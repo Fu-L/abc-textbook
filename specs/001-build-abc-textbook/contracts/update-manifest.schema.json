@@ -1,0 +1,522 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abc-textbook.local/schemas/update-manifest.schema.json",
+  "title": "ABC Textbook Publication Update Manifest",
+  "description": "週次・訂正・taxonomy・本文更新のステージング契約。状態遷移、レビュー独立性、blocking findingゼロは意味検証器でも検査する。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "kind",
+    "contestId",
+    "fixtureMode",
+    "idempotencyKey",
+    "baseReleaseVersion",
+    "sourceSetFingerprint",
+    "taxonomyVersion",
+    "authoringSkill",
+    "state",
+    "resumeStage",
+    "holdReason",
+    "candidateChanges",
+    "validationFindings",
+    "reviewRecords",
+    "ownerApproval",
+    "timings",
+    "createdAt",
+    "updatedAt",
+    "publishedReleaseVersion"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^upd-(abc[0-9]{3,}|content|taxonomy)-[a-f0-9]{12,64}$"
+    },
+    "kind": {
+      "enum": ["weekly", "correction", "taxonomy", "content"]
+    },
+    "contestId": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/contestId"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "fixtureMode": {
+      "type": "boolean"
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "minLength": 16
+    },
+    "baseReleaseVersion": {
+      "$ref": "#/$defs/releaseVersion"
+    },
+    "sourceSetFingerprint": {
+      "$ref": "#/$defs/sha256"
+    },
+    "taxonomyVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "authoringSkill": {
+      "$ref": "#/$defs/skillRef"
+    },
+    "state": {
+      "$ref": "#/$defs/updateState"
+    },
+    "resumeStage": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/updateState"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "holdReason": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/holdReason"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "candidateChanges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/candidateChange"
+      }
+    },
+    "validationFindings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/validationFinding"
+      }
+    },
+    "reviewRecords": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/reviewRecord"
+      }
+    },
+    "ownerApproval": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ownerApproval"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "timings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/stageTiming"
+      }
+    },
+    "createdAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "updatedAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "publishedReleaseVersion": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/releaseVersion"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "ON_HOLD"
+          }
+        },
+        "required": ["state"]
+      },
+      "then": {
+        "properties": {
+          "resumeStage": {
+            "$ref": "#/$defs/updateState"
+          },
+          "holdReason": {
+            "$ref": "#/$defs/holdReason"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "enum": ["READY_TO_PUBLISH", "PUBLISHED"]
+          }
+        },
+        "required": ["state"]
+      },
+      "then": {
+        "properties": {
+          "reviewRecords": {
+            "type": "array",
+            "minItems": 1
+          },
+          "ownerApproval": {
+            "$ref": "#/$defs/ownerApproval"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "PUBLISHED"
+          }
+        },
+        "required": ["state"]
+      },
+      "then": {
+        "properties": {
+          "publishedReleaseVersion": {
+            "$ref": "#/$defs/releaseVersion"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "dateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "contestId": {
+      "type": "string",
+      "pattern": "^abc[0-9]{3,}$"
+    },
+    "problemId": {
+      "type": "string",
+      "pattern": "^abc[0-9]{3,}-[efgh]$"
+    },
+    "entityId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "releaseVersion": {
+      "type": "string",
+      "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]+$"
+    },
+    "updateState": {
+      "enum": [
+        "DISCOVERED",
+        "SOURCES_VERIFIED",
+        "DRAFTED",
+        "VALIDATED",
+        "AWAITING_EXTERNAL_REVIEW",
+        "AWAITING_OWNER_APPROVAL",
+        "READY_TO_PUBLISH",
+        "PUBLISHED",
+        "SUPERSEDED",
+        "ON_HOLD"
+      ]
+    },
+    "skillRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "digest"],
+      "properties": {
+        "name": {
+          "const": "abc-explanation-author"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "digest": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "holdReason": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "problemIds", "retryCondition"],
+      "properties": {
+        "code": {
+          "enum": [
+            "CONTEST_NOT_ENDED",
+            "ROBOTS_UNREACHABLE",
+            "POLICY_CHANGED",
+            "SOURCE_UNAVAILABLE",
+            "OFFICIAL_EDITORIAL_PENDING",
+            "PARSER_DRIFT",
+            "GENERATOR_UNAVAILABLE",
+            "AUTHORING_REQUIRED",
+            "SOURCE_CONTRADICTION",
+            "EXAMPLE_NOT_REPRODUCIBLE",
+            "DEPENDENCY_CYCLE",
+            "REVIEW_CHANGES_REQUESTED",
+            "DEADLINE_REACHED"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "problemIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/problemId"
+          },
+          "uniqueItems": true
+        },
+        "retryCondition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retryAfter": {
+          "$ref": "#/$defs/dateTime"
+        }
+      }
+    },
+    "candidateChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entityType", "entityId", "operation", "beforeDigest", "afterDigest", "path"],
+      "properties": {
+        "entityType": {
+          "enum": [
+            "contest",
+            "problem",
+            "explanation",
+            "technique_tag",
+            "learning_unit",
+            "placement",
+            "source",
+            "release"
+          ]
+        },
+        "entityId": {
+          "$ref": "#/$defs/entityId"
+        },
+        "operation": {
+          "enum": ["create", "update", "deprecate", "withdraw"]
+        },
+        "beforeDigest": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "afterDigest": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "validationFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "severity",
+        "entityType",
+        "entityId",
+        "message",
+        "path",
+        "evidence",
+        "blocking",
+        "createdAt"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "severity": {
+          "enum": ["info", "warning", "error"]
+        },
+        "entityType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entityId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "blocking": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "$ref": "#/$defs/dateTime"
+        }
+      }
+    },
+    "reviewRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "scopeType",
+        "scopeId",
+        "subjectDigest",
+        "authorId",
+        "reviewerId",
+        "sourceRevisionIds",
+        "skill",
+        "decision",
+        "findings",
+        "reviewedAt"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/entityId"
+        },
+        "scopeType": {
+          "enum": ["explanation", "update", "release", "claim", "example"]
+        },
+        "scopeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subjectDigest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "authorId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewerId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceRevisionIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/entityId"
+          },
+          "uniqueItems": true
+        },
+        "skill": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/skillRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "decision": {
+          "enum": ["approved", "changes_requested", "rejected"]
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reviewedAt": {
+          "$ref": "#/$defs/dateTime"
+        }
+      }
+    },
+    "ownerApproval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ownerId", "approvedManifestDigest", "approvedAt"],
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "approvedManifestDigest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "approvedAt": {
+          "$ref": "#/$defs/dateTime"
+        }
+      }
+    },
+    "stageTiming": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "startedAt", "endedAt", "durationMs", "outcome"],
+      "properties": {
+        "stage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "startedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "endedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "outcome": {
+          "enum": ["completed", "held", "failed", "skipped"]
+        }
+      }
+    }
+  }
+}

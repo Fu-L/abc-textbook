@@ -1,0 +1,758 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abc-textbook.local/schemas/catalog.schema.json",
+  "title": "ABC Textbook Public Catalog",
+  "description": "公開済み教材から生成される静的カタログ。配列間の参照、一意性、DAG、網羅性は意味検証器で追加検査する。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "release",
+    "contests",
+    "problems",
+    "techniqueTags",
+    "learningUnits",
+    "placements",
+    "explanations",
+    "sources"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "release": {
+      "$ref": "#/$defs/release"
+    },
+    "contests": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/contest"
+      }
+    },
+    "problems": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/problem"
+      }
+    },
+    "techniqueTags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/techniqueTag"
+      }
+    },
+    "learningUnits": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/learningUnit"
+      }
+    },
+    "placements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/placement"
+      }
+    },
+    "explanations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/explanation"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    }
+  },
+  "$defs": {
+    "dateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "contestId": {
+      "type": "string",
+      "pattern": "^abc[0-9]{3,}$"
+    },
+    "problemId": {
+      "type": "string",
+      "pattern": "^abc[0-9]{3,}-[efgh]$"
+    },
+    "entityId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "officialUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://(atcoder\\.jp|img\\.atcoder\\.jp)/"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "stringList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "idList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entityId"
+      },
+      "uniqueItems": true
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "cutoffAt",
+        "publishedAt",
+        "manifestDigest",
+        "firstContestId",
+        "lastContestId",
+        "contestCount",
+        "problemCount",
+        "cellCount",
+        "changelogPath"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]+$"
+        },
+        "cutoffAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "publishedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "manifestDigest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "firstContestId": {
+          "$ref": "#/$defs/contestId"
+        },
+        "lastContestId": {
+          "$ref": "#/$defs/contestId"
+        },
+        "contestCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "problemCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cellCount": {
+          "type": "integer",
+          "minimum": 4,
+          "multipleOf": 4
+        },
+        "changelogPath": {
+          "type": "string",
+          "pattern": "^/updates/"
+        }
+      }
+    },
+    "slotRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot",
+        "availability",
+        "catalogStatus",
+        "problemId",
+        "holdCode",
+        "evidenceSourceRevisionIds"
+      ],
+      "properties": {
+        "slot": {
+          "enum": ["E", "F", "G", "H"]
+        },
+        "availability": {
+          "enum": ["exists", "official_absent", "unknown", "withdrawn"]
+        },
+        "catalogStatus": {
+          "enum": [
+            "unrecorded",
+            "drafting",
+            "on_hold",
+            "published",
+            "correction_pending"
+          ]
+        },
+        "problemId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/problemId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "holdCode": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "evidenceSourceRevisionIds": {
+          "$ref": "#/$defs/idList"
+        }
+      }
+    },
+    "contest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "number",
+        "title",
+        "officialUrl",
+        "startsAt",
+        "endsAt",
+        "lastVerifiedAt",
+        "slots"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/contestId"
+        },
+        "number": {
+          "type": "integer",
+          "minimum": 212
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "officialUrl": {
+          "$ref": "#/$defs/officialUrl"
+        },
+        "startsAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "endsAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "lastVerifiedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "slots": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["E", "F", "G", "H"],
+          "properties": {
+            "E": {
+              "$ref": "#/$defs/slotRecord"
+            },
+            "F": {
+              "$ref": "#/$defs/slotRecord"
+            },
+            "G": {
+              "$ref": "#/$defs/slotRecord"
+            },
+            "H": {
+              "$ref": "#/$defs/slotRecord"
+            }
+          }
+        }
+      }
+    },
+    "constraintFact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "kind", "value", "sourceRevisionId"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": ["range", "sum_limit", "type", "relation", "other"]
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceRevisionId": {
+          "$ref": "#/$defs/entityId"
+        }
+      }
+    },
+    "difficultyEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "rationale", "sourceIds"],
+      "properties": {
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceIds": {
+          "$ref": "#/$defs/idList"
+        }
+      }
+    },
+    "problem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "contestId",
+        "slot",
+        "title",
+        "officialTaskUrl",
+        "summary",
+        "constraints",
+        "difficultyEvidence",
+        "sourceRevisionIds",
+        "lastVerifiedAt",
+        "publicationStatus",
+        "currentExplanationId",
+        "tagIds",
+        "learningUnitIds",
+        "route"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/problemId"
+        },
+        "contestId": {
+          "$ref": "#/$defs/contestId"
+        },
+        "slot": {
+          "enum": ["E", "F", "G", "H"]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "officialTaskUrl": {
+          "$ref": "#/$defs/officialUrl"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/constraintFact"
+          }
+        },
+        "difficultyEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/difficultyEvidence"
+          }
+        },
+        "sourceRevisionIds": {
+          "$ref": "#/$defs/idList"
+        },
+        "lastVerifiedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "publicationStatus": {
+          "enum": ["published", "on_hold", "correction_pending", "withdrawn"]
+        },
+        "currentExplanationId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/entityId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "tagIds": {
+          "$ref": "#/$defs/idList"
+        },
+        "learningUnitIds": {
+          "$ref": "#/$defs/idList"
+        },
+        "route": {
+          "type": "string",
+          "pattern": "^/problems/"
+        }
+      }
+    },
+    "techniqueTag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "definition",
+        "learningOutcomeIds",
+        "parentId",
+        "prerequisiteTagIds",
+        "aliases",
+        "representativeProblemIds",
+        "lifecycle",
+        "route"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^tag-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "learningOutcomeIds": {
+          "$ref": "#/$defs/idList"
+        },
+        "parentId": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^tag-[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "prerequisiteTagIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^tag-[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "uniqueItems": true
+        },
+        "aliases": {
+          "$ref": "#/$defs/stringList"
+        },
+        "representativeProblemIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/problemId"
+          },
+          "uniqueItems": true
+        },
+        "lifecycle": {
+          "enum": ["formal", "deprecated"]
+        },
+        "route": {
+          "type": "string",
+          "pattern": "^/tags/"
+        }
+      }
+    },
+    "ordering": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "globalIndex",
+        "stageRank",
+        "difficultyRank",
+        "representativeRank",
+        "rationale"
+      ],
+      "properties": {
+        "globalIndex": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stageRank": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "difficultyRank": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "representativeRank": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "learningUnit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "title",
+        "parentId",
+        "prerequisiteUnitIds",
+        "tagIds",
+        "learningOutcomeIds",
+        "placementIds",
+        "ordering",
+        "route"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^unit-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "enum": ["chapter", "section", "subsection"]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parentId": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^unit-[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "prerequisiteUnitIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^unit-[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "uniqueItems": true
+        },
+        "tagIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^tag-[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "uniqueItems": true
+        },
+        "learningOutcomeIds": {
+          "$ref": "#/$defs/idList"
+        },
+        "placementIds": {
+          "$ref": "#/$defs/idList"
+        },
+        "ordering": {
+          "$ref": "#/$defs/ordering"
+        },
+        "route": {
+          "type": "string",
+          "pattern": "^/learn/"
+        }
+      }
+    },
+    "tagRole": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tagId", "role"],
+      "properties": {
+        "tagId": {
+          "type": "string",
+          "pattern": "^tag-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "role": {
+          "enum": ["primary", "secondary"]
+        }
+      }
+    },
+    "placement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "problemId",
+        "unitId",
+        "tagRoles",
+        "mode",
+        "primaryExplanationProblemId",
+        "simplificationReason",
+        "differences",
+        "additionalLearning",
+        "difficultyBand"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/entityId"
+        },
+        "problemId": {
+          "$ref": "#/$defs/problemId"
+        },
+        "unitId": {
+          "type": "string",
+          "pattern": "^unit-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "tagRoles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/tagRole"
+          }
+        },
+        "mode": {
+          "enum": ["full", "similar", "supplement"]
+        },
+        "primaryExplanationProblemId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/problemId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "simplificationReason": {
+          "type": ["string", "null"]
+        },
+        "differences": {
+          "$ref": "#/$defs/stringList"
+        },
+        "additionalLearning": {
+          "$ref": "#/$defs/stringList"
+        },
+        "difficultyBand": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        }
+      }
+    },
+    "skillRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "digest"],
+      "properties": {
+        "name": {
+          "const": "abc-explanation-author"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "digest": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "explanation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "problemId",
+        "mode",
+        "route",
+        "authoringSkill",
+        "inputFingerprint",
+        "learningOutcomeIds",
+        "sourceRevisionIds",
+        "reviewedAt",
+        "revision"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/entityId"
+        },
+        "problemId": {
+          "$ref": "#/$defs/problemId"
+        },
+        "mode": {
+          "enum": ["full", "similar", "supplement"]
+        },
+        "route": {
+          "type": "string",
+          "pattern": "^/problems/"
+        },
+        "authoringSkill": {
+          "$ref": "#/$defs/skillRef"
+        },
+        "inputFingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "learningOutcomeIds": {
+          "$ref": "#/$defs/idList"
+        },
+        "sourceRevisionIds": {
+          "$ref": "#/$defs/idList"
+        },
+        "reviewedAt": {
+          "$ref": "#/$defs/dateTime"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "canonicalUrl",
+        "kind",
+        "authority",
+        "language",
+        "currentRevisionId",
+        "lastCheckedAt"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/entityId"
+        },
+        "canonicalUrl": {
+          "$ref": "#/$defs/sourceUrl"
+        },
+        "kind": {
+          "enum": [
+            "contest",
+            "tasks",
+            "task",
+            "editorial",
+            "correction",
+            "policy"
+          ]
+        },
+        "authority": {
+          "enum": ["official", "secondary"]
+        },
+        "language": {
+          "type": "string",
+          "minLength": 2
+        },
+        "currentRevisionId": {
+          "$ref": "#/$defs/entityId"
+        },
+        "lastCheckedAt": {
+          "$ref": "#/$defs/dateTime"
+        }
+      }
+    }
+  }
+}

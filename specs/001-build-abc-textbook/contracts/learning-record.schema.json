@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abc-textbook.local/schemas/learning-record.schema.json",
+  "title": "ABC Textbook Learning Record Export",
+  "description": "IndexedDB学習記録のバックアップ・復元契約。更新日時の独立性とmerge規則は意味検証器で追加検査する。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "exportedAt",
+    "catalogVersionAtExport",
+    "records",
+    "orphanedProblemIds"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "exportedAt": {
+      "$ref": "#/$defs/dateTime"
+    },
+    "catalogVersionAtExport": {
+      "type": "string",
+      "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]+$"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/learningRecord"
+      }
+    },
+    "orphanedProblemIds": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/problemId"
+      },
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "dateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "utcDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "problemId": {
+      "type": "string",
+      "pattern": "^abc[0-9]{3,}-[efgh]$"
+    },
+    "learningRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "problemId",
+        "status",
+        "statusUpdatedAt",
+        "needsReview",
+        "needsReviewUpdatedAt",
+        "recordVersion"
+      ],
+      "properties": {
+        "problemId": {
+          "$ref": "#/$defs/problemId"
+        },
+        "status": {
+          "enum": ["unstarted", "attempting", "completed"]
+        },
+        "statusUpdatedAt": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/utcDateTime"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "needsReview": {
+          "type": "boolean"
+        },
+        "needsReviewUpdatedAt": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/utcDateTime"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recordVersion": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}
