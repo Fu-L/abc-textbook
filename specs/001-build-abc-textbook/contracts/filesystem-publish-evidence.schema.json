@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abc-textbook.local/schemas/filesystem-publish-evidence.schema.json",
+  "title": "ABC Textbook Filesystem Publish Evidence",
+  "description": "実際に公開を行う個人所有機器のfilesystemで、lock、同一filesystem切替、rollback、receipt、再実行no-opを検証した証跡。Windows/macOS/Linux三環境を必須にしない。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "releaseDigest", "host", "tests", "rawEvidenceManifestDigest", "aggregatePassed", "generatedAt"],
+  "properties": {
+    "schemaVersion": { "const": "2.0.0" },
+    "releaseDigest": { "$ref": "#/$defs/sha256" },
+    "host": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["osFamily", "osVersion", "filesystem", "toolVersions"],
+      "properties": {
+        "osFamily": { "type": "string", "minLength": 1 },
+        "osVersion": { "type": "string", "minLength": 1 },
+        "filesystem": { "type": "string", "minLength": 1 },
+        "toolVersions": { "type": "object", "additionalProperties": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "tests": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["testId", "kind", "passed", "rawPath", "rawDigest"],
+        "properties": {
+          "testId": { "type": "string", "minLength": 1 },
+          "kind": { "enum": ["writer_lock", "global_lock", "same_filesystem_switch", "cross_filesystem_rejection", "conflict", "rollback_before_receipt", "state_recovery_after_receipt", "receipt_no_overwrite", "rerun_no_op"] },
+          "passed": { "type": "boolean" },
+          "rawPath": { "type": "string", "minLength": 1 },
+          "rawDigest": { "$ref": "#/$defs/sha256" }
+        }
+      }
+    },
+    "rawEvidenceManifestDigest": { "$ref": "#/$defs/sha256" },
+    "aggregatePassed": { "type": "boolean" },
+    "generatedAt": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}

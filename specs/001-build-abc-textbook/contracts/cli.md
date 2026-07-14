@@ -1,211 +1,186 @@
-# CLI Contract
+# CLI Contract: ABC上級問題体系化教科書
 
-**Version**: 1.0.0
+**Scope**: PublicationUpdateの候補作成、ReleaseCandidateの検証、人間review取込、承認、原子的公開。
 
-**Scope**: 終了済みABCの候補作成、検証、レビュー取込、承認、公開
+## Common rules
 
-## 1. 共通契約
+- 必須経路は有料API、常時backend、外部credentialを要求しない。
+- machine-readable resultはstdout最終行のJSON、進捗と診断はstderrへ出す。
+- 成功0、検証・保留2、使用法64、入力形式65、内部失敗70、I/O失敗73、設定失敗78を使う。
+- `--fixture`を持つartifactはproduction approve/publishを拒否する。
+- 同じupdate/candidateへの同時writerをlockで拒否し、publishは全candidate共通lockで直列化する。
+- repo-relative pathだけを扱い、absolute、`..`、symlink escape、重複pathを拒否する。
+- update/candidate identityに影響するinputが同じなら既存active artifactを冪等再利用する。
 
-- Node.js 24 LTSと`package-lock.json`で固定された依存を使う。
-- 全コマンドはrepository rootから実行する。
-- 既定で有料・従量課金APIを呼ばない。設定がなくても手動執筆テンプレートまで生成できる。
-- AtCoderへのアクセス前にrobots、規約指紋、対象contest終了を確認する。
-- AtCoder向けHTTP同時実行は1、開始間隔は1秒以上、限定retryとdeadlineを守る。
-- stdoutの最後の行は機械可読JSON、進捗と診断はstderrへ出す。
-- stderr、manifest、fixtureへAtCoder問題文・解説本文・認証情報を出さない。
-- 同じupdateへの同時writerをlockで拒否する。
-- `src/content/`を変更するのはpublishだけ。update/validate/review/approveは`staging/`内に限定する。
-
-### 共通終了コード
-
-| Code | Meaning |
-|---:|---|
-| `0` | コマンド目的を完了。updateでは候補/差分レポート作成済み |
-| `2` | 有効な保留レポートを作成して`ON_HOLD`で終了。再試行可能な業務結果 |
-| `64` | CLI引数または入力形式が不正 |
-| `65` | JSON/Markdown/schema/参照が不正で、有効な更新結果を作れない |
-| `73` | writer lock取得不可、または許可されない書込先 |
-| `78` | policy/設定が不正。安全な保留manifestも作れない |
-| `70` | 予期しない内部エラー。既存公開物は変更しない |
-
-`2`は公開成功ではないが、SC-006の「具体的な保留理由を確認できる」正常な観察結果として扱う。CIは`0`以外を明示的に判定する。
-
-## 2. 単一開始操作: `abc:update`
+## `abc:update` — 一操作の更新準備
 
 ```bash
-npm run abc:update -- --contest abcNNN
+npm run abc:update -- --contest abcNNN [--fixture PATH] [--resume UPDATE_ID]
 ```
 
-### Inputs
+実行順:
 
-| Option | Required | Contract |
-|---|---:|---|
-| `--contest abcNNN` | yes unless `--latest` | ABC 212以上。終了済みでなければ保留 |
-| `--latest` | alternative | archiveから最新の終了済み未収録ABCを1件選ぶ |
-| `--deadline-seconds N` | no | 既定840秒、最大900秒。候補/保留レポートまでのdeadline |
-| `--offline-fixture PATH` | no | ネットワークを一切使わず、テストfixtureを公式応答として読む |
-| `--regenerate` | no | source/taxonomy/skillが同じでもExplanation candidateを新revisionとして明示再生成 |
-| `--resume UPDATE_ID` | no | `ON_HOLD`更新を`resumeStage`から再開 |
+1. Contestが終了済みか確認する。
+2. robots、利用規約、生成AI rule、公式source fingerprintを確認する。
+3. 公式task orderを取得し、Dの位置より後の全problem labelを抽出する。
+4. Contest/Slot/Problem/Source metadataを作る。
+5. 公開Catalogとの差分とCorrection Impactを作る。
+6. Technique Inventory候補、既存Tag/Outcome/Unitへの分類候補、Placement候補、index previewを作る。
+7. ProblemごとにAuthoringPacketを作り、任意generatorが完全本文を返した場合だけ`explanation_draft`にする。
+8. 対象範囲、source、Explanation、Example、Tag、DAG、到達可能性、linkを検証する。
+9. 15分以内に全Problem resultとsummaryを保存する。
 
-- `--contest`と`--latest`は排他。
-- `--offline-fixture`使用時は出力へ`fixtureMode: true`を記録し、publish不可にする。
-- `--regenerate`はProblem/Indexの重複を許可せず、解説revisionだけを増やす。
-
-### Processing stages
-
-1. writer lockと入力検証
-2. robots/利用規約/生成AIルール指紋の確認
-3. archive/contestから終了確認
-4. tasksからE〜Hの存在と公式URLを抽出
-5. 問題/公式editorialから最小メタデータ・SourceRevisionを作成
-6. 既存releaseとの差分とidempotency keyを計算
-7. AuthoringPacket、手動テンプレート、タグ/前提/配置候補を作成
-8. schema、参照、DAG、網羅性、必須構成、内部リンクのfast検証
-9. 問題別候補またはhold reason、stage timing、総時間をmanifest/reportへ保存
-
-公式HTMLはstage 5の抽出・指紋計算後に破棄する。
-
-### Outputs
-
-```text
-staging/updates/<updateId>/
-├── manifest.json
-├── report.md
-├── sources/                 # URL、指紋、確認日時だけ
-├── authoring-packets/
-├── candidates/
-├── validation/
-└── reviews/
-```
-
-stdout最終行:
+最終JSONの必須field:
 
 ```json
 {
   "command": "abc:update",
-  "updateId": "upd-abc999-0123456789ab",
-  "state": "VALIDATED",
-  "reportPath": "staging/updates/upd-abc999-0123456789ab/report.md",
-  "elapsedMs": 12345,
-  "changedEntities": 4,
-  "blockingFindings": 0
+  "updateId": "update-...",
+  "contestId": "abcNNN",
+  "advancedSlotLabels": ["E", "F", "G", "H", "I"],
+  "resultCounts": {
+    "explanation_draft": 0,
+    "authoring_required": 0,
+    "blocked": 0
+  },
+  "state": "ELIGIBLE_FOR_BATCH",
+  "blockingFindingCount": 0,
+  "durationMs": 0,
+  "resultPath": "staging/updates/.../manifest.json"
 }
 ```
 
-保留時は`state: "ON_HOLD"`、`holdCode`、`problemIds`、`retryCondition`を追加し、exit 2とする。
+`advancedSlotLabels`は例示でありE〜H固定ではない。公式task orderでDより後の全labelと一致しなければならない。
 
-### Idempotency
+全resultが`explanation_draft`かつblocking 0の場合だけ`ELIGIBLE_FOR_BATCH`、それ以外は理由付き`ON_HOLD`にする。`authoring_required`と`blocked`をExplanation件数へ含めない。
 
-- idempotency keyはcontest slugとsource-set fingerprintから決定する。
-- 入力指紋が同じ再実行では同じupdate directoryを再利用し、順序・時刻以外の候補差分を増やさない。
-- 既に公開済みで差分がない場合はexit 0、`changedEntities: 0`、状態を`VALIDATED`として監査レポートだけ更新する。
-- source/taxonomy/skillのいずれかが変われば新revisionと差分を明示する。
+安定hold codeには`CONTEST_NOT_ENDED`、`D_TASK_NOT_FOUND`、`TASK_ORDER_CONFLICT`、`ROBOTS_UNREACHABLE`、`POLICY_CHANGED`、`SOURCE_UNAVAILABLE`、`EDITORIAL_PENDING`、`PARSER_DRIFT`、`GENERATOR_UNAVAILABLE`、`AUTHORING_REQUIRED`、`SOURCE_CONTRADICTION`、`EXAMPLE_NOT_REPRODUCIBLE`、`DEPENDENCY_CYCLE`、`DEADLINE_REACHED`を含める。
 
-### Hold codes
-
-最低限、次を安定コードとして扱う。
-
-`CONTEST_NOT_ENDED`, `ROBOTS_UNREACHABLE`, `POLICY_CHANGED`, `SOURCE_UNAVAILABLE`, `OFFICIAL_EDITORIAL_PENDING`, `PARSER_DRIFT`, `GENERATOR_UNAVAILABLE`, `AUTHORING_REQUIRED`, `SOURCE_CONTRADICTION`, `EXAMPLE_NOT_REPRODUCIBLE`, `DEPENDENCY_CYCLE`, `REVIEW_CHANGES_REQUESTED`, `DEADLINE_REACHED`。
-
-## 3. 検証: `abc:validate`
+## `release:bootstrap` — 初期seedのupdate化
 
 ```bash
-npm run abc:validate -- --update <updateId> [--level fast|release]
+npm run release:bootstrap -- --first 212 --last 466
 ```
 
-- 既定levelは`fast`。
-- `release`は全ブラウザーE2E、全ルートaxe、外部リンク、二重build digest、レビュー/承認を含む。
-- 検証は候補を書き換えず、`validation/run-<timestamp>.json`とmanifestのfinding参照だけを更新する。
-- blocking findingがあればexit 2、updateを`ON_HOLD`へ移し、元のstageを`resumeStage`へ残す。
-- 循環は経路、欠落参照は参照元/先、リンク失敗はproblem/source IDと結果を出す。
+- 既に検証済みのContest、Problem、Technique Inventory、taxonomy、Explanation、Learning Unitを一つのbootstrap PublicationUpdateへ固定する。
+- ABC 212〜466の全Contestと各D以後Problem、Source、content pathを完全列挙する。
+- 未完成・未分類・未review itemが一件でもあればELIGIBLEにしない。
+- 同じsnapshot digestは同じbootstrap updateを再利用する。
 
-stdout最終行:
-
-```json
-{
-  "command": "abc:validate",
-  "updateId": "upd-abc999-0123456789ab",
-  "level": "release",
-  "state": "AWAITING_EXTERNAL_REVIEW",
-  "blockingFindings": 0,
-  "reportPath": "staging/updates/upd-abc999-0123456789ab/validation/run.json"
-}
-```
-
-## 4. 外部レビュー取込: `abc:review`
+## `release:catch-up` — 初版cutoff追随
 
 ```bash
-npm run abc:review -- --update <updateId> --record <review-record.json>
+npm run release:catch-up -- --cutoff 2026-07-14T00:00:00+09:00
 ```
 
-- [update-manifest.schema.json](./update-manifest.schema.json)のReviewRecord契約を検証する。
-- `reviewerId === authorId`を意味検証で拒否する。
-- review対象digest、source revision集合、skill版が現在候補と一致しなければstale reviewとして拒否する。
-- `changes_requested/rejected`は`ON_HOLD`へ移し、findingを作る。
-- 全必須scopeが`approved`なら`AWAITING_OWNER_APPROVAL`へ進める。
-- レビュー担当者に利用者アカウントやGit権限を要求しない。版付きJSON記録だけを取り込める。
+- cutoffまでの最新終了済みABCを決め、seed後の未収録Contestを昇順に`abc:update`へ渡す。
+- 各ContestのDより後の全Problemをmanifestへ固定する。
+- 全catch-up updateがELIGIBLEになった場合だけ、bootstrap IDとcatch-up IDsをcandidate inputとして返す。
+- 一件でもON_HOLDなら終了2で停止し、欠落0件を報告しない。
 
-## 5. 管理者承認: `abc:approve`
+## `abc:prepare-release` — candidate作成
 
 ```bash
-npm run abc:approve -- --update <updateId> --owner <owner-id>
+npm run abc:prepare-release -- --update UPDATE_ID [--update UPDATE_ID ...] --target YYYY.MM.DD
 ```
 
-Preconditions:
+- 一つ以上のELIGIBLE updateを指定順に束ねる。
+- base release、target、cutoff、fixture modeの整合を確認する。
+- AdvancedSlotRegistryを既存順と全Contest official orderから決定生成する。
+- candidate treeへRelease非依存content、taxonomy、index、changelogを生成する。
+- state envelope、final Release record、approval、receiptをcontent subjectから除外する。
+- path順file inventoryから`contentSubjectDigest`を固定し、同じidentityのactive candidateを再利用する。
+- 成功時stateは`VALIDATING`。
 
-- fixture modeでない。
-- release検証が現在candidate digestに対して成功している。
-- blocking findingが0。
-- 必須Explanation/Claim/Example/Update scopeにauthorと異なるreviewerの承認がある。
-- ownerへ表示したmanifest digestが承認対象と一致する。
-
-承認記録はowner ID、manifest digest、offset付き時刻を持つ。内容が1 byteでも変わると承認を無効化する。成功後の状態は`READY_TO_PUBLISH`。
-
-## 6. 原子的公開: `abc:publish`
+## `abc:validate` — pre-review検証
 
 ```bash
-npm run abc:publish -- --update <updateId>
+npm run abc:validate -- --candidate CANDIDATE_ID
 ```
 
-Preconditions:
+少なくとも次をcandidate正本から検査する。
 
-- stateが`READY_TO_PUBLISH`。
-- 現在候補digestに対するreview/approval/release検証がすべて有効。
-- base releaseが現在公開releaseと一致する。
-- `src/content/`と公開manifestに未コミットの競合変更がない。
+- ABC 212からcutoffまでのContest連続性。
+- 各Contestの公式task orderとDより後の全Problem。
+- AdvancedSlotRegistryの完全性・安定順・矛盾0件。
+- Problem集合とTechnique Inventory集合の一致。
+- 全ProblemのTag、Outcome、Placement、Learning Unit/Tag collection到達性。
+- Explanation、Claim、Example、Exercise、AnswerMaterial、Source、Correction Impact。
+- Tag/Outcome/Unit DAGと生成順。
+- contest matrix、list alternative、search、LearningRecord shared route contract。
+- build、link、accessibility、client bundle、performance、zero-cost inventoryの適用check。
 
-Behavior:
+成功時、current `contentSubjectDigest`へ適用check集合とhuman review inventoryを固定して`AWAITING_REVIEW`へ進む。失敗時は`ON_HOLD`とresume stage、Problem別理由を保存する。
 
-1. 一時worktreeへ候補を適用
-2. `npm run verify:release`を再実行
-3. Release/変更履歴/派生索引を生成
-4. 一時成果物のdigestを承認digestと照合
-5. 公開manifestと正本を同じfilesystem transaction境界で切替
-6. updateを`PUBLISHED`へ移す
-
-失敗時は公開中releaseを維持し、部分適用しない。publish済みupdateへの再実行は同じreleaseを返すno-opとする。
-
-## 7. 読取専用コマンド
+## `abc:review` — HumanContentReviewEvidence取込
 
 ```bash
-npm run abc:status -- --update <updateId>
-npm run catalog:validate -- [--fixture PATH]
-npm run catalog:build
-npm run verify:fast
-npm run verify:release
+npm run abc:review -- --candidate CANDIDATE_ID --evidence PATH
 ```
 
-- `abc:status`は更新状態、候補数、hold、findings、review、approval、timingsを表示する。
-- `catalog:validate`は公開正本またはfixtureを変更せず検証する。
-- `catalog:build`は正本から公開JSON、学習順、索引を決定的に生成する。
-- verify scriptsはローカル必須経路であり、GitHub Actions専用ロジックを持たない。
+evidenceは次を満たさなければならない。
 
-## 8. ネットワークと安全性
+- `scopeType=release_candidate`、`scopeId=CANDIDATE_ID`、同じ`contentSubjectDigest`。
+- 一人のgate reviewerがOutcome coverageを確認する。
+- 全applicable checkの`executedByReviewerId`が同じgate reviewerで、raw resultと一致する。
+- 完全自動化不能な新規・変更Claim/Exampleの全itemがauthor IDs外の人間により判定される。
+- current Constitution 1.0.0とdependent template inventoryを含むConstitution Checkが成功する。
+- blocking finding 0、`aggregatePassed=true`。
 
-- AtCoder以外へ問題データを送信しない。AtCoderからは公開GETだけを行う。
-- 認証cookieを使わず、開催中や認証必須の情報を取得しない。
-- `User-Agent`にtool versionとproject/contact URLを含める。
-- robots取得不能時はAtCoderへの残りのアクセスを拒否する。
-- 429/503/一時ネットワーク障害だけをretryし、`Retry-After`を優先する。
-- policy fingerprint変更時は`POLICY_CHANGED`で停止し、人が方針を確認する。
-- fixtureには明確に架空のcontest/problemを使い、公式本文を保存しない。
+他者/CI実行結果の追認、複数reviewerへのcheck分割、owner approval、LLM result、learner self-studyをHumanContentReviewEvidenceの代用として拒否する。成功時`AWAITING_OWNER_APPROVAL`へ進む。
+
+## `abc:approve` — final payload固定と管理者承認
+
+```bash
+npm run abc:approve -- --candidate CANDIDATE_ID --owner OWNER_ID \
+  --publication-effective-at RFC3339 --expect-approvable-digest SHA256
+```
+
+- blocking 0、current human review、base/target namespace、fixture禁止を再確認する。
+- frozen contentとRelease metadataからpublic Catalog、release page、home、search index、sitemap/feed等のRelease依存fileを一回だけ生成する。
+- Release recordと全final fileを含む`candidatePayloadDigest`を計算する。
+- content subject、payload、check refs、human review refs、blocking stateから`approvableDigest`を計算する。
+- operatorへupdate IDs、file list、diff、check/review summary、両digestを表示する。
+- `--expect-approvable-digest`が一致する場合だけowner approvalを記録し、`AWAITING_FINAL_VALIDATION`へ進む。
+- owner approvalをhuman reviewとして数えない。
+
+## `verify:release -- --phase final`
+
+```bash
+npm run verify:release -- --phase final --candidate CANDIDATE_ID
+```
+
+- candidate fileを生成・変更しない。
+- content subject、candidate payload、Release、AdvancedSlotRegistry、checks、review、owner approvalを再計算する。
+- target path集合と実file集合、全route/link/search/build outputを照合する。
+- SC-009/010 LearnerOutcomeEvidence、SC-012 UserTimingEvidence、SC-015、SC-019、52週cost等のrelease evidenceをcurrent release digestへ照合する。
+- 元目的のCatalog completeness、体系的到達性、contest matrix/search、simple local learning managementを直接検査する。
+- 成功時だけ`READY_TO_PUBLISH`へ進む。
+
+## `abc:publish` — 原子的切替
+
+```bash
+npm run abc:publish -- --candidate CANDIDATE_ID [--simulate]
+```
+
+1. global publish lockを取得し、candidate/state/digest/base/windowを再確認する。
+2. 実行hostの同一filesystem上に一時tree、receipt temp、recovery journalを作る。
+3. failure injectionを含むpreflightを通す。
+4. 公開treeを一回切り替え、実時刻とbytesをreceipt rawへ記録する。
+5. rawとreceiptをno-overwriteでcommitしてからcandidate stateをPUBLISHEDへ更新する。
+
+receipt commit前の失敗は旧treeへrollbackし、orphan tempを除去する。receipt commit後のstate更新失敗は次回lock取得時にstateだけを収束させ、再swapしない。`--simulate`は公開treeを変更しない。公開済みcandidateの再実行はreceiptとtree一致を確認してno-opを返す。
+
+## Read-only commands
+
+```bash
+npm run abc:status -- --id UPDATE_OR_CANDIDATE_ID
+npm run catalog:validate -- --input PATH
+npm run catalog:build -- --input PATH --output PATH
+npm run verify:merge -- --evidence PATH
+```
+
+- `abc:status`はstate、Problem別result、hold/resume、content/payload digest、check/review、approval、windowを表示する。
+- `catalog:validate`はCatalog schemaと意味制約を検査し入力を変更しない。
+- `catalog:build`は確定Releaseまたはfixtureから派生indexを指定outputへ生成し、公開正本を変更しない。
+- `verify:merge`はWork Manifest、logical subject、同一gate reviewerのcheck実行、author外review、Constitution Check、finding 0を検証する。

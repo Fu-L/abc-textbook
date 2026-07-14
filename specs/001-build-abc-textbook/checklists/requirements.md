@@ -7,7 +7,7 @@
 ## Content Quality
 
 - [x] No implementation details (languages, frameworks, APIs)
-- [x] Focused on user value and business needs
+- [x] Focused on user value and learning needs
 - [x] Written for non-technical stakeholders
 - [x] All mandatory sections completed
 
@@ -16,7 +16,7 @@
 - [x] No [NEEDS CLARIFICATION] markers remain
 - [x] Requirements are testable and unambiguous
 - [x] Success criteria are measurable
-- [x] Success criteria are technology-agnostic (no implementation details)
+- [x] Success criteria are technology-agnostic
 - [x] All acceptance scenarios are defined
 - [x] Edge cases are identified
 - [x] Scope is clearly bounded
@@ -31,9 +31,10 @@
 
 ## Notes
 
-- Validation iteration 1: initial specification passed all 16 checks on 2026-07-12.
-- Validation iteration 2: the supplemented specification passed all 16 checks on 2026-07-12 after adding the matrix index, authoring-skill migration, content-unit ordering, zero-cost constraint, single-user scope, and learning records.
-- Validation iteration 3: all 16 checks passed on 2026-07-12 after replacing informal learning-state labels and defining separate, visible last-updated timestamps for answer and review states.
-- Validation iteration 4: all 16 checks passed on 2026-07-12 after adopting the requested progress labels, modeling review need as an independent badge, and adding a dedicated review-only problem list.
-- The dedicated authoring skill is named because migration from the root-level `prompt.md` is an explicit product constraint, not a choice of application framework.
+- Validation iteration 11 on 2026-07-14 followed `speckit-analyze` remediation.
+- 「E問題以上」を、公式問題一覧でDより後に並ぶ全競技問題と定義し、E〜Hの固定4枠による将来の欠落を解消した。
+- 典型体系を全対象問題の横断棚卸しから作る要件を追加し、コンテスト順の仮分類を公開正本にしないことを明示した。
+- 重複していた外部cohort、自己評価、必須LLM panelの品質基準を、一人の運用者による事前固定自己評価へ統合した。
+- 統治中のConstitution 1.0.0が要求する、自動検査と作成者外の人間レビューは維持した。
+- 有料サービス、特定LLM、実ブラウザー8組合せ、3 OS公開証跡は必須製品要件から除外し、1人・追加費用なしの目的へ戻した。
 - No `[NEEDS CLARIFICATION]` markers remain; reasonable defaults are recorded in Assumptions.

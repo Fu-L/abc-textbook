@@ -1,443 +1,319 @@
 # Data Model: ABC上級問題体系化教科書
 
-**対象仕様**: [spec.md](./spec.md)
-
-**技術判断**: [research.md](./research.md)
-
-## 1. モデル境界
-
-データを次の3境界に分ける。
-
-1. **教材の正本**: `src/content/`のJSONとMarkdown/限定MDX。Gitでレビュー・版管理する。
-2. **未公開更新**: `staging/updates/<updateId>/`の候補、検証結果、レビュー、承認。公開サイトからは読まない。
-3. **個人学習記録**: ブラウザーのIndexedDB。教材の問題IDだけを参照し、Gitや公開成果物へ含めない。
-
-索引表、タグ索引、全体学習順、Pagefind索引、`problem-catalog.json`は正本から生成する派生データであり、手編集しない。
-
-## 2. 共通規則
-
-### 2.1 安定ID
-
-| 対象 | 形式例 | 規則 |
-|---|---|---|
-| Contest | `abc212` | 公式contest slug。公開後は不変 |
-| Problem | `abc212-e` | `contestId` + 小文字slot。章・題名変更の影響を受けない |
-| Technique Tag | `tag-shortest-path-dijkstra` | 意味を表すkebab-case。名称変更時もIDを維持 |
-| Learning Unit | `unit-dijkstra-basic` | 学習内容を表すkebab-case。表示順・章番号を含めない |
-| Explanation | `exp-abc212-e-v1` | problem ID + 単調revision |
-| Source | `src-abc212-e-task` | 正規URLに対応する安定ID |
-| Source Revision | `srcrev-<sha256-prefix>` | 正規URLと正規化指紋から決定 |
-| Publication Update | `upd-abc467-<sha256-prefix>` | 対象とsource-set指紋から決定 |
-| Release | `2026.07.0` | CalVer。公開済み版は不変 |
-
-- IDはASCII小文字、数字、ハイフンだけを使う。
-- 公開済みIDを再利用・意味変更しない。統合/廃止時はaliasまたはreplacementを残す。
-- 配列の順序が意味を持たない箇所はID順に正規化し、決定的な差分を作る。
-
-### 2.2 日時
-
-- 正本・更新・契約ではRFC 3339のoffset付き日時を使う。
-- ブラウザー学習記録はUTCの`YYYY-MM-DDTHH:mm:ss.sssZ`で保存する。
-- 画面は`<time datetime>`に保存値を置き、ローカル日時、UTC offset、IANA timezoneを人間可読で示す。
-- 「更新記録なし」は`null`であり、読込時刻を補わない。
-
-### 2.3 指紋とrevision
-
-- SHA-256は正規化済み抽出データ、source集合、taxonomy、skill本文、公開manifestに使う。
-- 生のAtCoder HTMLは指紋計算後に破棄し、Gitへ保存しない。
-- revisionは同じIDの内容変更を表し、公開済みrevisionを上書きしない。
-
-## 3. 教材エンティティ
-
-### 3.1 Contest
-
-一つのABC開催回。
-
-| Field | Type | Required | Description |
-|---|---|---:|---|
-| `id` | ContestId | yes | 例: `abc212` |
-| `number` | integer | yes | 212以上 |
-| `title` | string | yes | 公式名称 |
-| `officialUrl` | HTTPS URL | yes | AtCoder公式contest URL |
-| `startsAt` / `endsAt` | RFC3339 | yes | 公式開催期間 |
-| `endedVerifiedAt` | RFC3339 | yes for ingestion | 終了を再確認した時刻 |
-| `slotRecords` | map E/F/G/H | yes | 各スロットの存在・収録状態 |
-| `sourceRevisionIds` | SourceRevisionId[] | yes | contest/task list根拠 |
-| `lastVerifiedAt` | RFC3339 | yes | 最終公式確認 |
-
-#### ContestSlotRecord
-
-| Field | Type | Description |
-|---|---|---|
-| `slot` | `E \| F \| G \| H` | 固定4枠 |
-| `availability` | `exists \| official_absent \| unknown \| withdrawn` | 公式上の存在状態 |
-| `catalogStatus` | `unrecorded \| drafting \| on_hold \| published \| correction_pending` | 教材側の状態 |
-| `problemId` | ProblemId or null | `exists`/`withdrawn`なら安定ID |
-| `holdCode` | string or null | 保留理由コード |
-| `evidenceSourceRevisionIds` | SourceRevisionId[] | `official_absent`にも必須 |
-
-画面表示は次の優先順で導出する。
-
-1. `official_absent` → 「公式問題なし」
-2. `unknown` → 「公開保留（公式状態未確認）」
-3. `withdrawn` → 「公式取り下げ」
-4. `unrecorded` → 「未収録」
-5. `drafting` → 「作成中」
-6. `on_hold`/`correction_pending` → 「公開保留」
-7. `published` → 「収録済み」
-
-### 3.2 Problem
-
-公式問題の識別情報と独自に構造化したメタデータ。問題文本文は保持しない。
-
-| Field | Type | Required | Description |
-|---|---|---:|---|
-| `id` | ProblemId | yes | 例: `abc212-e` |
-| `contestId` | ContestId | yes | Contest参照 |
-| `slot` | E/F/G/H | yes | contest内で一意 |
-| `title` | string | yes | 公式題名 |
-| `officialTaskUrl` | HTTPS URL | yes | task listから取得したURL |
-| `summary` | string | yes for publish | 独自の短い問題概要 |
-| `constraints` | ConstraintFact[] | yes | 数値・型・関係として独自構造化 |
-| `difficultyEvidence` | DifficultyEvidence[] | yes for publish | 根拠と対象学習者上の段階 |
-| `sourceRevisionIds` | SourceRevisionId[] | yes | task/editorial根拠 |
-| `lastVerifiedAt` | RFC3339 | yes | 公式確認日時 |
-| `publicationStatus` | enum | yes | `draft/on_hold/validated/approved/published/correction_pending/withdrawn` |
-| `currentExplanationId` | ExplanationId or null | conditional | 公開済み完全/差分解説 |
-| `revision` | positive integer | yes | 内容revision |
-
-Validation:
-
-- `(contestId, slot)`と`officialTaskUrl`は一意。
-- `officialTaskUrl`はタスク一覧から得たHTTPS AtCoder URLである。
-- 公開問題には1件以上のSource、Technique Tag、Problem Placementが必要。
-- `summary`と制約は公式本文の長い逐語コピーを含まない。
-
-### 3.3 Explanation
-
-問題に対する独自教材本文と検証メタデータ。本文は`docPath`のMarkdown/限定MDXに置く。
-
-| Field | Type | Required | Description |
-|---|---|---:|---|
-| `id` | ExplanationId | yes | revisionを含む |
-| `problemId` | ProblemId | yes | 対象問題 |
-| `mode` | `full \| similar \| supplement` | yes | 掲載形態 |
-| `docPath` | repository path | yes | `src/content/docs/...` |
-| `authoringSkill` | SkillRef | yes | name/version/digest |
-| `inputFingerprint` | SHA-256 | yes | source/taxonomy/skill入力 |
-| `learningOutcomeIds` | OutcomeId[] | yes | 1件以上 |
-| `claimIds` | ClaimId[] | yes | 技術的主張と出典を結ぶ |
-| `complexity` | ComplexityRecord | yes for full | 時間・空間・制約整合 |
-| `exampleIds` | ExampleId[] | yes for full | 再現可能な例または検証 |
-| `implementationNotes` | string[] | yes for full | 実装上の注意 |
-| `sourceRevisionIds` | SourceRevisionId[] | yes | 根拠集合 |
-| `reviewRecordIds` | ReviewRecordId[] | conditional | 公開には独立レビューが必要 |
-| `status` | enum | yes | `draft/validated/awaiting_review/approved/published/on_hold/superseded` |
-| `revision` | integer | yes | 同問題内の単調revision |
-
-`full`本文の必須見出し:
-
-1. 自然な考察手順
-2. 学ぶべきパーツの分解
-   - 典型パーツ（存在する場合）
-   - アドホックパーツ（存在する場合）
-3. 正当性
-4. 計算量と制約整合
-5. 実装上の注意
-6. 例または検証手順
-7. コーチからのワンポイントアドバイス
-8. 出典と確認日
-
-`similar`/`supplement`には主要解説ID、簡略化理由、制約/解法差分、追加で学ぶ点が必須。
-
-### 3.4 TechnicalClaim
-
-レビュー・訂正影響を細かく追跡する技術的主張。
-
-| Field | Type | Description |
-|---|---|---|
-| `id` | ClaimId | 解説内で安定 |
-| `explanationId` | ExplanationId | 所属解説 |
-| `statementSummary` | string | 独自の短い主張概要 |
-| `sourceRevisionIds` | SourceRevisionId[] | 根拠 |
-| `verificationMethod` | `automated \| external_review \| both` | 確認方法 |
-| `verifiedAt` | RFC3339 or null | 確認時刻 |
-
-Source指紋変更時はClaimから本文・例・演習への影響を列挙する。
-
-### 3.5 TechniqueTag
-
-深さ可変の典型知識・考察法。
-
-| Field | Type | Required | Description |
-|---|---|---:|---|
-| `id` | TagId | yes | 安定ID |
-| `name` | string | yes | 表示名 |
-| `definition` | string | yes for formal | 初出で使える短い定義 |
-| `learningOutcomeIds` | OutcomeId[] | yes for formal | 1件以上 |
-| `parentId` | TagId or null | yes | 階層木。深さ固定なし |
-| `prerequisiteTagIds` | TagId[] | yes | 学習DAGの入辺 |
-| `aliases` | string[] | yes | 同義語・旧名称 |
-| `representativeProblemIds` | ProblemId[] | yes for formal | 1件以上または成果で代替 |
-| `lifecycle` | `draft \| formal \| deprecated` | yes | 仮/正式/廃止 |
-| `replacementTagIds` | TagId[] | conditional | deprecated時の追跡先 |
-
-Validation:
-
-- 親関係は木で、自己親・循環・不要な空中間タグを許さない。
-- prerequisite関係は別DAGで、親子関係と混同しない。
-- aliasは全Tagで一意。名称変更時は旧名称をaliasへ残す。
-
-### 3.6 LearningOutcome
-
-章・解説・例・演習を結ぶ測定可能な成果。
-
-| Field | Type | Description |
-|---|---|---|
-| `id` | OutcomeId | 安定ID |
-| `statement` | string | 学習者が行える観察可能な行動 |
-| `prerequisiteOutcomeIds` | OutcomeId[] | 必要成果 |
-| `assessmentIds` | AssessmentId[] | 到達確認 |
-| `scope` | `global \| unit \| explanation` | 適用範囲 |
-
-### 3.7 LearningUnit
-
-chapter/section/subsectionを統一して扱う教材単位。
-
-| Field | Type | Required | Description |
-|---|---|---:|---|
-| `id` | UnitId | yes | 表示順を含めない安定ID |
-| `kind` | `chapter \| section \| subsection` | yes | 3種 |
-| `title` | string | yes | 表示名 |
-| `docPath` | repository path | yes | 導入・説明本文 |
-| `parentId` | UnitId or null | yes | chapter=null、section=chapter、subsection=section |
-| `prerequisiteUnitIds` | UnitId[] | yes | 明示前提 |
-| `tagIds` | TagId[] | yes | 対象典型 |
-| `learningOutcomeIds` | OutcomeId[] | yes | 1件以上 |
-| `termDefinitions` | TermDefinition[] | yes | 新用語の初出定義 |
-| `problemPlacementIds` | PlacementId[] | yes | 基本・発展・類題 |
-| `assessmentIds` | AssessmentId[] | yes | 到達確認 |
-| `ordering` | OrderingHints | yes | stage/difficulty/representativeness/rationale |
-| `status` | `draft \| reviewed \| published` | yes | 公開状態 |
-
-#### 全体学習順の生成
-
-1. prerequisiteをancestor単位へ畳み込み、chapter間を安定トポロジカルソートする。
-2. 各chapter内でsection、各section内でsubsectionを同様にソートする。
-3. 同順位は`stageRank`、`difficultyRank`、`representativeRank`、安定IDで決める。
-4. parent導入は最初のchildより前に置く。
-5. cross-parent前提がこの連続階層順で満たせない場合は公開を失敗させ、循環/違反経路を報告する。
-
-この方式により同じ分野を基礎編・複合編として別Unit/Chapterに再登場させつつ、一つのchapter subtreeは連続表示できる。
-
-### 3.8 ProblemPlacement
-
-問題、学習単位、典型タグの教育上の位置付け。
-
-| Field | Type | Required | Description |
-|---|---|---:|---|
-| `id` | PlacementId | yes | 安定ID |
-| `problemId` | ProblemId | yes | 対象問題 |
-| `unitId` | UnitId | yes | 掲載単位 |
-| `tagRoles` | `{tagId, role}[]` | yes | role=`primary/secondary`。primaryは1件以上 |
-| `mode` | `full \| similar \| supplement` | yes | 掲載形態 |
-| `primaryExplanationProblemId` | ProblemId or null | conditional | similar/supplement時 |
-| `simplificationReason` | string or null | conditional | 簡略化理由 |
-| `differences` | string[] | conditional | 主要解説との差分 |
-| `additionalLearning` | string[] | conditional | 追加要素 |
-| `difficultyBand` | integer | yes | 教材内の相対段階 |
-
-同一問題を複数Unitから参照できるが、完全解説本文の正本は1つだけにする。
-
-### 3.9 ReproducibleExample / Exercise / Assessment
-
-#### ReproducibleExample
-
-- `id`, `learningOutcomeIds`, `environment`, `input`, `steps`, `expectedObservableResult`
-- `kind`: `executable/manual/pseudocode`
-- `validationCommand`と`validatedAt`（自動化できる場合は必須）
-- `sourceRevisionIds`, `reviewRecordIds`
-- 省略、疑似コード、出力短縮は明示する。
-
-#### Exercise
-
-- `id`, `unitId`, `learningOutcomeIds`, `promptDocPath`, `answerDocPath`
-- `answerReasoning`または`verificationMethod`
-- `difficultyBand`, `prerequisiteUnitIds`
-
-#### Assessment
-
-- `id`, `outcomeId`, `method`, `successCondition`, `evidencePath`
-
-### 3.10 SourceRecord / SourceRevision
-
-#### SourceRecord
-
-| Field | Type | Description |
-|---|---|---|
-| `id` | SourceId | 正規URLに対応 |
-| `canonicalUrl` | HTTPS URL | 公式参照先 |
-| `kind` | `contest/tasks/task/editorial/correction/policy` | 種別 |
-| `authority` | `official/secondary` | 第一根拠か補助か |
-| `language` | string | 例: `ja` |
-| `currentRevisionId` | SourceRevisionId | 現在確認版 |
-
-#### SourceRevision
-
-- `id`, `sourceId`, `normalizedFingerprint`, `checkedAt`, `httpStatus`
-- `contestOrVersion`, `supersedesRevisionId`, `changeSummary`
-- `robotsPolicyFingerprint`, `termsPolicyFingerprint`
-- 生HTMLや公式本文は含めない。
-
-### 3.11 AuthoringSkill
-
-| Field | Type | Description |
-|---|---|---|
-| `name` | string | `abc-explanation-author` |
-| `version` | semver | skill契約版 |
-| `digest` | SHA-256 | `SKILL.md`と必須参照の内容指紋 |
-| `path` | repository path | `.agents/skills/.../SKILL.md` |
-| `inputSchemaVersion` | semver | AuthoringPacket契約 |
-| `outputSchemaVersion` | semver | Explanation契約 |
-| `requiredSections` | string[] | 必須構成 |
-
-### 3.12 ReviewRecord
-
-| Field | Type | Required | Description |
-|---|---|---:|---|
-| `id` | ReviewRecordId | yes | 安定ID |
-| `scopeType` / `scopeId` | enum/id | yes | explanation/update/release/claim/example |
-| `subjectDigest` | SHA-256 | yes | 実際に確認した候補内容。変更時はreview無効 |
-| `authorId` | string | yes | 作成者識別子 |
-| `reviewerId` | string | yes | authorと異なること |
-| `sourceRevisionIds` | SourceRevisionId[] | yes | 確認根拠 |
-| `skill` | SkillRef or null | conditional | 解説時 |
-| `decision` | `approved \| changes_requested \| rejected` | yes | 判定 |
-| `findings` | string[] | yes | 指摘または確認内容 |
-| `reviewedAt` | RFC3339 | yes | 時刻 |
-
-単一利用者の製品でも、公開する技術的主張・自動保証不能な例には別人のレビュー記録が必要。
-
-### 3.13 ValidationFinding
-
-| Field | Type | Description |
-|---|---|---|
-| `code` | stable string | 例: `DEPENDENCY_CYCLE` |
-| `severity` | `info/warning/error` | errorは公開block |
-| `entityType` / `entityId` | string | 問題単位へ追跡 |
-| `message` | string | 人間可読説明 |
-| `path` | string[] | 循環・参照経路等 |
-| `evidence` | string[] | 根拠ID/ファイル |
-| `blocking` | boolean | 公開可否 |
-| `createdAt` | RFC3339 | 検査時刻 |
-
-### 3.14 PublicationUpdate / Release
-
-#### PublicationUpdate
-
-- `id`, `kind` (`weekly/correction/taxonomy/content`), `contestId`
-- `fixtureMode`（trueの更新は公開不可）
-- `idempotencyKey`, `baseReleaseVersion`, `sourceSetFingerprint`
-- `taxonomyVersion`, `authoringSkill`
-- `state`, `resumeStage`, `holdReason`
-- `candidateChanges`, `validationFindings`, `reviewRecordIds`, `ownerApproval`
-- `timings`, `createdAt`, `updatedAt`, `publishedReleaseVersion`
-
-主状態:
+**Updated**: 2026-07-14
+
+## 1. Canonical conventions
+
+- IDはentity種別を含む安定した文字列とし、表示名・章位置・タグ名の変更で変えない。
+- 日時はoffset付きRFC 3339で保存し、比較時はUTC instantへ正規化する。
+- JSON digestはUnicode NFC検証後のRFC 8785 JCS bytesに対するSHA-256とする。
+- repo内pathはslash区切りのrelative pathだけを許し、空segment、`.`、`..`、symlinkを拒否する。
+- schema fieldは`src/lib/domain/schema-parts/*.ts`だけが定義し、`schemas.ts`と`index.ts`は再exportに限定する。
+
+## 2. Scope and catalog entities
+
+### Contest
+
+| Field | Rule |
+|---|---|
+| `id` | `abcNNN`形式の安定ID |
+| `number` | 212以上の整数 |
+| `title` | 公式名称 |
+| `startedAt` / `endedAt` | 公式日時。開催中は対象外 |
+| `officialUrl` | AtCoder公式URL |
+| `officialTaskOrder` | 公式problem labelを表示順に並べた非空配列 |
+| `taskOrderSourceRevisionId` | 順序を確認したSource Revision |
+| `checkedAt` | 最終確認日時 |
+
+`officialTaskOrder`内で`D`の位置より後にあるlabelを、そのContestのadvanced labelsとする。Dが見つからない、順序が重複する、取得源同士で順序が矛盾する場合はContest全体を公開保留にする。
+
+### AdvancedSlotRegistry
+
+公開版ごとに一つ持つ、対象範囲内のadvanced problem labelの安定順序である。
+
+| Field | Rule |
+|---|---|
+| `version` | registry契約版 |
+| `labels` | 重複しないlabel配列 |
+| `firstSeenContestByLabel` | labelをkey、初出Contest IDをvalueとするmap |
+| `orderEvidence` | 公式順を示すSource Revision集合 |
+| `digest` | labelsと根拠のcanonical digest |
+
+生成規則:
+
+1. 既存Releaseがある場合は既存registry順を維持する。
+2. 各Contestのadvanced labelsをContest番号順に走査する。
+3. 未知labelを、そのContestで直前・直後にある既知labelとの順序制約を満たす位置へ追加する。
+4. 制約が循環または矛盾する場合は推測せず公開保留にする。
+
+E/F/G/Hは固定enumではない。現在存在する通常labelとしてregistryへ現れるだけで、I、Exその他の新labelも同じ規則で追加する。
+
+### ContestSlotRecord
+
+| Field | Rule |
+|---|---|
+| `contestId` / `label` | 複合一意key |
+| `officialOrder` | Contest内の0以上の順序。公式問題なしではnull |
+| `availability` | `exists`, `official_absent`, `unknown`, `withdrawn` |
+| `catalogStatus` | `uncollected`, `drafting`, `on_hold`, `published`, `correction_pending` |
+| `holdReason` | `unknown`または`on_hold`で必須 |
+| `problemId` | `exists`のとき必須 |
+| `sourceRevisionId` | 状態根拠 |
+| `checkedAt` | 最終確認日時 |
+
+表示状態はavailabilityを優先する。`official_absent`は「公式問題なし」、`unknown`は理由付き「公開保留」、`withdrawn`は「公式取り下げ」、`exists`だけがcatalogStatusの5表示を使う。
+
+### Problem
+
+| Field | Rule |
+|---|---|
+| `id` | Contest IDと公式labelから導出する安定ID |
+| `contestId` / `slotLabel` | 対応slotへ一意に解決 |
+| `title` | 公式問題名 |
+| `officialUrl` | 公式問題page |
+| `constraintsSummary` | 転載を避けた構造化要約 |
+| `difficultyEvidence` | 公式情報、前提、対象学習者の段階 |
+| `sourceRevisionIds` | 一つ以上 |
+| `checkedAt` | 最終確認日時 |
+| `publicationStatus` | staging/publication状態 |
+| `primaryTagIds` | 一つ以上。正式化後 |
+| `secondaryTagIds` | 0件以上 |
+| `adHocElements` | 0件以上の問題固有要素 |
+| `placementId` | 一つ |
+
+## 3. Corpus-first learning model
+
+### TechniqueInventoryItem
+
+taxonomy作成前に全Problemへちょうど一件作る分析正本である。
+
+| Field | Rule |
+|---|---|
+| `problemId` | 全対象Problemを一回だけ所有 |
+| `sourceRevisionIds` | 判断根拠 |
+| `coreMethod` | 主たる解法の短い正規化記述 |
+| `proofIdeas` | 証明上の着眼点 |
+| `asymptoticComplexity` | 時間・空間計算量 |
+| `prerequisiteCandidates` | 必要知識候補 |
+| `implementationConcerns` | 実装上の注意 |
+| `outcomeCandidates` | 観察可能な学習成果候補 |
+| `adHocElements` | 一般化しない要素 |
+| `authorId` / `reviewStatus` | 棚卸しの責任と確認状態 |
+
+公開taxonomyを作る前に、対象Problem ID集合とInventoryのProblem ID集合が完全一致しなければならない。
+
+### TechniqueTag
+
+| Field | Rule |
+|---|---|
+| `id` | 安定Tag ID |
+| `name` / `definition` | 正式名と短い定義 |
+| `parentId` | Tagまたはnull root |
+| `prerequisiteTagIds` | 親関係とは別のDAG |
+| `learningOutcomeIds` | 一つ以上 |
+| `representativeProblemIds` | 一つ以上 |
+| `aliases` / `formerNames` | 全Tagで一意 |
+| `lifecycle` | active/deprecated |
+| `replacementTagIds` | deprecated時に一つ以上 |
+
+同義Tag、Problem一問だけを言い換えたTag、ad-hoc要素だけのTagを正式化してはならない。
+
+### LearningOutcome
+
+| Field | Rule |
+|---|---|
+| `id` | 安定Outcome ID |
+| `statement` | 学習者が観察可能な動詞で表す |
+| `prerequisiteOutcomeIds` | 循環のない集合 |
+| `scope` | 対象Tag/Unit/Problem |
+| `assessmentIds` | 一つ以上 |
+
+### LearningUnit
+
+| Field | Rule |
+|---|---|
+| `id` / `kind` | chapter, section, subsection |
+| `parentId` | 階層上の親またはnull |
+| `baselineId` / `baselineVersion` | 共通前提 |
+| `additionalPrerequisiteUnitIds` | 追加前提または空配列 |
+| `excludedTopics` | 意図的対象外 |
+| `tagIds` / `learningOutcomeIds` | 各一つ以上 |
+| `explanation` | 単位本文参照 |
+| `exampleIds` | 一つ以上 |
+| `problemIds` | 一つ以上 |
+| `assessmentIds` | 一つ以上 |
+| `stageRank` / `difficultyRank` / `representativeRank` | 0以上の整数 |
+| `globalIndex` / `orderReason` | 生成順と説明 |
+
+親子関係と前提関係は別に検証する。標準順は前提DAGをhard constraintとし、入次数0の候補だけを3 rank、最後にUnit IDのUTF-8 byte順で比較する。
+
+### ProblemPlacement
+
+| Field | Rule |
+|---|---|
+| `id` / `problemId` | Problemごとに一つ |
+| `policyVersion` | 判定policy版 |
+| `kind` | full/similar/supplement |
+| `primaryExplanationId` | similar/supplementで必須 |
+| `sharedOutcomeIds` | similar/supplementで一つ以上 |
+| `comparison` | 解法、証明、計算量、制約、前提、実装差 |
+| `additionalElement` | supplementではちょうど一つ、similarではnone明示 |
+| `rationale` / `evidenceIds` | 判定根拠 |
+
+`full`が既定である。新しい主成果、前提、主解法、証明着眼点、漸近計算量があれば`full`以外を拒否する。
+
+## 4. Explanation and evidence entities
+
+### Explanation
+
+Problemに対応する学習用本文で、`full`では独立本文、`similar`/`supplement`では主要解説への参照と差分本文を持つ。
+
+必須参照はProblem、Learning Outcome、baseline、追加前提、excludedTopics、Technique Tag、Source Revision、Technical Claim、Reproducible Example、authoring skill version/digestである。完全解説は考察、学ぶべき典型・ad-hoc要素、助言、正当性、計算量、制約整合、実装注意、例または検証手順を持つ。
+
+### TechnicalClaim
+
+検証可能な主張を安定ID、正確な文、Source Revision、author、検証状態、Correction Impactで表す。根拠なし・stale・矛盾状態は公開不可。
+
+### ReproducibleExample
+
+ExplanationまたはLearning Unitの少なくとも一方に所有され、Learning Outcome、環境、入力、手順、期待結果、検証方法、結果を持つ。疑似コード・省略は種類と範囲を直近でlabelする。
+
+### Exercise / Assessment / AnswerMaterial
+
+- ExerciseはProblem、Outcome、前提、到達条件、Assessment、AnswerMaterialを結ぶ。
+- Assessmentは観察可能な成功条件を持つ。
+- AnswerMaterialは最終答案だけでなく理由または検証方法、procedure、期待結果、検証結果を持つ。
+
+### SourceRecord / SourceRevision / CorrectionImpact
+
+SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。CorrectionImpactは変更による本文、Claim、Example、Exercise、AnswerMaterial、Unit順、派生indexの影響を完全列挙する。
+
+## 5. Learning records
+
+### LearningRecord
+
+| Field | Rule |
+|---|---|
+| `problemId` | 主key |
+| `status` | not_started/in_progress/completed |
+| `statusUpdatedAt` | 未変更ならnull |
+| `needsReview` | boolean |
+| `needsReviewUpdatedAt` | 未変更ならnull |
+
+status操作はstatus組だけ、needsReview操作はneedsReview組だけを更新する。Catalogへ新Problemが増えてもrecordを先行作成せず、join時に未着手・要復習なし・更新記録なしを表示する。
+
+### LearningRecordBackup
+
+schema version、createdAt、targetReleaseVersion、全record、不明Problem IDを持つ。import previewはnew、updated、same、unknown、invalidをitemと件数で返す。適用policyはcomponentごとのnewer-wins、backup-wins、cancelを明示し、一transactionで適用する。
+
+## 6. Update and release entities
+
+### AuthoringResult
+
+- `explanation_draft`: 完成本文と全必須metadataがあり検証対象にできる。
+- `authoring_required`: 完全な入力packetと手動templateがあるが本文未完成。
+- `blocked`: 根拠不足、deadline、policy変更等の具体的理由と再試行条件がある。
+
+後二者をExplanation件数へ含めない。
+
+### PublicationUpdate
+
+| Field | Rule |
+|---|---|
+| `id` / `kind` | 追加、訂正、taxonomy、bootstrap |
+| `baseReleaseVersion` | initialではnull |
+| `contestId` | Contest追加時に必須 |
+| `advancedSlotLabels` | Dより後の全label。固定4枠不可 |
+| `operations` | canonical entity差分 |
+| `authoringResults` | 全対象Problemへ一つ |
+| `correctionImpacts` | 該当時に全件 |
+| `validationSummary` | check結果とProblem別理由 |
+| `state` | PREPARING/ON_HOLD/ELIGIBLE_FOR_BATCH |
+
+全AuthoringResultが`explanation_draft`かつblocking 0件の場合だけELIGIBLE_FOR_BATCHへ進む。
+
+### ReleaseCandidate
+
+状態遷移（release versionは全契約で`YYYY.MM.DD`形式）:
 
 ```text
-DISCOVERED
-  -> SOURCES_VERIFIED
-  -> DRAFTED
-  -> VALIDATED
-  -> AWAITING_EXTERNAL_REVIEW
+DRAFTED
+  -> VALIDATING
+  -> AWAITING_REVIEW
   -> AWAITING_OWNER_APPROVAL
+  -> AWAITING_FINAL_VALIDATION
   -> READY_TO_PUBLISH
   -> PUBLISHED
-  -> SUPERSEDED
 ```
 
-- 任意の未公開状態 → `ON_HOLD`。`resumeStage`、理由、詳細、再試行条件が必要。
-- `ON_HOLD` → `resumeStage`は入力変化または明示再開時だけ。
-- `PUBLISHED`は不変。変更は新Updateで行う。
-- blocking finding、未レビュー、未承認、根拠矛盾がある状態から`READY_TO_PUBLISH`へ進めない。
+どの状態からも未完成、stale、expiry、検証失敗でON_HOLDへ移れる。candidateは一つ以上のELIGIBLE update、cutoff、AdvancedSlotRegistry、固定content tree、content digest、check refs、HumanContentReviewEvidence、owner approval、publication windowを持つ。reviewやapprovalは個別Updateではなくcandidateが所有する。
 
-#### Release
+### Release
 
-- `version`, `cutoffAt`, `publishedAt`, `updateIds`, `manifestDigest`
-- `coverage`（first/last contest、contest/problem/cell counts）
-- `added/changed/held/withdrawnProblemIds`, `taxonomyChanges`
-- `validationSummary`, `reviewRecordIds`, `changelogDocPath`
+release version、cutoff、AdvancedSlotRegistry、content snapshot digest、取り込んだupdate IDs、追加・変更・取り下げ問題、taxonomy変更、検証要約、review evidence refs、履歴を持つimmutable record。未公開ON_HOLD試行は含めず、staging statusから参照する。
 
-Releaseは公開manifestの唯一の入口で、部分的な候補を参照しない。
+### PublishReceipt
 
-## 4. 個人学習エンティティ
+candidate ID、release version、approved digest、公開前後tree digest、切替日時、結果を持つ。Release contentからは参照せず、公開transactionの外部append-only記録とする。
 
-### 4.1 LearningRecord
+## 7. Review entities
 
-IndexedDBだけに存在する。
+### ContentWorkManifest
 
-| Field | Type | Required | Description |
-|---|---|---:|---|
-| `problemId` | ProblemId | yes | primary key |
-| `status` | `unstarted \| attempting \| completed` | yes | 排他的1値 |
-| `statusUpdatedAt` | UTC RFC3339 or null | yes | statusだけの最終変更 |
-| `needsReview` | boolean | yes | statusと独立 |
-| `needsReviewUpdatedAt` | UTC RFC3339 or null | yes | tagだけの最終変更 |
-| `recordVersion` | positive integer | yes | optimistic migration用 |
+実装・content変更前に作るversion-controlled scopeである。top-levelにtask ID、scope digest、required requirement IDs、learning outcome IDs、review units、stateを持つ。各review unitは重複しないpaths、item IDs、requirements、outcomes、依存unit、checks、evidence role、owner、statusを持つ。
 
-State rules:
+content review unitはContest batchではなくLearning Outcome、Problem、Claim、Example、Exercise等の独立対象にする。tooling/abstractionには具体的なmaintenance benefitを必須にする。
 
-- レコード不在 → 読取時だけ既定値を合成し、日時は両方`null`。
-- statusは利用者が3値の間を任意に修正できる。status操作だけが`statusUpdatedAt`を更新する。
-- needsReviewは任意にtoggleできる。toggleだけが`needsReviewUpdatedAt`を更新する。
-- 「completedかつneedsReview=true」は有効。
-- 教材更新はLearningRecordを一括更新しない。
-- 未知/withdrawn problem IDのrecordも削除せず、backup/importと「過去の記録」に保持する。
+### HumanContentReviewEvidence
 
-### 4.2 LearningRecordExport
+同じlogical change subjectについて、次を保持する。
 
-- `schemaVersion`, `exportedAt`, `catalogVersionAtExport`
-- `records[]`, `orphanedProblemIds[]`
-- import前にJSON Schema、重複ID、日時、versionを検証する。
-- 既存値とのmergeは利用者に`newer-wins/backup-wins/cancel`を明示し、結果件数を表示する。
-- exportにアカウント、氏名、外部tracking IDを含めない。
+- 明示file inventoryとsubject digest
+- Outcome coverage reviewとgate reviewer ID
+- gate reviewer自身が実行した全適用check、command、result、raw path/digest、時刻
+- 自動化不能な新規・変更Claim/Exampleの完全inventory
+- 各itemのauthor IDs、author外reviewer ID、根拠、判定、finding、解消結果
+- aggregate resultと未解決blocking count
 
-## 5. 関係
+### MergeReviewEvidence
 
-```text
-Contest 1 ── 4 ContestSlotRecord
-Contest 1 ── 0..4 Problem
-Problem 1 ── 1..* SourceRevision
-Problem 1 ── 1..* ProblemPlacement
-Problem 1 ── 0..* Explanation revisions ── 1 AuthoringSkill version
-Problem 1 ── 0..1 LearningRecord (端末内のみ)
+Work Manifest、subject digest、HumanContentReviewEvidence、適用check集合、非適用理由、現行constitution version/digest、dependent template inventory、merge可否を結ぶ。LLM panel、独立auditor、owner approvalを別の必須review roleとして追加しない。
 
-TechniqueTag 0..1 ── parent TechniqueTag
-TechniqueTag * ── prerequisite TechniqueTag (DAG)
-LearningUnit 0..1 ── parent LearningUnit
-LearningUnit * ── prerequisite LearningUnit (DAG)
-ProblemPlacement * ── 1 Problem + 1 LearningUnit + 1..* TechniqueTag
+### LearnerOutcomeEvidence
 
-SourceRecord 1 ── 1..* SourceRevision
-SourceRevision * ── * TechnicalClaim / Example / Problem
-PublicationUpdate * ── * candidate entities / ValidationFinding / ReviewRecord
-Release 1 ── 1..* PublicationUpdate
-```
+SC-009/SC-010の運用者self-studyを一つのschemaで扱う。protocolはrelease digest、対象item、選定理由、提示順、期待要素、rubric、blocking項目、集計式を回答前に固定する。resultはraw回答、項目別採点、根拠、分子分母、aggregateを同じprotocol digestへ結び付ける。
 
-## 6. 公開前の全体検証
+### UserTimingEvidence
 
-公開可能なReleaseは次をすべて満たす。
+SC-012について、全公開Problem routeが共有LearningRecord component/action contractを使うinventoryと、事前固定した代表Problemの表示完了から二操作・reload確認までのraw timingを持つ。
 
-1. ABC 212からcutoffの最新終了済みABCまでContest番号が連続する。
-2. 各ContestにE〜Hの4 SlotRecordがあり、空欄の意味がない。
-3. `exists`の全Problemが出典、タグ、Unit、Placement、解説または差分解説へ到達できる。
-4. Tag親木、Tag前提DAG、Unit親木、Unit前提DAGに循環・自己辺・重複辺がない。
-5. 生成順で全前提が依存先より前にあり、順序理由を表示できる。
-6. 全full Explanationがskill必須区分、正当性、計算量、制約整合、注意、例、出典を持つ。
-7. 実行例が宣言環境で期待結果を再現し、手動例は独立レビュー済みである。
-8. authorと異なるreviewerの承認、およびownerの明示承認がある。
-9. blocking finding、壊れた内部リンク、未確定の必須外部リンク、axe違反、必須代替テキスト欠落が0件である。
-10. `npm run verify:release`と二重buildのmanifest digestが一致する。
-11. 公開候補がAtCoder本文・公式解説・公式コードの不必要な逐語転載を含まない。
-12. 既存LearningRecord fixtureが教材更新前後で同一で、新規問題はrecord不在の既定値になる。
+## 8. Derived indexes
+
+正本から次を決定生成する。
+
+- Contest × AdvancedSlotRegistry matrixと同内容のlist alternative
+- Problem detail、Explanation anchor、Learning Unit、Tag、similar problem route
+- Problem/Tag/Learning Unit/Contest種別付きsearch document
+- standard learning sequenceと前後navigation
+- Tag treeとTag別problem collection
+- static attributesとlocal LearningRecordをjoinするproblem/review list
+- Release historyとstaging status summary
+
+検索documentへstaging、非公開entity、deprecated route、LearningRecordを混入させない。
+
+## 9. Publication invariants
+
+公開前に少なくとも次を全件検査する。
+
+1. ABC 212からcutoffまでContest番号が連続する。
+2. 各ContestのDより後の全公式ProblemがCatalogに存在する。
+3. AdvancedSlotRegistryが全Contest orderと矛盾せず、新labelを欠落させない。
+4. Problem集合とTechnique Inventory集合が一致する。
+5. 全ProblemがTagとLearning UnitまたはTag collectionから到達可能である。
+6. Tag/Unit/Outcome prerequisite graphに循環・未知参照がない。
+7. 全Explanation/Example/Exercise/AnswerMaterialがOutcomeとSourceへ追跡できる。
+8. 全実行可能Example/AnswerMaterialの検証が成功する。
+9. 全内部link、用語、代替text、navigationが有効である。
+10. 全適用checkと必要なauthor外human reviewがcurrent subjectで成功する。
+11. owner approval後にcandidate bytesが変化していない。
+12. contest matrix、search、simple local learning managementが公開Problemで利用可能である。

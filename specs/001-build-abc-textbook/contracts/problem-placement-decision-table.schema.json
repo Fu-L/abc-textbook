@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abc-textbook.local/schemas/problem-placement-decision-table.schema.json",
+  "title": "ABC Textbook Problem Placement Decision Table",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "version", "defaultMode", "comparisonDimensions", "inputAttributes", "evaluationOrder", "exclusiveResult", "modeRules", "ambiguousAction", "digest"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "id": { "type": "string", "pattern": "^placement-policy-v[0-9]+$" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "defaultMode": { "const": "full" },
+    "comparisonDimensions": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "uniqueItems": true,
+      "allOf": [
+        { "contains": { "const": "algorithm" } },
+        { "contains": { "const": "proof" } },
+        { "contains": { "const": "complexity" } },
+        { "contains": { "const": "constraints" } },
+        { "contains": { "const": "prerequisites" } },
+        { "contains": { "const": "implementation" } },
+        { "contains": { "const": "learning_outcomes" } }
+      ],
+      "items": { "enum": ["algorithm", "proof", "complexity", "constraints", "prerequisites", "implementation", "learning_outcomes"] }
+    },
+    "inputAttributes": {
+      "const": ["primary_explanation_valid", "algorithm_same", "proof_same", "complexity_same", "constraints_difference_documented", "prerequisites_same", "implementation_difference_documented", "learning_outcomes_same", "additional_learning_count", "evidence_complete", "conflict_free"]
+    },
+    "evaluationOrder": { "const": ["similar", "supplement", "full"] },
+    "exclusiveResult": { "const": true },
+    "modeRules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["full", "similar", "supplement"],
+      "properties": {
+        "full": {
+          "allOf": [
+            { "$ref": "#/$defs/rule" },
+            { "properties": { "result": { "const": "full" }, "priority": { "const": 3 }, "fallback": { "const": true }, "clauses": { "maxItems": 0 } } }
+          ]
+        },
+        "similar": {
+          "allOf": [
+            { "$ref": "#/$defs/rule" },
+            { "properties": { "result": { "const": "similar" }, "priority": { "const": 1 }, "fallback": { "const": false }, "clauses": { "minItems": 1 } } }
+          ]
+        },
+        "supplement": {
+          "allOf": [
+            { "$ref": "#/$defs/rule" },
+            { "properties": { "result": { "const": "supplement" }, "priority": { "const": 2 }, "fallback": { "const": false }, "clauses": { "minItems": 1 } } }
+          ]
+        }
+      }
+    },
+    "ambiguousAction": { "const": "on_hold" },
+    "digest": {
+      "$ref": "#/$defs/sha256",
+      "description": "このJSON objectをkey順・array順・null表現までcanonical化し、自身のdigest fieldだけを除外して計算したSHA-256。"
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result", "priority", "fallback", "clauses", "requiredEvidence"],
+      "properties": {
+        "result": { "enum": ["full", "similar", "supplement"] },
+        "priority": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "fallback": { "type": "boolean" },
+        "clauses": { "type": "array", "items": { "$ref": "#/$defs/conditionGroup" } },
+        "requiredEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["independent_full_explanation", "primary_explanation_id", "shared_learning_outcome_ids", "algorithm_comparison", "proof_comparison", "complexity_comparison", "constraint_comparison", "prerequisite_comparison", "implementation_comparison", "simplification_reason", "additional_learning", "answer_material", "source_revision_ids", "verification_evidence"]
+          }
+        }
+      }
+    },
+    "conditionGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["all"],
+      "properties": {
+        "all": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/condition" } }
+      }
+    },
+    "condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attribute", "operator", "value"],
+      "properties": {
+        "attribute": {
+          "enum": ["primary_explanation_valid", "algorithm_same", "proof_same", "complexity_same", "constraints_difference_documented", "prerequisites_same", "implementation_difference_documented", "learning_outcomes_same", "additional_learning_count", "evidence_complete", "conflict_free"]
+        },
+        "operator": { "enum": ["eq", "not_eq", "lt", "lte", "gt", "gte"] },
+        "value": { "oneOf": [{ "type": "boolean" }, { "type": "integer", "minimum": 0 }, { "type": "string", "minLength": 1 }] }
+      }
+    }
+  }
+}
