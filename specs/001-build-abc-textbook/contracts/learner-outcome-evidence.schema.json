@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abc-textbook.local/schemas/learner-outcome-evidence.schema.json",
+  "title": "ABC Textbook Operator Learner Outcome Evidence",
+  "description": "SC-009/SC-010について、継続利用者である一人の運用者が回答前に固定したprotocolと自己評価結果を表す。外部participant cohortを要求しない。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "evidenceId", "releaseVersion", "releaseDigest", "operatorId", "protocol", "results", "rawManifest", "aggregatePassed", "generatedAt"],
+  "properties": {
+    "schemaVersion": { "const": "2.0.0" },
+    "evidenceId": { "$ref": "#/$defs/id" },
+    "releaseVersion": { "type": "string", "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}$" },
+    "releaseDigest": { "$ref": "#/$defs/sha256" },
+    "operatorId": { "$ref": "#/$defs/id" },
+    "protocol": { "$ref": "#/$defs/protocol" },
+    "results": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "$ref": "#/$defs/criterionResult" },
+      "allOf": [
+        { "contains": { "properties": { "criterionId": { "const": "SC-009" } }, "required": ["criterionId"] }, "minContains": 1, "maxContains": 1 },
+        { "contains": { "properties": { "criterionId": { "const": "SC-010" } }, "required": ["criterionId"] }, "minContains": 1, "maxContains": 1 }
+      ]
+    },
+    "rawManifest": { "$ref": "#/$defs/rawManifest" },
+    "aggregatePassed": { "type": "boolean" },
+    "generatedAt": { "$ref": "#/$defs/dateTime" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "dateTime": { "type": "string", "format": "date-time" },
+    "problemLabel": { "type": "string", "minLength": 1, "maxLength": 16, "pattern": "^[A-Za-z][A-Za-z0-9+_-]*$" },
+    "safePath": { "type": "string", "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//)[A-Za-z0-9._/-]+$" },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protocolId", "releaseDigest", "fixedAt", "sc009Items", "sc010Items", "rubrics", "passingRatio"],
+      "properties": {
+        "protocolId": { "$ref": "#/$defs/id" },
+        "releaseDigest": { "$ref": "#/$defs/sha256" },
+        "fixedAt": { "$ref": "#/$defs/dateTime" },
+        "sc009Items": {
+          "type": "array",
+          "minItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["itemId", "order", "problemId", "slotLabel", "primaryGenre", "expectedElements", "rubricId"],
+            "properties": {
+              "itemId": { "$ref": "#/$defs/id" },
+              "order": { "type": "integer", "minimum": 1 },
+              "problemId": { "$ref": "#/$defs/id" },
+              "slotLabel": { "$ref": "#/$defs/problemLabel" },
+              "primaryGenre": { "type": "string", "minLength": 1 },
+              "expectedElements": { "type": "array", "minItems": 4, "items": { "type": "string", "minLength": 1 } },
+              "rubricId": { "$ref": "#/$defs/id" }
+            }
+          }
+        },
+        "sc010Items": {
+          "type": "array",
+          "minItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["itemId", "order", "currentUnitId", "primaryGenre", "expectedNextUnitId", "expectedPrerequisiteIds", "expectedProblemId", "rubricId"],
+            "properties": {
+              "itemId": { "$ref": "#/$defs/id" },
+              "order": { "type": "integer", "minimum": 1 },
+              "currentUnitId": { "$ref": "#/$defs/id" },
+              "primaryGenre": { "enum": ["graph", "dynamic-programming", "data-structure", "mathematics", "other"] },
+              "expectedNextUnitId": { "$ref": "#/$defs/id" },
+              "expectedPrerequisiteIds": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+              "expectedProblemId": { "$ref": "#/$defs/id" },
+              "rubricId": { "$ref": "#/$defs/id" }
+            }
+          }
+        },
+        "rubrics": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["rubricId", "blockingItemIds", "items"],
+            "properties": {
+              "rubricId": { "$ref": "#/$defs/id" },
+              "blockingItemIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+              "items": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["itemId", "description"],
+                  "properties": {
+                    "itemId": { "$ref": "#/$defs/id" },
+                    "description": { "type": "string", "minLength": 1 }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "passingRatio": { "const": 0.8 }
+      }
+    },
+    "criterionResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["criterionId", "protocolId", "releaseDigest", "itemResults", "passedItemCount", "totalItemCount", "passRatio", "passed"],
+      "properties": {
+        "criterionId": { "enum": ["SC-009", "SC-010"] },
+        "protocolId": { "$ref": "#/$defs/id" },
+        "releaseDigest": { "$ref": "#/$defs/sha256" },
+        "itemResults": {
+          "type": "array",
+          "minItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["itemId", "rawAnswerPath", "rawAnswerDigest", "rubricDecisions", "allBlockingPassed", "evidenceNotes"],
+            "properties": {
+              "itemId": { "$ref": "#/$defs/id" },
+              "rawAnswerPath": { "$ref": "#/$defs/safePath" },
+              "rawAnswerDigest": { "$ref": "#/$defs/sha256" },
+              "rubricDecisions": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["rubricItemId", "decision", "rationale"],
+                  "properties": {
+                    "rubricItemId": { "$ref": "#/$defs/id" },
+                    "decision": { "enum": ["pass", "fail"] },
+                    "rationale": { "type": "string", "minLength": 1 }
+                  }
+                }
+              },
+              "allBlockingPassed": { "type": "boolean" },
+              "evidenceNotes": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "passedItemCount": { "type": "integer", "minimum": 0 },
+        "totalItemCount": { "type": "integer", "minimum": 5 },
+        "passRatio": { "type": "number", "minimum": 0, "maximum": 1 },
+        "passed": { "type": "boolean" }
+      }
+    },
+    "rawManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "digest", "fileCount", "files"],
+      "properties": {
+        "path": { "$ref": "#/$defs/safePath" },
+        "digest": { "$ref": "#/$defs/sha256" },
+        "fileCount": { "type": "integer", "minimum": 1 },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "sha256", "byteLength"],
+            "properties": {
+              "path": { "$ref": "#/$defs/safePath" },
+              "sha256": { "$ref": "#/$defs/sha256" },
+              "byteLength": { "type": "integer", "minimum": 0 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

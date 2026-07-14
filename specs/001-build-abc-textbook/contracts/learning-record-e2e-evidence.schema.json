@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abc-textbook.local/schemas/learning-record-e2e-evidence.schema.json",
+  "title": "ABC Textbook Learning Record E2E Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "releaseDigest", "automatedEngineMatrixVersion", "catalogVersion", "runs", "rawEvidenceDigest", "aggregatePassed", "generatedAt"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "releaseDigest": { "$ref": "#/$defs/sha256", "description": "対象Catalog Release.contentSnapshotDigestと完全一致する。Release.manifestDigest、candidateManifestDigest、candidatePayloadDigestを指定してはならない。" },
+    "automatedEngineMatrixVersion": { "type": "string", "minLength": 1 },
+    "catalogVersion": { "type": "string", "minLength": 1 },
+    "runs": {
+      "type": "array", "minItems": 45, "items": { "$ref": "#/$defs/run" },
+      "allOf": [
+        { "contains": { "properties": { "engine": { "const": "chromium" } }, "required": ["engine"] }, "minContains": 15 },
+        { "contains": { "properties": { "engine": { "const": "firefox" } }, "required": ["engine"] }, "minContains": 15 },
+        { "contains": { "properties": { "engine": { "const": "webkit" } }, "required": ["engine"] }, "minContains": 15 }
+      ]
+    },
+    "rawEvidenceDigest": { "$ref": "#/$defs/rawEvidenceManifestDigest" },
+    "aggregatePassed": { "const": true },
+    "generatedAt": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "rawEvidenceManifestDigest": {
+      "$ref": "#/$defs/sha256",
+      "description": "このevidence.jsonに隣接するraw/内の全fileから{path, sha256, byteLength}を作り、repository-relative path順に並べたarrayのcanonical JSON SHA-256。raw/実file集合、各byteLength/file SHA-256との完全一致を意味検証し、個別raw path fieldがなくても検証bytesを一意に復元する。"
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine", "engineRevision", "os", "problemId", "startMarker", "endMarker", "startedMonotonicMs", "completedMonotonicMs", "durationMs", "statusPersisted", "reviewPersisted", "statusUpdatedAt", "reviewUpdatedAt", "reloadCompleted", "reloadedStatus", "reloadedNeedsReview", "reloadedStatusUpdatedAt", "reloadedReviewUpdatedAt", "rollbackPassed"],
+      "properties": {
+        "engine": { "enum": ["chromium", "firefox", "webkit"] },
+        "engineRevision": { "type": "string", "minLength": 1 },
+        "os": { "type": "string", "minLength": 1 },
+        "problemId": { "type": "string", "pattern": "^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$" },
+        "startMarker": { "const": "problem-detail-render-complete" },
+        "endMarker": { "const": "both-save-confirmations-visible" },
+        "startedMonotonicMs": { "type": "number", "minimum": 0 },
+        "completedMonotonicMs": { "type": "number", "minimum": 0 },
+        "durationMs": { "type": "number", "minimum": 0, "maximum": 30000 },
+        "statusPersisted": { "const": true },
+        "reviewPersisted": { "const": true },
+        "statusUpdatedAt": { "type": "string", "format": "date-time" },
+        "reviewUpdatedAt": { "type": "string", "format": "date-time" },
+        "reloadCompleted": { "const": true },
+        "reloadedStatus": { "const": "completed" },
+        "reloadedNeedsReview": { "const": true },
+        "reloadedStatusUpdatedAt": { "type": "string", "format": "date-time" },
+        "reloadedReviewUpdatedAt": { "type": "string", "format": "date-time" },
+        "rollbackPassed": { "const": true }
+      }
+    }
+  }
+}

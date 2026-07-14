@@ -1,0 +1,418 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abc-textbook.local/schemas/user-timing-evidence.schema.json",
+  "title": "ABC Textbook Sole User Timing Evidence",
+  "description": "SC-012を、全公開Problem routeが同じ共有LearningRecord component/action contractを使うroute-equivalence inventoryと、そのinventory内の代表problemに対する運用者本人の実timingの組合せで立証する。代表problem単独の成功だけを全routeへ一般化しない。",
+  "oneOf": [
+    { "$ref": "#/$defs/protocol" },
+    { "$ref": "#/$defs/result" }
+  ],
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "dateTime": { "type": "string", "format": "date-time" },
+    "releaseVersion": { "type": "string", "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}$" },
+    "safeRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!.*(?:^|/)(?:[Cc][Oo][Nn]|[Pp][Rr][Nn]|[Aa][Uu][Xx]|[Nn][Uu][Ll]|[Cc][Oo][Mm][1-9]|[Ll][Pp][Tt][1-9])(?:\\.[A-Za-z0-9._-]+)?(?:/|$))(?:[A-Za-z0-9._-]*[A-Za-z0-9_-])(?:/[A-Za-z0-9._-]*[A-Za-z0-9_-])*$",
+      "description": "portable ASCIIのrepository-relative canonical path。absolute/drive/UNC、backslash、空・dot・dot-dot segment、末尾dot/slash、Windows予約文字/device nameを拒否する。"
+    },
+    "rawPath": {
+      "allOf": [
+        { "$ref": "#/$defs/safeRelativePath" },
+        { "pattern": "^docs/verification/user-timing/[0-9]{4}\\.[0-9]{2}\\.[0-9]+/r[1-9][0-9]*/raw/(?:[A-Za-z0-9._-]*[A-Za-z0-9_-])(?:/[A-Za-z0-9._-]*[A-Za-z0-9_-])*$" }
+      ],
+      "description": "同じreleaseVersion/r<N>のraw/配下に閉じた通常file path。意味検証器はsymlink解決後もraw directory外へ出ないことを確認する。"
+    },
+    "rawFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "byteLength"],
+      "properties": {
+        "path": { "$ref": "#/$defs/rawPath" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "byteLength": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "componentFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "digest", "byteLength"],
+      "properties": {
+        "path": {
+          "allOf": [
+            { "$ref": "#/$defs/safeRelativePath" },
+            { "pattern": "^(?:src/components|src/lib/learning-records)/.+\\.(?:astro|ts|tsx)$" }
+          ]
+        },
+        "digest": { "$ref": "#/$defs/sha256" },
+        "byteLength": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "actionContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contractId", "version", "path", "digest", "requiredActions"],
+      "properties": {
+        "contractId": { "const": "learning-record-direct-actions" },
+        "version": { "type": "string", "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$" },
+        "path": { "$ref": "#/$defs/safeRelativePath" },
+        "digest": { "$ref": "#/$defs/sha256" },
+        "requiredActions": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "enum": ["set_status_completed", "set_needs_review_true"] },
+          "allOf": [
+            { "contains": { "const": "set_status_completed" }, "minContains": 1, "maxContains": 1 },
+            { "contains": { "const": "set_needs_review_true" }, "minContains": 1, "maxContains": 1 }
+          ]
+        }
+      }
+    },
+    "routeEquivalenceProtocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inventoryPath",
+        "inventoryDigest",
+        "inventoryCount",
+        "sharedComponents",
+        "sharedComponentSetDigest",
+        "actionContract",
+        "representativeProblemId",
+        "expectedCheckedRouteCount"
+      ],
+      "properties": {
+        "inventoryPath": {
+          "type": "string",
+          "pattern": "^docs/verification/user-timing/[0-9]{4}\\.[0-9]{2}\\.[0-9]+/r[1-9][0-9]*/route-equivalence-inventory\\.json$",
+          "description": "対象releaseの公開Catalogに存在する全published Problem ID/route/path digestをpath昇順に列挙する事前固定inventory。"
+        },
+        "inventoryDigest": { "$ref": "#/$defs/sha256" },
+        "inventoryCount": { "type": "integer", "minimum": 1 },
+        "sharedComponents": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/componentFile" },
+          "description": "全Problem routeが同じbytesで利用するLearningRecord UI/action実装。"
+        },
+        "sharedComponentSetDigest": {
+          "$ref": "#/$defs/sha256",
+          "description": "sharedComponentsをpath順に並べた{path,digest,byteLength}[]のRFC 8785/JCS SHA-256。"
+        },
+        "actionContract": { "$ref": "#/$defs/actionContract" },
+        "representativeProblemId": { "type": "string", "pattern": "^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$" },
+        "expectedCheckedRouteCount": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "inventoryCountと一致させ、resultでは全routeを一対一に検査する。"
+        }
+      }
+    },
+    "routeCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "problemId",
+        "routePath",
+        "routeDigest",
+        "sharedComponentSetDigest",
+        "actionContractDigest",
+        "sharedComponentRendered",
+        "requiredActions",
+        "checkResultPath",
+        "checkResultDigest",
+        "status",
+        "checkedAt"
+      ],
+      "properties": {
+        "problemId": { "type": "string", "pattern": "^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$" },
+        "routePath": { "type": "string", "pattern": "^problems/abc[0-9]{3,}-[a-z][a-z0-9+_-]*/index\\.html$" },
+        "routeDigest": {
+          "$ref": "#/$defs/sha256",
+          "description": "対象releaseの生成済みroute artifact bytesまたは版付きroute contract projectionのdigest。inventoryの同一problem/routeと一致させる。"
+        },
+        "sharedComponentSetDigest": { "$ref": "#/$defs/sha256" },
+        "actionContractDigest": { "$ref": "#/$defs/sha256" },
+        "sharedComponentRendered": { "type": "boolean" },
+        "requiredActions": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "enum": ["set_status_completed", "set_needs_review_true"] },
+          "allOf": [
+            { "contains": { "const": "set_status_completed" }, "minContains": 1, "maxContains": 1 },
+            { "contains": { "const": "set_needs_review_true" }, "minContains": 1, "maxContains": 1 }
+          ]
+        },
+        "checkResultPath": { "$ref": "#/$defs/rawPath" },
+        "checkResultDigest": { "$ref": "#/$defs/sha256" },
+        "status": { "enum": ["passed", "failed"] },
+        "checkedAt": { "$ref": "#/$defs/dateTime" }
+      }
+    },
+    "routeEquivalenceResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inventoryPath",
+        "inventoryDigest",
+        "inventoryCount",
+        "sharedComponents",
+        "sharedComponentSetDigest",
+        "actionContract",
+        "representativeProblemId",
+        "routeChecks",
+        "checkedRouteCount",
+        "passedRouteCount",
+        "failedRouteCount",
+        "aggregatePassed",
+        "failureReasons"
+      ],
+      "properties": {
+        "inventoryPath": { "type": "string", "pattern": "^docs/verification/user-timing/[0-9]{4}\\.[0-9]{2}\\.[0-9]+/r[1-9][0-9]*/route-equivalence-inventory\\.json$" },
+        "inventoryDigest": { "$ref": "#/$defs/sha256" },
+        "inventoryCount": { "type": "integer", "minimum": 1 },
+        "sharedComponents": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/componentFile" } },
+        "sharedComponentSetDigest": { "$ref": "#/$defs/sha256" },
+        "actionContract": { "$ref": "#/$defs/actionContract" },
+        "representativeProblemId": { "type": "string", "pattern": "^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$" },
+        "routeChecks": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/routeCheck" },
+          "description": "inventoryの全Problem routeをproblemId/routePathでちょうど一度含む。意味検証器は公開Catalog・inventory・checksの三集合差分0、digest一致、同一component/action contractを確認する。"
+        },
+        "checkedRouteCount": { "type": "integer", "minimum": 0 },
+        "passedRouteCount": { "type": "integer", "minimum": 0 },
+        "failedRouteCount": { "type": "integer", "minimum": 0 },
+        "aggregatePassed": { "type": "boolean" },
+        "failureReasons": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "aggregatePassed": { "const": true } }, "required": ["aggregatePassed"] },
+          "then": {
+            "properties": {
+              "checkedRouteCount": { "minimum": 1 },
+              "passedRouteCount": { "minimum": 1 },
+              "failedRouteCount": { "const": 0 },
+              "routeChecks": {
+                "items": {
+                  "allOf": [
+                    { "$ref": "#/$defs/routeCheck" },
+                    { "properties": { "sharedComponentRendered": { "const": true }, "status": { "const": "passed" } } }
+                  ]
+                }
+              },
+              "failureReasons": { "maxItems": 0 }
+            }
+          },
+          "else": { "properties": { "failureReasons": { "minItems": 1 } } }
+        }
+      ]
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "documentKind",
+        "criterionId",
+        "releaseVersion",
+        "releaseDigest",
+        "revision",
+        "artifactPath",
+        "actorRole",
+        "problemId",
+        "routeEquivalence",
+        "fixedAt",
+        "measurementStartsAfter",
+        "startMarker",
+        "endMarker",
+        "requiredOperations",
+        "additionalNavigationAllowed",
+        "externalInstructionsAllowed",
+        "clockKind",
+        "maximumDurationMs",
+        "reloadAssertions",
+        "protocolDigest"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "1.1.0" },
+        "documentKind": { "const": "user_timing_protocol" },
+        "criterionId": { "const": "SC-012" },
+        "releaseVersion": { "$ref": "#/$defs/releaseVersion" },
+        "releaseDigest": { "$ref": "#/$defs/sha256" },
+        "revision": { "type": "integer", "minimum": 1 },
+        "artifactPath": { "type": "string", "pattern": "^docs/verification/user-timing/[0-9]{4}\\.[0-9]{2}\\.[0-9]+/r[1-9][0-9]*/protocol\\.json$" },
+        "actorRole": { "const": "sole_operator_learner" },
+        "problemId": { "type": "string", "pattern": "^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$", "description": "routeEquivalence inventoryに含まれる実timing代表problem。routeEquivalence.representativeProblemIdと一致させる。" },
+        "routeEquivalence": { "$ref": "#/$defs/routeEquivalenceProtocol" },
+        "fixedAt": { "$ref": "#/$defs/dateTime" },
+        "measurementStartsAfter": { "$ref": "#/$defs/dateTime" },
+        "startMarker": { "const": "problem-detail-render-complete" },
+        "endMarker": { "const": "both-save-confirmations-visible" },
+        "requiredOperations": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "enum": ["set_status_completed", "set_needs_review_true"] },
+          "allOf": [
+            { "contains": { "const": "set_status_completed" }, "minContains": 1, "maxContains": 1 },
+            { "contains": { "const": "set_needs_review_true" }, "minContains": 1, "maxContains": 1 }
+          ]
+        },
+        "additionalNavigationAllowed": { "const": false },
+        "externalInstructionsAllowed": { "const": false },
+        "clockKind": { "const": "monotonic" },
+        "maximumDurationMs": { "const": 30000 },
+        "reloadAssertions": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "enum": ["status_completed", "needs_review_true", "status_updated_at_preserved", "review_updated_at_preserved"] },
+          "allOf": [
+            { "contains": { "const": "status_completed" }, "minContains": 1, "maxContains": 1 },
+            { "contains": { "const": "needs_review_true" }, "minContains": 1, "maxContains": 1 },
+            { "contains": { "const": "status_updated_at_preserved" }, "minContains": 1, "maxContains": 1 },
+            { "contains": { "const": "review_updated_at_preserved" }, "minContains": 1, "maxContains": 1 }
+          ]
+        },
+        "protocolDigest": { "$ref": "#/$defs/sha256", "description": "protocolDigestだけを除外したdocumentのRFC 8785/JCS canonical JSON SHA-256。" }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation", "completedMonotonicMs", "saveConfirmationObserved", "persistedUpdatedAt"],
+      "properties": {
+        "operation": { "enum": ["set_status_completed", "set_needs_review_true"] },
+        "completedMonotonicMs": { "type": "number", "minimum": 0 },
+        "saveConfirmationObserved": { "type": "boolean" },
+        "persistedUpdatedAt": { "$ref": "#/$defs/dateTime" }
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "documentKind",
+        "criterionId",
+        "releaseVersion",
+        "releaseDigest",
+        "revision",
+        "artifactPath",
+        "protocolPath",
+        "protocolDigest",
+        "actorRole",
+        "problemId",
+        "routeEquivalence",
+        "startMarker",
+        "endMarker",
+        "startedMonotonicMs",
+        "completedMonotonicMs",
+        "durationMs",
+        "operations",
+        "additionalNavigationCount",
+        "externalInstructionUsed",
+        "reloadCompleted",
+        "reloadedStatus",
+        "reloadedNeedsReview",
+        "reloadedStatusUpdatedAt",
+        "reloadedReviewUpdatedAt",
+        "statusUpdatedAtPreserved",
+        "reviewUpdatedAtPreserved",
+        "passed",
+        "failureReasons",
+        "rawFiles",
+        "rawEvidenceDigest",
+        "generatedAt",
+        "resultDigest"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "1.1.0" },
+        "documentKind": { "const": "user_timing_result" },
+        "criterionId": { "const": "SC-012" },
+        "releaseVersion": { "$ref": "#/$defs/releaseVersion" },
+        "releaseDigest": { "$ref": "#/$defs/sha256" },
+        "revision": { "type": "integer", "minimum": 1 },
+        "artifactPath": { "type": "string", "pattern": "^docs/verification/user-timing/[0-9]{4}\\.[0-9]{2}\\.[0-9]+/r[1-9][0-9]*/sc-012\\.json$" },
+        "protocolPath": { "type": "string", "pattern": "^docs/verification/user-timing/[0-9]{4}\\.[0-9]{2}\\.[0-9]+/r[1-9][0-9]*/protocol\\.json$" },
+        "protocolDigest": { "$ref": "#/$defs/sha256" },
+        "actorRole": { "const": "sole_operator_learner" },
+        "problemId": { "type": "string", "pattern": "^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$", "description": "実timingを行った代表problem。protocol/resultのrouteEquivalence.representativeProblemIdと一致させる。" },
+        "routeEquivalence": { "$ref": "#/$defs/routeEquivalenceResult" },
+        "startMarker": { "const": "problem-detail-render-complete" },
+        "endMarker": { "const": "both-save-confirmations-visible" },
+        "startedMonotonicMs": { "type": "number", "minimum": 0 },
+        "completedMonotonicMs": { "type": "number", "minimum": 0 },
+        "durationMs": { "type": "number", "minimum": 0 },
+        "operations": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/operation" },
+          "allOf": [
+            { "contains": { "properties": { "operation": { "const": "set_status_completed" } }, "required": ["operation"] }, "minContains": 1, "maxContains": 1 },
+            { "contains": { "properties": { "operation": { "const": "set_needs_review_true" } }, "required": ["operation"] }, "minContains": 1, "maxContains": 1 }
+          ]
+        },
+        "additionalNavigationCount": { "type": "integer", "minimum": 0 },
+        "externalInstructionUsed": { "type": "boolean" },
+        "reloadCompleted": { "type": "boolean" },
+        "reloadedStatus": { "enum": ["not_started", "in_progress", "completed"] },
+        "reloadedNeedsReview": { "type": "boolean" },
+        "reloadedStatusUpdatedAt": { "$ref": "#/$defs/dateTime" },
+        "reloadedReviewUpdatedAt": { "$ref": "#/$defs/dateTime" },
+        "statusUpdatedAtPreserved": { "type": "boolean" },
+        "reviewUpdatedAtPreserved": { "type": "boolean" },
+        "passed": { "type": "boolean" },
+        "failureReasons": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "rawFiles": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/rawFile" } },
+        "rawEvidenceDigest": { "$ref": "#/$defs/sha256", "description": "rawFilesをrepository-relative path順に並べたcanonical JSONのSHA-256。" },
+        "generatedAt": { "$ref": "#/$defs/dateTime" },
+        "resultDigest": { "$ref": "#/$defs/sha256", "description": "resultDigestだけを除外したdocumentのRFC 8785/JCS canonical JSON SHA-256。" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "passed": { "const": true } }, "required": ["passed"] },
+          "then": {
+            "properties": {
+              "durationMs": { "maximum": 30000 },
+              "operations": { "items": { "properties": { "saveConfirmationObserved": { "const": true } } } },
+              "additionalNavigationCount": { "const": 0 },
+              "externalInstructionUsed": { "const": false },
+              "reloadCompleted": { "const": true },
+              "reloadedStatus": { "const": "completed" },
+              "reloadedNeedsReview": { "const": true },
+              "statusUpdatedAtPreserved": { "const": true },
+              "reviewUpdatedAtPreserved": { "const": true },
+              "routeEquivalence": {
+                "allOf": [
+                  { "$ref": "#/$defs/routeEquivalenceResult" },
+                  {
+                    "properties": {
+                      "failedRouteCount": { "const": 0 },
+                      "aggregatePassed": { "const": true }
+                    }
+                  }
+                ]
+              },
+              "failureReasons": { "maxItems": 0 }
+            }
+          },
+          "else": { "properties": { "failureReasons": { "minItems": 1 } } }
+        }
+      ]
+    }
+  }
+}

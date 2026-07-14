@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abc-textbook.local/schemas/merge-review.schema.json",
+  "title": "ABC Textbook Merge Review Evidence",
+  "description": "一つのlogical changeについて、学習成果単位のsubject、Work Manifest、同一gate reviewerが実行した全適用check、必要なauthor外HumanContentReviewEvidence、現行Constitution Check、merge可否を結ぶ。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "changeId",
+    "logicalChangeSubjectDigest",
+    "subjectFiles",
+    "excludedArtifacts",
+    "workManifestPath",
+    "workManifestDigest",
+    "learningOutcomeIds",
+    "outcomeImpact",
+    "applicableChecks",
+    "notApplicableChecks",
+    "humanContentReviewEvidenceId",
+    "humanContentReviewEvidencePath",
+    "humanContentReviewEvidenceDigest",
+    "constitutionCheck",
+    "unresolvedBlockingFindingCount",
+    "mergeApproved",
+    "reviewedAt",
+    "evidenceDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "2.0.0" },
+    "id": { "$ref": "#/$defs/id" },
+    "changeId": { "$ref": "#/$defs/id" },
+    "logicalChangeSubjectDigest": { "$ref": "#/$defs/sha256" },
+    "subjectFiles": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/fileEntry" } },
+    "excludedArtifacts": { "type": "array", "items": { "$ref": "#/$defs/fileEntry" } },
+    "workManifestPath": { "$ref": "#/$defs/safePath" },
+    "workManifestDigest": { "$ref": "#/$defs/sha256" },
+    "learningOutcomeIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+    "outcomeImpact": { "$ref": "#/$defs/outcomeImpact" },
+    "applicableChecks": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/check" } },
+    "notApplicableChecks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["checkId", "rationale"],
+        "properties": {
+          "checkId": { "$ref": "#/$defs/id" },
+          "rationale": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "humanContentReviewEvidenceId": { "$ref": "#/$defs/id" },
+    "humanContentReviewEvidencePath": { "$ref": "#/$defs/safePath" },
+    "humanContentReviewEvidenceDigest": { "$ref": "#/$defs/sha256" },
+    "constitutionCheck": { "$ref": "#/$defs/constitutionCheck" },
+    "unresolvedBlockingFindingCount": { "type": "integer", "minimum": 0 },
+    "mergeApproved": { "type": "boolean" },
+    "reviewedAt": { "$ref": "#/$defs/dateTime" },
+    "evidenceDigest": { "$ref": "#/$defs/sha256" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "mergeApproved": { "const": true } }, "required": ["mergeApproved"] },
+      "then": {
+        "properties": {
+          "unresolvedBlockingFindingCount": { "const": 0 },
+          "applicableChecks": { "items": { "properties": { "exitCode": { "const": 0 } } } },
+          "constitutionCheck": { "properties": { "passed": { "const": true }, "violationCount": { "const": 0 } } }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "outcomeImpact": { "properties": { "kind": { "const": "affects_learning_outcomes" } }, "required": ["kind"] } }, "required": ["outcomeImpact"] },
+      "then": { "properties": { "learningOutcomeIds": { "minItems": 1 } } },
+      "else": { "properties": { "learningOutcomeIds": { "maxItems": 0 } } }
+    }
+  ],
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "dateTime": { "type": "string", "format": "date-time" },
+    "safePath": { "type": "string", "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//)[A-Za-z0-9._/-]+$" },
+    "fileEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "byteLength"],
+      "properties": {
+        "path": { "$ref": "#/$defs/safePath" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "byteLength": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "outcomeImpact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "rationale"],
+      "properties": {
+        "kind": { "enum": ["affects_learning_outcomes", "none"] },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkId", "executedByReviewerId", "command", "subjectDigest", "resultPath", "resultDigest", "rawResultPath", "rawResultDigest", "exitCode", "completedAt"],
+      "properties": {
+        "checkId": { "$ref": "#/$defs/id" },
+        "executedByReviewerId": { "$ref": "#/$defs/id" },
+        "command": { "type": "string", "minLength": 1 },
+        "subjectDigest": { "$ref": "#/$defs/sha256" },
+        "resultPath": { "$ref": "#/$defs/safePath" },
+        "resultDigest": { "$ref": "#/$defs/sha256" },
+        "rawResultPath": { "$ref": "#/$defs/safePath" },
+        "rawResultDigest": { "$ref": "#/$defs/sha256" },
+        "exitCode": { "type": "integer" },
+        "completedAt": { "$ref": "#/$defs/dateTime" }
+      }
+    },
+    "constitutionCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["constitutionPath", "constitutionVersion", "constitutionDigest", "dependentTemplates", "violationCount", "passed", "checkedAt"],
+      "properties": {
+        "constitutionPath": { "const": ".specify/memory/constitution.md" },
+        "constitutionVersion": { "const": "1.0.0" },
+        "constitutionDigest": { "$ref": "#/$defs/sha256" },
+        "dependentTemplates": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/fileEntry" } },
+        "violationCount": { "type": "integer", "minimum": 0 },
+        "passed": { "type": "boolean" },
+        "checkedAt": { "$ref": "#/$defs/dateTime" }
+      }
+    }
+  }
+}

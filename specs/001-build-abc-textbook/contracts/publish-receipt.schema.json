@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abc-textbook.local/schemas/publish-receipt.schema.json",
+  "title": "ABC Textbook Append-only Post-publication Receipt",
+  "description": "原子的swap成功直後にcandidate外へ追記するimmutable receipt。frozen candidate payloadやCatalog Release.validationSummaryには含めない。swap後はraw temp生成→canonical manifest/digestと実bytes照合→docs/verification/publish-receipts/<releaseVersion>/raw/へのno-overwrite durable commit→このreceiptのatomic commit→ReleaseCandidate state commitの順に処理する。receipt atomic commitが不可逆なpublish commit markerであり、それ以前の失敗だけ旧treeへrollbackしてtempとorphan rawを除去する。receipt commit後はraw/new tree/receiptをimmutable保全し、state更新失敗では次回global lock下でcurrent tree・raw・receipt・candidate・journalのidentity/digestを照合してstateだけを収束させ、再swap・raw/receipt上書き/削除をしない。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "receiptId",
+    "receiptPath",
+    "candidateId",
+    "releaseVersion",
+    "contentSnapshotDigest",
+    "candidatePayloadDigest",
+    "approvableDigest",
+    "publicationEffectiveAt",
+    "publicationWindowEndsAt",
+    "actualAtomicSwapAt",
+    "osFamily",
+    "osVersion",
+    "filesystem",
+    "toolVersions",
+    "previousReleaseVersion",
+    "newReleaseVersion",
+    "result",
+    "rawEvidenceDigest",
+    "recordedAt"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "receiptId": {
+      "type": "string",
+      "pattern": "^publish-receipt-[0-9]{4}\\.[0-9]{2}\\.[0-9]+-[a-f0-9]{12,64}$"
+    },
+    "receiptPath": {
+      "type": "string",
+      "pattern": "^docs/verification/publish-receipts/[0-9]{4}\\.[0-9]{2}\\.[0-9]+\\.json$",
+      "description": "ReleaseCandidate directory外のappend-only repository-relative path。filename versionとreleaseVersionの一致を意味検証し、既存fileを上書きしない。"
+    },
+    "candidateId": {
+      "type": "string",
+      "pattern": "^release-candidate-[0-9]{4}\\.[0-9]{2}\\.[0-9]+-[a-f0-9]{12,64}$",
+      "description": "公開したReleaseCandidate.candidateId。releaseVersionはcandidate.targetReleaseVersionと一致させる。"
+    },
+    "releaseVersion": { "$ref": "#/$defs/releaseVersion" },
+    "contentSnapshotDigest": { "$ref": "#/$defs/sha256", "description": "candidate.contentSubjectDigestおよび公開Catalog Release.contentSnapshotDigestと一致させる。" },
+    "candidatePayloadDigest": { "$ref": "#/$defs/sha256", "description": "公開時のfrozen ReleaseCandidate.candidatePayloadDigestと一致させる。" },
+    "approvableDigest": { "$ref": "#/$defs/sha256", "description": "ownerApproval.approvedApprovableDigestと一致させる。" },
+    "publicationEffectiveAt": { "$ref": "#/$defs/dateTime" },
+    "publicationWindowEndsAt": { "$ref": "#/$defs/dateTime" },
+    "actualAtomicSwapAt": {
+      "$ref": "#/$defs/dateTime",
+      "description": "実公開treeへの原子的swap完了時刻。publicationEffectiveAt以上publicationWindowEndsAt以下のinclusive window内でなければreceiptを成功扱いせずcandidateをPUBLISHEDへ遷移しない。"
+    },
+    "osFamily": { "enum": ["windows", "macos", "linux"] },
+    "osVersion": { "type": "string", "minLength": 1 },
+    "filesystem": { "type": "string", "minLength": 1 },
+    "toolVersions": { "type": "object", "minProperties": 1, "additionalProperties": { "type": "string", "minLength": 1 } },
+    "previousReleaseVersion": {
+      "description": "initial publishはnull、incremental publishは実際に切替直前だったbase release version。",
+      "oneOf": [
+        { "$ref": "#/$defs/releaseVersion" },
+        { "type": "null" }
+      ]
+    },
+    "newReleaseVersion": { "$ref": "#/$defs/releaseVersion", "description": "releaseVersionと完全一致させる。" },
+    "result": { "const": "published" },
+    "rawEvidenceDigest": { "$ref": "#/$defs/rawEvidenceManifestDigest" },
+    "recordedAt": { "$ref": "#/$defs/dateTime" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "dateTime": { "type": "string", "format": "date-time" },
+    "rawEvidenceManifestDigest": {
+      "$ref": "#/$defs/sha256",
+      "description": "docs/verification/publish-receipts/<releaseVersion>/raw/内の全fileから{path, sha256, byteLength}を作り、repository-relative path順に並べたarrayのcanonical JSON SHA-256。raw/実file集合、各byteLength/file SHA-256との完全一致を意味検証する。raw setはreceipt atomic commit前にno-overwriteでdurable commitし、個別raw path fieldがなくてもreceiptから検証bytesを一意に復元できるようにする。receipt commit後はimmutableで上書き・削除しない。"
+    },
+    "releaseVersion": { "type": "string", "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}$" }
+  }
+}

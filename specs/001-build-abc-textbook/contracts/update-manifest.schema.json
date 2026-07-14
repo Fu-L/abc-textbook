@@ -1,521 +1,152 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://abc-textbook.local/schemas/update-manifest.schema.json",
-  "title": "ABC Textbook Publication Update Manifest",
-  "description": "週次・訂正・taxonomy・本文更新のステージング契約。状態遷移、レビュー独立性、blocking findingゼロは意味検証器でも検査する。",
+  "title": "ABC Textbook Publication Update",
+  "description": "一回のContest追加・訂正・taxonomy変更・bootstrapを表す。advancedSlotLabelsは公式task orderでDより後の全labelを持ち、固定E〜Hへ制限しない。",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "schemaVersion",
-    "id",
+    "updateId",
     "kind",
-    "contestId",
-    "fixtureMode",
-    "idempotencyKey",
     "baseReleaseVersion",
+    "contestId",
     "sourceSetFingerprint",
-    "taxonomyVersion",
-    "authoringSkill",
+    "advancedSlotLabels",
+    "operations",
+    "authoringResults",
+    "correctionImpactIds",
+    "validationSummary",
     "state",
-    "resumeStage",
-    "holdReason",
-    "candidateChanges",
-    "validationFindings",
-    "reviewRecords",
-    "ownerApproval",
-    "timings",
     "createdAt",
     "updatedAt",
-    "publishedReleaseVersion"
+    "fixtureMode"
   ],
   "properties": {
-    "schemaVersion": {
-      "const": "1.0.0"
-    },
-    "id": {
-      "type": "string",
-      "pattern": "^upd-(abc[0-9]{3,}|content|taxonomy)-[a-f0-9]{12,64}$"
-    },
-    "kind": {
-      "enum": ["weekly", "correction", "taxonomy", "content"]
-    },
-    "contestId": {
-      "oneOf": [
-        {
-          "$ref": "#/$defs/contestId"
-        },
-        {
-          "type": "null"
-        }
-      ]
-    },
-    "fixtureMode": {
-      "type": "boolean"
-    },
-    "idempotencyKey": {
-      "type": "string",
-      "minLength": 16
-    },
-    "baseReleaseVersion": {
-      "$ref": "#/$defs/releaseVersion"
-    },
-    "sourceSetFingerprint": {
-      "$ref": "#/$defs/sha256"
-    },
-    "taxonomyVersion": {
-      "type": "string",
-      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
-    },
-    "authoringSkill": {
-      "$ref": "#/$defs/skillRef"
-    },
-    "state": {
-      "$ref": "#/$defs/updateState"
-    },
-    "resumeStage": {
-      "oneOf": [
-        {
-          "$ref": "#/$defs/updateState"
-        },
-        {
-          "type": "null"
-        }
-      ]
-    },
-    "holdReason": {
-      "oneOf": [
-        {
-          "$ref": "#/$defs/holdReason"
-        },
-        {
-          "type": "null"
-        }
-      ]
-    },
-    "candidateChanges": {
+    "schemaVersion": { "const": "2.0.0" },
+    "updateId": { "$ref": "#/$defs/id" },
+    "kind": { "enum": ["contest_addition", "correction", "taxonomy", "bootstrap"] },
+    "baseReleaseVersion": { "anyOf": [{ "$ref": "#/$defs/releaseVersion" }, { "type": "null" }] },
+    "contestId": { "type": ["string", "null"], "pattern": "^abc[0-9]{3,}$" },
+    "sourceSetFingerprint": { "$ref": "#/$defs/sha256" },
+    "advancedSlotLabels": {
       "type": "array",
-      "items": {
-        "$ref": "#/$defs/candidateChange"
-      }
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/problemLabel" },
+      "description": "Contestの公式task orderでDより後に並ぶlabel。Contestを持つupdateでは全件必須。"
     },
-    "validationFindings": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/validationFinding"
-      }
-    },
-    "reviewRecords": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/reviewRecord"
-      }
-    },
-    "ownerApproval": {
-      "oneOf": [
-        {
-          "$ref": "#/$defs/ownerApproval"
-        },
-        {
-          "type": "null"
-        }
-      ]
-    },
-    "timings": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/stageTiming"
-      }
-    },
-    "createdAt": {
-      "$ref": "#/$defs/dateTime"
-    },
-    "updatedAt": {
-      "$ref": "#/$defs/dateTime"
-    },
-    "publishedReleaseVersion": {
-      "oneOf": [
-        {
-          "$ref": "#/$defs/releaseVersion"
-        },
-        {
-          "type": "null"
-        }
-      ]
-    }
+    "operations": { "type": "array", "items": { "$ref": "#/$defs/operation" } },
+    "authoringResults": { "type": "array", "items": { "$ref": "#/$defs/authoringResult" } },
+    "correctionImpactIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+    "validationSummary": { "$ref": "#/$defs/validationSummary" },
+    "state": { "enum": ["PREPARING", "ON_HOLD", "ELIGIBLE_FOR_BATCH"] },
+    "createdAt": { "$ref": "#/$defs/dateTime" },
+    "updatedAt": { "$ref": "#/$defs/dateTime" },
+    "fixtureMode": { "type": "boolean" }
   },
   "allOf": [
     {
-      "if": {
-        "properties": {
-          "state": {
-            "const": "ON_HOLD"
-          }
-        },
-        "required": ["state"]
-      },
-      "then": {
-        "properties": {
-          "resumeStage": {
-            "$ref": "#/$defs/updateState"
-          },
-          "holdReason": {
-            "$ref": "#/$defs/holdReason"
+      "if": { "properties": { "kind": { "const": "bootstrap" } }, "required": ["kind"] },
+      "then": { "properties": { "baseReleaseVersion": { "type": "null" } } },
+      "else": {
+        "if": { "properties": { "kind": { "const": "contest_addition" } }, "required": ["kind"] },
+        "then": {
+          "properties": {
+            "contestId": { "type": "string", "pattern": "^abc[0-9]{3,}$" },
+            "advancedSlotLabels": { "minItems": 1 }
           }
         }
       }
     },
     {
-      "if": {
-        "properties": {
-          "state": {
-            "enum": ["READY_TO_PUBLISH", "PUBLISHED"]
-          }
-        },
-        "required": ["state"]
-      },
+      "if": { "properties": { "state": { "const": "ELIGIBLE_FOR_BATCH" } }, "required": ["state"] },
       "then": {
         "properties": {
-          "reviewRecords": {
-            "type": "array",
-            "minItems": 1
+          "authoringResults": {
+            "items": { "properties": { "resultType": { "const": "explanation_draft" } }, "required": ["resultType"] }
           },
-          "ownerApproval": {
-            "$ref": "#/$defs/ownerApproval"
-          }
-        }
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "state": {
-            "const": "PUBLISHED"
-          }
-        },
-        "required": ["state"]
-      },
-      "then": {
-        "properties": {
-          "publishedReleaseVersion": {
-            "$ref": "#/$defs/releaseVersion"
+          "validationSummary": {
+            "properties": { "blockingFindingCount": { "const": 0 }, "aggregatePassed": { "const": true } },
+            "required": ["blockingFindingCount", "aggregatePassed"]
           }
         }
       }
     }
   ],
   "$defs": {
-    "dateTime": {
-      "type": "string",
-      "format": "date-time"
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "releaseVersion": { "type": "string", "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}$" },
+    "dateTime": { "type": "string", "format": "date-time" },
+    "problemLabel": { "type": "string", "minLength": 1, "maxLength": 16, "pattern": "^[A-Za-z][A-Za-z0-9+_-]*$" },
+    "safePath": { "type": "string", "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//)[A-Za-z0-9._/-]+$" },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operationId", "entityType", "entityId", "action", "path", "beforeDigest", "afterDigest"],
+      "properties": {
+        "operationId": { "$ref": "#/$defs/id" },
+        "entityType": { "enum": ["contest", "contest_slot", "problem", "technique_inventory", "tag", "learning_outcome", "learning_unit", "placement", "explanation", "claim", "example", "exercise", "assessment", "answer_material", "source", "correction_impact"] },
+        "entityId": { "$ref": "#/$defs/id" },
+        "action": { "enum": ["add", "replace", "remove"] },
+        "path": { "$ref": "#/$defs/safePath" },
+        "beforeDigest": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+        "afterDigest": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] }
+      }
     },
-    "sha256": {
-      "type": "string",
-      "pattern": "^[a-f0-9]{64}$"
-    },
-    "contestId": {
-      "type": "string",
-      "pattern": "^abc[0-9]{3,}$"
-    },
-    "problemId": {
-      "type": "string",
-      "pattern": "^abc[0-9]{3,}-[efgh]$"
-    },
-    "entityId": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    },
-    "releaseVersion": {
-      "type": "string",
-      "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]+$"
-    },
-    "updateState": {
-      "enum": [
-        "DISCOVERED",
-        "SOURCES_VERIFIED",
-        "DRAFTED",
-        "VALIDATED",
-        "AWAITING_EXTERNAL_REVIEW",
-        "AWAITING_OWNER_APPROVAL",
-        "READY_TO_PUBLISH",
-        "PUBLISHED",
-        "SUPERSEDED",
-        "ON_HOLD"
+    "authoringResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["problemId", "slotLabel", "resultType", "draftPath", "packetPath", "templatePath", "reasonCode", "reason", "retryCondition"],
+      "properties": {
+        "problemId": { "$ref": "#/$defs/id" },
+        "slotLabel": { "$ref": "#/$defs/problemLabel" },
+        "resultType": { "enum": ["explanation_draft", "authoring_required", "blocked"] },
+        "draftPath": { "anyOf": [{ "$ref": "#/$defs/safePath" }, { "type": "null" }] },
+        "packetPath": { "anyOf": [{ "$ref": "#/$defs/safePath" }, { "type": "null" }] },
+        "templatePath": { "anyOf": [{ "$ref": "#/$defs/safePath" }, { "type": "null" }] },
+        "reasonCode": { "type": ["string", "null"] },
+        "reason": { "type": ["string", "null"] },
+        "retryCondition": { "type": ["string", "null"] }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "resultType": { "const": "explanation_draft" } }, "required": ["resultType"] },
+          "then": { "properties": { "draftPath": { "$ref": "#/$defs/safePath" }, "reasonCode": { "type": "null" }, "reason": { "type": "null" } } }
+        },
+        {
+          "if": { "properties": { "resultType": { "const": "authoring_required" } }, "required": ["resultType"] },
+          "then": { "properties": { "packetPath": { "$ref": "#/$defs/safePath" }, "templatePath": { "$ref": "#/$defs/safePath" }, "reason": { "type": "string", "minLength": 1 } } }
+        },
+        {
+          "if": { "properties": { "resultType": { "const": "blocked" } }, "required": ["resultType"] },
+          "then": { "properties": { "reasonCode": { "type": "string", "minLength": 1 }, "reason": { "type": "string", "minLength": 1 }, "retryCondition": { "type": "string", "minLength": 1 } } }
+        }
       ]
     },
-    "skillRef": {
+    "validationSummary": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "version", "digest"],
+      "required": ["checkIds", "problemResults", "blockingFindingCount", "aggregatePassed", "resultDigest"],
       "properties": {
-        "name": {
-          "const": "abc-explanation-author"
-        },
-        "version": {
-          "type": "string",
-          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
-        },
-        "digest": {
-          "$ref": "#/$defs/sha256"
-        }
-      }
-    },
-    "holdReason": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["code", "message", "problemIds", "retryCondition"],
-      "properties": {
-        "code": {
-          "enum": [
-            "CONTEST_NOT_ENDED",
-            "ROBOTS_UNREACHABLE",
-            "POLICY_CHANGED",
-            "SOURCE_UNAVAILABLE",
-            "OFFICIAL_EDITORIAL_PENDING",
-            "PARSER_DRIFT",
-            "GENERATOR_UNAVAILABLE",
-            "AUTHORING_REQUIRED",
-            "SOURCE_CONTRADICTION",
-            "EXAMPLE_NOT_REPRODUCIBLE",
-            "DEPENDENCY_CYCLE",
-            "REVIEW_CHANGES_REQUESTED",
-            "DEADLINE_REACHED"
-          ]
-        },
-        "message": {
-          "type": "string",
-          "minLength": 1
-        },
-        "problemIds": {
+        "checkIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+        "problemResults": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/problemId"
-          },
-          "uniqueItems": true
-        },
-        "retryCondition": {
-          "type": "string",
-          "minLength": 1
-        },
-        "retryAfter": {
-          "$ref": "#/$defs/dateTime"
-        }
-      }
-    },
-    "candidateChange": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["entityType", "entityId", "operation", "beforeDigest", "afterDigest", "path"],
-      "properties": {
-        "entityType": {
-          "enum": [
-            "contest",
-            "problem",
-            "explanation",
-            "technique_tag",
-            "learning_unit",
-            "placement",
-            "source",
-            "release"
-          ]
-        },
-        "entityId": {
-          "$ref": "#/$defs/entityId"
-        },
-        "operation": {
-          "enum": ["create", "update", "deprecate", "withdraw"]
-        },
-        "beforeDigest": {
-          "oneOf": [
-            {
-              "$ref": "#/$defs/sha256"
-            },
-            {
-              "type": "null"
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["problemId", "passed", "findingCodes", "remediation"],
+            "properties": {
+              "problemId": { "$ref": "#/$defs/id" },
+              "passed": { "type": "boolean" },
+              "findingCodes": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+              "remediation": { "type": ["string", "null"] }
             }
-          ]
-        },
-        "afterDigest": {
-          "oneOf": [
-            {
-              "$ref": "#/$defs/sha256"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "path": {
-          "type": "string",
-          "minLength": 1
-        }
-      }
-    },
-    "validationFinding": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "code",
-        "severity",
-        "entityType",
-        "entityId",
-        "message",
-        "path",
-        "evidence",
-        "blocking",
-        "createdAt"
-      ],
-      "properties": {
-        "code": {
-          "type": "string",
-          "pattern": "^[A-Z][A-Z0-9_]+$"
-        },
-        "severity": {
-          "enum": ["info", "warning", "error"]
-        },
-        "entityType": {
-          "type": "string",
-          "minLength": 1
-        },
-        "entityId": {
-          "type": "string",
-          "minLength": 1
-        },
-        "message": {
-          "type": "string",
-          "minLength": 1
-        },
-        "path": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1
           }
         },
-        "evidence": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
-        },
-        "blocking": {
-          "type": "boolean"
-        },
-        "createdAt": {
-          "$ref": "#/$defs/dateTime"
-        }
-      }
-    },
-    "reviewRecord": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "id",
-        "scopeType",
-        "scopeId",
-        "subjectDigest",
-        "authorId",
-        "reviewerId",
-        "sourceRevisionIds",
-        "skill",
-        "decision",
-        "findings",
-        "reviewedAt"
-      ],
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/entityId"
-        },
-        "scopeType": {
-          "enum": ["explanation", "update", "release", "claim", "example"]
-        },
-        "scopeId": {
-          "type": "string",
-          "minLength": 1
-        },
-        "subjectDigest": {
-          "$ref": "#/$defs/sha256"
-        },
-        "authorId": {
-          "type": "string",
-          "minLength": 1
-        },
-        "reviewerId": {
-          "type": "string",
-          "minLength": 1
-        },
-        "sourceRevisionIds": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/$defs/entityId"
-          },
-          "uniqueItems": true
-        },
-        "skill": {
-          "oneOf": [
-            {
-              "$ref": "#/$defs/skillRef"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "decision": {
-          "enum": ["approved", "changes_requested", "rejected"]
-        },
-        "findings": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
-        },
-        "reviewedAt": {
-          "$ref": "#/$defs/dateTime"
-        }
-      }
-    },
-    "ownerApproval": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["ownerId", "approvedManifestDigest", "approvedAt"],
-      "properties": {
-        "ownerId": {
-          "type": "string",
-          "minLength": 1
-        },
-        "approvedManifestDigest": {
-          "$ref": "#/$defs/sha256"
-        },
-        "approvedAt": {
-          "$ref": "#/$defs/dateTime"
-        }
-      }
-    },
-    "stageTiming": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["stage", "startedAt", "endedAt", "durationMs", "outcome"],
-      "properties": {
-        "stage": {
-          "type": "string",
-          "minLength": 1
-        },
-        "startedAt": {
-          "$ref": "#/$defs/dateTime"
-        },
-        "endedAt": {
-          "$ref": "#/$defs/dateTime"
-        },
-        "durationMs": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "outcome": {
-          "enum": ["completed", "held", "failed", "skipped"]
-        }
+        "blockingFindingCount": { "type": "integer", "minimum": 0 },
+        "aggregatePassed": { "type": "boolean" },
+        "resultDigest": { "$ref": "#/$defs/sha256" }
       }
     }
   }
