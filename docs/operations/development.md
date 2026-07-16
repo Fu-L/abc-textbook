@@ -55,6 +55,8 @@ npm run verify:fast
 - test/build/updateの既定入力は `tests/fixtures/` のoffline dataです。
 - `BASE_PATH=/abc-textbook` でproject subpath buildを再現できます。
 - `SITE_URL=https://example.invalid` はcanonical URL生成だけに使い、外部通信を発生させません。
+- `link:check` は同じ実行内でbuildした `dist` の内部linkだけを検査します。
+- `verify:fast` は内部link検査とChromium/Firefox/WebKitの主要E2Eまで実行します。
 - live source確認はoffline suite成功後に明示的なdry-runとして実行します。
 
 ## Zero-cost boundary
@@ -73,5 +75,6 @@ sourceに含めません。
 - `npm ci` はlockfileとmanifestの不一致を失敗にします。
 - test clockの既定instantは `2026-07-14T12:00:00+09:00`、process timezoneはUTCです。
 - E2EはPlaywrightが固定するChromium、Firefox、WebKit projectをすべて実行します。
-- Pagefindは静的build後に生成され、CSPはWebAssemblyと同一origin workerだけを許可します。
+- Pagefindは静的build後に生成され、CSPはStarlightの既知inline script
+  hash、layout用style属性、WebAssembly、同一origin workerだけを許可します。
 - `.env*`、browser report、coverage、build outputはGitへ追加しません。

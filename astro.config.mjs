@@ -38,6 +38,15 @@ function resolveSite(value) {
 
 const base = normalizeBasePath(process.env.BASE_PATH ?? '/');
 const site = resolveSite(process.env.SITE_URL ?? 'https://abc-textbook.example');
+// Starlight 0.41.3 が `is:inline` で出力する共通script。
+// Astroはこれらを自動hash化しないため、依存更新時はE2EのCSP検査と合わせて見直す。
+const starlightInlineScriptHashes = [
+  'sha256-VWo5Wp4aqSj6nSgMpeAp9cKieaoIfwFUAunAVugI5gA=',
+  'sha256-f/zAUE74ucc3JYp4r4QQvkJofoQdkOIhHYK+jeZ6eko=',
+  'sha256-GkZBRnvSuhtx/cvzvukVkX2JJZW+DdPlVr7BX8Tefqo=',
+  'sha256-wX2yOADeV+NMngflD5uYi3vl50SHC4sfM1EmylVjlX4=',
+  'sha256-7eCV4jtsr4t4knb3c4FCRPeu7GGZeOUGE3XvWix0XOQ=',
+];
 
 export default defineConfig({
   site,
@@ -81,7 +90,12 @@ export default defineConfig({
       ],
       scriptDirective: {
         // Pagefindのworker実行に必要なWebAssemblyだけを同一originで許可する。
+        hashes: starlightInlineScriptHashes,
         resources: ["'self'", "'wasm-unsafe-eval'"],
+      },
+      styleDirective: {
+        // Starlightのlayout用style属性だけを許可し、style要素はAstroのhash管理を維持する。
+        resources: [{ resource: "'unsafe-inline'", kind: 'attribute' }],
       },
     },
   },

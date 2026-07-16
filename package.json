@@ -23,10 +23,12 @@
     "test:contract": "vitest run tests/contract",
     "test:integration": "vitest run tests/integration",
     "test:coverage": "vitest run --coverage",
-    "test:e2e": "npm run build && playwright test",
+    "test:e2e": "npm run build && npm run test:e2e:built",
+    "test:e2e:built": "playwright test",
     "test:e2e:install": "playwright install chromium firefox webkit",
-    "link:check": "tsx scripts/validate/links.ts",
-    "verify:fast": "npm run lint && npm run format:check && npm run check && npm run test && npm run build"
+    "link:check": "npm run build && npm run link:check:built",
+    "link:check:built": "tsx scripts/validate/links.ts",
+    "verify:fast": "npm run lint && npm run format:check && npm run check && npm run test && npm run build && npm run link:check:built && npm run test:e2e:built"
   },
   "dependencies": {
     "@astrojs/react": "6.0.1",

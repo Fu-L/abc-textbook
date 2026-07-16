@@ -24,14 +24,12 @@ if (!Number.isSafeInteger(port) || port < 1 || port > 65_535) {
       recurse: true,
       checkFragments: true,
       checkCss: true,
-      linksToSkip: ['^mailto:'],
+      // canonical URLは先にlocal serverへ書き換わるため、実際の通信先をlocal originへ限定する。
+      linksToSkip: (link) => Promise.resolve(new URL(link).origin !== localOrigin),
       urlRewriteExpressions: [
         {
-          pattern: new RegExp(
-            `^${escapeRegularExpression(siteOrigin)}${escapeRegularExpression(basePath)}(?=/|$)`,
-            'u',
-          ),
-          replacement: `${localOrigin}${basePath}`,
+          pattern: new RegExp(`^${escapeRegularExpression(siteOrigin)}(?=/|$)`, 'u'),
+          replacement: localOrigin,
         },
       ],
     });
