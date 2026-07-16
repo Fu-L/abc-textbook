@@ -1,0 +1,91 @@
+:root {
+  color-scheme: light dark;
+  --sl-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --sl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --sl-color-accent-low: hsl(218 48% 24%);
+  --sl-color-accent: hsl(214 88% 62%);
+  --sl-color-accent-high: hsl(208 100% 88%);
+  --abc-content-measure: 76ch;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: hsl(210 100% 94%);
+  --sl-color-accent: hsl(218 72% 42%);
+  --sl-color-accent-high: hsl(222 72% 22%);
+}
+
+html {
+  scroll-padding-block-start: 5rem;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+}
+
+.sl-markdown-content {
+  max-inline-size: var(--abc-content-measure);
+}
+
+.sl-markdown-content :is(code, kbd, samp) {
+  overflow-wrap: anywhere;
+}
+
+.sl-markdown-content pre[class*='language-'] {
+  border: 1px solid var(--sl-color-gray-5);
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--sl-color-gray-3);
+}
+
+.token.punctuation,
+.token.operator {
+  color: var(--sl-color-gray-2);
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+  color: var(--sl-color-orange);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin {
+  color: var(--sl-color-green);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: var(--sl-color-blue);
+}
+
+.token.function,
+.token.class-name {
+  color: var(--sl-color-purple);
+}
+
+:focus-visible {
+  outline: 0.2rem solid var(--sl-color-accent);
+  outline-offset: 0.2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -18,14 +18,14 @@
 
 **Purpose**: 追加費用なしの静的教材、local CLI、検証環境を固定する。
 
-- [ ] T001 Initialize the Node.js 24/TypeScript 6 project, pin all production and validation dependencies, and define npm scripts in `package.json`, `package-lock.json`, `.nvmrc`, and `.npmrc`
-- [ ] T002 [P] Configure strict ESM TypeScript, linting, formatting, and repository text normalization in `tsconfig.json`, `eslint.config.js`, `prettier.config.mjs`, and `.gitattributes`
-- [ ] T003 [P] Configure Astro 7, Starlight, project-base-aware static output, CSP, and Pagefind in `astro.config.mjs` and `src/styles/global.css`
-- [ ] T004 Define all structured content collections and loader boundaries in `src/content.config.ts`
-- [ ] T005 [P] Configure Vitest, Playwright Chromium/Firefox/WebKit, axe, and deterministic test clocks in `vitest.config.ts`, `playwright.config.ts`, and `tests/setup/fixed-clock.ts`
-- [ ] T006 Create the planned source, staging, evidence, and test directory skeleton with ownership notes in `src/README.md`, `staging/README.md`, `docs/README.md`, and `tests/README.md`
-- [ ] T007 [P] Create offline official-source, future-label, correction, failure-injection, and design-limit fixture inventories in `tests/fixtures/README.md` and `tests/fixtures/manifest.json`
-- [ ] T008 Document local-only setup, exact tool versions, zero-cost assumptions, and command conventions in `docs/operations/development.md`
+- [X] T001 Initialize the Node.js 24/TypeScript 6 project, pin all production and validation dependencies, and define npm scripts in `package.json`, `package-lock.json`, `.nvmrc`, and `.npmrc`
+- [X] T002 [P] Configure strict ESM TypeScript, linting, formatting, and repository text normalization in `tsconfig.json`, `eslint.config.js`, `prettier.config.mjs`, and `.gitattributes`
+- [X] T003 [P] Configure Astro 7, Starlight, project-base-aware static output, CSP, and Pagefind in `astro.config.mjs` and `src/styles/global.css`
+- [X] T004 Define all structured content collections and loader boundaries in `src/content.config.ts`
+- [X] T005 [P] Configure Vitest, Playwright Chromium/Firefox/WebKit, axe, and deterministic test clocks in `vitest.config.ts`, `playwright.config.ts`, and `tests/setup/fixed-clock.ts`
+- [X] T006 Create the planned source, staging, evidence, and test directory skeleton with ownership notes in `src/README.md`, `staging/README.md`, `docs/README.md`, and `tests/README.md`
+- [X] T007 [P] Create offline official-source, future-label, correction, failure-injection, and design-limit fixture inventories in `tests/fixtures/README.md` and `tests/fixtures/manifest.json`
+- [X] T008 Document local-only setup, exact tool versions, zero-cost assumptions, and command conventions in `docs/operations/development.md`
 
 ---
 

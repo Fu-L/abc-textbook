@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0.0",
+  "fixtureRoot": "tests/fixtures",
+  "networkAccess": "forbidden",
+  "defaultClock": "2026-07-14T12:00:00+09:00",
+  "inventories": [
+    {
+      "id": "official-source",
+      "path": "tests/fixtures/official-source",
+      "owner": "catalog-acquisition",
+      "purpose": "公式archive、task list、task、editorialの取得境界とfingerprintをofflineで検証する",
+      "requiredCases": [
+        "ended-contest",
+        "in-progress-contest-rejected",
+        "missing-editorial",
+        "policy-fingerprint-change",
+        "parser-drift"
+      ]
+    },
+    {
+      "id": "future-label",
+      "path": "tests/fixtures/future-label",
+      "owner": "advanced-slot-registry",
+      "purpose": "Dより後の全公式labelを固定E-H列へ切り捨てないことを検証する",
+      "requiredCases": [
+        "e-through-g",
+        "e-through-h",
+        "e-through-i",
+        "multi-character-ex",
+        "missing-d",
+        "order-conflict"
+      ]
+    },
+    {
+      "id": "corrections",
+      "path": "tests/fixtures/corrections",
+      "owner": "source-revisions",
+      "purpose": "訂正が本文、claim、example、exercise、answer、order、indexへ伝播することを検証する",
+      "requiredCases": [
+        "metadata-only",
+        "constraint-change",
+        "editorial-change",
+        "withdrawn-problem",
+        "incomplete-impact-rejected"
+      ]
+    },
+    {
+      "id": "failure-injection",
+      "path": "tests/fixtures/failure-injection",
+      "owner": "release-pipeline",
+      "purpose": "取得、検証、lock、書込、切替、receipt境界の失敗とrollbackを決定的に再現する",
+      "requiredCases": [
+        "network-timeout",
+        "validation-failure",
+        "writer-lock-held",
+        "switch-before-receipt-failure",
+        "receipt-after-switch-recovery",
+        "transaction-rollback"
+      ]
+    },
+    {
+      "id": "design-limits",
+      "path": "tests/fixtures/design-limits",
+      "owner": "performance",
+      "purpose": "seed、公開版、設計上限の生成・検証・filter性能を同じseedで測定する",
+      "requiredCases": [
+        "255-contests",
+        "1500-problems",
+        "500-tags",
+        "1000-learning-units",
+        "100-learning-records",
+        "52-week-update-simulation"
+      ]
+    }
+  ]
+}

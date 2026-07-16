@@ -1,0 +1,23 @@
+* text=auto eol=lf
+
+*.md text diff=markdown
+*.json text
+*.jsonc text
+*.js text
+*.mjs text
+*.ts text
+*.tsx text
+*.astro text
+*.css text
+*.yml text
+*.yaml text
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
