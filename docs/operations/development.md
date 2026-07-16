@@ -18,7 +18,7 @@ Phase 1で固定した必須toolchainは次のとおりです。
 | Prettier   |       3.9.5 |
 | Pagefind   |       1.5.2 |
 
-`.nvmrc`、`packageManager`、`engines`、exact
+`.nvmrc`、`packageManager`、`engines`、`devEngines`、exact
 dependency、`package-lock.json`を同時に更新しない限り、個別の版だけを変更してはいけません。
 
 ## Local-only setup
@@ -33,7 +33,8 @@ npm run test:e2e:install
 ```
 
 Node.jsは `v24.18.0`、npmは `11.16.0` と表示されなければ作業を止めます。Playwrightのbrowser
-binaryはローカルcacheへ保存され、repositoryへcommitしません。
+binaryはローカルcacheへ保存され、repositoryへcommitしません。`devEngines`
+により、指定外のNode.jsまたはnpmでは `npm run` も実行前に失敗します。
 
 ## Command conventions
 

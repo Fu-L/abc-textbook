@@ -9,6 +9,18 @@
     "node": "24.18.0",
     "npm": "11.16.0"
   },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.18.0",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "npm",
+      "version": "11.16.0",
+      "onFail": "error"
+    }
+  },
   "scripts": {
     "dev": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "build": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
@@ -23,7 +35,7 @@
     "test:contract": "vitest run tests/contract",
     "test:integration": "vitest run tests/integration",
     "test:coverage": "vitest run --coverage",
-    "test:e2e": "npm run build && npm run test:e2e:built",
+    "test:e2e": "npm run build && npm run test:e2e:built --",
     "test:e2e:built": "playwright test",
     "test:e2e:install": "playwright install chromium firefox webkit",
     "link:check": "npm run build && npm run link:check:built",
