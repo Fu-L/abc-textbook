@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2024"],
+    "types": ["node", "astro/client"]
+  },
+  "include": [".astro/content.d.ts", "src/content.config.ts"],
+  "exclude": ["dist", "build", "coverage", "node_modules"]
+}

@@ -1,35 +1,11 @@
 {
-  "extends": "astro/tsconfigs/strictest",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2024",
     "lib": ["ES2024", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "exactOptionalPropertyTypes": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "useUnknownInCatchVariables": true,
-    "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "types": ["astro/client", "node", "vitest/globals", "@playwright/test"]
+    "types": ["astro/client"]
   },
-  "include": [
-    ".astro/types.d.ts",
-    "src/**/*.astro",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "scripts/**/*.ts",
-    "tests/**/*.ts",
-    "astro.config.mjs",
-    "eslint.config.js",
-    "playwright.config.ts",
-    "prettier.config.mjs",
-    "vitest.config.ts"
-  ],
-  "exclude": ["dist", "build", "coverage", "node_modules"]
+  "include": [".astro/types.d.ts", "src/**/*.astro", "src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["src/content.config.ts", "dist", "build", "coverage", "node_modules"]
 }

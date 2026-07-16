@@ -2,44 +2,13 @@ import react from '@astrojs/react';
 import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
 
-/**
- * 公開先がルートでもサブパスでも、Astroへ渡すbaseの形式を統一する。
- * @param {string} value
- * @returns {string}
- */
-function normalizeBasePath(value) {
-  const trimmed = value.trim();
-
-  if (trimmed === '' || trimmed === '/') {
-    return '/';
-  }
-
-  const normalized = `/${trimmed.replace(/^\/+|\/+$/g, '')}`;
-  if (normalized.includes('..') || normalized.includes('\\')) {
-    throw new Error(`BASE_PATH must be a safe URL path: ${value}`);
-  }
-
-  return normalized;
-}
-
-/**
- * canonical URLの誤生成を防ぐため、originだけを受け付ける。
- * @param {string} value
- * @returns {string}
- */
-function resolveSite(value) {
-  const site = new URL(value);
-  if (!['http:', 'https:'].includes(site.protocol) || site.pathname !== '/') {
-    throw new Error('SITE_URL must be an absolute HTTP(S) origin without a path.');
-  }
-
-  return site.href;
-}
+import { normalizeBasePath, resolveSite } from './scripts/config/publication.ts';
 
 const base = normalizeBasePath(process.env.BASE_PATH ?? '/');
 const site = resolveSite(process.env.SITE_URL ?? 'https://abc-textbook.example');
 // Starlight 0.41.3 が `is:inline` で出力する共通script。
 // Astroはこれらを自動hash化しないため、依存更新時はE2EのCSP検査と合わせて見直す。
+/** @type {import('astro').CspHashEntry[]} */
 const starlightInlineScriptHashes = [
   'sha256-VWo5Wp4aqSj6nSgMpeAp9cKieaoIfwFUAunAVugI5gA=',
   'sha256-f/zAUE74ucc3JYp4r4QQvkJofoQdkOIhHYK+jeZ6eko=',

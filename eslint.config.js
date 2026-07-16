@@ -4,6 +4,12 @@ import astro from 'eslint-plugin-astro';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
+const sourceFiles = ['src/**/*.{ts,tsx,astro}'];
+const astroBuildFiles = ['src/content.config.ts'];
+const nodeFiles = ['scripts/**/*.ts', '*.config.{js,mjs,ts}'];
+const vitestFiles = ['tests/{contract,integration,performance,setup,unit}/**/*.ts'];
+const playwrightFiles = ['tests/e2e/**/*.ts'];
+
 export default defineConfig(
   {
     ignores: [
@@ -23,25 +29,73 @@ export default defineConfig(
   tseslint.configs.stylisticTypeChecked,
   astro.configs['flat/recommended'],
   {
-    files: ['**/*.{js,mjs,ts,tsx,astro}'],
+    files: sourceFiles,
+    ignores: ['src/content.config.ts'],
     languageOptions: {
+      globals: globals.browser,
+      parserOptions: {
+        extraFileExtensions: ['.astro'],
+        project: ['./tsconfig.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    files: nodeFiles,
+    languageOptions: {
+      globals: globals.node,
+      parserOptions: {
+        project: ['./tsconfig.node.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    files: astroBuildFiles,
+    languageOptions: {
+      globals: globals.node,
+      parserOptions: {
+        project: ['./tsconfig.astro.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    files: vitestFiles,
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.vitest,
+      },
+      parserOptions: {
+        project: ['./tsconfig.test.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    files: playwrightFiles,
+    languageOptions: {
+      // Playwright test本体はNode.js、page callbackはbrowserで実行される。
       globals: {
         ...globals.browser,
         ...globals.node,
       },
       parserOptions: {
-        extraFileExtensions: ['.astro'],
-        projectService: true,
+        project: ['./tsconfig.e2e.json'],
         tsconfigRootDir: import.meta.dirname,
       },
     },
+  },
+  {
+    files: [...sourceFiles, ...astroBuildFiles, ...nodeFiles, ...vitestFiles, ...playwrightFiles],
     rules: {
       '@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'inline-type-imports' }],
       '@typescript-eslint/no-import-type-side-effects': 'error',
     },
   },
   {
-    files: ['**/*.mjs', '**/*.js'],
+    files: ['*.config.{mjs,js}'],
     rules: {
       '@typescript-eslint/no-unsafe-assignment': 'off',
       '@typescript-eslint/no-unsafe-call': 'off',
