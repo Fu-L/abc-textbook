@@ -98,6 +98,59 @@
     "updatedAt"
   ],
   "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "enum": [
+              "READY_TO_PUBLISH",
+              "PUBLISHED"
+            ]
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contentFiles": {
+            "minItems": 1
+          },
+          "fixtureMode": {
+            "const": false
+          },
+          "preJudgmentCheckRefs": {
+            "minItems": 1
+          },
+          "humanContentReviewEvidenceRefs": {
+            "minItems": 1
+          },
+          "candidateFiles": {
+            "minItems": 1
+          },
+          "candidatePayloadDigest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "approvableDigest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "ownerApproval": {
+            "type": "object"
+          },
+          "publicationEffectiveAt": {
+            "type": "string"
+          },
+          "publicationWindowEndsAt": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
   "$id": "https://abc-textbook.local/schemas/release-candidate.schema.json",
   "title": "ABC Textbook Release Candidate",
   "$defs": {

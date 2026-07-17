@@ -66,6 +66,56 @@
     "fixtureMode"
   ],
   "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "ELIGIBLE_FOR_BATCH"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "authoringResults": {
+            "minItems": 1,
+            "items": {
+              "properties": {
+                "resultType": {
+                  "const": "explanation_draft"
+                }
+              }
+            }
+          },
+          "validationSummary": {
+            "properties": {
+              "aggregatePassed": {
+                "const": true
+              },
+              "blockingFindingCount": {
+                "const": 0
+              },
+              "problemResults": {
+                "items": {
+                  "properties": {
+                    "passed": {
+                      "const": true
+                    },
+                    "findingCodes": {
+                      "maxItems": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
   "$id": "https://abc-textbook.local/schemas/update-manifest.schema.json",
   "title": "ABC Textbook Publication Update",
   "$defs": {

@@ -1,6 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
+import Ajv2020 from 'ajv/dist/2020.js';
+import addFormats from 'ajv-formats';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -8,8 +10,35 @@ import {
   generateContractJsonSchemas,
 } from '../../scripts/generate-json-schemas.js';
 import { canonicalJson } from '../../src/lib/domain/canonical-json.js';
+import { ReleaseCandidateContract } from '../../src/lib/domain/schema-parts/release.js';
 
 const contractsDirectory = path.resolve('specs/001-build-abc-textbook/contracts');
+const sha = (character: string): string => character.repeat(64);
+const validDraftCandidate = {
+  schemaVersion: '2.0.0',
+  candidateId: 'candidate-phase-two',
+  releaseKind: 'initial',
+  targetReleaseVersion: '2026.07.17',
+  baseReleaseVersion: null,
+  cutoffAt: '2026-07-17T12:00:00+09:00',
+  orderedUpdateIds: ['update-phase-two'],
+  fixtureMode: false,
+  advancedSlotRegistryDigest: sha('1'),
+  contentFiles: [],
+  contentSubjectDigest: sha('2'),
+  preJudgmentCheckRefs: [],
+  humanContentReviewEvidenceRefs: [],
+  blockingFindings: [],
+  candidateFiles: [],
+  candidatePayloadDigest: null,
+  approvableDigest: null,
+  ownerApproval: null,
+  publicationEffectiveAt: null,
+  publicationWindowEndsAt: null,
+  state: 'DRAFTED',
+  createdAt: '2026-07-17T12:00:00+09:00',
+  updatedAt: '2026-07-17T12:00:00+09:00',
+} as const;
 
 describe('canonical Zod and JSON Schema parity', () => {
   it('does not read checked-in JSON contracts back into canonical schema modules', async () => {
@@ -57,9 +86,25 @@ describe('canonical Zod and JSON Schema parity', () => {
     }
   });
 
-  it.each(contractSchemaEntries)('$fileName rejects unknown top-level fields', ({ schema }) => {
-    const result = schema.safeParse({ unexpectedPhaseTwoField: true });
+  it('gives Zod and Ajv the same answer for valid, unknown-field, and duplicate inputs', () => {
+    const ajv = new Ajv2020({ allErrors: true, strict: false });
+    addFormats(ajv);
+    const validateJsonSchema = ajv.compile(ReleaseCandidateContract.jsonSchema);
+    const cases = [
+      { value: validDraftCandidate, expected: true },
+      { value: { ...validDraftCandidate, unexpectedPhaseTwoField: true }, expected: false },
+      {
+        value: {
+          ...validDraftCandidate,
+          orderedUpdateIds: ['update-phase-two', 'update-phase-two'],
+        },
+        expected: false,
+      },
+    ];
 
-    expect(result.success).toBe(false);
+    for (const { value, expected } of cases) {
+      expect(ReleaseCandidateContract.schema.safeParse(value).success).toBe(expected);
+      expect(validateJsonSchema(value)).toBe(expected);
+    }
   });
 });

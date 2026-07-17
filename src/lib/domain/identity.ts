@@ -21,7 +21,8 @@ export const normalizeProblemLabel = (label: string): string => {
     throw new StableIdError(`Unsupported official problem label: ${label}`);
   }
   // Escape every punctuation character, including the escape marker itself. This
-  // preserves existing alphanumeric IDs while making the mapping injective.
+  // preserves existing alphanumeric IDs while making the mapping injective for
+  // the case-insensitive official-label identity enforced by catalog validators.
   return normalized.replaceAll('_', '_5f').replaceAll('+', '_2b').replaceAll('-', '_2d');
 };
 

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { defineZodContractSchema, strictObject } from '../contract-schema.js';
+import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
 import { canonicalJson, digestWithoutField } from '../canonical-json.js';
 import { isOffsetDateTime } from '../date-time.js';
 
@@ -29,10 +29,13 @@ export const ContestSchema = strictObject({
   startedAt: OffsetDateTimeSchema,
   endedAt: OffsetDateTimeSchema,
   officialUrl: z.url({ protocol: /^https$/u, hostname: /^atcoder\.jp$/u }),
-  officialTaskOrder: z
-    .array(ProblemLabelSchema)
+  officialTaskOrder: uniqueArray(ProblemLabelSchema)
     .min(5)
-    .refine((labels) => new Set(labels).size === labels.length && labels.includes('D'))
+    .refine(
+      (labels) =>
+        new Set(labels.map((label) => label.toLocaleLowerCase('en-US'))).size === labels.length &&
+        labels.includes('D'),
+    )
     .meta({ uniqueItems: true, contains: { const: 'D' } }),
   taskOrderSourceRevisionId: EntityIdSchema,
   checkedAt: OffsetDateTimeSchema,
@@ -40,12 +43,15 @@ export const ContestSchema = strictObject({
 
 export const AdvancedSlotRegistrySchema = strictObject({
   version: z.literal('1.0.0'),
-  labels: z.array(ProblemLabelSchema).min(1).meta({ uniqueItems: true }),
+  labels: uniqueArray(ProblemLabelSchema).min(1),
   firstSeenContestByLabel: z.record(ProblemLabelSchema, ContestIdSchema),
-  orderEvidenceSourceRevisionIds: z.array(EntityIdSchema).min(1).meta({ uniqueItems: true }),
+  orderEvidenceSourceRevisionIds: uniqueArray(EntityIdSchema).min(1),
   digest: Sha256Schema,
 }).superRefine((registry, context) => {
-  if (new Set(registry.labels).size !== registry.labels.length) {
+  if (
+    new Set(registry.labels.map((label) => label.toLocaleLowerCase('en-US'))).size !==
+    registry.labels.length
+  ) {
     context.addIssue({ code: 'custom', message: 'Registry labels must be unique.' });
   }
   if (
@@ -484,8 +490,7 @@ const portablePath = z
   .regex(
     /^(?!.*(?:^|\/)(?:con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.[A-Za-z0-9._-]+)?(?:\/|$))(?:[A-Za-z0-9._-]*[A-Za-z0-9_-])(?:\/[A-Za-z0-9._-]*[A-Za-z0-9_-])*$/iu,
   );
-const uniqueText = (schema: z.ZodType<string> = nonEmptyText) =>
-  z.array(schema).meta({ uniqueItems: true });
+const uniqueText = (schema: z.ZodType<string> = nonEmptyText) => uniqueArray(schema);
 
 export const GlossarySchema = strictObject({
   schemaVersion: z.literal('1.0.0'),
@@ -504,6 +509,10 @@ export const GlossarySchema = strictObject({
     }),
   ),
   digest: Sha256Schema,
+}).superRefine((policy, context) => {
+  if (digestWithoutField(policy, 'digest') !== policy.digest) {
+    context.addIssue({ code: 'custom', path: ['digest'], message: 'Glossary digest is stale.' });
+  }
 });
 
 export const PrerequisiteBaselineSchema = strictObject({
@@ -525,6 +534,14 @@ export const PrerequisiteBaselineSchema = strictObject({
   sourceRevisionIds: uniqueText().min(1),
   checkedAt: OffsetDateTimeSchema,
   digest: Sha256Schema,
+}).superRefine((policy, context) => {
+  if (digestWithoutField(policy, 'digest') !== policy.digest) {
+    context.addIssue({
+      code: 'custom',
+      path: ['digest'],
+      message: 'Prerequisite baseline digest is stale.',
+    });
+  }
 });
 
 const placementAttribute = z.enum([
@@ -576,7 +593,7 @@ const placementRule = <R extends 'full' | 'similar' | 'supplement'>(
       .array(strictObject({ all: z.array(placementCondition).min(1) }))
       .min(minimum)
       .max(maximum ?? Number.MAX_SAFE_INTEGER),
-    requiredEvidence: z.array(placementEvidence).min(1).meta({ uniqueItems: true }),
+    requiredEvidence: uniqueArray(placementEvidence).min(1),
   });
 export const ProblemPlacementDecisionTableSchema = strictObject({
   schemaVersion: z.literal('1.0.0'),
@@ -620,6 +637,14 @@ export const ProblemPlacementDecisionTableSchema = strictObject({
   }),
   ambiguousAction: z.literal('on_hold'),
   digest: Sha256Schema,
+}).superRefine((policy, context) => {
+  if (digestWithoutField(policy, 'digest') !== policy.digest) {
+    context.addIssue({
+      code: 'custom',
+      path: ['digest'],
+      message: 'Problem placement policy digest is stale.',
+    });
+  }
 });
 
 const answerMaterialEvidenceItem = strictObject({

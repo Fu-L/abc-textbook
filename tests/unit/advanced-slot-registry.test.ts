@@ -73,6 +73,27 @@ describe('official advanced slot registry', () => {
         checkedAt: '2026-07-17T12:00:00+09:00',
       }),
     ).toThrow(/DUPLICATE_TASK_LABEL/u);
+
+    expect(() =>
+      parseOfficialTaskList({
+        contestId: 'abc500',
+        officialTaskListUrl: 'https://atcoder.jp/contests/abc500/tasks',
+        html: taskList(['A', 'B', 'C', 'D', 'Ex', 'ex']),
+        checkedAt: '2026-07-17T12:00:00+09:00',
+      }),
+    ).toThrow(/DUPLICATE_TASK_LABEL/u);
+
+    expect(() =>
+      buildAdvancedSlotRegistry({
+        contests: [
+          {
+            contestId: 'abc500',
+            advancedLabels: ['Ex', 'ex'],
+            sourceRevisionId: 'source-abc500-task-order',
+          },
+        ],
+      }),
+    ).toThrow(/DUPLICATE_TASK_LABEL/u);
   });
 
   it('fails the whole contest when one task-table row cannot be interpreted', () => {

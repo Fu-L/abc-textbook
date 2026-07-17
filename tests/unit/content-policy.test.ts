@@ -3,6 +3,11 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 import { digestWithoutField } from '../../src/lib/domain/canonical-json.js';
+import {
+  GlossarySchema,
+  PrerequisiteBaselineSchema,
+  ProblemPlacementDecisionTableSchema,
+} from '../../src/lib/domain/schema-parts/catalog.js';
 
 const readJson = (path: string): Record<string, unknown> =>
   JSON.parse(readFileSync(path, 'utf8')) as Record<string, unknown>;
@@ -24,6 +29,23 @@ const ruleMatches = (
   );
 
 describe('canonical content policies', () => {
+  it.each([
+    ['src/content/glossary/terms.json', GlossarySchema],
+    ['src/content/policies/prerequisite-baseline.json', PrerequisiteBaselineSchema],
+    ['src/content/policies/problem-placement.json', ProblemPlacementDecisionTableSchema],
+  ] as const)('rejects a stale canonical policy digest in %s', (fileName, schema) => {
+    const current = readJson(fileName);
+    expect(schema.safeParse(current).success).toBe(true);
+
+    const changedBody = structuredClone(current);
+    changedBody.version = '99.99.99';
+    expect(schema.safeParse(changedBody).success).toBe(false);
+
+    const changedDigest = structuredClone(current);
+    changedDigest.digest = 'f'.repeat(64);
+    expect(schema.safeParse(changedDigest).success).toBe(false);
+  });
+
   it('fails closed when any similar/supplement comparison dimension is undocumented', () => {
     const policyDocument = readJson('src/content/policies/problem-placement.json');
     const policy = policyDocument as {

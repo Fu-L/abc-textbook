@@ -30,7 +30,8 @@ export const buildAdvancedSlotRegistry = (input: {
   readonly contests: readonly ContestAdvancedOrder[];
 }): AdvancedSlotRegistry => {
   const existingLabels = [...(input.existingRegistry?.labels ?? [])];
-  if (new Set(existingLabels).size !== existingLabels.length) {
+  const caseFold = (label: string): string => label.toLocaleLowerCase('en-US');
+  if (new Set(existingLabels.map(caseFold)).size !== existingLabels.length) {
     throw new AdvancedSlotRegistryError(
       'DUPLICATE_REGISTRY_LABEL',
       'Existing registry is invalid.',
@@ -111,7 +112,7 @@ export const buildAdvancedSlotRegistry = (input: {
     if (contest.advancedLabels.some((label) => !/^[A-Za-z][A-Za-z0-9+_-]{0,15}$/u.test(label))) {
       throw new AdvancedSlotRegistryError('INVALID_TASK_LABEL', contest.contestId);
     }
-    if (new Set(contest.advancedLabels).size !== contest.advancedLabels.length) {
+    if (new Set(contest.advancedLabels.map(caseFold)).size !== contest.advancedLabels.length) {
       throw new AdvancedSlotRegistryError('DUPLICATE_TASK_LABEL', contest.contestId);
     }
     evidence.add(contest.sourceRevisionId);

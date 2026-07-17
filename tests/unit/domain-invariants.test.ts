@@ -146,12 +146,36 @@ describe('domain invariants', () => {
     expect(() =>
       createContentWorkManifest({
         ...base,
+        learningOutcomeIds: ['outcome-foundation', 'outcome-omitted'],
+        reviewUnits: [reviewUnit],
+      }),
+    ).toThrow(/OUTCOME_SCOPE_MISMATCH/u);
+
+    expect(() =>
+      createContentWorkManifest({
+        ...base,
         reviewUnits: [
           reviewUnit,
           {
             ...reviewUnit,
             unitId: 'RU-T024-second',
             paths: ['src/lib/validation/second.ts'],
+            itemIds: ['second-item'],
+          },
+        ],
+      }),
+    ).toThrow(/OVERLAPPING_REVIEW_UNIT_OUTCOME/u);
+
+    expect(() =>
+      createContentWorkManifest({
+        ...base,
+        reviewUnits: [
+          reviewUnit,
+          {
+            ...reviewUnit,
+            unitId: 'RU-T024-second',
+            paths: ['src/lib/validation/second.ts'],
+            learningOutcomeIds: [],
           },
         ],
       }),
@@ -167,6 +191,7 @@ describe('domain invariants', () => {
             unitId: 'RU-T024-second',
             paths: ['src/lib/validation/second.ts'],
             itemIds: ['second-item'],
+            learningOutcomeIds: [],
             dependencyUnitIds: ['RU-T024-foundation'],
           },
         ],

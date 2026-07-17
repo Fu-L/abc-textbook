@@ -1,5 +1,8 @@
 import { canonicalDigest, digestWithoutField } from '../domain/canonical-json.js';
-import { HumanContentReviewEvidenceSchema } from '../domain/schema-parts/review-evidence.js';
+import {
+  HumanContentReviewEvidenceSchema,
+  MergeReviewEvidenceSchema,
+} from '../domain/schema-parts/review-evidence.js';
 
 export class HumanReviewError extends Error {
   readonly code: string;
@@ -28,9 +31,15 @@ interface HumanReviewShape {
   readonly applicableCheckCount: number;
   readonly passedApplicableCheckCount: number;
   readonly reviewerExecutedCheckSetDigest: string;
-  readonly authors: readonly { readonly personId: string }[];
+  readonly authors: readonly {
+    readonly personId: string;
+    readonly authoredItemIds: readonly string[];
+  }[];
   readonly reviewers: readonly { readonly personId: string }[];
   readonly reviewItems: readonly {
+    readonly reviewItemId: string;
+    readonly kind: string;
+    readonly subjectPaths: readonly string[];
     readonly reviewerId: string;
     readonly authorIds: readonly string[];
     readonly decision: string;
@@ -58,7 +67,21 @@ export interface TrustedReviewCheckInventory {
     readonly checkId: string;
     readonly command: string;
   }[];
+  readonly reviewItems: readonly {
+    readonly reviewItemId: string;
+    readonly kind: 'outcome_coverage' | 'non_automatable_claim' | 'non_automatable_example';
+    readonly subjectPaths: readonly string[];
+    readonly authorIds: readonly string[];
+  }[];
 }
+
+const sameStringSet = (left: readonly string[], right: readonly string[]): boolean => {
+  const sortedRight = [...right].sort();
+  return (
+    left.length === right.length &&
+    [...left].sort().every((item, index) => item === sortedRight[index])
+  );
+};
 
 export const validateHumanContentReview = (
   value: unknown,
@@ -71,6 +94,9 @@ export const validateHumanContentReview = (
   const evidence = value as HumanReviewShape;
   const authors = new Set(evidence.authors.map(({ personId }) => personId));
   const reviewers = new Set(evidence.reviewers.map(({ personId }) => personId));
+  if (authors.size !== evidence.authors.length || reviewers.size !== evidence.reviewers.length) {
+    throw new HumanReviewError('REVIEW_INVENTORY_INVALID', 'People must be unique.');
+  }
   const gateReviewer = evidence.outcomeCoverageReview.reviewerId;
   if (!reviewers.has(gateReviewer) || authors.has(gateReviewer)) {
     throw new HumanReviewError('REVIEWER_NOT_INDEPENDENT', gateReviewer);
@@ -106,8 +132,58 @@ export const validateHumanContentReview = (
       throw new HumanReviewError('REVIEWER_CHECK_INVENTORY_INVALID', check.checkId);
     }
   }
+
+  const trustedItems = new Map(
+    trustedInventory.reviewItems.map((item) => [item.reviewItemId, item] as const),
+  );
+  const evidenceItemIds = evidence.reviewItems.map(({ reviewItemId }) => reviewItemId);
+  if (
+    trustedItems.size !== trustedInventory.reviewItems.length ||
+    new Set(evidenceItemIds).size !== evidenceItemIds.length ||
+    !sameStringSet(evidenceItemIds, [...trustedItems.keys()])
+  ) {
+    throw new HumanReviewError(
+      'REVIEW_ITEM_INVENTORY_INVALID',
+      'Evidence must exactly cover the fixed review-item inventory.',
+    );
+  }
+
+  const expectedAuthoredItems = new Map<string, string[]>();
+  for (const trustedItem of trustedInventory.reviewItems) {
+    if (new Set(trustedItem.authorIds).size !== trustedItem.authorIds.length) {
+      throw new HumanReviewError('REVIEW_ITEM_INVENTORY_INVALID', trustedItem.reviewItemId);
+    }
+    for (const authorId of trustedItem.authorIds) {
+      const itemIds = expectedAuthoredItems.get(authorId) ?? [];
+      itemIds.push(trustedItem.reviewItemId);
+      expectedAuthoredItems.set(authorId, itemIds);
+    }
+  }
+  if (!sameStringSet([...authors], [...expectedAuthoredItems.keys()])) {
+    throw new HumanReviewError('AUTHOR_INVENTORY_INVALID', 'Author inventory is incomplete.');
+  }
+  for (const author of evidence.authors) {
+    if (!sameStringSet(author.authoredItemIds, expectedAuthoredItems.get(author.personId) ?? [])) {
+      throw new HumanReviewError('AUTHOR_INVENTORY_INVALID', author.personId);
+    }
+  }
   for (const item of evidence.reviewItems) {
-    if (!reviewers.has(item.reviewerId) || item.authorIds.includes(item.reviewerId)) {
+    const trustedItem = trustedItems.get(item.reviewItemId);
+    if (!trustedItem) {
+      throw new HumanReviewError('REVIEW_ITEM_INVENTORY_INVALID', item.reviewItemId);
+    }
+    if (
+      item.kind !== trustedItem.kind ||
+      !sameStringSet(item.subjectPaths, trustedItem.subjectPaths) ||
+      !sameStringSet(item.authorIds, trustedItem.authorIds)
+    ) {
+      throw new HumanReviewError('REVIEW_ITEM_INVENTORY_INVALID', item.reviewItemId);
+    }
+    if (
+      !reviewers.has(item.reviewerId) ||
+      trustedItem.authorIds.includes(item.reviewerId) ||
+      authors.has(item.reviewerId)
+    ) {
       throw new HumanReviewError('ITEM_REVIEWER_NOT_INDEPENDENT', item.reviewerId);
     }
     if (
@@ -188,5 +264,68 @@ export const assertCurrentConstitution = (input: {
     input.violationCount !== 0
   ) {
     throw new HumanReviewError('STALE_CONSTITUTION_CHECK', 'Constitution check is not current.');
+  }
+};
+
+export interface TrustedMergeReviewContext {
+  readonly subjectDigest: string;
+  readonly workManifestPath: string;
+  readonly workManifestDigest: string;
+  readonly humanReview: {
+    readonly id: string;
+    readonly digest: string;
+    readonly subjectDigest: string;
+    readonly aggregatePassed: boolean;
+  };
+  readonly constitutionVersion: string;
+  readonly constitutionDigest: string;
+}
+
+export const validateMergeReviewEvidence = (
+  value: unknown,
+  trusted: TrustedMergeReviewContext,
+): void => {
+  const parsed = MergeReviewEvidenceSchema.safeParse(value);
+  if (!parsed.success) {
+    throw new HumanReviewError('MERGE_REVIEW_SCHEMA_INVALID', parsed.error.message);
+  }
+  const evidence = parsed.data;
+  if (
+    evidence.logicalChangeSubjectDigest !== trusted.subjectDigest ||
+    evidence.workManifestPath !== trusted.workManifestPath ||
+    evidence.workManifestDigest !== trusted.workManifestDigest ||
+    evidence.applicableChecks.some(
+      (check) => check.subjectDigest !== trusted.subjectDigest || check.exitCode !== 0,
+    )
+  ) {
+    throw new HumanReviewError(
+      'MERGE_REVIEW_SUBJECT_MISMATCH',
+      'Checks and work manifest must match the fixed change subject.',
+    );
+  }
+  if (
+    evidence.humanContentReviewEvidenceId !== trusted.humanReview.id ||
+    evidence.humanContentReviewEvidenceDigest !== trusted.humanReview.digest ||
+    trusted.humanReview.subjectDigest !== trusted.subjectDigest ||
+    !trusted.humanReview.aggregatePassed
+  ) {
+    throw new HumanReviewError(
+      'MERGE_HUMAN_REVIEW_INCOMPLETE',
+      'A complete human review for the current subject is required.',
+    );
+  }
+  assertCurrentConstitution({
+    constitutionVersion: evidence.constitutionCheck.constitutionVersion,
+    constitutionDigest: evidence.constitutionCheck.constitutionDigest,
+    currentVersion: trusted.constitutionVersion,
+    currentDigest: trusted.constitutionDigest,
+    passed: evidence.constitutionCheck.passed,
+    violationCount: evidence.constitutionCheck.violationCount,
+  });
+  if (evidence.unresolvedBlockingFindingCount !== 0 || !evidence.mergeApproved) {
+    throw new HumanReviewError('MERGE_REVIEW_INCOMPLETE', 'Merge review is not approved.');
+  }
+  if (digestWithoutField(evidence, 'evidenceDigest') !== evidence.evidenceDigest) {
+    throw new HumanReviewError('MERGE_REVIEW_DIGEST_MISMATCH', 'Merge evidence digest is stale.');
   }
 };

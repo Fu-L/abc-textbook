@@ -6,10 +6,119 @@ import {
   assertApprovalDigest,
   assertImmutableSnapshot,
   assertReviewComplete,
+  calculateApprovableDigest,
+  calculateCandidatePayloadDigest,
   transitionReleaseCandidate,
+  validatePublicationUpdate,
+  validateReleaseCandidate,
 } from '../../src/lib/validation/release-state.js';
 
 const digest = 'a'.repeat(64);
+const sha = (character: string): string => character.repeat(64);
+const publishedAt = '2026-07-17T12:00:00+09:00';
+const windowEndsAt = '2026-07-17T13:00:00+09:00';
+
+const makePublicationUpdate = (): Record<string, unknown> => ({
+  schemaVersion: '2.0.0',
+  updateId: 'update-phase-two',
+  kind: 'bootstrap',
+  baseReleaseVersion: null,
+  contestId: null,
+  sourceSetFingerprint: sha('1'),
+  advancedSlotLabels: ['E'],
+  operations: [],
+  authoringResults: [
+    {
+      problemId: 'abc212-x45',
+      slotLabel: 'E',
+      resultType: 'explanation_draft',
+      draftPath: 'src/content/docs/abc212-e.md',
+      packetPath: null,
+      templatePath: null,
+      reasonCode: null,
+      reason: null,
+      retryCondition: null,
+    },
+  ],
+  correctionImpactIds: [],
+  validationSummary: {
+    checkIds: ['check-contracts'],
+    problemResults: [
+      { problemId: 'abc212-x45', passed: true, findingCodes: [], remediation: null },
+    ],
+    blockingFindingCount: 0,
+    aggregatePassed: true,
+    resultDigest: sha('2'),
+  },
+  state: 'ELIGIBLE_FOR_BATCH',
+  createdAt: publishedAt,
+  updatedAt: publishedAt,
+  fixtureMode: false,
+});
+
+const makeReleaseCandidate = (): Record<string, unknown> => {
+  const candidate: Record<string, unknown> = {
+    schemaVersion: '2.0.0',
+    candidateId: 'candidate-phase-two',
+    releaseKind: 'initial',
+    targetReleaseVersion: '2026.07.17',
+    baseReleaseVersion: null,
+    cutoffAt: publishedAt,
+    orderedUpdateIds: ['update-phase-two'],
+    fixtureMode: false,
+    advancedSlotRegistryDigest: sha('3'),
+    contentFiles: [{ path: 'src/content/catalog.json', sha256: sha('4'), byteLength: 1 }],
+    contentSubjectDigest: sha('5'),
+    preJudgmentCheckRefs: [
+      {
+        checkId: 'check-contracts',
+        checkType: 'automated',
+        subjectDigest: sha('5'),
+        command: 'npm run test:contract',
+        exitCode: 0,
+        resultPath: 'docs/verification/check.json',
+        resultDigest: sha('6'),
+        completedAt: publishedAt,
+      },
+    ],
+    humanContentReviewEvidenceRefs: [
+      {
+        evidenceId: 'human-review-phase-two',
+        path: 'docs/verification/human-review.json',
+        digest: sha('7'),
+        subjectDigest: sha('5'),
+        reviewerExecutedCheckSetDigest: sha('8'),
+        aggregatePassed: true,
+      },
+    ],
+    blockingFindings: [],
+    candidateFiles: [{ path: 'dist/catalog.json', sha256: sha('9'), byteLength: 1 }],
+    candidatePayloadDigest: '',
+    approvableDigest: '',
+    ownerApproval: null,
+    publicationEffectiveAt: publishedAt,
+    publicationWindowEndsAt: windowEndsAt,
+    state: 'READY_TO_PUBLISH',
+    createdAt: publishedAt,
+    updatedAt: publishedAt,
+  };
+  candidate.candidatePayloadDigest = calculateCandidatePayloadDigest(
+    candidate.candidateFiles as readonly unknown[],
+  );
+  candidate.approvableDigest = calculateApprovableDigest({
+    contentSubjectDigest: candidate.contentSubjectDigest as string,
+    candidatePayloadDigest: candidate.candidatePayloadDigest as string,
+    preJudgmentCheckRefs: candidate.preJudgmentCheckRefs as readonly unknown[],
+    humanContentReviewEvidenceRefs: candidate.humanContentReviewEvidenceRefs as readonly unknown[],
+    blockingFindings: candidate.blockingFindings as readonly unknown[],
+  });
+  candidate.ownerApproval = {
+    ownerId: 'person-owner',
+    approvedDigest: candidate.approvableDigest,
+    approvedAt: publishedAt,
+  };
+  return candidate;
+};
 
 describe('release state gate', () => {
   it('allows only the declared forward transitions and fail-closed holds', () => {
@@ -70,17 +179,77 @@ describe('release state gate', () => {
   });
 
   it('requires an append-only receipt before the published state is accepted', () => {
+    const candidate = {
+      candidateId: 'candidate-phase-two',
+      targetReleaseVersion: '2026.07.17',
+      contentSubjectDigest: sha('5'),
+      candidatePayloadDigest: sha('b'),
+      approvableDigest: sha('c'),
+      publicationEffectiveAt: publishedAt,
+      publicationWindowEndsAt: windowEndsAt,
+    };
+    const receipt = {
+      candidateId: 'candidate-phase-two',
+      releaseVersion: '2026.07.17',
+      contentSnapshotDigest: sha('5'),
+      candidatePayloadDigest: sha('b'),
+      approvableDigest: sha('c'),
+      publicationEffectiveAt: publishedAt,
+      publicationWindowEndsAt: windowEndsAt,
+      result: 'published',
+    };
     expect(() =>
       transitionReleaseCandidate('READY_TO_PUBLISH', 'PUBLISHED', {
-        receipt: { candidateId: 'candidate-initial', result: 'published' },
-        candidateId: 'candidate-initial',
+        receipt,
+        candidate,
       }),
     ).not.toThrow();
 
     expect(() =>
       transitionReleaseCandidate('READY_TO_PUBLISH', 'PUBLISHED', {
-        candidateId: 'candidate-initial',
+        candidate,
       }),
     ).toThrow(/PUBLISH_RECEIPT_REQUIRED/u);
+
+    expect(() =>
+      transitionReleaseCandidate('READY_TO_PUBLISH', 'PUBLISHED', {
+        candidate,
+        receipt: { ...receipt, approvableDigest: sha('d') },
+      }),
+    ).toThrow(/PUBLISH_RECEIPT_MISMATCH/u);
+  });
+
+  it('rejects failed updates and incomplete publishable candidates', () => {
+    expect(() => {
+      validatePublicationUpdate(makePublicationUpdate());
+    }).not.toThrow();
+    const failedUpdate = makePublicationUpdate();
+    const [authoringResult] = failedUpdate.authoringResults as Record<string, unknown>[];
+    if (!authoringResult) throw new Error('Fixture authoring result is missing.');
+    authoringResult.resultType = 'blocked';
+    authoringResult.draftPath = null;
+    authoringResult.reasonCode = 'SOURCE_UNAVAILABLE';
+    authoringResult.reason = 'The source could not be verified.';
+    authoringResult.retryCondition = 'Retry after the source is restored.';
+    expect(() => {
+      validatePublicationUpdate(failedUpdate);
+    }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
+
+    expect(() => {
+      validateReleaseCandidate(makeReleaseCandidate());
+    }).not.toThrow();
+    const unapproved = makeReleaseCandidate();
+    unapproved.ownerApproval = null;
+    expect(() => {
+      validateReleaseCandidate(unapproved);
+    }).toThrow(/RELEASE_CANDIDATE_INVALID/u);
+
+    const stalePayload = makeReleaseCandidate();
+    const [candidateFile] = stalePayload.candidateFiles as { sha256: string }[];
+    if (!candidateFile) throw new Error('Fixture candidate file is missing.');
+    candidateFile.sha256 = sha('d');
+    expect(() => {
+      validateReleaseCandidate(stalePayload);
+    }).toThrow(/RELEASE_CANDIDATE_DIGEST_MISMATCH/u);
   });
 });

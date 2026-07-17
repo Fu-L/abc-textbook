@@ -86,7 +86,11 @@ export const parseOfficialTaskList = (input: OfficialTaskListInput): ParsedOffic
     if (!/^[A-Za-z][A-Za-z0-9+_-]*$/u.test(label)) {
       throw new OfficialTaskListError('INVALID_TASK_LABEL', label);
     }
-    if (labels.includes(label)) {
+    if (
+      labels.some(
+        (existing) => existing.toLocaleLowerCase('en-US') === label.toLocaleLowerCase('en-US'),
+      )
+    ) {
       throw new OfficialTaskListError('DUPLICATE_TASK_LABEL', label);
     }
     labels.push(label);

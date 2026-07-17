@@ -86,6 +86,46 @@
     "evidenceDigest"
   ],
   "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mergeApproved": {
+            "const": true
+          }
+        },
+        "required": [
+          "mergeApproved"
+        ]
+      },
+      "then": {
+        "properties": {
+          "applicableChecks": {
+            "items": {
+              "properties": {
+                "exitCode": {
+                  "const": 0
+                }
+              }
+            }
+          },
+          "constitutionCheck": {
+            "properties": {
+              "passed": {
+                "const": true
+              },
+              "violationCount": {
+                "const": 0
+              }
+            }
+          },
+          "unresolvedBlockingFindingCount": {
+            "const": 0
+          }
+        }
+      }
+    }
+  ],
   "$id": "https://abc-textbook.local/schemas/merge-review.schema.json",
   "title": "ABC Textbook Merge Review Evidence",
   "$defs": {

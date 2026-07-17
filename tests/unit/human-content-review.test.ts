@@ -1,14 +1,28 @@
 import { describe, expect, it } from 'vitest';
 
 import { canonicalDigest, digestWithoutField } from '../../src/lib/domain/canonical-json.js';
-import { HumanContentReviewEvidenceSchema } from '../../src/lib/domain/schema-parts/review-evidence.js';
-import { validateHumanContentReview } from '../../src/lib/validation/human-content-review.js';
+import {
+  HumanContentReviewEvidenceSchema,
+  MergeReviewEvidenceSchema,
+} from '../../src/lib/domain/schema-parts/review-evidence.js';
+import {
+  validateHumanContentReview,
+  validateMergeReviewEvidence,
+} from '../../src/lib/validation/human-content-review.js';
 
 const sha = (character: string): string => character.repeat(64);
 const trustedInventory = {
   subjectDigest: sha('a'),
   inventoryDigest: sha('c'),
   applicableChecks: [{ checkId: 'check-contracts', command: 'npm run test:contract' }],
+  reviewItems: [
+    {
+      reviewItemId: 'human-review-item-claim-one',
+      kind: 'non_automatable_claim',
+      subjectPaths: ['src/content/docs/index.md'],
+      authorIds: ['person-author'],
+    },
+  ],
 } as const;
 
 const makeEvidence = (input?: {
@@ -46,7 +60,7 @@ const makeEvidence = (input?: {
     applicableCheckCount: 1,
     passedApplicableCheckCount: 1,
     reviewerExecutedCheckSetDigest: canonicalDigest(applicableChecks),
-    authors: [{ personId: 'person-author', authoredItemIds: ['claim-one'] }],
+    authors: [{ personId: 'person-author', authoredItemIds: ['human-review-item-claim-one'] }],
     reviewers: [
       {
         personId: 'person-reviewer',
@@ -104,12 +118,99 @@ const makeEvidence = (input?: {
   return evidence;
 };
 
+const makeMergeEvidence = (): Record<string, unknown> => {
+  const evidence: Record<string, unknown> = {
+    schemaVersion: '2.0.0',
+    id: 'merge-review-phase-two',
+    changeId: 'change-phase-two',
+    logicalChangeSubjectDigest: sha('a'),
+    subjectFiles: [{ path: 'src/content/docs/index.md', sha256: sha('1'), byteLength: 1 }],
+    excludedArtifacts: [],
+    workManifestPath: 'docs/judgments/merge/phase-two/work-manifest.json',
+    workManifestDigest: sha('2'),
+    learningOutcomeIds: [],
+    outcomeImpact: { kind: 'none', rationale: 'No observable outcome changes.' },
+    applicableChecks: [
+      {
+        checkId: 'check-contracts',
+        executedByReviewerId: 'person-reviewer',
+        command: 'npm run test:contract',
+        subjectDigest: sha('a'),
+        resultPath: 'docs/judgments/merge/phase-two/check.json',
+        resultDigest: sha('3'),
+        rawResultPath: 'docs/judgments/merge/phase-two/check-raw.json',
+        rawResultDigest: sha('4'),
+        exitCode: 0,
+        completedAt: '2026-07-17T12:00:00+09:00',
+      },
+    ],
+    notApplicableChecks: [],
+    humanContentReviewEvidenceId: 'human-review-phase-two',
+    humanContentReviewEvidencePath: 'docs/judgments/merge/phase-two/human-review.json',
+    humanContentReviewEvidenceDigest: sha('5'),
+    constitutionCheck: {
+      constitutionPath: '.specify/memory/constitution.md',
+      constitutionVersion: '1.0.0',
+      constitutionDigest: sha('6'),
+      dependentTemplates: [
+        { path: '.specify/templates/plan-template.md', sha256: sha('7'), byteLength: 1 },
+      ],
+      violationCount: 0,
+      passed: true,
+      checkedAt: '2026-07-17T12:00:00+09:00',
+    },
+    unresolvedBlockingFindingCount: 0,
+    mergeApproved: true,
+    reviewedAt: '2026-07-17T12:30:00+09:00',
+    evidenceDigest: '',
+  };
+  evidence.evidenceDigest = digestWithoutField(evidence, 'evidenceDigest');
+  return evidence;
+};
+
+const trustedMergeContext = {
+  subjectDigest: sha('a'),
+  workManifestPath: 'docs/judgments/merge/phase-two/work-manifest.json',
+  workManifestDigest: sha('2'),
+  humanReview: {
+    id: 'human-review-phase-two',
+    digest: sha('5'),
+    subjectDigest: sha('a'),
+    aggregatePassed: true,
+  },
+  constitutionVersion: '1.0.0',
+  constitutionDigest: sha('6'),
+} as const;
+
 describe('human content review gate', () => {
   it('accepts a complete independently approved review', () => {
     expect(HumanContentReviewEvidenceSchema.safeParse(makeEvidence()).success).toBe(true);
     expect(() => {
       validateHumanContentReview(makeEvidence(), trustedInventory);
     }).not.toThrow();
+  });
+
+  it('requires current successful checks, constitution, and human review for merge approval', () => {
+    expect(() => {
+      validateMergeReviewEvidence(makeMergeEvidence(), trustedMergeContext);
+    }).not.toThrow();
+
+    const failedCheck = makeMergeEvidence();
+    const [check] = failedCheck.applicableChecks as { exitCode: number }[];
+    if (!check) throw new Error('Fixture check is missing.');
+    check.exitCode = 1;
+    failedCheck.evidenceDigest = digestWithoutField(failedCheck, 'evidenceDigest');
+    expect(MergeReviewEvidenceSchema.safeParse(failedCheck).success).toBe(false);
+    expect(() => {
+      validateMergeReviewEvidence(failedCheck, trustedMergeContext);
+    }).toThrow(/MERGE_REVIEW_SCHEMA_INVALID/u);
+
+    expect(() => {
+      validateMergeReviewEvidence(makeMergeEvidence(), {
+        ...trustedMergeContext,
+        humanReview: { ...trustedMergeContext.humanReview, aggregatePassed: false },
+      });
+    }).toThrow(/MERGE_HUMAN_REVIEW_INCOMPLETE/u);
   });
 
   it('rejects aggregate success with changes requested or unresolved findings', () => {
@@ -161,5 +262,39 @@ describe('human content review gate', () => {
         subjectDigest: sha('f'),
       });
     }).toThrow(/REVIEWER_CHECK_INVENTORY_INVALID/u);
+  });
+
+  it('binds review items and authors to the trusted inventory', () => {
+    const replacedAuthor = makeEvidence();
+    const [item] = replacedAuthor.reviewItems as { authorIds: string[] }[];
+    if (!item) throw new Error('Fixture item is missing.');
+    item.authorIds = ['person-reviewer'];
+    replacedAuthor.evidenceDigest = digestWithoutField(replacedAuthor, 'evidenceDigest');
+    expect(() => {
+      validateHumanContentReview(replacedAuthor, trustedInventory);
+    }).toThrow(/REVIEW_ITEM_INVENTORY_INVALID/u);
+
+    const duplicateItem = makeEvidence();
+    const items = duplicateItem.reviewItems as Record<string, unknown>[];
+    const [firstItem] = items;
+    if (!firstItem) throw new Error('Fixture item is missing.');
+    items.push(structuredClone(firstItem));
+    duplicateItem.inventoryItemCount = 2;
+    duplicateItem.reviewedItemCount = 2;
+    duplicateItem.approvedItemCount = 2;
+    duplicateItem.evidenceDigest = digestWithoutField(duplicateItem, 'evidenceDigest');
+    expect(() => {
+      validateHumanContentReview(duplicateItem, trustedInventory);
+    }).toThrow(/REVIEW_ITEM_INVENTORY_INVALID/u);
+
+    const omittedItem = makeEvidence();
+    omittedItem.reviewItems = [];
+    omittedItem.inventoryItemCount = 0;
+    omittedItem.reviewedItemCount = 0;
+    omittedItem.approvedItemCount = 0;
+    omittedItem.evidenceDigest = digestWithoutField(omittedItem, 'evidenceDigest');
+    expect(() => {
+      validateHumanContentReview(omittedItem, trustedInventory);
+    }).toThrow(/REVIEW_ITEM_INVENTORY_INVALID/u);
   });
 });

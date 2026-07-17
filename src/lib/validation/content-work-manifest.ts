@@ -171,6 +171,7 @@ export const validateContentWorkManifest = (value: unknown): void => {
   }
   const ownedPaths = new Map<string, string>();
   const ownedItems = new Map<string, string>();
+  const ownedOutcomes = new Map<string, string>();
   const assignedRequirements = new Set<string>();
   for (const unit of manifest.reviewUnits) {
     for (const outcomeId of unit.learningOutcomeIds) {
@@ -180,6 +181,14 @@ export const validateContentWorkManifest = (value: unknown): void => {
           `${unit.reviewUnitId} references undeclared ${outcomeId}.`,
         );
       }
+      const previous = ownedOutcomes.get(outcomeId);
+      if (previous) {
+        throw new WorkManifestError(
+          'OVERLAPPING_REVIEW_UNIT_OUTCOME',
+          `${outcomeId} is owned by ${previous} and ${unit.reviewUnitId}.`,
+        );
+      }
+      ownedOutcomes.set(outcomeId, unit.reviewUnitId);
     }
     for (const requirementId of unit.requirementIds) {
       if (!requiredRequirements.has(requirementId)) {
@@ -223,6 +232,15 @@ export const validateContentWorkManifest = (value: unknown): void => {
     throw new WorkManifestError(
       'REQUIREMENT_SCOPE_MISMATCH',
       'Review units do not cover the complete required requirement set.',
+    );
+  }
+  if (
+    ownedOutcomes.size !== knownOutcomes.size ||
+    [...knownOutcomes].some((outcomeId) => !ownedOutcomes.has(outcomeId))
+  ) {
+    throw new WorkManifestError(
+      'OUTCOME_SCOPE_MISMATCH',
+      'Review units must own every declared learning outcome exactly once.',
     );
   }
   try {

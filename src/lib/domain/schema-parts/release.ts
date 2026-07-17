@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { defineZodContractSchema, strictObject } from '../contract-schema.js';
+import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
 import {
   ContestIdSchema,
   EntityIdSchema,
@@ -12,7 +12,7 @@ import {
 
 const text = z.string().trim().min(1);
 const releaseVersion = z.string().regex(/^\d{4}\.\d{2}\.\d{2}$/u);
-const uniqueIds = z.array(EntityIdSchema).meta({ uniqueItems: true });
+const uniqueIds = uniqueArray(EntityIdSchema);
 
 export const AuthoringResultSchema = strictObject({
   problemId: z.string().min(1),
@@ -100,7 +100,7 @@ export const PublicationUpdateSchema = strictObject({
   baseReleaseVersion: releaseVersion.nullable(),
   contestId: ContestIdSchema.nullable(),
   sourceSetFingerprint: Sha256Schema,
-  advancedSlotLabels: z.array(ProblemLabelSchema).meta({ uniqueItems: true }),
+  advancedSlotLabels: uniqueArray(ProblemLabelSchema),
   operations: z.array(PublicationOperationSchema),
   authoringResults: z.array(PublicationAuthoringResultSchema),
   correctionImpactIds: uniqueIds,
@@ -109,7 +109,51 @@ export const PublicationUpdateSchema = strictObject({
   createdAt: OffsetDateTimeSchema,
   updatedAt: OffsetDateTimeSchema,
   fixtureMode: z.boolean(),
-});
+})
+  .superRefine((update, context) => {
+    if (
+      update.state === 'ELIGIBLE_FOR_BATCH' &&
+      (update.authoringResults.length === 0 ||
+        update.authoringResults.some((result) => result.resultType !== 'explanation_draft') ||
+        !update.validationSummary.aggregatePassed ||
+        update.validationSummary.blockingFindingCount !== 0 ||
+        update.validationSummary.problemResults.some(
+          (result) => !result.passed || result.findingCodes.length > 0,
+        ))
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['state'],
+        message: 'ELIGIBLE_FOR_BATCH requires every authoring and validation result to pass.',
+      });
+    }
+  })
+  .meta({
+    allOf: [
+      {
+        if: { properties: { state: { const: 'ELIGIBLE_FOR_BATCH' } }, required: ['state'] },
+        then: {
+          properties: {
+            authoringResults: {
+              minItems: 1,
+              items: { properties: { resultType: { const: 'explanation_draft' } } },
+            },
+            validationSummary: {
+              properties: {
+                aggregatePassed: { const: true },
+                blockingFindingCount: { const: 0 },
+                problemResults: {
+                  items: {
+                    properties: { passed: { const: true }, findingCodes: { maxItems: 0 } },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    ],
+  });
 
 const CandidateFileSchema = strictObject({
   path: SafePathSchema,
@@ -187,7 +231,61 @@ export const ReleaseCandidateSchema = strictObject({
   ]),
   createdAt: OffsetDateTimeSchema,
   updatedAt: OffsetDateTimeSchema,
-});
+})
+  .superRefine((candidate, context) => {
+    if (!['READY_TO_PUBLISH', 'PUBLISHED'].includes(candidate.state)) return;
+    const complete =
+      candidate.contentFiles.length > 0 &&
+      !candidate.fixtureMode &&
+      candidate.candidateFiles.length > 0 &&
+      candidate.preJudgmentCheckRefs.length > 0 &&
+      candidate.preJudgmentCheckRefs.every(
+        (check) => check.subjectDigest === candidate.contentSubjectDigest,
+      ) &&
+      candidate.humanContentReviewEvidenceRefs.length > 0 &&
+      candidate.humanContentReviewEvidenceRefs.every(
+        (review) => review.subjectDigest === candidate.contentSubjectDigest,
+      ) &&
+      candidate.blockingFindings.every((finding) => finding.resolved) &&
+      candidate.candidatePayloadDigest !== null &&
+      candidate.approvableDigest !== null &&
+      candidate.ownerApproval !== null &&
+      candidate.ownerApproval.approvedDigest === candidate.approvableDigest &&
+      candidate.publicationEffectiveAt !== null &&
+      candidate.publicationWindowEndsAt !== null &&
+      Date.parse(candidate.publicationEffectiveAt) <= Date.parse(candidate.publicationWindowEndsAt);
+    if (!complete) {
+      context.addIssue({
+        code: 'custom',
+        path: ['state'],
+        message: 'Publishable state requires a fixed, approved, fully validated candidate.',
+      });
+    }
+  })
+  .meta({
+    allOf: [
+      {
+        if: {
+          properties: { state: { enum: ['READY_TO_PUBLISH', 'PUBLISHED'] } },
+          required: ['state'],
+        },
+        then: {
+          properties: {
+            contentFiles: { minItems: 1 },
+            fixtureMode: { const: false },
+            preJudgmentCheckRefs: { minItems: 1 },
+            humanContentReviewEvidenceRefs: { minItems: 1 },
+            candidateFiles: { minItems: 1 },
+            candidatePayloadDigest: { type: 'string', pattern: '^[a-f0-9]{64}$' },
+            approvableDigest: { type: 'string', pattern: '^[a-f0-9]{64}$' },
+            ownerApproval: { type: 'object' },
+            publicationEffectiveAt: { type: 'string' },
+            publicationWindowEndsAt: { type: 'string' },
+          },
+        },
+      },
+    ],
+  });
 
 export const ImmutableReleaseSchema = strictObject({
   schemaVersion: z.literal('1.0.0'),

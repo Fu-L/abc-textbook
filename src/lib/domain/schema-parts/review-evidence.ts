@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { defineZodContractSchema, strictObject } from '../contract-schema.js';
+import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
 import {
   EntityIdSchema,
   OffsetDateTimeSchema,
@@ -11,7 +11,7 @@ import {
 } from './catalog.js';
 
 const text = z.string().trim().min(1);
-const unique = <T extends z.ZodType>(schema: T) => z.array(schema).meta({ uniqueItems: true });
+const unique = uniqueArray;
 const portablePath = z
   .string()
   .regex(
@@ -290,7 +290,38 @@ export const MergeReviewEvidenceSchema = strictObject({
   mergeApproved: z.boolean(),
   reviewedAt: OffsetDateTimeSchema,
   evidenceDigest: Sha256Schema,
-});
+})
+  .superRefine((evidence, context) => {
+    if (
+      evidence.mergeApproved &&
+      (evidence.applicableChecks.some((check) => check.exitCode !== 0) ||
+        !evidence.constitutionCheck.passed ||
+        evidence.constitutionCheck.violationCount !== 0 ||
+        evidence.unresolvedBlockingFindingCount !== 0)
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['mergeApproved'],
+        message: 'Merge approval requires all checks and findings to pass.',
+      });
+    }
+  })
+  .meta({
+    allOf: [
+      {
+        if: { properties: { mergeApproved: { const: true } }, required: ['mergeApproved'] },
+        then: {
+          properties: {
+            applicableChecks: { items: { properties: { exitCode: { const: 0 } } } },
+            constitutionCheck: {
+              properties: { passed: { const: true }, violationCount: { const: 0 } },
+            },
+            unresolvedBlockingFindingCount: { const: 0 },
+          },
+        },
+      },
+    ],
+  });
 
 const learnerRubricItem = strictObject({ itemId: EntityIdSchema, description: text });
 const learnerProtocol = strictObject({

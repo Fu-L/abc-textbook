@@ -1,5 +1,6 @@
 import { CatalogContract } from '../domain/schema-parts/catalog.js';
 import { stableProblemId } from '../domain/identity.js';
+import { hasStagingPathSegment } from './publication-boundary.js';
 import { buildAdvancedSlotRegistry } from './advanced-slot-registry.js';
 import {
   deterministicTopologicalOrder,
@@ -112,12 +113,7 @@ export const sortCatalogEntityArray = (
   });
 
 export const buildCatalog = (input: unknown, sourcePaths: readonly string[] = []): CatalogLike => {
-  const stagingPath = sourcePaths.find(
-    (sourcePath) =>
-      sourcePath === 'staging' ||
-      sourcePath.startsWith('staging/') ||
-      sourcePath.includes('/staging/'),
-  );
+  const stagingPath = sourcePaths.find(hasStagingPathSegment);
   if (stagingPath) {
     throw new CatalogBuildError([
       {

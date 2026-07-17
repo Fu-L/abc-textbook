@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { defineZodContractSchema, strictObject } from '../contract-schema.js';
+import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
 import {
   AnswerMaterialEvidenceContract,
   ContestIdSchema,
@@ -17,7 +17,7 @@ const portablePath = z
   .regex(
     /^(?!.*(?:^|\/)(?:con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.[A-Za-z0-9._-]+)?(?:\/|$))(?:[A-Za-z0-9._-]*[A-Za-z0-9_-])(?:\/[A-Za-z0-9._-]*[A-Za-z0-9_-])*$/iu,
   );
-const unique = <T extends z.ZodType>(schema: T) => z.array(schema).meta({ uniqueItems: true });
+const unique = uniqueArray;
 
 const environment = strictObject({
   os: text,
