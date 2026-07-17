@@ -18,7 +18,8 @@
       "executeUntrustedInstruction": false,
       "postReview": false,
       "targetCommit": "head-a",
-      "event": "COMMENT"
+      "event": "COMMENT",
+      "shaVerified": true
     }
   },
   {
@@ -38,7 +39,34 @@
     "expected": {
       "selectedHead": "fork-head",
       "targetCommit": "fork-head",
-      "postReview": false
+      "postReview": false,
+      "shaVerified": false,
+      "refetchRequired": true
+    }
+  },
+  {
+    "name": "fork-sha-mismatch-blocks-post",
+    "input": {
+      "explicitPostRequest": true,
+      "authOk": true,
+      "permissionOk": true,
+      "analyzedHead": "stale-local-head",
+      "preSubmitHead": "stale-local-head",
+      "postSubmitHead": "github-head",
+      "apiHead": "github-head",
+      "localHead": "same-named-local-head",
+      "existingDuplicate": false,
+      "ciConfigured": true
+    },
+    "expected": {
+      "selectedHead": "github-head",
+      "shaVerified": false,
+      "refetchRequired": true,
+      "restartAnalysis": true,
+      "postReview": false,
+      "postPayload": null,
+      "sent": false,
+      "reportFailure": true
     }
   },
   {
@@ -57,6 +85,8 @@
     },
     "expected": {
       "restartAnalysis": true,
+      "shaVerified": false,
+      "refetchRequired": true,
       "postReview": false,
       "sent": false
     }
@@ -86,6 +116,10 @@
     },
     "expected": {
       "postReview": true,
+      "postPayload": {
+        "commit_id": "head-a",
+        "event": "COMMENT"
+      },
       "sent": true,
       "latestHeadUnreviewed": true,
       "targetCommit": "head-a"
