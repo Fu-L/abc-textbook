@@ -252,6 +252,13 @@
                 "type": "null"
               }
             ]
+          },
+          "affectedProblemIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema9"
+            },
+            "uniqueItems": true
           }
         },
         "required": [
@@ -261,7 +268,8 @@
           "action",
           "path",
           "beforeDigest",
-          "afterDigest"
+          "afterDigest",
+          "affectedProblemIds"
         ],
         "additionalProperties": false
       }
@@ -276,7 +284,7 @@
         "type": "object",
         "properties": {
           "problemId": {
-            "$ref": "#/$defs/__schema1"
+            "$ref": "#/$defs/__schema9"
           },
           "slotLabel": {
             "$ref": "#/$defs/__schema7"
@@ -405,7 +413,7 @@
             "type": "object",
             "properties": {
               "problemId": {
-                "$ref": "#/$defs/__schema1"
+                "$ref": "#/$defs/__schema9"
               },
               "passed": {
                 "type": "boolean"

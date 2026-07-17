@@ -137,6 +137,7 @@ taxonomy作成前に全Problemへちょうど一件作る分析正本である�
 | `baselineId` / `baselineVersion` | 共通前提 |
 | `additionalPrerequisiteUnitIds` | 追加前提または空配列 |
 | `excludedTopics` | 意図的対象外 |
+| `sourceRevisionIds` | 単位本文と所有例の根拠 |
 | `tagIds` / `learningOutcomeIds` | 各一つ以上 |
 | `explanation` | 単位本文参照 |
 | `exampleIds` | 一つ以上 |
@@ -180,7 +181,7 @@ ExplanationまたはLearning Unitの少なくとも一方に所有され、Learn
 
 ### Exercise / Assessment / AnswerMaterial
 
-- ExerciseはProblem、Outcome、前提、到達条件、Assessment、AnswerMaterialを結ぶ。
+- ExerciseはProblem（null不可）、Outcome、前提、到達条件、Assessment、AnswerMaterialを結ぶ。
 - Assessmentは観察可能な成功条件を持つ。
 - AnswerMaterialは最終答案だけでなく理由または検証方法、procedure、期待結果、検証結果を持つ。
 
@@ -225,7 +226,7 @@ schema version、createdAt、targetReleaseVersion、全record、不明Problem ID
 | `contestId` | Contest追加時に必須 |
 | `advancedSlotLabels` | Dより後の全label。固定4枠不可 |
 | `targetProblemIds` | 変更種別にかかわらず影響を受けるProblem集合の正本。Problem operationの集合を必ず含む |
-| `operations` | canonical entity差分 |
+| `operations` | canonical entity差分。各operationは`affectedProblemIds`で所有・影響Problem集合を明示し、全operationの和集合を`targetProblemIds`と一致させる |
 | `authoringResults` | 全対象Problemへ一つ |
 | `correctionImpacts` | 該当時に全件 |
 | `validationSummary` | check結果とProblem別理由 |

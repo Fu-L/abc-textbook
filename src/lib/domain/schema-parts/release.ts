@@ -50,10 +50,16 @@ const PublicationOperationSchema = strictObject({
   path: SafePathSchema,
   beforeDigest: Sha256Schema.nullable(),
   afterDigest: Sha256Schema.nullable(),
+  /**
+   * The immutable Problem ownership resolved for this operation.  Non-Problem
+   * operations can affect more than one Problem, so deriving the update scope
+   * from `entityType === "problem"` is not sufficient.
+   */
+  affectedProblemIds: uniqueArray(ProblemIdSchema),
 });
 
 const PublicationAuthoringResultSchema = strictObject({
-  problemId: EntityIdSchema,
+  problemId: ProblemIdSchema,
   slotLabel: ProblemLabelSchema,
   resultType: z.enum(['explanation_draft', 'authoring_required', 'blocked']),
   draftPath: SafePathSchema.nullable(),
@@ -84,7 +90,7 @@ const PublicationValidationSummarySchema = strictObject({
   checkIds: uniqueIds.min(1),
   problemResults: z.array(
     strictObject({
-      problemId: EntityIdSchema,
+      problemId: ProblemIdSchema,
       passed: z.boolean(),
       findingCodes: z.array(text),
       remediation: z.string().nullable(),
@@ -115,9 +121,13 @@ export const PublicationUpdateSchema = strictObject({
   fixtureMode: z.boolean(),
 })
   .superRefine((update, context) => {
-    const operationProblemIds = update.operations
+    const problemOperationIds = update.operations
       .filter((operation) => operation.entityType === 'problem')
       .map(({ entityId }) => entityId);
+    const operationAffectedProblemIds = update.operations.flatMap(
+      ({ affectedProblemIds }) => affectedProblemIds,
+    );
+    const uniqueOperationAffectedProblemIds = [...new Set(operationAffectedProblemIds)];
     const targetProblemIds = [...update.targetProblemIds].sort();
     const contestId = update.contestId;
     const contestProblemIds =
@@ -136,7 +146,8 @@ export const PublicationUpdateSchema = strictObject({
       update.kind === 'contest_addition' &&
       (targetProblemIds.length !== contestProblemIds.length ||
         !sameIdSet(targetProblemIds, contestProblemIds) ||
-        !sameIdSet(operationProblemIds, targetProblemIds))
+        !sameIdSet(problemOperationIds, targetProblemIds) ||
+        !sameIdSet(uniqueOperationAffectedProblemIds, targetProblemIds))
     ) {
       context.addIssue({
         code: 'custom',
@@ -146,14 +157,29 @@ export const PublicationUpdateSchema = strictObject({
     }
     const targetSet = new Set(targetProblemIds);
     if (
-      new Set(operationProblemIds).size !== operationProblemIds.length ||
-      operationProblemIds.some((problemId) => !targetSet.has(problemId))
+      new Set(problemOperationIds).size !== problemOperationIds.length ||
+      problemOperationIds.some((problemId) => !targetSet.has(problemId)) ||
+      operationAffectedProblemIds.some((problemId) => !targetSet.has(problemId)) ||
+      !sameIdSet(uniqueOperationAffectedProblemIds, targetProblemIds)
     ) {
       context.addIssue({
         code: 'custom',
         path: ['targetProblemIds'],
-        message: 'Every Problem operation must be included in targetProblemIds.',
+        message:
+          'Operation affected Problem IDs must exactly match targetProblemIds, and every Problem operation must name itself.',
       });
+    }
+    for (const operation of update.operations) {
+      if (
+        operation.entityType === 'problem' &&
+        !sameIdSet(operation.affectedProblemIds, [operation.entityId])
+      ) {
+        context.addIssue({
+          code: 'custom',
+          path: ['operations'],
+          message: 'A Problem operation must affect exactly its own Problem ID.',
+        });
+      }
     }
     const authoringIds = update.authoringResults.map(({ problemId }) => problemId);
     const validationIds = update.validationSummary.problemResults.map(({ problemId }) => problemId);

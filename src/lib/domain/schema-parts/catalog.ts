@@ -200,11 +200,43 @@ export const TechniqueTagSchema = strictObject({
   prerequisiteTagIds: entityIds,
   learningOutcomeIds: entityIds.min(1),
   representativeProblemIds: z.array(ProblemIdSchema).min(1),
-  aliases: z.array(nonEmptyText),
-  formerNames: z.array(nonEmptyText),
+  aliases: uniqueArray(nonEmptyText),
+  formerNames: uniqueArray(nonEmptyText),
   lifecycle: z.enum(['active', 'deprecated']),
-  replacementTagIds: entityIds,
-});
+  replacementTagIds: uniqueArray(EntityIdSchema),
+})
+  .superRefine((tag, context) => {
+    if (tag.lifecycle === 'deprecated' && tag.replacementTagIds.length === 0) {
+      context.addIssue({
+        code: 'custom',
+        path: ['replacementTagIds'],
+        message: 'Deprecated tags require at least one replacement tag.',
+      });
+    }
+    if (tag.lifecycle === 'active' && tag.replacementTagIds.length > 0) {
+      context.addIssue({
+        code: 'custom',
+        path: ['replacementTagIds'],
+        message: 'Active tags cannot declare replacement tags.',
+      });
+    }
+    if (tag.replacementTagIds.includes(tag.id)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['replacementTagIds'],
+        message: 'A tag cannot replace itself.',
+      });
+    }
+  })
+  .meta({
+    allOf: [
+      {
+        if: { properties: { lifecycle: { const: 'deprecated' } }, required: ['lifecycle'] },
+        then: { properties: { replacementTagIds: { minItems: 1 } } },
+        else: { properties: { replacementTagIds: { maxItems: 0 } } },
+      },
+    ],
+  });
 
 export const LearningOutcomeSchema = strictObject({
   id: EntityIdSchema,
@@ -223,6 +255,7 @@ export const LearningUnitSchema = strictObject({
   baselineVersion: z.string().regex(/^\d+\.\d+\.\d+$/u),
   additionalPrerequisiteUnitIds: entityIds,
   excludedTopics: z.array(nonEmptyText),
+  sourceRevisionIds: entityIds.min(1),
   tagIds: entityIds.min(1),
   learningOutcomeIds: entityIds.min(1),
   docPath: SafePathSchema,
@@ -254,7 +287,99 @@ export const ProblemPlacementSchema = strictObject({
   additionalElement: nonEmptyText.nullable(),
   rationale: nonEmptyText,
   evidenceIds: entityIds.min(1),
-});
+})
+  .superRefine((placement, context) => {
+    const isFull = placement.kind === 'full';
+    const isSimilar = placement.kind === 'similar';
+    if (isFull && placement.primaryExplanationId !== null) {
+      context.addIssue({
+        code: 'custom',
+        path: ['primaryExplanationId'],
+        message: 'Full placement cannot reference a primary explanation.',
+      });
+    }
+    if (!isFull && placement.primaryExplanationId === null) {
+      context.addIssue({
+        code: 'custom',
+        path: ['primaryExplanationId'],
+        message: 'Similar and supplement placements require a primary explanation.',
+      });
+    }
+    if (isFull && placement.sharedOutcomeIds.length > 0) {
+      context.addIssue({
+        code: 'custom',
+        path: ['sharedOutcomeIds'],
+        message: 'Full placement cannot declare shared outcomes.',
+      });
+    }
+    if (!isFull && placement.sharedOutcomeIds.length === 0) {
+      context.addIssue({
+        code: 'custom',
+        path: ['sharedOutcomeIds'],
+        message: 'Abbreviated placements require shared outcomes.',
+      });
+    }
+    if (isSimilar && placement.additionalElement !== null) {
+      context.addIssue({
+        code: 'custom',
+        path: ['additionalElement'],
+        message: 'Similar placement cannot declare an additional element.',
+      });
+    }
+    if (placement.kind === 'supplement' && placement.additionalElement === null) {
+      context.addIssue({
+        code: 'custom',
+        path: ['additionalElement'],
+        message: 'Supplement placement requires exactly one additional element.',
+      });
+    }
+  })
+  .meta({
+    allOf: [
+      {
+        if: { properties: { kind: { const: 'full' } }, required: ['kind'] },
+        then: {
+          properties: {
+            primaryExplanationId: { type: 'null' },
+            sharedOutcomeIds: { maxItems: 0 },
+            additionalElement: { type: 'null' },
+          },
+        },
+      },
+      {
+        if: {
+          properties: { kind: { const: 'similar' } },
+          required: ['kind'],
+        },
+        then: {
+          properties: {
+            primaryExplanationId: {
+              type: 'string',
+              pattern: '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
+            },
+            sharedOutcomeIds: { minItems: 1 },
+            additionalElement: { type: 'null' },
+          },
+        },
+      },
+      {
+        if: {
+          properties: { kind: { const: 'supplement' } },
+          required: ['kind'],
+        },
+        then: {
+          properties: {
+            primaryExplanationId: {
+              type: 'string',
+              pattern: '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
+            },
+            sharedOutcomeIds: { minItems: 1 },
+            additionalElement: { type: 'string', minLength: 1 },
+          },
+        },
+      },
+    ],
+  });
 
 export const ExplanationSchema = strictObject({
   id: EntityIdSchema,
@@ -387,7 +512,7 @@ export const ReproducibleExampleSchema = strictObject({
 
 export const ExerciseSchema = strictObject({
   id: EntityIdSchema,
-  problemId: ProblemIdSchema.nullable(),
+  problemId: ProblemIdSchema,
   learningOutcomeIds: entityIds.min(1),
   prerequisiteIds: entityIds,
   attainmentCondition: nonEmptyText,
@@ -421,7 +546,7 @@ const ReleaseValidationSummarySchema = strictObject({
   checkCount: z.number().int().nonnegative(),
   passedCheckCount: z.number().int().nonnegative(),
   blockingFindingCount: z.number().int().nonnegative(),
-  evidenceDigests: z.array(Sha256Schema),
+  evidenceDigests: uniqueArray(Sha256Schema),
 });
 
 const EvidenceReferenceSchema = strictObject({

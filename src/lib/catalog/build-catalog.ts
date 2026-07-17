@@ -25,6 +25,10 @@ interface Entity {
   readonly contestId?: string;
   readonly label?: string;
   readonly officialOrder?: number | null;
+  readonly additionalPrerequisiteUnitIds?: readonly string[];
+  readonly stageRank?: number;
+  readonly difficultyRank?: number;
+  readonly representativeRank?: number;
 }
 
 interface CatalogLike {
@@ -85,6 +89,10 @@ interface CatalogLike {
   }[];
   readonly tags: readonly {
     readonly id: string;
+    readonly name: string;
+    readonly aliases: readonly string[];
+    readonly formerNames: readonly string[];
+    readonly lifecycle: 'active' | 'deprecated';
     readonly prerequisiteTagIds: readonly string[];
     readonly parentId: string | null;
     readonly learningOutcomeIds: readonly string[];
@@ -93,10 +101,12 @@ interface CatalogLike {
   }[];
   readonly learningUnits: readonly {
     readonly id: string;
+    readonly sourceRevisionIds: readonly string[];
     readonly additionalPrerequisiteUnitIds: readonly string[];
     readonly stageRank: number;
     readonly difficultyRank: number;
     readonly representativeRank: number;
+    readonly globalIndex: number;
     readonly parentId: string | null;
     readonly tagIds: readonly string[];
     readonly learningOutcomeIds: readonly string[];
@@ -113,13 +123,16 @@ interface CatalogLike {
   readonly placements: readonly {
     readonly id: string;
     readonly problemId: string;
+    readonly kind: 'full' | 'similar' | 'supplement';
     readonly primaryExplanationId: string | null;
     readonly sharedOutcomeIds: readonly string[];
+    readonly additionalElement: string | null;
     readonly evidenceIds: readonly string[];
   }[];
   readonly explanations: readonly {
     readonly id: string;
     readonly problemId: string;
+    readonly kind: 'full' | 'similar' | 'supplement';
     readonly primaryExplanationId: string | null;
     readonly learningOutcomeIds: readonly string[];
     readonly additionalPrerequisiteUnitIds: readonly string[];
@@ -154,7 +167,7 @@ interface CatalogLike {
   }[];
   readonly exercises: readonly {
     readonly id: string;
-    readonly problemId: string | null;
+    readonly problemId: string;
     readonly learningOutcomeIds: readonly string[];
     readonly assessmentId: string;
     readonly answerMaterialId: string;
@@ -193,19 +206,37 @@ const entityArrayKeys = [
 export const sortCatalogEntityArray = (
   key: (typeof entityArrayKeys)[number],
   items: readonly Entity[],
-): readonly Entity[] =>
-  [...items].sort((left, right) => {
-    const compareCodeUnits = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
-    const compareContestIds = (a: string, b: string): number => {
-      const leftNumber = /^abc(?<number>[0-9]+)$/u.exec(a)?.groups?.number;
-      const rightNumber = /^abc(?<number>[0-9]+)$/u.exec(b)?.groups?.number;
-      if (leftNumber && rightNumber) {
-        const leftValue = BigInt(leftNumber);
-        const rightValue = BigInt(rightNumber);
-        if (leftValue !== rightValue) return leftValue < rightValue ? -1 : 1;
-      }
-      return compareCodeUnits(a, b);
-    };
+): readonly Entity[] => {
+  const compareCodeUnits = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
+  const compareContestIds = (a: string, b: string): number => {
+    const leftNumber = /^abc(?<number>[0-9]+)$/u.exec(a)?.groups?.number;
+    const rightNumber = /^abc(?<number>[0-9]+)$/u.exec(b)?.groups?.number;
+    if (leftNumber && rightNumber) {
+      const leftValue = BigInt(leftNumber);
+      const rightValue = BigInt(rightNumber);
+      if (leftValue !== rightValue) return leftValue < rightValue ? -1 : 1;
+    }
+    return compareCodeUnits(a, b);
+  };
+  if (key === 'learningUnits') {
+    try {
+      const ordered = deterministicTopologicalOrder(
+        items.map((item) => ({
+          item,
+          id: item.id ?? '',
+          prerequisiteIds: item.additionalPrerequisiteUnitIds ?? [],
+          ranks: [item.stageRank ?? 0, item.difficultyRank ?? 0, item.representativeRank ?? 0],
+        })),
+        (node) => node.ranks,
+      );
+      return ordered.map(({ item }) => item);
+    } catch {
+      // Semantic validation reports the actual dependency error below;
+      // retain a deterministic fallback order until then.
+      return [...items].sort((left, right) => compareCodeUnits(left.id ?? '', right.id ?? ''));
+    }
+  }
+  return [...items].sort((left, right) => {
     if (key === 'contestSlots') {
       return (
         compareContestIds(left.contestId ?? '', right.contestId ?? '') ||
@@ -221,6 +252,7 @@ export const sortCatalogEntityArray = (
       ? compareContestIds(leftKey ?? '', rightKey ?? '')
       : compareCodeUnits(leftKey ?? '', rightKey ?? '');
   });
+};
 
 export const buildCatalog = (input: unknown, sourcePaths: readonly string[] = []): CatalogLike => {
   const stagingPath = sourcePaths.find(hasStagingPathSegment);
@@ -526,14 +558,25 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
     }
   };
   const scopeTargets = new Set([...tagIds, ...unitIds, ...problemIds]);
+  const releaseEvidenceDigests = catalog.release.validationSummary.evidenceDigests;
+  const reviewEvidenceIds = catalog.release.humanContentReviewEvidenceRefs.flatMap((ref) =>
+    typeof ref === 'object' &&
+    ref !== null &&
+    'evidenceId' in ref &&
+    typeof ref.evidenceId === 'string'
+      ? [ref.evidenceId]
+      : [],
+  );
   if (
     catalog.release.validationSummary.checkCount <= 0 ||
     catalog.release.validationSummary.passedCheckCount !==
       catalog.release.validationSummary.checkCount ||
     catalog.release.validationSummary.blockingFindingCount !== 0 ||
-    catalog.release.validationSummary.evidenceDigests.length <
-      catalog.release.validationSummary.checkCount ||
-    catalog.release.humanContentReviewEvidenceRefs.length === 0
+    releaseEvidenceDigests.length !== catalog.release.validationSummary.checkCount ||
+    new Set(releaseEvidenceDigests).size !== releaseEvidenceDigests.length ||
+    catalog.release.humanContentReviewEvidenceRefs.length === 0 ||
+    new Set(reviewEvidenceIds).size !== reviewEvidenceIds.length ||
+    reviewEvidenceIds.length !== catalog.release.humanContentReviewEvidenceRefs.length
   ) {
     diagnostics.push({
       code: 'RELEASE_EVIDENCE_INCOMPLETE',
@@ -602,6 +645,22 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
         message: problem.id,
       });
     }
+    if (placement && explanation) {
+      if (placement.kind !== explanation.kind) {
+        diagnostics.push({
+          code: 'PLACEMENT_EXPLANATION_KIND_MISMATCH',
+          entityId: problem.id,
+          message: `${placement.kind} != ${explanation.kind}`,
+        });
+      }
+      if (placement.primaryExplanationId !== explanation.primaryExplanationId) {
+        diagnostics.push({
+          code: 'PLACEMENT_PRIMARY_EXPLANATION_MISMATCH',
+          entityId: problem.id,
+          message: `${placement.id} and ${explanation.id} disagree about the primary explanation.`,
+        });
+      }
+    }
     if (
       problem.publicationStatus === 'published' &&
       (problem.primaryTagIds.length === 0 || !problem.placementId || !problem.explanationId)
@@ -614,19 +673,77 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
     }
   }
   for (const tag of catalog.tags) {
+    const normalizedTerms = [tag.name, ...tag.aliases, ...tag.formerNames].map((term) =>
+      term.normalize('NFKC').trim().toLocaleLowerCase('en-US'),
+    );
+    if (new Set(normalizedTerms).size !== normalizedTerms.length) {
+      diagnostics.push({
+        code: 'TAG_TERM_DUPLICATE',
+        entityId: tag.id,
+        message: 'A tag name, alias, or former name is duplicated within the tag.',
+      });
+    }
     if (tag.parentId) requireRefs(tag.id, 'parentId', [tag.parentId], tagIds);
     requireRefs(tag.id, 'prerequisiteTagIds', tag.prerequisiteTagIds, tagIds);
     requireRefs(tag.id, 'learningOutcomeIds', tag.learningOutcomeIds, outcomeIds);
     requireRefs(tag.id, 'representativeProblemIds', tag.representativeProblemIds, problemIds);
     requireRefs(tag.id, 'replacementTagIds', tag.replacementTagIds, tagIds);
+    if (tag.lifecycle === 'deprecated' && tag.replacementTagIds.length === 0) {
+      diagnostics.push({
+        code: 'TAG_REPLACEMENT_MISSING',
+        entityId: tag.id,
+        message: 'Deprecated tags require at least one replacement tag.',
+      });
+    }
+    if (tag.lifecycle === 'active' && tag.replacementTagIds.length > 0) {
+      diagnostics.push({
+        code: 'TAG_ACTIVE_REPLACEMENT',
+        entityId: tag.id,
+        message: 'Active tags cannot declare replacement tags.',
+      });
+    }
+    if (tag.replacementTagIds.includes(tag.id)) {
+      diagnostics.push({
+        code: 'TAG_REPLACEMENT_SELF_REFERENCE',
+        entityId: tag.id,
+        message: 'A tag cannot replace itself.',
+      });
+    }
+  }
+  const tagTermOwners = new Map<string, string>();
+  for (const tag of catalog.tags) {
+    for (const term of [tag.name, ...tag.aliases, ...tag.formerNames]) {
+      const normalized = term.normalize('NFKC').trim().toLocaleLowerCase('en-US');
+      const existingOwner = tagTermOwners.get(normalized);
+      if (existingOwner && existingOwner !== tag.id) {
+        diagnostics.push({
+          code: 'TAG_TERM_CONFLICT',
+          entityId: tag.id,
+          message: `${tag.id} shares the term "${term}" with ${existingOwner}.`,
+        });
+      } else {
+        tagTermOwners.set(normalized, tag.id);
+      }
+    }
   }
   for (const outcome of catalog.learningOutcomes) {
     requireRefs(outcome.id, 'prerequisiteOutcomeIds', outcome.prerequisiteOutcomeIds, outcomeIds);
     requireRefs(outcome.id, 'scopeIds', outcome.scopeIds, scopeTargets);
     requireRefs(outcome.id, 'assessmentIds', outcome.assessmentIds, assessmentIds);
+    for (const assessmentId of outcome.assessmentIds) {
+      const assessment = catalog.assessments.find(({ id }) => id === assessmentId);
+      if (assessment && !assessment.learningOutcomeIds.includes(outcome.id)) {
+        diagnostics.push({
+          code: 'OUTCOME_ASSESSMENT_REVERSE_REFERENCE_MISMATCH',
+          entityId: outcome.id,
+          message: `${outcome.id} is not listed by ${assessmentId}.`,
+        });
+      }
+    }
   }
   for (const unit of catalog.learningUnits) {
     if (unit.parentId) requireRefs(unit.id, 'parentId', [unit.parentId], unitIds);
+    requireRefs(unit.id, 'sourceRevisionIds', unit.sourceRevisionIds, sourceIds);
     requireRefs(
       unit.id,
       'additionalPrerequisiteUnitIds',
@@ -667,6 +784,40 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
         message: `${placement.id} is not selected by ${placement.problemId}.`,
       });
     }
+    const primary = placement.primaryExplanationId
+      ? catalog.explanations.find(({ id }) => id === placement.primaryExplanationId)
+      : undefined;
+    if (placement.kind === 'full' && placement.primaryExplanationId !== null) {
+      diagnostics.push({
+        code: 'FULL_PLACEMENT_HAS_PRIMARY',
+        entityId: placement.id,
+        message: 'Full placement must have an independent explanation.',
+      });
+    }
+    if (placement.kind !== 'full' && !primary) {
+      diagnostics.push({
+        code: 'ABBREVIATED_PLACEMENT_PRIMARY_MISSING',
+        entityId: placement.id,
+        message: 'Similar and supplement placements require a primary explanation.',
+      });
+    }
+    if (primary && primary.kind !== 'full') {
+      diagnostics.push({
+        code: 'PLACEMENT_PRIMARY_NOT_FULL',
+        entityId: placement.id,
+        message: `${placement.primaryExplanationId ?? 'unknown'} must be a full explanation.`,
+      });
+    }
+    const selectedExplanation = problem?.explanationId
+      ? catalog.explanations.find(({ id }) => id === problem.explanationId)
+      : undefined;
+    if (primary && primary.id === selectedExplanation?.id) {
+      diagnostics.push({
+        code: 'PLACEMENT_PRIMARY_SELF_REFERENCE',
+        entityId: placement.id,
+        message: 'A placement cannot use its selected explanation as its primary explanation.',
+      });
+    }
   }
   for (const explanation of catalog.explanations) {
     requireRefs(explanation.id, 'problemId', [explanation.problemId], problemIds);
@@ -677,6 +828,37 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
         [explanation.primaryExplanationId],
         explanationIds,
       );
+    if (explanation.kind === 'full' && explanation.primaryExplanationId !== null) {
+      diagnostics.push({
+        code: 'FULL_EXPLANATION_HAS_PRIMARY',
+        entityId: explanation.id,
+        message: 'Full explanations must be independent.',
+      });
+    }
+    if (explanation.kind !== 'full' && explanation.primaryExplanationId === null) {
+      diagnostics.push({
+        code: 'ABBREVIATED_EXPLANATION_PRIMARY_MISSING',
+        entityId: explanation.id,
+        message: 'Similar and supplement explanations require a primary explanation.',
+      });
+    }
+    if (explanation.primaryExplanationId === explanation.id) {
+      diagnostics.push({
+        code: 'EXPLANATION_PRIMARY_SELF_REFERENCE',
+        entityId: explanation.id,
+        message: 'An explanation cannot use itself as its primary explanation.',
+      });
+    }
+    const primary = explanation.primaryExplanationId
+      ? catalog.explanations.find(({ id }) => id === explanation.primaryExplanationId)
+      : undefined;
+    if (primary && primary.kind !== 'full') {
+      diagnostics.push({
+        code: 'EXPLANATION_PRIMARY_NOT_FULL',
+        entityId: explanation.id,
+        message: `${explanation.primaryExplanationId ?? 'unknown'} must be a full explanation.`,
+      });
+    }
     requireRefs(explanation.id, 'learningOutcomeIds', explanation.learningOutcomeIds, outcomeIds);
     requireRefs(
       explanation.id,
@@ -697,6 +879,30 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
       });
     }
   }
+  const explanationById = new Map(
+    catalog.explanations.map((explanation) => [explanation.id, explanation]),
+  );
+  const explanationVisitState = new Map<string, 'visiting' | 'visited'>();
+  const visitExplanation = (id: string, path: readonly string[]): void => {
+    const state = explanationVisitState.get(id);
+    if (state === 'visiting') {
+      diagnostics.push({
+        code: 'EXPLANATION_PRIMARY_CYCLE',
+        entityId: id,
+        message: `Primary explanation cycle: ${[...path, id].join(' -> ')}`,
+      });
+      return;
+    }
+    if (state === 'visited') return;
+    explanationVisitState.set(id, 'visiting');
+    const explanation = explanationById.get(id);
+    if (explanation?.primaryExplanationId) {
+      const primary = explanationById.get(explanation.primaryExplanationId);
+      if (primary) visitExplanation(primary.id, [...path, id]);
+    }
+    explanationVisitState.set(id, 'visited');
+  };
+  for (const explanation of catalog.explanations) visitExplanation(explanation.id, []);
   for (const claim of catalog.claims) {
     requireRefs(claim.id, 'sourceRevisionIds', claim.sourceRevisionIds, sourceIds);
     if (claim.verificationStatus !== 'verified') {
@@ -747,6 +953,21 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
         });
       }
     }
+    const explanationHasSource = example.ownerExplanationIds.some((explanationId) => {
+      const explanation = catalog.explanations.find(({ id }) => id === explanationId);
+      return Boolean(explanation && explanation.sourceRevisionIds.length > 0);
+    });
+    const learningUnitHasSource = example.ownerLearningUnitIds.some((unitId) => {
+      const unit = catalog.learningUnits.find(({ id }) => id === unitId);
+      return Boolean(unit && unit.sourceRevisionIds.length > 0);
+    });
+    if (!explanationHasSource && !learningUnitHasSource) {
+      diagnostics.push({
+        code: 'EXAMPLE_SOURCE_UNREACHABLE',
+        entityId: example.id,
+        message: 'Every example must reach at least one Source Revision through an owner.',
+      });
+    }
     if (example.verificationStatus !== 'passed') {
       diagnostics.push({
         code: 'EXAMPLE_NOT_VERIFIED',
@@ -756,13 +977,31 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
     }
   }
   for (const exercise of catalog.exercises) {
-    if (exercise.problemId) requireRefs(exercise.id, 'problemId', [exercise.problemId], problemIds);
+    requireRefs(exercise.id, 'problemId', [exercise.problemId], problemIds);
     requireRefs(exercise.id, 'learningOutcomeIds', exercise.learningOutcomeIds, outcomeIds);
     requireRefs(exercise.id, 'assessmentId', [exercise.assessmentId], assessmentIds);
     requireRefs(exercise.id, 'answerMaterialId', [exercise.answerMaterialId], answerMaterialIds);
+    const problem = catalog.problems.find(({ id }) => id === exercise.problemId);
+    if (!problem || problem.sourceRevisionIds.length === 0) {
+      diagnostics.push({
+        code: 'EXERCISE_SOURCE_UNREACHABLE',
+        entityId: exercise.id,
+        message: 'Every exercise must reach a Source Revision through its Problem.',
+      });
+    }
   }
   for (const assessment of catalog.assessments) {
     requireRefs(assessment.id, 'learningOutcomeIds', assessment.learningOutcomeIds, outcomeIds);
+    for (const outcomeId of assessment.learningOutcomeIds) {
+      const outcome = catalog.learningOutcomes.find(({ id }) => id === outcomeId);
+      if (outcome && !outcome.assessmentIds.includes(assessment.id)) {
+        diagnostics.push({
+          code: 'ASSESSMENT_OUTCOME_REVERSE_REFERENCE_MISMATCH',
+          entityId: assessment.id,
+          message: `${assessment.id} is not listed by ${outcomeId}.`,
+        });
+      }
+    }
   }
   for (const answer of catalog.answerMaterials) {
     requireRefs(answer.id, 'exerciseId', [answer.exerciseId], exerciseIds);
@@ -772,6 +1011,16 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
         code: 'ANSWER_MATERIAL_REVERSE_REFERENCE_MISMATCH',
         entityId: answer.id,
         message: `${answer.id} is not the answer selected by ${answer.exerciseId}.`,
+      });
+    }
+    const exerciseProblem = exercise
+      ? catalog.problems.find(({ id }) => id === exercise.problemId)
+      : undefined;
+    if (!exerciseProblem || exerciseProblem.sourceRevisionIds.length === 0) {
+      diagnostics.push({
+        code: 'ANSWER_MATERIAL_SOURCE_UNREACHABLE',
+        entityId: answer.id,
+        message: 'Every answer material must reach a Source Revision through its Exercise.',
       });
     }
     if (answer.verificationStatus !== 'passed') {
@@ -815,6 +1064,10 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
     })),
   );
   validateDag(
+    'TAG_REPLACEMENT_GRAPH_INVALID',
+    catalog.tags.map((tag) => ({ id: tag.id, prerequisiteIds: tag.replacementTagIds })),
+  );
+  validateDag(
     'OUTCOME_PREREQUISITE_DAG_INVALID',
     catalog.learningOutcomes.map((outcome) => ({
       id: outcome.id,
@@ -830,6 +1083,37 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
     })),
     (unit) => unit.ranks ?? [],
   );
+  try {
+    const orderedLearningUnits = deterministicTopologicalOrder(
+      catalog.learningUnits.map((unit) => ({
+        unit,
+        id: unit.id,
+        prerequisiteIds: unit.additionalPrerequisiteUnitIds,
+        ranks: [unit.stageRank, unit.difficultyRank, unit.representativeRank],
+      })),
+      (node) => node.ranks,
+    );
+    const expectedIds = orderedLearningUnits.map(({ id }) => id);
+    const actualIds = catalog.learningUnits.map(({ id }) => id);
+    if (expectedIds.some((id, index) => actualIds[index] !== id)) {
+      diagnostics.push({
+        code: 'LEARNING_UNIT_ORDER_MISMATCH',
+        message: 'Learning units must be stored in deterministic prerequisite order.',
+      });
+    }
+    for (const [index, unit] of catalog.learningUnits.entries()) {
+      if (unit.globalIndex !== index || unit.globalIndex !== expectedIds.indexOf(unit.id)) {
+        diagnostics.push({
+          code: 'LEARNING_UNIT_GLOBAL_INDEX_MISMATCH',
+          entityId: unit.id,
+          message: `${unit.id} must have globalIndex ${String(expectedIds.indexOf(unit.id))}.`,
+        });
+      }
+    }
+  } catch {
+    // The dedicated DAG validator above reports the actionable cycle or
+    // unknown-dependency diagnostic.
+  }
   validateDag(
     'LEARNING_UNIT_PARENT_HIERARCHY_INVALID',
     catalog.learningUnits.map((unit) => ({

@@ -3,6 +3,9 @@ import { describe, expect, it } from 'vitest';
 import {
   AdvancedSlotRegistrySchema,
   ContestSlotRecordSchema,
+  ExerciseSchema,
+  ProblemPlacementSchema,
+  TechniqueTagSchema,
 } from '../../src/lib/domain/schema-parts/catalog.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import {
@@ -313,6 +316,15 @@ describe('official advanced slot registry', () => {
     release.validationSummary.blockingFindingCount = 1;
     expect(() => buildCatalog(failedRelease)).toThrow(/RELEASE_EVIDENCE_INCOMPLETE/u);
 
+    const duplicatedReleaseEvidence = structuredClone(catalog) as Record<string, unknown>;
+    (duplicatedReleaseEvidence.release as Record<string, unknown>).validationSummary = {
+      checkCount: 2,
+      passedCheckCount: 2,
+      blockingFindingCount: 0,
+      evidenceDigests: [digest, digest],
+    };
+    expect(() => buildCatalog(duplicatedReleaseEvidence)).toThrow(/CATALOG_SCHEMA_INVALID/u);
+
     const unverifiedClaim = structuredClone(catalog) as Record<string, unknown>;
     (unverifiedClaim.claims as unknown[]) = [
       {
@@ -394,6 +406,68 @@ describe('official advanced slot registry', () => {
     expect(() => buildCatalog(independentGraphs)).not.toThrow();
   });
 
+  it('enforces placement mode fields and tag lifecycle invariants', () => {
+    const placement = {
+      id: 'placement-abc500-e',
+      problemId: 'abc500-e',
+      policyVersion: '1.0.0',
+      kind: 'full' as const,
+      primaryExplanationId: null,
+      sharedOutcomeIds: [],
+      comparison: {
+        method: 'Same method.',
+        proof: 'Same proof.',
+        complexity: 'Same complexity.',
+        constraints: 'Same constraints.',
+        prerequisites: 'Same prerequisites.',
+        implementation: 'Same implementation.',
+      },
+      additionalElement: null,
+      rationale: 'Independent explanation is required.',
+      evidenceIds: ['evidence-placement'],
+    };
+    expect(ProblemPlacementSchema.safeParse(placement).success).toBe(true);
+    expect(
+      ProblemPlacementSchema.safeParse({
+        ...placement,
+        kind: 'supplement',
+      }).success,
+    ).toBe(false);
+
+    const tag = {
+      id: 'tag-dp',
+      name: 'Dynamic programming',
+      definition: 'A reusable method.',
+      parentId: null,
+      prerequisiteTagIds: [],
+      learningOutcomeIds: ['outcome-dp'],
+      representativeProblemIds: ['abc500-e'],
+      aliases: [],
+      formerNames: [],
+      lifecycle: 'active' as const,
+      replacementTagIds: [],
+    };
+    expect(TechniqueTagSchema.safeParse(tag).success).toBe(true);
+    expect(
+      TechniqueTagSchema.safeParse({ ...tag, lifecycle: 'deprecated', replacementTagIds: [] })
+        .success,
+    ).toBe(false);
+    expect(TechniqueTagSchema.safeParse({ ...tag, replacementTagIds: ['tag-other'] }).success).toBe(
+      false,
+    );
+    expect(
+      ExerciseSchema.safeParse({
+        id: 'exercise-one',
+        problemId: null,
+        learningOutcomeIds: ['outcome-dp'],
+        prerequisiteIds: [],
+        attainmentCondition: 'The learner explains the method.',
+        assessmentId: 'assessment-one',
+        answerMaterialId: 'answer-one',
+      }).success,
+    ).toBe(false);
+  });
+
   it('places an order-conflict hold instead of guessing', () => {
     expect(() =>
       buildAdvancedSlotRegistry({
@@ -459,6 +533,27 @@ describe('official advanced slot registry', () => {
     expect(
       sortCatalogEntityArray('contests', [{ id: 'abc1000' }, { id: 'abc999' }]).map(({ id }) => id),
     ).toEqual(['abc999', 'abc1000']);
+  });
+
+  it('orders learning units by prerequisites before applying the ID tie-breaker', () => {
+    expect(
+      sortCatalogEntityArray('learningUnits', [
+        {
+          id: 'unit-b',
+          additionalPrerequisiteUnitIds: ['unit-a'],
+          stageRank: 0,
+          difficultyRank: 0,
+          representativeRank: 0,
+        },
+        {
+          id: 'unit-a',
+          additionalPrerequisiteUnitIds: [],
+          stageRank: 0,
+          difficultyRank: 0,
+          representativeRank: 0,
+        },
+      ]).map(({ id }) => id),
+    ).toEqual(['unit-a', 'unit-b']);
   });
 
   it('rejects contradictory ContestSlot availability and hold states', () => {

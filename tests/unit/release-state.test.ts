@@ -37,6 +37,7 @@ const makePublicationUpdate = (): Record<string, unknown> => ({
       path: 'src/content/problems/abc212-x45.json',
       beforeDigest: null,
       afterDigest: sha('a'),
+      affectedProblemIds: ['abc212-x45'],
     },
   ],
   authoringResults: [
@@ -327,6 +328,7 @@ describe('release state gate', () => {
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),
         afterDigest: sha('b'),
+        affectedProblemIds: ['abc212-x45'],
       },
     ];
     expect(() => {
@@ -337,6 +339,37 @@ describe('release state gate', () => {
     wrongTarget.targetProblemIds = ['abc212-other'];
     expect(() => {
       validatePublicationUpdate(wrongTarget);
+    }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
+
+    const mismatchedOperationOwner = makePublicationUpdate();
+    mismatchedOperationOwner.kind = 'correction';
+    mismatchedOperationOwner.advancedSlotLabels = [];
+    mismatchedOperationOwner.targetProblemIds = ['abc212-other'];
+    mismatchedOperationOwner.operations = [
+      {
+        operationId: 'operation-replace-explanation',
+        entityType: 'explanation',
+        entityId: 'explanation-abc212-x45',
+        action: 'replace',
+        path: 'src/content/docs/abc212-e.md',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+        affectedProblemIds: ['abc212-x45'],
+      },
+    ];
+    mismatchedOperationOwner.authoringResults = (
+      mismatchedOperationOwner.authoringResults as {
+        problemId: string;
+      }[]
+    ).map((result) => ({ ...result, problemId: 'abc212-other' }));
+    mismatchedOperationOwner.validationSummary = {
+      ...(mismatchedOperationOwner.validationSummary as Record<string, unknown>),
+      problemResults: [
+        { problemId: 'abc212-other', passed: true, findingCodes: [], remediation: null },
+      ],
+    };
+    expect(() => {
+      validatePublicationUpdate(mismatchedOperationOwner);
     }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
   });
 });
