@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "version": "1.0.0",
+  "language": "ja",
+  "terms": [
+    {
+      "id": "term-learning-outcome",
+      "canonicalName": "学習成果",
+      "aliases": ["Learning Outcome", "到達目標"],
+      "definition": "学習後に学習者が観察可能な行動として示せる能力。",
+      "prerequisiteTermIds": [],
+      "firstUseUnitId": "unit-foundations",
+      "scope": "global",
+      "sourceRevisionIds": ["source-constitution-1-0-0"]
+    },
+    {
+      "id": "term-prerequisite",
+      "canonicalName": "前提",
+      "aliases": ["prerequisite", "前提知識"],
+      "definition": "学習単位に取り組む前に利用できる必要がある知識または技能。",
+      "prerequisiteTermIds": [],
+      "firstUseUnitId": "unit-foundations",
+      "scope": "global",
+      "sourceRevisionIds": ["source-constitution-1-0-0"]
+    },
+    {
+      "id": "term-primary-technique",
+      "canonicalName": "主たる典型",
+      "aliases": ["primary technique", "主タグ"],
+      "definition": "問題の中心となる解法選択と学習成果を代表する典型。",
+      "prerequisiteTermIds": ["term-learning-outcome"],
+      "firstUseUnitId": "unit-foundations",
+      "scope": "global",
+      "sourceRevisionIds": ["source-spec-001-v1"]
+    }
+  ],
+  "digest": "ee62b7f904efb6dbb9560a9b452bf68985066e61ca9994cfd7c8a7e38a19b746"
+}

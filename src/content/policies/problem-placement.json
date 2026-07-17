@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "placement-policy-v1",
+  "version": "1.0.0",
+  "defaultMode": "full",
+  "comparisonDimensions": [
+    "algorithm",
+    "proof",
+    "complexity",
+    "constraints",
+    "prerequisites",
+    "implementation",
+    "learning_outcomes"
+  ],
+  "inputAttributes": [
+    "primary_explanation_valid",
+    "algorithm_same",
+    "proof_same",
+    "complexity_same",
+    "constraints_difference_documented",
+    "prerequisites_same",
+    "implementation_difference_documented",
+    "learning_outcomes_same",
+    "additional_learning_count",
+    "evidence_complete",
+    "conflict_free"
+  ],
+  "evaluationOrder": ["similar", "supplement", "full"],
+  "exclusiveResult": true,
+  "modeRules": {
+    "full": {
+      "result": "full",
+      "priority": 3,
+      "fallback": true,
+      "clauses": [],
+      "requiredEvidence": [
+        "independent_full_explanation",
+        "source_revision_ids",
+        "verification_evidence"
+      ]
+    },
+    "similar": {
+      "result": "similar",
+      "priority": 1,
+      "fallback": false,
+      "clauses": [
+        {
+          "all": [
+            { "attribute": "primary_explanation_valid", "operator": "eq", "value": true },
+            { "attribute": "algorithm_same", "operator": "eq", "value": true },
+            { "attribute": "proof_same", "operator": "eq", "value": true },
+            { "attribute": "complexity_same", "operator": "eq", "value": true },
+            { "attribute": "prerequisites_same", "operator": "eq", "value": true },
+            { "attribute": "learning_outcomes_same", "operator": "eq", "value": true },
+            { "attribute": "additional_learning_count", "operator": "eq", "value": 0 },
+            { "attribute": "evidence_complete", "operator": "eq", "value": true },
+            { "attribute": "conflict_free", "operator": "eq", "value": true }
+          ]
+        }
+      ],
+      "requiredEvidence": [
+        "primary_explanation_id",
+        "shared_learning_outcome_ids",
+        "algorithm_comparison",
+        "proof_comparison",
+        "complexity_comparison",
+        "constraint_comparison",
+        "prerequisite_comparison",
+        "implementation_comparison",
+        "source_revision_ids",
+        "verification_evidence"
+      ]
+    },
+    "supplement": {
+      "result": "supplement",
+      "priority": 2,
+      "fallback": false,
+      "clauses": [
+        {
+          "all": [
+            { "attribute": "primary_explanation_valid", "operator": "eq", "value": true },
+            { "attribute": "algorithm_same", "operator": "eq", "value": true },
+            { "attribute": "proof_same", "operator": "eq", "value": true },
+            { "attribute": "complexity_same", "operator": "eq", "value": true },
+            { "attribute": "prerequisites_same", "operator": "eq", "value": true },
+            { "attribute": "learning_outcomes_same", "operator": "eq", "value": true },
+            { "attribute": "additional_learning_count", "operator": "eq", "value": 1 },
+            { "attribute": "evidence_complete", "operator": "eq", "value": true },
+            { "attribute": "conflict_free", "operator": "eq", "value": true }
+          ]
+        }
+      ],
+      "requiredEvidence": [
+        "primary_explanation_id",
+        "shared_learning_outcome_ids",
+        "additional_learning",
+        "answer_material",
+        "source_revision_ids",
+        "verification_evidence"
+      ]
+    }
+  },
+  "ambiguousAction": "on_hold",
+  "digest": "b1c2d1a825a835a94d76d58ece54c10bad0fec0789fbfbe2d350206d2f6ab62b"
+}

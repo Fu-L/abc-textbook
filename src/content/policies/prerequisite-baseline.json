@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "prereq-abc-advanced-v1",
+  "version": "1.0.0",
+  "name": "ABC上級問題の共通前提",
+  "language": "ja",
+  "skills": [
+    {
+      "id": "skill-programming-basics",
+      "observableStatement": "C++または同等の言語で、分岐・反復・関数・配列を用いたプログラムを実装できる。",
+      "verificationMethod": "ABC D相当の問題を制約内で実装し、サンプルと追加ケースを通す。"
+    },
+    {
+      "id": "skill-complexity-basics",
+      "observableStatement": "入力上限から必要な時間計算量と空間計算量の目安を説明できる。",
+      "verificationMethod": "実装の主要操作を数え、Big-O記法と制約の整合を説明する。"
+    },
+    {
+      "id": "skill-proof-basics",
+      "observableStatement": "不変条件、場合分け、帰納法のいずれかを使って解法の正しさを説明できる。",
+      "verificationMethod": "選んだ解法について前提、主張、根拠を分けた短い証明を書く。"
+    },
+    {
+      "id": "skill-standard-library",
+      "observableStatement": "標準的なコンテナ、ソート、二分探索を適切に選択して利用できる。",
+      "verificationMethod": "操作要件からデータ構造または標準アルゴリズムを選び、計算量を示す。"
+    }
+  ],
+  "excludedSkills": [
+    {
+      "name": "個別の高度アルゴリズム",
+      "rationale": "グラフ、動的計画法、高度なデータ構造などは各LearningUnitで追加前提として明示する。"
+    }
+  ],
+  "sourceRevisionIds": ["source-constitution-1-0-0", "source-spec-001-v1"],
+  "checkedAt": "2026-07-17T12:00:00+09:00",
+  "digest": "2c1cbd830d2083db4740ba426400e488f41b2d5a9fde3e5d7b7f5aaf4baf1431"
+}
