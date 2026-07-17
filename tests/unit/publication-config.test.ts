@@ -38,6 +38,13 @@ describe('publication environment configuration', () => {
     '/abc/%5cproblems',
     '/abc\\problems',
     '/abc\u0000problems',
+    '/abc text',
+    '/教材',
+    '/abc"x',
+    "/abc'x",
+    '/abc<page>',
+    ' /abc',
+    '/abc ',
   ])('rejects unsafe BASE_PATH values: %s', (value) => {
     expect(() => normalizeBasePath(value)).toThrow(UsageError);
   });

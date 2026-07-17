@@ -1,5 +1,8 @@
 import AxeBuilder from '@axe-core/playwright';
-import { expect, test, type Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
+
+import { FIXED_CLOCK_INSTANT } from '../setup/clock-constants.js';
+import { expect, test } from './fixtures.js';
 
 function collectBrowserErrors(page: Page): string[] {
   const browserErrors: string[] = [];
@@ -14,6 +17,47 @@ function collectBrowserErrors(page: Page): string[] {
 
   return browserErrors;
 }
+
+test('uses the deterministic browser clock and Tokyo timezone', async ({ fixedClock, page }) => {
+  await page.goto('./');
+
+  const initialClock = await page.evaluate(() => {
+    const formatter = new Intl.DateTimeFormat('ja-JP', {
+      day: '2-digit',
+      hour: '2-digit',
+      hourCycle: 'h23',
+      month: '2-digit',
+      timeZoneName: 'short',
+      year: 'numeric',
+    });
+
+    return {
+      iso: new Date().toISOString(),
+      parts: Object.fromEntries(
+        formatter
+          .formatToParts(new Date())
+          .filter((part) => part.type !== 'literal')
+          .map((part) => [part.type, part.value]),
+      ),
+      timeZone: formatter.resolvedOptions().timeZone,
+    };
+  });
+
+  expect(initialClock.iso).toBe(FIXED_CLOCK_INSTANT.toISOString());
+  expect(initialClock.timeZone).toBe('Asia/Tokyo');
+  expect(initialClock.parts).toMatchObject({
+    day: '14',
+    hour: '12',
+    month: '07',
+    year: '2026',
+  });
+  expect(initialClock.parts.timeZoneName).toBeTruthy();
+
+  await fixedClock.advance(60_000);
+  await expect
+    .poll(() => page.evaluate(() => new Date().toISOString()))
+    .toBe('2026-07-14T03:01:00.000Z');
+});
 
 test('keeps the desktop textbook shell interactive, accessible, and CSP-clean', async ({
   page,

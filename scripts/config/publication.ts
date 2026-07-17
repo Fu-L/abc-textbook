@@ -9,23 +9,25 @@ export class UsageError extends Error {
  * 公開先がルートでもサブパスでも、Astroへ渡すbaseの形式を統一する。
  */
 export function normalizeBasePath(value: string): string {
-  const trimmed = value.trim();
-
-  if (trimmed === '' || trimmed === '/') {
+  if (value === '' || value === '/') {
     return '/';
   }
 
   const unsafeUrlSyntax = /[\\%?#]/u;
-  const hasEmptySegment =
-    trimmed.startsWith('//') || trimmed.endsWith('//') || trimmed.includes('//');
-  const pathWithoutBoundarySlashes = trimmed.replace(/^\/|\/$/gu, '');
+  const hasEmptySegment = value.startsWith('//') || value.endsWith('//') || value.includes('//');
+  const pathWithoutBoundarySlashes = value.replace(/^\/|\/$/gu, '');
   const segments = pathWithoutBoundarySlashes.split('/');
+  // Astro/Starlightのbaseで確実に扱えるASCII URL unreserved文字だけを許可する。
+  const safeSegment = /^[A-Za-z0-9._~-]+$/u;
 
   if (
     containsControlCharacter(value) ||
-    unsafeUrlSyntax.test(trimmed) ||
+    unsafeUrlSyntax.test(value) ||
     hasEmptySegment ||
-    segments.some((segment) => segment === '' || segment === '.' || segment === '..')
+    segments.some(
+      (segment) =>
+        segment === '' || segment === '.' || segment === '..' || !safeSegment.test(segment),
+    )
   ) {
     throw new UsageError(`BASE_PATH must be a safe URL pathname: ${value}`);
   }

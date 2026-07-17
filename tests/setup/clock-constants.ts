@@ -1,0 +1,2 @@
+export const FIXED_CLOCK_ISO = '2026-07-14T12:00:00+09:00';
+export const FIXED_CLOCK_INSTANT = new Date(FIXED_CLOCK_ISO);

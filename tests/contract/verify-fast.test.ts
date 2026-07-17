@@ -69,22 +69,26 @@ describe('verify:fast exit code contract', () => {
     expect(execute).not.toHaveBeenCalled();
   });
 
-  it.each([{ LINK_CHECK_PORT: '8673invalid' }, { PORT: '0' }, { BASE_PATH: '/abc?preview=true' }])(
-    'rejects invalid runner-owned environment before running checks: %s',
-    async (invalidEnv) => {
-      const execute: VerificationExecutor = vi.fn(() => Promise.resolve(0));
+  it.each([
+    { LINK_CHECK_PORT: '8673invalid' },
+    { PORT: '0' },
+    { BASE_PATH: '/abc?preview=true' },
+    { BASE_PATH: '/教材' },
+    { BASE_PATH: '/abc text' },
+    { BASE_PATH: '/abc"x' },
+  ])('rejects invalid runner-owned environment before running checks: %s', async (invalidEnv) => {
+    const execute: VerificationExecutor = vi.fn(() => Promise.resolve(0));
 
-      await expect(
-        runVerification({
-          args: [],
-          env: { ...validEnvironment, ...invalidEnv },
-          execute,
-          report: vi.fn(),
-        }),
-      ).resolves.toBe(EXIT_CODE.usage);
-      expect(execute).not.toHaveBeenCalled();
-    },
-  );
+    await expect(
+      runVerification({
+        args: [],
+        env: { ...validEnvironment, ...invalidEnv },
+        execute,
+        report: vi.fn(),
+      }),
+    ).resolves.toBe(EXIT_CODE.usage);
+    expect(execute).not.toHaveBeenCalled();
+  });
 
   it('maps unexpected arguments to usage exit code 64', async () => {
     await expect(
