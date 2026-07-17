@@ -224,6 +224,7 @@ schema version、createdAt、targetReleaseVersion、全record、不明Problem ID
 | `baseReleaseVersion` | initialではnull |
 | `contestId` | Contest追加時に必須 |
 | `advancedSlotLabels` | Dより後の全label。固定4枠不可 |
+| `targetProblemIds` | 変更種別にかかわらず影響を受けるProblem集合の正本。Problem operationの集合を必ず含む |
 | `operations` | canonical entity差分 |
 | `authoringResults` | 全対象Problemへ一つ |
 | `correctionImpacts` | 該当時に全件 |

@@ -85,6 +85,7 @@
   "$id": "https://abc-textbook.local/schemas/catalog.schema.json",
   "title": "ABC Textbook Catalog",
   "description": "ABC212以降の各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。",
+  "$comment": "Structural constraints are defined here; cross-field and collection invariants are enforced by the canonical Zod runtime validator.",
   "$defs": {
     "__schema0": {
       "type": "string",

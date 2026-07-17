@@ -10,6 +10,8 @@ import {
   generateContractJsonSchemas,
 } from '../../scripts/generate-json-schemas.js';
 import { canonicalJson } from '../../src/lib/domain/canonical-json.js';
+import { validateContractValue } from '../../src/lib/domain/contract-schema.js';
+import { LearningRecordContract } from '../../src/lib/domain/schema-parts/learning.js';
 import {
   ReleaseCandidateContract,
   UpdateManifestContract,
@@ -87,6 +89,42 @@ describe('canonical Zod and JSON Schema parity', () => {
         canonicalJson(intentionallyEdited),
       );
     }
+    expect(contractSchemaEntries).toHaveLength(20);
+    expect(contractSchemaEntries.map(({ semanticValidation }) => semanticValidation)).toEqual(
+      Array.from({ length: 20 }, () => 'canonical-zod'),
+    );
+  });
+
+  it('routes semantic collection invariants through the canonical validator', () => {
+    const duplicateRecords = {
+      schemaVersion: '1.0.0',
+      exportedAt: '2026-07-17T12:00:00+09:00',
+      catalogVersionAtExport: '2026.07.17',
+      records: [
+        {
+          problemId: 'abc212-e',
+          status: 'unstarted',
+          statusUpdatedAt: null,
+          needsReview: false,
+          needsReviewUpdatedAt: null,
+        },
+        {
+          problemId: 'abc212-e',
+          status: 'completed',
+          statusUpdatedAt: '2026-07-17T12:00:00+09:00',
+          needsReview: true,
+          needsReviewUpdatedAt: '2026-07-17T12:00:00+09:00',
+        },
+      ],
+      orphanedProblemIds: [],
+    };
+    const ajv = new Ajv2020({ allErrors: true, strict: false });
+    addFormats(ajv);
+    const validateJsonSchema = ajv.compile(LearningRecordContract.jsonSchema);
+
+    // JSON Schema cannot express uniqueness by a nested problemId property.
+    expect(validateJsonSchema(duplicateRecords)).toBe(true);
+    expect(validateContractValue(LearningRecordContract, duplicateRecords)).toBe(false);
   });
 
   it('gives Zod and Ajv the same answer for valid, unknown-field, and duplicate inputs', () => {
@@ -120,6 +158,7 @@ describe('canonical Zod and JSON Schema parity', () => {
       contestId: null,
       sourceSetFingerprint: sha('1'),
       advancedSlotLabels: ['E'],
+      targetProblemIds: ['abc212-e'],
       operations: [
         {
           operationId: 'operation-problem',

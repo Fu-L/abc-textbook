@@ -312,6 +312,86 @@ describe('official advanced slot registry', () => {
     release.validationSummary.passedCheckCount = 0;
     release.validationSummary.blockingFindingCount = 1;
     expect(() => buildCatalog(failedRelease)).toThrow(/RELEASE_EVIDENCE_INCOMPLETE/u);
+
+    const unverifiedClaim = structuredClone(catalog) as Record<string, unknown>;
+    (unverifiedClaim.claims as unknown[]) = [
+      {
+        id: 'claim-one',
+        text: 'Fixture claim.',
+        sourceRevisionIds: ['source-abc212-task-order'],
+        authorId: 'author-fixture',
+        verificationStatus: 'unverified',
+      },
+    ];
+    expect(() => buildCatalog(unverifiedClaim)).toThrow(/CLAIM_NOT_VERIFIED/u);
+
+    const unknownOutcomeScope = structuredClone(catalog) as Record<string, unknown>;
+    unknownOutcomeScope.learningOutcomes = [
+      {
+        id: 'outcome-one',
+        statement: 'Explain the fixture method.',
+        prerequisiteOutcomeIds: [],
+        scopeIds: ['tag-missing'],
+        assessmentIds: ['assessment-one'],
+      },
+    ];
+    unknownOutcomeScope.assessments = [
+      {
+        id: 'assessment-one',
+        learningOutcomeIds: ['outcome-one'],
+        method: 'Fixture assessment.',
+        successCondition: 'The learner explains it.',
+      },
+    ];
+    expect(() => buildCatalog(unknownOutcomeScope)).toThrow(/CATALOG_REFERENCE_MISSING/u);
+
+    const independentGraphs = structuredClone(catalog) as Record<string, unknown>;
+    independentGraphs.learningOutcomes = [
+      {
+        id: 'outcome-one',
+        statement: 'Explain the fixture method.',
+        prerequisiteOutcomeIds: [],
+        scopeIds: [],
+        assessmentIds: ['assessment-one'],
+      },
+    ];
+    independentGraphs.assessments = [
+      {
+        id: 'assessment-one',
+        learningOutcomeIds: ['outcome-one'],
+        method: 'Fixture assessment.',
+        successCondition: 'The learner explains it.',
+      },
+    ];
+    independentGraphs.tags = [
+      {
+        id: 'tag-a',
+        name: 'Tag A',
+        definition: 'Fixture tag A.',
+        parentId: 'tag-b',
+        prerequisiteTagIds: [],
+        learningOutcomeIds: ['outcome-one'],
+        representativeProblemIds: ['abc212-e'],
+        aliases: [],
+        formerNames: [],
+        lifecycle: 'active',
+        replacementTagIds: [],
+      },
+      {
+        id: 'tag-b',
+        name: 'Tag B',
+        definition: 'Fixture tag B.',
+        parentId: null,
+        prerequisiteTagIds: ['tag-a'],
+        learningOutcomeIds: ['outcome-one'],
+        representativeProblemIds: ['abc212-e'],
+        aliases: [],
+        formerNames: [],
+        lifecycle: 'active',
+        replacementTagIds: [],
+      },
+    ];
+    expect(() => buildCatalog(independentGraphs)).not.toThrow();
   });
 
   it('places an order-conflict hold instead of guessing', () => {

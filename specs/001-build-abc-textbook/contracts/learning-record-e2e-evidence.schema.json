@@ -40,6 +40,7 @@
   "additionalProperties": false,
   "$id": "https://abc-textbook.local/schemas/learning-record-e2e-evidence.schema.json",
   "title": "ABC Textbook Learning Record E2E Evidence",
+  "$comment": "Structural constraints are defined here; cross-field and collection invariants are enforced by the canonical Zod runtime validator.",
   "$defs": {
     "__schema0": {
       "type": "string",

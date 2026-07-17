@@ -13,6 +13,7 @@ import {
   deterministicTopologicalOrder,
 } from '../../src/lib/validation/validate.js';
 import {
+  calculateContentWorkManifestScopeDigest,
   createContentWorkManifest,
   validateContentWorkManifest,
   WorkManifestError,
@@ -127,12 +128,45 @@ describe('domain invariants', () => {
     ).toThrow(WorkManifestError);
 
     const created = createContentWorkManifest({ ...base, reviewUnits: [reviewUnit] });
+    const createdShape = created as {
+      readonly taskId: string;
+      readonly requiredRequirementIds: readonly string[];
+      readonly learningOutcomeIds: readonly string[];
+      readonly reviewUnits: readonly {
+        readonly reviewUnitId: string;
+        readonly changeKind: string;
+        readonly paths: readonly string[];
+        readonly itemIds: readonly string[];
+        readonly requirementIds: readonly string[];
+        readonly learningOutcomeIds: readonly string[];
+        readonly dependencyReviewUnitIds: readonly string[];
+        readonly checkIds: readonly string[];
+        readonly evidenceRoles: readonly string[];
+        readonly maintenanceBenefit: string | null;
+        readonly owner: string;
+      }[];
+    };
+    const trustedScope = {
+      taskId: createdShape.taskId,
+      requiredRequirementIds: createdShape.requiredRequirementIds,
+      learningOutcomeIds: createdShape.learningOutcomeIds,
+      reviewUnits: createdShape.reviewUnits,
+    };
     const staleScope = structuredClone(created) as Record<string, unknown>;
     const staleUnits = staleScope.reviewUnits as { itemIds: string[] }[];
     staleUnits[0]?.itemIds.push('silently-added-item');
     staleScope.digest = digestWithoutField(staleScope, 'digest');
     expect(() => {
       validateContentWorkManifest(staleScope);
+    }).toThrow(/WORK_MANIFEST_SCOPE_DIGEST_MISMATCH/u);
+
+    staleScope.scopeDigest = calculateContentWorkManifestScopeDigest({
+      ...trustedScope,
+      reviewUnits: staleScope.reviewUnits as typeof trustedScope.reviewUnits,
+    });
+    staleScope.digest = digestWithoutField(staleScope, 'digest');
+    expect(() => {
+      validateContentWorkManifest(staleScope, trustedScope);
     }).toThrow(/WORK_MANIFEST_SCOPE_DIGEST_MISMATCH/u);
 
     expect(() =>

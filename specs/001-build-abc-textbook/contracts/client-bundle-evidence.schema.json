@@ -86,6 +86,7 @@
   ],
   "$id": "https://abc-textbook.local/schemas/client-bundle-evidence.schema.json",
   "title": "ABC Textbook Client Bundle Evidence",
+  "$comment": "Structural constraints are defined here; cross-field and collection invariants are enforced by the canonical Zod runtime validator.",
   "$defs": {
     "__schema0": {
       "type": "string",

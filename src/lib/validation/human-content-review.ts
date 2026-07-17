@@ -66,12 +66,23 @@ interface HumanReviewShape {
 export interface TrustedReviewCheckInventory {
   readonly subjectDigest: string;
   readonly inventoryDigest: string;
+  /** Independently validated ContentWorkManifest scope. */
+  readonly workManifest: {
+    readonly learningOutcomeIds: readonly string[];
+    readonly reviewUnits: readonly {
+      readonly reviewUnitId: string;
+      readonly subjectPaths: readonly string[];
+      readonly learningOutcomeIds: readonly string[];
+      readonly owner: string;
+    }[];
+  };
   readonly applicableChecks: readonly {
     readonly checkId: string;
     readonly command: string;
   }[];
   readonly reviewItems: readonly {
     readonly reviewItemId: string;
+    readonly reviewUnitId: string;
     readonly kind: 'outcome_coverage' | 'non_automatable_claim' | 'non_automatable_example';
     readonly subjectPaths: readonly string[];
     readonly authorIds: readonly string[];
@@ -140,6 +151,46 @@ export const validateHumanContentReview = (
   const trustedItems = new Map(
     trustedInventory.reviewItems.map((item) => [item.reviewItemId, item] as const),
   );
+  const trustedManifestUnits = new Map(
+    trustedInventory.workManifest.reviewUnits.map((unit) => [unit.reviewUnitId, unit] as const),
+  );
+  const manifestOutcomeIds = [...new Set(trustedInventory.workManifest.learningOutcomeIds)];
+  const manifestPaths = [
+    ...new Set(trustedInventory.workManifest.reviewUnits.flatMap((unit) => unit.subjectPaths)),
+  ];
+  const manifestAuthorIds = [
+    ...new Set(trustedInventory.workManifest.reviewUnits.map((unit) => unit.owner)),
+  ];
+  const manifestPathOwners = new Map<string, string>();
+  const manifestOutcomeOwners = new Map<string, string>();
+  for (const unit of trustedInventory.workManifest.reviewUnits) {
+    for (const path of unit.subjectPaths) {
+      if (manifestPathOwners.has(path)) {
+        throw new HumanReviewError('WORK_MANIFEST_INVENTORY_INVALID', path);
+      }
+      manifestPathOwners.set(path, unit.reviewUnitId);
+    }
+    for (const outcomeId of unit.learningOutcomeIds) {
+      if (manifestOutcomeOwners.has(outcomeId)) {
+        throw new HumanReviewError('WORK_MANIFEST_INVENTORY_INVALID', outcomeId);
+      }
+      manifestOutcomeOwners.set(outcomeId, unit.reviewUnitId);
+    }
+  }
+  if (
+    manifestOutcomeIds.length !== trustedInventory.workManifest.learningOutcomeIds.length ||
+    trustedManifestUnits.size !== trustedInventory.workManifest.reviewUnits.length ||
+    trustedInventory.workManifest.reviewUnits.some(
+      (unit) =>
+        unit.learningOutcomeIds.some((outcomeId) => !manifestOutcomeIds.includes(outcomeId)) ||
+        unit.subjectPaths.some((path) => !manifestPaths.includes(path)),
+    )
+  ) {
+    throw new HumanReviewError(
+      'WORK_MANIFEST_INVENTORY_INVALID',
+      'Trusted work-manifest scope is not unique and complete.',
+    );
+  }
   const evidenceItemIds = evidence.reviewItems.map(({ reviewItemId }) => reviewItemId);
   if (
     trustedItems.size !== trustedInventory.reviewItems.length ||
@@ -198,19 +249,41 @@ export const validateHumanContentReview = (
       throw new HumanReviewError('UNRESOLVED_BLOCKING_FINDING', item.reviewerId);
     }
   }
-  const trustedOutcomeIds = [
+  const trustedItemPaths = [
+    ...new Set(trustedInventory.reviewItems.flatMap((item) => item.subjectPaths)),
+  ];
+  const trustedItemOutcomeIds = [
     ...new Set(trustedInventory.reviewItems.flatMap((item) => item.learningOutcomeIds)),
   ];
-  const trustedOutcomePaths = [
-    ...new Set(
-      trustedInventory.reviewItems
-        .filter((item) => item.learningOutcomeIds.length > 0)
-        .flatMap((item) => item.subjectPaths),
-    ),
-  ];
-  const trustedAuthorIds = [
+  const trustedItemAuthorIds = [
     ...new Set(trustedInventory.reviewItems.flatMap((item) => item.authorIds)),
   ];
+  const trustedItemUnitIds = new Set(trustedInventory.reviewItems.map((item) => item.reviewUnitId));
+  if (
+    !sameStringSet(trustedItemPaths, manifestPaths) ||
+    !sameStringSet(trustedItemOutcomeIds, manifestOutcomeIds) ||
+    !sameStringSet(trustedItemAuthorIds, manifestAuthorIds) ||
+    trustedInventory.workManifest.reviewUnits.some(
+      (unit) => !trustedItemUnitIds.has(unit.reviewUnitId),
+    ) ||
+    trustedInventory.reviewItems.some((item) => {
+      const unit = trustedManifestUnits.get(item.reviewUnitId);
+      return (
+        unit === undefined ||
+        item.subjectPaths.some((path) => !unit.subjectPaths.includes(path)) ||
+        item.learningOutcomeIds.some((outcomeId) => !unit.learningOutcomeIds.includes(outcomeId)) ||
+        !item.authorIds.includes(unit.owner)
+      );
+    })
+  ) {
+    throw new HumanReviewError(
+      'REVIEW_ITEM_INVENTORY_INVALID',
+      'Review items must cover the independently validated work-manifest scope.',
+    );
+  }
+  const trustedOutcomeIds = manifestOutcomeIds;
+  const trustedOutcomePaths = manifestPaths;
+  const trustedAuthorIds = manifestAuthorIds;
   const coverage = evidence.outcomeCoverageReview;
   if (
     !sameStringSet(coverage.learningOutcomeIds, trustedOutcomeIds) ||

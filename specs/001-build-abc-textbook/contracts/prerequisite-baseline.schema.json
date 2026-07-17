@@ -48,6 +48,7 @@
   "additionalProperties": false,
   "$id": "https://abc-textbook.local/schemas/prerequisite-baseline.schema.json",
   "title": "ABC Textbook Prerequisite Baseline",
+  "$comment": "Structural constraints are defined here; cross-field and collection invariants are enforced by the canonical Zod runtime validator.",
   "$defs": {
     "__schema0": {
       "type": "string",

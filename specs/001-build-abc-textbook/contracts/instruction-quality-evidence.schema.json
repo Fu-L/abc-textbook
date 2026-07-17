@@ -24,16 +24,16 @@
       "$ref": "#/$defs/__schema1"
     },
     "humanReviewEvidenceIds": {
-      "$ref": "#/$defs/__schema6"
-    },
-    "blockingFindingCount": {
       "$ref": "#/$defs/__schema7"
     },
-    "aggregatePassed": {
+    "blockingFindingCount": {
       "$ref": "#/$defs/__schema8"
     },
-    "generatedAt": {
+    "aggregatePassed": {
       "$ref": "#/$defs/__schema9"
+    },
+    "generatedAt": {
+      "$ref": "#/$defs/__schema10"
     }
   },
   "required": [
@@ -82,6 +82,7 @@
   ],
   "$id": "https://abc-textbook.local/schemas/instruction-quality-evidence.schema.json",
   "title": "ABC Textbook Instruction Quality Evidence",
+  "$comment": "Structural constraints are defined here; cross-field and collection invariants are enforced by the canonical Zod runtime validator.",
   "$defs": {
     "__schema0": {
       "type": "string",
@@ -93,96 +94,100 @@
     },
     "__schema2": {
       "type": "integer",
-      "minimum": 0,
+      "exclusiveMinimum": 0,
       "maximum": 9007199254740991
     },
     "__schema3": {
       "type": "integer",
-      "minimum": 0,
+      "exclusiveMinimum": 0,
       "maximum": 9007199254740991
     },
     "__schema4": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "itemId": {
-            "$ref": "#/$defs/__schema5"
-          },
-          "category": {
-            "type": "string",
-            "enum": [
-              "textbook",
-              "explanation",
-              "exercise",
-              "answer",
-              "ui",
-              "cli",
-              "operations"
-            ]
-          },
-          "path": {
-            "$ref": "#/$defs/__schema5"
-          },
-          "contentDigest": {
-            "$ref": "#/$defs/__schema1"
-          },
-          "learningOutcomeIds": {
-            "type": "array",
-            "items": {
-              "$ref": "#/$defs/__schema5"
-            }
-          },
-          "automatedPassed": {
-            "type": "boolean"
-          },
-          "requiresHumanReview": {
-            "type": "boolean"
-          },
-          "humanReviewItemId": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "required": [
-          "itemId",
-          "category",
-          "path",
-          "contentDigest",
-          "learningOutcomeIds",
-          "automatedPassed",
-          "requiresHumanReview",
-          "humanReviewItemId"
-        ],
-        "additionalProperties": false
-      }
-    },
-    "__schema5": {
-      "type": "string",
-      "minLength": 1
-    },
-    "__schema6": {
+      "minItems": 1,
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema5"
+      }
+    },
+    "__schema5": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "$ref": "#/$defs/__schema6"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "textbook",
+            "explanation",
+            "exercise",
+            "answer",
+            "ui",
+            "cli",
+            "operations"
+          ]
+        },
+        "path": {
+          "$ref": "#/$defs/__schema6"
+        },
+        "contentDigest": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "learningOutcomeIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema6"
+          }
+        },
+        "automatedPassed": {
+          "type": "boolean"
+        },
+        "requiresHumanReview": {
+          "type": "boolean"
+        },
+        "humanReviewItemId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "itemId",
+        "category",
+        "path",
+        "contentDigest",
+        "learningOutcomeIds",
+        "automatedPassed",
+        "requiresHumanReview",
+        "humanReviewItemId"
+      ],
+      "additionalProperties": false
+    },
+    "__schema6": {
+      "type": "string",
+      "minLength": 1
+    },
+    "__schema7": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema6"
       },
       "uniqueItems": true
     },
-    "__schema7": {
+    "__schema8": {
       "type": "integer",
       "minimum": 0,
       "maximum": 9007199254740991
     },
-    "__schema8": {
+    "__schema9": {
       "type": "boolean"
     },
-    "__schema9": {
+    "__schema10": {
       "type": "string",
       "format": "date-time",
       "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"

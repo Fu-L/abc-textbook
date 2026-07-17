@@ -14,10 +14,22 @@ const sha = (character: string): string => character.repeat(64);
 const trustedInventory = {
   subjectDigest: sha('a'),
   inventoryDigest: sha('c'),
+  workManifest: {
+    learningOutcomeIds: [],
+    reviewUnits: [
+      {
+        reviewUnitId: 'RU-T024-foundation',
+        subjectPaths: ['src/content/docs/index.md'],
+        learningOutcomeIds: [],
+        owner: 'person-author',
+      },
+    ],
+  },
   applicableChecks: [{ checkId: 'check-contracts', command: 'npm run test:contract' }],
   reviewItems: [
     {
       reviewItemId: 'human-review-item-claim-one',
+      reviewUnitId: 'RU-T024-foundation',
       kind: 'non_automatable_claim',
       subjectPaths: ['src/content/docs/index.md'],
       authorIds: ['person-author'],
@@ -322,5 +334,28 @@ describe('human content review gate', () => {
         ],
       });
     }).toThrow(/MERGE_CHECK_INVENTORY_INVALID/u);
+
+    const trustedWithManifestOutcome = {
+      ...trustedInventory,
+      workManifest: {
+        ...trustedInventory.workManifest,
+        learningOutcomeIds: ['outcome-one'],
+        reviewUnits: [
+          {
+            ...trustedInventory.workManifest.reviewUnits[0],
+            learningOutcomeIds: ['outcome-one'],
+          },
+        ],
+      },
+      reviewItems: [
+        {
+          ...trustedInventory.reviewItems[0],
+          learningOutcomeIds: ['outcome-one'],
+        },
+      ],
+    } as const;
+    expect(() => {
+      validateHumanContentReview(makeEvidence(), trustedWithManifestOutcome);
+    }).toThrow(/REVIEW_ITEM_INVENTORY_INVALID/u);
   });
 });

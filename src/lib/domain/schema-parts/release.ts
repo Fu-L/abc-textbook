@@ -6,6 +6,7 @@ import {
   ContestIdSchema,
   EntityIdSchema,
   OffsetDateTimeSchema,
+  ProblemIdSchema,
   ProblemLabelSchema,
   SafePathSchema,
   Sha256Schema,
@@ -102,6 +103,8 @@ export const PublicationUpdateSchema = strictObject({
   contestId: ContestIdSchema.nullable(),
   sourceSetFingerprint: Sha256Schema,
   advancedSlotLabels: uniqueArray(ProblemLabelSchema),
+  /** The immutable set of Problems whose content or taxonomy is affected by this update. */
+  targetProblemIds: uniqueArray(ProblemIdSchema),
   operations: z.array(PublicationOperationSchema),
   authoringResults: z.array(PublicationAuthoringResultSchema),
   correctionImpactIds: uniqueIds,
@@ -113,28 +116,45 @@ export const PublicationUpdateSchema = strictObject({
 })
   .superRefine((update, context) => {
     const operationProblemIds = update.operations
-      .filter((operation) => operation.entityType === 'problem' && operation.action !== 'remove')
+      .filter((operation) => operation.entityType === 'problem')
       .map(({ entityId }) => entityId);
+    const targetProblemIds = [...update.targetProblemIds].sort();
     const contestId = update.contestId;
     const contestProblemIds =
       update.kind === 'contest_addition' && contestId !== null
         ? update.advancedSlotLabels.map((label) => stableProblemId(contestId, label))
         : [];
+    const sameIdSet = (left: readonly string[], right: readonly string[]): boolean => {
+      const leftSorted = [...left].sort();
+      const rightSorted = [...right].sort();
+      return (
+        leftSorted.length === rightSorted.length &&
+        leftSorted.every((problemId, index) => problemId === rightSorted[index])
+      );
+    };
     if (
       update.kind === 'contest_addition' &&
-      (operationProblemIds.length !== contestProblemIds.length ||
-        new Set(operationProblemIds).size !== operationProblemIds.length ||
-        [...operationProblemIds]
-          .sort()
-          .some((problemId, index) => problemId !== [...contestProblemIds].sort()[index]))
+      (targetProblemIds.length !== contestProblemIds.length ||
+        !sameIdSet(targetProblemIds, contestProblemIds) ||
+        !sameIdSet(operationProblemIds, targetProblemIds))
     ) {
       context.addIssue({
         code: 'custom',
-        path: ['operations'],
-        message: 'Contest problem operations must exactly match advanced slot labels.',
+        path: ['targetProblemIds'],
+        message: 'Contest targets must exactly match advanced slot labels.',
       });
     }
-    const targetProblemIds = [...new Set([...operationProblemIds, ...contestProblemIds])].sort();
+    const targetSet = new Set(targetProblemIds);
+    if (
+      new Set(operationProblemIds).size !== operationProblemIds.length ||
+      operationProblemIds.some((problemId) => !targetSet.has(problemId))
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['targetProblemIds'],
+        message: 'Every Problem operation must be included in targetProblemIds.',
+      });
+    }
     const authoringIds = update.authoringResults.map(({ problemId }) => problemId);
     const validationIds = update.validationSummary.problemResults.map(({ problemId }) => problemId);
     const sameTargets = (ids: readonly string[]): boolean =>

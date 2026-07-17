@@ -10,6 +10,7 @@
   ],
   "$id": "https://abc-textbook.local/schemas/user-timing-evidence.schema.json",
   "title": "ABC Textbook Sole User Timing Evidence",
+  "$comment": "Structural constraints are defined here; cross-field and collection invariants are enforced by the canonical Zod runtime validator.",
   "$defs": {
     "__schema0": {
       "type": "object",

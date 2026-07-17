@@ -1,4 +1,4 @@
-import { canonicalDigest, digestWithoutField } from '../domain/canonical-json.js';
+import { canonicalDigest, canonicalJson, digestWithoutField } from '../domain/canonical-json.js';
 import { ContentWorkManifestSchema } from '../domain/schema-parts/review-evidence.js';
 import { deterministicTopologicalOrder } from './validate.js';
 
@@ -24,7 +24,7 @@ export interface WorkManifestReviewUnitInput {
   readonly ownerId: string;
 }
 
-interface ManifestReviewUnit {
+export interface ManifestReviewUnit {
   readonly reviewUnitId: string;
   readonly changeKind: string;
   readonly paths: readonly string[];
@@ -38,14 +38,22 @@ interface ManifestReviewUnit {
   readonly owner: string;
 }
 
-const sortedUnique = (values: readonly string[]): string[] => [...values].sort();
-
-const scopeProjection = (input: {
+/**
+ * Trusted scope captured before implementation starts.  A manifest's own
+ * scopeDigest proves internal consistency, but it cannot prove that a caller
+ * has not replaced both the scope and its digest.  Validators that cross a
+ * trust boundary should pass this independently captured projection.
+ */
+export interface ContentWorkManifestScope {
   readonly taskId: string;
   readonly requiredRequirementIds: readonly string[];
   readonly learningOutcomeIds: readonly string[];
   readonly reviewUnits: readonly ManifestReviewUnit[];
-}): Readonly<Record<string, unknown>> => ({
+}
+
+const sortedUnique = (values: readonly string[]): string[] => [...values].sort();
+
+const scopeProjection = (input: ContentWorkManifestScope): Readonly<Record<string, unknown>> => ({
   taskId: input.taskId,
   requiredRequirementIds: sortedUnique(input.requiredRequirementIds),
   learningOutcomeIds: sortedUnique(input.learningOutcomeIds),
@@ -66,6 +74,9 @@ const scopeProjection = (input: {
     .sort((left, right) => left.reviewUnitId.localeCompare(right.reviewUnitId)),
 });
 
+export const calculateContentWorkManifestScopeDigest = (scope: ContentWorkManifestScope): string =>
+  canonicalDigest(scopeProjection(scope));
+
 export const createContentWorkManifest = (input: {
   readonly manifestId: string;
   readonly taskId: string;
@@ -83,7 +94,7 @@ export const createContentWorkManifest = (input: {
         ? 'The declared review units change observable learning outcomes.'
         : 'The change is infrastructure-only and does not alter learner-visible outcomes.',
   };
-  const scope = {
+  const scope: ContentWorkManifestScope = {
     taskId: input.taskId,
     requiredRequirementIds: [...input.requiredRequirementIds].sort(),
     learningOutcomeIds: [...input.learningOutcomeIds].sort(),
@@ -113,7 +124,7 @@ export const createContentWorkManifest = (input: {
     schemaVersion: '1.0.0',
     manifestId: input.manifestId,
     taskId: input.taskId,
-    scopeDigest: canonicalDigest(scopeProjection(scope)),
+    scopeDigest: calculateContentWorkManifestScopeDigest(scope),
     digest: '',
     changeKind: input.changeKind,
     requiredRequirementIds: scope.requiredRequirementIds,
@@ -126,11 +137,14 @@ export const createContentWorkManifest = (input: {
     updatedAt: input.createdAt,
   };
   manifest.digest = digestWithoutField(manifest, 'digest');
-  validateContentWorkManifest(manifest);
+  validateContentWorkManifest(manifest, scope);
   return Object.freeze(manifest);
 };
 
-export const validateContentWorkManifest = (value: unknown): void => {
+export const validateContentWorkManifest = (
+  value: unknown,
+  trustedScope?: ContentWorkManifestScope,
+): void => {
   const parsed = ContentWorkManifestSchema.safeParse(value);
   if (!parsed.success) {
     throw new WorkManifestError('WORK_MANIFEST_SCHEMA_INVALID', parsed.error.message);
@@ -159,7 +173,14 @@ export const validateContentWorkManifest = (value: unknown): void => {
   if (digestWithoutField(value as Record<string, unknown>, 'digest') !== manifest.digest) {
     throw new WorkManifestError('WORK_MANIFEST_DIGEST_MISMATCH', 'Manifest digest is stale.');
   }
-  if (canonicalDigest(scopeProjection(manifest)) !== manifest.scopeDigest) {
+  const manifestScope = scopeProjection(manifest);
+  const expectedScope = trustedScope ? scopeProjection(trustedScope) : manifestScope;
+  if (
+    calculateContentWorkManifestScopeDigest(manifest) !== manifest.scopeDigest ||
+    (trustedScope !== undefined &&
+      (manifest.scopeDigest !== canonicalDigest(expectedScope) ||
+        canonicalJson(manifestScope) !== canonicalJson(expectedScope)))
+  ) {
     throw new WorkManifestError('WORK_MANIFEST_SCOPE_DIGEST_MISMATCH', 'Manifest scope is stale.');
   }
 

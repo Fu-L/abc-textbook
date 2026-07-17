@@ -27,6 +27,7 @@ const makePublicationUpdate = (): Record<string, unknown> => ({
   contestId: null,
   sourceSetFingerprint: sha('1'),
   advancedSlotLabels: ['E'],
+  targetProblemIds: ['abc212-x45'],
   operations: [
     {
       operationId: 'operation-add-abc212-x45',
@@ -311,5 +312,31 @@ describe('release state gate', () => {
     expect(() => {
       validateReleaseCandidate(makeReleaseCandidate());
     }).toThrow(/RELEASE_TRUSTED_INVENTORY_REQUIRED/u);
+  });
+
+  it('uses explicit target Problem IDs for correction operations', () => {
+    const correction = makePublicationUpdate();
+    correction.kind = 'correction';
+    correction.advancedSlotLabels = [];
+    correction.operations = [
+      {
+        operationId: 'operation-replace-explanation',
+        entityType: 'explanation',
+        entityId: 'explanation-abc212-x45',
+        action: 'replace',
+        path: 'src/content/docs/abc212-e.md',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+      },
+    ];
+    expect(() => {
+      validatePublicationUpdate(correction);
+    }).not.toThrow();
+
+    const wrongTarget = makePublicationUpdate();
+    wrongTarget.targetProblemIds = ['abc212-other'];
+    expect(() => {
+      validatePublicationUpdate(wrongTarget);
+    }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
   });
 });

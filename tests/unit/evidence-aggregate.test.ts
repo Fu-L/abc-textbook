@@ -9,6 +9,7 @@ import {
   FilesystemPublishEvidenceSchema,
   InstructionQualityEvidenceSchema,
 } from '../../src/lib/domain/schema-parts/verification-evidence.js';
+import { validateInstructionQualityEvidence } from '../../src/lib/validation/instruction-quality.js';
 
 const sha = (character: string): string => character.repeat(64);
 const at = '2026-07-17T12:00:00+09:00';
@@ -139,5 +140,63 @@ describe('fail-closed evidence aggregates', () => {
       generatedAt: at,
     };
     expect(InstructionQualityEvidenceSchema.safeParse(evidence).success).toBe(false);
+  });
+
+  it('binds instruction quality evidence to a trusted non-empty inventory', () => {
+    const trustedInventory = {
+      releaseDigest: sha('a'),
+      inventoryDigest: sha('b'),
+      items: [
+        {
+          itemId: 'item-one',
+          category: 'textbook' as const,
+          path: 'src/content/docs/one.md',
+          contentDigest: sha('c'),
+          learningOutcomeIds: ['outcome-one'],
+          requiresHumanReview: true,
+          humanReviewItemId: 'human-review-item-one',
+        },
+      ],
+      humanReviewEvidence: [
+        {
+          evidenceId: 'human-content-review-one',
+          reviewItemIds: ['human-review-item-one'],
+          aggregatePassed: true as const,
+        },
+      ],
+    };
+    const evidence = {
+      schemaVersion: '2.0.0',
+      releaseDigest: sha('a'),
+      inventoryDigest: sha('b'),
+      inventoryCount: 1,
+      checkedCount: 1,
+      items: [
+        {
+          itemId: 'item-one',
+          category: 'textbook',
+          path: 'src/content/docs/one.md',
+          contentDigest: sha('c'),
+          learningOutcomeIds: ['outcome-one'],
+          automatedPassed: true,
+          requiresHumanReview: true,
+          humanReviewItemId: 'human-review-item-one',
+        },
+      ],
+      automatedResultDigest: sha('d'),
+      humanReviewEvidenceIds: ['human-content-review-one'],
+      blockingFindingCount: 0,
+      aggregatePassed: true,
+      generatedAt: at,
+    };
+    expect(() => {
+      validateInstructionQualityEvidence(evidence, trustedInventory);
+    }).not.toThrow();
+
+    const emptySelfDeclared = { ...evidence, inventoryCount: 0, checkedCount: 0, items: [] };
+    expect(InstructionQualityEvidenceSchema.safeParse(emptySelfDeclared).success).toBe(false);
+    expect(() => {
+      validateInstructionQualityEvidence(emptySelfDeclared, trustedInventory);
+    }).toThrow(/INSTRUCTION_QUALITY_SCHEMA_INVALID/u);
   });
 });
