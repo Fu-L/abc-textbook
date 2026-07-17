@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+.astro/
+coverage/
+playwright-report/
+test-results/
+blob-report/
+package-lock.json
+*.min.js
+.agents/
+.specify/
+specs/
+prompt.md

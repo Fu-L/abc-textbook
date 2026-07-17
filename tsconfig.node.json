@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2024"],
+    "types": ["node", "astro/client"],
+    "allowJs": true,
+    "checkJs": true
+  },
+  "include": [
+    ".astro/content.d.ts",
+    "scripts/**/*.ts",
+    "astro.config.mjs",
+    "eslint.config.js",
+    "playwright.config.ts",
+    "prettier.config.mjs",
+    "vitest.config.ts"
+  ],
+  "exclude": ["dist", "build", "coverage", "node_modules"]
+}

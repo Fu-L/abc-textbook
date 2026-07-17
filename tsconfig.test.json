@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2024"],
+    "types": ["node", "vitest/globals"]
+  },
+  "include": [
+    "tests/contract/**/*.ts",
+    "tests/integration/**/*.ts",
+    "tests/performance/**/*.ts",
+    "tests/setup/**/*.ts",
+    "tests/unit/**/*.ts"
+  ],
+  "exclude": ["dist", "build", "coverage", "node_modules"]
+}
