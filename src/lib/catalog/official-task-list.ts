@@ -36,15 +36,40 @@ export const parseOfficialTaskList = (input: OfficialTaskListInput): ParsedOffic
   if (url.protocol !== 'https:' || url.hostname !== 'atcoder.jp') {
     throw new OfficialTaskListError('UNTRUSTED_OFFICIAL_URL', input.officialTaskListUrl);
   }
+  const expectedTaskListPath = `/contests/${input.contestId}/tasks`;
+  if (url.pathname.replace(/\/$/u, '') !== expectedTaskListPath) {
+    throw new OfficialTaskListError('CONTEST_URL_MISMATCH', input.officialTaskListUrl);
+  }
 
   const $ = load(input.html);
   const labels: string[] = [];
-  $('a[href*="/tasks/"]').each((_index, element) => {
-    const label = $(element).text().normalize('NFC').trim();
-    if (label.length > 0 && !labels.includes(label)) labels.push(label);
-    else if (label.length > 0) {
+  $('tr').each((_index, row) => {
+    const labelAnchor = $(row).find('td').first().find('a[href]').first();
+    if (labelAnchor.length === 0) return;
+
+    const href = labelAnchor.attr('href');
+    if (!href) return;
+    const taskUrl = new URL(href, url);
+    const match = /^\/contests\/(?<contestId>abc[0-9]{3,})\/tasks\/(?<taskId>[a-z0-9_]+)$/u.exec(
+      taskUrl.pathname,
+    );
+    if (!match?.groups) return;
+    if (
+      taskUrl.hostname !== 'atcoder.jp' ||
+      match.groups.contestId !== input.contestId ||
+      !match.groups.taskId?.startsWith(`${input.contestId}_`)
+    ) {
+      throw new OfficialTaskListError('TASK_LINK_CONTEST_MISMATCH', href);
+    }
+
+    const label = labelAnchor.text().normalize('NFC').trim();
+    if (!/^[A-Za-z][A-Za-z0-9+_-]*$/u.test(label)) {
+      throw new OfficialTaskListError('INVALID_TASK_LABEL', label);
+    }
+    if (labels.includes(label)) {
       throw new OfficialTaskListError('DUPLICATE_TASK_LABEL', label);
     }
+    labels.push(label);
   });
 
   if (labels.length === 0) {

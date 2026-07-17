@@ -7,32 +7,51 @@
   "skills": [
     {
       "id": "skill-programming-basics",
-      "observableStatement": "C++または同等の言語で、分岐・反復・関数・配列を用いたプログラムを実装できる。",
-      "verificationMethod": "ABC D相当の問題を制約内で実装し、サンプルと追加ケースを通す。"
+      "observableStatement": "競技プログラミング用言語で、標準入出力・条件分岐・反復・関数を用いたプログラムを実装できる。",
+      "verificationMethod": "小規模な入力処理を関数へ分け、分岐と反復を含むプログラムを実行する。"
+    },
+    {
+      "id": "skill-basic-data-handling",
+      "observableStatement": "整数、文字列、配列、連想配列、集合を要件に応じて選び、走査・更新・集計・並べ替えができる。",
+      "verificationMethod": "重複を含む入力を集計し、連想配列または集合を選んだ理由と主要操作の計算量を説明する。"
     },
     {
       "id": "skill-complexity-basics",
-      "observableStatement": "入力上限から必要な時間計算量と空間計算量の目安を説明できる。",
-      "verificationMethod": "実装の主要操作を数え、Big-O記法と制約の整合を説明する。"
+      "observableStatement": "入力上限から全探索、線形走査、二分探索の時間計算量と空間計算量を見積もれる。",
+      "verificationMethod": "3種類の候補実装の主要操作を数え、Big-O記法と制約の整合を説明する。"
+    },
+    {
+      "id": "skill-prefix-greedy-elementary-dp",
+      "observableStatement": "累積和、基本的な貪欲法、一次元の初歩的な動的計画法を説明して実装できる。",
+      "verificationMethod": "各手法を用いる小規模な問題で状態または選択根拠を説明し、境界を含む実装を通す。"
+    },
+    {
+      "id": "skill-basic-dfs-bfs",
+      "observableStatement": "木、重みなしグラフ、グリッドに対する深さ優先探索と幅優先探索を実装できる。",
+      "verificationMethod": "訪問済み管理を含むDFSとBFSを実装し、連結でない入力と最短手数を確認する。"
+    },
+    {
+      "id": "skill-elementary-number-theory-testing",
+      "observableStatement": "剰余、最大公約数、初歩的な素因数分解を扱い、境界値を含むテストで誤りを切り分けられる。",
+      "verificationMethod": "0、1、素数、合成数、最大入力付近を含むテストを作り、失敗原因を説明する。"
     },
     {
       "id": "skill-proof-basics",
       "observableStatement": "不変条件、場合分け、帰納法のいずれかを使って解法の正しさを説明できる。",
       "verificationMethod": "選んだ解法について前提、主張、根拠を分けた短い証明を書く。"
-    },
-    {
-      "id": "skill-standard-library",
-      "observableStatement": "標準的なコンテナ、ソート、二分探索を適切に選択して利用できる。",
-      "verificationMethod": "操作要件からデータ構造または標準アルゴリズムを選び、計算量を示す。"
     }
   ],
   "excludedSkills": [
     {
-      "name": "個別の高度アルゴリズム",
-      "rationale": "グラフ、動的計画法、高度なデータ構造などは各LearningUnitで追加前提として明示する。"
+      "name": "高度なデータ構造・発展グラフ算法・高度な動的計画法",
+      "rationale": "初歩的な一次元DPと木・重みなしグラフ・グリッドのDFS/BFSまでは共通前提とし、それを超える手法は各LearningUnitの追加前提として明示する。"
+    },
+    {
+      "name": "FFT・発展的組合せ論・数論・問題固有の定理",
+      "rationale": "共通前提には含めず、必要な場合だけ教材内の先行LearningUnitとして明示する。"
     }
   ],
   "sourceRevisionIds": ["source-constitution-1-0-0", "source-spec-001-v1"],
   "checkedAt": "2026-07-17T12:00:00+09:00",
-  "digest": "2c1cbd830d2083db4740ba426400e488f41b2d5a9fde3e5d7b7f5aaf4baf1431"
+  "digest": "4c2e15149207ee9a9d785dcb67df83daf4decdf3c40673eaf92636575b09b6e5"
 }

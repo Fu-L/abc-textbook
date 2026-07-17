@@ -1,10 +1,65 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://abc-textbook.local/schemas/catalog.schema.json",
-  "title": "ABC Textbook Catalog",
-  "description": "ABC212以降の各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。",
   "type": "object",
-  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "release": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "advancedSlotRegistry": {
+      "$ref": "#/$defs/__schema11"
+    },
+    "contests": {
+      "$ref": "#/$defs/__schema17"
+    },
+    "contestSlots": {
+      "$ref": "#/$defs/__schema18"
+    },
+    "problems": {
+      "$ref": "#/$defs/__schema19"
+    },
+    "techniqueInventory": {
+      "$ref": "#/$defs/__schema20"
+    },
+    "tags": {
+      "$ref": "#/$defs/__schema21"
+    },
+    "learningOutcomes": {
+      "$ref": "#/$defs/__schema22"
+    },
+    "learningUnits": {
+      "$ref": "#/$defs/__schema23"
+    },
+    "placements": {
+      "$ref": "#/$defs/__schema24"
+    },
+    "explanations": {
+      "$ref": "#/$defs/__schema25"
+    },
+    "sources": {
+      "$ref": "#/$defs/__schema39"
+    },
+    "correctionImpacts": {
+      "$ref": "#/$defs/__schema40"
+    },
+    "claims": {
+      "$ref": "#/$defs/__schema41"
+    },
+    "examples": {
+      "$ref": "#/$defs/__schema42"
+    },
+    "exercises": {
+      "$ref": "#/$defs/__schema46"
+    },
+    "assessments": {
+      "$ref": "#/$defs/__schema47"
+    },
+    "answerMaterials": {
+      "$ref": "#/$defs/__schema48"
+    }
+  },
   "required": [
     "schemaVersion",
     "release",
@@ -26,422 +81,1527 @@
     "assessments",
     "answerMaterials"
   ],
-  "properties": {
-    "schemaVersion": { "const": "2.0.0" },
-    "release": { "$ref": "#/$defs/release" },
-    "advancedSlotRegistry": { "$ref": "#/$defs/advancedSlotRegistry" },
-    "contests": { "type": "array", "items": { "$ref": "#/$defs/contest" } },
-    "contestSlots": { "type": "array", "items": { "$ref": "#/$defs/contestSlot" } },
-    "problems": { "type": "array", "items": { "$ref": "#/$defs/problem" } },
-    "techniqueInventory": { "type": "array", "items": { "$ref": "#/$defs/techniqueInventoryItem" } },
-    "tags": { "type": "array", "items": { "$ref": "#/$defs/tag" } },
-    "learningOutcomes": { "type": "array", "items": { "$ref": "#/$defs/learningOutcome" } },
-    "learningUnits": { "type": "array", "items": { "$ref": "#/$defs/learningUnit" } },
-    "placements": { "type": "array", "items": { "$ref": "#/$defs/placement" } },
-    "explanations": { "type": "array", "items": { "$ref": "#/$defs/explanation" } },
-    "sources": { "type": "array", "items": { "$ref": "#/$defs/sourceRevision" } },
-    "correctionImpacts": { "type": "array", "items": { "$ref": "#/$defs/correctionImpact" } },
-    "claims": { "type": "array", "items": { "$ref": "#/$defs/claim" } },
-    "examples": { "type": "array", "items": { "$ref": "#/$defs/example" } },
-    "exercises": { "type": "array", "items": { "$ref": "#/$defs/exercise" } },
-    "assessments": { "type": "array", "items": { "$ref": "#/$defs/assessment" } },
-    "answerMaterials": { "type": "array", "items": { "$ref": "#/$defs/answerMaterial" } }
-  },
+  "additionalProperties": false,
+  "$id": "https://abc-textbook.local/schemas/catalog.schema.json",
+  "title": "ABC Textbook Catalog",
+  "description": "ABC212以降の各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。",
   "$defs": {
-    "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" },
-    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-    "dateTime": { "type": "string", "format": "date-time" },
-    "uri": { "type": "string", "format": "uri", "pattern": "^https://" },
-    "safePath": { "type": "string", "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//)[A-Za-z0-9._/-]+$" },
-    "releaseVersion": { "type": "string", "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}$" },
-    "problemLabel": {
+    "__schema0": {
       "type": "string",
-      "minLength": 1,
-      "maxLength": 16,
-      "pattern": "^[A-Za-z][A-Za-z0-9+_-]*$",
-      "description": "公式problem label。E/F/G/Hに限定しない。"
+      "const": "2.0.0"
     },
-    "release": {
+    "__schema1": {
       "type": "object",
-      "additionalProperties": false,
-      "required": ["version", "releaseKind", "cutoffAt", "validatedAt", "publicationEffectiveAt", "manifestDigest", "contentSnapshotDigest", "updateIds", "advancedSlotRegistryDigest", "firstContestId", "lastContestId", "contestCount", "problemCount", "slotRecordCount", "addedProblemIds", "changedProblemIds", "heldProblemIds", "withdrawnProblemIds", "taxonomyChanges", "validationSummary", "humanContentReviewEvidenceRefs", "changelogPath"],
       "properties": {
-        "version": { "$ref": "#/$defs/releaseVersion" },
-        "releaseKind": { "enum": ["initial", "incremental"] },
-        "cutoffAt": { "$ref": "#/$defs/dateTime" },
-        "validatedAt": { "$ref": "#/$defs/dateTime" },
-        "publicationEffectiveAt": { "$ref": "#/$defs/dateTime" },
-        "manifestDigest": { "$ref": "#/$defs/sha256" },
-        "contentSnapshotDigest": { "$ref": "#/$defs/sha256" },
-        "updateIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "advancedSlotRegistryDigest": { "$ref": "#/$defs/sha256" },
-        "firstContestId": { "type": "string", "pattern": "^abc[0-9]{3,}$" },
-        "lastContestId": { "type": "string", "pattern": "^abc[0-9]{3,}$" },
-        "contestCount": { "type": "integer", "minimum": 1 },
-        "problemCount": { "type": "integer", "minimum": 1 },
-        "slotRecordCount": { "type": "integer", "minimum": 1 },
-        "addedProblemIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "changedProblemIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "heldProblemIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "withdrawnProblemIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "taxonomyChanges": { "type": "array", "items": { "$ref": "#/$defs/taxonomyChange" } },
-        "validationSummary": { "$ref": "#/$defs/releaseValidationSummary" },
-        "humanContentReviewEvidenceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidenceRef" } },
-        "changelogPath": { "$ref": "#/$defs/safePath" }
+        "version": {
+          "type": "string",
+          "pattern": "^\\d{4}\\.\\d{2}\\.\\d{2}$"
+        },
+        "releaseKind": {
+          "type": "string",
+          "enum": [
+            "initial",
+            "incremental"
+          ]
+        },
+        "cutoffAt": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "validatedAt": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "publicationEffectiveAt": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "manifestDigest": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "contentSnapshotDigest": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "updateIds": {
+          "minItems": 1,
+          "$ref": "#/$defs/__schema5"
+        },
+        "advancedSlotRegistryDigest": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "firstContestId": {
+          "$ref": "#/$defs/__schema6"
+        },
+        "lastContestId": {
+          "$ref": "#/$defs/__schema6"
+        },
+        "contestCount": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "problemCount": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "slotRecordCount": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "addedProblemIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema7"
+          }
+        },
+        "changedProblemIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema7"
+          }
+        },
+        "heldProblemIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema7"
+          }
+        },
+        "withdrawnProblemIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema7"
+          }
+        },
+        "taxonomyChanges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "added",
+                  "renamed",
+                  "merged",
+                  "split",
+                  "deprecated"
+                ]
+              },
+              "entityId": {
+                "$ref": "#/$defs/__schema4"
+              },
+              "summary": {
+                "$ref": "#/$defs/__schema8"
+              }
+            },
+            "required": [
+              "kind",
+              "entityId",
+              "summary"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "validationSummary": {
+          "type": "object",
+          "properties": {
+            "checkCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "passedCheckCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "blockingFindingCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "evidenceDigests": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/__schema3"
+              }
+            }
+          },
+          "required": [
+            "checkCount",
+            "passedCheckCount",
+            "blockingFindingCount",
+            "evidenceDigests"
+          ],
+          "additionalProperties": false
+        },
+        "humanContentReviewEvidenceRefs": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema9"
+          }
+        },
+        "changelogPath": {
+          "$ref": "#/$defs/__schema10"
+        }
+      },
+      "required": [
+        "version",
+        "releaseKind",
+        "cutoffAt",
+        "validatedAt",
+        "publicationEffectiveAt",
+        "manifestDigest",
+        "contentSnapshotDigest",
+        "updateIds",
+        "advancedSlotRegistryDigest",
+        "firstContestId",
+        "lastContestId",
+        "contestCount",
+        "problemCount",
+        "slotRecordCount",
+        "addedProblemIds",
+        "changedProblemIds",
+        "heldProblemIds",
+        "withdrawnProblemIds",
+        "taxonomyChanges",
+        "validationSummary",
+        "humanContentReviewEvidenceRefs",
+        "changelogPath"
+      ],
+      "additionalProperties": false
+    },
+    "__schema2": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+    },
+    "__schema3": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "__schema4": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "__schema5": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema4"
       }
     },
-    "advancedSlotRegistry": {
+    "__schema6": {
+      "type": "string",
+      "pattern": "^abc[0-9]{3,}$"
+    },
+    "__schema7": {
+      "type": "string",
+      "pattern": "^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$"
+    },
+    "__schema8": {
+      "type": "string",
+      "minLength": 1
+    },
+    "__schema9": {
       "type": "object",
-      "additionalProperties": false,
-      "required": ["version", "labels", "firstSeenContestByLabel", "orderEvidenceSourceRevisionIds", "digest"],
       "properties": {
-        "version": { "type": "string", "minLength": 1 },
-        "labels": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/problemLabel" } },
+        "evidenceId": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "path": {
+          "$ref": "#/$defs/__schema10"
+        },
+        "digest": {
+          "$ref": "#/$defs/__schema3"
+        }
+      },
+      "required": [
+        "evidenceId",
+        "path",
+        "digest"
+      ],
+      "additionalProperties": false
+    },
+    "__schema10": {
+      "type": "string",
+      "pattern": "^(?!\\/)(?!.*(?:^|\\/)\\.\\.(?:\\/|$))(?!.*\\/\\/)[A-Za-z0-9._/-]+$"
+    },
+    "__schema11": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "$ref": "#/$defs/__schema12"
+        },
+        "labels": {
+          "$ref": "#/$defs/__schema13"
+        },
         "firstSeenContestByLabel": {
-          "type": "object",
-          "minProperties": 1,
-          "propertyNames": { "$ref": "#/$defs/problemLabel" },
-          "additionalProperties": { "type": "string", "pattern": "^abc[0-9]{3,}$" }
+          "$ref": "#/$defs/__schema15"
         },
-        "orderEvidenceSourceRevisionIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "digest": { "$ref": "#/$defs/sha256" }
-      }
-    },
-    "contest": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "number", "title", "startedAt", "endedAt", "officialUrl", "officialTaskOrder", "taskOrderSourceRevisionId", "checkedAt"],
-      "properties": {
-        "id": { "type": "string", "pattern": "^abc[0-9]{3,}$" },
-        "number": { "type": "integer", "minimum": 212 },
-        "title": { "type": "string", "minLength": 1 },
-        "startedAt": { "$ref": "#/$defs/dateTime" },
-        "endedAt": { "$ref": "#/$defs/dateTime" },
-        "officialUrl": { "$ref": "#/$defs/uri" },
-        "officialTaskOrder": { "type": "array", "minItems": 5, "uniqueItems": true, "items": { "$ref": "#/$defs/problemLabel" }, "contains": { "const": "D" } },
-        "taskOrderSourceRevisionId": { "$ref": "#/$defs/id" },
-        "checkedAt": { "$ref": "#/$defs/dateTime" }
-      }
-    },
-    "contestSlot": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["contestId", "label", "officialOrder", "availability", "catalogStatus", "holdReason", "problemId", "sourceRevisionId", "checkedAt"],
-      "properties": {
-        "contestId": { "type": "string", "pattern": "^abc[0-9]{3,}$" },
-        "label": { "$ref": "#/$defs/problemLabel" },
-        "officialOrder": { "type": ["integer", "null"], "minimum": 0 },
-        "availability": { "enum": ["exists", "official_absent", "unknown", "withdrawn"] },
-        "catalogStatus": { "enum": ["uncollected", "drafting", "on_hold", "published", "correction_pending"] },
-        "holdReason": { "type": ["string", "null"] },
-        "problemId": { "anyOf": [{ "$ref": "#/$defs/id" }, { "type": "null" }] },
-        "sourceRevisionId": { "$ref": "#/$defs/id" },
-        "checkedAt": { "$ref": "#/$defs/dateTime" }
-      }
-    },
-    "problem": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "contestId", "slotLabel", "title", "officialUrl", "constraintsSummary", "difficultyEvidence", "sourceRevisionIds", "checkedAt", "publicationStatus", "primaryTagIds", "secondaryTagIds", "adHocElements", "placementId", "explanationId"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "contestId": { "type": "string", "pattern": "^abc[0-9]{3,}$" },
-        "slotLabel": { "$ref": "#/$defs/problemLabel" },
-        "title": { "type": "string", "minLength": 1 },
-        "officialUrl": { "$ref": "#/$defs/uri" },
-        "constraintsSummary": { "type": "string", "minLength": 1 },
-        "difficultyEvidence": { "type": "string", "minLength": 1 },
-        "sourceRevisionIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "checkedAt": { "$ref": "#/$defs/dateTime" },
-        "publicationStatus": { "enum": ["draft", "on_hold", "published", "correction_pending", "withdrawn"] },
-        "primaryTagIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "secondaryTagIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "adHocElements": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "placementId": { "$ref": "#/$defs/id" },
-        "explanationId": { "$ref": "#/$defs/id" }
-      }
-    },
-    "techniqueInventoryItem": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["problemId", "sourceRevisionIds", "coreMethod", "proofIdeas", "asymptoticComplexity", "prerequisiteCandidates", "implementationConcerns", "outcomeCandidates", "adHocElements", "authorId", "reviewStatus"],
-      "properties": {
-        "problemId": { "$ref": "#/$defs/id" },
-        "sourceRevisionIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "coreMethod": { "type": "string", "minLength": 1 },
-        "proofIdeas": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
-        "asymptoticComplexity": { "type": "string", "minLength": 1 },
-        "prerequisiteCandidates": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "implementationConcerns": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "outcomeCandidates": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
-        "adHocElements": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "authorId": { "$ref": "#/$defs/id" },
-        "reviewStatus": { "enum": ["draft", "reviewed", "changes_requested"] }
-      }
-    },
-    "tag": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "name", "definition", "parentId", "prerequisiteTagIds", "learningOutcomeIds", "representativeProblemIds", "aliases", "formerNames", "lifecycle", "replacementTagIds"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "name": { "type": "string", "minLength": 1 },
-        "definition": { "type": "string", "minLength": 1 },
-        "parentId": { "anyOf": [{ "$ref": "#/$defs/id" }, { "type": "null" }] },
-        "prerequisiteTagIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "learningOutcomeIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "representativeProblemIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "aliases": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
-        "formerNames": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
-        "lifecycle": { "enum": ["active", "deprecated"] },
-        "replacementTagIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }
-      }
-    },
-    "learningOutcome": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "statement", "prerequisiteOutcomeIds", "scopeIds", "assessmentIds"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "statement": { "type": "string", "minLength": 1 },
-        "prerequisiteOutcomeIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "scopeIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "assessmentIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }
-      }
-    },
-    "learningUnit": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "kind", "title", "parentId", "baselineId", "baselineVersion", "additionalPrerequisiteUnitIds", "excludedTopics", "tagIds", "learningOutcomeIds", "docPath", "exampleIds", "problemIds", "assessmentIds", "stageRank", "difficultyRank", "representativeRank", "globalIndex", "orderReason"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "kind": { "enum": ["chapter", "section", "subsection"] },
-        "title": { "type": "string", "minLength": 1 },
-        "parentId": { "anyOf": [{ "$ref": "#/$defs/id" }, { "type": "null" }] },
-        "baselineId": { "$ref": "#/$defs/id" },
-        "baselineVersion": { "type": "string", "minLength": 1 },
-        "additionalPrerequisiteUnitIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "excludedTopics": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "tagIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "learningOutcomeIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "docPath": { "type": "string", "pattern": "^src/content/docs/learn/" },
-        "exampleIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "problemIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "assessmentIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "stageRank": { "type": "integer", "minimum": 0 },
-        "difficultyRank": { "type": "integer", "minimum": 0 },
-        "representativeRank": { "type": "integer", "minimum": 0 },
-        "globalIndex": { "type": "integer", "minimum": 0 },
-        "orderReason": { "type": "string", "minLength": 1 }
-      }
-    },
-    "placement": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "problemId", "policyVersion", "kind", "primaryExplanationId", "sharedOutcomeIds", "comparison", "additionalElement", "rationale", "evidenceIds"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "problemId": { "$ref": "#/$defs/id" },
-        "policyVersion": { "type": "string", "minLength": 1 },
-        "kind": { "enum": ["full", "similar", "supplement"] },
-        "primaryExplanationId": { "anyOf": [{ "$ref": "#/$defs/id" }, { "type": "null" }] },
-        "sharedOutcomeIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "comparison": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["method", "proof", "complexity", "constraints", "prerequisites", "implementation"],
-          "properties": {
-            "method": { "type": "string" },
-            "proof": { "type": "string" },
-            "complexity": { "type": "string" },
-            "constraints": { "type": "string" },
-            "prerequisites": { "type": "string" },
-            "implementation": { "type": "string" }
-          }
+        "orderEvidenceSourceRevisionIds": {
+          "$ref": "#/$defs/__schema16"
         },
-        "additionalElement": { "type": ["string", "null"] },
-        "rationale": { "type": "string", "minLength": 1 },
-        "evidenceIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }
-      }
-    },
-    "explanation": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "problemId", "kind", "primaryExplanationId", "differenceSummary", "docPath", "learningOutcomeIds", "baselineId", "baselineVersion", "additionalPrerequisiteUnitIds", "excludedTopics", "tagIds", "sourceRevisionIds", "claimIds", "exampleIds", "skillName", "skillVersion", "skillDigest", "revision", "sections"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "problemId": { "$ref": "#/$defs/id" },
-        "kind": { "enum": ["full", "similar", "supplement"] },
-        "primaryExplanationId": { "anyOf": [{ "$ref": "#/$defs/id" }, { "type": "null" }] },
-        "differenceSummary": { "type": ["string", "null"] },
-        "docPath": { "type": "string", "pattern": "^src/content/docs/problems/" },
-        "learningOutcomeIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "baselineId": { "$ref": "#/$defs/id" },
-        "baselineVersion": { "type": "string", "minLength": 1 },
-        "additionalPrerequisiteUnitIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "excludedTopics": { "type": "array", "items": { "type": "string", "minLength": 1 } },
-        "tagIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "sourceRevisionIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "claimIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "exampleIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "skillName": { "const": "abc-explanation-author" },
-        "skillVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
-        "skillDigest": { "$ref": "#/$defs/sha256" },
-        "revision": { "type": "integer", "minimum": 1 },
-        "sections": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["reasoning", "techniqueAndAdHoc", "correctness", "complexityAndConstraints", "implementation", "verification", "reviewAdvice"],
-          "properties": {
-            "reasoning": { "type": "string", "minLength": 1 },
-            "techniqueAndAdHoc": { "type": "string", "minLength": 1 },
-            "correctness": { "type": "string", "minLength": 1 },
-            "complexityAndConstraints": { "type": "string", "minLength": 1 },
-            "implementation": { "type": "string", "minLength": 1 },
-            "verification": { "type": "string", "minLength": 1 },
-            "reviewAdvice": { "type": "string", "minLength": 1 }
-          }
+        "digest": {
+          "$ref": "#/$defs/__schema3"
         }
       },
-      "allOf": [
-        {
-          "if": { "properties": { "kind": { "const": "full" } }, "required": ["kind"] },
-          "then": { "properties": { "primaryExplanationId": { "type": "null" }, "differenceSummary": { "type": "null" } } },
-          "else": { "properties": { "primaryExplanationId": { "$ref": "#/$defs/id" }, "differenceSummary": { "type": "string", "minLength": 1 } } }
-        }
+      "required": [
+        "version",
+        "labels",
+        "firstSeenContestByLabel",
+        "orderEvidenceSourceRevisionIds",
+        "digest"
+      ],
+      "additionalProperties": false
+    },
+    "__schema12": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "__schema13": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema14"
+      },
+      "uniqueItems": true
+    },
+    "__schema14": {
+      "type": "string",
+      "maxLength": 16,
+      "pattern": "^[A-Za-z][A-Za-z0-9+_-]*$"
+    },
+    "__schema15": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/__schema14"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/__schema6"
+      }
+    },
+    "__schema16": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema4"
+      },
+      "uniqueItems": true
+    },
+    "__schema17": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema6"
+          },
+          "number": {
+            "type": "integer",
+            "minimum": 212,
+            "maximum": 9007199254740991
+          },
+          "title": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "startedAt": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "endedAt": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "officialUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "officialTaskOrder": {
+            "minItems": 5,
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema14"
+            },
+            "uniqueItems": true,
+            "contains": {
+              "const": "D"
+            }
+          },
+          "taskOrderSourceRevisionId": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "checkedAt": {
+            "$ref": "#/$defs/__schema2"
+          }
+        },
+        "required": [
+          "id",
+          "number",
+          "title",
+          "startedAt",
+          "endedAt",
+          "officialUrl",
+          "officialTaskOrder",
+          "taskOrderSourceRevisionId",
+          "checkedAt"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema18": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "contestId": {
+            "$ref": "#/$defs/__schema6"
+          },
+          "label": {
+            "$ref": "#/$defs/__schema14"
+          },
+          "officialOrder": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "availability": {
+            "type": "string",
+            "enum": [
+              "exists",
+              "official_absent",
+              "unknown",
+              "withdrawn"
+            ]
+          },
+          "catalogStatus": {
+            "type": "string",
+            "enum": [
+              "uncollected",
+              "drafting",
+              "on_hold",
+              "published",
+              "correction_pending"
+            ]
+          },
+          "holdReason": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/__schema8"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "problemId": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/__schema7"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sourceRevisionId": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "checkedAt": {
+            "$ref": "#/$defs/__schema2"
+          }
+        },
+        "required": [
+          "contestId",
+          "label",
+          "officialOrder",
+          "availability",
+          "catalogStatus",
+          "holdReason",
+          "problemId",
+          "sourceRevisionId",
+          "checkedAt"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema19": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema7"
+          },
+          "contestId": {
+            "$ref": "#/$defs/__schema6"
+          },
+          "slotLabel": {
+            "$ref": "#/$defs/__schema14"
+          },
+          "title": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "officialUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "constraintsSummary": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "difficultyEvidence": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "sourceRevisionIds": {
+            "minItems": 1,
+            "$ref": "#/$defs/__schema5"
+          },
+          "checkedAt": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "publicationStatus": {
+            "type": "string",
+            "enum": [
+              "uncollected",
+              "drafting",
+              "on_hold",
+              "published",
+              "correction_pending"
+            ]
+          },
+          "primaryTagIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "secondaryTagIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "adHocElements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema8"
+            }
+          },
+          "placementId": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/__schema4"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "explanationId": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/__schema4"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "contestId",
+          "slotLabel",
+          "title",
+          "officialUrl",
+          "constraintsSummary",
+          "difficultyEvidence",
+          "sourceRevisionIds",
+          "checkedAt",
+          "publicationStatus",
+          "primaryTagIds",
+          "secondaryTagIds",
+          "adHocElements",
+          "placementId",
+          "explanationId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema20": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "problemId": {
+            "$ref": "#/$defs/__schema7"
+          },
+          "sourceRevisionIds": {
+            "minItems": 1,
+            "$ref": "#/$defs/__schema5"
+          },
+          "coreMethod": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "proofIdeas": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema8"
+            }
+          },
+          "asymptoticComplexity": {
+            "type": "object",
+            "properties": {
+              "time": {
+                "$ref": "#/$defs/__schema8"
+              },
+              "space": {
+                "$ref": "#/$defs/__schema8"
+              }
+            },
+            "required": [
+              "time",
+              "space"
+            ],
+            "additionalProperties": false
+          },
+          "prerequisiteCandidates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema8"
+            }
+          },
+          "implementationConcerns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema8"
+            }
+          },
+          "outcomeCandidates": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema8"
+            }
+          },
+          "adHocElements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema8"
+            }
+          },
+          "authorId": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "reviewStatus": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "reviewed",
+              "changes_requested"
+            ]
+          }
+        },
+        "required": [
+          "problemId",
+          "sourceRevisionIds",
+          "coreMethod",
+          "proofIdeas",
+          "asymptoticComplexity",
+          "prerequisiteCandidates",
+          "implementationConcerns",
+          "outcomeCandidates",
+          "adHocElements",
+          "authorId",
+          "reviewStatus"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema21": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "name": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "definition": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "parentId": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/__schema4"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "prerequisiteTagIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "learningOutcomeIds": {
+            "minItems": 1,
+            "$ref": "#/$defs/__schema5"
+          },
+          "representativeProblemIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema7"
+            }
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema8"
+            }
+          },
+          "formerNames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema8"
+            }
+          },
+          "lifecycle": {
+            "type": "string",
+            "enum": [
+              "active",
+              "deprecated"
+            ]
+          },
+          "replacementTagIds": {
+            "$ref": "#/$defs/__schema5"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "definition",
+          "parentId",
+          "prerequisiteTagIds",
+          "learningOutcomeIds",
+          "representativeProblemIds",
+          "aliases",
+          "formerNames",
+          "lifecycle",
+          "replacementTagIds"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema22": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "statement": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "prerequisiteOutcomeIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "scopeIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "assessmentIds": {
+            "minItems": 1,
+            "$ref": "#/$defs/__schema5"
+          }
+        },
+        "required": [
+          "id",
+          "statement",
+          "prerequisiteOutcomeIds",
+          "scopeIds",
+          "assessmentIds"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema23": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "chapter",
+              "section",
+              "subsection"
+            ]
+          },
+          "title": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "parentId": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/__schema4"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "baselineId": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "baselineVersion": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "additionalPrerequisiteUnitIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "excludedTopics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema8"
+            }
+          },
+          "tagIds": {
+            "minItems": 1,
+            "$ref": "#/$defs/__schema5"
+          },
+          "learningOutcomeIds": {
+            "minItems": 1,
+            "$ref": "#/$defs/__schema5"
+          },
+          "docPath": {
+            "$ref": "#/$defs/__schema10"
+          },
+          "exampleIds": {
+            "minItems": 1,
+            "$ref": "#/$defs/__schema5"
+          },
+          "problemIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema7"
+            }
+          },
+          "assessmentIds": {
+            "minItems": 1,
+            "$ref": "#/$defs/__schema5"
+          },
+          "stageRank": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "difficultyRank": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "representativeRank": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "globalIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "orderReason": {
+            "$ref": "#/$defs/__schema8"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "parentId",
+          "baselineId",
+          "baselineVersion",
+          "additionalPrerequisiteUnitIds",
+          "excludedTopics",
+          "tagIds",
+          "learningOutcomeIds",
+          "docPath",
+          "exampleIds",
+          "problemIds",
+          "assessmentIds",
+          "stageRank",
+          "difficultyRank",
+          "representativeRank",
+          "globalIndex",
+          "orderReason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema24": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "problemId": {
+            "$ref": "#/$defs/__schema7"
+          },
+          "policyVersion": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "full",
+              "similar",
+              "supplement"
+            ]
+          },
+          "primaryExplanationId": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/__schema4"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sharedOutcomeIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "comparison": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "$ref": "#/$defs/__schema8"
+              },
+              "proof": {
+                "$ref": "#/$defs/__schema8"
+              },
+              "complexity": {
+                "$ref": "#/$defs/__schema8"
+              },
+              "constraints": {
+                "$ref": "#/$defs/__schema8"
+              },
+              "prerequisites": {
+                "$ref": "#/$defs/__schema8"
+              },
+              "implementation": {
+                "$ref": "#/$defs/__schema8"
+              }
+            },
+            "required": [
+              "method",
+              "proof",
+              "complexity",
+              "constraints",
+              "prerequisites",
+              "implementation"
+            ],
+            "additionalProperties": false
+          },
+          "additionalElement": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/__schema8"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rationale": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "evidenceIds": {
+            "minItems": 1,
+            "$ref": "#/$defs/__schema5"
+          }
+        },
+        "required": [
+          "id",
+          "problemId",
+          "policyVersion",
+          "kind",
+          "primaryExplanationId",
+          "sharedOutcomeIds",
+          "comparison",
+          "additionalElement",
+          "rationale",
+          "evidenceIds"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema25": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "problemId": {
+            "$ref": "#/$defs/__schema7"
+          },
+          "kind": {
+            "$ref": "#/$defs/__schema26"
+          },
+          "primaryExplanationId": {
+            "$ref": "#/$defs/__schema27"
+          },
+          "differenceSummary": {
+            "$ref": "#/$defs/__schema28"
+          },
+          "docPath": {
+            "$ref": "#/$defs/__schema10"
+          },
+          "learningOutcomeIds": {
+            "$ref": "#/$defs/__schema29"
+          },
+          "baselineId": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "baselineVersion": {
+            "$ref": "#/$defs/__schema30"
+          },
+          "additionalPrerequisiteUnitIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "excludedTopics": {
+            "$ref": "#/$defs/__schema31"
+          },
+          "tagIds": {
+            "$ref": "#/$defs/__schema32"
+          },
+          "sourceRevisionIds": {
+            "$ref": "#/$defs/__schema33"
+          },
+          "claimIds": {
+            "$ref": "#/$defs/__schema34"
+          },
+          "exampleIds": {
+            "$ref": "#/$defs/__schema35"
+          },
+          "skillName": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "skillVersion": {
+            "$ref": "#/$defs/__schema36"
+          },
+          "skillDigest": {
+            "$ref": "#/$defs/__schema3"
+          },
+          "revision": {
+            "$ref": "#/$defs/__schema37"
+          },
+          "sections": {
+            "$ref": "#/$defs/__schema38"
+          }
+        },
+        "required": [
+          "id",
+          "problemId",
+          "kind",
+          "primaryExplanationId",
+          "differenceSummary",
+          "docPath",
+          "learningOutcomeIds",
+          "baselineId",
+          "baselineVersion",
+          "additionalPrerequisiteUnitIds",
+          "excludedTopics",
+          "tagIds",
+          "sourceRevisionIds",
+          "claimIds",
+          "exampleIds",
+          "skillName",
+          "skillVersion",
+          "skillDigest",
+          "revision",
+          "sections"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "full"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "primaryExplanationId": {
+                  "type": "null"
+                },
+                "differenceSummary": {
+                  "type": "null"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "primaryExplanationId": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+                },
+                "differenceSummary": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "__schema26": {
+      "type": "string",
+      "enum": [
+        "full",
+        "similar",
+        "supplement"
       ]
     },
-    "sourceRevision": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "url", "sourceKind", "contestId", "checkedAt", "fingerprint", "termsCheckedAt"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "url": { "$ref": "#/$defs/uri" },
-        "sourceKind": { "enum": ["contest", "task_list", "task", "editorial", "rules", "terms"] },
-        "contestId": { "type": ["string", "null"] },
-        "checkedAt": { "$ref": "#/$defs/dateTime" },
-        "fingerprint": { "$ref": "#/$defs/sha256" },
-        "termsCheckedAt": { "$ref": "#/$defs/dateTime" }
-      }
-    },
-    "correctionImpact": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "sourceRevisionId", "changeSummary", "explanationIds", "claimIds", "exampleIds", "exerciseIds", "answerMaterialIds", "learningUnitIds", "derivedIndexPaths", "verificationStatus"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "sourceRevisionId": { "$ref": "#/$defs/id" },
-        "changeSummary": { "type": "string", "minLength": 1 },
-        "explanationIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "claimIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "exampleIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "exerciseIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "answerMaterialIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "learningUnitIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "derivedIndexPaths": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/safePath" } },
-        "verificationStatus": { "enum": ["pending", "verified", "failed"] }
-      }
-    },
-    "claim": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "text", "sourceRevisionIds", "authorId", "verificationStatus"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "text": { "type": "string", "minLength": 1 },
-        "sourceRevisionIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "authorId": { "$ref": "#/$defs/id" },
-        "verificationStatus": { "enum": ["verified", "needs_human_review", "changes_requested"] }
-      }
-    },
-    "example": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "learningOutcomeIds", "ownerExplanationIds", "ownerLearningUnitIds", "environment", "input", "procedure", "expectedResult", "verificationStatus"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "learningOutcomeIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "ownerExplanationIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "ownerLearningUnitIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "environment": { "type": "string", "minLength": 1 },
-        "input": { "type": "string" },
-        "procedure": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
-        "expectedResult": { "type": "string", "minLength": 1 },
-        "verificationStatus": { "enum": ["verified", "needs_human_review", "failed"] }
-      },
+    "__schema27": {
       "anyOf": [
-        { "properties": { "ownerExplanationIds": { "minItems": 1 } } },
-        { "properties": { "ownerLearningUnitIds": { "minItems": 1 } } }
+        {
+          "$ref": "#/$defs/__schema4"
+        },
+        {
+          "type": "null"
+        }
       ]
     },
-    "exercise": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "problemId", "learningOutcomeIds", "prerequisiteIds", "attainmentCondition", "assessmentId", "answerMaterialId"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "problemId": { "$ref": "#/$defs/id" },
-        "learningOutcomeIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "prerequisiteIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "attainmentCondition": { "type": "string", "minLength": 1 },
-        "assessmentId": { "$ref": "#/$defs/id" },
-        "answerMaterialId": { "$ref": "#/$defs/id" }
+    "__schema28": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/__schema8"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema29": {
+      "minItems": 1,
+      "$ref": "#/$defs/__schema5"
+    },
+    "__schema30": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "__schema31": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema8"
       }
     },
-    "assessment": {
+    "__schema32": {
+      "minItems": 1,
+      "$ref": "#/$defs/__schema5"
+    },
+    "__schema33": {
+      "minItems": 1,
+      "$ref": "#/$defs/__schema5"
+    },
+    "__schema34": {
+      "minItems": 1,
+      "$ref": "#/$defs/__schema5"
+    },
+    "__schema35": {
+      "minItems": 1,
+      "$ref": "#/$defs/__schema5"
+    },
+    "__schema36": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "__schema37": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema38": {
       "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "learningOutcomeIds", "method", "successCondition"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "learningOutcomeIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-        "method": { "type": "string", "minLength": 1 },
-        "successCondition": { "type": "string", "minLength": 1 }
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/__schema8"
       }
     },
-    "answerMaterial": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "exerciseId", "reasoningOrVerification", "procedure", "expectedResult", "verificationStatus"],
-      "properties": {
-        "id": { "$ref": "#/$defs/id" },
-        "exerciseId": { "$ref": "#/$defs/id" },
-        "reasoningOrVerification": { "type": "string", "minLength": 1 },
-        "procedure": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
-        "expectedResult": { "type": "string", "minLength": 1 },
-        "verificationStatus": { "enum": ["verified", "needs_human_review", "failed"] }
+    "__schema39": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "sourceKind": {
+            "type": "string",
+            "enum": [
+              "official_problem",
+              "official_editorial",
+              "official_contest",
+              "other_official"
+            ]
+          },
+          "contestId": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/__schema6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "checkedAt": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "fingerprint": {
+            "$ref": "#/$defs/__schema3"
+          },
+          "termsCheckedAt": {
+            "$ref": "#/$defs/__schema2"
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "sourceKind",
+          "contestId",
+          "checkedAt",
+          "fingerprint",
+          "termsCheckedAt"
+        ],
+        "additionalProperties": false
       }
     },
-    "taxonomyChange": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["kind", "entityId", "summary"],
-      "properties": {
-        "kind": { "enum": ["tag_add", "tag_merge", "tag_split", "tag_deprecate", "outcome_change", "unit_change", "order_change", "placement_change"] },
-        "entityId": { "$ref": "#/$defs/id" },
-        "summary": { "type": "string", "minLength": 1 }
+    "__schema40": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "sourceRevisionId": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "changeSummary": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "explanationIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "claimIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "exampleIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "exerciseIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "answerMaterialIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "learningUnitIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "derivedIndexPaths": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema10"
+            }
+          },
+          "verificationStatus": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "verified",
+              "failed"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "sourceRevisionId",
+          "changeSummary",
+          "explanationIds",
+          "claimIds",
+          "exampleIds",
+          "exerciseIds",
+          "answerMaterialIds",
+          "learningUnitIds",
+          "derivedIndexPaths",
+          "verificationStatus"
+        ],
+        "additionalProperties": false
       }
     },
-    "releaseValidationSummary": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["checkCount", "passedCheckCount", "blockingFindingCount", "evidenceDigests"],
-      "properties": {
-        "checkCount": { "type": "integer", "minimum": 1 },
-        "passedCheckCount": { "type": "integer", "minimum": 1 },
-        "blockingFindingCount": { "const": 0 },
-        "evidenceDigests": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/sha256" } }
+    "__schema41": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "text": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "sourceRevisionIds": {
+            "minItems": 1,
+            "$ref": "#/$defs/__schema5"
+          },
+          "authorId": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "verificationStatus": {
+            "type": "string",
+            "enum": [
+              "verified",
+              "unverified",
+              "stale",
+              "contradicted"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "sourceRevisionIds",
+          "authorId",
+          "verificationStatus"
+        ],
+        "additionalProperties": false
       }
     },
-    "evidenceRef": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["evidenceId", "path", "digest"],
-      "properties": {
-        "evidenceId": { "$ref": "#/$defs/id" },
-        "path": { "$ref": "#/$defs/safePath" },
-        "digest": { "$ref": "#/$defs/sha256" }
+    "__schema42": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "learningOutcomeIds": {
+            "$ref": "#/$defs/__schema43"
+          },
+          "ownerExplanationIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "ownerLearningUnitIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "environment": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "input": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "procedure": {
+            "$ref": "#/$defs/__schema44"
+          },
+          "expectedResult": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "verificationStatus": {
+            "$ref": "#/$defs/__schema45"
+          }
+        },
+        "required": [
+          "id",
+          "learningOutcomeIds",
+          "ownerExplanationIds",
+          "ownerLearningUnitIds",
+          "environment",
+          "input",
+          "procedure",
+          "expectedResult",
+          "verificationStatus"
+        ],
+        "additionalProperties": false,
+        "anyOf": [
+          {
+            "properties": {
+              "ownerExplanationIds": {
+                "minItems": 1
+              }
+            }
+          },
+          {
+            "properties": {
+              "ownerLearningUnitIds": {
+                "minItems": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    "__schema43": {
+      "minItems": 1,
+      "$ref": "#/$defs/__schema5"
+    },
+    "__schema44": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema8"
+      }
+    },
+    "__schema45": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "passed",
+        "failed"
+      ]
+    },
+    "__schema46": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "problemId": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/__schema7"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "learningOutcomeIds": {
+            "minItems": 1,
+            "$ref": "#/$defs/__schema5"
+          },
+          "prerequisiteIds": {
+            "$ref": "#/$defs/__schema5"
+          },
+          "attainmentCondition": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "assessmentId": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "answerMaterialId": {
+            "$ref": "#/$defs/__schema4"
+          }
+        },
+        "required": [
+          "id",
+          "problemId",
+          "learningOutcomeIds",
+          "prerequisiteIds",
+          "attainmentCondition",
+          "assessmentId",
+          "answerMaterialId"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema47": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "learningOutcomeIds": {
+            "minItems": 1,
+            "$ref": "#/$defs/__schema5"
+          },
+          "method": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "successCondition": {
+            "$ref": "#/$defs/__schema8"
+          }
+        },
+        "required": [
+          "id",
+          "learningOutcomeIds",
+          "method",
+          "successCondition"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema48": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "exerciseId": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "reasoningOrVerification": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "procedure": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema8"
+            }
+          },
+          "expectedResult": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "verificationStatus": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "passed",
+              "failed"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "exerciseId",
+          "reasoningOrVerification",
+          "procedure",
+          "expectedResult",
+          "verificationStatus"
+        ],
+        "additionalProperties": false
       }
     }
   }

@@ -20,7 +20,9 @@ export const normalizeProblemLabel = (label: string): string => {
   if (!/^[a-z][a-z0-9+_-]*$/u.test(normalized)) {
     throw new StableIdError(`Unsupported official problem label: ${label}`);
   }
-  return normalized.replaceAll('+', '-plus-').replaceAll('_', '-');
+  // Escape every punctuation character, including the escape marker itself. This
+  // preserves existing alphanumeric IDs while making the mapping injective.
+  return normalized.replaceAll('_', '_5f').replaceAll('+', '_2b').replaceAll('-', '_2d');
 };
 
 export const stableProblemId = (contestId: string, officialLabel: string): string => {

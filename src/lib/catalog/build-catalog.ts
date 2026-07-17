@@ -1,4 +1,5 @@
 import { CatalogContract } from '../domain/schema-parts/catalog.js';
+import { stableProblemId } from '../domain/identity.js';
 import {
   deterministicTopologicalOrder,
   DomainValidationError,
@@ -17,7 +18,10 @@ export class CatalogBuildError extends Error {
 
 interface Entity {
   readonly id?: string;
-  readonly problemId?: string;
+  readonly problemId?: string | null;
+  readonly contestId?: string;
+  readonly label?: string;
+  readonly officialOrder?: number | null;
 }
 
 interface CatalogLike {
@@ -29,8 +33,14 @@ interface CatalogLike {
   readonly contestSlots: readonly {
     readonly contestId: string;
     readonly label: string;
+    readonly officialOrder: number | null;
+    readonly problemId?: string | null;
   }[];
-  readonly problems: readonly { readonly id: string }[];
+  readonly problems: readonly {
+    readonly id: string;
+    readonly contestId?: string;
+    readonly slotLabel?: string;
+  }[];
   readonly techniqueInventory: readonly { readonly problemId: string }[];
   readonly tags: readonly {
     readonly id: string;
@@ -65,10 +75,24 @@ const entityArrayKeys = [
   'answerMaterials',
 ] as const;
 
-const sortedEntities = (items: readonly Entity[]): readonly Entity[] =>
-  [...items].sort((left, right) =>
-    (left.id ?? left.problemId ?? '').localeCompare(right.id ?? right.problemId ?? ''),
-  );
+export const sortCatalogEntityArray = (
+  key: (typeof entityArrayKeys)[number],
+  items: readonly Entity[],
+): readonly Entity[] =>
+  [...items].sort((left, right) => {
+    if (key === 'contestSlots') {
+      return (
+        (left.contestId ?? '').localeCompare(right.contestId ?? '') ||
+        (left.officialOrder ?? Number.MAX_SAFE_INTEGER) -
+          (right.officialOrder ?? Number.MAX_SAFE_INTEGER) ||
+        (left.label ?? '').localeCompare(right.label ?? '') ||
+        (left.problemId ?? '').localeCompare(right.problemId ?? '')
+      );
+    }
+    const leftKey = key === 'techniqueInventory' ? left.problemId : left.id;
+    const rightKey = key === 'techniqueInventory' ? right.problemId : right.id;
+    return (leftKey ?? '').localeCompare(rightKey ?? '');
+  });
 
 export const buildCatalog = (input: unknown, sourcePaths: readonly string[] = []): CatalogLike => {
   const stagingPath = sourcePaths.find(
@@ -95,7 +119,7 @@ export const buildCatalog = (input: unknown, sourcePaths: readonly string[] = []
   for (const key of entityArrayKeys) {
     const value = catalog[key];
     if (Array.isArray(value)) {
-      (catalog as Record<string, unknown>)[key] = sortedEntities(value as Entity[]);
+      (catalog as Record<string, unknown>)[key] = sortCatalogEntityArray(key, value as Entity[]);
     }
   }
   const diagnostics = validateCatalogSemantics(catalog);
@@ -106,6 +130,25 @@ export const buildCatalog = (input: unknown, sourcePaths: readonly string[] = []
 export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagnostic[] => {
   const diagnostics: ValidationDiagnostic[] = [];
   const problemIds = new Set(catalog.problems.map(({ id }) => id));
+  if (problemIds.size !== catalog.problems.length) {
+    diagnostics.push({
+      code: 'DUPLICATE_PROBLEM_ID',
+      message: 'Problem IDs must be unique across the registry.',
+    });
+  }
+  for (const problem of catalog.problems) {
+    if (
+      problem.contestId &&
+      problem.slotLabel &&
+      stableProblemId(problem.contestId, problem.slotLabel) !== problem.id
+    ) {
+      diagnostics.push({
+        code: 'UNSTABLE_PROBLEM_ID',
+        entityId: problem.id,
+        message: `${problem.contestId}:${problem.slotLabel}`,
+      });
+    }
+  }
   const inventoryIds = new Set(catalog.techniqueInventory.map(({ problemId }) => problemId));
   for (const missing of [...problemIds].filter((id) => !inventoryIds.has(id))) {
     diagnostics.push({ code: 'TECHNIQUE_INVENTORY_MISSING', entityId: missing, message: missing });

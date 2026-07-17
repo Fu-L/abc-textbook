@@ -1,4 +1,8 @@
+import Ajv2020, { type ErrorObject } from 'ajv/dist/2020.js';
+import addFormats from 'ajv-formats';
 import { z } from 'zod';
+
+import { isOffsetDateTime } from './date-time.js';
 
 export type JsonSchemaDocument = Readonly<Record<string, unknown>>;
 
@@ -6,7 +10,15 @@ export interface ContractSchemaDefinition {
   readonly fileName: `${string}.schema.json`;
   readonly schema: z.ZodType;
   readonly jsonSchema: JsonSchemaDocument;
+  readonly reuseJsonSchemaReferences?: boolean;
 }
+
+const ajv = new Ajv2020({ allErrors: true, allowUnionTypes: true, strict: false });
+addFormats(ajv);
+ajv.addFormat('date-time', { type: 'string', validate: isOffsetDateTime });
+
+const formatAjvError = (error: ErrorObject): string =>
+  `${error.instancePath || '/'} ${error.message ?? error.keyword}`;
 
 const removeUnsupportedJsonSchemaKeywords = (value: unknown): unknown => {
   if (Array.isArray(value)) return value.map(removeUnsupportedJsonSchemaKeywords);
@@ -29,8 +41,20 @@ const removeUnsupportedJsonSchemaKeywords = (value: unknown): unknown => {
   return value;
 };
 
-export const zodFromContractSchema = (jsonSchema: JsonSchemaDocument): z.ZodType =>
-  z.fromJSONSchema(removeUnsupportedJsonSchemaKeywords(jsonSchema) as JsonSchemaDocument);
+export const zodFromContractSchema = (jsonSchema: JsonSchemaDocument): z.ZodType => {
+  const structuralSchema = z.fromJSONSchema(
+    removeUnsupportedJsonSchemaKeywords(jsonSchema) as JsonSchemaDocument,
+  );
+  const validateJsonSchema = ajv.compile(jsonSchema);
+  return structuralSchema
+    .superRefine((value, context) => {
+      if (validateJsonSchema(value)) return;
+      for (const error of validateJsonSchema.errors ?? []) {
+        context.addIssue({ code: 'custom', message: formatAjvError(error) });
+      }
+    })
+    .meta(jsonSchema);
+};
 
 export const defineContractSchema = (
   fileName: ContractSchemaDefinition['fileName'],
@@ -40,6 +64,23 @@ export const defineContractSchema = (
   schema: zodFromContractSchema(jsonSchema),
   jsonSchema,
 });
+
+export const defineZodContractSchema = (
+  fileName: ContractSchemaDefinition['fileName'],
+  schema: z.ZodType,
+  metadata: Readonly<Record<string, unknown>> = {},
+): ContractSchemaDefinition => {
+  const annotatedSchema = schema.meta(metadata);
+  return {
+    fileName,
+    schema: annotatedSchema,
+    jsonSchema: z.toJSONSchema(annotatedSchema, {
+      target: 'draft-2020-12',
+      reused: 'ref',
+    }),
+    reuseJsonSchemaReferences: true,
+  };
+};
 
 export const strictObject = <Shape extends z.ZodRawShape>(shape: Shape): z.ZodObject<Shape> =>
   z.strictObject(shape);

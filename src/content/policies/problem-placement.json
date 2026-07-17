@@ -50,7 +50,13 @@
             { "attribute": "algorithm_same", "operator": "eq", "value": true },
             { "attribute": "proof_same", "operator": "eq", "value": true },
             { "attribute": "complexity_same", "operator": "eq", "value": true },
+            { "attribute": "constraints_difference_documented", "operator": "eq", "value": true },
             { "attribute": "prerequisites_same", "operator": "eq", "value": true },
+            {
+              "attribute": "implementation_difference_documented",
+              "operator": "eq",
+              "value": true
+            },
             { "attribute": "learning_outcomes_same", "operator": "eq", "value": true },
             { "attribute": "additional_learning_count", "operator": "eq", "value": 0 },
             { "attribute": "evidence_complete", "operator": "eq", "value": true },
@@ -82,7 +88,13 @@
             { "attribute": "algorithm_same", "operator": "eq", "value": true },
             { "attribute": "proof_same", "operator": "eq", "value": true },
             { "attribute": "complexity_same", "operator": "eq", "value": true },
+            { "attribute": "constraints_difference_documented", "operator": "eq", "value": true },
             { "attribute": "prerequisites_same", "operator": "eq", "value": true },
+            {
+              "attribute": "implementation_difference_documented",
+              "operator": "eq",
+              "value": true
+            },
             { "attribute": "learning_outcomes_same", "operator": "eq", "value": true },
             { "attribute": "additional_learning_count", "operator": "eq", "value": 1 },
             { "attribute": "evidence_complete", "operator": "eq", "value": true },
@@ -101,5 +113,5 @@
     }
   },
   "ambiguousAction": "on_hold",
-  "digest": "b1c2d1a825a835a94d76d58ece54c10bad0fec0789fbfbe2d350206d2f6ab62b"
+  "digest": "184b1e04fb8ca2e0bad2e17ba68aceb0700137f4b56035d90431fad281ddeb49"
 }

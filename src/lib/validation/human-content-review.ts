@@ -98,7 +98,11 @@ export const validateHumanContentReview = (value: unknown): void => {
     evidence.reviewedItemCount === evidence.reviewItems.length &&
     evidence.approvedItemCount + evidence.changesRequestedItemCount ===
       evidence.reviewedItemCount &&
-    evidence.unreviewedItemCount === 0;
+    evidence.changesRequestedItemCount === 0 &&
+    evidence.unreviewedItemCount === 0 &&
+    evidence.reviewItems.every(
+      (item) => item.decision === 'approved' && item.findings.every((finding) => finding.resolved),
+    );
   if (!countsAreComplete || !evidence.outcomeCoverageConfirmed || !evidence.aggregatePassed) {
     throw new HumanReviewError(
       'REVIEW_INCOMPLETE',

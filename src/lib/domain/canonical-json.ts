@@ -41,16 +41,16 @@ const serialize = (value: unknown, seen: Set<object>): string => {
     }
     seen.add(value);
     const object = value as Record<string, unknown>;
-    const entries = Object.keys(object)
-      .sort((left, right) => Buffer.from(left).compare(Buffer.from(right)))
-      .map((key) => {
-        assertNfc(key);
-        const item = object[key];
-        if (item === undefined) {
-          throw new CanonicalJsonError('Canonical JSON cannot contain undefined values.');
-        }
-        return `${JSON.stringify(key)}:${serialize(item, seen)}`;
-      });
+    const keys = Object.keys(object);
+    keys.forEach(assertNfc);
+    // RFC 8785/JCS uses ECMAScript's lexicographic UTF-16 code-unit ordering.
+    const entries = keys.sort().map((key) => {
+      const item = object[key];
+      if (item === undefined) {
+        throw new CanonicalJsonError('Canonical JSON cannot contain undefined values.');
+      }
+      return `${JSON.stringify(key)}:${serialize(item, seen)}`;
+    });
     seen.delete(value);
     return `{${entries.join(',')}}`;
   }

@@ -1,19 +1,25 @@
 import answerMaterialEvidenceContractJson from '../../../../specs/001-build-abc-textbook/contracts/answer-material-evidence.schema.json' with { type: 'json' };
-import catalogContractJson from '../../../../specs/001-build-abc-textbook/contracts/catalog.schema.json' with { type: 'json' };
 import glossaryContractJson from '../../../../specs/001-build-abc-textbook/contracts/glossary.schema.json' with { type: 'json' };
 import prerequisiteBaselineContractJson from '../../../../specs/001-build-abc-textbook/contracts/prerequisite-baseline.schema.json' with { type: 'json' };
 import placementPolicyContractJson from '../../../../specs/001-build-abc-textbook/contracts/problem-placement-decision-table.schema.json' with { type: 'json' };
 import { z } from 'zod';
 
-import { defineContractSchema, strictObject } from '../contract-schema.js';
+import { defineContractSchema, defineZodContractSchema, strictObject } from '../contract-schema.js';
+import { canonicalJson, digestWithoutField } from '../canonical-json.js';
+import { isOffsetDateTime } from '../date-time.js';
 
 export const EntityIdSchema = z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u);
 export const Sha256Schema = z.string().regex(/^[a-f0-9]{64}$/u);
-export const OffsetDateTimeSchema = z.iso.datetime({ offset: true });
+export const OffsetDateTimeSchema = z.iso
+  .datetime({ offset: true })
+  .refine(isOffsetDateTime, 'Invalid RFC 3339 date-time.');
 export const SafePathSchema = z
   .string()
   .regex(/^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))(?!.*\/\/)[A-Za-z0-9._/-]+$/u);
-export const ProblemLabelSchema = z.string().regex(/^[A-Za-z][A-Za-z0-9+_-]*$/u);
+export const ProblemLabelSchema = z
+  .string()
+  .regex(/^[A-Za-z][A-Za-z0-9+_-]*$/u)
+  .max(16);
 export const ContestIdSchema = z.string().regex(/^abc[0-9]{3,}$/u);
 export const ProblemIdSchema = z.string().regex(/^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$/u);
 
@@ -27,17 +33,41 @@ export const ContestSchema = strictObject({
   startedAt: OffsetDateTimeSchema,
   endedAt: OffsetDateTimeSchema,
   officialUrl: z.url({ protocol: /^https$/u, hostname: /^atcoder\.jp$/u }),
-  officialTaskOrder: z.array(ProblemLabelSchema).min(1),
+  officialTaskOrder: z
+    .array(ProblemLabelSchema)
+    .min(5)
+    .refine((labels) => new Set(labels).size === labels.length && labels.includes('D'))
+    .meta({ uniqueItems: true, contains: { const: 'D' } }),
   taskOrderSourceRevisionId: EntityIdSchema,
   checkedAt: OffsetDateTimeSchema,
 });
 
 export const AdvancedSlotRegistrySchema = strictObject({
   version: z.literal('1.0.0'),
-  labels: z.array(ProblemLabelSchema),
+  labels: z.array(ProblemLabelSchema).min(1).meta({ uniqueItems: true }),
   firstSeenContestByLabel: z.record(ProblemLabelSchema, ContestIdSchema),
-  orderEvidenceSourceRevisionIds: z.array(EntityIdSchema),
+  orderEvidenceSourceRevisionIds: z.array(EntityIdSchema).min(1).meta({ uniqueItems: true }),
   digest: Sha256Schema,
+}).superRefine((registry, context) => {
+  if (new Set(registry.labels).size !== registry.labels.length) {
+    context.addIssue({ code: 'custom', message: 'Registry labels must be unique.' });
+  }
+  if (
+    new Set(registry.orderEvidenceSourceRevisionIds).size !==
+    registry.orderEvidenceSourceRevisionIds.length
+  ) {
+    context.addIssue({ code: 'custom', message: 'Order evidence revisions must be unique.' });
+  }
+  const firstSeenLabels = Object.keys(registry.firstSeenContestByLabel).sort();
+  if (canonicalJson(firstSeenLabels) !== canonicalJson([...registry.labels].sort())) {
+    context.addIssue({
+      code: 'custom',
+      message: 'Every registry label needs exactly one first-seen contest.',
+    });
+  }
+  if (digestWithoutField(registry, 'digest') !== registry.digest) {
+    context.addIssue({ code: 'custom', message: 'Registry digest is stale.' });
+  }
 });
 
 export const ContestSlotRecordSchema = strictObject({
@@ -141,7 +171,14 @@ export const ProblemPlacementSchema = strictObject({
   kind: z.enum(['full', 'similar', 'supplement']),
   primaryExplanationId: EntityIdSchema.nullable(),
   sharedOutcomeIds: entityIds,
-  comparison: z.record(z.string(), z.union([z.string(), z.boolean(), z.number()])),
+  comparison: strictObject({
+    method: nonEmptyText,
+    proof: nonEmptyText,
+    complexity: nonEmptyText,
+    constraints: nonEmptyText,
+    prerequisites: nonEmptyText,
+    implementation: nonEmptyText,
+  }),
   additionalElement: nonEmptyText.nullable(),
   rationale: nonEmptyText,
   evidenceIds: entityIds.min(1),
@@ -168,7 +205,41 @@ export const ExplanationSchema = strictObject({
   skillDigest: Sha256Schema,
   revision: z.number().int().positive(),
   sections: z.record(z.string(), nonEmptyText),
-});
+})
+  .superRefine((explanation, context) => {
+    const fullShapeIsValid =
+      explanation.primaryExplanationId === null && explanation.differenceSummary === null;
+    const abbreviatedShapeIsValid =
+      explanation.primaryExplanationId !== null && explanation.differenceSummary !== null;
+    if (
+      (explanation.kind === 'full' && !fullShapeIsValid) ||
+      (explanation.kind !== 'full' && !abbreviatedShapeIsValid)
+    ) {
+      context.addIssue({
+        code: 'custom',
+        message: 'Explanation kind and difference fields conflict.',
+      });
+    }
+  })
+  .meta({
+    allOf: [
+      {
+        if: { properties: { kind: { const: 'full' } }, required: ['kind'] },
+        then: {
+          properties: {
+            primaryExplanationId: { type: 'null' },
+            differenceSummary: { type: 'null' },
+          },
+        },
+        else: {
+          properties: {
+            primaryExplanationId: { type: 'string', pattern: '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$' },
+            differenceSummary: { type: 'string', minLength: 1 },
+          },
+        },
+      },
+    ],
+  });
 
 export const SourceRevisionSchema = strictObject({
   id: EntityIdSchema,
@@ -230,7 +301,17 @@ export const ReproducibleExampleSchema = strictObject({
   procedure: z.array(nonEmptyText).min(1),
   expectedResult: nonEmptyText,
   verificationStatus: z.enum(['pending', 'passed', 'failed']),
-});
+})
+  .refine(
+    (example) => example.ownerExplanationIds.length > 0 || example.ownerLearningUnitIds.length > 0,
+    'Example must have an explanation or learning-unit owner.',
+  )
+  .meta({
+    anyOf: [
+      { properties: { ownerExplanationIds: { minItems: 1 } } },
+      { properties: { ownerLearningUnitIds: { minItems: 1 } } },
+    ],
+  });
 
 export const ExerciseSchema = strictObject({
   id: EntityIdSchema,
@@ -258,7 +339,78 @@ export const AnswerMaterialSchema = strictObject({
   verificationStatus: z.enum(['pending', 'passed', 'failed']),
 });
 
-export const CatalogContract = defineContractSchema('catalog.schema.json', catalogContractJson);
+const TaxonomyChangeSchema = strictObject({
+  kind: z.enum(['added', 'renamed', 'merged', 'split', 'deprecated']),
+  entityId: EntityIdSchema,
+  summary: nonEmptyText,
+});
+
+const ReleaseValidationSummarySchema = strictObject({
+  checkCount: z.number().int().nonnegative(),
+  passedCheckCount: z.number().int().nonnegative(),
+  blockingFindingCount: z.number().int().nonnegative(),
+  evidenceDigests: z.array(Sha256Schema),
+});
+
+const EvidenceReferenceSchema = strictObject({
+  evidenceId: EntityIdSchema,
+  path: SafePathSchema,
+  digest: Sha256Schema,
+});
+
+export const CatalogReleaseSchema = strictObject({
+  version: z.string().regex(/^\d{4}\.\d{2}\.\d{2}$/u),
+  releaseKind: z.enum(['initial', 'incremental']),
+  cutoffAt: OffsetDateTimeSchema,
+  validatedAt: OffsetDateTimeSchema,
+  publicationEffectiveAt: OffsetDateTimeSchema,
+  manifestDigest: Sha256Schema,
+  contentSnapshotDigest: Sha256Schema,
+  updateIds: entityIds.min(1),
+  advancedSlotRegistryDigest: Sha256Schema,
+  firstContestId: ContestIdSchema,
+  lastContestId: ContestIdSchema,
+  contestCount: z.number().int().positive(),
+  problemCount: z.number().int().positive(),
+  slotRecordCount: z.number().int().positive(),
+  addedProblemIds: z.array(ProblemIdSchema),
+  changedProblemIds: z.array(ProblemIdSchema),
+  heldProblemIds: z.array(ProblemIdSchema),
+  withdrawnProblemIds: z.array(ProblemIdSchema),
+  taxonomyChanges: z.array(TaxonomyChangeSchema),
+  validationSummary: ReleaseValidationSummarySchema,
+  humanContentReviewEvidenceRefs: z.array(EvidenceReferenceSchema).min(1),
+  changelogPath: SafePathSchema,
+});
+
+export const CatalogSchema = strictObject({
+  schemaVersion: z.literal('2.0.0'),
+  release: CatalogReleaseSchema,
+  advancedSlotRegistry: AdvancedSlotRegistrySchema,
+  contests: z.array(ContestSchema),
+  contestSlots: z.array(ContestSlotRecordSchema),
+  problems: z.array(ProblemSchema),
+  techniqueInventory: z.array(TechniqueInventoryItemSchema),
+  tags: z.array(TechniqueTagSchema),
+  learningOutcomes: z.array(LearningOutcomeSchema),
+  learningUnits: z.array(LearningUnitSchema),
+  placements: z.array(ProblemPlacementSchema),
+  explanations: z.array(ExplanationSchema),
+  sources: z.array(SourceRevisionSchema),
+  correctionImpacts: z.array(CorrectionImpactSchema),
+  claims: z.array(TechnicalClaimSchema),
+  examples: z.array(ReproducibleExampleSchema),
+  exercises: z.array(ExerciseSchema),
+  assessments: z.array(AssessmentSchema),
+  answerMaterials: z.array(AnswerMaterialSchema),
+});
+
+export const CatalogContract = defineZodContractSchema('catalog.schema.json', CatalogSchema, {
+  $id: 'https://abc-textbook.local/schemas/catalog.schema.json',
+  title: 'ABC Textbook Catalog',
+  description:
+    'ABC212以降の各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。',
+});
 export const GlossaryContract = defineContractSchema('glossary.schema.json', glossaryContractJson);
 export const PrerequisiteBaselineContract = defineContractSchema(
   'prerequisite-baseline.schema.json',
@@ -273,7 +425,6 @@ export const AnswerMaterialEvidenceContract = defineContractSchema(
   answerMaterialEvidenceContractJson,
 );
 
-export const CatalogSchema = CatalogContract.schema;
 export const GlossarySchema = GlossaryContract.schema;
 export const PrerequisiteBaselineSchema = PrerequisiteBaselineContract.schema;
 export const ProblemPlacementDecisionTableSchema = ProblemPlacementDecisionTableContract.schema;
