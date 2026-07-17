@@ -29,8 +29,11 @@
     "blockingFindingCount": {
       "$ref": "#/$defs/__schema7"
     },
-    "generatedAt": {
+    "aggregatePassed": {
       "$ref": "#/$defs/__schema8"
+    },
+    "generatedAt": {
+      "$ref": "#/$defs/__schema9"
     }
   },
   "required": [
@@ -43,9 +46,40 @@
     "automatedResultDigest",
     "humanReviewEvidenceIds",
     "blockingFindingCount",
+    "aggregatePassed",
     "generatedAt"
   ],
   "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "aggregatePassed": {
+            "const": true
+          }
+        },
+        "required": [
+          "aggregatePassed"
+        ]
+      },
+      "then": {
+        "properties": {
+          "blockingFindingCount": {
+            "const": 0
+          },
+          "items": {
+            "items": {
+              "properties": {
+                "automatedPassed": {
+                  "const": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
   "$id": "https://abc-textbook.local/schemas/instruction-quality-evidence.schema.json",
   "title": "ABC Textbook Instruction Quality Evidence",
   "$defs": {
@@ -146,6 +180,9 @@
       "maximum": 9007199254740991
     },
     "__schema8": {
+      "type": "boolean"
+    },
+    "__schema9": {
       "type": "string",
       "format": "date-time",
       "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"

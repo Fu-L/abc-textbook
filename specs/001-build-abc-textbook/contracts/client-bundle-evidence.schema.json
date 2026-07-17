@@ -54,6 +54,36 @@
     "generatedAt"
   ],
   "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "aggregatePassed": {
+            "const": true
+          }
+        },
+        "required": [
+          "aggregatePassed"
+        ]
+      },
+      "then": {
+        "properties": {
+          "violationCount": {
+            "const": 0
+          },
+          "routeChunkDecisions": {
+            "items": {
+              "properties": {
+                "allowed": {
+                  "const": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
   "$id": "https://abc-textbook.local/schemas/client-bundle-evidence.schema.json",
   "title": "ABC Textbook Client Bundle Evidence",
   "$defs": {

@@ -143,7 +143,42 @@ export const ClientBundleEvidenceSchema = strictObject({
   routeChunkDecisions: unique(routeChunkDecision).min(1),
   aggregatePassed: z.boolean(),
   generatedAt: OffsetDateTimeSchema,
-});
+})
+  .superRefine((evidence, context) => {
+    const violations = evidence.routeChunkDecisions.filter((decision) => !decision.allowed).length;
+    if (
+      evidence.checkedDecisionCount !== evidence.routeChunkDecisions.length ||
+      evidence.violationCount !== violations ||
+      evidence.aggregatePassed !== (violations === 0)
+    ) {
+      context.addIssue({ code: 'custom', message: 'Client bundle aggregate is stale.' });
+    }
+  })
+  .meta({
+    allOf: [
+      {
+        if: { properties: { aggregatePassed: { const: true } }, required: ['aggregatePassed'] },
+        then: {
+          properties: {
+            violationCount: { const: 0 },
+            routeChunkDecisions: { items: { properties: { allowed: { const: true } } } },
+          },
+        },
+      },
+    ],
+  });
+
+const filesystemTestKinds = [
+  'writer_lock',
+  'global_lock',
+  'same_filesystem_switch',
+  'cross_filesystem_rejection',
+  'conflict',
+  'rollback_before_receipt',
+  'state_recovery_after_receipt',
+  'receipt_no_overwrite',
+  'rerun_no_op',
+] as const;
 
 export const FilesystemPublishEvidenceSchema = strictObject({
   schemaVersion: z.literal('2.0.0'),
@@ -158,27 +193,40 @@ export const FilesystemPublishEvidenceSchema = strictObject({
     .array(
       strictObject({
         testId: text,
-        kind: z.enum([
-          'writer_lock',
-          'global_lock',
-          'same_filesystem_switch',
-          'cross_filesystem_rejection',
-          'conflict',
-          'rollback_before_receipt',
-          'state_recovery_after_receipt',
-          'receipt_no_overwrite',
-          'rerun_no_op',
-        ]),
+        kind: z.enum(filesystemTestKinds),
         passed: z.boolean(),
         rawPath: text,
         rawDigest: Sha256Schema,
       }),
     )
-    .min(8),
+    .length(filesystemTestKinds.length),
   rawEvidenceManifestDigest: Sha256Schema,
   aggregatePassed: z.boolean(),
   generatedAt: OffsetDateTimeSchema,
-});
+})
+  .superRefine((evidence, context) => {
+    const ids = evidence.tests.map(({ testId }) => testId);
+    const kinds = evidence.tests.map(({ kind }) => kind);
+    if (
+      new Set(ids).size !== ids.length ||
+      new Set(kinds).size !== filesystemTestKinds.length ||
+      filesystemTestKinds.some((kind) => !kinds.includes(kind)) ||
+      evidence.aggregatePassed !== evidence.tests.every(({ passed }) => passed)
+    ) {
+      context.addIssue({
+        code: 'custom',
+        message: 'Filesystem evidence coverage/aggregate is stale.',
+      });
+    }
+  })
+  .meta({
+    allOf: [
+      {
+        if: { properties: { aggregatePassed: { const: true } }, required: ['aggregatePassed'] },
+        then: { properties: { tests: { items: { properties: { passed: { const: true } } } } } },
+      },
+    ],
+  });
 
 export const InstructionQualityEvidenceSchema = strictObject({
   schemaVersion: z.literal('2.0.0'),
@@ -209,8 +257,41 @@ export const InstructionQualityEvidenceSchema = strictObject({
   automatedResultDigest: Sha256Schema,
   humanReviewEvidenceIds: unique(text),
   blockingFindingCount: z.number().int().nonnegative(),
+  aggregatePassed: z.boolean(),
   generatedAt: OffsetDateTimeSchema,
-});
+})
+  .superRefine((evidence, context) => {
+    const ids = evidence.items.map(({ itemId }) => itemId);
+    const requiredHumanReviewIds = evidence.items.flatMap((item) =>
+      item.requiresHumanReview && item.humanReviewItemId ? [item.humanReviewItemId] : [],
+    );
+    const complete =
+      evidence.inventoryCount === evidence.items.length &&
+      evidence.checkedCount === evidence.items.length &&
+      new Set(ids).size === ids.length &&
+      evidence.items.every(
+        (item) =>
+          item.automatedPassed && item.requiresHumanReview === (item.humanReviewItemId !== null),
+      ) &&
+      (requiredHumanReviewIds.length === 0 || evidence.humanReviewEvidenceIds.length > 0) &&
+      evidence.blockingFindingCount === 0;
+    if (evidence.aggregatePassed !== complete) {
+      context.addIssue({ code: 'custom', message: 'Instruction quality aggregate is stale.' });
+    }
+  })
+  .meta({
+    allOf: [
+      {
+        if: { properties: { aggregatePassed: { const: true } }, required: ['aggregatePassed'] },
+        then: {
+          properties: {
+            blockingFindingCount: { const: 0 },
+            items: { items: { properties: { automatedPassed: { const: true } } } },
+          },
+        },
+      },
+    ],
+  });
 
 const learningRecordRun = strictObject({
   engine: z.enum(['chromium', 'firefox', 'webkit']),

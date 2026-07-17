@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
+import { stableProblemId } from '../identity.js';
 import {
   ContestIdSchema,
   EntityIdSchema,
@@ -111,9 +112,40 @@ export const PublicationUpdateSchema = strictObject({
   fixtureMode: z.boolean(),
 })
   .superRefine((update, context) => {
+    const operationProblemIds = update.operations
+      .filter((operation) => operation.entityType === 'problem' && operation.action !== 'remove')
+      .map(({ entityId }) => entityId);
+    const contestId = update.contestId;
+    const contestProblemIds =
+      update.kind === 'contest_addition' && contestId !== null
+        ? update.advancedSlotLabels.map((label) => stableProblemId(contestId, label))
+        : [];
+    if (
+      update.kind === 'contest_addition' &&
+      (operationProblemIds.length !== contestProblemIds.length ||
+        new Set(operationProblemIds).size !== operationProblemIds.length ||
+        [...operationProblemIds]
+          .sort()
+          .some((problemId, index) => problemId !== [...contestProblemIds].sort()[index]))
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['operations'],
+        message: 'Contest problem operations must exactly match advanced slot labels.',
+      });
+    }
+    const targetProblemIds = [...new Set([...operationProblemIds, ...contestProblemIds])].sort();
+    const authoringIds = update.authoringResults.map(({ problemId }) => problemId);
+    const validationIds = update.validationSummary.problemResults.map(({ problemId }) => problemId);
+    const sameTargets = (ids: readonly string[]): boolean =>
+      ids.length === targetProblemIds.length &&
+      new Set(ids).size === ids.length &&
+      [...ids].sort().every((id, index) => id === targetProblemIds[index]);
     if (
       update.state === 'ELIGIBLE_FOR_BATCH' &&
-      (update.authoringResults.length === 0 ||
+      (targetProblemIds.length === 0 ||
+        !sameTargets(authoringIds) ||
+        !sameTargets(validationIds) ||
         update.authoringResults.some((result) => result.resultType !== 'explanation_draft') ||
         !update.validationSummary.aggregatePassed ||
         update.validationSummary.blockingFindingCount !== 0 ||
@@ -199,7 +231,7 @@ const OwnerApprovalSchema = strictObject({
 
 export const ReleaseCandidateSchema = strictObject({
   schemaVersion: z.literal('2.0.0'),
-  candidateId: EntityIdSchema,
+  candidateId: z.string().regex(/^release-candidate-\d{4}\.\d{2}\.\d+-[a-f0-9]{12,64}$/u),
   releaseKind: z.enum(['initial', 'incremental']),
   targetReleaseVersion: releaseVersion,
   baseReleaseVersion: releaseVersion.nullable(),
@@ -233,6 +265,14 @@ export const ReleaseCandidateSchema = strictObject({
   updatedAt: OffsetDateTimeSchema,
 })
   .superRefine((candidate, context) => {
+    for (const [path, files] of [
+      ['contentFiles', candidate.contentFiles],
+      ['candidateFiles', candidate.candidateFiles],
+    ] as const) {
+      if (new Set(files.map((file) => file.path)).size !== files.length) {
+        context.addIssue({ code: 'custom', path: [path], message: 'File paths must be unique.' });
+      }
+    }
     if (!['READY_TO_PUBLISH', 'PUBLISHED'].includes(candidate.state)) return;
     const complete =
       candidate.contentFiles.length > 0 &&

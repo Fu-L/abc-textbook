@@ -42,6 +42,7 @@ interface HumanReviewShape {
     readonly subjectPaths: readonly string[];
     readonly reviewerId: string;
     readonly authorIds: readonly string[];
+    readonly learningOutcomeIds: readonly string[];
     readonly decision: string;
     readonly findings: readonly { readonly severity: string; readonly resolved: boolean }[];
   }[];
@@ -49,6 +50,8 @@ interface HumanReviewShape {
     readonly reviewerId: string;
     readonly authorIds: readonly string[];
     readonly decision: string;
+    readonly learningOutcomeIds: readonly string[];
+    readonly subjectPaths: readonly string[];
   };
   readonly inventoryItemCount: number;
   readonly reviewedItemCount: number;
@@ -72,6 +75,7 @@ export interface TrustedReviewCheckInventory {
     readonly kind: 'outcome_coverage' | 'non_automatable_claim' | 'non_automatable_example';
     readonly subjectPaths: readonly string[];
     readonly authorIds: readonly string[];
+    readonly learningOutcomeIds: readonly string[];
   }[];
 }
 
@@ -175,7 +179,8 @@ export const validateHumanContentReview = (
     if (
       item.kind !== trustedItem.kind ||
       !sameStringSet(item.subjectPaths, trustedItem.subjectPaths) ||
-      !sameStringSet(item.authorIds, trustedItem.authorIds)
+      !sameStringSet(item.authorIds, trustedItem.authorIds) ||
+      !sameStringSet(item.learningOutcomeIds, trustedItem.learningOutcomeIds)
     ) {
       throw new HumanReviewError('REVIEW_ITEM_INVENTORY_INVALID', item.reviewItemId);
     }
@@ -192,6 +197,38 @@ export const validateHumanContentReview = (
     ) {
       throw new HumanReviewError('UNRESOLVED_BLOCKING_FINDING', item.reviewerId);
     }
+  }
+  const trustedOutcomeIds = [
+    ...new Set(trustedInventory.reviewItems.flatMap((item) => item.learningOutcomeIds)),
+  ];
+  const trustedOutcomePaths = [
+    ...new Set(
+      trustedInventory.reviewItems
+        .filter((item) => item.learningOutcomeIds.length > 0)
+        .flatMap((item) => item.subjectPaths),
+    ),
+  ];
+  const trustedAuthorIds = [
+    ...new Set(trustedInventory.reviewItems.flatMap((item) => item.authorIds)),
+  ];
+  const coverage = evidence.outcomeCoverageReview;
+  if (
+    !sameStringSet(coverage.learningOutcomeIds, trustedOutcomeIds) ||
+    !sameStringSet(
+      coverage.subjectPaths,
+      trustedOutcomePaths.length > 0
+        ? trustedOutcomePaths
+        : trustedInventory.reviewItems.flatMap((item) => item.subjectPaths),
+    ) ||
+    !sameStringSet(coverage.authorIds, trustedAuthorIds) ||
+    (trustedOutcomeIds.length > 0
+      ? coverage.decision !== 'confirmed'
+      : coverage.decision !== 'no_outcome_impact_confirmed')
+  ) {
+    throw new HumanReviewError(
+      'OUTCOME_COVERAGE_INVENTORY_INVALID',
+      'Outcome coverage must exactly match the validated work manifest.',
+    );
   }
   const checkSetDigest = canonicalDigest(
     evidence.applicableChecks
@@ -276,9 +313,17 @@ export interface TrustedMergeReviewContext {
     readonly digest: string;
     readonly subjectDigest: string;
     readonly aggregatePassed: boolean;
+    readonly gateReviewerId: string;
   };
   readonly constitutionVersion: string;
   readonly constitutionDigest: string;
+  readonly gateReviewerId: string;
+  readonly checks: readonly {
+    readonly checkId: string;
+    readonly command: string;
+    readonly applicable: boolean;
+    readonly notApplicableRationale?: string;
+  }[];
 }
 
 export const validateMergeReviewEvidence = (
@@ -290,6 +335,32 @@ export const validateMergeReviewEvidence = (
     throw new HumanReviewError('MERGE_REVIEW_SCHEMA_INVALID', parsed.error.message);
   }
   const evidence = parsed.data;
+  const applicableById = new Map(evidence.applicableChecks.map((check) => [check.checkId, check]));
+  const notApplicableById = new Map(
+    evidence.notApplicableChecks.map((check) => [check.checkId, check]),
+  );
+  const trustedCheckIds = trusted.checks.map(({ checkId }) => checkId);
+  if (
+    new Set(trustedCheckIds).size !== trustedCheckIds.length ||
+    trusted.checks.some((expected) => {
+      const applicable = applicableById.get(expected.checkId);
+      const notApplicable = notApplicableById.get(expected.checkId);
+      return expected.applicable
+        ? !applicable ||
+            notApplicable !== undefined ||
+            applicable.command !== expected.command ||
+            applicable.executedByReviewerId !== trusted.gateReviewerId
+        : applicable !== undefined ||
+            !notApplicable ||
+            notApplicable.rationale !== expected.notApplicableRationale;
+    }) ||
+    applicableById.size + notApplicableById.size !== trusted.checks.length
+  ) {
+    throw new HumanReviewError(
+      'MERGE_CHECK_INVENTORY_INVALID',
+      'Merge evidence must exactly classify and execute the trusted check inventory.',
+    );
+  }
   if (
     evidence.logicalChangeSubjectDigest !== trusted.subjectDigest ||
     evidence.workManifestPath !== trusted.workManifestPath ||
@@ -307,6 +378,7 @@ export const validateMergeReviewEvidence = (
     evidence.humanContentReviewEvidenceId !== trusted.humanReview.id ||
     evidence.humanContentReviewEvidenceDigest !== trusted.humanReview.digest ||
     trusted.humanReview.subjectDigest !== trusted.subjectDigest ||
+    trusted.humanReview.gateReviewerId !== trusted.gateReviewerId ||
     !trusted.humanReview.aggregatePassed
   ) {
     throw new HumanReviewError(

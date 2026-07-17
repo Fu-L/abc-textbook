@@ -10,7 +10,7 @@ import {
   buildAdvancedSlotRegistry,
   materializeContestSlotStates,
 } from '../../src/lib/catalog/advanced-slot-registry.js';
-import { buildCatalog } from '../../src/lib/catalog/build-catalog.js';
+import { buildCatalog, sortCatalogEntityArray } from '../../src/lib/catalog/build-catalog.js';
 import { parseOfficialTaskList } from '../../src/lib/catalog/official-task-list.js';
 
 const taskList = (labels: readonly string[]) => `
@@ -259,7 +259,17 @@ describe('official advanced slot registry', () => {
       learningUnits: [],
       placements: [],
       explanations: [],
-      sources: [],
+      sources: [
+        {
+          id: 'source-abc212-task-order',
+          url: 'https://atcoder.jp/contests/abc212/tasks',
+          sourceKind: 'official_contest',
+          contestId: 'abc212',
+          checkedAt: '2026-07-17T14:00:00+09:00',
+          fingerprint: digest,
+          termsCheckedAt: '2026-07-17T14:00:00+09:00',
+        },
+      ],
       correctionImpacts: [],
       claims: [],
       examples: [],
@@ -288,6 +298,20 @@ describe('official advanced slot registry', () => {
     expect(() => buildCatalog(falseAbsence)).toThrow(
       /CONTEST_SLOT_OFFICIAL_MISMATCH|CATALOG_SCHEMA_INVALID/u,
     );
+
+    const unknownTag = structuredClone(catalog) as Record<string, unknown>;
+    const [problem] = unknownTag.problems as { primaryTagIds: string[] }[];
+    if (!problem) throw new Error('Fixture problem is missing.');
+    problem.primaryTagIds = ['tag-missing'];
+    expect(() => buildCatalog(unknownTag)).toThrow(/CATALOG_REFERENCE_MISSING/u);
+
+    const failedRelease = structuredClone(catalog) as Record<string, unknown>;
+    const release = failedRelease.release as {
+      validationSummary: { passedCheckCount: number; blockingFindingCount: number };
+    };
+    release.validationSummary.passedCheckCount = 0;
+    release.validationSummary.blockingFindingCount = 1;
+    expect(() => buildCatalog(failedRelease)).toThrow(/RELEASE_EVIDENCE_INCOMPLETE/u);
   });
 
   it('places an order-conflict hold instead of guessing', () => {
@@ -312,7 +336,11 @@ describe('official advanced slot registry', () => {
   it('records a missing H as official absence and keeps unknown/withdrawn distinct', () => {
     const states = materializeContestSlotStates(
       ['E', 'F', 'G', 'H', 'I', 'Ex'],
-      { contestId: 'abc500', advancedLabels: ['E', 'F', 'G', 'I', 'Ex'] },
+      {
+        contestId: 'abc500',
+        officialTaskOrder: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'I', 'Ex'],
+        advancedLabels: ['E', 'F', 'G', 'I', 'Ex'],
+      },
       { I: 'unknown', Ex: 'withdrawn' },
     );
 
@@ -322,6 +350,35 @@ describe('official advanced slot registry', () => {
     });
     expect(states.find(({ label }) => label === 'I')?.availability).toBe('unknown');
     expect(states.find(({ label }) => label === 'Ex')?.availability).toBe('withdrawn');
+    expect(states.find(({ label }) => label === 'E')?.officialOrder).toBe(4);
+    expect(states.find(({ label }) => label === 'F')?.officialOrder).toBe(5);
+  });
+
+  it('rejects case-fold collisions across existing and later contest labels', () => {
+    const subject = {
+      version: '1.0.0' as const,
+      labels: ['Ex'],
+      firstSeenContestByLabel: { Ex: 'abc212' },
+      orderEvidenceSourceRevisionIds: ['source-abc212-task-order'],
+    };
+    expect(() =>
+      buildAdvancedSlotRegistry({
+        existingRegistry: { ...subject, digest: canonicalDigest(subject) },
+        contests: [
+          {
+            contestId: 'abc500',
+            advancedLabels: ['ex'],
+            sourceRevisionId: 'source-abc500-task-order',
+          },
+        ],
+      }),
+    ).toThrow(/TASK_LABEL_CASE_CONFLICT/u);
+  });
+
+  it('sorts contest entities numerically and without locale-dependent comparison', () => {
+    expect(
+      sortCatalogEntityArray('contests', [{ id: 'abc1000' }, { id: 'abc999' }]).map(({ id }) => id),
+    ).toEqual(['abc999', 'abc1000']);
   });
 
   it('rejects contradictory ContestSlot availability and hold states', () => {

@@ -8,6 +8,7 @@ import {
   assertReviewComplete,
   calculateApprovableDigest,
   calculateCandidatePayloadDigest,
+  calculateContentSubjectDigest,
   transitionReleaseCandidate,
   validatePublicationUpdate,
   validateReleaseCandidate,
@@ -26,7 +27,17 @@ const makePublicationUpdate = (): Record<string, unknown> => ({
   contestId: null,
   sourceSetFingerprint: sha('1'),
   advancedSlotLabels: ['E'],
-  operations: [],
+  operations: [
+    {
+      operationId: 'operation-add-abc212-x45',
+      entityType: 'problem',
+      entityId: 'abc212-x45',
+      action: 'add',
+      path: 'src/content/problems/abc212-x45.json',
+      beforeDigest: null,
+      afterDigest: sha('a'),
+    },
+  ],
   authoringResults: [
     {
       problemId: 'abc212-x45',
@@ -57,9 +68,11 @@ const makePublicationUpdate = (): Record<string, unknown> => ({
 });
 
 const makeReleaseCandidate = (): Record<string, unknown> => {
+  const contentFiles = [{ path: 'src/content/catalog.json', sha256: sha('4'), byteLength: 1 }];
+  const contentSubjectDigest = calculateContentSubjectDigest(contentFiles);
   const candidate: Record<string, unknown> = {
     schemaVersion: '2.0.0',
-    candidateId: 'candidate-phase-two',
+    candidateId: 'release-candidate-2026.07.17-aaaaaaaaaaaa',
     releaseKind: 'initial',
     targetReleaseVersion: '2026.07.17',
     baseReleaseVersion: null,
@@ -67,13 +80,13 @@ const makeReleaseCandidate = (): Record<string, unknown> => {
     orderedUpdateIds: ['update-phase-two'],
     fixtureMode: false,
     advancedSlotRegistryDigest: sha('3'),
-    contentFiles: [{ path: 'src/content/catalog.json', sha256: sha('4'), byteLength: 1 }],
-    contentSubjectDigest: sha('5'),
+    contentFiles,
+    contentSubjectDigest,
     preJudgmentCheckRefs: [
       {
         checkId: 'check-contracts',
         checkType: 'automated',
-        subjectDigest: sha('5'),
+        subjectDigest: contentSubjectDigest,
         command: 'npm run test:contract',
         exitCode: 0,
         resultPath: 'docs/verification/check.json',
@@ -86,7 +99,7 @@ const makeReleaseCandidate = (): Record<string, unknown> => {
         evidenceId: 'human-review-phase-two',
         path: 'docs/verification/human-review.json',
         digest: sha('7'),
-        subjectDigest: sha('5'),
+        subjectDigest: contentSubjectDigest,
         reviewerExecutedCheckSetDigest: sha('8'),
         aggregatePassed: true,
       },
@@ -119,6 +132,22 @@ const makeReleaseCandidate = (): Record<string, unknown> => {
   };
   return candidate;
 };
+
+const trustedCandidateContext = (candidate: Record<string, unknown>) => ({
+  updates: [
+    {
+      updateId: 'update-phase-two',
+      state: 'ELIGIBLE_FOR_BATCH' as const,
+      baseReleaseVersion: null,
+      targetReleaseVersion: '2026.07.17',
+    },
+  ],
+  contentFiles: candidate.contentFiles as {
+    path: string;
+    sha256: string;
+    byteLength: number;
+  }[],
+});
 
 describe('release state gate', () => {
   it('allows only the declared forward transitions and fail-closed holds', () => {
@@ -179,29 +208,34 @@ describe('release state gate', () => {
   });
 
   it('requires an append-only receipt before the published state is accepted', () => {
-    const candidate = {
-      candidateId: 'candidate-phase-two',
-      targetReleaseVersion: '2026.07.17',
-      contentSubjectDigest: sha('5'),
-      candidatePayloadDigest: sha('b'),
-      approvableDigest: sha('c'),
-      publicationEffectiveAt: publishedAt,
-      publicationWindowEndsAt: windowEndsAt,
-    };
+    const candidate = makeReleaseCandidate();
     const receipt = {
-      candidateId: 'candidate-phase-two',
+      schemaVersion: '1.0.0',
+      receiptId: 'publish-receipt-2026.07.17-bbbbbbbbbbbb',
+      receiptPath: 'docs/verification/publish-receipts/2026.07.17.json',
+      candidateId: candidate.candidateId,
       releaseVersion: '2026.07.17',
-      contentSnapshotDigest: sha('5'),
-      candidatePayloadDigest: sha('b'),
-      approvableDigest: sha('c'),
+      contentSnapshotDigest: candidate.contentSubjectDigest,
+      candidatePayloadDigest: candidate.candidatePayloadDigest,
+      approvableDigest: candidate.approvableDigest,
       publicationEffectiveAt: publishedAt,
       publicationWindowEndsAt: windowEndsAt,
+      actualAtomicSwapAt: '2026-07-17T12:30:00+09:00',
+      osFamily: 'macos',
+      osVersion: '15.0',
+      filesystem: 'apfs',
+      toolVersions: { node: '24.18.0' },
+      previousReleaseVersion: null,
+      newReleaseVersion: '2026.07.17',
       result: 'published',
+      rawEvidenceDigest: sha('d'),
+      recordedAt: '2026-07-17T12:31:00+09:00',
     };
     expect(() =>
       transitionReleaseCandidate('READY_TO_PUBLISH', 'PUBLISHED', {
         receipt,
         candidate,
+        trusted: trustedCandidateContext(candidate),
       }),
     ).not.toThrow();
 
@@ -214,7 +248,16 @@ describe('release state gate', () => {
     expect(() =>
       transitionReleaseCandidate('READY_TO_PUBLISH', 'PUBLISHED', {
         candidate,
-        receipt: { ...receipt, approvableDigest: sha('d') },
+        receipt: { ...receipt, approvableDigest: sha('e') },
+        trusted: trustedCandidateContext(candidate),
+      }),
+    ).toThrow(/PUBLISH_RECEIPT_MISMATCH/u);
+
+    expect(() =>
+      transitionReleaseCandidate('READY_TO_PUBLISH', 'PUBLISHED', {
+        candidate,
+        receipt: { ...receipt, actualAtomicSwapAt: '2026-07-17T14:00:00+09:00' },
+        trusted: trustedCandidateContext(candidate),
       }),
     ).toThrow(/PUBLISH_RECEIPT_MISMATCH/u);
   });
@@ -236,12 +279,13 @@ describe('release state gate', () => {
     }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
 
     expect(() => {
-      validateReleaseCandidate(makeReleaseCandidate());
+      const candidate = makeReleaseCandidate();
+      validateReleaseCandidate(candidate, trustedCandidateContext(candidate));
     }).not.toThrow();
     const unapproved = makeReleaseCandidate();
     unapproved.ownerApproval = null;
     expect(() => {
-      validateReleaseCandidate(unapproved);
+      validateReleaseCandidate(unapproved, trustedCandidateContext(unapproved));
     }).toThrow(/RELEASE_CANDIDATE_INVALID/u);
 
     const stalePayload = makeReleaseCandidate();
@@ -249,7 +293,23 @@ describe('release state gate', () => {
     if (!candidateFile) throw new Error('Fixture candidate file is missing.');
     candidateFile.sha256 = sha('d');
     expect(() => {
-      validateReleaseCandidate(stalePayload);
+      validateReleaseCandidate(stalePayload, trustedCandidateContext(stalePayload));
     }).toThrow(/RELEASE_CANDIDATE_DIGEST_MISMATCH/u);
+
+    const changedContent = makeReleaseCandidate();
+    const [contentFile] = changedContent.contentFiles as { sha256: string }[];
+    if (!contentFile) throw new Error('Fixture content file is missing.');
+    const trusted = trustedCandidateContext(changedContent);
+    trusted.contentFiles = structuredClone(trusted.contentFiles);
+    const [trustedContentFile] = trusted.contentFiles;
+    if (!trustedContentFile) throw new Error('Trusted content fixture is missing.');
+    trustedContentFile.sha256 = sha('f');
+    expect(() => {
+      validateReleaseCandidate(changedContent, trusted);
+    }).toThrow(/RELEASE_CANDIDATE_DIGEST_MISMATCH/u);
+
+    expect(() => {
+      validateReleaseCandidate(makeReleaseCandidate());
+    }).toThrow(/RELEASE_TRUSTED_INVENTORY_REQUIRED/u);
   });
 });

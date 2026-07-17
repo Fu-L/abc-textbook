@@ -10,13 +10,16 @@ import {
   generateContractJsonSchemas,
 } from '../../scripts/generate-json-schemas.js';
 import { canonicalJson } from '../../src/lib/domain/canonical-json.js';
-import { ReleaseCandidateContract } from '../../src/lib/domain/schema-parts/release.js';
+import {
+  ReleaseCandidateContract,
+  UpdateManifestContract,
+} from '../../src/lib/domain/schema-parts/release.js';
 
 const contractsDirectory = path.resolve('specs/001-build-abc-textbook/contracts');
 const sha = (character: string): string => character.repeat(64);
 const validDraftCandidate = {
   schemaVersion: '2.0.0',
-  candidateId: 'candidate-phase-two',
+  candidateId: 'release-candidate-2026.07.17-aaaaaaaaaaaa',
   releaseKind: 'initial',
   targetReleaseVersion: '2026.07.17',
   baseReleaseVersion: null,
@@ -106,5 +109,60 @@ describe('canonical Zod and JSON Schema parity', () => {
       expect(ReleaseCandidateContract.schema.safeParse(value).success).toBe(expected);
       expect(validateJsonSchema(value)).toBe(expected);
     }
+  });
+
+  it('keeps ELIGIBLE update conditional failures aligned between Zod and Ajv', () => {
+    const update = {
+      schemaVersion: '2.0.0',
+      updateId: 'update-phase-two',
+      kind: 'bootstrap',
+      baseReleaseVersion: null,
+      contestId: null,
+      sourceSetFingerprint: sha('1'),
+      advancedSlotLabels: ['E'],
+      operations: [
+        {
+          operationId: 'operation-problem',
+          entityType: 'problem',
+          entityId: 'abc212-e',
+          action: 'add',
+          path: 'src/content/problems/abc212-e.json',
+          beforeDigest: null,
+          afterDigest: sha('2'),
+        },
+      ],
+      authoringResults: [
+        {
+          problemId: 'abc212-e',
+          slotLabel: 'E',
+          resultType: 'blocked',
+          draftPath: null,
+          packetPath: null,
+          templatePath: null,
+          reasonCode: 'SOURCE_UNAVAILABLE',
+          reason: 'Source unavailable.',
+          retryCondition: 'Retry later.',
+        },
+      ],
+      correctionImpactIds: [],
+      validationSummary: {
+        checkIds: ['check-contracts'],
+        problemResults: [
+          { problemId: 'abc212-e', passed: true, findingCodes: [], remediation: null },
+        ],
+        blockingFindingCount: 0,
+        aggregatePassed: true,
+        resultDigest: sha('3'),
+      },
+      state: 'ELIGIBLE_FOR_BATCH',
+      createdAt: '2026-07-17T12:00:00+09:00',
+      updatedAt: '2026-07-17T12:00:00+09:00',
+      fixtureMode: false,
+    } as const;
+    const ajv = new Ajv2020({ allErrors: true, strict: false });
+    addFormats(ajv);
+    const validateJsonSchema = ajv.compile(UpdateManifestContract.jsonSchema);
+    expect(UpdateManifestContract.schema.safeParse(update).success).toBe(false);
+    expect(validateJsonSchema(update)).toBe(false);
   });
 });

@@ -1,5 +1,9 @@
 import { canonicalDigest } from '../domain/canonical-json.js';
-import { PublicationUpdateSchema, ReleaseCandidateSchema } from '../domain/schema-parts/release.js';
+import {
+  PublicationUpdateSchema,
+  PublishReceiptSchema,
+  ReleaseCandidateSchema,
+} from '../domain/schema-parts/release.js';
 
 export type ReleaseCandidateState =
   | 'DRAFTED'
@@ -33,25 +37,9 @@ export class ReleaseTransitionError extends Error {
 }
 
 interface PublishContext {
-  readonly candidate?: {
-    readonly candidateId: string;
-    readonly targetReleaseVersion: string;
-    readonly contentSubjectDigest: string;
-    readonly candidatePayloadDigest: string | null;
-    readonly approvableDigest: string | null;
-    readonly publicationEffectiveAt: string | null;
-    readonly publicationWindowEndsAt: string | null;
-  };
-  readonly receipt?: {
-    readonly candidateId: string;
-    readonly releaseVersion: string;
-    readonly contentSnapshotDigest: string;
-    readonly candidatePayloadDigest: string;
-    readonly approvableDigest: string;
-    readonly publicationEffectiveAt: string;
-    readonly publicationWindowEndsAt: string;
-    readonly result: string;
-  };
+  readonly candidate?: unknown;
+  readonly receipt?: unknown;
+  readonly trusted?: TrustedReleaseCandidateContext;
 }
 
 export const transitionReleaseCandidate = (
@@ -65,21 +53,27 @@ export const transitionReleaseCandidate = (
     throw new ReleaseTransitionError('INVALID_RELEASE_TRANSITION', `${current} -> ${next}`);
   }
   if (next === 'PUBLISHED') {
-    const candidate = context?.candidate;
-    const receipt = context?.receipt;
-    if (!candidate || !receipt) {
+    const candidateResult = ReleaseCandidateSchema.safeParse(context?.candidate);
+    const receiptResult = PublishReceiptSchema.safeParse(context?.receipt);
+    if (!candidateResult.success || !receiptResult.success) {
       throw new ReleaseTransitionError(
         'PUBLISH_RECEIPT_REQUIRED',
-        'A matching append-only receipt is required.',
+        'A schema-valid READY candidate and append-only receipt are required.',
       );
     }
-    if (receipt.result !== 'published') {
+    const candidate = candidateResult.data;
+    const receipt = receiptResult.data;
+    try {
+      validateReleaseCandidate(candidate, context?.trusted);
+    } catch (error) {
       throw new ReleaseTransitionError(
-        'PUBLISH_RECEIPT_REQUIRED',
-        'A successful append-only receipt is required.',
+        'PUBLISH_CANDIDATE_INVALID',
+        error instanceof Error ? error.message : String(error),
       );
     }
+    const swapAt = Date.parse(receipt.actualAtomicSwapAt);
     if (
+      candidate.state !== 'READY_TO_PUBLISH' ||
       candidate.candidatePayloadDigest === null ||
       candidate.approvableDigest === null ||
       candidate.publicationEffectiveAt === null ||
@@ -90,7 +84,12 @@ export const transitionReleaseCandidate = (
       receipt.candidatePayloadDigest !== candidate.candidatePayloadDigest ||
       receipt.approvableDigest !== candidate.approvableDigest ||
       receipt.publicationEffectiveAt !== candidate.publicationEffectiveAt ||
-      receipt.publicationWindowEndsAt !== candidate.publicationWindowEndsAt
+      receipt.publicationWindowEndsAt !== candidate.publicationWindowEndsAt ||
+      receipt.newReleaseVersion !== candidate.targetReleaseVersion ||
+      receipt.previousReleaseVersion !== candidate.baseReleaseVersion ||
+      swapAt < Date.parse(candidate.publicationEffectiveAt) ||
+      swapAt > Date.parse(candidate.publicationWindowEndsAt) ||
+      Date.parse(receipt.recordedAt) < swapAt
     ) {
       throw new ReleaseTransitionError(
         'PUBLISH_RECEIPT_MISMATCH',
@@ -109,7 +108,19 @@ export const validatePublicationUpdate = (value: unknown): void => {
 };
 
 export const calculateCandidatePayloadDigest = (candidateFiles: readonly unknown[]): string =>
-  canonicalDigest(candidateFiles);
+  canonicalDigest(sortFileInventory(candidateFiles));
+
+const sortFileInventory = (files: readonly unknown[]): readonly unknown[] =>
+  [...files].sort((left, right) => {
+    const leftPath =
+      typeof left === 'object' && left !== null && 'path' in left ? String(left.path) : '';
+    const rightPath =
+      typeof right === 'object' && right !== null && 'path' in right ? String(right.path) : '';
+    return leftPath < rightPath ? -1 : leftPath > rightPath ? 1 : 0;
+  });
+
+export const calculateContentSubjectDigest = (contentFiles: readonly unknown[]): string =>
+  canonicalDigest(sortFileInventory(contentFiles));
 
 export const calculateApprovableDigest = (candidate: {
   readonly contentSubjectDigest: string;
@@ -126,14 +137,56 @@ export const calculateApprovableDigest = (candidate: {
     blockingFindings: candidate.blockingFindings,
   });
 
-export const validateReleaseCandidate = (value: unknown): void => {
+export interface TrustedReleaseCandidateContext {
+  readonly updates: readonly {
+    readonly updateId: string;
+    readonly state: 'ELIGIBLE_FOR_BATCH';
+    readonly baseReleaseVersion: string | null;
+    readonly targetReleaseVersion: string;
+  }[];
+  /** Read-only inventory calculated from the actual files immediately before publication. */
+  readonly contentFiles: readonly {
+    readonly path: string;
+    readonly sha256: string;
+    readonly byteLength: number;
+  }[];
+}
+
+export const validateReleaseCandidate = (
+  value: unknown,
+  trusted?: TrustedReleaseCandidateContext,
+): void => {
   const result = ReleaseCandidateSchema.safeParse(value);
   if (!result.success) {
     throw new ReleaseTransitionError('RELEASE_CANDIDATE_INVALID', result.error.message);
   }
   const candidate = result.data;
   if (['READY_TO_PUBLISH', 'PUBLISHED'].includes(candidate.state)) {
+    if (!trusted) {
+      throw new ReleaseTransitionError(
+        'RELEASE_TRUSTED_INVENTORY_REQUIRED',
+        'Final validation requires trusted update and file inventories.',
+      );
+    }
+    const trustedUpdates = new Map(trusted.updates.map((update) => [update.updateId, update]));
+    const updateInventoryMatches =
+      trustedUpdates.size === trusted.updates.length &&
+      trustedUpdates.size === candidate.orderedUpdateIds.length &&
+      candidate.orderedUpdateIds.every((updateId, index) => {
+        const update = trustedUpdates.get(updateId);
+        return (
+          trusted.updates[index]?.updateId === updateId &&
+          update?.state === 'ELIGIBLE_FOR_BATCH' &&
+          update.baseReleaseVersion === candidate.baseReleaseVersion &&
+          update.targetReleaseVersion === candidate.targetReleaseVersion
+        );
+      });
+    const trustedFiles = sortFileInventory(trusted.contentFiles);
+    const candidateContentFiles = sortFileInventory(candidate.contentFiles);
     if (
+      !updateInventoryMatches ||
+      canonicalDigest(trustedFiles) !== canonicalDigest(candidateContentFiles) ||
+      candidate.contentSubjectDigest !== calculateContentSubjectDigest(candidate.contentFiles) ||
       candidate.fixtureMode ||
       candidate.candidatePayloadDigest === null ||
       candidate.approvableDigest === null ||

@@ -292,6 +292,18 @@ export const MergeReviewEvidenceSchema = strictObject({
   evidenceDigest: Sha256Schema,
 })
   .superRefine((evidence, context) => {
+    const applicableIds = evidence.applicableChecks.map(({ checkId }) => checkId);
+    const notApplicableIds = evidence.notApplicableChecks.map(({ checkId }) => checkId);
+    if (
+      new Set(applicableIds).size !== applicableIds.length ||
+      new Set(notApplicableIds).size !== notApplicableIds.length ||
+      applicableIds.some((id) => notApplicableIds.includes(id))
+    ) {
+      context.addIssue({
+        code: 'custom',
+        message: 'Check classifications must be unique and disjoint.',
+      });
+    }
     if (
       evidence.mergeApproved &&
       (evidence.applicableChecks.some((check) => check.exitCode !== 0) ||

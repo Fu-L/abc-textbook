@@ -4,6 +4,8 @@ import { deterministicTopologicalOrder } from '../validation/validate.js';
 export interface ContestAdvancedOrder {
   readonly contestId: string;
   readonly advancedLabels: readonly string[];
+  /** Complete official task order. Required when materializing absolute slot positions. */
+  readonly officialTaskOrder?: readonly string[];
   readonly sourceRevisionId?: string;
 }
 
@@ -82,6 +84,7 @@ export const buildAdvancedSlotRegistry = (input: {
   };
   const evidence = new Set(input.existingRegistry?.orderEvidenceSourceRevisionIds ?? []);
   const allLabels = new Set(existingLabels);
+  const globallyObservedCase = new Map(existingLabels.map((label) => [caseFold(label), label]));
   const edges = new Map<string, Set<string>>();
   const ensure = (label: string): void => {
     allLabels.add(label);
@@ -114,6 +117,17 @@ export const buildAdvancedSlotRegistry = (input: {
     }
     if (new Set(contest.advancedLabels.map(caseFold)).size !== contest.advancedLabels.length) {
       throw new AdvancedSlotRegistryError('DUPLICATE_TASK_LABEL', contest.contestId);
+    }
+    for (const label of contest.advancedLabels) {
+      const folded = caseFold(label);
+      const observed = globallyObservedCase.get(folded);
+      if (observed !== undefined && observed !== label) {
+        throw new AdvancedSlotRegistryError(
+          'TASK_LABEL_CASE_CONFLICT',
+          `${observed} and ${label} are distinct labels with the same stable identity.`,
+        );
+      }
+      globallyObservedCase.set(folded, label);
     }
     evidence.add(contest.sourceRevisionId);
     contest.advancedLabels.forEach((label) => {
@@ -185,7 +199,7 @@ export type ContestSlotAvailability = 'exists' | 'official_absent' | 'unknown' |
 
 export const materializeContestSlotStates = (
   registryLabels: readonly string[],
-  contest: ContestAdvancedOrder,
+  contest: ContestAdvancedOrder & { readonly officialTaskOrder: readonly string[] },
   stateOverrides: Readonly<
     Partial<Record<string, Extract<ContestSlotAvailability, 'unknown' | 'withdrawn'>>>
   > = {},
@@ -197,7 +211,7 @@ export const materializeContestSlotStates = (
   readonly holdReason: string | null;
 }[] =>
   registryLabels.map((label) => {
-    const officialOrder = contest.advancedLabels.indexOf(label);
+    const officialOrder = contest.officialTaskOrder.indexOf(label);
     const override = stateOverrides[label];
     const availability = override ?? (officialOrder < 0 ? 'official_absent' : 'exists');
     return {

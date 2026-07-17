@@ -21,6 +21,7 @@ const trustedInventory = {
       kind: 'non_automatable_claim',
       subjectPaths: ['src/content/docs/index.md'],
       authorIds: ['person-author'],
+      learningOutcomeIds: [],
     },
   ],
 } as const;
@@ -177,9 +178,12 @@ const trustedMergeContext = {
     digest: sha('5'),
     subjectDigest: sha('a'),
     aggregatePassed: true,
+    gateReviewerId: 'person-reviewer',
   },
   constitutionVersion: '1.0.0',
   constitutionDigest: sha('6'),
+  gateReviewerId: 'person-reviewer',
+  checks: [{ checkId: 'check-contracts', command: 'npm run test:contract', applicable: true }],
 } as const;
 
 describe('human content review gate', () => {
@@ -296,5 +300,27 @@ describe('human content review gate', () => {
     expect(() => {
       validateHumanContentReview(omittedItem, trustedInventory);
     }).toThrow(/REVIEW_ITEM_INVENTORY_INVALID/u);
+  });
+
+  it('binds outcome coverage and merge checks to the trusted manifest inventory', () => {
+    const replacedCoverage = makeEvidence();
+    const coverage = replacedCoverage.outcomeCoverageReview as Record<string, unknown>;
+    coverage.decision = 'confirmed';
+    coverage.learningOutcomeIds = ['outcome-untrusted'];
+    coverage.noOutcomeImpactRationale = null;
+    replacedCoverage.evidenceDigest = digestWithoutField(replacedCoverage, 'evidenceDigest');
+    expect(() => {
+      validateHumanContentReview(replacedCoverage, trustedInventory);
+    }).toThrow(/OUTCOME_COVERAGE_INVENTORY_INVALID/u);
+
+    expect(() => {
+      validateMergeReviewEvidence(makeMergeEvidence(), {
+        ...trustedMergeContext,
+        checks: [
+          ...trustedMergeContext.checks,
+          { checkId: 'check-lint', command: 'npm run lint', applicable: true },
+        ],
+      });
+    }).toThrow(/MERGE_CHECK_INVENTORY_INVALID/u);
   });
 });

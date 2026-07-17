@@ -34,6 +34,16 @@ interface CatalogLike {
     readonly contestCount: number;
     readonly problemCount: number;
     readonly slotRecordCount: number;
+    readonly validationSummary: {
+      readonly checkCount: number;
+      readonly passedCheckCount: number;
+      readonly blockingFindingCount: number;
+    };
+    readonly humanContentReviewEvidenceRefs: readonly unknown[];
+    readonly addedProblemIds: readonly string[];
+    readonly changedProblemIds: readonly string[];
+    readonly heldProblemIds: readonly string[];
+    readonly withdrawnProblemIds: readonly string[];
   };
   readonly advancedSlotRegistry: {
     readonly labels: readonly string[];
@@ -53,16 +63,26 @@ interface CatalogLike {
     readonly officialOrder: number | null;
     readonly availability: 'exists' | 'official_absent' | 'unknown' | 'withdrawn';
     readonly problemId?: string | null;
+    readonly sourceRevisionId: string;
   }[];
   readonly problems: readonly {
     readonly id: string;
     readonly contestId?: string;
     readonly slotLabel?: string;
+    readonly publicationStatus: string;
+    readonly sourceRevisionIds: readonly string[];
+    readonly primaryTagIds: readonly string[];
+    readonly secondaryTagIds: readonly string[];
+    readonly placementId: string | null;
+    readonly explanationId: string | null;
   }[];
   readonly techniqueInventory: readonly { readonly problemId: string }[];
   readonly tags: readonly {
     readonly id: string;
     readonly prerequisiteTagIds: readonly string[];
+    readonly parentId: string | null;
+    readonly learningOutcomeIds: readonly string[];
+    readonly representativeProblemIds: readonly string[];
   }[];
   readonly learningUnits: readonly {
     readonly id: string;
@@ -70,7 +90,70 @@ interface CatalogLike {
     readonly stageRank: number;
     readonly difficultyRank: number;
     readonly representativeRank: number;
+    readonly parentId: string | null;
+    readonly tagIds: readonly string[];
+    readonly learningOutcomeIds: readonly string[];
+    readonly exampleIds: readonly string[];
+    readonly problemIds: readonly string[];
+    readonly assessmentIds: readonly string[];
   }[];
+  readonly learningOutcomes: readonly {
+    readonly id: string;
+    readonly prerequisiteOutcomeIds: readonly string[];
+    readonly assessmentIds: readonly string[];
+  }[];
+  readonly placements: readonly {
+    readonly id: string;
+    readonly problemId: string;
+    readonly primaryExplanationId: string | null;
+    readonly sharedOutcomeIds: readonly string[];
+    readonly evidenceIds: readonly string[];
+  }[];
+  readonly explanations: readonly {
+    readonly id: string;
+    readonly problemId: string;
+    readonly primaryExplanationId: string | null;
+    readonly learningOutcomeIds: readonly string[];
+    readonly additionalPrerequisiteUnitIds: readonly string[];
+    readonly tagIds: readonly string[];
+    readonly sourceRevisionIds: readonly string[];
+    readonly claimIds: readonly string[];
+    readonly exampleIds: readonly string[];
+  }[];
+  readonly sources: readonly { readonly id: string }[];
+  readonly claims: readonly {
+    readonly id: string;
+    readonly sourceRevisionIds: readonly string[];
+  }[];
+  readonly correctionImpacts: readonly {
+    readonly id: string;
+    readonly sourceRevisionId: string;
+    readonly explanationIds: readonly string[];
+    readonly claimIds: readonly string[];
+    readonly exampleIds: readonly string[];
+    readonly exerciseIds: readonly string[];
+    readonly answerMaterialIds: readonly string[];
+    readonly learningUnitIds: readonly string[];
+    readonly verificationStatus: string;
+  }[];
+  readonly examples: readonly {
+    readonly id: string;
+    readonly learningOutcomeIds: readonly string[];
+    readonly ownerExplanationIds: readonly string[];
+    readonly ownerLearningUnitIds: readonly string[];
+  }[];
+  readonly exercises: readonly {
+    readonly id: string;
+    readonly problemId: string | null;
+    readonly learningOutcomeIds: readonly string[];
+    readonly assessmentId: string;
+    readonly answerMaterialId: string;
+  }[];
+  readonly assessments: readonly {
+    readonly id: string;
+    readonly learningOutcomeIds: readonly string[];
+  }[];
+  readonly answerMaterials: readonly { readonly id: string; readonly exerciseId: string }[];
   readonly [key: string]: unknown;
 }
 
@@ -98,18 +181,31 @@ export const sortCatalogEntityArray = (
   items: readonly Entity[],
 ): readonly Entity[] =>
   [...items].sort((left, right) => {
+    const compareCodeUnits = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
+    const compareContestIds = (a: string, b: string): number => {
+      const leftNumber = /^abc(?<number>[0-9]+)$/u.exec(a)?.groups?.number;
+      const rightNumber = /^abc(?<number>[0-9]+)$/u.exec(b)?.groups?.number;
+      if (leftNumber && rightNumber) {
+        const leftValue = BigInt(leftNumber);
+        const rightValue = BigInt(rightNumber);
+        if (leftValue !== rightValue) return leftValue < rightValue ? -1 : 1;
+      }
+      return compareCodeUnits(a, b);
+    };
     if (key === 'contestSlots') {
       return (
-        (left.contestId ?? '').localeCompare(right.contestId ?? '') ||
+        compareContestIds(left.contestId ?? '', right.contestId ?? '') ||
         (left.officialOrder ?? Number.MAX_SAFE_INTEGER) -
           (right.officialOrder ?? Number.MAX_SAFE_INTEGER) ||
-        (left.label ?? '').localeCompare(right.label ?? '') ||
-        (left.problemId ?? '').localeCompare(right.problemId ?? '')
+        compareCodeUnits(left.label ?? '', right.label ?? '') ||
+        compareCodeUnits(left.problemId ?? '', right.problemId ?? '')
       );
     }
     const leftKey = key === 'techniqueInventory' ? left.problemId : left.id;
     const rightKey = key === 'techniqueInventory' ? right.problemId : right.id;
-    return (leftKey ?? '').localeCompare(rightKey ?? '');
+    return key === 'contests'
+      ? compareContestIds(leftKey ?? '', rightKey ?? '')
+      : compareCodeUnits(leftKey ?? '', rightKey ?? '');
   });
 
 export const buildCatalog = (input: unknown, sourcePaths: readonly string[] = []): CatalogLike => {
@@ -221,6 +317,12 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
     }
   }
   const inventoryIds = new Set(catalog.techniqueInventory.map(({ problemId }) => problemId));
+  if (inventoryIds.size !== catalog.techniqueInventory.length) {
+    diagnostics.push({
+      code: 'DUPLICATE_TECHNIQUE_INVENTORY_PROBLEM',
+      message: 'Each problem must have exactly one Technique Inventory record.',
+    });
+  }
   for (const missing of [...problemIds].filter((id) => !inventoryIds.has(id))) {
     diagnostics.push({ code: 'TECHNIQUE_INVENTORY_MISSING', entityId: missing, message: missing });
   }
@@ -356,14 +458,235 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
       message: error instanceof Error ? error.message : String(error),
     });
   }
+  const idSet = (kind: string, values: readonly { readonly id: string }[]): ReadonlySet<string> => {
+    const ids = new Set(values.map(({ id }) => id));
+    if (ids.size !== values.length) {
+      diagnostics.push({ code: `DUPLICATE_${kind}_ID`, message: `${kind} IDs must be unique.` });
+    }
+    return ids;
+  };
+  const tagIds = idSet('TAG', catalog.tags);
+  const outcomeIds = idSet('OUTCOME', catalog.learningOutcomes);
+  const unitIds = idSet('LEARNING_UNIT', catalog.learningUnits);
+  const placementIds = idSet('PLACEMENT', catalog.placements);
+  const explanationIds = idSet('EXPLANATION', catalog.explanations);
+  const sourceIds = idSet('SOURCE_REVISION', catalog.sources);
+  idSet('CORRECTION_IMPACT', catalog.correctionImpacts);
+  const claimIds = idSet('CLAIM', catalog.claims);
+  const exampleIds = idSet('EXAMPLE', catalog.examples);
+  const exerciseIds = idSet('EXERCISE', catalog.exercises);
+  const assessmentIds = idSet('ASSESSMENT', catalog.assessments);
+  const answerMaterialIds = idSet('ANSWER_MATERIAL', catalog.answerMaterials);
+  const requireRefs = (
+    owner: string,
+    relation: string,
+    refs: readonly string[],
+    targets: ReadonlySet<string>,
+  ): void => {
+    for (const ref of refs) {
+      if (!targets.has(ref)) {
+        diagnostics.push({
+          code: 'CATALOG_REFERENCE_MISSING',
+          entityId: owner,
+          message: `${owner}.${relation} references unknown ${ref}.`,
+        });
+      }
+    }
+  };
+  if (
+    catalog.release.validationSummary.passedCheckCount !==
+      catalog.release.validationSummary.checkCount ||
+    catalog.release.validationSummary.blockingFindingCount !== 0 ||
+    catalog.release.humanContentReviewEvidenceRefs.length === 0
+  ) {
+    diagnostics.push({
+      code: 'RELEASE_EVIDENCE_INCOMPLETE',
+      message: 'Every release check and human review must pass before catalog publication.',
+    });
+  }
+  for (const [relation, refs] of [
+    ['addedProblemIds', catalog.release.addedProblemIds],
+    ['changedProblemIds', catalog.release.changedProblemIds],
+    ['heldProblemIds', catalog.release.heldProblemIds],
+    ['withdrawnProblemIds', catalog.release.withdrawnProblemIds],
+  ] as const) {
+    requireRefs('release', relation, refs, problemIds);
+  }
+  for (const slot of catalog.contestSlots) {
+    requireRefs(
+      `${slot.contestId}:${slot.label}`,
+      'sourceRevisionId',
+      [slot.sourceRevisionId],
+      sourceIds,
+    );
+  }
+  for (const contest of catalog.contests) {
+    requireRefs(
+      contest.id,
+      'taskOrderSourceRevisionId',
+      [contest.taskOrderSourceRevisionId],
+      sourceIds,
+    );
+  }
+  for (const problem of catalog.problems) {
+    requireRefs(problem.id, 'sourceRevisionIds', problem.sourceRevisionIds, sourceIds);
+    requireRefs(problem.id, 'primaryTagIds', problem.primaryTagIds, tagIds);
+    requireRefs(problem.id, 'secondaryTagIds', problem.secondaryTagIds, tagIds);
+    if (problem.placementId)
+      requireRefs(problem.id, 'placementId', [problem.placementId], placementIds);
+    if (problem.explanationId)
+      requireRefs(problem.id, 'explanationId', [problem.explanationId], explanationIds);
+    const placement = problem.placementId
+      ? catalog.placements.find(({ id }) => id === problem.placementId)
+      : undefined;
+    const explanation = problem.explanationId
+      ? catalog.explanations.find(({ id }) => id === problem.explanationId)
+      : undefined;
+    if (placement && placement.problemId !== problem.id) {
+      diagnostics.push({
+        code: 'PROBLEM_PLACEMENT_MISMATCH',
+        entityId: problem.id,
+        message: problem.id,
+      });
+    }
+    if (explanation && explanation.problemId !== problem.id) {
+      diagnostics.push({
+        code: 'PROBLEM_EXPLANATION_MISMATCH',
+        entityId: problem.id,
+        message: problem.id,
+      });
+    }
+    if (
+      problem.publicationStatus === 'published' &&
+      (problem.primaryTagIds.length === 0 || !problem.placementId || !problem.explanationId)
+    ) {
+      diagnostics.push({
+        code: 'PUBLISHED_PROBLEM_UNREACHABLE',
+        entityId: problem.id,
+        message: 'Published problems require a primary tag, placement, and explanation.',
+      });
+    }
+  }
+  for (const tag of catalog.tags) {
+    if (tag.parentId) requireRefs(tag.id, 'parentId', [tag.parentId], tagIds);
+    requireRefs(tag.id, 'prerequisiteTagIds', tag.prerequisiteTagIds, tagIds);
+    requireRefs(tag.id, 'learningOutcomeIds', tag.learningOutcomeIds, outcomeIds);
+    requireRefs(tag.id, 'representativeProblemIds', tag.representativeProblemIds, problemIds);
+  }
+  for (const outcome of catalog.learningOutcomes) {
+    requireRefs(outcome.id, 'prerequisiteOutcomeIds', outcome.prerequisiteOutcomeIds, outcomeIds);
+    requireRefs(outcome.id, 'assessmentIds', outcome.assessmentIds, assessmentIds);
+  }
+  for (const unit of catalog.learningUnits) {
+    if (unit.parentId) requireRefs(unit.id, 'parentId', [unit.parentId], unitIds);
+    requireRefs(
+      unit.id,
+      'additionalPrerequisiteUnitIds',
+      unit.additionalPrerequisiteUnitIds,
+      unitIds,
+    );
+    requireRefs(unit.id, 'tagIds', unit.tagIds, tagIds);
+    requireRefs(unit.id, 'learningOutcomeIds', unit.learningOutcomeIds, outcomeIds);
+    requireRefs(unit.id, 'exampleIds', unit.exampleIds, exampleIds);
+    requireRefs(unit.id, 'problemIds', unit.problemIds, problemIds);
+    requireRefs(unit.id, 'assessmentIds', unit.assessmentIds, assessmentIds);
+  }
+  for (const placement of catalog.placements) {
+    requireRefs(placement.id, 'problemId', [placement.problemId], problemIds);
+    if (placement.primaryExplanationId)
+      requireRefs(
+        placement.id,
+        'primaryExplanationId',
+        [placement.primaryExplanationId],
+        explanationIds,
+      );
+    requireRefs(placement.id, 'sharedOutcomeIds', placement.sharedOutcomeIds, outcomeIds);
+  }
+  for (const explanation of catalog.explanations) {
+    requireRefs(explanation.id, 'problemId', [explanation.problemId], problemIds);
+    if (explanation.primaryExplanationId)
+      requireRefs(
+        explanation.id,
+        'primaryExplanationId',
+        [explanation.primaryExplanationId],
+        explanationIds,
+      );
+    requireRefs(explanation.id, 'learningOutcomeIds', explanation.learningOutcomeIds, outcomeIds);
+    requireRefs(
+      explanation.id,
+      'additionalPrerequisiteUnitIds',
+      explanation.additionalPrerequisiteUnitIds,
+      unitIds,
+    );
+    requireRefs(explanation.id, 'tagIds', explanation.tagIds, tagIds);
+    requireRefs(explanation.id, 'sourceRevisionIds', explanation.sourceRevisionIds, sourceIds);
+    requireRefs(explanation.id, 'claimIds', explanation.claimIds, claimIds);
+    requireRefs(explanation.id, 'exampleIds', explanation.exampleIds, exampleIds);
+  }
+  for (const claim of catalog.claims) {
+    requireRefs(claim.id, 'sourceRevisionIds', claim.sourceRevisionIds, sourceIds);
+  }
+  for (const impact of catalog.correctionImpacts) {
+    requireRefs(impact.id, 'sourceRevisionId', [impact.sourceRevisionId], sourceIds);
+    requireRefs(impact.id, 'explanationIds', impact.explanationIds, explanationIds);
+    requireRefs(impact.id, 'claimIds', impact.claimIds, claimIds);
+    requireRefs(impact.id, 'exampleIds', impact.exampleIds, exampleIds);
+    requireRefs(impact.id, 'exerciseIds', impact.exerciseIds, exerciseIds);
+    requireRefs(impact.id, 'answerMaterialIds', impact.answerMaterialIds, answerMaterialIds);
+    requireRefs(impact.id, 'learningUnitIds', impact.learningUnitIds, unitIds);
+    if (impact.verificationStatus === 'failed') {
+      diagnostics.push({
+        code: 'CORRECTION_IMPACT_FAILED',
+        entityId: impact.id,
+        message: 'Failed correction impact evidence cannot be published.',
+      });
+    }
+  }
+  for (const example of catalog.examples) {
+    requireRefs(example.id, 'learningOutcomeIds', example.learningOutcomeIds, outcomeIds);
+    requireRefs(example.id, 'ownerExplanationIds', example.ownerExplanationIds, explanationIds);
+    requireRefs(example.id, 'ownerLearningUnitIds', example.ownerLearningUnitIds, unitIds);
+  }
+  for (const exercise of catalog.exercises) {
+    if (exercise.problemId) requireRefs(exercise.id, 'problemId', [exercise.problemId], problemIds);
+    requireRefs(exercise.id, 'learningOutcomeIds', exercise.learningOutcomeIds, outcomeIds);
+    requireRefs(exercise.id, 'assessmentId', [exercise.assessmentId], assessmentIds);
+    requireRefs(exercise.id, 'answerMaterialId', [exercise.answerMaterialId], answerMaterialIds);
+  }
+  for (const assessment of catalog.assessments) {
+    requireRefs(assessment.id, 'learningOutcomeIds', assessment.learningOutcomeIds, outcomeIds);
+  }
+  for (const answer of catalog.answerMaterials) {
+    requireRefs(answer.id, 'exerciseId', [answer.exerciseId], exerciseIds);
+    const exercise = catalog.exercises.find(({ id }) => id === answer.exerciseId);
+    if (exercise && exercise.answerMaterialId !== answer.id) {
+      diagnostics.push({
+        code: 'ANSWER_MATERIAL_REVERSE_REFERENCE_MISMATCH',
+        entityId: answer.id,
+        message: `${answer.id} is not the answer selected by ${answer.exerciseId}.`,
+      });
+    }
+  }
   try {
     deterministicTopologicalOrder(
-      catalog.tags.map((tag) => ({ id: tag.id, prerequisiteIds: tag.prerequisiteTagIds })),
+      catalog.tags.map((tag) => ({
+        id: tag.id,
+        prerequisiteIds: [...tag.prerequisiteTagIds, ...(tag.parentId ? [tag.parentId] : [])],
+      })),
+    );
+    deterministicTopologicalOrder(
+      catalog.learningOutcomes.map((outcome) => ({
+        id: outcome.id,
+        prerequisiteIds: outcome.prerequisiteOutcomeIds,
+      })),
     );
     deterministicTopologicalOrder(
       catalog.learningUnits.map((unit) => ({
         id: unit.id,
-        prerequisiteIds: unit.additionalPrerequisiteUnitIds,
+        prerequisiteIds: [
+          ...unit.additionalPrerequisiteUnitIds,
+          ...(unit.parentId ? [unit.parentId] : []),
+        ],
         ranks: [unit.stageRank, unit.difficultyRank, unit.representativeRank],
       })),
       (unit) => unit.ranks,
