@@ -1,130 +1,413 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://abc-textbook.local/schemas/performance-evidence.schema.json",
-  "title": "ABC Textbook Performance Evidence",
   "type": "object",
-  "additionalProperties": false,
-  "required": ["schemaVersion", "releaseDigest", "environment", "fixtures", "buildRuns", "filterMeasurement", "successfulUpdateMeasurement", "generatedAt"],
   "properties": {
-    "schemaVersion": { "const": "1.1.0" },
-    "releaseDigest": { "$ref": "#/$defs/sha256", "description": "対象Catalog Release.contentSnapshotDigestと完全一致する。Release.manifestDigest、candidateManifestDigest、candidatePayloadDigestを指定してはならない。" },
-    "environment": { "$ref": "#/$defs/environment" },
-    "fixtures": {
-      "type": "array", "minItems": 3, "maxItems": 3, "items": { "$ref": "#/$defs/fixture" },
-      "allOf": [
-        { "contains": { "properties": { "kind": { "const": "seed" } }, "required": ["kind"] }, "minContains": 1, "maxContains": 1 },
-        { "contains": { "properties": { "kind": { "const": "release-cutoff" } }, "required": ["kind"] }, "minContains": 1, "maxContains": 1 },
-        { "contains": { "properties": { "kind": { "const": "design-limit" } }, "required": ["kind"] }, "minContains": 1, "maxContains": 1 }
-      ]
+    "schemaVersion": {
+      "$ref": "#/$defs/__schema0"
     },
-    "buildRuns": {
-      "type": "array", "minItems": 9, "maxItems": 9, "items": { "$ref": "#/$defs/buildRun" },
-      "allOf": [
-        { "contains": { "properties": { "fixtureKind": { "const": "seed" } }, "required": ["fixtureKind"] }, "minContains": 3, "maxContains": 3 },
-        { "contains": { "properties": { "fixtureKind": { "const": "release-cutoff" } }, "required": ["fixtureKind"] }, "minContains": 3, "maxContains": 3 },
-        { "contains": { "properties": { "fixtureKind": { "const": "design-limit" } }, "required": ["fixtureKind"] }, "minContains": 3, "maxContains": 3 }
-      ]
-    },
-    "filterMeasurement": { "$ref": "#/$defs/filter" },
-    "successfulUpdateMeasurement": { "$ref": "#/$defs/update" },
-    "generatedAt": { "$ref": "#/$defs/dateTime" }
-  },
-  "$defs": {
-    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-    "dateTime": { "type": "string", "format": "date-time" },
-    "rawEvidenceManifestDigest": {
-      "$ref": "#/$defs/sha256",
-      "description": "このevidence.jsonに隣接するraw/内の全fileから{path, sha256, byteLength}を作り、repository-relative path順に並べたarrayのcanonical JSON SHA-256。raw/実file集合、各byteLength/file SHA-256との完全一致を意味検証し、個別raw path fieldがなくても検証bytesを一意に復元する。全build/filter/update測定のrawEvidenceDigestはこの同一値にする。"
+    "releaseDigest": {
+      "$ref": "#/$defs/__schema1"
     },
     "environment": {
-      "type": "object", "additionalProperties": false,
-      "required": ["os", "cpu", "physicalCores", "memoryGiB", "storage", "powerSource", "concurrentHighLoad", "nodeVersion", "npmVersion", "chromiumRevision"],
+      "$ref": "#/$defs/__schema2"
+    },
+    "fixtures": {
+      "$ref": "#/$defs/__schema4"
+    },
+    "buildRuns": {
+      "$ref": "#/$defs/__schema14"
+    },
+    "filterMeasurement": {
+      "$ref": "#/$defs/__schema16"
+    },
+    "successfulUpdateMeasurement": {
+      "$ref": "#/$defs/__schema17"
+    },
+    "generatedAt": {
+      "$ref": "#/$defs/__schema9"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "releaseDigest",
+    "environment",
+    "fixtures",
+    "buildRuns",
+    "filterMeasurement",
+    "successfulUpdateMeasurement",
+    "generatedAt"
+  ],
+  "additionalProperties": false,
+  "$id": "https://abc-textbook.local/schemas/performance-evidence.schema.json",
+  "title": "ABC Textbook Performance Evidence",
+  "$defs": {
+    "__schema0": {
+      "type": "string",
+      "const": "1.1.0"
+    },
+    "__schema1": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "__schema2": {
+      "type": "object",
       "properties": {
-        "os": { "type": "string", "minLength": 1 }, "cpu": { "type": "string", "minLength": 1 },
-        "physicalCores": { "type": "integer", "minimum": 4 }, "memoryGiB": { "type": "number", "minimum": 16 },
-        "storage": { "const": "local-ssd" }, "powerSource": { "const": "ac" }, "concurrentHighLoad": { "const": false },
-        "nodeVersion": { "type": "string", "minLength": 1 },
-        "npmVersion": { "type": "string", "minLength": 1 }, "chromiumRevision": { "type": "string", "minLength": 1 }
+        "os": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "cpu": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "physicalCores": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 9007199254740991
+        },
+        "memoryGiB": {
+          "type": "number",
+          "minimum": 16
+        },
+        "storage": {
+          "type": "string",
+          "const": "local-ssd"
+        },
+        "powerSource": {
+          "type": "string",
+          "const": "ac"
+        },
+        "concurrentHighLoad": {
+          "type": "boolean",
+          "const": false
+        },
+        "nodeVersion": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "npmVersion": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "chromiumRevision": {
+          "$ref": "#/$defs/__schema3"
+        }
+      },
+      "required": [
+        "os",
+        "cpu",
+        "physicalCores",
+        "memoryGiB",
+        "storage",
+        "powerSource",
+        "concurrentHighLoad",
+        "nodeVersion",
+        "npmVersion",
+        "chromiumRevision"
+      ],
+      "additionalProperties": false
+    },
+    "__schema3": {
+      "type": "string",
+      "minLength": 1
+    },
+    "__schema4": {
+      "minItems": 3,
+      "maxItems": 3,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema5"
       }
     },
-    "fixture": {
-      "type": "object", "additionalProperties": false,
-      "required": ["kind", "generatorVersion", "seed", "cutoffAt", "schemaVersion", "contestCount", "problemCount", "tagCount", "learningUnitCount", "fileListDigest", "catalogDigest"],
+    "__schema5": {
+      "type": "object",
       "properties": {
-        "kind": { "enum": ["seed", "release-cutoff", "design-limit"] }, "generatorVersion": { "type": "string", "minLength": 1 },
-        "seed": { "oneOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }] },
-        "cutoffAt": { "oneOf": [{ "$ref": "#/$defs/dateTime" }, { "type": "null" }] },
-        "schemaVersion": { "type": "string", "minLength": 1 },
-        "contestCount": { "type": "integer", "minimum": 1 }, "problemCount": { "type": "integer", "minimum": 1 },
-        "tagCount": { "type": "integer", "minimum": 1 }, "learningUnitCount": { "type": "integer", "minimum": 1 },
-        "fileListDigest": { "$ref": "#/$defs/sha256" }, "catalogDigest": { "$ref": "#/$defs/sha256" }
+        "kind": {
+          "$ref": "#/$defs/__schema6"
+        },
+        "generatorVersion": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "seed": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "cutoffAt": {
+          "$ref": "#/$defs/__schema8"
+        },
+        "schemaVersion": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "contestCount": {
+          "$ref": "#/$defs/__schema10"
+        },
+        "problemCount": {
+          "$ref": "#/$defs/__schema11"
+        },
+        "tagCount": {
+          "$ref": "#/$defs/__schema12"
+        },
+        "learningUnitCount": {
+          "$ref": "#/$defs/__schema13"
+        },
+        "fileListDigest": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "catalogDigest": {
+          "$ref": "#/$defs/__schema1"
+        }
       },
-      "allOf": [
+      "required": [
+        "kind",
+        "generatorVersion",
+        "seed",
+        "cutoffAt",
+        "schemaVersion",
+        "contestCount",
+        "problemCount",
+        "tagCount",
+        "learningUnitCount",
+        "fileListDigest",
+        "catalogDigest"
+      ],
+      "additionalProperties": false
+    },
+    "__schema6": {
+      "type": "string",
+      "enum": [
+        "seed",
+        "release-cutoff",
+        "design-limit"
+      ]
+    },
+    "__schema7": {
+      "anyOf": [
         {
-          "if": { "properties": { "kind": { "const": "seed" } }, "required": ["kind"] },
-          "then": { "properties": { "seed": { "type": "string", "minLength": 1 }, "cutoffAt": { "type": "null" }, "contestCount": { "const": 255 }, "problemCount": { "maximum": 1020 } } }
+          "$ref": "#/$defs/__schema3"
         },
         {
-          "if": { "properties": { "kind": { "const": "release-cutoff" } }, "required": ["kind"] },
-          "then": { "properties": { "seed": { "const": null }, "cutoffAt": { "$ref": "#/$defs/dateTime" } } }
-        },
-        {
-          "if": { "properties": { "kind": { "const": "design-limit" } }, "required": ["kind"] },
-          "then": { "properties": { "seed": { "type": "string", "minLength": 1 }, "cutoffAt": { "type": "null" }, "problemCount": { "const": 1500 }, "tagCount": { "const": 500 }, "learningUnitCount": { "const": 1000 } } }
+          "type": "null"
         }
       ]
     },
-    "buildRun": {
-      "type": "object", "additionalProperties": false,
-      "required": ["fixtureKind", "fixtureDigest", "run", "durationMs", "rawEvidenceDigest", "passed"],
-      "properties": {
-        "fixtureKind": { "enum": ["seed", "release-cutoff", "design-limit"] }, "fixtureDigest": { "$ref": "#/$defs/sha256" },
-        "run": { "type": "integer", "minimum": 1, "maximum": 3 },
-        "durationMs": { "type": "number", "minimum": 0, "maximum": 300000 }, "rawEvidenceDigest": { "$ref": "#/$defs/rawEvidenceManifestDigest" }, "passed": { "const": true }
+    "__schema8": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/__schema9"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema9": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+    },
+    "__schema10": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema11": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema12": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema13": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema14": {
+      "minItems": 9,
+      "maxItems": 9,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema15"
       }
     },
-    "filter": {
-      "type": "object", "additionalProperties": false,
-      "required": ["fixtureDigest", "startMarker", "endMarker", "warmupCount", "sampleCount", "p95Ms", "sampleDigest", "rawEvidenceDigest", "passed"],
+    "__schema15": {
+      "type": "object",
       "properties": {
-        "fixtureDigest": { "$ref": "#/$defs/sha256" }, "startMarker": { "const": "before-input-event" }, "endMarker": { "const": "count-and-list-dom-committed" },
-        "warmupCount": { "const": 10 }, "sampleCount": { "const": 30 }, "p95Ms": { "type": "number", "minimum": 0, "maximum": 100 },
-        "sampleDigest": { "$ref": "#/$defs/sha256" }, "rawEvidenceDigest": { "$ref": "#/$defs/rawEvidenceManifestDigest" }, "passed": { "const": true }
-      }
-    },
-    "update": {
-      "type": "object", "additionalProperties": false,
-      "required": ["fixtureDigest", "contestId", "startMarker", "endMarker", "startedMonotonicMs", "completedMonotonicMs", "durationMs", "problemResultCount", "authoringResultCounts", "rawEvidenceDigest", "exitCode", "passed"],
-      "properties": {
-        "fixtureDigest": { "$ref": "#/$defs/sha256" }, "contestId": { "type": "string", "pattern": "^abc[0-9]{3,}$" }, "startMarker": { "const": "command-start" },
-        "endMarker": { "const": "successful-command-exit-after-all-authoring-results-persisted" },
-        "startedMonotonicMs": { "type": "number", "minimum": 0 }, "completedMonotonicMs": { "type": "number", "minimum": 0 },
-        "durationMs": { "type": "number", "minimum": 0, "maximum": 900000 },
-        "problemResultCount": {
+        "fixtureKind": {
+          "type": "string",
+          "enum": [
+            "seed",
+            "release-cutoff",
+            "design-limit"
+          ]
+        },
+        "fixtureDigest": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "run": {
           "type": "integer",
           "minimum": 1,
-          "description": "この成功測定で永続化した対象problem数。authoringResultCounts.explanation_draftと完全一致することを意味検証する。"
+          "maximum": 3
         },
-        "rawEvidenceDigest": { "$ref": "#/$defs/rawEvidenceManifestDigest" },
+        "durationMs": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 300000
+        },
+        "rawEvidenceDigest": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "passed": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "required": [
+        "fixtureKind",
+        "fixtureDigest",
+        "run",
+        "durationMs",
+        "rawEvidenceDigest",
+        "passed"
+      ],
+      "additionalProperties": false
+    },
+    "__schema16": {
+      "type": "object",
+      "properties": {
+        "fixtureDigest": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "startMarker": {
+          "type": "string",
+          "const": "before-input-event"
+        },
+        "endMarker": {
+          "type": "string",
+          "const": "count-and-list-dom-committed"
+        },
+        "warmupCount": {
+          "type": "number",
+          "const": 10
+        },
+        "sampleCount": {
+          "type": "number",
+          "const": 30
+        },
+        "p95Ms": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "sampleDigest": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "rawEvidenceDigest": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "passed": {
+          "type": "boolean",
+          "const": true
+        }
+      },
+      "required": [
+        "fixtureDigest",
+        "startMarker",
+        "endMarker",
+        "warmupCount",
+        "sampleCount",
+        "p95Ms",
+        "sampleDigest",
+        "rawEvidenceDigest",
+        "passed"
+      ],
+      "additionalProperties": false
+    },
+    "__schema17": {
+      "type": "object",
+      "properties": {
+        "fixtureDigest": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "contestId": {
+          "type": "string",
+          "pattern": "^abc[0-9]{3,}$"
+        },
+        "startMarker": {
+          "type": "string",
+          "const": "command-start"
+        },
+        "endMarker": {
+          "type": "string",
+          "const": "successful-command-exit-after-all-authoring-results-persisted"
+        },
+        "startedMonotonicMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "completedMonotonicMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "durationMs": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 900000
+        },
+        "problemResultCount": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
         "authoringResultCounts": {
-          "type": "object", "additionalProperties": false,
-          "required": ["explanation_draft", "authoring_required", "blocked"],
+          "type": "object",
           "properties": {
             "explanation_draft": {
               "type": "integer",
-              "minimum": 1,
-              "description": "problemResultCountと完全一致することを意味検証する。"
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991
             },
-            "authoring_required": { "const": 0 },
-            "blocked": { "const": 0 }
-          }
+            "authoring_required": {
+              "type": "number",
+              "const": 0
+            },
+            "blocked": {
+              "type": "number",
+              "const": 0
+            }
+          },
+          "required": [
+            "explanation_draft",
+            "authoring_required",
+            "blocked"
+          ],
+          "additionalProperties": false
         },
-        "exitCode": { "const": 0 },
+        "rawEvidenceDigest": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "exitCode": {
+          "type": "number",
+          "const": 0
+        },
         "passed": {
-          "const": true,
-          "description": "exitCode=0の成功更新だけを測る。authoring_requiredまたはblockedを含むON_HOLD/exit 2の測定はこのfieldへ格納しない。"
+          "type": "boolean",
+          "const": true
         }
-      }
+      },
+      "required": [
+        "fixtureDigest",
+        "contestId",
+        "startMarker",
+        "endMarker",
+        "startedMonotonicMs",
+        "completedMonotonicMs",
+        "durationMs",
+        "problemResultCount",
+        "authoringResultCounts",
+        "rawEvidenceDigest",
+        "exitCode",
+        "passed"
+      ],
+      "additionalProperties": false
     }
   }
 }

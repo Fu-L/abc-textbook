@@ -5,6 +5,11 @@ import { HumanContentReviewEvidenceSchema } from '../../src/lib/domain/schema-pa
 import { validateHumanContentReview } from '../../src/lib/validation/human-content-review.js';
 
 const sha = (character: string): string => character.repeat(64);
+const trustedInventory = {
+  subjectDigest: sha('a'),
+  inventoryDigest: sha('c'),
+  applicableChecks: [{ checkId: 'check-contracts', command: 'npm run test:contract' }],
+} as const;
 
 const makeEvidence = (input?: {
   readonly decision?: 'approved' | 'changes_requested';
@@ -40,9 +45,7 @@ const makeEvidence = (input?: {
     applicableChecks,
     applicableCheckCount: 1,
     passedApplicableCheckCount: 1,
-    reviewerExecutedCheckSetDigest: canonicalDigest(
-      applicableChecks.map(({ checkId, resultDigest }) => ({ checkId, resultDigest })),
-    ),
+    reviewerExecutedCheckSetDigest: canonicalDigest(applicableChecks),
     authors: [{ personId: 'person-author', authoredItemIds: ['claim-one'] }],
     reviewers: [
       {
@@ -105,7 +108,7 @@ describe('human content review gate', () => {
   it('accepts a complete independently approved review', () => {
     expect(HumanContentReviewEvidenceSchema.safeParse(makeEvidence()).success).toBe(true);
     expect(() => {
-      validateHumanContentReview(makeEvidence());
+      validateHumanContentReview(makeEvidence(), trustedInventory);
     }).not.toThrow();
   });
 
@@ -115,7 +118,7 @@ describe('human content review gate', () => {
         .success,
     ).toBe(false);
     expect(() => {
-      validateHumanContentReview(makeEvidence({ findingResolved: false }));
+      validateHumanContentReview(makeEvidence({ findingResolved: false }), trustedInventory);
     }).toThrow(/REVIEW_INCOMPLETE/u);
   });
 
@@ -124,5 +127,39 @@ describe('human content review gate', () => {
     evidence.generatedAt = '2026-02-30T12:31:00+09:00';
     evidence.evidenceDigest = digestWithoutField(evidence, 'evidenceDigest');
     expect(HumanContentReviewEvidenceSchema.safeParse(evidence).success).toBe(false);
+  });
+
+  it('rejects omitted, duplicated, or differently scoped trusted checks', () => {
+    const evidence = makeEvidence();
+    const inventoryWithRequiredLint = {
+      ...trustedInventory,
+      applicableChecks: [
+        ...trustedInventory.applicableChecks,
+        { checkId: 'check-lint', command: 'npm run lint' },
+      ],
+    };
+    expect(() => {
+      validateHumanContentReview(evidence, inventoryWithRequiredLint);
+    }).toThrow(/REVIEWER_CHECK_INVENTORY_INVALID/u);
+
+    const duplicated = structuredClone(evidence);
+    const checks = duplicated.applicableChecks as Record<string, unknown>[];
+    const [firstCheck] = checks;
+    if (!firstCheck) throw new Error('Fixture check is missing.');
+    checks.push(structuredClone(firstCheck));
+    duplicated.applicableCheckCount = 2;
+    duplicated.passedApplicableCheckCount = 2;
+    duplicated.reviewerExecutedCheckSetDigest = canonicalDigest(checks);
+    duplicated.evidenceDigest = digestWithoutField(duplicated, 'evidenceDigest');
+    expect(() => {
+      validateHumanContentReview(duplicated, trustedInventory);
+    }).toThrow(/REVIEWER_CHECK_INVENTORY_INVALID/u);
+
+    expect(() => {
+      validateHumanContentReview(evidence, {
+        ...trustedInventory,
+        subjectDigest: sha('f'),
+      });
+    }).toThrow(/REVIEWER_CHECK_INVENTORY_INVALID/u);
   });
 });

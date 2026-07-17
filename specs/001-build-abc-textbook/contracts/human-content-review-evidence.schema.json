@@ -1,10 +1,95 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://abc-textbook.local/schemas/human-content-review-evidence.schema.json",
-  "title": "ABC Textbook Independent Human Content Review Evidence",
-  "description": "Constitution 1.0.0が要求する、reviewer自身によるoutcome coverage確認と全適用自動check実行、および完全自動化できない新規・変更claim/exampleを作成者以外の人が査読した機械可読証跡。意味検証器はsubject/inventory/raw digest、全必須item coverage、各checkのexecutedByReviewerIdとraw実行記録、非自動化itemのreviewerとauthorの非一致、finding解消を再計算し、他者の実行結果を確認しただけの記録やowner approvalによる代用を拒否する。",
   "type": "object",
-  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "id": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "scopeType": {
+      "$ref": "#/$defs/__schema2"
+    },
+    "scopeId": {
+      "$ref": "#/$defs/__schema3"
+    },
+    "releaseVersion": {
+      "$ref": "#/$defs/__schema4"
+    },
+    "subjectDigest": {
+      "$ref": "#/$defs/__schema5"
+    },
+    "inventoryPath": {
+      "$ref": "#/$defs/__schema6"
+    },
+    "inventoryDigest": {
+      "$ref": "#/$defs/__schema5"
+    },
+    "rawEvidenceManifestPath": {
+      "$ref": "#/$defs/__schema6"
+    },
+    "rawEvidenceManifestDigest": {
+      "$ref": "#/$defs/__schema5"
+    },
+    "rawEvidenceCount": {
+      "$ref": "#/$defs/__schema7"
+    },
+    "artifactPath": {
+      "$ref": "#/$defs/__schema6"
+    },
+    "applicableChecks": {
+      "$ref": "#/$defs/__schema8"
+    },
+    "applicableCheckCount": {
+      "$ref": "#/$defs/__schema12"
+    },
+    "passedApplicableCheckCount": {
+      "$ref": "#/$defs/__schema13"
+    },
+    "reviewerExecutedCheckSetDigest": {
+      "$ref": "#/$defs/__schema5"
+    },
+    "authors": {
+      "$ref": "#/$defs/__schema14"
+    },
+    "reviewers": {
+      "$ref": "#/$defs/__schema16"
+    },
+    "reviewItems": {
+      "$ref": "#/$defs/__schema18"
+    },
+    "inventoryItemCount": {
+      "$ref": "#/$defs/__schema27"
+    },
+    "reviewedItemCount": {
+      "$ref": "#/$defs/__schema28"
+    },
+    "approvedItemCount": {
+      "$ref": "#/$defs/__schema29"
+    },
+    "changesRequestedItemCount": {
+      "$ref": "#/$defs/__schema30"
+    },
+    "unreviewedItemCount": {
+      "$ref": "#/$defs/__schema31"
+    },
+    "outcomeCoverageReview": {
+      "$ref": "#/$defs/__schema32"
+    },
+    "outcomeCoverageConfirmed": {
+      "$ref": "#/$defs/__schema38"
+    },
+    "aggregatePassed": {
+      "$ref": "#/$defs/__schema39"
+    },
+    "generatedAt": {
+      "$ref": "#/$defs/__schema10"
+    },
+    "evidenceDigest": {
+      "$ref": "#/$defs/__schema5"
+    }
+  },
   "required": [
     "schemaVersion",
     "id",
@@ -36,250 +121,483 @@
     "generatedAt",
     "evidenceDigest"
   ],
-  "properties": {
-    "schemaVersion": { "const": "2.0.0" },
-    "id": { "type": "string", "pattern": "^human-content-review-[a-z0-9]+(?:-[a-z0-9]+)*$" },
-    "scopeType": { "enum": ["merge", "release_candidate"] },
-    "scopeId": { "type": "string", "minLength": 1 },
-    "releaseVersion": {
-      "oneOf": [
-        { "type": "string", "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}$" },
-        { "type": "null" }
-      ]
-    },
-    "subjectDigest": { "$ref": "#/$defs/sha256" },
-    "inventoryPath": { "$ref": "#/$defs/safeRelativePath" },
-    "inventoryDigest": { "$ref": "#/$defs/sha256" },
-    "rawEvidenceManifestPath": {
-      "$ref": "#/$defs/safeRelativePath",
-      "description": "適用checkごとの実行者、command、開始・完了時刻、stdout/stderrまたは同等の未加工result、およびoutcome/non-automatable review basisを列挙するcanonical raw manifest。manifest自身は列挙対象から除外する。"
-    },
-    "rawEvidenceManifestDigest": { "$ref": "#/$defs/sha256", "description": "raw manifest documentのRFC 8785/JCS SHA-256。manifestが列挙する各raw fileのpath/digest/byteLengthも実bytesと照合する。" },
-    "rawEvidenceCount": { "type": "integer", "minimum": 1 },
-    "artifactPath": { "$ref": "#/$defs/safeRelativePath" },
-    "applicableChecks": {
-      "type": "array",
-      "minItems": 1,
-      "items": { "$ref": "#/$defs/applicableCheck" },
-      "description": "outcomeCoverageReview.reviewerIdで指定した同一reviewerがsubjectDigestへscopeされた全適用自動checkを自ら実行した記録。各executedByReviewerIdはそのIDと一致して外側reviewersへ解決し、raw manifestの同じcheck executionとも一致する。command/path/digestは一意で、completedAtは各review itemのreviewedAt以前でなければならない。他者実行結果の確認・追認や、複数reviewerへのcheck集合の分割は憲章上の実行として認めない。"
-    },
-    "applicableCheckCount": { "type": "integer", "minimum": 1 },
-    "passedApplicableCheckCount": { "type": "integer", "minimum": 0 },
-    "reviewerExecutedCheckSetDigest": {
-      "$ref": "#/$defs/sha256",
-      "description": "applicableChecksをcheckId順に並べた{checkId,command,subjectDigest,resultPath,resultDigest,exitCode,passed,completedAt,executedByReviewerId}[]のRFC 8785/JCS SHA-256。意味検証器が再計算し、全executedByReviewerIdがoutcomeCoverageReview.reviewerIdと同じであること、およびrelease/merge gateの参照値との一致を検査する。"
-    },
-    "authors": {
-      "type": "array",
-      "minItems": 1,
-      "items": { "$ref": "#/$defs/author" },
-      "description": "subject内itemの全authorを一意に列挙する。"
-    },
-    "reviewers": {
-      "type": "array",
-      "minItems": 1,
-      "items": { "$ref": "#/$defs/reviewer" },
-      "description": "各reviewerIdは一意。review itemごとに、そのitemのauthorIdsへ含まれないreviewerを割り当てる。"
-    },
-    "reviewItems": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/reviewItem" },
-      "description": "inventoryでhuman review requiredとなったoutcome coverage、非完全自動化claim/exampleをちょうど1件ずつ含む。非教材変更で必須itemが0件でも、別fieldのoutcomeCoverageConfirmedはreviewerがno-impact判断を確認した結果でなければならない。"
-    },
-    "inventoryItemCount": { "type": "integer", "minimum": 0 },
-    "reviewedItemCount": { "type": "integer", "minimum": 0 },
-    "approvedItemCount": { "type": "integer", "minimum": 0 },
-    "changesRequestedItemCount": { "type": "integer", "minimum": 0 },
-    "unreviewedItemCount": { "type": "integer", "minimum": 0 },
-    "outcomeCoverageReview": { "$ref": "#/$defs/outcomeCoverageReview" },
-    "outcomeCoverageConfirmed": { "type": "boolean" },
-    "aggregatePassed": { "type": "boolean" },
-    "generatedAt": { "$ref": "#/$defs/dateTime" },
-    "evidenceDigest": { "$ref": "#/$defs/sha256", "description": "evidenceDigestだけを除外したdocumentのRFC 8785/JCS canonical JSON SHA-256。" }
-  },
+  "additionalProperties": false,
   "allOf": [
     {
-      "if": { "properties": { "scopeType": { "const": "merge" } }, "required": ["scopeType"] },
+      "if": {
+        "properties": {
+          "aggregatePassed": {
+            "const": true
+          }
+        },
+        "required": [
+          "aggregatePassed"
+        ]
+      },
       "then": {
         "properties": {
-          "scopeId": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
-          "releaseVersion": { "type": "null" },
-          "inventoryPath": { "pattern": "^docs/judgments/merge/[a-z0-9]+(?:-[a-z0-9]+)*/human-review-inventory\\.json$" },
-          "artifactPath": { "pattern": "^docs/judgments/merge/[a-z0-9]+(?:-[a-z0-9]+)*/human-review\\.json$" },
-          "rawEvidenceManifestPath": { "pattern": "^docs/judgments/merge/[a-z0-9]+(?:-[a-z0-9]+)*/human-review-raw/manifest\\.json$" }
-        }
-      }
-    },
-    {
-      "if": { "properties": { "scopeType": { "const": "release_candidate" } }, "required": ["scopeType"] },
-      "then": {
-        "properties": {
-          "scopeId": { "pattern": "^release-candidate-[0-9]{4}\\.[0-9]{2}\\.[0-9]+-[a-f0-9]{12,64}$" },
-          "releaseVersion": { "type": "string", "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}$" },
-          "inventoryPath": { "pattern": "^docs/verification/human-content-review/[0-9]{4}\\.[0-9]{2}\\.[0-9]+/r[1-9][0-9]*/inventory\\.json$" },
-          "artifactPath": { "pattern": "^docs/verification/human-content-review/[0-9]{4}\\.[0-9]{2}\\.[0-9]+/r[1-9][0-9]*/evidence\\.json$" },
-          "rawEvidenceManifestPath": { "pattern": "^docs/verification/human-content-review/[0-9]{4}\\.[0-9]{2}\\.[0-9]+/r[1-9][0-9]*/raw/manifest\\.json$" }
-        }
-      }
-    },
-    {
-      "if": { "properties": { "aggregatePassed": { "const": true } }, "required": ["aggregatePassed"] },
-      "then": {
-        "properties": {
-          "outcomeCoverageConfirmed": { "const": true },
+          "outcomeCoverageConfirmed": {
+            "const": true
+          },
+          "changesRequestedItemCount": {
+            "const": 0
+          },
+          "unreviewedItemCount": {
+            "const": 0
+          },
           "applicableChecks": {
             "items": {
-              "allOf": [
-                { "$ref": "#/$defs/applicableCheck" },
-                { "properties": { "exitCode": { "const": 0 }, "passed": { "const": true } } }
-              ]
+              "properties": {
+                "exitCode": {
+                  "const": 0
+                },
+                "passed": {
+                  "const": true
+                }
+              }
             }
           },
-          "changesRequestedItemCount": { "const": 0 },
-          "unreviewedItemCount": { "const": 0 },
-          "reviewItems": { "items": { "properties": { "decision": { "const": "approved" } } } }
+          "reviewItems": {
+            "items": {
+              "properties": {
+                "decision": {
+                  "const": "approved"
+                }
+              }
+            }
+          }
         }
       }
     }
   ],
+  "$id": "https://abc-textbook.local/schemas/human-content-review-evidence.schema.json",
+  "title": "ABC Textbook Independent Human Content Review Evidence",
   "$defs": {
-    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-    "dateTime": { "type": "string", "format": "date-time" },
-    "safeRelativePath": {
+    "__schema0": {
       "type": "string",
-      "minLength": 1,
-      "pattern": "^(?!.*(?:^|/)(?:[Cc][Oo][Nn]|[Pp][Rr][Nn]|[Aa][Uu][Xx]|[Nn][Uu][Ll]|[Cc][Oo][Mm][1-9]|[Ll][Pp][Tt][1-9])(?:\\.[A-Za-z0-9._-]+)?(?:/|$))(?:[A-Za-z0-9._-]*[A-Za-z0-9_-])(?:/[A-Za-z0-9._-]*[A-Za-z0-9_-])*$"
+      "const": "2.0.0"
     },
-    "personId": { "type": "string", "pattern": "^person-[a-z0-9]+(?:-[a-z0-9]+)*$" },
-    "applicableCheck": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["checkId", "command", "subjectDigest", "resultPath", "resultDigest", "exitCode", "passed", "completedAt", "executedByReviewerId"],
-      "properties": {
-        "checkId": { "type": "string", "pattern": "^check-[a-z0-9]+(?:-[a-z0-9]+)*$" },
-        "command": { "type": "string", "minLength": 1 },
-        "subjectDigest": { "$ref": "#/$defs/sha256", "description": "外側subjectDigestと一致する。" },
-        "resultPath": { "$ref": "#/$defs/safeRelativePath" },
-        "resultDigest": { "$ref": "#/$defs/sha256" },
-        "exitCode": { "type": "integer" },
-        "passed": { "type": "boolean" },
-        "completedAt": { "$ref": "#/$defs/dateTime" },
-        "executedByReviewerId": { "$ref": "#/$defs/personId", "description": "外側reviewersへ解決する実行者。rawEvidenceManifestPathの同じcheckIdの実行記録でもexecutorとして一致しなければならず、結果を後から確認した人のIDを記録してはならない。" }
-      }
+    "__schema1": {
+      "type": "string",
+      "pattern": "^human-content-review-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
-    "outcomeCoverageReview": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["reviewerId", "authorIds", "decision", "learningOutcomeIds", "subjectPaths", "rationale", "noOutcomeImpactRationale", "confirmedAt"],
-      "properties": {
-        "reviewerId": { "$ref": "#/$defs/personId", "description": "憲章gateを担当する同一reviewer。外側reviewersへ解決し、authorIdsに含まれず、全applicableChecks[].executedByReviewerIdと一致しなければならない。" },
-        "authorIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/personId" } },
-        "decision": { "enum": ["confirmed", "no_outcome_impact_confirmed"] },
-        "learningOutcomeIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^outcome-[a-z0-9]+(?:-[a-z0-9]+)*$" } },
-        "subjectPaths": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/safeRelativePath" } },
-        "rationale": { "type": "string", "minLength": 1 },
-        "noOutcomeImpactRationale": { "oneOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }] },
-        "confirmedAt": { "$ref": "#/$defs/dateTime" }
-      },
-      "allOf": [
+    "__schema2": {
+      "type": "string",
+      "enum": [
+        "merge",
+        "release_candidate"
+      ]
+    },
+    "__schema3": {
+      "type": "string",
+      "minLength": 1
+    },
+    "__schema4": {
+      "anyOf": [
         {
-          "if": { "properties": { "decision": { "const": "confirmed" } }, "required": ["decision"] },
-          "then": { "properties": { "learningOutcomeIds": { "minItems": 1 }, "noOutcomeImpactRationale": { "type": "null" } } }
+          "type": "string",
+          "pattern": "^\\d{4}\\.\\d{2}\\.\\d{2}$"
         },
         {
-          "if": { "properties": { "decision": { "const": "no_outcome_impact_confirmed" } }, "required": ["decision"] },
-          "then": { "properties": { "learningOutcomeIds": { "maxItems": 0 }, "noOutcomeImpactRationale": { "type": "string", "minLength": 1 } } }
+          "type": "null"
         }
       ]
     },
-    "author": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["personId", "authoredItemIds"],
-      "properties": {
-        "personId": { "$ref": "#/$defs/personId" },
-        "authoredItemIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+    "__schema5": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "__schema6": {
+      "type": "string",
+      "pattern": "^(?!.*(?:^|\\/)(?:con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\\.[A-Za-z0-9._-]+)?(?:\\/|$))(?:[A-Za-z0-9._-]*[A-Za-z0-9_-])(?:\\/[A-Za-z0-9._-]*[A-Za-z0-9_-])*$"
+    },
+    "__schema7": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema8": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema9"
       }
     },
-    "reviewer": {
+    "__schema9": {
       "type": "object",
-      "additionalProperties": false,
+      "properties": {
+        "checkId": {
+          "type": "string",
+          "pattern": "^check-[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "command": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "subjectDigest": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "resultPath": {
+          "$ref": "#/$defs/__schema6"
+        },
+        "resultDigest": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "exitCode": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "completedAt": {
+          "$ref": "#/$defs/__schema10"
+        },
+        "executedByReviewerId": {
+          "$ref": "#/$defs/__schema11"
+        }
+      },
+      "required": [
+        "checkId",
+        "command",
+        "subjectDigest",
+        "resultPath",
+        "resultDigest",
+        "exitCode",
+        "passed",
+        "completedAt",
+        "executedByReviewerId"
+      ],
+      "additionalProperties": false
+    },
+    "__schema10": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+    },
+    "__schema11": {
+      "type": "string",
+      "pattern": "^person-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "__schema12": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema13": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema14": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema15"
+      }
+    },
+    "__schema15": {
+      "type": "object",
+      "properties": {
+        "personId": {
+          "$ref": "#/$defs/__schema11"
+        },
+        "authoredItemIds": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema3"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "personId",
+        "authoredItemIds"
+      ],
+      "additionalProperties": false
+    },
+    "__schema16": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema17"
+      }
+    },
+    "__schema17": {
+      "type": "object",
+      "properties": {
+        "personId": {
+          "$ref": "#/$defs/__schema11"
+        },
+        "role": {
+          "type": "string",
+          "const": "independent_human_content_reviewer"
+        },
+        "independenceDeclaration": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "countedAsOwnerApproval": {
+          "type": "boolean",
+          "const": false
+        }
+      },
       "required": [
         "personId",
         "role",
         "independenceDeclaration",
         "countedAsOwnerApproval"
       ],
-      "properties": {
-        "personId": { "$ref": "#/$defs/personId" },
-        "role": { "const": "independent_human_content_reviewer" },
-        "independenceDeclaration": { "type": "string", "minLength": 1 },
-        "countedAsOwnerApproval": { "const": false }
+      "additionalProperties": false
+    },
+    "__schema18": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reviewItemId": {
+            "$ref": "#/$defs/__schema19"
+          },
+          "kind": {
+            "$ref": "#/$defs/__schema20"
+          },
+          "subjectPaths": {
+            "$ref": "#/$defs/__schema21"
+          },
+          "authorIds": {
+            "$ref": "#/$defs/__schema22"
+          },
+          "learningOutcomeIds": {
+            "$ref": "#/$defs/__schema23"
+          },
+          "reviewerId": {
+            "$ref": "#/$defs/__schema11"
+          },
+          "reviewBasis": {
+            "$ref": "#/$defs/__schema3"
+          },
+          "decision": {
+            "$ref": "#/$defs/__schema25"
+          },
+          "findings": {
+            "$ref": "#/$defs/__schema26"
+          },
+          "reviewedAt": {
+            "$ref": "#/$defs/__schema10"
+          }
+        },
+        "required": [
+          "reviewItemId",
+          "kind",
+          "subjectPaths",
+          "authorIds",
+          "learningOutcomeIds",
+          "reviewerId",
+          "reviewBasis",
+          "decision",
+          "findings",
+          "reviewedAt"
+        ],
+        "additionalProperties": false
       }
     },
-    "finding": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["findingId", "severity", "description", "resolved", "evidenceRefs"],
-      "properties": {
-        "findingId": { "type": "string", "pattern": "^human-review-finding-[a-z0-9]+(?:-[a-z0-9]+)*$" },
-        "severity": { "enum": ["blocking", "advisory"] },
-        "description": { "type": "string", "minLength": 1 },
-        "resolved": { "type": "boolean" },
-        "evidenceRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
-      }
+    "__schema19": {
+      "type": "string",
+      "pattern": "^human-review-item-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
-    "reviewItem": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "reviewItemId",
-        "kind",
-        "subjectPaths",
-        "authorIds",
-        "learningOutcomeIds",
-        "reviewerId",
-        "reviewBasis",
-        "decision",
-        "findings",
-        "reviewedAt"
-      ],
-      "properties": {
-        "reviewItemId": { "type": "string", "pattern": "^human-review-item-[a-z0-9]+(?:-[a-z0-9]+)*$" },
-        "kind": { "enum": ["outcome_coverage", "non_automatable_claim", "non_automatable_example"] },
-        "subjectPaths": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/safeRelativePath" } },
-        "authorIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/personId" } },
-        "learningOutcomeIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^outcome-[a-z0-9]+(?:-[a-z0-9]+)*$" } },
-        "reviewerId": { "$ref": "#/$defs/personId", "description": "reviewersに存在し、このitemのauthorIdsには存在してはならない。" },
-        "reviewBasis": { "type": "string", "minLength": 1 },
-        "decision": { "enum": ["approved", "changes_requested"] },
-        "findings": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
-        "reviewedAt": { "$ref": "#/$defs/dateTime" }
+    "__schema20": {
+      "type": "string",
+      "enum": [
+        "outcome_coverage",
+        "non_automatable_claim",
+        "non_automatable_example"
+      ]
+    },
+    "__schema21": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema6"
       },
-      "allOf": [
+      "uniqueItems": true
+    },
+    "__schema22": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema11"
+      },
+      "uniqueItems": true
+    },
+    "__schema23": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema24"
+      },
+      "uniqueItems": true
+    },
+    "__schema24": {
+      "type": "string",
+      "pattern": "^outcome-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "__schema25": {
+      "type": "string",
+      "enum": [
+        "approved",
+        "changes_requested"
+      ]
+    },
+    "__schema26": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "findingId": {
+            "type": "string",
+            "pattern": "^human-review-finding-[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "blocking",
+              "advisory"
+            ]
+          },
+          "description": {
+            "$ref": "#/$defs/__schema3"
+          },
+          "resolved": {
+            "type": "boolean"
+          },
+          "evidenceRefs": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema3"
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "findingId",
+          "severity",
+          "description",
+          "resolved",
+          "evidenceRefs"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema27": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema28": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema29": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema30": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema31": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema32": {
+      "type": "object",
+      "properties": {
+        "reviewerId": {
+          "$ref": "#/$defs/__schema11"
+        },
+        "authorIds": {
+          "$ref": "#/$defs/__schema33"
+        },
+        "decision": {
+          "$ref": "#/$defs/__schema34"
+        },
+        "learningOutcomeIds": {
+          "$ref": "#/$defs/__schema35"
+        },
+        "subjectPaths": {
+          "$ref": "#/$defs/__schema36"
+        },
+        "rationale": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "noOutcomeImpactRationale": {
+          "$ref": "#/$defs/__schema37"
+        },
+        "confirmedAt": {
+          "$ref": "#/$defs/__schema10"
+        }
+      },
+      "required": [
+        "reviewerId",
+        "authorIds",
+        "decision",
+        "learningOutcomeIds",
+        "subjectPaths",
+        "rationale",
+        "noOutcomeImpactRationale",
+        "confirmedAt"
+      ],
+      "additionalProperties": false
+    },
+    "__schema33": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema11"
+      },
+      "uniqueItems": true
+    },
+    "__schema34": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "no_outcome_impact_confirmed"
+      ]
+    },
+    "__schema35": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema24"
+      },
+      "uniqueItems": true
+    },
+    "__schema36": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema6"
+      },
+      "uniqueItems": true
+    },
+    "__schema37": {
+      "anyOf": [
         {
-          "if": { "properties": { "kind": { "const": "outcome_coverage" } }, "required": ["kind"] },
-          "then": { "properties": { "learningOutcomeIds": { "minItems": 1 } } }
+          "$ref": "#/$defs/__schema3"
         },
         {
-          "if": { "properties": { "decision": { "const": "approved" } }, "required": ["decision"] },
-          "then": {
-            "properties": {
-              "findings": {
-                "items": {
-                  "allOf": [
-                    { "$ref": "#/$defs/finding" },
-                    {
-                      "if": { "properties": { "severity": { "const": "blocking" } }, "required": ["severity"] },
-                      "then": { "properties": { "resolved": { "const": true } } }
-                    }
-                  ]
-                }
-              }
-            }
-          }
+          "type": "null"
         }
       ]
+    },
+    "__schema38": {
+      "type": "boolean"
+    },
+    "__schema39": {
+      "type": "boolean"
     }
   }
 }

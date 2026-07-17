@@ -26,6 +26,7 @@ import {
 } from '../src/lib/domain/schema-parts/review-evidence.js';
 import {
   ClientBundleEvidenceContract,
+  ExecutableExampleEvidenceContract,
   FilesystemPublishEvidenceContract,
   InstructionQualityEvidenceContract,
   LearningRecordE2eEvidenceContract,
@@ -41,6 +42,7 @@ export const contractSchemaEntries: readonly ContractSchemaDefinition[] = [
   AnswerMaterialEvidenceContract,
   CatalogContract,
   ClientBundleEvidenceContract,
+  ExecutableExampleEvidenceContract,
   ContentWorkManifestContract,
   FilesystemPublishEvidenceContract,
   GlossaryContract,

@@ -13,11 +13,15 @@ export class HumanReviewError extends Error {
 
 interface HumanReviewShape {
   readonly subjectDigest: string;
+  readonly inventoryDigest: string;
   readonly applicableChecks: readonly {
     readonly checkId: string;
+    readonly command: string;
     readonly subjectDigest: string;
+    readonly resultPath: string;
     readonly exitCode: number;
     readonly passed: boolean;
+    readonly completedAt: string;
     readonly executedByReviewerId: string;
     readonly resultDigest: string;
   }[];
@@ -47,7 +51,19 @@ interface HumanReviewShape {
   readonly evidenceDigest: string;
 }
 
-export const validateHumanContentReview = (value: unknown): void => {
+export interface TrustedReviewCheckInventory {
+  readonly subjectDigest: string;
+  readonly inventoryDigest: string;
+  readonly applicableChecks: readonly {
+    readonly checkId: string;
+    readonly command: string;
+  }[];
+}
+
+export const validateHumanContentReview = (
+  value: unknown,
+  trustedInventory: TrustedReviewCheckInventory,
+): void => {
   const parsed = HumanContentReviewEvidenceSchema.safeParse(value);
   if (!parsed.success) {
     throw new HumanReviewError('HUMAN_REVIEW_SCHEMA_INVALID', parsed.error.message);
@@ -62,8 +78,26 @@ export const validateHumanContentReview = (value: unknown): void => {
   if (evidence.outcomeCoverageReview.authorIds.includes(gateReviewer)) {
     throw new HumanReviewError('REVIEWER_NOT_INDEPENDENT', gateReviewer);
   }
+  const evidenceCheckIds = evidence.applicableChecks.map(({ checkId }) => checkId);
+  const trustedCheckIds = trustedInventory.applicableChecks.map(({ checkId }) => checkId);
+  if (
+    trustedInventory.subjectDigest !== evidence.subjectDigest ||
+    trustedInventory.inventoryDigest !== evidence.inventoryDigest ||
+    new Set(evidenceCheckIds).size !== evidenceCheckIds.length ||
+    new Set(trustedCheckIds).size !== trustedCheckIds.length ||
+    [...evidenceCheckIds].sort().join('\n') !== [...trustedCheckIds].sort().join('\n')
+  ) {
+    throw new HumanReviewError(
+      'REVIEWER_CHECK_INVENTORY_INVALID',
+      'Evidence does not exactly cover the trusted check inventory.',
+    );
+  }
+  const trustedCommands = new Map(
+    trustedInventory.applicableChecks.map(({ checkId, command }) => [checkId, command]),
+  );
   for (const check of evidence.applicableChecks) {
     if (
+      check.command !== trustedCommands.get(check.checkId) ||
       check.executedByReviewerId !== gateReviewer ||
       check.subjectDigest !== evidence.subjectDigest ||
       check.exitCode !== 0 ||
@@ -85,7 +119,29 @@ export const validateHumanContentReview = (value: unknown): void => {
   }
   const checkSetDigest = canonicalDigest(
     evidence.applicableChecks
-      .map(({ checkId, resultDigest }) => ({ checkId, resultDigest }))
+      .map(
+        ({
+          checkId,
+          command,
+          subjectDigest,
+          resultPath,
+          resultDigest,
+          exitCode,
+          passed,
+          completedAt,
+          executedByReviewerId,
+        }) => ({
+          checkId,
+          command,
+          subjectDigest,
+          resultPath,
+          resultDigest,
+          exitCode,
+          passed,
+          completedAt,
+          executedByReviewerId,
+        }),
+      )
       .sort((left, right) => left.checkId.localeCompare(right.checkId)),
   );
   if (checkSetDigest !== evidence.reviewerExecutedCheckSetDigest) {

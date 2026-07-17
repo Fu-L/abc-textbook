@@ -12,6 +12,22 @@ import { canonicalJson } from '../../src/lib/domain/canonical-json.js';
 const contractsDirectory = path.resolve('specs/001-build-abc-textbook/contracts');
 
 describe('canonical Zod and JSON Schema parity', () => {
+  it('does not read checked-in JSON contracts back into canonical schema modules', async () => {
+    const schemaPartDirectory = path.resolve('src/lib/domain/schema-parts');
+    for (const fileName of [
+      'catalog.ts',
+      'learning.ts',
+      'release.ts',
+      'review-evidence.ts',
+      'verification-evidence.ts',
+    ]) {
+      const source = await readFile(path.join(schemaPartDirectory, fileName), 'utf8');
+      expect(source, fileName).not.toMatch(/schema\.json.*with\s*\{\s*type:\s*['"]json['"]/u);
+      expect(source, fileName).not.toContain('zodFromContractSchema');
+      expect(source, fileName).not.toContain('defineContractSchema');
+    }
+  });
+
   it('owns every JSON contract in the five schema-part modules', async () => {
     const generated = generateContractJsonSchemas();
 
@@ -32,6 +48,12 @@ describe('canonical Zod and JSON Schema parity', () => {
           (definition) => definition.type === 'object' && definition.additionalProperties === false,
         );
       expect(rootIsStrict || referencedRootsAreStrict, fileName).toBe(true);
+
+      const intentionallyEdited = structuredClone(committed) as Record<string, unknown>;
+      intentionallyEdited.title = 'intentionally drifted contract';
+      expect(canonicalJson(schema), `${fileName} drift sentinel`).not.toBe(
+        canonicalJson(intentionallyEdited),
+      );
     }
   });
 

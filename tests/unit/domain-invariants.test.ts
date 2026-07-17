@@ -45,6 +45,9 @@ describe('domain invariants', () => {
     expect(canonicalDigest({ z: 1, a: ['x', null] })).toMatch(/^[a-f0-9]{64}$/u);
     expect(() => canonicalJson({ text: 'e\u0301' })).toThrow(/NFC/u);
     expect(canonicalJson({ '\u{1f600}': 1, '\ue000': 2 })).toBe('{"😀":1,"":2}');
+    expect(() => canonicalJson({ text: '\ud800' })).toThrow(/surrogate/u);
+    expect(() => canonicalJson({ '\udc00': 'invalid key' })).toThrow(/surrogate/u);
+    expect(() => canonicalJson({ text: '😀' })).not.toThrow();
   });
 
   it('encodes every allowed problem-label punctuation without stable-ID collisions', () => {

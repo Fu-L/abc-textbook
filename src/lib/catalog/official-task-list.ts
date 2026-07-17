@@ -42,19 +42,39 @@ export const parseOfficialTaskList = (input: OfficialTaskListInput): ParsedOffic
   }
 
   const $ = load(input.html);
+  const taskTables = $('table').filter(
+    (_index, table) => $(table).find('tbody a[href*="/tasks/"]').length > 0,
+  );
+  if (taskTables.length !== 1) {
+    throw new OfficialTaskListError(
+      'PARSER_DRIFT',
+      `Expected exactly one official task table, found ${String(taskTables.length)}.`,
+    );
+  }
+  const rows = taskTables.first().find('tbody > tr');
+  if (rows.length === 0) {
+    throw new OfficialTaskListError('PARSER_DRIFT', 'The official task table has no body rows.');
+  }
   const labels: string[] = [];
-  $('tr').each((_index, row) => {
+  rows.each((_index, row) => {
     const labelAnchor = $(row).find('td').first().find('a[href]').first();
-    if (labelAnchor.length === 0) return;
+    if (labelAnchor.length !== 1) {
+      throw new OfficialTaskListError('PARSER_DRIFT', 'A task row has no label link.');
+    }
 
     const href = labelAnchor.attr('href');
-    if (!href) return;
+    if (!href) {
+      throw new OfficialTaskListError('PARSER_DRIFT', 'A task label link has no href.');
+    }
     const taskUrl = new URL(href, url);
     const match = /^\/contests\/(?<contestId>abc[0-9]{3,})\/tasks\/(?<taskId>[a-z0-9_]+)$/u.exec(
       taskUrl.pathname,
     );
-    if (!match?.groups) return;
+    if (!match?.groups) {
+      throw new OfficialTaskListError('PARSER_DRIFT', `Unrecognized task link: ${href}`);
+    }
     if (
+      taskUrl.protocol !== 'https:' ||
       taskUrl.hostname !== 'atcoder.jp' ||
       match.groups.contestId !== input.contestId ||
       !match.groups.taskId?.startsWith(`${input.contestId}_`)

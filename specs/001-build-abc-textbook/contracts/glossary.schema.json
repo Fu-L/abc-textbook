@@ -1,39 +1,120 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://abc-textbook.local/schemas/glossary.schema.json",
-  "title": "ABC Textbook Canonical Glossary",
   "type": "object",
-  "additionalProperties": false,
-  "required": ["schemaVersion", "version", "language", "terms", "digest"],
   "properties": {
-    "schemaVersion": { "const": "1.0.0" },
-    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
-    "language": { "const": "ja" },
+    "schemaVersion": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "version": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "language": {
+      "$ref": "#/$defs/__schema2"
+    },
     "terms": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/term" }
+      "$ref": "#/$defs/__schema3"
     },
     "digest": {
-      "$ref": "#/$defs/sha256",
-      "description": "このJSON objectをkey順・array順・null表現までcanonical化し、自身のdigest fieldだけを除外して計算したSHA-256。"
+      "$ref": "#/$defs/__schema6"
     }
   },
+  "required": [
+    "schemaVersion",
+    "version",
+    "language",
+    "terms",
+    "digest"
+  ],
+  "additionalProperties": false,
+  "$id": "https://abc-textbook.local/schemas/glossary.schema.json",
+  "title": "ABC Textbook Glossary",
   "$defs": {
-    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-    "term": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["id", "canonicalName", "aliases", "definition", "prerequisiteTermIds", "firstUseUnitId", "scope", "sourceRevisionIds"],
-      "properties": {
-        "id": { "type": "string", "pattern": "^term-[a-z0-9]+(?:-[a-z0-9]+)*$" },
-        "canonicalName": { "type": "string", "minLength": 1 },
-        "aliases": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
-        "definition": { "type": "string", "minLength": 1 },
-        "prerequisiteTermIds": { "type": "array", "items": { "type": "string", "pattern": "^term-[a-z0-9]+(?:-[a-z0-9]+)*$" }, "uniqueItems": true },
-        "firstUseUnitId": { "type": "string", "pattern": "^unit-[a-z0-9]+(?:-[a-z0-9]+)*$" },
-        "scope": { "enum": ["global", "genre", "unit"] },
-        "sourceRevisionIds": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+    "__schema0": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "__schema1": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "__schema2": {
+      "type": "string",
+      "const": "ja"
+    },
+    "__schema3": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^term-[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "canonicalName": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema4"
+            },
+            "uniqueItems": true
+          },
+          "definition": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "prerequisiteTermIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema5"
+            },
+            "uniqueItems": true
+          },
+          "firstUseUnitId": {
+            "type": "string",
+            "pattern": "^unit-[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "global",
+              "genre",
+              "unit"
+            ]
+          },
+          "sourceRevisionIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema4"
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "id",
+          "canonicalName",
+          "aliases",
+          "definition",
+          "prerequisiteTermIds",
+          "firstUseUnitId",
+          "scope",
+          "sourceRevisionIds"
+        ],
+        "additionalProperties": false
       }
+    },
+    "__schema4": {
+      "type": "string",
+      "minLength": 1
+    },
+    "__schema5": {
+      "type": "string",
+      "pattern": "^term-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "__schema6": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
     }
   }
 }

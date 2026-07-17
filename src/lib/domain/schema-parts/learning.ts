@@ -1,7 +1,6 @@
-import learningRecordContractJson from '../../../../specs/001-build-abc-textbook/contracts/learning-record.schema.json' with { type: 'json' };
 import { z } from 'zod';
 
-import { defineContractSchema, strictObject } from '../contract-schema.js';
+import { defineZodContractSchema, strictObject } from '../contract-schema.js';
 import { OffsetDateTimeSchema, ProblemIdSchema } from './catalog.js';
 
 export const LearningRecordSchema = strictObject({
@@ -38,7 +37,11 @@ export const LearningRecordImportPreviewSchema = strictObject({
 
 export const LearningRecordMergePolicySchema = z.enum(['newer-wins', 'backup-wins', 'cancel']);
 
-export const LearningRecordContract = defineContractSchema(
+export const LearningRecordContract = defineZodContractSchema(
   'learning-record.schema.json',
-  learningRecordContractJson,
+  LearningRecordBackupSchema,
+  {
+    $id: 'https://abc-textbook.local/schemas/learning-record.schema.json',
+    title: 'ABC Textbook Learning Record Backup',
+  },
 );

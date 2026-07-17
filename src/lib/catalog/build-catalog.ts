@@ -1,5 +1,6 @@
 import { CatalogContract } from '../domain/schema-parts/catalog.js';
 import { stableProblemId } from '../domain/identity.js';
+import { buildAdvancedSlotRegistry } from './advanced-slot-registry.js';
 import {
   deterministicTopologicalOrder,
   DomainValidationError,
@@ -25,15 +26,31 @@ interface Entity {
 }
 
 interface CatalogLike {
-  readonly advancedSlotRegistry: { readonly labels: readonly string[] };
+  readonly release: {
+    readonly advancedSlotRegistryDigest: string;
+    readonly firstContestId: string;
+    readonly lastContestId: string;
+    readonly contestCount: number;
+    readonly problemCount: number;
+    readonly slotRecordCount: number;
+  };
+  readonly advancedSlotRegistry: {
+    readonly labels: readonly string[];
+    readonly firstSeenContestByLabel: Readonly<Record<string, string>>;
+    readonly orderEvidenceSourceRevisionIds: readonly string[];
+    readonly digest: string;
+  };
   readonly contests: readonly {
     readonly id: string;
+    readonly number: number;
     readonly officialTaskOrder: readonly string[];
+    readonly taskOrderSourceRevisionId: string;
   }[];
   readonly contestSlots: readonly {
     readonly contestId: string;
     readonly label: string;
     readonly officialOrder: number | null;
+    readonly availability: 'exists' | 'official_absent' | 'unknown' | 'withdrawn';
     readonly problemId?: string | null;
   }[];
   readonly problems: readonly {
@@ -129,6 +146,64 @@ export const buildCatalog = (input: unknown, sourcePaths: readonly string[] = []
 
 export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagnostic[] => {
   const diagnostics: ValidationDiagnostic[] = [];
+  const contestIds = new Set(catalog.contests.map(({ id }) => id));
+  if (contestIds.size !== catalog.contests.length) {
+    diagnostics.push({ code: 'DUPLICATE_CONTEST_ID', message: 'Contest IDs must be unique.' });
+  }
+  if (catalog.release.contestCount !== catalog.contests.length) {
+    diagnostics.push({
+      code: 'CONTEST_COUNT_MISMATCH',
+      message: 'release.contestCount does not match contests.',
+    });
+  }
+  if (catalog.release.problemCount !== catalog.problems.length) {
+    diagnostics.push({
+      code: 'PROBLEM_COUNT_MISMATCH',
+      message: 'release.problemCount does not match problems.',
+    });
+  }
+  if (catalog.release.slotRecordCount !== catalog.contestSlots.length) {
+    diagnostics.push({
+      code: 'SLOT_RECORD_COUNT_MISMATCH',
+      message: 'release.slotRecordCount does not match contestSlots.',
+    });
+  }
+  if (catalog.release.advancedSlotRegistryDigest !== catalog.advancedSlotRegistry.digest) {
+    diagnostics.push({
+      code: 'REGISTRY_DIGEST_MISMATCH',
+      message: 'Release registry digest is stale.',
+    });
+  }
+  const contestNumbers = [...catalog.contests].map(({ number }) => number).sort((a, b) => a - b);
+  const firstNumber = Number(
+    /^abc(?<number>[0-9]+)$/u.exec(catalog.release.firstContestId)?.groups?.number,
+  );
+  const lastNumber = Number(
+    /^abc(?<number>[0-9]+)$/u.exec(catalog.release.lastContestId)?.groups?.number,
+  );
+  const expectedNumbers =
+    Number.isInteger(firstNumber) && Number.isInteger(lastNumber) && lastNumber >= firstNumber
+      ? Array.from(
+          { length: lastNumber - firstNumber + 1 },
+          (_unused, index) => firstNumber + index,
+        )
+      : [];
+  if (
+    expectedNumbers.length !== catalog.contests.length ||
+    expectedNumbers.some((number, index) => contestNumbers[index] !== number) ||
+    catalog.contests.some(({ id, number }) => id !== `abc${String(number)}`)
+  ) {
+    diagnostics.push({
+      code: 'CONTEST_RANGE_INCOMPLETE',
+      message: 'Contest range must be continuous and agree with release bounds.',
+    });
+  }
+  if (catalog.release.firstContestId !== 'abc212') {
+    diagnostics.push({
+      code: 'CATALOG_START_CONTEST_INVALID',
+      message: 'The public catalog must start at ABC 212.',
+    });
+  }
   const problemIds = new Set(catalog.problems.map(({ id }) => id));
   if (problemIds.size !== catalog.problems.length) {
     diagnostics.push({
@@ -156,24 +231,134 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
   for (const orphan of [...inventoryIds].filter((id) => !problemIds.has(id))) {
     diagnostics.push({ code: 'TECHNIQUE_INVENTORY_ORPHAN', entityId: orphan, message: orphan });
   }
-  const slotKeys = new Set(
-    catalog.contestSlots.map(({ contestId, label }) => `${contestId}:${label}`),
+  const slotKeys = new Set<string>();
+  for (const slot of catalog.contestSlots) {
+    const key = `${slot.contestId}:${slot.label}`;
+    if (slotKeys.has(key)) {
+      diagnostics.push({ code: 'DUPLICATE_CONTEST_SLOT', entityId: slot.contestId, message: key });
+    }
+    slotKeys.add(key);
+    if (!contestIds.has(slot.contestId)) {
+      diagnostics.push({ code: 'CONTEST_SLOT_ORPHAN', entityId: slot.contestId, message: key });
+    }
+    if (!catalog.advancedSlotRegistry.labels.includes(slot.label)) {
+      diagnostics.push({
+        code: 'CONTEST_SLOT_LABEL_NOT_REGISTERED',
+        entityId: slot.contestId,
+        message: key,
+      });
+    }
+    if (
+      slot.problemId !== null &&
+      slot.problemId !== undefined &&
+      !problemIds.has(slot.problemId)
+    ) {
+      diagnostics.push({
+        code: 'CONTEST_SLOT_PROBLEM_ORPHAN',
+        entityId: slot.problemId,
+        message: key,
+      });
+    }
+  }
+  const slottedProblemIds = new Set(
+    catalog.contestSlots.flatMap(({ problemId }) => (problemId ? [problemId] : [])),
   );
+  for (const problemId of problemIds) {
+    if (!slottedProblemIds.has(problemId)) {
+      diagnostics.push({ code: 'PROBLEM_SLOT_MISSING', entityId: problemId, message: problemId });
+    }
+  }
+  for (const problem of catalog.problems) {
+    const matchingSlot = catalog.contestSlots.find(
+      (slot) => slot.contestId === problem.contestId && slot.label === problem.slotLabel,
+    );
+    if (matchingSlot?.problemId !== problem.id) {
+      diagnostics.push({
+        code: 'PROBLEM_SLOT_MISMATCH',
+        entityId: problem.id,
+        message: problem.id,
+      });
+    }
+  }
   for (const contest of catalog.contests) {
     const d = contest.officialTaskOrder.indexOf('D');
     if (d < 0) {
       diagnostics.push({ code: 'D_TASK_NOT_FOUND', entityId: contest.id, message: contest.id });
       continue;
     }
+    const advancedLabels = contest.officialTaskOrder.slice(d + 1);
     for (const label of catalog.advancedSlotRegistry.labels) {
-      if (!slotKeys.has(`${contest.id}:${label}`)) {
+      const key = `${contest.id}:${label}`;
+      const matchingSlots = catalog.contestSlots.filter(
+        (slot) => slot.contestId === contest.id && slot.label === label,
+      );
+      if (!slotKeys.has(key)) {
         diagnostics.push({
           code: 'CONTEST_SLOT_STATE_MISSING',
           entityId: contest.id,
           message: `${contest.id}:${label}`,
         });
+        continue;
+      }
+      const slot = matchingSlots[0];
+      if (!slot) continue;
+      const officialOrder = contest.officialTaskOrder.indexOf(label);
+      if (officialOrder >= 0) {
+        if (slot.availability === 'official_absent' || slot.officialOrder !== officialOrder) {
+          diagnostics.push({
+            code: 'CONTEST_SLOT_OFFICIAL_MISMATCH',
+            entityId: contest.id,
+            message: key,
+          });
+        }
+      } else if (slot.availability === 'exists' || slot.officialOrder !== null) {
+        diagnostics.push({
+          code: 'CONTEST_SLOT_ABSENCE_MISMATCH',
+          entityId: contest.id,
+          message: key,
+        });
       }
     }
+    for (const label of advancedLabels) {
+      if (!catalog.advancedSlotRegistry.labels.includes(label)) {
+        diagnostics.push({
+          code: 'REGISTRY_LABEL_MISSING',
+          entityId: contest.id,
+          message: `${contest.id}:${label}`,
+        });
+      }
+    }
+  }
+  try {
+    const rebuiltRegistry = buildAdvancedSlotRegistry({
+      contests: [...catalog.contests]
+        .sort((left, right) => left.number - right.number)
+        .map((contest) => ({
+          contestId: contest.id,
+          advancedLabels: contest.officialTaskOrder.slice(
+            contest.officialTaskOrder.indexOf('D') + 1,
+          ),
+          sourceRevisionId: contest.taskOrderSourceRevisionId,
+        })),
+    });
+    if (
+      JSON.stringify(rebuiltRegistry.labels) !==
+        JSON.stringify(catalog.advancedSlotRegistry.labels) ||
+      JSON.stringify(rebuiltRegistry.firstSeenContestByLabel) !==
+        JSON.stringify(catalog.advancedSlotRegistry.firstSeenContestByLabel) ||
+      JSON.stringify(rebuiltRegistry.orderEvidenceSourceRevisionIds) !==
+        JSON.stringify(catalog.advancedSlotRegistry.orderEvidenceSourceRevisionIds)
+    ) {
+      diagnostics.push({
+        code: 'REGISTRY_REBUILD_MISMATCH',
+        message: 'Registry does not match official contest task orders.',
+      });
+    }
+  } catch (error) {
+    diagnostics.push({
+      code: 'REGISTRY_REBUILD_FAILED',
+      message: error instanceof Error ? error.message : String(error),
+    });
   }
   try {
     deterministicTopologicalOrder(

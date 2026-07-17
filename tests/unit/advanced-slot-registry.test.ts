@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { AdvancedSlotRegistrySchema } from '../../src/lib/domain/schema-parts/catalog.js';
+import {
+  AdvancedSlotRegistrySchema,
+  ContestSlotRecordSchema,
+} from '../../src/lib/domain/schema-parts/catalog.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import {
   AdvancedSlotRegistryError,
@@ -72,6 +75,21 @@ describe('official advanced slot registry', () => {
     ).toThrow(/DUPLICATE_TASK_LABEL/u);
   });
 
+  it('fails the whole contest when one task-table row cannot be interpreted', () => {
+    const html = taskList(['A', 'B', 'C', 'D', 'E']).replace(
+      '/contests/abc500/tasks/abc500_e',
+      '/contests/abc500/task/abc500_e',
+    );
+    expect(() =>
+      parseOfficialTaskList({
+        contestId: 'abc500',
+        officialTaskListUrl: 'https://atcoder.jp/contests/abc500/tasks',
+        html,
+        checkedAt: '2026-07-17T12:00:00+09:00',
+      }),
+    ).toThrow(/PARSER_DRIFT/u);
+  });
+
   it('keeps the existing order while inserting future labels from official constraints', () => {
     const existingSubject = {
       version: '1.0.0' as const,
@@ -110,9 +128,9 @@ describe('official advanced slot registry', () => {
     const registry = buildAdvancedSlotRegistry({
       contests: [
         {
-          contestId: 'abc500',
+          contestId: 'abc212',
           advancedLabels: ['E'],
-          sourceRevisionId: 'source-abc500-task-order',
+          sourceRevisionId: 'source-abc212-task-order',
         },
       ],
     });
@@ -129,8 +147,8 @@ describe('official advanced slot registry', () => {
         contentSnapshotDigest: digest,
         updateIds: ['update-foundation'],
         advancedSlotRegistryDigest: registry.digest,
-        firstContestId: 'abc500',
-        lastContestId: 'abc500',
+        firstContestId: 'abc212',
+        lastContestId: 'abc212',
         contestCount: 1,
         problemCount: 1,
         slotRecordCount: 1,
@@ -155,10 +173,66 @@ describe('official advanced slot registry', () => {
         changelogPath: 'docs/changelog/2026.07.17.md',
       },
       advancedSlotRegistry: registry,
-      contests: [],
-      contestSlots: [],
-      problems: [],
-      techniqueInventory: [],
+      contests: [
+        {
+          id: 'abc212',
+          number: 212,
+          title: 'AtCoder Beginner Contest 212',
+          startedAt: '2026-07-17T12:00:00+09:00',
+          endedAt: '2026-07-17T13:40:00+09:00',
+          officialUrl: 'https://atcoder.jp/contests/abc212',
+          officialTaskOrder: ['A', 'B', 'C', 'D', 'E'],
+          taskOrderSourceRevisionId: 'source-abc212-task-order',
+          checkedAt: '2026-07-17T14:00:00+09:00',
+        },
+      ],
+      contestSlots: [
+        {
+          contestId: 'abc212',
+          label: 'E',
+          officialOrder: 4,
+          availability: 'exists',
+          catalogStatus: 'uncollected',
+          holdReason: null,
+          problemId: 'abc212-e',
+          sourceRevisionId: 'source-abc212-task-order',
+          checkedAt: '2026-07-17T14:00:00+09:00',
+        },
+      ],
+      problems: [
+        {
+          id: 'abc212-e',
+          contestId: 'abc212',
+          slotLabel: 'E',
+          title: 'Problem E',
+          officialUrl: 'https://atcoder.jp/contests/abc212/tasks/abc212_e',
+          constraintsSummary: 'Fixture constraints.',
+          difficultyEvidence: 'Fixture evidence.',
+          sourceRevisionIds: ['source-abc212-task-order'],
+          checkedAt: '2026-07-17T14:00:00+09:00',
+          publicationStatus: 'uncollected',
+          primaryTagIds: [],
+          secondaryTagIds: [],
+          adHocElements: [],
+          placementId: null,
+          explanationId: null,
+        },
+      ],
+      techniqueInventory: [
+        {
+          problemId: 'abc212-e',
+          sourceRevisionIds: ['source-abc212-task-order'],
+          coreMethod: 'Fixture method.',
+          proofIdeas: ['Fixture proof.'],
+          asymptoticComplexity: { time: 'O(1)', space: 'O(1)' },
+          prerequisiteCandidates: [],
+          implementationConcerns: [],
+          outcomeCandidates: ['Fixture outcome.'],
+          adHocElements: [],
+          authorId: 'author-fixture',
+          reviewStatus: 'draft',
+        },
+      ],
       tags: [],
       learningOutcomes: [],
       learningUnits: [],
@@ -174,6 +248,25 @@ describe('official advanced slot registry', () => {
     });
 
     expect(catalog.advancedSlotRegistry).toEqual(registry);
+
+    const countMismatch = structuredClone(catalog) as Record<string, unknown>;
+    (countMismatch.release as { problemCount: number }).problemCount = 2;
+    expect(() => buildCatalog(countMismatch)).toThrow(/PROBLEM_COUNT_MISMATCH/u);
+
+    const falseAbsence = structuredClone(catalog) as Record<string, unknown>;
+    const [slot] = falseAbsence.contestSlots as {
+      availability: string;
+      officialOrder: number | null;
+      problemId: string | null;
+    }[];
+    if (slot) {
+      slot.availability = 'official_absent';
+      slot.officialOrder = null;
+      slot.problemId = null;
+    }
+    expect(() => buildCatalog(falseAbsence)).toThrow(
+      /CONTEST_SLOT_OFFICIAL_MISMATCH|CATALOG_SCHEMA_INVALID/u,
+    );
   });
 
   it('places an order-conflict hold instead of guessing', () => {
@@ -208,5 +301,35 @@ describe('official advanced slot registry', () => {
     });
     expect(states.find(({ label }) => label === 'I')?.availability).toBe('unknown');
     expect(states.find(({ label }) => label === 'Ex')?.availability).toBe('withdrawn');
+  });
+
+  it('rejects contradictory ContestSlot availability and hold states', () => {
+    const base = {
+      contestId: 'abc500',
+      label: 'E',
+      officialOrder: 4,
+      availability: 'exists' as const,
+      catalogStatus: 'drafting' as const,
+      holdReason: null,
+      problemId: 'abc500-e',
+      sourceRevisionId: 'source-abc500-task-order',
+      checkedAt: '2026-07-17T12:00:00+09:00',
+    };
+    expect(ContestSlotRecordSchema.safeParse(base).success).toBe(true);
+    expect(ContestSlotRecordSchema.safeParse({ ...base, problemId: null }).success).toBe(false);
+    expect(
+      ContestSlotRecordSchema.safeParse({
+        ...base,
+        availability: 'official_absent',
+        officialOrder: null,
+      }).success,
+    ).toBe(false);
+    expect(
+      ContestSlotRecordSchema.safeParse({ ...base, availability: 'unknown', problemId: null })
+        .success,
+    ).toBe(false);
+    expect(ContestSlotRecordSchema.safeParse({ ...base, catalogStatus: 'on_hold' }).success).toBe(
+      false,
+    );
   });
 });

@@ -1,10 +1,77 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://abc-textbook.local/schemas/release-candidate.schema.json",
-  "title": "ABC Textbook Release Candidate",
-  "description": "一つ以上のELIGIBLE_FOR_BATCH updateを固定content treeへ束ね、自動検査、Constitution Checkを含むHumanContentReviewEvidence、owner approval、read-only final validationを経て公開するcandidate state envelope。",
   "type": "object",
-  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "candidateId": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "releaseKind": {
+      "$ref": "#/$defs/__schema2"
+    },
+    "targetReleaseVersion": {
+      "$ref": "#/$defs/__schema3"
+    },
+    "baseReleaseVersion": {
+      "$ref": "#/$defs/__schema4"
+    },
+    "cutoffAt": {
+      "$ref": "#/$defs/__schema5"
+    },
+    "orderedUpdateIds": {
+      "$ref": "#/$defs/__schema6"
+    },
+    "fixtureMode": {
+      "$ref": "#/$defs/__schema7"
+    },
+    "advancedSlotRegistryDigest": {
+      "$ref": "#/$defs/__schema8"
+    },
+    "contentFiles": {
+      "$ref": "#/$defs/__schema9"
+    },
+    "contentSubjectDigest": {
+      "$ref": "#/$defs/__schema8"
+    },
+    "preJudgmentCheckRefs": {
+      "$ref": "#/$defs/__schema12"
+    },
+    "humanContentReviewEvidenceRefs": {
+      "$ref": "#/$defs/__schema14"
+    },
+    "blockingFindings": {
+      "$ref": "#/$defs/__schema15"
+    },
+    "candidateFiles": {
+      "$ref": "#/$defs/__schema16"
+    },
+    "candidatePayloadDigest": {
+      "$ref": "#/$defs/__schema17"
+    },
+    "approvableDigest": {
+      "$ref": "#/$defs/__schema18"
+    },
+    "ownerApproval": {
+      "$ref": "#/$defs/__schema19"
+    },
+    "publicationEffectiveAt": {
+      "$ref": "#/$defs/__schema20"
+    },
+    "publicationWindowEndsAt": {
+      "$ref": "#/$defs/__schema21"
+    },
+    "state": {
+      "$ref": "#/$defs/__schema22"
+    },
+    "createdAt": {
+      "$ref": "#/$defs/__schema5"
+    },
+    "updatedAt": {
+      "$ref": "#/$defs/__schema5"
+    }
+  },
   "required": [
     "schemaVersion",
     "candidateId",
@@ -30,129 +97,312 @@
     "createdAt",
     "updatedAt"
   ],
-  "properties": {
-    "schemaVersion": { "const": "2.0.0" },
-    "candidateId": { "$ref": "#/$defs/id" },
-    "releaseKind": { "enum": ["initial", "incremental"] },
-    "targetReleaseVersion": { "$ref": "#/$defs/releaseVersion" },
-    "baseReleaseVersion": { "anyOf": [{ "$ref": "#/$defs/releaseVersion" }, { "type": "null" }] },
-    "cutoffAt": { "$ref": "#/$defs/dateTime" },
-    "orderedUpdateIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
-    "fixtureMode": { "type": "boolean" },
-    "advancedSlotRegistryDigest": { "$ref": "#/$defs/sha256" },
-    "contentFiles": { "type": "array", "items": { "$ref": "#/$defs/fileEntry" } },
-    "contentSubjectDigest": { "$ref": "#/$defs/sha256" },
-    "preJudgmentCheckRefs": { "type": "array", "items": { "$ref": "#/$defs/checkRef" } },
-    "humanContentReviewEvidenceRefs": { "type": "array", "items": { "$ref": "#/$defs/reviewRef" } },
-    "blockingFindings": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
-    "candidateFiles": { "type": "array", "items": { "$ref": "#/$defs/fileEntry" } },
-    "candidatePayloadDigest": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
-    "approvableDigest": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
-    "ownerApproval": { "anyOf": [{ "$ref": "#/$defs/ownerApproval" }, { "type": "null" }] },
-    "publicationEffectiveAt": { "anyOf": [{ "$ref": "#/$defs/dateTime" }, { "type": "null" }] },
-    "publicationWindowEndsAt": { "anyOf": [{ "$ref": "#/$defs/dateTime" }, { "type": "null" }] },
-    "state": { "enum": ["DRAFTED", "VALIDATING", "AWAITING_REVIEW", "AWAITING_OWNER_APPROVAL", "AWAITING_FINAL_VALIDATION", "READY_TO_PUBLISH", "ON_HOLD", "PUBLISHED", "EXPIRED"] },
-    "createdAt": { "$ref": "#/$defs/dateTime" },
-    "updatedAt": { "$ref": "#/$defs/dateTime" }
-  },
-  "allOf": [
-    {
-      "if": { "properties": { "releaseKind": { "const": "initial" } }, "required": ["releaseKind"] },
-      "then": { "properties": { "baseReleaseVersion": { "type": "null" } } },
-      "else": { "properties": { "baseReleaseVersion": { "$ref": "#/$defs/releaseVersion" } } }
-    },
-    {
-      "if": { "properties": { "state": { "enum": ["AWAITING_OWNER_APPROVAL", "AWAITING_FINAL_VALIDATION", "READY_TO_PUBLISH", "PUBLISHED"] } }, "required": ["state"] },
-      "then": {
-        "properties": {
-          "humanContentReviewEvidenceRefs": { "minItems": 1 },
-          "blockingFindings": { "maxItems": 0 }
-        }
-      }
-    },
-    {
-      "if": { "properties": { "state": { "enum": ["AWAITING_FINAL_VALIDATION", "READY_TO_PUBLISH", "PUBLISHED"] } }, "required": ["state"] },
-      "then": {
-        "properties": {
-          "candidatePayloadDigest": { "$ref": "#/$defs/sha256" },
-          "approvableDigest": { "$ref": "#/$defs/sha256" },
-          "ownerApproval": { "$ref": "#/$defs/ownerApproval" },
-          "publicationEffectiveAt": { "$ref": "#/$defs/dateTime" },
-          "publicationWindowEndsAt": { "$ref": "#/$defs/dateTime" },
-          "candidateFiles": { "minItems": 1 }
-        }
-      }
-    },
-    {
-      "if": { "properties": { "fixtureMode": { "const": true } }, "required": ["fixtureMode"] },
-      "then": { "properties": { "state": { "not": { "const": "PUBLISHED" } } } }
-    }
-  ],
+  "additionalProperties": false,
+  "$id": "https://abc-textbook.local/schemas/release-candidate.schema.json",
+  "title": "ABC Textbook Release Candidate",
   "$defs": {
-    "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" },
-    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-    "releaseVersion": { "type": "string", "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}$" },
-    "dateTime": { "type": "string", "format": "date-time" },
-    "safePath": { "type": "string", "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//)[A-Za-z0-9._/-]+$" },
-    "fileEntry": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["path", "sha256", "byteLength"],
-      "properties": {
-        "path": { "$ref": "#/$defs/safePath" },
-        "sha256": { "$ref": "#/$defs/sha256" },
-        "byteLength": { "type": "integer", "minimum": 0 }
+    "__schema0": {
+      "type": "string",
+      "const": "2.0.0"
+    },
+    "__schema1": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "__schema2": {
+      "type": "string",
+      "enum": [
+        "initial",
+        "incremental"
+      ]
+    },
+    "__schema3": {
+      "type": "string",
+      "pattern": "^\\d{4}\\.\\d{2}\\.\\d{2}$"
+    },
+    "__schema4": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/__schema3"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema5": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+    },
+    "__schema6": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema1"
+      },
+      "uniqueItems": true
+    },
+    "__schema7": {
+      "type": "boolean"
+    },
+    "__schema8": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "__schema9": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema10"
       }
     },
-    "checkRef": {
+    "__schema10": {
       "type": "object",
-      "additionalProperties": false,
-      "required": ["checkId", "checkType", "subjectDigest", "command", "exitCode", "resultPath", "resultDigest", "completedAt"],
       "properties": {
-        "checkId": { "$ref": "#/$defs/id" },
-        "checkType": { "enum": ["automated", "human_content_review", "learner_outcome", "user_timing", "other"] },
-        "subjectDigest": { "$ref": "#/$defs/sha256" },
-        "command": { "type": "string", "minLength": 1 },
-        "exitCode": { "const": 0 },
-        "resultPath": { "$ref": "#/$defs/safePath" },
-        "resultDigest": { "$ref": "#/$defs/sha256" },
-        "completedAt": { "$ref": "#/$defs/dateTime" }
+        "path": {
+          "$ref": "#/$defs/__schema11"
+        },
+        "sha256": {
+          "$ref": "#/$defs/__schema8"
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "byteLength"
+      ],
+      "additionalProperties": false
+    },
+    "__schema11": {
+      "type": "string",
+      "pattern": "^(?!\\/)(?!.*(?:^|\\/)\\.\\.(?:\\/|$))(?!.*\\/\\/)[A-Za-z0-9._/-]+$"
+    },
+    "__schema12": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "checkId": {
+            "$ref": "#/$defs/__schema1"
+          },
+          "checkType": {
+            "type": "string",
+            "enum": [
+              "automated",
+              "human_content_review",
+              "learner_outcome",
+              "user_timing",
+              "other"
+            ]
+          },
+          "subjectDigest": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "command": {
+            "$ref": "#/$defs/__schema13"
+          },
+          "exitCode": {
+            "type": "number",
+            "const": 0
+          },
+          "resultPath": {
+            "$ref": "#/$defs/__schema11"
+          },
+          "resultDigest": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "completedAt": {
+            "$ref": "#/$defs/__schema5"
+          }
+        },
+        "required": [
+          "checkId",
+          "checkType",
+          "subjectDigest",
+          "command",
+          "exitCode",
+          "resultPath",
+          "resultDigest",
+          "completedAt"
+        ],
+        "additionalProperties": false
       }
     },
-    "reviewRef": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["evidenceId", "path", "digest", "subjectDigest", "reviewerExecutedCheckSetDigest", "aggregatePassed"],
-      "properties": {
-        "evidenceId": { "$ref": "#/$defs/id" },
-        "path": { "$ref": "#/$defs/safePath" },
-        "digest": { "$ref": "#/$defs/sha256" },
-        "subjectDigest": { "$ref": "#/$defs/sha256" },
-        "reviewerExecutedCheckSetDigest": { "$ref": "#/$defs/sha256" },
-        "aggregatePassed": { "const": true }
+    "__schema13": {
+      "type": "string",
+      "minLength": 1
+    },
+    "__schema14": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "evidenceId": {
+            "$ref": "#/$defs/__schema1"
+          },
+          "path": {
+            "$ref": "#/$defs/__schema11"
+          },
+          "digest": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "subjectDigest": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "reviewerExecutedCheckSetDigest": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "aggregatePassed": {
+            "type": "boolean",
+            "const": true
+          }
+        },
+        "required": [
+          "evidenceId",
+          "path",
+          "digest",
+          "subjectDigest",
+          "reviewerExecutedCheckSetDigest",
+          "aggregatePassed"
+        ],
+        "additionalProperties": false
       }
     },
-    "finding": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["code", "severity", "entityId", "message", "resolved"],
-      "properties": {
-        "code": { "type": "string", "minLength": 1 },
-        "severity": { "enum": ["critical", "high", "medium", "low"] },
-        "entityId": { "type": ["string", "null"] },
-        "message": { "type": "string", "minLength": 1 },
-        "resolved": { "type": "boolean" }
+    "__schema15": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "$ref": "#/$defs/__schema13"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "critical",
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "entityId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "message": {
+            "$ref": "#/$defs/__schema13"
+          },
+          "resolved": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "code",
+          "severity",
+          "entityId",
+          "message",
+          "resolved"
+        ],
+        "additionalProperties": false
       }
     },
-    "ownerApproval": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["ownerId", "approvedDigest", "approvedAt"],
-      "properties": {
-        "ownerId": { "$ref": "#/$defs/id" },
-        "approvedDigest": { "$ref": "#/$defs/sha256" },
-        "approvedAt": { "$ref": "#/$defs/dateTime" }
+    "__schema16": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema10"
       }
+    },
+    "__schema17": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/__schema8"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema18": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/__schema8"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema19": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "ownerId": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "approvedDigest": {
+              "$ref": "#/$defs/__schema8"
+            },
+            "approvedAt": {
+              "$ref": "#/$defs/__schema5"
+            }
+          },
+          "required": [
+            "ownerId",
+            "approvedDigest",
+            "approvedAt"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema20": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/__schema5"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema21": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/__schema5"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema22": {
+      "type": "string",
+      "enum": [
+        "DRAFTED",
+        "VALIDATING",
+        "AWAITING_REVIEW",
+        "AWAITING_OWNER_APPROVAL",
+        "AWAITING_FINAL_VALIDATION",
+        "READY_TO_PUBLISH",
+        "ON_HOLD",
+        "PUBLISHED",
+        "EXPIRED"
+      ]
     }
   }
 }

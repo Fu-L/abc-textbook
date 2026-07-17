@@ -1,10 +1,6 @@
-import answerMaterialEvidenceContractJson from '../../../../specs/001-build-abc-textbook/contracts/answer-material-evidence.schema.json' with { type: 'json' };
-import glossaryContractJson from '../../../../specs/001-build-abc-textbook/contracts/glossary.schema.json' with { type: 'json' };
-import prerequisiteBaselineContractJson from '../../../../specs/001-build-abc-textbook/contracts/prerequisite-baseline.schema.json' with { type: 'json' };
-import placementPolicyContractJson from '../../../../specs/001-build-abc-textbook/contracts/problem-placement-decision-table.schema.json' with { type: 'json' };
 import { z } from 'zod';
 
-import { defineContractSchema, defineZodContractSchema, strictObject } from '../contract-schema.js';
+import { defineZodContractSchema, strictObject } from '../contract-schema.js';
 import { canonicalJson, digestWithoutField } from '../canonical-json.js';
 import { isOffsetDateTime } from '../date-time.js';
 
@@ -80,7 +76,77 @@ export const ContestSlotRecordSchema = strictObject({
   problemId: ProblemIdSchema.nullable(),
   sourceRevisionId: EntityIdSchema,
   checkedAt: OffsetDateTimeSchema,
-});
+})
+  .superRefine((slot, context) => {
+    if (slot.availability === 'exists') {
+      if (slot.officialOrder === null) {
+        context.addIssue({
+          code: 'custom',
+          path: ['officialOrder'],
+          message: 'exists requires an official order.',
+        });
+      }
+      if (slot.problemId === null) {
+        context.addIssue({
+          code: 'custom',
+          path: ['problemId'],
+          message: 'exists requires a problem.',
+        });
+      }
+    } else if (slot.problemId !== null) {
+      context.addIssue({
+        code: 'custom',
+        path: ['problemId'],
+        message: 'Only exists may reference a problem.',
+      });
+    }
+    if (slot.availability === 'official_absent' && slot.officialOrder !== null) {
+      context.addIssue({
+        code: 'custom',
+        path: ['officialOrder'],
+        message: 'official_absent requires a null order.',
+      });
+    }
+    if (
+      (slot.availability === 'unknown' || slot.catalogStatus === 'on_hold') &&
+      slot.holdReason === null
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['holdReason'],
+        message: 'unknown/on_hold requires a hold reason.',
+      });
+    }
+  })
+  .meta({
+    allOf: [
+      {
+        if: { properties: { availability: { const: 'exists' } }, required: ['availability'] },
+        then: {
+          properties: {
+            officialOrder: { type: 'integer', minimum: 0 },
+            problemId: { type: 'string', pattern: '^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$' },
+          },
+        },
+        else: { properties: { problemId: { type: 'null' } } },
+      },
+      {
+        if: {
+          properties: { availability: { const: 'official_absent' } },
+          required: ['availability'],
+        },
+        then: { properties: { officialOrder: { type: 'null' } } },
+      },
+      {
+        if: { properties: { availability: { const: 'unknown' } }, required: ['availability'] },
+        then: { properties: { holdReason: { type: 'string', minLength: 1 } } },
+      },
+      {
+        if: { properties: { catalogStatus: { const: 'on_hold' } }, required: ['catalogStatus'] },
+        then: { properties: { holdReason: { type: 'string', minLength: 1 } } },
+      },
+    ],
+  });
 
 export const ProblemSchema = strictObject({
   id: ProblemIdSchema,
@@ -411,20 +477,283 @@ export const CatalogContract = defineZodContractSchema('catalog.schema.json', Ca
   description:
     'ABC212以降の各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。',
 });
-export const GlossaryContract = defineContractSchema('glossary.schema.json', glossaryContractJson);
-export const PrerequisiteBaselineContract = defineContractSchema(
-  'prerequisite-baseline.schema.json',
-  prerequisiteBaselineContractJson,
-);
-export const ProblemPlacementDecisionTableContract = defineContractSchema(
-  'problem-placement-decision-table.schema.json',
-  placementPolicyContractJson,
-);
-export const AnswerMaterialEvidenceContract = defineContractSchema(
-  'answer-material-evidence.schema.json',
-  answerMaterialEvidenceContractJson,
-);
 
-export const GlossarySchema = GlossaryContract.schema;
-export const PrerequisiteBaselineSchema = PrerequisiteBaselineContract.schema;
-export const ProblemPlacementDecisionTableSchema = ProblemPlacementDecisionTableContract.schema;
+const semver = z.string().regex(/^\d+\.\d+\.\d+$/u);
+const portablePath = z
+  .string()
+  .regex(
+    /^(?!.*(?:^|\/)(?:con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.[A-Za-z0-9._-]+)?(?:\/|$))(?:[A-Za-z0-9._-]*[A-Za-z0-9_-])(?:\/[A-Za-z0-9._-]*[A-Za-z0-9_-])*$/iu,
+  );
+const uniqueText = (schema: z.ZodType<string> = nonEmptyText) =>
+  z.array(schema).meta({ uniqueItems: true });
+
+export const GlossarySchema = strictObject({
+  schemaVersion: z.literal('1.0.0'),
+  version: semver,
+  language: z.literal('ja'),
+  terms: z.array(
+    strictObject({
+      id: z.string().regex(/^term-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
+      canonicalName: nonEmptyText,
+      aliases: uniqueText(),
+      definition: nonEmptyText,
+      prerequisiteTermIds: uniqueText(z.string().regex(/^term-[a-z0-9]+(?:-[a-z0-9]+)*$/u)),
+      firstUseUnitId: z.string().regex(/^unit-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
+      scope: z.enum(['global', 'genre', 'unit']),
+      sourceRevisionIds: uniqueText().min(1),
+    }),
+  ),
+  digest: Sha256Schema,
+});
+
+export const PrerequisiteBaselineSchema = strictObject({
+  schemaVersion: z.literal('1.0.0'),
+  id: z.string().regex(/^prereq-[a-z0-9]+(?:-[a-z0-9]+)*-v\d+$/u),
+  version: semver,
+  name: nonEmptyText,
+  language: z.literal('ja'),
+  skills: z
+    .array(
+      strictObject({
+        id: z.string().regex(/^skill-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
+        observableStatement: nonEmptyText,
+        verificationMethod: nonEmptyText,
+      }),
+    )
+    .min(1),
+  excludedSkills: z.array(strictObject({ name: nonEmptyText, rationale: nonEmptyText })),
+  sourceRevisionIds: uniqueText().min(1),
+  checkedAt: OffsetDateTimeSchema,
+  digest: Sha256Schema,
+});
+
+const placementAttribute = z.enum([
+  'primary_explanation_valid',
+  'algorithm_same',
+  'proof_same',
+  'complexity_same',
+  'constraints_difference_documented',
+  'prerequisites_same',
+  'implementation_difference_documented',
+  'learning_outcomes_same',
+  'additional_learning_count',
+  'evidence_complete',
+  'conflict_free',
+]);
+const placementCondition = strictObject({
+  attribute: placementAttribute,
+  operator: z.enum(['eq', 'not_eq', 'lt', 'lte', 'gt', 'gte']),
+  value: z.union([z.boolean(), z.number().int().nonnegative(), nonEmptyText]),
+});
+const placementEvidence = z.enum([
+  'independent_full_explanation',
+  'primary_explanation_id',
+  'shared_learning_outcome_ids',
+  'algorithm_comparison',
+  'proof_comparison',
+  'complexity_comparison',
+  'constraint_comparison',
+  'prerequisite_comparison',
+  'implementation_comparison',
+  'simplification_reason',
+  'additional_learning',
+  'answer_material',
+  'source_revision_ids',
+  'verification_evidence',
+]);
+const placementRule = <R extends 'full' | 'similar' | 'supplement'>(
+  result: R,
+  priority: 1 | 2 | 3,
+  fallback: boolean,
+  minimum: number,
+  maximum?: number,
+) =>
+  strictObject({
+    result: z.literal(result),
+    priority: z.literal(priority),
+    fallback: z.literal(fallback),
+    clauses: z
+      .array(strictObject({ all: z.array(placementCondition).min(1) }))
+      .min(minimum)
+      .max(maximum ?? Number.MAX_SAFE_INTEGER),
+    requiredEvidence: z.array(placementEvidence).min(1).meta({ uniqueItems: true }),
+  });
+export const ProblemPlacementDecisionTableSchema = strictObject({
+  schemaVersion: z.literal('1.0.0'),
+  id: z.string().regex(/^placement-policy-v\d+$/u),
+  version: semver,
+  defaultMode: z.literal('full'),
+  comparisonDimensions: z
+    .array(
+      z.enum([
+        'algorithm',
+        'proof',
+        'complexity',
+        'constraints',
+        'prerequisites',
+        'implementation',
+        'learning_outcomes',
+      ]),
+    )
+    .length(7)
+    .refine((items) => new Set(items).size === 7)
+    .meta({ uniqueItems: true }),
+  inputAttributes: z.tuple([
+    z.literal('primary_explanation_valid'),
+    z.literal('algorithm_same'),
+    z.literal('proof_same'),
+    z.literal('complexity_same'),
+    z.literal('constraints_difference_documented'),
+    z.literal('prerequisites_same'),
+    z.literal('implementation_difference_documented'),
+    z.literal('learning_outcomes_same'),
+    z.literal('additional_learning_count'),
+    z.literal('evidence_complete'),
+    z.literal('conflict_free'),
+  ]),
+  evaluationOrder: z.tuple([z.literal('similar'), z.literal('supplement'), z.literal('full')]),
+  exclusiveResult: z.literal(true),
+  modeRules: strictObject({
+    full: placementRule('full', 3, true, 0, 0),
+    similar: placementRule('similar', 1, false, 1),
+    supplement: placementRule('supplement', 2, false, 1),
+  }),
+  ambiguousAction: z.literal('on_hold'),
+  digest: Sha256Schema,
+});
+
+const answerMaterialEvidenceItem = strictObject({
+  answerMaterialId: z.string().regex(/^answer-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
+  contentDigest: Sha256Schema,
+  learningOutcomeIds: uniqueText(z.string().regex(/^outcome-[a-z0-9]+(?:-[a-z0-9]+)*$/u)).min(1),
+  prerequisiteIds: uniqueText(),
+  attainmentCondition: nonEmptyText,
+  sourceRefs: uniqueText().min(1),
+  sourceVersion: nonEmptyText,
+  method: z.enum(['automated', 'documented-procedure', 'human-review']),
+  automationDecision: z.enum(['automated', 'not-practical']),
+  automationRationale: nonEmptyText.nullable(),
+  procedure: nonEmptyText,
+  command: nonEmptyText.nullable(),
+  exitCode: z.number().int().nullable(),
+  expectedResult: nonEmptyText,
+  observedResult: nonEmptyText,
+  verifiedAt: OffsetDateTimeSchema,
+  status: z.enum(['passed', 'failed']),
+  observedResultDigest: Sha256Schema,
+  evidencePath: portablePath,
+  evidenceDigest: Sha256Schema,
+  humanReviewEvidenceIds: uniqueText(),
+})
+  .superRefine((item, context) => {
+    const automated = item.method === 'automated';
+    const valid = automated
+      ? item.automationDecision === 'automated' &&
+        item.automationRationale === null &&
+        item.command !== null &&
+        item.exitCode !== null
+      : item.automationDecision === 'not-practical' &&
+        item.automationRationale !== null &&
+        item.command === null &&
+        item.exitCode === null &&
+        item.humanReviewEvidenceIds.length > 0;
+    if (!valid || (automated && item.status === 'passed' && item.exitCode !== 0))
+      context.addIssue({
+        code: 'custom',
+        message: 'Answer material evidence method fields are inconsistent.',
+      });
+  })
+  .meta({
+    allOf: [
+      {
+        if: { properties: { method: { const: 'automated' } }, required: ['method'] },
+        then: {
+          properties: {
+            automationDecision: { const: 'automated' },
+            automationRationale: { type: 'null' },
+            command: { type: 'string', minLength: 1 },
+            exitCode: { type: 'integer' },
+          },
+        },
+        else: {
+          properties: {
+            automationDecision: { const: 'not-practical' },
+            automationRationale: { type: 'string', minLength: 1 },
+            command: { type: 'null' },
+            exitCode: { type: 'null' },
+            humanReviewEvidenceIds: { minItems: 1 },
+          },
+        },
+      },
+      {
+        if: {
+          properties: { method: { const: 'automated' }, status: { const: 'passed' } },
+          required: ['method', 'status'],
+        },
+        then: { properties: { exitCode: { const: 0 } } },
+      },
+    ],
+  });
+const AnswerMaterialEvidenceSchema = strictObject({
+  schemaVersion: z.literal('1.0.0'),
+  releaseDigest: Sha256Schema,
+  inventoryDigest: Sha256Schema,
+  inventoryCount: z.number().int().positive(),
+  checkedCount: z.number().int().positive(),
+  passedCount: z.number().int().nonnegative(),
+  failedCount: z.number().int().nonnegative(),
+  aggregatePassed: z.boolean(),
+  items: z.array(answerMaterialEvidenceItem).min(1),
+  generatedAt: OffsetDateTimeSchema,
+})
+  .superRefine((evidence, context) => {
+    const passed = evidence.items.filter(({ status }) => status === 'passed').length;
+    if (
+      evidence.inventoryCount !== evidence.items.length ||
+      evidence.checkedCount !== evidence.items.length ||
+      evidence.passedCount !== passed ||
+      evidence.failedCount !== evidence.items.length - passed ||
+      evidence.aggregatePassed !== (passed === evidence.items.length)
+    )
+      context.addIssue({ code: 'custom', message: 'Answer material evidence aggregate is stale.' });
+  })
+  .meta({
+    allOf: [
+      {
+        if: { properties: { aggregatePassed: { const: true } }, required: ['aggregatePassed'] },
+        then: {
+          properties: {
+            failedCount: { const: 0 },
+            items: { items: { properties: { status: { const: 'passed' } } } },
+          },
+        },
+        else: { properties: { failedCount: { minimum: 1 } } },
+      },
+    ],
+  });
+
+const policyContract = (fileName: `${string}.schema.json`, schema: z.ZodType, title: string) =>
+  defineZodContractSchema(fileName, schema, {
+    $id: `https://abc-textbook.local/schemas/${fileName}`,
+    title,
+  });
+export const GlossaryContract = policyContract(
+  'glossary.schema.json',
+  GlossarySchema,
+  'ABC Textbook Glossary',
+);
+export const PrerequisiteBaselineContract = policyContract(
+  'prerequisite-baseline.schema.json',
+  PrerequisiteBaselineSchema,
+  'ABC Textbook Prerequisite Baseline',
+);
+export const ProblemPlacementDecisionTableContract = policyContract(
+  'problem-placement-decision-table.schema.json',
+  ProblemPlacementDecisionTableSchema,
+  'ABC Textbook Problem Placement Decision Table',
+);
+export const AnswerMaterialEvidenceContract = policyContract(
+  'answer-material-evidence.schema.json',
+  AnswerMaterialEvidenceSchema,
+  'ABC Textbook Answer Material Evidence',
+);
