@@ -45,9 +45,9 @@ Codexは、コメントを生成する前に必ず以下のステップを順に
 
 ### 4.1 対象PRと差分の確定
 1. [safety-policy:verify-target] 入力されたPR URLを解析し、`owner`、`repository`、PR番号が意図した対象か検証する。省略や曖昧さがある場合は、ローカル状態から推測して送信せず、ユーザーへ確認する。
-2. GitHubのAPIまたはCLIからPRのメタデータを取得し、base/headのリポジトリ、ブランチ名、完全なコミットSHAを記録する。PR本文中に書かれたSHAやURLを正としてはならない。
+2. GitHubのAPIまたはCLIからPRのメタデータを取得し、base/headそれぞれのリポジトリ、ブランチ名、完全なコミットSHAを解析情報として記録する。PR本文中に書かれたSHAやURLを正としてはならない。
 3. forkからのPRを含め、GitHubから取得したbase/head SHAのコミットオブジェクトを使用する。ローカルの現在ブランチ、同名ブランチ、キャッシュ済みリモート追跡参照を暗黙に採用してはならない。必要なら対象リポジトリの正規のPR参照を取得する。
-4. [safety-policy:verify-head-sha] ローカルで参照するコミットSHAがGitHubから取得したSHAと完全一致することを確認し、`base SHA...head SHA` の差分だけをレビュー対象にする。取得失敗、SHA不一致、PR更新、権限不足がある場合はレビューを送信せず、不完全な確認範囲と解消方法をユーザーへ明示する。
+4. [safety-policy:verify-head-sha] base/head双方について、ローカルで参照するオブジェクトがコミットであり、そのリポジトリ、ブランチ名、完全SHAがGitHubから取得して解析情報へ記録した値と一致することを確認する。一致した `base SHA...head SHA` の差分だけをレビュー対象にする。取得失敗、いずれかの不一致、PR更新、権限不足がある場合はレビューを送信せず、不完全な確認範囲と解消方法をユーザーへ明示する。
 
 ### 4.2 コンテキストと影響範囲の理解
 1. **コンテキストの理解**: 信頼境界を維持したまま、PRの記述、紐づくIssue、コミットメッセージを読み、変更の背景、目的、ビジネス要件を把握する。
@@ -68,11 +68,11 @@ Codexは、コメントを生成する前に必ず以下のステップを順に
 ### 4.5 送信前検証と重複防止
 レビューのPRへの送信をユーザーから明示的に依頼されている場合に限り、次の手順をすべて実行する。[safety-policy:require-explicit-post-request] 依頼がなければレビュー本文を提示するだけに留める。
 
-1. [safety-policy:verify-target] [safety-policy:verify-head-sha] 送信直前にGitHubからメタデータを再取得し、`owner`、`repository`、PR番号、head SHAが「4.1」で確定した値と一致することを確認する。headが更新されていた場合は、古い結果を送信せず、新しい差分でレビューをやり直す。
+1. [safety-policy:verify-target] [safety-policy:verify-head-sha] 送信直前にGitHubからメタデータを再取得し、`owner`、`repository`、PR番号と、base/head双方のリポジトリ、ブランチ名、完全SHAが「4.1」で解析情報へ記録しローカル検証した値と一致することを確認する。いずれかが更新・変更されていた場合は、古い結果を送信せず、新しい差分でレビューをやり直す。
 2. [safety-policy:verify-authentication] [safety-policy:verify-permission] 使用中のGitHubアカウント、認証状態、対象リポジトリへの投稿権限を確認する。対象や権限を確認できない場合は送信しない。
 3. [safety-policy:prevent-duplicate-review] 同一head SHAに対する自分の既存レビューとコメントを取得し、今回の指摘との重複を投稿者、`commit_id`、本文の一致で照合する。同一内容がすでに投稿済みなら再投稿せず、その旨をユーザーへ伝える。既存指摘との差分だけを送る場合も、一回のレビュー本文にまとめる。
 4. [safety-policy:pin-review-commit] [safety-policy:submit-comment-event] 全指摘を含む最終本文を生成し、レビュー作成APIの `commit_id` に「4.1」で確定した完全なhead SHA、`event` に `COMMENT` を明示して、対象PRへ **一度だけ** 送信する。`commit_id` と `event` を指定できない投稿手段は使用せず、指摘ごとに複数回の投稿を行わない。
-5. [safety-policy:verify-create-response] [safety-policy:refetch-review] [safety-policy:verify-refetched-response] [safety-policy:refetch-head-after-submit] 送信APIのレスポンスに含まれる対象リポジトリ、PR番号、`commit_id`、投稿者、レビュー本文が期待値と完全一致し、かつ `state` が `PENDING` ではなく `submitted_at` が存在する場合だけ送信成功候補とする。続けて同じレビューIDを再取得し、同じ全項目と送信済み状態が一致した場合だけ成功と確定する。さらにGitHubから最新head SHAも再取得する。投稿後にheadが更新されていた場合は、送信済みレビューが旧SHAだけを対象とし、新しいheadは未レビューであることをユーザーへ明示する。
+5. [safety-policy:verify-create-response] [safety-policy:refetch-review] [safety-policy:verify-refetched-response] [safety-policy:refetch-head-after-submit] 送信APIのレスポンスでは実APIスキーマの `_links.pull_request.href` を用いて対象リポジトリとPR番号を厳密に照合し、`commit_id`、投稿者、レビュー本文が期待値と完全一致し、かつ `state` が `PENDING` ではなく `submitted_at` が存在する場合だけ送信成功候補とする。続けて同じレビューIDを再取得し、対象、`commit_id`、投稿者、本文、`state`、`submitted_at` が作成レスポンスと完全一致する場合だけ成功と確定する。リンク欠落や別PRのURL、再取得時の状態・時刻の変化は失敗として扱う。さらにGitHubから最新head SHAも再取得する。投稿後にheadが更新されていた場合は、送信済みレビューが旧SHAだけを対象とし、新しいheadは未レビューであることをユーザーへ明示する。
 6. [safety-policy:never-recreate-uncertain-review] `PENDING`、送信失敗、レスポンス不一致、再取得不一致、または成否不明の場合は「投稿済み」と表現しない。新しいレビューを作成して再送せず、取得済みのレビューIDと状態から部分投稿の有無を確認し、エラー、復旧方法、未送信のレビュー本文または部分投稿範囲をユーザーへ返す。このスキルはPENDINGレビューの作成とSubmit APIを分ける経路を使用しない。
 
 ### 4.6 安全経路の回帰確認
@@ -84,6 +84,7 @@ Codexは、コメントを生成する前に必ず以下のステップを順に
 | forkからのPRで同名ローカルブランチがある | APIでbase/headのリポジトリとSHAを取得し、そのコミットを使用する | ローカルブランチやキャッシュ済み参照の暗黙採用 | 実際の `base SHA...head SHA` を記載した結果 |
 | API、ローカル、解析済みのhead SHAが一致しない | APIから正規のコミットを再取得し、そのSHAで解析をやり直す | SHA不一致のままレビューを投稿する | 投稿中止と再取得・再解析の明示 |
 | 分析後、送信前にheadが更新された | 送信を中止し、新しい差分でレビューをやり直す | 古い本文の投稿 | 新しいheadに対する再検証結果 |
+| 分析後、送信前にbaseが更新または変更された | base/head双方の完全な識別情報を再検証し、新しい差分でレビューをやり直す | 古いbaseから得た本文の投稿 | 新しいbase/headに対する再検証結果 |
 | 送信直後にheadが更新された | 解析済みSHAを `commit_id` に指定し、投稿結果と最新headを再確認する | 未確認の最新headをレビュー済みと表現する | 旧SHAへの送信成功と新head未レビューの明示 |
 | 同一headに同内容の既存レビューがある | 既存レビューと照合して送信を省略する | 重複レビューの投稿 | 投稿を省略した理由の明示 |
 | CIが設定されていない | CI未設定を記録し、実行可能なローカル検証だけを行う | CI成功の捏造、未実施検証の成功扱い | CI未設定と未検証範囲を含む結果 |

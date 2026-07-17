@@ -116,6 +116,18 @@ def pull_head(pull: object) -> object:
     return head.get("sha") if isinstance(head, dict) else None
 
 
+def pull_side_identity(pull: object, side_name: str) -> object:
+    if not isinstance(pull, dict):
+        return None
+    side = pull.get(side_name)
+    if not isinstance(side, dict):
+        return None
+    repo = side.get("repo")
+    if not isinstance(repo, dict):
+        return None
+    return (repo.get("full_name"), side.get("ref"), side.get("sha"))
+
+
 def expected_pull_url(target: tuple[str, int]) -> str:
     return f"https://api.github.com/repos/{target[0]}/pulls/{target[1]}"
 
@@ -133,7 +145,7 @@ def review_matches(
         return False
     user = review.get("user")
     links = review.get("_links")
-    pull_link = links.get("pull") if isinstance(links, dict) else None
+    pull_link = links.get("pull_request") if isinstance(links, dict) else None
     target_matches = bool(
         isinstance(pull_link, dict)
         and pull_link.get("href") == expected_pull_url(target)
@@ -175,36 +187,102 @@ def submitted_review_matches(
     )
 
 
+def same_submitted_review(create_response: object, refetched_response: object) -> bool:
+    if not isinstance(create_response, dict) or not isinstance(
+        refetched_response, dict
+    ):
+        return False
+    fields = ("id", "commit_id", "body", "state", "submitted_at")
+    if any(
+        create_response.get(field) != refetched_response.get(field)
+        for field in fields
+    ):
+        return False
+    create_user = create_response.get("user")
+    refetched_user = refetched_response.get("user")
+    create_links = create_response.get("_links")
+    refetched_links = refetched_response.get("_links")
+    return bool(
+        isinstance(create_user, dict)
+        and isinstance(refetched_user, dict)
+        and create_user.get("login") == refetched_user.get("login")
+        and isinstance(create_links, dict)
+        and isinstance(refetched_links, dict)
+        and create_links.get("pull_request")
+        == refetched_links.get("pull_request")
+    )
+
+
 def evaluate(input_data: dict[str, Any], policy: dict[str, Any]) -> dict[str, Any]:
     target = target_from_request(input_data)
     request = input_data["request"]
     actor = request["actor"]
     body = request["body"]
-    analyzed_head = input_data["analysis"]["headSha"]
+    analysis = input_data["analysis"]
+    analyzed_head = analysis["headSha"]
+    analyzed_head_identity = (
+        analysis["headRepo"],
+        analysis["headRef"],
+        analyzed_head,
+    )
+    analyzed_base = (
+        analysis["baseRepo"],
+        analysis["baseRef"],
+        analysis["baseSha"],
+    )
     initial_pull = input_data["initialPullResponse"]
     pre_submit_pull = input_data["preSubmitPullResponse"]
     local_commit = input_data["localCommit"]
+    local_base_commit = input_data["localBaseCommit"]
     auth_response = input_data["authResponse"]
     permission_response = input_data["permissionResponse"]
     existing_reviews = input_data["reviewsResponse"]
 
     initial_target_matches = pull_matches_target(initial_pull, target)
     pre_submit_target_matches = pull_matches_target(pre_submit_pull, target)
+    initial_head_identity = pull_side_identity(initial_pull, "head")
+    pre_submit_head_identity = pull_side_identity(pre_submit_pull, "head")
     initial_head = pull_head(initial_pull)
     pre_submit_head = pull_head(pre_submit_pull)
+    initial_base = pull_side_identity(initial_pull, "base")
+    pre_submit_base = pull_side_identity(pre_submit_pull, "base")
     local_head = local_commit.get("sha") if isinstance(local_commit, dict) else None
+    local_head_identity = (
+        local_commit.get("repo") if isinstance(local_commit, dict) else None,
+        local_commit.get("ref") if isinstance(local_commit, dict) else None,
+        local_head,
+    )
     local_is_commit = bool(
         isinstance(local_commit, dict) and local_commit.get("type") == "commit"
+    )
+    local_base = (
+        local_base_commit.get("repo")
+        if isinstance(local_base_commit, dict)
+        else None,
+        local_base_commit.get("ref") if isinstance(local_base_commit, dict) else None,
+        local_base_commit.get("sha") if isinstance(local_base_commit, dict) else None,
+    )
+    local_base_is_commit = bool(
+        isinstance(local_base_commit, dict)
+        and local_base_commit.get("type") == "commit"
     )
     sha_verified = bool(
         initial_target_matches
         and pre_submit_target_matches
         and local_is_commit
-        and initial_head == analyzed_head == local_head == pre_submit_head
+        and local_base_is_commit
+        and initial_base == analyzed_base == local_base == pre_submit_base
+        and initial_head_identity
+        == analyzed_head_identity
+        == local_head_identity
+        == pre_submit_head_identity
     )
     refetch_required = not sha_verified
     restart_analysis = bool(
-        initial_head != analyzed_head or pre_submit_head != analyzed_head
+        initial_base != analyzed_base
+        or pre_submit_base != analyzed_base
+        or initial_head_identity != analyzed_head_identity
+        or pre_submit_head_identity != analyzed_head_identity
     )
     auth_ok = bool(
         isinstance(auth_response, dict) and auth_response.get("login") == actor
@@ -267,11 +345,7 @@ def evaluate(input_data: dict[str, Any], policy: dict[str, Any]) -> dict[str, An
         body=body,
         policy=policy,
     )
-    same_review = bool(
-        isinstance(create_response, dict)
-        and isinstance(refetched_response, dict)
-        and create_response.get("id") == refetched_response.get("id")
-    )
+    same_review = same_submitted_review(create_response, refetched_response)
     sent = bool(can_attempt_post and created_matches and refetched_matches and same_review)
 
     post_submit_pull = input_data.get("postSubmitPullResponse")

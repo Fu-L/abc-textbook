@@ -11,37 +11,54 @@
       "body": "# Code review result"
     },
     "analysis": {
+      "baseRepo": "Fu-L/abc-textbook",
+      "baseRef": "main",
+      "baseSha": "base-a",
+      "headRepo": "contributor/abc-textbook",
+      "headRef": "feat/review-pr",
       "headSha": "head-a"
     },
     "initialPullResponse": {
       "number": 4,
       "base": {
         "sha": "base-a",
+        "ref": "main",
         "repo": {
           "full_name": "Fu-L/abc-textbook"
         }
       },
       "head": {
         "sha": "head-a",
+        "ref": "feat/review-pr",
         "repo": {
           "full_name": "contributor/abc-textbook"
         }
       }
     },
     "localCommit": {
+      "repo": "contributor/abc-textbook",
+      "ref": "feat/review-pr",
       "sha": "head-a",
+      "type": "commit"
+    },
+    "localBaseCommit": {
+      "repo": "Fu-L/abc-textbook",
+      "ref": "main",
+      "sha": "base-a",
       "type": "commit"
     },
     "preSubmitPullResponse": {
       "number": 4,
       "base": {
         "sha": "base-a",
+        "ref": "main",
         "repo": {
           "full_name": "Fu-L/abc-textbook"
         }
       },
       "head": {
         "sha": "head-a",
+        "ref": "feat/review-pr",
         "repo": {
           "full_name": "contributor/abc-textbook"
         }
@@ -64,7 +81,7 @@
         "login": "reviewer"
       },
       "_links": {
-        "pull": {
+        "pull_request": {
           "href": "https://api.github.com/repos/Fu-L/abc-textbook/pulls/4"
         }
       }
@@ -79,7 +96,7 @@
         "login": "reviewer"
       },
       "_links": {
-        "pull": {
+        "pull_request": {
           "href": "https://api.github.com/repos/Fu-L/abc-textbook/pulls/4"
         }
       }
@@ -88,12 +105,14 @@
       "number": 4,
       "base": {
         "sha": "base-a",
+        "ref": "main",
         "repo": {
           "full_name": "Fu-L/abc-textbook"
         }
       },
       "head": {
         "sha": "head-a",
+        "ref": "feat/review-pr",
         "repo": {
           "full_name": "contributor/abc-textbook"
         }
@@ -188,6 +207,39 @@
       }
     },
     {
+      "name": "base-changed-before-submit-restarts-analysis",
+      "input": {
+        "preSubmitPullResponse": {
+          "base": {
+            "sha": "base-b"
+          }
+        }
+      },
+      "expected": {
+        "restartAnalysis": true,
+        "shaVerified": false,
+        "refetchRequired": true,
+        "postReview": false,
+        "sent": false,
+        "reportFailure": true
+      }
+    },
+    {
+      "name": "local-base-identity-mismatch-blocks-post",
+      "input": {
+        "localBaseCommit": {
+          "ref": "release"
+        }
+      },
+      "expected": {
+        "restartAnalysis": false,
+        "shaVerified": false,
+        "refetchRequired": true,
+        "postReview": false,
+        "sent": false
+      }
+    },
+    {
       "name": "authentication-response-must-match-actor",
       "input": {
         "authResponse": {
@@ -271,6 +323,51 @@
         "sent": false,
         "reportFailure": true,
         "recreateReview": false
+      }
+    },
+    {
+      "name": "refetched-review-state-must-match-created-review",
+      "input": {
+        "refetchedReviewResponse": {
+          "state": "DISMISSED"
+        }
+      },
+      "expected": {
+        "postReview": true,
+        "reviewRefetched": true,
+        "sent": false,
+        "reportFailure": true,
+        "recreateReview": false
+      }
+    },
+    {
+      "name": "review-response-requires-pull-request-link",
+      "input": {
+        "createReviewResponse": {
+          "_links": null
+        }
+      },
+      "expected": {
+        "postReview": true,
+        "sent": false,
+        "reportFailure": true
+      }
+    },
+    {
+      "name": "review-response-rejects-different-pull-request-link",
+      "input": {
+        "refetchedReviewResponse": {
+          "_links": {
+            "pull_request": {
+              "href": "https://api.github.com/repos/Fu-L/abc-textbook/pulls/5"
+            }
+          }
+        }
+      },
+      "expected": {
+        "postReview": true,
+        "sent": false,
+        "reportFailure": true
       }
     },
     {
