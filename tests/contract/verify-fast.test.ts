@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import {
   EXIT_CODE,
   runVerification,
+  VERIFICATION_STEPS,
   type VerificationExecutor,
   type VerificationStep,
 } from '../../scripts/verify/runner.js';
@@ -13,7 +14,7 @@ const validEnvironment = {
 };
 
 describe('verify:fast exit code contract', () => {
-  it.each<VerificationStep['id']>(['lint', 'test', 'build', 'e2e'])(
+  it.each<VerificationStep['id']>(VERIFICATION_STEPS.map((step) => step.id))(
     'maps a %s failure to verification exit code 2',
     async (failedStep) => {
       const execute: VerificationExecutor = vi.fn((step: VerificationStep) =>
@@ -31,6 +32,26 @@ describe('verify:fast exit code contract', () => {
     },
   );
 
+  it.each(
+    VERIFICATION_STEPS.flatMap((step) => [
+      { expected: EXIT_CODE.usage, native: EXIT_CODE.usage, stepId: step.id },
+      { expected: EXIT_CODE.internal, native: EXIT_CODE.internal, stepId: step.id },
+    ]),
+  )('preserves exit code $native from the $stepId step', async ({ expected, native, stepId }) => {
+    const execute: VerificationExecutor = vi.fn((step: VerificationStep) =>
+      Promise.resolve(step.id === stepId ? native : 0),
+    );
+
+    await expect(
+      runVerification({
+        args: [],
+        env: validEnvironment,
+        execute,
+        report: vi.fn(),
+      }),
+    ).resolves.toBe(expected);
+  });
+
   it('maps invalid environment variables to usage exit code 64 before running checks', async () => {
     const execute: VerificationExecutor = vi.fn(() => Promise.resolve(0));
 
@@ -47,6 +68,23 @@ describe('verify:fast exit code contract', () => {
     ).resolves.toBe(EXIT_CODE.usage);
     expect(execute).not.toHaveBeenCalled();
   });
+
+  it.each([{ LINK_CHECK_PORT: '8673invalid' }, { PORT: '0' }, { BASE_PATH: '/abc?preview=true' }])(
+    'rejects invalid runner-owned environment before running checks: %s',
+    async (invalidEnv) => {
+      const execute: VerificationExecutor = vi.fn(() => Promise.resolve(0));
+
+      await expect(
+        runVerification({
+          args: [],
+          env: { ...validEnvironment, ...invalidEnv },
+          execute,
+          report: vi.fn(),
+        }),
+      ).resolves.toBe(EXIT_CODE.usage);
+      expect(execute).not.toHaveBeenCalled();
+    },
+  );
 
   it('maps unexpected arguments to usage exit code 64', async () => {
     await expect(

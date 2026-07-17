@@ -5,6 +5,7 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 const sourceFiles = ['src/**/*.{ts,tsx,astro}'];
+const browserSourceFiles = ['src/client/**/*.{ts,tsx}'];
 const astroBuildFiles = ['src/content.config.ts'];
 const nodeFiles = ['scripts/**/*.ts', '*.config.{js,mjs,ts}'];
 const vitestFiles = ['tests/{contract,integration,performance,setup,unit}/**/*.ts'];
@@ -30,12 +31,21 @@ export default defineConfig(
   astro.configs['flat/recommended'],
   {
     files: sourceFiles,
-    ignores: ['src/content.config.ts'],
+    ignores: ['src/client/**/*', 'src/content.config.ts'],
     languageOptions: {
-      globals: globals.browser,
       parserOptions: {
         extraFileExtensions: ['.astro'],
         project: ['./tsconfig.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    files: browserSourceFiles,
+    languageOptions: {
+      globals: globals.browser,
+      parserOptions: {
+        project: ['./tsconfig.client.json'],
         tsconfigRootDir: import.meta.dirname,
       },
     },
@@ -88,7 +98,14 @@ export default defineConfig(
     },
   },
   {
-    files: [...sourceFiles, ...astroBuildFiles, ...nodeFiles, ...vitestFiles, ...playwrightFiles],
+    files: [
+      ...sourceFiles,
+      ...browserSourceFiles,
+      ...astroBuildFiles,
+      ...nodeFiles,
+      ...vitestFiles,
+      ...playwrightFiles,
+    ],
     rules: {
       '@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'inline-type-imports' }],
       '@typescript-eslint/no-import-type-side-effects': 'error',

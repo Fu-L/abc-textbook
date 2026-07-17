@@ -4,20 +4,20 @@ import { extname, resolve, sep } from 'node:path';
 
 import { check, LinkState } from 'linkinator';
 
-const port = Number.parseInt(process.env.LINK_CHECK_PORT ?? '8673', 10);
-const basePath = normalizeBasePath(process.env.BASE_PATH ?? '/');
-const siteOrigin = new URL(process.env.SITE_URL ?? 'https://abc-textbook.example').origin;
-const localOrigin = `http://127.0.0.1:${String(port)}`;
-const startUrl = `${localOrigin}${basePath || '/'}`;
+import { normalizeBasePath, resolvePort, resolveSite, UsageError } from '../config/publication.js';
+
 const distRoot = resolve('dist');
 
-if (!Number.isSafeInteger(port) || port < 1 || port > 65_535) {
-  console.error('LINK_CHECK_PORT must be an integer from 1 through 65535.');
-  process.exitCode = 64;
-} else {
-  const server = createStaticServer();
+try {
+  const port = resolvePort(process.env.LINK_CHECK_PORT ?? '8673', 'LINK_CHECK_PORT');
+  const basePath = normalizeBasePath(process.env.BASE_PATH ?? '/');
+  const siteOrigin = new URL(resolveSite(process.env.SITE_URL ?? 'https://abc-textbook.example'))
+    .origin;
+  const localOrigin = `http://127.0.0.1:${String(port)}`;
+  const startUrl = `${localOrigin}${basePath}`;
+  const server = createStaticServer(basePath);
 
-  await listen(server);
+  await listen(server, port);
   try {
     const result = await check({
       path: startUrl,
@@ -50,32 +50,35 @@ if (!Number.isSafeInteger(port) || port < 1 || port > 65_535) {
   } finally {
     await close(server);
   }
-}
-
-function normalizeBasePath(value: string): string {
-  const trimmed = value.trim();
-  if (trimmed === '' || trimmed === '/') {
-    return '';
+} catch (error) {
+  if (error instanceof UsageError) {
+    console.error(error.message);
+    process.exitCode = 64;
+  } else {
+    throw error;
   }
-
-  return `/${trimmed.replace(/^\/+|\/+$/gu, '')}`;
 }
 
 function escapeRegularExpression(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
 }
 
-function createStaticServer(): Server {
+function createStaticServer(basePath: string): Server {
   // 本番サーバーを使わず、生成済みdistだけを検査対象にする。
   return createServer((request, response) => {
-    void serveStaticFile(request, response);
+    void serveStaticFile(request, response, basePath);
   });
 }
 
-async function serveStaticFile(request: IncomingMessage, response: ServerResponse): Promise<void> {
+async function serveStaticFile(
+  request: IncomingMessage,
+  response: ServerResponse,
+  basePath: string,
+): Promise<void> {
   try {
-    const requestUrl = new URL(request.url ?? '/', localOrigin);
-    const relativePath = stripBasePath(requestUrl.pathname);
+    const host = request.headers.host ?? '127.0.0.1';
+    const requestUrl = new URL(request.url ?? '/', `http://${host}`);
+    const relativePath = stripBasePath(requestUrl.pathname, basePath);
 
     if (relativePath === null) {
       response.writeHead(404).end();
@@ -104,8 +107,8 @@ async function serveStaticFile(request: IncomingMessage, response: ServerRespons
   }
 }
 
-function stripBasePath(pathname: string): string | null {
-  if (basePath === '') {
+function stripBasePath(pathname: string, basePath: string): string | null {
+  if (basePath === '/') {
     return pathname;
   }
 
@@ -164,7 +167,7 @@ function contentType(filePath: string): string {
   return types[extname(filePath)] ?? 'application/octet-stream';
 }
 
-function listen(server: Server): Promise<void> {
+function listen(server: Server, port: number): Promise<void> {
   return new Promise((resolvePromise, reject) => {
     server.once('error', reject);
     server.listen(port, '127.0.0.1', () => {

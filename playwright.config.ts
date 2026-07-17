@@ -1,11 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
 
-import { normalizeBasePath } from './scripts/config/publication.js';
+import { normalizeBasePath, resolvePort } from './scripts/config/publication.js';
 
 const normalizedBasePath = normalizeBasePath(process.env.BASE_PATH ?? '/');
 // Astroのbaseと同じ値を、PlaywrightのURL結合用に末尾スラッシュ付きで返す。
 const basePath = normalizedBasePath === '/' ? '/' : `${normalizedBasePath}/`;
-const port = Number.parseInt(process.env.PORT ?? '4321', 10);
+const port = resolvePort(process.env.PORT ?? '4321', 'PORT');
 const origin = `http://127.0.0.1:${String(port)}`;
 // 相対URLで遷移するE2Eが、ルート公開とサブパス公開の両方で同じように動くようにする。
 const baseURL = new URL(basePath, origin).href;

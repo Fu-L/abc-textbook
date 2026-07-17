@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 
-import { normalizeBasePath, resolveSite, UsageError } from '../config/publication.js';
+import { normalizeBasePath, resolvePort, resolveSite, UsageError } from '../config/publication.js';
 
 export const EXIT_CODE = {
   success: 0,
@@ -48,6 +48,8 @@ export async function runVerification(options: RunVerificationOptions): Promise<
   try {
     normalizeBasePath(options.env.BASE_PATH ?? '/');
     resolveSite(options.env.SITE_URL ?? 'https://abc-textbook.example');
+    resolvePort(options.env.LINK_CHECK_PORT ?? '8673', 'LINK_CHECK_PORT');
+    resolvePort(options.env.PORT ?? '4321', 'PORT');
   } catch (error) {
     if (error instanceof UsageError) {
       report(error.message);
@@ -64,7 +66,7 @@ export async function runVerification(options: RunVerificationOptions): Promise<
       const exitCode = await execute(step);
       if (exitCode !== EXIT_CODE.success) {
         report(`${step.script} failed with native exit code ${String(exitCode)}.`);
-        return EXIT_CODE.verificationFailure;
+        return classifyChildExitCode(exitCode);
       }
     }
   } catch (error) {
@@ -73,6 +75,14 @@ export async function runVerification(options: RunVerificationOptions): Promise<
   }
 
   return EXIT_CODE.success;
+}
+
+function classifyChildExitCode(exitCode: number): number {
+  if (exitCode === EXIT_CODE.usage || exitCode === EXIT_CODE.internal) {
+    return exitCode;
+  }
+
+  return EXIT_CODE.verificationFailure;
 }
 
 function executeNpmScript(step: VerificationStep): Promise<number> {

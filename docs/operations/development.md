@@ -60,7 +60,7 @@ npm run verify:fast
   URL生成以外の外部通信を発生させません。
 - `link:check` は同じ実行内でbuildした `dist` の内部linkだけを検査します。
 - `verify:fast` は内部link検査とChromium/Firefox/WebKitの主要E2Eまで実行します。
-- `check` はbrowser source、Astro build、Node.js
+- `check` は`src/client/`のbrowser source、Astro frontmatter/build、Node.js
   CLI/config、Vitest、Playwrightの型環境を分離して検査します。
 - live source確認はoffline suite成功後に明示的なdry-runとして実行します。
 

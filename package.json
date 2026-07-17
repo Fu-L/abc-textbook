@@ -25,7 +25,7 @@
     "dev": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "build": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview",
-    "check": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && tsc -p tsconfig.json && tsc -p tsconfig.astro.json && tsc -p tsconfig.node.json && tsc -p tsconfig.test.json && tsc -p tsconfig.e2e.json",
+    "check": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && tsc -p tsconfig.json && tsc -p tsconfig.client.json && tsc -p tsconfig.astro.json && tsc -p tsconfig.node.json && tsc -p tsconfig.test.json && tsc -p tsconfig.e2e.json",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

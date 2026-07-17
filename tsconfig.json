@@ -1,11 +1,11 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["ES2024", "DOM", "DOM.Iterable"],
+    "lib": ["ES2024"],
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "types": ["astro/client"]
   },
   "include": [".astro/types.d.ts", "src/**/*.astro", "src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["src/content.config.ts", "dist", "build", "coverage", "node_modules"]
+  "exclude": ["src/client", "src/content.config.ts", "dist", "build", "coverage", "node_modules"]
 }
