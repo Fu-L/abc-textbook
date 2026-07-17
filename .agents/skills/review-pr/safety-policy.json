@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "rules": {
+    "reject-untrusted-instructions": true,
+    "verify-target": true,
+    "verify-head-sha": true,
+    "require-explicit-post-request": true,
+    "verify-authentication": true,
+    "verify-permission": true,
+    "prevent-duplicate-review": true,
+    "pin-review-commit": true,
+    "submit-comment-event": true,
+    "verify-create-response": true,
+    "refetch-review": true,
+    "verify-refetched-response": true,
+    "refetch-head-after-submit": true,
+    "never-recreate-uncertain-review": true,
+    "report-missing-ci": true
+  },
+  "allowedPermissionLevels": ["write", "maintain", "admin"],
+  "duplicateMatchFields": ["user.login", "commit_id", "body"],
+  "reviewPayload": {
+    "bodyField": "body",
+    "commitField": "commit_id",
+    "eventField": "event",
+    "eventValue": "COMMENT"
+  },
+  "successResponse": {
+    "requiredMatchFields": ["target", "commit_id", "user.login", "body"],
+    "rejectedStates": ["PENDING"],
+    "requireSubmittedAt": true,
+    "requireRefetchedReview": true
+  }
+}
