@@ -16,7 +16,12 @@ import {
   buildAdvancedSlotRegistry,
   materializeContestSlotStates,
 } from '../../src/lib/catalog/advanced-slot-registry.js';
-import { buildCatalog, sortCatalogEntityArray } from '../../src/lib/catalog/build-catalog.js';
+import {
+  buildCatalog,
+  catalogContentDigest,
+  sortCatalogEntityArray,
+  type CatalogLike,
+} from '../../src/lib/catalog/build-catalog.js';
 import { parseOfficialTaskList } from '../../src/lib/catalog/official-task-list.js';
 
 const taskList = (labels: readonly string[]) => `
@@ -213,7 +218,7 @@ describe('official advanced slot registry', () => {
       reviews: [releaseReview],
     };
     const build = (input: unknown) => buildCatalog(input, [], trustedEvidence);
-    const catalog = build({
+    const catalogInput = {
       schemaVersion: '2.0.0',
       release: {
         version: '2026.07.17',
@@ -328,9 +333,21 @@ describe('official advanced slot registry', () => {
       exercises: [],
       assessments: [],
       answerMaterials: [],
-    });
+    };
+    const contentDigest = catalogContentDigest(catalogInput as CatalogLike);
+    releaseCheck.subjectDigest = contentDigest;
+    releaseReview.subjectDigest = contentDigest;
+    trustedEvidence.subjectDigest = contentDigest;
+    catalogInput.release.contentSnapshotDigest = contentDigest;
+    const catalog = build(catalogInput);
 
     expect(catalog.advancedSlotRegistry).toEqual(registry);
+    expect(catalogContentDigest(catalog)).toBe(catalog.release.contentSnapshotDigest);
+    const changedContent = structuredClone(catalog) as Record<string, unknown>;
+    const [changedProblem] = changedContent.problems as { title: string }[];
+    if (!changedProblem) throw new Error('Fixture problem is missing.');
+    changedProblem.title = 'Changed after review.';
+    expect(() => build(changedContent)).toThrow(/CONTENT_SNAPSHOT_DIGEST_MISMATCH/u);
 
     const countMismatch = structuredClone(catalog) as Record<string, unknown>;
     (countMismatch.release as { problemCount: number }).problemCount = 2;
@@ -462,6 +479,26 @@ describe('official advanced slot registry', () => {
         replacementTagIds: [],
       },
     ];
+    const independentContentDigest = catalogContentDigest(independentGraphs as CatalogLike);
+    const independentRelease = independentGraphs.release as {
+      contentSnapshotDigest: string;
+      validationSummary: { checks: { subjectDigest: string }[] };
+      humanContentReviewEvidenceRefs: { subjectDigest: string }[];
+    };
+    independentRelease.contentSnapshotDigest = independentContentDigest;
+    const [independentCheck] = independentRelease.validationSummary.checks;
+    if (!independentCheck) throw new Error('Independent graph check is missing.');
+    independentCheck.subjectDigest = independentContentDigest;
+    const [independentReview] = independentRelease.humanContentReviewEvidenceRefs;
+    if (!independentReview) throw new Error('Independent graph review is missing.');
+    independentReview.subjectDigest = independentContentDigest;
+    trustedEvidence.subjectDigest = independentContentDigest;
+    const [trustedCheck] = trustedEvidence.checks;
+    if (!trustedCheck) throw new Error('Trusted independent check is missing.');
+    trustedCheck.subjectDigest = independentContentDigest;
+    const [trustedReview] = trustedEvidence.reviews;
+    if (!trustedReview) throw new Error('Trusted independent review is missing.');
+    trustedReview.subjectDigest = independentContentDigest;
     expect(() => build(independentGraphs)).not.toThrow();
   });
 

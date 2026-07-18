@@ -25,6 +25,14 @@ const isWithin = (root: string, candidate: string): boolean => {
   );
 };
 
+/** Public evidence is kept in these roots; staging and arbitrary repository files are not evidence. */
+export const publicEvidenceRoots = [
+  'docs/verification',
+  'docs/reviews/human-content',
+  // Keep the path used by the phase-two fixtures while the review tree migrates to its final name.
+  'docs/judgments',
+] as const;
+
 export const resolvePublicCatalogInput = async (
   inputPath: string,
   repositoryRoot = process.cwd(),
@@ -55,4 +63,59 @@ export const resolvePublicCatalogInput = async (
     );
   }
   return resolvedInput;
+};
+
+export const resolvePublicEvidencePath = async (
+  evidencePath: string,
+  repositoryRoot = process.cwd(),
+): Promise<string> => {
+  if (hasStagingPathSegment(evidencePath)) {
+    throw new CatalogPublicationBoundaryError(
+      'STAGING_PUBLICATION_BOUNDARY',
+      `Public evidence cannot read ${evidencePath}.`,
+    );
+  }
+
+  const resolvedRepositoryRoot = await realpath(repositoryRoot);
+  const absoluteEvidence = path.isAbsolute(evidencePath)
+    ? evidencePath
+    : path.resolve(resolvedRepositoryRoot, evidencePath);
+  let resolvedEvidence: string;
+  try {
+    resolvedEvidence = await realpath(absoluteEvidence);
+  } catch {
+    throw new CatalogPublicationBoundaryError(
+      'EVIDENCE_FILE_NOT_FOUND',
+      `Public evidence file does not exist: ${evidencePath}.`,
+    );
+  }
+
+  try {
+    const resolvedStagingRoot = await realpath(path.join(resolvedRepositoryRoot, 'staging'));
+    if (isWithin(resolvedStagingRoot, resolvedEvidence)) {
+      throw new CatalogPublicationBoundaryError(
+        'STAGING_PUBLICATION_BOUNDARY',
+        `Public evidence cannot read staging through ${evidencePath}.`,
+      );
+    }
+  } catch (error) {
+    if (error instanceof CatalogPublicationBoundaryError) throw error;
+    // The repository may omit staging in a minimal test fixture; root authorization below still applies.
+  }
+
+  const resolvedRoots: string[] = [];
+  for (const root of publicEvidenceRoots) {
+    try {
+      resolvedRoots.push(await realpath(path.join(resolvedRepositoryRoot, root)));
+    } catch {
+      // A not-yet-created optional evidence root cannot authorize a path.
+    }
+  }
+  if (!resolvedRoots.some((root) => isWithin(root, resolvedEvidence))) {
+    throw new CatalogPublicationBoundaryError(
+      'EVIDENCE_OUTSIDE_PUBLIC_ROOT',
+      `Evidence must be under a public evidence root: ${evidencePath}.`,
+    );
+  }
+  return resolvedEvidence;
 };

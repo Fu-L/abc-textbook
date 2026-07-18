@@ -1,10 +1,10 @@
 import { readFile } from 'node:fs/promises';
 
+import { buildCatalog, CatalogBuildError } from '../src/lib/catalog/build-catalog.js';
 import {
-  buildCatalog,
-  CatalogBuildError,
-  type TrustedCatalogReleaseEvidenceInventory,
-} from '../src/lib/catalog/build-catalog.js';
+  CatalogEvidenceInventoryError,
+  loadTrustedCatalogReleaseEvidenceInventory,
+} from '../src/lib/catalog/evidence-inventory.js';
 import {
   CatalogPublicationBoundaryError,
   resolvePublicCatalogInput,
@@ -22,15 +22,15 @@ if (!inputPath || !evidencePath || args.length !== 4) {
   try {
     const resolvedInputPath = await resolvePublicCatalogInput(inputPath);
     const input = JSON.parse(await readFile(resolvedInputPath, 'utf8')) as unknown;
-    const trustedEvidence = JSON.parse(
-      await readFile(evidencePath, 'utf8'),
-    ) as TrustedCatalogReleaseEvidenceInventory;
+    const trustedEvidence = await loadTrustedCatalogReleaseEvidenceInventory(evidencePath);
     buildCatalog(input, [], trustedEvidence);
     console.log('CATALOG_VALID');
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
     process.exitCode =
-      error instanceof CatalogBuildError || error instanceof CatalogPublicationBoundaryError
+      error instanceof CatalogBuildError ||
+      error instanceof CatalogPublicationBoundaryError ||
+      error instanceof CatalogEvidenceInventoryError
         ? 2
         : 70;
   }

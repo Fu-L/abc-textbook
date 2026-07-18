@@ -56,6 +56,7 @@ export interface TrustedCatalogReleaseEvidenceInventory {
 }
 
 export interface CatalogLike {
+  readonly schemaVersion: '2.0.0';
   readonly release: {
     readonly advancedSlotRegistryDigest: string;
     readonly cutoffAt: string;
@@ -254,6 +255,42 @@ const entityArrayKeys = [
   'answerMaterials',
 ] as const;
 
+/**
+ * The release block is metadata about the snapshot and contains the snapshot digest itself.
+ * Keep this projection explicit so adding a release field can never silently change its subject.
+ */
+const catalogContentKeys = [
+  'schemaVersion',
+  'advancedSlotRegistry',
+  'contests',
+  'contestSlots',
+  'problems',
+  'techniqueInventory',
+  'tags',
+  'learningOutcomes',
+  'learningUnits',
+  'placements',
+  'explanations',
+  'sources',
+  'correctionImpacts',
+  'claims',
+  'examples',
+  'exercises',
+  'assessments',
+  'answerMaterials',
+] as const;
+
+export const projectCatalogContent = (
+  catalog: CatalogLike,
+): Readonly<Record<(typeof catalogContentKeys)[number], unknown>> => {
+  const projection = {} as Record<(typeof catalogContentKeys)[number], unknown>;
+  for (const key of catalogContentKeys) projection[key] = catalog[key];
+  return projection;
+};
+
+export const catalogContentDigest = (catalog: CatalogLike): string =>
+  canonicalDigest(projectCatalogContent(catalog));
+
 export const sortCatalogEntityArray = (
   key: (typeof entityArrayKeys)[number],
   items: readonly Entity[],
@@ -342,6 +379,14 @@ export const validateCatalogSemantics = (
   trustedEvidence?: TrustedCatalogReleaseEvidenceInventory,
 ): ValidationDiagnostic[] => {
   const diagnostics: ValidationDiagnostic[] = [];
+  const expectedContentSnapshotDigest = catalogContentDigest(catalog);
+  if (catalog.release.contentSnapshotDigest !== expectedContentSnapshotDigest) {
+    diagnostics.push({
+      code: 'CONTENT_SNAPSHOT_DIGEST_MISMATCH',
+      message:
+        'release.contentSnapshotDigest must match the normalized public catalog content projection.',
+    });
+  }
   const contestIds = new Set(catalog.contests.map(({ id }) => id));
   if (contestIds.size !== catalog.contests.length) {
     diagnostics.push({ code: 'DUPLICATE_CONTEST_ID', message: 'Contest IDs must be unique.' });
