@@ -15,6 +15,7 @@ import {
   calculateContentSubjectDigest,
 } from '../../src/lib/validation/release-state.js';
 import { calculateContentWorkManifestScopeDigest } from '../../src/lib/validation/content-work-manifest.js';
+import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
 
 const execFileAsync = promisify(execFile);
 const sha = (character: string): string => character.repeat(64);
@@ -237,17 +238,20 @@ describe('catalog validation CLI evidence boundary', () => {
       approvedDigest: releaseCandidate.approvableDigest,
       approvedAt: '2026-07-17T12:50:00+09:00',
     };
-    const catalog = {
-      release: {
-        version: '2026.07.17',
-        releaseKind: 'initial',
-        cutoffAt: '2026-07-17T09:00:00+09:00',
-        manifestDigest: workManifest.digest,
-        contentFileInventoryDigest: subjectDigest,
-        contentSnapshotDigest: subjectDigest,
-        updateIds: ['update-foundation'],
-        advancedSlotRegistryDigest: sha('f'),
-      },
+    const catalog = makeTrustedCatalog({
+      manifestDigest: workManifest.digest,
+      contentFileInventoryDigest: subjectDigest,
+      contentSnapshotDigest: subjectDigest,
+      updateIds: ['update-foundation'],
+    });
+    releaseCandidate.advancedSlotRegistryDigest = String(
+      (catalog.release as Record<string, unknown>).advancedSlotRegistryDigest,
+    );
+    releaseCandidate.approvableDigest = calculateApprovableDigest(releaseCandidate as never);
+    releaseCandidate.ownerApproval = {
+      ownerId: 'owner-release',
+      approvedDigest: releaseCandidate.approvableDigest,
+      approvedAt: '2026-07-17T12:50:00+09:00',
     };
     review.inventoryDigest = deriveCatalogEvidenceTrustContext({
       catalog,
@@ -309,8 +313,8 @@ describe('catalog validation CLI evidence boundary', () => {
       operations: [
         {
           operationId: 'operation-add-abc212-x45',
-          entityType: 'explanation',
-          entityId: 'explanation-abc212-x45',
+          entityType: 'tag',
+          entityId: 'tag-graphs',
           action: 'add',
           path: contentPath,
           beforeDigest: null,
@@ -379,6 +383,9 @@ describe('catalog validation CLI evidence boundary', () => {
     const { stdout: baseCommit } = await execFileAsync('git', ['rev-parse', 'HEAD'], {
       cwd: repositoryRoot,
     });
+    await execFileAsync('git', ['update-ref', 'refs/remotes/origin/main', baseCommit.trim()], {
+      cwd: repositoryRoot,
+    });
     await execFileAsync(
       'git',
       [
@@ -406,8 +413,6 @@ describe('catalog validation CLI evidence boundary', () => {
         'catalog.json',
         '--evidence-inventory',
         inventoryPath,
-        '--base-commit',
-        baseCommit.trim(),
       ],
       { cwd: repositoryRoot },
     ).catch((value: unknown) => value as { code: number; stderr: string });

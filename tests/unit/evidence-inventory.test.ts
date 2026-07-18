@@ -25,6 +25,11 @@ const execFileAsync = promisify(execFile);
 const sha = (character: string): string => character.repeat(64);
 const fileDigest = (value: string): string =>
   createHash('sha256').update(value, 'utf8').digest('hex');
+const protectedBaseRef = 'refs/remotes/origin/main';
+
+const protectBaseCommit = async (repositoryRoot: string, commit: string): Promise<void> => {
+  await execFileAsync('git', ['update-ref', protectedBaseRef, commit], { cwd: repositoryRoot });
+};
 
 describe('catalog release evidence inventory', () => {
   let repositoryRoot: string;
@@ -226,19 +231,270 @@ describe('catalog release evidence inventory', () => {
       approvedDigest: releaseCandidate.approvableDigest,
       approvedAt: '2026-07-17T12:50:00+09:00',
     };
+    const registrySubject = {
+      version: '1.0.0' as const,
+      labels: ['E' as const],
+      firstSeenContestByLabel: { E: 'abc212' },
+      orderEvidenceSourceRevisionIds: ['source-revision-abc212-e'],
+    };
+    releaseCandidate.advancedSlotRegistryDigest = canonicalDigest(registrySubject);
     const catalog = {
+      schemaVersion: '2.0.0' as const,
       release: {
         version: '2026.07.17',
-        releaseKind: 'initial',
+        releaseKind: 'initial' as const,
         cutoffAt: '2026-07-17T09:00:00+09:00',
+        validatedAt: '2026-07-17T12:00:00+09:00',
+        publicationEffectiveAt: '2026-07-17T13:00:00+09:00',
         manifestDigest: workManifest.digest,
         contentFileInventoryDigest: subjectDigest,
         contentSnapshotDigest: subjectDigest,
         updateIds: ['update-foundation'],
-        advancedSlotRegistryDigest: sha('f'),
+        advancedSlotRegistryDigest: canonicalDigest(registrySubject),
+        firstContestId: 'abc212',
+        lastContestId: 'abc212',
+        contestCount: 1,
+        problemCount: 1,
+        slotRecordCount: 1,
+        addedProblemIds: ['abc212-x45'],
+        changedProblemIds: [],
+        heldProblemIds: [],
+        withdrawnProblemIds: [],
+        taxonomyChanges: [],
+        validationSummary: {
+          checkCount: 1,
+          passedCheckCount: 1,
+          blockingFindingCount: 0,
+          evidenceDigests: [checkDigest],
+          checks: [
+            {
+              checkId: check.checkId,
+              command: check.command,
+              subjectDigest,
+              resultPath: checkPath,
+              resultDigest: checkDigest,
+              exitCode: 0,
+              passed: true,
+              completedAt: check.completedAt,
+            },
+          ],
+        },
+        humanContentReviewEvidenceRefs: [
+          {
+            evidenceId: review.id,
+            path: reviewPath,
+            digest: sha('9'),
+            subjectDigest,
+            authorIds: ['person-author'],
+            reviewerIds: ['person-reviewer'],
+            aggregatePassed: true as const,
+          },
+        ],
+        changelogPath: 'docs/changelog/2026-07-17.md',
       },
+      advancedSlotRegistry: {
+        ...registrySubject,
+        digest: canonicalDigest(registrySubject),
+      },
+      contests: [
+        {
+          id: 'abc212',
+          number: 212,
+          title: 'ABC 212',
+          startedAt: '2026-07-17T00:00:00+09:00',
+          endedAt: '2026-07-17T01:00:00+09:00',
+          officialUrl: 'https://atcoder.jp/contests/abc212',
+          officialTaskOrder: ['A', 'B', 'C', 'D', 'E'],
+          taskOrderSourceRevisionId: 'source-revision-abc212-e',
+          checkedAt: '2026-07-17T02:00:00+09:00',
+        },
+      ],
+      contestSlots: [
+        {
+          contestId: 'abc212',
+          label: 'E',
+          officialOrder: 4,
+          availability: 'exists' as const,
+          catalogStatus: 'published' as const,
+          holdReason: null,
+          problemId: 'abc212-x45',
+          sourceRevisionId: 'source-revision-abc212-e',
+          checkedAt: '2026-07-17T02:00:00+09:00',
+        },
+      ],
+      problems: [
+        {
+          id: 'abc212-x45',
+          contestId: 'abc212',
+          slotLabel: 'E',
+          title: 'Fixture problem',
+          officialUrl: 'https://atcoder.jp/contests/abc212/tasks/abc212_e',
+          constraintsSummary: 'Fixture constraints.',
+          difficultyEvidence: 'Fixture difficulty.',
+          sourceRevisionIds: ['source-revision-abc212-e'],
+          checkedAt: '2026-07-17T02:00:00+09:00',
+          publicationStatus: 'published' as const,
+          primaryTagIds: ['tag-graphs'],
+          secondaryTagIds: [],
+          adHocElements: [],
+          placementId: null,
+          explanationId: 'explanation-abc212-x45',
+        },
+      ],
+      techniqueInventory: [
+        {
+          problemId: 'abc212-x45',
+          sourceRevisionIds: ['source-revision-abc212-e'],
+          coreMethod: 'Fixture method.',
+          proofIdeas: ['Fixture proof.'],
+          asymptoticComplexity: { time: 'O(1)', space: 'O(1)' },
+          prerequisiteCandidates: [],
+          implementationConcerns: [],
+          outcomeCandidates: ['Fixture outcome.'],
+          adHocElements: [],
+          authorId: 'person-author',
+          reviewStatus: 'reviewed' as const,
+        },
+      ],
+      tags: [
+        {
+          id: 'tag-graphs',
+          name: 'Graphs',
+          definition: 'Fixture graph definition.',
+          parentId: null,
+          prerequisiteTagIds: [],
+          learningOutcomeIds: ['outcome-graphs'],
+          representativeProblemIds: ['abc212-x45'],
+          aliases: [],
+          formerNames: [],
+          lifecycle: 'active' as const,
+          replacementTagIds: [],
+        },
+      ],
+      learningOutcomes: [
+        {
+          id: 'outcome-graphs',
+          statement: 'Explain the fixture graph method.',
+          prerequisiteOutcomeIds: [],
+          scopeIds: ['tag-graphs'],
+          assessmentIds: ['assessment-graphs'],
+        },
+      ],
+      learningUnits: [
+        {
+          id: 'unit-graphs',
+          kind: 'chapter' as const,
+          title: 'Fixture graphs',
+          parentId: null,
+          baselineId: 'baseline-foundation',
+          baselineVersion: '1.0.0',
+          additionalPrerequisiteUnitIds: [],
+          excludedTopics: [],
+          sourceRevisionIds: ['source-revision-abc212-e'],
+          tagIds: ['tag-graphs'],
+          learningOutcomeIds: ['outcome-graphs'],
+          docPath: 'src/content/docs/index.md',
+          exampleIds: ['example-graphs'],
+          problemIds: ['abc212-x45'],
+          assessmentIds: ['assessment-graphs'],
+          stageRank: 0,
+          difficultyRank: 0,
+          representativeRank: 0,
+          globalIndex: 0,
+          orderReason: 'Fixture order.',
+        },
+      ],
+      placements: [],
+      explanations: [
+        {
+          id: 'explanation-abc212-x45',
+          problemId: 'abc212-x45',
+          kind: 'full' as const,
+          primaryExplanationId: null,
+          differenceSummary: null,
+          docPath: 'src/content/docs/index.md',
+          learningOutcomeIds: ['outcome-graphs'],
+          baselineId: 'baseline-foundation',
+          baselineVersion: '1.0.0',
+          additionalPrerequisiteUnitIds: [],
+          excludedTopics: [],
+          tagIds: ['tag-graphs'],
+          sourceRevisionIds: ['source-revision-abc212-e'],
+          claimIds: ['claim-graphs'],
+          exampleIds: ['example-graphs'],
+          skillName: 'fixture-skill',
+          skillVersion: '1.0.0',
+          skillDigest: sha('a'),
+          revision: 1,
+          sections: { overview: 'Fixture explanation.' },
+        },
+      ],
+      sources: [
+        {
+          id: 'source-revision-abc212-e',
+          url: 'https://atcoder.jp/contests/abc212/tasks/abc212_e',
+          sourceKind: 'official_problem' as const,
+          contestId: 'abc212',
+          checkedAt: '2026-07-17T02:00:00+09:00',
+          fingerprint: sha('b'),
+          termsCheckedAt: '2026-07-17T02:00:00+09:00',
+        },
+      ],
+      correctionImpacts: [],
+      claims: [
+        {
+          id: 'claim-graphs',
+          text: 'Fixture claim.',
+          sourceRevisionIds: ['source-revision-abc212-e'],
+          authorId: 'person-author',
+          verificationStatus: 'verified' as const,
+        },
+      ],
+      examples: [
+        {
+          id: 'example-graphs',
+          learningOutcomeIds: ['outcome-graphs'],
+          ownerExplanationIds: ['explanation-abc212-x45'],
+          ownerLearningUnitIds: ['unit-graphs'],
+          environment: 'Fixture environment.',
+          input: '1',
+          procedure: ['Run fixture.'],
+          expectedResult: '1',
+          verificationStatus: 'passed' as const,
+        },
+      ],
+      exercises: [
+        {
+          id: 'exercise-graphs',
+          problemId: 'abc212-x45',
+          learningOutcomeIds: ['outcome-graphs'],
+          prerequisiteIds: [],
+          attainmentCondition: 'Fixture condition.',
+          assessmentId: 'assessment-graphs',
+          answerMaterialId: 'answer-graphs',
+        },
+      ],
+      assessments: [
+        {
+          id: 'assessment-graphs',
+          learningOutcomeIds: ['outcome-graphs'],
+          method: 'Fixture assessment.',
+          successCondition: 'Fixture success.',
+        },
+      ],
+      answerMaterials: [
+        {
+          id: 'answer-graphs',
+          exerciseId: 'exercise-graphs',
+          reasoningOrVerification: 'Fixture answer.',
+          procedure: ['Verify fixture.'],
+          expectedResult: '1',
+          verificationStatus: 'passed' as const,
+        },
+      ],
     };
     const canonicalSources = { catalog, workManifest, releaseCandidate };
+    await writeJson('catalog.json', catalog);
     const derivedContext = deriveCatalogEvidenceTrustContext(canonicalSources);
     review.inventoryDigest = derivedContext.inventoryDigest;
     review.evidenceDigest = digestWithoutField(review, 'evidenceDigest');
@@ -554,6 +810,7 @@ describe('catalog release evidence inventory', () => {
     const { stdout: baseCommit } = await execFileAsync('git', ['rev-parse', 'HEAD'], {
       cwd: repositoryRoot,
     });
+    await protectBaseCommit(repositoryRoot, baseCommit.trim());
     await execFileAsync(
       'git',
       [
@@ -570,7 +827,7 @@ describe('catalog release evidence inventory', () => {
     );
     await expect(
       loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot, {
-        baseCommit: baseCommit.trim(),
+        catalogPath: 'catalog.json',
       }),
     ).rejects.toThrow(/WORK_MANIFEST_NOT_VERSION_CONTROLLED/u);
   });
@@ -615,6 +872,7 @@ describe('catalog release evidence inventory', () => {
     const { stdout: baseCommit } = await execFileAsync('git', ['rev-parse', 'HEAD'], {
       cwd: repositoryRoot,
     });
+    await protectBaseCommit(repositoryRoot, baseCommit.trim());
     await execFileAsync(
       'git',
       [
@@ -631,7 +889,7 @@ describe('catalog release evidence inventory', () => {
     );
     await expect(
       loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot, {
-        baseCommit: baseCommit.trim(),
+        catalogPath: 'catalog.json',
       }),
     ).rejects.toThrow(/CANONICAL_PUBLICATION_UPDATE_MISSING/u);
 
@@ -647,8 +905,8 @@ describe('catalog release evidence inventory', () => {
       operations: [
         {
           operationId: 'operation-add-abc212-x45',
-          entityType: 'explanation',
-          entityId: 'explanation-abc212-x45',
+          entityType: 'tag',
+          entityId: 'tag-graphs',
           action: 'add',
           path: 'src/content/docs/index.md',
           beforeDigest: null,
@@ -688,7 +946,7 @@ describe('catalog release evidence inventory', () => {
     await writeFile(path.join(repositoryRoot, 'src/content/docs/index.md'), '# Changed\n', 'utf8');
     await expect(
       loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot, {
-        baseCommit: baseCommit.trim(),
+        catalogPath: 'catalog.json',
       }),
     ).rejects.toThrow(/RELEASE_CANDIDATE_DIGEST_MISMATCH/u);
 
@@ -728,9 +986,10 @@ describe('catalog release evidence inventory', () => {
       release: { contentFileInventoryDigest: string };
     };
     canonicalCatalog.release.contentFileInventoryDigest = actualSubjectDigest;
+    await writeJson('catalog.json', canonicalCatalog);
     await expect(
       loadCatalogEvidenceCanonicalSources(canonicalCatalog, repositoryRoot, {
-        baseCommit: baseCommit.trim(),
+        catalogPath: 'catalog.json',
       }),
     ).resolves.toMatchObject({
       releaseCandidate: { contentSubjectDigest: actualSubjectDigest },

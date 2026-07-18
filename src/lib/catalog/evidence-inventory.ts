@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { execFile } from 'node:child_process';
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile, readdir, realpath } from 'node:fs/promises';
 import path from 'node:path';
 import { promisify } from 'node:util';
 
@@ -11,10 +11,10 @@ import { strictObject } from '../domain/contract-schema.js';
 import {
   EntityIdSchema,
   OffsetDateTimeSchema,
-  ProblemIdSchema,
   SafePathSchema,
   Sha256Schema,
 } from '../domain/schema-parts/catalog.js';
+import type { CatalogSchema } from '../domain/schema-parts/catalog.js';
 import { HumanContentReviewEvidenceSchema as ReviewEvidenceSchema } from '../domain/schema-parts/review-evidence.js';
 import { ContentWorkManifestSchema } from '../domain/schema-parts/review-evidence.js';
 import { PublicationUpdateSchema, ReleaseCandidateSchema } from '../domain/schema-parts/release.js';
@@ -38,9 +38,15 @@ import {
 } from '../validation/human-content-review.js';
 import {
   CatalogPublicationBoundaryError,
+  resolvePublicCatalogInput,
   resolvePublicEvidencePath,
 } from './publication-boundary.js';
 import type { TrustedCatalogReleaseEvidenceInventory } from './build-catalog.js';
+import {
+  buildTrustedPublicationDiff,
+  parseTrustedCatalog,
+  TrustedCatalogDiffError,
+} from './trusted-diff.js';
 
 const text = z.string().trim().min(1);
 
@@ -95,8 +101,8 @@ export interface CatalogEvidenceCanonicalSources {
 const execFileAsync = promisify(execFile);
 
 export interface CatalogEvidenceTrustOptions {
-  /** A protected commit captured before the content change began. */
-  readonly baseCommit: string;
+  /** The public catalog file whose current bytes are being validated. */
+  readonly catalogPath: string;
 }
 
 interface ContentFileInventoryEntry {
@@ -117,37 +123,46 @@ const runGit = async (
   return result.stdout;
 };
 
-const resolveTrustedBaseCommit = async (
-  baseCommit: string | undefined,
-  repositoryRoot: string,
-): Promise<string> => {
-  if (!baseCommit || !/^[0-9a-f]{40}$/iu.test(baseCommit)) {
+const resolveTrustedBaseCommit = async (repositoryRoot: string): Promise<string> => {
+  const githubBaseRef = process.env.GITHUB_BASE_REF?.trim();
+  const baseRef = githubBaseRef
+    ? `refs/remotes/origin/${githubBaseRef}`
+    : 'refs/remotes/origin/main';
+  if (
+    !/^refs\/remotes\/[A-Za-z0-9._-]+\/[A-Za-z0-9._/-]+$/u.test(baseRef) ||
+    baseRef.includes('..') ||
+    baseRef.includes('@{') ||
+    baseRef.endsWith('/')
+  ) {
     throw new CatalogEvidenceInventoryError(
-      'TRUSTED_BASE_COMMIT_REQUIRED',
-      'A full protected base commit different from HEAD is required.',
+      'TRUSTED_BASE_REF_INVALID',
+      'A protected remote-tracking base ref is required.',
     );
   }
   let headCommit: string;
-  let resolvedBaseCommit: string;
+  let protectedBaseCommit: string;
   try {
     headCommit = String(await runGit(['rev-parse', 'HEAD^{commit}'], repositoryRoot)).trim();
-    resolvedBaseCommit = String(
-      await runGit(['rev-parse', `${baseCommit}^{commit}`], repositoryRoot),
+    protectedBaseCommit = String(
+      await runGit(
+        ['rev-parse', '--verify', '--end-of-options', `${baseRef}^{commit}`],
+        repositoryRoot,
+      ),
     ).trim();
-    await runGit(['merge-base', '--is-ancestor', resolvedBaseCommit, 'HEAD'], repositoryRoot);
+    await runGit(['merge-base', '--is-ancestor', protectedBaseCommit, 'HEAD'], repositoryRoot);
   } catch {
     throw new CatalogEvidenceInventoryError(
-      'TRUSTED_BASE_COMMIT_INVALID',
-      'The protected base commit must resolve and be an ancestor of HEAD.',
+      'TRUSTED_BASE_REF_INVALID',
+      `${baseRef} must resolve to a protected commit reachable from HEAD.`,
     );
   }
-  if (resolvedBaseCommit !== baseCommit.toLowerCase() || resolvedBaseCommit === headCommit) {
+  if (protectedBaseCommit === headCommit) {
     throw new CatalogEvidenceInventoryError(
-      'TRUSTED_BASE_COMMIT_INVALID',
-      'The protected base commit must be an immutable commit before HEAD, not HEAD itself.',
+      'TRUSTED_BASE_REF_INVALID',
+      'The protected base ref must point to a commit before HEAD, not HEAD itself.',
     );
   }
-  return resolvedBaseCommit;
+  return protectedBaseCommit;
 };
 
 const listFiles = async (root: string): Promise<string[]> => {
@@ -214,6 +229,104 @@ const readCommittedManifestScope = async (
   return toManifestScope(parsed.data);
 };
 
+const relativeRepositoryPath = async (
+  filePath: string,
+  repositoryRoot: string,
+): Promise<string> => {
+  const resolvedRepositoryRoot = await realpath(repositoryRoot);
+  const relativePath = path.relative(resolvedRepositoryRoot, filePath).replaceAll(path.sep, '/');
+  if (
+    relativePath === '' ||
+    relativePath === '..' ||
+    relativePath.startsWith('../') ||
+    path.isAbsolute(relativePath)
+  ) {
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_CATALOG_PATH_INVALID',
+      `${filePath} must be inside the repository.`,
+    );
+  }
+  return relativePath;
+};
+
+const readCommittedCatalog = async (
+  catalogPath: string,
+  repositoryRoot: string,
+  baseCommit: string,
+  releaseKind: 'initial' | 'incremental',
+): Promise<z.infer<typeof CatalogSchema> | undefined> => {
+  const relativePath = await relativeRepositoryPath(catalogPath, repositoryRoot);
+  let stdout: string | Buffer;
+  try {
+    stdout = await runGit(['show', `${baseCommit}:${relativePath}`], repositoryRoot);
+  } catch {
+    try {
+      await runGit(['cat-file', '-e', `${baseCommit}:${relativePath}`], repositoryRoot);
+    } catch {
+      if (releaseKind === 'initial') return undefined;
+      throw new CatalogEvidenceInventoryError(
+        'TRUSTED_BASE_CATALOG_REQUIRED',
+        `${relativePath} must exist in the protected base Catalog for an incremental release.`,
+      );
+    }
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_CATALOG_JSON_INVALID',
+      `${relativePath} could not be read from the protected base commit.`,
+    );
+  }
+  let value: unknown;
+  try {
+    value = JSON.parse(String(stdout)) as unknown;
+  } catch {
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_CATALOG_SCHEMA_INVALID',
+      `${relativePath} is not valid JSON in the protected base commit.`,
+    );
+  }
+  try {
+    return parseTrustedCatalog(value, `${relativePath} at ${baseCommit}`);
+  } catch (error) {
+    if (error instanceof TrustedCatalogDiffError) {
+      throw new CatalogEvidenceInventoryError(error.code, error.message);
+    }
+    throw error;
+  }
+};
+
+const readCurrentCatalog = async (
+  catalog: unknown,
+  catalogPath: string,
+  repositoryRoot: string,
+): Promise<z.infer<typeof CatalogSchema>> => {
+  let resolvedPath: string;
+  try {
+    resolvedPath = await resolvePublicCatalogInput(catalogPath, repositoryRoot);
+  } catch (error) {
+    if (error instanceof CatalogPublicationBoundaryError) throw error;
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_CATALOG_PATH_INVALID',
+      error instanceof Error ? error.message : String(error),
+    );
+  }
+  const fileValue = await readJsonFile(resolvedPath, 'CANONICAL_CATALOG_JSON_INVALID');
+  const expectedDigest = canonicalDigest(catalog);
+  const actualDigest = canonicalDigest(fileValue);
+  if (expectedDigest !== actualDigest) {
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_CATALOG_INPUT_MISMATCH',
+      `${catalogPath} does not reproduce the catalog input supplied to the validator.`,
+    );
+  }
+  try {
+    return parseTrustedCatalog(fileValue, catalogPath);
+  } catch (error) {
+    if (error instanceof TrustedCatalogDiffError) {
+      throw new CatalogEvidenceInventoryError(error.code, error.message);
+    }
+    throw error;
+  }
+};
+
 const calculateBaseContentFileInventory = async (
   repositoryRoot: string,
   baseCommit: string,
@@ -269,29 +382,6 @@ const calculateActualContentFileInventory = async (
     }),
   );
 
-const deriveTrustedProblemOwnership = (
-  operation: z.infer<typeof PublicationUpdateSchema>['operations'][number],
-): readonly string[] => {
-  const candidates = new Set<string>();
-  const problemIdPattern = /abc[0-9]{3,}-[a-z][a-z0-9+_-]*/giu;
-  for (const source of [operation.entityId, operation.path]) {
-    for (const match of source.matchAll(problemIdPattern)) {
-      const candidate = match[0];
-      if (ProblemIdSchema.safeParse(candidate).success) candidates.add(candidate.toLowerCase());
-    }
-  }
-  if (operation.entityType === 'problem' && ProblemIdSchema.safeParse(operation.entityId).success) {
-    candidates.add(operation.entityId.toLowerCase());
-  }
-  if (candidates.size === 0) {
-    throw new CatalogEvidenceInventoryError(
-      'PUBLICATION_UPDATE_OWNERSHIP_UNDERIVED',
-      `Cannot derive Problem ownership from ${operation.operationId} and its trusted content path.`,
-    );
-  }
-  return [...candidates].sort();
-};
-
 const sameOrderedStrings = (left: readonly string[], right: readonly string[]): boolean =>
   left.length === right.length && left.every((value, index) => value === right[index]);
 
@@ -301,7 +391,13 @@ export const loadCatalogEvidenceCanonicalSources = async (
   repositoryRoot = process.cwd(),
   options?: CatalogEvidenceTrustOptions,
 ): Promise<CatalogEvidenceCanonicalSources> => {
-  const baseCommit = await resolveTrustedBaseCommit(options?.baseCommit, repositoryRoot);
+  if (!options?.catalogPath) {
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_CATALOG_PATH_REQUIRED',
+      'A repository-bound public catalog path is required to rebuild the trusted Catalog diff.',
+    );
+  }
+  const baseCommit = await resolveTrustedBaseCommit(repositoryRoot);
   const catalogResult = z
     .object({
       release: z.object({
@@ -323,6 +419,23 @@ export const loadCatalogEvidenceCanonicalSources = async (
     );
   }
   const release = catalogResult.data.release;
+  const currentCatalog = await readCurrentCatalog(catalog, options.catalogPath, repositoryRoot);
+  let resolvedCatalogPath: string;
+  try {
+    resolvedCatalogPath = await resolvePublicCatalogInput(options.catalogPath, repositoryRoot);
+  } catch (error) {
+    if (error instanceof CatalogPublicationBoundaryError) throw error;
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_CATALOG_PATH_INVALID',
+      error instanceof Error ? error.message : String(error),
+    );
+  }
+  const baseCatalog = await readCommittedCatalog(
+    resolvedCatalogPath,
+    repositoryRoot,
+    baseCommit,
+    release.releaseKind,
+  );
   const manifestMatches: {
     path: string;
     value: z.infer<typeof ContentWorkManifestSchema>;
@@ -439,20 +552,28 @@ export const loadCatalogEvidenceCanonicalSources = async (
   }
   const operationPaths = new Set<string>();
   const operationIds = new Set<string>();
+  let trustedDiff: ReturnType<typeof buildTrustedPublicationDiff>;
+  try {
+    trustedDiff = buildTrustedPublicationDiff([...updates.values()], baseCatalog, currentCatalog);
+  } catch (error) {
+    if (error instanceof TrustedCatalogDiffError) {
+      throw new CatalogEvidenceInventoryError(error.code, error.message);
+    }
+    throw error;
+  }
+  const trustedUpdates = new Map(trustedDiff.updates.map((update) => [update.updateId, update]));
   for (const update of updates.values()) {
-    const operationOwnership = update.operations.map((operation) => ({
-      operationId: operation.operationId,
-      affectedProblemIds: deriveTrustedProblemOwnership(operation),
-      entityType: operation.entityType,
-      entityId: operation.entityId,
-      action: operation.action,
-      path: operation.path,
-      beforeDigest: operation.beforeDigest,
-      afterDigest: operation.afterDigest,
-    }));
+    const trustedUpdate = trustedUpdates.get(update.updateId);
+    if (!trustedUpdate) {
+      throw new CatalogEvidenceInventoryError(
+        'PUBLICATION_UPDATE_TRUSTED_DIFF_MISSING',
+        update.updateId,
+      );
+    }
     try {
       validatePublicationUpdate(update, {
-        operationOwnership,
+        operationOwnership: trustedUpdate.operationOwnership,
+        correctionImpacts: trustedUpdate.correctionImpacts,
         baseFiles: baseContentFiles,
         currentFiles: actualContentFiles,
       });
