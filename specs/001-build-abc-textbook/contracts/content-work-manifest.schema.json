@@ -1,10 +1,50 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://abc-textbook.local/schemas/content-work-manifest.schema.json",
-  "title": "ABC Textbook Logical-Change Work Manifest",
-  "description": "contentだけに限定しないlogical changeを、独立査読・独立merge可能なreview unitへ事前分解する汎用契約。意味検証器はmanifestId/taskId/path、scopeDigestとdigest、requirement集合、item/pathの一意所有、review-unit dependency DAG、check/evidence coverage、state遷移、current evidenceを再計算する。union(reviewUnits[].requirementIds)はrequiredRequirementIdsと集合として完全一致し、未知・未割当・重複割当を許さない。substantive contentはLearning Outcomeを必須とし、tooling/abstractionまたはmixed内の該当unitは具体的maintenanceBenefitを必須にする。",
   "type": "object",
-  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "manifestId": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "taskId": {
+      "$ref": "#/$defs/__schema2"
+    },
+    "scopeDigest": {
+      "$ref": "#/$defs/__schema3"
+    },
+    "digest": {
+      "$ref": "#/$defs/__schema3"
+    },
+    "changeKind": {
+      "$ref": "#/$defs/__schema4"
+    },
+    "requiredRequirementIds": {
+      "$ref": "#/$defs/__schema5"
+    },
+    "learningOutcomeIds": {
+      "$ref": "#/$defs/__schema7"
+    },
+    "outcomeImpact": {
+      "$ref": "#/$defs/__schema9"
+    },
+    "reviewUnits": {
+      "$ref": "#/$defs/__schema11"
+    },
+    "maintenanceBenefit": {
+      "$ref": "#/$defs/__schema30"
+    },
+    "state": {
+      "$ref": "#/$defs/__schema29"
+    },
+    "createdAt": {
+      "$ref": "#/$defs/__schema31"
+    },
+    "updatedAt": {
+      "$ref": "#/$defs/__schema31"
+    }
+  },
   "required": [
     "schemaVersion",
     "manifestId",
@@ -21,161 +61,138 @@
     "createdAt",
     "updatedAt"
   ],
-  "properties": {
-    "schemaVersion": { "const": "1.0.0" },
-    "manifestId": {
+  "additionalProperties": false,
+  "$id": "https://abc-textbook.local/schemas/content-work-manifest.schema.json",
+  "title": "ABC Textbook Content Work Manifest",
+  "$comment": "Structural constraints are defined here; cross-field and collection invariants are enforced by the canonical Zod runtime validator.",
+  "$defs": {
+    "__schema0": {
       "type": "string",
-      "pattern": "^work-manifest-T[0-9]{3}(?:-[a-z0-9]+(?:-[a-z0-9]+)*)?$",
-      "description": "taskIdと一致する安定ID。"
+      "const": "1.0.0"
     },
-    "taskId": { "type": "string", "pattern": "^T[0-9]{3}$" },
-    "scopeDigest": {
-      "$ref": "#/$defs/sha256",
-      "description": "manifestが計画するlogical-change scopeの安定canonical digest。対象path bytesがまだ存在しない場合も、予定path、requirement、item、dependency、check/evidence roleを固定したscope projectionから算出する。"
+    "__schema1": {
+      "type": "string",
+      "pattern": "^work-manifest-T\\d{3}(?:-[a-z0-9]+(?:-[a-z0-9]+)*)?$"
     },
-    "digest": {
-      "$ref": "#/$defs/sha256",
-      "description": "digest fieldだけを除外したmanifest documentのRFC 8785/JCS canonical JSON SHA-256。計画変更では既存値を黙って維持せず再計算する。"
+    "__schema2": {
+      "type": "string",
+      "pattern": "^T\\d{3}$"
     },
-    "changeKind": {
-      "enum": ["content", "schema", "domain", "tooling", "abstraction", "documentation", "test", "operations", "mixed"]
+    "__schema3": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
     },
-    "requiredRequirementIds": {
-      "type": "array",
+    "__schema4": {
+      "type": "string",
+      "enum": [
+        "content",
+        "schema",
+        "domain",
+        "tooling",
+        "abstraction",
+        "documentation",
+        "test",
+        "operations",
+        "mixed"
+      ]
+    },
+    "__schema5": {
       "minItems": 1,
-      "uniqueItems": true,
-      "items": { "$ref": "#/$defs/requirementId" },
-      "description": "このlogical changeが満たすべき完全なrequirement集合。reviewUnits[].requirementIdsのunionと集合として一致させる。"
-    },
-    "learningOutcomeIds": {
       "type": "array",
-      "uniqueItems": true,
-      "items": { "$ref": "#/$defs/outcomeId" }
+      "items": {
+        "$ref": "#/$defs/__schema6"
+      },
+      "uniqueItems": true
     },
-    "outcomeImpact": { "$ref": "#/$defs/outcomeImpact" },
-    "reviewUnits": {
+    "__schema6": {
+      "type": "string",
+      "pattern": "^(?:FR|SC|CQ)-\\d{3}$"
+    },
+    "__schema7": {
       "type": "array",
-      "minItems": 1,
-      "uniqueItems": true,
-      "items": { "$ref": "#/$defs/reviewUnit" },
-      "description": "reviewUnitId、itemIds、pathsは全unit間で一意。各item/pathは一つのunitだけが所有し、dependencyReviewUnitIdsは既知unitだけからなる非循環DAGにする。"
+      "items": {
+        "$ref": "#/$defs/__schema8"
+      },
+      "uniqueItems": true
     },
-    "maintenanceBenefit": {
-      "oneOf": [
-        { "type": "string", "minLength": 1 },
-        { "type": "null" }
-      ],
-      "description": "task全体に共通するtooling/abstractionの具体的保守効果。単なる対象外理由ではなく、重複削減、変更点局所化、検証範囲縮小等を記述する。unit固有効果は各reviewUnitへも記録する。"
+    "__schema8": {
+      "type": "string",
+      "pattern": "^outcome-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
-    "state": { "$ref": "#/$defs/state" },
-    "createdAt": { "$ref": "#/$defs/dateTime" },
-    "updatedAt": {
-      "$ref": "#/$defs/dateTime",
-      "description": "createdAt以後。state、scope、review unitまたはdigest更新時に更新する。"
-    }
-  },
-  "allOf": [
-    {
-      "if": { "properties": { "changeKind": { "enum": ["tooling", "abstraction"] } }, "required": ["changeKind"] },
-      "then": { "properties": { "maintenanceBenefit": { "type": "string", "minLength": 1 } } }
-    },
-    {
-      "if": { "properties": { "changeKind": { "const": "content" } }, "required": ["changeKind"] },
-      "then": {
-        "properties": {
-          "learningOutcomeIds": { "minItems": 1 },
-          "outcomeImpact": {
-            "allOf": [
-              { "$ref": "#/$defs/outcomeImpact" },
-              { "properties": { "kind": { "const": "affects_learning_outcomes" } } }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "if": { "properties": { "learningOutcomeIds": { "maxItems": 0 } }, "required": ["learningOutcomeIds"] },
-      "then": {
-        "properties": {
-          "outcomeImpact": {
-            "allOf": [
-              { "$ref": "#/$defs/outcomeImpact" },
-              { "properties": { "kind": { "const": "none" } } }
-            ]
-          }
+    "__schema9": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "affects_learning_outcomes",
+            "none"
+          ]
+        },
+        "rationale": {
+          "$ref": "#/$defs/__schema10"
         }
       },
-      "else": {
-        "properties": {
-          "outcomeImpact": {
-            "allOf": [
-              { "$ref": "#/$defs/outcomeImpact" },
-              { "properties": { "kind": { "const": "affects_learning_outcomes" } } }
-            ]
-          }
-        }
-      }
+      "required": [
+        "kind",
+        "rationale"
+      ],
+      "additionalProperties": false
     },
-    {
-      "if": { "properties": { "state": { "const": "verified" } }, "required": ["state"] },
-      "then": {
-        "properties": {
-          "reviewUnits": {
-            "items": {
-              "allOf": [
-                { "$ref": "#/$defs/reviewUnit" },
-                { "properties": { "status": { "enum": ["verified", "complete"] } } }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "if": { "properties": { "state": { "const": "complete" } }, "required": ["state"] },
-      "then": {
-        "properties": {
-          "reviewUnits": {
-            "items": {
-              "allOf": [
-                { "$ref": "#/$defs/reviewUnit" },
-                { "properties": { "status": { "const": "complete" } } }
-              ]
-            }
-          }
-        }
-      }
-    }
-  ],
-  "$defs": {
-    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-    "dateTime": { "type": "string", "format": "date-time" },
-    "state": { "enum": ["planned", "in_progress", "verified", "complete", "blocked"] },
-    "requirementId": { "type": "string", "pattern": "^(?:FR|SC|CQ)-[0-9]{3}$" },
-    "outcomeId": { "type": "string", "pattern": "^outcome-[a-z0-9]+(?:-[a-z0-9]+)*$" },
-    "personId": { "type": "string", "pattern": "^person-[a-z0-9]+(?:-[a-z0-9]+)*$" },
-    "safeRelativePath": {
+    "__schema10": {
       "type": "string",
-      "minLength": 1,
-      "pattern": "^(?!.*(?:^|/)(?:[Cc][Oo][Nn]|[Pp][Rr][Nn]|[Aa][Uu][Xx]|[Nn][Uu][Ll]|[Cc][Oo][Mm][1-9]|[Ll][Pp][Tt][1-9])(?:\\.[A-Za-z0-9._-]+)?(?:/|$))(?:[A-Za-z0-9._-]*[A-Za-z0-9_-])(?:/[A-Za-z0-9._-]*[A-Za-z0-9_-])*$",
-      "description": "portable ASCIIのrepository-relative canonical slash-only path。absolute/drive/UNC、backslash、dot/dot-dot/空segment、trailing dot/slash、Windows device nameを拒否する。"
+      "minLength": 1
     },
-    "outcomeImpact": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["kind", "rationale"],
-      "properties": {
-        "kind": { "enum": ["affects_learning_outcomes", "none"] },
-        "rationale": {
-          "type": "string",
-          "minLength": 1,
-          "description": "影響する成果との関係、または非教材変更で成果影響がない具体的理由。bare booleanや『対象外』だけの記述は禁止する。"
-        }
+    "__schema11": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema12"
       }
     },
-    "reviewUnit": {
+    "__schema12": {
       "type": "object",
-      "additionalProperties": false,
+      "properties": {
+        "reviewUnitId": {
+          "$ref": "#/$defs/__schema13"
+        },
+        "changeKind": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "itemIds": {
+          "$ref": "#/$defs/__schema14"
+        },
+        "requirementIds": {
+          "$ref": "#/$defs/__schema16"
+        },
+        "learningOutcomeIds": {
+          "$ref": "#/$defs/__schema18"
+        },
+        "outcomeImpact": {
+          "$ref": "#/$defs/__schema9"
+        },
+        "paths": {
+          "$ref": "#/$defs/__schema19"
+        },
+        "dependencyReviewUnitIds": {
+          "$ref": "#/$defs/__schema21"
+        },
+        "checkIds": {
+          "$ref": "#/$defs/__schema23"
+        },
+        "evidenceRoles": {
+          "$ref": "#/$defs/__schema25"
+        },
+        "maintenanceBenefit": {
+          "$ref": "#/$defs/__schema27"
+        },
+        "owner": {
+          "$ref": "#/$defs/__schema28"
+        },
+        "status": {
+          "$ref": "#/$defs/__schema29"
+        }
+      },
       "required": [
         "reviewUnitId",
         "changeKind",
@@ -191,70 +208,128 @@
         "owner",
         "status"
       ],
-      "properties": {
-        "reviewUnitId": { "type": "string", "pattern": "^RU-T[0-9]{3}-[a-z0-9]+(?:-[a-z0-9]+)*$" },
-        "changeKind": { "enum": ["content", "schema", "domain", "tooling", "abstraction", "documentation", "test", "operations", "mixed"] },
-        "itemIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$" } },
-        "requirementIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/requirementId" } },
-        "learningOutcomeIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/outcomeId" } },
-        "outcomeImpact": { "$ref": "#/$defs/outcomeImpact" },
-        "paths": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/safeRelativePath" } },
-        "dependencyReviewUnitIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^RU-T[0-9]{3}-[a-z0-9]+(?:-[a-z0-9]+)*$" } },
-        "checkIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^check-[a-z0-9]+(?:-[a-z0-9]+)*$" } },
-        "evidenceRoles": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$" } },
-        "maintenanceBenefit": {
-          "oneOf": [
-            { "type": "string", "minLength": 1 },
-            { "type": "null" }
-          ],
-          "description": "このunitが追加するtooling/abstraction/共通化の具体的保守効果。"
-        },
-        "owner": { "$ref": "#/$defs/personId" },
-        "status": { "$ref": "#/$defs/state" }
+      "additionalProperties": false
+    },
+    "__schema13": {
+      "type": "string",
+      "pattern": "^RU-T\\d{3}-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "__schema14": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema15"
       },
-      "allOf": [
+      "uniqueItems": true
+    },
+    "__schema15": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "__schema16": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema17"
+      },
+      "uniqueItems": true
+    },
+    "__schema17": {
+      "type": "string",
+      "pattern": "^(?:FR|SC|CQ)-\\d{3}$"
+    },
+    "__schema18": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema8"
+      },
+      "uniqueItems": true
+    },
+    "__schema19": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema20"
+      },
+      "uniqueItems": true
+    },
+    "__schema20": {
+      "type": "string",
+      "pattern": "^(?!.*(?:^|\\/)(?:con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\\.[A-Za-z0-9._-]+)?(?:\\/|$))(?:[A-Za-z0-9._-]*[A-Za-z0-9_-])(?:\\/[A-Za-z0-9._-]*[A-Za-z0-9_-])*$"
+    },
+    "__schema21": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema22"
+      },
+      "uniqueItems": true
+    },
+    "__schema22": {
+      "type": "string",
+      "pattern": "^RU-T\\d{3}-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "__schema23": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema24"
+      },
+      "uniqueItems": true
+    },
+    "__schema24": {
+      "type": "string",
+      "pattern": "^check-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "__schema25": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema26"
+      },
+      "uniqueItems": true
+    },
+    "__schema26": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$"
+    },
+    "__schema27": {
+      "anyOf": [
         {
-          "if": { "properties": { "changeKind": { "enum": ["tooling", "abstraction"] } }, "required": ["changeKind"] },
-          "then": { "properties": { "maintenanceBenefit": { "type": "string", "minLength": 1 } } }
+          "$ref": "#/$defs/__schema10"
         },
         {
-          "if": { "properties": { "changeKind": { "const": "content" } }, "required": ["changeKind"] },
-          "then": {
-            "properties": {
-              "learningOutcomeIds": { "minItems": 1 },
-              "outcomeImpact": {
-                "allOf": [
-                  { "$ref": "#/$defs/outcomeImpact" },
-                  { "properties": { "kind": { "const": "affects_learning_outcomes" } } }
-                ]
-              }
-            }
-          }
-        },
-        {
-          "if": { "properties": { "learningOutcomeIds": { "maxItems": 0 } }, "required": ["learningOutcomeIds"] },
-          "then": {
-            "properties": {
-              "outcomeImpact": {
-                "allOf": [
-                  { "$ref": "#/$defs/outcomeImpact" },
-                  { "properties": { "kind": { "const": "none" } } }
-                ]
-              }
-            }
-          },
-          "else": {
-            "properties": {
-              "outcomeImpact": {
-                "allOf": [
-                  { "$ref": "#/$defs/outcomeImpact" },
-                  { "properties": { "kind": { "const": "affects_learning_outcomes" } } }
-                ]
-              }
-            }
-          }
+          "type": "null"
         }
       ]
+    },
+    "__schema28": {
+      "type": "string",
+      "pattern": "^person-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "__schema29": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "in_progress",
+        "verified",
+        "complete",
+        "blocked"
+      ]
+    },
+    "__schema30": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/__schema10"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema31": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
     }
   }
 }

@@ -8,7 +8,7 @@ const sourceFiles = ['src/**/*.{ts,tsx,astro}'];
 const browserSourceFiles = ['src/client/**/*.{ts,tsx}'];
 const astroBuildFiles = ['src/content.config.ts'];
 const nodeFiles = ['scripts/**/*.ts', '*.config.{js,mjs,ts}'];
-const vitestFiles = ['tests/{contract,integration,performance,setup,unit}/**/*.ts'];
+const vitestFiles = ['tests/{contract,integration,performance,setup,unit,fixtures}/**/*.ts'];
 const playwrightFiles = ['tests/e2e/**/*.ts'];
 
 export default defineConfig(

@@ -137,6 +137,7 @@ taxonomy作成前に全Problemへちょうど一件作る分析正本である�
 | `baselineId` / `baselineVersion` | 共通前提 |
 | `additionalPrerequisiteUnitIds` | 追加前提または空配列 |
 | `excludedTopics` | 意図的対象外 |
+| `sourceRevisionIds` | 単位本文と所有例の根拠 |
 | `tagIds` / `learningOutcomeIds` | 各一つ以上 |
 | `explanation` | 単位本文参照 |
 | `exampleIds` | 一つ以上 |
@@ -180,7 +181,7 @@ ExplanationまたはLearning Unitの少なくとも一方に所有され、Learn
 
 ### Exercise / Assessment / AnswerMaterial
 
-- ExerciseはProblem、Outcome、前提、到達条件、Assessment、AnswerMaterialを結ぶ。
+- ExerciseはProblem（null不可）、Outcome、前提、到達条件、Assessment、AnswerMaterialを結ぶ。
 - Assessmentは観察可能な成功条件を持つ。
 - AnswerMaterialは最終答案だけでなく理由または検証方法、procedure、期待結果、検証結果を持つ。
 
@@ -224,7 +225,8 @@ schema version、createdAt、targetReleaseVersion、全record、不明Problem ID
 | `baseReleaseVersion` | initialではnull |
 | `contestId` | Contest追加時に必須 |
 | `advancedSlotLabels` | Dより後の全label。固定4枠不可 |
-| `operations` | canonical entity差分 |
+| `targetProblemIds` | 変更種別にかかわらず影響を受けるProblem集合の正本。Problem operationの集合を必ず含む |
+| `operations` | canonical entity差分。各operationは`affectedProblemIds`で所有・影響Problem集合を明示し、全operationの和集合を`targetProblemIds`と一致させる |
 | `authoringResults` | 全対象Problemへ一つ |
 | `correctionImpacts` | 該当時に全件 |
 | `validationSummary` | check結果とProblem別理由 |
@@ -246,11 +248,11 @@ DRAFTED
   -> PUBLISHED
 ```
 
-どの状態からも未完成、stale、expiry、検証失敗でON_HOLDへ移れる。candidateは一つ以上のELIGIBLE update、cutoff、AdvancedSlotRegistry、固定content tree、content digest、check refs、HumanContentReviewEvidence、owner approval、publication windowを持つ。reviewやapprovalは個別Updateではなくcandidateが所有する。
+どの状態からも未完成、stale、expiry、検証失敗でON_HOLDへ移れる。candidateは一つ以上のELIGIBLE update、cutoff、AdvancedSlotRegistry、固定content tree、実ファイルinventory digest、論理catalog snapshot digest、work manifest digest、check refs、HumanContentReviewEvidence、owner approval、publication windowを持つ。owner approvalのapprovable digestは実ファイル、論理snapshot、manifestをすべて束縛する。reviewやapprovalは個別Updateではなくcandidateが所有する。
 
 ### Release
 
-release version、cutoff、AdvancedSlotRegistry、content snapshot digest、取り込んだupdate IDs、追加・変更・取り下げ問題、taxonomy変更、検証要約、review evidence refs、履歴を持つimmutable record。未公開ON_HOLD試行は含めず、staging statusから参照する。
+release version、cutoff、AdvancedSlotRegistry、実ファイルinventory digest、論理catalog snapshot digest、取り込んだupdate IDs、追加・変更・取り下げ問題、taxonomy変更、検証要約、review evidence refs、履歴を持つimmutable record。両digestは対象が異なるため同値を要求しない。未公開ON_HOLD試行は含めず、staging statusから参照する。
 
 ### PublishReceipt
 

@@ -1,46 +1,166 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://abc-textbook.local/schemas/filesystem-publish-evidence.schema.json",
-  "title": "ABC Textbook Filesystem Publish Evidence",
-  "description": "実際に公開を行う個人所有機器のfilesystemで、lock、同一filesystem切替、rollback、receipt、再実行no-opを検証した証跡。Windows/macOS/Linux三環境を必須にしない。",
   "type": "object",
-  "additionalProperties": false,
-  "required": ["schemaVersion", "releaseDigest", "host", "tests", "rawEvidenceManifestDigest", "aggregatePassed", "generatedAt"],
   "properties": {
-    "schemaVersion": { "const": "2.0.0" },
-    "releaseDigest": { "$ref": "#/$defs/sha256" },
+    "schemaVersion": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "releaseDigest": {
+      "$ref": "#/$defs/__schema1"
+    },
     "host": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["osFamily", "osVersion", "filesystem", "toolVersions"],
-      "properties": {
-        "osFamily": { "type": "string", "minLength": 1 },
-        "osVersion": { "type": "string", "minLength": 1 },
-        "filesystem": { "type": "string", "minLength": 1 },
-        "toolVersions": { "type": "object", "additionalProperties": { "type": "string", "minLength": 1 } }
-      }
+      "$ref": "#/$defs/__schema2"
     },
     "tests": {
-      "type": "array",
-      "minItems": 8,
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["testId", "kind", "passed", "rawPath", "rawDigest"],
+      "$ref": "#/$defs/__schema4"
+    },
+    "rawEvidenceManifestDigest": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "aggregatePassed": {
+      "$ref": "#/$defs/__schema6"
+    },
+    "generatedAt": {
+      "$ref": "#/$defs/__schema7"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "releaseDigest",
+    "host",
+    "tests",
+    "rawEvidenceManifestDigest",
+    "aggregatePassed",
+    "generatedAt"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
         "properties": {
-          "testId": { "type": "string", "minLength": 1 },
-          "kind": { "enum": ["writer_lock", "global_lock", "same_filesystem_switch", "cross_filesystem_rejection", "conflict", "rollback_before_receipt", "state_recovery_after_receipt", "receipt_no_overwrite", "rerun_no_op"] },
-          "passed": { "type": "boolean" },
-          "rawPath": { "type": "string", "minLength": 1 },
-          "rawDigest": { "$ref": "#/$defs/sha256" }
+          "aggregatePassed": {
+            "const": true
+          }
+        },
+        "required": [
+          "aggregatePassed"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tests": {
+            "items": {
+              "properties": {
+                "passed": {
+                  "const": true
+                }
+              }
+            }
+          }
         }
       }
-    },
-    "rawEvidenceManifestDigest": { "$ref": "#/$defs/sha256" },
-    "aggregatePassed": { "type": "boolean" },
-    "generatedAt": { "type": "string", "format": "date-time" }
-  },
+    }
+  ],
+  "$id": "https://abc-textbook.local/schemas/filesystem-publish-evidence.schema.json",
+  "title": "ABC Textbook Filesystem Publish Evidence",
+  "$comment": "Structural constraints are defined here; cross-field and collection invariants are enforced by the canonical Zod runtime validator.",
   "$defs": {
-    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+    "__schema0": {
+      "type": "string",
+      "const": "2.0.0"
+    },
+    "__schema1": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "__schema2": {
+      "type": "object",
+      "properties": {
+        "osFamily": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "osVersion": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "filesystem": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "toolVersions": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema3"
+          }
+        }
+      },
+      "required": [
+        "osFamily",
+        "osVersion",
+        "filesystem",
+        "toolVersions"
+      ],
+      "additionalProperties": false
+    },
+    "__schema3": {
+      "type": "string",
+      "minLength": 1
+    },
+    "__schema4": {
+      "minItems": 9,
+      "maxItems": 9,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema5"
+      }
+    },
+    "__schema5": {
+      "type": "object",
+      "properties": {
+        "testId": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "writer_lock",
+            "global_lock",
+            "same_filesystem_switch",
+            "cross_filesystem_rejection",
+            "conflict",
+            "rollback_before_receipt",
+            "state_recovery_after_receipt",
+            "receipt_no_overwrite",
+            "rerun_no_op"
+          ]
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "rawPath": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "rawDigest": {
+          "$ref": "#/$defs/__schema1"
+        }
+      },
+      "required": [
+        "testId",
+        "kind",
+        "passed",
+        "rawPath",
+        "rawDigest"
+      ],
+      "additionalProperties": false
+    },
+    "__schema6": {
+      "type": "boolean"
+    },
+    "__schema7": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+    }
   }
 }

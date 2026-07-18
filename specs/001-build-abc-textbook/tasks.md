@@ -35,25 +35,25 @@
 
 **⚠️ CRITICAL**: この phase が完了するまで corpus data や公開 content を作らない。
 
-- [ ] T009 [P] Add failing Zod-to-JSON-Schema parity and unknown-field rejection tests for every contract in `tests/contract/schema-parity.test.ts`
-- [ ] T010 [P] Add failing official task-order tests covering missing H, future I/Ex labels, duplicate labels, and order conflicts in `tests/unit/advanced-slot-registry.test.ts`
-- [ ] T011 [P] Add failing stable-ID, RFC 3339 offset, digest, DAG-cycle, and deterministic-topological-order tests in `tests/unit/domain-invariants.test.ts`
-- [ ] T012 [P] Add failing release state, immutable snapshot, approval digest, review completeness, and publish-receipt transition tests in `tests/unit/release-state.test.ts`
-- [ ] T013 Define Contest, AdvancedSlotRegistry, ContestSlotRecord, Problem, TechniqueInventoryItem, TechniqueTag, LearningOutcome, LearningUnit, ProblemPlacement, source, claim, example, exercise, assessment, and answer-material Zod shapes in `src/lib/domain/schema-parts/catalog.ts`
-- [ ] T014 [P] Define LearningRecord and versioned backup/preview/merge Zod shapes without account or sync fields in `src/lib/domain/schema-parts/learning.ts`
-- [ ] T015 [P] Define PublicationUpdate, AuthoringResult, ReleaseCandidate, immutable Release, and PublishReceipt Zod shapes in `src/lib/domain/schema-parts/release.ts`
-- [ ] T016 [P] Define ContentWorkManifest, HumanContentReviewEvidence, MergeReviewEvidence, LearnerOutcomeEvidence, and UserTimingEvidence Zod shapes in `src/lib/domain/schema-parts/review-evidence.ts`
-- [ ] T017 [P] Define performance, executable-example, answer-material, instruction-quality, client-bundle, and filesystem-publish evidence Zod shapes in `src/lib/domain/schema-parts/verification-evidence.ts`
-- [ ] T018 Re-export schema-part definitions without redefining shapes in `src/lib/domain/schemas.ts` and expose the domain public API in `src/lib/domain/index.ts`
-- [ ] T019 Generate every `specs/001-build-abc-textbook/contracts/*.schema.json` from the canonical Zod shapes and fail on drift in `scripts/generate-json-schemas.ts`
-- [ ] T020 [P] Implement stable entity IDs, canonical JSON, SHA-256 digests, and offset-preserving date-time helpers in `src/lib/domain/identity.ts`, `src/lib/domain/canonical-json.ts`, and `src/lib/domain/date-time.ts`
-- [ ] T021 [P] Implement the official task-list parser with source fingerprinting, D-position detection, and no statement/editorial copying in `src/lib/catalog/official-task-list.ts`
-- [ ] T022 Implement official-order stable union, absent/unknown/withdrawn states, and order-conflict holds in `src/lib/catalog/advanced-slot-registry.ts`
-- [ ] T023 [P] Create the unique prerequisite baseline, placement decision table, and terminology sources in `src/content/policies/prerequisite-baseline.json`, `src/content/policies/problem-placement.json`, and `src/content/glossary/terms.json`
-- [ ] T024 [P] Implement pre-change work-manifest creation and learning-outcome scope validation in `src/lib/validation/content-work-manifest.ts`
-- [ ] T025 [P] Implement author separation, reviewer-run check inventory, subject digest, finding resolution, and current-constitution checks in `src/lib/validation/human-content-review.ts`
-- [ ] T026 Implement public/staging separation and the canonical catalog assembly pipeline in `src/lib/catalog/build-catalog.ts` and `scripts/catalog-build.ts`
-- [ ] T027 Implement the shared fail-closed validation orchestrator and stable diagnostic codes in `src/lib/validation/validate.ts` and `scripts/catalog-validate.ts`
+- [X] T009 [P] Add failing Zod-to-JSON-Schema parity and unknown-field rejection tests for every contract in `tests/contract/schema-parity.test.ts`
+- [X] T010 [P] Add failing official task-order tests covering missing H, future I/Ex labels, duplicate labels, and order conflicts in `tests/unit/advanced-slot-registry.test.ts`
+- [X] T011 [P] Add failing stable-ID, RFC 3339 offset, digest, DAG-cycle, and deterministic-topological-order tests in `tests/unit/domain-invariants.test.ts`
+- [X] T012 [P] Add failing release state, immutable snapshot, approval digest, review completeness, and publish-receipt transition tests in `tests/unit/release-state.test.ts`
+- [X] T013 Define Contest, AdvancedSlotRegistry, ContestSlotRecord, Problem, TechniqueInventoryItem, TechniqueTag, LearningOutcome, LearningUnit, ProblemPlacement, source, claim, example, exercise, assessment, and answer-material Zod shapes in `src/lib/domain/schema-parts/catalog.ts`
+- [X] T014 [P] Define LearningRecord and versioned backup/preview/merge Zod shapes without account or sync fields in `src/lib/domain/schema-parts/learning.ts`
+- [X] T015 [P] Define PublicationUpdate, AuthoringResult, ReleaseCandidate, immutable Release, and PublishReceipt Zod shapes in `src/lib/domain/schema-parts/release.ts`
+- [X] T016 [P] Define ContentWorkManifest, HumanContentReviewEvidence, MergeReviewEvidence, LearnerOutcomeEvidence, and UserTimingEvidence Zod shapes in `src/lib/domain/schema-parts/review-evidence.ts`
+- [X] T017 [P] Define performance, executable-example, answer-material, instruction-quality, client-bundle, and filesystem-publish evidence Zod shapes in `src/lib/domain/schema-parts/verification-evidence.ts`
+- [X] T018 Re-export schema-part definitions without redefining shapes in `src/lib/domain/schemas.ts` and expose the domain public API in `src/lib/domain/index.ts`
+- [X] T019 Generate every `specs/001-build-abc-textbook/contracts/*.schema.json` from the canonical Zod shapes and fail on drift in `scripts/generate-json-schemas.ts`
+- [X] T020 [P] Implement stable entity IDs, canonical JSON, SHA-256 digests, and offset-preserving date-time helpers in `src/lib/domain/identity.ts`, `src/lib/domain/canonical-json.ts`, and `src/lib/domain/date-time.ts`
+- [X] T021 [P] Implement the official task-list parser with source fingerprinting, D-position detection, and no statement/editorial copying in `src/lib/catalog/official-task-list.ts`
+- [X] T022 Implement official-order stable union, absent/unknown/withdrawn states, and order-conflict holds in `src/lib/catalog/advanced-slot-registry.ts`
+- [X] T023 [P] Create the unique prerequisite baseline, placement decision table, and terminology sources in `src/content/policies/prerequisite-baseline.json`, `src/content/policies/problem-placement.json`, and `src/content/glossary/terms.json`
+- [X] T024 [P] Implement pre-change work-manifest creation and learning-outcome scope validation in `src/lib/validation/content-work-manifest.ts`
+- [X] T025 [P] Implement author separation, reviewer-run check inventory, subject digest, finding resolution, and current-constitution checks in `src/lib/validation/human-content-review.ts`
+- [X] T026 Implement public/staging separation and the canonical catalog assembly pipeline in `src/lib/catalog/build-catalog.ts` and `scripts/catalog-build.ts`
+- [X] T027 Implement the shared fail-closed validation orchestrator and stable diagnostic codes in `src/lib/validation/validate.ts` and `scripts/catalog-validate.ts`
 
 **Checkpoint**: Schema ownership is singular, future labels are accepted, and all T009–T012 tests pass.
 

@@ -1,10 +1,23 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://abc-textbook.local/schemas/learning-record.schema.json",
-  "title": "ABC Textbook Learning Record Export",
-  "description": "IndexedDB学習記録のバックアップ・復元契約。更新日時の独立性とmerge規則は意味検証器で追加検査する。",
   "type": "object",
-  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "exportedAt": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "catalogVersionAtExport": {
+      "$ref": "#/$defs/__schema2"
+    },
+    "records": {
+      "$ref": "#/$defs/__schema3"
+    },
+    "orphanedProblemIds": {
+      "$ref": "#/$defs/__schema5"
+    }
+  },
   "required": [
     "schemaVersion",
     "exportedAt",
@@ -12,90 +25,82 @@
     "records",
     "orphanedProblemIds"
   ],
-  "properties": {
-    "schemaVersion": {
+  "additionalProperties": false,
+  "$id": "https://abc-textbook.local/schemas/learning-record.schema.json",
+  "title": "ABC Textbook Learning Record Backup",
+  "$comment": "Structural constraints are defined here; cross-field and collection invariants are enforced by the canonical Zod runtime validator.",
+  "$defs": {
+    "__schema0": {
+      "type": "string",
       "const": "1.0.0"
     },
-    "exportedAt": {
-      "$ref": "#/$defs/dateTime"
-    },
-    "catalogVersionAtExport": {
-      "type": "string",
-      "pattern": "^[0-9]{4}\\.[0-9]{2}\\.[0-9]+$"
-    },
-    "records": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/learningRecord"
-      }
-    },
-    "orphanedProblemIds": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/problemId"
-      },
-      "uniqueItems": true
-    }
-  },
-  "$defs": {
-    "dateTime": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "utcDateTime": {
+    "__schema1": {
       "type": "string",
       "format": "date-time",
-      "pattern": "Z$"
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
     },
-    "problemId": {
+    "__schema2": {
+      "type": "string",
+      "pattern": "^\\d{4}\\.\\d{2}\\.\\d+$"
+    },
+    "__schema3": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "problemId": {
+            "$ref": "#/$defs/__schema4"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "unstarted",
+              "in_progress",
+              "completed"
+            ]
+          },
+          "statusUpdatedAt": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/__schema1"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "needsReview": {
+            "type": "boolean"
+          },
+          "needsReviewUpdatedAt": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/__schema1"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "problemId",
+          "status",
+          "statusUpdatedAt",
+          "needsReview",
+          "needsReviewUpdatedAt"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema4": {
       "type": "string",
       "pattern": "^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$"
     },
-    "learningRecord": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "problemId",
-        "status",
-        "statusUpdatedAt",
-        "needsReview",
-        "needsReviewUpdatedAt",
-        "recordVersion"
-      ],
-      "properties": {
-        "problemId": {
-          "$ref": "#/$defs/problemId"
-        },
-        "status": {
-          "enum": ["unstarted", "attempting", "completed"]
-        },
-        "statusUpdatedAt": {
-          "oneOf": [
-            {
-              "$ref": "#/$defs/utcDateTime"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "needsReview": {
-          "type": "boolean"
-        },
-        "needsReviewUpdatedAt": {
-          "oneOf": [
-            {
-              "$ref": "#/$defs/utcDateTime"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "recordVersion": {
-          "type": "integer",
-          "minimum": 1
-        }
+    "__schema5": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema4"
       }
     }
   }

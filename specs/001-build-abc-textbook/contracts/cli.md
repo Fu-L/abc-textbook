@@ -175,12 +175,13 @@ receipt commit前の失敗は旧treeへrollbackし、orphan tempを除去する�
 
 ```bash
 npm run abc:status -- --id UPDATE_OR_CANDIDATE_ID
-npm run catalog:validate -- --input PATH
-npm run catalog:build -- --input PATH --output PATH
+npm run catalog:validate -- --input PATH --evidence-inventory PATH
+npm run catalog:build -- --input PATH --output PATH --evidence-inventory PATH
 npm run verify:merge -- --evidence PATH
 ```
 
 - `abc:status`はstate、Problem別result、hold/resume、content/payload digest、check/review、approval、windowを表示する。
 - `catalog:validate`はCatalog schemaと意味制約を検査し入力を変更しない。
 - `catalog:build`は確定Releaseまたはfixtureから派生indexを指定outputへ生成し、公開正本を変更しない。
+- 両CLIは任意のmanifest/candidateを引数で信頼しない。Catalogのrelease recordから`docs/work-manifests/`、`staging/release-candidates/`、`staging/updates/`の正規recordを一意に解決し、CIが提供する保護済みremote-tracking base ref（`GITHUB_BASE_REF`、ローカル既定は`origin/main`）からwork manifest、Catalog、content treeの基準を読み、`src/content/`の実ファイルinventoryを公開直前に再構築する。base refはCLI引数から選択できず、任意SHAの指定、`HEAD`自身、baseからの更新を含む未固定manifest、base/current Catalogで再現できないoperationやCorrection Impactは拒否する。
 - `verify:merge`はWork Manifest、logical subject、同一gate reviewerのcheck実行、author外review、Constitution Check、finding 0を検証する。
