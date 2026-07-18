@@ -7,6 +7,7 @@ import {
 } from '../src/lib/catalog/evidence-inventory.js';
 import {
   CatalogPublicationBoundaryError,
+  resolveCanonicalReleaseSource,
   resolvePublicCatalogInput,
 } from '../src/lib/catalog/publication-boundary.js';
 
@@ -15,22 +16,34 @@ const inputIndex = args.indexOf('--input');
 const inputPath = inputIndex < 0 ? undefined : args[inputIndex + 1];
 const evidenceIndex = args.indexOf('--evidence-inventory');
 const evidencePath = evidenceIndex < 0 ? undefined : args[evidenceIndex + 1];
-const trustContextIndex = args.indexOf('--trusted-review-context');
-const trustContextPath = trustContextIndex < 0 ? undefined : args[trustContextIndex + 1];
-if (!inputPath || !evidencePath || !trustContextPath || args.length !== 6) {
+const manifestIndex = args.indexOf('--work-manifest');
+const workManifestPath = manifestIndex < 0 ? undefined : args[manifestIndex + 1];
+const candidateIndex = args.indexOf('--release-candidate');
+const releaseCandidatePath = candidateIndex < 0 ? undefined : args[candidateIndex + 1];
+if (
+  !inputPath ||
+  !evidencePath ||
+  !workManifestPath ||
+  !releaseCandidatePath ||
+  args.length !== 8
+) {
   console.error(
-    'Usage: catalog-validate --input CATALOG.json --evidence-inventory INVENTORY.json --trusted-review-context CONTEXT.json',
+    'Usage: catalog-validate --input CATALOG.json --evidence-inventory INVENTORY.json --work-manifest MANIFEST.json --release-candidate CANDIDATE.json',
   );
   process.exitCode = 64;
 } else {
   try {
     const resolvedInputPath = await resolvePublicCatalogInput(inputPath);
     const input = JSON.parse(await readFile(resolvedInputPath, 'utf8')) as unknown;
-    const trustedReviewContext = JSON.parse(await readFile(trustContextPath, 'utf8')) as unknown;
-    const trustedEvidence = await loadTrustedCatalogReleaseEvidenceInventory(
-      evidencePath,
-      trustedReviewContext,
-    );
+    const resolvedManifestPath = await resolveCanonicalReleaseSource(workManifestPath);
+    const resolvedCandidatePath = await resolveCanonicalReleaseSource(releaseCandidatePath);
+    const workManifest = JSON.parse(await readFile(resolvedManifestPath, 'utf8')) as unknown;
+    const releaseCandidate = JSON.parse(await readFile(resolvedCandidatePath, 'utf8')) as unknown;
+    const trustedEvidence = await loadTrustedCatalogReleaseEvidenceInventory(evidencePath, {
+      catalog: input,
+      workManifest,
+      releaseCandidate,
+    });
     buildCatalog(input, [], trustedEvidence);
     console.log('CATALOG_VALID');
   } catch (error) {

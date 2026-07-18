@@ -12,6 +12,17 @@ import {
   Sha256Schema,
 } from '../domain/schema-parts/catalog.js';
 import { HumanContentReviewEvidenceSchema as ReviewEvidenceSchema } from '../domain/schema-parts/review-evidence.js';
+import { ContentWorkManifestSchema } from '../domain/schema-parts/review-evidence.js';
+import { ReleaseCandidateSchema } from '../domain/schema-parts/release.js';
+import {
+  calculateApprovableDigest,
+  calculateCandidatePayloadDigest,
+  calculateContentSubjectDigest,
+} from '../validation/release-state.js';
+import {
+  validateContentWorkManifest,
+  WorkManifestError,
+} from '../validation/content-work-manifest.js';
 import {
   HumanReviewError,
   type TrustedReviewCheckInventory,
@@ -67,41 +78,171 @@ const CatalogReviewReferenceSchema = strictObject({
   aggregatePassed: z.boolean(),
 });
 
-/**
- * Supplied independently of the evidence inventory (for example from a verified
- * ContentWorkManifest/release candidate) so an inventory cannot choose its own
- * required checks or review scope.
- */
-export const CatalogEvidenceTrustContextSchema = strictObject({
-  subjectDigest: Sha256Schema,
-  inventoryDigest: Sha256Schema,
-  workManifest: strictObject({
-    learningOutcomeIds: z.array(EntityIdSchema),
-    reviewUnits: z
-      .array(
-        strictObject({
-          reviewUnitId: z.string().regex(/^RU-T\d{3}-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
-          subjectPaths: z.array(SafePathSchema).min(1),
-          learningOutcomeIds: z.array(EntityIdSchema),
-          owner: EntityIdSchema,
-        }),
-      )
-      .min(1),
-  }),
-  applicableChecks: z.array(strictObject({ checkId: EntityIdSchema, command: text })).min(1),
-  reviewItems: z
-    .array(
-      strictObject({
-        reviewItemId: EntityIdSchema,
-        reviewUnitId: z.string().regex(/^RU-T\d{3}-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
-        kind: z.enum(['outcome_coverage', 'non_automatable_claim', 'non_automatable_example']),
-        subjectPaths: z.array(SafePathSchema).min(1),
-        authorIds: z.array(EntityIdSchema).min(1),
-        learningOutcomeIds: z.array(EntityIdSchema),
+export interface CatalogEvidenceCanonicalSources {
+  readonly catalog: unknown;
+  readonly workManifest: unknown;
+  readonly releaseCandidate: unknown;
+}
+
+const sameOrderedStrings = (left: readonly string[], right: readonly string[]): boolean =>
+  left.length === right.length && left.every((value, index) => value === right[index]);
+
+const reviewKinds = [
+  'outcome_coverage',
+  'non_automatable_claim',
+  'non_automatable_example',
+] as const;
+
+/** Derive the trust context exclusively from canonical, mutually-bound release records. */
+export const deriveCatalogEvidenceTrustContext = (
+  sources: CatalogEvidenceCanonicalSources,
+): TrustedReviewCheckInventory => {
+  const manifestResult = ContentWorkManifestSchema.safeParse(sources.workManifest);
+  if (!manifestResult.success) {
+    throw new CatalogEvidenceInventoryError(
+      'WORK_MANIFEST_SCHEMA_INVALID',
+      manifestResult.error.message,
+    );
+  }
+  try {
+    validateContentWorkManifest(manifestResult.data);
+  } catch (error) {
+    if (error instanceof WorkManifestError) {
+      throw new CatalogEvidenceInventoryError(error.code, error.message);
+    }
+    throw error;
+  }
+  const candidateResult = ReleaseCandidateSchema.safeParse(sources.releaseCandidate);
+  if (!candidateResult.success) {
+    throw new CatalogEvidenceInventoryError(
+      'RELEASE_CANDIDATE_INVALID',
+      candidateResult.error.message,
+    );
+  }
+  const catalogResult = z
+    .object({
+      release: z.object({
+        version: z.string(),
+        releaseKind: z.string(),
+        cutoffAt: z.string(),
+        manifestDigest: Sha256Schema,
+        contentSnapshotDigest: Sha256Schema,
+        updateIds: z.array(EntityIdSchema),
+        advancedSlotRegistryDigest: Sha256Schema,
       }),
-    )
-    .min(1),
-});
+    })
+    .safeParse(sources.catalog);
+  if (!catalogResult.success) {
+    throw new CatalogEvidenceInventoryError(
+      'CATALOG_RELEASE_CONTEXT_INVALID',
+      catalogResult.error.message,
+    );
+  }
+  const manifest = manifestResult.data;
+  const candidate = candidateResult.data;
+  const release = catalogResult.data.release;
+  if (
+    manifest.digest !== release.manifestDigest ||
+    candidate.targetReleaseVersion !== release.version ||
+    candidate.releaseKind !== release.releaseKind ||
+    candidate.cutoffAt !== release.cutoffAt ||
+    candidate.advancedSlotRegistryDigest !== release.advancedSlotRegistryDigest ||
+    candidate.contentSubjectDigest !== release.contentSnapshotDigest ||
+    !sameOrderedStrings(candidate.orderedUpdateIds, release.updateIds)
+  ) {
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_RELEASE_CONTEXT_MISMATCH',
+      'Catalog, Work Manifest, and Release Candidate do not describe one immutable release.',
+    );
+  }
+  if (
+    candidate.fixtureMode ||
+    !['READY_TO_PUBLISH', 'PUBLISHED'].includes(candidate.state) ||
+    candidate.contentSubjectDigest !== calculateContentSubjectDigest(candidate.contentFiles) ||
+    candidate.candidatePayloadDigest === null ||
+    candidate.candidatePayloadDigest !==
+      calculateCandidatePayloadDigest(candidate.candidateFiles) ||
+    candidate.approvableDigest === null ||
+    candidate.approvableDigest !==
+      calculateApprovableDigest({
+        contentSubjectDigest: candidate.contentSubjectDigest,
+        candidatePayloadDigest: candidate.candidatePayloadDigest,
+        preJudgmentCheckRefs: candidate.preJudgmentCheckRefs,
+        humanContentReviewEvidenceRefs: candidate.humanContentReviewEvidenceRefs,
+        blockingFindings: candidate.blockingFindings,
+      })
+  ) {
+    throw new CatalogEvidenceInventoryError(
+      'RELEASE_CANDIDATE_DIGEST_MISMATCH',
+      'Release Candidate is not a final, internally consistent canonical record.',
+    );
+  }
+
+  const requiredCheckIds = [
+    ...new Set(manifest.reviewUnits.flatMap((unit) => unit.checkIds)),
+  ].sort();
+  const candidateChecks = new Map(
+    candidate.preJudgmentCheckRefs.map((check) => [check.checkId, check] as const),
+  );
+  if (
+    candidateChecks.size !== candidate.preJudgmentCheckRefs.length ||
+    !sameOrderedStrings(requiredCheckIds, [...candidateChecks.keys()].sort())
+  ) {
+    throw new CatalogEvidenceInventoryError(
+      'MANIFEST_CHECK_INVENTORY_MISMATCH',
+      'Release Candidate checks must exactly cover Work Manifest check IDs.',
+    );
+  }
+  const applicableChecks = requiredCheckIds.map((checkId) => {
+    const check = candidateChecks.get(checkId);
+    if (!check)
+      throw new CatalogEvidenceInventoryError('MANIFEST_CHECK_INVENTORY_MISMATCH', checkId);
+    return { checkId, command: check.command };
+  });
+  const reviewItems = manifest.reviewUnits.flatMap((unit) => {
+    const kinds = unit.evidenceRoles.filter((role): role is (typeof reviewKinds)[number] =>
+      reviewKinds.includes(role as (typeof reviewKinds)[number]),
+    );
+    if (kinds.length !== 1) {
+      throw new CatalogEvidenceInventoryError(
+        'MANIFEST_REVIEW_ROLE_INVALID',
+        `${unit.reviewUnitId} must declare exactly one human-review evidence role.`,
+      );
+    }
+    const kind = kinds[0];
+    if (!kind)
+      throw new CatalogEvidenceInventoryError('MANIFEST_REVIEW_ROLE_INVALID', unit.reviewUnitId);
+    return unit.itemIds.map((reviewItemId) => ({
+      reviewItemId,
+      reviewUnitId: unit.reviewUnitId,
+      kind,
+      subjectPaths: unit.paths,
+      authorIds: [unit.owner],
+      learningOutcomeIds: unit.learningOutcomeIds,
+    }));
+  });
+  const inventoryDigest = canonicalDigest({
+    manifestDigest: manifest.digest,
+    subjectDigest: candidate.contentSubjectDigest,
+    applicableChecks,
+    reviewItems,
+  });
+  return {
+    subjectDigest: candidate.contentSubjectDigest,
+    inventoryDigest,
+    workManifest: {
+      learningOutcomeIds: manifest.learningOutcomeIds,
+      reviewUnits: manifest.reviewUnits.map((unit) => ({
+        reviewUnitId: unit.reviewUnitId,
+        subjectPaths: unit.paths,
+        learningOutcomeIds: unit.learningOutcomeIds,
+        owner: unit.owner,
+      })),
+    },
+    applicableChecks,
+    reviewItems,
+  };
+};
 
 export const CatalogReleaseEvidenceInventorySchema = strictObject({
   subjectDigest: Sha256Schema,
@@ -447,17 +588,10 @@ const verifyReviewReference = async (
 
 export const loadTrustedCatalogReleaseEvidenceInventory = async (
   inventoryPath: string,
-  trustedReviewContext: unknown,
+  canonicalSources: CatalogEvidenceCanonicalSources,
   repositoryRoot = process.cwd(),
 ): Promise<TrustedCatalogReleaseEvidenceInventory> => {
-  const trustedContextResult = CatalogEvidenceTrustContextSchema.safeParse(trustedReviewContext);
-  if (!trustedContextResult.success) {
-    throw new CatalogEvidenceInventoryError(
-      'EVIDENCE_TRUST_CONTEXT_INVALID',
-      trustedContextResult.error.message,
-    );
-  }
-  const trustedContext: TrustedReviewCheckInventory = trustedContextResult.data;
+  const trustedContext = deriveCatalogEvidenceTrustContext(canonicalSources);
   const inventoryFile = await readPublicEvidenceFile(inventoryPath, repositoryRoot);
   const parsed = CatalogReleaseEvidenceInventorySchema.safeParse(inventoryFile.value);
   if (!parsed.success) {
@@ -475,6 +609,36 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
       verifyReviewReference(review, repositoryRoot, checks, trustedContext),
     ),
   );
+  const candidate = ReleaseCandidateSchema.parse(canonicalSources.releaseCandidate);
+  if (
+    candidate.preJudgmentCheckRefs.length !== checks.length ||
+    candidate.preJudgmentCheckRefs.some((reference) => {
+      const check = checks.find(({ checkId }) => checkId === reference.checkId);
+      return (
+        check?.command !== reference.command ||
+        check.subjectDigest !== reference.subjectDigest ||
+        check.resultPath !== reference.resultPath ||
+        check.resultDigest !== reference.resultDigest ||
+        check.exitCode !== reference.exitCode ||
+        check.completedAt !== reference.completedAt
+      );
+    }) ||
+    candidate.humanContentReviewEvidenceRefs.length !== reviews.length ||
+    candidate.humanContentReviewEvidenceRefs.some((reference) => {
+      const review = reviews.find(({ evidenceId }) => evidenceId === reference.evidenceId);
+      return (
+        review?.path !== reference.path ||
+        review.digest !== reference.digest ||
+        review.subjectDigest !== reference.subjectDigest ||
+        review.aggregatePassed !== reference.aggregatePassed
+      );
+    })
+  ) {
+    throw new CatalogEvidenceInventoryError(
+      'RELEASE_CANDIDATE_EVIDENCE_MISMATCH',
+      'Release Candidate evidence references must exactly match verified evidence files.',
+    );
+  }
   const subjectDigests = [
     ...checks.map(({ subjectDigest }) => subjectDigest),
     ...reviews.map(({ subjectDigest }) => subjectDigest),

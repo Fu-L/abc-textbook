@@ -8,6 +8,13 @@ import { promisify } from 'node:util';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { canonicalDigest, digestWithoutField } from '../../src/lib/domain/canonical-json.js';
+import { deriveCatalogEvidenceTrustContext } from '../../src/lib/catalog/evidence-inventory.js';
+import {
+  calculateApprovableDigest,
+  calculateCandidatePayloadDigest,
+  calculateContentSubjectDigest,
+} from '../../src/lib/validation/release-state.js';
+import { calculateContentWorkManifestScopeDigest } from '../../src/lib/validation/content-work-manifest.js';
 
 const execFileAsync = promisify(execFile);
 const sha = (character: string): string => character.repeat(64);
@@ -32,8 +39,9 @@ describe('catalog validation CLI evidence boundary', () => {
     return createHash('sha256').update(contents).digest('hex');
   };
 
-  it('fails closed when evidence omits a check required by the trusted context', async () => {
-    const subjectDigest = sha('a');
+  it('fails closed when evidence omits a check required by the canonical manifest', async () => {
+    const contentFiles = [{ path: 'catalog.json', sha256: sha('d'), byteLength: 123 }];
+    const subjectDigest = calculateContentSubjectDigest(contentFiles);
     const checkPath = 'docs/verification/check-catalog.json';
     const check = {
       schemaVersion: '1.0.0',
@@ -67,7 +75,7 @@ describe('catalog validation CLI evidence boundary', () => {
       releaseVersion: '2026.07.17',
       subjectDigest,
       inventoryPath: 'docs/verification/review-inventory.json',
-      inventoryDigest: sha('b'),
+      inventoryDigest: '',
       rawEvidenceManifestPath: 'docs/verification/review-raw-manifest.json',
       rawEvidenceManifestDigest: sha('c'),
       rawEvidenceCount: 1,
@@ -119,8 +127,132 @@ describe('catalog validation CLI evidence boundary', () => {
       generatedAt: '2026-07-17T12:31:00+09:00',
       evidenceDigest: '',
     };
+    const manifestScope = {
+      taskId: 'T024',
+      requiredRequirementIds: ['FR-026'],
+      learningOutcomeIds: [],
+      reviewUnits: [
+        {
+          reviewUnitId: 'RU-T024-catalog',
+          changeKind: 'documentation',
+          paths: ['src/content/docs/index.md'],
+          itemIds: ['human-review-item-catalog'],
+          requirementIds: ['FR-026'],
+          learningOutcomeIds: [],
+          outcomeImpact: { kind: 'none', rationale: 'No learner outcome changes.' },
+          dependencyReviewUnitIds: [],
+          checkIds: ['check-catalog', 'check-lint'],
+          evidenceRoles: ['non_automatable_claim'],
+          maintenanceBenefit: null,
+          owner: 'person-author',
+          status: 'complete',
+        },
+      ],
+    };
+    const workManifest: Record<string, unknown> = {
+      schemaVersion: '1.0.0',
+      manifestId: 'work-manifest-T024-catalog',
+      ...manifestScope,
+      scopeDigest: calculateContentWorkManifestScopeDigest(manifestScope),
+      digest: '',
+      changeKind: 'documentation',
+      outcomeImpact: { kind: 'none', rationale: 'No learner outcome changes.' },
+      maintenanceBenefit: null,
+      state: 'complete',
+      createdAt: '2026-07-17T10:00:00+09:00',
+      updatedAt: '2026-07-17T11:00:00+09:00',
+    };
+    workManifest.digest = digestWithoutField(workManifest, 'digest');
+    const candidateFiles = [{ path: 'catalog.json', sha256: sha('e'), byteLength: 456 }];
+    const releaseCandidate: Record<string, unknown> = {
+      schemaVersion: '2.0.0',
+      candidateId: 'release-candidate-2026.07.17-aaaaaaaaaaaa',
+      releaseKind: 'initial',
+      targetReleaseVersion: '2026.07.17',
+      baseReleaseVersion: null,
+      cutoffAt: '2026-07-17T09:00:00+09:00',
+      orderedUpdateIds: ['update-foundation'],
+      fixtureMode: false,
+      advancedSlotRegistryDigest: sha('f'),
+      contentFiles,
+      contentSubjectDigest: subjectDigest,
+      preJudgmentCheckRefs: [
+        {
+          checkId: check.checkId,
+          checkType: 'automated',
+          subjectDigest,
+          command: check.command,
+          exitCode: 0,
+          resultPath: checkPath,
+          resultDigest: checkDigest,
+          completedAt: check.completedAt,
+        },
+        {
+          checkId: 'check-lint',
+          checkType: 'automated',
+          subjectDigest,
+          command: 'npm run lint',
+          exitCode: 0,
+          resultPath: 'docs/verification/check-lint.json',
+          resultDigest: sha('8'),
+          completedAt: check.completedAt,
+        },
+      ],
+      humanContentReviewEvidenceRefs: [
+        {
+          evidenceId: review.id,
+          path: reviewPath,
+          digest: sha('9'),
+          subjectDigest,
+          reviewerExecutedCheckSetDigest: review.reviewerExecutedCheckSetDigest,
+          aggregatePassed: true,
+        },
+      ],
+      blockingFindings: [],
+      candidateFiles,
+      candidatePayloadDigest: calculateCandidatePayloadDigest(candidateFiles),
+      approvableDigest: '',
+      ownerApproval: null,
+      publicationEffectiveAt: '2026-07-17T13:00:00+09:00',
+      publicationWindowEndsAt: '2026-07-17T14:00:00+09:00',
+      state: 'READY_TO_PUBLISH',
+      createdAt: '2026-07-17T10:00:00+09:00',
+      updatedAt: '2026-07-17T12:45:00+09:00',
+    };
+    releaseCandidate.approvableDigest = calculateApprovableDigest(releaseCandidate as never);
+    releaseCandidate.ownerApproval = {
+      ownerId: 'owner-release',
+      approvedDigest: releaseCandidate.approvableDigest,
+      approvedAt: '2026-07-17T12:50:00+09:00',
+    };
+    const catalog = {
+      release: {
+        version: '2026.07.17',
+        releaseKind: 'initial',
+        cutoffAt: '2026-07-17T09:00:00+09:00',
+        manifestDigest: workManifest.digest,
+        contentSnapshotDigest: subjectDigest,
+        updateIds: ['update-foundation'],
+        advancedSlotRegistryDigest: sha('f'),
+      },
+    };
+    review.inventoryDigest = deriveCatalogEvidenceTrustContext({
+      catalog,
+      workManifest,
+      releaseCandidate,
+    }).inventoryDigest;
     review.evidenceDigest = digestWithoutField(review, 'evidenceDigest');
     const reviewDigest = await writeJson(reviewPath, review);
+    const candidateReviewRefs = releaseCandidate.humanContentReviewEvidenceRefs as {
+      digest: string;
+    }[];
+    if (candidateReviewRefs[0]) candidateReviewRefs[0].digest = reviewDigest;
+    releaseCandidate.approvableDigest = calculateApprovableDigest(releaseCandidate as never);
+    releaseCandidate.ownerApproval = {
+      ownerId: 'owner-release',
+      approvedDigest: releaseCandidate.approvableDigest,
+      approvedAt: '2026-07-17T12:50:00+09:00',
+    };
     const inventoryPath = 'docs/verification/release-evidence-inventory.json';
     await writeJson(inventoryPath, {
       subjectDigest,
@@ -148,37 +280,11 @@ describe('catalog validation CLI evidence boundary', () => {
         },
       ],
     });
-    const contextPath = 'docs/verification/trusted-review-context.json';
-    await writeJson(contextPath, {
-      subjectDigest,
-      inventoryDigest: sha('b'),
-      workManifest: {
-        learningOutcomeIds: [],
-        reviewUnits: [
-          {
-            reviewUnitId: 'RU-T024-catalog',
-            subjectPaths: ['src/content/docs/index.md'],
-            learningOutcomeIds: [],
-            owner: 'person-author',
-          },
-        ],
-      },
-      applicableChecks: [
-        { checkId: check.checkId, command: check.command },
-        { checkId: 'check-lint', command: 'npm run lint' },
-      ],
-      reviewItems: [
-        {
-          reviewItemId: 'human-review-item-catalog',
-          reviewUnitId: 'RU-T024-catalog',
-          kind: 'non_automatable_claim',
-          subjectPaths: ['src/content/docs/index.md'],
-          authorIds: ['person-author'],
-          learningOutcomeIds: [],
-        },
-      ],
-    });
-    await writeJson('catalog.json', {});
+    const manifestPath = 'docs/verification/work-manifest.json';
+    const candidatePath = 'staging/release-candidate.json';
+    await writeJson(manifestPath, workManifest);
+    await writeJson(candidatePath, releaseCandidate);
+    await writeJson('catalog.json', catalog);
 
     const scriptPath = path.resolve('scripts/catalog-validate.ts');
     const tsxLoaderPath = path.resolve('node_modules/tsx/dist/loader.mjs');
@@ -192,8 +298,10 @@ describe('catalog validation CLI evidence boundary', () => {
         'catalog.json',
         '--evidence-inventory',
         inventoryPath,
-        '--trusted-review-context',
-        contextPath,
+        '--work-manifest',
+        manifestPath,
+        '--release-candidate',
+        candidatePath,
       ],
       { cwd: repositoryRoot },
     ).catch((value: unknown) => value as { code: number; stderr: string });

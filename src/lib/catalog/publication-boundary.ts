@@ -119,3 +119,30 @@ export const resolvePublicEvidencePath = async (
   }
   return resolvedEvidence;
 };
+
+/** Canonical release inputs may live in staging, but never outside the repository tree. */
+export const resolveCanonicalReleaseSource = async (
+  sourcePath: string,
+  repositoryRoot = process.cwd(),
+): Promise<string> => {
+  const resolvedRepositoryRoot = await realpath(repositoryRoot);
+  const absoluteSource = path.isAbsolute(sourcePath)
+    ? sourcePath
+    : path.resolve(resolvedRepositoryRoot, sourcePath);
+  let resolvedSource: string;
+  try {
+    resolvedSource = await realpath(absoluteSource);
+  } catch {
+    throw new CatalogPublicationBoundaryError(
+      'CANONICAL_RELEASE_SOURCE_NOT_FOUND',
+      `Canonical release source does not exist: ${sourcePath}.`,
+    );
+  }
+  if (!isWithin(resolvedRepositoryRoot, resolvedSource)) {
+    throw new CatalogPublicationBoundaryError(
+      'CANONICAL_RELEASE_SOURCE_OUTSIDE_REPOSITORY',
+      `Canonical release source is outside the repository: ${sourcePath}.`,
+    );
+  }
+  return resolvedSource;
+};

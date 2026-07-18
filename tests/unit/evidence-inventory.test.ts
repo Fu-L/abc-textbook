@@ -7,7 +7,14 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { canonicalDigest, digestWithoutField } from '../../src/lib/domain/canonical-json.js';
 import {
+  calculateApprovableDigest,
+  calculateCandidatePayloadDigest,
+  calculateContentSubjectDigest,
+} from '../../src/lib/validation/release-state.js';
+import { calculateContentWorkManifestScopeDigest } from '../../src/lib/validation/content-work-manifest.js';
+import {
   CatalogEvidenceInventoryError,
+  deriveCatalogEvidenceTrustContext,
   loadTrustedCatalogReleaseEvidenceInventory,
 } from '../../src/lib/catalog/evidence-inventory.js';
 
@@ -38,7 +45,8 @@ describe('catalog release evidence inventory', () => {
   };
 
   const makeFixture = async () => {
-    const subjectDigest = sha('a');
+    const contentFiles = [{ path: 'catalog.json', sha256: sha('d'), byteLength: 123 }];
+    const subjectDigest = calculateContentSubjectDigest(contentFiles);
     const checkPath = 'docs/verification/check-catalog.json';
     const check = {
       schemaVersion: '1.0.0',
@@ -72,7 +80,7 @@ describe('catalog release evidence inventory', () => {
       releaseVersion: '2026.07.17',
       subjectDigest,
       inventoryPath: 'docs/verification/review-inventory.json',
-      inventoryDigest: sha('b'),
+      inventoryDigest: '',
       rawEvidenceManifestPath: 'docs/verification/review-raw-manifest.json',
       rawEvidenceManifestDigest: sha('c'),
       rawEvidenceCount: 1,
@@ -124,8 +132,120 @@ describe('catalog release evidence inventory', () => {
       generatedAt: '2026-07-17T12:31:00+09:00',
       evidenceDigest: '',
     };
+    const manifestScope = {
+      taskId: 'T024',
+      requiredRequirementIds: ['FR-026'],
+      learningOutcomeIds: [],
+      reviewUnits: [
+        {
+          reviewUnitId: 'RU-T024-catalog',
+          changeKind: 'documentation',
+          paths: ['src/content/docs/index.md'],
+          itemIds: ['human-review-item-catalog'],
+          requirementIds: ['FR-026'],
+          learningOutcomeIds: [],
+          outcomeImpact: { kind: 'none', rationale: 'No learner outcome changes.' },
+          dependencyReviewUnitIds: [],
+          checkIds: [check.checkId],
+          evidenceRoles: ['non_automatable_claim'],
+          maintenanceBenefit: null,
+          owner: 'person-author',
+          status: 'complete',
+        },
+      ],
+    };
+    const workManifest: Record<string, unknown> = {
+      schemaVersion: '1.0.0',
+      manifestId: 'work-manifest-T024-catalog',
+      ...manifestScope,
+      scopeDigest: calculateContentWorkManifestScopeDigest(manifestScope),
+      digest: '',
+      changeKind: 'documentation',
+      outcomeImpact: { kind: 'none', rationale: 'No learner outcome changes.' },
+      maintenanceBenefit: null,
+      state: 'complete',
+      createdAt: '2026-07-17T10:00:00+09:00',
+      updatedAt: '2026-07-17T11:00:00+09:00',
+    };
+    workManifest.digest = digestWithoutField(workManifest, 'digest');
+    const candidateFiles = [{ path: 'catalog.json', sha256: sha('e'), byteLength: 456 }];
+    const releaseCandidate: Record<string, unknown> = {
+      schemaVersion: '2.0.0',
+      candidateId: 'release-candidate-2026.07.17-aaaaaaaaaaaa',
+      releaseKind: 'initial',
+      targetReleaseVersion: '2026.07.17',
+      baseReleaseVersion: null,
+      cutoffAt: '2026-07-17T09:00:00+09:00',
+      orderedUpdateIds: ['update-foundation'],
+      fixtureMode: false,
+      advancedSlotRegistryDigest: sha('f'),
+      contentFiles,
+      contentSubjectDigest: subjectDigest,
+      preJudgmentCheckRefs: [
+        {
+          checkId: check.checkId,
+          checkType: 'automated',
+          subjectDigest,
+          command: check.command,
+          exitCode: 0,
+          resultPath: checkPath,
+          resultDigest: checkDigest,
+          completedAt: check.completedAt,
+        },
+      ],
+      humanContentReviewEvidenceRefs: [
+        {
+          evidenceId: review.id,
+          path: reviewPath,
+          digest: sha('9'),
+          subjectDigest,
+          reviewerExecutedCheckSetDigest: review.reviewerExecutedCheckSetDigest,
+          aggregatePassed: true,
+        },
+      ],
+      blockingFindings: [],
+      candidateFiles,
+      candidatePayloadDigest: calculateCandidatePayloadDigest(candidateFiles),
+      approvableDigest: '',
+      ownerApproval: null,
+      publicationEffectiveAt: '2026-07-17T13:00:00+09:00',
+      publicationWindowEndsAt: '2026-07-17T14:00:00+09:00',
+      state: 'READY_TO_PUBLISH',
+      createdAt: '2026-07-17T10:00:00+09:00',
+      updatedAt: '2026-07-17T12:45:00+09:00',
+    };
+    releaseCandidate.approvableDigest = calculateApprovableDigest(releaseCandidate as never);
+    releaseCandidate.ownerApproval = {
+      ownerId: 'owner-release',
+      approvedDigest: releaseCandidate.approvableDigest,
+      approvedAt: '2026-07-17T12:50:00+09:00',
+    };
+    const catalog = {
+      release: {
+        version: '2026.07.17',
+        releaseKind: 'initial',
+        cutoffAt: '2026-07-17T09:00:00+09:00',
+        manifestDigest: workManifest.digest,
+        contentSnapshotDigest: subjectDigest,
+        updateIds: ['update-foundation'],
+        advancedSlotRegistryDigest: sha('f'),
+      },
+    };
+    const canonicalSources = { catalog, workManifest, releaseCandidate };
+    const derivedContext = deriveCatalogEvidenceTrustContext(canonicalSources);
+    review.inventoryDigest = derivedContext.inventoryDigest;
     review.evidenceDigest = digestWithoutField(review, 'evidenceDigest');
     const reviewDigest = await writeJson(reviewPath, review);
+    const candidateReviewRefs = releaseCandidate.humanContentReviewEvidenceRefs as {
+      digest: string;
+    }[];
+    if (candidateReviewRefs[0]) candidateReviewRefs[0].digest = reviewDigest;
+    releaseCandidate.approvableDigest = calculateApprovableDigest(releaseCandidate as never);
+    releaseCandidate.ownerApproval = {
+      ownerId: 'owner-release',
+      approvedDigest: releaseCandidate.approvableDigest,
+      approvedAt: '2026-07-17T12:50:00+09:00',
+    };
     const inventoryPath = 'docs/verification/release-evidence-inventory.json';
     const inventory = {
       subjectDigest,
@@ -153,32 +273,6 @@ describe('catalog release evidence inventory', () => {
         },
       ],
     };
-    const trustedReviewContext = {
-      subjectDigest,
-      inventoryDigest: sha('b'),
-      workManifest: {
-        learningOutcomeIds: [],
-        reviewUnits: [
-          {
-            reviewUnitId: 'RU-T024-catalog',
-            subjectPaths: ['src/content/docs/index.md'],
-            learningOutcomeIds: [],
-            owner: 'person-author',
-          },
-        ],
-      },
-      applicableChecks: [{ checkId: check.checkId, command: check.command }],
-      reviewItems: [
-        {
-          reviewItemId: 'human-review-item-catalog',
-          reviewUnitId: 'RU-T024-catalog',
-          kind: 'non_automatable_claim',
-          subjectPaths: ['src/content/docs/index.md'],
-          authorIds: ['person-author'],
-          learningOutcomeIds: [],
-        },
-      ],
-    } as const;
     await writeJson(inventoryPath, inventory);
     return {
       inventoryPath,
@@ -187,7 +281,7 @@ describe('catalog release evidence inventory', () => {
       check,
       reviewPath,
       review,
-      trustedReviewContext,
+      canonicalSources,
     };
   };
 
@@ -196,7 +290,7 @@ describe('catalog release evidence inventory', () => {
 
     const trusted = await loadTrustedCatalogReleaseEvidenceInventory(
       fixture.inventoryPath,
-      fixture.trustedReviewContext,
+      fixture.canonicalSources,
       repositoryRoot,
     );
 
@@ -227,7 +321,7 @@ describe('catalog release evidence inventory', () => {
     await expect(
       loadTrustedCatalogReleaseEvidenceInventory(
         fixture.inventoryPath,
-        fixture.trustedReviewContext,
+        fixture.canonicalSources,
         repositoryRoot,
       ),
     ).rejects.toThrow(/EVIDENCE_FILE_NOT_FOUND/u);
@@ -242,7 +336,7 @@ describe('catalog release evidence inventory', () => {
     await expect(
       loadTrustedCatalogReleaseEvidenceInventory(
         fixture.inventoryPath,
-        fixture.trustedReviewContext,
+        fixture.canonicalSources,
         repositoryRoot,
       ),
     ).rejects.toThrow(/STAGING_PUBLICATION_BOUNDARY/u);
@@ -257,7 +351,7 @@ describe('catalog release evidence inventory', () => {
     await expect(
       loadTrustedCatalogReleaseEvidenceInventory(
         fixture.inventoryPath,
-        fixture.trustedReviewContext,
+        fixture.canonicalSources,
         repositoryRoot,
       ),
     ).rejects.toThrow(/EVIDENCE_RESULT_DIGEST_MISMATCH/u);
@@ -279,7 +373,7 @@ describe('catalog release evidence inventory', () => {
     await expect(
       loadTrustedCatalogReleaseEvidenceInventory(
         fixture.inventoryPath,
-        fixture.trustedReviewContext,
+        fixture.canonicalSources,
         repositoryRoot,
       ),
     ).rejects.toThrow(/EVIDENCE_RESULT_SCHEMA_INVALID/u);
@@ -300,7 +394,7 @@ describe('catalog release evidence inventory', () => {
     await expect(
       loadTrustedCatalogReleaseEvidenceInventory(
         refreshed.inventoryPath,
-        refreshed.trustedReviewContext,
+        refreshed.canonicalSources,
         repositoryRoot,
       ),
     ).rejects.toThrow(/REVIEW_INCOMPLETE/u);
@@ -312,62 +406,104 @@ describe('catalog release evidence inventory', () => {
 
     const error = await loadTrustedCatalogReleaseEvidenceInventory(
       inventoryPath,
-      (await makeFixture()).trustedReviewContext,
+      (await makeFixture()).canonicalSources,
       repositoryRoot,
     ).catch((value: unknown) => value);
     expect(error).toBeInstanceOf(CatalogEvidenceInventoryError);
     expect((error as CatalogEvidenceInventoryError).code).toBe('EVIDENCE_INVENTORY_SCHEMA_INVALID');
   });
 
-  it('rejects omitted required checks and review items from the independent context', async () => {
+  it('rejects an arbitrary inventory digest and a catalog bound to another manifest', async () => {
     const fixture = await makeFixture();
-    const contextWithRequiredLint = {
-      ...fixture.trustedReviewContext,
-      applicableChecks: [
-        ...fixture.trustedReviewContext.applicableChecks,
-        { checkId: 'check-lint', command: 'npm run lint' },
-      ],
+    const forgedReview = structuredClone(fixture.review);
+    forgedReview.inventoryDigest = sha('b');
+    forgedReview.evidenceDigest = digestWithoutField(forgedReview, 'evidenceDigest');
+    const forgedReviewDigest = await writeJson(fixture.reviewPath, forgedReview);
+    const forgedInventory = structuredClone(fixture.inventory) as {
+      reviews: { digest: string }[];
     };
+    if (forgedInventory.reviews[0]) forgedInventory.reviews[0].digest = forgedReviewDigest;
+    await writeJson(fixture.inventoryPath, forgedInventory);
+    const forgedSources = structuredClone(fixture.canonicalSources);
+    const candidate = forgedSources.releaseCandidate as Record<string, unknown> & {
+      humanContentReviewEvidenceRefs: { digest: string }[];
+    };
+    if (candidate.humanContentReviewEvidenceRefs[0]) {
+      candidate.humanContentReviewEvidenceRefs[0].digest = forgedReviewDigest;
+    }
+    candidate.approvableDigest = calculateApprovableDigest(candidate as never);
+    candidate.ownerApproval = {
+      ownerId: 'owner-release',
+      approvedDigest: candidate.approvableDigest,
+      approvedAt: '2026-07-17T12:50:00+09:00',
+    };
+    await expect(
+      loadTrustedCatalogReleaseEvidenceInventory(
+        fixture.inventoryPath,
+        forgedSources,
+        repositoryRoot,
+      ),
+    ).rejects.toThrow(/REVIEWER_CHECK_INVENTORY_INVALID/u);
+
+    const otherManifestSources = structuredClone(fixture.canonicalSources);
+    (otherManifestSources.catalog.release as Record<string, unknown>).manifestDigest = sha('0');
+    await expect(
+      loadTrustedCatalogReleaseEvidenceInventory(
+        fixture.inventoryPath,
+        otherManifestSources,
+        repositoryRoot,
+      ),
+    ).rejects.toThrow(/CANONICAL_RELEASE_CONTEXT_MISMATCH/u);
+  });
+
+  it('derives required checks and review items from the canonical manifest', async () => {
+    const fixture = await makeFixture();
+    const contextWithRequiredLint = structuredClone(fixture.canonicalSources);
+    const lintManifest = contextWithRequiredLint.workManifest as Record<string, unknown> & {
+      reviewUnits: { checkIds: string[] }[];
+    };
+    lintManifest.reviewUnits[0]?.checkIds.push('check-lint');
+    lintManifest.scopeDigest = calculateContentWorkManifestScopeDigest(lintManifest as never);
+    lintManifest.digest = digestWithoutField(lintManifest, 'digest');
+    (contextWithRequiredLint.catalog.release as Record<string, unknown>).manifestDigest =
+      lintManifest.digest;
     await expect(
       loadTrustedCatalogReleaseEvidenceInventory(
         fixture.inventoryPath,
         contextWithRequiredLint,
         repositoryRoot,
       ),
-    ).rejects.toThrow(/REVIEWER_CHECK_INVENTORY_INVALID/u);
+    ).rejects.toThrow(/MANIFEST_CHECK_INVENTORY_MISMATCH/u);
 
-    const contextWithChangedClaim = {
-      ...fixture.trustedReviewContext,
-      workManifest: {
-        ...fixture.trustedReviewContext.workManifest,
-        reviewUnits: [
-          ...fixture.trustedReviewContext.workManifest.reviewUnits,
-          {
-            reviewUnitId: 'RU-T024-added-claim',
-            subjectPaths: ['src/content/docs/added-claim.md'],
-            learningOutcomeIds: [],
-            owner: 'person-author',
-          },
-        ],
-      },
-      reviewItems: [
-        ...fixture.trustedReviewContext.reviewItems,
-        {
-          reviewItemId: 'human-review-item-added-claim',
-          reviewUnitId: 'RU-T024-added-claim',
-          kind: 'non_automatable_claim' as const,
-          subjectPaths: ['src/content/docs/added-claim.md'],
-          authorIds: ['person-author'],
-          learningOutcomeIds: [],
-        },
-      ],
+    const contextWithChangedClaim = structuredClone(fixture.canonicalSources);
+    const changedManifest = contextWithChangedClaim.workManifest as Record<string, unknown> & {
+      reviewUnits: Record<string, unknown>[];
     };
+    changedManifest.reviewUnits.push({
+      reviewUnitId: 'RU-T024-added-claim',
+      changeKind: 'documentation',
+      paths: ['src/content/docs/added-claim.md'],
+      itemIds: ['human-review-item-added-claim'],
+      requirementIds: ['FR-026'],
+      learningOutcomeIds: [],
+      outcomeImpact: { kind: 'none', rationale: 'No learner outcome changes.' },
+      dependencyReviewUnitIds: [],
+      checkIds: ['check-catalog'],
+      evidenceRoles: ['non_automatable_claim'],
+      maintenanceBenefit: null,
+      owner: 'person-author',
+      status: 'complete',
+    });
+    changedManifest.scopeDigest = calculateContentWorkManifestScopeDigest(changedManifest as never);
+    changedManifest.digest = digestWithoutField(changedManifest, 'digest');
+    (contextWithChangedClaim.catalog.release as Record<string, unknown>).manifestDigest =
+      changedManifest.digest;
     await expect(
       loadTrustedCatalogReleaseEvidenceInventory(
         fixture.inventoryPath,
         contextWithChangedClaim,
         repositoryRoot,
       ),
-    ).rejects.toThrow(/REVIEW_ITEM_INVENTORY_INVALID/u);
+    ).rejects.toThrow(/REVIEWER_CHECK_INVENTORY_INVALID/u);
   });
 });
