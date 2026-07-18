@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -24,13 +26,30 @@ import {
 } from '../../src/lib/catalog/build-catalog.js';
 import { parseOfficialTaskList } from '../../src/lib/catalog/official-task-list.js';
 
+const ABC500_TASK_IDS: Readonly<Record<string, string>> = {
+  A: 'abc500_a',
+  B: 'abc500_b',
+  C: 'abc500_c',
+  D: 'abc500_d',
+  E: 'abc500_e',
+  F: 'abc500_f',
+  I: 'abc500_i',
+  Ex: 'abc500_h',
+  ex: 'abc500_i_extra',
+};
+
 const taskList = (labels: readonly string[]) => `
   <table><tbody>${labels
     .map(
       (label) =>
-        `<tr><td><a href="/contests/abc500/tasks/abc500_${label.toLowerCase()}">${label}</a></td><td><a href="/contests/abc500/tasks/abc500_${label.toLowerCase()}">Problem ${label}</a></td></tr>`,
+        `<tr><td><a href="/contests/abc500/tasks/${ABC500_TASK_IDS[label] ?? 'abc500_unknown'}">${label}</a></td><td><a href="/contests/abc500/tasks/${ABC500_TASK_IDS[label] ?? 'abc500_unknown'}">Problem ${label}</a></td></tr>`,
     )
     .join('')}</tbody></table>`;
+
+const abc300TaskList = readFileSync(
+  new URL('../fixtures/future-label/abc300-tasks.html', import.meta.url),
+  'utf8',
+);
 
 describe('official advanced slot registry', () => {
   it('selects every official task after D without copying statements', () => {
@@ -42,23 +61,43 @@ describe('official advanced slot registry', () => {
     });
 
     expect(parsed.advancedLabels).toEqual(['E', 'F', 'I', 'Ex']);
+    expect(parsed.officialTaskIds).toEqual([
+      'abc500_a',
+      'abc500_b',
+      'abc500_c',
+      'abc500_d',
+      'abc500_e',
+      'abc500_f',
+      'abc500_i',
+      'abc500_h',
+    ]);
     expect(parsed.sourceFingerprint).toMatch(/^[a-f0-9]{64}$/u);
     expect(JSON.stringify(parsed)).not.toContain('Problem E');
   });
 
-  it('fails closed when a displayed label and task URL disagree or a task URL repeats', () => {
-    expect(() =>
-      parseOfficialTaskList({
-        contestId: 'abc500',
-        officialTaskListUrl: 'https://atcoder.jp/contests/abc500/tasks',
-        html: taskList(['A', 'B', 'C', 'D', 'E']).replace(
-          '/contests/abc500/tasks/abc500_e">E',
-          '/contests/abc500/tasks/abc500_f">E',
-        ),
-        checkedAt: '2026-07-17T12:00:00+09:00',
-      }),
-    ).toThrow(/PARSER_DRIFT/u);
+  it('accepts labels whose official task IDs do not follow the displayed label', () => {
+    const parsed = parseOfficialTaskList({
+      contestId: 'abc300',
+      officialTaskListUrl: 'https://atcoder.jp/contests/abc300/tasks',
+      html: abc300TaskList,
+      checkedAt: '2026-07-17T12:00:00+09:00',
+    });
 
+    expect(parsed.officialTaskOrder).toEqual(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'Ex']);
+    expect(parsed.officialTaskIds).toEqual([
+      'abc300_a',
+      'abc300_b',
+      'abc300_c',
+      'abc300_d',
+      'abc300_e',
+      'abc300_f',
+      'abc300_g',
+      'abc300_h',
+    ]);
+    expect(parsed.advancedLabels).toEqual(['E', 'F', 'G', 'Ex']);
+  });
+
+  it('fails closed when a task ID repeats', () => {
     expect(() =>
       parseOfficialTaskList({
         contestId: 'abc500',
@@ -70,6 +109,18 @@ describe('official advanced slot registry', () => {
         checkedAt: '2026-07-17T12:00:00+09:00',
       }),
     ).toThrow(/PARSER_DRIFT/u);
+
+    expect(() =>
+      parseOfficialTaskList({
+        contestId: 'abc500',
+        officialTaskListUrl: 'https://atcoder.jp/contests/abc500/tasks',
+        html: taskList(['A', 'B', 'C', 'D', 'E', 'E']).replace(
+          '/contests/abc500/tasks/abc500_e">E',
+          '/contests/abc500/tasks/abc500_i">E',
+        ),
+        checkedAt: '2026-07-17T12:00:00+09:00',
+      }),
+    ).toThrow(/DUPLICATE_TASK_LABEL/u);
   });
 
   it('rejects task-list and task links for a different contest', () => {
@@ -109,7 +160,7 @@ describe('official advanced slot registry', () => {
         html: taskList(['A', 'B', 'C', 'D', 'E', 'E']),
         checkedAt: '2026-07-17T12:00:00+09:00',
       }),
-    ).toThrow(/DUPLICATE_TASK_LABEL|DUPLICATE_TASK_LINK/u);
+    ).toThrow(/DUPLICATE_TASK_LABEL|DUPLICATE_TASK_ID/u);
 
     expect(() =>
       parseOfficialTaskList({
@@ -118,7 +169,7 @@ describe('official advanced slot registry', () => {
         html: taskList(['A', 'B', 'C', 'D', 'Ex', 'ex']),
         checkedAt: '2026-07-17T12:00:00+09:00',
       }),
-    ).toThrow(/DUPLICATE_TASK_LABEL|DUPLICATE_TASK_LINK/u);
+    ).toThrow(/DUPLICATE_TASK_LABEL|DUPLICATE_TASK_ID/u);
 
     expect(() =>
       buildAdvancedSlotRegistry({
