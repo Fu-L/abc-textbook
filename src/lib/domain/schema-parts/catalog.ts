@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
 import { canonicalJson, digestWithoutField } from '../canonical-json.js';
-import { isOffsetDateTime } from '../date-time.js';
+import { compareOffsetDateTimes, isOffsetDateTime, parseOffsetDateTime } from '../date-time.js';
 
 export const EntityIdSchema = z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u);
 export const Sha256Schema = z.string().regex(/^[a-f0-9]{64}$/u);
@@ -11,7 +11,9 @@ export const OffsetDateTimeSchema = z.iso
   .refine(isOffsetDateTime, 'Invalid RFC 3339 date-time.');
 export const SafePathSchema = z
   .string()
-  .regex(/^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))(?!.*\/\/)[A-Za-z0-9._/-]+$/u);
+  .regex(
+    /^(?!\/)(?!.*\/$)(?!.*\/\/)(?!^(?:\.{1,2})(?:\/|$))(?!.*\/(?:\.{1,2})(?:\/|$))[A-Za-z0-9._/-]+$/u,
+  );
 export const ProblemLabelSchema = z
   .string()
   .regex(/^[A-Za-z][A-Za-z0-9+_-]*$/u)
@@ -21,6 +23,60 @@ export const ProblemIdSchema = z.string().regex(/^abc[0-9]{3,}-[a-z][a-z0-9+_-]*
 
 const nonEmptyText = z.string().trim().min(1);
 const entityIds = z.array(EntityIdSchema);
+
+export type AtCoderContestResource = 'contest' | 'tasks' | 'task' | 'editorial';
+
+export interface AtCoderContestResourceUrl {
+  readonly contestId: string;
+  readonly resource: AtCoderContestResource;
+  readonly taskId: string | null;
+}
+
+/** Parse only HTTPS AtCoder contest URLs used as authoritative source links. */
+export const parseAtCoderContestResourceUrl = (value: string): AtCoderContestResourceUrl | null => {
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    return null;
+  }
+  if (
+    url.protocol !== 'https:' ||
+    url.hostname !== 'atcoder.jp' ||
+    url.username !== '' ||
+    url.password !== '' ||
+    url.port !== ''
+  ) {
+    return null;
+  }
+  const pathname = url.pathname.endsWith('/') ? url.pathname.slice(0, -1) || '/' : url.pathname;
+  const match =
+    /^\/contests\/(?<contestId>abc[0-9]{3,})(?:\/(?<section>tasks|editorial)(?:\/(?<taskId>[a-z0-9_]+))?)?$/u.exec(
+      pathname,
+    );
+  if (!match?.groups) return null;
+  const section = match.groups.section;
+  const contestId = match.groups.contestId;
+  const taskId = match.groups.taskId ?? null;
+  if (!contestId || (section === 'editorial' && taskId !== null)) return null;
+  if (taskId !== null && !taskId.startsWith(`${contestId}_`)) return null;
+  const resource: AtCoderContestResource =
+    section === 'tasks'
+      ? taskId
+        ? 'task'
+        : 'tasks'
+      : section === 'editorial'
+        ? 'editorial'
+        : 'contest';
+  return {
+    contestId,
+    resource,
+    taskId,
+  };
+};
+
+const compareOffsetDateTimeStrings = (left: string, right: string): number =>
+  compareOffsetDateTimes(parseOffsetDateTime(left), parseOffsetDateTime(right));
 
 export const ContestSchema = strictObject({
   id: ContestIdSchema,
@@ -39,6 +95,24 @@ export const ContestSchema = strictObject({
     .meta({ uniqueItems: true, contains: { const: 'D' } }),
   taskOrderSourceRevisionId: EntityIdSchema,
   checkedAt: OffsetDateTimeSchema,
+}).superRefine((contest, context) => {
+  const officialUrl =
+    parseAtCoderContestResourceUrl(contest.officialUrl) ??
+    ({ contestId: '', resource: 'contest', taskId: null } as const);
+  if (officialUrl.contestId !== contest.id || officialUrl.resource !== 'contest') {
+    context.addIssue({
+      code: 'custom',
+      path: ['officialUrl'],
+      message: 'Contest officialUrl must be the matching HTTPS AtCoder contest page.',
+    });
+  }
+  if (compareOffsetDateTimeStrings(contest.startedAt, contest.endedAt) >= 0) {
+    context.addIssue({
+      code: 'custom',
+      path: ['endedAt'],
+      message: 'Contest must end after it starts.',
+    });
+  }
 });
 
 export const AdvancedSlotRegistrySchema = strictObject({
@@ -123,6 +197,19 @@ export const ContestSlotRecordSchema = strictObject({
         message: 'unknown/on_hold requires a hold reason.',
       });
     }
+    const allowedNonExistingStatuses: Readonly<Record<string, readonly string[]>> = {
+      official_absent: ['uncollected', 'on_hold'],
+      unknown: ['on_hold'],
+      withdrawn: ['on_hold'],
+    };
+    const allowedStatuses = allowedNonExistingStatuses[slot.availability];
+    if (allowedStatuses && !allowedStatuses.includes(slot.catalogStatus)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['catalogStatus'],
+        message: `${slot.availability} cannot use ${slot.catalogStatus} catalog status.`,
+      });
+    }
   })
   .meta({
     allOf: [
@@ -141,11 +228,25 @@ export const ContestSlotRecordSchema = strictObject({
           properties: { availability: { const: 'official_absent' } },
           required: ['availability'],
         },
-        then: { properties: { officialOrder: { type: 'null' } } },
+        then: {
+          properties: {
+            officialOrder: { type: 'null' },
+            catalogStatus: { enum: ['uncollected', 'on_hold'] },
+          },
+        },
       },
       {
         if: { properties: { availability: { const: 'unknown' } }, required: ['availability'] },
-        then: { properties: { holdReason: { type: 'string', minLength: 1 } } },
+        then: {
+          properties: {
+            catalogStatus: { const: 'on_hold' },
+            holdReason: { type: 'string', minLength: 1 },
+          },
+        },
+      },
+      {
+        if: { properties: { availability: { const: 'withdrawn' } }, required: ['availability'] },
+        then: { properties: { catalogStatus: { const: 'on_hold' } } },
       },
       {
         if: { properties: { catalogStatus: { const: 'on_hold' } }, required: ['catalogStatus'] },
@@ -176,6 +277,22 @@ export const ProblemSchema = strictObject({
   adHocElements: z.array(nonEmptyText),
   placementId: EntityIdSchema.nullable(),
   explanationId: EntityIdSchema.nullable(),
+}).superRefine((problem, context) => {
+  const officialUrl =
+    parseAtCoderContestResourceUrl(problem.officialUrl) ??
+    ({ contestId: '', resource: 'contest', taskId: null } as const);
+  const expectedTaskId = `${problem.contestId}_${problem.slotLabel.toLocaleLowerCase('en-US')}`;
+  if (
+    officialUrl.contestId !== problem.contestId ||
+    officialUrl.resource !== 'task' ||
+    officialUrl.taskId !== expectedTaskId
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['officialUrl'],
+      message: 'Problem officialUrl must match its AtCoder contest and task label.',
+    });
+  }
 });
 
 export const TechniqueInventoryItemSchema = strictObject({
@@ -451,6 +568,39 @@ export const SourceRevisionSchema = strictObject({
   checkedAt: OffsetDateTimeSchema,
   fingerprint: Sha256Schema,
   termsCheckedAt: OffsetDateTimeSchema,
+}).superRefine((source, context) => {
+  const officialUrl = parseAtCoderContestResourceUrl(source.url);
+  const requiresContest = source.sourceKind !== 'other_official' || source.contestId !== null;
+  if (!officialUrl || (requiresContest && source.contestId === null)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['url'],
+      message: 'Source URL must be a supported HTTPS AtCoder contest resource.',
+    });
+    return;
+  }
+  if (source.contestId !== null && officialUrl.contestId !== source.contestId) {
+    context.addIssue({
+      code: 'custom',
+      path: ['contestId'],
+      message: 'Source contestId must match the AtCoder URL.',
+    });
+  }
+  const validResource =
+    source.sourceKind === 'official_problem'
+      ? officialUrl.resource === 'task'
+      : source.sourceKind === 'official_editorial'
+        ? officialUrl.resource === 'editorial'
+        : source.sourceKind === 'official_contest'
+          ? officialUrl.resource === 'contest' || officialUrl.resource === 'tasks'
+          : true;
+  if (!validResource) {
+    context.addIssue({
+      code: 'custom',
+      path: ['sourceKind'],
+      message: `${source.sourceKind} must use its matching AtCoder URL path.`,
+    });
+  }
 });
 
 export const SourceRecordSchema = strictObject({
@@ -542,17 +692,70 @@ const TaxonomyChangeSchema = strictObject({
   summary: nonEmptyText,
 });
 
+const ReleaseCheckSchema = strictObject({
+  checkId: EntityIdSchema,
+  command: nonEmptyText,
+  subjectDigest: Sha256Schema,
+  resultPath: SafePathSchema,
+  resultDigest: Sha256Schema,
+  exitCode: z.number().int(),
+  passed: z.boolean(),
+  completedAt: OffsetDateTimeSchema,
+});
+
 const ReleaseValidationSummarySchema = strictObject({
   checkCount: z.number().int().nonnegative(),
   passedCheckCount: z.number().int().nonnegative(),
   blockingFindingCount: z.number().int().nonnegative(),
   evidenceDigests: uniqueArray(Sha256Schema),
+  checks: z.array(ReleaseCheckSchema).min(1),
+}).superRefine((summary, context) => {
+  const checkIds = summary.checks.map(({ checkId }) => checkId);
+  const resultDigests = summary.checks.map(({ resultDigest }) => resultDigest);
+  const sorted = (values: readonly string[]): string[] => [...values].sort();
+  if (new Set(checkIds).size !== checkIds.length) {
+    context.addIssue({
+      code: 'custom',
+      path: ['checks'],
+      message: 'Release check IDs must be unique.',
+    });
+  }
+  if (new Set(resultDigests).size !== resultDigests.length) {
+    context.addIssue({
+      code: 'custom',
+      path: ['checks'],
+      message: 'Release check result digests must be unique.',
+    });
+  }
+  if (
+    summary.checkCount !== summary.checks.length ||
+    summary.passedCheckCount !==
+      summary.checks.filter((check) => check.passed && check.exitCode === 0).length ||
+    sorted(summary.evidenceDigests).join('\n') !== sorted(resultDigests).join('\n')
+  ) {
+    context.addIssue({
+      code: 'custom',
+      message: 'Release check counts and evidence digests must be derived from checks.',
+    });
+  }
 });
 
 const EvidenceReferenceSchema = strictObject({
   evidenceId: EntityIdSchema,
   path: SafePathSchema,
   digest: Sha256Schema,
+  subjectDigest: Sha256Schema,
+  authorIds: uniqueArray(EntityIdSchema).min(1),
+  reviewerIds: uniqueArray(EntityIdSchema).min(1),
+  aggregatePassed: z.literal(true),
+}).superRefine((reference, context) => {
+  if (reference.authorIds.some((authorId) => reference.reviewerIds.includes(authorId))) {
+    context.addIssue({
+      code: 'custom',
+      path: ['reviewerIds'],
+      message: 'Human review authors and reviewers must be disjoint.',
+    });
+  }
 });
 
 export const CatalogReleaseSchema = strictObject({

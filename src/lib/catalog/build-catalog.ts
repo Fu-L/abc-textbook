@@ -1,5 +1,6 @@
-import { CatalogContract } from '../domain/schema-parts/catalog.js';
+import { CatalogContract, parseAtCoderContestResourceUrl } from '../domain/schema-parts/catalog.js';
 import { canonicalDigest } from '../domain/canonical-json.js';
+import { compareOffsetDateTimes, parseOffsetDateTime } from '../domain/date-time.js';
 import { stableProblemId } from '../domain/identity.js';
 import { hasStagingPathSegment } from './publication-boundary.js';
 import { buildAdvancedSlotRegistry } from './advanced-slot-registry.js';
@@ -31,9 +32,34 @@ interface Entity {
   readonly representativeRank?: number;
 }
 
-interface CatalogLike {
+export interface TrustedCatalogReleaseEvidenceInventory {
+  readonly subjectDigest: string;
+  readonly checks: readonly {
+    readonly checkId: string;
+    readonly command: string;
+    readonly subjectDigest: string;
+    readonly resultPath: string;
+    readonly resultDigest: string;
+    readonly exitCode: number;
+    readonly passed: boolean;
+    readonly completedAt: string;
+  }[];
+  readonly reviews: readonly {
+    readonly evidenceId: string;
+    readonly path: string;
+    readonly digest: string;
+    readonly subjectDigest: string;
+    readonly authorIds: readonly string[];
+    readonly reviewerIds: readonly string[];
+    readonly aggregatePassed: boolean;
+  }[];
+}
+
+export interface CatalogLike {
   readonly release: {
     readonly advancedSlotRegistryDigest: string;
+    readonly cutoffAt: string;
+    readonly contentSnapshotDigest: string;
     readonly firstContestId: string;
     readonly lastContestId: string;
     readonly contestCount: number;
@@ -44,8 +70,26 @@ interface CatalogLike {
       readonly passedCheckCount: number;
       readonly blockingFindingCount: number;
       readonly evidenceDigests: readonly string[];
+      readonly checks: readonly {
+        readonly checkId: string;
+        readonly command: string;
+        readonly subjectDigest: string;
+        readonly resultPath: string;
+        readonly resultDigest: string;
+        readonly exitCode: number;
+        readonly passed: boolean;
+        readonly completedAt: string;
+      }[];
     };
-    readonly humanContentReviewEvidenceRefs: readonly unknown[];
+    readonly humanContentReviewEvidenceRefs: readonly {
+      readonly evidenceId: string;
+      readonly path: string;
+      readonly digest: string;
+      readonly subjectDigest: string;
+      readonly authorIds: readonly string[];
+      readonly reviewerIds: readonly string[];
+      readonly aggregatePassed: boolean;
+    }[];
     readonly addedProblemIds: readonly string[];
     readonly changedProblemIds: readonly string[];
     readonly heldProblemIds: readonly string[];
@@ -61,6 +105,8 @@ interface CatalogLike {
   readonly contests: readonly {
     readonly id: string;
     readonly number: number;
+    readonly startedAt: string;
+    readonly endedAt: string;
     readonly officialTaskOrder: readonly string[];
     readonly taskOrderSourceRevisionId: string;
   }[];
@@ -141,7 +187,12 @@ interface CatalogLike {
     readonly claimIds: readonly string[];
     readonly exampleIds: readonly string[];
   }[];
-  readonly sources: readonly { readonly id: string; readonly contestId: string | null }[];
+  readonly sources: readonly {
+    readonly id: string;
+    readonly url: string;
+    readonly sourceKind: string;
+    readonly contestId: string | null;
+  }[];
   readonly claims: readonly {
     readonly id: string;
     readonly sourceRevisionIds: readonly string[];
@@ -254,7 +305,11 @@ export const sortCatalogEntityArray = (
   });
 };
 
-export const buildCatalog = (input: unknown, sourcePaths: readonly string[] = []): CatalogLike => {
+export const buildCatalog = (
+  input: unknown,
+  sourcePaths: readonly string[] = [],
+  trustedEvidence?: TrustedCatalogReleaseEvidenceInventory,
+): CatalogLike => {
   const stagingPath = sourcePaths.find(hasStagingPathSegment);
   if (stagingPath) {
     throw new CatalogBuildError([
@@ -277,16 +332,38 @@ export const buildCatalog = (input: unknown, sourcePaths: readonly string[] = []
       (catalog as Record<string, unknown>)[key] = sortCatalogEntityArray(key, value as Entity[]);
     }
   }
-  const diagnostics = validateCatalogSemantics(catalog);
+  const diagnostics = validateCatalogSemantics(catalog, trustedEvidence);
   if (diagnostics.length > 0) throw new CatalogBuildError(diagnostics);
   return Object.freeze(catalog);
 };
 
-export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagnostic[] => {
+export const validateCatalogSemantics = (
+  catalog: CatalogLike,
+  trustedEvidence?: TrustedCatalogReleaseEvidenceInventory,
+): ValidationDiagnostic[] => {
   const diagnostics: ValidationDiagnostic[] = [];
   const contestIds = new Set(catalog.contests.map(({ id }) => id));
   if (contestIds.size !== catalog.contests.length) {
     diagnostics.push({ code: 'DUPLICATE_CONTEST_ID', message: 'Contest IDs must be unique.' });
+  }
+  const releaseCutoff = parseOffsetDateTime(catalog.release.cutoffAt);
+  for (const contest of catalog.contests) {
+    const startedAt = parseOffsetDateTime(contest.startedAt);
+    const endedAt = parseOffsetDateTime(contest.endedAt);
+    if (compareOffsetDateTimes(startedAt, endedAt) >= 0) {
+      diagnostics.push({
+        code: 'CONTEST_TIME_RANGE_INVALID',
+        entityId: contest.id,
+        message: `${contest.id} must end after it starts.`,
+      });
+    }
+    if (compareOffsetDateTimes(endedAt, releaseCutoff) > 0) {
+      diagnostics.push({
+        code: 'CONTEST_AFTER_RELEASE_CUTOFF',
+        entityId: contest.id,
+        message: `${contest.id} ends after the release cutoff.`,
+      });
+    }
   }
   if (catalog.release.contestCount !== catalog.contests.length) {
     diagnostics.push({
@@ -558,29 +635,99 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
     }
   };
   const scopeTargets = new Set([...tagIds, ...unitIds, ...problemIds]);
+  const releaseChecks = catalog.release.validationSummary.checks;
   const releaseEvidenceDigests = catalog.release.validationSummary.evidenceDigests;
-  const reviewEvidenceIds = catalog.release.humanContentReviewEvidenceRefs.flatMap((ref) =>
-    typeof ref === 'object' &&
-    ref !== null &&
-    'evidenceId' in ref &&
-    typeof ref.evidenceId === 'string'
-      ? [ref.evidenceId]
-      : [],
-  );
-  if (
-    catalog.release.validationSummary.checkCount <= 0 ||
-    catalog.release.validationSummary.passedCheckCount !==
-      catalog.release.validationSummary.checkCount ||
-    catalog.release.validationSummary.blockingFindingCount !== 0 ||
-    releaseEvidenceDigests.length !== catalog.release.validationSummary.checkCount ||
-    new Set(releaseEvidenceDigests).size !== releaseEvidenceDigests.length ||
-    catalog.release.humanContentReviewEvidenceRefs.length === 0 ||
-    new Set(reviewEvidenceIds).size !== reviewEvidenceIds.length ||
-    reviewEvidenceIds.length !== catalog.release.humanContentReviewEvidenceRefs.length
-  ) {
+  const releaseCheckIds = releaseChecks.map(({ checkId }) => checkId);
+  const releaseResultDigests = releaseChecks.map(({ resultDigest }) => resultDigest);
+  const reviewEvidenceRefs = catalog.release.humanContentReviewEvidenceRefs;
+  const reviewEvidenceIds = reviewEvidenceRefs.map(({ evidenceId }) => evidenceId);
+  const sameStringSet = (left: readonly string[], right: readonly string[]): boolean => {
+    const sortedLeft = [...left].sort();
+    const sortedRight = [...right].sort();
+    return (
+      sortedLeft.length === sortedRight.length &&
+      sortedLeft.every((item, index) => item === sortedRight[index])
+    );
+  };
+  const sameCheck = (
+    left: (typeof releaseChecks)[number],
+    right: TrustedCatalogReleaseEvidenceInventory['checks'][number],
+  ): boolean =>
+    left.checkId === right.checkId &&
+    left.command === right.command &&
+    left.subjectDigest === right.subjectDigest &&
+    left.resultPath === right.resultPath &&
+    left.resultDigest === right.resultDigest &&
+    left.exitCode === right.exitCode &&
+    left.passed === right.passed &&
+    left.completedAt === right.completedAt;
+  const sameReview = (
+    left: (typeof reviewEvidenceRefs)[number],
+    right: TrustedCatalogReleaseEvidenceInventory['reviews'][number],
+  ): boolean =>
+    left.evidenceId === right.evidenceId &&
+    left.path === right.path &&
+    left.digest === right.digest &&
+    left.subjectDigest === right.subjectDigest &&
+    left.aggregatePassed === right.aggregatePassed &&
+    sameStringSet(left.authorIds, right.authorIds) &&
+    sameStringSet(left.reviewerIds, right.reviewerIds);
+  const releaseEvidenceComplete =
+    catalog.release.validationSummary.checkCount > 0 &&
+    catalog.release.validationSummary.passedCheckCount ===
+      catalog.release.validationSummary.checkCount &&
+    catalog.release.validationSummary.blockingFindingCount === 0 &&
+    releaseChecks.length === catalog.release.validationSummary.checkCount &&
+    new Set(releaseCheckIds).size === releaseCheckIds.length &&
+    new Set(releaseResultDigests).size === releaseResultDigests.length &&
+    sameStringSet(releaseEvidenceDigests, releaseResultDigests) &&
+    reviewEvidenceRefs.length > 0 &&
+    new Set(reviewEvidenceIds).size === reviewEvidenceIds.length &&
+    reviewEvidenceRefs.every(
+      (review) =>
+        review.aggregatePassed &&
+        review.subjectDigest === catalog.release.contentSnapshotDigest &&
+        review.reviewerIds.length > 0 &&
+        review.authorIds.length > 0 &&
+        !review.authorIds.some((authorId) => review.reviewerIds.includes(authorId)),
+    ) &&
+    releaseChecks.every(
+      (check) =>
+        check.subjectDigest === catalog.release.contentSnapshotDigest &&
+        check.exitCode === 0 &&
+        check.passed,
+    ) &&
+    trustedEvidence?.subjectDigest === catalog.release.contentSnapshotDigest &&
+    trustedEvidence.checks.length === releaseChecks.length &&
+    trustedEvidence.reviews.length === reviewEvidenceRefs.length &&
+    sameStringSet(
+      trustedEvidence.checks.map(({ checkId }) => checkId),
+      releaseCheckIds,
+    ) &&
+    trustedEvidence.checks.every((trustedCheck) => {
+      const releaseCheck = releaseChecks.find(({ checkId }) => checkId === trustedCheck.checkId);
+      return releaseCheck !== undefined && sameCheck(releaseCheck, trustedCheck);
+    }) &&
+    sameStringSet(
+      trustedEvidence.reviews.map(({ evidenceId }) => evidenceId),
+      reviewEvidenceIds,
+    ) &&
+    trustedEvidence.reviews.every((trustedReview) => {
+      const review = reviewEvidenceRefs.find(
+        ({ evidenceId }) => evidenceId === trustedReview.evidenceId,
+      );
+      return review !== undefined && sameReview(review, trustedReview);
+    });
+  if (!trustedEvidence) {
+    diagnostics.push({
+      code: 'RELEASE_EVIDENCE_INVENTORY_REQUIRED',
+      message: 'Catalog publication requires the trusted release check and review inventory.',
+    });
+  } else if (!releaseEvidenceComplete) {
     diagnostics.push({
       code: 'RELEASE_EVIDENCE_INCOMPLETE',
-      message: 'Every release check and human review must pass before catalog publication.',
+      message:
+        'Every release check and human review must match the trusted current subject before publication.',
     });
   }
   for (const inventory of catalog.techniqueInventory) {
@@ -621,6 +768,28 @@ export const validateCatalogSemantics = (catalog: CatalogLike): ValidationDiagno
     requireRefs(problem.id, 'sourceRevisionIds', problem.sourceRevisionIds, sourceIds);
     requireRefs(problem.id, 'primaryTagIds', problem.primaryTagIds, tagIds);
     requireRefs(problem.id, 'secondaryTagIds', problem.secondaryTagIds, tagIds);
+    for (const sourceRevisionId of problem.sourceRevisionIds) {
+      const source = catalog.sources.find(({ id }) => id === sourceRevisionId);
+      if (!source) continue;
+      const sourceUrl = parseAtCoderContestResourceUrl(source.url);
+      const expectedTaskId = `${problem.contestId}_${problem.slotLabel.toLocaleLowerCase('en-US')}`;
+      if (source.contestId !== problem.contestId || sourceUrl?.contestId !== problem.contestId) {
+        diagnostics.push({
+          code: 'PROBLEM_SOURCE_CONTEST_MISMATCH',
+          entityId: problem.id,
+          message: `${sourceRevisionId} is not scoped to ${problem.contestId}.`,
+        });
+      } else if (
+        source.sourceKind === 'official_problem' &&
+        (sourceUrl.resource !== 'task' || sourceUrl.taskId !== expectedTaskId)
+      ) {
+        diagnostics.push({
+          code: 'PROBLEM_SOURCE_TASK_MISMATCH',
+          entityId: problem.id,
+          message: `${sourceRevisionId} does not cite ${expectedTaskId}.`,
+        });
+      }
+    }
     if (problem.placementId)
       requireRefs(problem.id, 'placementId', [problem.placementId], placementIds);
     if (problem.explanationId)

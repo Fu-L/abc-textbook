@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
 import { stableProblemId } from '../identity.js';
+import { compareOffsetDateTimes, parseOffsetDateTime } from '../date-time.js';
 import {
   ContestIdSchema,
   EntityIdSchema,
@@ -55,7 +56,7 @@ const PublicationOperationSchema = strictObject({
    * operations can affect more than one Problem, so deriving the update scope
    * from `entityType === "problem"` is not sufficient.
    */
-  affectedProblemIds: uniqueArray(ProblemIdSchema),
+  affectedProblemIds: uniqueArray(ProblemIdSchema).min(1),
 });
 
 const PublicationAuthoringResultSchema = strictObject({
@@ -121,6 +122,28 @@ export const PublicationUpdateSchema = strictObject({
   fixtureMode: z.boolean(),
 })
   .superRefine((update, context) => {
+    const operationIds = update.operations.map(({ operationId }) => operationId);
+    if (new Set(operationIds).size !== operationIds.length) {
+      context.addIssue({
+        code: 'custom',
+        path: ['operations'],
+        message: 'Operation IDs must be unique.',
+      });
+    }
+    if (update.kind === 'correction' && update.correctionImpactIds.length === 0) {
+      context.addIssue({
+        code: 'custom',
+        path: ['correctionImpactIds'],
+        message: 'Correction updates must enumerate at least one Correction Impact.',
+      });
+    }
+    if (update.kind !== 'correction' && update.correctionImpactIds.length > 0) {
+      context.addIssue({
+        code: 'custom',
+        path: ['correctionImpactIds'],
+        message: 'Only correction updates may enumerate Correction Impacts.',
+      });
+    }
     const problemOperationIds = update.operations
       .filter((operation) => operation.entityType === 'problem')
       .map(({ entityId }) => entityId);
@@ -339,7 +362,10 @@ export const ReleaseCandidateSchema = strictObject({
       candidate.ownerApproval.approvedDigest === candidate.approvableDigest &&
       candidate.publicationEffectiveAt !== null &&
       candidate.publicationWindowEndsAt !== null &&
-      Date.parse(candidate.publicationEffectiveAt) <= Date.parse(candidate.publicationWindowEndsAt);
+      compareOffsetDateTimes(
+        parseOffsetDateTime(candidate.publicationEffectiveAt),
+        parseOffsetDateTime(candidate.publicationWindowEndsAt),
+      ) <= 0;
     if (!complete) {
       context.addIssue({
         code: 'custom',

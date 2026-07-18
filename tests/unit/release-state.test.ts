@@ -69,6 +69,26 @@ const makePublicationUpdate = (): Record<string, unknown> => ({
   fixtureMode: false,
 });
 
+const trustedPublicationUpdateContext = (update: Record<string, unknown>) => {
+  const operations = update.operations as {
+    operationId: string;
+    affectedProblemIds: string[];
+  }[];
+  const targetProblemIds = update.targetProblemIds as string[];
+  const correctionImpactIds = update.correctionImpactIds as string[];
+  return {
+    operationOwnership: operations.map(({ operationId, affectedProblemIds }) => ({
+      operationId,
+      affectedProblemIds: [...affectedProblemIds],
+    })),
+    correctionImpacts: correctionImpactIds.map((correctionImpactId) => ({
+      correctionImpactId,
+      affectedProblemIds: [...targetProblemIds],
+      operationIds: operations.map(({ operationId }) => operationId),
+    })),
+  };
+};
+
 const makeReleaseCandidate = (): Record<string, unknown> => {
   const contentFiles = [{ path: 'src/content/catalog.json', sha256: sha('4'), byteLength: 1 }];
   const contentSubjectDigest = calculateContentSubjectDigest(contentFiles);
@@ -266,7 +286,8 @@ describe('release state gate', () => {
 
   it('rejects failed updates and incomplete publishable candidates', () => {
     expect(() => {
-      validatePublicationUpdate(makePublicationUpdate());
+      const update = makePublicationUpdate();
+      validatePublicationUpdate(update, trustedPublicationUpdateContext(update));
     }).not.toThrow();
     const failedUpdate = makePublicationUpdate();
     const [authoringResult] = failedUpdate.authoringResults as Record<string, unknown>[];
@@ -277,7 +298,7 @@ describe('release state gate', () => {
     authoringResult.reason = 'The source could not be verified.';
     authoringResult.retryCondition = 'Retry after the source is restored.';
     expect(() => {
-      validatePublicationUpdate(failedUpdate);
+      validatePublicationUpdate(failedUpdate, trustedPublicationUpdateContext(failedUpdate));
     }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
 
     expect(() => {
@@ -319,6 +340,7 @@ describe('release state gate', () => {
     const correction = makePublicationUpdate();
     correction.kind = 'correction';
     correction.advancedSlotLabels = [];
+    correction.correctionImpactIds = ['correction-impact-one'];
     correction.operations = [
       {
         operationId: 'operation-replace-explanation',
@@ -332,13 +354,16 @@ describe('release state gate', () => {
       },
     ];
     expect(() => {
-      validatePublicationUpdate(correction);
+      validatePublicationUpdate(correction, trustedPublicationUpdateContext(correction));
     }).not.toThrow();
 
     const wrongTarget = makePublicationUpdate();
     wrongTarget.targetProblemIds = ['abc212-other'];
     expect(() => {
-      validatePublicationUpdate(wrongTarget);
+      validatePublicationUpdate(
+        wrongTarget,
+        trustedPublicationUpdateContext(makePublicationUpdate()),
+      );
     }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
 
     const mismatchedOperationOwner = makePublicationUpdate();
@@ -369,7 +394,37 @@ describe('release state gate', () => {
       ],
     };
     expect(() => {
-      validatePublicationUpdate(mismatchedOperationOwner);
+      validatePublicationUpdate(
+        mismatchedOperationOwner,
+        trustedPublicationUpdateContext(mismatchedOperationOwner),
+      );
+    }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
+  });
+
+  it('fails closed when update ownership is not independently trusted', () => {
+    const update = makePublicationUpdate();
+    expect(() => {
+      validatePublicationUpdate(update);
+    }).toThrow(/PUBLICATION_UPDATE_OWNERSHIP_REQUIRED/u);
+
+    const correction = makePublicationUpdate();
+    correction.kind = 'correction';
+    correction.advancedSlotLabels = [];
+    correction.correctionImpactIds = [];
+    correction.operations = [
+      {
+        operationId: 'operation-replace-explanation',
+        entityType: 'explanation',
+        entityId: 'explanation-abc212-x45',
+        action: 'replace',
+        path: 'src/content/docs/abc212-e.md',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+        affectedProblemIds: ['abc212-x45'],
+      },
+    ];
+    expect(() => {
+      validatePublicationUpdate(correction, trustedPublicationUpdateContext(correction));
     }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
   });
 });

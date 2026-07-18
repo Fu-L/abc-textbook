@@ -33,6 +33,10 @@ describe('domain invariants', () => {
     expect(tokyo.original).toBe('2026-07-17T12:00:00+09:00');
     expect(tokyo.offset).toBe('+09:00');
     expect(compareOffsetDateTimes(tokyo, utc)).toBe(0);
+    const earlierFraction = parseOffsetDateTime('2026-07-17T03:00:00.0001Z');
+    const laterFraction = parseOffsetDateTime('2026-07-17T03:00:00.0009Z');
+    expect(compareOffsetDateTimes(earlierFraction, laterFraction)).toBe(-1);
+    expect(compareOffsetDateTimes(laterFraction, earlierFraction)).toBe(1);
     expect(() => parseOffsetDateTime('2026-07-17T12:00:00')).toThrow();
     expect(() => parseOffsetDateTime('2026-02-30T12:00:00+09:00')).toThrow();
     expect(() => parseOffsetDateTime('2026-04-31T00:00:00Z')).toThrow();

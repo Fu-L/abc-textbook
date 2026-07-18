@@ -1,4 +1,5 @@
 import { canonicalDigest } from '../domain/canonical-json.js';
+import { compareOffsetDateTimes, parseOffsetDateTime } from '../domain/date-time.js';
 import {
   PublicationUpdateSchema,
   PublishReceiptSchema,
@@ -36,6 +37,20 @@ export class ReleaseTransitionError extends Error {
   }
 }
 
+export interface TrustedPublicationUpdateContext {
+  /** Ownership/impact inventory calculated from the trusted catalog diff. */
+  readonly operationOwnership: readonly {
+    readonly operationId: string;
+    readonly affectedProblemIds: readonly string[];
+  }[];
+  /** Correction impacts calculated from the trusted catalog diff. */
+  readonly correctionImpacts?: readonly {
+    readonly correctionImpactId: string;
+    readonly affectedProblemIds: readonly string[];
+    readonly operationIds: readonly string[];
+  }[];
+}
+
 interface PublishContext {
   readonly candidate?: unknown;
   readonly receipt?: unknown;
@@ -71,7 +86,7 @@ export const transitionReleaseCandidate = (
         error instanceof Error ? error.message : String(error),
       );
     }
-    const swapAt = Date.parse(receipt.actualAtomicSwapAt);
+    const swapAt = parseOffsetDateTime(receipt.actualAtomicSwapAt);
     if (
       candidate.state !== 'READY_TO_PUBLISH' ||
       candidate.candidatePayloadDigest === null ||
@@ -87,9 +102,9 @@ export const transitionReleaseCandidate = (
       receipt.publicationWindowEndsAt !== candidate.publicationWindowEndsAt ||
       receipt.newReleaseVersion !== candidate.targetReleaseVersion ||
       receipt.previousReleaseVersion !== candidate.baseReleaseVersion ||
-      swapAt < Date.parse(candidate.publicationEffectiveAt) ||
-      swapAt > Date.parse(candidate.publicationWindowEndsAt) ||
-      Date.parse(receipt.recordedAt) < swapAt
+      compareOffsetDateTimes(swapAt, parseOffsetDateTime(candidate.publicationEffectiveAt)) < 0 ||
+      compareOffsetDateTimes(swapAt, parseOffsetDateTime(candidate.publicationWindowEndsAt)) > 0 ||
+      compareOffsetDateTimes(parseOffsetDateTime(receipt.recordedAt), swapAt) < 0
     ) {
       throw new ReleaseTransitionError(
         'PUBLISH_RECEIPT_MISMATCH',
@@ -100,10 +115,107 @@ export const transitionReleaseCandidate = (
   return next;
 };
 
-export const validatePublicationUpdate = (value: unknown): void => {
+const sameStringSet = (left: readonly string[], right: readonly string[]): boolean => {
+  const sortedLeft = [...left].sort();
+  const sortedRight = [...right].sort();
+  return (
+    sortedLeft.length === sortedRight.length &&
+    sortedLeft.every((item, index) => item === sortedRight[index])
+  );
+};
+
+export const validatePublicationUpdate = (
+  value: unknown,
+  trusted?: TrustedPublicationUpdateContext,
+): void => {
   const result = PublicationUpdateSchema.safeParse(value);
   if (!result.success) {
     throw new ReleaseTransitionError('PUBLICATION_UPDATE_INVALID', result.error.message);
+  }
+  if (!trusted) {
+    throw new ReleaseTransitionError(
+      'PUBLICATION_UPDATE_OWNERSHIP_REQUIRED',
+      'Publication updates require an independently computed ownership inventory.',
+    );
+  }
+  const update = result.data;
+  const trustedOperations = new Map(
+    trusted.operationOwnership.map((operation) => [operation.operationId, operation]),
+  );
+  const operationIds = update.operations.map(({ operationId }) => operationId);
+  if (
+    trustedOperations.size !== trusted.operationOwnership.length ||
+    trustedOperations.size !== operationIds.length ||
+    !sameStringSet([...trustedOperations.keys()], operationIds)
+  ) {
+    throw new ReleaseTransitionError(
+      'PUBLICATION_UPDATE_OWNERSHIP_INVALID',
+      'Trusted operation inventory does not exactly cover this update.',
+    );
+  }
+  for (const operation of update.operations) {
+    const expected = trustedOperations.get(operation.operationId);
+    if (!expected || !sameStringSet(operation.affectedProblemIds, expected.affectedProblemIds)) {
+      throw new ReleaseTransitionError(
+        'PUBLICATION_UPDATE_OWNERSHIP_INVALID',
+        `Operation ${operation.operationId} does not match trusted Problem ownership.`,
+      );
+    }
+  }
+  const trustedAffectedProblemIds = trusted.operationOwnership.flatMap(
+    (operation) => operation.affectedProblemIds,
+  );
+  if (!sameStringSet([...new Set(trustedAffectedProblemIds)], update.targetProblemIds)) {
+    throw new ReleaseTransitionError(
+      'PUBLICATION_UPDATE_OWNERSHIP_INVALID',
+      'Trusted operation ownership does not exactly match targetProblemIds.',
+    );
+  }
+  if (update.kind === 'correction') {
+    const trustedImpacts = trusted.correctionImpacts ?? [];
+    const impactMap = new Map(trustedImpacts.map((impact) => [impact.correctionImpactId, impact]));
+    const updateImpactIds = update.correctionImpactIds;
+    if (
+      impactMap.size !== trustedImpacts.length ||
+      impactMap.size !== updateImpactIds.length ||
+      !sameStringSet([...impactMap.keys()], updateImpactIds)
+    ) {
+      throw new ReleaseTransitionError(
+        'PUBLICATION_UPDATE_CORRECTION_IMPACT_INVALID',
+        'Trusted Correction Impact inventory does not exactly cover the update.',
+      );
+    }
+    const operationIdSet = new Set(operationIds);
+    const impactAffectedProblemIds: string[] = [];
+    const coveredOperationIds: string[] = [];
+    for (const impactId of updateImpactIds) {
+      const impact = impactMap.get(impactId);
+      if (
+        !impact ||
+        impact.affectedProblemIds.length === 0 ||
+        impact.affectedProblemIds.some(
+          (problemId) => !update.targetProblemIds.includes(problemId),
+        ) ||
+        impact.operationIds.length === 0 ||
+        impact.operationIds.some((operationId) => !operationIdSet.has(operationId))
+      ) {
+        throw new ReleaseTransitionError(
+          'PUBLICATION_UPDATE_CORRECTION_IMPACT_INVALID',
+          `Correction Impact ${impactId} is incomplete or outside the update scope.`,
+        );
+      }
+      impactAffectedProblemIds.push(...impact.affectedProblemIds);
+      coveredOperationIds.push(...impact.operationIds);
+    }
+    if (
+      !sameStringSet([...new Set(impactAffectedProblemIds)], update.targetProblemIds) ||
+      !sameStringSet([...new Set(coveredOperationIds)], operationIds)
+    ) {
+      throw new ReleaseTransitionError(
+        'PUBLICATION_UPDATE_CORRECTION_IMPACT_INVALID',
+        'Correction Impacts must cover every affected Problem and operation exactly.',
+      );
+    }
   }
 };
 

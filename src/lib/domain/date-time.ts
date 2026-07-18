@@ -5,6 +5,8 @@ export interface OffsetDateTime {
   readonly original: string;
   readonly offset: string;
   readonly epochMilliseconds: number;
+  /** Exact UTC instant used for ordering; the schema permits up to 9 digits. */
+  readonly epochNanoseconds: bigint;
 }
 
 export class OffsetDateTimeError extends Error {
@@ -41,8 +43,13 @@ export const parseOffsetDateTime = (value: string): OffsetDateTime => {
   ) {
     throw new OffsetDateTimeError(value);
   }
-  const epochMilliseconds = Date.parse(value);
-  if (!Number.isFinite(epochMilliseconds)) throw new OffsetDateTimeError(value);
+  const fraction = match.groups.fraction ?? '';
+  const fractionNanoseconds = BigInt(fraction.padEnd(9, '0') || '0');
+  const wholeSecondValue = fraction ? value.replace(`.${fraction}`, '') : value;
+  const wholeSecondEpochMilliseconds = Date.parse(wholeSecondValue);
+  if (!Number.isFinite(wholeSecondEpochMilliseconds)) throw new OffsetDateTimeError(value);
+  const epochMilliseconds = wholeSecondEpochMilliseconds + Number(fractionNanoseconds / 1_000_000n);
+  const epochNanoseconds = BigInt(wholeSecondEpochMilliseconds) * 1_000_000n + fractionNanoseconds;
 
   const roundTrip = new Date(epochMilliseconds);
   if (Number.isNaN(roundTrip.getTime())) throw new OffsetDateTimeError(value);
@@ -51,11 +58,15 @@ export const parseOffsetDateTime = (value: string): OffsetDateTime => {
     original: value,
     offset: match.groups.offset ?? 'Z',
     epochMilliseconds,
+    epochNanoseconds,
   });
 };
 
-export const compareOffsetDateTimes = (left: OffsetDateTime, right: OffsetDateTime): number =>
-  Math.sign(left.epochMilliseconds - right.epochMilliseconds);
+export const compareOffsetDateTimes = (left: OffsetDateTime, right: OffsetDateTime): number => {
+  if (left.epochNanoseconds < right.epochNanoseconds) return -1;
+  if (left.epochNanoseconds > right.epochNanoseconds) return 1;
+  return 0;
+};
 
 export const isOffsetDateTime = (value: string): boolean => {
   try {

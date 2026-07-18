@@ -3,8 +3,11 @@ import { describe, expect, it } from 'vitest';
 import {
   AdvancedSlotRegistrySchema,
   ContestSlotRecordSchema,
+  ProblemSchema,
   ExerciseSchema,
   ProblemPlacementSchema,
+  SafePathSchema,
+  SourceRevisionSchema,
   TechniqueTagSchema,
 } from '../../src/lib/domain/schema-parts/catalog.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
@@ -36,6 +39,32 @@ describe('official advanced slot registry', () => {
     expect(parsed.advancedLabels).toEqual(['E', 'F', 'I', 'Ex']);
     expect(parsed.sourceFingerprint).toMatch(/^[a-f0-9]{64}$/u);
     expect(JSON.stringify(parsed)).not.toContain('Problem E');
+  });
+
+  it('fails closed when a displayed label and task URL disagree or a task URL repeats', () => {
+    expect(() =>
+      parseOfficialTaskList({
+        contestId: 'abc500',
+        officialTaskListUrl: 'https://atcoder.jp/contests/abc500/tasks',
+        html: taskList(['A', 'B', 'C', 'D', 'E']).replace(
+          '/contests/abc500/tasks/abc500_e">E',
+          '/contests/abc500/tasks/abc500_f">E',
+        ),
+        checkedAt: '2026-07-17T12:00:00+09:00',
+      }),
+    ).toThrow(/PARSER_DRIFT/u);
+
+    expect(() =>
+      parseOfficialTaskList({
+        contestId: 'abc500',
+        officialTaskListUrl: 'https://atcoder.jp/contests/abc500/tasks',
+        html: taskList(['A', 'B', 'C', 'D', 'E']).replace(
+          '/contests/abc500/tasks/abc500_e">E',
+          '/contests/abc500/tasks/abc500_d">E',
+        ),
+        checkedAt: '2026-07-17T12:00:00+09:00',
+      }),
+    ).toThrow(/PARSER_DRIFT/u);
   });
 
   it('rejects task-list and task links for a different contest', () => {
@@ -75,7 +104,7 @@ describe('official advanced slot registry', () => {
         html: taskList(['A', 'B', 'C', 'D', 'E', 'E']),
         checkedAt: '2026-07-17T12:00:00+09:00',
       }),
-    ).toThrow(/DUPLICATE_TASK_LABEL/u);
+    ).toThrow(/DUPLICATE_TASK_LABEL|DUPLICATE_TASK_LINK/u);
 
     expect(() =>
       parseOfficialTaskList({
@@ -84,7 +113,7 @@ describe('official advanced slot registry', () => {
         html: taskList(['A', 'B', 'C', 'D', 'Ex', 'ex']),
         checkedAt: '2026-07-17T12:00:00+09:00',
       }),
-    ).toThrow(/DUPLICATE_TASK_LABEL/u);
+    ).toThrow(/DUPLICATE_TASK_LABEL|DUPLICATE_TASK_LINK/u);
 
     expect(() =>
       buildAdvancedSlotRegistry({
@@ -159,12 +188,37 @@ describe('official advanced slot registry', () => {
       ],
     });
     const digest = 'a'.repeat(64);
-    const catalog = buildCatalog({
+    const releaseCheck = {
+      checkId: 'check-catalog-foundation',
+      command: 'npm run test:contract',
+      subjectDigest: digest,
+      resultPath: 'docs/verification/catalog-check.json',
+      resultDigest: digest,
+      exitCode: 0 as const,
+      passed: true as const,
+      completedAt: '2026-07-17T14:00:00+09:00',
+    };
+    const releaseReview = {
+      evidenceId: 'human-review-foundation',
+      path: 'docs/judgments/merge/foundation/human-review.json',
+      digest,
+      subjectDigest: digest,
+      authorIds: ['person-author'],
+      reviewerIds: ['person-reviewer'],
+      aggregatePassed: true as const,
+    };
+    const trustedEvidence = {
+      subjectDigest: digest,
+      checks: [releaseCheck],
+      reviews: [releaseReview],
+    };
+    const build = (input: unknown) => buildCatalog(input, [], trustedEvidence);
+    const catalog = build({
       schemaVersion: '2.0.0',
       release: {
         version: '2026.07.17',
         releaseKind: 'initial',
-        cutoffAt: '2026-07-17T12:00:00+09:00',
+        cutoffAt: '2026-07-17T14:00:00+09:00',
         validatedAt: '2026-07-17T12:01:00+09:00',
         publicationEffectiveAt: '2026-07-17T12:02:00+09:00',
         manifestDigest: digest,
@@ -186,14 +240,9 @@ describe('official advanced slot registry', () => {
           passedCheckCount: 1,
           blockingFindingCount: 0,
           evidenceDigests: [digest],
+          checks: [releaseCheck],
         },
-        humanContentReviewEvidenceRefs: [
-          {
-            evidenceId: 'human-review-foundation',
-            path: 'docs/judgments/merge/foundation/human-review.json',
-            digest,
-          },
-        ],
+        humanContentReviewEvidenceRefs: [releaseReview],
         changelogPath: 'docs/changelog/2026.07.17.md',
       },
       advancedSlotRegistry: registry,
@@ -285,7 +334,7 @@ describe('official advanced slot registry', () => {
 
     const countMismatch = structuredClone(catalog) as Record<string, unknown>;
     (countMismatch.release as { problemCount: number }).problemCount = 2;
-    expect(() => buildCatalog(countMismatch)).toThrow(/PROBLEM_COUNT_MISMATCH/u);
+    expect(() => build(countMismatch)).toThrow(/PROBLEM_COUNT_MISMATCH/u);
 
     const falseAbsence = structuredClone(catalog) as Record<string, unknown>;
     const [slot] = falseAbsence.contestSlots as {
@@ -298,7 +347,7 @@ describe('official advanced slot registry', () => {
       slot.officialOrder = null;
       slot.problemId = null;
     }
-    expect(() => buildCatalog(falseAbsence)).toThrow(
+    expect(() => build(falseAbsence)).toThrow(
       /CONTEST_SLOT_OFFICIAL_MISMATCH|CATALOG_SCHEMA_INVALID/u,
     );
 
@@ -306,15 +355,25 @@ describe('official advanced slot registry', () => {
     const [problem] = unknownTag.problems as { primaryTagIds: string[] }[];
     if (!problem) throw new Error('Fixture problem is missing.');
     problem.primaryTagIds = ['tag-missing'];
-    expect(() => buildCatalog(unknownTag)).toThrow(/CATALOG_REFERENCE_MISSING/u);
+    expect(() => build(unknownTag)).toThrow(/CATALOG_REFERENCE_MISSING/u);
 
     const failedRelease = structuredClone(catalog) as Record<string, unknown>;
     const release = failedRelease.release as {
-      validationSummary: { passedCheckCount: number; blockingFindingCount: number };
+      validationSummary: {
+        passedCheckCount: number;
+        blockingFindingCount: number;
+        checks: { passed: boolean; exitCode: number }[];
+      };
     };
     release.validationSummary.passedCheckCount = 0;
     release.validationSummary.blockingFindingCount = 1;
-    expect(() => buildCatalog(failedRelease)).toThrow(/RELEASE_EVIDENCE_INCOMPLETE/u);
+    const [failedCheck] = release.validationSummary.checks;
+    if (!failedCheck) throw new Error('Fixture release check is missing.');
+    failedCheck.passed = false;
+    failedCheck.exitCode = 1;
+    expect(() => build(failedRelease)).toThrow(
+      /CATALOG_SCHEMA_INVALID|RELEASE_EVIDENCE_INCOMPLETE/u,
+    );
 
     const duplicatedReleaseEvidence = structuredClone(catalog) as Record<string, unknown>;
     (duplicatedReleaseEvidence.release as Record<string, unknown>).validationSummary = {
@@ -323,7 +382,7 @@ describe('official advanced slot registry', () => {
       blockingFindingCount: 0,
       evidenceDigests: [digest, digest],
     };
-    expect(() => buildCatalog(duplicatedReleaseEvidence)).toThrow(/CATALOG_SCHEMA_INVALID/u);
+    expect(() => build(duplicatedReleaseEvidence)).toThrow(/CATALOG_SCHEMA_INVALID/u);
 
     const unverifiedClaim = structuredClone(catalog) as Record<string, unknown>;
     (unverifiedClaim.claims as unknown[]) = [
@@ -335,7 +394,7 @@ describe('official advanced slot registry', () => {
         verificationStatus: 'unverified',
       },
     ];
-    expect(() => buildCatalog(unverifiedClaim)).toThrow(/CLAIM_NOT_VERIFIED/u);
+    expect(() => build(unverifiedClaim)).toThrow(/CLAIM_NOT_VERIFIED/u);
 
     const unknownOutcomeScope = structuredClone(catalog) as Record<string, unknown>;
     unknownOutcomeScope.learningOutcomes = [
@@ -355,7 +414,7 @@ describe('official advanced slot registry', () => {
         successCondition: 'The learner explains it.',
       },
     ];
-    expect(() => buildCatalog(unknownOutcomeScope)).toThrow(/CATALOG_REFERENCE_MISSING/u);
+    expect(() => build(unknownOutcomeScope)).toThrow(/CATALOG_REFERENCE_MISSING/u);
 
     const independentGraphs = structuredClone(catalog) as Record<string, unknown>;
     independentGraphs.learningOutcomes = [
@@ -403,7 +462,7 @@ describe('official advanced slot registry', () => {
         replacementTagIds: [],
       },
     ];
-    expect(() => buildCatalog(independentGraphs)).not.toThrow();
+    expect(() => build(independentGraphs)).not.toThrow();
   });
 
   it('enforces placement mode fields and tag lifecycle invariants', () => {
@@ -584,5 +643,64 @@ describe('official advanced slot registry', () => {
     expect(ContestSlotRecordSchema.safeParse({ ...base, catalogStatus: 'on_hold' }).success).toBe(
       false,
     );
+  });
+
+  it('binds paths, official URLs, and source revisions to their trusted shapes', () => {
+    expect(SafePathSchema.safeParse('src/content/catalog.json').success).toBe(true);
+    for (const path of ['.', '..', './catalog.json', 'src//catalog.json', 'src/content/']) {
+      expect(SafePathSchema.safeParse(path).success, path).toBe(false);
+    }
+
+    const digest = 'a'.repeat(64);
+    const problem = {
+      id: 'abc500-e',
+      contestId: 'abc500',
+      slotLabel: 'E',
+      title: 'Problem E',
+      officialUrl: 'https://atcoder.jp/contests/abc500/tasks/abc500_e',
+      constraintsSummary: 'Fixture constraints.',
+      difficultyEvidence: 'Fixture evidence.',
+      sourceRevisionIds: ['source-abc500-e'],
+      checkedAt: '2026-07-17T14:00:00+09:00',
+      publicationStatus: 'uncollected' as const,
+      primaryTagIds: [],
+      secondaryTagIds: [],
+      adHocElements: [],
+      placementId: null,
+      explanationId: null,
+    };
+    expect(ProblemSchema.safeParse(problem).success).toBe(true);
+    expect(
+      ProblemSchema.safeParse({
+        ...problem,
+        officialUrl: 'https://example.com/abc500/tasks/abc500_e',
+      }).success,
+    ).toBe(false);
+    expect(
+      ProblemSchema.safeParse({
+        ...problem,
+        officialUrl: 'https://atcoder.jp/contests/abc500/tasks/abc500_f',
+      }).success,
+    ).toBe(false);
+
+    const source = {
+      id: 'source-abc500-e',
+      url: 'https://atcoder.jp/contests/abc500/tasks/abc500_e',
+      sourceKind: 'official_problem' as const,
+      contestId: 'abc500',
+      checkedAt: '2026-07-17T14:00:00+09:00',
+      fingerprint: digest,
+      termsCheckedAt: '2026-07-17T14:00:00+09:00',
+    };
+    expect(SourceRevisionSchema.safeParse(source).success).toBe(true);
+    expect(
+      SourceRevisionSchema.safeParse({
+        ...source,
+        url: 'https://atcoder.jp/contests/abc501/tasks/abc500_e',
+      }).success,
+    ).toBe(false);
+    expect(
+      SourceRevisionSchema.safeParse({ ...source, url: 'https://example.com/source' }).success,
+    ).toBe(false);
   });
 });

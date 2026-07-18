@@ -56,17 +56,24 @@ export const parseOfficialTaskList = (input: OfficialTaskListInput): ParsedOffic
     throw new OfficialTaskListError('PARSER_DRIFT', 'The official task table has no body rows.');
   }
   const labels: string[] = [];
+  const taskPaths = new Set<string>();
   rows.each((_index, row) => {
-    const labelAnchor = $(row).find('td').first().find('a[href]').first();
-    if (labelAnchor.length !== 1) {
+    const labelAnchors = $(row).find('td').first().find('a[href]');
+    if (labelAnchors.length !== 1) {
       throw new OfficialTaskListError('PARSER_DRIFT', 'A task row has no label link.');
     }
+    const labelAnchor = labelAnchors.first();
 
     const href = labelAnchor.attr('href');
     if (!href) {
       throw new OfficialTaskListError('PARSER_DRIFT', 'A task label link has no href.');
     }
-    const taskUrl = new URL(href, url);
+    let taskUrl: URL;
+    try {
+      taskUrl = new URL(href, url);
+    } catch {
+      throw new OfficialTaskListError('PARSER_DRIFT', `Unrecognized task link: ${href}`);
+    }
     const match = /^\/contests\/(?<contestId>abc[0-9]{3,})\/tasks\/(?<taskId>[a-z0-9_]+)$/u.exec(
       taskUrl.pathname,
     );
@@ -82,9 +89,26 @@ export const parseOfficialTaskList = (input: OfficialTaskListInput): ParsedOffic
       throw new OfficialTaskListError('TASK_LINK_CONTEST_MISMATCH', href);
     }
 
+    const taskPath = taskUrl.pathname;
+    if (taskPaths.has(taskPath)) {
+      throw new OfficialTaskListError('PARSER_DRIFT', `DUPLICATE_TASK_LINK: ${taskPath}`);
+    }
+    taskPaths.add(taskPath);
+
+    const taskId = match.groups.taskId;
+    if (!taskId) {
+      throw new OfficialTaskListError('PARSER_DRIFT', `Task link has no task ID: ${href}`);
+    }
     const label = labelAnchor.text().normalize('NFC').trim();
     if (!/^[A-Za-z][A-Za-z0-9+_-]*$/u.test(label)) {
       throw new OfficialTaskListError('INVALID_TASK_LABEL', label);
+    }
+    const taskLabel = taskId.slice(input.contestId.length + 1);
+    if (taskLabel !== label.toLocaleLowerCase('en-US')) {
+      throw new OfficialTaskListError(
+        'PARSER_DRIFT',
+        `TASK_LABEL_LINK_MISMATCH: ${label} does not match ${taskId}`,
+      );
     }
     if (
       labels.some(
