@@ -248,11 +248,11 @@ DRAFTED
   -> PUBLISHED
 ```
 
-どの状態からも未完成、stale、expiry、検証失敗でON_HOLDへ移れる。candidateは一つ以上のELIGIBLE update、cutoff、AdvancedSlotRegistry、固定content tree、content digest、check refs、HumanContentReviewEvidence、owner approval、publication windowを持つ。reviewやapprovalは個別Updateではなくcandidateが所有する。
+どの状態からも未完成、stale、expiry、検証失敗でON_HOLDへ移れる。candidateは一つ以上のELIGIBLE update、cutoff、AdvancedSlotRegistry、固定content tree、実ファイルinventory digest、論理catalog snapshot digest、work manifest digest、check refs、HumanContentReviewEvidence、owner approval、publication windowを持つ。owner approvalのapprovable digestは実ファイル、論理snapshot、manifestをすべて束縛する。reviewやapprovalは個別Updateではなくcandidateが所有する。
 
 ### Release
 
-release version、cutoff、AdvancedSlotRegistry、content snapshot digest、取り込んだupdate IDs、追加・変更・取り下げ問題、taxonomy変更、検証要約、review evidence refs、履歴を持つimmutable record。未公開ON_HOLD試行は含めず、staging statusから参照する。
+release version、cutoff、AdvancedSlotRegistry、実ファイルinventory digest、論理catalog snapshot digest、取り込んだupdate IDs、追加・変更・取り下げ問題、taxonomy変更、検証要約、review evidence refs、履歴を持つimmutable record。両digestは対象が異なるため同値を要求しない。未公開ON_HOLD試行は含めず、staging statusから参照する。
 
 ### PublishReceipt
 

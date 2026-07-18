@@ -65,6 +65,7 @@ export interface CatalogLike {
     readonly validatedAt: string;
     readonly publicationEffectiveAt: string;
     readonly manifestDigest: string;
+    readonly contentFileInventoryDigest: string;
     readonly contentSnapshotDigest: string;
     readonly updateIds: readonly string[];
     readonly firstContestId: string;
@@ -292,6 +293,7 @@ const immutableReleaseScopeKeys = [
   'validatedAt',
   'publicationEffectiveAt',
   'manifestDigest',
+  'contentFileInventoryDigest',
   'updateIds',
   'advancedSlotRegistryDigest',
   'firstContestId',
@@ -759,18 +761,18 @@ export const validateCatalogSemantics = (
     reviewEvidenceRefs.every(
       (review) =>
         review.aggregatePassed &&
-        review.subjectDigest === catalog.release.contentSnapshotDigest &&
+        review.subjectDigest === catalog.release.contentFileInventoryDigest &&
         review.reviewerIds.length > 0 &&
         review.authorIds.length > 0 &&
         !review.authorIds.some((authorId) => review.reviewerIds.includes(authorId)),
     ) &&
     releaseChecks.every(
       (check) =>
-        check.subjectDigest === catalog.release.contentSnapshotDigest &&
+        check.subjectDigest === catalog.release.contentFileInventoryDigest &&
         check.exitCode === 0 &&
         check.passed,
     ) &&
-    trustedEvidence?.subjectDigest === catalog.release.contentSnapshotDigest &&
+    trustedEvidence?.subjectDigest === catalog.release.contentFileInventoryDigest &&
     trustedEvidence.checks.length === releaseChecks.length &&
     trustedEvidence.reviews.length === reviewEvidenceRefs.length &&
     sameStringSet(

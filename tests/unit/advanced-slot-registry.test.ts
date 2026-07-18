@@ -227,6 +227,7 @@ describe('official advanced slot registry', () => {
         validatedAt: '2026-07-17T12:01:00+09:00',
         publicationEffectiveAt: '2026-07-17T12:02:00+09:00',
         manifestDigest: digest,
+        contentFileInventoryDigest: digest,
         contentSnapshotDigest: digest,
         updateIds: ['update-foundation'],
         advancedSlotRegistryDigest: registry.digest,
@@ -335,9 +336,6 @@ describe('official advanced slot registry', () => {
       answerMaterials: [],
     };
     const contentDigest = catalogContentDigest(catalogInput as CatalogLike);
-    releaseCheck.subjectDigest = contentDigest;
-    releaseReview.subjectDigest = contentDigest;
-    trustedEvidence.subjectDigest = contentDigest;
     catalogInput.release.contentSnapshotDigest = contentDigest;
     const catalog = build(catalogInput);
 
@@ -515,23 +513,8 @@ describe('official advanced slot registry', () => {
     const independentContentDigest = catalogContentDigest(independentGraphs as CatalogLike);
     const independentRelease = independentGraphs.release as {
       contentSnapshotDigest: string;
-      validationSummary: { checks: { subjectDigest: string }[] };
-      humanContentReviewEvidenceRefs: { subjectDigest: string }[];
     };
     independentRelease.contentSnapshotDigest = independentContentDigest;
-    const [independentCheck] = independentRelease.validationSummary.checks;
-    if (!independentCheck) throw new Error('Independent graph check is missing.');
-    independentCheck.subjectDigest = independentContentDigest;
-    const [independentReview] = independentRelease.humanContentReviewEvidenceRefs;
-    if (!independentReview) throw new Error('Independent graph review is missing.');
-    independentReview.subjectDigest = independentContentDigest;
-    trustedEvidence.subjectDigest = independentContentDigest;
-    const [trustedCheck] = trustedEvidence.checks;
-    if (!trustedCheck) throw new Error('Trusted independent check is missing.');
-    trustedCheck.subjectDigest = independentContentDigest;
-    const [trustedReview] = trustedEvidence.reviews;
-    if (!trustedReview) throw new Error('Trusted independent review is missing.');
-    trustedReview.subjectDigest = independentContentDigest;
     expect(() => build(independentGraphs)).not.toThrow();
   });
 

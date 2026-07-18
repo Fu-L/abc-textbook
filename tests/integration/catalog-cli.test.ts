@@ -40,7 +40,17 @@ describe('catalog validation CLI evidence boundary', () => {
   };
 
   it('fails closed when evidence omits a check required by the canonical manifest', async () => {
-    const contentFiles = [{ path: 'catalog.json', sha256: sha('d'), byteLength: 123 }];
+    const contentPath = 'src/content/docs/index.md';
+    const content = '# Catalog fixture\n';
+    await mkdir(path.join(repositoryRoot, 'src/content/docs'), { recursive: true });
+    await writeFile(path.join(repositoryRoot, contentPath), content, 'utf8');
+    const contentFiles = [
+      {
+        path: contentPath,
+        sha256: createHash('sha256').update(content).digest('hex'),
+        byteLength: Buffer.byteLength(content),
+      },
+    ];
     const subjectDigest = calculateContentSubjectDigest(contentFiles);
     const checkPath = 'docs/verification/check-catalog.json';
     const check = {
@@ -174,6 +184,8 @@ describe('catalog validation CLI evidence boundary', () => {
       orderedUpdateIds: ['update-foundation'],
       fixtureMode: false,
       advancedSlotRegistryDigest: sha('f'),
+      workManifestDigest: workManifest.digest,
+      catalogContentSnapshotDigest: subjectDigest,
       contentFiles,
       contentSubjectDigest: subjectDigest,
       preJudgmentCheckRefs: [
@@ -231,6 +243,7 @@ describe('catalog validation CLI evidence boundary', () => {
         releaseKind: 'initial',
         cutoffAt: '2026-07-17T09:00:00+09:00',
         manifestDigest: workManifest.digest,
+        contentFileInventoryDigest: subjectDigest,
         contentSnapshotDigest: subjectDigest,
         updateIds: ['update-foundation'],
         advancedSlotRegistryDigest: sha('f'),
@@ -280,11 +293,75 @@ describe('catalog validation CLI evidence boundary', () => {
         },
       ],
     });
-    const manifestPath = 'docs/verification/work-manifest.json';
-    const candidatePath = 'staging/release-candidate.json';
+    const manifestPath = 'docs/work-manifests/catalog/manifest.json';
+    const candidatePath = 'staging/release-candidates/release-candidate.json';
     await writeJson(manifestPath, workManifest);
     await writeJson(candidatePath, releaseCandidate);
+    await writeJson('staging/updates/update-foundation.json', {
+      schemaVersion: '2.0.0',
+      updateId: 'update-foundation',
+      kind: 'bootstrap',
+      baseReleaseVersion: null,
+      contestId: null,
+      sourceSetFingerprint: sha('1'),
+      advancedSlotLabels: ['E'],
+      targetProblemIds: ['abc212-x45'],
+      operations: [
+        {
+          operationId: 'operation-add-abc212-x45',
+          entityType: 'problem',
+          entityId: 'abc212-x45',
+          action: 'add',
+          path: 'src/content/problems/abc212-x45.json',
+          beforeDigest: null,
+          afterDigest: sha('a'),
+          affectedProblemIds: ['abc212-x45'],
+        },
+      ],
+      authoringResults: [
+        {
+          problemId: 'abc212-x45',
+          slotLabel: 'E',
+          resultType: 'explanation_draft',
+          draftPath: 'src/content/docs/index.md',
+          packetPath: null,
+          templatePath: null,
+          reasonCode: null,
+          reason: null,
+          retryCondition: null,
+        },
+      ],
+      correctionImpactIds: [],
+      validationSummary: {
+        checkIds: ['check-catalog'],
+        problemResults: [
+          { problemId: 'abc212-x45', passed: true, findingCodes: [], remediation: null },
+        ],
+        blockingFindingCount: 0,
+        aggregatePassed: true,
+        resultDigest: sha('2'),
+      },
+      state: 'ELIGIBLE_FOR_BATCH',
+      createdAt: '2026-07-17T10:00:00+09:00',
+      updatedAt: '2026-07-17T11:00:00+09:00',
+      fixtureMode: false,
+    });
     await writeJson('catalog.json', catalog);
+    await execFileAsync('git', ['init'], { cwd: repositoryRoot });
+    await execFileAsync('git', ['add', manifestPath], { cwd: repositoryRoot });
+    await execFileAsync(
+      'git',
+      [
+        '-c',
+        'user.name=Fixture',
+        '-c',
+        'user.email=fixture@example.com',
+        'commit',
+        '-m',
+        'freeze manifest',
+      ],
+      { cwd: repositoryRoot },
+    );
 
     const scriptPath = path.resolve('scripts/catalog-validate.ts');
     const tsxLoaderPath = path.resolve('node_modules/tsx/dist/loader.mjs');
@@ -298,10 +375,6 @@ describe('catalog validation CLI evidence boundary', () => {
         'catalog.json',
         '--evidence-inventory',
         inventoryPath,
-        '--work-manifest',
-        manifestPath,
-        '--release-candidate',
-        candidatePath,
       ],
       { cwd: repositoryRoot },
     ).catch((value: unknown) => value as { code: number; stderr: string });

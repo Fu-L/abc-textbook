@@ -308,6 +308,8 @@ export const ReleaseCandidateSchema = strictObject({
   orderedUpdateIds: uniqueIds.min(1),
   fixtureMode: z.boolean(),
   advancedSlotRegistryDigest: Sha256Schema,
+  workManifestDigest: Sha256Schema,
+  catalogContentSnapshotDigest: Sha256Schema,
   contentFiles: z.array(CandidateFileSchema),
   contentSubjectDigest: Sha256Schema,
   preJudgmentCheckRefs: z.array(CandidateCheckRefSchema),

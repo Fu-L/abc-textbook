@@ -29,6 +29,8 @@ const validDraftCandidate = {
   orderedUpdateIds: ['update-phase-two'],
   fixtureMode: false,
   advancedSlotRegistryDigest: sha('1'),
+  workManifestDigest: sha('3'),
+  catalogContentSnapshotDigest: sha('4'),
   contentFiles: [],
   contentSubjectDigest: sha('2'),
   preJudgmentCheckRefs: [],

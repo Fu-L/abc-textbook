@@ -765,6 +765,9 @@ export const CatalogReleaseSchema = strictObject({
   validatedAt: OffsetDateTimeSchema,
   publicationEffectiveAt: OffsetDateTimeSchema,
   manifestDigest: Sha256Schema,
+  /** Digest of the on-disk canonical content file inventory approved by release evidence. */
+  contentFileInventoryDigest: Sha256Schema,
+  /** Digest of the normalized logical catalog projection, including immutable release scope. */
   contentSnapshotDigest: Sha256Schema,
   updateIds: entityIds.min(1),
   advancedSlotRegistryDigest: Sha256Schema,

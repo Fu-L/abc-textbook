@@ -1,5 +1,8 @@
 import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { execFile } from 'node:child_process';
+import { readFile, readdir } from 'node:fs/promises';
+import path from 'node:path';
+import { promisify } from 'node:util';
 
 import { z } from 'zod';
 
@@ -13,13 +16,16 @@ import {
 } from '../domain/schema-parts/catalog.js';
 import { HumanContentReviewEvidenceSchema as ReviewEvidenceSchema } from '../domain/schema-parts/review-evidence.js';
 import { ContentWorkManifestSchema } from '../domain/schema-parts/review-evidence.js';
-import { ReleaseCandidateSchema } from '../domain/schema-parts/release.js';
+import { PublicationUpdateSchema, ReleaseCandidateSchema } from '../domain/schema-parts/release.js';
 import {
   calculateApprovableDigest,
   calculateCandidatePayloadDigest,
   calculateContentSubjectDigest,
+  ReleaseTransitionError,
+  validateReleaseCandidate,
 } from '../validation/release-state.js';
 import {
+  type ContentWorkManifestScope,
   validateContentWorkManifest,
   WorkManifestError,
 } from '../validation/content-work-manifest.js';
@@ -84,8 +90,225 @@ export interface CatalogEvidenceCanonicalSources {
   readonly releaseCandidate: unknown;
 }
 
+const execFileAsync = promisify(execFile);
+
+const listFiles = async (root: string): Promise<string[]> => {
+  let entries;
+  try {
+    entries = await readdir(root, { withFileTypes: true });
+  } catch {
+    return [];
+  }
+  const nested = await Promise.all(
+    entries.map(async (entry) => {
+      const target = path.join(root, entry.name);
+      return entry.isDirectory() ? listFiles(target) : entry.isFile() ? [target] : [];
+    }),
+  );
+  return nested.flat().sort();
+};
+
+const readJsonFile = async (filePath: string, code: string): Promise<unknown> => {
+  try {
+    return JSON.parse(await readFile(filePath, 'utf8')) as unknown;
+  } catch {
+    throw new CatalogEvidenceInventoryError(code, `Cannot read valid JSON from ${filePath}.`);
+  }
+};
+
+const toManifestScope = (
+  manifest: z.infer<typeof ContentWorkManifestSchema>,
+): ContentWorkManifestScope => ({
+  taskId: manifest.taskId,
+  requiredRequirementIds: manifest.requiredRequirementIds,
+  learningOutcomeIds: manifest.learningOutcomeIds,
+  reviewUnits: manifest.reviewUnits,
+});
+
+const readCommittedManifestScope = async (
+  manifestPath: string,
+  repositoryRoot: string,
+): Promise<ContentWorkManifestScope> => {
+  const relativePath = path.relative(repositoryRoot, manifestPath).replaceAll(path.sep, '/');
+  let stdout: string;
+  try {
+    ({ stdout } = await execFileAsync('git', ['show', `HEAD:${relativePath}`], {
+      cwd: repositoryRoot,
+    }));
+  } catch {
+    throw new CatalogEvidenceInventoryError(
+      'WORK_MANIFEST_NOT_VERSION_CONTROLLED',
+      `${relativePath} must be committed before content changes are released.`,
+    );
+  }
+  let committed: unknown;
+  try {
+    committed = JSON.parse(stdout) as unknown;
+  } catch {
+    throw new CatalogEvidenceInventoryError(
+      'WORK_MANIFEST_SCHEMA_INVALID',
+      `${relativePath} is not valid JSON in HEAD.`,
+    );
+  }
+  const parsed = ContentWorkManifestSchema.safeParse(committed);
+  if (!parsed.success) {
+    throw new CatalogEvidenceInventoryError('WORK_MANIFEST_SCHEMA_INVALID', parsed.error.message);
+  }
+  return toManifestScope(parsed.data);
+};
+
+const calculateActualContentFileInventory = async (repositoryRoot: string) =>
+  Promise.all(
+    (await listFiles(path.join(repositoryRoot, 'src/content'))).map(async (filePath) => {
+      const bytes = await readFile(filePath);
+      return {
+        path: path.relative(repositoryRoot, filePath).replaceAll(path.sep, '/'),
+        sha256: createHash('sha256').update(bytes).digest('hex'),
+        byteLength: bytes.byteLength,
+      };
+    }),
+  );
+
 const sameOrderedStrings = (left: readonly string[], right: readonly string[]): boolean =>
   left.length === right.length && left.every((value, index) => value === right[index]);
+
+/** Resolve release records only from fixed canonical roots and rebuild trusted inventories. */
+export const loadCatalogEvidenceCanonicalSources = async (
+  catalog: unknown,
+  repositoryRoot = process.cwd(),
+): Promise<CatalogEvidenceCanonicalSources> => {
+  const catalogResult = z
+    .object({
+      release: z.object({
+        version: z.string(),
+        releaseKind: z.enum(['initial', 'incremental']),
+        cutoffAt: z.string(),
+        manifestDigest: Sha256Schema,
+        contentFileInventoryDigest: Sha256Schema,
+        contentSnapshotDigest: Sha256Schema,
+        updateIds: z.array(EntityIdSchema),
+        advancedSlotRegistryDigest: Sha256Schema,
+      }),
+    })
+    .safeParse(catalog);
+  if (!catalogResult.success) {
+    throw new CatalogEvidenceInventoryError(
+      'CATALOG_RELEASE_CONTEXT_INVALID',
+      catalogResult.error.message,
+    );
+  }
+  const release = catalogResult.data.release;
+  const manifestMatches: {
+    path: string;
+    value: z.infer<typeof ContentWorkManifestSchema>;
+  }[] = [];
+  for (const filePath of await listFiles(path.join(repositoryRoot, 'docs/work-manifests'))) {
+    if (!filePath.endsWith('.json')) continue;
+    const parsed = ContentWorkManifestSchema.safeParse(
+      await readJsonFile(filePath, 'WORK_MANIFEST_JSON_INVALID'),
+    );
+    if (parsed.success && parsed.data.digest === release.manifestDigest) {
+      manifestMatches.push({ path: filePath, value: parsed.data });
+    }
+  }
+  if (manifestMatches.length !== 1) {
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_WORK_MANIFEST_NOT_UNIQUE',
+      'release.manifestDigest must resolve exactly one manifest under docs/work-manifests.',
+    );
+  }
+  const manifestMatch = manifestMatches[0];
+  if (!manifestMatch) {
+    throw new CatalogEvidenceInventoryError('CANONICAL_WORK_MANIFEST_NOT_UNIQUE', 'No manifest.');
+  }
+  const committedScope = await readCommittedManifestScope(manifestMatch.path, repositoryRoot);
+  try {
+    validateContentWorkManifest(manifestMatch.value, committedScope);
+  } catch (error) {
+    if (error instanceof WorkManifestError) {
+      throw new CatalogEvidenceInventoryError(error.code, error.message);
+    }
+    throw error;
+  }
+
+  const candidateMatches: z.infer<typeof ReleaseCandidateSchema>[] = [];
+  for (const filePath of await listFiles(path.join(repositoryRoot, 'staging/release-candidates'))) {
+    if (!filePath.endsWith('.json')) continue;
+    const parsed = ReleaseCandidateSchema.safeParse(
+      await readJsonFile(filePath, 'RELEASE_CANDIDATE_JSON_INVALID'),
+    );
+    if (
+      parsed.success &&
+      parsed.data.targetReleaseVersion === release.version &&
+      parsed.data.releaseKind === release.releaseKind &&
+      parsed.data.cutoffAt === release.cutoffAt &&
+      parsed.data.advancedSlotRegistryDigest === release.advancedSlotRegistryDigest &&
+      parsed.data.workManifestDigest === release.manifestDigest &&
+      parsed.data.catalogContentSnapshotDigest === release.contentSnapshotDigest &&
+      parsed.data.contentSubjectDigest === release.contentFileInventoryDigest &&
+      sameOrderedStrings(parsed.data.orderedUpdateIds, release.updateIds)
+    ) {
+      candidateMatches.push(parsed.data);
+    }
+  }
+  if (candidateMatches.length !== 1) {
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_RELEASE_CANDIDATE_NOT_UNIQUE',
+      'Release scope must resolve exactly one candidate under staging/release-candidates.',
+    );
+  }
+  const candidate = candidateMatches[0];
+  if (!candidate) {
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_RELEASE_CANDIDATE_NOT_UNIQUE',
+      'No candidate.',
+    );
+  }
+
+  const updates = new Map<string, z.infer<typeof PublicationUpdateSchema>>();
+  for (const filePath of await listFiles(path.join(repositoryRoot, 'staging/updates'))) {
+    if (!filePath.endsWith('.json')) continue;
+    const parsed = PublicationUpdateSchema.safeParse(
+      await readJsonFile(filePath, 'PUBLICATION_UPDATE_JSON_INVALID'),
+    );
+    if (parsed.success && candidate.orderedUpdateIds.includes(parsed.data.updateId)) {
+      if (updates.has(parsed.data.updateId)) {
+        throw new CatalogEvidenceInventoryError(
+          'CANONICAL_PUBLICATION_UPDATE_DUPLICATE',
+          parsed.data.updateId,
+        );
+      }
+      updates.set(parsed.data.updateId, parsed.data);
+    }
+  }
+  if (
+    updates.size !== candidate.orderedUpdateIds.length ||
+    candidate.orderedUpdateIds.some((id) => updates.get(id)?.state !== 'ELIGIBLE_FOR_BATCH')
+  ) {
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_PUBLICATION_UPDATE_MISSING',
+      'Every ordered update must exist once under staging/updates and be eligible.',
+    );
+  }
+  const actualContentFiles = await calculateActualContentFileInventory(repositoryRoot);
+  try {
+    validateReleaseCandidate(candidate, {
+      updates: candidate.orderedUpdateIds.map((id) => ({
+        updateId: id,
+        state: 'ELIGIBLE_FOR_BATCH',
+        baseReleaseVersion: updates.get(id)?.baseReleaseVersion ?? null,
+        targetReleaseVersion: candidate.targetReleaseVersion,
+      })),
+      contentFiles: actualContentFiles,
+    });
+  } catch (error) {
+    if (error instanceof ReleaseTransitionError) {
+      throw new CatalogEvidenceInventoryError(error.code, error.message);
+    }
+    throw error;
+  }
+  return { catalog, workManifest: manifestMatch.value, releaseCandidate: candidate };
+};
 
 const reviewKinds = [
   'outcome_coverage',
@@ -126,6 +349,7 @@ export const deriveCatalogEvidenceTrustContext = (
         releaseKind: z.string(),
         cutoffAt: z.string(),
         manifestDigest: Sha256Schema,
+        contentFileInventoryDigest: Sha256Schema,
         contentSnapshotDigest: Sha256Schema,
         updateIds: z.array(EntityIdSchema),
         advancedSlotRegistryDigest: Sha256Schema,
@@ -147,7 +371,9 @@ export const deriveCatalogEvidenceTrustContext = (
     candidate.releaseKind !== release.releaseKind ||
     candidate.cutoffAt !== release.cutoffAt ||
     candidate.advancedSlotRegistryDigest !== release.advancedSlotRegistryDigest ||
-    candidate.contentSubjectDigest !== release.contentSnapshotDigest ||
+    candidate.workManifestDigest !== release.manifestDigest ||
+    candidate.catalogContentSnapshotDigest !== release.contentSnapshotDigest ||
+    candidate.contentSubjectDigest !== release.contentFileInventoryDigest ||
     !sameOrderedStrings(candidate.orderedUpdateIds, release.updateIds)
   ) {
     throw new CatalogEvidenceInventoryError(
@@ -165,6 +391,8 @@ export const deriveCatalogEvidenceTrustContext = (
     candidate.approvableDigest === null ||
     candidate.approvableDigest !==
       calculateApprovableDigest({
+        workManifestDigest: candidate.workManifestDigest,
+        catalogContentSnapshotDigest: candidate.catalogContentSnapshotDigest,
         contentSubjectDigest: candidate.contentSubjectDigest,
         candidatePayloadDigest: candidate.candidatePayloadDigest,
         preJudgmentCheckRefs: candidate.preJudgmentCheckRefs,

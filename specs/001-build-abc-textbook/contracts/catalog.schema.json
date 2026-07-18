@@ -117,6 +117,9 @@
         "manifestDigest": {
           "$ref": "#/$defs/__schema3"
         },
+        "contentFileInventoryDigest": {
+          "$ref": "#/$defs/__schema3"
+        },
         "contentSnapshotDigest": {
           "$ref": "#/$defs/__schema3"
         },
@@ -248,6 +251,7 @@
         "validatedAt",
         "publicationEffectiveAt",
         "manifestDigest",
+        "contentFileInventoryDigest",
         "contentSnapshotDigest",
         "updateIds",
         "advancedSlotRegistryDigest",

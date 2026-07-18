@@ -235,6 +235,8 @@ export const calculateContentSubjectDigest = (contentFiles: readonly unknown[]):
   canonicalDigest(sortFileInventory(contentFiles));
 
 export const calculateApprovableDigest = (candidate: {
+  readonly workManifestDigest: string;
+  readonly catalogContentSnapshotDigest: string;
   readonly contentSubjectDigest: string;
   readonly candidatePayloadDigest: string;
   readonly preJudgmentCheckRefs: readonly unknown[];
@@ -242,6 +244,8 @@ export const calculateApprovableDigest = (candidate: {
   readonly blockingFindings: readonly unknown[];
 }): string =>
   canonicalDigest({
+    workManifestDigest: candidate.workManifestDigest,
+    catalogContentSnapshotDigest: candidate.catalogContentSnapshotDigest,
     contentSubjectDigest: candidate.contentSubjectDigest,
     candidatePayloadDigest: candidate.candidatePayloadDigest,
     preJudgmentCheckRefs: candidate.preJudgmentCheckRefs,
@@ -306,6 +310,8 @@ export const validateReleaseCandidate = (
         calculateCandidatePayloadDigest(candidate.candidateFiles) ||
       candidate.approvableDigest !==
         calculateApprovableDigest({
+          workManifestDigest: candidate.workManifestDigest,
+          catalogContentSnapshotDigest: candidate.catalogContentSnapshotDigest,
           contentSubjectDigest: candidate.contentSubjectDigest,
           candidatePayloadDigest: candidate.candidatePayloadDigest,
           preJudgmentCheckRefs: candidate.preJudgmentCheckRefs,

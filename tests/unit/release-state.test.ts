@@ -102,6 +102,8 @@ const makeReleaseCandidate = (): Record<string, unknown> => {
     orderedUpdateIds: ['update-phase-two'],
     fixtureMode: false,
     advancedSlotRegistryDigest: sha('3'),
+    workManifestDigest: sha('a'),
+    catalogContentSnapshotDigest: sha('b'),
     contentFiles,
     contentSubjectDigest,
     preJudgmentCheckRefs: [
@@ -141,6 +143,8 @@ const makeReleaseCandidate = (): Record<string, unknown> => {
     candidate.candidateFiles as readonly unknown[],
   );
   candidate.approvableDigest = calculateApprovableDigest({
+    workManifestDigest: candidate.workManifestDigest as string,
+    catalogContentSnapshotDigest: candidate.catalogContentSnapshotDigest as string,
     contentSubjectDigest: candidate.contentSubjectDigest as string,
     candidatePayloadDigest: candidate.candidatePayloadDigest as string,
     preJudgmentCheckRefs: candidate.preJudgmentCheckRefs as readonly unknown[],
@@ -330,6 +334,17 @@ describe('release state gate', () => {
     expect(() => {
       validateReleaseCandidate(changedContent, trusted);
     }).toThrow(/RELEASE_CANDIDATE_DIGEST_MISMATCH/u);
+
+    for (const field of ['workManifestDigest', 'catalogContentSnapshotDigest'] as const) {
+      const changedApprovalScope = makeReleaseCandidate();
+      changedApprovalScope[field] = sha('f');
+      expect(() => {
+        validateReleaseCandidate(
+          changedApprovalScope,
+          trustedCandidateContext(changedApprovalScope),
+        );
+      }).toThrow(/RELEASE_CANDIDATE_DIGEST_MISMATCH/u);
+    }
 
     expect(() => {
       validateReleaseCandidate(makeReleaseCandidate());

@@ -29,6 +29,12 @@
     "advancedSlotRegistryDigest": {
       "$ref": "#/$defs/__schema9"
     },
+    "workManifestDigest": {
+      "$ref": "#/$defs/__schema9"
+    },
+    "catalogContentSnapshotDigest": {
+      "$ref": "#/$defs/__schema9"
+    },
     "contentFiles": {
       "$ref": "#/$defs/__schema10"
     },
@@ -82,6 +88,8 @@
     "orderedUpdateIds",
     "fixtureMode",
     "advancedSlotRegistryDigest",
+    "workManifestDigest",
+    "catalogContentSnapshotDigest",
     "contentFiles",
     "contentSubjectDigest",
     "preJudgmentCheckRefs",

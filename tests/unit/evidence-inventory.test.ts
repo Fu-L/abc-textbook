@@ -1,7 +1,9 @@
+import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
+import { promisify } from 'node:util';
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
@@ -15,9 +17,11 @@ import { calculateContentWorkManifestScopeDigest } from '../../src/lib/validatio
 import {
   CatalogEvidenceInventoryError,
   deriveCatalogEvidenceTrustContext,
+  loadCatalogEvidenceCanonicalSources,
   loadTrustedCatalogReleaseEvidenceInventory,
 } from '../../src/lib/catalog/evidence-inventory.js';
 
+const execFileAsync = promisify(execFile);
 const sha = (character: string): string => character.repeat(64);
 const fileDigest = (value: string): string =>
   createHash('sha256').update(value, 'utf8').digest('hex');
@@ -179,6 +183,8 @@ describe('catalog release evidence inventory', () => {
       orderedUpdateIds: ['update-foundation'],
       fixtureMode: false,
       advancedSlotRegistryDigest: sha('f'),
+      workManifestDigest: workManifest.digest,
+      catalogContentSnapshotDigest: subjectDigest,
       contentFiles,
       contentSubjectDigest: subjectDigest,
       preJudgmentCheckRefs: [
@@ -226,6 +232,7 @@ describe('catalog release evidence inventory', () => {
         releaseKind: 'initial',
         cutoffAt: '2026-07-17T09:00:00+09:00',
         manifestDigest: workManifest.digest,
+        contentFileInventoryDigest: subjectDigest,
         contentSnapshotDigest: subjectDigest,
         updateIds: ['update-foundation'],
         advancedSlotRegistryDigest: sha('f'),
@@ -467,6 +474,14 @@ describe('catalog release evidence inventory', () => {
     lintManifest.digest = digestWithoutField(lintManifest, 'digest');
     (contextWithRequiredLint.catalog.release as Record<string, unknown>).manifestDigest =
       lintManifest.digest;
+    const lintCandidate = contextWithRequiredLint.releaseCandidate;
+    lintCandidate.workManifestDigest = lintManifest.digest;
+    lintCandidate.approvableDigest = calculateApprovableDigest(lintCandidate as never);
+    lintCandidate.ownerApproval = {
+      ownerId: 'owner-release',
+      approvedDigest: lintCandidate.approvableDigest,
+      approvedAt: '2026-07-17T12:50:00+09:00',
+    };
     await expect(
       loadTrustedCatalogReleaseEvidenceInventory(
         fixture.inventoryPath,
@@ -498,6 +513,14 @@ describe('catalog release evidence inventory', () => {
     changedManifest.digest = digestWithoutField(changedManifest, 'digest');
     (contextWithChangedClaim.catalog.release as Record<string, unknown>).manifestDigest =
       changedManifest.digest;
+    const changedCandidate = contextWithChangedClaim.releaseCandidate;
+    changedCandidate.workManifestDigest = changedManifest.digest;
+    changedCandidate.approvableDigest = calculateApprovableDigest(changedCandidate as never);
+    changedCandidate.ownerApproval = {
+      ownerId: 'owner-release',
+      approvedDigest: changedCandidate.approvableDigest,
+      approvedAt: '2026-07-17T12:50:00+09:00',
+    };
     await expect(
       loadTrustedCatalogReleaseEvidenceInventory(
         fixture.inventoryPath,
@@ -505,5 +528,141 @@ describe('catalog release evidence inventory', () => {
         repositoryRoot,
       ),
     ).rejects.toThrow(/REVIEWER_CHECK_INVENTORY_INVALID/u);
+  });
+
+  it('requires a version-controlled manifest from the canonical manifest root', async () => {
+    const fixture = await makeFixture();
+    await writeJson(
+      'docs/work-manifests/catalog/manifest.json',
+      fixture.canonicalSources.workManifest,
+    );
+    await expect(
+      loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot),
+    ).rejects.toThrow(/WORK_MANIFEST_NOT_VERSION_CONTROLLED/u);
+  });
+
+  it('requires every canonical update and rejects candidate file inventories not rebuilt from disk', async () => {
+    const fixture = await makeFixture();
+    const manifestPath = 'docs/work-manifests/catalog/manifest.json';
+    await writeJson(manifestPath, fixture.canonicalSources.workManifest);
+    await writeJson(
+      'staging/release-candidates/release-candidate.json',
+      fixture.canonicalSources.releaseCandidate,
+    );
+    await execFileAsync('git', ['init'], { cwd: repositoryRoot });
+    await execFileAsync('git', ['add', manifestPath], { cwd: repositoryRoot });
+    await execFileAsync(
+      'git',
+      [
+        '-c',
+        'user.name=Fixture',
+        '-c',
+        'user.email=fixture@example.com',
+        'commit',
+        '-m',
+        'freeze manifest',
+      ],
+      { cwd: repositoryRoot },
+    );
+    await expect(
+      loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot),
+    ).rejects.toThrow(/CANONICAL_PUBLICATION_UPDATE_MISSING/u);
+
+    await writeJson('staging/updates/update-foundation.json', {
+      schemaVersion: '2.0.0',
+      updateId: 'update-foundation',
+      kind: 'bootstrap',
+      baseReleaseVersion: null,
+      contestId: null,
+      sourceSetFingerprint: sha('1'),
+      advancedSlotLabels: ['E'],
+      targetProblemIds: ['abc212-x45'],
+      operations: [
+        {
+          operationId: 'operation-add-abc212-x45',
+          entityType: 'problem',
+          entityId: 'abc212-x45',
+          action: 'add',
+          path: 'src/content/problems/abc212-x45.json',
+          beforeDigest: null,
+          afterDigest: sha('a'),
+          affectedProblemIds: ['abc212-x45'],
+        },
+      ],
+      authoringResults: [
+        {
+          problemId: 'abc212-x45',
+          slotLabel: 'E',
+          resultType: 'explanation_draft',
+          draftPath: 'src/content/docs/index.md',
+          packetPath: null,
+          templatePath: null,
+          reasonCode: null,
+          reason: null,
+          retryCondition: null,
+        },
+      ],
+      correctionImpactIds: [],
+      validationSummary: {
+        checkIds: ['check-catalog'],
+        problemResults: [
+          { problemId: 'abc212-x45', passed: true, findingCodes: [], remediation: null },
+        ],
+        blockingFindingCount: 0,
+        aggregatePassed: true,
+        resultDigest: sha('2'),
+      },
+      state: 'ELIGIBLE_FOR_BATCH',
+      createdAt: '2026-07-17T10:00:00+09:00',
+      updatedAt: '2026-07-17T11:00:00+09:00',
+      fixtureMode: false,
+    });
+    await mkdir(path.join(repositoryRoot, 'src/content/docs'), { recursive: true });
+    await writeFile(path.join(repositoryRoot, 'src/content/docs/index.md'), '# Changed\n', 'utf8');
+    await expect(
+      loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot),
+    ).rejects.toThrow(/RELEASE_CANDIDATE_DIGEST_MISMATCH/u);
+
+    const content = '# Changed\n';
+    const canonicalCandidate = structuredClone(fixture.canonicalSources.releaseCandidate) as Record<
+      string,
+      unknown
+    > & {
+      preJudgmentCheckRefs: { subjectDigest: string }[];
+      humanContentReviewEvidenceRefs: { subjectDigest: string }[];
+    };
+    canonicalCandidate.contentFiles = [
+      {
+        path: 'src/content/docs/index.md',
+        sha256: createHash('sha256').update(content).digest('hex'),
+        byteLength: Buffer.byteLength(content),
+      },
+    ];
+    const actualSubjectDigest = calculateContentSubjectDigest(
+      canonicalCandidate.contentFiles as readonly unknown[],
+    );
+    canonicalCandidate.contentSubjectDigest = actualSubjectDigest;
+    canonicalCandidate.preJudgmentCheckRefs.forEach((check) => {
+      check.subjectDigest = actualSubjectDigest;
+    });
+    canonicalCandidate.humanContentReviewEvidenceRefs.forEach((review) => {
+      review.subjectDigest = actualSubjectDigest;
+    });
+    canonicalCandidate.approvableDigest = calculateApprovableDigest(canonicalCandidate as never);
+    canonicalCandidate.ownerApproval = {
+      ownerId: 'owner-release',
+      approvedDigest: canonicalCandidate.approvableDigest,
+      approvedAt: '2026-07-17T12:50:00+09:00',
+    };
+    await writeJson('staging/release-candidates/release-candidate.json', canonicalCandidate);
+    const canonicalCatalog = structuredClone(fixture.canonicalSources.catalog) as {
+      release: { contentFileInventoryDigest: string };
+    };
+    canonicalCatalog.release.contentFileInventoryDigest = actualSubjectDigest;
+    await expect(
+      loadCatalogEvidenceCanonicalSources(canonicalCatalog, repositoryRoot),
+    ).resolves.toMatchObject({
+      releaseCandidate: { contentSubjectDigest: actualSubjectDigest },
+    });
   });
 });
