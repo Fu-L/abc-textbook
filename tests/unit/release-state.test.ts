@@ -241,7 +241,7 @@ describe('release state gate', () => {
       receiptPath: 'docs/verification/publish-receipts/2026.07.17.json',
       candidateId: candidate.candidateId,
       releaseVersion: '2026.07.17',
-      contentSnapshotDigest: candidate.contentSubjectDigest,
+      contentSnapshotDigest: candidate.catalogContentSnapshotDigest,
       candidatePayloadDigest: candidate.candidatePayloadDigest,
       approvableDigest: candidate.approvableDigest,
       publicationEffectiveAt: publishedAt,
@@ -264,6 +264,14 @@ describe('release state gate', () => {
         trusted: trustedCandidateContext(candidate),
       }),
     ).not.toThrow();
+
+    expect(() =>
+      transitionReleaseCandidate('READY_TO_PUBLISH', 'PUBLISHED', {
+        candidate,
+        receipt: { ...receipt, contentSnapshotDigest: candidate.contentSubjectDigest },
+        trusted: trustedCandidateContext(candidate),
+      }),
+    ).toThrow(/PUBLISH_RECEIPT_MISMATCH/u);
 
     expect(() =>
       transitionReleaseCandidate('READY_TO_PUBLISH', 'PUBLISHED', {

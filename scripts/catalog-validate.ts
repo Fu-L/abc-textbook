@@ -16,14 +16,20 @@ const inputIndex = args.indexOf('--input');
 const inputPath = inputIndex < 0 ? undefined : args[inputIndex + 1];
 const evidenceIndex = args.indexOf('--evidence-inventory');
 const evidencePath = evidenceIndex < 0 ? undefined : args[evidenceIndex + 1];
-if (!inputPath || !evidencePath || args.length !== 4) {
-  console.error('Usage: catalog-validate --input CATALOG.json --evidence-inventory INVENTORY.json');
+const baseIndex = args.indexOf('--base-commit');
+const baseCommit = baseIndex < 0 ? undefined : args[baseIndex + 1];
+if (!inputPath || !evidencePath || !baseCommit || args.length !== 6) {
+  console.error(
+    'Usage: catalog-validate --input CATALOG.json --evidence-inventory INVENTORY.json --base-commit COMMIT',
+  );
   process.exitCode = 64;
 } else {
   try {
     const resolvedInputPath = await resolvePublicCatalogInput(inputPath);
     const input = JSON.parse(await readFile(resolvedInputPath, 'utf8')) as unknown;
-    const canonicalSources = await loadCatalogEvidenceCanonicalSources(input);
+    const canonicalSources = await loadCatalogEvidenceCanonicalSources(input, process.cwd(), {
+      baseCommit,
+    });
     const trustedEvidence = await loadTrustedCatalogReleaseEvidenceInventory(
       evidencePath,
       canonicalSources,

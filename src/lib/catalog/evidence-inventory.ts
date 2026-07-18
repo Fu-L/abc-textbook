@@ -11,6 +11,7 @@ import { strictObject } from '../domain/contract-schema.js';
 import {
   EntityIdSchema,
   OffsetDateTimeSchema,
+  ProblemIdSchema,
   SafePathSchema,
   Sha256Schema,
 } from '../domain/schema-parts/catalog.js';
@@ -22,6 +23,7 @@ import {
   calculateCandidatePayloadDigest,
   calculateContentSubjectDigest,
   ReleaseTransitionError,
+  validatePublicationUpdate,
   validateReleaseCandidate,
 } from '../validation/release-state.js';
 import {
@@ -92,6 +94,62 @@ export interface CatalogEvidenceCanonicalSources {
 
 const execFileAsync = promisify(execFile);
 
+export interface CatalogEvidenceTrustOptions {
+  /** A protected commit captured before the content change began. */
+  readonly baseCommit: string;
+}
+
+interface ContentFileInventoryEntry {
+  readonly path: string;
+  readonly sha256: string;
+  readonly byteLength: number;
+}
+
+const runGit = async (
+  args: readonly string[],
+  repositoryRoot: string,
+  encoding: 'utf8' | 'buffer' = 'utf8',
+): Promise<string | Buffer> => {
+  const result = await execFileAsync('git', [...args], {
+    cwd: repositoryRoot,
+    encoding,
+  });
+  return result.stdout;
+};
+
+const resolveTrustedBaseCommit = async (
+  baseCommit: string | undefined,
+  repositoryRoot: string,
+): Promise<string> => {
+  if (!baseCommit || !/^[0-9a-f]{40}$/iu.test(baseCommit)) {
+    throw new CatalogEvidenceInventoryError(
+      'TRUSTED_BASE_COMMIT_REQUIRED',
+      'A full protected base commit different from HEAD is required.',
+    );
+  }
+  let headCommit: string;
+  let resolvedBaseCommit: string;
+  try {
+    headCommit = String(await runGit(['rev-parse', 'HEAD^{commit}'], repositoryRoot)).trim();
+    resolvedBaseCommit = String(
+      await runGit(['rev-parse', `${baseCommit}^{commit}`], repositoryRoot),
+    ).trim();
+    await runGit(['merge-base', '--is-ancestor', resolvedBaseCommit, 'HEAD'], repositoryRoot);
+  } catch {
+    throw new CatalogEvidenceInventoryError(
+      'TRUSTED_BASE_COMMIT_INVALID',
+      'The protected base commit must resolve and be an ancestor of HEAD.',
+    );
+  }
+  if (resolvedBaseCommit !== baseCommit.toLowerCase() || resolvedBaseCommit === headCommit) {
+    throw new CatalogEvidenceInventoryError(
+      'TRUSTED_BASE_COMMIT_INVALID',
+      'The protected base commit must be an immutable commit before HEAD, not HEAD itself.',
+    );
+  }
+  return resolvedBaseCommit;
+};
+
 const listFiles = async (root: string): Promise<string[]> => {
   let entries;
   try {
@@ -128,13 +186,12 @@ const toManifestScope = (
 const readCommittedManifestScope = async (
   manifestPath: string,
   repositoryRoot: string,
+  baseCommit: string,
 ): Promise<ContentWorkManifestScope> => {
   const relativePath = path.relative(repositoryRoot, manifestPath).replaceAll(path.sep, '/');
-  let stdout: string;
+  let stdout: string | Buffer;
   try {
-    ({ stdout } = await execFileAsync('git', ['show', `HEAD:${relativePath}`], {
-      cwd: repositoryRoot,
-    }));
+    stdout = await runGit(['show', `${baseCommit}:${relativePath}`], repositoryRoot);
   } catch {
     throw new CatalogEvidenceInventoryError(
       'WORK_MANIFEST_NOT_VERSION_CONTROLLED',
@@ -143,11 +200,11 @@ const readCommittedManifestScope = async (
   }
   let committed: unknown;
   try {
-    committed = JSON.parse(stdout) as unknown;
+    committed = JSON.parse(String(stdout)) as unknown;
   } catch {
     throw new CatalogEvidenceInventoryError(
       'WORK_MANIFEST_SCHEMA_INVALID',
-      `${relativePath} is not valid JSON in HEAD.`,
+      `${relativePath} is not valid JSON in the protected base commit.`,
     );
   }
   const parsed = ContentWorkManifestSchema.safeParse(committed);
@@ -157,7 +214,50 @@ const readCommittedManifestScope = async (
   return toManifestScope(parsed.data);
 };
 
-const calculateActualContentFileInventory = async (repositoryRoot: string) =>
+const calculateBaseContentFileInventory = async (
+  repositoryRoot: string,
+  baseCommit: string,
+): Promise<ContentFileInventoryEntry[]> => {
+  let output: string | Buffer;
+  try {
+    output = await runGit(
+      ['ls-tree', '-r', '--name-only', baseCommit, '--', 'src/content'],
+      repositoryRoot,
+    );
+  } catch {
+    throw new CatalogEvidenceInventoryError(
+      'TRUSTED_BASE_CONTENT_UNREADABLE',
+      'The protected base commit content tree could not be read.',
+    );
+  }
+  const relativePaths = String(output)
+    .split('\n')
+    .map((value) => value.trim())
+    .filter(Boolean);
+  return Promise.all(
+    relativePaths.map(async (relativePath) => {
+      let raw: string | Buffer;
+      try {
+        raw = await runGit(['show', `${baseCommit}:${relativePath}`], repositoryRoot, 'buffer');
+      } catch {
+        throw new CatalogEvidenceInventoryError(
+          'TRUSTED_BASE_CONTENT_UNREADABLE',
+          `Cannot read ${relativePath} from the protected base commit.`,
+        );
+      }
+      const bytes = Buffer.isBuffer(raw) ? raw : Buffer.from(raw);
+      return {
+        path: relativePath,
+        sha256: createHash('sha256').update(bytes).digest('hex'),
+        byteLength: bytes.byteLength,
+      };
+    }),
+  );
+};
+
+const calculateActualContentFileInventory = async (
+  repositoryRoot: string,
+): Promise<ContentFileInventoryEntry[]> =>
   Promise.all(
     (await listFiles(path.join(repositoryRoot, 'src/content'))).map(async (filePath) => {
       const bytes = await readFile(filePath);
@@ -169,6 +269,29 @@ const calculateActualContentFileInventory = async (repositoryRoot: string) =>
     }),
   );
 
+const deriveTrustedProblemOwnership = (
+  operation: z.infer<typeof PublicationUpdateSchema>['operations'][number],
+): readonly string[] => {
+  const candidates = new Set<string>();
+  const problemIdPattern = /abc[0-9]{3,}-[a-z][a-z0-9+_-]*/giu;
+  for (const source of [operation.entityId, operation.path]) {
+    for (const match of source.matchAll(problemIdPattern)) {
+      const candidate = match[0];
+      if (ProblemIdSchema.safeParse(candidate).success) candidates.add(candidate.toLowerCase());
+    }
+  }
+  if (operation.entityType === 'problem' && ProblemIdSchema.safeParse(operation.entityId).success) {
+    candidates.add(operation.entityId.toLowerCase());
+  }
+  if (candidates.size === 0) {
+    throw new CatalogEvidenceInventoryError(
+      'PUBLICATION_UPDATE_OWNERSHIP_UNDERIVED',
+      `Cannot derive Problem ownership from ${operation.operationId} and its trusted content path.`,
+    );
+  }
+  return [...candidates].sort();
+};
+
 const sameOrderedStrings = (left: readonly string[], right: readonly string[]): boolean =>
   left.length === right.length && left.every((value, index) => value === right[index]);
 
@@ -176,7 +299,9 @@ const sameOrderedStrings = (left: readonly string[], right: readonly string[]): 
 export const loadCatalogEvidenceCanonicalSources = async (
   catalog: unknown,
   repositoryRoot = process.cwd(),
+  options?: CatalogEvidenceTrustOptions,
 ): Promise<CatalogEvidenceCanonicalSources> => {
+  const baseCommit = await resolveTrustedBaseCommit(options?.baseCommit, repositoryRoot);
   const catalogResult = z
     .object({
       release: z.object({
@@ -221,7 +346,11 @@ export const loadCatalogEvidenceCanonicalSources = async (
   if (!manifestMatch) {
     throw new CatalogEvidenceInventoryError('CANONICAL_WORK_MANIFEST_NOT_UNIQUE', 'No manifest.');
   }
-  const committedScope = await readCommittedManifestScope(manifestMatch.path, repositoryRoot);
+  const committedScope = await readCommittedManifestScope(
+    manifestMatch.path,
+    repositoryRoot,
+    baseCommit,
+  );
   try {
     validateContentWorkManifest(manifestMatch.value, committedScope);
   } catch (error) {
@@ -291,6 +420,7 @@ export const loadCatalogEvidenceCanonicalSources = async (
     );
   }
   const actualContentFiles = await calculateActualContentFileInventory(repositoryRoot);
+  const baseContentFiles = await calculateBaseContentFileInventory(repositoryRoot, baseCommit);
   try {
     validateReleaseCandidate(candidate, {
       updates: candidate.orderedUpdateIds.map((id) => ({
@@ -306,6 +436,61 @@ export const loadCatalogEvidenceCanonicalSources = async (
       throw new CatalogEvidenceInventoryError(error.code, error.message);
     }
     throw error;
+  }
+  const operationPaths = new Set<string>();
+  const operationIds = new Set<string>();
+  for (const update of updates.values()) {
+    const operationOwnership = update.operations.map((operation) => ({
+      operationId: operation.operationId,
+      affectedProblemIds: deriveTrustedProblemOwnership(operation),
+      entityType: operation.entityType,
+      entityId: operation.entityId,
+      action: operation.action,
+      path: operation.path,
+      beforeDigest: operation.beforeDigest,
+      afterDigest: operation.afterDigest,
+    }));
+    try {
+      validatePublicationUpdate(update, {
+        operationOwnership,
+        baseFiles: baseContentFiles,
+        currentFiles: actualContentFiles,
+      });
+    } catch (error) {
+      if (error instanceof ReleaseTransitionError) {
+        throw new CatalogEvidenceInventoryError(error.code, error.message);
+      }
+      throw error;
+    }
+    for (const operation of update.operations) {
+      if (operationIds.has(operation.operationId)) {
+        throw new CatalogEvidenceInventoryError(
+          'CANONICAL_PUBLICATION_UPDATE_DUPLICATE_OPERATION',
+          operation.operationId,
+        );
+      }
+      operationIds.add(operation.operationId);
+      if (operationPaths.has(operation.path)) {
+        throw new CatalogEvidenceInventoryError(
+          'CANONICAL_PUBLICATION_UPDATE_DUPLICATE_PATH',
+          operation.path,
+        );
+      }
+      operationPaths.add(operation.path);
+    }
+  }
+  const baseByPath = new Map(baseContentFiles.map((file) => [file.path, file] as const));
+  const currentByPath = new Map(actualContentFiles.map((file) => [file.path, file] as const));
+  const changedPaths = new Set(
+    [...new Set([...baseByPath.keys(), ...currentByPath.keys()])].filter(
+      (filePath) => baseByPath.get(filePath)?.sha256 !== currentByPath.get(filePath)?.sha256,
+    ),
+  );
+  if (!sameStringSet([...changedPaths], [...operationPaths])) {
+    throw new CatalogEvidenceInventoryError(
+      'CANONICAL_PUBLICATION_UPDATE_DIFF_INCOMPLETE',
+      'Publication updates must exactly cover the protected-base to current content diff.',
+    );
   }
   return { catalog, workManifest: manifestMatch.value, releaseCandidate: candidate };
 };

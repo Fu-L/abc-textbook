@@ -42,12 +42,30 @@ export interface TrustedPublicationUpdateContext {
   readonly operationOwnership: readonly {
     readonly operationId: string;
     readonly affectedProblemIds: readonly string[];
+    /** Present when the ownership inventory was derived from an actual diff. */
+    readonly entityType?: string;
+    readonly entityId?: string;
+    readonly action?: 'add' | 'replace' | 'remove';
+    readonly path?: string;
+    readonly beforeDigest?: string | null;
+    readonly afterDigest?: string | null;
   }[];
   /** Correction impacts calculated from the trusted catalog diff. */
   readonly correctionImpacts?: readonly {
     readonly correctionImpactId: string;
     readonly affectedProblemIds: readonly string[];
     readonly operationIds: readonly string[];
+  }[];
+  /** The independently reconstructed before/after content inventories. */
+  readonly baseFiles?: readonly {
+    readonly path: string;
+    readonly sha256: string;
+    readonly byteLength: number;
+  }[];
+  readonly currentFiles?: readonly {
+    readonly path: string;
+    readonly sha256: string;
+    readonly byteLength: number;
   }[];
 }
 
@@ -95,7 +113,7 @@ export const transitionReleaseCandidate = (
       candidate.publicationWindowEndsAt === null ||
       receipt.candidateId !== candidate.candidateId ||
       receipt.releaseVersion !== candidate.targetReleaseVersion ||
-      receipt.contentSnapshotDigest !== candidate.contentSubjectDigest ||
+      receipt.contentSnapshotDigest !== candidate.catalogContentSnapshotDigest ||
       receipt.candidatePayloadDigest !== candidate.candidatePayloadDigest ||
       receipt.approvableDigest !== candidate.approvableDigest ||
       receipt.publicationEffectiveAt !== candidate.publicationEffectiveAt ||
@@ -160,6 +178,93 @@ export const validatePublicationUpdate = (
         'PUBLICATION_UPDATE_OWNERSHIP_INVALID',
         `Operation ${operation.operationId} does not match trusted Problem ownership.`,
       );
+    }
+  }
+  const hasDetailedDiff = trusted.operationOwnership.some(
+    (operation) => operation.path !== undefined,
+  );
+  if (hasDetailedDiff || trusted.baseFiles !== undefined || trusted.currentFiles !== undefined) {
+    if (
+      !trusted.baseFiles ||
+      !trusted.currentFiles ||
+      trusted.operationOwnership.some(
+        (operation) =>
+          operation.entityType === undefined ||
+          operation.entityId === undefined ||
+          operation.action === undefined ||
+          operation.path === undefined ||
+          operation.beforeDigest === undefined ||
+          operation.afterDigest === undefined,
+      )
+    ) {
+      throw new ReleaseTransitionError(
+        'PUBLICATION_UPDATE_DIFF_INVALID',
+        'A trusted publication update must include a complete before/after file diff.',
+      );
+    }
+    const baseFiles = new Map(trusted.baseFiles.map((file) => [file.path, file] as const));
+    const currentFiles = new Map(trusted.currentFiles.map((file) => [file.path, file] as const));
+    if (
+      baseFiles.size !== trusted.baseFiles.length ||
+      currentFiles.size !== trusted.currentFiles.length
+    ) {
+      throw new ReleaseTransitionError(
+        'PUBLICATION_UPDATE_DIFF_INVALID',
+        'Trusted publication file inventories must contain unique paths.',
+      );
+    }
+    const operationPaths = new Set<string>();
+    for (const operation of update.operations) {
+      const expected = trustedOperations.get(operation.operationId);
+      if (expected?.path === undefined) {
+        throw new ReleaseTransitionError(
+          'PUBLICATION_UPDATE_DIFF_INVALID',
+          `Operation ${operation.operationId} is absent from the trusted file diff.`,
+        );
+      }
+      if (
+        expected.entityType !== operation.entityType ||
+        expected.entityId !== operation.entityId ||
+        expected.action !== operation.action ||
+        expected.path !== operation.path ||
+        expected.beforeDigest !== operation.beforeDigest ||
+        expected.afterDigest !== operation.afterDigest
+      ) {
+        throw new ReleaseTransitionError(
+          'PUBLICATION_UPDATE_DIFF_INVALID',
+          `Operation ${operation.operationId} does not reproduce the trusted file diff.`,
+        );
+      }
+      if (operationPaths.has(operation.path)) {
+        throw new ReleaseTransitionError(
+          'PUBLICATION_UPDATE_DIFF_INVALID',
+          `Operation path ${operation.path} is claimed more than once.`,
+        );
+      }
+      operationPaths.add(operation.path);
+      const before = baseFiles.get(operation.path);
+      const after = currentFiles.get(operation.path);
+      const validTransition =
+        operation.action === 'add'
+          ? before === undefined &&
+            after !== undefined &&
+            operation.beforeDigest === null &&
+            operation.afterDigest === after.sha256
+          : operation.action === 'replace'
+            ? before !== undefined &&
+              after !== undefined &&
+              operation.beforeDigest === before.sha256 &&
+              operation.afterDigest === after.sha256
+            : before !== undefined &&
+              after === undefined &&
+              operation.beforeDigest === before.sha256 &&
+              operation.afterDigest === null;
+      if (!validTransition) {
+        throw new ReleaseTransitionError(
+          'PUBLICATION_UPDATE_DIFF_INVALID',
+          `Operation ${operation.operationId} does not match the trusted before/after files.`,
+        );
+      }
     }
   }
   const trustedAffectedProblemIds = trusted.operationOwnership.flatMap(

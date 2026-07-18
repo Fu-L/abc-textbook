@@ -20,16 +20,19 @@ const args = process.argv.slice(2);
 const inputPath = valueAfter(args, '--input');
 const outputPath = valueAfter(args, '--output');
 const evidencePath = valueAfter(args, '--evidence-inventory');
-if (!inputPath || !outputPath || !evidencePath || args.length !== 6) {
+const baseCommit = valueAfter(args, '--base-commit');
+if (!inputPath || !outputPath || !evidencePath || !baseCommit || args.length !== 8) {
   console.error(
-    'Usage: catalog-build --input CATALOG.json --output PATH --evidence-inventory INVENTORY.json',
+    'Usage: catalog-build --input CATALOG.json --output PATH --evidence-inventory INVENTORY.json --base-commit COMMIT',
   );
   process.exitCode = 64;
 } else {
   try {
     const resolvedInputPath = await resolvePublicCatalogInput(inputPath);
     const input = JSON.parse(await readFile(resolvedInputPath, 'utf8')) as unknown;
-    const canonicalSources = await loadCatalogEvidenceCanonicalSources(input);
+    const canonicalSources = await loadCatalogEvidenceCanonicalSources(input, process.cwd(), {
+      baseCommit,
+    });
     const trustedEvidence = await loadTrustedCatalogReleaseEvidenceInventory(
       evidencePath,
       canonicalSources,

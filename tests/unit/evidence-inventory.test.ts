@@ -536,8 +536,42 @@ describe('catalog release evidence inventory', () => {
       'docs/work-manifests/catalog/manifest.json',
       fixture.canonicalSources.workManifest,
     );
+    await execFileAsync('git', ['init'], { cwd: repositoryRoot });
+    await execFileAsync(
+      'git',
+      [
+        '-c',
+        'user.name=Fixture',
+        '-c',
+        'user.email=fixture@example.com',
+        'commit',
+        '--allow-empty',
+        '-m',
+        'freeze base',
+      ],
+      { cwd: repositoryRoot },
+    );
+    const { stdout: baseCommit } = await execFileAsync('git', ['rev-parse', 'HEAD'], {
+      cwd: repositoryRoot,
+    });
+    await execFileAsync(
+      'git',
+      [
+        '-c',
+        'user.name=Fixture',
+        '-c',
+        'user.email=fixture@example.com',
+        'commit',
+        '--allow-empty',
+        '-m',
+        'current release state',
+      ],
+      { cwd: repositoryRoot },
+    );
     await expect(
-      loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot),
+      loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot, {
+        baseCommit: baseCommit.trim(),
+      }),
     ).rejects.toThrow(/WORK_MANIFEST_NOT_VERSION_CONTROLLED/u);
   });
 
@@ -550,6 +584,20 @@ describe('catalog release evidence inventory', () => {
       fixture.canonicalSources.releaseCandidate,
     );
     await execFileAsync('git', ['init'], { cwd: repositoryRoot });
+    await execFileAsync(
+      'git',
+      [
+        '-c',
+        'user.name=Fixture',
+        '-c',
+        'user.email=fixture@example.com',
+        'commit',
+        '--allow-empty',
+        '-m',
+        'freeze base',
+      ],
+      { cwd: repositoryRoot },
+    );
     await execFileAsync('git', ['add', manifestPath], { cwd: repositoryRoot });
     await execFileAsync(
       'git',
@@ -564,8 +612,27 @@ describe('catalog release evidence inventory', () => {
       ],
       { cwd: repositoryRoot },
     );
+    const { stdout: baseCommit } = await execFileAsync('git', ['rev-parse', 'HEAD'], {
+      cwd: repositoryRoot,
+    });
+    await execFileAsync(
+      'git',
+      [
+        '-c',
+        'user.name=Fixture',
+        '-c',
+        'user.email=fixture@example.com',
+        'commit',
+        '--allow-empty',
+        '-m',
+        'current release state',
+      ],
+      { cwd: repositoryRoot },
+    );
     await expect(
-      loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot),
+      loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot, {
+        baseCommit: baseCommit.trim(),
+      }),
     ).rejects.toThrow(/CANONICAL_PUBLICATION_UPDATE_MISSING/u);
 
     await writeJson('staging/updates/update-foundation.json', {
@@ -580,12 +647,12 @@ describe('catalog release evidence inventory', () => {
       operations: [
         {
           operationId: 'operation-add-abc212-x45',
-          entityType: 'problem',
-          entityId: 'abc212-x45',
+          entityType: 'explanation',
+          entityId: 'explanation-abc212-x45',
           action: 'add',
-          path: 'src/content/problems/abc212-x45.json',
+          path: 'src/content/docs/index.md',
           beforeDigest: null,
-          afterDigest: sha('a'),
+          afterDigest: createHash('sha256').update('# Changed\n').digest('hex'),
           affectedProblemIds: ['abc212-x45'],
         },
       ],
@@ -620,7 +687,9 @@ describe('catalog release evidence inventory', () => {
     await mkdir(path.join(repositoryRoot, 'src/content/docs'), { recursive: true });
     await writeFile(path.join(repositoryRoot, 'src/content/docs/index.md'), '# Changed\n', 'utf8');
     await expect(
-      loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot),
+      loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot, {
+        baseCommit: baseCommit.trim(),
+      }),
     ).rejects.toThrow(/RELEASE_CANDIDATE_DIGEST_MISMATCH/u);
 
     const content = '# Changed\n';
@@ -660,7 +729,9 @@ describe('catalog release evidence inventory', () => {
     };
     canonicalCatalog.release.contentFileInventoryDigest = actualSubjectDigest;
     await expect(
-      loadCatalogEvidenceCanonicalSources(canonicalCatalog, repositoryRoot),
+      loadCatalogEvidenceCanonicalSources(canonicalCatalog, repositoryRoot, {
+        baseCommit: baseCommit.trim(),
+      }),
     ).resolves.toMatchObject({
       releaseCandidate: { contentSubjectDigest: actualSubjectDigest },
     });

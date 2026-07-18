@@ -309,12 +309,12 @@ describe('catalog validation CLI evidence boundary', () => {
       operations: [
         {
           operationId: 'operation-add-abc212-x45',
-          entityType: 'problem',
-          entityId: 'abc212-x45',
+          entityType: 'explanation',
+          entityId: 'explanation-abc212-x45',
           action: 'add',
-          path: 'src/content/problems/abc212-x45.json',
+          path: contentPath,
           beforeDigest: null,
-          afterDigest: sha('a'),
+          afterDigest: createHash('sha256').update(content).digest('hex'),
           affectedProblemIds: ['abc212-x45'],
         },
       ],
@@ -348,6 +348,20 @@ describe('catalog validation CLI evidence boundary', () => {
     });
     await writeJson('catalog.json', catalog);
     await execFileAsync('git', ['init'], { cwd: repositoryRoot });
+    await execFileAsync(
+      'git',
+      [
+        '-c',
+        'user.name=Fixture',
+        '-c',
+        'user.email=fixture@example.com',
+        'commit',
+        '--allow-empty',
+        '-m',
+        'freeze base',
+      ],
+      { cwd: repositoryRoot },
+    );
     await execFileAsync('git', ['add', manifestPath], { cwd: repositoryRoot });
     await execFileAsync(
       'git',
@@ -359,6 +373,23 @@ describe('catalog validation CLI evidence boundary', () => {
         'commit',
         '-m',
         'freeze manifest',
+      ],
+      { cwd: repositoryRoot },
+    );
+    const { stdout: baseCommit } = await execFileAsync('git', ['rev-parse', 'HEAD'], {
+      cwd: repositoryRoot,
+    });
+    await execFileAsync(
+      'git',
+      [
+        '-c',
+        'user.name=Fixture',
+        '-c',
+        'user.email=fixture@example.com',
+        'commit',
+        '--allow-empty',
+        '-m',
+        'current release state',
       ],
       { cwd: repositoryRoot },
     );
@@ -375,6 +406,8 @@ describe('catalog validation CLI evidence boundary', () => {
         'catalog.json',
         '--evidence-inventory',
         inventoryPath,
+        '--base-commit',
+        baseCommit.trim(),
       ],
       { cwd: repositoryRoot },
     ).catch((value: unknown) => value as { code: number; stderr: string });
