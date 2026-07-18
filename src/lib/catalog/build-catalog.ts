@@ -58,9 +58,15 @@ export interface TrustedCatalogReleaseEvidenceInventory {
 export interface CatalogLike {
   readonly schemaVersion: '2.0.0';
   readonly release: {
+    readonly version: string;
+    readonly releaseKind: 'initial' | 'incremental';
     readonly advancedSlotRegistryDigest: string;
     readonly cutoffAt: string;
+    readonly validatedAt: string;
+    readonly publicationEffectiveAt: string;
+    readonly manifestDigest: string;
     readonly contentSnapshotDigest: string;
+    readonly updateIds: readonly string[];
     readonly firstContestId: string;
     readonly lastContestId: string;
     readonly contestCount: number;
@@ -95,6 +101,8 @@ export interface CatalogLike {
     readonly changedProblemIds: readonly string[];
     readonly heldProblemIds: readonly string[];
     readonly withdrawnProblemIds: readonly string[];
+    readonly taxonomyChanges: readonly unknown[];
+    readonly changelogPath: string;
   };
   readonly advancedSlotRegistry: {
     readonly version: '1.0.0';
@@ -255,10 +263,7 @@ const entityArrayKeys = [
   'answerMaterials',
 ] as const;
 
-/**
- * The release block is metadata about the snapshot and contains the snapshot digest itself.
- * Keep this projection explicit so adding a release field can never silently change its subject.
- */
+/** Keep the public content projection explicit so new top-level fields cannot silently escape it. */
 const catalogContentKeys = [
   'schemaVersion',
   'advancedSlotRegistry',
@@ -280,11 +285,34 @@ const catalogContentKeys = [
   'answerMaterials',
 ] as const;
 
-export const projectCatalogContent = (
-  catalog: CatalogLike,
-): Readonly<Record<(typeof catalogContentKeys)[number], unknown>> => {
-  const projection = {} as Record<(typeof catalogContentKeys)[number], unknown>;
+const immutableReleaseScopeKeys = [
+  'version',
+  'releaseKind',
+  'cutoffAt',
+  'validatedAt',
+  'publicationEffectiveAt',
+  'manifestDigest',
+  'updateIds',
+  'advancedSlotRegistryDigest',
+  'firstContestId',
+  'lastContestId',
+  'contestCount',
+  'problemCount',
+  'slotRecordCount',
+  'addedProblemIds',
+  'changedProblemIds',
+  'heldProblemIds',
+  'withdrawnProblemIds',
+  'taxonomyChanges',
+  'changelogPath',
+] as const;
+
+export const projectCatalogContent = (catalog: CatalogLike): Readonly<Record<string, unknown>> => {
+  const projection: Record<string, unknown> = {};
   for (const key of catalogContentKeys) projection[key] = catalog[key];
+  const immutableReleaseScope: Record<string, unknown> = {};
+  for (const key of immutableReleaseScopeKeys) immutableReleaseScope[key] = catalog.release[key];
+  projection.release = immutableReleaseScope;
   return projection;
 };
 

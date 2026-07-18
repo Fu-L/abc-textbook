@@ -13,6 +13,11 @@ import {
 } from '../domain/schema-parts/catalog.js';
 import { HumanContentReviewEvidenceSchema as ReviewEvidenceSchema } from '../domain/schema-parts/review-evidence.js';
 import {
+  HumanReviewError,
+  type TrustedReviewCheckInventory,
+  validateHumanContentReview,
+} from '../validation/human-content-review.js';
+import {
   CatalogPublicationBoundaryError,
   resolvePublicEvidencePath,
 } from './publication-boundary.js';
@@ -60,6 +65,42 @@ const CatalogReviewReferenceSchema = strictObject({
   authorIds: z.array(EntityIdSchema).min(1),
   reviewerIds: z.array(EntityIdSchema).min(1),
   aggregatePassed: z.boolean(),
+});
+
+/**
+ * Supplied independently of the evidence inventory (for example from a verified
+ * ContentWorkManifest/release candidate) so an inventory cannot choose its own
+ * required checks or review scope.
+ */
+export const CatalogEvidenceTrustContextSchema = strictObject({
+  subjectDigest: Sha256Schema,
+  inventoryDigest: Sha256Schema,
+  workManifest: strictObject({
+    learningOutcomeIds: z.array(EntityIdSchema),
+    reviewUnits: z
+      .array(
+        strictObject({
+          reviewUnitId: z.string().regex(/^RU-T\d{3}-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
+          subjectPaths: z.array(SafePathSchema).min(1),
+          learningOutcomeIds: z.array(EntityIdSchema),
+          owner: EntityIdSchema,
+        }),
+      )
+      .min(1),
+  }),
+  applicableChecks: z.array(strictObject({ checkId: EntityIdSchema, command: text })).min(1),
+  reviewItems: z
+    .array(
+      strictObject({
+        reviewItemId: EntityIdSchema,
+        reviewUnitId: z.string().regex(/^RU-T\d{3}-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
+        kind: z.enum(['outcome_coverage', 'non_automatable_claim', 'non_automatable_example']),
+        subjectPaths: z.array(SafePathSchema).min(1),
+        authorIds: z.array(EntityIdSchema).min(1),
+        learningOutcomeIds: z.array(EntityIdSchema),
+      }),
+    )
+    .min(1),
 });
 
 export const CatalogReleaseEvidenceInventorySchema = strictObject({
@@ -331,6 +372,7 @@ const verifyReviewReference = async (
   reference: ReviewReference,
   repositoryRoot: string,
   trustedChecks: readonly TrustedCatalogReleaseEvidenceInventory['checks'][number][],
+  trustedReviewInventory: TrustedReviewCheckInventory,
 ): Promise<TrustedCatalogReleaseEvidenceInventory['reviews'][number]> => {
   const file = await readPublicEvidenceFile(reference.path, repositoryRoot);
   if (file.digest !== reference.digest) {
@@ -366,6 +408,14 @@ const verifyReviewReference = async (
       `${reference.evidenceId} does not reproduce its catalog reference.`,
     );
   }
+  try {
+    validateHumanContentReview(evidence, trustedReviewInventory);
+  } catch (error) {
+    if (error instanceof HumanReviewError) {
+      throw new CatalogEvidenceInventoryError(error.code, error.message);
+    }
+    throw error;
+  }
   validateReviewCompleteness(evidence);
   const reviewChecks = await Promise.all(
     evidence.applicableChecks.map((check) =>
@@ -397,8 +447,17 @@ const verifyReviewReference = async (
 
 export const loadTrustedCatalogReleaseEvidenceInventory = async (
   inventoryPath: string,
+  trustedReviewContext: unknown,
   repositoryRoot = process.cwd(),
 ): Promise<TrustedCatalogReleaseEvidenceInventory> => {
+  const trustedContextResult = CatalogEvidenceTrustContextSchema.safeParse(trustedReviewContext);
+  if (!trustedContextResult.success) {
+    throw new CatalogEvidenceInventoryError(
+      'EVIDENCE_TRUST_CONTEXT_INVALID',
+      trustedContextResult.error.message,
+    );
+  }
+  const trustedContext: TrustedReviewCheckInventory = trustedContextResult.data;
   const inventoryFile = await readPublicEvidenceFile(inventoryPath, repositoryRoot);
   const parsed = CatalogReleaseEvidenceInventorySchema.safeParse(inventoryFile.value);
   if (!parsed.success) {
@@ -412,7 +471,9 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
     parsed.data.checks.map((check) => verifyCheckReference(check, repositoryRoot)),
   );
   const reviews = await Promise.all(
-    parsed.data.reviews.map((review) => verifyReviewReference(review, repositoryRoot, checks)),
+    parsed.data.reviews.map((review) =>
+      verifyReviewReference(review, repositoryRoot, checks, trustedContext),
+    ),
   );
   const subjectDigests = [
     ...checks.map(({ subjectDigest }) => subjectDigest),
@@ -422,7 +483,8 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
   if (
     subjectDigest === undefined ||
     subjectDigests.some((digest) => digest !== subjectDigest) ||
-    parsed.data.subjectDigest !== subjectDigest
+    parsed.data.subjectDigest !== subjectDigest ||
+    trustedContext.subjectDigest !== subjectDigest
   ) {
     throw new CatalogEvidenceInventoryError(
       'EVIDENCE_SUBJECT_MISMATCH',

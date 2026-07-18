@@ -153,8 +153,42 @@ describe('catalog release evidence inventory', () => {
         },
       ],
     };
+    const trustedReviewContext = {
+      subjectDigest,
+      inventoryDigest: sha('b'),
+      workManifest: {
+        learningOutcomeIds: [],
+        reviewUnits: [
+          {
+            reviewUnitId: 'RU-T024-catalog',
+            subjectPaths: ['src/content/docs/index.md'],
+            learningOutcomeIds: [],
+            owner: 'person-author',
+          },
+        ],
+      },
+      applicableChecks: [{ checkId: check.checkId, command: check.command }],
+      reviewItems: [
+        {
+          reviewItemId: 'human-review-item-catalog',
+          reviewUnitId: 'RU-T024-catalog',
+          kind: 'non_automatable_claim',
+          subjectPaths: ['src/content/docs/index.md'],
+          authorIds: ['person-author'],
+          learningOutcomeIds: [],
+        },
+      ],
+    } as const;
     await writeJson(inventoryPath, inventory);
-    return { inventoryPath, inventory, checkPath, check, reviewPath, review };
+    return {
+      inventoryPath,
+      inventory,
+      checkPath,
+      check,
+      reviewPath,
+      review,
+      trustedReviewContext,
+    };
   };
 
   it('builds trusted metadata from the result and review files', async () => {
@@ -162,6 +196,7 @@ describe('catalog release evidence inventory', () => {
 
     const trusted = await loadTrustedCatalogReleaseEvidenceInventory(
       fixture.inventoryPath,
+      fixture.trustedReviewContext,
       repositoryRoot,
     );
 
@@ -190,7 +225,11 @@ describe('catalog release evidence inventory', () => {
     missingCheck.resultPath = 'docs/verification/missing.json';
     await writeJson(fixture.inventoryPath, missing);
     await expect(
-      loadTrustedCatalogReleaseEvidenceInventory(fixture.inventoryPath, repositoryRoot),
+      loadTrustedCatalogReleaseEvidenceInventory(
+        fixture.inventoryPath,
+        fixture.trustedReviewContext,
+        repositoryRoot,
+      ),
     ).rejects.toThrow(/EVIDENCE_FILE_NOT_FOUND/u);
 
     const staging = structuredClone(fixture.inventory) as {
@@ -201,7 +240,11 @@ describe('catalog release evidence inventory', () => {
     stagingCheck.resultPath = 'staging/check.json';
     await writeJson(fixture.inventoryPath, staging);
     await expect(
-      loadTrustedCatalogReleaseEvidenceInventory(fixture.inventoryPath, repositoryRoot),
+      loadTrustedCatalogReleaseEvidenceInventory(
+        fixture.inventoryPath,
+        fixture.trustedReviewContext,
+        repositoryRoot,
+      ),
     ).rejects.toThrow(/STAGING_PUBLICATION_BOUNDARY/u);
 
     const digestMismatch = structuredClone(fixture.inventory) as {
@@ -212,7 +255,11 @@ describe('catalog release evidence inventory', () => {
     mismatchedCheck.resultDigest = sha('f');
     await writeJson(fixture.inventoryPath, digestMismatch);
     await expect(
-      loadTrustedCatalogReleaseEvidenceInventory(fixture.inventoryPath, repositoryRoot),
+      loadTrustedCatalogReleaseEvidenceInventory(
+        fixture.inventoryPath,
+        fixture.trustedReviewContext,
+        repositoryRoot,
+      ),
     ).rejects.toThrow(/EVIDENCE_RESULT_DIGEST_MISMATCH/u);
   });
 
@@ -230,7 +277,11 @@ describe('catalog release evidence inventory', () => {
     invalidCheck.resultDigest = invalidResultDigest;
     await writeJson(fixture.inventoryPath, invalidInventory);
     await expect(
-      loadTrustedCatalogReleaseEvidenceInventory(fixture.inventoryPath, repositoryRoot),
+      loadTrustedCatalogReleaseEvidenceInventory(
+        fixture.inventoryPath,
+        fixture.trustedReviewContext,
+        repositoryRoot,
+      ),
     ).rejects.toThrow(/EVIDENCE_RESULT_SCHEMA_INVALID/u);
 
     const refreshed = await makeFixture();
@@ -247,8 +298,12 @@ describe('catalog release evidence inventory', () => {
     incompleteReviewReference.aggregatePassed = false;
     await writeJson(refreshed.inventoryPath, incompleteInventory);
     await expect(
-      loadTrustedCatalogReleaseEvidenceInventory(refreshed.inventoryPath, repositoryRoot),
-    ).rejects.toThrow(/HUMAN_REVIEW_INCOMPLETE/u);
+      loadTrustedCatalogReleaseEvidenceInventory(
+        refreshed.inventoryPath,
+        refreshed.trustedReviewContext,
+        repositoryRoot,
+      ),
+    ).rejects.toThrow(/REVIEW_INCOMPLETE/u);
   });
 
   it('exposes a typed loader error for invalid inventory JSON', async () => {
@@ -257,9 +312,62 @@ describe('catalog release evidence inventory', () => {
 
     const error = await loadTrustedCatalogReleaseEvidenceInventory(
       inventoryPath,
+      (await makeFixture()).trustedReviewContext,
       repositoryRoot,
     ).catch((value: unknown) => value);
     expect(error).toBeInstanceOf(CatalogEvidenceInventoryError);
     expect((error as CatalogEvidenceInventoryError).code).toBe('EVIDENCE_INVENTORY_SCHEMA_INVALID');
+  });
+
+  it('rejects omitted required checks and review items from the independent context', async () => {
+    const fixture = await makeFixture();
+    const contextWithRequiredLint = {
+      ...fixture.trustedReviewContext,
+      applicableChecks: [
+        ...fixture.trustedReviewContext.applicableChecks,
+        { checkId: 'check-lint', command: 'npm run lint' },
+      ],
+    };
+    await expect(
+      loadTrustedCatalogReleaseEvidenceInventory(
+        fixture.inventoryPath,
+        contextWithRequiredLint,
+        repositoryRoot,
+      ),
+    ).rejects.toThrow(/REVIEWER_CHECK_INVENTORY_INVALID/u);
+
+    const contextWithChangedClaim = {
+      ...fixture.trustedReviewContext,
+      workManifest: {
+        ...fixture.trustedReviewContext.workManifest,
+        reviewUnits: [
+          ...fixture.trustedReviewContext.workManifest.reviewUnits,
+          {
+            reviewUnitId: 'RU-T024-added-claim',
+            subjectPaths: ['src/content/docs/added-claim.md'],
+            learningOutcomeIds: [],
+            owner: 'person-author',
+          },
+        ],
+      },
+      reviewItems: [
+        ...fixture.trustedReviewContext.reviewItems,
+        {
+          reviewItemId: 'human-review-item-added-claim',
+          reviewUnitId: 'RU-T024-added-claim',
+          kind: 'non_automatable_claim' as const,
+          subjectPaths: ['src/content/docs/added-claim.md'],
+          authorIds: ['person-author'],
+          learningOutcomeIds: [],
+        },
+      ],
+    };
+    await expect(
+      loadTrustedCatalogReleaseEvidenceInventory(
+        fixture.inventoryPath,
+        contextWithChangedClaim,
+        repositoryRoot,
+      ),
+    ).rejects.toThrow(/REVIEW_ITEM_INVENTORY_INVALID/u);
   });
 });

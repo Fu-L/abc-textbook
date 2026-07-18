@@ -343,6 +343,39 @@ describe('official advanced slot registry', () => {
 
     expect(catalog.advancedSlotRegistry).toEqual(registry);
     expect(catalogContentDigest(catalog)).toBe(catalog.release.contentSnapshotDigest);
+    const releaseScopeMutations: readonly ((release: Record<string, unknown>) => void)[] = [
+      (release) => {
+        release.version = '2026.07.18';
+      },
+      (release) => {
+        release.releaseKind = 'incremental';
+      },
+      (release) => {
+        release.cutoffAt = '2026-07-17T14:01:00+09:00';
+      },
+      (release) => {
+        release.manifestDigest = '1'.repeat(64);
+      },
+      (release) => {
+        release.updateIds = ['update-replaced'];
+      },
+      (release) => {
+        release.addedProblemIds = ['abc212-e'];
+      },
+      (release) => {
+        release.taxonomyChanges = [{ changed: true }];
+      },
+      (release) => {
+        release.changelogPath = 'docs/changelog/2026.07.18.md';
+      },
+    ];
+    for (const mutateRelease of releaseScopeMutations) {
+      const changedReleaseScope = structuredClone(catalog);
+      mutateRelease(changedReleaseScope.release);
+      expect(catalogContentDigest(changedReleaseScope)).not.toBe(
+        catalog.release.contentSnapshotDigest,
+      );
+    }
     const changedContent = structuredClone(catalog) as Record<string, unknown>;
     const [changedProblem] = changedContent.problems as { title: string }[];
     if (!changedProblem) throw new Error('Fixture problem is missing.');

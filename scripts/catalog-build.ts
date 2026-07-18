@@ -19,18 +19,21 @@ const args = process.argv.slice(2);
 const inputPath = valueAfter(args, '--input');
 const outputPath = valueAfter(args, '--output');
 const evidencePath = valueAfter(args, '--evidence-inventory');
-if (!inputPath || !outputPath || !evidencePath || args.length !== 6) {
+const trustContextPath = valueAfter(args, '--trusted-review-context');
+if (!inputPath || !outputPath || !evidencePath || !trustContextPath || args.length !== 8) {
   console.error(
-    'Usage: catalog-build --input CATALOG.json --output PATH --evidence-inventory INVENTORY.json',
+    'Usage: catalog-build --input CATALOG.json --output PATH --evidence-inventory INVENTORY.json --trusted-review-context CONTEXT.json',
   );
   process.exitCode = 64;
 } else {
   try {
     const resolvedInputPath = await resolvePublicCatalogInput(inputPath);
     const input = JSON.parse(await readFile(resolvedInputPath, 'utf8')) as unknown;
-    const trustedEvidence = evidencePath
-      ? await loadTrustedCatalogReleaseEvidenceInventory(evidencePath)
-      : undefined;
+    const trustedReviewContext = JSON.parse(await readFile(trustContextPath, 'utf8')) as unknown;
+    const trustedEvidence = await loadTrustedCatalogReleaseEvidenceInventory(
+      evidencePath,
+      trustedReviewContext,
+    );
     const catalog = buildCatalog(input, [], trustedEvidence);
     await writeFile(outputPath, `${JSON.stringify(catalog, null, 2)}\n`, { flag: 'wx' });
   } catch (error) {

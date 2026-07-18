@@ -15,14 +15,22 @@ const inputIndex = args.indexOf('--input');
 const inputPath = inputIndex < 0 ? undefined : args[inputIndex + 1];
 const evidenceIndex = args.indexOf('--evidence-inventory');
 const evidencePath = evidenceIndex < 0 ? undefined : args[evidenceIndex + 1];
-if (!inputPath || !evidencePath || args.length !== 4) {
-  console.error('Usage: catalog-validate --input CATALOG.json --evidence-inventory INVENTORY.json');
+const trustContextIndex = args.indexOf('--trusted-review-context');
+const trustContextPath = trustContextIndex < 0 ? undefined : args[trustContextIndex + 1];
+if (!inputPath || !evidencePath || !trustContextPath || args.length !== 6) {
+  console.error(
+    'Usage: catalog-validate --input CATALOG.json --evidence-inventory INVENTORY.json --trusted-review-context CONTEXT.json',
+  );
   process.exitCode = 64;
 } else {
   try {
     const resolvedInputPath = await resolvePublicCatalogInput(inputPath);
     const input = JSON.parse(await readFile(resolvedInputPath, 'utf8')) as unknown;
-    const trustedEvidence = await loadTrustedCatalogReleaseEvidenceInventory(evidencePath);
+    const trustedReviewContext = JSON.parse(await readFile(trustContextPath, 'utf8')) as unknown;
+    const trustedEvidence = await loadTrustedCatalogReleaseEvidenceInventory(
+      evidencePath,
+      trustedReviewContext,
+    );
     buildCatalog(input, [], trustedEvidence);
     console.log('CATALOG_VALID');
   } catch (error) {
