@@ -102,14 +102,31 @@ taxonomy作成前に全Problemへちょうど一件作る分析正本である�
 
 公開taxonomyを作る前に、対象Problem ID集合とInventoryのProblem ID集合が完全一致しなければならない。
 
+### PreviewCohortCandidatePool
+
+`initial-v1`のcohortを選ぶために、候補範囲の公式metadataから作る軽量な選定入力である。`staging/previews/<preview-id>/candidate-pool.json`に保存し、previewのTechnique Inventoryや公開taxonomyとは別のnamespaceで管理する。
+
+| Field | Rule |
+|---|---|
+| `problemId` / `contestNumber` / `officialTaskOrder` | 公式metadataから取得した安定識別子と公式順 |
+| `advancedLabel` | Dより後の公式task label |
+| `sourceRevisionIds` | 問題の存在、順序、label、分類候補の根拠 |
+| `candidateDomains` / `candidateOutcomeIds` | 公式根拠から作った軽量な分野・成果候補。完全なTechniqueInventoryではない |
+| `selectionEligible` / `exclusionReason` | cohort選定に使えるかと、使えない場合の具体的理由 |
+| `fixtureId` | fixture由来なら実データと区別するID、実データならnull |
+| `candidatePoolDigest` | 全候補とSource Revisionを含む不変digest |
+
+候補分類は主解法・証明・計算量を確定する完全棚卸しではなく、選定規則を機械的に評価するためのsource-backedな入力に限る。Tag、LearningUnit、canonical Problemの分類を作成してはならず、T037のcohort manifestはこのpoolのdigestを固定した後にだけ生成できる。
+
 ### PreviewSnapshot
 
-全コーパス完成前に設計を実データで検証するprivate previewの不変snapshotである。公開Catalogのentityではなく、`staging/previews/<preview-id>/snapshots/<joinDigest>.json`に保存する。同じpreviewを再検証しても既存snapshotを上書きせず、新しいjoin digestのsnapshotを追加する。
+全コーパス完成前に設計を実データで検証するprivate previewの不変snapshotである。公開Catalogのentityではなく、唯一の正本を`staging/previews/<preview-id>/snapshots/<joinDigest>.json`に保存する。同じpreviewを再検証しても既存snapshotを上書きせず、新しいjoin digestのsnapshotを追加する。
 
 | Field | Rule |
 |---|---|
 | `previewId` | `initial-v1`などの版付き安定ID |
 | `manifestDigest` | T037でfreezeしたcohort manifestの不変digest |
+| `candidatePoolDigest` | cohort選定に使ったPreviewCohortCandidatePoolのdigest |
 | `problemIds` | 4分野、8 Problem以上、3 Contest以上、2 advanced label以上を満たす選定集合 |
 | `sourceRevisionIds` | 選定根拠のSource Revision集合。fixture使用時はfixture IDを別記録 |
 | `provisionalTaxonomyDigest` | 仮Tag/Outcome/Unit/DAG/Placementのdigest。canonical taxonomyのdigestとは別物 |
@@ -121,6 +138,34 @@ taxonomy作成前に全Problemへちょうど一件作る分析正本である�
 | `status` | `draft`, `on_hold`, `passed`。`passed`でも公開Releaseへ昇格しない |
 
 Previewはcanonical `Problem.id`、`SourceRevision.id`、`LearningRecord.problemId`を再採番してはならない。previewのcontentと仮taxonomyはnamespace付きpathに隔離し、公開catalog loaderとPagefindから除外する。
+
+### PreviewSnapshotReference
+
+監査・検索用の派生参照であり、`PreviewSnapshot`の複製ではない。`docs/verification/previews/<preview-id>/preview-join/<joinDigest>.json`に保存し、合否の正本は常にcanonical snapshotへ解決する。
+
+| Field | Rule |
+|---|---|
+| `previewId` / `joinDigest` | 参照対象のpreviewとcanonical snapshotを識別する |
+| `canonicalSnapshotPath` | `staging/previews/<preview-id>/snapshots/<joinDigest>.json`の固定path |
+| `canonicalSnapshotDigest` | 参照作成時に読み取ったcanonical snapshotのdigest |
+| `status` | canonical snapshotから再計算した表示用status |
+| `transactionId` | PreviewSnapshotCommitのID |
+
+参照はcanonical snapshotが存在し、path上の内容が`joinDigest`と一致した後にだけ作成する。参照の欠落・古さはcanonical snapshotの再作成を意味せず、再実行で参照だけを修復できる。参照単体を`passed`の証拠として扱ってはならない。
+
+### PreviewSnapshotCommit
+
+canonical snapshotと派生参照を異なるdirectoryへ書く処理を追跡するtransaction manifestである。`staging/previews/<preview-id>/transactions/<joinDigest>.json`に保存し、phase更新自体も同じdirectory内の一時ファイルからrenameして行う。
+
+| Field | Rule |
+|---|---|
+| `transactionId` / `joinDigest` | 一回のjoin結果に対する安定ID |
+| `canonicalSnapshotPath` / `referencePath` | 二つの保存先を明示する |
+| `phase` | `prepared`、`snapshot_committed`、`reference_committed`、`verified`、`recovery_required`の単調な状態 |
+| `canonicalSnapshotDigest` | commit後に検証したcanonical snapshotのdigest |
+| `recoveryReason` | 中断・I/O失敗・stale参照などの具体的理由。正常時はnull |
+
+canonical snapshotは同じdirectory内の一時ファイルから一回だけrenameしてcommitし、既存pathを上書きしない。参照はその後に別の一時ファイルからrenameする。二つのdirectoryをまたぐ処理全体を一つのfilesystem atomic operationとはみなさず、途中停止時はtransaction manifestを読み、canonical snapshotを正本として参照を再生成または保留する。
 
 ### TaxonomyIntegrationMap
 
