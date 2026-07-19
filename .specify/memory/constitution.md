@@ -94,15 +94,16 @@ maintenance benefit. This limits drift and keeps future corrections affordable.
 3. Organize implementation tasks by independently reviewable learning outcome. Tasks MUST
    include source verification, example or exercise validation, accessibility review, and
    cross-reference checks when relevant.
-4. Before merge, the maintainer MUST perform an explicit self-review that confirms outcome
-   coverage and run all applicable automated checks. A third-party reviewer MUST review the
-   affected scope only when one or more of the following fixed high-risk conditions applies:
-   an explanation conflicts with an authoritative source or correction, it introduces an
-   original proof or other correctness argument not directly supported by the cited source, or
-   it makes a major taxonomy/classification change to a learning outcome, technique tag,
-   prerequisite, or problem placement. A normal update MUST NOT require an external person ID.
-   Review evidence MUST state whether the decision is a self-review or a third-party review;
-   the two modes MUST NOT be presented as interchangeable.
+4. Before merge, an explicit human review MUST confirm outcome coverage and run all applicable
+   automated checks. A normal update MUST use the maintainer's `self` review. A third-party
+   reviewer MUST review the affected scope, using `third_party` mode instead of `self`, only
+   when one or more of the following fixed high-risk conditions applies: an explanation
+   conflicts with an authoritative source or correction, it introduces an original proof or
+   other correctness argument not directly supported by the cited source, or it makes a major
+   taxonomy/classification change to a learning outcome, technique tag, prerequisite, or
+   problem placement. A normal update MUST NOT require an external person ID. Review evidence
+   MUST state whether the decision is a self-review or a third-party review; the two modes MUST
+   NOT be presented as interchangeable.
 5. A change MUST NOT be published while known broken links, unexplained validation failures,
    inaccessible required content, contradictory guidance, or non-reproducible examples remain.
 

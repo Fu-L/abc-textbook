@@ -127,8 +127,7 @@ export const validateHumanContentReview = (
   if (
     trustedInventory.reviewPolicy.requiredMode !== evidence.reviewPolicy.requiredMode ||
     !sameStringSet(trustedInventory.reviewPolicy.riskReasons, evidence.reviewPolicy.riskReasons) ||
-    (trustedInventory.reviewPolicy.requiredMode === 'third_party' &&
-      evidence.reviewMode !== 'third_party')
+    evidence.reviewMode !== trustedInventory.reviewPolicy.requiredMode
   ) {
     throw new HumanReviewError(
       'REVIEW_POLICY_MISMATCH',

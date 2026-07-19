@@ -215,8 +215,7 @@ export const HumanContentReviewEvidenceSchema = strictObject({
       });
     if (
       evidence.reviewer.mode !== evidence.reviewMode ||
-      (evidence.reviewPolicy.requiredMode === 'third_party' &&
-        evidence.reviewMode !== 'third_party') ||
+      evidence.reviewMode !== evidence.reviewPolicy.requiredMode ||
       (evidence.aggregatePassed &&
         (!evidence.outcomeCoverageConfirmed ||
           evidence.changesRequestedItemCount !== 0 ||
@@ -232,6 +231,30 @@ export const HumanContentReviewEvidenceSchema = strictObject({
   })
   .meta({
     allOf: [
+      {
+        oneOf: [
+          {
+            properties: {
+              reviewPolicy: {
+                properties: { requiredMode: { const: 'self' } },
+                required: ['requiredMode'],
+              },
+              reviewMode: { const: 'self' },
+            },
+            required: ['reviewPolicy', 'reviewMode'],
+          },
+          {
+            properties: {
+              reviewPolicy: {
+                properties: { requiredMode: { const: 'third_party' } },
+                required: ['requiredMode'],
+              },
+              reviewMode: { const: 'third_party' },
+            },
+            required: ['reviewPolicy', 'reviewMode'],
+          },
+        ],
+      },
       {
         if: { properties: { aggregatePassed: { const: true } }, required: ['aggregatePassed'] },
         then: {

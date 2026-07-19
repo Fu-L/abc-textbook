@@ -116,6 +116,52 @@
   "additionalProperties": false,
   "allOf": [
     {
+      "oneOf": [
+        {
+          "properties": {
+            "reviewPolicy": {
+              "properties": {
+                "requiredMode": {
+                  "const": "self"
+                }
+              },
+              "required": [
+                "requiredMode"
+              ]
+            },
+            "reviewMode": {
+              "const": "self"
+            }
+          },
+          "required": [
+            "reviewPolicy",
+            "reviewMode"
+          ]
+        },
+        {
+          "properties": {
+            "reviewPolicy": {
+              "properties": {
+                "requiredMode": {
+                  "const": "third_party"
+                }
+              },
+              "required": [
+                "requiredMode"
+              ]
+            },
+            "reviewMode": {
+              "const": "third_party"
+            }
+          },
+          "required": [
+            "reviewPolicy",
+            "reviewMode"
+          ]
+        }
+      ]
+    },
+    {
       "if": {
         "properties": {
           "aggregatePassed": {

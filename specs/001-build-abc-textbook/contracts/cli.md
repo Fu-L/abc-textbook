@@ -121,7 +121,7 @@ npm run abc:review -- --candidate CANDIDATE_ID --evidence PATH
 evidenceは次を満たさなければならない。
 
 - `scopeType=release_candidate`、`scopeId=CANDIDATE_ID`、同じ`contentSubjectDigest`。
-- manifestのreview policyと同じ`reviewMode`（通常は`self`、高リスク時だけ`third_party`）を記録する。
+- manifestのreview policyと同じ`reviewMode`（通常は`self`、高リスク時だけ`third_party`）を記録する。高リスク時の`third_party` reviewは同じscopeの`self` reviewに代わる。
 - `self`ではmanifest ownerがOutcome coverageを確認し、`third_party`ではauthor外のreviewerが確認する。
 - 全applicable checkの`executedByReviewerId`が証跡のreviewerと一致し、同じsubjectのresultと一致する。
 - 完全自動化不能な新規・変更Claim/Exampleの全itemをreviewerが判定し、self/third-partyの表示を混同しない。

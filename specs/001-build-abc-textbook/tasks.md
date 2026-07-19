@@ -4,7 +4,7 @@
 
 **Prerequisites**: `plan.md`, `spec.md`, `research.md`, `data-model.md`, `contracts/`, `quickstart.md`
 
-**Validation**: 自動化可能な検査は Vitest/Playwright/Ajv/build CLI で先に失敗を確認してから実装する。通常更新はmanifest ownerのself-reviewで完結し、公式根拠との矛盾・独自証明・重大な分類変更を含む高リスク項目だけを作成者外のthird-party reviewへ送る。
+**Validation**: 自動化可能な検査は Vitest/Playwright/Ajv/build CLI で先に失敗を確認してから実装する。通常更新はmanifest ownerのself-reviewで完結し、公式根拠との矛盾・独自証明・重大な分類変更を含む高リスク項目だけはself-reviewに代えて作成者外のthird-party reviewへ送る。
 
 **Organization**: User Story ごとに独立検証可能な phase を置く。同優先度 P1 のうち US2 を先に実行するのは、全問題の Technique Inventory とコーパス横断 taxonomy が US1 の解説執筆をブロックするためであり、製品優先度の変更ではない。
 
@@ -104,7 +104,7 @@
 - [ ] T056 [P] [US2] Freeze one work manifest per accepted outcome and author hybrid/advanced-modeling units and structured learning items in `docs/work-manifests/initial/hybrid/`, `src/content/docs/learn/hybrid/`, `src/content/examples/hybrid/`, `src/content/exercises/hybrid/`, `src/content/assessments/hybrid/`, and `src/content/answer-materials/hybrid/`
 - [ ] T057 [US2] Generate learning-path navigation and order reasons exclusively from the validated DAG in `src/lib/catalog/build-learning-path.ts`
 - [ ] T058 [US2] Verify every exercise and answer material against its LearningOutcome and record executable or documented-procedure evidence in `docs/verification/bootstrap/answer-materials.json`
-- [ ] T059 [US2] Have the maintainer self-review outcome coverage, run the taxonomy/DAG/placement/reachability/learning-path/terminology/cross-reference suites, invoke third-party review only for fixed high-risk classification changes, and record mode-labeled current-subject MergeReviewEvidence in `docs/verification/bootstrap/us2.json` and `docs/reviews/human-content/bootstrap/us2/merge-review.json`
+- [ ] T059 [US2] Have the policy-selected reviewer confirm outcome coverage and run the taxonomy/DAG/placement/reachability/learning-path/terminology/cross-reference suites (`self` for normal changes, `third_party` instead of `self` for fixed high-risk classification changes), and record mode-labeled current-subject MergeReviewEvidence in `docs/verification/bootstrap/us2.json` and `docs/reviews/human-content/bootstrap/us2/merge-review.json`
 - [ ] T060 [US2] Pre-fix and execute the five-position graph/DP/data-structure/mathematics learning-path self-study for SC-010 in `docs/verification/learner-outcomes/bootstrap/sc-010.json`
 
 **Checkpoint**: Full-corpus taxonomy and textbook order are stable; no contest-batch Tag/Unit or unreachable Problem remains.
@@ -135,11 +135,11 @@
 - [ ] T071 [P] [US1] Author outcome-scoped hybrid/advanced-modeling explanations, claims, examples, and review manifests in `src/content/docs/problems/hybrid/`, `src/content/claims/hybrid/`, `src/content/examples/hybrid/`, and `docs/work-manifests/initial/problem-explanations/hybrid/`
 - [ ] T072 [US1] Execute every runnable example in its declared environment and record input, procedure, expected, observed, and digest evidence in `docs/verification/bootstrap/examples.json`
 - [ ] T073 [US1] Re-evaluate every non-full placement against algorithm, proof, complexity, constraints, prerequisites, implementation differences, and learning outcomes in `docs/verification/bootstrap/problem-placements.json`
-- [ ] T074 [US1] Have the maintainer self-review non-automatable new or changed technical claims and examples, and have third-party reviewers resolve only the fixed high-risk cases in `docs/reviews/human-content/bootstrap/problem-explanations/`
+- [ ] T074 [US1] Have the policy-selected reviewer (`self` for normal changes, `third_party` instead of `self` for fixed high-risk cases) review non-automatable new or changed technical claims and examples in `docs/reviews/human-content/bootstrap/problem-explanations/`
 - [ ] T075 [US1] Validate 100% explanation structure, source traceability, skill version, terminology, copyright-safe quotation, example reproducibility, and zero unresolved review findings in `docs/verification/bootstrap/explanations.json`
 - [ ] T076 [US1] Generate the public Problem-to-Explanation mapping without duplicating canonical tag/unit data in `src/lib/catalog/build-problem-explanations.ts`
 - [ ] T077 [US1] Pre-fix and execute the five-problem, three-genre, two-label self-study for SC-009 in `docs/verification/learner-outcomes/bootstrap/sc-009.json`
-- [ ] T078 [US1] Have the maintainer confirm outcome coverage and run every applicable US1 check as self-review, require third-party review only for the fixed high-risk policy, resolve all findings, and store the mode-labeled acceptance matrix plus current-subject MergeReviewEvidence in `docs/verification/bootstrap/us1.json` and `docs/reviews/human-content/bootstrap/us1/merge-review.json`
+- [ ] T078 [US1] Have the policy-selected reviewer confirm outcome coverage and run every applicable US1 check (`self` for normal changes, `third_party` instead of `self` for the fixed high-risk policy), resolve all findings, and store the mode-labeled acceptance matrix plus current-subject MergeReviewEvidence in `docs/verification/bootstrap/us1.json` and `docs/reviews/human-content/bootstrap/us1/merge-review.json`
 
 **Checkpoint**: Every scoped Problem has either a complete independent explanation or a fully evidenced similar/supplement placement, and SC-009 passes.
 
@@ -171,7 +171,7 @@
 - [ ] T091 [US3] Build backup selection, preview, conflict-policy confirmation, apply result, and storage status UI in `src/pages/settings/learning-records.astro`
 - [ ] T092 [US3] Build the initial `needsReview=1` page with extra filters and no external state transmission in `src/pages/review/index.astro`
 - [ ] T093 [US3] Record full-route shared-contract E2E, representative raw timing, and reload evidence in `docs/verification/user-timing/bootstrap/sc-012.json`
-- [ ] T094 [US3] Have the maintainer self-review outcome coverage, run all US3 checks including 100+ record success/failure restore, resolve findings, and record current-subject mode-labeled MergeReviewEvidence in `docs/verification/bootstrap/learning-record-restore.json` and `docs/reviews/human-content/bootstrap/us3/merge-review.json`
+- [ ] T094 [US3] Have the policy-selected reviewer confirm outcome coverage and run all US3 checks including 100+ record success/failure restore (`self` for normal changes, `third_party` instead of `self` when a fixed high-risk condition applies), resolve findings, and record current-subject mode-labeled MergeReviewEvidence in `docs/verification/bootstrap/learning-record-restore.json` and `docs/reviews/human-content/bootstrap/us3/merge-review.json`
 
 **Checkpoint**: Status and review state are independent, local-only, recoverable, and preserved across content changes.
 
@@ -204,7 +204,7 @@
 - [ ] T108 [US4] Implement narrow-screen reflow, two-dimensional-table-only scrolling, focus visibility, and non-color states in `src/styles/accessibility.css`
 - [ ] T109 [US4] Run all future-label, direct-navigation, search, no-JavaScript, axe, keyboard, and reflow E2E tests and store results in `docs/verification/bootstrap/us4.json`
 - [ ] T110 [US4] Verify all internal links, cross-references, canonical routes, base paths, Pagefind entries, sitemap, and feed in `docs/verification/bootstrap/links-and-search.json`
-- [ ] T111 [US4] Have the maintainer self-review outcome coverage, run all US4 checks including every target cell/route comparison for SC-002/005/011/017, invoke third-party review only for fixed high-risk taxonomy changes, resolve findings, and record current-subject mode-labeled MergeReviewEvidence in `docs/verification/bootstrap/reverse-index.json` and `docs/reviews/human-content/bootstrap/us4/merge-review.json`
+- [ ] T111 [US4] Have the policy-selected reviewer confirm outcome coverage and run all US4 checks including every target cell/route comparison for SC-002/005/011/017 (`self` for normal changes, `third_party` instead of `self` for fixed high-risk taxonomy changes), resolve findings, and record current-subject mode-labeled MergeReviewEvidence in `docs/verification/bootstrap/reverse-index.json` and `docs/reviews/human-content/bootstrap/us4/merge-review.json`
 
 **Checkpoint**: Every advanced Problem is visible under its official label and reachable from both the learning system and reverse indexes.
 
@@ -240,7 +240,7 @@
 - [ ] T128 [US5] Implement read-only final validation with dependency-closure and no post-approval regeneration in `scripts/verify-release.ts`
 - [ ] T129 [US5] Implement writer/global locks, same-filesystem atomic switch, rollback-before-receipt, recovery-after-receipt, and append-only receipts in `scripts/publish-update.ts`
 - [ ] T130 [US5] Generate public immutable Release history and separate administrator-only hold summaries in `src/lib/catalog/build-release-history.ts`
-- [ ] T131 [US5] Have the maintainer self-review outcome coverage, run idempotency/failure-injection/correction/approval-freeze/publish-simulation checks, invoke third-party review only for fixed high-risk correction/classification cases, resolve findings, and record current-subject mode-labeled MergeReviewEvidence in `docs/verification/bootstrap/us5.json` and `docs/reviews/human-content/bootstrap/us5/merge-review.json`
+- [ ] T131 [US5] Have the policy-selected reviewer confirm outcome coverage and run idempotency/failure-injection/correction/approval-freeze/publish-simulation checks (`self` for normal changes, `third_party` instead of `self` for fixed high-risk correction/classification cases), resolve findings, and record current-subject mode-labeled MergeReviewEvidence in `docs/verification/bootstrap/us5.json` and `docs/reviews/human-content/bootstrap/us5/merge-review.json`
 - [ ] T132 [US5] Document the weekly prepare/review/approve/validate/publish/backup workflow and every recovery state in `docs/operations/weekly-update.md`
 
 **Checkpoint**: The complete update pipeline works offline and in simulation; no production publish has occurred.
@@ -264,7 +264,7 @@
 - [ ] T143 Freeze an offset-qualified initial `cutoffAt`, discover all ended ABCs after 466, and process every missing Contest through normal updates in `staging/updates/initial-catch-up/`
 - [ ] T144 Re-run all T133–T142 validators after catch-up and reject any unresolved Problem, temporary taxonomy, missing review, or changed learner record in `docs/verification/initial-release/post-catch-up.json`
 - [ ] T145 Prepare one immutable initial ReleaseCandidate containing bootstrap and all catch-up updates in `staging/release-candidates/initial/release-candidate.json`
-- [ ] T146 Complete one maintainer self-review check inventory for the exact candidate digest and all required third-party claim/example reviews triggered by the fixed high-risk policy in `docs/reviews/human-content/initial-release/`
+- [ ] T146 Complete the policy-selected review check inventory for the exact candidate digest (`self` for normal changes, `third_party` instead of `self` for every fixed high-risk claim/example scope) in `docs/reviews/human-content/initial-release/`
 - [ ] T147 Re-run the pre-fixed SC-009 and SC-010 protocols plus SC-012 representative timing against the exact candidate digest in `docs/verification/learner-outcomes/initial-release/`
 - [ ] T148 Bind explicit owner approval to the unchanged candidate/content/review/evidence digests in `staging/release-candidates/initial/owner-approval.json`
 - [ ] T149 Execute read-only final validation, dependency-closure comparison, publish simulation, and rollback rehearsal without regenerating content in `docs/verification/initial-release/final-validation.json`
@@ -306,7 +306,7 @@ Setup → Foundational → US2 taxonomy ─→ US1 explanations ─┐
 
 - Contract/unit/E2E tests are written first and observed failing before implementation.
 - Canonical data precedes derived pages and indexes.
-- Automated checks precede the self-review or risk-triggered third-party review; findings must be resolved before approval.
+- Automated checks precede the policy-selected self-review or risk-triggered third-party review; findings must be resolved before approval.
 - Approval freezes digests; final validation is read-only; production publication is the last mutating step.
 
 ## Parallel Opportunities

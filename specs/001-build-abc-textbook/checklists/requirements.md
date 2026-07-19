@@ -35,6 +35,6 @@
 - 「E問題以上」を、公式問題一覧でDより後に並ぶ全競技問題と定義し、E〜Hの固定4枠による将来の欠落を解消した。
 - 典型体系を全対象問題の横断棚卸しから作る要件を追加し、コンテスト順の仮分類を公開正本にしないことを明示した。
 - 重複していた外部cohort、自己評価、必須LLM panelの品質基準を、一人の運用者による事前固定自己評価へ統合した。
-- Constitution 2.0.0に合わせ、通常更新は管理者self-reviewで完結し、公式根拠との矛盾・独自証明・重大な分類変更だけを作成者外third-party reviewへ送るmode/risk policyを仕様へ反映した。
+- Constitution 2.0.0に合わせ、通常更新は管理者self-reviewで完結し、公式根拠との矛盾・独自証明・重大な分類変更だけをself-reviewに代えて作成者外third-party reviewへ送るmode/risk policyを仕様へ反映した。
 - 有料サービス、特定LLM、実ブラウザー8組合せ、3 OS公開証跡は必須製品要件から除外し、1人・追加費用なしの目的へ戻した。
 - No `[NEEDS CLARIFICATION]` markers remain; reasonable defaults are recorded in Assumptions.

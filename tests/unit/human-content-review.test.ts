@@ -245,6 +245,17 @@ describe('human content review gate', () => {
     }
   });
 
+  it('rejects a review mode that does not match the fixed policy', () => {
+    const evidence = makeThirdPartyEvidence('original_proof');
+    evidence.reviewPolicy = { requiredMode: 'self', riskReasons: [] };
+    evidence.evidenceDigest = digestWithoutField(evidence, 'evidenceDigest');
+
+    expect(HumanContentReviewEvidenceSchema.safeParse(evidence).success).toBe(false);
+    expect(() => {
+      validateHumanContentReview(evidence, trustedInventory);
+    }).toThrow(/HUMAN_REVIEW_SCHEMA_INVALID/u);
+  });
+
   it('requires current successful checks, constitution, and human review for merge approval', () => {
     expect(() => {
       validateMergeReviewEvidence(makeMergeEvidence(), trustedMergeContext);

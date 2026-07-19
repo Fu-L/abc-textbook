@@ -268,7 +268,7 @@ content review unitはContest batchではなくLearning Outcome、Problem、Clai
 
 ### HumanContentReviewEvidence
 
-同じlogical change subjectについて、次を保持する。通常更新の`self` modeではmanifest ownerがreviewerを兼ね、外部person IDを要求しない。固定policyが高リスクを示す場合だけ`third_party` modeを使い、reviewerはauthor集合と分離する。
+同じlogical change subjectについて、次を保持する。通常更新の`self` modeではmanifest ownerがreviewerを兼ね、外部person IDを要求しない。固定policyが高リスクを示す場合だけ`third_party` modeを使い、`self` reviewに代えてauthor集合と分離したreviewerが確認する。
 
 - 明示file inventoryとsubject digest
 - Outcome coverage reviewとreview mode、reviewer ID

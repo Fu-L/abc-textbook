@@ -157,7 +157,7 @@ npm run verify:merge -- --fixture tests/fixtures/reviews/logical-change
 
 - Work ManifestがLearning Outcome単位の非重複review unitを持つ。
 - 通常fixtureは外部person IDなしで、manifest ownerのself-review、outcome coverage、全適用checkを記録して完了する。
-- manifestのreview policyが公式根拠との矛盾・独自証明・重大な分類変更を示すfixtureだけはthird-party modeとし、author外のperson IDを要求する。
+- manifestのreview policyが公式根拠との矛盾・独自証明・重大な分類変更を示すfixtureだけは、selfに代えてthird-party modeとし、author外のperson IDを要求する。
 - self/third-party modeの取り違え、missing check、他者実行結果の追認、第三者reviewでのauthor/reviewer一致、stale digest、未解消findingを拒否する。
 - LLM、owner approval、外部cohortをHumanContentReviewEvidenceの代用として受理しない。
 
