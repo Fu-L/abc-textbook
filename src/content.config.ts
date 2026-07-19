@@ -4,6 +4,8 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'zod';
 
+import { structuredContentRoots } from './lib/catalog/content-source-registry.js';
+
 const structuredEntrySchema = z.record(z.string(), z.unknown());
 
 function structuredJsonCollection(base: string) {
@@ -17,25 +19,28 @@ function structuredJsonCollection(base: string) {
   });
 }
 
+const structuredCollection = (name: keyof typeof structuredContentRoots) =>
+  structuredJsonCollection(`./${structuredContentRoots[name]}`);
+
 export const collections = {
   docs: defineCollection({
     loader: docsLoader(),
     schema: docsSchema(),
   }),
-  contests: structuredJsonCollection('./src/content/contests'),
-  problemSlots: structuredJsonCollection('./src/content/problem-slots'),
-  problems: structuredJsonCollection('./src/content/problems'),
-  techniqueInventory: structuredJsonCollection('./src/content/technique-inventory'),
-  tags: structuredJsonCollection('./src/content/tags'),
-  learningOutcomes: structuredJsonCollection('./src/content/learning-outcomes'),
-  learningUnits: structuredJsonCollection('./src/content/learning-units'),
-  claims: structuredJsonCollection('./src/content/claims'),
-  examples: structuredJsonCollection('./src/content/examples'),
-  exercises: structuredJsonCollection('./src/content/exercises'),
-  assessments: structuredJsonCollection('./src/content/assessments'),
-  answerMaterials: structuredJsonCollection('./src/content/answer-materials'),
-  sources: structuredJsonCollection('./src/content/sources'),
-  glossary: structuredJsonCollection('./src/content/glossary'),
-  policies: structuredJsonCollection('./src/content/policies'),
-  releases: structuredJsonCollection('./src/content/releases'),
+  contests: structuredCollection('contests'),
+  problemSlots: structuredCollection('problemSlots'),
+  problems: structuredCollection('problems'),
+  techniqueInventory: structuredCollection('techniqueInventory'),
+  tags: structuredCollection('tags'),
+  learningOutcomes: structuredCollection('learningOutcomes'),
+  learningUnits: structuredCollection('learningUnits'),
+  claims: structuredCollection('claims'),
+  examples: structuredCollection('examples'),
+  exercises: structuredCollection('exercises'),
+  assessments: structuredCollection('assessments'),
+  answerMaterials: structuredCollection('answerMaterials'),
+  sources: structuredCollection('sources'),
+  glossary: structuredCollection('glossary'),
+  policies: structuredCollection('policies'),
+  releases: structuredCollection('releases'),
 };

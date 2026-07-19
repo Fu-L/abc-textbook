@@ -42,9 +42,10 @@ describe('catalog validation CLI evidence boundary', () => {
 
   it('fails closed when evidence omits a check required by the canonical manifest', async () => {
     const contentPath = 'src/content/docs/index.md';
+    const baseContent = '# Catalog fixture base\n';
     const content = '# Catalog fixture\n';
     await mkdir(path.join(repositoryRoot, 'src/content/docs'), { recursive: true });
-    await writeFile(path.join(repositoryRoot, contentPath), content, 'utf8');
+    await writeFile(path.join(repositoryRoot, contentPath), baseContent, 'utf8');
     const contentFiles = [
       {
         path: contentPath,
@@ -178,9 +179,9 @@ describe('catalog validation CLI evidence boundary', () => {
     const releaseCandidate: Record<string, unknown> = {
       schemaVersion: '2.0.0',
       candidateId: 'release-candidate-2026.07.17-aaaaaaaaaaaa',
-      releaseKind: 'initial',
+      releaseKind: 'incremental',
       targetReleaseVersion: '2026.07.17',
-      baseReleaseVersion: null,
+      baseReleaseVersion: '2026.07.16',
       cutoffAt: '2026-07-17T09:00:00+09:00',
       orderedUpdateIds: ['update-foundation'],
       fixtureMode: false,
@@ -239,11 +240,16 @@ describe('catalog validation CLI evidence boundary', () => {
       approvedAt: '2026-07-17T12:50:00+09:00',
     };
     const catalog = makeTrustedCatalog({
+      releaseKind: 'incremental',
       manifestDigest: workManifest.digest,
       contentFileInventoryDigest: subjectDigest,
       contentSnapshotDigest: subjectDigest,
       updateIds: ['update-foundation'],
     });
+    const baseCatalog = structuredClone(catalog);
+    const explanation = catalog.explanations[0];
+    if (!explanation) throw new Error('Fixture explanation is missing.');
+    explanation.revision = 2;
     releaseCandidate.advancedSlotRegistryDigest = String(
       (catalog.release as Record<string, unknown>).advancedSlotRegistryDigest,
     );
@@ -304,21 +310,28 @@ describe('catalog validation CLI evidence boundary', () => {
     await writeJson('staging/updates/update-foundation.json', {
       schemaVersion: '2.0.0',
       updateId: 'update-foundation',
-      kind: 'bootstrap',
-      baseReleaseVersion: null,
+      kind: 'taxonomy',
+      baseReleaseVersion: '2026.07.16',
       contestId: null,
       sourceSetFingerprint: sha('1'),
-      advancedSlotLabels: ['E'],
+      advancedSlotLabels: [],
       targetProblemIds: ['abc212-x45'],
       operations: [
         {
-          operationId: 'operation-add-abc212-x45',
-          entityType: 'tag',
-          entityId: 'tag-graphs',
-          action: 'add',
+          operationId: 'operation-replace-explanation',
+          entityType: 'explanation',
+          entityId: 'explanation-abc212-x45',
+          action: 'replace',
           path: contentPath,
-          beforeDigest: null,
+          beforeDigest: createHash('sha256').update(baseContent).digest('hex'),
           afterDigest: createHash('sha256').update(content).digest('hex'),
+          affectedEntities: [
+            {
+              entityType: 'explanation',
+              entityId: 'explanation-abc212-x45',
+              action: 'replace',
+            },
+          ],
           affectedProblemIds: ['abc212-x45'],
         },
       ],
@@ -350,8 +363,9 @@ describe('catalog validation CLI evidence boundary', () => {
       updatedAt: '2026-07-17T11:00:00+09:00',
       fixtureMode: false,
     });
-    await writeJson('catalog.json', catalog);
+    await writeJson('catalog.json', baseCatalog);
     await execFileAsync('git', ['init'], { cwd: repositoryRoot });
+    await execFileAsync('git', ['add', 'catalog.json', contentPath], { cwd: repositoryRoot });
     await execFileAsync(
       'git',
       [
@@ -400,6 +414,8 @@ describe('catalog validation CLI evidence boundary', () => {
       ],
       { cwd: repositoryRoot },
     );
+    await writeFile(path.join(repositoryRoot, contentPath), content, 'utf8');
+    await writeJson('catalog.json', catalog);
 
     const scriptPath = path.resolve('scripts/catalog-validate.ts');
     const tsxLoaderPath = path.resolve('node_modules/tsx/dist/loader.mjs');

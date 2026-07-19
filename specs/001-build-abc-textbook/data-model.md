@@ -226,7 +226,7 @@ schema version、createdAt、targetReleaseVersion、全record、不明Problem ID
 | `contestId` | Contest追加時に必須 |
 | `advancedSlotLabels` | Dより後の全label。固定4枠不可 |
 | `targetProblemIds` | 変更種別にかかわらず影響を受けるProblem集合の正本。Problem operationの集合を必ず含む |
-| `operations` | canonical entity差分。各operationは`affectedProblemIds`で所有・影響Problem集合を明示し、全operationの和集合を`targetProblemIds`と一致させる |
+| `operations` | pathごとのcanonical file transition。`entityType`/`entityId`はpath所有を検証するanchor、`action`/digestはfile transitionを表す。各operationは、そのpathに対応する実Catalog projection差分を`affectedEntities`へ完全列挙し、base/currentでpathを所有する全entityから導出した`affectedProblemIds`を明示する。全operationのProblem集合は`targetProblemIds`と一致させる |
 | `authoringResults` | 全対象Problemへ一つ |
 | `correctionImpacts` | 該当時に全件 |
 | `validationSummary` | check結果とProblem別理由 |

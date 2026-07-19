@@ -37,6 +37,7 @@ const makePublicationUpdate = (): Record<string, unknown> => ({
       path: 'src/content/problems/abc212-x45.json',
       beforeDigest: null,
       afterDigest: sha('a'),
+      affectedEntities: [],
       affectedProblemIds: ['abc212-x45'],
     },
   ],
@@ -72,13 +73,19 @@ const makePublicationUpdate = (): Record<string, unknown> => ({
 const trustedPublicationUpdateContext = (update: Record<string, unknown>) => {
   const operations = update.operations as {
     operationId: string;
+    affectedEntities: {
+      entityType: string;
+      entityId: string;
+      action: 'add' | 'replace' | 'remove';
+    }[];
     affectedProblemIds: string[];
   }[];
   const targetProblemIds = update.targetProblemIds as string[];
   const correctionImpactIds = update.correctionImpactIds as string[];
   return {
-    operationOwnership: operations.map(({ operationId, affectedProblemIds }) => ({
+    operationOwnership: operations.map(({ operationId, affectedEntities, affectedProblemIds }) => ({
       operationId,
+      affectedEntities: affectedEntities.map((diff) => ({ ...diff })),
       affectedProblemIds: [...affectedProblemIds],
     })),
     correctionImpacts: correctionImpactIds.map((correctionImpactId) => ({
@@ -373,6 +380,7 @@ describe('release state gate', () => {
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),
         afterDigest: sha('b'),
+        affectedEntities: [],
         affectedProblemIds: ['abc212-x45'],
       },
     ];
@@ -402,6 +410,7 @@ describe('release state gate', () => {
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),
         afterDigest: sha('b'),
+        affectedEntities: [],
         affectedProblemIds: ['abc212-x45'],
       },
     ];
@@ -424,6 +433,86 @@ describe('release state gate', () => {
     }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
   });
 
+  it('rejects multiple operations that duplicate one file transition', () => {
+    const update = makePublicationUpdate();
+    update.operations = [
+      {
+        operationId: 'operation-replace-explanation',
+        entityType: 'explanation',
+        entityId: 'explanation-abc212-x45',
+        action: 'replace',
+        path: 'src/content/docs/abc212-e.md',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+        affectedEntities: [],
+        affectedProblemIds: ['abc212-x45'],
+      },
+      {
+        operationId: 'operation-replace-learning-unit',
+        entityType: 'learning_unit',
+        entityId: 'unit-graphs',
+        action: 'replace',
+        path: 'src/content/docs/abc212-e.md',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+        affectedEntities: [],
+        affectedProblemIds: ['abc212-x45'],
+      },
+    ];
+    const operations = update.operations as {
+      operationId: string;
+      affectedEntities: [];
+      affectedProblemIds: string[];
+      entityType: string;
+      entityId: string;
+      action: 'add' | 'replace' | 'remove';
+      path: string;
+      beforeDigest: string | null;
+      afterDigest: string | null;
+    }[];
+    const trusted = {
+      operationOwnership: operations,
+      baseFiles: [{ path: 'src/content/docs/abc212-e.md', sha256: sha('a'), byteLength: 10 }],
+      currentFiles: [{ path: 'src/content/docs/abc212-e.md', sha256: sha('b'), byteLength: 11 }],
+    };
+
+    expect(() => {
+      validatePublicationUpdate(update, trusted);
+    }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
+  });
+
+  it.each([
+    ['replace+add', ['replace', 'add'] as const],
+    ['replace+remove', ['replace', 'remove'] as const],
+    ['add+add', ['add', 'add'] as const],
+    ['remove+remove', ['remove', 'remove'] as const],
+  ])(
+    'rejects duplicate file transitions independently of entity actions (%s)',
+    (_label, actions) => {
+      const operations = actions.map((action, index) => ({
+        operationId: `operation-shared-${String(index)}`,
+        entityType: index === 0 ? 'explanation' : 'learning_unit',
+        entityId: index === 0 ? 'explanation-abc212-x45' : 'unit-graphs',
+        action,
+        path: 'src/content/docs/index.md',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+        affectedEntities: [],
+        affectedProblemIds: ['abc212-x45'],
+      }));
+      const update = makePublicationUpdate();
+      update.operations = operations;
+
+      expect(() => {
+        validatePublicationUpdate(update, {
+          operationOwnership: operations,
+          baseFiles: [{ path: 'src/content/docs/index.md', sha256: sha('a'), byteLength: 10 }],
+          currentFiles: [{ path: 'src/content/docs/index.md', sha256: sha('b'), byteLength: 11 }],
+        });
+      }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
+    },
+  );
+
   it('fails closed when update ownership is not independently trusted', () => {
     const update = makePublicationUpdate();
     expect(() => {
@@ -443,6 +532,7 @@ describe('release state gate', () => {
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),
         afterDigest: sha('b'),
+        affectedEntities: [],
         affectedProblemIds: ['abc212-x45'],
       },
     ];

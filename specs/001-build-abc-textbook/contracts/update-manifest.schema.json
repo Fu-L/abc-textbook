@@ -30,25 +30,25 @@
       "$ref": "#/$defs/__schema10"
     },
     "authoringResults": {
-      "$ref": "#/$defs/__schema12"
+      "$ref": "#/$defs/__schema14"
     },
     "correctionImpactIds": {
-      "$ref": "#/$defs/__schema20"
-    },
-    "validationSummary": {
-      "$ref": "#/$defs/__schema21"
-    },
-    "state": {
       "$ref": "#/$defs/__schema22"
     },
-    "createdAt": {
+    "validationSummary": {
       "$ref": "#/$defs/__schema23"
+    },
+    "state": {
+      "$ref": "#/$defs/__schema24"
+    },
+    "createdAt": {
+      "$ref": "#/$defs/__schema25"
     },
     "updatedAt": {
-      "$ref": "#/$defs/__schema23"
+      "$ref": "#/$defs/__schema25"
     },
     "fixtureMode": {
-      "$ref": "#/$defs/__schema24"
+      "$ref": "#/$defs/__schema26"
     }
   },
   "required": [
@@ -199,25 +199,7 @@
             "$ref": "#/$defs/__schema1"
           },
           "entityType": {
-            "type": "string",
-            "enum": [
-              "contest",
-              "contest_slot",
-              "problem",
-              "technique_inventory",
-              "tag",
-              "learning_outcome",
-              "learning_unit",
-              "placement",
-              "explanation",
-              "claim",
-              "example",
-              "exercise",
-              "assessment",
-              "answer_material",
-              "source",
-              "correction_impact"
-            ]
+            "$ref": "#/$defs/__schema11"
           },
           "entityId": {
             "$ref": "#/$defs/__schema1"
@@ -231,7 +213,7 @@
             ]
           },
           "path": {
-            "$ref": "#/$defs/__schema11"
+            "$ref": "#/$defs/__schema12"
           },
           "beforeDigest": {
             "anyOf": [
@@ -253,8 +235,14 @@
               }
             ]
           },
+          "affectedEntities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/__schema13"
+            },
+            "uniqueItems": true
+          },
           "affectedProblemIds": {
-            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/$defs/__schema9"
@@ -270,6 +258,7 @@
           "path",
           "beforeDigest",
           "afterDigest",
+          "affectedEntities",
           "affectedProblemIds"
         ],
         "additionalProperties": false
@@ -277,9 +266,55 @@
     },
     "__schema11": {
       "type": "string",
-      "pattern": "^(?!\\/)(?!.*\\/$)(?!.*\\/\\/)(?!^(?:\\.{1,2})(?:\\/|$))(?!.*\\/(?:\\.{1,2})(?:\\/|$))[A-Za-z0-9._/-]+$"
+      "enum": [
+        "contest",
+        "contest_slot",
+        "problem",
+        "technique_inventory",
+        "tag",
+        "learning_outcome",
+        "learning_unit",
+        "placement",
+        "explanation",
+        "claim",
+        "example",
+        "exercise",
+        "assessment",
+        "answer_material",
+        "source",
+        "correction_impact"
+      ]
     },
     "__schema12": {
+      "type": "string",
+      "pattern": "^(?!\\/)(?!.*\\/$)(?!.*\\/\\/)(?!^(?:\\.{1,2})(?:\\/|$))(?!.*\\/(?:\\.{1,2})(?:\\/|$))[A-Za-z0-9._/-]+$"
+    },
+    "__schema13": {
+      "type": "object",
+      "properties": {
+        "entityType": {
+          "$ref": "#/$defs/__schema11"
+        },
+        "entityId": {
+          "$ref": "#/$defs/__schema1"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "add",
+            "replace",
+            "remove"
+          ]
+        }
+      },
+      "required": [
+        "entityType",
+        "entityId",
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "__schema14": {
       "type": "array",
       "items": {
         "type": "object",
@@ -291,25 +326,25 @@
             "$ref": "#/$defs/__schema7"
           },
           "resultType": {
-            "$ref": "#/$defs/__schema13"
-          },
-          "draftPath": {
-            "$ref": "#/$defs/__schema14"
-          },
-          "packetPath": {
             "$ref": "#/$defs/__schema15"
           },
-          "templatePath": {
+          "draftPath": {
             "$ref": "#/$defs/__schema16"
           },
-          "reasonCode": {
+          "packetPath": {
             "$ref": "#/$defs/__schema17"
           },
-          "reason": {
+          "templatePath": {
             "$ref": "#/$defs/__schema18"
           },
-          "retryCondition": {
+          "reasonCode": {
             "$ref": "#/$defs/__schema19"
+          },
+          "reason": {
+            "$ref": "#/$defs/__schema20"
+          },
+          "retryCondition": {
+            "$ref": "#/$defs/__schema21"
           }
         },
         "required": [
@@ -326,7 +361,7 @@
         "additionalProperties": false
       }
     },
-    "__schema13": {
+    "__schema15": {
       "type": "string",
       "enum": [
         "explanation_draft",
@@ -334,30 +369,10 @@
         "blocked"
       ]
     },
-    "__schema14": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/__schema11"
-        },
-        {
-          "type": "null"
-        }
-      ]
-    },
-    "__schema15": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/__schema11"
-        },
-        {
-          "type": "null"
-        }
-      ]
-    },
     "__schema16": {
       "anyOf": [
         {
-          "$ref": "#/$defs/__schema11"
+          "$ref": "#/$defs/__schema12"
         },
         {
           "type": "null"
@@ -367,7 +382,7 @@
     "__schema17": {
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/$defs/__schema12"
         },
         {
           "type": "null"
@@ -377,7 +392,7 @@
     "__schema18": {
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/$defs/__schema12"
         },
         {
           "type": "null"
@@ -395,18 +410,38 @@
       ]
     },
     "__schema20": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema21": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "__schema22": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema1"
       },
       "uniqueItems": true
     },
-    "__schema21": {
+    "__schema23": {
       "type": "object",
       "properties": {
         "checkIds": {
           "minItems": 1,
-          "$ref": "#/$defs/__schema20"
+          "$ref": "#/$defs/__schema22"
         },
         "problemResults": {
           "type": "array",
@@ -467,7 +502,7 @@
       ],
       "additionalProperties": false
     },
-    "__schema22": {
+    "__schema24": {
       "type": "string",
       "enum": [
         "PREPARING",
@@ -475,12 +510,12 @@
         "ELIGIBLE_FOR_BATCH"
       ]
     },
-    "__schema23": {
+    "__schema25": {
       "type": "string",
       "format": "date-time",
       "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
     },
-    "__schema24": {
+    "__schema26": {
       "type": "boolean"
     }
   }
