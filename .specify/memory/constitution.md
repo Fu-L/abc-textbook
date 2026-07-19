@@ -1,6 +1,6 @@
 <!--
 Sync Impact Report
-- Version change: template (unversioned) → 1.0.0
+- Version change: 1.0.0 → 2.0.0
 - Modified principles:
   - Template Principle 1 → I. Learning-Outcome Alignment
   - Template Principle 2 → II. Accuracy and Traceability
@@ -10,15 +10,21 @@ Sync Impact Report
 - Added sections:
   - Content Standards
   - Authoring Workflow and Quality Gates
+- Changed quality gate:
+  - Normal updates may complete with maintainer self-review; third-party review is mandatory
+    only for the enumerated high-risk conditions.
+- Added review evidence distinction:
+  - Self-review and third-party review have separate modes and actor records.
 - Removed sections: none (template sections were concretized)
 - Templates requiring updates:
-  - ✅ updated: .specify/templates/plan-template.md
-  - ✅ updated: .specify/templates/spec-template.md
+  - ✅ reviewed; no change required: .specify/templates/plan-template.md
+  - ✅ reviewed; no change required: .specify/templates/spec-template.md
   - ✅ updated: .specify/templates/tasks-template.md
   - ✅ reviewed; no change required: .specify/templates/checklist-template.md
 - Command templates: none present under .specify/templates/commands/
 - Runtime guidance documents: none present
-- Follow-up TODOs: none
+- Follow-up TODOs:
+  - Keep the high-risk reason enum synchronized with the review contract and task guidance.
 -->
 # ABC Textbook Constitution
 
@@ -28,9 +34,9 @@ Sync Impact Report
 Every chapter, lesson, exercise, and example MUST state or trace to a concrete learning
 outcome. Content MUST include only the concepts needed to achieve its declared outcomes;
 prerequisites and intentionally excluded topics MUST be explicit. A change is complete only
-when a reviewer can connect each substantive section to an outcome and each outcome to a
-measurable learner activity or assessment. This keeps the textbook focused and makes
-coverage verifiable.
+when the maintainer's explicit self-review, or a required third-party review, can connect each
+substantive section to an outcome and each outcome to a measurable learner activity or
+assessment. This keeps the textbook focused and makes coverage verifiable.
 
 ### II. Accuracy and Traceability
 Technical claims, definitions, commands, and results MUST be factually correct for the
@@ -88,9 +94,16 @@ maintenance benefit. This limits drift and keeps future corrections affordable.
 3. Organize implementation tasks by independently reviewable learning outcome. Tasks MUST
    include source verification, example or exercise validation, accessibility review, and
    cross-reference checks when relevant.
-4. Before merge, a reviewer MUST confirm outcome coverage and run all applicable automated
-   checks. A person other than the author MUST review claims or examples whose correctness
-   cannot be fully automated.
+4. Before merge, an explicit human review MUST confirm outcome coverage and run all applicable
+   automated checks. A normal update MUST use the maintainer's `self` review. A third-party
+   reviewer MUST review the affected scope, using `third_party` mode instead of `self`, only
+   when one or more of the following fixed high-risk conditions applies: an explanation
+   conflicts with an authoritative source or correction, it introduces an original proof or
+   other correctness argument not directly supported by the cited source, or it makes a major
+   taxonomy/classification change to a learning outcome, technique tag, prerequisite, or
+   problem placement. A normal update MUST NOT require an external person ID. Review evidence
+   MUST state whether the decision is a self-review or a third-party review; the two modes MUST
+   NOT be presented as interchangeable.
 5. A change MUST NOT be published while known broken links, unexplained validation failures,
    inaccessible required content, contradictory guidance, or non-reproducible examples remain.
 
@@ -114,4 +127,4 @@ Every feature plan and review MUST include a Constitution Check. Reviewers MUST 
 unjustified violations. The maintainers MUST audit the constitution and its dependent templates
 whenever an amendment is proposed and during any publication-readiness review.
 
-**Version**: 1.0.0 | **Ratified**: 2026-07-12 | **Last Amended**: 2026-07-12
+**Version**: 2.0.0 | **Ratified**: 2026-07-19 | **Last Amended**: 2026-07-19

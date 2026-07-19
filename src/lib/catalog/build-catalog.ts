@@ -51,6 +51,7 @@ export interface TrustedCatalogReleaseEvidenceInventory {
     readonly subjectDigest: string;
     readonly authorIds: readonly string[];
     readonly reviewerIds: readonly string[];
+    readonly reviewMode: 'self' | 'third_party';
     readonly aggregatePassed: boolean;
   }[];
 }
@@ -96,6 +97,7 @@ export interface CatalogLike {
       readonly subjectDigest: string;
       readonly authorIds: readonly string[];
       readonly reviewerIds: readonly string[];
+      readonly reviewMode: 'self' | 'third_party';
       readonly aggregatePassed: boolean;
     }[];
     readonly addedProblemIds: readonly string[];
@@ -745,6 +747,7 @@ export const validateCatalogSemantics = (
     left.digest === right.digest &&
     left.subjectDigest === right.subjectDigest &&
     left.aggregatePassed === right.aggregatePassed &&
+    left.reviewMode === right.reviewMode &&
     sameStringSet(left.authorIds, right.authorIds) &&
     sameStringSet(left.reviewerIds, right.reviewerIds);
   const releaseEvidenceComplete =
@@ -764,7 +767,8 @@ export const validateCatalogSemantics = (
         review.subjectDigest === catalog.release.contentFileInventoryDigest &&
         review.reviewerIds.length > 0 &&
         review.authorIds.length > 0 &&
-        !review.authorIds.some((authorId) => review.reviewerIds.includes(authorId)),
+        (review.reviewMode === 'self' ||
+          !review.authorIds.some((authorId) => review.reviewerIds.includes(authorId))),
     ) &&
     releaseChecks.every(
       (check) =>

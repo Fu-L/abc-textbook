@@ -156,9 +156,9 @@ npm run verify:merge -- --fixture tests/fixtures/reviews/logical-change
 期待結果:
 
 - Work ManifestがLearning Outcome単位の非重複review unitを持つ。
-- 一人のgate reviewerがoutcome coverageを確認し、全適用checkを自ら実行したraw resultを持つ。
-- 自動化不能な新規・変更Claim/Exampleはitem author以外の人間判定を持つ。
-- missing check、他者実行結果の追認、authorとreviewerの一致、stale digest、未解消findingを拒否する。
+- 通常fixtureは外部person IDなしで、manifest ownerのself-review、outcome coverage、全適用checkを記録して完了する。
+- manifestのreview policyが公式根拠との矛盾・独自証明・重大な分類変更を示すfixtureだけは、selfに代えてthird-party modeとし、author外のperson IDを要求する。
+- self/third-party modeの取り違え、missing check、他者実行結果の追認、第三者reviewでのauthor/reviewer一致、stale digest、未解消findingを拒否する。
 - LLM、owner approval、外部cohortをHumanContentReviewEvidenceの代用として受理しない。
 
 ## Scenario K — Release candidateとrollback
@@ -175,7 +175,7 @@ npm run abc:publish -- --candidate fixture-initial --simulate
 期待結果:
 
 - ABC 212からcutoffまでの連続性、Dより後の全Problem、AdvancedSlotRegistry、Technique Inventory、到達可能性をcandidate正本から再計算する。
-- 自動checkとcurrent HumanContentReviewEvidenceが揃うまでapproveできない。
+- 自動checkとcurrent HumanContentReviewEvidence（selfまたはrisk policyに応じたthird-party）が揃うまでapproveできない。
 - owner承認後にcandidate bytesが変わるとfinal validationが失敗する。
 - 切替前失敗は旧treeへrollbackし、成功時だけPublishReceiptを残す。
 - fixtureをproduction publishしようとすると副作用なしで拒否する。

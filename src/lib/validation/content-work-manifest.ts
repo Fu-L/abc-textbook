@@ -24,6 +24,11 @@ export interface WorkManifestReviewUnitInput {
   readonly ownerId: string;
 }
 
+export interface ContentReviewPolicy {
+  readonly requiredMode: 'self' | 'third_party';
+  readonly riskReasons: readonly string[];
+}
+
 export interface ManifestReviewUnit {
   readonly reviewUnitId: string;
   readonly changeKind: string;
@@ -48,6 +53,7 @@ export interface ContentWorkManifestScope {
   readonly taskId: string;
   readonly requiredRequirementIds: readonly string[];
   readonly learningOutcomeIds: readonly string[];
+  readonly reviewPolicy: ContentReviewPolicy;
   readonly reviewUnits: readonly ManifestReviewUnit[];
 }
 
@@ -57,6 +63,10 @@ const scopeProjection = (input: ContentWorkManifestScope): Readonly<Record<strin
   taskId: input.taskId,
   requiredRequirementIds: sortedUnique(input.requiredRequirementIds),
   learningOutcomeIds: sortedUnique(input.learningOutcomeIds),
+  reviewPolicy: {
+    requiredMode: input.reviewPolicy.requiredMode,
+    riskReasons: sortedUnique(input.reviewPolicy.riskReasons),
+  },
   reviewUnits: input.reviewUnits
     .map((unit) => ({
       reviewUnitId: unit.reviewUnitId,
@@ -83,6 +93,7 @@ export const createContentWorkManifest = (input: {
   readonly changeKind: string;
   readonly requiredRequirementIds: readonly string[];
   readonly learningOutcomeIds: readonly string[];
+  readonly reviewPolicy?: ContentReviewPolicy;
   readonly reviewUnits: readonly WorkManifestReviewUnitInput[];
   readonly maintenanceBenefit: string | null;
   readonly createdAt: string;
@@ -94,10 +105,12 @@ export const createContentWorkManifest = (input: {
         ? 'The declared review units change observable learning outcomes.'
         : 'The change is infrastructure-only and does not alter learner-visible outcomes.',
   };
+  const reviewPolicy = input.reviewPolicy ?? { requiredMode: 'self', riskReasons: [] };
   const scope: ContentWorkManifestScope = {
     taskId: input.taskId,
     requiredRequirementIds: [...input.requiredRequirementIds].sort(),
     learningOutcomeIds: [...input.learningOutcomeIds].sort(),
+    reviewPolicy,
     reviewUnits: input.reviewUnits.map((unit) => ({
       reviewUnitId: unit.unitId,
       changeKind: input.changeKind,
@@ -121,7 +134,7 @@ export const createContentWorkManifest = (input: {
     })),
   };
   const manifest: Record<string, unknown> = {
-    schemaVersion: '1.0.0',
+    schemaVersion: '2.0.0',
     manifestId: input.manifestId,
     taskId: input.taskId,
     scopeDigest: calculateContentWorkManifestScopeDigest(scope),
@@ -130,6 +143,7 @@ export const createContentWorkManifest = (input: {
     requiredRequirementIds: scope.requiredRequirementIds,
     learningOutcomeIds: scope.learningOutcomeIds,
     outcomeImpact,
+    reviewPolicy: scope.reviewPolicy,
     reviewUnits: scope.reviewUnits,
     maintenanceBenefit: input.maintenanceBenefit,
     state: 'planned',
@@ -155,6 +169,7 @@ export const validateContentWorkManifest = (
     readonly digest: string;
     readonly requiredRequirementIds: readonly string[];
     readonly learningOutcomeIds: readonly string[];
+    readonly reviewPolicy: ContentReviewPolicy;
     readonly outcomeImpact: { readonly kind: string };
     readonly reviewUnits: readonly {
       readonly reviewUnitId: string;

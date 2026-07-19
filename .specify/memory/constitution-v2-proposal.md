@@ -1,4 +1,8 @@
 <!--
+SUPERSEDED: This proposal described an LLM-panel-based amendment and is retained only as
+historical context. Issue #10 replaced it with the risk-based self-review/third-party-review
+policy ratified in constitution.md 2.0.0. It has no governing authority.
+
 Sync Impact Report
 - Amendment status: PROPOSED — maintainer explicit acceptance is pending
 - Version change: 1.0.0 → 2.0.0
@@ -17,10 +21,10 @@ Sync Impact Report
 - Follow-up TODOs:
   - BLOCKED: maintainer review and explicit acceptance of this 2.0.0 MAJOR amendment
 -->
-# ABC Textbook Constitution 2.0.0 Proposal
+# ABC Textbook Constitution 2.0.0 Proposal (Superseded)
 
-> **Proposal only:** Version 1.0.0 in `constitution.md` remains the governing constitution until
-> a maintainer explicitly accepts this MAJOR amendment. This file has no governing authority.
+> **Superseded proposal:** This file is retained for historical context only. The governing
+> policy is the risk-based amendment in `constitution.md` 2.0.0.
 
 ## Core Principles
 

@@ -112,14 +112,15 @@
 
 ## 10. Review evidence
 
-**Decision**: 一つのlogical changeを明示file inventoryとLearning Outcomeで固定する。一人のgate reviewerがoutcome coverageを確認して全適用自動checkを自ら実行し、完全自動化できない新規・変更Technical Claim/Reproducible Exampleはitem author以外の人間が確認する。check result、raw result、review item、finding解消を同じsubject digestへ結び付ける。
+**Decision**: 一つのlogical changeを明示file inventory、Learning Outcome、review risk policyで固定する。通常更新は管理者がoutcome coverageをself-reviewし、全適用自動checkを自ら実行する。公式根拠との矛盾・独自証明・重大な分類変更を含む高リスク更新だけはself-reviewに代えて`third_party` modeとし、author外reviewerを要求する。check result、review mode、review item、finding解消を同じsubject digestへ結び付ける。
 
-**Rationale**: Constitution 1.0.0の必須gateを直接満たし、複数の重複panelやrole registryを増やさずに正確性と成果被覆を監査できる。
+**Rationale**: 一人の運用者が通常更新を追加調整なしで完結できる一方、事前定義した高リスク条件では第三者の異なる視点を強制できる。modeとrisk policyをdigestへ束ねることで、自己reviewを第三者reviewと誤表示せず、複数の重複panelやrole registryを増やさずに正確性と成果被覆を監査できる。
 
 **Alternatives considered**:
 
-- CI結果の追認だけをreviewer実行とする: 憲章の「reviewer must run」を満たさないため不採用。
-- LLM判定で人間reviewを代替する: 統治中の憲章に反するため不採用。
+- CI結果の追認だけをreviewer実行とする: reviewer本人のcheck実行とならず、self/third-partyいずれのmodeでも不採用。
+- 通常更新も外部reviewer必須とする: 一人用の週次更新へ第三者可用性を持ち込み、Issue #10のSLA要件に反するため不採用。
+- 高リスク条件を自由記述だけで判定する: 条件が再現不能になり、third-party gateを回避できるため不採用。
 - external learner cohortをpublication gateにする: 1人用の初期製品に継続的な外部調整を持ち込むため不採用。
 
 ## 11. Accessibilityとbrowser検証

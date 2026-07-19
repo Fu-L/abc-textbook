@@ -2,6 +2,8 @@ import { z } from 'zod';
 
 import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
 import {
+  ContentReviewModeSchema,
+  ContentReviewRiskReasonSchema,
   EntityIdSchema,
   OffsetDateTimeSchema,
   ProblemIdSchema,
@@ -34,6 +36,19 @@ const changeKind = z.enum([
 const outcomeImpact = strictObject({
   kind: z.enum(['affects_learning_outcomes', 'none']),
   rationale: text,
+});
+const reviewPolicy = strictObject({
+  requiredMode: ContentReviewModeSchema,
+  riskReasons: unique(ContentReviewRiskReasonSchema),
+}).superRefine((policy, context) => {
+  const isHighRisk = policy.riskReasons.length > 0;
+  if (isHighRisk !== (policy.requiredMode === 'third_party')) {
+    context.addIssue({
+      code: 'custom',
+      path: ['requiredMode'],
+      message: 'Third-party review is required exactly when a high-risk reason is declared.',
+    });
+  }
 });
 
 const reviewUnit = strictObject({
@@ -74,7 +89,7 @@ const reviewUnit = strictObject({
 });
 
 export const ContentWorkManifestSchema = strictObject({
-  schemaVersion: z.literal('1.0.0'),
+  schemaVersion: z.literal('2.0.0'),
   manifestId: z.string().regex(/^work-manifest-T\d{3}(?:-[a-z0-9]+(?:-[a-z0-9]+)*)?$/u),
   taskId: z.string().regex(/^T\d{3}$/u),
   scopeDigest: Sha256Schema,
@@ -83,6 +98,7 @@ export const ContentWorkManifestSchema = strictObject({
   requiredRequirementIds: unique(z.string().regex(/^(?:FR|SC|CQ)-\d{3}$/u)).min(1),
   learningOutcomeIds: unique(outcomeId),
   outcomeImpact,
+  reviewPolicy,
   reviewUnits: z.array(reviewUnit).min(1),
   maintenanceBenefit: text.nullable(),
   state,
@@ -158,7 +174,7 @@ const outcomeCoverageReview = strictObject({
 });
 
 export const HumanContentReviewEvidenceSchema = strictObject({
-  schemaVersion: z.literal('2.0.0'),
+  schemaVersion: z.literal('3.0.0'),
   id: z.string().regex(/^human-content-review-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
   scopeType: z.enum(['merge', 'release_candidate']),
   scopeId: text,
@@ -169,25 +185,14 @@ export const HumanContentReviewEvidenceSchema = strictObject({
   subjectDigest: Sha256Schema,
   inventoryPath: portablePath,
   inventoryDigest: Sha256Schema,
-  rawEvidenceManifestPath: portablePath,
-  rawEvidenceManifestDigest: Sha256Schema,
-  rawEvidenceCount: z.number().int().positive(),
-  artifactPath: portablePath,
+  reviewPolicy,
+  reviewMode: ContentReviewModeSchema,
   applicableChecks: z.array(applicableCheck).min(1),
   applicableCheckCount: z.number().int().positive(),
   passedApplicableCheckCount: z.number().int().nonnegative(),
   reviewerExecutedCheckSetDigest: Sha256Schema,
   authors: z.array(strictObject({ personId, authoredItemIds: unique(text).min(1) })).min(1),
-  reviewers: z
-    .array(
-      strictObject({
-        personId,
-        role: z.literal('independent_human_content_reviewer'),
-        independenceDeclaration: text,
-        countedAsOwnerApproval: z.literal(false),
-      }),
-    )
-    .min(1),
+  reviewer: strictObject({ personId, mode: ContentReviewModeSchema }),
   reviewItems: z.array(reviewItem),
   inventoryItemCount: z.number().int().nonnegative(),
   reviewedItemCount: z.number().int().nonnegative(),
@@ -209,12 +214,14 @@ export const HumanContentReviewEvidenceSchema = strictObject({
         message: 'Release version conflicts with scope.',
       });
     if (
-      evidence.aggregatePassed &&
-      (!evidence.outcomeCoverageConfirmed ||
-        evidence.changesRequestedItemCount !== 0 ||
-        evidence.unreviewedItemCount !== 0 ||
-        evidence.applicableChecks.some((check) => !check.passed || check.exitCode !== 0) ||
-        evidence.reviewItems.some((item) => item.decision !== 'approved'))
+      evidence.reviewer.mode !== evidence.reviewMode ||
+      evidence.reviewMode !== evidence.reviewPolicy.requiredMode ||
+      (evidence.aggregatePassed &&
+        (!evidence.outcomeCoverageConfirmed ||
+          evidence.changesRequestedItemCount !== 0 ||
+          evidence.unreviewedItemCount !== 0 ||
+          evidence.applicableChecks.some((check) => !check.passed || check.exitCode !== 0) ||
+          evidence.reviewItems.some((item) => item.decision !== 'approved')))
     )
       context.addIssue({
         code: 'custom',
@@ -224,6 +231,30 @@ export const HumanContentReviewEvidenceSchema = strictObject({
   })
   .meta({
     allOf: [
+      {
+        oneOf: [
+          {
+            properties: {
+              reviewPolicy: {
+                properties: { requiredMode: { const: 'self' } },
+                required: ['requiredMode'],
+              },
+              reviewMode: { const: 'self' },
+            },
+            required: ['reviewPolicy', 'reviewMode'],
+          },
+          {
+            properties: {
+              reviewPolicy: {
+                properties: { requiredMode: { const: 'third_party' } },
+                required: ['requiredMode'],
+              },
+              reviewMode: { const: 'third_party' },
+            },
+            required: ['reviewPolicy', 'reviewMode'],
+          },
+        ],
+      },
       {
         if: { properties: { aggregatePassed: { const: true } }, required: ['aggregatePassed'] },
         then: {
@@ -247,7 +278,7 @@ const fileEntry = strictObject({
   byteLength: z.number().int().nonnegative(),
 });
 export const MergeReviewEvidenceSchema = strictObject({
-  schemaVersion: z.literal('2.0.0'),
+  schemaVersion: z.literal('3.0.0'),
   id: EntityIdSchema,
   changeId: EntityIdSchema,
   logicalChangeSubjectDigest: Sha256Schema,
@@ -257,6 +288,8 @@ export const MergeReviewEvidenceSchema = strictObject({
   workManifestDigest: Sha256Schema,
   learningOutcomeIds: unique(EntityIdSchema),
   outcomeImpact,
+  reviewMode: ContentReviewModeSchema,
+  reviewerId: EntityIdSchema,
   applicableChecks: z
     .array(
       strictObject({
@@ -279,7 +312,7 @@ export const MergeReviewEvidenceSchema = strictObject({
   humanContentReviewEvidenceDigest: Sha256Schema,
   constitutionCheck: strictObject({
     constitutionPath: z.literal('.specify/memory/constitution.md'),
-    constitutionVersion: z.literal('1.0.0'),
+    constitutionVersion: z.literal('2.0.0'),
     constitutionDigest: Sha256Schema,
     dependentTemplates: z.array(fileEntry).min(1),
     violationCount: z.number().int().nonnegative(),
@@ -587,7 +620,7 @@ export const ContentWorkManifestContract = contract(
 export const HumanContentReviewEvidenceContract = contract(
   'human-content-review-evidence.schema.json',
   HumanContentReviewEvidenceSchema,
-  'ABC Textbook Independent Human Content Review Evidence',
+  'ABC Textbook Self or Third-Party Content Review Evidence',
 );
 export const MergeReviewEvidenceContract = contract(
   'merge-review.schema.json',

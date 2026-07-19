@@ -17,6 +17,11 @@ export class HumanReviewError extends Error {
 interface HumanReviewShape {
   readonly subjectDigest: string;
   readonly inventoryDigest: string;
+  readonly reviewPolicy: {
+    readonly requiredMode: 'self' | 'third_party';
+    readonly riskReasons: readonly string[];
+  };
+  readonly reviewMode: 'self' | 'third_party';
   readonly applicableChecks: readonly {
     readonly checkId: string;
     readonly command: string;
@@ -35,7 +40,7 @@ interface HumanReviewShape {
     readonly personId: string;
     readonly authoredItemIds: readonly string[];
   }[];
-  readonly reviewers: readonly { readonly personId: string }[];
+  readonly reviewer: { readonly personId: string; readonly mode: 'self' | 'third_party' };
   readonly reviewItems: readonly {
     readonly reviewItemId: string;
     readonly kind: string;
@@ -66,6 +71,10 @@ interface HumanReviewShape {
 export interface TrustedReviewCheckInventory {
   readonly subjectDigest: string;
   readonly inventoryDigest: string;
+  readonly reviewPolicy: {
+    readonly requiredMode: 'self' | 'third_party';
+    readonly riskReasons: readonly string[];
+  };
   /** Independently validated ContentWorkManifest scope. */
   readonly workManifest: {
     readonly learningOutcomeIds: readonly string[];
@@ -108,16 +117,22 @@ export const validateHumanContentReview = (
   }
   const evidence = value as HumanReviewShape;
   const authors = new Set(evidence.authors.map(({ personId }) => personId));
-  const reviewers = new Set(evidence.reviewers.map(({ personId }) => personId));
-  if (authors.size !== evidence.authors.length || reviewers.size !== evidence.reviewers.length) {
-    throw new HumanReviewError('REVIEW_INVENTORY_INVALID', 'People must be unique.');
+  const reviewerId = evidence.reviewer.personId;
+  if (authors.size !== evidence.authors.length) {
+    throw new HumanReviewError('REVIEW_INVENTORY_INVALID', 'Authors must be unique.');
   }
-  const gateReviewer = evidence.outcomeCoverageReview.reviewerId;
-  if (!reviewers.has(gateReviewer) || authors.has(gateReviewer)) {
-    throw new HumanReviewError('REVIEWER_NOT_INDEPENDENT', gateReviewer);
+  if (evidence.reviewer.mode !== evidence.reviewMode) {
+    throw new HumanReviewError('REVIEW_MODE_MISMATCH', 'Reviewer mode must match the evidence.');
   }
-  if (evidence.outcomeCoverageReview.authorIds.includes(gateReviewer)) {
-    throw new HumanReviewError('REVIEWER_NOT_INDEPENDENT', gateReviewer);
+  if (
+    trustedInventory.reviewPolicy.requiredMode !== evidence.reviewPolicy.requiredMode ||
+    !sameStringSet(trustedInventory.reviewPolicy.riskReasons, evidence.reviewPolicy.riskReasons) ||
+    evidence.reviewMode !== trustedInventory.reviewPolicy.requiredMode
+  ) {
+    throw new HumanReviewError(
+      'REVIEW_POLICY_MISMATCH',
+      'Evidence does not satisfy the fixed review-risk policy.',
+    );
   }
   const evidenceCheckIds = evidence.applicableChecks.map(({ checkId }) => checkId);
   const trustedCheckIds = trustedInventory.applicableChecks.map(({ checkId }) => checkId);
@@ -139,7 +154,7 @@ export const validateHumanContentReview = (
   for (const check of evidence.applicableChecks) {
     if (
       check.command !== trustedCommands.get(check.checkId) ||
-      check.executedByReviewerId !== gateReviewer ||
+      check.executedByReviewerId !== reviewerId ||
       check.subjectDigest !== evidence.subjectDigest ||
       check.exitCode !== 0 ||
       !check.passed
@@ -161,6 +176,16 @@ export const validateHumanContentReview = (
   const manifestAuthorIds = [
     ...new Set(trustedInventory.workManifest.reviewUnits.map((unit) => unit.owner)),
   ];
+  if (
+    evidence.reviewMode === 'self'
+      ? !manifestAuthorIds.includes(reviewerId)
+      : manifestAuthorIds.includes(reviewerId)
+  ) {
+    throw new HumanReviewError(
+      'REVIEWER_IDENTITY_INVALID',
+      'Self review must use a manifest owner; third-party review must use another person.',
+    );
+  }
   const manifestPathOwners = new Map<string, string>();
   const manifestOutcomeOwners = new Map<string, string>();
   for (const unit of trustedInventory.workManifest.reviewUnits) {
@@ -236,11 +261,11 @@ export const validateHumanContentReview = (
       throw new HumanReviewError('REVIEW_ITEM_INVENTORY_INVALID', item.reviewItemId);
     }
     if (
-      !reviewers.has(item.reviewerId) ||
-      trustedItem.authorIds.includes(item.reviewerId) ||
-      authors.has(item.reviewerId)
+      item.reviewerId !== reviewerId ||
+      (evidence.reviewMode === 'third_party' &&
+        (trustedItem.authorIds.includes(item.reviewerId) || authors.has(item.reviewerId)))
     ) {
-      throw new HumanReviewError('ITEM_REVIEWER_NOT_INDEPENDENT', item.reviewerId);
+      throw new HumanReviewError('ITEM_REVIEWER_INVALID', item.reviewerId);
     }
     if (
       item.decision === 'approved' &&
@@ -294,6 +319,7 @@ export const validateHumanContentReview = (
         : trustedInventory.reviewItems.flatMap((item) => item.subjectPaths),
     ) ||
     !sameStringSet(coverage.authorIds, trustedAuthorIds) ||
+    coverage.reviewerId !== reviewerId ||
     (trustedOutcomeIds.length > 0
       ? coverage.decision !== 'confirmed'
       : coverage.decision !== 'no_outcome_impact_confirmed')
@@ -386,11 +412,12 @@ export interface TrustedMergeReviewContext {
     readonly digest: string;
     readonly subjectDigest: string;
     readonly aggregatePassed: boolean;
-    readonly gateReviewerId: string;
+    readonly reviewerId: string;
+    readonly reviewMode: 'self' | 'third_party';
   };
   readonly constitutionVersion: string;
   readonly constitutionDigest: string;
-  readonly gateReviewerId: string;
+  readonly reviewerId: string;
   readonly checks: readonly {
     readonly checkId: string;
     readonly command: string;
@@ -422,7 +449,7 @@ export const validateMergeReviewEvidence = (
         ? !applicable ||
             notApplicable !== undefined ||
             applicable.command !== expected.command ||
-            applicable.executedByReviewerId !== trusted.gateReviewerId
+            applicable.executedByReviewerId !== trusted.reviewerId
         : applicable !== undefined ||
             !notApplicable ||
             notApplicable.rationale !== expected.notApplicableRationale;
@@ -451,7 +478,9 @@ export const validateMergeReviewEvidence = (
     evidence.humanContentReviewEvidenceId !== trusted.humanReview.id ||
     evidence.humanContentReviewEvidenceDigest !== trusted.humanReview.digest ||
     trusted.humanReview.subjectDigest !== trusted.subjectDigest ||
-    trusted.humanReview.gateReviewerId !== trusted.gateReviewerId ||
+    trusted.humanReview.reviewerId !== trusted.reviewerId ||
+    trusted.humanReview.reviewMode !== evidence.reviewMode ||
+    evidence.reviewerId !== trusted.reviewerId ||
     !trusted.humanReview.aggregatePassed
   ) {
     throw new HumanReviewError(

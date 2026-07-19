@@ -132,6 +132,7 @@ const makeReleaseCandidate = (): Record<string, unknown> => {
         digest: sha('7'),
         subjectDigest: contentSubjectDigest,
         reviewerExecutedCheckSetDigest: sha('8'),
+        reviewMode: 'self',
         aggregatePassed: true,
       },
     ],

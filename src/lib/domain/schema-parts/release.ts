@@ -5,6 +5,7 @@ import { stableProblemId } from '../identity.js';
 import { compareOffsetDateTimes, parseOffsetDateTime } from '../date-time.js';
 import {
   ContestIdSchema,
+  ContentReviewModeSchema,
   EntityIdSchema,
   OffsetDateTimeSchema,
   ProblemIdSchema,
@@ -303,6 +304,7 @@ const CandidateReviewRefSchema = strictObject({
   digest: Sha256Schema,
   subjectDigest: Sha256Schema,
   reviewerExecutedCheckSetDigest: Sha256Schema,
+  reviewMode: ContentReviewModeSchema,
   aggregatePassed: z.literal(true),
 });
 const CandidateFindingSchema = strictObject({
