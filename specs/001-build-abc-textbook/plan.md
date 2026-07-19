@@ -138,6 +138,7 @@ src/
 scripts/
 ├── update-abc/
 ├── validate/
+├── preview-verify.ts
 ├── catalog-build.ts
 ├── catalog-validate.ts
 ├── prepare-release-candidate.ts
@@ -199,7 +200,7 @@ slot labelの比較は表示文字列の辞書順では行わない。Contest内
 
 Foundational phaseの完了後、全コーパス制作を待たずに`initial-v1` private previewを作る。これは実ユーザーへ公開するReleaseではなく、設計を実データで検証するstaging snapshotである。previewの不完全な件数を公開版の達成率へ算入してはならず、FR-001/SC-001を満たしたと主張してはならない。
 
-preview cohortは、公式metadataを取得した後に次の決定的な規則でfreezeする。
+preview cohortは、選定規則をT028で固定し、候補範囲の公式metadataをT032で取得・検証した後、T037で次の決定的な規則によりfreezeする。T028ではProblem IDやSource Revisionを先に固定しない。
 
 1. graph/search、dynamic-programming、data-structures/algorithm-design、mathematics/combinatoricsの4分野から、候補Learning Outcomeごとに2 Problem以上を選ぶ。
 2. 合計8 Problem以上、3 Contest以上、2種類以上のadvanced slot labelを含める。seedで条件を満たせない場合は、同じ規則を固定したfuture-label fixtureを併用し、実データとfixtureの範囲をmanifestで分ける。
@@ -210,7 +211,7 @@ previewは次の縦切りを同一cohortで通す。
 
 `official metadata → Technique Inventory → provisional Tag/Outcome/DAG/Placement → Explanation/Claim/Example/Exercise/AnswerMaterial → static UI/search → local LearningRecord → update preparation/release simulation`
 
-各段階はpreview digestを引き継ぎ、失敗時は次段へ進めず具体的なhold reasonを残す。最小限のUI・学習記録・更新処理は本番用の共通実装をfixtureへ接続して検証し、preview専用の別実装を作らない。preview gateは、複数分野・複数Contest・複数labelの全Problemが一つのcatalogから問題、解説、Learning Unit、Tag、learning record、update statusへ到達でき、source/claim/example/answer/link/accessibility/rollbackの全適用checkが通り、policyに応じたreview evidenceがcurrent digestへ結び付いたときだけPASSとする。
+各段階はpreview digestを引き継ぎ、失敗時は次段へ進めず具体的なhold reasonを残す。最小限のUI・学習記録・更新処理は本番用の共通実装をfixtureへ接続して検証し、preview専用の別実装を作らない。T154の`preview:verify`を独立したjoin taskとして置き、固定manifestからmetadata、inventory、仮taxonomy、content、UI/search、LearningRecord、update simulationの各artifact digestを読み、同一cohort・同一current subjectで再計算する。全Problemが一つのcatalogから問題、解説、Learning Unit、Tag、learning record、update statusへ到達でき、source/claim/example/answer/link/accessibility/rollbackの全適用checkとpolicyに応じたreview evidenceがcurrent digestへ結び付いたときだけ、`staging/previews/<preview-id>/snapshots/<joinDigest>.json`へ不変の`PreviewSnapshot.status=passed`を作成する。欠落、stale digest、失敗check、review不在は新しい`on_hold` snapshotとして保存し、既存snapshotを上書きせず、T066–T071のbulk authoringを開始してはならない。
 
 ### Corpus-First Final Taxonomy and Authoring
 
@@ -219,7 +220,7 @@ preview後も、公開taxonomyは全コーパスから再計算する。初期�
 1. ABC 212〜466の全ContestとDより後の全slot/problem metadataを収集し、欠落・公式状態を確定する。
 2. 全Problemについて、公式根拠から主たる解法、証明着眼点、計算量、必要前提、実装上の注意、候補成果を`TechniqueInventoryItem`として棚卸しする。
 3. 全inventoryを横断して、正式Tag、Learning Outcome、Tag前提DAG、Learning Unit前提DAG、標準学習順、Problem Placementを設計する。同義の仮Tagや一問専用Unitを正本へ残さない。
-4. `outcomeId`ごとにProblem IDを公式順で並べ、最大8 Problemの連続したOutcome/Problem shardへ分割し、shardごとに独立したwork manifest、paths、checks、review evidenceを生成する。
+4. T154のpreview PASS後、`outcomeId`ごとにProblem IDを公式順で並べ、最大8 Problemの連続したOutcome/Problem shardへ分割し、shardごとに独立したwork manifest、paths、checks、review evidenceを生成する。
 5. 各Problemを主たるLearning Outcomeのshardへ一意に割り当て、完全解説または根拠付きの類題/補充問題を執筆する。
 6. domain別のLearning Unit本文、例、演習、解答、到達確認を作り、全Problemが教科書順またはTag問題集から到達できることを検証する。
 
@@ -250,7 +251,7 @@ bootstrapと全catch-up updateを一つのcandidateへ束ね、content digestを
 
 | 成果 | 自動検証 | 人間確認 |
 |---|---|---|
-| Preview vertical slice | cohortの分野/Contest/label条件、metadata→inventory→仮taxonomy→content→UI/search→LearningRecord→updateのdigest連鎖、全Problem到達性、rollback、staging/public分離 | previewを公開Releaseと誤認しないこと、各shardの独立reviewとhold理由 |
+| Preview vertical slice | T154の`preview:verify`による固定cohortの分野/Contest/label条件、metadata→inventory→仮taxonomy→content→UI/search→LearningRecord→updateのcomponent digest join、全Problem到達性、rollback、staging/public分離、current-subject review evidence | previewを公開Releaseと誤認しないこと、join前の欠落・stale digest・hold理由 |
 | 対象範囲 | Contest連続性、公式task order、Dより後の全slot/problem、動的registry、将来label fixture | 公式一覧の順序矛盾・取得不能時だけ確認 |
 | 解説 | 必須構成、出典、前提、成果、計算量、例、skill版、内部参照、self/third-party mode | 通常は管理者self-review。公式根拠との矛盾・独自証明・重大な分類変更だけself-reviewに代えてauthor外third-party reviewerが確認 |
 | 典型体系 | inventory全件対応、Tag/Unit DAG、同義語、代表問題、到達可能性、安定順 | 通常は管理者self-review。重大なtaxonomy/classification変更だけself-reviewに代えてthird-party reviewerが確認 |

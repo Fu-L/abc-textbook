@@ -104,15 +104,19 @@ taxonomy作成前に全Problemへちょうど一件作る分析正本である�
 
 ### PreviewSnapshot
 
-全コーパス完成前に設計を実データで検証するprivate previewの不変snapshotである。公開Catalogのentityではなく、`staging/previews/<preview-id>/`に保存する。
+全コーパス完成前に設計を実データで検証するprivate previewの不変snapshotである。公開Catalogのentityではなく、`staging/previews/<preview-id>/snapshots/<joinDigest>.json`に保存する。同じpreviewを再検証しても既存snapshotを上書きせず、新しいjoin digestのsnapshotを追加する。
 
 | Field | Rule |
 |---|---|
 | `previewId` | `initial-v1`などの版付き安定ID |
+| `manifestDigest` | T037でfreezeしたcohort manifestの不変digest |
 | `problemIds` | 4分野、8 Problem以上、3 Contest以上、2 advanced label以上を満たす選定集合 |
 | `sourceRevisionIds` | 選定根拠のSource Revision集合。fixture使用時はfixture IDを別記録 |
 | `provisionalTaxonomyDigest` | 仮Tag/Outcome/Unit/DAG/Placementのdigest。canonical taxonomyのdigestとは別物 |
 | `componentDigests` | metadata、inventory、content、UI/search、LearningRecord、update simulationの各digest |
+| `checkResultIds` | joinで再確認した全適用checkの結果ID集合。欠落・失敗・stale subjectを許可しない |
+| `reviewEvidenceIds` | componentとjoinのcurrent-subject self/third-party review evidence集合。review policyとmodeが一致しなければならない |
+| `joinDigest` | frozen manifest、component digest、check結果、review evidenceを含む不変のjoin digest |
 | `holdReason` | 条件未達または検証失敗時の具体的理由。PASS時はnull |
 | `status` | `draft`, `on_hold`, `passed`。`passed`でも公開Releaseへ昇格しない |
 
