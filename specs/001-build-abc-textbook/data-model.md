@@ -131,6 +131,7 @@ taxonomy作成前に全Problemへちょうど一件作る分析正本である�
 | `sourceRevisionIds` | 選定根拠のSource Revision集合。fixture使用時はfixture IDを別記録 |
 | `provisionalTaxonomyDigest` | 仮Tag/Outcome/Unit/DAG/Placementのdigest。canonical taxonomyのdigestとは別物 |
 | `componentDigests` | metadata、inventory、content、UI/search、LearningRecord、update simulationの各digest |
+| `authoringSkillVersion` / `authoringSkillDigest` | preview content/updateが使用したT064の版付きskill。component subjectと一致しなければならない |
 | `checkResultIds` | joinで再確認した全適用checkの結果ID集合。欠落・失敗・stale subjectを許可しない |
 | `reviewEvidenceIds` | componentとjoinのcurrent-subject self/third-party review evidence集合。review policyとmodeが一致しなければならない |
 | `joinDigest` | frozen manifest、component digest、check結果、review evidenceを含む不変のjoin digest |
@@ -183,6 +184,25 @@ Previewの仮taxonomyを全コーパスから再生成したfinal taxonomyへ統
 | `status` | `proposed`, `accepted`, `rejected`。未acceptedはcanonicalへmaterialize不可 |
 
 Integration mapは仮DAGをfinalへコピーする記録ではない。final Inventory全件からTag/Outcome/UnitのDAG、標準順、ProblemPlacementを再計算した結果と照合し、未知参照、循環、未分類Problem、影響未列挙が0件の場合だけ`accepted`にできる。
+
+### FinalTaxonomyBuild
+
+全コーパスのTechnique Inventoryとpreview統合結果から一度だけ生成し、T047–T050がcanonical entityへmaterializeする前のfinal taxonomy受理単位である。候補は`staging/taxonomy/`に置き、未`accepted`の候補を`src/content/`や公開catalogへ読み込んではならない。
+
+| Field | Rule |
+|---|---|
+| `inventoryDigest` | T044で完全一致を確認した全Problem/TechniqueInventory集合のdigest |
+| `previewSnapshotDigest` | T154の`passed` snapshot。preview成功を全件coverageの代替にしない |
+| `integrationMapDigest` | 仮Tag/Outcome/Unit全件の`promote`/`merge`/`split`/`retire`対応表 |
+| `taxonomyDigest` | final Tag/Outcome/LearningUnit候補、定義、成果、代表問題のdigest |
+| `tagDagDigest` / `learningUnitDagDigest` | 別々に再計算した前提DAGと未知参照・循環なしの証跡 |
+| `orderDigest` / `placementDigest` | 決定的標準順と全ProblemPlacementのdigest |
+| `correctionImpactDigest` | taxonomy再編が本文、例、演習、解答、順序、索引へ与える影響の全件digest |
+| `sourceRevisionIds` | 候補と分類判断の根拠。staleまたは矛盾した根拠は受理不可 |
+| `reviewEvidenceIds` | 固定policyに従ったcurrent-subject self/third-party evidence |
+| `status` / `acceptedAt` | `proposed`, `accepted`, `rejected`。`accepted`のみT047–T050がmaterialize可能 |
+
+`FinalTaxonomyBuild`は同じ`inventoryDigest`、`previewSnapshotDigest`、policy、入力bytesから同じ結果を得られなければならない。preview候補の名称一致だけでfinal entityを作ること、integration mapの未対応・影響未列挙、final DAGの再計算を省略することを拒否する。
 
 ### OutcomeProblemShardManifest
 
@@ -269,6 +289,19 @@ shard indexのProblem ID集合は、final Catalogの全対象Problem集合と完
 Problemに対応する学習用本文で、`full`では独立本文、`similar`/`supplement`では主要解説への参照と差分本文を持つ。
 
 必須参照はProblem、Learning Outcome、baseline、追加前提、excludedTopics、Technique Tag、Source Revision、Technical Claim、Reproducible Example、authoring skill version/digestである。完全解説は考察、学ぶべき典型・ad-hoc要素、助言、正当性、計算量、制約整合、実装注意、例または検証手順を持つ。
+
+### AuthoringSkillRevision
+
+解説とupdate authoringが参照する、版付きで自己完結した執筆契約である。T064で作成し、preview componentと全Explanationから同じ版・digestへ追跡できなければならない。
+
+| Field | Rule |
+|---|---|
+| `version` / `digest` | skill本文、references、templates、input/output contractのcanonical digest |
+| `inputRequirements` | source revision、制約、確認日、利用条件、Problem/Outcome前提の必須入力 |
+| `outputContract` | Explanation/Claim/Example/Exercise/AnswerMaterialの必須構造と不足時の状態 |
+| `referencePaths` / `templatePaths` | skillから直接解決できるrepo-relative path。root promptへの暗黙依存を許可しない |
+| `sourceNormalizationVersion` | 公式根拠の正規化規則の版 |
+| `status` | `frozen`のみpreview/full authoringの入力として使用可能 |
 
 ### TechnicalClaim
 

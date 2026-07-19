@@ -211,7 +211,7 @@ previewは次の縦切りを同一cohortで通す。
 
 `official metadata → Technique Inventory → provisional Tag/Outcome/DAG/Placement → Explanation/Claim/Example/Exercise/AnswerMaterial → static UI/search → local LearningRecord → update preparation/release simulation`
 
-各段階はpreview digestを引き継ぎ、失敗時は次段へ進めず具体的なhold reasonを残す。最小限のUI・学習記録・更新処理は本番用の共通実装をfixtureへ接続して検証し、preview専用の別実装を作らない。T094/T111/T126が固定する`docs/verification/previews/initial-v1/components/learning-records.json`、`ui-search.json`、`update-simulation.json`と、T045/T051–T054のmetadata/taxonomy/content component manifestをT154の明示的な入力にする。T154の`preview:verify`は固定manifestとこれらのartifact digestだけを読み、同一cohort・同一current subjectで再計算する。全Problemが一つのpreview catalogから問題、解説、Learning Unit、Tag、learning record、update statusへ到達でき、source/claim/example/answer/link/accessibility/rollbackの全適用checkとpolicyに応じたreview evidenceがcurrent digestへ結び付いたときだけ、`staging/previews/<preview-id>/snapshots/<joinDigest>.json`へ不変の`PreviewSnapshot.status=passed`を作成する。canonical snapshotは同一directory内の一時ファイルからrenameして一度だけcommitし、`docs/verification/previews/<preview-id>/preview-join/<joinDigest>.json`には`PreviewSnapshotReference`だけを別途作成する。この二つのdirectoryへの書き込み全体を一つのatomic operationとはみなさず、`staging/previews/<preview-id>/transactions/<joinDigest>.json`のphaseとrecovery手順で、途中停止時はcanonical snapshotを正本に参照だけを再生成する。欠落、stale digest、失敗check、review不在は新しい`on_hold` snapshotとして保存し、既存snapshotを上書きせず、T047–T050のfinal taxonomy、T065のshard index、T127以降のproduction candidate/approval/publishをpreviewの前提にしてはならない。
+各段階はpreview digestを引き継ぎ、失敗時は次段へ進めず具体的なhold reasonを残す。T064で版付きのauthoring skill、入力packet、source normalization、template、version、digestをfreezeし、T051–T054/T119はそのskill manifestを必須入力として同じ`authoringSkillVersion`/`authoringSkillDigest`をcomponent evidenceへ記録する。最小限のUI・学習記録・更新処理は本番用の共通実装をfixtureへ接続して検証し、preview専用の別実装を作らない。T094/T111/T126が固定する`docs/verification/previews/initial-v1/components/learning-records.json`、`ui-search.json`、`update-simulation.json`と、T045/T051–T054のmetadata/taxonomy/content component manifest、T064の`docs/verification/authoring-skill/initial-v1/skill-manifest.json`をT154の明示的な入力にする。T154の`preview:verify`は固定manifestとこれらのartifact digestだけを読み、同一cohort・同一current subject・同一authoring skill subjectで再計算する。全Problemが一つのpreview catalogから問題、解説、Learning Unit、Tag、learning record、update statusへ到達でき、source/claim/example/answer/link/accessibility/rollbackの全適用checkとpolicyに応じたreview evidenceがcurrent digestへ結び付いたときだけ、`staging/previews/<preview-id>/snapshots/<joinDigest>.json`へ不変の`PreviewSnapshot.status=passed`を作成する。canonical snapshotは同一directory内の一時ファイルからrenameして一度だけcommitし、`docs/verification/previews/<preview-id>/preview-join/<joinDigest>.json`には`PreviewSnapshotReference`だけを別途作成する。この二つのdirectoryへの書き込み全体を一つのatomic operationとはみなさず、`staging/previews/<preview-id>/transactions/<joinDigest>.json`のphaseとrecovery手順で、途中停止時はcanonical snapshotを正本に参照だけを再生成する。欠落、stale digest、skill mismatch、失敗check、review不在は新しい`on_hold` snapshotとして保存し、既存snapshotを上書きせず、T159のfinal taxonomy、T065のshard index、T127以降のproduction candidate/approval/publishをpreviewの前提にしてはならない。
 
 ### Corpus-First Final Taxonomy and Authoring
 
@@ -220,11 +220,12 @@ preview後も、公開taxonomyは全コーパスから再計算する。初期�
 1. ABC 212〜466の全ContestとDより後の全slot/problem metadataを収集し、欠落・公式状態を確定する。
 2. 全Problemについて、公式根拠から主たる解法、証明着眼点、計算量、必要前提、実装上の注意、候補成果を`TechniqueInventoryItem`として棚卸しする。
 3. 全inventoryを横断して、正式Tag、Learning Outcome、Tag前提DAG、Learning Unit前提DAG、標準学習順、Problem Placementを設計する。同義の仮Tagや一問専用Unitを正本へ残さない。
-4. T154のpreview PASS後に全Inventoryからfinal taxonomy、DAG、placement、LearningUnitを受理し（T047–T050）。preview用のT051–T054はcomponent digestを固定した時点で完了し、canonicalな全コーパス展開はT055–T056とT155–T158の別taskで行う。その後T065で`outcomeId`ごとにProblem IDを公式順で並べ、最大8 Problemの連続したOutcome/Problem shardへ分割し、shardごとに独立したwork manifest、paths、checks、review evidenceと同一`indexDigest`を生成する。
+4. T154のpreview PASS後に、T159がT044でfreezeした全Inventoryからfinal Tag/Outcome/Unit候補、二つのDAG、標準順、全ProblemPlacement、完全なTaxonomyIntegrationMapを決定生成し、policy-selected review後に一つの`FinalTaxonomyBuild` digestとして受理する。T047–T050はそのaccepted digestをcanonical entityへmaterializeするだけで、preview候補を直接正本にしない。preview用のT051–T054はcomponent digestを固定した時点で完了し、canonicalな全コーパス展開はT055–T056とT155–T158の別taskで行う。その後T065で`outcomeId`ごとにProblem IDを公式順で並べ、最大8 Problemの連続したOutcome/Problem shardへ分割し、shardごとに独立したwork manifest、paths、checks、review evidenceと同一`indexDigest`を生成する。
 5. 各Problemを主たるLearning Outcomeのshardへ一意に割り当て、完全解説または根拠付きの類題/補充問題を執筆する。
 6. domain別のLearning Unit本文、例、演習、解答、到達確認を作り、全Problemが教科書順またはTag問題集から到達できることを検証する。
+7. T057/T075–T076/T078のfull-corpus content・explanation・mapping acceptance後にT160を実行し、preview fixtureへ接続していた共有catalog、route、matrix、search、Pagefind、sitemap/feedをcanonical full-corpus sourceへ一度だけ切り替えてdigestをfreezeする。T138/T140/T145/T146はこの固定projectionを検証・消費し、切替を暗黙に実行しない。
 
-previewの仮taxonomyから最終taxonomyへの統合は、次の規則を必ず適用する。
+previewの仮taxonomyから最終taxonomyへの統合は、T159の`FinalTaxonomyBuild`で全Inventoryを入力に一度だけ決定・review・acceptし、T047–T050がaccepted digestをmaterializeする。次の規則を必ず適用する。
 
 - 仮Tag/Outcome/Unitは`staging/previews/`のnamespaceにのみ存在し、`src/content/tags/`、`learning-outcomes/`、`learning-units/`、公開catalogへ直接コピーしない。
 - 全ProblemのInventory digestを入力に、各仮entityを`promote`、既存entityへの`merge`、複数entityへの`split`、`retire`のいずれかへ一度だけ対応付ける。対応表にはpreview ID、final ID、影響Problem ID、根拠、review policy、旧IDのalias/redirectを記録する。
@@ -259,7 +260,7 @@ bootstrapと全catch-up updateを一つのcandidateへ束ね、content digestを
 | Outcome/Problem shards | `outcomeId`単位、公式順、最大8 Problem、path非重複、shard別check/review/preview、全shard joinの欠落0件 | shard scope外の変更を混入させていないこと |
 | 演習・解答 | Outcome参照、理由または検証方法、実行可能部分の結果、全件inventory | 自動実行不能な解答の妥当性を確認 |
 | 学習記録 | schema移行、独立日時、再読込、filter、100件backup/restore、rollback | SC-012の代表操作とSC-009/010の事前固定自己評価 |
-| 逆引き・検索 | 動的slot表、代替一覧、全destination link、検索種別、0件結果、未公開除外 | 表・検索・学習順が迷わず使えるか確認 |
+| 逆引き・検索 | previewではT099–T111、full-corpusではT160がcanonical catalog、動的slot表、代替一覧、全destination link、検索種別、0件結果、未公開除外を生成し、T138/T140/T146が固定digestを検証 | 表・検索・学習順が迷わず使えるか確認 |
 | 週次更新 | 終了判定、差分、3種結果、冪等性、訂正影響、hold/resume、15分 | 保留理由、分類候補、公開差分を管理者が確認 |
 | 公開 | fixed candidate、全check、selfまたはrequired third-party review evidence、owner digest、lock、rollback、receipt | 管理者が同じdigestを承認し変更履歴とreview modeを確認 |
 | 品質 | build、link、axe、keyboard、reflow、用語、AnswerMaterial、性能、client bundle | 自動化不能項目だけを限定確認 |

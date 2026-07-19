@@ -51,6 +51,7 @@ fixtureには、graph/search、dynamic-programming、data-structures/algorithm-d
 期待結果:
 
 - 同じpreview digestで、公式metadata、Technique Inventory、仮taxonomy/placement、Explanation/Claim/Example/Exercise/AnswerMaterial、static UI/search、local LearningRecord、update/release simulationを一周し、そのcomponent digestをjoinする。
+- preview content/update componentはT064の`authoringSkillVersion`と`authoringSkillDigest`を同じcurrent subjectとして持ち、skill manifestの欠落・不一致や入力不足は完成扱いされない。
 - 仮taxonomy、preview-only content、端末状態は`src/content/`、公開catalog、Pagefind、ReleaseCandidateへ混入しない。
 - source、claim、example、answer、link、accessibility、schema、rollback、idempotencyの適用checkとcurrent-subject review evidenceが一つでも欠ける、失敗する、またはstale digestを参照する場合は、canonical `PreviewSnapshot.status=on_hold`と具体的な`holdReason`を保存し、T047–T050のfinal taxonomy、T055–T056/T155–T158のfull LearningUnit、T065のshard index freeze、T066–T071のbulk explanation shardへ進まない。
 - 全component digest、check結果、review evidenceを結合した`joinDigest`と`PreviewSnapshot.status=passed`をcanonical `staging/previews/initial-v1/snapshots/<joinDigest>.json`へ不変保存し、`docs/verification/previews/initial-v1/preview-join/<joinDigest>.json`にはそのpath・digest・transaction IDを持つ派生`PreviewSnapshotReference`だけを保存する。referenceの欠落はcanonical snapshotを無効にせず、recoveryで再生成する。`passed`でもFR-001/SC-001の全件coverageを満たした扱いにせず、preview snapshotを公開Releaseから隔離する。
@@ -81,6 +82,7 @@ npm run test:integration -- problem-placement
 - 前提が必ず先行し、同じ入力から同じ全体順と順序理由が得られる。
 - cycle、自己辺、未知参照、生成順改ざんを拒否する。
 - 新しい主成果・前提・解法・証明着眼点・漸近計算量を持つ問題をsimilar/supplementにできない。
+- preview taxonomyは直接canonicalへコピーせず、T159が全Inventoryから`FinalTaxonomyBuild`と全件`TaxonomyIntegrationMap`を生成し、review後にacceptしたdigestだけがT047–T050でmaterializeされる。
 
 ## Scenario E — 解説生成skillと本文
 
@@ -110,6 +112,7 @@ npm run test:e2e -- learning-path contest-index search
 - 収録済みcellからProblem、Explanation、Learning Unit、primary/secondary Tag、similar problemsへ各一操作で到達する。
 - Problem/Tag/Learning Unit/Contestの検索結果と明瞭な0件結果がある。
 - staging、非公開candidate、端末状態は検索に入らない。
+- previewのroute/search検証だけではfull coverageとみなさず、T160がaccepted full-corpus catalogへ一度だけ切り替えた後に全route、matrix、catalog endpoint、Pagefind、sitemap/feedを再生成する。
 
 ## Scenario G — 学習記録
 
