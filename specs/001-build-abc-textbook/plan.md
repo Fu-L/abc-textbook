@@ -12,13 +12,13 @@ ABC 212から公開基準日時点の最新終了済みABCまでについて、�
 
 ## Technical Context
 
-**Language/Version**: Node.js 24 LTS、TypeScript 6.x strict/ESM。実装開始時に完全版を固定する。
+**Language/Version**: Node.js 24 LTS（通常開発は`>=24.18.0 <25.0.0`、リリース基準版は24.18.0）、TypeScript 6.x strict/ESM。Node/npmの対応範囲とリリース基準版を分離し、依存はlockfileで完全版を固定する。
 
 **Primary Dependencies**: Astro 7、Starlight 0.41、Zod 4、idb、Cheerio、Ajv 8、Vitest 4、Playwright、axe、Linkinator。すべてlockfileで完全版を固定する。
 
 **Storage**: 教材正本と公開履歴はGit管理のJSON/Markdown、更新候補はrepo内staging、個人学習記録はブラウザーのIndexedDB、バックアップは版付きJSONファイル。
 
-**Testing**: Vitestのunit/contract/integration、PlaywrightのChromium/Firefox/WebKit E2E、axe、静的build、内部リンク検査、schema parity、固定fixtureによる更新・rollback・性能検査。
+**Testing**: Vitestのunit/contract/integration、PlaywrightのChromium/Firefox/WebKit E2E、axe、静的build、内部リンク検査、schema parity、固定fixtureによる更新・rollback・性能検査。CIではリリース基準版と対応範囲の別patch版で同じ`verify:fast`を実行する。
 
 **Target Platform**: Node.js 24を実行できる個人所有PCと、静的HTTP配信された標準的なデスクトップ/モバイルブラウザー。必須経路はローカルで完結し、特定ホスティングを要求しない。
 

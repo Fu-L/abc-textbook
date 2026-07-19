@@ -1,25 +1,24 @@
 # Local development
 
-## Fixed toolchain
+## Toolchain policy
 
-Phase 1で固定した必須toolchainは次のとおりです。
+依存パッケージは`package-lock.json`で完全版を固定します。Node.jsとnpmは、通常開発で利用できる対応範囲と、リリース検証で再現する基準版を分けて管理します。
 
-| Tool       |     Version |
-| ---------- | ----------: |
-| Node.js    | 24.18.0 LTS |
-| npm        |     11.16.0 |
-| TypeScript |       6.0.3 |
-| Astro      |       7.1.0 |
-| Starlight  |      0.41.3 |
-| Zod        |       4.4.3 |
-| Vitest     |      4.1.10 |
-| Playwright |      1.61.1 |
-| ESLint     |      10.7.0 |
-| Prettier   |       3.9.5 |
-| Pagefind   |       1.5.2 |
+| Tool       | Supported development range  | Release baseline |
+| ---------- | ---------------------------- | ---------------- |
+| Node.js    | `>=24.18.0 <25.0.0` (24 LTS) | `24.18.0`        |
+| npm        | `>=11.16.0 <12.0.0`          | `11.16.0`        |
+| TypeScript | lockfile exact               | `6.0.3`          |
+| Astro      | lockfile exact               | `7.1.0`          |
+| Starlight  | lockfile exact               | `0.41.3`         |
+| Zod        | lockfile exact               | `4.4.3`          |
+| Vitest     | lockfile exact               | `4.1.10`         |
+| Playwright | lockfile exact               | `1.61.1`         |
+| ESLint     | lockfile exact               | `10.7.0`         |
+| Prettier   | lockfile exact               | `3.9.5`          |
+| Pagefind   | lockfile exact               | `1.5.2`          |
 
-`.nvmrc`、`packageManager`、`engines`、`devEngines`、exact
-dependency、`package-lock.json`を同時に更新しない限り、個別の版だけを変更してはいけません。
+`.nvmrc`と`packageManager`はそれぞれリリース基準のNode.js/npmを示します。対応範囲内のpatch更新は通常開発で許可され、`devEngines`は範囲外の場合だけ警告します。依存版を変更するときは、通常どおりmanifestと`package-lock.json`を同じ変更で更新します。
 
 ## Local-only setup
 
@@ -32,9 +31,9 @@ npm ci
 npm run test:e2e:install
 ```
 
-Node.jsは `v24.18.0`、npmは `11.16.0` と表示されなければ作業を止めます。Playwrightのbrowser
-binaryはローカルcacheへ保存され、repositoryへcommitしません。`devEngines`
-により、指定外のNode.jsまたはnpmでは `npm run` も実行前に失敗します。
+リリース再現を行う場合は、Node.jsが `v24.18.0`、npmが `11.16.0`
+と表示されることを確認します。通常開発では上表の対応範囲内であればpatchが異なっていても実行できます。対応範囲外のNode.js/npmでの動作は保証せず、`engine-strict=true`により依存インストールを停止します。Playwrightのbrowser
+binaryはローカルcacheへ保存され、repositoryへcommitしません。
 
 ## Command conventions
 
@@ -60,6 +59,8 @@ npm run verify:fast
   URL生成以外の外部通信を発生させません。
 - `link:check` は同じ実行内でbuildした `dist` の内部linkだけを検査します。
 - `verify:fast` は内部link検査とChromium/Firefox/WebKitの主要E2Eまで実行します。
+- GitHub
+  Actionsの[CI workflow](../../.github/workflows/ci.yml)は、リリース基準版と対応範囲のローリング版をそれぞれ`npm ci`および`verify:fast`で検証します。
 - `check` は`src/client/`のbrowser source、Astro frontmatter/build、Node.js
   CLI/config、Vitest、Playwrightの型環境を分離して検査します。
 - live source確認はoffline suite成功後に明示的なdry-runとして実行します。

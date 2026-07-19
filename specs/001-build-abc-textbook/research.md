@@ -1,18 +1,18 @@
 # Research: ABC上級問題体系化教科書
 
-**Updated**: 2026-07-14
+**Updated**: 2026-07-19
 
 ## 1. 公開範囲と実行環境
 
-**Decision**: 2026-07-12時点で終了済みのABC 212〜466を初期制作seedにし、初版直前に`cutoffAt`を固定してその時点の最新終了済みABCまで追随する。実行環境はNode.js 24 LTS、TypeScript 6.x、npm 11.xとし、実装開始時の完全版と全依存をlockfileへ固定する。
+**Decision**: 2026-07-12時点で終了済みのABC 212〜466を初期制作seedにし、初版直前に`cutoffAt`を固定してその時点の最新終了済みABCまで追随する。実行環境はNode.js 24 LTS（`>=24.18.0 <25.0.0`）とnpm 11（`>=11.16.0 <12.0.0`）を対応範囲とする。`.nvmrc`と`packageManager`にはリリース基準版のNode.js 24.18.0/npm 11.16.0を残し、TypeScript 6.xと全依存はlockfileで完全版を固定する。
 
-**Rationale**: [ABC 466公式ページ](https://atcoder.jp/contests/abc466?lang=ja)は2026-07-11に終了しており、調査時点の最新終了済みABCである。公開までに新しいABCが終了し得るため、制作seedと公開上限を分ける必要がある。[Node.js release一覧](https://nodejs.org/en/about/previous-releases)ではNode 24がLTSであり、長期保守に適する。`npm ci`はmanifestとlockfileの不一致を失敗にできる。
+**Rationale**: [ABC 466公式ページ](https://atcoder.jp/contests/abc466?lang=ja)は2026-07-11に終了しており、調査時点の最新終了済みABCである。公開までに新しいABCが終了し得るため、制作seedと公開上限を分ける必要がある。[Node.js release一覧](https://nodejs.org/en/about/previous-releases)ではNode 24がLTSであり、長期保守に適する。patch完全一致を`npm run`の条件にすると、同じLTS major内の更新で通常開発が止まるため、対応範囲内のpatch更新を許可する。一方、依存木とリリース証跡の再現性は、基準版CIと`npm ci`によるlockfile検査で維持する。
 
 **Alternatives considered**:
 
 - ABC 466を恒久的な公開上限にする: 「ABC212以降」の継続範囲を満たさないため不採用。
-- Current版Nodeを基準にする: 更新頻度が高く再現性が落ちるため不採用。
-- patch版を固定しない: 実行時期で依存木が変わるため不採用。
+- Current版Nodeを基準にする: 更新頻度が高く再現性が落ちるため不採用。Node 24 LTSの対応範囲を明示し、CIでは基準版とローリング版を分ける。
+- 開発環境もpatch完全一致にする: 同じLTS major内のセキュリティ・保守更新を妨げるため不採用。リリース基準版と対応範囲を別々に記録する。
 
 ## 2. 「E問題以上」の判定
 
