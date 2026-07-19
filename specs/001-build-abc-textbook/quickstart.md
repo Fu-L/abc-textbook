@@ -4,8 +4,8 @@
 
 ## Prerequisites
 
-- `.nvmrc`に一致するNode.js
-- `package-lock.json`に一致するnpm
+- 対応範囲（Node.js `>=24.18.0 <25.0.0`、npm `>=11.16.0 <12.0.0`）内のNode.js/npm
+- リリース基準を再現する場合は`.nvmrc`と`packageManager`に一致するNode.js/npm
 - repository rootで`npm ci`が成功していること
 - 実networkを使う手順以外は`tests/fixtures/`だけで実行できること
 
@@ -15,6 +15,8 @@ npm run verify:fast
 ```
 
 `verify:fast`は型、schema parity、unit/contract/integration test、静的build、内部link、主要E2Eを実行し、成功0、検証失敗2、使用法違反64を共通規則にする。
+
+対応範囲内のpatch差を含むCI検証は`.github/workflows/ci.yml`で行い、リリース基準版では`npm ci`によるmanifest/lockfile整合性も確認する。
 
 ## Scenario A — 動的なE問題以上の範囲
 
