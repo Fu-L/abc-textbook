@@ -260,6 +260,13 @@ describe('trusted publication diff', () => {
         action: 'replace',
         path,
       }),
+      makeOperation({
+        operationId: 'operation-replace-learning-unit-json',
+        entityType: 'learning_unit',
+        entityId: 'unit-graphs',
+        action: 'replace',
+        path: 'src/content/learning-units/unit-graphs.json',
+      }),
     ]);
 
     const diff = buildTrustedPublicationDiff(
@@ -267,7 +274,167 @@ describe('trusted publication diff', () => {
       parseTrustedCatalog(baseCatalog, 'base'),
       parseTrustedCatalog(currentCatalog, 'current'),
     );
-    expect(diff.updates[0]?.operationOwnership).toHaveLength(2);
+    expect(diff.updates[0]?.operationOwnership).toHaveLength(3);
+  });
+
+  it('requires only the changed structured source for LearningUnit metadata changes', () => {
+    const baseCatalog = makeTrustedCatalog({});
+    const currentCatalog = structuredClone(baseCatalog);
+    const baseUnit = baseCatalog.learningUnits[0];
+    const currentUnit = currentCatalog.learningUnits[0];
+    if (!baseUnit || !currentUnit) throw new Error('LearningUnit fixture is missing.');
+    baseUnit.docPath = 'src/content/docs/unit-graphs.md';
+    currentUnit.docPath = baseUnit.docPath;
+    currentUnit.orderReason = 'Changed order reason.';
+
+    const update = makeUpdate([
+      makeOperation({
+        operationId: 'operation-replace-learning-unit-json',
+        entityType: 'learning_unit',
+        entityId: 'unit-graphs',
+        path: 'src/content/learning-units/unit-graphs.json',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+      }),
+    ]);
+    const sourceInventory = {
+      baseFiles: [
+        { path: 'src/content/learning-units/unit-graphs.json', sha256: sha('a'), byteLength: 10 },
+        { path: 'src/content/docs/unit-graphs.md', sha256: sha('c'), byteLength: 10 },
+      ],
+      currentFiles: [
+        { path: 'src/content/learning-units/unit-graphs.json', sha256: sha('b'), byteLength: 11 },
+        { path: 'src/content/docs/unit-graphs.md', sha256: sha('c'), byteLength: 10 },
+      ],
+    };
+
+    const diff = buildTrustedPublicationDiff(
+      [update],
+      parseTrustedCatalog(baseCatalog, 'base'),
+      parseTrustedCatalog(currentCatalog, 'current'),
+      sourceInventory,
+    );
+    const trustedUpdate = diff.updates[0];
+    if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    expect(trustedUpdate.operationOwnership.map(({ path }) => path)).toEqual([
+      'src/content/learning-units/unit-graphs.json',
+    ]);
+    expect(() => {
+      validatePublicationUpdate(update, {
+        operationOwnership: trustedUpdate.operationOwnership,
+        correctionImpacts: trustedUpdate.correctionImpacts,
+        baseFiles: sourceInventory.baseFiles,
+        currentFiles: sourceInventory.currentFiles,
+      });
+    }).not.toThrow();
+  });
+
+  it('represents a LearningUnit body-only change even when its Catalog projection is unchanged', () => {
+    const baseCatalog = makeTrustedCatalog({});
+    const currentCatalog = structuredClone(baseCatalog);
+    const baseUnit = baseCatalog.learningUnits[0];
+    const currentUnit = currentCatalog.learningUnits[0];
+    if (!baseUnit || !currentUnit) throw new Error('LearningUnit fixture is missing.');
+    baseUnit.docPath = 'src/content/docs/unit-graphs.md';
+    currentUnit.docPath = baseUnit.docPath;
+
+    const update = makeUpdate([
+      makeOperation({
+        operationId: 'operation-replace-learning-unit-body',
+        entityType: 'learning_unit',
+        entityId: 'unit-graphs',
+        path: 'src/content/docs/unit-graphs.md',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+      }),
+    ]);
+    const sourceInventory = {
+      baseFiles: [
+        { path: 'src/content/learning-units/unit-graphs.json', sha256: sha('c'), byteLength: 10 },
+        { path: 'src/content/docs/unit-graphs.md', sha256: sha('a'), byteLength: 10 },
+      ],
+      currentFiles: [
+        { path: 'src/content/learning-units/unit-graphs.json', sha256: sha('c'), byteLength: 10 },
+        { path: 'src/content/docs/unit-graphs.md', sha256: sha('b'), byteLength: 11 },
+      ],
+    };
+
+    const diff = buildTrustedPublicationDiff(
+      [update],
+      parseTrustedCatalog(baseCatalog, 'base'),
+      parseTrustedCatalog(currentCatalog, 'current'),
+      sourceInventory,
+    );
+    const trustedUpdate = diff.updates[0];
+    if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    expect(trustedUpdate.operationOwnership.map(({ path }) => path)).toEqual([
+      'src/content/docs/unit-graphs.md',
+    ]);
+    expect(() => {
+      validatePublicationUpdate(update, {
+        operationOwnership: trustedUpdate.operationOwnership,
+        correctionImpacts: trustedUpdate.correctionImpacts,
+        baseFiles: sourceInventory.baseFiles,
+        currentFiles: sourceInventory.currentFiles,
+      });
+    }).not.toThrow();
+  });
+
+  it('requires both LearningUnit sources when metadata and body change together', () => {
+    const baseCatalog = makeTrustedCatalog({});
+    const currentCatalog = structuredClone(baseCatalog);
+    const baseUnit = baseCatalog.learningUnits[0];
+    const currentUnit = currentCatalog.learningUnits[0];
+    if (!baseUnit || !currentUnit) throw new Error('LearningUnit fixture is missing.');
+    baseUnit.docPath = 'src/content/docs/unit-graphs.md';
+    currentUnit.docPath = baseUnit.docPath;
+    currentUnit.orderReason = 'Changed order reason.';
+
+    const update = makeUpdate([
+      makeOperation({
+        operationId: 'operation-replace-learning-unit-json',
+        entityType: 'learning_unit',
+        entityId: 'unit-graphs',
+        path: 'src/content/learning-units/unit-graphs.json',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+      }),
+      makeOperation({
+        operationId: 'operation-replace-learning-unit-body',
+        entityType: 'learning_unit',
+        entityId: 'unit-graphs',
+        path: 'src/content/docs/unit-graphs.md',
+        beforeDigest: sha('c'),
+        afterDigest: sha('d'),
+      }),
+    ]);
+    const sourceInventory = {
+      baseFiles: [
+        { path: 'src/content/learning-units/unit-graphs.json', sha256: sha('a'), byteLength: 10 },
+        { path: 'src/content/docs/unit-graphs.md', sha256: sha('c'), byteLength: 10 },
+      ],
+      currentFiles: [
+        { path: 'src/content/learning-units/unit-graphs.json', sha256: sha('b'), byteLength: 11 },
+        { path: 'src/content/docs/unit-graphs.md', sha256: sha('d'), byteLength: 11 },
+      ],
+    };
+
+    const diff = buildTrustedPublicationDiff(
+      [update],
+      parseTrustedCatalog(baseCatalog, 'base'),
+      parseTrustedCatalog(currentCatalog, 'current'),
+      sourceInventory,
+    );
+    const trustedUpdate = diff.updates[0];
+    if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    expect(() => {
+      validatePublicationUpdate(update, {
+        operationOwnership: trustedUpdate.operationOwnership,
+        correctionImpacts: trustedUpdate.correctionImpacts,
+        baseFiles: sourceInventory.baseFiles,
+        currentFiles: sourceInventory.currentFiles,
+      });
+    }).not.toThrow();
   });
 
   it('allows an explanation docPath move through the complete release validation', () => {

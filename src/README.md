@@ -12,7 +12,9 @@
   dataを再定義しません。
 - Catalog entityの正規所有pathは、構造化entityでは対応する`src/content/<collection>/`配下のstable
   IDをbasenameとするJSON（shard
-  directoryは許可）、Explanation/LearningUnitではentityの`docPath`、Placementでは`src/content/policies/problem-placements.json`、CorrectionImpactでは`derivedIndexPaths`とする。1ファイルを複数entityが所有することを許し、その場合は同じbefore/after
+  directoryは許可）、Explanation/LearningUnitではentityの`docPath`も含め、Placementでは`src/content/policies/problem-placements.json`、CorrectionImpactでは`derivedIndexPaths`とする。公開検証時はこの規則でbase/currentのsource
+  provenance inventoryを再構築し、Catalog
+  projectionだけでなく各所有pathのdigest差分もentity差分へ結び付ける。これによりLearningUnitのJSONメタデータだけの変更、本文だけの変更、両方の変更を区別できる。1ファイルを複数entityが所有することを許し、その場合は同じbefore/after
   digestを持つoperationをentityごとに記録する。同じCatalog
   entityの一つの差分に複数pathが関係する場合も、対応するoperationは一つのPublicationUpdateにまとめる。同じcanonical
   source

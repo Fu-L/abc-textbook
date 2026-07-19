@@ -327,6 +327,16 @@ describe('catalog validation CLI evidence boundary', () => {
           afterDigest: createHash('sha256').update(content).digest('hex'),
           affectedProblemIds: ['abc212-x45'],
         },
+        {
+          operationId: 'operation-replace-learning-unit',
+          entityType: 'learning_unit',
+          entityId: 'unit-graphs',
+          action: 'replace',
+          path: contentPath,
+          beforeDigest: createHash('sha256').update(baseContent).digest('hex'),
+          afterDigest: createHash('sha256').update(content).digest('hex'),
+          affectedProblemIds: ['abc212-x45'],
+        },
       ],
       authoringResults: [
         {

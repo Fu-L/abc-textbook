@@ -117,8 +117,23 @@ class CatalogGraph {
   private readonly byTypeAndAlias = new Map<string, CatalogNode>();
   private readonly byAlias = new Map<string, CatalogNode[]>();
   private readonly reverseReferences = new Map<string, Set<string>>();
+  private readonly sourceFiles:
+    ReadonlyMap<string, TrustedCatalogSourceInventory['baseFiles'][number]> | undefined;
 
-  constructor(catalog: Catalog | undefined) {
+  constructor(
+    catalog: Catalog | undefined,
+    sourceFiles?: readonly TrustedCatalogSourceInventory['baseFiles'][number][],
+  ) {
+    if (sourceFiles !== undefined) {
+      const files = new Map(sourceFiles.map((file) => [file.path, file] as const));
+      if (files.size !== sourceFiles.length) {
+        throw new TrustedCatalogDiffError(
+          'TRUSTED_SOURCE_INVENTORY_DUPLICATE',
+          'Trusted source inventories must contain unique paths.',
+        );
+      }
+      this.sourceFiles = files;
+    }
     if (!catalog) return;
     for (const [collection, entityType] of collections) {
       const values = catalog[collection];
@@ -208,6 +223,43 @@ class CatalogGraph {
     return [...this.nodesByEntityKey.values()];
   }
 
+  hasSourceInventory(): boolean {
+    return this.sourceFiles !== undefined;
+  }
+
+  sourcePaths(node: CatalogNode): readonly string[] {
+    const declaredPaths = declaredSourcePaths(node);
+    const root = structuredEntityRoots[node.entityType];
+    const discoveredPaths = this.sourceFiles
+      ? [...this.sourceFiles.keys()].filter((candidatePath) => nodeOwnsPath(node, candidatePath))
+      : [];
+    const discoveredStructuredPaths = root
+      ? discoveredPaths.filter((candidatePath) => pathHasRoot(candidatePath, root))
+      : [];
+    const structuredPaths =
+      discoveredStructuredPaths.length > 0
+        ? discoveredStructuredPaths
+        : root
+          ? structuredFallbackSourcePaths(node)
+          : [];
+    return [...new Set([...declaredPaths, ...structuredPaths])].sort();
+  }
+
+  sourceDigest(sourcePath: string): string | undefined {
+    return this.sourceFiles?.get(sourcePath)?.sha256;
+  }
+
+  effectiveProjection(node: CatalogNode): string {
+    if (!this.sourceFiles) return node.projection;
+    return canonicalJson({
+      catalog: node.projection,
+      sourceFiles: this.sourcePaths(node).map((sourcePath) => ({
+        path: sourcePath,
+        sha256: this.sourceDigest(sourcePath) ?? null,
+      })),
+    });
+  }
+
   referencedNodes(node: CatalogNode): readonly CatalogNode[] {
     return [...node.references]
       .map((key) => this.nodes.get(key))
@@ -276,6 +328,24 @@ export interface TrustedPublicationDiff {
   readonly updates: readonly TrustedUpdateDiff[];
 }
 
+/**
+ * The immutable before/after source inventory rebuilt from the repository.
+ * Catalog records intentionally do not contain file bytes, so the trusted
+ * diff also compares the digest of each source path owned by an entity.
+ */
+export interface TrustedCatalogSourceInventory {
+  readonly baseFiles: readonly {
+    readonly path: string;
+    readonly sha256: string;
+    readonly byteLength: number;
+  }[];
+  readonly currentFiles: readonly {
+    readonly path: string;
+    readonly sha256: string;
+    readonly byteLength: number;
+  }[];
+}
+
 interface CatalogGraphPair {
   readonly base: CatalogGraph;
   readonly current: CatalogGraph;
@@ -288,6 +358,7 @@ interface CatalogEntityDiff {
   readonly action: PublicationOperation['action'];
   readonly base: CatalogNode | undefined;
   readonly current: CatalogNode | undefined;
+  readonly changedSourcePaths: readonly string[];
 }
 
 const structuredEntityRoots: Readonly<Partial<Record<EntityType, string>>> = {
@@ -356,6 +427,7 @@ const nodeOwnsPath = (node: CatalogNode, candidatePath: string): boolean => {
 };
 
 const catalogEntityDiffs = (pair: CatalogGraphPair): readonly CatalogEntityDiff[] => {
+  const hasSourceInventory = pair.base.hasSourceInventory() || pair.current.hasSourceInventory();
   const baseByKey = new Map(
     pair.base.entityNodes().map((node) => [operationAlias(node.entityType, node.identity), node]),
   );
@@ -370,14 +442,32 @@ const catalogEntityDiffs = (pair: CatalogGraphPair): readonly CatalogEntityDiff[
     const current = currentByKey.get(key);
     const node = current ?? base;
     if (!node) return [];
+    const baseProjection = base ? pair.base.effectiveProjection(base) : undefined;
+    const currentProjection = current ? pair.current.effectiveProjection(current) : undefined;
     const action: PublicationOperation['action'] | undefined = !base
       ? 'add'
       : !current
         ? 'remove'
-        : base.projection === current.projection
+        : baseProjection === currentProjection
           ? undefined
           : 'replace';
     if (!action) return [];
+    const sourcePaths = [
+      ...(base ? pair.base.sourcePaths(base) : []),
+      ...(current ? pair.current.sourcePaths(current) : []),
+    ].filter((path, index, paths) => paths.indexOf(path) === index);
+    const changedSourcePaths = hasSourceInventory
+      ? sourcePaths.filter(
+          (sourcePath) =>
+            pair.base.sourceDigest(sourcePath) !== pair.current.sourceDigest(sourcePath),
+        )
+      : sourcePaths;
+    if (hasSourceInventory && changedSourcePaths.length === 0) {
+      throw new TrustedCatalogDiffError(
+        'PUBLICATION_UPDATE_ENTITY_SOURCE_DIFF_INVALID',
+        `${action} ${node.entityType}:${node.identity} has no corresponding changed source path in the trusted inventory.`,
+      );
+    }
     return [
       {
         key,
@@ -386,6 +476,7 @@ const catalogEntityDiffs = (pair: CatalogGraphPair): readonly CatalogEntityDiff[
         action,
         base,
         current,
+        changedSourcePaths,
       },
     ];
   });
@@ -429,6 +520,15 @@ const resolveEntityDiff = (
     throw new TrustedCatalogDiffError(
       'PUBLICATION_UPDATE_ENTITY_PATH_INVALID',
       `${operation.operationId} claims ${operation.path}, which is not a canonical source path for ${operation.entityType}:${node.identity}.`,
+    );
+  }
+  if (
+    (pair.base.hasSourceInventory() || pair.current.hasSourceInventory()) &&
+    !diff.changedSourcePaths.includes(operation.path)
+  ) {
+    throw new TrustedCatalogDiffError(
+      'PUBLICATION_UPDATE_ENTITY_SOURCE_PATH_INVALID',
+      `${operation.operationId} claims ${operation.path}, but that source path did not change in the trusted inventory for ${operation.entityType}:${node.identity}.`,
     );
   }
   return diff;
@@ -523,7 +623,7 @@ const impactPaths = (node: CatalogNode): readonly string[] => {
   return Array.isArray(paths) && paths.every((value) => typeof value === 'string') ? paths : [];
 };
 
-const canonicalEntityPaths = (node: CatalogNode): readonly string[] => {
+const declaredSourcePaths = (node: CatalogNode): readonly string[] => {
   if (node.entityType === 'explanation' || node.entityType === 'learning_unit') {
     return typeof node.value.docPath === 'string' ? [node.value.docPath] : [];
   }
@@ -531,17 +631,17 @@ const canonicalEntityPaths = (node: CatalogNode): readonly string[] => {
     return ['src/content/policies/problem-placements.json'];
   }
   if (node.entityType === 'correction_impact') return impactPaths(node);
-  // Structured entities are allowed to use arbitrary shard directories. Their
-  // operation path is still checked by nodeOwnsPath, but the complete set of
-  // paths cannot be reconstructed from the Catalog projection alone.
   return [];
 };
 
+const structuredFallbackSourcePaths = (node: CatalogNode): readonly string[] => {
+  const root = structuredEntityRoots[node.entityType];
+  if (!root) return [];
+  return structuredFileNames(node).map((name) => `${root}/${name}.json`);
+};
+
 const canonicalEntityDiffPaths = (diff: CatalogEntityDiff): readonly string[] =>
-  [
-    ...(diff.base ? canonicalEntityPaths(diff.base) : []),
-    ...(diff.current ? canonicalEntityPaths(diff.current) : []),
-  ].filter((path, index, paths) => paths.indexOf(path) === index);
+  diff.changedSourcePaths;
 
 const deriveCorrectionImpacts = (
   update: PublicationUpdate,
@@ -600,10 +700,11 @@ export const buildTrustedPublicationDiff = (
   updates: readonly PublicationUpdate[],
   baseCatalog: Catalog | undefined,
   currentCatalog: Catalog,
+  sourceInventory?: TrustedCatalogSourceInventory,
 ): TrustedPublicationDiff => {
   const pair: CatalogGraphPair = {
-    base: new CatalogGraph(baseCatalog),
-    current: new CatalogGraph(currentCatalog),
+    base: new CatalogGraph(baseCatalog, sourceInventory?.baseFiles),
+    current: new CatalogGraph(currentCatalog, sourceInventory?.currentFiles),
   };
   const entityDiffs = catalogEntityDiffs(pair);
   const entityDiffByKey = new Map(entityDiffs.map((diff) => [diff.key, diff]));

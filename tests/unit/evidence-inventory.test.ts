@@ -936,6 +936,16 @@ describe('catalog release evidence inventory', () => {
           afterDigest: createHash('sha256').update('# Changed\n').digest('hex'),
           affectedProblemIds: ['abc212-x45'],
         },
+        {
+          operationId: 'operation-replace-learning-unit',
+          entityType: 'learning_unit',
+          entityId: 'unit-graphs',
+          action: 'replace',
+          path: 'src/content/docs/index.md',
+          beforeDigest: fileDigest(baseContent),
+          afterDigest: createHash('sha256').update('# Changed\n').digest('hex'),
+          affectedProblemIds: ['abc212-x45'],
+        },
       ],
       authoringResults: [
         {

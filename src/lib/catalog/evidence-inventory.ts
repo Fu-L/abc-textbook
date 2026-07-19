@@ -554,7 +554,10 @@ export const loadCatalogEvidenceCanonicalSources = async (
   const operationIds = new Set<string>();
   let trustedDiff: ReturnType<typeof buildTrustedPublicationDiff>;
   try {
-    trustedDiff = buildTrustedPublicationDiff([...updates.values()], baseCatalog, currentCatalog);
+    trustedDiff = buildTrustedPublicationDiff([...updates.values()], baseCatalog, currentCatalog, {
+      baseFiles: baseContentFiles,
+      currentFiles: actualContentFiles,
+    });
   } catch (error) {
     if (error instanceof TrustedCatalogDiffError) {
       throw new CatalogEvidenceInventoryError(error.code, error.message);
