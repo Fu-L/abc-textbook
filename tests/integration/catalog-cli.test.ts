@@ -240,7 +240,7 @@ describe('catalog validation CLI evidence boundary', () => {
       updateIds: ['update-foundation'],
     });
     const baseCatalog = structuredClone(catalog);
-    const explanation = catalog.explanations[0];
+    const explanation = catalog.authoringUnits[0];
     if (!explanation) throw new Error('Fixture explanation is missing.');
     explanation.revision = 2;
     releaseCandidate.advancedSlotRegistryDigest = String(
@@ -313,16 +313,16 @@ describe('catalog validation CLI evidence boundary', () => {
       operations: [
         {
           operationId: 'operation-replace-explanation',
-          entityType: 'explanation',
-          entityId: 'explanation-abc212-x45',
+          entityType: 'authoring_unit',
+          entityId: 'abc212-x45',
           action: 'replace',
           path: contentPath,
           beforeDigest: createHash('sha256').update(baseContent).digest('hex'),
           afterDigest: createHash('sha256').update(content).digest('hex'),
           affectedEntities: [
             {
-              entityType: 'explanation',
-              entityId: 'explanation-abc212-x45',
+              entityType: 'authoring_unit',
+              entityId: 'abc212-x45',
               action: 'replace',
             },
           ],
@@ -333,7 +333,7 @@ describe('catalog validation CLI evidence boundary', () => {
         {
           problemId: 'abc212-x45',
           slotLabel: 'E',
-          resultType: 'explanation_draft',
+          resultType: 'authoring_unit_draft',
           draftPath: 'src/content/docs/index.md',
           packetPath: null,
           templatePath: null,

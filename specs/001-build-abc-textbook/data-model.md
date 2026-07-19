@@ -213,7 +213,7 @@ Integration mapは仮DAGをfinalへコピーする記録ではない。final Inv
 | `shardId` | `outcomeId`と安定ordinalから導出し、Problemの表示名変更で変えない |
 | `primaryOutcomeId` | ちょうど一つ。Problemのprimary outcomeと一致する |
 | `problemIds` | 1〜8件、canonical official orderの連続chunk、shard間で重複なし |
-| `itemIds` | 所有するExplanation、Claim、Example、Exercise、AnswerMaterialの完全なID集合 |
+| `problemIds` | 所有するProblem authoring unitの完全な集合。本文内blockへ独立entity IDを付けない |
 | `paths` | shard専有のcanonical/staging path集合。別shard・共有Unit/Tag pathとの重複を拒否 |
 | `dependencyShardIds` | 前提を満たすために必要なshardの集合。循環不可 |
 | `checkIds` / `evidencePaths` | source、structure、example、answer、link、accessibility、review、previewの適用checkと出力先 |
@@ -245,7 +245,7 @@ shard indexのProblem ID集合は、final Catalogの全対象Problem集合と完
 | `statement` | 学習者が観察可能な動詞で表す |
 | `prerequisiteOutcomeIds` | 循環のない集合 |
 | `scope` | 対象Tag/Unit/Problem |
-| `assessmentIds` | 一つ以上 |
+AssessmentはProblem authoring unitのExercise内にco-locateし、Outcomeへ直接紐付ける。
 
 ### LearningUnit
 
@@ -258,7 +258,7 @@ shard indexのProblem ID集合は、final Catalogの全対象Problem集合と完
 | `excludedTopics` | 意図的対象外 |
 | `sourceRevisionIds` | 単位本文と所有例の根拠 |
 | `tagIds` / `learningOutcomeIds` | 各一つ以上 |
-| `explanation` | 単位本文参照 |
+| `authoringUnit` | Problem単位本文参照 |
 | `exampleIds` | 一つ以上 |
 | `problemIds` | 一つ以上 |
 | `assessmentIds` | 一つ以上 |
@@ -274,7 +274,7 @@ shard indexのProblem ID集合は、final Catalogの全対象Problem集合と完
 | `id` / `problemId` | Problemごとに一つ |
 | `policyVersion` | 判定policy版 |
 | `kind` | full/similar/supplement |
-| `primaryExplanationId` | similar/supplementで必須 |
+| `primaryProblemId` | similar/supplementで必須。参照先はfull authoring unitを持つProblem |
 | `sharedOutcomeIds` | similar/supplementで一つ以上 |
 | `comparison` | 解法、証明、計算量、制約、前提、実装差 |
 | `additionalElement` | supplementではちょうど一つ、similarではnone明示 |
@@ -282,44 +282,42 @@ shard indexのProblem ID集合は、final Catalogの全対象Problem集合と完
 
 `full`が既定である。新しい主成果、前提、主解法、証明着眼点、漸近計算量があれば`full`以外を拒否する。
 
-## 4. Explanation and evidence entities
+## 4. Problem authoring unit and evidence
 
-### Explanation
+### Entity化の判断基準
 
-Problemに対応する学習用本文で、`full`では独立本文、`similar`/`supplement`では主要解説への参照と差分本文を持つ。
+独立entityは「所有者と別のライフサイクルを持つ」または「複数ownerから参照される」対象に限定する。Problem、Technique Tag、Learning Outcome、Learning Unit、Source Revision、Correction Impactは独立entityとする。Claim、Example、Exercise、Assessment、AnswerはProblem本文と同時に変更されるため独立entityにしない。
 
-必須参照はProblem、Learning Outcome、baseline、追加前提、excludedTopics、Technique Tag、Source Revision、Technical Claim、Reproducible Example、authoring skill version/digestである。完全解説は考察、学ぶべき典型・ad-hoc要素、助言、正当性、計算量、制約整合、実装注意、例または検証手順を持つ。
+### ProblemAuthoringUnit
+
+一問分の本文、frontmatter、Claim、Example、Exercise、Assessment、Answerを一つのMarkdown authoring unitへco-locateする。`full`では独立本文、`similar`/`supplement`では`primaryProblemId`と差分本文を持つ。Catalog上のidentityは既存`problemId`であり、別のExplanation IDを作らない。
+
+必須参照はProblem、Learning Outcome、baseline、追加前提、excludedTopics、Technique Tag、Source Revision、authoring skill version/digestである。完全解説は考察、典型、問題固有要素、復習助言、正当性、時間・空間計算量、制約整合、実装注意を明示する。
+
+文書内のClaim、Example、Exerciseはdocument-localな`key`を持つ。このkeyは実行manifestやreview evidenceから`(problemId, key)`で対象を特定するためのlocatorであり、Catalog entity IDや別artifactへの参照ではない。
 
 ### AuthoringSkillRevision
 
-解説とupdate authoringが参照する、版付きで自己完結した執筆契約である。T064で作成し、preview componentと全Explanationから同じ版・digestへ追跡できなければならない。
+解説とupdate authoringが参照する、版付きで自己完結した執筆契約である。T064で作成し、preview componentと全ProblemAuthoringUnitから同じ版・digestへ追跡できなければならない。
 
 | Field | Rule |
 |---|---|
 | `version` / `digest` | skill本文、references、templates、input/output contractのcanonical digest |
 | `inputRequirements` | source revision、制約、確認日、利用条件、Problem/Outcome前提の必須入力 |
-| `outputContract` | Explanation/Claim/Example/Exercise/AnswerMaterialの必須構造と不足時の状態 |
+| `outputContract` | ProblemAuthoringUnitと内包blockの必須構造、不足時の状態 |
 | `referencePaths` / `templatePaths` | skillから直接解決できるrepo-relative path。root promptへの暗黙依存を許可しない |
 | `sourceNormalizationVersion` | 公式根拠の正規化規則の版 |
 | `status` | `frozen`のみpreview/full authoringの入力として使用可能 |
 
-### TechnicalClaim
+### Co-located blocks
 
-検証可能な主張を安定ID、正確な文、Source Revision、author、検証状態、Correction Impactで表す。根拠なし・stale・矛盾状態は公開不可。
-
-### ReproducibleExample
-
-ExplanationまたはLearning Unitの少なくとも一方に所有され、Learning Outcome、環境、入力、手順、期待結果、検証方法、結果を持つ。疑似コード・省略は種類と範囲を直近でlabelする。
-
-### Exercise / Assessment / AnswerMaterial
-
-- ExerciseはProblem（null不可）、Outcome、前提、到達条件、Assessment、AnswerMaterialを結ぶ。
-- Assessmentは観察可能な成功条件を持つ。
-- AnswerMaterialは最終答案だけでなく理由または検証方法、procedure、期待結果、検証結果を持つ。
+- Claimは正確な文、Source Revision、author、検証状態を持つ。根拠なし・stale・矛盾状態は公開不可。
+- ExampleはLearning Outcome、任意のLearning Unit、種類、言語、省略範囲、環境、入力、手順、期待結果、検証結果を持つ。`executable`だけを実行manifestの必須対象とし、疑似コード・図示例は`not_applicable`とする。
+- ExerciseはOutcome、前提、到達条件、観察可能なAssessment、理由または検証方法を含むAnswerを一つのblockに持つ。Answerの検証成功前は公開不可。
 
 ### SourceRecord / SourceRevision / CorrectionImpact
 
-SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。CorrectionImpactは変更による本文、Claim、Example、Exercise、AnswerMaterial、Unit順、派生indexの影響を完全列挙する。
+SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。CorrectionImpactは本文と別の訂正ライフサイクルを持つため独立entityとし、影響するauthoring unitのProblem ID、文書内section key、Unit順、派生indexを完全列挙する。
 
 ## 5. Learning records
 
@@ -343,11 +341,11 @@ schema version、createdAt、targetReleaseVersion、全record、不明Problem ID
 
 ### AuthoringResult
 
-- `explanation_draft`: 完成本文と全必須metadataがあり検証対象にできる。
+- `authoring_unit_draft`: 完成本文と全必須metadataがあり検証対象にできる。
 - `authoring_required`: 完全な入力packetと手動templateがあるが本文未完成。
 - `blocked`: 根拠不足、deadline、policy変更等の具体的理由と再試行条件がある。
 
-後二者をExplanation件数へ含めない。
+後二者をProblemAuthoringUnit件数へ含めない。
 
 ### PublicationUpdate
 
@@ -364,7 +362,7 @@ schema version、createdAt、targetReleaseVersion、全record、不明Problem ID
 | `validationSummary` | check結果とProblem別理由 |
 | `state` | PREPARING/ON_HOLD/ELIGIBLE_FOR_BATCH |
 
-全AuthoringResultが`explanation_draft`かつblocking 0件の場合だけELIGIBLE_FOR_BATCHへ進む。
+全AuthoringResultが`authoring_unit_draft`かつblocking 0件の場合だけELIGIBLE_FOR_BATCHへ進む。
 
 ### ReleaseCandidate
 
@@ -396,7 +394,7 @@ candidate ID、release version、approved digest、公開前後tree digest、切
 
 実装・content変更前に作るversion-controlled scopeである。top-levelにtask ID、scope digest、required requirement IDs、learning outcome IDs、固定したreview policy、review units、stateを持つ。review policyは`self`または`third_party`の必須modeと、公式根拠との矛盾・独自証明・重大な分類変更から選ぶrisk reasonを持つ。各review unitは重複しないpaths、item IDs、requirements、outcomes、依存unit、checks、evidence role、owner、statusを持つ。
 
-content review unitはContest batchではなくOutcome/Problem shard、Problem、Claim、Example、Exercise等の独立対象にする。Outcome/Problem shardは一つのprimary Learning Outcomeに属するProblem IDを公式順に最大8件ずつ分割し、paths、item IDs、dependency unit、checks、evidenceを単独で解決できなければならない。tooling/abstractionには具体的なmaintenance benefitを必須にする。
+content review unitはContest batchではなくOutcome/Problem shardまたはProblem authoring unitを対象にする。文書内blockを別review unitへ分割しない。Outcome/Problem shardは一つのprimary Learning Outcomeに属するProblem IDを公式順に最大8件ずつ分割し、paths、Problem IDs、dependency unit、checks、evidenceを単独で解決できなければならない。tooling/abstractionには具体的なmaintenance benefitを必須にする。
 
 ### HumanContentReviewEvidence
 
@@ -426,7 +424,7 @@ SC-012について、全公開Problem routeが共有LearningRecord component/act
 正本から次を決定生成する。
 
 - Contest × AdvancedSlotRegistry matrixと同内容のlist alternative
-- Problem detail、Explanation anchor、Learning Unit、Tag、similar problem route
+- Problem detail、authoring unit anchor、Learning Unit、Tag、similar problem route
 - Problem/Tag/Learning Unit/Contest種別付きsearch document
 - standard learning sequenceと前後navigation
 - Tag treeとTag別problem collection
@@ -445,8 +443,8 @@ SC-012について、全公開Problem routeが共有LearningRecord component/act
 4. Problem集合とTechnique Inventory集合が一致する。
 5. 全ProblemがTagとLearning UnitまたはTag collectionから到達可能である。
 6. Tag/Unit/Outcome prerequisite graphに循環・未知参照がない。
-7. 全Explanation/Example/Exercise/AnswerMaterialがOutcomeとSourceへ追跡できる。
-8. 全実行可能Example/AnswerMaterialの検証が成功する。
+7. 全ProblemAuthoringUnitと内包blockがOutcomeとSourceへ追跡できる。
+8. 全実行可能ExampleとAnswerの検証が成功する。
 9. 全内部link、用語、代替text、navigationが有効である。
 10. 全適用checkとreview policyに応じたselfまたはthird-party reviewがcurrent subjectで成功する。
 11. owner approval後にcandidate bytesが変化していない。

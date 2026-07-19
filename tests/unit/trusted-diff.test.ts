@@ -16,18 +16,15 @@ describe('trusted publication diff', () => {
       correctionImpacts: Record<string, unknown>[];
     };
     const baseCatalog = structuredClone(currentCatalog);
-    const explanation = currentCatalog.explanations[0];
+    const explanation = currentCatalog.authoringUnits[0];
     if (!explanation) throw new Error('Fixture explanation is missing.');
     explanation.revision = 2;
     const correctionImpact = {
       id: 'correction-impact-graphs',
       sourceRevisionId: 'source-revision-abc212-e',
       changeSummary: 'Fixture correction.',
-      explanationIds: ['explanation-abc212-x45'],
-      claimIds: ['claim-graphs'],
-      exampleIds: ['example-graphs'],
-      exerciseIds: ['exercise-graphs'],
-      answerMaterialIds: ['answer-graphs'],
+      authoringUnitProblemIds: ['abc212-x45'],
+      affectedSectionKeys: ['sections.correctness'],
       learningUnitIds: ['unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified' as const,
@@ -46,8 +43,8 @@ describe('trusted publication diff', () => {
       operations: [
         {
           operationId: 'operation-replace-explanation',
-          entityType: 'explanation',
-          entityId: 'explanation-abc212-x45',
+          entityType: 'authoring_unit',
+          entityId: 'abc212-x45',
           action: 'replace',
           path: 'src/content/docs/index.md',
           beforeDigest: sha('2'),
@@ -60,7 +57,7 @@ describe('trusted publication diff', () => {
         {
           problemId: 'abc212-x45',
           slotLabel: 'E',
-          resultType: 'explanation_draft',
+          resultType: 'authoring_unit_draft',
           draftPath: 'src/content/docs/index.md',
           packetPath: null,
           templatePath: null,
@@ -121,11 +118,8 @@ describe('trusted publication diff', () => {
       id: 'correction-impact-graphs',
       sourceRevisionId: 'source-revision-abc212-e',
       changeSummary: 'Fixture correction.',
-      explanationIds: ['explanation-abc212-x45'],
-      claimIds: ['claim-graphs'],
-      exampleIds: ['example-graphs'],
-      exerciseIds: ['exercise-graphs'],
-      answerMaterialIds: ['answer-graphs'],
+      authoringUnitProblemIds: ['abc212-x45'],
+      affectedSectionKeys: ['sections.correctness'],
       learningUnitIds: ['unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified' as const,
@@ -172,8 +166,8 @@ describe('trusted publication diff', () => {
     const update = makeUpdate([
       makeOperation({
         operationId: 'operation-replace-explanation',
-        entityType: 'explanation',
-        entityId: 'explanation-abc212-x45',
+        entityType: 'authoring_unit',
+        entityId: 'abc212-x45',
         action: 'replace',
         path: 'src/content/docs/index.md',
       }),
@@ -216,7 +210,7 @@ describe('trusted publication diff', () => {
   it('rejects a Catalog entity diff omitted from publication operations', () => {
     const baseCatalog = makeTrustedCatalog({});
     const currentCatalog = makeTrustedCatalog({});
-    const explanation = currentCatalog.explanations[0];
+    const explanation = currentCatalog.authoringUnits[0];
     if (!explanation) throw new Error('Fixture explanation is missing.');
     explanation.revision = 2;
 
@@ -232,7 +226,7 @@ describe('trusted publication diff', () => {
   it('allows multiple changed entities to share one owned file', () => {
     const baseCatalog = makeTrustedCatalog({});
     const currentCatalog = makeTrustedCatalog({});
-    const explanation = currentCatalog.explanations[0];
+    const explanation = currentCatalog.authoringUnits[0];
     const learningUnit = currentCatalog.learningUnits[0];
     if (!explanation || !learningUnit) throw new Error('Fixture learning entities are missing.');
     explanation.revision = 2;
@@ -241,8 +235,8 @@ describe('trusted publication diff', () => {
     const update = makeUpdate([
       makeOperation({
         operationId: 'operation-replace-explanation',
-        entityType: 'explanation',
-        entityId: 'explanation-abc212-x45',
+        entityType: 'authoring_unit',
+        entityId: 'abc212-x45',
         action: 'replace',
         path,
       }),
@@ -263,7 +257,7 @@ describe('trusted publication diff', () => {
     expect(diff.updates[0]?.operationOwnership).toHaveLength(2);
     expect(diff.updates[0]?.operationOwnership[0]?.affectedEntities).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ entityType: 'explanation' }),
+        expect.objectContaining({ entityType: 'authoring_unit' }),
         expect.objectContaining({ entityType: 'learning_unit' }),
       ]),
     );
@@ -641,7 +635,7 @@ describe('trusted publication diff', () => {
   it('allows an explanation docPath move through the complete release validation', () => {
     const baseCatalog = makeTrustedCatalog({});
     const currentCatalog = structuredClone(baseCatalog);
-    const explanation = currentCatalog.explanations[0];
+    const explanation = currentCatalog.authoringUnits[0];
     if (!explanation) throw new Error('Fixture explanation is missing.');
     explanation.docPath = 'src/content/docs/moved.md';
 
@@ -687,11 +681,8 @@ describe('trusted publication diff', () => {
       id: 'correction-impact-graphs',
       sourceRevisionId: 'source-revision-abc212-e',
       changeSummary: 'Fixture correction.',
-      explanationIds: ['explanation-abc212-x45'],
-      claimIds: ['claim-graphs'],
-      exampleIds: ['example-graphs'],
-      exerciseIds: ['exercise-graphs'],
-      answerMaterialIds: ['answer-graphs'],
+      authoringUnitProblemIds: ['abc212-x45'],
+      affectedSectionKeys: ['sections.correctness'],
       learningUnitIds: ['unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified' as const,
@@ -749,7 +740,7 @@ describe('trusted publication diff', () => {
   it('rejects splitting one entity diff across updates even when paths differ', () => {
     const baseCatalog = makeTrustedCatalog({});
     const currentCatalog = structuredClone(baseCatalog);
-    const explanation = currentCatalog.explanations[0];
+    const explanation = currentCatalog.authoringUnits[0];
     if (!explanation) throw new Error('Fixture explanation is missing.');
     explanation.docPath = 'src/content/docs/moved.md';
 
@@ -791,7 +782,7 @@ describe('trusted publication diff', () => {
   it('rejects the same entity diff and path claimed by multiple updates', () => {
     const baseCatalog = makeTrustedCatalog({});
     const currentCatalog = makeTrustedCatalog({});
-    const explanation = currentCatalog.explanations[0];
+    const explanation = currentCatalog.authoringUnits[0];
     if (!explanation) throw new Error('Fixture explanation is missing.');
     explanation.revision = 2;
 
@@ -802,8 +793,8 @@ describe('trusted publication diff', () => {
             [
               makeOperation({
                 operationId: 'operation-replace-explanation-first',
-                entityType: 'explanation',
-                entityId: 'explanation-abc212-x45',
+                entityType: 'authoring_unit',
+                entityId: 'abc212-x45',
               }),
             ],
             ['abc212-x45'],
@@ -813,8 +804,8 @@ describe('trusted publication diff', () => {
             [
               makeOperation({
                 operationId: 'operation-replace-explanation-second',
-                entityType: 'explanation',
-                entityId: 'explanation-abc212-x45',
+                entityType: 'authoring_unit',
+                entityId: 'abc212-x45',
               }),
             ],
             ['abc212-x45'],
@@ -830,7 +821,7 @@ describe('trusted publication diff', () => {
   it('rejects splitting shared source paths across entity updates', () => {
     const baseCatalog = makeTrustedCatalog({});
     const currentCatalog = structuredClone(baseCatalog);
-    const explanation = currentCatalog.explanations[0];
+    const explanation = currentCatalog.authoringUnits[0];
     const learningUnit = currentCatalog.learningUnits[0];
     if (!explanation || !learningUnit) throw new Error('Fixture learning entities are missing.');
     explanation.docPath = 'src/content/docs/moved.md';
@@ -843,16 +834,16 @@ describe('trusted publication diff', () => {
             [
               makeOperation({
                 operationId: 'operation-remove-explanation-doc',
-                entityType: 'explanation',
-                entityId: 'explanation-abc212-x45',
+                entityType: 'authoring_unit',
+                entityId: 'abc212-x45',
                 action: 'remove',
                 beforeDigest: sha('2'),
                 afterDigest: null,
               }),
               makeOperation({
                 operationId: 'operation-add-explanation-doc',
-                entityType: 'explanation',
-                entityId: 'explanation-abc212-x45',
+                entityType: 'authoring_unit',
+                entityId: 'abc212-x45',
                 action: 'add',
                 path: 'src/content/docs/moved.md',
                 beforeDigest: null,
@@ -895,8 +886,8 @@ describe('trusted publication diff', () => {
 
 const makeOperation = (overrides: Record<string, unknown>): Record<string, unknown> => ({
   operationId: 'operation-default',
-  entityType: 'explanation',
-  entityId: 'explanation-abc212-x45',
+  entityType: 'authoring_unit',
+  entityId: 'abc212-x45',
   action: 'replace',
   path: 'src/content/docs/index.md',
   beforeDigest: sha('2'),

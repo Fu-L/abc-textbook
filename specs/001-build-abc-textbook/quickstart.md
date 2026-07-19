@@ -150,7 +150,7 @@ npm run abc:update -- --fixture tests/fixtures/updates/dynamic-slot-contest
 期待結果:
 
 - 一回の開始操作で終了確認、Dより後の全Problem、source、差分、Technique候補、Tag/Unit配置候補、index previewを作る。
-- Problemごとに`explanation_draft`、`authoring_required`、`blocked`のいずれかを返す。
+- Problemごとに`authoring_unit_draft`、`authoring_required`、`blocked`のいずれかを返す。
 - 同じinputの再実行で同じupdateを再利用し、重複を作らない。
 - 15分deadline fixtureで全Problem resultと最終summaryを返す。
 - 未完成resultが一件でもあればupdateはON_HOLDになりrelease inputへ進まない。

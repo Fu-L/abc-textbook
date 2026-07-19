@@ -96,7 +96,7 @@
       "prefixItems": [
         {
           "type": "string",
-          "const": "primary_explanation_valid"
+          "const": "primary_authoring_unit_valid"
         },
         {
           "type": "string",
@@ -317,7 +317,7 @@
         "attribute": {
           "type": "string",
           "enum": [
-            "primary_explanation_valid",
+            "primary_authoring_unit_valid",
             "algorithm_same",
             "proof_same",
             "complexity_same",
@@ -368,8 +368,8 @@
     "__schema12": {
       "type": "string",
       "enum": [
-        "independent_full_explanation",
-        "primary_explanation_id",
+        "independent_full_authoring_unit",
+        "primary_problem_id",
         "shared_learning_outcome_ids",
         "algorithm_comparison",
         "proof_comparison",
@@ -379,7 +379,7 @@
         "implementation_comparison",
         "simplification_reason",
         "additional_learning",
-        "answer_material",
+        "answer",
         "source_revision_ids",
         "verification_evidence"
       ]

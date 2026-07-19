@@ -26,8 +26,8 @@ npm run abc:update -- --contest abcNNN [--fixture PATH] [--resume UPDATE_ID]
 4. Contest/Slot/Problem/Source metadataを作る。
 5. 公開Catalogとの差分とCorrection Impactを作る。
 6. Technique Inventory候補、既存Tag/Outcome/Unitへの分類候補、Placement候補、index previewを作る。
-7. ProblemごとにAuthoringPacketを作り、任意generatorが完全本文を返した場合だけ`explanation_draft`にする。
-8. 対象範囲、source、Explanation、Example、Tag、DAG、到達可能性、linkを検証する。
+7. ProblemごとにAuthoringPacketを作り、任意generatorが完全本文を返した場合だけ`authoring_unit_draft`にする。
+8. 対象範囲、source、ProblemAuthoringUnitと内包Example、Tag、DAG、到達可能性、linkを検証する。
 9. 15分以内に全Problem resultとsummaryを保存する。
 
 最終JSONの必須field:
@@ -39,7 +39,7 @@ npm run abc:update -- --contest abcNNN [--fixture PATH] [--resume UPDATE_ID]
   "contestId": "abcNNN",
   "advancedSlotLabels": ["E", "F", "G", "H", "I"],
   "resultCounts": {
-    "explanation_draft": 0,
+    "authoring_unit_draft": 0,
     "authoring_required": 0,
     "blocked": 0
   },
@@ -52,7 +52,7 @@ npm run abc:update -- --contest abcNNN [--fixture PATH] [--resume UPDATE_ID]
 
 `advancedSlotLabels`は例示でありE〜H固定ではない。公式task orderでDより後の全labelと一致しなければならない。
 
-全resultが`explanation_draft`かつblocking 0の場合だけ`ELIGIBLE_FOR_BATCH`、それ以外は理由付き`ON_HOLD`にする。`authoring_required`と`blocked`をExplanation件数へ含めない。
+全resultが`authoring_unit_draft`かつblocking 0の場合だけ`ELIGIBLE_FOR_BATCH`、それ以外は理由付き`ON_HOLD`にする。`authoring_required`と`blocked`をProblemAuthoringUnit件数へ含めない。
 
 安定hold codeには`CONTEST_NOT_ENDED`、`D_TASK_NOT_FOUND`、`TASK_ORDER_CONFLICT`、`ROBOTS_UNREACHABLE`、`POLICY_CHANGED`、`SOURCE_UNAVAILABLE`、`EDITORIAL_PENDING`、`PARSER_DRIFT`、`GENERATOR_UNAVAILABLE`、`AUTHORING_REQUIRED`、`SOURCE_CONTRADICTION`、`EXAMPLE_NOT_REPRODUCIBLE`、`DEPENDENCY_CYCLE`、`DEADLINE_REACHED`を含める。
 
@@ -62,7 +62,7 @@ npm run abc:update -- --contest abcNNN [--fixture PATH] [--resume UPDATE_ID]
 npm run release:bootstrap -- --first 212 --last 466
 ```
 
-- 既に検証済みのContest、Problem、Technique Inventory、taxonomy、Explanation、Learning Unitを一つのbootstrap PublicationUpdateへ固定する。
+- 既に検証済みのContest、Problem、Technique Inventory、taxonomy、ProblemAuthoringUnit、Learning Unitを一つのbootstrap PublicationUpdateへ固定する。
 - ABC 212〜466の全Contestと各D以後Problem、Source、content pathを完全列挙する。
 - 未完成・未分類・未review itemが一件でもあればELIGIBLEにしない。
 - 同じsnapshot digestは同じbootstrap updateを再利用する。
@@ -105,7 +105,7 @@ npm run abc:validate -- --candidate CANDIDATE_ID
 - AdvancedSlotRegistryの完全性・安定順・矛盾0件。
 - Problem集合とTechnique Inventory集合の一致。
 - 全ProblemのTag、Outcome、Placement、Learning Unit/Tag collection到達性。
-- Explanation、Claim、Example、Exercise、AnswerMaterial、Source、Correction Impact。
+- ProblemAuthoringUnit、Source、Correction Impact。Claim、Example、Exercise、Assessment、Answerはauthoring unitの同一file transitionに含める。
 - Tag/Outcome/Unit DAGと生成順。
 - contest matrix、list alternative、search、LearningRecord shared route contract。
 - build、link、accessibility、client bundle、performance、zero-cost inventoryの適用check。

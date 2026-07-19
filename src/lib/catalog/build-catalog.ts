@@ -57,7 +57,7 @@ export interface TrustedCatalogReleaseEvidenceInventory {
 }
 
 export interface CatalogLike {
-  readonly schemaVersion: '2.0.0';
+  readonly schemaVersion: '3.0.0';
   readonly release: {
     readonly version: string;
     readonly releaseKind: 'initial' | 'incremental';
@@ -139,7 +139,6 @@ export interface CatalogLike {
     readonly primaryTagIds: readonly string[];
     readonly secondaryTagIds: readonly string[];
     readonly placementId: string | null;
-    readonly explanationId: string | null;
   }[];
   readonly techniqueInventory: readonly {
     readonly problemId: string;
@@ -168,36 +167,53 @@ export interface CatalogLike {
     readonly parentId: string | null;
     readonly tagIds: readonly string[];
     readonly learningOutcomeIds: readonly string[];
-    readonly exampleIds: readonly string[];
     readonly problemIds: readonly string[];
-    readonly assessmentIds: readonly string[];
+    readonly examples: readonly {
+      readonly key: string;
+      readonly learningOutcomeIds: readonly string[];
+      readonly kind: 'executable' | 'pseudocode' | 'illustrative';
+      readonly verificationStatus: 'pending' | 'passed' | 'not_applicable' | 'failed';
+    }[];
   }[];
   readonly learningOutcomes: readonly {
     readonly id: string;
     readonly prerequisiteOutcomeIds: readonly string[];
     readonly scopeIds: readonly string[];
-    readonly assessmentIds: readonly string[];
   }[];
   readonly placements: readonly {
     readonly id: string;
     readonly problemId: string;
     readonly kind: 'full' | 'similar' | 'supplement';
-    readonly primaryExplanationId: string | null;
+    readonly primaryProblemId: string | null;
     readonly sharedOutcomeIds: readonly string[];
     readonly additionalElement: string | null;
     readonly evidenceIds: readonly string[];
   }[];
-  readonly explanations: readonly {
-    readonly id: string;
+  readonly authoringUnits: readonly {
     readonly problemId: string;
     readonly kind: 'full' | 'similar' | 'supplement';
-    readonly primaryExplanationId: string | null;
+    readonly primaryProblemId: string | null;
     readonly learningOutcomeIds: readonly string[];
     readonly additionalPrerequisiteUnitIds: readonly string[];
     readonly tagIds: readonly string[];
     readonly sourceRevisionIds: readonly string[];
-    readonly claimIds: readonly string[];
-    readonly exampleIds: readonly string[];
+    readonly claims: readonly {
+      readonly key: string;
+      readonly sourceRevisionIds: readonly string[];
+      readonly verificationStatus: 'verified' | 'unverified' | 'stale' | 'contradicted';
+    }[];
+    readonly examples: readonly {
+      readonly key: string;
+      readonly learningOutcomeIds: readonly string[];
+      readonly learningUnitIds: readonly string[];
+      readonly kind: 'executable' | 'pseudocode' | 'illustrative';
+      readonly verificationStatus: 'pending' | 'passed' | 'not_applicable' | 'failed';
+    }[];
+    readonly exercises: readonly {
+      readonly key: string;
+      readonly learningOutcomeIds: readonly string[];
+      readonly answer: { readonly verificationStatus: 'pending' | 'passed' | 'failed' };
+    }[];
   }[];
   readonly sources: readonly {
     readonly id: string;
@@ -205,44 +221,13 @@ export interface CatalogLike {
     readonly sourceKind: string;
     readonly contestId: string | null;
   }[];
-  readonly claims: readonly {
-    readonly id: string;
-    readonly sourceRevisionIds: readonly string[];
-    readonly verificationStatus: 'verified' | 'unverified' | 'stale' | 'contradicted';
-  }[];
   readonly correctionImpacts: readonly {
     readonly id: string;
     readonly sourceRevisionId: string;
-    readonly explanationIds: readonly string[];
-    readonly claimIds: readonly string[];
-    readonly exampleIds: readonly string[];
-    readonly exerciseIds: readonly string[];
-    readonly answerMaterialIds: readonly string[];
+    readonly authoringUnitProblemIds: readonly string[];
+    readonly affectedSectionKeys: readonly string[];
     readonly learningUnitIds: readonly string[];
     readonly verificationStatus: string;
-  }[];
-  readonly examples: readonly {
-    readonly id: string;
-    readonly learningOutcomeIds: readonly string[];
-    readonly ownerExplanationIds: readonly string[];
-    readonly ownerLearningUnitIds: readonly string[];
-    readonly verificationStatus: 'pending' | 'passed' | 'failed';
-  }[];
-  readonly exercises: readonly {
-    readonly id: string;
-    readonly problemId: string;
-    readonly learningOutcomeIds: readonly string[];
-    readonly assessmentId: string;
-    readonly answerMaterialId: string;
-  }[];
-  readonly assessments: readonly {
-    readonly id: string;
-    readonly learningOutcomeIds: readonly string[];
-  }[];
-  readonly answerMaterials: readonly {
-    readonly id: string;
-    readonly exerciseId: string;
-    readonly verificationStatus: 'pending' | 'passed' | 'failed';
   }[];
   readonly [key: string]: unknown;
 }
@@ -256,14 +241,9 @@ const entityArrayKeys = [
   'learningOutcomes',
   'learningUnits',
   'placements',
-  'explanations',
+  'authoringUnits',
   'sources',
   'correctionImpacts',
-  'claims',
-  'examples',
-  'exercises',
-  'assessments',
-  'answerMaterials',
 ] as const;
 
 /** Keep the public content projection explicit so new top-level fields cannot silently escape it. */
@@ -278,14 +258,9 @@ const catalogContentKeys = [
   'learningOutcomes',
   'learningUnits',
   'placements',
-  'explanations',
+  'authoringUnits',
   'sources',
   'correctionImpacts',
-  'claims',
-  'examples',
-  'exercises',
-  'assessments',
-  'answerMaterials',
 ] as const;
 
 const immutableReleaseScopeKeys = [
@@ -366,8 +341,9 @@ export const sortCatalogEntityArray = (
         compareCodeUnits(left.problemId ?? '', right.problemId ?? '')
       );
     }
-    const leftKey = key === 'techniqueInventory' ? left.problemId : left.id;
-    const rightKey = key === 'techniqueInventory' ? right.problemId : right.id;
+    const usesProblemIdentity = key === 'techniqueInventory' || key === 'authoringUnits';
+    const leftKey = usesProblemIdentity ? left.problemId : left.id;
+    const rightKey = usesProblemIdentity ? right.problemId : right.id;
     return key === 'contests'
       ? compareContestIds(leftKey ?? '', rightKey ?? '')
       : compareCodeUnits(leftKey ?? '', rightKey ?? '');
@@ -687,14 +663,15 @@ export const validateCatalogSemantics = (
   const outcomeIds = idSet('OUTCOME', catalog.learningOutcomes);
   const unitIds = idSet('LEARNING_UNIT', catalog.learningUnits);
   const placementIds = idSet('PLACEMENT', catalog.placements);
-  const explanationIds = idSet('EXPLANATION', catalog.explanations);
   const sourceIds = idSet('SOURCE_REVISION', catalog.sources);
   idSet('CORRECTION_IMPACT', catalog.correctionImpacts);
-  const claimIds = idSet('CLAIM', catalog.claims);
-  const exampleIds = idSet('EXAMPLE', catalog.examples);
-  const exerciseIds = idSet('EXERCISE', catalog.exercises);
-  const assessmentIds = idSet('ASSESSMENT', catalog.assessments);
-  const answerMaterialIds = idSet('ANSWER_MATERIAL', catalog.answerMaterials);
+  const authoringUnitProblemIds = new Set(catalog.authoringUnits.map(({ problemId }) => problemId));
+  if (authoringUnitProblemIds.size !== catalog.authoringUnits.length) {
+    diagnostics.push({
+      code: 'DUPLICATE_AUTHORING_UNIT_PROBLEM',
+      message: 'A Problem can own only one authoring unit.',
+    });
+  }
   const requireRefs = (
     owner: string,
     relation: string,
@@ -871,14 +848,10 @@ export const validateCatalogSemantics = (
     }
     if (problem.placementId)
       requireRefs(problem.id, 'placementId', [problem.placementId], placementIds);
-    if (problem.explanationId)
-      requireRefs(problem.id, 'explanationId', [problem.explanationId], explanationIds);
     const placement = problem.placementId
       ? catalog.placements.find(({ id }) => id === problem.placementId)
       : undefined;
-    const explanation = problem.explanationId
-      ? catalog.explanations.find(({ id }) => id === problem.explanationId)
-      : undefined;
+    const authoringUnit = catalog.authoringUnits.find(({ problemId }) => problemId === problem.id);
     if (placement && placement.problemId !== problem.id) {
       diagnostics.push({
         code: 'PROBLEM_PLACEMENT_MISMATCH',
@@ -886,37 +859,30 @@ export const validateCatalogSemantics = (
         message: problem.id,
       });
     }
-    if (explanation && explanation.problemId !== problem.id) {
-      diagnostics.push({
-        code: 'PROBLEM_EXPLANATION_MISMATCH',
-        entityId: problem.id,
-        message: problem.id,
-      });
-    }
-    if (placement && explanation) {
-      if (placement.kind !== explanation.kind) {
+    if (placement && authoringUnit) {
+      if (placement.kind !== authoringUnit.kind) {
         diagnostics.push({
-          code: 'PLACEMENT_EXPLANATION_KIND_MISMATCH',
+          code: 'PLACEMENT_AUTHORING_KIND_MISMATCH',
           entityId: problem.id,
-          message: `${placement.kind} != ${explanation.kind}`,
+          message: `${placement.kind} != ${authoringUnit.kind}`,
         });
       }
-      if (placement.primaryExplanationId !== explanation.primaryExplanationId) {
+      if (placement.primaryProblemId !== authoringUnit.primaryProblemId) {
         diagnostics.push({
-          code: 'PLACEMENT_PRIMARY_EXPLANATION_MISMATCH',
+          code: 'PLACEMENT_PRIMARY_PROBLEM_MISMATCH',
           entityId: problem.id,
-          message: `${placement.id} and ${explanation.id} disagree about the primary explanation.`,
+          message: `${placement.id} and its authoring unit disagree about the primary Problem.`,
         });
       }
     }
     if (
       problem.publicationStatus === 'published' &&
-      (problem.primaryTagIds.length === 0 || !problem.placementId || !problem.explanationId)
+      (problem.primaryTagIds.length === 0 || !problem.placementId || !authoringUnit)
     ) {
       diagnostics.push({
         code: 'PUBLISHED_PROBLEM_UNREACHABLE',
         entityId: problem.id,
-        message: 'Published problems require a primary tag, placement, and explanation.',
+        message: 'Published problems require a primary tag, placement, and authoring unit.',
       });
     }
   }
@@ -977,17 +943,6 @@ export const validateCatalogSemantics = (
   for (const outcome of catalog.learningOutcomes) {
     requireRefs(outcome.id, 'prerequisiteOutcomeIds', outcome.prerequisiteOutcomeIds, outcomeIds);
     requireRefs(outcome.id, 'scopeIds', outcome.scopeIds, scopeTargets);
-    requireRefs(outcome.id, 'assessmentIds', outcome.assessmentIds, assessmentIds);
-    for (const assessmentId of outcome.assessmentIds) {
-      const assessment = catalog.assessments.find(({ id }) => id === assessmentId);
-      if (assessment && !assessment.learningOutcomeIds.includes(outcome.id)) {
-        diagnostics.push({
-          code: 'OUTCOME_ASSESSMENT_REVERSE_REFERENCE_MISMATCH',
-          entityId: outcome.id,
-          message: `${outcome.id} is not listed by ${assessmentId}.`,
-        });
-      }
-    }
   }
   for (const unit of catalog.learningUnits) {
     if (unit.parentId) requireRefs(unit.id, 'parentId', [unit.parentId], unitIds);
@@ -1000,29 +955,30 @@ export const validateCatalogSemantics = (
     );
     requireRefs(unit.id, 'tagIds', unit.tagIds, tagIds);
     requireRefs(unit.id, 'learningOutcomeIds', unit.learningOutcomeIds, outcomeIds);
-    requireRefs(unit.id, 'exampleIds', unit.exampleIds, exampleIds);
     requireRefs(unit.id, 'problemIds', unit.problemIds, problemIds);
-    requireRefs(unit.id, 'assessmentIds', unit.assessmentIds, assessmentIds);
-    for (const exampleId of unit.exampleIds) {
-      const example = catalog.examples.find(({ id }) => id === exampleId);
-      if (example && !example.ownerLearningUnitIds.includes(unit.id)) {
+    for (const example of unit.examples) {
+      requireRefs(
+        `${unit.id}:${example.key}`,
+        'learningOutcomeIds',
+        example.learningOutcomeIds,
+        outcomeIds,
+      );
+      if (
+        (example.kind === 'executable' && example.verificationStatus !== 'passed') ||
+        (example.kind !== 'executable' && example.verificationStatus !== 'not_applicable')
+      ) {
         diagnostics.push({
-          code: 'EXAMPLE_REVERSE_REFERENCE_MISMATCH',
-          entityId: exampleId,
-          message: `${exampleId} is not owned by ${unit.id}.`,
+          code: 'LEARNING_UNIT_EXAMPLE_NOT_VERIFIED',
+          entityId: unit.id,
+          message: `${unit.id}:${example.key} has an invalid publication verification state.`,
         });
       }
     }
   }
   for (const placement of catalog.placements) {
     requireRefs(placement.id, 'problemId', [placement.problemId], problemIds);
-    if (placement.primaryExplanationId)
-      requireRefs(
-        placement.id,
-        'primaryExplanationId',
-        [placement.primaryExplanationId],
-        explanationIds,
-      );
+    if (placement.primaryProblemId)
+      requireRefs(placement.id, 'primaryProblemId', [placement.primaryProblemId], problemIds);
     requireRefs(placement.id, 'sharedOutcomeIds', placement.sharedOutcomeIds, outcomeIds);
     const problem = catalog.problems.find(({ id }) => id === placement.problemId);
     if (problem && problem.placementId !== placement.id) {
@@ -1032,250 +988,144 @@ export const validateCatalogSemantics = (
         message: `${placement.id} is not selected by ${placement.problemId}.`,
       });
     }
-    const primary = placement.primaryExplanationId
-      ? catalog.explanations.find(({ id }) => id === placement.primaryExplanationId)
+    const primary = placement.primaryProblemId
+      ? catalog.authoringUnits.find(({ problemId }) => problemId === placement.primaryProblemId)
       : undefined;
-    if (placement.kind === 'full' && placement.primaryExplanationId !== null) {
+    if (placement.kind === 'full' && placement.primaryProblemId !== null) {
       diagnostics.push({
         code: 'FULL_PLACEMENT_HAS_PRIMARY',
         entityId: placement.id,
-        message: 'Full placement must have an independent explanation.',
+        message: 'Full placement must have an independent authoring unit.',
       });
     }
     if (placement.kind !== 'full' && !primary) {
       diagnostics.push({
         code: 'ABBREVIATED_PLACEMENT_PRIMARY_MISSING',
         entityId: placement.id,
-        message: 'Similar and supplement placements require a primary explanation.',
+        message: 'Similar and supplement placements require a primary Problem authoring unit.',
       });
     }
     if (primary && primary.kind !== 'full') {
       diagnostics.push({
         code: 'PLACEMENT_PRIMARY_NOT_FULL',
         entityId: placement.id,
-        message: `${placement.primaryExplanationId ?? 'unknown'} must be a full explanation.`,
+        message: `${placement.primaryProblemId ?? 'unknown'} must own a full authoring unit.`,
       });
     }
-    const selectedExplanation = problem?.explanationId
-      ? catalog.explanations.find(({ id }) => id === problem.explanationId)
-      : undefined;
-    if (primary && primary.id === selectedExplanation?.id) {
+    if (primary?.problemId === placement.problemId) {
       diagnostics.push({
         code: 'PLACEMENT_PRIMARY_SELF_REFERENCE',
         entityId: placement.id,
-        message: 'A placement cannot use its selected explanation as its primary explanation.',
+        message: 'A placement cannot use its own Problem as its primary Problem.',
       });
     }
   }
-  for (const explanation of catalog.explanations) {
-    requireRefs(explanation.id, 'problemId', [explanation.problemId], problemIds);
-    if (explanation.primaryExplanationId)
-      requireRefs(
-        explanation.id,
-        'primaryExplanationId',
-        [explanation.primaryExplanationId],
-        explanationIds,
-      );
-    if (explanation.kind === 'full' && explanation.primaryExplanationId !== null) {
-      diagnostics.push({
-        code: 'FULL_EXPLANATION_HAS_PRIMARY',
-        entityId: explanation.id,
-        message: 'Full explanations must be independent.',
-      });
-    }
-    if (explanation.kind !== 'full' && explanation.primaryExplanationId === null) {
-      diagnostics.push({
-        code: 'ABBREVIATED_EXPLANATION_PRIMARY_MISSING',
-        entityId: explanation.id,
-        message: 'Similar and supplement explanations require a primary explanation.',
-      });
-    }
-    if (explanation.primaryExplanationId === explanation.id) {
-      diagnostics.push({
-        code: 'EXPLANATION_PRIMARY_SELF_REFERENCE',
-        entityId: explanation.id,
-        message: 'An explanation cannot use itself as its primary explanation.',
-      });
-    }
-    const primary = explanation.primaryExplanationId
-      ? catalog.explanations.find(({ id }) => id === explanation.primaryExplanationId)
-      : undefined;
-    if (primary && primary.kind !== 'full') {
-      diagnostics.push({
-        code: 'EXPLANATION_PRIMARY_NOT_FULL',
-        entityId: explanation.id,
-        message: `${explanation.primaryExplanationId ?? 'unknown'} must be a full explanation.`,
-      });
-    }
-    requireRefs(explanation.id, 'learningOutcomeIds', explanation.learningOutcomeIds, outcomeIds);
+  for (const unit of catalog.authoringUnits) {
+    requireRefs(unit.problemId, 'problemId', [unit.problemId], problemIds);
+    if (unit.primaryProblemId)
+      requireRefs(unit.problemId, 'primaryProblemId', [unit.primaryProblemId], problemIds);
+    requireRefs(unit.problemId, 'learningOutcomeIds', unit.learningOutcomeIds, outcomeIds);
     requireRefs(
-      explanation.id,
+      unit.problemId,
       'additionalPrerequisiteUnitIds',
-      explanation.additionalPrerequisiteUnitIds,
+      unit.additionalPrerequisiteUnitIds,
       unitIds,
     );
-    requireRefs(explanation.id, 'tagIds', explanation.tagIds, tagIds);
-    requireRefs(explanation.id, 'sourceRevisionIds', explanation.sourceRevisionIds, sourceIds);
-    requireRefs(explanation.id, 'claimIds', explanation.claimIds, claimIds);
-    requireRefs(explanation.id, 'exampleIds', explanation.exampleIds, exampleIds);
-    const problem = catalog.problems.find(({ id }) => id === explanation.problemId);
-    if (problem && problem.explanationId !== explanation.id) {
-      diagnostics.push({
-        code: 'EXPLANATION_REVERSE_REFERENCE_MISMATCH',
-        entityId: explanation.id,
-        message: `${explanation.id} is not selected by ${explanation.problemId}.`,
-      });
+    requireRefs(unit.problemId, 'tagIds', unit.tagIds, tagIds);
+    requireRefs(unit.problemId, 'sourceRevisionIds', unit.sourceRevisionIds, sourceIds);
+    for (const claim of unit.claims) {
+      requireRefs(
+        `${unit.problemId}:${claim.key}`,
+        'sourceRevisionIds',
+        claim.sourceRevisionIds,
+        sourceIds,
+      );
+      if (claim.verificationStatus !== 'verified') {
+        diagnostics.push({
+          code: 'AUTHORING_CLAIM_NOT_VERIFIED',
+          entityId: unit.problemId,
+          message: `Claim ${claim.key} is not verified.`,
+        });
+      }
+    }
+    for (const example of unit.examples) {
+      requireRefs(
+        `${unit.problemId}:${example.key}`,
+        'learningOutcomeIds',
+        example.learningOutcomeIds,
+        outcomeIds,
+      );
+      requireRefs(
+        `${unit.problemId}:${example.key}`,
+        'learningUnitIds',
+        example.learningUnitIds,
+        unitIds,
+      );
+      const validStatus =
+        example.kind === 'executable'
+          ? example.verificationStatus === 'passed'
+          : example.verificationStatus === 'not_applicable';
+      if (!validStatus) {
+        diagnostics.push({
+          code: 'AUTHORING_EXAMPLE_NOT_VERIFIED',
+          entityId: unit.problemId,
+          message: `Example ${example.key} has an invalid publication verification state.`,
+        });
+      }
+    }
+    for (const exercise of unit.exercises) {
+      requireRefs(
+        `${unit.problemId}:${exercise.key}`,
+        'learningOutcomeIds',
+        exercise.learningOutcomeIds,
+        outcomeIds,
+      );
+      if (exercise.answer.verificationStatus !== 'passed') {
+        diagnostics.push({
+          code: 'AUTHORING_ANSWER_NOT_VERIFIED',
+          entityId: unit.problemId,
+          message: `Exercise ${exercise.key} answer is not verified.`,
+        });
+      }
     }
   }
-  const explanationById = new Map(
-    catalog.explanations.map((explanation) => [explanation.id, explanation]),
+  const authoringUnitByProblemId = new Map(
+    catalog.authoringUnits.map((unit) => [unit.problemId, unit]),
   );
-  const explanationVisitState = new Map<string, 'visiting' | 'visited'>();
-  const visitExplanation = (id: string, path: readonly string[]): void => {
-    const state = explanationVisitState.get(id);
+  const authoringVisitState = new Map<string, 'visiting' | 'visited'>();
+  const visitAuthoringUnit = (problemId: string, path: readonly string[]): void => {
+    const state = authoringVisitState.get(problemId);
     if (state === 'visiting') {
       diagnostics.push({
-        code: 'EXPLANATION_PRIMARY_CYCLE',
-        entityId: id,
-        message: `Primary explanation cycle: ${[...path, id].join(' -> ')}`,
+        code: 'AUTHORING_PRIMARY_CYCLE',
+        entityId: problemId,
+        message: `Primary Problem cycle: ${[...path, problemId].join(' -> ')}`,
       });
       return;
     }
     if (state === 'visited') return;
-    explanationVisitState.set(id, 'visiting');
-    const explanation = explanationById.get(id);
-    if (explanation?.primaryExplanationId) {
-      const primary = explanationById.get(explanation.primaryExplanationId);
-      if (primary) visitExplanation(primary.id, [...path, id]);
+    authoringVisitState.set(problemId, 'visiting');
+    const primaryProblemId = authoringUnitByProblemId.get(problemId)?.primaryProblemId;
+    if (primaryProblemId && authoringUnitByProblemId.has(primaryProblemId)) {
+      visitAuthoringUnit(primaryProblemId, [...path, problemId]);
     }
-    explanationVisitState.set(id, 'visited');
+    authoringVisitState.set(problemId, 'visited');
   };
-  for (const explanation of catalog.explanations) visitExplanation(explanation.id, []);
-  for (const claim of catalog.claims) {
-    requireRefs(claim.id, 'sourceRevisionIds', claim.sourceRevisionIds, sourceIds);
-    if (claim.verificationStatus !== 'verified') {
-      diagnostics.push({
-        code: 'CLAIM_NOT_VERIFIED',
-        entityId: claim.id,
-        message: 'Public catalogs may contain only verified technical claims.',
-      });
-    }
-  }
+  for (const unit of catalog.authoringUnits) visitAuthoringUnit(unit.problemId, []);
   for (const impact of catalog.correctionImpacts) {
     requireRefs(impact.id, 'sourceRevisionId', [impact.sourceRevisionId], sourceIds);
-    requireRefs(impact.id, 'explanationIds', impact.explanationIds, explanationIds);
-    requireRefs(impact.id, 'claimIds', impact.claimIds, claimIds);
-    requireRefs(impact.id, 'exampleIds', impact.exampleIds, exampleIds);
-    requireRefs(impact.id, 'exerciseIds', impact.exerciseIds, exerciseIds);
-    requireRefs(impact.id, 'answerMaterialIds', impact.answerMaterialIds, answerMaterialIds);
+    requireRefs(
+      impact.id,
+      'authoringUnitProblemIds',
+      impact.authoringUnitProblemIds,
+      authoringUnitProblemIds,
+    );
     requireRefs(impact.id, 'learningUnitIds', impact.learningUnitIds, unitIds);
     if (impact.verificationStatus !== 'verified') {
       diagnostics.push({
         code: 'CORRECTION_IMPACT_NOT_VERIFIED',
         entityId: impact.id,
         message: 'Correction impact evidence must be verified before publication.',
-      });
-    }
-  }
-  for (const example of catalog.examples) {
-    requireRefs(example.id, 'learningOutcomeIds', example.learningOutcomeIds, outcomeIds);
-    requireRefs(example.id, 'ownerExplanationIds', example.ownerExplanationIds, explanationIds);
-    requireRefs(example.id, 'ownerLearningUnitIds', example.ownerLearningUnitIds, unitIds);
-    for (const explanationId of example.ownerExplanationIds) {
-      const explanation = catalog.explanations.find(({ id }) => id === explanationId);
-      if (explanation && !explanation.exampleIds.includes(example.id)) {
-        diagnostics.push({
-          code: 'EXAMPLE_REVERSE_REFERENCE_MISMATCH',
-          entityId: example.id,
-          message: `${example.id} is not listed by ${explanationId}.`,
-        });
-      }
-    }
-    for (const unitId of example.ownerLearningUnitIds) {
-      const unit = catalog.learningUnits.find(({ id }) => id === unitId);
-      if (unit && !unit.exampleIds.includes(example.id)) {
-        diagnostics.push({
-          code: 'EXAMPLE_REVERSE_REFERENCE_MISMATCH',
-          entityId: example.id,
-          message: `${example.id} is not listed by ${unitId}.`,
-        });
-      }
-    }
-    const explanationHasSource = example.ownerExplanationIds.some((explanationId) => {
-      const explanation = catalog.explanations.find(({ id }) => id === explanationId);
-      return Boolean(explanation && explanation.sourceRevisionIds.length > 0);
-    });
-    const learningUnitHasSource = example.ownerLearningUnitIds.some((unitId) => {
-      const unit = catalog.learningUnits.find(({ id }) => id === unitId);
-      return Boolean(unit && unit.sourceRevisionIds.length > 0);
-    });
-    if (!explanationHasSource && !learningUnitHasSource) {
-      diagnostics.push({
-        code: 'EXAMPLE_SOURCE_UNREACHABLE',
-        entityId: example.id,
-        message: 'Every example must reach at least one Source Revision through an owner.',
-      });
-    }
-    if (example.verificationStatus !== 'passed') {
-      diagnostics.push({
-        code: 'EXAMPLE_NOT_VERIFIED',
-        entityId: example.id,
-        message: 'Public catalogs may contain only passed reproducible examples.',
-      });
-    }
-  }
-  for (const exercise of catalog.exercises) {
-    requireRefs(exercise.id, 'problemId', [exercise.problemId], problemIds);
-    requireRefs(exercise.id, 'learningOutcomeIds', exercise.learningOutcomeIds, outcomeIds);
-    requireRefs(exercise.id, 'assessmentId', [exercise.assessmentId], assessmentIds);
-    requireRefs(exercise.id, 'answerMaterialId', [exercise.answerMaterialId], answerMaterialIds);
-    const problem = catalog.problems.find(({ id }) => id === exercise.problemId);
-    if (!problem || problem.sourceRevisionIds.length === 0) {
-      diagnostics.push({
-        code: 'EXERCISE_SOURCE_UNREACHABLE',
-        entityId: exercise.id,
-        message: 'Every exercise must reach a Source Revision through its Problem.',
-      });
-    }
-  }
-  for (const assessment of catalog.assessments) {
-    requireRefs(assessment.id, 'learningOutcomeIds', assessment.learningOutcomeIds, outcomeIds);
-    for (const outcomeId of assessment.learningOutcomeIds) {
-      const outcome = catalog.learningOutcomes.find(({ id }) => id === outcomeId);
-      if (outcome && !outcome.assessmentIds.includes(assessment.id)) {
-        diagnostics.push({
-          code: 'ASSESSMENT_OUTCOME_REVERSE_REFERENCE_MISMATCH',
-          entityId: assessment.id,
-          message: `${assessment.id} is not listed by ${outcomeId}.`,
-        });
-      }
-    }
-  }
-  for (const answer of catalog.answerMaterials) {
-    requireRefs(answer.id, 'exerciseId', [answer.exerciseId], exerciseIds);
-    const exercise = catalog.exercises.find(({ id }) => id === answer.exerciseId);
-    if (exercise && exercise.answerMaterialId !== answer.id) {
-      diagnostics.push({
-        code: 'ANSWER_MATERIAL_REVERSE_REFERENCE_MISMATCH',
-        entityId: answer.id,
-        message: `${answer.id} is not the answer selected by ${answer.exerciseId}.`,
-      });
-    }
-    const exerciseProblem = exercise
-      ? catalog.problems.find(({ id }) => id === exercise.problemId)
-      : undefined;
-    if (!exerciseProblem || exerciseProblem.sourceRevisionIds.length === 0) {
-      diagnostics.push({
-        code: 'ANSWER_MATERIAL_SOURCE_UNREACHABLE',
-        entityId: answer.id,
-        message: 'Every answer material must reach a Source Revision through its Exercise.',
-      });
-    }
-    if (answer.verificationStatus !== 'passed') {
-      diagnostics.push({
-        code: 'ANSWER_MATERIAL_NOT_VERIFIED',
-        entityId: answer.id,
-        message: 'Public catalogs may contain only passed answer materials.',
       });
     }
   }

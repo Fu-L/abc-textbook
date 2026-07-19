@@ -20,8 +20,8 @@ const uniqueIds = uniqueArray(EntityIdSchema);
 
 export const AuthoringResultSchema = strictObject({
   problemId: z.string().min(1),
-  result: z.enum(['explanation_draft', 'authoring_required', 'blocked']),
-  explanationId: EntityIdSchema.nullable(),
+  result: z.enum(['authoring_unit_draft', 'authoring_required', 'blocked']),
+  authoringUnitProblemId: ProblemIdSchema.nullable(),
   inputPacketPath: z.string().min(1).nullable(),
   holdCode: z.string().min(1).nullable(),
   retryCondition: z.string().min(1).nullable(),
@@ -36,12 +36,7 @@ const PublicationEntityTypeSchema = z.enum([
   'learning_outcome',
   'learning_unit',
   'placement',
-  'explanation',
-  'claim',
-  'example',
-  'exercise',
-  'assessment',
-  'answer_material',
+  'authoring_unit',
   'source',
   'correction_impact',
 ]);
@@ -75,7 +70,7 @@ const PublicationOperationSchema = strictObject({
 const PublicationAuthoringResultSchema = strictObject({
   problemId: ProblemIdSchema,
   slotLabel: ProblemLabelSchema,
-  resultType: z.enum(['explanation_draft', 'authoring_required', 'blocked']),
+  resultType: z.enum(['authoring_unit_draft', 'authoring_required', 'blocked']),
   draftPath: SafePathSchema.nullable(),
   packetPath: SafePathSchema.nullable(),
   templatePath: SafePathSchema.nullable(),
@@ -84,7 +79,7 @@ const PublicationAuthoringResultSchema = strictObject({
   retryCondition: z.string().nullable(),
 }).superRefine((result, context) => {
   const valid =
-    result.resultType === 'explanation_draft'
+    result.resultType === 'authoring_unit_draft'
       ? result.draftPath !== null && result.reasonCode === null && result.reason === null
       : result.resultType === 'authoring_required'
         ? result.packetPath !== null &&
@@ -236,7 +231,7 @@ export const PublicationUpdateSchema = strictObject({
       (targetProblemIds.length === 0 ||
         !sameTargets(authoringIds) ||
         !sameTargets(validationIds) ||
-        update.authoringResults.some((result) => result.resultType !== 'explanation_draft') ||
+        update.authoringResults.some((result) => result.resultType !== 'authoring_unit_draft') ||
         !update.validationSummary.aggregatePassed ||
         update.validationSummary.blockingFindingCount !== 0 ||
         update.validationSummary.problemResults.some(
@@ -258,7 +253,7 @@ export const PublicationUpdateSchema = strictObject({
           properties: {
             authoringResults: {
               minItems: 1,
-              items: { properties: { resultType: { const: 'explanation_draft' } } },
+              items: { properties: { resultType: { const: 'authoring_unit_draft' } } },
             },
             validationSummary: {
               properties: {

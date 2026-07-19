@@ -4,7 +4,7 @@ import { ExecutableExampleEvidenceSchema } from '../../src/lib/domain/schema-par
 
 const sha = (character: string): string => character.repeat(64);
 const evidence = () => ({
-  schemaVersion: '1.0.0',
+  schemaVersion: '2.0.0',
   releaseDigest: sha('a'),
   subjectDigest: sha('b'),
   inventoryDigest: sha('c'),
@@ -15,7 +15,8 @@ const evidence = () => ({
   aggregatePassed: true,
   items: [
     {
-      exampleId: 'example-one',
+      problemId: 'abc212-e',
+      exampleKey: 'example-one',
       subjectDigest: sha('b'),
       releaseDigest: sha('a'),
       environment: 'Node.js 24.18.0',

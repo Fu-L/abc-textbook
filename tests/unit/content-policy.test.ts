@@ -54,7 +54,7 @@ describe('canonical content policies', () => {
     };
     expect(digestWithoutField(policyDocument, 'digest')).toBe(policy.digest);
     const complete = {
-      primary_explanation_valid: true,
+      primary_authoring_unit_valid: true,
       algorithm_same: true,
       proof_same: true,
       complexity_same: true,
@@ -72,7 +72,7 @@ describe('canonical content policies', () => {
 
     expect(ruleMatches(similar, complete)).toBe(true);
     for (const attribute of [
-      'primary_explanation_valid',
+      'primary_authoring_unit_valid',
       'algorithm_same',
       'proof_same',
       'complexity_same',

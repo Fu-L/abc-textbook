@@ -361,7 +361,7 @@
         "authoringResultCounts": {
           "type": "object",
           "properties": {
-            "explanation_draft": {
+            "authoring_unit_draft": {
               "type": "integer",
               "exclusiveMinimum": 0,
               "maximum": 9007199254740991
@@ -376,7 +376,7 @@
             }
           },
           "required": [
-            "explanation_draft",
+            "authoring_unit_draft",
             "authoring_required",
             "blocked"
           ],

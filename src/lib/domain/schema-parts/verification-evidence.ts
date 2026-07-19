@@ -4,7 +4,6 @@ import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-
 import {
   AnswerMaterialEvidenceContract,
   ContestIdSchema,
-  EntityIdSchema,
   OffsetDateTimeSchema,
   ProblemIdSchema,
   SafePathSchema,
@@ -94,7 +93,7 @@ export const PerformanceEvidenceSchema = strictObject({
     durationMs: z.number().min(0).max(900000),
     problemResultCount: z.number().int().positive(),
     authoringResultCounts: strictObject({
-      explanation_draft: z.number().int().positive(),
+      authoring_unit_draft: z.number().int().positive(),
       authoring_required: z.literal(0),
       blocked: z.literal(0),
     }),
@@ -335,7 +334,8 @@ export const LearningRecordE2eEvidenceSchema = strictObject({
 });
 
 const executableExampleItem = strictObject({
-  exampleId: EntityIdSchema,
+  problemId: ProblemIdSchema,
+  exampleKey: z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u),
   subjectDigest: Sha256Schema,
   releaseDigest: Sha256Schema,
   environment: text,
@@ -349,7 +349,7 @@ const executableExampleItem = strictObject({
   evidencePath: SafePathSchema,
 });
 export const ExecutableExampleEvidenceSchema = strictObject({
-  schemaVersion: z.literal('1.0.0'),
+  schemaVersion: z.literal('2.0.0'),
   releaseDigest: Sha256Schema,
   subjectDigest: Sha256Schema,
   inventoryDigest: Sha256Schema,
@@ -362,7 +362,7 @@ export const ExecutableExampleEvidenceSchema = strictObject({
   generatedAt: OffsetDateTimeSchema,
 })
   .superRefine((evidence, context) => {
-    const ids = evidence.items.map(({ exampleId }) => exampleId);
+    const ids = evidence.items.map(({ problemId, exampleKey }) => `${problemId}:${exampleKey}`);
     const passed = evidence.items.filter((item) => item.passed).length;
     if (new Set(ids).size !== ids.length)
       context.addIssue({ code: 'custom', path: ['items'], message: 'Example IDs must be unique.' });

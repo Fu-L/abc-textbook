@@ -89,7 +89,7 @@
   "$defs": {
     "__schema0": {
       "type": "string",
-      "const": "1.0.0"
+      "const": "2.0.0"
     },
     "__schema1": {
       "type": "string",
@@ -128,7 +128,11 @@
     "__schema8": {
       "type": "object",
       "properties": {
-        "exampleId": {
+        "problemId": {
+          "type": "string",
+          "pattern": "^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$"
+        },
+        "exampleKey": {
           "type": "string",
           "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
         },
@@ -172,7 +176,8 @@
         }
       },
       "required": [
-        "exampleId",
+        "problemId",
+        "exampleKey",
         "subjectDigest",
         "releaseDigest",
         "environment",
