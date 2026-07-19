@@ -584,9 +584,18 @@ export const buildTrustedPublicationDiff = (
   const entityDiffs = catalogEntityDiffs(pair);
   const entityDiffByKey = new Map(entityDiffs.map((diff) => [diff.key, diff]));
   const representedEntityDiffs = new Set<string>();
+  const representedEntityDiffPaths = new Set<string>();
   const trustedUpdates = updates.map((update) => {
     const operationOwnership = update.operations.map((operation) => {
       const diff = resolveEntityDiff(pair, entityDiffByKey, operation);
+      const representationKey = `${diff.key}\u0000${operation.path}`;
+      if (representedEntityDiffPaths.has(representationKey)) {
+        throw new TrustedCatalogDiffError(
+          'PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE',
+          `${operation.operationId} reclaims ${diff.entityType}:${diff.entityId} at ${operation.path}, which is already represented by another operation.`,
+        );
+      }
+      representedEntityDiffPaths.add(representationKey);
       representedEntityDiffs.add(diff.key);
       return {
         operationId: operation.operationId,

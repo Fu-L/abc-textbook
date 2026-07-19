@@ -469,6 +469,37 @@ describe('release state gate', () => {
     }).not.toThrow();
   });
 
+  it.each([
+    ['replace+add', ['replace', 'add'] as const],
+    ['replace+remove', ['replace', 'remove'] as const],
+    ['add+add', ['add', 'add'] as const],
+    ['remove+remove', ['remove', 'remove'] as const],
+  ])(
+    'validates shared file transitions independently of entity actions (%s)',
+    (_label, actions) => {
+      const operations = actions.map((action, index) => ({
+        operationId: `operation-shared-${String(index)}`,
+        entityType: index === 0 ? 'explanation' : 'learning_unit',
+        entityId: index === 0 ? 'explanation-abc212-x45' : 'unit-graphs',
+        action,
+        path: 'src/content/docs/index.md',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+        affectedProblemIds: ['abc212-x45'],
+      }));
+      const update = makePublicationUpdate();
+      update.operations = operations;
+
+      expect(() => {
+        validatePublicationUpdate(update, {
+          operationOwnership: operations,
+          baseFiles: [{ path: 'src/content/docs/index.md', sha256: sha('a'), byteLength: 10 }],
+          currentFiles: [{ path: 'src/content/docs/index.md', sha256: sha('b'), byteLength: 11 }],
+        });
+      }).not.toThrow();
+    },
+  );
+
   it('fails closed when update ownership is not independently trusted', () => {
     const update = makePublicationUpdate();
     expect(() => {

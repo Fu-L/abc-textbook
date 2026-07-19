@@ -5,6 +5,7 @@ import {
   parseTrustedCatalog,
 } from '../../src/lib/catalog/trusted-diff.js';
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
+import { validatePublicationUpdate } from '../../src/lib/validation/release-state.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
 
 const sha = (character: string): string => character.repeat(64);
@@ -59,8 +60,8 @@ describe('trusted publication diff', () => {
           entityId: 'correction-impact-graphs',
           action: 'add',
           path: 'src/content/docs/index.md',
-          beforeDigest: null,
-          afterDigest: sha('5'),
+          beforeDigest: sha('2'),
+          afterDigest: sha('3'),
           affectedProblemIds: ['abc212-x45'],
         },
       ],
@@ -106,6 +107,71 @@ describe('trusted publication diff', () => {
         operationIds: ['operation-add-correction-impact', 'operation-replace-explanation'],
       },
     ]);
+
+    const trustedUpdate = diff.updates[0];
+    if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    expect(() => {
+      validatePublicationUpdate(update, {
+        operationOwnership: trustedUpdate.operationOwnership,
+        correctionImpacts: trustedUpdate.correctionImpacts,
+        baseFiles: [{ path: 'src/content/docs/index.md', sha256: sha('2'), byteLength: 10 }],
+        currentFiles: [{ path: 'src/content/docs/index.md', sha256: sha('3'), byteLength: 11 }],
+      });
+    }).not.toThrow();
+  });
+
+  it('allows removing an entity from a shared file while retaining the file', () => {
+    const baseCatalog = makeTrustedCatalog({}) as ReturnType<typeof makeTrustedCatalog> & {
+      correctionImpacts: Record<string, unknown>[];
+    };
+    const currentCatalog = structuredClone(baseCatalog);
+    baseCatalog.correctionImpacts.push({
+      id: 'correction-impact-graphs',
+      sourceRevisionId: 'source-revision-abc212-e',
+      changeSummary: 'Fixture correction.',
+      explanationIds: ['explanation-abc212-x45'],
+      claimIds: ['claim-graphs'],
+      exampleIds: ['example-graphs'],
+      exerciseIds: ['exercise-graphs'],
+      answerMaterialIds: ['answer-graphs'],
+      learningUnitIds: ['unit-graphs'],
+      derivedIndexPaths: ['src/content/docs/index.md'],
+      verificationStatus: 'verified' as const,
+    });
+
+    const update = makeUpdate(
+      [
+        makeOperation({
+          operationId: 'operation-remove-correction-impact',
+          entityType: 'correction_impact',
+          entityId: 'correction-impact-graphs',
+          action: 'remove',
+          path: 'src/content/docs/index.md',
+          beforeDigest: sha('2'),
+          afterDigest: sha('3'),
+        }),
+      ],
+      ['abc212-x45'],
+      'update-remove-correction-impact',
+    );
+    update.kind = 'correction';
+    update.correctionImpactIds = ['correction-impact-graphs'];
+
+    const diff = buildTrustedPublicationDiff(
+      [update],
+      parseTrustedCatalog(baseCatalog, 'base'),
+      parseTrustedCatalog(currentCatalog, 'current'),
+    );
+    const trustedUpdate = diff.updates[0];
+    if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    expect(() => {
+      validatePublicationUpdate(update, {
+        operationOwnership: trustedUpdate.operationOwnership,
+        correctionImpacts: trustedUpdate.correctionImpacts,
+        baseFiles: [{ path: 'src/content/docs/index.md', sha256: sha('2'), byteLength: 10 }],
+        currentFiles: [{ path: 'src/content/docs/index.md', sha256: sha('3'), byteLength: 11 }],
+      });
+    }).not.toThrow();
   });
 
   it('rejects a replace operation when the entity projection is unchanged', () => {
@@ -203,6 +269,45 @@ describe('trusted publication diff', () => {
     );
     expect(diff.updates[0]?.operationOwnership).toHaveLength(2);
   });
+
+  it('rejects the same entity diff and path claimed by multiple updates', () => {
+    const baseCatalog = makeTrustedCatalog({});
+    const currentCatalog = makeTrustedCatalog({});
+    const explanation = currentCatalog.explanations[0];
+    if (!explanation) throw new Error('Fixture explanation is missing.');
+    explanation.revision = 2;
+
+    expect(() => {
+      buildTrustedPublicationDiff(
+        [
+          makeUpdate(
+            [
+              makeOperation({
+                operationId: 'operation-replace-explanation-first',
+                entityType: 'explanation',
+                entityId: 'explanation-abc212-x45',
+              }),
+            ],
+            ['abc212-x45'],
+            'update-first',
+          ),
+          makeUpdate(
+            [
+              makeOperation({
+                operationId: 'operation-replace-explanation-second',
+                entityType: 'explanation',
+                entityId: 'explanation-abc212-x45',
+              }),
+            ],
+            ['abc212-x45'],
+            'update-second',
+          ),
+        ],
+        parseTrustedCatalog(baseCatalog, 'base'),
+        parseTrustedCatalog(currentCatalog, 'current'),
+      );
+    }).toThrow(/PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE/u);
+  });
 });
 
 const makeOperation = (overrides: Record<string, unknown>): Record<string, unknown> => ({
@@ -220,10 +325,11 @@ const makeOperation = (overrides: Record<string, unknown>): Record<string, unkno
 const makeUpdate = (
   operations: readonly Record<string, unknown>[],
   targetProblemIds: readonly string[] = ['abc212-x45'],
+  updateId = 'update-diff-fixture',
 ) =>
   PublicationUpdateSchema.parse({
     schemaVersion: '2.0.0',
-    updateId: 'update-diff-fixture',
+    updateId,
     kind: 'bootstrap',
     baseReleaseVersion: null,
     contestId: null,

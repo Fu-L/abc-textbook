@@ -236,21 +236,22 @@ export const validatePublicationUpdate = (
       }
       const before = baseFiles.get(operation.path);
       const after = currentFiles.get(operation.path);
+      const fileTransition =
+        before === undefined && after !== undefined
+          ? 'add'
+          : before !== undefined && after !== undefined
+            ? 'replace'
+            : before !== undefined && after === undefined
+              ? 'remove'
+              : undefined;
       const validTransition =
-        operation.action === 'add'
-          ? before === undefined &&
-            after !== undefined &&
-            operation.beforeDigest === null &&
-            operation.afterDigest === after.sha256
-          : operation.action === 'replace'
-            ? before !== undefined &&
-              after !== undefined &&
-              operation.beforeDigest === before.sha256 &&
-              operation.afterDigest === after.sha256
-            : before !== undefined &&
-              after === undefined &&
-              operation.beforeDigest === before.sha256 &&
-              operation.afterDigest === null;
+        fileTransition === 'add'
+          ? operation.beforeDigest === null && operation.afterDigest === after?.sha256
+          : fileTransition === 'replace'
+            ? operation.beforeDigest === before?.sha256 && operation.afterDigest === after?.sha256
+            : fileTransition === 'remove'
+              ? operation.beforeDigest === before?.sha256 && operation.afterDigest === null
+              : false;
       if (!validTransition) {
         throw new ReleaseTransitionError(
           'PUBLICATION_UPDATE_DIFF_INVALID',
