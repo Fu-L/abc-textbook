@@ -6,7 +6,6 @@ import {
   AdvancedSlotRegistrySchema,
   ContestSlotRecordSchema,
   ProblemSchema,
-  ExerciseSchema,
   ProblemPlacementSchema,
   SafePathSchema,
   SourceRevisionSchema,
@@ -271,7 +270,7 @@ describe('official advanced slot registry', () => {
     };
     const build = (input: unknown) => buildCatalog(input, [], trustedEvidence);
     const catalogInput = {
-      schemaVersion: '2.0.0',
+      schemaVersion: '3.0.0',
       release: {
         version: '2026.07.17',
         releaseKind: 'initial',
@@ -346,7 +345,6 @@ describe('official advanced slot registry', () => {
           secondaryTagIds: [],
           adHocElements: [],
           placementId: null,
-          explanationId: null,
         },
       ],
       techniqueInventory: [
@@ -368,7 +366,7 @@ describe('official advanced slot registry', () => {
       learningOutcomes: [],
       learningUnits: [],
       placements: [],
-      explanations: [],
+      authoringUnits: [],
       sources: [
         {
           id: 'source-abc212-task-order',
@@ -381,11 +379,6 @@ describe('official advanced slot registry', () => {
         },
       ],
       correctionImpacts: [],
-      claims: [],
-      examples: [],
-      exercises: [],
-      assessments: [],
-      answerMaterials: [],
     };
     const contentDigest = catalogContentDigest(catalogInput as CatalogLike);
     catalogInput.release.contentSnapshotDigest = contentDigest;
@@ -484,18 +477,6 @@ describe('official advanced slot registry', () => {
     };
     expect(() => build(duplicatedReleaseEvidence)).toThrow(/CATALOG_SCHEMA_INVALID/u);
 
-    const unverifiedClaim = structuredClone(catalog) as Record<string, unknown>;
-    (unverifiedClaim.claims as unknown[]) = [
-      {
-        id: 'claim-one',
-        text: 'Fixture claim.',
-        sourceRevisionIds: ['source-abc212-task-order'],
-        authorId: 'author-fixture',
-        verificationStatus: 'unverified',
-      },
-    ];
-    expect(() => build(unverifiedClaim)).toThrow(/CLAIM_NOT_VERIFIED/u);
-
     const unknownOutcomeScope = structuredClone(catalog) as Record<string, unknown>;
     unknownOutcomeScope.learningOutcomes = [
       {
@@ -503,15 +484,6 @@ describe('official advanced slot registry', () => {
         statement: 'Explain the fixture method.',
         prerequisiteOutcomeIds: [],
         scopeIds: ['tag-missing'],
-        assessmentIds: ['assessment-one'],
-      },
-    ];
-    unknownOutcomeScope.assessments = [
-      {
-        id: 'assessment-one',
-        learningOutcomeIds: ['outcome-one'],
-        method: 'Fixture assessment.',
-        successCondition: 'The learner explains it.',
       },
     ];
     expect(() => build(unknownOutcomeScope)).toThrow(/CATALOG_REFERENCE_MISSING/u);
@@ -523,15 +495,6 @@ describe('official advanced slot registry', () => {
         statement: 'Explain the fixture method.',
         prerequisiteOutcomeIds: [],
         scopeIds: [],
-        assessmentIds: ['assessment-one'],
-      },
-    ];
-    independentGraphs.assessments = [
-      {
-        id: 'assessment-one',
-        learningOutcomeIds: ['outcome-one'],
-        method: 'Fixture assessment.',
-        successCondition: 'The learner explains it.',
       },
     ];
     independentGraphs.tags = [
@@ -576,7 +539,7 @@ describe('official advanced slot registry', () => {
       problemId: 'abc500-e',
       policyVersion: '1.0.0',
       kind: 'full' as const,
-      primaryExplanationId: null,
+      primaryProblemId: null,
       sharedOutcomeIds: [],
       comparison: {
         method: 'Same method.',
@@ -619,17 +582,6 @@ describe('official advanced slot registry', () => {
     expect(TechniqueTagSchema.safeParse({ ...tag, replacementTagIds: ['tag-other'] }).success).toBe(
       false,
     );
-    expect(
-      ExerciseSchema.safeParse({
-        id: 'exercise-one',
-        problemId: null,
-        learningOutcomeIds: ['outcome-dp'],
-        prerequisiteIds: [],
-        attainmentCondition: 'The learner explains the method.',
-        assessmentId: 'assessment-one',
-        answerMaterialId: 'answer-one',
-      }).success,
-    ).toBe(false);
   });
 
   it('places an order-conflict hold instead of guessing', () => {
@@ -772,7 +724,6 @@ describe('official advanced slot registry', () => {
       secondaryTagIds: [],
       adHocElements: [],
       placementId: null,
-      explanationId: null,
     };
     expect(ProblemSchema.safeParse(problem).success).toBe(true);
     expect(

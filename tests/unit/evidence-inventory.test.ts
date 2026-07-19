@@ -20,6 +20,10 @@ import {
   loadCatalogEvidenceCanonicalSources,
   loadTrustedCatalogReleaseEvidenceInventory,
 } from '../../src/lib/catalog/evidence-inventory.js';
+import {
+  deriveExecutableExampleInventory,
+  executableExampleInventoryDigest,
+} from '../../src/lib/catalog/build-catalog.js';
 
 const execFileAsync = promisify(execFile);
 const sha = (character: string): string => character.repeat(64);
@@ -232,7 +236,7 @@ describe('catalog release evidence inventory', () => {
     };
     releaseCandidate.advancedSlotRegistryDigest = canonicalDigest(registrySubject);
     const catalog = {
-      schemaVersion: '2.0.0' as const,
+      schemaVersion: '3.0.0' as const,
       release: {
         version: '2026.07.17',
         releaseKind: 'initial' as const,
@@ -332,7 +336,6 @@ describe('catalog release evidence inventory', () => {
           secondaryTagIds: [],
           adHocElements: [],
           placementId: null,
-          explanationId: 'explanation-abc212-x45',
         },
       ],
       techniqueInventory: [
@@ -371,7 +374,6 @@ describe('catalog release evidence inventory', () => {
           statement: 'Explain the fixture graph method.',
           prerequisiteOutcomeIds: [],
           scopeIds: ['tag-graphs'],
-          assessmentIds: ['assessment-graphs'],
         },
       ],
       learningUnits: [
@@ -388,9 +390,39 @@ describe('catalog release evidence inventory', () => {
           tagIds: ['tag-graphs'],
           learningOutcomeIds: ['outcome-graphs'],
           docPath: 'src/content/docs/index.md',
-          exampleIds: ['example-graphs'],
           problemIds: ['abc212-x45'],
-          assessmentIds: ['assessment-graphs'],
+          examples: [
+            {
+              key: 'unit-intuition',
+              learningOutcomeIds: ['outcome-graphs'],
+              kind: 'illustrative' as const,
+              language: 'text',
+              omissions: [],
+              environment: 'Textbook page.',
+              input: 'Fixture graph.',
+              procedure: ['Trace the fixture graph.'],
+              expectedResult: 'The transition is identified.',
+              verificationStatus: 'not_applicable' as const,
+            },
+          ],
+          exercises: [
+            {
+              key: 'unit-check',
+              learningOutcomeIds: ['outcome-graphs'],
+              prerequisiteIds: [],
+              attainmentCondition: 'Explain the fixture transition.',
+              assessment: {
+                method: 'Compare the explanation with the invariant.',
+                successCondition: 'The invariant and transition are both stated.',
+              },
+              answer: {
+                reasoningOrVerification: 'The fixture transition preserves the invariant.',
+                procedure: ['Check the invariant before and after the transition.'],
+                expectedResult: 'The invariant is preserved.',
+                verificationStatus: 'passed' as const,
+              },
+            },
+          ],
           stageRank: 0,
           difficultyRank: 0,
           representativeRank: 0,
@@ -399,12 +431,11 @@ describe('catalog release evidence inventory', () => {
         },
       ],
       placements: [],
-      explanations: [
+      authoringUnits: [
         {
-          id: 'explanation-abc212-x45',
           problemId: 'abc212-x45',
           kind: 'full' as const,
-          primaryExplanationId: null,
+          primaryProblemId: null,
           differenceSummary: null,
           docPath: 'src/content/docs/index.md',
           learningOutcomeIds: ['outcome-graphs'],
@@ -414,13 +445,57 @@ describe('catalog release evidence inventory', () => {
           excludedTopics: [],
           tagIds: ['tag-graphs'],
           sourceRevisionIds: ['source-revision-abc212-e'],
-          claimIds: ['claim-graphs'],
-          exampleIds: ['example-graphs'],
-          skillName: 'fixture-skill',
-          skillVersion: '1.0.0',
-          skillDigest: sha('a'),
+          skill: { name: 'fixture-skill', version: '1.0.0', digest: sha('a') },
           revision: 1,
-          sections: { overview: 'Fixture explanation.' },
+          sections: {
+            reasoning: 'Fixture reasoning.',
+            technique: 'Fixture technique.',
+            problemSpecificElements: 'Fixture-specific elements.',
+            reviewAdvice: 'Fixture review advice.',
+            correctness: 'Fixture correctness.',
+            complexity: { time: 'O(1)', space: 'O(1)' },
+            constraintConsistency: 'Fixture constraints are consistent.',
+            implementationNotes: 'Fixture implementation notes.',
+          },
+          claims: [
+            {
+              key: 'method-correctness',
+              text: 'Fixture claim.',
+              sourceRevisionIds: ['source-revision-abc212-e'],
+              authorId: 'person-author',
+              verificationStatus: 'verified' as const,
+            },
+          ],
+          examples: [
+            {
+              key: 'minimal-case',
+              learningOutcomeIds: ['outcome-graphs'],
+              learningUnitIds: ['unit-graphs'],
+              kind: 'executable' as const,
+              language: 'text',
+              omissions: [],
+              environment: 'Fixture environment.',
+              input: '1',
+              procedure: ['Run fixture.'],
+              expectedResult: '1',
+              verificationStatus: 'passed' as const,
+            },
+          ],
+          exercises: [
+            {
+              key: 'apply-method',
+              learningOutcomeIds: ['outcome-graphs'],
+              prerequisiteIds: [],
+              attainmentCondition: 'Fixture condition.',
+              assessment: { method: 'Fixture assessment.', successCondition: 'Fixture success.' },
+              answer: {
+                reasoningOrVerification: 'Fixture answer.',
+                procedure: ['Verify fixture.'],
+                expectedResult: '1',
+                verificationStatus: 'passed' as const,
+              },
+            },
+          ],
         },
       ],
       sources: [
@@ -435,57 +510,6 @@ describe('catalog release evidence inventory', () => {
         },
       ],
       correctionImpacts: [],
-      claims: [
-        {
-          id: 'claim-graphs',
-          text: 'Fixture claim.',
-          sourceRevisionIds: ['source-revision-abc212-e'],
-          authorId: 'person-author',
-          verificationStatus: 'verified' as const,
-        },
-      ],
-      examples: [
-        {
-          id: 'example-graphs',
-          learningOutcomeIds: ['outcome-graphs'],
-          ownerExplanationIds: ['explanation-abc212-x45'],
-          ownerLearningUnitIds: ['unit-graphs'],
-          environment: 'Fixture environment.',
-          input: '1',
-          procedure: ['Run fixture.'],
-          expectedResult: '1',
-          verificationStatus: 'passed' as const,
-        },
-      ],
-      exercises: [
-        {
-          id: 'exercise-graphs',
-          problemId: 'abc212-x45',
-          learningOutcomeIds: ['outcome-graphs'],
-          prerequisiteIds: [],
-          attainmentCondition: 'Fixture condition.',
-          assessmentId: 'assessment-graphs',
-          answerMaterialId: 'answer-graphs',
-        },
-      ],
-      assessments: [
-        {
-          id: 'assessment-graphs',
-          learningOutcomeIds: ['outcome-graphs'],
-          method: 'Fixture assessment.',
-          successCondition: 'Fixture success.',
-        },
-      ],
-      answerMaterials: [
-        {
-          id: 'answer-graphs',
-          exerciseId: 'exercise-graphs',
-          reasoningOrVerification: 'Fixture answer.',
-          procedure: ['Verify fixture.'],
-          expectedResult: '1',
-          verificationStatus: 'passed' as const,
-        },
-      ],
     };
     const canonicalSources = { catalog, workManifest, releaseCandidate };
     await writeJson('catalog.json', catalog);
@@ -503,6 +527,38 @@ describe('catalog release evidence inventory', () => {
       approvedDigest: releaseCandidate.approvableDigest,
       approvedAt: '2026-07-17T12:50:00+09:00',
     };
+    const executableExampleEvidencePath = 'docs/verification/executable-examples.json';
+    const executableInventory = deriveExecutableExampleInventory(catalog);
+    const executableExampleEvidence = {
+      schemaVersion: '3.0.0' as const,
+      releaseDigest: sha('a'),
+      subjectDigest: catalog.release.contentSnapshotDigest,
+      inventoryDigest: executableExampleInventoryDigest(catalog),
+      inventoryCount: executableInventory.length,
+      checkedCount: executableInventory.length,
+      passedCount: executableInventory.length,
+      failedCount: 0,
+      aggregatePassed: true,
+      items: executableInventory.map((item, index) => ({
+        ...item,
+        subjectDigest: catalog.release.contentSnapshotDigest,
+        releaseDigest: sha('a'),
+        environment: 'Node.js fixture',
+        command: 'node fixture.js',
+        expectedResult: '1',
+        actualResult: '1',
+        exitCode: 0,
+        passed: true,
+        executedAt: '2026-07-17T12:30:00+09:00',
+        resultDigest: sha(String(index + 1)),
+        evidencePath: executableExampleEvidencePath,
+      })),
+      generatedAt: '2026-07-17T12:31:00+09:00',
+    };
+    const executableExampleEvidenceDigest = await writeJson(
+      executableExampleEvidencePath,
+      executableExampleEvidence,
+    );
     const inventoryPath = 'docs/verification/release-evidence-inventory.json';
     const inventory = {
       subjectDigest,
@@ -530,6 +586,11 @@ describe('catalog release evidence inventory', () => {
           aggregatePassed: true,
         },
       ],
+      executableExampleEvidence: {
+        path: executableExampleEvidencePath,
+        digest: executableExampleEvidenceDigest,
+        subjectDigest: catalog.release.contentSnapshotDigest,
+      },
     };
     await writeJson(inventoryPath, inventory);
     return {
@@ -832,11 +893,11 @@ describe('catalog release evidence inventory', () => {
     const fixture = await makeFixture();
     const catalog = fixture.canonicalSources.catalog as {
       release: { releaseKind: 'initial' | 'incremental' };
-      explanations: { revision: number }[];
+      authoringUnits: { revision: number }[];
     };
     catalog.release.releaseKind = 'incremental';
     const baseCatalog = structuredClone(catalog);
-    const explanation = catalog.explanations[0];
+    const explanation = catalog.authoringUnits[0];
     if (!explanation) throw new Error('Fixture explanation is missing.');
     explanation.revision = 2;
     const baseContent = '# Base changed content\n';
@@ -924,16 +985,16 @@ describe('catalog release evidence inventory', () => {
       operations: [
         {
           operationId: 'operation-replace-explanation',
-          entityType: 'explanation',
-          entityId: 'explanation-abc212-x45',
+          entityType: 'authoring_unit',
+          entityId: 'abc212-x45',
           action: 'replace',
           path: 'src/content/docs/index.md',
           beforeDigest: fileDigest(baseContent),
           afterDigest: createHash('sha256').update('# Changed\n').digest('hex'),
           affectedEntities: [
             {
-              entityType: 'explanation',
-              entityId: 'explanation-abc212-x45',
+              entityType: 'authoring_unit',
+              entityId: 'abc212-x45',
               action: 'replace',
             },
           ],
@@ -944,7 +1005,7 @@ describe('catalog release evidence inventory', () => {
         {
           problemId: 'abc212-x45',
           slotLabel: 'E',
-          resultType: 'explanation_draft',
+          resultType: 'authoring_unit_draft',
           draftPath: 'src/content/docs/index.md',
           packetPath: null,
           templatePath: null,

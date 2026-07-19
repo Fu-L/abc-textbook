@@ -3,37 +3,77 @@ import { z } from 'zod';
 import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
 import { canonicalJson, digestWithoutField } from '../canonical-json.js';
 import { compareOffsetDateTimes, isOffsetDateTime, parseOffsetDateTime } from '../date-time.js';
+import {
+  InlineExerciseSchema,
+  LearningUnitInlineExampleSchema,
+  ProblemAuthoringUnitSchema,
+} from './authoring-unit.js';
+import {
+  ContentBlockKeyPattern,
+  ContentReviewModeSchema,
+  ContentReviewRiskReasonSchema,
+  ContestIdSchema,
+  EntityIdSchema,
+  OffsetDateTimeSchema as StructuralOffsetDateTimeSchema,
+  ProblemIdSchema,
+  ProblemLabelSchema,
+  SafePathSchema,
+  Sha256Schema,
+} from './content-common.js';
 
-export const EntityIdSchema = z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u);
-export const Sha256Schema = z.string().regex(/^[a-f0-9]{64}$/u);
-/** Distinguishes the maintainer's self-review from a required third-party review. */
-export const ContentReviewModeSchema = z.enum(['self', 'third_party']);
-/**
- * A bounded set of conditions that make a third-party content review mandatory.
- * Keep this list deliberately small and versioned: changing it changes the gate.
- */
-export const ContentReviewRiskReasonSchema = z.enum([
-  'official_source_conflict',
-  'original_proof',
-  'major_classification_change',
-]);
-export const OffsetDateTimeSchema = z.iso
-  .datetime({ offset: true })
-  .refine(isOffsetDateTime, 'Invalid RFC 3339 date-time.');
-export const SafePathSchema = z
-  .string()
-  .regex(
-    /^(?!\/)(?!.*\/$)(?!.*\/\/)(?!^(?:\.{1,2})(?:\/|$))(?!.*\/(?:\.{1,2})(?:\/|$))[A-Za-z0-9._/-]+$/u,
-  );
-export const ProblemLabelSchema = z
-  .string()
-  .regex(/^[A-Za-z][A-Za-z0-9+_-]*$/u)
-  .max(16);
-export const ContestIdSchema = z.string().regex(/^abc[0-9]{3,}$/u);
-export const ProblemIdSchema = z.string().regex(/^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$/u);
+export * from './content-common.js';
+export * from './authoring-unit.js';
+
+export {
+  ContentReviewModeSchema,
+  ContentReviewRiskReasonSchema,
+  ContestIdSchema,
+  EntityIdSchema,
+  ProblemIdSchema,
+  ProblemLabelSchema,
+  SafePathSchema,
+  Sha256Schema,
+};
+export const OffsetDateTimeSchema = StructuralOffsetDateTimeSchema.refine(
+  isOffsetDateTime,
+  'Invalid RFC 3339 date-time.',
+);
 
 const nonEmptyText = z.string().trim().min(1);
 const entityIds = z.array(EntityIdSchema);
+const localBlockPath = (namespace: 'claims' | 'examples' | 'exercises') =>
+  z.string().regex(new RegExp(`^${namespace}\\.${ContentBlockKeyPattern}$`, 'u'));
+const exerciseDetailPath = z
+  .string()
+  .regex(new RegExp(`^exercises\\.${ContentBlockKeyPattern}\\.(?:assessment|answer)$`, 'u'));
+
+/**
+ * Correction targets use the same explicit owner model as execution evidence.
+ * The path remains document-local and is resolved against the selected owner.
+ */
+export const CorrectionImpactContentLocatorSchema = z.discriminatedUnion('ownerType', [
+  strictObject({
+    ownerType: z.literal('problem'),
+    problemId: ProblemIdSchema,
+    path: z.union([
+      z.string().regex(new RegExp(`^sections\\.${ContentBlockKeyPattern}$`, 'u')),
+      localBlockPath('claims'),
+      localBlockPath('examples'),
+      localBlockPath('exercises'),
+      exerciseDetailPath,
+    ]),
+  }),
+  strictObject({
+    ownerType: z.literal('learning_unit'),
+    learningUnitId: EntityIdSchema,
+    path: z.union([
+      z.literal('content'),
+      localBlockPath('examples'),
+      localBlockPath('exercises'),
+      exerciseDetailPath,
+    ]),
+  }),
+]);
 
 export type AtCoderContestResource = 'contest' | 'tasks' | 'task' | 'editorial';
 
@@ -287,7 +327,6 @@ export const ProblemSchema = strictObject({
   secondaryTagIds: entityIds,
   adHocElements: z.array(nonEmptyText),
   placementId: EntityIdSchema.nullable(),
-  explanationId: EntityIdSchema.nullable(),
 }).superRefine((problem, context) => {
   const officialUrl =
     parseAtCoderContestResourceUrl(problem.officialUrl) ??
@@ -371,7 +410,6 @@ export const LearningOutcomeSchema = strictObject({
   statement: nonEmptyText,
   prerequisiteOutcomeIds: entityIds,
   scopeIds: entityIds,
-  assessmentIds: entityIds.min(1),
 });
 
 export const LearningUnitSchema = strictObject({
@@ -387,14 +425,25 @@ export const LearningUnitSchema = strictObject({
   tagIds: entityIds.min(1),
   learningOutcomeIds: entityIds.min(1),
   docPath: SafePathSchema,
-  exampleIds: entityIds.min(1),
   problemIds: z.array(ProblemIdSchema).min(1),
-  assessmentIds: entityIds.min(1),
+  examples: uniqueArray(LearningUnitInlineExampleSchema).min(1),
+  exercises: uniqueArray(InlineExerciseSchema).min(1),
   stageRank: z.number().int().nonnegative(),
   difficultyRank: z.number().int().nonnegative(),
   representativeRank: z.number().int().nonnegative(),
   globalIndex: z.number().int().nonnegative(),
   orderReason: nonEmptyText,
+}).superRefine((unit, context) => {
+  for (const field of ['examples', 'exercises'] as const) {
+    const keys = unit[field].map(({ key }) => key);
+    if (new Set(keys).size !== keys.length) {
+      context.addIssue({
+        code: 'custom',
+        path: [field],
+        message: `${field} local keys must be unique inside a Learning Unit.`,
+      });
+    }
+  }
 });
 
 export const ProblemPlacementSchema = strictObject({
@@ -402,7 +451,7 @@ export const ProblemPlacementSchema = strictObject({
   problemId: ProblemIdSchema,
   policyVersion: z.string().regex(/^\d+\.\d+\.\d+$/u),
   kind: z.enum(['full', 'similar', 'supplement']),
-  primaryExplanationId: EntityIdSchema.nullable(),
+  primaryProblemId: ProblemIdSchema.nullable(),
   sharedOutcomeIds: entityIds,
   comparison: strictObject({
     method: nonEmptyText,
@@ -419,18 +468,18 @@ export const ProblemPlacementSchema = strictObject({
   .superRefine((placement, context) => {
     const isFull = placement.kind === 'full';
     const isSimilar = placement.kind === 'similar';
-    if (isFull && placement.primaryExplanationId !== null) {
+    if (isFull && placement.primaryProblemId !== null) {
       context.addIssue({
         code: 'custom',
-        path: ['primaryExplanationId'],
-        message: 'Full placement cannot reference a primary explanation.',
+        path: ['primaryProblemId'],
+        message: 'Full placement cannot reference a primary Problem.',
       });
     }
-    if (!isFull && placement.primaryExplanationId === null) {
+    if (!isFull && placement.primaryProblemId === null) {
       context.addIssue({
         code: 'custom',
-        path: ['primaryExplanationId'],
-        message: 'Similar and supplement placements require a primary explanation.',
+        path: ['primaryProblemId'],
+        message: 'Similar and supplement placements require a primary Problem.',
       });
     }
     if (isFull && placement.sharedOutcomeIds.length > 0) {
@@ -468,7 +517,7 @@ export const ProblemPlacementSchema = strictObject({
         if: { properties: { kind: { const: 'full' } }, required: ['kind'] },
         then: {
           properties: {
-            primaryExplanationId: { type: 'null' },
+            primaryProblemId: { type: 'null' },
             sharedOutcomeIds: { maxItems: 0 },
             additionalElement: { type: 'null' },
           },
@@ -481,9 +530,9 @@ export const ProblemPlacementSchema = strictObject({
         },
         then: {
           properties: {
-            primaryExplanationId: {
+            primaryProblemId: {
               type: 'string',
-              pattern: '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
+              pattern: '^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$',
             },
             sharedOutcomeIds: { minItems: 1 },
             additionalElement: { type: 'null' },
@@ -497,69 +546,12 @@ export const ProblemPlacementSchema = strictObject({
         },
         then: {
           properties: {
-            primaryExplanationId: {
+            primaryProblemId: {
               type: 'string',
-              pattern: '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
+              pattern: '^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$',
             },
             sharedOutcomeIds: { minItems: 1 },
             additionalElement: { type: 'string', minLength: 1 },
-          },
-        },
-      },
-    ],
-  });
-
-export const ExplanationSchema = strictObject({
-  id: EntityIdSchema,
-  problemId: ProblemIdSchema,
-  kind: z.enum(['full', 'similar', 'supplement']),
-  primaryExplanationId: EntityIdSchema.nullable(),
-  differenceSummary: nonEmptyText.nullable(),
-  docPath: SafePathSchema,
-  learningOutcomeIds: entityIds.min(1),
-  baselineId: EntityIdSchema,
-  baselineVersion: z.string().regex(/^\d+\.\d+\.\d+$/u),
-  additionalPrerequisiteUnitIds: entityIds,
-  excludedTopics: z.array(nonEmptyText),
-  tagIds: entityIds.min(1),
-  sourceRevisionIds: entityIds.min(1),
-  claimIds: entityIds.min(1),
-  exampleIds: entityIds.min(1),
-  skillName: nonEmptyText,
-  skillVersion: z.string().regex(/^\d+\.\d+\.\d+$/u),
-  skillDigest: Sha256Schema,
-  revision: z.number().int().positive(),
-  sections: z.record(z.string(), nonEmptyText),
-})
-  .superRefine((explanation, context) => {
-    const fullShapeIsValid =
-      explanation.primaryExplanationId === null && explanation.differenceSummary === null;
-    const abbreviatedShapeIsValid =
-      explanation.primaryExplanationId !== null && explanation.differenceSummary !== null;
-    if (
-      (explanation.kind === 'full' && !fullShapeIsValid) ||
-      (explanation.kind !== 'full' && !abbreviatedShapeIsValid)
-    ) {
-      context.addIssue({
-        code: 'custom',
-        message: 'Explanation kind and difference fields conflict.',
-      });
-    }
-  })
-  .meta({
-    allOf: [
-      {
-        if: { properties: { kind: { const: 'full' } }, required: ['kind'] },
-        then: {
-          properties: {
-            primaryExplanationId: { type: 'null' },
-            differenceSummary: { type: 'null' },
-          },
-        },
-        else: {
-          properties: {
-            primaryExplanationId: { type: 'string', pattern: '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$' },
-            differenceSummary: { type: 'string', minLength: 1 },
           },
         },
       },
@@ -631,70 +623,10 @@ export const CorrectionImpactSchema = strictObject({
   id: EntityIdSchema,
   sourceRevisionId: EntityIdSchema,
   changeSummary: nonEmptyText,
-  explanationIds: entityIds,
-  claimIds: entityIds,
-  exampleIds: entityIds,
-  exerciseIds: entityIds,
-  answerMaterialIds: entityIds,
-  learningUnitIds: entityIds,
+  affectedContentLocators: uniqueArray(CorrectionImpactContentLocatorSchema).min(1),
+  affectedLearningUnitOrderIds: uniqueArray(EntityIdSchema),
   derivedIndexPaths: z.array(SafePathSchema),
   verificationStatus: z.enum(['pending', 'verified', 'failed']),
-});
-
-export const TechnicalClaimSchema = strictObject({
-  id: EntityIdSchema,
-  text: nonEmptyText,
-  sourceRevisionIds: entityIds.min(1),
-  authorId: EntityIdSchema,
-  verificationStatus: z.enum(['verified', 'unverified', 'stale', 'contradicted']),
-});
-
-export const ReproducibleExampleSchema = strictObject({
-  id: EntityIdSchema,
-  learningOutcomeIds: entityIds.min(1),
-  ownerExplanationIds: entityIds,
-  ownerLearningUnitIds: entityIds,
-  environment: nonEmptyText,
-  input: nonEmptyText,
-  procedure: z.array(nonEmptyText).min(1),
-  expectedResult: nonEmptyText,
-  verificationStatus: z.enum(['pending', 'passed', 'failed']),
-})
-  .refine(
-    (example) => example.ownerExplanationIds.length > 0 || example.ownerLearningUnitIds.length > 0,
-    'Example must have an explanation or learning-unit owner.',
-  )
-  .meta({
-    anyOf: [
-      { properties: { ownerExplanationIds: { minItems: 1 } } },
-      { properties: { ownerLearningUnitIds: { minItems: 1 } } },
-    ],
-  });
-
-export const ExerciseSchema = strictObject({
-  id: EntityIdSchema,
-  problemId: ProblemIdSchema,
-  learningOutcomeIds: entityIds.min(1),
-  prerequisiteIds: entityIds,
-  attainmentCondition: nonEmptyText,
-  assessmentId: EntityIdSchema,
-  answerMaterialId: EntityIdSchema,
-});
-
-export const AssessmentSchema = strictObject({
-  id: EntityIdSchema,
-  learningOutcomeIds: entityIds.min(1),
-  method: nonEmptyText,
-  successCondition: nonEmptyText,
-});
-
-export const AnswerMaterialSchema = strictObject({
-  id: EntityIdSchema,
-  exerciseId: EntityIdSchema,
-  reasoningOrVerification: nonEmptyText,
-  procedure: z.array(nonEmptyText).min(1),
-  expectedResult: nonEmptyText,
-  verificationStatus: z.enum(['pending', 'passed', 'failed']),
 });
 
 const TaxonomyChangeSchema = strictObject({
@@ -802,7 +734,7 @@ export const CatalogReleaseSchema = strictObject({
 });
 
 export const CatalogSchema = strictObject({
-  schemaVersion: z.literal('2.0.0'),
+  schemaVersion: z.literal('3.0.0'),
   release: CatalogReleaseSchema,
   advancedSlotRegistry: AdvancedSlotRegistrySchema,
   contests: z.array(ContestSchema),
@@ -813,14 +745,9 @@ export const CatalogSchema = strictObject({
   learningOutcomes: z.array(LearningOutcomeSchema),
   learningUnits: z.array(LearningUnitSchema),
   placements: z.array(ProblemPlacementSchema),
-  explanations: z.array(ExplanationSchema),
+  authoringUnits: z.array(ProblemAuthoringUnitSchema),
   sources: z.array(SourceRevisionSchema),
   correctionImpacts: z.array(CorrectionImpactSchema),
-  claims: z.array(TechnicalClaimSchema),
-  examples: z.array(ReproducibleExampleSchema),
-  exercises: z.array(ExerciseSchema),
-  assessments: z.array(AssessmentSchema),
-  answerMaterials: z.array(AnswerMaterialSchema),
 });
 
 export const CatalogContract = defineZodContractSchema('catalog.schema.json', CatalogSchema, {
@@ -891,7 +818,7 @@ export const PrerequisiteBaselineSchema = strictObject({
 });
 
 const placementAttribute = z.enum([
-  'primary_explanation_valid',
+  'primary_authoring_unit_valid',
   'algorithm_same',
   'proof_same',
   'complexity_same',
@@ -909,8 +836,8 @@ const placementCondition = strictObject({
   value: z.union([z.boolean(), z.number().int().nonnegative(), nonEmptyText]),
 });
 const placementEvidence = z.enum([
-  'independent_full_explanation',
-  'primary_explanation_id',
+  'independent_full_authoring_unit',
+  'primary_problem_id',
   'shared_learning_outcome_ids',
   'algorithm_comparison',
   'proof_comparison',
@@ -920,7 +847,7 @@ const placementEvidence = z.enum([
   'implementation_comparison',
   'simplification_reason',
   'additional_learning',
-  'answer_material',
+  'answer',
   'source_revision_ids',
   'verification_evidence',
 ]);
@@ -962,7 +889,7 @@ export const ProblemPlacementDecisionTableSchema = strictObject({
     .refine((items) => new Set(items).size === 7)
     .meta({ uniqueItems: true }),
   inputAttributes: z.tuple([
-    z.literal('primary_explanation_valid'),
+    z.literal('primary_authoring_unit_valid'),
     z.literal('algorithm_same'),
     z.literal('proof_same'),
     z.literal('complexity_same'),
@@ -994,7 +921,8 @@ export const ProblemPlacementDecisionTableSchema = strictObject({
 });
 
 const answerMaterialEvidenceItem = strictObject({
-  answerMaterialId: z.string().regex(/^answer-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
+  problemId: ProblemIdSchema,
+  exerciseKey: z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u),
   contentDigest: Sha256Schema,
   learningOutcomeIds: uniqueText(z.string().regex(/^outcome-[a-z0-9]+(?:-[a-z0-9]+)*$/u)).min(1),
   prerequisiteIds: uniqueText(),
@@ -1066,7 +994,7 @@ const answerMaterialEvidenceItem = strictObject({
     ],
   });
 const AnswerMaterialEvidenceSchema = strictObject({
-  schemaVersion: z.literal('1.0.0'),
+  schemaVersion: z.literal('2.0.0'),
   releaseDigest: Sha256Schema,
   inventoryDigest: Sha256Schema,
   inventoryCount: z.number().int().positive(),

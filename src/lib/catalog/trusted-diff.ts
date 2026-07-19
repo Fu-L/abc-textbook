@@ -18,12 +18,7 @@ type EntityType =
   | 'learning_outcome'
   | 'learning_unit'
   | 'placement'
-  | 'explanation'
-  | 'claim'
-  | 'example'
-  | 'exercise'
-  | 'assessment'
-  | 'answer_material'
+  | 'authoring_unit'
   | 'source'
   | 'correction_impact';
 
@@ -36,14 +31,9 @@ const collections: readonly [keyof Catalog, EntityType][] = [
   ['learningOutcomes', 'learning_outcome'],
   ['learningUnits', 'learning_unit'],
   ['placements', 'placement'],
-  ['explanations', 'explanation'],
+  ['authoringUnits', 'authoring_unit'],
   ['sources', 'source'],
   ['correctionImpacts', 'correction_impact'],
-  ['claims', 'claim'],
-  ['examples', 'example'],
-  ['exercises', 'exercise'],
-  ['assessments', 'assessment'],
-  ['answerMaterials', 'answer_material'],
 ];
 
 const collectStrings = (value: unknown): readonly string[] => {
@@ -95,7 +85,10 @@ const canonicalEntityIdentity = (
     const label = typeof value.label === 'string' ? value.label : undefined;
     if (contestId && label) return `${contestId}:${label.toLocaleUpperCase('en-US')}`;
   }
-  if (entityType === 'technique_inventory' && typeof value.problemId === 'string') {
+  if (
+    (entityType === 'technique_inventory' || entityType === 'authoring_unit') &&
+    typeof value.problemId === 'string'
+  ) {
     return value.problemId;
   }
   return typeof value.id === 'string' ? value.id : undefined;
@@ -117,8 +110,11 @@ const nodeAliases = (entityType: EntityType, value: Record<string, unknown>): Se
       aliases.add(contestSlotOperationId(contestId, label));
     }
   }
-  if (entityType === 'technique_inventory' && typeof value.problemId === 'string') {
-    aliases.add(`technique-inventory-${value.problemId}`);
+  if (
+    (entityType === 'technique_inventory' || entityType === 'authoring_unit') &&
+    typeof value.problemId === 'string'
+  ) {
+    aliases.add(`${entityType.replace('_', '-')}-${value.problemId}`);
   }
   return aliases;
 };
@@ -377,11 +373,6 @@ const structuredEntityRoots: Readonly<Partial<Record<EntityType, string>>> = {
   tag: structuredContentRoots.tags,
   learning_outcome: structuredContentRoots.learningOutcomes,
   learning_unit: structuredContentRoots.learningUnits,
-  claim: structuredContentRoots.claims,
-  example: structuredContentRoots.examples,
-  exercise: structuredContentRoots.exercises,
-  assessment: structuredContentRoots.assessments,
-  answer_material: structuredContentRoots.answerMaterials,
   source: structuredContentRoots.sources,
 };
 
@@ -419,7 +410,7 @@ const structuredFileNames = (node: CatalogNode): readonly string[] => {
  */
 const nodeOwnsPath = (node: CatalogNode, candidatePath: string): boolean => {
   if (!candidatePath.startsWith('src/content/')) return false;
-  if (node.entityType === 'explanation' || node.entityType === 'learning_unit') {
+  if (node.entityType === 'authoring_unit' || node.entityType === 'learning_unit') {
     if (node.value.docPath === candidatePath) return true;
   }
   if (node.entityType === 'placement') {
@@ -628,7 +619,7 @@ const impactPaths = (node: CatalogNode): readonly string[] => {
 };
 
 const declaredSourcePaths = (node: CatalogNode): readonly string[] => {
-  if (node.entityType === 'explanation' || node.entityType === 'learning_unit') {
+  if (node.entityType === 'authoring_unit' || node.entityType === 'learning_unit') {
     return typeof node.value.docPath === 'string' ? [node.value.docPath] : [];
   }
   if (node.entityType === 'placement') {

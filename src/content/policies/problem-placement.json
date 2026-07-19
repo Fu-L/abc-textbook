@@ -13,7 +13,7 @@
     "learning_outcomes"
   ],
   "inputAttributes": [
-    "primary_explanation_valid",
+    "primary_authoring_unit_valid",
     "algorithm_same",
     "proof_same",
     "complexity_same",
@@ -34,7 +34,7 @@
       "fallback": true,
       "clauses": [],
       "requiredEvidence": [
-        "independent_full_explanation",
+        "independent_full_authoring_unit",
         "source_revision_ids",
         "verification_evidence"
       ]
@@ -46,7 +46,7 @@
       "clauses": [
         {
           "all": [
-            { "attribute": "primary_explanation_valid", "operator": "eq", "value": true },
+            { "attribute": "primary_authoring_unit_valid", "operator": "eq", "value": true },
             { "attribute": "algorithm_same", "operator": "eq", "value": true },
             { "attribute": "proof_same", "operator": "eq", "value": true },
             { "attribute": "complexity_same", "operator": "eq", "value": true },
@@ -65,7 +65,7 @@
         }
       ],
       "requiredEvidence": [
-        "primary_explanation_id",
+        "primary_problem_id",
         "shared_learning_outcome_ids",
         "algorithm_comparison",
         "proof_comparison",
@@ -84,7 +84,7 @@
       "clauses": [
         {
           "all": [
-            { "attribute": "primary_explanation_valid", "operator": "eq", "value": true },
+            { "attribute": "primary_authoring_unit_valid", "operator": "eq", "value": true },
             { "attribute": "algorithm_same", "operator": "eq", "value": true },
             { "attribute": "proof_same", "operator": "eq", "value": true },
             { "attribute": "complexity_same", "operator": "eq", "value": true },
@@ -103,15 +103,15 @@
         }
       ],
       "requiredEvidence": [
-        "primary_explanation_id",
+        "primary_problem_id",
         "shared_learning_outcome_ids",
         "additional_learning",
-        "answer_material",
+        "answer",
         "source_revision_ids",
         "verification_evidence"
       ]
     }
   },
   "ambiguousAction": "on_hold",
-  "digest": "184b1e04fb8ca2e0bad2e17ba68aceb0700137f4b56035d90431fad281ddeb49"
+  "digest": "e011eef7e44221ab59f4834ce643344be105218e4c015d7c9d80796fb86f5e72"
 }

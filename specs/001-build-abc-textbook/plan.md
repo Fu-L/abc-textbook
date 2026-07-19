@@ -113,11 +113,6 @@ src/
 │   ├── tags/
 │   ├── learning-outcomes/
 │   ├── learning-units/
-│   ├── claims/
-│   ├── examples/
-│   ├── exercises/
-│   ├── assessments/
-│   ├── answer-materials/
 │   ├── sources/
 │   ├── glossary/terms.json
 │   ├── policies/
@@ -162,7 +157,7 @@ tests/
 
 docs/
 ├── work-manifests/
-│   └── initial/problem-explanations/
+│   └── initial/problem-authoring-units/
 │       ├── index.json
 │       └── shards/
 ├── reviews/human-content/
@@ -209,7 +204,7 @@ preview cohortは、選定規則をT028で固定し、候補範囲の公式metad
 
 previewは次の縦切りを同一cohortで通す。
 
-`official metadata → Technique Inventory → provisional Tag/Outcome/DAG/Placement → Explanation/Claim/Example/Exercise/AnswerMaterial → static UI/search → local LearningRecord → update preparation/release simulation`
+`official metadata → Technique Inventory → provisional Tag/Outcome/DAG/Placement → ProblemAuthoringUnit/LearningUnit inline content → static UI/search → local LearningRecord → update preparation/release simulation`
 
 各段階はpreview digestを引き継ぎ、失敗時は次段へ進めず具体的なhold reasonを残す。T064で版付きのauthoring skill、入力packet、source normalization、template、version、digestをfreezeし、T051–T054/T119はそのskill manifestを必須入力として同じ`authoringSkillVersion`/`authoringSkillDigest`をcomponent evidenceへ記録する。最小限のUI・学習記録・更新処理は本番用の共通実装をfixtureへ接続して検証し、preview専用の別実装を作らない。T094/T111/T126が固定する`docs/verification/previews/initial-v1/components/learning-records.json`、`ui-search.json`、`update-simulation.json`と、T045/T051–T054のmetadata/taxonomy/content component manifest、T064の`docs/verification/authoring-skill/initial-v1/skill-manifest.json`をT154の明示的な入力にする。T154の`preview:verify`は固定manifestとこれらのartifact digestだけを読み、同一cohort・同一current subject・同一authoring skill subjectで再計算する。全Problemが一つのpreview catalogから問題、解説、Learning Unit、Tag、learning record、update statusへ到達でき、source/claim/example/answer/link/accessibility/rollbackの全適用checkとpolicyに応じたreview evidenceがcurrent digestへ結び付いたときだけ、`staging/previews/<preview-id>/snapshots/<joinDigest>.json`へ不変の`PreviewSnapshot.status=passed`を作成する。canonical snapshotは同一directory内の一時ファイルからrenameして一度だけcommitし、`docs/verification/previews/<preview-id>/preview-join/<joinDigest>.json`には`PreviewSnapshotReference`だけを別途作成する。この二つのdirectoryへの書き込み全体を一つのatomic operationとはみなさず、`staging/previews/<preview-id>/transactions/<joinDigest>.json`のphaseとrecovery手順で、途中停止時はcanonical snapshotを正本に参照だけを再生成する。欠落、stale digest、skill mismatch、失敗check、review不在は新しい`on_hold` snapshotとして保存し、既存snapshotを上書きせず、T159のfinal taxonomy、T065のshard index、T127以降のproduction candidate/approval/publishをpreviewの前提にしてはならない。
 
@@ -234,11 +229,11 @@ previewの仮taxonomyから最終taxonomyへの統合は、T159の`FinalTaxonomy
 - Problem ID、Source Revision、LearningRecordのkeyは変更せず、taxonomy再編で影響する本文、例、演習、解答、placement、索引を`CorrectionImpact`へ完全列挙する。対応未確定の仮entityまたは影響未確認Problemが一つでもあればfinal taxonomyを受理しない。
 - final taxonomyの受理後にのみcanonical contentへmaterializeし、preview snapshotはimmutableな検証証跡として残す。previewの成果物を公開Releaseへ混在させない。
 
-コンテスト番号batchは公式metadata取得と進捗管理にだけ使い、taxonomyや章構成の境界には使わない。content work manifestはOutcome/Problem shard、Claim、Example、Exerciseを独立review unitにし、scope、paths、前提、checks、review evidenceをcontent変更前に固定する。shardは他shardのcanonical fileを編集せず、共有Unit/TagはUS2のfinal taxonomy joinだけが所有する。
+コンテスト番号batchは公式metadata取得と進捗管理にだけ使い、taxonomyや章構成の境界には使わない。content work manifestはOutcome/Problem shardを一問単位の`ProblemAuthoringUnit`集合としてreview unitにし、scope、paths、前提、checks、review evidenceをcontent変更前に固定する。Claim、Example、Exercise、Assessment、Answerを独立review unitや別保存先へ分割しない。shardは他shardのcanonical fileを編集せず、共有LearningUnit/TagはUS2のfinal taxonomy joinだけが所有する。
 
 ### Prerequisites, Placement, and Terminology
 
-共通前提baseline、problem placement decision table、glossaryを別々の唯一の正本にする。全Learning UnitとExplanationはbaseline、追加前提または追加前提なし、対象外を直接参照する。placementは`full`既定で、主要解説と主成果・前提・解法・証明・漸近計算量が同じ場合だけ`similar`、単一の副次的技能だけを追加する場合だけ`supplement`を許す。どの行にも一意に一致しない場合は保留する。
+共通前提baseline、problem placement decision table、glossaryを別々の唯一の正本にする。全LearningUnitとProblemAuthoringUnitはbaseline、追加前提または追加前提なし、対象外を直接参照する。placementは`full`既定で、主要解説と主成果・前提・解法・証明・漸近計算量が同じ場合だけ`similar`、単一の副次的技能だけを追加する場合だけ`supplement`を許す。どの行にも一意に一致しない場合は保留する。
 
 学習順は前提DAGをhard constraintとし、同時に配置可能なUnitの安定rankとUnit IDで決定する。表示上は前提、難易度、代表性による順序理由を確認できるようにする。
 

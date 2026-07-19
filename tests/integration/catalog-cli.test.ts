@@ -15,6 +15,10 @@ import {
   calculateContentSubjectDigest,
 } from '../../src/lib/validation/release-state.js';
 import { calculateContentWorkManifestScopeDigest } from '../../src/lib/validation/content-work-manifest.js';
+import {
+  deriveExecutableExampleInventory,
+  executableExampleInventoryDigest,
+} from '../../src/lib/catalog/build-catalog.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
 
 const execFileAsync = promisify(execFile);
@@ -240,7 +244,7 @@ describe('catalog validation CLI evidence boundary', () => {
       updateIds: ['update-foundation'],
     });
     const baseCatalog = structuredClone(catalog);
-    const explanation = catalog.explanations[0];
+    const explanation = catalog.authoringUnits[0];
     if (!explanation) throw new Error('Fixture explanation is missing.');
     explanation.revision = 2;
     releaseCandidate.advancedSlotRegistryDigest = String(
@@ -269,6 +273,38 @@ describe('catalog validation CLI evidence boundary', () => {
       approvedDigest: releaseCandidate.approvableDigest,
       approvedAt: '2026-07-17T12:50:00+09:00',
     };
+    const executableExampleEvidencePath = 'docs/verification/executable-examples.json';
+    const executableInventory = deriveExecutableExampleInventory(catalog);
+    const executableExampleEvidence = {
+      schemaVersion: '3.0.0' as const,
+      releaseDigest: sha('a'),
+      subjectDigest: catalog.release.contentSnapshotDigest,
+      inventoryDigest: executableExampleInventoryDigest(catalog),
+      inventoryCount: executableInventory.length,
+      checkedCount: executableInventory.length,
+      passedCount: executableInventory.length,
+      failedCount: 0,
+      aggregatePassed: true,
+      items: executableInventory.map((item, index) => ({
+        ...item,
+        subjectDigest: catalog.release.contentSnapshotDigest,
+        releaseDigest: sha('a'),
+        environment: 'Node.js fixture',
+        command: 'node fixture.js',
+        expectedResult: '1',
+        actualResult: '1',
+        exitCode: 0,
+        passed: true,
+        executedAt: '2026-07-17T12:30:00+09:00',
+        resultDigest: sha(String(index + 1)),
+        evidencePath: executableExampleEvidencePath,
+      })),
+      generatedAt: '2026-07-17T12:31:00+09:00',
+    };
+    const executableExampleEvidenceDigest = await writeJson(
+      executableExampleEvidencePath,
+      executableExampleEvidence,
+    );
     const inventoryPath = 'docs/verification/release-evidence-inventory.json';
     await writeJson(inventoryPath, {
       subjectDigest,
@@ -296,6 +332,11 @@ describe('catalog validation CLI evidence boundary', () => {
           aggregatePassed: true,
         },
       ],
+      executableExampleEvidence: {
+        path: executableExampleEvidencePath,
+        digest: executableExampleEvidenceDigest,
+        subjectDigest: catalog.release.contentSnapshotDigest,
+      },
     });
     const manifestPath = 'docs/work-manifests/catalog/manifest.json';
     const candidatePath = 'staging/release-candidates/release-candidate.json';
@@ -313,16 +354,16 @@ describe('catalog validation CLI evidence boundary', () => {
       operations: [
         {
           operationId: 'operation-replace-explanation',
-          entityType: 'explanation',
-          entityId: 'explanation-abc212-x45',
+          entityType: 'authoring_unit',
+          entityId: 'abc212-x45',
           action: 'replace',
           path: contentPath,
           beforeDigest: createHash('sha256').update(baseContent).digest('hex'),
           afterDigest: createHash('sha256').update(content).digest('hex'),
           affectedEntities: [
             {
-              entityType: 'explanation',
-              entityId: 'explanation-abc212-x45',
+              entityType: 'authoring_unit',
+              entityId: 'abc212-x45',
               action: 'replace',
             },
           ],
@@ -333,7 +374,7 @@ describe('catalog validation CLI evidence boundary', () => {
         {
           problemId: 'abc212-x45',
           slotLabel: 'E',
-          resultType: 'explanation_draft',
+          resultType: 'authoring_unit_draft',
           draftPath: 'src/content/docs/index.md',
           packetPath: null,
           templatePath: null,

@@ -45,7 +45,7 @@ const makePublicationUpdate = (): Record<string, unknown> => ({
     {
       problemId: 'abc212-x45',
       slotLabel: 'E',
-      resultType: 'explanation_draft',
+      resultType: 'authoring_unit_draft',
       draftPath: 'src/content/docs/abc212-e.md',
       packetPath: null,
       templatePath: null,
@@ -375,8 +375,8 @@ describe('release state gate', () => {
     correction.operations = [
       {
         operationId: 'operation-replace-explanation',
-        entityType: 'explanation',
-        entityId: 'explanation-abc212-x45',
+        entityType: 'authoring_unit',
+        entityId: 'abc212-x45',
         action: 'replace',
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),
@@ -405,8 +405,8 @@ describe('release state gate', () => {
     mismatchedOperationOwner.operations = [
       {
         operationId: 'operation-replace-explanation',
-        entityType: 'explanation',
-        entityId: 'explanation-abc212-x45',
+        entityType: 'authoring_unit',
+        entityId: 'abc212-x45',
         action: 'replace',
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),
@@ -439,8 +439,8 @@ describe('release state gate', () => {
     update.operations = [
       {
         operationId: 'operation-replace-explanation',
-        entityType: 'explanation',
-        entityId: 'explanation-abc212-x45',
+        entityType: 'authoring_unit',
+        entityId: 'abc212-x45',
         action: 'replace',
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),
@@ -492,8 +492,8 @@ describe('release state gate', () => {
     (_label, actions) => {
       const operations = actions.map((action, index) => ({
         operationId: `operation-shared-${String(index)}`,
-        entityType: index === 0 ? 'explanation' : 'learning_unit',
-        entityId: index === 0 ? 'explanation-abc212-x45' : 'unit-graphs',
+        entityType: index === 0 ? 'authoring_unit' : 'learning_unit',
+        entityId: index === 0 ? 'abc212-x45' : 'unit-graphs',
         action,
         path: 'src/content/docs/index.md',
         beforeDigest: sha('a'),
@@ -527,8 +527,8 @@ describe('release state gate', () => {
     correction.operations = [
       {
         operationId: 'operation-replace-explanation',
-        entityType: 'explanation',
-        entityId: 'explanation-abc212-x45',
+        entityType: 'authoring_unit',
+        entityId: 'abc212-x45',
         action: 'replace',
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),

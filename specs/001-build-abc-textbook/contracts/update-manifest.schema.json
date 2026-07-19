@@ -89,7 +89,7 @@
             "items": {
               "properties": {
                 "resultType": {
-                  "const": "explanation_draft"
+                  "const": "authoring_unit_draft"
                 }
               }
             }
@@ -275,12 +275,7 @@
         "learning_outcome",
         "learning_unit",
         "placement",
-        "explanation",
-        "claim",
-        "example",
-        "exercise",
-        "assessment",
-        "answer_material",
+        "authoring_unit",
         "source",
         "correction_impact"
       ]
@@ -364,7 +359,7 @@
     "__schema15": {
       "type": "string",
       "enum": [
-        "explanation_draft",
+        "authoring_unit_draft",
         "authoring_required",
         "blocked"
       ]

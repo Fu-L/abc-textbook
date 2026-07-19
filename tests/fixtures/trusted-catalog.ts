@@ -12,7 +12,7 @@ const registrySubject = {
 const registryDigest = canonicalDigest(registrySubject);
 
 export const makeTrustedCatalog = (releaseOverrides: Record<string, unknown>) => ({
-  schemaVersion: '2.0.0' as const,
+  schemaVersion: '3.0.0' as const,
   release: {
     version: '2026.07.17',
     releaseKind: 'initial' as const,
@@ -113,7 +113,6 @@ export const makeTrustedCatalog = (releaseOverrides: Record<string, unknown>) =>
       secondaryTagIds: [],
       adHocElements: [],
       placementId: null,
-      explanationId: 'explanation-abc212-x45',
     },
   ],
   techniqueInventory: [
@@ -152,7 +151,6 @@ export const makeTrustedCatalog = (releaseOverrides: Record<string, unknown>) =>
       statement: 'Explain the fixture graph method.',
       prerequisiteOutcomeIds: [],
       scopeIds: ['tag-graphs'],
-      assessmentIds: ['assessment-graphs'],
     },
   ],
   learningUnits: [
@@ -169,9 +167,39 @@ export const makeTrustedCatalog = (releaseOverrides: Record<string, unknown>) =>
       tagIds: ['tag-graphs'],
       learningOutcomeIds: ['outcome-graphs'],
       docPath: 'src/content/docs/index.md',
-      exampleIds: ['example-graphs'],
       problemIds: ['abc212-x45'],
-      assessmentIds: ['assessment-graphs'],
+      examples: [
+        {
+          key: 'unit-intuition',
+          learningOutcomeIds: ['outcome-graphs'],
+          kind: 'illustrative' as const,
+          language: 'text',
+          omissions: [],
+          environment: 'Textbook page.',
+          input: 'Fixture graph.',
+          procedure: ['Trace the fixture graph.'],
+          expectedResult: 'The transition is identified.',
+          verificationStatus: 'not_applicable' as const,
+        },
+      ],
+      exercises: [
+        {
+          key: 'unit-check',
+          learningOutcomeIds: ['outcome-graphs'],
+          prerequisiteIds: [],
+          attainmentCondition: 'Explain the fixture transition.',
+          assessment: {
+            method: 'Compare the explanation with the invariant.',
+            successCondition: 'The invariant and transition are both stated.',
+          },
+          answer: {
+            reasoningOrVerification: 'The fixture transition preserves the invariant.',
+            procedure: ['Check the invariant before and after the transition.'],
+            expectedResult: 'The invariant is preserved.',
+            verificationStatus: 'passed' as const,
+          },
+        },
+      ],
       stageRank: 0,
       difficultyRank: 0,
       representativeRank: 0,
@@ -180,12 +208,11 @@ export const makeTrustedCatalog = (releaseOverrides: Record<string, unknown>) =>
     },
   ],
   placements: [],
-  explanations: [
+  authoringUnits: [
     {
-      id: 'explanation-abc212-x45',
       problemId: 'abc212-x45',
       kind: 'full' as const,
-      primaryExplanationId: null,
+      primaryProblemId: null,
       differenceSummary: null,
       docPath: 'src/content/docs/index.md',
       learningOutcomeIds: ['outcome-graphs'],
@@ -195,13 +222,60 @@ export const makeTrustedCatalog = (releaseOverrides: Record<string, unknown>) =>
       excludedTopics: [],
       tagIds: ['tag-graphs'],
       sourceRevisionIds: ['source-revision-abc212-e'],
-      claimIds: ['claim-graphs'],
-      exampleIds: ['example-graphs'],
-      skillName: 'fixture-skill',
-      skillVersion: '1.0.0',
-      skillDigest: sha('a'),
+      skill: { name: 'fixture-skill', version: '1.0.0', digest: sha('a') },
       revision: 1,
-      sections: { overview: 'Fixture explanation.' },
+      sections: {
+        reasoning: 'Fixture reasoning.',
+        technique: 'Fixture technique.',
+        problemSpecificElements: 'Fixture-specific elements.',
+        reviewAdvice: 'Fixture review advice.',
+        correctness: 'Fixture correctness argument.',
+        complexity: { time: 'O(1)', space: 'O(1)' },
+        constraintConsistency: 'Fixture constraints are consistent.',
+        implementationNotes: 'Fixture implementation notes.',
+      },
+      claims: [
+        {
+          key: 'method-correctness',
+          text: 'Fixture claim.',
+          sourceRevisionIds: ['source-revision-abc212-e'],
+          authorId: 'person-author',
+          verificationStatus: 'verified' as const,
+        },
+      ],
+      examples: [
+        {
+          key: 'minimal-case',
+          learningOutcomeIds: ['outcome-graphs'],
+          learningUnitIds: ['unit-graphs'],
+          kind: 'executable' as const,
+          language: 'text',
+          omissions: [],
+          environment: 'Fixture environment.',
+          input: '1',
+          procedure: ['Run fixture.'],
+          expectedResult: '1',
+          verificationStatus: 'passed' as const,
+        },
+      ],
+      exercises: [
+        {
+          key: 'apply-method',
+          learningOutcomeIds: ['outcome-graphs'],
+          prerequisiteIds: [],
+          attainmentCondition: 'Fixture condition.',
+          assessment: {
+            method: 'Fixture assessment.',
+            successCondition: 'Fixture success.',
+          },
+          answer: {
+            reasoningOrVerification: 'Fixture answer.',
+            procedure: ['Verify fixture.'],
+            expectedResult: '1',
+            verificationStatus: 'passed' as const,
+          },
+        },
+      ],
     },
   ],
   sources: [
@@ -216,55 +290,4 @@ export const makeTrustedCatalog = (releaseOverrides: Record<string, unknown>) =>
     },
   ],
   correctionImpacts: [],
-  claims: [
-    {
-      id: 'claim-graphs',
-      text: 'Fixture claim.',
-      sourceRevisionIds: ['source-revision-abc212-e'],
-      authorId: 'person-author',
-      verificationStatus: 'verified' as const,
-    },
-  ],
-  examples: [
-    {
-      id: 'example-graphs',
-      learningOutcomeIds: ['outcome-graphs'],
-      ownerExplanationIds: ['explanation-abc212-x45'],
-      ownerLearningUnitIds: ['unit-graphs'],
-      environment: 'Fixture environment.',
-      input: '1',
-      procedure: ['Run fixture.'],
-      expectedResult: '1',
-      verificationStatus: 'passed' as const,
-    },
-  ],
-  exercises: [
-    {
-      id: 'exercise-graphs',
-      problemId: 'abc212-x45',
-      learningOutcomeIds: ['outcome-graphs'],
-      prerequisiteIds: [],
-      attainmentCondition: 'Fixture condition.',
-      assessmentId: 'assessment-graphs',
-      answerMaterialId: 'answer-graphs',
-    },
-  ],
-  assessments: [
-    {
-      id: 'assessment-graphs',
-      learningOutcomeIds: ['outcome-graphs'],
-      method: 'Fixture assessment.',
-      successCondition: 'Fixture success.',
-    },
-  ],
-  answerMaterials: [
-    {
-      id: 'answer-graphs',
-      exerciseId: 'exercise-graphs',
-      reasoningOrVerification: 'Fixture answer.',
-      procedure: ['Verify fixture.'],
-      expectedResult: '1',
-      verificationStatus: 'passed' as const,
-    },
-  ],
 });
