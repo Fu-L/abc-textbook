@@ -1,6 +1,6 @@
 # Data Model: ABC上級問題体系化教科書
 
-**Updated**: 2026-07-14
+**Updated**: 2026-07-19
 
 ## 1. Canonical conventions
 
@@ -102,6 +102,125 @@ taxonomy作成前に全Problemへちょうど一件作る分析正本である�
 
 公開taxonomyを作る前に、対象Problem ID集合とInventoryのProblem ID集合が完全一致しなければならない。
 
+### PreviewCohortCandidatePool
+
+`initial-v1`のcohortを選ぶために、候補範囲の公式metadataから作る軽量な選定入力である。`staging/previews/<preview-id>/candidate-pool.json`に保存し、previewのTechnique Inventoryや公開taxonomyとは別のnamespaceで管理する。
+
+| Field | Rule |
+|---|---|
+| `problemId` / `contestNumber` / `officialTaskOrder` | 公式metadataから取得した安定識別子と公式順 |
+| `advancedLabel` | Dより後の公式task label |
+| `sourceRevisionIds` | 問題の存在、順序、label、分類候補の根拠 |
+| `candidateDomains` / `candidateOutcomeIds` | 公式根拠から作った軽量な分野・成果候補。完全なTechniqueInventoryではない |
+| `selectionEligible` / `exclusionReason` | cohort選定に使えるかと、使えない場合の具体的理由 |
+| `fixtureId` | fixture由来なら実データと区別するID、実データならnull |
+| `candidatePoolDigest` | 全候補とSource Revisionを含む不変digest |
+
+候補分類は主解法・証明・計算量を確定する完全棚卸しではなく、選定規則を機械的に評価するためのsource-backedな入力に限る。Tag、LearningUnit、canonical Problemの分類を作成してはならず、T037のcohort manifestはこのpoolのdigestを固定した後にだけ生成できる。
+
+### PreviewSnapshot
+
+全コーパス完成前に設計を実データで検証するprivate previewの不変snapshotである。公開Catalogのentityではなく、唯一の正本を`staging/previews/<preview-id>/snapshots/<joinDigest>.json`に保存する。同じpreviewを再検証しても既存snapshotを上書きせず、新しいjoin digestのsnapshotを追加する。
+
+| Field | Rule |
+|---|---|
+| `previewId` | `initial-v1`などの版付き安定ID |
+| `manifestDigest` | T037でfreezeしたcohort manifestの不変digest |
+| `candidatePoolDigest` | cohort選定に使ったPreviewCohortCandidatePoolのdigest |
+| `problemIds` | 4分野、8 Problem以上、3 Contest以上、2 advanced label以上を満たす選定集合 |
+| `sourceRevisionIds` | 選定根拠のSource Revision集合。fixture使用時はfixture IDを別記録 |
+| `provisionalTaxonomyDigest` | 仮Tag/Outcome/Unit/DAG/Placementのdigest。canonical taxonomyのdigestとは別物 |
+| `componentDigests` | metadata、inventory、content、UI/search、LearningRecord、update simulationの各digest |
+| `authoringSkillVersion` / `authoringSkillDigest` | preview content/updateが使用したT064の版付きskill。component subjectと一致しなければならない |
+| `checkResultIds` | joinで再確認した全適用checkの結果ID集合。欠落・失敗・stale subjectを許可しない |
+| `reviewEvidenceIds` | componentとjoinのcurrent-subject self/third-party review evidence集合。review policyとmodeが一致しなければならない |
+| `joinDigest` | frozen manifest、component digest、check結果、review evidenceを含む不変のjoin digest |
+| `holdReason` | 条件未達または検証失敗時の具体的理由。PASS時はnull |
+| `status` | `draft`, `on_hold`, `passed`。`passed`でも公開Releaseへ昇格しない |
+
+Previewはcanonical `Problem.id`、`SourceRevision.id`、`LearningRecord.problemId`を再採番してはならない。previewのcontentと仮taxonomyはnamespace付きpathに隔離し、公開catalog loaderとPagefindから除外する。
+
+### PreviewSnapshotReference
+
+監査・検索用の派生参照であり、`PreviewSnapshot`の複製ではない。`docs/verification/previews/<preview-id>/preview-join/<joinDigest>.json`に保存し、合否の正本は常にcanonical snapshotへ解決する。
+
+| Field | Rule |
+|---|---|
+| `previewId` / `joinDigest` | 参照対象のpreviewとcanonical snapshotを識別する |
+| `canonicalSnapshotPath` | `staging/previews/<preview-id>/snapshots/<joinDigest>.json`の固定path |
+| `canonicalSnapshotDigest` | 参照作成時に読み取ったcanonical snapshotのdigest |
+| `status` | canonical snapshotから再計算した表示用status |
+| `transactionId` | PreviewSnapshotCommitのID |
+
+参照はcanonical snapshotが存在し、path上の内容が`joinDigest`と一致した後にだけ作成する。参照の欠落・古さはcanonical snapshotの再作成を意味せず、再実行で参照だけを修復できる。参照単体を`passed`の証拠として扱ってはならない。
+
+### PreviewSnapshotCommit
+
+canonical snapshotと派生参照を異なるdirectoryへ書く処理を追跡するtransaction manifestである。`staging/previews/<preview-id>/transactions/<joinDigest>.json`に保存し、phase更新自体も同じdirectory内の一時ファイルからrenameして行う。
+
+| Field | Rule |
+|---|---|
+| `transactionId` / `joinDigest` | 一回のjoin結果に対する安定ID |
+| `canonicalSnapshotPath` / `referencePath` | 二つの保存先を明示する |
+| `phase` | `prepared`、`snapshot_committed`、`reference_committed`、`verified`、`recovery_required`の単調な状態 |
+| `canonicalSnapshotDigest` | commit後に検証したcanonical snapshotのdigest |
+| `recoveryReason` | 中断・I/O失敗・stale参照などの具体的理由。正常時はnull |
+
+canonical snapshotは同じdirectory内の一時ファイルから一回だけrenameしてcommitし、既存pathを上書きしない。参照はその後に別の一時ファイルからrenameする。二つのdirectoryをまたぐ処理全体を一つのfilesystem atomic operationとはみなさず、途中停止時はtransaction manifestを読み、canonical snapshotを正本として参照を再生成または保留する。
+
+### TaxonomyIntegrationMap
+
+Previewの仮taxonomyを全コーパスから再生成したfinal taxonomyへ統合する監査正本である。`docs/verification/previews/<preview-id>/taxonomy-integration.json`へ保存する。
+
+| Field | Rule |
+|---|---|
+| `previewEntityId` / `previewEntityKind` | 仮Tag、Outcome、Unitのnamespace付きID |
+| `action` | `promote`, `merge`, `split`, `retire`のいずれか一つ |
+| `finalEntityIds` | `promote`/`merge`は一つ、`split`は二つ以上、`retire`は空 |
+| `affectedProblemIds` | 仮entityが参照した全Problem。split時は各final entityへの再分類結果も保持 |
+| `rationale` / `evidenceIds` | 定義、前提、成果、代表性、全inventoryとの比較根拠 |
+| `aliasOrRedirects` | merge/retire時の旧名称・旧IDの検索/参照移行 |
+| `reviewMode` / `reviewEvidenceId` | major classification changeを含む場合は`third_party`、それ以外は固定policyに従う |
+| `status` | `proposed`, `accepted`, `rejected`。未acceptedはcanonicalへmaterialize不可 |
+
+Integration mapは仮DAGをfinalへコピーする記録ではない。final Inventory全件からTag/Outcome/UnitのDAG、標準順、ProblemPlacementを再計算した結果と照合し、未知参照、循環、未分類Problem、影響未列挙が0件の場合だけ`accepted`にできる。
+
+### FinalTaxonomyBuild
+
+全コーパスのTechnique Inventoryとpreview統合結果から一度だけ生成し、T047–T050がcanonical entityへmaterializeする前のfinal taxonomy受理単位である。候補は`staging/taxonomy/`に置き、未`accepted`の候補を`src/content/`や公開catalogへ読み込んではならない。
+
+| Field | Rule |
+|---|---|
+| `inventoryDigest` | T044で完全一致を確認した全Problem/TechniqueInventory集合のdigest |
+| `previewSnapshotDigest` | T154の`passed` snapshot。preview成功を全件coverageの代替にしない |
+| `integrationMapDigest` | 仮Tag/Outcome/Unit全件の`promote`/`merge`/`split`/`retire`対応表 |
+| `taxonomyDigest` | final Tag/Outcome/LearningUnit候補、定義、成果、代表問題のdigest |
+| `tagDagDigest` / `learningUnitDagDigest` | 別々に再計算した前提DAGと未知参照・循環なしの証跡 |
+| `orderDigest` / `placementDigest` | 決定的標準順と全ProblemPlacementのdigest |
+| `correctionImpactDigest` | taxonomy再編が本文、例、演習、解答、順序、索引へ与える影響の全件digest |
+| `sourceRevisionIds` | 候補と分類判断の根拠。staleまたは矛盾した根拠は受理不可 |
+| `reviewEvidenceIds` | 固定policyに従ったcurrent-subject self/third-party evidence |
+| `status` / `acceptedAt` | `proposed`, `accepted`, `rejected`。`accepted`のみT047–T050がmaterialize可能 |
+
+`FinalTaxonomyBuild`は同じ`inventoryDigest`、`previewSnapshotDigest`、policy、入力bytesから同じ結果を得られなければならない。preview候補の名称一致だけでfinal entityを作ること、integration mapの未対応・影響未列挙、final DAGの再計算を省略することを拒否する。
+
+### OutcomeProblemShardManifest
+
+最終ProblemPlacementから決定生成される、解説作業の最小追跡単位である。Contest batchやdomainの進捗表ではなく、各shardを単独でbuild・review・previewできるwork manifestとして扱う。
+
+| Field | Rule |
+|---|---|
+| `shardId` | `outcomeId`と安定ordinalから導出し、Problemの表示名変更で変えない |
+| `primaryOutcomeId` | ちょうど一つ。Problemのprimary outcomeと一致する |
+| `problemIds` | 1〜8件、canonical official orderの連続chunk、shard間で重複なし |
+| `itemIds` | 所有するExplanation、Claim、Example、Exercise、AnswerMaterialの完全なID集合 |
+| `paths` | shard専有のcanonical/staging path集合。別shard・共有Unit/Tag pathとの重複を拒否 |
+| `dependencyShardIds` | 前提を満たすために必要なshardの集合。循環不可 |
+| `checkIds` / `evidencePaths` | source、structure、example、answer、link、accessibility、review、previewの適用checkと出力先 |
+| `status` | `generated`, `in_progress`, `on_hold`, `reviewed`, `joined` |
+
+shard indexのProblem ID集合は、final Catalogの全対象Problem集合と完全一致しなければならない。生成順やshard境界の変更は、同じ入力からindexを再生成し、旧indexとの差分と影響するLearningRecord以外のCorrectionImpactを残して行う。
+
 ### TechniqueTag
 
 | Field | Rule |
@@ -170,6 +289,19 @@ taxonomy作成前に全Problemへちょうど一件作る分析正本である�
 Problemに対応する学習用本文で、`full`では独立本文、`similar`/`supplement`では主要解説への参照と差分本文を持つ。
 
 必須参照はProblem、Learning Outcome、baseline、追加前提、excludedTopics、Technique Tag、Source Revision、Technical Claim、Reproducible Example、authoring skill version/digestである。完全解説は考察、学ぶべき典型・ad-hoc要素、助言、正当性、計算量、制約整合、実装注意、例または検証手順を持つ。
+
+### AuthoringSkillRevision
+
+解説とupdate authoringが参照する、版付きで自己完結した執筆契約である。T064で作成し、preview componentと全Explanationから同じ版・digestへ追跡できなければならない。
+
+| Field | Rule |
+|---|---|
+| `version` / `digest` | skill本文、references、templates、input/output contractのcanonical digest |
+| `inputRequirements` | source revision、制約、確認日、利用条件、Problem/Outcome前提の必須入力 |
+| `outputContract` | Explanation/Claim/Example/Exercise/AnswerMaterialの必須構造と不足時の状態 |
+| `referencePaths` / `templatePaths` | skillから直接解決できるrepo-relative path。root promptへの暗黙依存を許可しない |
+| `sourceNormalizationVersion` | 公式根拠の正規化規則の版 |
+| `status` | `frozen`のみpreview/full authoringの入力として使用可能 |
 
 ### TechnicalClaim
 
@@ -264,7 +396,7 @@ candidate ID、release version、approved digest、公開前後tree digest、切
 
 実装・content変更前に作るversion-controlled scopeである。top-levelにtask ID、scope digest、required requirement IDs、learning outcome IDs、固定したreview policy、review units、stateを持つ。review policyは`self`または`third_party`の必須modeと、公式根拠との矛盾・独自証明・重大な分類変更から選ぶrisk reasonを持つ。各review unitは重複しないpaths、item IDs、requirements、outcomes、依存unit、checks、evidence role、owner、statusを持つ。
 
-content review unitはContest batchではなくLearning Outcome、Problem、Claim、Example、Exercise等の独立対象にする。tooling/abstractionには具体的なmaintenance benefitを必須にする。
+content review unitはContest batchではなくOutcome/Problem shard、Problem、Claim、Example、Exercise等の独立対象にする。Outcome/Problem shardは一つのprimary Learning Outcomeに属するProblem IDを公式順に最大8件ずつ分割し、paths、item IDs、dependency unit、checks、evidenceを単独で解決できなければならない。tooling/abstractionには具体的なmaintenance benefitを必須にする。
 
 ### HumanContentReviewEvidence
 
@@ -319,3 +451,5 @@ SC-012について、全公開Problem routeが共有LearningRecord component/act
 10. 全適用checkとreview policyに応じたselfまたはthird-party reviewがcurrent subjectで成功する。
 11. owner approval後にcandidate bytesが変化していない。
 12. contest matrix、search、simple local learning managementが公開Problemで利用可能である。
+13. private preview、仮taxonomy、未結合shard、preview-only evidenceが公開content treeへ入っていない。
+14. `FR-001`/`SC-001`に対応するABC 212〜cutoffの連続性とDより後のProblem 100% coverageを、previewとは独立したfinal candidateから再計算できる。
