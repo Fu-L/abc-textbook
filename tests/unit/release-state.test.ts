@@ -424,6 +424,51 @@ describe('release state gate', () => {
     }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
   });
 
+  it('allows entity operations for one file to share the file transition', () => {
+    const update = makePublicationUpdate();
+    update.operations = [
+      {
+        operationId: 'operation-replace-explanation',
+        entityType: 'explanation',
+        entityId: 'explanation-abc212-x45',
+        action: 'replace',
+        path: 'src/content/docs/abc212-e.md',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+        affectedProblemIds: ['abc212-x45'],
+      },
+      {
+        operationId: 'operation-replace-learning-unit',
+        entityType: 'learning_unit',
+        entityId: 'unit-graphs',
+        action: 'replace',
+        path: 'src/content/docs/abc212-e.md',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+        affectedProblemIds: ['abc212-x45'],
+      },
+    ];
+    const operations = update.operations as {
+      operationId: string;
+      affectedProblemIds: string[];
+      entityType: string;
+      entityId: string;
+      action: 'add' | 'replace' | 'remove';
+      path: string;
+      beforeDigest: string | null;
+      afterDigest: string | null;
+    }[];
+    const trusted = {
+      operationOwnership: operations,
+      baseFiles: [{ path: 'src/content/docs/abc212-e.md', sha256: sha('a'), byteLength: 10 }],
+      currentFiles: [{ path: 'src/content/docs/abc212-e.md', sha256: sha('b'), byteLength: 11 }],
+    };
+
+    expect(() => {
+      validatePublicationUpdate(update, trusted);
+    }).not.toThrow();
+  });
+
   it('fails closed when update ownership is not independently trusted', () => {
     const update = makePublicationUpdate();
     expect(() => {

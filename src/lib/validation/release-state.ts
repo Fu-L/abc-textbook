@@ -213,7 +213,6 @@ export const validatePublicationUpdate = (
         'Trusted publication file inventories must contain unique paths.',
       );
     }
-    const operationPaths = new Set<string>();
     for (const operation of update.operations) {
       const expected = trustedOperations.get(operation.operationId);
       if (expected?.path === undefined) {
@@ -235,13 +234,6 @@ export const validatePublicationUpdate = (
           `Operation ${operation.operationId} does not reproduce the trusted file diff.`,
         );
       }
-      if (operationPaths.has(operation.path)) {
-        throw new ReleaseTransitionError(
-          'PUBLICATION_UPDATE_DIFF_INVALID',
-          `Operation path ${operation.path} is claimed more than once.`,
-        );
-      }
-      operationPaths.add(operation.path);
       const before = baseFiles.get(operation.path);
       const after = currentFiles.get(operation.path);
       const validTransition =

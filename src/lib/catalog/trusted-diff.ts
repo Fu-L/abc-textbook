@@ -1,5 +1,6 @@
 import type { z } from 'zod';
 
+import { canonicalJson } from '../domain/canonical-json.js';
 import { ProblemIdSchema, CatalogSchema } from '../domain/schema-parts/catalog.js';
 import type { PublicationUpdateSchema } from '../domain/schema-parts/release.js';
 
@@ -63,8 +64,10 @@ const collectProblemIds = (value: unknown): readonly string[] =>
 interface CatalogNode {
   readonly key: string;
   readonly entityType: EntityType;
+  readonly identity: string;
   readonly aliases: ReadonlySet<string>;
   readonly value: Record<string, unknown>;
+  readonly projection: string;
   readonly directProblemIds: readonly string[];
   readonly references: Set<string>;
 }
@@ -72,8 +75,25 @@ interface CatalogNode {
 const operationAlias = (entityType: EntityType, entityId: string): string =>
   `${entityType}\u0000${entityId}`;
 
+const canonicalEntityIdentity = (
+  entityType: EntityType,
+  value: Record<string, unknown>,
+): string | undefined => {
+  if (entityType === 'contest_slot') {
+    const contestId = typeof value.contestId === 'string' ? value.contestId : undefined;
+    const label = typeof value.label === 'string' ? value.label : undefined;
+    if (contestId && label) return `${contestId}:${label}`;
+  }
+  if (entityType === 'technique_inventory' && typeof value.problemId === 'string') {
+    return value.problemId;
+  }
+  return typeof value.id === 'string' ? value.id : undefined;
+};
+
 const nodeAliases = (entityType: EntityType, value: Record<string, unknown>): Set<string> => {
   const aliases = new Set<string>();
+  const identity = canonicalEntityIdentity(entityType, value);
+  if (identity) aliases.add(identity);
   if (typeof value.id === 'string') aliases.add(value.id);
   if (typeof value.problemId === 'string') aliases.add(value.problemId);
   if (entityType === 'contest_slot') {
@@ -93,6 +113,7 @@ const nodeAliases = (entityType: EntityType, value: Record<string, unknown>): Se
 
 class CatalogGraph {
   private readonly nodes = new Map<string, CatalogNode>();
+  private readonly nodesByEntityKey = new Map<string, CatalogNode>();
   private readonly byTypeAndAlias = new Map<string, CatalogNode>();
   private readonly byAlias = new Map<string, CatalogNode[]>();
   private readonly reverseReferences = new Map<string, Set<string>>();
@@ -104,22 +125,62 @@ class CatalogGraph {
       if (!Array.isArray(values)) continue;
       values.forEach((value, index) => {
         const record = value as Record<string, unknown>;
+        const identity = canonicalEntityIdentity(entityType, record);
+        if (!identity) {
+          throw new TrustedCatalogDiffError(
+            'CANONICAL_CATALOG_ENTITY_ID_INVALID',
+            `${entityType} at index ${String(index)} has no stable identity.`,
+          );
+        }
         const aliases = nodeAliases(entityType, record);
-        if (aliases.size === 0) return;
+        const entityKey = operationAlias(entityType, identity);
+        if (this.nodesByEntityKey.has(entityKey)) {
+          throw new TrustedCatalogDiffError(
+            'CANONICAL_CATALOG_ENTITY_DUPLICATE',
+            `${entityType}:${identity} occurs more than once in the Catalog.`,
+          );
+        }
         const firstAlias = [...aliases][0];
-        if (!firstAlias) return;
+        if (!firstAlias) {
+          throw new TrustedCatalogDiffError(
+            'CANONICAL_CATALOG_ENTITY_ID_INVALID',
+            `${entityType}:${identity} has no resolvable alias.`,
+          );
+        }
+        let projection: string;
+        try {
+          projection = canonicalJson(record);
+        } catch (error) {
+          throw new TrustedCatalogDiffError(
+            'CANONICAL_CATALOG_PROJECTION_INVALID',
+            `${entityType}:${identity} is not canonical JSON: ${
+              error instanceof Error ? error.message : String(error)
+            }`,
+          );
+        }
         const key = `${entityType}:${firstAlias}:${String(index)}`;
         const node: CatalogNode = {
           key,
           entityType,
+          identity,
           aliases,
           value: record,
+          projection,
           directProblemIds: collectProblemIds(record),
           references: new Set(),
         };
         this.nodes.set(key, node);
+        this.nodesByEntityKey.set(entityKey, node);
         for (const alias of aliases) {
-          this.byTypeAndAlias.set(operationAlias(entityType, alias), node);
+          const aliasKey = operationAlias(entityType, alias);
+          const previous = this.byTypeAndAlias.get(aliasKey);
+          if (previous && previous !== node) {
+            throw new TrustedCatalogDiffError(
+              'CANONICAL_CATALOG_ENTITY_ALIAS_DUPLICATE',
+              `${entityType}:${alias} resolves to more than one Catalog entity.`,
+            );
+          }
+          this.byTypeAndAlias.set(aliasKey, node);
           const nodes = this.byAlias.get(alias) ?? [];
           nodes.push(node);
           this.byAlias.set(alias, nodes);
@@ -141,6 +202,10 @@ class CatalogGraph {
 
   resolve(entityType: EntityType, entityId: string): CatalogNode | undefined {
     return this.byTypeAndAlias.get(operationAlias(entityType, entityId));
+  }
+
+  entityNodes(): readonly CatalogNode[] {
+    return [...this.nodesByEntityKey.values()];
   }
 
   referencedNodes(node: CatalogNode): readonly CatalogNode[] {
@@ -215,6 +280,155 @@ interface CatalogGraphPair {
   readonly base: CatalogGraph;
   readonly current: CatalogGraph;
 }
+
+interface CatalogEntityDiff {
+  readonly key: string;
+  readonly entityType: EntityType;
+  readonly entityId: string;
+  readonly action: PublicationOperation['action'];
+  readonly base: CatalogNode | undefined;
+  readonly current: CatalogNode | undefined;
+}
+
+const structuredEntityRoots: Readonly<Partial<Record<EntityType, string>>> = {
+  contest: 'src/content/contests',
+  contest_slot: 'src/content/problem-slots',
+  problem: 'src/content/problems',
+  technique_inventory: 'src/content/technique-inventory',
+  tag: 'src/content/tags',
+  learning_outcome: 'src/content/learning-outcomes',
+  learning_unit: 'src/content/learning-units',
+  claim: 'src/content/claims',
+  example: 'src/content/examples',
+  exercise: 'src/content/exercises',
+  assessment: 'src/content/assessments',
+  answer_material: 'src/content/answer-materials',
+  source: 'src/content/sources',
+};
+
+const pathBasename = (value: string): string => value.slice(value.lastIndexOf('/') + 1);
+
+const pathHasRoot = (value: string, root: string): boolean =>
+  value.startsWith(`${root}/`) && value.endsWith('.json');
+
+const structuredFileNames = (node: CatalogNode): readonly string[] => {
+  const candidates = new Set<string>();
+  candidates.add(node.identity);
+  if (typeof node.value.id === 'string') candidates.add(node.value.id);
+  if (typeof node.value.problemId === 'string') candidates.add(node.value.problemId);
+  if (node.entityType === 'contest_slot') {
+    const contestId = typeof node.value.contestId === 'string' ? node.value.contestId : undefined;
+    const label = typeof node.value.label === 'string' ? node.value.label : undefined;
+    if (contestId && label) {
+      candidates.add(`${contestId}-${label.toLocaleLowerCase('en-US')}`);
+      candidates.add(`${contestId}_${label.toLocaleLowerCase('en-US')}`);
+      candidates.add(contestId);
+    }
+  }
+  return [...candidates];
+};
+
+/**
+ * Canonical source ownership for Catalog entities.
+ *
+ * Structured records are one JSON object per file, with arbitrary shard
+ * directories allowed below their collection root. Explanations and learning
+ * units additionally own their declared Markdown docPath. A Markdown file may
+ * therefore be owned by multiple entity projections; operations may repeat
+ * that path when each operation has the same file transition.
+ */
+const nodeOwnsPath = (node: CatalogNode, candidatePath: string): boolean => {
+  if (!candidatePath.startsWith('src/content/')) return false;
+  if (node.entityType === 'explanation' || node.entityType === 'learning_unit') {
+    if (node.value.docPath === candidatePath) return true;
+  }
+  if (node.entityType === 'placement') {
+    return candidatePath === 'src/content/policies/problem-placements.json';
+  }
+  if (node.entityType === 'correction_impact') {
+    const paths = impactPaths(node);
+    return paths.includes(candidatePath);
+  }
+  const root = structuredEntityRoots[node.entityType];
+  if (!root || !pathHasRoot(candidatePath, root)) return false;
+  const basename = pathBasename(candidatePath).replace(/\.json$/u, '');
+  return structuredFileNames(node).includes(basename);
+};
+
+const catalogEntityDiffs = (pair: CatalogGraphPair): readonly CatalogEntityDiff[] => {
+  const baseByKey = new Map(
+    pair.base.entityNodes().map((node) => [operationAlias(node.entityType, node.identity), node]),
+  );
+  const currentByKey = new Map(
+    pair.current
+      .entityNodes()
+      .map((node) => [operationAlias(node.entityType, node.identity), node]),
+  );
+  const keys = [...new Set([...baseByKey.keys(), ...currentByKey.keys()])].sort();
+  return keys.flatMap((key) => {
+    const base = baseByKey.get(key);
+    const current = currentByKey.get(key);
+    const node = current ?? base;
+    if (!node) return [];
+    const action: PublicationOperation['action'] | undefined = !base
+      ? 'add'
+      : !current
+        ? 'remove'
+        : base.projection === current.projection
+          ? undefined
+          : 'replace';
+    if (!action) return [];
+    return [
+      {
+        key,
+        entityType: node.entityType,
+        entityId: node.identity,
+        action,
+        base,
+        current,
+      },
+    ];
+  });
+};
+
+const resolveEntityDiff = (
+  pair: CatalogGraphPair,
+  diffs: ReadonlyMap<string, CatalogEntityDiff>,
+  operation: PublicationOperation,
+): CatalogEntityDiff => {
+  const nodes = resolveNodes(pair, operation);
+  const node = nodes[0];
+  if (!node) {
+    throw new TrustedCatalogDiffError(
+      'PUBLICATION_UPDATE_ENTITY_NOT_FOUND',
+      `Cannot resolve ${operation.entityType}:${operation.entityId} in the trusted Catalogs.`,
+    );
+  }
+  const diff = diffs.get(operationAlias(node.entityType, node.identity));
+  if (diff?.action !== operation.action) {
+    throw new TrustedCatalogDiffError(
+      'PUBLICATION_UPDATE_ENTITY_DIFF_INVALID',
+      `${operation.operationId} does not correspond to a changed ${operation.entityType}:${node.identity} Catalog projection.`,
+    );
+  }
+  const ownedNodes =
+    operation.action === 'add'
+      ? [diff.current]
+      : operation.action === 'remove'
+        ? [diff.base]
+        : [diff.base, diff.current];
+  if (
+    ownedNodes.some(
+      (ownedNode) => ownedNode === undefined || !nodeOwnsPath(ownedNode, operation.path),
+    )
+  ) {
+    throw new TrustedCatalogDiffError(
+      'PUBLICATION_UPDATE_ENTITY_PATH_INVALID',
+      `${operation.operationId} claims ${operation.path}, which is not a canonical source path for ${operation.entityType}:${node.identity}.`,
+    );
+  }
+  return diff;
+};
 
 const resolveNodes = (
   pair: CatalogGraphPair,
@@ -367,9 +581,14 @@ export const buildTrustedPublicationDiff = (
     base: new CatalogGraph(baseCatalog),
     current: new CatalogGraph(currentCatalog),
   };
-  return {
-    updates: updates.map((update) => {
-      const operationOwnership = update.operations.map((operation) => ({
+  const entityDiffs = catalogEntityDiffs(pair);
+  const entityDiffByKey = new Map(entityDiffs.map((diff) => [diff.key, diff]));
+  const representedEntityDiffs = new Set<string>();
+  const trustedUpdates = updates.map((update) => {
+    const operationOwnership = update.operations.map((operation) => {
+      const diff = resolveEntityDiff(pair, entityDiffByKey, operation);
+      representedEntityDiffs.add(diff.key);
+      return {
         operationId: operation.operationId,
         affectedProblemIds: operationProblemIds(pair, operation),
         entityType: operation.entityType,
@@ -378,17 +597,25 @@ export const buildTrustedPublicationDiff = (
         path: operation.path,
         beforeDigest: operation.beforeDigest,
         afterDigest: operation.afterDigest,
-      }));
-      return {
-        updateId: update.updateId,
-        operationOwnership,
-        correctionImpacts:
-          update.kind === 'correction'
-            ? deriveCorrectionImpacts(update, pair, operationOwnership)
-            : [],
       };
-    }),
-  };
+    });
+    return {
+      updateId: update.updateId,
+      operationOwnership,
+      correctionImpacts:
+        update.kind === 'correction'
+          ? deriveCorrectionImpacts(update, pair, operationOwnership)
+          : [],
+    };
+  });
+  const missingEntityDiff = entityDiffs.find((diff) => !representedEntityDiffs.has(diff.key));
+  if (missingEntityDiff) {
+    throw new TrustedCatalogDiffError(
+      'PUBLICATION_UPDATE_ENTITY_DIFF_INCOMPLETE',
+      `Catalog ${missingEntityDiff.action} ${missingEntityDiff.entityType}:${missingEntityDiff.entityId} is not represented by a publication operation.`,
+    );
+  }
+  return { updates: trustedUpdates };
 };
 
 export const parseTrustedCatalog = (value: unknown, label: string): Catalog => {

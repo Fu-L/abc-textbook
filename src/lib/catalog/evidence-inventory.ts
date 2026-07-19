@@ -591,12 +591,6 @@ export const loadCatalogEvidenceCanonicalSources = async (
         );
       }
       operationIds.add(operation.operationId);
-      if (operationPaths.has(operation.path)) {
-        throw new CatalogEvidenceInventoryError(
-          'CANONICAL_PUBLICATION_UPDATE_DUPLICATE_PATH',
-          operation.path,
-        );
-      }
       operationPaths.add(operation.path);
     }
   }

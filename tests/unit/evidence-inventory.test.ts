@@ -834,6 +834,25 @@ describe('catalog release evidence inventory', () => {
 
   it('requires every canonical update and rejects candidate file inventories not rebuilt from disk', async () => {
     const fixture = await makeFixture();
+    const catalog = fixture.canonicalSources.catalog as {
+      release: { releaseKind: 'initial' | 'incremental' };
+      explanations: { revision: number }[];
+    };
+    catalog.release.releaseKind = 'incremental';
+    const baseCatalog = structuredClone(catalog);
+    const explanation = catalog.explanations[0];
+    if (!explanation) throw new Error('Fixture explanation is missing.');
+    explanation.revision = 2;
+    const baseContent = '# Base changed content\n';
+    await mkdir(path.join(repositoryRoot, 'src/content/docs'), { recursive: true });
+    await writeFile(path.join(repositoryRoot, 'src/content/docs/index.md'), baseContent, 'utf8');
+    await writeJson('catalog.json', baseCatalog);
+    const releaseCandidate = fixture.canonicalSources.releaseCandidate as {
+      releaseKind: 'initial' | 'incremental';
+      baseReleaseVersion: string | null;
+    };
+    releaseCandidate.releaseKind = 'incremental';
+    releaseCandidate.baseReleaseVersion = '2026.07.16';
     const manifestPath = 'docs/work-manifests/catalog/manifest.json';
     await writeJson(manifestPath, fixture.canonicalSources.workManifest);
     await writeJson(
@@ -841,6 +860,9 @@ describe('catalog release evidence inventory', () => {
       fixture.canonicalSources.releaseCandidate,
     );
     await execFileAsync('git', ['init'], { cwd: repositoryRoot });
+    await execFileAsync('git', ['add', 'catalog.json', 'src/content/docs/index.md'], {
+      cwd: repositoryRoot,
+    });
     await execFileAsync(
       'git',
       [
@@ -887,6 +909,7 @@ describe('catalog release evidence inventory', () => {
       ],
       { cwd: repositoryRoot },
     );
+    await writeJson('catalog.json', catalog);
     await expect(
       loadCatalogEvidenceCanonicalSources(fixture.canonicalSources.catalog, repositoryRoot, {
         catalogPath: 'catalog.json',
@@ -896,20 +919,20 @@ describe('catalog release evidence inventory', () => {
     await writeJson('staging/updates/update-foundation.json', {
       schemaVersion: '2.0.0',
       updateId: 'update-foundation',
-      kind: 'bootstrap',
-      baseReleaseVersion: null,
+      kind: 'taxonomy',
+      baseReleaseVersion: '2026.07.16',
       contestId: null,
       sourceSetFingerprint: sha('1'),
-      advancedSlotLabels: ['E'],
+      advancedSlotLabels: [],
       targetProblemIds: ['abc212-x45'],
       operations: [
         {
-          operationId: 'operation-add-abc212-x45',
-          entityType: 'tag',
-          entityId: 'tag-graphs',
-          action: 'add',
+          operationId: 'operation-replace-explanation',
+          entityType: 'explanation',
+          entityId: 'explanation-abc212-x45',
+          action: 'replace',
           path: 'src/content/docs/index.md',
-          beforeDigest: null,
+          beforeDigest: fileDigest(baseContent),
           afterDigest: createHash('sha256').update('# Changed\n').digest('hex'),
           affectedProblemIds: ['abc212-x45'],
         },
