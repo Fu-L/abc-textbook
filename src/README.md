@@ -13,7 +13,8 @@
 - Catalog entityの正規所有pathは、構造化entityでは対応する`src/content/<collection>/`配下のstable
   IDをbasenameとするJSON（shard
   directoryは許可）、Explanation/LearningUnitではentityの`docPath`、Placementでは`src/content/policies/problem-placements.json`、CorrectionImpactでは`derivedIndexPaths`とする。1ファイルを複数entityが所有することを許し、その場合は同じbefore/after
-  digestを持つoperationをentityごとに記録する。
+  digestを持つoperationをentityごとに記録する。同じCatalog
+  entityの一つの差分に複数pathが関係する場合も、対応するoperationは一つのPublicationUpdateにまとめる。
 
 `staging/` から `src/content/`
 への直接importは禁止です。公開候補は検証・review・承認・最終検証を経た処理だけが反映します。

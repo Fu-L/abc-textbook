@@ -587,11 +587,22 @@ export const buildTrustedPublicationDiff = (
   };
   const entityDiffs = catalogEntityDiffs(pair);
   const entityDiffByKey = new Map(entityDiffs.map((diff) => [diff.key, diff]));
-  const representedEntityDiffs = new Set<string>();
+  // A Catalog projection diff is atomic at PublicationUpdate scope. Keep its
+  // owner separate from path representation because one entity may span
+  // multiple source paths during a move.
+  const entityDiffOwners = new Map<string, string>();
   const representedEntityDiffPaths = new Set<string>();
   const trustedUpdates = updates.map((update) => {
     const operationOwnership = update.operations.map((operation) => {
       const diff = resolveEntityDiff(pair, entityDiffByKey, operation);
+      const ownerUpdateId = entityDiffOwners.get(diff.key);
+      if (ownerUpdateId !== undefined && ownerUpdateId !== update.updateId) {
+        throw new TrustedCatalogDiffError(
+          'PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE',
+          `${operation.operationId} splits ${diff.entityType}:${diff.entityId} across updates ${ownerUpdateId} and ${update.updateId}; all operations for one Catalog diff must belong to the same update.`,
+        );
+      }
+      entityDiffOwners.set(diff.key, update.updateId);
       const representationKey = `${diff.key}\u0000${operation.path}`;
       if (representedEntityDiffPaths.has(representationKey)) {
         throw new TrustedCatalogDiffError(
@@ -600,7 +611,6 @@ export const buildTrustedPublicationDiff = (
         );
       }
       representedEntityDiffPaths.add(representationKey);
-      representedEntityDiffs.add(diff.key);
       return {
         operationId: operation.operationId,
         affectedProblemIds: operationProblemIds(pair, operation),
@@ -621,7 +631,7 @@ export const buildTrustedPublicationDiff = (
           : [],
     };
   });
-  const missingEntityDiff = entityDiffs.find((diff) => !representedEntityDiffs.has(diff.key));
+  const missingEntityDiff = entityDiffs.find((diff) => !entityDiffOwners.has(diff.key));
   if (missingEntityDiff) {
     throw new TrustedCatalogDiffError(
       'PUBLICATION_UPDATE_ENTITY_DIFF_INCOMPLETE',

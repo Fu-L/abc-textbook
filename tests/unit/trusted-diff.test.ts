@@ -372,6 +372,46 @@ describe('trusted publication diff', () => {
     }).not.toThrow();
   });
 
+  it('rejects splitting one entity diff across updates even when paths differ', () => {
+    const baseCatalog = makeTrustedCatalog({});
+    const currentCatalog = structuredClone(baseCatalog);
+    const explanation = currentCatalog.explanations[0];
+    if (!explanation) throw new Error('Fixture explanation is missing.');
+    explanation.docPath = 'src/content/docs/moved.md';
+
+    expect(() => {
+      buildTrustedPublicationDiff(
+        [
+          makeUpdate(
+            [
+              makeOperation({
+                operationId: 'operation-remove-explanation-doc',
+                beforeDigest: sha('2'),
+                afterDigest: null,
+              }),
+            ],
+            ['abc212-x45'],
+            'update-remove-explanation-doc',
+          ),
+          makeUpdate(
+            [
+              makeOperation({
+                operationId: 'operation-add-explanation-doc',
+                path: 'src/content/docs/moved.md',
+                beforeDigest: null,
+                afterDigest: sha('3'),
+              }),
+            ],
+            ['abc212-x45'],
+            'update-add-explanation-doc',
+          ),
+        ],
+        parseTrustedCatalog(baseCatalog, 'base'),
+        parseTrustedCatalog(currentCatalog, 'current'),
+      );
+    }).toThrow(/PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE/u);
+  });
+
   it('rejects the same entity diff and path claimed by multiple updates', () => {
     const baseCatalog = makeTrustedCatalog({});
     const currentCatalog = makeTrustedCatalog({});
