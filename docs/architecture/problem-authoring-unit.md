@@ -11,7 +11,9 @@
 
 Claim、Example、Exercise、Assessment、Answer はいずれも本文と同時に執筆・訂正されるため、`ProblemAuthoringUnit`
 内に置く。文書内の `key` は検証結果を特定する locator であり、Catalog entity
-ID ではない。実行可能例と解答の検証証跡は `(problemId, key)` で対象を固定する。
+ID ではない。Problem本文の実行可能例は `{ ownerType: "problem", problemId, exampleKey }`、Learning
+Unit本文の実行可能例は `{ ownerType: "learning_unit", learningUnitId, exampleKey }`
+で対象を固定する。
 
 `similar` と `supplement` は Explanation ID ではなく安定した `primaryProblemId` を参照する。Source
 Revision と Correction

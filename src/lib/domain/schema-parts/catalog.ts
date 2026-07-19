@@ -36,6 +36,19 @@ export const OffsetDateTimeSchema = StructuralOffsetDateTimeSchema.refine(
 
 const nonEmptyText = z.string().trim().min(1);
 const entityIds = z.array(EntityIdSchema);
+const authoringUnitLocalKeyPattern = '[a-z][a-z0-9]*(?:-[a-z0-9]+)*';
+/**
+ * A correction locator is owner-qualified because local keys are only unique
+ * inside one ProblemAuthoringUnit document.
+ */
+export const CorrectionImpactSectionLocatorSchema = z
+  .string()
+  .regex(
+    new RegExp(
+      `^abc[0-9]{3,}-[a-z][a-z0-9+_-]*:(?:sections\\.${authoringUnitLocalKeyPattern}|claims\\.${authoringUnitLocalKeyPattern}|examples\\.${authoringUnitLocalKeyPattern}|exercises\\.${authoringUnitLocalKeyPattern}(?:\\.(?:assessment|answer))?)$`,
+      'u',
+    ),
+  );
 
 export type AtCoderContestResource = 'contest' | 'tasks' | 'task' | 'editorial';
 
@@ -586,8 +599,8 @@ export const CorrectionImpactSchema = strictObject({
   id: EntityIdSchema,
   sourceRevisionId: EntityIdSchema,
   changeSummary: nonEmptyText,
-  authoringUnitProblemIds: z.array(ProblemIdSchema),
-  affectedSectionKeys: z.array(nonEmptyText),
+  authoringUnitProblemIds: uniqueArray(ProblemIdSchema).min(1),
+  affectedSectionKeys: uniqueArray(CorrectionImpactSectionLocatorSchema).min(1),
   learningUnitIds: entityIds,
   derivedIndexPaths: z.array(SafePathSchema),
   verificationStatus: z.enum(['pending', 'verified', 'failed']),

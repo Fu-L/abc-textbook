@@ -213,7 +213,7 @@ Integration mapは仮DAGをfinalへコピーする記録ではない。final Inv
 | `shardId` | `outcomeId`と安定ordinalから導出し、Problemの表示名変更で変えない |
 | `primaryOutcomeId` | ちょうど一つ。Problemのprimary outcomeと一致する |
 | `problemIds` | 1〜8件、canonical official orderの連続chunk、shard間で重複なし |
-| `problemIds` | 所有するProblem authoring unitの完全な集合。本文内blockへ独立entity IDを付けない |
+| `authoringUnitProblemIds` | 所有するProblem authoring unitの完全な集合。本文内blockへ独立entity IDを付けない |
 | `paths` | shard専有のcanonical/staging path集合。別shard・共有Unit/Tag pathとの重複を拒否 |
 | `dependencyShardIds` | 前提を満たすために必要なshardの集合。循環不可 |
 | `checkIds` / `evidencePaths` | source、structure、example、answer、link、accessibility、review、previewの適用checkと出力先 |
@@ -258,10 +258,8 @@ AssessmentはProblem authoring unitのExercise内にco-locateし、Outcomeへ直
 | `excludedTopics` | 意図的対象外 |
 | `sourceRevisionIds` | 単位本文と所有例の根拠 |
 | `tagIds` / `learningOutcomeIds` | 各一つ以上 |
-| `authoringUnit` | Problem単位本文参照 |
-| `exampleIds` | 一つ以上 |
+| `examples` | Learning Unit本文にinlineで置くExample block配列。`key`はUnit内local keyで、`executable`は実行証跡を必須とする |
 | `problemIds` | 一つ以上 |
-| `assessmentIds` | 一つ以上 |
 | `stageRank` / `difficultyRank` / `representativeRank` | 0以上の整数 |
 | `globalIndex` / `orderReason` | 生成順と説明 |
 
@@ -294,7 +292,7 @@ AssessmentはProblem authoring unitのExercise内にco-locateし、Outcomeへ直
 
 必須参照はProblem、Learning Outcome、baseline、追加前提、excludedTopics、Technique Tag、Source Revision、authoring skill version/digestである。完全解説は考察、典型、問題固有要素、復習助言、正当性、時間・空間計算量、制約整合、実装注意を明示する。
 
-文書内のClaim、Example、Exerciseはdocument-localな`key`を持つ。このkeyは実行manifestやreview evidenceから`(problemId, key)`で対象を特定するためのlocatorであり、Catalog entity IDや別artifactへの参照ではない。
+文書内のClaim、Example、Exerciseはdocument-localな`key`を持つ。このkeyは実行manifestやreview evidenceからowner種別付きのlocatorで対象を特定する。Problem本文の例は`{ownerType: "problem", problemId, exampleKey}`、Learning Unit本文の例は`{ownerType: "learning_unit", learningUnitId, exampleKey}`とし、Catalog entity IDや別artifactへの参照を新設しない。
 
 ### AuthoringSkillRevision
 
@@ -312,12 +310,12 @@ AssessmentはProblem authoring unitのExercise内にco-locateし、Outcomeへ直
 ### Co-located blocks
 
 - Claimは正確な文、Source Revision、author、検証状態を持つ。根拠なし・stale・矛盾状態は公開不可。
-- ExampleはLearning Outcome、任意のLearning Unit、種類、言語、省略範囲、環境、入力、手順、期待結果、検証結果を持つ。`executable`だけを実行manifestの必須対象とし、疑似コード・図示例は`not_applicable`とする。
+- ExampleはLearning Outcome、任意のLearning Unit、種類、言語、省略範囲、環境、入力、手順、期待結果、検証結果を持つ。`executable`だけを実行manifestの必須対象とし、疑似コード・図示例は`not_applicable`とする。公開時はCatalogからProblem/Learning Unit双方のexecutable Example inventoryを再生成し、locator・subject digest・件数を証跡と完全一致させる。
 - ExerciseはOutcome、前提、到達条件、観察可能なAssessment、理由または検証方法を含むAnswerを一つのblockに持つ。Answerの検証成功前は公開不可。
 
 ### SourceRecord / SourceRevision / CorrectionImpact
 
-SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。CorrectionImpactは本文と別の訂正ライフサイクルを持つため独立entityとし、影響するauthoring unitのProblem ID、文書内section key、Unit順、派生indexを完全列挙する。
+SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。CorrectionImpactは本文と別の訂正ライフサイクルを持つため独立entityとし、影響するauthoring unitのProblem ID、owner-qualifiedな文書内section/local block locator（例: `abc212-x45:sections.correctness`）、Unit順、派生indexを完全列挙する。locatorは対象Unitへ解決できない限り公開不可である。
 
 ## 5. Learning records
 

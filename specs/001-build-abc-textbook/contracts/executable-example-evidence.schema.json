@@ -33,7 +33,7 @@
       "$ref": "#/$defs/__schema7"
     },
     "generatedAt": {
-      "$ref": "#/$defs/__schema10"
+      "$ref": "#/$defs/__schema15"
     }
   },
   "required": [
@@ -89,7 +89,7 @@
   "$defs": {
     "__schema0": {
       "type": "string",
-      "const": "2.0.0"
+      "const": "3.0.0"
     },
     "__schema1": {
       "type": "string",
@@ -126,80 +126,173 @@
       }
     },
     "__schema8": {
-      "type": "object",
-      "properties": {
-        "problemId": {
-          "type": "string",
-          "pattern": "^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$"
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "ownerType": {
+              "type": "string",
+              "const": "problem"
+            },
+            "problemId": {
+              "type": "string",
+              "pattern": "^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$"
+            },
+            "exampleKey": {
+              "$ref": "#/$defs/__schema9"
+            },
+            "subjectDigest": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "releaseDigest": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "environment": {
+              "$ref": "#/$defs/__schema10"
+            },
+            "command": {
+              "$ref": "#/$defs/__schema10"
+            },
+            "expectedResult": {
+              "$ref": "#/$defs/__schema11"
+            },
+            "actualResult": {
+              "$ref": "#/$defs/__schema12"
+            },
+            "exitCode": {
+              "$ref": "#/$defs/__schema13"
+            },
+            "passed": {
+              "$ref": "#/$defs/__schema14"
+            },
+            "executedAt": {
+              "$ref": "#/$defs/__schema15"
+            },
+            "resultDigest": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "evidencePath": {
+              "$ref": "#/$defs/__schema16"
+            }
+          },
+          "required": [
+            "ownerType",
+            "problemId",
+            "exampleKey",
+            "subjectDigest",
+            "releaseDigest",
+            "environment",
+            "command",
+            "expectedResult",
+            "actualResult",
+            "exitCode",
+            "passed",
+            "executedAt",
+            "resultDigest",
+            "evidencePath"
+          ],
+          "additionalProperties": false
         },
-        "exampleKey": {
-          "type": "string",
-          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
-        },
-        "subjectDigest": {
-          "$ref": "#/$defs/__schema1"
-        },
-        "releaseDigest": {
-          "$ref": "#/$defs/__schema1"
-        },
-        "environment": {
-          "$ref": "#/$defs/__schema9"
-        },
-        "command": {
-          "$ref": "#/$defs/__schema9"
-        },
-        "expectedResult": {
-          "type": "string",
-          "minLength": 1
-        },
-        "actualResult": {
-          "type": "string",
-          "minLength": 1
-        },
-        "exitCode": {
-          "type": "integer",
-          "minimum": -9007199254740991,
-          "maximum": 9007199254740991
-        },
-        "passed": {
-          "type": "boolean"
-        },
-        "executedAt": {
-          "$ref": "#/$defs/__schema10"
-        },
-        "resultDigest": {
-          "$ref": "#/$defs/__schema1"
-        },
-        "evidencePath": {
-          "type": "string",
-          "pattern": "^(?!\\/)(?!.*\\/$)(?!.*\\/\\/)(?!^(?:\\.{1,2})(?:\\/|$))(?!.*\\/(?:\\.{1,2})(?:\\/|$))[A-Za-z0-9._/-]+$"
+        {
+          "type": "object",
+          "properties": {
+            "ownerType": {
+              "type": "string",
+              "const": "learning_unit"
+            },
+            "learningUnitId": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+            },
+            "exampleKey": {
+              "$ref": "#/$defs/__schema9"
+            },
+            "subjectDigest": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "releaseDigest": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "environment": {
+              "$ref": "#/$defs/__schema10"
+            },
+            "command": {
+              "$ref": "#/$defs/__schema10"
+            },
+            "expectedResult": {
+              "$ref": "#/$defs/__schema11"
+            },
+            "actualResult": {
+              "$ref": "#/$defs/__schema12"
+            },
+            "exitCode": {
+              "$ref": "#/$defs/__schema13"
+            },
+            "passed": {
+              "$ref": "#/$defs/__schema14"
+            },
+            "executedAt": {
+              "$ref": "#/$defs/__schema15"
+            },
+            "resultDigest": {
+              "$ref": "#/$defs/__schema1"
+            },
+            "evidencePath": {
+              "$ref": "#/$defs/__schema16"
+            }
+          },
+          "required": [
+            "ownerType",
+            "learningUnitId",
+            "exampleKey",
+            "subjectDigest",
+            "releaseDigest",
+            "environment",
+            "command",
+            "expectedResult",
+            "actualResult",
+            "exitCode",
+            "passed",
+            "executedAt",
+            "resultDigest",
+            "evidencePath"
+          ],
+          "additionalProperties": false
         }
-      },
-      "required": [
-        "problemId",
-        "exampleKey",
-        "subjectDigest",
-        "releaseDigest",
-        "environment",
-        "command",
-        "expectedResult",
-        "actualResult",
-        "exitCode",
-        "passed",
-        "executedAt",
-        "resultDigest",
-        "evidencePath"
-      ],
-      "additionalProperties": false
+      ]
     },
     "__schema9": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
     },
     "__schema10": {
       "type": "string",
+      "minLength": 1
+    },
+    "__schema11": {
+      "type": "string",
+      "minLength": 1
+    },
+    "__schema12": {
+      "type": "string",
+      "minLength": 1
+    },
+    "__schema13": {
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    },
+    "__schema14": {
+      "type": "boolean"
+    },
+    "__schema15": {
+      "type": "string",
       "format": "date-time",
       "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+    },
+    "__schema16": {
+      "type": "string",
+      "pattern": "^(?!\\/)(?!.*\\/$)(?!.*\\/\\/)(?!^(?:\\.{1,2})(?:\\/|$))(?!.*\\/(?:\\.{1,2})(?:\\/|$))[A-Za-z0-9._/-]+$"
     }
   }
 }

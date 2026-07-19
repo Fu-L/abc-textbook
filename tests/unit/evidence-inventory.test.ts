@@ -20,6 +20,10 @@ import {
   loadCatalogEvidenceCanonicalSources,
   loadTrustedCatalogReleaseEvidenceInventory,
 } from '../../src/lib/catalog/evidence-inventory.js';
+import {
+  deriveExecutableExampleInventory,
+  executableExampleInventoryDigest,
+} from '../../src/lib/catalog/build-catalog.js';
 
 const execFileAsync = promisify(execFile);
 const sha = (character: string): string => character.repeat(64);
@@ -492,6 +496,38 @@ describe('catalog release evidence inventory', () => {
       approvedDigest: releaseCandidate.approvableDigest,
       approvedAt: '2026-07-17T12:50:00+09:00',
     };
+    const executableExampleEvidencePath = 'docs/verification/executable-examples.json';
+    const executableInventory = deriveExecutableExampleInventory(catalog);
+    const executableExampleEvidence = {
+      schemaVersion: '3.0.0' as const,
+      releaseDigest: sha('a'),
+      subjectDigest: catalog.release.contentSnapshotDigest,
+      inventoryDigest: executableExampleInventoryDigest(catalog),
+      inventoryCount: executableInventory.length,
+      checkedCount: executableInventory.length,
+      passedCount: executableInventory.length,
+      failedCount: 0,
+      aggregatePassed: true,
+      items: executableInventory.map((item, index) => ({
+        ...item,
+        subjectDigest: catalog.release.contentSnapshotDigest,
+        releaseDigest: sha('a'),
+        environment: 'Node.js fixture',
+        command: 'node fixture.js',
+        expectedResult: '1',
+        actualResult: '1',
+        exitCode: 0,
+        passed: true,
+        executedAt: '2026-07-17T12:30:00+09:00',
+        resultDigest: sha(String(index + 1)),
+        evidencePath: executableExampleEvidencePath,
+      })),
+      generatedAt: '2026-07-17T12:31:00+09:00',
+    };
+    const executableExampleEvidenceDigest = await writeJson(
+      executableExampleEvidencePath,
+      executableExampleEvidence,
+    );
     const inventoryPath = 'docs/verification/release-evidence-inventory.json';
     const inventory = {
       subjectDigest,
@@ -519,6 +555,11 @@ describe('catalog release evidence inventory', () => {
           aggregatePassed: true,
         },
       ],
+      executableExampleEvidence: {
+        path: executableExampleEvidencePath,
+        digest: executableExampleEvidenceDigest,
+        subjectDigest: catalog.release.contentSnapshotDigest,
+      },
     };
     await writeJson(inventoryPath, inventory);
     return {

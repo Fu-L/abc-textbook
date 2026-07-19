@@ -2,6 +2,10 @@ import { CatalogContract, parseAtCoderContestResourceUrl } from '../domain/schem
 import { canonicalDigest } from '../domain/canonical-json.js';
 import { compareOffsetDateTimes, parseOffsetDateTime } from '../domain/date-time.js';
 import { stableProblemId } from '../domain/identity.js';
+import {
+  executableExampleEvidenceLocatorKey,
+  type ExecutableExampleEvidence,
+} from '../domain/schema-parts/verification-evidence.js';
 import { hasStagingPathSegment } from './publication-boundary.js';
 import { buildAdvancedSlotRegistry } from './advanced-slot-registry.js';
 import {
@@ -54,6 +58,12 @@ export interface TrustedCatalogReleaseEvidenceInventory {
     readonly reviewMode: 'self' | 'third_party';
     readonly aggregatePassed: boolean;
   }[];
+  /** Verified execution evidence for every executable example in the Catalog. */
+  readonly executableExampleEvidence?: {
+    readonly path: string;
+    readonly digest: string;
+    readonly evidence: ExecutableExampleEvidence;
+  };
 }
 
 export interface CatalogLike {
@@ -193,6 +203,7 @@ export interface CatalogLike {
     readonly problemId: string;
     readonly kind: 'full' | 'similar' | 'supplement';
     readonly primaryProblemId: string | null;
+    readonly sections: Readonly<Record<string, unknown>>;
     readonly learningOutcomeIds: readonly string[];
     readonly additionalPrerequisiteUnitIds: readonly string[];
     readonly tagIds: readonly string[];
@@ -231,6 +242,57 @@ export interface CatalogLike {
   }[];
   readonly [key: string]: unknown;
 }
+
+export type ExecutableExampleInventoryItem =
+  | {
+      readonly ownerType: 'problem';
+      readonly problemId: string;
+      readonly exampleKey: string;
+    }
+  | {
+      readonly ownerType: 'learning_unit';
+      readonly learningUnitId: string;
+      readonly exampleKey: string;
+    };
+
+/**
+ * Rebuild the executable-example inventory from canonical Catalog content.
+ * The owner discriminator prevents document-local keys from colliding.
+ */
+export const deriveExecutableExampleInventory = (
+  catalog: Pick<CatalogLike, 'learningUnits' | 'authoringUnits'>,
+): readonly ExecutableExampleInventoryItem[] => {
+  const learningUnitExamples = catalog.learningUnits.flatMap((unit) =>
+    unit.examples
+      .filter(({ kind }) => kind === 'executable')
+      .map(({ key }) => ({
+        ownerType: 'learning_unit' as const,
+        learningUnitId: unit.id,
+        exampleKey: key,
+      })),
+  );
+  const problemExamples = catalog.authoringUnits.flatMap((unit) =>
+    unit.examples
+      .filter(({ kind }) => kind === 'executable')
+      .map(({ key }) => ({
+        ownerType: 'problem' as const,
+        problemId: unit.problemId,
+        exampleKey: key,
+      })),
+  );
+  const compareCodeUnits = (left: string, right: string): number =>
+    left < right ? -1 : left > right ? 1 : 0;
+  return [...learningUnitExamples, ...problemExamples].sort((left, right) =>
+    compareCodeUnits(
+      executableExampleEvidenceLocatorKey(left),
+      executableExampleEvidenceLocatorKey(right),
+    ),
+  );
+};
+
+export const executableExampleInventoryDigest = (
+  catalog: Pick<CatalogLike, 'learningUnits' | 'authoringUnits'>,
+): string => canonicalDigest({ items: deriveExecutableExampleInventory(catalog) });
 
 const entityArrayKeys = [
   'contests',
@@ -666,6 +728,9 @@ export const validateCatalogSemantics = (
   const sourceIds = idSet('SOURCE_REVISION', catalog.sources);
   idSet('CORRECTION_IMPACT', catalog.correctionImpacts);
   const authoringUnitProblemIds = new Set(catalog.authoringUnits.map(({ problemId }) => problemId));
+  const authoringUnitByProblemId = new Map(
+    catalog.authoringUnits.map((unit) => [unit.problemId, unit]),
+  );
   if (authoringUnitProblemIds.size !== catalog.authoringUnits.length) {
     diagnostics.push({
       code: 'DUPLICATE_AUTHORING_UNIT_PROBLEM',
@@ -1024,6 +1089,30 @@ export const validateCatalogSemantics = (
     requireRefs(unit.problemId, 'problemId', [unit.problemId], problemIds);
     if (unit.primaryProblemId)
       requireRefs(unit.problemId, 'primaryProblemId', [unit.primaryProblemId], problemIds);
+    if (unit.kind !== 'full') {
+      const primary = unit.primaryProblemId
+        ? authoringUnitByProblemId.get(unit.primaryProblemId)
+        : undefined;
+      if (!primary) {
+        diagnostics.push({
+          code: 'AUTHORING_PRIMARY_MISSING',
+          entityId: unit.problemId,
+          message: `${unit.problemId} must reference an existing primary authoring unit.`,
+        });
+      } else if (primary.kind !== 'full') {
+        diagnostics.push({
+          code: 'AUTHORING_PRIMARY_NOT_FULL',
+          entityId: unit.problemId,
+          message: `${unit.problemId} must reference a full authoring unit.`,
+        });
+      } else if (primary.problemId === unit.problemId) {
+        diagnostics.push({
+          code: 'AUTHORING_PRIMARY_SELF_REFERENCE',
+          entityId: unit.problemId,
+          message: 'An abbreviated authoring unit cannot use itself as its primary Problem.',
+        });
+      }
+    }
     requireRefs(unit.problemId, 'learningOutcomeIds', unit.learningOutcomeIds, outcomeIds);
     requireRefs(
       unit.problemId,
@@ -1089,9 +1178,69 @@ export const validateCatalogSemantics = (
       }
     }
   }
-  const authoringUnitByProblemId = new Map(
-    catalog.authoringUnits.map((unit) => [unit.problemId, unit]),
+  const expectedExecutableExamples = deriveExecutableExampleInventory(catalog);
+  const expectedExecutableExampleKeys = expectedExecutableExamples.map(
+    executableExampleEvidenceLocatorKey,
   );
+  const trustedExecutableEvidence = trustedEvidence?.executableExampleEvidence?.evidence;
+  if (expectedExecutableExamples.length === 0) {
+    if (trustedExecutableEvidence) {
+      diagnostics.push({
+        code: 'EXECUTABLE_EXAMPLE_EVIDENCE_UNEXPECTED',
+        message: 'Executable example evidence exists but the Catalog has no executable examples.',
+      });
+    }
+  } else if (!trustedExecutableEvidence) {
+    diagnostics.push({
+      code: 'EXECUTABLE_EXAMPLE_EVIDENCE_REQUIRED',
+      message: 'Publication requires evidence for every executable example.',
+    });
+  } else {
+    const actualExecutableExampleKeys = trustedExecutableEvidence.items.map(
+      executableExampleEvidenceLocatorKey,
+    );
+    const expectedSubjectDigest = catalog.release.contentSnapshotDigest;
+    const evidenceMatchesInventory =
+      trustedExecutableEvidence.subjectDigest === expectedSubjectDigest &&
+      trustedExecutableEvidence.inventoryDigest === executableExampleInventoryDigest(catalog) &&
+      trustedExecutableEvidence.inventoryCount === expectedExecutableExamples.length &&
+      trustedExecutableEvidence.checkedCount === expectedExecutableExamples.length &&
+      trustedExecutableEvidence.aggregatePassed &&
+      trustedExecutableEvidence.items.every(
+        (item) => item.passed && item.subjectDigest === expectedSubjectDigest,
+      ) &&
+      sameStringSet(actualExecutableExampleKeys, expectedExecutableExampleKeys);
+    if (!evidenceMatchesInventory) {
+      diagnostics.push({
+        code: 'EXECUTABLE_EXAMPLE_EVIDENCE_MISMATCH',
+        message:
+          'Executable example evidence must exactly match the Catalog locator inventory and subject digest.',
+      });
+    }
+  }
+  const authoringSectionExists = (
+    unit: CatalogLike['authoringUnits'][number],
+    key: string,
+  ): boolean => {
+    const [namespace, localKey, detail] = key.split('.');
+    if (!namespace || !localKey) return false;
+    if (namespace === 'sections') {
+      return detail === undefined && Object.hasOwn(unit.sections, localKey);
+    }
+    if (namespace === 'claims') {
+      return detail === undefined && unit.claims.some((claim) => claim.key === localKey);
+    }
+    if (namespace === 'examples') {
+      return detail === undefined && unit.examples.some((example) => example.key === localKey);
+    }
+    if (namespace === 'exercises') {
+      const exercise = unit.exercises.find((candidate) => candidate.key === localKey);
+      return Boolean(
+        exercise && (detail === undefined || detail === 'assessment' || detail === 'answer'),
+      );
+    }
+    return false;
+  };
   const authoringVisitState = new Map<string, 'visiting' | 'visited'>();
   const visitAuthoringUnit = (problemId: string, path: readonly string[]): void => {
     const state = authoringVisitState.get(problemId);
@@ -1121,6 +1270,59 @@ export const validateCatalogSemantics = (
       authoringUnitProblemIds,
     );
     requireRefs(impact.id, 'learningUnitIds', impact.learningUnitIds, unitIds);
+    if (impact.authoringUnitProblemIds.length === 0) {
+      diagnostics.push({
+        code: 'CORRECTION_IMPACT_TARGET_EMPTY',
+        entityId: impact.id,
+        message: 'Correction Impact must target at least one authoring unit.',
+      });
+    }
+    if (impact.affectedSectionKeys.length === 0) {
+      diagnostics.push({
+        code: 'CORRECTION_IMPACT_SECTIONS_EMPTY',
+        entityId: impact.id,
+        message: 'Correction Impact must enumerate at least one affected section or block.',
+      });
+    }
+    if (
+      new Set(impact.authoringUnitProblemIds).size !== impact.authoringUnitProblemIds.length ||
+      new Set(impact.affectedSectionKeys).size !== impact.affectedSectionKeys.length
+    ) {
+      diagnostics.push({
+        code: 'CORRECTION_IMPACT_LOCATOR_DUPLICATE',
+        entityId: impact.id,
+        message: 'Correction Impact targets and locators must be unique.',
+      });
+    }
+    for (const locator of impact.affectedSectionKeys) {
+      const separator = locator.indexOf(':');
+      const problemId = separator < 0 ? '' : locator.slice(0, separator);
+      const key = separator < 0 ? '' : locator.slice(separator + 1);
+      if (!impact.authoringUnitProblemIds.includes(problemId)) {
+        diagnostics.push({
+          code: 'CORRECTION_IMPACT_LOCATOR_OWNER_MISMATCH',
+          entityId: impact.id,
+          message: `${locator} is outside the declared authoring unit targets.`,
+        });
+        continue;
+      }
+      const unit = authoringUnitByProblemId.get(problemId);
+      if (!unit || !authoringUnitProblemIds.has(problemId)) {
+        diagnostics.push({
+          code: 'CORRECTION_IMPACT_LOCATOR_OWNER_MISSING',
+          entityId: impact.id,
+          message: `${locator} cannot resolve its authoring unit owner.`,
+        });
+        continue;
+      }
+      if (!authoringSectionExists(unit, key)) {
+        diagnostics.push({
+          code: 'CORRECTION_IMPACT_SECTION_NOT_FOUND',
+          entityId: impact.id,
+          message: `${locator} does not resolve to a section or local block.`,
+        });
+      }
+    }
     if (impact.verificationStatus !== 'verified') {
       diagnostics.push({
         code: 'CORRECTION_IMPACT_NOT_VERIFIED',

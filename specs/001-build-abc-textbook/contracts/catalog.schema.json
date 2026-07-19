@@ -2021,16 +2021,20 @@
             "$ref": "#/$defs/__schema8"
           },
           "authoringUnitProblemIds": {
+            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/$defs/__schema7"
-            }
+            },
+            "uniqueItems": true
           },
           "affectedSectionKeys": {
+            "minItems": 1,
             "type": "array",
             "items": {
-              "$ref": "#/$defs/__schema8"
-            }
+              "$ref": "#/$defs/__schema92"
+            },
+            "uniqueItems": true
           },
           "learningUnitIds": {
             "$ref": "#/$defs/__schema5"
@@ -2062,6 +2066,10 @@
         ],
         "additionalProperties": false
       }
+    },
+    "__schema92": {
+      "type": "string",
+      "pattern": "^abc[0-9]{3,}-[a-z][a-z0-9+_-]*:(?:sections\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*|claims\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*|examples\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*|exercises\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*(?:\\.(?:assessment|answer))?)$"
     }
   }
 }

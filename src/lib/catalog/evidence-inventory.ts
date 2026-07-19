@@ -9,13 +9,17 @@ import { z } from 'zod';
 import { canonicalDigest, digestWithoutField } from '../domain/canonical-json.js';
 import { strictObject } from '../domain/contract-schema.js';
 import {
+  CatalogSchema,
   ContentReviewModeSchema,
   EntityIdSchema,
   OffsetDateTimeSchema,
   SafePathSchema,
   Sha256Schema,
 } from '../domain/schema-parts/catalog.js';
-import type { CatalogSchema } from '../domain/schema-parts/catalog.js';
+import {
+  ExecutableExampleEvidenceSchema,
+  executableExampleEvidenceLocatorKey,
+} from '../domain/schema-parts/verification-evidence.js';
 import { HumanContentReviewEvidenceSchema as ReviewEvidenceSchema } from '../domain/schema-parts/review-evidence.js';
 import { ContentWorkManifestSchema } from '../domain/schema-parts/review-evidence.js';
 import { PublicationUpdateSchema, ReleaseCandidateSchema } from '../domain/schema-parts/release.js';
@@ -42,7 +46,11 @@ import {
   resolvePublicCatalogInput,
   resolvePublicEvidencePath,
 } from './publication-boundary.js';
-import type { TrustedCatalogReleaseEvidenceInventory } from './build-catalog.js';
+import {
+  deriveExecutableExampleInventory,
+  executableExampleInventoryDigest,
+  type TrustedCatalogReleaseEvidenceInventory,
+} from './build-catalog.js';
 import {
   buildTrustedPublicationDiff,
   parseTrustedCatalog,
@@ -103,6 +111,13 @@ const CatalogReviewReferenceSchema = strictObject({
       message: 'Third-party review authors and reviewers must be disjoint.',
     });
   }
+});
+
+const CatalogExecutableExampleEvidenceReferenceSchema = strictObject({
+  path: SafePathSchema,
+  digest: Sha256Schema,
+  /** Executable evidence is scoped to the logical Catalog snapshot, not file inventory. */
+  subjectDigest: Sha256Schema,
 });
 
 export interface CatalogEvidenceCanonicalSources {
@@ -795,6 +810,7 @@ export const CatalogReleaseEvidenceInventorySchema = strictObject({
   subjectDigest: Sha256Schema,
   checks: z.array(CatalogCheckReferenceSchema).min(1),
   reviews: z.array(CatalogReviewReferenceSchema).min(1),
+  executableExampleEvidence: CatalogExecutableExampleEvidenceReferenceSchema.optional(),
 }).superRefine((inventory, context) => {
   const checkIds = inventory.checks.map(({ checkId }) => checkId);
   const resultPaths = inventory.checks.map(({ resultPath }) => resultPath);
@@ -814,6 +830,7 @@ export const CatalogReleaseEvidenceInventorySchema = strictObject({
 type CheckReference = z.infer<typeof CatalogCheckReferenceSchema>;
 type CheckResult = z.infer<typeof CatalogReleaseCheckResultSchema>;
 type ReviewReference = z.infer<typeof CatalogReviewReferenceSchema>;
+type ExecutableExampleReference = z.infer<typeof CatalogExecutableExampleEvidenceReferenceSchema>;
 type ReviewEvidence = z.infer<typeof ReviewEvidenceSchema>;
 
 const sameStringSet = (left: readonly string[], right: readonly string[]): boolean => {
@@ -1134,6 +1151,54 @@ const verifyReviewReference = async (
   };
 };
 
+const verifyExecutableExampleReference = async (
+  reference: ExecutableExampleReference,
+  catalog: z.infer<typeof CatalogSchema>,
+  repositoryRoot: string,
+): Promise<NonNullable<TrustedCatalogReleaseEvidenceInventory['executableExampleEvidence']>> => {
+  const expectedInventory = deriveExecutableExampleInventory(catalog);
+  const expectedKeys = expectedInventory.map(executableExampleEvidenceLocatorKey);
+  const expectedSubjectDigest = catalog.release.contentSnapshotDigest;
+  if (reference.subjectDigest !== expectedSubjectDigest) {
+    throw new CatalogEvidenceInventoryError(
+      'EXECUTABLE_EXAMPLE_EVIDENCE_SUBJECT_MISMATCH',
+      `${reference.path} is not scoped to the current Catalog snapshot.`,
+    );
+  }
+  const file = await readPublicEvidenceFile(reference.path, repositoryRoot);
+  if (file.digest !== reference.digest) {
+    throw new CatalogEvidenceInventoryError(
+      'EXECUTABLE_EXAMPLE_EVIDENCE_DIGEST_MISMATCH',
+      `${reference.path} does not match its release inventory reference.`,
+    );
+  }
+  const parsed = ExecutableExampleEvidenceSchema.safeParse(file.value);
+  if (!parsed.success) {
+    throw new CatalogEvidenceInventoryError(
+      'EXECUTABLE_EXAMPLE_EVIDENCE_SCHEMA_INVALID',
+      `${reference.path}: ${parsed.error.message}`,
+    );
+  }
+  const evidence = parsed.data;
+  const actualKeys = evidence.items.map(executableExampleEvidenceLocatorKey);
+  if (
+    evidence.subjectDigest !== expectedSubjectDigest ||
+    evidence.inventoryDigest !== executableExampleInventoryDigest(catalog) ||
+    evidence.inventoryCount !== expectedInventory.length ||
+    evidence.checkedCount !== expectedInventory.length ||
+    !evidence.aggregatePassed ||
+    evidence.items.length !== expectedInventory.length ||
+    !evidence.items.every((item) => item.passed && item.subjectDigest === expectedSubjectDigest) ||
+    !sameStringSet(actualKeys, expectedKeys)
+  ) {
+    throw new CatalogEvidenceInventoryError(
+      'EXECUTABLE_EXAMPLE_EVIDENCE_INVENTORY_MISMATCH',
+      `${reference.path} does not exactly cover the Catalog executable-example inventory.`,
+    );
+  }
+  return { path: reference.path, digest: file.digest, evidence };
+};
+
 export const loadTrustedCatalogReleaseEvidenceInventory = async (
   inventoryPath: string,
   canonicalSources: CatalogEvidenceCanonicalSources,
@@ -1146,6 +1211,36 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
     throw new CatalogEvidenceInventoryError(
       'EVIDENCE_INVENTORY_SCHEMA_INVALID',
       `${inventoryPath}: ${parsed.error.message}`,
+    );
+  }
+  const catalogResult = CatalogSchema.safeParse(canonicalSources.catalog);
+  if (!catalogResult.success) {
+    throw new CatalogEvidenceInventoryError(
+      'CATALOG_SCHEMA_INVALID',
+      `Canonical Catalog: ${catalogResult.error.message}`,
+    );
+  }
+  const expectedExecutableExampleCount = deriveExecutableExampleInventory(
+    catalogResult.data,
+  ).length;
+  let executableExampleEvidence:
+    NonNullable<TrustedCatalogReleaseEvidenceInventory['executableExampleEvidence']> | undefined;
+  if (parsed.data.executableExampleEvidence) {
+    if (expectedExecutableExampleCount === 0) {
+      throw new CatalogEvidenceInventoryError(
+        'EXECUTABLE_EXAMPLE_EVIDENCE_UNEXPECTED',
+        'The release inventory references executable evidence but the Catalog has no executable examples.',
+      );
+    }
+    executableExampleEvidence = await verifyExecutableExampleReference(
+      parsed.data.executableExampleEvidence,
+      catalogResult.data,
+      repositoryRoot,
+    );
+  } else if (expectedExecutableExampleCount > 0) {
+    throw new CatalogEvidenceInventoryError(
+      'EXECUTABLE_EXAMPLE_EVIDENCE_REQUIRED',
+      'The release inventory must reference evidence for every executable example.',
     );
   }
 
@@ -1204,5 +1299,10 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
       'All evidence files and the inventory must use one current subject digest.',
     );
   }
-  return { subjectDigest, checks, reviews };
+  return {
+    subjectDigest,
+    checks,
+    reviews,
+    ...(executableExampleEvidence ? { executableExampleEvidence } : {}),
+  };
 };

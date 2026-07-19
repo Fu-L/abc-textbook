@@ -4,6 +4,7 @@ import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-
 import {
   AnswerMaterialEvidenceContract,
   ContestIdSchema,
+  EntityIdSchema,
   OffsetDateTimeSchema,
   ProblemIdSchema,
   SafePathSchema,
@@ -333,9 +334,19 @@ export const LearningRecordE2eEvidenceSchema = strictObject({
   generatedAt: OffsetDateTimeSchema,
 });
 
-const executableExampleItem = strictObject({
-  problemId: ProblemIdSchema,
-  exampleKey: z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u),
+const executableExampleKey = z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u);
+export type ExecutableExampleEvidenceLocator =
+  | {
+      ownerType: 'problem';
+      problemId: string;
+      exampleKey: string;
+    }
+  | {
+      ownerType: 'learning_unit';
+      learningUnitId: string;
+      exampleKey: string;
+    };
+const executableExampleEvidenceFields = {
   subjectDigest: Sha256Schema,
   releaseDigest: Sha256Schema,
   environment: text,
@@ -347,9 +358,33 @@ const executableExampleItem = strictObject({
   executedAt: OffsetDateTimeSchema,
   resultDigest: Sha256Schema,
   evidencePath: SafePathSchema,
-});
+};
+const executableExampleItem = z.union([
+  strictObject({
+    ownerType: z.literal('problem'),
+    problemId: ProblemIdSchema,
+    exampleKey: executableExampleKey,
+    ...executableExampleEvidenceFields,
+  }),
+  strictObject({
+    ownerType: z.literal('learning_unit'),
+    learningUnitId: EntityIdSchema,
+    exampleKey: executableExampleKey,
+    ...executableExampleEvidenceFields,
+  }),
+]);
+
+export type ExecutableExampleEvidenceItem = z.infer<typeof executableExampleItem>;
+
+export const executableExampleEvidenceLocatorKey = (
+  item: ExecutableExampleEvidenceLocator,
+): string =>
+  item.ownerType === 'problem'
+    ? `problem:${item.problemId}:${item.exampleKey}`
+    : `learning_unit:${item.learningUnitId}:${item.exampleKey}`;
+
 export const ExecutableExampleEvidenceSchema = strictObject({
-  schemaVersion: z.literal('2.0.0'),
+  schemaVersion: z.literal('3.0.0'),
   releaseDigest: Sha256Schema,
   subjectDigest: Sha256Schema,
   inventoryDigest: Sha256Schema,
@@ -362,10 +397,14 @@ export const ExecutableExampleEvidenceSchema = strictObject({
   generatedAt: OffsetDateTimeSchema,
 })
   .superRefine((evidence, context) => {
-    const ids = evidence.items.map(({ problemId, exampleKey }) => `${problemId}:${exampleKey}`);
+    const ids = evidence.items.map(executableExampleEvidenceLocatorKey);
     const passed = evidence.items.filter((item) => item.passed).length;
     if (new Set(ids).size !== ids.length)
-      context.addIssue({ code: 'custom', path: ['items'], message: 'Example IDs must be unique.' });
+      context.addIssue({
+        code: 'custom',
+        path: ['items'],
+        message: 'Example locators must be unique.',
+      });
     if (
       evidence.inventoryCount !== evidence.items.length ||
       evidence.checkedCount !== evidence.items.length ||
@@ -400,6 +439,8 @@ export const ExecutableExampleEvidenceSchema = strictObject({
       },
     ],
   });
+
+export type ExecutableExampleEvidence = z.infer<typeof ExecutableExampleEvidenceSchema>;
 
 export { AnswerMaterialEvidenceContract as AnswerMaterialVerificationEvidenceContract };
 export const AnswerMaterialEvidenceSchema = AnswerMaterialEvidenceContract.schema;
