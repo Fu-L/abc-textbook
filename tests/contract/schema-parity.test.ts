@@ -170,6 +170,7 @@ describe('canonical Zod and JSON Schema parity', () => {
           path: 'src/content/problems/abc212-e.json',
           beforeDigest: null,
           afterDigest: sha('2'),
+          affectedEntities: [],
           affectedProblemIds: ['abc212-e'],
         },
       ],

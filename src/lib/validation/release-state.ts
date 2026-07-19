@@ -49,6 +49,11 @@ export interface TrustedPublicationUpdateContext {
     readonly path?: string;
     readonly beforeDigest?: string | null;
     readonly afterDigest?: string | null;
+    readonly affectedEntities: readonly {
+      readonly entityType: string;
+      readonly entityId: string;
+      readonly action: 'add' | 'replace' | 'remove';
+    }[];
   }[];
   /** Correction impacts calculated from the trusted catalog diff. */
   readonly correctionImpacts?: readonly {
@@ -142,6 +147,25 @@ const sameStringSet = (left: readonly string[], right: readonly string[]): boole
   );
 };
 
+const entityDiffKey = (diff: {
+  readonly entityType: string;
+  readonly entityId: string;
+  readonly action: string;
+}): string => `${diff.entityType}\u0000${diff.entityId}\u0000${diff.action}`;
+
+const sameEntityDiffSet = (
+  left: readonly {
+    readonly entityType: string;
+    readonly entityId: string;
+    readonly action: string;
+  }[],
+  right: readonly {
+    readonly entityType: string;
+    readonly entityId: string;
+    readonly action: string;
+  }[],
+): boolean => sameStringSet(left.map(entityDiffKey), right.map(entityDiffKey));
+
 export const validatePublicationUpdate = (
   value: unknown,
   trusted?: TrustedPublicationUpdateContext,
@@ -173,10 +197,14 @@ export const validatePublicationUpdate = (
   }
   for (const operation of update.operations) {
     const expected = trustedOperations.get(operation.operationId);
-    if (!expected || !sameStringSet(operation.affectedProblemIds, expected.affectedProblemIds)) {
+    if (
+      !expected ||
+      !sameStringSet(operation.affectedProblemIds, expected.affectedProblemIds) ||
+      !sameEntityDiffSet(operation.affectedEntities, expected.affectedEntities)
+    ) {
       throw new ReleaseTransitionError(
         'PUBLICATION_UPDATE_OWNERSHIP_INVALID',
-        `Operation ${operation.operationId} does not match trusted Problem ownership.`,
+        `Operation ${operation.operationId} does not match trusted Problem or entity ownership.`,
       );
     }
   }

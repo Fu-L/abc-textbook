@@ -13,7 +13,7 @@
 - Publication operationはentityの状態遷移ではなく、trustedなbase/current
   inventoryから導出した実ファイル遷移をcanonical
   pathごとに1件だけ記録する。`entityType`と`entityId`はそのpathの所有権を検証するanchorであり、問題を持たないContestSlotには`contest-slot-<contest>-<lowercase-label>`を使う。Catalog
-  projectionのadd/replace/removeはファイル遷移と独立に比較し、各差分が所有する変更pathへ関連付ける。共有Markdownでは1件のファイル遷移に複数のCatalog差分を関連付けられるが、本文だけの変更から無関係なentity差分を合成しない。同じentity差分に必要な複数pathは一つのPublicationUpdateへまとめる。
+  projectionのadd/replace/removeはファイル遷移と独立に比較し、各差分が所有する変更pathへ`affectedEntities`として永続化する。共有Markdownでは1件のファイル遷移に複数のCatalog差分を関連付けられるが、本文だけの変更から無関係なentity差分を合成しない。本文だけの変更でもbase/currentでpathを所有する全entityのProblem集合を更新範囲に含める。同じentity差分に必要な複数pathは一つのPublicationUpdateへまとめる。
 
 `staging/` から `src/content/`
 への直接importは禁止です。公開候補は検証・review・承認・最終検証を経た処理だけが反映します。

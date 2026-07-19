@@ -37,6 +37,7 @@ const makePublicationUpdate = (): Record<string, unknown> => ({
       path: 'src/content/problems/abc212-x45.json',
       beforeDigest: null,
       afterDigest: sha('a'),
+      affectedEntities: [],
       affectedProblemIds: ['abc212-x45'],
     },
   ],
@@ -72,13 +73,19 @@ const makePublicationUpdate = (): Record<string, unknown> => ({
 const trustedPublicationUpdateContext = (update: Record<string, unknown>) => {
   const operations = update.operations as {
     operationId: string;
+    affectedEntities: {
+      entityType: string;
+      entityId: string;
+      action: 'add' | 'replace' | 'remove';
+    }[];
     affectedProblemIds: string[];
   }[];
   const targetProblemIds = update.targetProblemIds as string[];
   const correctionImpactIds = update.correctionImpactIds as string[];
   return {
-    operationOwnership: operations.map(({ operationId, affectedProblemIds }) => ({
+    operationOwnership: operations.map(({ operationId, affectedEntities, affectedProblemIds }) => ({
       operationId,
+      affectedEntities: affectedEntities.map((diff) => ({ ...diff })),
       affectedProblemIds: [...affectedProblemIds],
     })),
     correctionImpacts: correctionImpactIds.map((correctionImpactId) => ({
@@ -373,6 +380,7 @@ describe('release state gate', () => {
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),
         afterDigest: sha('b'),
+        affectedEntities: [],
         affectedProblemIds: ['abc212-x45'],
       },
     ];
@@ -402,6 +410,7 @@ describe('release state gate', () => {
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),
         afterDigest: sha('b'),
+        affectedEntities: [],
         affectedProblemIds: ['abc212-x45'],
       },
     ];
@@ -424,7 +433,7 @@ describe('release state gate', () => {
     }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
   });
 
-  it('allows entity operations for one file to share the file transition', () => {
+  it('rejects multiple operations that duplicate one file transition', () => {
     const update = makePublicationUpdate();
     update.operations = [
       {
@@ -435,6 +444,7 @@ describe('release state gate', () => {
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),
         afterDigest: sha('b'),
+        affectedEntities: [],
         affectedProblemIds: ['abc212-x45'],
       },
       {
@@ -445,11 +455,13 @@ describe('release state gate', () => {
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),
         afterDigest: sha('b'),
+        affectedEntities: [],
         affectedProblemIds: ['abc212-x45'],
       },
     ];
     const operations = update.operations as {
       operationId: string;
+      affectedEntities: [];
       affectedProblemIds: string[];
       entityType: string;
       entityId: string;
@@ -466,7 +478,7 @@ describe('release state gate', () => {
 
     expect(() => {
       validatePublicationUpdate(update, trusted);
-    }).not.toThrow();
+    }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
   });
 
   it.each([
@@ -475,7 +487,7 @@ describe('release state gate', () => {
     ['add+add', ['add', 'add'] as const],
     ['remove+remove', ['remove', 'remove'] as const],
   ])(
-    'validates shared file transitions independently of entity actions (%s)',
+    'rejects duplicate file transitions independently of entity actions (%s)',
     (_label, actions) => {
       const operations = actions.map((action, index) => ({
         operationId: `operation-shared-${String(index)}`,
@@ -485,6 +497,7 @@ describe('release state gate', () => {
         path: 'src/content/docs/index.md',
         beforeDigest: sha('a'),
         afterDigest: sha('b'),
+        affectedEntities: [],
         affectedProblemIds: ['abc212-x45'],
       }));
       const update = makePublicationUpdate();
@@ -496,7 +509,7 @@ describe('release state gate', () => {
           baseFiles: [{ path: 'src/content/docs/index.md', sha256: sha('a'), byteLength: 10 }],
           currentFiles: [{ path: 'src/content/docs/index.md', sha256: sha('b'), byteLength: 11 }],
         });
-      }).not.toThrow();
+      }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
     },
   );
 
@@ -519,6 +532,7 @@ describe('release state gate', () => {
         path: 'src/content/docs/abc212-e.md',
         beforeDigest: sha('a'),
         afterDigest: sha('b'),
+        affectedEntities: [],
         affectedProblemIds: ['abc212-x45'],
       },
     ];

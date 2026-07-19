@@ -548,6 +548,22 @@ const resolveNodes = (
 const unionProblemIds = (values: readonly (readonly string[])[]): readonly string[] =>
   [...new Set(values.flat())].sort();
 
+const nodeProblemIds = (graph: CatalogGraph, node: CatalogNode): readonly string[] =>
+  node.entityType === 'correction_impact'
+    ? graph.problemIdsOwnedByReferences(node)
+    : graph.problemIdsOwnedBy(node);
+
+/** Every Catalog entity that owns a changed file contributes to its review scope. */
+const pathOwnerProblemIds = (pair: CatalogGraphPair, path: string): readonly string[] =>
+  unionProblemIds(
+    ([pair.base, pair.current] as const).flatMap((graph) =>
+      graph
+        .entityNodes()
+        .filter((node) => nodeOwnsPath(node, path))
+        .map((node) => nodeProblemIds(graph, node)),
+    ),
+  );
+
 const operationProblemIds = (
   pair: CatalogGraphPair,
   operation: PublicationOperation,
@@ -774,6 +790,7 @@ export const buildTrustedPublicationDiff = (
         operationId: operation.operationId,
         affectedProblemIds: unionProblemIds([
           operationProblemIds(pair, operation),
+          pathOwnerProblemIds(pair, operation.path),
           ...operationEntityDiffs.map((diff) => entityDiffProblemIds(pair, diff)),
         ]),
         entityType: operation.entityType,

@@ -934,6 +934,13 @@ describe('catalog release evidence inventory', () => {
           path: 'src/content/docs/index.md',
           beforeDigest: fileDigest(baseContent),
           afterDigest: createHash('sha256').update('# Changed\n').digest('hex'),
+          affectedEntities: [
+            {
+              entityType: 'explanation',
+              entityId: 'explanation-abc212-x45',
+              action: 'replace',
+            },
+          ],
           affectedProblemIds: ['abc212-x45'],
         },
       ],

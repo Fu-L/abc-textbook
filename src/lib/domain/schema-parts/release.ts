@@ -26,31 +26,43 @@ export const AuthoringResultSchema = strictObject({
   retryCondition: z.string().min(1).nullable(),
 });
 
+const PublicationEntityTypeSchema = z.enum([
+  'contest',
+  'contest_slot',
+  'problem',
+  'technique_inventory',
+  'tag',
+  'learning_outcome',
+  'learning_unit',
+  'placement',
+  'explanation',
+  'claim',
+  'example',
+  'exercise',
+  'assessment',
+  'answer_material',
+  'source',
+  'correction_impact',
+]);
+
+const PublicationEntityDiffSchema = strictObject({
+  entityType: PublicationEntityTypeSchema,
+  entityId: EntityIdSchema,
+  action: z.enum(['add', 'replace', 'remove']),
+});
+
 const PublicationOperationSchema = strictObject({
   operationId: EntityIdSchema,
-  entityType: z.enum([
-    'contest',
-    'contest_slot',
-    'problem',
-    'technique_inventory',
-    'tag',
-    'learning_outcome',
-    'learning_unit',
-    'placement',
-    'explanation',
-    'claim',
-    'example',
-    'exercise',
-    'assessment',
-    'answer_material',
-    'source',
-    'correction_impact',
-  ]),
+  /** A Catalog entity that owns this path and anchors the file transition. */
+  entityType: PublicationEntityTypeSchema,
   entityId: EntityIdSchema,
+  /** The action of the file transition, independent of Catalog entity actions. */
   action: z.enum(['add', 'replace', 'remove']),
   path: SafePathSchema,
   beforeDigest: Sha256Schema.nullable(),
   afterDigest: Sha256Schema.nullable(),
+  /** Canonical Catalog projection diffs whose changed source set includes this path. */
+  affectedEntities: uniqueArray(PublicationEntityDiffSchema),
   /**
    * The immutable Problem ownership resolved for this operation.  Non-Problem
    * operations can affect more than one Problem, so deriving the update scope
@@ -128,6 +140,14 @@ export const PublicationUpdateSchema = strictObject({
         code: 'custom',
         path: ['operations'],
         message: 'Operation IDs must be unique.',
+      });
+    }
+    const operationPaths = update.operations.map(({ path }) => path);
+    if (new Set(operationPaths).size !== operationPaths.length) {
+      context.addIssue({
+        code: 'custom',
+        path: ['operations'],
+        message: 'Each file transition path must be represented by exactly one operation.',
       });
     }
     if (update.kind === 'correction' && update.correctionImpactIds.length === 0) {

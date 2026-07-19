@@ -52,6 +52,7 @@ describe('trusted publication diff', () => {
           path: 'src/content/docs/index.md',
           beforeDigest: sha('2'),
           afterDigest: sha('3'),
+          affectedEntities: [],
           affectedProblemIds: ['abc212-x45'],
         },
       ],
@@ -100,6 +101,7 @@ describe('trusted publication diff', () => {
 
     const trustedUpdate = diff.updates[0];
     if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    persistAffectedEntities(update, trustedUpdate);
     expect(() => {
       validatePublicationUpdate(update, {
         operationOwnership: trustedUpdate.operationOwnership,
@@ -154,6 +156,7 @@ describe('trusted publication diff', () => {
     );
     const trustedUpdate = diff.updates[0];
     if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    persistAffectedEntities(update, trustedUpdate);
     expect(() => {
       validatePublicationUpdate(update, {
         operationOwnership: trustedUpdate.operationOwnership,
@@ -264,6 +267,43 @@ describe('trusted publication diff', () => {
         expect.objectContaining({ entityType: 'learning_unit' }),
       ]),
     );
+    const trustedUpdate = diff.updates[0];
+    if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    const sourceInventory = {
+      baseFiles: [
+        { path, sha256: sha('2'), byteLength: 10 },
+        {
+          path: 'src/content/learning-units/unit-graphs.json',
+          sha256: sha('2'),
+          byteLength: 10,
+        },
+      ],
+      currentFiles: [
+        { path, sha256: sha('3'), byteLength: 11 },
+        {
+          path: 'src/content/learning-units/unit-graphs.json',
+          sha256: sha('3'),
+          byteLength: 11,
+        },
+      ],
+    };
+    expect(() => {
+      validatePublicationUpdate(update, {
+        operationOwnership: trustedUpdate.operationOwnership,
+        ...sourceInventory,
+      });
+    }).toThrow(/PUBLICATION_UPDATE_OWNERSHIP_INVALID/u);
+
+    persistAffectedEntities(update, trustedUpdate);
+    expect(update.operations.map(({ affectedEntities }) => affectedEntities)).toEqual(
+      trustedUpdate.operationOwnership.map(({ affectedEntities }) => affectedEntities),
+    );
+    expect(() => {
+      validatePublicationUpdate(update, {
+        operationOwnership: trustedUpdate.operationOwnership,
+        ...sourceInventory,
+      });
+    }).not.toThrow();
   });
 
   it('requires only the changed structured source for LearningUnit metadata changes', () => {
@@ -305,6 +345,7 @@ describe('trusted publication diff', () => {
     );
     const trustedUpdate = diff.updates[0];
     if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    persistAffectedEntities(update, trustedUpdate);
     expect(trustedUpdate.operationOwnership.map(({ path }) => path)).toEqual([
       'src/content/learning-units/unit-graphs.json',
     ]);
@@ -356,6 +397,7 @@ describe('trusted publication diff', () => {
     );
     const trustedUpdate = diff.updates[0];
     if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    persistAffectedEntities(update, trustedUpdate);
     expect(trustedUpdate.operationOwnership.map(({ path }) => path)).toEqual([
       'src/content/docs/unit-graphs.md',
     ]);
@@ -399,12 +441,61 @@ describe('trusted publication diff', () => {
     );
     const trustedUpdate = diff.updates[0];
     if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    persistAffectedEntities(update, trustedUpdate);
     expect(trustedUpdate.operationOwnership).toHaveLength(1);
     expect(trustedUpdate.operationOwnership[0]?.affectedEntities).toEqual([]);
     expect(() => {
       validatePublicationUpdate(update, {
         operationOwnership: trustedUpdate.operationOwnership,
         correctionImpacts: [],
+        ...sourceInventory,
+      });
+    }).not.toThrow();
+  });
+
+  it('includes every independent owner Problem for a shared body-only change', () => {
+    const baseCatalog = makeTrustedCatalog({});
+    const independentUnit = structuredClone(baseCatalog.learningUnits[0]);
+    if (!independentUnit) throw new Error('LearningUnit fixture is missing.');
+    independentUnit.id = 'unit-independent';
+    independentUnit.title = 'Independent shared owner';
+    independentUnit.problemIds = ['abc212-x46'];
+    independentUnit.globalIndex = 1;
+    baseCatalog.learningUnits.push(independentUnit);
+    const currentCatalog = structuredClone(baseCatalog);
+    const path = 'src/content/docs/index.md';
+    const sourceInventory = {
+      baseFiles: [{ path, sha256: sha('a'), byteLength: 10 }],
+      currentFiles: [{ path, sha256: sha('b'), byteLength: 11 }],
+    };
+    const update = makeUpdate(
+      [
+        makeOperation({
+          operationId: 'operation-replace-shared-body',
+          beforeDigest: sha('a'),
+          afterDigest: sha('b'),
+          affectedProblemIds: ['abc212-x45', 'abc212-x46'],
+        }),
+      ],
+      ['abc212-x45', 'abc212-x46'],
+    );
+
+    const diff = buildTrustedPublicationDiff(
+      [update],
+      parseTrustedCatalog(baseCatalog, 'base'),
+      parseTrustedCatalog(currentCatalog, 'current'),
+      sourceInventory,
+    );
+    const trustedUpdate = diff.updates[0];
+    if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    expect(trustedUpdate.operationOwnership[0]).toMatchObject({
+      affectedProblemIds: ['abc212-x45', 'abc212-x46'],
+      affectedEntities: [],
+    });
+    persistAffectedEntities(update, trustedUpdate);
+    expect(() => {
+      validatePublicationUpdate(update, {
+        operationOwnership: trustedUpdate.operationOwnership,
         ...sourceInventory,
       });
     }).not.toThrow();
@@ -454,6 +545,7 @@ describe('trusted publication diff', () => {
             path,
             beforeDigest,
             afterDigest,
+            affectedEntities: [],
             affectedProblemIds: [],
           }),
         ],
@@ -469,6 +561,7 @@ describe('trusted publication diff', () => {
       );
       const trustedUpdate = diff.updates[0];
       if (!trustedUpdate) throw new Error('Trusted update is missing.');
+      persistAffectedEntities(update, trustedUpdate);
       expect(trustedUpdate.operationOwnership[0]?.affectedProblemIds).toEqual([]);
       expect(trustedUpdate.operationOwnership[0]?.affectedEntities).toEqual([
         {
@@ -534,6 +627,7 @@ describe('trusted publication diff', () => {
     );
     const trustedUpdate = diff.updates[0];
     if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    persistAffectedEntities(update, trustedUpdate);
     expect(() => {
       validatePublicationUpdate(update, {
         operationOwnership: trustedUpdate.operationOwnership,
@@ -573,6 +667,7 @@ describe('trusted publication diff', () => {
     );
     const trustedUpdate = diff.updates[0];
     if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    persistAffectedEntities(update, trustedUpdate);
 
     expect(() => {
       validatePublicationUpdate(update, {
@@ -637,6 +732,7 @@ describe('trusted publication diff', () => {
     );
     const trustedUpdate = diff.updates[0];
     if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    persistAffectedEntities(update, trustedUpdate);
 
     expect(() => {
       validatePublicationUpdate(update, {
@@ -805,6 +901,7 @@ const makeOperation = (overrides: Record<string, unknown>): Record<string, unkno
   path: 'src/content/docs/index.md',
   beforeDigest: sha('2'),
   afterDigest: sha('3'),
+  affectedEntities: [],
   affectedProblemIds: ['abc212-x45'],
   ...overrides,
 });
@@ -838,3 +935,17 @@ const makeUpdate = (
     updatedAt: '2026-07-17T11:00:00+09:00',
     fixtureMode: false,
   });
+
+const persistAffectedEntities = (
+  update: ReturnType<typeof makeUpdate>,
+  trustedUpdate: ReturnType<typeof buildTrustedPublicationDiff>['updates'][number],
+): void => {
+  for (const operation of update.operations) {
+    const trustedOperation = trustedUpdate.operationOwnership.find(
+      ({ operationId }) => operationId === operation.operationId,
+    );
+    if (!trustedOperation)
+      throw new Error(`Trusted operation ${operation.operationId} is missing.`);
+    operation.affectedEntities = trustedOperation.affectedEntities.map((diff) => ({ ...diff }));
+  }
+};
