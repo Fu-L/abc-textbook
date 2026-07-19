@@ -182,7 +182,7 @@ const makeMergeEvidence = (): Record<string, unknown> => {
     humanContentReviewEvidenceDigest: sha('5'),
     constitutionCheck: {
       constitutionPath: '.specify/memory/constitution.md',
-      constitutionVersion: '1.0.0',
+      constitutionVersion: '2.0.0',
       constitutionDigest: sha('6'),
       dependentTemplates: [
         { path: '.specify/templates/plan-template.md', sha256: sha('7'), byteLength: 1 },
@@ -212,7 +212,7 @@ const trustedMergeContext = {
     reviewerId: 'person-author',
     reviewMode: 'self',
   },
-  constitutionVersion: '1.0.0',
+  constitutionVersion: '2.0.0',
   constitutionDigest: sha('6'),
   reviewerId: 'person-author',
   checks: [{ checkId: 'check-contracts', command: 'npm run test:contract', applicable: true }],

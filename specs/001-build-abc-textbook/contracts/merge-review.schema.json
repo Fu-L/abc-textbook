@@ -317,7 +317,7 @@
         },
         "constitutionVersion": {
           "type": "string",
-          "const": "1.0.0"
+          "const": "2.0.0"
         },
         "constitutionDigest": {
           "$ref": "#/$defs/__schema2"
