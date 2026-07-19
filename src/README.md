@@ -10,15 +10,10 @@
   は端末内記録、`lib/validation/` はfail-closed検証を所有します。
 - `components/`, `layouts/`, `pages/`, `styles/` は表示責務だけを持ち、canonical
   dataを再定義しません。
-- Catalog entityの正規所有pathは、構造化entityでは対応する`src/content/<collection>/`配下のstable
-  IDをbasenameとするJSON（shard
-  directoryは許可）、Explanation/LearningUnitではentityの`docPath`も含め、Placementでは`src/content/policies/problem-placements.json`、CorrectionImpactでは`derivedIndexPaths`とする。公開検証時はこの規則でbase/currentのsource
-  provenance inventoryを再構築し、Catalog
-  projectionだけでなく各所有pathのdigest差分もentity差分へ結び付ける。これによりLearningUnitのJSONメタデータだけの変更、本文だけの変更、両方の変更を区別できる。1ファイルを複数entityが所有することを許し、その場合は同じbefore/after
-  digestを持つoperationをentityごとに記録する。同じCatalog
-  entityの一つの差分に複数pathが関係する場合も、対応するoperationは一つのPublicationUpdateにまとめる。同じcanonical
-  source
-  pathをbaseまたはcurrentで共有する複数entity差分も、共有pathに関係するoperationを一つのPublicationUpdateにまとめる。
+- Publication operationはentityの状態遷移ではなく、trustedなbase/current
+  inventoryから導出した実ファイル遷移をcanonical
+  pathごとに1件だけ記録する。`entityType`と`entityId`はそのpathの所有権を検証するanchorであり、問題を持たないContestSlotには`contest-slot-<contest>-<lowercase-label>`を使う。Catalog
+  projectionのadd/replace/removeはファイル遷移と独立に比較し、各差分が所有する変更pathへ関連付ける。共有Markdownでは1件のファイル遷移に複数のCatalog差分を関連付けられるが、本文だけの変更から無関係なentity差分を合成しない。同じentity差分に必要な複数pathは一つのPublicationUpdateへまとめる。
 
 `staging/` から `src/content/`
 への直接importは禁止です。公開候補は検証・review・承認・最終検証を経た処理だけが反映します。

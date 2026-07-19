@@ -254,7 +254,6 @@
             ]
           },
           "affectedProblemIds": {
-            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/$defs/__schema9"

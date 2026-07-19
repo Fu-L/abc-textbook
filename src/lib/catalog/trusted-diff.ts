@@ -3,6 +3,7 @@ import type { z } from 'zod';
 import { canonicalJson } from '../domain/canonical-json.js';
 import { ProblemIdSchema, CatalogSchema } from '../domain/schema-parts/catalog.js';
 import type { PublicationUpdateSchema } from '../domain/schema-parts/release.js';
+import { structuredContentRoots } from './content-source-registry.js';
 
 type Catalog = z.infer<typeof CatalogSchema>;
 type PublicationUpdate = z.infer<typeof PublicationUpdateSchema>;
@@ -75,6 +76,16 @@ interface CatalogNode {
 const operationAlias = (entityType: EntityType, entityId: string): string =>
   `${entityType}\u0000${entityId}`;
 
+const contestSlotOperationId = (contestId: string, label: string): string =>
+  `contest-slot-${contestId}-${label.toLocaleLowerCase('en-US')}`;
+
+const operationEntityId = (node: CatalogNode): string => {
+  if (node.entityType !== 'contest_slot') return node.identity;
+  const contestId = typeof node.value.contestId === 'string' ? node.value.contestId : undefined;
+  const label = typeof node.value.label === 'string' ? node.value.label : undefined;
+  return contestId && label ? contestSlotOperationId(contestId, label) : node.identity;
+};
+
 const canonicalEntityIdentity = (
   entityType: EntityType,
   value: Record<string, unknown>,
@@ -82,7 +93,7 @@ const canonicalEntityIdentity = (
   if (entityType === 'contest_slot') {
     const contestId = typeof value.contestId === 'string' ? value.contestId : undefined;
     const label = typeof value.label === 'string' ? value.label : undefined;
-    if (contestId && label) return `${contestId}:${label}`;
+    if (contestId && label) return `${contestId}:${label.toLocaleUpperCase('en-US')}`;
   }
   if (entityType === 'technique_inventory' && typeof value.problemId === 'string') {
     return value.problemId;
@@ -103,6 +114,7 @@ const nodeAliases = (entityType: EntityType, value: Record<string, unknown>): Se
       aliases.add(`${contestId}:${label}`);
       aliases.add(`contest-slot-${contestId}-${label}`);
       aliases.add(`${contestId}-${label}`);
+      aliases.add(contestSlotOperationId(contestId, label));
     }
   }
   if (entityType === 'technique_inventory' && typeof value.problemId === 'string') {
@@ -249,17 +261,6 @@ class CatalogGraph {
     return this.sourceFiles?.get(sourcePath)?.sha256;
   }
 
-  effectiveProjection(node: CatalogNode): string {
-    if (!this.sourceFiles) return node.projection;
-    return canonicalJson({
-      catalog: node.projection,
-      sourceFiles: this.sourcePaths(node).map((sourcePath) => ({
-        path: sourcePath,
-        sha256: this.sourceDigest(sourcePath) ?? null,
-      })),
-    });
-  }
-
   referencedNodes(node: CatalogNode): readonly CatalogNode[] {
     return [...node.references]
       .map((key) => this.nodes.get(key))
@@ -310,6 +311,13 @@ export interface TrustedOperationOwnership {
   readonly path: string;
   readonly beforeDigest: string | null;
   readonly afterDigest: string | null;
+  readonly affectedEntities: readonly TrustedEntityDiffReference[];
+}
+
+export interface TrustedEntityDiffReference {
+  readonly entityType: EntityType;
+  readonly entityId: string;
+  readonly action: 'add' | 'replace' | 'remove';
 }
 
 export interface TrustedCorrectionImpact {
@@ -362,19 +370,19 @@ interface CatalogEntityDiff {
 }
 
 const structuredEntityRoots: Readonly<Partial<Record<EntityType, string>>> = {
-  contest: 'src/content/contests',
-  contest_slot: 'src/content/problem-slots',
-  problem: 'src/content/problems',
-  technique_inventory: 'src/content/technique-inventory',
-  tag: 'src/content/tags',
-  learning_outcome: 'src/content/learning-outcomes',
-  learning_unit: 'src/content/learning-units',
-  claim: 'src/content/claims',
-  example: 'src/content/examples',
-  exercise: 'src/content/exercises',
-  assessment: 'src/content/assessments',
-  answer_material: 'src/content/answer-materials',
-  source: 'src/content/sources',
+  contest: structuredContentRoots.contests,
+  contest_slot: structuredContentRoots.problemSlots,
+  problem: structuredContentRoots.problems,
+  technique_inventory: structuredContentRoots.techniqueInventory,
+  tag: structuredContentRoots.tags,
+  learning_outcome: structuredContentRoots.learningOutcomes,
+  learning_unit: structuredContentRoots.learningUnits,
+  claim: structuredContentRoots.claims,
+  example: structuredContentRoots.examples,
+  exercise: structuredContentRoots.exercises,
+  assessment: structuredContentRoots.assessments,
+  answer_material: structuredContentRoots.answerMaterials,
+  source: structuredContentRoots.sources,
 };
 
 const pathBasename = (value: string): string => value.slice(value.lastIndexOf('/') + 1);
@@ -391,6 +399,7 @@ const structuredFileNames = (node: CatalogNode): readonly string[] => {
     const contestId = typeof node.value.contestId === 'string' ? node.value.contestId : undefined;
     const label = typeof node.value.label === 'string' ? node.value.label : undefined;
     if (contestId && label) {
+      candidates.add(contestSlotOperationId(contestId, label));
       candidates.add(`${contestId}-${label.toLocaleLowerCase('en-US')}`);
       candidates.add(`${contestId}_${label.toLocaleLowerCase('en-US')}`);
       candidates.add(contestId);
@@ -405,8 +414,8 @@ const structuredFileNames = (node: CatalogNode): readonly string[] => {
  * Structured records are one JSON object per file, with arbitrary shard
  * directories allowed below their collection root. Explanations and learning
  * units additionally own their declared Markdown docPath. A Markdown file may
- * therefore be owned by multiple entity projections; operations may repeat
- * that path when each operation has the same file transition.
+ * therefore be owned by multiple entity projections. File transitions are
+ * represented once per path; affected Catalog entity diffs are derived below.
  */
 const nodeOwnsPath = (node: CatalogNode, candidatePath: string): boolean => {
   if (!candidatePath.startsWith('src/content/')) return false;
@@ -442,8 +451,8 @@ const catalogEntityDiffs = (pair: CatalogGraphPair): readonly CatalogEntityDiff[
     const current = currentByKey.get(key);
     const node = current ?? base;
     if (!node) return [];
-    const baseProjection = base ? pair.base.effectiveProjection(base) : undefined;
-    const currentProjection = current ? pair.current.effectiveProjection(current) : undefined;
+    const baseProjection = base?.projection;
+    const currentProjection = current?.projection;
     const action: PublicationOperation['action'] | undefined = !base
       ? 'add'
       : !current
@@ -472,7 +481,7 @@ const catalogEntityDiffs = (pair: CatalogGraphPair): readonly CatalogEntityDiff[
       {
         key,
         entityType: node.entityType,
-        entityId: node.identity,
+        entityId: operationEntityId(node),
         action,
         base,
         current,
@@ -482,56 +491,42 @@ const catalogEntityDiffs = (pair: CatalogGraphPair): readonly CatalogEntityDiff[
   });
 };
 
-const resolveEntityDiff = (
+const resolveOperationNodes = (
   pair: CatalogGraphPair,
-  diffs: ReadonlyMap<string, CatalogEntityDiff>,
   operation: PublicationOperation,
-): CatalogEntityDiff => {
+): readonly CatalogNode[] => {
   const nodes = resolveNodes(pair, operation);
-  const node = nodes[0];
-  if (!node) {
-    throw new TrustedCatalogDiffError(
-      'PUBLICATION_UPDATE_ENTITY_NOT_FOUND',
-      `Cannot resolve ${operation.entityType}:${operation.entityId} in the trusted Catalogs.`,
-    );
-  }
-  const diff = diffs.get(operationAlias(node.entityType, node.identity));
-  if (diff?.action !== operation.action) {
-    throw new TrustedCatalogDiffError(
-      'PUBLICATION_UPDATE_ENTITY_DIFF_INVALID',
-      `${operation.operationId} does not correspond to a changed ${operation.entityType}:${node.identity} Catalog projection.`,
-    );
-  }
-  const ownedNodes =
-    operation.action === 'add'
-      ? [diff.current]
-      : operation.action === 'remove'
-        ? [diff.base]
-        : [diff.base, diff.current];
-  const pathIsOwned =
-    operation.action === 'replace'
-      ? ownedNodes.some(
-          (ownedNode) => ownedNode !== undefined && nodeOwnsPath(ownedNode, operation.path),
-        )
-      : ownedNodes.every(
-          (ownedNode) => ownedNode !== undefined && nodeOwnsPath(ownedNode, operation.path),
-        );
-  if (!pathIsOwned) {
+  if (!nodes.some((node) => nodeOwnsPath(node, operation.path))) {
     throw new TrustedCatalogDiffError(
       'PUBLICATION_UPDATE_ENTITY_PATH_INVALID',
-      `${operation.operationId} claims ${operation.path}, which is not a canonical source path for ${operation.entityType}:${node.identity}.`,
+      `${operation.operationId} claims ${operation.path}, which is not a canonical source path for ${operation.entityType}:${operation.entityId}.`,
     );
   }
-  if (
-    (pair.base.hasSourceInventory() || pair.current.hasSourceInventory()) &&
-    !diff.changedSourcePaths.includes(operation.path)
-  ) {
-    throw new TrustedCatalogDiffError(
-      'PUBLICATION_UPDATE_ENTITY_SOURCE_PATH_INVALID',
-      `${operation.operationId} claims ${operation.path}, but that source path did not change in the trusted inventory for ${operation.entityType}:${node.identity}.`,
-    );
+  if (pair.base.hasSourceInventory() || pair.current.hasSourceInventory()) {
+    const beforeDigest = pair.base.sourceDigest(operation.path);
+    const afterDigest = pair.current.sourceDigest(operation.path);
+    const action =
+      beforeDigest === undefined
+        ? afterDigest === undefined
+          ? undefined
+          : 'add'
+        : afterDigest === undefined
+          ? 'remove'
+          : beforeDigest === afterDigest
+            ? undefined
+            : 'replace';
+    if (
+      action !== operation.action ||
+      (beforeDigest ?? null) !== operation.beforeDigest ||
+      (afterDigest ?? null) !== operation.afterDigest
+    ) {
+      throw new TrustedCatalogDiffError(
+        'PUBLICATION_UPDATE_SOURCE_DIFF_INVALID',
+        `${operation.operationId} does not reproduce the trusted file transition for ${operation.path}.`,
+      );
+    }
   }
-  return diff;
+  return nodes;
 };
 
 const resolveNodes = (
@@ -540,24 +535,6 @@ const resolveNodes = (
 ): readonly CatalogNode[] => {
   const base = pair.base.resolve(operation.entityType, operation.entityId);
   const current = pair.current.resolve(operation.entityType, operation.entityId);
-  if (operation.action === 'add' && (!current || base)) {
-    throw new TrustedCatalogDiffError(
-      'PUBLICATION_UPDATE_ENTITY_DIFF_INVALID',
-      `${operation.operationId} adds an entity that is not newly present in the current Catalog.`,
-    );
-  }
-  if (operation.action === 'remove' && (!base || current)) {
-    throw new TrustedCatalogDiffError(
-      'PUBLICATION_UPDATE_ENTITY_DIFF_INVALID',
-      `${operation.operationId} removes an entity that is not absent from the current Catalog or missing from the base Catalog.`,
-    );
-  }
-  if (operation.action === 'replace' && (!base || !current)) {
-    throw new TrustedCatalogDiffError(
-      'PUBLICATION_UPDATE_ENTITY_DIFF_INVALID',
-      `${operation.operationId} replaces an entity that is not present in both Catalogs.`,
-    );
-  }
   const nodes = [base, current].filter((value): value is CatalogNode => value !== undefined);
   if (nodes.length === 0) {
     throw new TrustedCatalogDiffError(
@@ -589,14 +566,25 @@ const operationProblemIds = (
           ]),
     ),
   );
-  if (problemIds.length === 0) {
-    throw new TrustedCatalogDiffError(
-      'PUBLICATION_UPDATE_OWNERSHIP_UNDERIVED',
-      `Cannot derive Problem ownership from the trusted ${operation.entityType}:${operation.entityId} Catalog diff.`,
-    );
-  }
   return problemIds;
 };
+
+const entityDiffProblemIds = (pair: CatalogGraphPair, diff: CatalogEntityDiff): readonly string[] =>
+  unionProblemIds(
+    [diff.base, diff.current]
+      .filter((node): node is CatalogNode => node !== undefined)
+      .map((node) =>
+        node.entityType === 'correction_impact'
+          ? unionProblemIds([
+              pair.base.problemIdsOwnedByReferences(node),
+              pair.current.problemIdsOwnedByReferences(node),
+            ])
+          : unionProblemIds([
+              pair.base.problemIdsOwnedBy(node),
+              pair.current.problemIdsOwnedBy(node),
+            ]),
+      ),
+  );
 
 const correctionImpactTargets = (
   pair: CatalogGraphPair,
@@ -707,54 +695,98 @@ export const buildTrustedPublicationDiff = (
     current: new CatalogGraph(currentCatalog, sourceInventory?.currentFiles),
   };
   const entityDiffs = catalogEntityDiffs(pair);
-  const entityDiffByKey = new Map(entityDiffs.map((diff) => [diff.key, diff]));
-  // A Catalog projection diff is atomic at PublicationUpdate scope. Keep its
-  // owner separate from path representation because one entity may span
-  // multiple source paths during a move.
-  const entityDiffOwners = new Map<string, string>();
-  const representedEntityDiffPaths = new Map<string, Set<string>>();
-  const sharedCanonicalPathOwners = new Map<string, string>();
+  const operationByPath = new Map<
+    string,
+    { readonly update: PublicationUpdate; readonly operation: PublicationOperation }
+  >();
+  const affectedEntityDiffs = new Map<string, CatalogEntityDiff[]>();
+
+  for (const update of updates) {
+    for (const operation of update.operations) {
+      const previous = operationByPath.get(operation.path);
+      if (previous) {
+        throw new TrustedCatalogDiffError(
+          'PUBLICATION_UPDATE_DUPLICATE_PATH',
+          `${operation.operationId} duplicates ${operation.path}, already represented by ${previous.operation.operationId}; a file transition must be recorded once.`,
+        );
+      }
+      resolveOperationNodes(pair, operation);
+      const digestShapeIsValid =
+        operation.action === 'add'
+          ? operation.beforeDigest === null && operation.afterDigest !== null
+          : operation.action === 'replace'
+            ? operation.beforeDigest !== null &&
+              operation.afterDigest !== null &&
+              operation.beforeDigest !== operation.afterDigest
+            : operation.beforeDigest !== null && operation.afterDigest === null;
+      if (!digestShapeIsValid) {
+        throw new TrustedCatalogDiffError(
+          'PUBLICATION_UPDATE_SOURCE_DIFF_INVALID',
+          `${operation.operationId} has digests that conflict with its ${operation.action} file transition.`,
+        );
+      }
+      operationByPath.set(operation.path, { update, operation });
+      affectedEntityDiffs.set(operation.operationId, []);
+    }
+  }
+
+  for (const diff of entityDiffs) {
+    const paths = canonicalEntityDiffPaths(diff);
+    const missingPaths = paths.filter((path) => !operationByPath.has(path));
+    if (missingPaths.length > 0) {
+      throw new TrustedCatalogDiffError(
+        'PUBLICATION_UPDATE_ENTITY_DIFF_INCOMPLETE',
+        `Catalog ${diff.action} ${diff.entityType}:${diff.entityId} is missing canonical source paths: ${missingPaths.join(', ')}.`,
+      );
+    }
+    const owners = new Set(
+      paths.map((path) => operationByPath.get(path)?.update.updateId).filter(Boolean),
+    );
+    if (owners.size !== 1) {
+      throw new TrustedCatalogDiffError(
+        'PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE',
+        `Catalog ${diff.action} ${diff.entityType}:${diff.entityId} is split across updates; all source paths for one Catalog diff must be atomic.`,
+      );
+    }
+    for (const path of paths) {
+      const operationId = operationByPath.get(path)?.operation.operationId;
+      if (!operationId) continue;
+      affectedEntityDiffs.get(operationId)?.push(diff);
+    }
+  }
+
+  if (!sourceInventory) {
+    const unrelated = [...operationByPath.values()].find(
+      ({ operation }) => affectedEntityDiffs.get(operation.operationId)?.length === 0,
+    );
+    if (unrelated) {
+      throw new TrustedCatalogDiffError(
+        'PUBLICATION_UPDATE_ENTITY_DIFF_INVALID',
+        `${unrelated.operation.operationId} has no independently derived Catalog diff and no trusted source inventory.`,
+      );
+    }
+  }
+
   const trustedUpdates = updates.map((update) => {
     const operationOwnership = update.operations.map((operation) => {
-      const diff = resolveEntityDiff(pair, entityDiffByKey, operation);
-      const ownerUpdateId = entityDiffOwners.get(diff.key);
-      if (ownerUpdateId !== undefined && ownerUpdateId !== update.updateId) {
-        throw new TrustedCatalogDiffError(
-          'PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE',
-          `${operation.operationId} splits ${diff.entityType}:${diff.entityId} across updates ${ownerUpdateId} and ${update.updateId}; all operations for one Catalog diff must belong to the same update.`,
-        );
-      }
-      entityDiffOwners.set(diff.key, update.updateId);
-
-      for (const path of canonicalEntityDiffPaths(diff)) {
-        const sharedPathOwner = sharedCanonicalPathOwners.get(path);
-        if (sharedPathOwner !== undefined && sharedPathOwner !== update.updateId) {
-          throw new TrustedCatalogDiffError(
-            'PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE',
-            `${operation.operationId} splits Catalog diffs sharing ${path} across updates ${sharedPathOwner} and ${update.updateId}; shared canonical source paths must be updated atomically.`,
-          );
-        }
-        sharedCanonicalPathOwners.set(path, update.updateId);
-      }
-
-      const representedPaths = representedEntityDiffPaths.get(diff.key) ?? new Set<string>();
-      if (representedPaths.has(operation.path)) {
-        throw new TrustedCatalogDiffError(
-          'PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE',
-          `${operation.operationId} reclaims ${diff.entityType}:${diff.entityId} at ${operation.path}, which is already represented by another operation.`,
-        );
-      }
-      representedPaths.add(operation.path);
-      representedEntityDiffPaths.set(diff.key, representedPaths);
+      const operationEntityDiffs = affectedEntityDiffs.get(operation.operationId) ?? [];
       return {
         operationId: operation.operationId,
-        affectedProblemIds: operationProblemIds(pair, operation),
+        affectedProblemIds: unionProblemIds([
+          operationProblemIds(pair, operation),
+          ...operationEntityDiffs.map((diff) => entityDiffProblemIds(pair, diff)),
+        ]),
         entityType: operation.entityType,
         entityId: operation.entityId,
         action: operation.action,
         path: operation.path,
         beforeDigest: operation.beforeDigest,
         afterDigest: operation.afterDigest,
+        affectedEntities: operationEntityDiffs.map(({ entityType, entityId, action }) => ({
+          entityType,
+          entityId,
+          action,
+        })),
       };
     });
     return {
@@ -766,27 +798,6 @@ export const buildTrustedPublicationDiff = (
           : [],
     };
   });
-  const missingEntityDiff = entityDiffs.find((diff) => !entityDiffOwners.has(diff.key));
-  if (missingEntityDiff) {
-    throw new TrustedCatalogDiffError(
-      'PUBLICATION_UPDATE_ENTITY_DIFF_INCOMPLETE',
-      `Catalog ${missingEntityDiff.action} ${missingEntityDiff.entityType}:${missingEntityDiff.entityId} is not represented by a publication operation.`,
-    );
-  }
-  const incompleteEntityDiff = entityDiffs.find((diff) => {
-    const representedPaths = representedEntityDiffPaths.get(diff.key) ?? new Set<string>();
-    return canonicalEntityDiffPaths(diff).some((path) => !representedPaths.has(path));
-  });
-  if (incompleteEntityDiff) {
-    const representedPaths = representedEntityDiffPaths.get(incompleteEntityDiff.key) ?? new Set();
-    const missingPaths = canonicalEntityDiffPaths(incompleteEntityDiff).filter(
-      (path) => !representedPaths.has(path),
-    );
-    throw new TrustedCatalogDiffError(
-      'PUBLICATION_UPDATE_ENTITY_DIFF_INCOMPLETE',
-      `Catalog ${incompleteEntityDiff.action} ${incompleteEntityDiff.entityType}:${incompleteEntityDiff.entityId} is missing canonical source paths: ${missingPaths.join(', ')}.`,
-    );
-  }
   return { updates: trustedUpdates };
 };
 

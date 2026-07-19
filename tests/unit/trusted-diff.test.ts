@@ -54,16 +54,6 @@ describe('trusted publication diff', () => {
           afterDigest: sha('3'),
           affectedProblemIds: ['abc212-x45'],
         },
-        {
-          operationId: 'operation-add-correction-impact',
-          entityType: 'correction_impact',
-          entityId: 'correction-impact-graphs',
-          action: 'add',
-          path: 'src/content/docs/index.md',
-          beforeDigest: sha('2'),
-          afterDigest: sha('3'),
-          affectedProblemIds: ['abc212-x45'],
-        },
       ],
       authoringResults: [
         {
@@ -104,7 +94,7 @@ describe('trusted publication diff', () => {
       {
         correctionImpactId: 'correction-impact-graphs',
         affectedProblemIds: ['abc212-x45'],
-        operationIds: ['operation-add-correction-impact', 'operation-replace-explanation'],
+        operationIds: ['operation-replace-explanation'],
       },
     ]);
 
@@ -145,7 +135,7 @@ describe('trusted publication diff', () => {
           operationId: 'operation-remove-correction-impact',
           entityType: 'correction_impact',
           entityId: 'correction-impact-graphs',
-          action: 'remove',
+          action: 'replace',
           path: 'src/content/docs/index.md',
           beforeDigest: sha('2'),
           afterDigest: sha('3'),
@@ -254,13 +244,6 @@ describe('trusted publication diff', () => {
         path,
       }),
       makeOperation({
-        operationId: 'operation-replace-learning-unit',
-        entityType: 'learning_unit',
-        entityId: 'unit-graphs',
-        action: 'replace',
-        path,
-      }),
-      makeOperation({
         operationId: 'operation-replace-learning-unit-json',
         entityType: 'learning_unit',
         entityId: 'unit-graphs',
@@ -274,7 +257,13 @@ describe('trusted publication diff', () => {
       parseTrustedCatalog(baseCatalog, 'base'),
       parseTrustedCatalog(currentCatalog, 'current'),
     );
-    expect(diff.updates[0]?.operationOwnership).toHaveLength(3);
+    expect(diff.updates[0]?.operationOwnership).toHaveLength(2);
+    expect(diff.updates[0]?.operationOwnership[0]?.affectedEntities).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ entityType: 'explanation' }),
+        expect.objectContaining({ entityType: 'learning_unit' }),
+      ]),
+    );
   });
 
   it('requires only the changed structured source for LearningUnit metadata changes', () => {
@@ -380,6 +369,124 @@ describe('trusted publication diff', () => {
     }).not.toThrow();
   });
 
+  it('records a shared Markdown body change once without inventing other entity diffs', () => {
+    const baseCatalog = makeTrustedCatalog({});
+    const currentCatalog = structuredClone(baseCatalog);
+    const baseUnit = baseCatalog.learningUnits[0];
+    const currentUnit = currentCatalog.learningUnits[0];
+    if (!baseUnit || !currentUnit) throw new Error('LearningUnit fixture is missing.');
+    baseUnit.docPath = 'src/content/docs/index.md';
+    currentUnit.docPath = baseUnit.docPath;
+    const sourceInventory = {
+      baseFiles: [{ path: baseUnit.docPath, sha256: sha('a'), byteLength: 10 }],
+      currentFiles: [{ path: baseUnit.docPath, sha256: sha('b'), byteLength: 11 }],
+    };
+    const update = makeUpdate([
+      makeOperation({
+        operationId: 'operation-replace-learning-unit-body',
+        entityType: 'learning_unit',
+        entityId: 'unit-graphs',
+        beforeDigest: sha('a'),
+        afterDigest: sha('b'),
+      }),
+    ]);
+
+    const diff = buildTrustedPublicationDiff(
+      [update],
+      parseTrustedCatalog(baseCatalog, 'base'),
+      parseTrustedCatalog(currentCatalog, 'current'),
+      sourceInventory,
+    );
+    const trustedUpdate = diff.updates[0];
+    if (!trustedUpdate) throw new Error('Trusted update is missing.');
+    expect(trustedUpdate.operationOwnership).toHaveLength(1);
+    expect(trustedUpdate.operationOwnership[0]?.affectedEntities).toEqual([]);
+    expect(() => {
+      validatePublicationUpdate(update, {
+        operationOwnership: trustedUpdate.operationOwnership,
+        correctionImpacts: [],
+        ...sourceInventory,
+      });
+    }).not.toThrow();
+  });
+
+  it.each(['add', 'replace', 'remove'] as const)(
+    'publishes a problem-less ContestSlot through a stable operation identity (%s)',
+    (transition) => {
+      const absentSlot = {
+        contestId: 'abc212',
+        label: 'E',
+        officialOrder: null,
+        availability: 'official_absent' as const,
+        catalogStatus: 'uncollected' as const,
+        holdReason: null,
+        problemId: null,
+        sourceRevisionId: 'source-revision-abc212-e',
+        checkedAt: '2026-07-17T02:00:00+09:00',
+      };
+      const baseCatalog = makeTrustedCatalog({}) as unknown as Record<string, unknown> & {
+        contestSlots: Record<string, unknown>[];
+      };
+      const currentCatalog = structuredClone(baseCatalog);
+      baseCatalog.contestSlots = transition === 'add' ? [] : [structuredClone(absentSlot)];
+      currentCatalog.contestSlots =
+        transition === 'remove'
+          ? []
+          : [
+              transition === 'replace'
+                ? { ...absentSlot, checkedAt: '2026-07-18T02:00:00+09:00' }
+                : structuredClone(absentSlot),
+            ];
+      const path = 'src/content/problem-slots/contest-slot-abc212-e.json';
+      const beforeDigest = transition === 'add' ? null : sha('a');
+      const afterDigest = transition === 'remove' ? null : sha('b');
+      const sourceInventory = {
+        baseFiles: beforeDigest === null ? [] : [{ path, sha256: beforeDigest, byteLength: 10 }],
+        currentFiles: afterDigest === null ? [] : [{ path, sha256: afterDigest, byteLength: 11 }],
+      };
+      const update = makeUpdate(
+        [
+          makeOperation({
+            operationId: `operation-${transition}-contest-slot`,
+            entityType: 'contest_slot',
+            entityId: 'contest-slot-abc212-e',
+            action: transition,
+            path,
+            beforeDigest,
+            afterDigest,
+            affectedProblemIds: [],
+          }),
+        ],
+        [],
+        `update-${transition}-contest-slot`,
+      );
+
+      const diff = buildTrustedPublicationDiff(
+        [update],
+        parseTrustedCatalog(baseCatalog, 'base'),
+        parseTrustedCatalog(currentCatalog, 'current'),
+        sourceInventory,
+      );
+      const trustedUpdate = diff.updates[0];
+      if (!trustedUpdate) throw new Error('Trusted update is missing.');
+      expect(trustedUpdate.operationOwnership[0]?.affectedProblemIds).toEqual([]);
+      expect(trustedUpdate.operationOwnership[0]?.affectedEntities).toEqual([
+        {
+          entityType: 'contest_slot',
+          entityId: 'contest-slot-abc212-e',
+          action: transition,
+        },
+      ]);
+      expect(() => {
+        validatePublicationUpdate(update, {
+          operationOwnership: trustedUpdate.operationOwnership,
+          correctionImpacts: [],
+          ...sourceInventory,
+        });
+      }).not.toThrow();
+    },
+  );
+
   it('requires both LearningUnit sources when metadata and body change together', () => {
     const baseCatalog = makeTrustedCatalog({});
     const currentCatalog = structuredClone(baseCatalog);
@@ -447,11 +554,13 @@ describe('trusted publication diff', () => {
     const update = makeUpdate([
       makeOperation({
         operationId: 'operation-remove-explanation-doc',
+        action: 'remove',
         beforeDigest: sha('2'),
         afterDigest: null,
       }),
       makeOperation({
         operationId: 'operation-add-explanation-doc',
+        action: 'add',
         path: 'src/content/docs/moved.md',
         beforeDigest: null,
         afterDigest: sha('3'),
@@ -504,6 +613,7 @@ describe('trusted publication diff', () => {
         operationId: 'operation-remove-correction-index',
         entityType: 'correction_impact',
         entityId: 'correction-impact-graphs',
+        action: 'remove',
         beforeDigest: sha('2'),
         afterDigest: null,
       }),
@@ -511,6 +621,7 @@ describe('trusted publication diff', () => {
         operationId: 'operation-add-correction-index',
         entityType: 'correction_impact',
         entityId: 'correction-impact-graphs',
+        action: 'add',
         path: 'src/content/docs/moved-index.md',
         beforeDigest: null,
         afterDigest: sha('3'),
@@ -553,6 +664,7 @@ describe('trusted publication diff', () => {
             [
               makeOperation({
                 operationId: 'operation-remove-explanation-doc',
+                action: 'remove',
                 beforeDigest: sha('2'),
                 afterDigest: null,
               }),
@@ -564,6 +676,7 @@ describe('trusted publication diff', () => {
             [
               makeOperation({
                 operationId: 'operation-add-explanation-doc',
+                action: 'add',
                 path: 'src/content/docs/moved.md',
                 beforeDigest: null,
                 afterDigest: sha('3'),
@@ -615,7 +728,7 @@ describe('trusted publication diff', () => {
         parseTrustedCatalog(baseCatalog, 'base'),
         parseTrustedCatalog(currentCatalog, 'current'),
       );
-    }).toThrow(/PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE/u);
+    }).toThrow(/PUBLICATION_UPDATE_DUPLICATE_PATH/u);
   });
 
   it('rejects splitting shared source paths across entity updates', () => {
@@ -636,6 +749,7 @@ describe('trusted publication diff', () => {
                 operationId: 'operation-remove-explanation-doc',
                 entityType: 'explanation',
                 entityId: 'explanation-abc212-x45',
+                action: 'remove',
                 beforeDigest: sha('2'),
                 afterDigest: null,
               }),
@@ -643,6 +757,7 @@ describe('trusted publication diff', () => {
                 operationId: 'operation-add-explanation-doc',
                 entityType: 'explanation',
                 entityId: 'explanation-abc212-x45',
+                action: 'add',
                 path: 'src/content/docs/moved.md',
                 beforeDigest: null,
                 afterDigest: sha('3'),
@@ -657,6 +772,7 @@ describe('trusted publication diff', () => {
                 operationId: 'operation-remove-learning-unit-doc',
                 entityType: 'learning_unit',
                 entityId: 'unit-graphs',
+                action: 'remove',
                 beforeDigest: sha('2'),
                 afterDigest: null,
               }),
@@ -664,6 +780,7 @@ describe('trusted publication diff', () => {
                 operationId: 'operation-add-learning-unit-doc',
                 entityType: 'learning_unit',
                 entityId: 'unit-graphs',
+                action: 'add',
                 path: 'src/content/docs/moved.md',
                 beforeDigest: null,
                 afterDigest: sha('3'),
@@ -676,7 +793,7 @@ describe('trusted publication diff', () => {
         parseTrustedCatalog(baseCatalog, 'base'),
         parseTrustedCatalog(currentCatalog, 'current'),
       );
-    }).toThrow(/PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE/u);
+    }).toThrow(/PUBLICATION_UPDATE_DUPLICATE_PATH/u);
   });
 });
 

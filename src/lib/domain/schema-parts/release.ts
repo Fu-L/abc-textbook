@@ -56,7 +56,7 @@ const PublicationOperationSchema = strictObject({
    * operations can affect more than one Problem, so deriving the update scope
    * from `entityType === "problem"` is not sufficient.
    */
-  affectedProblemIds: uniqueArray(ProblemIdSchema).min(1),
+  affectedProblemIds: uniqueArray(ProblemIdSchema),
 });
 
 const PublicationAuthoringResultSchema = strictObject({
