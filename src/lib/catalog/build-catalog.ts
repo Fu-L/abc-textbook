@@ -184,6 +184,11 @@ export interface CatalogLike {
       readonly kind: 'executable' | 'pseudocode' | 'illustrative';
       readonly verificationStatus: 'pending' | 'passed' | 'not_applicable' | 'failed';
     }[];
+    readonly exercises: readonly {
+      readonly key: string;
+      readonly learningOutcomeIds: readonly string[];
+      readonly answer: { readonly verificationStatus: 'pending' | 'passed' | 'failed' };
+    }[];
   }[];
   readonly learningOutcomes: readonly {
     readonly id: string;
@@ -235,9 +240,19 @@ export interface CatalogLike {
   readonly correctionImpacts: readonly {
     readonly id: string;
     readonly sourceRevisionId: string;
-    readonly authoringUnitProblemIds: readonly string[];
-    readonly affectedSectionKeys: readonly string[];
-    readonly learningUnitIds: readonly string[];
+    readonly affectedContentLocators: readonly (
+      | {
+          readonly ownerType: 'problem';
+          readonly problemId: string;
+          readonly path: string;
+        }
+      | {
+          readonly ownerType: 'learning_unit';
+          readonly learningUnitId: string;
+          readonly path: string;
+        }
+    )[];
+    readonly affectedLearningUnitOrderIds: readonly string[];
     readonly verificationStatus: string;
   }[];
   readonly [key: string]: unknown;
@@ -724,6 +739,7 @@ export const validateCatalogSemantics = (
   const tagIds = idSet('TAG', catalog.tags);
   const outcomeIds = idSet('OUTCOME', catalog.learningOutcomes);
   const unitIds = idSet('LEARNING_UNIT', catalog.learningUnits);
+  const learningUnitById = new Map(catalog.learningUnits.map((unit) => [unit.id, unit]));
   const placementIds = idSet('PLACEMENT', catalog.placements);
   const sourceIds = idSet('SOURCE_REVISION', catalog.sources);
   idSet('CORRECTION_IMPACT', catalog.correctionImpacts);
@@ -1039,6 +1055,21 @@ export const validateCatalogSemantics = (
         });
       }
     }
+    for (const exercise of unit.exercises) {
+      requireRefs(
+        `${unit.id}:${exercise.key}`,
+        'learningOutcomeIds',
+        exercise.learningOutcomeIds,
+        outcomeIds,
+      );
+      if (exercise.answer.verificationStatus !== 'passed') {
+        diagnostics.push({
+          code: 'LEARNING_UNIT_ANSWER_NOT_VERIFIED',
+          entityId: unit.id,
+          message: `Exercise ${exercise.key} answer is not verified.`,
+        });
+      }
+    }
   }
   for (const placement of catalog.placements) {
     requireRefs(placement.id, 'problemId', [placement.problemId], problemIds);
@@ -1218,11 +1249,11 @@ export const validateCatalogSemantics = (
       });
     }
   }
-  const authoringSectionExists = (
+  const problemContentPathExists = (
     unit: CatalogLike['authoringUnits'][number],
-    key: string,
+    path: string,
   ): boolean => {
-    const [namespace, localKey, detail] = key.split('.');
+    const [namespace, localKey, detail] = path.split('.');
     if (!namespace || !localKey) return false;
     if (namespace === 'sections') {
       return detail === undefined && Object.hasOwn(unit.sections, localKey);
@@ -1241,6 +1272,30 @@ export const validateCatalogSemantics = (
     }
     return false;
   };
+  const learningUnitContentPathExists = (
+    unit: CatalogLike['learningUnits'][number],
+    path: string,
+  ): boolean => {
+    if (path === 'content') return true;
+    const [namespace, localKey, detail] = path.split('.');
+    if (!namespace || !localKey) return false;
+    if (namespace === 'examples') {
+      return detail === undefined && unit.examples.some((example) => example.key === localKey);
+    }
+    if (namespace === 'exercises') {
+      const exercise = unit.exercises.find((candidate) => candidate.key === localKey);
+      return Boolean(
+        exercise && (detail === undefined || detail === 'assessment' || detail === 'answer'),
+      );
+    }
+    return false;
+  };
+  const correctionLocatorKey = (
+    locator: CatalogLike['correctionImpacts'][number]['affectedContentLocators'][number],
+  ): string =>
+    locator.ownerType === 'problem'
+      ? `problem:${locator.problemId}:${locator.path}`
+      : `learning_unit:${locator.learningUnitId}:${locator.path}`;
   const authoringVisitState = new Map<string, 'visiting' | 'visited'>();
   const visitAuthoringUnit = (problemId: string, path: readonly string[]): void => {
     const state = authoringVisitState.get(problemId);
@@ -1265,28 +1320,22 @@ export const validateCatalogSemantics = (
     requireRefs(impact.id, 'sourceRevisionId', [impact.sourceRevisionId], sourceIds);
     requireRefs(
       impact.id,
-      'authoringUnitProblemIds',
-      impact.authoringUnitProblemIds,
-      authoringUnitProblemIds,
+      'affectedLearningUnitOrderIds',
+      impact.affectedLearningUnitOrderIds,
+      unitIds,
     );
-    requireRefs(impact.id, 'learningUnitIds', impact.learningUnitIds, unitIds);
-    if (impact.authoringUnitProblemIds.length === 0) {
+    if (impact.affectedContentLocators.length === 0) {
       diagnostics.push({
-        code: 'CORRECTION_IMPACT_TARGET_EMPTY',
+        code: 'CORRECTION_IMPACT_LOCATORS_EMPTY',
         entityId: impact.id,
-        message: 'Correction Impact must target at least one authoring unit.',
+        message: 'Correction Impact must enumerate at least one affected content locator.',
       });
     }
-    if (impact.affectedSectionKeys.length === 0) {
-      diagnostics.push({
-        code: 'CORRECTION_IMPACT_SECTIONS_EMPTY',
-        entityId: impact.id,
-        message: 'Correction Impact must enumerate at least one affected section or block.',
-      });
-    }
+    const locatorKeys = impact.affectedContentLocators.map(correctionLocatorKey);
     if (
-      new Set(impact.authoringUnitProblemIds).size !== impact.authoringUnitProblemIds.length ||
-      new Set(impact.affectedSectionKeys).size !== impact.affectedSectionKeys.length
+      new Set(locatorKeys).size !== locatorKeys.length ||
+      new Set(impact.affectedLearningUnitOrderIds).size !==
+        impact.affectedLearningUnitOrderIds.length
     ) {
       diagnostics.push({
         code: 'CORRECTION_IMPACT_LOCATOR_DUPLICATE',
@@ -1294,32 +1343,41 @@ export const validateCatalogSemantics = (
         message: 'Correction Impact targets and locators must be unique.',
       });
     }
-    for (const locator of impact.affectedSectionKeys) {
-      const separator = locator.indexOf(':');
-      const problemId = separator < 0 ? '' : locator.slice(0, separator);
-      const key = separator < 0 ? '' : locator.slice(separator + 1);
-      if (!impact.authoringUnitProblemIds.includes(problemId)) {
-        diagnostics.push({
-          code: 'CORRECTION_IMPACT_LOCATOR_OWNER_MISMATCH',
-          entityId: impact.id,
-          message: `${locator} is outside the declared authoring unit targets.`,
-        });
+    for (const locator of impact.affectedContentLocators) {
+      const locatorKey = correctionLocatorKey(locator);
+      if (locator.ownerType === 'problem') {
+        const unit = authoringUnitByProblemId.get(locator.problemId);
+        if (!unit) {
+          diagnostics.push({
+            code: 'CORRECTION_IMPACT_LOCATOR_OWNER_MISSING',
+            entityId: impact.id,
+            message: `${locatorKey} cannot resolve its Problem authoring unit owner.`,
+          });
+          continue;
+        }
+        if (!problemContentPathExists(unit, locator.path)) {
+          diagnostics.push({
+            code: 'CORRECTION_IMPACT_CONTENT_NOT_FOUND',
+            entityId: impact.id,
+            message: `${locatorKey} does not resolve to a section or local block.`,
+          });
+        }
         continue;
       }
-      const unit = authoringUnitByProblemId.get(problemId);
-      if (!unit || !authoringUnitProblemIds.has(problemId)) {
+      const unit = learningUnitById.get(locator.learningUnitId);
+      if (!unit) {
         diagnostics.push({
           code: 'CORRECTION_IMPACT_LOCATOR_OWNER_MISSING',
           entityId: impact.id,
-          message: `${locator} cannot resolve its authoring unit owner.`,
+          message: `${locatorKey} cannot resolve its Learning Unit owner.`,
         });
         continue;
       }
-      if (!authoringSectionExists(unit, key)) {
+      if (!learningUnitContentPathExists(unit, locator.path)) {
         diagnostics.push({
-          code: 'CORRECTION_IMPACT_SECTION_NOT_FOUND',
+          code: 'CORRECTION_IMPACT_CONTENT_NOT_FOUND',
           entityId: impact.id,
-          message: `${locator} does not resolve to a section or local block.`,
+          message: `${locatorKey} does not resolve to Learning Unit content or a local block.`,
         });
       }
     }

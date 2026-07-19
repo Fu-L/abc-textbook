@@ -1,15 +1,20 @@
 import { z } from 'zod';
 
 import { strictObject, uniqueArray } from '../contract-schema.js';
-import { EntityIdSchema, ProblemIdSchema, SafePathSchema, Sha256Schema } from './content-common.js';
+import {
+  ContentBlockKeySchema,
+  EntityIdSchema,
+  ProblemIdSchema,
+  SafePathSchema,
+  Sha256Schema,
+} from './content-common.js';
 
 const text = z.string().trim().min(1);
 const entityIds = uniqueArray(EntityIdSchema);
-const localKey = z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u);
 
 /** A source-backed claim lives and changes with its owning Problem document. */
 export const InlineClaimSchema = strictObject({
-  key: localKey,
+  key: ContentBlockKeySchema,
   text,
   sourceRevisionIds: entityIds.min(1),
   authorId: EntityIdSchema,
@@ -17,10 +22,9 @@ export const InlineClaimSchema = strictObject({
 });
 
 /** Metadata adjacent to an executable or illustrative code block. */
-export const InlineExampleSchema = strictObject({
-  key: localKey,
+const inlineExampleFields = {
+  key: ContentBlockKeySchema,
   learningOutcomeIds: entityIds.min(1),
-  learningUnitIds: entityIds,
   kind: z.enum(['executable', 'pseudocode', 'illustrative']),
   language: text,
   omissions: z.array(text),
@@ -29,7 +33,12 @@ export const InlineExampleSchema = strictObject({
   procedure: z.array(text).min(1),
   expectedResult: text,
   verificationStatus: z.enum(['pending', 'passed', 'not_applicable', 'failed']),
-}).superRefine((example, context) => {
+};
+
+const validateInlineExample = (
+  example: { readonly kind: string; readonly verificationStatus: string },
+  context: z.RefinementCtx,
+): void => {
   const executable = example.kind === 'executable';
   if (executable !== (example.verificationStatus !== 'not_applicable')) {
     context.addIssue({
@@ -39,7 +48,17 @@ export const InlineExampleSchema = strictObject({
         'Executable examples require a verification result; other examples use not_applicable.',
     });
   }
-});
+};
+
+/** Example block owned by one Problem authoring document. */
+export const InlineExampleSchema = strictObject({
+  ...inlineExampleFields,
+  learningUnitIds: entityIds,
+}).superRefine(validateInlineExample);
+
+/** Example block owned by one Learning Unit document. */
+export const LearningUnitInlineExampleSchema =
+  strictObject(inlineExampleFields).superRefine(validateInlineExample);
 
 const InlineAssessmentSchema = strictObject({ method: text, successCondition: text });
 const InlineAnswerSchema = strictObject({
@@ -50,7 +69,7 @@ const InlineAnswerSchema = strictObject({
 });
 
 export const InlineExerciseSchema = strictObject({
-  key: localKey,
+  key: ContentBlockKeySchema,
   learningOutcomeIds: entityIds.min(1),
   prerequisiteIds: entityIds,
   attainmentCondition: text,

@@ -50,7 +50,7 @@ fixtureには、graph/search、dynamic-programming、data-structures/algorithm-d
 
 期待結果:
 
-- 同じpreview digestで、公式metadata、Technique Inventory、仮taxonomy/placement、Explanation/Claim/Example/Exercise/AnswerMaterial、static UI/search、local LearningRecord、update/release simulationを一周し、そのcomponent digestをjoinする。
+- 同じpreview digestで、公式metadata、Technique Inventory、仮taxonomy/placement、ProblemAuthoringUnit/LearningUnit inline content、static UI/search、local LearningRecord、update/release simulationを一周し、そのcomponent digestをjoinする。
 - preview content/update componentはT064の`authoringSkillVersion`と`authoringSkillDigest`を同じcurrent subjectとして持ち、skill manifestの欠落・不一致や入力不足は完成扱いされない。
 - 仮taxonomy、preview-only content、端末状態は`src/content/`、公開catalog、Pagefind、ReleaseCandidateへ混入しない。
 - source、claim、example、answer、link、accessibility、schema、rollback、idempotencyの適用checkとcurrent-subject review evidenceが一つでも欠ける、失敗する、またはstale digestを参照する場合は、canonical `PreviewSnapshot.status=on_hold`と具体的な`holdReason`を保存し、T047–T050のfinal taxonomy、T055–T056/T155–T158のfull LearningUnit、T065のshard index freeze、T066–T071のbulk explanation shardへ進まない。
@@ -88,7 +88,7 @@ npm run test:integration -- problem-placement
 
 ```bash
 npm run test:integration -- explanation-authoring
-npm run catalog:validate -- --fixture tests/fixtures/catalog/explanations
+npm run catalog:validate -- --fixture tests/fixtures/catalog/problem-authoring-units
 ```
 
 期待結果:

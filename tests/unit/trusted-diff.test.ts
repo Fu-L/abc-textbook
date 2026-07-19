@@ -23,9 +23,10 @@ describe('trusted publication diff', () => {
       id: 'correction-impact-graphs',
       sourceRevisionId: 'source-revision-abc212-e',
       changeSummary: 'Fixture correction.',
-      authoringUnitProblemIds: ['abc212-x45'],
-      affectedSectionKeys: ['abc212-x45:sections.correctness'],
-      learningUnitIds: ['unit-graphs'],
+      affectedContentLocators: [
+        { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctness' },
+      ],
+      affectedLearningUnitOrderIds: ['unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified' as const,
     };
@@ -118,9 +119,10 @@ describe('trusted publication diff', () => {
       id: 'correction-impact-graphs',
       sourceRevisionId: 'source-revision-abc212-e',
       changeSummary: 'Fixture correction.',
-      authoringUnitProblemIds: ['abc212-x45'],
-      affectedSectionKeys: ['abc212-x45:sections.correctness'],
-      learningUnitIds: ['unit-graphs'],
+      affectedContentLocators: [
+        { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctness' },
+      ],
+      affectedLearningUnitOrderIds: ['unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified' as const,
     });
@@ -681,9 +683,10 @@ describe('trusted publication diff', () => {
       id: 'correction-impact-graphs',
       sourceRevisionId: 'source-revision-abc212-e',
       changeSummary: 'Fixture correction.',
-      authoringUnitProblemIds: ['abc212-x45'],
-      affectedSectionKeys: ['abc212-x45:sections.correctness'],
-      learningUnitIds: ['unit-graphs'],
+      affectedContentLocators: [
+        { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctness' },
+      ],
+      affectedLearningUnitOrderIds: ['unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified' as const,
     };

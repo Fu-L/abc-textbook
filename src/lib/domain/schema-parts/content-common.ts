@@ -1,6 +1,11 @@
 import { z } from 'zod';
 
 export const EntityIdSchema = z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u);
+/** Stable only inside its owning authoring document; never a Catalog entity ID. */
+export const ContentBlockKeyPattern = '[a-z][a-z0-9]*(?:-[a-z0-9]+)*';
+export const ContentBlockKeySchema = z
+  .string()
+  .regex(new RegExp(`^${ContentBlockKeyPattern}$`, 'u'));
 export const Sha256Schema = z.string().regex(/^[a-f0-9]{64}$/u);
 export const ContentReviewModeSchema = z.enum(['self', 'third_party']);
 export const ContentReviewRiskReasonSchema = z.enum([

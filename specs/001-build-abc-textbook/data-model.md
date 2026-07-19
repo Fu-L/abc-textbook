@@ -245,7 +245,7 @@ shard indexのProblem ID集合は、final Catalogの全対象Problem集合と完
 | `statement` | 学習者が観察可能な動詞で表す |
 | `prerequisiteOutcomeIds` | 循環のない集合 |
 | `scope` | 対象Tag/Unit/Problem |
-AssessmentはProblem authoring unitのExercise内にco-locateし、Outcomeへ直接紐付ける。
+AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内にco-locateし、Outcomeへ直接紐付ける。
 
 ### LearningUnit
 
@@ -258,7 +258,8 @@ AssessmentはProblem authoring unitのExercise内にco-locateし、Outcomeへ直
 | `excludedTopics` | 意図的対象外 |
 | `sourceRevisionIds` | 単位本文と所有例の根拠 |
 | `tagIds` / `learningOutcomeIds` | 各一つ以上 |
-| `examples` | Learning Unit本文にinlineで置くExample block配列。`key`はUnit内local keyで、`executable`は実行証跡を必須とする |
+| `examples` | 一つ以上。Learning Unit本文にinlineで置くExample block配列。`key`はUnit内local keyで、`executable`は実行証跡を必須とする |
+| `exercises` | 一つ以上。Outcome、前提、到達条件、Assessment、検証済みAnswerをco-locateした到達確認block |
 | `problemIds` | 一つ以上 |
 | `stageRank` / `difficultyRank` / `representativeRank` | 0以上の整数 |
 | `globalIndex` / `orderReason` | 生成順と説明 |
@@ -284,7 +285,7 @@ AssessmentはProblem authoring unitのExercise内にco-locateし、Outcomeへ直
 
 ### Entity化の判断基準
 
-独立entityは「所有者と別のライフサイクルを持つ」または「複数ownerから参照される」対象に限定する。Problem、Technique Tag、Learning Outcome、Learning Unit、Source Revision、Correction Impactは独立entityとする。Claim、Example、Exercise、Assessment、AnswerはProblem本文と同時に変更されるため独立entityにしない。
+独立entityは「所有者と別のライフサイクルを持つ」または「複数ownerから参照される」対象に限定する。Problem、Technique Tag、Learning Outcome、Learning Unit、Source Revision、Correction Impactは独立entityとする。ClaimはProblemAuthoringUnitに、ExampleとExercise/Assessment/Answerは所有するProblemAuthoringUnitまたはLearningUnitにco-locateし、所有者の本文と同時に変更されるため独立entityにしない。
 
 ### ProblemAuthoringUnit
 
@@ -311,11 +312,11 @@ AssessmentはProblem authoring unitのExercise内にco-locateし、Outcomeへ直
 
 - Claimは正確な文、Source Revision、author、検証状態を持つ。根拠なし・stale・矛盾状態は公開不可。
 - ExampleはLearning Outcome、任意のLearning Unit、種類、言語、省略範囲、環境、入力、手順、期待結果、検証結果を持つ。`executable`だけを実行manifestの必須対象とし、疑似コード・図示例は`not_applicable`とする。公開時はCatalogからProblem/Learning Unit双方のexecutable Example inventoryを再生成し、locator・subject digest・件数を証跡と完全一致させる。
-- ExerciseはOutcome、前提、到達条件、観察可能なAssessment、理由または検証方法を含むAnswerを一つのblockに持つ。Answerの検証成功前は公開不可。
+- ExerciseはOutcome、前提、到達条件、観察可能なAssessment、理由または検証方法を含むAnswerを一つのblockに持つ。ProblemAuthoringUnitとLearningUnitは同じblock契約を使い、Answerの検証成功前は公開不可。
 
 ### SourceRecord / SourceRevision / CorrectionImpact
 
-SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。CorrectionImpactは本文と別の訂正ライフサイクルを持つため独立entityとし、影響するauthoring unitのProblem ID、owner-qualifiedな文書内section/local block locator（例: `abc212-x45:sections.correctness`）、Unit順、派生indexを完全列挙する。locatorは対象Unitへ解決できない限り公開不可である。
+SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。CorrectionImpactは本文と別の訂正ライフサイクルを持つため独立entityとする。`affectedContentLocators`は`{ownerType: "problem", problemId, path}`または`{ownerType: "learning_unit", learningUnitId, path}`の判別付きunionで、ProblemAuthoringUnitのsection/local blockとLearningUnitの本文/Example/Exercise/Assessment/Answerを対象にする。これとは別に`affectedLearningUnitOrderIds`と`derivedIndexPaths`でUnit順と派生indexを列挙する。重複するowner ID配列を正本にせず、各locatorが選択したownerの実データへ解決できない限り公開不可である。
 
 ## 5. Learning records
 

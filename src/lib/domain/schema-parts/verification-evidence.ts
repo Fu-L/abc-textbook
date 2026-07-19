@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
 import {
   AnswerMaterialEvidenceContract,
+  ContentBlockKeySchema,
   ContestIdSchema,
   EntityIdSchema,
   OffsetDateTimeSchema,
@@ -334,7 +335,6 @@ export const LearningRecordE2eEvidenceSchema = strictObject({
   generatedAt: OffsetDateTimeSchema,
 });
 
-const executableExampleKey = z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u);
 export type ExecutableExampleEvidenceLocator =
   | {
       ownerType: 'problem';
@@ -363,13 +363,13 @@ const executableExampleItem = z.union([
   strictObject({
     ownerType: z.literal('problem'),
     problemId: ProblemIdSchema,
-    exampleKey: executableExampleKey,
+    exampleKey: ContentBlockKeySchema,
     ...executableExampleEvidenceFields,
   }),
   strictObject({
     ownerType: z.literal('learning_unit'),
     learningUnitId: EntityIdSchema,
-    exampleKey: executableExampleKey,
+    exampleKey: ContentBlockKeySchema,
     ...executableExampleEvidenceFields,
   }),
 ]);

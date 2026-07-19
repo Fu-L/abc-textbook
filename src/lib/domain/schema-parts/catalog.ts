@@ -3,8 +3,13 @@ import { z } from 'zod';
 import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
 import { canonicalJson, digestWithoutField } from '../canonical-json.js';
 import { compareOffsetDateTimes, isOffsetDateTime, parseOffsetDateTime } from '../date-time.js';
-import { ProblemAuthoringUnitSchema } from './authoring-unit.js';
 import {
+  InlineExerciseSchema,
+  LearningUnitInlineExampleSchema,
+  ProblemAuthoringUnitSchema,
+} from './authoring-unit.js';
+import {
+  ContentBlockKeyPattern,
   ContentReviewModeSchema,
   ContentReviewRiskReasonSchema,
   ContestIdSchema,
@@ -36,19 +41,39 @@ export const OffsetDateTimeSchema = StructuralOffsetDateTimeSchema.refine(
 
 const nonEmptyText = z.string().trim().min(1);
 const entityIds = z.array(EntityIdSchema);
-const authoringUnitLocalKeyPattern = '[a-z][a-z0-9]*(?:-[a-z0-9]+)*';
-/**
- * A correction locator is owner-qualified because local keys are only unique
- * inside one ProblemAuthoringUnit document.
- */
-export const CorrectionImpactSectionLocatorSchema = z
+const localBlockPath = (namespace: 'claims' | 'examples' | 'exercises') =>
+  z.string().regex(new RegExp(`^${namespace}\\.${ContentBlockKeyPattern}$`, 'u'));
+const exerciseDetailPath = z
   .string()
-  .regex(
-    new RegExp(
-      `^abc[0-9]{3,}-[a-z][a-z0-9+_-]*:(?:sections\\.${authoringUnitLocalKeyPattern}|claims\\.${authoringUnitLocalKeyPattern}|examples\\.${authoringUnitLocalKeyPattern}|exercises\\.${authoringUnitLocalKeyPattern}(?:\\.(?:assessment|answer))?)$`,
-      'u',
-    ),
-  );
+  .regex(new RegExp(`^exercises\\.${ContentBlockKeyPattern}\\.(?:assessment|answer)$`, 'u'));
+
+/**
+ * Correction targets use the same explicit owner model as execution evidence.
+ * The path remains document-local and is resolved against the selected owner.
+ */
+export const CorrectionImpactContentLocatorSchema = z.discriminatedUnion('ownerType', [
+  strictObject({
+    ownerType: z.literal('problem'),
+    problemId: ProblemIdSchema,
+    path: z.union([
+      z.string().regex(new RegExp(`^sections\\.${ContentBlockKeyPattern}$`, 'u')),
+      localBlockPath('claims'),
+      localBlockPath('examples'),
+      localBlockPath('exercises'),
+      exerciseDetailPath,
+    ]),
+  }),
+  strictObject({
+    ownerType: z.literal('learning_unit'),
+    learningUnitId: EntityIdSchema,
+    path: z.union([
+      z.literal('content'),
+      localBlockPath('examples'),
+      localBlockPath('exercises'),
+      exerciseDetailPath,
+    ]),
+  }),
+]);
 
 export type AtCoderContestResource = 'contest' | 'tasks' | 'task' | 'editorial';
 
@@ -401,25 +426,24 @@ export const LearningUnitSchema = strictObject({
   learningOutcomeIds: entityIds.min(1),
   docPath: SafePathSchema,
   problemIds: z.array(ProblemIdSchema).min(1),
-  examples: z.array(
-    strictObject({
-      key: EntityIdSchema,
-      learningOutcomeIds: entityIds.min(1),
-      kind: z.enum(['executable', 'pseudocode', 'illustrative']),
-      language: nonEmptyText,
-      omissions: z.array(nonEmptyText),
-      environment: nonEmptyText,
-      input: nonEmptyText,
-      procedure: z.array(nonEmptyText).min(1),
-      expectedResult: nonEmptyText,
-      verificationStatus: z.enum(['pending', 'passed', 'not_applicable', 'failed']),
-    }),
-  ),
+  examples: uniqueArray(LearningUnitInlineExampleSchema).min(1),
+  exercises: uniqueArray(InlineExerciseSchema).min(1),
   stageRank: z.number().int().nonnegative(),
   difficultyRank: z.number().int().nonnegative(),
   representativeRank: z.number().int().nonnegative(),
   globalIndex: z.number().int().nonnegative(),
   orderReason: nonEmptyText,
+}).superRefine((unit, context) => {
+  for (const field of ['examples', 'exercises'] as const) {
+    const keys = unit[field].map(({ key }) => key);
+    if (new Set(keys).size !== keys.length) {
+      context.addIssue({
+        code: 'custom',
+        path: [field],
+        message: `${field} local keys must be unique inside a Learning Unit.`,
+      });
+    }
+  }
 });
 
 export const ProblemPlacementSchema = strictObject({
@@ -599,9 +623,8 @@ export const CorrectionImpactSchema = strictObject({
   id: EntityIdSchema,
   sourceRevisionId: EntityIdSchema,
   changeSummary: nonEmptyText,
-  authoringUnitProblemIds: uniqueArray(ProblemIdSchema).min(1),
-  affectedSectionKeys: uniqueArray(CorrectionImpactSectionLocatorSchema).min(1),
-  learningUnitIds: entityIds,
+  affectedContentLocators: uniqueArray(CorrectionImpactContentLocatorSchema).min(1),
+  affectedLearningUnitOrderIds: uniqueArray(EntityIdSchema),
   derivedIndexPaths: z.array(SafePathSchema),
   verificationStatus: z.enum(['pending', 'verified', 'failed']),
 });

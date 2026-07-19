@@ -8,7 +8,11 @@ import {
   type CatalogLike,
 } from '../../src/lib/catalog/build-catalog.js';
 import { ProblemAuthoringUnitSchema } from '../../src/lib/domain/schema-parts/authoring-unit.js';
-import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
+import {
+  CatalogSchema,
+  CorrectionImpactSchema,
+  LearningUnitSchema,
+} from '../../src/lib/domain/schema-parts/catalog.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
 
 const catalogFixture = () => CatalogSchema.parse(makeTrustedCatalog({}));
@@ -187,41 +191,126 @@ describe('Problem authoring unit', () => {
     expect(staleCodes).toContain('EXECUTABLE_EXAMPLE_EVIDENCE_MISMATCH');
   });
 
-  it('resolves Correction Impact locators against the targeted authoring unit', () => {
+  it('keeps each Learning Unit example and attainment check in one strict document', () => {
+    const unit = catalogFixture().learningUnits[0];
+    if (!unit) throw new Error('Fixture learning unit is missing.');
+    expect(LearningUnitSchema.safeParse(unit).success).toBe(true);
+    expect(LearningUnitSchema.safeParse({ ...unit, examples: [] }).success).toBe(false);
+    expect(LearningUnitSchema.safeParse({ ...unit, exercises: [] }).success).toBe(false);
+
+    const example = unit.examples[0];
+    const exercise = unit.exercises[0];
+    if (!example || !exercise) throw new Error('Fixture Learning Unit blocks are missing.');
+    expect(
+      LearningUnitSchema.safeParse({ ...unit, examples: [example, structuredClone(example)] })
+        .success,
+    ).toBe(false);
+    expect(
+      LearningUnitSchema.safeParse({ ...unit, exercises: [exercise, structuredClone(exercise)] })
+        .success,
+    ).toBe(false);
+  });
+
+  it('validates Learning Unit outcome links and answer evidence before publication', () => {
+    const catalog = catalogFixture();
+    const unit = catalog.learningUnits[0];
+    const exercise = unit?.exercises[0];
+    if (!unit || !exercise) throw new Error('Fixture Learning Unit exercise is missing.');
+    exercise.learningOutcomeIds = ['outcome-missing'];
+    exercise.answer.verificationStatus = 'pending';
+
+    const diagnostics = validateCatalogSemantics(catalog);
+    expect(diagnostics.map(({ code }) => code)).toEqual(
+      expect.arrayContaining(['CATALOG_REFERENCE_MISSING', 'LEARNING_UNIT_ANSWER_NOT_VERIFIED']),
+    );
+  });
+
+  it('resolves owner-qualified Correction Impact locators against both document types', () => {
     const catalog = catalogFixture();
     catalog.correctionImpacts.push({
       id: 'correction-impact-invalid',
       sourceRevisionId: 'source-revision-abc212-e',
       changeSummary: 'Invalid fixture correction.',
-      authoringUnitProblemIds: ['abc212-x45'],
-      affectedSectionKeys: ['abc212-x45:sections.correctnes'],
-      learningUnitIds: ['unit-graphs'],
+      affectedContentLocators: [
+        { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctnes' },
+      ],
+      affectedLearningUnitOrderIds: [],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified',
     });
     const invalidCodes = validateCatalogSemantics(catalog as CatalogLike).map(({ code }) => code);
-    expect(invalidCodes).toContain('CORRECTION_IMPACT_SECTION_NOT_FOUND');
+    expect(invalidCodes).toContain('CORRECTION_IMPACT_CONTENT_NOT_FOUND');
 
     catalog.correctionImpacts.push({
-      id: 'correction-impact-foreign',
+      id: 'correction-impact-learning-unit',
       sourceRevisionId: 'source-revision-abc212-e',
-      changeSummary: 'Foreign fixture correction.',
-      authoringUnitProblemIds: ['abc212-x45'],
-      affectedSectionKeys: ['abc212-z99:sections.correctness'],
-      learningUnitIds: ['unit-graphs'],
+      changeSummary: 'Learning Unit fixture correction.',
+      affectedContentLocators: [
+        {
+          ownerType: 'learning_unit',
+          learningUnitId: 'unit-graphs',
+          path: 'examples.unit-intuition',
+        },
+        {
+          ownerType: 'learning_unit',
+          learningUnitId: 'unit-graphs',
+          path: 'exercises.unit-check.assessment',
+        },
+      ],
+      affectedLearningUnitOrderIds: ['unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified',
     });
-    const foreignCodes = validateCatalogSemantics(catalog as CatalogLike).map(({ code }) => code);
-    expect(foreignCodes).toContain('CORRECTION_IMPACT_LOCATOR_OWNER_MISMATCH');
+    const learningUnitCodes = validateCatalogSemantics(catalog as CatalogLike).filter(
+      ({ entityId }) => entityId === 'correction-impact-learning-unit',
+    );
+    expect(learningUnitCodes).toEqual([]);
+
+    catalog.correctionImpacts.push({
+      id: 'correction-impact-learning-unit-invalid',
+      sourceRevisionId: 'source-revision-abc212-e',
+      changeSummary: 'Unknown Learning Unit block correction.',
+      affectedContentLocators: [
+        {
+          ownerType: 'learning_unit',
+          learningUnitId: 'unit-graphs',
+          path: 'examples.missing-example',
+        },
+      ],
+      affectedLearningUnitOrderIds: [],
+      derivedIndexPaths: [],
+      verificationStatus: 'verified',
+    });
+    const missingBlockCodes = validateCatalogSemantics(catalog as CatalogLike)
+      .filter(({ entityId }) => entityId === 'correction-impact-learning-unit-invalid')
+      .map(({ code }) => code);
+    expect(missingBlockCodes).toContain('CORRECTION_IMPACT_CONTENT_NOT_FOUND');
+
+    catalog.correctionImpacts.push({
+      id: 'correction-impact-missing-owner',
+      sourceRevisionId: 'source-revision-abc212-e',
+      changeSummary: 'Missing owner fixture correction.',
+      affectedContentLocators: [
+        { ownerType: 'learning_unit', learningUnitId: 'unit-missing', path: 'content' },
+      ],
+      affectedLearningUnitOrderIds: [],
+      derivedIndexPaths: [],
+      verificationStatus: 'verified',
+    });
+    const missingOwnerCodes = validateCatalogSemantics(catalog as CatalogLike).map(
+      ({ code }) => code,
+    );
+    expect(missingOwnerCodes).toContain('CORRECTION_IMPACT_LOCATOR_OWNER_MISSING');
 
     catalog.correctionImpacts.push({
       id: 'correction-impact-duplicate',
       sourceRevisionId: 'source-revision-abc212-e',
       changeSummary: 'Duplicate fixture correction.',
-      authoringUnitProblemIds: ['abc212-x45'],
-      affectedSectionKeys: ['abc212-x45:sections.correctness', 'abc212-x45:sections.correctness'],
-      learningUnitIds: ['unit-graphs'],
+      affectedContentLocators: [
+        { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctness' },
+        { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctness' },
+      ],
+      affectedLearningUnitOrderIds: ['unit-graphs', 'unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified',
     });
@@ -233,16 +322,19 @@ describe('Problem authoring unit', () => {
     const emptyImpact = {
       ...originalImpact,
       id: 'correction-impact-empty',
-      authoringUnitProblemIds: [],
-      affectedSectionKeys: [],
+      affectedContentLocators: [],
     };
     catalog.correctionImpacts.push(emptyImpact);
     const emptyCodes = validateCatalogSemantics(catalog as CatalogLike).map(({ code }) => code);
-    expect(emptyCodes).toEqual(
-      expect.arrayContaining([
-        'CORRECTION_IMPACT_TARGET_EMPTY',
-        'CORRECTION_IMPACT_SECTIONS_EMPTY',
-      ]),
-    );
+    expect(emptyCodes).toContain('CORRECTION_IMPACT_LOCATORS_EMPTY');
+
+    expect(
+      CorrectionImpactSchema.safeParse({
+        ...originalImpact,
+        affectedContentLocators: [
+          { ownerType: 'learning_unit', problemId: 'abc212-x45', path: 'content' },
+        ],
+      }).success,
+    ).toBe(false);
   });
 });
