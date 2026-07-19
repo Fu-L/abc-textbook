@@ -11,9 +11,11 @@ import {
 } from '../../src/lib/validation/human-content-review.js';
 
 const sha = (character: string): string => character.repeat(64);
+type RiskReason = 'official_source_conflict' | 'original_proof' | 'major_classification_change';
 const trustedInventory = {
   subjectDigest: sha('a'),
   inventoryDigest: sha('c'),
+  reviewPolicy: { requiredMode: 'self', riskReasons: [] },
   workManifest: {
     learningOutcomeIds: [],
     reviewUnits: [
@@ -53,11 +55,11 @@ const makeEvidence = (input?: {
       exitCode: 0,
       passed: true,
       completedAt: '2026-07-17T12:00:00+09:00',
-      executedByReviewerId: 'person-reviewer',
+      executedByReviewerId: 'person-author',
     },
   ];
   const evidence: Record<string, unknown> = {
-    schemaVersion: '2.0.0',
+    schemaVersion: '3.0.0',
     id: 'human-content-review-phase-two',
     scopeType: 'merge',
     scopeId: 'phase-two',
@@ -65,23 +67,14 @@ const makeEvidence = (input?: {
     subjectDigest: sha('a'),
     inventoryPath: 'docs/judgments/merge/phase-two/human-review-inventory.json',
     inventoryDigest: sha('c'),
-    rawEvidenceManifestPath: 'docs/judgments/merge/phase-two/human-review-raw/manifest.json',
-    rawEvidenceManifestDigest: sha('d'),
-    rawEvidenceCount: 1,
-    artifactPath: 'docs/judgments/merge/phase-two/human-review.json',
+    reviewPolicy: { requiredMode: 'self', riskReasons: [] },
+    reviewMode: 'self',
     applicableChecks,
     applicableCheckCount: 1,
     passedApplicableCheckCount: 1,
     reviewerExecutedCheckSetDigest: canonicalDigest(applicableChecks),
     authors: [{ personId: 'person-author', authoredItemIds: ['human-review-item-claim-one'] }],
-    reviewers: [
-      {
-        personId: 'person-reviewer',
-        role: 'independent_human_content_reviewer',
-        independenceDeclaration: 'I did not author the reviewed item.',
-        countedAsOwnerApproval: false,
-      },
-    ],
+    reviewer: { personId: 'person-author', mode: 'self' },
     reviewItems: [
       {
         reviewItemId: 'human-review-item-claim-one',
@@ -89,7 +82,7 @@ const makeEvidence = (input?: {
         subjectPaths: ['src/content/docs/index.md'],
         authorIds: ['person-author'],
         learningOutcomeIds: [],
-        reviewerId: 'person-reviewer',
+        reviewerId: 'person-author',
         reviewBasis: 'Compared the claim with its official source.',
         decision,
         findings:
@@ -113,7 +106,7 @@ const makeEvidence = (input?: {
     changesRequestedItemCount: decision === 'changes_requested' ? 1 : 0,
     unreviewedItemCount: 0,
     outcomeCoverageReview: {
-      reviewerId: 'person-reviewer',
+      reviewerId: 'person-author',
       authorIds: ['person-author'],
       decision: 'no_outcome_impact_confirmed',
       learningOutcomeIds: [],
@@ -131,9 +124,33 @@ const makeEvidence = (input?: {
   return evidence;
 };
 
+const makeThirdPartyEvidence = (riskReason: RiskReason): Record<string, unknown> => {
+  const evidence = makeEvidence();
+  evidence.reviewPolicy = { requiredMode: 'third_party', riskReasons: [riskReason] };
+  evidence.reviewMode = 'third_party';
+  evidence.reviewer = { personId: 'person-reviewer', mode: 'third_party' };
+  const [check] = evidence.applicableChecks as { executedByReviewerId: string }[];
+  if (!check) throw new Error('Fixture check is missing.');
+  check.executedByReviewerId = 'person-reviewer';
+  const [item] = evidence.reviewItems as { reviewerId: string }[];
+  if (!item) throw new Error('Fixture review item is missing.');
+  item.reviewerId = 'person-reviewer';
+  const coverage = evidence.outcomeCoverageReview as { reviewerId: string };
+  coverage.reviewerId = 'person-reviewer';
+  evidence.reviewerExecutedCheckSetDigest = canonicalDigest(evidence.applicableChecks);
+  evidence.evidenceDigest = digestWithoutField(evidence, 'evidenceDigest');
+  return evidence;
+};
+
+const highRiskTrustedInventory = (riskReason: RiskReason) =>
+  ({
+    ...trustedInventory,
+    reviewPolicy: { requiredMode: 'third_party', riskReasons: [riskReason] },
+  }) as const;
+
 const makeMergeEvidence = (): Record<string, unknown> => {
   const evidence: Record<string, unknown> = {
-    schemaVersion: '2.0.0',
+    schemaVersion: '3.0.0',
     id: 'merge-review-phase-two',
     changeId: 'change-phase-two',
     logicalChangeSubjectDigest: sha('a'),
@@ -143,10 +160,12 @@ const makeMergeEvidence = (): Record<string, unknown> => {
     workManifestDigest: sha('2'),
     learningOutcomeIds: [],
     outcomeImpact: { kind: 'none', rationale: 'No observable outcome changes.' },
+    reviewMode: 'self',
+    reviewerId: 'person-author',
     applicableChecks: [
       {
         checkId: 'check-contracts',
-        executedByReviewerId: 'person-reviewer',
+        executedByReviewerId: 'person-author',
         command: 'npm run test:contract',
         subjectDigest: sha('a'),
         resultPath: 'docs/judgments/merge/phase-two/check.json',
@@ -190,20 +209,40 @@ const trustedMergeContext = {
     digest: sha('5'),
     subjectDigest: sha('a'),
     aggregatePassed: true,
-    gateReviewerId: 'person-reviewer',
+    reviewerId: 'person-author',
+    reviewMode: 'self',
   },
   constitutionVersion: '1.0.0',
   constitutionDigest: sha('6'),
-  gateReviewerId: 'person-reviewer',
+  reviewerId: 'person-author',
   checks: [{ checkId: 'check-contracts', command: 'npm run test:contract', applicable: true }],
 } as const;
 
 describe('human content review gate', () => {
-  it('accepts a complete independently approved review', () => {
+  it('accepts a complete owner self-review without an external person ID', () => {
     expect(HumanContentReviewEvidenceSchema.safeParse(makeEvidence()).success).toBe(true);
     expect(() => {
       validateHumanContentReview(makeEvidence(), trustedInventory);
     }).not.toThrow();
+  });
+
+  it('requires third-party review only for a fixed high-risk policy', () => {
+    const riskReasons: RiskReason[] = [
+      'official_source_conflict',
+      'original_proof',
+      'major_classification_change',
+    ];
+    for (const riskReason of riskReasons) {
+      expect(() => {
+        validateHumanContentReview(makeEvidence(), highRiskTrustedInventory(riskReason));
+      }).toThrow(/REVIEW_POLICY_MISMATCH/u);
+      expect(() => {
+        validateHumanContentReview(
+          makeThirdPartyEvidence(riskReason),
+          highRiskTrustedInventory(riskReason),
+        );
+      }).not.toThrow();
+    }
   });
 
   it('requires current successful checks, constitution, and human review for merge approval', () => {

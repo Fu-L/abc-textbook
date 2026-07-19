@@ -6,6 +6,17 @@ import { compareOffsetDateTimes, isOffsetDateTime, parseOffsetDateTime } from '.
 
 export const EntityIdSchema = z.string().regex(/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/u);
 export const Sha256Schema = z.string().regex(/^[a-f0-9]{64}$/u);
+/** Distinguishes the maintainer's self-review from a required third-party review. */
+export const ContentReviewModeSchema = z.enum(['self', 'third_party']);
+/**
+ * A bounded set of conditions that make a third-party content review mandatory.
+ * Keep this list deliberately small and versioned: changing it changes the gate.
+ */
+export const ContentReviewRiskReasonSchema = z.enum([
+  'official_source_conflict',
+  'original_proof',
+  'major_classification_change',
+]);
 export const OffsetDateTimeSchema = z.iso
   .datetime({ offset: true })
   .refine(isOffsetDateTime, 'Invalid RFC 3339 date-time.');
@@ -747,13 +758,17 @@ const EvidenceReferenceSchema = strictObject({
   subjectDigest: Sha256Schema,
   authorIds: uniqueArray(EntityIdSchema).min(1),
   reviewerIds: uniqueArray(EntityIdSchema).min(1),
+  reviewMode: ContentReviewModeSchema,
   aggregatePassed: z.literal(true),
 }).superRefine((reference, context) => {
-  if (reference.authorIds.some((authorId) => reference.reviewerIds.includes(authorId))) {
+  if (
+    reference.reviewMode === 'third_party' &&
+    reference.authorIds.some((authorId) => reference.reviewerIds.includes(authorId))
+  ) {
     context.addIssue({
       code: 'custom',
       path: ['reviewerIds'],
-      message: 'Human review authors and reviewers must be disjoint.',
+      message: 'Third-party review authors and reviewers must be disjoint.',
     });
   }
 });

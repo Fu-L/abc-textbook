@@ -9,6 +9,7 @@ import { z } from 'zod';
 import { canonicalDigest, digestWithoutField } from '../domain/canonical-json.js';
 import { strictObject } from '../domain/contract-schema.js';
 import {
+  ContentReviewModeSchema,
   EntityIdSchema,
   OffsetDateTimeSchema,
   SafePathSchema,
@@ -89,7 +90,19 @@ const CatalogReviewReferenceSchema = strictObject({
   subjectDigest: Sha256Schema,
   authorIds: z.array(EntityIdSchema).min(1),
   reviewerIds: z.array(EntityIdSchema).min(1),
+  reviewMode: ContentReviewModeSchema,
   aggregatePassed: z.boolean(),
+}).superRefine((reference, context) => {
+  if (
+    reference.reviewMode === 'third_party' &&
+    reference.authorIds.some((authorId) => reference.reviewerIds.includes(authorId))
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['reviewerIds'],
+      message: 'Third-party review authors and reviewers must be disjoint.',
+    });
+  }
 });
 
 export interface CatalogEvidenceCanonicalSources {
@@ -195,6 +208,7 @@ const toManifestScope = (
   taskId: manifest.taskId,
   requiredRequirementIds: manifest.requiredRequirementIds,
   learningOutcomeIds: manifest.learningOutcomeIds,
+  reviewPolicy: manifest.reviewPolicy,
   reviewUnits: manifest.reviewUnits,
 });
 
@@ -755,12 +769,14 @@ export const deriveCatalogEvidenceTrustContext = (
   const inventoryDigest = canonicalDigest({
     manifestDigest: manifest.digest,
     subjectDigest: candidate.contentSubjectDigest,
+    reviewPolicy: manifest.reviewPolicy,
     applicableChecks,
     reviewItems,
   });
   return {
     subjectDigest: candidate.contentSubjectDigest,
     inventoryDigest,
+    reviewPolicy: manifest.reviewPolicy,
     workManifest: {
       learningOutcomeIds: manifest.learningOutcomeIds,
       reviewUnits: manifest.reviewUnits.map((unit) => ({
@@ -940,18 +956,18 @@ const sameCheckReference = (
 
 const validateReviewCompleteness = (evidence: ReviewEvidence): void => {
   const authorIds = evidence.authors.map(({ personId }) => personId);
-  const reviewerIds = evidence.reviewers.map(({ personId }) => personId);
+  const reviewerIds = [evidence.reviewer.personId];
   const itemIds = evidence.reviewItems.map(({ reviewItemId }) => reviewItemId);
   const itemPaths = [...new Set(evidence.reviewItems.flatMap((item) => item.subjectPaths))];
   const itemOutcomeIds = [
     ...new Set(evidence.reviewItems.flatMap((item) => item.learningOutcomeIds)),
   ];
   const itemAuthorIds = [...new Set(evidence.reviewItems.flatMap((item) => item.authorIds))];
-  const gateReviewerId = evidence.outcomeCoverageReview.reviewerId;
+  const reviewerId = evidence.reviewer.personId;
   const allChecksPassed = evidence.applicableChecks.every(
     (check) =>
       check.subjectDigest === evidence.subjectDigest &&
-      check.executedByReviewerId === gateReviewerId &&
+      check.executedByReviewerId === reviewerId &&
       check.exitCode === 0 &&
       check.passed,
   );
@@ -997,16 +1013,16 @@ const validateReviewCompleteness = (evidence: ReviewEvidence): void => {
   const authorsAndReviewersAreValid =
     new Set(authorIds).size === authorIds.length &&
     new Set(reviewerIds).size === reviewerIds.length &&
-    !authorIds.some((authorId) => reviewerIds.includes(authorId)) &&
-    reviewerIds.includes(gateReviewerId) &&
-    !authorIds.includes(gateReviewerId);
+    (evidence.reviewMode === 'self'
+      ? authorIds.includes(reviewerId)
+      : !authorIds.includes(reviewerId));
   const itemsAreOwnedAndReviewed =
     new Set(itemIds).size === itemIds.length &&
     evidence.reviewItems.every(
       (item) =>
         item.authorIds.every((authorId) => authorIds.includes(authorId)) &&
-        reviewerIds.includes(item.reviewerId) &&
-        !item.authorIds.includes(item.reviewerId),
+        item.reviewerId === reviewerId &&
+        (evidence.reviewMode === 'self' || !item.authorIds.includes(item.reviewerId)),
     ) &&
     evidence.authors.every(
       (author) =>
@@ -1016,12 +1032,14 @@ const validateReviewCompleteness = (evidence: ReviewEvidence): void => {
     evidence.reviewItems.every((item) =>
       authorIds.some((authorId) => item.authorIds.includes(authorId)),
     );
-  const coverageIsIndependent =
+  const coverageIsComplete =
     sameStringSet(evidence.outcomeCoverageReview.subjectPaths, itemPaths) &&
     sameStringSet(evidence.outcomeCoverageReview.learningOutcomeIds, itemOutcomeIds) &&
     sameStringSet(evidence.outcomeCoverageReview.authorIds, itemAuthorIds) &&
     evidence.outcomeCoverageReview.authorIds.every((authorId) => authorIds.includes(authorId)) &&
-    !evidence.outcomeCoverageReview.authorIds.includes(gateReviewerId);
+    evidence.outcomeCoverageReview.reviewerId === reviewerId &&
+    (evidence.reviewMode === 'self' ||
+      !evidence.outcomeCoverageReview.authorIds.includes(reviewerId));
 
   if (
     !allChecksPassed ||
@@ -1029,7 +1047,7 @@ const validateReviewCompleteness = (evidence: ReviewEvidence): void => {
     !countsAreComplete ||
     !authorsAndReviewersAreValid ||
     !itemsAreOwnedAndReviewed ||
-    !coverageIsIndependent ||
+    !coverageIsComplete ||
     !evidence.outcomeCoverageConfirmed ||
     !evidence.aggregatePassed
   ) {
@@ -1069,10 +1087,8 @@ const verifyReviewReference = async (
       reference.authorIds,
       evidence.authors.map(({ personId }) => personId),
     ) ||
-    !sameStringSet(
-      reference.reviewerIds,
-      evidence.reviewers.map(({ personId }) => personId),
-    ) ||
+    !sameStringSet(reference.reviewerIds, [evidence.reviewer.personId]) ||
+    reference.reviewMode !== evidence.reviewMode ||
     digestWithoutField(evidence, 'evidenceDigest') !== evidence.evidenceDigest
   ) {
     throw new CatalogEvidenceInventoryError(
@@ -1112,7 +1128,8 @@ const verifyReviewReference = async (
     digest: file.digest,
     subjectDigest: evidence.subjectDigest,
     authorIds: evidence.authors.map(({ personId }) => personId),
-    reviewerIds: evidence.reviewers.map(({ personId }) => personId),
+    reviewerIds: [evidence.reviewer.personId],
+    reviewMode: evidence.reviewMode,
     aggregatePassed: evidence.aggregatePassed,
   };
 };
@@ -1161,6 +1178,7 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
         review?.path !== reference.path ||
         review.digest !== reference.digest ||
         review.subjectDigest !== reference.subjectDigest ||
+        review.reviewMode !== reference.reviewMode ||
         review.aggregatePassed !== reference.aggregatePassed
       );
     })

@@ -32,11 +32,17 @@
     "outcomeImpact": {
       "$ref": "#/$defs/__schema8"
     },
-    "applicableChecks": {
+    "reviewMode": {
       "$ref": "#/$defs/__schema10"
     },
+    "reviewerId": {
+      "$ref": "#/$defs/__schema1"
+    },
+    "applicableChecks": {
+      "$ref": "#/$defs/__schema11"
+    },
     "notApplicableChecks": {
-      "$ref": "#/$defs/__schema13"
+      "$ref": "#/$defs/__schema14"
     },
     "humanContentReviewEvidenceId": {
       "$ref": "#/$defs/__schema1"
@@ -48,16 +54,16 @@
       "$ref": "#/$defs/__schema2"
     },
     "constitutionCheck": {
-      "$ref": "#/$defs/__schema14"
-    },
-    "unresolvedBlockingFindingCount": {
       "$ref": "#/$defs/__schema15"
     },
-    "mergeApproved": {
+    "unresolvedBlockingFindingCount": {
       "$ref": "#/$defs/__schema16"
     },
+    "mergeApproved": {
+      "$ref": "#/$defs/__schema17"
+    },
     "reviewedAt": {
-      "$ref": "#/$defs/__schema12"
+      "$ref": "#/$defs/__schema13"
     },
     "evidenceDigest": {
       "$ref": "#/$defs/__schema2"
@@ -74,6 +80,8 @@
     "workManifestDigest",
     "learningOutcomeIds",
     "outcomeImpact",
+    "reviewMode",
+    "reviewerId",
     "applicableChecks",
     "notApplicableChecks",
     "humanContentReviewEvidenceId",
@@ -132,7 +140,7 @@
   "$defs": {
     "__schema0": {
       "type": "string",
-      "const": "2.0.0"
+      "const": "3.0.0"
     },
     "__schema1": {
       "type": "string",
@@ -213,13 +221,20 @@
       "minLength": 1
     },
     "__schema10": {
+      "type": "string",
+      "enum": [
+        "self",
+        "third_party"
+      ]
+    },
+    "__schema11": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema11"
+        "$ref": "#/$defs/__schema12"
       }
     },
-    "__schema11": {
+    "__schema12": {
       "type": "object",
       "properties": {
         "checkId": {
@@ -252,7 +267,7 @@
           "maximum": 9007199254740991
         },
         "completedAt": {
-          "$ref": "#/$defs/__schema12"
+          "$ref": "#/$defs/__schema13"
         }
       },
       "required": [
@@ -269,12 +284,12 @@
       ],
       "additionalProperties": false
     },
-    "__schema12": {
+    "__schema13": {
       "type": "string",
       "format": "date-time",
       "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
     },
-    "__schema13": {
+    "__schema14": {
       "type": "array",
       "items": {
         "type": "object",
@@ -293,7 +308,7 @@
         "additionalProperties": false
       }
     },
-    "__schema14": {
+    "__schema15": {
       "type": "object",
       "properties": {
         "constitutionPath": {
@@ -323,7 +338,7 @@
           "type": "boolean"
         },
         "checkedAt": {
-          "$ref": "#/$defs/__schema12"
+          "$ref": "#/$defs/__schema13"
         }
       },
       "required": [
@@ -337,12 +352,12 @@
       ],
       "additionalProperties": false
     },
-    "__schema15": {
+    "__schema16": {
       "type": "integer",
       "minimum": 0,
       "maximum": 9007199254740991
     },
-    "__schema16": {
+    "__schema17": {
       "type": "boolean"
     }
   }

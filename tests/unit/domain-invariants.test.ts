@@ -127,6 +127,20 @@ describe('domain invariants', () => {
     expect(() =>
       createContentWorkManifest({
         ...base,
+        reviewPolicy: { requiredMode: 'third_party', riskReasons: ['original_proof'] },
+        reviewUnits: [reviewUnit],
+      }),
+    ).not.toThrow();
+    expect(() =>
+      createContentWorkManifest({
+        ...base,
+        reviewPolicy: { requiredMode: 'self', riskReasons: ['original_proof'] },
+        reviewUnits: [reviewUnit],
+      }),
+    ).toThrow(/WORK_MANIFEST_SCHEMA_INVALID/u);
+    expect(() =>
+      createContentWorkManifest({
+        ...base,
         reviewUnits: [reviewUnit, { ...reviewUnit, unitId: 'RU-T024-duplicate' }],
       }),
     ).toThrow(WorkManifestError);
@@ -136,6 +150,10 @@ describe('domain invariants', () => {
       readonly taskId: string;
       readonly requiredRequirementIds: readonly string[];
       readonly learningOutcomeIds: readonly string[];
+      readonly reviewPolicy: {
+        readonly requiredMode: 'self' | 'third_party';
+        readonly riskReasons: readonly string[];
+      };
       readonly reviewUnits: readonly {
         readonly reviewUnitId: string;
         readonly changeKind: string;
@@ -154,6 +172,7 @@ describe('domain invariants', () => {
       taskId: createdShape.taskId,
       requiredRequirementIds: createdShape.requiredRequirementIds,
       learningOutcomeIds: createdShape.learningOutcomeIds,
+      reviewPolicy: createdShape.reviewPolicy,
       reviewUnits: createdShape.reviewUnits,
     };
     const staleScope = structuredClone(created) as Record<string, unknown>;

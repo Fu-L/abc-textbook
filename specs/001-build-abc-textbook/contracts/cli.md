@@ -121,13 +121,14 @@ npm run abc:review -- --candidate CANDIDATE_ID --evidence PATH
 evidenceは次を満たさなければならない。
 
 - `scopeType=release_candidate`、`scopeId=CANDIDATE_ID`、同じ`contentSubjectDigest`。
-- 一人のgate reviewerがOutcome coverageを確認する。
-- 全applicable checkの`executedByReviewerId`が同じgate reviewerで、raw resultと一致する。
-- 完全自動化不能な新規・変更Claim/Exampleの全itemがauthor IDs外の人間により判定される。
-- current Constitution 1.0.0とdependent template inventoryを含むConstitution Checkが成功する。
+- manifestのreview policyと同じ`reviewMode`（通常は`self`、高リスク時だけ`third_party`）を記録する。
+- `self`ではmanifest ownerがOutcome coverageを確認し、`third_party`ではauthor外のreviewerが確認する。
+- 全applicable checkの`executedByReviewerId`が証跡のreviewerと一致し、同じsubjectのresultと一致する。
+- 完全自動化不能な新規・変更Claim/Exampleの全itemをreviewerが判定し、self/third-partyの表示を混同しない。
+- current Constitution 2.0.0とdependent template inventoryを含むConstitution Checkが成功する。
 - blocking finding 0、`aggregatePassed=true`。
 
-他者/CI実行結果の追認、複数reviewerへのcheck分割、owner approval、LLM result、learner self-studyをHumanContentReviewEvidenceの代用として拒否する。成功時`AWAITING_OWNER_APPROVAL`へ進む。
+他者/CI実行結果の追認、複数reviewerへのcheck分割、review policyにない第三者必須化、owner approval、LLM result、learner self-studyをHumanContentReviewEvidenceの代用として拒否する。成功時`AWAITING_OWNER_APPROVAL`へ進む。
 
 ## `abc:approve` — final payload固定と管理者承認
 
@@ -184,4 +185,4 @@ npm run verify:merge -- --evidence PATH
 - `catalog:validate`はCatalog schemaと意味制約を検査し入力を変更しない。
 - `catalog:build`は確定Releaseまたはfixtureから派生indexを指定outputへ生成し、公開正本を変更しない。
 - 両CLIは任意のmanifest/candidateを引数で信頼しない。Catalogのrelease recordから`docs/work-manifests/`、`staging/release-candidates/`、`staging/updates/`の正規recordを一意に解決し、CIが提供する保護済みremote-tracking base ref（`GITHUB_BASE_REF`、ローカル既定は`origin/main`）からwork manifest、Catalog、content treeの基準を読み、`src/content/`の実ファイルinventoryを公開直前に再構築する。base refはCLI引数から選択できず、任意SHAの指定、`HEAD`自身、baseからの更新を含む未固定manifest、base/current Catalogで再現できないoperationやCorrection Impactは拒否する。
-- `verify:merge`はWork Manifest、logical subject、同一gate reviewerのcheck実行、author外review、Constitution Check、finding 0を検証する。
+- `verify:merge`はWork Manifest、logical subject、review modeに応じた同一reviewerのcheck実行、必要時のみauthor外review、Constitution Check、finding 0を検証する。

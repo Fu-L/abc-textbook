@@ -261,6 +261,7 @@ describe('official advanced slot registry', () => {
       subjectDigest: digest,
       authorIds: ['person-author'],
       reviewerIds: ['person-reviewer'],
+      reviewMode: 'third_party' as const,
       aggregatePassed: true as const,
     };
     const trustedEvidence = {

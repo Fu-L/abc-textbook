@@ -262,24 +262,24 @@ candidate ID、release version、approved digest、公開前後tree digest、切
 
 ### ContentWorkManifest
 
-実装・content変更前に作るversion-controlled scopeである。top-levelにtask ID、scope digest、required requirement IDs、learning outcome IDs、review units、stateを持つ。各review unitは重複しないpaths、item IDs、requirements、outcomes、依存unit、checks、evidence role、owner、statusを持つ。
+実装・content変更前に作るversion-controlled scopeである。top-levelにtask ID、scope digest、required requirement IDs、learning outcome IDs、固定したreview policy、review units、stateを持つ。review policyは`self`または`third_party`の必須modeと、公式根拠との矛盾・独自証明・重大な分類変更から選ぶrisk reasonを持つ。各review unitは重複しないpaths、item IDs、requirements、outcomes、依存unit、checks、evidence role、owner、statusを持つ。
 
 content review unitはContest batchではなくLearning Outcome、Problem、Claim、Example、Exercise等の独立対象にする。tooling/abstractionには具体的なmaintenance benefitを必須にする。
 
 ### HumanContentReviewEvidence
 
-同じlogical change subjectについて、次を保持する。
+同じlogical change subjectについて、次を保持する。通常更新の`self` modeではmanifest ownerがreviewerを兼ね、外部person IDを要求しない。固定policyが高リスクを示す場合だけ`third_party` modeを使い、reviewerはauthor集合と分離する。
 
 - 明示file inventoryとsubject digest
-- Outcome coverage reviewとgate reviewer ID
-- gate reviewer自身が実行した全適用check、command、result、raw path/digest、時刻
+- Outcome coverage reviewとreview mode、reviewer ID
+- reviewer自身が実行した全適用check、command、result path/digest、時刻
 - 自動化不能な新規・変更Claim/Exampleの完全inventory
-- 各itemのauthor IDs、author外reviewer ID、根拠、判定、finding、解消結果
+- 各itemのauthor IDs、reviewer ID、根拠、判定、finding、解消結果
 - aggregate resultと未解決blocking count
 
 ### MergeReviewEvidence
 
-Work Manifest、subject digest、HumanContentReviewEvidence、適用check集合、非適用理由、現行constitution version/digest、dependent template inventory、merge可否を結ぶ。LLM panel、独立auditor、owner approvalを別の必須review roleとして追加しない。
+Work Manifest、subject digest、HumanContentReviewEvidence、適用check集合、非適用理由、現行constitution version/digest、dependent template inventory、merge可否を結ぶ。self-reviewとthird-party reviewのmodeを保持するが、owner approvalを品質reviewの代用にしない。LLM panelや独立auditorを通常更新の必須roleとして追加しない。
 
 ### LearnerOutcomeEvidence
 
@@ -316,6 +316,6 @@ SC-012について、全公開Problem routeが共有LearningRecord component/act
 7. 全Explanation/Example/Exercise/AnswerMaterialがOutcomeとSourceへ追跡できる。
 8. 全実行可能Example/AnswerMaterialの検証が成功する。
 9. 全内部link、用語、代替text、navigationが有効である。
-10. 全適用checkと必要なauthor外human reviewがcurrent subjectで成功する。
+10. 全適用checkとreview policyに応じたselfまたはthird-party reviewがcurrent subjectで成功する。
 11. owner approval後にcandidate bytesが変化していない。
 12. contest matrix、search、simple local learning managementが公開Problemで利用可能である。

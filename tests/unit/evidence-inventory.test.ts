@@ -77,12 +77,12 @@ describe('catalog release evidence inventory', () => {
         completedAt: check.completedAt,
         resultPath: checkPath,
         resultDigest: checkDigest,
-        executedByReviewerId: 'person-reviewer',
+        executedByReviewerId: 'person-author',
       },
     ];
     const reviewPath = 'docs/reviews/human-content/review-catalog.json';
     const review: Record<string, unknown> = {
-      schemaVersion: '2.0.0',
+      schemaVersion: '3.0.0',
       id: 'human-content-review-catalog',
       scopeType: 'release_candidate',
       scopeId: 'release-candidate-2026.07.17-aaaaaaaaaaaa',
@@ -90,23 +90,14 @@ describe('catalog release evidence inventory', () => {
       subjectDigest,
       inventoryPath: 'docs/verification/review-inventory.json',
       inventoryDigest: '',
-      rawEvidenceManifestPath: 'docs/verification/review-raw-manifest.json',
-      rawEvidenceManifestDigest: sha('c'),
-      rawEvidenceCount: 1,
-      artifactPath: reviewPath,
+      reviewPolicy: { requiredMode: 'self', riskReasons: [] } as const,
+      reviewMode: 'self',
       applicableChecks,
       applicableCheckCount: 1,
       passedApplicableCheckCount: 1,
       reviewerExecutedCheckSetDigest: canonicalDigest(applicableChecks),
       authors: [{ personId: 'person-author', authoredItemIds: ['human-review-item-catalog'] }],
-      reviewers: [
-        {
-          personId: 'person-reviewer',
-          role: 'independent_human_content_reviewer',
-          independenceDeclaration: 'I did not author the reviewed item.',
-          countedAsOwnerApproval: false,
-        },
-      ],
+      reviewer: { personId: 'person-author', mode: 'self' },
       reviewItems: [
         {
           reviewItemId: 'human-review-item-catalog',
@@ -114,7 +105,7 @@ describe('catalog release evidence inventory', () => {
           subjectPaths: ['src/content/docs/index.md'],
           authorIds: ['person-author'],
           learningOutcomeIds: [],
-          reviewerId: 'person-reviewer',
+          reviewerId: 'person-author',
           reviewBasis: 'Compared the claim with its source.',
           decision: 'approved',
           findings: [],
@@ -127,7 +118,7 @@ describe('catalog release evidence inventory', () => {
       changesRequestedItemCount: 0,
       unreviewedItemCount: 0,
       outcomeCoverageReview: {
-        reviewerId: 'person-reviewer',
+        reviewerId: 'person-author',
         authorIds: ['person-author'],
         decision: 'no_outcome_impact_confirmed',
         learningOutcomeIds: [],
@@ -145,6 +136,7 @@ describe('catalog release evidence inventory', () => {
       taskId: 'T024',
       requiredRequirementIds: ['FR-026'],
       learningOutcomeIds: [],
+      reviewPolicy: { requiredMode: 'self', riskReasons: [] } as const,
       reviewUnits: [
         {
           reviewUnitId: 'RU-T024-catalog',
@@ -164,7 +156,7 @@ describe('catalog release evidence inventory', () => {
       ],
     };
     const workManifest: Record<string, unknown> = {
-      schemaVersion: '1.0.0',
+      schemaVersion: '2.0.0',
       manifestId: 'work-manifest-T024-catalog',
       ...manifestScope,
       scopeDigest: calculateContentWorkManifestScopeDigest(manifestScope),
@@ -211,6 +203,7 @@ describe('catalog release evidence inventory', () => {
           digest: sha('9'),
           subjectDigest,
           reviewerExecutedCheckSetDigest: review.reviewerExecutedCheckSetDigest,
+          reviewMode: 'self',
           aggregatePassed: true,
         },
       ],
@@ -286,7 +279,8 @@ describe('catalog release evidence inventory', () => {
             digest: sha('9'),
             subjectDigest,
             authorIds: ['person-author'],
-            reviewerIds: ['person-reviewer'],
+            reviewerIds: ['person-author'],
+            reviewMode: 'self',
             aggregatePassed: true as const,
           },
         ],
@@ -531,7 +525,8 @@ describe('catalog release evidence inventory', () => {
           digest: reviewDigest,
           subjectDigest,
           authorIds: ['person-author'],
-          reviewerIds: ['person-reviewer'],
+          reviewerIds: ['person-author'],
+          reviewMode: 'self',
           aggregatePassed: true,
         },
       ],
@@ -567,7 +562,8 @@ describe('catalog release evidence inventory', () => {
       evidenceId: fixture.review.id,
       path: fixture.reviewPath,
       authorIds: ['person-author'],
-      reviewerIds: ['person-reviewer'],
+      reviewerIds: ['person-author'],
+      reviewMode: 'self',
       aggregatePassed: true,
     });
   });

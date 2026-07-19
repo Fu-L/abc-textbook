@@ -23,7 +23,7 @@ export interface TrustedInstructionQualityInventory {
     readonly requiresHumanReview: boolean;
     readonly humanReviewItemId: string | null;
   }[];
-  /** Successful, independently validated review evidence for this inventory. */
+  /** Successful review evidence for this inventory, with mode enforced by its own gate. */
   readonly humanReviewEvidence: readonly {
     readonly evidenceId: string;
     readonly reviewItemIds: readonly string[];
