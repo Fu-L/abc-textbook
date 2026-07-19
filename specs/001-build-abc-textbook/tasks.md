@@ -4,7 +4,7 @@
 
 **Prerequisites**: `plan.md`, `spec.md`, `research.md`, `data-model.md`, `contracts/`, `quickstart.md`
 
-**Validation**: 自動化可能な検査は Vitest/Playwright/Ajv/build CLI で先に失敗を確認してから実装する。通常更新はmanifest ownerのself-reviewで完結し、公式根拠との矛盾・独自証明・重大な分類変更を含む高リスク項目だけはself-reviewに代えて作成者外のthird-party reviewへ送る。private previewはstaging/public分離を検証し、Outcome/Problem shardはshard単位でbuild・review・previewした後に全件joinを行う。
+**Validation**: 自動化可能な検査は Vitest/Playwright/Ajv/build CLI で先に失敗を確認してから実装する。通常更新はmanifest ownerのself-reviewで完結し、公式根拠との矛盾・独自証明・重大な分類変更を含む高リスク項目だけはself-reviewに代えて作成者外のthird-party reviewへ送る。private previewはstaging/public分離を検証し、Outcome/Problem shardはshard単位でbuild・review・previewした後に全件joinを行う。T094/T111/T126はpreview専用のcomponent evidenceを固定し、production/full-corpus evidenceはT154後の別taskで作成する。
 
 **Organization**: User Story ごとに独立検証可能な phase を置く。Foundational完了後に、複数分野・複数Contest・複数labelのprivate vertical previewを同じ実装経路で一周させる。その後に全コーパスのInventoryとfinal taxonomyをjoinし、US1の解説はOutcome/Problem shard単位で生成・追跡する。P1のUS2を設計上先行させるのは、final taxonomyの所有権を確定するためであり、previewを全件完了まで遅延させる理由にはしない。
 
@@ -18,9 +18,17 @@
 
 ### Private vertical preview milestone (`initial-v1`)
 
-`initial-v1`は公開Releaseではなく、`staging/previews/initial-v1/`と`docs/verification/previews/initial-v1/`だけに保存する設計検証用snapshotである。T028–T031でcohortの選定規則と失敗テストをfreezeし、T032で候補範囲の公式metadataを取得・検証した後、T037で実際のcohort manifestをfreezeする。T038/T045/T051–T054/T083/T099/T116の各preview実装は、全コーパスbatchを待たずに同じcohortを入力として通せることを確認し、T154で全componentをjoinする。preview専用の別catalog、UI、LearningRecord、update実装は作らない。
+`initial-v1`は公開Releaseではなく、`staging/previews/initial-v1/`と`docs/verification/previews/initial-v1/`だけに保存する設計検証用snapshotである。T028–T031でcohortの選定規則と失敗テストをfreezeし、T032で候補範囲の公式metadataを取得・検証した後、T037で実際のcohort manifestをfreezeする。preview componentは全コーパスbatchを待たずに同じcohortを入力として通し、次の完了証跡を出す。
 
-同じtaskを二度手書きで複製しないため、preview scopeとfull scopeを同じ実装へ渡す。previewの依存列は`T028 (rules/tests) → T032 (official metadata) → T037 (cohort freeze) → T038 (inventory) → T045 (provisional taxonomy) → T051–T054 (four-domain content) → T083–T094/T099–T110/T116–T132 (LearningRecord/UI/update) → T154 (join gate)`、fullの依存列は`T032–T044(full) → T045(full) → T046–T050 → T055–T056 → T066–T071`とする。T154はpreview scopeのcomponentだけを入力にし、full scopeのjoinはpreview scopeの成功を待つが、preview scopeはfull scopeの完了を待たない。T066–T071にはT154を追加の前提として明示する。
+- metadata/inventory/provisional taxonomy: `docs/verification/previews/initial-v1/components/metadata-inventory-taxonomy.json` (T045)
+- four-domain learning content: `docs/verification/previews/initial-v1/components/content/<domain>.json` (T051–T054)
+- local LearningRecord: `docs/verification/previews/initial-v1/components/learning-records.json` (T094)
+- static UI/search: `docs/verification/previews/initial-v1/components/ui-search.json` (T111)
+- update/release simulation: `docs/verification/previews/initial-v1/components/update-simulation.json` (T126)
+
+T154は上記の固定artifactと`staging/previews/initial-v1/preview-manifest.json`だけをjoinする。T127–T153のcanonical full route、production candidate、owner approval、publish、initial-release reviewはpreviewの入力にしてはならない。preview専用の別catalog、UI、LearningRecord、update実装は作らない。
+
+同じtaskを二度手書きで複製しないため、preview scopeとfull scopeは共通実装へ別々のfixture/catalogを渡す。previewの依存列は`T028–T032 (rules/tests and candidate metadata) → T037 (cohort freeze) → T038 (preview inventory) → T045/T046 (provisional taxonomy) → T051–T054 (four-domain content) → T083–T094 (LearningRecord preview) / T099–T111 (UI/search preview) / T116–T126 (update simulation preview) → T154 (join gate)`とする。fullの依存列は`T032–T044(full inventory) → T047–T050(full taxonomy and placement) → T064 (authoring/source prerequisites) → T154 PASS → T065 (frozen shard index) → T066–T071`とし、US3/US4/US5のcanonical full workはT154後も継続する。T154はpreview component artifactだけを入力にし、preview scopeはfull scopeの完了を待たない。
 
 cohortの完了条件は次の通りである。
 
@@ -35,9 +43,9 @@ cohortの完了条件は次の通りである。
 
 ### Generated Outcome/Problem shard contract
 
-T066–T071は巨大なdomain単位の本文作業ではなく、`docs/work-manifests/initial/problem-explanations/index.json`からOutcome/Problem shard work itemを生成・ディスパッチするtaskである。生成単位は`primaryOutcomeId`ごとにProblem IDを公式順で並べた最大8件の連続chunkとし、各shardへ次を一意に割り当てる。
+T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/work-manifests/initial/problem-explanations/index.json`を一度だけ生成・freezeする専用taskである。T066–T071はこの固定indexからOutcome/Problem shard work itemを生成・ディスパッチする6つの独立taskであり、生成単位は`primaryOutcomeId`ごとにProblem IDを公式順で並べた最大8件の連続chunkとする。各domain manifestは同じ`indexDigest`を記録し、join時に再計算して一致を検証する。
 
-- `shardId`、明示的なProblem/Claim/Example ID、前提shard、所有path、required checks、evidence path、review policy、preview status
+- `shardId`、明示的なProblem/Claim/Example ID、前提shard、所有path、required checks、evidence path、review policy、preview status、固定`indexDigest`
 - `src/content/docs/problems/<outcome>/<shardId>/`、`src/content/claims/<outcome>/<shardId>/`、`src/content/examples/<outcome>/<shardId>/`、`docs/work-manifests/initial/problem-explanations/<outcome>/<shardId>/`の非重複path
 - shard単独のsource/structure/example/answer/link/accessibility検証、current-subject review evidence、private preview snapshot
 
@@ -109,7 +117,7 @@ T066–T071は巨大なdomain単位の本文作業ではなく、`docs/work-mani
 - [ ] T035 [P] [US2] Import and verify only official metadata for ABC 368–419 after T032 metadata acquisition; this task may run in parallel with T037 because it does not select or mutate the preview cohort in `src/content/contests/abc368-abc419/`, `src/content/problem-slots/abc368-abc419/`, `src/content/problems/abc368-abc419/`, and `src/content/sources/abc368-abc419/`
 - [ ] T036 [P] [US2] Import and verify only official metadata for ABC 420–466 after T032 metadata acquisition; this task may run in parallel with T037 because it does not select or mutate the preview cohort in `src/content/contests/abc420-abc466/`, `src/content/problem-slots/abc420-abc466/`, `src/content/problems/abc420-abc466/`, and `src/content/sources/abc420-abc466/`
 - [ ] T037 [US2] After T032 has verified the candidate metadata, deterministically select and freeze the `initial-v1` cohort by contest number, official task order, Problem ID, four-domain coverage, contest diversity, advanced-label diversity, Source Revisions, fixture boundaries, and excluded Problems in `staging/previews/initial-v1/preview-manifest.json` and `docs/verification/previews/initial-v1/cohort-selection.json`; reject missing or contradictory metadata instead of guessing
-- [ ] T038 [P] [US2] Create source-backed TechniqueInventoryItem records for the preview cohort and deterministic problem-ID shard 00 without creating Tag or Unit entities, writing preview records only under `staging/previews/initial-v1/technique-inventory/` until the full-corpus join in `src/content/technique-inventory/shard-00/`
+- [ ] T038 [P] [US2] Create source-backed TechniqueInventoryItem records for the preview cohort and deterministic problem-ID shard 00 without creating Tag or Unit entities, write the preview inventory digest under `docs/verification/previews/initial-v1/components/`, and keep preview records only under `staging/previews/initial-v1/technique-inventory/` until the full-corpus join in `src/content/technique-inventory/shard-00/`
 - [ ] T039 [P] [US2] Create source-backed TechniqueInventoryItem records for deterministic problem-ID shard 01 without creating Tag or Unit entities in `src/content/technique-inventory/shard-01/`
 - [ ] T040 [P] [US2] Create source-backed TechniqueInventoryItem records for deterministic problem-ID shard 02 without creating Tag or Unit entities in `src/content/technique-inventory/shard-02/`
 - [ ] T041 [P] [US2] Create source-backed TechniqueInventoryItem records for deterministic problem-ID shard 03 without creating Tag or Unit entities in `src/content/technique-inventory/shard-03/`
@@ -119,16 +127,16 @@ T066–T071は巨大なdomain単位の本文作業ではなく、`docs/work-mani
 
 ### Taxonomy and textbook implementation for User Story 2
 
-- [ ] T045 [US2] In preview scope, generate the `initial-v1` provisional taxonomy and integration candidates immediately from the preview Inventory; in full scope, synthesize all-corpus clusters, overlaps, outliers, prerequisites, and proposed outcomes without mutating canonical taxonomy in `staging/previews/initial-v1/taxonomy/`, `docs/verification/previews/initial-v1/taxonomy-integration.json`, and `docs/verification/bootstrap/taxonomy-synthesis.md`
-- [ ] T046 [US2] In preview scope, freeze non-overlapping candidate taxonomy review units; in full scope, accept each provisional `promote`/`merge`/`split`/`retire` decision with affected Problem IDs and evidence and define observable non-duplicated LearningOutcome entities in `docs/work-manifests/initial/us2/taxonomy/`, `docs/verification/previews/initial-v1/taxonomy-integration.json`, and `src/content/learning-outcomes/`
-- [ ] T047 [US2] Define canonical TechniqueTag entities only from the accepted full-corpus mapping, including definitions, outcomes, parents, prerequisites, aliases, old names, and representative Problems; reject preview-only or one-Problem tags in `src/content/tags/`
-- [ ] T048 [US2] Recompute and validate separate Tag and LearningUnit prerequisite DAGs plus the deterministic standard order from the full Inventory, rather than copying preview edges, in `src/content/policies/learning-order.json`
-- [ ] T049 [US2] Apply the canonical placement decision table to every Problem with primary/supporting tags, unique primary outcome review unit, and full/similar/supplement evidence; enumerate preview taxonomy changes through `CorrectionImpact` in `src/content/policies/problem-placements.json` and `docs/verification/bootstrap/problem-placements.json`
-- [ ] T050 [US2] Define chapter/section/subsection LearningUnit entities with baseline/additional prerequisites, outcomes, examples, Problems, and assessments in `src/content/learning-units/`
-- [ ] T051 [P] [US2] Freeze one work manifest per preview candidate Outcome and author the graph/search/modeling preview learning path first, then expand it through the same accepted final taxonomy in `docs/work-manifests/initial/graph-search/`, `staging/previews/initial-v1/learning/graph-search/`, `src/content/docs/learn/graph-search/`, `src/content/examples/graph-search/`, `src/content/exercises/graph-search/`, `src/content/assessments/graph-search/`, and `src/content/answer-materials/graph-search/`
-- [ ] T052 [P] [US2] Freeze one work manifest per preview candidate Outcome and author the dynamic-programming preview learning path first, then its full-corpus expansion with structured learning items in `docs/work-manifests/initial/dynamic-programming/`, `staging/previews/initial-v1/learning/dynamic-programming/`, `src/content/docs/learn/dynamic-programming/`, `src/content/examples/dynamic-programming/`, `src/content/exercises/dynamic-programming/`, `src/content/assessments/dynamic-programming/`, and `src/content/answer-materials/dynamic-programming/`
-- [ ] T053 [P] [US2] Freeze one work manifest per preview candidate Outcome and author the data-structure/algorithm-design preview learning path first, then its full-corpus expansion with structured learning items in `docs/work-manifests/initial/data-structures/`, `staging/previews/initial-v1/learning/data-structures/`, `src/content/docs/learn/data-structures/`, `src/content/examples/data-structures/`, `src/content/exercises/data-structures/`, `src/content/assessments/data-structures/`, and `src/content/answer-materials/data-structures/`
-- [ ] T054 [P] [US2] Freeze one work manifest per preview candidate Outcome and author the mathematics/combinatorics preview learning path first, then its full-corpus expansion with structured learning items in `docs/work-manifests/initial/mathematics/`, `staging/previews/initial-v1/learning/mathematics/`, `src/content/docs/learn/mathematics/`, `src/content/examples/mathematics/`, `src/content/exercises/mathematics/`, `src/content/assessments/mathematics/`, and `src/content/answer-materials/mathematics/`
+- [ ] T045 [US2] Generate the `initial-v1` provisional taxonomy and integration candidates immediately from the preview Inventory, freeze their digest without mutating canonical taxonomy, and write the metadata/inventory/provisional-taxonomy component evidence to `staging/previews/initial-v1/taxonomy/`, `docs/verification/previews/initial-v1/taxonomy-integration.json`, and `docs/verification/previews/initial-v1/components/metadata-inventory-taxonomy.json`; all-corpus synthesis remains a post-T154 activity in `docs/verification/bootstrap/taxonomy-synthesis.md`
+- [ ] T046 [US2] In preview scope, freeze non-overlapping candidate taxonomy review units and the provisional `promote`/`merge`/`split`/`retire` evidence needed by the four preview content tasks in `docs/work-manifests/initial/us2/taxonomy/` and `docs/verification/previews/initial-v1/taxonomy-integration.json`; do not materialize canonical entities
+- [ ] T047 [US2] After T154, define canonical TechniqueTag entities only from the accepted full-corpus mapping, including definitions, outcomes, parents, prerequisites, aliases, old names, and representative Problems; reject preview-only or one-Problem tags in `src/content/tags/`
+- [ ] T048 [US2] After T154, recompute and validate separate Tag and LearningUnit prerequisite DAGs plus the deterministic standard order from the full Inventory, rather than copying preview edges, in `src/content/policies/learning-order.json`
+- [ ] T049 [US2] After T154, apply the canonical placement decision table to every Problem with primary/supporting tags, unique primary outcome review unit, and full/similar/supplement evidence; enumerate preview taxonomy changes through `CorrectionImpact` in `src/content/policies/problem-placements.json` and `docs/verification/bootstrap/problem-placements.json`
+- [ ] T050 [US2] After T154, define chapter/section/subsection LearningUnit entities with baseline/additional prerequisites, outcomes, examples, Problems, and assessments in `src/content/learning-units/`
+- [ ] T051 [P] [US2] Freeze one work manifest per preview candidate Outcome and author only the graph/search/modeling `initial-v1` learning path before T154; write the preview component digest to `docs/verification/previews/initial-v1/components/content/graph-search.json`, then continue its full-corpus expansion after T047/T050 in `docs/work-manifests/initial/graph-search/`, `staging/previews/initial-v1/learning/graph-search/`, `src/content/docs/learn/graph-search/`, `src/content/examples/graph-search/`, `src/content/exercises/graph-search/`, `src/content/assessments/graph-search/`, and `src/content/answer-materials/graph-search/`
+- [ ] T052 [P] [US2] Freeze one work manifest per preview candidate Outcome and author only the dynamic-programming `initial-v1` learning path before T154; write the preview component digest to `docs/verification/previews/initial-v1/components/content/dynamic-programming.json`, then continue its full-corpus expansion after T047/T050 in `docs/work-manifests/initial/dynamic-programming/`, `staging/previews/initial-v1/learning/dynamic-programming/`, `src/content/docs/learn/dynamic-programming/`, `src/content/examples/dynamic-programming/`, `src/content/exercises/dynamic-programming/`, `src/content/assessments/dynamic-programming/`, and `src/content/answer-materials/dynamic-programming/`
+- [ ] T053 [P] [US2] Freeze one work manifest per preview candidate Outcome and author only the data-structure/algorithm-design `initial-v1` learning path before T154; write the preview component digest to `docs/verification/previews/initial-v1/components/content/data-structures.json`, then continue its full-corpus expansion after T047/T050 in `docs/work-manifests/initial/data-structures/`, `staging/previews/initial-v1/learning/data-structures/`, `src/content/docs/learn/data-structures/`, `src/content/examples/data-structures/`, `src/content/exercises/data-structures/`, `src/content/assessments/data-structures/`, and `src/content/answer-materials/data-structures/`
+- [ ] T054 [P] [US2] Freeze one work manifest per preview candidate Outcome and author only the mathematics/combinatorics `initial-v1` learning path before T154; write the preview component digest to `docs/verification/previews/initial-v1/components/content/mathematics.json`, then continue its full-corpus expansion after T047/T050 in `docs/work-manifests/initial/mathematics/`, `staging/previews/initial-v1/learning/mathematics/`, `src/content/docs/learn/mathematics/`, `src/content/examples/mathematics/`, `src/content/exercises/mathematics/`, `src/content/assessments/mathematics/`, and `src/content/answer-materials/mathematics/`
 - [ ] T055 [P] [US2] After the accepted final taxonomy, freeze one work manifest per Outcome and author string/geometry units and structured learning items in `docs/work-manifests/initial/string-geometry/`, `src/content/docs/learn/string-geometry/`, `src/content/examples/string-geometry/`, `src/content/exercises/string-geometry/`, `src/content/assessments/string-geometry/`, and `src/content/answer-materials/string-geometry/`
 - [ ] T056 [P] [US2] After the accepted final taxonomy, freeze one work manifest per Outcome and author hybrid/advanced-modeling units and structured learning items in `docs/work-manifests/initial/hybrid/`, `src/content/docs/learn/hybrid/`, `src/content/examples/hybrid/`, `src/content/exercises/hybrid/`, `src/content/assessments/hybrid/`, and `src/content/answer-materials/hybrid/`
 - [ ] T057 [US2] Generate learning-path navigation and order reasons exclusively from the validated DAG in `src/lib/catalog/build-learning-path.ts`
@@ -154,14 +162,14 @@ T066–T071は巨大なdomain単位の本文作業ではなく、`docs/work-mani
 
 ### Implementation for User Story 1
 
-- [ ] T064 [US1] Create the self-contained versioned explanation authoring skill, references, and templates in `.agents/skills/abc-explanation-author/SKILL.md`, `.agents/skills/abc-explanation-author/references/`, and `.agents/skills/abc-explanation-author/templates/`
-- [ ] T065 [US1] Normalize official source revisions, verification dates, constraints, and allowed-use metadata needed by all explanations in `src/content/sources/`
-- [ ] T066 [US1] After T154 has passed and the final taxonomy, placements, authoring skill, and source revisions are available, generate and freeze the deterministic Outcome/Problem shard index, then dispatch and author the graph/search/modeling shard work items independently (maximum 8 Problem IDs, non-overlapping paths) in `docs/work-manifests/initial/problem-explanations/index.json`, `src/content/docs/problems/graph-search/`, `src/content/claims/graph-search/`, `src/content/examples/graph-search/`, and `docs/work-manifests/initial/problem-explanations/graph-search/`
-- [ ] T067 [P] [US1] After T154 has passed, generate dynamic-programming Outcome/Problem shard work items from the deterministic index, then author and independently build/review/preview each generated shard with its own evidence and hold state in `src/content/docs/problems/dynamic-programming/`, `src/content/claims/dynamic-programming/`, `src/content/examples/dynamic-programming/`, and `docs/work-manifests/initial/problem-explanations/dynamic-programming/`
-- [ ] T068 [P] [US1] After T154 has passed, generate data-structure/algorithm-design Outcome/Problem shard work items from the deterministic index, then author and independently build/review/preview each generated shard with no shared canonical-file writes in `src/content/docs/problems/data-structures/`, `src/content/claims/data-structures/`, `src/content/examples/data-structures/`, and `docs/work-manifests/initial/problem-explanations/data-structures/`
-- [ ] T069 [P] [US1] After T154 has passed, generate mathematics/combinatorics Outcome/Problem shard work items from the deterministic index, then author and independently build/review/preview each generated shard with source, example, answer, and cross-reference evidence in `src/content/docs/problems/mathematics/`, `src/content/claims/mathematics/`, `src/content/examples/mathematics/`, and `docs/work-manifests/initial/problem-explanations/mathematics/`
-- [ ] T070 [P] [US1] After T154 has passed, generate string/geometry Outcome/Problem shard work items from the deterministic index, then author and independently build/review/preview each generated shard with explicit primary Outcome ownership in `src/content/docs/problems/string-geometry/`, `src/content/claims/string-geometry/`, `src/content/examples/string-geometry/`, and `docs/work-manifests/initial/problem-explanations/string-geometry/`
-- [ ] T071 [P] [US1] After T154 has passed, generate hybrid/advanced-modeling Outcome/Problem shard work items from the deterministic index, then author and independently build/review/preview each generated shard with all shard-local evidence before the global join in `src/content/docs/problems/hybrid/`, `src/content/claims/hybrid/`, `src/content/examples/hybrid/`, and `docs/work-manifests/initial/problem-explanations/hybrid/`
+- [ ] T064 [US1] Create the self-contained versioned explanation authoring skill, references, and templates, and normalize the official source revisions, verification dates, constraints, and allowed-use metadata needed by all explanations in `.agents/skills/abc-explanation-author/SKILL.md`, `.agents/skills/abc-explanation-author/references/`, `.agents/skills/abc-explanation-author/templates/`, and `src/content/sources/`
+- [ ] T065 [US1] After T049 has accepted the final taxonomy/placements and T154 has passed, generate, validate, and freeze the deterministic Outcome/Problem shard index with official Problem order, maximum-8 contiguous chunks, non-overlapping ownership paths, required checks, and a single `indexDigest` in `docs/work-manifests/initial/problem-explanations/index.json`
+- [ ] T066 [P] [US1] After T065, dispatch and author the graph/search/modeling Outcome/Problem shard work items from the frozen index; record the same `indexDigest` in each domain manifest and independently build/review/preview each maximum-8-Problem shard with non-overlapping paths in `src/content/docs/problems/graph-search/`, `src/content/claims/graph-search/`, `src/content/examples/graph-search/`, and `docs/work-manifests/initial/problem-explanations/graph-search/`
+- [ ] T067 [P] [US1] After T065, dispatch and author the dynamic-programming Outcome/Problem shard work items from the frozen index; record the same `indexDigest` in each domain manifest and independently build/review/preview each generated shard with its own evidence and hold state in `src/content/docs/problems/dynamic-programming/`, `src/content/claims/dynamic-programming/`, `src/content/examples/dynamic-programming/`, and `docs/work-manifests/initial/problem-explanations/dynamic-programming/`
+- [ ] T068 [P] [US1] After T065, dispatch and author the data-structure/algorithm-design Outcome/Problem shard work items from the frozen index; record the same `indexDigest` in each domain manifest and independently build/review/preview each generated shard with no shared canonical-file writes in `src/content/docs/problems/data-structures/`, `src/content/claims/data-structures/`, `src/content/examples/data-structures/`, and `docs/work-manifests/initial/problem-explanations/data-structures/`
+- [ ] T069 [P] [US1] After T065, dispatch and author the mathematics/combinatorics Outcome/Problem shard work items from the frozen index; record the same `indexDigest` in each domain manifest and independently build/review/preview each generated shard with source, example, answer, and cross-reference evidence in `src/content/docs/problems/mathematics/`, `src/content/claims/mathematics/`, `src/content/examples/mathematics/`, and `docs/work-manifests/initial/problem-explanations/mathematics/`
+- [ ] T070 [P] [US1] After T065, dispatch and author the string/geometry Outcome/Problem shard work items from the frozen index; record the same `indexDigest` in each domain manifest and independently build/review/preview each generated shard with explicit primary Outcome ownership in `src/content/docs/problems/string-geometry/`, `src/content/claims/string-geometry/`, `src/content/examples/string-geometry/`, and `docs/work-manifests/initial/problem-explanations/string-geometry/`
+- [ ] T071 [P] [US1] After T065, dispatch and author the hybrid/advanced-modeling Outcome/Problem shard work items from the frozen index; record the same `indexDigest` in each domain manifest and independently build/review/preview each generated shard with all shard-local evidence before the global join in `src/content/docs/problems/hybrid/`, `src/content/claims/hybrid/`, `src/content/examples/hybrid/`, and `docs/work-manifests/initial/problem-explanations/hybrid/`
 - [ ] T072 [US1] Execute every runnable example in its declared environment and record input, procedure, expected, observed, and digest evidence in `docs/verification/bootstrap/examples.json`
 - [ ] T073 [US1] Re-evaluate every non-full placement against algorithm, proof, complexity, constraints, prerequisites, implementation differences, and learning outcomes in `docs/verification/bootstrap/problem-placements.json`
 - [ ] T074 [US1] Have the policy-selected reviewer (`self` for normal changes, `third_party` instead of `self` for fixed high-risk cases) review non-automatable new or changed technical claims and examples in `docs/reviews/human-content/bootstrap/problem-explanations/`
@@ -189,7 +197,7 @@ T066–T071は巨大なdomain単位の本文作業ではなく、`docs/work-mani
 
 ### Implementation for User Story 3
 
-- [ ] T083 [US3] Implement versioned IndexedDB opening, migrations, and catalog-independent Problem-ID records, and run the same contract against the `initial-v1` preview catalog without changing Problem IDs in `src/lib/learning-records/database.ts` and `staging/previews/initial-v1/`
+- [ ] T083 [US3] Implement versioned IndexedDB opening, migrations, and catalog-independent Problem-ID records, and first run the same contract against the `initial-v1` preview catalog without changing Problem IDs in `src/lib/learning-records/database.ts` and `staging/previews/initial-v1/`; apply the full-corpus catalog only after T154
 - [ ] T084 [US3] Implement independent atomic status and needsReview actions with offset timestamps in `src/lib/learning-records/store.ts`
 - [ ] T085 [US3] Build the shared accessible learning-record control and no-JavaScript/IndexedDB-unavailable states in `src/components/LearningRecordControl.tsx`
 - [ ] T086 [US3] Implement stable localized date/time/timezone display and `更新記録なし` handling in `src/components/LearningRecordTimestamp.astro`
@@ -199,8 +207,8 @@ T066–T071は巨大なdomain単位の本文作業ではなく、`docs/work-mani
 - [ ] T090 [US3] Implement `newer-wins`, `backup-wins`, `cancel`, tie handling, and one-transaction rollback in `src/lib/learning-records/import-apply.ts`
 - [ ] T091 [US3] Build backup selection, preview, conflict-policy confirmation, apply result, and storage status UI in `src/pages/settings/learning-records.astro`
 - [ ] T092 [US3] Build the initial `needsReview=1` page with extra filters and no external state transmission in `src/pages/review/index.astro`
-- [ ] T093 [US3] Record full-route shared-contract E2E, representative raw timing, and reload evidence in `docs/verification/user-timing/bootstrap/sc-012.json`
-- [ ] T094 [US3] Have the policy-selected reviewer confirm outcome coverage and run all US3 checks including 100+ record success/failure restore (`self` for normal changes, `third_party` instead of `self` when a fixed high-risk condition applies), resolve findings, and record current-subject mode-labeled MergeReviewEvidence in `docs/verification/bootstrap/learning-record-restore.json` and `docs/reviews/human-content/bootstrap/us3/merge-review.json`
+- [ ] T093 [US3] Run the shared-contract E2E, representative raw timing, reload, and 100+ record restore checks against the frozen `initial-v1` catalog and record preview-only evidence in `docs/verification/previews/initial-v1/learning-records/`
+- [ ] T094 [US3] Have the policy-selected reviewer confirm the `initial-v1` LearningRecord component coverage, resolve preview findings, and write current-subject mode-labeled evidence plus the component digest to `docs/verification/previews/initial-v1/components/learning-records.json` and `docs/reviews/human-content/previews/initial-v1/us3/`; full-corpus validation remains a T139/T146 concern
 
 **Checkpoint**: Status and review state are independent, local-only, recoverable, and preserved across content changes.
 
@@ -221,19 +229,19 @@ T066–T071は巨大なdomain単位の本文作業ではなく、`docs/work-mani
 
 ### Implementation for User Story 4
 
-- [ ] T099 [US4] Implement the single canonical layout, breadcrumbs, section navigation, previous/next links, skip link, and external-link labeling shared by the `initial-v1` preview and final catalog in `src/layouts/TextbookLayout.astro`
-- [ ] T100 [P] [US4] Build home, complete learning path, and LearningUnit routes in `src/pages/index.astro`, `src/pages/learn/index.astro`, and `src/pages/learn/[...slug].astro`
-- [ ] T101 [P] [US4] Build TechniqueTag index/detail and Problem index/detail routes from canonical IDs in `src/pages/tags/index.astro`, `src/pages/tags/[slug].astro`, `src/pages/problems/index.astro`, and `src/pages/problems/[problemId].astro`
-- [ ] T102 [P] [US4] Build release-history list/detail routes with complete immutable fields and evidence references in `src/pages/updates/index.astro` and `src/pages/updates/[version].astro`
-- [ ] T103 [US4] Build the AdvancedSlotRegistry-driven accessible matrix and same-result alternative list in `src/components/ContestMatrix.astro` and `src/pages/contests/index.astro`
-- [ ] T104 [US4] Add distinguishable one-operation links from every published cell to Problem, explanation anchor, LearningUnit, primary/supporting TechniqueTags, and similar Problems in `src/components/ContestProblemCell.astro`
-- [ ] T105 [US4] Build combined visible-label filters, URL query serialization, result counts, reset, and zero-result guidance in `src/components/ProblemFilters.tsx`
-- [ ] T106 [US4] Configure Pagefind documents and entity-kind metadata while excluding controls, staging, obsolete routes, and local state in `src/lib/catalog/search-documents.ts`
-- [ ] T107 [US4] Generate the schema-valid public catalog endpoint solely from canonical public content in `src/pages/data/catalog.json.ts`
-- [ ] T108 [US4] Implement narrow-screen reflow, two-dimensional-table-only scrolling, focus visibility, and non-color states in `src/styles/accessibility.css`
-- [ ] T109 [US4] Run all future-label, direct-navigation, search, no-JavaScript, axe, keyboard, and reflow E2E tests and store results in `docs/verification/bootstrap/us4.json`
-- [ ] T110 [US4] Verify all internal links, cross-references, canonical routes, base paths, Pagefind entries, sitemap, and feed in `docs/verification/bootstrap/links-and-search.json`
-- [ ] T111 [US4] Have the policy-selected reviewer confirm outcome coverage and run all US4 checks including every target cell/route comparison for SC-002/005/011/017 (`self` for normal changes, `third_party` instead of `self` for fixed high-risk taxonomy changes), resolve findings, and record current-subject mode-labeled MergeReviewEvidence in `docs/verification/bootstrap/reverse-index.json` and `docs/reviews/human-content/bootstrap/us4/merge-review.json`
+- [ ] T099 [US4] Implement the shared layout, breadcrumbs, section navigation, previous/next links, skip link, and external-link labeling against the `initial-v1` preview catalog; full-catalog route closure remains after T154 in `src/layouts/TextbookLayout.astro`
+- [ ] T100 [P] [US4] Build preview-capable home, learning-path, and LearningUnit route foundations without assuming full-corpus content in `src/pages/index.astro`, `src/pages/learn/index.astro`, and `src/pages/learn/[...slug].astro`
+- [ ] T101 [P] [US4] Build preview-capable TechniqueTag and Problem index/detail route foundations from stable IDs in `src/pages/tags/index.astro`, `src/pages/tags/[slug].astro`, `src/pages/problems/index.astro`, and `src/pages/problems/[problemId].astro`
+- [ ] T102 [P] [US4] Build preview-capable release-history list/detail route foundations with immutable fields and evidence references in `src/pages/updates/index.astro` and `src/pages/updates/[version].astro`
+- [ ] T103 [US4] Build the AdvancedSlotRegistry-driven matrix and same-result alternative list for the frozen preview catalog in `src/components/ContestMatrix.astro` and `src/pages/contests/index.astro`
+- [ ] T104 [US4] Add distinguishable one-operation links from every preview cell to Problem, explanation anchor, LearningUnit, primary/supporting TechniqueTags, and similar Problems in `src/components/ContestProblemCell.astro`
+- [ ] T105 [US4] Build combined visible-label filters, URL query serialization, result counts, reset, and zero-result guidance for the preview catalog in `src/components/ProblemFilters.tsx`
+- [ ] T106 [US4] Configure preview Pagefind documents and entity-kind metadata while excluding controls, staging, obsolete routes, and local state in `src/lib/catalog/search-documents.ts`
+- [ ] T107 [US4] Generate the schema-valid preview catalog endpoint solely from frozen preview content; full-catalog regeneration is post-T154 in `src/pages/data/catalog.json.ts`
+- [ ] T108 [US4] Implement the shared narrow-screen reflow, two-dimensional-table-only scrolling, focus visibility, and non-color states used by preview and final routes in `src/styles/accessibility.css`
+- [ ] T109 [US4] Run the future-label, direct-navigation, search, no-JavaScript, axe, keyboard, and reflow checks against `initial-v1` and store preview evidence in `docs/verification/previews/initial-v1/ui-search/`
+- [ ] T110 [US4] Verify internal links, cross-references, preview canonical routes, base paths, Pagefind entries, sitemap, and feed without reading unpublished full-catalog content in `docs/verification/previews/initial-v1/ui-search/`
+- [ ] T111 [US4] Have the policy-selected reviewer confirm the `initial-v1` UI/search component coverage, resolve preview findings, and write current-subject mode-labeled evidence plus the component digest to `docs/verification/previews/initial-v1/components/ui-search.json` and `docs/reviews/human-content/previews/initial-v1/us4/`; full route/search closure remains T138/T140/T146
 
 **Checkpoint**: Every advanced Problem is visible under its official label and reachable from both the learning system and reverse indexes.
 
@@ -254,23 +262,23 @@ T066–T071は巨大なdomain単位の本文作業ではなく、`docs/work-mani
 
 ### Implementation for User Story 5
 
-- [ ] T116 [US5] Implement latest-ended and explicit-range discovery with offline-fixture mode and no in-progress Contest ingestion, then run the same update preparation against `initial-v1` without publishing preview state in `scripts/update-abc/discover.ts` and `staging/previews/initial-v1/`
-- [ ] T117 [US5] Implement official metadata acquisition, fingerprinting, dynamic advanced slots, and source-failure holds in `scripts/update-abc/acquire.ts`
-- [ ] T118 [US5] Implement staging-only diff operations and deterministic update IDs in `scripts/update-abc/stage.ts`
-- [ ] T119 [US5] Integrate the versioned authoring skill so each target Problem becomes explanation_draft, authoring_required with complete inputs/template, or blocked with a concrete reason in `scripts/update-abc/author.ts`
-- [ ] T120 [US5] Implement existing-taxonomy mapping plus explicit full-corpus impact proposals for unmatched techniques without publishing temporary Tag/Unit entities in `scripts/update-abc/classify.ts`
-- [ ] T121 [US5] Implement source, explanation, example, placement, DAG, order, catalog, index, cross-reference, and per-Problem diagnostics in `scripts/update-abc/validate.ts`
-- [ ] T122 [US5] Implement one-command orchestration, resumable state, 15-minute timing, stable output, and documented exit codes in `scripts/update-abc/index.ts`
-- [ ] T123 [US5] Implement correction impact enumeration across content, examples, exercises, answers, order, and indexes in `scripts/update-abc/correction-impact.ts`
-- [ ] T124 [US5] Implement seed bootstrap and normal catch-up updates through the same manifest/state machine in `scripts/update-abc/bootstrap.ts`
-- [ ] T125 [US5] Implement multi-update candidate preparation, public/staging closure, immutable snapshot digest, and validation inventory in `scripts/prepare-release-candidate.ts`
-- [ ] T126 [US5] Implement fixed risk-policy selection, reviewer-run applicable checks, self-review or required third-party item review, finding resolution, and merge decision in `scripts/review-update.ts`
-- [ ] T127 [US5] Implement explicit owner approval bound to candidate/content/review digests in `scripts/approve-update.ts`
-- [ ] T128 [US5] Implement read-only final validation with dependency-closure and no post-approval regeneration in `scripts/verify-release.ts`
-- [ ] T129 [US5] Implement writer/global locks, same-filesystem atomic switch, rollback-before-receipt, recovery-after-receipt, and append-only receipts in `scripts/publish-update.ts`
-- [ ] T130 [US5] Generate public immutable Release history and separate administrator-only hold summaries in `src/lib/catalog/build-release-history.ts`
-- [ ] T131 [US5] Have the policy-selected reviewer confirm outcome coverage and run idempotency/failure-injection/correction/approval-freeze/publish-simulation checks (`self` for normal changes, `third_party` instead of `self` for fixed high-risk correction/classification cases), resolve findings, and record current-subject mode-labeled MergeReviewEvidence in `docs/verification/bootstrap/us5.json` and `docs/reviews/human-content/bootstrap/us5/merge-review.json`
-- [ ] T132 [US5] Document the weekly prepare/review/approve/validate/publish/backup workflow and every recovery state in `docs/operations/weekly-update.md`
+- [ ] T116 [US5] Implement latest-ended and explicit-range discovery with offline-fixture mode and no in-progress Contest ingestion, then run only the `initial-v1` update preparation before T154 without publishing preview state in `scripts/update-abc/discover.ts` and `staging/previews/initial-v1/`; full-corpus discovery remains post-T154
+- [ ] T117 [US5] Implement the shared official metadata acquisition, fingerprinting, dynamic advanced slots, and source-failure holds, and exercise them against the frozen preview fixture before T154 in `scripts/update-abc/acquire.ts`
+- [ ] T118 [US5] Implement staging-only diff operations and deterministic update IDs for the preview fixture before T154; production update state remains post-T154 in `scripts/update-abc/stage.ts`
+- [ ] T119 [US5] Integrate the versioned authoring skill for the preview fixture so each target Problem becomes `explanation_draft`, `authoring_required` with complete inputs/template, or `blocked` with a concrete reason before T154 in `scripts/update-abc/author.ts`
+- [ ] T120 [US5] Implement existing-taxonomy mapping and preview-only impact proposals for unmatched techniques without publishing temporary Tag/Unit entities before T154 in `scripts/update-abc/classify.ts`; full-corpus classification follows T047–T050
+- [ ] T121 [US5] Implement source, explanation, example, placement, DAG, order, catalog, index, cross-reference, and per-Problem diagnostics needed by the preview fixture before T154 in `scripts/update-abc/validate.ts`
+- [ ] T122 [US5] Implement one-command orchestration, resumable state, 15-minute timing, stable output, and documented exit codes for the preview fixture before T154 in `scripts/update-abc/index.ts`
+- [ ] T123 [US5] Implement correction-impact enumeration for the preview fixture across content, examples, exercises, answers, order, and indexes before T154 in `scripts/update-abc/correction-impact.ts`
+- [ ] T124 [US5] Implement the preview-only seed bootstrap through the shared manifest/state machine before T154 in `scripts/update-abc/bootstrap.ts`; normal full-corpus catch-up remains post-T154
+- [ ] T125 [US5] Run the fixture-only update/release simulation for `initial-v1`, including staging/public closure, immutable preview digest, validation inventory, and no production candidate writes in `scripts/prepare-release-candidate.ts` and `staging/previews/initial-v1/release-simulation/`
+- [ ] T126 [US5] For the fixture-only preview simulation, apply the fixed risk policy, run applicable checks, resolve findings, and write current-subject self/third-party component evidence plus the digest to `scripts/review-update.ts`, `docs/verification/previews/initial-v1/components/update-simulation.json`, and `docs/reviews/human-content/previews/initial-v1/us5/`; owner approval and publish are explicitly out of scope
+- [ ] T127 [US5] After T154, implement explicit owner approval bound to a full-corpus candidate/content/review digest in `scripts/approve-update.ts`
+- [ ] T128 [US5] After T154, implement read-only final validation with dependency-closure and no post-approval regeneration in `scripts/verify-release.ts`
+- [ ] T129 [US5] After T154, implement writer/global locks, same-filesystem atomic switch, rollback-before-receipt, recovery-after-receipt, and append-only receipts in `scripts/publish-update.ts`
+- [ ] T130 [US5] After T154, generate public immutable Release history and separate administrator-only hold summaries for the full catalog in `src/lib/catalog/build-release-history.ts`
+- [ ] T131 [US5] After T154, have the policy-selected reviewer confirm full-corpus outcome coverage and run idempotency/failure-injection/correction/approval-freeze/publish-simulation checks (`self` for normal changes, `third_party` instead of `self` for fixed high-risk correction/classification cases), resolve findings, and record current-subject mode-labeled MergeReviewEvidence in `docs/verification/bootstrap/us5.json` and `docs/reviews/human-content/bootstrap/us5/merge-review.json`
+- [ ] T132 [US5] After T154, document the full-catalog weekly prepare/review/approve/validate/publish/backup workflow and every recovery state in `docs/operations/weekly-update.md`
 
 **Checkpoint**: The complete update pipeline works offline and in simulation; no production publish has occurred.
 
@@ -278,7 +286,7 @@ T066–T071は巨大なdomain単位の本文作業ではなく、`docs/work-mani
 
 ## Phase 8: Polish & Cross-Cutting Initial Release
 
-**Purpose**: 全storyを初版候補へ統合し、目的・憲章・品質・費用・性能を最終確認してから初めて実公開する。
+**Purpose**: T154のpreview PASS後に全storyのfull-corpus成果を初版候補へ統合し、目的・憲章・品質・費用・性能を最終確認してから初めて実公開する。preview component evidence、仮taxonomy、未結合shard、未承認candidateはこのphaseへ直接持ち込まない。
 
 - [ ] T133 [P] Run Zod/JSON Schema parity, contract schema validation, unknown-field rejection, and generated-file drift checks in `docs/verification/initial-release/schema-contracts.json`
 - [ ] T134 [P] Recompute the authoritative final-release gate independently of preview artifacts: ABC continuity, official D-after slots, dynamic registry, public Problem coverage, classification, reachability, and direct-link coverage must prove FR-001/SC-001 100% coverage in `docs/verification/initial-release/corpus-completeness.json`
@@ -306,9 +314,9 @@ T066–T071は巨大なdomain単位の本文作業ではなく、`docs/work-mani
 
 ## Cross-cutting checkpoint: Private preview join
 
-T154 is defined after the append-only task list so task IDs remain sequential, but it executes after the preview components and before the T066–T071 bulk authoring tasks. It is a delivery gate, not a test-only placeholder.
+T154 is defined after the append-only task list so task IDs remain sequential, but it executes after the preview components and before the post-preview final-taxonomy and T066–T071 bulk-authoring tasks. It is a delivery gate, not a test-only placeholder.
 
-- [ ] T154 [US2] Join the `initial-v1` preview after T032/T037/T038/T045/T051–T054/T083–T094/T099–T110/T116–T132 have produced their preview component artifacts, wire `preview:verify` in `package.json`, run it from `scripts/preview-verify.ts` as `npm run preview:verify -- --fixture tests/fixtures/previews/initial-v1` against the frozen manifest without reselecting or regenerating inputs, recompute metadata/inventory/provisional-taxonomy/content/UI-search/LearningRecord/update-simulation digests, require every applicable check and current-subject self/third-party review evidence, and atomically create an immutable `PreviewSnapshot` named by `joinDigest` under `staging/previews/initial-v1/snapshots/` and `docs/verification/previews/initial-v1/preview-join/`; a `passed` snapshot is mandatory before T066–T071 and a missing, stale, failed, or incomplete component leaves the new snapshot `on_hold`
+- [ ] T154 [US2] Join the `initial-v1` preview from only these fixed inputs: `staging/previews/initial-v1/preview-manifest.json` (T037), `docs/verification/previews/initial-v1/components/metadata-inventory-taxonomy.json` (T045), `docs/verification/previews/initial-v1/components/content/{graph-search,dynamic-programming,data-structures,mathematics}.json` (T051–T054), `docs/verification/previews/initial-v1/components/learning-records.json` (T094), `docs/verification/previews/initial-v1/components/ui-search.json` (T111), and `docs/verification/previews/initial-v1/components/update-simulation.json` (T126); wire `preview:verify` in `package.json`, run it from `scripts/preview-verify.ts` as `npm run preview:verify -- --fixture tests/fixtures/previews/initial-v1` against the frozen manifest without reselecting or regenerating inputs, recompute each component digest, require every applicable check and current-subject self/third-party review evidence, and atomically create an immutable `PreviewSnapshot` named by `joinDigest` under `staging/previews/initial-v1/snapshots/` and `docs/verification/previews/initial-v1/preview-join/`; it must not read any artifact outside this list, especially the full-catalog outputs of T047–T050/T055–T078 or the production/full-release outputs of T127–T153, and a missing, stale, failed, or incomplete component leaves the new snapshot `on_hold`
 
 ## Dependencies & Execution Order
 
@@ -316,21 +324,22 @@ T154 is defined after the append-only task list so task IDs remain sequential, b
 
 - **Setup (Phase 1)**: no dependency.
 - **Foundational (Phase 2)**: depends on Phase 1 and blocks all stories.
-- **Preview milestone**: starts after Phase 2. T028 freezes only selection rules and failing-contract scope; T032 acquires candidate official metadata; T037 freezes the actual cohort manifest; T029–T031 freeze the remaining preview contracts. The preview path may use the same fixtures and shared implementations from US2/US1/US3/US4/US5 as soon as each component is ready. T154 is the explicit join barrier: it must pass before bulk authoring is treated as design-stable, but it never satisfies the final corpus gate.
-- **US2 (Phase 3, P1)**: starts after Phase 2 and T037; preview inventory/taxonomy is staging-only, while T032–T044 still perform the full metadata and TechniqueInventory join. T045 preview mode depends on T037/T038, T045 full mode cannot accept final taxonomy until T038–T044 finish, T051–T056 preview mode may start after the provisional taxonomy, and T154 waits for all preview components before T066–T071.
-- **US1 (Phase 4, P1)**: depends on the accepted final US2 taxonomy, placements, and T154. T066–T071 generate and execute independent Outcome/Problem shard work items after T064–T065 and T049; no per-contest temporary taxonomy is permitted.
-- **US3 (Phase 5, P1)**: can start after Phase 2 using preview/catalog fixtures once T079 freezes the story manifest; final evidence depends on stable public Problem IDs from US1/US2.
-- **US4 (Phase 6, P2)**: can validate shared routes against the private preview fixture after Phase 2, then depends on US1/US2 canonical content for final indexes; learning-state integration also depends on US3.
-- **US5 (Phase 7, P2)**: depends on the schemas and policies from Phase 2, begins with the T112 manifest, validates the preview update path first, and validates production candidates against all completed story outputs.
+- **Preview milestone**: starts after Phase 2. T028 freezes only selection rules and failing-contract scope; T032 acquires candidate official metadata; T037 freezes the actual cohort manifest; T029–T031 freeze the remaining preview contracts. T038/T045/T046, T051–T054, T083–T094, T099–T111, and T116–T126 produce only the explicitly listed preview artifacts. T154 is the explicit join barrier: it must pass before final taxonomy acceptance and bulk authoring are treated as design-stable, but it never satisfies the final corpus gate.
+- **US2 (Phase 3, P1)**: starts after Phase 2 and T037; preview inventory/taxonomy is staging-only, while T032–T044 perform the full metadata and TechniqueInventory join independently. T045/T046 produce the preview taxonomy, T051–T054 may author preview content before T154, T047–T050 accept the full taxonomy/placement after T154, and T154 reads only the preview component manifests.
+- **US1 (Phase 4, P1)**: depends on the accepted final US2 taxonomy/placements, T064, and T154. T065 freezes the shard index, then T066–T071 generate and execute six independent Outcome/Problem shard work streams; no per-contest temporary taxonomy is permitted.
+- **US3 (Phase 5, P1)**: starts after Phase 2 with the preview fixture and completes T094's component evidence before T154; full-corpus learning-record validation is performed by T139/T146 after stable public Problem IDs are available.
+- **US4 (Phase 6, P2)**: starts with the preview fixture and completes T111's component evidence before T154; canonical full routes, indexes, and search closure are performed by T138/T140/T146 after US1/US2 content is available.
+- **US5 (Phase 7, P2)**: starts with the T112 manifest and completes the fixture-only T116–T126 update simulation before T154; T127–T132 and the initial ReleaseCandidate/approval/publish tasks are post-T154 full-catalog work.
 - **Initial Release (Phase 8)**: depends on all user stories. T152 is forbidden until T145–T151 are complete in order.
 
 ### User Story Dependency Graph
 
 ```text
-Setup → Foundational ─┬→ preview components ─→ T154 preview PASS ───────┐
-                      ├→ full US2 inventory/taxonomy ──────────────────┼→ US1 shard content ─┐
-                      ├→ US3 records (preview then full) ──────────────┼→ US4 indexes/UI → US5 updates → Initial release
-                      └→ shared fixture contracts ────────────────────┘
+Setup → Foundational ─┬→ preview components ─→ T154 preview PASS ─┬→ final taxonomy/placement ─→ T065 index ─→ T066–T071 shards ─┐
+                      ├→ full US2 inventory ──────────────────────┘                                                    │
+                      ├→ US3 preview → T154 → full learning records ───────────────────────────────────────────────────┤
+                      ├→ US4 preview → T154 → full routes/index/search ────────────────────────────────────────────────┤→ Initial release
+                      └→ US5 preview simulation → T154 → candidate/review/approval/publish ──────────────────────────┘
 ```
 
 - **Preview** is independently testable as a private, digest-bound vertical slice; it cannot be promoted or counted as final coverage.
@@ -354,7 +363,7 @@ Setup → Foundational ─┬→ preview components ─→ T154 preview PASS ─
 - T009–T012, T013–T017, and T020–T025 can proceed in their marked groups.
 - T032 acquires and verifies the candidate 212–263 metadata without selecting a cohort; T037 freezes the cohort from those verified Source Revisions. T033–T036 may collect the remaining metadata ranges in parallel after T032 and independently of T037 because their directories do not overlap and they do not create taxonomy.
 - T038–T043 may inventory deterministic Problem-ID shards in parallel after the preview inventory contract; T044 is the full-corpus join barrier.
-- T051–T054 may proceed by provisional preview Outcome with disjoint work manifests; T055–T056 wait for the accepted final taxonomy. T154 joins the four-domain component digests with T083–T094, T099–T110, and T116–T132 before T066 freezes the full-corpus shard index. After T066, T067–T071 may proceed in parallel with disjoint Problem/Claim/Example paths and independent evidence.
+- T051–T054 may proceed by provisional preview Outcome with disjoint work manifests; T055–T056 and T047–T050 wait for the accepted final taxonomy. T154 joins only the seven listed preview component manifests from T045/T051–T054/T094/T111/T126. After T154 and T049, T065 freezes one `indexDigest`; T066–T071, including graph/search/modeling, may then proceed in parallel with disjoint Problem/Claim/Example paths and must copy and verify that digest.
 - All test-authoring groups and T133–T142 final read-only audits may run in parallel as marked.
 
 ## Parallel Example: User Story 2
@@ -368,11 +377,12 @@ Task T042: generated inventory shard 04 in src/content/technique-inventory/shard
 Task T043: generated inventory shard 05 in src/content/technique-inventory/shard-05/
 ```
 
-The join task T044 proves complete corpus coverage before T045 may synthesize the canonical final taxonomy; T045 preview mode may synthesize only the staging provisional taxonomy from the frozen preview Inventory.
+The join task T044 proves complete corpus coverage for the eventual final taxonomy; T045/T046 synthesize and review only the staging provisional taxonomy before T154. T047–T050 accept the canonical final taxonomy and placement after the preview PASS.
 
 ## Parallel Example: User Story 1
 
 ```text
+Task T065: frozen Outcome/Problem shard index and shared indexDigest
 Task T066: generated graph/search/modeling shards, each with its own work manifest, evidence, review, and private preview
 Task T067: generated dynamic-programming shards, each with its own work manifest, evidence, review, and private preview
 Task T068: generated data-structure/algorithm-design shards, each with its own work manifest, evidence, review, and private preview
@@ -381,7 +391,7 @@ Task T070: generated string/geometry shards, each with its own work manifest, ev
 Task T071: generated hybrid/advanced-modeling shards, each with its own work manifest, evidence, review, and private preview
 ```
 
-Each task owns disjoint Outcome/Problem/Claim/Example paths and uses the already-frozen taxonomy.
+Each T066–T071 task owns disjoint Outcome/Problem/Claim/Example paths and records the `indexDigest` frozen by T065; no domain task generates or mutates the shared index.
 
 ## Implementation Strategy
 

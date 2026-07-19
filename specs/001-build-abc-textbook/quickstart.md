@@ -46,13 +46,13 @@ npm run preview:verify -- --fixture tests/fixtures/previews/initial-v1
 
 fixtureには、graph/search、dynamic-programming、data-structures/algorithm-design、mathematics/combinatoricsの4分野、8 Problem以上、3 Contest以上、2種類以上のadvanced labelを含める。実データとfuture-label fixtureを併用する場合は、`preview-manifest.json`で両者を区別する。
 
-`preview:verify`はcohortを選び直す処理ではなく、T032で取得しT037でfreezeした`preview-manifest.json`と、各componentが出力したmanifest/digestを結合するT154のjoin taskである。`staging/previews/initial-v1/snapshots/<joinDigest>.json`へ新しい不変snapshotを原子的に作成する前に、metadata、Technique Inventory、仮taxonomy/placement、content、UI/search、local LearningRecord、update/release simulationの全component digestが同じcohort・同じcurrent subjectに対応することを再計算して確認する。既存のsnapshotは再実行で上書きしない。
+`preview:verify`はcohortを選び直す処理ではなく、T032で取得しT037でfreezeした`preview-manifest.json`と、T045/T051–T054/T094/T111/T126が固定した次のcomponent manifest/digestだけを結合するT154のjoin taskである。入力は`metadata-inventory-taxonomy.json`、`content/{graph-search,dynamic-programming,data-structures,mathematics}.json`、`learning-records.json`、`ui-search.json`、`update-simulation.json`として`docs/verification/previews/initial-v1/components/`に固定する。`staging/previews/initial-v1/snapshots/<joinDigest>.json`へ新しい不変snapshotを原子的に作成する前に、metadata、Technique Inventory、仮taxonomy/placement、content、UI/search、local LearningRecord、update/release simulationの全component digestが同じcohort・同じcurrent subjectに対応することを再計算して確認する。full taxonomy、production candidate、owner approval、publish、initial-release reviewはT154の入力にせず、既存のsnapshotは再実行で上書きしない。
 
 期待結果:
 
 - 同じpreview digestで、公式metadata、Technique Inventory、仮taxonomy/placement、Explanation/Claim/Example/Exercise/AnswerMaterial、static UI/search、local LearningRecord、update/release simulationを一周し、そのcomponent digestをjoinする。
 - 仮taxonomy、preview-only content、端末状態は`src/content/`、公開catalog、Pagefind、ReleaseCandidateへ混入しない。
-- source、claim、example、answer、link、accessibility、schema、rollback、idempotencyの適用checkとcurrent-subject review evidenceが一つでも欠ける、失敗する、またはstale digestを参照する場合は、`PreviewSnapshot.status=on_hold`と具体的な`holdReason`を保存し、bulk explanation shardへ進まない。
+- source、claim、example、answer、link、accessibility、schema、rollback、idempotencyの適用checkとcurrent-subject review evidenceが一つでも欠ける、失敗する、またはstale digestを参照する場合は、`PreviewSnapshot.status=on_hold`と具体的な`holdReason`を保存し、T065のshard index freezeやT066–T071のbulk explanation shardへ進まない。
 - 全component digest、check結果、review evidenceを結合した`joinDigest`と`PreviewSnapshot.status=passed`を`staging/previews/initial-v1/snapshots/<joinDigest>.json`および`docs/verification/previews/initial-v1/preview-join/<joinDigest>.json`へ不変保存する。`passed`でもFR-001/SC-001の全件coverageを満たした扱いにせず、preview snapshotを公開Releaseから隔離する。
 
 ## Scenario C — 全コーパスTechnique Inventory
