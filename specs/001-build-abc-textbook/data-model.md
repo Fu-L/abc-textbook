@@ -1,6 +1,6 @@
 # Data Model: ABC上級問題体系化教科書
 
-**Updated**: 2026-07-14
+**Updated**: 2026-07-19
 
 ## 1. Canonical conventions
 
@@ -101,6 +101,56 @@ taxonomy作成前に全Problemへちょうど一件作る分析正本である�
 | `authorId` / `reviewStatus` | 棚卸しの責任と確認状態 |
 
 公開taxonomyを作る前に、対象Problem ID集合とInventoryのProblem ID集合が完全一致しなければならない。
+
+### PreviewSnapshot
+
+全コーパス完成前に設計を実データで検証するprivate previewの不変snapshotである。公開Catalogのentityではなく、`staging/previews/<preview-id>/`に保存する。
+
+| Field | Rule |
+|---|---|
+| `previewId` | `initial-v1`などの版付き安定ID |
+| `problemIds` | 4分野、8 Problem以上、3 Contest以上、2 advanced label以上を満たす選定集合 |
+| `sourceRevisionIds` | 選定根拠のSource Revision集合。fixture使用時はfixture IDを別記録 |
+| `provisionalTaxonomyDigest` | 仮Tag/Outcome/Unit/DAG/Placementのdigest。canonical taxonomyのdigestとは別物 |
+| `componentDigests` | metadata、inventory、content、UI/search、LearningRecord、update simulationの各digest |
+| `holdReason` | 条件未達または検証失敗時の具体的理由。PASS時はnull |
+| `status` | `draft`, `on_hold`, `passed`。`passed`でも公開Releaseへ昇格しない |
+
+Previewはcanonical `Problem.id`、`SourceRevision.id`、`LearningRecord.problemId`を再採番してはならない。previewのcontentと仮taxonomyはnamespace付きpathに隔離し、公開catalog loaderとPagefindから除外する。
+
+### TaxonomyIntegrationMap
+
+Previewの仮taxonomyを全コーパスから再生成したfinal taxonomyへ統合する監査正本である。`docs/verification/previews/<preview-id>/taxonomy-integration.json`へ保存する。
+
+| Field | Rule |
+|---|---|
+| `previewEntityId` / `previewEntityKind` | 仮Tag、Outcome、Unitのnamespace付きID |
+| `action` | `promote`, `merge`, `split`, `retire`のいずれか一つ |
+| `finalEntityIds` | `promote`/`merge`は一つ、`split`は二つ以上、`retire`は空 |
+| `affectedProblemIds` | 仮entityが参照した全Problem。split時は各final entityへの再分類結果も保持 |
+| `rationale` / `evidenceIds` | 定義、前提、成果、代表性、全inventoryとの比較根拠 |
+| `aliasOrRedirects` | merge/retire時の旧名称・旧IDの検索/参照移行 |
+| `reviewMode` / `reviewEvidenceId` | major classification changeを含む場合は`third_party`、それ以外は固定policyに従う |
+| `status` | `proposed`, `accepted`, `rejected`。未acceptedはcanonicalへmaterialize不可 |
+
+Integration mapは仮DAGをfinalへコピーする記録ではない。final Inventory全件からTag/Outcome/UnitのDAG、標準順、ProblemPlacementを再計算した結果と照合し、未知参照、循環、未分類Problem、影響未列挙が0件の場合だけ`accepted`にできる。
+
+### OutcomeProblemShardManifest
+
+最終ProblemPlacementから決定生成される、解説作業の最小追跡単位である。Contest batchやdomainの進捗表ではなく、各shardを単独でbuild・review・previewできるwork manifestとして扱う。
+
+| Field | Rule |
+|---|---|
+| `shardId` | `outcomeId`と安定ordinalから導出し、Problemの表示名変更で変えない |
+| `primaryOutcomeId` | ちょうど一つ。Problemのprimary outcomeと一致する |
+| `problemIds` | 1〜8件、canonical official orderの連続chunk、shard間で重複なし |
+| `itemIds` | 所有するExplanation、Claim、Example、Exercise、AnswerMaterialの完全なID集合 |
+| `paths` | shard専有のcanonical/staging path集合。別shard・共有Unit/Tag pathとの重複を拒否 |
+| `dependencyShardIds` | 前提を満たすために必要なshardの集合。循環不可 |
+| `checkIds` / `evidencePaths` | source、structure、example、answer、link、accessibility、review、previewの適用checkと出力先 |
+| `status` | `generated`, `in_progress`, `on_hold`, `reviewed`, `joined` |
+
+shard indexのProblem ID集合は、final Catalogの全対象Problem集合と完全一致しなければならない。生成順やshard境界の変更は、同じ入力からindexを再生成し、旧indexとの差分と影響するLearningRecord以外のCorrectionImpactを残して行う。
 
 ### TechniqueTag
 
@@ -264,7 +314,7 @@ candidate ID、release version、approved digest、公開前後tree digest、切
 
 実装・content変更前に作るversion-controlled scopeである。top-levelにtask ID、scope digest、required requirement IDs、learning outcome IDs、固定したreview policy、review units、stateを持つ。review policyは`self`または`third_party`の必須modeと、公式根拠との矛盾・独自証明・重大な分類変更から選ぶrisk reasonを持つ。各review unitは重複しないpaths、item IDs、requirements、outcomes、依存unit、checks、evidence role、owner、statusを持つ。
 
-content review unitはContest batchではなくLearning Outcome、Problem、Claim、Example、Exercise等の独立対象にする。tooling/abstractionには具体的なmaintenance benefitを必須にする。
+content review unitはContest batchではなくOutcome/Problem shard、Problem、Claim、Example、Exercise等の独立対象にする。Outcome/Problem shardは一つのprimary Learning Outcomeに属するProblem IDを公式順に最大8件ずつ分割し、paths、item IDs、dependency unit、checks、evidenceを単独で解決できなければならない。tooling/abstractionには具体的なmaintenance benefitを必須にする。
 
 ### HumanContentReviewEvidence
 
@@ -319,3 +369,5 @@ SC-012について、全公開Problem routeが共有LearningRecord component/act
 10. 全適用checkとreview policyに応じたselfまたはthird-party reviewがcurrent subjectで成功する。
 11. owner approval後にcandidate bytesが変化していない。
 12. contest matrix、search、simple local learning managementが公開Problemで利用可能である。
+13. private preview、仮taxonomy、未結合shard、preview-only evidenceが公開content treeへ入っていない。
+14. `FR-001`/`SC-001`に対応するABC 212〜cutoffの連続性とDより後のProblem 100% coverageを、previewとは独立したfinal candidateから再計算できる。

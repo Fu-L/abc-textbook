@@ -38,7 +38,22 @@ fixtureには次を含める。
 - Hがない回は未収録ではなく公式問題なしになる。
 - 固定E〜H enumへ切り捨てるfixtureは失敗する。
 
-## Scenario B — 全コーパスTechnique Inventory
+## Scenario B — `initial-v1` private vertical preview
+
+```bash
+npm run preview:verify -- --fixture tests/fixtures/previews/initial-v1
+```
+
+fixtureには、graph/search、dynamic-programming、data-structures/algorithm-design、mathematics/combinatoricsの4分野、8 Problem以上、3 Contest以上、2種類以上のadvanced labelを含める。実データとfuture-label fixtureを併用する場合は、`preview-manifest.json`で両者を区別する。
+
+期待結果:
+
+- 同じpreview digestで、公式metadata、Technique Inventory、仮taxonomy/placement、Explanation/Claim/Example/Exercise/AnswerMaterial、static UI/search、local LearningRecord、update/release simulationを一周する。
+- 仮taxonomy、preview-only content、端末状態は`src/content/`、公開catalog、Pagefind、ReleaseCandidateへ混入しない。
+- source、claim、example、answer、link、accessibility、schema、rollback、idempotencyの適用checkとcurrent-subject review evidenceが揃わない場合は具体的なhold reasonを返す。
+- `passed`でもFR-001/SC-001の全件coverageを満たした扱いにせず、preview snapshotをimmutableな検証証跡として保存する。
+
+## Scenario C — 全コーパスTechnique Inventory
 
 ```bash
 npm run catalog:validate -- --fixture tests/fixtures/catalog/technique-inventory
@@ -51,7 +66,7 @@ npm run catalog:validate -- --fixture tests/fixtures/catalog/technique-inventory
 - Contestごとの同義仮Tag、Problem一問の言い換えTag、ad-hocだけのTagを正式化できない。
 - 同じ典型を持つ別ContestのProblemが共通Outcome/Tagへまとまる。
 
-## Scenario C — 学習順と問題配置
+## Scenario D — 学習順と問題配置
 
 ```bash
 npm run test:integration -- learning-order
@@ -65,7 +80,7 @@ npm run test:integration -- problem-placement
 - cycle、自己辺、未知参照、生成順改ざんを拒否する。
 - 新しい主成果・前提・解法・証明着眼点・漸近計算量を持つ問題をsimilar/supplementにできない。
 
-## Scenario D — 解説生成skillと本文
+## Scenario E — 解説生成skillと本文
 
 ```bash
 npm run test:integration -- explanation-authoring
@@ -79,7 +94,7 @@ npm run catalog:validate -- --fixture tests/fixtures/catalog/explanations
 - 入力不足は`authoring_required`になり完成Explanationへ数えない。
 - 疑似コード・省略出力のlabel欠落、根拠矛盾、再現不能例を拒否する。
 
-## Scenario E — 教科書と逆引き
+## Scenario F — 教科書と逆引き
 
 ```bash
 npm run build
@@ -94,7 +109,7 @@ npm run test:e2e -- learning-path contest-index search
 - Problem/Tag/Learning Unit/Contestの検索結果と明瞭な0件結果がある。
 - staging、非公開candidate、端末状態は検索に入らない。
 
-## Scenario F — 学習記録
+## Scenario G — 学習記録
 
 ```bash
 npm run test:e2e -- learning-records review-list
@@ -108,7 +123,7 @@ npm run test:e2e -- learning-records review-list
 - 要復習一覧へ2操作以内で到達し、Contest、slot、Tag、Unit、statusで絞り込める。
 - IndexedDBが利用不能でも本文と通常navigationは読め、controlだけが理由付きで無効になる。
 
-## Scenario G — Backup/restore
+## Scenario H — Backup/restore
 
 ```bash
 npm run test:integration -- learning-record-backup
@@ -121,7 +136,7 @@ npm run test:integration -- learning-record-backup
 - status組とneedsReview組を独立比較する。
 - 成功時は値・日時が100%一致し、失敗注入時は部分反映0件になる。
 
-## Scenario H — 一操作の週次更新
+## Scenario I — 一操作の週次更新
 
 ```bash
 npm run abc:update -- --fixture tests/fixtures/updates/dynamic-slot-contest
@@ -135,7 +150,7 @@ npm run abc:update -- --fixture tests/fixtures/updates/dynamic-slot-contest
 - 15分deadline fixtureで全Problem resultと最終summaryを返す。
 - 未完成resultが一件でもあればupdateはON_HOLDになりrelease inputへ進まない。
 
-## Scenario I — Correction impact
+## Scenario J — Correction impact
 
 ```bash
 npm run test:integration -- correction-update
@@ -147,7 +162,7 @@ npm run test:integration -- correction-update
 - 一部だけ更新、古いsource参照、影響ID/path欠落を拒否する。
 - Problem IDが同じLearningRecordは変更しない。
 
-## Scenario J — Reviewとmerge gate
+## Scenario K — Reviewとmerge gate
 
 ```bash
 npm run verify:merge -- --fixture tests/fixtures/reviews/logical-change
@@ -155,13 +170,15 @@ npm run verify:merge -- --fixture tests/fixtures/reviews/logical-change
 
 期待結果:
 
-- Work ManifestがLearning Outcome単位の非重複review unitを持つ。
+- Work ManifestがOutcome/Problem shard、Problem、Claim、Example、Exercise単位の非重複review unitを持ち、各shardに明示的なProblem ID、path、check、evidenceがある。
+- 各shardを独立にbuild・review・previewでき、全shard joinで重複Problem、未割当Problem、path overlapが0件になる。
+- previewの仮entityはpromote、merge、split、retireのいずれかへ一度だけ対応付けられ、final taxonomyは全Inventoryから再計算される。
 - 通常fixtureは外部person IDなしで、manifest ownerのself-review、outcome coverage、全適用checkを記録して完了する。
 - manifestのreview policyが公式根拠との矛盾・独自証明・重大な分類変更を示すfixtureだけは、selfに代えてthird-party modeとし、author外のperson IDを要求する。
 - self/third-party modeの取り違え、missing check、他者実行結果の追認、第三者reviewでのauthor/reviewer一致、stale digest、未解消findingを拒否する。
 - LLM、owner approval、外部cohortをHumanContentReviewEvidenceの代用として受理しない。
 
-## Scenario K — Release candidateとrollback
+## Scenario L — Release candidateとrollback
 
 ```bash
 npm run abc:prepare-release -- --fixture tests/fixtures/releases/initial
@@ -174,13 +191,14 @@ npm run abc:publish -- --candidate fixture-initial --simulate
 
 期待結果:
 
-- ABC 212からcutoffまでの連続性、Dより後の全Problem、AdvancedSlotRegistry、Technique Inventory、到達可能性をcandidate正本から再計算する。
+- ABC 212からcutoffまでの連続性、Dより後の全Problem 100% coverage、AdvancedSlotRegistry、final Technique Inventory、到達可能性をpreviewとは独立したcandidate正本から再計算する。
+- preview artifact、仮taxonomy、未結合shard、未解決holdがcandidateへ混入していないことを確認する。
 - 自動checkとcurrent HumanContentReviewEvidence（selfまたはrisk policyに応じたthird-party）が揃うまでapproveできない。
 - owner承認後にcandidate bytesが変わるとfinal validationが失敗する。
 - 切替前失敗は旧treeへrollbackし、成功時だけPublishReceiptを残す。
 - fixtureをproduction publishしようとすると副作用なしで拒否する。
 
-## Scenario L — 目的保存と公開品質
+## Scenario M — 目的保存と公開品質
 
 ```bash
 npm run verify:release -- --phase final --candidate fixture-initial

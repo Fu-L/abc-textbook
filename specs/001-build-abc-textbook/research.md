@@ -52,15 +52,16 @@
 
 ## 5. 全コーパス横断の典型体系
 
-**Decision**: 初期content制作は、全公式metadata収集、全ProblemのTechnique Inventory、corpus-wide taxonomy、Problem Placement、解説、Learning Unit本文の順に行う。Technique Inventoryは主解法、証明着眼点、計算量、必要前提、実装注意、候補成果をProblemごとに保持する。TagとUnitはinventory全体を比較して統合・分割する。
+**Decision**: 初期content制作は、Foundational完了後に小さなprivate vertical previewを先に一周させ、その後に全公式metadata、全ProblemのTechnique Inventory、corpus-wide taxonomy、Problem Placement、Outcome/Problem shard単位の解説、Learning Unit本文を進める。previewのTag/Outcome/Unitはstaging namespaceの仮taxonomyに限り、公開正本へ直接昇格させない。Technique Inventoryは主解法、証明着眼点、計算量、必要前提、実装注意、候補成果をProblemごとに保持し、最終TagとUnitは全inventoryを比較して統合・分割する。
 
-**Rationale**: Contest番号batchごとに仮Tag/Unitを作って後から統合すると、同義Tag、問題一問だけのUnit、重複説明が正本へ入り、元目的の「典型を体系化」が後工程になる。先に全体像を作れば、同じ典型を一つの学習成果へ集約し、代表問題と練習問題を適切に選べる。
+**Rationale**: 全コーパスを完成させる前に代表的な複数分野・複数Contest・複数labelの経路を実データで検証すれば、schema、前提、UI、学習記録、更新CLIの設計欠陥を早期に発見できる。一方、Contest番号batchごとに仮Tag/Unitを公開正本へ作って後から統合すると、同義Tag、問題一問だけのUnit、重複説明が残る。previewはstagingに閉じ、最終TagとUnitは全inventoryから再計算し、promote/merge/split/retireの対応表と影響範囲をレビューすることで、早期検証とcorpus-wide体系化を両立する。
 
 **Alternatives considered**:
 
 - Problem解説を全て`full`で先に書き、後でtaxonomy化する: 大量の重複執筆と再配置を生むため不採用。
 - Contest範囲を章境界にする: 年代と学習依存が一致しないため不採用。
 - AI clusteringだけで正式化する: 根拠、前提、教育的順序を検証できないため不採用。
+- previewの仮taxonomyをそのまま公開taxonomyへコピーする: 全コーパスでの同義・分割・前提検証を飛ばし、final releaseの網羅性と保守性を損なうため不採用。
 
 ## 6. 学習記録
 
