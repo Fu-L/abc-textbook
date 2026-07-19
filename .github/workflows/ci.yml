@@ -51,7 +51,7 @@ jobs:
         run: npm ci
 
       - name: Install Playwright browsers
-        run: npm run test:e2e:install
+        run: npm run test:e2e:install:ci
 
       - name: Run full verification
         run: npm run verify:fast
