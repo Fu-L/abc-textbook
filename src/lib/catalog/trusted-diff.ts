@@ -523,6 +523,26 @@ const impactPaths = (node: CatalogNode): readonly string[] => {
   return Array.isArray(paths) && paths.every((value) => typeof value === 'string') ? paths : [];
 };
 
+const canonicalEntityPaths = (node: CatalogNode): readonly string[] => {
+  if (node.entityType === 'explanation' || node.entityType === 'learning_unit') {
+    return typeof node.value.docPath === 'string' ? [node.value.docPath] : [];
+  }
+  if (node.entityType === 'placement') {
+    return ['src/content/policies/problem-placements.json'];
+  }
+  if (node.entityType === 'correction_impact') return impactPaths(node);
+  // Structured entities are allowed to use arbitrary shard directories. Their
+  // operation path is still checked by nodeOwnsPath, but the complete set of
+  // paths cannot be reconstructed from the Catalog projection alone.
+  return [];
+};
+
+const canonicalEntityDiffPaths = (diff: CatalogEntityDiff): readonly string[] =>
+  [
+    ...(diff.base ? canonicalEntityPaths(diff.base) : []),
+    ...(diff.current ? canonicalEntityPaths(diff.current) : []),
+  ].filter((path, index, paths) => paths.indexOf(path) === index);
+
 const deriveCorrectionImpacts = (
   update: PublicationUpdate,
   pair: CatalogGraphPair,
@@ -591,7 +611,8 @@ export const buildTrustedPublicationDiff = (
   // owner separate from path representation because one entity may span
   // multiple source paths during a move.
   const entityDiffOwners = new Map<string, string>();
-  const representedEntityDiffPaths = new Set<string>();
+  const representedEntityDiffPaths = new Map<string, Set<string>>();
+  const sharedCanonicalPathOwners = new Map<string, string>();
   const trustedUpdates = updates.map((update) => {
     const operationOwnership = update.operations.map((operation) => {
       const diff = resolveEntityDiff(pair, entityDiffByKey, operation);
@@ -603,14 +624,27 @@ export const buildTrustedPublicationDiff = (
         );
       }
       entityDiffOwners.set(diff.key, update.updateId);
-      const representationKey = `${diff.key}\u0000${operation.path}`;
-      if (representedEntityDiffPaths.has(representationKey)) {
+
+      for (const path of canonicalEntityDiffPaths(diff)) {
+        const sharedPathOwner = sharedCanonicalPathOwners.get(path);
+        if (sharedPathOwner !== undefined && sharedPathOwner !== update.updateId) {
+          throw new TrustedCatalogDiffError(
+            'PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE',
+            `${operation.operationId} splits Catalog diffs sharing ${path} across updates ${sharedPathOwner} and ${update.updateId}; shared canonical source paths must be updated atomically.`,
+          );
+        }
+        sharedCanonicalPathOwners.set(path, update.updateId);
+      }
+
+      const representedPaths = representedEntityDiffPaths.get(diff.key) ?? new Set<string>();
+      if (representedPaths.has(operation.path)) {
         throw new TrustedCatalogDiffError(
           'PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE',
           `${operation.operationId} reclaims ${diff.entityType}:${diff.entityId} at ${operation.path}, which is already represented by another operation.`,
         );
       }
-      representedEntityDiffPaths.add(representationKey);
+      representedPaths.add(operation.path);
+      representedEntityDiffPaths.set(diff.key, representedPaths);
       return {
         operationId: operation.operationId,
         affectedProblemIds: operationProblemIds(pair, operation),
@@ -636,6 +670,20 @@ export const buildTrustedPublicationDiff = (
     throw new TrustedCatalogDiffError(
       'PUBLICATION_UPDATE_ENTITY_DIFF_INCOMPLETE',
       `Catalog ${missingEntityDiff.action} ${missingEntityDiff.entityType}:${missingEntityDiff.entityId} is not represented by a publication operation.`,
+    );
+  }
+  const incompleteEntityDiff = entityDiffs.find((diff) => {
+    const representedPaths = representedEntityDiffPaths.get(diff.key) ?? new Set<string>();
+    return canonicalEntityDiffPaths(diff).some((path) => !representedPaths.has(path));
+  });
+  if (incompleteEntityDiff) {
+    const representedPaths = representedEntityDiffPaths.get(incompleteEntityDiff.key) ?? new Set();
+    const missingPaths = canonicalEntityDiffPaths(incompleteEntityDiff).filter(
+      (path) => !representedPaths.has(path),
+    );
+    throw new TrustedCatalogDiffError(
+      'PUBLICATION_UPDATE_ENTITY_DIFF_INCOMPLETE',
+      `Catalog ${incompleteEntityDiff.action} ${incompleteEntityDiff.entityType}:${incompleteEntityDiff.entityId} is missing canonical source paths: ${missingPaths.join(', ')}.`,
     );
   }
   return { updates: trustedUpdates };

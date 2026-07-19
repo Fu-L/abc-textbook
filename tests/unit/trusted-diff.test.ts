@@ -450,6 +450,67 @@ describe('trusted publication diff', () => {
       );
     }).toThrow(/PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE/u);
   });
+
+  it('rejects splitting shared source paths across entity updates', () => {
+    const baseCatalog = makeTrustedCatalog({});
+    const currentCatalog = structuredClone(baseCatalog);
+    const explanation = currentCatalog.explanations[0];
+    const learningUnit = currentCatalog.learningUnits[0];
+    if (!explanation || !learningUnit) throw new Error('Fixture learning entities are missing.');
+    explanation.docPath = 'src/content/docs/moved.md';
+    learningUnit.docPath = 'src/content/docs/moved.md';
+
+    expect(() => {
+      buildTrustedPublicationDiff(
+        [
+          makeUpdate(
+            [
+              makeOperation({
+                operationId: 'operation-remove-explanation-doc',
+                entityType: 'explanation',
+                entityId: 'explanation-abc212-x45',
+                beforeDigest: sha('2'),
+                afterDigest: null,
+              }),
+              makeOperation({
+                operationId: 'operation-add-explanation-doc',
+                entityType: 'explanation',
+                entityId: 'explanation-abc212-x45',
+                path: 'src/content/docs/moved.md',
+                beforeDigest: null,
+                afterDigest: sha('3'),
+              }),
+            ],
+            ['abc212-x45'],
+            'update-explanation-move',
+          ),
+          makeUpdate(
+            [
+              makeOperation({
+                operationId: 'operation-remove-learning-unit-doc',
+                entityType: 'learning_unit',
+                entityId: 'unit-graphs',
+                beforeDigest: sha('2'),
+                afterDigest: null,
+              }),
+              makeOperation({
+                operationId: 'operation-add-learning-unit-doc',
+                entityType: 'learning_unit',
+                entityId: 'unit-graphs',
+                path: 'src/content/docs/moved.md',
+                beforeDigest: null,
+                afterDigest: sha('3'),
+              }),
+            ],
+            ['abc212-x45'],
+            'update-learning-unit-move',
+          ),
+        ],
+        parseTrustedCatalog(baseCatalog, 'base'),
+        parseTrustedCatalog(currentCatalog, 'current'),
+      );
+    }).toThrow(/PUBLICATION_UPDATE_ENTITY_DIFF_DUPLICATE/u);
+  });
 });
 
 const makeOperation = (overrides: Record<string, unknown>): Record<string, unknown> => ({
