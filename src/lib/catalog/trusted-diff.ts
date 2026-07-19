@@ -417,11 +417,15 @@ const resolveEntityDiff = (
       : operation.action === 'remove'
         ? [diff.base]
         : [diff.base, diff.current];
-  if (
-    ownedNodes.some(
-      (ownedNode) => ownedNode === undefined || !nodeOwnsPath(ownedNode, operation.path),
-    )
-  ) {
+  const pathIsOwned =
+    operation.action === 'replace'
+      ? ownedNodes.some(
+          (ownedNode) => ownedNode !== undefined && nodeOwnsPath(ownedNode, operation.path),
+        )
+      : ownedNodes.every(
+          (ownedNode) => ownedNode !== undefined && nodeOwnsPath(ownedNode, operation.path),
+        );
+  if (!pathIsOwned) {
     throw new TrustedCatalogDiffError(
       'PUBLICATION_UPDATE_ENTITY_PATH_INVALID',
       `${operation.operationId} claims ${operation.path}, which is not a canonical source path for ${operation.entityType}:${node.identity}.`,

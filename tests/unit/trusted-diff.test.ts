@@ -270,6 +270,108 @@ describe('trusted publication diff', () => {
     expect(diff.updates[0]?.operationOwnership).toHaveLength(2);
   });
 
+  it('allows an explanation docPath move through the complete release validation', () => {
+    const baseCatalog = makeTrustedCatalog({});
+    const currentCatalog = structuredClone(baseCatalog);
+    const explanation = currentCatalog.explanations[0];
+    if (!explanation) throw new Error('Fixture explanation is missing.');
+    explanation.docPath = 'src/content/docs/moved.md';
+
+    const update = makeUpdate([
+      makeOperation({
+        operationId: 'operation-remove-explanation-doc',
+        beforeDigest: sha('2'),
+        afterDigest: null,
+      }),
+      makeOperation({
+        operationId: 'operation-add-explanation-doc',
+        path: 'src/content/docs/moved.md',
+        beforeDigest: null,
+        afterDigest: sha('3'),
+      }),
+    ]);
+    const diff = buildTrustedPublicationDiff(
+      [update],
+      parseTrustedCatalog(baseCatalog, 'base'),
+      parseTrustedCatalog(currentCatalog, 'current'),
+    );
+    const trustedUpdate = diff.updates[0];
+    if (!trustedUpdate) throw new Error('Trusted update is missing.');
+
+    expect(() => {
+      validatePublicationUpdate(update, {
+        operationOwnership: trustedUpdate.operationOwnership,
+        correctionImpacts: trustedUpdate.correctionImpacts,
+        baseFiles: [{ path: 'src/content/docs/index.md', sha256: sha('2'), byteLength: 10 }],
+        currentFiles: [{ path: 'src/content/docs/moved.md', sha256: sha('3'), byteLength: 11 }],
+      });
+    }).not.toThrow();
+  });
+
+  it('allows replacing correction impact index paths through the complete release validation', () => {
+    const baseCatalog = makeTrustedCatalog({}) as ReturnType<typeof makeTrustedCatalog> & {
+      correctionImpacts: Record<string, unknown>[];
+    };
+    const correctionImpact = {
+      id: 'correction-impact-graphs',
+      sourceRevisionId: 'source-revision-abc212-e',
+      changeSummary: 'Fixture correction.',
+      explanationIds: ['explanation-abc212-x45'],
+      claimIds: ['claim-graphs'],
+      exampleIds: ['example-graphs'],
+      exerciseIds: ['exercise-graphs'],
+      answerMaterialIds: ['answer-graphs'],
+      learningUnitIds: ['unit-graphs'],
+      derivedIndexPaths: ['src/content/docs/index.md'],
+      verificationStatus: 'verified' as const,
+    };
+    baseCatalog.correctionImpacts.push(correctionImpact);
+    const currentCatalog = structuredClone(baseCatalog);
+    const currentImpact = currentCatalog.correctionImpacts[0] as
+      Record<string, unknown> | undefined;
+    if (!currentImpact) throw new Error('Fixture correction impact is missing.');
+    currentImpact.derivedIndexPaths = ['src/content/docs/moved-index.md'];
+
+    const update = makeUpdate([
+      makeOperation({
+        operationId: 'operation-remove-correction-index',
+        entityType: 'correction_impact',
+        entityId: 'correction-impact-graphs',
+        beforeDigest: sha('2'),
+        afterDigest: null,
+      }),
+      makeOperation({
+        operationId: 'operation-add-correction-index',
+        entityType: 'correction_impact',
+        entityId: 'correction-impact-graphs',
+        path: 'src/content/docs/moved-index.md',
+        beforeDigest: null,
+        afterDigest: sha('3'),
+      }),
+    ]);
+    update.kind = 'correction';
+    update.correctionImpactIds = ['correction-impact-graphs'];
+
+    const diff = buildTrustedPublicationDiff(
+      [update],
+      parseTrustedCatalog(baseCatalog, 'base'),
+      parseTrustedCatalog(currentCatalog, 'current'),
+    );
+    const trustedUpdate = diff.updates[0];
+    if (!trustedUpdate) throw new Error('Trusted update is missing.');
+
+    expect(() => {
+      validatePublicationUpdate(update, {
+        operationOwnership: trustedUpdate.operationOwnership,
+        correctionImpacts: trustedUpdate.correctionImpacts,
+        baseFiles: [{ path: 'src/content/docs/index.md', sha256: sha('2'), byteLength: 10 }],
+        currentFiles: [
+          { path: 'src/content/docs/moved-index.md', sha256: sha('3'), byteLength: 11 },
+        ],
+      });
+    }).not.toThrow();
+  });
+
   it('rejects the same entity diff and path claimed by multiple updates', () => {
     const baseCatalog = makeTrustedCatalog({});
     const currentCatalog = makeTrustedCatalog({});
