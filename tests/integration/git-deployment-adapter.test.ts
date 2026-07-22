@@ -34,7 +34,7 @@ describe('GitDeploymentAdapter', () => {
     return stdout.trim();
   };
 
-  const metadata = (version: string, commit: string) => ({
+  const metadata = (version: string, commit: string): CommitDeploymentRequest['release'] => ({
     schemaVersion: '1.0.0',
     version,
     cutoffAt: '2026-07-17T12:00:00+09:00',
@@ -59,13 +59,13 @@ describe('GitDeploymentAdapter', () => {
     const firstCommit = await commitSite('release one', 'release one');
     const secondCommit = await commitSite('release two', 'release two');
     const deployments: CommitDeploymentRequest[] = [];
-    const deploymentHistory = new Set<string>();
+    const deploymentHistory = new Map<string, CommitDeploymentRequest['release']>();
     let deployedContents = '';
     const adapter = new GitDeploymentAdapter(repositoryRoot, {
-      hasDeployment: (commit) => Promise.resolve(deploymentHistory.has(commit)),
+      getDeployment: (commit) => Promise.resolve(deploymentHistory.get(commit)),
       deployCommit: async (request) => {
         deployments.push(request);
-        deploymentHistory.add(request.release.commit);
+        deploymentHistory.set(request.release.commit, request.release);
         const { stdout } = await execFileAsync(
           'git',
           ['show', `${request.release.commit}:site.txt`],
@@ -83,7 +83,7 @@ describe('GitDeploymentAdapter', () => {
     await adapter.deploy(metadata('2026.07.18', secondCommit));
     expect(deployedContents).toBe('release two');
 
-    await adapter.rollback(metadata('2026.07.17', firstCommit));
+    await adapter.rollback(firstCommit);
     expect(deployedContents).toBe('release one');
     expect(
       deployments.map(({ release, reason }) => ({
@@ -102,11 +102,11 @@ describe('GitDeploymentAdapter', () => {
     repositoryRoot = await mkdtemp(path.join(tmpdir(), 'abc-textbook-deploy-'));
     await execFileAsync('git', ['init'], { cwd: repositoryRoot });
     const adapter = new GitDeploymentAdapter(repositoryRoot, {
-      hasDeployment: () => Promise.resolve(false),
+      getDeployment: () => Promise.resolve(undefined),
       deployCommit: () => Promise.resolve({ deploymentUrl: 'https://example.test/unreachable' }),
     });
 
-    await expect(adapter.rollback(metadata('2026.07.17', 'a'.repeat(40)))).rejects.toMatchObject({
+    await expect(adapter.rollback('a'.repeat(40))).rejects.toMatchObject({
       code: 'UNKNOWN_RELEASE_COMMIT',
     } satisfies Partial<GitDeploymentError>);
   });
@@ -121,14 +121,14 @@ describe('GitDeploymentAdapter', () => {
     const commit = await commitSite('unpublished change', 'unpublished change');
     let deployCalled = false;
     const adapter = new GitDeploymentAdapter(repositoryRoot, {
-      hasDeployment: () => Promise.resolve(false),
+      getDeployment: () => Promise.resolve(undefined),
       deployCommit: () => {
         deployCalled = true;
         return Promise.resolve({ deploymentUrl: 'https://example.test/unreachable' });
       },
     });
 
-    await expect(adapter.rollback(metadata('2026.07.17', commit))).rejects.toMatchObject({
+    await expect(adapter.rollback(commit)).rejects.toMatchObject({
       code: 'UNKNOWN_RELEASE_COMMIT',
     } satisfies Partial<GitDeploymentError>);
     expect(deployCalled).toBe(false);
@@ -142,26 +142,46 @@ describe('GitDeploymentAdapter', () => {
       cwd: repositoryRoot,
     });
     const commit = await commitSite('release one', 'release one');
-    const deploymentHistory = new Set<string>();
+    const deploymentHistory = new Map<string, CommitDeploymentRequest['release']>();
     let activeDeployments = 0;
     let maximumActiveDeployments = 0;
     const adapter = new GitDeploymentAdapter(repositoryRoot, {
-      hasDeployment: (candidate) => Promise.resolve(deploymentHistory.has(candidate)),
+      getDeployment: (candidate) => Promise.resolve(deploymentHistory.get(candidate)),
       deployCommit: async (request) => {
         activeDeployments += 1;
         maximumActiveDeployments = Math.max(maximumActiveDeployments, activeDeployments);
         await new Promise<void>((resolve) => setTimeout(resolve, 5));
-        deploymentHistory.add(request.release.commit);
+        deploymentHistory.set(request.release.commit, request.release);
         activeDeployments -= 1;
         return { deploymentUrl: 'https://example.test/deployments/serialized' };
       },
     });
 
-    await Promise.all([
-      adapter.deploy(metadata('2026.07.17', commit)),
-      adapter.rollback(metadata('2026.07.17', commit)),
-    ]);
+    await Promise.all([adapter.deploy(metadata('2026.07.17', commit)), adapter.rollback(commit)]);
 
     expect(maximumActiveDeployments).toBe(1);
+  });
+
+  it('uses the recorded release metadata when rolling back', async () => {
+    repositoryRoot = await mkdtemp(path.join(tmpdir(), 'abc-textbook-deploy-'));
+    await execFileAsync('git', ['init'], { cwd: repositoryRoot });
+    await execFileAsync('git', ['config', 'user.name', 'Test Author'], { cwd: repositoryRoot });
+    await execFileAsync('git', ['config', 'user.email', 'test@example.com'], {
+      cwd: repositoryRoot,
+    });
+    const commit = await commitSite('release one', 'release one');
+    const recorded = metadata('2026.07.17', commit);
+    const deployments: CommitDeploymentRequest[] = [];
+    const adapter = new GitDeploymentAdapter(repositoryRoot, {
+      getDeployment: () => Promise.resolve(recorded),
+      deployCommit: (request) => {
+        deployments.push(request);
+        return Promise.resolve({ deploymentUrl: 'https://example.test/deployments/rollback' });
+      },
+    });
+
+    await adapter.rollback(commit);
+
+    expect(deployments).toEqual([{ release: recorded, reason: 'rollback' }]);
   });
 });

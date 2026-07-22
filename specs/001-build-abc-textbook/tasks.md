@@ -362,7 +362,7 @@ Setup → Foundational ─┬→ candidate pool/cohort ─→ preview components
 - Canonical data precedes derived pages and indexes.
 - Preview paths use the same canonical implementation and are rejected from public projections; provisional taxonomy is replaced by final taxonomy through the integration map.
 - Automated checks precede the policy-selected self-review or risk-triggered third-party review; findings must be resolved before merge.
-- Approval freezes digests; final validation is read-only; production publication is the last mutating step.
+- Final validation is read-only; protected-main merge fixes the release commit, and deployment publishes that exact commit without content changes.
 
 ## Parallel Opportunities
 

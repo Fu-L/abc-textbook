@@ -126,9 +126,9 @@ npm run abc:deploy -- --metadata release-metadata.json
 npm run abc:deploy -- --rollback-to RELEASE_COMMIT
 ```
 
-通常デプロイのmetadataはmerge後のCIが確定commitと検証runから生成し、`version`、`cutoffAt`、full Git `commit`、更新概要、HTTPSの`validationResultsUrl`だけを持つ。deployment adapterはcommitがrepository内の既知commitへ完全一致することを確認し、同一adapter内の要求を直列化して静的hostへcommitを渡す。候補state、owner approval、publication window、独自digest、append-only receiptは作らない。
+通常デプロイのmetadataはprotected mainへのmerge後にCIが確定commitと検証runから生成し、`version`、`cutoffAt`、full Git `commit`、更新概要、HTTPSの`validationResultsUrl`だけを持つ。protected-main所属とrequired checksはCIのmerge/deploy workflowが保証し、deployment adapterへ重複実装しない。adapterはcommitがrepository内の既知commitへ完全一致することを確認し、同一adapter内の要求を直列化して静的hostへcommitを渡す。候補state、owner approval、publication window、独自digest、append-only receiptは作らない。
 
-rollbackは既知のrelease commitを同じadapterで再deployする。公開履歴・実行中lock・retry・deploy結果は静的hostのdeployment adapterの責務であり、Catalogやrelease metadataへtransaction stateを複製しない。ローカルfilesystem公開が将来必要になった場合だけ、同一directoryのtemp→renameを別adapterとして追加する。
+rollbackはcommitだけを受け取り、静的hostの公開履歴からそのcommitに記録済みのrelease metadataを取得して同じadapterで再deployする。呼び出し元がrollback用metadataを再指定することはできない。公開履歴・実行中lock・retry・deploy結果は静的hostのdeployment adapterの責務であり、Catalogやrelease metadataへtransaction stateを複製しない。ローカルfilesystem公開が将来必要になった場合だけ、同一directoryのtemp→renameを別adapterとして追加する。
 
 ## Read-only commands
 

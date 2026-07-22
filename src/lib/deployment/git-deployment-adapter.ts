@@ -17,7 +17,7 @@ export interface CommitDeploymentResult {
 }
 
 export interface CommitDeploymentTarget {
-  hasDeployment(commit: string): Promise<boolean>;
+  getDeployment(commit: string): Promise<ReleaseMetadata | undefined>;
   deployCommit(request: CommitDeploymentRequest): Promise<CommitDeploymentResult>;
 }
 
@@ -32,8 +32,9 @@ export class GitDeploymentError extends Error {
 }
 
 /**
- * The only publication boundary for static hosting. Snapshot selection and
- * rollback are both deployments of a full, already-known Git commit.
+ * A small adapter around static hosting. Protected-main checks remain the
+ * responsibility of CI; this boundary verifies exact local object IDs and
+ * delegates deployment history to the hosting target.
  */
 export class GitDeploymentAdapter {
   private deploymentQueue: Promise<void> = Promise.resolve();
@@ -44,17 +45,14 @@ export class GitDeploymentAdapter {
   ) {}
 
   deploy(releaseMetadata: unknown): Promise<CommitDeploymentResult> {
-    return this.enqueue(releaseMetadata, 'release');
+    return this.enqueue(() => this.deployRelease(releaseMetadata));
   }
 
-  rollback(releaseMetadata: unknown): Promise<CommitDeploymentResult> {
-    return this.enqueue(releaseMetadata, 'rollback');
+  rollback(commit: unknown): Promise<CommitDeploymentResult> {
+    return this.enqueue(() => this.rollbackToCommit(commit));
   }
 
-  private async enqueue(
-    releaseMetadata: unknown,
-    reason: DeploymentReason,
-  ): Promise<CommitDeploymentResult> {
+  private async enqueue(operation: () => Promise<CommitDeploymentResult>) {
     const previousDeployment = this.deploymentQueue;
     let unlock: () => void = () => undefined;
     this.deploymentQueue = new Promise<void>((resolve) => {
@@ -62,50 +60,68 @@ export class GitDeploymentAdapter {
     });
     await previousDeployment;
     try {
-      return await this.deployKnownCommit(releaseMetadata, reason);
+      return await operation();
     } finally {
       unlock();
     }
   }
 
-  private async deployKnownCommit(
-    releaseMetadata: unknown,
-    reason: DeploymentReason,
-  ): Promise<CommitDeploymentResult> {
+  private async deployRelease(releaseMetadata: unknown): Promise<CommitDeploymentResult> {
     const parsed = ReleaseMetadataSchema.safeParse(releaseMetadata);
     if (!parsed.success) {
       throw new GitDeploymentError('INVALID_RELEASE_METADATA', parsed.error.message);
     }
     const release = parsed.data;
+    await this.resolveExactCommit(release.commit);
+    return this.target.deployCommit({ release, reason: 'release' });
+  }
+
+  private async rollbackToCommit(commit: unknown): Promise<CommitDeploymentResult> {
+    if (typeof commit !== 'string' || !/^(?:[a-f0-9]{40}|[a-f0-9]{64})$/u.test(commit)) {
+      throw new GitDeploymentError(
+        'UNKNOWN_RELEASE_COMMIT',
+        'Rollback requires a full Git commit object ID.',
+      );
+    }
+    await this.resolveExactCommit(commit);
+    const recordedMetadata = await this.target.getDeployment(commit);
+    if (recordedMetadata === undefined) {
+      throw new GitDeploymentError(
+        'UNKNOWN_RELEASE_COMMIT',
+        `${commit} does not exist in the deployment history.`,
+      );
+    }
+    const parsed = ReleaseMetadataSchema.safeParse(recordedMetadata);
+    if (!parsed.success || parsed.data.commit !== commit) {
+      throw new GitDeploymentError(
+        'INVALID_RELEASE_METADATA',
+        `Deployment history returned invalid metadata for ${commit}.`,
+      );
+    }
+    return this.target.deployCommit({ release: parsed.data, reason: 'rollback' });
+  }
+
+  private async resolveExactCommit(commit: string): Promise<string> {
     let resolvedCommit: string;
     try {
       const { stdout } = await execFileAsync(
         'git',
-        ['rev-parse', '--verify', '--end-of-options', `${release.commit}^{commit}`],
+        ['rev-parse', '--verify', '--end-of-options', `${commit}^{commit}`],
         { cwd: this.repositoryRoot, encoding: 'utf8' },
       );
       resolvedCommit = stdout.trim();
     } catch {
       throw new GitDeploymentError(
         'UNKNOWN_RELEASE_COMMIT',
-        `${release.commit} is not a commit in the release repository.`,
+        `${commit} is not a commit in the release repository.`,
       );
     }
-    if (resolvedCommit !== release.commit) {
+    if (resolvedCommit !== commit) {
       throw new GitDeploymentError(
         'UNKNOWN_RELEASE_COMMIT',
-        `${release.commit} did not resolve to the exact release commit.`,
+        `${commit} did not resolve to the exact release commit.`,
       );
     }
-    if (reason === 'rollback' && !(await this.target.hasDeployment(release.commit))) {
-      throw new GitDeploymentError(
-        'UNKNOWN_RELEASE_COMMIT',
-        `${release.commit} does not exist in the deployment history.`,
-      );
-    }
-    return this.target.deployCommit({
-      release,
-      reason,
-    });
+    return resolvedCommit;
   }
 }
