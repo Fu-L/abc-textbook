@@ -2,10 +2,8 @@ import { z } from 'zod';
 
 import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
 import { stableProblemId } from '../identity.js';
-import { compareOffsetDateTimes, parseOffsetDateTime } from '../date-time.js';
 import {
   ContestIdSchema,
-  ContentReviewModeSchema,
   EntityIdSchema,
   OffsetDateTimeSchema,
   ProblemIdSchema,
@@ -272,184 +270,48 @@ export const PublicationUpdateSchema = strictObject({
     ],
   });
 
-const CandidateFileSchema = strictObject({
-  path: SafePathSchema,
-  sha256: Sha256Schema,
-  byteLength: z.number().int().nonnegative(),
-});
-const CandidateCheckRefSchema = strictObject({
-  checkId: EntityIdSchema,
-  checkType: z.enum([
-    'automated',
-    'human_content_review',
-    'learner_outcome',
-    'user_timing',
-    'other',
-  ]),
-  subjectDigest: Sha256Schema,
-  command: text,
-  exitCode: z.literal(0),
-  resultPath: SafePathSchema,
-  resultDigest: Sha256Schema,
-  completedAt: OffsetDateTimeSchema,
-});
-const CandidateReviewRefSchema = strictObject({
-  evidenceId: EntityIdSchema,
-  path: SafePathSchema,
-  digest: Sha256Schema,
-  subjectDigest: Sha256Schema,
-  reviewerExecutedCheckSetDigest: Sha256Schema,
-  reviewMode: ContentReviewModeSchema,
-  aggregatePassed: z.literal(true),
-});
-const CandidateFindingSchema = strictObject({
-  code: text,
-  severity: z.enum(['critical', 'high', 'medium', 'low']),
-  entityId: z.string().nullable(),
-  message: text,
-  resolved: z.boolean(),
-});
-const OwnerApprovalSchema = strictObject({
-  ownerId: EntityIdSchema,
-  approvedDigest: Sha256Schema,
-  approvedAt: OffsetDateTimeSchema,
+const GitCommitSchema = z
+  .string()
+  .regex(/^(?:[a-f0-9]{40}|[a-f0-9]{64})$/u, 'A full Git commit object ID is required.');
+const ValidationResultsUrlSchema = z
+  .url()
+  .regex(/^https:\/\//u, 'Validation results must use HTTPS.')
+  .meta({ format: 'uri' });
+
+export const ReleaseChangeSummarySchema = strictObject({
+  updateIds: uniqueIds.min(1),
+  addedProblemIds: uniqueArray(ProblemIdSchema),
+  changedProblemIds: uniqueArray(ProblemIdSchema),
+  withdrawnProblemIds: uniqueArray(ProblemIdSchema),
+  taxonomyChanges: uniqueArray(text),
+}).superRefine((summary, context) => {
+  const categorizedProblemIds = [
+    ...summary.addedProblemIds,
+    ...summary.changedProblemIds,
+    ...summary.withdrawnProblemIds,
+  ];
+  if (new Set(categorizedProblemIds).size !== categorizedProblemIds.length) {
+    context.addIssue({
+      code: 'custom',
+      message: 'A Problem may appear in only one release change category.',
+    });
+  }
 });
 
-export const ReleaseCandidateSchema = strictObject({
-  schemaVersion: z.literal('2.0.0'),
-  candidateId: z.string().regex(/^release-candidate-\d{4}\.\d{2}\.\d+-[a-f0-9]{12,64}$/u),
-  releaseKind: z.enum(['initial', 'incremental']),
-  targetReleaseVersion: releaseVersion,
-  baseReleaseVersion: releaseVersion.nullable(),
-  cutoffAt: OffsetDateTimeSchema,
-  orderedUpdateIds: uniqueIds.min(1),
-  fixtureMode: z.boolean(),
-  advancedSlotRegistryDigest: Sha256Schema,
-  workManifestDigest: Sha256Schema,
-  catalogContentSnapshotDigest: Sha256Schema,
-  contentFiles: z.array(CandidateFileSchema),
-  contentSubjectDigest: Sha256Schema,
-  preJudgmentCheckRefs: z.array(CandidateCheckRefSchema),
-  humanContentReviewEvidenceRefs: z.array(CandidateReviewRefSchema),
-  blockingFindings: z.array(CandidateFindingSchema),
-  candidateFiles: z.array(CandidateFileSchema),
-  candidatePayloadDigest: Sha256Schema.nullable(),
-  approvableDigest: Sha256Schema.nullable(),
-  ownerApproval: OwnerApprovalSchema.nullable(),
-  publicationEffectiveAt: OffsetDateTimeSchema.nullable(),
-  publicationWindowEndsAt: OffsetDateTimeSchema.nullable(),
-  state: z.enum([
-    'DRAFTED',
-    'VALIDATING',
-    'AWAITING_REVIEW',
-    'AWAITING_OWNER_APPROVAL',
-    'AWAITING_FINAL_VALIDATION',
-    'READY_TO_PUBLISH',
-    'ON_HOLD',
-    'PUBLISHED',
-    'EXPIRED',
-  ]),
-  createdAt: OffsetDateTimeSchema,
-  updatedAt: OffsetDateTimeSchema,
-})
-  .superRefine((candidate, context) => {
-    for (const [path, files] of [
-      ['contentFiles', candidate.contentFiles],
-      ['candidateFiles', candidate.candidateFiles],
-    ] as const) {
-      if (new Set(files.map((file) => file.path)).size !== files.length) {
-        context.addIssue({ code: 'custom', path: [path], message: 'File paths must be unique.' });
-      }
-    }
-    if (!['READY_TO_PUBLISH', 'PUBLISHED'].includes(candidate.state)) return;
-    const complete =
-      candidate.contentFiles.length > 0 &&
-      !candidate.fixtureMode &&
-      candidate.candidateFiles.length > 0 &&
-      candidate.preJudgmentCheckRefs.length > 0 &&
-      candidate.preJudgmentCheckRefs.every(
-        (check) => check.subjectDigest === candidate.contentSubjectDigest,
-      ) &&
-      candidate.humanContentReviewEvidenceRefs.length > 0 &&
-      candidate.humanContentReviewEvidenceRefs.every(
-        (review) => review.subjectDigest === candidate.contentSubjectDigest,
-      ) &&
-      candidate.blockingFindings.every((finding) => finding.resolved) &&
-      candidate.candidatePayloadDigest !== null &&
-      candidate.approvableDigest !== null &&
-      candidate.ownerApproval !== null &&
-      candidate.ownerApproval.approvedDigest === candidate.approvableDigest &&
-      candidate.publicationEffectiveAt !== null &&
-      candidate.publicationWindowEndsAt !== null &&
-      compareOffsetDateTimes(
-        parseOffsetDateTime(candidate.publicationEffectiveAt),
-        parseOffsetDateTime(candidate.publicationWindowEndsAt),
-      ) <= 0;
-    if (!complete) {
-      context.addIssue({
-        code: 'custom',
-        path: ['state'],
-        message: 'Publishable state requires a fixed, approved, fully validated candidate.',
-      });
-    }
-  })
-  .meta({
-    allOf: [
-      {
-        if: {
-          properties: { state: { enum: ['READY_TO_PUBLISH', 'PUBLISHED'] } },
-          required: ['state'],
-        },
-        then: {
-          properties: {
-            contentFiles: { minItems: 1 },
-            fixtureMode: { const: false },
-            preJudgmentCheckRefs: { minItems: 1 },
-            humanContentReviewEvidenceRefs: { minItems: 1 },
-            candidateFiles: { minItems: 1 },
-            candidatePayloadDigest: { type: 'string', pattern: '^[a-f0-9]{64}$' },
-            approvableDigest: { type: 'string', pattern: '^[a-f0-9]{64}$' },
-            ownerApproval: { type: 'object' },
-            publicationEffectiveAt: { type: 'string' },
-            publicationWindowEndsAt: { type: 'string' },
-          },
-        },
-      },
-    ],
-  });
-
-export const ImmutableReleaseSchema = strictObject({
+/**
+ * The deployment-facing release record. Git owns snapshot identity and history;
+ * validation and content evidence remain in their dedicated versioned artifacts.
+ */
+export const ReleaseMetadataSchema = strictObject({
   schemaVersion: z.literal('1.0.0'),
   version: releaseVersion,
   cutoffAt: OffsetDateTimeSchema,
-  contentSnapshotDigest: Sha256Schema,
-  updateIds: uniqueIds.min(1),
-  publishedAt: OffsetDateTimeSchema,
+  commit: GitCommitSchema,
+  changeSummary: ReleaseChangeSummarySchema,
+  validationResultsUrl: ValidationResultsUrlSchema,
 }).readonly();
-export const ReleaseSchema = ImmutableReleaseSchema;
-
-export const PublishReceiptSchema = strictObject({
-  schemaVersion: z.literal('1.0.0'),
-  receiptId: z.string().regex(/^publish-receipt-\d{4}\.\d{2}\.\d+-[a-f0-9]{12,64}$/u),
-  receiptPath: z.string().regex(/^docs\/verification\/publish-receipts\/\d{4}\.\d{2}\.\d+\.json$/u),
-  candidateId: z.string().regex(/^release-candidate-\d{4}\.\d{2}\.\d+-[a-f0-9]{12,64}$/u),
-  releaseVersion,
-  contentSnapshotDigest: Sha256Schema,
-  candidatePayloadDigest: Sha256Schema,
-  approvableDigest: Sha256Schema,
-  publicationEffectiveAt: OffsetDateTimeSchema,
-  publicationWindowEndsAt: OffsetDateTimeSchema,
-  actualAtomicSwapAt: OffsetDateTimeSchema,
-  osFamily: z.enum(['windows', 'macos', 'linux']),
-  osVersion: text,
-  filesystem: text,
-  toolVersions: z.record(z.string(), text).refine((value) => Object.keys(value).length > 0),
-  previousReleaseVersion: releaseVersion.nullable(),
-  newReleaseVersion: releaseVersion,
-  result: z.literal('published'),
-  rawEvidenceDigest: Sha256Schema,
-  recordedAt: OffsetDateTimeSchema,
-});
+export type ReleaseMetadata = z.infer<typeof ReleaseMetadataSchema>;
+export const ReleaseSchema = ReleaseMetadataSchema;
 
 const contract = (fileName: `${string}.schema.json`, schema: z.ZodType, title: string) =>
   defineZodContractSchema(fileName, schema, {
@@ -462,13 +324,8 @@ export const UpdateManifestContract = contract(
   PublicationUpdateSchema,
   'ABC Textbook Publication Update',
 );
-export const ReleaseCandidateContract = contract(
-  'release-candidate.schema.json',
-  ReleaseCandidateSchema,
-  'ABC Textbook Release Candidate',
-);
-export const PublishReceiptContract = contract(
-  'publish-receipt.schema.json',
-  PublishReceiptSchema,
-  'ABC Textbook Publish Receipt',
+export const ReleaseMetadataContract = contract(
+  'release-metadata.schema.json',
+  ReleaseMetadataSchema,
+  'ABC Textbook Git Release Metadata',
 );

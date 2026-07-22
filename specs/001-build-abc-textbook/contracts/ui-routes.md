@@ -47,9 +47,9 @@ HTML route は末尾 slash を正規形とし、GitHub Pages の project base pa
 - 自動検査の件数・成功数・blocking finding 件数・証跡 digest
 - human content review の ID・path・digest と changelog path
 
-0 件の配列は空欄でなく「0件」と表示する。短縮 digest には完全値を確認・copy できる accessible な手段を付ける。`validatedAt` は保存値を表示し、実際の原子的切替時刻は append-only publish receipt の `actualAtomicSwapAt` として区別する。
+0 件の配列は空欄でなく「0件」と表示する。短縮 digest には完全値を確認・copy できる accessible な手段を付ける。Release画面はfull Git commitと検証結果URLを表示し、実際のdeploy時刻とrollback履歴は静的hostのdeployment履歴へlinkする。
 
-公開候補の承認後は content snapshot を変更しない。final validation は Release、catalog、Pagefind、sitemap、feed、asset manifest を含む派生物の推移閉包を read-only で照合し、production publish はその成功後だけ許可する。
+merge前のfinal validationはRelease、catalog、Pagefind、sitemap、feed、asset manifestを含む派生物の推移閉包をread-onlyで照合し、production deployはrequired checksを通過したprotected mainのcommitだけを許可する。
 
 ## 3. Problem detail
 

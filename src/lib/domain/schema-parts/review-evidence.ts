@@ -176,7 +176,7 @@ const outcomeCoverageReview = strictObject({
 export const HumanContentReviewEvidenceSchema = strictObject({
   schemaVersion: z.literal('3.0.0'),
   id: z.string().regex(/^human-content-review-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
-  scopeType: z.enum(['merge', 'release_candidate']),
+  scopeType: z.enum(['merge', 'release']),
   scopeId: text,
   releaseVersion: z
     .string()

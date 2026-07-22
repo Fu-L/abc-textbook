@@ -169,66 +169,6 @@ export const ClientBundleEvidenceSchema = strictObject({
     ],
   });
 
-const filesystemTestKinds = [
-  'writer_lock',
-  'global_lock',
-  'same_filesystem_switch',
-  'cross_filesystem_rejection',
-  'conflict',
-  'rollback_before_receipt',
-  'state_recovery_after_receipt',
-  'receipt_no_overwrite',
-  'rerun_no_op',
-] as const;
-
-export const FilesystemPublishEvidenceSchema = strictObject({
-  schemaVersion: z.literal('2.0.0'),
-  releaseDigest: Sha256Schema,
-  host: strictObject({
-    osFamily: text,
-    osVersion: text,
-    filesystem: text,
-    toolVersions: z.record(z.string(), text),
-  }),
-  tests: z
-    .array(
-      strictObject({
-        testId: text,
-        kind: z.enum(filesystemTestKinds),
-        passed: z.boolean(),
-        rawPath: text,
-        rawDigest: Sha256Schema,
-      }),
-    )
-    .length(filesystemTestKinds.length),
-  rawEvidenceManifestDigest: Sha256Schema,
-  aggregatePassed: z.boolean(),
-  generatedAt: OffsetDateTimeSchema,
-})
-  .superRefine((evidence, context) => {
-    const ids = evidence.tests.map(({ testId }) => testId);
-    const kinds = evidence.tests.map(({ kind }) => kind);
-    if (
-      new Set(ids).size !== ids.length ||
-      new Set(kinds).size !== filesystemTestKinds.length ||
-      filesystemTestKinds.some((kind) => !kinds.includes(kind)) ||
-      evidence.aggregatePassed !== evidence.tests.every(({ passed }) => passed)
-    ) {
-      context.addIssue({
-        code: 'custom',
-        message: 'Filesystem evidence coverage/aggregate is stale.',
-      });
-    }
-  })
-  .meta({
-    allOf: [
-      {
-        if: { properties: { aggregatePassed: { const: true } }, required: ['aggregatePassed'] },
-        then: { properties: { tests: { items: { properties: { passed: { const: true } } } } } },
-      },
-    ],
-  });
-
 export const InstructionQualityEvidenceSchema = strictObject({
   schemaVersion: z.literal('2.0.0'),
   releaseDigest: Sha256Schema,
@@ -468,11 +408,6 @@ export const ClientBundleEvidenceContract = contract(
   'client-bundle-evidence.schema.json',
   ClientBundleEvidenceSchema,
   'ABC Textbook Client Bundle Evidence',
-);
-export const FilesystemPublishEvidenceContract = contract(
-  'filesystem-publish-evidence.schema.json',
-  FilesystemPublishEvidenceSchema,
-  'ABC Textbook Filesystem Publish Evidence',
 );
 export const LearningRecordE2eEvidenceContract = contract(
   'learning-record-e2e-evidence.schema.json',

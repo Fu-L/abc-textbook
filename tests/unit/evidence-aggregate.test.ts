@@ -6,7 +6,6 @@ import {
 } from '../../src/lib/domain/schema-parts/learning.js';
 import {
   ClientBundleEvidenceSchema,
-  FilesystemPublishEvidenceSchema,
   InstructionQualityEvidenceSchema,
 } from '../../src/lib/domain/schema-parts/verification-evidence.js';
 import { validateInstructionQualityEvidence } from '../../src/lib/validation/instruction-quality.js';
@@ -77,41 +76,6 @@ describe('fail-closed evidence aggregates', () => {
       generatedAt: at,
     };
     expect(ClientBundleEvidenceSchema.safeParse(evidence).success).toBe(false);
-  });
-
-  it('requires every filesystem case exactly once and every result to pass', () => {
-    const kinds = [
-      'writer_lock',
-      'global_lock',
-      'same_filesystem_switch',
-      'cross_filesystem_rejection',
-      'conflict',
-      'rollback_before_receipt',
-      'state_recovery_after_receipt',
-      'receipt_no_overwrite',
-      'rerun_no_op',
-    ] as const;
-    const tests = kinds.map((kind, index) => ({
-      testId: `test-${String(index)}`,
-      kind,
-      passed: true,
-      rawPath: `docs/verification/fs-${String(index)}.json`,
-      rawDigest: sha(String((index % 9) + 1)),
-    }));
-    const evidence = {
-      schemaVersion: '2.0.0',
-      releaseDigest: sha('a'),
-      host: { osFamily: 'macos', osVersion: '15', filesystem: 'apfs', toolVersions: {} },
-      tests,
-      rawEvidenceManifestDigest: sha('b'),
-      aggregatePassed: true,
-      generatedAt: at,
-    };
-    expect(FilesystemPublishEvidenceSchema.safeParse(evidence).success).toBe(true);
-    const [firstTest] = tests;
-    if (!firstTest) throw new Error('Filesystem test fixture is missing.');
-    firstTest.passed = false;
-    expect(FilesystemPublishEvidenceSchema.safeParse(evidence).success).toBe(false);
   });
 
   it('rejects stale instruction inventory and unresolved quality gates', () => {

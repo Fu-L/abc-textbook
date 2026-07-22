@@ -13,38 +13,25 @@ import { canonicalJson } from '../../src/lib/domain/canonical-json.js';
 import { validateContractValue } from '../../src/lib/domain/contract-schema.js';
 import { LearningRecordContract } from '../../src/lib/domain/schema-parts/learning.js';
 import {
-  ReleaseCandidateContract,
+  ReleaseMetadataContract,
   UpdateManifestContract,
 } from '../../src/lib/domain/schema-parts/release.js';
 
 const contractsDirectory = path.resolve('specs/001-build-abc-textbook/contracts');
 const sha = (character: string): string => character.repeat(64);
-const validDraftCandidate = {
-  schemaVersion: '2.0.0',
-  candidateId: 'release-candidate-2026.07.17-aaaaaaaaaaaa',
-  releaseKind: 'initial',
-  targetReleaseVersion: '2026.07.17',
-  baseReleaseVersion: null,
+const validReleaseMetadata = {
+  schemaVersion: '1.0.0',
+  version: '2026.07.17',
   cutoffAt: '2026-07-17T12:00:00+09:00',
-  orderedUpdateIds: ['update-phase-two'],
-  fixtureMode: false,
-  advancedSlotRegistryDigest: sha('1'),
-  workManifestDigest: sha('3'),
-  catalogContentSnapshotDigest: sha('4'),
-  contentFiles: [],
-  contentSubjectDigest: sha('2'),
-  preJudgmentCheckRefs: [],
-  humanContentReviewEvidenceRefs: [],
-  blockingFindings: [],
-  candidateFiles: [],
-  candidatePayloadDigest: null,
-  approvableDigest: null,
-  ownerApproval: null,
-  publicationEffectiveAt: null,
-  publicationWindowEndsAt: null,
-  state: 'DRAFTED',
-  createdAt: '2026-07-17T12:00:00+09:00',
-  updatedAt: '2026-07-17T12:00:00+09:00',
+  commit: 'a'.repeat(40),
+  changeSummary: {
+    updateIds: ['update-phase-two'],
+    addedProblemIds: ['abc212-e'],
+    changedProblemIds: [],
+    withdrawnProblemIds: [],
+    taxonomyChanges: [],
+  },
+  validationResultsUrl: 'https://github.com/Fu-L/abc-textbook/actions/runs/1',
 } as const;
 
 describe('canonical Zod and JSON Schema parity', () => {
@@ -79,7 +66,7 @@ describe('canonical Zod and JSON Schema parity', () => {
       expect(canonicalJson(schema), fileName).toBe(canonicalJson(committed));
       const rootIsStrict = schema.type === 'object' && schema.additionalProperties === false;
       const referencedRootsAreStrict =
-        'oneOf' in schema &&
+        ('$ref' in schema || 'oneOf' in schema) &&
         Object.values((schema.$defs ?? {}) as Record<string, Record<string, unknown>>).some(
           (definition) => definition.type === 'object' && definition.additionalProperties === false,
         );
@@ -91,9 +78,9 @@ describe('canonical Zod and JSON Schema parity', () => {
         canonicalJson(intentionallyEdited),
       );
     }
-    expect(contractSchemaEntries).toHaveLength(20);
+    expect(contractSchemaEntries).toHaveLength(18);
     expect(contractSchemaEntries.map(({ semanticValidation }) => semanticValidation)).toEqual(
-      Array.from({ length: 20 }, () => 'canonical-zod'),
+      Array.from({ length: 18 }, () => 'canonical-zod'),
     );
   });
 
@@ -132,23 +119,42 @@ describe('canonical Zod and JSON Schema parity', () => {
   it('gives Zod and Ajv the same answer for valid, unknown-field, and duplicate inputs', () => {
     const ajv = new Ajv2020({ allErrors: true, strict: false });
     addFormats(ajv);
-    const validateJsonSchema = ajv.compile(ReleaseCandidateContract.jsonSchema);
+    const validateJsonSchema = ajv.compile(ReleaseMetadataContract.jsonSchema);
     const cases = [
-      { value: validDraftCandidate, expected: true },
-      { value: { ...validDraftCandidate, unexpectedPhaseTwoField: true }, expected: false },
+      { value: validReleaseMetadata, expected: true },
+      { value: { ...validReleaseMetadata, unexpectedPhaseTwoField: true }, expected: false },
+      { value: { ...validReleaseMetadata, commit: 'a'.repeat(12) }, expected: false },
+      {
+        value: { ...validReleaseMetadata, validationResultsUrl: 'http://example.test/results' },
+        expected: false,
+      },
+      { value: { ...validReleaseMetadata, validationResultsUrl: 'https://[' }, expected: false },
       {
         value: {
-          ...validDraftCandidate,
-          orderedUpdateIds: ['update-phase-two', 'update-phase-two'],
+          ...validReleaseMetadata,
+          changeSummary: {
+            ...validReleaseMetadata.changeSummary,
+            updateIds: ['update-phase-two', 'update-phase-two'],
+          },
         },
         expected: false,
       },
     ];
 
     for (const { value, expected } of cases) {
-      expect(ReleaseCandidateContract.schema.safeParse(value).success).toBe(expected);
+      expect(ReleaseMetadataContract.schema.safeParse(value).success).toBe(expected);
       expect(validateJsonSchema(value)).toBe(expected);
     }
+
+    expect(
+      ReleaseMetadataContract.schema.safeParse({
+        ...validReleaseMetadata,
+        changeSummary: {
+          ...validReleaseMetadata.changeSummary,
+          changedProblemIds: ['abc212-e'],
+        },
+      }).success,
+    ).toBe(false);
   });
 
   it('keeps ELIGIBLE update conditional failures aligned between Zod and Ajv', () => {

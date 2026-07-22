@@ -224,7 +224,7 @@
       "type": "string",
       "enum": [
         "merge",
-        "release_candidate"
+        "release"
       ]
     },
     "__schema3": {

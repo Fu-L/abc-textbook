@@ -363,29 +363,24 @@ schema version、createdAt、targetReleaseVersion、全record、不明Problem ID
 
 全AuthoringResultが`authoring_unit_draft`かつblocking 0件の場合だけELIGIBLE_FOR_BATCHへ進む。
 
-### ReleaseCandidate
+### Release Metadata
 
-状態遷移（release versionは全契約で`YYYY.MM.DD`形式）:
-
-```text
-DRAFTED
-  -> VALIDATING
-  -> AWAITING_REVIEW
-  -> AWAITING_OWNER_APPROVAL
-  -> AWAITING_FINAL_VALIDATION
-  -> READY_TO_PUBLISH
-  -> PUBLISHED
-```
-
-どの状態からも未完成、stale、expiry、検証失敗でON_HOLDへ移れる。candidateは一つ以上のELIGIBLE update、cutoff、AdvancedSlotRegistry、固定content tree、実ファイルinventory digest、論理catalog snapshot digest、work manifest digest、check refs、HumanContentReviewEvidence、owner approval、publication windowを持つ。owner approvalのapprovable digestは実ファイル、論理snapshot、manifestをすべて束縛する。reviewやapprovalは個別Updateではなくcandidateが所有する。
+deployment adapterへ渡す最小recordであり、`schemaVersion`、`version`（`YYYY.MM.DD`）、`cutoffAt`、full Git `commit`、`changeSummary`、HTTPSの`validationResultsUrl`だけを持つ。merge後のCIが確定commitと検証runから生成するdeployment入力であり、自身が指すcommitへ自己参照的に書き込まない。`changeSummary`はupdate IDs、追加・変更・取り下げProblem IDs、taxonomy変更要約を保持する。snapshot identity、immutability、履歴はGit commit/treeとprotected mainが所有するため、candidate state、owner approval、publication window、candidate/content/approvable digest、PublishReceiptは持たない。
 
 ### Release
 
-release version、cutoff、AdvancedSlotRegistry、実ファイルinventory digest、論理catalog snapshot digest、取り込んだupdate IDs、追加・変更・取り下げ問題、taxonomy変更、検証要約、review evidence refs、履歴を持つimmutable record。両digestは対象が異なるため同値を要求しない。未公開ON_HOLD試行は含めず、staging statusから参照する。
+公開版はRelease Metadataが指すGit commitである。Catalogには取り込んだupdate IDs、追加・変更・保留・取り下げ問題、taxonomy変更、検証要約、review evidence refs、changelogを保持し、未公開ON_HOLD試行はPublicationUpdate statusから参照する。rollbackは既知のRelease Metadataが指すcommitをdeployment adapterで再deployする。
 
-### PublishReceipt
+### Release責務の重複解消
 
-candidate ID、release version、approved digest、公開前後tree digest、切替日時、結果を持つ。Release contentからは参照せず、公開transactionの外部append-only記録とする。
+| 旧artifact / field | Git・静的host側の正本 | 残す責務 |
+|---|---|---|
+| candidate content/payload/approvable digest | Git commit/tree hash | なし。contentの品質digestは検証evidence内だけで使う |
+| Catalog content file inventory / logical snapshot digest | Git commitとは別対象 | evidenceのcurrent subjectと論理projection整合の検証だけに使い、release IDにはしない |
+| candidate state / owner approval | protected mainのrequired checksとmerge | PublicationUpdateのhold理由とHumanContentReviewEvidence |
+| publication window / global publish lock | 静的hostのdeployment queue | adapter内の要求直列化 |
+| atomic filesystem switch / recovery journal | 静的hostのdeploy履歴 | filesystem公開が必要な場合だけ独立adapter |
+| append-only PublishReceipt | Git履歴と静的hostのdeployment履歴 | Release Metadataのcommitとvalidation results URL |
 
 ## 7. Review entities
 
@@ -446,7 +441,7 @@ SC-012について、全公開Problem routeが共有LearningRecord component/act
 8. 全実行可能ExampleとAnswerの検証が成功する。
 9. 全内部link、用語、代替text、navigationが有効である。
 10. 全適用checkとreview policyに応じたselfまたはthird-party reviewがcurrent subjectで成功する。
-11. owner approval後にcandidate bytesが変化していない。
+11. 必須checkとreviewを通過したprotected mainのfull Git commitだけがdeploy対象である。
 12. contest matrix、search、simple local learning managementが公開Problemで利用可能である。
 13. private preview、仮taxonomy、未結合shard、preview-only evidenceが公開content treeへ入っていない。
-14. `FR-001`/`SC-001`に対応するABC 212〜cutoffの連続性とDより後のProblem 100% coverageを、previewとは独立したfinal candidateから再計算できる。
+14. `FR-001`/`SC-001`に対応するABC 212〜cutoffの連続性とDより後のProblem 100% coverageを、previewとは独立したrelease commitから再計算できる。
