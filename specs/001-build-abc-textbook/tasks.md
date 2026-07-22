@@ -26,7 +26,7 @@
 - static UI/search: `docs/verification/previews/initial-v1/components/ui-search.json` (T111)
 - update/release simulation: `docs/verification/previews/initial-v1/components/update-simulation.json` (T126)
 
-T154は上記の固定artifact、T064がfreezeした`docs/verification/authoring-skill/initial-v1/skill-manifest.json`、および`staging/previews/initial-v1/preview-manifest.json`だけをjoinする。T127–T153のcanonical full route、production candidate、owner approval、publish、initial-release reviewはpreviewの入力にしてはならない。preview専用の別catalog、UI、LearningRecord、update実装は作らない。snapshotの正本は`staging/previews/initial-v1/snapshots/`だけに置き、`docs/verification/previews/initial-v1/preview-join/`にはcanonical pathとdigestを持つ`PreviewSnapshotReference`だけを置く。
+T154は上記の固定artifact、T064がfreezeした`docs/verification/authoring-skill/initial-v1/skill-manifest.json`、および`staging/previews/initial-v1/preview-manifest.json`だけをjoinする。T127–T153のcanonical full route、production release validation/deploy、initial-release reviewはpreviewの入力にしてはならない。preview専用の別catalog、UI、LearningRecord、update実装は作らない。snapshotの正本は`staging/previews/initial-v1/snapshots/`だけに置き、`docs/verification/previews/initial-v1/preview-join/`にはcanonical pathとdigestを持つ`PreviewSnapshotReference`だけを置く。
 
 同じtaskを二度手書きで複製しないため、preview scopeとfull scopeは共通実装へ別々のfixture/catalogを渡す。previewの依存列は`T028–T032 (rules/tests, candidate pool, and metadata) → T037 (cohort freeze) → T038 (preview inventory) → T045/T046 (provisional taxonomy) + T064 (versioned authoring skill) → T051–T054 (four-domain preview content only) → T083–T094 (LearningRecord preview) / T099–T111 (UI/search preview) / T116–T126 (update simulation preview) → T154 (join gate)`とする。fullの依存列は`T032–T044(full inventory) + T154 PASS → T159 (full-corpus taxonomy synthesis and acceptance) → T047–T050 (canonical materialization)`とし、T055–T056/T155–T158(full LearningUnit content)はT050後に、T064(authoring/source prerequisites)はT061–T063後に進める。T065(frozen shard index)はT049、T064、T154の完了後に実行し、T066–T071はそのindexへ依存する。T160(full public route/search projection)はT057/T075/T076/T078完了後に一度だけpreview sourceからcanonical full-corpus sourceへ切り替える。US3/US4/US5のcanonical full workはT154後も継続する。T154はpreview component artifactだけを入力にし、preview scopeはfull scopeの完了を待たない。
 
@@ -75,12 +75,12 @@ T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/w
 - [X] T009 [P] Add failing Zod-to-JSON-Schema parity and unknown-field rejection tests for every contract in `tests/contract/schema-parity.test.ts`
 - [X] T010 [P] Add failing official task-order tests covering missing H, future I/Ex labels, duplicate labels, and order conflicts in `tests/unit/advanced-slot-registry.test.ts`
 - [X] T011 [P] Add failing stable-ID, RFC 3339 offset, digest, DAG-cycle, and deterministic-topological-order tests in `tests/unit/domain-invariants.test.ts`
-- [X] T012 [P] Add failing release state, immutable snapshot, approval digest, review completeness, and publish-receipt transition tests in `tests/unit/release-state.test.ts`
+- [X] T012 [P] Add failing PublicationUpdate and review-completeness gate tests in `tests/unit/publication-update.test.ts`
 - [X] T013 Define Contest, AdvancedSlotRegistry, ContestSlotRecord, Problem, TechniqueInventoryItem, TechniqueTag, LearningOutcome, LearningUnit, ProblemPlacement, source, ProblemAuthoringUnit, co-located content block, and owner-qualified evidence/correction locator Zod shapes in `src/lib/domain/schema-parts/catalog.ts` and `src/lib/domain/schema-parts/authoring-unit.ts`
 - [X] T014 [P] Define LearningRecord and versioned backup/preview/merge Zod shapes without account or sync fields in `src/lib/domain/schema-parts/learning.ts`
-- [X] T015 [P] Define PublicationUpdate, AuthoringResult, ReleaseCandidate, immutable Release, and PublishReceipt Zod shapes in `src/lib/domain/schema-parts/release.ts`
+- [X] T015 [P] Define PublicationUpdate, AuthoringResult, and Git-based ReleaseMetadata Zod shapes in `src/lib/domain/schema-parts/release.ts`
 - [X] T016 [P] Define ContentWorkManifest review policy, self/third-party HumanContentReviewEvidence, MergeReviewEvidence, LearnerOutcomeEvidence, and UserTimingEvidence Zod shapes in `src/lib/domain/schema-parts/review-evidence.ts`
-- [X] T017 [P] Define performance, executable-example, answer-material, instruction-quality, client-bundle, and filesystem-publish evidence Zod shapes in `src/lib/domain/schema-parts/verification-evidence.ts`
+- [X] T017 [P] Define performance, executable-example, answer-material, instruction-quality, and client-bundle evidence Zod shapes in `src/lib/domain/schema-parts/verification-evidence.ts`
 - [X] T018 Re-export schema-part definitions without redefining shapes in `src/lib/domain/schemas.ts` and expose the domain public API in `src/lib/domain/index.ts`
 - [X] T019 Generate every `specs/001-build-abc-textbook/contracts/*.schema.json` from the canonical Zod shapes and fail on drift in `scripts/generate-json-schemas.ts`
 - [X] T020 [P] Implement stable entity IDs, canonical JSON, SHA-256 digests, and offset-preserving date-time helpers in `src/lib/domain/identity.ts`, `src/lib/domain/canonical-json.ts`, and `src/lib/domain/date-time.ts`
@@ -249,16 +249,16 @@ T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/w
 
 ## Phase 7: User Story 5 - 新しいABCを一操作で追加準備する (Priority: P2)
 
-**Goal**: 終了済み未収録ABCを一操作で安全に候補化し、検証・限定review・承認・原子的公開へ進める。
+**Goal**: 終了済み未収録ABCを一操作で安全に更新準備し、検証・限定review・protected mainへのmerge・静的デプロイへ進める。
 
-**Independent Test**: offline fixtureで一回の開始操作から15分以内に全対象Problemを完成草案/要執筆/具体的保留へ分類し、再実行で重複0件、失敗候補の公開0件、承認digest変更0件、publish失敗時の部分切替0件を確認する。
+**Independent Test**: offline fixtureで一回の開始操作から15分以内に全対象Problemを完成草案/要執筆/具体的保留へ分類し、再実行で重複0件、required check失敗commitの公開0件、未知commitのdeploy 0件、既知release commitの再deploy rollback成功を確認する。
 
 ### Tests for User Story 5
 
 - [ ] T112 [US5] Freeze the US5 learning-outcome review units before story changes and add failing ended-contest discovery, D-after scope, future-label, source-failure, and single-start-operation tests in `docs/work-manifests/initial/us5/manifest.json` and `tests/integration/update-discovery.test.ts`
 - [ ] T113 [P] [US5] Add failing complete-draft/authoring-required/blocked, authoring-skill integration, and idempotent rerun tests in `tests/integration/update-prepare.test.ts`
 - [ ] T114 [P] [US5] Add failing correction-impact, taxonomy-cycle, reachability, index, and hold/resume tests in `tests/integration/update-validation.test.ts`
-- [ ] T115 [P] [US5] Add failing fixed-candidate, required-review, approval digest, final-read-only validation, lock, rollback, receipt, and rerun-no-op tests in `tests/integration/release-pipeline.test.ts`
+- [X] T115 [P] [US5] Add failing minimal release metadata, known-commit validation, serialized deployment, rollback-by-redeploy, and unknown-commit tests in `tests/integration/git-deployment-adapter.test.ts`
 
 ### Implementation for User Story 5
 
@@ -271,22 +271,22 @@ T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/w
 - [ ] T122 [US5] Implement one-command orchestration, resumable state, 15-minute timing, stable output, and documented exit codes for the preview fixture before T154 in `scripts/update-abc/index.ts`
 - [ ] T123 [US5] Implement correction-impact enumeration for the preview fixture across content, examples, exercises, answers, order, and indexes before T154 in `scripts/update-abc/correction-impact.ts`
 - [ ] T124 [US5] Implement the preview-only seed bootstrap through the shared manifest/state machine before T154 in `scripts/update-abc/bootstrap.ts`; normal full-corpus catch-up remains post-T154
-- [ ] T125 [US5] After T119–T124, run the fixture-only update/release simulation for `initial-v1`, including staging/public closure, immutable preview digest, validation inventory, and no production candidate writes in `scripts/prepare-release-candidate.ts` and `staging/previews/initial-v1/release-simulation/`
-- [ ] T126 [US5] After T125 and T064, for the fixture-only preview simulation, apply the fixed risk policy, run applicable checks, resolve findings, and write current-subject self/third-party component evidence plus the digest and exact authoring-skill subject to `scripts/review-update.ts`, `docs/verification/previews/initial-v1/components/update-simulation.json`, and `docs/reviews/human-content/previews/initial-v1/us5/`; owner approval and publish are explicitly out of scope
-- [ ] T127 [US5] After T154, implement explicit owner approval bound to a full-corpus candidate/content/review digest in `scripts/approve-update.ts`
-- [ ] T128 [US5] After T154, implement read-only final validation with dependency-closure and no post-approval regeneration in `scripts/verify-release.ts`
-- [ ] T129 [US5] After T154, implement writer/global locks, same-filesystem atomic switch, rollback-before-receipt, recovery-after-receipt, and append-only receipts in `scripts/publish-update.ts`
+- [ ] T125 [US5] After T119–T124, run the fixture-only update/release simulation for `initial-v1`, including staging/public closure, immutable preview digest, validation inventory, and no production release metadata or deployment writes in `scripts/verify-release.ts` and `staging/previews/initial-v1/release-simulation/`
+- [ ] T126 [US5] After T125 and T064, for the fixture-only preview simulation, apply the fixed risk policy, run applicable checks, resolve findings, and write current-subject self/third-party component evidence plus the digest and exact authoring-skill subject to `scripts/review-update.ts`, `docs/verification/previews/initial-v1/components/update-simulation.json`, and `docs/reviews/human-content/previews/initial-v1/us5/`; production merge and deploy are explicitly out of scope
+- [X] T127 [US5] Replace candidate/approval/receipt contracts with minimal version/cutoff/commit/change-summary/validation-URL ReleaseMetadata in `src/lib/domain/schema-parts/release.ts` and `specs/001-build-abc-textbook/contracts/release-metadata.schema.json`
+- [ ] T128 [US5] After T154, implement read-only release validation against the protected-base diff and the exact merge commit in `scripts/verify-release.ts`
+- [X] T129 [US5] Isolate deployment serialization and rollback-by-known-commit redeploy in `src/lib/deployment/git-deployment-adapter.ts`; leave filesystem temp→rename behavior to an optional separate adapter
 - [ ] T130 [US5] After T154, generate public immutable Release history and separate administrator-only hold summaries for the full catalog in `src/lib/catalog/build-release-history.ts`
-- [ ] T131 [US5] After T154, have the policy-selected reviewer confirm full-corpus outcome coverage and run idempotency/failure-injection/correction/approval-freeze/publish-simulation checks (`self` for normal changes, `third_party` instead of `self` for fixed high-risk correction/classification cases), resolve findings, and record current-subject mode-labeled MergeReviewEvidence in `docs/verification/bootstrap/us5.json` and `docs/reviews/human-content/bootstrap/us5/merge-review.json`
-- [ ] T132 [US5] After T154, document the full-catalog weekly prepare/review/approve/validate/publish/backup workflow and every recovery state in `docs/operations/weekly-update.md`
+- [ ] T131 [US5] After T154, have the policy-selected reviewer confirm full-corpus outcome coverage and run idempotency/failure-injection/correction/required-check/deploy-simulation checks (`self` for normal changes, `third_party` instead of `self` for fixed high-risk correction/classification cases), resolve findings, and record current-subject mode-labeled MergeReviewEvidence in `docs/verification/bootstrap/us5.json` and `docs/reviews/human-content/bootstrap/us5/merge-review.json`
+- [ ] T132 [US5] After T154, document the full-catalog weekly prepare/review/validate/merge/deploy/backup workflow and deployment-adapter recovery in `docs/operations/weekly-update.md`
 
-**Checkpoint**: The complete update pipeline works offline and in simulation; no production publish has occurred.
+**Checkpoint**: The complete update pipeline works offline and in simulation; no production deploy has occurred.
 
 ---
 
 ## Phase 8: Polish & Cross-Cutting Initial Release
 
-**Purpose**: T154のpreview PASS後に全storyのfull-corpus成果を初版候補へ統合し、目的・憲章・品質・費用・性能を最終確認してから初めて実公開する。preview component evidence、仮taxonomy、未結合shard、未承認candidateはこのphaseへ直接持ち込まない。
+**Purpose**: T154のpreview PASS後に全storyのfull-corpus成果を初版release commitへ統合し、目的・憲章・品質・費用・性能を最終確認してから初めて実公開する。preview component evidence、仮taxonomy、未結合shard、未検証updateはこのphaseへ直接持ち込まない。
 
 - [ ] T133 [P] Run Zod/JSON Schema parity, contract schema validation, unknown-field rejection, and generated-file drift checks in `docs/verification/initial-release/schema-contracts.json`
 - [ ] T134 [P] Recompute the authoritative final-release gate independently of preview artifacts: ABC continuity, official D-after slots, dynamic registry, public Problem coverage, classification, reachability, and direct-link coverage must prove FR-001/SC-001 100% coverage in `docs/verification/initial-release/corpus-completeness.json`
@@ -300,15 +300,15 @@ T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/w
 - [ ] T142 [P] Audit client bundles, external dependencies, telemetry, accounts, paid services, and a deterministic 52-week update simulation for zero additional required cost in `docs/verification/initial-release/zero-cost-52-weeks.json`
 - [ ] T143 Freeze an offset-qualified initial `cutoffAt`, discover all ended ABCs after 466, and process every missing Contest through normal updates in `staging/updates/initial-catch-up/`
 - [ ] T144 Re-run all T133–T142 validators after catch-up and reject any unresolved Problem, temporary/provisional taxonomy, unjoined Outcome/Problem shard, missing review, preview artifact leakage, or changed learner record in `docs/verification/initial-release/post-catch-up.json`
-- [ ] T145 After T160, prepare one immutable initial ReleaseCandidate containing bootstrap and all catch-up updates in `staging/release-candidates/initial/release-candidate.json`
-- [ ] T146 After T160, complete the policy-selected review check inventory for the exact candidate digest (`self` for normal changes, `third_party` instead of `self` for every fixed high-risk claim/example scope) in `docs/reviews/human-content/initial-release/`
-- [ ] T147 Re-run the pre-fixed SC-009 and SC-010 protocols plus SC-012 representative timing against the exact candidate digest in `docs/verification/learner-outcomes/initial-release/`
-- [ ] T148 Bind explicit owner approval to the unchanged candidate/content/review/evidence digests in `staging/release-candidates/initial/owner-approval.json`
-- [ ] T149 Execute read-only final validation, dependency-closure comparison, publish simulation, and rollback rehearsal without regenerating content in `docs/verification/initial-release/final-validation.json`
-- [ ] T150 Finalize the exact production commands, locks, backup, rollback boundary, receipt recovery, and verification steps in `docs/operations/initial-release-runbook.md`
-- [ ] T151 Audit the final candidate against the original goal, all FR/CQ/SC requirements including FR-001/SC-001, the private-preview exclusion, Outcome/Problem shard join evidence, Constitution 2.0.0, self/third-party review policy, one-user scope, and zero-cost boundary in `docs/verification/initial-release/goal-and-constitution.json`
-- [ ] T152 Publish the already-approved and already-final-validated candidate atomically without content changes by following `docs/operations/initial-release-runbook.md`
-- [ ] T153 Verify the append-only receipt, immutable Release history, public content digest, route/search availability, rollback state, and learning-record compatibility in `docs/verification/publish-receipts/initial-release.json`
+- [ ] T145 After T160, assemble the initial release change summary from bootstrap and all catch-up update IDs in the Catalog release history
+- [ ] T146 After T160, complete the policy-selected review check inventory for the exact release commit subject (`self` for normal changes, `third_party` instead of `self` for every fixed high-risk claim/example scope) in `docs/reviews/human-content/initial-release/`
+- [ ] T147 Re-run the pre-fixed SC-009 and SC-010 protocols plus SC-012 representative timing against the exact release commit in `docs/verification/learner-outcomes/initial-release/`
+- [ ] T148 Configure build, link, schema, content-completeness, and policy-selected review checks as protected-main merge requirements
+- [ ] T149 Execute read-only final validation, dependency-closure comparison, deploy simulation, and known-commit rollback rehearsal without regenerating content in `docs/verification/initial-release/final-validation.json`
+- [ ] T150 Finalize the exact production deploy adapter, static-host history, retry, rollback, and verification steps in `docs/operations/initial-release-runbook.md`
+- [ ] T151 Audit the final release commit against the original goal, all FR/CQ/SC requirements including FR-001/SC-001, the private-preview exclusion, Outcome/Problem shard join evidence, Constitution 2.0.0, self/third-party review policy, one-user scope, and zero-cost boundary in `docs/verification/initial-release/goal-and-constitution.json`
+- [ ] T152 Merge the fully validated tree to protected main and deploy that exact full commit hash without content changes by following `docs/operations/initial-release-runbook.md`
+- [ ] T153 Verify static-host deployment history, immutable Git Release history, route/search availability, known-commit rollback, and learning-record compatibility in `docs/verification/deployments/initial-release.json`
 
 ---
 
@@ -336,7 +336,7 @@ T154 is defined after the original task list so task IDs remain sequential, but 
 - **US1 (Phase 4, P1)**: depends on the accepted final US2 taxonomy/placements, T064, and T154. T065 freezes the shard index, then T066–T071 generate and execute six independent Outcome/Problem shard work streams; no per-contest temporary taxonomy is permitted. T065 owns the shared index and no domain task may generate or mutate it.
 - **US3 (Phase 5, P1)**: starts after Phase 2 with the preview fixture and completes T094's component evidence before T154; full-corpus learning-record validation is performed by T139/T146 after stable public Problem IDs are available.
 - **US4 (Phase 6, P2)**: starts with the preview fixture and completes T111's component evidence before T154; T160 is the post-preview implementation that binds canonical full content to routes, indexes, search, catalog, sitemap, and feed, and T138/T140/T146 validate that fixed projection.
-- **US5 (Phase 7, P2)**: starts with the T112 manifest and completes the fixture-only T116–T126 update simulation before T154; T127–T132 and the initial ReleaseCandidate/approval/publish tasks are post-T154 full-catalog work.
+- **US5 (Phase 7, P2)**: starts with the T112 manifest and completes the fixture-only T116–T126 update simulation before T154; protected-main validation and the initial release metadata/deploy tasks are post-T154 full-catalog work.
 - **Initial Release (Phase 8)**: depends on all user stories. T152 is forbidden until T145–T151 are complete in order.
 
 ### User Story Dependency Graph
@@ -346,7 +346,7 @@ Setup → Foundational ─┬→ candidate pool/cohort ─→ preview components
                       ├→ full US2 inventory ──────────────────────────────────────────────┘                                             │                  ├→ T160 full routes/index/search ───┤
                       ├→ US3 preview → T154 → full learning records ───────────────────────────────────────────────────────────────────┤                  │
                       ├→ US4 preview → T154 ────────────────────────────────────────────────────────────────────────────────────────────┘                  │→ Initial release
-                      └→ US5 preview simulation → T154 → candidate/review/approval/publish ────────────────────────────────────────────────────────────────┘
+                      └→ US5 preview simulation → T154 → review/merge/deploy ─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 - **Preview** is independently testable as a private, digest-bound vertical slice; it cannot be promoted or counted as final coverage. Its canonical snapshot lives only under staging; the verification tree contains a recoverable reference.
@@ -361,8 +361,8 @@ Setup → Foundational ─┬→ candidate pool/cohort ─→ preview components
 - Contract/unit/E2E tests are written first and observed failing before implementation.
 - Canonical data precedes derived pages and indexes.
 - Preview paths use the same canonical implementation and are rejected from public projections; provisional taxonomy is replaced by final taxonomy through the integration map.
-- Automated checks precede the policy-selected self-review or risk-triggered third-party review; findings must be resolved before approval.
-- Approval freezes digests; final validation is read-only; production publication is the last mutating step.
+- Automated checks precede the policy-selected self-review or risk-triggered third-party review; findings must be resolved before merge.
+- Final validation is read-only; protected-main merge fixes the release commit, and deployment publishes that exact commit without content changes.
 
 ## Parallel Opportunities
 
@@ -409,7 +409,7 @@ Each T066–T071 task owns disjoint Outcome/Problem/Claim/Example paths and reco
 3. Run the explicit T154 join gate, resolve its hold findings, and keep preview data unpublished.
 4. Run T159 to synthesize and accept the final taxonomy from the complete Inventory, materialize it through T047–T050, and then expand full-corpus LearningUnit content through T055–T056/T155–T158.
 5. Generate and review the Outcome/Problem shards, join the explanations, and run T160 to switch the shared public projections from preview to canonical full-corpus content.
-6. Validate the final projections, shard join, and final US1/US2 independently before the initial Release candidate.
+6. Validate the final projections, shard join, and final US1/US2 independently before the initial release commit.
 
 The private preview is an early feedback milestone, not a reduced public MVP. The public MVP remains subject to the full-corpus FR-001/SC-001 gate.
 
@@ -421,7 +421,7 @@ The private preview is an early feedback milestone, not a reduced public MVP. Th
 4. Local learning records → validate progress tracking and backup against stable Problem IDs.
 5. T160 preview-to-canonical route/search projection switch → validate one-operation reachability and dynamic labels against the full corpus.
 6. Weekly update pipeline → validate idempotent maintenance and correction handling.
-7. Integrate, freeze, review, approve, final-validate, runbook-audit, and publish only after the independent final coverage gate passes.
+7. Integrate, review, final-validate, merge, runbook-audit, and deploy only after the independent final coverage gate passes.
 
 ## Notes
 
@@ -434,4 +434,4 @@ The private preview is an early feedback milestone, not a reduced public MVP. Th
 - T160 is the only post-preview task that switches shared public projections from the frozen fixture to the canonical full-corpus catalog; T138/T140/T145/T146 consume its fixed projection digest and do not perform that switch implicitly.
 - A generated shard is independently buildable, reviewable, previewable, and path-disjoint; its success never replaces the all-shard join or the final FR-001/SC-001 gate.
 - Optional tools may assist, but no paid service, specific model, external cohort, separate auditor, multi-user account, or always-on backend is a required task.
-- No production publish occurs in US5 simulation. T152 is the only production publication task and is gated by the runbook and goal audit.
+- No production deploy occurs in US5 simulation. T152 is the only production deployment task and is gated by protected-main checks, the runbook, and goal audit.

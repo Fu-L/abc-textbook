@@ -1,16 +1,16 @@
 # CLI Contract: ABC上級問題体系化教科書
 
-**Scope**: PublicationUpdateの候補作成、ReleaseCandidateの検証、人間review取込、承認、原子的公開。
+**Scope**: PublicationUpdateの準備、merge前検証、人間review取込、Git commit単位の静的デプロイ。
 
 ## Common rules
 
 - 必須経路は有料API、常時backend、外部credentialを要求しない。
 - machine-readable resultはstdout最終行のJSON、進捗と診断はstderrへ出す。
 - 成功0、検証・保留2、使用法64、入力形式65、内部失敗70、I/O失敗73、設定失敗78を使う。
-- `--fixture`を持つartifactはproduction approve/publishを拒否する。
-- 同じupdate/candidateへの同時writerをlockで拒否し、publishは全candidate共通lockで直列化する。
+- `--fixture`を持つartifactはproduction merge/deployを拒否する。
+- updateへの同時writerはupdate側で拒否し、デプロイの直列化はdeployment adapterと静的hostへ限定する。
 - repo-relative pathだけを扱い、absolute、`..`、symlink escape、重複pathを拒否する。
-- update/candidate identityに影響するinputが同じなら既存active artifactを冪等再利用する。
+- update identityに影響するinputが同じなら既存active artifactを冪等再利用する。
 
 ## `abc:update` — 一操作の更新準備
 
@@ -75,30 +75,19 @@ npm run release:catch-up -- --cutoff 2026-07-14T00:00:00+09:00
 
 - cutoffまでの最新終了済みABCを決め、seed後の未収録Contestを昇順に`abc:update`へ渡す。
 - 各ContestのDより後の全Problemをmanifestへ固定する。
-- 全catch-up updateがELIGIBLEになった場合だけ、bootstrap IDとcatch-up IDsをcandidate inputとして返す。
+- 全catch-up updateがELIGIBLEになった場合だけ、bootstrap IDとcatch-up IDsをrelease change summaryとして返す。
 - 一件でもON_HOLDなら終了2で停止し、欠落0件を報告しない。
 
-## `abc:prepare-release` — candidate作成
+## `verify:release` — merge前のrelease検証
 
 ```bash
-npm run abc:prepare-release -- --update UPDATE_ID [--update UPDATE_ID ...] --target YYYY.MM.DD
+npm run verify:release -- --commit HEAD
 ```
 
-- 一つ以上のELIGIBLE updateを指定順に束ねる。
-- base release、target、cutoff、fixture modeの整合を確認する。
-- AdvancedSlotRegistryを既存順と全Contest official orderから決定生成する。
-- candidate treeへRelease非依存content、taxonomy、index、changelogを生成する。
-- state envelope、final Release record、approval、receiptをcontent subjectから除外する。
-- path順file inventoryから`contentSubjectDigest`を固定し、同じidentityのactive candidateを再利用する。
-- 成功時stateは`VALIDATING`。
-
-## `abc:validate` — pre-review検証
-
-```bash
-npm run abc:validate -- --candidate CANDIDATE_ID
-```
-
-少なくとも次をcandidate正本から検査する。
+- 一つ以上のELIGIBLE updateがCatalogの`release.updateIds`と完全一致することを確認する。
+- CIがcheckoutしたcommit/treeを唯一のsnapshotとして扱い、独自content/payload/approval digestを作らない。
+- Work Manifest、Catalog、PublicationUpdate、実content inventoryを保護済みbaseから再構築した差分へ照合する。
+- 少なくとも次をcommitの正本から検査する。
 
 - ABC 212からcutoffまでのContest連続性。
 - 各Contestの公式task orderとDより後の全Problem。
@@ -110,17 +99,17 @@ npm run abc:validate -- --candidate CANDIDATE_ID
 - contest matrix、list alternative、search、LearningRecord shared route contract。
 - build、link、accessibility、client bundle、performance、zero-cost inventoryの適用check。
 
-成功時、current `contentSubjectDigest`へ適用check集合とhuman review inventoryを固定して`AWAITING_REVIEW`へ進む。失敗時は`ON_HOLD`とresume stage、Problem別理由を保存する。
+成功したcheck URLはCIがrelease metadataの`validationResultsUrl`へ設定する。失敗時はmergeを拒否し、Problem別理由をPublicationUpdateへ残す。
 
 ## `abc:review` — HumanContentReviewEvidence取込
 
 ```bash
-npm run abc:review -- --candidate CANDIDATE_ID --evidence PATH
+npm run abc:review -- --update UPDATE_ID --evidence PATH
 ```
 
 evidenceは次を満たさなければならない。
 
-- `scopeType=release_candidate`、`scopeId=CANDIDATE_ID`、同じ`contentSubjectDigest`。
+- Work Manifestのscope、Catalogのcurrent subject、PublicationUpdateの対象範囲が一致する。
 - manifestのreview policyと同じ`reviewMode`（通常は`self`、高リスク時だけ`third_party`）を記録する。高リスク時の`third_party` reviewは同じscopeの`self` reviewに代わる。
 - `self`ではmanifest ownerがOutcome coverageを確認し、`third_party`ではauthor外のreviewerが確認する。
 - 全applicable checkの`executedByReviewerId`が証跡のreviewerと一致し、同じsubjectのresultと一致する。
@@ -128,61 +117,30 @@ evidenceは次を満たさなければならない。
 - current Constitution 2.0.0とdependent template inventoryを含むConstitution Checkが成功する。
 - blocking finding 0、`aggregatePassed=true`。
 
-他者/CI実行結果の追認、複数reviewerへのcheck分割、review policyにない第三者必須化、owner approval、LLM result、learner self-studyをHumanContentReviewEvidenceの代用として拒否する。成功時`AWAITING_OWNER_APPROVAL`へ進む。
+他者/CI実行結果の追認、複数reviewerへのcheck分割、review policyにない第三者必須化、独自owner approval、LLM result、learner self-studyをHumanContentReviewEvidenceの代用として拒否する。必要reviewとCI checkはprotected mainのmerge条件にする。
 
-## `abc:approve` — final payload固定と管理者承認
-
-```bash
-npm run abc:approve -- --candidate CANDIDATE_ID --owner OWNER_ID \
-  --publication-effective-at RFC3339 --expect-approvable-digest SHA256
-```
-
-- blocking 0、current human review、base/target namespace、fixture禁止を再確認する。
-- frozen contentとRelease metadataからpublic Catalog、release page、home、search index、sitemap/feed等のRelease依存fileを一回だけ生成する。
-- Release recordと全final fileを含む`candidatePayloadDigest`を計算する。
-- content subject、payload、check refs、human review refs、blocking stateから`approvableDigest`を計算する。
-- operatorへupdate IDs、file list、diff、check/review summary、両digestを表示する。
-- `--expect-approvable-digest`が一致する場合だけowner approvalを記録し、`AWAITING_FINAL_VALIDATION`へ進む。
-- owner approvalをhuman reviewとして数えない。
-
-## `verify:release -- --phase final`
+## `abc:deploy` — Git commitの静的デプロイ
 
 ```bash
-npm run verify:release -- --phase final --candidate CANDIDATE_ID
+npm run abc:deploy -- --metadata release-metadata.json
+npm run abc:deploy -- --rollback-to RELEASE_COMMIT
 ```
 
-- candidate fileを生成・変更しない。
-- content subject、candidate payload、Release、AdvancedSlotRegistry、checks、review、owner approvalを再計算する。
-- target path集合と実file集合、全route/link/search/build outputを照合する。
-- SC-009/010 LearnerOutcomeEvidence、SC-012 UserTimingEvidence、SC-015、SC-019、52週cost等のrelease evidenceをcurrent release digestへ照合する。
-- 元目的のCatalog completeness、体系的到達性、contest matrix/search、simple local learning managementを直接検査する。
-- 成功時だけ`READY_TO_PUBLISH`へ進む。
+通常デプロイのmetadataはprotected mainへのmerge後にCIが確定commitと検証runから生成し、`version`、`cutoffAt`、full Git `commit`、更新概要、HTTPSの`validationResultsUrl`だけを持つ。protected-main所属とrequired checksはCIのmerge/deploy workflowが保証し、deployment adapterへ重複実装しない。adapterはcommitがrepository内の既知commitへ完全一致することを確認し、同一adapter内の要求を直列化して静的hostへcommitを渡す。候補state、owner approval、publication window、独自digest、append-only receiptは作らない。
 
-## `abc:publish` — 原子的切替
-
-```bash
-npm run abc:publish -- --candidate CANDIDATE_ID [--simulate]
-```
-
-1. global publish lockを取得し、candidate/state/digest/base/windowを再確認する。
-2. 実行hostの同一filesystem上に一時tree、receipt temp、recovery journalを作る。
-3. failure injectionを含むpreflightを通す。
-4. 公開treeを一回切り替え、実時刻とbytesをreceipt rawへ記録する。
-5. rawとreceiptをno-overwriteでcommitしてからcandidate stateをPUBLISHEDへ更新する。
-
-receipt commit前の失敗は旧treeへrollbackし、orphan tempを除去する。receipt commit後のstate更新失敗は次回lock取得時にstateだけを収束させ、再swapしない。`--simulate`は公開treeを変更しない。公開済みcandidateの再実行はreceiptとtree一致を確認してno-opを返す。
+rollbackはcommitだけを受け取り、静的hostの公開履歴からそのcommitに記録済みのrelease metadataを取得して同じadapterで再deployする。呼び出し元がrollback用metadataを再指定することはできない。公開履歴・実行中lock・retry・deploy結果は静的hostのdeployment adapterの責務であり、Catalogやrelease metadataへtransaction stateを複製しない。ローカルfilesystem公開が将来必要になった場合だけ、同一directoryのtemp→renameを別adapterとして追加する。
 
 ## Read-only commands
 
 ```bash
-npm run abc:status -- --id UPDATE_OR_CANDIDATE_ID
+npm run abc:status -- --id UPDATE_ID
 npm run catalog:validate -- --input PATH --evidence-inventory PATH
 npm run catalog:build -- --input PATH --output PATH --evidence-inventory PATH
 npm run verify:merge -- --evidence PATH
 ```
 
-- `abc:status`はstate、Problem別result、hold/resume、content/payload digest、check/review、approval、windowを表示する。
+- `abc:status`はPublicationUpdateのstate、Problem別result、hold/resume、check/reviewを表示する。
 - `catalog:validate`はCatalog schemaと意味制約を検査し入力を変更しない。
 - `catalog:build`は確定Releaseまたはfixtureから派生indexを指定outputへ生成し、公開正本を変更しない。
-- 両CLIは任意のmanifest/candidateを引数で信頼しない。Catalogのrelease recordから`docs/work-manifests/`、`staging/release-candidates/`、`staging/updates/`の正規recordを一意に解決し、CIが提供する保護済みremote-tracking base ref（`GITHUB_BASE_REF`、ローカル既定は`origin/main`）からwork manifest、Catalog、content treeの基準を読み、`src/content/`の実ファイルinventoryを公開直前に再構築する。base refはCLI引数から選択できず、任意SHAの指定、`HEAD`自身、baseからの更新を含む未固定manifest、base/current Catalogで再現できないoperationやCorrection Impactは拒否する。
+- 両CLIは任意のmanifestを引数で信頼しない。Catalogのrelease recordから`docs/work-manifests/`と`staging/updates/`の正規recordを一意に解決し、CIが提供する保護済みremote-tracking base ref（`GITHUB_BASE_REF`、ローカル既定は`origin/main`）からwork manifest、Catalog、content treeの基準を読み、`src/content/`の実ファイルinventoryをmerge前に再構築する。base refはCLI引数から選択できず、任意SHAの指定、`HEAD`自身、baseからの更新を含む未固定manifest、base/current Catalogで再現できないoperationやCorrection Impactは拒否する。
 - `verify:merge`はWork Manifest、logical subject、review modeに応じた同一reviewerのcheck実行、必要時のみauthor外review、Constitution Check、finding 0を検証する。

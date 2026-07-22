@@ -26,7 +26,7 @@ ABC 212から公開基準日時点の最新終了済みABCまでについて、�
 
 **Performance Goals**: 255コンテストの初期規模、公開版の実対象範囲、1,500問題・500タグ・1,000学習単位の設計上限を、記録済みの同一基準環境で各5分以内に検証・生成する。設計上限での複合絞り込みは10回の事前実行後30回測定し、95パーセンタイル100ms以内とする。終了済み1コンテストの更新準備は、完成、要執筆、保留の各fixtureで15分以内に結果を確定する。
 
-**Constraints**: 必須経路の追加費用0円、継続利用者1人、アカウント・常時稼働backend・有料APIなし。開催中コンテストを取得しない。公式問題文・解説を正本へ転載せず、公式URL、確認情報、必要最小限の引用、独自説明を保持する。公開には全自動検査、必要な作成者外レビュー、固定候補への管理者承認を要求する。特定LLM、外部参加者cohort、全OS・全実browserの手動証跡は必須経路にしない。
+**Constraints**: 必須経路の追加費用0円、継続利用者1人、アカウント・常時稼働backend・有料APIなし。開催中コンテストを取得しない。公式問題文・解説を正本へ転載せず、公式URL、確認情報、必要最小限の引用、独自説明を保持する。公開には全自動検査、必要な作成者外レビュー、protected mainへのmergeを要求し、merge済みGit commitを静的hostへ渡す。特定LLM、外部参加者cohort、全OS・全実browserの手動証跡は必須経路にしない。
 
 **Scale/Scope**: 初期制作シードはABC 212〜466の255コンテスト。E〜Hは初期の基準列として認識するが、対象problem slotは文字列かつ公式順として扱い、Dより後の新しい記号を上限なく追加できる。1人分の学習記録を少なくとも1,500問題まで扱う。
 
@@ -47,7 +47,7 @@ ABC 212から公開基準日時点の最新終了済みABCまでについて、�
 ### Phase 1設計後の再評価
 
 - `data-model.md`は全教材単位と成果・前提・出典の参照、Advanced Problem Slotの動的順序、学習記録、更新・公開状態を定義する。
-- `contracts/`は固定4枠ではなくslot registryと公式順を契約化し、学習記録、更新、公開候補、レビュー、前提、placement、glossaryを機械検証できる。
+- `contracts/`は固定4枠ではなくslot registryと公式順を契約化し、学習記録、更新、最小release metadata、レビュー、前提、placement、glossaryを機械検証できる。
 - `quickstart.md`は新しい問題記号を含むfixture、`initial-v1` private vertical preview、仮taxonomy統合、Outcome/Problem shard join、全コーパスtaxonomy、解説、学習管理、更新、公開rollbackを別々に検証する。
 - 全設計成果物に未解消の憲章違反はない。Gate resultは**PASS**である。
 
@@ -66,7 +66,7 @@ specs/001-build-abc-textbook/
 │   ├── catalog.schema.json
 │   ├── learning-record.schema.json
 │   ├── update-manifest.schema.json
-│   ├── release-candidate.schema.json
+│   ├── release-metadata.schema.json
 │   ├── content-work-manifest.schema.json
 │   ├── merge-review.schema.json
 │   ├── human-content-review-evidence.schema.json
@@ -79,8 +79,6 @@ specs/001-build-abc-textbook/
 │   ├── performance-evidence.schema.json
 │   ├── answer-material-evidence.schema.json
 │   ├── instruction-quality-evidence.schema.json
-│   ├── filesystem-publish-evidence.schema.json
-│   ├── publish-receipt.schema.json
 │   ├── client-bundle-evidence.schema.json
 │   ├── cli.md
 │   └── ui-routes.md
@@ -136,16 +134,13 @@ scripts/
 ├── preview-verify.ts
 ├── catalog-build.ts
 ├── catalog-validate.ts
-├── prepare-release-candidate.ts
 ├── verify-release.ts
-├── approve-update.ts
-└── publish-update.ts
+└── deploy-release.ts
 
 staging/
 ├── previews/
 │   └── initial-v1/
-├── updates/
-└── release-candidates/
+└── updates/
 
 tests/
 ├── contract/
@@ -167,7 +162,7 @@ docs/
         └── initial-v1/
 ```
 
-**Structure Decision**: Astro/Starlight単一プロジェクトに教材表示、共有domain、更新CLIを置く。サイトとCLIは同じZod shape、安定ID、slot ordering、DAG、前提baseline、placement policy、glossaryを共有する。shape定義は`src/lib/domain/schema-parts/*.ts`、公開集約は`schemas.ts`/`index.ts`に限定し、JSON Schemaはそこから生成する。private preview、未公開候補、仮taxonomyは`staging/`または`docs/verification/previews/`に隔離し、`src/content/`へ直接書き込まない。承認済みcandidateだけを公開正本へ原子的に反映する。
+**Structure Decision**: Astro/Starlight単一プロジェクトに教材表示、共有domain、更新CLIを置く。サイトとCLIは同じZod shape、安定ID、slot ordering、DAG、前提baseline、placement policy、glossaryを共有する。shape定義は`src/lib/domain/schema-parts/*.ts`、公開集約は`schemas.ts`/`index.ts`に限定し、JSON Schemaはそこから生成する。private preview、未公開更新、仮taxonomyは`staging/`または`docs/verification/previews/`に隔離し、`src/content/`へ直接書き込まない。protected mainのrequired checksを通ったGit commitだけをdeployment adapterへ渡す。
 
 ## Phase 0: Outline & Research
 
@@ -176,8 +171,8 @@ docs/
 ## Phase 1: Design & Contracts
 
 - [data-model.md](./data-model.md): 教材正本、動的problem slot registry、Technique Inventory、タグ/学習単位DAG、個人学習記録、更新・公開状態を定義する。
-- `contracts/*.schema.json`: catalog、学習記録、更新、公開候補、work manifest、review、前提、placement、glossary、検証証跡を定義する。Zod shapeから生成し、手書きの二重正本を残さない。
-- [contracts/cli.md](./contracts/cli.md): 単一開始操作、検証、承認、公開、終了code、冪等性、失敗時の契約を定義する。
+- `contracts/*.schema.json`: catalog、学習記録、更新、最小release metadata、work manifest、review、前提、placement、glossary、検証証跡を定義する。Zod shapeから生成し、手書きの二重正本を残さない。
+- [contracts/cli.md](./contracts/cli.md): 単一開始操作、merge前検証、Git commitデプロイ、終了code、冪等性、失敗時の契約を定義する。
 - [contracts/ui-routes.md](./contracts/ui-routes.md): 静的route、動的slot表、検索、学習状態、バックアップ、accessibilityを定義する。
 - [quickstart.md](./quickstart.md): offline fixtureだけで主要シナリオを再現し、任意の公式network確認を分離する。
 
@@ -206,7 +201,7 @@ previewは次の縦切りを同一cohortで通す。
 
 `official metadata → Technique Inventory → provisional Tag/Outcome/DAG/Placement → ProblemAuthoringUnit/LearningUnit inline content → static UI/search → local LearningRecord → update preparation/release simulation`
 
-各段階はpreview digestを引き継ぎ、失敗時は次段へ進めず具体的なhold reasonを残す。T064で版付きのauthoring skill、入力packet、source normalization、template、version、digestをfreezeし、T051–T054/T119はそのskill manifestを必須入力として同じ`authoringSkillVersion`/`authoringSkillDigest`をcomponent evidenceへ記録する。最小限のUI・学習記録・更新処理は本番用の共通実装をfixtureへ接続して検証し、preview専用の別実装を作らない。T094/T111/T126が固定する`docs/verification/previews/initial-v1/components/learning-records.json`、`ui-search.json`、`update-simulation.json`と、T045/T051–T054のmetadata/taxonomy/content component manifest、T064の`docs/verification/authoring-skill/initial-v1/skill-manifest.json`をT154の明示的な入力にする。T154の`preview:verify`は固定manifestとこれらのartifact digestだけを読み、同一cohort・同一current subject・同一authoring skill subjectで再計算する。全Problemが一つのpreview catalogから問題、解説、Learning Unit、Tag、learning record、update statusへ到達でき、source/claim/example/answer/link/accessibility/rollbackの全適用checkとpolicyに応じたreview evidenceがcurrent digestへ結び付いたときだけ、`staging/previews/<preview-id>/snapshots/<joinDigest>.json`へ不変の`PreviewSnapshot.status=passed`を作成する。canonical snapshotは同一directory内の一時ファイルからrenameして一度だけcommitし、`docs/verification/previews/<preview-id>/preview-join/<joinDigest>.json`には`PreviewSnapshotReference`だけを別途作成する。この二つのdirectoryへの書き込み全体を一つのatomic operationとはみなさず、`staging/previews/<preview-id>/transactions/<joinDigest>.json`のphaseとrecovery手順で、途中停止時はcanonical snapshotを正本に参照だけを再生成する。欠落、stale digest、skill mismatch、失敗check、review不在は新しい`on_hold` snapshotとして保存し、既存snapshotを上書きせず、T159のfinal taxonomy、T065のshard index、T127以降のproduction candidate/approval/publishをpreviewの前提にしてはならない。
+各段階はpreview digestを引き継ぎ、失敗時は次段へ進めず具体的なhold reasonを残す。T064で版付きのauthoring skill、入力packet、source normalization、template、version、digestをfreezeし、T051–T054/T119はそのskill manifestを必須入力として同じ`authoringSkillVersion`/`authoringSkillDigest`をcomponent evidenceへ記録する。最小限のUI・学習記録・更新処理は本番用の共通実装をfixtureへ接続して検証し、preview専用の別実装を作らない。T094/T111/T126が固定する`docs/verification/previews/initial-v1/components/learning-records.json`、`ui-search.json`、`update-simulation.json`と、T045/T051–T054のmetadata/taxonomy/content component manifest、T064の`docs/verification/authoring-skill/initial-v1/skill-manifest.json`をT154の明示的な入力にする。T154の`preview:verify`は固定manifestとこれらのartifact digestだけを読み、同一cohort・同一current subject・同一authoring skill subjectで再計算する。全Problemが一つのpreview catalogから問題、解説、Learning Unit、Tag、learning record、update statusへ到達でき、source/claim/example/answer/link/accessibility/rollbackの全適用checkとpolicyに応じたreview evidenceがcurrent digestへ結び付いたときだけ、`staging/previews/<preview-id>/snapshots/<joinDigest>.json`へ不変の`PreviewSnapshot.status=passed`を作成する。canonical snapshotは同一directory内の一時ファイルからrenameして一度だけcommitし、`docs/verification/previews/<preview-id>/preview-join/<joinDigest>.json`には`PreviewSnapshotReference`だけを別途作成する。この二つのdirectoryへの書き込み全体を一つのatomic operationとはみなさず、`staging/previews/<preview-id>/transactions/<joinDigest>.json`のphaseとrecovery手順で、途中停止時はcanonical snapshotを正本に参照だけを再生成する。欠落、stale digest、skill mismatch、失敗check、review不在は新しい`on_hold` snapshotとして保存し、既存snapshotを上書きせず、T159のfinal taxonomy、T065のshard index、T127以降のproduction release validation/deployをpreviewの前提にしてはならない。
 
 ### Corpus-First Final Taxonomy and Authoring
 
@@ -241,13 +236,13 @@ previewの仮taxonomyから最終taxonomyへの統合は、T159の`FinalTaxonomy
 
 ABC 212〜466はbootstrap seedであり公開上限ではない。初版candidate直前にoffset付き`cutoffAt`を固定し、終了済み最新ABCまでの未収録Contestを昇順に通常updateへ通す。各ContestではDより後の全公式problemを列挙し、未完成解説、未解消分類、仮taxonomy、検証失敗、保留updateが一件でもあれば初版candidateを作らない。private previewはこのgateの対象範囲外であり、previewの成功を全件収録の代替にしない。
 
-bootstrapと全catch-up updateを一つのcandidateへ束ね、content digestを固定する。自動検査とpolicyに応じたself-reviewまたは高リスク時のthird-party reviewの後、管理者が同じdigestを承認し、read-only final検証に成功したtreeだけを一回原子的に切り替える。cutoff後に終了したContestは次回対象とする。
+bootstrapと全catch-up updateをCatalogのrelease change summaryへ束ねる。自動検査とpolicyに応じたself-reviewまたは高リスク時のthird-party reviewをprotected mainのmerge条件にし、成功したfull Git commitだけを静的hostへdeployする。cutoff後に終了したContestは次回対象とし、rollbackは既知release commitを再deployする。
 
 ## Verification Strategy
 
 | 成果 | 自動検証 | 人間確認 |
 |---|---|---|
-| Preview vertical slice | T045/T051–T054/T094/T111/T126が固定したpreview component manifestとT154の`preview:verify`による固定cohortの分野/Contest/label条件、metadata→inventory→仮taxonomy→content→UI/search→LearningRecord→updateのdigest join、全Problem到達性、rollback、staging/public分離、current-subject review evidence、canonical snapshotと派生referenceのrecovery | previewを公開Releaseと誤認しないこと、full taxonomy・production candidate・approval・publishをjoinへ混入させないこと、二重保存をPreviewSnapshotと誤認しないこと、欠落/stale/hold理由 |
+| Preview vertical slice | T045/T051–T054/T094/T111/T126が固定したpreview component manifestとT154の`preview:verify`による固定cohortの分野/Contest/label条件、metadata→inventory→仮taxonomy→content→UI/search→LearningRecord→updateのdigest join、全Problem到達性、rollback、staging/public分離、current-subject review evidence、canonical snapshotと派生referenceのrecovery | previewを公開Releaseと誤認しないこと、full taxonomy・production release・deployをjoinへ混入させないこと、二重保存をPreviewSnapshotと誤認しないこと、欠落/stale/hold理由 |
 | 対象範囲 | Contest連続性、公式task order、Dより後の全slot/problem、動的registry、将来label fixture | 公式一覧の順序矛盾・取得不能時だけ確認 |
 | 解説 | 必須構成、出典、前提、成果、計算量、例、skill版、内部参照、self/third-party mode | 通常は管理者self-review。公式根拠との矛盾・独自証明・重大な分類変更だけself-reviewに代えてauthor外third-party reviewerが確認 |
 | 典型体系 | inventory全件対応、Tag/Unit DAG、同義語、代表問題、到達可能性、安定順 | 通常は管理者self-review。重大なtaxonomy/classification変更だけself-reviewに代えてthird-party reviewerが確認 |
@@ -257,11 +252,11 @@ bootstrapと全catch-up updateを一つのcandidateへ束ね、content digestを
 | 学習記録 | schema移行、独立日時、再読込、filter、100件backup/restore、rollback | SC-012の代表操作とSC-009/010の事前固定自己評価 |
 | 逆引き・検索 | previewではT099–T111、full-corpusではT160がcanonical catalog、動的slot表、代替一覧、全destination link、検索種別、0件結果、未公開除外を生成し、T138/T140/T146が固定digestを検証 | 表・検索・学習順が迷わず使えるか確認 |
 | 週次更新 | 終了判定、差分、3種結果、冪等性、訂正影響、hold/resume、15分 | 保留理由、分類候補、公開差分を管理者が確認 |
-| 公開 | fixed candidate、全check、selfまたはrequired third-party review evidence、owner digest、lock、rollback、receipt | 管理者が同じdigestを承認し変更履歴とreview modeを確認 |
+| 公開 | protected mainのfull Git commit、全check、selfまたはrequired third-party review evidence、最小metadata、既知commitの再deploy rollback | 管理者がmerge前に変更履歴・検証URL・review modeを確認 |
 | 品質 | build、link、axe、keyboard、reflow、用語、AnswerMaterial、性能、client bundle | 自動化不能項目だけを限定確認 |
 | 無料運用 | 必須外部依存inventoryと52週fixture | 有料経路が必須化していないことを管理者が確認 |
 
-`verify:release`は証跡数だけで成功させず、公開candidateの正本から、FR-001/SC-001に対応するABC 212〜cutoffの連続性とDより後の全Problemの100%収録、全Problemの学習到達性、dynamic contest matrix、検索、簡易学習管理を直接再計算する。preview artifact、仮taxonomy、未結合shard、未解決holdはcandidateのcontent treeへ入れない。いずれかが欠ければ他の検査が成功しても公開を拒否する。
+`verify:release`は証跡数だけで成功させず、merge対象のGit treeから、FR-001/SC-001に対応するABC 212〜cutoffの連続性とDより後の全Problemの100%収録、全Problemの学習到達性、dynamic contest matrix、検索、簡易学習管理を直接再計算する。preview artifact、仮taxonomy、未結合shard、未解決holdはrelease commitのcontent treeへ入れない。いずれかが欠ければrequired checkを失敗させる。
 
 ## Complexity Tracking
 
@@ -274,6 +269,6 @@ bootstrapと全catch-up updateを一つのcandidateへ束ね、content digestを
 | private vertical preview | 全コーパス完了前にschema・依存・UI・学習記録・更新の設計欠陥を検出する | staging namespace、preview digest、final gate除外、仮taxonomy統合表を固定する |
 | Outcome/Problem shards | 巨大なdomain taskを独立review可能な作業単位へ分解する | final placement後に決定的生成し、最大8 Problem、path非重複、join gateを強制する |
 | baseline・placement・glossaryの3正本 | 前提、掲載形態、用語の責務を混同しない | 各正本を一つにし、loaderとdigestで複製を拒否する |
-| candidate stagingと原子的切替 | 部分公開と承認後変更を防ぐ | fixed digest、read-only final検証、lock、rollbackを使う |
+| Git releaseとdeployment adapter | 検証済みsnapshotだけを公開しrollback可能にする | protected main、full commit hash、静的hostのdeploy履歴、既知commitの再deployを使う |
 
 追加LLM panel、独立constitution auditor、外部learner cohort、実browser 8組合せ、3 OS必須証跡は採用しない。これらは統治中の憲章が要求せず、1人用の教材・簡易学習管理という目的に対して保守負担が大きいためである。

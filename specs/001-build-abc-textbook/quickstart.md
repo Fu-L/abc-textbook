@@ -46,13 +46,13 @@ npm run preview:verify -- --fixture tests/fixtures/previews/initial-v1
 
 fixtureには、graph/search、dynamic-programming、data-structures/algorithm-design、mathematics/combinatoricsの4分野、8 Problem以上、3 Contest以上、2種類以上のadvanced labelを含める。実データとfuture-label fixtureを併用する場合は、`preview-manifest.json`で両者を区別する。
 
-`preview:verify`はcohortを選び直す処理ではなく、T032で取得したcandidate poolを根拠にT037でfreezeした`preview-manifest.json`と、T045/T051–T054/T094/T111/T126が固定した次のcomponent manifest/digestだけを結合するT154のjoin taskである。入力は`metadata-inventory-taxonomy.json`、`content/{graph-search,dynamic-programming,data-structures,mathematics}.json`、`learning-records.json`、`ui-search.json`、`update-simulation.json`として`docs/verification/previews/initial-v1/components/`に固定する。metadata、Technique Inventory、仮taxonomy/placement、content、UI/search、local LearningRecord、update/release simulationの全component digestが同じcohort・同じcurrent subjectに対応することを再計算して確認した後、`staging/previews/initial-v1/snapshots/<joinDigest>.json`へ同一directory内の一時ファイルをrenameして新しいcanonical snapshotを一度だけcommitする。commit phaseは`staging/previews/initial-v1/transactions/<joinDigest>.json`へ記録し、canonical snapshotの存在とdigestを検証してから、`docs/verification/previews/initial-v1/preview-join/<joinDigest>.json`へ`PreviewSnapshotReference`を別の一時ファイルからrenameする。これは二つのdirectoryをまたぐ一つのatomic operationではない。途中停止時はtransaction phaseを読み、canonical snapshotがあればreferenceだけを再生成し、canonical snapshotがなければreferenceを作らずholdする。full taxonomy、production candidate、owner approval、publish、initial-release reviewはT154の入力にせず、既存のsnapshotは再実行で上書きしない。
+`preview:verify`はcohortを選び直す処理ではなく、T032で取得したcandidate poolを根拠にT037でfreezeした`preview-manifest.json`と、T045/T051–T054/T094/T111/T126が固定した次のcomponent manifest/digestだけを結合するT154のjoin taskである。入力は`metadata-inventory-taxonomy.json`、`content/{graph-search,dynamic-programming,data-structures,mathematics}.json`、`learning-records.json`、`ui-search.json`、`update-simulation.json`として`docs/verification/previews/initial-v1/components/`に固定する。metadata、Technique Inventory、仮taxonomy/placement、content、UI/search、local LearningRecord、update/release simulationの全component digestが同じcohort・同じcurrent subjectに対応することを再計算して確認した後、`staging/previews/initial-v1/snapshots/<joinDigest>.json`へ同一directory内の一時ファイルをrenameして新しいcanonical snapshotを一度だけcommitする。commit phaseは`staging/previews/initial-v1/transactions/<joinDigest>.json`へ記録し、canonical snapshotの存在とdigestを検証してから、`docs/verification/previews/initial-v1/preview-join/<joinDigest>.json`へ`PreviewSnapshotReference`を別の一時ファイルからrenameする。これは二つのdirectoryをまたぐ一つのatomic operationではない。途中停止時はtransaction phaseを読み、canonical snapshotがあればreferenceだけを再生成し、canonical snapshotがなければreferenceを作らずholdする。full taxonomy、production release validation/deploy、initial-release reviewはT154の入力にせず、既存のsnapshotは再実行で上書きしない。
 
 期待結果:
 
 - 同じpreview digestで、公式metadata、Technique Inventory、仮taxonomy/placement、ProblemAuthoringUnit/LearningUnit inline content、static UI/search、local LearningRecord、update/release simulationを一周し、そのcomponent digestをjoinする。
 - preview content/update componentはT064の`authoringSkillVersion`と`authoringSkillDigest`を同じcurrent subjectとして持ち、skill manifestの欠落・不一致や入力不足は完成扱いされない。
-- 仮taxonomy、preview-only content、端末状態は`src/content/`、公開catalog、Pagefind、ReleaseCandidateへ混入しない。
+- 仮taxonomy、preview-only content、端末状態は`src/content/`、公開catalog、Pagefind、release commitへ混入しない。
 - source、claim、example、answer、link、accessibility、schema、rollback、idempotencyの適用checkとcurrent-subject review evidenceが一つでも欠ける、失敗する、またはstale digestを参照する場合は、canonical `PreviewSnapshot.status=on_hold`と具体的な`holdReason`を保存し、T047–T050のfinal taxonomy、T055–T056/T155–T158のfull LearningUnit、T065のshard index freeze、T066–T071のbulk explanation shardへ進まない。
 - 全component digest、check結果、review evidenceを結合した`joinDigest`と`PreviewSnapshot.status=passed`をcanonical `staging/previews/initial-v1/snapshots/<joinDigest>.json`へ不変保存し、`docs/verification/previews/initial-v1/preview-join/<joinDigest>.json`にはそのpath・digest・transaction IDを持つ派生`PreviewSnapshotReference`だけを保存する。referenceの欠落はcanonical snapshotを無効にせず、recoveryで再生成する。`passed`でもFR-001/SC-001の全件coverageを満たした扱いにせず、preview snapshotを公開Releaseから隔離する。
 
@@ -183,30 +183,27 @@ npm run verify:merge -- --fixture tests/fixtures/reviews/logical-change
 - self/third-party modeの取り違え、missing check、他者実行結果の追認、第三者reviewでのauthor/reviewer一致、stale digest、未解消findingを拒否する。
 - LLM、owner approval、外部cohortをHumanContentReviewEvidenceの代用として受理しない。
 
-## Scenario L — Release candidateとrollback
+## Scenario L — Git releaseとrollback
 
 ```bash
-npm run abc:prepare-release -- --fixture tests/fixtures/releases/initial
-npm run abc:validate -- --candidate fixture-initial
-npm run abc:approve -- --candidate fixture-initial --owner fixture-owner \
-  --publication-effective-at 2026-07-14T12:00:00+09:00 \
-  --expect-approvable-digest fixture-digest
-npm run abc:publish -- --candidate fixture-initial --simulate
+npm run verify:release -- --commit HEAD
+npm run abc:deploy -- --metadata tests/fixtures/releases/initial/release-metadata.json
+npm run abc:deploy -- --rollback-to KNOWN_RELEASE_COMMIT
 ```
 
 期待結果:
 
-- ABC 212からcutoffまでの連続性、Dより後の全Problem 100% coverage、AdvancedSlotRegistry、final Technique Inventory、到達可能性をpreviewとは独立したcandidate正本から再計算する。
-- preview artifact、仮taxonomy、未結合shard、未解決holdがcandidateへ混入していないことを確認する。
-- 自動checkとcurrent HumanContentReviewEvidence（selfまたはrisk policyに応じたthird-party）が揃うまでapproveできない。
-- owner承認後にcandidate bytesが変わるとfinal validationが失敗する。
-- 切替前失敗は旧treeへrollbackし、成功時だけPublishReceiptを残す。
-- fixtureをproduction publishしようとすると副作用なしで拒否する。
+- ABC 212からcutoffまでの連続性、Dより後の全Problem 100% coverage、AdvancedSlotRegistry、final Technique Inventory、到達可能性をpreviewとは独立したmerge対象treeから再計算する。
+- preview artifact、仮taxonomy、未結合shard、未解決holdがrelease commitへ混入していないことを確認する。
+- 自動checkとcurrent HumanContentReviewEvidence（selfまたはrisk policyに応じたthird-party）が揃うまでprotected mainへmergeできない。
+- Release Metadataがversion、cutoff、full commit、更新概要、検証結果URL以外のtransaction stateを持たない。
+- rollbackは既知release commitの再deployで成功し、未知commitは副作用なしで拒否する。
+- fixtureをproduction deployしようとすると副作用なしで拒否する。
 
 ## Scenario M — 目的保存と公開品質
 
 ```bash
-npm run verify:release -- --phase final --candidate fixture-initial
+npm run verify:release -- --commit HEAD
 ```
 
 期待結果:

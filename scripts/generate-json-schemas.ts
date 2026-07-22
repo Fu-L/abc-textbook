@@ -13,8 +13,7 @@ import {
 } from '../src/lib/domain/schema-parts/catalog.js';
 import { LearningRecordContract } from '../src/lib/domain/schema-parts/learning.js';
 import {
-  PublishReceiptContract,
-  ReleaseCandidateContract,
+  ReleaseMetadataContract,
   UpdateManifestContract,
 } from '../src/lib/domain/schema-parts/release.js';
 import {
@@ -27,7 +26,6 @@ import {
 import {
   ClientBundleEvidenceContract,
   ExecutableExampleEvidenceContract,
-  FilesystemPublishEvidenceContract,
   InstructionQualityEvidenceContract,
   LearningRecordE2eEvidenceContract,
   PerformanceEvidenceContract,
@@ -44,7 +42,6 @@ export const contractSchemaEntries: readonly ContractSchemaDefinition[] = [
   ClientBundleEvidenceContract,
   ExecutableExampleEvidenceContract,
   ContentWorkManifestContract,
-  FilesystemPublishEvidenceContract,
   GlossaryContract,
   HumanContentReviewEvidenceContract,
   InstructionQualityEvidenceContract,
@@ -55,8 +52,7 @@ export const contractSchemaEntries: readonly ContractSchemaDefinition[] = [
   PerformanceEvidenceContract,
   PrerequisiteBaselineContract,
   ProblemPlacementDecisionTableContract,
-  PublishReceiptContract,
-  ReleaseCandidateContract,
+  ReleaseMetadataContract,
   UpdateManifestContract,
   UserTimingEvidenceContract,
 ].sort((left, right) => left.fileName.localeCompare(right.fileName));
@@ -80,17 +76,25 @@ const run = async (): Promise<void> => {
   for (const [fileName, jsonSchema] of Object.entries(generateContractJsonSchemas())) {
     const contractPath = path.join(contractsDirectory, fileName);
     const next = `${JSON.stringify(jsonSchema, null, 2)}\n`;
+    let current: string | undefined;
+    try {
+      current = await readFile(contractPath, 'utf8');
+    } catch (error) {
+      if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error;
+    }
     if (checkOnly) {
-      const current = await readFile(contractPath, 'utf8');
-      if (canonicalJson(JSON.parse(current) as unknown) !== canonicalJson(jsonSchema)) {
+      if (
+        current === undefined ||
+        canonicalJson(JSON.parse(current) as unknown) !== canonicalJson(jsonSchema)
+      ) {
         drift = true;
         process.stderr.write(`SCHEMA_DRIFT: ${fileName}\n`);
       }
-    } else {
-      const current = await readFile(contractPath, 'utf8');
-      if (canonicalJson(JSON.parse(current) as unknown) !== canonicalJson(jsonSchema)) {
-        await writeFile(contractPath, next, 'utf8');
-      }
+    } else if (
+      current === undefined ||
+      canonicalJson(JSON.parse(current) as unknown) !== canonicalJson(jsonSchema)
+    ) {
+      await writeFile(contractPath, next, 'utf8');
     }
   }
   if (drift) process.exitCode = 2;

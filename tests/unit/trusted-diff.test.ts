@@ -5,7 +5,7 @@ import {
   parseTrustedCatalog,
 } from '../../src/lib/catalog/trusted-diff.js';
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
-import { validatePublicationUpdate } from '../../src/lib/validation/release-state.js';
+import { validatePublicationUpdate } from '../../src/lib/validation/publication-update.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
 
 const sha = (character: string): string => character.repeat(64);

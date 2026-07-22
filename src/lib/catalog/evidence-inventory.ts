@@ -22,15 +22,11 @@ import {
 } from '../domain/schema-parts/verification-evidence.js';
 import { HumanContentReviewEvidenceSchema as ReviewEvidenceSchema } from '../domain/schema-parts/review-evidence.js';
 import { ContentWorkManifestSchema } from '../domain/schema-parts/review-evidence.js';
-import { PublicationUpdateSchema, ReleaseCandidateSchema } from '../domain/schema-parts/release.js';
+import { PublicationUpdateSchema } from '../domain/schema-parts/release.js';
 import {
-  calculateApprovableDigest,
-  calculateCandidatePayloadDigest,
-  calculateContentSubjectDigest,
-  ReleaseTransitionError,
+  PublicationUpdateError,
   validatePublicationUpdate,
-  validateReleaseCandidate,
-} from '../validation/release-state.js';
+} from '../validation/publication-update.js';
 import {
   type ContentWorkManifestScope,
   validateContentWorkManifest,
@@ -123,7 +119,6 @@ const CatalogExecutableExampleEvidenceReferenceSchema = strictObject({
 export interface CatalogEvidenceCanonicalSources {
   readonly catalog: unknown;
   readonly workManifest: unknown;
-  readonly releaseCandidate: unknown;
 }
 
 const execFileAsync = promisify(execFile);
@@ -502,47 +497,13 @@ export const loadCatalogEvidenceCanonicalSources = async (
     throw error;
   }
 
-  const candidateMatches: z.infer<typeof ReleaseCandidateSchema>[] = [];
-  for (const filePath of await listFiles(path.join(repositoryRoot, 'staging/release-candidates'))) {
-    if (!filePath.endsWith('.json')) continue;
-    const parsed = ReleaseCandidateSchema.safeParse(
-      await readJsonFile(filePath, 'RELEASE_CANDIDATE_JSON_INVALID'),
-    );
-    if (
-      parsed.success &&
-      parsed.data.targetReleaseVersion === release.version &&
-      parsed.data.releaseKind === release.releaseKind &&
-      parsed.data.cutoffAt === release.cutoffAt &&
-      parsed.data.advancedSlotRegistryDigest === release.advancedSlotRegistryDigest &&
-      parsed.data.workManifestDigest === release.manifestDigest &&
-      parsed.data.catalogContentSnapshotDigest === release.contentSnapshotDigest &&
-      parsed.data.contentSubjectDigest === release.contentFileInventoryDigest &&
-      sameOrderedStrings(parsed.data.orderedUpdateIds, release.updateIds)
-    ) {
-      candidateMatches.push(parsed.data);
-    }
-  }
-  if (candidateMatches.length !== 1) {
-    throw new CatalogEvidenceInventoryError(
-      'CANONICAL_RELEASE_CANDIDATE_NOT_UNIQUE',
-      'Release scope must resolve exactly one candidate under staging/release-candidates.',
-    );
-  }
-  const candidate = candidateMatches[0];
-  if (!candidate) {
-    throw new CatalogEvidenceInventoryError(
-      'CANONICAL_RELEASE_CANDIDATE_NOT_UNIQUE',
-      'No candidate.',
-    );
-  }
-
   const updates = new Map<string, z.infer<typeof PublicationUpdateSchema>>();
   for (const filePath of await listFiles(path.join(repositoryRoot, 'staging/updates'))) {
     if (!filePath.endsWith('.json')) continue;
     const parsed = PublicationUpdateSchema.safeParse(
       await readJsonFile(filePath, 'PUBLICATION_UPDATE_JSON_INVALID'),
     );
-    if (parsed.success && candidate.orderedUpdateIds.includes(parsed.data.updateId)) {
+    if (parsed.success && release.updateIds.includes(parsed.data.updateId)) {
       if (updates.has(parsed.data.updateId)) {
         throw new CatalogEvidenceInventoryError(
           'CANONICAL_PUBLICATION_UPDATE_DUPLICATE',
@@ -553,37 +514,42 @@ export const loadCatalogEvidenceCanonicalSources = async (
     }
   }
   if (
-    updates.size !== candidate.orderedUpdateIds.length ||
-    candidate.orderedUpdateIds.some((id) => updates.get(id)?.state !== 'ELIGIBLE_FOR_BATCH')
+    updates.size !== release.updateIds.length ||
+    release.updateIds.some((id) => updates.get(id)?.state !== 'ELIGIBLE_FOR_BATCH')
   ) {
     throw new CatalogEvidenceInventoryError(
       'CANONICAL_PUBLICATION_UPDATE_MISSING',
       'Every ordered update must exist once under staging/updates and be eligible.',
     );
   }
+  const orderedUpdates = release.updateIds.map((updateId) => {
+    const update = updates.get(updateId);
+    if (!update) {
+      throw new CatalogEvidenceInventoryError('CANONICAL_PUBLICATION_UPDATE_MISSING', updateId);
+    }
+    return update;
+  });
+  const expectedBaseReleaseVersion =
+    release.releaseKind === 'initial' ? null : (baseCatalog?.release.version ?? null);
+  if (orderedUpdates.some((update) => update.baseReleaseVersion !== expectedBaseReleaseVersion)) {
+    throw new CatalogEvidenceInventoryError(
+      'PUBLICATION_UPDATE_BASE_RELEASE_MISMATCH',
+      'Every release update must name the protected-base Catalog version.',
+    );
+  }
   const actualContentFiles = await calculateActualContentFileInventory(repositoryRoot);
   const baseContentFiles = await calculateBaseContentFileInventory(repositoryRoot, baseCommit);
-  try {
-    validateReleaseCandidate(candidate, {
-      updates: candidate.orderedUpdateIds.map((id) => ({
-        updateId: id,
-        state: 'ELIGIBLE_FOR_BATCH',
-        baseReleaseVersion: updates.get(id)?.baseReleaseVersion ?? null,
-        targetReleaseVersion: candidate.targetReleaseVersion,
-      })),
-      contentFiles: actualContentFiles,
-    });
-  } catch (error) {
-    if (error instanceof ReleaseTransitionError) {
-      throw new CatalogEvidenceInventoryError(error.code, error.message);
-    }
-    throw error;
+  if (canonicalDigest(actualContentFiles) !== release.contentFileInventoryDigest) {
+    throw new CatalogEvidenceInventoryError(
+      'RELEASE_CONTENT_INVENTORY_MISMATCH',
+      'release.contentFileInventoryDigest must be rebuilt from the current content files.',
+    );
   }
   const operationPaths = new Set<string>();
   const operationIds = new Set<string>();
   let trustedDiff: ReturnType<typeof buildTrustedPublicationDiff>;
   try {
-    trustedDiff = buildTrustedPublicationDiff([...updates.values()], baseCatalog, currentCatalog, {
+    trustedDiff = buildTrustedPublicationDiff(orderedUpdates, baseCatalog, currentCatalog, {
       baseFiles: baseContentFiles,
       currentFiles: actualContentFiles,
     });
@@ -594,7 +560,7 @@ export const loadCatalogEvidenceCanonicalSources = async (
     throw error;
   }
   const trustedUpdates = new Map(trustedDiff.updates.map((update) => [update.updateId, update]));
-  for (const update of updates.values()) {
+  for (const update of orderedUpdates) {
     const trustedUpdate = trustedUpdates.get(update.updateId);
     if (!trustedUpdate) {
       throw new CatalogEvidenceInventoryError(
@@ -610,7 +576,7 @@ export const loadCatalogEvidenceCanonicalSources = async (
         currentFiles: actualContentFiles,
       });
     } catch (error) {
-      if (error instanceof ReleaseTransitionError) {
+      if (error instanceof PublicationUpdateError) {
         throw new CatalogEvidenceInventoryError(error.code, error.message);
       }
       throw error;
@@ -639,7 +605,7 @@ export const loadCatalogEvidenceCanonicalSources = async (
       'Publication updates must exactly cover the protected-base to current content diff.',
     );
   }
-  return { catalog, workManifest: manifestMatch.value, releaseCandidate: candidate };
+  return { catalog, workManifest: manifestMatch.value };
 };
 
 const reviewKinds = [
@@ -667,27 +633,7 @@ export const deriveCatalogEvidenceTrustContext = (
     }
     throw error;
   }
-  const candidateResult = ReleaseCandidateSchema.safeParse(sources.releaseCandidate);
-  if (!candidateResult.success) {
-    throw new CatalogEvidenceInventoryError(
-      'RELEASE_CANDIDATE_INVALID',
-      candidateResult.error.message,
-    );
-  }
-  const catalogResult = z
-    .object({
-      release: z.object({
-        version: z.string(),
-        releaseKind: z.string(),
-        cutoffAt: z.string(),
-        manifestDigest: Sha256Schema,
-        contentFileInventoryDigest: Sha256Schema,
-        contentSnapshotDigest: Sha256Schema,
-        updateIds: z.array(EntityIdSchema),
-        advancedSlotRegistryDigest: Sha256Schema,
-      }),
-    })
-    .safeParse(sources.catalog);
+  const catalogResult = CatalogSchema.safeParse(sources.catalog);
   if (!catalogResult.success) {
     throw new CatalogEvidenceInventoryError(
       'CATALOG_RELEASE_CONTEXT_INVALID',
@@ -695,66 +641,31 @@ export const deriveCatalogEvidenceTrustContext = (
     );
   }
   const manifest = manifestResult.data;
-  const candidate = candidateResult.data;
   const release = catalogResult.data.release;
-  if (
-    manifest.digest !== release.manifestDigest ||
-    candidate.targetReleaseVersion !== release.version ||
-    candidate.releaseKind !== release.releaseKind ||
-    candidate.cutoffAt !== release.cutoffAt ||
-    candidate.advancedSlotRegistryDigest !== release.advancedSlotRegistryDigest ||
-    candidate.workManifestDigest !== release.manifestDigest ||
-    candidate.catalogContentSnapshotDigest !== release.contentSnapshotDigest ||
-    candidate.contentSubjectDigest !== release.contentFileInventoryDigest ||
-    !sameOrderedStrings(candidate.orderedUpdateIds, release.updateIds)
-  ) {
+  if (manifest.digest !== release.manifestDigest) {
     throw new CatalogEvidenceInventoryError(
       'CANONICAL_RELEASE_CONTEXT_MISMATCH',
-      'Catalog, Work Manifest, and Release Candidate do not describe one immutable release.',
-    );
-  }
-  if (
-    candidate.fixtureMode ||
-    !['READY_TO_PUBLISH', 'PUBLISHED'].includes(candidate.state) ||
-    candidate.contentSubjectDigest !== calculateContentSubjectDigest(candidate.contentFiles) ||
-    candidate.candidatePayloadDigest === null ||
-    candidate.candidatePayloadDigest !==
-      calculateCandidatePayloadDigest(candidate.candidateFiles) ||
-    candidate.approvableDigest === null ||
-    candidate.approvableDigest !==
-      calculateApprovableDigest({
-        workManifestDigest: candidate.workManifestDigest,
-        catalogContentSnapshotDigest: candidate.catalogContentSnapshotDigest,
-        contentSubjectDigest: candidate.contentSubjectDigest,
-        candidatePayloadDigest: candidate.candidatePayloadDigest,
-        preJudgmentCheckRefs: candidate.preJudgmentCheckRefs,
-        humanContentReviewEvidenceRefs: candidate.humanContentReviewEvidenceRefs,
-        blockingFindings: candidate.blockingFindings,
-      })
-  ) {
-    throw new CatalogEvidenceInventoryError(
-      'RELEASE_CANDIDATE_DIGEST_MISMATCH',
-      'Release Candidate is not a final, internally consistent canonical record.',
+      'Catalog and Work Manifest do not describe one release.',
     );
   }
 
   const requiredCheckIds = [
     ...new Set(manifest.reviewUnits.flatMap((unit) => unit.checkIds)),
   ].sort();
-  const candidateChecks = new Map(
-    candidate.preJudgmentCheckRefs.map((check) => [check.checkId, check] as const),
+  const releaseChecks = new Map(
+    release.validationSummary.checks.map((check) => [check.checkId, check] as const),
   );
   if (
-    candidateChecks.size !== candidate.preJudgmentCheckRefs.length ||
-    !sameOrderedStrings(requiredCheckIds, [...candidateChecks.keys()].sort())
+    releaseChecks.size !== release.validationSummary.checks.length ||
+    !sameOrderedStrings(requiredCheckIds, [...releaseChecks.keys()].sort())
   ) {
     throw new CatalogEvidenceInventoryError(
       'MANIFEST_CHECK_INVENTORY_MISMATCH',
-      'Release Candidate checks must exactly cover Work Manifest check IDs.',
+      'Catalog release checks must exactly cover Work Manifest check IDs.',
     );
   }
   const applicableChecks = requiredCheckIds.map((checkId) => {
-    const check = candidateChecks.get(checkId);
+    const check = releaseChecks.get(checkId);
     if (!check)
       throw new CatalogEvidenceInventoryError('MANIFEST_CHECK_INVENTORY_MISMATCH', checkId);
     return { checkId, command: check.command };
@@ -783,13 +694,13 @@ export const deriveCatalogEvidenceTrustContext = (
   });
   const inventoryDigest = canonicalDigest({
     manifestDigest: manifest.digest,
-    subjectDigest: candidate.contentSubjectDigest,
+    subjectDigest: release.contentFileInventoryDigest,
     reviewPolicy: manifest.reviewPolicy,
     applicableChecks,
     reviewItems,
   });
   return {
-    subjectDigest: candidate.contentSubjectDigest,
+    subjectDigest: release.contentFileInventoryDigest,
     inventoryDigest,
     reviewPolicy: manifest.reviewPolicy,
     workManifest: {
@@ -1252,10 +1163,10 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
       verifyReviewReference(review, repositoryRoot, checks, trustedContext),
     ),
   );
-  const candidate = ReleaseCandidateSchema.parse(canonicalSources.releaseCandidate);
+  const release = CatalogSchema.parse(canonicalSources.catalog).release;
   if (
-    candidate.preJudgmentCheckRefs.length !== checks.length ||
-    candidate.preJudgmentCheckRefs.some((reference) => {
+    release.validationSummary.checks.length !== checks.length ||
+    release.validationSummary.checks.some((reference) => {
       const check = checks.find(({ checkId }) => checkId === reference.checkId);
       return (
         check?.command !== reference.command ||
@@ -1266,8 +1177,8 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
         check.completedAt !== reference.completedAt
       );
     }) ||
-    candidate.humanContentReviewEvidenceRefs.length !== reviews.length ||
-    candidate.humanContentReviewEvidenceRefs.some((reference) => {
+    release.humanContentReviewEvidenceRefs.length !== reviews.length ||
+    release.humanContentReviewEvidenceRefs.some((reference) => {
       const review = reviews.find(({ evidenceId }) => evidenceId === reference.evidenceId);
       return (
         review?.path !== reference.path ||
@@ -1279,8 +1190,8 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
     })
   ) {
     throw new CatalogEvidenceInventoryError(
-      'RELEASE_CANDIDATE_EVIDENCE_MISMATCH',
-      'Release Candidate evidence references must exactly match verified evidence files.',
+      'RELEASE_EVIDENCE_MISMATCH',
+      'Catalog release evidence references must exactly match verified evidence files.',
     );
   }
   const subjectDigests = [

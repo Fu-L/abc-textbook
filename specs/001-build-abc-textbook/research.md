@@ -99,16 +99,17 @@
 - 特定model APIを必須化する: 追加費用0円を満たさないため不採用。
 - packetだけで完成扱いする: 教材価値を持つ本文がないため不採用。
 
-## 9. 更新と公開transaction
+## 9. Gitベースの更新と公開
 
-**Decision**: `abc:update`は終了確認、advanced slot抽出、source、差分、分類候補、authoring result、fast validationを一操作で実行し、15分以内に完成、要執筆、保留をProblemごとに返す。全Problem完成かつblocking 0のupdateだけをrelease batchへ入れる。candidate content digestを固定し、自動検査、必要な人間review、owner承認、read-only final検証の後にlocal filesystem上で原子的に切り替える。
+**Decision**: `abc:update`は終了確認、advanced slot抽出、source、差分、分類候補、authoring result、fast validationを一操作で実行し、15分以内に完成、要執筆、保留をProblemごとに返す。全Problem完成かつblocking 0のupdateだけをreleaseへ入れる。自動検査と必要な人間reviewをprotected mainのmerge条件へ集約し、merge済みのfull Git commitを唯一のrelease snapshot IDとして静的hostへdeployする。rollbackは既知のrelease commitの再deployとする。
 
-**Rationale**: 一操作を「無人公開」ではなく「候補準備開始」と定義すると、週次の操作量を減らしつつ憲章のreview gateを守れる。stagingとfixed digestで部分公開と承認後変更を防げる。
+**Rationale**: 一操作を「無人公開」ではなく「更新準備開始」と定義すると、週次の操作量を減らしつつ憲章のreview gateを守れる。Git commit/tree、required checks、静的hostのdeploy履歴を再利用すれば、独自candidate state、複数digest、自己承認、receipt transactionを保守せずに同じ安全性を得られる。
 
 **Alternatives considered**:
 
 - Problemごとに即時公開する: taxonomy・indexの部分不整合を生むため不採用。
-- owner approvalだけで品質検査を代替する: 憲章違反のため不採用。
+- owner approval artifactだけで品質検査を代替する: 憲章違反かつ単一管理者のmerge操作と重複するため不採用。
+- local filesystem上の独自atomic switchを必須化する: 現行の静的hostと責務が重複するため不採用。必要になった場合だけdeployment adapterとして追加する。
 - 必須LLM judge panelや独立auditorを追加する: 統治中の憲章が要求せず、1人運用の負担を過度に増やすため不採用。
 
 ## 10. Review evidence
