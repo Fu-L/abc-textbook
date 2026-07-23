@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T028-us2",
   "taskId": "T028",
-  "scopeDigest": "77eebd2217e1d015c6e5e97216ad312d2f01feee4f5a9f8071ce5259cb537b60",
-  "digest": "aa208bf37cb155b30776d9c31adaf9999036fc0af41308f627abd290e12349f0",
+  "scopeDigest": "4fb16cbfa282cac3b406d27dd37227a847649bc4d71a3b199d04e18f40a0dcb6",
+  "digest": "546ef39be7c1e8d130ed9eb6ca75f195c94c494e96877f751963d08d2f44d80c",
   "changeKind": "test",
   "requiredRequirementIds": [
     "FR-001",
@@ -43,6 +43,13 @@
         "rationale": "全対象問題から一時分類を公開せず正式taxonomyへ統合する契約を所有する。"
       },
       "paths": [
+        "src/lib/preview/cohort-selection.ts",
+        "src/lib/preview/index.ts",
+        "src/lib/preview/preview-chain.ts",
+        "src/lib/preview/preview-scope.ts",
+        "src/lib/preview/taxonomy-integration.ts",
+        "staging/previews/initial-v1/preview-manifest.json",
+        "tests/fixtures/preview-selection-rules.ts",
         "tests/contract/catalog-scope.test.ts",
         "tests/contract/preview-scope.test.ts",
         "tests/contract/taxonomy-integration.test.ts",
@@ -83,7 +90,12 @@
         "kind": "affects_learning_outcomes",
         "rationale": "主・補助典型と問題固有要素を区別し同一cohortで到達可能にする契約を所有する。"
       },
-      "paths": ["tests/integration/vertical-preview.test.ts"],
+      "paths": [
+        "tests/fixtures/in-memory-preview-snapshot-repository.ts",
+        "src/lib/preview/preview-snapshot-repository.ts",
+        "src/lib/preview/preview-snapshot.ts",
+        "tests/integration/vertical-preview.test.ts"
+      ],
       "dependencyReviewUnitIds": ["RU-T028-corpus-taxonomy", "RU-T028-learning-order"],
       "checkIds": ["check-us2-integration"],
       "evidenceRoles": ["vertical_preview_test"],

@@ -8,6 +8,9 @@
 - `content/docs/` は公開本文、その他の `content/` 配下は公開用の構造化JSONです。
 - `lib/domain/` はschemaと不変条件、`lib/catalog/` は派生catalog、 `lib/learning-records/`
   は端末内記録、`lib/validation/` はfail-closed検証を所有します。
+- `lib/preview/` はprivate previewのcohort選定、digest
+  chain、taxonomy受理、snapshotのcommit/recovery境界を所有します。テストはこの共有APIへfixtureまたはrepository
+  adapterを渡し、preview専用の判定を複製しません。
 - `components/`, `layouts/`, `pages/`, `styles/` は表示責務だけを持ち、canonical
   dataを再定義しません。
 - Publication operationはentityの状態遷移ではなく、trustedなbase/current

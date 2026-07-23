@@ -11,9 +11,19 @@ import {
   validateCatalogSemantics,
   type CatalogLike,
 } from '../../src/lib/catalog/build-catalog.js';
-import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
+import {
+  previewSelectionRulesDigest,
+  validateCohortSelection,
+  type PreviewCohortCandidate,
+  type PreviewCohortRules,
+} from '../../src/lib/preview/cohort-selection.js';
 import { validateContentWorkManifest } from '../../src/lib/validation/content-work-manifest.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
+import {
+  frozenInitialV1RulesDigest,
+  frozenInitialV1SelectionRules,
+  type FrozenInitialV1SelectionRules,
+} from '../fixtures/preview-selection-rules.js';
 
 interface PreviewSelectionManifest {
   readonly phase: string;
@@ -28,56 +38,16 @@ interface PreviewSelectionManifest {
     readonly labelRegistry: string;
     readonly requireOfficialStateForEveryRegistryLabel: boolean;
   };
-  readonly cohortRules: {
-    readonly domains: readonly string[];
-    readonly minimumProblemsPerDomain: number;
-    readonly minimumProblemCount: number;
-    readonly minimumContestCount: number;
-    readonly minimumAdvancedLabelCount: number;
-    readonly stableSortKeys: readonly string[];
-  };
-  readonly publicationBoundary: Readonly<Record<string, unknown>>;
+  readonly cohortRules: PreviewCohortRules;
+  readonly publicationBoundary: FrozenInitialV1SelectionRules['publicationBoundary'];
   readonly candidatePoolDigest: string | null;
   readonly selectedProblemIds: readonly string[];
   readonly sourceRevisionIds: readonly string[];
   readonly frozenRulesDigest: string;
 }
 
-interface CohortCandidate {
-  readonly problemId: string;
-  readonly contestNumber: number;
-  readonly officialTaskOrder: number;
-  readonly advancedLabel: string;
-  readonly domain: string;
-}
-
 const readJson = async <T>(filePath: string): Promise<T> =>
   JSON.parse(await readFile(filePath, 'utf8')) as T;
-
-const cohortViolations = (
-  candidates: readonly CohortCandidate[],
-  rules: PreviewSelectionManifest['cohortRules'],
-): string[] => {
-  const counts = new Map(rules.domains.map((domain) => [domain, 0]));
-  for (const candidate of candidates) {
-    if (counts.has(candidate.domain))
-      counts.set(candidate.domain, (counts.get(candidate.domain) ?? 0) + 1);
-  }
-  return [
-    ...(candidates.length < rules.minimumProblemCount ? ['problem_count'] : []),
-    ...(new Set(candidates.map(({ contestNumber }) => contestNumber)).size <
-    rules.minimumContestCount
-      ? ['contest_count']
-      : []),
-    ...(new Set(candidates.map(({ advancedLabel }) => advancedLabel)).size <
-    rules.minimumAdvancedLabelCount
-      ? ['advanced_label_count']
-      : []),
-    ...rules.domains.flatMap((domain) =>
-      (counts.get(domain) ?? 0) < rules.minimumProblemsPerDomain ? [`domain:${domain}`] : [],
-    ),
-  ];
-};
 
 describe('US2 catalog scope contract', () => {
   it('freezes valid, non-overlapping learning-outcome review units before story changes', async () => {
@@ -91,7 +61,7 @@ describe('US2 catalog scope contract', () => {
     const manifest = await readJson<PreviewSelectionManifest>(
       'staging/previews/initial-v1/preview-manifest.json',
     );
-    const rules = {
+    const rules: FrozenInitialV1SelectionRules = {
       seedRange: manifest.seedRange,
       scopeRule: manifest.scopeRule,
       cohortRules: manifest.cohortRules,
@@ -102,7 +72,12 @@ describe('US2 catalog scope contract', () => {
     expect(manifest.candidatePoolDigest).toBeNull();
     expect(manifest.selectedProblemIds).toEqual([]);
     expect(manifest.sourceRevisionIds).toEqual([]);
-    expect(manifest.frozenRulesDigest).toBe(canonicalDigest(rules));
+    expect(rules).toEqual(frozenInitialV1SelectionRules);
+    expect(manifest.frozenRulesDigest).toBe(frozenInitialV1RulesDigest);
+    expect(previewSelectionRulesDigest(rules)).toBe(frozenInitialV1RulesDigest);
+    expect(previewSelectionRulesDigest(frozenInitialV1SelectionRules)).toBe(
+      frozenInitialV1RulesDigest,
+    );
   });
 
   it('rejects a seed range with a missing Contest', () => {
@@ -147,19 +122,42 @@ describe('US2 catalog scope contract', () => {
     const { cohortRules } = await readJson<PreviewSelectionManifest>(
       'staging/previews/initial-v1/preview-manifest.json',
     );
-    const candidates: CohortCandidate[] = cohortRules.domains.flatMap((domain, domainIndex) =>
-      [0, 1].map((offset) => ({
-        problemId: `abc${String(212 + domainIndex)}-${offset === 0 ? 'e' : 'f'}`,
-        contestNumber: 212 + (domainIndex % 3),
-        officialTaskOrder: 4 + offset,
-        advancedLabel: offset === 0 ? 'E' : 'F',
-        domain,
-      })),
+    const candidates: PreviewCohortCandidate[] = cohortRules.domains.flatMap(
+      (domain, domainIndex) =>
+        [0, 1].map((offset) => ({
+          problemId: `abc${String(212 + domainIndex)}-${offset === 0 ? 'e' : 'f'}`,
+          contestNumber: 212 + (domainIndex % 3),
+          officialTaskOrder: 4 + offset,
+          advancedLabel: offset === 0 ? 'E' : 'F',
+          candidateDomains: [domain],
+          candidateOutcomeIds: [`outcome-${domain}`],
+        })),
     );
 
-    expect(cohortViolations(candidates, cohortRules)).toEqual([]);
-    expect(cohortViolations(candidates.slice(0, 6), cohortRules)).toEqual(
+    expect(validateCohortSelection(candidates, cohortRules)).toEqual([]);
+    expect(validateCohortSelection(candidates.slice(0, 6), cohortRules)).toEqual(
       expect.arrayContaining(['problem_count', `domain:${cohortRules.domains.at(-1) ?? ''}`]),
+    );
+  });
+
+  it('requires the selected cohort to cover every selected candidate outcome twice', async () => {
+    const { cohortRules } = await readJson<PreviewSelectionManifest>(
+      'staging/previews/initial-v1/preview-manifest.json',
+    );
+    const candidates: PreviewCohortCandidate[] = cohortRules.domains.flatMap(
+      (domain, domainIndex) =>
+        [0, 1].map((offset) => ({
+          problemId: `abc${String(212 + domainIndex)}-${offset === 0 ? 'e' : 'f'}`,
+          contestNumber: 212 + (domainIndex % 3),
+          officialTaskOrder: 4 + offset,
+          advancedLabel: offset === 0 ? 'E' : 'F',
+          candidateDomains: [domain],
+          candidateOutcomeIds: [`outcome-${String(domainIndex)}-${String(offset)}`],
+        })),
+    );
+
+    expect(validateCohortSelection(candidates, cohortRules)).toEqual(
+      expect.arrayContaining(['outcome:outcome-0-0', 'outcome:outcome-3-1']),
     );
   });
 

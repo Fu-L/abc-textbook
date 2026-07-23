@@ -2,67 +2,15 @@ import { describe, expect, it } from 'vitest';
 
 import { hasStagingPathSegment } from '../../src/lib/catalog/publication-boundary.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
-
-interface PreviewComponent {
-  readonly componentId: string;
-  readonly previewId: string;
-  readonly manifestDigest: string;
-  readonly problemIds: readonly string[];
-  readonly inputDigest: string;
-  readonly artifactDigest: string;
-  readonly outputDigest: string;
-}
-
-const componentOutputDigest = (component: Omit<PreviewComponent, 'outputDigest'>): string =>
-  canonicalDigest(component);
+import {
+  previewComponentOutputDigest,
+  validatePreviewChain,
+  type PreviewComponent,
+} from '../../src/lib/preview/preview-chain.js';
+import { unpublishedPreviewEntityViolations } from '../../src/lib/preview/preview-scope.js';
 
 const fixtureArtifactDigest = (componentId: string, artifact = 'fixture'): string =>
   canonicalDigest({ componentId, artifact });
-
-const previewChainViolations = (components: readonly PreviewComponent[]): string[] => {
-  const [first, ...rest] = components;
-  if (!first) return ['component_chain_empty'];
-  const violations: string[] = [];
-  for (const component of components) {
-    const subject = {
-      componentId: component.componentId,
-      previewId: component.previewId,
-      manifestDigest: component.manifestDigest,
-      problemIds: component.problemIds,
-      inputDigest: component.inputDigest,
-      artifactDigest: component.artifactDigest,
-    };
-    if (component.outputDigest !== componentOutputDigest(subject)) {
-      violations.push(`stale_output:${component.componentId}`);
-    }
-    if (
-      component.previewId !== first.previewId ||
-      component.manifestDigest !== first.manifestDigest ||
-      JSON.stringify(component.problemIds) !== JSON.stringify(first.problemIds)
-    ) {
-      violations.push(`cohort_mismatch:${component.componentId}`);
-    }
-  }
-  if (first.inputDigest !== first.manifestDigest) {
-    violations.push(`manifest_mismatch:${first.componentId}`);
-  }
-  for (const [index, component] of rest.entries()) {
-    const predecessor = components[index];
-    if (predecessor && component.inputDigest !== predecessor.outputDigest) {
-      violations.push(`broken_chain:${component.componentId}`);
-    }
-  }
-  return violations;
-};
-
-const previewEntityId = /^(?:preview|provisional)-/u;
-const unpublishedEntityViolations = (catalog: {
-  readonly tags: readonly { readonly id: string }[];
-  readonly learningUnits: readonly { readonly id: string }[];
-}): string[] =>
-  [...catalog.tags, ...catalog.learningUnits]
-    .filter(({ id }) => previewEntityId.test(id))
-    .map(({ id }) => id);
 
 describe('US2 preview scope contract', () => {
   it('binds every component to one manifest, cohort, and digest chain', () => {
@@ -79,7 +27,7 @@ describe('US2 preview scope contract', () => {
     };
     const metadata: PreviewComponent = {
       ...metadataSubject,
-      outputDigest: componentOutputDigest(metadataSubject),
+      outputDigest: previewComponentOutputDigest(metadataSubject),
     };
     const contentSubject = {
       componentId: 'content-graph-search',
@@ -89,21 +37,21 @@ describe('US2 preview scope contract', () => {
     };
     const content: PreviewComponent = {
       ...contentSubject,
-      outputDigest: componentOutputDigest(contentSubject),
+      outputDigest: previewComponentOutputDigest(contentSubject),
     };
 
-    expect(previewChainViolations([metadata, content])).toEqual([]);
-    expect(
-      previewChainViolations([{ ...metadata, inputDigest: 'c'.repeat(64) }, content]),
-    ).toContain('manifest_mismatch:metadata-inventory-taxonomy');
-    expect(
-      previewChainViolations([{ ...metadata, outputDigest: 'b'.repeat(64) }, content]),
-    ).toEqual(expect.arrayContaining(['stale_output:metadata-inventory-taxonomy']));
-    expect(previewChainViolations([metadata, { ...content, problemIds: ['abc212-e'] }])).toEqual(
+    expect(validatePreviewChain([metadata, content])).toEqual([]);
+    expect(validatePreviewChain([{ ...metadata, inputDigest: 'c'.repeat(64) }, content])).toContain(
+      'manifest_mismatch:metadata-inventory-taxonomy',
+    );
+    expect(validatePreviewChain([{ ...metadata, outputDigest: 'b'.repeat(64) }, content])).toEqual(
+      expect.arrayContaining(['stale_output:metadata-inventory-taxonomy']),
+    );
+    expect(validatePreviewChain([metadata, { ...content, problemIds: ['abc212-e'] }])).toEqual(
       expect.arrayContaining(['cohort_mismatch:content-graph-search']),
     );
     expect(
-      previewChainViolations([
+      validatePreviewChain([
         metadata,
         { ...content, artifactDigest: fixtureArtifactDigest('content-graph-search', 'changed') },
       ]),
@@ -112,7 +60,7 @@ describe('US2 preview scope contract', () => {
 
   it('rejects provisional Tag and LearningUnit IDs from a public Catalog projection', () => {
     expect(
-      unpublishedEntityViolations({
+      unpublishedPreviewEntityViolations({
         tags: [{ id: 'tag-graph' }, { id: 'provisional-tag-preview-graph' }],
         learningUnits: [{ id: 'unit-graph' }, { id: 'preview-unit-graph' }],
       }),
