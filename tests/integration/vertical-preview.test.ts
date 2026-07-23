@@ -44,6 +44,24 @@ interface PreviewSnapshot {
   readonly holdReasons: readonly string[];
 }
 
+const snapshotDigestSubject = (snapshot: PreviewSnapshot) => ({
+  previewId: snapshot.previewId,
+  manifestDigest: snapshot.manifestDigest,
+  problemIds: snapshot.problemIds,
+  componentDigests: snapshot.componentDigests,
+  status: snapshot.status,
+  holdReasons: snapshot.holdReasons,
+});
+
+const snapshotJoinDigest = (snapshot: PreviewSnapshot): string =>
+  canonicalDigest(snapshotDigestSubject(snapshot));
+
+const assertSnapshotIntegrity = (snapshot: PreviewSnapshot, pathJoinDigest: string): void => {
+  if (snapshot.joinDigest !== pathJoinDigest || snapshotJoinDigest(snapshot) !== pathJoinDigest) {
+    throw new Error('CANONICAL_SNAPSHOT_DIGEST_MISMATCH');
+  }
+};
+
 interface SnapshotReference {
   readonly joinDigest: string;
   readonly canonicalSnapshotPath: string;
@@ -57,6 +75,7 @@ class PreviewCommitHarness {
   readonly transactions = new Map<string, TransactionPhase>();
 
   commit(snapshot: PreviewSnapshot, interruptAfterSnapshot = false): void {
+    assertSnapshotIntegrity(snapshot, snapshot.joinDigest);
     this.transactions.set(snapshot.joinDigest, 'prepared');
     if (this.snapshots.has(snapshot.joinDigest)) throw new Error('SNAPSHOT_ALREADY_EXISTS');
     this.snapshots.set(snapshot.joinDigest, structuredClone(snapshot));
@@ -72,9 +91,17 @@ class PreviewCommitHarness {
       this.transactions.set(joinDigest, 'recovery_required');
       return;
     }
+    try {
+      assertSnapshotIntegrity(snapshot, joinDigest);
+    } catch {
+      this.references.delete(joinDigest);
+      this.transactions.set(joinDigest, 'recovery_required');
+      return;
+    }
     const reference = this.references.get(joinDigest);
     const referenceIsCurrent =
-      reference?.canonicalSnapshotDigest === canonicalDigest(snapshot) &&
+      reference?.joinDigest === joinDigest &&
+      reference.canonicalSnapshotDigest === canonicalDigest(snapshot) &&
       reference.status === snapshot.status;
     if (!referenceIsCurrent) {
       this.writeReference(joinDigest);
@@ -85,6 +112,7 @@ class PreviewCommitHarness {
   private writeReference(joinDigest: string): void {
     const snapshot = this.snapshots.get(joinDigest);
     if (!snapshot) throw new Error('CANONICAL_SNAPSHOT_MISSING');
+    assertSnapshotIntegrity(snapshot, joinDigest);
     this.references.set(joinDigest, {
       joinDigest,
       canonicalSnapshotPath: `staging/previews/initial-v1/snapshots/${joinDigest}.json`,
@@ -140,10 +168,11 @@ const joinPreview = (components: readonly ComponentEvidence[]): PreviewSnapshot 
     componentDigests: components.map(({ componentDigest }) => componentDigest),
     holdReasons,
   };
+  const status: PreviewStatus = holdReasons.length === 0 ? 'passed' : 'on_hold';
+  const snapshotSubject = { ...joinSubject, status };
   return {
-    ...joinSubject,
-    joinDigest: canonicalDigest(joinSubject),
-    status: holdReasons.length === 0 ? 'passed' : 'on_hold',
+    ...snapshotSubject,
+    joinDigest: canonicalDigest(snapshotSubject),
   };
 };
 
@@ -169,6 +198,7 @@ describe('US2 vertical preview contract', () => {
     const snapshot = joinPreview(completeComponents());
     expect(snapshot.status).toBe('passed');
     expect(snapshot.holdReasons).toEqual([]);
+    expect(snapshot.joinDigest).toBe(snapshotJoinDigest(snapshot));
   });
 
   it('records explicit holds for stale artifacts, failed checks, and stale review evidence', () => {
@@ -215,6 +245,38 @@ describe('US2 vertical preview contract', () => {
       harness.commit(snapshot);
     }).toThrow('SNAPSHOT_ALREADY_EXISTS');
     expect(harness.snapshots.get(snapshot.joinDigest)).toEqual(snapshot);
+  });
+
+  it.each([
+    ['status', { status: 'on_hold' as const }],
+    ['hold reasons', { holdReasons: ['TAMPERED'] }],
+    ['component digests', { componentDigests: ['tampered-component-digest'] }],
+  ])('rejects a %s mutation that retains an old join digest', (_, mutation) => {
+    const snapshot = joinPreview(completeComponents());
+    const tamperedSnapshot = { ...snapshot, ...mutation };
+    const harness = new PreviewCommitHarness();
+
+    expect(() => {
+      harness.commit(tamperedSnapshot);
+    }).toThrow('CANONICAL_SNAPSHOT_DIGEST_MISMATCH');
+    expect(harness.snapshots.size).toBe(0);
+    expect(harness.references.size).toBe(0);
+  });
+
+  it('does not recreate a reference from a tampered canonical snapshot during recovery', () => {
+    const snapshot = joinPreview(completeComponents());
+    const harness = new PreviewCommitHarness();
+    harness.commit(snapshot);
+    harness.snapshots.set(snapshot.joinDigest, {
+      ...snapshot,
+      componentDigests: ['tampered-component-digest'],
+    });
+    harness.references.delete(snapshot.joinDigest);
+
+    harness.recover(snapshot.joinDigest);
+
+    expect(harness.transactions.get(snapshot.joinDigest)).toBe('recovery_required');
+    expect(harness.references.has(snapshot.joinDigest)).toBe(false);
   });
 
   it('recovers a missing or stale derived reference from the canonical snapshot', () => {

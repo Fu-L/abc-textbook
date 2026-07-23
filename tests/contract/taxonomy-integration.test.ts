@@ -16,11 +16,27 @@ interface IntegrationEntry {
 interface FinalTaxonomyBuild {
   readonly inventoryDigest: string;
   readonly previewSnapshotDigest: string;
+  readonly previewSnapshotStatus: 'passed' | 'on_hold';
+  readonly policy: {
+    readonly name: string;
+    readonly version: string;
+    readonly inputScope: string;
+  };
   readonly integrationEntries: readonly IntegrationEntry[];
   readonly finalEntityIds: readonly string[];
   readonly placementProblemIds: readonly string[];
   readonly taxonomyDigest: string;
 }
+
+const taxonomyDigestSubject = (build: FinalTaxonomyBuild) => ({
+  inventoryDigest: build.inventoryDigest,
+  previewSnapshotDigest: build.previewSnapshotDigest,
+  previewSnapshotStatus: build.previewSnapshotStatus,
+  policy: build.policy,
+  integrationEntries: build.integrationEntries,
+  finalEntityIds: build.finalEntityIds,
+  placementProblemIds: build.placementProblemIds,
+});
 
 const integrationViolations = (
   previewEntityIds: readonly string[],
@@ -28,6 +44,9 @@ const integrationViolations = (
   build: FinalTaxonomyBuild,
 ): string[] => {
   const violations: string[] = [];
+  if (build.previewSnapshotStatus !== 'passed') {
+    violations.push('preview_snapshot_not_passed');
+  }
   const mappedIds = build.integrationEntries.map(({ previewEntityId }) => previewEntityId);
   if (
     new Set(mappedIds).size !== mappedIds.length ||
@@ -66,13 +85,7 @@ const integrationViolations = (
   ) {
     violations.push('placement_reachability_incomplete');
   }
-  const taxonomySubject = {
-    inventoryDigest: build.inventoryDigest,
-    integrationEntries: build.integrationEntries,
-    finalEntityIds: build.finalEntityIds,
-    placementProblemIds: build.placementProblemIds,
-  };
-  if (build.taxonomyDigest !== canonicalDigest(taxonomySubject)) {
+  if (build.taxonomyDigest !== canonicalDigest(taxonomyDigestSubject(build))) {
     violations.push('final_taxonomy_digest_stale');
   }
   return violations;
@@ -81,6 +94,13 @@ const integrationViolations = (
 const buildFixture = (): FinalTaxonomyBuild => {
   const subject = {
     inventoryDigest: 'a'.repeat(64),
+    previewSnapshotDigest: 'b'.repeat(64),
+    previewSnapshotStatus: 'passed' as const,
+    policy: {
+      name: 'full-corpus-taxonomy-recompute',
+      version: '1.0.0',
+      inputScope: 'complete-technique-inventory',
+    },
     integrationEntries: [
       {
         previewEntityId: 'preview-tag-bfs',
@@ -104,7 +124,6 @@ const buildFixture = (): FinalTaxonomyBuild => {
   };
   return {
     ...subject,
-    previewSnapshotDigest: 'b'.repeat(64),
     taxonomyDigest: canonicalDigest(subject),
   };
 };
@@ -165,17 +184,15 @@ describe('US2 preview-to-final taxonomy integration contract', () => {
       action: 'retire' as const,
       finalEntityIds: [],
     };
-    const subject = {
-      inventoryDigest: build.inventoryDigest,
+    const mergedBuild = {
+      ...build,
       integrationEntries: [merged, retired],
       finalEntityIds: ['tag-bfs'],
-      placementProblemIds: build.placementProblemIds,
     };
     expect(
       integrationViolations(previewEntityIds, inventoryProblemIds, {
-        ...build,
-        ...subject,
-        taxonomyDigest: canonicalDigest(subject),
+        ...mergedBuild,
+        taxonomyDigest: canonicalDigest(taxonomyDigestSubject(mergedBuild)),
       }),
     ).toEqual([]);
   });
@@ -190,6 +207,34 @@ describe('US2 preview-to-final taxonomy integration contract', () => {
     ).toEqual(
       expect.arrayContaining(['final_taxonomy_not_deduplicated', 'final_taxonomy_digest_stale']),
     );
+  });
+
+  it('binds final taxonomy acceptance to a passed preview and its policy subject', () => {
+    const build = buildFixture();
+    expect(integrationViolations(previewEntityIds, inventoryProblemIds, build)).toEqual([]);
+
+    expect(
+      integrationViolations(previewEntityIds, inventoryProblemIds, {
+        ...build,
+        previewSnapshotDigest: 'c'.repeat(64),
+      }),
+    ).toContain('final_taxonomy_digest_stale');
+
+    expect(
+      integrationViolations(previewEntityIds, inventoryProblemIds, {
+        ...build,
+        previewSnapshotStatus: 'on_hold',
+      }),
+    ).toEqual(
+      expect.arrayContaining(['preview_snapshot_not_passed', 'final_taxonomy_digest_stale']),
+    );
+
+    expect(
+      integrationViolations(previewEntityIds, inventoryProblemIds, {
+        ...build,
+        policy: { ...build.policy, version: '2.0.0' },
+      }),
+    ).toContain('final_taxonomy_digest_stale');
   });
 
   it('requires one reachable placement for every inventory Problem', () => {

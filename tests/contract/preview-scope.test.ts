@@ -9,11 +9,15 @@ interface PreviewComponent {
   readonly manifestDigest: string;
   readonly problemIds: readonly string[];
   readonly inputDigest: string;
+  readonly artifactDigest: string;
   readonly outputDigest: string;
 }
 
-const componentDigest = (component: Omit<PreviewComponent, 'outputDigest'>): string =>
+const componentOutputDigest = (component: Omit<PreviewComponent, 'outputDigest'>): string =>
   canonicalDigest(component);
+
+const fixtureArtifactDigest = (componentId: string, artifact = 'fixture'): string =>
+  canonicalDigest({ componentId, artifact });
 
 const previewChainViolations = (components: readonly PreviewComponent[]): string[] => {
   const [first, ...rest] = components;
@@ -26,8 +30,9 @@ const previewChainViolations = (components: readonly PreviewComponent[]): string
       manifestDigest: component.manifestDigest,
       problemIds: component.problemIds,
       inputDigest: component.inputDigest,
+      artifactDigest: component.artifactDigest,
     };
-    if (component.outputDigest !== componentDigest(subject)) {
+    if (component.outputDigest !== componentOutputDigest(subject)) {
       violations.push(`stale_output:${component.componentId}`);
     }
     if (
@@ -37,6 +42,9 @@ const previewChainViolations = (components: readonly PreviewComponent[]): string
     ) {
       violations.push(`cohort_mismatch:${component.componentId}`);
     }
+  }
+  if (first.inputDigest !== first.manifestDigest) {
+    violations.push(`manifest_mismatch:${first.componentId}`);
   }
   for (const [index, component] of rest.entries()) {
     const predecessor = components[index];
@@ -67,28 +75,39 @@ describe('US2 preview scope contract', () => {
       componentId: 'metadata-inventory-taxonomy',
       ...base,
       inputDigest: base.manifestDigest,
+      artifactDigest: fixtureArtifactDigest('metadata-inventory-taxonomy'),
     };
     const metadata: PreviewComponent = {
       ...metadataSubject,
-      outputDigest: componentDigest(metadataSubject),
+      outputDigest: componentOutputDigest(metadataSubject),
     };
     const contentSubject = {
       componentId: 'content-graph-search',
       ...base,
       inputDigest: metadata.outputDigest,
+      artifactDigest: fixtureArtifactDigest('content-graph-search'),
     };
     const content: PreviewComponent = {
       ...contentSubject,
-      outputDigest: componentDigest(contentSubject),
+      outputDigest: componentOutputDigest(contentSubject),
     };
 
     expect(previewChainViolations([metadata, content])).toEqual([]);
+    expect(
+      previewChainViolations([{ ...metadata, inputDigest: 'c'.repeat(64) }, content]),
+    ).toContain('manifest_mismatch:metadata-inventory-taxonomy');
     expect(
       previewChainViolations([{ ...metadata, outputDigest: 'b'.repeat(64) }, content]),
     ).toEqual(expect.arrayContaining(['stale_output:metadata-inventory-taxonomy']));
     expect(previewChainViolations([metadata, { ...content, problemIds: ['abc212-e'] }])).toEqual(
       expect.arrayContaining(['cohort_mismatch:content-graph-search']),
     );
+    expect(
+      previewChainViolations([
+        metadata,
+        { ...content, artifactDigest: fixtureArtifactDigest('content-graph-search', 'changed') },
+      ]),
+    ).toContain('stale_output:content-graph-search');
   });
 
   it('rejects provisional Tag and LearningUnit IDs from a public Catalog projection', () => {
