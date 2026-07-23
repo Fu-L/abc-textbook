@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "previewId": "initial-v1",
+  "phase": "selection_rules_frozen",
+  "seedRange": {
+    "firstContestNumber": 212,
+    "lastContestNumber": 466,
+    "requireContinuity": true
+  },
+  "scopeRule": {
+    "anchorLabel": "D",
+    "relation": "after_in_official_task_order",
+    "labelRegistry": "dynamic_official_order_union",
+    "requireOfficialStateForEveryRegistryLabel": true
+  },
+  "cohortRules": {
+    "domains": [
+      "graph-search",
+      "dynamic-programming",
+      "data-structures-algorithm-design",
+      "mathematics-combinatorics"
+    ],
+    "minimumProblemsPerDomain": 2,
+    "minimumProblemCount": 8,
+    "minimumContestCount": 3,
+    "minimumAdvancedLabelCount": 2,
+    "stableSortKeys": ["contestNumber", "officialTaskOrder", "problemId"],
+    "allowFixtureSupplement": true,
+    "requireFixtureBoundaryDeclaration": true
+  },
+  "publicationBoundary": {
+    "allowedPreviewRoots": ["staging/previews/initial-v1", "docs/verification/previews/initial-v1"],
+    "forbiddenPublicRoots": [
+      "src/content/tags",
+      "src/content/learning-outcomes",
+      "src/content/learning-units",
+      "src/content/releases"
+    ]
+  },
+  "candidatePoolDigest": null,
+  "selectedProblemIds": [],
+  "sourceRevisionIds": [],
+  "fixtureBoundaries": [],
+  "excludedProblemIds": [],
+  "frozenRulesDigest": "b9e8b345616bc64b9c620e49224c5b12295f149b8ec487f9e42c106d2961eaa5"
+}
