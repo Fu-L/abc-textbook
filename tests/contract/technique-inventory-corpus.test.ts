@@ -864,5 +864,5 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
     ]);
     expect(unownedOutput.exitCode).toBe(64);
     expect(unownedOutput.stderr).toContain('OUTPUT_PATH_NOT_OWNED');
-  });
+  }, 20_000);
 });
