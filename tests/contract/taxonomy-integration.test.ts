@@ -11,7 +11,18 @@ import {
 } from '../../src/lib/preview/taxonomy-integration.js';
 
 const validationContext: TaxonomyValidationContext = {
-  previewEntityIds: ['preview-tag-bfs', 'preview-unit-search'],
+  previewEntities: [
+    {
+      id: 'preview-tag-bfs',
+      kind: 'tag',
+      referencedProblemIds: ['abc212-e'],
+    },
+    {
+      id: 'preview-unit-search',
+      kind: 'unit',
+      referencedProblemIds: ['abc212-e', 'abc213-f'],
+    },
+  ],
   inventoryProblemIds: ['abc212-e', 'abc213-f'],
   passedPreviewSnapshotDigests: ['b'.repeat(64)],
   knownSourceRevisionIds: ['source-abc212-e', 'source-abc213-f'],
@@ -28,7 +39,7 @@ const integrationEntries = (): IntegrationEntry[] => [
     evidenceIds: ['evidence-bfs'],
     aliasOrRedirects: [],
     correctionImpactId: 'impact-bfs',
-    reviewMode: 'self',
+    reviewMode: 'third_party',
     reviewEvidenceId: 'review-bfs',
     status: 'accepted',
   },
@@ -42,7 +53,7 @@ const integrationEntries = (): IntegrationEntry[] => [
     evidenceIds: ['evidence-search-split'],
     aliasOrRedirects: ['preview-unit-search'],
     correctionImpactId: 'impact-search-split',
-    reviewMode: 'self',
+    reviewMode: 'third_party',
     reviewEvidenceId: 'review-search-split',
     status: 'accepted',
   },
@@ -56,7 +67,7 @@ const inputFixture = (): FinalTaxonomyBuildInput => {
       name: 'full-corpus-taxonomy-recompute',
       version: '1.0.0',
       inputScope: 'complete-technique-inventory',
-      requiredReviewMode: 'self' as const,
+      requiredReviewMode: 'third_party' as const,
     },
     integrationEntries: integrationEntries(),
     finalEntities: [
@@ -131,15 +142,15 @@ const inputFixture = (): FinalTaxonomyBuildInput => {
       {
         reviewEvidenceId: 'review-bfs',
         subjectDigest,
-        requiredMode: 'self',
-        reviewMode: 'self',
+        requiredMode: 'third_party',
+        reviewMode: 'third_party',
         aggregatePassed: true,
       },
       {
         reviewEvidenceId: 'review-search-split',
         subjectDigest,
-        requiredMode: 'self',
-        reviewMode: 'self',
+        requiredMode: 'third_party',
+        reviewMode: 'third_party',
         aggregatePassed: true,
       },
     ],
@@ -191,6 +202,58 @@ describe('US2 preview-to-final taxonomy integration contract', () => {
         rebuild(build, { integrationEntries: build.integrationEntries.slice(0, 1) }),
       ),
     ).toContain('integration_mapping_incomplete');
+  });
+
+  it('requires split integrations to use third-party review', () => {
+    const build = buildFixture();
+    const selfReviewed = rebuild(build, {
+      policy: { ...build.policy, requiredReviewMode: 'self' },
+      integrationEntries: build.integrationEntries.map((entry) => ({
+        ...entry,
+        reviewMode: 'self',
+      })),
+      reviewEvidence: build.reviewEvidence.map((evidence) => ({
+        ...evidence,
+        requiredMode: 'self',
+        reviewMode: 'self',
+      })),
+    });
+
+    expect(validateTaxonomyIntegration(validationContext, selfReviewed)).toEqual(
+      expect.arrayContaining([
+        'taxonomy_review_policy_insufficient',
+        'integration_review_mode_insufficient:preview-tag-bfs',
+        'integration_review_mode_insufficient:preview-unit-search',
+      ]),
+    );
+  });
+
+  it('requires preview entity kinds and affected Problem scopes to match exactly', () => {
+    const build = buildFixture();
+    const [first, second] = build.integrationEntries;
+    if (!first || !second) throw new Error('Integration fixture is incomplete.');
+
+    const mismatched = rebuild(build, {
+      integrationEntries: [
+        { ...first, previewEntityKind: 'unit' },
+        { ...second, affectedProblemIds: ['abc212-e'] },
+      ],
+    });
+    expect(validateTaxonomyIntegration(validationContext, mismatched)).toEqual(
+      expect.arrayContaining([
+        'preview_entity_kind_mismatch:preview-tag-bfs',
+        'affected_problem_scope_mismatch:preview-unit-search',
+      ]),
+    );
+
+    const wrongFinalKind = rebuild(build, {
+      finalEntities: build.finalEntities.map((entity) =>
+        entity.id === 'tag-bfs' ? { ...entity, kind: 'unit' as const } : entity,
+      ),
+    });
+    expect(validateTaxonomyIntegration(validationContext, wrongFinalKind)).toContain(
+      'final_entity_kind_mismatch:preview-tag-bfs',
+    );
   });
 
   it('rejects invalid action cardinality, fictional final IDs, and missing evidence', () => {

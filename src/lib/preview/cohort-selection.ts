@@ -52,8 +52,16 @@ export const validateCohortSelection = (
   const domainCounts = new Map(rules.domains.map((domain) => [domain, 0]));
   const outcomeProblems = new Map<string, Set<string>>();
   const violations: string[] = [];
+  const problemIds = new Set<string>();
+  const uniqueCandidates: PreviewCohortCandidate[] = [];
 
   for (const candidate of candidates) {
+    if (problemIds.has(candidate.problemId)) {
+      violations.push(`duplicate_problem_id:${candidate.problemId}`);
+      continue;
+    }
+    problemIds.add(candidate.problemId);
+    uniqueCandidates.push(candidate);
     const candidateDomains = new Set(candidate.candidateDomains);
     for (const domain of rules.domains) {
       if (candidateDomains.has(domain)) {
@@ -72,12 +80,12 @@ export const validateCohortSelection = (
   }
 
   violations.push(
-    ...(candidates.length < rules.minimumProblemCount ? ['problem_count'] : []),
-    ...(new Set(candidates.map(({ contestNumber }) => contestNumber)).size <
+    ...(problemIds.size < rules.minimumProblemCount ? ['problem_count'] : []),
+    ...(new Set(uniqueCandidates.map(({ contestNumber }) => contestNumber)).size <
     rules.minimumContestCount
       ? ['contest_count']
       : []),
-    ...(new Set(candidates.map(({ advancedLabel }) => advancedLabel)).size <
+    ...(new Set(uniqueCandidates.map(({ advancedLabel }) => advancedLabel)).size <
     rules.minimumAdvancedLabelCount
       ? ['advanced_label_count']
       : []),

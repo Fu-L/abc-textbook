@@ -87,8 +87,14 @@ export interface FinalTaxonomyBuild extends FinalTaxonomyBuildInput {
   readonly buildDigest: string;
 }
 
+export interface PreviewTaxonomyEntity {
+  readonly id: string;
+  readonly kind: TaxonomyEntityKind;
+  readonly referencedProblemIds: readonly string[];
+}
+
 export interface TaxonomyValidationContext {
-  readonly previewEntityIds: readonly string[];
+  readonly previewEntities: readonly PreviewTaxonomyEntity[];
   readonly inventoryProblemIds: readonly string[];
   readonly passedPreviewSnapshotDigests: readonly string[];
   readonly knownSourceRevisionIds: readonly string[];
@@ -128,6 +134,11 @@ const buildDigests = (build: FinalTaxonomyBuildInput) => ({
   placementDigest: canonicalDigest(build.placements),
   correctionImpactDigest: canonicalDigest(build.correctionImpacts),
 });
+
+const requiredReviewMode = (build: FinalTaxonomyBuildInput): TaxonomyReviewMode =>
+  build.integrationEntries.some(({ action }) => action === 'split')
+    ? 'third_party'
+    : build.policy.requiredReviewMode;
 
 export const finalTaxonomyBuildDigest = (build: Omit<FinalTaxonomyBuild, 'buildDigest'>): string =>
   canonicalDigest(build);
@@ -189,6 +200,8 @@ export const validateTaxonomyIntegration = (
   build: FinalTaxonomyBuild,
 ): string[] => {
   const violations: string[] = [];
+  const previewEntitiesById = new Map(context.previewEntities.map((entity) => [entity.id, entity]));
+  const requiredMode = requiredReviewMode(build);
   const finalEntityIds = build.finalEntities.map(({ id }) => id);
   const tagIds = build.finalEntities.filter(({ kind }) => kind === 'tag').map(({ id }) => id);
   const outcomeIds = build.finalEntities
@@ -201,10 +214,15 @@ export const validateTaxonomyIntegration = (
   }
 
   const mappedIds = build.integrationEntries.map(({ previewEntityId }) => previewEntityId);
-  if (!sameSet(mappedIds, context.previewEntityIds)) {
+  const previewEntityIds = context.previewEntities.map(({ id }) => id);
+  if (!sameSet(mappedIds, previewEntityIds)) {
     violations.push('integration_mapping_incomplete');
   }
+  if (build.policy.requiredReviewMode !== requiredMode) {
+    violations.push('taxonomy_review_policy_insufficient');
+  }
   for (const entry of build.integrationEntries) {
+    const previewEntity = previewEntitiesById.get(entry.previewEntityId);
     const validFinalEntityCount =
       entry.action === 'retire'
         ? entry.finalEntityIds.length === 0
@@ -225,14 +243,48 @@ export const validateTaxonomyIntegration = (
     if (entry.finalEntityIds.some((id) => !finalEntityIds.includes(id))) {
       violations.push(`final_entity_missing:${entry.previewEntityId}`);
     }
+    if (previewEntity && entry.previewEntityKind !== previewEntity.kind) {
+      violations.push(`preview_entity_kind_mismatch:${entry.previewEntityId}`);
+    }
+    if (previewEntity && !sameSet(entry.affectedProblemIds, previewEntity.referencedProblemIds)) {
+      violations.push(`affected_problem_scope_mismatch:${entry.previewEntityId}`);
+    }
     if (entry.affectedProblemIds.some((id) => !context.inventoryProblemIds.includes(id))) {
       violations.push(`unknown_affected_problem:${entry.previewEntityId}`);
+    }
+    if (entry.reviewMode !== requiredMode) {
+      violations.push(`integration_review_mode_insufficient:${entry.previewEntityId}`);
+    }
+    if (previewEntity && entry.action !== 'retire') {
+      for (const finalEntityId of entry.finalEntityIds) {
+        const finalEntity = build.finalEntities.find(({ id }) => id === finalEntityId);
+        if (finalEntity && finalEntity.kind !== previewEntity.kind) {
+          violations.push(`final_entity_kind_mismatch:${entry.previewEntityId}`);
+          break;
+        }
+      }
     }
     const review = build.reviewEvidence.find(
       ({ reviewEvidenceId }) => reviewEvidenceId === entry.reviewEvidenceId,
     );
-    if (review?.reviewMode !== entry.reviewMode) {
+    const reviewMode = review?.reviewMode;
+    const reviewRequiredMode = review?.requiredMode;
+    const reviewPassed = review?.aggregatePassed;
+    if (
+      reviewMode !== entry.reviewMode ||
+      reviewRequiredMode !== requiredMode ||
+      reviewMode !== requiredMode ||
+      !reviewPassed
+    ) {
       violations.push(`integration_review_missing:${entry.previewEntityId}`);
+    }
+  }
+
+  for (const previewEntity of context.previewEntities) {
+    if (
+      previewEntity.referencedProblemIds.some((id) => !context.inventoryProblemIds.includes(id))
+    ) {
+      violations.push(`unknown_preview_problem:${previewEntity.id}`);
     }
   }
 
@@ -323,8 +375,8 @@ export const validateTaxonomyIntegration = (
     build.reviewEvidence.some(
       (evidence) =>
         evidence.subjectDigest !== reviewSubjectDigest ||
-        evidence.requiredMode !== build.policy.requiredReviewMode ||
-        evidence.reviewMode !== evidence.requiredMode ||
+        evidence.requiredMode !== requiredMode ||
+        evidence.reviewMode !== requiredMode ||
         !evidence.aggregatePassed,
     )
   ) {

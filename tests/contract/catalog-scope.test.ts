@@ -161,6 +161,34 @@ describe('US2 catalog scope contract', () => {
     );
   });
 
+  it('counts distinct Problems for cohort size and domain coverage', async () => {
+    const { cohortRules } = await readJson<PreviewSelectionManifest>(
+      'staging/previews/initial-v1/preview-manifest.json',
+    );
+    const candidates: PreviewCohortCandidate[] = cohortRules.domains.flatMap(
+      (domain, domainIndex) =>
+        [0, 1].map((offset) => ({
+          problemId: `abc${String(212 + domainIndex)}-${offset === 0 ? 'e' : 'f'}`,
+          contestNumber: 212 + (domainIndex % 3),
+          officialTaskOrder: 4 + offset,
+          advancedLabel: offset === 0 ? 'E' : 'F',
+          candidateDomains: [domain],
+          candidateOutcomeIds: [`outcome-${domain}`],
+        })),
+    );
+    const first = candidates[0];
+    if (!first) throw new Error('Cohort fixture is incomplete.');
+
+    const duplicated = [...candidates.slice(0, -1), { ...first }];
+    expect(validateCohortSelection(duplicated, cohortRules)).toEqual(
+      expect.arrayContaining([
+        'duplicate_problem_id:abc212-e',
+        'problem_count',
+        `domain:${cohortRules.domains.at(-1) ?? ''}`,
+      ]),
+    );
+  });
+
   it('rejects staging as a public Catalog source even when the payload is otherwise valid', () => {
     expect(() =>
       buildCatalog(makeTrustedCatalog({}), ['staging/previews/initial-v1/catalog.json']),
