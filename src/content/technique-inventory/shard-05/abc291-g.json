@@ -4,7 +4,7 @@
     "source-abc291-editorial-5853-63fe1b5a3336818969994232dcd22bb622706f26a5e0a23b93e8b9467f59499a",
     "source-abc291-g-problem-b70a3c77e64434ca33b8131b0663954ac871d89241f2e3e45f1b62d9f0604162"
   ],
-  "coreMethod": "abc291-g「OR Sum」では、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc291-g「OR Sum」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
     "OR Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

@@ -4,7 +4,7 @@
     "source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd",
     "source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b"
   ],
-  "coreMethod": "abc339-e「Smooth Subsequence」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc339-e「Smooth Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Smooth Subsequence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

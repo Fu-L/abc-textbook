@@ -4,7 +4,7 @@
     "source-abc273-e-problem-fed53a2a982096aeb89f298579a1e809a95058a06ddf4fe75177d79e756a083a",
     "source-abc273-editorial-5023-f05e948a7eca80904f9ead71fc40f2c30993d9c1d91142ec2d2b7b341bb61399"
   ],
-  "coreMethod": "abc273-e「Notebook」では、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc273-e「Notebook」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
     "Notebook 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

@@ -4,7 +4,7 @@
     "source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de",
     "source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834"
   ],
-  "coreMethod": "abc275-f「Erase Subarrays」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc275-f「Erase Subarrays」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Erase Subarrays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

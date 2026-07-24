@@ -4,19 +4,19 @@
     "source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e",
     "source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63"
   ],
-  "coreMethod": "abc421-e「Yacht」では、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc421-e「Yacht」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "各遷移候補を一次関数へ対応させると、求める最適値は query 点での直線群の包絡線に一致する。",
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Yacht 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "Convex Hull Trick"],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "動的計画法の状態設計"],
   "implementationConcerns": [
-    "傾き単調性の有無で構造を選び、積の overflow と等傾き直線を処理する。"
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
   ],
   "outcomeCandidates": [
-    "Yacht 型の 整数の約数・剰余構造に対し、Convex Hull Trickを選び、状態と証明を一貫して設計できる。"
+    "Yacht 型の 整数の約数・剰余構造に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

@@ -4,7 +4,7 @@
     "source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227",
     "source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e"
   ],
-  "coreMethod": "abc235-f「Variety of Digits」では、上位桁から tight・leading-zero・必要な集約値を状態に持つ digit DP を行う。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc235-f「Variety of Digits」では、主解法候補として、上位桁から tight・leading-zero・必要な集約値を状態に持つ digit DP を行う。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "同じ prefix 状態以降の選択肢は一致し、tight が上限との大小関係を過不足なく表す。",
     "Variety of Digits 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

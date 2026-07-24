@@ -4,7 +4,7 @@
     "source-abc453-editorial-18526-99abc3e6c77c57725ffe9beb0d4040d7ea09e2940816f348844a2a020961876a",
     "source-abc453-g-problem-5676b21220a116d2220557784e8ac4f0313dc2d19e5d9495e935c686aac6f1dc"
   ],
-  "coreMethod": "abc453-g「Copy Query」では、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc453-g「Copy Query」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
     "Copy Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

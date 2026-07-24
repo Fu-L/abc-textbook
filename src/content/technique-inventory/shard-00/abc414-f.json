@@ -4,17 +4,19 @@
     "source-abc414-editorial-13439-06426077f4ac1f7611d8310107d8325328cb341b45aef3eb6ff0c5f6495a3df6",
     "source-abc414-f-problem-29225b0da36f7b897e7b7bd84e8bac500cee8ae58044912e0baaf0317ecf04e0"
   ],
-  "coreMethod": "abc414-f「Jump Traveling」では、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc414-f「Jump Traveling」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Jump Traveling 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["木の連結性と一意な単純路", "式変形と frequency map"],
-  "implementationConcerns": ["添字 parity による符号反転と負数 key をそのまま正確に保持する。"],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
   "outcomeCandidates": [
-    "Jump Traveling 型の 根付き木・部分木・パスの関係に対し、式変形と frequency mapを選び、状態と証明を一貫して設計できる。"
+    "Jump Traveling 型の 根付き木・部分木・パスの関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

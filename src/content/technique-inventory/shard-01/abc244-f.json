@@ -4,7 +4,7 @@
     "source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c",
     "source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6"
   ],
-  "coreMethod": "abc244-f「Shortest Good Path」では、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc244-f「Shortest Good Path」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
     "Shortest Good Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

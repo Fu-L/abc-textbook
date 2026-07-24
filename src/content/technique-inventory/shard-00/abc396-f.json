@@ -4,7 +4,7 @@
     "source-abc396-editorial-12374-589f6810ae5c3dccefb418c94eb6369993eca119b4162fd81606ab52afcc8acc",
     "source-abc396-f-problem-3a6c95223afa7acf1d9704bfe06b07779541b9bba7a589f020d7a044c63c41ae"
   ],
-  "coreMethod": "abc396-f「Rotated Inversions」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc396-f「Rotated Inversions」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
     "Rotated Inversions 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

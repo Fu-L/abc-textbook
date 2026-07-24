@@ -4,17 +4,15 @@
     "source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577",
     "source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238"
   ],
-  "coreMethod": "abc334-g「Christmas Color Grid 2」では、幅の小さい grid を走査し、frontier の塗色と連結成分 partition を正規化した profile DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc334-g「Christmas Color Grid 2」では、DFS 木の訪問順と lowlink を計算し、頂点除去で連結成分が分かれる条件を判定する。この状態表現から答えを構成する。",
   "proofIdeas": [
-    "未処理領域と接し得るのは frontier 上の頂点だけなので、その連結 partition が将来に必要な情報を全て含む。",
+    "子部分木から祖先へ戻れる最小訪問順を lowlink に保つと、親より上へ戻れない子ごとに頂点除去後の成分が一つ増える。",
     "Christmas Color Grid 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["grid の座標表現", "profile DP と連結成分状態の正規化"],
-  "implementationConcerns": [
-    "frontier から消える成分を再接続不能として判定し、成分 label を毎遷移後に canonicalize する。"
-  ],
+  "prerequisiteCandidates": ["DFS 木と lowlink"],
+  "implementationConcerns": ["根だけは DFS 木の子数で判定し、親への木辺と多重辺を区別する。"],
   "outcomeCandidates": [
-    "Christmas Color Grid 2 型の 盤面上の位置と局所遷移に対し、profile DP と連結成分状態の正規化を選び、状態と証明を一貫して設計できる。"
+    "Christmas Color Grid 2 型の問題に対し、DFS 木と lowlinkを選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",

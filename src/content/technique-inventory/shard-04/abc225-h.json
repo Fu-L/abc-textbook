@@ -4,7 +4,7 @@
     "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
     "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"
   ],
-  "coreMethod": "abc225-h「Social Distance 2」では、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc225-h「Social Distance 2」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "係数比較により元の再帰・畳み込みと冪級数恒等式が次数ごとに同値であることを示す。",
     "Social Distance 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

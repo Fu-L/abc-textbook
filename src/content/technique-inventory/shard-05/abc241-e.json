@@ -4,19 +4,19 @@
     "source-abc241-e-problem-aa1078a5980728f8a202a2ab0dd7b8cb2f9dbbf4fda2dc2352a746e378172be4",
     "source-abc241-editorial-3472-223ab10f3662d986ab9f48d7c727f682d9bbc31b921499899f8366059700fd74"
   ],
-  "coreMethod": "abc241-e「Putting Candies」では、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc241-e「Putting Candies」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "任意の遷移回数は異なる二冪の和として一意に表せ、前計算した遷移の関数合成で同じ終点へ到達する。",
+    "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
     "Putting Candies 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "ダブリングと二進展開"],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "剰余演算と modular inverse"],
   "implementationConcerns": [
-    "必要な最大 bit 数と遷移不能 sentinel を先に決め、表の参照範囲を揃える。"
+    "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。"
   ],
   "outcomeCandidates": [
-    "Putting Candies 型の 列の順序と prefix 状態に対し、ダブリングと二進展開を選び、状態と証明を一貫して設計できる。"
+    "Putting Candies 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

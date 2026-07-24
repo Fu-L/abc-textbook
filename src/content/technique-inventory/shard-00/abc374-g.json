@@ -4,17 +4,17 @@
     "source-abc374-editorial-11099-08ffa618d6266b4f574965ba7db128d0fd6d4897a29e321b44770b9f29b48990",
     "source-abc374-g-problem-ef990b1fe81062fb5fa496062ddb53c9751bba11b379a7113f4381ffff2dda7b"
   ],
-  "coreMethod": "abc374-g「Only One Product Name」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc374-g「Only One Product Name」では、主解法候補として、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+    "同一強連結成分内では相互到達可能であり、成分間を縮約すると閉路のない DAG になる。",
     "Only One Product Name 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["文字列の添字と prefix", "最大流・最小カット定理"],
-  "implementationConcerns": ["有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。"],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "強連結成分分解"],
+  "implementationConcerns": ["元頂点から成分番号への写像と、重複する成分間辺の扱いを明確にする。"],
   "outcomeCandidates": [
-    "Only One Product Name 型の 文字列の prefix・suffix と一致関係に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。"
+    "Only One Product Name 型の 文字列の prefix・suffix と一致関係に対し、強連結成分分解を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

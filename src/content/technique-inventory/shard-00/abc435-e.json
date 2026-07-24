@@ -4,7 +4,7 @@
     "source-abc435-e-problem-5227c9034b5752c55f7b3016adf5e19e52c5bdec91124387880c04a2700827b5",
     "source-abc435-editorial-14733-0e61d37e3106540e780b0121efa0e3e48e9aa8db6e9351b0421ca9ff3fd6bc2b"
   ],
-  "coreMethod": "abc435-e「Cover query」では、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc435-e「Cover query」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
     "Cover query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

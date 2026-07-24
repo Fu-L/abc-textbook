@@ -4,7 +4,7 @@
     "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
     "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
   ],
-  "coreMethod": "abc308-ex「Make Q」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc308-ex「Make Q」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
     "Make Q 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

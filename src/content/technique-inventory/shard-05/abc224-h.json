@@ -4,7 +4,7 @@
     "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
     "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
   ],
-  "coreMethod": "abc224-h「Security Camera 2」では、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc224-h「Security Camera 2」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "各増加路が残余グラフで最小費用なので、ポテンシャルを保った交換論により総費用の最適性が維持される。",
     "Security Camera 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

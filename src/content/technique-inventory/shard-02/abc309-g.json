@@ -4,7 +4,7 @@
     "source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa",
     "source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"
   ],
-  "coreMethod": "abc309-g「Ban Permutation」では、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc309-g「Ban Permutation」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
     "Ban Permutation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

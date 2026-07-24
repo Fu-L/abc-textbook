@@ -4,17 +4,17 @@
     "source-abc460-e-problem-b06cfe7b70e5235e8e2c3330612d3ef7c853c68f3c2d33f60825f5bba53d008e",
     "source-abc460-editorial-21009-f1b15c2f061916282d5a75f4e4924f3f810e46797634aaee40f4d173f7d63a0b"
   ],
-  "coreMethod": "abc460-e「x + y ≡ x + y」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc460-e「x + y ≡ x + y」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+    "整数線形結合で表せる値の集合が gcd の倍数全体なので、割り切れ条件が可解性の必要十分条件になる。",
     "x + y ≡ x + y 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["文字列の添字と prefix", "Fenwick tree"],
-  "implementationConcerns": ["内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "gcd と拡張 Euclid"],
+  "implementationConcerns": ["0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。"],
   "outcomeCandidates": [
-    "x + y ≡ x + y 型の 文字列の prefix・suffix と一致関係に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。"
+    "x + y ≡ x + y 型の 文字列の prefix・suffix と一致関係に対し、gcd と拡張 Euclidを選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

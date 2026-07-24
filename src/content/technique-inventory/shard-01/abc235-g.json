@@ -4,22 +4,17 @@
     "source-abc235-editorial-3252-e156873af08601dc484d0ce3da61dd8d27ddda8414b6756079ad415e547689b7",
     "source-abc235-g-problem-ff02f7865679f2725f215161406783f97b2ef351e4e8c2fbd85cecabc3dd6249"
   ],
-  "coreMethod": "abc235-g「Gardens」では、反復移動を一周期の変位ベクトルによる平行移動同値類へ分け、各類の訪問区間の和を数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc235-g「Gardens」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "一周期後の位置は常に同じ変位だけ移るため、変位方向に直交する不変量ごとに訪問点が一次元区間へ対応する。",
+    "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
     "Gardens 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": [
-    "整数論の基本的な割り切れ関係",
-    "格子点と gcd による方向ベクトル正規化"
-  ],
-  "implementationConcerns": [
-    "総変位が零の場合を分離し、負方向を含む同値類 key と区間端点を正規化する。"
-  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "包除原理"],
+  "implementationConcerns": ["空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。"],
   "outcomeCandidates": [
-    "Gardens 型の 整数の約数・剰余構造に対し、格子点と gcd による方向ベクトル正規化を選び、状態と証明を一貫して設計できる。"
+    "Gardens 型の 整数の約数・剰余構造に対し、包除原理を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

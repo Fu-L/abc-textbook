@@ -4,17 +4,19 @@
     "source-abc357-e-problem-64307c171532025fae3638a6c13355395f10cf6cbbc3eb9d72269d67bba48256",
     "source-abc357-editorial-10185-02035c2aaf509823d56034c354d137d0ffb8eb747241aa8cb9ca245e69b7a846"
   ],
-  "coreMethod": "abc357-e「Reachability in Functional Graph」では、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc357-e「Reachability in Functional Graph」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "同一強連結成分内では相互到達可能であり、成分間を縮約すると閉路のない DAG になる。",
+    "遷移を続けると有限頂点上で必ず再訪が起こり、経路は前置き木と一つの閉路へ一意に分かれる。",
     "Reachability in Functional Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "強連結成分分解"],
-  "implementationConcerns": ["元頂点から成分番号への写像と、重複する成分間辺の扱いを明確にする。"],
+  "prerequisiteCandidates": ["グラフの到達可能性", "関数グラフの閉路分解"],
+  "implementationConcerns": [
+    "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。"
+  ],
   "outcomeCandidates": [
-    "Reachability in Functional Graph 型の 頂点と辺からなる状態グラフに対し、強連結成分分解を選び、状態と証明を一貫して設計できる。"
+    "Reachability in Functional Graph 型の 頂点と辺からなる状態グラフに対し、関数グラフの閉路分解を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

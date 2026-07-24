@@ -4,7 +4,7 @@
     "source-abc260-e-problem-328b227f4e99a537b69624783d76fc38e6ead0e01546ee21e17761b6ae77e9db",
     "source-abc260-editorial-4458-d75d5dd71779552ced576f6e2f3bb80a4171a1aa23dc1a95432563e980ab61ac"
   ],
-  "coreMethod": "abc260-e「At Least One」では、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc260-e「At Least One」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "右端を固定した有効左端集合が単調に移動するため、戻らない二本の pointer で全境界を一度ずつ調べられる。",
     "At Least One 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

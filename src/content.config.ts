@@ -28,6 +28,7 @@ export const collections = {
     schema: docsSchema(),
   }),
   contests: structuredCollection('contests'),
+  contestGaps: structuredCollection('contestGaps'),
   problemSlots: structuredCollection('problemSlots'),
   problems: structuredCollection('problems'),
   techniqueInventory: structuredCollection('techniqueInventory'),

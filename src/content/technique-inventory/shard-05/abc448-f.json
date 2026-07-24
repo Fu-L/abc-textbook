@@ -4,7 +4,7 @@
     "source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5",
     "source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86"
   ],
-  "coreMethod": "abc448-f「Authentic Traveling Salesman Problem」では、offline 区間 query を Mo 順に並べ、左右端を一要素ずつ伸縮しながら集約値を更新する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc448-f「Authentic Traveling Salesman Problem」では、主解法候補として、offline 区間 query を Mo 順に並べ、左右端を一要素ずつ伸縮しながら集約値を更新する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "add・remove が現在区間の集約を正しく保ち、block 順で端点総移動回数が平方根上界に収まる。",
     "Authentic Traveling Salesman Problem 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

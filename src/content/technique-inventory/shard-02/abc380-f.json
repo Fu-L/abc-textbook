@@ -4,7 +4,7 @@
     "source-abc380-editorial-11351-466103312076f33bd3c483117d2d043c7a11a8b8b73e450614696190c6e1dfbe",
     "source-abc380-f-problem-7fb17205b066a873aa585d6cd8a1d97e733edec3a7c8f796f2f9e4f7007d48be"
   ],
-  "coreMethod": "abc380-f「Exchange Game」では、丸めた二候補だけへ分岐する再帰を定義し、同じ部分問題を memoize して再利用する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc380-f「Exchange Game」では、主解法候補として、丸めた二候補だけへ分岐する再帰を定義し、同じ部分問題を memoize して再利用する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "最小単位の端数は切り捨て側か切り上げ側のどちらかで清算すればよく、他の選択はそれらより改善しない。",
     "Exchange Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

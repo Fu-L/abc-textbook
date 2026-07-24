@@ -4,7 +4,7 @@
     "source-abc284-editorial-5481-9da01d2a70042d0bd7a43951bbdc27a4e2a956c0b0fe0efa9a7e4d96bfa4a14d",
     "source-abc284-ex-problem-62d52e6971d664c1fb7b8660b662c70437b217e7e263ea460b197a5a07453028"
   ],
-  "coreMethod": "abc284-ex「Count Unlabeled Graphs」では、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc284-ex「Count Unlabeled Graphs」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
     "Count Unlabeled Graphs 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

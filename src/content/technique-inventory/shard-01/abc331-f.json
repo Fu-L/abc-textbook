@@ -4,7 +4,7 @@
     "source-abc331-editorial-7820-84f397ddaac63f4cee808b3ca295902b86653b9cfaf7abb14f91cbc35c371522",
     "source-abc331-f-problem-0825f85271fc207f1f00eedd069b0591836c847c6da3ce4b4c51085bd71ae66b"
   ],
-  "coreMethod": "abc331-f「Palindrome Query」では、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc331-f「Palindrome Query」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "prefix hash の差から位置に依存しない部分文字列 hash を復元でき、等しい文字列は同じ値になる。",
     "Palindrome Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

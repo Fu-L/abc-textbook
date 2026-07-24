@@ -4,7 +4,7 @@
     "source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0",
     "source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2"
   ],
-  "coreMethod": "abc341-g「Highest Ratio」では、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc341-g「Highest Ratio」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "外積の符号が有向面積と回転方向を表すため、幾何条件を符号条件として必要十分に判定できる。",
     "Highest Ratio 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

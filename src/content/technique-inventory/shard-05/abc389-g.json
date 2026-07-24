@@ -4,17 +4,19 @@
     "source-abc389-editorial-11929-f9fe21efa00fe689b598c3b8fa861a7f0f477d812f06e83e7567cde9bcbbae0b",
     "source-abc389-g-problem-b82f036922a0daf1c33b346b56d5501063d655887bb21100bd2ad06619ca3647"
   ],
-  "coreMethod": "abc389-g「Odd Even Graph」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc389-g「Odd Even Graph」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Odd Even Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "全探索と候補数の上界評価"],
-  "implementationConcerns": ["同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。"],
+  "prerequisiteCandidates": ["グラフの到達可能性", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
   "outcomeCandidates": [
-    "Odd Even Graph 型の 頂点と辺からなる状態グラフに対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。"
+    "Odd Even Graph 型の 頂点と辺からなる状態グラフに対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

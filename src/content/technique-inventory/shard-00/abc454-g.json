@@ -4,17 +4,19 @@
     "source-abc454-editorial-19112-21efa506cd2931dfa4f71807ea339ebc5965f80a6cd28ee83425351988c7d598",
     "source-abc454-g-problem-fb905e5fd81e3cc2ba3f70fbe1984b727ee3d478c85de7cd863e7777f4e3a4f6"
   ],
-  "coreMethod": "abc454-g「Mode in the Subtree」では、木を heavy path に分解し、パス問題を対数本の一次元区間へ写す。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc454-g「Mode in the Subtree」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "light edge を通るたび部分木サイズが半減するため、任意の根付き木パスは対数本の区間へ分割できる。",
+    "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
     "Mode in the Subtree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["木の連結性と一意な単純路", "Heavy-Light Decomposition"],
-  "implementationConcerns": ["頂点値か辺値かに応じて LCA 側端点を含める区間を調整する。"],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "Union-Find"],
+  "implementationConcerns": [
+    "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。"
+  ],
   "outcomeCandidates": [
-    "Mode in the Subtree 型の 根付き木・部分木・パスの関係に対し、Heavy-Light Decompositionを選び、状態と証明を一貫して設計できる。"
+    "Mode in the Subtree 型の 根付き木・部分木・パスの関係に対し、Union-Findを選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

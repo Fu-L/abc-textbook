@@ -6,6 +6,7 @@
  */
 export const structuredContentRoots = {
   contests: 'src/content/contests',
+  contestGaps: 'src/content/contest-gaps',
   problemSlots: 'src/content/problem-slots',
   problems: 'src/content/problems',
   techniqueInventory: 'src/content/technique-inventory',

@@ -4,7 +4,7 @@
     "source-abc290-editorial-5758-7690d6e087c7b600f72a7e4932035bfae8591d1b67f55dc02cacd48d86f0c897",
     "source-abc290-g-problem-174a58af4aec053b28b4c475102358c2ee65c20bffe08524f99b3db7242dc533"
   ],
-  "coreMethod": "abc290-g「Edge Elimination」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc290-g「Edge Elimination」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
     "Edge Elimination 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

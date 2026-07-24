@@ -4,17 +4,19 @@
     "source-abc389-editorial-11966-2d50c1df0f7b6574a259cb831848ec304fcdca04663322d78c78d68438e57968",
     "source-abc389-f-problem-752d508edfdaa527668d8275f53899f230b8de394edf2b058d53053ad0d374b8"
   ],
-  "coreMethod": "abc389-f「Rated Range」では、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc389-f「Rated Range」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "作用の合成則と集約演算の準同型性により、遅延値を子へ配る前後で区間の表す値が変わらない。",
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Rated Range 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["半開区間の扱い", "遅延評価セグメント木"],
-  "implementationConcerns": ["作用合成の順序、単位作用、区間長を使う写像を同じ規約で実装する。"],
+  "prerequisiteCandidates": ["半開区間の扱い", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
   "outcomeCandidates": [
-    "Rated Range 型の 区間端点と包含関係に対し、遅延評価セグメント木を選び、状態と証明を一貫して設計できる。"
+    "Rated Range 型の 区間端点と包含関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

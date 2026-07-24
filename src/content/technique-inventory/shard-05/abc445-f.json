@@ -4,7 +4,7 @@
     "source-abc445-editorial-15907-89f35be3c547667a7b103bd1a349b102d4c891c815d9c3eb7304f679c2bfa2f7",
     "source-abc445-f-problem-bbb5df2daeea8d608944b9dfacd26db3a65d3051c3e818bd05f1ec115d582db4"
   ],
-  "coreMethod": "abc445-f「Exactly K Steps 2」では、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc445-f「Exactly K Steps 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
     "Exactly K Steps 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

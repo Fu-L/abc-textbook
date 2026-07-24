@@ -4,19 +4,17 @@
     "source-abc406-editorial-13045-88e5ab7994c41abf34b04962b7a2ffd21aca4604fea4eb821af9d9009f41d591",
     "source-abc406-f-problem-7bae4f2e492c9aec3a247593bc10e1b504e17cfaaa3c624927147a9d7376e5b3"
   ],
-  "coreMethod": "abc406-f「Compare Tree Weights」では、preorder の先頭を根とし、inorder の根位置で左右区間を分割して二分木を再帰復元する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc406-f「Compare Tree Weights」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "根と左右部分木の要素集合・長さが二つの traversal から一意に定まり、各部分区間へ同じ議論を適用できる。",
+    "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
     "Compare Tree Weights 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "二分木の preorder と inorder"],
-  "implementationConcerns": [
-    "値から inorder 位置への逆配列を使い、不整合区間や根が 1 でない入力を拒否する。"
-  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "深さ優先探索"],
+  "implementationConcerns": ["再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。"],
   "outcomeCandidates": [
-    "Compare Tree Weights 型の 頂点と辺からなる状態グラフに対し、二分木の preorder と inorderを選び、状態と証明を一貫して設計できる。"
+    "Compare Tree Weights 型の 頂点と辺からなる状態グラフに対し、深さ優先探索を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

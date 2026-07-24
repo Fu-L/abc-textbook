@@ -4,19 +4,17 @@
     "source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418",
     "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e"
   ],
-  "coreMethod": "abc214-h「Collecting」では、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc214-h「Collecting」では、主解法候補として、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "各増加路が残余グラフで最小費用なので、ポテンシャルを保った交換論により総費用の最適性が維持される。",
+    "同一強連結成分内では相互到達可能であり、成分間を縮約すると閉路のない DAG になる。",
     "Collecting 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "最小費用流と残余グラフ"],
-  "implementationConcerns": [
-    "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。"
-  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "強連結成分分解"],
+  "implementationConcerns": ["元頂点から成分番号への写像と、重複する成分間辺の扱いを明確にする。"],
   "outcomeCandidates": [
-    "Collecting 型の 頂点と辺からなる状態グラフに対し、最小費用流と残余グラフを選び、状態と証明を一貫して設計できる。"
+    "Collecting 型の 頂点と辺からなる状態グラフに対し、強連結成分分解を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

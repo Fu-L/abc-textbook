@@ -4,7 +4,7 @@
     "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
     "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5"
   ],
-  "coreMethod": "abc265-ex「No-capture Lance Game」では、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc265-ex「No-capture Lance Game」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
     "No-capture Lance Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

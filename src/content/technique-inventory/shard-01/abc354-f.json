@@ -4,19 +4,19 @@
     "source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84",
     "source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501"
   ],
-  "coreMethod": "abc354-f「Useless for LIS」では、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc354-f「Useless for LIS」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+    "大小・等値関係を保つ順位写像なので、元座標での順序条件と圧縮後の条件が同値になる。",
     "Useless for LIS 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "セグメント木と monoid"],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "座標圧縮"],
   "implementationConcerns": [
-    "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。"
+    "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。"
   ],
   "outcomeCandidates": [
-    "Useless for LIS 型の 列の順序と prefix 状態に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。"
+    "Useless for LIS 型の 列の順序と prefix 状態に対し、座標圧縮を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

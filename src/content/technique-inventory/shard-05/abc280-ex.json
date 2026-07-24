@@ -4,19 +4,17 @@
     "source-abc280-editorial-5332-5fe0f42d10a24b904294ed89de5b1f424075902dd282d2607ff3986a8efa79c5",
     "source-abc280-ex-problem-82d5cbd4eb164acf4fca03545ef6fead6bb70019652981eb20d6143b041a7b14"
   ],
-  "coreMethod": "abc280-ex「Substring Sort」では、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc280-ex「Substring Sort」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "ある文字列と prefix を共有する文字列群は辞書順で連続するため、最長一致する相手は隣接位置にも存在する。",
+    "suffix の辞書順と共通接頭辞長が部分文字列比較の最初の不一致位置を一意に決める。",
     "Substring Sort 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["文字列の添字と prefix", "辞書順と longest common prefix"],
-  "implementationConcerns": [
-    "元 index を文字列と一緒に保持し、先頭・末尾では存在する片側だけを比較する。"
-  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "Suffix Array と LCP"],
+  "implementationConcerns": ["suffix 長が異なる比較と sentinel の順序を統一する。"],
   "outcomeCandidates": [
-    "Substring Sort 型の 文字列の prefix・suffix と一致関係に対し、辞書順と longest common prefixを選び、状態と証明を一貫して設計できる。"
+    "Substring Sort 型の 文字列の prefix・suffix と一致関係に対し、Suffix Array と LCPを選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

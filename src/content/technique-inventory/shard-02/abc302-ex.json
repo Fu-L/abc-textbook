@@ -4,7 +4,7 @@
     "source-abc302-editorial-6409-0980d612d8a3b798d479cf989dcde01464de3545aff24aa2d5d6528a3fe792d2",
     "source-abc302-ex-problem-fe03a8a5ec8d36feacf56530e37fa3ad843cdeafb3615a1d48ba6eb56243ddb1"
   ],
-  "coreMethod": "abc302-ex「Ball Collector」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc302-ex「Ball Collector」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
     "Ball Collector 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

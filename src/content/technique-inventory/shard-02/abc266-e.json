@@ -4,7 +4,7 @@
     "source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c",
     "source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f"
   ],
-  "coreMethod": "abc266-e「Throwing the Die」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。入力から構成される離散状態と実行可能な遷移を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc266-e「Throwing the Die」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。入力から構成される離散状態と実行可能な遷移を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
     "Throwing the Die 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

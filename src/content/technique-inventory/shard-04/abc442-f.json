@@ -4,17 +4,19 @@
     "source-abc442-editorial-15142-5355880b8ad91a4f3c9a0c036da679518bd4554ebbfa7191f44bc656993dea61",
     "source-abc442-f-problem-d72a790bd4b9c8e7bd88ea4720ec625c1791bfd7fe4ab4fe09797503cfec89a4"
   ],
-  "coreMethod": "abc442-f「Diagonal Separation 2」では、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc442-f「Diagonal Separation 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Diagonal Separation 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["grid の座標表現", "累積和と差分"],
-  "implementationConcerns": ["半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。"],
+  "prerequisiteCandidates": ["grid の座標表現", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
   "outcomeCandidates": [
-    "Diagonal Separation 2 型の 盤面上の位置と局所遷移に対し、累積和と差分を選び、状態と証明を一貫して設計できる。"
+    "Diagonal Separation 2 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

@@ -4,7 +4,7 @@
     "source-abc412-e-problem-b1dd2ee7a196901de5c09926f0c5097e4ad5ba4e585f89a645632cf631613037",
     "source-abc412-editorial-13387-d3fee80ccc172983e1e1ad2ed6c6b7c1e99725db08da55d76946ec45e2986d5f"
   ],
-  "coreMethod": "abc412-e「LCM Sequence」では、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc412-e「LCM Sequence」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "算術の基本定理により正整数の素因数指数表現は一意で、積・割り切れ条件を指数ごとに判定できる。",
     "LCM Sequence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

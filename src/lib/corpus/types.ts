@@ -1,3 +1,6 @@
+import type { z } from 'zod';
+
+import type { OfficialContestGapMetadataSchema } from '../domain/schema-parts/catalog.js';
 import type { PreviewSelectionRules } from '../preview/cohort-selection.js';
 
 export type PolicyDocumentKind = 'robots' | 'terms' | 'generative-ai';
@@ -67,16 +70,7 @@ export interface OfficialContestMetadata {
   readonly checkedAt: string;
 }
 
-export interface OfficialContestGapMetadata {
-  readonly number: number;
-  readonly contestId: string;
-  readonly status: 'officially_unheld';
-  readonly evidenceUrl: string;
-  readonly evidenceAssertion: string;
-  readonly checkedAt: string;
-  readonly termsCheckedAt: string;
-  readonly fingerprint: string;
-}
+export type OfficialContestGapMetadata = z.infer<typeof OfficialContestGapMetadataSchema>;
 
 export interface CorpusSourceRevision {
   readonly id: string;

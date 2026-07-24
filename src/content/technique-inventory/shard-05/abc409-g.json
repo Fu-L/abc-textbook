@@ -4,7 +4,7 @@
     "source-abc409-editorial-13172-94a5ce9a66c66c0e47a1f1ccd42c3ded3ae66f20724269ca333de29f7e25d7a5",
     "source-abc409-g-problem-27228e15fe52a148b2a9dc3940e8a705c69f0551673efb01f45c4297f1c6ffcf"
   ],
-  "coreMethod": "abc409-g「Accumulation of Wealth」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc409-g「Accumulation of Wealth」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
     "Accumulation of Wealth 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

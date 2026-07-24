@@ -145,6 +145,17 @@ const TECHNIQUE_SIGNALS: readonly TechniqueSignal[] = [
     priority: 34,
   }),
   technique({
+    id: 'lowlink-articulation',
+    pattern: /(?:LowLink|lowlink|articulation points?|cut vertices|関節点)/u,
+    action: 'DFS 木の訪問順と lowlink を計算し、頂点除去で連結成分が分かれる条件を判定する',
+    proof:
+      '子部分木から祖先へ戻れる最小訪問順を lowlink に保つと、親より上へ戻れない子ごとに頂点除去後の成分が一つ増える。',
+    prerequisite: 'DFS 木と lowlink',
+    concern: '根だけは DFS 木の子数で判定し、親への木辺と多重辺を区別する。',
+    family: 'graph-decomposition',
+    priority: 36,
+  }),
+  technique({
     id: 'topological-dag',
     pattern: /(?:topological sort|topological order|トポロジカルソート|トポロジカル順序|\bDAG\b)/iu,
     action: '依存関係を DAG として表し、トポロジカル順に値を伝播する',
@@ -156,7 +167,8 @@ const TECHNIQUE_SIGNALS: readonly TechniqueSignal[] = [
   }),
   technique({
     id: 'minimum-spanning-tree',
-    pattern: /(?:minimum spanning tree|\bMST\b|Kruskal|Prim(?:'s)?|最小全域木|クラスカル|プリム)/iu,
+    pattern:
+      /(?:minimum spanning tree|\bMST\b|Kruskal|\bPrim(?:'s)?\b|最小全域木|クラスカル|プリム)/iu,
     action: '辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する',
     proof:
       'cut property により異なる成分を結ぶ最小辺は安全であり、閉路を避けた採用を繰り返せば最適な全域木になる。',
@@ -285,7 +297,8 @@ const TECHNIQUE_SIGNALS: readonly TechniqueSignal[] = [
   }),
   technique({
     id: 'fenwick-tree',
-    pattern: /(?:Fenwick tree|Binary Indexed Tree|\bBIT\b|Fenwick|フェニック木|二分木状配列)/iu,
+    pattern:
+      /(?:[Ff]enwick(?: [Tt]ree)?|[Bb]inary [Ii]ndexed [Tt]ree|\bBIT\b|フェニック木|二分木状配列)/u,
     action: '加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する',
     proof: '各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。',
     prerequisite: 'Fenwick tree',
@@ -1768,6 +1781,7 @@ const REVIEWED_SIGNAL_BINDINGS: Readonly<Record<string, readonly string[]>> = {
   'abc247-f': ['disjoint-set-union', 'dynamic-programming'],
   'abc248-e': ['computational-geometry', 'complete-enumeration'],
   'abc248-ex': ['lazy-segment-tree'],
+  'abc248-g': ['tree-dp'],
   'abc251-g': ['computational-geometry'],
   'abc252-ex': ['balanced-xor-necklace-mitm'],
   'abc252-e': ['shortest-path-tree-edge-selection'],
@@ -1808,11 +1822,14 @@ const REVIEWED_SIGNAL_BINDINGS: Readonly<Record<string, readonly string[]>> = {
   'abc335-f': ['step-size-sqrt-dp'],
   'abc336-f': ['bidirectional-rotation-mitm'],
   'abc330-e': ['dynamic-mex-maintenance'],
+  'abc334-g': ['lowlink-articulation'],
   'abc337-e': ['binary-information-encoding'],
   'abc337-f': ['circular-capped-window-counting'],
+  'abc337-g': ['euler-tour', 'fenwick-tree'],
   'abc338-g': ['expression-segment-composition'],
   'abc339-f': ['modular-product-fingerprinting'],
   'abc340-e': ['range-distribution-data-structure'],
+  'abc343-e': ['complete-enumeration'],
   'abc343-f': ['top-two-segment-tree'],
   'abc346-e': ['reverse-paint-processing'],
   'abc350-f': ['parenthesis-direction-traversal'],
@@ -1825,10 +1842,12 @@ const REVIEWED_SIGNAL_BINDINGS: Readonly<Record<string, readonly string[]>> = {
   'abc371-e': ['absence-gap-subarray-counting'],
   'abc377-e': ['permutation-cycle-power'],
   'abc377-f': ['attack-line-overlap-counting'],
+  'abc380-e': ['ordered-set'],
   'abc385-f': ['adjacent-visibility-dominance'],
   'abc390-f': ['absence-gap-subarray-counting'],
   'abc405-g': ['mo-frequency-bucket-aggregation'],
   'abc408-g': ['continued-fraction-open-interval'],
+  'abc410-e': ['dynamic-programming'],
   'abc410-f': ['thin-grid-zero-sum-rectangles'],
   'abc411-f': ['small-to-large-graph-contraction'],
   'abc418-e': ['slope-midpoint-pair-counting'],
@@ -1843,6 +1862,7 @@ const REVIEWED_SIGNAL_BINDINGS: Readonly<Record<string, readonly string[]>> = {
   'abc439-f': ['endpoint-pattern-subsequence-counting'],
   'abc440-g': ['layered-component-top-two-dp'],
   'abc441-e': ['prefix-difference-order-counting'],
+  'abc447-f': ['tree-dp'],
   'abc450-e': ['implicit-fibonacci-word-prefix'],
   'abc451-f': ['small-to-large-bipartite-dsu'],
   'abc461-f': ['divisor-product-score-dp'],
@@ -1914,6 +1934,13 @@ const REVIEWED_ONLY_SIGNAL_IDS = new Set<string>([
   'top-two-segment-tree',
   'two-dimensional-suffix-maximum',
   'bidirectional-rotation-mitm',
+  'degree-sqrt-decomposition',
+  'frontier-connectivity-dp',
+  'lattice-translation-classes',
+  'pair-witness-pigeonhole',
+  'reflection-parity-construction',
+  'spatial-bucketing',
+  'tree-traversal-reconstruction',
 ]);
 
 interface ReviewedComplexityBinding {
@@ -1977,6 +2004,9 @@ const REVIEWED_COMPLEXITY_BINDINGS: Readonly<Record<string, ReviewedComplexityBi
   },
 };
 
+export const reviewedProblemComplexity = (problemId: string): string | undefined =>
+  REVIEWED_COMPLEXITY_BINDINGS[problemId]?.time;
+
 const normalizeText = (value: string): string =>
   value.normalize('NFC').replace(/\s+/gu, ' ').trim();
 
@@ -1989,9 +2019,11 @@ const detectTechniques = (text: string, problemId: string): readonly TechniqueSi
   const matches = TECHNIQUE_SIGNALS.flatMap((signal) => {
     if (REVIEWED_ONLY_SIGNAL_IDS.has(signal.id)) return [];
     const occurrences = countMatches(text, signal.pattern);
-    return occurrences === 0 ? [] : [{ signal, occurrences }];
+    const firstIndex = text.search(signal.pattern);
+    return occurrences === 0 || firstIndex < 0 ? [] : [{ signal, occurrences, firstIndex }];
   }).sort(
     (left, right) =>
+      left.firstIndex - right.firstIndex ||
       right.signal.priority - left.signal.priority ||
       right.occurrences - left.occurrences ||
       left.signal.id.localeCompare(right.signal.id, 'en'),
@@ -2059,7 +2091,11 @@ export const authorTechniqueInventoryItem = (
 ): TechniqueAuthoringAnalysis => {
   const statementText = normalizeText(input.statementText);
   const editorialText = normalizeText(input.editorialText);
-  const signals = detectTechniques(`${input.problem.title} ${editorialText}`, input.problem.id);
+  // A title can contain an algorithm-shaped everyday word (for example,
+  // "1D Bucket Tool") without naming the solution. Prefer the first technique
+  // explicitly introduced by the official editorial; later hits are commonly
+  // alternatives or comparisons rather than the primary method.
+  const signals = detectTechniques(editorialText, input.problem.id);
   const primary = signals[0];
   const structure = detectStructure(`${input.problem.title} ${statementText}`);
   const hasReviewedBinding = REVIEWED_SIGNAL_BINDINGS[input.problem.id] !== undefined;
@@ -2092,7 +2128,9 @@ export const authorTechniqueInventoryItem = (
   const item = TechniqueInventoryItemSchema.parse({
     problemId: input.problem.id,
     sourceRevisionIds: [...input.problem.sourceRevisionIds].sort(),
-    coreMethod: `${input.problem.id}「${input.problem.title}」では、${methodActions}。${
+    coreMethod: `${input.problem.id}「${input.problem.title}」では、${
+      hasReviewedBinding ? '' : '主解法候補として、'
+    }${methodActions}。${
       hasReviewedBinding
         ? 'この状態表現から答えを構成する。'
         : `${structure.description}を必要十分な状態だけで表し、答えを構成する。`
@@ -2106,7 +2144,7 @@ export const authorTechniqueInventoryItem = (
     ],
     adHocElements: [],
     authorId: input.authorId ?? 'person-maintainer',
-    reviewStatus: 'reviewed',
+    reviewStatus: hasReviewedBinding ? 'reviewed' : 'draft',
   });
   return {
     item,

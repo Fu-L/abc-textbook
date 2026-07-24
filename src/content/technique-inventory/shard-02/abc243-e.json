@@ -4,7 +4,7 @@
     "source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41",
     "source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f"
   ],
-  "coreMethod": "abc243-e「Edge Deletion」では、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc243-e「Edge Deletion」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "許可する中継頂点集合について帰納し、最適路が新頂点を使う場合と使わない場合を網羅する。",
     "Edge Deletion 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

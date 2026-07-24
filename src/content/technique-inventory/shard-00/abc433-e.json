@@ -4,7 +4,7 @@
     "source-abc433-e-problem-c1c720619b326a64be6ed46ae25e7a4817b290636916afa6bc5d11780707a236",
     "source-abc433-editorial-14636-311d6477e1944f6467b6ce4081f41d65550694299324f13e27a64983dba59c30"
   ],
-  "coreMethod": "abc433-e「Max Matrix 2」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc433-e「Max Matrix 2」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
     "Max Matrix 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

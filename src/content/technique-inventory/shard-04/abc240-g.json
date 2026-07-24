@@ -4,19 +4,19 @@
     "source-abc240-editorial-3423-f1ae91f9a88b3ccf4ed145d2a904347e29aa782a320a7510c8ee6f1a870d9c0d",
     "source-abc240-g-problem-0d05122adbbea727dceed2629d2df052e4505a4b6829b2188ad615c73666d1c9"
   ],
-  "coreMethod": "abc240-g「Teleporting Takahashi」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc240-g「Teleporting Takahashi」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+    "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
     "Teleporting Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["grid の座標表現", "組合せ数と二項係数"],
+  "prerequisiteCandidates": ["grid の座標表現", "剰余演算と modular inverse"],
   "implementationConcerns": [
-    "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。"
+    "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。"
   ],
   "outcomeCandidates": [
-    "Teleporting Takahashi 型の 盤面上の位置と局所遷移に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。"
+    "Teleporting Takahashi 型の 盤面上の位置と局所遷移に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

@@ -4,7 +4,7 @@
     "source-abc376-editorial-11196-a18251ecf2055b932d102aa3f8bccd2f6b2e4df137f625ae2ae766a90759e2fb",
     "source-abc376-g-problem-d1e80774f47d87b619c3d47de0ca47347deb38146893cecb69ba3b4bdde81378"
   ],
-  "coreMethod": "abc376-g「Treasure Hunting」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc376-g「Treasure Hunting」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
     "Treasure Hunting 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

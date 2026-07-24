@@ -4,7 +4,7 @@
     "source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541",
     "source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"
   ],
-  "coreMethod": "abc220-h「Security Camera」では、選択を二群に分けて各側を全列挙し、和・順序・hash lookup で組を結合する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc220-h「Security Camera」では、主解法候補として、選択を二群に分けて各側を全列挙し、和・順序・hash lookup で組を結合する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "任意の全体選択は左右の部分選択の組へ一意に分かれるため、両側の列挙と結合で全候補を覆う。",
     "Security Camera 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

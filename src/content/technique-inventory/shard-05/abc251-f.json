@@ -4,17 +4,17 @@
     "source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d",
     "source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4"
   ],
-  "coreMethod": "abc251-f「Two Spanning Trees」では、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc251-f「Two Spanning Trees」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+    "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
     "Two Spanning Trees 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["木の連結性と一意な単純路", "幅優先探索"],
-  "implementationConcerns": ["訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。"],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "深さ優先探索"],
+  "implementationConcerns": ["再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。"],
   "outcomeCandidates": [
-    "Two Spanning Trees 型の 根付き木・部分木・パスの関係に対し、幅優先探索を選び、状態と証明を一貫して設計できる。"
+    "Two Spanning Trees 型の 根付き木・部分木・パスの関係に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

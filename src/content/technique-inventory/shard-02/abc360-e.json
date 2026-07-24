@@ -4,17 +4,19 @@
     "source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4",
     "source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a"
   ],
-  "coreMethod": "abc360-e「Random Swaps of Balls」では、線形遷移を行列として表し、binary exponentiation で多数回の遷移を合成する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc360-e「Random Swaps of Balls」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "状態ベクトルへの一回遷移が行列積に一致するため、結合則と二進展開で K 回遷移が行列の K 乗になる。",
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Random Swaps of Balls 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["半開区間の扱い", "行列累乗"],
-  "implementationConcerns": ["積の添字順序と modulus を統一し、疎行列なら不要な積を省く。"],
+  "prerequisiteCandidates": ["半開区間の扱い", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
   "outcomeCandidates": [
-    "Random Swaps of Balls 型の 区間端点と包含関係に対し、行列累乗を選び、状態と証明を一貫して設計できる。"
+    "Random Swaps of Balls 型の 区間端点と包含関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

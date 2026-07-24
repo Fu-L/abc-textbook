@@ -4,7 +4,7 @@
     "source-abc327-editorial-7579-19143f964595c33a9fb75c3de2ae24608c840e791233afa2c12a9619ca872058",
     "source-abc327-f-problem-caf95a8c3cb45ee5a85c76cc95ddb9e61bf314152fb11c7235ef0b035e9b269a"
   ],
-  "coreMethod": "abc327-f「Apples」では、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc327-f「Apples」では、主解法候補として、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "作用の合成則と集約演算の準同型性により、遅延値を子へ配る前後で区間の表す値が変わらない。",
     "Apples 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

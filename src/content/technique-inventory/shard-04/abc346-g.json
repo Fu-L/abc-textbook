@@ -4,7 +4,7 @@
     "source-abc346-editorial-9638-0c7ad27ddd09787f39cd8190b177d312d9985eb4ad674bf527389b86e9030751",
     "source-abc346-g-problem-8855088ceb0c5e93d97fc9dce94136b20fc688c72cb4aa09706db39c292d13a0"
   ],
-  "coreMethod": "abc346-g「Alone」では、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc346-g「Alone」では、主解法候補として、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "作用の合成則と集約演算の準同型性により、遅延値を子へ配る前後で区間の表す値が変わらない。",
     "Alone 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

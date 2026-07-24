@@ -4,7 +4,7 @@
     "source-abc396-editorial-12375-87460d584617418cae1e2edd3b3cf819cf0df9ab9c7a7be2568e840e8e487b24",
     "source-abc396-g-problem-81eeb298bb974b4bd8017be318c18264a7d11c3550cec032d95ea58895201f54"
   ],
-  "coreMethod": "abc396-g「Flip Row or Col」では、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc396-g「Flip Row or Col」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "各部分解を選択集合と終端状態で一意に分類し、最後の一手を外す帰納法で遷移の完全性を示す。",
     "Flip Row or Col 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

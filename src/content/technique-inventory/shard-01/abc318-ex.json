@@ -4,7 +4,7 @@
     "source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84",
     "source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01"
   ],
-  "coreMethod": "abc318-ex「Count Strong Test Cases」では、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc318-ex「Count Strong Test Cases」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "係数比較により元の再帰・畳み込みと冪級数恒等式が次数ごとに同値であることを示す。",
     "Count Strong Test Cases 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

@@ -4,7 +4,7 @@
     "source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5",
     "source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd"
   ],
-  "coreMethod": "abc233-f「Swap and Sort」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc233-f「Swap and Sort」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
     "Swap and Sort 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

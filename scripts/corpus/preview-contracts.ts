@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import { previewSelectionRulesDigest } from '../../src/lib/preview/cohort-selection.js';
 import type { PreviewSelectionRules } from '../../src/lib/preview/cohort-selection.js';
+import { PreviewCandidatePoolSchema } from '../../src/lib/corpus/technique-inventory.js';
 import type {
   PreviewCandidatePool,
   PreviewCohortCandidateInput,
@@ -35,7 +36,11 @@ const selectionRulesSchema = z.strictObject({
     minimumProblemCount: z.number().int().positive(),
     minimumContestCount: z.number().int().positive(),
     minimumAdvancedLabelCount: z.number().int().positive(),
-    stableSortKeys: uniqueStrings,
+    stableSortKeys: z.tuple([
+      z.literal('contestNumber'),
+      z.literal('officialTaskOrder'),
+      z.literal('problemId'),
+    ]),
     allowFixtureSupplement: z.boolean(),
     requireFixtureBoundaryDeclaration: z.boolean(),
   }),
@@ -80,17 +85,6 @@ const candidateInputFileSchema = z.strictObject({
   fixtures: z.array(candidateSchema),
 });
 
-const candidatePoolSchema = z.strictObject({
-  schemaVersion: z.literal('1.0.0'),
-  previewId: z.literal('initial-v1'),
-  batchId: z.literal('abc212-abc263'),
-  metadataBatchDigest: sha256,
-  allowedDomains: uniqueStrings.min(1),
-  sourceRevisionIds: uniqueStrings,
-  candidates: z.array(candidateSchema),
-  candidatePoolDigest: sha256,
-});
-
 export interface PreviewSelectionControl {
   readonly phase: string;
   readonly selectionRules: PreviewSelectionRules;
@@ -132,4 +126,4 @@ export const parseCandidateInputFile = (value: unknown): CandidateInputFile =>
   candidateInputFileSchema.parse(value);
 
 export const parsePreviewCandidatePool = (value: unknown): PreviewCandidatePool =>
-  candidatePoolSchema.parse(value);
+  PreviewCandidatePoolSchema.parse(value);

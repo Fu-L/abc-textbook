@@ -4,17 +4,19 @@
     "source-abc287-editorial-5633-7a389616e1c18eb480569f5987f8248187fca80603469d38b3212c4d9f96339e",
     "source-abc287-g-problem-8b42218db6b3e08b9fa2ffd1cbf114d5bc2fa41495e2afe16bfaea5fa2273199"
   ],
-  "coreMethod": "abc287-g「Balance Update Query」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc287-g「Balance Update Query」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+    "大小・等値関係を保つ順位写像なので、元座標での順序条件と圧縮後の条件が同値になる。",
     "Balance Update Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["online query の計算量設計", "Fenwick tree"],
-  "implementationConcerns": ["内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"],
+  "prerequisiteCandidates": ["online query の計算量設計", "座標圧縮"],
+  "implementationConcerns": [
+    "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。"
+  ],
   "outcomeCandidates": [
-    "Balance Update Query 型の 更新と問い合わせの時系列に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。"
+    "Balance Update Query 型の 更新と問い合わせの時系列に対し、座標圧縮を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

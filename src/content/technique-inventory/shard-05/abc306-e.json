@@ -4,19 +4,19 @@
     "source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd",
     "source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928"
   ],
-  "coreMethod": "abc306-e「Best Performances」では、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc306-e「Best Performances」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "親部分木の上位 K 個に入らない子内要素は、同じ子だけで K 個以上に負けるため親でも候補にならない。",
+    "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
     "Best Performances 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "small-to-large merge と上位 K 個の保持"],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "平衡二分探索木"],
   "implementationConcerns": [
-    "K の全体上限だけ保持し、query の 1-origin 順位と vector index を変換する。"
+    "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。"
   ],
   "outcomeCandidates": [
-    "Best Performances 型の 列の順序と prefix 状態に対し、small-to-large merge と上位 K 個の保持を選び、状態と証明を一貫して設計できる。"
+    "Best Performances 型の 列の順序と prefix 状態に対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

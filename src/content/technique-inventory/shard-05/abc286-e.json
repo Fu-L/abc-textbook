@@ -4,7 +4,7 @@
     "source-abc286-e-problem-8454afd2d7cbf93f7d73902a6055c610ab7cbfb726bb93e69934145bacd7924e",
     "source-abc286-editorial-5572-6f1f3b4f5ad6878e0e42cb4f8c140808d5f176a3ada4b42bc6a24bbf081f5871"
   ],
-  "coreMethod": "abc286-e「Souvenir」では、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc286-e「Souvenir」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "許可する中継頂点集合について帰納し、最適路が新頂点を使う場合と使わない場合を網羅する。",
     "Souvenir 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

@@ -4,19 +4,19 @@
     "source-abc358-e-problem-ce60cff63fd0577725456c91d6665c619045aa7e5cae031c6388896e96d4e6c5",
     "source-abc358-editorial-10224-5173bc717de96c786fc42652937e6a6bff489baa562df3ae25093cf36b299e82"
   ],
-  "coreMethod": "abc358-e「Alphabet Tiles」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc358-e「Alphabet Tiles」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Alphabet Tiles 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["文字列の添字と prefix", "組合せ数と二項係数"],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "動的計画法の状態設計"],
   "implementationConcerns": [
-    "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。"
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
   ],
   "outcomeCandidates": [
-    "Alphabet Tiles 型の 文字列の prefix・suffix と一致関係に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。"
+    "Alphabet Tiles 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

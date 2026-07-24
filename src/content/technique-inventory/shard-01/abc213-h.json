@@ -4,17 +4,19 @@
     "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
     "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"
   ],
-  "coreMethod": "abc213-h「Stroll」では、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc213-h「Stroll」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
+    "全対象が左・右・境界をまたぐものの三種に分かれ、再帰解と merge が互いに重複なく覆う。",
     "Stroll 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "畳み込みと NTT"],
-  "implementationConcerns": ["必要な係数長、padding 長、法が NTT に対応するかを確認する。"],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "分割統治"],
+  "implementationConcerns": [
+    "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。"
+  ],
   "outcomeCandidates": [
-    "Stroll 型の 列の順序と prefix 状態に対し、畳み込みと NTTを選び、状態と証明を一貫して設計できる。"
+    "Stroll 型の 列の順序と prefix 状態に対し、分割統治を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

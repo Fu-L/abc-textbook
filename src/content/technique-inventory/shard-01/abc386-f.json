@@ -4,7 +4,7 @@
     "source-abc386-editorial-11695-65707968a759b7bb8094dabfdbfdd6ba4dbfcf53684d68d29bcb6ef6cb7c7e39",
     "source-abc386-f-problem-25e7b3bda090132d80b6833e5c285d0b8145d6681279354502a1011ed13a00c3"
   ],
-  "coreMethod": "abc386-f「Operate K」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc386-f「Operate K」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Operate K 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

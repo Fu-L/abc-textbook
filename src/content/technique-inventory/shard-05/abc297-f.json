@@ -4,7 +4,7 @@
     "source-abc297-editorial-6157-b6977990ddffc8dfaf2e2b6dd9f30b58f9854d60d6ed32791d815e4e67da9c98",
     "source-abc297-f-problem-ead99b97c373361d06678b186b73957a8ebe3dfef841dde59a69ab2b46b5fab5"
   ],
-  "coreMethod": "abc297-f「Minimum Bounding Box 2」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc297-f「Minimum Bounding Box 2」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
     "Minimum Bounding Box 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

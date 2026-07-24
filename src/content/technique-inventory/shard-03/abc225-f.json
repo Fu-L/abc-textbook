@@ -4,19 +4,19 @@
     "source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01",
     "source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1"
   ],
-  "coreMethod": "abc225-f「String Cards」では、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc225-f「String Cards」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "ある文字列と prefix を共有する文字列群は辞書順で連続するため、最長一致する相手は隣接位置にも存在する。",
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "String Cards 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["文字列の添字と prefix", "辞書順と longest common prefix"],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "動的計画法の状態設計"],
   "implementationConcerns": [
-    "元 index を文字列と一緒に保持し、先頭・末尾では存在する片側だけを比較する。"
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
   ],
   "outcomeCandidates": [
-    "String Cards 型の 文字列の prefix・suffix と一致関係に対し、辞書順と longest common prefixを選び、状態と証明を一貫して設計できる。"
+    "String Cards 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

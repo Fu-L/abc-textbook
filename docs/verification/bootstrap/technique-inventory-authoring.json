@@ -7,7 +7,17 @@
   "sourceBoundProblemCount": 868,
   "complexityEssentialProblemCount": 12,
   "problemComplexityCount": 12,
-  "unclassifiedProblemIds": [],
+  "unclassifiedProblemIds": [
+    "abc261-e",
+    "abc270-g",
+    "abc280-g",
+    "abc283-g",
+    "abc314-ex",
+    "abc323-f",
+    "abc398-g",
+    "abc422-e",
+    "abc457-g"
+  ],
   "complexityOmittedProblemIds": [
     "abc212-e",
     "abc212-f",
@@ -867,8 +877,12 @@
     "abc466-g"
   ],
   "classificationModeCounts": {
-    "official_term_detection": 756,
-    "reviewed_binding": 112
+    "official_term_detection": 749,
+    "reviewed_binding": 119
+  },
+  "reviewStatusCounts": {
+    "draft": 749,
+    "reviewed": 119
   },
   "assignments": [
     {
@@ -881,7 +895,7 @@
     },
     {
       "problemId": "abc212-f",
-      "signalIds": ["binary-lifting"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "query",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -921,7 +935,7 @@
     },
     {
       "problemId": "abc213-g",
-      "signalIds": ["subset-dp"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -929,7 +943,7 @@
     },
     {
       "problemId": "abc213-h",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["divide-and-conquer"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -937,7 +951,7 @@
     },
     {
       "problemId": "abc214-e",
-      "signalIds": ["binary-search-answer"],
+      "signalIds": ["priority-queue"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -945,7 +959,7 @@
     },
     {
       "problemId": "abc214-f",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -961,7 +975,7 @@
     },
     {
       "problemId": "abc214-h",
-      "signalIds": ["min-cost-flow"],
+      "signalIds": ["strongly-connected-components"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -977,7 +991,7 @@
     },
     {
       "problemId": "abc215-f",
-      "signalIds": ["two-pointers"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1025,7 +1039,7 @@
     },
     {
       "problemId": "abc216-h",
-      "signalIds": ["subset-dp"],
+      "signalIds": ["topological-dag"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1033,7 +1047,7 @@
     },
     {
       "problemId": "abc217-e",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["priority-queue"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1089,7 +1103,7 @@
     },
     {
       "problemId": "abc218-h",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["greedy-exchange"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1129,7 +1143,7 @@
     },
     {
       "problemId": "abc220-e",
-      "signalIds": ["lca-binary-lifting"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1161,7 +1175,7 @@
     },
     {
       "problemId": "abc221-e",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["coordinate-compression"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1177,7 +1191,7 @@
     },
     {
       "problemId": "abc221-g",
-      "signalIds": ["bitset-optimization"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1185,7 +1199,7 @@
     },
     {
       "problemId": "abc221-h",
-      "signalIds": ["ordered-set"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1217,7 +1231,7 @@
     },
     {
       "problemId": "abc222-h",
-      "signalIds": ["formal-power-series"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1241,7 +1255,7 @@
     },
     {
       "problemId": "abc223-g",
-      "signalIds": ["rerooting-dp"],
+      "signalIds": ["max-flow-min-cut"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1249,7 +1263,7 @@
     },
     {
       "problemId": "abc223-h",
-      "signalIds": ["gaussian-elimination"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1297,7 +1311,7 @@
     },
     {
       "problemId": "abc225-f",
-      "signalIds": ["sorted-neighbor-lcp"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1329,7 +1343,7 @@
     },
     {
       "problemId": "abc226-f",
-      "signalIds": ["combinatorics-binomial"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1353,7 +1367,7 @@
     },
     {
       "problemId": "abc227-e",
-      "signalIds": ["frequency-candidate-counting"],
+      "signalIds": ["greedy-exchange"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1369,7 +1383,7 @@
     },
     {
       "problemId": "abc227-g",
-      "signalIds": ["minimum-spanning-tree"],
+      "signalIds": ["prime-factorization-sieve"],
       "structureId": "polynomial",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1393,7 +1407,7 @@
     },
     {
       "problemId": "abc228-f",
-      "signalIds": ["sparse-table"],
+      "signalIds": ["prefix-sum-difference"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1473,7 +1487,7 @@
     },
     {
       "problemId": "abc230-h",
-      "signalIds": ["formal-power-series"],
+      "signalIds": ["combinatorics-binomial"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1553,7 +1567,7 @@
     },
     {
       "problemId": "abc233-ex",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "query",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1601,7 +1615,7 @@
     },
     {
       "problemId": "abc234-g",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1617,7 +1631,7 @@
     },
     {
       "problemId": "abc235-ex",
-      "signalIds": ["minimum-spanning-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1633,7 +1647,7 @@
     },
     {
       "problemId": "abc235-g",
-      "signalIds": ["lattice-translation-classes"],
+      "signalIds": ["inclusion-exclusion"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1665,7 +1679,7 @@
     },
     {
       "problemId": "abc236-g",
-      "signalIds": ["matrix-exponentiation"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1673,7 +1687,7 @@
     },
     {
       "problemId": "abc237-e",
-      "signalIds": ["bellman-ford"],
+      "signalIds": ["dijkstra"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1681,7 +1695,7 @@
     },
     {
       "problemId": "abc237-ex",
-      "signalIds": ["max-flow-min-cut"],
+      "signalIds": ["topological-dag"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1705,7 +1719,7 @@
     },
     {
       "problemId": "abc238-e",
-      "signalIds": ["disjoint-set-union"],
+      "signalIds": ["prefix-sum-difference"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1729,7 +1743,7 @@
     },
     {
       "problemId": "abc238-g",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["prime-factorization-sieve"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1745,7 +1759,7 @@
     },
     {
       "problemId": "abc239-ex",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1777,7 +1791,7 @@
     },
     {
       "problemId": "abc240-ex",
-      "signalIds": ["tree-traversal-reconstruction"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1793,7 +1807,7 @@
     },
     {
       "problemId": "abc240-g",
-      "signalIds": ["combinatorics-binomial"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1801,7 +1815,7 @@
     },
     {
       "problemId": "abc241-e",
-      "signalIds": ["binary-lifting"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1841,7 +1855,7 @@
     },
     {
       "problemId": "abc242-ex",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["probability-expectation-dp"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1849,7 +1863,7 @@
     },
     {
       "problemId": "abc242-f",
-      "signalIds": ["inclusion-exclusion"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1889,7 +1903,7 @@
     },
     {
       "problemId": "abc243-g",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1905,7 +1919,7 @@
     },
     {
       "problemId": "abc244-ex",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["computational-geometry"],
       "structureId": "query",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1937,7 +1951,7 @@
     },
     {
       "problemId": "abc245-ex",
-      "signalIds": ["matrix-exponentiation"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1969,7 +1983,7 @@
     },
     {
       "problemId": "abc246-ex",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1985,7 +1999,7 @@
     },
     {
       "problemId": "abc246-g",
-      "signalIds": ["tree-dp"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -1993,7 +2007,7 @@
     },
     {
       "problemId": "abc247-e",
-      "signalIds": ["inclusion-exclusion"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2001,7 +2015,7 @@
     },
     {
       "problemId": "abc247-ex",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2041,7 +2055,7 @@
     },
     {
       "problemId": "abc248-f",
-      "signalIds": ["frontier-connectivity-dp"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2049,15 +2063,15 @@
     },
     {
       "problemId": "abc248-g",
-      "signalIds": ["pair-witness-pigeonhole"],
+      "signalIds": ["tree-dp"],
       "structureId": "tree",
-      "classificationMode": "official_term_detection",
+      "classificationMode": "reviewed_binding",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
     {
       "problemId": "abc249-e",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2065,7 +2079,7 @@
     },
     {
       "problemId": "abc249-ex",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["probability-expectation-dp"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2097,7 +2111,7 @@
     },
     {
       "problemId": "abc250-ex",
-      "signalIds": ["minimum-spanning-tree"],
+      "signalIds": ["disjoint-set-union"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2113,7 +2127,7 @@
     },
     {
       "problemId": "abc250-g",
-      "signalIds": ["lattice-translation-classes"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2129,7 +2143,7 @@
     },
     {
       "problemId": "abc251-ex",
-      "signalIds": ["digit-dp"],
+      "signalIds": ["combinatorics-binomial"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2137,7 +2151,7 @@
     },
     {
       "problemId": "abc251-f",
-      "signalIds": ["breadth-first-search"],
+      "signalIds": ["depth-first-search"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2177,7 +2191,7 @@
     },
     {
       "problemId": "abc252-g",
-      "signalIds": ["tree-traversal-reconstruction"],
+      "signalIds": ["interval-dp"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2185,7 +2199,7 @@
     },
     {
       "problemId": "abc253-e",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2241,7 +2255,7 @@
     },
     {
       "problemId": "abc254-g",
-      "signalIds": ["binary-lifting"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "query",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2281,7 +2295,7 @@
     },
     {
       "problemId": "abc256-e",
-      "signalIds": ["reverse-topological-pruning"],
+      "signalIds": ["functional-graph"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2305,7 +2319,7 @@
     },
     {
       "problemId": "abc256-g",
-      "signalIds": ["matrix-exponentiation"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2353,7 +2367,7 @@
     },
     {
       "problemId": "abc258-ex",
-      "signalIds": ["matrix-exponentiation"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2361,7 +2375,7 @@
     },
     {
       "problemId": "abc258-f",
-      "signalIds": ["lattice-translation-classes"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2369,7 +2383,7 @@
     },
     {
       "problemId": "abc258-g",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["bitset-optimization"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2377,7 +2391,7 @@
     },
     {
       "problemId": "abc259-e",
-      "signalIds": ["frequency-candidate-counting"],
+      "signalIds": ["prime-factorization-sieve"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2393,7 +2407,7 @@
     },
     {
       "problemId": "abc259-f",
-      "signalIds": ["tree-dp"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2417,7 +2431,7 @@
     },
     {
       "problemId": "abc260-ex",
-      "signalIds": ["formal-power-series"],
+      "signalIds": ["inclusion-exclusion"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2441,7 +2455,7 @@
     },
     {
       "problemId": "abc261-e",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": [],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2449,7 +2463,7 @@
     },
     {
       "problemId": "abc261-ex",
-      "signalIds": ["reverse-topological-pruning"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2465,7 +2479,7 @@
     },
     {
       "problemId": "abc261-g",
-      "signalIds": ["dijkstra"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2481,7 +2495,7 @@
     },
     {
       "problemId": "abc262-ex",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2489,7 +2503,7 @@
     },
     {
       "problemId": "abc262-f",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["greedy-exchange"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2497,7 +2511,7 @@
     },
     {
       "problemId": "abc262-g",
-      "signalIds": ["coordinate-compression"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2505,7 +2519,7 @@
     },
     {
       "problemId": "abc263-e",
-      "signalIds": ["probability-expectation-dp"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2513,7 +2527,7 @@
     },
     {
       "problemId": "abc263-ex",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2521,7 +2535,7 @@
     },
     {
       "problemId": "abc263-f",
-      "signalIds": ["complete-enumeration"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2585,7 +2599,7 @@
     },
     {
       "problemId": "abc265-f",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2609,7 +2623,7 @@
     },
     {
       "problemId": "abc266-ex",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2641,7 +2655,7 @@
     },
     {
       "problemId": "abc267-ex",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2673,7 +2687,7 @@
     },
     {
       "problemId": "abc268-ex",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["suffix-array"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2697,7 +2711,7 @@
     },
     {
       "problemId": "abc269-e",
-      "signalIds": ["floor-quotient-blocks"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2753,7 +2767,7 @@
     },
     {
       "problemId": "abc270-g",
-      "signalIds": ["modular-arithmetic"],
+      "signalIds": [],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2785,7 +2799,7 @@
     },
     {
       "problemId": "abc271-g",
-      "signalIds": ["matrix-exponentiation"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2801,7 +2815,7 @@
     },
     {
       "problemId": "abc272-ex",
-      "signalIds": ["formal-power-series"],
+      "signalIds": ["inclusion-exclusion"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2865,7 +2879,7 @@
     },
     {
       "problemId": "abc274-ex",
-      "signalIds": ["sorted-neighbor-lcp"],
+      "signalIds": ["rolling-hash"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2921,7 +2935,7 @@
     },
     {
       "problemId": "abc276-e",
-      "signalIds": ["disjoint-set-union"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2929,7 +2943,7 @@
     },
     {
       "problemId": "abc276-ex",
-      "signalIds": ["gaussian-elimination"],
+      "signalIds": ["bitset-optimization"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2953,7 +2967,7 @@
     },
     {
       "problemId": "abc277-e",
-      "signalIds": ["zero-one-bfs"],
+      "signalIds": ["dijkstra"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -2993,7 +3007,7 @@
     },
     {
       "problemId": "abc278-ex",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["combinatorics-binomial"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3001,7 +3015,7 @@
     },
     {
       "problemId": "abc278-f",
-      "signalIds": ["subset-dp"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3041,7 +3055,7 @@
     },
     {
       "problemId": "abc279-g",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3057,7 +3071,7 @@
     },
     {
       "problemId": "abc280-ex",
-      "signalIds": ["sorted-neighbor-lcp"],
+      "signalIds": ["suffix-array"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3065,7 +3079,7 @@
     },
     {
       "problemId": "abc280-f",
-      "signalIds": ["disjoint-set-union"],
+      "signalIds": ["breadth-first-search"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3073,7 +3087,7 @@
     },
     {
       "problemId": "abc280-g",
-      "signalIds": ["lattice-translation-classes"],
+      "signalIds": [],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3113,7 +3127,7 @@
     },
     {
       "problemId": "abc282-e",
-      "signalIds": ["minimum-spanning-tree"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3121,7 +3135,7 @@
     },
     {
       "problemId": "abc282-ex",
-      "signalIds": ["floor-quotient-blocks"],
+      "signalIds": ["divide-and-conquer"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3137,7 +3151,7 @@
     },
     {
       "problemId": "abc282-g",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3153,7 +3167,7 @@
     },
     {
       "problemId": "abc283-ex",
-      "signalIds": ["floor-quotient-blocks"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3169,7 +3183,7 @@
     },
     {
       "problemId": "abc283-g",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": [],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3193,7 +3207,7 @@
     },
     {
       "problemId": "abc284-f",
-      "signalIds": ["sorted-neighbor-lcp"],
+      "signalIds": ["z-kmp"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3201,7 +3215,7 @@
     },
     {
       "problemId": "abc284-g",
-      "signalIds": ["functional-graph"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3289,7 +3303,7 @@
     },
     {
       "problemId": "abc287-f",
-      "signalIds": ["tree-dp"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3297,7 +3311,7 @@
     },
     {
       "problemId": "abc287-g",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["coordinate-compression"],
       "structureId": "query",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3313,7 +3327,7 @@
     },
     {
       "problemId": "abc288-ex",
-      "signalIds": ["digit-dp"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3321,7 +3335,7 @@
     },
     {
       "problemId": "abc288-f",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3345,7 +3359,7 @@
     },
     {
       "problemId": "abc289-ex",
-      "signalIds": ["formal-power-series"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3385,7 +3399,7 @@
     },
     {
       "problemId": "abc290-f",
-      "signalIds": ["degree-sqrt-decomposition"],
+      "signalIds": ["piecewise-quadratic-optimization"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3401,7 +3415,7 @@
     },
     {
       "problemId": "abc291-e",
-      "signalIds": ["reverse-topological-pruning"],
+      "signalIds": ["topological-dag"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3441,7 +3455,7 @@
     },
     {
       "problemId": "abc292-ex",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["prefix-sum-difference"],
       "structureId": "query",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3449,7 +3463,7 @@
     },
     {
       "problemId": "abc292-f",
-      "signalIds": ["lattice-translation-classes"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3473,7 +3487,7 @@
     },
     {
       "problemId": "abc293-ex",
-      "signalIds": ["tree-dp"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3505,7 +3519,7 @@
     },
     {
       "problemId": "abc294-ex",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["subset-dp"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3521,7 +3535,7 @@
     },
     {
       "problemId": "abc294-g",
-      "signalIds": ["lca-binary-lifting"],
+      "signalIds": ["euler-tour"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3537,7 +3551,7 @@
     },
     {
       "problemId": "abc295-ex",
-      "signalIds": ["complete-enumeration"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3593,7 +3607,7 @@
     },
     {
       "problemId": "abc297-e",
-      "signalIds": ["dijkstra"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3625,7 +3639,7 @@
     },
     {
       "problemId": "abc298-e",
-      "signalIds": ["gcd-extended-euclid"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3641,7 +3655,7 @@
     },
     {
       "problemId": "abc298-f",
-      "signalIds": ["complete-enumeration"],
+      "signalIds": ["coordinate-compression"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3681,7 +3695,7 @@
     },
     {
       "problemId": "abc299-g",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["priority-queue"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3689,7 +3703,7 @@
     },
     {
       "problemId": "abc300-e",
-      "signalIds": ["memoized-recursion"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3697,7 +3711,7 @@
     },
     {
       "problemId": "abc300-ex",
-      "signalIds": ["formal-power-series"],
+      "signalIds": ["digit-dp"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3705,7 +3719,7 @@
     },
     {
       "problemId": "abc300-f",
-      "signalIds": ["binary-search-answer"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3713,7 +3727,7 @@
     },
     {
       "problemId": "abc300-g",
-      "signalIds": ["meet-in-the-middle"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3793,7 +3807,7 @@
     },
     {
       "problemId": "abc303-ex",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3809,7 +3823,7 @@
     },
     {
       "problemId": "abc303-g",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3817,7 +3831,7 @@
     },
     {
       "problemId": "abc304-e",
-      "signalIds": ["disjoint-set-union"],
+      "signalIds": ["ordered-set"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3833,7 +3847,7 @@
     },
     {
       "problemId": "abc304-f",
-      "signalIds": ["mobius-inversion"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3841,7 +3855,7 @@
     },
     {
       "problemId": "abc304-g",
-      "signalIds": ["two-pointers"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3857,7 +3871,7 @@
     },
     {
       "problemId": "abc305-ex",
-      "signalIds": ["computational-geometry"],
+      "signalIds": ["combinatorics-binomial"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3873,7 +3887,7 @@
     },
     {
       "problemId": "abc305-g",
-      "signalIds": ["matrix-exponentiation"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3881,7 +3895,7 @@
     },
     {
       "problemId": "abc306-e",
-      "signalIds": ["bounded-top-k-merge"],
+      "signalIds": ["ordered-set"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3889,7 +3903,7 @@
     },
     {
       "problemId": "abc306-ex",
-      "signalIds": ["reverse-topological-pruning"],
+      "signalIds": ["topological-dag"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3913,7 +3927,7 @@
     },
     {
       "problemId": "abc307-e",
-      "signalIds": ["inclusion-exclusion"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3921,7 +3935,7 @@
     },
     {
       "problemId": "abc307-ex",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["z-kmp"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -3993,7 +4007,7 @@
     },
     {
       "problemId": "abc309-f",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["coordinate-compression"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4025,7 +4039,7 @@
     },
     {
       "problemId": "abc310-f",
-      "signalIds": ["subset-dp"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4049,7 +4063,7 @@
     },
     {
       "problemId": "abc311-ex",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4057,7 +4071,7 @@
     },
     {
       "problemId": "abc311-f",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4113,7 +4127,7 @@
     },
     {
       "problemId": "abc313-ex",
-      "signalIds": ["frontier-connectivity-dp"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4129,7 +4143,7 @@
     },
     {
       "problemId": "abc313-g",
-      "signalIds": ["floor-quotient-blocks"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4145,7 +4159,7 @@
     },
     {
       "problemId": "abc314-ex",
-      "signalIds": ["minimum-spanning-tree"],
+      "signalIds": [],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4153,7 +4167,7 @@
     },
     {
       "problemId": "abc314-f",
-      "signalIds": ["probability-expectation-dp"],
+      "signalIds": ["disjoint-set-union"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4193,7 +4207,7 @@
     },
     {
       "problemId": "abc315-g",
-      "signalIds": ["gcd-extended-euclid"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4209,7 +4223,7 @@
     },
     {
       "problemId": "abc317-ex",
-      "signalIds": ["divide-and-conquer"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4305,7 +4319,7 @@
     },
     {
       "problemId": "abc320-g",
-      "signalIds": ["max-flow-min-cut"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4313,7 +4327,7 @@
     },
     {
       "problemId": "abc321-e",
-      "signalIds": ["lca-binary-lifting"],
+      "signalIds": ["segment-tree"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4329,7 +4343,7 @@
     },
     {
       "problemId": "abc321-g",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["probability-expectation-dp"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4353,7 +4367,7 @@
     },
     {
       "problemId": "abc322-g",
-      "signalIds": ["greedy-exchange"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4369,7 +4383,7 @@
     },
     {
       "problemId": "abc323-f",
-      "signalIds": ["lattice-translation-classes"],
+      "signalIds": [],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4393,7 +4407,7 @@
     },
     {
       "problemId": "abc324-f",
-      "signalIds": ["topological-dag"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4401,7 +4415,7 @@
     },
     {
       "problemId": "abc324-g",
-      "signalIds": ["binary-search-answer"],
+      "signalIds": ["ordered-set"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4417,7 +4431,7 @@
     },
     {
       "problemId": "abc325-f",
-      "signalIds": ["complete-enumeration"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4473,7 +4487,7 @@
     },
     {
       "problemId": "abc327-g",
-      "signalIds": ["formal-power-series"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4481,7 +4495,7 @@
     },
     {
       "problemId": "abc328-e",
-      "signalIds": ["minimum-spanning-tree"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4521,7 +4535,7 @@
     },
     {
       "problemId": "abc329-g",
-      "signalIds": ["lca-binary-lifting"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4569,7 +4583,7 @@
     },
     {
       "problemId": "abc331-g",
-      "signalIds": ["probability-expectation-dp"],
+      "signalIds": ["inclusion-exclusion"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4601,7 +4615,7 @@
     },
     {
       "problemId": "abc333-e",
-      "signalIds": ["minimum-spanning-tree"],
+      "signalIds": ["greedy-exchange"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4617,7 +4631,7 @@
     },
     {
       "problemId": "abc333-g",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4625,7 +4639,7 @@
     },
     {
       "problemId": "abc334-e",
-      "signalIds": ["disjoint-set-union"],
+      "signalIds": ["breadth-first-search"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4633,7 +4647,7 @@
     },
     {
       "problemId": "abc334-f",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4641,15 +4655,15 @@
     },
     {
       "problemId": "abc334-g",
-      "signalIds": ["frontier-connectivity-dp"],
+      "signalIds": ["lowlink-articulation"],
       "structureId": "grid",
-      "classificationMode": "official_term_detection",
+      "classificationMode": "reviewed_binding",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
     {
       "problemId": "abc335-e",
-      "signalIds": ["disjoint-set-union"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4665,7 +4679,7 @@
     },
     {
       "problemId": "abc335-g",
-      "signalIds": ["primitive-root-order"],
+      "signalIds": ["prime-factorization-sieve"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4713,15 +4727,15 @@
     },
     {
       "problemId": "abc337-g",
-      "signalIds": ["tree-traversal-reconstruction"],
+      "signalIds": ["euler-tour", "fenwick-tree"],
       "structureId": "graph",
-      "classificationMode": "official_term_detection",
+      "classificationMode": "reviewed_binding",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
     {
       "problemId": "abc338-e",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["ordered-set"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4729,7 +4743,7 @@
     },
     {
       "problemId": "abc338-f",
-      "signalIds": ["floyd-warshall"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4785,7 +4799,7 @@
     },
     {
       "problemId": "abc340-g",
-      "signalIds": ["heavy-light-decomposition"],
+      "signalIds": ["tree-dp"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4825,7 +4839,7 @@
     },
     {
       "problemId": "abc342-f",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4833,7 +4847,7 @@
     },
     {
       "problemId": "abc342-g",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["priority-queue"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4841,9 +4855,9 @@
     },
     {
       "problemId": "abc343-e",
-      "signalIds": ["lattice-translation-classes"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "number",
-      "classificationMode": "official_term_detection",
+      "classificationMode": "reviewed_binding",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4857,7 +4871,7 @@
     },
     {
       "problemId": "abc343-g",
-      "signalIds": ["subset-dp"],
+      "signalIds": ["z-kmp"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4873,7 +4887,7 @@
     },
     {
       "problemId": "abc344-f",
-      "signalIds": ["frequency-candidate-counting"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4905,7 +4919,7 @@
     },
     {
       "problemId": "abc345-g",
-      "signalIds": ["formal-power-series"],
+      "signalIds": ["combinatorics-binomial"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4945,7 +4959,7 @@
     },
     {
       "problemId": "abc347-f",
-      "signalIds": ["sparse-table"],
+      "signalIds": ["complete-enumeration"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4953,7 +4967,7 @@
     },
     {
       "problemId": "abc347-g",
-      "signalIds": ["max-flow-min-cut"],
+      "signalIds": ["sorted-neighbor-lcp"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4977,7 +4991,7 @@
     },
     {
       "problemId": "abc348-g",
-      "signalIds": ["convex-hull-trick"],
+      "signalIds": ["divide-and-conquer"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4985,7 +4999,7 @@
     },
     {
       "problemId": "abc349-e",
-      "signalIds": ["memoized-recursion"],
+      "signalIds": ["topological-dag"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -4993,7 +5007,7 @@
     },
     {
       "problemId": "abc349-f",
-      "signalIds": ["inclusion-exclusion"],
+      "signalIds": ["prime-factorization-sieve"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5009,7 +5023,7 @@
     },
     {
       "problemId": "abc350-e",
-      "signalIds": ["probability-expectation-dp"],
+      "signalIds": ["memoized-recursion"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5041,7 +5055,7 @@
     },
     {
       "problemId": "abc351-f",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["coordinate-compression"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5049,7 +5063,7 @@
     },
     {
       "problemId": "abc351-g",
-      "signalIds": ["heavy-light-decomposition"],
+      "signalIds": ["tree-dp"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5065,7 +5079,7 @@
     },
     {
       "problemId": "abc352-f",
-      "signalIds": ["subset-dp"],
+      "signalIds": ["depth-first-search"],
       "structureId": "query",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5081,7 +5095,7 @@
     },
     {
       "problemId": "abc353-e",
-      "signalIds": ["sorted-neighbor-lcp"],
+      "signalIds": ["trie"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5097,7 +5111,7 @@
     },
     {
       "problemId": "abc353-g",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5113,7 +5127,7 @@
     },
     {
       "problemId": "abc354-f",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["coordinate-compression"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5121,7 +5135,7 @@
     },
     {
       "problemId": "abc354-g",
-      "signalIds": ["max-flow-min-cut"],
+      "signalIds": ["topological-dag"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5145,7 +5159,7 @@
     },
     {
       "problemId": "abc355-g",
-      "signalIds": ["convex-hull-trick"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5161,7 +5175,7 @@
     },
     {
       "problemId": "abc356-f",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5177,7 +5191,7 @@
     },
     {
       "problemId": "abc357-e",
-      "signalIds": ["strongly-connected-components"],
+      "signalIds": ["functional-graph"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5193,7 +5207,7 @@
     },
     {
       "problemId": "abc357-g",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5201,7 +5215,7 @@
     },
     {
       "problemId": "abc358-e",
-      "signalIds": ["combinatorics-binomial"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5233,7 +5247,7 @@
     },
     {
       "problemId": "abc359-f",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["greedy-exchange"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5249,7 +5263,7 @@
     },
     {
       "problemId": "abc360-e",
-      "signalIds": ["matrix-exponentiation"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5257,7 +5271,7 @@
     },
     {
       "problemId": "abc360-f",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["coordinate-compression"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5265,7 +5279,7 @@
     },
     {
       "problemId": "abc360-g",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["coordinate-compression"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5281,7 +5295,7 @@
     },
     {
       "problemId": "abc361-f",
-      "signalIds": ["inclusion-exclusion"],
+      "signalIds": ["prime-factorization-sieve"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5297,7 +5311,7 @@
     },
     {
       "problemId": "abc362-e",
-      "signalIds": ["frequency-candidate-counting"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5305,7 +5319,7 @@
     },
     {
       "problemId": "abc362-f",
-      "signalIds": ["centroid-decomposition"],
+      "signalIds": ["max-flow-min-cut"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5337,7 +5351,7 @@
     },
     {
       "problemId": "abc363-g",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["segment-tree"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5353,7 +5367,7 @@
     },
     {
       "problemId": "abc364-f",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["minimum-spanning-tree"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5361,7 +5375,7 @@
     },
     {
       "problemId": "abc364-g",
-      "signalIds": ["dijkstra"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5369,7 +5383,7 @@
     },
     {
       "problemId": "abc365-e",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["prefix-sum-difference"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5481,7 +5495,7 @@
     },
     {
       "problemId": "abc369-g",
-      "signalIds": ["bounded-top-k-merge"],
+      "signalIds": ["euler-tour"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5489,7 +5503,7 @@
     },
     {
       "problemId": "abc370-e",
-      "signalIds": ["frequency-candidate-counting"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5497,7 +5511,7 @@
     },
     {
       "problemId": "abc370-f",
-      "signalIds": ["binary-lifting"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5505,7 +5519,7 @@
     },
     {
       "problemId": "abc370-g",
-      "signalIds": ["minimum-spanning-tree"],
+      "signalIds": ["prefix-sum-difference"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5537,7 +5551,7 @@
     },
     {
       "problemId": "abc372-e",
-      "signalIds": ["bounded-top-k-merge"],
+      "signalIds": ["disjoint-set-union"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5553,7 +5567,7 @@
     },
     {
       "problemId": "abc372-g",
-      "signalIds": ["floor-quotient-blocks"],
+      "signalIds": ["computational-geometry"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5569,7 +5583,7 @@
     },
     {
       "problemId": "abc373-f",
-      "signalIds": ["greedy-exchange"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5601,7 +5615,7 @@
     },
     {
       "problemId": "abc374-g",
-      "signalIds": ["max-flow-min-cut"],
+      "signalIds": ["strongly-connected-components"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5673,7 +5687,7 @@
     },
     {
       "problemId": "abc377-g",
-      "signalIds": ["trie"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5681,7 +5695,7 @@
     },
     {
       "problemId": "abc378-e",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["prefix-sum-difference"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5689,7 +5703,7 @@
     },
     {
       "problemId": "abc378-f",
-      "signalIds": ["lca-binary-lifting"],
+      "signalIds": ["tree-dp"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5729,9 +5743,9 @@
     },
     {
       "problemId": "abc380-e",
-      "signalIds": ["spatial-bucketing"],
+      "signalIds": ["ordered-set"],
       "structureId": "grid",
-      "classificationMode": "official_term_detection",
+      "classificationMode": "reviewed_binding",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5753,7 +5767,7 @@
     },
     {
       "problemId": "abc381-e",
-      "signalIds": ["floor-quotient-blocks"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5769,7 +5783,7 @@
     },
     {
       "problemId": "abc381-g",
-      "signalIds": ["binary-lifting"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5801,7 +5815,7 @@
     },
     {
       "problemId": "abc383-e",
-      "signalIds": ["disjoint-set-union"],
+      "signalIds": ["greedy-exchange"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5825,7 +5839,7 @@
     },
     {
       "problemId": "abc384-e",
-      "signalIds": ["minimum-spanning-tree"],
+      "signalIds": ["priority-queue"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5865,7 +5879,7 @@
     },
     {
       "problemId": "abc385-g",
-      "signalIds": ["formal-power-series"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5929,7 +5943,7 @@
     },
     {
       "problemId": "abc388-f",
-      "signalIds": ["dynamic-programming"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5953,7 +5967,7 @@
     },
     {
       "problemId": "abc389-f",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5961,7 +5975,7 @@
     },
     {
       "problemId": "abc389-g",
-      "signalIds": ["complete-enumeration"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5969,7 +5983,7 @@
     },
     {
       "problemId": "abc390-e",
-      "signalIds": ["greedy-exchange"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -5993,7 +6007,7 @@
     },
     {
       "problemId": "abc391-e",
-      "signalIds": ["frequency-candidate-counting"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6017,7 +6031,7 @@
     },
     {
       "problemId": "abc392-e",
-      "signalIds": ["disjoint-set-union"],
+      "signalIds": ["depth-first-search"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6025,7 +6039,7 @@
     },
     {
       "problemId": "abc392-f",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["prefix-sum-difference"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6049,7 +6063,7 @@
     },
     {
       "problemId": "abc393-f",
-      "signalIds": ["binary-search-answer"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6097,7 +6111,7 @@
     },
     {
       "problemId": "abc395-f",
-      "signalIds": ["minimum-spanning-tree"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6105,7 +6119,7 @@
     },
     {
       "problemId": "abc395-g",
-      "signalIds": ["dijkstra"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6145,7 +6159,7 @@
     },
     {
       "problemId": "abc397-f",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6153,7 +6167,7 @@
     },
     {
       "problemId": "abc397-g",
-      "signalIds": ["max-flow-min-cut"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6177,7 +6191,7 @@
     },
     {
       "problemId": "abc398-g",
-      "signalIds": ["frontier-connectivity-dp"],
+      "signalIds": [],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6225,7 +6239,7 @@
     },
     {
       "problemId": "abc400-g",
-      "signalIds": ["binary-search-answer"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6249,7 +6263,7 @@
     },
     {
       "problemId": "abc401-g",
-      "signalIds": ["max-flow-min-cut"],
+      "signalIds": ["binary-search-answer"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6297,7 +6311,7 @@
     },
     {
       "problemId": "abc403-g",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["coordinate-compression"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6361,7 +6375,7 @@
     },
     {
       "problemId": "abc406-f",
-      "signalIds": ["tree-traversal-reconstruction"],
+      "signalIds": ["depth-first-search"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6369,7 +6383,7 @@
     },
     {
       "problemId": "abc406-g",
-      "signalIds": ["piecewise-quadratic-optimization"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6385,7 +6399,7 @@
     },
     {
       "problemId": "abc407-f",
-      "signalIds": ["two-pointers"],
+      "signalIds": ["prefix-sum-difference"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6401,7 +6415,7 @@
     },
     {
       "problemId": "abc408-e",
-      "signalIds": ["disjoint-set-union"],
+      "signalIds": ["greedy-exchange"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6409,7 +6423,7 @@
     },
     {
       "problemId": "abc408-f",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6433,7 +6447,7 @@
     },
     {
       "problemId": "abc409-f",
-      "signalIds": ["pair-witness-pigeonhole"],
+      "signalIds": ["priority-queue"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6449,9 +6463,9 @@
     },
     {
       "problemId": "abc410-e",
-      "signalIds": ["bitset-optimization"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
-      "classificationMode": "official_term_detection",
+      "classificationMode": "reviewed_binding",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -6465,7 +6479,7 @@
     },
     {
       "problemId": "abc410-g",
-      "signalIds": ["complete-enumeration"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6505,7 +6519,7 @@
     },
     {
       "problemId": "abc412-f",
-      "signalIds": ["probability-expectation-dp"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6513,7 +6527,7 @@
     },
     {
       "problemId": "abc412-g",
-      "signalIds": ["max-flow-min-cut"],
+      "signalIds": ["gaussian-elimination"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6553,7 +6567,7 @@
     },
     {
       "problemId": "abc414-f",
-      "signalIds": ["frequency-candidate-counting"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6561,7 +6575,7 @@
     },
     {
       "problemId": "abc414-g",
-      "signalIds": ["dijkstra"],
+      "signalIds": ["segment-tree"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6593,7 +6607,7 @@
     },
     {
       "problemId": "abc416-e",
-      "signalIds": ["pair-witness-pigeonhole"],
+      "signalIds": ["floyd-warshall"],
       "structureId": "query",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6617,7 +6631,7 @@
     },
     {
       "problemId": "abc417-e",
-      "signalIds": ["depth-first-search"],
+      "signalIds": ["greedy-exchange"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6625,7 +6639,7 @@
     },
     {
       "problemId": "abc417-f",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["probability-expectation-dp"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6649,7 +6663,7 @@
     },
     {
       "problemId": "abc418-f",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["combinatorics-binomial"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6657,7 +6671,7 @@
     },
     {
       "problemId": "abc418-g",
-      "signalIds": ["reflection-parity-construction"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6713,7 +6727,7 @@
     },
     {
       "problemId": "abc421-e",
-      "signalIds": ["convex-hull-trick"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6737,7 +6751,7 @@
     },
     {
       "problemId": "abc422-e",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": [],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6745,7 +6759,7 @@
     },
     {
       "problemId": "abc422-f",
-      "signalIds": ["dijkstra"],
+      "signalIds": ["topological-dag"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6777,7 +6791,7 @@
     },
     {
       "problemId": "abc423-g",
-      "signalIds": ["gcd-extended-euclid"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6793,7 +6807,7 @@
     },
     {
       "problemId": "abc424-f",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["segment-tree"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6825,7 +6839,7 @@
     },
     {
       "problemId": "abc425-g",
-      "signalIds": ["recursive-construction"],
+      "signalIds": ["trie"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6897,7 +6911,7 @@
     },
     {
       "problemId": "abc428-g",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6929,7 +6943,7 @@
     },
     {
       "problemId": "abc430-e",
-      "signalIds": ["suffix-array"],
+      "signalIds": ["rolling-hash"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -6953,7 +6967,7 @@
     },
     {
       "problemId": "abc431-e",
-      "signalIds": ["reflection-parity-construction"],
+      "signalIds": ["zero-one-bfs"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7009,7 +7023,7 @@
     },
     {
       "problemId": "abc433-f",
-      "signalIds": ["convolution-ntt"],
+      "signalIds": ["prefix-sum-difference"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7017,7 +7031,7 @@
     },
     {
       "problemId": "abc433-g",
-      "signalIds": ["sorted-neighbor-lcp"],
+      "signalIds": ["suffix-array"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7025,7 +7039,7 @@
     },
     {
       "problemId": "abc434-e",
-      "signalIds": ["frontier-connectivity-dp"],
+      "signalIds": ["greedy-exchange"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7041,7 +7055,7 @@
     },
     {
       "problemId": "abc434-g",
-      "signalIds": ["degree-sqrt-decomposition"],
+      "signalIds": ["segment-tree"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7057,7 +7071,7 @@
     },
     {
       "problemId": "abc435-f",
-      "signalIds": ["tree-dp"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7081,7 +7095,7 @@
     },
     {
       "problemId": "abc436-f",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["segment-tree"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7097,7 +7111,7 @@
     },
     {
       "problemId": "abc437-e",
-      "signalIds": ["frequency-candidate-counting"],
+      "signalIds": ["trie"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7121,7 +7135,7 @@
     },
     {
       "problemId": "abc438-e",
-      "signalIds": ["spatial-bucketing"],
+      "signalIds": ["binary-lifting"],
       "structureId": "query",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7137,7 +7151,7 @@
     },
     {
       "problemId": "abc438-g",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["gcd-extended-euclid"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7201,7 +7215,7 @@
     },
     {
       "problemId": "abc441-f",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7209,7 +7223,7 @@
     },
     {
       "problemId": "abc441-g",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["segment-tree"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7225,7 +7239,7 @@
     },
     {
       "problemId": "abc442-f",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7233,7 +7247,7 @@
     },
     {
       "problemId": "abc442-g",
-      "signalIds": ["bounded-top-k-merge"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7249,7 +7263,7 @@
     },
     {
       "problemId": "abc443-f",
-      "signalIds": ["breadth-first-search"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7257,7 +7271,7 @@
     },
     {
       "problemId": "abc443-g",
-      "signalIds": ["floor-quotient-blocks"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7289,7 +7303,7 @@
     },
     {
       "problemId": "abc445-e",
-      "signalIds": ["frequency-candidate-counting"],
+      "signalIds": ["prime-factorization-sieve"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7305,7 +7319,7 @@
     },
     {
       "problemId": "abc445-g",
-      "signalIds": ["max-flow-min-cut"],
+      "signalIds": ["gcd-extended-euclid"],
       "structureId": "grid",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7329,7 +7343,7 @@
     },
     {
       "problemId": "abc446-g",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["greedy-exchange"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7337,7 +7351,7 @@
     },
     {
       "problemId": "abc447-e",
-      "signalIds": ["frontier-connectivity-dp"],
+      "signalIds": ["greedy-exchange"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7345,9 +7359,9 @@
     },
     {
       "problemId": "abc447-f",
-      "signalIds": ["degree-sqrt-decomposition"],
+      "signalIds": ["tree-dp"],
       "structureId": "graph",
-      "classificationMode": "official_term_detection",
+      "classificationMode": "reviewed_binding",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -7361,7 +7375,7 @@
     },
     {
       "problemId": "abc448-e",
-      "signalIds": ["binary-lifting"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7377,7 +7391,7 @@
     },
     {
       "problemId": "abc448-g",
-      "signalIds": ["convex-hull-trick"],
+      "signalIds": ["probability-expectation-dp"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7401,7 +7415,7 @@
     },
     {
       "problemId": "abc449-g",
-      "signalIds": ["formal-power-series"],
+      "signalIds": ["greedy-exchange"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7417,7 +7431,7 @@
     },
     {
       "problemId": "abc450-f",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7449,7 +7463,7 @@
     },
     {
       "problemId": "abc451-g",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["trie"],
       "structureId": "graph",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7457,7 +7471,7 @@
     },
     {
       "problemId": "abc452-e",
-      "signalIds": ["prefix-sum-difference"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7473,7 +7487,7 @@
     },
     {
       "problemId": "abc452-g",
-      "signalIds": ["sorted-neighbor-lcp"],
+      "signalIds": ["run-length-recurrence"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7521,7 +7535,7 @@
     },
     {
       "problemId": "abc454-g",
-      "signalIds": ["heavy-light-decomposition"],
+      "signalIds": ["disjoint-set-union"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7529,7 +7543,7 @@
     },
     {
       "problemId": "abc455-e",
-      "signalIds": ["frequency-candidate-counting"],
+      "signalIds": ["inclusion-exclusion"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7537,7 +7551,7 @@
     },
     {
       "problemId": "abc455-f",
-      "signalIds": ["tree-dp"],
+      "signalIds": ["segment-tree"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7545,7 +7559,7 @@
     },
     {
       "problemId": "abc455-g",
-      "signalIds": ["frequency-candidate-counting"],
+      "signalIds": ["two-pointers"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7553,7 +7567,7 @@
     },
     {
       "problemId": "abc456-e",
-      "signalIds": ["topological-dag"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7561,7 +7575,7 @@
     },
     {
       "problemId": "abc456-f",
-      "signalIds": ["segment-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7569,7 +7583,7 @@
     },
     {
       "problemId": "abc456-g",
-      "signalIds": ["formal-power-series"],
+      "signalIds": ["inclusion-exclusion"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7585,7 +7599,7 @@
     },
     {
       "problemId": "abc457-f",
-      "signalIds": ["lazy-segment-tree"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "permutation",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7593,7 +7607,7 @@
     },
     {
       "problemId": "abc457-g",
-      "signalIds": ["reflection-parity-construction"],
+      "signalIds": [],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7601,7 +7615,7 @@
     },
     {
       "problemId": "abc458-e",
-      "signalIds": ["combinatorics-binomial"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7609,7 +7623,7 @@
     },
     {
       "problemId": "abc458-f",
-      "signalIds": ["matrix-exponentiation"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7617,7 +7631,7 @@
     },
     {
       "problemId": "abc458-g",
-      "signalIds": ["binary-search-answer"],
+      "signalIds": ["dynamic-programming"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7625,7 +7639,7 @@
     },
     {
       "problemId": "abc459-e",
-      "signalIds": ["combinatorics-binomial"],
+      "signalIds": ["depth-first-search"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7649,7 +7663,7 @@
     },
     {
       "problemId": "abc460-e",
-      "signalIds": ["fenwick-tree"],
+      "signalIds": ["gcd-extended-euclid"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7665,7 +7679,7 @@
     },
     {
       "problemId": "abc460-g",
-      "signalIds": ["rerooting-dp"],
+      "signalIds": ["heavy-light-decomposition"],
       "structureId": "tree",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7737,7 +7751,7 @@
     },
     {
       "problemId": "abc463-g",
-      "signalIds": ["mo-algorithm"],
+      "signalIds": ["probability-expectation-dp"],
       "structureId": "number",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7777,7 +7791,7 @@
     },
     {
       "problemId": "abc465-f",
-      "signalIds": ["inclusion-exclusion"],
+      "signalIds": ["prefix-sum-difference"],
       "structureId": "string",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7785,7 +7799,7 @@
     },
     {
       "problemId": "abc465-g",
-      "signalIds": ["coordinate-compression"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7801,7 +7815,7 @@
     },
     {
       "problemId": "abc466-f",
-      "signalIds": ["priority-queue"],
+      "signalIds": ["modular-arithmetic"],
       "structureId": "sequence",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7809,7 +7823,7 @@
     },
     {
       "problemId": "abc466-g",
-      "signalIds": ["digit-dp"],
+      "signalIds": ["prefix-sum-difference"],
       "structureId": "interval",
       "classificationMode": "official_term_detection",
       "complexityEssential": false,
@@ -7823,81 +7837,82 @@
     "attack-line-overlap-counting": 1,
     "balanced-subset-partition-dp": 1,
     "balanced-xor-necklace-mitm": 1,
-    "bellman-ford": 3,
+    "bellman-ford": 2,
     "bidirectional-rotation-mitm": 1,
     "binary-information-encoding": 1,
-    "binary-lifting": 8,
-    "binary-search-answer": 28,
+    "binary-lifting": 3,
+    "binary-search-answer": 40,
     "bitset-optimization": 3,
-    "bounded-top-k-merge": 9,
+    "bounded-top-k-merge": 5,
     "breadth-first-search": 23,
     "canonical-transition-sequence-merge": 1,
-    "centroid-decomposition": 3,
+    "centroid-decomposition": 2,
     "chinese-remainder-theorem": 1,
     "circular-capped-window-counting": 1,
-    "combinatorics-binomial": 16,
-    "complete-enumeration": 24,
-    "computational-geometry": 12,
+    "combinatorics-binomial": 17,
+    "complete-enumeration": 33,
+    "computational-geometry": 13,
     "continued-fraction-open-interval": 1,
-    "convex-hull-trick": 6,
-    "convolution-ntt": 25,
-    "coordinate-compression": 4,
+    "convex-hull-trick": 2,
+    "convolution-ntt": 9,
+    "coordinate-compression": 11,
     "critical-distance-interval-enumeration": 1,
     "decimal-carry-scan": 1,
-    "degree-sqrt-decomposition": 4,
-    "depth-first-search": 15,
+    "degree-sqrt-decomposition": 1,
+    "depth-first-search": 19,
     "diagonal-xor-mitm": 1,
-    "digit-dp": 7,
-    "dijkstra": 16,
-    "disjoint-set-union": 22,
-    "divide-and-conquer": 3,
+    "digit-dp": 5,
+    "dijkstra": 12,
+    "disjoint-set-union": 17,
+    "divide-and-conquer": 5,
     "divisor-product-score-dp": 1,
     "dynamic-mex-maintenance": 1,
-    "dynamic-programming": 90,
+    "dynamic-programming": 180,
     "endpoint-pattern-subsequence-counting": 1,
+    "euler-tour": 3,
     "euler-trail-parity": 3,
     "event-sweep-delay-propagation": 1,
     "exact-length-maze-construction": 1,
     "expression-segment-composition": 1,
-    "fenwick-tree": 29,
-    "floor-quotient-blocks": 12,
+    "fenwick-tree": 11,
+    "floor-quotient-blocks": 5,
     "floyd-warshall": 6,
-    "formal-power-series": 17,
+    "formal-power-series": 6,
     "four-state-rook-dp": 1,
-    "frequency-candidate-counting": 18,
-    "frontier-connectivity-dp": 7,
-    "functional-graph": 3,
-    "gaussian-elimination": 3,
+    "frequency-candidate-counting": 7,
+    "frontier-connectivity-dp": 1,
+    "functional-graph": 4,
+    "gaussian-elimination": 2,
     "gcd-extended-euclid": 9,
-    "greedy-exchange": 21,
+    "greedy-exchange": 30,
     "grundy-game": 5,
-    "heavy-light-decomposition": 5,
+    "heavy-light-decomposition": 3,
     "implicit-fibonacci-word-prefix": 1,
     "inclusion-exclusion": 14,
-    "interval-dp": 2,
+    "interval-dp": 3,
     "interval-heavy-light-overlap": 1,
     "last-symbol-bitmask-dp": 1,
-    "lattice-translation-classes": 8,
+    "lattice-translation-classes": 1,
     "layered-component-top-two-dp": 1,
-    "lazy-segment-tree": 24,
-    "lca-binary-lifting": 10,
+    "lazy-segment-tree": 11,
+    "lca-binary-lifting": 5,
+    "lowlink-articulation": 1,
     "manhattan-coordinate-transform": 1,
-    "matrix-exponentiation": 8,
     "matrix-tree-characteristic-polynomial": 1,
-    "max-flow-min-cut": 23,
-    "meet-in-the-middle": 4,
-    "memoized-recursion": 5,
-    "min-cost-flow": 8,
-    "minimum-spanning-tree": 16,
-    "mo-algorithm": 4,
+    "max-flow-min-cut": 16,
+    "meet-in-the-middle": 3,
+    "memoized-recursion": 4,
+    "min-cost-flow": 7,
+    "minimum-spanning-tree": 7,
+    "mo-algorithm": 3,
     "mo-frequency-bucket-aggregation": 1,
-    "mobius-inversion": 2,
-    "modular-arithmetic": 13,
+    "mobius-inversion": 1,
+    "modular-arithmetic": 36,
     "modular-product-fingerprinting": 1,
     "modular-progression-sqrt-decomposition": 1,
     "multiplicative-order-divisor-search": 1,
-    "ordered-set": 9,
-    "pair-witness-pigeonhole": 4,
+    "ordered-set": 13,
+    "pair-witness-pigeonhole": 1,
     "parenthesis-direction-traversal": 1,
     "parenthesis-monoid-segment-tree": 1,
     "periodic-residue-precomputation": 1,
@@ -7907,26 +7922,25 @@
     "polynomial-moment-fenwick": 1,
     "prefix-difference-order-counting": 1,
     "prefix-suffix-permutation-effect": 1,
-    "prefix-sum-difference": 26,
-    "prime-factorization-sieve": 3,
+    "prefix-sum-difference": 24,
+    "prime-factorization-sieve": 10,
     "primitive-root-divisor-aggregation": 1,
-    "primitive-root-order": 1,
     "priority-flood-bottleneck": 1,
-    "priority-queue": 5,
-    "probability-expectation-dp": 32,
+    "priority-queue": 10,
+    "probability-expectation-dp": 33,
     "query-block-rebuild": 1,
     "radix-convolution-recurrence": 1,
     "range-distribution-data-structure": 1,
-    "recursive-construction": 5,
-    "reflection-parity-construction": 4,
+    "recursive-construction": 4,
+    "reflection-parity-construction": 1,
     "regular-bipartite-factorization": 1,
-    "rerooting-dp": 5,
+    "rerooting-dp": 3,
     "reverse-paint-processing": 1,
-    "reverse-topological-pruning": 6,
-    "rolling-hash": 1,
-    "run-length-recurrence": 1,
+    "reverse-topological-pruning": 2,
+    "rolling-hash": 3,
+    "run-length-recurrence": 2,
     "sandwich-triple-counting": 1,
-    "segment-tree": 38,
+    "segment-tree": 25,
     "sequence-reversal-composition": 1,
     "shortest-path-edge-recomputation": 1,
     "shortest-path-tree-edge-selection": 1,
@@ -7935,26 +7949,26 @@
     "small-to-large-bipartite-dsu": 1,
     "small-to-large-graph-contraction": 1,
     "small-to-large-set-merge": 1,
-    "sorted-neighbor-lcp": 11,
-    "sparse-table": 3,
-    "spatial-bucketing": 3,
+    "sorted-neighbor-lcp": 5,
+    "sparse-table": 1,
+    "spatial-bucketing": 1,
     "step-size-sqrt-dp": 1,
-    "strongly-connected-components": 2,
+    "strongly-connected-components": 3,
     "subsequence-prefix-suffix-pairing": 1,
-    "subset-dp": 10,
+    "subset-dp": 5,
     "subset-mobius-exact-conditions": 1,
-    "suffix-array": 3,
+    "suffix-array": 5,
     "symmetry-piecewise-linear-endpoints": 1,
     "thin-grid-zero-sum-rectangles": 1,
     "top-two-segment-tree": 1,
-    "topological-dag": 5,
-    "tree-dp": 11,
-    "tree-traversal-reconstruction": 5,
-    "trie": 3,
+    "topological-dag": 10,
+    "tree-dp": 10,
+    "tree-traversal-reconstruction": 1,
+    "trie": 6,
     "two-dimensional-suffix-maximum": 1,
-    "two-pointers": 8,
+    "two-pointers": 6,
     "two-sat-implication-graph": 1,
-    "z-kmp": 2,
+    "z-kmp": 5,
     "zero-one-bfs": 4
   },
   "structureCounts": {
@@ -7970,6 +7984,6 @@
     "string": 110,
     "tree": 46
   },
-  "inventoryDigest": "0e26c374907302379cf515ef8694e823dffad2acd2a4808f0f48d7e080f8d59d",
-  "evidenceDigest": "94b33bb9d9a1a6afc9e92dc1bc38294fb1795196b43bd7f29d61a62cdfb634d1"
+  "inventoryDigest": "47e27e7a32243b36cc809f7be51f398349f80f8739ea781c20d8fbca0ac267ec",
+  "evidenceDigest": "6ce50e40af9b990d4824315da85207c037684d3fbf4e61cf37a31fc15654f865"
 }

@@ -4,19 +4,17 @@
     "source-abc447-e-problem-02331c348ec8140e3148280a27c01e036fb008a7d23c4271fb3f25530617f98c",
     "source-abc447-editorial-16717-19b4073504d42c4a9ec3b36e49833fb26bc42a9191d686d1f75a89ac344471f7"
   ],
-  "coreMethod": "abc447-e「Divide Graph」では、幅の小さい grid を走査し、frontier の塗色と連結成分 partition を正規化した profile DP を行う。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc447-e「Divide Graph」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "未処理領域と接し得るのは frontier 上の頂点だけなので、その連結 partition が将来に必要な情報を全て含む。",
+    "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
     "Divide Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "profile DP と連結成分状態の正規化"],
-  "implementationConcerns": [
-    "frontier から消える成分を再接続不能として判定し、成分 label を毎遷移後に canonicalize する。"
-  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "greedy choice と交換論法"],
+  "implementationConcerns": ["同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。"],
   "outcomeCandidates": [
-    "Divide Graph 型の 頂点と辺からなる状態グラフに対し、profile DP と連結成分状態の正規化を選び、状態と証明を一貫して設計できる。"
+    "Divide Graph 型の 頂点と辺からなる状態グラフに対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

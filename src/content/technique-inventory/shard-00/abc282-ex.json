@@ -4,19 +4,19 @@
     "source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c",
     "source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"
   ],
-  "coreMethod": "abc282-ex「Min + Sum」では、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc282-ex「Min + Sum」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "floor(N/i) の異なる値は平方根より小さい商と平方根以下の添字から全て得られ、各区間端は除算で計算できる。",
+    "全対象が左・右・境界をまたぐものの三種に分かれ、再帰解と merge が互いに重複なく覆う。",
     "Min + Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "floor 除算の商区間列挙"],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "分割統治"],
   "implementationConcerns": [
-    "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。"
+    "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。"
   ],
   "outcomeCandidates": [
-    "Min + Sum 型の 列の順序と prefix 状態に対し、floor 除算の商区間列挙を選び、状態と証明を一貫して設計できる。"
+    "Min + Sum 型の 列の順序と prefix 状態に対し、分割統治を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

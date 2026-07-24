@@ -4,7 +4,7 @@
     "source-abc446-editorial-16384-e279164f75dd3bd2328adc1e2913cfadc8fe01e518d1feeff4473560ea3eae4f",
     "source-abc446-f-problem-f542f915a44d41318c9a77b17d56066f497fa351159eabce91ad755de4b504ba"
   ],
-  "coreMethod": "abc446-f「Reachable Set 2」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc446-f「Reachable Set 2」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
     "Reachable Set 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

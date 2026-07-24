@@ -4,7 +4,7 @@
     "source-abc277-editorial-5206-14af14904ec3ad231acf4708459f0200d373946b9f51e04c31502e64f36edd55",
     "source-abc277-g-problem-2ed36a8919af830606b7492d0612289cead83ec578ec2c13b7213708d642c787"
   ],
-  "coreMethod": "abc277-g「Random Walk to Millionaire」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc277-g「Random Walk to Millionaire」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
     "Random Walk to Millionaire 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

@@ -438,6 +438,7 @@ describe('official advanced slot registry', () => {
           checkedAt: '2026-07-17T14:00:00+09:00',
         },
       ],
+      contestGaps: [],
       contestSlots: [
         {
           contestId: 'abc212',

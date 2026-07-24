@@ -4,7 +4,7 @@
     "source-abc285-editorial-5531-9754cd49821d1394d83759ef0b347b6909fe57c23c4b702d002070f3b04c9c7a",
     "source-abc285-ex-problem-950bbedb3eeab9fd63d783709cbc9551732240ee4a8ab213ef941838e8b96dfe"
   ],
-  "coreMethod": "abc285-ex「Avoid Square Number」では、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc285-ex「Avoid Square Number」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "係数比較により元の再帰・畳み込みと冪級数恒等式が次数ごとに同値であることを示す。",
     "Avoid Square Number 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

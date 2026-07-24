@@ -28,6 +28,7 @@ interface Entity {
   readonly id?: string;
   readonly problemId?: string | null;
   readonly contestId?: string;
+  readonly number?: number;
   readonly label?: string;
   readonly officialOrder?: number | null;
   readonly additionalPrerequisiteUnitIds?: readonly string[];
@@ -132,6 +133,16 @@ export interface CatalogLike {
     readonly officialTaskOrder: readonly string[];
     readonly officialTaskIds: readonly string[];
     readonly taskOrderSourceRevisionId: string;
+  }[];
+  readonly contestGaps: readonly {
+    readonly number: number;
+    readonly contestId: string;
+    readonly status: 'officially_unheld';
+    readonly evidenceUrl: string;
+    readonly evidenceAssertion: string;
+    readonly checkedAt: string;
+    readonly termsCheckedAt: string;
+    readonly fingerprint: string;
   }[];
   readonly contestSlots: readonly {
     readonly contestId: string;
@@ -315,6 +326,7 @@ export const executableExampleInventoryDigest = (
 
 const entityArrayKeys = [
   'contests',
+  'contestGaps',
   'contestSlots',
   'problems',
   'techniqueInventory',
@@ -332,6 +344,7 @@ const catalogContentKeys = [
   'schemaVersion',
   'advancedSlotRegistry',
   'contests',
+  'contestGaps',
   'contestSlots',
   'problems',
   'techniqueInventory',
@@ -413,6 +426,12 @@ export const sortCatalogEntityArray = (
     }
   }
   return [...items].sort((left, right) => {
+    if (key === 'contestGaps') {
+      return (
+        (left.number ?? Number.MAX_SAFE_INTEGER) - (right.number ?? Number.MAX_SAFE_INTEGER) ||
+        compareContestIds(left.contestId ?? '', right.contestId ?? '')
+      );
+    }
     if (key === 'contestSlots') {
       return (
         compareContestIds(left.contestId ?? '', right.contestId ?? '') ||
@@ -559,6 +578,27 @@ export const validateCatalogSemantics = (
     });
   }
   const contestNumbers = [...catalog.contests].map(({ number }) => number).sort((a, b) => a - b);
+  const gapNumbers = [...catalog.contestGaps].map(({ number }) => number).sort((a, b) => a - b);
+  const gapNumberSet = new Set(gapNumbers);
+  const gapIdSet = new Set(catalog.contestGaps.map(({ contestId }) => contestId));
+  if (gapNumberSet.size !== gapNumbers.length || gapIdSet.size !== catalog.contestGaps.length) {
+    diagnostics.push({
+      code: 'DUPLICATE_CONTEST_GAP',
+      message: 'Official Contest gap numbers and IDs must be unique.',
+    });
+  }
+  if (catalog.contestGaps.some(({ contestId, number }) => contestId !== `abc${String(number)}`)) {
+    diagnostics.push({
+      code: 'CONTEST_GAP_ID_MISMATCH',
+      message: 'Official Contest gap IDs must agree with their numbers.',
+    });
+  }
+  if (contestNumbers.some((number) => gapNumberSet.has(number))) {
+    diagnostics.push({
+      code: 'CONTEST_GAP_OVERLAP',
+      message: 'A Contest number cannot be both held and officially unheld.',
+    });
+  }
   const firstNumber = Number(
     /^abc(?<number>[0-9]+)$/u.exec(catalog.release.firstContestId)?.groups?.number,
   );
@@ -572,14 +612,15 @@ export const validateCatalogSemantics = (
           (_unused, index) => firstNumber + index,
         )
       : [];
+  const coveredNumbers = [...contestNumbers, ...gapNumbers].sort((left, right) => left - right);
   if (
-    expectedNumbers.length !== catalog.contests.length ||
-    expectedNumbers.some((number, index) => contestNumbers[index] !== number) ||
+    expectedNumbers.length !== coveredNumbers.length ||
+    expectedNumbers.some((number, index) => coveredNumbers[index] !== number) ||
     catalog.contests.some(({ id, number }) => id !== `abc${String(number)}`)
   ) {
     diagnostics.push({
       code: 'CONTEST_RANGE_INCOMPLETE',
-      message: 'Contest range must be continuous and agree with release bounds.',
+      message: 'Held Contests and official gap evidence must cover the release range exactly once.',
     });
   }
   if (

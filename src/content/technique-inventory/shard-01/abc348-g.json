@@ -4,19 +4,19 @@
     "source-abc348-editorial-9707-e31a81617e57dd150c2c05cfe814e6a9b424cc80720ccfe1da0f26a7f8fad44a",
     "source-abc348-g-problem-c6f9ebb220dc35e4c233cabf0a3b5e1898952199a2414b14ee2c8587232d84a4"
   ],
-  "coreMethod": "abc348-g「Max (Sum - Max)」では、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc348-g「Max (Sum - Max)」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "各遷移候補を一次関数へ対応させると、求める最適値は query 点での直線群の包絡線に一致する。",
+    "全対象が左・右・境界をまたぐものの三種に分かれ、再帰解と merge が互いに重複なく覆う。",
     "Max (Sum - Max) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "Convex Hull Trick"],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "分割統治"],
   "implementationConcerns": [
-    "傾き単調性の有無で構造を選び、積の overflow と等傾き直線を処理する。"
+    "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。"
   ],
   "outcomeCandidates": [
-    "Max (Sum - Max) 型の 列の順序と prefix 状態に対し、Convex Hull Trickを選び、状態と証明を一貫して設計できる。"
+    "Max (Sum - Max) 型の 列の順序と prefix 状態に対し、分割統治を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

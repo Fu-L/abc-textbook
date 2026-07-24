@@ -4,17 +4,19 @@
     "source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5",
     "source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba"
   ],
-  "coreMethod": "abc258-ex「Odd Steps」では、線形遷移を行列として表し、binary exponentiation で多数回の遷移を合成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc258-ex「Odd Steps」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "状態ベクトルへの一回遷移が行列積に一致するため、結合則と二進展開で K 回遷移が行列の K 乗になる。",
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Odd Steps 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "行列累乗"],
-  "implementationConcerns": ["積の添字順序と modulus を統一し、疎行列なら不要な積を省く。"],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
   "outcomeCandidates": [
-    "Odd Steps 型の 列の順序と prefix 状態に対し、行列累乗を選び、状態と証明を一貫して設計できる。"
+    "Odd Steps 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

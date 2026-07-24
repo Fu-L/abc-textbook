@@ -4,19 +4,19 @@
     "source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69",
     "source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"
   ],
-  "coreMethod": "abc425-g「Sum of Min of XOR」では、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc425-g「Sum of Min of XOR」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "追加部分が既存構成と衝突せず、始点・終点・被覆条件を保つことをサイズに関する帰納法で示す。",
+    "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
     "Sum of Min of XOR 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "再帰的構成と帰納法"],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "Trie"],
   "implementationConcerns": [
-    "最小幅の基底ケース、行列の転置、再帰で変換した終点座標を個別に確認する。"
+    "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。"
   ],
   "outcomeCandidates": [
-    "Sum of Min of XOR 型の 列の順序と prefix 状態に対し、再帰的構成と帰納法を選び、状態と証明を一貫して設計できる。"
+    "Sum of Min of XOR 型の 列の順序と prefix 状態に対し、Trieを選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

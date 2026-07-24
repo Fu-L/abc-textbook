@@ -116,9 +116,10 @@ taxonomy作成前に全Problemへちょうど一件作る分析正本である�
 | `implementationConcerns` | 実装上の注意 |
 | `outcomeCandidates` | 観察可能な学習成果候補 |
 | `adHocElements` | 一般化しない要素 |
-| `authorId` / `reviewStatus` | 棚卸しの責任と確認状態 |
+| `authorId` / `reviewStatus` | 棚卸しの責任と確認状態。問題単位で主解法を確認した項目だけ`reviewed`、公式解説の用語検出で作った候補は`draft`とする |
 
 公開taxonomyを作る前に、対象Problem ID集合とInventoryのProblem ID集合が完全一致しなければならない。
+T044は全Problemのsource-boundなrecord coverageを固定する段階であり、`draft`を`reviewed`と偽装しない。`draft`候補はT159のfinal taxonomy受理前に問題単位で確認し、未確認または`changes_requested`の項目を正式なTag・Outcome・Unitの根拠にしてはならない。preview cohortは後続の設計検証へ進むため、T038時点で全件`reviewed`を要求する。
 Technique Inventoryは、平方根分割、償却解析、出力依存、実用上重要な定数倍などの計算量解析が主テクニックの成立理由となり、かつ解法全体の計算量が根拠から確定できる場合だけ`asymptoticComplexity`を持つ。通常の計算量は公式解説に明記されていても省略する。計算量を明示しない公式解説に対して、主テクニック単体の典型計算量や入力サイズを仮定した時間・空間上界を補完しない。完全解説を公開する後続工程では、問題固有の実装を確定したうえでFR-005の計算量・制約整合を別途満たす。
 
 ### PreviewCohortCandidatePool

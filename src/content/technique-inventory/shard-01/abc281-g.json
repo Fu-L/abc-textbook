@@ -4,7 +4,7 @@
     "source-abc281-editorial-5370-8c0c17274b70fbc71d255e9aec2cce8fb6b4d651c73c44634620502b569f27b6",
     "source-abc281-g-problem-0bef5b5691e862ad9fdea49d92f600ea4c1771d9e43d42b97f4196f90849cd64"
   ],
-  "coreMethod": "abc281-g「Farthest City」では、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc281-g「Farthest City」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
     "Farthest City 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

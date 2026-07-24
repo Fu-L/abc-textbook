@@ -4,7 +4,7 @@
     "source-abc243-editorial-3546-89a660b3c8dda82dde57aa36a38a94770e60efb75f91ba72b8d5d4ac1c78a971",
     "source-abc243-ex-problem-cb35728cca943b2ff65de0edea1b620bf01183421366f241251dbf8132adbebe"
   ],
-  "coreMethod": "abc243-ex「Builder Takahashi (Enhanced version)」では、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc243-ex「Builder Takahashi (Enhanced version)」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
     "Builder Takahashi (Enhanced version) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

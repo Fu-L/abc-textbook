@@ -4,19 +4,19 @@
     "source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86",
     "source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147"
   ],
-  "coreMethod": "abc222-h「Beautiful Binary Tree」では、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc222-h「Beautiful Binary Tree」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "係数比較により元の再帰・畳み込みと冪級数恒等式が次数ごとに同値であることを示す。",
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Beautiful Binary Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "形式的冪級数"],
+  "prerequisiteCandidates": ["グラフの到達可能性", "動的計画法の状態設計"],
   "implementationConcerns": [
-    "必要次数で毎回 truncate し、定数項が逆元や対数の前提を満たすか確認する。"
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
   ],
   "outcomeCandidates": [
-    "Beautiful Binary Tree 型の 頂点と辺からなる状態グラフに対し、形式的冪級数を選び、状態と証明を一貫して設計できる。"
+    "Beautiful Binary Tree 型の 頂点と辺からなる状態グラフに対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

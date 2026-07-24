@@ -4,7 +4,7 @@
     "source-abc391-editorial-12087-f639720fd19ac6ed72e77e27e96e282e340d8462db32f56e2b1da5f323c1f6f9",
     "source-abc391-g-problem-3d8533bce00788b3eb9ac9d532744390dcdcc902cacd6d022dfc629af8376c8b"
   ],
-  "coreMethod": "abc391-g「Many LCS」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc391-g「Many LCS」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Many LCS 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

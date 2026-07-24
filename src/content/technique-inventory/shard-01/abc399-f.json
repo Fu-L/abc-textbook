@@ -4,7 +4,7 @@
     "source-abc399-editorial-12565-ac7bdd56e7a6029aea5c663268764b44c2861728cd3012c8cc1c7a307f0c81b2",
     "source-abc399-f-problem-be71505c4e59264a9a1fda8b56d3ce83ca6da99f0247fd672909cc1a7daf40c7"
   ],
-  "coreMethod": "abc399-f「Range Power Sum」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc399-f「Range Power Sum」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "Range Power Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

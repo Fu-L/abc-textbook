@@ -5,7 +5,7 @@
     "source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256",
     "source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9"
   ],
-  "coreMethod": "abc434-f「Concat (2nd)」では、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc434-f「Concat (2nd)」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "既知の一致区間内では以前の値を再利用し、区間を越える比較だけが全体で線形回数になる。",
     "Concat (2nd) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -17,5 +17,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

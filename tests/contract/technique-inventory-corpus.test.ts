@@ -55,7 +55,6 @@ const inventoryItem = (problemId: string, sourceRevisionId: string) => ({
   sourceRevisionIds: [sourceRevisionId],
   coreMethod: `Derive the invariant needed by ${problemId}.`,
   proofIdeas: ['Prove that each transition preserves the stated invariant.'],
-  asymptoticComplexity: { time: 'O(N log N)', space: 'O(N)' },
   prerequisiteCandidates: ['Asymptotic analysis'],
   implementationConcerns: ['Check the smallest valid input.'],
   outcomeCandidates: ['Select and justify the invariant before implementation.'],
@@ -798,6 +797,36 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
     expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_COMPLEXITY_NOT_EXPLICIT');
     expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_PLACEHOLDER_TEXT');
     expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_CORE_METHOD_DUPLICATE');
+    expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_COMPLEXITY_POLICY_MISMATCH');
+  });
+
+  it('allows canonical drafts but keeps the reviewed preview boundary', () => {
+    const selectedProblemIds = new Set(validCorpus.previewManifest.selectedProblemIds);
+    const draftIndex = validCorpus.inventory.findIndex(
+      ({ entity }) => !selectedProblemIds.has(entity.problemId),
+    );
+    if (draftIndex < 0) throw new Error('A non-preview inventory fixture is required.');
+    const withCanonicalDraft = {
+      ...validCorpus,
+      inventory: validCorpus.inventory.map((loaded, index) =>
+        index === draftIndex
+          ? { ...loaded, entity: { ...loaded.entity, reviewStatus: 'draft' as const } }
+          : loaded,
+      ),
+    };
+    expect(validateTechniqueInventoryCorpus(withCanonicalDraft)).toEqual([]);
+
+    const withPreviewDraft = {
+      ...validCorpus,
+      previewInventory: validCorpus.previewInventory.map((loaded, index) =>
+        index === 0
+          ? { ...loaded, entity: { ...loaded.entity, reviewStatus: 'draft' as const } }
+          : loaded,
+      ),
+    };
+    expect(validateTechniqueInventoryCorpus(withPreviewDraft).map(({ code }) => code)).toContain(
+      'PREVIEW_TECHNIQUE_INVENTORY_NOT_REVIEWED',
+    );
   });
 
   it('keeps --check mutation-free and makes explicit --write atomic and idempotent', async () => {

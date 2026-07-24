@@ -4,7 +4,7 @@
     "source-abc384-editorial-11568-6cd162019da4df6e1237d39d3aa124ae586b7de8014d28607a84619e62964cbf",
     "source-abc384-f-problem-b501d68ce08b504f7dd3cebf2a90e741710e70cfc9ed3be3a591dada95efa709"
   ],
-  "coreMethod": "abc384-f「Double Sum 2」では、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc384-f「Double Sum 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
     "Double Sum 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

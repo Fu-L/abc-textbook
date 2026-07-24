@@ -4,19 +4,17 @@
     "source-abc431-e-problem-aea5e8bc55c0fa23b159bfddf8b55bc876c2e47eea1ef3ef0541c2e1a4d1bf24",
     "source-abc431-editorial-14483-a92eb04ac846e8663319adb90bc5e8e2a713a25188f00fa53d73c9d38bde3b8e"
   ],
-  "coreMethod": "abc431-e「Reflection on Grid」では、反射を二回組み合わせた ±2 平行移動を基本操作とし、座標 parity と退化区間を判定して操作列を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc431-e「Reflection on Grid」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "一回の反射は座標 parity を保ち、異なる二中心での連続反射が差の二倍の平行移動になる。",
+    "deque の先頭距離は非減少で、重み 0 の緩和を前、重み 1 を後へ置くことで Dijkstra と同じ確定順を保つ。",
     "Reflection on Grid 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["grid の座標表現", "一次元反射の合成と parity"],
-  "implementationConcerns": [
-    "区間幅が零の軸、奇数回が必要な初手、二座標の操作回数 parity を揃える。"
-  ],
+  "prerequisiteCandidates": ["grid の座標表現", "0-1 BFS"],
+  "implementationConcerns": ["改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。"],
   "outcomeCandidates": [
-    "Reflection on Grid 型の 盤面上の位置と局所遷移に対し、一次元反射の合成と parityを選び、状態と証明を一貫して設計できる。"
+    "Reflection on Grid 型の 盤面上の位置と局所遷移に対し、0-1 BFSを選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

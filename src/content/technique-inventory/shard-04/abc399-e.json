@@ -4,7 +4,7 @@
     "source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2",
     "source-abc399-editorial-12564-6e1510563de5279b95e284c4e0c13c4772bcba726ff97494a39c00e3e1e5b0f4"
   ],
-  "coreMethod": "abc399-e「Replace」では、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc399-e「Replace」では、主解法候補として、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "削除頂点からは rank が真に減るので無限歩できず、残存頂点は残存辺を選び続けて有限グラフ上の閉路へ到達する。",
     "Replace 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

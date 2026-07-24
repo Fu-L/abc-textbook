@@ -4,17 +4,17 @@
     "source-abc333-e-problem-54ee0e837a75eef0633b0e658e46acd1d10b413d37f5dafb8780346845b23b7f",
     "source-abc333-editorial-7939-a9a410ed926a18653f5725e36ab57c65fc00f2c1379deaed6109c889708766d3"
   ],
-  "coreMethod": "abc333-e「Takahashi Quest」では、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc333-e「Takahashi Quest」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "cut property により異なる成分を結ぶ最小辺は安全であり、閉路を避けた採用を繰り返せば最適な全域木になる。",
+    "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
     "Takahashi Quest 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "最小全域木と cut property"],
-  "implementationConcerns": ["同重み辺の順序が答えへ影響する場合は一括判定してから併合する。"],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "greedy choice と交換論法"],
+  "implementationConcerns": ["同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。"],
   "outcomeCandidates": [
-    "Takahashi Quest 型の 列の順序と prefix 状態に対し、最小全域木と cut propertyを選び、状態と証明を一貫して設計できる。"
+    "Takahashi Quest 型の 列の順序と prefix 状態に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

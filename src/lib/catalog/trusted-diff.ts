@@ -11,6 +11,7 @@ type PublicationOperation = PublicationUpdate['operations'][number];
 
 type EntityType =
   | 'contest'
+  | 'contest_gap'
   | 'contest_slot'
   | 'problem'
   | 'technique_inventory'
@@ -24,6 +25,7 @@ type EntityType =
 
 const collections: readonly [keyof Catalog, EntityType][] = [
   ['contests', 'contest'],
+  ['contestGaps', 'contest_gap'],
   ['contestSlots', 'contest_slot'],
   ['problems', 'problem'],
   ['techniqueInventory', 'technique_inventory'],
@@ -80,6 +82,9 @@ const canonicalEntityIdentity = (
   entityType: EntityType,
   value: Record<string, unknown>,
 ): string | undefined => {
+  if (entityType === 'contest_gap' && typeof value.contestId === 'string') {
+    return value.contestId;
+  }
   if (entityType === 'contest_slot') {
     const contestId = typeof value.contestId === 'string' ? value.contestId : undefined;
     const label = typeof value.label === 'string' ? value.label : undefined;
@@ -367,6 +372,7 @@ interface CatalogEntityDiff {
 
 const structuredEntityRoots: Readonly<Partial<Record<EntityType, string>>> = {
   contest: structuredContentRoots.contests,
+  contest_gap: structuredContentRoots.contestGaps,
   contest_slot: structuredContentRoots.problemSlots,
   problem: structuredContentRoots.problems,
   technique_inventory: structuredContentRoots.techniqueInventory,

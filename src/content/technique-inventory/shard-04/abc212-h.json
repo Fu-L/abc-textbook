@@ -4,7 +4,7 @@
     "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc",
     "source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93"
   ],
-  "coreMethod": "abc212-h「Nim Counting」では、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc212-h「Nim Counting」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
     "Nim Counting 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

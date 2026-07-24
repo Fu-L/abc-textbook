@@ -4,7 +4,7 @@
     "source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd",
     "source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae"
   ],
-  "coreMethod": "abc230-g「GCD Permutation」では、倍数・約数上の累積関係を Möbius inversion で反転し、exact な個数を復元する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc230-g「GCD Permutation」では、主解法候補として、倍数・約数上の累積関係を Möbius inversion で反転し、exact な個数を復元する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "約数 lattice 上で Möbius 関数の和が恒等元以外で 0 になるため、zeta 変換との逆変換になる。",
     "GCD Permutation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

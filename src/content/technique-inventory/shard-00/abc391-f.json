@@ -4,7 +4,7 @@
     "source-abc391-editorial-12085-f9ada4466df96ec457b67df1120398f082965da3bcdfda4427208c7f131ee928",
     "source-abc391-f-problem-747d848d57208246abe4cce1daeaa586525b51cc2160fae1ec9403b71e801dd0"
   ],
-  "coreMethod": "abc391-f「K-th Largest Triplet」では、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc391-f「K-th Largest Triplet」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "親部分木の上位 K 個に入らない子内要素は、同じ子だけで K 個以上に負けるため親でも候補にならない。",
     "K-th Largest Triplet 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

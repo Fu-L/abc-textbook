@@ -4,7 +4,7 @@
     "source-abc304-editorial-6500-329ed419aaa87d2073ba6e9f3aa951ed2b89c2ab042b9ebbe37b752da919c244",
     "source-abc304-ex-problem-88a1b5dcec9cca88a888a187d670ad04f5cc1f9733774bff9af0e3dd3127f935"
   ],
-  "coreMethod": "abc304-ex「Constrained Topological Sort」では、依存関係を DAG として表し、トポロジカル順に値を伝播する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc304-ex「Constrained Topological Sort」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
     "Constrained Topological Sort 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

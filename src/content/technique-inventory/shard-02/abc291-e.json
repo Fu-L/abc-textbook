@@ -4,17 +4,19 @@
     "source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef",
     "source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"
   ],
-  "coreMethod": "abc291-e「Find Permutation」では、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc291-e「Find Permutation」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "削除頂点からは rank が真に減るので無限歩できず、残存頂点は残存辺を選び続けて有限グラフ上の閉路へ到達する。",
+    "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
     "Find Permutation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["順列と逆写像", "逆向き topological pruning"],
-  "implementationConcerns": ["逆辺を保持し、出次数が零になった瞬間だけ queue へ追加する。"],
+  "prerequisiteCandidates": ["順列と逆写像", "DAG とトポロジカル順序"],
+  "implementationConcerns": [
+    "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。"
+  ],
   "outcomeCandidates": [
-    "Find Permutation 型の 順列の位置と値の対応に対し、逆向き topological pruningを選び、状態と証明を一貫して設計できる。"
+    "Find Permutation 型の 順列の位置と値の対応に対し、DAG とトポロジカル順序を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

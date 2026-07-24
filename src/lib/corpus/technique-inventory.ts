@@ -9,6 +9,7 @@ import { parseAtCoderContestResourceUrl } from '../domain/schema-parts/catalog.j
 import {
   ContestSchema,
   ContestSlotRecordSchema,
+  OfficialContestGapMetadataSchema,
   ProblemSchema,
   SourceRevisionSchema,
   TechniqueInventoryItemSchema,
@@ -23,6 +24,7 @@ import {
   corpusBatches,
   officialContestGapDefinitions,
 } from './batches.js';
+import { reviewedProblemComplexity } from './technique-authoring.js';
 
 const SHARD_COUNT = 6;
 const SHARD_VERSION = 'sha256-first-uint32be-mod-6-v1';
@@ -67,18 +69,7 @@ const PreviewCohortCandidateSchema = z.strictObject({
   fixtureId: nonEmptyText.nullable(),
 });
 
-const OfficialContestGapSchema = z.strictObject({
-  number: z.number().int().min(BOOTSTRAP_FIRST_CONTEST_NUMBER),
-  contestId: z.string().regex(/^abc[0-9]{3,}$/u),
-  status: z.literal('officially_unheld'),
-  evidenceUrl: z.url(),
-  evidenceAssertion: nonEmptyText,
-  checkedAt: nonEmptyText,
-  termsCheckedAt: nonEmptyText,
-  fingerprint: sha256,
-});
-
-const PreviewCandidatePoolSchema = z.strictObject({
+export const PreviewCandidatePoolSchema = z.strictObject({
   schemaVersion: z.literal('1.0.0'),
   previewId: z.literal('initial-v1'),
   batchId: z.literal('abc212-abc263'),
@@ -215,7 +206,7 @@ export interface LoadedInventoryEntity extends LoadedEntity<TechniqueInventoryIt
 
 export interface LoadedTechniqueInventoryCorpus {
   readonly contests: readonly LoadedEntity<Contest>[];
-  readonly contestGaps: readonly LoadedEntity<z.infer<typeof OfficialContestGapSchema>>[];
+  readonly contestGaps: readonly LoadedEntity<z.infer<typeof OfficialContestGapMetadataSchema>>[];
   readonly contestSlots: readonly LoadedEntity<ContestSlotRecord>[];
   readonly problems: readonly LoadedEntity<Problem>[];
   readonly sources: readonly LoadedEntity<SourceRevision>[];
@@ -255,6 +246,8 @@ export interface TechniqueInventoryEvidence {
     readonly problemCount: number;
     readonly sourceRevisionCount: number;
     readonly inventoryCount: number;
+    readonly reviewedInventoryCount: number;
+    readonly draftInventoryCount: number;
   };
   readonly cohort: {
     readonly previewId: 'initial-v1';
@@ -694,7 +687,7 @@ export const loadTechniqueInventoryCorpus = async (
     loadEntityRoots(
       layout.repositoryRoot,
       layout.contestGapRoots,
-      OfficialContestGapSchema,
+      OfficialContestGapMetadataSchema,
       ({ contestId }) => `${contestId}.json`,
     ),
     loadEntityRoots(
@@ -855,6 +848,16 @@ const hasExplicitAsymptoticComplexity = (item: TechniqueInventoryItem): boolean 
   return (
     (complexity.time === undefined || ASYMPTOTIC_NOTATION.test(complexity.time)) &&
     (complexity.space === undefined || ASYMPTOTIC_NOTATION.test(complexity.space))
+  );
+};
+const hasOnlyReviewedProblemComplexity = (item: TechniqueInventoryItem): boolean => {
+  const expectedTime = reviewedProblemComplexity(item.problemId);
+  const complexity = item.asymptoticComplexity;
+  if (expectedTime === undefined) return complexity === undefined;
+  return (
+    complexity !== undefined &&
+    complexity.space === undefined &&
+    complexity.time?.startsWith(`${expectedTime}（公式解法全体。`) === true
   );
 };
 const hasInventoryPlaceholder = (item: TechniqueInventoryItem): boolean =>
@@ -1255,8 +1258,8 @@ export const validateTechniqueInventoryCorpus = (
     if (item.sourceRevisionIds.some((sourceId) => !problem.sourceRevisionIds.includes(sourceId))) {
       add('TECHNIQUE_INVENTORY_SOURCE_SET_MISMATCH', item.problemId, item.problemId);
     }
-    if (item.reviewStatus !== 'reviewed') {
-      add('TECHNIQUE_INVENTORY_NOT_REVIEWED', item.reviewStatus, item.problemId);
+    if (item.reviewStatus === 'changes_requested') {
+      add('TECHNIQUE_INVENTORY_CHANGES_REQUESTED', item.reviewStatus, item.problemId);
     }
     if (hasShallowInventoryAnalysis(item)) {
       add(
@@ -1268,6 +1271,13 @@ export const validateTechniqueInventoryCorpus = (
     if (!hasExplicitAsymptoticComplexity(item)) {
       add(
         'TECHNIQUE_INVENTORY_COMPLEXITY_NOT_EXPLICIT',
+        JSON.stringify(item.asymptoticComplexity),
+        item.problemId,
+      );
+    }
+    if (!hasOnlyReviewedProblemComplexity(item)) {
+      add(
+        'TECHNIQUE_INVENTORY_COMPLEXITY_POLICY_MISMATCH',
         JSON.stringify(item.asymptoticComplexity),
         item.problemId,
       );
@@ -1658,6 +1668,9 @@ export const buildTechniqueInventoryEvidence = (
       problemCount: problems.length,
       sourceRevisionCount: sources.length,
       inventoryCount: inventory.length,
+      reviewedInventoryCount: inventory.filter(({ reviewStatus }) => reviewStatus === 'reviewed')
+        .length,
+      draftInventoryCount: inventory.filter(({ reviewStatus }) => reviewStatus === 'draft').length,
     },
     cohort: {
       previewId: 'initial-v1',

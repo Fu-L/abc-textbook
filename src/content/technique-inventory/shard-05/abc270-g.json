@@ -4,19 +4,20 @@
     "source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb",
     "source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96"
   ],
-  "coreMethod": "abc270-g「Sequence in mod P」では、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc270-g「Sequence in mod P」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+    "列の順序と prefix 状態と解候補の対応を双方向に示し、列挙の漏れと重複がないことを確認する。",
     "Sequence in mod P 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "剰余演算と modular inverse"],
+  "prerequisiteCandidates": ["配列と prefix の添字管理"],
   "implementationConcerns": [
-    "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。"
+    "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+    "状態 key と更新順序を固定し、同じ候補を二重に数えない。"
   ],
   "outcomeCandidates": [
-    "Sequence in mod P 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。"
+    "Sequence in mod P 型の 列の順序と prefix 状態に対し、状態縮約を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

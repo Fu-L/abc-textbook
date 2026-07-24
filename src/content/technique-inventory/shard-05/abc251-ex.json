@@ -4,19 +4,19 @@
     "source-abc251-editorial-3954-5502e77b9db90e8223bf51820c90da77bdb341a71963b77421a1a563a6336004",
     "source-abc251-ex-problem-fecc529753f72db31753658d74853da733df6f9c45e94aa18801d577114ab7b0"
   ],
-  "coreMethod": "abc251-ex「Fill Triangle」では、上位桁から tight・leading-zero・必要な集約値を状態に持つ digit DP を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc251-ex「Fill Triangle」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "同じ prefix 状態以降の選択肢は一致し、tight が上限との大小関係を過不足なく表す。",
+    "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
     "Fill Triangle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "桁 DP"],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "組合せ数と二項係数"],
   "implementationConcerns": [
-    "leading zero を通常の数字 0 と区別し、上限を含む境界遷移を確認する。"
+    "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。"
   ],
   "outcomeCandidates": [
-    "Fill Triangle 型の 列の順序と prefix 状態に対し、桁 DPを選び、状態と証明を一貫して設計できる。"
+    "Fill Triangle 型の 列の順序と prefix 状態に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

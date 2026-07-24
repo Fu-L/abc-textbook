@@ -4,17 +4,19 @@
     "source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9",
     "source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be"
   ],
-  "coreMethod": "abc233-ex「Manhattan Christmas Tree」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc233-ex「Manhattan Christmas Tree」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+    "判定の真偽が境界の片側で閉じる単調性を示せば、各比較で答えを含む区間を半分に保てる。",
     "Manhattan Christmas Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["online query の計算量設計", "Fenwick tree"],
-  "implementationConcerns": ["内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"],
+  "prerequisiteCandidates": ["online query の計算量設計", "二分探索と単調性"],
+  "implementationConcerns": [
+    "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。"
+  ],
   "outcomeCandidates": [
-    "Manhattan Christmas Tree 型の 更新と問い合わせの時系列に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。"
+    "Manhattan Christmas Tree 型の 更新と問い合わせの時系列に対し、二分探索と単調性を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

@@ -4,17 +4,19 @@
     "source-abc337-editorial-9128-cbe0bd941506e286fb57dadf72d10bcbdf8ee413c5cf00a8d08e9186e3731f52",
     "source-abc337-g-problem-c93d5e000c3d22efaf05c107e0398fe3076143c17dd8518cc30a3383278210cd"
   ],
-  "coreMethod": "abc337-g「Tree Inversion」では、preorder の先頭を根とし、inorder の根位置で左右区間を分割して二分木を再帰復元する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc337-g「Tree Inversion」では、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。さらに、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。",
   "proofIdeas": [
-    "根と左右部分木の要素集合・長さが二つの traversal から一意に定まり、各部分区間へ同じ議論を適用できる。",
+    "DFS で頂点へ入ってから出るまでに訪れる頂点はちょうどその部分木なので、時刻区間との対応が成立する。",
+    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
     "Tree Inversion 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "二分木の preorder と inorder"],
+  "prerequisiteCandidates": ["Euler tour による木の一次元化", "Fenwick tree"],
   "implementationConcerns": [
-    "値から inorder 位置への逆配列を使い、不整合区間や根が 1 でない入力を拒否する。"
+    "入時刻の半開区間と頂点値・辺値のどちらを記録するかを統一する。",
+    "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"
   ],
   "outcomeCandidates": [
-    "Tree Inversion 型の 頂点と辺からなる状態グラフに対し、二分木の preorder と inorderを選び、状態と証明を一貫して設計できる。"
+    "Tree Inversion 型の問題に対し、Euler tour による木の一次元化を選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",

@@ -191,6 +191,33 @@ export const ContestSchema = strictObject({
   }
 });
 
+export const OfficialContestGapMetadataSchema = strictObject({
+  number: z.number().int().min(212),
+  contestId: ContestIdSchema,
+  status: z.literal('officially_unheld'),
+  evidenceUrl: z.url({ protocol: /^https$/u, hostname: /^atcoder\.jp$/u }),
+  evidenceAssertion: nonEmptyText,
+  checkedAt: OffsetDateTimeSchema,
+  termsCheckedAt: OffsetDateTimeSchema,
+  fingerprint: Sha256Schema,
+}).superRefine((gap, context) => {
+  if (gap.contestId !== `abc${String(gap.number)}`) {
+    context.addIssue({
+      code: 'custom',
+      path: ['contestId'],
+      message: 'Contest gap ID must agree with its number.',
+    });
+  }
+  const evidence = parseAtCoderContestResourceUrl(gap.evidenceUrl);
+  if (evidence?.resource !== 'task') {
+    context.addIssue({
+      code: 'custom',
+      path: ['evidenceUrl'],
+      message: 'Contest gap evidence must be an official AtCoder task URL.',
+    });
+  }
+});
+
 export const AdvancedSlotRegistrySchema = strictObject({
   version: z.literal('1.0.0'),
   labels: uniqueArray(ProblemLabelSchema).min(1),
@@ -849,6 +876,7 @@ export const CatalogSchema = strictObject({
   release: CatalogReleaseSchema,
   advancedSlotRegistry: AdvancedSlotRegistrySchema,
   contests: z.array(ContestSchema),
+  contestGaps: z.array(OfficialContestGapMetadataSchema),
   contestSlots: z.array(ContestSlotRecordSchema),
   problems: z.array(ProblemSchema),
   techniqueInventory: z.array(TechniqueInventoryItemSchema),
@@ -865,7 +893,7 @@ export const CatalogContract = defineZodContractSchema('catalog.schema.json', Ca
   $id: 'https://abc-textbook.local/schemas/catalog.schema.json',
   title: 'ABC Textbook Catalog',
   description:
-    'ABC212以降の各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。',
+    'ABC212以降を開催済みContestと公式欠番証跡で連続被覆し、各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。',
 });
 
 const semver = z.string().regex(/^\d+\.\d+\.\d+$/u);

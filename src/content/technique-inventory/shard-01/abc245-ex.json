@@ -4,17 +4,19 @@
     "source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d",
     "source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760"
   ],
-  "coreMethod": "abc245-ex「Product Modulo 2」では、線形遷移を行列として表し、binary exponentiation で多数回の遷移を合成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc245-ex「Product Modulo 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "状態ベクトルへの一回遷移が行列積に一致するため、結合則と二進展開で K 回遷移が行列の K 乗になる。",
+    "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
     "Product Modulo 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "行列累乗"],
-  "implementationConcerns": ["積の添字順序と modulus を統一し、疎行列なら不要な積を省く。"],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "剰余演算と modular inverse"],
+  "implementationConcerns": [
+    "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。"
+  ],
   "outcomeCandidates": [
-    "Product Modulo 2 型の 列の順序と prefix 状態に対し、行列累乗を選び、状態と証明を一貫して設計できる。"
+    "Product Modulo 2 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

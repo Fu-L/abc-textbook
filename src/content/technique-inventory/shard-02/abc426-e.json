@@ -4,7 +4,7 @@
     "source-abc426-e-problem-064cb3ae02052d71eb4c77ee70984fb8d76f9ba8578c9bc580933b2b46f0cef3",
     "source-abc426-editorial-14151-841f0e2f065f1d8848b53ab8df599a199a5740f9c0153aa032edd6c748269877"
   ],
-  "coreMethod": "abc426-e「Closest Moment」では、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc426-e「Closest Moment」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "外積の符号が有向面積と回転方向を表すため、幾何条件を符号条件として必要十分に判定できる。",
     "Closest Moment 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

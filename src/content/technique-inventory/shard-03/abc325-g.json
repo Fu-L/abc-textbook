@@ -4,7 +4,7 @@
     "source-abc325-editorial-7486-d763a8df8183edf6b09a76fde61feafc91ae7029cb71557ba2d96f011b9db7a6",
     "source-abc325-g-problem-d6b5bc666733bb0c2482f36735a5b5944ce5be1d38202a2872319af590054561"
   ],
-  "coreMethod": "abc325-g「offence」では、連続区間を状態とし、最後の分割点または端点操作を列挙する interval DP を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc325-g「offence」では、主解法候補として、連続区間を状態とし、最後の分割点または端点操作を列挙する interval DP を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "最適解の最後の分割・操作で独立な小区間へ分けると、全候補がちょうど一つの遷移に対応する。",
     "offence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

@@ -4,7 +4,7 @@
     "source-abc295-e-problem-64981f82f53de95ee235bb36008af7ca7cf34f86df31a7eca487d734e80470bc",
     "source-abc295-editorial-6048-df04ef6fc06286019bbc89131f6293d01a91988bb68b1b5bff7816d9793ed8b5"
   ],
-  "coreMethod": "abc295-e「Kth Number」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc295-e「Kth Number」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
     "Kth Number 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

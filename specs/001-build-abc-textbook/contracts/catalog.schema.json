@@ -14,35 +14,38 @@
     "contests": {
       "$ref": "#/$defs/__schema27"
     },
-    "contestSlots": {
+    "contestGaps": {
       "$ref": "#/$defs/__schema33"
     },
+    "contestSlots": {
+      "$ref": "#/$defs/__schema37"
+    },
     "problems": {
-      "$ref": "#/$defs/__schema40"
+      "$ref": "#/$defs/__schema44"
     },
     "techniqueInventory": {
-      "$ref": "#/$defs/__schema48"
+      "$ref": "#/$defs/__schema52"
     },
     "tags": {
-      "$ref": "#/$defs/__schema51"
+      "$ref": "#/$defs/__schema55"
     },
     "learningOutcomes": {
-      "$ref": "#/$defs/__schema59"
+      "$ref": "#/$defs/__schema63"
     },
     "learningUnits": {
-      "$ref": "#/$defs/__schema60"
+      "$ref": "#/$defs/__schema64"
     },
     "placements": {
-      "$ref": "#/$defs/__schema85"
+      "$ref": "#/$defs/__schema89"
     },
     "authoringUnits": {
-      "$ref": "#/$defs/__schema92"
+      "$ref": "#/$defs/__schema96"
     },
     "sources": {
-      "$ref": "#/$defs/__schema109"
+      "$ref": "#/$defs/__schema113"
     },
     "correctionImpacts": {
-      "$ref": "#/$defs/__schema114"
+      "$ref": "#/$defs/__schema118"
     }
   },
   "required": [
@@ -50,6 +53,7 @@
     "release",
     "advancedSlotRegistry",
     "contests",
+    "contestGaps",
     "contestSlots",
     "problems",
     "techniqueInventory",
@@ -64,7 +68,7 @@
   "additionalProperties": false,
   "$id": "https://abc-textbook.local/schemas/catalog.schema.json",
   "title": "ABC Textbook Catalog",
-  "description": "ABC212以降の各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。",
+  "description": "ABC212以降を開催済みContestと公式欠番証跡で連続被覆し、各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。",
   "$comment": "Structural constraints are defined here; cross-field and collection invariants are enforced by the canonical Zod runtime validator.",
   "$defs": {
     "__schema0": {
@@ -574,6 +578,62 @@
       "items": {
         "type": "object",
         "properties": {
+          "number": {
+            "$ref": "#/$defs/__schema34"
+          },
+          "contestId": {
+            "$ref": "#/$defs/__schema6"
+          },
+          "status": {
+            "$ref": "#/$defs/__schema35"
+          },
+          "evidenceUrl": {
+            "$ref": "#/$defs/__schema36"
+          },
+          "evidenceAssertion": {
+            "$ref": "#/$defs/__schema8"
+          },
+          "checkedAt": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "termsCheckedAt": {
+            "$ref": "#/$defs/__schema2"
+          },
+          "fingerprint": {
+            "$ref": "#/$defs/__schema3"
+          }
+        },
+        "required": [
+          "number",
+          "contestId",
+          "status",
+          "evidenceUrl",
+          "evidenceAssertion",
+          "checkedAt",
+          "termsCheckedAt",
+          "fingerprint"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "__schema34": {
+      "type": "integer",
+      "minimum": 212,
+      "maximum": 9007199254740991
+    },
+    "__schema35": {
+      "type": "string",
+      "const": "officially_unheld"
+    },
+    "__schema36": {
+      "type": "string",
+      "format": "uri"
+    },
+    "__schema37": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
           "contestId": {
             "$ref": "#/$defs/__schema6"
           },
@@ -581,22 +641,22 @@
             "$ref": "#/$defs/__schema24"
           },
           "officialTaskId": {
-            "$ref": "#/$defs/__schema34"
-          },
-          "officialOrder": {
-            "$ref": "#/$defs/__schema35"
-          },
-          "availability": {
-            "$ref": "#/$defs/__schema36"
-          },
-          "catalogStatus": {
-            "$ref": "#/$defs/__schema37"
-          },
-          "holdReason": {
             "$ref": "#/$defs/__schema38"
           },
-          "problemId": {
+          "officialOrder": {
             "$ref": "#/$defs/__schema39"
+          },
+          "availability": {
+            "$ref": "#/$defs/__schema40"
+          },
+          "catalogStatus": {
+            "$ref": "#/$defs/__schema41"
+          },
+          "holdReason": {
+            "$ref": "#/$defs/__schema42"
+          },
+          "problemId": {
+            "$ref": "#/$defs/__schema43"
           },
           "sourceRevisionId": {
             "$ref": "#/$defs/__schema4"
@@ -747,7 +807,7 @@
         ]
       }
     },
-    "__schema34": {
+    "__schema38": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema32"
@@ -757,7 +817,7 @@
         }
       ]
     },
-    "__schema35": {
+    "__schema39": {
       "anyOf": [
         {
           "type": "integer",
@@ -769,7 +829,7 @@
         }
       ]
     },
-    "__schema36": {
+    "__schema40": {
       "type": "string",
       "enum": [
         "exists",
@@ -778,7 +838,7 @@
         "withdrawn"
       ]
     },
-    "__schema37": {
+    "__schema41": {
       "type": "string",
       "enum": [
         "uncollected",
@@ -788,7 +848,7 @@
         "correction_pending"
       ]
     },
-    "__schema38": {
+    "__schema42": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema8"
@@ -798,7 +858,7 @@
         }
       ]
     },
-    "__schema39": {
+    "__schema43": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema7"
@@ -808,7 +868,7 @@
         }
       ]
     },
-    "__schema40": {
+    "__schema44": {
       "type": "array",
       "items": {
         "type": "object",
@@ -829,22 +889,22 @@
             "$ref": "#/$defs/__schema8"
           },
           "officialUrl": {
-            "$ref": "#/$defs/__schema41"
+            "$ref": "#/$defs/__schema45"
           },
           "constraintsSummary": {
-            "$ref": "#/$defs/__schema42"
+            "$ref": "#/$defs/__schema46"
           },
           "difficultyEvidence": {
-            "$ref": "#/$defs/__schema43"
+            "$ref": "#/$defs/__schema47"
           },
           "sourceRevisionIds": {
-            "$ref": "#/$defs/__schema44"
+            "$ref": "#/$defs/__schema48"
           },
           "checkedAt": {
             "$ref": "#/$defs/__schema2"
           },
           "publicationStatus": {
-            "$ref": "#/$defs/__schema45"
+            "$ref": "#/$defs/__schema49"
           },
           "primaryTagIds": {
             "$ref": "#/$defs/__schema5"
@@ -853,10 +913,10 @@
             "$ref": "#/$defs/__schema5"
           },
           "adHocElements": {
-            "$ref": "#/$defs/__schema46"
+            "$ref": "#/$defs/__schema50"
           },
           "placementId": {
-            "$ref": "#/$defs/__schema47"
+            "$ref": "#/$defs/__schema51"
           }
         },
         "required": [
@@ -909,11 +969,11 @@
         ]
       }
     },
-    "__schema41": {
+    "__schema45": {
       "type": "string",
       "format": "uri"
     },
-    "__schema42": {
+    "__schema46": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema8"
@@ -923,7 +983,7 @@
         }
       ]
     },
-    "__schema43": {
+    "__schema47": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema8"
@@ -933,11 +993,11 @@
         }
       ]
     },
-    "__schema44": {
+    "__schema48": {
       "minItems": 1,
       "$ref": "#/$defs/__schema5"
     },
-    "__schema45": {
+    "__schema49": {
       "type": "string",
       "enum": [
         "uncollected",
@@ -947,13 +1007,13 @@
         "correction_pending"
       ]
     },
-    "__schema46": {
+    "__schema50": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema8"
       }
     },
-    "__schema47": {
+    "__schema51": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema4"
@@ -963,7 +1023,7 @@
         }
       ]
     },
-    "__schema48": {
+    "__schema52": {
       "type": "array",
       "items": {
         "type": "object",
@@ -993,10 +1053,10 @@
             "type": "object",
             "properties": {
               "time": {
-                "$ref": "#/$defs/__schema49"
+                "$ref": "#/$defs/__schema53"
               },
               "space": {
-                "$ref": "#/$defs/__schema50"
+                "$ref": "#/$defs/__schema54"
               }
             },
             "additionalProperties": false
@@ -1053,13 +1113,13 @@
         "additionalProperties": false
       }
     },
-    "__schema49": {
+    "__schema53": {
       "$ref": "#/$defs/__schema8"
     },
-    "__schema50": {
+    "__schema54": {
       "$ref": "#/$defs/__schema8"
     },
-    "__schema51": {
+    "__schema55": {
       "type": "array",
       "items": {
         "type": "object",
@@ -1074,28 +1134,28 @@
             "$ref": "#/$defs/__schema8"
           },
           "parentId": {
-            "$ref": "#/$defs/__schema52"
+            "$ref": "#/$defs/__schema56"
           },
           "prerequisiteTagIds": {
             "$ref": "#/$defs/__schema5"
           },
           "learningOutcomeIds": {
-            "$ref": "#/$defs/__schema53"
-          },
-          "representativeProblemIds": {
-            "$ref": "#/$defs/__schema54"
-          },
-          "aliases": {
-            "$ref": "#/$defs/__schema55"
-          },
-          "formerNames": {
-            "$ref": "#/$defs/__schema56"
-          },
-          "lifecycle": {
             "$ref": "#/$defs/__schema57"
           },
-          "replacementTagIds": {
+          "representativeProblemIds": {
             "$ref": "#/$defs/__schema58"
+          },
+          "aliases": {
+            "$ref": "#/$defs/__schema59"
+          },
+          "formerNames": {
+            "$ref": "#/$defs/__schema60"
+          },
+          "lifecycle": {
+            "$ref": "#/$defs/__schema61"
+          },
+          "replacementTagIds": {
+            "$ref": "#/$defs/__schema62"
           }
         },
         "required": [
@@ -1142,7 +1202,7 @@
         ]
       }
     },
-    "__schema52": {
+    "__schema56": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema4"
@@ -1152,46 +1212,46 @@
         }
       ]
     },
-    "__schema53": {
+    "__schema57": {
       "minItems": 1,
       "$ref": "#/$defs/__schema5"
     },
-    "__schema54": {
+    "__schema58": {
       "minItems": 1,
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema7"
       }
     },
-    "__schema55": {
+    "__schema59": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema8"
       },
       "uniqueItems": true
     },
-    "__schema56": {
+    "__schema60": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema8"
       },
       "uniqueItems": true
     },
-    "__schema57": {
+    "__schema61": {
       "type": "string",
       "enum": [
         "active",
         "deprecated"
       ]
     },
-    "__schema58": {
+    "__schema62": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema4"
       },
       "uniqueItems": true
     },
-    "__schema59": {
+    "__schema63": {
       "type": "array",
       "items": {
         "type": "object",
@@ -1218,7 +1278,7 @@
         "additionalProperties": false
       }
     },
-    "__schema60": {
+    "__schema64": {
       "type": "array",
       "items": {
         "type": "object",
@@ -1227,58 +1287,58 @@
             "$ref": "#/$defs/__schema4"
           },
           "kind": {
-            "$ref": "#/$defs/__schema61"
+            "$ref": "#/$defs/__schema65"
           },
           "title": {
             "$ref": "#/$defs/__schema8"
           },
           "parentId": {
-            "$ref": "#/$defs/__schema62"
+            "$ref": "#/$defs/__schema66"
           },
           "baselineId": {
             "$ref": "#/$defs/__schema4"
           },
           "baselineVersion": {
-            "$ref": "#/$defs/__schema63"
+            "$ref": "#/$defs/__schema67"
           },
           "additionalPrerequisiteUnitIds": {
             "$ref": "#/$defs/__schema5"
           },
           "excludedTopics": {
-            "$ref": "#/$defs/__schema64"
+            "$ref": "#/$defs/__schema68"
           },
           "sourceRevisionIds": {
-            "$ref": "#/$defs/__schema65"
+            "$ref": "#/$defs/__schema69"
           },
           "tagIds": {
-            "$ref": "#/$defs/__schema66"
+            "$ref": "#/$defs/__schema70"
           },
           "learningOutcomeIds": {
-            "$ref": "#/$defs/__schema67"
+            "$ref": "#/$defs/__schema71"
           },
           "docPath": {
             "$ref": "#/$defs/__schema15"
           },
           "problemIds": {
-            "$ref": "#/$defs/__schema68"
+            "$ref": "#/$defs/__schema72"
           },
           "examples": {
-            "$ref": "#/$defs/__schema69"
+            "$ref": "#/$defs/__schema73"
           },
           "exercises": {
-            "$ref": "#/$defs/__schema79"
-          },
-          "stageRank": {
-            "$ref": "#/$defs/__schema81"
-          },
-          "difficultyRank": {
-            "$ref": "#/$defs/__schema82"
-          },
-          "representativeRank": {
             "$ref": "#/$defs/__schema83"
           },
+          "stageRank": {
+            "$ref": "#/$defs/__schema85"
+          },
+          "difficultyRank": {
+            "$ref": "#/$defs/__schema86"
+          },
+          "representativeRank": {
+            "$ref": "#/$defs/__schema87"
+          },
           "globalIndex": {
-            "$ref": "#/$defs/__schema84"
+            "$ref": "#/$defs/__schema88"
           },
           "orderReason": {
             "$ref": "#/$defs/__schema8"
@@ -1309,7 +1369,7 @@
         "additionalProperties": false
       }
     },
-    "__schema61": {
+    "__schema65": {
       "type": "string",
       "enum": [
         "chapter",
@@ -1317,7 +1377,7 @@
         "subsection"
       ]
     },
-    "__schema62": {
+    "__schema66": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema4"
@@ -1327,75 +1387,75 @@
         }
       ]
     },
-    "__schema63": {
+    "__schema67": {
       "type": "string",
       "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
-    "__schema64": {
+    "__schema68": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema8"
       }
     },
-    "__schema65": {
+    "__schema69": {
       "minItems": 1,
       "$ref": "#/$defs/__schema5"
     },
-    "__schema66": {
+    "__schema70": {
       "minItems": 1,
       "$ref": "#/$defs/__schema5"
     },
-    "__schema67": {
+    "__schema71": {
       "minItems": 1,
       "$ref": "#/$defs/__schema5"
     },
-    "__schema68": {
+    "__schema72": {
       "minItems": 1,
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema7"
       }
     },
-    "__schema69": {
+    "__schema73": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema70"
+        "$ref": "#/$defs/__schema74"
       },
       "uniqueItems": true
     },
-    "__schema70": {
+    "__schema74": {
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/$defs/__schema71"
+          "$ref": "#/$defs/__schema75"
         },
         "learningOutcomeIds": {
-          "$ref": "#/$defs/__schema72"
-        },
-        "kind": {
-          "$ref": "#/$defs/__schema74"
-        },
-        "language": {
-          "$ref": "#/$defs/__schema75"
-        },
-        "omissions": {
           "$ref": "#/$defs/__schema76"
         },
+        "kind": {
+          "$ref": "#/$defs/__schema78"
+        },
+        "language": {
+          "$ref": "#/$defs/__schema79"
+        },
+        "omissions": {
+          "$ref": "#/$defs/__schema80"
+        },
         "environment": {
-          "$ref": "#/$defs/__schema75"
+          "$ref": "#/$defs/__schema79"
         },
         "input": {
-          "$ref": "#/$defs/__schema75"
+          "$ref": "#/$defs/__schema79"
         },
         "procedure": {
-          "$ref": "#/$defs/__schema77"
+          "$ref": "#/$defs/__schema81"
         },
         "expectedResult": {
-          "$ref": "#/$defs/__schema75"
+          "$ref": "#/$defs/__schema79"
         },
         "verificationStatus": {
-          "$ref": "#/$defs/__schema78"
+          "$ref": "#/$defs/__schema82"
         }
       },
       "required": [
@@ -1412,22 +1472,22 @@
       ],
       "additionalProperties": false
     },
-    "__schema71": {
+    "__schema75": {
       "type": "string",
       "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
     },
-    "__schema72": {
+    "__schema76": {
       "minItems": 1,
-      "$ref": "#/$defs/__schema73"
+      "$ref": "#/$defs/__schema77"
     },
-    "__schema73": {
+    "__schema77": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema4"
       },
       "uniqueItems": true
     },
-    "__schema74": {
+    "__schema78": {
       "type": "string",
       "enum": [
         "executable",
@@ -1435,24 +1495,24 @@
         "illustrative"
       ]
     },
-    "__schema75": {
+    "__schema79": {
       "type": "string",
       "minLength": 1
     },
-    "__schema76": {
+    "__schema80": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema75"
+        "$ref": "#/$defs/__schema79"
       }
     },
-    "__schema77": {
+    "__schema81": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema75"
+        "$ref": "#/$defs/__schema79"
       }
     },
-    "__schema78": {
+    "__schema82": {
       "type": "string",
       "enum": [
         "pending",
@@ -1461,38 +1521,38 @@
         "failed"
       ]
     },
-    "__schema79": {
+    "__schema83": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema80"
+        "$ref": "#/$defs/__schema84"
       },
       "uniqueItems": true
     },
-    "__schema80": {
+    "__schema84": {
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/$defs/__schema71"
+          "$ref": "#/$defs/__schema75"
         },
         "learningOutcomeIds": {
           "minItems": 1,
-          "$ref": "#/$defs/__schema73"
+          "$ref": "#/$defs/__schema77"
         },
         "prerequisiteIds": {
-          "$ref": "#/$defs/__schema73"
+          "$ref": "#/$defs/__schema77"
         },
         "attainmentCondition": {
-          "$ref": "#/$defs/__schema75"
+          "$ref": "#/$defs/__schema79"
         },
         "assessment": {
           "type": "object",
           "properties": {
             "method": {
-              "$ref": "#/$defs/__schema75"
+              "$ref": "#/$defs/__schema79"
             },
             "successCondition": {
-              "$ref": "#/$defs/__schema75"
+              "$ref": "#/$defs/__schema79"
             }
           },
           "required": [
@@ -1505,17 +1565,17 @@
           "type": "object",
           "properties": {
             "reasoningOrVerification": {
-              "$ref": "#/$defs/__schema75"
+              "$ref": "#/$defs/__schema79"
             },
             "procedure": {
               "minItems": 1,
               "type": "array",
               "items": {
-                "$ref": "#/$defs/__schema75"
+                "$ref": "#/$defs/__schema79"
               }
             },
             "expectedResult": {
-              "$ref": "#/$defs/__schema75"
+              "$ref": "#/$defs/__schema79"
             },
             "verificationStatus": {
               "type": "string",
@@ -1545,27 +1605,27 @@
       ],
       "additionalProperties": false
     },
-    "__schema81": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 9007199254740991
-    },
-    "__schema82": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 9007199254740991
-    },
-    "__schema83": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 9007199254740991
-    },
-    "__schema84": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 9007199254740991
-    },
     "__schema85": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema86": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema87": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema88": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema89": {
       "type": "array",
       "items": {
         "type": "object",
@@ -1577,28 +1637,28 @@
             "$ref": "#/$defs/__schema7"
           },
           "policyVersion": {
-            "$ref": "#/$defs/__schema86"
+            "$ref": "#/$defs/__schema90"
           },
           "kind": {
-            "$ref": "#/$defs/__schema87"
+            "$ref": "#/$defs/__schema91"
           },
           "primaryProblemId": {
-            "$ref": "#/$defs/__schema88"
+            "$ref": "#/$defs/__schema92"
           },
           "sharedOutcomeIds": {
             "$ref": "#/$defs/__schema5"
           },
           "comparison": {
-            "$ref": "#/$defs/__schema89"
+            "$ref": "#/$defs/__schema93"
           },
           "additionalElement": {
-            "$ref": "#/$defs/__schema90"
+            "$ref": "#/$defs/__schema94"
           },
           "rationale": {
             "$ref": "#/$defs/__schema8"
           },
           "evidenceIds": {
-            "$ref": "#/$defs/__schema91"
+            "$ref": "#/$defs/__schema95"
           }
         },
         "required": [
@@ -1696,11 +1756,11 @@
         ]
       }
     },
-    "__schema86": {
+    "__schema90": {
       "type": "string",
       "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
-    "__schema87": {
+    "__schema91": {
       "type": "string",
       "enum": [
         "full",
@@ -1708,7 +1768,7 @@
         "supplement"
       ]
     },
-    "__schema88": {
+    "__schema92": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema7"
@@ -1718,7 +1778,7 @@
         }
       ]
     },
-    "__schema89": {
+    "__schema93": {
       "type": "object",
       "properties": {
         "method": {
@@ -1750,7 +1810,7 @@
       ],
       "additionalProperties": false
     },
-    "__schema90": {
+    "__schema94": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema8"
@@ -1760,11 +1820,11 @@
         }
       ]
     },
-    "__schema91": {
+    "__schema95": {
       "minItems": 1,
       "$ref": "#/$defs/__schema5"
     },
-    "__schema92": {
+    "__schema96": {
       "type": "array",
       "items": {
         "type": "object",
@@ -1776,52 +1836,52 @@
             "$ref": "#/$defs/__schema15"
           },
           "learningOutcomeIds": {
-            "$ref": "#/$defs/__schema93"
+            "$ref": "#/$defs/__schema97"
           },
           "baselineId": {
             "$ref": "#/$defs/__schema4"
           },
           "baselineVersion": {
-            "$ref": "#/$defs/__schema94"
-          },
-          "additionalPrerequisiteUnitIds": {
-            "$ref": "#/$defs/__schema73"
-          },
-          "excludedTopics": {
-            "$ref": "#/$defs/__schema95"
-          },
-          "tagIds": {
-            "$ref": "#/$defs/__schema96"
-          },
-          "sourceRevisionIds": {
-            "$ref": "#/$defs/__schema97"
-          },
-          "skill": {
             "$ref": "#/$defs/__schema98"
           },
-          "revision": {
+          "additionalPrerequisiteUnitIds": {
+            "$ref": "#/$defs/__schema77"
+          },
+          "excludedTopics": {
             "$ref": "#/$defs/__schema99"
           },
-          "claims": {
+          "tagIds": {
             "$ref": "#/$defs/__schema100"
           },
-          "examples": {
+          "sourceRevisionIds": {
+            "$ref": "#/$defs/__schema101"
+          },
+          "skill": {
             "$ref": "#/$defs/__schema102"
           },
-          "exercises": {
+          "revision": {
+            "$ref": "#/$defs/__schema103"
+          },
+          "claims": {
             "$ref": "#/$defs/__schema104"
           },
-          "kind": {
-            "$ref": "#/$defs/__schema105"
-          },
-          "primaryProblemId": {
+          "examples": {
             "$ref": "#/$defs/__schema106"
           },
+          "exercises": {
+            "$ref": "#/$defs/__schema108"
+          },
+          "kind": {
+            "$ref": "#/$defs/__schema109"
+          },
+          "primaryProblemId": {
+            "$ref": "#/$defs/__schema110"
+          },
           "differenceSummary": {
-            "$ref": "#/$defs/__schema107"
+            "$ref": "#/$defs/__schema111"
           },
           "sections": {
-            "$ref": "#/$defs/__schema108"
+            "$ref": "#/$defs/__schema112"
           }
         },
         "required": [
@@ -1883,33 +1943,33 @@
         ]
       }
     },
-    "__schema93": {
+    "__schema97": {
       "minItems": 1,
-      "$ref": "#/$defs/__schema73"
+      "$ref": "#/$defs/__schema77"
     },
-    "__schema94": {
+    "__schema98": {
       "type": "string",
       "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
-    "__schema95": {
+    "__schema99": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema75"
+        "$ref": "#/$defs/__schema79"
       }
     },
-    "__schema96": {
+    "__schema100": {
       "minItems": 1,
-      "$ref": "#/$defs/__schema73"
+      "$ref": "#/$defs/__schema77"
     },
-    "__schema97": {
+    "__schema101": {
       "minItems": 1,
-      "$ref": "#/$defs/__schema73"
+      "$ref": "#/$defs/__schema77"
     },
-    "__schema98": {
+    "__schema102": {
       "type": "object",
       "properties": {
         "name": {
-          "$ref": "#/$defs/__schema75"
+          "$ref": "#/$defs/__schema79"
         },
         "version": {
           "type": "string",
@@ -1926,31 +1986,31 @@
       ],
       "additionalProperties": false
     },
-    "__schema99": {
+    "__schema103": {
       "type": "integer",
       "exclusiveMinimum": 0,
       "maximum": 9007199254740991
     },
-    "__schema100": {
+    "__schema104": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema101"
+        "$ref": "#/$defs/__schema105"
       },
       "uniqueItems": true
     },
-    "__schema101": {
+    "__schema105": {
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/$defs/__schema71"
+          "$ref": "#/$defs/__schema75"
         },
         "text": {
-          "$ref": "#/$defs/__schema75"
+          "$ref": "#/$defs/__schema79"
         },
         "sourceRevisionIds": {
           "minItems": 1,
-          "$ref": "#/$defs/__schema73"
+          "$ref": "#/$defs/__schema77"
         },
         "authorId": {
           "$ref": "#/$defs/__schema4"
@@ -1974,49 +2034,49 @@
       ],
       "additionalProperties": false
     },
-    "__schema102": {
+    "__schema106": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema103"
+        "$ref": "#/$defs/__schema107"
       },
       "uniqueItems": true
     },
-    "__schema103": {
+    "__schema107": {
       "type": "object",
       "properties": {
         "key": {
-          "$ref": "#/$defs/__schema71"
+          "$ref": "#/$defs/__schema75"
         },
         "learningOutcomeIds": {
-          "$ref": "#/$defs/__schema72"
-        },
-        "kind": {
-          "$ref": "#/$defs/__schema74"
-        },
-        "language": {
-          "$ref": "#/$defs/__schema75"
-        },
-        "omissions": {
           "$ref": "#/$defs/__schema76"
         },
-        "environment": {
-          "$ref": "#/$defs/__schema75"
-        },
-        "input": {
-          "$ref": "#/$defs/__schema75"
-        },
-        "procedure": {
-          "$ref": "#/$defs/__schema77"
-        },
-        "expectedResult": {
-          "$ref": "#/$defs/__schema75"
-        },
-        "verificationStatus": {
+        "kind": {
           "$ref": "#/$defs/__schema78"
         },
+        "language": {
+          "$ref": "#/$defs/__schema79"
+        },
+        "omissions": {
+          "$ref": "#/$defs/__schema80"
+        },
+        "environment": {
+          "$ref": "#/$defs/__schema79"
+        },
+        "input": {
+          "$ref": "#/$defs/__schema79"
+        },
+        "procedure": {
+          "$ref": "#/$defs/__schema81"
+        },
+        "expectedResult": {
+          "$ref": "#/$defs/__schema79"
+        },
+        "verificationStatus": {
+          "$ref": "#/$defs/__schema82"
+        },
         "learningUnitIds": {
-          "$ref": "#/$defs/__schema73"
+          "$ref": "#/$defs/__schema77"
         }
       },
       "required": [
@@ -2034,15 +2094,15 @@
       ],
       "additionalProperties": false
     },
-    "__schema104": {
+    "__schema108": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema80"
+        "$ref": "#/$defs/__schema84"
       },
       "uniqueItems": true
     },
-    "__schema105": {
+    "__schema109": {
       "type": "string",
       "enum": [
         "full",
@@ -2050,7 +2110,7 @@
         "supplement"
       ]
     },
-    "__schema106": {
+    "__schema110": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema7"
@@ -2060,24 +2120,24 @@
         }
       ]
     },
-    "__schema107": {
+    "__schema111": {
       "anyOf": [
         {
-          "$ref": "#/$defs/__schema75"
+          "$ref": "#/$defs/__schema79"
         },
         {
           "type": "null"
         }
       ]
     },
-    "__schema108": {
+    "__schema112": {
       "type": "object",
       "propertyNames": {
         "type": "string"
       },
       "additionalProperties": {}
     },
-    "__schema109": {
+    "__schema113": {
       "type": "array",
       "items": {
         "type": "object",
@@ -2086,16 +2146,16 @@
             "$ref": "#/$defs/__schema4"
           },
           "url": {
-            "$ref": "#/$defs/__schema110"
+            "$ref": "#/$defs/__schema114"
           },
           "sourceKind": {
-            "$ref": "#/$defs/__schema111"
+            "$ref": "#/$defs/__schema115"
           },
           "contestId": {
-            "$ref": "#/$defs/__schema112"
+            "$ref": "#/$defs/__schema116"
           },
           "officialTaskId": {
-            "$ref": "#/$defs/__schema113"
+            "$ref": "#/$defs/__schema117"
           },
           "checkedAt": {
             "$ref": "#/$defs/__schema2"
@@ -2120,11 +2180,11 @@
         "additionalProperties": false
       }
     },
-    "__schema110": {
+    "__schema114": {
       "type": "string",
       "format": "uri"
     },
-    "__schema111": {
+    "__schema115": {
       "type": "string",
       "enum": [
         "official_problem",
@@ -2133,7 +2193,7 @@
         "other_official"
       ]
     },
-    "__schema112": {
+    "__schema116": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema6"
@@ -2143,7 +2203,7 @@
         }
       ]
     },
-    "__schema113": {
+    "__schema117": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema32"
@@ -2153,7 +2213,7 @@
         }
       ]
     },
-    "__schema114": {
+    "__schema118": {
       "type": "array",
       "items": {
         "type": "object",
@@ -2171,7 +2231,7 @@
             "minItems": 1,
             "type": "array",
             "items": {
-              "$ref": "#/$defs/__schema115"
+              "$ref": "#/$defs/__schema119"
             },
             "uniqueItems": true
           },
@@ -2209,7 +2269,7 @@
         "additionalProperties": false
       }
     },
-    "__schema115": {
+    "__schema119": {
       "oneOf": [
         {
           "type": "object",
@@ -2240,7 +2300,7 @@
                   "pattern": "^exercises\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
                 },
                 {
-                  "$ref": "#/$defs/__schema116"
+                  "$ref": "#/$defs/__schema120"
                 }
               ]
             }
@@ -2277,7 +2337,7 @@
                   "pattern": "^exercises\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
                 },
                 {
-                  "$ref": "#/$defs/__schema116"
+                  "$ref": "#/$defs/__schema120"
                 }
               ]
             }
@@ -2291,7 +2351,7 @@
         }
       ]
     },
-    "__schema116": {
+    "__schema120": {
       "type": "string",
       "pattern": "^exercises\\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\\.(?:assessment|answer)$"
     }

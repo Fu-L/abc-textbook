@@ -93,6 +93,53 @@ describe('US2 catalog scope contract', () => {
     expect(codes).toContain('CONTEST_RANGE_INCOMPLETE');
   });
 
+  it('covers the release range with held Contests and official gaps exactly once', () => {
+    const baseCatalog = makeTrustedCatalog({
+      lastContestId: 'abc214',
+      contestCount: 2,
+    });
+    const firstContest = baseCatalog.contests[0];
+    if (!firstContest) throw new Error('Trusted catalog Contest fixture is missing.');
+    const secondContest = {
+      ...structuredClone(firstContest),
+      id: 'abc214',
+      number: 214,
+      title: 'ABC 214',
+      officialUrl: 'https://atcoder.jp/contests/abc214',
+      officialTaskIds: ['abc214_a', 'abc214_b', 'abc214_c', 'abc214_d', 'abc214_e'],
+      taskOrderSourceRevisionId: 'source-revision-abc214-e',
+    };
+    const gap = {
+      number: 213,
+      contestId: 'abc213',
+      status: 'officially_unheld' as const,
+      evidenceUrl: 'https://atcoder.jp/contests/abc350/tasks/abc350_a',
+      evidenceAssertion: 'ABC213 was not held in this fixture.',
+      checkedAt: '2026-07-17T02:00:00+09:00',
+      termsCheckedAt: '2026-07-17T02:00:00+09:00',
+      fingerprint: 'a'.repeat(64),
+    };
+    const catalog = {
+      ...baseCatalog,
+      contests: [...baseCatalog.contests, secondContest],
+      contestGaps: [gap],
+    };
+
+    const validCodes = validateCatalogSemantics(catalog as CatalogLike).map(({ code }) => code);
+    expect(validCodes).not.toContain('CONTEST_RANGE_INCOMPLETE');
+    expect(validCodes).not.toContain('CONTEST_GAP_OVERLAP');
+
+    const overlapCatalog = {
+      ...catalog,
+      contestGaps: [...catalog.contestGaps, { ...gap, number: 212, contestId: 'abc212' }],
+    };
+    const overlapCodes = validateCatalogSemantics(overlapCatalog as CatalogLike).map(
+      ({ code }) => code,
+    );
+    expect(overlapCodes).toContain('CONTEST_GAP_OVERLAP');
+    expect(overlapCodes).toContain('CONTEST_RANGE_INCOMPLETE');
+  });
+
   it('derives scope strictly from every official label after D', () => {
     const registry = buildAdvancedSlotRegistry({
       contests: [

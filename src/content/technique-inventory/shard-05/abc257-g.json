@@ -4,7 +4,7 @@
     "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9",
     "source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5"
   ],
-  "coreMethod": "abc257-g「Prefix Concatenation」では、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc257-g「Prefix Concatenation」では、主解法候補として、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "ある文字列と prefix を共有する文字列群は辞書順で連続するため、最長一致する相手は隣接位置にも存在する。",
     "Prefix Concatenation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

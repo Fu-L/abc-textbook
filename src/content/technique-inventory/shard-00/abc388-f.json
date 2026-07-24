@@ -4,19 +4,19 @@
     "source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5",
     "source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698"
   ],
-  "coreMethod": "abc388-f「Dangerous Sugoroku」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc388-f「Dangerous Sugoroku」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
-    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+    "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
     "Dangerous Sugoroku 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
   ],
-  "prerequisiteCandidates": ["半開区間の扱い", "動的計画法の状態設計"],
+  "prerequisiteCandidates": ["半開区間の扱い", "剰余演算と modular inverse"],
   "implementationConcerns": [
-    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+    "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。"
   ],
   "outcomeCandidates": [
-    "Dangerous Sugoroku 型の 区間端点と包含関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
+    "Dangerous Sugoroku 型の 区間端点と包含関係に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。"
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

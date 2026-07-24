@@ -4,7 +4,7 @@
     "source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953",
     "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"
   ],
-  "coreMethod": "abc256-ex「I like Query Problem」では、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc256-ex「I like Query Problem」では、主解法候補として、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "作用の合成則と集約演算の準同型性により、遅延値を子へ配る前後で区間の表す値が変わらない。",
     "I like Query Problem 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -16,5 +16,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }

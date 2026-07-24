@@ -336,6 +336,12 @@ const buildReport = (
         return counts;
       }, new Map<string, number>()),
     ),
+    reviewStatusCounts: sortedCounts(
+      records.reduce((counts, { item }) => {
+        increment(counts, item.reviewStatus);
+        return counts;
+      }, new Map<string, number>()),
+    ),
     assignments: records.map(
       ({
         problem,
@@ -463,13 +469,6 @@ try {
   const report = buildReport(records, sources.length);
   const unclassifiedCount = (report.unclassifiedProblemIds as readonly string[]).length;
   const problemComplexityCount = report.problemComplexityCount as number;
-  if (mode === 'write' && unclassifiedCount !== 0) {
-    throw new CorpusCliError(
-      'AUTHORING_ANALYSIS_COVERAGE_TOO_LOW',
-      `${String(unclassifiedCount)} Problems do not have a reviewed technique classification.`,
-    );
-  }
-
   let written = 0;
   let verified = 0;
   if (mode === 'write') {

@@ -4,7 +4,7 @@
     "source-abc358-editorial-10226-f6d3c2facce334fb9f9530e1cfa4602e88cc5246b8149af4753580df88723d30",
     "source-abc358-g-problem-7460a123500722b3ba747ab59d9bfa02371e73d65f5caf209edcbafa42d689ee"
   ],
-  "coreMethod": "abc358-g「AtCoder Tour」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "coreMethod": "abc358-g「AtCoder Tour」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
   "proofIdeas": [
     "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
     "AtCoder Tour 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
@@ -18,5 +18,5 @@
   ],
   "adHocElements": [],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft"
 }
