@@ -1,4 +1,11 @@
 import { canonicalDigest } from '../domain/canonical-json.js';
+import {
+  LearningOutcomeSchema,
+  LearningUnitSchema,
+  ProblemPlacementSchema,
+  TechniqueTagSchema,
+} from '../domain/schema-parts/catalog.js';
+import type { z } from 'zod';
 
 export type IntegrationAction = 'promote' | 'merge' | 'split' | 'retire';
 export type TaxonomyEntityKind = 'tag' | 'outcome' | 'unit';
@@ -26,25 +33,43 @@ export interface IntegrationEntry {
   readonly status: 'accepted' | 'proposed' | 'rejected';
 }
 
-export interface FinalTaxonomyEntity {
-  readonly id: string;
-  readonly kind: TaxonomyEntityKind;
-  readonly definition: string;
-  readonly learningOutcomeIds: readonly string[];
-  readonly representativeProblemIds: readonly string[];
-  readonly sourceRevisionIds: readonly string[];
-}
+type TechniqueTag = z.infer<typeof TechniqueTagSchema>;
+type LearningOutcome = z.infer<typeof LearningOutcomeSchema>;
+type LearningUnit = z.infer<typeof LearningUnitSchema>;
+type ProblemPlacement = z.infer<typeof ProblemPlacementSchema>;
+
+/**
+ * The outer `kind` is the taxonomy namespace. The nested value is the exact
+ * canonical entity shape so accepted builds cannot silently materialize a
+ * reduced preview-only projection.
+ */
+export type FinalTaxonomyEntity =
+  | {
+      readonly kind: 'tag';
+      readonly entity: TechniqueTag;
+      readonly sourceRevisionIds: readonly string[];
+    }
+  | {
+      readonly kind: 'outcome';
+      readonly entity: LearningOutcome;
+      readonly sourceRevisionIds: readonly string[];
+    }
+  | {
+      readonly kind: 'unit';
+      readonly entity: LearningUnit;
+      readonly sourceRevisionIds: readonly string[];
+    };
+
+/** Canonical ProblemPlacement plus the taxonomy reachability projections. */
+export type FinalProblemPlacement = ProblemPlacement & {
+  readonly tagIds: readonly string[];
+  readonly outcomeIds: readonly string[];
+  readonly learningUnitIds: readonly string[];
+};
 
 export interface PrerequisiteEdge {
   readonly nodeId: string;
   readonly prerequisiteId: string;
-}
-
-export interface FinalProblemPlacement {
-  readonly problemId: string;
-  readonly tagIds: readonly string[];
-  readonly outcomeIds: readonly string[];
-  readonly learningUnitIds: readonly string[];
 }
 
 export interface TaxonomyCorrectionImpact {
@@ -158,6 +183,11 @@ export const createFinalTaxonomyBuild = (input: FinalTaxonomyBuildInput): FinalT
   return { ...subject, buildDigest: finalTaxonomyBuildDigest(subject) };
 };
 
+export const finalTaxonomyEntityId = (entity: FinalTaxonomyEntity): string => entity.entity.id;
+
+const finalTaxonomyEntityIds = (entities: readonly FinalTaxonomyEntity[]): string[] =>
+  entities.map(finalTaxonomyEntityId);
+
 const sameSet = (left: readonly string[], right: readonly string[]): boolean => {
   const leftSet = new Set(left);
   const rightSet = new Set(right);
@@ -167,6 +197,39 @@ const sameSet = (left: readonly string[], right: readonly string[]): boolean => 
     leftSet.size === rightSet.size &&
     [...leftSet].every((value) => rightSet.has(value))
   );
+};
+
+const edgeKey = ({ nodeId, prerequisiteId }: PrerequisiteEdge): string =>
+  `${nodeId}\u0000${prerequisiteId}`;
+
+const sameEdgeSet = (
+  left: readonly PrerequisiteEdge[],
+  right: readonly PrerequisiteEdge[],
+): boolean => sameSet(left.map(edgeKey), right.map(edgeKey));
+
+const finalEntitySchemaResult = (entity: FinalTaxonomyEntity) => {
+  switch (entity.kind) {
+    case 'tag':
+      return TechniqueTagSchema.safeParse(entity.entity);
+    case 'outcome':
+      return LearningOutcomeSchema.safeParse(entity.entity);
+    case 'unit':
+      return LearningUnitSchema.safeParse(entity.entity);
+  }
+};
+
+const requireKnownReferences = (
+  violations: string[],
+  ownerId: string,
+  field: string,
+  references: readonly string[],
+  knownIds: ReadonlySet<string>,
+): void => {
+  for (const reference of references) {
+    if (!knownIds.has(reference)) {
+      violations.push(`final_entity_unknown_reference:${ownerId}:${field}:${reference}`);
+    }
+  }
 };
 
 const sameOrderedValues = (left: readonly string[], right: readonly string[]): boolean =>
@@ -241,12 +304,21 @@ export const validateTaxonomyIntegration = (
   const violations: string[] = [];
   const previewEntitiesById = new Map(context.previewEntities.map((entity) => [entity.id, entity]));
   const requiredMode = requiredReviewMode(build);
-  const finalEntityIds = build.finalEntities.map(({ id }) => id);
-  const tagIds = build.finalEntities.filter(({ kind }) => kind === 'tag').map(({ id }) => id);
+  const finalEntityIds = finalTaxonomyEntityIds(build.finalEntities);
+  const tagIds = build.finalEntities
+    .filter(({ kind }) => kind === 'tag')
+    .map(finalTaxonomyEntityId);
   const outcomeIds = build.finalEntities
     .filter(({ kind }) => kind === 'outcome')
-    .map(({ id }) => id);
-  const unitIds = build.finalEntities.filter(({ kind }) => kind === 'unit').map(({ id }) => id);
+    .map(finalTaxonomyEntityId);
+  const unitIds = build.finalEntities
+    .filter(({ kind }) => kind === 'unit')
+    .map(finalTaxonomyEntityId);
+  const tagIdsSet = new Set(tagIds);
+  const outcomeIdsSet = new Set(outcomeIds);
+  const unitIdsSet = new Set(unitIds);
+  const problemIdsSet = new Set(context.inventoryProblemIds);
+  const sourceRevisionIdsSet = new Set(build.sourceRevisionIds);
 
   if (!context.passedPreviewSnapshotDigests.includes(build.previewSnapshotDigest)) {
     violations.push('preview_snapshot_not_passed');
@@ -317,7 +389,9 @@ export const validateTaxonomyIntegration = (
     }
     if (previewEntity && entry.action !== 'retire') {
       for (const finalEntityId of entry.finalEntityIds) {
-        const finalEntity = build.finalEntities.find(({ id }) => id === finalEntityId);
+        const finalEntity = build.finalEntities.find(
+          (candidate) => finalTaxonomyEntityId(candidate) === finalEntityId,
+        );
         if (finalEntity && finalEntity.kind !== previewEntity.kind) {
           violations.push(`final_entity_kind_mismatch:${entry.previewEntityId}`);
           break;
@@ -355,18 +429,150 @@ export const validateTaxonomyIntegration = (
     violations.push('final_taxonomy_not_deduplicated');
   }
   for (const entity of build.finalEntities) {
+    const entityId = finalTaxonomyEntityId(entity);
+    const schemaResult = finalEntitySchemaResult(entity);
+    if (!schemaResult.success) {
+      violations.push(`final_entity_schema_invalid:${entityId}`);
+      continue;
+    }
     if (
-      entity.definition.trim().length === 0 ||
-      entity.representativeProblemIds.length === 0 ||
-      entity.representativeProblemIds.some((id) => !context.inventoryProblemIds.includes(id)) ||
       entity.sourceRevisionIds.length === 0 ||
-      entity.sourceRevisionIds.some((id) => !build.sourceRevisionIds.includes(id))
+      new Set(entity.sourceRevisionIds).size !== entity.sourceRevisionIds.length ||
+      entity.sourceRevisionIds.some((id) => !sourceRevisionIdsSet.has(id))
     ) {
-      violations.push(`final_entity_incomplete:${entity.id}`);
+      violations.push(`final_entity_incomplete:${entityId}`);
     }
-    if (entity.learningOutcomeIds.some((id) => !outcomeIds.includes(id))) {
-      violations.push(`final_entity_unknown_outcome:${entity.id}`);
+    if (entity.kind === 'tag') {
+      const tagResult = TechniqueTagSchema.safeParse(entity.entity);
+      if (!tagResult.success) continue;
+      const tag = tagResult.data;
+      requireKnownReferences(
+        violations,
+        entityId,
+        'parentId',
+        tag.parentId === null ? [] : [tag.parentId],
+        tagIdsSet,
+      );
+      requireKnownReferences(
+        violations,
+        entityId,
+        'prerequisiteTagIds',
+        tag.prerequisiteTagIds,
+        tagIdsSet,
+      );
+      requireKnownReferences(
+        violations,
+        entityId,
+        'replacementTagIds',
+        tag.replacementTagIds,
+        tagIdsSet,
+      );
+      if (tag.learningOutcomeIds.some((id) => !outcomeIdsSet.has(id))) {
+        violations.push(`final_entity_unknown_outcome:${entityId}`);
+      }
+      if (tag.representativeProblemIds.some((id) => !problemIdsSet.has(id))) {
+        violations.push(`final_entity_unknown_problem:${entityId}`);
+      }
+    } else if (entity.kind === 'outcome') {
+      const outcomeResult = LearningOutcomeSchema.safeParse(entity.entity);
+      if (!outcomeResult.success) continue;
+      const outcome = outcomeResult.data;
+      requireKnownReferences(
+        violations,
+        entityId,
+        'prerequisiteOutcomeIds',
+        outcome.prerequisiteOutcomeIds,
+        outcomeIdsSet,
+      );
+      requireKnownReferences(
+        violations,
+        entityId,
+        'scopeIds',
+        outcome.scopeIds,
+        new Set([...tagIds, ...unitIds, ...context.inventoryProblemIds]),
+      );
+    } else {
+      const unitResult = LearningUnitSchema.safeParse(entity.entity);
+      if (!unitResult.success) continue;
+      const unit = unitResult.data;
+      if (!sameSet(unit.sourceRevisionIds, entity.sourceRevisionIds)) {
+        violations.push(`final_entity_source_revisions_mismatch:${entityId}`);
+      }
+      requireKnownReferences(
+        violations,
+        entityId,
+        'parentId',
+        unit.parentId === null ? [] : [unit.parentId],
+        unitIdsSet,
+      );
+      requireKnownReferences(
+        violations,
+        entityId,
+        'additionalPrerequisiteUnitIds',
+        unit.additionalPrerequisiteUnitIds,
+        unitIdsSet,
+      );
+      requireKnownReferences(violations, entityId, 'tagIds', unit.tagIds, tagIdsSet);
+      requireKnownReferences(
+        violations,
+        entityId,
+        'learningOutcomeIds',
+        unit.learningOutcomeIds,
+        outcomeIdsSet,
+      );
+      requireKnownReferences(violations, entityId, 'problemIds', unit.problemIds, problemIdsSet);
+      for (const example of unit.examples) {
+        requireKnownReferences(
+          violations,
+          `${entityId}:${example.key}`,
+          'learningOutcomeIds',
+          example.learningOutcomeIds,
+          outcomeIdsSet,
+        );
+      }
+      for (const exercise of unit.exercises) {
+        requireKnownReferences(
+          violations,
+          `${entityId}:${exercise.key}`,
+          'learningOutcomeIds',
+          exercise.learningOutcomeIds,
+          outcomeIdsSet,
+        );
+      }
     }
+  }
+
+  const expectedTagPrerequisites = build.finalEntities
+    .filter(
+      (entity): entity is Extract<FinalTaxonomyEntity, { kind: 'tag' }> => entity.kind === 'tag',
+    )
+    .flatMap((entity) => {
+      const parsed = TechniqueTagSchema.safeParse(entity.entity);
+      return parsed.success
+        ? parsed.data.prerequisiteTagIds.map((prerequisiteId) => ({
+            nodeId: parsed.data.id,
+            prerequisiteId,
+          }))
+        : [];
+    });
+  if (!sameEdgeSet(build.tagPrerequisites, expectedTagPrerequisites)) {
+    violations.push('tag_dag_not_materialized_from_entities');
+  }
+  const expectedLearningUnitPrerequisites = build.finalEntities
+    .filter(
+      (entity): entity is Extract<FinalTaxonomyEntity, { kind: 'unit' }> => entity.kind === 'unit',
+    )
+    .flatMap((entity) => {
+      const parsed = LearningUnitSchema.safeParse(entity.entity);
+      return parsed.success
+        ? parsed.data.additionalPrerequisiteUnitIds.map((prerequisiteId) => ({
+            nodeId: parsed.data.id,
+            prerequisiteId,
+          }))
+        : [];
+    });
+  if (!sameEdgeSet(build.learningUnitPrerequisites, expectedLearningUnitPrerequisites)) {
+    violations.push('learning_unit_dag_not_materialized_from_entities');
   }
 
   violations.push(
@@ -393,16 +599,46 @@ export const validateTaxonomyIntegration = (
   if (!sameSet(placementProblemIds, context.inventoryProblemIds)) {
     violations.push('placement_reachability_incomplete');
   }
+  const placementIds = build.placements.map(({ id }) => id);
+  if (new Set(placementIds).size !== placementIds.length) {
+    violations.push('placement_ids_not_unique');
+  }
   for (const placement of build.placements) {
+    const { tagIds, outcomeIds, learningUnitIds, ...canonicalPlacement } = placement;
+    if (!ProblemPlacementSchema.safeParse(canonicalPlacement).success) {
+      violations.push(`placement_schema_invalid:${placement.problemId}`);
+    }
+    if (!problemIdsSet.has(placement.problemId)) {
+      violations.push(`placement_unknown_problem:${placement.problemId}`);
+    }
     if (
-      placement.tagIds.length === 0 ||
-      placement.outcomeIds.length === 0 ||
-      placement.learningUnitIds.length === 0 ||
-      placement.tagIds.some((id) => !tagIds.includes(id)) ||
-      placement.outcomeIds.some((id) => !outcomeIds.includes(id)) ||
-      placement.learningUnitIds.some((id) => !unitIds.includes(id))
+      tagIds.length === 0 ||
+      outcomeIds.length === 0 ||
+      learningUnitIds.length === 0 ||
+      new Set(tagIds).size !== tagIds.length ||
+      new Set(outcomeIds).size !== outcomeIds.length ||
+      new Set(learningUnitIds).size !== learningUnitIds.length ||
+      tagIds.some((id) => !tagIdsSet.has(id)) ||
+      outcomeIds.some((id) => !outcomeIdsSet.has(id)) ||
+      learningUnitIds.some((id) => !unitIdsSet.has(id))
     ) {
       violations.push(`placement_reference_invalid:${placement.problemId}`);
+    }
+    if (
+      placement.primaryProblemId !== null &&
+      (!problemIdsSet.has(placement.primaryProblemId) ||
+        placement.primaryProblemId === placement.problemId)
+    ) {
+      violations.push(`placement_primary_problem_invalid:${placement.problemId}`);
+    }
+    if (placement.sharedOutcomeIds.some((id) => !outcomeIdsSet.has(id))) {
+      violations.push(`placement_shared_outcome_invalid:${placement.problemId}`);
+    }
+    if (
+      placement.kind !== 'full' &&
+      placement.sharedOutcomeIds.some((id) => !outcomeIds.includes(id))
+    ) {
+      violations.push(`placement_shared_outcome_not_placed:${placement.problemId}`);
     }
   }
 
@@ -415,7 +651,9 @@ export const validateTaxonomyIntegration = (
     for (const assignment of entry.splitProblemAssignments) {
       for (const problemId of assignment.problemIds) {
         const problemPlacement = placementByProblemId.get(problemId);
-        const finalEntity = build.finalEntities.find(({ id }) => id === assignment.finalEntityId);
+        const finalEntity = build.finalEntities.find(
+          (candidate) => finalTaxonomyEntityId(candidate) === assignment.finalEntityId,
+        );
         const placedIds =
           previewEntity.kind === 'tag'
             ? problemPlacement?.tagIds

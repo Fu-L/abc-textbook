@@ -44,7 +44,10 @@ export interface PreviewJoinRequirements {
   readonly provisionalTaxonomyDigest: string;
   readonly authoringSkillVersion: string;
   readonly authoringSkillDigest: string;
-  readonly subjectDigest: string;
+  /** Digests recomputed from the actual artifact bytes for each component. */
+  readonly requiredArtifactDigests: Readonly<Record<string, string>>;
+  /** Current component subjects, including the corresponding artifact digest. */
+  readonly requiredSubjectDigests: Readonly<Record<string, string>>;
   readonly requiredCheckResultIds: readonly string[];
   readonly requiredReviewEvidenceIds: readonly string[];
   /** Review mode frozen by the preview manifest for each required evidence ID. */
@@ -64,7 +67,16 @@ export const requiredPreviewComponentIds = [
 
 export type ComponentEvidenceSubject = Omit<ComponentEvidence, 'componentDigest'>;
 
+/** The current subject excludes evidence and the self-reported integrity digest. */
+export type ComponentCurrentSubject = Omit<
+  ComponentEvidence,
+  'subjectDigest' | 'checkResults' | 'reviewEvidence' | 'componentDigest'
+>;
+
 export const componentEvidenceDigest = (component: ComponentEvidenceSubject): string =>
+  canonicalDigest(component);
+
+export const componentSubjectDigest = (component: ComponentCurrentSubject): string =>
   canonicalDigest(component);
 
 export interface PreviewSnapshot {
@@ -154,6 +166,22 @@ const componentIdsAreComplete = (componentIds: readonly string[]): boolean => {
   );
 };
 
+const digestRequirementIdsAreComplete = (digests: Readonly<Record<string, string>>): boolean =>
+  sameUniqueSet(Object.keys(digests), requiredPreviewComponentIds);
+
+const componentCurrentSubject = (component: ComponentEvidence): ComponentCurrentSubject => ({
+  componentId: component.componentId,
+  previewId: component.previewId,
+  manifestDigest: component.manifestDigest,
+  candidatePoolDigest: component.candidatePoolDigest,
+  problemIds: component.problemIds,
+  sourceRevisionIds: component.sourceRevisionIds,
+  provisionalTaxonomyDigest: component.provisionalTaxonomyDigest,
+  authoringSkillVersion: component.authoringSkillVersion,
+  authoringSkillDigest: component.authoringSkillDigest,
+  artifactDigest: component.artifactDigest,
+});
+
 /** Join component evidence only against the separately frozen preview requirements. */
 export const joinPreviewComponents = (
   components: readonly ComponentEvidence[],
@@ -164,6 +192,12 @@ export const joinPreviewComponents = (
   const holdReasons: string[] = [];
   const componentIds = components.map(({ componentId }) => componentId);
   if (!componentIdsAreComplete(componentIds)) holdReasons.push('COMPONENT_SET_INCOMPLETE');
+  if (!digestRequirementIdsAreComplete(requirements.requiredArtifactDigests)) {
+    holdReasons.push('ARTIFACT_DIGEST_SET_INCOMPLETE');
+  }
+  if (!digestRequirementIdsAreComplete(requirements.requiredSubjectDigests)) {
+    holdReasons.push('SUBJECT_DIGEST_SET_INCOMPLETE');
+  }
 
   const checkResults = components.flatMap(({ checkResults: results }) => results);
   const reviewEvidence = components.flatMap(({ reviewEvidence: evidence }) => evidence);
@@ -172,6 +206,21 @@ export const joinPreviewComponents = (
     const { componentDigest, ...subject } = component;
     if (componentDigest !== componentEvidenceDigest(subject)) {
       holdReasons.push(`COMPONENT_DIGEST_STALE:${component.componentId}`);
+    }
+    const expectedArtifactDigest = requirements.requiredArtifactDigests[component.componentId];
+    if (expectedArtifactDigest === undefined) {
+      holdReasons.push(`ARTIFACT_DIGEST_MISSING:${component.componentId}`);
+    } else if (component.artifactDigest !== expectedArtifactDigest) {
+      holdReasons.push(`ARTIFACT_DIGEST_MISMATCH:${component.componentId}`);
+    }
+    const expectedSubjectDigest = requirements.requiredSubjectDigests[component.componentId];
+    const recomputedSubjectDigest = componentSubjectDigest(componentCurrentSubject(component));
+    if (
+      expectedSubjectDigest === undefined ||
+      component.subjectDigest !== expectedSubjectDigest ||
+      recomputedSubjectDigest !== expectedSubjectDigest
+    ) {
+      holdReasons.push(`STALE_SUBJECT:${component.componentId}`);
     }
     if (
       component.previewId !== requirements.previewId ||
@@ -197,9 +246,6 @@ export const joinPreviewComponents = (
     ) {
       holdReasons.push(`AUTHORING_SKILL_MISMATCH:${component.componentId}`);
     }
-    if (component.subjectDigest !== requirements.subjectDigest) {
-      holdReasons.push(`STALE_SUBJECT:${component.componentId}`);
-    }
   }
 
   if (
@@ -211,7 +257,20 @@ export const joinPreviewComponents = (
     holdReasons.push('CHECK_RESULT_SET_INCOMPLETE');
   }
   for (const result of checkResults) {
-    if (result.subjectDigest !== requirements.subjectDigest) {
+    const owner = components.find(({ checkResults: results }) =>
+      results.some(({ checkResultId }) => checkResultId === result.checkResultId),
+    );
+    const expectedSubjectDigest = owner
+      ? requirements.requiredSubjectDigests[owner.componentId]
+      : undefined;
+    const currentSubjectDigest = owner
+      ? componentSubjectDigest(componentCurrentSubject(owner))
+      : undefined;
+    if (
+      expectedSubjectDigest === undefined ||
+      currentSubjectDigest !== expectedSubjectDigest ||
+      result.subjectDigest !== currentSubjectDigest
+    ) {
       holdReasons.push(`STALE_CHECK_RESULT:${result.checkResultId}`);
     }
     if (!result.passed) holdReasons.push(`CHECK_FAILED:${result.checkResultId}`);
@@ -226,6 +285,9 @@ export const joinPreviewComponents = (
     holdReasons.push('REVIEW_EVIDENCE_SET_INCOMPLETE');
   }
   for (const evidence of reviewEvidence) {
+    const owner = components.find(({ reviewEvidence: evidenceItems }) =>
+      evidenceItems.some(({ reviewEvidenceId }) => reviewEvidenceId === evidence.reviewEvidenceId),
+    );
     const expectedMode = requirements.requiredReviewModes[evidence.reviewEvidenceId];
     if (
       expectedMode === undefined ||
@@ -234,7 +296,18 @@ export const joinPreviewComponents = (
     ) {
       holdReasons.push(`REVIEW_POLICY_MISMATCH:${evidence.reviewEvidenceId}`);
     }
-    if (evidence.subjectDigest !== requirements.subjectDigest || !evidence.aggregatePassed) {
+    const expectedSubjectDigest = owner
+      ? requirements.requiredSubjectDigests[owner.componentId]
+      : undefined;
+    const currentSubjectDigest = owner
+      ? componentSubjectDigest(componentCurrentSubject(owner))
+      : undefined;
+    if (
+      expectedSubjectDigest === undefined ||
+      currentSubjectDigest !== expectedSubjectDigest ||
+      evidence.subjectDigest !== currentSubjectDigest ||
+      !evidence.aggregatePassed
+    ) {
       holdReasons.push(`CURRENT_REVIEW_MISSING:${evidence.reviewEvidenceId}`);
     }
   }

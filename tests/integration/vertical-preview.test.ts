@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import {
   componentEvidenceDigest,
+  componentSubjectDigest,
   joinPreviewComponents,
   previewSnapshotJoinDigest,
   requiredPreviewComponentIds,
@@ -15,7 +16,7 @@ import { InMemoryPreviewSnapshotRepository } from '../fixtures/in-memory-preview
 const componentFixture = (componentId: string): ComponentEvidence => {
   const checkResultId = `check:${componentId}`;
   const reviewEvidenceId = `review:${componentId}`;
-  const subject = {
+  const currentSubject = {
     componentId,
     previewId: 'initial-v1',
     manifestDigest: 'a'.repeat(64),
@@ -25,13 +26,17 @@ const componentFixture = (componentId: string): ComponentEvidence => {
     provisionalTaxonomyDigest: 'c'.repeat(64),
     authoringSkillVersion: '1.0.0',
     authoringSkillDigest: 'd'.repeat(64),
-    subjectDigest: 'e'.repeat(64),
     artifactDigest: canonicalDigest({ componentId, artifact: 'fixture' }),
-    checkResults: [{ checkResultId, subjectDigest: 'e'.repeat(64), passed: true }],
+  };
+  const subjectDigest = componentSubjectDigest(currentSubject);
+  const subject = {
+    ...currentSubject,
+    subjectDigest,
+    checkResults: [{ checkResultId, subjectDigest, passed: true }],
     reviewEvidence: [
       {
         reviewEvidenceId,
-        subjectDigest: 'e'.repeat(64),
+        subjectDigest,
         requiredMode: 'self' as const,
         reviewMode: 'self' as const,
         aggregatePassed: true,
@@ -53,7 +58,12 @@ const joinRequirements = (): PreviewJoinRequirements => ({
   provisionalTaxonomyDigest: 'c'.repeat(64),
   authoringSkillVersion: '1.0.0',
   authoringSkillDigest: 'd'.repeat(64),
-  subjectDigest: 'e'.repeat(64),
+  requiredArtifactDigests: Object.fromEntries(
+    completeComponents().map((component) => [component.componentId, component.artifactDigest]),
+  ),
+  requiredSubjectDigests: Object.fromEntries(
+    completeComponents().map((component) => [component.componentId, component.subjectDigest]),
+  ),
   requiredCheckResultIds: requiredPreviewComponentIds.map((componentId) => `check:${componentId}`),
   requiredReviewEvidenceIds: requiredPreviewComponentIds.map(
     (componentId) => `review:${componentId}`,
@@ -95,6 +105,35 @@ describe('US2 vertical preview contract', () => {
         'COMPONENT_DIGEST_STALE:content-graph-search',
         'CHECK_FAILED:check:content-graph-search',
         'REVIEW_POLICY_MISMATCH:review:content-graph-search',
+        'CURRENT_REVIEW_MISSING:review:content-graph-search',
+      ]),
+    );
+  });
+
+  it('holds a replaced artifact even when its component digest is recomputed', () => {
+    const changed = completeComponents().map((component) => {
+      if (component.componentId !== 'content-graph-search') return component;
+      const { componentDigest: _componentDigest, ...subject } = component;
+      void _componentDigest;
+      const changedSubject = {
+        ...subject,
+        artifactDigest: canonicalDigest({
+          componentId: component.componentId,
+          artifact: 'replaced',
+        }),
+      };
+      return {
+        ...changedSubject,
+        componentDigest: componentEvidenceDigest(changedSubject),
+      };
+    });
+
+    const snapshot = joinPreviewComponents(changed, joinRequirements());
+    expect(snapshot.status).toBe('on_hold');
+    expect(snapshot.holdReasons).toEqual(
+      expect.arrayContaining([
+        'ARTIFACT_DIGEST_MISMATCH:content-graph-search',
+        'STALE_CHECK_RESULT:check:content-graph-search',
         'CURRENT_REVIEW_MISSING:review:content-graph-search',
       ]),
     );

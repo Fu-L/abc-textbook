@@ -6,6 +6,7 @@ import {
   validateTaxonomyIntegration,
   type FinalTaxonomyBuild,
   type FinalTaxonomyBuildInput,
+  type FinalTaxonomyEntity,
   type IntegrationEntry,
   type TaxonomyValidationContext,
 } from '../../src/lib/preview/taxonomy-integration.js';
@@ -65,6 +66,165 @@ const integrationEntries = (): IntegrationEntry[] => [
   },
 ];
 
+const inlineExample = (key: string, outcomeId: string) => ({
+  key,
+  learningOutcomeIds: [outcomeId],
+  kind: 'illustrative' as const,
+  language: 'text',
+  omissions: [],
+  environment: 'Fixture environment.',
+  input: 'Fixture input.',
+  procedure: ['Trace the fixture example.'],
+  expectedResult: 'The fixture result is explained.',
+  verificationStatus: 'not_applicable' as const,
+});
+
+const inlineExercise = (key: string, outcomeId: string) => ({
+  key,
+  learningOutcomeIds: [outcomeId],
+  prerequisiteIds: [],
+  attainmentCondition: 'Explain the fixture method.',
+  assessment: {
+    method: 'Compare the explanation with the invariant.',
+    successCondition: 'The invariant and method are both stated.',
+  },
+  answer: {
+    reasoningOrVerification: 'The fixture invariant is preserved.',
+    procedure: ['Check the invariant.'],
+    expectedResult: 'The method is justified.',
+    verificationStatus: 'passed' as const,
+  },
+});
+
+const finalEntities = (): FinalTaxonomyEntity[] => [
+  {
+    kind: 'tag',
+    sourceRevisionIds: ['source-abc212-e'],
+    entity: {
+      id: 'tag-bfs',
+      name: 'Breadth-first search',
+      definition: 'Explore an unweighted state graph by distance layers.',
+      parentId: null,
+      prerequisiteTagIds: [],
+      learningOutcomeIds: ['outcome-search'],
+      representativeProblemIds: ['abc212-e'],
+      aliases: [],
+      formerNames: [],
+      lifecycle: 'active',
+      replacementTagIds: [],
+    },
+  },
+  {
+    kind: 'outcome',
+    sourceRevisionIds: ['source-abc212-e', 'source-abc213-f'],
+    entity: {
+      id: 'outcome-search',
+      statement: 'Select and justify a shortest-path search.',
+      prerequisiteOutcomeIds: [],
+      scopeIds: ['tag-bfs', 'unit-bfs', 'unit-dijkstra'],
+    },
+  },
+  {
+    kind: 'unit',
+    sourceRevisionIds: ['source-abc212-e'],
+    entity: {
+      id: 'unit-bfs',
+      kind: 'chapter',
+      title: 'Breadth-first search foundations.',
+      parentId: null,
+      baselineId: 'baseline-foundation',
+      baselineVersion: '1.0.0',
+      additionalPrerequisiteUnitIds: [],
+      excludedTopics: [],
+      sourceRevisionIds: ['source-abc212-e'],
+      tagIds: ['tag-bfs'],
+      learningOutcomeIds: ['outcome-search'],
+      docPath: 'src/content/docs/learn/unit-bfs.md',
+      problemIds: ['abc212-e'],
+      examples: [inlineExample('bfs-intuition', 'outcome-search')],
+      exercises: [inlineExercise('bfs-check', 'outcome-search')],
+      stageRank: 0,
+      difficultyRank: 0,
+      representativeRank: 0,
+      globalIndex: 0,
+      orderReason: 'Prerequisite-free foundation.',
+    },
+  },
+  {
+    kind: 'unit',
+    sourceRevisionIds: ['source-abc213-f'],
+    entity: {
+      id: 'unit-dijkstra',
+      kind: 'section',
+      title: 'Shortest paths with non-negative weights.',
+      parentId: 'unit-bfs',
+      baselineId: 'baseline-foundation',
+      baselineVersion: '1.0.0',
+      additionalPrerequisiteUnitIds: ['unit-bfs'],
+      excludedTopics: [],
+      sourceRevisionIds: ['source-abc213-f'],
+      tagIds: ['tag-bfs'],
+      learningOutcomeIds: ['outcome-search'],
+      docPath: 'src/content/docs/learn/unit-dijkstra.md',
+      problemIds: ['abc213-f'],
+      examples: [inlineExample('dijkstra-intuition', 'outcome-search')],
+      exercises: [inlineExercise('dijkstra-check', 'outcome-search')],
+      stageRank: 1,
+      difficultyRank: 1,
+      representativeRank: 1,
+      globalIndex: 1,
+      orderReason: 'Requires the BFS foundation first.',
+    },
+  },
+];
+
+const placements = () => [
+  {
+    id: 'placement-abc212-e',
+    problemId: 'abc212-e',
+    policyVersion: '1.0.0',
+    kind: 'full' as const,
+    primaryProblemId: null,
+    sharedOutcomeIds: [],
+    comparison: {
+      method: 'The method is independently explained.',
+      proof: 'The invariant is proved in the full explanation.',
+      complexity: 'The complexity is derived from the constraints.',
+      constraints: 'The method fits the official constraints.',
+      prerequisites: 'The common foundation is sufficient.',
+      implementation: 'The implementation notes are complete.',
+    },
+    additionalElement: null,
+    rationale: 'This is a complete explanation for the outcome.',
+    evidenceIds: ['source-abc212-e'],
+    tagIds: ['tag-bfs'],
+    outcomeIds: ['outcome-search'],
+    learningUnitIds: ['unit-bfs'],
+  },
+  {
+    id: 'placement-abc213-f',
+    problemId: 'abc213-f',
+    policyVersion: '1.0.0',
+    kind: 'full' as const,
+    primaryProblemId: null,
+    sharedOutcomeIds: [],
+    comparison: {
+      method: 'The weighted method is independently explained.',
+      proof: 'The relaxation invariant is proved in the full explanation.',
+      complexity: 'The complexity is derived from the constraints.',
+      constraints: 'The method fits the official constraints.',
+      prerequisites: 'The BFS foundation is listed as a prerequisite.',
+      implementation: 'The implementation notes are complete.',
+    },
+    additionalElement: null,
+    rationale: 'This is a complete explanation for the outcome.',
+    evidenceIds: ['source-abc213-f'],
+    tagIds: ['tag-bfs'],
+    outcomeIds: ['outcome-search'],
+    learningUnitIds: ['unit-dijkstra'],
+  },
+];
+
 const inputFixture = (): FinalTaxonomyBuildInput => {
   const reviewSubject = {
     inventoryDigest: 'a'.repeat(64),
@@ -76,57 +236,11 @@ const inputFixture = (): FinalTaxonomyBuildInput => {
       requiredReviewMode: 'third_party' as const,
     },
     integrationEntries: integrationEntries(),
-    finalEntities: [
-      {
-        id: 'tag-bfs',
-        kind: 'tag' as const,
-        definition: 'Explore an unweighted state graph by distance layers.',
-        learningOutcomeIds: ['outcome-search'],
-        representativeProblemIds: ['abc212-e'],
-        sourceRevisionIds: ['source-abc212-e'],
-      },
-      {
-        id: 'outcome-search',
-        kind: 'outcome' as const,
-        definition: 'Select and justify a shortest-path search.',
-        learningOutcomeIds: [],
-        representativeProblemIds: ['abc212-e', 'abc213-f'],
-        sourceRevisionIds: ['source-abc212-e', 'source-abc213-f'],
-      },
-      {
-        id: 'unit-bfs',
-        kind: 'unit' as const,
-        definition: 'Breadth-first search foundations.',
-        learningOutcomeIds: ['outcome-search'],
-        representativeProblemIds: ['abc212-e'],
-        sourceRevisionIds: ['source-abc212-e'],
-      },
-      {
-        id: 'unit-dijkstra',
-        kind: 'unit' as const,
-        definition: 'Shortest paths with non-negative weights.',
-        learningOutcomeIds: ['outcome-search'],
-        representativeProblemIds: ['abc213-f'],
-        sourceRevisionIds: ['source-abc213-f'],
-      },
-    ],
+    finalEntities: finalEntities(),
     tagPrerequisites: [],
     learningUnitPrerequisites: [{ nodeId: 'unit-dijkstra', prerequisiteId: 'unit-bfs' }],
     standardOrder: ['unit-bfs', 'unit-dijkstra'],
-    placements: [
-      {
-        problemId: 'abc212-e',
-        tagIds: ['tag-bfs'],
-        outcomeIds: ['outcome-search'],
-        learningUnitIds: ['unit-bfs'],
-      },
-      {
-        problemId: 'abc213-f',
-        tagIds: ['tag-bfs'],
-        outcomeIds: ['outcome-search'],
-        learningUnitIds: ['unit-dijkstra'],
-      },
-    ],
+    placements: placements(),
     correctionImpacts: [
       {
         correctionImpactId: 'impact-bfs',
@@ -200,6 +314,65 @@ describe('US2 preview-to-final taxonomy integration contract', () => {
     expect(validateTaxonomyIntegration(validationContext, buildFixture())).toEqual([]);
   });
 
+  it('requires canonical entity fields before accepting a final build', () => {
+    const build = buildFixture();
+    const invalidTag = rebuild(build, {
+      finalEntities: build.finalEntities.map((entity) =>
+        entity.kind === 'tag' && entity.entity.id === 'tag-bfs'
+          ? {
+              ...entity,
+              entity: { ...entity.entity, name: '' },
+            }
+          : entity,
+      ),
+    });
+    expect(validateTaxonomyIntegration(validationContext, invalidTag)).toContain(
+      'final_entity_schema_invalid:tag-bfs',
+    );
+
+    const invalidUnit = rebuild(build, {
+      finalEntities: build.finalEntities.map((entity) =>
+        entity.kind === 'unit' && entity.entity.id === 'unit-bfs'
+          ? { ...entity, entity: { ...entity.entity, baselineId: '' } }
+          : entity,
+      ),
+    });
+    expect(validateTaxonomyIntegration(validationContext, invalidUnit)).toContain(
+      'final_entity_schema_invalid:unit-bfs',
+    );
+
+    const invalidUnitContent = rebuild(build, {
+      finalEntities: build.finalEntities.map((entity) =>
+        entity.kind === 'unit' && entity.entity.id === 'unit-bfs'
+          ? { ...entity, entity: { ...entity.entity, examples: [], exercises: [] } }
+          : entity,
+      ),
+    });
+    expect(validateTaxonomyIntegration(validationContext, invalidUnitContent)).toContain(
+      'final_entity_schema_invalid:unit-bfs',
+    );
+  });
+
+  it('requires the canonical ProblemPlacement decision fields', () => {
+    const build = buildFixture();
+    const invalid = rebuild(build, {
+      placements: build.placements.map((placement) =>
+        placement.problemId === 'abc212-e'
+          ? {
+              ...placement,
+              policyVersion: 'not-a-version',
+              kind: 'similar' as const,
+              primaryProblemId: null,
+            }
+          : placement,
+      ),
+    });
+
+    expect(validateTaxonomyIntegration(validationContext, invalid)).toContain(
+      'placement_schema_invalid:abc212-e',
+    );
+  });
+
   it('maps every provisional entity exactly once through promote/merge/split/retire', () => {
     const build = buildFixture();
     expect(
@@ -254,7 +427,9 @@ describe('US2 preview-to-final taxonomy integration contract', () => {
 
     const wrongFinalKind = rebuild(build, {
       finalEntities: build.finalEntities.map((entity) =>
-        entity.id === 'tag-bfs' ? { ...entity, kind: 'unit' as const } : entity,
+        entity.kind === 'tag' && entity.entity.id === 'tag-bfs'
+          ? ({ ...entity, kind: 'unit' as const } as unknown as FinalTaxonomyEntity)
+          : entity,
       ),
     });
     expect(validateTaxonomyIntegration(validationContext, wrongFinalKind)).toContain(
