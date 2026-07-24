@@ -65,8 +65,14 @@ const joinRequirements = (): PreviewJoinRequirements => ({
     completeComponents().map((component) => [component.componentId, component.subjectDigest]),
   ),
   requiredCheckResultIds: requiredPreviewComponentIds.map((componentId) => `check:${componentId}`),
+  requiredCheckResultComponents: Object.fromEntries(
+    requiredPreviewComponentIds.map((componentId) => [`check:${componentId}`, componentId]),
+  ),
   requiredReviewEvidenceIds: requiredPreviewComponentIds.map(
     (componentId) => `review:${componentId}`,
+  ),
+  requiredReviewEvidenceComponents: Object.fromEntries(
+    requiredPreviewComponentIds.map((componentId) => [`review:${componentId}`, componentId]),
   ),
   requiredReviewModes: Object.fromEntries(
     requiredPreviewComponentIds.map((componentId) => [`review:${componentId}`, 'self']),
@@ -135,6 +141,60 @@ describe('US2 vertical preview contract', () => {
         'ARTIFACT_DIGEST_MISMATCH:content-graph-search',
         'STALE_CHECK_RESULT:check:content-graph-search',
         'CURRENT_REVIEW_MISSING:review:content-graph-search',
+      ]),
+    );
+  });
+
+  it('rejects evidence moved to another component even when digests are recomputed', () => {
+    const components = completeComponents();
+    const source = components.find((component) => component.componentId === 'content-graph-search');
+    const target = components.find(
+      (component) => component.componentId === 'metadata-inventory-taxonomy',
+    );
+    if (!source || !target) throw new Error('Preview component fixture is incomplete.');
+
+    const movedCheckResults = source.checkResults.map((result) => ({
+      ...result,
+      subjectDigest: target.subjectDigest,
+    }));
+    const movedReviewEvidence = source.reviewEvidence.map((evidence) => ({
+      ...evidence,
+      subjectDigest: target.subjectDigest,
+    }));
+    const movedTargetSubject = {
+      ...target,
+      checkResults: [...target.checkResults, ...movedCheckResults],
+      reviewEvidence: [...target.reviewEvidence, ...movedReviewEvidence],
+    };
+    const { componentDigest: _targetDigest, ...targetWithoutDigest } = movedTargetSubject;
+    void _targetDigest;
+    const movedTarget = {
+      ...targetWithoutDigest,
+      componentDigest: componentEvidenceDigest(targetWithoutDigest),
+    };
+    const { componentDigest: _sourceDigest, ...sourceWithoutDigest } = source;
+    void _sourceDigest;
+    const movedSource = {
+      ...sourceWithoutDigest,
+      checkResults: [],
+      reviewEvidence: [],
+    };
+    const movedSourceWithDigest = {
+      ...movedSource,
+      componentDigest: componentEvidenceDigest(movedSource),
+    };
+    const movedComponents = components.map((component) => {
+      if (component.componentId === source.componentId) return movedSourceWithDigest;
+      if (component.componentId === target.componentId) return movedTarget;
+      return component;
+    });
+
+    const snapshot = joinPreviewComponents(movedComponents, joinRequirements());
+    expect(snapshot.status).toBe('on_hold');
+    expect(snapshot.holdReasons).toEqual(
+      expect.arrayContaining([
+        'CHECK_RESULT_COMPONENT_MISMATCH:check:content-graph-search',
+        'REVIEW_EVIDENCE_COMPONENT_MISMATCH:review:content-graph-search',
       ]),
     );
   });

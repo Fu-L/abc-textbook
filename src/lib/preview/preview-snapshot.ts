@@ -49,7 +49,11 @@ export interface PreviewJoinRequirements {
   /** Current component subjects, including the corresponding artifact digest. */
   readonly requiredSubjectDigests: Readonly<Record<string, string>>;
   readonly requiredCheckResultIds: readonly string[];
+  /** Frozen component ownership for each required check evidence ID. */
+  readonly requiredCheckResultComponents: Readonly<Record<string, string>>;
   readonly requiredReviewEvidenceIds: readonly string[];
+  /** Frozen component ownership for each required review evidence ID. */
+  readonly requiredReviewEvidenceComponents: Readonly<Record<string, string>>;
   /** Review mode frozen by the preview manifest for each required evidence ID. */
   readonly requiredReviewModes: Readonly<Record<string, PreviewReviewMode>>;
 }
@@ -169,6 +173,17 @@ const componentIdsAreComplete = (componentIds: readonly string[]): boolean => {
 const digestRequirementIdsAreComplete = (digests: Readonly<Record<string, string>>): boolean =>
   sameUniqueSet(Object.keys(digests), requiredPreviewComponentIds);
 
+const evidenceComponentRequirementsAreComplete = (
+  componentRequirements: Readonly<Record<string, string>>,
+  evidenceIds: readonly string[],
+): boolean =>
+  sameUniqueSet(Object.keys(componentRequirements), evidenceIds) &&
+  Object.values(componentRequirements).every((componentId) =>
+    requiredPreviewComponentIds.includes(
+      componentId as (typeof requiredPreviewComponentIds)[number],
+    ),
+  );
+
 const componentCurrentSubject = (component: ComponentEvidence): ComponentCurrentSubject => ({
   componentId: component.componentId,
   previewId: component.previewId,
@@ -197,6 +212,22 @@ export const joinPreviewComponents = (
   }
   if (!digestRequirementIdsAreComplete(requirements.requiredSubjectDigests)) {
     holdReasons.push('SUBJECT_DIGEST_SET_INCOMPLETE');
+  }
+  if (
+    !evidenceComponentRequirementsAreComplete(
+      requirements.requiredCheckResultComponents,
+      requirements.requiredCheckResultIds,
+    )
+  ) {
+    holdReasons.push('CHECK_RESULT_COMPONENT_SET_INCOMPLETE');
+  }
+  if (
+    !evidenceComponentRequirementsAreComplete(
+      requirements.requiredReviewEvidenceComponents,
+      requirements.requiredReviewEvidenceIds,
+    )
+  ) {
+    holdReasons.push('REVIEW_EVIDENCE_COMPONENT_SET_INCOMPLETE');
   }
 
   const checkResults = components.flatMap(({ checkResults: results }) => results);
@@ -260,16 +291,20 @@ export const joinPreviewComponents = (
     const owner = components.find(({ checkResults: results }) =>
       results.some(({ checkResultId }) => checkResultId === result.checkResultId),
     );
-    const expectedSubjectDigest = owner
-      ? requirements.requiredSubjectDigests[owner.componentId]
+    const expectedComponentId = requirements.requiredCheckResultComponents[result.checkResultId];
+    const expectedSubjectDigest = expectedComponentId
+      ? requirements.requiredSubjectDigests[expectedComponentId]
       : undefined;
     const currentSubjectDigest = owner
       ? componentSubjectDigest(componentCurrentSubject(owner))
       : undefined;
+    if (owner?.componentId !== expectedComponentId) {
+      holdReasons.push(`CHECK_RESULT_COMPONENT_MISMATCH:${result.checkResultId}`);
+    }
     if (
       expectedSubjectDigest === undefined ||
       currentSubjectDigest !== expectedSubjectDigest ||
-      result.subjectDigest !== currentSubjectDigest
+      result.subjectDigest !== expectedSubjectDigest
     ) {
       holdReasons.push(`STALE_CHECK_RESULT:${result.checkResultId}`);
     }
@@ -296,16 +331,21 @@ export const joinPreviewComponents = (
     ) {
       holdReasons.push(`REVIEW_POLICY_MISMATCH:${evidence.reviewEvidenceId}`);
     }
-    const expectedSubjectDigest = owner
-      ? requirements.requiredSubjectDigests[owner.componentId]
+    const expectedComponentId =
+      requirements.requiredReviewEvidenceComponents[evidence.reviewEvidenceId];
+    const expectedSubjectDigest = expectedComponentId
+      ? requirements.requiredSubjectDigests[expectedComponentId]
       : undefined;
     const currentSubjectDigest = owner
       ? componentSubjectDigest(componentCurrentSubject(owner))
       : undefined;
+    if (owner?.componentId !== expectedComponentId) {
+      holdReasons.push(`REVIEW_EVIDENCE_COMPONENT_MISMATCH:${evidence.reviewEvidenceId}`);
+    }
     if (
       expectedSubjectDigest === undefined ||
       currentSubjectDigest !== expectedSubjectDigest ||
-      evidence.subjectDigest !== currentSubjectDigest ||
+      evidence.subjectDigest !== expectedSubjectDigest ||
       !evidence.aggregatePassed
     ) {
       holdReasons.push(`CURRENT_REVIEW_MISSING:${evidence.reviewEvidenceId}`);
