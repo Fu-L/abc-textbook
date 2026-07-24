@@ -508,6 +508,127 @@ describe('US2 preview-to-final taxonomy integration contract', () => {
     );
   });
 
+  it('orders independent LearningUnits by all canonical ranks and checks globalIndex', () => {
+    const build = buildFixture();
+    const rankReordered = rebuild(build, {
+      finalEntities: build.finalEntities.map((entity) => {
+        if (entity.kind !== 'unit') return entity;
+        if (entity.entity.id === 'unit-bfs') {
+          return {
+            ...entity,
+            entity: {
+              ...entity.entity,
+              parentId: null,
+              additionalPrerequisiteUnitIds: [],
+              stageRank: 1,
+              difficultyRank: 0,
+              representativeRank: 0,
+              globalIndex: 0,
+            },
+          };
+        }
+        return {
+          ...entity,
+          entity: {
+            ...entity.entity,
+            parentId: null,
+            additionalPrerequisiteUnitIds: [],
+            stageRank: 0,
+            difficultyRank: 0,
+            representativeRank: 0,
+            globalIndex: 1,
+          },
+        };
+      }),
+      learningUnitPrerequisites: [],
+      standardOrder: ['unit-bfs', 'unit-dijkstra'],
+    });
+
+    expect(validateTaxonomyIntegration(validationContext, rankReordered)).toEqual(
+      expect.arrayContaining([
+        'standard_order_stale',
+        'learning_unit_global_index_stale:unit-bfs',
+        'learning_unit_global_index_stale:unit-dijkstra',
+      ]),
+    );
+  });
+
+  it('rejects cycles in canonical taxonomy hierarchy and prerequisite graphs', () => {
+    const build = buildFixture();
+    const tagParentCycle = rebuild(build, {
+      finalEntities: build.finalEntities.map((entity) =>
+        entity.kind === 'tag'
+          ? { ...entity, entity: { ...entity.entity, parentId: 'tag-bfs' } }
+          : entity,
+      ),
+    });
+    expect(validateTaxonomyIntegration(validationContext, tagParentCycle)).toContain(
+      'tag_parent_hierarchy_cycle',
+    );
+
+    const tagReplacementCycle = rebuild(build, {
+      finalEntities: [
+        ...build.finalEntities.map((entity) =>
+          entity.kind === 'tag'
+            ? {
+                ...entity,
+                entity: {
+                  ...entity.entity,
+                  lifecycle: 'deprecated' as const,
+                  replacementTagIds: ['tag-other'],
+                },
+              }
+            : entity,
+        ),
+        {
+          kind: 'tag' as const,
+          sourceRevisionIds: ['source-abc213-f'],
+          entity: {
+            id: 'tag-other',
+            name: 'Another search technique',
+            definition: 'A second fixture tag used for replacement validation.',
+            parentId: null,
+            prerequisiteTagIds: [],
+            learningOutcomeIds: ['outcome-search'],
+            representativeProblemIds: ['abc213-f'],
+            aliases: [],
+            formerNames: [],
+            lifecycle: 'deprecated' as const,
+            replacementTagIds: ['tag-bfs'],
+          },
+        },
+      ],
+    });
+    expect(validateTaxonomyIntegration(validationContext, tagReplacementCycle)).toContain(
+      'tag_replacement_graph_cycle',
+    );
+
+    const outcomeCycle = rebuild(build, {
+      finalEntities: build.finalEntities.map((entity) =>
+        entity.kind === 'outcome'
+          ? {
+              ...entity,
+              entity: { ...entity.entity, prerequisiteOutcomeIds: ['outcome-search'] },
+            }
+          : entity,
+      ),
+    });
+    expect(validateTaxonomyIntegration(validationContext, outcomeCycle)).toContain(
+      'outcome_prerequisite_cycle',
+    );
+
+    const unitParentCycle = rebuild(build, {
+      finalEntities: build.finalEntities.map((entity) =>
+        entity.kind === 'unit' && entity.entity.id === 'unit-bfs'
+          ? { ...entity, entity: { ...entity.entity, parentId: 'unit-bfs' } }
+          : entity,
+      ),
+    });
+    expect(validateTaxonomyIntegration(validationContext, unitParentCycle)).toContain(
+      'learning_unit_parent_hierarchy_cycle',
+    );
+  });
+
   it('requires complete placements, CorrectionImpact scopes, and Source Revisions', () => {
     const build = buildFixture();
     expect(
@@ -534,6 +655,19 @@ describe('US2 preview-to-final taxonomy integration contract', () => {
         rebuild(build, { sourceRevisionIds: ['source-abc212-e'] }),
       ),
     ).toContain('source_revisions_stale');
+  });
+
+  it('requires exactly one placement for every Problem', () => {
+    const build = buildFixture();
+    const firstPlacement = build.placements[0];
+    if (!firstPlacement) throw new Error('Placement fixture is incomplete.');
+    const duplicateProblem = rebuild(build, {
+      placements: [...build.placements, { ...firstPlacement, id: 'placement-duplicate' }],
+    });
+
+    expect(validateTaxonomyIntegration(validationContext, duplicateProblem)).toContain(
+      'placement_problem_ids_not_unique',
+    );
   });
 
   it('requires split assignments to agree with Problem placements', () => {

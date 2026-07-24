@@ -5,6 +5,7 @@ import {
   ProblemPlacementSchema,
   TechniqueTagSchema,
 } from '../domain/schema-parts/catalog.js';
+import { DependencyCycleError, deterministicTopologicalOrder } from '../validation/validate.js';
 import type { z } from 'zod';
 
 export type IntegrationAction = 'promote' | 'merge' | 'split' | 'retire';
@@ -235,52 +236,8 @@ const requireKnownReferences = (
 const sameOrderedValues = (left: readonly string[], right: readonly string[]): boolean =>
   left.length === right.length && left.every((value, index) => value === right[index]);
 
-const graphHasCycle = (nodeIds: readonly string[], edges: readonly PrerequisiteEdge[]): boolean => {
-  const prerequisites = new Map(nodeIds.map((id) => [id, [] as string[]]));
-  for (const edge of edges) prerequisites.get(edge.nodeId)?.push(edge.prerequisiteId);
-  const visiting = new Set<string>();
-  const visited = new Set<string>();
-  const visit = (id: string): boolean => {
-    if (visiting.has(id)) return true;
-    if (visited.has(id)) return false;
-    visiting.add(id);
-    if ((prerequisites.get(id) ?? []).some(visit)) return true;
-    visiting.delete(id);
-    visited.add(id);
-    return false;
-  };
-  return nodeIds.some(visit);
-};
-
-/** Stable Kahn order using the entity ID as the tie-break key. */
-export const deterministicLearningUnitOrder = (
-  nodeIds: readonly string[],
-  edges: readonly PrerequisiteEdge[],
-): string[] => {
-  const remaining = new Set(nodeIds);
-  const prerequisites = new Map<string, Set<string>>(
-    nodeIds.map((nodeId) => [nodeId, new Set<string>()]),
-  );
-  for (const edge of edges) prerequisites.get(edge.nodeId)?.add(edge.prerequisiteId);
-
-  const order: string[] = [];
-  while (remaining.size > 0) {
-    const next = [...remaining]
-      .filter((nodeId) =>
-        [...(prerequisites.get(nodeId) ?? [])].every(
-          (prerequisiteId) => !remaining.has(prerequisiteId),
-        ),
-      )
-      .sort((left, right) => (left < right ? -1 : left > right ? 1 : 0))[0];
-    if (next === undefined) return [];
-    order.push(next);
-    remaining.delete(next);
-  }
-  return order;
-};
-
 const graphViolations = (
-  label: 'tag' | 'learning_unit',
+  label: string,
   nodeIds: readonly string[],
   edges: readonly PrerequisiteEdge[],
 ): string[] => {
@@ -291,9 +248,22 @@ const graphViolations = (
         !nodeIds.includes(nodeId) || !nodeIds.includes(prerequisiteId),
     )
   ) {
-    return [`${label}_dag_unknown_reference`];
+    return [`${label}_unknown_reference`];
   }
-  return graphHasCycle(nodeIds, edges) ? [`${label}_dag_cycle`] : [];
+  const nodes = nodeIds.map((id) => ({
+    id,
+    prerequisiteIds: edges
+      .filter((edge) => edge.nodeId === id)
+      .map(({ prerequisiteId }) => prerequisiteId),
+  }));
+  try {
+    deterministicTopologicalOrder(nodes);
+    return [];
+  } catch (error) {
+    return [
+      error instanceof DependencyCycleError ? `${label}_cycle` : `${label}_unknown_reference`,
+    ];
+  }
 };
 
 /** Validate the complete, accepted boundary consumed by canonical materialization. */
@@ -542,48 +512,105 @@ export const validateTaxonomyIntegration = (
     }
   }
 
-  const expectedTagPrerequisites = build.finalEntities
+  const parsedTags = build.finalEntities
     .filter(
       (entity): entity is Extract<FinalTaxonomyEntity, { kind: 'tag' }> => entity.kind === 'tag',
     )
-    .flatMap((entity) => {
-      const parsed = TechniqueTagSchema.safeParse(entity.entity);
-      return parsed.success
-        ? parsed.data.prerequisiteTagIds.map((prerequisiteId) => ({
-            nodeId: parsed.data.id,
-            prerequisiteId,
-          }))
-        : [];
+    .flatMap(({ entity }) => {
+      const parsed = TechniqueTagSchema.safeParse(entity);
+      return parsed.success ? [parsed.data] : [];
     });
-  if (!sameEdgeSet(build.tagPrerequisites, expectedTagPrerequisites)) {
-    violations.push('tag_dag_not_materialized_from_entities');
-  }
-  const expectedLearningUnitPrerequisites = build.finalEntities
+  const parsedOutcomes = build.finalEntities
+    .filter(
+      (entity): entity is Extract<FinalTaxonomyEntity, { kind: 'outcome' }> =>
+        entity.kind === 'outcome',
+    )
+    .flatMap(({ entity }) => {
+      const parsed = LearningOutcomeSchema.safeParse(entity);
+      return parsed.success ? [parsed.data] : [];
+    });
+  const parsedLearningUnits = build.finalEntities
     .filter(
       (entity): entity is Extract<FinalTaxonomyEntity, { kind: 'unit' }> => entity.kind === 'unit',
     )
-    .flatMap((entity) => {
-      const parsed = LearningUnitSchema.safeParse(entity.entity);
-      return parsed.success
-        ? parsed.data.additionalPrerequisiteUnitIds.map((prerequisiteId) => ({
-            nodeId: parsed.data.id,
-            prerequisiteId,
-          }))
-        : [];
+    .flatMap(({ entity }) => {
+      const parsed = LearningUnitSchema.safeParse(entity);
+      return parsed.success ? [parsed.data] : [];
     });
+
+  const expectedTagPrerequisites = parsedTags.flatMap((tag) =>
+    tag.prerequisiteTagIds.map((prerequisiteId) => ({
+      nodeId: tag.id,
+      prerequisiteId,
+    })),
+  );
+  if (!sameEdgeSet(build.tagPrerequisites, expectedTagPrerequisites)) {
+    violations.push('tag_dag_not_materialized_from_entities');
+  }
+  const expectedLearningUnitPrerequisites = parsedLearningUnits.flatMap((unit) =>
+    unit.additionalPrerequisiteUnitIds.map((prerequisiteId) => ({
+      nodeId: unit.id,
+      prerequisiteId,
+    })),
+  );
   if (!sameEdgeSet(build.learningUnitPrerequisites, expectedLearningUnitPrerequisites)) {
     violations.push('learning_unit_dag_not_materialized_from_entities');
   }
 
   violations.push(
-    ...graphViolations('tag', tagIds, build.tagPrerequisites),
-    ...graphViolations('learning_unit', unitIds, build.learningUnitPrerequisites),
+    ...graphViolations('tag_dag', tagIds, build.tagPrerequisites),
+    ...graphViolations('learning_unit_dag', unitIds, build.learningUnitPrerequisites),
+    ...graphViolations(
+      'tag_parent_hierarchy',
+      tagIds,
+      parsedTags.flatMap(({ id, parentId }) =>
+        parentId === null ? [] : [{ nodeId: id, prerequisiteId: parentId }],
+      ),
+    ),
+    ...graphViolations(
+      'tag_replacement_graph',
+      tagIds,
+      parsedTags.flatMap(({ id, replacementTagIds }) =>
+        replacementTagIds.map((prerequisiteId) => ({ nodeId: id, prerequisiteId })),
+      ),
+    ),
+    ...graphViolations(
+      'outcome_prerequisite',
+      outcomeIds,
+      parsedOutcomes.flatMap(({ id, prerequisiteOutcomeIds }) =>
+        prerequisiteOutcomeIds.map((prerequisiteId) => ({ nodeId: id, prerequisiteId })),
+      ),
+    ),
+    ...graphViolations(
+      'learning_unit_parent_hierarchy',
+      unitIds,
+      parsedLearningUnits.flatMap(({ id, parentId }) =>
+        parentId === null ? [] : [{ nodeId: id, prerequisiteId: parentId }],
+      ),
+    ),
   );
   const orderIndex = new Map(build.standardOrder.map((id, index) => [id, index]));
-  const expectedLearningUnitOrder = deterministicLearningUnitOrder(
-    unitIds,
-    build.learningUnitPrerequisites,
+  const ranksByUnitId = new Map(
+    parsedLearningUnits.map((unit) => [
+      unit.id,
+      [unit.stageRank, unit.difficultyRank, unit.representativeRank],
+    ]),
   );
+  let expectedLearningUnitOrder: string[] = [];
+  try {
+    expectedLearningUnitOrder = deterministicTopologicalOrder(
+      unitIds.map((id) => ({
+        id,
+        prerequisiteIds: build.learningUnitPrerequisites
+          .filter((edge) => edge.nodeId === id)
+          .map(({ prerequisiteId }) => prerequisiteId),
+        ranks: ranksByUnitId.get(id) ?? [],
+      })),
+      ({ ranks }) => ranks,
+    ).map(({ id }) => id);
+  } catch {
+    // The dedicated graph validators above report the actionable dependency error.
+  }
   if (
     !sameOrderedValues(build.standardOrder, expectedLearningUnitOrder) ||
     build.learningUnitPrerequisites.some(
@@ -594,8 +621,19 @@ export const validateTaxonomyIntegration = (
   ) {
     violations.push('standard_order_stale');
   }
+  const globalIndexByUnitId = new Map(
+    parsedLearningUnits.map((unit) => [unit.id, unit.globalIndex]),
+  );
+  for (const [index, unitId] of expectedLearningUnitOrder.entries()) {
+    if (globalIndexByUnitId.get(unitId) !== index) {
+      violations.push(`learning_unit_global_index_stale:${unitId}`);
+    }
+  }
 
   const placementProblemIds = build.placements.map(({ problemId }) => problemId);
+  if (new Set(placementProblemIds).size !== placementProblemIds.length) {
+    violations.push('placement_problem_ids_not_unique');
+  }
   if (!sameSet(placementProblemIds, context.inventoryProblemIds)) {
     violations.push('placement_reachability_incomplete');
   }
