@@ -4,12 +4,19 @@ export type IntegrationAction = 'promote' | 'merge' | 'split' | 'retire';
 export type TaxonomyEntityKind = 'tag' | 'outcome' | 'unit';
 export type TaxonomyReviewMode = 'self' | 'third_party';
 
+export interface SplitProblemAssignment {
+  readonly finalEntityId: string;
+  readonly problemIds: readonly string[];
+}
+
 export interface IntegrationEntry {
   readonly previewEntityId: string;
   readonly previewEntityKind: TaxonomyEntityKind;
   readonly action: IntegrationAction;
   readonly finalEntityIds: readonly string[];
   readonly affectedProblemIds: readonly string[];
+  /** Required for split entries; empty for promote, merge, and retire. */
+  readonly splitProblemAssignments: readonly SplitProblemAssignment[];
   readonly rationale: string;
   readonly evidenceIds: readonly string[];
   readonly aliasOrRedirects: readonly string[];
@@ -95,6 +102,8 @@ export interface PreviewTaxonomyEntity {
 
 export interface TaxonomyValidationContext {
   readonly previewEntities: readonly PreviewTaxonomyEntity[];
+  /** Digest frozen after the complete Technique Inventory join. */
+  readonly inventoryDigest: string;
   readonly inventoryProblemIds: readonly string[];
   readonly passedPreviewSnapshotDigests: readonly string[];
   readonly knownSourceRevisionIds: readonly string[];
@@ -160,6 +169,9 @@ const sameSet = (left: readonly string[], right: readonly string[]): boolean => 
   );
 };
 
+const sameOrderedValues = (left: readonly string[], right: readonly string[]): boolean =>
+  left.length === right.length && left.every((value, index) => value === right[index]);
+
 const graphHasCycle = (nodeIds: readonly string[], edges: readonly PrerequisiteEdge[]): boolean => {
   const prerequisites = new Map(nodeIds.map((id) => [id, [] as string[]]));
   for (const edge of edges) prerequisites.get(edge.nodeId)?.push(edge.prerequisiteId);
@@ -175,6 +187,33 @@ const graphHasCycle = (nodeIds: readonly string[], edges: readonly PrerequisiteE
     return false;
   };
   return nodeIds.some(visit);
+};
+
+/** Stable Kahn order using the entity ID as the tie-break key. */
+export const deterministicLearningUnitOrder = (
+  nodeIds: readonly string[],
+  edges: readonly PrerequisiteEdge[],
+): string[] => {
+  const remaining = new Set(nodeIds);
+  const prerequisites = new Map<string, Set<string>>(
+    nodeIds.map((nodeId) => [nodeId, new Set<string>()]),
+  );
+  for (const edge of edges) prerequisites.get(edge.nodeId)?.add(edge.prerequisiteId);
+
+  const order: string[] = [];
+  while (remaining.size > 0) {
+    const next = [...remaining]
+      .filter((nodeId) =>
+        [...(prerequisites.get(nodeId) ?? [])].every(
+          (prerequisiteId) => !remaining.has(prerequisiteId),
+        ),
+      )
+      .sort((left, right) => (left < right ? -1 : left > right ? 1 : 0))[0];
+    if (next === undefined) return [];
+    order.push(next);
+    remaining.delete(next);
+  }
+  return order;
 };
 
 const graphViolations = (
@@ -212,6 +251,9 @@ export const validateTaxonomyIntegration = (
   if (!context.passedPreviewSnapshotDigests.includes(build.previewSnapshotDigest)) {
     violations.push('preview_snapshot_not_passed');
   }
+  if (build.inventoryDigest !== context.inventoryDigest) {
+    violations.push('inventory_digest_stale');
+  }
 
   const mappedIds = build.integrationEntries.map(({ previewEntityId }) => previewEntityId);
   const previewEntityIds = context.previewEntities.map(({ id }) => id);
@@ -242,6 +284,24 @@ export const validateTaxonomyIntegration = (
     }
     if (entry.finalEntityIds.some((id) => !finalEntityIds.includes(id))) {
       violations.push(`final_entity_missing:${entry.previewEntityId}`);
+    }
+    if (entry.action !== 'split' && entry.splitProblemAssignments.length > 0) {
+      violations.push(`split_assignments_unexpected:${entry.previewEntityId}`);
+    }
+    if (entry.action === 'split') {
+      const assignedFinalEntityIds = entry.splitProblemAssignments.map(
+        ({ finalEntityId }) => finalEntityId,
+      );
+      const assignedProblemIds = entry.splitProblemAssignments.flatMap(
+        ({ problemIds }) => problemIds,
+      );
+      if (
+        !sameSet(assignedFinalEntityIds, entry.finalEntityIds) ||
+        !sameSet(assignedProblemIds, entry.affectedProblemIds) ||
+        entry.splitProblemAssignments.some(({ problemIds }) => problemIds.length === 0)
+      ) {
+        violations.push(`split_assignments_incomplete:${entry.previewEntityId}`);
+      }
     }
     if (previewEntity && entry.previewEntityKind !== previewEntity.kind) {
       violations.push(`preview_entity_kind_mismatch:${entry.previewEntityId}`);
@@ -314,8 +374,12 @@ export const validateTaxonomyIntegration = (
     ...graphViolations('learning_unit', unitIds, build.learningUnitPrerequisites),
   );
   const orderIndex = new Map(build.standardOrder.map((id, index) => [id, index]));
+  const expectedLearningUnitOrder = deterministicLearningUnitOrder(
+    unitIds,
+    build.learningUnitPrerequisites,
+  );
   if (
-    !sameSet(build.standardOrder, unitIds) ||
+    !sameOrderedValues(build.standardOrder, expectedLearningUnitOrder) ||
     build.learningUnitPrerequisites.some(
       ({ nodeId, prerequisiteId }) =>
         (orderIndex.get(prerequisiteId) ?? Number.POSITIVE_INFINITY) >=
@@ -339,6 +403,29 @@ export const validateTaxonomyIntegration = (
       placement.learningUnitIds.some((id) => !unitIds.includes(id))
     ) {
       violations.push(`placement_reference_invalid:${placement.problemId}`);
+    }
+  }
+
+  const placementByProblemId = new Map(
+    build.placements.map((placement) => [placement.problemId, placement]),
+  );
+  for (const entry of build.integrationEntries.filter(({ action }) => action === 'split')) {
+    const previewEntity = previewEntitiesById.get(entry.previewEntityId);
+    if (!previewEntity) continue;
+    for (const assignment of entry.splitProblemAssignments) {
+      for (const problemId of assignment.problemIds) {
+        const problemPlacement = placementByProblemId.get(problemId);
+        const finalEntity = build.finalEntities.find(({ id }) => id === assignment.finalEntityId);
+        const placedIds =
+          previewEntity.kind === 'tag'
+            ? problemPlacement?.tagIds
+            : previewEntity.kind === 'outcome'
+              ? problemPlacement?.outcomeIds
+              : problemPlacement?.learningUnitIds;
+        if (!finalEntity || !placedIds?.includes(assignment.finalEntityId)) {
+          violations.push(`split_placement_mismatch:${entry.previewEntityId}:${problemId}`);
+        }
+      }
     }
   }
 

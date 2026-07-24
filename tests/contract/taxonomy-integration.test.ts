@@ -23,6 +23,7 @@ const validationContext: TaxonomyValidationContext = {
       referencedProblemIds: ['abc212-e', 'abc213-f'],
     },
   ],
+  inventoryDigest: 'a'.repeat(64),
   inventoryProblemIds: ['abc212-e', 'abc213-f'],
   passedPreviewSnapshotDigests: ['b'.repeat(64)],
   knownSourceRevisionIds: ['source-abc212-e', 'source-abc213-f'],
@@ -35,6 +36,7 @@ const integrationEntries = (): IntegrationEntry[] => [
     action: 'promote',
     finalEntityIds: ['tag-bfs'],
     affectedProblemIds: ['abc212-e'],
+    splitProblemAssignments: [],
     rationale: 'The full inventory confirms the same reusable technique.',
     evidenceIds: ['evidence-bfs'],
     aliasOrRedirects: [],
@@ -49,6 +51,10 @@ const integrationEntries = (): IntegrationEntry[] => [
     action: 'split',
     finalEntityIds: ['unit-bfs', 'unit-dijkstra'],
     affectedProblemIds: ['abc212-e', 'abc213-f'],
+    splitProblemAssignments: [
+      { finalEntityId: 'unit-bfs', problemIds: ['abc212-e'] },
+      { finalEntityId: 'unit-dijkstra', problemIds: ['abc213-f'] },
+    ],
     rationale: 'The complete corpus requires separate unweighted and weighted units.',
     evidenceIds: ['evidence-search-split'],
     aliasOrRedirects: ['preview-unit-search'],
@@ -288,6 +294,16 @@ describe('US2 preview-to-final taxonomy integration contract', () => {
     );
   });
 
+  it('requires the build to use the frozen full-inventory digest', () => {
+    const build = buildFixture();
+    expect(
+      validateTaxonomyIntegration(
+        validationContext,
+        rebuild(build, { inventoryDigest: 'c'.repeat(64) }),
+      ),
+    ).toContain('inventory_digest_stale');
+  });
+
   it('rejects cycles and a stale deterministic LearningUnit order', () => {
     const build = buildFixture();
     const cycle = rebuild(build, {
@@ -302,6 +318,17 @@ describe('US2 preview-to-final taxonomy integration contract', () => {
 
     const staleOrder = rebuild(build, { standardOrder: [...build.standardOrder].reverse() });
     expect(validateTaxonomyIntegration(validationContext, staleOrder)).toContain(
+      'standard_order_stale',
+    );
+  });
+
+  it('rejects a different order for independent LearningUnits', () => {
+    const build = buildFixture();
+    const reordered = rebuild(build, {
+      learningUnitPrerequisites: [],
+      standardOrder: ['unit-dijkstra', 'unit-bfs'],
+    });
+    expect(validateTaxonomyIntegration(validationContext, reordered)).toContain(
       'standard_order_stale',
     );
   });
@@ -332,6 +359,20 @@ describe('US2 preview-to-final taxonomy integration contract', () => {
         rebuild(build, { sourceRevisionIds: ['source-abc212-e'] }),
       ),
     ).toContain('source_revisions_stale');
+  });
+
+  it('requires split assignments to agree with Problem placements', () => {
+    const build = buildFixture();
+    const mismatched = rebuild(build, {
+      placements: build.placements.map((placement) =>
+        placement.problemId === 'abc213-f'
+          ? { ...placement, learningUnitIds: ['unit-bfs'] }
+          : placement,
+      ),
+    });
+    expect(validateTaxonomyIntegration(validationContext, mismatched)).toContain(
+      'split_placement_mismatch:preview-unit-search:abc213-f',
+    );
   });
 
   it('requires policy-matched review evidence for the current complete subject', () => {

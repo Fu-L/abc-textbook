@@ -58,6 +58,9 @@ const joinRequirements = (): PreviewJoinRequirements => ({
   requiredReviewEvidenceIds: requiredPreviewComponentIds.map(
     (componentId) => `review:${componentId}`,
   ),
+  requiredReviewModes: Object.fromEntries(
+    requiredPreviewComponentIds.map((componentId) => [`review:${componentId}`, 'self']),
+  ),
 });
 
 describe('US2 vertical preview contract', () => {
@@ -136,6 +139,36 @@ describe('US2 vertical preview contract', () => {
     ).toEqual(
       expect.arrayContaining(['CHECK_RESULT_SET_INCOMPLETE', 'REVIEW_EVIDENCE_SET_INCOMPLETE']),
     );
+  });
+
+  it('holds evidence that disagrees with the frozen review policy', () => {
+    const requirements = joinRequirements();
+    const thirdPartyRequirements: PreviewJoinRequirements = {
+      ...requirements,
+      requiredReviewModes: Object.fromEntries(
+        requiredPreviewComponentIds.map((componentId) => [`review:${componentId}`, 'third_party']),
+      ),
+    };
+    const selfReviewedComponents = completeComponents().map((component) => {
+      const { componentDigest, ...subject } = component;
+      const changedSubject = {
+        ...subject,
+        reviewEvidence: component.reviewEvidence.map((evidence) => ({
+          ...evidence,
+          requiredMode: 'self' as const,
+          reviewMode: 'self' as const,
+        })),
+      };
+      void componentDigest;
+      return { ...changedSubject, componentDigest: componentEvidenceDigest(changedSubject) };
+    });
+
+    expect(joinPreviewComponents(selfReviewedComponents, thirdPartyRequirements)).toMatchObject({
+      status: 'on_hold',
+    });
+    expect(
+      joinPreviewComponents(selfReviewedComponents, thirdPartyRequirements).holdReasons,
+    ).toEqual(expect.arrayContaining(['REVIEW_POLICY_MISMATCH:review:content-graph-search']));
   });
 
   it('keeps a join on hold when a required component is missing or duplicated', () => {

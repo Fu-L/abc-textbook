@@ -47,6 +47,8 @@ export interface PreviewJoinRequirements {
   readonly subjectDigest: string;
   readonly requiredCheckResultIds: readonly string[];
   readonly requiredReviewEvidenceIds: readonly string[];
+  /** Review mode frozen by the preview manifest for each required evidence ID. */
+  readonly requiredReviewModes: Readonly<Record<string, PreviewReviewMode>>;
 }
 
 export const requiredPreviewComponentIds = [
@@ -224,7 +226,12 @@ export const joinPreviewComponents = (
     holdReasons.push('REVIEW_EVIDENCE_SET_INCOMPLETE');
   }
   for (const evidence of reviewEvidence) {
-    if (evidence.requiredMode !== evidence.reviewMode) {
+    const expectedMode = requirements.requiredReviewModes[evidence.reviewEvidenceId];
+    if (
+      expectedMode === undefined ||
+      evidence.requiredMode !== expectedMode ||
+      evidence.reviewMode !== expectedMode
+    ) {
       holdReasons.push(`REVIEW_POLICY_MISMATCH:${evidence.reviewEvidenceId}`);
     }
     if (evidence.subjectDigest !== requirements.subjectDigest || !evidence.aggregatePassed) {
