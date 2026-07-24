@@ -1,167 +1,309 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  finalTaxonomyDigest,
+  createFinalTaxonomyBuild,
+  taxonomyReviewSubjectDigest,
   validateTaxonomyIntegration,
   type FinalTaxonomyBuild,
+  type FinalTaxonomyBuildInput,
   type IntegrationEntry,
+  type TaxonomyValidationContext,
 } from '../../src/lib/preview/taxonomy-integration.js';
 
-const buildFixture = (): FinalTaxonomyBuild => {
-  const subject = {
+const validationContext: TaxonomyValidationContext = {
+  previewEntityIds: ['preview-tag-bfs', 'preview-unit-search'],
+  inventoryProblemIds: ['abc212-e', 'abc213-f'],
+  passedPreviewSnapshotDigests: ['b'.repeat(64)],
+  knownSourceRevisionIds: ['source-abc212-e', 'source-abc213-f'],
+};
+
+const integrationEntries = (): IntegrationEntry[] => [
+  {
+    previewEntityId: 'preview-tag-bfs',
+    previewEntityKind: 'tag',
+    action: 'promote',
+    finalEntityIds: ['tag-bfs'],
+    affectedProblemIds: ['abc212-e'],
+    rationale: 'The full inventory confirms the same reusable technique.',
+    evidenceIds: ['evidence-bfs'],
+    aliasOrRedirects: [],
+    correctionImpactId: 'impact-bfs',
+    reviewMode: 'self',
+    reviewEvidenceId: 'review-bfs',
+    status: 'accepted',
+  },
+  {
+    previewEntityId: 'preview-unit-search',
+    previewEntityKind: 'unit',
+    action: 'split',
+    finalEntityIds: ['unit-bfs', 'unit-dijkstra'],
+    affectedProblemIds: ['abc212-e', 'abc213-f'],
+    rationale: 'The complete corpus requires separate unweighted and weighted units.',
+    evidenceIds: ['evidence-search-split'],
+    aliasOrRedirects: ['preview-unit-search'],
+    correctionImpactId: 'impact-search-split',
+    reviewMode: 'self',
+    reviewEvidenceId: 'review-search-split',
+    status: 'accepted',
+  },
+];
+
+const inputFixture = (): FinalTaxonomyBuildInput => {
+  const reviewSubject = {
     inventoryDigest: 'a'.repeat(64),
     previewSnapshotDigest: 'b'.repeat(64),
-    previewSnapshotStatus: 'passed' as const,
     policy: {
       name: 'full-corpus-taxonomy-recompute',
       version: '1.0.0',
       inputScope: 'complete-technique-inventory',
+      requiredReviewMode: 'self' as const,
     },
-    integrationEntries: [
+    integrationEntries: integrationEntries(),
+    finalEntities: [
       {
-        previewEntityId: 'preview-tag-bfs',
-        action: 'promote' as const,
-        finalEntityIds: ['tag-bfs'],
+        id: 'tag-bfs',
+        kind: 'tag' as const,
+        definition: 'Explore an unweighted state graph by distance layers.',
+        learningOutcomeIds: ['outcome-search'],
+        representativeProblemIds: ['abc212-e'],
+        sourceRevisionIds: ['source-abc212-e'],
+      },
+      {
+        id: 'outcome-search',
+        kind: 'outcome' as const,
+        definition: 'Select and justify a shortest-path search.',
+        learningOutcomeIds: [],
+        representativeProblemIds: ['abc212-e', 'abc213-f'],
+        sourceRevisionIds: ['source-abc212-e', 'source-abc213-f'],
+      },
+      {
+        id: 'unit-bfs',
+        kind: 'unit' as const,
+        definition: 'Breadth-first search foundations.',
+        learningOutcomeIds: ['outcome-search'],
+        representativeProblemIds: ['abc212-e'],
+        sourceRevisionIds: ['source-abc212-e'],
+      },
+      {
+        id: 'unit-dijkstra',
+        kind: 'unit' as const,
+        definition: 'Shortest paths with non-negative weights.',
+        learningOutcomeIds: ['outcome-search'],
+        representativeProblemIds: ['abc213-f'],
+        sourceRevisionIds: ['source-abc213-f'],
+      },
+    ],
+    tagPrerequisites: [],
+    learningUnitPrerequisites: [{ nodeId: 'unit-dijkstra', prerequisiteId: 'unit-bfs' }],
+    standardOrder: ['unit-bfs', 'unit-dijkstra'],
+    placements: [
+      {
+        problemId: 'abc212-e',
+        tagIds: ['tag-bfs'],
+        outcomeIds: ['outcome-search'],
+        learningUnitIds: ['unit-bfs'],
+      },
+      {
+        problemId: 'abc213-f',
+        tagIds: ['tag-bfs'],
+        outcomeIds: ['outcome-search'],
+        learningUnitIds: ['unit-dijkstra'],
+      },
+    ],
+    correctionImpacts: [
+      {
+        correctionImpactId: 'impact-bfs',
         affectedProblemIds: ['abc212-e'],
-        evidenceIds: ['evidence-bfs'],
-        correctionImpactId: 'correction-impact-bfs',
+        affectedSurfaces: ['placement', 'index'],
       },
       {
-        previewEntityId: 'preview-unit-search',
-        action: 'split' as const,
-        finalEntityIds: ['unit-bfs', 'unit-dijkstra'],
+        correctionImpactId: 'impact-search-split',
         affectedProblemIds: ['abc212-e', 'abc213-f'],
-        evidenceIds: ['evidence-search-split'],
-        correctionImpactId: 'correction-impact-search-split',
+        affectedSurfaces: ['text', 'exercise', 'answer', 'order', 'index'],
       },
-    ] satisfies readonly IntegrationEntry[],
-    finalEntityIds: ['tag-bfs', 'unit-bfs', 'unit-dijkstra'],
-    placementProblemIds: ['abc212-e', 'abc213-f'],
+    ],
+    sourceRevisionIds: ['source-abc212-e', 'source-abc213-f'],
   };
+  const subjectDigest = taxonomyReviewSubjectDigest(reviewSubject);
   return {
-    ...subject,
-    taxonomyDigest: finalTaxonomyDigest(subject),
+    ...reviewSubject,
+    reviewEvidence: [
+      {
+        reviewEvidenceId: 'review-bfs',
+        subjectDigest,
+        requiredMode: 'self',
+        reviewMode: 'self',
+        aggregatePassed: true,
+      },
+      {
+        reviewEvidenceId: 'review-search-split',
+        subjectDigest,
+        requiredMode: 'self',
+        reviewMode: 'self',
+        aggregatePassed: true,
+      },
+    ],
+    status: 'accepted',
+    acceptedAt: '2026-07-24T00:00:00Z',
   };
 };
 
+const buildFixture = (): FinalTaxonomyBuild => createFinalTaxonomyBuild(inputFixture());
+
+const rebuild = (
+  build: FinalTaxonomyBuild,
+  changes: Partial<FinalTaxonomyBuildInput>,
+): FinalTaxonomyBuild => {
+  const input: FinalTaxonomyBuildInput = {
+    inventoryDigest: build.inventoryDigest,
+    previewSnapshotDigest: build.previewSnapshotDigest,
+    policy: build.policy,
+    integrationEntries: build.integrationEntries,
+    finalEntities: build.finalEntities,
+    tagPrerequisites: build.tagPrerequisites,
+    learningUnitPrerequisites: build.learningUnitPrerequisites,
+    standardOrder: build.standardOrder,
+    placements: build.placements,
+    correctionImpacts: build.correctionImpacts,
+    sourceRevisionIds: build.sourceRevisionIds,
+    reviewEvidence: build.reviewEvidence,
+    status: build.status,
+    acceptedAt: build.acceptedAt,
+  };
+  const changed = { ...input, ...changes };
+  const subjectDigest = taxonomyReviewSubjectDigest(changed);
+  return createFinalTaxonomyBuild({
+    ...changed,
+    reviewEvidence: changed.reviewEvidence.map((evidence) => ({ ...evidence, subjectDigest })),
+  });
+};
+
 describe('US2 preview-to-final taxonomy integration contract', () => {
-  const previewEntityIds = ['preview-tag-bfs', 'preview-unit-search'];
-  const inventoryProblemIds = ['abc212-e', 'abc213-f'];
+  it('accepts a complete, current-subject full-corpus build', () => {
+    expect(validateTaxonomyIntegration(validationContext, buildFixture())).toEqual([]);
+  });
 
   it('maps every provisional entity exactly once through promote/merge/split/retire', () => {
+    const build = buildFixture();
     expect(
-      validateTaxonomyIntegration(previewEntityIds, inventoryProblemIds, buildFixture()),
-    ).toEqual([]);
-
-    const incomplete = buildFixture();
-    const [first] = incomplete.integrationEntries;
-    expect(
-      validateTaxonomyIntegration(previewEntityIds, inventoryProblemIds, {
-        ...incomplete,
-        integrationEntries: first ? [first] : [],
-      }),
+      validateTaxonomyIntegration(
+        validationContext,
+        rebuild(build, { integrationEntries: build.integrationEntries.slice(0, 1) }),
+      ),
     ).toContain('integration_mapping_incomplete');
   });
 
-  it('enforces action cardinality and source-backed CorrectionImpact evidence', () => {
+  it('rejects invalid action cardinality, fictional final IDs, and missing evidence', () => {
     const build = buildFixture();
     const [first, second] = build.integrationEntries;
     if (!first || !second) throw new Error('Integration fixture is incomplete.');
-    const invalidEntry = {
+    const invalid = {
       ...second,
-      action: 'split' as const,
-      finalEntityIds: ['unit-bfs'],
+      finalEntityIds: ['unit-fictional'],
       evidenceIds: [],
+      rationale: '',
     };
     expect(
-      validateTaxonomyIntegration(previewEntityIds, inventoryProblemIds, {
-        ...build,
-        integrationEntries: [first, invalidEntry],
-      }),
+      validateTaxonomyIntegration(
+        validationContext,
+        rebuild(build, { integrationEntries: [first, invalid] }),
+      ),
     ).toEqual(
       expect.arrayContaining([
         'invalid_action_cardinality:preview-unit-search',
         'integration_evidence_missing:preview-unit-search',
+        'final_entity_missing:preview-unit-search',
       ]),
     );
   });
 
-  it('accepts merge and retire only with their exact target cardinality', () => {
+  it('requires the referenced preview snapshot to be a trusted passed snapshot', () => {
     const build = buildFixture();
-    const [first, second] = build.integrationEntries;
-    if (!first || !second) throw new Error('Integration fixture is incomplete.');
-    const merged = {
-      ...first,
-      action: 'merge' as const,
-      finalEntityIds: ['tag-bfs'],
-    };
-    const retired = {
-      ...second,
-      action: 'retire' as const,
-      finalEntityIds: [],
-    };
-    const mergedBuild = {
-      ...build,
-      integrationEntries: [merged, retired],
-      finalEntityIds: ['tag-bfs'],
-    };
-    expect(
-      validateTaxonomyIntegration(previewEntityIds, inventoryProblemIds, {
-        ...mergedBuild,
-        taxonomyDigest: finalTaxonomyDigest(mergedBuild),
-      }),
-    ).toEqual([]);
-  });
-
-  it('regenerates final taxonomy from the complete Inventory without provisional IDs', () => {
-    const build = buildFixture();
-    expect(
-      validateTaxonomyIntegration(previewEntityIds, inventoryProblemIds, {
-        ...build,
-        finalEntityIds: [...build.finalEntityIds, 'provisional-tag-leftover'],
-      }),
-    ).toEqual(
-      expect.arrayContaining(['final_taxonomy_not_deduplicated', 'final_taxonomy_digest_stale']),
+    const changed = rebuild(build, { previewSnapshotDigest: 'c'.repeat(64) });
+    expect(validateTaxonomyIntegration(validationContext, changed)).toContain(
+      'preview_snapshot_not_passed',
     );
   });
 
-  it('binds final taxonomy acceptance to a passed preview and its policy subject', () => {
+  it('rejects cycles and a stale deterministic LearningUnit order', () => {
     const build = buildFixture();
-    expect(validateTaxonomyIntegration(previewEntityIds, inventoryProblemIds, build)).toEqual([]);
-
-    expect(
-      validateTaxonomyIntegration(previewEntityIds, inventoryProblemIds, {
-        ...build,
-        previewSnapshotDigest: 'c'.repeat(64),
-      }),
-    ).toContain('final_taxonomy_digest_stale');
-
-    expect(
-      validateTaxonomyIntegration(previewEntityIds, inventoryProblemIds, {
-        ...build,
-        previewSnapshotStatus: 'on_hold',
-      }),
-    ).toEqual(
-      expect.arrayContaining(['preview_snapshot_not_passed', 'final_taxonomy_digest_stale']),
+    const cycle = rebuild(build, {
+      learningUnitPrerequisites: [
+        ...build.learningUnitPrerequisites,
+        { nodeId: 'unit-bfs', prerequisiteId: 'unit-dijkstra' },
+      ],
+    });
+    expect(validateTaxonomyIntegration(validationContext, cycle)).toEqual(
+      expect.arrayContaining(['learning_unit_dag_cycle', 'standard_order_stale']),
     );
 
-    expect(
-      validateTaxonomyIntegration(previewEntityIds, inventoryProblemIds, {
-        ...build,
-        policy: { ...build.policy, version: '2.0.0' },
-      }),
-    ).toContain('final_taxonomy_digest_stale');
+    const staleOrder = rebuild(build, { standardOrder: [...build.standardOrder].reverse() });
+    expect(validateTaxonomyIntegration(validationContext, staleOrder)).toContain(
+      'standard_order_stale',
+    );
   });
 
-  it('requires one reachable placement for every inventory Problem', () => {
+  it('requires complete placements, CorrectionImpact scopes, and Source Revisions', () => {
     const build = buildFixture();
     expect(
-      validateTaxonomyIntegration(previewEntityIds, inventoryProblemIds, {
-        ...build,
-        placementProblemIds: ['abc212-e'],
-      }),
-    ).toEqual(
-      expect.arrayContaining(['placement_reachability_incomplete', 'final_taxonomy_digest_stale']),
+      validateTaxonomyIntegration(
+        validationContext,
+        rebuild(build, { placements: build.placements.slice(0, 1) }),
+      ),
+    ).toContain('placement_reachability_incomplete');
+
+    const [firstImpact, secondImpact] = build.correctionImpacts;
+    if (!firstImpact || !secondImpact) throw new Error('CorrectionImpact fixture is incomplete.');
+    expect(
+      validateTaxonomyIntegration(
+        validationContext,
+        rebuild(build, {
+          correctionImpacts: [firstImpact, { ...secondImpact, affectedProblemIds: ['abc213-f'] }],
+        }),
+      ),
+    ).toContain('correction_impact_scope_mismatch:impact-search-split');
+
+    expect(
+      validateTaxonomyIntegration(
+        validationContext,
+        rebuild(build, { sourceRevisionIds: ['source-abc212-e'] }),
+      ),
+    ).toContain('source_revisions_stale');
+  });
+
+  it('requires policy-matched review evidence for the current complete subject', () => {
+    const build = buildFixture();
+    const staleReview = createFinalTaxonomyBuild({
+      ...inputFixture(),
+      reviewEvidence: inputFixture().reviewEvidence.map((evidence) => ({
+        ...evidence,
+        subjectDigest: 'f'.repeat(64),
+      })),
+    });
+    expect(validateTaxonomyIntegration(validationContext, staleReview)).toContain(
+      'current_subject_review_missing',
     );
+
+    expect(
+      validateTaxonomyIntegration(
+        validationContext,
+        rebuild(build, { status: 'proposed', acceptedAt: null }),
+      ),
+    ).toContain('final_taxonomy_not_accepted');
+  });
+
+  it.each([
+    ['integrationMapDigest', { integrationMapDigest: 'f'.repeat(64) }],
+    ['taxonomyDigest', { taxonomyDigest: 'f'.repeat(64) }],
+    ['tagDagDigest', { tagDagDigest: 'f'.repeat(64) }],
+    ['learningUnitDagDigest', { learningUnitDagDigest: 'f'.repeat(64) }],
+    ['orderDigest', { orderDigest: 'f'.repeat(64) }],
+    ['placementDigest', { placementDigest: 'f'.repeat(64) }],
+    ['correctionImpactDigest', { correctionImpactDigest: 'f'.repeat(64) }],
+    ['buildDigest', { buildDigest: 'f'.repeat(64) }],
+  ])('rejects a stale %s', (_, mutation) => {
+    expect(
+      validateTaxonomyIntegration(validationContext, { ...buildFixture(), ...mutation }),
+    ).not.toEqual([]);
   });
 });
