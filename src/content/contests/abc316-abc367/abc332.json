@@ -1,0 +1,20 @@
+{
+  "id": "abc332",
+  "number": 332,
+  "title": "AtCoder Beginner Contest 332",
+  "startedAt": "2023-12-10T21:00:00+09:00",
+  "endedAt": "2023-12-10T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc332",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc332_a",
+    "abc332_b",
+    "abc332_c",
+    "abc332_d",
+    "abc332_e",
+    "abc332_f",
+    "abc332_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc332-task-list-bb9047aa6c12d7e0bf9d5a4aa12237c8df13980ab81e1eba9384310424861bcd",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

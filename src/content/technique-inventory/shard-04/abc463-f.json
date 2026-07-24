@@ -1,0 +1,22 @@
+{
+  "problemId": "abc463-f",
+  "sourceRevisionIds": [
+    "source-abc463-editorial-21939-26e1a13f3658448a171da4673027ddd725353abf1088ea3ea4b2a4efd008b71f",
+    "source-abc463-f-problem-343004a4d30ce016eb3f93c1835e2c9c7d71f67e5334acf08a7861f15901ce01"
+  ],
+  "coreMethod": "abc463-f「Senshuraku」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+    "Senshuraku 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "組合せ数と二項係数"],
+  "implementationConcerns": [
+    "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Senshuraku 型の 整数の約数・剰余構造に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

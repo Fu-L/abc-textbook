@@ -1,0 +1,20 @@
+{
+  "id": "abc414-e",
+  "contestId": "abc414",
+  "slotLabel": "E",
+  "officialTaskId": "abc414_e",
+  "title": "Count A%B=C",
+  "officialUrl": "https://atcoder.jp/contests/abc414/tasks/abc414_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 10^{12}; N is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc414-e-problem-400f0f5a756e09ebb4432cb50e469a67995ec6b0e14ffa8478b397a8336277d7",
+    "source-abc414-editorial-13450-d136759d73f4ca99697d477bf5234f4941176a74dc16534f312ecb3b38ebb37a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

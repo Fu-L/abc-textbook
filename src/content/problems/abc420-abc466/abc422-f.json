@@ -1,0 +1,20 @@
+{
+  "id": "abc422-f",
+  "contestId": "abc422",
+  "slotLabel": "F",
+  "officialTaskId": "abc422_f",
+  "title": "Eat and Ride",
+  "officialUrl": "https://atcoder.jp/contests/abc422/tasks/abc422_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le5000; 1\\le M\\le5000; 1\\le W _ i\\le10 ^ 9\\ (1\\le i\\le N); 1\\le u _ i\\le v _ i\\le N\\ (1\\le i\\le M); The given graph is connected.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1",
+    "source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

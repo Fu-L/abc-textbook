@@ -1,0 +1,20 @@
+{
+  "id": "abc250-f",
+  "contestId": "abc250",
+  "slotLabel": "F",
+  "officialTaskId": "abc250_f",
+  "title": "One Fourth",
+  "officialUrl": "https://atcoder.jp/contests/abc250/tasks/abc250_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 4 \\le N \\le 10^5; |X_i|, |Y_i| \\le 4 \\times 10^8; The given points are the vertices of a convex N-gon in the counterclockwise order.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc250-f-problem-f073c65fa9a08b3cce95e5d85aac92471a16dda3bec9211a0af9189e1ebec2b2",
+    "source-abc250-editorial-3928-5023b9af8aa1da66ab00900f5b4489f1f6945435795598250a9021f4744f04b9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

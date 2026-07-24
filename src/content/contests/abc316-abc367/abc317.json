@@ -1,0 +1,21 @@
+{
+  "id": "abc317",
+  "number": 317,
+  "title": "GAMEFREAK Programming Contest 2023 (AtCoder Beginner Contest 317)",
+  "startedAt": "2023-08-26T21:00:00+09:00",
+  "endedAt": "2023-08-26T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc317",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc317_a",
+    "abc317_b",
+    "abc317_c",
+    "abc317_d",
+    "abc317_e",
+    "abc317_f",
+    "abc317_g",
+    "abc317_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc317-task-list-8ff99ae1195e2ff84b118ac87babc24f75f1688666f65ad78523e4f519e52b9e",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

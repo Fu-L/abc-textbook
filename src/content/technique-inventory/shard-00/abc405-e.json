@@ -1,0 +1,22 @@
+{
+  "problemId": "abc405-e",
+  "sourceRevisionIds": [
+    "source-abc405-e-problem-bba4dda2e02a55bd7bfbef138713d6d7b4e0b0ba9f9972784cc4ad2d93ff2194",
+    "source-abc405-editorial-13004-59ade1060f850eefa9ff15714c030d95aee071d0459add6a840ed9d74571108c"
+  ],
+  "coreMethod": "abc405-e「Fruit Lineup」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+    "Fruit Lineup 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "組合せ数と二項係数"],
+  "implementationConcerns": [
+    "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Fruit Lineup 型の 区間端点と包含関係に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

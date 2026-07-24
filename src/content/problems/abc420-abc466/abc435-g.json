@@ -1,0 +1,20 @@
+{
+  "id": "abc435-g",
+  "contestId": "abc435",
+  "slotLabel": "G",
+  "officialTaskId": "abc435_g",
+  "title": "Domino Arrangement",
+  "officialUrl": "https://atcoder.jp/contests/abc435/tasks/abc435_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N,M \\leq 5\\times 10^5; 1\\leq L_i \\leq R_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc435-g-problem-1c5f30320e1385bd7b970ef2b674da6b62239d9a00603552082b508f60fc3a19",
+    "source-abc435-editorial-14709-ab9da4b7c0dc0cd5c4357ebcc9efe075a5833e4ef01fe96fea034bc28984a726"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc300-ex",
+  "sourceRevisionIds": [
+    "source-abc300-editorial-6269-8ee6c801cc635135e368a145e5422f67ea6f3b84bb1f84c9a3d8abdbe3e9c62f",
+    "source-abc300-ex-problem-a4193e2c6420fe848a52d2fcde204ca005b9263c25643e305fd3a0f5154a481f"
+  ],
+  "coreMethod": "abc300-ex「Fibonacci: Revisited」では、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "係数比較により元の再帰・畳み込みと冪級数恒等式が次数ごとに同値であることを示す。",
+    "Fibonacci: Revisited 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "形式的冪級数"],
+  "implementationConcerns": [
+    "必要次数で毎回 truncate し、定数項が逆元や対数の前提を満たすか確認する。"
+  ],
+  "outcomeCandidates": [
+    "Fibonacci: Revisited 型の 列の順序と prefix 状態に対し、形式的冪級数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

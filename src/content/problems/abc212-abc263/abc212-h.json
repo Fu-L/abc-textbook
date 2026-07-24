@@ -1,0 +1,20 @@
+{
+  "id": "abc212-h",
+  "contestId": "abc212",
+  "slotLabel": "H",
+  "officialTaskId": "abc212_h",
+  "title": "Nim Counting",
+  "officialUrl": "https://atcoder.jp/contests/abc212/tasks/abc212_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 1 \\leq K < 2^{16}; 1 \\leq A_i < 2^{16}; All A_i are distinct.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93",
+    "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

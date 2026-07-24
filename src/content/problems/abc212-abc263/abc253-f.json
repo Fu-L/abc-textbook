@@ -1,0 +1,20 @@
+{
+  "id": "abc253-f",
+  "contestId": "abc253",
+  "slotLabel": "F",
+  "officialTaskId": "abc253_f",
+  "title": "Operations on a Matrix",
+  "officialUrl": "https://atcoder.jp/contests/abc253/tasks/abc253_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, M, Q \\leq 2 \\times 10^5; Every query is in one of the formats listed in the Problem Statement.; For each query in the format 1 l r x, 1 \\leq l \\leq r \\leq M and 1 \\leq x \\leq 10^9.; For each query in the format 2 i x, 1 \\leq i \\leq N and 1 \\leq x \\leq 10^9.; For each query in the format 3 i j, 1 \\leq i \\leq N and 1 \\leq j \\leq M.; At least one query in the format 3 i j is given.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc253-f-problem-9b46b432bebd3b4b187ea5abb99002da9ceeb10b0aeccaa727cd4c94ffc87a7b",
+    "source-abc253-editorial-4025-a9dda18762878be5ec2358cece648988d3e594c03022782f457e4a13e5c3a095"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

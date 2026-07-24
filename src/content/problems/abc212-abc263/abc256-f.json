@@ -1,0 +1,20 @@
+{
+  "id": "abc256-f",
+  "contestId": "abc256",
+  "slotLabel": "F",
+  "officialTaskId": "abc256_f",
+  "title": "Cumulative Cumulative Cumulative Sum",
+  "officialUrl": "https://atcoder.jp/contests/abc256/tasks/abc256_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times10^5; 1 \\leq Q \\leq 2\\times10^5; 0 \\leq A_i \\leq 10^9; 1 \\leq x \\leq N; 0 \\leq v \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965",
+    "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

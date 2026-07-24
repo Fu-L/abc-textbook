@@ -1,0 +1,20 @@
+{
+  "id": "abc248-f",
+  "contestId": "abc248",
+  "slotLabel": "F",
+  "officialTaskId": "abc248_f",
+  "title": "Keep Connect",
+  "officialUrl": "https://atcoder.jp/contests/abc248/tasks/abc248_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3000; 9\\times 10^8 \\leq P \\leq 10^9; N is an integer.; P is a prime.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad",
+    "source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

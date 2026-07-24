@@ -1,0 +1,20 @@
+{
+  "id": "abc370-e",
+  "contestId": "abc370",
+  "slotLabel": "E",
+  "officialTaskId": "abc370_e",
+  "title": "Avoid K Partition",
+  "officialUrl": "https://atcoder.jp/contests/abc370/tasks/abc370_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; -10^{15} \\leq K \\leq 10^{15}; -10^9 \\leq A_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc370-e-problem-d7ff45d3352a564a1b5f6de1562c31fcf5efce52c658332ce00497f5eb504fb4",
+    "source-abc370-editorial-10858-53664a8a6b1d89592b47f761ebce068c5c717e4a955921ededdecf1a92f9d5b7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

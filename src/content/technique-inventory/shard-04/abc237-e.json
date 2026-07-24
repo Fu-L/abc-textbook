@@ -1,0 +1,22 @@
+{
+  "problemId": "abc237-e",
+  "sourceRevisionIds": [
+    "source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4",
+    "source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"
+  ],
+  "coreMethod": "abc237-e「Skiing」では、全辺緩和を反復し、負辺を含む最短路と負閉路の影響範囲を判定する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "辺数 k 以下の最短路は k 回の緩和後に得られ、N 回目の改善は到達可能な負閉路の存在を示す。",
+    "Skiing 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "Bellman–Ford 法"],
+  "implementationConcerns": [
+    "未到達 sentinel からの加算を避け、負閉路から到達できる頂点を追加伝播する。"
+  ],
+  "outcomeCandidates": [
+    "Skiing 型の 整数の約数・剰余構造に対し、Bellman–Ford 法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

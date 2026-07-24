@@ -1,0 +1,20 @@
+{
+  "id": "abc354-e",
+  "contestId": "abc354",
+  "slotLabel": "E",
+  "officialTaskId": "abc354_e",
+  "title": "Remove Pairs",
+  "officialUrl": "https://atcoder.jp/contests/abc354/tasks/abc354_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 18; 1 \\leq A_i, B_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc354-e-problem-0d78e323d08982677aadd9bf82bd8aaa3d61fde4eb7c4c585bb406c6bddf40ad",
+    "source-abc354-editorial-10034-5414140ab4d6fbdd70f45fd1f619ea9ea25c170f2769838316fa9952fb7a0cea"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

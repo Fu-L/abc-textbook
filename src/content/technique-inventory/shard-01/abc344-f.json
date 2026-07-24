@@ -1,0 +1,20 @@
+{
+  "problemId": "abc344-f",
+  "sourceRevisionIds": [
+    "source-abc344-editorial-9473-e93b9c642a9f4fdca8fc80437b3b360b32bbfd6554894e058ecf9eef3b29e822",
+    "source-abc344-f-problem-1ce348dacdf45e7ee430869830c57cb7ab4b03f187e2300e665afb33c4dde6b3"
+  ],
+  "coreMethod": "abc344-f「Earn to Advance」では、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
+    "Earn to Advance 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "式変形と frequency map"],
+  "implementationConcerns": ["添字 parity による符号反転と負数 key をそのまま正確に保持する。"],
+  "outcomeCandidates": [
+    "Earn to Advance 型の 盤面上の位置と局所遷移に対し、式変形と frequency mapを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

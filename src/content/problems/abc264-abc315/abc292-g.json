@@ -1,0 +1,20 @@
+{
+  "id": "abc292-g",
+  "contestId": "abc292",
+  "slotLabel": "G",
+  "officialTaskId": "abc292_g",
+  "title": "Count Strictly Increasing Sequences",
+  "officialUrl": "https://atcoder.jp/contests/abc292/tasks/abc292_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 40; 1 \\leq M \\leq 40; N and M are integers.; S_i is a string of length M consisting of digits and ?.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc292-g-problem-714218a34f6e89aac6ec320f0cd62bd08c95dad0caf490167c48ee09cb549c82",
+    "source-abc292-editorial-5896-28ffb32781354ff1911e1f7e1d693e9dd16107cce13a29b9d80692114ca41c23"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

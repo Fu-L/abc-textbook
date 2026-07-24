@@ -1,0 +1,22 @@
+{
+  "problemId": "abc368-e",
+  "sourceRevisionIds": [
+    "source-abc368-e-problem-a673d6063dad671766e37586e3e23d2657d837232a96ac44de45dc425b6544ed",
+    "source-abc368-editorial-10752-c1d6c5155d2d9890f4506e2f637995f79c644f04162ceeb29059e816a897901b"
+  ],
+  "coreMethod": "abc368-e「Train Delay」では、全発着を時刻表時刻で event sort し、各駅の最新実到着時刻から後続列車へ必要最小の遅延を伝播する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "ある発車へ影響できるのはその時刻以前の到着だけであり、各駅の最大実到着時刻が全乗継制約を要約する。",
+    "Train Delay 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["event sweep と因果順序"],
+  "implementationConcerns": [
+    "同時刻では到着を発車より先に処理し、初期遅延が与えられる列車を通常更新で上書きしない。"
+  ],
+  "outcomeCandidates": [
+    "Train Delay 型の問題に対し、event sweep と因果順序を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

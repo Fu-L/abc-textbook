@@ -1,0 +1,22 @@
+{
+  "problemId": "abc377-g",
+  "sourceRevisionIds": [
+    "source-abc377-editorial-11244-f5941b10cd7d44e81a62374d091caa772405c26ae8fe723044fa153ec8db2c9b",
+    "source-abc377-g-problem-c47c0dc695430363ff5c459e97a1f4cdc8c4d0ed503230ac98b5fc0495cda29a"
+  ],
+  "coreMethod": "abc377-g「Edit to Match」では、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
+    "Edit to Match 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "Trie"],
+  "implementationConcerns": [
+    "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。"
+  ],
+  "outcomeCandidates": [
+    "Edit to Match 型の 文字列の prefix・suffix と一致関係に対し、Trieを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc264-g",
+  "contestId": "abc264",
+  "slotLabel": "G",
+  "officialTaskId": "abc264_g",
+  "title": "String Fair",
+  "officialUrl": "https://atcoder.jp/contests/abc264/tasks/abc264_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 18278; N is an integer.; T_i is a string of length between 1 and 3 consisting of lowercase English letters.; i \\neq j \\Rightarrow T_i \\neq T_j; -10^9 \\leq P_i \\leq 10^9; P_i is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f",
+    "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc310-e",
+  "contestId": "abc310",
+  "slotLabel": "E",
+  "officialTaskId": "abc310_e",
+  "title": "NAND repeatedly",
+  "officialUrl": "https://atcoder.jp/contests/abc310/tasks/abc310_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq10^6; S is a string of length N consisting of 0 and 1.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc310-e-problem-f2927b0359bb36b1994aa8571b67f18c439768beab5d4039fef78349c294794b",
+    "source-abc310-editorial-6784-a46512a53029c8d50e7fcb5089853b29b9081838e7484e6853edbf730cfbb93c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

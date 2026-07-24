@@ -1,0 +1,20 @@
+{
+  "problemId": "abc410-g",
+  "sourceRevisionIds": [
+    "source-abc410-editorial-13206-e2fbdc9a39a7edd04e902742f5f6bd3566f61c63a1fceb56b9d1afdb1158bc5f",
+    "source-abc410-g-problem-3028d18c1c027682e0605916145d5cdb51cd071d32e88766adf40142fdc4f9c4"
+  ],
+  "coreMethod": "abc410-g「Longest Chord Chain」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+    "Longest Chord Chain 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "全探索と候補数の上界評価"],
+  "implementationConcerns": ["同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。"],
+  "outcomeCandidates": [
+    "Longest Chord Chain 型の 区間端点と包含関係に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

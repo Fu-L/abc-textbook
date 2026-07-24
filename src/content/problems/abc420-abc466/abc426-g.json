@@ -1,0 +1,20 @@
+{
+  "id": "abc426-g",
+  "contestId": "abc426",
+  "slotLabel": "G",
+  "officialTaskId": "abc426_g",
+  "title": "Range Knapsack Query",
+  "officialUrl": "https://atcoder.jp/contests/abc426/tasks/abc426_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 2\\times 10^4; 1\\leq Q \\leq 2\\times 10^5; 1\\leq W_i \\leq 500; 1\\leq V_i \\leq 10^9; 1\\leq L_j \\leq R_j \\leq N; 1\\leq C_j \\leq 500; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc426-g-problem-80a35605001b68778e1e50ec302320928b9098d034248db93b8edfa8cf50ffc8",
+    "source-abc426-editorial-14152-f056049ecde829dec68a330e8a32e5f30cc4fa20790da1a4bcfe72cb66623b15"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

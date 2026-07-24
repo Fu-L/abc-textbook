@@ -1,0 +1,20 @@
+{
+  "id": "abc397-e",
+  "contestId": "abc397",
+  "slotLabel": "E",
+  "officialTaskId": "abc397_e",
+  "title": "Path Decomposition of a Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc397/tasks/abc397_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N; 1 \\leq K; NK \\leq 2 \\times 10^5; 1 \\leq u_i < v_i \\leq NK; The given graph is a tree.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc397-e-problem-6391988738ab7ffddb6170482d1b9a39b433f5fe46fbe0d30cd85ae1f62672dc",
+    "source-abc397-editorial-12452-6f1addea97f53055105b3c7b3d938e0577f71b2db53329cc44e477b36745c994"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

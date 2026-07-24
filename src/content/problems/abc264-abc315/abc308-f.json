@@ -1,0 +1,20 @@
+{
+  "id": "abc308-f",
+  "contestId": "abc308",
+  "slotLabel": "F",
+  "officialTaskId": "abc308_f",
+  "title": "Vouchers",
+  "officialUrl": "https://atcoder.jp/contests/abc308/tasks/abc308_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N,M\\leq 2\\times 10^5; 1\\leq P_i\\leq 10^9; 1\\leq D_i \\leq L_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc308-f-problem-1aa0efcfc13890447bf2c87ac81e1acace336befecdcabcb51d676ba83dd987a",
+    "source-abc308-editorial-6706-55d3ddad700f31c3b0a39ef7482a7f89e8a64d0bce740d6b153ec0f6afb6bdc7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

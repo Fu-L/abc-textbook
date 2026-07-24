@@ -1,0 +1,21 @@
+{
+  "id": "abc287",
+  "number": 287,
+  "title": "UNIQUE VISION Programming Contest 2023 New Year (AtCoder Beginner Contest 287)",
+  "startedAt": "2023-01-28T21:00:00+09:00",
+  "endedAt": "2023-01-28T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc287",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc287_a",
+    "abc287_b",
+    "abc287_c",
+    "abc287_d",
+    "abc287_e",
+    "abc287_f",
+    "abc287_g",
+    "abc287_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc287-task-list-d0ea91cf6fc9a78920512e270ea39969069e954929b855b8c76d3a44514348fc",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

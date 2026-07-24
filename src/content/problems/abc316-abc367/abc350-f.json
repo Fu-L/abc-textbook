@@ -1,0 +1,20 @@
+{
+  "id": "abc350-f",
+  "contestId": "abc350",
+  "slotLabel": "F",
+  "officialTaskId": "abc350_f",
+  "title": "Transpose",
+  "officialUrl": "https://atcoder.jp/contests/abc350/tasks/abc350_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le |S| \\le 5 \\times 10^5; S consists of uppercase and lowercase English letters, (, and ).; The parentheses in S are properly matched.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc350-f-problem-4739078c1c1a4520eff726101b57fa7e3fd82c645cc07c657b265f658b31d0d6",
+    "source-abc350-editorial-9820-549515ed8d09eb95e0a434d4ec275e0301e82b6916862a383d68a0842b756fd5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

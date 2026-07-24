@@ -1,0 +1,20 @@
+{
+  "id": "abc439",
+  "number": 439,
+  "title": "AtCoder Beginner Contest 439",
+  "startedAt": "2026-01-03T21:00:00+09:00",
+  "endedAt": "2026-01-03T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc439",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc439_a",
+    "abc439_b",
+    "abc439_c",
+    "abc439_d",
+    "abc439_e",
+    "abc439_f",
+    "abc439_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc439-task-list-9a0679a3cd81d40dab4514940315b93981d26770e9646ec514448628ff60f48f",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

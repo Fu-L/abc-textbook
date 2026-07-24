@@ -1,0 +1,20 @@
+{
+  "id": "abc391-e",
+  "contestId": "abc391",
+  "slotLabel": "E",
+  "officialTaskId": "abc391_e",
+  "title": "Hierarchical Majority Vote",
+  "officialUrl": "https://atcoder.jp/contests/abc391/tasks/abc391_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer with 1 \\leq N \\leq 13.; A is a string of length 3^N consisting of 0 and 1.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9",
+    "source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

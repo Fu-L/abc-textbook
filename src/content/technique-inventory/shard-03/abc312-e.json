@@ -1,0 +1,20 @@
+{
+  "problemId": "abc312-e",
+  "sourceRevisionIds": [
+    "source-abc312-e-problem-9e0049f07c73c21ea4269f199f2d74e3ab3bcc13ee7fe4ae923c890531a8d239",
+    "source-abc312-editorial-6838-166d3873dc17293a944a644e428df692fc57fb699b15243d02cb33c7cd219af8"
+  ],
+  "coreMethod": "abc312-e「Tangency of Cuboids」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+    "Tangency of Cuboids 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["全探索と候補数の上界評価"],
+  "implementationConcerns": ["同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。"],
+  "outcomeCandidates": [
+    "Tangency of Cuboids 型の問題に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc239-g",
+  "sourceRevisionIds": [
+    "source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838",
+    "source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe"
+  ],
+  "coreMethod": "abc239-g「Builder Takahashi」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+    "Builder Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "最大流・最小カット定理"],
+  "implementationConcerns": ["有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。"],
+  "outcomeCandidates": [
+    "Builder Takahashi 型の 頂点と辺からなる状態グラフに対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc456-g",
+  "sourceRevisionIds": [
+    "source-abc456-editorial-19853-85c25e151a71ee941f2b1cd32f444f6f1c74dc4e15b57ca939670e623d7db1ae",
+    "source-abc456-g-problem-2c386fec87007ddfba9b7c501fd2d26ba3aa37f87bc2f8f493ebe2ece0f8e9cb"
+  ],
+  "coreMethod": "abc456-g「Count Holidays」では、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "係数比較により元の再帰・畳み込みと冪級数恒等式が次数ごとに同値であることを示す。",
+    "Count Holidays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "形式的冪級数"],
+  "implementationConcerns": [
+    "必要次数で毎回 truncate し、定数項が逆元や対数の前提を満たすか確認する。"
+  ],
+  "outcomeCandidates": [
+    "Count Holidays 型の 文字列の prefix・suffix と一致関係に対し、形式的冪級数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

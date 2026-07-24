@@ -1,0 +1,20 @@
+{
+  "problemId": "abc265-f",
+  "sourceRevisionIds": [
+    "source-abc265-editorial-4680-0bbdbb3200c34e8acb881cfadc8bfc252fd0b57bdc73888428aa846296363ee6",
+    "source-abc265-f-problem-c6b77bc325b288f3569ccda1bcbe0cb7350d67c1e0f56c3511104dfac712e57b"
+  ],
+  "coreMethod": "abc265-f「Manhattan Cafe」では、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+    "Manhattan Cafe 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "累積和と差分"],
+  "implementationConcerns": ["半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。"],
+  "outcomeCandidates": [
+    "Manhattan Cafe 型の 整数の約数・剰余構造に対し、累積和と差分を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

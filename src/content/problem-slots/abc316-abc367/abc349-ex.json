@@ -1,0 +1,12 @@
+{
+  "contestId": "abc349",
+  "label": "Ex",
+  "officialTaskId": null,
+  "officialOrder": null,
+  "availability": "official_absent",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": null,
+  "sourceRevisionId": "source-abc349-task-list-c8e41915f7a45ab3baa4b6a1d6a2d6e61a8a3ea43b639e9f179278f4cf87d173",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

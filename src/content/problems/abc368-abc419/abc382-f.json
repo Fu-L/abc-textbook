@@ -1,0 +1,20 @@
+{
+  "id": "abc382-f",
+  "contestId": "abc382",
+  "slotLabel": "F",
+  "officialTaskId": "abc382_f",
+  "title": "Falling Bars",
+  "officialUrl": "https://atcoder.jp/contests/abc382/tasks/abc382_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W \\leq 2 \\times 10^5; 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq R_i \\leq H; 1 \\leq C_i \\leq W; 1 \\leq L_i \\leq W - C_i + 1; In the initial state, there is no cell occupied by two different bars.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc382-f-problem-3ba32cb296718a12fbaaced8b18b8752ca1051e7437047ad000ce8c979c72c68",
+    "source-abc382-editorial-11476-0492bb268332837af972819863dd94fa5bf870e8304d6ff03347d414bd5f4cff"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

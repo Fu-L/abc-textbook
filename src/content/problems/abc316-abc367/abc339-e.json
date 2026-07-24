@@ -1,0 +1,20 @@
+{
+  "id": "abc339-e",
+  "contestId": "abc339",
+  "slotLabel": "E",
+  "officialTaskId": "abc339_e",
+  "title": "Smooth Subsequence",
+  "officialUrl": "https://atcoder.jp/contests/abc339/tasks/abc339_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 0 \\leq D \\leq 5 \\times 10^5; 1 \\leq A_i \\leq 5 \\times 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd",
+    "source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

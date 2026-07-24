@@ -1,0 +1,20 @@
+{
+  "id": "abc244-ex",
+  "contestId": "abc244",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc244_h",
+  "title": "Linear Maximization",
+  "officialUrl": "https://atcoder.jp/contests/abc244/tasks/abc244_h",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1≤Q≤2 \\times 10^5; |X_i|, |Y_i|, |A_i|, |B_i| ≤10^9; If i ≠ j, then (X_i, Y_i) ≠ (X_j, Y_j).",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
+    "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

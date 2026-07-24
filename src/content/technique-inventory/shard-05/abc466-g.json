@@ -1,0 +1,22 @@
+{
+  "problemId": "abc466-g",
+  "sourceRevisionIds": [
+    "source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6",
+    "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"
+  ],
+  "coreMethod": "abc466-g「Segment Sum Constraints」では、上位桁から tight・leading-zero・必要な集約値を状態に持つ digit DP を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ prefix 状態以降の選択肢は一致し、tight が上限との大小関係を過不足なく表す。",
+    "Segment Sum Constraints 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "桁 DP"],
+  "implementationConcerns": [
+    "leading zero を通常の数字 0 と区別し、上限を含む境界遷移を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Segment Sum Constraints 型の 区間端点と包含関係に対し、桁 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

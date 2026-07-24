@@ -1,0 +1,21 @@
+{
+  "id": "abc266",
+  "number": 266,
+  "title": "AtCoder Beginner Contest 266",
+  "startedAt": "2022-08-27T21:00:00+09:00",
+  "endedAt": "2022-08-27T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc266",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc266_a",
+    "abc266_b",
+    "abc266_c",
+    "abc266_d",
+    "abc266_e",
+    "abc266_f",
+    "abc266_g",
+    "abc266_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc266-task-list-1c4f8973a14d840904705dd19e7035767eb6da7c1df6d23e844f40fbf567e636",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

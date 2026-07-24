@@ -1,0 +1,20 @@
+{
+  "id": "abc279-g",
+  "contestId": "abc279",
+  "slotLabel": "G",
+  "officialTaskId": "abc279_g",
+  "title": "At Most 2 Colors",
+  "officialUrl": "https://atcoder.jp/contests/abc279/tasks/abc279_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 2 \\le K \\le N \\le 10^6; 1 \\le C \\le 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc279-g-problem-cc853b7c4b00211cc7d49167491f5722ffaf3f56422c2cc4d834a52034cb8df3",
+    "source-abc279-editorial-5285-60c40c2102ebbe99f94ec9139e99cf092a9f12cfd859d5c5fbe878d1c1671b60"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

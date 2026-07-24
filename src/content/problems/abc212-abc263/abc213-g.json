@@ -1,0 +1,20 @@
+{
+  "id": "abc213-g",
+  "contestId": "abc213",
+  "slotLabel": "G",
+  "officialTaskId": "abc213_g",
+  "title": "Connectivity 2",
+  "officialUrl": "https://atcoder.jp/contests/abc213/tasks/abc213_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 17; 0 \\leq M \\leq \\frac{N(N-1)}{2}; 1 \\leq a_i \\lt b_i \\leq N; (a_i, b_i) \\neq (a_j, b_j) if i \\neq j.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2",
+    "source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc454-e",
+  "sourceRevisionIds": [
+    "source-abc454-e-problem-926f64349f9bacfad7ce606af35dd93eff1ebb06c061b88c4938da52cb11b5a3",
+    "source-abc454-editorial-19007-ae18eff082434ecb90bf56be028eceb50ec7840c65d922f42903b01f762b8f62"
+  ],
+  "coreMethod": "abc454-e「LRUD Moving」では、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "追加部分が既存構成と衝突せず、始点・終点・被覆条件を保つことをサイズに関する帰納法で示す。",
+    "LRUD Moving 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "再帰的構成と帰納法"],
+  "implementationConcerns": [
+    "最小幅の基底ケース、行列の転置、再帰で変換した終点座標を個別に確認する。"
+  ],
+  "outcomeCandidates": [
+    "LRUD Moving 型の 盤面上の位置と局所遷移に対し、再帰的構成と帰納法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

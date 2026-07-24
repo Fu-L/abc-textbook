@@ -1,0 +1,22 @@
+{
+  "problemId": "abc230-h",
+  "sourceRevisionIds": [
+    "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
+    "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+  ],
+  "coreMethod": "abc230-h「Bullion」では、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "係数比較により元の再帰・畳み込みと冪級数恒等式が次数ごとに同値であることを示す。",
+    "Bullion 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "形式的冪級数"],
+  "implementationConcerns": [
+    "必要次数で毎回 truncate し、定数項が逆元や対数の前提を満たすか確認する。"
+  ],
+  "outcomeCandidates": [
+    "Bullion 型の 整数の約数・剰余構造に対し、形式的冪級数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

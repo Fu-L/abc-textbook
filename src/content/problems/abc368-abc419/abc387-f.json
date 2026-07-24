@@ -1,0 +1,20 @@
+{
+  "id": "abc387-f",
+  "contestId": "abc387",
+  "slotLabel": "F",
+  "officialTaskId": "abc387_f",
+  "title": "Count Arrays",
+  "officialUrl": "https://atcoder.jp/contests/abc387/tasks/abc387_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, M \\leq 2025; 1 \\leq A_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc387-f-problem-d8df2e613ad268786b4f640f24a45e1357a5898c07726be951026680a2666c16",
+    "source-abc387-editorial-11834-86e47cdfbb55d84752bd9b893e3702857efbcfb3dfa7d6c99cfe7f66dac7e971"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

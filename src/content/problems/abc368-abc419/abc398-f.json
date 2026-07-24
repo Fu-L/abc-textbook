@@ -1,0 +1,20 @@
+{
+  "id": "abc398-f",
+  "contestId": "abc398",
+  "slotLabel": "F",
+  "officialTaskId": "abc398_f",
+  "title": "ABCBA",
+  "officialUrl": "https://atcoder.jp/contests/abc398/tasks/abc398_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length between 1 and 500000, inclusive, consisting of uppercase English letters.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc398-f-problem-c396893f0e5336d3421eef21e366c3e05c35d3dfc955c0f3248dc124818a60eb",
+    "source-abc398-editorial-12501-01e1edb514d0ffe21194f92add6db7cc726417d4a9fa6e2b794adb918f94727f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

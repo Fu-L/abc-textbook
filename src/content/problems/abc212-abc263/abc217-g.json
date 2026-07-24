@@ -1,0 +1,20 @@
+{
+  "id": "abc217-g",
+  "contestId": "abc217",
+  "slotLabel": "G",
+  "officialTaskId": "abc217_g",
+  "title": "Groups",
+  "officialUrl": "https://atcoder.jp/contests/abc217/tasks/abc217_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 5000; 2 \\leq M \\leq N; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555",
+    "source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

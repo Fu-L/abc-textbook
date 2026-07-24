@@ -1,0 +1,22 @@
+{
+  "problemId": "abc456-e",
+  "sourceRevisionIds": [
+    "source-abc456-e-problem-c3e51b63fd40c2ce2328caafad47b2b781ce1afa77274de1f82ff6145927c238",
+    "source-abc456-editorial-19849-c986ee8612d12ce480a296e55c2761fbd42c85ed54d8d94616a63d4505cc0d52"
+  ],
+  "coreMethod": "abc456-e「Endless Holidays」では、依存関係を DAG として表し、トポロジカル順に値を伝播する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
+    "Endless Holidays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "DAG とトポロジカル順序"],
+  "implementationConcerns": [
+    "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。"
+  ],
+  "outcomeCandidates": [
+    "Endless Holidays 型の 文字列の prefix・suffix と一致関係に対し、DAG とトポロジカル順序を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

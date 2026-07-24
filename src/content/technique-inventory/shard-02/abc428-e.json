@@ -1,0 +1,22 @@
+{
+  "problemId": "abc428-e",
+  "sourceRevisionIds": [
+    "source-abc428-e-problem-7d929dab8a998eb78a89669be62c9bd9e4d245a200a45e26b319d527a61f76b9",
+    "source-abc428-editorial-14240-d77d5666ac1548841eaa7c0c01d828cf2fec5a26f19012a4801b34b10a69a3aa"
+  ],
+  "coreMethod": "abc428-e「Farthest Vertex」では、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各有向辺の部分問題を辺の反対側だけから合成すれば、根を移しても必要な寄与を重複なく再利用できる。",
+    "Farthest Vertex 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "全方位木 DP"],
+  "implementationConcerns": [
+    "単位元と合成順序を明示し、子を除いた値を prefix・suffix から構成する。"
+  ],
+  "outcomeCandidates": [
+    "Farthest Vertex 型の 根付き木・部分木・パスの関係に対し、全方位木 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

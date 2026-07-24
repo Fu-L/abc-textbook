@@ -1,0 +1,20 @@
+{
+  "id": "abc323-f",
+  "contestId": "abc323",
+  "slotLabel": "F",
+  "officialTaskId": "abc323_f",
+  "title": "Push and Carry",
+  "officialUrl": "https://atcoder.jp/contests/abc323/tasks/abc323_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: -10^{17}\\leq X_A,Y_A,X_B,Y_B,X_C,Y_C\\leq 10^{17}; (X_A,Y_A)\\neq (X_B,Y_B); (X_B,Y_B)\\neq (X_C,Y_C); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc323-f-problem-3ff85140a4659479a5b62f24de1ad91652ffa3d65987caf1dadff61e5348d6f7",
+    "source-abc323-editorial-7358-370aebf0591df8f5c36451aa6f2f5067c6c01a5d3283a77333bcfc0fdf0c9b30"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

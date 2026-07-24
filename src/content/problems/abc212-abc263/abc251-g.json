@@ -1,0 +1,20 @@
+{
+  "id": "abc251-g",
+  "contestId": "abc251",
+  "slotLabel": "G",
+  "officialTaskId": "abc251_g",
+  "title": "Intersection of Polygons",
+  "officialUrl": "https://atcoder.jp/contests/abc251/tasks/abc251_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 50; 1 \\leq M \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; -10^8 \\leq x_i, y_i \\leq 10^8; -10^8 \\leq u_i, v_i \\leq 10^8; -10^8 \\leq a_i, b_i \\leq 10^8; All values in input are integers.; (x_1, y_1), (x_2, y_2), \\ldots, (x_N, y_N) forms a convex N-gon in the counterclockwise order.; Each interior angle of the polygon P is less than 180 degrees.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc251-g-problem-ed1514ba44cff749adc79cbdfd6994026e15dfd7a7cc482f7ea929e03c45625c",
+    "source-abc251-editorial-3961-2a9bef4a1862573769c0974a139227410cfe23c0b17110582e5c2dd0790c3413"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

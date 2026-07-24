@@ -1,0 +1,20 @@
+{
+  "id": "abc293-ex",
+  "contestId": "abc293",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc293_h",
+  "title": "Optimal Path Decomposition",
+  "officialUrl": "https://atcoder.jp/contests/abc293/tasks/abc293_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i, B_i \\leq N; The given graph is a tree.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc293-ex-problem-a073d501650d2242c62acd73265aeb8e9e62825f1dbe51a2e2cbb5363343f6b9",
+    "source-abc293-editorial-5964-fa661f02f6876e8896f80d4179788d50bb5a6502ede71ab300bd6a35945c80c9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

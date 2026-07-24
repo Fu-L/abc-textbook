@@ -1,0 +1,20 @@
+{
+  "problemId": "abc378-e",
+  "sourceRevisionIds": [
+    "source-abc378-e-problem-455f55c529853840624b25849197cee4c28e915574c44a8492c3d9fcd9bb42ef",
+    "source-abc378-editorial-11289-eaba34e24cab47788301f40dea4d5dcb36caf39e402be420a4e51caceff84104"
+  ],
+  "coreMethod": "abc378-e「Mod Sigma Problem」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+    "Mod Sigma Problem 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "Fenwick tree"],
+  "implementationConcerns": ["内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"],
+  "outcomeCandidates": [
+    "Mod Sigma Problem 型の 列の順序と prefix 状態に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc282-f",
+  "contestId": "abc282",
+  "slotLabel": "F",
+  "officialTaskId": "abc282_f",
+  "title": "Union of Two Sets",
+  "officialUrl": "https://atcoder.jp/contests/abc282/tasks/abc282_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 4000; 1 \\leq Q \\leq 10^5; 1 \\leq L \\leq R \\leq N; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc282-f-problem-86da67b53a7e864329b60455cddbbc086b4f398d45a9087c6e381fc9847ec1d8",
+    "source-abc282-editorial-5403-a6fc1b073b674859f239b20188df61ec3a08834c8b5f8c17af1ca21e9ccd56e4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

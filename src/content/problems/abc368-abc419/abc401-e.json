@@ -1,0 +1,20 @@
+{
+  "id": "abc401-e",
+  "contestId": "abc401",
+  "slotLabel": "E",
+  "officialTaskId": "abc401_e",
+  "title": "Reachable Set",
+  "officialUrl": "https://atcoder.jp/contests/abc401/tasks/abc401_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^{5}; 0 \\le M \\le 3 \\times 10^{5}; 1 \\le u_i < v_i \\le N\\ (1 \\le i \\le M); (u_i,v_i) \\ne (u_j,v_j)\\ (1 \\le i < j \\le M); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc401-e-problem-f5b4b49bf6752971d0100ab55024ebd0faf72125b6e54b66fe4e4eecd4f53757",
+    "source-abc401-editorial-12693-13b4b3a7596f5056fd2c1375310ea6e7add2d326705300c44e9b4e72b7d0b1bf"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

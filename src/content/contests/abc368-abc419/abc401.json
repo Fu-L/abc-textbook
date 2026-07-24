@@ -1,0 +1,20 @@
+{
+  "id": "abc401",
+  "number": 401,
+  "title": "AtCoder Beginner Contest 401",
+  "startedAt": "2025-04-12T21:00:00+09:00",
+  "endedAt": "2025-04-12T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc401",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc401_a",
+    "abc401_b",
+    "abc401_c",
+    "abc401_d",
+    "abc401_e",
+    "abc401_f",
+    "abc401_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc401-task-list-6b46913a9c68367b0c11c28ca61a18fbfcbbba00493b770882c0414505a51c78",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

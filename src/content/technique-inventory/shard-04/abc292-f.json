@@ -1,0 +1,25 @@
+{
+  "problemId": "abc292-f",
+  "sourceRevisionIds": [
+    "source-abc292-editorial-5884-ca8674d8c02ba4e9de86ab56ed2fc793bfb63f2e4110e636666fa34db9dee257",
+    "source-abc292-f-problem-14684cc6ad83cda8b2e7dfa0094c5b55b180871141e9ef06070428a0f66e1d08"
+  ],
+  "coreMethod": "abc292-f「Regular Triangle Inside a Rectangle」では、反復移動を一周期の変位ベクトルによる平行移動同値類へ分け、各類の訪問区間の和を数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "一周期後の位置は常に同じ変位だけ移るため、変位方向に直交する不変量ごとに訪問点が一次元区間へ対応する。",
+    "Regular Triangle Inside a Rectangle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": [
+    "整数論の基本的な割り切れ関係",
+    "格子点と gcd による方向ベクトル正規化"
+  ],
+  "implementationConcerns": [
+    "総変位が零の場合を分離し、負方向を含む同値類 key と区間端点を正規化する。"
+  ],
+  "outcomeCandidates": [
+    "Regular Triangle Inside a Rectangle 型の 整数の約数・剰余構造に対し、格子点と gcd による方向ベクトル正規化を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc380-e",
+  "contestId": "abc380",
+  "slotLabel": "E",
+  "officialTaskId": "abc380_e",
+  "title": "1D Bucket Tool",
+  "officialUrl": "https://atcoder.jp/contests/abc380/tasks/abc380_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; In queries of the first type, 1 \\leq x \\leq N.; In queries of the first and second types, 1 \\leq c \\leq N.; There is at least one query of the second type.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1",
+    "source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

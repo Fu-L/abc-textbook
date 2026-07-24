@@ -1,0 +1,20 @@
+{
+  "problemId": "abc213-e",
+  "sourceRevisionIds": [
+    "source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf",
+    "source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0"
+  ],
+  "coreMethod": "abc213-e「Stronger Takahashi」では、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "deque の先頭距離は非減少で、重み 0 の緩和を前、重み 1 を後へ置くことで Dijkstra と同じ確定順を保つ。",
+    "Stronger Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["0-1 BFS"],
+  "implementationConcerns": ["改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。"],
+  "outcomeCandidates": [
+    "Stronger Takahashi 型の問題に対し、0-1 BFSを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

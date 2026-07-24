@@ -1,0 +1,20 @@
+{
+  "id": "abc353-e",
+  "contestId": "abc353",
+  "slotLabel": "E",
+  "officialTaskId": "abc353_e",
+  "title": "Yet Another Sigma Problem",
+  "officialUrl": "https://atcoder.jp/contests/abc353/tasks/abc353_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3\\times 10^5; S_i is a string consisting of lowercase English letters.; 1 \\leq |S_i|; |S_1|+|S_2|+\\ldots+|S_N|\\leq 3\\times 10^5; All input numbers are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc353-e-problem-664ff6752d2dc14f04612070c41408399f4e648f0981d19c455ddc9db9b84432",
+    "source-abc353-editorial-9969-137ec1c5bd08e5a9fce39a58eb3825b744473a3d2ac97cb0be953ee76fae6e09"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

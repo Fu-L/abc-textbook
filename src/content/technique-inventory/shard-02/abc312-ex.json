@@ -1,0 +1,20 @@
+{
+  "problemId": "abc312-ex",
+  "sourceRevisionIds": [
+    "source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6",
+    "source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e"
+  ],
+  "coreMethod": "abc312-ex「snukesnuke」では、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "既知の一致区間内では以前の値を再利用し、区間を越える比較だけが全体で線形回数になる。",
+    "snukesnuke 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "Z algorithm または KMP"],
+  "implementationConcerns": ["連結文字列へ置く separator が入力 alphabet と衝突しないようにする。"],
+  "outcomeCandidates": [
+    "snukesnuke 型の 文字列の prefix・suffix と一致関係に対し、Z algorithm または KMPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

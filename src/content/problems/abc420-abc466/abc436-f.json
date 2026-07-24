@@ -1,0 +1,20 @@
+{
+  "id": "abc436-f",
+  "contestId": "abc436",
+  "slotLabel": "F",
+  "officialTaskId": "abc436_f",
+  "title": "Starry Landscape Photo",
+  "officialUrl": "https://atcoder.jp/contests/abc436/tasks/abc436_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le5\\times10 ^ 5; 1\\le B _ i\\le N\\ (1\\le i\\le N); B _ i\\ne B _ j\\ (1\\le i\\lt j\\le N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc436-f-problem-da1ce3721b6595927abdc1e76b7d373d4d10200091df978ad88750845d69f5d0",
+    "source-abc436-editorial-14750-acc54c52c47bca169df5838392016e5cf1f4edbaae92e4ed128b61e5e02cc86e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc257-e",
+  "sourceRevisionIds": [
+    "source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0",
+    "source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b"
+  ],
+  "coreMethod": "abc257-e「Addition and Multiplication 2」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+    "Addition and Multiplication 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "greedy choice と交換論法"],
+  "implementationConcerns": ["同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。"],
+  "outcomeCandidates": [
+    "Addition and Multiplication 2 型の 整数の約数・剰余構造に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

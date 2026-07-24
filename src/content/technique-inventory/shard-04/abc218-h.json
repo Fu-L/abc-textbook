@@ -1,0 +1,20 @@
+{
+  "problemId": "abc218-h",
+  "sourceRevisionIds": [
+    "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
+    "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
+  ],
+  "coreMethod": "abc218-h「Red and Blue Lamps」では、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
+    "Red and Blue Lamps 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "畳み込みと NTT"],
+  "implementationConcerns": ["必要な係数長、padding 長、法が NTT に対応するかを確認する。"],
+  "outcomeCandidates": [
+    "Red and Blue Lamps 型の 区間端点と包含関係に対し、畳み込みと NTTを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

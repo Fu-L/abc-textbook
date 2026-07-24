@@ -1,0 +1,20 @@
+{
+  "id": "abc375-g",
+  "contestId": "abc375",
+  "slotLabel": "G",
+  "officialTaskId": "abc375_g",
+  "title": "Road Blocked 2",
+  "officialUrl": "https://atcoder.jp/contests/abc375/tasks/abc375_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; 1 \\leq A_i < B_i \\leq N; All pairs (A_i, B_i) are distinct.; 1 \\leq C_i \\leq 10^9; City N can be reached from city 1 when all roads are passable.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f",
+    "source-abc375-editorial-11133-4b7e5cfe9584c4fb06ab138b27bf0a6a43fb3b3849ea866173f55f2402ca4a90"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc278-e",
+  "contestId": "abc278",
+  "slotLabel": "E",
+  "officialTaskId": "abc278_e",
+  "title": "Grid Filling",
+  "officialUrl": "https://atcoder.jp/contests/abc278/tasks/abc278_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W,N \\leq 300; 1 \\leq h \\leq H; 1 \\leq w \\leq W; (h,w)\\neq(H,W); 1 \\leq A _ {i,j} \\leq N\\ (1\\leq i\\leq H,1\\leq j\\leq W); All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc278-e-problem-10674eb9290e2dc650f840ffa0ef8850b60b66a1125ee5faf3d3e8a5e280b1a9",
+    "source-abc278-editorial-5234-56a3d9f81b47d9ae6267aafcf1b29b21bec3c877e8bc9b0d4f078948018b65c4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

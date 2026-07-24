@@ -1,0 +1,20 @@
+{
+  "problemId": "abc263-g",
+  "sourceRevisionIds": [
+    "source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2",
+    "source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132"
+  ],
+  "coreMethod": "abc263-g「Erasing Prime Pairs」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+    "Erasing Prime Pairs 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "最大流・最小カット定理"],
+  "implementationConcerns": ["有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。"],
+  "outcomeCandidates": [
+    "Erasing Prime Pairs 型の 整数の約数・剰余構造に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

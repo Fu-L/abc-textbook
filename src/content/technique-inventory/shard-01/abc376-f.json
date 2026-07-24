@@ -1,0 +1,22 @@
+{
+  "problemId": "abc376-f",
+  "sourceRevisionIds": [
+    "source-abc376-editorial-11195-040762248031ac7680f47cb7c002938ab7b4625bfbd63b69822874e35813e086",
+    "source-abc376-f-problem-f65a441087b389494550c813f98e5ae8fd78b78dcb1a9e01ef1483924261a2e0"
+  ],
+  "coreMethod": "abc376-f「Hands on Ring (Hard)」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+    "Hands on Ring (Hard) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
+  "outcomeCandidates": [
+    "Hands on Ring (Hard) 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

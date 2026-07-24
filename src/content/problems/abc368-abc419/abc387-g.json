@@ -1,0 +1,20 @@
+{
+  "id": "abc387-g",
+  "contestId": "abc387",
+  "slotLabel": "G",
+  "officialTaskId": "abc387_g",
+  "title": "Prime Circuit",
+  "officialUrl": "https://atcoder.jp/contests/abc387/tasks/abc387_g",
+  "constraintsSummary": "Time limit: 12 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 2.5 \\times 10^5, inclusive.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc387-g-problem-eecc85664ab281a340433ab68292e3f5b529d75e82f592f22bdc8746d35a2043",
+    "source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

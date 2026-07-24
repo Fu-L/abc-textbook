@@ -1,0 +1,20 @@
+{
+  "id": "abc424-f",
+  "contestId": "abc424",
+  "slotLabel": "F",
+  "officialTaskId": "abc424_f",
+  "title": "Adding Chords",
+  "officialUrl": "https://atcoder.jp/contests/abc424/tasks/abc424_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^6; 1 \\leq Q \\leq 3\\times 10^5; 1 \\leq A_i < B_i \\leq N; The 2Q integers A_1,\\ldots,A_Q,B_1,\\ldots,B_Q are pairwise distinct.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc424-f-problem-797d4fe9537e11466488967b83ee21792e5dfc5dafc05436240d37242ab7e797",
+    "source-abc424-editorial-13900-cbe65d1d291e222fd5af22288a9a30412b5bcb9f58985518daf446706ecbc60b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

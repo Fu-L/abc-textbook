@@ -1,0 +1,20 @@
+{
+  "id": "abc304-g",
+  "contestId": "abc304",
+  "slotLabel": "G",
+  "officialTaskId": "abc304_g",
+  "title": "Max of Medians",
+  "officialUrl": "https://atcoder.jp/contests/abc304/tasks/abc304_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 0 \\leq A_i < 2^{30}; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a",
+    "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

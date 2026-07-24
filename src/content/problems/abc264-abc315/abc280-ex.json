@@ -1,0 +1,20 @@
+{
+  "id": "abc280-ex",
+  "contestId": "abc280",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc280_h",
+  "title": "Substring Sort",
+  "officialUrl": "https://atcoder.jp/contests/abc280/tasks/abc280_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq \\lvert S_i\\rvert \\leq 10^5; \\displaystyle\\sum_{i=1}^N \\lvert S_i\\rvert\\leq 10^5; 1 \\leq Q \\leq 2\\times 10^5; 1 \\leq x_1<x_2<\\cdots<x_Q \\leq \\displaystyle\\sum_{i=1}^N \\frac{|S_i|(|S_i|+1)}{2}; N,Q,x_1,x_2,\\ldots,x_Q are integers.; S_i is a string consisting of lowercase English letters.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc280-ex-problem-82d5cbd4eb164acf4fca03545ef6fead6bb70019652981eb20d6143b041a7b14",
+    "source-abc280-editorial-5332-5fe0f42d10a24b904294ed89de5b1f424075902dd282d2607ff3986a8efa79c5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

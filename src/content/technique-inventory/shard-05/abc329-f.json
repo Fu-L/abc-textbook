@@ -1,0 +1,22 @@
+{
+  "problemId": "abc329-f",
+  "sourceRevisionIds": [
+    "source-abc329-editorial-7729-ea6187e9d38477f2f22c6ba9fbced4b85f50530bded67a053ee6c5af570b7d6b",
+    "source-abc329-f-problem-3681f3e42c982f349fc3afb43aeb531e6783de03991288d25354a68c5d0ac2c4"
+  ],
+  "coreMethod": "abc329-f「Colored Ball」では、各箱の色集合を保持し、小さい集合を大きい集合へ併合する small-to-large merge を行う。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "要素が移されるたび所属集合サイズが少なくとも倍になるので、各要素の移動回数は高々対数回になる。",
+    "Colored Ball 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["small-to-large merge"],
+  "implementationConcerns": [
+    "集合本体を swap してから小さい側を走査し、移動元を空にする問題仕様を保つ。"
+  ],
+  "outcomeCandidates": [
+    "Colored Ball 型の問題に対し、small-to-large mergeを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc224-h",
+  "contestId": "abc224",
+  "slotLabel": "H",
+  "officialTaskId": "abc224_h",
+  "title": "Security Camera 2",
+  "officialUrl": "https://atcoder.jp/contests/abc224/tasks/abc224_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le L,R \\le 100; 1 \\le A_i,B_i \\le 10; 0 \\le C_{i,j} \\le 100",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59",
+    "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

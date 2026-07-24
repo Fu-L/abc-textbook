@@ -1,0 +1,20 @@
+{
+  "id": "abc246-g",
+  "contestId": "abc246",
+  "slotLabel": "G",
+  "officialTaskId": "abc246_g",
+  "title": "Game on Tree 3",
+  "officialUrl": "https://atcoder.jp/contests/abc246/tasks/abc246_g",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq u_i, v_i \\leq N; The given graph is a tree.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362",
+    "source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

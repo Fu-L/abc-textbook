@@ -1,0 +1,20 @@
+{
+  "id": "abc301-e",
+  "contestId": "abc301",
+  "slotLabel": "E",
+  "officialTaskId": "abc301_e",
+  "title": "Pac-Takahashi",
+  "officialUrl": "https://atcoder.jp/contests/abc301/tasks/abc301_e",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\leq H,W \\leq 300; 1 \\leq T \\leq 2\\times 10^6; H, W, and T are integers.; A_{i,j} is one of S, G, ., #, and o.; Exactly one pair (i,j) satisfies A_{i,j}= S.; Exactly one pair (i,j) satisfies A_{i,j}= G.; At most 18 pairs (i,j) satisfy A_{i,j}= o.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e",
+    "source-abc301-editorial-6343-b11e11924058addc198935bbd91d06286574d2bfb73d521c8b78cb42849fa957"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

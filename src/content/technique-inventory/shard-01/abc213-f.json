@@ -1,0 +1,22 @@
+{
+  "problemId": "abc213-f",
+  "sourceRevisionIds": [
+    "source-abc213-editorial-2391-534c84f6432876508004b5c292c65c02485f600cd78973b126d80cdd50be2a0d",
+    "source-abc213-f-problem-db1b92140a905bd0d6d2a457fed88756303e0d045ee8df1a5f163cd555443a82"
+  ],
+  "coreMethod": "abc213-f「Common Prefixes」では、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "ある文字列と prefix を共有する文字列群は辞書順で連続するため、最長一致する相手は隣接位置にも存在する。",
+    "Common Prefixes 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "辞書順と longest common prefix"],
+  "implementationConcerns": [
+    "元 index を文字列と一緒に保持し、先頭・末尾では存在する片側だけを比較する。"
+  ],
+  "outcomeCandidates": [
+    "Common Prefixes 型の 文字列の prefix・suffix と一致関係に対し、辞書順と longest common prefixを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

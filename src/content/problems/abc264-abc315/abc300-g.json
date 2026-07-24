@@ -1,0 +1,20 @@
+{
+  "id": "abc300-g",
+  "contestId": "abc300",
+  "slotLabel": "G",
+  "officialTaskId": "abc300_g",
+  "title": "P-smooth number",
+  "officialUrl": "https://atcoder.jp/contests/abc300/tasks/abc300_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: N is an integer such that 1 \\le N \\le 10^{16}.; P is a prime such that 2 \\le P \\le 100.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc300-g-problem-a16c13e539b88958dae8d540944e6b9357faeb711b672eb6bf043bd81c0d080b",
+    "source-abc300-editorial-6275-de32447888ea06423b4d3f52d5dc0aff7bb6361d3c92f9f0202a1507ea3f6adf"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

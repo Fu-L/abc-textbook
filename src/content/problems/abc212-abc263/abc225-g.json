@@ -1,0 +1,20 @@
+{
+  "id": "abc225-g",
+  "contestId": "abc225",
+  "slotLabel": "G",
+  "officialTaskId": "abc225_g",
+  "title": "X",
+  "officialUrl": "https://atcoder.jp/contests/abc225/tasks/abc225_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W \\leq 100; 1 \\leq C \\leq 10^9; 1 \\leq A_{i,j} \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22",
+    "source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

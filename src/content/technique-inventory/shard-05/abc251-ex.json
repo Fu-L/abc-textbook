@@ -1,0 +1,22 @@
+{
+  "problemId": "abc251-ex",
+  "sourceRevisionIds": [
+    "source-abc251-editorial-3954-5502e77b9db90e8223bf51820c90da77bdb341a71963b77421a1a563a6336004",
+    "source-abc251-ex-problem-fecc529753f72db31753658d74853da733df6f9c45e94aa18801d577114ab7b0"
+  ],
+  "coreMethod": "abc251-ex「Fill Triangle」では、上位桁から tight・leading-zero・必要な集約値を状態に持つ digit DP を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ prefix 状態以降の選択肢は一致し、tight が上限との大小関係を過不足なく表す。",
+    "Fill Triangle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "桁 DP"],
+  "implementationConcerns": [
+    "leading zero を通常の数字 0 と区別し、上限を含む境界遷移を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Fill Triangle 型の 列の順序と prefix 状態に対し、桁 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

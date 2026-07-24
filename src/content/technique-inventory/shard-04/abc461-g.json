@@ -1,0 +1,20 @@
+{
+  "problemId": "abc461-g",
+  "sourceRevisionIds": [
+    "source-abc461-editorial-21377-bbe98f1e54d9c585f40389632ac677594e1da1c10d52b8a5b2a5da2003b296d7",
+    "source-abc461-g-problem-f09b23c77850cb0ca1d774e0b16ef71739d269ecadb9a8cad130373c532e2a94"
+  ],
+  "coreMethod": "abc461-g「Graph Problem 2026」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+    "Graph Problem 2026 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "最大流・最小カット定理"],
+  "implementationConcerns": ["有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。"],
+  "outcomeCandidates": [
+    "Graph Problem 2026 型の 頂点と辺からなる状態グラフに対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

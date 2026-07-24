@@ -1,0 +1,21 @@
+{
+  "id": "abc282",
+  "number": 282,
+  "title": "HHKB Programming Contest 2022 Winter(AtCoder Beginner Contest 282)",
+  "startedAt": "2022-12-17T21:00:00+09:00",
+  "endedAt": "2022-12-17T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc282",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc282_a",
+    "abc282_b",
+    "abc282_c",
+    "abc282_d",
+    "abc282_e",
+    "abc282_f",
+    "abc282_g",
+    "abc282_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc282-task-list-3326dc9a0a73cb14f595f3065b6e10854227f0d97e3abc7bdaf868bdedb6add9",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

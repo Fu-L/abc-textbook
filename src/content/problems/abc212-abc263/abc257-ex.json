@@ -1,0 +1,20 @@
+{
+  "id": "abc257-ex",
+  "contestId": "abc257",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc257_h",
+  "title": "Dice Sum 2",
+  "officialUrl": "https://atcoder.jp/contests/abc257/tasks/abc257_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 1000; 1 \\leq K \\leq N; 1 \\leq C_i \\leq 10^5; 1 \\leq A_{i,j} \\leq 10^5; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f",
+    "source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

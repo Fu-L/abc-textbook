@@ -1,0 +1,20 @@
+{
+  "problemId": "abc417-e",
+  "sourceRevisionIds": [
+    "source-abc417-e-problem-cea5c0f901c5869c9617734403c1605b07cb4daae4cb08d44ffe2e96ab5de334",
+    "source-abc417-editorial-13571-65acaa3021e80a01a0a423f7d4d2a04e3d780b47e6fb306f13a62da489869e7f"
+  ],
+  "coreMethod": "abc417-e「A Path in A Dictionary」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+    "A Path in A Dictionary 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "深さ優先探索"],
+  "implementationConcerns": ["再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。"],
+  "outcomeCandidates": [
+    "A Path in A Dictionary 型の 頂点と辺からなる状態グラフに対し、深さ優先探索を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

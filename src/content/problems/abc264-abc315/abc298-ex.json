@@ -1,0 +1,20 @@
+{
+  "id": "abc298-ex",
+  "contestId": "abc298",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc298_h",
+  "title": "Sum of Min of Length",
+  "officialUrl": "https://atcoder.jp/contests/abc298/tasks/abc298_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, Q \\leq 2 \\times 10^5; 1 \\leq A_i, B_i, L_i, R_i \\leq N; The given graph is a tree.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc298-ex-problem-306d0f55300f97018ec9802314cff3e14f0ea70b3bf1c58098b6b91d4a31789f",
+    "source-abc298-editorial-6218-40986b7f851ab2196d74d174440ce6ebd7f8d977070f487178d42b543e7d46cd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

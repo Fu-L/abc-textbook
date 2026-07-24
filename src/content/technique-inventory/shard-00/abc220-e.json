@@ -1,0 +1,22 @@
+{
+  "problemId": "abc220-e",
+  "sourceRevisionIds": [
+    "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
+    "source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7"
+  ],
+  "coreMethod": "abc220-e「Distance on Large Perfect Binary Tree」では、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "二進展開した距離だけ祖先へ移動でき、最大の異なる祖先から一段進めば最小共通祖先になる。",
+    "Distance on Large Perfect Binary Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "LCA と binary lifting"],
+  "implementationConcerns": [
+    "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。"
+  ],
+  "outcomeCandidates": [
+    "Distance on Large Perfect Binary Tree 型の 頂点と辺からなる状態グラフに対し、LCA と binary liftingを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

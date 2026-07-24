@@ -1,0 +1,20 @@
+{
+  "problemId": "abc314-ex",
+  "sourceRevisionIds": [
+    "source-abc314-editorial-6958-903fc195f820ea11b2d1c234636b2b3f311e60f34d6d00357ba1bab2b3125787",
+    "source-abc314-ex-problem-e573f2aa9925372ff091f6bb20223906f19c45f10b18478722aef8fc5baa4e85"
+  ],
+  "coreMethod": "abc314-ex「Disk and Segments」では、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "cut property により異なる成分を結ぶ最小辺は安全であり、閉路を避けた採用を繰り返せば最適な全域木になる。",
+    "Disk and Segments 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "最小全域木と cut property"],
+  "implementationConcerns": ["同重み辺の順序が答えへ影響する場合は一括判定してから併合する。"],
+  "outcomeCandidates": [
+    "Disk and Segments 型の 区間端点と包含関係に対し、最小全域木と cut propertyを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

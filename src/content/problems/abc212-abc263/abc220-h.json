@@ -1,0 +1,20 @@
+{
+  "id": "abc220-h",
+  "contestId": "abc220",
+  "slotLabel": "H",
+  "officialTaskId": "abc220_h",
+  "title": "Security Camera",
+  "officialUrl": "https://atcoder.jp/contests/abc220/tasks/abc220_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 40; 1 \\leq M \\leq \\frac{N(N-1)}{2}; 1 \\leq A_i \\lt B_i \\leq N; (A_i,B_i) \\neq (A_j,B_j) if i \\neq j.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da",
+    "source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

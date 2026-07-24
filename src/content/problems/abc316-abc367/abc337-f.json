@@ -1,0 +1,20 @@
+{
+  "id": "abc337-f",
+  "contestId": "abc337",
+  "slotLabel": "F",
+  "officialTaskId": "abc337_f",
+  "title": "Usual Color Ball Problems",
+  "officialUrl": "https://atcoder.jp/contests/abc337/tasks/abc337_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq M, K \\leq N; 1 \\leq C_i \\leq N",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc337-f-problem-ec424f4b73083b657b5d99a1d85b37a7a9d1f374d95d031eb7849c2641b84eaa",
+    "source-abc337-editorial-9141-81f4d2d348ba4cbf459d3850ba9989780768d7db4d1e7d35eb72fa69791fc173"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

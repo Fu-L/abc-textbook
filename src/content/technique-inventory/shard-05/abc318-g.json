@@ -1,0 +1,20 @@
+{
+  "problemId": "abc318-g",
+  "sourceRevisionIds": [
+    "source-abc318-editorial-7085-33833b825d1c9ced27b2d5f524fd6210757fdcc2f6ae23f60bd67dbe31353296",
+    "source-abc318-g-problem-b99eb01993a865b14e04e67ffcb2c77c8384770c173ec51a8f0ebf4b94438268"
+  ],
+  "coreMethod": "abc318-g「Typical Path Problem」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+    "Typical Path Problem 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "最大流・最小カット定理"],
+  "implementationConcerns": ["有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。"],
+  "outcomeCandidates": [
+    "Typical Path Problem 型の 頂点と辺からなる状態グラフに対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

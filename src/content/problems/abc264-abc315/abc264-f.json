@@ -1,0 +1,20 @@
+{
+  "id": "abc264-f",
+  "contestId": "abc264",
+  "slotLabel": "F",
+  "officialTaskId": "abc264_f",
+  "title": "Monochromatic Path",
+  "officialUrl": "https://atcoder.jp/contests/abc264/tasks/abc264_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W \\leq 2000; 1 \\leq R_i \\leq 10^9; 1 \\leq C_j \\leq 10^9; A_{i, j} \\in \\lbrace 0, 1\\rbrace; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6",
+    "source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

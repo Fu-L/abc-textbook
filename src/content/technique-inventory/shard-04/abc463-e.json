@@ -1,0 +1,22 @@
+{
+  "problemId": "abc463-e",
+  "sourceRevisionIds": [
+    "source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837",
+    "source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96"
+  ],
+  "coreMethod": "abc463-e「Roads and Gates」では、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
+    "Roads and Gates 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "Dijkstra 法と緩和"],
+  "implementationConcerns": [
+    "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。"
+  ],
+  "outcomeCandidates": [
+    "Roads and Gates 型の 整数の約数・剰余構造に対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

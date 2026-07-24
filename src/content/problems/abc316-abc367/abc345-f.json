@@ -1,0 +1,20 @@
+{
+  "id": "abc345-f",
+  "contestId": "abc345",
+  "slotLabel": "F",
+  "officialTaskId": "abc345_f",
+  "title": "Many Lamps",
+  "officialUrl": "https://atcoder.jp/contests/abc345/tasks/abc345_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq M \\leq \\min\\left( 2 \\times 10^5, \\frac{N(N-1)}{2} \\right); 0 \\leq K \\leq N; 1 \\leq u_i < v_i \\leq N; The given graph is simple.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc345-f-problem-e058936f6d4cce8ac7c5b99b904a5b93cfeb2f98a0b9d9d7000bfb8e042710e3",
+    "source-abc345-editorial-9558-cb10281ba2d26e522eaef3bebf2b27924a4104f16b20a401b0d5d54fcc969830"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

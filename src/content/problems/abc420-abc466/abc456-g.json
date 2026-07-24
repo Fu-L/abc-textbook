@@ -1,0 +1,20 @@
+{
+  "id": "abc456-g",
+  "contestId": "abc456",
+  "slotLabel": "G",
+  "officialTaskId": "abc456_g",
+  "title": "Count Holidays",
+  "officialUrl": "https://atcoder.jp/contests/abc456/tasks/abc456_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 2 \\times 10^5, inclusive.; S is a string of length N consisting of ., x.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc456-g-problem-2c386fec87007ddfba9b7c501fd2d26ba3aa37f87bc2f8f493ebe2ece0f8e9cb",
+    "source-abc456-editorial-19853-85c25e151a71ee941f2b1cd32f444f6f1c74dc4e15b57ca939670e623d7db1ae"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

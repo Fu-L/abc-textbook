@@ -1,0 +1,20 @@
+{
+  "id": "abc386-g",
+  "contestId": "abc386",
+  "slotLabel": "G",
+  "officialTaskId": "abc386_g",
+  "title": "Many MST",
+  "officialUrl": "https://atcoder.jp/contests/abc386/tasks/abc386_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 500; 1 \\le M \\le 500; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc386-g-problem-4fe3a667a55c7a659d2989372828511e074d4a9b1e7389fd83c4b0b640f28822",
+    "source-abc386-editorial-11690-735344c6a541a928331f8cc43afb46668a5259454f97d0e988843c3e9502bc1c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

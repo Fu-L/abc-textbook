@@ -1,0 +1,20 @@
+{
+  "id": "abc465-g",
+  "contestId": "abc465",
+  "slotLabel": "G",
+  "officialTaskId": "abc465_g",
+  "title": "Sum of Mex of Mod of Linear",
+  "officialUrl": "https://atcoder.jp/contests/abc465/tasks/abc465_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2\\times 10^5; 0\\le C < M \\le 10^9; 1\\le K\\le 10^9; 0\\le A_i < M; 1\\le Q\\le 2\\times 10^5; 1\\le i_q \\le N; 0\\le X_q < M; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc465-g-problem-c6ddec64bca1758e34afa0ef7fcf471fc418429836f6db580b326fc8c5c58601",
+    "source-abc465-editorial-22419-6f16f7f7fa142fb44e1fb7d89af7011ae47ba54d3a47bd611a97a3cadced6d0f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

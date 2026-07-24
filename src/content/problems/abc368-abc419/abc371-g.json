@@ -1,0 +1,20 @@
+{
+  "id": "abc371-g",
+  "contestId": "abc371",
+  "slotLabel": "G",
+  "officialTaskId": "abc371_g",
+  "title": "Lexicographically Smallest Permutation",
+  "officialUrl": "https://atcoder.jp/contests/abc371/tasks/abc371_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 1\\leq P_i\\leq N\\ (1\\leq i\\leq N); P_i\\neq P_j\\ (1\\leq i<j\\leq N); 1\\leq A_i\\leq N\\ (1\\leq i\\leq N); A_i\\neq A_j\\ (1\\leq i<j\\leq N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923",
+    "source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

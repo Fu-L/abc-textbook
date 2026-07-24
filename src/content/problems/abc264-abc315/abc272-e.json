@@ -1,0 +1,20 @@
+{
+  "id": "abc272-e",
+  "contestId": "abc272",
+  "slotLabel": "E",
+  "officialTaskId": "abc272_e",
+  "title": "Add and Mex",
+  "officialUrl": "https://atcoder.jp/contests/abc272/tasks/abc272_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N,M \\leq 2\\times 10^5; -10^9\\leq A_i\\leq 10^9; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade",
+    "source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc232-e",
+  "sourceRevisionIds": [
+    "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+    "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+  ],
+  "coreMethod": "abc232-e「Rook Path」では、現在位置を終点と行一致・列一致するかの4分類へ圧縮し、各分類の総数だけを K 回遷移する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "同じ分類内の cell は対称で以後の遷移数が等しく、各遷移係数は行・列内の行先個数だけで決まる。",
+    "Rook Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["対称性による状態圧縮 DP"],
+  "implementationConcerns": [
+    "X=1 または Y=1 で X-2・Y-2 が負になる項は、到達不能状態との積として安全に扱う。"
+  ],
+  "outcomeCandidates": [
+    "Rook Path 型の問題に対し、対称性による状態圧縮 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

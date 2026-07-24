@@ -1,0 +1,20 @@
+{
+  "id": "abc432-f",
+  "contestId": "abc432",
+  "slotLabel": "F",
+  "officialTaskId": "abc432_f",
+  "title": "Candy Redistribution",
+  "officialUrl": "https://atcoder.jp/contests/abc432/tasks/abc432_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 20; 1 \\leq A_i \\leq 10^8; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc432-f-problem-7f6bf4a691d4fea9c0380d1b3ed3155d978e5981eb5b26b3b020e1585d2ae4c4",
+    "source-abc432-editorial-14577-feebba7751d96a1c9a1985cb9b39f20a2de9e513032215d03d059512feb30c75"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

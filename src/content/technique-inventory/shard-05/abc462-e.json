@@ -1,0 +1,22 @@
+{
+  "problemId": "abc462-e",
+  "sourceRevisionIds": [
+    "source-abc462-e-problem-00806f6d57842b99312dcaefcffc5016befda8ee2283e0605fe7955230afdeb4",
+    "source-abc462-editorial-21400-74eb05e0e855bd0c2c27e61b16b3533c5cc934b55ca3c73f9e7d0ec6974d2236"
+  ],
+  "coreMethod": "abc462-e「Alternating Costs」では、符号・座標・費用の対称性で A≤B, X≤Y へ正規化し、歩数 K ごとの費用を区分一次式にして端点だけ評価する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "各領域では費用が K の一次関数なので最小値は定義域端にあり、対称変換は実行可能路と費用を保存する。",
+    "Alternating Costs 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["対称性と区分線形最適化"],
+  "implementationConcerns": [
+    "X+Y の parity を先に処理し、正規化の swap 後も座標と費用の対応を保つ。"
+  ],
+  "outcomeCandidates": [
+    "Alternating Costs 型の問題に対し、対称性と区分線形最適化を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

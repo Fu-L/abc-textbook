@@ -1,0 +1,22 @@
+{
+  "problemId": "abc419-g",
+  "sourceRevisionIds": [
+    "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+    "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+  ],
+  "coreMethod": "abc419-g「Count Simple Paths 2」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+    "Count Simple Paths 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "組合せ数と二項係数"],
+  "implementationConcerns": [
+    "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Count Simple Paths 2 型の 頂点と辺からなる状態グラフに対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

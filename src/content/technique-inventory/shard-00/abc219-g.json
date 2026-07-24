@@ -1,0 +1,22 @@
+{
+  "problemId": "abc219-g",
+  "sourceRevisionIds": [
+    "source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed",
+    "source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"
+  ],
+  "coreMethod": "abc219-g「Propagation」では、頂点を次数の閾値で heavy と light に分け、低次数更新は隣接先へ即時反映し高次数更新は時刻を遅延保持する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "light 頂点の走査長は閾値未満で、heavy 頂点数は次数和を閾値で割った個数以下になる。",
+    "Propagation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["次数による平方分割"],
+  "implementationConcerns": [
+    "各値の更新時刻を比較し、heavy 隣接表から最も新しい遅延更新だけを反映する。"
+  ],
+  "outcomeCandidates": [
+    "Propagation 型の問題に対し、次数による平方分割を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

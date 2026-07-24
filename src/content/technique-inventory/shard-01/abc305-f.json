@@ -1,0 +1,20 @@
+{
+  "problemId": "abc305-f",
+  "sourceRevisionIds": [
+    "source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090",
+    "source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9"
+  ],
+  "coreMethod": "abc305-f「Dungeon Explore」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+    "Dungeon Explore 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "深さ優先探索"],
+  "implementationConcerns": ["再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。"],
+  "outcomeCandidates": [
+    "Dungeon Explore 型の 頂点と辺からなる状態グラフに対し、深さ優先探索を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

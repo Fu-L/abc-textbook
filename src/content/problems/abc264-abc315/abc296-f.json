@@ -1,0 +1,20 @@
+{
+  "id": "abc296-f",
+  "contestId": "abc296",
+  "slotLabel": "F",
+  "officialTaskId": "abc296_f",
+  "title": "Simultaneous Swap",
+  "officialUrl": "https://atcoder.jp/contests/abc296/tasks/abc296_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2\\times 10^5; 1\\leq A_i,B_i\\leq N; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6",
+    "source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

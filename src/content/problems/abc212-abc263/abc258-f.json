@@ -1,0 +1,20 @@
+{
+  "id": "abc258-f",
+  "contestId": "abc258",
+  "slotLabel": "F",
+  "officialTaskId": "abc258_f",
+  "title": "Main Street",
+  "officialUrl": "https://atcoder.jp/contests/abc258/tasks/abc258_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 2 \\times 10^5; 1 \\le B,K \\le 10^9; 0 \\le S_x,S_y,G_x,G_y \\le 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc258-f-problem-e69b00e450a590b4f1f26d98031df0a0dcbc28ede9a4274f20f2b21b68bab788",
+    "source-abc258-editorial-4237-f64386f7dcd8dcbd2521070103668d59be2948a5eba1d7c8349965e9de0754d5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

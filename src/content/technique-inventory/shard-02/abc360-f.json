@@ -1,0 +1,20 @@
+{
+  "problemId": "abc360-f",
+  "sourceRevisionIds": [
+    "source-abc360-editorial-10323-8c4d9a5f024898c43c5374ba4f69c2e52dfea61b23a8564413205c7c24070951",
+    "source-abc360-f-problem-c17709f594bb666a67405cb3e6aa0269fa08eb28943f9259ece37d85766a4993"
+  ],
+  "coreMethod": "abc360-f「InterSections」では、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "作用の合成則と集約演算の準同型性により、遅延値を子へ配る前後で区間の表す値が変わらない。",
+    "InterSections 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "遅延評価セグメント木"],
+  "implementationConcerns": ["作用合成の順序、単位作用、区間長を使う写像を同じ規約で実装する。"],
+  "outcomeCandidates": [
+    "InterSections 型の 区間端点と包含関係に対し、遅延評価セグメント木を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

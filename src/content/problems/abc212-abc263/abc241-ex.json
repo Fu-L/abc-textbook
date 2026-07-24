@@ -1,0 +1,20 @@
+{
+  "id": "abc241-ex",
+  "contestId": "abc241",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc241_h",
+  "title": "Card Deck Score",
+  "officialUrl": "https://atcoder.jp/contests/abc241/tasks/abc241_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 16; 1 \\leq M \\leq 10^{18}; 1 \\leq A_i < 998244353; 1 \\leq B_i \\leq 10^{17}; If i\\neq j, then A_i \\neq A_j.; M\\leq B_1+B_2+\\cdots B_N; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc241-ex-problem-920692d485b32ace547699e9cee4a214d4b640f55d93314679fc656d0d3fe3c5",
+    "source-abc241-editorial-3473-9985803265c2f2ceca16b28ef311d5a58d36baf0cc903dc7cd7087a0c39e5129"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

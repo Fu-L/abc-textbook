@@ -1,0 +1,20 @@
+{
+  "problemId": "abc412-g",
+  "sourceRevisionIds": [
+    "source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb",
+    "source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2"
+  ],
+  "coreMethod": "abc412-g「Degree Harmony」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+    "Degree Harmony 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "最大流・最小カット定理"],
+  "implementationConcerns": ["有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。"],
+  "outcomeCandidates": [
+    "Degree Harmony 型の 頂点と辺からなる状態グラフに対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

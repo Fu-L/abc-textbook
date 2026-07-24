@@ -1,0 +1,20 @@
+{
+  "id": "abc369-f",
+  "contestId": "abc369",
+  "slotLabel": "F",
+  "officialTaskId": "abc369_f",
+  "title": "Gather Coins",
+  "officialUrl": "https://atcoder.jp/contests/abc369/tasks/abc369_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq H,W \\leq 2\\times 10^5; 1\\leq N \\leq \\min(HW-2, 2\\times 10^5); 1\\leq R_i \\leq H; 1\\leq C_i \\leq W; (R_i,C_i)\\neq (1,1); (R_i,C_i)\\neq (H,W); (R_i,C_i) are pairwise distinct.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc369-f-problem-fe90546a65130e5d35f17df00887c4686167db073e1ed767b6b9d2a080a6828c",
+    "source-abc369-editorial-10835-f7d009793c7de08f42cda826cd15d1d190b2503e80d06887d02386e9732cdddb"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

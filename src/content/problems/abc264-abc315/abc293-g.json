@@ -1,0 +1,20 @@
+{
+  "id": "abc293-g",
+  "contestId": "abc293",
+  "slotLabel": "G",
+  "officialTaskId": "abc293_g",
+  "title": "Triple Index",
+  "officialUrl": "https://atcoder.jp/contests/abc293/tasks/abc293_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 2 \\times 10^5; 1 \\leq l_q \\leq r_q \\leq N; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc293-g-problem-a415ae157c4931a162c6f1e20e5dd417d648595dbe7573e4ea2ecb325b7fa3f9",
+    "source-abc293-editorial-5947-521de1ac63f5adc46869cbc5a4afac67b6cb0cc2757590c8211288fd0f5561c8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

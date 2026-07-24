@@ -1,0 +1,22 @@
+{
+  "problemId": "abc450-g",
+  "sourceRevisionIds": [
+    "source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43",
+    "source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98"
+  ],
+  "coreMethod": "abc450-g「Random Subtraction」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+    "Random Subtraction 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "条件付き期待値と確率 DP"],
+  "implementationConcerns": [
+    "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Random Subtraction 型の 列の順序と prefix 状態に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

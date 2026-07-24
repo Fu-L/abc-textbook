@@ -1,0 +1,20 @@
+{
+  "id": "abc392-f",
+  "contestId": "abc392",
+  "slotLabel": "F",
+  "officialTaskId": "abc392_f",
+  "title": "Insert",
+  "officialUrl": "https://atcoder.jp/contests/abc392/tasks/abc392_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5\\times 10^5; 1 \\leq P_i \\leq i; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc392-f-problem-7960d080321bdc2198bcb5bf95b6b91511eb57189a943c0f3bf2ee17d8a8ddb4",
+    "source-abc392-editorial-12145-445d321e81594035b30924e7b75bfa6caefdf30ca487bdcd898557192838566c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

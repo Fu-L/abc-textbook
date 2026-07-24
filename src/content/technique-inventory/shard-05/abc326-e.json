@@ -1,0 +1,22 @@
+{
+  "problemId": "abc326-e",
+  "sourceRevisionIds": [
+    "source-abc326-e-problem-826a5d0552e758924802b9b180548c1d4f7f8cd80e3b0db5723f958e890a850b",
+    "source-abc326-editorial-7538-cfe2fc8d0501fdbb3376caf6ada2c9b1872bf406e2fe711524bf9960abd1918c"
+  ],
+  "coreMethod": "abc326-e「Revenge of \"The Salary of AtCoder Inc.\"」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+    "Revenge of \"The Salary of AtCoder Inc.\" 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "条件付き期待値と確率 DP"],
+  "implementationConcerns": [
+    "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Revenge of \"The Salary of AtCoder Inc.\" 型の 列の順序と prefix 状態に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

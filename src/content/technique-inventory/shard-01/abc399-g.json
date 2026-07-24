@@ -1,0 +1,20 @@
+{
+  "problemId": "abc399-g",
+  "sourceRevisionIds": [
+    "source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b",
+    "source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"
+  ],
+  "coreMethod": "abc399-g「Colorful Spanning Tree」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+    "Colorful Spanning Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "最大流・最小カット定理"],
+  "implementationConcerns": ["有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。"],
+  "outcomeCandidates": [
+    "Colorful Spanning Tree 型の 頂点と辺からなる状態グラフに対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

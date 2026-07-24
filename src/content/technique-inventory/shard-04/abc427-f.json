@@ -1,0 +1,20 @@
+{
+  "problemId": "abc427-f",
+  "sourceRevisionIds": [
+    "source-abc427-editorial-14195-a523ac80888e999b403a874323ca4ed5424535861f03895268bdcce8d5c01e98",
+    "source-abc427-f-problem-1009db545ade28aeb0009ef81f314ed11a4d7baaf41792a10bd84e80b8422dbd"
+  ],
+  "coreMethod": "abc427-f「Not Adjacent」では、選択を二群に分けて各側を全列挙し、和・順序・hash lookup で組を結合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の全体選択は左右の部分選択の組へ一意に分かれるため、両側の列挙と結合で全候補を覆う。",
+    "Not Adjacent 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "半分全列挙"],
+  "implementationConcerns": ["左右の列挙値を sort・deduplicate する条件と、補数の境界を確認する。"],
+  "outcomeCandidates": [
+    "Not Adjacent 型の 列の順序と prefix 状態に対し、半分全列挙を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc392-g",
+  "contestId": "abc392",
+  "slotLabel": "G",
+  "officialTaskId": "abc392_g",
+  "title": "Fine Triplets",
+  "officialUrl": "https://atcoder.jp/contests/abc392/tasks/abc392_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 10^6; 1 \\le S_i \\le 10^6; The elements of S are distinct.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc392-g-problem-0ecceae1087a498df7b9a28343f0cd4bd59d0a352b474711ebed70002f6dbc4b",
+    "source-abc392-editorial-12175-d00afb91d1eb85a0a43b828ca1e68d4aff9b65365ce8a51e2724334e95acd568"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

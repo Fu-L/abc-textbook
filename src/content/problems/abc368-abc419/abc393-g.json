@@ -1,0 +1,20 @@
+{
+  "id": "abc393-g",
+  "contestId": "abc393",
+  "slotLabel": "G",
+  "officialTaskId": "abc393_g",
+  "title": "Unevenness",
+  "officialUrl": "https://atcoder.jp/contests/abc393/tasks/abc393_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10; 1 \\leq P \\leq 10^{12}; 1 \\leq Q \\leq 10^{12}; \\gcd(P, Q) = 1; 0 \\leq A_{i,j} \\leq 10; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc393-g-problem-941c6da45dc5fe62551ec4fb6a70726479c20b28a4f3308d466fa9cb8822a201",
+    "source-abc393-editorial-12192-51ff1775a4a84d6ea3fa0c64dbec89b06500e2c486d30a6f6b6b6bac1f4c3756"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

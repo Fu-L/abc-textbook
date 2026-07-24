@@ -1,0 +1,20 @@
+{
+  "id": "abc372-g",
+  "contestId": "abc372",
+  "slotLabel": "G",
+  "officialTaskId": "abc372_g",
+  "title": "Ax + By < C",
+  "officialUrl": "https://atcoder.jp/contests/abc372/tasks/abc372_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 2 \\times 10^5; 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i, B_i, C_i \\leq 10^9; The sum of N over all test cases is at most 2 \\times 10^5.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25",
+    "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

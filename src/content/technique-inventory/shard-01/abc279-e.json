@@ -1,0 +1,20 @@
+{
+  "problemId": "abc279-e",
+  "sourceRevisionIds": [
+    "source-abc279-e-problem-331a193e2ed100b176928fd48364f433619e490d75fbcffb84e141d17c8fc390",
+    "source-abc279-editorial-5289-8faa4f66138e5b0e2e9cde2740f1c56d269463ace6cbcddedfa9a5b7c4dcf65b"
+  ],
+  "coreMethod": "abc279-e「Cheating Amidakuji」では、全 swap 適用後の逆位置と各時点までの prefix 状態を持ち、一操作を除いた影響を二要素の交換として復元する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "除いた swap より後の操作は二つの label の役割だけを交換するため、完全適用結果の逆写像から答え位置を得られる。",
+    "Cheating Amidakuji 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["順列の合成と逆写像"],
+  "implementationConcerns": ["値から位置への逆配列と、除外操作直前の二要素を区別して更新する。"],
+  "outcomeCandidates": [
+    "Cheating Amidakuji 型の問題に対し、順列の合成と逆写像を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

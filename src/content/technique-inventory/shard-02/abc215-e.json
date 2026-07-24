@@ -1,0 +1,22 @@
+{
+  "problemId": "abc215-e",
+  "sourceRevisionIds": [
+    "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+    "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
+  ],
+  "coreMethod": "abc215-e「Chain Contestant」では、使用済み種類集合と最後に選んだ種類を状態にし、現在文字を選ばない・同種を続ける・未使用種へ移る遷移を数える。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "各種類が一つの連続 block だけに現れる条件は、再登場を使用済み mask で禁じ、現在 block を末尾種類で識別すれば必要十分になる。",
+    "Chain Contestant 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["bitmask DP と末尾状態"],
+  "implementationConcerns": [
+    "空部分列を答えから除き、同種継続と新しい種類の開始を別遷移として modulus 上で加算する。"
+  ],
+  "outcomeCandidates": [
+    "Chain Contestant 型の問題に対し、bitmask DP と末尾状態を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

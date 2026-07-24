@@ -1,0 +1,12 @@
+{
+  "contestId": "abc333",
+  "label": "E",
+  "officialTaskId": "abc333_e",
+  "officialOrder": 4,
+  "availability": "exists",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": "abc333-e",
+  "sourceRevisionId": "source-abc333-task-list-75143b44d72f63f8f6e1ec13a807bbc30efcd20fe42aa433715bdcca24df7898",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

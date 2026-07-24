@@ -1,0 +1,20 @@
+{
+  "id": "abc328",
+  "number": 328,
+  "title": "Toyota Programming Contest 2023#7（AtCoder Beginner Contest 328）",
+  "startedAt": "2023-11-11T21:00:00+09:00",
+  "endedAt": "2023-11-11T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc328",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc328_a",
+    "abc328_b",
+    "abc328_c",
+    "abc328_d",
+    "abc328_e",
+    "abc328_f",
+    "abc328_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc328-task-list-1d0437e40b4d7422021345d2edd0cecc9413b500a40b775d3b5076aa89aa0254",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

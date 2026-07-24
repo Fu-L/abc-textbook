@@ -1,0 +1,22 @@
+{
+  "problemId": "abc225-h",
+  "sourceRevisionIds": [
+    "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+    "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"
+  ],
+  "coreMethod": "abc225-h「Social Distance 2」では、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "係数比較により元の再帰・畳み込みと冪級数恒等式が次数ごとに同値であることを示す。",
+    "Social Distance 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "形式的冪級数"],
+  "implementationConcerns": [
+    "必要次数で毎回 truncate し、定数項が逆元や対数の前提を満たすか確認する。"
+  ],
+  "outcomeCandidates": [
+    "Social Distance 2 型の 区間端点と包含関係に対し、形式的冪級数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

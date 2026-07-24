@@ -1,0 +1,20 @@
+{
+  "id": "abc403-g",
+  "contestId": "abc403",
+  "slotLabel": "G",
+  "officialTaskId": "abc403_g",
+  "title": "Odd Position Sum Query",
+  "officialUrl": "https://atcoder.jp/contests/abc403/tasks/abc403_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\le Q \\le 3\\times 10^5; 0 \\le y_i < 10^9; 1 \\le x_i \\le 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d",
+    "source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

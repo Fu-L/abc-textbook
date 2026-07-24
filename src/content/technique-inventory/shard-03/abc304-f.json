@@ -1,0 +1,20 @@
+{
+  "problemId": "abc304-f",
+  "sourceRevisionIds": [
+    "source-abc304-editorial-6511-ddd57c50291556fbe38e4db2238919b9c70daa74e48096ec0d0655b1d6fa718e",
+    "source-abc304-f-problem-b902c20c4f077e5c415a49f03de5f281397ae7faba2c8df6f44fecad1b786fe1"
+  ],
+  "coreMethod": "abc304-f「Shift Table」では、倍数・約数上の累積関係を Möbius inversion で反転し、exact な個数を復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "約数 lattice 上で Möbius 関数の和が恒等元以外で 0 になるため、zeta 変換との逆変換になる。",
+    "Shift Table 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "Möbius inversion"],
+  "implementationConcerns": ["約数向きと倍数向きのどちらを反転するか、添字 1 の初期値を確認する。"],
+  "outcomeCandidates": [
+    "Shift Table 型の 文字列の prefix・suffix と一致関係に対し、Möbius inversionを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

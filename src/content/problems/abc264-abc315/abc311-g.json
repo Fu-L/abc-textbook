@@ -1,0 +1,20 @@
+{
+  "id": "abc311-g",
+  "contestId": "abc311",
+  "slotLabel": "G",
+  "officialTaskId": "abc311_g",
+  "title": "One More Grid Task",
+  "officialUrl": "https://atcoder.jp/contests/abc311/tasks/abc311_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N,M \\le 300; 1 \\le A_{i,j} \\le 300",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544",
+    "source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

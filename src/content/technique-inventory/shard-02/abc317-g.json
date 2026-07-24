@@ -1,0 +1,22 @@
+{
+  "problemId": "abc317-g",
+  "sourceRevisionIds": [
+    "source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603",
+    "source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a"
+  ],
+  "coreMethod": "abc317-g「Rearranging」では、各値の出現を正則二部 multigraph の辺とみなし、完全マッチングを反復抽出して辺彩色を構成する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "正則二部グラフは Hall 条件を満たして完全マッチングを持ち、それを除くたび正則次数が一つ下がるため全辺を分解できる。",
+    "Rearranging 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["二部マッチングと Hall の定理"],
+  "implementationConcerns": [
+    "多重辺を別々の edge id で保持し、採用した完全マッチングの辺だけを各反復で除く。"
+  ],
+  "outcomeCandidates": [
+    "Rearranging 型の問題に対し、二部マッチングと Hall の定理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

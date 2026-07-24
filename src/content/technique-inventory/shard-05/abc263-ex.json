@@ -1,0 +1,20 @@
+{
+  "problemId": "abc263-ex",
+  "sourceRevisionIds": [
+    "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228",
+    "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e"
+  ],
+  "coreMethod": "abc263-ex「Intersection 2」では、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "作用の合成則と集約演算の準同型性により、遅延値を子へ配る前後で区間の表す値が変わらない。",
+    "Intersection 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "遅延評価セグメント木"],
+  "implementationConcerns": ["作用合成の順序、単位作用、区間長を使う写像を同じ規約で実装する。"],
+  "outcomeCandidates": [
+    "Intersection 2 型の 整数の約数・剰余構造に対し、遅延評価セグメント木を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

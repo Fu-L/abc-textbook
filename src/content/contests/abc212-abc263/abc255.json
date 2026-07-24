@@ -1,0 +1,21 @@
+{
+  "id": "abc255",
+  "number": 255,
+  "title": "Aising Programming Contest 2022（AtCoder Beginner Contest 255）",
+  "startedAt": "2022-06-11T21:00:00+09:00",
+  "endedAt": "2022-06-11T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc255",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc255_a",
+    "abc255_b",
+    "abc255_c",
+    "abc255_d",
+    "abc255_e",
+    "abc255_f",
+    "abc255_g",
+    "abc255_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc255-task-list-5a90c618f4cc62e534deecb6e9b3c25f7c7040d0460c4866b731501c43b346c4",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

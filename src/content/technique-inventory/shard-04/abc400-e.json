@@ -1,0 +1,20 @@
+{
+  "problemId": "abc400-e",
+  "sourceRevisionIds": [
+    "source-abc400-e-problem-0c4d02c2dcebc6cb631b724b729e0968a0f291ddae678ae91bd387a3003e31c2",
+    "source-abc400-editorial-12624-03cb010f7c808a65ab47555784b4fe0713e5db9d43effcda12e4f104f4523505"
+  ],
+  "coreMethod": "abc400-e「Ringo's Favorite Numbers 3」では、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "算術の基本定理により正整数の素因数指数表現は一意で、積・割り切れ条件を指数ごとに判定できる。",
+    "Ringo's Favorite Numbers 3 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["online query の計算量設計", "素因数分解と約数列挙"],
+  "implementationConcerns": ["試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。"],
+  "outcomeCandidates": [
+    "Ringo's Favorite Numbers 3 型の 更新と問い合わせの時系列に対し、素因数分解と約数列挙を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

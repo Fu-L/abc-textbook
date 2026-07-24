@@ -1,0 +1,25 @@
+{
+  "problemId": "abc440-e",
+  "sourceRevisionIds": [
+    "source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29",
+    "source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"
+  ],
+  "coreMethod": "abc440-e「Cookies」では、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "親部分木の上位 K 個に入らない子内要素は、同じ子だけで K 個以上に負けるため親でも候補にならない。",
+    "Cookies 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": [
+    "整数論の基本的な割り切れ関係",
+    "small-to-large merge と上位 K 個の保持"
+  ],
+  "implementationConcerns": [
+    "K の全体上限だけ保持し、query の 1-origin 順位と vector index を変換する。"
+  ],
+  "outcomeCandidates": [
+    "Cookies 型の 整数の約数・剰余構造に対し、small-to-large merge と上位 K 個の保持を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

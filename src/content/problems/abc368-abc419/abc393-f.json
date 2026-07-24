@@ -1,0 +1,20 @@
+{
+  "id": "abc393-f",
+  "contestId": "abc393",
+  "slotLabel": "F",
+  "officialTaskId": "abc393_f",
+  "title": "Prefix LIS Query",
+  "officialUrl": "https://atcoder.jp/contests/abc393/tasks/abc393_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,Q \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq R_i \\leq N; \\min\\lbrace A_1, A_2,\\dots,A_{R_i} \\rbrace\\leq X_i\\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06",
+    "source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc456-f",
+  "contestId": "abc456",
+  "slotLabel": "F",
+  "officialTaskId": "abc456_f",
+  "title": "Plan Holidays",
+  "officialUrl": "https://atcoder.jp/contests/abc456/tasks/abc456_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 2 \\times 10^5; 1 \\leq K \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; All input values are integers.; The sum of N over all test cases is at most 2\\times 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb",
+    "source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

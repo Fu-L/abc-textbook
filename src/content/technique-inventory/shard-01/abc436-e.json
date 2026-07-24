@@ -1,0 +1,22 @@
+{
+  "problemId": "abc436-e",
+  "sourceRevisionIds": [
+    "source-abc436-e-problem-29bcc2df24f6f13d81c2c0625f2cd0187ad861f6d793cd750abd7cdf145fb7cf",
+    "source-abc436-editorial-14751-1b8affa4ba8c56243f0edd95c7b0f99bfb5f41bc4efa3d55d8507934c752b83d"
+  ],
+  "coreMethod": "abc436-e「Minimum Swap」では、順列を cycle 分解し、各 swap が cycle 数を高々一つ増やすことから最小回数を N-C として cycle ごとに数える。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "同一 cycle 内の swap は一つの cycle を二つへ分割でき、恒等順列の N cycle まで毎回一つ増やす構成がある。",
+    "Minimum Swap 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["順列の cycle 分解"],
+  "implementationConcerns": [
+    "固定点も長さ1の cycle として数え、cycle サイズごとの選択数を問題の modulus で合成する。"
+  ],
+  "outcomeCandidates": [
+    "Minimum Swap 型の問題に対し、順列の cycle 分解を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

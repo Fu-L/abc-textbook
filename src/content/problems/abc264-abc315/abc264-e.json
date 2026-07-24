@@ -1,0 +1,20 @@
+{
+  "id": "abc264-e",
+  "contestId": "abc264",
+  "slotLabel": "E",
+  "officialTaskId": "abc264_e",
+  "title": "Blackout 2",
+  "officialUrl": "https://atcoder.jp/contests/abc264/tasks/abc264_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le N,M; N+M \\le 2 \\times 10^5; 1 \\le Q \\le E \\le 5 \\times 10^5; 1 \\le U_i < V_i \\le N+M; If i \\neq j, then U_i \\neq U_j or V_i \\neq V_j.; 1 \\le X_i \\le E; X_i are distinct.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc264-e-problem-bd843af830bff7ef0c524fcdd2d01548dbbdd2a8c6b3f48f0d31e08a6777bae3",
+    "source-abc264-editorial-4583-9802bae9f540b5a9e97e57fdbeea97e2919d30cda39ff2f9ce5fcedc243a47e8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

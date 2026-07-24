@@ -1,0 +1,20 @@
+{
+  "id": "abc307-e",
+  "contestId": "abc307",
+  "slotLabel": "E",
+  "officialTaskId": "abc307_e",
+  "title": "Distinct Adjacent",
+  "officialUrl": "https://atcoder.jp/contests/abc307/tasks/abc307_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N,M \\leq 10^6; N and M are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc307-e-problem-548289d5e47b4369203d1b5cd71609b25ca976c547a62835b66cbaa68f430300",
+    "source-abc307-editorial-6643-5e6128eb82addb9c1ef4eee51ce74721ecfe920047167e2febf7bd2d172c9d4b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc352-e",
+  "contestId": "abc352",
+  "slotLabel": "E",
+  "officialTaskId": "abc352_e",
+  "title": "Clique Connect",
+  "officialUrl": "https://atcoder.jp/contests/abc352/tasks/abc352_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; 2 \\leq K_i \\leq N; \\sum_{i=1}^{M} K_i \\leq 4 \\times 10^5; 1 \\leq A_{i,1} < A_{i,2} < \\dots < A_{i,K_i} \\leq N; 1 \\leq C_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc352-e-problem-63943885010ffcd58b64e6a5cbc8fba4ab2fee9afa4bf3221604b5ff1f7fe224",
+    "source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

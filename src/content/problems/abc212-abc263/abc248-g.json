@@ -1,0 +1,20 @@
+{
+  "id": "abc248-g",
+  "contestId": "abc248",
+  "slotLabel": "G",
+  "officialTaskId": "abc248_g",
+  "title": "GCD cost on the tree",
+  "officialUrl": "https://atcoder.jp/contests/abc248/tasks/abc248_g",
+  "constraintsSummary": "Time limit: 8 sec; Memory limit: 2048 MiB; Constraints: 2 \\leq N \\leq 10^5; 1 \\leq A_i\\leq 10^5; 1\\leq U_i<V_i\\leq N; All values in input are integers.; The given graph is a tree.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6",
+    "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

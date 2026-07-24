@@ -1,0 +1,20 @@
+{
+  "id": "abc324-e",
+  "contestId": "abc324",
+  "slotLabel": "E",
+  "officialTaskId": "abc324_e",
+  "title": "Joint Two Strings",
+  "officialUrl": "https://atcoder.jp/contests/abc324/tasks/abc324_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \\leq N \\leq 5 \\times 10^5; S_i and T are strings of length 1 to 5 \\times 10^5, inclusive, consisting of lowercase English letters.; The total length of S_1, S_2, \\ldots, S_N is at most 5 \\times 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc324-e-problem-122462833dadb1a89dbaa3b7de191d7423f1c4b68966e12b5abbd2ed0bcb20e8",
+    "source-abc324-editorial-7407-ac1b02cade60fe34b326d626abed852b9d908175f319770f619c493b275c28ba"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

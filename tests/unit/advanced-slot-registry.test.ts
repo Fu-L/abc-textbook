@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 import {
   AdvancedSlotRegistrySchema,
   ContestSlotRecordSchema,
+  parseAtCoderContestResourceUrl,
   ProblemSchema,
   ProblemPlacementSchema,
   SafePathSchema,
@@ -23,7 +24,10 @@ import {
   sortCatalogEntityArray,
   type CatalogLike,
 } from '../../src/lib/catalog/build-catalog.js';
-import { parseOfficialTaskList } from '../../src/lib/catalog/official-task-list.js';
+import {
+  parseOfficialEditorialItem,
+  parseOfficialTaskList,
+} from '../../src/lib/catalog/official-task-list.js';
 
 const ABC500_TASK_IDS: Readonly<Record<string, string>> = {
   A: 'abc500_a',
@@ -70,6 +74,11 @@ describe('official advanced slot registry', () => {
       'abc500_i',
       'abc500_h',
     ]);
+    expect(parsed.officialTasks.at(-1)).toEqual({
+      label: 'Ex',
+      taskId: 'abc500_h',
+      officialOrder: 7,
+    });
     expect(parsed.sourceFingerprint).toMatch(/^[a-f0-9]{64}$/u);
     expect(JSON.stringify(parsed)).not.toContain('Problem E');
   });
@@ -94,6 +103,118 @@ describe('official advanced slot registry', () => {
       'abc300_h',
     ]);
     expect(parsed.advancedLabels).toEqual(['E', 'F', 'G', 'Ex']);
+  });
+
+  it('fingerprints the normalized task mapping instead of volatile page HTML', () => {
+    const stable = parseOfficialTaskList({
+      contestId: 'abc500',
+      officialTaskListUrl: 'https://atcoder.jp/contests/abc500/tasks',
+      html: taskList(['A', 'B', 'C', 'D', 'E']),
+      checkedAt: '2026-07-17T12:00:00+09:00',
+    });
+    const volatileOnlyChange = parseOfficialTaskList({
+      contestId: 'abc500',
+      officialTaskListUrl: 'https://atcoder.jp/contests/abc500/tasks?lang=en#tasks',
+      html: `
+        <nav data-session="rotated-session">Signed in</nav>
+        <form><input name="csrf_token" value="rotated-token"></form>
+        ${taskList(['A', 'B', 'C', 'D', 'E'])}
+        <script>window.csrfToken = "another-rotated-token";</script>
+      `,
+      checkedAt: '2026-07-18T12:00:00+09:00',
+    });
+    const mappingChange = parseOfficialTaskList({
+      contestId: 'abc500',
+      officialTaskListUrl: 'https://atcoder.jp/contests/abc500/tasks',
+      html: taskList(['A', 'B', 'C', 'D', 'E']).replaceAll('abc500_e', 'abc500_e_v2'),
+      checkedAt: '2026-07-17T12:00:00+09:00',
+    });
+
+    expect(volatileOnlyChange.sourceFingerprint).toBe(stable.sourceFingerprint);
+    expect(mappingChange.sourceFingerprint).not.toBe(stable.sourceFingerprint);
+  });
+
+  it('binds an individual official editorial to its linked task ID', () => {
+    const parsed = parseOfficialEditorialItem({
+      contestId: 'abc300',
+      officialEditorialUrl: 'https://atcoder.jp/contests/abc300/editorial/9999',
+      html: `
+        <main>
+          <span class="label label-default">Official</span>
+          <h2><a href="/contests/abc300/tasks/abc300_h">Ex - Fixture</a> Editorial</h2>
+          <div>Fixture editorial body.</div>
+        </main>
+      `,
+      checkedAt: '2026-07-17T12:00:00+09:00',
+    });
+
+    expect(parsed).toMatchObject({
+      contestId: 'abc300',
+      editorialItemId: '9999',
+      officialTaskId: 'abc300_h',
+    });
+    expect(parsed.sourceFingerprint).toMatch(/^[a-f0-9]{64}$/u);
+
+    expect(() =>
+      parseOfficialEditorialItem({
+        contestId: 'abc300',
+        officialEditorialUrl: 'https://atcoder.jp/contests/abc300/editorial/9999',
+        html: '<h2><a href="/contests/abc300/tasks/abc300_h">Ex</a></h2>',
+        checkedAt: '2026-07-17T12:00:00+09:00',
+      }),
+    ).toThrow(/EDITORIAL_NOT_OFFICIAL/u);
+    expect(() =>
+      parseOfficialEditorialItem({
+        contestId: 'abc300',
+        officialEditorialUrl: 'https://atcoder.jp/contests/abc300/editorial/9999',
+        html: `
+          <span class="label">Official</span>
+          <h2><a href="/contests/abc301/tasks/abc301_h">Ex</a></h2>
+        `,
+        checkedAt: '2026-07-17T12:00:00+09:00',
+      }),
+    ).toThrow(/EDITORIAL_TASK_MAPPING_INVALID/u);
+  });
+
+  it('fingerprints normalized editorial content while ignoring volatile page state', () => {
+    const editorialHtml = (complexity: string, token: string) => `
+      <main data-session="${token}">
+        <span class="label label-default">Official</span>
+        <h2><a href="/contests/abc300/tasks/abc300_h">Ex - Fixture</a> Editorial</h2>
+        <form><input name="csrf_token" value="${token}"></form>
+        <section class="editorial-body">
+          <p>
+            Use dynamic programming in <strong>${complexity}</strong> time.
+            <a href="/contests/abc300/tasks/abc300_h#problem">Problem</a>
+          </p>
+          <script>window.csrfToken = "${token}";</script>
+          <input data-csrf="${token}" value="${token}">
+        </section>
+        <div class="clearfix">Last update: ${token}</div>
+        <footer>Session: ${token}</footer>
+      </main>
+    `;
+    const stable = parseOfficialEditorialItem({
+      contestId: 'abc300',
+      officialEditorialUrl: 'https://atcoder.jp/contests/abc300/editorial/9999',
+      html: editorialHtml('O(N)', 'first-token'),
+      checkedAt: '2026-07-17T12:00:00+09:00',
+    });
+    const volatileOnlyChange = parseOfficialEditorialItem({
+      contestId: 'abc300',
+      officialEditorialUrl: 'https://atcoder.jp/contests/abc300/editorial/9999?lang=en#top',
+      html: editorialHtml('O(N)', 'rotated-token'),
+      checkedAt: '2026-07-18T12:00:00+09:00',
+    });
+    const meaningfulChange = parseOfficialEditorialItem({
+      contestId: 'abc300',
+      officialEditorialUrl: 'https://atcoder.jp/contests/abc300/editorial/9999',
+      html: editorialHtml('O(N log N)', 'third-token'),
+      checkedAt: '2026-07-17T12:00:00+09:00',
+    });
+
+    expect(volatileOnlyChange.sourceFingerprint).toBe(stable.sourceFingerprint);
+    expect(meaningfulChange.sourceFingerprint).not.toBe(stable.sourceFingerprint);
   });
 
   it('fails closed when a task ID repeats', () => {
@@ -312,6 +433,7 @@ describe('official advanced slot registry', () => {
           endedAt: '2026-07-17T13:40:00+09:00',
           officialUrl: 'https://atcoder.jp/contests/abc212',
           officialTaskOrder: ['A', 'B', 'C', 'D', 'E'],
+          officialTaskIds: ['abc212_a', 'abc212_b', 'abc212_c', 'abc212_d', 'abc212_e'],
           taskOrderSourceRevisionId: 'source-abc212-task-order',
           checkedAt: '2026-07-17T14:00:00+09:00',
         },
@@ -320,6 +442,7 @@ describe('official advanced slot registry', () => {
         {
           contestId: 'abc212',
           label: 'E',
+          officialTaskId: 'abc212_e',
           officialOrder: 4,
           availability: 'exists',
           catalogStatus: 'uncollected',
@@ -334,11 +457,12 @@ describe('official advanced slot registry', () => {
           id: 'abc212-e',
           contestId: 'abc212',
           slotLabel: 'E',
+          officialTaskId: 'abc212_e',
           title: 'Problem E',
           officialUrl: 'https://atcoder.jp/contests/abc212/tasks/abc212_e',
           constraintsSummary: 'Fixture constraints.',
           difficultyEvidence: 'Fixture evidence.',
-          sourceRevisionIds: ['source-abc212-task-order'],
+          sourceRevisionIds: ['source-abc212-e'],
           checkedAt: '2026-07-17T14:00:00+09:00',
           publicationStatus: 'uncollected',
           primaryTagIds: [],
@@ -350,7 +474,7 @@ describe('official advanced slot registry', () => {
       techniqueInventory: [
         {
           problemId: 'abc212-e',
-          sourceRevisionIds: ['source-abc212-task-order'],
+          sourceRevisionIds: ['source-abc212-e'],
           coreMethod: 'Fixture method.',
           proofIdeas: ['Fixture proof.'],
           asymptoticComplexity: { time: 'O(1)', space: 'O(1)' },
@@ -369,10 +493,21 @@ describe('official advanced slot registry', () => {
       authoringUnits: [],
       sources: [
         {
+          id: 'source-abc212-e',
+          url: 'https://atcoder.jp/contests/abc212/tasks/abc212_e',
+          sourceKind: 'official_problem',
+          contestId: 'abc212',
+          officialTaskId: 'abc212_e',
+          checkedAt: '2026-07-17T14:00:00+09:00',
+          fingerprint: digest,
+          termsCheckedAt: '2026-07-17T14:00:00+09:00',
+        },
+        {
           id: 'source-abc212-task-order',
           url: 'https://atcoder.jp/contests/abc212/tasks',
           sourceKind: 'official_contest',
           contestId: 'abc212',
+          officialTaskId: null,
           checkedAt: '2026-07-17T14:00:00+09:00',
           fingerprint: digest,
           termsCheckedAt: '2026-07-17T14:00:00+09:00',
@@ -609,6 +744,17 @@ describe('official advanced slot registry', () => {
       {
         contestId: 'abc500',
         officialTaskOrder: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'I', 'Ex'],
+        officialTaskIds: [
+          'abc500_a',
+          'abc500_b',
+          'abc500_c',
+          'abc500_d',
+          'abc500_e',
+          'abc500_f',
+          'abc500_g',
+          'abc500_i',
+          'abc500_h',
+        ],
         advancedLabels: ['E', 'F', 'G', 'I', 'Ex'],
       },
       { I: 'unknown', Ex: 'withdrawn' },
@@ -676,6 +822,7 @@ describe('official advanced slot registry', () => {
     const base = {
       contestId: 'abc500',
       label: 'E',
+      officialTaskId: 'abc500_e',
       officialOrder: 4,
       availability: 'exists' as const,
       catalogStatus: 'drafting' as const,
@@ -713,6 +860,7 @@ describe('official advanced slot registry', () => {
       id: 'abc500-e',
       contestId: 'abc500',
       slotLabel: 'E',
+      officialTaskId: 'abc500_e',
       title: 'Problem E',
       officialUrl: 'https://atcoder.jp/contests/abc500/tasks/abc500_e',
       constraintsSummary: 'Fixture constraints.',
@@ -729,7 +877,40 @@ describe('official advanced slot registry', () => {
     expect(
       ProblemSchema.safeParse({
         ...problem,
+        id: 'abc300-ex',
+        contestId: 'abc300',
+        slotLabel: 'Ex',
+        officialTaskId: 'abc300_h',
+        officialUrl: 'https://atcoder.jp/contests/abc300/tasks/abc300_h',
+        sourceRevisionIds: ['source-abc300-ex'],
+      }).success,
+    ).toBe(true);
+    expect(
+      ProblemSchema.safeParse({
+        ...problem,
         officialUrl: 'https://example.com/abc500/tasks/abc500_e',
+      }).success,
+    ).toBe(false);
+    expect(
+      ProblemSchema.safeParse({
+        ...problem,
+        officialTaskId: 'abc500_f',
+      }).success,
+    ).toBe(false);
+    expect(
+      ProblemSchema.safeParse({
+        ...problem,
+        constraintsSummary: null,
+        difficultyEvidence: null,
+        publicationStatus: 'uncollected',
+      }).success,
+    ).toBe(true);
+    expect(
+      ProblemSchema.safeParse({
+        ...problem,
+        constraintsSummary: null,
+        difficultyEvidence: null,
+        publicationStatus: 'published',
       }).success,
     ).toBe(false);
     expect(
@@ -744,11 +925,28 @@ describe('official advanced slot registry', () => {
       url: 'https://atcoder.jp/contests/abc500/tasks/abc500_e',
       sourceKind: 'official_problem' as const,
       contestId: 'abc500',
+      officialTaskId: 'abc500_e',
       checkedAt: '2026-07-17T14:00:00+09:00',
       fingerprint: digest,
       termsCheckedAt: '2026-07-17T14:00:00+09:00',
     };
     expect(SourceRevisionSchema.safeParse(source).success).toBe(true);
+    const editorial = {
+      ...source,
+      id: 'source-abc500-e-editorial',
+      url: 'https://atcoder.jp/contests/abc500/editorial/12345',
+      sourceKind: 'official_editorial' as const,
+    };
+    expect(SourceRevisionSchema.safeParse(editorial).success).toBe(true);
+    expect(parseAtCoderContestResourceUrl(editorial.url)).toEqual({
+      contestId: 'abc500',
+      resource: 'editorial_item',
+      taskId: null,
+      editorialItemId: '12345',
+    });
+    expect(SourceRevisionSchema.safeParse({ ...editorial, officialTaskId: null }).success).toBe(
+      false,
+    );
     expect(
       SourceRevisionSchema.safeParse({
         ...source,

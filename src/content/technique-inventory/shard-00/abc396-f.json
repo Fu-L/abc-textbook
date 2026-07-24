@@ -1,0 +1,20 @@
+{
+  "problemId": "abc396-f",
+  "sourceRevisionIds": [
+    "source-abc396-editorial-12374-589f6810ae5c3dccefb418c94eb6369993eca119b4162fd81606ab52afcc8acc",
+    "source-abc396-f-problem-3a6c95223afa7acf1d9704bfe06b07779541b9bba7a589f020d7a044c63c41ae"
+  ],
+  "coreMethod": "abc396-f「Rotated Inversions」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+    "Rotated Inversions 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "Fenwick tree"],
+  "implementationConcerns": ["内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"],
+  "outcomeCandidates": [
+    "Rotated Inversions 型の 列の順序と prefix 状態に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

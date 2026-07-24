@@ -1,0 +1,20 @@
+{
+  "problemId": "abc301-e",
+  "sourceRevisionIds": [
+    "source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e",
+    "source-abc301-editorial-6343-b11e11924058addc198935bbd91d06286574d2bfb73d521c8b78cb42849fa957"
+  ],
+  "coreMethod": "abc301-e「Pac-Takahashi」では、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各部分解を選択集合と終端状態で一意に分類し、最後の一手を外す帰納法で遷移の完全性を示す。",
+    "Pac-Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "bitmask と subset DP"],
+  "implementationConcerns": ["集合への追加判定、部分集合列挙、状態数 2^N の型と配列長を確認する。"],
+  "outcomeCandidates": [
+    "Pac-Takahashi 型の 盤面上の位置と局所遷移に対し、bitmask と subset DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

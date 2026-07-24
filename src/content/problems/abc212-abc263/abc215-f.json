@@ -1,0 +1,20 @@
+{
+  "id": "abc215-f",
+  "contestId": "abc215",
+  "slotLabel": "F",
+  "officialTaskId": "abc215_f",
+  "title": "Dist Max 2",
+  "officialUrl": "https://atcoder.jp/contests/abc215/tasks/abc215_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 200000; 0 \\leq x_i,y_i \\leq 10^9; (x_i,y_i) \\neq (x_j,y_j) (i \\neq j); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537",
+    "source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

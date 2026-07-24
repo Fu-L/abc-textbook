@@ -1,0 +1,20 @@
+{
+  "id": "abc388",
+  "number": 388,
+  "title": "HHKB Programming Contest 2025(AtCoder Beginner Contest 388)",
+  "startedAt": "2025-01-11T21:00:00+09:00",
+  "endedAt": "2025-01-11T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc388",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc388_a",
+    "abc388_b",
+    "abc388_c",
+    "abc388_d",
+    "abc388_e",
+    "abc388_f",
+    "abc388_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc388-task-list-d43159c068de9c3ee9dc32cbfd2435572db6e8c5c9ff599cf6e670b5681f8022",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

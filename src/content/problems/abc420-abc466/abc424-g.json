@@ -1,0 +1,20 @@
+{
+  "id": "abc424-g",
+  "contestId": "abc424",
+  "slotLabel": "G",
+  "officialTaskId": "abc424_g",
+  "title": "Set list",
+  "officialUrl": "https://atcoder.jp/contests/abc424/tasks/abc424_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 100; 1\\leq M\\leq 100; 0\\leq A_i\\leq M; 0\\leq B_i\\leq N; 0\\leq C_i\\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2",
+    "source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

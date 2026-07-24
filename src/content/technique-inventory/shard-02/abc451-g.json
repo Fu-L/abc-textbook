@@ -1,0 +1,20 @@
+{
+  "problemId": "abc451-g",
+  "sourceRevisionIds": [
+    "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+    "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
+  ],
+  "coreMethod": "abc451-g「Minimum XOR Walk」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+    "Minimum XOR Walk 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "Fenwick tree"],
+  "implementationConcerns": ["内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"],
+  "outcomeCandidates": [
+    "Minimum XOR Walk 型の 頂点と辺からなる状態グラフに対し、Fenwick treeを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

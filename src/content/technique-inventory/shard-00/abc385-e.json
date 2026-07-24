@@ -1,0 +1,22 @@
+{
+  "problemId": "abc385-e",
+  "sourceRevisionIds": [
+    "source-abc385-e-problem-31f1e48e1b47f94d6bfe746b537b31b8fd3189cc059f04a525da7a930b91abe4",
+    "source-abc385-editorial-11640-df769f63cf1103b792437bd9b3be1880bc948f70c7a9e56e6de1c5f0ee721a93"
+  ],
+  "coreMethod": "abc385-e「Snowflake Tree」では、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "親部分木の上位 K 個に入らない子内要素は、同じ子だけで K 個以上に負けるため親でも候補にならない。",
+    "Snowflake Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "small-to-large merge と上位 K 個の保持"],
+  "implementationConcerns": [
+    "K の全体上限だけ保持し、query の 1-origin 順位と vector index を変換する。"
+  ],
+  "outcomeCandidates": [
+    "Snowflake Tree 型の 頂点と辺からなる状態グラフに対し、small-to-large merge と上位 K 個の保持を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

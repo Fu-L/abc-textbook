@@ -1,0 +1,20 @@
+{
+  "problemId": "abc293-g",
+  "sourceRevisionIds": [
+    "source-abc293-editorial-5947-521de1ac63f5adc46869cbc5a4afac67b6cb0cc2757590c8211288fd0f5561c8",
+    "source-abc293-g-problem-a415ae157c4931a162c6f1e20e5dd417d648595dbe7573e4ea2ecb325b7fa3f9"
+  ],
+  "coreMethod": "abc293-g「Triple Index」では、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
+    "Triple Index 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "式変形と frequency map"],
+  "implementationConcerns": ["添字 parity による符号反転と負数 key をそのまま正確に保持する。"],
+  "outcomeCandidates": [
+    "Triple Index 型の 列の順序と prefix 状態に対し、式変形と frequency mapを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

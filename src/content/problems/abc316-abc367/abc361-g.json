@@ -1,0 +1,20 @@
+{
+  "id": "abc361-g",
+  "contestId": "abc361",
+  "slotLabel": "G",
+  "officialTaskId": "abc361_g",
+  "title": "Go Territory",
+  "officialUrl": "https://atcoder.jp/contests/abc361/tasks/abc361_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 0 \\leq N \\leq 2 \\times 10^5; 0 \\leq X_i, Y_i \\leq 2 \\times 10^5; The pairs (X_i, Y_i) are distinct.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc361-g-problem-e7ae4c77ce0cced0a222ce1ed6380ab09770e31ccbe61d31b1c9049c13c16d51",
+    "source-abc361-editorial-10355-fa903d354a637287b02cc5a951981e5c8be5ba4737f17f92b245ca6fc792534b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

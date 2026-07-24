@@ -1,0 +1,20 @@
+{
+  "problemId": "abc239-ex",
+  "sourceRevisionIds": [
+    "source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd",
+    "source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94"
+  ],
+  "coreMethod": "abc239-ex「Dice Product 2」では、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
+    "Dice Product 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "畳み込みと NTT"],
+  "implementationConcerns": ["必要な係数長、padding 長、法が NTT に対応するかを確認する。"],
+  "outcomeCandidates": [
+    "Dice Product 2 型の 整数の約数・剰余構造に対し、畳み込みと NTTを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

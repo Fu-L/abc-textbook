@@ -1,0 +1,20 @@
+{
+  "problemId": "abc298-f",
+  "sourceRevisionIds": [
+    "source-abc298-editorial-6211-8114a025037834e41fb9ef5cb0443dad7fe85b1d98c3a7af10e1c3564a6478fe",
+    "source-abc298-f-problem-82542e25568160a466c44eea2f79e94505de6b46f2709898ee0a8440b9138d0f"
+  ],
+  "coreMethod": "abc298-f「Rook Score」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+    "Rook Score 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "全探索と候補数の上界評価"],
+  "implementationConcerns": ["同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。"],
+  "outcomeCandidates": [
+    "Rook Score 型の 盤面上の位置と局所遷移に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc312-g",
+  "contestId": "abc312",
+  "slotLabel": "G",
+  "officialTaskId": "abc312_g",
+  "title": "Avoid Straight Line",
+  "officialUrl": "https://atcoder.jp/contests/abc312/tasks/abc312_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i, B_i \\leq N; The given graph is a tree.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc312-g-problem-7f9c17fee4eb88ec83271f7ba91cd73e394e9e73b5e34fefe65ebc76ef6ffc39",
+    "source-abc312-editorial-6854-95127d442c1e51570a1a84ea4733af43f13e85b96d616c07119c7b7377841d01"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

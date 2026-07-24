@@ -1,0 +1,21 @@
+{
+  "id": "abc305",
+  "number": 305,
+  "title": "KYOCERA Programming Contest 2023（AtCoder Beginner Contest 305）",
+  "startedAt": "2023-06-10T21:00:00+09:00",
+  "endedAt": "2023-06-10T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc305",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc305_a",
+    "abc305_b",
+    "abc305_c",
+    "abc305_d",
+    "abc305_e",
+    "abc305_f",
+    "abc305_g",
+    "abc305_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc305-task-list-b9c823a0e3392d6805eacfe5537ece9ec74dff1ab2bb4336556887838be6a79f",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

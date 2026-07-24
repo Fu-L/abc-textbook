@@ -1,0 +1,20 @@
+{
+  "id": "abc326-g",
+  "contestId": "abc326",
+  "slotLabel": "G",
+  "officialTaskId": "abc326_g",
+  "title": "Unlock Achievement",
+  "officialUrl": "https://atcoder.jp/contests/abc326/tasks/abc326_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,M \\leq 50; 1 \\leq L_{i,j} \\leq 5; 1 \\leq A_i,C_i \\leq 10^6; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc326-g-problem-36dce71c2755d07b4df06c1211e409569c339d4776d5146c639f7ce28ba7f74f",
+    "source-abc326-editorial-7475-481f4308542830c11a42ae501727f532a2f6d6c2cafbfa5b3bb7657f003d72eb"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

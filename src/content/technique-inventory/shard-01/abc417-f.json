@@ -1,0 +1,20 @@
+{
+  "problemId": "abc417-f",
+  "sourceRevisionIds": [
+    "source-abc417-editorial-13549-9592f5d00c9cb4b14771101aa832aa0791fe2e15d3b99f55a07229f40675b664",
+    "source-abc417-f-problem-1fbb588cf6c343f09c00dde44b41f0da9c4ec9e47246eac1da54be528285f28c"
+  ],
+  "coreMethod": "abc417-f「Random Gathering」では、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "作用の合成則と集約演算の準同型性により、遅延値を子へ配る前後で区間の表す値が変わらない。",
+    "Random Gathering 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "遅延評価セグメント木"],
+  "implementationConcerns": ["作用合成の順序、単位作用、区間長を使う写像を同じ規約で実装する。"],
+  "outcomeCandidates": [
+    "Random Gathering 型の 区間端点と包含関係に対し、遅延評価セグメント木を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

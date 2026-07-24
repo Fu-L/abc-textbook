@@ -1,0 +1,20 @@
+{
+  "problemId": "abc366-g",
+  "sourceRevisionIds": [
+    "source-abc366-editorial-10641-ec072cdede89c9d3c18d5de5930b5d6b3bf3684a2bc8a17ae4b7116a2974fce3",
+    "source-abc366-g-problem-ad99ac5d70a5a554d814fefa08d734090fad5b47a1b1d082b0a713dfdc27ab75"
+  ],
+  "coreMethod": "abc366-g「XOR Neighbors」では、制約を線形方程式系へ写し、Gaussian elimination で rank・解・自由度を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "基本行変形は解集合を変えず、階段形の pivot と自由変数が解空間を完全に記述する。",
+    "XOR Neighbors 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "Gaussian elimination"],
+  "implementationConcerns": ["浮動小数なら pivoting と誤差、有限体なら非零 pivot の逆元を扱う。"],
+  "outcomeCandidates": [
+    "XOR Neighbors 型の 頂点と辺からなる状態グラフに対し、Gaussian eliminationを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

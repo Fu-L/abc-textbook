@@ -1,0 +1,20 @@
+{
+  "id": "abc324-g",
+  "contestId": "abc324",
+  "slotLabel": "G",
+  "officialTaskId": "abc324_g",
+  "title": "Generate Arrays",
+  "officialUrl": "https://atcoder.jp/contests/abc324/tasks/abc324_g",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 1\\leq A _ i\\leq N\\ (1\\leq i\\leq N); A _ i\\neq A _ j\\ (1\\leq i\\lt j\\leq N); 1\\leq Q\\leq2\\times10^5; t _ i=1,2\\ (1\\leq i\\leq Q); 0\\leq s _ i\\lt i\\ (1\\leq i\\leq Q); 0\\leq x _ i\\leq N\\ (1\\leq i\\leq Q); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc324-g-problem-a2a995abf08034c8681a217ff49c1a74625a353740871446c9b75fd426e15ea7",
+    "source-abc324-editorial-7399-ab02b564dea5abbc9ea0b59039ac96169d94dc9751a2bfc5aa105c089979319a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

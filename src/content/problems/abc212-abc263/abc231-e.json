@@ -1,0 +1,20 @@
+{
+  "id": "abc231-e",
+  "contestId": "abc231",
+  "slotLabel": "E",
+  "officialTaskId": "abc231_e",
+  "title": "Minimal payments",
+  "officialUrl": "https://atcoder.jp/contests/abc231/tasks/abc231_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\leq N \\leq 60; 1=A_1 < \\ldots <A_N \\leq 10^{18}; A_{i+1} is a multiple of A_i for every 1\\leq i \\leq N-1.; 1\\leq X \\leq 10^{18}",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c",
+    "source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

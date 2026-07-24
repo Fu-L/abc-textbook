@@ -1,0 +1,22 @@
+{
+  "problemId": "abc288-ex",
+  "sourceRevisionIds": [
+    "source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9",
+    "source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c"
+  ],
+  "coreMethod": "abc288-ex「A Nameless Counting Problem」では、上位桁から tight・leading-zero・必要な集約値を状態に持つ digit DP を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ prefix 状態以降の選択肢は一致し、tight が上限との大小関係を過不足なく表す。",
+    "A Nameless Counting Problem 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "桁 DP"],
+  "implementationConcerns": [
+    "leading zero を通常の数字 0 と区別し、上限を含む境界遷移を確認する。"
+  ],
+  "outcomeCandidates": [
+    "A Nameless Counting Problem 型の 列の順序と prefix 状態に対し、桁 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

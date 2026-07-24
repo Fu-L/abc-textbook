@@ -1,0 +1,20 @@
+{
+  "id": "abc258-e",
+  "contestId": "abc258",
+  "slotLabel": "E",
+  "officialTaskId": "abc258_e",
+  "title": "Packing Potatoes",
+  "officialUrl": "https://atcoder.jp/contests/abc258/tasks/abc258_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, Q \\leq 2 \\times 10^5; 1 \\leq X \\leq 10^9; 1 \\leq W_i \\leq 10^9 \\, (0 \\leq i \\leq N - 1); 1 \\leq K_i \\leq 10^{12} \\, (1 \\leq i \\leq Q); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084",
+    "source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

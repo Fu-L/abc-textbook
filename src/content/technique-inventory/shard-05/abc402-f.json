@@ -1,0 +1,22 @@
+{
+  "problemId": "abc402-f",
+  "sourceRevisionIds": [
+    "source-abc402-editorial-12713-b694a104e0818db20607af90c3769a6d79fdc4c66a4eb243a0aa4be1fa578817",
+    "source-abc402-f-problem-da2fa5cd1889a27d365df403a7a588d73613e27327d2c49e21e1071dce6b588e"
+  ],
+  "coreMethod": "abc402-f「Path to Integer」では、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "判定の真偽が境界の片側で閉じる単調性を示せば、各比較で答えを含む区間を半分に保てる。",
+    "Path to Integer 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "二分探索と単調性"],
+  "implementationConcerns": [
+    "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。"
+  ],
+  "outcomeCandidates": [
+    "Path to Integer 型の 盤面上の位置と局所遷移に対し、二分探索と単調性を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

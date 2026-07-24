@@ -1,0 +1,20 @@
+{
+  "id": "abc230-e",
+  "contestId": "abc230",
+  "slotLabel": "E",
+  "officialTaskId": "abc230_e",
+  "title": "Fraction Floor Sum",
+  "officialUrl": "https://atcoder.jp/contests/abc230/tasks/abc230_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{12}; N is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0",
+    "source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

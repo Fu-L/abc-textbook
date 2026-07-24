@@ -1,0 +1,22 @@
+{
+  "problemId": "abc416-e",
+  "sourceRevisionIds": [
+    "source-abc416-e-problem-d0213006b42ade435c4d82062e596bb88e0fc8daa09ff1eb8148bf011495855b",
+    "source-abc416-editorial-13536-14e98e1d6c7b3d87f4b6d704d63bd0be9524047bd30d39af71692ce80fef0a56"
+  ],
+  "coreMethod": "abc416-e「Development」では、小さい側の頂点対ごとに最初の共通隣接点を記録し、二個目を見つけた時点で 4-cycle を復元する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "4-cycle は小さい側の二頂点と、それらを共有する異なる二隣接点の組に必要十分に対応する。",
+    "Development 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["online query の計算量設計", "鳩ノ巣原理と二部グラフの 4-cycle"],
+  "implementationConcerns": [
+    "同一頂点対を unordered に正規化し、最初の witness と現在頂点が異なることを確認する。"
+  ],
+  "outcomeCandidates": [
+    "Development 型の 更新と問い合わせの時系列に対し、鳩ノ巣原理と二部グラフの 4-cycleを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc374",
+  "number": 374,
+  "title": "KEYENCE Programming Contest 2024（AtCoder Beginner Contest 374）",
+  "startedAt": "2024-10-05T21:00:00+09:00",
+  "endedAt": "2024-10-05T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc374",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc374_a",
+    "abc374_b",
+    "abc374_c",
+    "abc374_d",
+    "abc374_e",
+    "abc374_f",
+    "abc374_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc374-task-list-47f8b2f2b7d97826186598bf7fc8632ac1464c872d67d15b50ab891af7509cf9",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

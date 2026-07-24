@@ -1,0 +1,20 @@
+{
+  "problemId": "abc237-ex",
+  "sourceRevisionIds": [
+    "source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa",
+    "source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4"
+  ],
+  "coreMethod": "abc237-ex「Hakata」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+    "Hakata 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "最大流・最小カット定理"],
+  "implementationConcerns": ["有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。"],
+  "outcomeCandidates": [
+    "Hakata 型の 文字列の prefix・suffix と一致関係に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc396",
+  "number": 396,
+  "title": "AtCoder Beginner Contest 396",
+  "startedAt": "2025-03-08T21:00:00+09:00",
+  "endedAt": "2025-03-08T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc396",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc396_a",
+    "abc396_b",
+    "abc396_c",
+    "abc396_d",
+    "abc396_e",
+    "abc396_f",
+    "abc396_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc396-task-list-b66a277684329052af05c6ff70f98c79387ac14f85341c9bbcd679dc0c3feeeb",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

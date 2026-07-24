@@ -1,0 +1,20 @@
+{
+  "problemId": "abc274-g",
+  "sourceRevisionIds": [
+    "source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee",
+    "source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83"
+  ],
+  "coreMethod": "abc274-g「Security Camera 3」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+    "Security Camera 3 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "最大流・最小カット定理"],
+  "implementationConcerns": ["有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。"],
+  "outcomeCandidates": [
+    "Security Camera 3 型の 盤面上の位置と局所遷移に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

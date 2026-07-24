@@ -1,0 +1,20 @@
+{
+  "id": "abc310-g",
+  "contestId": "abc310",
+  "slotLabel": "G",
+  "officialTaskId": "abc310_g",
+  "title": "Takahashi And Pass-The-Ball Game",
+  "officialUrl": "https://atcoder.jp/contests/abc310/tasks/abc310_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times10^5; 1\\leq K\\leq 10^{18}; K is not a multiple of 998244353.; 1\\leq A _ i\\leq N\\ (1\\leq i\\leq N); 0\\leq B _ i\\lt998244353\\ (1\\leq i\\leq N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc310-g-problem-d670b111cffefaec620ceacce53ca59e0ec93e7ceaf9ad40d859cf2758514cb5",
+    "source-abc310-editorial-6785-613fc6f1ebc6d3c217bb0d69198685d99a6c020d4aa8ea98d2921499ac0fccf5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

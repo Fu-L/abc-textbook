@@ -1,0 +1,20 @@
+{
+  "id": "abc420-e",
+  "contestId": "abc420",
+  "slotLabel": "E",
+  "officialTaskId": "abc420_e",
+  "title": "Reachability Query",
+  "officialUrl": "https://atcoder.jp/contests/abc420/tasks/abc420_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 2 \\times 10^5; 1 \\le Q \\le 6 \\times 10^5; Type 1 queries satisfy the following constraints: 1 \\le u < v \\le N For each query, no edge connecting u and v has been added before that query.; 1 \\le u < v \\le N; For each query, no edge connecting u and v has been added before that query.; Type 2,3 queries satisfy the following constraints: 1 \\le v \\le N; 1 \\le v \\le N",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd",
+    "source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

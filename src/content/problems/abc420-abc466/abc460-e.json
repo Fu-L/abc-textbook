@@ -1,0 +1,20 @@
+{
+  "id": "abc460-e",
+  "contestId": "abc460",
+  "slotLabel": "E",
+  "officialTaskId": "abc460_e",
+  "title": "x + y ≡ x + y",
+  "officialUrl": "https://atcoder.jp/contests/abc460/tasks/abc460_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10^4; 1 \\leq N \\leq 10^{18}; 2 \\leq M \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc460-e-problem-b06cfe7b70e5235e8e2c3330612d3ef7c853c68f3c2d33f60825f5bba53d008e",
+    "source-abc460-editorial-21009-f1b15c2f061916282d5a75f4e4924f3f810e46797634aaee40f4d173f7d63a0b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

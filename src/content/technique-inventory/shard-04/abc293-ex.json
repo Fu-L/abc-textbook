@@ -1,0 +1,20 @@
+{
+  "problemId": "abc293-ex",
+  "sourceRevisionIds": [
+    "source-abc293-editorial-5964-fa661f02f6876e8896f80d4179788d50bb5a6502ede71ab300bd6a35945c80c9",
+    "source-abc293-ex-problem-a073d501650d2242c62acd73265aeb8e9e62825f1dbe51a2e2cbb5363343f6b9"
+  ],
+  "coreMethod": "abc293-ex「Optimal Path Decomposition」では、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "木には閉路がないため、親辺を除く部分木が独立し、帰納法で子の最適値または個数を合成できる。",
+    "Optimal Path Decomposition 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "根付き木と木 DP"],
+  "implementationConcerns": ["再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。"],
+  "outcomeCandidates": [
+    "Optimal Path Decomposition 型の 根付き木・部分木・パスの関係に対し、根付き木と木 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

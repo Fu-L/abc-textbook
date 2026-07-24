@@ -1,0 +1,20 @@
+{
+  "id": "abc402-e",
+  "contestId": "abc402",
+  "slotLabel": "E",
+  "officialTaskId": "abc402_e",
+  "title": "Payment Required",
+  "officialUrl": "https://atcoder.jp/contests/abc402/tasks/abc402_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 8; 1 \\leq S_i \\leq 2718; 1 \\leq C_i \\leq X \\leq 5000; 1 \\leq P_i \\leq 100; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e",
+    "source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

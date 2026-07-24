@@ -1,0 +1,21 @@
+{
+  "id": "abc277",
+  "number": 277,
+  "title": "Daiwa Securities Co. Ltd. Programming Contest 2022 Autumn (AtCoder Beginner Contest 277)",
+  "startedAt": "2022-11-12T21:00:00+09:00",
+  "endedAt": "2022-11-12T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc277",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc277_a",
+    "abc277_b",
+    "abc277_c",
+    "abc277_d",
+    "abc277_e",
+    "abc277_f",
+    "abc277_g",
+    "abc277_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc277-task-list-3d524b58ae5b6f51042f3bd1d12b14264f27535d0847261c71c8496eae4405ba",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

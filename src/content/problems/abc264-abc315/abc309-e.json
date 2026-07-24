@@ -1,0 +1,20 @@
+{
+  "id": "abc309-e",
+  "contestId": "abc309",
+  "slotLabel": "E",
+  "officialTaskId": "abc309_e",
+  "title": "Family and Insurance",
+  "officialUrl": "https://atcoder.jp/contests/abc309/tasks/abc309_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3 \\times 10^5; 1 \\leq M \\leq 3 \\times 10^5; 1 \\leq p_i \\leq i-1; 1 \\leq x_i \\leq N; 1 \\leq y_i \\leq 3 \\times 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc309-e-problem-6c47775c7f141367461bce7d134a932afa84e4b3a64ef4c7236d3ac359635d48",
+    "source-abc309-editorial-6748-51ede1abbaee7e70c7c4f0d149c11c985da3edd466836ffa5e81107bdee7f021"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

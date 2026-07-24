@@ -1,0 +1,20 @@
+{
+  "id": "abc244-f",
+  "contestId": "abc244",
+  "slotLabel": "F",
+  "officialTaskId": "abc244_f",
+  "title": "Shortest Good Path",
+  "officialUrl": "https://atcoder.jp/contests/abc244/tasks/abc244_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 17; N-1 \\leq M \\leq \\frac{N(N-1)}{2}; 1 \\leq u_i, v_i \\leq N; The given graph is simple and connected.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6",
+    "source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

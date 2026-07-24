@@ -1,0 +1,20 @@
+{
+  "id": "abc318-g",
+  "contestId": "abc318",
+  "slotLabel": "G",
+  "officialTaskId": "abc318_g",
+  "title": "Typical Path Problem",
+  "officialUrl": "https://atcoder.jp/contests/abc318/tasks/abc318_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2\\times 10^5; N-1\\leq M\\leq\\min\\left(\\frac{N(N-1)}{2},2\\times 10^5\\right); 1\\leq A,B,C\\leq N; A, B, and C are all distinct.; 1\\leq U_i<V_i\\leq N; The pairs (U_i,V_i) are all distinct.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc318-g-problem-b99eb01993a865b14e04e67ffcb2c77c8384770c173ec51a8f0ebf4b94438268",
+    "source-abc318-editorial-7085-33833b825d1c9ced27b2d5f524fd6210757fdcc2f6ae23f60bd67dbe31353296"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

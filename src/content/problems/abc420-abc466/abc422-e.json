@@ -1,0 +1,20 @@
+{
+  "id": "abc422-e",
+  "contestId": "abc422",
+  "slotLabel": "E",
+  "officialTaskId": "abc422_e",
+  "title": "Colinear",
+  "officialUrl": "https://atcoder.jp/contests/abc422/tasks/abc422_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 5 \\times 10^5; N is odd.; -10^8 \\leq x_i \\leq 10^8; -10^8 \\leq y_i \\leq 10^8; If i \\neq j, then (x_i, y_i) \\neq (x_j, y_j).; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc422-e-problem-44e69a3fb5e8d2422de1f335ba82aceb7f4466392b01cdcc3d8a17560541554f",
+    "source-abc422-editorial-13820-84a6d94e189cefe290ad2d1e79ce85ef37836d033117cbd8b62d65041716a864"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

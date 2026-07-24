@@ -1,0 +1,20 @@
+{
+  "id": "abc414-f",
+  "contestId": "abc414",
+  "slotLabel": "F",
+  "officialTaskId": "abc414_f",
+  "title": "Jump Traveling",
+  "officialUrl": "https://atcoder.jp/contests/abc414/tasks/abc414_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T\\leq 10^5; 2\\leq N\\leq 2\\times 10^5; 1\\leq K\\leq 20; 1\\leq u_i\\lt v_i\\leq N; The given graph is a tree.; The sum of N over all test cases is at most 2\\times 10^5.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc414-f-problem-29225b0da36f7b897e7b7bd84e8bac500cee8ae58044912e0baaf0317ecf04e0",
+    "source-abc414-editorial-13439-06426077f4ac1f7611d8310107d8325328cb341b45aef3eb6ff0c5f6495a3df6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc402-f",
+  "contestId": "abc402",
+  "slotLabel": "F",
+  "officialTaskId": "abc402_f",
+  "title": "Path to Integer",
+  "officialUrl": "https://atcoder.jp/contests/abc402/tasks/abc402_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 20; 2 \\leq M \\leq 10^9; 1 \\leq A_{i,j} \\leq 9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc402-f-problem-da2fa5cd1889a27d365df403a7a588d73613e27327d2c49e21e1071dce6b588e",
+    "source-abc402-editorial-12713-b694a104e0818db20607af90c3769a6d79fdc4c66a4eb243a0aa4be1fa578817"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

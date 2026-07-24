@@ -1,0 +1,20 @@
+{
+  "id": "abc450-g",
+  "contestId": "abc450",
+  "slotLabel": "G",
+  "officialTaskId": "abc450_g",
+  "title": "Random Subtraction",
+  "officialUrl": "https://atcoder.jp/contests/abc450/tasks/abc450_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq A_i \\leq 998244352; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98",
+    "source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

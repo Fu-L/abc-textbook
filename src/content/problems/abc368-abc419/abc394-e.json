@@ -1,0 +1,20 @@
+{
+  "id": "abc394-e",
+  "contestId": "abc394",
+  "slotLabel": "E",
+  "officialTaskId": "abc394_e",
+  "title": "Palindromic Shortest Path",
+  "officialUrl": "https://atcoder.jp/contests/abc394/tasks/abc394_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100; N is an integer.; Each C_{i, j} is either a lowercase English letter or -.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc394-e-problem-533b6d290a7446c365096ed0ea81d5cb587c31bea5b9f89f6ab6f060de728c85",
+    "source-abc394-editorial-12279-3461cc9787cdba2e081283a781ca43276d1250d76b4373a257ff891dbe30b97b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

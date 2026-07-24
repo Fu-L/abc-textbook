@@ -22,10 +22,26 @@
 | `startedAt` / `endedAt` | 公式日時。開催中は対象外 |
 | `officialUrl` | AtCoder公式URL |
 | `officialTaskOrder` | 公式problem labelを表示順に並べた非空配列 |
+| `officialTaskIds` | `officialTaskOrder`と同じ長さ・順序のAtCoder内部task ID。表示labelと一致するとは限らない |
 | `taskOrderSourceRevisionId` | 順序を確認したSource Revision |
 | `checkedAt` | 最終確認日時 |
 
-`officialTaskOrder`内で`D`の位置より後にあるlabelを、そのContestのadvanced labelsとする。Dが見つからない、順序が重複する、取得源同士で順序が矛盾する場合はContest全体を公開保留にする。
+`officialTaskOrder`内で`D`の位置より後にあるlabelを、そのContestのadvanced labelsとする。Dが見つからない、順序が重複する、labelと内部task IDの対応が欠ける、取得源同士で順序が矛盾する場合はContest全体を公開保留にする。`Ex`のように表示labelとURL末尾のtask IDが異なる問題でも、安定`Problem.id`は表示labelから導出し、公式URLと出典の照合には対応する`officialTaskIds`を使う。
+
+### OfficialContestGapMetadata
+
+ABC番号が公式に開催されなかった場合だけ作る範囲被覆証跡であり、`Contest`や空のtask listを捏造しない。
+
+| Field | Rule |
+|---|---|
+| `number` / `contestId` | 対象番号と対応する`abcNNN` ID |
+| `status` | `officially_unheld`のみ |
+| `evidenceUrl` | 欠番を明記したAtCoder公式task URL |
+| `evidenceAssertion` | parser driftを検出する短い公式assertion |
+| `checkedAt` / `termsCheckedAt` | 取得時点と利用条件確認時点 |
+| `fingerprint` | assertionを含む正規化公式contentのSHA-256 |
+
+対象番号ごとに`Contest`または`OfficialContestGapMetadata`のちょうど一方を要求する。欠番証跡からProblem、ContestSlotRecord、Source Revisionを派生させてはならない。
 
 ### AdvancedSlotRegistry
 
@@ -53,6 +69,7 @@ E/F/G/Hは固定enumではない。現在存在する通常labelとしてregistr
 | Field | Rule |
 |---|---|
 | `contestId` / `label` | 複合一意key |
+| `officialTaskId` | `exists`では対応するAtCoder内部task ID、`official_absent`ではnull |
 | `officialOrder` | Contest内の0以上の順序。公式問題なしではnull |
 | `availability` | `exists`, `official_absent`, `unknown`, `withdrawn` |
 | `catalogStatus` | `uncollected`, `drafting`, `on_hold`, `published`, `correction_pending` |
@@ -69,10 +86,11 @@ E/F/G/Hは固定enumではない。現在存在する通常labelとしてregistr
 |---|---|
 | `id` | Contest IDと公式labelから導出する安定ID |
 | `contestId` / `slotLabel` | 対応slotへ一意に解決 |
+| `officialTaskId` | 公式task listから得たAtCoder内部task ID。`id`の導出には使わない |
 | `title` | 公式問題名 |
 | `officialUrl` | 公式問題page |
-| `constraintsSummary` | 転載を避けた構造化要約 |
-| `difficultyEvidence` | 公式情報、前提、対象学習者の段階 |
+| `constraintsSummary` | 転載を避けた構造化要約。`uncollected`/`on_hold`ではnull可、それ以外は必須 |
+| `difficultyEvidence` | 公式情報、前提、対象学習者の段階。`uncollected`/`on_hold`ではnull可、それ以外は必須 |
 | `sourceRevisionIds` | 一つ以上 |
 | `checkedAt` | 最終確認日時 |
 | `publicationStatus` | staging/publication状態 |
@@ -90,10 +108,10 @@ taxonomy作成前に全Problemへちょうど一件作る分析正本である�
 | Field | Rule |
 |---|---|
 | `problemId` | 全対象Problemを一回だけ所有 |
-| `sourceRevisionIds` | 判断根拠 |
+| `sourceRevisionIds` | 重複しない判断根拠。当該Problemの`officialTaskId`へ結び付く公式問題revisionを一つ以上含み、個別公式解説を参照する場合も同じtask IDへ結び付く |
 | `coreMethod` | 主たる解法の短い正規化記述 |
 | `proofIdeas` | 証明上の着眼点 |
-| `asymptoticComplexity` | 時間・空間計算量 |
+| `asymptoticComplexity` | 任意。計算量解析自体が解法選択や実現可能性の本質となる特殊な場合に限り、公式解説または問題固有の解析で確定した解法全体の時間・空間計算量のうち一つ以上を持つ。通常の計算量や部分テクニックの汎用fallback値を代入してはならない |
 | `prerequisiteCandidates` | 必要知識候補 |
 | `implementationConcerns` | 実装上の注意 |
 | `outcomeCandidates` | 観察可能な学習成果候補 |
@@ -101,6 +119,7 @@ taxonomy作成前に全Problemへちょうど一件作る分析正本である�
 | `authorId` / `reviewStatus` | 棚卸しの責任と確認状態 |
 
 公開taxonomyを作る前に、対象Problem ID集合とInventoryのProblem ID集合が完全一致しなければならない。
+Technique Inventoryは、平方根分割、償却解析、出力依存、実用上重要な定数倍などの計算量解析が主テクニックの成立理由となり、かつ解法全体の計算量が根拠から確定できる場合だけ`asymptoticComplexity`を持つ。通常の計算量は公式解説に明記されていても省略する。計算量を明示しない公式解説に対して、主テクニック単体の典型計算量や入力サイズを仮定した時間・空間上界を補完しない。完全解説を公開する後続工程では、問題固有の実装を確定したうえでFR-005の計算量・制約整合を別途満たす。
 
 ### PreviewCohortCandidatePool
 
@@ -316,7 +335,7 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 
 ### SourceRecord / SourceRevision / CorrectionImpact
 
-SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。CorrectionImpactは本文と別の訂正ライフサイクルを持つため独立entityとする。`affectedContentLocators`は`{ownerType: "problem", problemId, path}`または`{ownerType: "learning_unit", learningUnitId, path}`の判別付きunionで、ProblemAuthoringUnitのsection/local blockとLearningUnitの本文/Example/Exercise/Assessment/Answerを対象にする。これとは別に`affectedLearningUnitOrderIds`と`derivedIndexPaths`でUnit順と派生indexを列挙する。重複するowner ID配列を正本にせず、各locatorが選択したownerの実データへ解決できない限り公開不可である。
+SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。問題pageまたは個別公式解説のSourceRevisionは`officialTaskId`を保持し、Contestのlabel-to-task-ID mappingおよび参照元Problemと一致しなければならない。Contest全体・task list・公式解説indexのrevisionでは`officialTaskId`をnullにする。公式解説index (`/editorial`) と個別公式解説 (`/editorial/<id>`) は別resourceとして扱い、Technique Inventoryの問題固有根拠にindexだけを使ってはならない。CorrectionImpactは本文と別の訂正ライフサイクルを持つため独立entityとする。`affectedContentLocators`は`{ownerType: "problem", problemId, path}`または`{ownerType: "learning_unit", learningUnitId, path}`の判別付きunionで、ProblemAuthoringUnitのsection/local blockとLearningUnitの本文/Example/Exercise/Assessment/Answerを対象にする。これとは別に`affectedLearningUnitOrderIds`と`derivedIndexPaths`でUnit順と派生indexを列挙する。重複するowner ID配列を正本にせず、各locatorが選択したownerの実データへ解決できない限り公開不可である。
 
 ## 5. Learning records
 
@@ -431,7 +450,7 @@ SC-012について、全公開Problem routeが共有LearningRecord component/act
 
 公開前に少なくとも次を全件検査する。
 
-1. ABC 212からcutoffまでContest番号が連続する。
+1. ABC 212からcutoffまでの各番号が、開催済みContestまたは公式欠番証跡のちょうど一方で連続被覆される。
 2. 各ContestのDより後の全公式ProblemがCatalogに存在する。
 3. AdvancedSlotRegistryが全Contest orderと矛盾せず、新labelを欠落させない。
 4. Problem集合とTechnique Inventory集合が一致する。

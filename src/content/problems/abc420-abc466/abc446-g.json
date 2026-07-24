@@ -1,0 +1,20 @@
+{
+  "id": "abc446-g",
+  "contestId": "abc446",
+  "slotLabel": "G",
+  "officialTaskId": "abc446_g",
+  "title": "221 Subsequence",
+  "officialUrl": "https://atcoder.jp/contests/abc446/tasks/abc446_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 500\\,000; 1 \\leq A_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc446-g-problem-37f1079958d3a19d18560c59f5699b3a1c2bca70a9712cbbda23a45c3d983770",
+    "source-abc446-editorial-16371-7e2dc85c07817b4f562f8b85ebccbeff91d4ca31241e7a4e9ef0df77a9872b6c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

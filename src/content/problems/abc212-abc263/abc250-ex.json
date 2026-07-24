@@ -1,0 +1,20 @@
+{
+  "id": "abc250-ex",
+  "contestId": "abc250",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc250_h",
+  "title": "Trespassing Takahashi",
+  "officialUrl": "https://atcoder.jp/contests/abc250/tasks/abc250_h",
+  "constraintsSummary": "Time limit: 7 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq K \\leq N \\leq 2 \\times 10^5; N-1 \\leq M \\leq \\min (2 \\times 10^5, \\frac{N(N-1)}{2}); 1 \\leq a_i \\lt b_i \\leq N; If i \\neq j, then (a_i,b_i) \\neq (a_j,b_j).; 1 \\leq c_i \\leq 10^9; One can travel from any point to any other point using some number of roads.; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq x_i \\lt y_i \\leq K; 1 \\leq t_1 \\leq \\ldots \\leq t_Q \\leq 10^{15}; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93",
+    "source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

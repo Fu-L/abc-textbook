@@ -1,0 +1,20 @@
+{
+  "id": "abc425-f",
+  "contestId": "abc425",
+  "slotLabel": "F",
+  "officialTaskId": "abc425_f",
+  "title": "Inserting Process",
+  "officialUrl": "https://atcoder.jp/contests/abc425/tasks/abc425_f",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 22; N is an integer.; T is a string of length N consisting of lowercase English letters.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc425-f-problem-0daba476797131229053d0bfee38097c725ef04ba5116bc52103f1073a1be4d3",
+    "source-abc425-editorial-14075-fe2a4e375b616dc66bfc769078c5ebea5de9aeeacb74e28b00a9e9678ab2c00c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc271-e",
+  "contestId": "abc271",
+  "slotLabel": "E",
+  "officialTaskId": "abc271_e",
+  "title": "Subsequence Path",
+  "officialUrl": "https://atcoder.jp/contests/abc271/tasks/abc271_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M, K \\leq 2 \\times 10^5; 1 \\leq A_i, B_i \\leq N, A_i \\neq B_i \\, (1 \\leq i \\leq M); 1 \\leq C_i \\leq 10^9 \\, (1 \\leq i \\leq M); 1 \\leq E_i \\leq M \\, (1 \\leq i \\leq K); All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc271-e-problem-fd7e62c9d1acf76da2f90ee7e99d215540cf06ce19275e120ba52dcdc8a76bc6",
+    "source-abc271-editorial-4924-1a068eda5b94d2332ed04171e4cfc5468c215a886d7473bd7efdd2dab9f874e6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc249-f",
+  "contestId": "abc249",
+  "slotLabel": "F",
+  "officialTaskId": "abc249_f",
+  "title": "Ignore Operations",
+  "officialUrl": "https://atcoder.jp/contests/abc249/tasks/abc249_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq K \\leq N; t_i \\in \\{1,2\\} \\, (1 \\leq i \\leq N); |y_i| \\leq 10^9 \\, (1 \\leq i \\leq N); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e",
+    "source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

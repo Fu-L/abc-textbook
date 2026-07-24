@@ -1,0 +1,20 @@
+{
+  "id": "abc251-f",
+  "contestId": "abc251",
+  "slotLabel": "F",
+  "officialTaskId": "abc251_f",
+  "title": "Two Spanning Trees",
+  "officialUrl": "https://atcoder.jp/contests/abc251/tasks/abc251_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; N-1 \\leq M \\leq \\min\\lbrace 2 \\times 10^5, N(N-1)/2 \\rbrace; 1 \\leq u_i, v_i \\leq N; All values in input are integers.; The given graph is simple and connected.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4",
+    "source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

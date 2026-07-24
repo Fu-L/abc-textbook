@@ -1,0 +1,20 @@
+{
+  "id": "abc339-g",
+  "contestId": "abc339",
+  "slotLabel": "G",
+  "officialTaskId": "abc339_g",
+  "title": "Smaller Sum",
+  "officialUrl": "https://atcoder.jp/contests/abc339/tasks/abc339_g",
+  "constraintsSummary": "Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 2 \\times 10^5; 0 \\le A_i \\le 10^9; 1 \\le Q \\le 2 \\times 10^5; For the encrypted inputs, the following holds: 0 \\le \\alpha_i, \\beta_i, \\gamma_i \\le 10^{18}; 0 \\le \\alpha_i, \\beta_i, \\gamma_i \\le 10^{18}; For the decrypted queries, the following holds: 1 \\le L_i \\le R_i \\le N 0 \\le X_i \\le 10^9; 1 \\le L_i \\le R_i \\le N; 0 \\le X_i \\le 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8",
+    "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

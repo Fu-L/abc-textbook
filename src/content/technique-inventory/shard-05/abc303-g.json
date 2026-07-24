@@ -1,0 +1,22 @@
+{
+  "problemId": "abc303-g",
+  "sourceRevisionIds": [
+    "source-abc303-editorial-6444-5611246de28948f9c9a7b632b84c007be451b111f0e0f135a76d5e329d598ad1",
+    "source-abc303-g-problem-fbcaf504a69e006d352d0458cb7b4b758db0b7d6fce4cdda38956ce856ca348f"
+  ],
+  "coreMethod": "abc303-g「Bags Game」では、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+    "Bags Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "セグメント木と monoid"],
+  "implementationConcerns": [
+    "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。"
+  ],
+  "outcomeCandidates": [
+    "Bags Game 型の 区間端点と包含関係に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

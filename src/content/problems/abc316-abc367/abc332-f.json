@@ -1,0 +1,20 @@
+{
+  "id": "abc332-f",
+  "contestId": "abc332",
+  "slotLabel": "F",
+  "officialTaskId": "abc332_f",
+  "title": "Random Update Query",
+  "officialUrl": "https://atcoder.jp/contests/abc332/tasks/abc332_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\leq N, M \\leq 2 \\times 10^5; 0 \\leq A_i \\leq 10^9; 1 \\leq L_i \\leq R_i \\leq N; 0 \\leq X_i \\leq 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc332-f-problem-24a1fcf4e5c5bb6779072ea00c387425b9402686d993728c49921369d0cd6fd2",
+    "source-abc332-editorial-7890-b6db5da6f35bcbe75e94efe972aacbb1dae17b24e342dcdc8e307f8062e698fe"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

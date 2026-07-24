@@ -1,0 +1,22 @@
+{
+  "problemId": "abc398-g",
+  "sourceRevisionIds": [
+    "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+    "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+  ],
+  "coreMethod": "abc398-g「Not Only Tree Game」では、幅の小さい grid を走査し、frontier の塗色と連結成分 partition を正規化した profile DP を行う。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "未処理領域と接し得るのは frontier 上の頂点だけなので、その連結 partition が将来に必要な情報を全て含む。",
+    "Not Only Tree Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "profile DP と連結成分状態の正規化"],
+  "implementationConcerns": [
+    "frontier から消える成分を再接続不能として判定し、成分 label を毎遷移後に canonicalize する。"
+  ],
+  "outcomeCandidates": [
+    "Not Only Tree Game 型の 頂点と辺からなる状態グラフに対し、profile DP と連結成分状態の正規化を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

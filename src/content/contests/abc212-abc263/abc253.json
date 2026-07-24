@@ -1,0 +1,21 @@
+{
+  "id": "abc253",
+  "number": 253,
+  "title": "NOMURA Programming Contest 2022（AtCoder Beginner Contest 253）",
+  "startedAt": "2022-05-28T21:00:00+09:00",
+  "endedAt": "2022-05-28T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc253",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc253_a",
+    "abc253_b",
+    "abc253_c",
+    "abc253_d",
+    "abc253_e",
+    "abc253_f",
+    "abc253_g",
+    "abc253_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc253-task-list-dad8f95f88a42ecec6ffb42c971b2317ca7f81d1e866a07530e4b5f833b98d8b",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

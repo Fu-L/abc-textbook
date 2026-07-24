@@ -65,7 +65,7 @@ npm run catalog:validate -- --fixture tests/fixtures/catalog/technique-inventory
 期待結果:
 
 - 対象Problem ID集合とTechniqueInventoryItemのProblem ID集合が完全一致する。
-- 主解法、証明着眼点、計算量、前提、実装注意、成果候補が欠けるitemを拒否する。
+- 主解法、証明着眼点、前提、実装注意、成果候補が欠けるitemを拒否する。計算量は解析自体が解法の本質となる特殊な場合に、解法全体について根拠から確定できた値だけを受理する。通常の計算量と部分テクニック由来の汎用fallback値を拒否する。
 - Contestごとの同義仮Tag、Problem一問の言い換えTag、ad-hocだけのTagを正式化できない。
 - 同じ典型を持つ別ContestのProblemが共通Outcome/Tagへまとまる。
 

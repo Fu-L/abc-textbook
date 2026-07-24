@@ -1,0 +1,20 @@
+{
+  "problemId": "abc462-g",
+  "sourceRevisionIds": [
+    "source-abc462-editorial-21456-125bd5706c0cdf5e896a02d1a23eef13dc6df29f4a75b59feaf156115895e857",
+    "source-abc462-g-problem-73f7e339d052db10556f4c6375992f51700de1db87661f7cad566dd5896ace03"
+  ],
+  "coreMethod": "abc462-g「Completely Wrong」では、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+    "Completely Wrong 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "包除原理"],
+  "implementationConcerns": ["空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。"],
+  "outcomeCandidates": [
+    "Completely Wrong 型の 整数の約数・剰余構造に対し、包除原理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

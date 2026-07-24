@@ -1,0 +1,20 @@
+{
+  "id": "abc321-e",
+  "contestId": "abc321",
+  "slotLabel": "E",
+  "officialTaskId": "abc321_e",
+  "title": "Complete Binary Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc321/tasks/abc321_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T \\leq 10^5; 1\\leq N \\leq 10^{18}; 1\\leq X \\leq N; 0\\leq K \\leq N-1; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615",
+    "source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

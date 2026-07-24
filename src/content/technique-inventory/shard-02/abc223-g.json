@@ -1,0 +1,22 @@
+{
+  "problemId": "abc223-g",
+  "sourceRevisionIds": [
+    "source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781",
+    "source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e"
+  ],
+  "coreMethod": "abc223-g「Vertex Deletion」では、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各有向辺の部分問題を辺の反対側だけから合成すれば、根を移しても必要な寄与を重複なく再利用できる。",
+    "Vertex Deletion 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "全方位木 DP"],
+  "implementationConcerns": [
+    "単位元と合成順序を明示し、子を除いた値を prefix・suffix から構成する。"
+  ],
+  "outcomeCandidates": [
+    "Vertex Deletion 型の 根付き木・部分木・パスの関係に対し、全方位木 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

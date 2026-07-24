@@ -1,0 +1,22 @@
+{
+  "problemId": "abc351-e",
+  "sourceRevisionIds": [
+    "source-abc351-e-problem-a298ef7244fa4a1ea123aa4d1d3434a2f4331859aa342b3f4d3bd12b576fde0f",
+    "source-abc351-editorial-9890-252c10a6f3108732a2cc331dac4102643e03c18803abef766d1c416cce70baf2"
+  ],
+  "coreMethod": "abc351-e「Jump Distance Sum」では、到達可能性を parity 別に分け、u=x+y と v=x-y へ座標変換して Manhattan 距離和を一次元絶対値和へ分離する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "同 parity 点では Chebyshev 型の移動距離が変換後の |Δu|+|Δv| の半分に等しく、各軸の寄与を独立に数えられる。",
+    "Jump Distance Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["45度座標変換と絶対値和"],
+  "implementationConcerns": [
+    "parity group を混ぜず、sort 後の prefix sum で各差を一度だけ数え、最後の 2 除算を扱う。"
+  ],
+  "outcomeCandidates": [
+    "Jump Distance Sum 型の問題に対し、45度座標変換と絶対値和を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

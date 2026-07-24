@@ -1,0 +1,22 @@
+{
+  "problemId": "abc252-e",
+  "sourceRevisionIds": [
+    "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+    "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"
+  ],
+  "coreMethod": "abc252-e「Road Reduction」では、Dijkstra の各頂点への最終緩和で predecessor edge を記録し、根以外へ一本ずつ選んで最短路木を残す。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "各 predecessor は距離を厳密に満たす最短路の一辺で、根からの辺数に関する帰納で全頂点の元最短距離が保たれる。",
+    "Road Reduction 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["Dijkstra 法と shortest-path tree"],
+  "implementationConcerns": [
+    "同距離候補は任意の一本でよく、priority queue の stale entry から predecessor を更新しない。"
+  ],
+  "outcomeCandidates": [
+    "Road Reduction 型の問題に対し、Dijkstra 法と shortest-path treeを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

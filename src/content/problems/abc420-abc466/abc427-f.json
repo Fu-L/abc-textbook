@@ -1,0 +1,20 @@
+{
+  "id": "abc427-f",
+  "contestId": "abc427",
+  "slotLabel": "F",
+  "officialTaskId": "abc427_f",
+  "title": "Not Adjacent",
+  "officialUrl": "https://atcoder.jp/contests/abc427/tasks/abc427_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le60; 1\\le M\\le10 ^ 9; 0\\le A _ i\\lt M; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc427-f-problem-1009db545ade28aeb0009ef81f314ed11a4d7baaf41792a10bd84e80b8422dbd",
+    "source-abc427-editorial-14195-a523ac80888e999b403a874323ca4ed5424535861f03895268bdcce8d5c01e98"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

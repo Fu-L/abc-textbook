@@ -1,0 +1,20 @@
+{
+  "id": "abc299-g",
+  "contestId": "abc299",
+  "slotLabel": "G",
+  "officialTaskId": "abc299_g",
+  "title": "Minimum Permutation",
+  "officialUrl": "https://atcoder.jp/contests/abc299/tasks/abc299_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq M; Every integer between 1 and M, inclusive, appears at least once in A.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc299-g-problem-9bc46c6b96b4bfb589e507c4e019637bbdf246dfa1da30b2811e62e72c107a48",
+    "source-abc299-editorial-6252-55d61d29022d60ea020340b687cb855075ccbde03c500c53f4557ff40796c8f7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

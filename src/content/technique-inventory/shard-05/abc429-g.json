@@ -1,0 +1,28 @@
+{
+  "problemId": "abc429-g",
+  "sourceRevisionIds": [
+    "source-abc429-editorial-14242-8c586c50b71364483aa2f1a0744f0edc53b0499f21359991f124117fb9446215",
+    "source-abc429-g-problem-8e2a8092102af19fac9206f28a8823b9ba90edb38486977ad961bb232cda385a"
+  ],
+  "coreMethod": "abc429-g「Sum of Pow of Mod of Linear」では、(Ak+B) mod M の列を鳩の巣原理で得た短い差分を用いて O(√M) 本の等差数列へ分解し、各列の冪和をまとめて求める。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "最初の O(√M) 項には差が O(√M) 以下の二項があり、その index 差で列を分けると wrap 回数の総和も O(√M) 本に抑えられる。",
+    "Sum of Pow of Mod of Linear 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "asymptoticComplexity": {
+    "time": "O(√M log M)（公式解法全体。特殊な計算量解析を含む）"
+  },
+  "prerequisiteCandidates": [
+    "鳩の巣原理、等差数列分解、等比数列の和",
+    "特殊な漸近計算量の見積もり"
+  ],
+  "implementationConcerns": [
+    "差分の向きと modulo の正規化を固定し、各等差列の長さと初項を整数演算で求める。"
+  ],
+  "outcomeCandidates": [
+    "Sum of Pow of Mod of Linear 型の問題に対し、鳩の巣原理、等差数列分解、等比数列の和を選び、状態・証明・特殊計算量を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc358-e",
+  "contestId": "abc358",
+  "slotLabel": "E",
+  "officialTaskId": "abc358_e",
+  "title": "Alphabet Tiles",
+  "officialUrl": "https://atcoder.jp/contests/abc358/tasks/abc358_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq 1000; 0 \\leq C_i \\leq 1000; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc358-e-problem-ce60cff63fd0577725456c91d6665c619045aa7e5cae031c6388896e96d4e6c5",
+    "source-abc358-editorial-10224-5173bc717de96c786fc42652937e6a6bff489baa562df3ae25093cf36b299e82"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

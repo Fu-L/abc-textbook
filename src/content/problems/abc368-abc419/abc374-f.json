@@ -1,0 +1,20 @@
+{
+  "id": "abc374-f",
+  "contestId": "abc374",
+  "slotLabel": "F",
+  "officialTaskId": "abc374_f",
+  "title": "Shipping",
+  "officialUrl": "https://atcoder.jp/contests/abc374/tasks/abc374_f",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le K \\le N \\le 100; 1 \\le X \\le 10^9; 1 \\le T_1 \\le T_2 \\le \\dots \\le T_N \\le 10^{12}",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc374-f-problem-23882ecbf159233e00a1d0f004e255e55db05c60e57a2c9909ea3a84c4ed95bf",
+    "source-abc374-editorial-11095-96d88404a0b6b88070e5ffa964c6c9a7809ac83cb8431a9044b0de85ad249703"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

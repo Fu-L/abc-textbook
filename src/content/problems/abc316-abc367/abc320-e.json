@@ -1,0 +1,20 @@
+{
+  "id": "abc320-e",
+  "contestId": "abc320",
+  "slotLabel": "E",
+  "officialTaskId": "abc320_e",
+  "title": "Somen Nagashi",
+  "officialUrl": "https://atcoder.jp/contests/abc320/tasks/abc320_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 1 \\leq M \\leq 2\\times 10^5; 0 <T_1 <\\ldots < T_M \\leq 10^9; 1 \\leq S_i \\leq 10^9; 1 \\leq W_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc320-e-problem-12283801c6795f9728446ffd483e652ec89d9b9d9905e5e0d79f5a7727acb16d",
+    "source-abc320-editorial-7125-606774792fcfd0b76f743eab75028895ecdc10a505dbd84e14df2a86807d39e6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

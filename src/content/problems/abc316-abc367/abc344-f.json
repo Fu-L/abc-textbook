@@ -1,0 +1,20 @@
+{
+  "id": "abc344-f",
+  "contestId": "abc344",
+  "slotLabel": "F",
+  "officialTaskId": "abc344_f",
+  "title": "Earn to Advance",
+  "officialUrl": "https://atcoder.jp/contests/abc344/tasks/abc344_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 80; 1 \\leq P_{i,j} \\leq 10^9; 1 \\leq R_{i,j},D_{i,j} \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc344-f-problem-1ce348dacdf45e7ee430869830c57cb7ab4b03f187e2300e665afb33c4dde6b3",
+    "source-abc344-editorial-9473-e93b9c642a9f4fdca8fc80437b3b360b32bbfd6554894e058ecf9eef3b29e822"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,25 @@
+{
+  "problemId": "abc421-f",
+  "sourceRevisionIds": [
+    "source-abc421-editorial-13787-433e8d0a684c462cc1e7cceabc14552e13947bbf5910cabd3c98196fd12e0564",
+    "source-abc421-f-problem-0ab28e8057b1b056ea75492696f2deba87c12925e65a0fb80b14697fe8aea8b9"
+  ],
+  "coreMethod": "abc421-f「Erase between X and Y」では、値を node ID とする next 配列で列を表し、両端から交互に辿って先に相手へ届いた区間を splice・削除する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "探索歩数は削除要素数の定数倍で、各 node は追加後に高々一度しか削除されないため全 query で線形になる。",
+    "Erase between X and Y 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "asymptoticComplexity": {
+    "time": "O(Q)（公式解法全体。特殊な計算量解析を含む）"
+  },
+  "prerequisiteCandidates": ["連結リストと償却解析", "特殊な漸近計算量の見積もり"],
+  "implementationConcerns": [
+    "両方向探索の一時和を分け、到達した向きだけを採用して端点自身を削除しない。"
+  ],
+  "outcomeCandidates": [
+    "Erase between X and Y 型の問題に対し、連結リストと償却解析を選び、状態・証明・特殊計算量を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

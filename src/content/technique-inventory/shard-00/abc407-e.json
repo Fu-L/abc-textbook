@@ -1,0 +1,20 @@
+{
+  "problemId": "abc407-e",
+  "sourceRevisionIds": [
+    "source-abc407-e-problem-142aa7cdf55acfde7d5e2e287f4974df8318542384b1b70c8d4c79c892201fbc",
+    "source-abc407-editorial-13106-5e2099b28d8365f9edeaf8a1e74f2037a1759ad055f6de3b1be589764b499f43"
+  ],
+  "coreMethod": "abc407-e「Most Valuable Parentheses」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+    "Most Valuable Parentheses 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "greedy choice と交換論法"],
+  "implementationConcerns": ["同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。"],
+  "outcomeCandidates": [
+    "Most Valuable Parentheses 型の 文字列の prefix・suffix と一致関係に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

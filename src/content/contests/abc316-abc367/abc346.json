@@ -1,0 +1,20 @@
+{
+  "id": "abc346",
+  "number": 346,
+  "title": "UNIQUE VISION Programming Contest 2024 Spring(AtCoder Beginner Contest 346)",
+  "startedAt": "2024-03-23T21:00:00+09:00",
+  "endedAt": "2024-03-23T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc346",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc346_a",
+    "abc346_b",
+    "abc346_c",
+    "abc346_d",
+    "abc346_e",
+    "abc346_f",
+    "abc346_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc346-task-list-df73e2588f549ec71cd5e61b16ee7807cecd1042838967570229ea34f22c8544",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc356-f",
+  "sourceRevisionIds": [
+    "source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce",
+    "source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a"
+  ],
+  "coreMethod": "abc356-f「Distance Component Size Query」では、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+    "Distance Component Size Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "セグメント木と monoid"],
+  "implementationConcerns": [
+    "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。"
+  ],
+  "outcomeCandidates": [
+    "Distance Component Size Query 型の 頂点と辺からなる状態グラフに対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc242-e",
+  "contestId": "abc242",
+  "slotLabel": "E",
+  "officialTaskId": "abc242_e",
+  "title": "(∀x∀)",
+  "officialUrl": "https://atcoder.jp/contests/abc242/tasks/abc242_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 250000; N is an integer between 1 and 10^6 (inclusive).; In a single input, the sum of N over the test cases is at most 10^6.; S is a string of length N consisting of uppercase English letters.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc242-e-problem-105c649ecb269302c3783a0fc0425f5042be2f65892d32c9e1a658283a51fa21",
+    "source-abc242-editorial-3516-341f0c2b714e9d00396dc06071f467ad103a6c56d7f034cb2d80284e09c1d2f7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc341-e",
+  "contestId": "abc341",
+  "slotLabel": "E",
+  "officialTaskId": "abc341_e",
+  "title": "Alternating String",
+  "officialUrl": "https://atcoder.jp/contests/abc341/tasks/abc341_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N, Q\\leq 5\\times 10^5; S is a string of length N consisting of 0 and 1.; 1\\leq L\\leq R\\leq N for queries of types 1 and 2.; There is at least one query of type 2.; N, Q, L, and R are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972",
+    "source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

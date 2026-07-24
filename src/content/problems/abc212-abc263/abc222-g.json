@@ -1,0 +1,20 @@
+{
+  "id": "abc222-g",
+  "contestId": "abc222",
+  "slotLabel": "G",
+  "officialTaskId": "abc222_g",
+  "title": "222",
+  "officialUrl": "https://atcoder.jp/contests/abc222/tasks/abc222_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 200; 1 \\leq K \\leq 10^8; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+    "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

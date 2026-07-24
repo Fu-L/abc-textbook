@@ -1,0 +1,20 @@
+{
+  "id": "abc342",
+  "number": 342,
+  "title": "HUAWEI Programming Contest 2024（AtCoder Beginner Contest 342）",
+  "startedAt": "2024-02-24T21:00:00+09:00",
+  "endedAt": "2024-02-24T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc342",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc342_a",
+    "abc342_b",
+    "abc342_c",
+    "abc342_d",
+    "abc342_e",
+    "abc342_f",
+    "abc342_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc342-task-list-13415a3f53aabd68ff399241883356cdc4ea098bae86de64f09ad459d4d875c0",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

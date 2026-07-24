@@ -1,0 +1,20 @@
+{
+  "id": "abc253-g",
+  "contestId": "abc253",
+  "slotLabel": "G",
+  "officialTaskId": "abc253_g",
+  "title": "Swap Many Times",
+  "officialUrl": "https://atcoder.jp/contests/abc253/tasks/abc253_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq L \\leq R \\leq \\frac{N(N-1)}{2}; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c",
+    "source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

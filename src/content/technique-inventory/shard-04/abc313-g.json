@@ -1,0 +1,22 @@
+{
+  "problemId": "abc313-g",
+  "sourceRevisionIds": [
+    "source-abc313-editorial-6896-281370d7d5359959d272cc05c68b3bb1fad37f5755e913964f4e498c2f615c86",
+    "source-abc313-g-problem-e9a3b224b799f49226e9c1f76dee5dbf07703407a7352ad343585b355644a5d2"
+  ],
+  "coreMethod": "abc313-g「Redistribution of Piles」では、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "floor(N/i) の異なる値は平方根より小さい商と平方根以下の添字から全て得られ、各区間端は除算で計算できる。",
+    "Redistribution of Piles 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "floor 除算の商区間列挙"],
+  "implementationConcerns": [
+    "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。"
+  ],
+  "outcomeCandidates": [
+    "Redistribution of Piles 型の 列の順序と prefix 状態に対し、floor 除算の商区間列挙を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

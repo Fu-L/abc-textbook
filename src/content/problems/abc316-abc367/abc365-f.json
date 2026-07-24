@@ -1,0 +1,20 @@
+{
+  "id": "abc365-f",
+  "contestId": "abc365",
+  "slotLabel": "F",
+  "officialTaskId": "abc365_f",
+  "title": "Takahashi on Grid",
+  "officialUrl": "https://atcoder.jp/contests/abc365/tasks/abc365_f",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10 ^ 5; 1\\leq L _ i\\leq U _ i\\leq10 ^ 9\\ (1\\leq i\\leq N); \\lbrack L _ i,U _ i\\rbrack\\cap\\lbrack L _ {i+1},U _ {i+1}\\rbrack\\neq\\emptyset\\ (1\\leq i\\lt N); 1\\leq Q\\leq2\\times10 ^ 5; 1\\leq s _ {x,i}\\leq N and L _ {s _ {x,i}}\\leq s _ {y,i}\\leq U _ {s _ {x,i}}\\ (1\\leq i\\leq Q); 1\\leq t _ {x,i}\\leq N and L _ {t _ {x,i}}\\leq t _ {y,i}\\leq U _ {t _ {x,i}}\\ (1\\leq i\\leq Q); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc365-f-problem-0e67b138b92e3c46ad2cede58de7ff3b3270e1ad124881d959dccfcc234401ae",
+    "source-abc365-editorial-10582-ce83fb2ad4d8834dc35fd6020b9f2457dbada335c7ffceeecf6b17d36d777bda"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

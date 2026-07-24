@@ -1,0 +1,20 @@
+{
+  "id": "abc308-g",
+  "contestId": "abc308",
+  "slotLabel": "G",
+  "officialTaskId": "abc308_g",
+  "title": "Minimum Xor Pair Query",
+  "officialUrl": "https://atcoder.jp/contests/abc308/tasks/abc308_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq Q \\leq 3\\times 10^5; 0\\leq x < 2 ^{30}; When a query 2 is given, at least one x is written on the blackboard.; When a query 3 is given, at least two integers are written on the blackboard.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a",
+    "source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

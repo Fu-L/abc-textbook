@@ -1,0 +1,20 @@
+{
+  "id": "abc220-e",
+  "contestId": "abc220",
+  "slotLabel": "E",
+  "officialTaskId": "abc220_e",
+  "title": "Distance on Large Perfect Binary Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc220/tasks/abc220_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^6; 1 \\leq D \\leq 2\\times 10^6; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
+    "source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

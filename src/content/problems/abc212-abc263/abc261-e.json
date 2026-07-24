@@ -1,0 +1,20 @@
+{
+  "id": "abc261-e",
+  "contestId": "abc261",
+  "slotLabel": "E",
+  "officialTaskId": "abc261_e",
+  "title": "Many Operations",
+  "officialUrl": "https://atcoder.jp/contests/abc261/tasks/abc261_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 1\\leq T_i \\leq 3; 0\\leq A_i \\lt 2^{30}; 0\\leq C \\lt 2^{30}; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578",
+    "source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

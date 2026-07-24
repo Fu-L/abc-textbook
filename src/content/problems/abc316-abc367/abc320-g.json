@@ -1,0 +1,20 @@
+{
+  "id": "abc320-g",
+  "contestId": "abc320",
+  "slotLabel": "G",
+  "officialTaskId": "abc320_g",
+  "title": "Slot Strategy 2 (Hard)",
+  "officialUrl": "https://atcoder.jp/contests/abc320/tasks/abc320_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100; 1 \\leq M \\leq 10^5; N and M are integers.; S_i is a string of length M consisting of digits.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc",
+    "source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

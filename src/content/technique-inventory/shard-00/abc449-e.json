@@ -1,0 +1,20 @@
+{
+  "problemId": "abc449-e",
+  "sourceRevisionIds": [
+    "source-abc449-e-problem-997a7ccb68b25fa3f77cd4e902582d044a8b91c43b69d203e02549bcbc08cc26",
+    "source-abc449-editorial-17253-4e8fa9484930c48248f543a8b9996139c2c021ca4abb754b9bfa4f34b2a34829"
+  ],
+  "coreMethod": "abc449-e「A += v」では、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
+    "A += v 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "式変形と frequency map"],
+  "implementationConcerns": ["添字 parity による符号反転と負数 key をそのまま正確に保持する。"],
+  "outcomeCandidates": [
+    "A += v 型の 列の順序と prefix 状態に対し、式変形と frequency mapを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

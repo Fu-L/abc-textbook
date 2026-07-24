@@ -1,0 +1,20 @@
+{
+  "id": "abc423-g",
+  "contestId": "abc423",
+  "slotLabel": "G",
+  "officialTaskId": "abc423_g",
+  "title": "Small Multiple 2",
+  "officialUrl": "https://atcoder.jp/contests/abc423/tasks/abc423_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: T is an integer.; 1 \\leq T \\leq 200; K is an integer.; 1 \\leq K \\leq 10^9; S is a string consisting of digits (0 - 9).; The first character of S is not 0.; 1 \\leq |S| \\leq 5 \\times 10^5; For each input file, the sum of |S| over all test cases is at most 5 \\times 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a",
+    "source-abc423-editorial-13874-875ebf449f21f3c74deeab5317db8177a527b8f48f050154fcad87b18a370a47"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

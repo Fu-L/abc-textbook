@@ -1,0 +1,20 @@
+{
+  "id": "abc297-g",
+  "contestId": "abc297",
+  "slotLabel": "G",
+  "officialTaskId": "abc297_g",
+  "title": "Constrained Nim 2",
+  "officialUrl": "https://atcoder.jp/contests/abc297/tasks/abc297_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 2\\times 10^5; 1\\leq L \\leq R \\leq 10^9; 1\\leq A_i \\leq 10^9; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc297-g-problem-5d7a9c2f2ffc60d29655b1e25594340a96613402eb03bbc0acfadfe94086087d",
+    "source-abc297-editorial-6172-bc1a41b391eda2ee80b27fae0e97e1f35e7b36b6ad06304ce6c9713ad4a7fd02"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc253-e",
+  "sourceRevisionIds": [
+    "source-abc253-e-problem-0ff7727e69a800ed6aa6bec68cb3e8676c00ec61fe523bf2f16afcc1ec5aa533",
+    "source-abc253-editorial-4018-2d52449d4b7b11ea03e570f282c8b0ba4362cd0103953f65a58ce9e3b3b1bc6e"
+  ],
+  "coreMethod": "abc253-e「Distance Sequence」では、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+    "Distance Sequence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "累積和と差分"],
+  "implementationConcerns": ["半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。"],
+  "outcomeCandidates": [
+    "Distance Sequence 型の 列の順序と prefix 状態に対し、累積和と差分を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc373-e",
+  "contestId": "abc373",
+  "slotLabel": "E",
+  "officialTaskId": "abc373_e",
+  "title": "How to Win the Election",
+  "officialUrl": "https://atcoder.jp/contests/abc373/tasks/abc373_e",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 2 \\times 10^5; 1 \\leq K \\leq 10^{12}; 0 \\leq A_i \\leq 10^{12}; \\displaystyle{\\sum_{i=1}^{N} A_i} \\leq K; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc373-e-problem-24a0916bd01b93bcaee356f649208d7c1b0d607b32eedb5794a50aaa4d23df51",
+    "source-abc373-editorial-11044-013abfd5e18e9e91bb7b8ec8a413682acb30bf7359b64ecdbfadc5a672648a4b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

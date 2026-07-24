@@ -1,0 +1,20 @@
+{
+  "id": "abc379-e",
+  "contestId": "abc379",
+  "slotLabel": "E",
+  "officialTaskId": "abc379_e",
+  "title": "Sum of All Substrings",
+  "officialUrl": "https://atcoder.jp/contests/abc379/tasks/abc379_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; N is an integer.; S is a string of length N consisting of digits from 1 through 9.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461",
+    "source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

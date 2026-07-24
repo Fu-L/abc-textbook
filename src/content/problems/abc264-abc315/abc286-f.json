@@ -1,0 +1,20 @@
+{
+  "id": "abc286-f",
+  "contestId": "abc286",
+  "slotLabel": "F",
+  "officialTaskId": "abc286_f",
+  "title": "Guess The Number 2",
+  "officialUrl": "https://atcoder.jp/contests/abc286/tasks/abc286_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 10^9 (inclusive).",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc286-f-problem-cafbda3fb64fbcd274bf163b32a922c2c5d1798c0c2c6c4ec0f55dd8b60aaacb",
+    "source-abc286-editorial-5588-84001bb2b92333c70401743584f2dd937e4435e68da73f58abd8dedc18635260"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

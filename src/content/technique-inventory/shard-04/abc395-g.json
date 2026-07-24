@@ -1,0 +1,22 @@
+{
+  "problemId": "abc395-g",
+  "sourceRevisionIds": [
+    "source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500",
+    "source-abc395-g-problem-28b4b77f6fd7b5f3d752638e1f2aa35eefec8abc1a034fccb30e919e725d5d55"
+  ],
+  "coreMethod": "abc395-g「Minimum Steiner Tree 2」では、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
+    "Minimum Steiner Tree 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "Dijkstra 法と緩和"],
+  "implementationConcerns": [
+    "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。"
+  ],
+  "outcomeCandidates": [
+    "Minimum Steiner Tree 2 型の 頂点と辺からなる状態グラフに対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc307-f",
+  "contestId": "abc307",
+  "slotLabel": "F",
+  "officialTaskId": "abc307_f",
+  "title": "Virus 2",
+  "officialUrl": "https://atcoder.jp/contests/abc307/tasks/abc307_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N\\leq 3\\times 10^5; 0 \\leq M\\leq 3\\times 10^5; 1 \\leq U_i < V_i\\leq N; All (U_i,V_i) are different.; 1\\leq W_i\\leq 10^9; 1 \\leq K\\leq N; 1\\leq A_1<A_2<\\cdots<A_K\\leq N; 1 \\leq D\\leq 3\\times 10^5; 1\\leq X_i\\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c",
+    "source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

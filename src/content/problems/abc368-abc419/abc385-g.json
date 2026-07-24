@@ -1,0 +1,20 @@
+{
+  "id": "abc385-g",
+  "contestId": "abc385",
+  "slotLabel": "G",
+  "officialTaskId": "abc385_g",
+  "title": "Counting Buildings",
+  "officialUrl": "https://atcoder.jp/contests/abc385/tasks/abc385_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; |K| \\leq N-1; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc385-g-problem-e8e51b64f6070e9628eba3ed49737ae3a5b5b216afbfa3cb75da906281b76834",
+    "source-abc385-editorial-11656-abbc96ead53c07d1d269bc2f578c53f96e5460874c25eaa08274554d877da35a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

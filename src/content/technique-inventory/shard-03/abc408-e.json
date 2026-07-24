@@ -1,0 +1,22 @@
+{
+  "problemId": "abc408-e",
+  "sourceRevisionIds": [
+    "source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4",
+    "source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"
+  ],
+  "coreMethod": "abc408-e「Minimum OR Path」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+    "Minimum OR Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "Union-Find"],
+  "implementationConcerns": [
+    "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。"
+  ],
+  "outcomeCandidates": [
+    "Minimum OR Path 型の 頂点と辺からなる状態グラフに対し、Union-Findを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

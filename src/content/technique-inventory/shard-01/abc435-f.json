@@ -1,0 +1,20 @@
+{
+  "problemId": "abc435-f",
+  "sourceRevisionIds": [
+    "source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217",
+    "source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677"
+  ],
+  "coreMethod": "abc435-f「Cat exercise」では、木を根付き化し、部分木の状態を辺を介して親へ合成する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "木には閉路がないため、親辺を除く部分木が独立し、帰納法で子の最適値または個数を合成できる。",
+    "Cat exercise 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["順列と逆写像", "根付き木と木 DP"],
+  "implementationConcerns": ["再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。"],
+  "outcomeCandidates": [
+    "Cat exercise 型の 順列の位置と値の対応に対し、根付き木と木 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

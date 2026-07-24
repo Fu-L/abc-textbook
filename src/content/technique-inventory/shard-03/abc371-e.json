@@ -1,0 +1,22 @@
+{
+  "problemId": "abc371-e",
+  "sourceRevisionIds": [
+    "source-abc371-e-problem-4317baef9dcf6c77612f151f700251d71ba4de4fd36a0edac3241c3756e9a5d9",
+    "source-abc371-editorial-10922-65463ad1e84ad122b219d944a7e2e3b3839270644ebe295fb6e2c39cfd6624ad"
+  ],
+  "coreMethod": "abc371-e「I Hate Sigma Problems」では、指定値が現れる位置へ番兵を加え、隣接出現位置間の gap ごとの三角数から、その値を含まない部分列数を数える。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "指定値を含まない部分列は二つの連続する出現位置の間へ一意に属し、各 gap 長 g は g(g+1)/2 個を与える。",
+    "I Hate Sigma Problems 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["余事象と出現位置列"],
+  "implementationConcerns": [
+    "両端番兵を含め、複数値を避ける条件では位置集合を merge して同じ gap 式を適用する。"
+  ],
+  "outcomeCandidates": [
+    "I Hate Sigma Problems 型の問題に対し、余事象と出現位置列を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

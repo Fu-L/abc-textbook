@@ -1,0 +1,20 @@
+{
+  "id": "abc425-g",
+  "contestId": "abc425",
+  "slotLabel": "G",
+  "officialTaskId": "abc425_g",
+  "title": "Sum of Min of XOR",
+  "officialUrl": "https://atcoder.jp/contests/abc425/tasks/abc425_g",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2\\times 10^5; 1\\le M\\le 10^9; 0\\le A_i \\le 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707",
+    "source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

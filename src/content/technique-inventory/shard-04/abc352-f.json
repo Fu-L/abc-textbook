@@ -1,0 +1,20 @@
+{
+  "problemId": "abc352-f",
+  "sourceRevisionIds": [
+    "source-abc352-editorial-9924-9f4a632245687078caf887539d0a943a3fdae14d244b269cc96b7f0c6dbb80a1",
+    "source-abc352-f-problem-35d14022d92c00f83a01507e4d6b5bc77077b50b3809064a4417b574c01caa21"
+  ],
+  "coreMethod": "abc352-f「Estimate Order」では、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各部分解を選択集合と終端状態で一意に分類し、最後の一手を外す帰納法で遷移の完全性を示す。",
+    "Estimate Order 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["online query の計算量設計", "bitmask と subset DP"],
+  "implementationConcerns": ["集合への追加判定、部分集合列挙、状態数 2^N の型と配列長を確認する。"],
+  "outcomeCandidates": [
+    "Estimate Order 型の 更新と問い合わせの時系列に対し、bitmask と subset DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

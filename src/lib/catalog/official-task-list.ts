@@ -1,8 +1,12 @@
-import { createHash } from 'node:crypto';
-
 import { load } from 'cheerio';
 
+import { canonicalDigest } from '../domain/canonical-json.js';
 import { parseOffsetDateTime } from '../domain/date-time.js';
+import { parseAtCoderContestResourceUrl } from '../domain/schema-parts/catalog.js';
+import {
+  normalizeOfficialContentFragment,
+  type NormalizedOfficialContentFragment,
+} from './official-content-normalization.js';
 
 export interface OfficialTaskListInput {
   readonly contestId: string;
@@ -14,6 +18,12 @@ export interface OfficialTaskListInput {
 export interface ParsedOfficialTaskList {
   readonly contestId: string;
   readonly officialTaskListUrl: string;
+  /** Ordered, lossless mapping from the displayed label to AtCoder's internal task ID. */
+  readonly officialTasks: readonly {
+    readonly label: string;
+    readonly taskId: string;
+    readonly officialOrder: number;
+  }[];
   readonly officialTaskOrder: readonly string[];
   readonly officialTaskIds: readonly string[];
   readonly advancedLabels: readonly string[];
@@ -30,6 +40,181 @@ export class OfficialTaskListError extends Error {
     this.name = 'OfficialTaskListError';
   }
 }
+
+const normalizeText = (value: string): string =>
+  value.normalize('NFC').replace(/\s+/gu, ' ').trim();
+
+const compareCodePoints = (left: string, right: string): number =>
+  left < right ? -1 : left > right ? 1 : 0;
+
+const canonicalAtCoderResourceUrl = (value: string): string => {
+  const url = new URL(value);
+  const pathname = url.pathname.endsWith('/') ? url.pathname.slice(0, -1) : url.pathname;
+  return `${url.protocol}//${url.host}${pathname}`;
+};
+
+export interface OfficialEditorialItemInput {
+  readonly contestId: string;
+  readonly officialEditorialUrl: string;
+  readonly html: string;
+  readonly checkedAt: string;
+}
+
+export interface ParsedOfficialEditorialItem {
+  readonly contestId: string;
+  readonly officialEditorialUrl: string;
+  readonly editorialItemId: string;
+  readonly officialTaskId: string;
+  readonly checkedAt: string;
+  readonly sourceFingerprint: string;
+}
+
+interface NormalizedEditorialContent {
+  readonly officialMarkerCount: number;
+  readonly taskHeadingCount: number;
+  readonly taskBindings: readonly {
+    readonly contestId: string;
+    readonly taskId: string;
+  }[];
+  readonly fragments: readonly NormalizedOfficialContentFragment[];
+}
+
+const normalizeEditorialContent = (
+  html: string,
+  officialEditorialUrl: string,
+): NormalizedEditorialContent => {
+  const $ = load(html);
+  const officialMarkerTexts = new Set(['Official', '公式']);
+  const officialMarkerCount = $('.label').filter((_index, marker) =>
+    officialMarkerTexts.has(normalizeText($(marker).text())),
+  ).length;
+
+  const taskBindings = new Map<string, { readonly contestId: string; readonly taskId: string }>();
+  const taskHeadings = $('h2').filter((_index, heading) => {
+    let hasTaskLink = false;
+    $(heading)
+      .find('a[href]')
+      .each((_anchorIndex, anchor) => {
+        const href = $(anchor).attr('href');
+        if (!href) return;
+        try {
+          const parsedTaskUrl = parseAtCoderContestResourceUrl(
+            new URL(href, officialEditorialUrl).href,
+          );
+          if (parsedTaskUrl?.resource === 'task' && parsedTaskUrl.taskId !== null) {
+            hasTaskLink = true;
+            taskBindings.set(`${parsedTaskUrl.contestId}:${parsedTaskUrl.taskId}`, {
+              contestId: parsedTaskUrl.contestId,
+              taskId: parsedTaskUrl.taskId,
+            });
+          }
+        } catch {
+          // Non-URL anchors are irrelevant to the authoritative task binding.
+        }
+      });
+    return hasTaskLink;
+  });
+
+  const taskHeading = taskHeadings.first();
+  const fragments = taskHeading
+    .nextAll()
+    .toArray()
+    .filter((element) => {
+      const selected = $(element);
+      return (
+        !selected.is('script, style, form, nav, footer, input, button, noscript') &&
+        !selected.hasClass('clearfix')
+      );
+    })
+    .flatMap((element): NormalizedOfficialContentFragment[] => {
+      const projection = normalizeOfficialContentFragment($.html(element), officialEditorialUrl);
+      return projection.text === '' &&
+        projection.links.length === 0 &&
+        projection.images.length === 0
+        ? []
+        : [projection];
+    });
+
+  return {
+    officialMarkerCount,
+    taskHeadingCount: taskHeadings.length,
+    taskBindings: [...taskBindings.values()].sort(
+      (left, right) =>
+        compareCodePoints(left.contestId, right.contestId) ||
+        compareCodePoints(left.taskId, right.taskId),
+    ),
+    fragments,
+  };
+};
+
+/**
+ * Bind an individual official editorial to the task link rendered in its heading.
+ * Editorial numeric IDs have no task identity of their own, so callers must not
+ * infer this relation from URL naming or from the displayed Problem label.
+ */
+export const parseOfficialEditorialItem = (
+  input: OfficialEditorialItemInput,
+): ParsedOfficialEditorialItem => {
+  parseOffsetDateTime(input.checkedAt);
+  const editorialUrl = parseAtCoderContestResourceUrl(input.officialEditorialUrl);
+  if (
+    editorialUrl?.contestId !== input.contestId ||
+    editorialUrl.resource !== 'editorial_item' ||
+    editorialUrl.editorialItemId === null
+  ) {
+    throw new OfficialTaskListError('EDITORIAL_URL_MISMATCH', input.officialEditorialUrl);
+  }
+
+  const normalizedContent = normalizeEditorialContent(input.html, input.officialEditorialUrl);
+  if (normalizedContent.officialMarkerCount !== 1) {
+    throw new OfficialTaskListError(
+      'EDITORIAL_NOT_OFFICIAL',
+      `Expected one Official marker, found ${String(normalizedContent.officialMarkerCount)}.`,
+    );
+  }
+
+  const [taskBinding] = normalizedContent.taskBindings;
+  if (
+    normalizedContent.taskHeadingCount !== 1 ||
+    normalizedContent.taskBindings.length !== 1 ||
+    taskBinding?.contestId !== input.contestId
+  ) {
+    throw new OfficialTaskListError(
+      'EDITORIAL_TASK_MAPPING_INVALID',
+      `Expected one task-bound heading, found ${String(normalizedContent.taskHeadingCount)} headings and ${String(normalizedContent.taskBindings.length)} task bindings.`,
+    );
+  }
+  const officialTaskId = taskBinding.taskId;
+  if (!officialTaskId) {
+    throw new OfficialTaskListError(
+      'EDITORIAL_TASK_MAPPING_INVALID',
+      'The official task ID is missing.',
+    );
+  }
+  if (normalizedContent.fragments.length === 0) {
+    throw new OfficialTaskListError(
+      'EDITORIAL_CONTENT_MISSING',
+      'The normalized official editorial body is empty.',
+    );
+  }
+
+  return Object.freeze({
+    contestId: input.contestId,
+    officialEditorialUrl: input.officialEditorialUrl,
+    editorialItemId: editorialUrl.editorialItemId,
+    officialTaskId,
+    checkedAt: input.checkedAt,
+    sourceFingerprint: canonicalDigest({
+      projectionVersion: 'official-editorial-item-v1',
+      contestId: input.contestId,
+      officialEditorialUrl: canonicalAtCoderResourceUrl(input.officialEditorialUrl),
+      editorialItemId: editorialUrl.editorialItemId,
+      official: true,
+      officialTaskId,
+      fragments: normalizedContent.fragments,
+    }),
+  });
+};
 
 export const parseOfficialTaskList = (input: OfficialTaskListInput): ParsedOfficialTaskList => {
   parseOffsetDateTime(input.checkedAt);
@@ -122,14 +307,30 @@ export const parseOfficialTaskList = (input: OfficialTaskListInput): ParsedOffic
   if (dPosition < 0) {
     throw new OfficialTaskListError('D_TASK_NOT_FOUND', input.contestId);
   }
+  const officialTasks = labels.map((label, officialOrder) => {
+    const taskId = taskIds[officialOrder];
+    if (!taskId) {
+      throw new OfficialTaskListError(
+        'PARSER_DRIFT',
+        `Task label ${label} has no corresponding official task ID.`,
+      );
+    }
+    return Object.freeze({ label, taskId, officialOrder });
+  });
 
   return Object.freeze({
     contestId: input.contestId,
     officialTaskListUrl: input.officialTaskListUrl,
+    officialTasks: Object.freeze(officialTasks),
     officialTaskOrder: Object.freeze(labels),
     officialTaskIds: Object.freeze(taskIds),
     advancedLabels: Object.freeze(labels.slice(dPosition + 1)),
     checkedAt: input.checkedAt,
-    sourceFingerprint: createHash('sha256').update(input.html, 'utf8').digest('hex'),
+    sourceFingerprint: canonicalDigest({
+      projectionVersion: 'official-task-list-v1',
+      contestId: input.contestId,
+      officialTaskListUrl: canonicalAtCoderResourceUrl(input.officialTaskListUrl),
+      officialTasks,
+    }),
   });
 };

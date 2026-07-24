@@ -1,0 +1,20 @@
+{
+  "id": "abc429-e",
+  "contestId": "abc429",
+  "slotLabel": "E",
+  "officialTaskId": "abc429_e",
+  "title": "Hit and Away",
+  "officialUrl": "https://atcoder.jp/contests/abc429/tasks/abc429_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\\leq N\\leq 2\\times 10^5; N-1\\leq M\\leq 2\\times 10^5; 1\\leq U_i,V_i\\leq N; U_i\\neq V_i; If i\\neq j, then \\{ U_i,V_i \\}\\neq \\{ U_j,V_j \\}.; S is a string of length N consisting of S and D.; N,M,U_i,V_i are all integers.; G is connected.; There are at least two safe vertices.; There is at least one dangerous vertex.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc429-e-problem-9df803b12556162e8f83aed4cd53ca9dcb9fa6107528f1fa7d6f1ab32324fd6b",
+    "source-abc429-editorial-14284-f4d1a802037bd607bb764925d6f5da02ab2da46bc71ab5d6b8cda013b83eb71d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc403-e",
+  "contestId": "abc403",
+  "slotLabel": "E",
+  "officialTaskId": "abc403_e",
+  "title": "Forbidden Prefix",
+  "officialUrl": "https://atcoder.jp/contests/abc403/tasks/abc403_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: Q is an integer between 1 and 2 \\times 10^5, inclusive.; T_i \\in \\{1,2\\}; Each S_i is a string of length between 1 and 5\\times 10^5, inclusive, consisting of lowercase English letters.; \\displaystyle \\sum_{i=1}^Q |S_i| \\leq 5 \\times 10^5",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23",
+    "source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

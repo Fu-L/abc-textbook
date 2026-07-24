@@ -1,0 +1,20 @@
+{
+  "id": "abc285-g",
+  "contestId": "abc285",
+  "slotLabel": "G",
+  "officialTaskId": "abc285_g",
+  "title": "Tatami",
+  "officialUrl": "https://atcoder.jp/contests/abc285/tasks/abc285_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W \\leq 300; H and W are integers.; c_{i,j} is one of 1, 2, and ?.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc285-g-problem-c175c30fd08313f9aff4bec8a706abc0de7c3ebf334e2d5b55ab72187ebddc0e",
+    "source-abc285-editorial-5500-15ce389fe4a17393dab7f63ad59b360a880879cee4ada634068acb3225c095af"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

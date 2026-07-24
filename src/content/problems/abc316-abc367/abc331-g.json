@@ -1,0 +1,20 @@
+{
+  "id": "abc331-g",
+  "contestId": "abc331",
+  "slotLabel": "G",
+  "officialTaskId": "abc331_g",
+  "title": "Collect Them All",
+  "officialUrl": "https://atcoder.jp/contests/abc331/tasks/abc331_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 2\\times 10^5; 1 \\leq C_i; \\sum_{i=1}^{M}C_i=N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc331-g-problem-2ff1239dc9161ed18837a37d3769cd399cf62e34a2065aca8ff9f5a278f1cc76",
+    "source-abc331-editorial-7763-4a22d39e350c730d06c236f2536ec68f54b34f357f0788f08790e344b88caf38"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

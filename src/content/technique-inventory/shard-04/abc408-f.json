@@ -1,0 +1,22 @@
+{
+  "problemId": "abc408-f",
+  "sourceRevisionIds": [
+    "source-abc408-editorial-13171-873a19e6cbc121a328bdb5d460e7ca35f392791b3ab13c7c5d38ea73c79b1bc0",
+    "source-abc408-f-problem-e9d9d4e80f8f317e1ca2bca68e178e015b8b622e132f810fdde4adc52b11ff3a"
+  ],
+  "coreMethod": "abc408-f「Athletic」では、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+    "Athletic 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["順列と逆写像", "セグメント木と monoid"],
+  "implementationConcerns": [
+    "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。"
+  ],
+  "outcomeCandidates": [
+    "Athletic 型の 順列の位置と値の対応に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

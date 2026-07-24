@@ -1,0 +1,21 @@
+{
+  "id": "abc307",
+  "number": 307,
+  "title": "Tokio Marine & Nichido Fire Insurance Programming Contest 2023（AtCoder Beginner Contest 307)",
+  "startedAt": "2023-06-24T21:00:00+09:00",
+  "endedAt": "2023-06-24T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc307",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc307_a",
+    "abc307_b",
+    "abc307_c",
+    "abc307_d",
+    "abc307_e",
+    "abc307_f",
+    "abc307_g",
+    "abc307_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc307-task-list-aaa258b0c2665ebdc4d1f3b3b4c3e394e692d5857d8ce0e298991962fd5d0785",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

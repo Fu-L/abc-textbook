@@ -1,0 +1,22 @@
+{
+  "problemId": "abc369-g",
+  "sourceRevisionIds": [
+    "source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d",
+    "source-abc369-g-problem-2b9423c419137fa16d4dc77e6739a0ec2fe5858da5fda63a67ee7e0247093265"
+  ],
+  "coreMethod": "abc369-g「As far as possible」では、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "親部分木の上位 K 個に入らない子内要素は、同じ子だけで K 個以上に負けるため親でも候補にならない。",
+    "As far as possible 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "small-to-large merge と上位 K 個の保持"],
+  "implementationConcerns": [
+    "K の全体上限だけ保持し、query の 1-origin 順位と vector index を変換する。"
+  ],
+  "outcomeCandidates": [
+    "As far as possible 型の 根付き木・部分木・パスの関係に対し、small-to-large merge と上位 K 個の保持を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc223-e",
+  "sourceRevisionIds": [
+    "source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1",
+    "source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf"
+  ],
+  "coreMethod": "abc223-e「Placing Rectangles」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+    "Placing Rectangles 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["全探索と候補数の上界評価"],
+  "implementationConcerns": ["同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。"],
+  "outcomeCandidates": [
+    "Placing Rectangles 型の問題に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

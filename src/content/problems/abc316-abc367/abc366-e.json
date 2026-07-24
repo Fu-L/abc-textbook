@@ -1,0 +1,20 @@
+{
+  "id": "abc366-e",
+  "contestId": "abc366",
+  "slotLabel": "E",
+  "officialTaskId": "abc366_e",
+  "title": "Manhattan Multifocal Ellipse",
+  "officialUrl": "https://atcoder.jp/contests/abc366/tasks/abc366_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq D \\leq 10^6; -10^6 \\leq x_i, y_i \\leq 10^6; (x_i, y_i) \\neq (x_j, y_j) for i \\neq j.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc366-e-problem-cb0d25a165a19479b8e9217c5f357fd3f13c4f691ad47579238461a6f90e952a",
+    "source-abc366-editorial-10640-a7dbc542388d153275ac2f9047c67898840b39621ff70e6e0be9a1e5046143fc"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

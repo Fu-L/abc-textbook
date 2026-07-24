@@ -1,0 +1,22 @@
+{
+  "problemId": "abc219-f",
+  "sourceRevisionIds": [
+    "source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014",
+    "source-abc219-f-problem-81357b19bc73aa408a3ae3da0732b554e100dd724249f7455f547dfa6db1cbf5"
+  ],
+  "coreMethod": "abc219-f「Cleaning Robot」では、反復移動を一周期の変位ベクトルによる平行移動同値類へ分け、各類の訪問区間の和を数える。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "一周期後の位置は常に同じ変位だけ移るため、変位方向に直交する不変量ごとに訪問点が一次元区間へ対応する。",
+    "Cleaning Robot 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["格子点と gcd による方向ベクトル正規化"],
+  "implementationConcerns": [
+    "総変位が零の場合を分離し、負方向を含む同値類 key と区間端点を正規化する。"
+  ],
+  "outcomeCandidates": [
+    "Cleaning Robot 型の問題に対し、格子点と gcd による方向ベクトル正規化を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc332-e",
+  "contestId": "abc332",
+  "slotLabel": "E",
+  "officialTaskId": "abc332_e",
+  "title": "Lucky bag",
+  "officialUrl": "https://atcoder.jp/contests/abc332/tasks/abc332_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq D\\leq N\\leq 15; 1 \\leq W_i\\leq 10^8; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc332-e-problem-8bb165a60ca59abbe8085534c31611759b62aed863af2ee2364d279f1508dd30",
+    "source-abc332-editorial-7904-577d9356dd1beb3d48672fa28ad733c35d8de85c7bb8b4e3a79dc139bb6dacc8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

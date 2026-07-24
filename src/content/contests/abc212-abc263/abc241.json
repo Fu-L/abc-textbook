@@ -1,0 +1,21 @@
+{
+  "id": "abc241",
+  "number": 241,
+  "title": "AtCoder Beginner Contest 241（Sponsored by Panasonic）",
+  "startedAt": "2022-02-26T21:00:00+09:00",
+  "endedAt": "2022-02-26T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc241",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc241_a",
+    "abc241_b",
+    "abc241_c",
+    "abc241_d",
+    "abc241_e",
+    "abc241_f",
+    "abc241_g",
+    "abc241_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc241-task-list-5b1486d1410e12d27246f6a96c7442de42e7e80f96f3e8ae03d243ad66f3aa5b",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc320-g",
+  "sourceRevisionIds": [
+    "source-abc320-editorial-7135-1136bca010508d20a90427cf8293f0d5fd30aabd5afb2f392a1a48773d96e6de",
+    "source-abc320-g-problem-789eb0778848b8c492240eb30c5aa90b9bf957974ed1d968c6c02800800145cc"
+  ],
+  "coreMethod": "abc320-g「Slot Strategy 2 (Hard)」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+    "Slot Strategy 2 (Hard) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "最大流・最小カット定理"],
+  "implementationConcerns": ["有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。"],
+  "outcomeCandidates": [
+    "Slot Strategy 2 (Hard) 型の 文字列の prefix・suffix と一致関係に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

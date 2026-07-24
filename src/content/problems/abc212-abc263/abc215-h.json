@@ -1,0 +1,20 @@
+{
+  "id": "abc215-h",
+  "contestId": "abc215",
+  "slotLabel": "H",
+  "officialTaskId": "abc215_h",
+  "title": "Cabbage Master",
+  "officialUrl": "https://atcoder.jp/contests/abc215/tasks/abc215_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 20; 1 \\leq M \\leq 10^4; 1 \\leq A_i \\leq 10^5; 1 \\leq B_j \\leq 10^5; c_{i, j} \\in \\lbrace 0, 1 \\rbrace; For every 1 \\leq j \\leq M, there exists 1 \\leq i \\leq N such that c_{i, j} = 1.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377",
+    "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

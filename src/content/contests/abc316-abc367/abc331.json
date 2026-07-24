@@ -1,0 +1,20 @@
+{
+  "id": "abc331",
+  "number": 331,
+  "title": "Daiwa Securities Co. Ltd. Programming Contest 2023（AtCoder Beginner Contest 331）",
+  "startedAt": "2023-12-02T21:00:00+09:00",
+  "endedAt": "2023-12-02T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc331",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc331_a",
+    "abc331_b",
+    "abc331_c",
+    "abc331_d",
+    "abc331_e",
+    "abc331_f",
+    "abc331_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc331-task-list-b1164e89c1435da074cfa59addad9a2bbfc48c9cbe1550c1a48b683ce241ccd1",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

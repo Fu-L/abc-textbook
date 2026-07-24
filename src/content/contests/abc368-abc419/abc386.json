@@ -1,0 +1,20 @@
+{
+  "id": "abc386",
+  "number": 386,
+  "title": "AtCoder Beginner Contest 386",
+  "startedAt": "2024-12-28T21:00:00+09:00",
+  "endedAt": "2024-12-28T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc386",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc386_a",
+    "abc386_b",
+    "abc386_c",
+    "abc386_d",
+    "abc386_e",
+    "abc386_f",
+    "abc386_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc386-task-list-5bfde5ee5483a7d578499f64a42e050ac01991a5f92d1077f6e18da4c1af1af3",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

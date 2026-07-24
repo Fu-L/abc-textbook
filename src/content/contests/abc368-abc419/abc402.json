@@ -1,0 +1,20 @@
+{
+  "id": "abc402",
+  "number": 402,
+  "title": "Tokio Marine & Nichido Fire Insurance Programming Contest 2025 (AtCoder Beginner Contest 402)",
+  "startedAt": "2025-04-19T21:00:00+09:00",
+  "endedAt": "2025-04-19T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc402",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc402_a",
+    "abc402_b",
+    "abc402_c",
+    "abc402_d",
+    "abc402_e",
+    "abc402_f",
+    "abc402_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc402-task-list-e0c3d5a724a394b8752dbdf50e691fc659257feea052515bff76558191a3794e",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

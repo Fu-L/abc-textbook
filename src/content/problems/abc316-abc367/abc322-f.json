@@ -1,0 +1,20 @@
+{
+  "id": "abc322-f",
+  "contestId": "abc322",
+  "slotLabel": "F",
+  "officialTaskId": "abc322_f",
+  "title": "Vacation Query",
+  "officialUrl": "https://atcoder.jp/contests/abc322/tasks/abc322_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 1 \\leq Q \\leq 10^5; S is a string of length N consisting of 0 and 1.; c \\in \\lbrace 1, 2 \\rbrace; 1 \\leq L \\leq R \\leq N; N, Q, c, L, and R are all integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc322-f-problem-00617dfda1bb35d2bd1170644c1a944cd547c3359c166bec98e45285c40a7563",
+    "source-abc322-editorial-7303-78eb3ac0025e62afd734563853884e0cc2d27e7d0f8706015f4fb8f1cc14a71d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

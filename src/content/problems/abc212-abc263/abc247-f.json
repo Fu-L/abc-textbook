@@ -1,0 +1,20 @@
+{
+  "id": "abc247-f",
+  "contestId": "abc247",
+  "slotLabel": "F",
+  "officialTaskId": "abc247_f",
+  "title": "Cards",
+  "officialUrl": "https://atcoder.jp/contests/abc247/tasks/abc247_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 1 \\leq P_i,Q_i \\leq N; P and Q are permutations of (1, 2, \\dots, N).; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e",
+    "source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

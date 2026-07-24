@@ -1,0 +1,20 @@
+{
+  "id": "abc268-g",
+  "contestId": "abc268",
+  "slotLabel": "G",
+  "officialTaskId": "abc268_g",
+  "title": "Random Student ID",
+  "officialUrl": "https://atcoder.jp/contests/abc268/tasks/abc268_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N; N is an integer.; S_i is a string of length at least 1 consisting of lowercase English letters.; The sum of lengths of the given strings is at most 5 \\times 10^5.; i \\neq j \\Rightarrow S_i \\neq S_j",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc268-g-problem-1ce0d2d72d4e4fd15ee56036a2337b2e2dec2d261f9331527aaf393478ca62a1",
+    "source-abc268-editorial-4782-eba6ee35ec70b7e21f9935aec2f4f08bb56a01d390bc24e8952ee7c85cae2c51"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

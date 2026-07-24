@@ -1,0 +1,20 @@
+{
+  "id": "abc412-f",
+  "contestId": "abc412",
+  "slotLabel": "F",
+  "officialTaskId": "abc412_f",
+  "title": "Socks 4",
+  "officialUrl": "https://atcoder.jp/contests/abc412/tasks/abc412_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3 \\times 10^5; 1 \\leq C \\leq N; 1 \\leq A_i \\leq 3000; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787",
+    "source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc460-f",
+  "contestId": "abc460",
+  "slotLabel": "F",
+  "officialTaskId": "abc460_f",
+  "title": "Farthest Pair Query",
+  "officialUrl": "https://atcoder.jp/contests/abc460/tasks/abc460_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 10^5; 1 \\leq U_i, V_i \\leq N; The given graph is a tree.; 1 \\leq Q \\leq 10^5; For each query, 1 \\leq x \\leq N.; There are always at least two black vertices.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc460-f-problem-e78320848f728b55f4d63e6e3cb1a19f2d2668613420c720327f73c7da3d2621",
+    "source-abc460-editorial-21029-aa3aea6c62f0ad6ad7f3a90d4b509af29a9962b410820591d626e0987bf398fd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

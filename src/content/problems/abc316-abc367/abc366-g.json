@@ -1,0 +1,20 @@
+{
+  "id": "abc366-g",
+  "contestId": "abc366",
+  "slotLabel": "G",
+  "officialTaskId": "abc366_g",
+  "title": "XOR Neighbors",
+  "officialUrl": "https://atcoder.jp/contests/abc366/tasks/abc366_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 60; 0 \\leq M \\leq N(N-1)/2; 1 \\leq u_i < v_i \\leq N; (u_i, v_i) \\neq (u_j, v_j) for i \\neq j.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc366-g-problem-ad99ac5d70a5a554d814fefa08d734090fad5b47a1b1d082b0a713dfdc27ab75",
+    "source-abc366-editorial-10641-ec072cdede89c9d3c18d5de5930b5d6b3bf3684a2bc8a17ae4b7116a2974fce3"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

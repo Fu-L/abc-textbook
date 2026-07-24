@@ -1,0 +1,20 @@
+{
+  "id": "abc363-f",
+  "contestId": "abc363",
+  "slotLabel": "F",
+  "officialTaskId": "abc363_f",
+  "title": "Palindromic Expression",
+  "officialUrl": "https://atcoder.jp/contests/abc363/tasks/abc363_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{12}; N is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc363-f-problem-3275745df92b9f92ad4f647c61c6536ebaff0452c26dd65d5d4b7cf674d3e2ae",
+    "source-abc363-editorial-10441-6343dfa8d3eb739cbdd3548d2c316644249356ca852bdc9634393c27fa3b6a93"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

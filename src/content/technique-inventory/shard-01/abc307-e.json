@@ -1,0 +1,20 @@
+{
+  "problemId": "abc307-e",
+  "sourceRevisionIds": [
+    "source-abc307-e-problem-548289d5e47b4369203d1b5cd71609b25ca976c547a62835b66cbaa68f430300",
+    "source-abc307-editorial-6643-5e6128eb82addb9c1ef4eee51ce74721ecfe920047167e2febf7bd2d172c9d4b"
+  ],
+  "coreMethod": "abc307-e「Distinct Adjacent」では、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+    "Distinct Adjacent 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "包除原理"],
+  "implementationConcerns": ["空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。"],
+  "outcomeCandidates": [
+    "Distinct Adjacent 型の 整数の約数・剰余構造に対し、包除原理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

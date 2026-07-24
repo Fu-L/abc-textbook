@@ -1,0 +1,20 @@
+{
+  "id": "abc298-e",
+  "contestId": "abc298",
+  "slotLabel": "E",
+  "officialTaskId": "abc298_e",
+  "title": "Unfair Sugoroku",
+  "officialUrl": "https://atcoder.jp/contests/abc298/tasks/abc298_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 100; 1 \\leq A, B < N; 1 \\leq P, Q \\leq 10; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc298-e-problem-5852dc6c338f2ccff6bd2385849a81c0ee563b813396f416b99683e1127bd9ff",
+    "source-abc298-editorial-6216-3e17008c42c2f5d640bcceb6616609643f0d97853747e55e48acc61dac404c8a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

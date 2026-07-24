@@ -1,0 +1,20 @@
+{
+  "id": "abc384-g",
+  "contestId": "abc384",
+  "slotLabel": "G",
+  "officialTaskId": "abc384_g",
+  "title": "Abs Sum",
+  "officialUrl": "https://atcoder.jp/contests/abc384/tasks/abc384_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 10^5; 0\\le A_i,B_j\\le 2\\times 10^8; 1\\le K\\le 10^4; 1\\le X_k,Y_k\\le N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc384-g-problem-e28558fe4f9d3cd66de0fdd5adcab4a395f351abae49033d7107c6661f591286",
+    "source-abc384-editorial-11548-b15bbcf84e1a645622eedbcb5b6c4df173f974b4e32990f5b3377802a1a6619b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

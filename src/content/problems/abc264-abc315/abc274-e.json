@@ -1,0 +1,20 @@
+{
+  "id": "abc274-e",
+  "contestId": "abc274",
+  "slotLabel": "E",
+  "officialTaskId": "abc274_e",
+  "title": "Booster",
+  "officialUrl": "https://atcoder.jp/contests/abc274/tasks/abc274_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 12; 0 \\leq M \\leq 5; -10^9 \\leq X_i,Y_i,P_i,Q_i \\leq 10^9; (0,0), (X_i,Y_i), and (P_i,Q_i) are distinct.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc274-e-problem-be297a46ec7a2045345d36a9d15ec7c9add4612d197ff976f4aac752017a43be",
+    "source-abc274-editorial-5020-27bf5ebee0c7846a38ea722d708f7869d9fd869ff41dad3fe6be350009735934"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

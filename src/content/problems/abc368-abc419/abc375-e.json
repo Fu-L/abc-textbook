@@ -1,0 +1,20 @@
+{
+  "id": "abc375-e",
+  "contestId": "abc375",
+  "slotLabel": "E",
+  "officialTaskId": "abc375_e",
+  "title": "3 Team Division",
+  "officialUrl": "https://atcoder.jp/contests/abc375/tasks/abc375_e",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 100; A_i \\in \\lbrace 1, 2, 3 \\rbrace; For each x \\in \\lbrace 1, 2, 3 \\rbrace, there exists some i with A_i = x.; 1 \\leq B_i; \\displaystyle\\sum_{i = 1}^{N} B_i \\leq 1500; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc375-e-problem-e634cc42bacb06c26385cba565e1e223f751929f8335e4de342352ec8335c946",
+    "source-abc375-editorial-11140-5e3559638ffdc90c2295a763c1e5bb8be59bca1f0c8512a9a2e3312d822c9885"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

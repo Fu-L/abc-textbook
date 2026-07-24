@@ -1,0 +1,20 @@
+{
+  "id": "abc263-e",
+  "contestId": "abc263",
+  "slotLabel": "E",
+  "officialTaskId": "abc263_e",
+  "title": "Sugoroku 3",
+  "officialUrl": "https://atcoder.jp/contests/abc263/tasks/abc263_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 2 \\times 10^5; 1 \\le A_i \\le N-i(1 \\le i \\le N-1); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc263-e-problem-eef4590c663d3faba07d180145406aac13d7d7c43bf20125fb419d5f195586f2",
+    "source-abc263-editorial-4546-50da0faeb7c80a60d2182c11cba30b7434a8e34da04c987b8c7eb076641af9a4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

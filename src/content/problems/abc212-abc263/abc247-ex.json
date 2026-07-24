@@ -1,0 +1,20 @@
+{
+  "id": "abc247-ex",
+  "contestId": "abc247",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc247_h",
+  "title": "Rearranging Problem",
+  "officialUrl": "https://atcoder.jp/contests/abc247/tasks/abc247_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 200000; 1 \\leq K \\leq 10^9; 1 \\leq c_i \\leq N; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb",
+    "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

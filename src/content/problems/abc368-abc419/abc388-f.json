@@ -1,0 +1,20 @@
+{
+  "id": "abc388-f",
+  "contestId": "abc388",
+  "slotLabel": "F",
+  "officialTaskId": "abc388_f",
+  "title": "Dangerous Sugoroku",
+  "officialUrl": "https://atcoder.jp/contests/abc388/tasks/abc388_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^{12}; 0 \\leq M \\leq 2 \\times 10^4; 1 \\leq A \\leq B \\leq 20; 1 < L_i \\leq R_i < N \\ (1 \\leq i \\leq M); R_i < L_{i+1} \\ (1 \\leq i \\leq M - 1); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698",
+    "source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

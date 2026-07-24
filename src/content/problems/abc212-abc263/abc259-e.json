@@ -1,0 +1,20 @@
+{
+  "id": "abc259-e",
+  "contestId": "abc259",
+  "slotLabel": "E",
+  "officialTaskId": "abc259_e",
+  "title": "LCM on Whiteboard",
+  "officialUrl": "https://atcoder.jp/contests/abc259/tasks/abc259_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq m_i; \\sum{m_i} \\leq 2 \\times 10^5; 2 \\leq p_{i,1} \\lt \\ldots \\lt p_{i,m_i} \\leq 10^9; p_{i,j} is prime.; 1 \\leq e_{i,j} \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc259-e-problem-eb7a258d38ce1d9f2ef53211daa3360cf49824f3019fbd9570feb5c144957816",
+    "source-abc259-editorial-4271-76fe64c5c7a413668836b08101de648037f01ce8e462d52ce8eb8b8d1ab980e8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

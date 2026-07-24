@@ -1,0 +1,20 @@
+{
+  "id": "abc336-e",
+  "contestId": "abc336",
+  "slotLabel": "E",
+  "officialTaskId": "abc336_e",
+  "title": "Digit Sum Divisible",
+  "officialUrl": "https://atcoder.jp/contests/abc336/tasks/abc336_e",
+  "constraintsSummary": "Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{14}; N is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc336-e-problem-e1a185c27eed4201034135246aad460cf12596817fb0cb9ae3fed94d4e8002d1",
+    "source-abc336-editorial-9055-6a942b7bd8833f100c70ec690df54f13212b43499edea2e3bf42486a83c9f66d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

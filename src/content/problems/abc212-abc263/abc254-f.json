@@ -1,0 +1,20 @@
+{
+  "id": "abc254-f",
+  "contestId": "abc254",
+  "slotLabel": "F",
+  "officialTaskId": "abc254_f",
+  "title": "Rectangle GCD",
+  "officialUrl": "https://atcoder.jp/contests/abc254/tasks/abc254_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N,Q \\le 2 \\times 10^5; 1 \\le A_i,B_i \\le 10^9; 1 \\le h_1 \\le h_2 \\le N; 1 \\le w_1 \\le w_2 \\le N; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc254-f-problem-fb9b12af78f2c27e67cf3fdf37ca5b98e81bbb6ccf253f0e8602d3235e2f53d0",
+    "source-abc254-editorial-4067-c931ee6e07f8d7b7e2f38c2ceb2193c131f8f11b66f6200318c5a3ce39a2cf54"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

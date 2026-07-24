@@ -1,0 +1,20 @@
+{
+  "problemId": "abc281-f",
+  "sourceRevisionIds": [
+    "source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07",
+    "source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7"
+  ],
+  "coreMethod": "abc281-f「Xor Minimization」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+    "Xor Minimization 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "greedy choice と交換論法"],
+  "implementationConcerns": ["同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。"],
+  "outcomeCandidates": [
+    "Xor Minimization 型の 列の順序と prefix 状態に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc420-f",
+  "contestId": "abc420",
+  "slotLabel": "F",
+  "officialTaskId": "abc420_f",
+  "title": "kirinuki",
+  "officialUrl": "https://atcoder.jp/contests/abc420/tasks/abc420_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N, M, and K are integers.; 1 \\le N,M \\le 5 \\times 10^5; 1 \\le N \\times M \\le 5 \\times 10^6; 1 \\le K \\le N \\times M; S_i is a string of length M consisting of . and #.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc420-f-problem-e5255d1e68596a19e9632578192125b612d2b28436ace623ca5a7f368018ff95",
+    "source-abc420-editorial-13741-3707893785f657ea0534c3a14747e11b63e4f398d30f858a61cc0ee929c15fa7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

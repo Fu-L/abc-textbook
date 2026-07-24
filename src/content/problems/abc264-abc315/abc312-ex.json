@@ -1,0 +1,20 @@
+{
+  "id": "abc312-ex",
+  "contestId": "abc312",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc312_h",
+  "title": "snukesnuke",
+  "officialUrl": "https://atcoder.jp/contests/abc312/tasks/abc312_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N \\geq 1; S_i is a string of length at least 1 consisting of lowercase English letters.; The sum of lengths of S_i is at most 2\\times 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e",
+    "source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

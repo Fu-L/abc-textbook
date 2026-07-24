@@ -1,0 +1,20 @@
+{
+  "id": "abc329-e",
+  "contestId": "abc329",
+  "slotLabel": "E",
+  "officialTaskId": "abc329_e",
+  "title": "Stamp",
+  "officialUrl": "https://atcoder.jp/contests/abc329/tasks/abc329_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 1 \\leq M \\leq \\min(N, 5); S is a string consisting of uppercase English letters with length N.; T is a string consisting of uppercase English letters with length M.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc329-e-problem-08b77404997243d3c43a9cdd8e62a6b077cdb9a32d67f7f1dfbfbc31f15343a0",
+    "source-abc329-editorial-7724-b6c3d4eacfc178c8ae6a1c4b47a0f4f371762ce09d782ddfdf1650f19e7b9c61"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

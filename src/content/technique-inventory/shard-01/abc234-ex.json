@@ -1,0 +1,22 @@
+{
+  "problemId": "abc234-ex",
+  "sourceRevisionIds": [
+    "source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015",
+    "source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4"
+  ],
+  "coreMethod": "abc234-ex「Enumerate Pairs」では、座標平面を距離閾値幅の bucket に分け、同一または隣接 bucket の点対だけを列挙する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "距離条件を満たす二点の bucket 座標差は定数範囲に限られるため、遠い bucket を調べる必要がない。",
+    "Enumerate Pairs 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["空間 bucket と距離比較"],
+  "implementationConcerns": [
+    "負座標の floor 除算、境界上の点、同一点対を一度だけ出力する順序を統一する。"
+  ],
+  "outcomeCandidates": [
+    "Enumerate Pairs 型の問題に対し、空間 bucket と距離比較を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

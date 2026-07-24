@@ -1,0 +1,20 @@
+{
+  "problemId": "abc261-f",
+  "sourceRevisionIds": [
+    "source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb",
+    "source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b"
+  ],
+  "coreMethod": "abc261-f「Sorting Color Balls」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+    "Sorting Color Balls 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "Fenwick tree"],
+  "implementationConcerns": ["内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"],
+  "outcomeCandidates": [
+    "Sorting Color Balls 型の 区間端点と包含関係に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

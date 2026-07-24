@@ -1,0 +1,20 @@
+{
+  "id": "abc405-e",
+  "contestId": "abc405",
+  "slotLabel": "E",
+  "officialTaskId": "abc405_e",
+  "title": "Fruit Lineup",
+  "officialUrl": "https://atcoder.jp/contests/abc405/tasks/abc405_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le A \\le 10^6; 1 \\le B \\le 10^6; 1 \\le C \\le 10^6; 1 \\le D \\le 10^6; A, B, C, and D are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc405-e-problem-bba4dda2e02a55bd7bfbef138713d6d7b4e0b0ba9f9972784cc4ad2d93ff2194",
+    "source-abc405-editorial-13004-59ade1060f850eefa9ff15714c030d95aee071d0459add6a840ed9d74571108c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

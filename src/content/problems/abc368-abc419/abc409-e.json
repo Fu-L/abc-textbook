@@ -1,0 +1,20 @@
+{
+  "id": "abc409-e",
+  "contestId": "abc409",
+  "slotLabel": "E",
+  "officialTaskId": "abc409_e",
+  "title": "Pair Annihilation",
+  "officialUrl": "https://atcoder.jp/contests/abc409/tasks/abc409_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^5; |x_i| \\leq 10^4; \\sum_{i=1}^N x_i = 0; 1 \\leq u_j < v_j \\leq N; 0 \\leq w_j \\leq 10^4; The given graph is a tree.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502",
+    "source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

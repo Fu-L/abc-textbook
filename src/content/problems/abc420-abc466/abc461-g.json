@@ -1,0 +1,20 @@
+{
+  "id": "abc461-g",
+  "contestId": "abc461",
+  "slotLabel": "G",
+  "officialTaskId": "abc461_g",
+  "title": "Graph Problem 2026",
+  "officialUrl": "https://atcoder.jp/contests/abc461/tasks/abc461_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^4; 0 \\leq M \\leq 5 \\times 10^4; 1 \\leq u_i \\lt v_i \\leq N; (u_1,v_1),(u_2,v_2),\\dots,(u_M,v_M) are pairwise distinct.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc461-g-problem-f09b23c77850cb0ca1d774e0b16ef71739d269ecadb9a8cad130373c532e2a94",
+    "source-abc461-editorial-21377-bbe98f1e54d9c585f40389632ac677594e1da1c10d52b8a5b2a5da2003b296d7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

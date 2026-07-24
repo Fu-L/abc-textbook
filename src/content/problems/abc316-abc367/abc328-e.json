@@ -1,0 +1,20 @@
+{
+  "id": "abc328-e",
+  "contestId": "abc328",
+  "slotLabel": "E",
+  "officialTaskId": "abc328_e",
+  "title": "Modulo MST",
+  "officialUrl": "https://atcoder.jp/contests/abc328/tasks/abc328_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq8; N-1\\leq M\\leq\\dfrac{N(N-1)}2; 1\\leq K\\leq10^{15}; 1\\leq u_i\\lt v_i\\leq N\\ (1\\leq i\\leq M); 0\\leq w_i\\lt K\\ (1\\leq i\\leq M); The given graph is simple and connected.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2",
+    "source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

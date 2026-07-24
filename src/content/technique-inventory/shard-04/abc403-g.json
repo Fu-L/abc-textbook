@@ -1,0 +1,22 @@
+{
+  "problemId": "abc403-g",
+  "sourceRevisionIds": [
+    "source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6",
+    "source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d"
+  ],
+  "coreMethod": "abc403-g「Odd Position Sum Query」では、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+    "Odd Position Sum Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "セグメント木と monoid"],
+  "implementationConcerns": [
+    "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。"
+  ],
+  "outcomeCandidates": [
+    "Odd Position Sum Query 型の 列の順序と prefix 状態に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc444-g",
+  "contestId": "abc444",
+  "slotLabel": "G",
+  "officialTaskId": "abc444_g",
+  "title": "Kyoen",
+  "officialUrl": "https://atcoder.jp/contests/abc444/tasks/abc444_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N \\geq 1; 2 \\leq P_i \\leq 100; P_i are distinct primes.; 1 \\leq E_i \\leq 10^{18}; 1 \\leq C \\leq 50; 0 \\leq A,B \\lt C; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc444-g-problem-54f848db5319c94c96ca2f9e9ea24336f3101577b8689d492467f1e10e9beb0f",
+    "source-abc444-editorial-15201-d228d4461c46b04252b60ee63c43fb2dd9e131c229df9f41bbff0d67a09d9f88"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

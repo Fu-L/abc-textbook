@@ -1,0 +1,20 @@
+{
+  "id": "abc245-f",
+  "contestId": "abc245",
+  "slotLabel": "F",
+  "officialTaskId": "abc245_f",
+  "title": "Endless Walk",
+  "officialUrl": "https://atcoder.jp/contests/abc245/tasks/abc245_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 0 \\leq M \\leq \\min(N(N-1), 2\\times 10^5); 1 \\leq U_i,V_i\\leq N; U_i\\neq V_i; (U_i,V_i)\\neq (U_j,V_j) if i\\neq j.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40",
+    "source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

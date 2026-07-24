@@ -1,0 +1,20 @@
+{
+  "problemId": "abc409-e",
+  "sourceRevisionIds": [
+    "source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502",
+    "source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d"
+  ],
+  "coreMethod": "abc409-e「Pair Annihilation」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+    "Pair Annihilation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "深さ優先探索"],
+  "implementationConcerns": ["再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。"],
+  "outcomeCandidates": [
+    "Pair Annihilation 型の 根付き木・部分木・パスの関係に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

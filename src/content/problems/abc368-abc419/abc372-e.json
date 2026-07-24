@@ -1,0 +1,20 @@
+{
+  "id": "abc372-e",
+  "contestId": "abc372",
+  "slotLabel": "E",
+  "officialTaskId": "abc372_e",
+  "title": "K-th Largest Connected Components",
+  "officialUrl": "https://atcoder.jp/contests/abc372/tasks/abc372_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, Q \\leq 2 \\times 10^5; In a Type 1 query, 1 \\leq u < v \\leq N.; In a Type 2 query, 1 \\leq v \\leq N, 1 \\leq k \\leq 10.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59",
+    "source-abc372-editorial-10967-abf15d02f03a6ce0612e3ba16d6281389413d47d0d0a4904b7c4235a262c1011"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

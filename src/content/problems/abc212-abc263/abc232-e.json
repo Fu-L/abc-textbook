@@ -1,0 +1,20 @@
+{
+  "id": "abc232-e",
+  "contestId": "abc232",
+  "slotLabel": "E",
+  "officialTaskId": "abc232_e",
+  "title": "Rook Path",
+  "officialUrl": "https://atcoder.jp/contests/abc232/tasks/abc232_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W \\leq 10^9; 1 \\leq K \\leq 10^6; 1 \\leq x_1, x_2 \\leq H; 1 \\leq y_1, y_2 \\leq W",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+    "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

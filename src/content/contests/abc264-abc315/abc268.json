@@ -1,0 +1,21 @@
+{
+  "id": "abc268",
+  "number": 268,
+  "title": "UNIQUE VISION Programming Contest 2022 Summer (AtCoder Beginner Contest 268)",
+  "startedAt": "2022-09-10T21:00:00+09:00",
+  "endedAt": "2022-09-10T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc268",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc268_a",
+    "abc268_b",
+    "abc268_c",
+    "abc268_d",
+    "abc268_e",
+    "abc268_f",
+    "abc268_g",
+    "abc268_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc268-task-list-122bda2869f11ba0123847ae8e76267e8965243538d6eef371f8af83e6ca73fa",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

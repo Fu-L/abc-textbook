@@ -1,0 +1,20 @@
+{
+  "id": "abc240-e",
+  "contestId": "abc240",
+  "slotLabel": "E",
+  "officialTaskId": "abc240_e",
+  "title": "Ranges on Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc240/tasks/abc240_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq u_i, v_i \\leq N; All values in input are integers.; The given graph is a tree.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637",
+    "source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

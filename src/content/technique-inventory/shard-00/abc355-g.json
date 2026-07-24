@@ -1,0 +1,22 @@
+{
+  "problemId": "abc355-g",
+  "sourceRevisionIds": [
+    "source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea",
+    "source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c"
+  ],
+  "coreMethod": "abc355-g「Baseball」では、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各遷移候補を一次関数へ対応させると、求める最適値は query 点での直線群の包絡線に一致する。",
+    "Baseball 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "Convex Hull Trick"],
+  "implementationConcerns": [
+    "傾き単調性の有無で構造を選び、積の overflow と等傾き直線を処理する。"
+  ],
+  "outcomeCandidates": [
+    "Baseball 型の 列の順序と prefix 状態に対し、Convex Hull Trickを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

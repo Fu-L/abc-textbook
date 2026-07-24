@@ -1,0 +1,20 @@
+{
+  "problemId": "abc355-f",
+  "sourceRevisionIds": [
+    "source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536",
+    "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
+  ],
+  "coreMethod": "abc355-f「MST Query」では、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "cut property により異なる成分を結ぶ最小辺は安全であり、閉路を避けた採用を繰り返せば最適な全域木になる。",
+    "MST Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "最小全域木と cut property"],
+  "implementationConcerns": ["同重み辺の順序が答えへ影響する場合は一括判定してから併合する。"],
+  "outcomeCandidates": [
+    "MST Query 型の 頂点と辺からなる状態グラフに対し、最小全域木と cut propertyを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

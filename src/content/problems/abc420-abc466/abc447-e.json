@@ -1,0 +1,20 @@
+{
+  "id": "abc447-e",
+  "contestId": "abc447",
+  "slotLabel": "E",
+  "officialTaskId": "abc447_e",
+  "title": "Divide Graph",
+  "officialUrl": "https://atcoder.jp/contests/abc447/tasks/abc447_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; N-1 \\leq M \\leq \\min\\left(\\frac{N(N-1)}{2}, 2\\times 10^5\\right); 1 \\leq U_i < V_i \\leq N; (U_i, V_i) \\neq (U_j, V_j) if i \\neq j; G is connected.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc447-e-problem-02331c348ec8140e3148280a27c01e036fb008a7d23c4271fb3f25530617f98c",
+    "source-abc447-editorial-16717-19b4073504d42c4a9ec3b36e49833fb26bc42a9191d686d1f75a89ac344471f7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

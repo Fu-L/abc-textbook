@@ -1,0 +1,20 @@
+{
+  "id": "abc436-g",
+  "contestId": "abc436",
+  "slotLabel": "G",
+  "officialTaskId": "abc436_g",
+  "title": "Linear Inequation",
+  "officialUrl": "https://atcoder.jp/contests/abc436/tasks/abc436_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le100; 1\\le A _ i\\le100\\ (1\\le i\\le N); 1\\le M\\le10 ^ {18}; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278",
+    "source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc427-g",
+  "sourceRevisionIds": [
+    "source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd",
+    "source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1"
+  ],
+  "coreMethod": "abc427-g「Takahashi's Expectation 2」では、任意の操作列を同じ遷移関数を表す単調な canonical 列へ正規化し、二冪 block を binary counter のように線形 merge する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "隣接二要素の置換が全初期値で遷移関数を保ち、canonical 列同士の merge も関数合成を保つ。",
+    "Takahashi's Expectation 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["関数合成の canonical form と二進 bucket"],
+  "implementationConcerns": [
+    "query は各 canonical block の切替点を二分探索し、追加時は同サイズ block だけを順に merge する。"
+  ],
+  "outcomeCandidates": [
+    "Takahashi's Expectation 2 型の問題に対し、関数合成の canonical form と二進 bucketを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

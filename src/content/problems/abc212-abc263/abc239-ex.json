@@ -1,0 +1,20 @@
+{
+  "id": "abc239-ex",
+  "contestId": "abc239",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc239_h",
+  "title": "Dice Product 2",
+  "officialUrl": "https://atcoder.jp/contests/abc239/tasks/abc239_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^9; 1 \\leq M \\leq 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94",
+    "source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc328-g",
+  "contestId": "abc328",
+  "slotLabel": "G",
+  "officialTaskId": "abc328_g",
+  "title": "Cut and Reorder",
+  "officialUrl": "https://atcoder.jp/contests/abc328/tasks/abc328_g",
+  "constraintsSummary": "Time limit: 2.8 sec; Memory limit: 512 MiB; Constraints: 1\\leq N\\leq22; 1\\leq C\\leq10^{15}; 1\\leq A_i\\leq10^{15}\\ (1\\leq i\\leq N); 1\\leq B_i\\leq10^{15}\\ (1\\leq i\\leq N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc328-g-problem-d42d13198dfc03048e75095b0c276abbeeb2f45adc94365aabd2e3709c5e0f43",
+    "source-abc328-editorial-7644-ac85e40ab4cc26b49b938335f8909857cf44b865ee29e80cc86036e1b17a7995"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

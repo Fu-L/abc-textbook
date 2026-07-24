@@ -1,0 +1,25 @@
+{
+  "problemId": "abc271-f",
+  "sourceRevisionIds": [
+    "source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1",
+    "source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa"
+  ],
+  "coreMethod": "abc271-f「XOR on Grid Path」では、始点側と終点側から対角線までの path XOR を各中継マス別に半分全列挙し、同じ XOR 値の頻度を突き合わせる。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "全 path は対角線上の一マスで始点側と終点側へ一意に分かれ、中継マスの値を一度だけ数える補正後に両 XOR が一致することが全体 XOR が零であることと同値になる。",
+    "XOR on Grid Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "asymptoticComplexity": {
+    "time": "O(N 2^N)（公式解法全体。特殊な計算量解析を含む）"
+  },
+  "prerequisiteCandidates": ["grid path の半分全列挙と XOR", "特殊な漸近計算量の見積もり"],
+  "implementationConcerns": [
+    "対角線のマス値を左右どちらに含めるかを固定し、同値 XOR は頻度の積で数える。"
+  ],
+  "outcomeCandidates": [
+    "XOR on Grid Path 型の問題に対し、grid path の半分全列挙と XORを選び、状態・証明・特殊計算量を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

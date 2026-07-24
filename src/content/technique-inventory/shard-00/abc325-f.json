@@ -1,0 +1,20 @@
+{
+  "problemId": "abc325-f",
+  "sourceRevisionIds": [
+    "source-abc325-editorial-7449-74ad2d2c5ccbb452ed7693aeb096d054c62cf569d6af4a3d8b61974855dfae26",
+    "source-abc325-f-problem-028bd12fa00570715edd9a40ccdb9bb363d331a16b8dc6034f7cda9a54ee84f9"
+  ],
+  "coreMethod": "abc325-f「Sensor Optimization Dilemma」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+    "Sensor Optimization Dilemma 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "全探索と候補数の上界評価"],
+  "implementationConcerns": ["同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。"],
+  "outcomeCandidates": [
+    "Sensor Optimization Dilemma 型の 整数の約数・剰余構造に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

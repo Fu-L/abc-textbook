@@ -1,0 +1,20 @@
+{
+  "id": "abc313-f",
+  "contestId": "abc313",
+  "slotLabel": "F",
+  "officialTaskId": "abc313_f",
+  "title": "Flip Machines",
+  "officialUrl": "https://atcoder.jp/contests/abc313/tasks/abc313_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 40; 1\\leq M \\leq 10^5; 1\\leq A_i,B_i \\leq 10^4; 1\\leq X_j,Y_j \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc313-f-problem-00388b1b978884ab084a0d18e374bfd1d5a20819c1e12e48215b2f8ccd687a60",
+    "source-abc313-editorial-6902-6d3c247afee2f117aee815d0cbeb6a571934752c6bdc476c7d3c035f4d3178c6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

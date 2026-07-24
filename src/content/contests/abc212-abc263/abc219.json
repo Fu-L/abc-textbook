@@ -1,0 +1,21 @@
+{
+  "id": "abc219",
+  "number": 219,
+  "title": "Sciseed Programming Contest 2021（AtCoder Beginner Contest 219）",
+  "startedAt": "2021-09-18T21:00:00+09:00",
+  "endedAt": "2021-09-18T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc219",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "H"],
+  "officialTaskIds": [
+    "abc219_a",
+    "abc219_b",
+    "abc219_c",
+    "abc219_d",
+    "abc219_e",
+    "abc219_f",
+    "abc219_g",
+    "abc219_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc219-task-list-6e90dd1460e564fe3f7bcc1a6ba7aefee4fc165b7ac7d2528835f4efe4b08cf5",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

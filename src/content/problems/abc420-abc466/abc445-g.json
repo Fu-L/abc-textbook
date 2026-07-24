@@ -1,0 +1,20 @@
+{
+  "id": "abc445-g",
+  "contestId": "abc445",
+  "slotLabel": "G",
+  "officialTaskId": "abc445_g",
+  "title": "Knight Placement",
+  "officialUrl": "https://atcoder.jp/contests/abc445/tasks/abc445_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 300; 0 \\le A \\le B \\le N; 1 \\le B; N,A,B are integers.; S_i is a string of length N consisting of . and # (1 \\le i \\le N).",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a",
+    "source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

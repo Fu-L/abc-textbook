@@ -1,0 +1,20 @@
+{
+  "id": "abc240-ex",
+  "contestId": "abc240",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc240_h",
+  "title": "Sequence of Substrings",
+  "officialUrl": "https://atcoder.jp/contests/abc240/tasks/abc240_h",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2.5 \\times 10^4; N is an integer.; S is a string of length N consisting of 0's and 1's.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89",
+    "source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

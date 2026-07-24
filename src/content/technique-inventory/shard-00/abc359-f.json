@@ -1,0 +1,20 @@
+{
+  "problemId": "abc359-f",
+  "sourceRevisionIds": [
+    "source-abc359-editorial-10260-2b6d1547de087bbf4176fd0e68c8db96a391c2283b8cae857798b0b04b0ffab8",
+    "source-abc359-f-problem-2b056103c3c211859dd536326e8594c8e2edc62f670339e9bf6745247be29142"
+  ],
+  "coreMethod": "abc359-f「Tree Degree Optimization」では、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
+    "Tree Degree Optimization 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "畳み込みと NTT"],
+  "implementationConcerns": ["必要な係数長、padding 長、法が NTT に対応するかを確認する。"],
+  "outcomeCandidates": [
+    "Tree Degree Optimization 型の 頂点と辺からなる状態グラフに対し、畳み込みと NTTを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc438-f",
+  "contestId": "abc438",
+  "slotLabel": "F",
+  "officialTaskId": "abc438_f",
+  "title": "Sum of Mex",
+  "officialUrl": "https://atcoder.jp/contests/abc438/tasks/abc438_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le 2\\times 10^5; 0\\le u_i < v_i < N; The graph given in the input is a tree.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238",
+    "source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

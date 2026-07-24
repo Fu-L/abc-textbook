@@ -1,0 +1,20 @@
+{
+  "id": "abc440-f",
+  "contestId": "abc440",
+  "slotLabel": "F",
+  "officialTaskId": "abc440_f",
+  "title": "Egoism",
+  "officialUrl": "https://atcoder.jp/contests/abc440/tasks/abc440_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^6 (1 \\leq i \\leq N); B_i is 1 or 2. (1 \\leq i \\leq N); 1 \\leq W_k \\leq N (1 \\leq k \\leq Q); 1 \\leq X_k \\leq 10^6 (1 \\leq k \\leq Q); Y_k is 1 or 2. (1 \\leq k \\leq Q); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc440-f-problem-49e8c48bf23ebe03297a814dc95ab95da892369e25fb91726dddd138d3fc91c6",
+    "source-abc440-editorial-15032-e0da1c1fd845f62396a02c2953ff3129230a530ccdf7e479ac25e96c18392302"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

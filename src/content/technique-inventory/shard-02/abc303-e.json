@@ -1,0 +1,20 @@
+{
+  "problemId": "abc303-e",
+  "sourceRevisionIds": [
+    "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
+    "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
+  ],
+  "coreMethod": "abc303-e「A Gift From the Stars」では、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+    "A Gift From the Stars 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "幅優先探索"],
+  "implementationConcerns": ["訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。"],
+  "outcomeCandidates": [
+    "A Gift From the Stars 型の 頂点と辺からなる状態グラフに対し、幅優先探索を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

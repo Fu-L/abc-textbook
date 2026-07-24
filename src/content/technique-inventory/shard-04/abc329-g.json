@@ -1,0 +1,22 @@
+{
+  "problemId": "abc329-g",
+  "sourceRevisionIds": [
+    "source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6",
+    "source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"
+  ],
+  "coreMethod": "abc329-g「Delivery on Tree」では、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "二進展開した距離だけ祖先へ移動でき、最大の異なる祖先から一段進めば最小共通祖先になる。",
+    "Delivery on Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "LCA と binary lifting"],
+  "implementationConcerns": [
+    "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。"
+  ],
+  "outcomeCandidates": [
+    "Delivery on Tree 型の 根付き木・部分木・パスの関係に対し、LCA と binary liftingを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

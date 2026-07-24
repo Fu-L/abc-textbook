@@ -1,0 +1,20 @@
+{
+  "problemId": "abc446-e",
+  "sourceRevisionIds": [
+    "source-abc446-e-problem-0c5beab949050b64c016f59892db61e46001fb5ae35216d0c6f4691877c5a10e",
+    "source-abc446-editorial-16370-eefb0bfb53eb98118b5c9db0f5e01d5fe88ab24820d7fb5fcaa5e39bebea9404"
+  ],
+  "coreMethod": "abc446-e「Multiple-Free Sequences」では、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+    "Multiple-Free Sequences 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "幅優先探索"],
+  "implementationConcerns": ["訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。"],
+  "outcomeCandidates": [
+    "Multiple-Free Sequences 型の 列の順序と prefix 状態に対し、幅優先探索を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

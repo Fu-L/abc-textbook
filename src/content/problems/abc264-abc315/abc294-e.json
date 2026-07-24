@@ -1,0 +1,20 @@
+{
+  "id": "abc294-e",
+  "contestId": "abc294",
+  "slotLabel": "E",
+  "officialTaskId": "abc294_e",
+  "title": "2xN Grid",
+  "officialUrl": "https://atcoder.jp/contests/abc294/tasks/abc294_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq L\\leq 10 ^ {12}; 1\\leq N _ 1,N _ 2\\leq 10 ^ 5; 1\\leq v _ {i,j}\\leq 10 ^ 9\\ (i\\in\\lbrace1,2\\rbrace,1\\leq j\\leq N _ i); 1\\leq l _ {i,j}\\leq L\\ (i\\in\\lbrace1,2\\rbrace,1\\leq j\\leq N _ i); v _ {i,j}\\neq v _ {i,j+1}\\ (i\\in\\lbrace1,2\\rbrace,1\\leq j\\lt N _ i); l _ {i,1}+l _ {i,2}+\\cdots+l _ {i,N _ i}=L\\ (i\\in\\lbrace1,2\\rbrace); All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc294-e-problem-d40bb560b6160993aa73f42f09a115c61bbbaad510862820393ed2368129667e",
+    "source-abc294-editorial-5990-db9e9ebaa6872499fced988dd22b4b7cd0dbed8b036c52ab1e6a3fff8a55d586"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc463-f",
+  "contestId": "abc463",
+  "slotLabel": "F",
+  "officialTaskId": "abc463_f",
+  "title": "Senshuraku",
+  "officialUrl": "https://atcoder.jp/contests/abc463/tasks/abc463_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 0\\le A _ i\\lt2N\\ (1\\le i\\le 2N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc463-f-problem-343004a4d30ce016eb3f93c1835e2c9c7d71f67e5334acf08a7861f15901ce01",
+    "source-abc463-editorial-21939-26e1a13f3658448a171da4673027ddd725353abf1088ea3ea4b2a4efd008b71f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

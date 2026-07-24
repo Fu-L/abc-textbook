@@ -1,0 +1,20 @@
+{
+  "id": "abc284-g",
+  "contestId": "abc284",
+  "slotLabel": "G",
+  "officialTaskId": "abc284_g",
+  "title": "Only Once",
+  "officialUrl": "https://atcoder.jp/contests/abc284/tasks/abc284_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 2\\times 10^5; 10^8\\leq M \\leq 10^9; N and M are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc284-g-problem-1539f7f7aca16e6da918cb5ede8914eaa0801ff2016afa105f09e3cccbd0a7ad",
+    "source-abc284-editorial-5468-0fc55757cb97e3e299eab495bb719d3ad048cf14d4177dd2d8ef414fe487605b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

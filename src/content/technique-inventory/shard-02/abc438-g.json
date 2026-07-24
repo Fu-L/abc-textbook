@@ -1,0 +1,20 @@
+{
+  "problemId": "abc438-g",
+  "sourceRevisionIds": [
+    "source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176",
+    "source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c"
+  ],
+  "coreMethod": "abc438-g「Sum of Min」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+    "Sum of Min 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "Fenwick tree"],
+  "implementationConcerns": ["内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"],
+  "outcomeCandidates": [
+    "Sum of Min 型の 列の順序と prefix 状態に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc226-g",
+  "contestId": "abc226",
+  "slotLabel": "G",
+  "officialTaskId": "abc226_g",
+  "title": "The baggage",
+  "officialUrl": "https://atcoder.jp/contests/abc226/tasks/abc226_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 5\\times 10^4; 0 \\leq A_i,B_i \\leq 10^{16}; 1 \\leq A_1+A_2+A_3+A_4+A_5; 1 \\leq B_1+B_2+B_3+B_4+B_5; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61",
+    "source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc306-e",
+  "contestId": "abc306",
+  "slotLabel": "E",
+  "officialTaskId": "abc306_e",
+  "title": "Best Performances",
+  "officialUrl": "https://atcoder.jp/contests/abc306/tasks/abc306_e",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le K \\le N \\le 5 \\times 10^5; 1 \\le Q \\le 5 \\times 10^5; 1 \\le X_i \\le N; 0 \\le Y_i \\le 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd",
+    "source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

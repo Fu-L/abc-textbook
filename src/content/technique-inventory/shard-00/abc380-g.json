@@ -1,0 +1,22 @@
+{
+  "problemId": "abc380-g",
+  "sourceRevisionIds": [
+    "source-abc380-editorial-11363-4c1b5eae453dc1dc73be946b7f9f6930eb7c93d7946c683a7f72f73f4729004b",
+    "source-abc380-g-problem-d161fd53e7e2ba10c59a497885deec96fdfbdf13621549a1773a39415d2c3c72"
+  ],
+  "coreMethod": "abc380-g「Another Shuffle Window」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+    "Another Shuffle Window 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["順列と逆写像", "条件付き期待値と確率 DP"],
+  "implementationConcerns": [
+    "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Another Shuffle Window 型の 順列の位置と値の対応に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

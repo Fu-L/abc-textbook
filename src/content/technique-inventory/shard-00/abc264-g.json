@@ -1,0 +1,22 @@
+{
+  "problemId": "abc264-g",
+  "sourceRevisionIds": [
+    "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2",
+    "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f"
+  ],
+  "coreMethod": "abc264-g「String Fair」では、全辺緩和を反復し、負辺を含む最短路と負閉路の影響範囲を判定する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "辺数 k 以下の最短路は k 回の緩和後に得られ、N 回目の改善は到達可能な負閉路の存在を示す。",
+    "String Fair 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "Bellman–Ford 法"],
+  "implementationConcerns": [
+    "未到達 sentinel からの加算を避け、負閉路から到達できる頂点を追加伝播する。"
+  ],
+  "outcomeCandidates": [
+    "String Fair 型の 文字列の prefix・suffix と一致関係に対し、Bellman–Ford 法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

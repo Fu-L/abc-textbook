@@ -1,0 +1,21 @@
+{
+  "id": "abc222",
+  "number": 222,
+  "title": "Exawizards Programming Contest 2021（AtCoder Beginner Contest 222）",
+  "startedAt": "2021-10-09T21:00:00+09:00",
+  "endedAt": "2021-10-09T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc222",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "H"],
+  "officialTaskIds": [
+    "abc222_a",
+    "abc222_b",
+    "abc222_c",
+    "abc222_d",
+    "abc222_e",
+    "abc222_f",
+    "abc222_g",
+    "abc222_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc222-task-list-0b4ddb774cdbf13593f74b5e1133f3cba4e5a82ac16a1df6fc5053794f80ac97",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

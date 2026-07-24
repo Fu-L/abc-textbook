@@ -1,0 +1,20 @@
+{
+  "id": "abc346-g",
+  "contestId": "abc346",
+  "slotLabel": "G",
+  "officialTaskId": "abc346_g",
+  "title": "Alone",
+  "officialUrl": "https://atcoder.jp/contests/abc346/tasks/abc346_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc346-g-problem-8855088ceb0c5e93d97fc9dce94136b20fc688c72cb4aa09706db39c292d13a0",
+    "source-abc346-editorial-9638-0c7ad27ddd09787f39cd8190b177d312d9985eb4ad674bf527389b86e9030751"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

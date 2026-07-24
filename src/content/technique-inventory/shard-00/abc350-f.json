@@ -1,0 +1,22 @@
+{
+  "problemId": "abc350-f",
+  "sourceRevisionIds": [
+    "source-abc350-editorial-9820-549515ed8d09eb95e0a434d4ec275e0301e82b6916862a383d68a0842b756fd5",
+    "source-abc350-f-problem-4739078c1c1a4520eff726101b57fa7e3fd82c645cc07c657b265f658b31d0d6"
+  ],
+  "coreMethod": "abc350-f「Transpose」では、対応括弧を stack で結び、括弧へ着いたら相方へ jump して走査方向を反転し、深さ parity で英字大小を変換する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "各括弧対の内部は外側と逆向きに一度だけ走査され、入れ子深さの parity が文字反転回数と一致する。",
+    "Transpose 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["括弧列の stack matching と方向反転"],
+  "implementationConcerns": [
+    "jump 後に現在方向へ一歩進み、括弧自体を出力せず、大小変換を ASCII 前提にしない。"
+  ],
+  "outcomeCandidates": [
+    "Transpose 型の問題に対し、括弧列の stack matching と方向反転を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

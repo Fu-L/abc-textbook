@@ -1,0 +1,20 @@
+{
+  "id": "abc262-ex",
+  "contestId": "abc262",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc262_h",
+  "title": "Max Limited Sequence",
+  "officialUrl": "https://atcoder.jp/contests/abc262/tasks/abc262_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\lt 998244353; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq L_i \\leq R_i \\leq N \\, (1 \\leq i \\leq Q); 1 \\leq X_i \\leq M \\, (1 \\leq i \\leq Q); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e",
+    "source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

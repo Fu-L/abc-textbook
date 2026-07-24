@@ -1,0 +1,20 @@
+{
+  "id": "abc306-f",
+  "contestId": "abc306",
+  "slotLabel": "F",
+  "officialTaskId": "abc306_f",
+  "title": "Merge Sets",
+  "officialUrl": "https://atcoder.jp/contests/abc306/tasks/abc306_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 10^4; 1\\leq M \\leq 10^2; 1\\leq A_{i,j} \\leq 10^9; If i_1 \\neq i_2 or j_1 \\neq j_2, then A_{i_1,j_1} \\neq A_{i_2,j_2}.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc306-f-problem-63fe6d6c7ae0bf5d4e0b393df64ed190600bfaf0159f4d78ea5e158e1c75a3c8",
+    "source-abc306-editorial-6601-7f08b56f50b5a14b21a2e311a92a05e3f3dcea5339f6c4fe18fd5dc598b9117e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

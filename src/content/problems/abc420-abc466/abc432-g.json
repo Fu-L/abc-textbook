@@ -1,0 +1,20 @@
+{
+  "id": "abc432-g",
+  "contestId": "abc432",
+  "slotLabel": "G",
+  "officialTaskId": "abc432_g",
+  "title": "Sum of Binom(A, B)",
+  "officialUrl": "https://atcoder.jp/contests/abc432/tasks/abc432_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N,M \\leq 5\\times 10^5; 1\\leq A_i,B_j \\leq 5\\times 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc432-g-problem-b59b6f3bdc3b67c8c130001cf7ac8a17227de2582d0a4e9bbcc21f124b4734ca",
+    "source-abc432-editorial-14573-21fb5018d3fab75809ccff8511b070d8ba4e456ef07fcaed46009f687478889c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

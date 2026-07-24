@@ -1,0 +1,20 @@
+{
+  "id": "abc442-g",
+  "contestId": "abc442",
+  "slotLabel": "G",
+  "officialTaskId": "abc442_g",
+  "title": "Lightweight Knapsack",
+  "officialUrl": "https://atcoder.jp/contests/abc442/tasks/abc442_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 2\\times 10^5; 1\\leq C \\leq 2\\times 10^9; 1\\leq W_i \\leq 3; 1\\leq V_i \\leq 10^9; 1\\leq K_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc442-g-problem-786c4b7e64b2b3683fa610e7c89bbca283ff887a211e5bcba2c472babb3f0e46",
+    "source-abc442-editorial-15137-f9062b3b9b33f08c57c2c63af857ea694d32c7f63bab8f599644261528074d25"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

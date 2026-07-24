@@ -1,0 +1,20 @@
+{
+  "id": "abc277-ex",
+  "contestId": "abc277",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc277_h",
+  "title": "Constrained Sums",
+  "officialUrl": "https://atcoder.jp/contests/abc277/tasks/abc277_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10000; 1 \\leq M \\leq 100; 1 \\leq Q \\leq 10000; 1 \\leq A_i, B_i \\leq N; 0 \\leq L_i \\leq R_i \\leq 2 \\times M; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245",
+    "source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

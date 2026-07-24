@@ -1,0 +1,20 @@
+{
+  "id": "abc450-e",
+  "contestId": "abc450",
+  "slotLabel": "E",
+  "officialTaskId": "abc450_e",
+  "title": "Fibonacci String",
+  "officialUrl": "https://atcoder.jp/contests/abc450/tasks/abc450_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: X and Y are strings of lowercase English letters of length between 1 and 10^4, inclusive.; 1 \\leq Q \\leq 10^5; 1 \\leq L_i \\leq R_i \\leq 10^{18}; C_i is a lowercase English letter.; All given numerical values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523",
+    "source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

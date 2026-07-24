@@ -1,0 +1,20 @@
+{
+  "problemId": "abc254-f",
+  "sourceRevisionIds": [
+    "source-abc254-editorial-4067-c931ee6e07f8d7b7e2f38c2ceb2193c131f8f11b66f6200318c5a3ce39a2cf54",
+    "source-abc254-f-problem-fb9b12af78f2c27e67cf3fdf37ca5b98e81bbb6ccf253f0e8602d3235e2f53d0"
+  ],
+  "coreMethod": "abc254-f「Rectangle GCD」では、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数線形結合で表せる値の集合が gcd の倍数全体なので、割り切れ条件が可解性の必要十分条件になる。",
+    "Rectangle GCD 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "gcd と拡張 Euclid"],
+  "implementationConcerns": ["0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。"],
+  "outcomeCandidates": [
+    "Rectangle GCD 型の 盤面上の位置と局所遷移に対し、gcd と拡張 Euclidを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

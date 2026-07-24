@@ -1,0 +1,20 @@
+{
+  "id": "abc331-f",
+  "contestId": "abc331",
+  "slotLabel": "F",
+  "officialTaskId": "abc331_f",
+  "title": "Palindrome Query",
+  "officialUrl": "https://atcoder.jp/contests/abc331/tasks/abc331_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^6; 1 \\leq Q \\leq 10^5; S is a string of length N consisting of lowercase English letters.; 1 \\leq x \\leq N; c is a lowercase English letter.; 1 \\leq L \\leq R \\leq N; N, Q, x, L, R are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc331-f-problem-0825f85271fc207f1f00eedd069b0591836c847c6da3ce4b4c51085bd71ae66b",
+    "source-abc331-editorial-7820-84f397ddaac63f4cee808b3ca295902b86653b9cfaf7abb14f91cbc35c371522"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

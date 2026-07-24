@@ -1,0 +1,22 @@
+{
+  "problemId": "abc385-g",
+  "sourceRevisionIds": [
+    "source-abc385-editorial-11656-abbc96ead53c07d1d269bc2f578c53f96e5460874c25eaa08274554d877da35a",
+    "source-abc385-g-problem-e8e51b64f6070e9628eba3ed49737ae3a5b5b216afbfa3cb75da906281b76834"
+  ],
+  "coreMethod": "abc385-g「Counting Buildings」では、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "係数比較により元の再帰・畳み込みと冪級数恒等式が次数ごとに同値であることを示す。",
+    "Counting Buildings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["順列と逆写像", "形式的冪級数"],
+  "implementationConcerns": [
+    "必要次数で毎回 truncate し、定数項が逆元や対数の前提を満たすか確認する。"
+  ],
+  "outcomeCandidates": [
+    "Counting Buildings 型の 順列の位置と値の対応に対し、形式的冪級数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

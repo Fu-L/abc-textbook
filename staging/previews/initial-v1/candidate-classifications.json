@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "previewId": "initial-v1",
+  "defaultExclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+  "candidates": [
+    {
+      "problemId": "abc212-g",
+      "classifications": [
+        {
+          "domain": "mathematics-combinatorics",
+          "outcomeId": "outcome-candidate-multiplicative-order-counting",
+          "rationale": "素数法を原始根の指数へ写し、指数合同式を最大公約数と約数の個数え上げへ帰着する公式解法である。"
+        }
+      ]
+    },
+    {
+      "problemId": "abc215-e",
+      "classifications": [
+        {
+          "domain": "dynamic-programming",
+          "outcomeId": "outcome-candidate-compressed-dp-state",
+          "rationale": "出場済み文字集合と末尾文字を状態に持つ部分列 DP により、同じ文字の選手が連続する制約を表現する公式解法である。"
+        }
+      ]
+    },
+    {
+      "problemId": "abc218-f",
+      "classifications": [
+        {
+          "domain": "graph-search",
+          "outcomeId": "outcome-candidate-shortest-path-structure",
+          "rationale": "有向非重みグラフの基準最短路を復元し、その経路上の辺だけを削除ごとに BFS し直す公式解法である。"
+        }
+      ]
+    },
+    {
+      "problemId": "abc222-g",
+      "classifications": [
+        {
+          "domain": "mathematics-combinatorics",
+          "outcomeId": "outcome-candidate-multiplicative-order-counting",
+          "rationale": "同一数字を並べた数の割り切れ条件を repunit の合同式へ変換し、10 の乗法的位数として最小桁数を求める公式解法である。"
+        }
+      ]
+    },
+    {
+      "problemId": "abc223-f",
+      "classifications": [
+        {
+          "domain": "data-structures-algorithm-design",
+          "outcomeId": "outcome-candidate-range-aggregate-under-updates",
+          "rationale": "括弧を ±1 とみなし、区間総和と最小接頭辞和を segment tree で保って swap 更新後の正当性を判定する公式解法である。"
+        }
+      ]
+    },
+    {
+      "problemId": "abc232-e",
+      "classifications": [
+        {
+          "domain": "dynamic-programming",
+          "outcomeId": "outcome-candidate-compressed-dp-state",
+          "rationale": "現在位置の行・列が目標と一致するかだけで盤面を 4 状態に商約し、K 手の遷移を数える公式 DP である。"
+        }
+      ]
+    },
+    {
+      "problemId": "abc252-e",
+      "classifications": [
+        {
+          "domain": "graph-search",
+          "outcomeId": "outcome-candidate-shortest-path-structure",
+          "rationale": "頂点 1 からの Dijkstra で各頂点の距離を確定させた直前辺を採用し、最短路木を構成する公式解法である。"
+        }
+      ]
+    },
+    {
+      "problemId": "abc256-f",
+      "classifications": [
+        {
+          "domain": "data-structures-algorithm-design",
+          "outcomeId": "outcome-candidate-range-aggregate-under-updates",
+          "rationale": "三重累積和の係数を二次式へ展開し、A_i・iA_i・i²A_i の更新可能な prefix sum を三本の Fenwick tree で保つ公式解法である。"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc390",
+  "number": 390,
+  "title": "AtCoder Beginner Contest 390",
+  "startedAt": "2025-01-25T21:00:00+09:00",
+  "endedAt": "2025-01-25T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc390",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc390_a",
+    "abc390_b",
+    "abc390_c",
+    "abc390_d",
+    "abc390_e",
+    "abc390_f",
+    "abc390_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc390-task-list-feb3f17b7650ac401ded6a4e0d223ac30e433e57c99f2ff49a37567d7cef436d",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

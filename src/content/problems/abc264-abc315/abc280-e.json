@@ -1,0 +1,20 @@
+{
+  "id": "abc280-e",
+  "contestId": "abc280",
+  "slotLabel": "E",
+  "officialTaskId": "abc280_e",
+  "title": "Critical Hit",
+  "officialUrl": "https://atcoder.jp/contests/abc280/tasks/abc280_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 0 \\leq P \\leq 100; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc280-e-problem-807c8d0a6a65d9a4c82bd33ed9d4d15a6823625f3fd1d04ea08e8a090568d44b",
+    "source-abc280-editorial-5331-861bf62d3f05c27dcf8ce95804bba4fd96267d2b7c980f9b95d2bfc1149a1916"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

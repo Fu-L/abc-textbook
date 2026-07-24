@@ -1,0 +1,20 @@
+{
+  "problemId": "abc433-f",
+  "sourceRevisionIds": [
+    "source-abc433-editorial-14594-08bc59650ef1192757d238eb2f5ed124e1ab34db56b16c86ccb1fa7841abc7d8",
+    "source-abc433-f-problem-ce87dc4de4780fe3a1c4a13b1e3631c7aeaec1cfe60d81db8e4fdede040d2391"
+  ],
+  "coreMethod": "abc433-f「1122 Subsequence 2」では、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
+    "1122 Subsequence 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "畳み込みと NTT"],
+  "implementationConcerns": ["必要な係数長、padding 長、法が NTT に対応するかを確認する。"],
+  "outcomeCandidates": [
+    "1122 Subsequence 2 型の 文字列の prefix・suffix と一致関係に対し、畳み込みと NTTを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

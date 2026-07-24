@@ -1,0 +1,20 @@
+{
+  "id": "abc400-f",
+  "contestId": "abc400",
+  "slotLabel": "F",
+  "officialTaskId": "abc400_f",
+  "title": "Happy Birthday! 3",
+  "officialUrl": "https://atcoder.jp/contests/abc400/tasks/abc400_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 400; 1 \\leq C_i \\leq N; 1 \\leq X_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc400-f-problem-f05c34f1b8e095a282536aee51bb76a0783529f28ada451225a15a3fb7126e5a",
+    "source-abc400-editorial-12625-0aebf97f723a76a0781e1ed9313a600be3b28cebc52c35a97eb9b75015211e58"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

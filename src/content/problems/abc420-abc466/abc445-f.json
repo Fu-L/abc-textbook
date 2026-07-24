@@ -1,0 +1,20 @@
+{
+  "id": "abc445-f",
+  "contestId": "abc445",
+  "slotLabel": "F",
+  "officialTaskId": "abc445_f",
+  "title": "Exactly K Steps 2",
+  "officialUrl": "https://atcoder.jp/contests/abc445/tasks/abc445_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 100; 1 \\le K \\le 10^9; 0 \\le C_{i,j} \\le 10^9\\ (1 \\le i \\le N,1 \\le j \\le N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc445-f-problem-bbb5df2daeea8d608944b9dfacd26db3a65d3051c3e818bd05f1ec115d582db4",
+    "source-abc445-editorial-15907-89f35be3c547667a7b103bd1a349b102d4c891c815d9c3eb7304f679c2bfa2f7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

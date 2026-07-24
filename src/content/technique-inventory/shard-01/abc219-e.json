@@ -1,0 +1,20 @@
+{
+  "problemId": "abc219-e",
+  "sourceRevisionIds": [
+    "source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b",
+    "source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943"
+  ],
+  "coreMethod": "abc219-e「Moat」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+    "Moat 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["全探索と候補数の上界評価"],
+  "implementationConcerns": ["同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。"],
+  "outcomeCandidates": [
+    "Moat 型の問題に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

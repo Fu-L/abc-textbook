@@ -1,0 +1,20 @@
+{
+  "id": "abc420",
+  "number": 420,
+  "title": "AtCoder Beginner Contest 420",
+  "startedAt": "2025-08-24T21:00:00+09:00",
+  "endedAt": "2025-08-24T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc420",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc420_a",
+    "abc420_b",
+    "abc420_c",
+    "abc420_d",
+    "abc420_e",
+    "abc420_f",
+    "abc420_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc420-task-list-fb89c89fd2713abe33bd38eca8100fe5b5573779f9374f41ad474064f8fe2252",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

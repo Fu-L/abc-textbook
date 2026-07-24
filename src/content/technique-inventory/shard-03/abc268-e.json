@@ -1,0 +1,20 @@
+{
+  "problemId": "abc268-e",
+  "sourceRevisionIds": [
+    "source-abc268-e-problem-ebb48085f9132fd7859792492da1d8ac110ddb24ce42343bc916a103a1221c9e",
+    "source-abc268-editorial-4777-26e9d1b6757939b74bb7bc9f6ed9067ff8db7f5ea5a842cdfbe08a3e624a510c"
+  ],
+  "coreMethod": "abc268-e「Chinese Restaurant (Three-Star Version)」では、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+    "Chinese Restaurant (Three-Star Version) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "累積和と差分"],
+  "implementationConcerns": ["半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。"],
+  "outcomeCandidates": [
+    "Chinese Restaurant (Three-Star Version) 型の 整数の約数・剰余構造に対し、累積和と差分を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

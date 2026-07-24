@@ -1,0 +1,20 @@
+{
+  "problemId": "abc369-e",
+  "sourceRevisionIds": [
+    "source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc",
+    "source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"
+  ],
+  "coreMethod": "abc369-e「Sightseeing Tour」では、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "許可する中継頂点集合について帰納し、最適路が新頂点を使う場合と使わない場合を網羅する。",
+    "Sightseeing Tour 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["online query の計算量設計", "Floyd–Warshall 法"],
+  "implementationConcerns": ["到達不能値同士を加算せず、更新順序 k-i-j を崩さない。"],
+  "outcomeCandidates": [
+    "Sightseeing Tour 型の 更新と問い合わせの時系列に対し、Floyd–Warshall 法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

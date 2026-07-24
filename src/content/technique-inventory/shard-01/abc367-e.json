@@ -1,0 +1,22 @@
+{
+  "problemId": "abc367-e",
+  "sourceRevisionIds": [
+    "source-abc367-e-problem-ee4a7e33c3e0527687a3ff0327ae52d41f34616b5b5f22a2144cbb87b07b56e8",
+    "source-abc367-editorial-10707-9b0092098f46b0b3a8d74b217af06864ebabd9c9a95f8c17dd68f5bfb69b23f7"
+  ],
+  "coreMethod": "abc367-e「Permute K times」では、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の遷移回数は異なる二冪の和として一意に表せ、前計算した遷移の関数合成で同じ終点へ到達する。",
+    "Permute K times 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "ダブリングと二進展開"],
+  "implementationConcerns": [
+    "必要な最大 bit 数と遷移不能 sentinel を先に決め、表の参照範囲を揃える。"
+  ],
+  "outcomeCandidates": [
+    "Permute K times 型の 列の順序と prefix 状態に対し、ダブリングと二進展開を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

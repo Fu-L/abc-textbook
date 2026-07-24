@@ -1,0 +1,20 @@
+{
+  "id": "abc443-g",
+  "contestId": "abc443",
+  "slotLabel": "G",
+  "officialTaskId": "abc443_g",
+  "title": "Another Mod of Linear Problem",
+  "officialUrl": "https://atcoder.jp/contests/abc443/tasks/abc443_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 3\\times 10^5; 1\\le N \\le M\\le 10^9; 0\\le A,B < M; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc443-g-problem-57b82a295ac386c53ab1317886a8f4ffc40c4bc853f1f6c66fb8dba9f12f4a16",
+    "source-abc443-editorial-15138-3aa9463ceddd2142f504b5b736ccfc887e550c9c69317c0bbca14a01bd6ecfad"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc240-f",
+  "contestId": "abc240",
+  "slotLabel": "F",
+  "officialTaskId": "abc240_f",
+  "title": "Sum Sum Max",
+  "officialUrl": "https://atcoder.jp/contests/abc240/tasks/abc240_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 2 \\times 10^5; 1 \\leq N \\leq 2 \\times 10^5; The sum of N in a single file is at most 2 \\times 10^5.; 1 \\leq M \\leq 10^9; |x_i| \\leq 4 \\, (1 \\leq i \\leq N); y_i \\gt 0 \\, (1 \\leq i \\leq N); \\sum_{k = 1}^N y_k = M; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b",
+    "source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

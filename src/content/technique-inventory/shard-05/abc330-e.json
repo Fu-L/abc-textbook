@@ -1,0 +1,22 @@
+{
+  "problemId": "abc330-e",
+  "sourceRevisionIds": [
+    "source-abc330-e-problem-c9b8f55f67731908d9b6568c81445ed2e45abb094bbce6983b56400d4f72aa57",
+    "source-abc330-editorial-7752-701993db3856eaa396d8e9b0d19710eeefa288e210731f5c6cf0074c7dfa0cd6"
+  ],
+  "coreMethod": "abc330-e「Mex and Update」では、値 0..N の出現数と、現在欠けている値の ordered set を更新し、その最小値を mex とする。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "長さ N の列の mex は N 以下であり、出現数が零の値だけを集合へ保てば集合最小が定義通りの最小非出現値になる。",
+    "Mex and Update 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["mex と ordered set"],
+  "implementationConcerns": [
+    "置換前後が同値な場合と範囲外の値を分け、出現数が 0↔1 になる瞬間だけ集合を更新する。"
+  ],
+  "outcomeCandidates": [
+    "Mex and Update 型の問題に対し、mex と ordered setを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

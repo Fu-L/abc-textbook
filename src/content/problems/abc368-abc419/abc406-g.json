@@ -1,0 +1,20 @@
+{
+  "id": "abc406-g",
+  "contestId": "abc406",
+  "slotLabel": "G",
+  "officialTaskId": "abc406_g",
+  "title": "Travelling Salesman Problem",
+  "officialUrl": "https://atcoder.jp/contests/abc406/tasks/abc406_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq C, D \\leq 10^5; -10^5 \\leq X_i \\leq 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc406-g-problem-af05a869e705437c9cfa5c822aa6d808b155b4a5c08c1bb41d36ec3d3f5db3f2",
+    "source-abc406-editorial-13048-920868b4aa7b9d1ecd1f5cb46d721512ac85991b33891224b3674ac02c77ee00"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

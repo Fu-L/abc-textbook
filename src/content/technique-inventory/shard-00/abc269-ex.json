@@ -1,0 +1,20 @@
+{
+  "problemId": "abc269-ex",
+  "sourceRevisionIds": [
+    "source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524",
+    "source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8"
+  ],
+  "coreMethod": "abc269-ex「Antichain」では、木を heavy path に分解し、パス問題を対数本の一次元区間へ写す。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "light edge を通るたび部分木サイズが半減するため、任意の根付き木パスは対数本の区間へ分割できる。",
+    "Antichain 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "Heavy-Light Decomposition"],
+  "implementationConcerns": ["頂点値か辺値かに応じて LCA 側端点を含める区間を調整する。"],
+  "outcomeCandidates": [
+    "Antichain 型の 根付き木・部分木・パスの関係に対し、Heavy-Light Decompositionを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

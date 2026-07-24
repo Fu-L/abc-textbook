@@ -1,0 +1,25 @@
+{
+  "problemId": "abc218-f",
+  "sourceRevisionIds": [
+    "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+    "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"
+  ],
+  "coreMethod": "abc218-f「Blocked Roads」では、元 graph で最短路を一本復元し、その路上辺を削除した場合だけ BFS を再実行し、他辺は元距離を再利用する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "選んだ最短路に含まれない辺を削除してもその路が残るため距離は変わらず、再計算対象は高々 N-1 辺である。",
+    "Blocked Roads 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "asymptoticComplexity": {
+    "time": "O(N[N+M])（公式解法全体。特殊な計算量解析を含む）"
+  },
+  "prerequisiteCandidates": ["BFS と最短路復元", "特殊な漸近計算量の見積もり"],
+  "implementationConcerns": [
+    "辺を端点 pair でなく edge id で無効化し、元々終点へ到達不能な場合を全問 -1 とする。"
+  ],
+  "outcomeCandidates": [
+    "Blocked Roads 型の問題に対し、BFS と最短路復元を選び、状態・証明・特殊計算量を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

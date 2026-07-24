@@ -1,0 +1,20 @@
+{
+  "id": "abc262-e",
+  "contestId": "abc262",
+  "slotLabel": "E",
+  "officialTaskId": "abc262_e",
+  "title": "Red and Blue Graph",
+  "officialUrl": "https://atcoder.jp/contests/abc262/tasks/abc262_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; 0 \\leq K \\leq N; 1 \\leq U_i \\lt V_i \\leq N \\, (1 \\leq i \\leq M); (U_i, V_i) \\neq (U_j, V_j) \\, (i \\neq j); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc262-e-problem-bc5fade319bd5ee2194ece46e588a0f5f4424f33bb25366042252c06b9136ed1",
+    "source-abc262-editorial-4479-33a3a1a74196fae91ced253beb14e06629da248ae29423536b8006b1eade4133"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

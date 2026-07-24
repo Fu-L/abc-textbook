@@ -1,0 +1,21 @@
+{
+  "id": "abc257",
+  "number": 257,
+  "title": "NS Solutions Corporation Programming Contest 2022（AtCoder Beginner Contest 257）",
+  "startedAt": "2022-06-25T21:00:00+09:00",
+  "endedAt": "2022-06-25T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc257",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc257_a",
+    "abc257_b",
+    "abc257_c",
+    "abc257_d",
+    "abc257_e",
+    "abc257_f",
+    "abc257_g",
+    "abc257_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc257-task-list-a1ca1208512c46760b27c9e9429678f70466c8e6d3ffba409d90e5cf694d339a",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

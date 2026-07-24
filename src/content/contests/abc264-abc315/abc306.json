@@ -1,0 +1,21 @@
+{
+  "id": "abc306",
+  "number": 306,
+  "title": "Toyota Programming Contest 2023#3（AtCoder Beginner Contest 306）",
+  "startedAt": "2023-06-17T21:00:00+09:00",
+  "endedAt": "2023-06-17T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc306",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc306_a",
+    "abc306_b",
+    "abc306_c",
+    "abc306_d",
+    "abc306_e",
+    "abc306_f",
+    "abc306_g",
+    "abc306_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc306-task-list-a2752404289a309fec3d8111e188dc9acdb4d14128fb38dd6ecb0f0df869a957",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

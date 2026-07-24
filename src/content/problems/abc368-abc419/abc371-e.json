@@ -1,0 +1,20 @@
+{
+  "id": "abc371-e",
+  "contestId": "abc371",
+  "slotLabel": "E",
+  "officialTaskId": "abc371_e",
+  "title": "I Hate Sigma Problems",
+  "officialUrl": "https://atcoder.jp/contests/abc371/tasks/abc371_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times 10^5; 1\\leq A_i\\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc371-e-problem-4317baef9dcf6c77612f151f700251d71ba4de4fd36a0edac3241c3756e9a5d9",
+    "source-abc371-editorial-10922-65463ad1e84ad122b219d944a7e2e3b3839270644ebe295fb6e2c39cfd6624ad"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

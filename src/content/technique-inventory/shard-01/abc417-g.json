@@ -1,0 +1,20 @@
+{
+  "problemId": "abc417-g",
+  "sourceRevisionIds": [
+    "source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee",
+    "source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a"
+  ],
+  "coreMethod": "abc417-g「Binary Cat」では、木を heavy path に分解し、パス問題を対数本の一次元区間へ写す。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "light edge を通るたび部分木サイズが半減するため、任意の根付き木パスは対数本の区間へ分割できる。",
+    "Binary Cat 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "Heavy-Light Decomposition"],
+  "implementationConcerns": ["頂点値か辺値かに応じて LCA 側端点を含める区間を調整する。"],
+  "outcomeCandidates": [
+    "Binary Cat 型の 文字列の prefix・suffix と一致関係に対し、Heavy-Light Decompositionを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

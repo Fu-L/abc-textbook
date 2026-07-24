@@ -1,0 +1,20 @@
+{
+  "id": "abc243-ex",
+  "contestId": "abc243",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc243_h",
+  "title": "Builder Takahashi (Enhanced version)",
+  "officialUrl": "https://atcoder.jp/contests/abc243/tasks/abc243_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H \\leq 100; 2 \\leq W \\leq 100; C_{i,j} is S, G, ., or O.; Each of S and G appears exactly once in C_{i,j}.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc243-ex-problem-cb35728cca943b2ff65de0edea1b620bf01183421366f241251dbf8132adbebe",
+    "source-abc243-editorial-3546-89a660b3c8dda82dde57aa36a38a94770e60efb75f91ba72b8d5d4ac1c78a971"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

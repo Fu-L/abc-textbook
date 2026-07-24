@@ -1,0 +1,20 @@
+{
+  "id": "abc220-f",
+  "contestId": "abc220",
+  "slotLabel": "F",
+  "officialTaskId": "abc220_f",
+  "title": "Distance Sums 2",
+  "officialUrl": "https://atcoder.jp/contests/abc220/tasks/abc220_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq u_i < v_i \\leq N; The given graph is a tree.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223",
+    "source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

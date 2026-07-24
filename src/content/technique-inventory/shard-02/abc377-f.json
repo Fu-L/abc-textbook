@@ -1,0 +1,22 @@
+{
+  "problemId": "abc377-f",
+  "sourceRevisionIds": [
+    "source-abc377-editorial-11246-f29d5b7dfcda9fe5a743e462d4bb6d1048af559b76f7ebedbd5b7dd2dcd4694a",
+    "source-abc377-f-problem-0783e8d2bcd70768494a36d61bb0dc1ea442c8f69fafc99c889c5d04e78fcf0c"
+  ],
+  "coreMethod": "abc377-f「Avoid Queen Attack」では、駒が利く行・列・二方向の対角線を一意化して総延長を足し、異方向の線の交点だけを列挙して重複を補正する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "同方向の重複線を除けば多重計上される cell は異なる方向の線の交点に限られ、その総数は O(M^2) である。",
+    "Avoid Queen Attack 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["包除原理と格子直線の交点"],
+  "implementationConcerns": [
+    "盤外交点、非整数交点、同一点へ三方向以上が集まる場合を multiplicity で補正する。"
+  ],
+  "outcomeCandidates": [
+    "Avoid Queen Attack 型の問題に対し、包除原理と格子直線の交点を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

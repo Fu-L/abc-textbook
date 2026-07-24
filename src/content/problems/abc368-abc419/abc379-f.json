@@ -1,0 +1,20 @@
+{
+  "id": "abc379-f",
+  "contestId": "abc379",
+  "slotLabel": "F",
+  "officialTaskId": "abc379_f",
+  "title": "Buildings 2",
+  "officialUrl": "https://atcoder.jp/contests/abc379/tasks/abc379_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq H_i \\leq N; H_i\\neq H_j\\ (i\\neq j); 1 \\leq l_i < r_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc379-f-problem-82dc25ffda54fdaed747134be3455bd303a1e2dc789ce44d64a96f6517140140",
+    "source-abc379-editorial-11309-8919f169b4e747b33f78529614802e8cbe94424c249443424ee87563093fb8c5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

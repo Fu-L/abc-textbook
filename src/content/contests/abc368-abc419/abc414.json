@@ -1,0 +1,20 @@
+{
+  "id": "abc414",
+  "number": 414,
+  "title": "Mirrativ Programming Contest 2025 (AtCoder Beginner Contest 414)",
+  "startedAt": "2025-07-12T21:00:00+09:00",
+  "endedAt": "2025-07-12T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc414",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc414_a",
+    "abc414_b",
+    "abc414_c",
+    "abc414_d",
+    "abc414_e",
+    "abc414_f",
+    "abc414_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc414-task-list-f43700e773925ab85a0b546f11c1982511d940bc46ae3f94b20e9ad3f38cc796",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc226-h",
+  "sourceRevisionIds": [
+    "source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412",
+    "source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48"
+  ],
+  "coreMethod": "abc226-h「Random Kth Max」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+    "Random Kth Max 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "条件付き期待値と確率 DP"],
+  "implementationConcerns": [
+    "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Random Kth Max 型の 区間端点と包含関係に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

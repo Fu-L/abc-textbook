@@ -1,0 +1,22 @@
+{
+  "problemId": "abc328-f",
+  "sourceRevisionIds": [
+    "source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28",
+    "source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"
+  ],
+  "coreMethod": "abc328-f「Good Set Query」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+    "Good Set Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "Union-Find"],
+  "implementationConcerns": [
+    "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。"
+  ],
+  "outcomeCandidates": [
+    "Good Set Query 型の 列の順序と prefix 状態に対し、Union-Findを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

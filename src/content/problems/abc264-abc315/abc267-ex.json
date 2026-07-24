@@ -1,0 +1,20 @@
+{
+  "id": "abc267-ex",
+  "contestId": "abc267",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc267_h",
+  "title": "Odd Sum",
+  "officialUrl": "https://atcoder.jp/contests/abc267/tasks/abc267_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 10^5; 1 \\le M \\le 10^6; 1 \\le A_i \\le 10; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc267-ex-problem-53fd370d715324cae8e3d5c9f315e45b9ce92b1b7e6b80ad84576f6b26bafb74",
+    "source-abc267-editorial-4736-2ddc26b1addb51230c1fb95dcc014fc02d67b3681e885e7b64b8c85277e8bbba"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

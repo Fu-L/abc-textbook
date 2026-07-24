@@ -1,0 +1,20 @@
+{
+  "id": "abc241-e",
+  "contestId": "abc241",
+  "slotLabel": "E",
+  "officialTaskId": "abc241_e",
+  "title": "Putting Candies",
+  "officialUrl": "https://atcoder.jp/contests/abc241/tasks/abc241_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq K \\leq 10^{12}; 1 \\leq A_i\\leq 10^6; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc241-e-problem-aa1078a5980728f8a202a2ab0dd7b8cb2f9dbbf4fda2dc2352a746e378172be4",
+    "source-abc241-editorial-3472-223ab10f3662d986ab9f48d7c727f682d9bbc31b921499899f8366059700fd74"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

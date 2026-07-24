@@ -1,0 +1,20 @@
+{
+  "id": "abc435",
+  "number": 435,
+  "title": "AtCoder Beginner Contest 435",
+  "startedAt": "2025-12-06T21:00:00+09:00",
+  "endedAt": "2025-12-06T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc435",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc435_a",
+    "abc435_b",
+    "abc435_c",
+    "abc435_d",
+    "abc435_e",
+    "abc435_f",
+    "abc435_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc435-task-list-136308263ee787e36e03fd94752ea7d155bd9d67bcb23a6724ae102784db1fef",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc253-ex",
+  "contestId": "abc253",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc253_h",
+  "title": "We Love Forest",
+  "officialUrl": "https://atcoder.jp/contests/abc253/tasks/abc253_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 14; N-1 \\leq M \\leq 500; 1 \\leq u_i,v_i \\leq N; u_i\\neq v_i; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc253-ex-problem-403eda1a50e862876c0d2cf16a7969f8c8d764c1034b46e09454824b8ae3cabd",
+    "source-abc253-editorial-4023-366204e887abfce0e08e2692d2e2861877d7e000474c649f5be1fddbb290bf8a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

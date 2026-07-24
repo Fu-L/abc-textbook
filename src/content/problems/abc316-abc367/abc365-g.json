@@ -1,0 +1,20 @@
+{
+  "id": "abc365-g",
+  "contestId": "abc365",
+  "slotLabel": "G",
+  "officialTaskId": "abc365_g",
+  "title": "AtCoder Office",
+  "officialUrl": "https://atcoder.jp/contests/abc365/tasks/abc365_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq2\\times10^5; 2\\leq M\\leq2\\times10^5; 1\\leq T_1\\lt T_2\\lt\\dotsb\\lt T_M\\leq10^9; 1\\leq P_i\\leq N\\ (1\\leq i\\leq M); For every 1\\leq p\\leq N, the number of indices i such that P_i=p is even.; 1\\leq Q\\leq2\\times10^5; 1\\leq A_i\\lt B_i\\leq N\\ (1\\leq i\\leq Q); All inputs are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c",
+    "source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

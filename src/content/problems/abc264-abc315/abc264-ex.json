@@ -1,0 +1,20 @@
+{
+  "id": "abc264-ex",
+  "contestId": "abc264",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc264_h",
+  "title": "Perfect Binary Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc264/tasks/abc264_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le N \\le 3 \\times 10^5; 1 \\le P_i < i",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc264-ex-problem-abda7f8b06dc62deb02c8bea6d21d9042f93407a6d352a8a58fddb2c9151d487",
+    "source-abc264-editorial-4584-35c13b9d5c60d7105e182f142f28d23cc2580af70d1e75587d2a3b846052e181"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

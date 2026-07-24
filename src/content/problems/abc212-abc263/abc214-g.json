@@ -1,0 +1,20 @@
+{
+  "id": "abc214-g",
+  "contestId": "abc214",
+  "slotLabel": "G",
+  "officialTaskId": "abc214_g",
+  "title": "Three Permutations",
+  "officialUrl": "https://atcoder.jp/contests/abc214/tasks/abc214_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3000; 1 \\leq p_i, q_i \\leq N; p_i \\neq p_j \\, (i \\neq j); q_i \\neq q_j \\, (i \\neq j); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613",
+    "source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

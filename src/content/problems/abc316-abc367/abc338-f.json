@@ -1,0 +1,20 @@
+{
+  "id": "abc338-f",
+  "contestId": "abc338",
+  "slotLabel": "F",
+  "officialTaskId": "abc338_f",
+  "title": "Negative Traveling Salesman",
+  "officialUrl": "https://atcoder.jp/contests/abc338/tasks/abc338_f",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 20; 1\\leq M \\leq N(N-1); 1\\leq U_i,V_i \\leq N; U_i \\neq V_i; (U_i,V_i) \\neq (U_j,V_j) for i\\neq j; -10^6\\leq W_i \\leq 10^6; The given graph does not contain negative cycles.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735",
+    "source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

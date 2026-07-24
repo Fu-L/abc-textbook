@@ -1,0 +1,20 @@
+{
+  "problemId": "abc357-e",
+  "sourceRevisionIds": [
+    "source-abc357-e-problem-64307c171532025fae3638a6c13355395f10cf6cbbc3eb9d72269d67bba48256",
+    "source-abc357-editorial-10185-02035c2aaf509823d56034c354d137d0ffb8eb747241aa8cb9ca245e69b7a846"
+  ],
+  "coreMethod": "abc357-e「Reachability in Functional Graph」では、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同一強連結成分内では相互到達可能であり、成分間を縮約すると閉路のない DAG になる。",
+    "Reachability in Functional Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "強連結成分分解"],
+  "implementationConcerns": ["元頂点から成分番号への写像と、重複する成分間辺の扱いを明確にする。"],
+  "outcomeCandidates": [
+    "Reachability in Functional Graph 型の 頂点と辺からなる状態グラフに対し、強連結成分分解を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

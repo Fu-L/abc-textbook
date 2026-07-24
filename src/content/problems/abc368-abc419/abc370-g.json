@@ -1,0 +1,20 @@
+{
+  "id": "abc370-g",
+  "contestId": "abc370",
+  "slotLabel": "G",
+  "officialTaskId": "abc370_g",
+  "title": "Divisible by 3",
+  "officialUrl": "https://atcoder.jp/contests/abc370/tasks/abc370_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{10}; 1 \\leq M \\leq 10^5; N and M are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc370-g-problem-24d3314149c61d48b68d9a4609bdb987c7c7fd4e495ed430aa041d2f82f6562f",
+    "source-abc370-editorial-10869-b805b19b481f5f6449220fab8a2c5502e7d0135bdecba7ae5c67b32de475acd1"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

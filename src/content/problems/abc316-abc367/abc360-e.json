@@ -1,0 +1,20 @@
+{
+  "id": "abc360-e",
+  "contestId": "abc360",
+  "slotLabel": "E",
+  "officialTaskId": "abc360_e",
+  "title": "Random Swaps of Balls",
+  "officialUrl": "https://atcoder.jp/contests/abc360/tasks/abc360_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 998244352; 1 \\leq K \\leq 10^5",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc360-e-problem-3214799dba5edf0f62e3de6174530c076d6d3440214e0a67aefb0f14f8343bd4",
+    "source-abc360-editorial-10310-74276377180d9ad33a9601d51c84cd9f96c782a05c48f81d65b8e956f90af30a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

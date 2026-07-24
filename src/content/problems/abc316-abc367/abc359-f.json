@@ -1,0 +1,20 @@
+{
+  "id": "abc359-f",
+  "contestId": "abc359",
+  "slotLabel": "F",
+  "officialTaskId": "abc359_f",
+  "title": "Tree Degree Optimization",
+  "officialUrl": "https://atcoder.jp/contests/abc359/tasks/abc359_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 2\\times 10^5; 1\\leq A_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc359-f-problem-2b056103c3c211859dd536326e8594c8e2edc62f670339e9bf6745247be29142",
+    "source-abc359-editorial-10260-2b6d1547de087bbf4176fd0e68c8db96a391c2283b8cae857798b0b04b0ffab8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

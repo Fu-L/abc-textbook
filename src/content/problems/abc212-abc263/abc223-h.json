@@ -1,0 +1,20 @@
+{
+  "id": "abc223-h",
+  "contestId": "abc223",
+  "slotLabel": "H",
+  "officialTaskId": "abc223_h",
+  "title": "Xor Query",
+  "officialUrl": "https://atcoder.jp/contests/abc223/tasks/abc223_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 4 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq A_i \\lt 2^{60}; 1 \\leq L_i \\leq R_i \\leq N; 1 \\leq X_i \\lt 2^{60}; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e",
+    "source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

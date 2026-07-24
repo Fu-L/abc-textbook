@@ -1,0 +1,20 @@
+{
+  "id": "abc243-f",
+  "contestId": "abc243",
+  "slotLabel": "F",
+  "officialTaskId": "abc243_f",
+  "title": "Lottery",
+  "officialUrl": "https://atcoder.jp/contests/abc243/tasks/abc243_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq 50; 1 \\leq M \\leq N \\leq 50; 0 < W_i; 0 < W_1 + \\ldots + W_N < 998244353; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc243-f-problem-5079ff840136d541c211c172c8a0a558b6aaef5045395c908305ee1c2788093e",
+    "source-abc243-editorial-3508-3ebd952fa347715a6423d7e9c124bee0e7408cca427b9b705bcc1d308492d16f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

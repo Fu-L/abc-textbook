@@ -1,0 +1,20 @@
+{
+  "problemId": "abc445-e",
+  "sourceRevisionIds": [
+    "source-abc445-e-problem-50135848a5878b8a158943534dbfed90b6878bc27e5ccea5387b9cf9efb99965",
+    "source-abc445-editorial-15897-cb7d716d9e102facbb220e48ba70de743c4fb5a4c813c547c6652e11a22000e2"
+  ],
+  "coreMethod": "abc445-e「Many LCMs」では、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
+    "Many LCMs 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "式変形と frequency map"],
+  "implementationConcerns": ["添字 parity による符号反転と負数 key をそのまま正確に保持する。"],
+  "outcomeCandidates": [
+    "Many LCMs 型の 列の順序と prefix 状態に対し、式変形と frequency mapを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

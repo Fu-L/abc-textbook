@@ -1,0 +1,18 @@
+{
+  "componentId": "technique-inventory",
+  "previewId": "initial-v1",
+  "manifestDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "problemIds": [
+    "abc212-g",
+    "abc215-e",
+    "abc218-f",
+    "abc222-g",
+    "abc223-f",
+    "abc232-e",
+    "abc252-e",
+    "abc256-f"
+  ],
+  "inputDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "artifactDigest": "f513f27b5e105b6c58922a3870d6bdc04a4c5850bf2d11ce46392d0121298f5a",
+  "outputDigest": "8ebb3b324b1972d98321b1249d6f387acbb54757ed8460638e6a6747eb150da7"
+}

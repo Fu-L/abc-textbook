@@ -1,0 +1,20 @@
+{
+  "id": "abc222-e",
+  "contestId": "abc222",
+  "slotLabel": "E",
+  "officialTaskId": "abc222_e",
+  "title": "Red and Blue Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc222/tasks/abc222_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 1000; 2 \\leq M \\leq 100; |K| \\leq 10^5; 1 \\leq A_i \\leq N; 1\\leq U_i,V_i\\leq N; The given graph is a tree.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75",
+    "source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

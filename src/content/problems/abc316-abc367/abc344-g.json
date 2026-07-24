@@ -1,0 +1,20 @@
+{
+  "id": "abc344-g",
+  "contestId": "abc344",
+  "slotLabel": "G",
+  "officialTaskId": "abc344_g",
+  "title": "Points and Comparison",
+  "officialUrl": "https://atcoder.jp/contests/abc344/tasks/abc344_g",
+  "constraintsSummary": "Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 5000; 1 \\le Q \\le 10^7; |X_i|, |Y_i| \\le 10^8; The pairs (X_i,Y_i) are distinct.; 0 \\le G_0 < (2^{31}-1); 0 \\le R_a \\le 10^8; 0 \\le R_b \\le 10^{16}",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc344-g-problem-d809ded0a0e2df95e9eb3d8af3f604d216fa6b1928af47694c116afc97a46ef3",
+    "source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc349-e",
+  "sourceRevisionIds": [
+    "source-abc349-e-problem-d85b1428d634ff73f6e42fa7cec9d7e7d380c8a49707ceea3650eb6132304b14",
+    "source-abc349-editorial-9780-919791b6256f66739ac67ccbd469d346f11d403d464187d1024aa862d9bfa6e7"
+  ],
+  "coreMethod": "abc349-e「Weighted Tic-Tac-Toe」では、丸めた二候補だけへ分岐する再帰を定義し、同じ部分問題を memoize して再利用する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "最小単位の端数は切り捨て側か切り上げ側のどちらかで清算すればよく、他の選択はそれらより改善しない。",
+    "Weighted Tic-Tac-Toe 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "メモ化再帰と最適部分構造"],
+  "implementationConcerns": [
+    "再帰 key の単位を揃え、切り上げ側で一段上へ carry する境界を処理する。"
+  ],
+  "outcomeCandidates": [
+    "Weighted Tic-Tac-Toe 型の 盤面上の位置と局所遷移に対し、メモ化再帰と最適部分構造を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

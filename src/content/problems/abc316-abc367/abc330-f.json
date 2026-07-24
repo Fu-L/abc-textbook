@@ -1,0 +1,20 @@
+{
+  "id": "abc330-f",
+  "contestId": "abc330",
+  "slotLabel": "F",
+  "officialTaskId": "abc330_f",
+  "title": "Minimize Bounding Square",
+  "officialUrl": "https://atcoder.jp/contests/abc330/tasks/abc330_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 2 \\times 10^5; 0 \\le K \\le 4 \\times 10^{14}; 0 \\le X_i, Y_i \\le 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc330-f-problem-8a90fa5e29d8244512c0ca99393824aab8100d938e9f9557e108155083428871",
+    "source-abc330-editorial-7753-dbcbe9a7817397803a66a446c6015dcdc62e451709ee1cf5e569a8a02998f96e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

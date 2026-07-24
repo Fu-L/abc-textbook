@@ -1,0 +1,20 @@
+{
+  "id": "abc384",
+  "number": 384,
+  "title": "Toyota Programming Contest 2024#12（AtCoder Beginner Contest 384）",
+  "startedAt": "2024-12-14T21:00:00+09:00",
+  "endedAt": "2024-12-14T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc384",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc384_a",
+    "abc384_b",
+    "abc384_c",
+    "abc384_d",
+    "abc384_e",
+    "abc384_f",
+    "abc384_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc384-task-list-94a9d6ff604928ac170a85c4c9f1338d921fa5513bb2ce766d6be1741a6913d3",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

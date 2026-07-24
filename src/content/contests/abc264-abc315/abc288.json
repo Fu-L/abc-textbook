@@ -1,0 +1,21 @@
+{
+  "id": "abc288",
+  "number": 288,
+  "title": "Toyota Programming Contest 2023 Spring Qual A（AtCoder Beginner Contest 288）",
+  "startedAt": "2023-02-04T21:00:00+09:00",
+  "endedAt": "2023-02-04T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc288",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc288_a",
+    "abc288_b",
+    "abc288_c",
+    "abc288_d",
+    "abc288_e",
+    "abc288_f",
+    "abc288_g",
+    "abc288_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc288-task-list-654511859eda32f1b2b734d96eeedd68617451d1cbd7a80728dce7d8a863b0fd",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

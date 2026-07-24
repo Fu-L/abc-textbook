@@ -1,0 +1,22 @@
+{
+  "problemId": "abc458-e",
+  "sourceRevisionIds": [
+    "source-abc458-e-problem-6e4db7c41179aed6676c72ae9bb5f6b852f9f18758d304c670319045b55c6fb1",
+    "source-abc458-editorial-20463-e6d5f67830dee2beb7162e5b5cd073fb4aafdfcf0020f20e77d5461bb5a44927"
+  ],
+  "coreMethod": "abc458-e「Count 123」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+    "Count 123 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "組合せ数と二項係数"],
+  "implementationConcerns": [
+    "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Count 123 型の 列の順序と prefix 状態に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

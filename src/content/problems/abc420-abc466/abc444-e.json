@@ -1,0 +1,20 @@
+{
+  "id": "abc444-e",
+  "contestId": "abc444",
+  "slotLabel": "E",
+  "officialTaskId": "abc444_e",
+  "title": "Sparse Range",
+  "officialUrl": "https://atcoder.jp/contests/abc444/tasks/abc444_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 4\\times 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq D \\leq 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc444-e-problem-dc6db3fa5a4cb75c262b4e86744c59364aa2f83ae4b1c38d2d3dc6579157e802",
+    "source-abc444-editorial-15690-15f66914a3c17025b5a7d8a595e6ae7f123f8769f39b8f98bc440e91ec61e759"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

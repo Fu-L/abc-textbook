@@ -1,0 +1,20 @@
+{
+  "id": "abc397-g",
+  "contestId": "abc397",
+  "slotLabel": "G",
+  "officialTaskId": "abc397_g",
+  "title": "Maximize Distance",
+  "officialUrl": "https://atcoder.jp/contests/abc397/tasks/abc397_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 30; 1 \\leq K \\leq M \\leq 100; 1 \\leq u_j, v_j \\leq N; u_j \\neq v_j; In the given graph, vertex N is reachable from vertex 1.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc397-g-problem-52a95239df69f599f295560aba115d40481c076aa8e1addf95fed5d689044a64",
+    "source-abc397-editorial-12453-7826b19c59d1c67b3cd090ff5177238021ac8d459e8fe2b0dff3ab388384c1d2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

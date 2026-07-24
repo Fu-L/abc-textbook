@@ -1,0 +1,20 @@
+{
+  "id": "abc273-ex",
+  "contestId": "abc273",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc273_h",
+  "title": "Inv(0,1)ving Insert(1,0)n",
+  "officialUrl": "https://atcoder.jp/contests/abc273/tasks/abc273_h",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 10^5; 0 \\le a_i,b_i \\le 10^9; a_i \\neq a_j or b_i \\neq b_j, if i \\neq j.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba",
+    "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,21 @@
+{
+  "id": "abc279",
+  "number": 279,
+  "title": "TOYOTA SYSTEMS Programming Contest 2022(AtCoder Beginner Contest 279)",
+  "startedAt": "2022-11-26T21:00:00+09:00",
+  "endedAt": "2022-11-26T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc279",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc279_a",
+    "abc279_b",
+    "abc279_c",
+    "abc279_d",
+    "abc279_e",
+    "abc279_f",
+    "abc279_g",
+    "abc279_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc279-task-list-d4c2df9c299656587d74e602803c024c2af7caaedffa153e0bd67251ac54c818",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc461-e",
+  "contestId": "abc461",
+  "slotLabel": "E",
+  "officialTaskId": "abc461_e",
+  "title": "E-liter",
+  "officialUrl": "https://atcoder.jp/contests/abc461/tasks/abc461_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, Q \\leq 3 \\times 10^5; For type 1 queries, 1 \\leq R \\leq N.; For type 2 queries, 1 \\leq C \\leq N.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc461-e-problem-cc659356b0d8f91d82016ffea49a6a7eea2831e6cd5d4bb4827537050dda17ed",
+    "source-abc461-editorial-21023-e0b0dbc3096edcd6e7f7335a89b21a22cdd23803811fb37e22c4452a2d2e73e2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

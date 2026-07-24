@@ -1,0 +1,20 @@
+{
+  "id": "abc439-e",
+  "contestId": "abc439",
+  "slotLabel": "E",
+  "officialTaskId": "abc439_e",
+  "title": "Kite",
+  "officialUrl": "https://atcoder.jp/contests/abc439/tasks/abc439_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 0 \\leq A_i \\leq 10^9; 0 \\leq B_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc439-e-problem-4779296ea5b700e723a4285e3be52c7d0203add2ac5b08989183e25701c8245e",
+    "source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

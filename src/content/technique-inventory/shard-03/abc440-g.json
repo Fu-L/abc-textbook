@@ -1,0 +1,22 @@
+{
+  "problemId": "abc440-g",
+  "sourceRevisionIds": [
+    "source-abc440-editorial-15033-e736b20251169d62c9695d54e2699f8cab16ab21ed6a0a06466c5f30ddecfb92",
+    "source-abc440-g-problem-3878da44dd24e2554a0f3a6202d860f40957ffa364bd7f2c634c695900fde4a2"
+  ],
+  "coreMethod": "abc440-g「Haunted House」では、各階を連結成分へ縮約した層状 graph 上で、梯子使用状態の DP を下階から計算し、除外最大値を上位二候補で高速化する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "同一遷移先を除く最大値は全候補の一位または二位に必ずあり、梯子使用有無が将来に必要な履歴を全て表す。",
+    "Haunted House 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["層状 graph DP と top-two trick"],
+  "implementationConcerns": [
+    "階間辺を成分単位で重複排除し、最大候補の遷移先 ID も保持して自己除外を判定する。"
+  ],
+  "outcomeCandidates": [
+    "Haunted House 型の問題に対し、層状 graph DP と top-two trickを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

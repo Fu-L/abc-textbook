@@ -1,0 +1,20 @@
+{
+  "problemId": "abc259-e",
+  "sourceRevisionIds": [
+    "source-abc259-e-problem-eb7a258d38ce1d9f2ef53211daa3360cf49824f3019fbd9570feb5c144957816",
+    "source-abc259-editorial-4271-76fe64c5c7a413668836b08101de648037f01ce8e462d52ce8eb8b8d1ab980e8"
+  ],
+  "coreMethod": "abc259-e「LCM on Whiteboard」では、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
+    "LCM on Whiteboard 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "式変形と frequency map"],
+  "implementationConcerns": ["添字 parity による符号反転と負数 key をそのまま正確に保持する。"],
+  "outcomeCandidates": [
+    "LCM on Whiteboard 型の 整数の約数・剰余構造に対し、式変形と frequency mapを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

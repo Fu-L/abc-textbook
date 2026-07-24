@@ -1,0 +1,20 @@
+{
+  "id": "abc311-ex",
+  "contestId": "abc311",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc311_h",
+  "title": "Many Illumination Plans",
+  "officialUrl": "https://atcoder.jp/contests/abc311/tasks/abc311_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 200; 0 \\leq X \\leq 50000; 1 \\leq P_i \\leq i - 1; 0 \\leq B_i \\leq 10^{15}; 0 \\leq W_i \\leq X; C_i is 0 or 1.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc311-ex-problem-e370488f1342f8751a5f37a9f0b8ab00784f5baee29786d775a1e52907cd7dc1",
+    "source-abc311-editorial-6814-952ca8df25e1dc29d36a2d97bf5823cc8ec71cafd9a762902cea712a7640e19f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

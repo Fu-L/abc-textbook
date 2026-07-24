@@ -1,0 +1,20 @@
+{
+  "id": "abc250-g",
+  "contestId": "abc250",
+  "slotLabel": "G",
+  "officialTaskId": "abc250_g",
+  "title": "Stonks",
+  "officialUrl": "https://atcoder.jp/contests/abc250/tasks/abc250_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le N \\le 2 \\times 10^5; 1 \\le P_i \\le 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907",
+    "source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

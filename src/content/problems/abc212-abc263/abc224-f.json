@@ -1,0 +1,20 @@
+{
+  "id": "abc224-f",
+  "contestId": "abc224",
+  "slotLabel": "F",
+  "officialTaskId": "abc224_f",
+  "title": "Problem where +s Separate Digits",
+  "officialUrl": "https://atcoder.jp/contests/abc224/tasks/abc224_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le |S| \\le 2 \\times 10^5; S consists of 1, 2, 3, 4, 5, 6, 7, 8, and 9.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8",
+    "source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

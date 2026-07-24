@@ -1,0 +1,22 @@
+{
+  "problemId": "abc212-f",
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a",
+    "source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b"
+  ],
+  "coreMethod": "abc212-f「Greedy Takahashi」では、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の遷移回数は異なる二冪の和として一意に表せ、前計算した遷移の関数合成で同じ終点へ到達する。",
+    "Greedy Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["online query の計算量設計", "ダブリングと二進展開"],
+  "implementationConcerns": [
+    "必要な最大 bit 数と遷移不能 sentinel を先に決め、表の参照範囲を揃える。"
+  ],
+  "outcomeCandidates": [
+    "Greedy Takahashi 型の 更新と問い合わせの時系列に対し、ダブリングと二進展開を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

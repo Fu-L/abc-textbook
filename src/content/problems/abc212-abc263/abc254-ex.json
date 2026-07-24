@@ -1,0 +1,20 @@
+{
+  "id": "abc254-ex",
+  "contestId": "abc254",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc254_h",
+  "title": "Multiply or Divide by 2",
+  "officialUrl": "https://atcoder.jp/contests/abc254/tasks/abc254_h",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 0 \\leq a_1 \\leq \\ldots \\leq a_N \\leq 10^9; 0 \\leq b_1 \\leq \\ldots \\leq b_N \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea",
+    "source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

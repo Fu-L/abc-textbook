@@ -1,0 +1,20 @@
+{
+  "id": "abc242-ex",
+  "contestId": "abc242",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc242_h",
+  "title": "Random Painting",
+  "officialUrl": "https://atcoder.jp/contests/abc242/tasks/abc242_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,M \\leq 400; 1 \\leq L_i \\leq R_i \\leq N; For every square i, there is an integer j such that L_j \\leq i \\leq R_j.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d",
+    "source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

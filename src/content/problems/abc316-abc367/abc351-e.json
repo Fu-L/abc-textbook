@@ -1,0 +1,20 @@
+{
+  "id": "abc351-e",
+  "contestId": "abc351",
+  "slotLabel": "E",
+  "officialTaskId": "abc351_e",
+  "title": "Jump Distance Sum",
+  "officialUrl": "https://atcoder.jp/contests/abc351/tasks/abc351_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 0 \\leq X_i, Y_i \\leq 10^8; For i \\neq j, (X_i, Y_i) \\neq (X_j, Y_j); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc351-e-problem-a298ef7244fa4a1ea123aa4d1d3434a2f4331859aa342b3f4d3bd12b576fde0f",
+    "source-abc351-editorial-9890-252c10a6f3108732a2cc331dac4102643e03c18803abef766d1c416cce70baf2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

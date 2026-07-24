@@ -1,0 +1,20 @@
+{
+  "id": "abc459-f",
+  "contestId": "abc459",
+  "slotLabel": "F",
+  "officialTaskId": "abc459_f",
+  "title": "-1, +1",
+  "officialUrl": "https://atcoder.jp/contests/abc459/tasks/abc459_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 3 \\times 10^5; 1 \\le N \\le 2 \\times 10^5; 0 \\le A_i \\le 10^9; The sum of N across all test cases is at most 6 \\times 10^5.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc459-f-problem-8bdd1d46eed2a90f4a233fad12113cbd0bfc99cc42f9b10b18ae084bc1b985c3",
+    "source-abc459-editorial-20507-0f56e72dcc42a017be4eb8cd3cab4a557b2c735265b6a856f36b07110843fb59"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

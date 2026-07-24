@@ -1,0 +1,20 @@
+{
+  "id": "abc320-f",
+  "contestId": "abc320",
+  "slotLabel": "F",
+  "officialTaskId": "abc320_f",
+  "title": "Fuel Round Trip",
+  "officialUrl": "https://atcoder.jp/contests/abc320/tasks/abc320_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, H \\leq 300; 0 < X_1 < X_2 < \\ldots < X_N \\leq 10^5; 1 \\leq P_i \\leq 10^5; 1 \\leq F_i \\leq H; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc320-f-problem-d19cf850f87884c29f311fddf735094aaf3418d2435ad4e15a6a565a4d01bf4f",
+    "source-abc320-editorial-7167-8dd6ca4160c25c43cdf355c2143ba482043c92d64e858f47e3dbce2f421831c0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,12 @@
+{
+  "contestId": "abc426",
+  "label": "G",
+  "officialTaskId": "abc426_g",
+  "officialOrder": 6,
+  "availability": "exists",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": "abc426-g",
+  "sourceRevisionId": "source-abc426-task-list-a27290c32095dee76533fecffa9ac19d56df4c9fcb19045b9b36869c945b21d8",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc417-f",
+  "contestId": "abc417",
+  "slotLabel": "F",
+  "officialTaskId": "abc417_f",
+  "title": "Random Gathering",
+  "officialUrl": "https://atcoder.jp/contests/abc417/tasks/abc417_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 1\\le M\\le2\\times10 ^ 5; 0\\le A _ i\\lt998244353\\ (1\\le i\\le N); 1\\le L _ i\\le R _ i\\le N\\ (1\\le i\\le M); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc417-f-problem-1fbb588cf6c343f09c00dde44b41f0da9c4ec9e47246eac1da54be528285f28c",
+    "source-abc417-editorial-13549-9592f5d00c9cb4b14771101aa832aa0791fe2e15d3b99f55a07229f40675b664"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc244-e",
+  "contestId": "abc244",
+  "slotLabel": "E",
+  "officialTaskId": "abc244_e",
+  "title": "King Bombee",
+  "officialUrl": "https://atcoder.jp/contests/abc244/tasks/abc244_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 2≤N≤2000; 1≤M≤2000; 1≤K≤2000; 1≤S,T,X≤N; X≠S; X≠T; 1≤U_i<V_i≤N; If i ≠ j, then (U_i, V_i) ≠ (U_j, V_j).",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920",
+    "source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

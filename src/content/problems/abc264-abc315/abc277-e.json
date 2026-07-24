@@ -1,0 +1,20 @@
+{
+  "id": "abc277-e",
+  "contestId": "abc277",
+  "slotLabel": "E",
+  "officialTaskId": "abc277_e",
+  "title": "Crystal Switches",
+  "officialUrl": "https://atcoder.jp/contests/abc277/tasks/abc277_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; 0 \\leq K \\leq N; 1 \\leq u_i, v_i \\leq N; u_i \\neq v_i; a_i \\in \\lbrace 0, 1\\rbrace; 1 \\leq s_1 \\lt s_2 \\lt \\cdots \\lt s_K \\leq N; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc277-e-problem-5fd6f47054e6357210bc28f89e696a6bbc68ee3694420e2e65f169375a9326ba",
+    "source-abc277-editorial-5204-9f1b83876c5a570274814530d6aa3abd7d02126577dc192eb2446c0c9fd44fc8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

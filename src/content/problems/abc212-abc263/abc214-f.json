@@ -1,0 +1,20 @@
+{
+  "id": "abc214-f",
+  "contestId": "abc214",
+  "slotLabel": "F",
+  "officialTaskId": "abc214_f",
+  "title": "Substrings",
+  "officialUrl": "https://atcoder.jp/contests/abc214/tasks/abc214_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length between 1 and 2 \\times 10^5 (inclusive) consisting of lowercase English letters.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc214-f-problem-203e028b0a1974274025dd558bce523e82e7a094cc1d77c32448a6e2abd00b75",
+    "source-abc214-editorial-2440-8404c7a84430603f504698d7a67b0eb89173b87ef656cf7e522e1d7ef121c7ac"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

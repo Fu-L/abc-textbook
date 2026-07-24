@@ -1,0 +1,20 @@
+{
+  "problemId": "abc384-e",
+  "sourceRevisionIds": [
+    "source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f",
+    "source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"
+  ],
+  "coreMethod": "abc384-e「Takahashi is Slime 2」では、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "cut property により異なる成分を結ぶ最小辺は安全であり、閉路を避けた採用を繰り返せば最適な全域木になる。",
+    "Takahashi is Slime 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "最小全域木と cut property"],
+  "implementationConcerns": ["同重み辺の順序が答えへ影響する場合は一括判定してから併合する。"],
+  "outcomeCandidates": [
+    "Takahashi is Slime 2 型の 盤面上の位置と局所遷移に対し、最小全域木と cut propertyを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

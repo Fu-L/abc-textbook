@@ -1,0 +1,20 @@
+{
+  "id": "abc464-g",
+  "contestId": "abc464",
+  "slotLabel": "G",
+  "officialTaskId": "abc464_g",
+  "title": "Celester 2",
+  "officialUrl": "https://atcoder.jp/contests/abc464/tasks/abc464_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 10^4; N is an integer between 2 and 10^6, inclusive.; S is a string of length N consisting of S and R.; The sum of N in a single input is at most 10^6.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a",
+    "source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc318-f",
+  "contestId": "abc318",
+  "slotLabel": "F",
+  "officialTaskId": "abc318_f",
+  "title": "Octopus",
+  "officialUrl": "https://atcoder.jp/contests/abc318/tasks/abc318_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N\\leq 200; -10^{18} \\leq X_1<X_2<\\cdots<X_N\\leq 10^{18}; 1\\leq L_1\\leq L_2\\leq\\cdots\\leq L_N\\leq 10^{18}; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc318-f-problem-0b824504860b99ebc9bb8759faba1965f56e706e77d629f4ac4f0f8615b89119",
+    "source-abc318-editorial-7075-3df92a12bdca86dc839ab5e4172efb614eef253a7ac1f559b431faae2b767c43"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

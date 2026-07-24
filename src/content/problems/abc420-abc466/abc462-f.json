@@ -1,0 +1,20 @@
+{
+  "id": "abc462-f",
+  "contestId": "abc462",
+  "slotLabel": "F",
+  "officialTaskId": "abc462_f",
+  "title": "More ABC",
+  "officialUrl": "https://atcoder.jp/contests/abc462/tasks/abc462_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T\\leq 10^5; S is a string of length between 3 and 3\\times 10^5, inclusive, consisting of uppercase English letters.; 1\\leq K \\leq 10; In each input, the total length of S over all test cases is at most 3\\times 10^5.; T and K are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc462-f-problem-31b1d1c4439105d0f203b91f1d5f4a8da45b6be631e272f544ac6728d4ec70a0",
+    "source-abc462-editorial-16164-52cbbb3827b91c096a486d13c992362aea139b8b1e716475326183aac32a6c62"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc228-f",
+  "contestId": "abc228",
+  "slotLabel": "F",
+  "officialTaskId": "abc228_f",
+  "title": "Stamp Game",
+  "officialUrl": "https://atcoder.jp/contests/abc228/tasks/abc228_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W \\leq 1000; 1 \\leq h_1, h_2 \\leq H; 1 \\leq w_1, w_2 \\leq W; 1 \\leq A_{i, j} \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc228-f-problem-89dadce4e1a0dc6582e292f9fa5d8b96f6f301dbf03a4e01c582b05833b501da",
+    "source-abc228-editorial-2945-12052f0fe09662260111e151499b5f2b2c3b5c7537f68c1c357cefea7748b13c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

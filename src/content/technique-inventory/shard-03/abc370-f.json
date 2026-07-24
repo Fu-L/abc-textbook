@@ -1,0 +1,22 @@
+{
+  "problemId": "abc370-f",
+  "sourceRevisionIds": [
+    "source-abc370-editorial-10895-ae5cc3fa596f036b68db8dec7ccd3da0d7012df59cf637c0e411ec377a98d44a",
+    "source-abc370-f-problem-a22fbc95c73df9857bb2e703550340b9aebb7f969b3b4316e123c91b8b8b6e58"
+  ],
+  "coreMethod": "abc370-f「Cake Division」では、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の遷移回数は異なる二冪の和として一意に表せ、前計算した遷移の関数合成で同じ終点へ到達する。",
+    "Cake Division 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "ダブリングと二進展開"],
+  "implementationConcerns": [
+    "必要な最大 bit 数と遷移不能 sentinel を先に決め、表の参照範囲を揃える。"
+  ],
+  "outcomeCandidates": [
+    "Cake Division 型の 区間端点と包含関係に対し、ダブリングと二進展開を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc459-e",
+  "contestId": "abc459",
+  "slotLabel": "E",
+  "officialTaskId": "abc459_e",
+  "title": "Select from Subtrees",
+  "officialUrl": "https://atcoder.jp/contests/abc459/tasks/abc459_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq P_i \\leq N; 1 \\leq C_i \\leq 10^9; 1 \\leq D_i; D_1 + D_2 + \\cdots + D_N \\leq 10^6; All input values are integers.; T is a rooted tree with vertex 1 as the root.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc459-e-problem-2ce3291f70c35bf35627556054a7895416f364b01dc308ebe180bb1ed76f59a5",
+    "source-abc459-editorial-20979-e81283aaf0c48dc74a735d7a8400a7359b35f32fd57640a4263ccb09478c828f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

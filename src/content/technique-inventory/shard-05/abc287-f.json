@@ -1,0 +1,20 @@
+{
+  "problemId": "abc287-f",
+  "sourceRevisionIds": [
+    "source-abc287-editorial-5632-36fff4af2ff56b09b2f6827fd12c787f4bba6f0510b282ceb2ed77f90a1d8eba",
+    "source-abc287-f-problem-e74e569b0d278aac06c0a9b4ffdd3abf77989fd2a435607ec62fd7f8ff6347f7"
+  ],
+  "coreMethod": "abc287-f「Components」では、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "木には閉路がないため、親辺を除く部分木が独立し、帰納法で子の最適値または個数を合成できる。",
+    "Components 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "根付き木と木 DP"],
+  "implementationConcerns": ["再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。"],
+  "outcomeCandidates": [
+    "Components 型の 根付き木・部分木・パスの関係に対し、根付き木と木 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

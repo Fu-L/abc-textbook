@@ -1,0 +1,20 @@
+{
+  "id": "abc305-g",
+  "contestId": "abc305",
+  "slotLabel": "G",
+  "officialTaskId": "abc305_g",
+  "title": "Banned Substrings",
+  "officialUrl": "https://atcoder.jp/contests/abc305/tasks/abc305_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq10^{18}; 1\\leq M\\leq126; N and M are integers.; s _ i is a non-empty string of length at most 6 consisting of a and b.; s _ i\\neq s _ j\\ (1\\leq i\\lt j\\leq M)",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc305-g-problem-19df3c0c00aafaff917749d3a11ee12bf3bfe0ef5929b0a1c26268c9caea49a5",
+    "source-abc305-editorial-6540-74ea55ef6854c06051d1da5f206ffb783baa289b24f8530c7f7f02f128fa814c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc415-g",
+  "contestId": "abc415",
+  "slotLabel": "G",
+  "officialTaskId": "abc415_g",
+  "title": "Get Many Cola",
+  "officialUrl": "https://atcoder.jp/contests/abc415/tasks/abc415_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 10^{15}; 1\\leq M \\leq 2\\times 10^5; 1\\leq B_i < A_i \\leq 300; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc415-g-problem-30342d182a7e8aad786d0e0357570b03b351ad48294fbde0112e5e3197c04006",
+    "source-abc415-editorial-13491-7ff02c91fc89331a46e6a0fde2e67669aaeba522f010beb4e5082f6094228007"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

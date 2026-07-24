@@ -1,0 +1,20 @@
+{
+  "id": "abc227-g",
+  "contestId": "abc227",
+  "slotLabel": "G",
+  "officialTaskId": "abc227_g",
+  "title": "Divisors of Binomial Coefficient",
+  "officialUrl": "https://atcoder.jp/contests/abc227/tasks/abc227_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{12}; 0 \\leq K \\leq \\min(10^6,N); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c",
+    "source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

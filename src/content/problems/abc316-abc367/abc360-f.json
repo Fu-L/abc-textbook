@@ -1,0 +1,20 @@
+{
+  "id": "abc360-f",
+  "contestId": "abc360",
+  "slotLabel": "F",
+  "officialTaskId": "abc360_f",
+  "title": "InterSections",
+  "officialUrl": "https://atcoder.jp/contests/abc360/tasks/abc360_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{5}; 0 \\leq L_i < R_i \\leq 10^{9} (1 \\leq i \\leq N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc360-f-problem-c17709f594bb666a67405cb3e6aa0269fa08eb28943f9259ece37d85766a4993",
+    "source-abc360-editorial-10323-8c4d9a5f024898c43c5374ba4f69c2e52dfea61b23a8564413205c7c24070951"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc429-f",
+  "contestId": "abc429",
+  "slotLabel": "F",
+  "officialTaskId": "abc429_f",
+  "title": "Shortest Path Query",
+  "officialUrl": "https://atcoder.jp/contests/abc429/tasks/abc429_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le 2\\times 10^5; S_{i,j} is # or ..; S_{1,1}=S_{3,N}= .; 1\\le Q\\le 2\\times 10^5; 1\\le r\\le 3; 1\\le c\\le N; (r,c) \\neq (1,1),(3,N); N,Q,r,c are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc429-f-problem-1daa51f4404cecb7602f514823810f40e0027d401966fcea1a1fdb1d37da475d",
+    "source-abc429-editorial-14274-e36534099806a283b2248f27f8ce44b278b6971a5ea492de86fba015f0759147"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

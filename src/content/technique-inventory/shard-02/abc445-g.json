@@ -1,0 +1,20 @@
+{
+  "problemId": "abc445-g",
+  "sourceRevisionIds": [
+    "source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394",
+    "source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"
+  ],
+  "coreMethod": "abc445-g「Knight Placement」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+    "Knight Placement 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "最大流・最小カット定理"],
+  "implementationConcerns": ["有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。"],
+  "outcomeCandidates": [
+    "Knight Placement 型の 盤面上の位置と局所遷移に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

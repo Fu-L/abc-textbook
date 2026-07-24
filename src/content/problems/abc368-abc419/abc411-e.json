@@ -1,0 +1,20 @@
+{
+  "id": "abc411-e",
+  "contestId": "abc411",
+  "slotLabel": "E",
+  "officialTaskId": "abc411_e",
+  "title": "E [max]",
+  "officialUrl": "https://atcoder.jp/contests/abc411/tasks/abc411_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 10^5; 1\\leq A_{i,j} \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc411-e-problem-98ce674015aab1611529fc1107e1c9bbe341e40cf8e2c43b601192197f7c29dd",
+    "source-abc411-editorial-13361-ed54805abf99dcee9f98de109c9c1471239666baf86409bc6803ad047a16aefd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

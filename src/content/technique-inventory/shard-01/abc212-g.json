@@ -1,0 +1,22 @@
+{
+  "problemId": "abc212-g",
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
+  ],
+  "coreMethod": "abc212-g「Power Pair」では、非零剰余を原始根の指数へ写して冪条件を一次合同式にし、gcd(P-1,a) ごとに個数を約数上で集約する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "原始根の指数写像は非零剰余との全単射で、an≡b の可解な b の個数は (P-1)/gcd(P-1,a) になる。",
+    "Power Pair 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["原始根、一次合同式、約数反転型集計"],
+  "implementationConcerns": [
+    "x=0 を分離し、P-1 の全約数を列挙して gcd が各約数になる指数数を大きい順に差し引く。"
+  ],
+  "outcomeCandidates": [
+    "Power Pair 型の問題に対し、原始根、一次合同式、約数反転型集計を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc252-g",
+  "contestId": "abc252",
+  "slotLabel": "G",
+  "officialTaskId": "abc252_g",
+  "title": "Pre-Order",
+  "officialUrl": "https://atcoder.jp/contests/abc252/tasks/abc252_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 500; 1 \\leq P_i\\leq N; P_1=1; All P_i are distinct.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad",
+    "source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

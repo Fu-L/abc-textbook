@@ -1,0 +1,20 @@
+{
+  "id": "abc301-ex",
+  "contestId": "abc301",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc301_h",
+  "title": "Difference of Distance",
+  "officialUrl": "https://atcoder.jp/contests/abc301/tasks/abc301_h",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 2\\times 10^5; N-1\\leq M \\leq 2\\times 10^5; 1 \\leq U_i,V_i \\leq N; U_i \\neq V_i; 1 \\leq W_i \\leq M; The given graph is connected.; 1\\leq Q \\leq 2\\times 10^5; 1 \\leq A_j \\leq M; 1 \\leq S_j,T_j \\leq N; S_j\\neq T_j; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc301-ex-problem-9af37d3cfd4c8a86125b566c017bbdc9dbc36b618b097122b0d5477141ecd9c3",
+    "source-abc301-editorial-6344-dc0137a9d497b87c806f280bfaa16810971f41dec665b5150a4a92beaa240e2c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

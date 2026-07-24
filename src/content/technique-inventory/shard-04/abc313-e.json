@@ -1,0 +1,20 @@
+{
+  "problemId": "abc313-e",
+  "sourceRevisionIds": [
+    "source-abc313-e-problem-3a03247007965db504c9b92bf17a4d2d3a2bd83c0fa99e737a74e209f8eb5bd0",
+    "source-abc313-editorial-6911-132005a653dc06fe5dd61179f748826fd3bb3655aea08bb83fab69235e2052d5"
+  ],
+  "coreMethod": "abc313-e「Duplicate」では、列を run-length encoding し、末尾 run から逆向きに長さと操作回数の漸化式を更新する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "有効入力では非 1 の run が隣接せず、操作による増減は直後の run 長だけで決まるため圧縮状態で再現できる。",
+    "Duplicate 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["Run-Length Encoding と逆向き漸化式"],
+  "implementationConcerns": ["不可能となる隣接条件を先に検査し、各加算を modulus 上で正規化する。"],
+  "outcomeCandidates": [
+    "Duplicate 型の問題に対し、Run-Length Encoding と逆向き漸化式を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

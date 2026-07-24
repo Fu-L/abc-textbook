@@ -1,0 +1,20 @@
+{
+  "id": "abc289-f",
+  "contestId": "abc289",
+  "slotLabel": "F",
+  "officialTaskId": "abc289_f",
+  "title": "Teleporter Takahashi",
+  "officialUrl": "https://atcoder.jp/contests/abc289/tasks/abc289_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0\\leq s _ x,s _ y,t _ x,t _ y\\leq2\\times10^5; 0\\leq a\\leq b\\leq2\\times10^5; 0\\leq c\\leq d\\leq2\\times10^5; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8",
+    "source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

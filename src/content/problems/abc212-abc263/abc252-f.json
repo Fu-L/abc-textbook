@@ -1,0 +1,20 @@
+{
+  "id": "abc252-f",
+  "contestId": "abc252",
+  "slotLabel": "F",
+  "officialTaskId": "abc252_f",
+  "title": "Bread",
+  "officialUrl": "https://atcoder.jp/contests/abc252/tasks/abc252_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1\\leq A_i\\leq 10^9; A_1+A_2+\\cdots+A_N\\leq L\\leq 10^{15}; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc252-f-problem-407bef3a8254ef3bcb6695a21b41be40fd863a5e4f768ace7a2b4c04abe77c9b",
+    "source-abc252-editorial-3998-ca987e0b6f9f09b37cc5ee02e435b26498e04365c6786f935ba0c3c5501d29fc"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

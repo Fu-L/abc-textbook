@@ -1,0 +1,20 @@
+{
+  "id": "abc380",
+  "number": 380,
+  "title": "AtCoder Beginner Contest 380",
+  "startedAt": "2024-11-16T21:00:00+09:00",
+  "endedAt": "2024-11-16T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc380",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc380_a",
+    "abc380_b",
+    "abc380_c",
+    "abc380_d",
+    "abc380_e",
+    "abc380_f",
+    "abc380_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc380-task-list-21316843ec4a36974ce132740611ec7a9c553550e97ac04d475a198b784d1d3a",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

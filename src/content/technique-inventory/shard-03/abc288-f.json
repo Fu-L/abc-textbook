@@ -1,0 +1,20 @@
+{
+  "problemId": "abc288-f",
+  "sourceRevisionIds": [
+    "source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f",
+    "source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70"
+  ],
+  "coreMethod": "abc288-f「Integer Division」では、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+    "Integer Division 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "累積和と差分"],
+  "implementationConcerns": ["半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。"],
+  "outcomeCandidates": [
+    "Integer Division 型の 文字列の prefix・suffix と一致関係に対し、累積和と差分を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

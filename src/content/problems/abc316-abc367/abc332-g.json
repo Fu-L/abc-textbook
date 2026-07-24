@@ -1,0 +1,20 @@
+{
+  "id": "abc332-g",
+  "contestId": "abc332",
+  "slotLabel": "G",
+  "officialTaskId": "abc332_g",
+  "title": "Not Too Many Balls",
+  "officialUrl": "https://atcoder.jp/contests/abc332/tasks/abc332_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\leq N \\leq 500; 1 \\leq M \\leq 5 \\times 10^5; 0 \\leq A_i, B_i \\leq 10^{12}",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc332-g-problem-94f820c608cb46557c2fc6da8de68cfa7cac7508ac566620b787eab02fed157f",
+    "source-abc332-editorial-7889-a696f202b5f150eb8989f441fa20863c1a6b316a0313f978ffb91e3cfda3507b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

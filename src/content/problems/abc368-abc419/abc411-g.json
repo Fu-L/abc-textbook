@@ -1,0 +1,20 @@
+{
+  "id": "abc411-g",
+  "contestId": "abc411",
+  "slotLabel": "G",
+  "officialTaskId": "abc411_g",
+  "title": "Count Cycles",
+  "officialUrl": "https://atcoder.jp/contests/abc411/tasks/abc411_g",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 20; 2\\leq M \\leq 2\\times 10^5; 1\\leq U_i < V_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc411-g-problem-86e31d1f7ec35c6370031a0690d76a5cf2afa132666468bef901acf9c227f05a",
+    "source-abc411-editorial-13360-88d62e2f490a7b2bd204d5f1c404398cdd69bec8f823420b771dacda7b56729e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

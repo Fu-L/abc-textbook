@@ -1,0 +1,20 @@
+{
+  "id": "abc254-e",
+  "contestId": "abc254",
+  "slotLabel": "E",
+  "officialTaskId": "abc254_e",
+  "title": "Small d and k",
+  "officialUrl": "https://atcoder.jp/contests/abc254/tasks/abc254_e",
+  "constraintsSummary": "Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 1.5 \\times 10^5; 0 \\leq M \\leq \\min (\\frac{N(N-1)}{2},\\frac{3N}{2}); 1 \\leq a_i \\lt b_i \\leq N; (a_i,b_i) \\neq (a_j,b_j), if i\\neq j.; The degree of each vertex in the graph is at most 3.; 1 \\leq Q \\leq 1.5 \\times 10^5; 1 \\leq x_i \\leq N; 0 \\leq k_i \\leq 3; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518",
+    "source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

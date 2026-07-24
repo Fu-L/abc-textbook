@@ -1,0 +1,20 @@
+{
+  "id": "abc334",
+  "number": 334,
+  "title": "UNIQUE VISION Programming Contest 2023 Christmas (AtCoder Beginner Contest 334)",
+  "startedAt": "2023-12-23T21:00:00+09:00",
+  "endedAt": "2023-12-23T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc334",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc334_a",
+    "abc334_b",
+    "abc334_c",
+    "abc334_d",
+    "abc334_e",
+    "abc334_f",
+    "abc334_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc334-task-list-1786551f3bc39734d32ddfa1aafbd422010df5eb02d3adcc98049e339b052b54",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

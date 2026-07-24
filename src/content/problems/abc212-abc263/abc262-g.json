@@ -1,0 +1,20 @@
+{
+  "id": "abc262-g",
+  "contestId": "abc262",
+  "slotLabel": "G",
+  "officialTaskId": "abc262_g",
+  "title": "LIS with Stack",
+  "officialUrl": "https://atcoder.jp/contests/abc262/tasks/abc262_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 50; 1 \\leq a_i \\leq 50; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc262-g-problem-19d170e12d0d8ec942a444cbab69fb0889a4accb5ff35fbc1d9270a4357e9534",
+    "source-abc262-editorial-4505-85be15665e24276967509cb409dcdfc402c9afa8e38ac52f41e1df1cc3c7e7dc"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

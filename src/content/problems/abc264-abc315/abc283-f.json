@@ -1,0 +1,20 @@
+{
+  "id": "abc283-f",
+  "contestId": "abc283",
+  "slotLabel": "F",
+  "officialTaskId": "abc283_f",
+  "title": "Permutation Distance",
+  "officialUrl": "https://atcoder.jp/contests/abc283/tasks/abc283_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times10^5; 1 \\leq P _ i \\leq N\\ (1\\leq i\\leq N); i\\neq j\\implies P _ i\\neq P _ j; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc283-f-problem-ddedbccc58b75b633702cef20a7efe1e20c558840ee7a6a098a9930490417307",
+    "source-abc283-editorial-5429-265733246d92900746fb904ca503345a78237200e139aec78840cf3ccc46297a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

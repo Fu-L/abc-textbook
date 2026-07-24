@@ -130,11 +130,13 @@ export interface CatalogLike {
     readonly startedAt: string;
     readonly endedAt: string;
     readonly officialTaskOrder: readonly string[];
+    readonly officialTaskIds: readonly string[];
     readonly taskOrderSourceRevisionId: string;
   }[];
   readonly contestSlots: readonly {
     readonly contestId: string;
     readonly label: string;
+    readonly officialTaskId: string | null;
     readonly officialOrder: number | null;
     readonly availability: 'exists' | 'official_absent' | 'unknown' | 'withdrawn';
     readonly problemId: string | null;
@@ -144,6 +146,7 @@ export interface CatalogLike {
     readonly id: string;
     readonly contestId: string;
     readonly slotLabel: string;
+    readonly officialTaskId: string;
     readonly publicationStatus: string;
     readonly sourceRevisionIds: readonly string[];
     readonly primaryTagIds: readonly string[];
@@ -236,6 +239,7 @@ export interface CatalogLike {
     readonly url: string;
     readonly sourceKind: string;
     readonly contestId: string | null;
+    readonly officialTaskId: string | null;
   }[];
   readonly correctionImpacts: readonly {
     readonly id: string;
@@ -494,6 +498,29 @@ export const validateCatalogSemantics = (
         message: `${contest.id} ends after the release cutoff.`,
       });
     }
+    if (contest.officialTaskOrder.length !== contest.officialTaskIds.length) {
+      diagnostics.push({
+        code: 'CONTEST_TASK_ID_MAPPING_INCOMPLETE',
+        entityId: contest.id,
+        message: `${contest.id} labels and official task IDs must have equal lengths.`,
+      });
+    }
+    if (new Set(contest.officialTaskIds).size !== contest.officialTaskIds.length) {
+      diagnostics.push({
+        code: 'DUPLICATE_OFFICIAL_TASK_ID',
+        entityId: contest.id,
+        message: `${contest.id} official task IDs must be unique.`,
+      });
+    }
+    for (const officialTaskId of contest.officialTaskIds) {
+      if (!officialTaskId.startsWith(`${contest.id}_`)) {
+        diagnostics.push({
+          code: 'OFFICIAL_TASK_ID_CONTEST_MISMATCH',
+          entityId: contest.id,
+          message: `${officialTaskId} does not belong to ${contest.id}.`,
+        });
+      }
+    }
   }
   if (catalog.release.contestCount !== catalog.contests.length) {
     diagnostics.push({
@@ -647,6 +674,25 @@ export const validateCatalogSemantics = (
         message: problem.id,
       });
     }
+    if (matchingSlot?.officialTaskId !== problem.officialTaskId) {
+      diagnostics.push({
+        code: 'PROBLEM_SLOT_TASK_ID_MISMATCH',
+        entityId: problem.id,
+        message: `${problem.id} and its slot disagree about the official task ID.`,
+      });
+    }
+    const contest = catalog.contests.find(({ id }) => id === problem.contestId);
+    const officialTaskIndex = contest?.officialTaskOrder.indexOf(problem.slotLabel) ?? -1;
+    if (
+      officialTaskIndex < 0 ||
+      contest?.officialTaskIds[officialTaskIndex] !== problem.officialTaskId
+    ) {
+      diagnostics.push({
+        code: 'PROBLEM_CONTEST_TASK_ID_MISMATCH',
+        entityId: problem.id,
+        message: `${problem.id} does not match the Contest label-to-task-ID mapping.`,
+      });
+    }
   }
   for (const contest of catalog.contests) {
     const d = contest.officialTaskOrder.indexOf('D');
@@ -671,15 +717,25 @@ export const validateCatalogSemantics = (
       const slot = matchingSlots[0];
       if (!slot) continue;
       const officialOrder = contest.officialTaskOrder.indexOf(label);
+      const officialTaskId =
+        officialOrder < 0 ? null : (contest.officialTaskIds[officialOrder] ?? null);
       if (officialOrder >= 0) {
-        if (slot.availability === 'official_absent' || slot.officialOrder !== officialOrder) {
+        if (
+          slot.availability === 'official_absent' ||
+          slot.officialOrder !== officialOrder ||
+          slot.officialTaskId !== officialTaskId
+        ) {
           diagnostics.push({
             code: 'CONTEST_SLOT_OFFICIAL_MISMATCH',
             entityId: contest.id,
             message: key,
           });
         }
-      } else if (slot.availability === 'exists' || slot.officialOrder !== null) {
+      } else if (
+        slot.availability === 'exists' ||
+        slot.officialOrder !== null ||
+        slot.officialTaskId !== null
+      ) {
         diagnostics.push({
           code: 'CONTEST_SLOT_ABSENCE_MISMATCH',
           entityId: contest.id,
@@ -870,6 +926,63 @@ export const validateCatalogSemantics = (
   for (const inventory of catalog.techniqueInventory) {
     requireRefs(inventory.problemId, 'problemId', [inventory.problemId], problemIds);
     requireRefs(inventory.problemId, 'sourceRevisionIds', inventory.sourceRevisionIds, sourceIds);
+    const problem = catalog.problems.find(({ id }) => id === inventory.problemId);
+    if (!problem) continue;
+    let hasBoundOfficialProblemSource = false;
+    for (const sourceRevisionId of inventory.sourceRevisionIds) {
+      const source = catalog.sources.find(({ id }) => id === sourceRevisionId);
+      if (!source) continue;
+      if (source.contestId !== problem.contestId) {
+        diagnostics.push({
+          code: 'TECHNIQUE_INVENTORY_SOURCE_CONTEST_MISMATCH',
+          entityId: inventory.problemId,
+          message: `${sourceRevisionId} is not scoped to ${problem.contestId}.`,
+        });
+        continue;
+      }
+      const sourceUrl = parseAtCoderContestResourceUrl(source.url);
+      if (source.sourceKind === 'official_problem') {
+        if (
+          sourceUrl?.resource === 'task' &&
+          sourceUrl.taskId === problem.officialTaskId &&
+          source.officialTaskId === problem.officialTaskId
+        ) {
+          hasBoundOfficialProblemSource = true;
+        } else {
+          diagnostics.push({
+            code: 'TECHNIQUE_INVENTORY_SOURCE_TASK_MISMATCH',
+            entityId: inventory.problemId,
+            message: `${sourceRevisionId} does not cite ${problem.officialTaskId}.`,
+          });
+        }
+      } else if (
+        source.sourceKind === 'official_editorial' &&
+        (sourceUrl?.resource !== 'editorial_item' ||
+          source.officialTaskId !== problem.officialTaskId)
+      ) {
+        diagnostics.push({
+          code: 'TECHNIQUE_INVENTORY_SOURCE_TASK_MISMATCH',
+          entityId: inventory.problemId,
+          message: `${sourceRevisionId} is not an editorial for ${problem.officialTaskId}.`,
+        });
+      } else if (
+        source.officialTaskId !== null &&
+        source.officialTaskId !== problem.officialTaskId
+      ) {
+        diagnostics.push({
+          code: 'TECHNIQUE_INVENTORY_SOURCE_TASK_MISMATCH',
+          entityId: inventory.problemId,
+          message: `${sourceRevisionId} is bound to another official task.`,
+        });
+      }
+    }
+    if (!hasBoundOfficialProblemSource) {
+      diagnostics.push({
+        code: 'TECHNIQUE_INVENTORY_PROBLEM_SOURCE_REQUIRED',
+        entityId: inventory.problemId,
+        message: `${inventory.problemId} requires its task-bound official Problem revision.`,
+      });
+    }
   }
   for (const [relation, refs] of [
     ['addedProblemIds', catalog.release.addedProblemIds],
@@ -909,7 +1022,6 @@ export const validateCatalogSemantics = (
       const source = catalog.sources.find(({ id }) => id === sourceRevisionId);
       if (!source) continue;
       const sourceUrl = parseAtCoderContestResourceUrl(source.url);
-      const expectedTaskId = `${problem.contestId}_${problem.slotLabel.toLocaleLowerCase('en-US')}`;
       if (source.contestId !== problem.contestId || sourceUrl?.contestId !== problem.contestId) {
         diagnostics.push({
           code: 'PROBLEM_SOURCE_CONTEST_MISMATCH',
@@ -918,12 +1030,24 @@ export const validateCatalogSemantics = (
         });
       } else if (
         source.sourceKind === 'official_problem' &&
-        (sourceUrl.resource !== 'task' || sourceUrl.taskId !== expectedTaskId)
+        (sourceUrl.resource !== 'task' ||
+          sourceUrl.taskId !== problem.officialTaskId ||
+          source.officialTaskId !== problem.officialTaskId)
       ) {
         diagnostics.push({
           code: 'PROBLEM_SOURCE_TASK_MISMATCH',
           entityId: problem.id,
-          message: `${sourceRevisionId} does not cite ${expectedTaskId}.`,
+          message: `${sourceRevisionId} does not cite ${problem.officialTaskId}.`,
+        });
+      } else if (
+        source.sourceKind === 'official_editorial' &&
+        (sourceUrl.resource !== 'editorial_item' ||
+          source.officialTaskId !== problem.officialTaskId)
+      ) {
+        diagnostics.push({
+          code: 'PROBLEM_SOURCE_TASK_MISMATCH',
+          entityId: problem.id,
+          message: `${sourceRevisionId} is not an editorial for ${problem.officialTaskId}.`,
         });
       }
     }

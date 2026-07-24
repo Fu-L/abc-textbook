@@ -1,0 +1,20 @@
+{
+  "id": "abc333-f",
+  "contestId": "abc333",
+  "slotLabel": "F",
+  "officialTaskId": "abc333_f",
+  "title": "Bomb Game 2",
+  "officialUrl": "https://atcoder.jp/contests/abc333/tasks/abc333_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 3000; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235",
+    "source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

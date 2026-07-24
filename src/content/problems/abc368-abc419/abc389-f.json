@@ -1,0 +1,20 @@
+{
+  "id": "abc389-f",
+  "contestId": "abc389",
+  "slotLabel": "F",
+  "officialTaskId": "abc389_f",
+  "title": "Rated Range",
+  "officialUrl": "https://atcoder.jp/contests/abc389/tasks/abc389_f",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq L_i \\leq R_i \\leq 5 \\times 10^5 (1 \\leq i \\leq N); 1 \\leq Q \\leq 3 \\times 10^5; For each query, 1 \\leq X \\leq 5 \\times 10^5.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc389-f-problem-752d508edfdaa527668d8275f53899f230b8de394edf2b058d53053ad0d374b8",
+    "source-abc389-editorial-11966-2d50c1df0f7b6574a259cb831848ec304fcdca04663322d78c78d68438e57968"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

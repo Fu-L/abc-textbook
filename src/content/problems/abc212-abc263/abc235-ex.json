@@ -1,0 +1,20 @@
+{
+  "id": "abc235-ex",
+  "contestId": "abc235",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc235_h",
+  "title": "Painting Weighted Graph",
+  "officialUrl": "https://atcoder.jp/contests/abc235/tasks/abc235_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^5; 0 \\leq M \\leq 10^5; 1 \\leq K \\leq 500; 1 \\leq A_i,B_i \\leq N; 1 \\leq C_i \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f",
+    "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc368-f",
+  "sourceRevisionIds": [
+    "source-abc368-editorial-10761-0bc3bb4d8c94b774a34347b8e31848f6917e8123e92e77d5e6eb7d25ad717c9b",
+    "source-abc368-f-problem-cd00451a2f62afd4f84d2f5cdebf0a53465ad8c85b06a9fe3c300051f93e968a"
+  ],
+  "coreMethod": "abc368-f「Dividing Game」では、各部分ゲームの Grundy 数を mex で求め、xor 和から勝敗または手を判定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "Sprague–Grundy 定理により impartial game は同じ Grundy 数の Nim heap と等価で、直和は xor になる。",
+    "Dividing Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "Sprague–Grundy theorem"],
+  "implementationConcerns": ["到達 Grundy 値の重複を除いて mex を取り、終端状態を 0 とする。"],
+  "outcomeCandidates": [
+    "Dividing Game 型の 列の順序と prefix 状態に対し、Sprague–Grundy theoremを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc250-e",
+  "contestId": "abc250",
+  "slotLabel": "E",
+  "officialTaskId": "abc250_e",
+  "title": "Prefix Equality",
+  "officialUrl": "https://atcoder.jp/contests/abc250/tasks/abc250_e",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,Q \\leq 2 \\times 10^5; 1 \\leq a_i,b_i \\leq 10^9; 1 \\leq x_i,y_i \\leq N; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc250-e-problem-7e57826303bfe2b9d9c3a11fb1a322d701539b14571e3397052872d29532abe8",
+    "source-abc250-editorial-3906-78e504b32c0ebfd41a61836f3acd43520283c852c6412bbe8de3fe7b86d23d37"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

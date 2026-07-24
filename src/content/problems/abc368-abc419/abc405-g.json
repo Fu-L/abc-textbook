@@ -1,0 +1,20 @@
+{
+  "id": "abc405-g",
+  "contestId": "abc405",
+  "slotLabel": "G",
+  "officialTaskId": "abc405_g",
+  "title": "Range Shuffle Query",
+  "officialUrl": "https://atcoder.jp/contests/abc405/tasks/abc405_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2.5 \\times 10^5; 1 \\le Q \\le 2.5 \\times 10^5; 1 \\le A_i \\le N; 1 \\le L \\le R \\le N; 1 \\le X \\le N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5",
+    "source-abc405-editorial-12997-8d1a52b7eec8ba1e235d005c7c0f233f6fc13ee79e5c108af0ad19d9941fac66"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc295-e",
+  "contestId": "abc295",
+  "slotLabel": "E",
+  "officialTaskId": "abc295_e",
+  "title": "Kth Number",
+  "officialUrl": "https://atcoder.jp/contests/abc295/tasks/abc295_e",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\\leq K \\leq N \\leq 2000; 1\\leq M \\leq 2000; 0\\leq A_i \\leq M; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc295-e-problem-64981f82f53de95ee235bb36008af7ca7cf34f86df31a7eca487d734e80470bc",
+    "source-abc295-editorial-6048-df04ef6fc06286019bbc89131f6293d01a91988bb68b1b5bff7816d9793ed8b5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

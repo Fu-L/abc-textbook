@@ -1,0 +1,20 @@
+{
+  "id": "abc441-f",
+  "contestId": "abc441",
+  "slotLabel": "F",
+  "officialTaskId": "abc441_f",
+  "title": "Must Buy",
+  "officialUrl": "https://atcoder.jp/contests/abc441/tasks/abc441_f",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 1000; 1\\leq M\\leq 5\\times 10^4; 1\\leq P_i\\leq M; 1\\leq V_i\\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc441-f-problem-21139505370faa67bd29ae3b8aa686d4231b529a3e5b1a6341ca7f1e21f6a850",
+    "source-abc441-editorial-15102-28425896fd55d61050cc6aeb46de7a52d0c3116cc9e1b0ef47eadf62bf6742e9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

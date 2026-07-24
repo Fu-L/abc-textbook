@@ -1,0 +1,20 @@
+{
+  "id": "abc274-ex",
+  "contestId": "abc274",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc274_h",
+  "title": "XOR Sum of Arrays",
+  "officialUrl": "https://atcoder.jp/contests/abc274/tasks/abc274_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 0 \\leq A_i \\leq 10^{18}; 1 \\leq Q \\leq 5 \\times 10^4; 1 \\leq a \\leq b \\leq N; 1 \\leq c \\leq d \\leq N; 1 \\leq e \\leq f \\leq N; b - a = d - c; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f",
+    "source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

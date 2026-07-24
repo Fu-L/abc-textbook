@@ -1,0 +1,22 @@
+{
+  "problemId": "abc228-e",
+  "sourceRevisionIds": [
+    "source-abc228-e-problem-206b70907effbf130d0797aeb5f04979b3d0938d3a5b017857ee6d5814f444e5",
+    "source-abc228-editorial-2932-685a5190cbdc171e572f3eba78ae2e8ae90bdc40a98ee203367c6c1b7eaba61d"
+  ],
+  "coreMethod": "abc228-e「Integer Sequence Fair」では、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+    "Integer Sequence Fair 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "剰余演算と modular inverse"],
+  "implementationConcerns": [
+    "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Integer Sequence Fair 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

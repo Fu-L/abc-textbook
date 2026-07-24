@@ -1,0 +1,20 @@
+{
+  "id": "abc225-e",
+  "contestId": "abc225",
+  "slotLabel": "E",
+  "officialTaskId": "abc225_e",
+  "title": "7",
+  "officialUrl": "https://atcoder.jp/contests/abc225/tasks/abc225_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq x_i,y_i \\leq 10^9; (x_i,y_i) \\neq (x_j,y_j)\\ (i \\neq j); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52",
+    "source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

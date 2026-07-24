@@ -1,0 +1,21 @@
+{
+  "id": "abc298",
+  "number": 298,
+  "title": "TOYOTA MOTOR CORPORATION Programming Contest 2023#1 (AtCoder Beginner Contest 298)",
+  "startedAt": "2023-04-15T21:00:00+09:00",
+  "endedAt": "2023-04-15T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc298",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc298_a",
+    "abc298_b",
+    "abc298_c",
+    "abc298_d",
+    "abc298_e",
+    "abc298_f",
+    "abc298_g",
+    "abc298_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc298-task-list-c0b0a756a0ab85760e75b48e73f3b3473b14dabcb425d3bea21766f739bf1012",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc290-ex",
+  "sourceRevisionIds": [
+    "source-abc290-editorial-5769-af1ef8e27fc3523ef9c273dc56ead5943390dfeba6f55f04302c6650407ccb2d",
+    "source-abc290-ex-problem-a29b268f9fcb6fef3dc807abeffbc5b02d4686294356e60cfb3d6a59ecc855b3"
+  ],
+  "coreMethod": "abc290-ex「Bow Meow Optimization」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+    "Bow Meow Optimization 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
+  "outcomeCandidates": [
+    "Bow Meow Optimization 型の 区間端点と包含関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

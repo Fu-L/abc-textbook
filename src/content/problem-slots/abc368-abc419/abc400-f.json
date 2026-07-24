@@ -1,0 +1,12 @@
+{
+  "contestId": "abc400",
+  "label": "F",
+  "officialTaskId": "abc400_f",
+  "officialOrder": 5,
+  "availability": "exists",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": "abc400-f",
+  "sourceRevisionId": "source-abc400-task-list-6c8868b221c18eefef610a84cb8707a2e4412bcea6e1c2676438e39e64ba0ed6",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

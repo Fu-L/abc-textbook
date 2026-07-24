@@ -57,7 +57,7 @@ describe('US2 catalog scope contract', () => {
     }).not.toThrow();
   });
 
-  it('freezes selection rules without prematurely choosing Problems or Source Revisions', async () => {
+  it('preserves the frozen selection rules after the deterministic cohort freeze', async () => {
     const manifest = await readJson<PreviewSelectionManifest>(
       'staging/previews/initial-v1/preview-manifest.json',
     );
@@ -68,10 +68,14 @@ describe('US2 catalog scope contract', () => {
       publicationBoundary: manifest.publicationBoundary,
     };
 
-    expect(manifest.phase).toBe('selection_rules_frozen');
-    expect(manifest.candidatePoolDigest).toBeNull();
-    expect(manifest.selectedProblemIds).toEqual([]);
-    expect(manifest.sourceRevisionIds).toEqual([]);
+    expect(manifest.phase).toBe('cohort_frozen');
+    expect(manifest.candidatePoolDigest).toMatch(/^[a-f0-9]{64}$/u);
+    expect(manifest.selectedProblemIds).toHaveLength(8);
+    expect(new Set(manifest.selectedProblemIds).size).toBe(manifest.selectedProblemIds.length);
+    expect(manifest.sourceRevisionIds.length).toBeGreaterThanOrEqual(
+      manifest.selectedProblemIds.length,
+    );
+    expect(new Set(manifest.sourceRevisionIds).size).toBe(manifest.sourceRevisionIds.length);
     expect(rules).toEqual(frozenInitialV1SelectionRules);
     expect(manifest.frozenRulesDigest).toBe(frozenInitialV1RulesDigest);
     expect(previewSelectionRulesDigest(rules)).toBe(frozenInitialV1RulesDigest);
@@ -108,6 +112,15 @@ describe('US2 catalog scope contract', () => {
       {
         contestId: 'abc500',
         officialTaskOrder: ['A', 'B', 'C', 'D', 'E', 'F', 'I'],
+        officialTaskIds: [
+          'abc500_a',
+          'abc500_b',
+          'abc500_c',
+          'abc500_d',
+          'abc500_e',
+          'abc500_f',
+          'abc500_i',
+        ],
         advancedLabels: ['E', 'F', 'I'],
       },
       { F: 'unknown', I: 'withdrawn' },

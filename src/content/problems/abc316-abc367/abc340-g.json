@@ -1,0 +1,20 @@
+{
+  "id": "abc340-g",
+  "contestId": "abc340",
+  "slotLabel": "G",
+  "officialTaskId": "abc340_g",
+  "title": "Leaf Color",
+  "officialUrl": "https://atcoder.jp/contests/abc340/tasks/abc340_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq N; 1 \\leq u_i \\lt v_i \\leq N; The graph given in the input is a tree.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc340-g-problem-e70db04af46e85658e7ad8818675e163c7295eebabf06a60954d3a6c85519bf8",
+    "source-abc340-editorial-9249-f5e2a5be1cd8f51c782110c8e5dcec99b713d85318ee4151297c7fa061066d86"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

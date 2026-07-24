@@ -6,6 +6,8 @@ export interface ContestAdvancedOrder {
   readonly advancedLabels: readonly string[];
   /** Complete official task order. Required when materializing absolute slot positions. */
   readonly officialTaskOrder?: readonly string[];
+  /** Internal AtCoder task IDs in the same order as officialTaskOrder. */
+  readonly officialTaskIds?: readonly string[];
   readonly sourceRevisionId?: string;
 }
 
@@ -199,26 +201,52 @@ export type ContestSlotAvailability = 'exists' | 'official_absent' | 'unknown' |
 
 export const materializeContestSlotStates = (
   registryLabels: readonly string[],
-  contest: ContestAdvancedOrder & { readonly officialTaskOrder: readonly string[] },
+  contest: ContestAdvancedOrder & {
+    readonly officialTaskOrder: readonly string[];
+    readonly officialTaskIds: readonly string[];
+  },
   stateOverrides: Readonly<
     Partial<Record<string, Extract<ContestSlotAvailability, 'unknown' | 'withdrawn'>>>
   > = {},
 ): readonly {
   readonly contestId: string;
   readonly label: string;
+  readonly officialTaskId: string | null;
   readonly officialOrder: number | null;
   readonly availability: ContestSlotAvailability;
   readonly holdReason: string | null;
-}[] =>
-  registryLabels.map((label) => {
+}[] => {
+  if (contest.officialTaskOrder.length !== contest.officialTaskIds.length) {
+    throw new AdvancedSlotRegistryError(
+      'TASK_ID_MAPPING_INCOMPLETE',
+      `${contest.contestId} has different label and task-ID counts.`,
+    );
+  }
+  if (new Set(contest.officialTaskIds).size !== contest.officialTaskIds.length) {
+    throw new AdvancedSlotRegistryError(
+      'DUPLICATE_TASK_ID',
+      `${contest.contestId} has duplicate official task IDs.`,
+    );
+  }
+  return registryLabels.map((label) => {
     const officialOrder = contest.officialTaskOrder.indexOf(label);
+    const officialTaskId =
+      officialOrder < 0 ? null : (contest.officialTaskIds[officialOrder] ?? null);
+    if (officialOrder >= 0 && officialTaskId === null) {
+      throw new AdvancedSlotRegistryError(
+        'TASK_ID_MAPPING_INCOMPLETE',
+        `${contest.contestId}:${label} has no official task ID.`,
+      );
+    }
     const override = stateOverrides[label];
     const availability = override ?? (officialOrder < 0 ? 'official_absent' : 'exists');
     return {
       contestId: contest.contestId,
       label,
+      officialTaskId,
       officialOrder: officialOrder < 0 ? null : officialOrder,
       availability,
       holdReason: availability === 'unknown' ? 'Official task state could not be confirmed.' : null,
     };
   });
+};

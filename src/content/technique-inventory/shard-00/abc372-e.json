@@ -1,0 +1,22 @@
+{
+  "problemId": "abc372-e",
+  "sourceRevisionIds": [
+    "source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59",
+    "source-abc372-editorial-10967-abf15d02f03a6ce0612e3ba16d6281389413d47d0d0a4904b7c4235a262c1011"
+  ],
+  "coreMethod": "abc372-e「K-th Largest Connected Components」では、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "親部分木の上位 K 個に入らない子内要素は、同じ子だけで K 個以上に負けるため親でも候補にならない。",
+    "K-th Largest Connected Components 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "small-to-large merge と上位 K 個の保持"],
+  "implementationConcerns": [
+    "K の全体上限だけ保持し、query の 1-origin 順位と vector index を変換する。"
+  ],
+  "outcomeCandidates": [
+    "K-th Largest Connected Components 型の 頂点と辺からなる状態グラフに対し、small-to-large merge と上位 K 個の保持を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc354",
+  "number": 354,
+  "title": "Panasonic Programming Contest 2024（AtCoder Beginner Contest 354）",
+  "startedAt": "2024-05-18T21:00:00+09:00",
+  "endedAt": "2024-05-18T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc354",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc354_a",
+    "abc354_b",
+    "abc354_c",
+    "abc354_d",
+    "abc354_e",
+    "abc354_f",
+    "abc354_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc354-task-list-cd62bb618e8720815754814d377476c87aeab2fd4304249772e14a64148c65c0",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

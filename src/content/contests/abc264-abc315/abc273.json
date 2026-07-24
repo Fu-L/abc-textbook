@@ -1,0 +1,21 @@
+{
+  "id": "abc273",
+  "number": 273,
+  "title": "Panasonic Programming Contest 2022(AtCoder Beginner Contest 273)",
+  "startedAt": "2022-10-15T21:00:00+09:00",
+  "endedAt": "2022-10-15T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc273",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc273_a",
+    "abc273_b",
+    "abc273_c",
+    "abc273_d",
+    "abc273_e",
+    "abc273_f",
+    "abc273_g",
+    "abc273_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc273-task-list-5929ece402a87f8d6899bc1727f037c304f0e6ca27ce687b2d80545a80ba1b1d",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

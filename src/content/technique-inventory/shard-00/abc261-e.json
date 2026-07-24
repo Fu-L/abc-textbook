@@ -1,0 +1,20 @@
+{
+  "problemId": "abc261-e",
+  "sourceRevisionIds": [
+    "source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578",
+    "source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f"
+  ],
+  "coreMethod": "abc261-e「Many Operations」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+    "Many Operations 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "Fenwick tree"],
+  "implementationConcerns": ["内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"],
+  "outcomeCandidates": [
+    "Many Operations 型の 整数の約数・剰余構造に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

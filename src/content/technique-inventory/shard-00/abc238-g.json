@@ -1,0 +1,20 @@
+{
+  "problemId": "abc238-g",
+  "sourceRevisionIds": [
+    "source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc",
+    "source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f"
+  ],
+  "coreMethod": "abc238-g「Cubic?」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+    "Cubic? 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "Fenwick tree"],
+  "implementationConcerns": ["内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"],
+  "outcomeCandidates": [
+    "Cubic? 型の 列の順序と prefix 状態に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

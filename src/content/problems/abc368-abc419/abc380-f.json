@@ -1,0 +1,20 @@
+{
+  "id": "abc380-f",
+  "contestId": "abc380",
+  "slotLabel": "F",
+  "officialTaskId": "abc380_f",
+  "title": "Exchange Game",
+  "officialUrl": "https://atcoder.jp/contests/abc380/tasks/abc380_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, M, L; N + M + L \\leq 12; 1 \\leq A_i, B_i, C_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc380-f-problem-7fb17205b066a873aa585d6cd8a1d97e733edec3a7c8f796f2f9e4f7007d48be",
+    "source-abc380-editorial-11351-466103312076f33bd3c483117d2d043c7a11a8b8b73e450614696190c6e1dfbe"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc409-f",
+  "contestId": "abc409",
+  "slotLabel": "F",
+  "officialTaskId": "abc409_f",
+  "title": "Connecting Points",
+  "officialUrl": "https://atcoder.jp/contests/abc409/tasks/abc409_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 1500; 1\\leq Q\\leq 1500; 0\\leq x_i,y_i\\leq 10^9; For queries of type 1, 0\\leq a,b\\leq 10^9.; For queries of type 3, let n be the number of vertices in G just before processing that query, then 1\\leq u\\lt v\\leq n.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc409-f-problem-fec7ee4dd0681cfccdab7c82f1d78d79b19074fe7b587293188aa87e737a047e",
+    "source-abc409-editorial-13228-cebc583d6c6842ea88624a86c2b7a418f774191123e7f161b74c2d6d494375e8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc265-ex",
+  "contestId": "abc265",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc265_h",
+  "title": "No-capture Lance Game",
+  "officialUrl": "https://atcoder.jp/contests/abc265/tasks/abc265_h",
+  "constraintsSummary": "Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H \\leq 8000; 2 \\leq W \\leq 30; H and W are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5",
+    "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc342-f",
+  "contestId": "abc342",
+  "slotLabel": "F",
+  "officialTaskId": "abc342_f",
+  "title": "Black Jack",
+  "officialUrl": "https://atcoder.jp/contests/abc342/tasks/abc342_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All inputs are integers.; 1 \\leq L \\leq N \\leq 2 \\times 10^5; 1 \\leq D \\leq N",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc342-f-problem-770139f9098b2222706e511e4bcbd138336b0c0da643a589410258d701e9eedd",
+    "source-abc342-editorial-9345-8a51974000f630b7d802fb75a217b7d432774ee320d77cce7436e8a20bbf9f9c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

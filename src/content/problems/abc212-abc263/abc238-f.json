@@ -1,0 +1,20 @@
+{
+  "id": "abc238-f",
+  "contestId": "abc238",
+  "slotLabel": "F",
+  "officialTaskId": "abc238_f",
+  "title": "Two Exams",
+  "officialUrl": "https://atcoder.jp/contests/abc238/tasks/abc238_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le N \\le 300; 1 \\le K \\le N; Each of P and Q is a permutation of (1,2,...,N).",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d",
+    "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc462-e",
+  "contestId": "abc462",
+  "slotLabel": "E",
+  "officialTaskId": "abc462_e",
+  "title": "Alternating Costs",
+  "officialUrl": "https://atcoder.jp/contests/abc462/tasks/abc462_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 2\\times 10^5; 1\\le A,B\\le 10^9; -10^9\\le X,Y\\le 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc462-e-problem-00806f6d57842b99312dcaefcffc5016befda8ee2283e0605fe7955230afdeb4",
+    "source-abc462-editorial-21400-74eb05e0e855bd0c2c27e61b16b3533c5cc934b55ca3c73f9e7d0ec6974d2236"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc240-g",
+  "contestId": "abc240",
+  "slotLabel": "G",
+  "officialTaskId": "abc240_g",
+  "title": "Teleporting Takahashi",
+  "officialUrl": "https://atcoder.jp/contests/abc240/tasks/abc240_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^7; -10^7 \\leq X, Y, Z \\leq 10^7; N, X, Y, and Z are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc240-g-problem-0d05122adbbea727dceed2629d2df052e4505a4b6829b2188ad615c73666d1c9",
+    "source-abc240-editorial-3423-f1ae91f9a88b3ccf4ed145d2a904347e29aa782a320a7510c8ee6f1a870d9c0d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc265-g",
+  "contestId": "abc265",
+  "slotLabel": "G",
+  "officialTaskId": "abc265_g",
+  "title": "012 Inversion",
+  "officialUrl": "https://atcoder.jp/contests/abc265/tasks/abc265_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 0 \\leq A_i \\leq 2; 1\\leq Q\\leq 10^5; In each query, 1\\leq L \\leq R \\leq N.; In each query of the second kind, 0\\leq S,T,U \\leq 2.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e",
+    "source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

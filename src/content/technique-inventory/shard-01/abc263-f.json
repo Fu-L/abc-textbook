@@ -1,0 +1,20 @@
+{
+  "problemId": "abc263-f",
+  "sourceRevisionIds": [
+    "source-abc263-editorial-4550-b6e2922d0d6dd7c13db4dd4ddb7bb9d9b79ac9e390f694ef5317da5f15264315",
+    "source-abc263-f-problem-29c43defca98c2a963108037041bb5b6dcc5966f30ac660724107a28ed5d9274"
+  ],
+  "coreMethod": "abc263-f「Tournament」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+    "Tournament 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "全探索と候補数の上界評価"],
+  "implementationConcerns": ["同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。"],
+  "outcomeCandidates": [
+    "Tournament 型の 区間端点と包含関係に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

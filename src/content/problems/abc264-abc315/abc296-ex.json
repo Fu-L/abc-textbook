@@ -1,0 +1,20 @@
+{
+  "id": "abc296-ex",
+  "contestId": "abc296",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc296_h",
+  "title": "Unite",
+  "officialUrl": "https://atcoder.jp/contests/abc296/tasks/abc296_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100; 1\\leq M \\leq 7; N and M are integers.; S_i is a string of length M consisting of # and ..; The given grid has at least one square painted black.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475",
+    "source-abc296-editorial-6119-ac80203d7028d704d5d765eb1d8dbd94b2cdcfd612591e482994c1f616f2edf7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

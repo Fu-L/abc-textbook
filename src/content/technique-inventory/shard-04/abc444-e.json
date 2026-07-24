@@ -1,0 +1,22 @@
+{
+  "problemId": "abc444-e",
+  "sourceRevisionIds": [
+    "source-abc444-e-problem-dc6db3fa5a4cb75c262b4e86744c59364aa2f83ae4b1c38d2d3dc6579157e802",
+    "source-abc444-editorial-15690-15f66914a3c17025b5a7d8a595e6ae7f123f8769f39b8f98bc440e91ec61e759"
+  ],
+  "coreMethod": "abc444-e「Sparse Range」では、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
+    "Sparse Range 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "平衡二分探索木"],
+  "implementationConcerns": [
+    "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。"
+  ],
+  "outcomeCandidates": [
+    "Sparse Range 型の 区間端点と包含関係に対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

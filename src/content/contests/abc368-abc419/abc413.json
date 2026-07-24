@@ -1,0 +1,20 @@
+{
+  "id": "abc413",
+  "number": 413,
+  "title": "Denso Create Programming Contest 2025（AtCoder Beginner Contest 413）",
+  "startedAt": "2025-07-05T21:00:00+09:00",
+  "endedAt": "2025-07-05T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc413",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc413_a",
+    "abc413_b",
+    "abc413_c",
+    "abc413_d",
+    "abc413_e",
+    "abc413_f",
+    "abc413_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc413-task-list-8594a8d062707da2db87ade38a9c110abbcae3136cd96dbd35e654ee8cadf21a",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

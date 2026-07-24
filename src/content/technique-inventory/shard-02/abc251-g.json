@@ -1,0 +1,22 @@
+{
+  "problemId": "abc251-g",
+  "sourceRevisionIds": [
+    "source-abc251-editorial-3961-2a9bef4a1862573769c0974a139227410cfe23c0b17110582e5c2dd0790c3413",
+    "source-abc251-g-problem-ed1514ba44cff749adc79cbdfd6994026e15dfd7a7cc482f7ea929e03c45625c"
+  ],
+  "coreMethod": "abc251-g「Intersection of Polygons」では、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "外積の符号が有向面積と回転方向を表すため、幾何条件を符号条件として必要十分に判定できる。",
+    "Intersection of Polygons 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["計算幾何の外積・内積"],
+  "implementationConcerns": [
+    "座標積の overflow、collinear な境界点、開区間と閉区間の交差を区別する。"
+  ],
+  "outcomeCandidates": [
+    "Intersection of Polygons 型の問題に対し、計算幾何の外積・内積を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

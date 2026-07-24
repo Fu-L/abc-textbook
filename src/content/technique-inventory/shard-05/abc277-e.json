@@ -1,0 +1,20 @@
+{
+  "problemId": "abc277-e",
+  "sourceRevisionIds": [
+    "source-abc277-e-problem-5fd6f47054e6357210bc28f89e696a6bbc68ee3694420e2e65f169375a9326ba",
+    "source-abc277-editorial-5204-9f1b83876c5a570274814530d6aa3abd7d02126577dc192eb2446c0c9fd44fc8"
+  ],
+  "coreMethod": "abc277-e「Crystal Switches」では、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "deque の先頭距離は非減少で、重み 0 の緩和を前、重み 1 を後へ置くことで Dijkstra と同じ確定順を保つ。",
+    "Crystal Switches 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "0-1 BFS"],
+  "implementationConcerns": ["改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。"],
+  "outcomeCandidates": [
+    "Crystal Switches 型の 頂点と辺からなる状態グラフに対し、0-1 BFSを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

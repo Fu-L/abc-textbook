@@ -1,0 +1,20 @@
+{
+  "id": "abc219-h",
+  "contestId": "abc219",
+  "slotLabel": "H",
+  "officialTaskId": "abc219_h",
+  "title": "Candles",
+  "officialUrl": "https://atcoder.jp/contests/abc219/tasks/abc219_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 300; -10^9 \\leq X_i \\leq 10^9; 1 \\leq A_i \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e",
+    "source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

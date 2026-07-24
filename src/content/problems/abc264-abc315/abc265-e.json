@@ -1,0 +1,20 @@
+{
+  "id": "abc265-e",
+  "contestId": "abc265",
+  "slotLabel": "E",
+  "officialTaskId": "abc265_e",
+  "title": "Warp",
+  "officialUrl": "https://atcoder.jp/contests/abc265/tasks/abc265_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 300; 0 \\leq M \\leq 10^5; -10^9 \\leq A,B,C,D,E,F \\leq 10^9; (A,B), (C,D), and (E,F) are distinct.; -10^9 \\leq X_i,Y_i \\leq 10^9; (X_i,Y_i)\\neq(0,0); (X_i,Y_i) are distinct.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc265-e-problem-34c2e6fb9b90f3eb28c9af246cc0db103c0a71a09d001b89d12a09a00ffcdee7",
+    "source-abc265-editorial-4587-0da702bb6f4af09d1b7452baa670b91c9db1cc7951fa06c33d2e97f9bbe422f1"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

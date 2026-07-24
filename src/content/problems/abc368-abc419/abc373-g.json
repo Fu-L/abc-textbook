@@ -1,0 +1,20 @@
+{
+  "id": "abc373-g",
+  "contestId": "abc373",
+  "slotLabel": "G",
+  "officialTaskId": "abc373_g",
+  "title": "No Cross Matching",
+  "officialUrl": "https://atcoder.jp/contests/abc373/tasks/abc373_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 300; 0 \\leq A_i, B_i, C_i, D_i \\leq 5000 (1 \\leq i \\leq N); (A_i, B_i) \\neq (A_j, B_j) (1 \\leq i < j \\leq N); (C_i, D_i) \\neq (C_j, D_j) (1 \\leq i < j \\leq N); (A_i, B_i) \\neq (C_j, D_j) (1 \\leq i, j \\leq N); No three different points lie on the same straight line.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc373-g-problem-1966028055b8124ce63fad5b85b2978764ef41f87134a380c7e139d0e050153e",
+    "source-abc373-editorial-11045-1fee3fff5238bfdbbb53355a4534e3eafa1b74fa4b22fa7b0f7df9ac05329804"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

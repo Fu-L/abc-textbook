@@ -1,0 +1,20 @@
+{
+  "id": "abc255-ex",
+  "contestId": "abc255",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc255_h",
+  "title": "Range Harvest Query",
+  "officialUrl": "https://atcoder.jp/contests/abc255/tasks/abc255_h",
+  "constraintsSummary": "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{18}; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq D_1 \\lt D_2 \\lt \\cdots \\lt D_Q \\leq 10^{18}; 1 \\leq L_i \\leq R_i \\leq N; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4",
+    "source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

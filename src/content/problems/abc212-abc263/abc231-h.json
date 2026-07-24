@@ -1,0 +1,20 @@
+{
+  "id": "abc231-h",
+  "contestId": "abc231",
+  "slotLabel": "H",
+  "officialTaskId": "abc231_h",
+  "title": "Minimum Coloring",
+  "officialUrl": "https://atcoder.jp/contests/abc231/tasks/abc231_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W \\leq 10^3; 1 \\leq N \\leq 10^3; 1 \\leq A_i \\leq H; 1 \\leq B_i \\leq W; 1 \\leq C_i \\leq 10^9; All pairs (A_i,B_i) are distinct.; There is at least one white piece in every row and every column.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf",
+    "source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

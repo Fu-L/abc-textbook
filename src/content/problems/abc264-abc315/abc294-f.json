@@ -1,0 +1,20 @@
+{
+  "id": "abc294-f",
+  "contestId": "abc294",
+  "slotLabel": "F",
+  "officialTaskId": "abc294_f",
+  "title": "Sugar Water 2",
+  "officialUrl": "https://atcoder.jp/contests/abc294/tasks/abc294_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, M \\leq 5 \\times 10^4; 1 \\leq K \\leq N \\times M; 1 \\leq A_i, B_i, C_i, D_i \\leq 10^5; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc294-f-problem-4cac15dbeb01b266629f56e03570d7c6798a2ea688747b57db91c1296762e613",
+    "source-abc294-editorial-6007-de45be4385ee21284a25107feade9404328fc47a94c7f503c5abbdd9959c2416"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

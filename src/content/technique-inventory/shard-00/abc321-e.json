@@ -1,0 +1,22 @@
+{
+  "problemId": "abc321-e",
+  "sourceRevisionIds": [
+    "source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615",
+    "source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305"
+  ],
+  "coreMethod": "abc321-e「Complete Binary Tree」では、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "二進展開した距離だけ祖先へ移動でき、最大の異なる祖先から一段進めば最小共通祖先になる。",
+    "Complete Binary Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "LCA と binary lifting"],
+  "implementationConcerns": [
+    "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。"
+  ],
+  "outcomeCandidates": [
+    "Complete Binary Tree 型の 根付き木・部分木・パスの関係に対し、LCA と binary liftingを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

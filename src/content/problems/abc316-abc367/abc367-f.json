@@ -1,0 +1,20 @@
+{
+  "id": "abc367-f",
+  "contestId": "abc367",
+  "slotLabel": "F",
+  "officialTaskId": "abc367_f",
+  "title": "Rearrange Query",
+  "officialUrl": "https://atcoder.jp/contests/abc367/tasks/abc367_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N,Q\\leq 2\\times 10^5; 1\\leq A_i,B_i\\leq N; 1\\leq l_i \\leq r_i\\leq N; 1\\leq L_i \\leq R_i\\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9",
+    "source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc375-f",
+  "sourceRevisionIds": [
+    "source-abc375-editorial-11134-46a7d0b5e5b2d6b4f15c42bbcd674364d05a6523a2c867c4bfb122cd6efe4ec3",
+    "source-abc375-f-problem-3fa1c95ca2546d4c0f0158de162875929649a584d8ac3344dd32fbfd96a07704"
+  ],
+  "coreMethod": "abc375-f「Road Blocked」では、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "許可する中継頂点集合について帰納し、最適路が新頂点を使う場合と使わない場合を網羅する。",
+    "Road Blocked 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["online query の計算量設計", "Floyd–Warshall 法"],
+  "implementationConcerns": ["到達不能値同士を加算せず、更新順序 k-i-j を崩さない。"],
+  "outcomeCandidates": [
+    "Road Blocked 型の 更新と問い合わせの時系列に対し、Floyd–Warshall 法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

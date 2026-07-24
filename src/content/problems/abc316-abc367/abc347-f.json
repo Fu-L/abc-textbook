@@ -1,0 +1,20 @@
+{
+  "id": "abc347-f",
+  "contestId": "abc347",
+  "slotLabel": "F",
+  "officialTaskId": "abc347_f",
+  "title": "Non-overlapping Squares",
+  "officialUrl": "https://atcoder.jp/contests/abc347/tasks/abc347_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 1000; 1\\leq M\\leq N/2; 0\\leq A _ {i,j}\\leq10 ^ 9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc347-f-problem-e2875573657b924b63f4733c94f662d48472b19786e646e654b93ffcc2389746",
+    "source-abc347-editorial-9674-b89f6ddb46ab39f5e1366cdd0ad3836f4e803e074f692895f943143278d4db8b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

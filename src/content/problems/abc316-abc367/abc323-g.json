@@ -1,0 +1,20 @@
+{
+  "id": "abc323-g",
+  "contestId": "abc323",
+  "slotLabel": "G",
+  "officialTaskId": "abc323_g",
+  "title": "Inversion of Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc323/tasks/abc323_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 500; P is a permutation of (1,2,\\ldots,N).",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda",
+    "source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

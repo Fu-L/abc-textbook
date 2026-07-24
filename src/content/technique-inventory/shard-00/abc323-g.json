@@ -1,0 +1,22 @@
+{
+  "problemId": "abc323-g",
+  "sourceRevisionIds": [
+    "source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37",
+    "source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"
+  ],
+  "coreMethod": "abc323-g「Inversion of Tree」では、条件付き辺へ形式変数を付けた Laplacian minor の行列式を作り、係数として条件別の全域木数を取り出す。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "Matrix-Tree 定理で各全域木の辺重み積が行列式へ一度現れ、形式変数の次数が選んだ対象辺数に一致する。",
+    "Inversion of Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["Matrix-Tree 定理と行列式多項式"],
+  "implementationConcerns": [
+    "有限体上で評価・補間する場合は相異なる評価点を選び、特異な shift と符号を処理する。"
+  ],
+  "outcomeCandidates": [
+    "Inversion of Tree 型の問題に対し、Matrix-Tree 定理と行列式多項式を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

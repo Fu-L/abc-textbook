@@ -1,0 +1,20 @@
+{
+  "id": "abc298-f",
+  "contestId": "abc298",
+  "slotLabel": "F",
+  "officialTaskId": "abc298_f",
+  "title": "Rook Score",
+  "officialUrl": "https://atcoder.jp/contests/abc298/tasks/abc298_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq r_i,c_i,x_i \\leq 10^9; (r_i,c_i) \\neq (r_j,c_j) if i \\neq j.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc298-f-problem-82542e25568160a466c44eea2f79e94505de6b46f2709898ee0a8440b9138d0f",
+    "source-abc298-editorial-6211-8114a025037834e41fb9ef5cb0443dad7fe85b1d98c3a7af10e1c3564a6478fe"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

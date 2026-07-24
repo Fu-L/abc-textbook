@@ -1,0 +1,20 @@
+{
+  "id": "abc395-g",
+  "contestId": "abc395",
+  "slotLabel": "G",
+  "officialTaskId": "abc395_g",
+  "title": "Minimum Steiner Tree 2",
+  "officialUrl": "https://atcoder.jp/contests/abc395/tasks/abc395_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 80; 1\\leq K\\leq \\min(N-2,\\textcolor{red}{8}); 0 \\leq C_{i,j} \\leq 10^9 \\ (1 \\leq i,j \\leq N, i \\ne j); C_{i,j} = C_{j,i} \\ (1 \\leq i,j \\leq N, i \\ne j); C_{i,i} = 0 \\ (1 \\leq i \\leq N); 1 \\leq Q \\leq 5000; K+1 \\leq s_i, t_i \\leq N \\ (1 \\leq i \\leq Q); s_i \\ne t_i \\ (1 \\leq i \\leq Q); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc395-g-problem-28b4b77f6fd7b5f3d752638e1f2aa35eefec8abc1a034fccb30e919e725d5d55",
+    "source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc354-g",
+  "contestId": "abc354",
+  "slotLabel": "G",
+  "officialTaskId": "abc354_g",
+  "title": "Select Strings",
+  "officialUrl": "https://atcoder.jp/contests/abc354/tasks/abc354_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100; S_i is a string consisting of lowercase English letters.; 1 \\leq |S_i|; |S_1| + |S_2| + \\ldots + |S_N| \\leq 5000; 1 \\leq A_i \\leq 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc354-g-problem-7fdec5e1c59064d4ae3f21325120b426c2d4375d6b5c4782d7c92404f8b6511d",
+    "source-abc354-editorial-10029-71112419c3ca2e0f8e450a31c21672da849fab8fe54f6d6b73f10dcdbbcf5ea4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

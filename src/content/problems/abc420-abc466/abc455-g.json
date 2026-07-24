@@ -1,0 +1,20 @@
+{
+  "id": "abc455-g",
+  "contestId": "abc455",
+  "slotLabel": "G",
+  "officialTaskId": "abc455_g",
+  "title": "Balanced Subarrays",
+  "officialUrl": "https://atcoder.jp/contests/abc455/tasks/abc455_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 2 \\times 10^5; 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq K \\leq \\min(N,10); 1 \\leq A_i \\leq N; 1 \\leq B_k \\leq N; B_1,B_2,\\dots,B_K are pairwise distinct.; The sum of N over all test cases is at most 2 \\times 10^5.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03",
+    "source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

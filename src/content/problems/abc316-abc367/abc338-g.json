@@ -1,0 +1,20 @@
+{
+  "id": "abc338-g",
+  "contestId": "abc338",
+  "slotLabel": "G",
+  "officialTaskId": "abc338_g",
+  "title": "evall",
+  "officialUrl": "https://atcoder.jp/contests/abc338/tasks/abc338_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq |S| \\leq 10^6; Each character of S is one of 123456789+*.; The first and last characters of S are digits.; There are no adjacent non-digit characters in S.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc338-g-problem-a4019826c94c7dc9ace7c734f2b75a77c98320c82f74f0980e601b9db60fac08",
+    "source-abc338-editorial-9174-882059f710a8b5642f21646998075bd40604d5e3f4d7126ba9d98fc60c7a2892"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

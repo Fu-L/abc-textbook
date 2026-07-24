@@ -1,0 +1,20 @@
+{
+  "problemId": "abc443-f",
+  "sourceRevisionIds": [
+    "source-abc443-editorial-15197-a20cb5df4ba450c476b50c9c0f0fc1204fdf7c0999bdc9367872550ab414173b",
+    "source-abc443-f-problem-a265f7e24b275c6d7683481599950207c9a31fbf981eb33be438240bfde46da0"
+  ],
+  "coreMethod": "abc443-f「Non-Increasing Number」では、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+    "Non-Increasing Number 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "幅優先探索"],
+  "implementationConcerns": ["訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。"],
+  "outcomeCandidates": [
+    "Non-Increasing Number 型の 列の順序と prefix 状態に対し、幅優先探索を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

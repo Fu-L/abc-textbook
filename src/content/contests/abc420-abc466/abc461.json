@@ -1,0 +1,20 @@
+{
+  "id": "abc461",
+  "number": 461,
+  "title": "AtCoder Beginner Contest 461",
+  "startedAt": "2026-06-06T21:00:00+09:00",
+  "endedAt": "2026-06-06T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc461",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc461_a",
+    "abc461_b",
+    "abc461_c",
+    "abc461_d",
+    "abc461_e",
+    "abc461_f",
+    "abc461_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc461-task-list-2040f12ac2966f39cbe05895adb9180d90a85dbd180a9acb4efbc866dfe6a165",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

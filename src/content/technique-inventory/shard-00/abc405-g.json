@@ -1,0 +1,25 @@
+{
+  "problemId": "abc405-g",
+  "sourceRevisionIds": [
+    "source-abc405-editorial-12997-8d1a52b7eec8ba1e235d005c7c0f233f6fc13ee79e5c108af0ad19d9941fac66",
+    "source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5"
+  ],
+  "coreMethod": "abc405-g「Range Shuffle Query」では、query を Mo 順に並べて値頻度を O(1) で増減し、頻度別の積と零要素を平方根 bucket にまとめて各答えを O(√N) で合成する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "Mo の add・remove が現在区間の頻度を保ち、各 bucket の集約値から必要な全頻度範囲の積を漏れなく復元できる。",
+    "Range Shuffle Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "asymptoticComplexity": {
+    "time": "O(N√Q + Q√N)（公式解法全体。特殊な計算量解析を含む）"
+  },
+  "prerequisiteCandidates": ["Mo’s algorithm と平方根分割による集約", "特殊な漸近計算量の見積もり"],
+  "implementationConcerns": [
+    "modular inverse を含む積では零要素数を別管理し、頻度変更前後の bucket 集約を正しい順序で更新する。"
+  ],
+  "outcomeCandidates": [
+    "Range Shuffle Query 型の問題に対し、Mo’s algorithm と平方根分割による集約を選び、状態・証明・特殊計算量を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

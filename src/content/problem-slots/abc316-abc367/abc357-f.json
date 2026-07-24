@@ -1,0 +1,12 @@
+{
+  "contestId": "abc357",
+  "label": "F",
+  "officialTaskId": "abc357_f",
+  "officialOrder": 5,
+  "availability": "exists",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": "abc357-f",
+  "sourceRevisionId": "source-abc357-task-list-2537d870f48c883a6e9ae916edabdbcf27816d6933ff3663d31b50d4b779bfe9",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

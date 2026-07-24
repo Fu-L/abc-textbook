@@ -1,0 +1,20 @@
+{
+  "id": "abc330",
+  "number": 330,
+  "title": "TOYOTA SYSTEMS Programming Contest 2023(AtCoder Beginner Contest 330)",
+  "startedAt": "2023-11-25T21:00:00+09:00",
+  "endedAt": "2023-11-25T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc330",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc330_a",
+    "abc330_b",
+    "abc330_c",
+    "abc330_d",
+    "abc330_e",
+    "abc330_f",
+    "abc330_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc330-task-list-a43d9795d62b31623186f9199dd5cff0445db48ed026d3f6496b4e670f70fe67",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

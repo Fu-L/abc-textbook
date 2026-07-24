@@ -1,0 +1,20 @@
+{
+  "problemId": "abc357-f",
+  "sourceRevisionIds": [
+    "source-abc357-editorial-10186-0ffc8702f9b8507bafcdee69c180255e62398d8223724386832f88075516947d",
+    "source-abc357-f-problem-a79b7aaa8ea4d464d60eeb53b25ebc4cbaa9cada5f4c8200d478058990ceb2c5"
+  ],
+  "coreMethod": "abc357-f「Two Sequence Queries」では、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "作用の合成則と集約演算の準同型性により、遅延値を子へ配る前後で区間の表す値が変わらない。",
+    "Two Sequence Queries 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "遅延評価セグメント木"],
+  "implementationConcerns": ["作用合成の順序、単位作用、区間長を使う写像を同じ規約で実装する。"],
+  "outcomeCandidates": [
+    "Two Sequence Queries 型の 列の順序と prefix 状態に対し、遅延評価セグメント木を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

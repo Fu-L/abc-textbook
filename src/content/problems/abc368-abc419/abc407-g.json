@@ -1,0 +1,20 @@
+{
+  "id": "abc407-g",
+  "contestId": "abc407",
+  "slotLabel": "G",
+  "officialTaskId": "abc407_g",
+  "title": "Domino Covering SUM",
+  "officialUrl": "https://atcoder.jp/contests/abc407/tasks/abc407_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq H; 1\\leq W; HW\\leq2000; -10 ^ {12}\\leq A _ {i,j}\\leq10 ^ {12}\\ (1\\leq i\\leq H,1\\leq j\\leq W); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc407-g-problem-10a1a22ae39383d2e2d15bccdb44c7a07f690a43c5906a252f6ec3e44d774d6a",
+    "source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

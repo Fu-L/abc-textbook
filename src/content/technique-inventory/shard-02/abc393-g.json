@@ -1,0 +1,22 @@
+{
+  "problemId": "abc393-g",
+  "sourceRevisionIds": [
+    "source-abc393-editorial-12192-51ff1775a4a84d6ea3fa0c64dbec89b06500e2c486d30a6f6b6b6bac1f4c3756",
+    "source-abc393-g-problem-941c6da45dc5fe62551ec4fb6a70726479c20b28a4f3308d466fa9cb8822a201"
+  ],
+  "coreMethod": "abc393-g「Unevenness」では、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各増加路が残余グラフで最小費用なので、ポテンシャルを保った交換論により総費用の最適性が維持される。",
+    "Unevenness 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "最小費用流と残余グラフ"],
+  "implementationConcerns": [
+    "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。"
+  ],
+  "outcomeCandidates": [
+    "Unevenness 型の 盤面上の位置と局所遷移に対し、最小費用流と残余グラフを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "abc244",
+  "number": 244,
+  "title": "AtCoder Beginner Contest 244",
+  "startedAt": "2022-03-20T21:00:00+09:00",
+  "endedAt": "2022-03-20T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc244",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc244_a",
+    "abc244_b",
+    "abc244_c",
+    "abc244_d",
+    "abc244_e",
+    "abc244_f",
+    "abc244_g",
+    "abc244_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc244-task-list-0367e86223fa57ed64a3551b7558fb6582006607f439b9c3d28d9cc1e2664043",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "abc312",
+  "number": 312,
+  "title": "UNIQUE VISION Programming Contest 2023 Summer(AtCoder Beginner Contest 312)",
+  "startedAt": "2023-07-29T21:00:00+09:00",
+  "endedAt": "2023-07-29T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc312",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc312_a",
+    "abc312_b",
+    "abc312_c",
+    "abc312_d",
+    "abc312_e",
+    "abc312_f",
+    "abc312_g",
+    "abc312_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc312-task-list-63adcbc0e8afb4c55d0147dec9cfa36a5426c880ea79330e4922fecc070b3719",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

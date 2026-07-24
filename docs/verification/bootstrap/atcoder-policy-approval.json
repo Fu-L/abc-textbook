@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "documents": [
+    {
+      "id": "atcoder-robots",
+      "kind": "robots",
+      "url": "https://atcoder.jp/robots.txt",
+      "approvedFingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1"
+    },
+    {
+      "id": "atcoder-terms",
+      "kind": "terms",
+      "url": "https://atcoder.jp/tos",
+      "approvedFingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf"
+    },
+    {
+      "id": "atcoder-generative-ai",
+      "kind": "generative-ai",
+      "url": "https://atcoder.jp/posts/1567",
+      "approvedFingerprint": "0e29e2a4278e73aa531ed7aff3019795ef0fdbed163f83106aed43772763c2df"
+    }
+  ]
+}

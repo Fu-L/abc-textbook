@@ -1,0 +1,20 @@
+{
+  "id": "abc258-g",
+  "contestId": "abc258",
+  "slotLabel": "G",
+  "officialTaskId": "abc258_g",
+  "title": "Triangle",
+  "officialUrl": "https://atcoder.jp/contests/abc258/tasks/abc258_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 3 \\le N \\le 3000; A is the adjacency matrix of a simple undirected graph G.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998",
+    "source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

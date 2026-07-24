@@ -1,0 +1,20 @@
+{
+  "problemId": "abc267-ex",
+  "sourceRevisionIds": [
+    "source-abc267-editorial-4736-2ddc26b1addb51230c1fb95dcc014fc02d67b3681e885e7b64b8c85277e8bbba",
+    "source-abc267-ex-problem-53fd370d715324cae8e3d5c9f315e45b9ce92b1b7e6b80ad84576f6b26bafb74"
+  ],
+  "coreMethod": "abc267-ex「Odd Sum」では、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
+    "Odd Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "畳み込みと NTT"],
+  "implementationConcerns": ["必要な係数長、padding 長、法が NTT に対応するかを確認する。"],
+  "outcomeCandidates": [
+    "Odd Sum 型の 列の順序と prefix 状態に対し、畳み込みと NTTを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

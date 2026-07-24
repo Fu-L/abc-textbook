@@ -1,0 +1,20 @@
+{
+  "id": "abc262-f",
+  "contestId": "abc262",
+  "slotLabel": "F",
+  "officialTaskId": "abc262_f",
+  "title": "Erase and Rotate",
+  "officialUrl": "https://atcoder.jp/contests/abc262/tasks/abc262_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq K \\leq N-1; 1 \\leq p_i \\leq N; (p_1,p_2,\\ldots,p_N) contains 1,2,\\ldots,N exactly once each.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc262-f-problem-e97d9131710ad7ff7ac0ab7616fd67a116b4f8df7a6289f54313e1c37043b87a",
+    "source-abc262-editorial-4504-fa00567abe2f9d20ce2bfdad3b0955cae6283d3d8c422a1f3fef480ede8090b7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

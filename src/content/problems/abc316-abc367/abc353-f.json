@@ -1,0 +1,20 @@
+{
+  "id": "abc353-f",
+  "contestId": "abc353",
+  "slotLabel": "F",
+  "officialTaskId": "abc353_f",
+  "title": "Tile Distance",
+  "officialUrl": "https://atcoder.jp/contests/abc353/tasks/abc353_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq K\\leq10^{16}; 0\\leq S_x\\leq2\\times10^{16}; 0\\leq S_y\\leq2\\times10^{16}; 0\\leq T_x\\leq2\\times10^{16}; 0\\leq T_y\\leq2\\times10^{16}; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc353-f-problem-75ae7813bfc2b129711ae72749e8cc373492d2c390c7354744dbf827865695a9",
+    "source-abc353-editorial-9936-509e9f0eee652edd2a928ddd74ea483002ee0d86c772f63f19bc7c42870e77e9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

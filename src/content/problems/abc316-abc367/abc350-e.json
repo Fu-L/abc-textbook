@@ -1,0 +1,20 @@
+{
+  "id": "abc350-e",
+  "contestId": "abc350",
+  "slotLabel": "E",
+  "officialTaskId": "abc350_e",
+  "title": "Toward 0",
+  "officialUrl": "https://atcoder.jp/contests/abc350/tasks/abc350_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{18}; 2 \\leq A \\leq 6; 1 \\leq X, Y \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19",
+    "source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

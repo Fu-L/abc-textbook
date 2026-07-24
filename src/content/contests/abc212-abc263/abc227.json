@@ -1,0 +1,21 @@
+{
+  "id": "abc227",
+  "number": 227,
+  "title": "KEYENCE Programming Contest 2021 (AtCoder Beginner Contest 227)",
+  "startedAt": "2021-11-13T21:00:00+09:00",
+  "endedAt": "2021-11-13T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc227",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "H"],
+  "officialTaskIds": [
+    "abc227_a",
+    "abc227_b",
+    "abc227_c",
+    "abc227_d",
+    "abc227_e",
+    "abc227_f",
+    "abc227_g",
+    "abc227_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc227-task-list-0c4657c2362fc1fc968f9f66d6b8fa75707de2197bd00f668fdfab30d58279fd",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

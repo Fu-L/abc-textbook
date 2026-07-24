@@ -1,0 +1,20 @@
+{
+  "id": "abc430-f",
+  "contestId": "abc430",
+  "slotLabel": "F",
+  "officialTaskId": "abc430_f",
+  "title": "Back and Forth Filling",
+  "officialUrl": "https://atcoder.jp/contests/abc430/tasks/abc430_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 20000; 2 \\le N \\le 3 \\times 10^5; S is a string of length N-1 consisting of L and R.; For a single input, the sum of N does not exceed 3 \\times 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc430-f-problem-f5c3abc7df1b691b9e336851067ce8f4992f4cef60bc811eba21edbacad6c6a5",
+    "source-abc430-editorial-14331-63c2ede9cdae616804184bf8d1c72438a1e48b1b54f8c158e006b5a7a6352f20"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

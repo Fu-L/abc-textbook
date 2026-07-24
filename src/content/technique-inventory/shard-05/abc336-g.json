@@ -1,0 +1,22 @@
+{
+  "problemId": "abc336-g",
+  "sourceRevisionIds": [
+    "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51",
+    "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb"
+  ],
+  "coreMethod": "abc336-g「16 Integers」では、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "元の歩道から必須辺だけを射影すると Euler trail になり、逆に成分内の自由経路で trail の隣接必須辺を接続できる。",
+    "16 Integers 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "Euler trail の存在条件"],
+  "implementationConcerns": [
+    "自己 loop と多重辺を許した次数 parity を数え、縮約成分の連結性を保つ。"
+  ],
+  "outcomeCandidates": [
+    "16 Integers 型の 列の順序と prefix 状態に対し、Euler trail の存在条件を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

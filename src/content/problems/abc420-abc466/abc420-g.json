@@ -1,0 +1,20 @@
+{
+  "id": "abc420-g",
+  "contestId": "abc420",
+  "slotLabel": "G",
+  "officialTaskId": "abc420_g",
+  "title": "sqrt(n²+n+X)",
+  "officialUrl": "https://atcoder.jp/contests/abc420/tasks/abc420_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: -10^{14} \\le X\\le 10^{14}; The input value is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc420-g-problem-2dff6a1126bda66a46d02fa7128a758855a0d61e22afc818f692e51469319fbf",
+    "source-abc420-editorial-13733-e64a00a448e785a6e17abd4176a44596ef536f2b5911f4ad0b3bcd8ade2a99c4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

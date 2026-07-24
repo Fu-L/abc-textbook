@@ -1,0 +1,20 @@
+{
+  "id": "abc437-f",
+  "contestId": "abc437",
+  "slotLabel": "F",
+  "officialTaskId": "abc437_f",
+  "title": "Manhattan Christmas Tree 2",
+  "officialUrl": "https://atcoder.jp/contests/abc437/tasks/abc437_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\le N,Q\\le 2\\times 10^5; -10^9\\le X_i,Y_i\\le 10^9; 1\\le i\\le N; 1\\le L\\le R\\le N; -10^9\\le x,y\\le 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc437-f-problem-31ca98501d7cea40b88574c6ad692175c9d92992d30517409358061afde8c90e",
+    "source-abc437-editorial-14891-8e01dd8035d7e76c1dc9842c0d289021678532fec32f01c9901a6228611703a7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc295-ex",
+  "contestId": "abc295",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc295_h",
+  "title": "E or m",
+  "officialUrl": "https://atcoder.jp/contests/abc295/tasks/abc295_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: N and M are integers.; 1 \\le N,M \\le 18; X is a grid with N rows and M columns consisting of 0, 1, and ?.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f",
+    "source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

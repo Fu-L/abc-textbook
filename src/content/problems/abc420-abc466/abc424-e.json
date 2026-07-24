@@ -1,0 +1,20 @@
+{
+  "id": "abc424-e",
+  "contestId": "abc424",
+  "slotLabel": "E",
+  "officialTaskId": "abc424_e",
+  "title": "Cut in Half",
+  "officialUrl": "https://atcoder.jp/contests/abc424/tasks/abc424_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10^5; For each test case: 1 \\leq N \\leq 10^5 1 \\leq A_i \\leq 10^9 1 \\leq K \\leq 10^9 1 \\leq X \\leq N+K; 1 \\leq N \\leq 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq K \\leq 10^9; 1 \\leq X \\leq N+K; The sum of N over all test cases does not exceed 10^5.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc424-e-problem-02b9995b4ccab9db6e4ad63955d08e26ca78ed293099894cb655b42315c3c4a6",
+    "source-abc424-editorial-13858-a4d5f909bedd3be212f27b0394ffd777966ae96bbccd6e09e08a6e08a6a3857e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

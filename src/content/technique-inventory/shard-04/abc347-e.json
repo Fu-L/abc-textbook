@@ -1,0 +1,20 @@
+{
+  "problemId": "abc347-e",
+  "sourceRevisionIds": [
+    "source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2",
+    "source-abc347-editorial-9698-544bfc4af8fe0b31f60059cf56a1f1319c7d7c7404590873bca6f6954b49b3f2"
+  ],
+  "coreMethod": "abc347-e「Set Add Query」では、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+    "Set Add Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "累積和と差分"],
+  "implementationConcerns": ["半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。"],
+  "outcomeCandidates": [
+    "Set Add Query 型の 列の順序と prefix 状態に対し、累積和と差分を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

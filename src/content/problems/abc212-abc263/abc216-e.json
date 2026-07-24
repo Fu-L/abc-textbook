@@ -1,0 +1,20 @@
+{
+  "id": "abc216-e",
+  "contestId": "abc216",
+  "slotLabel": "E",
+  "officialTaskId": "abc216_e",
+  "title": "Amusement Park",
+  "officialUrl": "https://atcoder.jp/contests/abc216/tasks/abc216_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq K \\leq 2 \\times 10^9; 1 \\leq A_i \\leq 2 \\times 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812",
+    "source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

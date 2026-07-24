@@ -1,0 +1,22 @@
+{
+  "problemId": "abc343-f",
+  "sourceRevisionIds": [
+    "source-abc343-editorial-9429-f957c82a79fb9fa65f5a79a28c8ef600eed7e0a6018d5e5492765d86106a5cbd",
+    "source-abc343-f-problem-118f15a1cd72a4d857e84ed257e673b547e83f09d03607b7bd2a8cf5c9f3a603"
+  ],
+  "coreMethod": "abc343-f「Second Largest Query」では、各 segment node に異なる最大値・第二最大値と各個数を保持し、子の高々四候補を merge する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "区間全体の上位二種類の値は左右の上位二種類の候補集合に必ず含まれ、同値の個数を足せば正確に復元できる。",
+    "Second Largest Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["segment tree と固定個数の候補 merge"],
+  "implementationConcerns": [
+    "同じ値の個数を合算してから上位二種類を選び、候補が一種類の node に sentinel を置く。"
+  ],
+  "outcomeCandidates": [
+    "Second Largest Query 型の問題に対し、segment tree と固定個数の候補 mergeを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

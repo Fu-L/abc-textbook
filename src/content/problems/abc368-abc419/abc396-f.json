@@ -1,0 +1,20 @@
+{
+  "id": "abc396-f",
+  "contestId": "abc396",
+  "slotLabel": "F",
+  "officialTaskId": "abc396_f",
+  "title": "Rotated Inversions",
+  "officialUrl": "https://atcoder.jp/contests/abc396/tasks/abc396_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N,M \\le 2\\times 10^5; 0 \\le A_i < M; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc396-f-problem-3a6c95223afa7acf1d9704bfe06b07779541b9bba7a589f020d7a044c63c41ae",
+    "source-abc396-editorial-12374-589f6810ae5c3dccefb418c94eb6369993eca119b4162fd81606ab52afcc8acc"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

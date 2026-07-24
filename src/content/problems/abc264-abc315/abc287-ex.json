@@ -1,0 +1,20 @@
+{
+  "id": "abc287-ex",
+  "contestId": "abc287",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc287_h",
+  "title": "Directed Graph and Query",
+  "officialUrl": "https://atcoder.jp/contests/abc287/tasks/abc287_h",
+  "constraintsSummary": "Time limit: 4.5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2000; 0 \\leq M \\leq N(N-1); 1 \\leq a_i,b_i \\leq N; a_i \\neq b_i; If i \\neq j, then (a_i,b_i) \\neq (a_j,b_j).; 1 \\leq Q \\leq 10^4; 1 \\leq s_i,t_i \\leq N; s_i \\neq t_i; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc287-ex-problem-088a9f5f7b92ce562b44a495e34373f0201ba7422b503c4bf3b34a28058b29fc",
+    "source-abc287-editorial-5635-87e762447ee5c71e40ec9615ff2d1e5e1f5364b1fdc004b0565ed82bbbd24090"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

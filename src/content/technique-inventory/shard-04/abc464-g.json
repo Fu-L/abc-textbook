@@ -1,0 +1,20 @@
+{
+  "problemId": "abc464-g",
+  "sourceRevisionIds": [
+    "source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54",
+    "source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"
+  ],
+  "coreMethod": "abc464-g「Celester 2」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+    "Celester 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "greedy choice と交換論法"],
+  "implementationConcerns": ["同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。"],
+  "outcomeCandidates": [
+    "Celester 2 型の 文字列の prefix・suffix と一致関係に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

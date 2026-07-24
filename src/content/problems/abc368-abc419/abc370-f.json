@@ -1,0 +1,20 @@
+{
+  "id": "abc370-f",
+  "contestId": "abc370",
+  "slotLabel": "F",
+  "officialTaskId": "abc370_f",
+  "title": "Cake Division",
+  "officialUrl": "https://atcoder.jp/contests/abc370/tasks/abc370_f",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq K \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^4; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc370-f-problem-a22fbc95c73df9857bb2e703550340b9aebb7f969b3b4316e123c91b8b8b6e58",
+    "source-abc370-editorial-10895-ae5cc3fa596f036b68db8dec7ccd3da0d7012df59cf637c0e411ec377a98d44a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

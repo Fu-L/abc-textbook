@@ -1,0 +1,20 @@
+{
+  "id": "abc408",
+  "number": 408,
+  "title": "AtCoder Beginner Contest 408",
+  "startedAt": "2025-05-31T21:00:00+09:00",
+  "endedAt": "2025-05-31T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc408",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc408_a",
+    "abc408_b",
+    "abc408_c",
+    "abc408_d",
+    "abc408_e",
+    "abc408_f",
+    "abc408_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc408-task-list-48ff2fb442d72e148cbb924465d6a07039877bb6f2fad06ee8df84683a850ee1",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

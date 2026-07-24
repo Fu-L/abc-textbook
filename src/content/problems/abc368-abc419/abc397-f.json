@@ -1,0 +1,20 @@
+{
+  "id": "abc397-f",
+  "contestId": "abc397",
+  "slotLabel": "F",
+  "officialTaskId": "abc397_f",
+  "title": "Variety Split Hard",
+  "officialUrl": "https://atcoder.jp/contests/abc397/tasks/abc397_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 3 \\times 10^5; 1 \\leq A_i \\leq N (1 \\leq i \\leq N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc397-f-problem-2ae42bf6a4f9d444b3bd9f3753c4459bbf27db20e58d0056256882c351c16fa2",
+    "source-abc397-editorial-12457-7f7b906edc8a6fba053224e8ef52a71749ad5e2e4906a0aa157fed62dea2ceb8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

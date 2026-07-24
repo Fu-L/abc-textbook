@@ -1,0 +1,20 @@
+{
+  "problemId": "abc255-e",
+  "sourceRevisionIds": [
+    "source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a",
+    "source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10"
+  ],
+  "coreMethod": "abc255-e「Lucky Numbers」では、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
+    "Lucky Numbers 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["式変形と frequency map"],
+  "implementationConcerns": ["添字 parity による符号反転と負数 key をそのまま正確に保持する。"],
+  "outcomeCandidates": [
+    "Lucky Numbers 型の問題に対し、式変形と frequency mapを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

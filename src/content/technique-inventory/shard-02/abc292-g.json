@@ -1,0 +1,22 @@
+{
+  "problemId": "abc292-g",
+  "sourceRevisionIds": [
+    "source-abc292-editorial-5896-28ffb32781354ff1911e1f7e1d693e9dd16107cce13a29b9d80692114ca41c23",
+    "source-abc292-g-problem-714218a34f6e89aac6ec320f0cd62bd08c95dad0caf490167c48ee09cb549c82"
+  ],
+  "coreMethod": "abc292-g「Count Strictly Increasing Sequences」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+    "Count Strictly Increasing Sequences 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
+  "outcomeCandidates": [
+    "Count Strictly Increasing Sequences 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

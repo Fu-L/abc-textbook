@@ -1,0 +1,20 @@
+{
+  "id": "abc216-g",
+  "contestId": "abc216",
+  "slotLabel": "G",
+  "officialTaskId": "abc216_g",
+  "title": "01Sequence",
+  "officialUrl": "https://atcoder.jp/contests/abc216/tasks/abc216_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq \\min(2 \\times 10^5, \\frac{N(N+1)}{2} ); 1 \\leq L_i \\leq R_i \\leq N; 1 \\leq X_i \\leq R_i-L_i+1; (L_i,R_i) \\neq (L_j,R_j) if i \\neq j.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e",
+    "source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

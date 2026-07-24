@@ -1,0 +1,20 @@
+{
+  "id": "abc348-e",
+  "contestId": "abc348",
+  "slotLabel": "E",
+  "officialTaskId": "abc348_e",
+  "title": "Minimize Sum of Distances",
+  "officialUrl": "https://atcoder.jp/contests/abc348/tasks/abc348_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq A_i, B_i \\leq N; The given graph is a tree.; 1 \\leq C_i \\leq 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc348-e-problem-823e6b5e6f018b5c00d4d94d6bd9bf1fe258ca5d9a46580b391823fef195d866",
+    "source-abc348-editorial-9706-57a215cd911ca45ed5e672c5b31b51ffbcfc636f4ebb913932872b2cdaceed73"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

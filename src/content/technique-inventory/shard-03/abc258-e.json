@@ -1,0 +1,22 @@
+{
+  "problemId": "abc258-e",
+  "sourceRevisionIds": [
+    "source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084",
+    "source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"
+  ],
+  "coreMethod": "abc258-e「Packing Potatoes」では、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+    "Packing Potatoes 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "剰余演算と modular inverse"],
+  "implementationConcerns": [
+    "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Packing Potatoes 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

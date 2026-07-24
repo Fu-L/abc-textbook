@@ -1,0 +1,22 @@
+{
+  "problemId": "abc436-g",
+  "sourceRevisionIds": [
+    "source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3",
+    "source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278"
+  ],
+  "coreMethod": "abc436-g「Linear Inequation」では、非負解を基数 d の商 Q と桁 R に分け、A·R の分布との畳み込みで境界係数列を縮約する操作を反復する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "X=dQ+R は一意で、各桁和 s ごとの残余問題 f(A,floor((M-s)/d)) が全解を重複なく分割する。",
+    "Linear Inequation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["基数分解、生成関数、畳み込み"],
+  "implementationConcerns": [
+    "負 index の係数を零として扱い、support 幅を証明した上で NTT の padding と法を選ぶ。"
+  ],
+  "outcomeCandidates": [
+    "Linear Inequation 型の問題に対し、基数分解、生成関数、畳み込みを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

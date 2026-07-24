@@ -1,0 +1,20 @@
+{
+  "id": "abc276-ex",
+  "contestId": "abc276",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc276_h",
+  "title": "Construct a Matrix",
+  "officialUrl": "https://atcoder.jp/contests/abc276/tasks/abc276_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,Q \\leq 2000; 1 \\leq a_i \\leq b_i \\leq N; 1 \\leq c_i \\leq d_i \\leq N; e_i \\in \\{0,1,2 \\}; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc276-ex-problem-9ff677eed53889aa49b0fdb815218f25f42392d1ebcf2d8b2595757bc6879c43",
+    "source-abc276-editorial-5169-30499c5ad8dee84dc3313dc5030eb15318ac0f2c796eeb2d8ebbe00f6c34532c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

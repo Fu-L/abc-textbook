@@ -1,0 +1,20 @@
+{
+  "id": "abc231-g",
+  "contestId": "abc231",
+  "slotLabel": "G",
+  "officialTaskId": "abc231_g",
+  "title": "Balls in Boxes",
+  "officialUrl": "https://atcoder.jp/contests/abc231/tasks/abc231_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 1000; 1 \\leq K \\leq 10^9; 0 \\leq A_i \\leq 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f",
+    "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc302-f",
+  "contestId": "abc302",
+  "slotLabel": "F",
+  "officialTaskId": "abc302_f",
+  "title": "Merge Set",
+  "officialUrl": "https://atcoder.jp/contests/abc302/tasks/abc302_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^5; 2 \\le M \\le 2 \\times 10^5; 1 \\le \\sum_{i=1}^{N} A_i \\le 5 \\times 10^5; 1 \\le S_{i,j} \\le M(1 \\le i \\le N,1 \\le j \\le A_i); S_{i,j} \\neq S_{i,k}(1 \\le j < k \\le A_i); All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc302-f-problem-4d05f9f5cc4730f18ade8ed1fb73a61ac369ec022b971e5091c0d0f41ab1d336",
+    "source-abc302-editorial-6411-6c4c7ecaa76c2c54863116a59357d23574055e21f52eae24f1585497d620d7d0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

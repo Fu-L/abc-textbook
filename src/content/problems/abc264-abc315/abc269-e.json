@@ -1,0 +1,20 @@
+{
+  "id": "abc269-e",
+  "contestId": "abc269",
+  "slotLabel": "E",
+  "officialTaskId": "abc269_e",
+  "title": "Last Rook",
+  "officialUrl": "https://atcoder.jp/contests/abc269/tasks/abc269_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^3; N is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc269-e-problem-8e4896a525fecb86db0fcd4de17d466b9225f950f4f821e20877a5e10bb5f096",
+    "source-abc269-editorial-4840-d8749b6eed0a078a255f371f2ff4ac02394f8bb7a44ec8628dc435c2448a0f51"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

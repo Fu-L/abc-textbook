@@ -1,0 +1,20 @@
+{
+  "id": "abc297-e",
+  "contestId": "abc297",
+  "slotLabel": "E",
+  "officialTaskId": "abc297_e",
+  "title": "Kth Takoyaki Set",
+  "officialUrl": "https://atcoder.jp/contests/abc297/tasks/abc297_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 10; 1 \\le K \\le 2 \\times 10^5; 1 \\le A_i \\le 10^9; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8",
+    "source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

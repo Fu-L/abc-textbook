@@ -1,0 +1,20 @@
+{
+  "id": "abc442-f",
+  "contestId": "abc442",
+  "slotLabel": "F",
+  "officialTaskId": "abc442_f",
+  "title": "Diagonal Separation 2",
+  "officialUrl": "https://atcoder.jp/contests/abc442/tasks/abc442_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5000; N is an integer.; S_i is a string of length N consisting of . and #.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc442-f-problem-d72a790bd4b9c8e7bd88ea4720ec625c1791bfd7fe4ab4fe09797503cfec89a4",
+    "source-abc442-editorial-15142-5355880b8ad91a4f3c9a0c036da679518bd4554ebbfa7191f44bc656993dea61"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

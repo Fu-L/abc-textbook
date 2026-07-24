@@ -1,0 +1,22 @@
+{
+  "problemId": "abc324-f",
+  "sourceRevisionIds": [
+    "source-abc324-editorial-7405-5317d02fe307ce10102a7967c7f3daf33d3d92a95198f8b7d90c973e18e2e531",
+    "source-abc324-f-problem-a176553a647da6e3d14065cf470eec98dd1f7f0cfc7f9e784e56d782ecb04ce2"
+  ],
+  "coreMethod": "abc324-f「Beautiful Path」では、依存関係を DAG として表し、トポロジカル順に値を伝播する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
+    "Beautiful Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "DAG とトポロジカル順序"],
+  "implementationConcerns": [
+    "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。"
+  ],
+  "outcomeCandidates": [
+    "Beautiful Path 型の 頂点と辺からなる状態グラフに対し、DAG とトポロジカル順序を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

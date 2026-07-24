@@ -1,0 +1,20 @@
+{
+  "id": "abc442-e",
+  "contestId": "abc442",
+  "slotLabel": "E",
+  "officialTaskId": "abc442_e",
+  "title": "Laser Takahashi",
+  "officialUrl": "https://atcoder.jp/contests/abc442/tasks/abc442_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 2\\times 10^5; 1\\leq Q \\leq 2\\times 10^5; -10^9\\leq X_i,Y_i \\leq 10^9; (X_i,Y_i)\\neq (0,0); 1\\leq A_j,B_j\\leq N; A_j\\neq B_j; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc442-e-problem-42087373ff2c255f67b0ad5bbad3ca4ea618df2041a9b7e0063309028f7c148f",
+    "source-abc442-editorial-15136-380daa78228677f1f43f35e09299c4abd5f07bea270b151f820cb4909ce5bda7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc441-e",
+  "contestId": "abc441",
+  "slotLabel": "E",
+  "officialTaskId": "abc441_e",
+  "title": "A > B substring",
+  "officialUrl": "https://atcoder.jp/contests/abc441/tasks/abc441_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le5\\times10 ^ 5; S is a string of length N consisting of A, B, and C.; N is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb",
+    "source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

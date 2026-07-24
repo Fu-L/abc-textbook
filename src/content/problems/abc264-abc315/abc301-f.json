@@ -1,0 +1,20 @@
+{
+  "id": "abc301-f",
+  "contestId": "abc301",
+  "slotLabel": "F",
+  "officialTaskId": "abc301_f",
+  "title": "Anti-DDoS",
+  "officialUrl": "https://atcoder.jp/contests/abc301/tasks/abc301_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S consists of uppercase English letters, lowercase English letters, and ?.; The length of S is between 4 and 3\\times 10^5, inclusive.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9",
+    "source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

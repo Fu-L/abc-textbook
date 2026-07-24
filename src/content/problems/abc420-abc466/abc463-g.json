@@ -1,0 +1,20 @@
+{
+  "id": "abc463-g",
+  "contestId": "abc463",
+  "slotLabel": "G",
+  "officialTaskId": "abc463_g",
+  "title": "Random Walk Distance",
+  "officialUrl": "https://atcoder.jp/contests/abc463/tasks/abc463_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 2 \\times 10^5; 1 \\leq N \\leq 2 \\times 10^5; |X| \\leq 2 \\times 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc463-g-problem-f75d039216a6beaa35699c1575f005d1b00bca4a677f7fbc81a351e9b32dbf46",
+    "source-abc463-editorial-21928-7cb7a2903038e719ee66fd28ee67e398c989ec8e7b146012e0b46809e6fae2ea"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc218-e",
+  "contestId": "abc218",
+  "slotLabel": "E",
+  "officialTaskId": "abc218_e",
+  "title": "Destruction",
+  "officialUrl": "https://atcoder.jp/contests/abc218/tasks/abc218_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; N-1 \\leq M \\leq 2\\times 10^5; 1 \\leq A_i,B_i \\leq N; -10^9 \\leq C_i \\leq 10^9; The given graph is connected.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46",
+    "source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

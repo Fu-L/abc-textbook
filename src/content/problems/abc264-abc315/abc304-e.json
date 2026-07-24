@@ -1,0 +1,20 @@
+{
+  "id": "abc304-e",
+  "contestId": "abc304",
+  "slotLabel": "E",
+  "officialTaskId": "abc304_e",
+  "title": "Good Graph",
+  "officialUrl": "https://atcoder.jp/contests/abc304/tasks/abc304_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 0 \\leq M \\leq 2 \\times10^5; 1 \\leq u_i, v_i \\leq N; 1 \\leq K \\leq 2 \\times 10^5; 1 \\leq x_i, y_i \\leq N; x_i \\neq y_i; i \\neq j \\implies \\lbrace x_i, y_i \\rbrace \\neq \\lbrace x_j, y_j \\rbrace; For all i = 1, 2, \\ldots, K, there is no path connecting vertices x_i and y_i.; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq p_i, q_i \\leq N; p_i \\neq q_i; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278",
+    "source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

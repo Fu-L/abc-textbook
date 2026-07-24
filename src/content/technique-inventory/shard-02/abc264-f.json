@@ -1,0 +1,22 @@
+{
+  "problemId": "abc264-f",
+  "sourceRevisionIds": [
+    "source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694",
+    "source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6"
+  ],
+  "coreMethod": "abc264-f「Monochromatic Path」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+    "Monochromatic Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
+  "outcomeCandidates": [
+    "Monochromatic Path 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

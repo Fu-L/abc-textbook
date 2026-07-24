@@ -1,0 +1,20 @@
+{
+  "problemId": "abc349-f",
+  "sourceRevisionIds": [
+    "source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1",
+    "source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"
+  ],
+  "coreMethod": "abc349-f「Subsequence LCM」では、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+    "Subsequence LCM 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "包除原理"],
+  "implementationConcerns": ["空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。"],
+  "outcomeCandidates": [
+    "Subsequence LCM 型の 列の順序と prefix 状態に対し、包除原理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

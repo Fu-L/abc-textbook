@@ -1,0 +1,20 @@
+{
+  "id": "abc266-e",
+  "contestId": "abc266",
+  "slotLabel": "E",
+  "officialTaskId": "abc266_e",
+  "title": "Throwing the Die",
+  "officialUrl": "https://atcoder.jp/contests/abc266/tasks/abc266_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c",
+    "source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

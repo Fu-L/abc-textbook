@@ -1,0 +1,20 @@
+{
+  "id": "abc432",
+  "number": 432,
+  "title": "OMRON Corporation Programming Contest 2025 #2 (AtCoder Beginner Contest 432)",
+  "startedAt": "2025-11-15T21:00:00+09:00",
+  "endedAt": "2025-11-15T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc432",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc432_a",
+    "abc432_b",
+    "abc432_c",
+    "abc432_d",
+    "abc432_e",
+    "abc432_f",
+    "abc432_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc432-task-list-5c0d596e169dd19d683b273c7c10c4045c4766823c5d66e2c7eafe2091a78cd1",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc314-g",
+  "contestId": "abc314",
+  "slotLabel": "G",
+  "officialTaskId": "abc314_g",
+  "title": "Amulets",
+  "officialUrl": "https://atcoder.jp/contests/abc314/tasks/abc314_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 3 \\times 10^5; 1 \\leq H \\leq 10^9; 1 \\leq A_i \\leq 10^9; 1 \\leq B_i \\leq M; For each 1 \\leq i \\leq M, there is 1 \\leq j \\leq N such that B_j = i.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc314-g-problem-f7e8cb27d04d7402d24779863a2b30886f8d1a1ef3eaea735f50e48c054a17f8",
+    "source-abc314-editorial-6952-45640d7016a0ea86a83a2614d7b26e993e32e24a29c4f1e68e6d084d818e0df0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

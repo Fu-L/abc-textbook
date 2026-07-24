@@ -1,0 +1,22 @@
+{
+  "problemId": "abc240-ex",
+  "sourceRevisionIds": [
+    "source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c",
+    "source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89"
+  ],
+  "coreMethod": "abc240-ex「Sequence of Substrings」では、preorder の先頭を根とし、inorder の根位置で左右区間を分割して二分木を再帰復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "根と左右部分木の要素集合・長さが二つの traversal から一意に定まり、各部分区間へ同じ議論を適用できる。",
+    "Sequence of Substrings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "二分木の preorder と inorder"],
+  "implementationConcerns": [
+    "値から inorder 位置への逆配列を使い、不整合区間や根が 1 でない入力を拒否する。"
+  ],
+  "outcomeCandidates": [
+    "Sequence of Substrings 型の 文字列の prefix・suffix と一致関係に対し、二分木の preorder と inorderを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

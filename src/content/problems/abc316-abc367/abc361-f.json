@@ -1,0 +1,20 @@
+{
+  "id": "abc361-f",
+  "contestId": "abc361",
+  "slotLabel": "F",
+  "officialTaskId": "abc361_f",
+  "title": "x = a^b",
+  "officialUrl": "https://atcoder.jp/contests/abc361/tasks/abc361_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 10^{18}",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc361-f-problem-eef728e582539f23e3b9502a553c74df4a116920c76ead4002cce17170e21c6a",
+    "source-abc361-editorial-10358-a150ea4a2fbe4c78b6ecdbba6ac264c5652569e14ab83b6e25de6cab90344650"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

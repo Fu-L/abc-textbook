@@ -1,0 +1,20 @@
+{
+  "id": "abc385-f",
+  "contestId": "abc385",
+  "slotLabel": "F",
+  "officialTaskId": "abc385_f",
+  "title": "Visible Buildings",
+  "officialUrl": "https://atcoder.jp/contests/abc385/tasks/abc385_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq X_1 < \\dots < X_N \\leq 10^9; 1 \\leq H_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc385-f-problem-75176a21b1f00a0a84ff4c1c5737571a51db5a16d6aefba6f634abe016ff81d2",
+    "source-abc385-editorial-11664-76d5a0bbd1baef5fe071c2d300507fca7164300e970ad633d9c5f17e3591e920"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

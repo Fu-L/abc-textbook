@@ -1,0 +1,20 @@
+{
+  "id": "abc299-ex",
+  "contestId": "abc299",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc299_h",
+  "title": "Dice Sum Infinity",
+  "officialUrl": "https://atcoder.jp/contests/abc299/tasks/abc299_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0\\lt R\\lt10^9; R is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516",
+    "source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

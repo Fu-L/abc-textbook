@@ -1,0 +1,20 @@
+{
+  "id": "abc234-g",
+  "contestId": "abc234",
+  "slotLabel": "G",
+  "officialTaskId": "abc234_g",
+  "title": "Divide a Sequence",
+  "officialUrl": "https://atcoder.jp/contests/abc234/tasks/abc234_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3 \\times 10^5; 1 \\leq A_i \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc",
+    "source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

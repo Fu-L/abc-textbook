@@ -1,0 +1,20 @@
+{
+  "id": "abc257-f",
+  "contestId": "abc257",
+  "slotLabel": "F",
+  "officialTaskId": "abc257_f",
+  "title": "Teleporter Setting",
+  "officialUrl": "https://atcoder.jp/contests/abc257/tasks/abc257_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3\\times 10^5; 1\\leq M\\leq 3\\times 10^5; 0\\leq U_i<V_i\\leq N; If i \\neq j, then (U_i,V_i)\\neq (U_j,V_j).; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c",
+    "source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

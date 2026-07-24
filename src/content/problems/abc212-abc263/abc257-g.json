@@ -1,0 +1,20 @@
+{
+  "id": "abc257-g",
+  "contestId": "abc257",
+  "slotLabel": "G",
+  "officialTaskId": "abc257_g",
+  "title": "Prefix Concatenation",
+  "officialUrl": "https://atcoder.jp/contests/abc257/tasks/abc257_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq |S| \\leq 5\\times 10^5; 1 \\leq |T| \\leq 5\\times 10^5; S and T are strings consisting of lowercase English letters.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5",
+    "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

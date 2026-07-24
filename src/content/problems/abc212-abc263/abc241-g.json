@@ -1,0 +1,20 @@
+{
+  "id": "abc241-g",
+  "contestId": "abc241",
+  "slotLabel": "G",
+  "officialTaskId": "abc241_g",
+  "title": "Round Robin",
+  "officialUrl": "https://atcoder.jp/contests/abc241/tasks/abc241_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 50; 0\\leq M \\leq \\frac{N(N-1)}{2}; 1\\leq W_i,L_i\\leq N; W_i \\neq L_i; If i\\neq j, then (W_i,L_i) \\neq (W_j,L_j).; (W_i,L_i) \\neq (L_j,W_j); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a",
+    "source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

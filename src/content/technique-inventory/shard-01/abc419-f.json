@@ -1,0 +1,22 @@
+{
+  "problemId": "abc419-f",
+  "sourceRevisionIds": [
+    "source-abc419-editorial-13623-83863d26c9a12a69f07be60afab51ff05603fa4e6f48038a54d1ac0e6c881f43",
+    "source-abc419-f-problem-6f4acd79816fc01bc857e64983555f3c7e040847741a7f21ee0fdbd1d0004ee9"
+  ],
+  "coreMethod": "abc419-f「All Included」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+    "All Included 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
+  "outcomeCandidates": [
+    "All Included 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

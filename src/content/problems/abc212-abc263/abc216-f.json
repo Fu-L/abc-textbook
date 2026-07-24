@@ -1,0 +1,20 @@
+{
+  "id": "abc216-f",
+  "contestId": "abc216",
+  "slotLabel": "F",
+  "officialTaskId": "abc216_f",
+  "title": "Max Sum Counting",
+  "officialUrl": "https://atcoder.jp/contests/abc216/tasks/abc216_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5000; 1 \\leq A_i,B_i \\leq 5000; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0",
+    "source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc294-ex",
+  "sourceRevisionIds": [
+    "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0",
+    "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"
+  ],
+  "coreMethod": "abc294-ex「K-Coloring」では、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
+    "K-Coloring 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "畳み込みと NTT"],
+  "implementationConcerns": ["必要な係数長、padding 長、法が NTT に対応するかを確認する。"],
+  "outcomeCandidates": [
+    "K-Coloring 型の 頂点と辺からなる状態グラフに対し、畳み込みと NTTを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc326-f",
+  "sourceRevisionIds": [
+    "source-abc326-editorial-7476-4d01976a865d3d9e446a33bade6b5ab30d1152561f955bffb10654bbdeeaa975",
+    "source-abc326-f-problem-fee8d914a1899607dcd5cb88eb247c39542e80191159d1a5c500390bbeededb9"
+  ],
+  "coreMethod": "abc326-f「Robot Rotation」では、選択を二群に分けて各側を全列挙し、和・順序・hash lookup で組を結合する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の全体選択は左右の部分選択の組へ一意に分かれるため、両側の列挙と結合で全候補を覆う。",
+    "Robot Rotation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "半分全列挙"],
+  "implementationConcerns": ["左右の列挙値を sort・deduplicate する条件と、補数の境界を確認する。"],
+  "outcomeCandidates": [
+    "Robot Rotation 型の 文字列の prefix・suffix と一致関係に対し、半分全列挙を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

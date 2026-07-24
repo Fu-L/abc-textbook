@@ -1,0 +1,22 @@
+{
+  "problemId": "abc406-g",
+  "sourceRevisionIds": [
+    "source-abc406-editorial-13048-920868b4aa7b9d1ecd1f5cb46d721512ac85991b33891224b3674ac02c77ee00",
+    "source-abc406-g-problem-af05a869e705437c9cfa5c822aa6d808b155b4a5c08c1bb41d36ec3d3f5db3f2"
+  ],
+  "coreMethod": "abc406-g「Travelling Salesman Problem」では、等差変化する区間内の累積値を二次式で表し、端点と頂点近傍だけを評価して最大値を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各 run 内の目的関数は離散二次関数なので、差分の符号が変わる点と区間端以外に最大候補はない。",
+    "Travelling Salesman Problem 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "等差数列の和と離散凸・凹関数"],
+  "implementationConcerns": [
+    "頂点の floor・ceil 両方を区間へ clamp し、積と累積和を十分広い整数型で持つ。"
+  ],
+  "outcomeCandidates": [
+    "Travelling Salesman Problem 型の 列の順序と prefix 状態に対し、等差数列の和と離散凸・凹関数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

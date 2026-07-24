@@ -1,0 +1,22 @@
+{
+  "problemId": "abc434-g",
+  "sourceRevisionIds": [
+    "source-abc434-editorial-14660-4785cdf7b0084f7d5c689355b827060d0d221e16c9681d8d879b37fe5b53c749",
+    "source-abc434-g-problem-219a37c2c31b58e0fc0f91969f4b52ea76287629a8c2208d1712b50b9f3c895c"
+  ],
+  "coreMethod": "abc434-g「Keyboard」では、頂点を次数の閾値で heavy と light に分け、低次数更新は隣接先へ即時反映し高次数更新は時刻を遅延保持する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "light 頂点の走査長は閾値未満で、heavy 頂点数は次数和を閾値で割った個数以下になる。",
+    "Keyboard 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "次数による平方分割"],
+  "implementationConcerns": [
+    "各値の更新時刻を比較し、heavy 隣接表から最も新しい遅延更新だけを反映する。"
+  ],
+  "outcomeCandidates": [
+    "Keyboard 型の 文字列の prefix・suffix と一致関係に対し、次数による平方分割を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

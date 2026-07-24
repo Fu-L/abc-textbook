@@ -1,0 +1,20 @@
+{
+  "id": "abc381-f",
+  "contestId": "abc381",
+  "slotLabel": "F",
+  "officialTaskId": "abc381_f",
+  "title": "1122 Subsequence",
+  "officialUrl": "https://atcoder.jp/contests/abc381/tasks/abc381_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 2 \\times 10^5; 1\\leq A_i \\leq 20; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc381-f-problem-83a041909bdba22c82453addbdbc034a229cddb66e0846a3e5cfab78226b857d",
+    "source-abc381-editorial-11408-e28925a36a1cc0462a58855ec2b49a1d989b5e9f61e0ee91cd9c99f91bda87aa"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}
