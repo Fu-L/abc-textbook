@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "previewId": "initial-v1",
+  "ownerId": "person-maintainer",
+  "frozenAt": "2026-07-26T09:00:00+09:00",
+  "groups": [
+    {
+      "slug": "multiplicative-order-counting",
+      "domain": "mathematics-combinatorics",
+      "candidateOutcomeId": "outcome-candidate-multiplicative-order-counting",
+      "problemIds": ["abc212-g", "abc222-g"],
+      "tagName": "乗法的構造と位数による数え上げ",
+      "tagDefinition": "乗法群・原始根・乗法的位数を用いて、指数の合同条件や最小周期を数え上げへ変換する技法。",
+      "outcomeStatement": "乗法的な条件を指数または位数の問題へ変換し、合同式と約数構造を使って数え上げられる。",
+      "unitTitle": "乗法的構造を指数と位数へ写す",
+      "rationale": "abc212-g と abc222-g は見かけ上の対象が異なるが、乗法的な条件を指数または位数へ写して合同式を扱う共通成果を持つ。"
+    },
+    {
+      "slug": "compressed-dp-state",
+      "domain": "dynamic-programming",
+      "candidateOutcomeId": "outcome-candidate-compressed-dp-state",
+      "problemIds": ["abc215-e", "abc232-e"],
+      "tagName": "同値性によるDP状態圧縮",
+      "tagDefinition": "将来の遷移と答えに必要な情報が同じ履歴や位置を同値類へまとめ、状態数を削減する動的計画法。",
+      "outcomeStatement": "履歴や位置の同値性を見つけ、将来の遷移を決める十分な最小状態として動的計画法を設計できる。",
+      "unitTitle": "同値類からDP状態を設計する",
+      "rationale": "abc215-e の使用済み集合・末尾状態と abc232-e の目標行列との一致状態は、将来の遷移に必要な情報だけを残す同じ設計原理で説明できる。"
+    },
+    {
+      "slug": "shortest-path-structure",
+      "domain": "graph-search",
+      "candidateOutcomeId": "outcome-candidate-shortest-path-structure",
+      "problemIds": ["abc218-f", "abc252-e"],
+      "tagName": "最短路の構造復元と再利用",
+      "tagDefinition": "最短距離だけでなく直前辺・経路・木を復元し、変更影響の限定や構成解へ利用する技法。",
+      "outcomeStatement": "最短路の経路または木を復元し、その構造を再計算範囲の限定や辺集合の構成に利用できる。",
+      "unitTitle": "最短路を構造として利用する",
+      "rationale": "abc218-f は基準最短路で削除影響を限定し、abc252-e は直前辺で最短路木を構成するため、距離を超えて最短路構造を利用する共通成果がある。"
+    },
+    {
+      "slug": "range-aggregate-under-updates",
+      "domain": "data-structures-algorithm-design",
+      "candidateOutcomeId": "outcome-candidate-range-aggregate-under-updates",
+      "problemIds": ["abc223-f", "abc256-f"],
+      "tagName": "更新可能な区間集約の設計",
+      "tagDefinition": "問い合わせ条件を結合可能な集約量へ分解し、Segment TreeやFenwick Treeで更新と区間・接頭辞計算を両立する技法。",
+      "outcomeStatement": "問い合わせ式や判定条件を更新可能な複数の集約量へ分解し、適切なデータ構造を選択できる。",
+      "unitTitle": "問い合わせを更新可能な集約量へ分解する",
+      "rationale": "abc223-f は総和と最小接頭辞和、abc256-f は係数別の三つの接頭辞和へ分解し、更新可能な集約量を設計する共通成果を持つ。"
+    }
+  ]
+}

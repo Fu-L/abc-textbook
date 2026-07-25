@@ -1,0 +1,651 @@
+{
+  "schemaVersion": "1.0.0",
+  "evidenceId": "preview-initial-v1-taxonomy-integration",
+  "previewId": "initial-v1",
+  "status": "evidence_frozen",
+  "taxonomyDigest": "445360ca2af20f0e4df97fcd023addbda7b22095077f68af52c919bffe57e620",
+  "inventoryComponentDigest": "8ebb3b324b1972d98321b1249d6f387acbb54757ed8460638e6a6747eb150da7",
+  "classificationsDigest": "11b17a24d6822e5299905170f0f63ddccae874c5098701d2d46dbadecab958f2",
+  "proposalDigest": "f3a14c96d975d6c65be539dece43e3d14461f52c060e0d73471646df2f8d9ab0",
+  "finalDecisionTask": "T159",
+  "canonicalMaterializationAllowed": false,
+  "candidates": [
+    {
+      "previewEntityId": "provisional-tag-multiplicative-order-counting",
+      "previewEntityKind": "tag",
+      "affectedProblemIds": ["abc212-g", "abc222-g"],
+      "rationale": "abc212-g と abc222-g は見かけ上の対象が異なるが、乗法的な条件を指数または位数へ写して合同式を扱う共通成果を持つ。",
+      "evidenceIds": [
+        "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+        "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+        "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+        "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+        "classification-abc212-g",
+        "classification-abc222-g"
+      ],
+      "affectedSurfaces": [
+        "staging/previews/initial-v1/taxonomy/groups/mathematics-combinatorics.json",
+        "docs/work-manifests/initial/us2/preview-content/mathematics-combinatorics/"
+      ],
+      "actionAssessments": [
+        {
+          "action": "promote",
+          "criterion": "全Inventoryでも定義・成果・前提が独立した再利用可能なentityとして維持される。",
+          "evidenceRequiredAtT159": ["full-inventory-comparison", "representative-problem-coverage"]
+        },
+        {
+          "action": "merge",
+          "criterion": "全Inventoryで別候補の定義・成果・前提に包含され、独立entityでは重複になる。",
+          "evidenceRequiredAtT159": [
+            "equivalence-or-containment-proof",
+            "alias-and-redirect-impact"
+          ]
+        },
+        {
+          "action": "split",
+          "criterion": "全Inventoryで複数の独立成果へ分かれ、各分割先に代表Problemと前提根拠がある。",
+          "evidenceRequiredAtT159": [
+            "complete-problem-reclassification",
+            "per-target-representatives"
+          ]
+        },
+        {
+          "action": "retire",
+          "criterion": "全Inventoryでは再利用可能な典型ではなく、ad-hocまたは他成果の一部に留まる。",
+          "evidenceRequiredAtT159": ["retirement-rationale", "affected-problem-reassignment"]
+        }
+      ],
+      "provisionalRecommendation": "promote",
+      "finalDecision": null,
+      "finalEntityIds": [],
+      "reviewPolicy": {
+        "requiredMode": "third_party",
+        "riskReasons": ["major_classification_change"]
+      }
+    },
+    {
+      "previewEntityId": "outcome-provisional-multiplicative-order-counting",
+      "previewEntityKind": "outcome",
+      "affectedProblemIds": ["abc212-g", "abc222-g"],
+      "rationale": "abc212-g と abc222-g は見かけ上の対象が異なるが、乗法的な条件を指数または位数へ写して合同式を扱う共通成果を持つ。",
+      "evidenceIds": [
+        "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+        "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+        "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+        "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+        "classification-abc212-g",
+        "classification-abc222-g"
+      ],
+      "affectedSurfaces": [
+        "staging/previews/initial-v1/taxonomy/groups/mathematics-combinatorics.json",
+        "docs/work-manifests/initial/us2/preview-content/mathematics-combinatorics/"
+      ],
+      "actionAssessments": [
+        {
+          "action": "promote",
+          "criterion": "全Inventoryでも定義・成果・前提が独立した再利用可能なentityとして維持される。",
+          "evidenceRequiredAtT159": ["full-inventory-comparison", "representative-problem-coverage"]
+        },
+        {
+          "action": "merge",
+          "criterion": "全Inventoryで別候補の定義・成果・前提に包含され、独立entityでは重複になる。",
+          "evidenceRequiredAtT159": [
+            "equivalence-or-containment-proof",
+            "alias-and-redirect-impact"
+          ]
+        },
+        {
+          "action": "split",
+          "criterion": "全Inventoryで複数の独立成果へ分かれ、各分割先に代表Problemと前提根拠がある。",
+          "evidenceRequiredAtT159": [
+            "complete-problem-reclassification",
+            "per-target-representatives"
+          ]
+        },
+        {
+          "action": "retire",
+          "criterion": "全Inventoryでは再利用可能な典型ではなく、ad-hocまたは他成果の一部に留まる。",
+          "evidenceRequiredAtT159": ["retirement-rationale", "affected-problem-reassignment"]
+        }
+      ],
+      "provisionalRecommendation": "promote",
+      "finalDecision": null,
+      "finalEntityIds": [],
+      "reviewPolicy": {
+        "requiredMode": "third_party",
+        "riskReasons": ["major_classification_change"]
+      }
+    },
+    {
+      "previewEntityId": "provisional-unit-multiplicative-order-counting",
+      "previewEntityKind": "unit",
+      "affectedProblemIds": ["abc212-g", "abc222-g"],
+      "rationale": "abc212-g と abc222-g は見かけ上の対象が異なるが、乗法的な条件を指数または位数へ写して合同式を扱う共通成果を持つ。",
+      "evidenceIds": [
+        "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+        "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+        "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+        "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+        "classification-abc212-g",
+        "classification-abc222-g"
+      ],
+      "affectedSurfaces": [
+        "staging/previews/initial-v1/taxonomy/groups/mathematics-combinatorics.json",
+        "docs/work-manifests/initial/us2/preview-content/mathematics-combinatorics/"
+      ],
+      "actionAssessments": [
+        {
+          "action": "promote",
+          "criterion": "全Inventoryでも定義・成果・前提が独立した再利用可能なentityとして維持される。",
+          "evidenceRequiredAtT159": ["full-inventory-comparison", "representative-problem-coverage"]
+        },
+        {
+          "action": "merge",
+          "criterion": "全Inventoryで別候補の定義・成果・前提に包含され、独立entityでは重複になる。",
+          "evidenceRequiredAtT159": [
+            "equivalence-or-containment-proof",
+            "alias-and-redirect-impact"
+          ]
+        },
+        {
+          "action": "split",
+          "criterion": "全Inventoryで複数の独立成果へ分かれ、各分割先に代表Problemと前提根拠がある。",
+          "evidenceRequiredAtT159": [
+            "complete-problem-reclassification",
+            "per-target-representatives"
+          ]
+        },
+        {
+          "action": "retire",
+          "criterion": "全Inventoryでは再利用可能な典型ではなく、ad-hocまたは他成果の一部に留まる。",
+          "evidenceRequiredAtT159": ["retirement-rationale", "affected-problem-reassignment"]
+        }
+      ],
+      "provisionalRecommendation": "promote",
+      "finalDecision": null,
+      "finalEntityIds": [],
+      "reviewPolicy": {
+        "requiredMode": "third_party",
+        "riskReasons": ["major_classification_change"]
+      }
+    },
+    {
+      "previewEntityId": "provisional-tag-compressed-dp-state",
+      "previewEntityKind": "tag",
+      "affectedProblemIds": ["abc215-e", "abc232-e"],
+      "rationale": "abc215-e の使用済み集合・末尾状態と abc232-e の目標行列との一致状態は、将来の遷移に必要な情報だけを残す同じ設計原理で説明できる。",
+      "evidenceIds": [
+        "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+        "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+        "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+        "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d",
+        "classification-abc215-e",
+        "classification-abc232-e"
+      ],
+      "affectedSurfaces": [
+        "staging/previews/initial-v1/taxonomy/groups/dynamic-programming.json",
+        "docs/work-manifests/initial/us2/preview-content/dynamic-programming/"
+      ],
+      "actionAssessments": [
+        {
+          "action": "promote",
+          "criterion": "全Inventoryでも定義・成果・前提が独立した再利用可能なentityとして維持される。",
+          "evidenceRequiredAtT159": ["full-inventory-comparison", "representative-problem-coverage"]
+        },
+        {
+          "action": "merge",
+          "criterion": "全Inventoryで別候補の定義・成果・前提に包含され、独立entityでは重複になる。",
+          "evidenceRequiredAtT159": [
+            "equivalence-or-containment-proof",
+            "alias-and-redirect-impact"
+          ]
+        },
+        {
+          "action": "split",
+          "criterion": "全Inventoryで複数の独立成果へ分かれ、各分割先に代表Problemと前提根拠がある。",
+          "evidenceRequiredAtT159": [
+            "complete-problem-reclassification",
+            "per-target-representatives"
+          ]
+        },
+        {
+          "action": "retire",
+          "criterion": "全Inventoryでは再利用可能な典型ではなく、ad-hocまたは他成果の一部に留まる。",
+          "evidenceRequiredAtT159": ["retirement-rationale", "affected-problem-reassignment"]
+        }
+      ],
+      "provisionalRecommendation": "promote",
+      "finalDecision": null,
+      "finalEntityIds": [],
+      "reviewPolicy": {
+        "requiredMode": "third_party",
+        "riskReasons": ["major_classification_change"]
+      }
+    },
+    {
+      "previewEntityId": "outcome-provisional-compressed-dp-state",
+      "previewEntityKind": "outcome",
+      "affectedProblemIds": ["abc215-e", "abc232-e"],
+      "rationale": "abc215-e の使用済み集合・末尾状態と abc232-e の目標行列との一致状態は、将来の遷移に必要な情報だけを残す同じ設計原理で説明できる。",
+      "evidenceIds": [
+        "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+        "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+        "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+        "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d",
+        "classification-abc215-e",
+        "classification-abc232-e"
+      ],
+      "affectedSurfaces": [
+        "staging/previews/initial-v1/taxonomy/groups/dynamic-programming.json",
+        "docs/work-manifests/initial/us2/preview-content/dynamic-programming/"
+      ],
+      "actionAssessments": [
+        {
+          "action": "promote",
+          "criterion": "全Inventoryでも定義・成果・前提が独立した再利用可能なentityとして維持される。",
+          "evidenceRequiredAtT159": ["full-inventory-comparison", "representative-problem-coverage"]
+        },
+        {
+          "action": "merge",
+          "criterion": "全Inventoryで別候補の定義・成果・前提に包含され、独立entityでは重複になる。",
+          "evidenceRequiredAtT159": [
+            "equivalence-or-containment-proof",
+            "alias-and-redirect-impact"
+          ]
+        },
+        {
+          "action": "split",
+          "criterion": "全Inventoryで複数の独立成果へ分かれ、各分割先に代表Problemと前提根拠がある。",
+          "evidenceRequiredAtT159": [
+            "complete-problem-reclassification",
+            "per-target-representatives"
+          ]
+        },
+        {
+          "action": "retire",
+          "criterion": "全Inventoryでは再利用可能な典型ではなく、ad-hocまたは他成果の一部に留まる。",
+          "evidenceRequiredAtT159": ["retirement-rationale", "affected-problem-reassignment"]
+        }
+      ],
+      "provisionalRecommendation": "promote",
+      "finalDecision": null,
+      "finalEntityIds": [],
+      "reviewPolicy": {
+        "requiredMode": "third_party",
+        "riskReasons": ["major_classification_change"]
+      }
+    },
+    {
+      "previewEntityId": "provisional-unit-compressed-dp-state",
+      "previewEntityKind": "unit",
+      "affectedProblemIds": ["abc215-e", "abc232-e"],
+      "rationale": "abc215-e の使用済み集合・末尾状態と abc232-e の目標行列との一致状態は、将来の遷移に必要な情報だけを残す同じ設計原理で説明できる。",
+      "evidenceIds": [
+        "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+        "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+        "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+        "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d",
+        "classification-abc215-e",
+        "classification-abc232-e"
+      ],
+      "affectedSurfaces": [
+        "staging/previews/initial-v1/taxonomy/groups/dynamic-programming.json",
+        "docs/work-manifests/initial/us2/preview-content/dynamic-programming/"
+      ],
+      "actionAssessments": [
+        {
+          "action": "promote",
+          "criterion": "全Inventoryでも定義・成果・前提が独立した再利用可能なentityとして維持される。",
+          "evidenceRequiredAtT159": ["full-inventory-comparison", "representative-problem-coverage"]
+        },
+        {
+          "action": "merge",
+          "criterion": "全Inventoryで別候補の定義・成果・前提に包含され、独立entityでは重複になる。",
+          "evidenceRequiredAtT159": [
+            "equivalence-or-containment-proof",
+            "alias-and-redirect-impact"
+          ]
+        },
+        {
+          "action": "split",
+          "criterion": "全Inventoryで複数の独立成果へ分かれ、各分割先に代表Problemと前提根拠がある。",
+          "evidenceRequiredAtT159": [
+            "complete-problem-reclassification",
+            "per-target-representatives"
+          ]
+        },
+        {
+          "action": "retire",
+          "criterion": "全Inventoryでは再利用可能な典型ではなく、ad-hocまたは他成果の一部に留まる。",
+          "evidenceRequiredAtT159": ["retirement-rationale", "affected-problem-reassignment"]
+        }
+      ],
+      "provisionalRecommendation": "promote",
+      "finalDecision": null,
+      "finalEntityIds": [],
+      "reviewPolicy": {
+        "requiredMode": "third_party",
+        "riskReasons": ["major_classification_change"]
+      }
+    },
+    {
+      "previewEntityId": "provisional-tag-shortest-path-structure",
+      "previewEntityKind": "tag",
+      "affectedProblemIds": ["abc218-f", "abc252-e"],
+      "rationale": "abc218-f は基準最短路で削除影響を限定し、abc252-e は直前辺で最短路木を構成するため、距離を超えて最短路構造を利用する共通成果がある。",
+      "evidenceIds": [
+        "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+        "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+        "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+        "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+        "classification-abc218-f",
+        "classification-abc252-e"
+      ],
+      "affectedSurfaces": [
+        "staging/previews/initial-v1/taxonomy/groups/graph-search.json",
+        "docs/work-manifests/initial/us2/preview-content/graph-search/"
+      ],
+      "actionAssessments": [
+        {
+          "action": "promote",
+          "criterion": "全Inventoryでも定義・成果・前提が独立した再利用可能なentityとして維持される。",
+          "evidenceRequiredAtT159": ["full-inventory-comparison", "representative-problem-coverage"]
+        },
+        {
+          "action": "merge",
+          "criterion": "全Inventoryで別候補の定義・成果・前提に包含され、独立entityでは重複になる。",
+          "evidenceRequiredAtT159": [
+            "equivalence-or-containment-proof",
+            "alias-and-redirect-impact"
+          ]
+        },
+        {
+          "action": "split",
+          "criterion": "全Inventoryで複数の独立成果へ分かれ、各分割先に代表Problemと前提根拠がある。",
+          "evidenceRequiredAtT159": [
+            "complete-problem-reclassification",
+            "per-target-representatives"
+          ]
+        },
+        {
+          "action": "retire",
+          "criterion": "全Inventoryでは再利用可能な典型ではなく、ad-hocまたは他成果の一部に留まる。",
+          "evidenceRequiredAtT159": ["retirement-rationale", "affected-problem-reassignment"]
+        }
+      ],
+      "provisionalRecommendation": "promote",
+      "finalDecision": null,
+      "finalEntityIds": [],
+      "reviewPolicy": {
+        "requiredMode": "third_party",
+        "riskReasons": ["major_classification_change"]
+      }
+    },
+    {
+      "previewEntityId": "outcome-provisional-shortest-path-structure",
+      "previewEntityKind": "outcome",
+      "affectedProblemIds": ["abc218-f", "abc252-e"],
+      "rationale": "abc218-f は基準最短路で削除影響を限定し、abc252-e は直前辺で最短路木を構成するため、距離を超えて最短路構造を利用する共通成果がある。",
+      "evidenceIds": [
+        "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+        "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+        "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+        "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+        "classification-abc218-f",
+        "classification-abc252-e"
+      ],
+      "affectedSurfaces": [
+        "staging/previews/initial-v1/taxonomy/groups/graph-search.json",
+        "docs/work-manifests/initial/us2/preview-content/graph-search/"
+      ],
+      "actionAssessments": [
+        {
+          "action": "promote",
+          "criterion": "全Inventoryでも定義・成果・前提が独立した再利用可能なentityとして維持される。",
+          "evidenceRequiredAtT159": ["full-inventory-comparison", "representative-problem-coverage"]
+        },
+        {
+          "action": "merge",
+          "criterion": "全Inventoryで別候補の定義・成果・前提に包含され、独立entityでは重複になる。",
+          "evidenceRequiredAtT159": [
+            "equivalence-or-containment-proof",
+            "alias-and-redirect-impact"
+          ]
+        },
+        {
+          "action": "split",
+          "criterion": "全Inventoryで複数の独立成果へ分かれ、各分割先に代表Problemと前提根拠がある。",
+          "evidenceRequiredAtT159": [
+            "complete-problem-reclassification",
+            "per-target-representatives"
+          ]
+        },
+        {
+          "action": "retire",
+          "criterion": "全Inventoryでは再利用可能な典型ではなく、ad-hocまたは他成果の一部に留まる。",
+          "evidenceRequiredAtT159": ["retirement-rationale", "affected-problem-reassignment"]
+        }
+      ],
+      "provisionalRecommendation": "promote",
+      "finalDecision": null,
+      "finalEntityIds": [],
+      "reviewPolicy": {
+        "requiredMode": "third_party",
+        "riskReasons": ["major_classification_change"]
+      }
+    },
+    {
+      "previewEntityId": "provisional-unit-shortest-path-structure",
+      "previewEntityKind": "unit",
+      "affectedProblemIds": ["abc218-f", "abc252-e"],
+      "rationale": "abc218-f は基準最短路で削除影響を限定し、abc252-e は直前辺で最短路木を構成するため、距離を超えて最短路構造を利用する共通成果がある。",
+      "evidenceIds": [
+        "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+        "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+        "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+        "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+        "classification-abc218-f",
+        "classification-abc252-e"
+      ],
+      "affectedSurfaces": [
+        "staging/previews/initial-v1/taxonomy/groups/graph-search.json",
+        "docs/work-manifests/initial/us2/preview-content/graph-search/"
+      ],
+      "actionAssessments": [
+        {
+          "action": "promote",
+          "criterion": "全Inventoryでも定義・成果・前提が独立した再利用可能なentityとして維持される。",
+          "evidenceRequiredAtT159": ["full-inventory-comparison", "representative-problem-coverage"]
+        },
+        {
+          "action": "merge",
+          "criterion": "全Inventoryで別候補の定義・成果・前提に包含され、独立entityでは重複になる。",
+          "evidenceRequiredAtT159": [
+            "equivalence-or-containment-proof",
+            "alias-and-redirect-impact"
+          ]
+        },
+        {
+          "action": "split",
+          "criterion": "全Inventoryで複数の独立成果へ分かれ、各分割先に代表Problemと前提根拠がある。",
+          "evidenceRequiredAtT159": [
+            "complete-problem-reclassification",
+            "per-target-representatives"
+          ]
+        },
+        {
+          "action": "retire",
+          "criterion": "全Inventoryでは再利用可能な典型ではなく、ad-hocまたは他成果の一部に留まる。",
+          "evidenceRequiredAtT159": ["retirement-rationale", "affected-problem-reassignment"]
+        }
+      ],
+      "provisionalRecommendation": "promote",
+      "finalDecision": null,
+      "finalEntityIds": [],
+      "reviewPolicy": {
+        "requiredMode": "third_party",
+        "riskReasons": ["major_classification_change"]
+      }
+    },
+    {
+      "previewEntityId": "provisional-tag-range-aggregate-under-updates",
+      "previewEntityKind": "tag",
+      "affectedProblemIds": ["abc223-f", "abc256-f"],
+      "rationale": "abc223-f は総和と最小接頭辞和、abc256-f は係数別の三つの接頭辞和へ分解し、更新可能な集約量を設計する共通成果を持つ。",
+      "evidenceIds": [
+        "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+        "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+        "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+        "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965",
+        "classification-abc223-f",
+        "classification-abc256-f"
+      ],
+      "affectedSurfaces": [
+        "staging/previews/initial-v1/taxonomy/groups/data-structures-algorithm-design.json",
+        "docs/work-manifests/initial/us2/preview-content/data-structures-algorithm-design/"
+      ],
+      "actionAssessments": [
+        {
+          "action": "promote",
+          "criterion": "全Inventoryでも定義・成果・前提が独立した再利用可能なentityとして維持される。",
+          "evidenceRequiredAtT159": ["full-inventory-comparison", "representative-problem-coverage"]
+        },
+        {
+          "action": "merge",
+          "criterion": "全Inventoryで別候補の定義・成果・前提に包含され、独立entityでは重複になる。",
+          "evidenceRequiredAtT159": [
+            "equivalence-or-containment-proof",
+            "alias-and-redirect-impact"
+          ]
+        },
+        {
+          "action": "split",
+          "criterion": "全Inventoryで複数の独立成果へ分かれ、各分割先に代表Problemと前提根拠がある。",
+          "evidenceRequiredAtT159": [
+            "complete-problem-reclassification",
+            "per-target-representatives"
+          ]
+        },
+        {
+          "action": "retire",
+          "criterion": "全Inventoryでは再利用可能な典型ではなく、ad-hocまたは他成果の一部に留まる。",
+          "evidenceRequiredAtT159": ["retirement-rationale", "affected-problem-reassignment"]
+        }
+      ],
+      "provisionalRecommendation": "promote",
+      "finalDecision": null,
+      "finalEntityIds": [],
+      "reviewPolicy": {
+        "requiredMode": "third_party",
+        "riskReasons": ["major_classification_change"]
+      }
+    },
+    {
+      "previewEntityId": "outcome-provisional-range-aggregate-under-updates",
+      "previewEntityKind": "outcome",
+      "affectedProblemIds": ["abc223-f", "abc256-f"],
+      "rationale": "abc223-f は総和と最小接頭辞和、abc256-f は係数別の三つの接頭辞和へ分解し、更新可能な集約量を設計する共通成果を持つ。",
+      "evidenceIds": [
+        "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+        "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+        "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+        "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965",
+        "classification-abc223-f",
+        "classification-abc256-f"
+      ],
+      "affectedSurfaces": [
+        "staging/previews/initial-v1/taxonomy/groups/data-structures-algorithm-design.json",
+        "docs/work-manifests/initial/us2/preview-content/data-structures-algorithm-design/"
+      ],
+      "actionAssessments": [
+        {
+          "action": "promote",
+          "criterion": "全Inventoryでも定義・成果・前提が独立した再利用可能なentityとして維持される。",
+          "evidenceRequiredAtT159": ["full-inventory-comparison", "representative-problem-coverage"]
+        },
+        {
+          "action": "merge",
+          "criterion": "全Inventoryで別候補の定義・成果・前提に包含され、独立entityでは重複になる。",
+          "evidenceRequiredAtT159": [
+            "equivalence-or-containment-proof",
+            "alias-and-redirect-impact"
+          ]
+        },
+        {
+          "action": "split",
+          "criterion": "全Inventoryで複数の独立成果へ分かれ、各分割先に代表Problemと前提根拠がある。",
+          "evidenceRequiredAtT159": [
+            "complete-problem-reclassification",
+            "per-target-representatives"
+          ]
+        },
+        {
+          "action": "retire",
+          "criterion": "全Inventoryでは再利用可能な典型ではなく、ad-hocまたは他成果の一部に留まる。",
+          "evidenceRequiredAtT159": ["retirement-rationale", "affected-problem-reassignment"]
+        }
+      ],
+      "provisionalRecommendation": "promote",
+      "finalDecision": null,
+      "finalEntityIds": [],
+      "reviewPolicy": {
+        "requiredMode": "third_party",
+        "riskReasons": ["major_classification_change"]
+      }
+    },
+    {
+      "previewEntityId": "provisional-unit-range-aggregate-under-updates",
+      "previewEntityKind": "unit",
+      "affectedProblemIds": ["abc223-f", "abc256-f"],
+      "rationale": "abc223-f は総和と最小接頭辞和、abc256-f は係数別の三つの接頭辞和へ分解し、更新可能な集約量を設計する共通成果を持つ。",
+      "evidenceIds": [
+        "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+        "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+        "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+        "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965",
+        "classification-abc223-f",
+        "classification-abc256-f"
+      ],
+      "affectedSurfaces": [
+        "staging/previews/initial-v1/taxonomy/groups/data-structures-algorithm-design.json",
+        "docs/work-manifests/initial/us2/preview-content/data-structures-algorithm-design/"
+      ],
+      "actionAssessments": [
+        {
+          "action": "promote",
+          "criterion": "全Inventoryでも定義・成果・前提が独立した再利用可能なentityとして維持される。",
+          "evidenceRequiredAtT159": ["full-inventory-comparison", "representative-problem-coverage"]
+        },
+        {
+          "action": "merge",
+          "criterion": "全Inventoryで別候補の定義・成果・前提に包含され、独立entityでは重複になる。",
+          "evidenceRequiredAtT159": [
+            "equivalence-or-containment-proof",
+            "alias-and-redirect-impact"
+          ]
+        },
+        {
+          "action": "split",
+          "criterion": "全Inventoryで複数の独立成果へ分かれ、各分割先に代表Problemと前提根拠がある。",
+          "evidenceRequiredAtT159": [
+            "complete-problem-reclassification",
+            "per-target-representatives"
+          ]
+        },
+        {
+          "action": "retire",
+          "criterion": "全Inventoryでは再利用可能な典型ではなく、ad-hocまたは他成果の一部に留まる。",
+          "evidenceRequiredAtT159": ["retirement-rationale", "affected-problem-reassignment"]
+        }
+      ],
+      "provisionalRecommendation": "promote",
+      "finalDecision": null,
+      "finalEntityIds": [],
+      "reviewPolicy": {
+        "requiredMode": "third_party",
+        "riskReasons": ["major_classification_change"]
+      }
+    }
+  ],
+  "integrationDigest": "128ace0a2f211dbf02744d961944eabcd221b723d9bc6deeba72a4a29d5532f9"
+}

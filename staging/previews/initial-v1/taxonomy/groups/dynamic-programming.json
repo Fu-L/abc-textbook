@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "previewId": "initial-v1",
+  "domain": "dynamic-programming",
+  "candidateOutcomeId": "outcome-candidate-compressed-dp-state",
+  "problemIds": ["abc215-e", "abc232-e"],
+  "sourceRevisionIds": [
+    "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+    "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+    "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+    "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+  ],
+  "tag": {
+    "id": "provisional-tag-compressed-dp-state",
+    "name": "同値性によるDP状態圧縮",
+    "definition": "将来の遷移と答えに必要な情報が同じ履歴や位置を同値類へまとめ、状態数を削減する動的計画法。",
+    "prerequisiteTagIds": [],
+    "outcomeIds": ["outcome-provisional-compressed-dp-state"],
+    "representativeProblemIds": ["abc215-e", "abc232-e"]
+  },
+  "outcome": {
+    "id": "outcome-provisional-compressed-dp-state",
+    "statement": "履歴や位置の同値性を見つけ、将来の遷移を決める十分な最小状態として動的計画法を設計できる。",
+    "prerequisiteOutcomeIds": [],
+    "problemIds": ["abc215-e", "abc232-e"]
+  },
+  "unit": {
+    "id": "provisional-unit-compressed-dp-state",
+    "title": "同値類からDP状態を設計する",
+    "prerequisiteUnitIds": [],
+    "tagIds": ["provisional-tag-compressed-dp-state"],
+    "outcomeIds": ["outcome-provisional-compressed-dp-state"],
+    "problemIds": ["abc215-e", "abc232-e"],
+    "sourceRevisionIds": [
+      "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+      "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+      "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+      "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+    ]
+  },
+  "placements": [
+    {
+      "problemId": "abc215-e",
+      "tagIds": ["provisional-tag-compressed-dp-state"],
+      "outcomeIds": ["outcome-provisional-compressed-dp-state"],
+      "unitIds": ["provisional-unit-compressed-dp-state"],
+      "classificationRationale": "出場済み文字集合と末尾文字を状態に持つ部分列 DP により、同じ文字の選手が連続する制約を表現する公式解法である。",
+      "sourceRevisionIds": [
+        "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+        "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
+      ]
+    },
+    {
+      "problemId": "abc232-e",
+      "tagIds": ["provisional-tag-compressed-dp-state"],
+      "outcomeIds": ["outcome-provisional-compressed-dp-state"],
+      "unitIds": ["provisional-unit-compressed-dp-state"],
+      "classificationRationale": "現在位置の行・列が目標と一致するかだけで盤面を 4 状態に商約し、K 手の遷移を数える公式 DP である。",
+      "sourceRevisionIds": [
+        "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+        "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+      ]
+    }
+  ],
+  "rationale": "abc215-e の使用済み集合・末尾状態と abc232-e の目標行列との一致状態は、将来の遷移に必要な情報だけを残す同じ設計原理で説明できる。",
+  "groupDigest": "e1d772fbd9d42ee1ce6b87d24a9c119e48d93f3c1a083019a6d6045bfc169c2b"
+}

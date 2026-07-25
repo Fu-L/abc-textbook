@@ -48,6 +48,8 @@
     "preview:apply-candidate-classifications": "tsx scripts/corpus/apply-candidate-classifications.ts",
     "preview:build-candidate-pool": "tsx scripts/corpus/build-candidate-pool.ts",
     "preview:freeze-cohort": "tsx scripts/corpus/freeze-cohort.ts",
+    "preview:taxonomy": "tsx scripts/corpus/freeze-provisional-taxonomy.ts --check",
+    "preview:taxonomy:write": "tsx scripts/corpus/freeze-provisional-taxonomy.ts --write",
     "corpus:verify": "tsx scripts/corpus/verify-inventory.ts --check",
     "corpus:verify:write": "tsx scripts/corpus/verify-inventory.ts --write",
     "test:e2e": "npm run build && npm run test:e2e:built --",

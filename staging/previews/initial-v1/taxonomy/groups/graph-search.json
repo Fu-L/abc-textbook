@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "previewId": "initial-v1",
+  "domain": "graph-search",
+  "candidateOutcomeId": "outcome-candidate-shortest-path-structure",
+  "problemIds": ["abc218-f", "abc252-e"],
+  "sourceRevisionIds": [
+    "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+    "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+    "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+    "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"
+  ],
+  "tag": {
+    "id": "provisional-tag-shortest-path-structure",
+    "name": "最短路の構造復元と再利用",
+    "definition": "最短距離だけでなく直前辺・経路・木を復元し、変更影響の限定や構成解へ利用する技法。",
+    "prerequisiteTagIds": [],
+    "outcomeIds": ["outcome-provisional-shortest-path-structure"],
+    "representativeProblemIds": ["abc218-f", "abc252-e"]
+  },
+  "outcome": {
+    "id": "outcome-provisional-shortest-path-structure",
+    "statement": "最短路の経路または木を復元し、その構造を再計算範囲の限定や辺集合の構成に利用できる。",
+    "prerequisiteOutcomeIds": [],
+    "problemIds": ["abc218-f", "abc252-e"]
+  },
+  "unit": {
+    "id": "provisional-unit-shortest-path-structure",
+    "title": "最短路を構造として利用する",
+    "prerequisiteUnitIds": [],
+    "tagIds": ["provisional-tag-shortest-path-structure"],
+    "outcomeIds": ["outcome-provisional-shortest-path-structure"],
+    "problemIds": ["abc218-f", "abc252-e"],
+    "sourceRevisionIds": [
+      "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+      "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+      "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+      "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"
+    ]
+  },
+  "placements": [
+    {
+      "problemId": "abc218-f",
+      "tagIds": ["provisional-tag-shortest-path-structure"],
+      "outcomeIds": ["outcome-provisional-shortest-path-structure"],
+      "unitIds": ["provisional-unit-shortest-path-structure"],
+      "classificationRationale": "有向非重みグラフの基準最短路を復元し、その経路上の辺だけを削除ごとに BFS し直す公式解法である。",
+      "sourceRevisionIds": [
+        "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+        "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"
+      ]
+    },
+    {
+      "problemId": "abc252-e",
+      "tagIds": ["provisional-tag-shortest-path-structure"],
+      "outcomeIds": ["outcome-provisional-shortest-path-structure"],
+      "unitIds": ["provisional-unit-shortest-path-structure"],
+      "classificationRationale": "頂点 1 からの Dijkstra で各頂点の距離を確定させた直前辺を採用し、最短路木を構成する公式解法である。",
+      "sourceRevisionIds": [
+        "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+        "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"
+      ]
+    }
+  ],
+  "rationale": "abc218-f は基準最短路で削除影響を限定し、abc252-e は直前辺で最短路木を構成するため、距離を超えて最短路構造を利用する共通成果がある。",
+  "groupDigest": "d26441b729cda8afcf103c46648cba6b321d39c5ebfbec62789f0e7b9ffac1bf"
+}
