@@ -1,0 +1,20 @@
+{
+  "id": "abc284-ex",
+  "contestId": "abc284",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc284_h",
+  "title": "Count Unlabeled Graphs",
+  "officialUrl": "https://atcoder.jp/contests/abc284/tasks/abc284_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 30; 10^8 \\leq P \\leq 10^9; P is a prime.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc284-ex-problem-62d52e6971d664c1fb7b8660b662c70437b217e7e263ea460b197a5a07453028",
+    "source-abc284-editorial-5481-9da01d2a70042d0bd7a43951bbdc27a4e2a956c0b0fe0efa9a7e4d96bfa4a14d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

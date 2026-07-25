@@ -1,0 +1,20 @@
+{
+  "id": "abc399-e",
+  "contestId": "abc399",
+  "slotLabel": "E",
+  "officialTaskId": "abc399_e",
+  "title": "Replace",
+  "officialUrl": "https://atcoder.jp/contests/abc399/tasks/abc399_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 2\\times 10^5; N is an integer.; Each of S and T is a string of length N, consisting of lowercase English letters.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2",
+    "source-abc399-editorial-12564-6e1510563de5279b95e284c4e0c13c4772bcba726ff97494a39c00e3e1e5b0f4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

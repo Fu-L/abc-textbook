@@ -1,0 +1,20 @@
+{
+  "id": "abc377-f",
+  "contestId": "abc377",
+  "slotLabel": "F",
+  "officialTaskId": "abc377_f",
+  "title": "Avoid Queen Attack",
+  "officialUrl": "https://atcoder.jp/contests/abc377/tasks/abc377_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq10^9; 1\\leq M\\leq10^3; 1\\leq a_k\\leq N,1\\leq b_k\\leq N\\ (1\\leq k\\leq M); (a_k,b_k)\\neq(a_l,b_l)\\ (1\\leq k\\lt l\\leq M); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc377-f-problem-0783e8d2bcd70768494a36d61bb0dc1ea442c8f69fafc99c889c5d04e78fcf0c",
+    "source-abc377-editorial-11246-f29d5b7dfcda9fe5a743e462d4bb6d1048af559b76f7ebedbd5b7dd2dcd4694a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc340-f",
+  "contestId": "abc340",
+  "slotLabel": "F",
+  "officialTaskId": "abc340_f",
+  "title": "S = 1",
+  "officialUrl": "https://atcoder.jp/contests/abc340/tasks/abc340_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: -10^{17} \\leq X, Y \\leq 10^{17}; (X, Y) \\neq (0, 0); X and Y are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd",
+    "source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

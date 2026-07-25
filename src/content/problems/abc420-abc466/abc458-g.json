@@ -1,0 +1,20 @@
+{
+  "id": "abc458-g",
+  "contestId": "abc458",
+  "slotLabel": "G",
+  "officialTaskId": "abc458_g",
+  "title": "Children Yearn for the Evil Kindergarten",
+  "officialUrl": "https://atcoder.jp/contests/abc458/tasks/abc458_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 3 \\times 10^5; 1 \\leq N \\leq 3 \\times 10^5; 1 \\leq A_i \\leq 10^6; 1 \\leq B_i \\leq 10^6; 1 \\leq C_i \\leq 10^6; The sum of N over all test cases is at most 3 \\times 10^5.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc458-g-problem-daae3589eb6dc548e2acfaefe7b95b81cff1f2ffe69465dc271f2fccdfe38cae",
+    "source-abc458-editorial-20460-e7a773e046a413de8fde9c92430ead7c8be1da0c945dda54fa45a64f9d7646e0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

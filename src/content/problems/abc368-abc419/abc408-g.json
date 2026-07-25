@@ -1,0 +1,20 @@
+{
+  "id": "abc408-g",
+  "contestId": "abc408",
+  "slotLabel": "G",
+  "officialTaskId": "abc408_g",
+  "title": "A/B < p/q < C/D",
+  "officialUrl": "https://atcoder.jp/contests/abc408/tasks/abc408_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 2\\times 10^5; 1\\le A,B,C,D\\le 10^{18}; \\displaystyle\\frac AB < \\frac CD; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c",
+    "source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc346-e",
+  "sourceRevisionIds": [
+    "source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec",
+    "source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb"
+  ],
+  "coreMethod": "abc346-e「Paint」では、上書き paint query を逆順に処理し、まだ確定していない行・列の交点数だけを色別に加算する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "逆順で最初に出会う paint が各 cell へ最後に適用された操作であり、未確定な反対軸との交点を一度だけ数える。",
+    "Paint 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["上書き操作の逆順処理"],
+  "implementationConcerns": ["同じ行・列の二回目以降を無視し、最後に未確定 cell を色 0 へ加える。"],
+  "outcomeCandidates": [
+    "Paint 型の問題に対し、上書き操作の逆順処理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

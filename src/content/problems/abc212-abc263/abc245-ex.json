@@ -1,0 +1,20 @@
+{
+  "id": "abc245-ex",
+  "contestId": "abc245",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc245_h",
+  "title": "Product Modulo 2",
+  "officialUrl": "https://atcoder.jp/contests/abc245/tasks/abc245_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq 10^9; 0 \\leq N \\lt M \\leq 10^{12}; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760",
+    "source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

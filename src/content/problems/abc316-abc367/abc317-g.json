@@ -1,0 +1,20 @@
+{
+  "id": "abc317-g",
+  "contestId": "abc317",
+  "slotLabel": "G",
+  "officialTaskId": "abc317_g",
+  "title": "Rearranging",
+  "officialUrl": "https://atcoder.jp/contests/abc317/tasks/abc317_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,M \\leq 100; 1 \\leq A_{i,j} \\leq N; All input values are integers.; The NM numbers A_{1,1},\\ldots,A_{N,M} contain exactly M occurrences of each of 1,\\ldots,N.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a",
+    "source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

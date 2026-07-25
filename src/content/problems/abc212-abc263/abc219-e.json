@@ -1,0 +1,20 @@
+{
+  "id": "abc219-e",
+  "contestId": "abc219",
+  "slotLabel": "E",
+  "officialTaskId": "abc219_e",
+  "title": "Moat",
+  "officialUrl": "https://atcoder.jp/contests/abc219/tasks/abc219_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: A_{i, j} \\in \\lbrace 0, 1\\rbrace; There is at least one pair (i, j) such that A_{i, j} = 1.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b",
+    "source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

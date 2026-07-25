@@ -1,0 +1,22 @@
+{
+  "problemId": "abc332-f",
+  "sourceRevisionIds": [
+    "source-abc332-editorial-7890-b6db5da6f35bcbe75e94efe972aacbb1dae17b24e342dcdc8e307f8062e698fe",
+    "source-abc332-f-problem-24a1fcf4e5c5bb6779072ea00c387425b9402686d993728c49921369d0cd6fd2"
+  ],
+  "coreMethod": "abc332-f「Random Update Query」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+    "Random Update Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "条件付き期待値と確率 DP"],
+  "implementationConcerns": [
+    "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Random Update Query 型の 列の順序と prefix 状態に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

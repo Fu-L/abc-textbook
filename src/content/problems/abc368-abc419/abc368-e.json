@@ -1,0 +1,20 @@
+{
+  "id": "abc368-e",
+  "contestId": "abc368",
+  "slotLabel": "E",
+  "officialTaskId": "abc368_e",
+  "title": "Train Delay",
+  "officialUrl": "https://atcoder.jp/contests/abc368/tasks/abc368_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 2 \\leq M \\leq 2\\times 10^5; 1 \\leq A_i,B_i \\leq N; A_i \\neq B_i; 0 \\leq S_i < T_i \\leq 10^9; 1 \\leq X_1 \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc368-e-problem-a673d6063dad671766e37586e3e23d2657d837232a96ac44de45dc425b6544ed",
+    "source-abc368-editorial-10752-c1d6c5155d2d9890f4506e2f637995f79c644f04162ceeb29059e816a897901b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc303-e",
+  "contestId": "abc303",
+  "slotLabel": "E",
+  "officialTaskId": "abc303_e",
+  "title": "A Gift From the Stars",
+  "officialUrl": "https://atcoder.jp/contests/abc303/tasks/abc303_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\\leq N\\leq 2\\times 10^5; 1\\leq u_i, v_i\\leq N; The given graph is an N-vertex tree obtained by the procedure in the problem statement.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
+    "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

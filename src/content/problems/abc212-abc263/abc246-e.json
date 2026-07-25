@@ -1,0 +1,20 @@
+{
+  "id": "abc246-e",
+  "contestId": "abc246",
+  "slotLabel": "E",
+  "officialTaskId": "abc246_e",
+  "title": "Bishop 2",
+  "officialUrl": "https://atcoder.jp/contests/abc246/tasks/abc246_e",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 1500; 1 \\le A_x,A_y \\le N; 1 \\le B_x,B_y \\le N; (A_x,A_y) \\neq (B_x,B_y); S_i is a string of length N consisting of . and #.; S_{A_x,A_y}= .; S_{B_x,B_y}= .",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc246-e-problem-0e2f0bb30b88da59ba7287e7e33d67229dfb820dceb6b1c2053d6b9fce77a94e",
+    "source-abc246-editorial-3702-98ab0c26bf215624b89817acec8ece6263f72ade00b9fd1d31ad410235d80a51"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

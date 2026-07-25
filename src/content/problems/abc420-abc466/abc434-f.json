@@ -1,0 +1,21 @@
+{
+  "id": "abc434-f",
+  "contestId": "abc434",
+  "slotLabel": "F",
+  "officialTaskId": "abc434_f",
+  "title": "Concat (2nd)",
+  "officialUrl": "https://atcoder.jp/contests/abc434/tasks/abc434_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 1.5 \\times 10^5; 2 \\le N \\le 3 \\times 10^5; T,N are integers.; S_i is a string consisting of lowercase English letters with length between 1 and 10^6-1, inclusive.; For a single input, the sum of N does not exceed 3 \\times 10^5.; For a single input, the sum of |S_i| does not exceed 10^6.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc434-f-problem-3a3e08003e3179b45b06e2fc5aee175704c4918cacfd1bd966d5dbc75ed6adc9",
+    "source-abc434-editorial-14670-66bb51f94f1f13b38f028cda9f5695e6525c00591da0b0b7ffe5e2f2be4b1dfc",
+    "source-abc434-editorial-14680-3197538bd4a21389bc1fa50f82b70c602af314a82a2c8d77c1acca870b5aa256"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

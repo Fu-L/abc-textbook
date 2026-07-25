@@ -1,0 +1,20 @@
+{
+  "id": "abc314-e",
+  "contestId": "abc314",
+  "slotLabel": "E",
+  "officialTaskId": "abc314_e",
+  "title": "Roulettes",
+  "officialUrl": "https://atcoder.jp/contests/abc314/tasks/abc314_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 100; 1\\leq M\\leq 100; 1\\leq C _ i\\leq 10 ^ 4\\ (1\\leq i\\leq N); 1\\leq P _ i\\leq 100\\ (1\\leq i\\leq N); 0\\leq S _ {i,j}\\leq M\\ (1\\leq i\\leq N,1\\leq j\\leq P _ i); \\displaystyle\\sum _ {j=1}^{P _ i}S _ {i,j}\\gt0\\ (1\\leq i\\leq N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231",
+    "source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

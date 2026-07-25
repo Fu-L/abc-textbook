@@ -1,0 +1,20 @@
+{
+  "id": "abc428-e",
+  "contestId": "abc428",
+  "slotLabel": "E",
+  "officialTaskId": "abc428_e",
+  "title": "Farthest Vertex",
+  "officialUrl": "https://atcoder.jp/contests/abc428/tasks/abc428_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 5 \\times 10^5; 1 \\leq A_i \\lt B_i \\leq N; The graph given in the input is a tree.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc428-e-problem-7d929dab8a998eb78a89669be62c9bd9e4d245a200a45e26b319d527a61f76b9",
+    "source-abc428-editorial-14240-d77d5666ac1548841eaa7c0c01d828cf2fec5a26f19012a4801b34b10a69a3aa"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

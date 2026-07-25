@@ -1,0 +1,20 @@
+{
+  "id": "abc381-e",
+  "contestId": "abc381",
+  "slotLabel": "E",
+  "officialTaskId": "abc381_e",
+  "title": "11/22 Subsequence",
+  "officialUrl": "https://atcoder.jp/contests/abc381/tasks/abc381_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq Q \\leq 10^5; S is a string of length N consisting of 1, 2, and /.; 1 \\leq L \\leq R \\leq N; N, Q, L, and R are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc381-e-problem-33cedafc3567e1473c0e51edbdd900f5c65883362ce9fee2d93f8fe237eb25cc",
+    "source-abc381-editorial-11415-3458571d0da76b5f771a15322cf4692afdc4517e2b358800c44065039fe47699"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

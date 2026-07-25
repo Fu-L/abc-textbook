@@ -1,0 +1,20 @@
+{
+  "id": "abc330-e",
+  "contestId": "abc330",
+  "slotLabel": "E",
+  "officialTaskId": "abc330_e",
+  "title": "Mex and Update",
+  "officialUrl": "https://atcoder.jp/contests/abc330/tasks/abc330_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N,Q \\le 2 \\times 10^5; 0 \\le A_i \\le 10^9; 1 \\le i_k \\le N; 0 \\le x_k \\le 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc330-e-problem-c9b8f55f67731908d9b6568c81445ed2e45abb094bbce6983b56400d4f72aa57",
+    "source-abc330-editorial-7752-701993db3856eaa396d8e9b0d19710eeefa288e210731f5c6cf0074c7dfa0cd6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

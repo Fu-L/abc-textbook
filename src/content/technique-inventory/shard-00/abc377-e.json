@@ -1,0 +1,22 @@
+{
+  "problemId": "abc377-e",
+  "sourceRevisionIds": [
+    "source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038",
+    "source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6"
+  ],
+  "coreMethod": "abc377-e「Permute K times 2」では、順列を互いに素な cycle へ分解し、各頂点を cycle 長 modulo の 2^K ステップ先へ写す。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "順列の反復は所属 cycle 上の回転であり、指数を cycle 長で割った余りだけ進む写像と一致する。",
+    "Permute K times 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["順列の cycle 分解と modular exponentiation"],
+  "implementationConcerns": [
+    "2^K 自体を構成せず cycle 長を法として累乗し、cycle 内 index を 0-origin で揃える。"
+  ],
+  "outcomeCandidates": [
+    "Permute K times 2 型の問題に対し、順列の cycle 分解と modular exponentiationを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc290-e",
+  "contestId": "abc290",
+  "slotLabel": "E",
+  "officialTaskId": "abc290_e",
+  "title": "Make it Palindrome",
+  "officialUrl": "https://atcoder.jp/contests/abc290/tasks/abc290_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \\le N \\le 2 \\times 10^5; 1 \\le A_i \\le N",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc290-e-problem-f2993e9faf757adb074a9a50baa3693197face16191fcc322009939465586f81",
+    "source-abc290-editorial-5757-6c632f8df14a8932c76a1074ca29937312e8c82e561eb79d6c41d5bdd3bf6239"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

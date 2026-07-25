@@ -1,0 +1,23 @@
+{
+  "problemId": "abc457-g",
+  "sourceRevisionIds": [
+    "source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6",
+    "source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320"
+  ],
+  "coreMethod": "abc457-g「Catch All Apples」では、主解法候補として、整数の約数・剰余構造を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数の約数・剰余構造と解候補の対応を双方向に示し、列挙の漏れと重複がないことを確認する。",
+    "Catch All Apples 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係"],
+  "implementationConcerns": [
+    "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+    "状態 key と更新順序を固定し、同じ候補を二重に数えない。"
+  ],
+  "outcomeCandidates": [
+    "Catch All Apples 型の 整数の約数・剰余構造に対し、状態縮約を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc315-g",
+  "contestId": "abc315",
+  "slotLabel": "G",
+  "officialTaskId": "abc315_g",
+  "title": "Ai + Bj + Ck = X (1 <= i, j, k <= N)",
+  "officialUrl": "https://atcoder.jp/contests/abc315/tasks/abc315_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 10^6; 1 \\le A,B,C \\le 10^9; 1 \\le X \\le 3 \\times 10^{15}",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77",
+    "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc329",
+  "number": 329,
+  "title": "Ｓｋｙ Inc, Programming Contest 2023（AtCoder Beginner Contest 329）",
+  "startedAt": "2023-11-18T21:00:00+09:00",
+  "endedAt": "2023-11-18T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc329",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc329_a",
+    "abc329_b",
+    "abc329_c",
+    "abc329_d",
+    "abc329_e",
+    "abc329_f",
+    "abc329_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc329-task-list-5d3ca25694e8b4a212b14913faf34a5592b18822aafb37827b328f111a57e38c",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

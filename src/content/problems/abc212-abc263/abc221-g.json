@@ -1,0 +1,20 @@
+{
+  "id": "abc221-g",
+  "contestId": "abc221",
+  "slotLabel": "G",
+  "officialTaskId": "abc221_g",
+  "title": "Jumping sequence",
+  "officialUrl": "https://atcoder.jp/contests/abc221/tasks/abc221_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2000; \\lvert A\\rvert, \\lvert B\\rvert \\leq 3.6\\times 10^6; 1 \\leq D_i \\leq 1800; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358",
+    "source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

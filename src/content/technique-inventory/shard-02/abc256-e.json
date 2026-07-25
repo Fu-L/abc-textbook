@@ -1,0 +1,22 @@
+{
+  "problemId": "abc256-e",
+  "sourceRevisionIds": [
+    "source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648",
+    "source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"
+  ],
+  "coreMethod": "abc256-e「Takahashi's Anguish」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "遷移を続けると有限頂点上で必ず再訪が起こり、経路は前置き木と一つの閉路へ一意に分かれる。",
+    "Takahashi's Anguish 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["順列と逆写像", "関数グラフの閉路分解"],
+  "implementationConcerns": [
+    "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。"
+  ],
+  "outcomeCandidates": [
+    "Takahashi's Anguish 型の 順列の位置と値の対応に対し、関数グラフの閉路分解を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

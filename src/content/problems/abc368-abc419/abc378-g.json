@@ -1,0 +1,20 @@
+{
+  "id": "abc378-g",
+  "contestId": "abc378",
+  "slotLabel": "G",
+  "officialTaskId": "abc378_g",
+  "title": "Everlasting LIDS",
+  "officialUrl": "https://atcoder.jp/contests/abc378/tasks/abc378_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \\leq A, B; AB \\leq 120; 10^8 \\leq M \\leq 10^9; M is a prime.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc378-g-problem-0e527fbbc43a6f3092556fb9d7fbef5243aa30226a3e4c71408157867c152ca0",
+    "source-abc378-editorial-11283-7858d0b5d92f979507e886a044d07ad747c4bfb2964eb529a160bec71d3074db"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

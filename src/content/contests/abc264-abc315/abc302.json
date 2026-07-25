@@ -1,0 +1,21 @@
+{
+  "id": "abc302",
+  "number": 302,
+  "title": "TOYOTA MOTOR CORPORATION Programming Contest 2023#2 (AtCoder Beginner Contest 302)",
+  "startedAt": "2023-05-20T21:00:00+09:00",
+  "endedAt": "2023-05-20T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc302",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc302_a",
+    "abc302_b",
+    "abc302_c",
+    "abc302_d",
+    "abc302_e",
+    "abc302_f",
+    "abc302_g",
+    "abc302_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc302-task-list-a85eac1e331e07def2a9ccb025e01d8c13db7c45782459c56b6c522802cd5df4",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

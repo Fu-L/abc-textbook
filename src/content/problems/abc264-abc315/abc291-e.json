@@ -1,0 +1,20 @@
+{
+  "id": "abc291-e",
+  "contestId": "abc291",
+  "slotLabel": "E",
+  "officialTaskId": "abc291_e",
+  "title": "Find Permutation",
+  "officialUrl": "https://atcoder.jp/contests/abc291/tasks/abc291_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq M \\leq 2\\times 10^5; 1\\leq X_i,Y_i \\leq N; All values in the input are integers.; There is an A consistent with the input.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef",
+    "source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

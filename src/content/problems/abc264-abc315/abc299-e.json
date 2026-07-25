@@ -1,0 +1,20 @@
+{
+  "id": "abc299-e",
+  "contestId": "abc299",
+  "slotLabel": "E",
+  "officialTaskId": "abc299_e",
+  "title": "Nearest Black Vertex",
+  "officialUrl": "https://atcoder.jp/contests/abc299/tasks/abc299_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2000; N-1 \\leq M \\leq \\min\\lbrace N(N-1)/2, 2000 \\rbrace; 1 \\leq u_i, v_i \\leq N; 0 \\leq K \\leq N; 1 \\leq p_1 \\lt p_2 \\lt \\cdots \\lt p_K \\leq N; 0 \\leq d_i \\leq N; The given graph is simple and connected.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc299-e-problem-5eaff5658e585b8a1814cac9913fea7903aacea5cdd6667c316624d32892b682",
+    "source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

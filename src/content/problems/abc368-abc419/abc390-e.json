@@ -1,0 +1,20 @@
+{
+  "id": "abc390-e",
+  "contestId": "abc390",
+  "slotLabel": "E",
+  "officialTaskId": "abc390_e",
+  "title": "Vitamin Balance",
+  "officialUrl": "https://atcoder.jp/contests/abc390/tasks/abc390_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5000; 1 \\leq X \\leq 5000; 1 \\leq V_i \\leq 3; 1 \\leq A_i \\leq 2 \\times 10^5; 1 \\leq C_i \\leq X; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc390-e-problem-ff538ec602655c71a960fa1cdb5b342bee885a3ca3b3f8ac9c995c50e01b488f",
+    "source-abc390-editorial-12052-d2b96777a9a281f05dd871151cf1083aedf3d0e96e2deb15a64d7da9cfb8a7ab"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

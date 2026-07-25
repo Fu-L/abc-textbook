@@ -1,0 +1,20 @@
+{
+  "id": "abc415-e",
+  "contestId": "abc415",
+  "slotLabel": "E",
+  "officialTaskId": "abc415_e",
+  "title": "Hungry Takahashi",
+  "officialUrl": "https://atcoder.jp/contests/abc415/tasks/abc415_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: H,W\\geq 1; H\\times W \\leq 2\\times 10^5; 1\\leq A_{i,j}\\leq 10^9; 1\\leq P_k\\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b",
+    "source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

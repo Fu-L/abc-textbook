@@ -1,0 +1,12 @@
+{
+  "contestId": "abc220",
+  "label": "E",
+  "officialTaskId": "abc220_e",
+  "officialOrder": 4,
+  "availability": "exists",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": "abc220-e",
+  "sourceRevisionId": "source-abc220-task-list-ad4c0b41ccb4e6148e070aa46f1d4d4f74e0fb3f3fcd2762ed96aca6471b2273",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

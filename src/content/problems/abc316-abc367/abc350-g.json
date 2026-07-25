@@ -1,0 +1,20 @@
+{
+  "id": "abc350-g",
+  "contestId": "abc350",
+  "slotLabel": "G",
+  "officialTaskId": "abc350_g",
+  "title": "Mediator",
+  "officialUrl": "https://atcoder.jp/contests/abc350/tasks/abc350_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 256 MiB; Constraints: All input values are integers.; 2 \\le N \\le 10^5; 1 \\le Q \\le 10^5; 1 \\le u < v \\le N; 0 \\le a,b,c < 998244353",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83",
+    "source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

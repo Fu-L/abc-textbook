@@ -208,7 +208,7 @@ previewは次の縦切りを同一cohortで通す。
 preview後も、公開taxonomyは全コーパスから再計算する。初期制作は次の順序を守る。
 
 1. ABC 212〜466の全ContestとDより後の全slot/problem metadataを収集し、欠落・公式状態を確定する。
-2. 全Problemについて、公式根拠から主たる解法、証明着眼点、計算量、必要前提、実装上の注意、候補成果を`TechniqueInventoryItem`として棚卸しする。
+2. 全Problemについて、公式根拠から主たる解法、証明着眼点、必要前提、実装上の注意、候補成果を`TechniqueInventoryItem`として棚卸しする。問題単位で主解法を確認した項目だけ`reviewed`とし、公式解説の用語検出による候補は`draft`のまま保持してT159のfinal taxonomy受理前に確認する。計算量解析自体が解法選択や実現可能性の本質となる特殊な場合に限り、公式解説または問題固有の解析で確定した解法全体の計算量を任意欄へ記録する。通常の計算量と、部分テクニックの汎用fallback計算量は生成しない。
 3. 全inventoryを横断して、正式Tag、Learning Outcome、Tag前提DAG、Learning Unit前提DAG、標準学習順、Problem Placementを設計する。同義の仮Tagや一問専用Unitを正本へ残さない。
 4. T154のpreview PASS後に、T159がT044でfreezeした全Inventoryからfinal Tag/Outcome/Unit候補、二つのDAG、標準順、全ProblemPlacement、完全なTaxonomyIntegrationMapを決定生成し、policy-selected review後に一つの`FinalTaxonomyBuild` digestとして受理する。T047–T050はそのaccepted digestをcanonical entityへmaterializeするだけで、preview候補を直接正本にしない。preview用のT051–T054はcomponent digestを固定した時点で完了し、canonicalな全コーパス展開はT055–T056とT155–T158の別taskで行う。その後T065で`outcomeId`ごとにProblem IDを公式順で並べ、最大8 Problemの連続したOutcome/Problem shardへ分割し、shardごとに独立したwork manifest、paths、checks、review evidenceと同一`indexDigest`を生成する。
 5. 各Problemを主たるLearning Outcomeのshardへ一意に割り当て、完全解説または根拠付きの類題/補充問題を執筆する。
@@ -243,7 +243,7 @@ bootstrapと全catch-up updateをCatalogのrelease change summaryへ束ねる。
 | 成果 | 自動検証 | 人間確認 |
 |---|---|---|
 | Preview vertical slice | T045/T051–T054/T094/T111/T126が固定したpreview component manifestとT154の`preview:verify`による固定cohortの分野/Contest/label条件、metadata→inventory→仮taxonomy→content→UI/search→LearningRecord→updateのdigest join、全Problem到達性、rollback、staging/public分離、current-subject review evidence、canonical snapshotと派生referenceのrecovery | previewを公開Releaseと誤認しないこと、full taxonomy・production release・deployをjoinへ混入させないこと、二重保存をPreviewSnapshotと誤認しないこと、欠落/stale/hold理由 |
-| 対象範囲 | Contest連続性、公式task order、Dより後の全slot/problem、動的registry、将来label fixture | 公式一覧の順序矛盾・取得不能時だけ確認 |
+| 対象範囲 | 開催済みContestと公式欠番証跡による番号連続性、公式task order、Dより後の全slot/problem、動的registry、将来label fixture | 公式一覧の順序矛盾・取得不能・欠番assertion変更時だけ確認 |
 | 解説 | 必須構成、出典、前提、成果、計算量、例、skill版、内部参照、self/third-party mode | 通常は管理者self-review。公式根拠との矛盾・独自証明・重大な分類変更だけself-reviewに代えてauthor外third-party reviewerが確認 |
 | 典型体系 | inventory全件対応、Tag/Unit DAG、同義語、代表問題、到達可能性、安定順 | 通常は管理者self-review。重大なtaxonomy/classification変更だけself-reviewに代えてthird-party reviewerが確認 |
 | Preview→final taxonomy | 仮entityの全件mapping、promote/merge/split/retireの根拠、Problem/Source/Record ID不変、全影響列挙、final DAG再計算 | split/major classification changeはthird-party policyを適用 |

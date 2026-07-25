@@ -1,0 +1,20 @@
+{
+  "id": "abc259-g",
+  "contestId": "abc259",
+  "slotLabel": "G",
+  "officialTaskId": "abc259_g",
+  "title": "Grid Card Game",
+  "officialUrl": "https://atcoder.jp/contests/abc259/tasks/abc259_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W \\leq 100; -10^9 \\leq A_{i, j} \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c",
+    "source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

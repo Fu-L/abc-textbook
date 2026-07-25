@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T032-corpus-inventory",
+  "taskId": "T032",
+  "scopeDigest": "b269d667fe40394a5726fc9a403a4d62a47d60e392fc37e0ef74aaa568ceaa89",
+  "digest": "b8605d1da77308b27b3f4f80ad108193bdc3a82bdbc9d00b7a3534dc25a1bb2e",
+  "changeKind": "mixed",
+  "requiredRequirementIds": [
+    "FR-001",
+    "FR-003",
+    "FR-006",
+    "FR-007",
+    "FR-009",
+    "FR-010",
+    "FR-013",
+    "FR-014",
+    "FR-034",
+    "SC-001",
+    "SC-002",
+    "SC-004",
+    "SC-020"
+  ],
+  "learningOutcomeIds": [
+    "outcome-us2-corpus-completeness",
+    "outcome-us2-official-metadata",
+    "outcome-us2-technique-inventory"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T032-official-metadata",
+      "changeKind": "mixed",
+      "paths": [
+        "docs/verification/bootstrap/atcoder-policy-approval.json",
+        "docs/verification/previews/initial-v1/cohort-selection.json",
+        "package.json",
+        "scripts/corpus",
+        "scripts/verify/runner.ts",
+        "specs/001-build-abc-textbook/contracts/catalog.schema.json",
+        "specs/001-build-abc-textbook/contracts/update-manifest.schema.json",
+        "specs/001-build-abc-textbook/data-model.md",
+        "specs/001-build-abc-textbook/plan.md",
+        "specs/001-build-abc-textbook/quickstart.md",
+        "specs/001-build-abc-textbook/research.md",
+        "specs/001-build-abc-textbook/spec.md",
+        "src/content/contest-gaps",
+        "src/content.config.ts",
+        "src/content/contests",
+        "src/content/problem-slots",
+        "src/content/problems",
+        "src/content/sources",
+        "src/lib/catalog/advanced-slot-registry.ts",
+        "src/lib/catalog/build-catalog.ts",
+        "src/lib/catalog/content-source-registry.ts",
+        "src/lib/catalog/official-content-normalization.ts",
+        "src/lib/catalog/official-task-list.ts",
+        "src/lib/catalog/trusted-diff.ts",
+        "src/lib/corpus",
+        "src/lib/domain/schema-parts/catalog.ts",
+        "src/lib/domain/schema-parts/release.ts",
+        "src/lib/preview/cohort-selection.ts",
+        "staging/previews/initial-v1/candidate-classifications.json",
+        "staging/previews/initial-v1/candidate-input.json",
+        "staging/previews/initial-v1/candidate-pool.json",
+        "staging/previews/initial-v1/preview-manifest.json",
+        "tests/contract/catalog-scope.test.ts",
+        "tests/fixtures/trusted-catalog.ts",
+        "tests/unit/advanced-slot-registry.test.ts",
+        "tests/unit/evidence-inventory.test.ts",
+        "tests/unit/trusted-diff.test.ts"
+      ],
+      "itemIds": ["us2.official-metadata", "us2.preview-candidate-pool", "us2.preview-cohort"],
+      "requirementIds": ["FR-001", "FR-003", "FR-006", "FR-014", "SC-001"],
+      "learningOutcomeIds": ["outcome-us2-official-metadata"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-corpus-metadata", "check-preview-cohort", "check-schema"],
+      "evidenceRoles": ["official_source_verification"],
+      "maintenanceBenefit": "A deterministic, source-fingerprinted acquisition pipeline keeps 255 contest numbers (254 held Contests plus one official gap) auditable and reproducible.",
+      "owner": "person-maintainer",
+      "status": "verified"
+    },
+    {
+      "reviewUnitId": "RU-T032-technique-inventory",
+      "changeKind": "mixed",
+      "paths": [
+        "docs/verification/bootstrap/technique-inventory-authoring.json",
+        "docs/verification/previews/initial-v1/components/technique-inventory.json",
+        "src/content/technique-inventory",
+        "staging/previews/initial-v1/technique-inventory",
+        "tests/contract/technique-inventory.test.ts",
+        "tests/unit/technique-authoring.test.ts"
+      ],
+      "itemIds": ["us2.technique-inventory-shards"],
+      "requirementIds": ["FR-007", "FR-009", "FR-010", "FR-034", "SC-002", "SC-004"],
+      "learningOutcomeIds": ["outcome-us2-technique-inventory"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": ["RU-T032-official-metadata"],
+      "checkIds": ["check-authoring", "check-technique-inventory"],
+      "evidenceRoles": ["source_backed_inventory"],
+      "maintenanceBenefit": "Problem-confirmed records stay reviewed while term-detected candidates remain draft; deterministic shards keep all 868 source-backed records reproducible without technique-level complexity fallbacks.",
+      "owner": "person-maintainer",
+      "status": "verified"
+    },
+    {
+      "reviewUnitId": "RU-T032-corpus-join",
+      "changeKind": "mixed",
+      "paths": [
+        ".prettierignore",
+        "docs/verification/bootstrap/technique-inventory.json",
+        "docs/work-manifests/initial/us2/corpus-inventory.json",
+        "specs/001-build-abc-textbook/tasks.md",
+        "tests/contract/corpus-metadata.test.ts",
+        "tests/contract/technique-inventory-corpus.test.ts"
+      ],
+      "itemIds": ["us2.corpus-inventory-join"],
+      "requirementIds": ["FR-013", "SC-020"],
+      "learningOutcomeIds": ["outcome-us2-corpus-completeness"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": ["RU-T032-technique-inventory"],
+      "checkIds": [
+        "check-build",
+        "check-corpus-join",
+        "check-format",
+        "check-lint",
+        "check-us2-contracts"
+      ],
+      "evidenceRoles": ["corpus_join_verification"],
+      "maintenanceBenefit": "The fail-closed full-corpus join proves continuity, source coverage, shard completeness, and preview isolation before taxonomy synthesis.",
+      "owner": "person-maintainer",
+      "status": "verified"
+    }
+  ],
+  "maintenanceBenefit": "A deterministic, source-fingerprinted acquisition and join pipeline keeps all 255 contest numbers (254 held Contests plus one official gap) and their inventory auditable and reproducible.",
+  "state": "verified",
+  "createdAt": "2026-07-24T23:05:00+09:00",
+  "updatedAt": "2026-07-25T02:03:41+09:00"
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc407-f",
+  "sourceRevisionIds": [
+    "source-abc407-editorial-13108-38f93e0c75d1922e70f9cb3ae76f65fae4a6386c930a66d1ebf4d332862331e8",
+    "source-abc407-f-problem-284de07bd055797c176cf4d63305ca74264c863f3254ae2b251073c88d2fec0c"
+  ],
+  "coreMethod": "abc407-f「Sums of Sliding Window Maximum」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+    "Sums of Sliding Window Maximum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "累積和と差分"],
+  "implementationConcerns": ["半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。"],
+  "outcomeCandidates": [
+    "Sums of Sliding Window Maximum 型の 列の順序と prefix 状態に対し、累積和と差分を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

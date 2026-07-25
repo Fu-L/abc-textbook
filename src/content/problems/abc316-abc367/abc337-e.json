@@ -1,0 +1,20 @@
+{
+  "id": "abc337-e",
+  "contestId": "abc337",
+  "slotLabel": "E",
+  "officialTaskId": "abc337_e",
+  "title": "Bad Juice",
+  "officialUrl": "https://atcoder.jp/contests/abc337/tasks/abc337_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 2 \\leq N \\leq 100",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107",
+    "source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc388-e",
+  "contestId": "abc388",
+  "slotLabel": "E",
+  "officialTaskId": "abc388_e",
+  "title": "Simultaneous Kagamimochi",
+  "officialUrl": "https://atcoder.jp/contests/abc388/tasks/abc388_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 5 \\times 10^5; 1 \\leq A_i \\leq 10^9 \\ (1 \\leq i \\leq N); A_i \\leq A_{i+1} \\ (1 \\leq i < N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f",
+    "source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

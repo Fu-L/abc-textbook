@@ -1,0 +1,20 @@
+{
+  "id": "abc227-e",
+  "contestId": "abc227",
+  "slotLabel": "E",
+  "officialTaskId": "abc227_e",
+  "title": "Swap",
+  "officialUrl": "https://atcoder.jp/contests/abc227/tasks/abc227_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq |S| \\leq 30; 0 \\leq K \\leq 10^9; S consists of K, E, Y.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc227-e-problem-b7746806d6e5e8256f10091efbe52d7fe25dc98cb8ba800e471036eab2cb6346",
+    "source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc304-ex",
+  "contestId": "abc304",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc304_h",
+  "title": "Constrained Topological Sort",
+  "officialUrl": "https://atcoder.jp/contests/abc304/tasks/abc304_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 0 \\leq M \\leq \\min\\lbrace 4 \\times 10^5, N(N-1) \\rbrace; 1 \\leq s_i, t_i \\leq N; s_i \\neq t_i; i \\neq j \\implies (s_i, t_i) \\neq (s_j, t_j); 1 \\leq L_i \\leq R_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc304-ex-problem-88a1b5dcec9cca88a888a187d670ad04f5cc1f9733774bff9af0e3dd3127f935",
+    "source-abc304-editorial-6500-329ed419aaa87d2073ba6e9f3aa951ed2b89c2ab042b9ebbe37b752da919c244"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

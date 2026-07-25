@@ -1,0 +1,20 @@
+{
+  "id": "abc342-e",
+  "contestId": "abc342",
+  "slotLabel": "E",
+  "officialTaskId": "abc342_e",
+  "title": "Last Train",
+  "officialUrl": "https://atcoder.jp/contests/abc342/tasks/abc342_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq2\\times10 ^ 5; 1\\leq M\\leq2\\times10 ^ 5; 1\\leq l _ i,d _ i,k _ i,c _ i\\leq10 ^ 9\\ (1\\leq i\\leq M); 1\\leq A _ i,B _ i\\leq N\\ (1\\leq i\\leq M); A _ i\\neq B _ i\\ (1\\leq i\\leq M); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc342-e-problem-5af07c51272a224f3fb56629683fd300920ff307e4ec6225148234c99d00dd1b",
+    "source-abc342-editorial-9396-2117f3e6d05c8d4d50dc830879890840382f6b4ee4618a37455c4db9c4f408f6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

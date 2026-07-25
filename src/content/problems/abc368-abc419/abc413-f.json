@@ -1,0 +1,20 @@
+{
+  "id": "abc413-f",
+  "contestId": "abc413",
+  "slotLabel": "F",
+  "officialTaskId": "abc413_f",
+  "title": "No Passage",
+  "officialUrl": "https://atcoder.jp/contests/abc413/tasks/abc413_f",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H \\leq 3000; 2 \\leq W \\leq 3000; 1 \\leq K \\leq \\min(HW,3000); 1 \\leq R_i \\leq H; 1 \\leq C_i \\leq W; (R_i,C_i) \\neq (R_j,C_j) (1 \\leq i < j \\leq K); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c",
+    "source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

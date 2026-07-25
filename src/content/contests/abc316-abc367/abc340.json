@@ -1,0 +1,20 @@
+{
+  "id": "abc340",
+  "number": 340,
+  "title": "KAJIMA CORPORATION CONTEST 2024（AtCoder Beginner Contest 340）",
+  "startedAt": "2024-02-10T21:00:00+09:00",
+  "endedAt": "2024-02-10T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc340",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc340_a",
+    "abc340_b",
+    "abc340_c",
+    "abc340_d",
+    "abc340_e",
+    "abc340_f",
+    "abc340_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc340-task-list-ab775aebec734152e03e6f7a448ed9f73b7b88ba6de76b4a809d1bdeb2b59402",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

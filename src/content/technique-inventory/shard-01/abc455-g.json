@@ -1,0 +1,22 @@
+{
+  "problemId": "abc455-g",
+  "sourceRevisionIds": [
+    "source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e",
+    "source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03"
+  ],
+  "coreMethod": "abc455-g「Balanced Subarrays」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "右端を固定した有効左端集合が単調に移動するため、戻らない二本の pointer で全境界を一度ずつ調べられる。",
+    "Balanced Subarrays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "尺取り法"],
+  "implementationConcerns": [
+    "空区間、条件を満たす直前・直後のどちらを数えるかを loop 不変条件にする。"
+  ],
+  "outcomeCandidates": [
+    "Balanced Subarrays 型の 列の順序と prefix 状態に対し、尺取り法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

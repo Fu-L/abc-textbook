@@ -1,0 +1,20 @@
+{
+  "id": "abc383-f",
+  "contestId": "abc383",
+  "slotLabel": "F",
+  "officialTaskId": "abc383_f",
+  "title": "Diversity",
+  "officialUrl": "https://atcoder.jp/contests/abc383/tasks/abc383_f",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 500; 1 \\leq X \\leq 50000; 1 \\leq K \\leq 10^9; 1 \\leq P_i \\leq X (1 \\leq i \\leq N); 1 \\leq U_i \\leq 10^9 (1 \\leq i \\leq N); 1 \\leq C_i \\leq N (1 \\leq i \\leq N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc383-f-problem-23cb991da11a36cac8f24478e4a39b588ecd6b35bf7540dad1c0861b1d621d3d",
+    "source-abc383-editorial-11543-469a2a268432e665cd71d9e0a5fadbd51552d07d27c532787834bef3176a4afb"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc408-f",
+  "contestId": "abc408",
+  "slotLabel": "F",
+  "officialTaskId": "abc408_f",
+  "title": "Athletic",
+  "officialUrl": "https://atcoder.jp/contests/abc408/tasks/abc408_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 1 \\leq D,R \\leq N; H is a permutation of (1,2,\\ldots,N).; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc408-f-problem-e9d9d4e80f8f317e1ca2bca68e178e015b8b622e132f810fdde4adc52b11ff3a",
+    "source-abc408-editorial-13171-873a19e6cbc121a328bdb5d460e7ca35f392791b3ab13c7c5d38ea73c79b1bc0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

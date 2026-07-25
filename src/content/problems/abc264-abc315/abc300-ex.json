@@ -1,0 +1,20 @@
+{
+  "id": "abc300-ex",
+  "contestId": "abc300",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc300_h",
+  "title": "Fibonacci: Revisited",
+  "officialUrl": "https://atcoder.jp/contests/abc300/tasks/abc300_h",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq 5 \\times 10^4; 0 \\leq N \\leq 10^{18}; N and K are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc300-ex-problem-a4193e2c6420fe848a52d2fcde204ca005b9263c25643e305fd3a0f5154a481f",
+    "source-abc300-editorial-6269-8ee6c801cc635135e368a145e5422f67ea6f3b84bb1f84c9a3d8abdbe3e9c62f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

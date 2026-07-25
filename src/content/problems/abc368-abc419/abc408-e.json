@@ -1,0 +1,20 @@
+{
+  "id": "abc408-e",
+  "contestId": "abc408",
+  "slotLabel": "E",
+  "officialTaskId": "abc408_e",
+  "title": "Minimum OR Path",
+  "officialUrl": "https://atcoder.jp/contests/abc408/tasks/abc408_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le 2\\times 10^5; N-1\\le M\\le 2\\times 10^5; 1\\le u_i < v_i\\le N; 0\\le w_i< 2^{30}; The given graph is connected.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4",
+    "source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

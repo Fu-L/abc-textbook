@@ -1,0 +1,22 @@
+{
+  "problemId": "abc428-f",
+  "sourceRevisionIds": [
+    "source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906",
+    "source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb"
+  ],
+  "coreMethod": "abc428-f「Pyramid Alignment」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "判定の真偽が境界の片側で閉じる単調性を示せば、各比較で答えを含む区間を半分に保てる。",
+    "Pyramid Alignment 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "二分探索と単調性"],
+  "implementationConcerns": [
+    "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。"
+  ],
+  "outcomeCandidates": [
+    "Pyramid Alignment 型の 区間端点と包含関係に対し、二分探索と単調性を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc221-f",
+  "contestId": "abc221",
+  "slotLabel": "F",
+  "officialTaskId": "abc221_f",
+  "title": "Diameter set",
+  "officialUrl": "https://atcoder.jp/contests/abc221/tasks/abc221_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq U_i,V_i \\leq N; U_i \\neq V_i; All values in input are integers.; The given graph is a tree.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea",
+    "source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

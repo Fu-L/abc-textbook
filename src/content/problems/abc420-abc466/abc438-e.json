@@ -1,0 +1,20 @@
+{
+  "id": "abc438-e",
+  "contestId": "abc438",
+  "slotLabel": "E",
+  "officialTaskId": "abc438_e",
+  "title": "Heavy Buckets",
+  "officialUrl": "https://atcoder.jp/contests/abc438/tasks/abc438_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq A_i \\leq N; 1 \\leq T_i \\leq 10^9; 1 \\leq B_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc438-e-problem-6392dfca12a247f83bdd4deb25a184c922e4d84801ab08acc370de6406f691b4",
+    "source-abc438-editorial-14964-92e2c297aa167b81542365c9f8c0612a0a6ba5d11cf6d32180a4220251602708"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

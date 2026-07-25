@@ -1,0 +1,20 @@
+{
+  "id": "abc390-f",
+  "contestId": "abc390",
+  "slotLabel": "F",
+  "officialTaskId": "abc390_f",
+  "title": "Double Sum 3",
+  "officialUrl": "https://atcoder.jp/contests/abc390/tasks/abc390_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 3 \\times 10^5; 1 \\le A_i \\le N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc390-f-problem-22049aa8f88e5498af5eabbf879fd7dc80c3bbfeeb8675feed9cdc0c73c0f25c",
+    "source-abc390-editorial-11968-0c7d3bbe1f4c2e8e21d96a1bb4669821ced94dc24d3daee43b319ad13b71951d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

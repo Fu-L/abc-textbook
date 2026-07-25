@@ -1,0 +1,20 @@
+{
+  "id": "abc326-e",
+  "contestId": "abc326",
+  "slotLabel": "E",
+  "officialTaskId": "abc326_e",
+  "title": "Revenge of \"The Salary of AtCoder Inc.\"",
+  "officialUrl": "https://atcoder.jp/contests/abc326/tasks/abc326_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All inputs are integers.; 1 \\le N \\le 3 \\times 10^5; 0 \\le A_i < 998244353",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc326-e-problem-826a5d0552e758924802b9b180548c1d4f7f8cd80e3b0db5723f958e890a850b",
+    "source-abc326-editorial-7538-cfe2fc8d0501fdbb3376caf6ada2c9b1872bf406e2fe711524bf9960abd1918c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

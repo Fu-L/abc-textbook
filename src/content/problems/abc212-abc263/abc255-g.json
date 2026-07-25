@@ -1,0 +1,20 @@
+{
+  "id": "abc255-g",
+  "contestId": "abc255",
+  "slotLabel": "G",
+  "officialTaskId": "abc255_g",
+  "title": "Constrained Nim",
+  "officialUrl": "https://atcoder.jp/contests/abc255/tasks/abc255_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^{18}; 1 \\leq Y_i \\leq X_i \\leq 10^{18}; i \\neq j \\Rightarrow (X_i, Y_i) \\neq (X_j, Y_j); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a",
+    "source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

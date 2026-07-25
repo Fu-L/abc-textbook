@@ -1,0 +1,20 @@
+{
+  "id": "abc356-g",
+  "contestId": "abc356",
+  "slotLabel": "G",
+  "officialTaskId": "abc356_g",
+  "title": "Freestyle",
+  "officialUrl": "https://atcoder.jp/contests/abc356/tasks/abc356_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 2 \\times 10^5; 1 \\le A_i, B_i \\le 10^9; 1 \\le Q \\le 2 \\times 10^5; 1 \\le C_i, D_i \\le 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601",
+    "source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

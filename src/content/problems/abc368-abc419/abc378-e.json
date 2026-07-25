@@ -1,0 +1,20 @@
+{
+  "id": "abc378-e",
+  "contestId": "abc378",
+  "slotLabel": "E",
+  "officialTaskId": "abc378_e",
+  "title": "Mod Sigma Problem",
+  "officialUrl": "https://atcoder.jp/contests/abc378/tasks/abc378_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; 0 \\leq A_i \\leq 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc378-e-problem-455f55c529853840624b25849197cee4c28e915574c44a8492c3d9fcd9bb42ef",
+    "source-abc378-editorial-11289-eaba34e24cab47788301f40dea4d5dcb36caf39e402be420a4e51caceff84104"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

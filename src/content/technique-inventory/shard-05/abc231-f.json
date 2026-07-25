@@ -1,0 +1,22 @@
+{
+  "problemId": "abc231-f",
+  "sourceRevisionIds": [
+    "source-abc231-editorial-3059-2800894ed0012eda3c59d85ce01046fba8bf0c21479cd2c0c4e8eb9298de0bc3",
+    "source-abc231-f-problem-37c3e1fabb258af6c0177d00752d792cedf5ab67a0ea32e2697bfe540ba9a2d2"
+  ],
+  "coreMethod": "abc231-f「Jealous Two」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "大小・等値関係を保つ順位写像なので、元座標での順序条件と圧縮後の条件が同値になる。",
+    "Jealous Two 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "座標圧縮"],
+  "implementationConcerns": [
+    "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。"
+  ],
+  "outcomeCandidates": [
+    "Jealous Two 型の 整数の約数・剰余構造に対し、座標圧縮を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

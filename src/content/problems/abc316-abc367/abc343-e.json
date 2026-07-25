@@ -1,0 +1,20 @@
+{
+  "id": "abc343-e",
+  "contestId": "abc343",
+  "slotLabel": "E",
+  "officialTaskId": "abc343_e",
+  "title": "7x7x7",
+  "officialUrl": "https://atcoder.jp/contests/abc343/tasks/abc343_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0 \\leq V_1, V_2, V_3 \\leq 3 \\times 7^3; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e",
+    "source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

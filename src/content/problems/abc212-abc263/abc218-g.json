@@ -1,0 +1,20 @@
+{
+  "id": "abc218-g",
+  "contestId": "abc218",
+  "slotLabel": "G",
+  "officialTaskId": "abc218_g",
+  "title": "Game on Tree 2",
+  "officialUrl": "https://atcoder.jp/contests/abc218/tasks/abc218_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^5; 2 \\leq A_i \\leq 10^9; A_i is even.; 1 \\leq u_i < v_i \\leq N; The given graph is a tree.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8",
+    "source-abc218-editorial-2607-43364299e8c54da3ef94a47ec6ac5138474c324ae1a077ee7172a2a34595f6a1"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

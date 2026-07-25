@@ -1,0 +1,22 @@
+{
+  "problemId": "abc394-g",
+  "sourceRevisionIds": [
+    "source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598",
+    "source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905"
+  ],
+  "coreMethod": "abc394-g「Dense Buildings」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+    "Dense Buildings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["online query の計算量設計", "Union-Find"],
+  "implementationConcerns": [
+    "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。"
+  ],
+  "outcomeCandidates": [
+    "Dense Buildings 型の 更新と問い合わせの時系列に対し、Union-Findを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

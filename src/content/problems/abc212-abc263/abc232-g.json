@@ -1,0 +1,20 @@
+{
+  "id": "abc232-g",
+  "contestId": "abc232",
+  "slotLabel": "G",
+  "officialTaskId": "abc232_g",
+  "title": "Modulo Shortest Path",
+  "officialUrl": "https://atcoder.jp/contests/abc232/tasks/abc232_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 2 \\leq M \\leq 10^9; 0 \\leq A_i, B_j < M; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52",
+    "source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

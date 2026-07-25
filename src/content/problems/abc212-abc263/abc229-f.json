@@ -1,0 +1,20 @@
+{
+  "id": "abc229-f",
+  "contestId": "abc229",
+  "slotLabel": "F",
+  "officialTaskId": "abc229_f",
+  "title": "Make Bipartite",
+  "officialUrl": "https://atcoder.jp/contests/abc229/tasks/abc229_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq B_i \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc229-f-problem-f2579985b675f085a56d0c290e1dc7beff1aa85aa5f2a862ccfd13f209542fb4",
+    "source-abc229-editorial-2964-a66e289920d7588fbb4b2e2cd89b55615cf46b882c4d66e37469774e168f85e0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

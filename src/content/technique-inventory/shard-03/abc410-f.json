@@ -1,0 +1,25 @@
+{
+  "problemId": "abc410-f",
+  "sourceRevisionIds": [
+    "source-abc410-editorial-13301-016146bb9813164cf858661316da166afe0eac8834cd42513889d4ff5b36eb3b",
+    "source-abc410-f-problem-910d3d1f479c4c06e362230fb26749534039b0116e67c45c39f9305153e904fc"
+  ],
+  "coreMethod": "abc410-f「Balanced Rectangles」では、短い方を行方向にして上下端を全列挙し、列差分の prefix sum が等しい組を密配列 frequency で数える。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "上下端固定後の平衡長方形は列差分和が零の区間と一対一で、等しい prefix sum の二位置がその区間を定める。",
+    "Balanced Rectangles 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "asymptoticComplexity": {
+    "time": "O(H²W)（公式解法全体。特殊な計算量解析を含む）"
+  },
+  "prerequisiteCandidates": ["二次元累積更新と零和区間", "特殊な漸近計算量の見積もり"],
+  "implementationConcerns": [
+    "H≤W に転置し、prefix 値域の offset と frequency 配列の初期化コストを全体計算量内へ収める。"
+  ],
+  "outcomeCandidates": [
+    "Balanced Rectangles 型の問題に対し、二次元累積更新と零和区間を選び、状態・証明・特殊計算量を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

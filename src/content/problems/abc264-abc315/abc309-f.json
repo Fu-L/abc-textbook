@@ -1,0 +1,20 @@
+{
+  "id": "abc309-f",
+  "contestId": "abc309",
+  "slotLabel": "F",
+  "officialTaskId": "abc309_f",
+  "title": "Box in Box",
+  "officialUrl": "https://atcoder.jp/contests/abc309/tasks/abc309_f",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq h_i,w_i,d_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc309-f-problem-af7da23718a2c29e3bde282433111f3d78b057a829c074e805216bd258134b85",
+    "source-abc309-editorial-6749-98ac1871ea8d174b0bd5bff4727ef3a6150b1be6a81d3de97f6a84f185d3dc37"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc423-e",
+  "contestId": "abc423",
+  "slotLabel": "E",
+  "officialTaskId": "abc423_e",
+  "title": "Sum of Subarrays",
+  "officialUrl": "https://atcoder.jp/contests/abc423/tasks/abc423_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, Q \\leq 3 \\times 10^5; 1 \\leq A_i \\leq 100; 1 \\leq L_i \\leq R_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc423-e-problem-70cd42243b3dd2ea52aa4c95e5cbc404880bfbd8f4cc44c1e25c1048ad7fb183",
+    "source-abc423-editorial-13865-fd384d905e41456fa6859db592e9bd3fa92ee736dd68a446d3fa122f7e885422"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

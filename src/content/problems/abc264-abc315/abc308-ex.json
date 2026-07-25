@@ -1,0 +1,20 @@
+{
+  "id": "abc308-ex",
+  "contestId": "abc308",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc308_h",
+  "title": "Make Q",
+  "officialUrl": "https://atcoder.jp/contests/abc308/tasks/abc308_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 4\\leq N \\leq 300; 4\\leq M \\leq \\frac{N(N-1)}{2}; 1 \\leq A_i < B_i \\leq N; (A_i,B_i) \\neq (A_j,B_j), if i \\neq j.; 1 \\leq C_i \\leq 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8",
+    "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

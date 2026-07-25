@@ -27,6 +27,7 @@ export const AuthoringResultSchema = strictObject({
 
 const PublicationEntityTypeSchema = z.enum([
   'contest',
+  'contest_gap',
   'contest_slot',
   'problem',
   'technique_inventory',

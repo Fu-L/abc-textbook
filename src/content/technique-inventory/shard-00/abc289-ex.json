@@ -1,0 +1,22 @@
+{
+  "problemId": "abc289-ex",
+  "sourceRevisionIds": [
+    "source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286",
+    "source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"
+  ],
+  "coreMethod": "abc289-ex「Trio」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+    "Trio 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "剰余演算と modular inverse"],
+  "implementationConcerns": [
+    "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Trio 型の 整数の約数・剰余構造に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

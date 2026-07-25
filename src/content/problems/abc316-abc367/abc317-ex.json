@@ -1,0 +1,20 @@
+{
+  "id": "abc317-ex",
+  "contestId": "abc317",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc317_h",
+  "title": "Walk",
+  "officialUrl": "https://atcoder.jp/contests/abc317/tasks/abc317_h",
+  "constraintsSummary": "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 5 \\times 10^4; 1 \\leq K \\leq 5 \\times 10^5; A_i, B_i, C_i, D_i \\in \\lbrace 0, 1 \\rbrace; A_1 = D_1; B_N = C_{N-1} = C_N = 0",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc317-ex-problem-fbd59b0227a3f35072f9dd14298cbff3e9f5554bf780ea7bdea114628041de95",
+    "source-abc317-editorial-7013-2e538661c5fbeb428b89076ae6a976e45249a07e838732eab8d9a027635950d9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

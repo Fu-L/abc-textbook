@@ -1,0 +1,20 @@
+{
+  "id": "abc358-f",
+  "contestId": "abc358",
+  "slotLabel": "F",
+  "officialTaskId": "abc358_f",
+  "title": "Easiest Maze",
+  "officialUrl": "https://atcoder.jp/contests/abc358/tasks/abc358_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 100; 1\\leq M \\leq 100; 1\\leq K\\leq NM; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc358-f-problem-10dc7b1dbf735ed686b12077ee24559ce712c76dcfaee3b541cd3d97cd9e510b",
+    "source-abc358-editorial-10222-fe9e7381e43a0e97ee4abbc7649ef7e3ff6d224a4a46e7d042ab685e16ba82d5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

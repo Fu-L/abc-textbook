@@ -1,0 +1,20 @@
+{
+  "id": "abc429-g",
+  "contestId": "abc429",
+  "slotLabel": "G",
+  "officialTaskId": "abc429_g",
+  "title": "Sum of Pow of Mod of Linear",
+  "officialUrl": "https://atcoder.jp/contests/abc429/tasks/abc429_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 100; 1\\le N,M,R\\le 10^9; 0\\le A,B < M; 1\\le X < R; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc429-g-problem-8e2a8092102af19fac9206f28a8823b9ba90edb38486977ad961bb232cda385a",
+    "source-abc429-editorial-14242-8c586c50b71364483aa2f1a0744f0edc53b0499f21359991f124117fb9446215"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

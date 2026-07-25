@@ -1,0 +1,20 @@
+{
+  "problemId": "abc229-h",
+  "sourceRevisionIds": [
+    "source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c",
+    "source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb"
+  ],
+  "coreMethod": "abc229-h「Advance or Eat」では、主解法候補として、各部分ゲームの Grundy 数を mex で求め、xor 和から勝敗または手を判定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "Sprague–Grundy 定理により impartial game は同じ Grundy 数の Nim heap と等価で、直和は xor になる。",
+    "Advance or Eat 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "Sprague–Grundy theorem"],
+  "implementationConcerns": ["到達 Grundy 値の重複を除いて mex を取り、終端状態を 0 とする。"],
+  "outcomeCandidates": [
+    "Advance or Eat 型の 盤面上の位置と局所遷移に対し、Sprague–Grundy theoremを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc411-f",
+  "contestId": "abc411",
+  "slotLabel": "F",
+  "officialTaskId": "abc411_f",
+  "title": "Contraction",
+  "officialUrl": "https://atcoder.jp/contests/abc411/tasks/abc411_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 3\\times 10^5; 1\\leq M\\leq 3\\times 10^5; 1\\leq U_i<V_i\\leq N; (U_i,V_i)\\neq (U_j,V_j) if i\\neq j.; 1\\leq Q\\leq 3\\times 10^5; 1\\leq X_i\\leq M; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf",
+    "source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

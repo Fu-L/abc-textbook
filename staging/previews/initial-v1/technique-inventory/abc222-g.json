@@ -1,0 +1,22 @@
+{
+  "problemId": "abc222-g",
+  "sourceRevisionIds": [
+    "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+    "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
+  ],
+  "coreMethod": "abc222-g「222」では、repdigit 条件を 10^n≡1 mod M' へ変形し、Euler の定理から n を φ(M') の約数へ限定して昇順検査する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "最小指数 n と φ(M') の gcd も解になるため最小性から n は φ(M') を割り、最初に成功する約数が乗法的位数である。",
+    "222 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["Euler の定理、Euler φ、乗法的位数"],
+  "implementationConcerns": [
+    "M' が 2 または 5 と共通因子を持つ場合を解なしにし、modular power の積を安全な型で計算する。"
+  ],
+  "outcomeCandidates": [
+    "222 型の問題に対し、Euler の定理、Euler φ、乗法的位数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

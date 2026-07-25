@@ -1,0 +1,22 @@
+{
+  "problemId": "abc349-e",
+  "sourceRevisionIds": [
+    "source-abc349-e-problem-d85b1428d634ff73f6e42fa7cec9d7e7d380c8a49707ceea3650eb6132304b14",
+    "source-abc349-editorial-9780-919791b6256f66739ac67ccbd469d346f11d403d464187d1024aa862d9bfa6e7"
+  ],
+  "coreMethod": "abc349-e「Weighted Tic-Tac-Toe」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
+    "Weighted Tic-Tac-Toe 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "DAG とトポロジカル順序"],
+  "implementationConcerns": [
+    "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。"
+  ],
+  "outcomeCandidates": [
+    "Weighted Tic-Tac-Toe 型の 盤面上の位置と局所遷移に対し、DAG とトポロジカル順序を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

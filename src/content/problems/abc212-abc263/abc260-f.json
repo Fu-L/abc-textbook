@@ -1,0 +1,20 @@
+{
+  "id": "abc260-f",
+  "contestId": "abc260",
+  "slotLabel": "F",
+  "officialTaskId": "abc260_f",
+  "title": "Find 4-cycle",
+  "officialUrl": "https://atcoder.jp/contests/abc260/tasks/abc260_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq S \\leq 3 \\times 10^5; 2 \\leq T \\leq 3000; 4 \\leq M \\leq \\min(S \\times T,3 \\times 10^5); 1 \\leq u_i \\leq S; S + 1 \\leq v_i \\leq S + T; If i \\neq j, then (u_i, v_i) \\neq (u_j, v_j).; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e",
+    "source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

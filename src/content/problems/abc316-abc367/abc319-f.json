@@ -1,0 +1,20 @@
+{
+  "id": "abc319-f",
+  "contestId": "abc319",
+  "slotLabel": "F",
+  "officialTaskId": "abc319_f",
+  "title": "Fighter Takahashi",
+  "officialUrl": "https://atcoder.jp/contests/abc319/tasks/abc319_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 500; 1\\leq p _ i\\lt i\\ (2\\leq i\\leq N); t _ i\\in\\lbrace1,2\\rbrace\\ (2\\leq i\\leq N); t _ i=1\\implies1\\leq s _ i\\leq 10 ^ 9\\ (2\\leq i\\leq N); t _ i=2\\implies s _ i=0\\ (2\\leq i\\leq N); 1\\leq g _ i\\leq 10 ^ 9\\ (2\\leq i\\leq N); There are at most 10 vertices with t _ i=2.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc319-f-problem-c1208d3efebd2340b03da6c8fb0d0d67c5187c463518323e09a9d0c1bf8c1349",
+    "source-abc319-editorial-7116-380646a87755c3ff5eaefcc4bb046f4f0fc57791263dcf79be0fa8e78ad8570f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

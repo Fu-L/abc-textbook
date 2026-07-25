@@ -1,0 +1,22 @@
+{
+  "problemId": "abc295-f",
+  "sourceRevisionIds": [
+    "source-abc295-editorial-6035-ff096632d65b2245e644ed1e953c945408fcb66eae149c9c5f15bf6e75801b73",
+    "source-abc295-f-problem-b30370616947ea6138cad14cf7b276e9ae23e08087db6dcd068d9a797aead540"
+  ],
+  "coreMethod": "abc295-f「substr = S」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "判定の真偽が境界の片側で閉じる単調性を示せば、各比較で答えを含む区間を半分に保てる。",
+    "substr = S 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "二分探索と単調性"],
+  "implementationConcerns": [
+    "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。"
+  ],
+  "outcomeCandidates": [
+    "substr = S 型の 文字列の prefix・suffix と一致関係に対し、二分探索と単調性を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

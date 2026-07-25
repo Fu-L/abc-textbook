@@ -1,0 +1,20 @@
+{
+  "id": "abc433-f",
+  "contestId": "abc433",
+  "slotLabel": "F",
+  "officialTaskId": "abc433_f",
+  "title": "1122 Subsequence 2",
+  "officialUrl": "https://atcoder.jp/contests/abc433/tasks/abc433_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string consisting of digits with length between 1 and 10^6, inclusive.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc433-f-problem-ce87dc4de4780fe3a1c4a13b1e3631c7aeaec1cfe60d81db8e4fdede040d2391",
+    "source-abc433-editorial-14594-08bc59650ef1192757d238eb2f5ed124e1ab34db56b16c86ccb1fa7841abc7d8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

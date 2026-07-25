@@ -1,0 +1,20 @@
+{
+  "id": "abc428-g",
+  "contestId": "abc428",
+  "slotLabel": "G",
+  "officialTaskId": "abc428_g",
+  "title": "Necklace",
+  "officialUrl": "https://atcoder.jp/contests/abc428/tasks/abc428_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 2 \\leq U \\leq 5 \\times 10^5; 2 \\leq b_i \\leq U; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc428-g-problem-4c9ee096b30b6e265ffac8108560bbf30f1b95277ec6655592c23b0115876ef3",
+    "source-abc428-editorial-14241-ca060bb313b0832f3141ca21dd859cb566100282997d6738967a1166139fb941"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

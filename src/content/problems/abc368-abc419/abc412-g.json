@@ -1,0 +1,20 @@
+{
+  "id": "abc412-g",
+  "contestId": "abc412",
+  "slotLabel": "G",
+  "officialTaskId": "abc412_g",
+  "title": "Degree Harmony",
+  "officialUrl": "https://atcoder.jp/contests/abc412/tasks/abc412_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 150; 0 \\leq M \\leq \\frac{N(N-1)}{2}; 1 \\leq u_i < v_i \\leq N; The given graph is simple.; 1 \\leq A_i \\leq 150; 1 \\leq \\sum_{i=1}^N A_i \\leq 150; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2",
+    "source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

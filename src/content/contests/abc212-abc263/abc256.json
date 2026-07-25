@@ -1,0 +1,21 @@
+{
+  "id": "abc256",
+  "number": 256,
+  "title": "Tokio Marine & Nichido Fire Insurance Programming Contest 2022（AtCoder Beginner Contest 256)",
+  "startedAt": "2022-06-18T21:00:00+09:00",
+  "endedAt": "2022-06-18T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc256",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc256_a",
+    "abc256_b",
+    "abc256_c",
+    "abc256_d",
+    "abc256_e",
+    "abc256_f",
+    "abc256_g",
+    "abc256_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc256-task-list-af7ff3ec734c38b65ce9a69d803bbf15008a08ba974115c53ddd29f881812b8e",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

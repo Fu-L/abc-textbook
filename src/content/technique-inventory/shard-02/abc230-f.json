@@ -1,0 +1,20 @@
+{
+  "problemId": "abc230-f",
+  "sourceRevisionIds": [
+    "source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c",
+    "source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba"
+  ],
+  "coreMethod": "abc230-f「Predilection」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+    "Predilection 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "greedy choice と交換論法"],
+  "implementationConcerns": ["同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。"],
+  "outcomeCandidates": [
+    "Predilection 型の 列の順序と prefix 状態に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

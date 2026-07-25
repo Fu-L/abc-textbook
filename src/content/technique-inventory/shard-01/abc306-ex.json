@@ -1,0 +1,22 @@
+{
+  "problemId": "abc306-ex",
+  "sourceRevisionIds": [
+    "source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10",
+    "source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b"
+  ],
+  "coreMethod": "abc306-ex「Balance Scale」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
+    "Balance Scale 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "DAG とトポロジカル順序"],
+  "implementationConcerns": [
+    "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。"
+  ],
+  "outcomeCandidates": [
+    "Balance Scale 型の 文字列の prefix・suffix と一致関係に対し、DAG とトポロジカル順序を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

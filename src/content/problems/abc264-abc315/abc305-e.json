@@ -1,0 +1,20 @@
+{
+  "id": "abc305-e",
+  "contestId": "abc305",
+  "slotLabel": "E",
+  "officialTaskId": "abc305_e",
+  "title": "Art Gallery on Graph",
+  "officialUrl": "https://atcoder.jp/contests/abc305/tasks/abc305_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq M \\leq \\min \\left(\\frac{N(N-1)}{2}, 2 \\times 10^5 \\right); 1 \\leq K \\leq N; 1 \\leq a_i, b_i \\leq N; The given graph is simple.; 1 \\leq p_i \\leq N; All p_i are distinct.; 1 \\leq h_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f",
+    "source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

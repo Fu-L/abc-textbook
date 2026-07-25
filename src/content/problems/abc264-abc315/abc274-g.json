@@ -1,0 +1,20 @@
+{
+  "id": "abc274-g",
+  "contestId": "abc274",
+  "slotLabel": "G",
+  "officialTaskId": "abc274_g",
+  "title": "Security Camera 3",
+  "officialUrl": "https://atcoder.jp/contests/abc274/tasks/abc274_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W \\leq 300; S_{i,j} is . or #.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83",
+    "source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

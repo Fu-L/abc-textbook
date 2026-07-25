@@ -1,0 +1,22 @@
+{
+  "problemId": "abc379-e",
+  "sourceRevisionIds": [
+    "source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461",
+    "source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"
+  ],
+  "coreMethod": "abc379-e「Sum of All Substrings」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "floor(N/i) の異なる値は平方根より小さい商と平方根以下の添字から全て得られ、各区間端は除算で計算できる。",
+    "Sum of All Substrings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "floor 除算の商区間列挙"],
+  "implementationConcerns": [
+    "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。"
+  ],
+  "outcomeCandidates": [
+    "Sum of All Substrings 型の 文字列の prefix・suffix と一致関係に対し、floor 除算の商区間列挙を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

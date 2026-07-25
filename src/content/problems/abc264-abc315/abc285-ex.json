@@ -1,0 +1,20 @@
+{
+  "id": "abc285-ex",
+  "contestId": "abc285",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc285_h",
+  "title": "Avoid Square Number",
+  "officialUrl": "https://atcoder.jp/contests/abc285/tasks/abc285_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \\le N,K,E_i \\le 10000",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc285-ex-problem-950bbedb3eeab9fd63d783709cbc9551732240ee4a8ab213ef941838e8b96dfe",
+    "source-abc285-editorial-5531-9754cd49821d1394d83759ef0b347b6909fe57c23c4b702d002070f3b04c9c7a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

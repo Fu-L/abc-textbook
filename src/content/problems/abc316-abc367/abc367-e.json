@@ -1,0 +1,20 @@
+{
+  "id": "abc367-e",
+  "contestId": "abc367",
+  "slotLabel": "E",
+  "officialTaskId": "abc367_e",
+  "title": "Permute K times",
+  "officialUrl": "https://atcoder.jp/contests/abc367/tasks/abc367_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 2 \\times 10^5; 0 \\le K \\le 10^{18}; 1 \\le X_i \\le N; 1 \\le A_i \\le 2 \\times 10^5",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc367-e-problem-ee4a7e33c3e0527687a3ff0327ae52d41f34616b5b5f22a2144cbb87b07b56e8",
+    "source-abc367-editorial-10707-9b0092098f46b0b3a8d74b217af06864ebabd9c9a95f8c17dd68f5bfb69b23f7"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc311-e",
+  "contestId": "abc311",
+  "slotLabel": "E",
+  "officialTaskId": "abc311_e",
+  "title": "Defect-free Squares",
+  "officialUrl": "https://atcoder.jp/contests/abc311/tasks/abc311_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W \\leq 3000; 0 \\leq N \\leq \\min(H \\times W, 10^5); 1 \\leq a_i \\leq H; 1 \\leq b_i \\leq W; All (a_i, b_i) are pairwise different.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648",
+    "source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

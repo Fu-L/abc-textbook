@@ -1,0 +1,20 @@
+{
+  "id": "abc243-g",
+  "contestId": "abc243",
+  "slotLabel": "G",
+  "officialTaskId": "abc243_g",
+  "title": "Sqrt",
+  "officialUrl": "https://atcoder.jp/contests/abc243/tasks/abc243_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 20; 1 \\leq X \\leq 9\\times 10^{18}; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc243-g-problem-b11ec941d82d048180799a902b0fd591a98479641423b35d2b627222a5187a82",
+    "source-abc243-editorial-3510-390624bcb30e413c9c5a41a55f2872e9d60338300d004b539c551de1c561a5b1"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc292-f",
+  "contestId": "abc292",
+  "slotLabel": "F",
+  "officialTaskId": "abc292_f",
+  "title": "Regular Triangle Inside a Rectangle",
+  "officialUrl": "https://atcoder.jp/contests/abc292/tasks/abc292_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq A,B \\leq 1000; A and B are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc292-f-problem-14684cc6ad83cda8b2e7dfa0094c5b55b180871141e9ef06070428a0f66e1d08",
+    "source-abc292-editorial-5884-ca8674d8c02ba4e9de86ab56ed2fc793bfb63f2e4110e636666fa34db9dee257"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

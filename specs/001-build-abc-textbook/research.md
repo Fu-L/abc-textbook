@@ -52,7 +52,7 @@
 
 ## 5. 全コーパス横断の典型体系
 
-**Decision**: 初期content制作は、Foundational完了後に小さなprivate vertical previewを先に一周させ、その後に全公式metadata、全ProblemのTechnique Inventory、corpus-wide taxonomy、Problem Placement、Outcome/Problem shard単位の解説、Learning Unit本文を進める。previewのTag/Outcome/Unitはstaging namespaceの仮taxonomyに限り、公開正本へ直接昇格させない。Technique Inventoryは主解法、証明着眼点、計算量、必要前提、実装注意、候補成果をProblemごとに保持し、最終TagとUnitは全inventoryを比較して統合・分割する。
+**Decision**: 初期content制作は、Foundational完了後に小さなprivate vertical previewを先に一周させ、その後に全公式metadata、全ProblemのTechnique Inventory、corpus-wide taxonomy、Problem Placement、Outcome/Problem shard単位の解説、Learning Unit本文を進める。previewのTag/Outcome/Unitはstaging namespaceの仮taxonomyに限り、公開正本へ直接昇格させない。Technique Inventoryは主解法、証明着眼点、必要前提、実装注意、候補成果をProblemごとに保持する。計算量は平方根分割・償却解析・出力依存・重要な定数倍など、解析自体が解法の本質となる場合だけ、解法全体について公式根拠または問題固有の解析から確定した値を任意で記録する。通常の計算量と部分テクニックの汎用fallback計算量は保持しない。最終TagとUnitは全inventoryを比較して統合・分割する。
 
 **Rationale**: 全コーパスを完成させる前に代表的な複数分野・複数Contest・複数labelの経路を実データで検証すれば、schema、前提、UI、学習記録、更新CLIの設計欠陥を早期に発見できる。一方、Contest番号batchごとに仮Tag/Unitを公開正本へ作って後から統合すると、同義Tag、問題一問だけのUnit、重複説明が残る。previewはstagingに閉じ、最終TagとUnitは全inventoryから再計算し、promote/merge/split/retireの対応表と影響範囲をレビューすることで、早期検証とcorpus-wide体系化を両立する。
 

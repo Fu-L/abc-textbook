@@ -1,0 +1,20 @@
+{
+  "id": "abc401-g",
+  "contestId": "abc401",
+  "slotLabel": "G",
+  "officialTaskId": "abc401_g",
+  "title": "Push Simultaneously",
+  "officialUrl": "https://atcoder.jp/contests/abc401/tasks/abc401_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 300; 0\\leq\\mathit{sx} _ i\\leq10 ^ {18}\\ (1\\leq i\\leq N); 0\\leq\\mathit{sy} _ i\\leq10 ^ {18}\\ (1\\leq i\\leq N); 0\\leq\\mathit{gx} _ i\\leq10 ^ {18}\\ (1\\leq i\\leq N); 0\\leq\\mathit{gy} _ i\\leq10 ^ {18}\\ (1\\leq i\\leq N); (\\mathit{sx} _ i,\\mathit{sy} _ i)\\neq(\\mathit{sx} _ j,\\mathit{sy} _ j)\\ (1\\leq i\\lt j\\leq N); (\\mathit{gx} _ i,\\mathit{gy} _ i)\\neq(\\mathit{gx} _ j,\\mathit{gy} _ j)\\ (1\\leq i\\lt j\\leq N); (\\mathit{sx} _ i,\\mathit{sy} _ i)\\neq(\\mathit{gx} _ j,\\mathit{gy} _ j)\\ (1\\leq i\\leq N,1\\leq j\\leq N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc401-g-problem-3ee52766c3365ab2c6a7ab22ab404db98fc8e2635fee97fc4bc2083abb71a823",
+    "source-abc401-editorial-12694-4393607042e8a5fd2f5d8f605b8d6bd21eac9a4a925eb9d71d35a35c25ff976d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,4049 @@
+{
+  "schemaVersion": "1.0.0",
+  "previewId": "initial-v1",
+  "batchId": "abc212-abc263",
+  "metadataBatchDigest": "6c7711d6f1c7b87a11d3994e43985d7adaa67ced91e3b1d1cb8550d8892135d7",
+  "allowedDomains": [
+    "data-structures-algorithm-design",
+    "dynamic-programming",
+    "graph-search",
+    "mathematics-combinatorics"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0",
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e",
+    "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc",
+    "source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a",
+    "source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93",
+    "source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf",
+    "source-abc213-editorial-2391-534c84f6432876508004b5c292c65c02485f600cd78973b126d80cdd50be2a0d",
+    "source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f",
+    "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
+    "source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0",
+    "source-abc213-f-problem-db1b92140a905bd0d6d2a457fed88756303e0d045ee8df1a5f163cd555443a82",
+    "source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2",
+    "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9",
+    "source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2",
+    "source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028",
+    "source-abc214-editorial-2440-8404c7a84430603f504698d7a67b0eb89173b87ef656cf7e522e1d7ef121c7ac",
+    "source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418",
+    "source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15",
+    "source-abc214-f-problem-203e028b0a1974274025dd558bce523e82e7a094cc1d77c32448a6e2abd00b75",
+    "source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613",
+    "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e",
+    "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+    "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+    "source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256",
+    "source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27",
+    "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d",
+    "source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537",
+    "source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e",
+    "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377",
+    "source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812",
+    "source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd",
+    "source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db",
+    "source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f",
+    "source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341",
+    "source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0",
+    "source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e",
+    "source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97",
+    "source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2",
+    "source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a",
+    "source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b",
+    "source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef",
+    "source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57",
+    "source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e",
+    "source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555",
+    "source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323",
+    "source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46",
+    "source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9",
+    "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
+    "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+    "source-abc218-editorial-2607-43364299e8c54da3ef94a47ec6ac5138474c324ae1a077ee7172a2a34595f6a1",
+    "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+    "source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8",
+    "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70",
+    "source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b",
+    "source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726",
+    "source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943",
+    "source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed",
+    "source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014",
+    "source-abc219-f-problem-81357b19bc73aa408a3ae3da0732b554e100dd724249f7455f547dfa6db1cbf5",
+    "source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34",
+    "source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e",
+    "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
+    "source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7",
+    "source-abc220-editorial-2684-ebe75396fb3dc16f89b1952b2f1e9bb2bc23e34bff5179ed35fe39c2888ac327",
+    "source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541",
+    "source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a",
+    "source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223",
+    "source-abc220-g-problem-11cd77caf912f0d4d4a1772f3a50e387c0c294519ddc6ef41e8278462c72a6ed",
+    "source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da",
+    "source-abc221-e-problem-31553d7a955139b88a89f7b7d5fad0702844b013338cca84806192fbbced4d37",
+    "source-abc221-editorial-2718-e8b624442e68a1112412ccfd31e488070b6bb0a6f415fd1a8ecbb260e8dad138",
+    "source-abc221-editorial-2719-7d0a4f6a911b12cda7b3a1e70f53d64016b01e1a7616f1dace14babf5de7061a",
+    "source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072",
+    "source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b",
+    "source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea",
+    "source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358",
+    "source-abc221-h-problem-007d88780f471378894ba67fde15552d3170f77ca35c3818d479b162d1a50d50",
+    "source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75",
+    "source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86",
+    "source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8",
+    "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+    "source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c",
+    "source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80",
+    "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+    "source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147",
+    "source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1",
+    "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+    "source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781",
+    "source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf",
+    "source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190",
+    "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+    "source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e",
+    "source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e",
+    "source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7",
+    "source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057",
+    "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+    "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3",
+    "source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92",
+    "source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8",
+    "source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72",
+    "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59",
+    "source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52",
+    "source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01",
+    "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+    "source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1",
+    "source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45",
+    "source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1",
+    "source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22",
+    "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd",
+    "source-abc226-e-problem-3ca6433e5ec0f6996502c33674b13259def0590aeea6689d74a414ab33bbf677",
+    "source-abc226-editorial-2878-2de04cf0703a44bc099836c041ba9edc8d01da823227f38738ef602d5dbe9e10",
+    "source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412",
+    "source-abc226-editorial-2889-a9c5442114a34c37728bcec59eeeb20ea9188ddb5bd549a4dbcfec1bef7ea180",
+    "source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3",
+    "source-abc226-f-problem-445d4ec66745084a734b87bfa5c86445e188cebfd19fc703876bb5f7b890cdba",
+    "source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61",
+    "source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48",
+    "source-abc227-e-problem-b7746806d6e5e8256f10091efbe52d7fe25dc98cb8ba800e471036eab2cb6346",
+    "source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455",
+    "source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5",
+    "source-abc227-editorial-2914-87defb838bebcd1104697af5ba110c6f49f96bee04b0b32ee2bbe32e8f0ce6d8",
+    "source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a",
+    "source-abc227-f-problem-a9a41987be11c4be4182da98bcd5f68243f97b8b98b6fd3c30ed64e420e3e801",
+    "source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c",
+    "source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681",
+    "source-abc228-e-problem-206b70907effbf130d0797aeb5f04979b3d0938d3a5b017857ee6d5814f444e5",
+    "source-abc228-editorial-2932-685a5190cbdc171e572f3eba78ae2e8ae90bdc40a98ee203367c6c1b7eaba61d",
+    "source-abc228-editorial-2942-95765aba1977229808ad2c05816696527f7c547f42f56a6a101d6ed536bb8fdf",
+    "source-abc228-editorial-2945-12052f0fe09662260111e151499b5f2b2c3b5c7537f68c1c357cefea7748b13c",
+    "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
+    "source-abc228-f-problem-89dadce4e1a0dc6582e292f9fa5d8b96f6f301dbf03a4e01c582b05833b501da",
+    "source-abc228-g-problem-0bda9bd2f12555defe74109966b56bc2d699f0f77de68f55f7136575c16a7719",
+    "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777",
+    "source-abc229-e-problem-d9c76ebb631eb668dd6772d319953cc51d2956bed4f77fa174b0c2f60fba8b41",
+    "source-abc229-editorial-2958-e1f5841b40bd2ddd793fc39890bd1e7c2cc99e815182f14d0fac099106701eea",
+    "source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f",
+    "source-abc229-editorial-2964-a66e289920d7588fbb4b2e2cd89b55615cf46b882c4d66e37469774e168f85e0",
+    "source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c",
+    "source-abc229-f-problem-f2579985b675f085a56d0c290e1dc7beff1aa85aa5f2a862ccfd13f209542fb4",
+    "source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708",
+    "source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb",
+    "source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0",
+    "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
+    "source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019",
+    "source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd",
+    "source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c",
+    "source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba",
+    "source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae",
+    "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f",
+    "source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c",
+    "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
+    "source-abc231-editorial-3059-2800894ed0012eda3c59d85ce01046fba8bf0c21479cd2c0c4e8eb9298de0bc3",
+    "source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948",
+    "source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb",
+    "source-abc231-f-problem-37c3e1fabb258af6c0177d00752d792cedf5ab67a0ea32e2697bfe540ba9a2d2",
+    "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f",
+    "source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf",
+    "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+    "source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634",
+    "source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98",
+    "source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172",
+    "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d",
+    "source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7",
+    "source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52",
+    "source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd",
+    "source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf",
+    "source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5",
+    "source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9",
+    "source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060",
+    "source-abc233-editorial-3184-ab4b36adbfd0c3b627d15746dfe4d9457e05f0c83e47e5e8554f2b06686d0f9d",
+    "source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be",
+    "source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd",
+    "source-abc233-g-problem-3b941d80cb692b12d25a1776c90c2c690d4c1f32cd5e2ff6fadcadb670749baf",
+    "source-abc234-e-problem-1ddc11f2854e44117e51e8b3048cbcf709205b4865051f1c62c033002b6e96db",
+    "source-abc234-editorial-3223-046d35954e659dc60bc7aa26e0efc75e4f6cca517bad349758550a7f621af1a2",
+    "source-abc234-editorial-3225-cede12fb81c714f047c71686c1f5971aa655086831eacbbe163e3011929e07db",
+    "source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015",
+    "source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6",
+    "source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4",
+    "source-abc234-f-problem-63c82d89d32fbc1eedce8bd501c1d65d163257583e40c51ec7ca6ef5d4b88e95",
+    "source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc",
+    "source-abc235-e-problem-dccad2a4c2f5987ff301944fb9581b4434faa1a3d9c6056a2a351517fb96d800",
+    "source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227",
+    "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
+    "source-abc235-editorial-3252-e156873af08601dc484d0ce3da61dd8d27ddda8414b6756079ad415e547689b7",
+    "source-abc235-editorial-3254-3f27d67a0dbdcf3850835b7081f4364b176de8ed7482511f3e8c04b5bfb48b7b",
+    "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f",
+    "source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e",
+    "source-abc235-g-problem-ff02f7865679f2725f215161406783f97b2ef351e4e8c2fbd85cecabc3dd6249",
+    "source-abc236-e-problem-5f69c8c6899723655022d7f0e5013316d5a62150df71e9d374df34f169744e32",
+    "source-abc236-editorial-3279-5fdbcfbd9d3e46d2ea40d72e73cf40ff8bd6a8395405fd27400b039a6ca44e62",
+    "source-abc236-editorial-3286-eb641db2ebe6102a3decfe3203d9f04dcb8427feefdb35660b1fe094417c333d",
+    "source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea",
+    "source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c",
+    "source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53",
+    "source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1",
+    "source-abc236-g-problem-f1eea62ce5aa1264a1a77a48af5df332be33d5dc6fc17e07d56e10c53c66baed",
+    "source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4",
+    "source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc",
+    "source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa",
+    "source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064",
+    "source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b",
+    "source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4",
+    "source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88",
+    "source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab",
+    "source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d",
+    "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
+    "source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc",
+    "source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379",
+    "source-abc238-editorial-3361-2a85ca62e2aaf6e541f5fa85d0a9d831577cef21b0b07cf76f5995ee6ffb24f3",
+    "source-abc238-ex-problem-925c57a0268e42b5c59c90d4c02a25c085f1bf9694c506d458661cbc37071238",
+    "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d",
+    "source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f",
+    "source-abc239-e-problem-0c0332ca346ab35bfa6ab96fb1358c42c5f5d1900beb6549ac2981886d6d849b",
+    "source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd",
+    "source-abc239-editorial-3385-b6460d588699cea27577b95603a64000088399f80feb54109efed334fa7c8ce5",
+    "source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5",
+    "source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838",
+    "source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94",
+    "source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5",
+    "source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe",
+    "source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637",
+    "source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88",
+    "source-abc240-editorial-3423-f1ae91f9a88b3ccf4ed145d2a904347e29aa782a320a7510c8ee6f1a870d9c0d",
+    "source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8",
+    "source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c",
+    "source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89",
+    "source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b",
+    "source-abc240-g-problem-0d05122adbbea727dceed2629d2df052e4505a4b6829b2188ad615c73666d1c9",
+    "source-abc241-e-problem-aa1078a5980728f8a202a2ab0dd7b8cb2f9dbbf4fda2dc2352a746e378172be4",
+    "source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011",
+    "source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e",
+    "source-abc241-editorial-3472-223ab10f3662d986ab9f48d7c727f682d9bbc31b921499899f8366059700fd74",
+    "source-abc241-editorial-3473-9985803265c2f2ceca16b28ef311d5a58d36baf0cc903dc7cd7087a0c39e5129",
+    "source-abc241-ex-problem-920692d485b32ace547699e9cee4a214d4b640f55d93314679fc656d0d3fe3c5",
+    "source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638",
+    "source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a",
+    "source-abc242-e-problem-105c649ecb269302c3783a0fc0425f5042be2f65892d32c9e1a658283a51fa21",
+    "source-abc242-editorial-3516-341f0c2b714e9d00396dc06071f467ad103a6c56d7f034cb2d80284e09c1d2f7",
+    "source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8",
+    "source-abc242-editorial-3522-d39e3de67b27391779fc77a8c4b78a0c312a6680143b1c75af6a07908174f39f",
+    "source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915",
+    "source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d",
+    "source-abc242-f-problem-a91e15c3ea5df8a298ef6f8f613cebf8ab72483d0ca9df9344328e0bb0171108",
+    "source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5",
+    "source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41",
+    "source-abc243-editorial-3508-3ebd952fa347715a6423d7e9c124bee0e7408cca427b9b705bcc1d308492d16f",
+    "source-abc243-editorial-3510-390624bcb30e413c9c5a41a55f2872e9d60338300d004b539c551de1c561a5b1",
+    "source-abc243-editorial-3546-89a660b3c8dda82dde57aa36a38a94770e60efb75f91ba72b8d5d4ac1c78a971",
+    "source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f",
+    "source-abc243-ex-problem-cb35728cca943b2ff65de0edea1b620bf01183421366f241251dbf8132adbebe",
+    "source-abc243-f-problem-5079ff840136d541c211c172c8a0a558b6aaef5045395c908305ee1c2788093e",
+    "source-abc243-g-problem-b11ec941d82d048180799a902b0fd591a98479641423b35d2b627222a5187a82",
+    "source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920",
+    "source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c",
+    "source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e",
+    "source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2",
+    "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+    "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
+    "source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6",
+    "source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427",
+    "source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235",
+    "source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b",
+    "source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d",
+    "source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c",
+    "source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa",
+    "source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760",
+    "source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40",
+    "source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad",
+    "source-abc246-e-problem-0e2f0bb30b88da59ba7287e7e33d67229dfb820dceb6b1c2053d6b9fce77a94e",
+    "source-abc246-editorial-3702-98ab0c26bf215624b89817acec8ece6263f72ade00b9fd1d31ad410235d80a51",
+    "source-abc246-editorial-3703-5f85057e90e262a99e173328f8aea104b062c4190fe41c301f6b3005f52e5521",
+    "source-abc246-editorial-3705-73fb7421c296a34062f61baff4f3572476241cbc81f54aac6c14d6374e53381a",
+    "source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72",
+    "source-abc246-ex-problem-a1b21b8f8e0ba6be58e2ef77d8a5b8fd73c081165d7832ed9a18d9a5cba6efe5",
+    "source-abc246-f-problem-b94ffbe6c9d6fa14522518bddc097e6ac7134d9d96564598d89d696b6f231de5",
+    "source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362",
+    "source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb",
+    "source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d",
+    "source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd",
+    "source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020",
+    "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+    "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb",
+    "source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e",
+    "source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3",
+    "source-abc248-e-problem-3bdb5230e435e45ecdada0339b5aa4d424d0a6dcecc863712b12270c320c19a8",
+    "source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b",
+    "source-abc248-editorial-3792-678e0d64c5fea2844c27e28f78b4fffc0bd8497479aa439587db945b60c3fac6",
+    "source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18",
+    "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721",
+    "source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d",
+    "source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad",
+    "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6",
+    "source-abc249-e-problem-cfe689aa85acd815da2acaa222c471dc6da66e90e7448790bc6f36389707ae6d",
+    "source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e",
+    "source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32",
+    "source-abc249-editorial-3840-84d04b3fc3ea14ea3dddfaa54d60218ec60fc0ed9c4e16245236bbea6d1d334b",
+    "source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec",
+    "source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266",
+    "source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e",
+    "source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719",
+    "source-abc250-e-problem-7e57826303bfe2b9d9c3a11fb1a322d701539b14571e3397052872d29532abe8",
+    "source-abc250-editorial-3906-78e504b32c0ebfd41a61836f3acd43520283c852c6412bbe8de3fe7b86d23d37",
+    "source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb",
+    "source-abc250-editorial-3928-5023b9af8aa1da66ab00900f5b4489f1f6945435795598250a9021f4744f04b9",
+    "source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b",
+    "source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93",
+    "source-abc250-f-problem-f073c65fa9a08b3cce95e5d85aac92471a16dda3bec9211a0af9189e1ebec2b2",
+    "source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907",
+    "source-abc251-e-problem-7c9287bd212a0a604dc19a9cf77613d3cef0b2dbf5527459d4f2e00e169015c7",
+    "source-abc251-editorial-3954-5502e77b9db90e8223bf51820c90da77bdb341a71963b77421a1a563a6336004",
+    "source-abc251-editorial-3960-1d8338326b3b9ca141e5de2a04f3325e817b795409f99f48ec6f5b8de3fda6d2",
+    "source-abc251-editorial-3961-2a9bef4a1862573769c0974a139227410cfe23c0b17110582e5c2dd0790c3413",
+    "source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d",
+    "source-abc251-ex-problem-fecc529753f72db31753658d74853da733df6f9c45e94aa18801d577114ab7b0",
+    "source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4",
+    "source-abc251-g-problem-ed1514ba44cff749adc79cbdfd6994026e15dfd7a7cc482f7ea929e03c45625c",
+    "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+    "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+    "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
+    "source-abc252-editorial-3998-ca987e0b6f9f09b37cc5ee02e435b26498e04365c6786f935ba0c3c5501d29fc",
+    "source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b",
+    "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed",
+    "source-abc252-f-problem-407bef3a8254ef3bcb6695a21b41be40fd863a5e4f768ace7a2b4c04abe77c9b",
+    "source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad",
+    "source-abc253-e-problem-0ff7727e69a800ed6aa6bec68cb3e8676c00ec61fe523bf2f16afcc1ec5aa533",
+    "source-abc253-editorial-4018-2d52449d4b7b11ea03e570f282c8b0ba4362cd0103953f65a58ce9e3b3b1bc6e",
+    "source-abc253-editorial-4023-366204e887abfce0e08e2692d2e2861877d7e000474c649f5be1fddbb290bf8a",
+    "source-abc253-editorial-4025-a9dda18762878be5ec2358cece648988d3e594c03022782f457e4a13e5c3a095",
+    "source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651",
+    "source-abc253-ex-problem-403eda1a50e862876c0d2cf16a7969f8c8d764c1034b46e09454824b8ae3cabd",
+    "source-abc253-f-problem-9b46b432bebd3b4b187ea5abb99002da9ceeb10b0aeccaa727cd4c94ffc87a7b",
+    "source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c",
+    "source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518",
+    "source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc",
+    "source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52",
+    "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+    "source-abc254-editorial-4067-c931ee6e07f8d7b7e2f38c2ceb2193c131f8f11b66f6200318c5a3ce39a2cf54",
+    "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea",
+    "source-abc254-f-problem-fb9b12af78f2c27e67cf3fdf37ca5b98e81bbb6ccf253f0e8602d3235e2f53d0",
+    "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190",
+    "source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a",
+    "source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10",
+    "source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d",
+    "source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132",
+    "source-abc255-editorial-4105-468540b88cdedbb71b5c0365f7989f877a04953998ea5c1b51b9db993945ab3b",
+    "source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4",
+    "source-abc255-f-problem-d18f8d29fe4e73a8279289ed4b8f908c96f0e6f08d0e99bf611576777a05137b",
+    "source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a",
+    "source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648",
+    "source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953",
+    "source-abc256-editorial-4130-c937a3ca3ad9ce902644773130814a2722819fd3dcbf5fa9616c506c5796c96a",
+    "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+    "source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893",
+    "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80",
+    "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965",
+    "source-abc256-g-problem-e2d7ac823f51f5a8e20aba7cec2631acd3bcab48b3e8a5eed6b8a1039de3f27c",
+    "source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0",
+    "source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b",
+    "source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a",
+    "source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35",
+    "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9",
+    "source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f",
+    "source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c",
+    "source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5",
+    "source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084",
+    "source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5",
+    "source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973",
+    "source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a",
+    "source-abc258-editorial-4237-f64386f7dcd8dcbd2521070103668d59be2948a5eba1d7c8349965e9de0754d5",
+    "source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba",
+    "source-abc258-f-problem-e69b00e450a590b4f1f26d98031df0a0dcbc28ede9a4274f20f2b21b68bab788",
+    "source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998",
+    "source-abc259-e-problem-eb7a258d38ce1d9f2ef53211daa3360cf49824f3019fbd9570feb5c144957816",
+    "source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0",
+    "source-abc259-editorial-4271-76fe64c5c7a413668836b08101de648037f01ce8e462d52ce8eb8b8d1ab980e8",
+    "source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5",
+    "source-abc259-editorial-4287-3612bfdde67210806fa69102feb1a83f6ce40f8819df0ea69ef29e3a434f89e8",
+    "source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a",
+    "source-abc259-f-problem-ace555e2e0fe1e65c70f65d4e3021a56b88142ea4c5c68b9767e8d833d4964a9",
+    "source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c",
+    "source-abc260-e-problem-328b227f4e99a537b69624783d76fc38e6ead0e01546ee21e17761b6ae77e9db",
+    "source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40",
+    "source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b",
+    "source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c",
+    "source-abc260-editorial-4458-d75d5dd71779552ced576f6e2f3bb80a4171a1aa23dc1a95432563e980ab61ac",
+    "source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd",
+    "source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e",
+    "source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d",
+    "source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578",
+    "source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d",
+    "source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f",
+    "source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb",
+    "source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa",
+    "source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d",
+    "source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b",
+    "source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6",
+    "source-abc262-e-problem-bc5fade319bd5ee2194ece46e588a0f5f4424f33bb25366042252c06b9136ed1",
+    "source-abc262-editorial-4479-33a3a1a74196fae91ced253beb14e06629da248ae29423536b8006b1eade4133",
+    "source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058",
+    "source-abc262-editorial-4504-fa00567abe2f9d20ce2bfdad3b0955cae6283d3d8c422a1f3fef480ede8090b7",
+    "source-abc262-editorial-4505-85be15665e24276967509cb409dcdfc402c9afa8e38ac52f41e1df1cc3c7e7dc",
+    "source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e",
+    "source-abc262-f-problem-e97d9131710ad7ff7ac0ab7616fd67a116b4f8df7a6289f54313e1c37043b87a",
+    "source-abc262-g-problem-19d170e12d0d8ec942a444cbab69fb0889a4accb5ff35fbc1d9270a4357e9534",
+    "source-abc263-e-problem-eef4590c663d3faba07d180145406aac13d7d7c43bf20125fb419d5f195586f2",
+    "source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2",
+    "source-abc263-editorial-4546-50da0faeb7c80a60d2182c11cba30b7434a8e34da04c987b8c7eb076641af9a4",
+    "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228",
+    "source-abc263-editorial-4550-b6e2922d0d6dd7c13db4dd4ddb7bb9d9b79ac9e390f694ef5317da5f15264315",
+    "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e",
+    "source-abc263-f-problem-29c43defca98c2a963108037041bb5b6dcc5966f30ac660724107a28ed5d9274",
+    "source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132"
+  ],
+  "candidates": [
+    {
+      "problemId": "abc212-e",
+      "contestNumber": 212,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc212_e",
+      "sourceRevisionIds": [
+        "source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0",
+        "source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc212-f",
+      "contestNumber": 212,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc212_f",
+      "sourceRevisionIds": [
+        "source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a",
+        "source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc212-g",
+      "contestNumber": 212,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc212_g",
+      "sourceRevisionIds": [
+        "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+        "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
+      ],
+      "candidateDomains": ["mathematics-combinatorics"],
+      "candidateOutcomeIds": ["outcome-candidate-multiplicative-order-counting"],
+      "classifications": [
+        {
+          "domain": "mathematics-combinatorics",
+          "outcomeId": "outcome-candidate-multiplicative-order-counting",
+          "sourceRevisionIds": [
+            "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+            "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
+          ],
+          "rationale": "素数法を原始根の指数へ写し、指数合同式を最大公約数と約数の個数え上げへ帰着する公式解法である。"
+        }
+      ],
+      "selectionEligible": true,
+      "exclusionReason": null,
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc212-h",
+      "contestNumber": 212,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc212_h",
+      "sourceRevisionIds": [
+        "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc",
+        "source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc213-e",
+      "contestNumber": 213,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc213_e",
+      "sourceRevisionIds": [
+        "source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf",
+        "source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc213-f",
+      "contestNumber": 213,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc213_f",
+      "sourceRevisionIds": [
+        "source-abc213-editorial-2391-534c84f6432876508004b5c292c65c02485f600cd78973b126d80cdd50be2a0d",
+        "source-abc213-f-problem-db1b92140a905bd0d6d2a457fed88756303e0d045ee8df1a5f163cd555443a82"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc213-g",
+      "contestNumber": 213,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc213_g",
+      "sourceRevisionIds": [
+        "source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f",
+        "source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc213-h",
+      "contestNumber": 213,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc213_h",
+      "sourceRevisionIds": [
+        "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
+        "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc214-e",
+      "contestNumber": 214,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc214_e",
+      "sourceRevisionIds": [
+        "source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2",
+        "source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc214-f",
+      "contestNumber": 214,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc214_f",
+      "sourceRevisionIds": [
+        "source-abc214-editorial-2440-8404c7a84430603f504698d7a67b0eb89173b87ef656cf7e522e1d7ef121c7ac",
+        "source-abc214-f-problem-203e028b0a1974274025dd558bce523e82e7a094cc1d77c32448a6e2abd00b75"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc214-g",
+      "contestNumber": 214,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc214_g",
+      "sourceRevisionIds": [
+        "source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15",
+        "source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc214-h",
+      "contestNumber": 214,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc214_h",
+      "sourceRevisionIds": [
+        "source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418",
+        "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc215-e",
+      "contestNumber": 215,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc215_e",
+      "sourceRevisionIds": [
+        "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+        "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
+      ],
+      "candidateDomains": ["dynamic-programming"],
+      "candidateOutcomeIds": ["outcome-candidate-compressed-dp-state"],
+      "classifications": [
+        {
+          "domain": "dynamic-programming",
+          "outcomeId": "outcome-candidate-compressed-dp-state",
+          "sourceRevisionIds": [
+            "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+            "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
+          ],
+          "rationale": "出場済み文字集合と末尾文字を状態に持つ部分列 DP により、同じ文字の選手が連続する制約を表現する公式解法である。"
+        }
+      ],
+      "selectionEligible": true,
+      "exclusionReason": null,
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc215-f",
+      "contestNumber": 215,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc215_f",
+      "sourceRevisionIds": [
+        "source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256",
+        "source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc215-g",
+      "contestNumber": 215,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc215_g",
+      "sourceRevisionIds": [
+        "source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27",
+        "source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc215-h",
+      "contestNumber": 215,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc215_h",
+      "sourceRevisionIds": [
+        "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d",
+        "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc216-e",
+      "contestNumber": 216,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc216_e",
+      "sourceRevisionIds": [
+        "source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812",
+        "source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc216-f",
+      "contestNumber": 216,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc216_f",
+      "sourceRevisionIds": [
+        "source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f",
+        "source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc216-g",
+      "contestNumber": 216,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc216_g",
+      "sourceRevisionIds": [
+        "source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db",
+        "source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc216-h",
+      "contestNumber": 216,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc216_h",
+      "sourceRevisionIds": [
+        "source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341",
+        "source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc217-e",
+      "contestNumber": 217,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc217_e",
+      "sourceRevisionIds": [
+        "source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2",
+        "source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc217-f",
+      "contestNumber": 217,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc217_f",
+      "sourceRevisionIds": [
+        "source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57",
+        "source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc217-g",
+      "contestNumber": 217,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc217_g",
+      "sourceRevisionIds": [
+        "source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a",
+        "source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc217-h",
+      "contestNumber": 217,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc217_h",
+      "sourceRevisionIds": [
+        "source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef",
+        "source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc218-e",
+      "contestNumber": 218,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc218_e",
+      "sourceRevisionIds": [
+        "source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46",
+        "source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc218-f",
+      "contestNumber": 218,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc218_f",
+      "sourceRevisionIds": [
+        "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+        "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"
+      ],
+      "candidateDomains": ["graph-search"],
+      "candidateOutcomeIds": ["outcome-candidate-shortest-path-structure"],
+      "classifications": [
+        {
+          "domain": "graph-search",
+          "outcomeId": "outcome-candidate-shortest-path-structure",
+          "sourceRevisionIds": [
+            "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+            "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"
+          ],
+          "rationale": "有向非重みグラフの基準最短路を復元し、その経路上の辺だけを削除ごとに BFS し直す公式解法である。"
+        }
+      ],
+      "selectionEligible": true,
+      "exclusionReason": null,
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc218-g",
+      "contestNumber": 218,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc218_g",
+      "sourceRevisionIds": [
+        "source-abc218-editorial-2607-43364299e8c54da3ef94a47ec6ac5138474c324ae1a077ee7172a2a34595f6a1",
+        "source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc218-h",
+      "contestNumber": 218,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc218_h",
+      "sourceRevisionIds": [
+        "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
+        "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc219-e",
+      "contestNumber": 219,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc219_e",
+      "sourceRevisionIds": [
+        "source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b",
+        "source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc219-f",
+      "contestNumber": 219,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc219_f",
+      "sourceRevisionIds": [
+        "source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014",
+        "source-abc219-f-problem-81357b19bc73aa408a3ae3da0732b554e100dd724249f7455f547dfa6db1cbf5"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc219-g",
+      "contestNumber": 219,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc219_g",
+      "sourceRevisionIds": [
+        "source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed",
+        "source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc219-h",
+      "contestNumber": 219,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc219_h",
+      "sourceRevisionIds": [
+        "source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726",
+        "source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc220-e",
+      "contestNumber": 220,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc220_e",
+      "sourceRevisionIds": [
+        "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
+        "source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc220-f",
+      "contestNumber": 220,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc220_f",
+      "sourceRevisionIds": [
+        "source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a",
+        "source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc220-g",
+      "contestNumber": 220,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc220_g",
+      "sourceRevisionIds": [
+        "source-abc220-editorial-2684-ebe75396fb3dc16f89b1952b2f1e9bb2bc23e34bff5179ed35fe39c2888ac327",
+        "source-abc220-g-problem-11cd77caf912f0d4d4a1772f3a50e387c0c294519ddc6ef41e8278462c72a6ed"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc220-h",
+      "contestNumber": 220,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc220_h",
+      "sourceRevisionIds": [
+        "source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541",
+        "source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc221-e",
+      "contestNumber": 221,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc221_e",
+      "sourceRevisionIds": [
+        "source-abc221-e-problem-31553d7a955139b88a89f7b7d5fad0702844b013338cca84806192fbbced4d37",
+        "source-abc221-editorial-2718-e8b624442e68a1112412ccfd31e488070b6bb0a6f415fd1a8ecbb260e8dad138"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc221-f",
+      "contestNumber": 221,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc221_f",
+      "sourceRevisionIds": [
+        "source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072",
+        "source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc221-g",
+      "contestNumber": 221,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc221_g",
+      "sourceRevisionIds": [
+        "source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b",
+        "source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc221-h",
+      "contestNumber": 221,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc221_h",
+      "sourceRevisionIds": [
+        "source-abc221-editorial-2719-7d0a4f6a911b12cda7b3a1e70f53d64016b01e1a7616f1dace14babf5de7061a",
+        "source-abc221-h-problem-007d88780f471378894ba67fde15552d3170f77ca35c3818d479b162d1a50d50"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc222-e",
+      "contestNumber": 222,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc222_e",
+      "sourceRevisionIds": [
+        "source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75",
+        "source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc222-f",
+      "contestNumber": 222,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc222_f",
+      "sourceRevisionIds": [
+        "source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8",
+        "source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc222-g",
+      "contestNumber": 222,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc222_g",
+      "sourceRevisionIds": [
+        "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+        "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
+      ],
+      "candidateDomains": ["mathematics-combinatorics"],
+      "candidateOutcomeIds": ["outcome-candidate-multiplicative-order-counting"],
+      "classifications": [
+        {
+          "domain": "mathematics-combinatorics",
+          "outcomeId": "outcome-candidate-multiplicative-order-counting",
+          "sourceRevisionIds": [
+            "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+            "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
+          ],
+          "rationale": "同一数字を並べた数の割り切れ条件を repunit の合同式へ変換し、10 の乗法的位数として最小桁数を求める公式解法である。"
+        }
+      ],
+      "selectionEligible": true,
+      "exclusionReason": null,
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc222-h",
+      "contestNumber": 222,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc222_h",
+      "sourceRevisionIds": [
+        "source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86",
+        "source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc223-e",
+      "contestNumber": 223,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc223_e",
+      "sourceRevisionIds": [
+        "source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1",
+        "source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc223-f",
+      "contestNumber": 223,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc223_f",
+      "sourceRevisionIds": [
+        "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+        "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306"
+      ],
+      "candidateDomains": ["data-structures-algorithm-design"],
+      "candidateOutcomeIds": ["outcome-candidate-range-aggregate-under-updates"],
+      "classifications": [
+        {
+          "domain": "data-structures-algorithm-design",
+          "outcomeId": "outcome-candidate-range-aggregate-under-updates",
+          "sourceRevisionIds": [
+            "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+            "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306"
+          ],
+          "rationale": "括弧を ±1 とみなし、区間総和と最小接頭辞和を segment tree で保って swap 更新後の正当性を判定する公式解法である。"
+        }
+      ],
+      "selectionEligible": true,
+      "exclusionReason": null,
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc223-g",
+      "contestNumber": 223,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc223_g",
+      "sourceRevisionIds": [
+        "source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781",
+        "source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc223-h",
+      "contestNumber": 223,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc223_h",
+      "sourceRevisionIds": [
+        "source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190",
+        "source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc224-e",
+      "contestNumber": 224,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc224_e",
+      "sourceRevisionIds": [
+        "source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7",
+        "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc224-f",
+      "contestNumber": 224,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc224_f",
+      "sourceRevisionIds": [
+        "source-abc224-editorial-2805-fea9cf7ef923126da1b89e051d0d4cda8040de0c20d5f2b0d762f0150cc0a057",
+        "source-abc224-f-problem-71b818d6048ada6e2b5d8044cd26db1d133b8a77d08360687dc9b5c048f0dcc8"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc224-g",
+      "contestNumber": 224,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc224_g",
+      "sourceRevisionIds": [
+        "source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92",
+        "source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc224-h",
+      "contestNumber": 224,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc224_h",
+      "sourceRevisionIds": [
+        "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+        "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc225-e",
+      "contestNumber": 225,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc225_e",
+      "sourceRevisionIds": [
+        "source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52",
+        "source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc225-f",
+      "contestNumber": 225,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc225_f",
+      "sourceRevisionIds": [
+        "source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01",
+        "source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc225-g",
+      "contestNumber": 225,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc225_g",
+      "sourceRevisionIds": [
+        "source-abc225-editorial-2854-484eb3ccbb21c634dc1498cc3a1e37532b11dec1ee08507a0087165c0dd32d45",
+        "source-abc225-g-problem-0044e2a28056e68ffffa3a4cc96513bf99913cc6daa28f96561b9fa5e6015d22"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc225-h",
+      "contestNumber": 225,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc225_h",
+      "sourceRevisionIds": [
+        "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+        "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc226-e",
+      "contestNumber": 226,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc226_e",
+      "sourceRevisionIds": [
+        "source-abc226-e-problem-3ca6433e5ec0f6996502c33674b13259def0590aeea6689d74a414ab33bbf677",
+        "source-abc226-editorial-2889-a9c5442114a34c37728bcec59eeeb20ea9188ddb5bd549a4dbcfec1bef7ea180"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc226-f",
+      "contestNumber": 226,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc226_f",
+      "sourceRevisionIds": [
+        "source-abc226-editorial-2878-2de04cf0703a44bc099836c041ba9edc8d01da823227f38738ef602d5dbe9e10",
+        "source-abc226-f-problem-445d4ec66745084a734b87bfa5c86445e188cebfd19fc703876bb5f7b890cdba"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc226-g",
+      "contestNumber": 226,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc226_g",
+      "sourceRevisionIds": [
+        "source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3",
+        "source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc226-h",
+      "contestNumber": 226,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc226_h",
+      "sourceRevisionIds": [
+        "source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412",
+        "source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc227-e",
+      "contestNumber": 227,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc227_e",
+      "sourceRevisionIds": [
+        "source-abc227-e-problem-b7746806d6e5e8256f10091efbe52d7fe25dc98cb8ba800e471036eab2cb6346",
+        "source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc227-f",
+      "contestNumber": 227,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc227_f",
+      "sourceRevisionIds": [
+        "source-abc227-editorial-2914-87defb838bebcd1104697af5ba110c6f49f96bee04b0b32ee2bbe32e8f0ce6d8",
+        "source-abc227-f-problem-a9a41987be11c4be4182da98bcd5f68243f97b8b98b6fd3c30ed64e420e3e801"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc227-g",
+      "contestNumber": 227,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc227_g",
+      "sourceRevisionIds": [
+        "source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5",
+        "source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc227-h",
+      "contestNumber": 227,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc227_h",
+      "sourceRevisionIds": [
+        "source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a",
+        "source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc228-e",
+      "contestNumber": 228,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc228_e",
+      "sourceRevisionIds": [
+        "source-abc228-e-problem-206b70907effbf130d0797aeb5f04979b3d0938d3a5b017857ee6d5814f444e5",
+        "source-abc228-editorial-2932-685a5190cbdc171e572f3eba78ae2e8ae90bdc40a98ee203367c6c1b7eaba61d"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc228-f",
+      "contestNumber": 228,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc228_f",
+      "sourceRevisionIds": [
+        "source-abc228-editorial-2945-12052f0fe09662260111e151499b5f2b2c3b5c7537f68c1c357cefea7748b13c",
+        "source-abc228-f-problem-89dadce4e1a0dc6582e292f9fa5d8b96f6f301dbf03a4e01c582b05833b501da"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc228-g",
+      "contestNumber": 228,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc228_g",
+      "sourceRevisionIds": [
+        "source-abc228-editorial-2942-95765aba1977229808ad2c05816696527f7c547f42f56a6a101d6ed536bb8fdf",
+        "source-abc228-g-problem-0bda9bd2f12555defe74109966b56bc2d699f0f77de68f55f7136575c16a7719"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc228-h",
+      "contestNumber": 228,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc228_h",
+      "sourceRevisionIds": [
+        "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
+        "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc229-e",
+      "contestNumber": 229,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc229_e",
+      "sourceRevisionIds": [
+        "source-abc229-e-problem-d9c76ebb631eb668dd6772d319953cc51d2956bed4f77fa174b0c2f60fba8b41",
+        "source-abc229-editorial-2958-e1f5841b40bd2ddd793fc39890bd1e7c2cc99e815182f14d0fac099106701eea"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc229-f",
+      "contestNumber": 229,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc229_f",
+      "sourceRevisionIds": [
+        "source-abc229-editorial-2964-a66e289920d7588fbb4b2e2cd89b55615cf46b882c4d66e37469774e168f85e0",
+        "source-abc229-f-problem-f2579985b675f085a56d0c290e1dc7beff1aa85aa5f2a862ccfd13f209542fb4"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc229-g",
+      "contestNumber": 229,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc229_g",
+      "sourceRevisionIds": [
+        "source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f",
+        "source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc229-h",
+      "contestNumber": 229,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc229_h",
+      "sourceRevisionIds": [
+        "source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c",
+        "source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc230-e",
+      "contestNumber": 230,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc230_e",
+      "sourceRevisionIds": [
+        "source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0",
+        "source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc230-f",
+      "contestNumber": 230,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc230_f",
+      "sourceRevisionIds": [
+        "source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c",
+        "source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc230-g",
+      "contestNumber": 230,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc230_g",
+      "sourceRevisionIds": [
+        "source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd",
+        "source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc230-h",
+      "contestNumber": 230,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc230_h",
+      "sourceRevisionIds": [
+        "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
+        "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc231-e",
+      "contestNumber": 231,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc231_e",
+      "sourceRevisionIds": [
+        "source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c",
+        "source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc231-f",
+      "contestNumber": 231,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc231_f",
+      "sourceRevisionIds": [
+        "source-abc231-editorial-3059-2800894ed0012eda3c59d85ce01046fba8bf0c21479cd2c0c4e8eb9298de0bc3",
+        "source-abc231-f-problem-37c3e1fabb258af6c0177d00752d792cedf5ab67a0ea32e2697bfe540ba9a2d2"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc231-g",
+      "contestNumber": 231,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc231_g",
+      "sourceRevisionIds": [
+        "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
+        "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc231-h",
+      "contestNumber": 231,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc231_h",
+      "sourceRevisionIds": [
+        "source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948",
+        "source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc232-e",
+      "contestNumber": 232,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc232_e",
+      "sourceRevisionIds": [
+        "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+        "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+      ],
+      "candidateDomains": ["dynamic-programming"],
+      "candidateOutcomeIds": ["outcome-candidate-compressed-dp-state"],
+      "classifications": [
+        {
+          "domain": "dynamic-programming",
+          "outcomeId": "outcome-candidate-compressed-dp-state",
+          "sourceRevisionIds": [
+            "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+            "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+          ],
+          "rationale": "現在位置の行・列が目標と一致するかだけで盤面を 4 状態に商約し、K 手の遷移を数える公式 DP である。"
+        }
+      ],
+      "selectionEligible": true,
+      "exclusionReason": null,
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc232-f",
+      "contestNumber": 232,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc232_f",
+      "sourceRevisionIds": [
+        "source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172",
+        "source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc232-g",
+      "contestNumber": 232,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc232_g",
+      "sourceRevisionIds": [
+        "source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98",
+        "source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc232-h",
+      "contestNumber": 232,
+      "officialTaskOrder": 7,
+      "advancedLabel": "H",
+      "officialTaskId": "abc232_h",
+      "sourceRevisionIds": [
+        "source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634",
+        "source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc233-e",
+      "contestNumber": 233,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc233_e",
+      "sourceRevisionIds": [
+        "source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf",
+        "source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc233-f",
+      "contestNumber": 233,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc233_f",
+      "sourceRevisionIds": [
+        "source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5",
+        "source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc233-g",
+      "contestNumber": 233,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc233_g",
+      "sourceRevisionIds": [
+        "source-abc233-editorial-3184-ab4b36adbfd0c3b627d15746dfe4d9457e05f0c83e47e5e8554f2b06686d0f9d",
+        "source-abc233-g-problem-3b941d80cb692b12d25a1776c90c2c690d4c1f32cd5e2ff6fadcadb670749baf"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc233-ex",
+      "contestNumber": 233,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc233_h",
+      "sourceRevisionIds": [
+        "source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9",
+        "source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc234-e",
+      "contestNumber": 234,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc234_e",
+      "sourceRevisionIds": [
+        "source-abc234-e-problem-1ddc11f2854e44117e51e8b3048cbcf709205b4865051f1c62c033002b6e96db",
+        "source-abc234-editorial-3225-cede12fb81c714f047c71686c1f5971aa655086831eacbbe163e3011929e07db"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc234-f",
+      "contestNumber": 234,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc234_f",
+      "sourceRevisionIds": [
+        "source-abc234-editorial-3223-046d35954e659dc60bc7aa26e0efc75e4f6cca517bad349758550a7f621af1a2",
+        "source-abc234-f-problem-63c82d89d32fbc1eedce8bd501c1d65d163257583e40c51ec7ca6ef5d4b88e95"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc234-g",
+      "contestNumber": 234,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc234_g",
+      "sourceRevisionIds": [
+        "source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6",
+        "source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc234-ex",
+      "contestNumber": 234,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc234_h",
+      "sourceRevisionIds": [
+        "source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015",
+        "source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc235-e",
+      "contestNumber": 235,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc235_e",
+      "sourceRevisionIds": [
+        "source-abc235-e-problem-dccad2a4c2f5987ff301944fb9581b4434faa1a3d9c6056a2a351517fb96d800",
+        "source-abc235-editorial-3254-3f27d67a0dbdcf3850835b7081f4364b176de8ed7482511f3e8c04b5bfb48b7b"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc235-f",
+      "contestNumber": 235,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc235_f",
+      "sourceRevisionIds": [
+        "source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227",
+        "source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc235-g",
+      "contestNumber": 235,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc235_g",
+      "sourceRevisionIds": [
+        "source-abc235-editorial-3252-e156873af08601dc484d0ce3da61dd8d27ddda8414b6756079ad415e547689b7",
+        "source-abc235-g-problem-ff02f7865679f2725f215161406783f97b2ef351e4e8c2fbd85cecabc3dd6249"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc235-ex",
+      "contestNumber": 235,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc235_h",
+      "sourceRevisionIds": [
+        "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
+        "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc236-e",
+      "contestNumber": 236,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc236_e",
+      "sourceRevisionIds": [
+        "source-abc236-e-problem-5f69c8c6899723655022d7f0e5013316d5a62150df71e9d374df34f169744e32",
+        "source-abc236-editorial-3279-5fdbcfbd9d3e46d2ea40d72e73cf40ff8bd6a8395405fd27400b039a6ca44e62"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc236-f",
+      "contestNumber": 236,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc236_f",
+      "sourceRevisionIds": [
+        "source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea",
+        "source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc236-g",
+      "contestNumber": 236,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc236_g",
+      "sourceRevisionIds": [
+        "source-abc236-editorial-3286-eb641db2ebe6102a3decfe3203d9f04dcb8427feefdb35660b1fe094417c333d",
+        "source-abc236-g-problem-f1eea62ce5aa1264a1a77a48af5df332be33d5dc6fc17e07d56e10c53c66baed"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc236-ex",
+      "contestNumber": 236,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc236_h",
+      "sourceRevisionIds": [
+        "source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c",
+        "source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc237-e",
+      "contestNumber": 237,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc237_e",
+      "sourceRevisionIds": [
+        "source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4",
+        "source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc237-f",
+      "contestNumber": 237,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc237_f",
+      "sourceRevisionIds": [
+        "source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc",
+        "source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc237-g",
+      "contestNumber": 237,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc237_g",
+      "sourceRevisionIds": [
+        "source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b",
+        "source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc237-ex",
+      "contestNumber": 237,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc237_h",
+      "sourceRevisionIds": [
+        "source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa",
+        "source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc238-e",
+      "contestNumber": 238,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc238_e",
+      "sourceRevisionIds": [
+        "source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d",
+        "source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc238-f",
+      "contestNumber": 238,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc238_f",
+      "sourceRevisionIds": [
+        "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
+        "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc238-g",
+      "contestNumber": 238,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc238_g",
+      "sourceRevisionIds": [
+        "source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc",
+        "source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc238-ex",
+      "contestNumber": 238,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc238_h",
+      "sourceRevisionIds": [
+        "source-abc238-editorial-3361-2a85ca62e2aaf6e541f5fa85d0a9d831577cef21b0b07cf76f5995ee6ffb24f3",
+        "source-abc238-ex-problem-925c57a0268e42b5c59c90d4c02a25c085f1bf9694c506d458661cbc37071238"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc239-e",
+      "contestNumber": 239,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc239_e",
+      "sourceRevisionIds": [
+        "source-abc239-e-problem-0c0332ca346ab35bfa6ab96fb1358c42c5f5d1900beb6549ac2981886d6d849b",
+        "source-abc239-editorial-3385-b6460d588699cea27577b95603a64000088399f80feb54109efed334fa7c8ce5"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc239-f",
+      "contestNumber": 239,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc239_f",
+      "sourceRevisionIds": [
+        "source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5",
+        "source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc239-g",
+      "contestNumber": 239,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc239_g",
+      "sourceRevisionIds": [
+        "source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838",
+        "source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc239-ex",
+      "contestNumber": 239,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc239_h",
+      "sourceRevisionIds": [
+        "source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd",
+        "source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc240-e",
+      "contestNumber": 240,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc240_e",
+      "sourceRevisionIds": [
+        "source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637",
+        "source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc240-f",
+      "contestNumber": 240,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc240_f",
+      "sourceRevisionIds": [
+        "source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88",
+        "source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc240-g",
+      "contestNumber": 240,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc240_g",
+      "sourceRevisionIds": [
+        "source-abc240-editorial-3423-f1ae91f9a88b3ccf4ed145d2a904347e29aa782a320a7510c8ee6f1a870d9c0d",
+        "source-abc240-g-problem-0d05122adbbea727dceed2629d2df052e4505a4b6829b2188ad615c73666d1c9"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc240-ex",
+      "contestNumber": 240,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc240_h",
+      "sourceRevisionIds": [
+        "source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c",
+        "source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc241-e",
+      "contestNumber": 241,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc241_e",
+      "sourceRevisionIds": [
+        "source-abc241-e-problem-aa1078a5980728f8a202a2ab0dd7b8cb2f9dbbf4fda2dc2352a746e378172be4",
+        "source-abc241-editorial-3472-223ab10f3662d986ab9f48d7c727f682d9bbc31b921499899f8366059700fd74"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc241-f",
+      "contestNumber": 241,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc241_f",
+      "sourceRevisionIds": [
+        "source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011",
+        "source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc241-g",
+      "contestNumber": 241,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc241_g",
+      "sourceRevisionIds": [
+        "source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e",
+        "source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc241-ex",
+      "contestNumber": 241,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc241_h",
+      "sourceRevisionIds": [
+        "source-abc241-editorial-3473-9985803265c2f2ceca16b28ef311d5a58d36baf0cc903dc7cd7087a0c39e5129",
+        "source-abc241-ex-problem-920692d485b32ace547699e9cee4a214d4b640f55d93314679fc656d0d3fe3c5"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc242-e",
+      "contestNumber": 242,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc242_e",
+      "sourceRevisionIds": [
+        "source-abc242-e-problem-105c649ecb269302c3783a0fc0425f5042be2f65892d32c9e1a658283a51fa21",
+        "source-abc242-editorial-3516-341f0c2b714e9d00396dc06071f467ad103a6c56d7f034cb2d80284e09c1d2f7"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc242-f",
+      "contestNumber": 242,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc242_f",
+      "sourceRevisionIds": [
+        "source-abc242-editorial-3522-d39e3de67b27391779fc77a8c4b78a0c312a6680143b1c75af6a07908174f39f",
+        "source-abc242-f-problem-a91e15c3ea5df8a298ef6f8f613cebf8ab72483d0ca9df9344328e0bb0171108"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc242-g",
+      "contestNumber": 242,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc242_g",
+      "sourceRevisionIds": [
+        "source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8",
+        "source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc242-ex",
+      "contestNumber": 242,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc242_h",
+      "sourceRevisionIds": [
+        "source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915",
+        "source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc243-e",
+      "contestNumber": 243,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc243_e",
+      "sourceRevisionIds": [
+        "source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41",
+        "source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc243-f",
+      "contestNumber": 243,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc243_f",
+      "sourceRevisionIds": [
+        "source-abc243-editorial-3508-3ebd952fa347715a6423d7e9c124bee0e7408cca427b9b705bcc1d308492d16f",
+        "source-abc243-f-problem-5079ff840136d541c211c172c8a0a558b6aaef5045395c908305ee1c2788093e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc243-g",
+      "contestNumber": 243,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc243_g",
+      "sourceRevisionIds": [
+        "source-abc243-editorial-3510-390624bcb30e413c9c5a41a55f2872e9d60338300d004b539c551de1c561a5b1",
+        "source-abc243-g-problem-b11ec941d82d048180799a902b0fd591a98479641423b35d2b627222a5187a82"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc243-ex",
+      "contestNumber": 243,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc243_h",
+      "sourceRevisionIds": [
+        "source-abc243-editorial-3546-89a660b3c8dda82dde57aa36a38a94770e60efb75f91ba72b8d5d4ac1c78a971",
+        "source-abc243-ex-problem-cb35728cca943b2ff65de0edea1b620bf01183421366f241251dbf8132adbebe"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc244-e",
+      "contestNumber": 244,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc244_e",
+      "sourceRevisionIds": [
+        "source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920",
+        "source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc244-f",
+      "contestNumber": 244,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc244_f",
+      "sourceRevisionIds": [
+        "source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c",
+        "source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc244-g",
+      "contestNumber": 244,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc244_g",
+      "sourceRevisionIds": [
+        "source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e",
+        "source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc244-ex",
+      "contestNumber": 244,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc244_h",
+      "sourceRevisionIds": [
+        "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+        "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc245-e",
+      "contestNumber": 245,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc245_e",
+      "sourceRevisionIds": [
+        "source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235",
+        "source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc245-f",
+      "contestNumber": 245,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc245_f",
+      "sourceRevisionIds": [
+        "source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c",
+        "source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc245-g",
+      "contestNumber": 245,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc245_g",
+      "sourceRevisionIds": [
+        "source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa",
+        "source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc245-ex",
+      "contestNumber": 245,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc245_h",
+      "sourceRevisionIds": [
+        "source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d",
+        "source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc246-e",
+      "contestNumber": 246,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc246_e",
+      "sourceRevisionIds": [
+        "source-abc246-e-problem-0e2f0bb30b88da59ba7287e7e33d67229dfb820dceb6b1c2053d6b9fce77a94e",
+        "source-abc246-editorial-3702-98ab0c26bf215624b89817acec8ece6263f72ade00b9fd1d31ad410235d80a51"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc246-f",
+      "contestNumber": 246,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc246_f",
+      "sourceRevisionIds": [
+        "source-abc246-editorial-3703-5f85057e90e262a99e173328f8aea104b062c4190fe41c301f6b3005f52e5521",
+        "source-abc246-f-problem-b94ffbe6c9d6fa14522518bddc097e6ac7134d9d96564598d89d696b6f231de5"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc246-g",
+      "contestNumber": 246,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc246_g",
+      "sourceRevisionIds": [
+        "source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72",
+        "source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc246-ex",
+      "contestNumber": 246,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc246_h",
+      "sourceRevisionIds": [
+        "source-abc246-editorial-3705-73fb7421c296a34062f61baff4f3572476241cbc81f54aac6c14d6374e53381a",
+        "source-abc246-ex-problem-a1b21b8f8e0ba6be58e2ef77d8a5b8fd73c081165d7832ed9a18d9a5cba6efe5"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc247-e",
+      "contestNumber": 247,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc247_e",
+      "sourceRevisionIds": [
+        "source-abc247-e-problem-53e415f6d3d83bc8a82bd8a4cf4d2653566ae05d5ecc0a66e70d6e84b6849fbb",
+        "source-abc247-editorial-3736-974927d584c54ce2af9c7e02ec62854811379031ca77cc8ee90694be0db78020"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc247-f",
+      "contestNumber": 247,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc247_f",
+      "sourceRevisionIds": [
+        "source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d",
+        "source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc247-g",
+      "contestNumber": 247,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc247_g",
+      "sourceRevisionIds": [
+        "source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd",
+        "source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc247-ex",
+      "contestNumber": 247,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc247_h",
+      "sourceRevisionIds": [
+        "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+        "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc248-e",
+      "contestNumber": 248,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc248_e",
+      "sourceRevisionIds": [
+        "source-abc248-e-problem-3bdb5230e435e45ecdada0339b5aa4d424d0a6dcecc863712b12270c320c19a8",
+        "source-abc248-editorial-3792-678e0d64c5fea2844c27e28f78b4fffc0bd8497479aa439587db945b60c3fac6"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc248-f",
+      "contestNumber": 248,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc248_f",
+      "sourceRevisionIds": [
+        "source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18",
+        "source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc248-g",
+      "contestNumber": 248,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc248_g",
+      "sourceRevisionIds": [
+        "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721",
+        "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc248-ex",
+      "contestNumber": 248,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc248_h",
+      "sourceRevisionIds": [
+        "source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b",
+        "source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc249-e",
+      "contestNumber": 249,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc249_e",
+      "sourceRevisionIds": [
+        "source-abc249-e-problem-cfe689aa85acd815da2acaa222c471dc6da66e90e7448790bc6f36389707ae6d",
+        "source-abc249-editorial-3840-84d04b3fc3ea14ea3dddfaa54d60218ec60fc0ed9c4e16245236bbea6d1d334b"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc249-f",
+      "contestNumber": 249,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc249_f",
+      "sourceRevisionIds": [
+        "source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e",
+        "source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc249-g",
+      "contestNumber": 249,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc249_g",
+      "sourceRevisionIds": [
+        "source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32",
+        "source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc249-ex",
+      "contestNumber": 249,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc249_h",
+      "sourceRevisionIds": [
+        "source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec",
+        "source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc250-e",
+      "contestNumber": 250,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc250_e",
+      "sourceRevisionIds": [
+        "source-abc250-e-problem-7e57826303bfe2b9d9c3a11fb1a322d701539b14571e3397052872d29532abe8",
+        "source-abc250-editorial-3906-78e504b32c0ebfd41a61836f3acd43520283c852c6412bbe8de3fe7b86d23d37"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc250-f",
+      "contestNumber": 250,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc250_f",
+      "sourceRevisionIds": [
+        "source-abc250-editorial-3928-5023b9af8aa1da66ab00900f5b4489f1f6945435795598250a9021f4744f04b9",
+        "source-abc250-f-problem-f073c65fa9a08b3cce95e5d85aac92471a16dda3bec9211a0af9189e1ebec2b2"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc250-g",
+      "contestNumber": 250,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc250_g",
+      "sourceRevisionIds": [
+        "source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b",
+        "source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc250-ex",
+      "contestNumber": 250,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc250_h",
+      "sourceRevisionIds": [
+        "source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb",
+        "source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc251-e",
+      "contestNumber": 251,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc251_e",
+      "sourceRevisionIds": [
+        "source-abc251-e-problem-7c9287bd212a0a604dc19a9cf77613d3cef0b2dbf5527459d4f2e00e169015c7",
+        "source-abc251-editorial-3960-1d8338326b3b9ca141e5de2a04f3325e817b795409f99f48ec6f5b8de3fda6d2"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc251-f",
+      "contestNumber": 251,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc251_f",
+      "sourceRevisionIds": [
+        "source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d",
+        "source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc251-g",
+      "contestNumber": 251,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc251_g",
+      "sourceRevisionIds": [
+        "source-abc251-editorial-3961-2a9bef4a1862573769c0974a139227410cfe23c0b17110582e5c2dd0790c3413",
+        "source-abc251-g-problem-ed1514ba44cff749adc79cbdfd6994026e15dfd7a7cc482f7ea929e03c45625c"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc251-ex",
+      "contestNumber": 251,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc251_h",
+      "sourceRevisionIds": [
+        "source-abc251-editorial-3954-5502e77b9db90e8223bf51820c90da77bdb341a71963b77421a1a563a6336004",
+        "source-abc251-ex-problem-fecc529753f72db31753658d74853da733df6f9c45e94aa18801d577114ab7b0"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc252-e",
+      "contestNumber": 252,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc252_e",
+      "sourceRevisionIds": [
+        "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+        "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"
+      ],
+      "candidateDomains": ["graph-search"],
+      "candidateOutcomeIds": ["outcome-candidate-shortest-path-structure"],
+      "classifications": [
+        {
+          "domain": "graph-search",
+          "outcomeId": "outcome-candidate-shortest-path-structure",
+          "sourceRevisionIds": [
+            "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+            "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"
+          ],
+          "rationale": "頂点 1 からの Dijkstra で各頂点の距離を確定させた直前辺を採用し、最短路木を構成する公式解法である。"
+        }
+      ],
+      "selectionEligible": true,
+      "exclusionReason": null,
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc252-f",
+      "contestNumber": 252,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc252_f",
+      "sourceRevisionIds": [
+        "source-abc252-editorial-3998-ca987e0b6f9f09b37cc5ee02e435b26498e04365c6786f935ba0c3c5501d29fc",
+        "source-abc252-f-problem-407bef3a8254ef3bcb6695a21b41be40fd863a5e4f768ace7a2b4c04abe77c9b"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc252-g",
+      "contestNumber": 252,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc252_g",
+      "sourceRevisionIds": [
+        "source-abc252-editorial-3999-5b2717dd1df94942cb59daa50c900cd1837cc938ecd38742b5a848ceacf25e6b",
+        "source-abc252-g-problem-228c5b0b2f3d0d7de2e819e38eedfdb28c3778d3434903e386bc3b0ec241e3ad"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc252-ex",
+      "contestNumber": 252,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc252_h",
+      "sourceRevisionIds": [
+        "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
+        "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc253-e",
+      "contestNumber": 253,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc253_e",
+      "sourceRevisionIds": [
+        "source-abc253-e-problem-0ff7727e69a800ed6aa6bec68cb3e8676c00ec61fe523bf2f16afcc1ec5aa533",
+        "source-abc253-editorial-4018-2d52449d4b7b11ea03e570f282c8b0ba4362cd0103953f65a58ce9e3b3b1bc6e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc253-f",
+      "contestNumber": 253,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc253_f",
+      "sourceRevisionIds": [
+        "source-abc253-editorial-4025-a9dda18762878be5ec2358cece648988d3e594c03022782f457e4a13e5c3a095",
+        "source-abc253-f-problem-9b46b432bebd3b4b187ea5abb99002da9ceeb10b0aeccaa727cd4c94ffc87a7b"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc253-g",
+      "contestNumber": 253,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc253_g",
+      "sourceRevisionIds": [
+        "source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651",
+        "source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc253-ex",
+      "contestNumber": 253,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc253_h",
+      "sourceRevisionIds": [
+        "source-abc253-editorial-4023-366204e887abfce0e08e2692d2e2861877d7e000474c649f5be1fddbb290bf8a",
+        "source-abc253-ex-problem-403eda1a50e862876c0d2cf16a7969f8c8d764c1034b46e09454824b8ae3cabd"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc254-e",
+      "contestNumber": 254,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc254_e",
+      "sourceRevisionIds": [
+        "source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518",
+        "source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc254-f",
+      "contestNumber": 254,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc254_f",
+      "sourceRevisionIds": [
+        "source-abc254-editorial-4067-c931ee6e07f8d7b7e2f38c2ceb2193c131f8f11b66f6200318c5a3ce39a2cf54",
+        "source-abc254-f-problem-fb9b12af78f2c27e67cf3fdf37ca5b98e81bbb6ccf253f0e8602d3235e2f53d0"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc254-g",
+      "contestNumber": 254,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc254_g",
+      "sourceRevisionIds": [
+        "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+        "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc254-ex",
+      "contestNumber": 254,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc254_h",
+      "sourceRevisionIds": [
+        "source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52",
+        "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc255-e",
+      "contestNumber": 255,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc255_e",
+      "sourceRevisionIds": [
+        "source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a",
+        "source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc255-f",
+      "contestNumber": 255,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc255_f",
+      "sourceRevisionIds": [
+        "source-abc255-editorial-4105-468540b88cdedbb71b5c0365f7989f877a04953998ea5c1b51b9db993945ab3b",
+        "source-abc255-f-problem-d18f8d29fe4e73a8279289ed4b8f908c96f0e6f08d0e99bf611576777a05137b"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc255-g",
+      "contestNumber": 255,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc255_g",
+      "sourceRevisionIds": [
+        "source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132",
+        "source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc255-ex",
+      "contestNumber": 255,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc255_h",
+      "sourceRevisionIds": [
+        "source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d",
+        "source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc256-e",
+      "contestNumber": 256,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc256_e",
+      "sourceRevisionIds": [
+        "source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648",
+        "source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc256-f",
+      "contestNumber": 256,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc256_f",
+      "sourceRevisionIds": [
+        "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+        "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+      ],
+      "candidateDomains": ["data-structures-algorithm-design"],
+      "candidateOutcomeIds": ["outcome-candidate-range-aggregate-under-updates"],
+      "classifications": [
+        {
+          "domain": "data-structures-algorithm-design",
+          "outcomeId": "outcome-candidate-range-aggregate-under-updates",
+          "sourceRevisionIds": [
+            "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+            "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+          ],
+          "rationale": "三重累積和の係数を二次式へ展開し、A_i・iA_i・i²A_i の更新可能な prefix sum を三本の Fenwick tree で保つ公式解法である。"
+        }
+      ],
+      "selectionEligible": true,
+      "exclusionReason": null,
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc256-g",
+      "contestNumber": 256,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc256_g",
+      "sourceRevisionIds": [
+        "source-abc256-editorial-4130-c937a3ca3ad9ce902644773130814a2722819fd3dcbf5fa9616c506c5796c96a",
+        "source-abc256-g-problem-e2d7ac823f51f5a8e20aba7cec2631acd3bcab48b3e8a5eed6b8a1039de3f27c"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc256-ex",
+      "contestNumber": 256,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc256_h",
+      "sourceRevisionIds": [
+        "source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953",
+        "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc257-e",
+      "contestNumber": 257,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc257_e",
+      "sourceRevisionIds": [
+        "source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0",
+        "source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc257-f",
+      "contestNumber": 257,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc257_f",
+      "sourceRevisionIds": [
+        "source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35",
+        "source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc257-g",
+      "contestNumber": 257,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc257_g",
+      "sourceRevisionIds": [
+        "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9",
+        "source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc257-ex",
+      "contestNumber": 257,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc257_h",
+      "sourceRevisionIds": [
+        "source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a",
+        "source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc258-e",
+      "contestNumber": 258,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc258_e",
+      "sourceRevisionIds": [
+        "source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084",
+        "source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc258-f",
+      "contestNumber": 258,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc258_f",
+      "sourceRevisionIds": [
+        "source-abc258-editorial-4237-f64386f7dcd8dcbd2521070103668d59be2948a5eba1d7c8349965e9de0754d5",
+        "source-abc258-f-problem-e69b00e450a590b4f1f26d98031df0a0dcbc28ede9a4274f20f2b21b68bab788"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc258-g",
+      "contestNumber": 258,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc258_g",
+      "sourceRevisionIds": [
+        "source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a",
+        "source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc258-ex",
+      "contestNumber": 258,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc258_h",
+      "sourceRevisionIds": [
+        "source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5",
+        "source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc259-e",
+      "contestNumber": 259,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc259_e",
+      "sourceRevisionIds": [
+        "source-abc259-e-problem-eb7a258d38ce1d9f2ef53211daa3360cf49824f3019fbd9570feb5c144957816",
+        "source-abc259-editorial-4271-76fe64c5c7a413668836b08101de648037f01ce8e462d52ce8eb8b8d1ab980e8"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc259-f",
+      "contestNumber": 259,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc259_f",
+      "sourceRevisionIds": [
+        "source-abc259-editorial-4287-3612bfdde67210806fa69102feb1a83f6ce40f8819df0ea69ef29e3a434f89e8",
+        "source-abc259-f-problem-ace555e2e0fe1e65c70f65d4e3021a56b88142ea4c5c68b9767e8d833d4964a9"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc259-g",
+      "contestNumber": 259,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc259_g",
+      "sourceRevisionIds": [
+        "source-abc259-editorial-4284-a25457dfeead7602125f9196b2951be97642758194bb48f204a4b1fab4a187e5",
+        "source-abc259-g-problem-d43876664d61be4e70a53399cdfc70d319194144c438ac4a2ee97ee5efc1ed1c"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc259-ex",
+      "contestNumber": 259,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc259_h",
+      "sourceRevisionIds": [
+        "source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0",
+        "source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc260-e",
+      "contestNumber": 260,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc260_e",
+      "sourceRevisionIds": [
+        "source-abc260-e-problem-328b227f4e99a537b69624783d76fc38e6ead0e01546ee21e17761b6ae77e9db",
+        "source-abc260-editorial-4458-d75d5dd71779552ced576f6e2f3bb80a4171a1aa23dc1a95432563e980ab61ac"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc260-f",
+      "contestNumber": 260,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc260_f",
+      "sourceRevisionIds": [
+        "source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b",
+        "source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc260-g",
+      "contestNumber": 260,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc260_g",
+      "sourceRevisionIds": [
+        "source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c",
+        "source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc260-ex",
+      "contestNumber": 260,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc260_h",
+      "sourceRevisionIds": [
+        "source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40",
+        "source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc261-e",
+      "contestNumber": 261,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc261_e",
+      "sourceRevisionIds": [
+        "source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578",
+        "source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc261-f",
+      "contestNumber": 261,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc261_f",
+      "sourceRevisionIds": [
+        "source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb",
+        "source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc261-g",
+      "contestNumber": 261,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc261_g",
+      "sourceRevisionIds": [
+        "source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa",
+        "source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc261-ex",
+      "contestNumber": 261,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc261_h",
+      "sourceRevisionIds": [
+        "source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d",
+        "source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc262-e",
+      "contestNumber": 262,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc262_e",
+      "sourceRevisionIds": [
+        "source-abc262-e-problem-bc5fade319bd5ee2194ece46e588a0f5f4424f33bb25366042252c06b9136ed1",
+        "source-abc262-editorial-4479-33a3a1a74196fae91ced253beb14e06629da248ae29423536b8006b1eade4133"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc262-f",
+      "contestNumber": 262,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc262_f",
+      "sourceRevisionIds": [
+        "source-abc262-editorial-4504-fa00567abe2f9d20ce2bfdad3b0955cae6283d3d8c422a1f3fef480ede8090b7",
+        "source-abc262-f-problem-e97d9131710ad7ff7ac0ab7616fd67a116b4f8df7a6289f54313e1c37043b87a"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc262-g",
+      "contestNumber": 262,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc262_g",
+      "sourceRevisionIds": [
+        "source-abc262-editorial-4505-85be15665e24276967509cb409dcdfc402c9afa8e38ac52f41e1df1cc3c7e7dc",
+        "source-abc262-g-problem-19d170e12d0d8ec942a444cbab69fb0889a4accb5ff35fbc1d9270a4357e9534"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc262-ex",
+      "contestNumber": 262,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc262_h",
+      "sourceRevisionIds": [
+        "source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058",
+        "source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc263-e",
+      "contestNumber": 263,
+      "officialTaskOrder": 4,
+      "advancedLabel": "E",
+      "officialTaskId": "abc263_e",
+      "sourceRevisionIds": [
+        "source-abc263-e-problem-eef4590c663d3faba07d180145406aac13d7d7c43bf20125fb419d5f195586f2",
+        "source-abc263-editorial-4546-50da0faeb7c80a60d2182c11cba30b7434a8e34da04c987b8c7eb076641af9a4"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc263-f",
+      "contestNumber": 263,
+      "officialTaskOrder": 5,
+      "advancedLabel": "F",
+      "officialTaskId": "abc263_f",
+      "sourceRevisionIds": [
+        "source-abc263-editorial-4550-b6e2922d0d6dd7c13db4dd4ddb7bb9d9b79ac9e390f694ef5317da5f15264315",
+        "source-abc263-f-problem-29c43defca98c2a963108037041bb5b6dcc5966f30ac660724107a28ed5d9274"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc263-g",
+      "contestNumber": 263,
+      "officialTaskOrder": 6,
+      "advancedLabel": "G",
+      "officialTaskId": "abc263_g",
+      "sourceRevisionIds": [
+        "source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2",
+        "source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    },
+    {
+      "problemId": "abc263-ex",
+      "contestNumber": 263,
+      "officialTaskOrder": 7,
+      "advancedLabel": "Ex",
+      "officialTaskId": "abc263_h",
+      "sourceRevisionIds": [
+        "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228",
+        "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e"
+      ],
+      "candidateDomains": [],
+      "candidateOutcomeIds": [],
+      "classifications": [],
+      "selectionEligible": false,
+      "exclusionReason": "initial-v1 の固定成果候補には含めず、全コーパスの Technique Inventory で評価するため。",
+      "fixtureId": null
+    }
+  ],
+  "candidatePoolDigest": "6987df761395247879f6b8dd9ce430353eee4d183b2a96f739f833ff74481a72"
+}

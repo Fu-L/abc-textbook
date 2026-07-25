@@ -1,0 +1,20 @@
+{
+  "id": "abc288-g",
+  "contestId": "abc288",
+  "slotLabel": "G",
+  "officialTaskId": "abc288_g",
+  "title": "3^N Minesweeper",
+  "officialUrl": "https://atcoder.jp/contests/abc288/tasks/abc288_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 12; There is a placement of bombs consistent with A_0, A_1, \\ldots, A_{3^N-1}.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc288-g-problem-db639708c759ee9e18690d8b5632e289ed81f9465831f8d77a0270f935cdbde1",
+    "source-abc288-editorial-5668-ef5c3075ac804bab211e75a08af10f6ebb16e459bc0b1aff5de1646db74da3cd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

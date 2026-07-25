@@ -1,0 +1,20 @@
+{
+  "id": "abc267-e",
+  "contestId": "abc267",
+  "slotLabel": "E",
+  "officialTaskId": "abc267_e",
+  "title": "Erasing Vertices 2",
+  "officialUrl": "https://atcoder.jp/contests/abc267/tasks/abc267_e",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^5; 0 \\le M \\le 2 \\times 10^5; 1 \\le A_i \\le 10^9; 1 \\le U_i,V_i \\le N; The given graph is simple.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a",
+    "source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

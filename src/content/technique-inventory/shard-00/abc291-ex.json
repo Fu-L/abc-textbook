@@ -1,0 +1,22 @@
+{
+  "problemId": "abc291-ex",
+  "sourceRevisionIds": [
+    "source-abc291-editorial-5840-f81899847d6c0912676ee91faaba0803527dfcec357072d21460af24e7909b0c",
+    "source-abc291-ex-problem-0f5a2a3d492a1dc4e0890bcd3980e0243acdf9436eed5817e512836de4613d9d"
+  ],
+  "coreMethod": "abc291-ex「Balanced Tree」では、主解法候補として、木を重心で再帰分割し、重心をまたぐ寄与だけを各階層で集計する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "重心除去後の各連結成分が半分以下になるため、各頂点の寄与は対数個の階層でちょうど一度ずつ処理される。",
+    "Balanced Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "木の重心と再帰分割"],
+  "implementationConcerns": [
+    "重心を除いた成分ごとの集計を分離し、同一成分内の過剰計上を差し引く。"
+  ],
+  "outcomeCandidates": [
+    "Balanced Tree 型の 根付き木・部分木・パスの関係に対し、木の重心と再帰分割を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc252-ex",
+  "contestId": "abc252",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc252_h",
+  "title": "K-th beautiful Necklace",
+  "officialUrl": "https://atcoder.jp/contests/abc252/tasks/abc252_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq C \\leq N \\leq 70; 1 \\leq D_i \\leq C; 0 \\leq V_i < 2^{60}; 1 \\leq K \\leq 10^{18}; There are at least K ways to make a necklace.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed",
+    "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

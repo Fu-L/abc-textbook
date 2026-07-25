@@ -1,0 +1,20 @@
+{
+  "id": "abc236-g",
+  "contestId": "abc236",
+  "slotLabel": "G",
+  "officialTaskId": "abc236_g",
+  "title": "Good Vertices",
+  "officialUrl": "https://atcoder.jp/contests/abc236/tasks/abc236_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 100; 1 \\leq T \\leq N^2; 1 \\leq L \\leq 10^9; 1 \\leq u_t, v_t \\leq N; i \\neq j \\Rightarrow (u_i, v_i) \\neq (u_j, v_j); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc236-g-problem-f1eea62ce5aa1264a1a77a48af5df332be33d5dc6fc17e07d56e10c53c66baed",
+    "source-abc236-editorial-3286-eb641db2ebe6102a3decfe3203d9f04dcb8427feefdb35660b1fe094417c333d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

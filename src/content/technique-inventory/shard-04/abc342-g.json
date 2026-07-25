@@ -1,0 +1,20 @@
+{
+  "problemId": "abc342-g",
+  "sourceRevisionIds": [
+    "source-abc342-editorial-9373-764095d523625c3183a5d63be514e88bebed61dcbf54caf6a44d2858ff2554fa",
+    "source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7"
+  ],
+  "coreMethod": "abc342-g「Retroactive Range Chmax」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "未処理候補の最小または最大 key を常に選ぶ greedy-choice property を保つ。",
+    "Retroactive Range Chmax 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "priority queue"],
+  "implementationConcerns": ["更新前の古い entry を識別して読み飛ばし、tie-break を決定的にする。"],
+  "outcomeCandidates": [
+    "Retroactive Range Chmax 型の 区間端点と包含関係に対し、priority queueを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

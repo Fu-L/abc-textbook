@@ -1,0 +1,20 @@
+{
+  "id": "abc352-f",
+  "contestId": "abc352",
+  "slotLabel": "F",
+  "officialTaskId": "abc352_f",
+  "title": "Estimate Order",
+  "officialUrl": "https://atcoder.jp/contests/abc352/tasks/abc352_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 16; 0 \\leq M \\leq \\frac{N(N - 1)}{2}; 1 \\leq A_i, B_i \\leq N; 1 \\leq C_i \\leq N - 1; (A_i, B_i) \\neq (A_j, B_j) (i \\neq j); There is at least one possible ranking that does not contradict the given information.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc352-f-problem-35d14022d92c00f83a01507e4d6b5bc77077b50b3809064a4417b574c01caa21",
+    "source-abc352-editorial-9924-9f4a632245687078caf887539d0a943a3fdae14d244b269cc96b7f0c6dbb80a1"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

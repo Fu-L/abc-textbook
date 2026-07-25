@@ -1,0 +1,20 @@
+{
+  "id": "abc278-ex",
+  "contestId": "abc278",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc278_h",
+  "title": "make 1",
+  "officialUrl": "https://atcoder.jp/contests/abc278/tasks/abc278_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq B \\leq 10^7; N \\leq 2^B; N and B are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc278-ex-problem-49227ad1d2ec3968bf08a7cbc0c1fab87d217b52980f2097766caae5bfd774f7",
+    "source-abc278-editorial-5210-0f1a56156ff30245ba49db87069bf35c61ea37eecc6e019379bf06fedd2ac83b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

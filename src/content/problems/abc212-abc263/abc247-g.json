@@ -1,0 +1,20 @@
+{
+  "id": "abc247-g",
+  "contestId": "abc247",
+  "slotLabel": "G",
+  "officialTaskId": "abc247_g",
+  "title": "Dream Team",
+  "officialUrl": "https://atcoder.jp/contests/abc247/tasks/abc247_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3\\times 10^4; 1 \\leq A_i,B_i \\leq 150; 1 \\leq C_i \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3",
+    "source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

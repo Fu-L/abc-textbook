@@ -1,0 +1,20 @@
+{
+  "id": "abc466-g",
+  "contestId": "abc466",
+  "slotLabel": "G",
+  "officialTaskId": "abc466_g",
+  "title": "Segment Sum Constraints",
+  "officialUrl": "https://atcoder.jp/contests/abc466/tasks/abc466_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 8; 1 \\leq M \\leq 36; 1\\leq L_i\\leq R_i\\leq N; 1\\leq S_i\\leq 10^9; All (L_i,R_i) are distinct.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6",
+    "source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

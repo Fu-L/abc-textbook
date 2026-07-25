@@ -1,0 +1,20 @@
+{
+  "id": "abc212-g",
+  "contestId": "abc212",
+  "slotLabel": "G",
+  "officialTaskId": "abc212_g",
+  "title": "Power Pair",
+  "officialUrl": "https://atcoder.jp/contests/abc212/tasks/abc212_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq P \\leq 10^{12}; P is a prime number.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

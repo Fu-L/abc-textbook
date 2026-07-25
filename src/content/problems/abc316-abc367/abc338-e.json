@@ -1,0 +1,20 @@
+{
+  "id": "abc338-e",
+  "contestId": "abc338",
+  "slotLabel": "E",
+  "officialTaskId": "abc338_e",
+  "title": "Chords",
+  "officialUrl": "https://atcoder.jp/contests/abc338/tasks/abc338_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 2\\times 10^5; 1\\leq A_i,B_i \\leq 2N; A_1,\\dots,A_N,B_1,\\dots,B_N are all distinct; All input values are integers",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc338-e-problem-9dd60d4e5c4ed7772cd791c12f8b48bef91c588ae829b02c763fbe3f7f9e8bc0",
+    "source-abc338-editorial-9172-411422b4ddb0a7b0369c40a609943ac7f77967ee10923f39ad7fd7f30c5c8102"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc262-e",
+  "sourceRevisionIds": [
+    "source-abc262-e-problem-bc5fade319bd5ee2194ece46e588a0f5f4424f33bb25366042252c06b9136ed1",
+    "source-abc262-editorial-4479-33a3a1a74196fae91ced253beb14e06629da248ae29423536b8006b1eade4133"
+  ],
+  "coreMethod": "abc262-e「Red and Blue Graph」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+    "Red and Blue Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["組合せ数と二項係数"],
+  "implementationConcerns": [
+    "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Red and Blue Graph 型の問題に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

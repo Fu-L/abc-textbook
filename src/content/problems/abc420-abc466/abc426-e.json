@@ -1,0 +1,20 @@
+{
+  "id": "abc426-e",
+  "contestId": "abc426",
+  "slotLabel": "E",
+  "officialTaskId": "abc426_e",
+  "title": "Closest Moment",
+  "officialUrl": "https://atcoder.jp/contests/abc426/tasks/abc426_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T\\leq 2\\times 10^5; -100\\leq TS_X,TS_Y,TG_X,TG_Y,AS_X,AS_Y,AG_X,AG_Y \\leq 100; (TS_X,TS_Y)\\neq (TG_X,TG_Y); (AS_X,AS_Y)\\neq (AG_X,AG_Y); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc426-e-problem-064cb3ae02052d71eb4c77ee70984fb8d76f9ba8578c9bc580933b2b46f0cef3",
+    "source-abc426-editorial-14151-841f0e2f065f1d8848b53ab8df599a199a5740f9c0153aa032edd6c748269877"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

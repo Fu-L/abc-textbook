@@ -1,0 +1,20 @@
+{
+  "id": "abc410-g",
+  "contestId": "abc410",
+  "slotLabel": "G",
+  "officialTaskId": "abc410_g",
+  "title": "Longest Chord Chain",
+  "officialUrl": "https://atcoder.jp/contests/abc410/tasks/abc410_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 1 \\leq A_i,B_i \\leq 2N; The 2N values A_1, \\ldots, A_N,B_1,\\ldots,B_N are pairwise distinct.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc410-g-problem-3028d18c1c027682e0605916145d5cdb51cd071d32e88766adf40142fdc4f9c4",
+    "source-abc410-editorial-13206-e2fbdc9a39a7edd04e902742f5f6bd3566f61c63a1fceb56b9d1afdb1158bc5f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

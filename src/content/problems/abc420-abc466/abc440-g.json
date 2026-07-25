@@ -1,0 +1,20 @@
+{
+  "id": "abc440-g",
+  "contestId": "abc440",
+  "slotLabel": "G",
+  "officialTaskId": "abc440_g",
+  "title": "Haunted House",
+  "officialUrl": "https://atcoder.jp/contests/abc440/tasks/abc440_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: F,H,W are integers.; 1 \\leq F \\leq 10; 1 \\leq H,W \\leq 500; S_{k,i,j} is either a digit (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) or #. (1 \\leq k \\leq F, 1 \\leq i \\leq H, 1 \\leq j \\leq W); Q is an integer.; 1 \\leq Q \\leq 10^5; G_i, A_i, B_i are integers. (1 \\leq i \\leq Q); 1 \\leq G_i \\leq F (1 \\leq i \\leq Q); 1 \\leq A_i \\leq H (1 \\leq i \\leq Q); 1 \\leq B_i \\leq W (1 \\leq i \\leq Q); S_{G_i, A_i, B_i} is not #. (1 \\leq i \\leq Q)",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc440-g-problem-3878da44dd24e2554a0f3a6202d860f40957ffa364bd7f2c634c695900fde4a2",
+    "source-abc440-editorial-15033-e736b20251169d62c9695d54e2699f8cab16ab21ed6a0a06466c5f30ddecfb92"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

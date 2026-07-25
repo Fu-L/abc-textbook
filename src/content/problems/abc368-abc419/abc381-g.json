@@ -1,0 +1,20 @@
+{
+  "id": "abc381-g",
+  "contestId": "abc381",
+  "slotLabel": "G",
+  "officialTaskId": "abc381_g",
+  "title": "Fibonacci Product",
+  "officialUrl": "https://atcoder.jp/contests/abc381/tasks/abc381_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 5; 1 \\leq N \\leq 10^{18}; 0 \\leq x \\leq 998244352; 0 \\leq y \\leq 998244352; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46",
+    "source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

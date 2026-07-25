@@ -1,0 +1,22 @@
+{
+  "problemId": "abc318-f",
+  "sourceRevisionIds": [
+    "source-abc318-editorial-7075-3df92a12bdca86dc839ab5e4172efb614eef253a7ac1f559b431faae2b767c43",
+    "source-abc318-f-problem-0b824504860b99ebc9bb8759faba1965f56e706e77d629f4ac4f0f8615b89119"
+  ],
+  "coreMethod": "abc318-f「Octopus」では、距離の適否が変化する臨界座標 X_i±L_j を列挙し、隣接臨界点間の代表値で sorted distance 条件を判定する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "各 |X_i-k| と L_j の比較結果は臨界座標をまたぐまで変わらないため、各整数区間の一点を調べれば区間全体の可否が決まる。",
+    "Octopus 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["絶対値の区分線形性と臨界点列挙"],
+  "implementationConcerns": [
+    "臨界点自身と開区間内の整数を分け、距離列と長さ列を同じ順序で sort して比較する。"
+  ],
+  "outcomeCandidates": [
+    "Octopus 型の問題に対し、絶対値の区分線形性と臨界点列挙を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

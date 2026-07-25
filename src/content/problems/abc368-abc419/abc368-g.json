@@ -1,0 +1,20 @@
+{
+  "id": "abc368-g",
+  "contestId": "abc368",
+  "slotLabel": "G",
+  "officialTaskId": "abc368_g",
+  "title": "Add and Multiply Queries",
+  "officialUrl": "https://atcoder.jp/contests/abc368/tasks/abc368_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq B_i \\leq 10^9; 1 \\leq Q \\leq 10^5; For type 1 and 2 queries, 1 \\leq i \\leq N.; For type 1 and 2 queries, 1 \\leq x \\leq 10^9.; For type 3 queries, 1 \\leq l \\leq r \\leq N.; For type 3 queries, the value to be printed is at most 10^{18}.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc368-g-problem-6972426d6decd4bedceb4613cca81bf4610fbab9f3dcefe37256139e096fea76",
+    "source-abc368-editorial-10764-9b45a08a22ce98f11311581d85dcdca1fd865b97e679d67b801719ea69204c1d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

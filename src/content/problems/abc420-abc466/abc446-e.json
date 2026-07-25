@@ -1,0 +1,20 @@
+{
+  "id": "abc446-e",
+  "contestId": "abc446",
+  "slotLabel": "E",
+  "officialTaskId": "abc446_e",
+  "title": "Multiple-Free Sequences",
+  "officialUrl": "https://atcoder.jp/contests/abc446/tasks/abc446_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq M \\leq 1000; 0 \\leq A, B \\leq M-1; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc446-e-problem-0c5beab949050b64c016f59892db61e46001fb5ae35216d0c6f4691877c5a10e",
+    "source-abc446-editorial-16370-eefb0bfb53eb98118b5c9db0f5e01d5fe88ab24820d7fb5fcaa5e39bebea9404"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

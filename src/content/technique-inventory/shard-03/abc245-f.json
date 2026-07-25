@@ -1,0 +1,20 @@
+{
+  "problemId": "abc245-f",
+  "sourceRevisionIds": [
+    "source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c",
+    "source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40"
+  ],
+  "coreMethod": "abc245-f「Endless Walk」では、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "削除頂点からは rank が真に減るので無限歩できず、残存頂点は残存辺を選び続けて有限グラフ上の閉路へ到達する。",
+    "Endless Walk 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["逆向き topological pruning"],
+  "implementationConcerns": ["逆辺を保持し、出次数が零になった瞬間だけ queue へ追加する。"],
+  "outcomeCandidates": [
+    "Endless Walk 型の問題に対し、逆向き topological pruningを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

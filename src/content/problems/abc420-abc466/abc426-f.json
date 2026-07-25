@@ -1,0 +1,20 @@
+{
+  "id": "abc426-f",
+  "contestId": "abc426",
+  "slotLabel": "F",
+  "officialTaskId": "abc426_f",
+  "title": "Clearance",
+  "officialUrl": "https://atcoder.jp/contests/abc426/tasks/abc426_f",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 3 \\times 10^5; 1 \\le A_i \\le 10^{15}; 1 \\le Q \\le 3 \\times 10^5; 1 \\le l_i \\le r_i \\le N; 1 \\le k_i \\le 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc426-f-problem-93e6832d004ca768f3f6b7cf4738709114637b35636654bb85d2be9503041827",
+    "source-abc426-editorial-14143-0c6e4382363b1d657429ec69212ff11cb35e9fe9a5858f8a00956f490a3593d3"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

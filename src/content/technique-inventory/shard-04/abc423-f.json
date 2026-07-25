@@ -1,0 +1,22 @@
+{
+  "problemId": "abc423-f",
+  "sourceRevisionIds": [
+    "source-abc423-editorial-13873-b183c21408906a98fbc0a1ecb2bdafc34c2ae964197a7962a0a578c9cc33050e",
+    "source-abc423-f-problem-27082ddda5c782c854c9df91666560e0bb9c3f0adec2cb9f2d0306ea473c917c"
+  ],
+  "coreMethod": "abc423-f「Loud Cicada」では、条件 subset ごとの lcm 倍数個数を求め、subset Möbius 変換で「ちょうどその条件集合だけ」を満たす個数へ反転する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "部分条件 T の個数は T を含む全 exact 条件 S の和なので、Boolean lattice 上の zeta 変換を反転すればよい。",
+    "Loud Cicada 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["subset zeta・Möbius 変換"],
+  "implementationConcerns": [
+    "lcm が上限を超えた時点で sentinel に丸め、乗算前の除算で overflow を避ける。"
+  ],
+  "outcomeCandidates": [
+    "Loud Cicada 型の問題に対し、subset zeta・Möbius 変換を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

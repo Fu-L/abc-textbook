@@ -1,0 +1,20 @@
+{
+  "id": "abc228-g",
+  "contestId": "abc228",
+  "slotLabel": "G",
+  "officialTaskId": "abc228_g",
+  "title": "Digits on Grid",
+  "officialUrl": "https://atcoder.jp/contests/abc228/tasks/abc228_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W \\leq 10; 1 \\leq N \\leq 300; 1 \\leq c_{i, j} \\leq 9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc228-g-problem-0bda9bd2f12555defe74109966b56bc2d699f0f77de68f55f7136575c16a7719",
+    "source-abc228-editorial-2942-95765aba1977229808ad2c05816696527f7c547f42f56a6a101d6ed536bb8fdf"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

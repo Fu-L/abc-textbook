@@ -1,0 +1,20 @@
+{
+  "id": "abc259-ex",
+  "contestId": "abc259",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc259_h",
+  "title": "Yet Another Path Counting",
+  "officialUrl": "https://atcoder.jp/contests/abc259/tasks/abc259_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 400; 1 \\leq a_{i,j} \\leq N^2; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a",
+    "source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

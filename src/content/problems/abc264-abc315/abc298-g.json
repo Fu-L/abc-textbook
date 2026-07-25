@@ -1,0 +1,20 @@
+{
+  "id": "abc298-g",
+  "contestId": "abc298",
+  "slotLabel": "G",
+  "officialTaskId": "abc298_g",
+  "title": "Strawberry War",
+  "officialUrl": "https://atcoder.jp/contests/abc298/tasks/abc298_g",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W \\leq 6; 1 \\leq T \\leq HW-1; 0 \\leq s_{i,j} \\leq 10^{16}; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc298-g-problem-4aa32cffef2a254d7c9397481059a8a0e4669ca3c79d27ec3102535408f5aec5",
+    "source-abc298-editorial-6212-714fee5065565dad928d724e4d246c759083fd6f70b57311491a155320dfdaa2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

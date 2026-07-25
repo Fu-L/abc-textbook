@@ -1,0 +1,20 @@
+{
+  "id": "abc328-f",
+  "contestId": "abc328",
+  "slotLabel": "F",
+  "officialTaskId": "abc328_f",
+  "title": "Good Set Query",
+  "officialUrl": "https://atcoder.jp/contests/abc328/tasks/abc328_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\leq N, Q \\leq 2 \\times 10^5; 1 \\leq a_i, b_i \\leq N; -10^9 \\leq d_i \\leq 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58",
+    "source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc431-e",
+  "contestId": "abc431",
+  "slotLabel": "E",
+  "officialTaskId": "abc431_e",
+  "title": "Reflection on Grid",
+  "officialUrl": "https://atcoder.jp/contests/abc431/tasks/abc431_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T; 1\\leq H,W; HW\\leq 2\\times 10^5; S_i is a string of length W consisting of A, B, C.; T, H, and W are integers.; The sum of HW over all test cases is at most 2\\times 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc431-e-problem-aea5e8bc55c0fa23b159bfddf8b55bc876c2e47eea1ef3ef0541c2e1a4d1bf24",
+    "source-abc431-editorial-14483-a92eb04ac846e8663319adb90bc5e8e2a713a25188f00fa53d73c9d38bde3b8e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

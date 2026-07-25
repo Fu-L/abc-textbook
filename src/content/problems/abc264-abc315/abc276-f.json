@@ -1,0 +1,20 @@
+{
+  "id": "abc276-f",
+  "contestId": "abc276",
+  "slotLabel": "F",
+  "officialTaskId": "abc276_f",
+  "title": "Double Chance",
+  "officialUrl": "https://atcoder.jp/contests/abc276/tasks/abc276_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 1 \\leq A_i \\leq 2\\times 10^5; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc276-f-problem-8458e6623b4a15fa95504db816dad955e83b363f69ac8bcd8f7f5d3fae260deb",
+    "source-abc276-editorial-5174-9428f970e7dd996691db755207bc1d0af8192e158099bf7709109244eefd72b6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

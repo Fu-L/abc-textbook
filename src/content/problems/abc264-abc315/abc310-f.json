@@ -1,0 +1,20 @@
+{
+  "id": "abc310-f",
+  "contestId": "abc310",
+  "slotLabel": "F",
+  "officialTaskId": "abc310_f",
+  "title": "Make 10 Again",
+  "officialUrl": "https://atcoder.jp/contests/abc310/tasks/abc310_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100; 1 \\leq A_i \\leq 10^6; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc310-f-problem-ceb440da4cd164253e7b55de56ad6496baf85705d667d8b4ba231f4a76ace7cf",
+    "source-abc310-editorial-6791-97d7f1f412ee6d6ce11c3eafc9a45b2eaebd6163518981c398bb324443a75b07"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc276-g",
+  "contestId": "abc276",
+  "slotLabel": "G",
+  "officialTaskId": "abc276_g",
+  "title": "Count Sequences",
+  "officialUrl": "https://atcoder.jp/contests/abc276/tasks/abc276_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^7; 1 \\leq M \\leq 10^7; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc276-g-problem-fa716d725f2c9a5e1b8fed032c7d2f43c5312c70e114b1ccbd8c3c1771002f7a",
+    "source-abc276-editorial-5168-502ce674e16c416fc1f9f6562b75f2450e2715c73de44c5f5d30a4b238b8c778"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

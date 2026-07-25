@@ -1,0 +1,25 @@
+{
+  "problemId": "abc252-ex",
+  "sourceRevisionIds": [
+    "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
+    "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"
+  ],
+  "coreMethod": "abc252-ex「K-th beautiful Necklace」では、色ごとの選択数の積が均衡するよう色集合を二分し、各半分の XOR を列挙して binary trie の共有走査で K 番目を上位 bit から決める。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "各ネックレスは左右の選択の組へ一意に分かれ、trie の分岐数が現在の prefix を満たす組数になるため、組数との比較で答えの各 bit を確定できる。",
+    "K-th beautiful Necklace 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "asymptoticComplexity": {
+    "time": "O(3^{N/6} log V)（公式解法全体。特殊な計算量解析を含む）"
+  },
+  "prerequisiteCandidates": ["半分全列挙、binary trie、XOR の辞書順", "特殊な漸近計算量の見積もり"],
+  "implementationConcerns": [
+    "左右の列挙数が均衡するよう色単位で分割し、前の bit で到達した trie node から探索を再開する。"
+  ],
+  "outcomeCandidates": [
+    "K-th beautiful Necklace 型の問題に対し、半分全列挙、binary trie、XOR の辞書順を選び、状態・証明・特殊計算量を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

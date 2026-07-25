@@ -1,0 +1,20 @@
+{
+  "id": "abc263-ex",
+  "contestId": "abc263",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc263_h",
+  "title": "Intersection 2",
+  "officialUrl": "https://atcoder.jp/contests/abc263/tasks/abc263_h",
+  "constraintsSummary": "Time limit: 7 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 5 \\times 10^4; 1 \\le K \\le \\frac{N(N-1)}{2}; -1000 \\le |A_i|,|B_i|,|C_i| \\le 1000(1 \\le i \\le N); No two of the lines are parallel.; A_i \\neq 0 or B_i \\neq 0(1 \\le i \\le N).; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e",
+    "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

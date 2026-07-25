@@ -1,0 +1,10 @@
+{
+  "number": 316,
+  "contestId": "abc316",
+  "status": "officially_unheld",
+  "evidenceUrl": "https://atcoder.jp/contests/abc350/tasks/abc350_a",
+  "evidenceAssertion": "ABC316 was not held on AtCoder.",
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+  "fingerprint": "9d49649208a11fb1cea424d1057b1f9e06942db647c7a30a4e97926a87083e6b"
+}

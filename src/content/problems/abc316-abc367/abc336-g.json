@@ -1,0 +1,20 @@
+{
+  "id": "abc336-g",
+  "contestId": "abc336",
+  "slotLabel": "G",
+  "officialTaskId": "abc336_g",
+  "title": "16 Integers",
+  "officialUrl": "https://atcoder.jp/contests/abc336/tasks/abc336_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: X_{i, j, k, l} are all non-negative integers.; 1 \\leq \\displaystyle \\sum_{i=0}^1 \\sum_{j=0}^1 \\sum_{k=0}^1 \\sum_{l=0}^1 X_{i,j,k,l} \\leq 10^6",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb",
+    "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

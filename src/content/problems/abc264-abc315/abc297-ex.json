@@ -1,0 +1,20 @@
+{
+  "id": "abc297-ex",
+  "contestId": "abc297",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc297_h",
+  "title": "Diff Adjacent",
+  "officialUrl": "https://atcoder.jp/contests/abc297/tasks/abc297_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^5; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc297-ex-problem-acf0c092c4ebf9fd75c392b95e3647caad781aabbd8a882a52ff5ff9b40ad215",
+    "source-abc297-editorial-6141-eb4db3f782f161398487c46accd3f29e0badf888e3d74996b9178385e861fb3e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,21 @@
+{
+  "id": "abc295",
+  "number": 295,
+  "title": "AtCoder Beginner Contest 295",
+  "startedAt": "2023-03-25T21:00:00+09:00",
+  "endedAt": "2023-03-25T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc295",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc295_a",
+    "abc295_b",
+    "abc295_c",
+    "abc295_d",
+    "abc295_e",
+    "abc295_f",
+    "abc295_g",
+    "abc295_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc295-task-list-5dbf9249a16b8485f7ccfdc048aeed265fa1f65799d7aee4903d6bb3bf4dfb02",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc230-h",
+  "contestId": "abc230",
+  "slotLabel": "H",
+  "officialTaskId": "abc230_h",
+  "title": "Bullion",
+  "officialUrl": "https://atcoder.jp/contests/abc230/tasks/abc230_h",
+  "constraintsSummary": "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq W \\leq 2.5 \\times 10^5; 1 \\leq K \\leq W; 1 \\leq w_i \\leq W (1 \\leq i \\leq K); i \\neq j \\to w_i \\neq w_j (1 \\leq i,j \\leq K); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f",
+    "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

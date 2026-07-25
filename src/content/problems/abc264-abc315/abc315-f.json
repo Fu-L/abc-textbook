@@ -1,0 +1,20 @@
+{
+  "id": "abc315-f",
+  "contestId": "abc315",
+  "slotLabel": "F",
+  "officialTaskId": "abc315_f",
+  "title": "Shortcuts",
+  "officialUrl": "https://atcoder.jp/contests/abc315/tasks/abc315_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \\le N \\le 10^4; 0 \\le X_i,Y_i \\le 10^4; (X_i,Y_i) \\neq (X_j,Y_j) if i \\neq j.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc315-f-problem-e216857b05d3a1490f0d20893059c08b33dfb0d4ea423314d90b0869d0359b5b",
+    "source-abc315-editorial-6993-49cc68eab96132414d85a799b382c6666858d61b80fc2bace9f31c8cd0fdfed4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

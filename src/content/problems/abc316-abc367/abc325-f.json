@@ -1,0 +1,20 @@
+{
+  "id": "abc325-f",
+  "contestId": "abc325",
+  "slotLabel": "F",
+  "officialTaskId": "abc325_f",
+  "title": "Sensor Optimization Dilemma",
+  "officialUrl": "https://atcoder.jp/contests/abc325/tasks/abc325_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 100; 1\\leq D_i,L_j \\leq 10^5; 1\\leq C_j \\leq 10^9; 1\\leq K_j \\leq 10^3; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc325-f-problem-028bd12fa00570715edd9a40ccdb9bb363d331a16b8dc6034f7cda9a54ee84f9",
+    "source-abc325-editorial-7449-74ad2d2c5ccbb452ed7693aeb096d054c62cf569d6af4a3d8b61974855dfae26"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

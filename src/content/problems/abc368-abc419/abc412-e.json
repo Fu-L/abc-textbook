@@ -1,0 +1,20 @@
+{
+  "id": "abc412-e",
+  "contestId": "abc412",
+  "slotLabel": "E",
+  "officialTaskId": "abc412_e",
+  "title": "LCM Sequence",
+  "officialUrl": "https://atcoder.jp/contests/abc412/tasks/abc412_e",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq L \\leq R \\leq 10^{14}; R - L \\leq 10^7; L and R are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc412-e-problem-b1dd2ee7a196901de5c09926f0c5097e4ad5ba4e585f89a645632cf631613037",
+    "source-abc412-editorial-13387-d3fee80ccc172983e1e1ad2ed6c6b7c1e99725db08da55d76946ec45e2986d5f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

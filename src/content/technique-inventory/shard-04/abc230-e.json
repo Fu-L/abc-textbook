@@ -1,0 +1,22 @@
+{
+  "problemId": "abc230-e",
+  "sourceRevisionIds": [
+    "source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0",
+    "source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019"
+  ],
+  "coreMethod": "abc230-e「Fraction Floor Sum」では、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "floor(N/i) の異なる値は平方根より小さい商と平方根以下の添字から全て得られ、各区間端は除算で計算できる。",
+    "Fraction Floor Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["floor 除算の商区間列挙"],
+  "implementationConcerns": [
+    "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。"
+  ],
+  "outcomeCandidates": [
+    "Fraction Floor Sum 型の問題に対し、floor 除算の商区間列挙を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

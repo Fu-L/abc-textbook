@@ -1,0 +1,20 @@
+{
+  "id": "abc377-e",
+  "contestId": "abc377",
+  "slotLabel": "E",
+  "officialTaskId": "abc377_e",
+  "title": "Permute K times 2",
+  "officialUrl": "https://atcoder.jp/contests/abc377/tasks/abc377_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 1\\leq K\\leq10^{18}; 1\\leq P_i\\leq N\\ (1\\leq i\\leq N); P_i\\neq P_j\\ (1\\leq i\\lt j\\leq N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc377-e-problem-ffa6944b90c3f057053b100634a547deeb0bb4ca2423c96632b7a1d176f67038",
+    "source-abc377-editorial-11238-25534d683c1a7a13bda3efa75d7b1bf148fde3143638b94a0430c4e8793f0ca6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

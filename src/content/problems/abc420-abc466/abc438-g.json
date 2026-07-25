@@ -1,0 +1,20 @@
+{
+  "id": "abc438-g",
+  "contestId": "abc438",
+  "slotLabel": "G",
+  "officialTaskId": "abc438_g",
+  "title": "Sum of Min",
+  "officialUrl": "https://atcoder.jp/contests/abc438/tasks/abc438_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N,M\\le 2\\times 10^5; 1\\le K\\le 10^{18}; 1\\le A_i,B_i\\le 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c",
+    "source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc290-e",
+  "sourceRevisionIds": [
+    "source-abc290-e-problem-f2993e9faf757adb074a9a50baa3693197face16191fcc322009939465586f81",
+    "source-abc290-editorial-5757-6c632f8df14a8932c76a1074ca29937312e8c82e561eb79d6c41d5bdd3bf6239"
+  ],
+  "coreMethod": "abc290-e「Make it Palindrome」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "floor(N/i) の異なる値は平方根より小さい商と平方根以下の添字から全て得られ、各区間端は除算で計算できる。",
+    "Make it Palindrome 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "floor 除算の商区間列挙"],
+  "implementationConcerns": [
+    "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。"
+  ],
+  "outcomeCandidates": [
+    "Make it Palindrome 型の 列の順序と prefix 状態に対し、floor 除算の商区間列挙を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

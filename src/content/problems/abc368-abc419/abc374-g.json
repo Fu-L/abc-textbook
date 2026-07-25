@@ -1,0 +1,20 @@
+{
+  "id": "abc374-g",
+  "contestId": "abc374",
+  "slotLabel": "G",
+  "officialTaskId": "abc374_g",
+  "title": "Only One Product Name",
+  "officialUrl": "https://atcoder.jp/contests/abc374/tasks/abc374_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 26^2; N is an integer.; Each S_i is a string of length 2 consisting of uppercase English letters.; All S_1,S_2,\\ldots,S_N are distinct.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc374-g-problem-ef990b1fe81062fb5fa496062ddb53c9751bba11b379a7113f4381ffff2dda7b",
+    "source-abc374-editorial-11099-08ffa618d6266b4f574965ba7db128d0fd6d4897a29e321b44770b9f29b48990"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc345",
+  "number": 345,
+  "title": "Monoxer Programming Contest 2024（AtCoder Beginner Contest 345）",
+  "startedAt": "2024-03-16T21:00:00+09:00",
+  "endedAt": "2024-03-16T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc345",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc345_a",
+    "abc345_b",
+    "abc345_c",
+    "abc345_d",
+    "abc345_e",
+    "abc345_f",
+    "abc345_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc345-task-list-edabcca1d8c39450aa9edc1e634afd082b041ea319f69203f6bdbca027fb8a59",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

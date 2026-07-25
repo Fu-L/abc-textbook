@@ -1,0 +1,20 @@
+{
+  "id": "abc347-g",
+  "contestId": "abc347",
+  "slotLabel": "G",
+  "officialTaskId": "abc347_g",
+  "title": "Grid Coloring 2",
+  "officialUrl": "https://atcoder.jp/contests/abc347/tasks/abc347_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq20; 0\\leq A _ {i,j}\\leq 5\\ (1\\leq i\\leq N,1\\leq j\\leq N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc347-g-problem-4d7bd8e36b0ae6b211c6b2b1af886e1054c1707d1d6949b564f5cdd8e0720917",
+    "source-abc347-editorial-9671-6184ff3921feec0613e42dad5bf991b5cc0913ed7497d717d45c7bac68b7f22a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

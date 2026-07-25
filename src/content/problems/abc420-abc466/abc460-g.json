@@ -1,0 +1,20 @@
+{
+  "id": "abc460-g",
+  "contestId": "abc460",
+  "slotLabel": "G",
+  "officialTaskId": "abc460_g",
+  "title": "Vertex Flip Query",
+  "officialUrl": "https://atcoder.jp/contests/abc460/tasks/abc460_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq W_i \\leq 10^9; C_i \\in \\lbrace 0,1 \\rbrace; 1 \\leq a_i \\lt b_i \\leq N; The input graph is a tree.; 1 \\leq v \\leq N; 1 \\leq x \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc460-g-problem-8a4e2da0f88034c47040b8ff47d390445e433f0c72add4595cfba8620b77b27c",
+    "source-abc460-editorial-21012-6211d79b0247de51b5bce8908f4941d08e93e10351948ee7572b8ad47d17609a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

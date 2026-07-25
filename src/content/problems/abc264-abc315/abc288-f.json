@@ -1,0 +1,20 @@
+{
+  "id": "abc288-f",
+  "contestId": "abc288",
+  "slotLabel": "F",
+  "officialTaskId": "abc288_f",
+  "title": "Integer Division",
+  "officialUrl": "https://atcoder.jp/contests/abc288/tasks/abc288_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; X has N digits in decimal representation, none of which is 0.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70",
+    "source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

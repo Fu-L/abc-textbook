@@ -1,0 +1,20 @@
+{
+  "id": "abc301-g",
+  "contestId": "abc301",
+  "slotLabel": "G",
+  "officialTaskId": "abc301_g",
+  "title": "Worst Picture",
+  "officialUrl": "https://atcoder.jp/contests/abc301/tasks/abc301_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 50; 0 < X_i \\leq 1000; -1000 \\leq Y_i,Z_i \\leq 1000; The triples (X_i,Y_i,Z_i) are distinct.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc301-g-problem-17e39979cd39918343e6cf0d6f6bdcf1ea2e6c4245a8daedcf5c8a493c60522f",
+    "source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc381",
+  "number": 381,
+  "title": "AtCoder Beginner Contest 381",
+  "startedAt": "2024-11-22T21:00:00+09:00",
+  "endedAt": "2024-11-22T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc381",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc381_a",
+    "abc381_b",
+    "abc381_c",
+    "abc381_d",
+    "abc381_e",
+    "abc381_f",
+    "abc381_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc381-task-list-752763a09968067630452ab271aacd891f17538b2a450d772d6be48b8cb42f9a",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

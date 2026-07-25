@@ -1,0 +1,20 @@
+{
+  "id": "abc309-ex",
+  "contestId": "abc309",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc309_h",
+  "title": "Simple Path Counting Problem",
+  "officialUrl": "https://atcoder.jp/contests/abc309/tasks/abc309_h",
+  "constraintsSummary": "Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 10^9; 1 \\le M,K,L \\le 10^5; 1 \\le A_i,B_j \\le M",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc309-ex-problem-65aeeef57cba7aec6c3dfae69feb941b8f786bc151fe34154c429e4013c949e7",
+    "source-abc309-editorial-6751-6ce08329a6ac1858c581d4dcaf20125dccad02bd6b0c6a0898679de12244393d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

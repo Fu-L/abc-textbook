@@ -1,0 +1,20 @@
+{
+  "id": "abc302-e",
+  "contestId": "abc302",
+  "slotLabel": "E",
+  "officialTaskId": "abc302_e",
+  "title": "Isolation",
+  "officialUrl": "https://atcoder.jp/contests/abc302/tasks/abc302_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N\\leq 3\\times 10^5; 1 \\leq Q\\leq 3\\times 10^5; For each query of the first kind, 1\\leq u,v\\leq N and u\\neq v.; For each query of the second kind, 1\\leq v\\leq N.; Right before a query of the first kind is given, there is no edge between vertices u and v.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc302-e-problem-11b090eb53471a5e3315ce1c2837d74511b3dbb4e27cef33f24c523b09821da0",
+    "source-abc302-editorial-6410-4a22dd9ce6220c919d246e3b7809bb34dc5372fbfdb9e41e7caacacdd5e5fe8e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

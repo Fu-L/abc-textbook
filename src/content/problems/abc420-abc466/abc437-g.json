@@ -1,0 +1,20 @@
+{
+  "id": "abc437-g",
+  "contestId": "abc437",
+  "slotLabel": "G",
+  "officialTaskId": "abc437_g",
+  "title": "Colorful Christmas Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc437/tasks/abc437_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T\\leq 20000; 2\\leq N\\leq 2000; c_i is R, G, or B.; 1\\leq u_i,v_i\\leq N; When viewing the bulbs as vertices and the ribbons as edges, the given graph is a tree.; T,N,u_i,v_i are integers.; The sum of N^2 in one input file is at most 2000^2.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc437-g-problem-64f2258936d02bfced674b6c373b752285b1aae4d20e67c04c8c38dd671d8230",
+    "source-abc437-editorial-14853-197af7e234e4b81d38f7ac3947a0bb5c0a18a1e7ee825eb297ebe1d177e2448c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

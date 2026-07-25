@@ -1,0 +1,20 @@
+{
+  "id": "abc342-g",
+  "contestId": "abc342",
+  "slotLabel": "G",
+  "officialTaskId": "abc342_g",
+  "title": "Retroactive Range Chmax",
+  "officialUrl": "https://atcoder.jp/contests/abc342/tasks/abc342_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 1\\leq A_i\\leq10^9\\ (1\\leq i\\leq N); 1\\leq Q\\leq2\\times10^5; In a type-1 operation, 1\\leq l\\leq r\\leq N and 1\\leq x\\leq10^9.; In a type-2 operation, i is not greater than the number of operations given before, and 1\\leq i.; In a type-2 operation, the i-th operation is of type 1.; In type-2 operations, the same i does not appear multiple times.; In a type-3 operation, 1\\leq i\\leq N.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7",
+    "source-abc342-editorial-9373-764095d523625c3183a5d63be514e88bebed61dcbf54caf6a44d2858ff2554fa"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

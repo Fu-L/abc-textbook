@@ -1,0 +1,20 @@
+{
+  "problemId": "abc272-ex",
+  "sourceRevisionIds": [
+    "source-abc272-editorial-4963-2fab3266c32ba5ad324a1e421e6f7965abecb00b9e8fbd6bf7be0ce24b25d477",
+    "source-abc272-ex-problem-13a1b5608d7d4c4ef6a93585f42563a31743bd693135ae3e339b3dbcbf3657ba"
+  ],
+  "coreMethod": "abc272-ex「Flipping Coins 2」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+    "Flipping Coins 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["順列と逆写像", "包除原理"],
+  "implementationConcerns": ["空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。"],
+  "outcomeCandidates": [
+    "Flipping Coins 2 型の 順列の位置と値の対応に対し、包除原理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

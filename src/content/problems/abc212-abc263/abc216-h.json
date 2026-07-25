@@ -1,0 +1,20 @@
+{
+  "id": "abc216-h",
+  "contestId": "abc216",
+  "slotLabel": "H",
+  "officialTaskId": "abc216_h",
+  "title": "Random Robots",
+  "officialUrl": "https://atcoder.jp/contests/abc216/tasks/abc216_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq K \\leq 10; 1 \\leq N \\leq 1000; 0 \\leq x_1 \\lt x_2 \\lt \\cdots \\lt x_K \\leq 1000; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97",
+    "source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

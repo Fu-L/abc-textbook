@@ -1,0 +1,20 @@
+{
+  "id": "abc345-g",
+  "contestId": "abc345",
+  "slotLabel": "G",
+  "officialTaskId": "abc345_g",
+  "title": "Sugoroku 5",
+  "officialUrl": "https://atcoder.jp/contests/abc345/tasks/abc345_g",
+  "constraintsSummary": "Time limit: 12 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 2 \\times 10^5; N and K are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc345-g-problem-7d03c394d2605f58fdd910a1c46dfcc1e42ffb3b14cbd8503c3af52d9d4a26eb",
+    "source-abc345-editorial-9549-bbf9feee2dc8e8f9bcda8cc5b67eab93e4ae97e10063ff8e34b19b3a9890a8d3"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

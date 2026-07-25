@@ -1,0 +1,20 @@
+{
+  "id": "abc428",
+  "number": 428,
+  "title": "AtCoder Beginner Contest 428",
+  "startedAt": "2025-10-18T21:30:00+09:00",
+  "endedAt": "2025-10-18T23:10:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc428",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc428_a",
+    "abc428_b",
+    "abc428_c",
+    "abc428_d",
+    "abc428_e",
+    "abc428_f",
+    "abc428_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc428-task-list-e06e272e7c9b9cdc875fd332e62060cc1117a8c15784f99a5df5dcba345bbdbe",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

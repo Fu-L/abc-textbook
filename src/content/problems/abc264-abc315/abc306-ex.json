@@ -1,0 +1,20 @@
+{
+  "id": "abc306-ex",
+  "contestId": "abc306",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc306_h",
+  "title": "Balance Scale",
+  "officialUrl": "https://atcoder.jp/contests/abc306/tasks/abc306_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \\le N \\le 17; 1 \\le M \\le \\frac{N \\times (N-1)}{2}; 1 \\le A_i < B_i \\le N; i \\neq j \\Rightarrow (A_i,B_i) \\neq (A_j,B_j)",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b",
+    "source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

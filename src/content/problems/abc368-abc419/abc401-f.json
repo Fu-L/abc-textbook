@@ -1,0 +1,20 @@
+{
+  "id": "abc401-f",
+  "contestId": "abc401",
+  "slotLabel": "F",
+  "officialTaskId": "abc401_f",
+  "title": "Add One Edge 3",
+  "officialUrl": "https://atcoder.jp/contests/abc401/tasks/abc401_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N_1, N_2 \\le 2 \\times 10^{5}; 1 \\le u_{1,i}, v_{1,i} \\le N_1; 1 \\le u_{2,i}, v_{2,i} \\le N_2; Both given graphs are trees.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2",
+    "source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc237-ex",
+  "sourceRevisionIds": [
+    "source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa",
+    "source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4"
+  ],
+  "coreMethod": "abc237-ex「Hakata」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
+    "Hakata 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "DAG とトポロジカル順序"],
+  "implementationConcerns": [
+    "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。"
+  ],
+  "outcomeCandidates": [
+    "Hakata 型の 文字列の prefix・suffix と一致関係に対し、DAG とトポロジカル順序を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

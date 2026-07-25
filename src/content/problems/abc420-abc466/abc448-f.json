@@ -1,0 +1,20 @@
+{
+  "id": "abc448-f",
+  "contestId": "abc448",
+  "slotLabel": "F",
+  "officialTaskId": "abc448_f",
+  "title": "Authentic Traveling Salesman Problem",
+  "officialUrl": "https://atcoder.jp/contests/abc448/tasks/abc448_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 6 \\times 10^4; 0 \\leq X_i \\leq 2 \\times 10^7; 0 \\leq Y_i \\leq 2 \\times 10^7; (X_i, Y_i) \\neq (X_j, Y_j) if i \\neq j; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86",
+    "source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

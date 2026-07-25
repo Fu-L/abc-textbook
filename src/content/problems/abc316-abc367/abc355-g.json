@@ -1,0 +1,20 @@
+{
+  "id": "abc355-g",
+  "contestId": "abc355",
+  "slotLabel": "G",
+  "officialTaskId": "abc355_g",
+  "title": "Baseball",
+  "officialUrl": "https://atcoder.jp/contests/abc355/tasks/abc355_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^4; 1 \\leq K \\leq N; 0 \\leq P_i \\leq 10^5; 1 \\leq \\sum_{y'=1}^N P_{y'} \\leq 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c",
+    "source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

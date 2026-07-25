@@ -1,0 +1,20 @@
+{
+  "id": "abc335-e",
+  "contestId": "abc335",
+  "slotLabel": "E",
+  "officialTaskId": "abc335_e",
+  "title": "Non-Decreasing Colorful Path",
+  "officialUrl": "https://atcoder.jp/contests/abc335/tasks/abc335_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \\le N \\le 2 \\times 10^5; N-1 \\le M \\le 2 \\times 10^5; 1 \\le A_i \\le 2 \\times 10^5; The graph is connected.; 1 \\le U_i < V_i \\le N; (U_i,V_i) \\neq (U_j,V_j) if i \\neq j.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc335-e-problem-74667aba09b44fd468f310632df8e11f7ecd7d1da6aa64ea7e5846d0d52755e9",
+    "source-abc335-editorial-9037-b36c2054e83f43171398cad8f9e3b09d456bbdec6363016acbfd0880e4b4c48f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

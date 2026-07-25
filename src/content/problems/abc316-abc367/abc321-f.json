@@ -1,0 +1,20 @@
+{
+  "id": "abc321-f",
+  "contestId": "abc321",
+  "slotLabel": "F",
+  "officialTaskId": "abc321_f",
+  "title": "#(subset sum = K) with Add and Erase",
+  "officialUrl": "https://atcoder.jp/contests/abc321/tasks/abc321_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le Q \\le 5000; 1 \\le K \\le 5000; For each type-1 operation, 1 \\le x \\le 5000.; All the operations satisfy the condition in the problem statement.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc321-f-problem-db02ce3276d716fc8807c4554c30ea699cb92847de58b49207b5ed44b19feb68",
+    "source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

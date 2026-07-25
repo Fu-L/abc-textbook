@@ -1,0 +1,20 @@
+{
+  "id": "abc272-f",
+  "contestId": "abc272",
+  "slotLabel": "F",
+  "officialTaskId": "abc272_f",
+  "title": "Two Strings",
+  "officialUrl": "https://atcoder.jp/contests/abc272/tasks/abc272_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^5; S and T are strings of length N each, consisting of lowercase English letters.; N is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8",
+    "source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

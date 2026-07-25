@@ -1,0 +1,20 @@
+{
+  "id": "abc218-f",
+  "contestId": "abc218",
+  "slotLabel": "F",
+  "officialTaskId": "abc218_f",
+  "title": "Blocked Roads",
+  "officialUrl": "https://atcoder.jp/contests/abc218/tasks/abc218_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 400; 1 \\leq M \\leq N(N-1); 1 \\leq s_i,t_i \\leq N; s_i \\neq t_i; (s_i,t_i) \\neq (s_j,t_j) (i \\neq j); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+    "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

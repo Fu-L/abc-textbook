@@ -1,0 +1,20 @@
+{
+  "id": "abc318-e",
+  "contestId": "abc318",
+  "slotLabel": "E",
+  "officialTaskId": "abc318_e",
+  "title": "Sandwiches",
+  "officialUrl": "https://atcoder.jp/contests/abc318/tasks/abc318_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\\leq N\\leq 3\\times 10^5; 1\\leq A_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc318-e-problem-70c4c614fc1f6c6f052372ab7f5a476b184b77ecf4c3f561ff9333ccd64d62b4",
+    "source-abc318-editorial-7068-092cf3852f4a8e6d08d5e530476d0cf637d2836240da2dcaa8deef09ead12c1d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

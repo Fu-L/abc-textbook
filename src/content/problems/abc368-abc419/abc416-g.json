@@ -1,0 +1,20 @@
+{
+  "id": "abc416-g",
+  "contestId": "abc416",
+  "slotLabel": "G",
+  "officialTaskId": "abc416_g",
+  "title": "Concat (1st)",
+  "officialUrl": "https://atcoder.jp/contests/abc416/tasks/abc416_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 10^5; 1\\leq K \\leq 10^5; S_i is a string consisting of lowercase English letters with length at most 10.; N and K are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc416-g-problem-9ebb537408e3fffb9e134910629c6205717daff6a09cae6b38632ffe13119338",
+    "source-abc416-editorial-13508-3cc358d000363441e0ec6cd32eabc27e757847b39f72389ef8f6cce98c7f016c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

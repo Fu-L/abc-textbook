@@ -1,0 +1,22 @@
+{
+  "problemId": "abc253-g",
+  "sourceRevisionIds": [
+    "source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651",
+    "source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c"
+  ],
+  "coreMethod": "abc253-g「Swap Many Times」では、大量の swap の辞書順区間を完全な行と端の部分行へ分け、完全行を少数回の列反転として合成する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "一行分の swap 列が suffix の cyclic shift に等しく、連続する完全行の合成が二回の反転と一致する。",
+    "Swap Many Times 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列反転と操作列の合成"],
+  "implementationConcerns": [
+    "L・R を行内 offset へ変換し、完全行の前後に残る O(N) 個の swap だけを直接実行する。"
+  ],
+  "outcomeCandidates": [
+    "Swap Many Times 型の問題に対し、配列反転と操作列の合成を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

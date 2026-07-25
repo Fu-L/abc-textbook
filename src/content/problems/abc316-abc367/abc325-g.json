@@ -1,0 +1,20 @@
+{
+  "id": "abc325-g",
+  "contestId": "abc325",
+  "slotLabel": "G",
+  "officialTaskId": "abc325_g",
+  "title": "offence",
+  "officialUrl": "https://atcoder.jp/contests/abc325/tasks/abc325_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0 \\leq K < |S| \\leq 300; K is an integer.; S is a string consisting of lowercase English letters.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc325-g-problem-d6b5bc666733bb0c2482f36735a5b5944ce5be1d38202a2872319af590054561",
+    "source-abc325-editorial-7486-d763a8df8183edf6b09a76fde61feafc91ae7029cb71557ba2d96f011b9db7a6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc251-e",
+  "contestId": "abc251",
+  "slotLabel": "E",
+  "officialTaskId": "abc251_e",
+  "title": "Takahashi and Animals",
+  "officialUrl": "https://atcoder.jp/contests/abc251/tasks/abc251_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3 \\times 10^5; 1 \\leq A_i \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc251-e-problem-7c9287bd212a0a604dc19a9cf77613d3cef0b2dbf5527459d4f2e00e169015c7",
+    "source-abc251-editorial-3960-1d8338326b3b9ca141e5de2a04f3325e817b795409f99f48ec6f5b8de3fda6d2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

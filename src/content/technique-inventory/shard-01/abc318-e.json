@@ -1,0 +1,22 @@
+{
+  "problemId": "abc318-e",
+  "sourceRevisionIds": [
+    "source-abc318-e-problem-70c4c614fc1f6c6f052372ab7f5a476b184b77ecf4c3f561ff9333ccd64d62b4",
+    "source-abc318-editorial-7068-092cf3852f4a8e6d08d5e530476d0cf637d2836240da2dcaa8deef09ead12c1d"
+  ],
+  "coreMethod": "abc318-e「Sandwiches」では、中央位置を左から走査し、左右の値別 frequency から同値な両端の組数を加え、中央と同値な組を除く。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "各 i<j<k は中央 j を一意に持ち、j の左右で同じ値を一つずつ選ぶ積が全候補を重複なく数える。",
+    "Sandwiches 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["prefix・suffix frequency と積の法則"],
+  "implementationConcerns": [
+    "中央要素を右側 frequency から先に除き、同値三要素を除外する更新順序を固定する。"
+  ],
+  "outcomeCandidates": [
+    "Sandwiches 型の問題に対し、prefix・suffix frequency と積の法則を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

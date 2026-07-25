@@ -1,0 +1,20 @@
+{
+  "problemId": "abc258-g",
+  "sourceRevisionIds": [
+    "source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a",
+    "source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998"
+  ],
+  "coreMethod": "abc258-g「Triangle」では、主解法候補として、真偽状態を machine word の bit 列へ詰め、集合遷移を bit 演算で並列化する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各 bit が元の一状態に対応し、shift・論理演算が元の遷移を成分ごとに同時実行する。",
+    "Triangle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "bitset による集合演算"],
+  "implementationConcerns": ["末尾 word の不要 bit と shift が word 境界をまたぐ場合を処理する。"],
+  "outcomeCandidates": [
+    "Triangle 型の 頂点と辺からなる状態グラフに対し、bitset による集合演算を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

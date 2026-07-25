@@ -1,0 +1,20 @@
+{
+  "id": "abc455-f",
+  "contestId": "abc455",
+  "slotLabel": "F",
+  "officialTaskId": "abc455_f",
+  "title": "Merge Slimes 2",
+  "officialUrl": "https://atcoder.jp/contests/abc455/tasks/abc455_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq Q \\leq 10^5; 1 \\leq l_q \\leq r_q \\leq N; 1 \\leq a_q \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc455-f-problem-76c0283331a2cf3cb4b1a40e1c35a7935555beb137dc24ad0e9e5e21b01cf28e",
+    "source-abc455-editorial-19241-da4989a5ebdd44c503c9363a958049ed6ec3f1adcafafec35f4534d0ffedbc7d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

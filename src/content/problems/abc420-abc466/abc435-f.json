@@ -1,0 +1,20 @@
+{
+  "id": "abc435-f",
+  "contestId": "abc435",
+  "slotLabel": "F",
+  "officialTaskId": "abc435_f",
+  "title": "Cat exercise",
+  "officialUrl": "https://atcoder.jp/contests/abc435/tasks/abc435_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times 10^5; (P_1,P_2,\\ldots, P_N) is a permutation of (1,2,\\ldots,N).; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677",
+    "source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc224-g",
+  "contestId": "abc224",
+  "slotLabel": "G",
+  "officialTaskId": "abc224_g",
+  "title": "Roll or Increment",
+  "officialUrl": "https://atcoder.jp/contests/abc224/tasks/abc224_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^9; 1 \\leq S, T \\leq N; 1 \\leq A, B \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72",
+    "source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

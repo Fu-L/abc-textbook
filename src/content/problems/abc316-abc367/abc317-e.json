@@ -1,0 +1,20 @@
+{
+  "id": "abc317-e",
+  "contestId": "abc317",
+  "slotLabel": "E",
+  "officialTaskId": "abc317_e",
+  "title": "Avoid Eye Contact",
+  "officialUrl": "https://atcoder.jp/contests/abc317/tasks/abc317_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W \\leq 2000; A_{i,j} is ., #, >, v, <, ^, S, or G.; Each of S and G occurs exactly once among A_{i, j}.; Neither the starting point nor the goal is in a person's line of sight.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc317-e-problem-98c0a26c978ed5d74663e63fb19026ffa7ae80e5dad04f4774b3b25c359b48f1",
+    "source-abc317-editorial-7031-f26afd576be4da56ed9277fcbd138dafe8c23b558a21ea07ee547bbc54615777"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

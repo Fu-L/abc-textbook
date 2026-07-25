@@ -1,0 +1,20 @@
+{
+  "id": "abc269-g",
+  "contestId": "abc269",
+  "slotLabel": "G",
+  "officialTaskId": "abc269_g",
+  "title": "Reversible Cards 2",
+  "officialUrl": "https://atcoder.jp/contests/abc269/tasks/abc269_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq M \\leq 2 \\times 10^5; 0 \\leq A_i, B_i \\leq M; \\sum_{i=1}^N (A_i + B_i) = M; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88",
+    "source-abc269-editorial-4841-ed4eb6b9855fed47f17aa20ed3e7bdd909ec1215e1c635d33bbf024aaf06cb84"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

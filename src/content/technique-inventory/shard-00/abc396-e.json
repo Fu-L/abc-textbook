@@ -1,0 +1,20 @@
+{
+  "problemId": "abc396-e",
+  "sourceRevisionIds": [
+    "source-abc396-e-problem-c31b2e0500585e6c964e0c4d69feb8d69b79c20268e0b70f888a608f5050f5be",
+    "source-abc396-editorial-12390-71791dcbbee89dd3c8461b74eb40ed29a5b6449cb7af08322d917ad0443365bc"
+  ],
+  "coreMethod": "abc396-e「Min of Restricted Sum」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+    "Min of Restricted Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "幅優先探索"],
+  "implementationConcerns": ["訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。"],
+  "outcomeCandidates": [
+    "Min of Restricted Sum 型の 列の順序と prefix 状態に対し、幅優先探索を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc282-f",
+  "sourceRevisionIds": [
+    "source-abc282-editorial-5403-a6fc1b073b674859f239b20188df61ec3a08834c8b5f8c17af1ca21e9ccd56e4",
+    "source-abc282-f-problem-86da67b53a7e864329b60455cddbbc086b4f398d45a9087c6e381fc9847ec1d8"
+  ],
+  "coreMethod": "abc282-f「Union of Two Sets」では、主解法候補として、冪長でも冪等な区間要約を二冪長ごとに前計算し、二区間から query を答える。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "冪等演算では重なる二つの二冪区間を合成しても値が変わらず、任意区間を覆える。",
+    "Union of Two Sets 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["online query の計算量設計", "Sparse Table と冪等演算"],
+  "implementationConcerns": ["区間長の floor log を事前計算し、空区間を問い合わせない。"],
+  "outcomeCandidates": [
+    "Union of Two Sets 型の 更新と問い合わせの時系列に対し、Sparse Table と冪等演算を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

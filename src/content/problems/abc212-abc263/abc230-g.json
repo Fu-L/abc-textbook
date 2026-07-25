@@ -1,0 +1,20 @@
+{
+  "id": "abc230-g",
+  "contestId": "abc230",
+  "slotLabel": "G",
+  "officialTaskId": "abc230_g",
+  "title": "GCD Permutation",
+  "officialUrl": "https://atcoder.jp/contests/abc230/tasks/abc230_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; (P_1,P_2,\\ldots,P_N) is a permutation of (1,2,\\ldots,N).; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae",
+    "source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

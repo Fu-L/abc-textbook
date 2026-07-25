@@ -1,0 +1,21 @@
+{
+  "id": "abc247",
+  "number": 247,
+  "title": "AtCoder Beginner Contest 247",
+  "startedAt": "2022-04-10T21:00:00+09:00",
+  "endedAt": "2022-04-10T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc247",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc247_a",
+    "abc247_b",
+    "abc247_c",
+    "abc247_d",
+    "abc247_e",
+    "abc247_f",
+    "abc247_g",
+    "abc247_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc247-task-list-4c20de554a49c589419c947585d475ea0792fac01220ff336e4f62525ad87929",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

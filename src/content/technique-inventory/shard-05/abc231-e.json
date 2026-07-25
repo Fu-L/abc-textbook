@@ -1,0 +1,22 @@
+{
+  "problemId": "abc231-e",
+  "sourceRevisionIds": [
+    "source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c",
+    "source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb"
+  ],
+  "coreMethod": "abc231-e「Minimal payments」では、丸めた二候補だけへ分岐する再帰を定義し、同じ部分問題を memoize して再利用する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "最小単位の端数は切り捨て側か切り上げ側のどちらかで清算すればよく、他の選択はそれらより改善しない。",
+    "Minimal payments 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["メモ化再帰と最適部分構造"],
+  "implementationConcerns": [
+    "再帰 key の単位を揃え、切り上げ側で一段上へ carry する境界を処理する。"
+  ],
+  "outcomeCandidates": [
+    "Minimal payments 型の問題に対し、メモ化再帰と最適部分構造を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

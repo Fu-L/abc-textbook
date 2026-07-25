@@ -1,0 +1,20 @@
+{
+  "id": "abc271-g",
+  "contestId": "abc271",
+  "slotLabel": "G",
+  "officialTaskId": "abc271_g",
+  "title": "Access Counter",
+  "officialUrl": "https://atcoder.jp/contests/abc271/tasks/abc271_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{18}; 1 \\leq X,Y \\leq 99; c_i is T or A.; N, X, and Y are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc271-g-problem-7232f294682424bce273370bc368433bbd7331d706edf9a5151c81840824fc58",
+    "source-abc271-editorial-4931-b01c59d4b4297b12ce5e2936b33964cc01626c4dea121fda7d515768c9f8faaf"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

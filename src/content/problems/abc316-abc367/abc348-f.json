@@ -1,0 +1,20 @@
+{
+  "id": "abc348-f",
+  "contestId": "abc348",
+  "slotLabel": "F",
+  "officialTaskId": "abc348_f",
+  "title": "Oddly Similar",
+  "officialUrl": "https://atcoder.jp/contests/abc348/tasks/abc348_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2000; 1 \\leq M \\leq 2000; 1 \\leq A_{i,j} \\leq 999; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc348-f-problem-e6cdc8d4d7b34661443befa49ba6ce4894287446e58c7154e0cb1e2c627ff935",
+    "source-abc348-editorial-9731-afb44305327ab23b60890a293679d6f3d14e71f94053d0953c8b5129b8f21ff2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

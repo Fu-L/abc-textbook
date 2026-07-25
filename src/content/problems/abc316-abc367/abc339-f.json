@@ -1,0 +1,20 @@
+{
+  "id": "abc339-f",
+  "contestId": "abc339",
+  "slotLabel": "F",
+  "officialTaskId": "abc339_f",
+  "title": "Product Equality",
+  "officialUrl": "https://atcoder.jp/contests/abc339/tasks/abc339_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 1000; \\color{red}{1 \\le A_i < 10^{1000}}",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc339-f-problem-fd4fd095dde8aba7756de773d9f4b871b37d3563a7e3899c3f38b694662189b5",
+    "source-abc339-editorial-9206-783ff9c3caa8b6c79125699ba25139d0f342ede0ece4c0a1081ab3044f3c70a2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

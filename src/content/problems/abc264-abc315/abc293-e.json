@@ -1,0 +1,20 @@
+{
+  "id": "abc293-e",
+  "contestId": "abc293",
+  "slotLabel": "E",
+  "officialTaskId": "abc293_e",
+  "title": "Geometric Progression",
+  "officialUrl": "https://atcoder.jp/contests/abc293/tasks/abc293_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq A, M \\leq 10^9; 1 \\leq X \\leq 10^{12}; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc293-e-problem-34dffe16b25f63d64a14ea0e51c23a469f311873f2c9f9d6402e85cde91a89d3",
+    "source-abc293-editorial-5955-af80e9c73937033b345abba821c9c5a5e318dbbda9ef3aa34d15aa0e121cc6d3"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

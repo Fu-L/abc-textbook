@@ -1,0 +1,20 @@
+{
+  "id": "abc292-ex",
+  "contestId": "abc292",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc292_h",
+  "title": "Rating Estimator",
+  "officialUrl": "https://atcoder.jp/contests/abc292/tasks/abc292_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 1 \\leq B \\leq 10^9; 1 \\leq Q \\leq 10^5; 0 \\leq a_i \\leq 10^9; 1 \\leq c \\leq N; 0 \\leq x \\leq 10^9; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc292-ex-problem-9f6fad77868d72dbd6f000ad47dea0254c74ec49279cbf1d42f024da899fc99b",
+    "source-abc292-editorial-5887-7498e511a2951ba3c4f47d7ef98b7c42f5f9a34d616491b4d39b45c93e8cfb43"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

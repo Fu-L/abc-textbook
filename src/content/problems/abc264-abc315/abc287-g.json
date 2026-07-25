@@ -1,0 +1,20 @@
+{
+  "id": "abc287-g",
+  "contestId": "abc287",
+  "slotLabel": "G",
+  "officialTaskId": "abc287_g",
+  "title": "Balance Update Query",
+  "officialUrl": "https://atcoder.jp/contests/abc287/tasks/abc287_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,Q \\leq 2 \\times 10^5; 0 \\leq a_i \\leq 10^9; 0 \\leq b_i \\leq 10^4; For each query of the 1-st kind, 1 \\leq x \\leq N and 0 \\leq y \\leq 10^9.; For each query of the 2-nd kind, 1 \\leq x \\leq N and 0 \\leq y \\leq 10^4.; For each query of the 3-rd kind, 1 \\leq x \\leq 10^9.; There is at least one query of the 3-rd kind.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc287-g-problem-8b42218db6b3e08b9fa2ffd1cbf114d5bc2fa41495e2afe16bfaea5fa2273199",
+    "source-abc287-editorial-5633-7a389616e1c18eb480569f5987f8248187fca80603469d38b3212c4d9f96339e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

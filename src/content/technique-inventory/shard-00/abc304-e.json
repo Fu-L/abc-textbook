@@ -1,0 +1,22 @@
+{
+  "problemId": "abc304-e",
+  "sourceRevisionIds": [
+    "source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278",
+    "source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354"
+  ],
+  "coreMethod": "abc304-e「Good Graph」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
+    "Good Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "平衡二分探索木"],
+  "implementationConcerns": [
+    "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。"
+  ],
+  "outcomeCandidates": [
+    "Good Graph 型の 頂点と辺からなる状態グラフに対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

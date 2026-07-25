@@ -1,0 +1,20 @@
+{
+  "id": "abc390-g",
+  "contestId": "abc390",
+  "slotLabel": "G",
+  "officialTaskId": "abc390_g",
+  "title": "Permutation Concatenation",
+  "officialUrl": "https://atcoder.jp/contests/abc390/tasks/abc390_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952",
+    "source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc226-f",
+  "sourceRevisionIds": [
+    "source-abc226-editorial-2878-2de04cf0703a44bc099836c041ba9edc8d01da823227f38738ef602d5dbe9e10",
+    "source-abc226-f-problem-445d4ec66745084a734b87bfa5c86445e188cebfd19fc703876bb5f7b890cdba"
+  ],
+  "coreMethod": "abc226-f「Score of Permutations」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+    "Score of Permutations 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["順列と逆写像", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
+  "outcomeCandidates": [
+    "Score of Permutations 型の 順列の位置と値の対応に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

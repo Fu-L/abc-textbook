@@ -1,0 +1,20 @@
+{
+  "id": "abc214-e",
+  "contestId": "abc214",
+  "slotLabel": "E",
+  "officialTaskId": "abc214_e",
+  "title": "Packing Under Range Regulations",
+  "officialUrl": "https://atcoder.jp/contests/abc214/tasks/abc214_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 2 \\times 10^5; 1 \\le N \\le 2 \\times 10^5; 1 \\le L_i \\le R_i \\le 10^9; The sum of N across the test cases in one input is at most 2 \\times 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2",
+    "source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

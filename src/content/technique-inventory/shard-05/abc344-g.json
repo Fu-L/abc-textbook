@@ -1,0 +1,22 @@
+{
+  "problemId": "abc344-g",
+  "sourceRevisionIds": [
+    "source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd",
+    "source-abc344-g-problem-d809ded0a0e2df95e9eb3d8af3f604d216fa6b1928af47694c116afc97a46ef3"
+  ],
+  "coreMethod": "abc344-g「Points and Comparison」では、主解法候補として、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "ある文字列と prefix を共有する文字列群は辞書順で連続するため、最長一致する相手は隣接位置にも存在する。",
+    "Points and Comparison 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "辞書順と longest common prefix"],
+  "implementationConcerns": [
+    "元 index を文字列と一緒に保持し、先頭・末尾では存在する片側だけを比較する。"
+  ],
+  "outcomeCandidates": [
+    "Points and Comparison 型の 整数の約数・剰余構造に対し、辞書順と longest common prefixを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

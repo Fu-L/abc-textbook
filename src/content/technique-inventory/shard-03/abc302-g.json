@@ -1,0 +1,20 @@
+{
+  "problemId": "abc302-g",
+  "sourceRevisionIds": [
+    "source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e",
+    "source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0"
+  ],
+  "coreMethod": "abc302-g「Sort from 1 to 4」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+    "Sort from 1 to 4 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["greedy choice と交換論法"],
+  "implementationConcerns": ["同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。"],
+  "outcomeCandidates": [
+    "Sort from 1 to 4 型の問題に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

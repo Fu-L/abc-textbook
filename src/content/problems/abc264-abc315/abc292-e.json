@@ -1,0 +1,20 @@
+{
+  "id": "abc292-e",
+  "contestId": "abc292",
+  "slotLabel": "E",
+  "officialTaskId": "abc292_e",
+  "title": "Transitivity",
+  "officialUrl": "https://atcoder.jp/contests/abc292/tasks/abc292_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2000; 0 \\leq M \\leq 2000; 1 \\leq u_i ,v_i \\leq N; u_i \\neq v_i; (u_i,v_i) \\neq (u_j,v_j) if i \\neq j.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc292-e-problem-edcb478dbb9ec49e093c3079b675dad0fae05bf62cac02c422f56c03055ffa66",
+    "source-abc292-editorial-5874-1a03583c8be421b7ea294c349cd239be44ea432b717e4d32a9d1ac6dd5a83f3c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

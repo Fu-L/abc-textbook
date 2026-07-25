@@ -1,0 +1,22 @@
+{
+  "problemId": "abc408-g",
+  "sourceRevisionIds": [
+    "source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f",
+    "source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c"
+  ],
+  "coreMethod": "abc408-g「A/B < p/q < C/D」では、開区間の両端から共通整数部を除き、1 未満なら逆数で端点を反転する Euclid 型再帰で最小分母分数を得る。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "整数平行移動と逆数変換は区間内分数を全単射で対応させ、各段で連分数の一係数が確定する。",
+    "A/B < p/q < C/D 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["連分数と Euclid の互除法"],
+  "implementationConcerns": [
+    "開区間の等号を混ぜず、逆数時に端点順を交換し、分子分母の積を広い整数型で比較する。"
+  ],
+  "outcomeCandidates": [
+    "A/B < p/q < C/D 型の問題に対し、連分数と Euclid の互除法を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

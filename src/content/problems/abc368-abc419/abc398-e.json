@@ -1,0 +1,20 @@
+{
+  "id": "abc398-e",
+  "contestId": "abc398",
+  "slotLabel": "E",
+  "officialTaskId": "abc398_e",
+  "title": "Tree Game",
+  "officialUrl": "https://atcoder.jp/contests/abc398/tasks/abc398_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 100; 1 \\leq U_i < V_i \\leq N; The given graph is a tree.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+    "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

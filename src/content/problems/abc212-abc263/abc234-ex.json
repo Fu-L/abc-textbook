@@ -1,0 +1,20 @@
+{
+  "id": "abc234-ex",
+  "contestId": "abc234",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc234_h",
+  "title": "Enumerate Pairs",
+  "officialUrl": "https://atcoder.jp/contests/abc234/tasks/abc234_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le N \\le 2 \\times 10^5; 1 \\le K \\le 1.5 \\times 10^9; 0 \\le x_i,y_i \\le 10^9; There are at most 4 \\times 10^5 pairs of integers that should be listed.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4",
+    "source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

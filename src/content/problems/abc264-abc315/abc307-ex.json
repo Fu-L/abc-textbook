@@ -1,0 +1,20 @@
+{
+  "id": "abc307-ex",
+  "contestId": "abc307",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc307_h",
+  "title": "Marquee",
+  "officialUrl": "https://atcoder.jp/contests/abc307/tasks/abc307_h",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq L \\leq W \\leq 3\\times 10^5; L and W are integers.; S is a string of length L consisting of uppercase and lowercase English letters.; P is a string of length W consisting of uppercase and lowercase English letters, ., and _.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc307-ex-problem-506e072acecfa90ffe96aad108798bb3e5c6919de0ae1c05e3c0ca6cf148a467",
+    "source-abc307-editorial-6598-80d8a8aa72d932c227c443d13ec476be1fe4a005eb77e94cf8f37dcea7cc2227"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

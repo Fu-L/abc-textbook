@@ -1,0 +1,20 @@
+{
+  "id": "abc363-e",
+  "contestId": "abc363",
+  "slotLabel": "E",
+  "officialTaskId": "abc363_e",
+  "title": "Sinking Land",
+  "officialUrl": "https://atcoder.jp/contests/abc363/tasks/abc363_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W \\leq 1000; 1 \\leq Y \\leq 10^5; 1 \\leq A_{i,j} \\leq 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc363-e-problem-5c1cd2b6791656de944ce3c4d0c033f141306ce329dc5b745ef599446b586900",
+    "source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

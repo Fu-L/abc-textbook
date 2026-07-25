@@ -1,0 +1,20 @@
+{
+  "id": "abc290-ex",
+  "contestId": "abc290",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc290_h",
+  "title": "Bow Meow Optimization",
+  "officialUrl": "https://atcoder.jp/contests/abc290/tasks/abc290_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N,M \\leq 300; 1\\leq A_i,B_i \\leq 10^9; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc290-ex-problem-a29b268f9fcb6fef3dc807abeffbc5b02d4686294356e60cfb3d6a59ecc855b3",
+    "source-abc290-editorial-5769-af1ef8e27fc3523ef9c273dc56ead5943390dfeba6f55f04302c6650407ccb2d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

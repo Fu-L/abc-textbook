@@ -1,0 +1,20 @@
+{
+  "id": "abc215-e",
+  "contestId": "abc215",
+  "slotLabel": "E",
+  "officialTaskId": "abc215_e",
+  "title": "Chain Contestant",
+  "officialUrl": "https://atcoder.jp/contests/abc215/tasks/abc215_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 1000; |S|=N; S consists of uppercase English letters from A through J.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+    "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

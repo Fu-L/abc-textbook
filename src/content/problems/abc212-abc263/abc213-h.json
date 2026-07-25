@@ -1,0 +1,20 @@
+{
+  "id": "abc213-h",
+  "contestId": "abc213",
+  "slotLabel": "H",
+  "officialTaskId": "abc213_h",
+  "title": "Stroll",
+  "officialUrl": "https://atcoder.jp/contests/abc213/tasks/abc213_h",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10; 1 \\leq M \\leq \\min \\left(10, \\frac{N(N-1)}{2} \\right); 1 \\leq T \\leq 4 \\times 10^4; 1 \\leq a_i \\lt b_i \\leq N; (a_i, b_i) \\neq (a_j, b_j) if i \\neq j.; 0 \\leq p_{i,j} \\lt 998244353",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9",
+    "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

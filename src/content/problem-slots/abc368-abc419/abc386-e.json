@@ -1,0 +1,12 @@
+{
+  "contestId": "abc386",
+  "label": "E",
+  "officialTaskId": "abc386_e",
+  "officialOrder": 4,
+  "availability": "exists",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": "abc386-e",
+  "sourceRevisionId": "source-abc386-task-list-5bfde5ee5483a7d578499f64a42e050ac01991a5f92d1077f6e18da4c1af1af3",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

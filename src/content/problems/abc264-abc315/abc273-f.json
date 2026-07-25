@@ -1,0 +1,20 @@
+{
+  "id": "abc273-f",
+  "contestId": "abc273",
+  "slotLabel": "F",
+  "officialTaskId": "abc273_f",
+  "title": "Hammer 2",
+  "officialUrl": "https://atcoder.jp/contests/abc273/tasks/abc273_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \\le N \\le 1500; 1 \\le |X|,|Y_i|,|Z_i| \\le 10^9; The (2 \\times N + 1) coordinates X,Y_i and Z_i are distinct.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc",
+    "source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

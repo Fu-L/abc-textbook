@@ -1,0 +1,20 @@
+{
+  "id": "abc235-f",
+  "contestId": "abc235",
+  "slotLabel": "F",
+  "officialTaskId": "abc235_f",
+  "title": "Variety of Digits",
+  "officialUrl": "https://atcoder.jp/contests/abc235/tasks/abc235_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N < 10^{10^4}; 1 \\leq M \\leq 10; 0 \\leq C_1 < \\ldots < C_M \\leq 9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e",
+    "source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

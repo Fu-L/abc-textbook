@@ -1,0 +1,20 @@
+{
+  "id": "abc249-ex",
+  "contestId": "abc249",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc249_h",
+  "title": "Dye Color",
+  "officialUrl": "https://atcoder.jp/contests/abc249/tasks/abc249_h",
+  "constraintsSummary": "Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 2000; 1 \\le A_i \\le N; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266",
+    "source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

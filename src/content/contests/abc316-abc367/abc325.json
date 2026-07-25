@@ -1,0 +1,20 @@
+{
+  "id": "abc325",
+  "number": 325,
+  "title": "KEYENCE Programming Contest 2023 Autumn（AtCoder Beginner Contest 325）",
+  "startedAt": "2023-10-21T21:00:00+09:00",
+  "endedAt": "2023-10-21T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc325",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc325_a",
+    "abc325_b",
+    "abc325_c",
+    "abc325_d",
+    "abc325_e",
+    "abc325_f",
+    "abc325_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc325-task-list-16fe05b8556f5a10695525fb2bfee745e41ae023596bced0d50b93806190f6b9",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

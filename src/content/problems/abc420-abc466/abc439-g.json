@@ -1,0 +1,20 @@
+{
+  "id": "abc439-g",
+  "contestId": "abc439",
+  "slotLabel": "G",
+  "officialTaskId": "abc439_g",
+  "title": "Sugoroku 6",
+  "officialUrl": "https://atcoder.jp/contests/abc439/tasks/abc439_g",
+  "constraintsSummary": "Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2.5 \\times 10^5; 1 \\leq M \\leq N; 2 \\leq L \\leq 2.5 \\times 10^5; 1 \\leq A_1 \\lt A_2 \\lt \\dots \\lt A_M \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26",
+    "source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

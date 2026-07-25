@@ -1,0 +1,22 @@
+{
+  "problemId": "abc293-e",
+  "sourceRevisionIds": [
+    "source-abc293-e-problem-34dffe16b25f63d64a14ea0e51c23a469f311873f2c9f9d6402e85cde91a89d3",
+    "source-abc293-editorial-5955-af80e9c73937033b345abba821c9c5a5e318dbbda9ef3aa34d15aa0e121cc6d3"
+  ],
+  "coreMethod": "abc293-e「Geometric Progression」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+    "Geometric Progression 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "剰余演算と modular inverse"],
+  "implementationConcerns": [
+    "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Geometric Progression 型の 整数の約数・剰余構造に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

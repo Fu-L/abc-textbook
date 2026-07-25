@@ -1,0 +1,22 @@
+{
+  "problemId": "abc448-e",
+  "sourceRevisionIds": [
+    "source-abc448-e-problem-2e75c00389f73522688e3410de62a0e400eaf627cb19ddf0616c8fa3ae397dfe",
+    "source-abc448-editorial-16749-7468a146eb2ed5b942c7fa3c4c47c44239fb8ad100daa5691a838e974f534b21"
+  ],
+  "coreMethod": "abc448-e「Simple Division」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+    "Simple Division 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "剰余演算と modular inverse"],
+  "implementationConcerns": [
+    "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Simple Division 型の 文字列の prefix・suffix と一致関係に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

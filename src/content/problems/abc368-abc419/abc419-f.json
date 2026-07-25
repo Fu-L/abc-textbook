@@ -1,0 +1,20 @@
+{
+  "id": "abc419-f",
+  "contestId": "abc419",
+  "slotLabel": "F",
+  "officialTaskId": "abc419_f",
+  "title": "All Included",
+  "officialUrl": "https://atcoder.jp/contests/abc419/tasks/abc419_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 8; 1\\leq L\\leq 100; N and L are integers.; Each S_i is a string of length 1 and 10, inclusive, consisting of lowercase English letters.; S_i\\neq S_j\\ (i\\neq j)",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc419-f-problem-6f4acd79816fc01bc857e64983555f3c7e040847741a7f21ee0fdbd1d0004ee9",
+    "source-abc419-editorial-13623-83863d26c9a12a69f07be60afab51ff05603fa4e6f48038a54d1ac0e6c881f43"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

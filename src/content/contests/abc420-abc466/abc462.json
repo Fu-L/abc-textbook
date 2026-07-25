@@ -1,0 +1,20 @@
+{
+  "id": "abc462",
+  "number": 462,
+  "title": "CodeQUEEN 2026 -qual- (AtCoder Beginner Contest 462)",
+  "startedAt": "2026-06-13T21:00:00+09:00",
+  "endedAt": "2026-06-13T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc462",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc462_a",
+    "abc462_b",
+    "abc462_c",
+    "abc462_d",
+    "abc462_e",
+    "abc462_f",
+    "abc462_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc462-task-list-9d7d4a2ec4a942371547c57c4a6a956fb5ac2a3f39b1120858191416e4aca769",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

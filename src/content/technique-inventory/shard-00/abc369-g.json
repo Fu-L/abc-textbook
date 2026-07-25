@@ -1,0 +1,20 @@
+{
+  "problemId": "abc369-g",
+  "sourceRevisionIds": [
+    "source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d",
+    "source-abc369-g-problem-2b9423c419137fa16d4dc77e6739a0ec2fe5858da5fda63a67ee7e0247093265"
+  ],
+  "coreMethod": "abc369-g「As far as possible」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "DFS で頂点へ入ってから出るまでに訪れる頂点はちょうどその部分木なので、時刻区間との対応が成立する。",
+    "As far as possible 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["木の連結性と一意な単純路", "Euler tour による木の一次元化"],
+  "implementationConcerns": ["入時刻の半開区間と頂点値・辺値のどちらを記録するかを統一する。"],
+  "outcomeCandidates": [
+    "As far as possible 型の 根付き木・部分木・パスの関係に対し、Euler tour による木の一次元化を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc296-e",
+  "contestId": "abc296",
+  "slotLabel": "E",
+  "officialTaskId": "abc296_e",
+  "title": "Transition Game",
+  "officialUrl": "https://atcoder.jp/contests/abc296/tasks/abc296_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times 10^5; 1\\leq A_i\\leq N; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc296-e-problem-d20cd3f48bf987b0261459fa8579faa57de6822c5f637a3d263bf0c442985204",
+    "source-abc296-editorial-6116-dbe4ddefbb6d44eab7ed7f4d8bd3b687af7526bb5b0e973a6dd18f091a411f0b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

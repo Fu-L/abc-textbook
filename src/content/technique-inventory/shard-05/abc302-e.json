@@ -1,0 +1,22 @@
+{
+  "problemId": "abc302-e",
+  "sourceRevisionIds": [
+    "source-abc302-e-problem-11b090eb53471a5e3315ce1c2837d74511b3dbb4e27cef33f24c523b09821da0",
+    "source-abc302-editorial-6410-4a22dd9ce6220c919d246e3b7809bb34dc5372fbfdb9e41e7caacacdd5e5fe8e"
+  ],
+  "coreMethod": "abc302-e「Isolation」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
+    "Isolation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "平衡二分探索木"],
+  "implementationConcerns": [
+    "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。"
+  ],
+  "outcomeCandidates": [
+    "Isolation 型の 頂点と辺からなる状態グラフに対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

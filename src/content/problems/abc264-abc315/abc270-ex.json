@@ -1,0 +1,20 @@
+{
+  "id": "abc270-ex",
+  "contestId": "abc270",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc270_h",
+  "title": "add 1",
+  "officialUrl": "https://atcoder.jp/contests/abc270/tasks/abc270_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 2\\times 10^5; 0=A_1\\leq A_2\\leq \\cdots \\leq A_N\\leq 10^{18}; A_N>0; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc270-ex-problem-0b01642c8ebddbe08cc870b2e38f520a70ba664454fa39d28c4064833109dc4d",
+    "source-abc270-editorial-4880-5daf49f85c53245b3cda565c56b18dfe60eb5e14c4b8e6c3669f215321f2c989"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

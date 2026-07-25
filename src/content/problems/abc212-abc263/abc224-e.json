@@ -1,0 +1,20 @@
+{
+  "id": "abc224-e",
+  "contestId": "abc224",
+  "slotLabel": "E",
+  "officialTaskId": "abc224_e",
+  "title": "Integers on Grid",
+  "officialUrl": "https://atcoder.jp/contests/abc224/tasks/abc224_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W \\leq 2 \\times 10^5; 1 \\leq N \\leq \\min(2 \\times 10^5, HW); 1 \\leq r_i \\leq H; 1 \\leq c_i \\leq W; 1 \\leq a_i \\leq 10^9; i \\neq j \\Rightarrow (r_i, c_i) \\neq (r_j, c_j); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7",
+    "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

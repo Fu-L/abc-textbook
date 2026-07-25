@@ -1,0 +1,20 @@
+{
+  "id": "abc261-f",
+  "contestId": "abc261",
+  "slotLabel": "F",
+  "officialTaskId": "abc261_f",
+  "title": "Sorting Color Balls",
+  "officialUrl": "https://atcoder.jp/contests/abc261/tasks/abc261_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3\\times 10^5; 1\\leq C_i\\leq N; 1\\leq X_i\\leq N; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc261-f-problem-efc03c0c6969a8b6609591aafc1ad8af566d970a60417a2a30692b8b9c1bbb1b",
+    "source-abc261-editorial-4484-568736e4a5d7b1cbefae39f8c795de9c1b2d67282624dd5a161079111bbaccfb"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

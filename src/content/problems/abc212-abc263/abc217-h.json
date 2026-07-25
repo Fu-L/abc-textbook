@@ -1,0 +1,20 @@
+{
+  "id": "abc217-h",
+  "contestId": "abc217",
+  "slotLabel": "H",
+  "officialTaskId": "abc217_h",
+  "title": "Snuketoon",
+  "officialUrl": "https://atcoder.jp/contests/abc217/tasks/abc217_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq T_1 \\lt T_2 \\lt \\dots \\lt T_N \\leq 10^9; D_i (1 \\leq i \\leq N) is 0 or 1.; -10^9 \\leq X_i \\leq 10^9 (1 \\leq i \\leq N); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323",
+    "source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

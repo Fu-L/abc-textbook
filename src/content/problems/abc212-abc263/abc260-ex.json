@@ -1,0 +1,20 @@
+{
+  "id": "abc260-ex",
+  "contestId": "abc260",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc260_h",
+  "title": "Colorfulness",
+  "officialUrl": "https://atcoder.jp/contests/abc260/tasks/abc260_h",
+  "constraintsSummary": "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2.5 \\times 10^5; 1 \\leq M \\leq 2.5 \\times 10^5; 1 \\leq a_i \\leq N; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd",
+    "source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

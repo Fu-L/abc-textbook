@@ -1,0 +1,20 @@
+{
+  "id": "abc269-f",
+  "contestId": "abc269",
+  "slotLabel": "F",
+  "officialTaskId": "abc269_f",
+  "title": "Numbered Checker",
+  "officialUrl": "https://atcoder.jp/contests/abc269/tasks/abc269_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \\le N,M \\le 10^9; 1 \\le Q \\le 2 \\times 10^5; 1 \\le A_i \\le B_i \\le N; 1 \\le C_i \\le D_i \\le M",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc269-f-problem-2f910c36bdeb03d58b53f7268e5dd5a44bf7c0d463a544ab9903e17b615ab67a",
+    "source-abc269-editorial-4846-ca50d700b0e54577aa1a9ec3da3743af33cf5d02afd035d1be6729315c6ee811"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc305-f",
+  "contestId": "abc305",
+  "slotLabel": "F",
+  "officialTaskId": "abc305_f",
+  "title": "Dungeon Explore",
+  "officialUrl": "https://atcoder.jp/contests/abc305/tasks/abc305_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq100; N-1\\leq M\\leq\\dfrac{N(N-1)}2; The graph is simple and connected.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc305-f-problem-f13178bfa7b480c26c6206c3c96d4f08526a5036807fe624b1e4484ef7ba8de9",
+    "source-abc305-editorial-6542-fb4c7cf6c4c3a4faf71fe74fb0d98f376f1ad7e98f2ffe32ebf555e1121cc090"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

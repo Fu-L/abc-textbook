@@ -1,0 +1,20 @@
+{
+  "id": "abc427-g",
+  "contestId": "abc427",
+  "slotLabel": "G",
+  "officialTaskId": "abc427_g",
+  "title": "Takahashi's Expectation 2",
+  "officialUrl": "https://atcoder.jp/contests/abc427/tasks/abc427_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 1\\le A\\le10 ^ 9; 1\\le B\\le10 ^ 9; -10 ^ 9\\le P _ i\\le10 ^ 9\\ (1\\le i\\le N); 1\\le Q\\le2\\times10 ^ 5; T _ i=1 or T _ i=2\\ (1\\le i\\le Q); There exists an integer i\\ (1\\le i\\le Q) such that T _ i=2.; If T _ i=1, then -10 ^ 9\\le X _ i\\le10 ^ 9. (1\\le i\\le Q); If T _ i=2, then -10 ^ {12}\\le X _ i\\le10 ^ {12}. (1\\le i\\le Q); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1",
+    "source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

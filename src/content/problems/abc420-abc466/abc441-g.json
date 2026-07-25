@@ -1,0 +1,20 @@
+{
+  "id": "abc441-g",
+  "contestId": "abc441",
+  "slotLabel": "G",
+  "officialTaskId": "abc441_g",
+  "title": "Takoyaki and Flip",
+  "officialUrl": "https://atcoder.jp/contests/abc441/tasks/abc441_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 1\\le Q\\le2\\times10 ^ 5; In all queries, 1\\le L\\le R\\le N.; In type 1 queries, 1\\le X\\le10 ^ 9.; There is at least one type 3 query.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc441-g-problem-6b1f42602dae00eb8633de4f6741c2c4433f2b299f53f8ca86aea2176c99a261",
+    "source-abc441-editorial-15103-53734a38f511a7b1b7f989c215be897bae76dac5c7e5ee46f8df14a502c06245"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

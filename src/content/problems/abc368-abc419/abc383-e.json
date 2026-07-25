@@ -1,0 +1,20 @@
+{
+  "id": "abc383-e",
+  "contestId": "abc383",
+  "slotLabel": "E",
+  "officialTaskId": "abc383_e",
+  "title": "Sum of Max Matching",
+  "officialUrl": "https://atcoder.jp/contests/abc383/tasks/abc383_e",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; N-1 \\leq M \\leq \\min(\\frac{N \\times (N-1)}{2},2 \\times 10^5); 1 \\leq K \\leq N; 1 \\leq u_i<v_i \\leq N (1 \\leq i \\leq M); 1 \\leq w_i \\leq 10^9; 1 \\leq A_i,B_i \\leq N (1 \\leq i \\leq K); The given graph is simple and connected.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc383-e-problem-936e349ad2d218832382636988104c5e2c9d1f1bcf631fa5971661472ab65e6d",
+    "source-abc383-editorial-11542-f324d9a508a43099b3e45ae63a7d21055c042979d4d26403a184b7ae4a4f3145"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

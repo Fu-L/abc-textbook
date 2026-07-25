@@ -1,0 +1,21 @@
+{
+  "id": "abc308",
+  "number": 308,
+  "title": "AtCoder Beginner Contest 308",
+  "startedAt": "2023-07-01T21:00:00+09:00",
+  "endedAt": "2023-07-01T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc308",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc308_a",
+    "abc308_b",
+    "abc308_c",
+    "abc308_d",
+    "abc308_e",
+    "abc308_f",
+    "abc308_g",
+    "abc308_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc308-task-list-f401bacae9e246f80d50adfae4d3ef9371c8be15e25d01d750a243eb963b1e32",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

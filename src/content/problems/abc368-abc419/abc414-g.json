@@ -1,0 +1,20 @@
+{
+  "id": "abc414-g",
+  "contestId": "abc414",
+  "slotLabel": "G",
+  "officialTaskId": "abc414_g",
+  "title": "AtCoder Express 4",
+  "officialUrl": "https://atcoder.jp/contests/abc414/tasks/abc414_g",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 10^5; 1\\leq M\\leq 10^5; 0\\leq x_1 < x_2 < \\ldots < x_N \\leq 10^{12}; 1\\leq l_i\\leq r_i\\leq N, 1\\leq L_i\\leq R_i\\leq N; r_i\\lt L_i or R_i\\lt l_i.; 1\\leq c_i\\leq 10^{12}; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc414-g-problem-79f582a7b52f95ca6db3d84ac26d9bb4bbea8c837443dbb3b5a0492e442a8da5",
+    "source-abc414-editorial-13415-646133a0df99101298dd4bd6ddef428c00978db0f886b827ad90cf9daf76ded8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

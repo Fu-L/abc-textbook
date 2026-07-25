@@ -1,0 +1,20 @@
+{
+  "id": "abc232-f",
+  "contestId": "abc232",
+  "slotLabel": "F",
+  "officialTaskId": "abc232_f",
+  "title": "Simple Operations on Sequence",
+  "officialUrl": "https://atcoder.jp/contests/abc232/tasks/abc232_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 18; 1 \\leq X \\leq 10^8; 1 \\leq Y \\leq 10^{16}; 1 \\leq A_i, B_i \\leq 10^8; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7",
+    "source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

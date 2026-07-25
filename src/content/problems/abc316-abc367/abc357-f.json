@@ -1,0 +1,20 @@
+{
+  "id": "abc357-f",
+  "contestId": "abc357",
+  "slotLabel": "F",
+  "officialTaskId": "abc357_f",
+  "title": "Two Sequence Queries",
+  "officialUrl": "https://atcoder.jp/contests/abc357/tasks/abc357_f",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N,Q\\leq 2\\times 10^5; 0\\leq A_i,B_i\\leq 10^9; 1\\leq l\\leq r\\leq N; 1\\leq x\\leq 10^9; All input values are integers.; There is at least one query of the third type.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc357-f-problem-a79b7aaa8ea4d464d60eeb53b25ebc4cbaa9cada5f4c8200d478058990ceb2c5",
+    "source-abc357-editorial-10186-0ffc8702f9b8507bafcdee69c180255e62398d8223724386832f88075516947d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

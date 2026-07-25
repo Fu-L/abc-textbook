@@ -1,0 +1,20 @@
+{
+  "id": "abc323-e",
+  "contestId": "abc323",
+  "slotLabel": "E",
+  "officialTaskId": "abc323_e",
+  "title": "Playlist",
+  "officialUrl": "https://atcoder.jp/contests/abc323/tasks/abc323_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N\\leq 10^3; 0 \\leq X\\leq 10^4; 1 \\leq T_i\\leq 10^4; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc323-e-problem-5e48fc5e3fa5d92f3844f5dd695d5020a4a80f9ae516bc9c7211ae200296dcf3",
+    "source-abc323-editorial-7357-bc6da2c0f9b70d0ca06c9e349916b5e0405fbf5c764658dc443b7ce468946ecf"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

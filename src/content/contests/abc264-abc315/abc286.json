@@ -1,0 +1,21 @@
+{
+  "id": "abc286",
+  "number": 286,
+  "title": "UL Systems Programming Contest 2023(AtCoder Beginner Contest 286)",
+  "startedAt": "2023-01-21T21:00:00+09:00",
+  "endedAt": "2023-01-21T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc286",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc286_a",
+    "abc286_b",
+    "abc286_c",
+    "abc286_d",
+    "abc286_e",
+    "abc286_f",
+    "abc286_g",
+    "abc286_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc286-task-list-c1313d0b125ffac45363d8a0ef181f8ad5a0238f5e2a604b084270788e091d91",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "abc303",
+  "number": 303,
+  "title": "NS Solutions Corporation Programming Contest 2023（AtCoder Beginner Contest 303）",
+  "startedAt": "2023-05-27T21:00:00+09:00",
+  "endedAt": "2023-05-27T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc303",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc303_a",
+    "abc303_b",
+    "abc303_c",
+    "abc303_d",
+    "abc303_e",
+    "abc303_f",
+    "abc303_g",
+    "abc303_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc303-task-list-8d8c51cb540305037da336753aa26535710de8b80448a71e02be33f965f063db",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "abc231",
+  "number": 231,
+  "title": "Panasonic Programming Contest 2021(AtCoder Beginner Contest 231)",
+  "startedAt": "2021-12-11T21:00:00+09:00",
+  "endedAt": "2021-12-11T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc231",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "H"],
+  "officialTaskIds": [
+    "abc231_a",
+    "abc231_b",
+    "abc231_c",
+    "abc231_d",
+    "abc231_e",
+    "abc231_f",
+    "abc231_g",
+    "abc231_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc231-task-list-f0d3b1d578f69ab4e2e6915c22087e539c2af2d0d51928510e647aeb7b01cf13",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

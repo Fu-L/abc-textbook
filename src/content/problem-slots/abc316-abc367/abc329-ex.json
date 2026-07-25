@@ -1,0 +1,12 @@
+{
+  "contestId": "abc329",
+  "label": "Ex",
+  "officialTaskId": null,
+  "officialOrder": null,
+  "availability": "official_absent",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": null,
+  "sourceRevisionId": "source-abc329-task-list-5d3ca25694e8b4a212b14913faf34a5592b18822aafb37827b328f111a57e38c",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc222-h",
+  "contestId": "abc222",
+  "slotLabel": "H",
+  "officialTaskId": "abc222_h",
+  "title": "Beautiful Binary Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc222/tasks/abc222_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^7; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147",
+    "source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

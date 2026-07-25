@@ -1,0 +1,21 @@
+{
+  "id": "abc439-f",
+  "contestId": "abc439",
+  "slotLabel": "F",
+  "officialTaskId": "abc439_f",
+  "title": "Beautiful Kadomatsu",
+  "officialUrl": "https://atcoder.jp/contests/abc439/tasks/abc439_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 3 \\times 10^5; P is a permutation of (1,2,\\dots,N).",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc439-f-problem-1ab367a1121b2356ace607e5cbe50f36affe330938a7f64cd56071baf9f89797",
+    "source-abc439-editorial-14989-e1dd7d975d4ecdcb47d569213dae5fffa55f5ff328f78027cd63aeab341562ce",
+    "source-abc439-editorial-14996-dafa76d1df1d12c5c0c2697ee8f8ddf459e9be86007e52bcdfd74e1eff5d15f9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

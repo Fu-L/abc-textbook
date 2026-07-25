@@ -1,0 +1,22 @@
+{
+  "problemId": "abc395-f",
+  "sourceRevisionIds": [
+    "source-abc395-editorial-12344-2eb8137f8829c1e0b7a623f2ec4e13324710e3793f7e853d5497c8205592d1d5",
+    "source-abc395-f-problem-df822de6d2bbd93a79019da4bb858e300849ca17a277929a897ccf9206036c48"
+  ],
+  "coreMethod": "abc395-f「Smooth Occlusion」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "判定の真偽が境界の片側で閉じる単調性を示せば、各比較で答えを含む区間を半分に保てる。",
+    "Smooth Occlusion 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "二分探索と単調性"],
+  "implementationConcerns": [
+    "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。"
+  ],
+  "outcomeCandidates": [
+    "Smooth Occlusion 型の 整数の約数・剰余構造に対し、二分探索と単調性を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

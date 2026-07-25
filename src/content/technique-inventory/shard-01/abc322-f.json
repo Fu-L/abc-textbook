@@ -1,0 +1,20 @@
+{
+  "problemId": "abc322-f",
+  "sourceRevisionIds": [
+    "source-abc322-editorial-7303-78eb3ac0025e62afd734563853884e0cc2d27e7d0f8706015f4fb8f1cc14a71d",
+    "source-abc322-f-problem-00617dfda1bb35d2bd1170644c1a944cd547c3359c166bec98e45285c40a7563"
+  ],
+  "coreMethod": "abc322-f「Vacation Query」では、主解法候補として、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "作用の合成則と集約演算の準同型性により、遅延値を子へ配る前後で区間の表す値が変わらない。",
+    "Vacation Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "遅延評価セグメント木"],
+  "implementationConcerns": ["作用合成の順序、単位作用、区間長を使う写像を同じ規約で実装する。"],
+  "outcomeCandidates": [
+    "Vacation Query 型の 文字列の prefix・suffix と一致関係に対し、遅延評価セグメント木を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

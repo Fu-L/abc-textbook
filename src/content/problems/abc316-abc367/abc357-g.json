@@ -1,0 +1,20 @@
+{
+  "id": "abc357-g",
+  "contestId": "abc357",
+  "slotLabel": "G",
+  "officialTaskId": "abc357_g",
+  "title": "Stair-like Grid",
+  "officialUrl": "https://atcoder.jp/contests/abc357/tasks/abc357_g",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2.5 \\times 10^5; N is even.; 0 \\leq M \\leq 50; 1 \\leq a_i \\leq N; 1 \\leq b_i \\leq \\left \\lceil \\frac{a_i}{2} \\right \\rceil \\times 2; (a_i, b_i) \\neq (1, 1) and (a_i, b_i) \\neq (N, N).; (a_i, b_i) \\neq (a_j, b_j) if i \\neq j.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc357-g-problem-5e7319708b23faaeb5d7dad6022dc6e5aa4cc5268b0249022bbd607aa38d484f",
+    "source-abc357-editorial-10179-6ee21b6ab16f35a854bce875f0abbc9f40ed38233e4cb1f9f4f40a634ef45b06"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

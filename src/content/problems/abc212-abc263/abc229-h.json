@@ -1,0 +1,20 @@
+{
+  "id": "abc229-h",
+  "contestId": "abc229",
+  "slotLabel": "H",
+  "officialTaskId": "abc229_h",
+  "title": "Advance or Eat",
+  "officialUrl": "https://atcoder.jp/contests/abc229/tasks/abc229_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 8; N is an integer.; S_{i,j} is W, B, or ..",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb",
+    "source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

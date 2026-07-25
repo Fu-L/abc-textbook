@@ -1,0 +1,22 @@
+{
+  "problemId": "abc338-e",
+  "sourceRevisionIds": [
+    "source-abc338-e-problem-9dd60d4e5c4ed7772cd791c12f8b48bef91c588ae829b02c763fbe3f7f9e8bc0",
+    "source-abc338-editorial-9172-411422b4ddb0a7b0369c40a609943ac7f77967ee10923f39ad7fd7f30c5c8102"
+  ],
+  "coreMethod": "abc338-e「Chords」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
+    "Chords 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い", "平衡二分探索木"],
+  "implementationConcerns": [
+    "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。"
+  ],
+  "outcomeCandidates": [
+    "Chords 型の 区間端点と包含関係に対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

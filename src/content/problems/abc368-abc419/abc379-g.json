@@ -1,0 +1,20 @@
+{
+  "id": "abc379-g",
+  "contestId": "abc379",
+  "slotLabel": "G",
+  "officialTaskId": "abc379_g",
+  "title": "Count Grid 3-coloring",
+  "officialUrl": "https://atcoder.jp/contests/abc379/tasks/abc379_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W; H \\times W \\leq 200; H and W are integers.; S is a grid with H rows and W columns consisting of 1, 2, 3, and ?.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171",
+    "source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

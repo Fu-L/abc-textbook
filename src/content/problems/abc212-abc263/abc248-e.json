@@ -1,0 +1,20 @@
+{
+  "id": "abc248-e",
+  "contestId": "abc248",
+  "slotLabel": "E",
+  "officialTaskId": "abc248_e",
+  "title": "K-colinear Line",
+  "officialUrl": "https://atcoder.jp/contests/abc248/tasks/abc248_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 300; \\lvert X_i \\rvert, \\lvert Y_i \\rvert \\leq 10^9; X_i\\neq X_j or Y_i\\neq Y_j, if i\\neq j.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc248-e-problem-3bdb5230e435e45ecdada0339b5aa4d424d0a6dcecc863712b12270c320c19a8",
+    "source-abc248-editorial-3792-678e0d64c5fea2844c27e28f78b4fffc0bd8497479aa439587db945b60c3fac6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc241-f",
+  "contestId": "abc241",
+  "slotLabel": "F",
+  "officialTaskId": "abc241_f",
+  "title": "Skate",
+  "officialUrl": "https://atcoder.jp/contests/abc241/tasks/abc241_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq H \\leq 10^9; 1\\leq W \\leq 10^9; 1\\leq N \\leq 10^5; 1\\leq s_x,g_x\\leq H; 1\\leq s_y,g_y\\leq W; 1\\leq X_i \\leq H; 1\\leq Y_i \\leq W; (s_x,s_y)\\neq (g_x,g_y); (s_x,s_y)\\neq (X_i,Y_i); (g_x,g_y)\\neq (X_i,Y_i); If i\\neq j, then (X_i,Y_i)\\neq (X_j,Y_j).; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638",
+    "source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

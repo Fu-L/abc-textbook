@@ -1,0 +1,20 @@
+{
+  "id": "abc263-f",
+  "contestId": "abc263",
+  "slotLabel": "F",
+  "officialTaskId": "abc263_f",
+  "title": "Tournament",
+  "officialUrl": "https://atcoder.jp/contests/abc263/tasks/abc263_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 16; 1 \\leq C_{i,j} \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc263-f-problem-29c43defca98c2a963108037041bb5b6dcc5966f30ac660724107a28ed5d9274",
+    "source-abc263-editorial-4550-b6e2922d0d6dd7c13db4dd4ddb7bb9d9b79ac9e390f694ef5317da5f15264315"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

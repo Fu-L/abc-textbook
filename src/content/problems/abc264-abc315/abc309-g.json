@@ -1,0 +1,20 @@
+{
+  "id": "abc309-g",
+  "contestId": "abc309",
+  "slotLabel": "G",
+  "officialTaskId": "abc309_g",
+  "title": "Ban Permutation",
+  "officialUrl": "https://atcoder.jp/contests/abc309/tasks/abc309_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 100; 1 \\le X \\le 5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055",
+    "source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

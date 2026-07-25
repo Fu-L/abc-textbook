@@ -1,0 +1,20 @@
+{
+  "id": "abc226-h",
+  "contestId": "abc226",
+  "slotLabel": "H",
+  "officialTaskId": "abc226_h",
+  "title": "Random Kth Max",
+  "officialUrl": "https://atcoder.jp/contests/abc226/tasks/abc226_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 50; 1 \\leq K \\leq N; 0 \\leq L_i \\lt R_i \\leq 100; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48",
+    "source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

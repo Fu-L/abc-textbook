@@ -1,0 +1,22 @@
+{
+  "problemId": "abc341-e",
+  "sourceRevisionIds": [
+    "source-abc341-e-problem-f4e2b13f0ec3f2b9861cae0204dc63ce25ce852d34c9cc224eff6680d4dda972",
+    "source-abc341-editorial-9325-a380e12aee45a16b3b4b750da58091f560e37101f4eaf926fc833b5552745def"
+  ],
+  "coreMethod": "abc341-e「Alternating String」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+    "Alternating String 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "セグメント木と monoid"],
+  "implementationConcerns": [
+    "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。"
+  ],
+  "outcomeCandidates": [
+    "Alternating String 型の 文字列の prefix・suffix と一致関係に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

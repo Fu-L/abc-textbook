@@ -1,0 +1,20 @@
+{
+  "id": "abc291-g",
+  "contestId": "abc291",
+  "slotLabel": "G",
+  "officialTaskId": "abc291_g",
+  "title": "OR Sum",
+  "officialUrl": "https://atcoder.jp/contests/abc291/tasks/abc291_g",
+  "constraintsSummary": "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 5\\times 10^5; 0\\leq A_i,B_i \\leq 31; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc291-g-problem-b70a3c77e64434ca33b8131b0663954ac871d89241f2e3e45f1b62d9f0604162",
+    "source-abc291-editorial-5853-63fe1b5a3336818969994232dcd22bb622706f26a5e0a23b93e8b9467f59499a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

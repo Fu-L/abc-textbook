@@ -1,0 +1,20 @@
+{
+  "id": "abc221-h",
+  "contestId": "abc221",
+  "slotLabel": "H",
+  "officialTaskId": "abc221_h",
+  "title": "Count Multiset",
+  "officialUrl": "https://atcoder.jp/contests/abc221/tasks/abc221_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 5000; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc221-h-problem-007d88780f471378894ba67fde15552d3170f77ca35c3818d479b162d1a50d50",
+    "source-abc221-editorial-2719-7d0a4f6a911b12cda7b3a1e70f53d64016b01e1a7616f1dace14babf5de7061a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

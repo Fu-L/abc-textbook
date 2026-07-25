@@ -1,0 +1,20 @@
+{
+  "id": "abc369-e",
+  "contestId": "abc369",
+  "slotLabel": "E",
+  "officialTaskId": "abc369_e",
+  "title": "Sightseeing Tour",
+  "officialUrl": "https://atcoder.jp/contests/abc369/tasks/abc369_e",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 400; N-1 \\leq M \\leq 2 \\times 10^5; 1 \\leq U_i < V_i \\leq N; 1 \\leq T_i \\leq 10^9; 1 \\leq Q \\leq 3000; 1 \\leq K_i \\leq 5; 1 \\leq B_{i,1} < B_{i,2} < \\cdots < B_{i,K_i} \\leq M; All input values are integers.; It is possible to travel between any two islands using some bridges.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc",
+    "source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

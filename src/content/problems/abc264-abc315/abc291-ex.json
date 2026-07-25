@@ -1,0 +1,20 @@
+{
+  "id": "abc291-ex",
+  "contestId": "abc291",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc291_h",
+  "title": "Balanced Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc291/tasks/abc291_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1\\leq A_i,B_i \\leq N; All values in the input are integers.; The given graph is a tree.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc291-ex-problem-0f5a2a3d492a1dc4e0890bcd3980e0243acdf9436eed5817e512836de4613d9d",
+    "source-abc291-editorial-5840-f81899847d6c0912676ee91faaba0803527dfcec357072d21460af24e7909b0c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

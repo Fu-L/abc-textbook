@@ -1,0 +1,20 @@
+{
+  "id": "abc445-e",
+  "contestId": "abc445",
+  "slotLabel": "E",
+  "officialTaskId": "abc445_e",
+  "title": "Many LCMs",
+  "officialUrl": "https://atcoder.jp/contests/abc445/tasks/abc445_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10^5; 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^7; All input values are integers.; The sum of N over all test cases in a single input is at most 2 \\times 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc445-e-problem-50135848a5878b8a158943534dbfed90b6878bc27e5ccea5387b9cf9efb99965",
+    "source-abc445-editorial-15897-cb7d716d9e102facbb220e48ba70de743c4fb5a4c813c547c6652e11a22000e2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

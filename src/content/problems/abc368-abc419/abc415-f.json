@@ -1,0 +1,20 @@
+{
+  "id": "abc415-f",
+  "contestId": "abc415",
+  "slotLabel": "F",
+  "officialTaskId": "abc415_f",
+  "title": "Max Combo",
+  "officialUrl": "https://atcoder.jp/contests/abc415/tasks/abc415_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 5 \\times 10^5, inclusive.; S is a string of length N consisting of lowercase English letters.; Q is an integer between 1 and 5 \\times 10^5, inclusive.; Type 1 queries satisfy the following constraints: i is an integer between 1 and N, inclusive. x is a lowercase English letter.; i is an integer between 1 and N, inclusive.; x is a lowercase English letter.; Type 2 queries satisfy the following constraints: l,r are integers satisfying 1 \\le l \\le r \\le N.; l,r are integers satisfying 1 \\le l \\le r \\le N.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc415-f-problem-db40abf308f6599da193860db7308c2e227e4301e69869227a21eb7da63019da",
+    "source-abc415-editorial-13485-ecd648f75179785509f8b9157eb02e89f55c030b9c0efdef66a026c4a0b0176d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

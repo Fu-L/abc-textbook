@@ -1,0 +1,20 @@
+{
+  "id": "abc223-e",
+  "contestId": "abc223",
+  "slotLabel": "E",
+  "officialTaskId": "abc223_e",
+  "title": "Placing Rectangles",
+  "officialUrl": "https://atcoder.jp/contests/abc223/tasks/abc223_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq X, Y \\leq 10^9; 1 \\leq A, B, C \\leq 10^{18}; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1",
+    "source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

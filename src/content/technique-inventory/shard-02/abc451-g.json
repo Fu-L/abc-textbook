@@ -1,0 +1,22 @@
+{
+  "problemId": "abc451-g",
+  "sourceRevisionIds": [
+    "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+    "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
+  ],
+  "coreMethod": "abc451-g「Minimum XOR Walk」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
+    "Minimum XOR Walk 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "Trie"],
+  "implementationConcerns": [
+    "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。"
+  ],
+  "outcomeCandidates": [
+    "Minimum XOR Walk 型の 頂点と辺からなる状態グラフに対し、Trieを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

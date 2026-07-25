@@ -1,0 +1,12 @@
+{
+  "contestId": "abc401",
+  "label": "H",
+  "officialTaskId": null,
+  "officialOrder": null,
+  "availability": "official_absent",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": null,
+  "sourceRevisionId": "source-abc401-task-list-6b46913a9c68367b0c11c28ca61a18fbfcbbba00493b770882c0414505a51c78",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc227-g",
+  "sourceRevisionIds": [
+    "source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5",
+    "source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c"
+  ],
+  "coreMethod": "abc227-g「Divisors of Binomial Coefficient」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "算術の基本定理により正整数の素因数指数表現は一意で、積・割り切れ条件を指数ごとに判定できる。",
+    "Divisors of Binomial Coefficient 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["多項式の係数演算", "素因数分解と約数列挙"],
+  "implementationConcerns": ["試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。"],
+  "outcomeCandidates": [
+    "Divisors of Binomial Coefficient 型の 多項式係数と組合せ和の対応に対し、素因数分解と約数列挙を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

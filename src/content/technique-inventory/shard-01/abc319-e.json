@@ -1,0 +1,22 @@
+{
+  "problemId": "abc319-e",
+  "sourceRevisionIds": [
+    "source-abc319-e-problem-c4a4219b20dece617d23d754c99682f553521931e1092d89b0e73b7592f56b84",
+    "source-abc319-editorial-7100-2a5438d3186735365beab74de2e9243b47adce3c143ef6f82170241133983151"
+  ],
+  "coreMethod": "abc319-e「Bus Stops」では、各待ち時間の法をまとめた最小公倍数 L に対し、出発時刻の剰余ごとの所要時間を前計算する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "全ての待ち条件が時刻 modulo L だけで決まり、L の倍数だけずらした行程の到着時刻も同じだけ平行移動する。",
+    "Bus Stops 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["合同式と最小公倍数による周期化"],
+  "implementationConcerns": [
+    "固定の始端・終端時間を行程内へ入れる位置と、負でない modulo の定義を統一する。"
+  ],
+  "outcomeCandidates": [
+    "Bus Stops 型の問題に対し、合同式と最小公倍数による周期化を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

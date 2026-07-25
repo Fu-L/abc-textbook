@@ -1,0 +1,20 @@
+{
+  "id": "abc214-h",
+  "contestId": "abc214",
+  "slotLabel": "H",
+  "officialTaskId": "abc214_h",
+  "title": "Collecting",
+  "officialUrl": "https://atcoder.jp/contests/abc214/tasks/abc214_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; 1 \\leq K \\leq 10; 1 \\leq A_i, B_i \\leq N; A_i \\neq B_i; A_i \\neq A_j or B_i \\neq B_j, if i \\neq j.; 1 \\leq X_i \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e",
+    "source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

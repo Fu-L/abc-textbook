@@ -1,0 +1,20 @@
+{
+  "id": "abc266-ex",
+  "contestId": "abc266",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc266_h",
+  "title": "Snuke Panic (2D)",
+  "officialUrl": "https://atcoder.jp/contests/abc266/tasks/abc266_h",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq T_i \\leq 10^9; 0 \\leq X_i,Y_i \\leq 10^9; 1 \\leq A_i \\leq 10^9; The triples (T_i,X_i,Y_i) are distinct.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e",
+    "source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

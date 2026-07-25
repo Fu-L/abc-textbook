@@ -1,0 +1,20 @@
+{
+  "id": "abc433",
+  "number": 433,
+  "title": "AtCoder Beginner Contest 433",
+  "startedAt": "2025-11-22T21:00:00+09:00",
+  "endedAt": "2025-11-22T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc433",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc433_a",
+    "abc433_b",
+    "abc433_c",
+    "abc433_d",
+    "abc433_e",
+    "abc433_f",
+    "abc433_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc433-task-list-5dfe5c929c57498af467a069a048ecb8988f61d6ccddc5d090da4fc199f01663",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

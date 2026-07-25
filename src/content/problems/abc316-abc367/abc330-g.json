@@ -1,0 +1,20 @@
+{
+  "id": "abc330-g",
+  "contestId": "abc330",
+  "slotLabel": "G",
+  "officialTaskId": "abc330_g",
+  "title": "Inversion Squared",
+  "officialUrl": "https://atcoder.jp/contests/abc330/tasks/abc330_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 3000; A_i = -1 or 1\\leq A_i \\leq N.; Each integer from 1 to N is contained at most once in A.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc330-g-problem-253e1f6725532d08590375dc5679214a715482cb9c47a9d4eb020640e1e340a8",
+    "source-abc330-editorial-7743-75b295b2b27227610092fa695ea99440e8b479574687a9365b727193c93cb23e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

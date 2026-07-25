@@ -1,0 +1,20 @@
+{
+  "id": "abc303-ex",
+  "contestId": "abc303",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc303_h",
+  "title": "Constrained Tree Degree",
+  "officialUrl": "https://atcoder.jp/contests/abc303/tasks/abc303_h",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 2\\times 10^5; 1\\leq K \\leq N-1; 1\\leq S_1 < S_2 < \\ldots < S_K \\leq N-1; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc303-ex-problem-267a3028ae4d2520204c715bf88d04e5e0021b870033e77b67444f1502079e89",
+    "source-abc303-editorial-6425-145eaa525a03e51f289be86aa8bfc1fdac81daaab3e0b34cba01fe494b1a4506"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

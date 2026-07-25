@@ -1,0 +1,20 @@
+{
+  "id": "abc245-e",
+  "contestId": "abc245",
+  "slotLabel": "E",
+  "officialTaskId": "abc245_e",
+  "title": "Wrapping Chocolate",
+  "officialUrl": "https://atcoder.jp/contests/abc245/tasks/abc245_e",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq M \\leq 2\\times 10^5; 1 \\leq A_i,B_i,C_i,D_i \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235",
+    "source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc263-g",
+  "contestId": "abc263",
+  "slotLabel": "G",
+  "officialTaskId": "abc263_g",
+  "title": "Erasing Prime Pairs",
+  "officialUrl": "https://atcoder.jp/contests/abc263/tasks/abc263_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100; 1 \\leq A_i \\leq 10^7; 1 \\leq B_i \\leq 10^9; All A_i are distinct.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc263-g-problem-3544fd0611c86c99fb427893ed0daac8d5d820123490945d6cbcf37e3d5b5132",
+    "source-abc263-editorial-4537-eed6c766625e13546e78cdb7556166cabe8920898c0876286cb352dc7c4567e2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

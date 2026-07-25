@@ -1,0 +1,20 @@
+{
+  "id": "abc409-g",
+  "contestId": "abc409",
+  "slotLabel": "G",
+  "officialTaskId": "abc409_g",
+  "title": "Accumulation of Wealth",
+  "officialUrl": "https://atcoder.jp/contests/abc409/tasks/abc409_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^5; 0 \\leq P \\leq 100; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc409-g-problem-27228e15fe52a148b2a9dc3940e8a705c69f0551673efb01f45c4297f1c6ffcf",
+    "source-abc409-editorial-13172-94a5ce9a66c66c0e47a1f1ccd42c3ded3ae66f20724269ca333de29f7e25d7a5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

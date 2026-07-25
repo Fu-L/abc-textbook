@@ -1,0 +1,20 @@
+{
+  "id": "abc234-f",
+  "contestId": "abc234",
+  "slotLabel": "F",
+  "officialTaskId": "abc234_f",
+  "title": "Reordering",
+  "officialUrl": "https://atcoder.jp/contests/abc234/tasks/abc234_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length 1 and 5000 (inclusive) consisting of lowercase English letters.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc234-f-problem-63c82d89d32fbc1eedce8bd501c1d65d163257583e40c51ec7ca6ef5d4b88e95",
+    "source-abc234-editorial-3223-046d35954e659dc60bc7aa26e0efc75e4f6cca517bad349758550a7f621af1a2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

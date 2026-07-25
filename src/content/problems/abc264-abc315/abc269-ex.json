@@ -1,0 +1,20 @@
+{
+  "id": "abc269-ex",
+  "contestId": "abc269",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc269_h",
+  "title": "Antichain",
+  "officialUrl": "https://atcoder.jp/contests/abc269/tasks/abc269_h",
+  "constraintsSummary": "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq P_i \\lt i; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8",
+    "source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

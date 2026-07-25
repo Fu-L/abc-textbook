@@ -1,0 +1,20 @@
+{
+  "id": "abc436-e",
+  "contestId": "abc436",
+  "slotLabel": "E",
+  "officialTaskId": "abc436_e",
+  "title": "Minimum Swap",
+  "officialUrl": "https://atcoder.jp/contests/abc436/tasks/abc436_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le3\\times10 ^ 5; 1\\le P _ i\\le N\\ (1\\le i\\le N); P _ i\\ne P _ j\\ (1\\le i\\lt j\\le N); There exists 1\\le i\\le N such that i\\ne P _ i.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc436-e-problem-29bcc2df24f6f13d81c2c0625f2cd0187ad861f6d793cd750abd7cdf145fb7cf",
+    "source-abc436-editorial-14751-1b8affa4ba8c56243f0edd95c7b0f99bfb5f41bc4efa3d55d8507934c752b83d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

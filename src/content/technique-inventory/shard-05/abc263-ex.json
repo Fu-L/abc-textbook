@@ -1,0 +1,22 @@
+{
+  "problemId": "abc263-ex",
+  "sourceRevisionIds": [
+    "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228",
+    "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e"
+  ],
+  "coreMethod": "abc263-ex「Intersection 2」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "判定の真偽が境界の片側で閉じる単調性を示せば、各比較で答えを含む区間を半分に保てる。",
+    "Intersection 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "二分探索と単調性"],
+  "implementationConcerns": [
+    "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。"
+  ],
+  "outcomeCandidates": [
+    "Intersection 2 型の 整数の約数・剰余構造に対し、二分探索と単調性を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

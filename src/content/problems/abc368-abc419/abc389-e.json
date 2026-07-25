@@ -1,0 +1,20 @@
+{
+  "id": "abc389-e",
+  "contestId": "abc389",
+  "slotLabel": "E",
+  "officialTaskId": "abc389_e",
+  "title": "Square Price",
+  "officialUrl": "https://atcoder.jp/contests/abc389/tasks/abc389_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^{5}; 1 \\leq M \\leq 10^{18}; 1 \\leq P_i \\leq 2 \\times 10^{9}; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc389-e-problem-3a553297817d29a27dfb7d11685a16ed62c082e74450f447d074a561c7780d7c",
+    "source-abc389-editorial-11933-465f9d18cab3042f93ba18a34e19f674ce5a62395f1b557e7fa003637d1dcd6d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

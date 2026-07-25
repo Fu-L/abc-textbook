@@ -1,0 +1,20 @@
+{
+  "id": "abc386-e",
+  "contestId": "abc386",
+  "slotLabel": "E",
+  "officialTaskId": "abc386_e",
+  "title": "Maximize XOR",
+  "officialUrl": "https://atcoder.jp/contests/abc386/tasks/abc386_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq K\\leq N\\leq 2\\times 10^5; 0\\leq A_i<2^{60}; \\dbinom{N}{K}\\leq 10^6; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc386-e-problem-e1f49d50548e219465a1696d7c45828cea62061cc1995fd3f4e74f29d60e63c0",
+    "source-abc386-editorial-11697-1f8ad337c682c1b9ee95e2c2265649f581f30715ea292ca96743620dacd5c251"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

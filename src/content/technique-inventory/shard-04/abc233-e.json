@@ -1,0 +1,22 @@
+{
+  "problemId": "abc233-e",
+  "sourceRevisionIds": [
+    "source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf",
+    "source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060"
+  ],
+  "coreMethod": "abc233-e「Σ[k=0..10^100]floor(X／10^k)」では、巨大整数を文字列の各桁として扱い、prefix 桁和と carry を下位桁から一回走査して答えの桁を確定する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "各出力桁へ寄与する入力 prefix が桁和に一致し、十進 carry を次桁へ渡せば筆算と同じ総和になる。",
+    "Σ[k=0..10^100]floor(X／10^k) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["多倍長整数の桁処理"],
+  "implementationConcerns": [
+    "入力桁を全て処理した後も carry が零になるまで出力し、結果を逆順に戻す。"
+  ],
+  "outcomeCandidates": [
+    "Σ[k=0..10^100]floor(X／10^k) 型の問題に対し、多倍長整数の桁処理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

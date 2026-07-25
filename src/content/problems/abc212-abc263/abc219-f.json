@@ -1,0 +1,20 @@
+{
+  "id": "abc219-f",
+  "contestId": "abc219",
+  "slotLabel": "F",
+  "officialTaskId": "abc219_f",
+  "title": "Cleaning Robot",
+  "officialUrl": "https://atcoder.jp/contests/abc219/tasks/abc219_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length between 1 and 2 \\times 10^5 (inclusive) consisting of L, R, U, D.; 1 \\leq K \\leq 10^{12}",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc219-f-problem-81357b19bc73aa408a3ae3da0732b554e100dd724249f7455f547dfa6db1cbf5",
+    "source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

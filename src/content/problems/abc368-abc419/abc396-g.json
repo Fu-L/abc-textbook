@@ -1,0 +1,20 @@
+{
+  "id": "abc396-g",
+  "contestId": "abc396",
+  "slotLabel": "G",
+  "officialTaskId": "abc396_g",
+  "title": "Flip Row or Col",
+  "officialUrl": "https://atcoder.jp/contests/abc396/tasks/abc396_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H \\leq 2\\times 10^5; 1 \\leq W \\leq 18; H and W are integers.; A_{i,1}A_{i,2}\\ldots A_{i,W} is a length-W string consisting of 0 and 1.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc396-g-problem-81eeb298bb974b4bd8017be318c18264a7d11c3550cec032d95ea58895201f54",
+    "source-abc396-editorial-12375-87460d584617418cae1e2edd3b3cf819cf0df9ab9c7a7be2568e840e8e487b24"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc396-e",
+  "contestId": "abc396",
+  "slotLabel": "E",
+  "officialTaskId": "abc396_e",
+  "title": "Min of Restricted Sum",
+  "officialUrl": "https://atcoder.jp/contests/abc396/tasks/abc396_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2\\times 10^5; 0 \\le M \\le 10^5; 1 \\le X_i, Y_i \\le N; 0 \\le Z_i \\le 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc396-e-problem-c31b2e0500585e6c964e0c4d69feb8d69b79c20268e0b70f888a608f5050f5be",
+    "source-abc396-editorial-12390-71791dcbbee89dd3c8461b74eb40ed29a5b6449cb7af08322d917ad0443365bc"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc242-g",
+  "contestId": "abc242",
+  "slotLabel": "G",
+  "officialTaskId": "abc242_g",
+  "title": "Range Pairing Query",
+  "officialUrl": "https://atcoder.jp/contests/abc242/tasks/abc242_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le N \\le 10^5; 1 \\le Q \\le 10^6; 1 \\le A_i \\le N; 1 \\le l \\le r \\le N in each query.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5",
+    "source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

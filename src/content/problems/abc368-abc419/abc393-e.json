@@ -1,0 +1,20 @@
+{
+  "id": "abc393-e",
+  "contestId": "abc393",
+  "slotLabel": "E",
+  "officialTaskId": "abc393_e",
+  "title": "GCD of Subset",
+  "officialUrl": "https://atcoder.jp/contests/abc393/tasks/abc393_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 1.2 \\times 10^6; 1 \\leq A_i \\leq 10^6; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc393-e-problem-1e1f2843143d35d6c5d3150c8d998e82152d9774ae3832fc0936a73f30866d8f",
+    "source-abc393-editorial-12243-3c04bba99a9b8a20be1435fc482a7c1e5e81e34c6f6aa29197be95eda1d4f5c1"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

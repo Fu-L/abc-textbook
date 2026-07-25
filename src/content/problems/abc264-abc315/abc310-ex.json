@@ -1,0 +1,20 @@
+{
+  "id": "abc310-ex",
+  "contestId": "abc310",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc310_h",
+  "title": "Negative Cost",
+  "officialUrl": "https://atcoder.jp/contests/abc310/tasks/abc310_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 300; 1 \\leq H \\leq 10^{18}; -300 \\leq C_i \\leq 300; C_i \\leq 0 for some 1 \\leq i \\leq N.; 1 \\leq D_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc310-ex-problem-db87c46124e4ba901645279dde5b9f7c4b4c380f5d256656c04f6cee7ec94eba",
+    "source-abc310-editorial-6794-7767ff020d4423335f0997e80c56115825006dcfae36bf7a5468095cc489bb5b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

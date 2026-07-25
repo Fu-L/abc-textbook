@@ -1,0 +1,20 @@
+{
+  "id": "abc346-e",
+  "contestId": "abc346",
+  "slotLabel": "E",
+  "officialTaskId": "abc346_e",
+  "title": "Paint",
+  "officialUrl": "https://atcoder.jp/contests/abc346/tasks/abc346_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W, M \\leq 2 \\times 10^5; T_i \\in \\lbrace 1, 2 \\rbrace; 1 \\leq A_i \\leq H for each i such that T_i = 1,; 1 \\leq A_i \\leq W for each i such that T_i = 2.; 0 \\leq X_i \\leq 2 \\times 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec",
+    "source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

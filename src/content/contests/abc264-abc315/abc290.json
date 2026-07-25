@@ -1,0 +1,21 @@
+{
+  "id": "abc290",
+  "number": 290,
+  "title": "Toyota Programming Contest 2023 Spring Qual B（AtCoder Beginner Contest 290）",
+  "startedAt": "2023-02-19T21:00:00+09:00",
+  "endedAt": "2023-02-19T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc290",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc290_a",
+    "abc290_b",
+    "abc290_c",
+    "abc290_d",
+    "abc290_e",
+    "abc290_f",
+    "abc290_g",
+    "abc290_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc290-task-list-24459998fa7734c48af3634f68315de2239151447aee0a8f14061b4192ad75d1",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

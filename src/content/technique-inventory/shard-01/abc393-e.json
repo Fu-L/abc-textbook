@@ -1,0 +1,20 @@
+{
+  "problemId": "abc393-e",
+  "sourceRevisionIds": [
+    "source-abc393-e-problem-1e1f2843143d35d6c5d3150c8d998e82152d9774ae3832fc0936a73f30866d8f",
+    "source-abc393-editorial-12243-3c04bba99a9b8a20be1435fc482a7c1e5e81e34c6f6aa29197be95eda1d4f5c1"
+  ],
+  "coreMethod": "abc393-e「GCD of Subset」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "整数線形結合で表せる値の集合が gcd の倍数全体なので、割り切れ条件が可解性の必要十分条件になる。",
+    "GCD of Subset 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "gcd と拡張 Euclid"],
+  "implementationConcerns": ["0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。"],
+  "outcomeCandidates": [
+    "GCD of Subset 型の 列の順序と prefix 状態に対し、gcd と拡張 Euclidを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

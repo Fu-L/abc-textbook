@@ -1,0 +1,20 @@
+{
+  "id": "abc295-g",
+  "contestId": "abc295",
+  "slotLabel": "G",
+  "officialTaskId": "abc295_g",
+  "title": "Minimum Reachable City",
+  "officialUrl": "https://atcoder.jp/contests/abc295/tasks/abc295_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 2\\times 10^5; 1\\leq Q \\leq 2\\times 10^5; 1\\leq p_i\\leq i; For each query in the first format: 1\\leq u,v \\leq N. u \\neq v. On G_S, vertex u is reachable from vertex v via some edges.; 1\\leq u,v \\leq N.; u \\neq v.; On G_S, vertex u is reachable from vertex v via some edges.; For each query in the second format, 1\\leq x \\leq N.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc295-g-problem-1e1a3e055f7aad2cd56a4f89ed9743a56d6ccc6b472446f9aa7eb01f150272ba",
+    "source-abc295-editorial-6052-e8a82887ceedd6e246d7ee23d6abb37b105a7c8de6a510a6a1a6cd79cf4fb735"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

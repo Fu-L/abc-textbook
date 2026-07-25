@@ -1,0 +1,20 @@
+{
+  "id": "abc363-g",
+  "contestId": "abc363",
+  "slotLabel": "G",
+  "officialTaskId": "abc363_g",
+  "title": "Dynamic Scheduling",
+  "officialUrl": "https://atcoder.jp/contests/abc363/tasks/abc363_g",
+  "constraintsSummary": "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq Q \\leq 10^5; 1 \\leq D_i \\leq N; 1 \\leq P_i \\leq 10^9; 1 \\leq c \\leq N; 1 \\leq x \\leq N; 1 \\leq y \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc363-g-problem-4b21bdcb8e03600245118519ddd01979cb186e7c265ba480003997492e6ba9e3",
+    "source-abc363-editorial-10451-6d090c51cdcb5cd135b6516c2a81751ba5d845e3e3c1302f5031dacd528bc3ce"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

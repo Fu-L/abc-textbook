@@ -1,0 +1,22 @@
+{
+  "problemId": "abc351-f",
+  "sourceRevisionIds": [
+    "source-abc351-editorial-9877-597d4bd09ec26bf222624a2357ff69b6bda0e3f4b273bca35cabb8953774e686",
+    "source-abc351-f-problem-759c8b5d7921f2c97c855f3ab51645da21d9936ee6eeaa61c8cb72f2b3a0b3fc"
+  ],
+  "coreMethod": "abc351-f「Double Sum」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "大小・等値関係を保つ順位写像なので、元座標での順序条件と圧縮後の条件が同値になる。",
+    "Double Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "座標圧縮"],
+  "implementationConcerns": [
+    "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。"
+  ],
+  "outcomeCandidates": [
+    "Double Sum 型の 列の順序と prefix 状態に対し、座標圧縮を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

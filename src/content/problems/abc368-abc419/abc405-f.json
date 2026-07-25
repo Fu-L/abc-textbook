@@ -1,0 +1,20 @@
+{
+  "id": "abc405-f",
+  "contestId": "abc405",
+  "slotLabel": "F",
+  "officialTaskId": "abc405_f",
+  "title": "Chord Crossing",
+  "officialUrl": "https://atcoder.jp/contests/abc405/tasks/abc405_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 10^6; 1\\leq M \\leq \\min\\left(\\lfloor\\frac{N}{2}\\rfloor, 2\\times 10^5\\right); 1 \\le Q \\le 2 \\times 10^5; 1 \\le A_i < B_i \\le 2N; 1 \\le C_j < D_j \\le 2N; A_i and B_i are even.; C_j and D_j are odd.; For any i_1 and i_2 (i_1 \\neq i_2), segments i_1 and i_2 do not share a point.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04",
+    "source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

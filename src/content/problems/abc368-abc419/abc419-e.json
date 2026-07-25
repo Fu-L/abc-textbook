@@ -1,0 +1,20 @@
+{
+  "id": "abc419-e",
+  "contestId": "abc419",
+  "slotLabel": "E",
+  "officialTaskId": "abc419_e",
+  "title": "Subarray Sum Divisibility",
+  "officialUrl": "https://atcoder.jp/contests/abc419/tasks/abc419_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, M \\leq 500; 1 \\leq L \\leq N; 0 \\leq A_i < M; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc419-e-problem-9745e23ca858252ce68f4b06c24710e6580f6033bbb7ecf3ee09ca6b8e9fa693",
+    "source-abc419-editorial-13669-ea28eb62bdc6407b05afcca3ca925a26b0d33500cf664daecef4d5e1abdacf53"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

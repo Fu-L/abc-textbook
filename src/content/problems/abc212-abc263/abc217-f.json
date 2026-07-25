@@ -1,0 +1,20 @@
+{
+  "id": "abc217-f",
+  "contestId": "abc217",
+  "slotLabel": "F",
+  "officialTaskId": "abc217_f",
+  "title": "Make Pair",
+  "officialUrl": "https://atcoder.jp/contests/abc217/tasks/abc217_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 200; 0 \\leq M \\leq N(2N-1); 1 \\leq A_i < B_i \\leq 2N; All pairs (A_i, B_i) are distinct.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e",
+    "source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

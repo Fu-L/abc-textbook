@@ -1,0 +1,20 @@
+{
+  "id": "abc256-g",
+  "contestId": "abc256",
+  "slotLabel": "G",
+  "officialTaskId": "abc256_g",
+  "title": "Black and White Stones",
+  "officialUrl": "https://atcoder.jp/contests/abc256/tasks/abc256_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 10^{12}; 1 \\leq D \\leq 10^4; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc256-g-problem-e2d7ac823f51f5a8e20aba7cec2631acd3bcab48b3e8a5eed6b8a1039de3f27c",
+    "source-abc256-editorial-4130-c937a3ca3ad9ce902644773130814a2722819fd3dcbf5fa9616c506c5796c96a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

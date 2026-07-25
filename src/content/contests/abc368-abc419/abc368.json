@@ -1,0 +1,20 @@
+{
+  "id": "abc368",
+  "number": 368,
+  "title": "Hitachi Vantara Programming Contest 2024（AtCoder Beginner Contest 368）",
+  "startedAt": "2024-08-24T21:00:00+09:00",
+  "endedAt": "2024-08-24T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc368",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc368_a",
+    "abc368_b",
+    "abc368_c",
+    "abc368_d",
+    "abc368_e",
+    "abc368_f",
+    "abc368_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc368-task-list-680f71e5f09b9c74e1a02e8f7d361ba0cc884fbb878efc9c7a56633a09bcb464",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

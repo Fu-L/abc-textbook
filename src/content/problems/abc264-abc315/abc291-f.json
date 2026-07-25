@@ -1,0 +1,20 @@
+{
+  "id": "abc291-f",
+  "contestId": "abc291",
+  "slotLabel": "F",
+  "officialTaskId": "abc291_f",
+  "title": "Teleporter and Closed off",
+  "officialUrl": "https://atcoder.jp/contests/abc291/tasks/abc291_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 10^5; 1\\leq M\\leq 10; M<N; S_i is a string of length M consisting of 0 and 1.; If i+j>N, then the j-th character of S_i is 0.; N and M are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc291-f-problem-d3425db927cfe56c02dc45c664a9289789ebf0fc8683c87aebbb40642e31321a",
+    "source-abc291-editorial-5846-807b8ff2df16d15a085f79f2697170001c9cb78cecc76b0c60285c608a44aae5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

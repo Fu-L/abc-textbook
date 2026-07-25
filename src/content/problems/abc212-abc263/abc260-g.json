@@ -1,0 +1,20 @@
+{
+  "id": "abc260-g",
+  "contestId": "abc260",
+  "slotLabel": "G",
+  "officialTaskId": "abc260_g",
+  "title": "Scalene Triangle Area",
+  "officialUrl": "https://atcoder.jp/contests/abc260/tasks/abc260_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: N, M, X_i, Y_i, and Q are integers.; 1 \\le N \\le 2000; 1 \\le M \\le 2 \\times N; S_i consists of O and X.; 1 \\le Q \\le 2 \\times 10^5; 1 \\le X_i,Y_i \\le N",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d",
+    "source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

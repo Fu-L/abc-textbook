@@ -1,0 +1,20 @@
+{
+  "id": "abc277-f",
+  "contestId": "abc277",
+  "slotLabel": "F",
+  "officialTaskId": "abc277_f",
+  "title": "Sorting a Matrix",
+  "officialUrl": "https://atcoder.jp/contests/abc277/tasks/abc277_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W; H \\times W \\leq 10^6; 0 \\leq A_{i, j} \\leq H \\times W; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b",
+    "source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,21 @@
+{
+  "id": "abc285",
+  "number": 285,
+  "title": "AtCoder Beginner Contest 285",
+  "startedAt": "2023-01-15T21:00:00+09:00",
+  "endedAt": "2023-01-15T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc285",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc285_a",
+    "abc285_b",
+    "abc285_c",
+    "abc285_d",
+    "abc285_e",
+    "abc285_f",
+    "abc285_g",
+    "abc285_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc285-task-list-febc707638025eece316971341c8cab01e029d204d44d33de429e361196c8737",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

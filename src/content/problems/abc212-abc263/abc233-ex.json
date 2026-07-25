@@ -1,0 +1,20 @@
+{
+  "id": "abc233-ex",
+  "contestId": "abc233",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc233_h",
+  "title": "Manhattan Christmas Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc233/tasks/abc233_h",
+  "constraintsSummary": "Time limit: 7 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 10^5; 0\\leq x_i\\leq 10^5; 0\\leq y_i\\leq 10^5; (x_i,y_i) \\neq (x_j,y_j) if i\\neq j.; 1\\leq Q \\leq 10^5; 0\\leq a_i\\leq 10^5; 0\\leq b_i\\leq 10^5; 1\\leq K_i\\leq N; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be",
+    "source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

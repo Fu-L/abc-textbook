@@ -1,0 +1,20 @@
+{
+  "id": "abc303-f",
+  "contestId": "abc303",
+  "slotLabel": "F",
+  "officialTaskId": "abc303_f",
+  "title": "Damage over Time",
+  "officialUrl": "https://atcoder.jp/contests/abc303/tasks/abc303_f",
+  "constraintsSummary": "Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3 \\times 10^5; 1 \\leq H \\leq 10^{18}; 1 \\leq t_i,d_i \\leq 10^9; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc303-f-problem-a0f85dd8f4276fa524adc23cb037fe16e63d4a043ad917475e730fd1a41d89d7",
+    "source-abc303-editorial-6443-30e1ebea1a4af726c45725dc3445b91467b44bfff76be07d0ade4e955c1baa4c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

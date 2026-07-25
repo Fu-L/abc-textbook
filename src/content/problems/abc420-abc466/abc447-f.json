@@ -1,0 +1,20 @@
+{
+  "id": "abc447-f",
+  "contestId": "abc447",
+  "slotLabel": "F",
+  "officialTaskId": "abc447_f",
+  "title": "Centipede Graph",
+  "officialUrl": "https://atcoder.jp/contests/abc447/tasks/abc447_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le Q; 3 \\le N \\le 2 \\times 10^5; 1 \\le A_i, B_i \\le N; The given graph is a tree.; The sum of N over all test cases is at most 2 \\times 10^5.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca",
+    "source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

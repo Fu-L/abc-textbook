@@ -1,0 +1,20 @@
+{
+  "id": "abc279-f",
+  "contestId": "abc279",
+  "slotLabel": "F",
+  "officialTaskId": "abc279_f",
+  "title": "BOX",
+  "officialUrl": "https://atcoder.jp/contests/abc279/tasks/abc279_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 2 \\le N \\le 3 \\times 10^5; 1 \\le Q \\le 3 \\times 10^5; For each type-1 operation, 1 \\le X,Y \\le N and X \\neq Y.; For each type-2 operation, 1 \\le X \\le N.; For each type-3 operation, ball X is contained in some box at that point.; There is at least one type-3 operation.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc279-f-problem-073733efc404d7b820298114bdc572224b608dd2d787fb84b3b51bc0d56d875b",
+    "source-abc279-editorial-5284-2ea014c0428701362b5eb54e72479b68b510301e5a6ea983c6cd976648341c18"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

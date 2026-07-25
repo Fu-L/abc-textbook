@@ -1,0 +1,20 @@
+{
+  "id": "abc362-g",
+  "contestId": "abc362",
+  "slotLabel": "G",
+  "officialTaskId": "abc362_g",
+  "title": "Count Substring Query",
+  "officialUrl": "https://atcoder.jp/contests/abc362/tasks/abc362_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq |S| \\leq 5 \\times 10^5; 1 \\leq Q \\leq 5 \\times 10^5; 1 \\leq |T_i| \\leq |S|; \\displaystyle \\sum_{i=1}^Q |T_i| \\leq 5 \\times 10^5; S and T_i are strings consisting of lowercase English letters.; Q is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc362-g-problem-cf10480009e3293213e9936deb4c1888fee228da4bfeed2b831a6f9392208788",
+    "source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

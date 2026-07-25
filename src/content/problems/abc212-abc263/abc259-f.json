@@ -1,0 +1,20 @@
+{
+  "id": "abc259-f",
+  "contestId": "abc259",
+  "slotLabel": "F",
+  "officialTaskId": "abc259_f",
+  "title": "Select Edges",
+  "officialUrl": "https://atcoder.jp/contests/abc259/tasks/abc259_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3 \\times 10^5; 1 \\leq u_i, v_i \\leq N; -10^9 \\leq w_i \\leq 10^9; d_i is a non-negative integer not exceeding the degree of Vertex i.; The given graph is a tree.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc259-f-problem-ace555e2e0fe1e65c70f65d4e3021a56b88142ea4c5c68b9767e8d833d4964a9",
+    "source-abc259-editorial-4287-3612bfdde67210806fa69102feb1a83f6ce40f8819df0ea69ef29e3a434f89e8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc275-g",
+  "contestId": "abc275",
+  "slotLabel": "G",
+  "officialTaskId": "abc275_g",
+  "title": "Infinite Knapsack",
+  "officialUrl": "https://atcoder.jp/contests/abc275/tasks/abc275_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times 10^5; 10^8\\leq A_i,B_i,C_i \\leq 10^9; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b",
+    "source-abc275-editorial-5111-51c9acaf8a6c44d57dd0445da6d60dda5cc93d44ef12a3eabc0b55b292e8d731"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

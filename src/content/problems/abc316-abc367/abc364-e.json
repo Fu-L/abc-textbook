@@ -1,0 +1,20 @@
+{
+  "id": "abc364-e",
+  "contestId": "abc364",
+  "slotLabel": "E",
+  "officialTaskId": "abc364_e",
+  "title": "Maximum Glutton",
+  "officialUrl": "https://atcoder.jp/contests/abc364/tasks/abc364_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 80; 1 \\leq A_i, B_i \\leq 10000; 1 \\leq X, Y \\leq 10000; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc364-e-problem-f289fab9c8381e2b4f56dcd0a8aede73e15a87dea934c8f489c8e1d2581d1bb0",
+    "source-abc364-editorial-10550-6bd9421e81822ad43403ee3bc7600cc7eae49364d5f67e86c9a5e3dc896a7e25"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

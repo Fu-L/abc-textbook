@@ -1,0 +1,20 @@
+{
+  "id": "abc286-ex",
+  "contestId": "abc286",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc286_h",
+  "title": "Don't Swim",
+  "officialUrl": "https://atcoder.jp/contests/abc286/tasks/abc286_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\\leq N \\leq 10^5; |x_i|,|y_i|,|s_x|,|s_y|,|t_x|,|t_y|\\leq 10^9; (x_1,y_1),(x_2,y_2),\\ldots, and (x_N,y_N) form a convex polygon in counterclockwise order.; No three points of C are colinear.; S and T are outside C and not on the circumference of C.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc286-ex-problem-15c38577c720eb4723e02ad546c45234cfb17e37d1b62b397e322fb118847716",
+    "source-abc286-editorial-5568-b6443e17b93b4acda941f3898e1facf7191809b5faa1df975f1edfa7c506b00e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

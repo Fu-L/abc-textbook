@@ -1,0 +1,20 @@
+{
+  "id": "abc322-e",
+  "contestId": "abc322",
+  "slotLabel": "E",
+  "officialTaskId": "abc322_e",
+  "title": "Product Development",
+  "officialUrl": "https://atcoder.jp/contests/abc322/tasks/abc322_e",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 100; 1 \\le K,P \\le 5; 0 \\le A_{i,j} \\le P(1 \\le i \\le N,1 \\le j \\le K); 1 \\le C_i \\le 10^9(1 \\le i \\le N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc322-e-problem-1bed777da02da0d0fb2cd0ffc183daef2bab75c1085e50520ea13f3d19842abb",
+    "source-abc322-editorial-7305-a1eb089617d41a3e23c589f3f11562591487672b8c226f6dd460c7253bf68101"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

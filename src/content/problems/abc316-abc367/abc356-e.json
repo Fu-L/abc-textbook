@@ -1,0 +1,20 @@
+{
+  "id": "abc356-e",
+  "contestId": "abc356",
+  "slotLabel": "E",
+  "officialTaskId": "abc356_e",
+  "title": "Max/Min",
+  "officialUrl": "https://atcoder.jp/contests/abc356/tasks/abc356_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq A_i \\leq 10^6; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc356-e-problem-1e0f17fba263518103ea1f25c1e38af9f2d1c4ad5354e40fadfa9575c47bfe5e",
+    "source-abc356-editorial-10116-e9887115bd504bac202ff7241b487b6e336f909dd8f4ea7952d06e6079a07c56"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc392",
+  "number": 392,
+  "title": "Japan Registry Services (JPRS) Programming Contest 2025#1 (AtCoder Beginner Contest 392)",
+  "startedAt": "2025-02-08T21:00:00+09:00",
+  "endedAt": "2025-02-08T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc392",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc392_a",
+    "abc392_b",
+    "abc392_c",
+    "abc392_d",
+    "abc392_e",
+    "abc392_f",
+    "abc392_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc392-task-list-937fdd0c1d327d907de69cee1bee8a36de2063a3f1c8eb305582b5e7277026ab",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

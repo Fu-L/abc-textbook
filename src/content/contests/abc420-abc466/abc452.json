@@ -1,0 +1,20 @@
+{
+  "id": "abc452",
+  "number": 452,
+  "title": "AtCoder Beginner Contest 452",
+  "startedAt": "2026-04-04T21:00:00+09:00",
+  "endedAt": "2026-04-04T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc452",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc452_a",
+    "abc452_b",
+    "abc452_c",
+    "abc452_d",
+    "abc452_e",
+    "abc452_f",
+    "abc452_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc452-task-list-26d7b74d8f89e715d038212f63e752fb069552aee9084503e9b17da4216665e1",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

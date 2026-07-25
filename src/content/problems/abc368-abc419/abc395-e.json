@@ -1,0 +1,20 @@
+{
+  "id": "abc395-e",
+  "contestId": "abc395",
+  "slotLabel": "E",
+  "officialTaskId": "abc395_e",
+  "title": "Flip Edge",
+  "officialUrl": "https://atcoder.jp/contests/abc395/tasks/abc395_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; 1 \\leq X \\leq 10^9; 1 \\leq u _ i \\leq N \\ (1 \\leq i \\leq M); 1 \\leq v _ i \\leq N \\ (1 \\leq i \\leq M); For the given graph, it is guaranteed that you can reach vertex N from vertex 1 by the operations described.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc395-e-problem-402e6ff6530462ac78b572a07feba8ec267525d08b57b227f3b6f2a8b1a8b4c1",
+    "source-abc395-editorial-12343-9640f20e4e80dbab11d63e9d138eb9d07c59938d706e16cad9cac9c5981f93f1"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

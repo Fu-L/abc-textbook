@@ -1,0 +1,20 @@
+{
+  "id": "abc227-h",
+  "contestId": "abc227",
+  "slotLabel": "H",
+  "officialTaskId": "abc227_h",
+  "title": "Eat Them All",
+  "officialUrl": "https://atcoder.jp/contests/abc227/tasks/abc227_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq A_{i,j} \\leq 100; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681",
+    "source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

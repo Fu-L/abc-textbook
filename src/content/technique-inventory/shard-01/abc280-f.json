@@ -1,0 +1,20 @@
+{
+  "problemId": "abc280-f",
+  "sourceRevisionIds": [
+    "source-abc280-editorial-5303-aea62deae9b25f1c4e4b148b805c4bf36522b9a2edc9a3e1d8ad4c9488e912b0",
+    "source-abc280-f-problem-47f71a8cdee8536d7a88cdb6ec9f45a36b4048b5445c952d60040e01ecc44ae9"
+  ],
+  "coreMethod": "abc280-f「Pay or Receive」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+    "Pay or Receive 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "幅優先探索"],
+  "implementationConcerns": ["訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。"],
+  "outcomeCandidates": [
+    "Pay or Receive 型の 整数の約数・剰余構造に対し、幅優先探索を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

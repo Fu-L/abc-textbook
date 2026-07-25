@@ -1,0 +1,20 @@
+{
+  "id": "abc232-h",
+  "contestId": "abc232",
+  "slotLabel": "H",
+  "officialTaskId": "abc232_h",
+  "title": "King's Tour",
+  "officialUrl": "https://atcoder.jp/contests/abc232/tasks/abc232_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H \\leq 100; 2 \\leq W \\leq 100; 1 \\leq a \\leq H; 1 \\leq b \\leq W; (a, b) \\neq (1, 1); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd",
+    "source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

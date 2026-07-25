@@ -1,0 +1,21 @@
+{
+  "id": "abc232",
+  "number": 232,
+  "title": "M-SOLUTIONS Programming Contest 2021(AtCoder Beginner Contest 232)",
+  "startedAt": "2021-12-19T21:00:00+09:00",
+  "endedAt": "2021-12-19T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc232",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "H"],
+  "officialTaskIds": [
+    "abc232_a",
+    "abc232_b",
+    "abc232_c",
+    "abc232_d",
+    "abc232_e",
+    "abc232_f",
+    "abc232_g",
+    "abc232_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc232-task-list-bb4cf7e3f73fed814dff2c5cf16415a5b2485eb6f317183af07dfd57c53d6612",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

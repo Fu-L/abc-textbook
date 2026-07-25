@@ -1,0 +1,20 @@
+{
+  "id": "abc287-e",
+  "contestId": "abc287",
+  "slotLabel": "E",
+  "officialTaskId": "abc287_e",
+  "title": "Karuta",
+  "officialUrl": "https://atcoder.jp/contests/abc287/tasks/abc287_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 5 \\times 10^5; N is an integer.; S_i is a string of length at least 1 consisting of lowercase English letters (i = 1, 2, \\dots, N).; The sum of lengths of S_i is at most 5 \\times 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc287-e-problem-4db894920640533697c1ae44f746223d25b228dff8a43790261e0db6b225e331",
+    "source-abc287-editorial-5609-3eae5d32344ce4b280463e67fdc31b14606774c7b48316b446410cb81ae139bb"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

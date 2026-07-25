@@ -1,0 +1,20 @@
+{
+  "id": "abc410-f",
+  "contestId": "abc410",
+  "slotLabel": "F",
+  "officialTaskId": "abc410_f",
+  "title": "Balanced Rectangles",
+  "officialUrl": "https://atcoder.jp/contests/abc410/tasks/abc410_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 25000; 1 \\le H,W; The sum of H \\times W over all test cases in one input does not exceed 3 \\times 10^5.; S_i is a string of length W consisting of # and ..",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc410-f-problem-910d3d1f479c4c06e362230fb26749534039b0116e67c45c39f9305153e904fc",
+    "source-abc410-editorial-13301-016146bb9813164cf858661316da166afe0eac8834cd42513889d4ff5b36eb3b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

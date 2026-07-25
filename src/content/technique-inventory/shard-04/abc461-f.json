@@ -1,0 +1,22 @@
+{
+  "problemId": "abc461-f",
+  "sourceRevisionIds": [
+    "source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea",
+    "source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710"
+  ],
+  "coreMethod": "abc461-f「Total Product is N」では、N の約数だけを積状態とし、選択個数ごとに subset の個数と要素和総計を同時に更新する knapsack DP を行う。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "積が N になる選択は全要素が N の約数で、各約数を使う・使わない遷移が全 subset を一度ずつ生成する。",
+    "Total Product is N 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["約数列挙と積 knapsack DP"],
+  "implementationConcerns": [
+    "積状態は c/d への遷移で overflow を避け、順列化する b! を最後に掛ける。"
+  ],
+  "outcomeCandidates": [
+    "Total Product is N 型の問題に対し、約数列挙と積 knapsack DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

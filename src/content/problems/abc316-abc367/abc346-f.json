@@ -1,0 +1,20 @@
+{
+  "id": "abc346-f",
+  "contestId": "abc346",
+  "slotLabel": "F",
+  "officialTaskId": "abc346_f",
+  "title": "SSttrriinngg in StringString",
+  "officialUrl": "https://atcoder.jp/contests/abc346/tasks/abc346_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1\\leq N\\leq 10^{12}; S and T are strings consisting of lowercase English letters with lengths between 1 and 10^5, inclusive.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc346-f-problem-769406fbef8b7355fc2543f1baf82c8095f9f130818a7db02444532f78852c8a",
+    "source-abc346-editorial-9644-88f7e07664cbfa0a620f9e228a583be943e0b1dd2c9f831fa6a5d315791ddf01"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

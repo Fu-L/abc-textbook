@@ -1,0 +1,22 @@
+{
+  "problemId": "abc443-g",
+  "sourceRevisionIds": [
+    "source-abc443-editorial-15138-3aa9463ceddd2142f504b5b736ccfc887e550c9c69317c0bbca14a01bd6ecfad",
+    "source-abc443-g-problem-57b82a295ac386c53ab1317886a8f4ffc40c4bc853f1f6c66fb8dba9f12f4a16"
+  ],
+  "coreMethod": "abc443-g「Another Mod of Linear Problem」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+    "Another Mod of Linear Problem 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "剰余演算と modular inverse"],
+  "implementationConcerns": [
+    "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Another Mod of Linear Problem 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

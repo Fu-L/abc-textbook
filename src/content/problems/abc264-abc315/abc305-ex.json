@@ -1,0 +1,20 @@
+{
+  "id": "abc305-ex",
+  "contestId": "abc305",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc305_h",
+  "title": "Shojin",
+  "officialUrl": "https://atcoder.jp/contests/abc305/tasks/abc305_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq X \\leq 10^8; 1 \\leq A_i \\leq 10^5; 1 \\leq B_i; \\sum_{i=1}^N B_i \\leq X; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc305-ex-problem-730ae4f7996eba3782f92a13c6c00df6cb84ff2c25a18bfbe74bb063308496d2",
+    "source-abc305-editorial-6534-00b45bdb795c412a311d2d938a469f5c2f7c15e05d5c7d698c7b7da52d6e2d54"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

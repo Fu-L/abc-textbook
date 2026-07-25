@@ -1,0 +1,20 @@
+{
+  "id": "abc248-ex",
+  "contestId": "abc248",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc248_h",
+  "title": "Beautiful Subsequences",
+  "officialUrl": "https://atcoder.jp/contests/abc248/tasks/abc248_h",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 1.4\\times 10^5; P is a permutation of (1,\\ldots,N).; 0 \\leq K \\leq 3; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d",
+    "source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

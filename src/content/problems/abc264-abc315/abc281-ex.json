@@ -1,0 +1,20 @@
+{
+  "id": "abc281-ex",
+  "contestId": "abc281",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc281_h",
+  "title": "Alchemy",
+  "officialUrl": "https://atcoder.jp/contests/abc281/tasks/abc281_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A \\leq 10^9; N and A are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746",
+    "source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

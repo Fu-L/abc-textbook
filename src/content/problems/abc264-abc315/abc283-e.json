@@ -1,0 +1,20 @@
+{
+  "id": "abc283-e",
+  "contestId": "abc283",
+  "slotLabel": "E",
+  "officialTaskId": "abc283_e",
+  "title": "Don't Isolate Elements",
+  "officialUrl": "https://atcoder.jp/contests/abc283/tasks/abc283_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H,W \\leq 1000; A_{i,j} = 0 or A_{i,j} = 1; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc283-e-problem-2c21d492459ec8f7874377ac680303a0204b699b8e17735499e5767b9d4f6ce9",
+    "source-abc283-editorial-5433-8ab24c07cdb4e5b5e837256ab0c6ad1b43e508c1a6c4ef356e10edaad95b1ed2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

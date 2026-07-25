@@ -1,0 +1,20 @@
+{
+  "id": "abc267-f",
+  "contestId": "abc267",
+  "slotLabel": "F",
+  "officialTaskId": "abc267_f",
+  "title": "Exactly K Steps",
+  "officialUrl": "https://atcoder.jp/contests/abc267/tasks/abc267_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\lt B_i \\leq N \\, (1 \\leq i \\leq N - 1); The given graph is a tree.; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq U_i, K_i \\leq N \\, (1 \\leq i \\leq Q); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1",
+    "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

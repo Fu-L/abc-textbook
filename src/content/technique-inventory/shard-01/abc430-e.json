@@ -1,0 +1,22 @@
+{
+  "problemId": "abc430-e",
+  "sourceRevisionIds": [
+    "source-abc430-e-problem-b0cb6de7fb36a6c43cc9c715ac854f309a60dead8b8d1285ff1f92d4e123a3ea",
+    "source-abc430-editorial-14330-5bf5bf1021053e75dfa2c7c03f6556ac423e7ae4301be63af7cfd372f4f53c05"
+  ],
+  "coreMethod": "abc430-e「Shift String」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "prefix hash の差から位置に依存しない部分文字列 hash を復元でき、等しい文字列は同じ値になる。",
+    "Shift String 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "Rolling Hash"],
+  "implementationConcerns": [
+    "衝突確率を抑える複数 modulus または十分広い整数型を選び、負値を正規化する。"
+  ],
+  "outcomeCandidates": [
+    "Shift String 型の 文字列の prefix・suffix と一致関係に対し、Rolling Hashを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

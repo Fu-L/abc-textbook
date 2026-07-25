@@ -1,0 +1,20 @@
+{
+  "id": "abc433-e",
+  "contestId": "abc433",
+  "slotLabel": "E",
+  "officialTaskId": "abc433_e",
+  "title": "Max Matrix 2",
+  "officialUrl": "https://atcoder.jp/contests/abc433/tasks/abc433_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 10^5; 1\\le N,M; The sum of N\\times M over all test cases is at most 2\\times 10^5.; 1\\le X_i,Y_j\\le N\\times M; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc433-e-problem-c1c720619b326a64be6ed46ae25e7a4817b290636916afa6bc5d11780707a236",
+    "source-abc433-editorial-14636-311d6477e1944f6467b6ce4081f41d65550694299324f13e27a64983dba59c30"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc340-e",
+  "sourceRevisionIds": [
+    "source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4",
+    "source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b"
+  ],
+  "coreMethod": "abc340-e「Mancala 2」では、一山の個数を商と余りに分け、全周への一様加算と余り個分の循環区間加算を lazy data structure で処理する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "各位置へ floor(x/N) 個を配った残り x mod N 個が操作位置の直後から連続して一個ずつ配られる。",
+    "Mancala 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["range add・point query と商余り分解"],
+  "implementationConcerns": [
+    "循環区間を高々二区間へ分割し、取り出す位置を零へ戻してから配布加算する。"
+  ],
+  "outcomeCandidates": [
+    "Mancala 2 型の問題に対し、range add・point query と商余り分解を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

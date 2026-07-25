@@ -503,6 +503,7 @@ describe('trusted publication diff', () => {
       const absentSlot = {
         contestId: 'abc212',
         label: 'E',
+        officialTaskId: null,
         officialOrder: null,
         availability: 'official_absent' as const,
         catalogStatus: 'uncollected' as const,

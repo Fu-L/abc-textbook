@@ -1,0 +1,20 @@
+{
+  "id": "abc386-f",
+  "contestId": "abc386",
+  "slotLabel": "F",
+  "officialTaskId": "abc386_f",
+  "title": "Operate K",
+  "officialUrl": "https://atcoder.jp/contests/abc386/tasks/abc386_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: Each of S and T is a string of length between 1 and 500000, inclusive, consisting of lowercase English letters.; K is an integer satisfying \\color{red}{1 \\le K \\le 20}.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc386-f-problem-25e7b3bda090132d80b6833e5c285d0b8145d6681279354502a1011ed13a00c3",
+    "source-abc386-editorial-11695-65707968a759b7bb8094dabfdbfdd6ba4dbfcf53684d68d29bcb6ef6cb7c7e39"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

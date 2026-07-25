@@ -1,0 +1,21 @@
+{
+  "id": "abc280",
+  "number": 280,
+  "title": "Denso Create Programming Contest 2022 Winter(AtCoder Beginner Contest 280)",
+  "startedAt": "2022-12-03T21:00:00+09:00",
+  "endedAt": "2022-12-03T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc280",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc280_a",
+    "abc280_b",
+    "abc280_c",
+    "abc280_d",
+    "abc280_e",
+    "abc280_f",
+    "abc280_g",
+    "abc280_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc280-task-list-b7c07a7233c0a81fbf4807c457455aeaff415a1834926750e2e1ea942216f0b7",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

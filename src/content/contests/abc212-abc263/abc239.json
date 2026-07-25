@@ -1,0 +1,21 @@
+{
+  "id": "abc239",
+  "number": 239,
+  "title": "Denso Create Programming Contest 2022(AtCoder Beginner Contest 239)",
+  "startedAt": "2022-02-19T21:00:00+09:00",
+  "endedAt": "2022-02-19T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc239",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc239_a",
+    "abc239_b",
+    "abc239_c",
+    "abc239_d",
+    "abc239_e",
+    "abc239_f",
+    "abc239_g",
+    "abc239_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc239-task-list-5f846a71f64f1ba2cf2f1f5342df26be93d5a0545606cf3fe94ba9b717a2b4e3",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

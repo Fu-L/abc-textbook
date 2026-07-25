@@ -1,0 +1,21 @@
+{
+  "id": "abc238",
+  "number": 238,
+  "title": "Monoxer Programming Contest 2022（AtCoder Beginner Contest 238）",
+  "startedAt": "2022-02-05T21:00:00+09:00",
+  "endedAt": "2022-02-05T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc238",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc238_a",
+    "abc238_b",
+    "abc238_c",
+    "abc238_d",
+    "abc238_e",
+    "abc238_f",
+    "abc238_g",
+    "abc238_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc238-task-list-a33d8a1ebee14892fe0f8760f9d4c26bcbac6dc24dd3f4d997bf81a3f4098a15",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

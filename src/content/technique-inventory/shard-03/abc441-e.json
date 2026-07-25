@@ -1,0 +1,22 @@
+{
+  "problemId": "abc441-e",
+  "sourceRevisionIds": [
+    "source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb",
+    "source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31"
+  ],
+  "coreMethod": "abc441-e「A > B substring」では、文字数差の prefix D_i を作り、i<j かつ D_i<D_j となる pair を Fenwick tree または値域 frequency で数える。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "部分文字列内の A-B は二つの prefix 差であり、正である条件が D_i<D_j と完全に同値になる。",
+    "A > B substring 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["prefix sum と転倒数型 pair counting"],
+  "implementationConcerns": [
+    "空 prefix D_0 を含め、strict inequality と同値 prefix の除外を崩さない。"
+  ],
+  "outcomeCandidates": [
+    "A > B substring 型の問題に対し、prefix sum と転倒数型 pair countingを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc233-g",
+  "contestId": "abc233",
+  "slotLabel": "G",
+  "officialTaskId": "abc233_g",
+  "title": "Strongest Takahashi",
+  "officialUrl": "https://atcoder.jp/contests/abc233/tasks/abc233_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \\le N \\le 50; S_i consists of # and ..; |S_i|=N",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc233-g-problem-3b941d80cb692b12d25a1776c90c2c690d4c1f32cd5e2ff6fadcadb670749baf",
+    "source-abc233-editorial-3184-ab4b36adbfd0c3b627d15746dfe4d9457e05f0c83e47e5e8554f2b06686d0f9d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

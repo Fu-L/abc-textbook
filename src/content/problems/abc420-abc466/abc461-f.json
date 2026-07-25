@@ -1,0 +1,20 @@
+{
+  "id": "abc461-f",
+  "contestId": "abc461",
+  "slotLabel": "F",
+  "officialTaskId": "abc461_f",
+  "title": "Total Product is N",
+  "officialUrl": "https://atcoder.jp/contests/abc461/tasks/abc461_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{10}; The input value is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc461-f-problem-367794ea99529987124048cd99ef50750e517d58f20c34f06a7b261542d89710",
+    "source-abc461-editorial-21376-54e77a943453eb6254ddeefdc7218c2812108ca0cb4cab3d03be43a9dce947ea"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

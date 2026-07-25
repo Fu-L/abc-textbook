@@ -1,0 +1,22 @@
+{
+  "problemId": "abc244-ex",
+  "sourceRevisionIds": [
+    "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+    "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+  ],
+  "coreMethod": "abc244-ex「Linear Maximization」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "外積の符号が有向面積と回転方向を表すため、幾何条件を符号条件として必要十分に判定できる。",
+    "Linear Maximization 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["online query の計算量設計", "計算幾何の外積・内積"],
+  "implementationConcerns": [
+    "座標積の overflow、collinear な境界点、開区間と閉区間の交差を区別する。"
+  ],
+  "outcomeCandidates": [
+    "Linear Maximization 型の 更新と問い合わせの時系列に対し、計算幾何の外積・内積を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc457-e",
+  "contestId": "abc457",
+  "slotLabel": "E",
+  "officialTaskId": "abc457_e",
+  "title": "Crossing Table Cloth",
+  "officialUrl": "https://atcoder.jp/contests/abc457/tasks/abc457_e",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^5; 2 \\le M \\le 2 \\times 10^5; 1 \\le L_i \\le R_i \\le N; 1 \\le Q \\le 2 \\times 10^5; 1 \\le S_q \\le T_q \\le N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc457-e-problem-2f0a474f18270f192dc76fef79170fa1cf44d5e27cec8966569571ab20db7bcc",
+    "source-abc457-editorial-20075-104476d338438366890b2e26b13fa6811480adae5fe82698da328a5a7b9624d2"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

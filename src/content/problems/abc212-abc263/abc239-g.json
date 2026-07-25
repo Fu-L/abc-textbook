@@ -1,0 +1,20 @@
+{
+  "id": "abc239-g",
+  "contestId": "abc239",
+  "slotLabel": "G",
+  "officialTaskId": "abc239_g",
+  "title": "Builder Takahashi",
+  "officialUrl": "https://atcoder.jp/contests/abc239/tasks/abc239_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 100; N - 1 \\leq M \\leq \\frac{N(N-1)}{2} - 1; 1 \\leq a_i \\lt b_i \\leq N (1 \\leq i \\leq M); (a_i, b_i) \\neq (1, N); The given graph is simple and connected.; 1 \\leq c_{i} \\leq 10^9 (2 \\leq i \\leq N-1); c_1 = c_N = 0; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc239-g-problem-c2dec687fbb50d593b9f97ccdbc655b2cd8d81169f1afb680c2b9b1f335fa1fe",
+    "source-abc239-editorial-3393-8b25db27b12e56f140fc13d3f51a1d6a8d5bbe8802dcca8557636490785a0838"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,21 @@
+{
+  "id": "abc235",
+  "number": 235,
+  "title": "HHKB Programming Contest 2022（AtCoder Beginner Contest 235）",
+  "startedAt": "2022-01-15T21:00:00+09:00",
+  "endedAt": "2022-01-15T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc235",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc235_a",
+    "abc235_b",
+    "abc235_c",
+    "abc235_d",
+    "abc235_e",
+    "abc235_f",
+    "abc235_g",
+    "abc235_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc235-task-list-fd6d6088558ad2714ee7a36642bfcc6e8d07baa38d157c755a3f36abdaaf5d25",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

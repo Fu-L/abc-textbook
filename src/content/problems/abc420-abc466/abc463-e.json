@@ -1,0 +1,20 @@
+{
+  "id": "abc463-e",
+  "contestId": "abc463",
+  "slotLabel": "E",
+  "officialTaskId": "abc463_e",
+  "title": "Roads and Gates",
+  "officialUrl": "https://atcoder.jp/contests/abc463/tasks/abc463_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le2\\times10 ^ 5; 0\\le M\\le2\\times10 ^ 5; 1\\le u _ i\\lt v _ i\\le N\\ (1\\le i\\le M); 1\\le T _ i\\le10 ^ 9\\ (1\\le i\\le M); 1\\le X _ i\\le10 ^ 9\\ (1\\le i\\le N); 1\\le Y\\le 10 ^ 9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc463-e-problem-b1c78b5d7f7d16c1826aad1e574e294a196536ae928b9132155e9f5063f3a837",
+    "source-abc463-editorial-21940-9ad8dc40350b56bbaa375436bfc75c2502805d6c694896eb049af73188c90b96"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

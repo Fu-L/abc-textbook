@@ -1,0 +1,22 @@
+{
+  "problemId": "abc438-f",
+  "sourceRevisionIds": [
+    "source-abc438-editorial-14945-5b550b2de40d2ca4f196bf74e42d0f92dd97ea873ccf9c1f5404cd218db4f85a",
+    "source-abc438-f-problem-33efc20bf1a34d46b6cc580c1b44876a5bccb6ce94cd9910ebf6de744700d238"
+  ],
+  "coreMethod": "abc438-f「Sum of Mex」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "二進展開した距離だけ祖先へ移動でき、最大の異なる祖先から一段進めば最小共通祖先になる。",
+    "Sum of Mex 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "LCA と binary lifting"],
+  "implementationConcerns": [
+    "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。"
+  ],
+  "outcomeCandidates": [
+    "Sum of Mex 型の 頂点と辺からなる状態グラフに対し、LCA と binary liftingを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

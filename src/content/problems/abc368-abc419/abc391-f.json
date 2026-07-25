@@ -1,0 +1,20 @@
+{
+  "id": "abc391-f",
+  "contestId": "abc391",
+  "slotLabel": "F",
+  "officialTaskId": "abc391_f",
+  "title": "K-th Largest Triplet",
+  "officialUrl": "https://atcoder.jp/contests/abc391/tasks/abc391_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 2\\times 10^5; 1\\leq K \\leq \\min(N^3,5\\times 10^5); 1\\leq A_i,B_i,C_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc391-f-problem-747d848d57208246abe4cce1daeaa586525b51cc2160fae1ec9403b71e801dd0",
+    "source-abc391-editorial-12085-f9ada4466df96ec457b67df1120398f082965da3bcdfda4427208c7f131ee928"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc458-e",
+  "contestId": "abc458",
+  "slotLabel": "E",
+  "officialTaskId": "abc458_e",
+  "title": "Count 123",
+  "officialUrl": "https://atcoder.jp/contests/abc458/tasks/abc458_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq X_1, X_2, X_3 \\leq 10^6; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc458-e-problem-6e4db7c41179aed6676c72ae9bb5f6b852f9f18758d304c670319045b55c6fb1",
+    "source-abc458-editorial-20463-e6d5f67830dee2beb7162e5b5cd073fb4aafdfcf0020f20e77d5461bb5a44927"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

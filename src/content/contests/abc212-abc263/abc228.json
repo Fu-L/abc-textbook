@@ -1,0 +1,21 @@
+{
+  "id": "abc228",
+  "number": 228,
+  "title": "TOYOTA SYSTEMS Programming Contest 2021(AtCoder Beginner Contest 228)",
+  "startedAt": "2021-11-20T21:00:00+09:00",
+  "endedAt": "2021-11-20T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc228",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "H"],
+  "officialTaskIds": [
+    "abc228_a",
+    "abc228_b",
+    "abc228_c",
+    "abc228_d",
+    "abc228_e",
+    "abc228_f",
+    "abc228_g",
+    "abc228_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc228-task-list-aa10a38b83b6cf7628c7f9ee61e36d0f89f55cf01dec2a3c48878852a28a07ed",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

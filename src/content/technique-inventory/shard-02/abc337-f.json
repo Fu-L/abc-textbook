@@ -1,0 +1,22 @@
+{
+  "problemId": "abc337-f",
+  "sourceRevisionIds": [
+    "source-abc337-editorial-9141-81f4d2d348ba4cbf459d3850ba9989780768d7db4d1e7d35eb72fa69791fc173",
+    "source-abc337-f-problem-ec424f4b73083b657b5d99a1d85b37a7a9d1f374d95d031eb7849c2641b84eaa"
+  ],
+  "coreMethod": "abc337-f「Usual Color Ball Problems」では、列を二周分へ延長し、色ごとの個数を保つ two pointers で上限 K まで寄与する巡回 window を更新する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "右端を伸ばしたときの新規寄与はその色の保有数が K 未満の場合だけ増え、左端ごとの最大 window を単調に進められる。",
+    "Usual Color Ball Problems 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["円環列の二周化と two pointers"],
+  "implementationConcerns": [
+    "window 長を元の列長以下に制限し、色数上限と箱単位の切り上げを別々に更新する。"
+  ],
+  "outcomeCandidates": [
+    "Usual Color Ball Problems 型の問題に対し、円環列の二周化と two pointersを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

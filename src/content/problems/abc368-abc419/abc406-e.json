@@ -1,0 +1,20 @@
+{
+  "id": "abc406-e",
+  "contestId": "abc406",
+  "slotLabel": "E",
+  "officialTaskId": "abc406_e",
+  "title": "Popcount Sum 3",
+  "officialUrl": "https://atcoder.jp/contests/abc406/tasks/abc406_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 100; 1 \\leq N < 2^{60}; 1 \\leq K \\leq 60; T, N, and K are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc406-e-problem-e51929679a44007aaacf170f3736320107093a509f93b68a93ac184ce5f4dbb9",
+    "source-abc406-editorial-13044-83db9c133d58e1b20d93b55a7c8729b8132891f780ab91c9fa882dc4b477fe72"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

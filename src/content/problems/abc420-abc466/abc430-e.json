@@ -1,0 +1,20 @@
+{
+  "id": "abc430-e",
+  "contestId": "abc430",
+  "slotLabel": "E",
+  "officialTaskId": "abc430_e",
+  "title": "Shift String",
+  "officialUrl": "https://atcoder.jp/contests/abc430/tasks/abc430_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 10000; A and B are strings consisting of 0 and 1.; 2 \\le |A|=|B| \\le 10^6; For a single input, the sum of |A| does not exceed 10^6.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc430-e-problem-b0cb6de7fb36a6c43cc9c715ac854f309a60dead8b8d1285ff1f92d4e123a3ea",
+    "source-abc430-editorial-14330-5bf5bf1021053e75dfa2c7c03f6556ac423e7ae4301be63af7cfd372f4f53c05"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

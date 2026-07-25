@@ -1,0 +1,22 @@
+{
+  "problemId": "abc256-f",
+  "sourceRevisionIds": [
+    "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+    "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+  ],
+  "coreMethod": "abc256-f「Cumulative Cumulative Cumulative Sum」では、三重累積和の係数を i の二次式へ展開し、ΣA_i・ΣiA_i・Σi²A_i を三本の Fenwick tree で点更新・prefix取得する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "A_i の D_x への寄与回数は (x-i+1)(x-i+2)/2 であり、展開後は x の係数と三つの prefix moment の線形結合になる。",
+    "Cumulative Cumulative Cumulative Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["二項係数の展開と Fenwick tree"],
+  "implementationConcerns": [
+    "2 の modular inverse、i の1-origin、値の代入更新を旧値との差分へ変換する処理を統一する。"
+  ],
+  "outcomeCandidates": [
+    "Cumulative Cumulative Cumulative Sum 型の問題に対し、二項係数の展開と Fenwick treeを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

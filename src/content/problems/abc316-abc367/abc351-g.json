@@ -1,0 +1,20 @@
+{
+  "id": "abc351-g",
+  "contestId": "abc351",
+  "slotLabel": "G",
+  "officialTaskId": "abc351_g",
+  "title": "Hash on Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc351/tasks/abc351_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq p_i < i; 0 \\leq A_i < 998244353; 1 \\leq v \\leq N; 0 \\leq x < 998244353; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc351-g-problem-db5ec50bcd9264b8596fd6a75bb905bf447b1f1de9e684cb4f1d3be444486fa9",
+    "source-abc351-editorial-9868-860696c2a3056d2d8d8b9c37b1d6efe15564a3b3db133c5619ab4686c81b1c2e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

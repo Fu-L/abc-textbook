@@ -1,0 +1,22 @@
+{
+  "problemId": "abc245-g",
+  "sourceRevisionIds": [
+    "source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa",
+    "source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad"
+  ],
+  "coreMethod": "abc245-g「Foreign Friends」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
+    "Foreign Friends 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "Dijkstra 法と緩和"],
+  "implementationConcerns": [
+    "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。"
+  ],
+  "outcomeCandidates": [
+    "Foreign Friends 型の 列の順序と prefix 状態に対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

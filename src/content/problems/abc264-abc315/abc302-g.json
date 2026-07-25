@@ -1,0 +1,20 @@
+{
+  "id": "abc302-g",
+  "contestId": "abc302",
+  "slotLabel": "G",
+  "officialTaskId": "abc302_g",
+  "title": "Sort from 1 to 4",
+  "officialUrl": "https://atcoder.jp/contests/abc302/tasks/abc302_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1\\leq A_i \\leq 4; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc302-g-problem-a6e5157f05f8846c2c25f0821320fa4c725fd772d70553ef3ca56d068a43abf0",
+    "source-abc302-editorial-6393-61b7ea0d859ff4fb59b59a0bf2e9f9fb2093d207e077d62e668cd3583843d22e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

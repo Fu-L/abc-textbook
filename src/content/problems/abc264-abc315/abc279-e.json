@@ -1,0 +1,20 @@
+{
+  "id": "abc279-e",
+  "contestId": "abc279",
+  "slotLabel": "E",
+  "officialTaskId": "abc279_e",
+  "title": "Cheating Amidakuji",
+  "officialUrl": "https://atcoder.jp/contests/abc279/tasks/abc279_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq M \\leq 2\\times 10^5; 1 \\leq A_i \\leq N-1\\ (1\\leq i \\leq M); All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc279-e-problem-331a193e2ed100b176928fd48364f433619e490d75fbcffb84e141d17c8fc390",
+    "source-abc279-editorial-5289-8faa4f66138e5b0e2e9cde2740f1c56d269463ace6cbcddedfa9a5b7c4dcf65b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

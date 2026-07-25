@@ -1,0 +1,20 @@
+{
+  "id": "abc464-e",
+  "contestId": "abc464",
+  "slotLabel": "E",
+  "officialTaskId": "abc464_e",
+  "title": "Fill-Rect Query",
+  "officialUrl": "https://atcoder.jp/contests/abc464/tasks/abc464_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le H, W; H \\times W \\le 10^6; 1 \\le Q \\le 2 \\times 10^5; 1 \\le R_i \\le H; 1 \\le C_i \\le W; X_i is an uppercase English letter.; All input numbers are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc464-e-problem-defb471e43dca2de9900801f05276d827ac60ff531290f56e41c86990cc76685",
+    "source-abc464-editorial-22266-6370d9e67da4830cfa46aad5c75e6537ae480407f14e26ee599880eadbcdc4c9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

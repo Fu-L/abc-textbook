@@ -1,0 +1,20 @@
+{
+  "id": "abc382-e",
+  "contestId": "abc382",
+  "slotLabel": "E",
+  "officialTaskId": "abc382_e",
+  "title": "Expansion Packs",
+  "officialUrl": "https://atcoder.jp/contests/abc382/tasks/abc382_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5000; 1 \\leq X \\leq 5000; 1 \\leq P_i \\leq 100; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc382-e-problem-cada6e51e9f885d9c7388f9f82fbbc352ce0221cb90919bc0c7a3f43f1288ec4",
+    "source-abc382-editorial-11483-80a132d8f84c3778cfcddf11c6c3dfc6b0ab8e23bcda3deb951f31b6b3aa827c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

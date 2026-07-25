@@ -1,0 +1,20 @@
+{
+  "id": "abc359-e",
+  "contestId": "abc359",
+  "slotLabel": "E",
+  "officialTaskId": "abc359_e",
+  "title": "Water Tank",
+  "officialUrl": "https://atcoder.jp/contests/abc359/tasks/abc359_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10 ^ 5; 1\\leq H _ i\\leq10 ^ 9\\ (1\\leq i\\leq N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc359-e-problem-eb51ad038f13dca0efcc5ccca6afd91ec904df066f80b2da5974f7679fe2c227",
+    "source-abc359-editorial-10262-ea2d05f58e64259f16d8f79a4e1d1735011cd9cc6ff98609133b62b2895323f5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

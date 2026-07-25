@@ -1,0 +1,20 @@
+{
+  "id": "abc383-g",
+  "contestId": "abc383",
+  "slotLabel": "G",
+  "officialTaskId": "abc383_g",
+  "title": "Bar Cover",
+  "officialUrl": "https://atcoder.jp/contests/abc383/tasks/abc383_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq K \\leq \\min(5,N); -10^9 \\leq A_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc383-g-problem-72be83610d4356251b6c9b25d5441578f5fdd5ac5db4c535baf1c323433e9444",
+    "source-abc383-editorial-11500-ab0a48e7cda2a99f752f9faef52005366b6bdf6afeb68d0ce190a22a973b8251"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

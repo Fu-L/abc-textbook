@@ -1,0 +1,20 @@
+{
+  "id": "abc265-f",
+  "contestId": "abc265",
+  "slotLabel": "F",
+  "officialTaskId": "abc265_f",
+  "title": "Manhattan Cafe",
+  "officialUrl": "https://atcoder.jp/contests/abc265/tasks/abc265_f",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100; 0 \\leq D \\leq 1000; -1000 \\leq p_i, q_i \\leq 1000; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc265-f-problem-c6b77bc325b288f3569ccda1bcbe0cb7350d67c1e0f56c3511104dfac712e57b",
+    "source-abc265-editorial-4680-0bbdbb3200c34e8acb881cfadc8bfc252fd0b57bdc73888428aa846296363ee6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

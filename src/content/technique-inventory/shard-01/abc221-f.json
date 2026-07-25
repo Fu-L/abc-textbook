@@ -1,0 +1,24 @@
+{
+  "problemId": "abc221-f",
+  "sourceRevisionIds": [
+    "source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072",
+    "source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea"
+  ],
+  "coreMethod": "abc221-f「Diameter set」では、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。さらに、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+    "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+    "Diameter set 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["幅優先探索", "組合せ数と二項係数"],
+  "implementationConcerns": [
+    "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+    "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Diameter set 型の問題に対し、幅優先探索を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

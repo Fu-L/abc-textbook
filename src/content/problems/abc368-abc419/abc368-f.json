@@ -1,0 +1,20 @@
+{
+  "id": "abc368-f",
+  "contestId": "abc368",
+  "slotLabel": "F",
+  "officialTaskId": "abc368_f",
+  "title": "Dividing Game",
+  "officialUrl": "https://atcoder.jp/contests/abc368/tasks/abc368_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 2 \\leq A_i \\leq 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc368-f-problem-cd00451a2f62afd4f84d2f5cdebf0a53465ad8c85b06a9fe3c300051f93e968a",
+    "source-abc368-editorial-10761-0bc3bb4d8c94b774a34347b8e31848f6917e8123e92e77d5e6eb7d25ad717c9b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

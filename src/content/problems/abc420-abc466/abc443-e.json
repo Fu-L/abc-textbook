@@ -1,0 +1,20 @@
+{
+  "id": "abc443-e",
+  "contestId": "abc443",
+  "slotLabel": "E",
+  "officialTaskId": "abc443_e",
+  "title": "Climbing Silver",
+  "officialUrl": "https://atcoder.jp/contests/abc443/tasks/abc443_e",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: T,N,C are integers.; 1 \\le T \\le 50000; 2 \\le N \\le 3000; 1 \\le C \\le N; S_i is a string of length N consisting of . and #.; The C-th character of S_N is ..; For each input, the sum of N^2 does not exceed 9 \\times 10^6.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc443-e-problem-b3960baa2caed86517a7483a19f035a7fa43860f29b9e6cf12ef1c1fb58bc67e",
+    "source-abc443-editorial-15178-902141be8f54ae13638e470cf9689e927602d2ef4019499fd15c4344db210272"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

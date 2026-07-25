@@ -1,0 +1,22 @@
+{
+  "problemId": "abc237-e",
+  "sourceRevisionIds": [
+    "source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4",
+    "source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"
+  ],
+  "coreMethod": "abc237-e「Skiing」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
+    "Skiing 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "Dijkstra 法と緩和"],
+  "implementationConcerns": [
+    "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。"
+  ],
+  "outcomeCandidates": [
+    "Skiing 型の 整数の約数・剰余構造に対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

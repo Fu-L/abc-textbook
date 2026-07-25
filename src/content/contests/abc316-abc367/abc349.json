@@ -1,0 +1,20 @@
+{
+  "id": "abc349",
+  "number": 349,
+  "title": "AtCoder Beginner Contest 349",
+  "startedAt": "2024-04-13T21:00:00+09:00",
+  "endedAt": "2024-04-13T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc349",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc349_a",
+    "abc349_b",
+    "abc349_c",
+    "abc349_d",
+    "abc349_e",
+    "abc349_f",
+    "abc349_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc349-task-list-c8e41915f7a45ab3baa4b6a1d6a2d6e61a8a3ea43b639e9f179278f4cf87d173",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

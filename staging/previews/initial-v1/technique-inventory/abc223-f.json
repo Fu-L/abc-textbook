@@ -1,0 +1,22 @@
+{
+  "problemId": "abc223-f",
+  "sourceRevisionIds": [
+    "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+    "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306"
+  ],
+  "coreMethod": "abc223-f「Parenthesis Checking」では、括弧を ±1 とし、各区間の総和と prefix 最小値を monoid として segment tree で点更新・区間取得する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "括弧列が正しい条件は総和0かつ全prefix非負で、二区間結合時の最小prefixは min(left.min,left.sum+right.min) になる。",
+    "Parenthesis Checking 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["正しい括弧列の prefix 条件と segment tree monoid"],
+  "implementationConcerns": [
+    "swap は二点更新し、query の相対 prefix 最小値を区間左端の累積値から独立に判定する。"
+  ],
+  "outcomeCandidates": [
+    "Parenthesis Checking 型の問題に対し、正しい括弧列の prefix 条件と segment tree monoidを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

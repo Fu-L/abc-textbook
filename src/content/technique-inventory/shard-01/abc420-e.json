@@ -1,0 +1,22 @@
+{
+  "problemId": "abc420-e",
+  "sourceRevisionIds": [
+    "source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd",
+    "source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0"
+  ],
+  "coreMethod": "abc420-e「Reachability Query」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+    "Reachability Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "Union-Find"],
+  "implementationConcerns": [
+    "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。"
+  ],
+  "outcomeCandidates": [
+    "Reachability Query 型の 頂点と辺からなる状態グラフに対し、Union-Findを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

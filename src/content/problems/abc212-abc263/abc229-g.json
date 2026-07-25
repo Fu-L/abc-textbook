@@ -1,0 +1,20 @@
+{
+  "id": "abc229-g",
+  "contestId": "abc229",
+  "slotLabel": "G",
+  "officialTaskId": "abc229_g",
+  "title": "Longest Y",
+  "officialUrl": "https://atcoder.jp/contests/abc229/tasks/abc229_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq |S| \\leq 2 \\times 10^5; Each character of S is Y or ..; 0 \\leq K \\leq 10^{12}; K is an integer.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708",
+    "source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

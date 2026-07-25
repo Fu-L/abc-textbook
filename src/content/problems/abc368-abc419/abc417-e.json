@@ -1,0 +1,20 @@
+{
+  "id": "abc417-e",
+  "contestId": "abc417",
+  "slotLabel": "E",
+  "officialTaskId": "abc417_e",
+  "title": "A Path in A Dictionary",
+  "officialUrl": "https://atcoder.jp/contests/abc417/tasks/abc417_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T\\leq 500; 2\\leq N\\leq 1000; N-1\\leq M\\leq \\min\\left( \\frac{N(N-1)}{2},5\\times 10^4\\right); 1\\leq X,Y \\leq N; X\\neq Y; 1\\leq U_i<V_i \\leq N; If i\\neq j, then (U_i,V_i)\\neq (U_j,V_j).; The given graph is connected.; The sum of N over all test cases in each input is at most 1000.; The sum of M over all test cases in each input is at most 5\\times 10^4.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc417-e-problem-cea5c0f901c5869c9617734403c1605b07cb4daae4cb08d44ffe2e96ab5de334",
+    "source-abc417-editorial-13571-65acaa3021e80a01a0a423f7d4d2a04e3d780b47e6fb306f13a62da489869e7f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

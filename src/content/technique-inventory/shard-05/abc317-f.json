@@ -1,0 +1,22 @@
+{
+  "problemId": "abc317-f",
+  "sourceRevisionIds": [
+    "source-abc317-editorial-7018-59f2e40fd912bf2f18cedcd4e3f0039a8109edf8d2ad2da774b80d5447eea11e",
+    "source-abc317-f-problem-6862e5cd34f93d52dda06534a17093682d439c6782da35441e03760d73741976"
+  ],
+  "coreMethod": "abc317-f「Nim」では、主解法候補として、上位桁から tight・leading-zero・必要な集約値を状態に持つ digit DP を行う。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ prefix 状態以降の選択肢は一致し、tight が上限との大小関係を過不足なく表す。",
+    "Nim 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "桁 DP"],
+  "implementationConcerns": [
+    "leading zero を通常の数字 0 と区別し、上限を含む境界遷移を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Nim 型の 整数の約数・剰余構造に対し、桁 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

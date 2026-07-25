@@ -1,0 +1,20 @@
+{
+  "id": "abc437-e",
+  "contestId": "abc437",
+  "slotLabel": "E",
+  "officialTaskId": "abc437_e",
+  "title": "Sort Arrays",
+  "officialUrl": "https://atcoder.jp/contests/abc437/tasks/abc437_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 3\\times 10^5; 0\\leq x_i\\lt i; 1\\leq y_i\\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc437-e-problem-4cba7e5ca3c04372a2c7647c04627c95c7aceaacc84a6d8c0b462fb52ad53db4",
+    "source-abc437-editorial-14880-76723f083e28ba8b598f49540087d2b1e45e518ac5b7972abb09408ca9ce43e5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

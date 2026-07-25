@@ -1,0 +1,20 @@
+{
+  "id": "abc458-f",
+  "contestId": "abc458",
+  "slotLabel": "F",
+  "officialTaskId": "abc458_f",
+  "title": "Critical Misread",
+  "officialUrl": "https://atcoder.jp/contests/abc458/tasks/abc458_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 10^9, inclusive.; K is an integer between 1 and 10, inclusive.; S_i is a string consisting of lowercase English letters with length between 1 and 10, inclusive.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc458-f-problem-4cc44c1d7cc919609272d3502594318f2f3965b58e2e08c63cb2dcb24d0cbd27",
+    "source-abc458-editorial-20159-cd84e0dd7d040aa4baf7a31029f7f976734f461304118f5d9ee6f64a7b64bfca"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

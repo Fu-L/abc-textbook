@@ -1,0 +1,20 @@
+{
+  "problemId": "abc447-f",
+  "sourceRevisionIds": [
+    "source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e",
+    "source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca"
+  ],
+  "coreMethod": "abc447-f「Centipede Graph」では、木を根付き化し、部分木の状態を辺を介して親へ合成する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "木には閉路がないため、親辺を除く部分木が独立し、帰納法で子の最適値または個数を合成できる。",
+    "Centipede Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["根付き木と木 DP"],
+  "implementationConcerns": ["再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。"],
+  "outcomeCandidates": [
+    "Centipede Graph 型の問題に対し、根付き木と木 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

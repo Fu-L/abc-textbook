@@ -1,0 +1,20 @@
+{
+  "id": "abc457-f",
+  "contestId": "abc457",
+  "slotLabel": "F",
+  "officialTaskId": "abc457_f",
+  "title": "Second Gap",
+  "officialUrl": "https://atcoder.jp/contests/abc457/tasks/abc457_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 2 \\times 10^5; 1 \\le D_i \\le N - i; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc457-f-problem-9769767990a68437fd8f505e2e1e09553115be9784fb340c2dabe8018196b0db",
+    "source-abc457-editorial-20140-f7f05153de638e20d8a9d91ff20b3afe593cb79dcaa4b7b6105de9fd025c6064"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

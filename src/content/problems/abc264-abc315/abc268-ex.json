@@ -1,0 +1,20 @@
+{
+  "id": "abc268-ex",
+  "contestId": "abc268",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc268_h",
+  "title": "Taboo",
+  "officialUrl": "https://atcoder.jp/contests/abc268/tasks/abc268_h",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq |S| \\leq 5 \\times 10^5; 1 \\leq N; N is an integer.; 1 \\leq |T_i|; \\sum{|T_i|} \\leq 5 \\times 10^5; T_i \\neq T_j if i \\neq j.; S and T_i are strings consisting of lowercase English letters.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a",
+    "source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

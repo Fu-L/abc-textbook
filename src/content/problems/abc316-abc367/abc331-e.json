@@ -1,0 +1,20 @@
+{
+  "id": "abc331-e",
+  "contestId": "abc331",
+  "slotLabel": "E",
+  "officialTaskId": "abc331_e",
+  "title": "Set Meal",
+  "officialUrl": "https://atcoder.jp/contests/abc331/tasks/abc331_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, M \\leq 10^5; 0 \\leq L \\leq \\min(10^5, NM - 1); 1 \\leq a_i, b_i \\leq 10^9; 1 \\leq c_i \\leq N; 1 \\leq d_j \\leq M; (c_i, d_i) \\neq (c_j, d_j) if i \\neq j.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc331-e-problem-c771615a9e19ac2c74b6969333bbc0bcf052767532d5a88a24ccf1d88f07dfab",
+    "source-abc331-editorial-7821-c847e2b391347e4d5dbf43067cce67fdb9d95ff161189a9d94fe04ec3eba528b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

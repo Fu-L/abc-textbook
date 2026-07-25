@@ -1,0 +1,20 @@
+{
+  "id": "abc314-ex",
+  "contestId": "abc314",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc314_h",
+  "title": "Disk and Segments",
+  "officialUrl": "https://atcoder.jp/contests/abc314/tasks/abc314_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 100; 0\\leq a _ i,b _ i,c _ i,d _ i\\leq1000\\ (1\\leq i\\leq N); (a _ i,b _ i)\\neq(c _ i,d _ i)\\ (1\\leq i\\leq N); The i-th and j-th line segments do not share a point (1\\leq i\\lt j\\leq N).; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc314-ex-problem-e573f2aa9925372ff091f6bb20223906f19c45f10b18478722aef8fc5baa4e85",
+    "source-abc314-editorial-6958-903fc195f820ea11b2d1c234636b2b3f311e60f34d6d00357ba1bab2b3125787"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

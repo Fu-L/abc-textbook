@@ -1,0 +1,20 @@
+{
+  "id": "abc283-g",
+  "contestId": "abc283",
+  "slotLabel": "G",
+  "officialTaskId": "abc283_g",
+  "title": "Partial Xor Enumeration",
+  "officialUrl": "https://atcoder.jp/contests/abc283/tasks/abc283_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 0\\leq A _ i\\lt2^{60}\\ (1\\leq i\\leq N); 1\\leq L\\leq R\\leq k; R-L\\leq2\\times10^5; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc283-g-problem-421a25e6e43a500d4c47305bf939cbea7c8edaba3eb10f08b58cb3abb5994a0d",
+    "source-abc283-editorial-5430-affe38163eed0a16411c251e484bd226d779be9a3b4ce68d334786d4c72afff4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

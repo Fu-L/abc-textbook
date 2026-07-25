@@ -1,0 +1,20 @@
+{
+  "id": "abc270-g",
+  "contestId": "abc270",
+  "slotLabel": "G",
+  "officialTaskId": "abc270_g",
+  "title": "Sequence in mod P",
+  "officialUrl": "https://atcoder.jp/contests/abc270/tasks/abc270_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 100; 2 \\leq P \\leq 10^9; P is a prime.; 0\\leq A,B,S,G < P; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96",
+    "source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

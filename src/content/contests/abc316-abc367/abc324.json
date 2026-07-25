@@ -1,0 +1,20 @@
+{
+  "id": "abc324",
+  "number": 324,
+  "title": "Japan Registry Services (JPRS) Programming Contest 2023 (AtCoder Beginner Contest 324)",
+  "startedAt": "2023-10-14T21:00:00+09:00",
+  "endedAt": "2023-10-14T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc324",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc324_a",
+    "abc324_b",
+    "abc324_c",
+    "abc324_d",
+    "abc324_e",
+    "abc324_f",
+    "abc324_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc324-task-list-494a3fdd6cf5f341d254b5f8735f694be473993c115a215d8bd57437fc933f87",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

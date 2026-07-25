@@ -1,0 +1,20 @@
+{
+  "id": "abc322-g",
+  "contestId": "abc322",
+  "slotLabel": "G",
+  "officialTaskId": "abc322_g",
+  "title": "Two Kinds of Base",
+  "officialUrl": "https://atcoder.jp/contests/abc322/tasks/abc322_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 10^9; 1 \\le X \\le 2 \\times 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783",
+    "source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

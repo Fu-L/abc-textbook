@@ -1,0 +1,22 @@
+{
+  "problemId": "abc464-e",
+  "sourceRevisionIds": [
+    "source-abc464-e-problem-defb471e43dca2de9900801f05276d827ac60ff531290f56e41c86990cc76685",
+    "source-abc464-editorial-22266-6370d9e67da4830cfa46aad5c75e6537ae480407f14e26ee599880eadbcdc4c9"
+  ],
+  "coreMethod": "abc464-e「Fill-Rect Query」では、各長方形更新を query index の点情報へ置き換え、右下から左上への二次元 suffix maximum で各 cell の最後の更新を求める。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "cell (r,c) を覆う query は R_i≥r かつ C_i≥c の点であり、その右下領域の最大 index が最後の上書きに一致する。",
+    "Fill-Rect Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["二次元 suffix DP と上書き順序"],
+  "implementationConcerns": [
+    "同一点では最大 query index を残し、得た index を最後に X_i へ写して未更新 cell を区別する。"
+  ],
+  "outcomeCandidates": [
+    "Fill-Rect Query 型の問題に対し、二次元 suffix DP と上書き順序を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

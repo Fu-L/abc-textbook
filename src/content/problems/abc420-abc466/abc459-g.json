@@ -1,0 +1,20 @@
+{
+  "id": "abc459-g",
+  "contestId": "abc459",
+  "slotLabel": "G",
+  "officialTaskId": "abc459_g",
+  "title": "Golf 2",
+  "officialUrl": "https://atcoder.jp/contests/abc459/tasks/abc459_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 2 \\times 10^5; 1 \\le A < B \\le 10^6; 0 \\le X, Y \\le 10^6; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc",
+    "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

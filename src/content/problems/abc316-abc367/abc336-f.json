@@ -1,0 +1,20 @@
+{
+  "id": "abc336-f",
+  "contestId": "abc336",
+  "slotLabel": "F",
+  "officialTaskId": "abc336_f",
+  "title": "Rotation Puzzle",
+  "officialUrl": "https://atcoder.jp/contests/abc336/tasks/abc336_f",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq H,W \\leq 8; 1 \\leq S_{i,j} \\leq H \\times W; If (i,j) \\neq (i',j'), then S_{i,j} \\neq S_{i',j'}; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc336-f-problem-a8622f4a21e80664937f8b887d949e748d985863cfc0fec2d26b8c93ceb99fb0",
+    "source-abc336-editorial-9077-0cd54d18f7cc11b31dcadd7717f47d87708c62acb78535738776c658707e70f8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

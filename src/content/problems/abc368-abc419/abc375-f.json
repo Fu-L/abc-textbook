@@ -1,0 +1,20 @@
+{
+  "id": "abc375-f",
+  "contestId": "abc375",
+  "slotLabel": "F",
+  "officialTaskId": "abc375_f",
+  "title": "Road Blocked",
+  "officialUrl": "https://atcoder.jp/contests/abc375/tasks/abc375_f",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 300; 0 \\leq M \\leq \\frac{N(N-1)}{2}; 1 \\leq A_i < B_i \\leq N; All pairs (A_i, B_i) are distinct.; 1 \\leq C_i \\leq 10^9; 1 \\leq Q \\leq 2 \\times 10^5; In the queries of the first type, 1 \\leq i \\leq M.; The road given in a query of the first type is not already closed at that time.; The number of queries of the first type is at most 300.; In the queries of the second type, 1 \\leq x < y \\leq N.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc375-f-problem-3fa1c95ca2546d4c0f0158de162875929649a584d8ac3344dd32fbfd96a07704",
+    "source-abc375-editorial-11134-46a7d0b5e5b2d6b4f15c42bbcd674364d05a6523a2c867c4bfb122cd6efe4ec3"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

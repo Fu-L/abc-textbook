@@ -1,0 +1,20 @@
+{
+  "id": "abc281-f",
+  "contestId": "abc281",
+  "slotLabel": "F",
+  "officialTaskId": "abc281_f",
+  "title": "Xor Minimization",
+  "officialUrl": "https://atcoder.jp/contests/abc281/tasks/abc281_f",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 1.5 \\times 10^5; 0 \\leq a_i \\lt 2^{30}; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7",
+    "source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc327-e",
+  "contestId": "abc327",
+  "slotLabel": "E",
+  "officialTaskId": "abc327_e",
+  "title": "Maximize Rating",
+  "officialUrl": "https://atcoder.jp/contests/abc327/tasks/abc327_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 5000; 1\\leq P_i\\leq 5000; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a",
+    "source-abc327-editorial-7564-c0d8558ee7fe61bcffb1c1da0f5f606c581d76c70301dc25ce5eda2de40c4d24"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

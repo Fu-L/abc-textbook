@@ -1,0 +1,22 @@
+{
+  "problemId": "abc240-f",
+  "sourceRevisionIds": [
+    "source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88",
+    "source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b"
+  ],
+  "coreMethod": "abc240-f「Sum Sum Max」では、等差変化する区間内の累積値を二次式で表し、端点と頂点近傍だけを評価して最大値を求める。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "各 run 内の目的関数は離散二次関数なので、差分の符号が変わる点と区間端以外に最大候補はない。",
+    "Sum Sum Max 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["等差数列の和と離散凸・凹関数"],
+  "implementationConcerns": [
+    "頂点の floor・ceil 両方を区間へ clamp し、積と累積和を十分広い整数型で持つ。"
+  ],
+  "outcomeCandidates": [
+    "Sum Sum Max 型の問題に対し、等差数列の和と離散凸・凹関数を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

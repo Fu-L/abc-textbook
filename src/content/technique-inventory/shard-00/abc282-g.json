@@ -1,0 +1,22 @@
+{
+  "problemId": "abc282-g",
+  "sourceRevisionIds": [
+    "source-abc282-editorial-5393-c24383a9e3f327d508de882b4e496c8a01d6dc4abc2638636b91f999b91acfa3",
+    "source-abc282-g-problem-ec3be7878e90f5627c96f1edd4f6084095dc51431de0e9c63d5a80381c5032b0"
+  ],
+  "coreMethod": "abc282-g「Similar Permutation」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+    "Similar Permutation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["順列と逆写像", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
+  "outcomeCandidates": [
+    "Similar Permutation 型の 順列の位置と値の対応に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

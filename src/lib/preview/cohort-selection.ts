@@ -34,7 +34,10 @@ export interface PreviewSelectionRules {
     readonly requireOfficialStateForEveryRegistryLabel: boolean;
   };
   readonly cohortRules: PreviewCohortRules;
-  readonly publicationBoundary: Readonly<Record<string, unknown>>;
+  readonly publicationBoundary: {
+    readonly allowedPreviewRoots: readonly string[];
+    readonly forbiddenPublicRoots: readonly string[];
+  };
 }
 
 export const previewSelectionRulesDigest = (rules: PreviewSelectionRules): string =>

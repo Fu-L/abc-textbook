@@ -1,0 +1,20 @@
+{
+  "id": "abc243-e",
+  "contestId": "abc243",
+  "slotLabel": "E",
+  "officialTaskId": "abc243_e",
+  "title": "Edge Deletion",
+  "officialUrl": "https://atcoder.jp/contests/abc243/tasks/abc243_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 300; N-1 \\leq M \\leq \\frac{N(N-1)}{2}; 1 \\leq A_i \\lt B_i \\leq N; 1 \\leq C_i \\leq 10^9; (A_i, B_i) \\neq (A_j, B_j) if i \\neq j.; The given graph is connected.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41",
+    "source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc384-g",
+  "sourceRevisionIds": [
+    "source-abc384-editorial-11548-b15bbcf84e1a645622eedbcb5b6c4df173f974b4e32990f5b3377802a1a6619b",
+    "source-abc384-g-problem-e28558fe4f9d3cd66de0fdd5adcab4a395f351abae49033d7107c6661f591286"
+  ],
+  "coreMethod": "abc384-g「Abs Sum」では、主解法候補として、offline 区間 query を Mo 順に並べ、左右端を一要素ずつ伸縮しながら集約値を更新する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "add・remove が現在区間の集約を正しく保ち、block 順で端点総移動回数が平方根上界に収まる。",
+    "Abs Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "Mo’s algorithm"],
+  "implementationConcerns": [
+    "右端を block ごとに交互順へ sort し、add と remove の更新前後の個数条件を逆にしない。"
+  ],
+  "outcomeCandidates": [
+    "Abs Sum 型の 列の順序と prefix 状態に対し、Mo’s algorithmを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

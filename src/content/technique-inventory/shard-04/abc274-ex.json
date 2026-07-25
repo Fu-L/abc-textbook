@@ -1,0 +1,22 @@
+{
+  "problemId": "abc274-ex",
+  "sourceRevisionIds": [
+    "source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838",
+    "source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f"
+  ],
+  "coreMethod": "abc274-ex「XOR Sum of Arrays」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "prefix hash の差から位置に依存しない部分文字列 hash を復元でき、等しい文字列は同じ値になる。",
+    "XOR Sum of Arrays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "Rolling Hash"],
+  "implementationConcerns": [
+    "衝突確率を抑える複数 modulus または十分広い整数型を選び、負値を正規化する。"
+  ],
+  "outcomeCandidates": [
+    "XOR Sum of Arrays 型の 頂点と辺からなる状態グラフに対し、Rolling Hashを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

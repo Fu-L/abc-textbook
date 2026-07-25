@@ -1,0 +1,22 @@
+{
+  "problemId": "abc353-e",
+  "sourceRevisionIds": [
+    "source-abc353-e-problem-664ff6752d2dc14f04612070c41408399f4e648f0981d19c455ddc9db9b84432",
+    "source-abc353-editorial-9969-137ec1c5bd08e5a9fce39a58eb3825b744473a3d2ac97cb0be953ee76fae6e09"
+  ],
+  "coreMethod": "abc353-e「Yet Another Sigma Problem」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
+    "Yet Another Sigma Problem 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "Trie"],
+  "implementationConcerns": [
+    "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。"
+  ],
+  "outcomeCandidates": [
+    "Yet Another Sigma Problem 型の 文字列の prefix・suffix と一致関係に対し、Trieを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

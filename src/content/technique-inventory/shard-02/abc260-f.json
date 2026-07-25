@@ -1,0 +1,22 @@
+{
+  "problemId": "abc260-f",
+  "sourceRevisionIds": [
+    "source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b",
+    "source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e"
+  ],
+  "coreMethod": "abc260-f「Find 4-cycle」では、小さい側の頂点対ごとに最初の共通隣接点を記録し、二個目を見つけた時点で 4-cycle を復元する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "4-cycle は小さい側の二頂点と、それらを共有する異なる二隣接点の組に必要十分に対応する。",
+    "Find 4-cycle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["鳩ノ巣原理と二部グラフの 4-cycle"],
+  "implementationConcerns": [
+    "同一頂点対を unordered に正規化し、最初の witness と現在頂点が異なることを確認する。"
+  ],
+  "outcomeCandidates": [
+    "Find 4-cycle 型の問題に対し、鳩ノ巣原理と二部グラフの 4-cycleを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc270-e",
+  "contestId": "abc270",
+  "slotLabel": "E",
+  "officialTaskId": "abc270_e",
+  "title": "Apple Baskets on Circle",
+  "officialUrl": "https://atcoder.jp/contests/abc270/tasks/abc270_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 0 \\leq A_i \\leq 10^{12}; 1 \\leq K \\leq 10^{12}; There are at least K apples in total. That is, \\sum_{i=1}^{N}A_i\\geq K.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc",
+    "source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

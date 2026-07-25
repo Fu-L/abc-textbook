@@ -1,0 +1,20 @@
+{
+  "id": "abc376-f",
+  "contestId": "abc376",
+  "slotLabel": "F",
+  "officialTaskId": "abc376_f",
+  "title": "Hands on Ring (Hard)",
+  "officialUrl": "https://atcoder.jp/contests/abc376/tasks/abc376_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\\leq N \\leq 3000; 1\\leq Q \\leq 3000; H_i is L or R.; 1 \\leq T_i \\leq N; N, Q, and T_i are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc376-f-problem-f65a441087b389494550c813f98e5ae8fd78b78dcb1a9e01ef1483924261a2e0",
+    "source-abc376-editorial-11195-040762248031ac7680f47cb7c002938ab7b4625bfbd63b69822874e35813e086"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

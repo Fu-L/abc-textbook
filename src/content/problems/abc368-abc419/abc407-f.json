@@ -1,0 +1,20 @@
+{
+  "id": "abc407-f",
+  "contestId": "abc407",
+  "slotLabel": "F",
+  "officialTaskId": "abc407_f",
+  "title": "Sums of Sliding Window Maximum",
+  "officialUrl": "https://atcoder.jp/contests/abc407/tasks/abc407_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^{5}; 0 \\le A_i \\le 10^{7} (1 \\le i \\le N); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc407-f-problem-284de07bd055797c176cf4d63305ca74264c863f3254ae2b251073c88d2fec0c",
+    "source-abc407-editorial-13108-38f93e0c75d1922e70f9cb3ae76f65fae4a6386c930a66d1ebf4d332862331e8"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

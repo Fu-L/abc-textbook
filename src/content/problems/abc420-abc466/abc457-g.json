@@ -1,0 +1,20 @@
+{
+  "id": "abc457-g",
+  "contestId": "abc457",
+  "slotLabel": "G",
+  "officialTaskId": "abc457_g",
+  "title": "Catch All Apples",
+  "officialUrl": "https://atcoder.jp/contests/abc457/tasks/abc457_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 3 \\times 10^5; 0 \\le T_i \\le 3 \\times 10^5; 0 \\le X_i \\le 3 \\times 10^5; (T_i, X_i) \\neq (T_j, X_j) (i \\neq j); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320",
+    "source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

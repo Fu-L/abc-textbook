@@ -1,0 +1,20 @@
+{
+  "id": "abc406",
+  "number": 406,
+  "title": "Panasonic Programming Contest 2025（AtCoder Beginner Contest 406）",
+  "startedAt": "2025-05-17T21:00:00+09:00",
+  "endedAt": "2025-05-17T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc406",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc406_a",
+    "abc406_b",
+    "abc406_c",
+    "abc406_d",
+    "abc406_e",
+    "abc406_f",
+    "abc406_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc406-task-list-fc2bda5e7d652c3f4d8340281d7ac4b532ed87d5ae4d5735ee39a279b9c7d28b",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

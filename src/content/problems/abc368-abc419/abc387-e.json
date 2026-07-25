@@ -1,0 +1,20 @@
+{
+  "id": "abc387-e",
+  "contestId": "abc387",
+  "slotLabel": "E",
+  "officialTaskId": "abc387_e",
+  "title": "Digit Sum Divisible 2",
+  "officialUrl": "https://atcoder.jp/contests/abc387/tasks/abc387_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer at least 1 and less than 10^{100000}.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc387-e-problem-192a642a754258adc79e3149680c6874fbae41bc1334c46ab2b728e8375555e0",
+    "source-abc387-editorial-11830-ec18309bf0ba574d1dc8dcab13f48dccc3aaeeabb60104e678c384b60544669d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

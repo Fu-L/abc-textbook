@@ -1,0 +1,20 @@
+{
+  "problemId": "abc217-f",
+  "sourceRevisionIds": [
+    "source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57",
+    "source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e"
+  ],
+  "coreMethod": "abc217-f「Make Pair」では、主解法候補として、連続区間を状態とし、最後の分割点または端点操作を列挙する interval DP を行う。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "最適解の最後の分割・操作で独立な小区間へ分けると、全候補がちょうど一つの遷移に対応する。",
+    "Make Pair 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "区間 DP"],
+  "implementationConcerns": ["区間長の短い順に計算し、半開区間と閉区間を混在させない。"],
+  "outcomeCandidates": [
+    "Make Pair 型の 整数の約数・剰余構造に対し、区間 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "abc300",
+  "number": 300,
+  "title": "UNIQUE VISION Programming Contest 2023 Spring(AtCoder Beginner Contest 300)",
+  "startedAt": "2023-04-29T21:00:00+09:00",
+  "endedAt": "2023-04-29T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc300",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc300_a",
+    "abc300_b",
+    "abc300_c",
+    "abc300_d",
+    "abc300_e",
+    "abc300_f",
+    "abc300_g",
+    "abc300_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc300-task-list-b5350e2f723ec1fd9276ef7c4e0f2165b46bcc01779b55a78ea096898af1faf8",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc410",
+  "number": 410,
+  "title": "AtCoder Beginner Contest 410",
+  "startedAt": "2025-06-14T21:00:00+09:00",
+  "endedAt": "2025-06-14T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc410",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc410_a",
+    "abc410_b",
+    "abc410_c",
+    "abc410_d",
+    "abc410_e",
+    "abc410_f",
+    "abc410_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc410-task-list-ef78b8855b0eb47b49d0b2fb5229f02de509f9b54dd9e00a01c3cf43d6ba2adc",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

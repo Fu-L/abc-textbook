@@ -1,0 +1,20 @@
+{
+  "id": "abc427-e",
+  "contestId": "abc427",
+  "slotLabel": "E",
+  "officialTaskId": "abc427_e",
+  "title": "Wind Cleaning",
+  "officialUrl": "https://atcoder.jp/contests/abc427/tasks/abc427_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W \\leq 12; S_i is a string of length W consisting of T, #, and ..; There is exactly one (i, j) such that S_{i, j} = T.; There is at least one (i, j) such that S_{i, j} = #.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc427-e-problem-39f00b523157b4f857b566f257cf9c6b6a0d04344ca9741f584e987e0ca526f5",
+    "source-abc427-editorial-14197-b5f7fe42bd361cb6585fdae29d50412466d220aeeaafdcc91d7c73639858f1dd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

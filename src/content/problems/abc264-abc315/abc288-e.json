@@ -1,0 +1,20 @@
+{
+  "id": "abc288-e",
+  "contestId": "abc288",
+  "slotLabel": "E",
+  "officialTaskId": "abc288_e",
+  "title": "Wish List",
+  "officialUrl": "https://atcoder.jp/contests/abc288/tasks/abc288_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 5000; 1 \\leq A_i \\leq 10^9; 1 \\leq C_i \\leq 10^9; 1 \\leq X_1 \\lt X_2 \\lt \\cdots \\lt X_M \\leq N; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427",
+    "source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

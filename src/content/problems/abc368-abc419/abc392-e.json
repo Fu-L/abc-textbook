@@ -1,0 +1,20 @@
+{
+  "id": "abc392-e",
+  "contestId": "abc392",
+  "slotLabel": "E",
+  "officialTaskId": "abc392_e",
+  "title": "Cables and Servers",
+  "officialUrl": "https://atcoder.jp/contests/abc392/tasks/abc392_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; N-1 \\leq M \\leq 2\\times 10^5; 1 \\leq A_i, B_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc392-e-problem-cca914b773f4300547dd13f0be4ee0b93de98f083a9d832610bdb677c12e588e",
+    "source-abc392-editorial-12146-7cc0915fcaf1a0c3a3b0187c3dbd572b27a4d78f55584d727f99b1a9ca50c1df"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

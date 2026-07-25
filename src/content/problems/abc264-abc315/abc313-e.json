@@ -1,0 +1,20 @@
+{
+  "id": "abc313-e",
+  "contestId": "abc313",
+  "slotLabel": "E",
+  "officialTaskId": "abc313_e",
+  "title": "Duplicate",
+  "officialUrl": "https://atcoder.jp/contests/abc313/tasks/abc313_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^6; S is a length-N string consisting of 1, 2, 3, 4, 5, 6, 7, 8, and 9.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc313-e-problem-3a03247007965db504c9b92bf17a4d2d3a2bd83c0fa99e737a74e209f8eb5bd0",
+    "source-abc313-editorial-6911-132005a653dc06fe5dd61179f748826fd3bb3655aea08bb83fab69235e2052d5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

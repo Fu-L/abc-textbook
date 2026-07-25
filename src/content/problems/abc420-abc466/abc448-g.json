@@ -1,0 +1,20 @@
+{
+  "id": "abc448-g",
+  "contestId": "abc448",
+  "slotLabel": "G",
+  "officialTaskId": "abc448_g",
+  "title": "Conquest",
+  "officialUrl": "https://atcoder.jp/contests/abc448/tasks/abc448_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 500; 3 \\leq N \\leq 5 \\times 10^4; 0 \\leq X_{i,j} \\leq 10^6; The sum of N over all test cases is at most 5 \\times 10^4.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc448-g-problem-9c3d193be0c9d1434381d4d84a1343349ce51759b1518d85fcdd834176e390f2",
+    "source-abc448-editorial-16719-b11eff7b70376383870574c557d89c78380420afec2ae7ae0aa370fff764e9b4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

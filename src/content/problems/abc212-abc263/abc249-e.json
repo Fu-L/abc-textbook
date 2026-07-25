@@ -1,0 +1,20 @@
+{
+  "id": "abc249-e",
+  "contestId": "abc249",
+  "slotLabel": "E",
+  "officialTaskId": "abc249_e",
+  "title": "RLE",
+  "officialUrl": "https://atcoder.jp/contests/abc249/tasks/abc249_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 3000; 10^8 \\le P \\le 10^9; N and P are integers.; P is a prime.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc249-e-problem-cfe689aa85acd815da2acaa222c471dc6da66e90e7448790bc6f36389707ae6d",
+    "source-abc249-editorial-3840-84d04b3fc3ea14ea3dddfaa54d60218ec60fc0ed9c4e16245236bbea6d1d334b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

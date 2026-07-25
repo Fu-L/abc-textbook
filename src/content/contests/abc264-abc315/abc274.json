@@ -1,0 +1,21 @@
+{
+  "id": "abc274",
+  "number": 274,
+  "title": "キーエンスプログラミングコンテスト2022（AtCoder Beginner Contest 274）",
+  "startedAt": "2022-10-22T21:00:00+09:00",
+  "endedAt": "2022-10-22T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc274",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc274_a",
+    "abc274_b",
+    "abc274_c",
+    "abc274_d",
+    "abc274_e",
+    "abc274_f",
+    "abc274_g",
+    "abc274_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc274-task-list-b0194d4f248a4755ebcca9d936999f45e4707baa9a2d996a846776fa0dbea6b8",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

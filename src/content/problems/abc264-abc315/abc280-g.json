@@ -1,0 +1,20 @@
+{
+  "id": "abc280-g",
+  "contestId": "abc280",
+  "slotLabel": "G",
+  "officialTaskId": "abc280_g",
+  "title": "Do Use Hexagon Grid 2",
+  "officialUrl": "https://atcoder.jp/contests/abc280/tasks/abc280_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 300; -10^9\\leq X_i,Y_i \\leq 10^9; 1\\leq D \\leq 10^{10}; (X_i,Y_i) are pairwise distinct.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc280-g-problem-7807ef3931a86fdd7adb0d21d36f4018124829bac93a304e81099c69e8d1a1b3",
+    "source-abc280-editorial-5307-08dbbe27bf52c97c58393c02b70945caf6e1fc8cf22b5097bd443a39029daecc"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

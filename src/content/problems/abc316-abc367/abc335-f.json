@@ -1,0 +1,20 @@
+{
+  "id": "abc335-f",
+  "contestId": "abc335",
+  "slotLabel": "F",
+  "officialTaskId": "abc335_f",
+  "title": "Hop Sugoroku",
+  "officialUrl": "https://atcoder.jp/contests/abc335/tasks/abc335_f",
+  "constraintsSummary": "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 2 \\times 10^5; 1 \\le A_i \\le 2 \\times 10^5",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc335-f-problem-43ce80c8813d030f4d8d45e6809eb385d25fd1db5fa21b707b2a9f9c32678483",
+    "source-abc335-editorial-9038-75d1ffdd8b1f3f04351303bd37aa5663466c9211f668ed0c1fd1e25f0d815f2e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

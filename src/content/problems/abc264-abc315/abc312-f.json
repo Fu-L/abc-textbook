@@ -1,0 +1,20 @@
+{
+  "id": "abc312-f",
+  "contestId": "abc312",
+  "slotLabel": "F",
+  "officialTaskId": "abc312_f",
+  "title": "Cans and Openers",
+  "officialUrl": "https://atcoder.jp/contests/abc312/tasks/abc312_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 2 \\times 10^5; T_i is 0, 1, or 2.; 1 \\leq X_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc312-f-problem-5f183be91a874fb126f803f5b9cf9cccd1901b25c908dd376b5c6289579b2f03",
+    "source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

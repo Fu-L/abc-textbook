@@ -1,0 +1,20 @@
+{
+  "id": "abc246-ex",
+  "contestId": "abc246",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc246_h",
+  "title": "01? Queries",
+  "officialUrl": "https://atcoder.jp/contests/abc246/tasks/abc246_h",
+  "constraintsSummary": "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, Q \\leq 10^5; N and Q are integers.; S is a string of length N consisting of 0, 1, and ?.; 1 \\leq x_i \\leq N; c_i is one of the characters 0 , 1, and ?.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc246-ex-problem-a1b21b8f8e0ba6be58e2ef77d8a5b8fd73c081165d7832ed9a18d9a5cba6efe5",
+    "source-abc246-editorial-3705-73fb7421c296a34062f61baff4f3572476241cbc81f54aac6c14d6374e53381a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

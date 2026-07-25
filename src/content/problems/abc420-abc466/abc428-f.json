@@ -1,0 +1,20 @@
+{
+  "id": "abc428-f",
+  "contestId": "abc428",
+  "slotLabel": "F",
+  "officialTaskId": "abc428_f",
+  "title": "Pyramid Alignment",
+  "officialUrl": "https://atcoder.jp/contests/abc428/tasks/abc428_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq W_i \\leq 10^9 (1 \\leq i \\leq N); W_1 < W_2 < \\dots < W_N; For v given in queries of types 1 and 2, 1 \\leq v \\leq N.; For x given in queries of type 3, 0 \\leq x \\leq 10^9.; At least one query of type 3 is given.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb",
+    "source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

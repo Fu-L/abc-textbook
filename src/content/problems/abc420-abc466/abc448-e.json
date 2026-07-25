@@ -1,0 +1,20 @@
+{
+  "id": "abc448-e",
+  "contestId": "abc448",
+  "slotLabel": "E",
+  "officialTaskId": "abc448_e",
+  "title": "Simple Division",
+  "officialUrl": "https://atcoder.jp/contests/abc448/tasks/abc448_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le M \\le 10^4; 1 \\le K \\le 10^5; c_i is one of the digits 0,1,2,3,4,5,6,7,8,9.; 1 \\le l_i \\le 10^9; c_1 \\neq 0; M,K,l_i are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc448-e-problem-2e75c00389f73522688e3410de62a0e400eaf627cb19ddf0616c8fa3ae397dfe",
+    "source-abc448-editorial-16749-7468a146eb2ed5b942c7fa3c4c47c44239fb8ad100daa5691a838e974f534b21"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

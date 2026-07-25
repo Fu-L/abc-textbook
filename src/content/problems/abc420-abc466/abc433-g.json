@@ -1,0 +1,20 @@
+{
+  "id": "abc433-g",
+  "contestId": "abc433",
+  "slotLabel": "G",
+  "officialTaskId": "abc433_g",
+  "title": "Substring Game",
+  "officialUrl": "https://atcoder.jp/contests/abc433/tasks/abc433_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 10^5; T is an integer.; S is a string consisting of lowercase English letters with length between 1 and 2\\times 10^5, inclusive.; The sum of the lengths of S over all test cases is at most 4\\times 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc433-g-problem-56991ad609c06493e3f50699aa57d6046d113f95a100f431f220b0430bef96a4",
+    "source-abc433-editorial-14604-dc4c7ff9c502d4e6f093918f8d3f4fe32c97ba0d442486658598234b34044eaf"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

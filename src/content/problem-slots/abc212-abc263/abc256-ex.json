@@ -1,0 +1,12 @@
+{
+  "contestId": "abc256",
+  "label": "Ex",
+  "officialTaskId": "abc256_h",
+  "officialOrder": 7,
+  "availability": "exists",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": "abc256-ex",
+  "sourceRevisionId": "source-abc256-task-list-af7ff3ec734c38b65ce9a69d803bbf15008a08ba974115c53ddd29f881812b8e",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

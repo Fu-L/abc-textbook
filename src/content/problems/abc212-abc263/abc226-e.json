@@ -1,0 +1,20 @@
+{
+  "id": "abc226-e",
+  "contestId": "abc226",
+  "slotLabel": "E",
+  "officialTaskId": "abc226_e",
+  "title": "Just one",
+  "officialUrl": "https://atcoder.jp/contests/abc226/tasks/abc226_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq M \\leq 2\\times 10^5; 1 \\leq U_i,V_i \\leq N; U_i \\neq V_i; All values in input are integers.; The given graph is simple.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc226-e-problem-3ca6433e5ec0f6996502c33674b13259def0590aeea6689d74a414ab33bbf677",
+    "source-abc226-editorial-2889-a9c5442114a34c37728bcec59eeeb20ea9188ddb5bd549a4dbcfec1bef7ea180"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc449-f",
+  "sourceRevisionIds": [
+    "source-abc449-editorial-17255-6fd682baa90baf074010360d09d0a80654a34ffb17c7ac564f6a460f8a1daf80",
+    "source-abc449-f-problem-c9b7085ff7a09e8e38747fb18533e3d4dcc619eb39292a2eb76476305b7c0dc3"
+  ],
+  "coreMethod": "abc449-f「Grid Clipping」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
+    "Grid Clipping 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "平衡二分探索木"],
+  "implementationConcerns": [
+    "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。"
+  ],
+  "outcomeCandidates": [
+    "Grid Clipping 型の 盤面上の位置と局所遷移に対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

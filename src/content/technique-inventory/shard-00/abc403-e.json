@@ -1,0 +1,22 @@
+{
+  "problemId": "abc403-e",
+  "sourceRevisionIds": [
+    "source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23",
+    "source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"
+  ],
+  "coreMethod": "abc403-e「Forbidden Prefix」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
+    "Forbidden Prefix 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "Trie"],
+  "implementationConcerns": [
+    "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。"
+  ],
+  "outcomeCandidates": [
+    "Forbidden Prefix 型の 文字列の prefix・suffix と一致関係に対し、Trieを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

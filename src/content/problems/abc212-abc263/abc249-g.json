@@ -1,0 +1,20 @@
+{
+  "id": "abc249-g",
+  "contestId": "abc249",
+  "slotLabel": "G",
+  "officialTaskId": "abc249_g",
+  "title": "Xor Cards",
+  "officialUrl": "https://atcoder.jp/contests/abc249/tasks/abc249_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 1000; 0 \\leq K \\lt 2^{30}; 0 \\leq A_i, B_i \\lt 2^{30} \\, (1 \\leq i \\leq N); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719",
+    "source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

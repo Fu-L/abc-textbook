@@ -1,0 +1,20 @@
+{
+  "id": "abc334-e",
+  "contestId": "abc334",
+  "slotLabel": "E",
+  "officialTaskId": "abc334_e",
+  "title": "Christmas Color Grid 1",
+  "officialUrl": "https://atcoder.jp/contests/abc334/tasks/abc334_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W \\leq 1000; S_{i,j} = . or S_{i,j} = #.; There is at least one (i,j) such that S_{i,j} = ..",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc334-e-problem-3fcc496e040f815592e86224b94ccb06f704495a049994d43e2236e1750702f2",
+    "source-abc334-editorial-8987-b5406de59fd4abbb6979c1bc648407117b6f6e6a3358fba9e90bfcb7a486295f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc318-ex",
+  "contestId": "abc318",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc318_h",
+  "title": "Count Strong Test Cases",
+  "officialUrl": "https://atcoder.jp/contests/abc318/tasks/abc318_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01",
+    "source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

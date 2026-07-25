@@ -1,0 +1,22 @@
+{
+  "problemId": "abc298-f",
+  "sourceRevisionIds": [
+    "source-abc298-editorial-6211-8114a025037834e41fb9ef5cb0443dad7fe85b1d98c3a7af10e1c3564a6478fe",
+    "source-abc298-f-problem-82542e25568160a466c44eea2f79e94505de6b46f2709898ee0a8440b9138d0f"
+  ],
+  "coreMethod": "abc298-f「Rook Score」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "大小・等値関係を保つ順位写像なので、元座標での順序条件と圧縮後の条件が同値になる。",
+    "Rook Score 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "座標圧縮"],
+  "implementationConcerns": [
+    "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。"
+  ],
+  "outcomeCandidates": [
+    "Rook Score 型の 盤面上の位置と局所遷移に対し、座標圧縮を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

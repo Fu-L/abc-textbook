@@ -1,0 +1,20 @@
+{
+  "id": "abc223-f",
+  "contestId": "abc223",
+  "slotLabel": "F",
+  "officialTaskId": "abc223_f",
+  "title": "Parenthesis Checking",
+  "officialUrl": "https://atcoder.jp/contests/abc223/tasks/abc223_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,Q \\leq 2 \\times 10^5; S is a string of length N consisting of ( and ).; 1 \\leq l < r \\leq N; N,Q,l,r are all integers.; Each query is in the format 1 l r or 2 l r.; There is at least one query in the format 2 l r.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+    "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

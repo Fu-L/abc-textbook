@@ -1,0 +1,20 @@
+{
+  "id": "abc431-f",
+  "contestId": "abc431",
+  "slotLabel": "F",
+  "officialTaskId": "abc431_f",
+  "title": "Almost Sorted 2",
+  "officialUrl": "https://atcoder.jp/contests/abc431/tasks/abc431_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 2\\times 10^5; 1\\leq D\\leq 10^6; 1\\leq A_i\\leq 10^6; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc431-f-problem-24f87728a3fc28ac631adf09694ffab5bef2251ee31ef1a7d1836bd6c43d1f5f",
+    "source-abc431-editorial-14492-228ecac80890d685616600ffce4e1c80d66c5ad8df5cd8032d64020511828730"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc233-f",
+  "contestId": "abc233",
+  "slotLabel": "F",
+  "officialTaskId": "abc233_f",
+  "title": "Swap and Sort",
+  "officialUrl": "https://atcoder.jp/contests/abc233/tasks/abc233_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 1000; P is a permutation of (1,2,\\ldots,N).; 1\\leq M \\leq \\min(2\\times 10^5, \\frac{N(N-1)}{2}); 1\\leq a_i \\lt b_i\\leq N; (a_i,b_i)\\neq (a_j,b_j) if i\\neq j.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd",
+    "source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

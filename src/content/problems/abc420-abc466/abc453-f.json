@@ -1,0 +1,20 @@
+{
+  "id": "abc453-f",
+  "contestId": "abc453",
+  "slotLabel": "F",
+  "officialTaskId": "abc453_f",
+  "title": "Avoid Division",
+  "officialUrl": "https://atcoder.jp/contests/abc453/tasks/abc453_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T\\leq 10^5; 2\\leq N\\leq 3\\times 10^5; 1\\leq K\\leq N; 1\\leq U_i,V_i\\leq N; The given graph is a tree.; 1\\leq C_i\\leq N; C_1+C_2+\\cdots+C_K\\geq N; All input values are integers.; The sum of N over all test cases does not exceed 3\\times 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0",
+    "source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

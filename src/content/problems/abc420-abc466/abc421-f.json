@@ -1,0 +1,20 @@
+{
+  "id": "abc421-f",
+  "contestId": "abc421",
+  "slotLabel": "F",
+  "officialTaskId": "abc421_f",
+  "title": "Erase between X and Y",
+  "officialUrl": "https://atcoder.jp/contests/abc421/tasks/abc421_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq Q \\leq 5\\times 10^5; For the i-th query: If it is a type 1 query: 0\\leq x < i A contains x immediately before processing the query. If it is a type 2 query: 0\\leq x < y < i A contains both x and y immediately before processing the query.; If it is a type 1 query: 0\\leq x < i A contains x immediately before processing the query.; 0\\leq x < i; A contains x immediately before processing the query.; If it is a type 2 query: 0\\leq x < y < i A contains both x and y immediately before processing the query.; 0\\leq x < y < i; A contains both x and y immediately before processing the query.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc421-f-problem-0ab28e8057b1b056ea75492696f2deba87c12925e65a0fb80b14697fe8aea8b9",
+    "source-abc421-editorial-13787-433e8d0a684c462cc1e7cceabc14552e13947bbf5910cabd3c98196fd12e0564"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

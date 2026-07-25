@@ -1,0 +1,12 @@
+{
+  "contestId": "abc280",
+  "label": "H",
+  "officialTaskId": null,
+  "officialOrder": null,
+  "availability": "official_absent",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": null,
+  "sourceRevisionId": "source-abc280-task-list-b7c07a7233c0a81fbf4807c457455aeaff415a1834926750e2e1ea942216f0b7",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

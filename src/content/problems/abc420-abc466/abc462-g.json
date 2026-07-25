@@ -1,0 +1,20 @@
+{
+  "id": "abc462-g",
+  "contestId": "abc462",
+  "slotLabel": "G",
+  "officialTaskId": "abc462_g",
+  "title": "Completely Wrong",
+  "officialUrl": "https://atcoder.jp/contests/abc462/tasks/abc462_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2\\times 10^5; 1\\le C_i,G_k\\le N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc462-g-problem-73f7e339d052db10556f4c6375992f51700de1db87661f7cad566dd5896ace03",
+    "source-abc462-editorial-21456-125bd5706c0cdf5e896a02d1a23eef13dc6df29f4a75b59feaf156115895e857"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

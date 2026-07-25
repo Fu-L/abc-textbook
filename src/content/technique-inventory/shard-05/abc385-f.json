@@ -1,0 +1,20 @@
+{
+  "problemId": "abc385-f",
+  "sourceRevisionIds": [
+    "source-abc385-editorial-11664-76d5a0bbd1baef5fe071c2d300507fca7164300e970ad633d9c5f17e3591e920",
+    "source-abc385-f-problem-75176a21b1f00a0a84ff4c1c5737571a51db5a16d6aefba6f634abe016ff81d2"
+  ],
+  "coreMethod": "abc385-f「Visible Buildings」では、全ての建物対の可視条件を、中間点による支配関係を使って隣接対だけの高さ下限へ縮約する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "非隣接対の間から任意の建物を取ると、二つの短い対の少なくとも一方が元の対以上に厳しい制約を与える。",
+    "Visible Buildings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["直線の傾きと支配関係"],
+  "implementationConcerns": ["分子を整数で交差計算して桁落ちを避け、除算は最後に一度だけ行う。"],
+  "outcomeCandidates": [
+    "Visible Buildings 型の問題に対し、直線の傾きと支配関係を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

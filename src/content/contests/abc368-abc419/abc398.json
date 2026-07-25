@@ -1,0 +1,20 @@
+{
+  "id": "abc398",
+  "number": 398,
+  "title": "UNIQUE VISION Programming Contest 2025 Spring (AtCoder Beginner Contest 398)",
+  "startedAt": "2025-03-22T21:00:00+09:00",
+  "endedAt": "2025-03-22T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc398",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc398_a",
+    "abc398_b",
+    "abc398_c",
+    "abc398_d",
+    "abc398_e",
+    "abc398_f",
+    "abc398_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc398-task-list-6bbdab47ef6b3edec30c744182a8e27e6d15e9cd5dda0926c1b943204ed69437",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

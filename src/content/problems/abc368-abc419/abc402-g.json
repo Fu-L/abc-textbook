@@ -1,0 +1,20 @@
+{
+  "id": "abc402-g",
+  "contestId": "abc402",
+  "slotLabel": "G",
+  "officialTaskId": "abc402_g",
+  "title": "Sum of Prod of Mod of Linear",
+  "officialUrl": "https://atcoder.jp/contests/abc402/tasks/abc402_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 10^5; 1\\le N\\le 10^6; 1\\le M\\le 10^6; 0\\le A,B_1,B_2 < M; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc402-g-problem-95c89a1ffb525b87d5e7640bde58ffc874c001655cb6d330694ae27f9396d3e1",
+    "source-abc402-editorial-12688-47b342f1e7fe599b2d9b9a8f0cc0e38a0bdb0b5710deae48ad87f6b65cbf11a3"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

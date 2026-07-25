@@ -1,0 +1,20 @@
+{
+  "id": "abc376-e",
+  "contestId": "abc376",
+  "slotLabel": "E",
+  "officialTaskId": "abc376_e",
+  "title": "Max × Sum",
+  "officialUrl": "https://atcoder.jp/contests/abc376/tasks/abc376_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 2 \\times 10^5; 1 \\leq K \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i, B_i \\leq 10^6; The sum of N over all test cases is at most 2 \\times 10^5.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc376-e-problem-7bc711965a6cb1a7ffa745402a6fb1ece00c92df9108f71ecf78624601b0b740",
+    "source-abc376-editorial-11187-abe02a99a58ed4a8685fd3fd6fcfabae2aaf5b2597061f987de0b9d63ec82993"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

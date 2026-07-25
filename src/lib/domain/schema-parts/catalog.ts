@@ -41,6 +41,7 @@ export const OffsetDateTimeSchema = StructuralOffsetDateTimeSchema.refine(
 
 const nonEmptyText = z.string().trim().min(1);
 const entityIds = z.array(EntityIdSchema);
+export const OfficialTaskIdSchema = z.string().regex(/^abc[0-9]{3,}_[a-z0-9_]+$/u);
 const localBlockPath = (namespace: 'claims' | 'examples' | 'exercises') =>
   z.string().regex(new RegExp(`^${namespace}\\.${ContentBlockKeyPattern}$`, 'u'));
 const exerciseDetailPath = z
@@ -75,12 +76,13 @@ export const CorrectionImpactContentLocatorSchema = z.discriminatedUnion('ownerT
   }),
 ]);
 
-export type AtCoderContestResource = 'contest' | 'tasks' | 'task' | 'editorial';
+export type AtCoderContestResource = 'contest' | 'tasks' | 'task' | 'editorial' | 'editorial_item';
 
 export interface AtCoderContestResourceUrl {
   readonly contestId: string;
   readonly resource: AtCoderContestResource;
   readonly taskId: string | null;
+  readonly editorialItemId: string | null;
 }
 
 /** Parse only HTTPS AtCoder contest URLs used as authoritative source links. */
@@ -102,27 +104,33 @@ export const parseAtCoderContestResourceUrl = (value: string): AtCoderContestRes
   }
   const pathname = url.pathname.endsWith('/') ? url.pathname.slice(0, -1) || '/' : url.pathname;
   const match =
-    /^\/contests\/(?<contestId>abc[0-9]{3,})(?:\/(?<section>tasks|editorial)(?:\/(?<taskId>[a-z0-9_]+))?)?$/u.exec(
+    /^\/contests\/(?<contestId>abc[0-9]{3,})(?:\/(?<section>tasks|editorial)(?:\/(?<resourceId>[a-z0-9_]+))?)?$/u.exec(
       pathname,
     );
   if (!match?.groups) return null;
   const section = match.groups.section;
   const contestId = match.groups.contestId;
-  const taskId = match.groups.taskId ?? null;
-  if (!contestId || (section === 'editorial' && taskId !== null)) return null;
+  const resourceId = match.groups.resourceId ?? null;
+  const taskId = section === 'tasks' ? resourceId : null;
+  const editorialItemId = section === 'editorial' ? resourceId : null;
+  if (!contestId) return null;
   if (taskId !== null && !taskId.startsWith(`${contestId}_`)) return null;
+  if (editorialItemId !== null && !/^[0-9]+$/u.test(editorialItemId)) return null;
   const resource: AtCoderContestResource =
     section === 'tasks'
       ? taskId
         ? 'task'
         : 'tasks'
       : section === 'editorial'
-        ? 'editorial'
+        ? editorialItemId
+          ? 'editorial_item'
+          : 'editorial'
         : 'contest';
   return {
     contestId,
     resource,
     taskId,
+    editorialItemId,
   };
 };
 
@@ -144,12 +152,13 @@ export const ContestSchema = strictObject({
         labels.includes('D'),
     )
     .meta({ uniqueItems: true, contains: { const: 'D' } }),
+  officialTaskIds: uniqueArray(OfficialTaskIdSchema).min(5),
   taskOrderSourceRevisionId: EntityIdSchema,
   checkedAt: OffsetDateTimeSchema,
 }).superRefine((contest, context) => {
   const officialUrl =
     parseAtCoderContestResourceUrl(contest.officialUrl) ??
-    ({ contestId: '', resource: 'contest', taskId: null } as const);
+    ({ contestId: '', resource: 'contest', taskId: null, editorialItemId: null } as const);
   if (officialUrl.contestId !== contest.id || officialUrl.resource !== 'contest') {
     context.addIssue({
       code: 'custom',
@@ -162,6 +171,49 @@ export const ContestSchema = strictObject({
       code: 'custom',
       path: ['endedAt'],
       message: 'Contest must end after it starts.',
+    });
+  }
+  if (contest.officialTaskIds.length !== contest.officialTaskOrder.length) {
+    context.addIssue({
+      code: 'custom',
+      path: ['officialTaskIds'],
+      message: 'Contest labels and official task IDs must form a complete ordered mapping.',
+    });
+  }
+  for (const [index, officialTaskId] of contest.officialTaskIds.entries()) {
+    if (!officialTaskId.startsWith(`${contest.id}_`)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['officialTaskIds', index],
+        message: 'Every official task ID must belong to its Contest.',
+      });
+    }
+  }
+});
+
+export const OfficialContestGapMetadataSchema = strictObject({
+  number: z.number().int().min(212),
+  contestId: ContestIdSchema,
+  status: z.literal('officially_unheld'),
+  evidenceUrl: z.url({ protocol: /^https$/u, hostname: /^atcoder\.jp$/u }),
+  evidenceAssertion: nonEmptyText,
+  checkedAt: OffsetDateTimeSchema,
+  termsCheckedAt: OffsetDateTimeSchema,
+  fingerprint: Sha256Schema,
+}).superRefine((gap, context) => {
+  if (gap.contestId !== `abc${String(gap.number)}`) {
+    context.addIssue({
+      code: 'custom',
+      path: ['contestId'],
+      message: 'Contest gap ID must agree with its number.',
+    });
+  }
+  const evidence = parseAtCoderContestResourceUrl(gap.evidenceUrl);
+  if (evidence?.resource !== 'task') {
+    context.addIssue({
+      code: 'custom',
+      path: ['evidenceUrl'],
+      message: 'Contest gap evidence must be an official AtCoder task URL.',
     });
   }
 });
@@ -200,6 +252,7 @@ export const AdvancedSlotRegistrySchema = strictObject({
 export const ContestSlotRecordSchema = strictObject({
   contestId: ContestIdSchema,
   label: ProblemLabelSchema,
+  officialTaskId: OfficialTaskIdSchema.nullable(),
   officialOrder: z.number().int().nonnegative().nullable(),
   availability: z.enum(['exists', 'official_absent', 'unknown', 'withdrawn']),
   catalogStatus: z.enum(['uncollected', 'drafting', 'on_hold', 'published', 'correction_pending']),
@@ -224,6 +277,13 @@ export const ContestSlotRecordSchema = strictObject({
           message: 'exists requires a problem.',
         });
       }
+      if (slot.officialTaskId === null) {
+        context.addIssue({
+          code: 'custom',
+          path: ['officialTaskId'],
+          message: 'exists requires an official task ID.',
+        });
+      }
     } else if (slot.problemId !== null) {
       context.addIssue({
         code: 'custom',
@@ -231,12 +291,21 @@ export const ContestSlotRecordSchema = strictObject({
         message: 'Only exists may reference a problem.',
       });
     }
-    if (slot.availability === 'official_absent' && slot.officialOrder !== null) {
-      context.addIssue({
-        code: 'custom',
-        path: ['officialOrder'],
-        message: 'official_absent requires a null order.',
-      });
+    if (slot.availability === 'official_absent') {
+      if (slot.officialOrder !== null) {
+        context.addIssue({
+          code: 'custom',
+          path: ['officialOrder'],
+          message: 'official_absent requires a null order.',
+        });
+      }
+      if (slot.officialTaskId !== null) {
+        context.addIssue({
+          code: 'custom',
+          path: ['officialTaskId'],
+          message: 'official_absent cannot name an official task ID.',
+        });
+      }
     }
     if (
       (slot.availability === 'unknown' || slot.catalogStatus === 'on_hold') &&
@@ -269,6 +338,7 @@ export const ContestSlotRecordSchema = strictObject({
         then: {
           properties: {
             officialOrder: { type: 'integer', minimum: 0 },
+            officialTaskId: { type: 'string', pattern: '^abc[0-9]{3,}_[a-z0-9_]+$' },
             problemId: { type: 'string', pattern: '^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$' },
           },
         },
@@ -282,6 +352,7 @@ export const ContestSlotRecordSchema = strictObject({
         then: {
           properties: {
             officialOrder: { type: 'null' },
+            officialTaskId: { type: 'null' },
             catalogStatus: { enum: ['uncollected', 'on_hold'] },
           },
         },
@@ -310,10 +381,11 @@ export const ProblemSchema = strictObject({
   id: ProblemIdSchema,
   contestId: ContestIdSchema,
   slotLabel: ProblemLabelSchema,
+  officialTaskId: OfficialTaskIdSchema,
   title: nonEmptyText,
   officialUrl: z.url(),
-  constraintsSummary: nonEmptyText,
-  difficultyEvidence: nonEmptyText,
+  constraintsSummary: nonEmptyText.nullable(),
+  difficultyEvidence: nonEmptyText.nullable(),
   sourceRevisionIds: entityIds.min(1),
   checkedAt: OffsetDateTimeSchema,
   publicationStatus: z.enum([
@@ -327,30 +399,74 @@ export const ProblemSchema = strictObject({
   secondaryTagIds: entityIds,
   adHocElements: z.array(nonEmptyText),
   placementId: EntityIdSchema.nullable(),
-}).superRefine((problem, context) => {
-  const officialUrl =
-    parseAtCoderContestResourceUrl(problem.officialUrl) ??
-    ({ contestId: '', resource: 'contest', taskId: null } as const);
-  const expectedTaskId = `${problem.contestId}_${problem.slotLabel.toLocaleLowerCase('en-US')}`;
-  if (
-    officialUrl.contestId !== problem.contestId ||
-    officialUrl.resource !== 'task' ||
-    officialUrl.taskId !== expectedTaskId
-  ) {
-    context.addIssue({
-      code: 'custom',
-      path: ['officialUrl'],
-      message: 'Problem officialUrl must match its AtCoder contest and task label.',
-    });
-  }
-});
+})
+  .superRefine((problem, context) => {
+    const officialUrl =
+      parseAtCoderContestResourceUrl(problem.officialUrl) ??
+      ({ contestId: '', resource: 'contest', taskId: null, editorialItemId: null } as const);
+    if (
+      officialUrl.contestId !== problem.contestId ||
+      officialUrl.resource !== 'task' ||
+      officialUrl.taskId !== problem.officialTaskId ||
+      !problem.officialTaskId.startsWith(`${problem.contestId}_`)
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['officialUrl'],
+        message: 'Problem officialUrl must match its AtCoder contest and task label.',
+      });
+    }
+    const permitsIncompleteAnalysis =
+      problem.publicationStatus === 'uncollected' || problem.publicationStatus === 'on_hold';
+    if (!permitsIncompleteAnalysis && problem.constraintsSummary === null) {
+      context.addIssue({
+        code: 'custom',
+        path: ['constraintsSummary'],
+        message: 'Analyzed Problems require a constraints summary.',
+      });
+    }
+    if (!permitsIncompleteAnalysis && problem.difficultyEvidence === null) {
+      context.addIssue({
+        code: 'custom',
+        path: ['difficultyEvidence'],
+        message: 'Analyzed Problems require difficulty evidence.',
+      });
+    }
+  })
+  .meta({
+    allOf: [
+      {
+        if: {
+          properties: {
+            publicationStatus: {
+              enum: ['drafting', 'published', 'correction_pending'],
+            },
+          },
+          required: ['publicationStatus'],
+        },
+        then: {
+          properties: {
+            constraintsSummary: { type: 'string', minLength: 1 },
+            difficultyEvidence: { type: 'string', minLength: 1 },
+          },
+        },
+      },
+    ],
+  });
 
 export const TechniqueInventoryItemSchema = strictObject({
   problemId: ProblemIdSchema,
-  sourceRevisionIds: entityIds.min(1),
+  sourceRevisionIds: uniqueArray(EntityIdSchema).min(1),
   coreMethod: nonEmptyText,
   proofIdeas: z.array(nonEmptyText).min(1),
-  asymptoticComplexity: strictObject({ time: nonEmptyText, space: nonEmptyText }),
+  asymptoticComplexity: strictObject({
+    time: nonEmptyText.optional(),
+    space: nonEmptyText.optional(),
+  })
+    .refine((complexity) => complexity.time !== undefined || complexity.space !== undefined, {
+      message: 'At least one problem-specific complexity bound is required when present.',
+    })
+    .optional(),
   prerequisiteCandidates: z.array(nonEmptyText),
   implementationConcerns: z.array(nonEmptyText),
   outcomeCandidates: z.array(nonEmptyText).min(1),
@@ -568,6 +684,7 @@ export const SourceRevisionSchema = strictObject({
     'other_official',
   ]),
   contestId: ContestIdSchema.nullable(),
+  officialTaskId: OfficialTaskIdSchema.nullable(),
   checkedAt: OffsetDateTimeSchema,
   fingerprint: Sha256Schema,
   termsCheckedAt: OffsetDateTimeSchema,
@@ -591,9 +708,10 @@ export const SourceRevisionSchema = strictObject({
   }
   const validResource =
     source.sourceKind === 'official_problem'
-      ? officialUrl.resource === 'task'
+      ? officialUrl.resource === 'task' && officialUrl.taskId === source.officialTaskId
       : source.sourceKind === 'official_editorial'
-        ? officialUrl.resource === 'editorial'
+        ? (officialUrl.resource === 'editorial' && source.officialTaskId === null) ||
+          (officialUrl.resource === 'editorial_item' && source.officialTaskId !== null)
         : source.sourceKind === 'official_contest'
           ? officialUrl.resource === 'contest' || officialUrl.resource === 'tasks'
           : true;
@@ -602,6 +720,26 @@ export const SourceRevisionSchema = strictObject({
       code: 'custom',
       path: ['sourceKind'],
       message: `${source.sourceKind} must use its matching AtCoder URL path.`,
+    });
+  }
+  if (
+    source.officialTaskId !== null &&
+    (source.contestId === null || !source.officialTaskId.startsWith(`${source.contestId}_`))
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['officialTaskId'],
+      message: 'Source officialTaskId must belong to its Contest.',
+    });
+  }
+  if (
+    (source.sourceKind === 'official_contest' || source.sourceKind === 'other_official') &&
+    source.officialTaskId !== null
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['officialTaskId'],
+      message: `${source.sourceKind} cannot be bound to an official task ID.`,
     });
   }
 });
@@ -738,6 +876,7 @@ export const CatalogSchema = strictObject({
   release: CatalogReleaseSchema,
   advancedSlotRegistry: AdvancedSlotRegistrySchema,
   contests: z.array(ContestSchema),
+  contestGaps: z.array(OfficialContestGapMetadataSchema),
   contestSlots: z.array(ContestSlotRecordSchema),
   problems: z.array(ProblemSchema),
   techniqueInventory: z.array(TechniqueInventoryItemSchema),
@@ -754,7 +893,7 @@ export const CatalogContract = defineZodContractSchema('catalog.schema.json', Ca
   $id: 'https://abc-textbook.local/schemas/catalog.schema.json',
   title: 'ABC Textbook Catalog',
   description:
-    'ABC212以降の各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。',
+    'ABC212以降を開催済みContestと公式欠番証跡で連続被覆し、各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。',
 });
 
 const semver = z.string().regex(/^\d+\.\d+\.\d+$/u);

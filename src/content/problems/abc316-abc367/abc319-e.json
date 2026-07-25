@@ -1,0 +1,20 @@
+{
+  "id": "abc319-e",
+  "contestId": "abc319",
+  "slotLabel": "E",
+  "officialTaskId": "abc319_e",
+  "title": "Bus Stops",
+  "officialUrl": "https://atcoder.jp/contests/abc319/tasks/abc319_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^5; 1 \\leq X, Y \\leq 10^9; 1 \\leq P_i \\leq 8; 1 \\leq T_i \\leq 10^9; 1 \\leq Q \\leq 2 \\times 10^5; 0 \\leq q_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc319-e-problem-c4a4219b20dece617d23d754c99682f553521931e1092d89b0e73b7592f56b84",
+    "source-abc319-editorial-7100-2a5438d3186735365beab74de2e9243b47adce3c143ef6f82170241133983151"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

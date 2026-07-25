@@ -1,0 +1,20 @@
+{
+  "id": "abc234-e",
+  "contestId": "abc234",
+  "slotLabel": "E",
+  "officialTaskId": "abc234_e",
+  "title": "Arithmetic Number",
+  "officialUrl": "https://atcoder.jp/contests/abc234/tasks/abc234_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: X is an integer between 1 and 10^{17} (inclusive).",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc234-e-problem-1ddc11f2854e44117e51e8b3048cbcf709205b4865051f1c62c033002b6e96db",
+    "source-abc234-editorial-3225-cede12fb81c714f047c71686c1f5971aa655086831eacbbe163e3011929e07db"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

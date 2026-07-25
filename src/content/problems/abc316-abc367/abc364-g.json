@@ -1,0 +1,20 @@
+{
+  "id": "abc364-g",
+  "contestId": "abc364",
+  "slotLabel": "G",
+  "officialTaskId": "abc364_g",
+  "title": "Last Major City",
+  "officialUrl": "https://atcoder.jp/contests/abc364/tasks/abc364_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 4000; N-1 \\leq M \\leq 8000; 2\\leq K \\leq \\min(N,\\,10); 1 \\leq A_i < B_i \\leq N; 1 \\leq C_i \\leq 10^9; One can travel between any two cities by traversing some roads.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc364-g-problem-2b7755f38ab76701b38b7e8606e7efbd62fb407a019d63341ada4e0e7fed61b6",
+    "source-abc364-editorial-10547-0ce6702759818c3334c43dfff2b684fb4f5ff524c8e1a158e410e6d33ffd750a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

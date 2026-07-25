@@ -1,0 +1,20 @@
+{
+  "id": "abc266-g",
+  "contestId": "abc266",
+  "slotLabel": "G",
+  "officialTaskId": "abc266_g",
+  "title": "Yet Another RGB Sequence",
+  "officialUrl": "https://atcoder.jp/contests/abc266/tasks/abc266_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq R,G,B\\leq 10^6; 0 \\leq K \\leq \\mathrm{min}(R,G); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc",
+    "source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

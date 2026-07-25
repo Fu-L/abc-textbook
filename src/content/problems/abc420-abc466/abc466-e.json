@@ -1,0 +1,20 @@
+{
+  "id": "abc466-e",
+  "contestId": "abc466",
+  "slotLabel": "E",
+  "officialTaskId": "abc466_e",
+  "title": "Range Flip",
+  "officialUrl": "https://atcoder.jp/contests/abc466/tasks/abc466_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq K \\leq 10; 1 \\leq A_i, B_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc466-e-problem-4ba87520bee3c600fc85b2af5308f919b501ce18367da34fe56b758004d431dd",
+    "source-abc466-editorial-22629-4ae993f0eb49e129b14e741f409c3997322e3cb8a3254fa1d3e195ceb2170757"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

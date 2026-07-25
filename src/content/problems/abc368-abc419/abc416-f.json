@@ -1,0 +1,20 @@
+{
+  "id": "abc416-f",
+  "contestId": "abc416",
+  "slotLabel": "F",
+  "officialTaskId": "abc416_f",
+  "title": "Paint Tree 2",
+  "officialUrl": "https://atcoder.jp/contests/abc416/tasks/abc416_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le 2\\times 10^5; 1\\le K\\le 5; 1\\le A_i\\le 10^9; 1\\le U_i < V_i \\le N; The given graph is a tree.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc416-f-problem-1b4e0e1da18c3f3627fb622d402fd0d6accd17b478479dd2f626227f6c211a69",
+    "source-abc416-editorial-13537-e498a5292eb7b837e39dbab06dc44482b245fe9998c203baf15a4b0c8c9e0c9c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

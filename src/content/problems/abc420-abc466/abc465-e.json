@@ -1,0 +1,20 @@
+{
+  "id": "abc465-e",
+  "contestId": "abc465",
+  "slotLabel": "E",
+  "officialTaskId": "abc465_e",
+  "title": "Digit Circus",
+  "officialUrl": "https://atcoder.jp/contests/abc465/tasks/abc465_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \\leq N < 10^{500}",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc465-e-problem-945513a43d3360f73d206b2d03ede33780e53f0435eb9811015021223411d6f5",
+    "source-abc465-editorial-22563-ba14b921b94c95a8d42cf05aac191fb6724ff984035c08f519b55b7a0b3a782d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc329-g",
+  "contestId": "abc329",
+  "slotLabel": "G",
+  "officialTaskId": "abc329_g",
+  "title": "Delivery on Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc329/tasks/abc329_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 10^4; 1\\leq M \\leq 2\\times 10^5; 1\\leq K \\leq 10^3; 1\\leq P_i \\leq i; For every v\\ (1\\leq v \\leq N), there are at most two i's such that P_i=v.; 1\\leq S_j, T_j \\leq N; S_j \\neq T_j; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf",
+    "source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc286-f",
+  "sourceRevisionIds": [
+    "source-abc286-editorial-5588-84001bb2b92333c70401743584f2dd937e4435e68da73f58abd8dedc18635260",
+    "source-abc286-f-problem-cafbda3fb64fbcd274bf163b32a922c2c5d1798c0c2c6c4ec0f55dd8b60aaacb"
+  ],
+  "coreMethod": "abc286-f「Guess The Number 2」では、主解法候補として、複数の合同条件を gcd で整合性検査し、中国剰余定理で一つの剰余類へ併合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "差が gcd で割り切れることが解存在の必要十分条件で、拡張 Euclid により併合解を構成できる。",
+    "Guess The Number 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "中国剰余定理"],
+  "implementationConcerns": ["lcm 計算の overflow と負の剰余を正規化し、非互いに素な法も扱う。"],
+  "outcomeCandidates": [
+    "Guess The Number 2 型の 列の順序と prefix 状態に対し、中国剰余定理を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

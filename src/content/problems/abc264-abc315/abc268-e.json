@@ -1,0 +1,20 @@
+{
+  "id": "abc268-e",
+  "contestId": "abc268",
+  "slotLabel": "E",
+  "officialTaskId": "abc268_e",
+  "title": "Chinese Restaurant (Three-Star Version)",
+  "officialUrl": "https://atcoder.jp/contests/abc268/tasks/abc268_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2 \\times 10^5; 0 \\leq p_i \\leq N-1; p_i \\neq p_j if i \\neq j.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc268-e-problem-ebb48085f9132fd7859792492da1d8ac110ddb24ce42343bc916a103a1221c9e",
+    "source-abc268-editorial-4777-26e9d1b6757939b74bb7bc9f6ed9067ff8db7f5ea5a842cdfbe08a3e624a510c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

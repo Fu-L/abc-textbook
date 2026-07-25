@@ -1,0 +1,20 @@
+{
+  "id": "abc319-g",
+  "contestId": "abc319",
+  "slotLabel": "G",
+  "officialTaskId": "abc319_g",
+  "title": "Counting Shortest Paths",
+  "officialUrl": "https://atcoder.jp/contests/abc319/tasks/abc319_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 0 \\leq M \\leq \\min\\lbrace 2 \\times 10^5, N(N-1)/2 \\rbrace; 1 \\leq u_i, v_i \\leq N; u_i \\neq v_i; i \\neq j \\implies \\lbrace u_i, v_i \\rbrace \\neq \\lbrace u_j, v_j \\rbrace; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc319-g-problem-c3bbfea156ff3fc3ce28a9a9a7bdf1f75000e3605171c1819220290f852642d7",
+    "source-abc319-editorial-7118-3acc6181e5d0bb9bf43d6f690d56a73812764e8eb373c0455e0eb90f547e9aa0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

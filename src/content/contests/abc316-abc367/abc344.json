@@ -1,0 +1,20 @@
+{
+  "id": "abc344",
+  "number": 344,
+  "title": "Toyota Programming Contest 2024#3（AtCoder Beginner Contest 344）",
+  "startedAt": "2024-03-09T21:00:00+09:00",
+  "endedAt": "2024-03-09T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc344",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc344_a",
+    "abc344_b",
+    "abc344_c",
+    "abc344_d",
+    "abc344_e",
+    "abc344_f",
+    "abc344_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc344-task-list-6faec25378c2df95fa6cd303399510aca7aab0c8bf202cc8dff1059c5dd64761",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc403-f",
+  "sourceRevisionIds": [
+    "source-abc403-editorial-12771-40816f386a2e96d37d3b6ae4f78aaed6c4433ef1367bad2c312f7db54d5bea93",
+    "source-abc403-f-problem-4cf4b17433f9f9b863f1181b17134a8af10babfe57b14ebed9fb589ff7edc426"
+  ],
+  "coreMethod": "abc403-f「Shortest One Formula」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+    "Shortest One Formula 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["文字列の添字と prefix", "動的計画法の状態設計"],
+  "implementationConcerns": [
+    "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。"
+  ],
+  "outcomeCandidates": [
+    "Shortest One Formula 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

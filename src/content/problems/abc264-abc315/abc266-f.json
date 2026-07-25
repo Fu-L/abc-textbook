@@ -1,0 +1,20 @@
+{
+  "id": "abc266-f",
+  "contestId": "abc266",
+  "slotLabel": "F",
+  "officialTaskId": "abc266_f",
+  "title": "Well-defined Path Queries on a Namori",
+  "officialUrl": "https://atcoder.jp/contests/abc266/tasks/abc266_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2 \\times 10^5; 1 \\leq u_i < v_i\\leq N; (u_i,v_i) \\neq (u_j,v_j) if i \\neq j.; G is a connected simple undirected graph with N vertices and N edges.; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq x_i < y_i\\leq N; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26",
+    "source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

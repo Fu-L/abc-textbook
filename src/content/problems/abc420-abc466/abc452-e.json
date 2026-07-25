@@ -1,0 +1,20 @@
+{
+  "id": "abc452-e",
+  "contestId": "abc452",
+  "slotLabel": "E",
+  "officialTaskId": "abc452_e",
+  "title": "You WILL Like Sigma Problem",
+  "officialUrl": "https://atcoder.jp/contests/abc452/tasks/abc452_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,M \\leq 5 \\times 10^5; 1 \\leq A_i, B_j \\leq 5 \\times 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db",
+    "source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

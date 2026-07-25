@@ -1,0 +1,20 @@
+{
+  "id": "abc419-g",
+  "contestId": "abc419",
+  "slotLabel": "G",
+  "officialTaskId": "abc419_g",
+  "title": "Count Simple Paths 2",
+  "officialUrl": "https://atcoder.jp/contests/abc419/tasks/abc419_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 2\\times 10^5; N-1\\leq M\\leq N+20; 1\\leq u_i\\lt v_i\\leq N; The given graph is a simple connected undirected graph.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf",
+    "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

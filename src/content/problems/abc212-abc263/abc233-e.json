@@ -1,0 +1,20 @@
+{
+  "id": "abc233-e",
+  "contestId": "abc233",
+  "slotLabel": "E",
+  "officialTaskId": "abc233_e",
+  "title": "Σ[k=0..10^100]floor(X／10^k)",
+  "officialUrl": "https://atcoder.jp/contests/abc233/tasks/abc233_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: X is an integer.; 1 \\le X < 10^{500000}",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc233-e-problem-4b2430767539052419622c48e465c8e788614454093f49946380e131efd70dbf",
+    "source-abc233-editorial-3174-f511e377e70185f224c2b295bf37b6c1df96d12c3b62c48d035d70e1e7f8c060"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

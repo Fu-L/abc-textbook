@@ -1,0 +1,20 @@
+{
+  "id": "abc441",
+  "number": 441,
+  "title": "AtCoder Beginner Contest 441 (Promotion of Engineer Guild Fes)",
+  "startedAt": "2026-01-17T21:00:00+09:00",
+  "endedAt": "2026-01-17T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc441",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc441_a",
+    "abc441_b",
+    "abc441_c",
+    "abc441_d",
+    "abc441_e",
+    "abc441_f",
+    "abc441_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc441-task-list-117b9ea0b20c937cb4f9cba032d5881beedc5ad7f8890534f65e09c83c7590b8",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

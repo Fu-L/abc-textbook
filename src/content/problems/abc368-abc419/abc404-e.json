@@ -1,0 +1,20 @@
+{
+  "id": "abc404-e",
+  "contestId": "abc404",
+  "slotLabel": "E",
+  "officialTaskId": "abc404_e",
+  "title": "Bowls and Beans",
+  "officialUrl": "https://atcoder.jp/contests/abc404/tasks/abc404_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \\le N \\le 2000; 1 \\le C_i \\le i; 0 \\le A_i \\le 1; \\displaystyle \\sum_{i=1}^{N-1} A_i > 0",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc404-e-problem-ba601f0017973e934f6482d36aa2100fe6081ac61aed87ffa1167ad37ac1f9f5",
+    "source-abc404-editorial-12866-47e6f33188ac21f645f2d92a415f44a523bc1d6126e3574c93bf87a7c4efe33c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

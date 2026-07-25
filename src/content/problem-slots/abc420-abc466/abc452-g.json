@@ -1,0 +1,12 @@
+{
+  "contestId": "abc452",
+  "label": "G",
+  "officialTaskId": "abc452_g",
+  "officialOrder": 6,
+  "availability": "exists",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": "abc452-g",
+  "sourceRevisionId": "source-abc452-task-list-26d7b74d8f89e715d038212f63e752fb069552aee9084503e9b17da4216665e1",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

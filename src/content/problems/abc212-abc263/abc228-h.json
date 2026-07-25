@@ -1,0 +1,20 @@
+{
+  "id": "abc228-h",
+  "contestId": "abc228",
+  "slotLabel": "H",
+  "officialTaskId": "abc228_h",
+  "title": "Histogram",
+  "officialUrl": "https://atcoder.jp/contests/abc228/tasks/abc228_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq X \\leq 10^6; 1 \\leq A_i, C_i \\leq 10^6 \\, (1 \\leq i \\leq N); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777",
+    "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,21 @@
+{
+  "id": "abc271",
+  "number": 271,
+  "title": "KYOCERA Programming Contest 2022（AtCoder Beginner Contest 271）",
+  "startedAt": "2022-10-01T21:00:00+09:00",
+  "endedAt": "2022-10-01T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc271",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc271_a",
+    "abc271_b",
+    "abc271_c",
+    "abc271_d",
+    "abc271_e",
+    "abc271_f",
+    "abc271_g",
+    "abc271_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc271-task-list-e63e8c414786d4b1c997e986bade01061f9357c3d90b0096aef88573f502d16c",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

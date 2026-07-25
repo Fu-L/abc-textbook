@@ -1,0 +1,21 @@
+{
+  "id": "abc263",
+  "number": 263,
+  "title": "LINE Verda Programming Contest（AtCoder Beginner Contest 263）",
+  "startedAt": "2022-08-06T21:00:00+09:00",
+  "endedAt": "2022-08-06T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc263",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc263_a",
+    "abc263_b",
+    "abc263_c",
+    "abc263_d",
+    "abc263_e",
+    "abc263_f",
+    "abc263_g",
+    "abc263_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc263-task-list-d8140e8549e0d61121ec1070e29c29b68dba0a08e8f2c3a65c21ea6c8180b038",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

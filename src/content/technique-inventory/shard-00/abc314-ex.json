@@ -1,0 +1,23 @@
+{
+  "problemId": "abc314-ex",
+  "sourceRevisionIds": [
+    "source-abc314-editorial-6958-903fc195f820ea11b2d1c234636b2b3f311e60f34d6d00357ba1bab2b3125787",
+    "source-abc314-ex-problem-e573f2aa9925372ff091f6bb20223906f19c45f10b18478722aef8fc5baa4e85"
+  ],
+  "coreMethod": "abc314-ex「Disk and Segments」では、主解法候補として、区間端点と包含関係を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "区間端点と包含関係と解候補の対応を双方向に示し、列挙の漏れと重複がないことを確認する。",
+    "Disk and Segments 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["半開区間の扱い"],
+  "implementationConcerns": [
+    "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+    "状態 key と更新順序を固定し、同じ候補を二重に数えない。"
+  ],
+  "outcomeCandidates": [
+    "Disk and Segments 型の 区間端点と包含関係に対し、状態縮約を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

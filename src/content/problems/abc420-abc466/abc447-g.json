@@ -1,0 +1,20 @@
+{
+  "id": "abc447-g",
+  "contestId": "abc447",
+  "slotLabel": "G",
+  "officialTaskId": "abc447_g",
+  "title": "Div. 1 & Div. 2",
+  "officialUrl": "https://atcoder.jp/contests/abc447/tasks/abc447_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 6 \\leq N \\leq 10^5; 1 \\leq K_i \\leq N; 1 \\leq A_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc447-g-problem-c03ac610934126bc19d4d5f101725d00a6f56667a89b1edeec154307dfe53200",
+    "source-abc447-editorial-16718-a1b669c119b77dfc8a1a573bcb336299847d65177f0a055fe603e08d6272f111"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc356-f",
+  "contestId": "abc356",
+  "slotLabel": "F",
+  "officialTaskId": "abc356_f",
+  "title": "Distance Component Size Query",
+  "officialUrl": "https://atcoder.jp/contests/abc356/tasks/abc356_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq Q \\leq 2\\times 10^5; 0 \\leq K \\leq 10^{18}; For each query, 1 \\leq x \\leq 10^{18}.; For each query of the second type, the given x is in S at that point.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc356-f-problem-ff7fab795b8d9f8a7edcfcf4c31ab456e24710bdcf757f68dd9b2db4015b963a",
+    "source-abc356-editorial-10114-385f9336c50f21621b2c24a6263eb1fdf7353153925b6727b637471e3e2e6dce"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

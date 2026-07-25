@@ -1,0 +1,23 @@
+{
+  "problemId": "abc398-g",
+  "sourceRevisionIds": [
+    "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+    "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+  ],
+  "coreMethod": "abc398-g「Not Only Tree Game」では、主解法候補として、頂点と辺からなる状態グラフを同値な状態へ縮約し、必要な候補だけを制約内で列挙する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "頂点と辺からなる状態グラフと解候補の対応を双方向に示し、列挙の漏れと重複がないことを確認する。",
+    "Not Only Tree Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性"],
+  "implementationConcerns": [
+    "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+    "状態 key と更新順序を固定し、同じ候補を二重に数えない。"
+  ],
+  "outcomeCandidates": [
+    "Not Only Tree Game 型の 頂点と辺からなる状態グラフに対し、状態縮約を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

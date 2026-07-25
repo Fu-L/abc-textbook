@@ -1,0 +1,20 @@
+{
+  "id": "abc226-f",
+  "contestId": "abc226",
+  "slotLabel": "F",
+  "officialTaskId": "abc226_f",
+  "title": "Score of Permutations",
+  "officialUrl": "https://atcoder.jp/contests/abc226/tasks/abc226_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 50; 1 \\leq K \\leq 10^4; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc226-f-problem-445d4ec66745084a734b87bfa5c86445e188cebfd19fc703876bb5f7b890cdba",
+    "source-abc226-editorial-2878-2de04cf0703a44bc099836c041ba9edc8d01da823227f38738ef602d5dbe9e10"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "problemId": "abc331-e",
+  "sourceRevisionIds": [
+    "source-abc331-e-problem-c771615a9e19ac2c74b6969333bbc0bcf052767532d5a88a24ccf1d88f07dfab",
+    "source-abc331-editorial-7821-c847e2b391347e4d5dbf43067cce67fdb9d95ff161189a9d94fe04ec3eba528b"
+  ],
+  "coreMethod": "abc331-e「Set Meal」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "未処理候補の最小または最大 key を常に選ぶ greedy-choice property を保つ。",
+    "Set Meal 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "priority queue"],
+  "implementationConcerns": ["更新前の古い entry を識別して読み飛ばし、tie-break を決定的にする。"],
+  "outcomeCandidates": [
+    "Set Meal 型の 整数の約数・剰余構造に対し、priority queueを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

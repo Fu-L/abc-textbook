@@ -1,0 +1,20 @@
+{
+  "id": "abc443-f",
+  "contestId": "abc443",
+  "slotLabel": "F",
+  "officialTaskId": "abc443_f",
+  "title": "Non-Increasing Number",
+  "officialUrl": "https://atcoder.jp/contests/abc443/tasks/abc443_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 3\\times 10^6; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc443-f-problem-a265f7e24b275c6d7683481599950207c9a31fbf981eb33be438240bfde46da0",
+    "source-abc443-editorial-15197-a20cb5df4ba450c476b50c9c0f0fc1204fdf7c0999bdc9367872550ab414173b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

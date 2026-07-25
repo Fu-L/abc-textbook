@@ -1,0 +1,24 @@
+{
+  "problemId": "abc239-f",
+  "sourceRevisionIds": [
+    "source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5",
+    "source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5"
+  ],
+  "coreMethod": "abc239-f「Construct Highway」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+    "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+    "Construct Highway 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["Union-Find", "greedy choice と交換論法"],
+  "implementationConcerns": [
+    "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+    "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Construct Highway 型の問題に対し、Union-Findを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

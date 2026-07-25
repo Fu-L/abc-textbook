@@ -1,0 +1,20 @@
+{
+  "id": "abc261-ex",
+  "contestId": "abc261",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc261_h",
+  "title": "Game on Graph",
+  "officialUrl": "https://atcoder.jp/contests/abc261/tasks/abc261_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 0 \\leq M \\leq 2\\times 10^5; 1 \\leq v \\leq N; 1 \\leq A_i,B_i \\leq N; There is no multi-edges. That is, (A_i,B_i)\\neq(A_j,B_j) for i\\neq j.; There is no self-loops. That is, A_i\\neq B_i.; 0 \\leq C_i \\leq 10^9; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d",
+    "source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

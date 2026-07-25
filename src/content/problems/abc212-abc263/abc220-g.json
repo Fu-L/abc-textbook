@@ -1,0 +1,20 @@
+{
+  "id": "abc220-g",
+  "contestId": "abc220",
+  "slotLabel": "G",
+  "officialTaskId": "abc220_g",
+  "title": "Isosceles Trapezium",
+  "officialUrl": "https://atcoder.jp/contests/abc220/tasks/abc220_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 4 \\leq N \\leq 1000; -10^9 \\leq X_i,Y_i \\leq 10^9; 1 \\leq C_i \\leq 10^9; (X_i,Y_i) \\neq (X_j,Y_j) if i \\neq j.; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc220-g-problem-11cd77caf912f0d4d4a1772f3a50e387c0c294519ddc6ef41e8278462c72a6ed",
+    "source-abc220-editorial-2684-ebe75396fb3dc16f89b1952b2f1e9bb2bc23e34bff5179ed35fe39c2888ac327"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

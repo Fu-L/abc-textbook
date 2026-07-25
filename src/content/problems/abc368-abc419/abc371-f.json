@@ -1,0 +1,20 @@
+{
+  "id": "abc371-f",
+  "contestId": "abc371",
+  "slotLabel": "F",
+  "officialTaskId": "abc371_f",
+  "title": "Takahashi in Narrow Road",
+  "officialUrl": "https://atcoder.jp/contests/abc371/tasks/abc371_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 0\\leq X_1 < X_2 < \\dotsb < X_N \\leq10^8; 1\\leq Q\\leq2\\times10^5; 1\\leq T_i\\leq N\\ (1\\leq i\\leq Q); 0\\leq G_i\\leq10^8\\ (1\\leq i\\leq Q); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc371-f-problem-7c73fa17ad05c2bcfdd4dbe82c66272f01165812986e3aad79cacead3c2c3ae5",
+    "source-abc371-editorial-10926-fcc33011042b86a27c41fe94fb7ae603c81ce7d0ec16740e8615064d8bde0526"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

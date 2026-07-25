@@ -1,0 +1,20 @@
+{
+  "id": "abc395-f",
+  "contestId": "abc395",
+  "slotLabel": "F",
+  "officialTaskId": "abc395_f",
+  "title": "Smooth Occlusion",
+  "officialUrl": "https://atcoder.jp/contests/abc395/tasks/abc395_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq U _ i \\leq 10^9 \\ (1 \\leq i \\leq N); 1 \\leq D _ i \\leq 10^9 \\ (1 \\leq i \\leq N); 1 \\leq X \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc395-f-problem-df822de6d2bbd93a79019da4bb858e300849ca17a277929a897ccf9206036c48",
+    "source-abc395-editorial-12344-2eb8137f8829c1e0b7a623f2ec4e13324710e3793f7e853d5497c8205592d1d5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

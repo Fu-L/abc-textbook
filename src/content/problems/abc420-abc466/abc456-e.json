@@ -1,0 +1,20 @@
+{
+  "id": "abc456-e",
+  "contestId": "abc456",
+  "slotLabel": "E",
+  "officialTaskId": "abc456_e",
+  "title": "Endless Holidays",
+  "officialUrl": "https://atcoder.jp/contests/abc456/tasks/abc456_e",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10^5; 1 \\leq N \\leq 10^5; N-1 \\leq M \\leq 10^5; 1 \\leq U_i \\lt V_i \\leq N; Any pair of cities can be reached from each other by traversing some roads.; 2 \\leq W \\leq 10; T,N,M,U_i,V_i,W are integers.; S_i is a string of length W consisting of o, x.; The sum of N over all test cases is at most 10^5.; The sum of M over all test cases is at most 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc456-e-problem-c3e51b63fd40c2ce2328caafad47b2b781ce1afa77274de1f82ff6145927c238",
+    "source-abc456-editorial-19849-c986ee8612d12ce480a296e55c2761fbd42c85ed54d8d94616a63d4505cc0d52"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

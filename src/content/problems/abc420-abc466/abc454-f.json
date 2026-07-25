@@ -1,0 +1,20 @@
+{
+  "id": "abc454-f",
+  "contestId": "abc454",
+  "slotLabel": "F",
+  "officialTaskId": "abc454_f",
+  "title": "Make it Palindrome 2",
+  "officialUrl": "https://atcoder.jp/contests/abc454/tasks/abc454_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T; 1\\le N\\le 2\\times 10^5; 1\\le M\\le 10^9; 0\\le A_i < M; The sum of N over all test cases is at most 2\\times 10^5.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc454-f-problem-bbc8d24f06252a3e5e57c69a70f9a50b8e76f4cd8da3d0d358d05e4be52a59a5",
+    "source-abc454-editorial-18568-8ce2cba3bb83660699ad4c3dbb33f0ab5d396d236c33e9a6cea0b08bc3143e9e"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

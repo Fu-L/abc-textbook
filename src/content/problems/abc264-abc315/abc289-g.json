@@ -1,0 +1,20 @@
+{
+  "id": "abc289-g",
+  "contestId": "abc289",
+  "slotLabel": "G",
+  "officialTaskId": "abc289_g",
+  "title": "Shopping in AtCoder store",
+  "officialUrl": "https://atcoder.jp/contests/abc289/tasks/abc289_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 1\\leq M\\leq2\\times10^5; 0\\leq B _ i\\leq10^9\\quad(1\\leq i\\leq N); 0\\leq C _ i\\leq10^9\\quad(1\\leq i\\leq M); All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63",
+    "source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

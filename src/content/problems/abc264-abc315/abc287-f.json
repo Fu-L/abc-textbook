@@ -1,0 +1,20 @@
+{
+  "id": "abc287-f",
+  "contestId": "abc287",
+  "slotLabel": "F",
+  "officialTaskId": "abc287_f",
+  "title": "Components",
+  "officialUrl": "https://atcoder.jp/contests/abc287/tasks/abc287_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5000; 1 \\leq a_i \\lt b_i \\leq N; The given graph is a tree.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc287-f-problem-e74e569b0d278aac06c0a9b4ffdd3abf77989fd2a435607ec62fd7f8ff6347f7",
+    "source-abc287-editorial-5632-36fff4af2ff56b09b2f6827fd12c787f4bba6f0510b282ceb2ed77f90a1d8eba"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc300-ex",
+  "sourceRevisionIds": [
+    "source-abc300-editorial-6269-8ee6c801cc635135e368a145e5422f67ea6f3b84bb1f84c9a3d8abdbe3e9c62f",
+    "source-abc300-ex-problem-a4193e2c6420fe848a52d2fcde204ca005b9263c25643e305fd3a0f5154a481f"
+  ],
+  "coreMethod": "abc300-ex「Fibonacci: Revisited」では、主解法候補として、上位桁から tight・leading-zero・必要な集約値を状態に持つ digit DP を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "同じ prefix 状態以降の選択肢は一致し、tight が上限との大小関係を過不足なく表す。",
+    "Fibonacci: Revisited 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["配列と prefix の添字管理", "桁 DP"],
+  "implementationConcerns": [
+    "leading zero を通常の数字 0 と区別し、上限を含む境界遷移を確認する。"
+  ],
+  "outcomeCandidates": [
+    "Fibonacci: Revisited 型の 列の順序と prefix 状態に対し、桁 DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

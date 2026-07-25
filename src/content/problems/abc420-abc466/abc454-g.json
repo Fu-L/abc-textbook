@@ -1,0 +1,20 @@
+{
+  "id": "abc454-g",
+  "contestId": "abc454",
+  "slotLabel": "G",
+  "officialTaskId": "abc454_g",
+  "title": "Mode in the Subtree",
+  "officialUrl": "https://atcoder.jp/contests/abc454/tasks/abc454_g",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2.5 \\times 10^6; 1 \\leq p_i \\lt i; 1 \\leq c_i \\leq N; 1 \\leq \\mathrm{seed} \\lt 2^{31}; 2 \\leq M \\leq \\min(N, 10^5); 1 \\leq F \\leq N; 1 \\leq q_i \\lt i; 1 \\leq d_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc454-g-problem-fb905e5fd81e3cc2ba3f70fbe1984b727ee3d478c85de7cd863e7777f4e3a4f6",
+    "source-abc454-editorial-19112-21efa506cd2931dfa4f71807ea339ebc5965f80a6cd28ee83425351988c7d598"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc384-e",
+  "contestId": "abc384",
+  "slotLabel": "E",
+  "officialTaskId": "abc384_e",
+  "title": "Takahashi is Slime 2",
+  "officialUrl": "https://atcoder.jp/contests/abc384/tasks/abc384_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq H,W\\leq500; 1\\leq P\\leq H; 1\\leq Q\\leq W; 1\\leq X\\leq10^9; 1\\leq S _ {i,j}\\leq10^{12}; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f",
+    "source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

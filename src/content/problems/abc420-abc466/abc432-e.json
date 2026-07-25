@@ -1,0 +1,20 @@
+{
+  "id": "abc432-e",
+  "contestId": "abc432",
+  "slotLabel": "E",
+  "officialTaskId": "abc432_e",
+  "title": "Clamp",
+  "officialUrl": "https://atcoder.jp/contests/abc432/tasks/abc432_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 5\\times 10^5; 1\\leq Q \\leq 2\\times 10^5; 0\\leq A_i \\leq 5\\times 10^5; For queries of the first type, 1\\leq x\\leq N 0\\leq y \\leq 5\\times 10^5; 1\\leq x\\leq N; 0\\leq y \\leq 5\\times 10^5; For queries of the second type, 0\\leq l,r \\leq 5\\times 10^5; 0\\leq l,r \\leq 5\\times 10^5; All inputs are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc432-e-problem-80faeeba809117447ceb08d66cf6a35cb7e0492c35323f90c7398b76d946fde4",
+    "source-abc432-editorial-14572-764bfa5a99ff52099e6cc8417442383b9b5d78e8b93cb45529ea827bf613f6d9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

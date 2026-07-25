@@ -1,0 +1,20 @@
+{
+  "id": "abc404-g",
+  "contestId": "abc404",
+  "slotLabel": "G",
+  "officialTaskId": "abc404_g",
+  "title": "Specified Range Sums",
+  "officialUrl": "https://atcoder.jp/contests/abc404/tasks/abc404_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N,M \\le 4000; 1 \\le L_i \\le R_i \\le N; 1 \\le S_i \\le 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee",
+    "source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

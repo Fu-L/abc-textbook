@@ -1,0 +1,12 @@
+{
+  "contestId": "abc232",
+  "label": "F",
+  "officialTaskId": "abc232_f",
+  "officialOrder": 5,
+  "availability": "exists",
+  "catalogStatus": "uncollected",
+  "holdReason": null,
+  "problemId": "abc232-f",
+  "sourceRevisionId": "source-abc232-task-list-bb4cf7e3f73fed814dff2c5cf16415a5b2485eb6f317183af07dfd57c53d6612",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "abc296",
+  "number": 296,
+  "title": "AtCoder Beginner Contest 296",
+  "startedAt": "2023-04-01T21:00:00+09:00",
+  "endedAt": "2023-04-01T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc296",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc296_a",
+    "abc296_b",
+    "abc296_c",
+    "abc296_d",
+    "abc296_e",
+    "abc296_f",
+    "abc296_g",
+    "abc296_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc296-task-list-fb1dd12a3b55c32122052d6be9df4659b247bc4909821538e83a16c12037b561",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,22 @@
+{
+  "problemId": "abc437-e",
+  "sourceRevisionIds": [
+    "source-abc437-e-problem-4cba7e5ca3c04372a2c7647c04627c95c7aceaacc84a6d8c0b462fb52ad53db4",
+    "source-abc437-editorial-14880-76723f083e28ba8b598f49540087d2b1e45e518ac5b7972abb09408ca9ce43e5"
+  ],
+  "coreMethod": "abc437-e「Sort Arrays」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
+    "Sort Arrays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["順列と逆写像", "Trie"],
+  "implementationConcerns": [
+    "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。"
+  ],
+  "outcomeCandidates": [
+    "Sort Arrays 型の 順列の位置と値の対応に対し、Trieを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

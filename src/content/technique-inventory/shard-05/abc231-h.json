@@ -1,0 +1,22 @@
+{
+  "problemId": "abc231-h",
+  "sourceRevisionIds": [
+    "source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948",
+    "source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"
+  ],
+  "coreMethod": "abc231-h「Minimum Coloring」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各増加路が残余グラフで最小費用なので、ポテンシャルを保った交換論により総費用の最適性が維持される。",
+    "Minimum Coloring 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["grid の座標表現", "最小費用流と残余グラフ"],
+  "implementationConcerns": [
+    "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。"
+  ],
+  "outcomeCandidates": [
+    "Minimum Coloring 型の 盤面上の位置と局所遷移に対し、最小費用流と残余グラフを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

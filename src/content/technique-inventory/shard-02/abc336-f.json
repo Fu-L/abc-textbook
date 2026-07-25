@@ -1,0 +1,25 @@
+{
+  "problemId": "abc336-f",
+  "sourceRevisionIds": [
+    "source-abc336-editorial-9077-0cd54d18f7cc11b31dcadd7717f47d87708c62acb78535738776c658707e70f8",
+    "source-abc336-f-problem-a8622f4a21e80664937f8b887d949e748d985863cfc0fec2d26b8c93ceb99fb0"
+  ],
+  "coreMethod": "abc336-f「Rotation Puzzle」では、初期盤面と完成盤面の双方から深さ K/2 まで状態を列挙し、到達 layer の共通状態から最小操作回数を復元する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "長さ K 以下の任意の操作列は中央で二分でき、後半を逆操作として完成盤面側から辿れば、両側の到達集合が必ず中央状態で交わる。",
+    "Rotation Puzzle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "asymptoticComplexity": {
+    "time": "O(3^{K/2} KHW)（公式解法全体。特殊な計算量解析を含む）"
+  },
+  "prerequisiteCandidates": ["双方向探索と半分全列挙", "特殊な漸近計算量の見積もり"],
+  "implementationConcerns": [
+    "直前操作の即時打ち消しを除外し、盤面を衝突しない canonical key で保存する。"
+  ],
+  "outcomeCandidates": [
+    "Rotation Puzzle 型の問題に対し、双方向探索と半分全列挙を選び、状態・証明・特殊計算量を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

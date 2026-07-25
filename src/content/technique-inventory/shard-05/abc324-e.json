@@ -1,0 +1,22 @@
+{
+  "problemId": "abc324-e",
+  "sourceRevisionIds": [
+    "source-abc324-e-problem-122462833dadb1a89dbaa3b7de191d7423f1c4b68966e12b5abbd2ed0bcb20e8",
+    "source-abc324-editorial-7407-ac1b02cade60fe34b326d626abed852b9d908175f319770f619c493b275c28ba"
+  ],
+  "coreMethod": "abc324-e「Joint Two Strings」では、各文字列が目標文字列の prefix と suffix を何文字 subsequence として取れるか求め、補完可能な組を整列して数える。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "連結後に目標を subsequence として含むことは、前半が取れる prefix 長と後半が取れる suffix 長の和が目標長以上であることと同値になる。",
+    "Joint Two Strings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["subsequence の貪欲照合と二分探索"],
+  "implementationConcerns": [
+    "空 prefix・空 suffix を許し、同じ文字列を両側に選べる ordered pair として数える。"
+  ],
+  "outcomeCandidates": [
+    "Joint Two Strings 型の問題に対し、subsequence の貪欲照合と二分探索を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

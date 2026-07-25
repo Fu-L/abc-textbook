@@ -1,0 +1,20 @@
+{
+  "id": "abc278-g",
+  "contestId": "abc278",
+  "slotLabel": "G",
+  "officialTaskId": "abc278_g",
+  "title": "Generalized Subtraction Game",
+  "officialUrl": "https://atcoder.jp/contests/abc278/tasks/abc278_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2000; 1 \\leq L \\leq R \\leq N; N, L, and R are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc278-g-problem-07282b4beb8ce5efa2f662d474e296266315d4bfdd42145df14336f17f49edd6",
+    "source-abc278-editorial-5237-ac31c97ad00111ee5b5cf4db267b3ca24195bd7a9483e542bc2bb6ba7d33497a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

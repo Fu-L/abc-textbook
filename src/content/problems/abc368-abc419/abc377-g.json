@@ -1,0 +1,20 @@
+{
+  "id": "abc377-g",
+  "contestId": "abc377",
+  "slotLabel": "G",
+  "officialTaskId": "abc377_g",
+  "title": "Edit to Match",
+  "officialUrl": "https://atcoder.jp/contests/abc377/tasks/abc377_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2\\times 10^5; Each S_i is a string of length at least 1 consisting of lowercase English letters.; \\displaystyle \\sum_{i=1}^N |S_i|\\le 2\\times 10^5",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc377-g-problem-c47c0dc695430363ff5c459e97a1f4cdc8c4d0ed503230ac98b5fc0495cda29a",
+    "source-abc377-editorial-11244-f5941b10cd7d44e81a62374d091caa772405c26ae8fe723044fa153ec8db2c9b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc343-g",
+  "contestId": "abc343",
+  "slotLabel": "G",
+  "officialTaskId": "abc343_g",
+  "title": "Compress Strings",
+  "officialUrl": "https://atcoder.jp/contests/abc343/tasks/abc343_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \\leq N \\leq 20; S_i is a string consisting of lowercase English letters whose length is at least 1.; The total length of S_1, S_2, \\dots, S_N is at most 2\\times 10^5.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc343-g-problem-bd0d4f09487ab73e9780b1979149827420246173bfd0f70e1e583c04da30a63e",
+    "source-abc343-editorial-9436-6a670070b7c547f803b964c0cf52d50537c5e486adca0024522f5353a5db112a"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

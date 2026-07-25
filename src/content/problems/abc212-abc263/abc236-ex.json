@@ -1,0 +1,20 @@
+{
+  "id": "abc236-ex",
+  "contestId": "abc236",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc236_h",
+  "title": "Distinct Multiples",
+  "officialUrl": "https://atcoder.jp/contests/abc236/tasks/abc236_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 16; 1 \\leq M \\leq 10^{18}; 1 \\leq D_i \\leq M \\, (1 \\leq i \\leq N); All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53",
+    "source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

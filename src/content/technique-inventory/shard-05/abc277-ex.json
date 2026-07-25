@@ -1,0 +1,22 @@
+{
+  "problemId": "abc277-ex",
+  "sourceRevisionIds": [
+    "source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66",
+    "source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245"
+  ],
+  "coreMethod": "abc277-ex「Constrained Sums」では、整数条件を threshold ごとの真偽変数へ分解し、各制約を 2-SAT の含意辺として表す。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "各二項制約と二つの含意辺が論理的に同値で、変数と否定が同じ強連結成分にないことが充足可能性の必要十分条件になる。",
+    "Constrained Sums 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["2-SAT と implication graph"],
+  "implementationConcerns": [
+    "変数と否定の vertex index、threshold の単調含意、常真・常偽 literal を一貫して符号化する。"
+  ],
+  "outcomeCandidates": [
+    "Constrained Sums 型の問題に対し、2-SAT と implication graphを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

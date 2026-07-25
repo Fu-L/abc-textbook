@@ -1,0 +1,20 @@
+{
+  "id": "abc372",
+  "number": 372,
+  "title": "UNIQUE VISION Programming Contest 2024 Autumn (AtCoder Beginner Contest 372)",
+  "startedAt": "2024-09-21T21:00:00+09:00",
+  "endedAt": "2024-09-21T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc372",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc372_a",
+    "abc372_b",
+    "abc372_c",
+    "abc372_d",
+    "abc372_e",
+    "abc372_f",
+    "abc372_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc372-task-list-6445d00765fbd1c6c7009ad4c13e5638d75da1bf567b3dc4092f72cabec33801",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

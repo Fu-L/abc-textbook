@@ -1,0 +1,20 @@
+{
+  "id": "abc411",
+  "number": 411,
+  "title": "UNIQUE VISION Programming Contest 2025 Summer (AtCoder Beginner Contest 411)",
+  "startedAt": "2025-06-21T21:00:00+09:00",
+  "endedAt": "2025-06-21T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc411",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G"],
+  "officialTaskIds": [
+    "abc411_a",
+    "abc411_b",
+    "abc411_c",
+    "abc411_d",
+    "abc411_e",
+    "abc411_f",
+    "abc411_g"
+  ],
+  "taskOrderSourceRevisionId": "source-abc411-task-list-4ad15ff99c25a86bd379bcfbc895df4bb5329320f7bf30c86cbd73b8e32675ef",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc465-f",
+  "contestId": "abc465",
+  "slotLabel": "F",
+  "officialTaskId": "abc465_f",
+  "title": "Sjeltzer?",
+  "officialUrl": "https://atcoder.jp/contests/abc465/tasks/abc465_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \\leq N \\leq 3 \\times 10^5; S_i is a string consisting of digits (0-9).; |S_i| = 6; S_1, \\dots, S_N are distinct.; V_i is an integer.; 1 \\leq V_i \\leq 10^9; Q is an integer.; 1 \\leq Q \\leq 3 \\times 10^5; In each query, x and y are strings consisting of digits (0-9).; In each query, |x| = |y| = 6.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc465-f-problem-c9109dea2048fa5cc3b2fce223d2b8a41089a550bf80d96a71c5b1220b08bde1",
+    "source-abc465-editorial-22562-36c2843189624076ba172ca8a1b2407c7540468aee86c2eb28e660f3bb35e6b4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

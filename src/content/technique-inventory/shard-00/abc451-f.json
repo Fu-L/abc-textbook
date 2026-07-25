@@ -1,0 +1,25 @@
+{
+  "problemId": "abc451-f",
+  "sourceRevisionIds": [
+    "source-abc451-editorial-18091-ee0e42ed4ad9b07800e171e23a7943b9727d1666e268304fbe47d241fe0b351a",
+    "source-abc451-f-problem-1795336b8ffdf013868cbc1740d0a0261d6fb20324849793e539548d9821aeb5"
+  ],
+  "coreMethod": "abc451-f「Make Bipartite 3」では、各二部連結成分の二色集合を管理し、新辺で成分を結ぶ際に小さい側だけを必要なら反転して DSU merge する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "二部成分の彩色は全反転を除き一意で、小さい成分の頂点は走査されるたび所属成分サイズが倍以上になる。",
+    "Make Bipartite 3 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "asymptoticComplexity": {
+    "time": "O(Q α[N] + N log N)（公式解法全体。特殊な計算量解析を含む）"
+  },
+  "prerequisiteCandidates": ["二部彩色、DSU、small-to-large merge", "特殊な漸近計算量の見積もり"],
+  "implementationConcerns": [
+    "同一成分内の同色辺で以後不可能を固定し、成分寄与 min(白,黒) を merge 前後で差分更新する。"
+  ],
+  "outcomeCandidates": [
+    "Make Bipartite 3 型の問題に対し、二部彩色、DSU、small-to-large mergeを選び、状態・証明・特殊計算量を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

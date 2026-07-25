@@ -1,0 +1,20 @@
+{
+  "id": "abc404-f",
+  "contestId": "abc404",
+  "slotLabel": "F",
+  "officialTaskId": "abc404_f",
+  "title": "Lost and Pound",
+  "officialUrl": "https://atcoder.jp/contests/abc404/tasks/abc404_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2\\times 10^5; 1 \\le T \\le 30; 1 \\le M \\le 30; 1 \\le K \\le 30; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc404-f-problem-0177ad06dec4c00128c31966769f7140fae58529868e6963494b7bd013a756ab",
+    "source-abc404-editorial-12846-02a4f8e1d277892cd04c396236017ee727c354a0679b96a497b9856107a626f3"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

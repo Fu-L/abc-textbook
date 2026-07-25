@@ -1,0 +1,20 @@
+{
+  "id": "abc237-e",
+  "contestId": "abc237",
+  "slotLabel": "E",
+  "officialTaskId": "abc237_e",
+  "title": "Skiing",
+  "officialUrl": "https://atcoder.jp/contests/abc237/tasks/abc237_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; N-1 \\leq M \\leq \\min( 2\\times 10^5,\\frac{N(N-1)}{2}); 0 \\leq H_i\\leq 10^8 (1 \\leq i \\leq N); 1 \\leq U_i < V_i \\leq N (1 \\leq i \\leq M); (U_i,V_i) \\neq (U_j, V_j) if i \\neq j.; All values in input are integers.; It is possible to travel between any two spaces using some slopes.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4",
+    "source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc440-e",
+  "contestId": "abc440",
+  "slotLabel": "E",
+  "officialTaskId": "abc440_e",
+  "title": "Cookies",
+  "officialUrl": "https://atcoder.jp/contests/abc440/tasks/abc440_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 50; 1 \\leq K \\leq 10^5; 1 \\leq X \\leq \\min\\left(10^5, \\binom{N+K-1}{K}\\right); -10^9 \\leq A_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29",
+    "source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

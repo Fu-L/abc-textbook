@@ -1,0 +1,20 @@
+{
+  "id": "abc398-g",
+  "contestId": "abc398",
+  "slotLabel": "G",
+  "officialTaskId": "abc398_g",
+  "title": "Not Only Tree Game",
+  "officialUrl": "https://atcoder.jp/contests/abc398/tasks/abc398_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 0 \\leq M \\leq 2\\times 10^5; 1 \\leq U_i < V_i \\leq N; The given graph does not contain an odd cycle.; The given graph does not contain multi-edges.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d",
+    "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

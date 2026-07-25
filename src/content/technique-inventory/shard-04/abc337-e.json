@@ -1,0 +1,22 @@
+{
+  "problemId": "abc337-e",
+  "sourceRevisionIds": [
+    "source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107",
+    "source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"
+  ],
+  "coreMethod": "abc337-e「Bad Juice」では、対象番号を二進 codeword に割り当て、各 bit が 1 の対象集合を一回の検査へまとめて結果から番号を復号する。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "ceil(log2 N) bit の codeword は N 個の対象を一意に区別し、各検査結果が対応 bit をそのまま与える。",
+    "Bad Juice 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["二進表現と情報量の下界"],
+  "implementationConcerns": [
+    "番号の 0-origin・1-origin を変換し、空の検査集合と対話出力の flush を扱う。"
+  ],
+  "outcomeCandidates": [
+    "Bad Juice 型の問題に対し、二進表現と情報量の下界を選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

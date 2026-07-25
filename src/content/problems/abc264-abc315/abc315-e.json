@@ -1,0 +1,20 @@
+{
+  "id": "abc315-e",
+  "contestId": "abc315",
+  "slotLabel": "E",
+  "officialTaskId": "abc315_e",
+  "title": "Prerequisites",
+  "officialUrl": "https://atcoder.jp/contests/abc315/tasks/abc315_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 0 \\leq C_i < N; \\sum_{i=1}^{N} C_i \\leq 2 \\times 10^5; C_1 \\geq 1; 1 \\leq P_{i,j} \\leq N; P_{i,j} \\neq P_{i,k} for 1 \\leq j < k \\leq C_i.; It is possible to read all the books.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc315-e-problem-746510fe523d6206c9704c9bc4663caf3f35c2e5369ba36984004381f97f11ed",
+    "source-abc315-editorial-6989-65329880be8ffdf3bbd6f96ad076c13c71c69b7fb34114edd01acb4deec7de6f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

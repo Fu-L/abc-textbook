@@ -1,0 +1,21 @@
+{
+  "id": "abc283",
+  "number": 283,
+  "title": "UNIQUE VISION Programming Contest 2022 Winter(AtCoder Beginner Contest 283)",
+  "startedAt": "2022-12-24T21:00:00+09:00",
+  "endedAt": "2022-12-24T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc283",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc283_a",
+    "abc283_b",
+    "abc283_c",
+    "abc283_d",
+    "abc283_e",
+    "abc283_f",
+    "abc283_g",
+    "abc283_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc283-task-list-a26491bd64fbb93d67eb0039a27a920bba2b867983a298a5e95d7310829f0d68",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

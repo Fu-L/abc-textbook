@@ -1,0 +1,22 @@
+{
+  "problemId": "abc339-f",
+  "sourceRevisionIds": [
+    "source-abc339-editorial-9206-783ff9c3caa8b6c79125699ba25139d0f342ede0ece4c0a1081ab3044f3c70a2",
+    "source-abc339-f-problem-fd4fd095dde8aba7756de773d9f4b871b37d3563a7e3899c3f38b694662189b5"
+  ],
+  "coreMethod": "abc339-f「Product Equality」では、巨大整数を複数の法で fingerprint 化し、値と積の fingerprint の frequency を照合して三つ組を数える。この状態表現から答えを構成する。",
+  "proofIdeas": [
+    "真に等しい積は全ての法で同じ剰余になり、十分大きい法または複数法では異なる値の衝突確率を制御できる。",
+    "Product Equality 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["modular fingerprint と frequency map"],
+  "implementationConcerns": [
+    "積を取る前に広い整数型へ上げ、衝突を許す確率的解法か exact な多倍長比較かを明記する。"
+  ],
+  "outcomeCandidates": [
+    "Product Equality 型の問題に対し、modular fingerprint と frequency mapを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "reviewed"
+}

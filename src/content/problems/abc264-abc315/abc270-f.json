@@ -1,0 +1,20 @@
+{
+  "id": "abc270-f",
+  "contestId": "abc270",
+  "slotLabel": "F",
+  "officialTaskId": "abc270_f",
+  "title": "Transportation",
+  "officialUrl": "https://atcoder.jp/contests/abc270/tasks/abc270_f",
+  "constraintsSummary": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq M \\leq 2\\times 10^5; 1\\leq X_i\\leq 10^9; 1\\leq Y_i\\leq 10^9; 1\\leq A_i<B_i\\leq N; 1\\leq Z_i\\leq 10^9; (A_i,B_i)\\neq (A_j,B_j), if i\\neq j.; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc270-f-problem-efec89ac1c43e22dd35597a3e0251e203121f0c37021c39d09bbaead2ee11869",
+    "source-abc270-editorial-4879-a4659bb56ec1be762b27323f903ffbc21ef4d2d95fc7cf02b8275440b009f3df"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

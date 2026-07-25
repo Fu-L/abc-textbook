@@ -1,0 +1,20 @@
+{
+  "id": "abc418-g",
+  "contestId": "abc418",
+  "slotLabel": "G",
+  "officialTaskId": "abc418_g",
+  "title": "Binary Operation",
+  "officialUrl": "https://atcoder.jp/contests/abc418/tasks/abc418_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; N is an integer.; T is a string of length N consisting of 0 and 1.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc418-g-problem-051665252efa45310009132536ebf03318397dc1fb1a4c70829b3e7af7af5df3",
+    "source-abc418-editorial-13620-544f5a49be506e4052a25315d3ce6d6ac71f96bb21ad9c9fbf58a3022af1ee2b"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

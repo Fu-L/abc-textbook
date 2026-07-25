@@ -1,0 +1,20 @@
+{
+  "id": "abc237-ex",
+  "contestId": "abc237",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc237_h",
+  "title": "Hakata",
+  "officialUrl": "https://atcoder.jp/contests/abc237/tasks/abc237_h",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq |S| \\leq 200; S consists of lowercase English letters.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4",
+    "source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

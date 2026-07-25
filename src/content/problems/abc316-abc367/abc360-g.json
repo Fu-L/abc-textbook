@@ -1,0 +1,20 @@
+{
+  "id": "abc360-g",
+  "contestId": "abc360",
+  "slotLabel": "G",
+  "officialTaskId": "abc360_g",
+  "title": "Suitable Edit for LIS",
+  "officialUrl": "https://atcoder.jp/contests/abc360/tasks/abc360_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc360-g-problem-afcb71f00ad3f3e54a1b1614aaa8488b7f197aba168ef8042cad3a714f6d0a41",
+    "source-abc360-editorial-10311-f2bf65622d7fe204fadcbd584906d7e0f8de510da599308200d58d73cee9d109"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

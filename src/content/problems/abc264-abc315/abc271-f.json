@@ -1,0 +1,20 @@
+{
+  "id": "abc271-f",
+  "contestId": "abc271",
+  "slotLabel": "F",
+  "officialTaskId": "abc271_f",
+  "title": "XOR on Grid Path",
+  "officialUrl": "https://atcoder.jp/contests/abc271/tasks/abc271_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 20; 0 \\leq a_{i, j} \\lt 2^{30} \\, (1 \\leq i, j \\leq N); All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa",
+    "source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

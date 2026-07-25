@@ -1,0 +1,20 @@
+{
+  "id": "abc280-f",
+  "contestId": "abc280",
+  "slotLabel": "F",
+  "officialTaskId": "abc280_f",
+  "title": "Pay or Receive",
+  "officialUrl": "https://atcoder.jp/contests/abc280/tasks/abc280_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 10^5; 0\\leq M \\leq 10^5; 1\\leq Q \\leq 10^5; 1\\leq A_i,B_i,X_i,Y_i \\leq N; 0\\leq C_i \\leq 10^9; All values in the input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc280-f-problem-47f71a8cdee8536d7a88cdb6ec9f45a36b4048b5445c952d60040e01ecc44ae9",
+    "source-abc280-editorial-5303-aea62deae9b25f1c4e4b148b805c4bf36522b9a2edc9a3e1d8ad4c9488e912b0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc294-ex",
+  "contestId": "abc294",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc294_h",
+  "title": "K-Coloring",
+  "officialUrl": "https://atcoder.jp/contests/abc294/tasks/abc294_h",
+  "constraintsSummary": "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 30; 0 \\leq M \\leq \\min \\left(30, \\frac{N(N-1)}{2} \\right); 1 \\leq K \\leq 10^9; 1 \\leq u_i \\lt v_i \\leq N; The given graph is simple.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521",
+    "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

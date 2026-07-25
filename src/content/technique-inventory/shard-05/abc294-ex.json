@@ -1,0 +1,20 @@
+{
+  "problemId": "abc294-ex",
+  "sourceRevisionIds": [
+    "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0",
+    "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"
+  ],
+  "coreMethod": "abc294-ex「K-Coloring」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+  "proofIdeas": [
+    "各部分解を選択集合と終端状態で一意に分類し、最後の一手を外す帰納法で遷移の完全性を示す。",
+    "K-Coloring 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  ],
+  "prerequisiteCandidates": ["グラフの到達可能性", "bitmask と subset DP"],
+  "implementationConcerns": ["集合への追加判定、部分集合列挙、状態数 2^N の型と配列長を確認する。"],
+  "outcomeCandidates": [
+    "K-Coloring 型の 頂点と辺からなる状態グラフに対し、bitmask と subset DPを選び、状態と証明を一貫して設計できる。"
+  ],
+  "adHocElements": [],
+  "authorId": "person-maintainer",
+  "reviewStatus": "draft"
+}

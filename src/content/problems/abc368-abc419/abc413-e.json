@@ -1,0 +1,20 @@
+{
+  "id": "abc413-e",
+  "contestId": "abc413",
+  "slotLabel": "E",
+  "officialTaskId": "abc413_e",
+  "title": "Reverse 2^i",
+  "officialUrl": "https://atcoder.jp/contests/abc413/tasks/abc413_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10^{5}; 1 \\leq N \\leq 18; P is a permutation of (1,2,3,\\ldots,2^{N}).; For each input file, the sum of 2^N over all test cases is at most 3 \\times 10^{5}.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc413-e-problem-b33e30b82a6df49f0dc88ff9bbab8b13863a9d73d69009e0e22b19166cd6c101",
+    "source-abc413-editorial-13406-d94240a40fe855e57af83485a4cd057185bab32505c42cac77e1e73f3c2d50e4"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

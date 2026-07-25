@@ -1,0 +1,21 @@
+{
+  "id": "abc269",
+  "number": 269,
+  "title": "UNICORN Programming Contest 2022(AtCoder Beginner Contest 269)",
+  "startedAt": "2022-09-17T21:00:00+09:00",
+  "endedAt": "2022-09-17T22:40:00+09:00",
+  "officialUrl": "https://atcoder.jp/contests/abc269",
+  "officialTaskOrder": ["A", "B", "C", "D", "E", "F", "G", "Ex"],
+  "officialTaskIds": [
+    "abc269_a",
+    "abc269_b",
+    "abc269_c",
+    "abc269_d",
+    "abc269_e",
+    "abc269_f",
+    "abc269_g",
+    "abc269_h"
+  ],
+  "taskOrderSourceRevisionId": "source-abc269-task-list-1efe7b8c4cb2fe275b1070826978715290946ce2874f58cd238a787ffa61e99d",
+  "checkedAt": "2026-07-24T23:59:30+09:00"
+}

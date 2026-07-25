@@ -1,0 +1,20 @@
+{
+  "id": "abc446-f",
+  "contestId": "abc446",
+  "slotLabel": "F",
+  "officialTaskId": "abc446_f",
+  "title": "Reachable Set 2",
+  "officialUrl": "https://atcoder.jp/contests/abc446/tasks/abc446_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 3\\times 10^5; 1\\leq M\\leq 3\\times 10^5; 1\\leq U_i,V_i\\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc446-f-problem-f542f915a44d41318c9a77b17d56066f497fa351159eabce91ad755de4b504ba",
+    "source-abc446-editorial-16384-e279164f75dd3bd2328adc1e2913cfadc8fe01e518d1feeff4473560ea3eae4f"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

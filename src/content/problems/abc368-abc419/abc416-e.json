@@ -1,0 +1,20 @@
+{
+  "id": "abc416-e",
+  "contestId": "abc416",
+  "slotLabel": "E",
+  "officialTaskId": "abc416_e",
+  "title": "Development",
+  "officialUrl": "https://atcoder.jp/contests/abc416/tasks/abc416_e",
+  "constraintsSummary": "Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 500; 0 \\leq M \\leq 10^5; 1 \\leq A_i < B_i \\leq N; 1 \\leq C_i \\leq 10^9; 0 \\leq K \\leq N; 1 \\leq T \\leq 10^9; 1 \\leq D_1 < \\dots < D_K \\leq N; 1 \\leq Q \\leq 1000; For type 1 queries: 1\\leq x < y \\leq N, 1 \\leq t \\leq 10^9.; For type 2 queries: 1 \\leq x \\leq N.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc416-e-problem-d0213006b42ade435c4d82062e596bb88e0fc8daa09ff1eb8148bf011495855b",
+    "source-abc416-editorial-13536-14e98e1d6c7b3d87f4b6d704d63bd0be9524047bd30d39af71692ce80fef0a56"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

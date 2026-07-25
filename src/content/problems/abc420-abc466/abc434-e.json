@@ -1,0 +1,20 @@
+{
+  "id": "abc434-e",
+  "contestId": "abc434",
+  "slotLabel": "E",
+  "officialTaskId": "abc434_e",
+  "title": "Distribute Bunnies",
+  "officialUrl": "https://atcoder.jp/contests/abc434/tasks/abc434_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; -10^9 \\leq X_i \\leq 10^9; 1 \\leq R_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc434-e-problem-57a85c270331d5a998fe7241beb665e9a2a94be6ab8e403b818953267214041c",
+    "source-abc434-editorial-14684-e3f7929aa75b4bff090151a80f1d38ab481ab915f85146db5cb26658674d2e74"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

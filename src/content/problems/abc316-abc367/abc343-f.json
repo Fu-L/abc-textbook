@@ -1,0 +1,20 @@
+{
+  "id": "abc343-f",
+  "contestId": "abc343",
+  "slotLabel": "F",
+  "officialTaskId": "abc343_f",
+  "title": "Second Largest Query",
+  "officialUrl": "https://atcoder.jp/contests/abc343/tasks/abc343_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, Q \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; For type-1 queries, 1 \\leq p \\leq N.; For type-1 queries, 1 \\leq x \\leq 10^9.; For type-2 queries, 1 \\leq l \\leq r \\leq N.; There is at least one type-2 query.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc343-f-problem-118f15a1cd72a4d857e84ed257e673b547e83f09d03607b7bd2a8cf5c9f3a603",
+    "source-abc343-editorial-9429-f957c82a79fb9fa65f5a79a28c8ef600eed7e0a6018d5e5492765d86106a5cbd"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

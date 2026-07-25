@@ -1,0 +1,20 @@
+{
+  "id": "abc406-f",
+  "contestId": "abc406",
+  "slotLabel": "F",
+  "officialTaskId": "abc406_f",
+  "title": "Compare Tree Weights",
+  "officialUrl": "https://atcoder.jp/contests/abc406/tasks/abc406_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3 \\times 10^5; 1 \\leq U_i, V_i \\leq N; 1 \\leq Q \\leq 3 \\times 10^5; 1 \\leq x \\leq N; 1 \\leq w \\leq 1000; 1 \\leq y \\leq N-1; All input values are integers.; The given graph is a tree.; There is at least one query of the second type.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc406-f-problem-7bae4f2e492c9aec3a247593bc10e1b504e17cfaaa3c624927147a9d7376e5b3",
+    "source-abc406-editorial-13045-88e5ab7994c41abf34b04962b7a2ffd21aca4604fea4eb821af9d9009f41d591"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

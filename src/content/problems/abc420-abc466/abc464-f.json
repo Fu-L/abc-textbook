@@ -1,0 +1,20 @@
+{
+  "id": "abc464-f",
+  "contestId": "abc464",
+  "slotLabel": "F",
+  "officialTaskId": "abc464_f",
+  "title": "Random Vault Heist",
+  "officialUrl": "https://atcoder.jp/contests/abc464/tasks/abc464_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 40; 1 \\le A_i \\le 10^{16}; 1 \\le X \\le \\sum_{i=1}^{N} A_i; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc464-f-problem-dcb0e9e61dbba534dfb6d4ef7263a86cefd314e6d4642c1b493cc5bd45cb4b1c",
+    "source-abc464-editorial-22267-0673f070f5e873df4f8c7d81703cf63f55dbd2bcb33ec4b2606cceb4d60d72c0"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

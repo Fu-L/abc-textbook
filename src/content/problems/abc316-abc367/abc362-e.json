@@ -1,0 +1,20 @@
+{
+  "id": "abc362-e",
+  "contestId": "abc362",
+  "slotLabel": "E",
+  "officialTaskId": "abc362_e",
+  "title": "Count Arithmetic Subsequences",
+  "officialUrl": "https://atcoder.jp/contests/abc362/tasks/abc362_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 80; 1 \\leq A_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc362-e-problem-12d537dccbcb369fc5a6142726d86335fa37a673f581d34beeb99b6bda5e0ace",
+    "source-abc362-editorial-10399-fb31b09b5e81b48ced70ca519f2ccf93e7c7fc2c9e0291693eee4c5e26ffdbc9"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

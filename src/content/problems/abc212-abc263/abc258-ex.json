@@ -1,0 +1,20 @@
+{
+  "id": "abc258-ex",
+  "contestId": "abc258",
+  "slotLabel": "Ex",
+  "officialTaskId": "abc258_h",
+  "title": "Odd Steps",
+  "officialUrl": "https://atcoder.jp/contests/abc258/tasks/abc258_h",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq A_1 \\lt A_2 \\lt \\dots \\lt A_N \\lt S \\leq 10^{18}; All values in input are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba",
+    "source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

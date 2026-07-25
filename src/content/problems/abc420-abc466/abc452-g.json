@@ -1,0 +1,20 @@
+{
+  "id": "abc452-g",
+  "contestId": "abc452",
+  "slotLabel": "G",
+  "officialTaskId": "abc452_g",
+  "title": "221 Substring",
+  "officialUrl": "https://atcoder.jp/contests/abc452/tasks/abc452_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 500\\,000; 1 \\leq A_i \\leq 9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08",
+    "source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938"
+  ],
+  "checkedAt": "2026-07-24T23:59:30+09:00",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}
