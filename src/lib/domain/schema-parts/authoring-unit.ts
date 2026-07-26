@@ -31,12 +31,17 @@ const inlineExampleFields = {
   environment: text,
   input: text,
   procedure: z.array(text).min(1),
+  executionTarget: SafePathSchema.nullable(),
   expectedResult: text,
   verificationStatus: z.enum(['pending', 'passed', 'not_applicable', 'failed']),
 };
 
 const validateInlineExample = (
-  example: { readonly kind: string; readonly verificationStatus: string },
+  example: {
+    readonly kind: string;
+    readonly verificationStatus: string;
+    readonly executionTarget: string | null;
+  },
   context: z.RefinementCtx,
 ): void => {
   const executable = example.kind === 'executable';
@@ -46,6 +51,13 @@ const validateInlineExample = (
       path: ['verificationStatus'],
       message:
         'Executable examples require a verification result; other examples use not_applicable.',
+    });
+  }
+  if (executable !== (example.executionTarget !== null)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['executionTarget'],
+      message: 'Executable examples require a repository-relative execution target.',
     });
   }
 };

@@ -13,7 +13,9 @@ Claimは`ProblemAuthoringUnit`に、ExampleとExercise/Assessment/Answerは所�
 または`LearningUnit`に置く。いずれも所有者の本文と同時に執筆・訂正される。文書内の `key`
 は検証結果を特定する locator であり、Catalog entity ID ではない。Problem本文の実行可能例は
 `{ ownerType: "problem", problemId, exampleKey }`、Learning Unit本文の実行可能例は
-`{ ownerType: "learning_unit", learningUnitId, exampleKey }`で対象を固定する。
+`{ ownerType: "learning_unit", learningUnitId, exampleKey }`で対象を固定する。`executable`
+のExampleはリポジトリ相対の `executionTarget` を必ず持ち、`pseudocode` と `illustrative` は
+`executionTarget: null` とする。これにより、実行可能と宣言した例が実行対象なしで公開されない。
 
 LearningUnitも同じExampleとExercise/Assessment/Answerのblock契約を使い、例と到達確認を各一件以上本文へco-locateする。CorrectionImpactも同じowner種別を持つ判別付きlocatorを正本とし、ProblemのsectionまたはLearningUnitの本文・local
 blockを実データへ解決する。document-local keyをCatalog全体のentity IDへ昇格させない。

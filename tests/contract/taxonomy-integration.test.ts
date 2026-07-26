@@ -75,6 +75,7 @@ const inlineExample = (key: string, outcomeId: string) => ({
   environment: 'Fixture environment.',
   input: 'Fixture input.',
   procedure: ['Trace the fixture example.'],
+  executionTarget: null,
   expectedResult: 'The fixture result is explained.',
   verificationStatus: 'not_applicable' as const,
 });

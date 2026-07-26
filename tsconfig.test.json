@@ -9,7 +9,8 @@
     "tests/integration/**/*.ts",
     "tests/performance/**/*.ts",
     "tests/setup/**/*.ts",
-    "tests/unit/**/*.ts"
+    "tests/unit/**/*.ts",
+    "tests/fixtures/**/*.ts"
   ],
   "exclude": ["dist", "build", "coverage", "node_modules"]
 }

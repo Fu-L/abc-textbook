@@ -1,4 +1,6 @@
+import { execFile } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
+import { promisify } from 'node:util';
 
 import { describe, expect, it } from 'vitest';
 
@@ -20,6 +22,7 @@ interface FixtureManifest {
 
 const readJson = async <T>(filePath: string): Promise<T> =>
   JSON.parse(await readFile(filePath, 'utf8')) as T;
+const execFileAsync = promisify(execFile);
 
 const comparison = {
   learningOutcomes: true,
@@ -205,6 +208,25 @@ describe('explanation quality contract', () => {
         'ANSWER_MATERIAL_INCOMPLETE',
       ]),
     );
+  });
+
+  it('executes the representative example and checks its recorded result', async () => {
+    const fixtures = await readJson<FixtureManifest>(
+      'tests/fixtures/authoring-skill/manifest.json',
+    );
+    const unit = await readJson<ProblemAuthoringUnit>(fixtures.representativeOutputPath);
+    const example = unit.examples.find(({ key }) => key === 'example-small-prime');
+    if (!example) throw new Error('Representative executable example is missing.');
+    if (example.kind !== 'executable' || example.executionTarget === null) {
+      throw new Error('Representative example must declare an executable target.');
+    }
+
+    const result = await execFileAsync(
+      process.execPath,
+      ['--experimental-strip-types', example.executionTarget, example.input.trim()],
+      { cwd: process.cwd(), maxBuffer: 1024 * 1024 },
+    );
+    expect(result.stdout.trim()).toBe(example.expectedResult);
   });
 
   it('uses self review normally and third-party review only for fixed high-risk reasons', () => {
