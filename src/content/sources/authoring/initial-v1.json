@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "packetId": "authoring-sources-initial-v1",
   "sourceNormalizationVersion": "1.0.0",
-  "authoringSkillVersion": "1.0.0",
-  "authoringSkillDigest": "74bb852dd15732da1c1176c62e5ab15a05f85ed284116674c24db7b9fd6507a0",
+  "authoringSkillVersion": "1.1.0",
+  "authoringSkillDigest": "02a7a7b38611484da688caaf4046e7087b2a89f7a344131f1f4b3c3e2373cb2c",
   "allowedUsePolicy": {
     "mode": "reference_and_original_explanation_only",
     "prohibitUnnecessaryReproduction": true,

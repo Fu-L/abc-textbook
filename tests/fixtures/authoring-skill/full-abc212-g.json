@@ -1,0 +1,77 @@
+{
+  "problemId": "abc212-g",
+  "docPath": "src/content/problems/abc212-g.md",
+  "learningOutcomeIds": ["outcome-provisional-multiplicative-order-counting"],
+  "baselineId": "baseline-advanced-learner",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": ["原始根の一般論"],
+  "tagIds": ["provisional-tag-multiplicative-order-counting"],
+  "sourceRevisionIds": [
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05"
+  ],
+  "skill": {
+    "name": "abc-explanation-author",
+    "version": "1.1.0",
+    "digest": "02a7a7b38611484da688caaf4046e7087b2a89f7a344131f1f4b3c3e2373cb2c"
+  },
+  "revision": 1,
+  "kind": "full",
+  "primaryProblemId": null,
+  "differenceSummary": null,
+  "sections": {
+    "reasoning": "制約 P <= 10^12 から、各 x を試す方針は間に合わない。一方、素数 P を法とする 1 から P-1 の非零元は乗法で閉じ、小さな P で累乗を追うと元ごとに周期が現れる。ここから個々の元ではなく周期（位数）ごとに個数を数える候補が得られる。位数は P-1 の約数に限られるため、P-1 の約数を列挙し、小さい位数から寄与を確定する動的計画に落とし込む。",
+    "technique": "群の元を位数ごとに分類し、取り得る位数が群の大きさの約数に限られることを使う。「対象を一つずつ見られないが、各対象が少数の種類に分類できる」ときは、種類ごとの数え上げを疑う。",
+    "problemSpecificElements": "法が素数であるため非零元全体が位数 P-1 の巡回群になる点が鍵である。制約に「P は素数」と明記されているときは、剰余類の乗法構造に注目し、利用できないかを確認する。",
+    "reviewAdvice": "- 「個々の値」が多すぎるときは、位数などの少数の分類でまとめられないか考える。\n- 法が素数という制約を見たら、非零元の乗法群と P-1 の約数を候補に上げる。\n- 結果の式だけでなく、「なぜ位数ごとに数えると漏れも重複もないか」を説明できる状態にする。",
+    "correctness": "各非零元の位数は一意であり P-1 の約数なので、位数ごとの集合は全非零元の分割になる。したがって各位数の個数を一度ずつ加える数え上げに重複も漏れもない。",
+    "complexity": { "time": "O(sqrt(P) log P)", "space": "O(sqrt(P))" },
+    "constraintConsistency": "P <= 10^12 でも P-1 の約数候補は O(sqrt(P)) で列挙でき、各約数に対する計算は高速な剰余演算で行える。",
+    "implementationNotes": "P は 10^12 までなので整数型の範囲と乗算の丸めを確認する。約数は昇順に並べ、既に求めた真の位数の寄与を引く。"
+  },
+  "claims": [
+    {
+      "key": "claim-order-count",
+      "text": "約数ごとに位数を数え上げる。",
+      "sourceRevisionIds": [
+        "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05"
+      ],
+      "authorId": "person-maintainer",
+      "verificationStatus": "verified"
+    }
+  ],
+  "examples": [
+    {
+      "key": "example-small-prime",
+      "learningOutcomeIds": ["outcome-provisional-multiplicative-order-counting"],
+      "learningUnitIds": [],
+      "kind": "executable",
+      "language": "TypeScript 6 / Node.js 24",
+      "omissions": [],
+      "environment": "Node.js 24.18.0",
+      "input": "P = 5",
+      "procedure": ["列挙コードを実行する。", "出力を手計算と比較する。"],
+      "expectedResult": "4",
+      "verificationStatus": "passed"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "exercise-order-proof",
+      "learningOutcomeIds": ["outcome-provisional-multiplicative-order-counting"],
+      "prerequisiteIds": [],
+      "attainmentCondition": "位数による分類が一意であることを説明できる。",
+      "assessment": {
+        "method": "証明の各対応を確認する。",
+        "successCondition": "重複と漏れがない理由を述べる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "各元の最小周期は一意であり P-1 の約数である。",
+        "procedure": ["各元を最小周期へ対応させる。", "各対応先の個数を確認する。"],
+        "expectedResult": "全元が一度ずつ数えられる。",
+        "verificationStatus": "passed"
+      }
+    }
+  ]
+}

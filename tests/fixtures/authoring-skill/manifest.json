@@ -1,7 +1,8 @@
 {
   "schemaVersion": "1.0.0",
-  "authoringSkillVersion": "1.0.0",
-  "authoringSkillDigest": "74bb852dd15732da1c1176c62e5ab15a05f85ed284116674c24db7b9fd6507a0",
+  "authoringSkillVersion": "1.1.0",
+  "authoringSkillDigest": "02a7a7b38611484da688caaf4046e7087b2a89f7a344131f1f4b3c3e2373cb2c",
+  "representativeOutputPath": "tests/fixtures/authoring-skill/full-abc212-g.json",
   "fixtures": [
     {
       "fixtureId": "good-full-abc212-g",
@@ -52,8 +53,8 @@
         ],
         "skill": {
           "name": "abc-explanation-author",
-          "version": "1.0.0",
-          "digest": "74bb852dd15732da1c1176c62e5ab15a05f85ed284116674c24db7b9fd6507a0"
+          "version": "1.1.0",
+          "digest": "02a7a7b38611484da688caaf4046e7087b2a89f7a344131f1f4b3c3e2373cb2c"
         }
       }
     },
@@ -112,8 +113,8 @@
         ],
         "skill": {
           "name": "abc-explanation-author",
-          "version": "1.0.0",
-          "digest": "74bb852dd15732da1c1176c62e5ab15a05f85ed284116674c24db7b9fd6507a0"
+          "version": "1.1.0",
+          "digest": "02a7a7b38611484da688caaf4046e7087b2a89f7a344131f1f4b3c3e2373cb2c"
         }
       }
     },
@@ -138,8 +139,8 @@
         "sources": [],
         "skill": {
           "name": "abc-explanation-author",
-          "version": "1.0.0",
-          "digest": "74bb852dd15732da1c1176c62e5ab15a05f85ed284116674c24db7b9fd6507a0"
+          "version": "1.1.0",
+          "digest": "02a7a7b38611484da688caaf4046e7087b2a89f7a344131f1f4b3c3e2373cb2c"
         }
       }
     }
