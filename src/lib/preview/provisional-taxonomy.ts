@@ -22,6 +22,12 @@ const REQUIRED_REQUIREMENT_IDS = [
   'SC-004',
   'SC-020',
 ] as const;
+const PREVIEW_CONTENT_DIRECTORY_BY_DOMAIN: ReadonlyMap<string, string> = new Map([
+  ['graph-search', 'graph-search'],
+  ['dynamic-programming', 'dynamic-programming'],
+  ['data-structures-algorithm-design', 'data-structures'],
+  ['mathematics-combinatorics', 'mathematics'],
+] as const);
 
 export type ProvisionalIntegrationAction = (typeof ACTIONS)[number];
 export type ProvisionalTaxonomyEntityKind = 'tag' | 'outcome' | 'unit';
@@ -126,6 +132,17 @@ export const parseProvisionalCandidateClassificationsDocument = (
 
 export const parseProvisionalTaxonomyProposal = (value: unknown): ProvisionalTaxonomyProposal =>
   provisionalTaxonomyProposalSchema.parse(value);
+
+export const previewContentDirectoryForDomain = (domain: string): string => {
+  const directory = PREVIEW_CONTENT_DIRECTORY_BY_DOMAIN.get(domain);
+  if (!directory) {
+    throw new ProvisionalTaxonomyError(
+      'PROPOSAL_INVALID',
+      `No preview-content directory is configured for ${domain}.`,
+    );
+  }
+  return directory;
+};
 
 export interface ProvisionalTaxonomyBuildInput {
   readonly manifest: ProvisionalTaxonomyManifestInput;
@@ -556,7 +573,10 @@ const buildIntegrationCandidate = (
     ...sourceRevisionIds,
     ...problemIds.map((problemId) => `classification-${problemId}`),
   ],
-  affectedSurfaces: [groupPath, `docs/work-manifests/initial/us2/preview-content/${domain}/`],
+  affectedSurfaces: [
+    groupPath,
+    `docs/work-manifests/initial/us2/preview-content/${previewContentDirectoryForDomain(domain)}/`,
+  ],
   actionAssessments: actionAssessments(),
   provisionalRecommendation: 'promote',
   finalDecision: null,

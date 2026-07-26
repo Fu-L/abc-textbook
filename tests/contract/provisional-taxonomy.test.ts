@@ -4,6 +4,7 @@ import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { previewComponentOutputDigest } from '../../src/lib/preview/preview-chain.js';
 import {
   buildProvisionalTaxonomyArtifacts,
+  previewContentDirectoryForDomain,
   validateProvisionalTaxonomyArtifacts,
   type ProvisionalTaxonomyBuildInput,
 } from '../../src/lib/preview/provisional-taxonomy.js';
@@ -144,6 +145,16 @@ const buildInput = (): ProvisionalTaxonomyBuildInput => {
 };
 
 describe('T045/T046 provisional taxonomy boundary', () => {
+  it('maps candidate domains to the task-owned preview content directories', () => {
+    expect(previewContentDirectoryForDomain('graph-search')).toBe('graph-search');
+    expect(previewContentDirectoryForDomain('dynamic-programming')).toBe('dynamic-programming');
+    expect(previewContentDirectoryForDomain('data-structures-algorithm-design')).toBe(
+      'data-structures',
+    );
+    expect(previewContentDirectoryForDomain('mathematics-combinatorics')).toBe('mathematics');
+    expect(() => previewContentDirectoryForDomain('unknown-domain')).toThrow(/PROPOSAL_INVALID/iu);
+  });
+
   it('builds deterministic staging-only taxonomy, review units, and component evidence', () => {
     const input = buildInput();
     const first = buildProvisionalTaxonomyArtifacts(input);

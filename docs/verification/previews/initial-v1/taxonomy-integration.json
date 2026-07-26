@@ -25,7 +25,7 @@
       ],
       "affectedSurfaces": [
         "staging/previews/initial-v1/taxonomy/groups/mathematics-combinatorics.json",
-        "docs/work-manifests/initial/us2/preview-content/mathematics-combinatorics/"
+        "docs/work-manifests/initial/us2/preview-content/mathematics/"
       ],
       "actionAssessments": [
         {
@@ -78,7 +78,7 @@
       ],
       "affectedSurfaces": [
         "staging/previews/initial-v1/taxonomy/groups/mathematics-combinatorics.json",
-        "docs/work-manifests/initial/us2/preview-content/mathematics-combinatorics/"
+        "docs/work-manifests/initial/us2/preview-content/mathematics/"
       ],
       "actionAssessments": [
         {
@@ -131,7 +131,7 @@
       ],
       "affectedSurfaces": [
         "staging/previews/initial-v1/taxonomy/groups/mathematics-combinatorics.json",
-        "docs/work-manifests/initial/us2/preview-content/mathematics-combinatorics/"
+        "docs/work-manifests/initial/us2/preview-content/mathematics/"
       ],
       "actionAssessments": [
         {
@@ -502,7 +502,7 @@
       ],
       "affectedSurfaces": [
         "staging/previews/initial-v1/taxonomy/groups/data-structures-algorithm-design.json",
-        "docs/work-manifests/initial/us2/preview-content/data-structures-algorithm-design/"
+        "docs/work-manifests/initial/us2/preview-content/data-structures/"
       ],
       "actionAssessments": [
         {
@@ -555,7 +555,7 @@
       ],
       "affectedSurfaces": [
         "staging/previews/initial-v1/taxonomy/groups/data-structures-algorithm-design.json",
-        "docs/work-manifests/initial/us2/preview-content/data-structures-algorithm-design/"
+        "docs/work-manifests/initial/us2/preview-content/data-structures/"
       ],
       "actionAssessments": [
         {
@@ -608,7 +608,7 @@
       ],
       "affectedSurfaces": [
         "staging/previews/initial-v1/taxonomy/groups/data-structures-algorithm-design.json",
-        "docs/work-manifests/initial/us2/preview-content/data-structures-algorithm-design/"
+        "docs/work-manifests/initial/us2/preview-content/data-structures/"
       ],
       "actionAssessments": [
         {
@@ -647,5 +647,5 @@
       }
     }
   ],
-  "integrationDigest": "128ace0a2f211dbf02744d961944eabcd221b723d9bc6deeba72a4a29d5532f9"
+  "integrationDigest": "9ca98dacf24843dcacb18486cbbb1af348bf75155ac0ba67a4e6aa2ea50970c7"
 }
