@@ -1,4 +1,6 @@
+import { execFile } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
+import { promisify } from 'node:util';
 
 import { describe, expect, it } from 'vitest';
 
@@ -9,15 +11,18 @@ import {
   type AuthoringInputPacket,
   type AuthoringSkillSubject,
 } from '../../src/lib/authoring/explanation-authoring-skill.js';
+import type { ProblemAuthoringUnit } from '../../src/lib/domain/schema-parts/authoring-unit.js';
 
 interface FixtureManifest {
   readonly authoringSkillVersion: string;
   readonly authoringSkillDigest: string;
+  readonly representativeOutputPath: string;
   readonly fixtures: readonly { readonly input: AuthoringInputPacket }[];
 }
 
 const readJson = async <T>(filePath: string): Promise<T> =>
   JSON.parse(await readFile(filePath, 'utf8')) as T;
+const execFileAsync = promisify(execFile);
 
 const comparison = {
   learningOutcomes: true,
@@ -70,76 +75,13 @@ describe('explanation quality contract', () => {
       version: fixtures.authoringSkillVersion,
       digest: fixtures.authoringSkillDigest,
     };
-    const editorialId = input.technicalClaims[0]?.sourceRevisionIds[0];
-    if (!editorialId) throw new Error('Editorial source fixture is missing.');
-    const unit = {
-      problemId: input.problemId,
-      docPath: 'src/content/problems/abc212-g.md',
-      learningOutcomeIds: input.learningOutcomeIds,
-      baselineId: input.baseline.id,
-      baselineVersion: input.baseline.version,
-      additionalPrerequisiteUnitIds: input.additionalPrerequisiteUnitIds,
-      excludedTopics: input.excludedTopics,
-      tagIds: input.tagIds,
-      sourceRevisionIds: input.sources.map(({ sourceRevisionId }) => sourceRevisionId),
-      skill,
-      revision: 1,
-      kind: 'full',
-      primaryProblemId: null,
-      differenceSummary: null,
-      sections: {
-        reasoning: '小さい例から周期性を観察し、位数ごとの個数へ分解する。',
-        technique: '約数列挙と乗法位数を組み合わせる。',
-        problemSpecificElements: '法が素数であることを使う。',
-        reviewAdvice: '位数が法の約数になる理由から復習する。',
-        correctness: '各要素を位数で一意に分類するため重複も漏れもない。',
-        complexity: { time: 'O(sqrt(P) log P)', space: 'O(sqrt(P))' },
-        constraintConsistency: 'P <= 10^9 なので約数列挙が間に合う。',
-        implementationNotes: '剰余の乗算を各加算の直後に行う。',
-      },
-      claims: [
-        {
-          key: 'claim-order-count',
-          text: input.technicalClaims[0]?.text,
-          sourceRevisionIds: [editorialId],
-          authorId: 'person-maintainer',
-          verificationStatus: 'verified',
-        },
-      ],
-      examples: [
-        {
-          key: 'example-small-prime',
-          learningOutcomeIds: input.learningOutcomeIds,
-          learningUnitIds: [],
-          kind: 'executable',
-          language: 'TypeScript 6 / Node.js 24',
-          omissions: [],
-          environment: 'Node.js 24.18.0',
-          input: 'P = 5',
-          procedure: ['列挙コードを実行する。', '出力を手計算と比較する。'],
-          expectedResult: '4',
-          verificationStatus: 'passed',
-        },
-      ],
-      exercises: [
-        {
-          key: 'exercise-order-proof',
-          learningOutcomeIds: input.learningOutcomeIds,
-          prerequisiteIds: [],
-          attainmentCondition: '位数による分類が一意であることを説明できる。',
-          assessment: {
-            method: '証明の各写像を確認する。',
-            successCondition: '重複と漏れがない理由を述べる。',
-          },
-          answer: {
-            reasoningOrVerification: '各元の最小周期は一意でありP-1の約数である。',
-            procedure: ['各元を最小周期へ対応させる。', '各fiberの個数を確認する。'],
-            expectedResult: '全元が一度ずつ数えられる。',
-            verificationStatus: 'passed',
-          },
-        },
-      ],
-    };
+    const unit = await readJson<ProblemAuthoringUnit>(fixtures.representativeOutputPath);
+
+    expect(unit.sections.reasoning).toContain('制約');
+    expect(unit.sections.reasoning).toContain('候補');
+    expect(unit.sections.technique).toContain('分類');
+    expect(unit.sections.problemSpecificElements).toContain('注目');
+    expect(unit.sections.reviewAdvice).toContain('\n- ');
 
     expect(validateAuthoringOutput(unit, skill, input)).toEqual({
       status: 'ready',
@@ -266,6 +208,25 @@ describe('explanation quality contract', () => {
         'ANSWER_MATERIAL_INCOMPLETE',
       ]),
     );
+  });
+
+  it('executes the representative example and checks its recorded result', async () => {
+    const fixtures = await readJson<FixtureManifest>(
+      'tests/fixtures/authoring-skill/manifest.json',
+    );
+    const unit = await readJson<ProblemAuthoringUnit>(fixtures.representativeOutputPath);
+    const example = unit.examples.find(({ key }) => key === 'example-small-prime');
+    if (!example) throw new Error('Representative executable example is missing.');
+    if (example.kind !== 'executable' || example.executionTarget === null) {
+      throw new Error('Representative example must declare an executable target.');
+    }
+
+    const result = await execFileAsync(
+      process.execPath,
+      ['--experimental-strip-types', example.executionTarget, example.input.trim()],
+      { cwd: process.cwd(), maxBuffer: 1024 * 1024 },
+    );
+    expect(result.stdout.trim()).toBe(example.expectedResult);
   });
 
   it('uses self review normally and third-party review only for fixed high-risk reasons', () => {

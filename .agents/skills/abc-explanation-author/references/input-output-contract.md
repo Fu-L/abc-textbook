@@ -10,6 +10,6 @@
 
 正本は `src/lib/domain/schema-parts/authoring-unit.ts` の `ProblemAuthoringUnitSchema` である。skill内に別schemaを複製しない。
 
-full解説は、考察、典型、問題固有要素、復習助言、正当性、時間・空間計算量、制約整合、実装注意をすべて含む。similar/supplementはprimary Problem、差分、実装注意を含む。全種類でsource-backed Claim、再現可能なExample、Assessmentと検証方法を含むAnswerを同じ文書へ置く。
+full解説は、後知恵で一直線化しない考察、典型、問題固有要素、復習助言、正当性、時間・空間計算量、制約整合、実装注意をすべて含む。similar/supplementはprimary Problem、差分に気づくまでの考察、差分の実装影響、学ぶべき要素、復習助言を含み、supplementは追加要素の導出も含む。詳細な粒度は `writing-policy.md` に従う。全種類でsource-backed Claim、再現可能なExample、Assessmentと検証方法を含むAnswerを同じ文書へ置く。
 
 公開候補に進めるには、検証済みの入力packet全体を出力validatorへ渡し、出力のskill subjectがmanifestと一致し、Problem、学習成果、baseline、追加前提、対象外、Tag、kind、primary Problemが入力packetのsubjectと一致しなければならない。参照sourceが入力packetに含まれ、各Claimのsource集合が入力technical claimに対応し、対象Problemのofficial taskと用途許可を満たし、Claimがverified、実行可能ExampleとAnswerがpassedであることを要する。

@@ -174,6 +174,50 @@ describe('explanation authoring skill contract', () => {
     }
   });
 
+  it('keeps the complete writing policy inside the frozen skill artifacts', async () => {
+    const manifest = await readJson<SkillManifest>(
+      'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
+    );
+    const artifactContents = await Promise.all(
+      manifest.artifacts.map(async ({ path }) => ({ path, content: await readFile(path, 'utf8') })),
+    );
+    const combinedSkill = artifactContents.map(({ content }) => content).join('\n');
+    const writingPolicy = artifactContents.find(({ path }) =>
+      path.endsWith('/references/writing-policy.md'),
+    )?.content;
+    const fullTemplate = artifactContents.find(({ path }) =>
+      path.endsWith('/templates/full-explanation.md'),
+    )?.content;
+    const abbreviatedTemplate = artifactContents.find(({ path }) =>
+      path.endsWith('/templates/abbreviated-explanation.md'),
+    )?.content;
+
+    expect(writingPolicy).toContain('自然な考察ロードマップ');
+    expect(writingPolicy).toContain('正解から逆算した一直線のこじつけは避ける');
+    expect(writingPolicy).toContain('AtCoder赤コーダー相当');
+    expect(writingPolicy).toContain('部分集合の部分集合は O(3^N)');
+    expect(writingPolicy).toContain('転倒数を Fenwick Tree で数える');
+    expect(writingPolicy).toContain('約数の個数は意外と少ない');
+    expect(writingPolicy).toContain('最大値の最小化は二分探索');
+    expect(writingPolicy).toContain('操作の順番を逆から考える');
+    expect(writingPolicy).toContain('実は不変量が存在する');
+    expect(writingPolicy).toContain('実は状態数が少ない');
+    expect(writingPolicy).toContain('ARC、AGC、Codeforces Div. 1（CF Div1）、UCUP');
+    expect(writingPolicy).toContain('個数制限は設けない');
+    expect(writingPolicy).toContain('典型要素');
+    expect(writingPolicy).toContain('問題固有の要素');
+    expect(writingPolicy).toContain('復習時の助言と文体');
+    expect(writingPolicy).toContain('`full`');
+    expect(writingPolicy).toContain('`similar`');
+    expect(writingPolicy).toContain('`supplement`');
+    expect(fullTemplate).toContain('## 自然な考察ロードマップ');
+    expect(fullTemplate).toContain('## 典型要素');
+    expect(fullTemplate).toContain('## 問題固有の要素と見抜き方');
+    expect(abbreviatedTemplate).toContain('## 差分に気づくまでの考察');
+    expect(abbreviatedTemplate).toContain('## コーチからの復習メッセージ');
+    expect(combinedSkill).not.toMatch(/(?:^|[\s`/])prompt\.md(?:$|[\s`])/m);
+  });
+
   it('prepares the fixed complete fixtures and holds the incomplete fixture', async () => {
     const manifest = await readJson<SkillManifest>(
       'docs/verification/authoring-skill/initial-v1/skill-manifest.json',

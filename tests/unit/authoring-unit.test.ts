@@ -30,6 +30,7 @@ const addLearningUnitExecutableExample = (catalog: ReturnType<typeof catalogFixt
     environment: 'Fixture environment.',
     input: '1',
     procedure: ['Run fixture.'],
+    executionTarget: 'tests/fixtures/authoring-skill/echo-input.ts',
     expectedResult: '1',
     verificationStatus: 'passed',
   });
@@ -89,6 +90,21 @@ describe('Problem authoring unit', () => {
     if (!example) throw new Error('Fixture example is missing.');
     unit.examples.push(structuredClone(example));
     expect(ProblemAuthoringUnitSchema.safeParse(unit).success).toBe(false);
+  });
+
+  it('requires executable targets and rejects targets on non-executable examples', () => {
+    const executableWithoutTarget = unitFixture();
+    const executableExample = executableWithoutTarget.examples[0];
+    if (!executableExample) throw new Error('Fixture example is missing.');
+    executableExample.executionTarget = null;
+    expect(ProblemAuthoringUnitSchema.safeParse(executableWithoutTarget).success).toBe(false);
+
+    const illustrativeWithTarget = unitFixture();
+    const illustrativeExample = illustrativeWithTarget.examples[0];
+    if (!illustrativeExample) throw new Error('Fixture example is missing.');
+    illustrativeExample.kind = 'illustrative';
+    illustrativeExample.verificationStatus = 'not_applicable';
+    expect(ProblemAuthoringUnitSchema.safeParse(illustrativeWithTarget).success).toBe(false);
   });
 
   it('keeps abbreviated Problems small while binding them to a full primary Problem', () => {
