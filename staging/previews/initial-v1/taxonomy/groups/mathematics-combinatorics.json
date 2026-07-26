@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "previewId": "initial-v1",
+  "domain": "mathematics-combinatorics",
+  "candidateOutcomeId": "outcome-candidate-multiplicative-order-counting",
+  "problemIds": ["abc212-g", "abc222-g"],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+    "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
+  ],
+  "tag": {
+    "id": "provisional-tag-multiplicative-order-counting",
+    "name": "乗法的構造と位数による数え上げ",
+    "definition": "乗法群・原始根・乗法的位数を用いて、指数の合同条件や最小周期を数え上げへ変換する技法。",
+    "prerequisiteTagIds": [],
+    "outcomeIds": ["outcome-provisional-multiplicative-order-counting"],
+    "representativeProblemIds": ["abc212-g", "abc222-g"]
+  },
+  "outcome": {
+    "id": "outcome-provisional-multiplicative-order-counting",
+    "statement": "乗法的な条件を指数または位数の問題へ変換し、合同式と約数構造を使って数え上げられる。",
+    "prerequisiteOutcomeIds": [],
+    "problemIds": ["abc212-g", "abc222-g"]
+  },
+  "unit": {
+    "id": "provisional-unit-multiplicative-order-counting",
+    "title": "乗法的構造を指数と位数へ写す",
+    "prerequisiteUnitIds": [],
+    "tagIds": ["provisional-tag-multiplicative-order-counting"],
+    "outcomeIds": ["outcome-provisional-multiplicative-order-counting"],
+    "problemIds": ["abc212-g", "abc222-g"],
+    "sourceRevisionIds": [
+      "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+      "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+      "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+      "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
+    ]
+  },
+  "placements": [
+    {
+      "problemId": "abc212-g",
+      "tagIds": ["provisional-tag-multiplicative-order-counting"],
+      "outcomeIds": ["outcome-provisional-multiplicative-order-counting"],
+      "unitIds": ["provisional-unit-multiplicative-order-counting"],
+      "classificationRationale": "素数法を原始根の指数へ写し、指数合同式を最大公約数と約数の個数え上げへ帰着する公式解法である。",
+      "sourceRevisionIds": [
+        "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+        "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
+      ]
+    },
+    {
+      "problemId": "abc222-g",
+      "tagIds": ["provisional-tag-multiplicative-order-counting"],
+      "outcomeIds": ["outcome-provisional-multiplicative-order-counting"],
+      "unitIds": ["provisional-unit-multiplicative-order-counting"],
+      "classificationRationale": "同一数字を並べた数の割り切れ条件を repunit の合同式へ変換し、10 の乗法的位数として最小桁数を求める公式解法である。",
+      "sourceRevisionIds": [
+        "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+        "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
+      ]
+    }
+  ],
+  "rationale": "abc212-g と abc222-g は見かけ上の対象が異なるが、乗法的な条件を指数または位数へ写して合同式を扱う共通成果を持つ。",
+  "groupDigest": "50905ea570dcd11716e614eba5a8b9ae1a37ebc8f2b6127a421d28fcac0bc062"
+}

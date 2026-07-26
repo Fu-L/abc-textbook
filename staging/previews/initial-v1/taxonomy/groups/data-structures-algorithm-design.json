@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "previewId": "initial-v1",
+  "domain": "data-structures-algorithm-design",
+  "candidateOutcomeId": "outcome-candidate-range-aggregate-under-updates",
+  "problemIds": ["abc223-f", "abc256-f"],
+  "sourceRevisionIds": [
+    "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+    "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+    "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+    "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+  ],
+  "tag": {
+    "id": "provisional-tag-range-aggregate-under-updates",
+    "name": "更新可能な区間集約の設計",
+    "definition": "問い合わせ条件を結合可能な集約量へ分解し、Segment TreeやFenwick Treeで更新と区間・接頭辞計算を両立する技法。",
+    "prerequisiteTagIds": [],
+    "outcomeIds": ["outcome-provisional-range-aggregate-under-updates"],
+    "representativeProblemIds": ["abc223-f", "abc256-f"]
+  },
+  "outcome": {
+    "id": "outcome-provisional-range-aggregate-under-updates",
+    "statement": "問い合わせ式や判定条件を更新可能な複数の集約量へ分解し、適切なデータ構造を選択できる。",
+    "prerequisiteOutcomeIds": [],
+    "problemIds": ["abc223-f", "abc256-f"]
+  },
+  "unit": {
+    "id": "provisional-unit-range-aggregate-under-updates",
+    "title": "問い合わせを更新可能な集約量へ分解する",
+    "prerequisiteUnitIds": [],
+    "tagIds": ["provisional-tag-range-aggregate-under-updates"],
+    "outcomeIds": ["outcome-provisional-range-aggregate-under-updates"],
+    "problemIds": ["abc223-f", "abc256-f"],
+    "sourceRevisionIds": [
+      "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+      "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+      "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+      "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+    ]
+  },
+  "placements": [
+    {
+      "problemId": "abc223-f",
+      "tagIds": ["provisional-tag-range-aggregate-under-updates"],
+      "outcomeIds": ["outcome-provisional-range-aggregate-under-updates"],
+      "unitIds": ["provisional-unit-range-aggregate-under-updates"],
+      "classificationRationale": "括弧を ±1 とみなし、区間総和と最小接頭辞和を segment tree で保って swap 更新後の正当性を判定する公式解法である。",
+      "sourceRevisionIds": [
+        "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+        "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306"
+      ]
+    },
+    {
+      "problemId": "abc256-f",
+      "tagIds": ["provisional-tag-range-aggregate-under-updates"],
+      "outcomeIds": ["outcome-provisional-range-aggregate-under-updates"],
+      "unitIds": ["provisional-unit-range-aggregate-under-updates"],
+      "classificationRationale": "三重累積和の係数を二次式へ展開し、A_i・iA_i・i²A_i の更新可能な prefix sum を三本の Fenwick tree で保つ公式解法である。",
+      "sourceRevisionIds": [
+        "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+        "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+      ]
+    }
+  ],
+  "rationale": "abc223-f は総和と最小接頭辞和、abc256-f は係数別の三つの接頭辞和へ分解し、更新可能な集約量を設計する共通成果を持つ。",
+  "groupDigest": "7fd5de3cc1ddc53644dee89192b3dc0a93d712cfa0072c5789ca0d8128ba4537"
+}

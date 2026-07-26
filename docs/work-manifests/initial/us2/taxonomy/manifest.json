@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T046-preview-taxonomy",
+  "taskId": "T046",
+  "scopeDigest": "e4858f621dad2b8f44cd7bfccde98fafdf83acae21c402f8104941c428e9a391",
+  "digest": "3c3c9cd7778e16d1a0d8b288256658d526ae151da55b5b983f92b99b726f22d7",
+  "changeKind": "mixed",
+  "requiredRequirementIds": [
+    "FR-007",
+    "FR-008",
+    "FR-009",
+    "FR-010",
+    "FR-013",
+    "SC-002",
+    "SC-004",
+    "SC-020"
+  ],
+  "learningOutcomeIds": [
+    "outcome-provisional-compressed-dp-state",
+    "outcome-provisional-multiplicative-order-counting",
+    "outcome-provisional-range-aggregate-under-updates",
+    "outcome-provisional-shortest-path-structure"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": ["major_classification_change"]
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T046-mathematics-combinatorics",
+      "changeKind": "mixed",
+      "paths": ["staging/previews/initial-v1/taxonomy/groups/mathematics-combinatorics.json"],
+      "itemIds": [
+        "outcome:outcome-provisional-multiplicative-order-counting",
+        "problem:abc212-g",
+        "problem:abc222-g",
+        "tag:provisional-tag-multiplicative-order-counting",
+        "unit:provisional-unit-multiplicative-order-counting"
+      ],
+      "requirementIds": [
+        "FR-007",
+        "FR-008",
+        "FR-009",
+        "FR-010",
+        "FR-013",
+        "SC-002",
+        "SC-004",
+        "SC-020"
+      ],
+      "learningOutcomeIds": ["outcome-provisional-multiplicative-order-counting"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-preview-taxonomy", "check-taxonomy-integration"],
+      "evidenceRoles": ["provisional_taxonomy_review"],
+      "maintenanceBenefit": "Outcome-scoped, non-overlapping review units keep preview taxonomy evidence reusable by T051-T054 while T159 remains the sole final taxonomy decision owner.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T046-dynamic-programming",
+      "changeKind": "mixed",
+      "paths": ["staging/previews/initial-v1/taxonomy/groups/dynamic-programming.json"],
+      "itemIds": [
+        "outcome:outcome-provisional-compressed-dp-state",
+        "problem:abc215-e",
+        "problem:abc232-e",
+        "tag:provisional-tag-compressed-dp-state",
+        "unit:provisional-unit-compressed-dp-state"
+      ],
+      "requirementIds": [
+        "FR-007",
+        "FR-008",
+        "FR-009",
+        "FR-010",
+        "FR-013",
+        "SC-002",
+        "SC-004",
+        "SC-020"
+      ],
+      "learningOutcomeIds": ["outcome-provisional-compressed-dp-state"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-preview-taxonomy", "check-taxonomy-integration"],
+      "evidenceRoles": ["provisional_taxonomy_review"],
+      "maintenanceBenefit": "Outcome-scoped, non-overlapping review units keep preview taxonomy evidence reusable by T051-T054 while T159 remains the sole final taxonomy decision owner.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T046-graph-search",
+      "changeKind": "mixed",
+      "paths": ["staging/previews/initial-v1/taxonomy/groups/graph-search.json"],
+      "itemIds": [
+        "outcome:outcome-provisional-shortest-path-structure",
+        "problem:abc218-f",
+        "problem:abc252-e",
+        "tag:provisional-tag-shortest-path-structure",
+        "unit:provisional-unit-shortest-path-structure"
+      ],
+      "requirementIds": [
+        "FR-007",
+        "FR-008",
+        "FR-009",
+        "FR-010",
+        "FR-013",
+        "SC-002",
+        "SC-004",
+        "SC-020"
+      ],
+      "learningOutcomeIds": ["outcome-provisional-shortest-path-structure"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-preview-taxonomy", "check-taxonomy-integration"],
+      "evidenceRoles": ["provisional_taxonomy_review"],
+      "maintenanceBenefit": "Outcome-scoped, non-overlapping review units keep preview taxonomy evidence reusable by T051-T054 while T159 remains the sole final taxonomy decision owner.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T046-data-structures-algorithm-design",
+      "changeKind": "mixed",
+      "paths": [
+        "staging/previews/initial-v1/taxonomy/groups/data-structures-algorithm-design.json"
+      ],
+      "itemIds": [
+        "outcome:outcome-provisional-range-aggregate-under-updates",
+        "problem:abc223-f",
+        "problem:abc256-f",
+        "tag:provisional-tag-range-aggregate-under-updates",
+        "unit:provisional-unit-range-aggregate-under-updates"
+      ],
+      "requirementIds": [
+        "FR-007",
+        "FR-008",
+        "FR-009",
+        "FR-010",
+        "FR-013",
+        "SC-002",
+        "SC-004",
+        "SC-020"
+      ],
+      "learningOutcomeIds": ["outcome-provisional-range-aggregate-under-updates"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-preview-taxonomy", "check-taxonomy-integration"],
+      "evidenceRoles": ["provisional_taxonomy_review"],
+      "maintenanceBenefit": "Outcome-scoped, non-overlapping review units keep preview taxonomy evidence reusable by T051-T054 while T159 remains the sole final taxonomy decision owner.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": "Outcome-scoped, non-overlapping review units keep preview taxonomy evidence reusable by T051-T054 while T159 remains the sole final taxonomy decision owner.",
+  "state": "planned",
+  "createdAt": "2026-07-26T09:00:00+09:00",
+  "updatedAt": "2026-07-26T09:00:00+09:00"
+}
