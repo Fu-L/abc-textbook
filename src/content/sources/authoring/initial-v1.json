@@ -1,0 +1,248 @@
+{
+  "schemaVersion": "1.0.0",
+  "packetId": "authoring-sources-initial-v1",
+  "sourceNormalizationVersion": "1.0.0",
+  "authoringSkillVersion": "1.0.0",
+  "authoringSkillDigest": "6584f618dd5fa2ebddecaea734ece6b9a3f2705ba0e5f4459233640a74b7dabd",
+  "allowedUsePolicy": {
+    "mode": "reference_and_original_explanation_only",
+    "prohibitUnnecessaryReproduction": true,
+    "missingOrStaleSourceAction": "hold_with_retry_condition"
+  },
+  "problemInputs": [
+    {
+      "problemId": "abc212-g",
+      "problemPath": "src/content/problems/abc212-abc263/abc212-g.json",
+      "officialTaskId": "abc212_g",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq P \\leq 10^{12}; P is a prime number.",
+      "sourceRevisionIds": [
+        "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+        "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05"
+      ],
+      "checkedAt": "2026-07-24T23:59:30+09:00"
+    },
+    {
+      "problemId": "abc215-e",
+      "problemPath": "src/content/problems/abc212-abc263/abc215-e.json",
+      "officialTaskId": "abc215_e",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 1000; |S|=N; S consists of uppercase English letters from A through J.",
+      "sourceRevisionIds": [
+        "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+        "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
+      ],
+      "checkedAt": "2026-07-24T23:59:30+09:00"
+    },
+    {
+      "problemId": "abc218-f",
+      "problemPath": "src/content/problems/abc212-abc263/abc218-f.json",
+      "officialTaskId": "abc218_f",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 400; 1 \\leq M \\leq N(N-1); 1 \\leq s_i,t_i \\leq N; s_i \\neq t_i; (s_i,t_i) \\neq (s_j,t_j) (i \\neq j); All values in input are integers.",
+      "sourceRevisionIds": [
+        "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+        "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339"
+      ],
+      "checkedAt": "2026-07-24T23:59:30+09:00"
+    },
+    {
+      "problemId": "abc222-g",
+      "problemPath": "src/content/problems/abc212-abc263/abc222-g.json",
+      "officialTaskId": "abc222_g",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 200; 1 \\leq K \\leq 10^8; All values in input are integers.",
+      "sourceRevisionIds": [
+        "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+        "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95"
+      ],
+      "checkedAt": "2026-07-24T23:59:30+09:00"
+    },
+    {
+      "problemId": "abc223-f",
+      "problemPath": "src/content/problems/abc212-abc263/abc223-f.json",
+      "officialTaskId": "abc223_f",
+      "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,Q \\leq 2 \\times 10^5; S is a string of length N consisting of ( and ).; 1 \\leq l < r \\leq N; N,Q,l,r are all integers.; Each query is in the format 1 l r or 2 l r.; There is at least one query in the format 2 l r.",
+      "sourceRevisionIds": [
+        "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+        "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf"
+      ],
+      "checkedAt": "2026-07-24T23:59:30+09:00"
+    },
+    {
+      "problemId": "abc232-e",
+      "problemPath": "src/content/problems/abc212-abc263/abc232-e.json",
+      "officialTaskId": "abc232_e",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W \\leq 10^9; 1 \\leq K \\leq 10^6; 1 \\leq x_1, x_2 \\leq H; 1 \\leq y_1, y_2 \\leq W",
+      "sourceRevisionIds": [
+        "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+        "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+      ],
+      "checkedAt": "2026-07-24T23:59:30+09:00"
+    },
+    {
+      "problemId": "abc252-e",
+      "problemPath": "src/content/problems/abc212-abc263/abc252-e.json",
+      "officialTaskId": "abc252_e",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; N-1 \\leq M \\leq 2\\times 10^5; 1 \\leq A_i < B_i \\leq N; (A_i,B_i)\\neq(A_j,B_j) if i\\neq j.; 1\\leq C_i \\leq 10^9; One can travel between any two cities using some roads.; All values in input are integers.",
+      "sourceRevisionIds": [
+        "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+        "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"
+      ],
+      "checkedAt": "2026-07-24T23:59:30+09:00"
+    },
+    {
+      "problemId": "abc256-f",
+      "problemPath": "src/content/problems/abc212-abc263/abc256-f.json",
+      "officialTaskId": "abc256_f",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times10^5; 1 \\leq Q \\leq 2\\times10^5; 0 \\leq A_i \\leq 10^9; 1 \\leq x \\leq N; 0 \\leq v \\leq 10^9; All values in input are integers.",
+      "sourceRevisionIds": [
+        "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965",
+        "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a"
+      ],
+      "checkedAt": "2026-07-24T23:59:30+09:00"
+    }
+  ],
+  "sources": [
+    {
+      "sourceRevisionId": "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+      "path": "src/content/sources/abc212-abc263/source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05.json",
+      "sourceKind": "official_editorial",
+      "officialTaskId": "abc212_g",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["technical_claim", "example_verification", "answer_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+      "path": "src/content/sources/abc212-abc263/source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5.json",
+      "sourceKind": "official_problem",
+      "officialTaskId": "abc212_g",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["constraint_reference", "technical_claim", "example_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+      "path": "src/content/sources/abc212-abc263/source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846.json",
+      "sourceKind": "official_problem",
+      "officialTaskId": "abc215_e",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["constraint_reference", "technical_claim", "example_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+      "path": "src/content/sources/abc212-abc263/source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f.json",
+      "sourceKind": "official_editorial",
+      "officialTaskId": "abc215_e",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["technical_claim", "example_verification", "answer_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+      "path": "src/content/sources/abc212-abc263/source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339.json",
+      "sourceKind": "official_editorial",
+      "officialTaskId": "abc218_f",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["technical_claim", "example_verification", "answer_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+      "path": "src/content/sources/abc212-abc263/source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023.json",
+      "sourceKind": "official_problem",
+      "officialTaskId": "abc218_f",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["constraint_reference", "technical_claim", "example_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+      "path": "src/content/sources/abc212-abc263/source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95.json",
+      "sourceKind": "official_editorial",
+      "officialTaskId": "abc222_g",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["technical_claim", "example_verification", "answer_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+      "path": "src/content/sources/abc212-abc263/source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378.json",
+      "sourceKind": "official_problem",
+      "officialTaskId": "abc222_g",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["constraint_reference", "technical_claim", "example_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+      "path": "src/content/sources/abc212-abc263/source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf.json",
+      "sourceKind": "official_editorial",
+      "officialTaskId": "abc223_f",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["technical_claim", "example_verification", "answer_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+      "path": "src/content/sources/abc212-abc263/source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306.json",
+      "sourceKind": "official_problem",
+      "officialTaskId": "abc223_f",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["constraint_reference", "technical_claim", "example_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+      "path": "src/content/sources/abc212-abc263/source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46.json",
+      "sourceKind": "official_problem",
+      "officialTaskId": "abc232_e",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["constraint_reference", "technical_claim", "example_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d",
+      "path": "src/content/sources/abc212-abc263/source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d.json",
+      "sourceKind": "official_editorial",
+      "officialTaskId": "abc232_e",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["technical_claim", "example_verification", "answer_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+      "path": "src/content/sources/abc212-abc263/source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a.json",
+      "sourceKind": "official_problem",
+      "officialTaskId": "abc252_e",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["constraint_reference", "technical_claim", "example_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+      "path": "src/content/sources/abc212-abc263/source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2.json",
+      "sourceKind": "official_editorial",
+      "officialTaskId": "abc252_e",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["technical_claim", "example_verification", "answer_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+      "path": "src/content/sources/abc212-abc263/source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a.json",
+      "sourceKind": "official_editorial",
+      "officialTaskId": "abc256_f",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["technical_claim", "example_verification", "answer_verification"]
+    },
+    {
+      "sourceRevisionId": "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965",
+      "path": "src/content/sources/abc212-abc263/source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965.json",
+      "sourceKind": "official_problem",
+      "officialTaskId": "abc256_f",
+      "checkedAt": "2026-07-24T23:59:30+09:00",
+      "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+      "allowedUses": ["constraint_reference", "technical_claim", "example_verification"]
+    }
+  ]
+}

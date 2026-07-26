@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "1.0.0",
+  "manifestId": "abc-explanation-author-initial-v1",
+  "status": "frozen",
+  "authoringSkillName": "abc-explanation-author",
+  "authoringSkillVersion": "1.0.0",
+  "authoringSkillDigest": "6584f618dd5fa2ebddecaea734ece6b9a3f2705ba0e5f4459233640a74b7dabd",
+  "sourceNormalizationVersion": "1.0.0",
+  "frozenAt": "2026-07-26T12:00:00+09:00",
+  "artifacts": [
+    {
+      "path": ".agents/skills/abc-explanation-author/SKILL.md",
+      "digest": "894bd28a47d239b09ae096242ced4a5ac3f9e74a9e6a5644e3d5ef8efcf636d6"
+    },
+    {
+      "path": ".agents/skills/abc-explanation-author/references/input-output-contract.md",
+      "digest": "b9a0fa5310cc76fe4f7ac6e2b8e0e71252d61ad9b01e3e811e9132685413a0e0"
+    },
+    {
+      "path": ".agents/skills/abc-explanation-author/references/placement-policy.md",
+      "digest": "b309a66c958b50255b04e24a773e8d7688a3489350844678fe893e50419b08b2"
+    },
+    {
+      "path": ".agents/skills/abc-explanation-author/references/review-policy.md",
+      "digest": "158afc53a4ac1a6c26a4e686cff2fe18cef535094e151fdcd02b4101f41d1c2e"
+    },
+    {
+      "path": ".agents/skills/abc-explanation-author/references/source-policy.md",
+      "digest": "89ab81b368e8e5c1025ad6cba8045830a0905d1924d2da9ca0dcb5071dfede21"
+    },
+    {
+      "path": ".agents/skills/abc-explanation-author/templates/abbreviated-explanation.md",
+      "digest": "c1fcb420b0f0879624e21e0ef25b140c49c2ed7a34436e62fd6353488eb8f7c1"
+    },
+    {
+      "path": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "digest": "51de609d6ea2d0cedceed15ab5fe0cbed2f09f8644564f8ebb9b0aa7b2eb3ec9"
+    }
+  ],
+  "sourcePacket": {
+    "path": "src/content/sources/authoring/initial-v1.json",
+    "digest": "9ea376566994fc191745b50aa6a282687f0f25ce94ec5ed5626ebc832a2d08b3",
+    "inputProblemIds": [
+      "abc212-g",
+      "abc215-e",
+      "abc218-f",
+      "abc222-g",
+      "abc223-f",
+      "abc232-e",
+      "abc252-e",
+      "abc256-f"
+    ],
+    "inputSourceRevisionIds": [
+      "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+      "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+      "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+      "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+      "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+      "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+      "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+      "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+      "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+      "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+      "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+      "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d",
+      "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+      "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+      "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+      "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+    ],
+    "allowedUses": [
+      "constraint_reference",
+      "technical_claim",
+      "example_verification",
+      "answer_verification"
+    ]
+  },
+  "inputContract": {
+    "requiredFields": [
+      "problemId",
+      "learningOutcomeIds",
+      "baseline",
+      "additionalPrerequisiteUnitIds",
+      "excludedTopics",
+      "tagIds",
+      "constraints",
+      "placementCandidate",
+      "technicalClaims",
+      "sources",
+      "skill"
+    ],
+    "insufficientInputStatus": "blocked",
+    "requireOfficialProblemRevision": true,
+    "requireClaimSourceAllowedUse": true,
+    "rejectSkillSubjectMismatch": true
+  },
+  "outputContract": {
+    "schemaPath": "src/lib/domain/schema-parts/authoring-unit.ts#ProblemAuthoringUnitSchema",
+    "resultStatuses": ["authoring_unit_draft", "authoring_required", "blocked"],
+    "fullRequiredSections": [
+      "reasoning",
+      "technique",
+      "problemSpecificElements",
+      "reviewAdvice",
+      "correctness",
+      "complexity.time",
+      "complexity.space",
+      "constraintConsistency",
+      "implementationNotes"
+    ],
+    "abbreviatedRequiredSections": ["differences", "implementationNotes"],
+    "coLocatedBlocks": ["claims", "examples", "exercises", "assessment", "answer"],
+    "publishableVerification": {
+      "claims": "verified",
+      "executableExamples": "passed",
+      "answers": "passed"
+    }
+  },
+  "reviewPolicy": {
+    "defaultMode": "self",
+    "highRiskMode": "third_party",
+    "highRiskReasons": [
+      "official_source_conflict",
+      "independent_proof",
+      "major_classification_change"
+    ]
+  },
+  "consumers": ["T051", "T052", "T053", "T054", "T119", "T154"]
+}

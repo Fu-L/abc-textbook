@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T061-us1",
+  "taskId": "T061",
+  "scopeDigest": "c82ec8ea4336335778f3caca82895e6be915010b933716d3cfaf3cc96193c01d",
+  "digest": "2701eb0d1cd511a224c5d00e1ce3734f8719f2ec81ec4c45d48e0ae1a318cd5b",
+  "changeKind": "mixed",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-002",
+    "CQ-003",
+    "CQ-005",
+    "CQ-006",
+    "CQ-007",
+    "FR-004",
+    "FR-005",
+    "FR-006",
+    "FR-012",
+    "FR-023",
+    "FR-026",
+    "FR-031"
+  ],
+  "learningOutcomeIds": [
+    "outcome-us1-authoring-contract",
+    "outcome-us1-explanation-quality",
+    "outcome-us1-source-traceability"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T061-authoring-contract",
+      "changeKind": "mixed",
+      "paths": [
+        ".agents/skills/abc-explanation-author/SKILL.md",
+        ".agents/skills/abc-explanation-author/references/input-output-contract.md",
+        "src/lib/authoring/explanation-authoring-skill.ts",
+        "tests/contract/explanation-authoring-skill.test.ts"
+      ],
+      "itemIds": [
+        "us1.authoring-input",
+        "us1.authoring-output",
+        "us1.insufficient-input-hold",
+        "us1.skill-subject"
+      ],
+      "requirementIds": ["CQ-001", "FR-023", "FR-031"],
+      "learningOutcomeIds": ["outcome-us1-authoring-contract"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-authoring-skill-contract"],
+      "evidenceRoles": ["contract_test"],
+      "maintenanceBenefit": "A single frozen skill and source packet prevents preview content and update authoring from duplicating or drifting their contracts.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T061-explanation-quality",
+      "changeKind": "mixed",
+      "paths": [
+        ".agents/skills/abc-explanation-author/references/placement-policy.md",
+        ".agents/skills/abc-explanation-author/references/review-policy.md",
+        ".agents/skills/abc-explanation-author/templates/abbreviated-explanation.md",
+        ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+        "tests/contract/explanation-quality.test.ts"
+      ],
+      "itemIds": [
+        "us1.complete-explanation",
+        "us1.full-similar-supplement",
+        "us1.reproducible-example",
+        "us1.review-policy"
+      ],
+      "requirementIds": ["CQ-003", "CQ-005", "CQ-006", "FR-004", "FR-005", "FR-012", "FR-026"],
+      "learningOutcomeIds": ["outcome-us1-explanation-quality"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": ["RU-T061-authoring-contract"],
+      "checkIds": ["check-explanation-quality"],
+      "evidenceRoles": ["quality_contract_test"],
+      "maintenanceBenefit": "A single frozen skill and source packet prevents preview content and update authoring from duplicating or drifting their contracts.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T061-source-packet",
+      "changeKind": "mixed",
+      "paths": [
+        ".agents/skills/abc-explanation-author/references/source-policy.md",
+        "docs/verification/authoring-skill/initial-v1/skill-manifest.json",
+        "src/content/sources/authoring/initial-v1.json",
+        "tests/fixtures/authoring-skill/manifest.json"
+      ],
+      "itemIds": ["us1.authoring-fixtures", "us1.normalized-source-packet", "us1.skill-manifest"],
+      "requirementIds": ["CQ-002", "CQ-007", "FR-006"],
+      "learningOutcomeIds": ["outcome-us1-source-traceability"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": ["RU-T061-authoring-contract"],
+      "checkIds": ["check-authoring-skill-contract"],
+      "evidenceRoles": ["source_traceability_contract"],
+      "maintenanceBenefit": "A single frozen skill and source packet prevents preview content and update authoring from duplicating or drifting their contracts.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": "A single frozen skill and source packet prevents preview content and update authoring from duplicating or drifting their contracts.",
+  "state": "planned",
+  "createdAt": "2026-07-26T12:00:00+09:00",
+  "updatedAt": "2026-07-26T12:00:00+09:00"
+}

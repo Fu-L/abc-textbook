@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0.0",
+  "authoringSkillVersion": "1.0.0",
+  "authoringSkillDigest": "6584f618dd5fa2ebddecaea734ece6b9a3f2705ba0e5f4459233640a74b7dabd",
+  "fixtures": [
+    {
+      "fixtureId": "good-full-abc212-g",
+      "expectedStatus": "authoring_required",
+      "expectedKind": "full",
+      "input": {
+        "problemId": "abc212-g",
+        "learningOutcomeIds": ["outcome-provisional-multiplicative-order-counting"],
+        "baseline": { "id": "baseline-advanced-learner", "version": "1.0.0" },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": ["原始根の一般論"],
+        "tagIds": ["provisional-tag-multiplicative-order-counting"],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq P \\leq 10^{12}; P is a prime number."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "約数ごとに位数を数え上げる。",
+            "sourceRevisionIds": [
+              "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+            "path": "src/content/sources/abc212-abc263/source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc212_g",
+            "checkedAt": "2026-07-24T23:59:30+09:00",
+            "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+            "allowedUses": ["constraint_reference", "technical_claim", "example_verification"]
+          },
+          {
+            "sourceRevisionId": "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+            "path": "src/content/sources/abc212-abc263/source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc212_g",
+            "checkedAt": "2026-07-24T23:59:30+09:00",
+            "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+            "allowedUses": ["technical_claim", "example_verification", "answer_verification"]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.0.0",
+          "digest": "6584f618dd5fa2ebddecaea734ece6b9a3f2705ba0e5f4459233640a74b7dabd"
+        }
+      }
+    },
+    {
+      "fixtureId": "good-similar-abc222-g",
+      "expectedStatus": "authoring_required",
+      "expectedKind": "similar",
+      "input": {
+        "problemId": "abc222-g",
+        "learningOutcomeIds": ["outcome-provisional-multiplicative-order-counting"],
+        "baseline": { "id": "baseline-advanced-learner", "version": "1.0.0" },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": ["原始根の一般論"],
+        "tagIds": ["provisional-tag-multiplicative-order-counting"],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 200; 1 \\leq K \\leq 10^8; All values in input are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": "abc212-g",
+          "comparison": {
+            "learningOutcomes": true,
+            "prerequisites": true,
+            "coreMethod": true,
+            "proofIdea": true,
+            "asymptoticComplexity": true
+          },
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "合同式を乗法位数へ帰着する。",
+            "sourceRevisionIds": [
+              "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+            "path": "src/content/sources/abc212-abc263/source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc222_g",
+            "checkedAt": "2026-07-24T23:59:30+09:00",
+            "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+            "allowedUses": ["constraint_reference", "technical_claim", "example_verification"]
+          },
+          {
+            "sourceRevisionId": "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+            "path": "src/content/sources/abc212-abc263/source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc222_g",
+            "checkedAt": "2026-07-24T23:59:30+09:00",
+            "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+            "allowedUses": ["technical_claim", "example_verification", "answer_verification"]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.0.0",
+          "digest": "6584f618dd5fa2ebddecaea734ece6b9a3f2705ba0e5f4459233640a74b7dabd"
+        }
+      }
+    },
+    {
+      "fixtureId": "incomplete-missing-sources",
+      "expectedStatus": "blocked",
+      "expectedDiagnosticCodes": ["INPUT_REQUIRED_FIELD_INVALID"],
+      "input": {
+        "problemId": "abc218-f",
+        "learningOutcomeIds": ["outcome-provisional-shortest-path-structure"],
+        "baseline": { "id": "baseline-advanced-learner", "version": "1.0.0" },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": ["provisional-tag-shortest-path-structure"],
+        "constraints": [],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [],
+        "sources": [],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.0.0",
+          "digest": "6584f618dd5fa2ebddecaea734ece6b9a3f2705ba0e5f4459233640a74b7dabd"
+        }
+      }
+    }
+  ]
+}
