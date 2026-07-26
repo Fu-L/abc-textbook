@@ -4,17 +4,17 @@
   "status": "frozen",
   "authoringSkillName": "abc-explanation-author",
   "authoringSkillVersion": "1.0.0",
-  "authoringSkillDigest": "6584f618dd5fa2ebddecaea734ece6b9a3f2705ba0e5f4459233640a74b7dabd",
+  "authoringSkillDigest": "74bb852dd15732da1c1176c62e5ab15a05f85ed284116674c24db7b9fd6507a0",
   "sourceNormalizationVersion": "1.0.0",
   "frozenAt": "2026-07-26T12:00:00+09:00",
   "artifacts": [
     {
       "path": ".agents/skills/abc-explanation-author/SKILL.md",
-      "digest": "894bd28a47d239b09ae096242ced4a5ac3f9e74a9e6a5644e3d5ef8efcf636d6"
+      "digest": "1a5ef2addd8b0ec86d8158f1c2218b300b85039c40706981f7a37723bea833ea"
     },
     {
       "path": ".agents/skills/abc-explanation-author/references/input-output-contract.md",
-      "digest": "b9a0fa5310cc76fe4f7ac6e2b8e0e71252d61ad9b01e3e811e9132685413a0e0"
+      "digest": "7203b723af36fe1844529de4bf5c06c73b05fdea9af81b1652b2125b9978b0fd"
     },
     {
       "path": ".agents/skills/abc-explanation-author/references/placement-policy.md",
@@ -92,6 +92,7 @@
     "insufficientInputStatus": "blocked",
     "requireOfficialProblemRevision": true,
     "requireClaimSourceAllowedUse": true,
+    "requireClaimSourceTaskMatch": true,
     "rejectSkillSubjectMismatch": true
   },
   "outputContract": {
@@ -110,6 +111,21 @@
     ],
     "abbreviatedRequiredSections": ["differences", "implementationNotes"],
     "coLocatedBlocks": ["claims", "examples", "exercises", "assessment", "answer"],
+    "subjectBinding": {
+      "inputPacketRequired": true,
+      "fields": [
+        "problemId",
+        "learningOutcomeIds",
+        "baseline",
+        "additionalPrerequisiteUnitIds",
+        "excludedTopics",
+        "tagIds"
+      ],
+      "placementFields": ["kind", "primaryProblemId"],
+      "claimSourceBinding": "Each output claim source set must match one input technical claim source set.",
+      "claimSourceTaskMatch": true,
+      "claimSourceAllowedUse": "technical_claim"
+    },
     "publishableVerification": {
       "claims": "verified",
       "executableExamples": "passed",

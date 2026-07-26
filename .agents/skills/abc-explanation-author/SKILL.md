@@ -29,7 +29,8 @@ ABC上級問題の `ProblemAuthoringUnit` を、公式根拠と教材の学習�
 4. fullは `templates/full-explanation.md`、similar/supplementは `templates/abbreviated-explanation.md` を使う。
 5. Claim、Example、Exercise、Assessment、Answerを本文と同じauthoring unitへ置き、sourceと学習成果を明示する。
 6. `references/review-policy.md` に従ってreview modeを決める。
-7. output contractと再現可能性を検証し、全診断が解消された場合だけ草案として渡す。
+7. output contractと再現可能性を検証する。出力のProblem、学習成果、baseline、前提、対象外、Tag、placementは入力packetと一致させ、Claimのsourceは入力technical claimと同じsource集合を参照し、対象Problemのofficial taskと用途許可を満たすことを確認する。
+8. 全診断が解消された場合だけ草案として渡す。
 
 ## 出力
 

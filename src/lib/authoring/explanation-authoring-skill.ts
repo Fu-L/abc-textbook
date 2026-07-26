@@ -116,6 +116,20 @@ const diagnostic = (code: string, path: string, message: string): AuthoringDiagn
 const issuePath = (path: readonly PropertyKey[]): string =>
   path.length === 0 ? '$' : path.map(String).join('.');
 
+const normalizeOfficialTaskId = (officialTaskId: string): string =>
+  officialTaskId.replaceAll('_', '-');
+
+const sourceBelongsToProblem = (
+  source: NormalizedAuthoringSource,
+  targetProblemId: string,
+): boolean => normalizeOfficialTaskId(source.officialTaskId) === targetProblemId;
+
+const equalStringArrays = (actual: readonly string[], expected: readonly string[]): boolean =>
+  actual.length === expected.length && actual.every((value, index) => value === expected[index]);
+
+const sourceSetKey = (sourceRevisionIds: readonly string[]): string =>
+  [...sourceRevisionIds].sort().join('\u0000');
+
 export const classifyExplanationKind = (
   candidate: AuthoringInputPacket['placementCandidate'],
 ): 'full' | 'similar' | 'supplement' => {
@@ -167,8 +181,7 @@ export const validateAuthoringInput = (
   const sourceById = new Map(input.sources.map((source) => [source.sourceRevisionId, source]));
   const problemSources = input.sources.filter(
     (source) =>
-      source.sourceKind === 'official_problem' &&
-      source.officialTaskId.replace('_', '-') === input.problemId,
+      source.sourceKind === 'official_problem' && sourceBelongsToProblem(source, input.problemId),
   );
   if (problemSources.length === 0) {
     diagnostics.push(
@@ -181,24 +194,36 @@ export const validateAuthoringInput = (
   }
 
   for (const [claimIndex, claim] of input.technicalClaims.entries()) {
-    for (const sourceRevisionId of claim.sourceRevisionIds) {
+    for (const [sourceIndex, sourceRevisionId] of claim.sourceRevisionIds.entries()) {
+      const path = `technicalClaims.${String(claimIndex)}.sourceRevisionIds.${String(sourceIndex)}`;
       const source = sourceById.get(sourceRevisionId);
       if (!source) {
         diagnostics.push(
           diagnostic(
             'SOURCE_REVISION_MISSING',
-            `technicalClaims.${String(claimIndex)}.sourceRevisionIds`,
+            path,
             `${sourceRevisionId} is not present in the input source packet.`,
           ),
         );
-      } else if (!source.allowedUses.includes('technical_claim')) {
-        diagnostics.push(
-          diagnostic(
-            'SOURCE_USE_NOT_ALLOWED',
-            `technicalClaims.${String(claimIndex)}.sourceRevisionIds`,
-            `${sourceRevisionId} is not approved for technical claims.`,
-          ),
-        );
+      } else {
+        if (!source.allowedUses.includes('technical_claim')) {
+          diagnostics.push(
+            diagnostic(
+              'SOURCE_USE_NOT_ALLOWED',
+              path,
+              `${sourceRevisionId} is not approved for technical claims.`,
+            ),
+          );
+        }
+        if (!sourceBelongsToProblem(source, input.problemId)) {
+          diagnostics.push(
+            diagnostic(
+              'SOURCE_PROBLEM_MISMATCH',
+              path,
+              `${sourceRevisionId} belongs to official task ${source.officialTaskId}, not ${input.problemId}.`,
+            ),
+          );
+        }
       }
     }
   }
@@ -252,7 +277,7 @@ export const prepareExplanationAuthoring = (
 export const validateAuthoringOutput = (
   value: unknown,
   expectedSkill: AuthoringSkillSubject,
-  inputSources: readonly NormalizedAuthoringSource[],
+  input: AuthoringInputPacket,
 ): InputValidationResult => {
   const parsed = ProblemAuthoringUnitSchema.safeParse(value);
   if (!parsed.success) {
@@ -269,6 +294,9 @@ export const validateAuthoringOutput = (
   }
 
   const unit: ProblemAuthoringUnit = parsed.data;
+  const inputValidation = validateAuthoringInput(input, expectedSkill);
+  if (inputValidation.status === 'on_hold') return inputValidation;
+  const validatedInput = AuthoringInputPacketSchema.parse(input);
   const diagnostics: AuthoringDiagnostic[] = [];
   if (unit.skill.name !== expectedSkill.name || unit.skill.version !== expectedSkill.version) {
     diagnostics.push(
@@ -289,18 +317,193 @@ export const validateAuthoringOutput = (
     );
   }
 
-  const availableSources = new Set(inputSources.map(({ sourceRevisionId }) => sourceRevisionId));
-  const referencedSources = new Set([
-    ...unit.sourceRevisionIds,
-    ...unit.claims.flatMap(({ sourceRevisionIds }) => sourceRevisionIds),
-  ]);
-  for (const sourceRevisionId of referencedSources) {
-    if (!availableSources.has(sourceRevisionId)) {
+  if (unit.problemId !== validatedInput.problemId) {
+    diagnostics.push(
+      diagnostic(
+        'OUTPUT_PROBLEM_MISMATCH',
+        'problemId',
+        `Output targets ${unit.problemId}, but the validated input targets ${validatedInput.problemId}.`,
+      ),
+    );
+  }
+  if (!equalStringArrays(unit.learningOutcomeIds, validatedInput.learningOutcomeIds)) {
+    diagnostics.push(
+      diagnostic(
+        'OUTPUT_LEARNING_OUTCOMES_MISMATCH',
+        'learningOutcomeIds',
+        'Output learning outcomes must match the validated input packet.',
+      ),
+    );
+  }
+  if (
+    unit.baselineId !== validatedInput.baseline.id ||
+    unit.baselineVersion !== validatedInput.baseline.version
+  ) {
+    diagnostics.push(
+      diagnostic(
+        'OUTPUT_BASELINE_MISMATCH',
+        'baseline',
+        'Output baseline must match the validated input packet.',
+      ),
+    );
+  }
+  if (
+    !equalStringArrays(
+      unit.additionalPrerequisiteUnitIds,
+      validatedInput.additionalPrerequisiteUnitIds,
+    )
+  ) {
+    diagnostics.push(
+      diagnostic(
+        'OUTPUT_PREREQUISITES_MISMATCH',
+        'additionalPrerequisiteUnitIds',
+        'Output additional prerequisites must match the validated input packet.',
+      ),
+    );
+  }
+  if (!equalStringArrays(unit.excludedTopics, validatedInput.excludedTopics)) {
+    diagnostics.push(
+      diagnostic(
+        'OUTPUT_EXCLUDED_TOPICS_MISMATCH',
+        'excludedTopics',
+        'Output excluded topics must match the validated input packet.',
+      ),
+    );
+  }
+  if (!equalStringArrays(unit.tagIds, validatedInput.tagIds)) {
+    diagnostics.push(
+      diagnostic(
+        'OUTPUT_TAGS_MISMATCH',
+        'tagIds',
+        'Output tags must match the validated input packet.',
+      ),
+    );
+  }
+  const allowedLearningOutcomeIds = new Set(validatedInput.learningOutcomeIds);
+  for (const [exampleIndex, example] of unit.examples.entries()) {
+    for (const [outcomeIndex, learningOutcomeId] of example.learningOutcomeIds.entries()) {
+      if (!allowedLearningOutcomeIds.has(learningOutcomeId)) {
+        diagnostics.push(
+          diagnostic(
+            'OUTPUT_LEARNING_OUTCOME_NOT_IN_INPUT',
+            `examples.${String(exampleIndex)}.learningOutcomeIds.${String(outcomeIndex)}`,
+            `${learningOutcomeId} is not declared by the validated input packet.`,
+          ),
+        );
+      }
+    }
+  }
+  for (const [exerciseIndex, exercise] of unit.exercises.entries()) {
+    for (const [outcomeIndex, learningOutcomeId] of exercise.learningOutcomeIds.entries()) {
+      if (!allowedLearningOutcomeIds.has(learningOutcomeId)) {
+        diagnostics.push(
+          diagnostic(
+            'OUTPUT_LEARNING_OUTCOME_NOT_IN_INPUT',
+            `exercises.${String(exerciseIndex)}.learningOutcomeIds.${String(outcomeIndex)}`,
+            `${learningOutcomeId} is not declared by the validated input packet.`,
+          ),
+        );
+      }
+    }
+  }
+
+  const expectedKind = classifyExplanationKind(validatedInput.placementCandidate);
+  if (unit.kind !== expectedKind) {
+    diagnostics.push(
+      diagnostic(
+        'OUTPUT_KIND_MISMATCH',
+        'kind',
+        `Output kind ${unit.kind} does not match the input placement candidate (${expectedKind}).`,
+      ),
+    );
+  }
+  const expectedPrimaryProblemId =
+    expectedKind === 'full' ? null : validatedInput.placementCandidate.primaryProblemId;
+  if (unit.primaryProblemId !== expectedPrimaryProblemId) {
+    diagnostics.push(
+      diagnostic(
+        'OUTPUT_PRIMARY_PROBLEM_MISMATCH',
+        'primaryProblemId',
+        `Output primary Problem must be ${expectedPrimaryProblemId ?? 'null'} for the validated placement candidate.`,
+      ),
+    );
+  }
+
+  const sourceById = new Map(
+    validatedInput.sources.map((source) => [source.sourceRevisionId, source]),
+  );
+  const reportOutputSource = (
+    sourceRevisionId: string,
+    path: string,
+    requiredUse?: z.infer<typeof AllowedSourceUseSchema>,
+  ): NormalizedAuthoringSource | undefined => {
+    const source = sourceById.get(sourceRevisionId);
+    if (!source) {
       diagnostics.push(
         diagnostic(
           'OUTPUT_SOURCE_NOT_IN_PACKET',
-          'sourceRevisionIds',
+          path,
           `${sourceRevisionId} was not supplied by the validated input packet.`,
+        ),
+      );
+      return undefined;
+    }
+    if (!sourceBelongsToProblem(source, validatedInput.problemId)) {
+      diagnostics.push(
+        diagnostic(
+          'OUTPUT_SOURCE_PROBLEM_MISMATCH',
+          path,
+          `${sourceRevisionId} belongs to official task ${source.officialTaskId}, not ${validatedInput.problemId}.`,
+        ),
+      );
+    }
+    if (requiredUse !== undefined && !source.allowedUses.includes(requiredUse)) {
+      diagnostics.push(
+        diagnostic(
+          'OUTPUT_SOURCE_USE_NOT_ALLOWED',
+          path,
+          `${sourceRevisionId} is not approved for ${requiredUse}.`,
+        ),
+      );
+    }
+    return source;
+  };
+
+  unit.sourceRevisionIds.forEach((sourceRevisionId, sourceIndex) => {
+    reportOutputSource(sourceRevisionId, `sourceRevisionIds.${String(sourceIndex)}`);
+  });
+
+  const inputClaimSourceCounts = new Map<string, number>();
+  for (const claim of validatedInput.technicalClaims) {
+    const key = sourceSetKey(claim.sourceRevisionIds);
+    inputClaimSourceCounts.set(key, (inputClaimSourceCounts.get(key) ?? 0) + 1);
+  }
+  for (const [claimIndex, claim] of unit.claims.entries()) {
+    const path = `claims.${String(claimIndex)}.sourceRevisionIds`;
+    for (const [sourceIndex, sourceRevisionId] of claim.sourceRevisionIds.entries()) {
+      reportOutputSource(sourceRevisionId, `${path}.${String(sourceIndex)}`, 'technical_claim');
+    }
+    const sourceKey = sourceSetKey(claim.sourceRevisionIds);
+    const remainingClaims = inputClaimSourceCounts.get(sourceKey) ?? 0;
+    if (remainingClaims === 0) {
+      diagnostics.push(
+        diagnostic(
+          'OUTPUT_CLAIM_SOURCE_MISMATCH',
+          path,
+          'Each output claim must reference exactly the source revisions declared by an input technical claim.',
+        ),
+      );
+    } else {
+      inputClaimSourceCounts.set(sourceKey, remainingClaims - 1);
+    }
+  }
+  for (const [sourceKey, remainingClaims] of inputClaimSourceCounts) {
+    if (remainingClaims > 0) {
+      diagnostics.push(
+        diagnostic(
+          'OUTPUT_TECHNICAL_CLAIM_MISSING',
+          'claims',
+          `The output does not represent ${String(remainingClaims)} input technical claim(s) for source set ${sourceKey}.`,
         ),
       );
     }

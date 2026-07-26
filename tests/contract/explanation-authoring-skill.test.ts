@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 import {
   prepareExplanationAuthoring,
   validateAuthoringInput,
+  type AuthoringInputPacket,
   type AuthoringSkillSubject,
 } from '../../src/lib/authoring/explanation-authoring-skill.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
@@ -222,5 +223,31 @@ describe('explanation authoring skill contract', () => {
     expect(result.diagnostics.map(({ code }) => code)).toEqual(
       expect.arrayContaining(['SKILL_VERSION_MISMATCH', 'SOURCE_REVISION_MISSING']),
     );
+  });
+
+  it('holds a technical claim that cites another Problem source revision', async () => {
+    const manifest = await readJson<SkillManifest>(
+      'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
+    );
+    const fixtures = await readJson<FixtureManifest>(
+      'tests/fixtures/authoring-skill/manifest.json',
+    );
+    const complete = fixtures.fixtures[0]?.input as AuthoringInputPacket | undefined;
+    const otherProblem = fixtures.fixtures[1]?.input as AuthoringInputPacket | undefined;
+    if (!complete || !otherProblem) throw new Error('Problem fixtures are missing.');
+    const foreignSource = otherProblem.sources.find(
+      ({ sourceKind }) => sourceKind === 'official_editorial',
+    );
+    if (!foreignSource) throw new Error('Foreign editorial source fixture is missing.');
+
+    const input = structuredClone(complete);
+    const firstClaim = input.technicalClaims[0];
+    if (!firstClaim) throw new Error('Technical claim fixture is missing.');
+    input.sources.push(foreignSource);
+    firstClaim.sourceRevisionIds = [foreignSource.sourceRevisionId];
+
+    const result = validateAuthoringInput(input, skillSubject(manifest));
+    expect(result.status).toBe('on_hold');
+    expect(result.diagnostics.map(({ code }) => code)).toContain('SOURCE_PROBLEM_MISMATCH');
   });
 });

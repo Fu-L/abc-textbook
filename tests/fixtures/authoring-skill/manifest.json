@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "authoringSkillVersion": "1.0.0",
-  "authoringSkillDigest": "6584f618dd5fa2ebddecaea734ece6b9a3f2705ba0e5f4459233640a74b7dabd",
+  "authoringSkillDigest": "74bb852dd15732da1c1176c62e5ab15a05f85ed284116674c24db7b9fd6507a0",
   "fixtures": [
     {
       "fixtureId": "good-full-abc212-g",
@@ -53,7 +53,7 @@
         "skill": {
           "name": "abc-explanation-author",
           "version": "1.0.0",
-          "digest": "6584f618dd5fa2ebddecaea734ece6b9a3f2705ba0e5f4459233640a74b7dabd"
+          "digest": "74bb852dd15732da1c1176c62e5ab15a05f85ed284116674c24db7b9fd6507a0"
         }
       }
     },
@@ -113,7 +113,7 @@
         "skill": {
           "name": "abc-explanation-author",
           "version": "1.0.0",
-          "digest": "6584f618dd5fa2ebddecaea734ece6b9a3f2705ba0e5f4459233640a74b7dabd"
+          "digest": "74bb852dd15732da1c1176c62e5ab15a05f85ed284116674c24db7b9fd6507a0"
         }
       }
     },
@@ -139,7 +139,7 @@
         "skill": {
           "name": "abc-explanation-author",
           "version": "1.0.0",
-          "digest": "6584f618dd5fa2ebddecaea734ece6b9a3f2705ba0e5f4459233640a74b7dabd"
+          "digest": "74bb852dd15732da1c1176c62e5ab15a05f85ed284116674c24db7b9fd6507a0"
         }
       }
     }
