@@ -3,14 +3,14 @@
   "manifestId": "abc-explanation-author-initial-v1",
   "status": "frozen",
   "authoringSkillName": "abc-explanation-author",
-  "authoringSkillVersion": "1.1.0",
-  "authoringSkillDigest": "02a7a7b38611484da688caaf4046e7087b2a89f7a344131f1f4b3c3e2373cb2c",
+  "authoringSkillVersion": "1.1.1",
+  "authoringSkillDigest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa",
   "sourceNormalizationVersion": "1.0.0",
   "frozenAt": "2026-07-27T12:00:00+09:00",
   "artifacts": [
     {
       "path": ".agents/skills/abc-explanation-author/SKILL.md",
-      "digest": "537568dc90dede61be2d0c7a12f52a82bce6031fb28f73a8e4eb22cc6fcda813"
+      "digest": "34606b3e44da2a0bf8775bce497dc4c19f38b5146678ab81afa937d2afe813b0"
     },
     {
       "path": ".agents/skills/abc-explanation-author/references/input-output-contract.md",
@@ -30,7 +30,7 @@
     },
     {
       "path": ".agents/skills/abc-explanation-author/references/writing-policy.md",
-      "digest": "58e8a3b52047bc689f448aa7b3581aa0d41f2c4eabe6a745ac3c773518e68cfd"
+      "digest": "0f93019c063fe7806f341c962258066aa7f58e4bc85d5dc3ddd870754706e2e4"
     },
     {
       "path": ".agents/skills/abc-explanation-author/templates/abbreviated-explanation.md",
@@ -43,7 +43,7 @@
   ],
   "sourcePacket": {
     "path": "src/content/sources/authoring/initial-v1.json",
-    "digest": "4e4390eb86a56f9be2c33d68e866fe22c96c82f735a52a9ce115f24e544d486d",
+    "digest": "9607a2d54826793f749cb6f84ef74c653071e68e5721052098a09b895c8bbf1b",
     "inputProblemIds": [
       "abc212-g",
       "abc215-e",

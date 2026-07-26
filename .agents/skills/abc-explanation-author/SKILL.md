@@ -1,7 +1,7 @@
 ---
 name: abc-explanation-author
 description: 検証済みの公式Source RevisionからABC上級問題の解説草案または具体的な保留診断を作る。
-version: 1.1.0
+version: 1.1.1
 ---
 
 # ABC Explanation Author

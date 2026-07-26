@@ -194,6 +194,16 @@ describe('explanation authoring skill contract', () => {
 
     expect(writingPolicy).toContain('自然な考察ロードマップ');
     expect(writingPolicy).toContain('正解から逆算した一直線のこじつけは避ける');
+    expect(writingPolicy).toContain('AtCoder赤コーダー相当');
+    expect(writingPolicy).toContain('部分集合の部分集合は O(3^N)');
+    expect(writingPolicy).toContain('転倒数を Fenwick Tree で数える');
+    expect(writingPolicy).toContain('約数の個数は意外と少ない');
+    expect(writingPolicy).toContain('最大値の最小化は二分探索');
+    expect(writingPolicy).toContain('操作の順番を逆から考える');
+    expect(writingPolicy).toContain('実は不変量が存在する');
+    expect(writingPolicy).toContain('実は状態数が少ない');
+    expect(writingPolicy).toContain('ARC、AGC、Codeforces Div. 1（CF Div1）、UCUP');
+    expect(writingPolicy).toContain('個数制限は設けない');
     expect(writingPolicy).toContain('典型要素');
     expect(writingPolicy).toContain('問題固有の要素');
     expect(writingPolicy).toContain('復習時の助言と文体');
