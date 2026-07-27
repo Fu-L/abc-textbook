@@ -4,7 +4,7 @@
   "scopeType": "merge",
   "scopeId": "initial-v1-us4-ui-search",
   "releaseVersion": null,
-  "subjectDigest": "82c1dae7e7d0ae8c0064a65051120296e7e61937bee7952625a752a5e3dea570",
+  "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
   "inventoryPath": "docs/work-manifests/initial/us4/manifest.json",
   "inventoryDigest": "d9987a3082dffa3fa177f90cdf81d12f0ce83db573ed4fe95f62046c950daf5e",
   "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
@@ -13,9 +13,9 @@
     {
       "checkId": "check-us4-contracts",
       "command": "npm test",
-      "subjectDigest": "82c1dae7e7d0ae8c0064a65051120296e7e61937bee7952625a752a5e3dea570",
+      "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
       "resultPath": "docs/verification/previews/initial-v1/ui-search/acceptance.json",
-      "resultDigest": "ba880958780e123c89c80fa9cbac63000ad2b74f9d9f70bcf5a93a0daea9bad8",
+      "resultDigest": "19b6fef9f1810fe1c091f925ac80d7df9cbe3b95303bf360b6c675719360fa80",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-27T23:21:00+09:00",
@@ -24,9 +24,9 @@
     {
       "checkId": "check-us4-e2e",
       "command": "npm run test:e2e",
-      "subjectDigest": "82c1dae7e7d0ae8c0064a65051120296e7e61937bee7952625a752a5e3dea570",
+      "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
       "resultPath": "docs/verification/previews/initial-v1/ui-search/acceptance.json",
-      "resultDigest": "ba880958780e123c89c80fa9cbac63000ad2b74f9d9f70bcf5a93a0daea9bad8",
+      "resultDigest": "19b6fef9f1810fe1c091f925ac80d7df9cbe3b95303bf360b6c675719360fa80",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-27T23:21:00+09:00",
@@ -35,9 +35,9 @@
     {
       "checkId": "check-us4-base-path",
       "command": "BASE_PATH=/abc-textbook npm run test:e2e:built",
-      "subjectDigest": "82c1dae7e7d0ae8c0064a65051120296e7e61937bee7952625a752a5e3dea570",
+      "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
       "resultPath": "docs/verification/previews/initial-v1/ui-search/acceptance.json",
-      "resultDigest": "ba880958780e123c89c80fa9cbac63000ad2b74f9d9f70bcf5a93a0daea9bad8",
+      "resultDigest": "19b6fef9f1810fe1c091f925ac80d7df9cbe3b95303bf360b6c675719360fa80",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-27T23:21:00+09:00",
@@ -46,7 +46,7 @@
     {
       "checkId": "check-us4-links",
       "command": "npm run link:check:built",
-      "subjectDigest": "82c1dae7e7d0ae8c0064a65051120296e7e61937bee7952625a752a5e3dea570",
+      "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
       "resultPath": "docs/verification/previews/initial-v1/ui-search/routes-links.json",
       "resultDigest": "5dddb3b2f553c884d7dcc49ba81cd95f1dc5b97e2bc63684e9afcdaf491c7410",
       "exitCode": 0,
@@ -57,9 +57,9 @@
     {
       "checkId": "check-us4-static-quality",
       "command": "npm run check && npm run lint && npm run format:check",
-      "subjectDigest": "82c1dae7e7d0ae8c0064a65051120296e7e61937bee7952625a752a5e3dea570",
+      "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
       "resultPath": "docs/verification/previews/initial-v1/ui-search/acceptance.json",
-      "resultDigest": "ba880958780e123c89c80fa9cbac63000ad2b74f9d9f70bcf5a93a0daea9bad8",
+      "resultDigest": "19b6fef9f1810fe1c091f925ac80d7df9cbe3b95303bf360b6c675719360fa80",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-27T23:21:00+09:00",
@@ -68,7 +68,7 @@
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "bf8217c1d9ac947b0d31bf09467ffc233a8949344d15e9c71934300538a40715",
+  "reviewerExecutedCheckSetDigest": "27152f85ef4c266204dfbd79bae680265780d1f11e21bf41922f85aa221d5689",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -103,7 +103,7 @@
       "authorIds": ["person-maintainer"],
       "learningOutcomeIds": ["outcome-us4-dynamic-matrix"],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "公式順 registry、materializeContestSlotStates による明示状態、通常投影を通る future I/unknown fixture、代替リスト、各 destination への区別可能な直接リンクを確認した。",
+      "reviewBasis": "公式順 registry、materializeContestSlotStates による明示状態とavailability優先順位、通常投影を通る future I Problem/unknown fixture、代替リスト、各 destination への区別可能な直接リンクを確認した。",
       "decision": "approved",
       "findings": [],
       "reviewedAt": "2026-07-27T23:21:00+09:00"
@@ -119,7 +119,7 @@
       "authorIds": ["person-maintainer"],
       "learningOutcomeIds": ["outcome-us4-search-accessibility"],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "正規 CatalogSchema endpoint、Pagefind の公開projection・未収録ID除外・最新query制御、URL filter、0件案内、keyboard、axe、非色依存状態、320 CSS pixel reflow を3 browserで確認した。",
+      "reviewBasis": "現行証跡digestとSource Revisionを参照する正規 CatalogSchema endpoint、Pagefind の公開projection・未収録ID除外・最新query制御、URL filter、0件案内、keyboard、axe、非色依存状態、320 CSS pixel reflow を3 browserで確認した。",
       "decision": "approved",
       "findings": [],
       "reviewedAt": "2026-07-27T23:21:00+09:00"
@@ -150,5 +150,5 @@
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
   "generatedAt": "2026-07-27T23:21:00+09:00",
-  "evidenceDigest": "72c8e37b9ec648af008ebc9ca64c4418b9d31480fc2924b9214c233d6b0da1e0"
+  "evidenceDigest": "2984f63e76d96c6a3434187dc5b3ba5490405d3b0bee7990711a59a7157885e2"
 }

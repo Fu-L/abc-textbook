@@ -8,6 +8,7 @@ import {
   canonicalPreviewRoutes,
   frozenPreviewUiCatalogSource,
   futureCompatibilityCatalog,
+  futureProblemCompatibilityCatalog,
   withBase,
 } from '../../src/lib/catalog/preview-ui-catalog.js';
 import { buildPreviewCatalogContract } from '../../src/lib/catalog/preview-catalog-contract.js';
@@ -61,6 +62,21 @@ describe('initial-v1 UI route contract', () => {
     expect(catalog.problems.map(({ id }) => id)).toEqual(
       frozenPreviewUiCatalogSource.selectedProblemIds,
     );
+    expect(catalog.release.validationSummary.checks[0]?.resultDigest).toBe(
+      componentEvidence.artifactFiles[0]?.digest,
+    );
+    expect(catalog.release.humanContentReviewEvidenceRefs[0]?.digest).toBe(
+      componentEvidence.reviewEvidence.digest,
+    );
+    const sourceIds = new Set(catalog.sources.map(({ id }) => id));
+    for (const revisionId of catalog.problems.flatMap(
+      ({ sourceRevisionIds }) => sourceRevisionIds,
+    )) {
+      expect(sourceIds).toContain(revisionId);
+    }
+    for (const revisionId of catalog.advancedSlotRegistry.orderEvidenceSourceRevisionIds) {
+      expect(sourceIds).toContain(revisionId);
+    }
   });
 
   it('projects future labels and unavailable states through the ordinary catalog path', () => {
@@ -76,6 +92,41 @@ describe('initial-v1 UI route contract', () => {
       )?.state,
     ).toBe('unknown');
     expect(JSON.stringify(buildSearchDocuments(futureCompatibilityCatalog))).toContain('abc999');
+  });
+
+  it('lets unavailable official state override a selected preview problem', () => {
+    const catalog = buildPreviewUiCatalog({
+      ...frozenPreviewUiCatalogSource,
+      contests: frozenPreviewUiCatalogSource.contests.map((contest) =>
+        contest.id === 'abc212'
+          ? { ...contest, slotStateOverrides: { G: 'unknown' as const } }
+          : contest,
+      ),
+    });
+    const cell = catalog.cells.find(
+      ({ contestId, label }) => contestId === 'abc212' && label === 'G',
+    );
+
+    expect(cell?.state).toBe('unknown');
+    expect(cell?.problemId).toBeNull();
+  });
+
+  it('projects a future I problem onto canonical routes, search, and coverage', () => {
+    const futureProblem = futureProblemCompatibilityCatalog.problems.find(
+      ({ id }) => id === 'abc999-i',
+    );
+    expect(futureProblem?.label).toBe('I');
+    expect(canonicalPreviewRoutes(futureProblemCompatibilityCatalog)).toContain(
+      '/problems/abc999-i/',
+    );
+    expect(JSON.stringify(buildSearchDocuments(futureProblemCompatibilityCatalog))).toContain(
+      'Future I Projection Fixture',
+    );
+    expect(
+      futureProblemCompatibilityCatalog.cells.find(
+        ({ contestId, label }) => contestId === 'abc999' && label === 'I',
+      )?.state,
+    ).toBe('preview');
   });
 
   it('keeps base-path joining deterministic without double slashes', () => {

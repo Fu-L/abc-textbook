@@ -1,5 +1,7 @@
 import type { z } from 'zod';
 
+import acceptanceEvidence from '../../../docs/verification/previews/initial-v1/ui-search/acceptance.json';
+import reviewEvidence from '../../../docs/reviews/human-content/previews/initial-v1/us4/ui-search-review.json';
 import { canonicalDigest } from '../domain/canonical-json.js';
 import { CatalogSchema } from '../domain/schema-parts/catalog.js';
 import { buildAdvancedSlotRegistry } from './advanced-slot-registry.js';
@@ -28,14 +30,12 @@ export const buildPreviewCatalogContract = (
     })),
   });
   const checkedAt = '2026-07-27T23:21:00+09:00';
-  const endpointCheckDigest = canonicalDigest({
-    checkId: 'check-preview-catalog-contract',
-    subjectDigest: source.subjectDigest,
-  });
-  const reviewDigest = canonicalDigest({
-    evidenceId: 'human-content-review-initial-v1-us4',
-    subjectDigest: source.subjectDigest,
-  });
+  const endpointCheckDigest = canonicalDigest(acceptanceEvidence);
+  const reviewDigest = canonicalDigest(reviewEvidence);
+  const endpointCheck = reviewEvidence.applicableChecks.find(
+    ({ checkId }) => checkId === 'check-us4-contracts',
+  );
+  if (!endpointCheck) throw new Error('US4 contract review evidence is missing.');
 
   const groupForProblem = (problemId: string) =>
     source.groups.filter(({ problemIds }) => problemIds.includes(problemId));
@@ -72,7 +72,7 @@ export const buildPreviewCatalogContract = (
           {
             checkId: 'check-preview-catalog-contract',
             command: 'npm test -- tests/contract/ui-routes.test.ts',
-            subjectDigest: source.subjectDigest,
+            subjectDigest: endpointCheck.subjectDigest,
             resultPath: 'docs/verification/previews/initial-v1/ui-search/acceptance.json',
             resultDigest: endpointCheckDigest,
             exitCode: 0,
@@ -86,7 +86,7 @@ export const buildPreviewCatalogContract = (
           evidenceId: 'human-content-review-initial-v1-us4',
           path: 'docs/reviews/human-content/previews/initial-v1/us4/ui-search-review.json',
           digest: reviewDigest,
-          subjectDigest: source.subjectDigest,
+          subjectDigest: reviewEvidence.subjectDigest,
           authorIds: ['person-maintainer'],
           reviewerIds: ['person-maintainer'],
           reviewMode: 'self',
@@ -224,9 +224,56 @@ export const buildPreviewCatalogContract = (
     })),
     placements: [],
     authoringUnits: [],
-    sources: [],
+    sources: [
+      ...source.contests.map((contest) => sourceForContest(contest)),
+      ...source.problems.flatMap((problem) =>
+        problem.sourceRevisionIds.map((revisionId) =>
+          sourceForProblemRevision(problem, revisionId),
+        ),
+      ),
+    ],
     correctionImpacts: [],
   });
 };
 
 export const previewCatalogContract = buildPreviewCatalogContract();
+
+function sourceForContest(contest: PreviewUiCatalogSource['contests'][number]) {
+  return {
+    id: contest.taskOrderSourceRevisionId,
+    url: `https://atcoder.jp/contests/${contest.id}/tasks`,
+    sourceKind: 'official_contest' as const,
+    contestId: contest.id,
+    officialTaskId: null,
+    checkedAt: contest.checkedAt,
+    fingerprint: revisionFingerprint(contest.taskOrderSourceRevisionId),
+    termsCheckedAt: contest.checkedAt,
+  };
+}
+
+function sourceForProblemRevision(
+  problem: PreviewUiCatalogSource['problems'][number],
+  revisionId: string,
+) {
+  const editorialMatch = /^source-[^-]+-editorial-(?<itemId>\d+)-/u.exec(revisionId);
+  return {
+    id: revisionId,
+    url: editorialMatch?.groups?.itemId
+      ? `https://atcoder.jp/contests/${problem.contestId}/editorial/${editorialMatch.groups.itemId}`
+      : problem.officialUrl,
+    sourceKind: editorialMatch ? ('official_editorial' as const) : ('official_problem' as const),
+    contestId: problem.contestId,
+    officialTaskId: problem.officialTaskId,
+    checkedAt: problem.checkedAt,
+    fingerprint: revisionFingerprint(revisionId),
+    termsCheckedAt: problem.checkedAt,
+  };
+}
+
+function revisionFingerprint(revisionId: string): string {
+  const fingerprint = revisionId.split('-').at(-1);
+  if (!fingerprint || !/^[a-f0-9]{64}$/u.test(fingerprint)) {
+    throw new Error(`Source Revision ID has no SHA-256 fingerprint: ${revisionId}`);
+  }
+  return fingerprint;
+}

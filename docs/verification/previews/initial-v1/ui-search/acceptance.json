@@ -10,7 +10,7 @@
       "checkId": "check-us4-contracts",
       "command": "npm test",
       "result": "passed",
-      "summary": "32 files and 304 tests passed, including the frozen US4 routes, the canonical CatalogSchema endpoint, future I/unknown projection, and evidence contracts."
+      "summary": "32 files and 306 tests passed, including the frozen US4 routes, the canonical CatalogSchema endpoint with current evidence/source references, future I Problem coverage, unknown-state precedence, and evidence contracts."
     },
     {
       "checkId": "check-us4-e2e",

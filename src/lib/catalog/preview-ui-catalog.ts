@@ -59,7 +59,7 @@ const problemSourceSchema = z
 const groupSchema = z
   .strictObject({
     domain: z.string().min(1),
-    problemIds: z.array(z.string().min(1)).min(2),
+    problemIds: z.array(z.string().min(1)).min(1),
     tag: z
       .strictObject({
         id: z.string().min(1),
@@ -116,7 +116,7 @@ const previewProblemSchema = z.strictObject({
   supportingTagIds: z.array(z.string().min(1)),
   learningUnitId: z.string().min(1),
   learningOutcomeId: z.string().min(1),
-  similarProblemIds: z.array(z.string().min(1)).min(1),
+  similarProblemIds: z.array(z.string().min(1)),
   explanationSummary: z.string().min(1),
   sourceRevisionIds: z.array(z.string().min(1)).min(1),
 });
@@ -326,17 +326,20 @@ export const buildPreviewUiCatalog = (
       const previewProblem = problems.find(
         (problem) => problem.contestId === contest.id && problem.label === slot.label,
       );
-      const state = previewProblem
-        ? 'preview'
-        : slot.availability === 'exists'
-          ? 'unpublished'
-          : slot.availability;
+      const state =
+        slot.availability === 'unknown' || slot.availability === 'withdrawn'
+          ? slot.availability
+          : previewProblem
+            ? 'preview'
+            : slot.availability === 'exists'
+              ? 'unpublished'
+              : slot.availability;
       return {
         contestId: contest.id,
         label: slot.label,
         state,
         stateLabel: stateLabel[state],
-        problemId: previewProblem?.id ?? null,
+        problemId: state === 'preview' ? (previewProblem?.id ?? null) : null,
         officialTaskId: slot.officialTaskId,
       } as const;
     }),
@@ -440,6 +443,83 @@ export const futureCompatibilityCatalog = buildPreviewUiCatalog({
       taskOrderSourceRevisionId: 'source-fixture-abc999-task-list',
       checkedAt: '2026-07-27T22:00:00+09:00',
       slotStateOverrides: { G: 'unknown' },
+    }),
+  ],
+});
+
+export const futureProblemCompatibilityCatalog = buildPreviewUiCatalog({
+  previewId: 'future-problem-fixture',
+  subjectDigest: frozenPreviewUiCatalogSource.subjectDigest,
+  publicationBoundary: 'private-preview',
+  problemPublicationState: 'preview',
+  releaseVersion: 'future-problem-fixture',
+  selectedProblemIds: ['abc999-i'],
+  contests: futureCompatibilityCatalog.contests.map((contest) =>
+    contestSchema.parse({
+      ...contest,
+      startedAt: '2026-07-27T20:00:00+09:00',
+      endedAt: '2026-07-27T21:40:00+09:00',
+      officialTaskOrder: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'I'],
+      officialTaskIds: [
+        'abc999_a',
+        'abc999_b',
+        'abc999_c',
+        'abc999_d',
+        'abc999_e',
+        'abc999_f',
+        'abc999_g',
+        'abc999_i',
+      ],
+      taskOrderSourceRevisionId: 'source-fixture-abc999-task-list',
+      checkedAt: '2026-07-27T22:00:00+09:00',
+    }),
+  ),
+  problems: [
+    problemSourceSchema.parse({
+      id: 'abc999-i',
+      contestId: 'abc999',
+      slotLabel: 'I',
+      officialTaskId: 'abc999_i',
+      title: 'Future I Projection Fixture',
+      officialUrl: 'https://atcoder.jp/contests/abc999/tasks/abc999_i',
+      constraintsSummary: 'Fixture constraints for future I projection.',
+      difficultyEvidence: null,
+      sourceRevisionIds: ['source-fixture-abc999-i-problem'],
+      checkedAt: '2026-07-27T22:00:00+09:00',
+    }),
+  ],
+  groups: [
+    groupSchema.parse({
+      domain: 'future-slot',
+      problemIds: ['abc999-i'],
+      tag: {
+        id: 'provisional-tag-future-slot',
+        name: '将来問題記号',
+        definition: '将来追加される問題記号を通常の投影で扱うための契約fixture。',
+        prerequisiteTagIds: [],
+        outcomeIds: ['outcome-provisional-future-slot'],
+        representativeProblemIds: ['abc999-i'],
+      },
+      outcome: {
+        id: 'outcome-provisional-future-slot',
+        statement: '将来問題記号を既存のrouteと検索projectionで扱える。',
+        prerequisiteOutcomeIds: [],
+      },
+      unit: {
+        id: 'provisional-unit-future-slot',
+        title: '将来問題記号の互換性',
+        prerequisiteUnitIds: [],
+        problemIds: ['abc999-i'],
+        sourceRevisionIds: ['source-fixture-abc999-i-problem'],
+        tagIds: ['provisional-tag-future-slot'],
+        outcomeIds: ['outcome-provisional-future-slot'],
+      },
+      placements: [
+        {
+          problemId: 'abc999-i',
+          classificationRationale: 'I問題も同じ投影境界を通ることを確認するfixture。',
+        },
+      ],
     }),
   ],
 });
