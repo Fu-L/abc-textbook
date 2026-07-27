@@ -7,13 +7,42 @@ test('indexes entity kind, aliases, hierarchy, and contest terms on canonical ro
   await page.getByRole('button', { name: '検索' }).click();
   const dialog = page.getByRole('dialog', { name: '検索' });
   const input = dialog.locator('.pagefind-ui__search-input');
+  const status = dialog.locator('[data-search-status]');
+  const cases = [
+    { term: 'Power Pair', kind: '問題', href: '/problems/abc212-g/' },
+    {
+      term: 'graph-search',
+      kind: '典型タグ',
+      href: '/tags/provisional-tag-shortest-path-structure/',
+    },
+    {
+      term: 'グラフ・探索',
+      kind: '学習単位',
+      href: '/learn/provisional-unit-shortest-path-structure/',
+    },
+    { term: 'ABC 212', kind: 'コンテスト索引', href: '/contests/' },
+  ] as const;
 
-  for (const term of ['Power Pair', 'graph-search', 'グラフ・探索', 'ABC 212']) {
+  for (const { term, kind, href } of cases) {
     await input.fill(term);
-    await expect(dialog.locator('.pagefind-ui__result-link').first()).toBeVisible();
+    await expect(status).toHaveText(/\d+件の候補があります。/u);
+    const result = dialog.locator(`.pagefind-ui__result-link[href$="${href}"]`).first();
+    await expect(result).toBeVisible();
+    await expect(result).toContainText(`${kind}:`);
   }
+
+  // A slower previous query must never overwrite the newest query's result set.
   await input.fill('Power Pair');
-  await expect(dialog.locator('.pagefind-ui__result-link').first()).toContainText('問題:');
+  await input.fill('graph-search');
+  await expect(status).toHaveText(/\d+件の候補があります。/u);
+  await expect(
+    dialog.locator(
+      '.pagefind-ui__result-link[href$="/tags/provisional-tag-shortest-path-structure/"]',
+    ),
+  ).toBeVisible();
+  await expect(
+    dialog.locator('.pagefind-ui__result-link[href$="/problems/abc212-g/"]'),
+  ).toHaveCount(0);
 });
 
 test('shows zero-result guidance and excludes controls, staging, and local state', async ({
@@ -25,9 +54,18 @@ test('shows zero-result guidance and excludes controls, staging, and local state
   await search.getByRole('button', { name: '適用' }).click();
   await expect(page.getByText(/0件.*条件を変更/u)).toBeVisible();
 
+  await page.getByRole('button', { name: '検索' }).click();
+  const dialog = page.getByRole('dialog', { name: '検索' });
+  const input = dialog.locator('.pagefind-ui__search-input');
+  const status = dialog.locator('[data-search-status]');
+  for (const excluded of ['ABC212_E', 'staging/', 'needsReview', 'statusUpdatedAt']) {
+    await input.fill(excluded);
+    await expect(status).toContainText('一致する公開ページはありません。');
+    await expect(dialog.locator('.pagefind-ui__result-link')).toHaveCount(0);
+  }
+
   const catalog = await page.request.get('./data/catalog.json');
-  const body = await catalog.text();
-  expect(body).not.toContain('staging/');
-  expect(body).not.toContain('needsReview');
-  expect(body).not.toContain('statusUpdatedAt');
+  expect(catalog.ok()).toBe(true);
+  const payload = (await catalog.json()) as { schemaVersion?: string };
+  expect(payload.schemaVersion).toBe('3.0.0');
 });

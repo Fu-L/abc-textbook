@@ -1,12 +1,22 @@
 ---
+import { previewCatalog } from '../lib/catalog/preview-ui-catalog.js';
+
 interface Props {
   base: string;
 }
 
 const { base } = Astro.props;
+const excludedProblemIdentifiers = previewCatalog.cells
+  .filter(({ state, officialTaskId }) => state !== 'preview' && officialTaskId !== null)
+  .map(({ officialTaskId }) => officialTaskId?.toLocaleLowerCase('en-US'));
 ---
 
-<div class="site-search" data-pagefind-ignore data-search-base={base}>
+<div
+  class="site-search"
+  data-pagefind-ignore
+  data-search-base={base}
+  data-excluded-problem-identifiers={JSON.stringify(excludedProblemIdentifiers)}
+>
   <button type="button" disabled data-search-open aria-describedby="search-requirement">検索</button
   >
   <span id="search-requirement" class="noscript-guidance">検索にはJavaScriptが必要です。</span>
@@ -38,6 +48,9 @@ const { base } = Astro.props;
   }
   const root = document.querySelector<HTMLElement>('[data-search-base]');
   const base = root?.dataset.searchBase ?? '/';
+  const excludedProblemIdentifiers = new Set<string>(
+    JSON.parse(root?.dataset.excludedProblemIdentifiers ?? '[]'),
+  );
   const openButton = document.querySelector('[data-search-open]');
   const dialog = document.querySelector('[data-search-dialog]');
   const input = dialog?.querySelector('.pagefind-ui__search-input');
@@ -45,6 +58,8 @@ const { base } = Astro.props;
   const results = dialog?.querySelector('[data-search-results]');
   const requirement = root?.querySelector('[id="search-requirement"]');
   let pagefindPromise: Promise<PagefindModule> | undefined;
+  let searchSequence = 0;
+  let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 
   if (
     openButton instanceof HTMLButtonElement &&
@@ -65,14 +80,7 @@ const { base } = Astro.props;
         dialog.close();
       }
     });
-    input.addEventListener('input', async () => {
-      const term = input.value.trim();
-      results.replaceChildren();
-      if (!term) {
-        status.textContent = '検索語を入力してください。';
-        return;
-      }
-      status.textContent = '検索中です。';
+    const runSearch = async (term: string, requestSequence: number) => {
       try {
         pagefindPromise ??= import(
           /* @vite-ignore */ `${base}pagefind/pagefind.js`
@@ -80,9 +88,18 @@ const { base } = Astro.props;
         const pagefind = await pagefindPromise;
         await pagefind.init();
         const response = await pagefind.search(term);
-        const loaded = await Promise.all(
+        const candidates = await Promise.all(
           response.results.slice(0, 10).map((result) => result.data()),
         );
+        if (requestSequence !== searchSequence || input.value.trim() !== term) return;
+        const normalizedTerm = term.toLocaleLowerCase('ja');
+        const loaded = candidates.filter((item) =>
+          `${item.meta?.title ?? ''} ${item.meta?.['search-terms'] ?? ''} ${item.excerpt ?? ''}`
+            .replace(/<[^>]+>/gu, '')
+            .toLocaleLowerCase('ja')
+            .includes(normalizedTerm),
+        );
+        results.replaceChildren();
         for (const item of loaded) {
           const li = document.createElement('li');
           const link = document.createElement('a');
@@ -101,8 +118,27 @@ const { base } = Astro.props;
             ? `「${term}」に一致する公開ページはありません。`
             : `${loaded.length}件の候補があります。`;
       } catch {
-        status.textContent = '検索索引を読み込めませんでした。時間をおいて再試行してください。';
+        if (requestSequence === searchSequence) {
+          status.textContent = '検索索引を読み込めませんでした。時間をおいて再試行してください。';
+        }
       }
+    };
+    input.addEventListener('input', () => {
+      searchSequence += 1;
+      const requestSequence = searchSequence;
+      if (debounceTimer) clearTimeout(debounceTimer);
+      const term = input.value.trim();
+      results.replaceChildren();
+      if (!term) {
+        status.textContent = '検索語を入力してください。';
+        return;
+      }
+      if (excludedProblemIdentifiers.has(term.toLocaleLowerCase('en-US'))) {
+        status.textContent = `「${term}」に一致する公開ページはありません。`;
+        return;
+      }
+      status.textContent = '検索中です。';
+      debounceTimer = setTimeout(() => void runSearch(term, requestSequence), 150);
     });
   }
 </script>

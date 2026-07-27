@@ -20,11 +20,17 @@ test('renders dynamic columns, explicit states, direct links, and the alternativ
 
 test('the registry accepts a future I column through the same projection', async ({ page }) => {
   await page.goto('./contests/');
-  const labels = await page.locator('[data-registry-labels]').getAttribute('data-registry-labels');
+  const labels = await page
+    .locator('[data-registry-labels]')
+    .first()
+    .getAttribute('data-registry-labels');
   expect(labels?.split(',')).toEqual(['E', 'F', 'G', 'Ex', 'H']);
-  await page.getByText('将来の I 問題を同じ経路で扱う互換性 fixture').click();
+  await page.getByText('将来の I 問題と確認不能状態を同じ投影で扱う互換性 fixture').click();
   const fixture = page.getByRole('table', { name: 'future I compatibility fixture' });
   await expect(fixture.getByRole('columnheader', { name: 'I', exact: true })).toBeVisible();
+  await expect(fixture.getByText('確認不能')).toBeVisible();
+  await expect(fixture.getByText('未収録').first()).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'コンテスト別リスト' }).last()).toBeVisible();
 });
 
 test('keeps only the two-dimensional table horizontally scrollable at 320 CSS pixels', async ({

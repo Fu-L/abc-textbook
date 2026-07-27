@@ -1,6 +1,7 @@
 ---
 import SearchControl from '../components/SearchControl.astro';
 import { withBase } from '../lib/catalog/preview-ui-catalog.js';
+import { buildSearchDocuments } from '../lib/catalog/search-documents.js';
 import '../styles/global.css';
 
 interface Crumb {
@@ -19,6 +20,12 @@ interface Props {
 const { title, description, breadcrumbs = [], previous, next } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const canonical = new URL(withBase(Astro.url.pathname.slice(base.length - 1), base), Astro.site);
+const logicalPath = `/${Astro.url.pathname.slice(base.length).replace(/^\/+|\/+$/gu, '')}`;
+const canonicalLogicalPath = logicalPath === '/' ? '/' : `${logicalPath}/`;
+const searchDocuments = buildSearchDocuments().filter(
+  ({ route }) => route === canonicalLogicalPath,
+);
+const searchTerms = [...new Set(searchDocuments.flatMap(({ terms }) => terms))];
 const navItems = [
   ['学習経路', '/learn/'],
   ['問題', '/problems/'],
@@ -73,6 +80,18 @@ const navItems = [
         </ol>
       </nav>
       <main id="main-content" data-pagefind-body>
+        {
+          searchTerms.length > 0 && (
+            <span
+              class="visually-hidden"
+              aria-hidden="true"
+              data-search-projection
+              data-pagefind-meta="search-terms"
+            >
+              {searchTerms.join(' ')}
+            </span>
+          )
+        }
         <slot />
       </main>
       {

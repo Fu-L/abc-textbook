@@ -1,6 +1,6 @@
 ---
-import { futureLabelFixtureRegistry, previewCatalog } from '../lib/catalog/preview-ui-catalog.js';
-import ContestProblemCell from './ContestProblemCell.astro';
+import { futureCompatibilityCatalog, previewCatalog } from '../lib/catalog/preview-ui-catalog.js';
+import ContestMatrixView from './ContestMatrixView.astro';
 
 interface Props {
   base: string;
@@ -9,97 +9,21 @@ interface Props {
 const { base } = Astro.props;
 ---
 
-<section
-  aria-labelledby="matrix-title"
-  data-registry-labels={previewCatalog.registry.labels.join(',')}
->
-  <h2 id="matrix-title">上級問題マトリクス</h2>
-  <p>列は各コンテストの公式問題順で D より後に現れる記号の安定和集合です。</p>
-  <div
-    class="matrix-scroll"
-    data-matrix-scroll
-    tabindex="0"
-    aria-label="上級問題マトリクスのスクロール領域"
-  >
-    <table>
-      <caption
-        >initial-v1 上級問題マトリクス。空欄は使わず、各セルの状態をテキストで示します。</caption
-      >
-      <thead>
-        <tr
-          ><th scope="col">コンテスト</th>{
-            previewCatalog.registry.labels.map((label) => <th scope="col">{label}</th>)
-          }</tr
-        >
-      </thead>
-      <tbody>
-        {
-          previewCatalog.contests.map((contest) => (
-            <tr id={contest.id}>
-              <th scope="row">
-                <a href={contest.officialUrl} rel="external">
-                  ABC {contest.number}（外部公式サイト）
-                </a>
-              </th>
-              {previewCatalog.registry.labels.map((label) => {
-                const cell = previewCatalog.cells.find(
-                  (item) => item.contestId === contest.id && item.label === label,
-                );
-                return <td>{cell && <ContestProblemCell base={base} cell={cell} />}</td>;
-              })}
-            </tr>
-          ))
-        }
-      </tbody>
-    </table>
-  </div>
-</section>
+<ContestMatrixView
+  base={base}
+  catalog={previewCatalog}
+  heading="上級問題マトリクス"
+  headingId="matrix-title"
+/>
 
-<details data-pagefind-ignore>
-  <summary>将来の I 問題を同じ経路で扱う互換性 fixture</summary>
-  <table>
-    <caption>future I compatibility fixture</caption>
-    <thead
-      ><tr>{futureLabelFixtureRegistry.labels.map((label) => <th scope="col">{label}</th>)}</tr
-      ></thead
-    >
-    <tbody
-      ><tr
-        >{
-          futureLabelFixtureRegistry.labels.map((label) => (
-            <td>{label === 'I' ? '収録候補 I' : `fixture ${label}`}</td>
-          ))
-        }</tr
-      ></tbody
-    >
-  </table>
+<details>
+  <summary>将来の I 問題と確認不能状態を同じ投影で扱う互換性 fixture</summary>
+  <ContestMatrixView
+    base={base}
+    catalog={futureCompatibilityCatalog}
+    heading="future I compatibility fixture"
+    headingId="future-matrix-title"
+    showAlternative={true}
+    indexContent={true}
+  />
 </details>
-
-<section aria-labelledby="alternative-title">
-  <h2 id="alternative-title">コンテスト別リスト</h2>
-  <p>表と同じ結果を縦方向だけで読める代替表示です。</p>
-  {
-    previewCatalog.contests.map((contest) => (
-      <article>
-        <h3>ABC {contest.number}</h3>
-        <dl>
-          {previewCatalog.registry.labels.map((label) => {
-            const cell = previewCatalog.cells.find(
-              (item) => item.contestId === contest.id && item.label === label,
-            );
-            return (
-              cell && (
-                <>
-                  <dt>{label}</dt>
-                  <dd>
-                    <ContestProblemCell base={base} cell={cell} />
-                  </dd>
-                </>
-              )
-            );
-          })}
-        </dl>
-      </article>
-    ))
-  }
-</section>

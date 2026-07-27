@@ -1,0 +1,104 @@
+---
+import type { PreviewUiCatalog } from '../lib/catalog/preview-ui-catalog.js';
+import ContestProblemCell from './ContestProblemCell.astro';
+
+interface Props {
+  base: string;
+  catalog: PreviewUiCatalog;
+  heading: string;
+  headingId: string;
+  showAlternative?: boolean;
+  indexContent?: boolean;
+}
+
+const {
+  base,
+  catalog,
+  heading,
+  headingId,
+  showAlternative = true,
+  indexContent = false,
+} = Astro.props;
+---
+
+<section
+  aria-labelledby={headingId}
+  data-registry-labels={catalog.registry.labels.join(',')}
+  data-pagefind-ignore={indexContent ? undefined : true}
+>
+  <h2 id={headingId}>{heading}</h2>
+  <p>列は各コンテストの公式問題順で D より後に現れる記号の安定和集合です。</p>
+  <div
+    class="matrix-scroll"
+    data-matrix-scroll
+    tabindex="0"
+    aria-label={`${heading}のスクロール領域`}
+  >
+    <table>
+      <caption>{heading}。空欄は使わず、各セルの状態をテキストで示します。</caption>
+      <thead>
+        <tr>
+          <th scope="col">コンテスト</th>
+          {catalog.registry.labels.map((label) => <th scope="col">{label}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {
+          catalog.contests.map((contest) => (
+            <tr id={`${headingId}-${contest.id}`}>
+              <th scope="row">
+                <a href={contest.officialUrl} rel="external">
+                  ABC {contest.number}（外部公式サイト）
+                </a>
+              </th>
+              {catalog.registry.labels.map((label) => {
+                const cell = catalog.cells.find(
+                  (item) => item.contestId === contest.id && item.label === label,
+                );
+                return (
+                  <td>
+                    {cell && <ContestProblemCell base={base} catalog={catalog} cell={cell} />}
+                  </td>
+                );
+              })}
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{
+  showAlternative && (
+    <section
+      aria-labelledby={`${headingId}-alternative`}
+      data-pagefind-ignore={indexContent ? undefined : true}
+    >
+      <h2 id={`${headingId}-alternative`}>コンテスト別リスト</h2>
+      <p>表と同じ結果を縦方向だけで読める代替表示です。</p>
+      {catalog.contests.map((contest) => (
+        <article>
+          <h3>ABC {contest.number}</h3>
+          <dl>
+            {catalog.registry.labels.map((label) => {
+              const cell = catalog.cells.find(
+                (item) => item.contestId === contest.id && item.label === label,
+              );
+              return (
+                cell && (
+                  <>
+                    <dt>{label}</dt>
+                    <dd>
+                      <ContestProblemCell base={base} catalog={catalog} cell={cell} />
+                    </dd>
+                  </>
+                )
+              );
+            })}
+          </dl>
+        </article>
+      ))}
+    </section>
+  )
+}

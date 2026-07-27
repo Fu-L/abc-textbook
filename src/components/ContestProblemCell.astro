@@ -1,19 +1,31 @@
 ---
-import { previewCatalog, withBase } from '../lib/catalog/preview-ui-catalog.js';
+import {
+  previewCatalog,
+  withBase,
+  type PreviewUiCatalog,
+} from '../lib/catalog/preview-ui-catalog.js';
 
 interface Props {
   base: string;
   cell: (typeof previewCatalog.cells)[number];
+  catalog?: PreviewUiCatalog;
 }
 
-const { base, cell } = Astro.props;
+const { base, cell, catalog = previewCatalog } = Astro.props;
 const problem = cell.problemId
-  ? previewCatalog.problems.find(({ id }) => id === cell.problemId)
+  ? catalog.problems.find(({ id }) => id === cell.problemId)
   : undefined;
-const tag = problem ? previewCatalog.tags.find(({ id }) => id === problem.primaryTagId) : undefined;
+const tag = problem ? catalog.tags.find(({ id }) => id === problem.primaryTagId) : undefined;
 const unit = problem
-  ? previewCatalog.learningUnits.find(({ id }) => id === problem.learningUnitId)
+  ? catalog.learningUnits.find(({ id }) => id === problem.learningUnitId)
   : undefined;
+const unavailableMessage = {
+  official_absent: 'このコンテストの公式問題一覧に該当記号はありません。',
+  preview: '収録問題の情報を読み込めません。',
+  unknown: '公式問題の状態を確認できません。',
+  withdrawn: '公式サイトで取り下げられています。',
+  unpublished: '公式問題はありますが、この preview には未収録です。',
+} as const;
 ---
 
 <div class:list={['contest-cell', `state-${cell.state}`]} data-problem-id={problem?.id}>
@@ -44,7 +56,7 @@ const unit = problem
             </li>
           )}
           {problem.supportingTagIds.map((tagId) => {
-            const supporting = previewCatalog.tags.find(({ id }) => id === tagId);
+            const supporting = catalog.tags.find(({ id }) => id === tagId);
             return (
               supporting && (
                 <li>
@@ -54,7 +66,7 @@ const unit = problem
             );
           })}
           {problem.similarProblemIds.map((problemId) => {
-            const similar = previewCatalog.problems.find(({ id }) => id === problemId);
+            const similar = catalog.problems.find(({ id }) => id === problemId);
             return (
               similar && (
                 <li>
@@ -65,10 +77,8 @@ const unit = problem
           })}
         </ul>
       </>
-    ) : cell.officialTaskId ? (
-      <span>{cell.officialTaskId.toUpperCase()} は preview 対象外です。</span>
     ) : (
-      <span>このコンテストの公式問題一覧に該当記号はありません。</span>
+      <span data-pagefind-ignore>{unavailableMessage[cell.state]}</span>
     )
   }
 </div>

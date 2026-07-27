@@ -7,8 +7,11 @@ import {
   buildPreviewUiCatalog,
   canonicalPreviewRoutes,
   frozenPreviewUiCatalogSource,
+  futureCompatibilityCatalog,
   withBase,
 } from '../../src/lib/catalog/preview-ui-catalog.js';
+import { buildPreviewCatalogContract } from '../../src/lib/catalog/preview-catalog-contract.js';
+import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { HumanContentReviewEvidenceSchema } from '../../src/lib/domain/schema-parts/review-evidence.js';
 import { buildSearchDocuments } from '../../src/lib/catalog/search-documents.js';
 import { validatePreviewChain } from '../../src/lib/preview/preview-chain.js';
@@ -48,6 +51,31 @@ describe('initial-v1 UI route contract', () => {
     expect(new Set(catalog.problems.map(({ publicationState }) => publicationState))).toEqual(
       new Set(['preview']),
     );
+  });
+
+  it('serves the preview through the repository-wide CatalogSchema contract', () => {
+    const catalog = buildPreviewCatalogContract();
+
+    expect(() => CatalogSchema.parse(catalog)).not.toThrow();
+    expect(catalog.schemaVersion).toBe('3.0.0');
+    expect(catalog.problems.map(({ id }) => id)).toEqual(
+      frozenPreviewUiCatalogSource.selectedProblemIds,
+    );
+  });
+
+  it('projects future labels and unavailable states through the ordinary catalog path', () => {
+    expect(futureCompatibilityCatalog.registry.labels).toContain('I');
+    expect(
+      futureCompatibilityCatalog.cells.find(
+        ({ contestId, label }) => contestId === 'abc999' && label === 'I',
+      )?.state,
+    ).toBe('unpublished');
+    expect(
+      futureCompatibilityCatalog.cells.find(
+        ({ contestId, label }) => contestId === 'abc999' && label === 'G',
+      )?.state,
+    ).toBe('unknown');
+    expect(JSON.stringify(buildSearchDocuments(futureCompatibilityCatalog))).toContain('abc999');
   });
 
   it('keeps base-path joining deterministic without double slashes', () => {
