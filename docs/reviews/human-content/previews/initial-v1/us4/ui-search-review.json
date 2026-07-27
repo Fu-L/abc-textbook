@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "3.0.0",
+  "id": "human-content-review-initial-v1-us4",
+  "scopeType": "merge",
+  "scopeId": "initial-v1-us4-ui-search",
+  "releaseVersion": null,
+  "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
+  "inventoryPath": "docs/work-manifests/initial/us4/manifest.json",
+  "inventoryDigest": "d9987a3082dffa3fa177f90cdf81d12f0ce83db573ed4fe95f62046c950daf5e",
+  "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
+  "reviewMode": "self",
+  "applicableChecks": [
+    {
+      "checkId": "check-us4-contracts",
+      "command": "npm test",
+      "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
+      "resultPath": "docs/verification/previews/initial-v1/ui-search/acceptance.json",
+      "resultDigest": "19b6fef9f1810fe1c091f925ac80d7df9cbe3b95303bf360b6c675719360fa80",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-27T23:21:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    },
+    {
+      "checkId": "check-us4-e2e",
+      "command": "npm run test:e2e",
+      "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
+      "resultPath": "docs/verification/previews/initial-v1/ui-search/acceptance.json",
+      "resultDigest": "19b6fef9f1810fe1c091f925ac80d7df9cbe3b95303bf360b6c675719360fa80",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-27T23:21:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    },
+    {
+      "checkId": "check-us4-base-path",
+      "command": "BASE_PATH=/abc-textbook npm run test:e2e:built",
+      "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
+      "resultPath": "docs/verification/previews/initial-v1/ui-search/acceptance.json",
+      "resultDigest": "19b6fef9f1810fe1c091f925ac80d7df9cbe3b95303bf360b6c675719360fa80",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-27T23:21:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    },
+    {
+      "checkId": "check-us4-links",
+      "command": "npm run link:check:built",
+      "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
+      "resultPath": "docs/verification/previews/initial-v1/ui-search/routes-links.json",
+      "resultDigest": "5dddb3b2f553c884d7dcc49ba81cd95f1dc5b97e2bc63684e9afcdaf491c7410",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-27T23:21:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    },
+    {
+      "checkId": "check-us4-static-quality",
+      "command": "npm run check && npm run lint && npm run format:check",
+      "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
+      "resultPath": "docs/verification/previews/initial-v1/ui-search/acceptance.json",
+      "resultDigest": "19b6fef9f1810fe1c091f925ac80d7df9cbe3b95303bf360b6c675719360fa80",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-27T23:21:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    }
+  ],
+  "applicableCheckCount": 5,
+  "passedApplicableCheckCount": 5,
+  "reviewerExecutedCheckSetDigest": "27152f85ef4c266204dfbd79bae680265780d1f11e21bf41922f85aa221d5689",
+  "authors": [
+    {
+      "personId": "person-maintainer",
+      "authoredItemIds": [
+        "us4.canonical-navigation",
+        "us4.dynamic-matrix",
+        "us4.search-accessibility"
+      ]
+    }
+  ],
+  "reviewer": { "personId": "person-maintainer", "mode": "self" },
+  "reviewItems": [
+    {
+      "reviewItemId": "human-review-item-us4-navigation",
+      "kind": "outcome_coverage",
+      "subjectPaths": ["src/layouts/TextbookLayout.astro", "src/pages/index.astro"],
+      "authorIds": ["person-maintainer"],
+      "learningOutcomeIds": ["outcome-us4-canonical-navigation"],
+      "reviewerId": "person-maintainer",
+      "reviewBasis": "本文、breadcrumbs、section navigation、previous/next、skip link、外部リンク表示を静的 route と no-JavaScript 条件で確認した。",
+      "decision": "approved",
+      "findings": [],
+      "reviewedAt": "2026-07-27T23:21:00+09:00"
+    },
+    {
+      "reviewItemId": "human-review-item-us4-matrix",
+      "kind": "outcome_coverage",
+      "subjectPaths": [
+        "src/components/ContestMatrix.astro",
+        "src/components/ContestProblemCell.astro"
+      ],
+      "authorIds": ["person-maintainer"],
+      "learningOutcomeIds": ["outcome-us4-dynamic-matrix"],
+      "reviewerId": "person-maintainer",
+      "reviewBasis": "公式順 registry、materializeContestSlotStates による明示状態とavailability優先順位、通常投影を通る future I Problem/unknown fixture、代替リスト、各 destination への区別可能な直接リンクを確認した。",
+      "decision": "approved",
+      "findings": [],
+      "reviewedAt": "2026-07-27T23:21:00+09:00"
+    },
+    {
+      "reviewItemId": "human-review-item-us4-search-accessibility",
+      "kind": "outcome_coverage",
+      "subjectPaths": [
+        "src/components/SearchControl.astro",
+        "src/components/ProblemFilters.tsx",
+        "src/styles/accessibility.css"
+      ],
+      "authorIds": ["person-maintainer"],
+      "learningOutcomeIds": ["outcome-us4-search-accessibility"],
+      "reviewerId": "person-maintainer",
+      "reviewBasis": "現行証跡digestとSource Revisionを参照する正規 CatalogSchema endpoint、Pagefind の公開projection・未収録ID除外・最新query制御、URL filter、0件案内、keyboard、axe、非色依存状態、320 CSS pixel reflow を3 browserで確認した。",
+      "decision": "approved",
+      "findings": [],
+      "reviewedAt": "2026-07-27T23:21:00+09:00"
+    }
+  ],
+  "inventoryItemCount": 3,
+  "reviewedItemCount": 3,
+  "approvedItemCount": 3,
+  "changesRequestedItemCount": 0,
+  "unreviewedItemCount": 0,
+  "outcomeCoverageReview": {
+    "reviewerId": "person-maintainer",
+    "authorIds": ["person-maintainer"],
+    "decision": "confirmed",
+    "learningOutcomeIds": [
+      "outcome-us4-canonical-navigation",
+      "outcome-us4-dynamic-matrix",
+      "outcome-us4-search-accessibility"
+    ],
+    "subjectPaths": [
+      "docs/work-manifests/initial/us4/manifest.json",
+      "docs/verification/previews/initial-v1/ui-search/acceptance.json"
+    ],
+    "rationale": "US4 の3 review unit は、静的導線、動的逆引き、検索とaccessibilityの観察可能な成果をそれぞれ検証する。",
+    "noOutcomeImpactRationale": null,
+    "confirmedAt": "2026-07-27T23:21:00+09:00"
+  },
+  "outcomeCoverageConfirmed": true,
+  "aggregatePassed": true,
+  "generatedAt": "2026-07-27T23:21:00+09:00",
+  "evidenceDigest": "2984f63e76d96c6a3434187dc5b3ba5490405d3b0bee7990711a59a7157885e2"
+}

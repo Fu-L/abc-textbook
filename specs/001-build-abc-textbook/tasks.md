@@ -222,26 +222,26 @@ T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/w
 
 ### Tests for User Story 4
 
-- [ ] T095 [US4] Freeze the US4 learning-outcome review units before story changes and add failing route, base-path, static-content-without-JavaScript, and canonical navigation tests in `docs/work-manifests/initial/us4/manifest.json` and `tests/contract/ui-routes.test.ts`
-- [ ] T096 [P] [US4] Add failing dynamic-column, non-empty state, direct-link, alternative-list, future-I, and reflow tests in `tests/e2e/contest-matrix.spec.ts`
-- [ ] T097 [P] [US4] Add failing Pagefind entity/alias/hierarchy/contest search, zero-result, and unpublished/local-state exclusion tests in `tests/e2e/search.spec.ts`
-- [ ] T098 [P] [US4] Add failing keyboard, landmark, heading, table-header, accessible-name, text-alternative, and color-independence tests in `tests/e2e/accessibility.spec.ts`
+- [X] T095 [US4] Freeze the US4 learning-outcome review units before story changes and add failing route, base-path, static-content-without-JavaScript, and canonical navigation tests in `docs/work-manifests/initial/us4/manifest.json` and `tests/contract/ui-routes.test.ts`
+- [X] T096 [P] [US4] Add failing dynamic-column, non-empty state, direct-link, alternative-list, future-I, and reflow tests in `tests/e2e/contest-matrix.spec.ts`
+- [X] T097 [P] [US4] Add failing Pagefind entity/alias/hierarchy/contest search, zero-result, and unpublished/local-state exclusion tests in `tests/e2e/search.spec.ts`
+- [X] T098 [P] [US4] Add failing keyboard, landmark, heading, table-header, accessible-name, text-alternative, and color-independence tests in `tests/e2e/accessibility.spec.ts`
 
 ### Implementation for User Story 4
 
-- [ ] T099 [US4] Implement the shared layout, breadcrumbs, section navigation, previous/next links, skip link, and external-link labeling against the `initial-v1` preview catalog while keeping the catalog source injectable for the post-preview full-catalog projection in `src/layouts/TextbookLayout.astro`
-- [ ] T100 [P] [US4] Build preview-capable home, learning-path, and LearningUnit route foundations without assuming full-corpus content in `src/pages/index.astro`, `src/pages/learn/index.astro`, and `src/pages/learn/[...slug].astro`
-- [ ] T101 [P] [US4] Build preview-capable TechniqueTag and Problem index/detail route foundations from stable IDs in `src/pages/tags/index.astro`, `src/pages/tags/[slug].astro`, `src/pages/problems/index.astro`, and `src/pages/problems/[problemId].astro`
-- [ ] T102 [P] [US4] Build preview-capable release-history list/detail route foundations with immutable fields and evidence references in `src/pages/updates/index.astro` and `src/pages/updates/[version].astro`
-- [ ] T103 [US4] Build the AdvancedSlotRegistry-driven matrix and same-result alternative list for the frozen preview catalog in `src/components/ContestMatrix.astro` and `src/pages/contests/index.astro`
-- [ ] T104 [US4] Add distinguishable one-operation links from every preview cell to Problem, explanation anchor, LearningUnit, primary/supporting TechniqueTags, and similar Problems in `src/components/ContestProblemCell.astro`
-- [ ] T105 [US4] Build combined visible-label filters, URL query serialization, result counts, reset, and zero-result guidance for the preview catalog in `src/components/ProblemFilters.tsx`
-- [ ] T106 [US4] Configure preview Pagefind documents and entity-kind metadata while excluding controls, staging, obsolete routes, and local state in `src/lib/catalog/search-documents.ts`
-- [ ] T107 [US4] Generate the schema-valid preview catalog endpoint solely from frozen preview content; the post-preview switch and full-catalog regeneration are owned by T160 in `src/pages/data/catalog.json.ts`
-- [ ] T108 [US4] Implement the shared narrow-screen reflow, two-dimensional-table-only scrolling, focus visibility, and non-color states used by preview and final routes in `src/styles/accessibility.css`
-- [ ] T109 [US4] Run the future-label, direct-navigation, search, no-JavaScript, axe, keyboard, and reflow checks against `initial-v1` and store preview evidence in `docs/verification/previews/initial-v1/ui-search/`
-- [ ] T110 [US4] Verify internal links, cross-references, preview canonical routes, base paths, Pagefind entries, sitemap, and feed without reading unpublished full-catalog content in `docs/verification/previews/initial-v1/ui-search/`
-- [ ] T111 [US4] Have the policy-selected reviewer confirm the `initial-v1` UI/search component coverage, resolve preview findings, and write current-subject mode-labeled evidence plus the component digest to `docs/verification/previews/initial-v1/components/ui-search.json` and `docs/reviews/human-content/previews/initial-v1/us4/`; full route/search closure is implemented by T160 and validated by T138/T140/T146
+- [X] T099 [US4] Implement the shared layout, breadcrumbs, section navigation, previous/next links, skip link, and external-link labeling against the `initial-v1` preview catalog while keeping the catalog source injectable for the post-preview full-catalog projection in `src/layouts/TextbookLayout.astro`
+- [X] T100 [P] [US4] Build preview-capable home, learning-path, and LearningUnit route foundations without assuming full-corpus content in `src/pages/index.astro`, `src/pages/learn/index.astro`, and `src/pages/learn/[...slug].astro`
+- [X] T101 [P] [US4] Build preview-capable TechniqueTag and Problem index/detail route foundations from stable IDs in `src/pages/tags/index.astro`, `src/pages/tags/[slug].astro`, `src/pages/problems/index.astro`, and `src/pages/problems/[problemId].astro`
+- [X] T102 [P] [US4] Build preview-capable release-history list/detail route foundations with immutable fields and evidence references in `src/pages/updates/index.astro` and `src/pages/updates/[version].astro`
+- [X] T103 [US4] Build the AdvancedSlotRegistry-driven matrix and same-result alternative list for the frozen preview catalog in `src/components/ContestMatrix.astro` and `src/pages/contests/index.astro`
+- [X] T104 [US4] Add distinguishable one-operation links from every preview cell to Problem, explanation anchor, LearningUnit, primary/supporting TechniqueTags, and similar Problems in `src/components/ContestProblemCell.astro`
+- [X] T105 [US4] Build combined visible-label filters, URL query serialization, result counts, reset, and zero-result guidance for the preview catalog in `src/components/ProblemFilters.tsx`
+- [X] T106 [US4] Configure preview Pagefind documents and entity-kind metadata while excluding controls, staging, obsolete routes, and local state in `src/lib/catalog/search-documents.ts`
+- [X] T107 [US4] Generate the schema-valid preview catalog endpoint solely from frozen preview content; the post-preview switch and full-catalog regeneration are owned by T160 in `src/pages/data/catalog.json.ts`
+- [X] T108 [US4] Implement the shared narrow-screen reflow, two-dimensional-table-only scrolling, focus visibility, and non-color states used by preview and final routes in `src/styles/accessibility.css`
+- [X] T109 [US4] Run the future-label, direct-navigation, search, no-JavaScript, axe, keyboard, and reflow checks against `initial-v1` and store preview evidence in `docs/verification/previews/initial-v1/ui-search/`
+- [X] T110 [US4] Verify internal links, cross-references, preview canonical routes, base paths, Pagefind entries, sitemap, and feed without reading unpublished full-catalog content in `docs/verification/previews/initial-v1/ui-search/`
+- [X] T111 [US4] Have the policy-selected reviewer confirm the `initial-v1` UI/search component coverage, resolve preview findings, and write current-subject mode-labeled evidence plus the component digest to `docs/verification/previews/initial-v1/components/ui-search.json` and `docs/reviews/human-content/previews/initial-v1/us4/`; full route/search closure is implemented by T160 and validated by T138/T140/T146
 
 **Checkpoint**: Every advanced Problem is visible under its official label and reachable from both the learning system and reverse indexes.
 

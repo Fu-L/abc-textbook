@@ -1,0 +1,38 @@
+---
+import TextbookLayout from '../../layouts/TextbookLayout.astro';
+import { previewCatalog, type PreviewUiCatalog } from '../../lib/catalog/preview-ui-catalog.js';
+
+interface Props {
+  release: PreviewUiCatalog['releaseHistory'][number];
+}
+export function getStaticPaths() {
+  return previewCatalog.releaseHistory.map((release) => ({
+    params: { version: release.version },
+    props: { release },
+  }));
+}
+const { release } = Astro.props;
+---
+
+<TextbookLayout
+  title={`更新 ${release.version}`}
+  description={`${release.version} preview subject`}
+  breadcrumbs={[{ href: '/updates/', label: '更新履歴' }, { label: release.version }]}
+>
+  <span data-pagefind-meta="entity-kind">更新履歴</span><h1>{release.version}</h1>
+  <dl>
+    <dt>種別</dt><dd>private preview（公開 Release ではありません）</dd><dt>問題数</dt><dd>
+      {release.problemCount}件
+    </dd><dt>subject digest</dt><dd><code>{release.subjectDigest}</code></dd><dt>証跡</dt><dd>
+      <ul>
+        {
+          release.evidencePaths.map((path) => (
+            <li>
+              <code>{path}</code>
+            </li>
+          ))
+        }
+      </ul>
+    </dd>
+  </dl>
+</TextbookLayout>

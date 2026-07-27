@@ -1,0 +1,43 @@
+{
+  "componentId": "ui-search",
+  "previewId": "initial-v1",
+  "manifestDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "problemIds": [
+    "abc212-g",
+    "abc215-e",
+    "abc218-f",
+    "abc222-g",
+    "abc223-f",
+    "abc232-e",
+    "abc252-e",
+    "abc256-f"
+  ],
+  "inputDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "artifactDigest": "f07d7ead23dcbeb480c981e5d7c5b2a0f946d6a4f61ae2c4245e154971f55fa8",
+  "outputDigest": "ae2ccbf38506e6dbc85b37ca810b9eac98e8d33bfc3e04bf4a2217920cde41c2",
+  "catalogSubjectDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "status": "passed",
+  "workManifestPath": "docs/work-manifests/initial/us4/manifest.json",
+  "workManifestDigest": "d9987a3082dffa3fa177f90cdf81d12f0ce83db573ed4fe95f62046c950daf5e",
+  "artifactFiles": [
+    {
+      "path": "docs/verification/previews/initial-v1/ui-search/acceptance.json",
+      "digest": "19b6fef9f1810fe1c091f925ac80d7df9cbe3b95303bf360b6c675719360fa80"
+    },
+    {
+      "path": "docs/verification/previews/initial-v1/ui-search/routes-links.json",
+      "digest": "5dddb3b2f553c884d7dcc49ba81cd95f1dc5b97e2bc63684e9afcdaf491c7410"
+    },
+    {
+      "path": "docs/reviews/human-content/previews/initial-v1/us4/ui-search-review.json",
+      "digest": "ca84cc8005f6a7b6ecce3bb7e192514a3d785f20b765d9ca1841401c9617a170"
+    }
+  ],
+  "reviewEvidence": {
+    "path": "docs/reviews/human-content/previews/initial-v1/us4/ui-search-review.json",
+    "digest": "ca84cc8005f6a7b6ecce3bb7e192514a3d785f20b765d9ca1841401c9617a170",
+    "subjectDigest": "d30cf5849add2bdfa239ec4930ffe9d4a146f38ba09891246f64a5cd49d7fdc4",
+    "reviewMode": "self",
+    "aggregatePassed": true
+  }
+}

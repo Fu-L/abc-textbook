@@ -1,0 +1,29 @@
+---
+import { futureCompatibilityCatalog, previewCatalog } from '../lib/catalog/preview-ui-catalog.js';
+import ContestMatrixView from './ContestMatrixView.astro';
+
+interface Props {
+  base: string;
+}
+
+const { base } = Astro.props;
+---
+
+<ContestMatrixView
+  base={base}
+  catalog={previewCatalog}
+  heading="上級問題マトリクス"
+  headingId="matrix-title"
+/>
+
+<details>
+  <summary>将来の I 問題と確認不能状態を同じ投影で扱う互換性 fixture</summary>
+  <ContestMatrixView
+    base={base}
+    catalog={futureCompatibilityCatalog}
+    heading="future I compatibility fixture"
+    headingId="future-matrix-title"
+    showAlternative={true}
+    indexContent={true}
+  />
+</details>
