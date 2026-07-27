@@ -1,0 +1,58 @@
+---
+import TextbookLayout from '../../layouts/TextbookLayout.astro';
+import {
+  previewCatalog,
+  withBase,
+  type PreviewUiCatalog,
+} from '../../lib/catalog/preview-ui-catalog.js';
+
+interface Props {
+  tag: PreviewUiCatalog['tags'][number];
+}
+export function getStaticPaths() {
+  return previewCatalog.tags.map((tag) => ({ params: { slug: tag.id }, props: { tag } }));
+}
+const { tag } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const unit = previewCatalog.learningUnits.find((item) =>
+  item.problemIds.some((id) => tag.problemIds.includes(id)),
+);
+---
+
+<TextbookLayout
+  title={tag.name}
+  description={tag.definition}
+  breadcrumbs={[{ href: '/tags/', label: '典型タグ' }, { label: tag.name }]}
+>
+  <span data-pagefind-meta="entity-kind">典型タグ</span>
+  <h1>{tag.name}</h1>
+  <p>{tag.definition}</p>
+  <p>検索別名: {tag.aliases.join('、')}</p>
+  <section>
+    <h2>学習成果と学習単位</h2>{
+      unit && (
+        <p>
+          <a href={withBase(unit.route, base)}>{unit.title}</a>: {unit.outcome}
+        </p>
+      )
+    }
+  </section>
+  <section>
+    <h2>代表・関連問題</h2><ul>
+      {
+        tag.problemIds.map((id) => {
+          const problem = previewCatalog.problems.find((item) => item.id === id);
+          return (
+            problem && (
+              <li>
+                <a href={withBase(problem.route, base)}>
+                  {problem.id.toUpperCase()} — {problem.title}
+                </a>
+              </li>
+            )
+          );
+        })
+      }
+    </ul>
+  </section>
+</TextbookLayout>

@@ -1,0 +1,76 @@
+---
+import TextbookLayout from '../../layouts/TextbookLayout.astro';
+import {
+  getProblemGroup,
+  previewCatalog,
+  withBase,
+  type PreviewProblem,
+} from '../../lib/catalog/preview-ui-catalog.js';
+
+interface Props {
+  problem: PreviewProblem;
+}
+export function getStaticPaths() {
+  return previewCatalog.problems.map((problem) => ({
+    params: { problemId: problem.id },
+    props: { problem },
+  }));
+}
+const { problem } = Astro.props;
+const group = getProblemGroup(problem.id);
+const base = import.meta.env.BASE_URL;
+---
+
+<TextbookLayout
+  title={`${problem.id.toUpperCase()} — ${problem.title}`}
+  description={problem.explanationSummary}
+  breadcrumbs={[{ href: '/problems/', label: '問題一覧' }, { label: problem.id.toUpperCase() }]}
+>
+  <span data-pagefind-meta="entity-kind">問題</span>
+  <span hidden data-pagefind-meta="contest">ABC {problem.contestNumber}</span>
+  <h1>ABC {problem.contestNumber} {problem.label} — {problem.title}</h1>
+  <p><strong>掲載状態: 収録済み（initial-v1 preview）</strong></p>
+  <p>
+    <a href={problem.officialUrl} rel="external">{problem.title} の公式問題ページ（外部リンク）</a>
+  </p>
+  <p>最終確認: <time datetime={problem.checkedAt}>{problem.checkedAt}（Asia/Tokyo）</time></p>
+  <section>
+    <h2>学習上の位置付け</h2>{
+      group?.unit && (
+        <p>
+          学習単位: <a href={withBase(group.unit.route, base)}>{group.unit.title}</a>
+        </p>
+      )
+    }{
+      group?.tag && (
+        <p>
+          主タグ: <a href={withBase(group.tag.route, base)}>{group.tag.name}</a>
+        </p>
+      )
+    }
+  </section>
+  <section id="explanation">
+    <h2>解説</h2><p>{problem.explanationSummary}</p><p>
+      この preview では分類根拠と学習経路の接続を検証します。完全な問題別解説は Outcome/Problem
+      shard の受理後に同じ安定 ID へ投影します。
+    </p><h3>制約との整合</h3><p>{problem.constraintsSummary}</p>
+  </section>
+  <section>
+    <h2>類題</h2><ul>
+      {
+        problem.similarProblemIds.map((id) => {
+          const similar = previewCatalog.problems.find((item) => item.id === id);
+          return (
+            similar && (
+              <li>
+                <a href={withBase(similar.route, base)}>
+                  {similar.id.toUpperCase()} — {similar.title}
+                </a>
+              </li>
+            )
+          );
+        })
+      }
+    </ul>
+  </section>
+</TextbookLayout>

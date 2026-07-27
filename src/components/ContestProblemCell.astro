@@ -1,0 +1,74 @@
+---
+import { previewCatalog, withBase } from '../lib/catalog/preview-ui-catalog.js';
+
+interface Props {
+  base: string;
+  cell: (typeof previewCatalog.cells)[number];
+}
+
+const { base, cell } = Astro.props;
+const problem = cell.problemId
+  ? previewCatalog.problems.find(({ id }) => id === cell.problemId)
+  : undefined;
+const tag = problem ? previewCatalog.tags.find(({ id }) => id === problem.primaryTagId) : undefined;
+const unit = problem
+  ? previewCatalog.learningUnits.find(({ id }) => id === problem.learningUnitId)
+  : undefined;
+---
+
+<div class:list={['contest-cell', `state-${cell.state}`]} data-problem-id={problem?.id}>
+  <strong>{cell.stateLabel}</strong>
+  {
+    problem ? (
+      <>
+        <span>
+          {problem.id.toUpperCase()} — {problem.title}
+        </span>
+        <ul class="cell-links">
+          <li>
+            <a href={withBase(problem.route, base)}>問題詳細: {problem.id}</a>
+          </li>
+          <li>
+            <a href={`${withBase(problem.route, base)}${problem.explanationAnchor}`}>
+              解説: {problem.title}
+            </a>
+          </li>
+          {unit && (
+            <li>
+              <a href={withBase(unit.route, base)}>学習単位: {unit.title}</a>
+            </li>
+          )}
+          {tag && (
+            <li>
+              <a href={withBase(tag.route, base)}>主タグ: {tag.name}</a>
+            </li>
+          )}
+          {problem.supportingTagIds.map((tagId) => {
+            const supporting = previewCatalog.tags.find(({ id }) => id === tagId);
+            return (
+              supporting && (
+                <li>
+                  <a href={withBase(supporting.route, base)}>補助タグ: {supporting.name}</a>
+                </li>
+              )
+            );
+          })}
+          {problem.similarProblemIds.map((problemId) => {
+            const similar = previewCatalog.problems.find(({ id }) => id === problemId);
+            return (
+              similar && (
+                <li>
+                  <a href={withBase(similar.route, base)}>類題: {similar.id}</a>
+                </li>
+              )
+            );
+          })}
+        </ul>
+      </>
+    ) : cell.officialTaskId ? (
+      <span>{cell.officialTaskId.toUpperCase()} は preview 対象外です。</span>
+    ) : (
+      <span>このコンテストの公式問題一覧に該当記号はありません。</span>
+    )
+  }
+</div>

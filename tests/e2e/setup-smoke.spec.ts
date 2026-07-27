@@ -73,10 +73,6 @@ test('keeps the desktop textbook shell interactive, accessible, and CSP-clean', 
     }),
   ).toBeVisible();
 
-  const themeSelect = page.locator('starlight-theme-select select').first();
-  await themeSelect.selectOption('light');
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-
   const searchButton = page.getByRole('button', { name: '検索' });
   await expect(searchButton).toBeEnabled();
   await searchButton.click();
@@ -96,26 +92,17 @@ test('keeps the desktop textbook shell interactive, accessible, and CSP-clean', 
   expect(browserErrors).toEqual([]);
 });
 
-test('keeps the mobile menu stable and CSP-clean', async ({ page }) => {
+test('keeps the mobile textbook navigation stable and CSP-clean', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const browserErrors = collectBrowserErrors(page);
 
   await page.goto('./');
 
-  const menuButton = page.getByRole('button', { name: 'メニュー' });
-  const menuToggle = page.locator('starlight-menu-button');
-  const sidebar = page.locator('#starlight__sidebar');
-  await page.waitForFunction(() => customElements.get('starlight-menu-button') !== undefined);
-  await expect(sidebar).toBeHidden();
-
-  await menuButton.click();
-  await expect(menuToggle).toHaveAttribute('aria-expanded', 'true');
-  await expect(page.locator('body')).toHaveAttribute('data-mobile-menu-expanded', '');
-  await expect(sidebar).toBeVisible();
-
-  await menuButton.click();
-  await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
-  await expect(page.locator('body')).not.toHaveAttribute('data-mobile-menu-expanded', '');
-  await expect(sidebar).toBeHidden();
+  const navigation = page.getByRole('navigation', { name: '主要セクション' });
+  await expect(navigation).toBeVisible();
+  await expect(navigation.getByRole('link', { name: '学習経路' })).toBeVisible();
+  await expect(navigation.getByRole('link', { name: 'コンテスト' })).toBeVisible();
+  await page.getByRole('button', { name: '検索' }).click();
+  await expect(page.getByRole('dialog', { name: '検索' })).toBeVisible();
   expect(browserErrors).toEqual([]);
 });

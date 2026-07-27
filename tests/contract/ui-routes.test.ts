@@ -1,0 +1,89 @@
+import { describe, expect, it } from 'vitest';
+
+import reviewEvidence from '../../docs/reviews/human-content/previews/initial-v1/us4/ui-search-review.json';
+import workManifest from '../../docs/work-manifests/initial/us4/manifest.json';
+import componentEvidence from '../../docs/verification/previews/initial-v1/components/ui-search.json';
+import {
+  buildPreviewUiCatalog,
+  canonicalPreviewRoutes,
+  frozenPreviewUiCatalogSource,
+  withBase,
+} from '../../src/lib/catalog/preview-ui-catalog.js';
+import { HumanContentReviewEvidenceSchema } from '../../src/lib/domain/schema-parts/review-evidence.js';
+import { buildSearchDocuments } from '../../src/lib/catalog/search-documents.js';
+import { validatePreviewChain } from '../../src/lib/preview/preview-chain.js';
+import { validateContentWorkManifest } from '../../src/lib/validation/content-work-manifest.js';
+
+describe('initial-v1 UI route contract', () => {
+  it('freezes the US4 review scope before implementation', () => {
+    expect(() => {
+      validateContentWorkManifest(workManifest);
+    }).not.toThrow();
+  });
+
+  it('freezes a current-subject reviewed UI/search component', () => {
+    expect(validatePreviewChain([componentEvidence])).toEqual([]);
+    expect(HumanContentReviewEvidenceSchema.parse(reviewEvidence).aggregatePassed).toBe(true);
+    expect(componentEvidence.catalogSubjectDigest).toBe(buildPreviewUiCatalog().subjectDigest);
+  });
+
+  it('projects only the frozen preview cohort onto stable canonical routes', () => {
+    const catalog = buildPreviewUiCatalog(frozenPreviewUiCatalogSource);
+
+    expect(catalog.previewId).toBe('initial-v1');
+    expect(catalog.problems).toHaveLength(8);
+    expect(catalog.problems.map(({ id }) => id)).toEqual([
+      'abc212-g',
+      'abc215-e',
+      'abc218-f',
+      'abc222-g',
+      'abc223-f',
+      'abc232-e',
+      'abc252-e',
+      'abc256-f',
+    ]);
+    expect(catalog.problems.every(({ route }) => route === `/problems/${routeId(route)}/`)).toBe(
+      true,
+    );
+    expect(new Set(catalog.problems.map(({ publicationState }) => publicationState))).toEqual(
+      new Set(['preview']),
+    );
+  });
+
+  it('keeps base-path joining deterministic without double slashes', () => {
+    expect(withBase('/problems/abc212-g/', '/abc-textbook/')).toBe(
+      '/abc-textbook/problems/abc212-g/',
+    );
+    expect(withBase('/contests/', '/')).toBe('/contests/');
+    expect(withBase('/feed.xml', '/abc-textbook/')).toBe('/abc-textbook/feed.xml');
+  });
+
+  it('provides canonical navigation for every entity', () => {
+    const catalog = buildPreviewUiCatalog();
+    const routes = canonicalPreviewRoutes(catalog);
+
+    expect(routes).toContain('/');
+    expect(routes).toContain('/learn/');
+    expect(routes).toContain('/contests/');
+    expect(routes).toContain('/updates/initial-v1/');
+    for (const problem of catalog.problems) expect(routes).toContain(problem.route);
+    for (const tag of catalog.tags) expect(routes).toContain(tag.route);
+    for (const unit of catalog.learningUnits) expect(routes).toContain(unit.route);
+    expect(new Set(routes).size).toBe(routes.length);
+  });
+
+  it('projects searchable entity kinds and terms without private state', () => {
+    const documents = buildSearchDocuments();
+    const serialized = JSON.stringify(documents);
+
+    expect(new Set(documents.map(({ entityKind }) => entityKind))).toEqual(
+      new Set(['problem', 'technique-tag', 'learning-unit', 'contest', 'release']),
+    );
+    expect(serialized).toContain('graph-search');
+    expect(serialized).toContain('グラフ・探索');
+    expect(serialized).not.toContain('staging/');
+    expect(serialized).not.toContain('needsReview');
+  });
+});
+
+const routeId = (route: string): string => route.split('/').filter(Boolean).at(-1) ?? '';

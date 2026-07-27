@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "evidenceId": "preview-initial-v1-ui-search-routes-links",
+  "previewId": "initial-v1",
+  "catalogSubjectDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "canonicalRouteFamilies": [
+    "/",
+    "/learn/",
+    "/learn/<learning-unit-id>/",
+    "/tags/",
+    "/tags/<technique-tag-id>/",
+    "/problems/",
+    "/problems/<problem-id>/",
+    "/contests/",
+    "/updates/",
+    "/updates/initial-v1/",
+    "/data/catalog.json",
+    "/sitemap.xml",
+    "/feed.xml"
+  ],
+  "projection": {
+    "source": "staging/previews/initial-v1/preview-manifest.json",
+    "sourceBoundary": "injectable PreviewUiCatalog",
+    "fullCorpusSwitchOwner": "T160",
+    "duplicatedPreviewRoutes": false
+  },
+  "crossReferences": {
+    "checkedPreviewCells": 8,
+    "requiredDestinationsPerPublishedCell": [
+      "problem",
+      "explanation-anchor",
+      "learning-unit",
+      "primary-tag",
+      "supporting-tags-if-present",
+      "similar-problems"
+    ],
+    "ambiguousLinkCount": 0,
+    "brokenLinkCount": 0
+  },
+  "generatedIndexes": {
+    "pagefind": "passed",
+    "catalogEndpoint": "passed",
+    "sitemap": "passed",
+    "feed": "passed"
+  },
+  "rootBasePath": "/",
+  "projectBasePath": "/abc-textbook/",
+  "status": "passed",
+  "completedAt": "2026-07-27T23:21:00+09:00"
+}

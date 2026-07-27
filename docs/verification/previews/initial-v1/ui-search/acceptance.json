@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "evidenceId": "preview-initial-v1-ui-search-acceptance",
+  "previewId": "initial-v1",
+  "catalogSubjectDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "workManifestPath": "docs/work-manifests/initial/us4/manifest.json",
+  "workManifestDigest": "d9987a3082dffa3fa177f90cdf81d12f0ce83db573ed4fe95f62046c950daf5e",
+  "checks": [
+    {
+      "checkId": "check-us4-contracts",
+      "command": "npm test",
+      "result": "passed",
+      "summary": "32 files and 302 tests passed, including the frozen US4 route/catalog and evidence contracts."
+    },
+    {
+      "checkId": "check-us4-e2e",
+      "command": "npm run test:e2e",
+      "result": "passed",
+      "summary": "Dynamic matrix, future I fixture, direct navigation, Pagefind, no-JavaScript, keyboard, axe, and 320 CSS pixel reflow passed in Chromium, Firefox, and WebKit."
+    },
+    {
+      "checkId": "check-us4-base-path",
+      "command": "BASE_PATH=/abc-textbook SITE_URL=https://example.com npm run build && BASE_PATH=/abc-textbook npm run test:e2e:built -- tests/e2e/contest-matrix.spec.ts tests/e2e/search.spec.ts tests/e2e/accessibility.spec.ts --project=chromium",
+      "result": "passed",
+      "summary": "The project-base build generated every preview route, and all 7 targeted browser checks passed under /abc-textbook/."
+    },
+    {
+      "checkId": "check-us4-links",
+      "command": "npm run link:check:built",
+      "result": "passed",
+      "summary": "65 internal routes and anchors passed with no broken targets."
+    },
+    {
+      "checkId": "check-us4-static-quality",
+      "command": "npm run check && npm run lint && npm run format:check",
+      "result": "passed",
+      "summary": "Astro and TypeScript diagnostics, ESLint, and Prettier passed."
+    }
+  ],
+  "coverage": {
+    "problemCount": 8,
+    "contestCount": 8,
+    "registryLabels": ["E", "F", "G", "Ex", "H"],
+    "futureFixtureLabels": ["E", "F", "G", "I"],
+    "learningUnitCount": 4,
+    "techniqueTagCount": 4,
+    "browserProjects": ["chromium", "firefox", "webkit"],
+    "minimumViewportWidthCssPixels": 320
+  },
+  "exclusionsConfirmed": [
+    "navigation",
+    "search-and-filter-controls",
+    "staging-paths",
+    "unpublished-problem-documents",
+    "learning-record-local-state"
+  ],
+  "status": "passed",
+  "completedAt": "2026-07-27T23:21:00+09:00"
+}

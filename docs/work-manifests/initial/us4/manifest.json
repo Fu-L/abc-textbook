@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T095-us4",
+  "taskId": "T095",
+  "scopeDigest": "5396c777f401acb6f06cad68b6ee92967af04f985009c196167d591222ee9478",
+  "digest": "d9987a3082dffa3fa177f90cdf81d12f0ce83db573ed4fe95f62046c950daf5e",
+  "changeKind": "mixed",
+  "requiredRequirementIds": ["FR-014", "FR-015", "FR-016", "FR-029", "SC-005", "SC-011", "SC-020"],
+  "learningOutcomeIds": [
+    "outcome-us4-canonical-navigation",
+    "outcome-us4-dynamic-matrix",
+    "outcome-us4-search-accessibility"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T095-canonical-navigation",
+      "changeKind": "mixed",
+      "paths": [
+        "src/layouts/TextbookLayout.astro",
+        "src/pages/index.astro",
+        "src/pages/learn",
+        "src/pages/problems",
+        "src/pages/tags",
+        "src/pages/updates",
+        "tests/contract/ui-routes.test.ts"
+      ],
+      "itemIds": [
+        "us4.base-path",
+        "us4.canonical-navigation",
+        "us4.no-javascript",
+        "us4.static-routes"
+      ],
+      "requirementIds": ["FR-015", "FR-029", "SC-005"],
+      "learningOutcomeIds": ["outcome-us4-canonical-navigation"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-us4-contracts", "check-us4-links"],
+      "evidenceRoles": ["route_contract_test"],
+      "maintenanceBenefit": "Preview and full-corpus sources share one validated route/search projection boundary, so T160 can switch the injected catalog without duplicating pages.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T095-dynamic-matrix",
+      "changeKind": "mixed",
+      "paths": [
+        "src/components/ContestMatrix.astro",
+        "src/components/ContestProblemCell.astro",
+        "src/pages/contests/index.astro",
+        "tests/e2e/contest-matrix.spec.ts"
+      ],
+      "itemIds": [
+        "us4.alternative-list",
+        "us4.dynamic-slots",
+        "us4.explicit-cell-state",
+        "us4.future-label",
+        "us4.one-operation-links"
+      ],
+      "requirementIds": ["FR-014", "FR-015", "SC-005", "SC-011", "SC-020"],
+      "learningOutcomeIds": ["outcome-us4-dynamic-matrix"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": ["RU-T095-canonical-navigation"],
+      "checkIds": ["check-us4-e2e"],
+      "evidenceRoles": ["matrix_e2e_test"],
+      "maintenanceBenefit": "Preview and full-corpus sources share one validated route/search projection boundary, so T160 can switch the injected catalog without duplicating pages.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T095-search-accessibility",
+      "changeKind": "mixed",
+      "paths": [
+        "src/components/ProblemFilters.tsx",
+        "src/components/SearchControl.astro",
+        "src/lib/catalog/preview-ui-catalog.ts",
+        "src/lib/catalog/search-documents.ts",
+        "src/pages/data/catalog.json.ts",
+        "src/pages/feed.xml.ts",
+        "src/pages/sitemap.xml.ts",
+        "src/styles/accessibility.css",
+        "tests/e2e/accessibility.spec.ts",
+        "tests/e2e/search.spec.ts"
+      ],
+      "itemIds": [
+        "us4.catalog-endpoint",
+        "us4.filters",
+        "us4.keyboard",
+        "us4.pagefind",
+        "us4.reflow",
+        "us4.sitemap-feed"
+      ],
+      "requirementIds": ["FR-016", "FR-029", "SC-020"],
+      "learningOutcomeIds": ["outcome-us4-search-accessibility"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": ["RU-T095-canonical-navigation", "RU-T095-dynamic-matrix"],
+      "checkIds": ["check-us4-build", "check-us4-e2e", "check-us4-links"],
+      "evidenceRoles": ["search_accessibility_e2e_test"],
+      "maintenanceBenefit": "Preview and full-corpus sources share one validated route/search projection boundary, so T160 can switch the injected catalog without duplicating pages.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": "Preview and full-corpus sources share one validated route/search projection boundary, so T160 can switch the injected catalog without duplicating pages.",
+  "state": "planned",
+  "createdAt": "2026-07-27T23:00:00+09:00",
+  "updatedAt": "2026-07-27T23:00:00+09:00"
+}

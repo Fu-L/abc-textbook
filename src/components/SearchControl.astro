@@ -1,0 +1,108 @@
+---
+interface Props {
+  base: string;
+}
+
+const { base } = Astro.props;
+---
+
+<div class="site-search" data-pagefind-ignore data-search-base={base}>
+  <button type="button" disabled data-search-open aria-describedby="search-requirement">検索</button
+  >
+  <span id="search-requirement" class="noscript-guidance">検索にはJavaScriptが必要です。</span>
+  <dialog aria-label="検索" data-search-dialog>
+    <form method="dialog" class="search-heading">
+      <strong>教材を検索</strong>
+      <button value="cancel" aria-label="検索を閉じる">閉じる</button>
+    </form>
+    <label>
+      検索語
+      <input class="pagefind-ui__search-input" type="search" autocomplete="off" />
+    </label>
+    <p aria-live="polite" data-search-status>検索語を入力してください。</p>
+    <ol class="search-results" data-search-results></ol>
+  </dialog>
+</div>
+
+<script>
+  interface PagefindResultData {
+    readonly url: string;
+    readonly excerpt?: string;
+    readonly meta?: Readonly<Record<string, string>>;
+  }
+  interface PagefindModule {
+    init(): Promise<void>;
+    search(term: string): Promise<{
+      readonly results: readonly { data(): Promise<PagefindResultData> }[];
+    }>;
+  }
+  const root = document.querySelector<HTMLElement>('[data-search-base]');
+  const base = root?.dataset.searchBase ?? '/';
+  const openButton = document.querySelector('[data-search-open]');
+  const dialog = document.querySelector('[data-search-dialog]');
+  const input = dialog?.querySelector('.pagefind-ui__search-input');
+  const status = dialog?.querySelector('[data-search-status]');
+  const results = dialog?.querySelector('[data-search-results]');
+  const requirement = root?.querySelector('[id="search-requirement"]');
+  let pagefindPromise: Promise<PagefindModule> | undefined;
+
+  if (
+    openButton instanceof HTMLButtonElement &&
+    dialog instanceof HTMLDialogElement &&
+    input instanceof HTMLInputElement &&
+    status &&
+    results
+  ) {
+    openButton.disabled = false;
+    if (requirement instanceof HTMLElement) requirement.hidden = true;
+    openButton.addEventListener('click', () => {
+      dialog.showModal();
+      input.focus();
+    });
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        dialog.close();
+      }
+    });
+    input.addEventListener('input', async () => {
+      const term = input.value.trim();
+      results.replaceChildren();
+      if (!term) {
+        status.textContent = '検索語を入力してください。';
+        return;
+      }
+      status.textContent = '検索中です。';
+      try {
+        pagefindPromise ??= import(
+          /* @vite-ignore */ `${base}pagefind/pagefind.js`
+        ) as Promise<PagefindModule>;
+        const pagefind = await pagefindPromise;
+        await pagefind.init();
+        const response = await pagefind.search(term);
+        const loaded = await Promise.all(
+          response.results.slice(0, 10).map((result) => result.data()),
+        );
+        for (const item of loaded) {
+          const li = document.createElement('li');
+          const link = document.createElement('a');
+          link.className = 'pagefind-ui__result-link';
+          link.href = item.url;
+          const kind = item.meta?.['entity-kind'];
+          link.textContent = `${kind ? `${kind}: ` : ''}${item.meta?.title ?? item.url}`;
+          li.append(link);
+          const excerpt = document.createElement('p');
+          excerpt.textContent = item.excerpt?.replace(/<[^>]+>/gu, '') ?? '';
+          li.append(excerpt);
+          results.append(li);
+        }
+        status.textContent =
+          loaded.length === 0
+            ? `「${term}」に一致する公開ページはありません。`
+            : `${loaded.length}件の候補があります。`;
+      } catch {
+        status.textContent = '検索索引を読み込めませんでした。時間をおいて再試行してください。';
+      }
+    });
+  }
+</script>

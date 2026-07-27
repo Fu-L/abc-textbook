@@ -1,0 +1,31 @@
+---
+import TextbookLayout from '../../layouts/TextbookLayout.astro';
+import { previewCatalog, withBase } from '../../lib/catalog/preview-ui-catalog.js';
+const base = import.meta.env.BASE_URL;
+---
+
+<TextbookLayout
+  title="標準学習経路"
+  description="initial-v1 の学習単位を順番にたどる"
+  breadcrumbs={[{ label: '標準学習経路' }]}
+>
+  <span data-pagefind-meta="entity-kind">学習経路</span>
+  <h1>標準学習経路</h1>
+  <p>
+    各学習単位は、到達目標、関連する典型タグ、preview 問題へ結び付きます。現在の provisional
+    taxonomy は公開正本ではありません。
+  </p>
+  <ol>
+    {
+      previewCatalog.learningUnits.map((unit) => (
+        <li>
+          <h2>
+            <a href={withBase(unit.route, base)}>{unit.title}</a>
+          </h2>
+          <p>{unit.outcome}</p>
+          <p>対象問題: {unit.problemIds.map((id) => id.toUpperCase()).join('、')}</p>
+        </li>
+      ))
+    }
+  </ol>
+</TextbookLayout>
