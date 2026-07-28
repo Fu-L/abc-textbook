@@ -4,7 +4,7 @@
   "scopeType": "merge",
   "scopeId": "initial-v1-us5-update-simulation",
   "releaseVersion": null,
-  "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
+  "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
   "inventoryPath": "docs/work-manifests/initial/us5/manifest.json",
   "inventoryDigest": "d2b77b9176417e5dcd9a4abe2a9f8396b8f3689d9621af97fa999a4452da6965",
   "reviewPolicy": {
@@ -15,10 +15,10 @@
   "applicableChecks": [
     {
       "checkId": "check-us5-discovery",
-      "command": "npm test",
-      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
+      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-04ea38e2db1d7b390448b807/manifest.json --simulation-only",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
       "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
-      "resultDigest": "73d9c5555681ae3ac56bac411a30cf5730e131fa75013e4d850515eda47f77e5",
+      "resultDigest": "9d991162f73a9021430c552a9d658a8496056c68b3452a0cc2ca8446ce3b17ea",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-28T15:00:00+09:00",
@@ -26,10 +26,10 @@
     },
     {
       "checkId": "check-us5-prepare",
-      "command": "npm test",
-      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
+      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-04ea38e2db1d7b390448b807/manifest.json --simulation-only",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
       "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
-      "resultDigest": "73d9c5555681ae3ac56bac411a30cf5730e131fa75013e4d850515eda47f77e5",
+      "resultDigest": "9d991162f73a9021430c552a9d658a8496056c68b3452a0cc2ca8446ce3b17ea",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-28T15:00:00+09:00",
@@ -37,10 +37,10 @@
     },
     {
       "checkId": "check-us5-review",
-      "command": "npm test",
-      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
+      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-04ea38e2db1d7b390448b807/manifest.json --simulation-only",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
       "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
-      "resultDigest": "73d9c5555681ae3ac56bac411a30cf5730e131fa75013e4d850515eda47f77e5",
+      "resultDigest": "9d991162f73a9021430c552a9d658a8496056c68b3452a0cc2ca8446ce3b17ea",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-28T15:00:00+09:00",
@@ -48,10 +48,10 @@
     },
     {
       "checkId": "check-us5-validation",
-      "command": "npm test",
-      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
+      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-04ea38e2db1d7b390448b807/manifest.json --simulation-only",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
       "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
-      "resultDigest": "73d9c5555681ae3ac56bac411a30cf5730e131fa75013e4d850515eda47f77e5",
+      "resultDigest": "9d991162f73a9021430c552a9d658a8496056c68b3452a0cc2ca8446ce3b17ea",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-28T15:00:00+09:00",
@@ -60,7 +60,7 @@
   ],
   "applicableCheckCount": 4,
   "passedApplicableCheckCount": 4,
-  "reviewerExecutedCheckSetDigest": "fd52c72ca9c925d6a042911b0bd805521647808bd9d9f0944b20b39bb80e9a5f",
+  "reviewerExecutedCheckSetDigest": "7659a3be25af4bf32e05195146a68954c526ad75d7e0ce778166e159818cb08a",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -143,5 +143,5 @@
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
   "generatedAt": "2026-07-28T15:00:00+09:00",
-  "evidenceDigest": "f7fdb380eb1658595a3f9b0050752fad12e18cd77ba19cb728c8d37bbe8d9dfb"
+  "evidenceDigest": "e9b65c06579d8303c00804ab64708896e766bbd02275baf285d3f8feb641cd95"
 }

@@ -26,6 +26,12 @@ export const verifyPreviewReleaseSimulation = (input: {
     publicWriteCount: input.publicWrites.length,
     productionReleaseMetadataWriteCount: input.productionReleaseMetadataWrites.length,
     deploymentWriteCount: input.deploymentWrites.length,
+    applicableCheckIds: [
+      'check-us5-discovery',
+      'check-us5-prepare',
+      'check-us5-review',
+      'check-us5-validation',
+    ],
     checks: [
       'staging-public-closure',
       'immutable-preview-digest',
@@ -68,16 +74,21 @@ if (isMain()) {
       productionReleaseMetadataWrites: [],
       deploymentWrites: [],
     });
-    const releaseEligible = update.state === 'ELIGIBLE_FOR_BATCH';
-    const summary = {
-      command: 'verify:release',
-      updateId: update.updateId,
-      fixtureMode: update.fixtureMode,
-      state: update.state,
-      aggregatePassed: releaseEligible && verification.aggregatePassed,
-      blockingFindingCount: update.validationSummary.blockingFindingCount,
-    };
-    process.stdout.write(`${JSON.stringify(summary)}\n`);
-    process.exitCode = summary.aggregatePassed ? 0 : 2;
+    if (process.argv.includes('--simulation-only')) {
+      process.stdout.write(`${JSON.stringify(verification)}\n`);
+      process.exitCode = verification.aggregatePassed ? 0 : 2;
+    } else {
+      const releaseEligible = update.state === 'ELIGIBLE_FOR_BATCH';
+      const summary = {
+        command: 'verify:release',
+        updateId: update.updateId,
+        fixtureMode: update.fixtureMode,
+        state: update.state,
+        aggregatePassed: releaseEligible && verification.aggregatePassed,
+        blockingFindingCount: update.validationSummary.blockingFindingCount,
+      };
+      process.stdout.write(`${JSON.stringify(summary)}\n`);
+      process.exitCode = summary.aggregatePassed ? 0 : 2;
+    }
   }
 }

@@ -34,43 +34,43 @@
   "provisionalTaxonomyDigest": "445360ca2af20f0e4df97fcd023addbda7b22095077f68af52c919bffe57e620",
   "authoringSkillVersion": "1.1.1",
   "authoringSkillDigest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa",
-  "artifactDigest": "73d9c5555681ae3ac56bac411a30cf5730e131fa75013e4d850515eda47f77e5",
-  "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
+  "artifactDigest": "9d991162f73a9021430c552a9d658a8496056c68b3452a0cc2ca8446ce3b17ea",
+  "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
   "checkResults": [
     {
       "checkResultId": "check:update:discovery",
-      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
       "passed": true
     },
     {
       "checkResultId": "check:update:authoring",
-      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
       "passed": true
     },
     {
       "checkResultId": "check:update:validation",
-      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
       "passed": true
     },
     {
       "checkResultId": "check:update:idempotency",
-      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
       "passed": true
     },
     {
       "checkResultId": "check:update:staging-closure",
-      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
       "passed": true
     }
   ],
   "reviewEvidence": [
     {
       "reviewEvidenceId": "review:update-simulation:self",
-      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
       "requiredMode": "self",
       "reviewMode": "self",
       "aggregatePassed": true
     }
   ],
-  "componentDigest": "d3b355daacfd47186180e265e3bf90d38b3a9b73d7b7c293f7ac4d0aa523f4c1"
+  "componentDigest": "e14e290de82971133dcca6eb3764b01fa179e3af466550868e271c48fabae6d2"
 }

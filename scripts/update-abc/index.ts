@@ -59,6 +59,10 @@ interface SourcePacket {
   readonly sources: readonly { readonly sourceRevisionId: string; readonly path: string }[];
 }
 
+interface ProblemArtifact {
+  readonly id: string;
+}
+
 interface LearningArtifact {
   readonly learningUnit: {
     readonly problemIds: readonly string[];
@@ -121,23 +125,22 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
       manifest.selectedProblemIds.map((problemId) => problemId.slice(0, problemId.indexOf('-'))),
     ),
   ];
-  const contests = await Promise.all(
+  const contestEntries = await Promise.all(
     contestIds.map(async (contestId) => {
-      const artifact = await readJson<ContestArtifact>(
-        root,
-        `src/content/contests/abc212-abc263/${contestId}.json`,
-      );
-      return {
-        contestId: artifact.id,
-        startsAt: artifact.startedAt,
-        endsAt: artifact.endedAt,
-        tasks: artifact.officialTaskOrder.map((label) => ({
-          label,
-          sourceRevisionId: artifact.taskOrderSourceRevisionId,
-        })),
-      };
+      const contestPath = `src/content/contests/abc212-abc263/${contestId}.json`;
+      const artifact = await readJson<ContestArtifact>(root, contestPath);
+      return { contestId, contestPath, artifact };
     }),
   );
+  const contests = contestEntries.map(({ artifact }) => ({
+    contestId: artifact.id,
+    startsAt: artifact.startedAt,
+    endsAt: artifact.endedAt,
+    tasks: artifact.officialTaskOrder.map((label) => ({
+      label,
+      sourceRevisionId: artifact.taskOrderSourceRevisionId,
+    })),
+  }));
   const discovered = discoverContests({
     contests,
     mode: 'explicit-range',
@@ -161,11 +164,58 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
       return { problemId, inventoryPath, inventory };
     }),
   );
+  const problemEntries = await Promise.all(
+    manifest.selectedProblemIds.map(async (problemId) => {
+      const problemPath = `src/content/problems/abc212-abc263/${problemId}.json`;
+      const problem = await readJson<ProblemArtifact>(root, problemPath);
+      if (problem.id !== problemId) throw new Error(`PROBLEM_ID_MISMATCH:${problemId}`);
+      return { problemId, problemPath, problem };
+    }),
+  );
+  const sourceProblemIds = new Map<string, string[]>();
+  for (const problemInput of packet.problemInputs) {
+    for (const sourceRevisionId of problemInput.sourceRevisionIds) {
+      const owners = sourceProblemIds.get(sourceRevisionId) ?? [];
+      owners.push(problemInput.problemId);
+      sourceProblemIds.set(sourceRevisionId, owners);
+    }
+  }
+  const sourceEntries = await Promise.all(
+    packet.sources.map(async ({ sourceRevisionId, path: sourcePath }) => ({
+      sourceRevisionId,
+      sourcePath,
+      source: await readJson<unknown>(root, sourcePath),
+      affectedProblemIds: sourceProblemIds.get(sourceRevisionId) ?? [],
+    })),
+  );
   const staged = bootstrapPreviewSeed({
     previewId: options.fixture,
     problemIds: manifest.selectedProblemIds,
     snapshotDigest: manifest.metadataBatchDigest,
     artifacts: [
+      ...contestEntries.map(({ contestId, contestPath, artifact }) => ({
+        entityType: 'contest' as const,
+        entityId: contestId,
+        path: contestPath,
+        digest: canonicalDigest(artifact),
+        affectedProblemIds: manifest.selectedProblemIds.filter((problemId) =>
+          problemId.startsWith(`${contestId}-`),
+        ),
+      })),
+      ...problemEntries.map(({ problemId, problemPath, problem }) => ({
+        entityType: 'problem' as const,
+        entityId: problemId,
+        path: problemPath,
+        digest: canonicalDigest(problem),
+        affectedProblemIds: [problemId],
+      })),
+      ...sourceEntries.map(({ sourceRevisionId, sourcePath, source, affectedProblemIds }) => ({
+        entityType: 'source' as const,
+        entityId: sourceRevisionId,
+        path: sourcePath,
+        digest: canonicalDigest(source),
+        affectedProblemIds,
+      })),
       ...inventoryEntries.map(({ problemId, inventoryPath, inventory }) => ({
         entityType: 'technique_inventory' as const,
         entityId: `inventory-${problemId}`,

@@ -115,13 +115,16 @@ describe('US5 update validation', () => {
   it('freezes canonical update, work-manifest, review, and component evidence contracts', async () => {
     const update = PublicationUpdateSchema.parse(
       await json(
-        'staging/previews/initial-v1/release-simulation/update-755496a7aaa0e4b08c713fb7/manifest.json',
+        'staging/previews/initial-v1/release-simulation/update-04ea38e2db1d7b390448b807/manifest.json',
       ),
     );
     expect(update.authoringResults).toHaveLength(8);
     expect(
       update.authoringResults.every(({ resultType }) => resultType === 'authoring_required'),
     ).toBe(true);
+    expect(update.operations.filter(({ entityType }) => entityType === 'contest')).toHaveLength(8);
+    expect(update.operations.filter(({ entityType }) => entityType === 'problem')).toHaveLength(8);
+    expect(update.operations.filter(({ entityType }) => entityType === 'source')).toHaveLength(16);
 
     const workManifest = await json('docs/work-manifests/initial/us5/manifest.json');
     expect(() => {
@@ -142,6 +145,9 @@ describe('US5 update validation', () => {
       review.applicableChecks.every(
         (check) => check.resultDigest === canonicalDigest(verification),
       ),
+    ).toBe(true);
+    expect(
+      review.applicableChecks.every((check) => check.command.includes('--simulation-only')),
     ).toBe(true);
 
     const component = (await json(

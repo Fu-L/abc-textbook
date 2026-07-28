@@ -7,7 +7,8 @@ export const bootstrapPreviewSeed = (input: {
   readonly problemIds: readonly string[];
   readonly snapshotDigest: string;
   readonly artifacts: readonly {
-    readonly entityType: 'source' | 'technique_inventory' | 'learning_unit' | 'placement';
+    readonly entityType:
+      'contest' | 'problem' | 'source' | 'technique_inventory' | 'learning_unit' | 'placement';
     readonly entityId: string;
     readonly path: string;
     readonly digest: string;
@@ -18,6 +19,7 @@ export const bootstrapPreviewSeed = (input: {
     previewId: input.previewId,
     contestId: null,
     sourceSetFingerprint: input.snapshotDigest,
+    allowRepositoryPaths: true,
     targetProblemIds: input.problemIds,
     operations: input.artifacts.map((artifact) => ({
       entityType: artifact.entityType,

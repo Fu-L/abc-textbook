@@ -11,6 +11,7 @@ export const createPreviewUpdateReview = (input: {
   readonly authoringSkillDigest: string;
   readonly checkIds: readonly string[];
   readonly resultDigest: string;
+  readonly resultCommand: string;
   readonly riskReasons?: readonly string[];
 }) => {
   const reviewMode =
@@ -22,7 +23,7 @@ export const createPreviewUpdateReview = (input: {
   const resultPath = 'staging/previews/initial-v1/release-simulation/verification.json';
   const applicableChecks = input.checkIds.map((checkId) => ({
     checkId,
-    command: 'npm test',
+    command: input.resultCommand,
     subjectDigest: input.subjectDigest,
     resultPath,
     resultDigest: input.resultDigest,
@@ -124,9 +125,14 @@ if (isMain()) {
       throw new Error('REVIEW_INVENTORY_DIGEST_MISMATCH');
     }
     for (const check of evidence.applicableChecks) {
-      const result = JSON.parse(await readFile(check.resultPath, 'utf8')) as unknown;
+      const result = JSON.parse(await readFile(check.resultPath, 'utf8')) as {
+        readonly applicableCheckIds?: readonly string[];
+      };
       if (canonicalDigest(result) !== check.resultDigest) {
         throw new Error(`REVIEW_CHECK_RESULT_DIGEST_MISMATCH:${check.checkId}`);
+      }
+      if (!result.applicableCheckIds?.includes(check.checkId)) {
+        throw new Error(`REVIEW_CHECK_RESULT_SCOPE_MISMATCH:${check.checkId}`);
       }
     }
     const component = JSON.parse(

@@ -7,6 +7,7 @@ export interface StageInput {
   readonly sourceSetFingerprint: string;
   readonly targetProblemIds: readonly string[];
   readonly operations: readonly StagedOperationInput[];
+  readonly allowRepositoryPaths?: boolean;
 }
 
 export interface StagedUpdate extends StageInput {
@@ -15,9 +16,14 @@ export interface StagedUpdate extends StageInput {
   readonly inputDigest: string;
 }
 
-const assertStagingPath = (candidate: string, previewId: string): void => {
+const assertStagingPath = (
+  candidate: string,
+  previewId: string,
+  allowRepositoryPaths: boolean,
+): void => {
   const root = `staging/previews/${previewId}/`;
-  if (!candidate.startsWith(root) || candidate.includes('..') || candidate.startsWith('/')) {
+  const unsafe = candidate.includes('..') || candidate.startsWith('/');
+  if (unsafe || (!allowRepositoryPaths && !candidate.startsWith(root))) {
     throw new Error(`STAGING_PATH_REQUIRED:${candidate}`);
   }
 };
@@ -25,12 +31,14 @@ const assertStagingPath = (candidate: string, previewId: string): void => {
 export const stagePublicationUpdate = (input: StageInput): StagedUpdate => {
   const paths = new Set<string>();
   for (const operation of input.operations) {
-    assertStagingPath(operation.path, input.previewId);
+    assertStagingPath(operation.path, input.previewId, input.allowRepositoryPaths ?? false);
     if (paths.has(operation.path)) throw new Error(`DUPLICATE_OPERATION_PATH:${operation.path}`);
     paths.add(operation.path);
   }
+  const { allowRepositoryPaths: _allowRepositoryPaths, ...stableInput } = input;
+  void _allowRepositoryPaths;
   const normalized = {
-    ...input,
+    ...stableInput,
     targetProblemIds: [...input.targetProblemIds].sort(stableCompare),
     operations: [...input.operations]
       .sort((left, right) => stableCompare(left.path, right.path))
