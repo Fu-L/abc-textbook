@@ -1,0 +1,18 @@
+{
+  "previewId": "initial-v1",
+  "updateId": "update-7f8677b9d39d4cdc4cbd73ba",
+  "stagingClosed": true,
+  "publicWriteCount": 0,
+  "productionReleaseMetadataWriteCount": 0,
+  "deploymentWriteCount": 0,
+  "checks": [
+    "staging-public-closure",
+    "immutable-preview-digest",
+    "validation-inventory",
+    "no-production-release-metadata",
+    "no-deployment"
+  ],
+  "aggregatePassed": true,
+  "findings": [],
+  "immutablePreviewDigest": "74fd675aad081b01c67141bba0dd85c7fd1f4ad7fd7cc6cb0a7db504ffa08f35"
+}

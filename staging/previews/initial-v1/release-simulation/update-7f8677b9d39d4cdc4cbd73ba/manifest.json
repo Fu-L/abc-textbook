@@ -1,0 +1,20 @@
+{
+  "command": "abc:update",
+  "fixtureMode": true,
+  "previewId": "initial-v1",
+  "updateId": "update-7f8677b9d39d4cdc4cbd73ba",
+  "contestId": "abc256",
+  "advancedSlotLabels": ["E", "F"],
+  "resultCounts": {
+    "authoring_unit_draft": 2,
+    "authoring_required": 0,
+    "blocked": 0
+  },
+  "state": "ELIGIBLE_FOR_BATCH",
+  "blockingFindingCount": 0,
+  "completedSteps": ["discover", "acquire", "stage", "author", "classify", "validate"],
+  "holdReasons": [],
+  "subjectDigest": "35b1e4a149c6b463264e5619db990fa98cd53e5f6c5bf397db78c1e25c2c152d",
+  "productionReleaseMetadataWrites": [],
+  "deploymentWrites": []
+}

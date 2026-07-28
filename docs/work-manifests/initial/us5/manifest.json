@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0.0",
+  "manifestId": "initial-us5-update-simulation",
+  "ownerId": "person-maintainer",
+  "previewId": "initial-v1",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "learningOutcomeReviewUnits": [
+    {
+      "id": "us5-discovery-acquisition",
+      "outcome": "終了済みContestのDより後を公式metadataから欠落なく発見できる"
+    },
+    {
+      "id": "us5-authoring-classification",
+      "outcome": "各Problemを草案・要執筆・具体的保留のいずれかへ決定的に分類できる"
+    },
+    {
+      "id": "us5-validation-resume",
+      "outcome": "検証失敗を保持し、同じ入力から重複なく再開できる"
+    }
+  ],
+  "subjectPaths": [
+    "scripts/update-abc",
+    "scripts/verify-release.ts",
+    "scripts/review-update.ts",
+    "staging/previews/initial-v1/release-simulation"
+  ]
+}
