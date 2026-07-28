@@ -1,0 +1,79 @@
+{
+  "taskId": "T052",
+  "domain": "dynamic-programming",
+  "directory": "dynamic-programming",
+  "frozenAt": "2026-07-28T09:00:00+09:00",
+  "ownerId": "person-maintainer",
+  "review": {
+    "reviewerId": "person-maintainer",
+    "decision": "approved",
+    "reviewedAt": "2026-07-28T09:30:00+09:00",
+    "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。",
+    "approvedSubjectDigest": "6a7d5f4ed0b7c12552128442adc27a751e395ba3141362a7b038b0bbcd87c808"
+  },
+  "outcome": {
+    "id": "outcome-provisional-compressed-dp-state",
+    "statement": "履歴や位置の同値性を見つけ、将来の遷移を決める十分な最小状態として動的計画法を設計できる。"
+  },
+  "unit": {
+    "id": "provisional-unit-compressed-dp-state",
+    "title": "同値類からDP状態を設計する",
+    "prerequisiteUnitIds": [],
+    "excludedTopics": ["行列累乗による遷移高速化", "一般のオートマトン最小化"],
+    "tagIds": ["provisional-tag-compressed-dp-state"],
+    "problemIds": ["abc215-e", "abc232-e"],
+    "sourceRevisionIds": [
+      "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+      "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+      "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+      "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+    ],
+    "explanation": "DPの状態は過去をそのまま保存するのではなく、今後の選択肢と答えへの寄与が同じ過去をまとめる。abc215-e では、選んだ部分列の具体的な位置列ではなく、既に登場した文字の集合と末尾の文字だけが次の文字を追加できるかを決める。abc232-e では、盤面上の具体的な座標ではなく、現在の行と列が目標の行・列に一致するかという4状態だけで遷移数が決まる。状態候補を作るときは、二つの履歴を交換しても将来の遷移先の種類と本数が同じかを問う。異なるなら情報が不足し、同じならさらに圧縮できる。",
+    "examples": [
+      {
+        "key": "four-equivalence-classes",
+        "learningOutcomeIds": ["outcome-provisional-compressed-dp-state"],
+        "kind": "illustrative",
+        "language": "text",
+        "omissions": ["各遷移の具体的な係数計算"],
+        "environment": "紙と筆記具",
+        "input": "目標マス (r,c) と現在マス (x,y) がある H×W 盤面",
+        "procedure": [
+          "x=r かを真偽で記録する。",
+          "y=c かを真偽で記録する。",
+          "同じ真偽組の二地点から可能な遷移の分類が一致することを確認する。"
+        ],
+        "executionTarget": null,
+        "expectedResult": "全 H×W 地点を、行一致・列一致の真偽による4状態へ圧縮できる。",
+        "verificationStatus": "not_applicable"
+      }
+    ],
+    "exercises": [
+      {
+        "key": "test-sufficient-state",
+        "learningOutcomeIds": ["outcome-provisional-compressed-dp-state"],
+        "prerequisiteIds": [],
+        "attainmentCondition": "提案された状態が十分かを反例探索で判定できる。",
+        "assessment": {
+          "method": "状態設計と反例説明",
+          "successCondition": "同じ状態にまとめた二つの履歴から遷移可能性が異なるなら不足と判定する。"
+        },
+        "answer": {
+          "reasoningOrVerification": "DP状態が十分であるには、同じ状態に写る任意の履歴が、各次状態へ同じ方法数で遷移しなければならない。末尾文字を落とした abc215-e の状態では、次に同じ文字を続けられるかが区別できず反例になる。",
+          "procedure": [
+            "同じ候補状態へ写る二履歴を選ぶ。",
+            "次の一手を列挙する。",
+            "遷移先または方法数の差があれば状態へ識別情報を追加する。"
+          ],
+          "expectedResult": "abc215-e では使用文字集合に加えて末尾文字が必要だと説明できる。",
+          "verificationStatus": "passed"
+        }
+      }
+    ],
+    "navigation": {
+      "previousUnitId": "provisional-unit-multiplicative-order-counting",
+      "nextUnitId": "provisional-unit-shortest-path-structure",
+      "orderReason": "provisional taxonomy の固定順に従い、乗法的構造の次、最短路構造の前に置く。"
+    }
+  }
+}

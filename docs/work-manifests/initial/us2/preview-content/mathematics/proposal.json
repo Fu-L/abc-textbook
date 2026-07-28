@@ -1,0 +1,79 @@
+{
+  "taskId": "T054",
+  "domain": "mathematics-combinatorics",
+  "directory": "mathematics",
+  "frozenAt": "2026-07-28T09:00:00+09:00",
+  "ownerId": "person-maintainer",
+  "review": {
+    "reviewerId": "person-maintainer",
+    "decision": "approved",
+    "reviewedAt": "2026-07-28T09:30:00+09:00",
+    "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。",
+    "approvedSubjectDigest": "3541925f958ed4a1091e1d62b5fc9ac72cf0c519fd2305a8e7987afbf4fa5f25"
+  },
+  "outcome": {
+    "id": "outcome-provisional-multiplicative-order-counting",
+    "statement": "乗法的な条件を指数または位数の問題へ変換し、合同式と約数構造を使って数え上げられる。"
+  },
+  "unit": {
+    "id": "provisional-unit-multiplicative-order-counting",
+    "title": "乗法的構造を指数と位数へ写す",
+    "prerequisiteUnitIds": [],
+    "excludedTopics": ["一般の有限群論", "離散対数の高速計算"],
+    "tagIds": ["provisional-tag-multiplicative-order-counting"],
+    "problemIds": ["abc212-g", "abc222-g"],
+    "sourceRevisionIds": [
+      "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+      "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+      "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+      "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
+    ],
+    "explanation": "積や反復で定義された条件は、生成元の指数や乗法的位数へ移すと加法的な合同式として扱えることがある。abc212-g では素数法の非零剰余を原始根の冪で表し、積に関する条件を指数の合同条件へ変換して最大公約数と約数ごとの数え上げへ帰着する。abc222-g では同じ数字を並べた数を repunit として表し、割り切れる最小桁数を10の乗法的位数として捉える。最初に確認すべきなのは、法と底が互いに素で周期が存在するか、元の条件が指数化で同値に保たれるかである。存在しない場合を先に分け、存在する場合だけ約数を小さい順に調べる。",
+    "examples": [
+      {
+        "key": "order-as-period",
+        "learningOutcomeIds": ["outcome-provisional-multiplicative-order-counting"],
+        "kind": "illustrative",
+        "language": "text",
+        "omissions": ["abc222-g 固有の法の変換"],
+        "environment": "紙と筆記具",
+        "input": "法7における10の冪",
+        "procedure": [
+          "10≡3 (mod 7) とする。",
+          "3, 3², 3³, ... を法7で計算する。",
+          "初めて1へ戻る正の指数を記録する。"
+        ],
+        "executionTarget": null,
+        "expectedResult": "3⁶≡1 (mod 7) で、それ以前に1へ戻らないため位数は6となる。",
+        "verificationStatus": "not_applicable"
+      }
+    ],
+    "exercises": [
+      {
+        "key": "order-existence-and-divisors",
+        "learningOutcomeIds": ["outcome-provisional-multiplicative-order-counting"],
+        "prerequisiteIds": [],
+        "attainmentCondition": "位数が存在する条件を確認し、候補を群の位数の約数へ絞れる。",
+        "assessment": {
+          "method": "合同式の短答",
+          "successCondition": "底と法の最大公約数を確認し、Eulerの定理から位数が φ(m) の約数だと説明する。"
+        },
+        "answer": {
+          "reasoningOrVerification": "gcd(a,m)=1 のとき a は法 m の単元であり、a^φ(m)≡1 なので最小の正指数である位数は存在する。位数は有限群の元の位数だから φ(m) を割る。",
+          "procedure": [
+            "gcd(a,m) を計算する。",
+            "1でなければ乗法的位数による方針を保留する。",
+            "1なら φ(m) の約数を列挙し、小さい順に a^d≡1 を検査する。"
+          ],
+          "expectedResult": "候補指数を φ(m) の約数へ限定し、最小の成立値を選べる。",
+          "verificationStatus": "passed"
+        }
+      }
+    ],
+    "navigation": {
+      "previousUnitId": null,
+      "nextUnitId": "provisional-unit-compressed-dp-state",
+      "orderReason": "provisional taxonomy の固定順で先頭に置き、次にDP状態圧縮へ進む。"
+    }
+  }
+}

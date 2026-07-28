@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T053-data-structures",
+  "taskId": "T053",
+  "scopeDigest": "c1f0c137f08db7e88dcaca10364118f64681707aff44b7f2412d950dc902d567",
+  "digest": "8c4e723b2b7a622a4c77c02fe6f63ef22def268907e9eb3f2f043baf809b981f",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-002",
+    "CQ-003",
+    "CQ-004",
+    "CQ-005",
+    "CQ-006",
+    "CQ-007",
+    "FR-006",
+    "FR-009",
+    "FR-010",
+    "FR-011",
+    "FR-012",
+    "FR-013",
+    "FR-019",
+    "FR-022",
+    "FR-023",
+    "FR-025",
+    "FR-026",
+    "FR-031"
+  ],
+  "learningOutcomeIds": ["outcome-provisional-range-aggregate-under-updates"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T053-data-structures",
+      "changeKind": "content",
+      "paths": [
+        "docs/verification/previews/initial-v1/components/content/data-structures.json",
+        "staging/previews/initial-v1/learning/data-structures/learning-unit.json"
+      ],
+      "itemIds": [
+        "outcome:outcome-provisional-range-aggregate-under-updates",
+        "problem:abc223-f",
+        "problem:abc256-f",
+        "unit:provisional-unit-range-aggregate-under-updates"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-002",
+        "CQ-003",
+        "CQ-004",
+        "CQ-005",
+        "CQ-006",
+        "CQ-007",
+        "FR-006",
+        "FR-009",
+        "FR-010",
+        "FR-011",
+        "FR-012",
+        "FR-013",
+        "FR-019",
+        "FR-022",
+        "FR-023",
+        "FR-025",
+        "FR-026",
+        "FR-031"
+      ],
+      "learningOutcomeIds": ["outcome-provisional-range-aggregate-under-updates"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-data-structures-accessibility",
+        "check-data-structures-example-answer",
+        "check-data-structures-links",
+        "check-data-structures-review-policy",
+        "check-data-structures-schema",
+        "check-data-structures-source-traceability"
+      ],
+      "evidenceRoles": ["preview_learning_content_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-07-28T09:00:00+09:00",
+  "updatedAt": "2026-07-28T09:00:00+09:00"
+}
