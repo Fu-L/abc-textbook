@@ -66,6 +66,13 @@ export class PreviewLearningContentError extends Error {
   }
 }
 
+export const authoringSourcePacketDigest = (packet: object): string =>
+  canonicalDigest(
+    Object.fromEntries(
+      Object.entries(packet).filter(([field]) => field !== 'authoringSkillDigest'),
+    ),
+  );
+
 export interface PreviewLearningContentManifestInput {
   previewId: string;
   manifestDigest: string;
@@ -98,6 +105,12 @@ export interface PreviewLearningContentDomainInput {
   directory: string;
   frozenAt: string;
   ownerId: string;
+  review: {
+    reviewerId: string;
+    decision: 'approved' | 'changes_requested';
+    reviewedAt: string;
+    basis: string;
+  };
   expectedProblemIds: string[];
   expectedSourceRevisionIds: string[];
   outcome: { id: string; statement: string };
@@ -107,6 +120,7 @@ export interface PreviewLearningContentDomainInput {
 export interface PreviewLearningContentBuildInput {
   manifest: PreviewLearningContentManifestInput;
   taxonomyDigest: string;
+  taxonomyUnitOrder: string[];
   authoringSkill: { version: string; digest: string; sourcePacketDigest: string };
   domain: PreviewLearningContentDomainInput;
 }
@@ -117,6 +131,12 @@ const domainProposalSchema = z.strictObject({
   directory: z.string().regex(SLUG),
   frozenAt: OffsetDateTimeSchema,
   ownerId: z.string().regex(/^person-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
+  review: z.strictObject({
+    reviewerId: z.string().regex(/^person-[a-z0-9]+(?:-[a-z0-9]+)*$/u),
+    decision: z.enum(['approved', 'changes_requested']),
+    reviewedAt: OffsetDateTimeSchema,
+    basis: z.string().trim().min(1),
+  }),
   outcome: z.strictObject({ id: z.string().min(1), statement: z.string().trim().min(1) }),
   unit: z.strictObject({
     id: z.string().min(1),
@@ -168,7 +188,12 @@ export interface PreviewLearningContentArtifacts {
   readonly componentPath: string;
   readonly learningUnit: PreviewLearningUnitArtifact;
   readonly workManifest: PreviewLearningContentWorkManifest;
-  readonly component: ComponentEvidence;
+  readonly component: PreviewLearningContentComponent;
+}
+
+export interface PreviewLearningContentComponent extends ComponentEvidence {
+  readonly status: 'on_hold' | 'passed';
+  readonly holdReasons: readonly string[];
 }
 
 const validateInput = (input: PreviewLearningContentBuildInput): void => {
@@ -184,28 +209,11 @@ const validateInput = (input: PreviewLearningContentBuildInput): void => {
     !TASK_ID.test(domain.taskId) ||
     !SLUG.test(domain.domain) ||
     !SLUG.test(domain.directory) ||
-    !OffsetDateTimeSchema.safeParse(domain.frozenAt).success
+    !OffsetDateTimeSchema.safeParse(domain.frozenAt).success ||
+    input.taxonomyUnitOrder.length === 0 ||
+    !unique(input.taxonomyUnitOrder)
   ) {
     throw new PreviewLearningContentError('INPUT_INVALID', 'Digest, ID, task, or date is invalid.');
-  }
-  if (
-    !sameSet(domain.unit.problemIds, domain.expectedProblemIds) ||
-    domain.unit.problemIds.some((problemId) => !PROBLEM_ID.test(problemId)) ||
-    domain.unit.problemIds.some((problemId) => !manifest.selectedProblemIds.includes(problemId))
-  ) {
-    throw new PreviewLearningContentError(
-      'COHORT_MISMATCH',
-      'The LearningUnit must own exactly the taxonomy group Problems.',
-    );
-  }
-  if (
-    !sameSet(domain.unit.sourceRevisionIds, domain.expectedSourceRevisionIds) ||
-    domain.unit.sourceRevisionIds.some((sourceId) => !manifest.sourceRevisionIds.includes(sourceId))
-  ) {
-    throw new PreviewLearningContentError(
-      'SOURCE_MISMATCH',
-      'The LearningUnit source packet does not match its taxonomy group.',
-    );
   }
   if (
     domain.outcome.id.trim().length === 0 ||
@@ -224,21 +232,84 @@ const validateInput = (input: PreviewLearningContentBuildInput): void => {
   }
   for (const example of domain.unit.examples) LearningUnitInlineExampleSchema.parse(example);
   for (const exercise of domain.unit.exercises) InlineExerciseSchema.parse(exercise);
-  const expectedOutcomeIds = [domain.outcome.id];
-  if (
-    domain.unit.examples.some(
-      ({ learningOutcomeIds }) => !sameSet(learningOutcomeIds, expectedOutcomeIds),
-    ) ||
-    domain.unit.exercises.some(
-      ({ learningOutcomeIds }) => !sameSet(learningOutcomeIds, expectedOutcomeIds),
-    ) ||
-    domain.unit.exercises.some(({ answer }) => answer.verificationStatus !== 'passed')
-  ) {
-    throw new PreviewLearningContentError(
-      'ATTAINMENT_MISMATCH',
-      'Every example and exercise must bind to the candidate Outcome with a passed answer.',
+};
+
+const evaluateInput = (
+  input: PreviewLearningContentBuildInput,
+): {
+  readonly holdReasons: string[];
+  readonly checks: Readonly<Record<(typeof CHECK_NAMES)[number], boolean>>;
+} => {
+  const { manifest, domain } = input;
+  const cohortPassed =
+    sameSet(domain.unit.problemIds, domain.expectedProblemIds) &&
+    domain.unit.problemIds.every((problemId) => PROBLEM_ID.test(problemId)) &&
+    domain.unit.problemIds.every((problemId) => manifest.selectedProblemIds.includes(problemId));
+  const sourcePassed =
+    sameSet(domain.unit.sourceRevisionIds, domain.expectedSourceRevisionIds) &&
+    domain.unit.sourceRevisionIds.every((sourceId) =>
+      manifest.sourceRevisionIds.includes(sourceId),
     );
-  }
+  const expectedOutcomeIds = [domain.outcome.id];
+  const attainmentPassed =
+    domain.unit.examples.every(({ learningOutcomeIds }) =>
+      sameSet(learningOutcomeIds, expectedOutcomeIds),
+    ) &&
+    domain.unit.exercises.every(({ learningOutcomeIds }) =>
+      sameSet(learningOutcomeIds, expectedOutcomeIds),
+    ) &&
+    domain.unit.exercises.every(({ answer }) => answer.verificationStatus === 'passed');
+  const unitIndex = input.taxonomyUnitOrder.indexOf(domain.unit.id);
+  const linksPassed =
+    unitIndex >= 0 &&
+    input.taxonomyUnitOrder.lastIndexOf(domain.unit.id) === unitIndex &&
+    domain.unit.navigation.previousUnitId === (input.taxonomyUnitOrder[unitIndex - 1] ?? null) &&
+    domain.unit.navigation.nextUnitId === (input.taxonomyUnitOrder[unitIndex + 1] ?? null) &&
+    domain.unit.prerequisiteUnitIds.every((prerequisiteId) => {
+      const prerequisiteIndex = input.taxonomyUnitOrder.indexOf(prerequisiteId);
+      return prerequisiteIndex >= 0 && prerequisiteIndex < unitIndex;
+    });
+  const accessibilityPassed =
+    domain.unit.explanation.trim().length > 0 &&
+    domain.unit.navigation.orderReason.trim().length > 0 &&
+    domain.unit.examples.every(
+      (example) =>
+        example.environment.trim().length > 0 &&
+        example.input.trim().length > 0 &&
+        example.procedure.every((step) => step.trim().length > 0) &&
+        example.expectedResult.trim().length > 0,
+    ) &&
+    domain.unit.exercises.every(
+      (exercise) =>
+        exercise.attainmentCondition.trim().length > 0 &&
+        exercise.assessment.method.trim().length > 0 &&
+        exercise.assessment.successCondition.trim().length > 0 &&
+        exercise.answer.reasoningOrVerification.trim().length > 0,
+    );
+  const reviewPassed =
+    domain.review.decision === 'approved' &&
+    domain.review.reviewerId === domain.ownerId &&
+    domain.review.basis.trim().length > 0 &&
+    OffsetDateTimeSchema.safeParse(domain.review.reviewedAt).success;
+  const holdReasons = [
+    ...(cohortPassed ? [] : ['COHORT_MISMATCH']),
+    ...(sourcePassed ? [] : ['SOURCE_MISMATCH']),
+    ...(attainmentPassed ? [] : ['ATTAINMENT_MISMATCH']),
+    ...(linksPassed ? [] : ['NAVIGATION_MISMATCH']),
+    ...(accessibilityPassed ? [] : ['ACCESSIBILITY_MISMATCH']),
+    ...(reviewPassed ? [] : ['REVIEW_INPUT_INVALID']),
+  ];
+  return {
+    holdReasons,
+    checks: {
+      'source-traceability': cohortPassed && sourcePassed,
+      'example-answer': attainmentPassed,
+      links: linksPassed,
+      accessibility: accessibilityPassed,
+      schema: true,
+      'review-policy': reviewPassed,
+    },
+  };
 };
 
 const withDigest = <T extends Readonly<Record<string, unknown>>, K extends string>(
@@ -251,6 +322,7 @@ export const buildPreviewLearningContentArtifacts = (
 ): PreviewLearningContentArtifacts => {
   validateInput(input);
   const { manifest, domain, authoringSkill } = input;
+  const evaluation = evaluateInput(input);
   const root = `staging/previews/${manifest.previewId}/learning/${domain.directory}`;
   const learningUnitPath = `${root}/learning-unit.json`;
   const workManifestPath = `docs/work-manifests/initial/us2/preview-content/${domain.directory}/manifest.json`;
@@ -268,6 +340,7 @@ export const buildPreviewLearningContentArtifacts = (
       authoringSkillVersion: authoringSkill.version,
       authoringSkillDigest: authoringSkill.digest,
       sourcePacketDigest: authoringSkill.sourcePacketDigest,
+      review: domain.review,
       canonicalMaterializationAllowed: false as const,
       finalMaterializationTasks: ['T155', 'T156', 'T157', 'T158'],
     },
@@ -321,7 +394,7 @@ export const buildPreviewLearningContentArtifacts = (
   const checkResults = CHECK_NAMES.map((name) => ({
     checkResultId: `check:${domain.directory}:${name}`,
     subjectDigest,
-    passed: true,
+    passed: evaluation.checks[name],
   }));
   const reviewEvidence = [
     {
@@ -329,11 +402,18 @@ export const buildPreviewLearningContentArtifacts = (
       subjectDigest,
       requiredMode: 'self' as const,
       reviewMode: 'self' as const,
-      aggregatePassed: true,
+      aggregatePassed: evaluation.holdReasons.length === 0,
     },
   ];
-  const componentSubject = { ...currentSubject, subjectDigest, checkResults, reviewEvidence };
-  const component: ComponentEvidence = {
+  const componentSubject = {
+    ...currentSubject,
+    subjectDigest,
+    checkResults,
+    reviewEvidence,
+    status: evaluation.holdReasons.length === 0 ? ('passed' as const) : ('on_hold' as const),
+    holdReasons: evaluation.holdReasons,
+  };
+  const component: PreviewLearningContentComponent = {
     ...componentSubject,
     componentDigest: componentEvidenceDigest(componentSubject),
   };

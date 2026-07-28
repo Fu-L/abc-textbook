@@ -4,6 +4,12 @@
   "directory": "dynamic-programming",
   "frozenAt": "2026-07-28T09:00:00+09:00",
   "ownerId": "person-maintainer",
+  "review": {
+    "reviewerId": "person-maintainer",
+    "decision": "approved",
+    "reviewedAt": "2026-07-28T09:30:00+09:00",
+    "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。"
+  },
   "outcome": {
     "id": "outcome-provisional-compressed-dp-state",
     "statement": "履歴や位置の同値性を見つけ、将来の遷移を決める十分な最小状態として動的計画法を設計できる。"

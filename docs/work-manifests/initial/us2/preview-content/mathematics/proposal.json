@@ -4,6 +4,12 @@
   "directory": "mathematics",
   "frozenAt": "2026-07-28T09:00:00+09:00",
   "ownerId": "person-maintainer",
+  "review": {
+    "reviewerId": "person-maintainer",
+    "decision": "approved",
+    "reviewedAt": "2026-07-28T09:30:00+09:00",
+    "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。"
+  },
   "outcome": {
     "id": "outcome-provisional-multiplicative-order-counting",
     "statement": "乗法的な条件を指数または位数の問題へ変換し、合同式と約数構造を使って数え上げられる。"

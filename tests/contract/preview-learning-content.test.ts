@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  authoringSourcePacketDigest,
   buildPreviewLearningContentArtifacts,
   validatePreviewLearningContentArtifacts,
   type PreviewLearningContentBuildInput,
@@ -17,6 +18,7 @@ const buildInput = (): PreviewLearningContentBuildInput => ({
     sourceRevisionIds: ['source-abc218-f-problem', 'source-abc252-e-problem'],
   },
   taxonomyDigest: digest('c'),
+  taxonomyUnitOrder: ['provisional-unit-shortest-path-structure'],
   authoringSkill: {
     version: '1.1.1',
     digest: digest('d'),
@@ -28,6 +30,12 @@ const buildInput = (): PreviewLearningContentBuildInput => ({
     directory: 'graph-search',
     frozenAt: '2026-07-28T09:00:00+09:00',
     ownerId: 'person-maintainer',
+    review: {
+      reviewerId: 'person-maintainer',
+      decision: 'approved',
+      reviewedAt: '2026-07-28T09:30:00+09:00',
+      basis: 'Outcome、説明、例、演習、解答、navigationをsource packetと照合した。',
+    },
     expectedProblemIds: ['abc218-f', 'abc252-e'],
     expectedSourceRevisionIds: ['source-abc218-f-problem', 'source-abc252-e-problem'],
     outcome: {
@@ -82,6 +90,23 @@ const buildInput = (): PreviewLearningContentBuildInput => ({
 });
 
 describe('T051-T054 preview learning content', () => {
+  it('detects source packet byte-subject changes while excluding the skill back-reference', () => {
+    const packet = {
+      authoringSkillDigest: digest('a'),
+      sources: [{ sourceRevisionId: 'source-one', allowedUses: ['technical_claim'] }],
+    };
+    const frozen = authoringSourcePacketDigest(packet);
+    expect(authoringSourcePacketDigest({ ...packet, authoringSkillDigest: digest('b') })).toBe(
+      frozen,
+    );
+    expect(
+      authoringSourcePacketDigest({
+        ...packet,
+        sources: [{ sourceRevisionId: 'source-one', allowedUses: [] }],
+      }),
+    ).not.toBe(frozen);
+  });
+
   it('builds deterministic staging-only content, manifest, and current-subject evidence', () => {
     const input = buildInput();
     const first = buildPreviewLearningContentArtifacts(input);
@@ -97,15 +122,37 @@ describe('T051-T054 preview learning content', () => {
     expect(first.component.reviewEvidence[0]?.aggregatePassed).toBe(true);
   });
 
-  it('rejects cohort, source, skill, and publication-boundary mismatches', () => {
+  it('records cohort, source, link, and review failures as concrete holds', () => {
     const input = buildInput();
     const badProblem = structuredClone(input);
     badProblem.domain.unit.problemIds = ['abc218-f'];
-    expect(() => buildPreviewLearningContentArtifacts(badProblem)).toThrow(/COHORT/iu);
+    const cohortHold = buildPreviewLearningContentArtifacts(badProblem);
+    expect(cohortHold.component.status).toBe('on_hold');
+    expect(cohortHold.component.holdReasons).toContain('COHORT_MISMATCH');
 
     const badSource = structuredClone(input);
     badSource.domain.unit.sourceRevisionIds = ['source-unknown'];
-    expect(() => buildPreviewLearningContentArtifacts(badSource)).toThrow(/SOURCE/iu);
+    const sourceHold = buildPreviewLearningContentArtifacts(badSource);
+    expect(sourceHold.component.holdReasons).toContain('SOURCE_MISMATCH');
+
+    const badLink = structuredClone(input);
+    badLink.domain.unit.navigation.nextUnitId = 'provisional-unit-missing';
+    const linkHold = buildPreviewLearningContentArtifacts(badLink);
+    expect(linkHold.component.holdReasons).toContain('NAVIGATION_MISMATCH');
+    expect(
+      linkHold.component.checkResults.find(({ checkResultId }) => checkResultId.includes('links'))
+        ?.passed,
+    ).toBe(false);
+
+    const missingReview = structuredClone(input);
+    missingReview.domain.review.decision = 'changes_requested';
+    const reviewHold = buildPreviewLearningContentArtifacts(missingReview);
+    expect(reviewHold.component.holdReasons).toContain('REVIEW_INPUT_INVALID');
+    expect(reviewHold.component.reviewEvidence[0]?.aggregatePassed).toBe(false);
+  });
+
+  it('rejects publication-boundary violations', () => {
+    const input = buildInput();
 
     const artifacts = buildPreviewLearningContentArtifacts(input);
     const changed = {

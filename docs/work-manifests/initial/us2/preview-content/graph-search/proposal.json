@@ -4,6 +4,12 @@
   "directory": "graph-search",
   "frozenAt": "2026-07-28T09:00:00+09:00",
   "ownerId": "person-maintainer",
+  "review": {
+    "reviewerId": "person-maintainer",
+    "decision": "approved",
+    "reviewedAt": "2026-07-28T09:30:00+09:00",
+    "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。"
+  },
   "outcome": {
     "id": "outcome-provisional-shortest-path-structure",
     "statement": "最短路の経路または木を復元し、その構造を再計算範囲の限定や辺集合の構成に利用できる。"

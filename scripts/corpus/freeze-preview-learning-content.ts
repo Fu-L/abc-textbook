@@ -2,6 +2,7 @@ import { access } from 'node:fs/promises';
 
 import { canonicalJson } from '../../src/lib/domain/canonical-json.js';
 import {
+  authoringSourcePacketDigest,
   buildPreviewLearningContentArtifacts,
   parsePreviewLearningContentDomainProposal,
   validatePreviewLearningContentArtifacts,
@@ -35,6 +36,7 @@ interface TaxonomyGroup {
 
 interface TaxonomyDocument {
   readonly taxonomyDigest: string;
+  readonly standardUnitOrder: string[];
 }
 
 interface SkillManifestDocument {
@@ -102,7 +104,9 @@ try {
     throw new CorpusCliError('PREVIEW_CONTENT_PREREQUISITE_INVALID', PREVIEW_ID);
   }
   const sourcePacket = (await readJson(skill.sourcePacket.path)) as AuthoringSourcePacketDocument;
+  const packetDigest = authoringSourcePacketDigest(sourcePacket);
   if (
+    packetDigest !== skill.sourcePacket.digest ||
     sourcePacket.authoringSkillVersion !== skill.authoringSkillVersion ||
     sourcePacket.authoringSkillDigest !== skill.authoringSkillDigest
   ) {
@@ -173,6 +177,7 @@ try {
           sourceRevisionIds: manifest.sourceRevisionIds,
         },
         taxonomyDigest: taxonomy.taxonomyDigest,
+        taxonomyUnitOrder: taxonomy.standardUnitOrder,
         authoringSkill: {
           version: skill.authoringSkillVersion,
           digest: skill.authoringSkillDigest,

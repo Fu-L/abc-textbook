@@ -4,6 +4,12 @@
   "directory": "data-structures",
   "frozenAt": "2026-07-28T09:00:00+09:00",
   "ownerId": "person-maintainer",
+  "review": {
+    "reviewerId": "person-maintainer",
+    "decision": "approved",
+    "reviewedAt": "2026-07-28T09:30:00+09:00",
+    "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。"
+  },
   "outcome": {
     "id": "outcome-provisional-range-aggregate-under-updates",
     "statement": "問い合わせ式や判定条件を更新可能な複数の集約量へ分解し、適切なデータ構造を選択できる。"
