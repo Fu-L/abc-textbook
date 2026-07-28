@@ -3,6 +3,9 @@ import { describe, expect, it } from 'vitest';
 import {
   authoringSourcePacketDigest,
   buildPreviewLearningContentArtifacts,
+  matchesPreviewLearningContentTaxonomy,
+  parsePreviewLearningContentDomainProposal,
+  previewTaxonomyGroupDigest,
   validatePreviewLearningContentArtifacts,
   type PreviewLearningContentBuildInput,
 } from '../../src/lib/preview/learning-content.js';
@@ -163,6 +166,72 @@ describe('T051-T054 preview learning content', () => {
     expect(staleReview.component.subjectDigest).not.toBe(
       changedAfterReview.domain.review.approvedSubjectDigest,
     );
+  });
+
+  it('fails the schema gate for duplicate inline block keys', () => {
+    const input = buildInput();
+    const example = input.domain.unit.examples[0];
+    if (!example) throw new Error('Example fixture is missing.');
+    input.domain.unit.examples.push(structuredClone(example));
+
+    const result = buildPreviewLearningContentArtifacts(input);
+    expect(result.component.status).toBe('on_hold');
+    expect(result.component.holdReasons).toContain('SCHEMA_MISMATCH');
+    expect(
+      result.component.checkResults.find(({ checkResultId }) => checkResultId.includes('schema'))
+        ?.passed,
+    ).toBe(false);
+    const { expectedProblemIds, expectedSourceRevisionIds, ...proposal } = input.domain;
+    expect(() =>
+      parsePreviewLearningContentDomainProposal(
+        proposal,
+        expectedProblemIds,
+        expectedSourceRevisionIds,
+      ),
+    ).toThrow();
+    const { title: omittedTitle, ...unitWithoutTitle } = proposal.unit;
+    expect(omittedTitle).toBe(input.domain.unit.title);
+    const missingTitle = { ...proposal, unit: unitWithoutTitle };
+    expect(() =>
+      parsePreviewLearningContentDomainProposal(
+        missingTitle,
+        expectedProblemIds,
+        expectedSourceRevisionIds,
+      ),
+    ).toThrow();
+  });
+
+  it('binds proposals to the digest-verified taxonomy-owned unit fields', () => {
+    const input = buildInput();
+    const taxonomyUnit = {
+      id: input.domain.unit.id,
+      title: input.domain.unit.title,
+      prerequisiteUnitIds: input.domain.unit.prerequisiteUnitIds,
+      tagIds: input.domain.unit.tagIds,
+      outcomeIds: [input.domain.outcome.id],
+      problemIds: input.domain.unit.problemIds,
+      sourceRevisionIds: input.domain.unit.sourceRevisionIds,
+    };
+    expect(matchesPreviewLearningContentTaxonomy(input.domain, taxonomyUnit)).toBe(true);
+    expect(
+      matchesPreviewLearningContentTaxonomy(input.domain, {
+        ...taxonomyUnit,
+        title: 'proposalでは変更できないtitle',
+      }),
+    ).toBe(false);
+    expect(
+      matchesPreviewLearningContentTaxonomy(input.domain, {
+        ...taxonomyUnit,
+        tagIds: ['provisional-tag-other'],
+      }),
+    ).toBe(false);
+
+    const group = { domain: 'graph-search', unit: taxonomyUnit };
+    const frozenDigest = previewTaxonomyGroupDigest(group);
+    expect(previewTaxonomyGroupDigest({ ...group, groupDigest: frozenDigest })).toBe(frozenDigest);
+    expect(
+      previewTaxonomyGroupDigest({ ...group, unit: { ...taxonomyUnit, title: '改変' } }),
+    ).not.toBe(frozenDigest);
   });
 
   it('rejects publication-boundary violations', () => {

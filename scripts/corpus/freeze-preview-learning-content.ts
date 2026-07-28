@@ -4,7 +4,9 @@ import { canonicalJson } from '../../src/lib/domain/canonical-json.js';
 import {
   authoringSourcePacketDigest,
   buildPreviewLearningContentArtifacts,
+  matchesPreviewLearningContentTaxonomy,
   parsePreviewLearningContentDomainProposal,
+  previewTaxonomyGroupDigest,
   validatePreviewLearningContentArtifacts,
 } from '../../src/lib/preview/learning-content.js';
 import { CorpusCliError, readJson, reportCliFailure, writeJsonNoOverwrite } from './cli-support.js';
@@ -31,12 +33,26 @@ interface TaxonomyGroup {
   readonly problemIds: string[];
   readonly sourceRevisionIds: string[];
   readonly outcome: { readonly id: string; readonly statement: string };
-  readonly unit: { readonly id: string };
+  readonly unit: {
+    readonly id: string;
+    readonly title: string;
+    readonly prerequisiteUnitIds: string[];
+    readonly tagIds: string[];
+    readonly outcomeIds: string[];
+    readonly problemIds: string[];
+    readonly sourceRevisionIds: string[];
+  };
+  readonly groupDigest: string;
 }
 
 interface TaxonomyDocument {
   readonly taxonomyDigest: string;
   readonly standardUnitOrder: string[];
+  readonly groupRefs: readonly {
+    readonly domain: string;
+    readonly path: string;
+    readonly digest: string;
+  }[];
 }
 
 interface SkillManifestDocument {
@@ -115,10 +131,18 @@ try {
 
   const artifacts = await Promise.all(
     DOMAINS.map(async ([domain, directory]) => {
-      const group = (await readJson(
-        `staging/previews/${PREVIEW_ID}/taxonomy/groups/${domain}.json`,
-      )) as TaxonomyGroup;
-      if (group.domain !== domain) throw new CorpusCliError('TAXONOMY_GROUP_MISSING', domain);
+      const groupPath = `staging/previews/${PREVIEW_ID}/taxonomy/groups/${domain}.json`;
+      const group = (await readJson(groupPath)) as TaxonomyGroup;
+      const groupRef = taxonomy.groupRefs.find((reference) => reference.domain === domain);
+      if (
+        group.domain !== domain ||
+        groupRef?.path !== groupPath ||
+        groupRef.digest !== group.groupDigest ||
+        previewTaxonomyGroupDigest(group as unknown as Readonly<Record<string, unknown>>) !==
+          group.groupDigest
+      ) {
+        throw new CorpusCliError('TAXONOMY_GROUP_MISSING', domain);
+      }
       const proposal = parsePreviewLearningContentDomainProposal(
         await readJson(
           `docs/work-manifests/initial/us2/preview-content/${directory}/proposal.json`,
@@ -131,7 +155,7 @@ try {
         proposal.directory !== directory ||
         proposal.outcome.id !== group.outcome.id ||
         proposal.outcome.statement !== group.outcome.statement ||
-        proposal.unit.id !== group.unit.id
+        !matchesPreviewLearningContentTaxonomy(proposal, group.unit)
       ) {
         throw new CorpusCliError('TAXONOMY_GROUP_MISMATCH', domain);
       }

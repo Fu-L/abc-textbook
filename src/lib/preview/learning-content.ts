@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { canonicalDigest } from '../domain/canonical-json.js';
+import { strictObject } from '../domain/contract-schema.js';
 import {
   LearningUnitInlineExampleSchema,
   InlineExerciseSchema,
@@ -55,6 +56,28 @@ const sameSet = (left: readonly string[], right: readonly string[]): boolean =>
   unique(right) &&
   left.length === right.length &&
   left.every((item) => right.includes(item));
+
+const addDuplicateKeyIssues = (
+  value: {
+    readonly examples: readonly { readonly key: string }[];
+    readonly exercises: readonly { readonly key: string }[];
+  },
+  context: z.RefinementCtx,
+): void => {
+  for (const field of ['examples', 'exercises'] as const) {
+    const seen = new Set<string>();
+    value[field].forEach(({ key }, index) => {
+      if (seen.has(key)) {
+        context.addIssue({
+          code: 'custom',
+          path: [field, index, 'key'],
+          message: `${field} keys must be unique within a LearningUnit.`,
+        });
+      }
+      seen.add(key);
+    });
+  }
+};
 
 export class PreviewLearningContentError extends Error {
   readonly code: string;
@@ -126,6 +149,24 @@ export interface PreviewLearningContentBuildInput {
   domain: PreviewLearningContentDomainInput;
 }
 
+const previewLearningUnitSchema = strictObject({
+  id: z.string().min(1),
+  title: z.string().trim().min(1),
+  prerequisiteUnitIds: z.array(z.string().min(1)),
+  excludedTopics: z.array(z.string().trim().min(1)),
+  tagIds: z.array(z.string().min(1)).min(1),
+  problemIds: z.array(z.string().regex(PROBLEM_ID)).min(1),
+  sourceRevisionIds: z.array(z.string().min(1)).min(1),
+  explanation: z.string().trim().min(1),
+  examples: z.array(LearningUnitInlineExampleSchema).min(1),
+  exercises: z.array(InlineExerciseSchema).min(1),
+  navigation: strictObject({
+    previousUnitId: z.string().min(1).nullable(),
+    nextUnitId: z.string().min(1).nullable(),
+    orderReason: z.string().trim().min(1),
+  }),
+}).superRefine(addDuplicateKeyIssues);
+
 const domainProposalSchema = z.strictObject({
   taskId: z.string().regex(TASK_ID),
   domain: z.string().regex(SLUG),
@@ -140,23 +181,7 @@ const domainProposalSchema = z.strictObject({
     approvedSubjectDigest: z.string().regex(SHA256),
   }),
   outcome: z.strictObject({ id: z.string().min(1), statement: z.string().trim().min(1) }),
-  unit: z.strictObject({
-    id: z.string().min(1),
-    title: z.string().trim().min(1),
-    prerequisiteUnitIds: z.array(z.string().min(1)),
-    excludedTopics: z.array(z.string().trim().min(1)),
-    tagIds: z.array(z.string().min(1)).min(1),
-    problemIds: z.array(z.string().regex(PROBLEM_ID)).min(1),
-    sourceRevisionIds: z.array(z.string().min(1)).min(1),
-    explanation: z.string().trim().min(1),
-    examples: z.array(LearningUnitInlineExampleSchema).min(1),
-    exercises: z.array(InlineExerciseSchema).min(1),
-    navigation: z.strictObject({
-      previousUnitId: z.string().min(1).nullable(),
-      nextUnitId: z.string().min(1).nullable(),
-      orderReason: z.string().trim().min(1),
-    }),
-  }),
+  unit: previewLearningUnitSchema,
 });
 
 export const parsePreviewLearningContentDomainProposal = (
@@ -178,6 +203,54 @@ export interface PreviewLearningUnitArtifact extends Readonly<Record<string, unk
   readonly canonicalMaterializationAllowed: false;
   readonly contentDigest: string;
 }
+
+const previewLearningUnitArtifactSchema = strictObject({
+  schemaVersion: z.literal('1.0.0'),
+  previewId: z.string().regex(SLUG),
+  domain: z.string().regex(SLUG),
+  outcome: strictObject({ id: z.string().min(1), statement: z.string().trim().min(1) }),
+  learningUnit: previewLearningUnitSchema.extend({
+    learningOutcomeIds: z.array(z.string().min(1)).min(1),
+  }),
+  authoringSkillVersion: z.string().regex(/^\d+\.\d+\.\d+$/u),
+  authoringSkillDigest: z.string().regex(SHA256),
+  sourcePacketDigest: z.string().regex(SHA256),
+  canonicalMaterializationAllowed: z.literal(false),
+  finalMaterializationTasks: z.tuple([
+    z.literal('T155'),
+    z.literal('T156'),
+    z.literal('T157'),
+    z.literal('T158'),
+  ]),
+  contentDigest: z.string().regex(SHA256),
+});
+
+export interface PreviewTaxonomyUnitBinding {
+  readonly id: string;
+  readonly title: string;
+  readonly prerequisiteUnitIds: readonly string[];
+  readonly tagIds: readonly string[];
+  readonly outcomeIds: readonly string[];
+  readonly problemIds: readonly string[];
+  readonly sourceRevisionIds: readonly string[];
+}
+
+export const previewTaxonomyGroupDigest = (group: Readonly<Record<string, unknown>>): string =>
+  canonicalDigest(
+    Object.fromEntries(Object.entries(group).filter(([field]) => field !== 'groupDigest')),
+  );
+
+export const matchesPreviewLearningContentTaxonomy = (
+  proposal: PreviewLearningContentDomainInput,
+  taxonomyUnit: PreviewTaxonomyUnitBinding,
+): boolean =>
+  proposal.unit.id === taxonomyUnit.id &&
+  proposal.unit.title === taxonomyUnit.title &&
+  sameOrderedValues(proposal.unit.prerequisiteUnitIds, taxonomyUnit.prerequisiteUnitIds) &&
+  sameOrderedValues(proposal.unit.tagIds, taxonomyUnit.tagIds) &&
+  sameOrderedValues([proposal.outcome.id], taxonomyUnit.outcomeIds) &&
+  sameOrderedValues(proposal.unit.problemIds, taxonomyUnit.problemIds) &&
+  sameOrderedValues(proposal.unit.sourceRevisionIds, taxonomyUnit.sourceRevisionIds);
 
 export interface PreviewLearningContentWorkManifest extends Readonly<Record<string, unknown>> {
   readonly taskId: string;
@@ -238,6 +311,7 @@ const validateInput = (input: PreviewLearningContentBuildInput): void => {
 
 const evaluateInput = (
   input: PreviewLearningContentBuildInput,
+  learningUnit: PreviewLearningUnitArtifact,
 ): {
   readonly holdReasons: string[];
   readonly checks: Readonly<Partial<Record<(typeof CHECK_NAMES)[number], boolean>>>;
@@ -288,12 +362,14 @@ const evaluateInput = (
         exercise.assessment.successCondition.trim().length > 0 &&
         exercise.answer.reasoningOrVerification.trim().length > 0,
     );
+  const schemaPassed = previewLearningUnitArtifactSchema.safeParse(learningUnit).success;
   const holdReasons = [
     ...(cohortPassed ? [] : ['COHORT_MISMATCH']),
     ...(sourcePassed ? [] : ['SOURCE_MISMATCH']),
     ...(attainmentPassed ? [] : ['ATTAINMENT_MISMATCH']),
     ...(linksPassed ? [] : ['NAVIGATION_MISMATCH']),
     ...(accessibilityPassed ? [] : ['ACCESSIBILITY_MISMATCH']),
+    ...(schemaPassed ? [] : ['SCHEMA_MISMATCH']),
   ];
   return {
     holdReasons,
@@ -302,7 +378,7 @@ const evaluateInput = (
       'example-answer': attainmentPassed,
       links: linksPassed,
       accessibility: accessibilityPassed,
-      schema: true,
+      schema: schemaPassed,
     },
   };
 };
@@ -317,7 +393,6 @@ export const buildPreviewLearningContentArtifacts = (
 ): PreviewLearningContentArtifacts => {
   validateInput(input);
   const { manifest, domain, authoringSkill } = input;
-  const evaluation = evaluateInput(input);
   const root = `staging/previews/${manifest.previewId}/learning/${domain.directory}`;
   const learningUnitPath = `${root}/learning-unit.json`;
   const workManifestPath = `docs/work-manifests/initial/us2/preview-content/${domain.directory}/manifest.json`;
@@ -340,6 +415,7 @@ export const buildPreviewLearningContentArtifacts = (
     },
     'contentDigest',
   ) as PreviewLearningUnitArtifact;
+  const evaluation = evaluateInput(input, learningUnit);
   const workManifest = createContentWorkManifest({
     manifestId: `work-manifest-${domain.taskId}-${domain.directory}`,
     taskId: domain.taskId,
