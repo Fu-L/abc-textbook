@@ -1,30 +1,108 @@
 {
-  "schemaVersion": "1.0.0",
-  "manifestId": "initial-us5-update-simulation",
-  "ownerId": "person-maintainer",
-  "previewId": "initial-v1",
-  "reviewPolicy": {
-    "requiredMode": "self",
-    "riskReasons": []
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T112-us5",
+  "taskId": "T112",
+  "scopeDigest": "0483f358915ec7140b405bc66e9971c8b8eb1c8330ad337a6c46b8bc11e6b933",
+  "digest": "d2b77b9176417e5dcd9a4abe2a9f8396b8f3689d9621af97fa999a4452da6965",
+  "changeKind": "mixed",
+  "requiredRequirementIds": [
+    "FR-023",
+    "FR-024",
+    "FR-025",
+    "FR-026",
+    "FR-028",
+    "SC-006",
+    "SC-007",
+    "SC-020"
+  ],
+  "learningOutcomeIds": [
+    "outcome-us5-authoring-classification",
+    "outcome-us5-discovery-acquisition",
+    "outcome-us5-validation-resume"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
   },
-  "learningOutcomeReviewUnits": [
+  "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
+  "reviewUnits": [
     {
-      "id": "us5-discovery-acquisition",
-      "outcome": "終了済みContestのDより後を公式metadataから欠落なく発見できる"
+      "reviewUnitId": "RU-T112-discovery-acquisition",
+      "changeKind": "mixed",
+      "paths": [
+        "scripts/update-abc/acquire.ts",
+        "scripts/update-abc/discover.ts",
+        "tests/integration/update-discovery.test.ts"
+      ],
+      "itemIds": ["us5.discovery", "us5.metadata"],
+      "requirementIds": ["FR-024", "SC-006", "SC-020"],
+      "learningOutcomeIds": ["outcome-us5-discovery-acquisition"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-us5-discovery"],
+      "evidenceRoles": ["integration_test"],
+      "maintenanceBenefit": "One shared deterministic state machine serves preview simulation and later full-catalog updates without publishing preview-only taxonomy.",
+      "owner": "person-maintainer",
+      "status": "planned"
     },
     {
-      "id": "us5-authoring-classification",
-      "outcome": "各Problemを草案・要執筆・具体的保留のいずれかへ決定的に分類できる"
+      "reviewUnitId": "RU-T112-authoring-classification",
+      "changeKind": "mixed",
+      "paths": [
+        "scripts/update-abc/author.ts",
+        "scripts/update-abc/classify.ts",
+        "scripts/update-abc/stage.ts",
+        "tests/integration/update-prepare.test.ts"
+      ],
+      "itemIds": ["us5.authoring", "us5.idempotency"],
+      "requirementIds": ["FR-023", "FR-025", "SC-007"],
+      "learningOutcomeIds": ["outcome-us5-authoring-classification"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": ["RU-T112-discovery-acquisition"],
+      "checkIds": ["check-us5-prepare"],
+      "evidenceRoles": ["integration_test"],
+      "maintenanceBenefit": "One shared deterministic state machine serves preview simulation and later full-catalog updates without publishing preview-only taxonomy.",
+      "owner": "person-maintainer",
+      "status": "planned"
     },
     {
-      "id": "us5-validation-resume",
-      "outcome": "検証失敗を保持し、同じ入力から重複なく再開できる"
+      "reviewUnitId": "RU-T112-validation-resume",
+      "changeKind": "mixed",
+      "paths": [
+        "scripts/review-update.ts",
+        "scripts/update-abc/bootstrap.ts",
+        "scripts/update-abc/correction-impact.ts",
+        "scripts/update-abc/index.ts",
+        "scripts/update-abc/validate.ts",
+        "scripts/verify-release.ts",
+        "tests/integration/update-validation.test.ts"
+      ],
+      "itemIds": ["us5.correction-impact", "us5.review", "us5.validation-resume"],
+      "requirementIds": ["FR-024", "FR-026", "FR-028", "SC-006"],
+      "learningOutcomeIds": ["outcome-us5-validation-resume"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [
+        "RU-T112-authoring-classification",
+        "RU-T112-discovery-acquisition"
+      ],
+      "checkIds": ["check-us5-review", "check-us5-validation"],
+      "evidenceRoles": ["component_evidence"],
+      "maintenanceBenefit": "One shared deterministic state machine serves preview simulation and later full-catalog updates without publishing preview-only taxonomy.",
+      "owner": "person-maintainer",
+      "status": "planned"
     }
   ],
-  "subjectPaths": [
-    "scripts/update-abc",
-    "scripts/verify-release.ts",
-    "scripts/review-update.ts",
-    "staging/previews/initial-v1/release-simulation"
-  ]
+  "maintenanceBenefit": "One shared deterministic state machine serves preview simulation and later full-catalog updates without publishing preview-only taxonomy.",
+  "state": "planned",
+  "createdAt": "2026-07-28T15:00:00+09:00",
+  "updatedAt": "2026-07-28T15:00:00+09:00"
 }

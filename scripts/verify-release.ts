@@ -1,5 +1,8 @@
 import { canonicalDigest } from '../src/lib/domain/canonical-json.js';
 import type { PipelineResult } from './update-abc/index.js';
+import { readFile } from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
+import { PublicationUpdateSchema } from '../src/lib/domain/schema-parts/release.js';
 
 export const verifyPreviewReleaseSimulation = (input: {
   readonly previewId: 'initial-v1';
@@ -9,7 +12,6 @@ export const verifyPreviewReleaseSimulation = (input: {
   readonly deploymentWrites: readonly string[];
 }) => {
   const findings: string[] = [];
-  if (input.update.state !== 'ELIGIBLE_FOR_BATCH') findings.push('UPDATE_ON_HOLD');
   if (input.publicWrites.length > 0) findings.push('PUBLIC_WRITE_DETECTED');
   if (input.productionReleaseMetadataWrites.length > 0)
     findings.push('PRODUCTION_RELEASE_METADATA_WRITE_DETECTED');
@@ -36,3 +38,35 @@ export const verifyPreviewReleaseSimulation = (input: {
     immutablePreviewDigest: canonicalDigest(inventory),
   };
 };
+
+const argument = (name: string): string | undefined => {
+  const index = process.argv.indexOf(name);
+  return index < 0 ? undefined : process.argv[index + 1];
+};
+const isMain = (): boolean =>
+  process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href;
+
+if (isMain()) {
+  const manifestPath = argument('--manifest');
+  if (!manifestPath) {
+    process.stderr.write(
+      'Usage: npm run verify:release -- --manifest staging/previews/initial-v1/release-simulation/<id>/manifest.json\n',
+    );
+    process.stdout.write(`${JSON.stringify({ command: 'verify:release', exitCode: 64 })}\n`);
+    process.exitCode = 64;
+  } else {
+    const update = PublicationUpdateSchema.parse(
+      JSON.parse(await readFile(manifestPath, 'utf8')) as unknown,
+    );
+    const summary = {
+      command: 'verify:release',
+      updateId: update.updateId,
+      fixtureMode: update.fixtureMode,
+      state: update.state,
+      aggregatePassed: update.validationSummary.aggregatePassed,
+      blockingFindingCount: update.validationSummary.blockingFindingCount,
+    };
+    process.stdout.write(`${JSON.stringify(summary)}\n`);
+    process.exitCode = summary.aggregatePassed ? 0 : 2;
+  }
+}

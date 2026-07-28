@@ -1,44 +1,141 @@
 {
-  "schemaVersion": "1.0.0",
-  "reviewId": "review-initial-v1-us5-update-simulation",
-  "previewId": "initial-v1",
-  "subjectDigest": "6752931d08c8a53f43df9740bc885903f6b3196b14421f74fe5c680f9265c8c4",
+  "schemaVersion": "3.0.0",
+  "id": "human-content-review-initial-v1-us5-update-simulation",
+  "scopeType": "merge",
+  "scopeId": "initial-v1-us5-update-simulation",
+  "releaseVersion": null,
+  "subjectDigest": "103d71192391c7f5a8d1ffd83b942da6ade6dc3cbac40be2441bbddec22003ba",
+  "inventoryPath": "docs/work-manifests/initial/us5/manifest.json",
+  "inventoryDigest": "d2b77b9176417e5dcd9a4abe2a9f8396b8f3689d9621af97fa999a4452da6965",
   "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
   "reviewMode": "self",
-  "reviewerId": "person-maintainer",
-  "authoringSkill": {
-    "name": "abc-explanation-author",
-    "version": "1.1.1",
-    "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
-  },
   "applicableChecks": [
     {
-      "checkId": "check:update:discovery",
-      "subjectDigest": "6752931d08c8a53f43df9740bc885903f6b3196b14421f74fe5c680f9265c8c4",
-      "passed": true
+      "checkId": "check-us5-discovery",
+      "command": "npm test",
+      "subjectDigest": "103d71192391c7f5a8d1ffd83b942da6ade6dc3cbac40be2441bbddec22003ba",
+      "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
+      "resultDigest": "5776331dcf122d5e602a7beb75e44ad40c1dfe404fd61916a62dae828867c6c3",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-28T15:00:00+09:00",
+      "executedByReviewerId": "person-maintainer"
     },
     {
-      "checkId": "check:update:authoring",
-      "subjectDigest": "6752931d08c8a53f43df9740bc885903f6b3196b14421f74fe5c680f9265c8c4",
-      "passed": true
+      "checkId": "check-us5-prepare",
+      "command": "npm test",
+      "subjectDigest": "103d71192391c7f5a8d1ffd83b942da6ade6dc3cbac40be2441bbddec22003ba",
+      "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
+      "resultDigest": "5776331dcf122d5e602a7beb75e44ad40c1dfe404fd61916a62dae828867c6c3",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-28T15:00:00+09:00",
+      "executedByReviewerId": "person-maintainer"
     },
     {
-      "checkId": "check:update:validation",
-      "subjectDigest": "6752931d08c8a53f43df9740bc885903f6b3196b14421f74fe5c680f9265c8c4",
-      "passed": true
+      "checkId": "check-us5-review",
+      "command": "npm test",
+      "subjectDigest": "103d71192391c7f5a8d1ffd83b942da6ade6dc3cbac40be2441bbddec22003ba",
+      "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
+      "resultDigest": "5776331dcf122d5e602a7beb75e44ad40c1dfe404fd61916a62dae828867c6c3",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-28T15:00:00+09:00",
+      "executedByReviewerId": "person-maintainer"
     },
     {
-      "checkId": "check:update:idempotency",
-      "subjectDigest": "6752931d08c8a53f43df9740bc885903f6b3196b14421f74fe5c680f9265c8c4",
-      "passed": true
-    },
-    {
-      "checkId": "check:update:staging-closure",
-      "subjectDigest": "6752931d08c8a53f43df9740bc885903f6b3196b14421f74fe5c680f9265c8c4",
-      "passed": true
+      "checkId": "check-us5-validation",
+      "command": "npm test",
+      "subjectDigest": "103d71192391c7f5a8d1ffd83b942da6ade6dc3cbac40be2441bbddec22003ba",
+      "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
+      "resultDigest": "5776331dcf122d5e602a7beb75e44ad40c1dfe404fd61916a62dae828867c6c3",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-28T15:00:00+09:00",
+      "executedByReviewerId": "person-maintainer"
     }
   ],
-  "blockingFindingCount": 0,
+  "applicableCheckCount": 4,
+  "passedApplicableCheckCount": 4,
+  "reviewerExecutedCheckSetDigest": "fbef16c2849212785e5a60fa3b5bd8a9b94eacd27baa1ab3728bda4766ba2c46",
+  "authors": [
+    {
+      "personId": "person-maintainer",
+      "authoredItemIds": ["us5.discovery", "us5.authoring", "us5.validation-resume"]
+    }
+  ],
+  "reviewer": { "personId": "person-maintainer", "mode": "self" },
+  "reviewItems": [
+    {
+      "reviewItemId": "human-review-item-us5-authoring-classification",
+      "kind": "outcome_coverage",
+      "subjectPaths": [
+        "scripts/update-abc/index.ts",
+        "staging/previews/initial-v1/release-simulation/verification.json"
+      ],
+      "authorIds": ["person-maintainer"],
+      "learningOutcomeIds": ["outcome-us5-authoring-classification"],
+      "reviewerId": "person-maintainer",
+      "reviewBasis": "The current fixture subject was checked with abc-explanation-author 1.1.1 (6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa).",
+      "decision": "approved",
+      "findings": [],
+      "reviewedAt": "2026-07-28T15:00:00+09:00"
+    },
+    {
+      "reviewItemId": "human-review-item-us5-discovery-acquisition",
+      "kind": "outcome_coverage",
+      "subjectPaths": [
+        "scripts/update-abc/index.ts",
+        "staging/previews/initial-v1/release-simulation/verification.json"
+      ],
+      "authorIds": ["person-maintainer"],
+      "learningOutcomeIds": ["outcome-us5-discovery-acquisition"],
+      "reviewerId": "person-maintainer",
+      "reviewBasis": "The current fixture subject was checked with abc-explanation-author 1.1.1 (6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa).",
+      "decision": "approved",
+      "findings": [],
+      "reviewedAt": "2026-07-28T15:00:00+09:00"
+    },
+    {
+      "reviewItemId": "human-review-item-us5-validation-resume",
+      "kind": "outcome_coverage",
+      "subjectPaths": [
+        "scripts/update-abc/index.ts",
+        "staging/previews/initial-v1/release-simulation/verification.json"
+      ],
+      "authorIds": ["person-maintainer"],
+      "learningOutcomeIds": ["outcome-us5-validation-resume"],
+      "reviewerId": "person-maintainer",
+      "reviewBasis": "The current fixture subject was checked with abc-explanation-author 1.1.1 (6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa).",
+      "decision": "approved",
+      "findings": [],
+      "reviewedAt": "2026-07-28T15:00:00+09:00"
+    }
+  ],
+  "inventoryItemCount": 3,
+  "reviewedItemCount": 3,
+  "approvedItemCount": 3,
+  "changesRequestedItemCount": 0,
+  "unreviewedItemCount": 0,
+  "outcomeCoverageReview": {
+    "reviewerId": "person-maintainer",
+    "authorIds": ["person-maintainer"],
+    "decision": "confirmed",
+    "learningOutcomeIds": [
+      "outcome-us5-authoring-classification",
+      "outcome-us5-discovery-acquisition",
+      "outcome-us5-validation-resume"
+    ],
+    "subjectPaths": [
+      "docs/work-manifests/initial/us5/manifest.json",
+      "staging/previews/initial-v1/release-simulation/verification.json"
+    ],
+    "rationale": "The frozen US5 review units cover discovery, authoring classification, and resumable validation.",
+    "noOutcomeImpactRationale": null,
+    "confirmedAt": "2026-07-28T15:00:00+09:00"
+  },
+  "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "evidenceDigest": "ac7bc67507872726c012e11ada92230d2221f614f19aa00a9090aa55083a1cba"
+  "generatedAt": "2026-07-28T15:00:00+09:00",
+  "evidenceDigest": "ac00a2902f4f7afc8c65c6a88abb32884482a809409b54ad80ac31b42754739f"
 }

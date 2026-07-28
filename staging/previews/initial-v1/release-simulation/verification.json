@@ -1,6 +1,6 @@
 {
   "previewId": "initial-v1",
-  "updateId": "update-7f8677b9d39d4cdc4cbd73ba",
+  "updateId": "update-31c49d8ebf9d0f5e3faac0b7",
   "stagingClosed": true,
   "publicWriteCount": 0,
   "productionReleaseMetadataWriteCount": 0,
@@ -14,5 +14,5 @@
   ],
   "aggregatePassed": true,
   "findings": [],
-  "immutablePreviewDigest": "74fd675aad081b01c67141bba0dd85c7fd1f4ad7fd7cc6cb0a7db504ffa08f35"
+  "immutablePreviewDigest": "5776331dcf122d5e602a7beb75e44ad40c1dfe404fd61916a62dae828867c6c3"
 }
