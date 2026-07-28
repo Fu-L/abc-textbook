@@ -8,7 +8,8 @@
     "reviewerId": "person-maintainer",
     "decision": "approved",
     "reviewedAt": "2026-07-28T09:30:00+09:00",
-    "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。"
+    "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。",
+    "approvedSubjectDigest": "9617e2d58c352288ca898214f907f6705cb96b6f582950fda094726826bd0aa6"
   },
   "outcome": {
     "id": "outcome-provisional-shortest-path-structure",

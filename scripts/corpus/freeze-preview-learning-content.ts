@@ -210,6 +210,12 @@ try {
     );
   }
   for (const [filePath, value] of missing) await writeJsonNoOverwrite(filePath, value);
+  const heldComponents = artifacts
+    .filter(({ component }) => component.status !== 'passed')
+    .map(({ component }) => `${component.componentId}:${component.holdReasons.join(',')}`);
+  if (heldComponents.length > 0) {
+    throw new Error(`PREVIEW_CONTENT_ON_HOLD: ${heldComponents.join('; ')}`);
+  }
   console.log(
     JSON.stringify({
       command: 'freeze-preview-learning-content',

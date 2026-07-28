@@ -34,44 +34,44 @@
   "provisionalTaxonomyDigest": "445360ca2af20f0e4df97fcd023addbda7b22095077f68af52c919bffe57e620",
   "authoringSkillVersion": "1.1.1",
   "authoringSkillDigest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa",
-  "artifactDigest": "a4482baa8c38925d6a626b1ecd82be2c2179c7f87ba6f67e67de02cf57b0903f",
-  "subjectDigest": "19cfd986ec1c28f1441d5804a4e1cdd8c4d433a5d0e5f05ed715fa6b7ac2b657",
+  "artifactDigest": "8b85c5d2152f5e8992b1bfd38932b1e33ee2a7c25f18fd72dd0f09c293fa1ced",
+  "subjectDigest": "114c75ebf85144499a8ea8f2229a8105dbe12166a782e0e66697981376f229d9",
   "checkResults": [
     {
       "checkResultId": "check:data-structures:source-traceability",
-      "subjectDigest": "19cfd986ec1c28f1441d5804a4e1cdd8c4d433a5d0e5f05ed715fa6b7ac2b657",
+      "subjectDigest": "114c75ebf85144499a8ea8f2229a8105dbe12166a782e0e66697981376f229d9",
       "passed": true
     },
     {
       "checkResultId": "check:data-structures:example-answer",
-      "subjectDigest": "19cfd986ec1c28f1441d5804a4e1cdd8c4d433a5d0e5f05ed715fa6b7ac2b657",
+      "subjectDigest": "114c75ebf85144499a8ea8f2229a8105dbe12166a782e0e66697981376f229d9",
       "passed": true
     },
     {
       "checkResultId": "check:data-structures:links",
-      "subjectDigest": "19cfd986ec1c28f1441d5804a4e1cdd8c4d433a5d0e5f05ed715fa6b7ac2b657",
+      "subjectDigest": "114c75ebf85144499a8ea8f2229a8105dbe12166a782e0e66697981376f229d9",
       "passed": true
     },
     {
       "checkResultId": "check:data-structures:accessibility",
-      "subjectDigest": "19cfd986ec1c28f1441d5804a4e1cdd8c4d433a5d0e5f05ed715fa6b7ac2b657",
+      "subjectDigest": "114c75ebf85144499a8ea8f2229a8105dbe12166a782e0e66697981376f229d9",
       "passed": true
     },
     {
       "checkResultId": "check:data-structures:schema",
-      "subjectDigest": "19cfd986ec1c28f1441d5804a4e1cdd8c4d433a5d0e5f05ed715fa6b7ac2b657",
+      "subjectDigest": "114c75ebf85144499a8ea8f2229a8105dbe12166a782e0e66697981376f229d9",
       "passed": true
     },
     {
       "checkResultId": "check:data-structures:review-policy",
-      "subjectDigest": "19cfd986ec1c28f1441d5804a4e1cdd8c4d433a5d0e5f05ed715fa6b7ac2b657",
+      "subjectDigest": "114c75ebf85144499a8ea8f2229a8105dbe12166a782e0e66697981376f229d9",
       "passed": true
     }
   ],
   "reviewEvidence": [
     {
       "reviewEvidenceId": "review:data-structures:self",
-      "subjectDigest": "19cfd986ec1c28f1441d5804a4e1cdd8c4d433a5d0e5f05ed715fa6b7ac2b657",
+      "subjectDigest": "114c75ebf85144499a8ea8f2229a8105dbe12166a782e0e66697981376f229d9",
       "requiredMode": "self",
       "reviewMode": "self",
       "aggregatePassed": true
@@ -79,5 +79,5 @@
   ],
   "status": "passed",
   "holdReasons": [],
-  "componentDigest": "63db8f72f8300694388ed382fedbe9723ea9782be28007db14e441fbff44e8e8"
+  "componentDigest": "b201e731d36f93460bf93329b5c2c2ec973d3b96d891eb4cd8cab221eddab93a"
 }

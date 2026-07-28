@@ -110,6 +110,7 @@ export interface PreviewLearningContentDomainInput {
     decision: 'approved' | 'changes_requested';
     reviewedAt: string;
     basis: string;
+    approvedSubjectDigest: string;
   };
   expectedProblemIds: string[];
   expectedSourceRevisionIds: string[];
@@ -136,6 +137,7 @@ const domainProposalSchema = z.strictObject({
     decision: z.enum(['approved', 'changes_requested']),
     reviewedAt: OffsetDateTimeSchema,
     basis: z.string().trim().min(1),
+    approvedSubjectDigest: z.string().regex(SHA256),
   }),
   outcome: z.strictObject({ id: z.string().min(1), statement: z.string().trim().min(1) }),
   unit: z.strictObject({
@@ -238,7 +240,7 @@ const evaluateInput = (
   input: PreviewLearningContentBuildInput,
 ): {
   readonly holdReasons: string[];
-  readonly checks: Readonly<Record<(typeof CHECK_NAMES)[number], boolean>>;
+  readonly checks: Readonly<Partial<Record<(typeof CHECK_NAMES)[number], boolean>>>;
 } => {
   const { manifest, domain } = input;
   const cohortPassed =
@@ -286,18 +288,12 @@ const evaluateInput = (
         exercise.assessment.successCondition.trim().length > 0 &&
         exercise.answer.reasoningOrVerification.trim().length > 0,
     );
-  const reviewPassed =
-    domain.review.decision === 'approved' &&
-    domain.review.reviewerId === domain.ownerId &&
-    domain.review.basis.trim().length > 0 &&
-    OffsetDateTimeSchema.safeParse(domain.review.reviewedAt).success;
   const holdReasons = [
     ...(cohortPassed ? [] : ['COHORT_MISMATCH']),
     ...(sourcePassed ? [] : ['SOURCE_MISMATCH']),
     ...(attainmentPassed ? [] : ['ATTAINMENT_MISMATCH']),
     ...(linksPassed ? [] : ['NAVIGATION_MISMATCH']),
     ...(accessibilityPassed ? [] : ['ACCESSIBILITY_MISMATCH']),
-    ...(reviewPassed ? [] : ['REVIEW_INPUT_INVALID']),
   ];
   return {
     holdReasons,
@@ -307,7 +303,6 @@ const evaluateInput = (
       links: linksPassed,
       accessibility: accessibilityPassed,
       schema: true,
-      'review-policy': reviewPassed,
     },
   };
 };
@@ -340,7 +335,6 @@ export const buildPreviewLearningContentArtifacts = (
       authoringSkillVersion: authoringSkill.version,
       authoringSkillDigest: authoringSkill.digest,
       sourcePacketDigest: authoringSkill.sourcePacketDigest,
-      review: domain.review,
       canonicalMaterializationAllowed: false as const,
       finalMaterializationTasks: ['T155', 'T156', 'T157', 'T158'],
     },
@@ -391,10 +385,20 @@ export const buildPreviewLearningContentArtifacts = (
     artifactDigest,
   };
   const subjectDigest = componentSubjectDigest(currentSubject);
+  const reviewPassed =
+    domain.review.decision === 'approved' &&
+    domain.review.reviewerId === domain.ownerId &&
+    domain.review.basis.trim().length > 0 &&
+    OffsetDateTimeSchema.safeParse(domain.review.reviewedAt).success &&
+    domain.review.approvedSubjectDigest === subjectDigest;
+  const holdReasons = [
+    ...evaluation.holdReasons,
+    ...(reviewPassed ? [] : ['REVIEW_INPUT_INVALID']),
+  ];
   const checkResults = CHECK_NAMES.map((name) => ({
     checkResultId: `check:${domain.directory}:${name}`,
     subjectDigest,
-    passed: evaluation.checks[name],
+    passed: name === 'review-policy' ? reviewPassed : (evaluation.checks[name] ?? false),
   }));
   const reviewEvidence = [
     {
@@ -402,7 +406,7 @@ export const buildPreviewLearningContentArtifacts = (
       subjectDigest,
       requiredMode: 'self' as const,
       reviewMode: 'self' as const,
-      aggregatePassed: evaluation.holdReasons.length === 0,
+      aggregatePassed: holdReasons.length === 0,
     },
   ];
   const componentSubject = {
@@ -410,8 +414,8 @@ export const buildPreviewLearningContentArtifacts = (
     subjectDigest,
     checkResults,
     reviewEvidence,
-    status: evaluation.holdReasons.length === 0 ? ('passed' as const) : ('on_hold' as const),
-    holdReasons: evaluation.holdReasons,
+    status: holdReasons.length === 0 ? ('passed' as const) : ('on_hold' as const),
+    holdReasons,
   };
   const component: PreviewLearningContentComponent = {
     ...componentSubject,

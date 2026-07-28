@@ -8,7 +8,8 @@
     "reviewerId": "person-maintainer",
     "decision": "approved",
     "reviewedAt": "2026-07-28T09:30:00+09:00",
-    "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。"
+    "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。",
+    "approvedSubjectDigest": "3541925f958ed4a1091e1d62b5fc9ac72cf0c519fd2305a8e7987afbf4fa5f25"
   },
   "outcome": {
     "id": "outcome-provisional-multiplicative-order-counting",
