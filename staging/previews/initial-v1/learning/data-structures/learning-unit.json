@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0.0",
+  "previewId": "initial-v1",
+  "domain": "data-structures-algorithm-design",
+  "outcome": {
+    "id": "outcome-provisional-range-aggregate-under-updates",
+    "statement": "問い合わせ式や判定条件を更新可能な複数の集約量へ分解し、適切なデータ構造を選択できる。"
+  },
+  "learningUnit": {
+    "id": "provisional-unit-range-aggregate-under-updates",
+    "title": "問い合わせを更新可能な集約量へ分解する",
+    "prerequisiteUnitIds": [],
+    "excludedTopics": ["永続データ構造", "遅延伝播による区間更新"],
+    "tagIds": ["provisional-tag-range-aggregate-under-updates"],
+    "problemIds": ["abc223-f", "abc256-f"],
+    "sourceRevisionIds": [
+      "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+      "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+      "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+      "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+    ],
+    "explanation": "更新と問い合わせを両立するには、答えを直接持つのではなく、結合できる集約量へ分解する。abc223-f の括弧列では '(' を +1、')' を -1 とみなすと、正しい括弧列の条件は区間総和が0で、区間内の相対接頭辞最小値が0以上であることになる。各区間について総和と接頭辞最小値を持てば、左右を結合できる。abc256-f では求める累積和を添字の多項式で展開し、A_i、iA_i、i²A_i のような重み付き和へ分解して Fenwick Tree で更新する。共通手順は、問い合わせ式を展開し、点更新で変化する基底量と、結合または接頭辞和で復元できる答えを分離することである。",
+    "examples": [
+      {
+        "key": "parentheses-monoid",
+        "learningOutcomeIds": ["outcome-provisional-range-aggregate-under-updates"],
+        "kind": "pseudocode",
+        "language": "text",
+        "omissions": ["Segment Tree の実装"],
+        "environment": "紙と筆記具",
+        "input": "左区間 (sum=1,minPrefix=0)、右区間 (sum=-1,minPrefix=-1)",
+        "procedure": [
+          "結合後の総和を left.sum + right.sum とする。",
+          "結合後の最小値を min(left.minPrefix, left.sum + right.minPrefix) とする。"
+        ],
+        "executionTarget": null,
+        "expectedResult": "結合結果は sum=0, minPrefix=0 となり、正しい括弧列の条件を満たす。",
+        "verificationStatus": "not_applicable"
+      }
+    ],
+    "exercises": [
+      {
+        "key": "derive-aggregate",
+        "learningOutcomeIds": ["outcome-provisional-range-aggregate-under-updates"],
+        "prerequisiteIds": [],
+        "attainmentCondition": "括弧列判定に必要な二つの集約量と結合式を導出できる。",
+        "assessment": {
+          "method": "式の導出",
+          "successCondition": "総和と接頭辞最小値を挙げ、右側の最小値へ左側総和を加える。"
+        },
+        "answer": {
+          "reasoningOrVerification": "右区間の接頭辞は全体から見ると左区間の総和だけ底上げされる。したがって結合後の最小接頭辞は left.min と left.sum+right.min の小さい方であり、総和は加算である。",
+          "procedure": [
+            "文字を ±1 へ変換する。",
+            "区間を左右に分けて接頭辞を比較する。",
+            "結合式を Segment Tree の演算として使う。"
+          ],
+          "expectedResult": "(sum,minPrefix) が結合可能な十分情報だと説明できる。",
+          "verificationStatus": "passed"
+        }
+      }
+    ],
+    "navigation": {
+      "previousUnitId": "provisional-unit-shortest-path-structure",
+      "nextUnitId": null,
+      "orderReason": "provisional taxonomy の固定順で最後に置き、最短路構造から進む。"
+    },
+    "learningOutcomeIds": ["outcome-provisional-range-aggregate-under-updates"]
+  },
+  "authoringSkillVersion": "1.1.1",
+  "authoringSkillDigest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa",
+  "sourcePacketDigest": "9607a2d54826793f749cb6f84ef74c653071e68e5721052098a09b895c8bbf1b",
+  "canonicalMaterializationAllowed": false,
+  "finalMaterializationTasks": ["T155", "T156", "T157", "T158"],
+  "contentDigest": "7b7ab488007125eeaf2ad7648bdef090abb5284d7eb2b8de269423b797e7d513"
+}

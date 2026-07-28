@@ -1,0 +1,81 @@
+{
+  "componentId": "content-mathematics",
+  "previewId": "initial-v1",
+  "manifestDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "candidatePoolDigest": "6987df761395247879f6b8dd9ce430353eee4d183b2a96f739f833ff74481a72",
+  "problemIds": [
+    "abc212-g",
+    "abc215-e",
+    "abc218-f",
+    "abc222-g",
+    "abc223-f",
+    "abc232-e",
+    "abc252-e",
+    "abc256-f"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+    "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+    "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+    "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+    "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+    "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+    "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+    "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+    "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+    "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d",
+    "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+    "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+    "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+    "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+  ],
+  "provisionalTaxonomyDigest": "445360ca2af20f0e4df97fcd023addbda7b22095077f68af52c919bffe57e620",
+  "authoringSkillVersion": "1.1.1",
+  "authoringSkillDigest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa",
+  "artifactDigest": "b48ef1ddadba8e320acd75b8593f74a96e89f58148bb26f44cfffe4c18d8387e",
+  "subjectDigest": "3541925f958ed4a1091e1d62b5fc9ac72cf0c519fd2305a8e7987afbf4fa5f25",
+  "checkResults": [
+    {
+      "checkResultId": "check:mathematics:source-traceability",
+      "subjectDigest": "3541925f958ed4a1091e1d62b5fc9ac72cf0c519fd2305a8e7987afbf4fa5f25",
+      "passed": true
+    },
+    {
+      "checkResultId": "check:mathematics:example-answer",
+      "subjectDigest": "3541925f958ed4a1091e1d62b5fc9ac72cf0c519fd2305a8e7987afbf4fa5f25",
+      "passed": true
+    },
+    {
+      "checkResultId": "check:mathematics:links",
+      "subjectDigest": "3541925f958ed4a1091e1d62b5fc9ac72cf0c519fd2305a8e7987afbf4fa5f25",
+      "passed": true
+    },
+    {
+      "checkResultId": "check:mathematics:accessibility",
+      "subjectDigest": "3541925f958ed4a1091e1d62b5fc9ac72cf0c519fd2305a8e7987afbf4fa5f25",
+      "passed": true
+    },
+    {
+      "checkResultId": "check:mathematics:schema",
+      "subjectDigest": "3541925f958ed4a1091e1d62b5fc9ac72cf0c519fd2305a8e7987afbf4fa5f25",
+      "passed": true
+    },
+    {
+      "checkResultId": "check:mathematics:review-policy",
+      "subjectDigest": "3541925f958ed4a1091e1d62b5fc9ac72cf0c519fd2305a8e7987afbf4fa5f25",
+      "passed": true
+    }
+  ],
+  "reviewEvidence": [
+    {
+      "reviewEvidenceId": "review:mathematics:self",
+      "subjectDigest": "3541925f958ed4a1091e1d62b5fc9ac72cf0c519fd2305a8e7987afbf4fa5f25",
+      "requiredMode": "self",
+      "reviewMode": "self",
+      "aggregatePassed": true
+    }
+  ],
+  "componentDigest": "2c6dda831da6f8ced140f601125e0069d4dd01b045024801133fba1af5be9814"
+}
