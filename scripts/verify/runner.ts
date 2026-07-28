@@ -11,16 +11,7 @@ export const EXIT_CODE = {
 
 export interface VerificationStep {
   readonly id:
-    | 'lint'
-    | 'format'
-    | 'check'
-    | 'test'
-    | 'corpus'
-    | 'taxonomy'
-    | 'learning-content'
-    | 'build'
-    | 'links'
-    | 'e2e';
+    'lint' | 'format' | 'check' | 'test' | 'corpus' | 'taxonomy' | 'build' | 'links' | 'e2e';
   readonly script: string;
 }
 
@@ -31,7 +22,6 @@ export const VERIFICATION_STEPS: readonly VerificationStep[] = [
   { id: 'test', script: 'test' },
   { id: 'corpus', script: 'corpus:verify' },
   { id: 'taxonomy', script: 'preview:taxonomy' },
-  { id: 'learning-content', script: 'preview:learning-content' },
   { id: 'build', script: 'build' },
   { id: 'links', script: 'link:check:built' },
   { id: 'e2e', script: 'test:e2e:built' },
