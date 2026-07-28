@@ -1,6 +1,7 @@
 {
   "previewId": "initial-v1",
-  "updateId": "update-31c49d8ebf9d0f5e3faac0b7",
+  "updateId": "update-755496a7aaa0e4b08c713fb7",
+  "publicationUpdateDigest": "d669f80d6ae85e6cdbd07ef4d20de1809cc41fd5ba9bfede44f53824d8c8db01",
   "stagingClosed": true,
   "publicWriteCount": 0,
   "productionReleaseMetadataWriteCount": 0,
@@ -14,5 +15,5 @@
   ],
   "aggregatePassed": true,
   "findings": [],
-  "immutablePreviewDigest": "5776331dcf122d5e602a7beb75e44ad40c1dfe404fd61916a62dae828867c6c3"
+  "immutablePreviewDigest": "9c960416a5376aa375a96cb114485c88bc43ab36be4a499995cbcfff5c8b203b"
 }

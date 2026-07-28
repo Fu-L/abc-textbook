@@ -1,12 +1,14 @@
 import { canonicalDigest } from '../src/lib/domain/canonical-json.js';
-import type { PipelineResult } from './update-abc/index.js';
 import { readFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { PublicationUpdateSchema } from '../src/lib/domain/schema-parts/release.js';
 
 export const verifyPreviewReleaseSimulation = (input: {
   readonly previewId: 'initial-v1';
-  readonly update: PipelineResult;
+  readonly update: {
+    readonly updateId: string;
+    readonly publicationUpdate: unknown;
+  };
   readonly publicWrites: readonly string[];
   readonly productionReleaseMetadataWrites: readonly string[];
   readonly deploymentWrites: readonly string[];
@@ -19,6 +21,7 @@ export const verifyPreviewReleaseSimulation = (input: {
   const inventory = {
     previewId: input.previewId,
     updateId: input.update.updateId,
+    publicationUpdateDigest: canonicalDigest(input.update.publicationUpdate),
     stagingClosed: true,
     publicWriteCount: input.publicWrites.length,
     productionReleaseMetadataWriteCount: input.productionReleaseMetadataWrites.length,
@@ -58,12 +61,20 @@ if (isMain()) {
     const update = PublicationUpdateSchema.parse(
       JSON.parse(await readFile(manifestPath, 'utf8')) as unknown,
     );
+    const verification = verifyPreviewReleaseSimulation({
+      previewId: 'initial-v1',
+      update: { updateId: update.updateId, publicationUpdate: update },
+      publicWrites: [],
+      productionReleaseMetadataWrites: [],
+      deploymentWrites: [],
+    });
+    const releaseEligible = update.state === 'ELIGIBLE_FOR_BATCH';
     const summary = {
       command: 'verify:release',
       updateId: update.updateId,
       fixtureMode: update.fixtureMode,
       state: update.state,
-      aggregatePassed: update.validationSummary.aggregatePassed,
+      aggregatePassed: releaseEligible && verification.aggregatePassed,
       blockingFindingCount: update.validationSummary.blockingFindingCount,
     };
     process.stdout.write(`${JSON.stringify(summary)}\n`);

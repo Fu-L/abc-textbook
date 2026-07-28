@@ -1,26 +1,32 @@
-import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { stagePublicationUpdate } from './stage.js';
-import { pathToFileURL } from 'node:url';
 import { persistPublicationUpdate, runUpdatePipeline } from './index.js';
+import { pathToFileURL } from 'node:url';
 
 export const bootstrapPreviewSeed = (input: {
   readonly previewId: string;
   readonly problemIds: readonly string[];
   readonly snapshotDigest: string;
+  readonly artifacts: readonly {
+    readonly entityType: 'source' | 'technique_inventory' | 'learning_unit' | 'placement';
+    readonly entityId: string;
+    readonly path: string;
+    readonly digest: string;
+    readonly affectedProblemIds: readonly string[];
+  }[];
 }) =>
   stagePublicationUpdate({
     previewId: input.previewId,
     contestId: null,
     sourceSetFingerprint: input.snapshotDigest,
     targetProblemIds: input.problemIds,
-    operations: input.problemIds.map((problemId) => ({
-      entityType: 'problem' as const,
-      entityId: problemId,
+    operations: input.artifacts.map((artifact) => ({
+      entityType: artifact.entityType,
+      entityId: artifact.entityId,
       action: 'add' as const,
-      path: `staging/previews/${input.previewId}/release-simulation/bootstrap/${problemId}.json`,
+      path: artifact.path,
       beforeDigest: null,
-      afterDigest: canonicalDigest({ problemId, snapshotDigest: input.snapshotDigest }),
-      affectedProblemIds: [problemId],
+      afterDigest: artifact.digest,
+      affectedProblemIds: artifact.affectedProblemIds,
     })),
   });
 

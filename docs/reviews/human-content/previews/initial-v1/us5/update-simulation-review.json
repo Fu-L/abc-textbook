@@ -4,18 +4,21 @@
   "scopeType": "merge",
   "scopeId": "initial-v1-us5-update-simulation",
   "releaseVersion": null,
-  "subjectDigest": "103d71192391c7f5a8d1ffd83b942da6ade6dc3cbac40be2441bbddec22003ba",
+  "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
   "inventoryPath": "docs/work-manifests/initial/us5/manifest.json",
   "inventoryDigest": "d2b77b9176417e5dcd9a4abe2a9f8396b8f3689d9621af97fa999a4452da6965",
-  "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
   "reviewMode": "self",
   "applicableChecks": [
     {
       "checkId": "check-us5-discovery",
       "command": "npm test",
-      "subjectDigest": "103d71192391c7f5a8d1ffd83b942da6ade6dc3cbac40be2441bbddec22003ba",
+      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
       "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
-      "resultDigest": "5776331dcf122d5e602a7beb75e44ad40c1dfe404fd61916a62dae828867c6c3",
+      "resultDigest": "73d9c5555681ae3ac56bac411a30cf5730e131fa75013e4d850515eda47f77e5",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-28T15:00:00+09:00",
@@ -24,9 +27,9 @@
     {
       "checkId": "check-us5-prepare",
       "command": "npm test",
-      "subjectDigest": "103d71192391c7f5a8d1ffd83b942da6ade6dc3cbac40be2441bbddec22003ba",
+      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
       "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
-      "resultDigest": "5776331dcf122d5e602a7beb75e44ad40c1dfe404fd61916a62dae828867c6c3",
+      "resultDigest": "73d9c5555681ae3ac56bac411a30cf5730e131fa75013e4d850515eda47f77e5",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-28T15:00:00+09:00",
@@ -35,9 +38,9 @@
     {
       "checkId": "check-us5-review",
       "command": "npm test",
-      "subjectDigest": "103d71192391c7f5a8d1ffd83b942da6ade6dc3cbac40be2441bbddec22003ba",
+      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
       "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
-      "resultDigest": "5776331dcf122d5e602a7beb75e44ad40c1dfe404fd61916a62dae828867c6c3",
+      "resultDigest": "73d9c5555681ae3ac56bac411a30cf5730e131fa75013e4d850515eda47f77e5",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-28T15:00:00+09:00",
@@ -46,9 +49,9 @@
     {
       "checkId": "check-us5-validation",
       "command": "npm test",
-      "subjectDigest": "103d71192391c7f5a8d1ffd83b942da6ade6dc3cbac40be2441bbddec22003ba",
+      "subjectDigest": "93d8a81be0b84839c6e1503754b6b44c84431ae97699ed2e4779cec7d2ff3a67",
       "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
-      "resultDigest": "5776331dcf122d5e602a7beb75e44ad40c1dfe404fd61916a62dae828867c6c3",
+      "resultDigest": "73d9c5555681ae3ac56bac411a30cf5730e131fa75013e4d850515eda47f77e5",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-28T15:00:00+09:00",
@@ -57,14 +60,17 @@
   ],
   "applicableCheckCount": 4,
   "passedApplicableCheckCount": 4,
-  "reviewerExecutedCheckSetDigest": "fbef16c2849212785e5a60fa3b5bd8a9b94eacd27baa1ab3728bda4766ba2c46",
+  "reviewerExecutedCheckSetDigest": "fd52c72ca9c925d6a042911b0bd805521647808bd9d9f0944b20b39bb80e9a5f",
   "authors": [
     {
       "personId": "person-maintainer",
       "authoredItemIds": ["us5.discovery", "us5.authoring", "us5.validation-resume"]
     }
   ],
-  "reviewer": { "personId": "person-maintainer", "mode": "self" },
+  "reviewer": {
+    "personId": "person-maintainer",
+    "mode": "self"
+  },
   "reviewItems": [
     {
       "reviewItemId": "human-review-item-us5-authoring-classification",
@@ -137,5 +143,5 @@
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
   "generatedAt": "2026-07-28T15:00:00+09:00",
-  "evidenceDigest": "ac00a2902f4f7afc8c65c6a88abb32884482a809409b54ad80ac31b42754739f"
+  "evidenceDigest": "f7fdb380eb1658595a3f9b0050752fad12e18cd77ba19cb728c8d37bbe8d9dfb"
 }

@@ -3,8 +3,10 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import { prepareAuthoringResults } from './author.js';
+import { acquireOfficialMetadata } from './acquire.js';
 import { classifyTechniques } from './classify.js';
-import { stagePublicationUpdate } from './stage.js';
+import { discoverContests } from './discover.js';
+import { bootstrapPreviewSeed } from './bootstrap.js';
 import { validatePreparedUpdate } from './validate.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
@@ -39,6 +41,14 @@ interface PreviewManifest {
   readonly selectedProblemIds: readonly string[];
   readonly sourceRevisionIds: readonly string[];
   readonly metadataBatchDigest: string;
+}
+
+interface ContestArtifact {
+  readonly id: string;
+  readonly startedAt: string;
+  readonly endedAt: string;
+  readonly officialTaskOrder: readonly string[];
+  readonly taskOrderSourceRevisionId: string;
 }
 
 interface SourcePacket {
@@ -106,27 +116,75 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
   const learning = await Promise.all(
     learningPaths.map((candidate) => readJson<LearningArtifact>(root, candidate)),
   );
+  const contestIds = [
+    ...new Set(
+      manifest.selectedProblemIds.map((problemId) => problemId.slice(0, problemId.indexOf('-'))),
+    ),
+  ];
+  const contests = await Promise.all(
+    contestIds.map(async (contestId) => {
+      const artifact = await readJson<ContestArtifact>(
+        root,
+        `src/content/contests/abc212-abc263/${contestId}.json`,
+      );
+      return {
+        contestId: artifact.id,
+        startsAt: artifact.startedAt,
+        endsAt: artifact.endedAt,
+        tasks: artifact.officialTaskOrder.map((label) => ({
+          label,
+          sourceRevisionId: artifact.taskOrderSourceRevisionId,
+        })),
+      };
+    }),
+  );
+  const discovered = discoverContests({
+    contests,
+    mode: 'explicit-range',
+    firstContestNumber: 212,
+    lastContestNumber: 256,
+    now: '2026-07-28T15:00:00+09:00',
+  });
+  const acquired = await Promise.all(discovered.map((contest) => acquireOfficialMetadata(contest)));
+  const acquiredProblemIds = new Set(acquired.flatMap((result) => result.problemIds));
+  if (
+    acquired.some((result) => result.status === 'on_hold') ||
+    manifest.selectedProblemIds.some((problemId) => !acquiredProblemIds.has(problemId))
+  ) {
+    throw new Error('PREVIEW_DISCOVERY_SCOPE_MISMATCH');
+  }
 
   const inventoryEntries = await Promise.all(
     manifest.selectedProblemIds.map(async (problemId) => {
       const inventoryPath = `staging/previews/initial-v1/technique-inventory/${problemId}.json`;
-      await readJson<unknown>(root, inventoryPath);
-      return { problemId };
+      const inventory = await readJson<unknown>(root, inventoryPath);
+      return { problemId, inventoryPath, inventory };
     }),
   );
-  const staged = stagePublicationUpdate({
+  const staged = bootstrapPreviewSeed({
     previewId: options.fixture,
-    contestId: null,
-    sourceSetFingerprint: manifest.metadataBatchDigest,
-    targetProblemIds: manifest.selectedProblemIds,
-    operations: [
+    problemIds: manifest.selectedProblemIds,
+    snapshotDigest: manifest.metadataBatchDigest,
+    artifacts: [
+      ...inventoryEntries.map(({ problemId, inventoryPath, inventory }) => ({
+        entityType: 'technique_inventory' as const,
+        entityId: `inventory-${problemId}`,
+        path: inventoryPath,
+        digest: canonicalDigest(inventory),
+        affectedProblemIds: [problemId],
+      })),
+      ...learning.map((artifact, index) => ({
+        entityType: 'learning_unit' as const,
+        entityId: `preview-learning-${['graph-search', 'dynamic-programming', 'data-structures', 'mathematics'][index] ?? String(index)}`,
+        path: learningPaths[index] ?? '',
+        digest: canonicalDigest(artifact),
+        affectedProblemIds: artifact.learningUnit.problemIds,
+      })),
       {
         entityType: 'placement' as const,
         entityId: 'preview-placement-index',
-        action: 'add' as const,
         path: 'staging/previews/initial-v1/taxonomy/index.json',
-        beforeDigest: null,
-        afterDigest: canonicalDigest(taxonomy),
+        digest: canonicalDigest(taxonomy),
         affectedProblemIds: manifest.selectedProblemIds,
       },
     ],
@@ -316,8 +374,17 @@ export const persistPublicationUpdate = async (
   }).catch(async (error: unknown) => {
     if (!(error instanceof Error) || !('code' in error) || error.code !== 'EEXIST') throw error;
     const existing = JSON.parse(await readFile(destination, 'utf8')) as unknown;
-    if (canonicalDigest(existing) !== canonicalDigest(result.publicationUpdate))
-      throw new Error('IMMUTABLE_UPDATE_CONFLICT');
+    if (canonicalDigest(existing) === canonicalDigest(result.publicationUpdate)) return;
+    const previous = PublicationUpdateSchema.parse(existing);
+    const next = PublicationUpdateSchema.parse(result.publicationUpdate);
+    if (
+      previous.updateId !== next.updateId ||
+      previous.sourceSetFingerprint !== next.sourceSetFingerprint ||
+      canonicalDigest(previous.targetProblemIds) !== canonicalDigest(next.targetProblemIds)
+    ) {
+      throw new Error('RESUME_INPUT_MISMATCH');
+    }
+    await writeFile(destination, `${JSON.stringify(next, null, 2)}\n`, 'utf8');
   });
 };
 

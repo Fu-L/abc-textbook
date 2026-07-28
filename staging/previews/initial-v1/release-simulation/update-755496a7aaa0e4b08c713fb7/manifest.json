@@ -1,0 +1,412 @@
+{
+  "schemaVersion": "2.0.0",
+  "updateId": "update-755496a7aaa0e4b08c713fb7",
+  "kind": "bootstrap",
+  "baseReleaseVersion": null,
+  "contestId": null,
+  "sourceSetFingerprint": "6c7711d6f1c7b87a11d3994e43985d7adaa67ced91e3b1d1cb8550d8892135d7",
+  "advancedSlotLabels": ["E", "F", "G"],
+  "targetProblemIds": [
+    "abc212-g",
+    "abc215-e",
+    "abc218-f",
+    "abc222-g",
+    "abc223-f",
+    "abc232-e",
+    "abc252-e",
+    "abc256-f"
+  ],
+  "operations": [
+    {
+      "operationId": "operation-3c627c4acb1c8b58b82c",
+      "entityType": "learning_unit",
+      "entityId": "preview-learning-data-structures",
+      "action": "add",
+      "path": "staging/previews/initial-v1/learning/data-structures/learning-unit.json",
+      "beforeDigest": null,
+      "afterDigest": "7ddfff957ca7c77b9ce6cf422304156b28b157b080504edc2515f0f4f99ce657",
+      "affectedEntities": [
+        {
+          "entityType": "learning_unit",
+          "entityId": "preview-learning-data-structures",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc223-f", "abc256-f"]
+    },
+    {
+      "operationId": "operation-51d40e8f27ec3bd785fb",
+      "entityType": "learning_unit",
+      "entityId": "preview-learning-dynamic-programming",
+      "action": "add",
+      "path": "staging/previews/initial-v1/learning/dynamic-programming/learning-unit.json",
+      "beforeDigest": null,
+      "afterDigest": "0b23f2a3e24cd33bd6d45c81a5ae9b0800bc0cf095626d042bf90ca4f670e543",
+      "affectedEntities": [
+        {
+          "entityType": "learning_unit",
+          "entityId": "preview-learning-dynamic-programming",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc215-e", "abc232-e"]
+    },
+    {
+      "operationId": "operation-09e2e355cde254761ae4",
+      "entityType": "learning_unit",
+      "entityId": "preview-learning-graph-search",
+      "action": "add",
+      "path": "staging/previews/initial-v1/learning/graph-search/learning-unit.json",
+      "beforeDigest": null,
+      "afterDigest": "5154ee2739a1a89d39b025c944234e322d838b1e1bb94ab84ea62101dfea5298",
+      "affectedEntities": [
+        {
+          "entityType": "learning_unit",
+          "entityId": "preview-learning-graph-search",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc218-f", "abc252-e"]
+    },
+    {
+      "operationId": "operation-ac83767a8ee18c662109",
+      "entityType": "learning_unit",
+      "entityId": "preview-learning-mathematics",
+      "action": "add",
+      "path": "staging/previews/initial-v1/learning/mathematics/learning-unit.json",
+      "beforeDigest": null,
+      "afterDigest": "a8bfccc2fc833c3c8f56fb7c28abcea86bc7e3b45a27cf79f54e5e9718148ec3",
+      "affectedEntities": [
+        {
+          "entityType": "learning_unit",
+          "entityId": "preview-learning-mathematics",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc212-g", "abc222-g"]
+    },
+    {
+      "operationId": "operation-117abde53200f58e2414",
+      "entityType": "placement",
+      "entityId": "preview-placement-index",
+      "action": "add",
+      "path": "staging/previews/initial-v1/taxonomy/index.json",
+      "beforeDigest": null,
+      "afterDigest": "97e89e0f24962e3ed82ac7b05106bff2f7808452c991d2e1454c636d08bff62f",
+      "affectedEntities": [
+        {
+          "entityType": "placement",
+          "entityId": "preview-placement-index",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc212-g",
+        "abc215-e",
+        "abc218-f",
+        "abc222-g",
+        "abc223-f",
+        "abc232-e",
+        "abc252-e",
+        "abc256-f"
+      ]
+    },
+    {
+      "operationId": "operation-53635c75bb9c538d4596",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc212-g",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc212-g.json",
+      "beforeDigest": null,
+      "afterDigest": "76cff5df8ce9dd7e59f8915d51626c7d0f16e08396031a7e1dc067f237d07fc9",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc212-g",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc212-g"]
+    },
+    {
+      "operationId": "operation-2d10628f1dec03274e66",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc215-e",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc215-e.json",
+      "beforeDigest": null,
+      "afterDigest": "ef2134e2c060a80ce23d9383c6a1692e88c32fbedd0b2a94d63c8096288fcedc",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc215-e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc215-e"]
+    },
+    {
+      "operationId": "operation-2b7ca861a9fcdb31b13a",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc218-f",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc218-f.json",
+      "beforeDigest": null,
+      "afterDigest": "5aa13018d6b3eb1eb68831ef77f65e14306616e69addd9b2f03a7cbd5a66e7f5",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc218-f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc218-f"]
+    },
+    {
+      "operationId": "operation-043e1c1cc1aae9a418c2",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc222-g",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc222-g.json",
+      "beforeDigest": null,
+      "afterDigest": "78e7c8a656fe50210798bdfb36672e3955773963ff4088f98adddbee7db0dd36",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc222-g",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc222-g"]
+    },
+    {
+      "operationId": "operation-ccc90f06acf8d0b000b4",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc223-f",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc223-f.json",
+      "beforeDigest": null,
+      "afterDigest": "7724ff854943298faac88ec9164d2ffef1faaecc2d5b8c2933880bca76779985",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc223-f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc223-f"]
+    },
+    {
+      "operationId": "operation-734e410bac18bb036fa2",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc232-e",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc232-e.json",
+      "beforeDigest": null,
+      "afterDigest": "1a109d2a3e54f610c52e106c0e659b6fb2b40dc3000451dd704450ff70fbb8d5",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc232-e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc232-e"]
+    },
+    {
+      "operationId": "operation-da634cf27fa38046acc9",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc252-e",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc252-e.json",
+      "beforeDigest": null,
+      "afterDigest": "af40c7e6d5e16ef1b9887c91ac35cd598cd51bcf0325f18eddccb942256c4555",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc252-e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc252-e"]
+    },
+    {
+      "operationId": "operation-38da9a7afd10d5271cb6",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc256-f",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc256-f.json",
+      "beforeDigest": null,
+      "afterDigest": "f22bd68a591b032b8e29eed1a8ca696f272d73d8918970b92ee8ffaa56890da5",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc256-f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc256-f"]
+    }
+  ],
+  "authoringResults": [
+    {
+      "problemId": "abc212-g",
+      "slotLabel": "G",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc215-e",
+      "slotLabel": "E",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc218-f",
+      "slotLabel": "F",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc222-g",
+      "slotLabel": "G",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc223-f",
+      "slotLabel": "F",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc232-e",
+      "slotLabel": "E",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc252-e",
+      "slotLabel": "E",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc256-f",
+      "slotLabel": "F",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    }
+  ],
+  "correctionImpactIds": [],
+  "validationSummary": {
+    "checkIds": [
+      "source",
+      "explanation",
+      "example",
+      "placement",
+      "dag",
+      "order",
+      "catalog",
+      "index",
+      "cross-reference"
+    ],
+    "problemResults": [
+      {
+        "problemId": "abc212-g",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc215-e",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc218-f",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc222-g",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc223-f",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc232-e",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc252-e",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc256-f",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      }
+    ],
+    "blockingFindingCount": 0,
+    "aggregatePassed": true,
+    "resultDigest": "ae3482d4afddbaa6cbc4671af543612f11335f9b1739e04ffac82ff71da8b4d7"
+  },
+  "state": "ON_HOLD",
+  "createdAt": "2026-07-28T15:00:00+09:00",
+  "updatedAt": "2026-07-28T15:00:00+09:00",
+  "fixtureMode": true
+}

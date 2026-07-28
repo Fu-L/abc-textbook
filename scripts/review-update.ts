@@ -3,12 +3,14 @@ import { pathToFileURL } from 'node:url';
 
 import { canonicalDigest } from '../src/lib/domain/canonical-json.js';
 import { HumanContentReviewEvidenceSchema } from '../src/lib/domain/schema-parts/review-evidence.js';
+import { validateContentWorkManifest } from '../src/lib/validation/content-work-manifest.js';
 
 export const createPreviewUpdateReview = (input: {
   readonly subjectDigest: string;
   readonly authoringSkillVersion: string;
   readonly authoringSkillDigest: string;
   readonly checkIds: readonly string[];
+  readonly resultDigest: string;
   readonly riskReasons?: readonly string[];
 }) => {
   const reviewMode =
@@ -18,13 +20,12 @@ export const createPreviewUpdateReview = (input: {
   const reviewerId = reviewMode === 'self' ? 'person-maintainer' : 'person-independent-reviewer';
   const completedAt = '2026-07-28T15:00:00+09:00';
   const resultPath = 'staging/previews/initial-v1/release-simulation/verification.json';
-  const resultDigest = '5776331dcf122d5e602a7beb75e44ad40c1dfe404fd61916a62dae828867c6c3';
   const applicableChecks = input.checkIds.map((checkId) => ({
     checkId,
     command: 'npm test',
     subjectDigest: input.subjectDigest,
     resultPath,
-    resultDigest,
+    resultDigest: input.resultDigest,
     exitCode: 0,
     passed: true,
     completedAt,
@@ -117,6 +118,26 @@ if (isMain()) {
       Object.fromEntries(Object.entries(evidence).filter(([key]) => key !== 'evidenceDigest')),
     );
     if (validDigest !== evidence.evidenceDigest) throw new Error('REVIEW_EVIDENCE_DIGEST_MISMATCH');
+    const inventory = JSON.parse(await readFile(evidence.inventoryPath, 'utf8')) as unknown;
+    validateContentWorkManifest(inventory);
+    if ((inventory as { readonly digest?: unknown }).digest !== evidence.inventoryDigest) {
+      throw new Error('REVIEW_INVENTORY_DIGEST_MISMATCH');
+    }
+    for (const check of evidence.applicableChecks) {
+      const result = JSON.parse(await readFile(check.resultPath, 'utf8')) as unknown;
+      if (canonicalDigest(result) !== check.resultDigest) {
+        throw new Error(`REVIEW_CHECK_RESULT_DIGEST_MISMATCH:${check.checkId}`);
+      }
+    }
+    const component = JSON.parse(
+      await readFile(
+        'docs/verification/previews/initial-v1/components/update-simulation.json',
+        'utf8',
+      ),
+    ) as { readonly subjectDigest?: unknown };
+    if (component.subjectDigest !== evidence.subjectDigest) {
+      throw new Error('REVIEW_COMPONENT_SUBJECT_DIGEST_MISMATCH');
+    }
     process.stdout.write(
       `${JSON.stringify({ command: 'abc:review', evidenceId: evidence.id, reviewMode: evidence.reviewMode, aggregatePassed: evidence.aggregatePassed })}\n`,
     );

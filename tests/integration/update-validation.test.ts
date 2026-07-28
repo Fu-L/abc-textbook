@@ -1,11 +1,19 @@
-import { readFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
 import { enumerateCorrectionImpacts } from '../../scripts/update-abc/correction-impact.js';
-import { resumeUpdate, runUpdatePipeline } from '../../scripts/update-abc/index.js';
+import { verifyPreviewReleaseSimulation } from '../../scripts/verify-release.js';
+import {
+  persistPublicationUpdate,
+  resumeUpdate,
+  runUpdatePipeline,
+} from '../../scripts/update-abc/index.js';
 import { validatePreparedUpdate } from '../../scripts/update-abc/validate.js';
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
+import { CorrectionImpactSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { HumanContentReviewEvidenceSchema } from '../../src/lib/domain/schema-parts/review-evidence.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import {
@@ -20,21 +28,24 @@ const json = async (relativePath: string): Promise<unknown> =>
 
 describe('US5 update validation', () => {
   it('enumerates every affected content and derived index surface', () => {
-    expect(
-      enumerateCorrectionImpacts({
-        correctionId: 'correction-abc500-e',
-        problemIds: ['abc500-e'],
-        changedBlocks: ['explanation', 'example'],
-        locators: [
-          {
-            problemId: 'abc500-e',
-            contentPath: 'staging/previews/initial-v1/learning/graph-search/learning-unit.json',
-            orderPath: 'staging/previews/initial-v1/taxonomy/index.json',
-            indexPaths: ['staging/previews/initial-v1/taxonomy/index.json'],
-          },
-        ],
-      }).affectedKinds,
-    ).toEqual(['content', 'examples', 'exercises', 'answers', 'order', 'indexes']);
+    const impact = enumerateCorrectionImpacts({
+      correctionId: 'correction-abc500-e',
+      sourceRevisionId: 'source-abc500-e',
+      problemIds: ['abc500-e'],
+      changedBlocks: ['explanation', 'example'],
+      locators: [
+        {
+          problemId: 'abc500-e',
+          learningUnitId: 'unit-abc500-e',
+          exampleKey: 'worked-example',
+          exerciseKey: 'practice',
+          orderId: 'order-preview',
+          indexPaths: ['staging/previews/initial-v1/taxonomy/index.json'],
+        },
+      ],
+    });
+    expect(CorrectionImpactSchema.parse(impact)).toEqual(impact);
+    expect(impact.affectedContentLocators).toHaveLength(4);
   });
 
   it('reports cycle, reachability, and index failures per Problem', () => {
@@ -84,10 +95,27 @@ describe('US5 update validation', () => {
     ).rejects.toThrow('RESUME_INPUT_MISMATCH');
   });
 
+  it('persists a validated resume transition for the same immutable input identity', async () => {
+    const outputRoot = await mkdtemp(path.join(tmpdir(), 'abc-update-resume-'));
+    try {
+      const held = await runUpdatePipeline({ fixture: 'initial-v1', failAt: 'validate' });
+      await persistPublicationUpdate(held, outputRoot);
+      const resumed = await resumeUpdate(held, { fixture: 'initial-v1' });
+      await expect(persistPublicationUpdate(resumed, outputRoot)).resolves.toBeUndefined();
+      const saved = PublicationUpdateSchema.parse(
+        JSON.parse(await readFile(path.join(outputRoot, resumed.resultPath), 'utf8')) as unknown,
+      );
+      expect(saved.validationSummary.aggregatePassed).toBe(true);
+      expect(saved.updateId).toBe(held.updateId);
+    } finally {
+      await rm(outputRoot, { recursive: true, force: true });
+    }
+  });
+
   it('freezes canonical update, work-manifest, review, and component evidence contracts', async () => {
     const update = PublicationUpdateSchema.parse(
       await json(
-        'staging/previews/initial-v1/release-simulation/update-31c49d8ebf9d0f5e3faac0b7/manifest.json',
+        'staging/previews/initial-v1/release-simulation/update-755496a7aaa0e4b08c713fb7/manifest.json',
       ),
     );
     expect(update.authoringResults).toHaveLength(8);
@@ -107,6 +135,14 @@ describe('US5 update validation', () => {
     );
     const { evidenceDigest, ...reviewSubject } = review;
     expect(canonicalDigest(reviewSubject)).toBe(evidenceDigest);
+    const verification = await json(
+      'staging/previews/initial-v1/release-simulation/verification.json',
+    );
+    expect(
+      review.applicableChecks.every(
+        (check) => check.resultDigest === canonicalDigest(verification),
+      ),
+    ).toBe(true);
 
     const component = (await json(
       'docs/verification/previews/initial-v1/components/update-simulation.json',
@@ -122,5 +158,15 @@ describe('US5 update validation', () => {
     void _reviewEvidence;
     expect(componentSubjectDigest(currentSubject)).toBe(subjectDigest);
     expect(componentEvidenceDigest(componentSubject)).toBe(componentDigest);
+    expect(component.artifactDigest).toBe(canonicalDigest(verification));
+    expect(
+      verifyPreviewReleaseSimulation({
+        previewId: 'initial-v1',
+        update: { updateId: update.updateId, publicationUpdate: update },
+        publicWrites: [],
+        productionReleaseMetadataWrites: [],
+        deploymentWrites: [],
+      }),
+    ).toEqual(verification);
   });
 });
