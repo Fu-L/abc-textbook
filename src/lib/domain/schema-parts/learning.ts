@@ -43,11 +43,12 @@ export const LearningRecordBackupSchema = strictObject({
       message: 'Orphan IDs must be unique.',
     });
   }
-  const overlap = recordIds.find((problemId) => orphanIds.includes(problemId));
-  if (overlap) {
+  const missingRecord = orphanIds.find((problemId) => !recordIds.includes(problemId));
+  if (missingRecord) {
     context.addIssue({
       code: 'custom',
-      message: `${overlap} cannot be both a record and an orphan.`,
+      path: ['orphanedProblemIds'],
+      message: `${missingRecord} must retain its full record in the backup.`,
     });
   }
 });

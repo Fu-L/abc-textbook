@@ -13,10 +13,10 @@
     "abc256-f"
   ],
   "checks": {
-    "vitest": { "passedFiles": 39, "passedTests": 340, "failedTests": 0 },
-    "sharedContractE2e": { "passed": 51, "failed": 0, "engineRuns": 48, "storageFailureRuns": 3 },
+    "vitest": { "passedFiles": 40, "passedTests": 344, "failedTests": 0 },
+    "sharedContractE2e": { "passed": 63, "failed": 0, "engineRuns": 48, "storageFailureRuns": 3 },
     "representativeTiming": {
-      "maximumObservedMs": 1900,
+      "maximumObservedMs": 319.9526250000001,
       "requiredMaximumMs": 30000,
       "passed": true
     },
@@ -36,7 +36,10 @@
     }
   },
   "e2eEvidencePath": "docs/verification/previews/initial-v1/learning-records/e2e.json",
-  "e2eEvidenceDigest": "cb778676612324c5632ff5c0cf9e7d6d2e9a9d07756d8dfa8e24e53322559c12",
+  "e2eEvidenceDigest": "3dfdf14ba6d4456ea7541c5b32abbef9ce2e6dcb15ac0e2eb64ef1fb03ba1ce3",
+  "rawReportPath": "docs/verification/previews/initial-v1/learning-records/raw-playwright.json",
+  "rawReportDigest": "9264a6a5eca21d19961d2ea1ca4e0ca11dc06f01d04524261ecaf3be74616fd0",
+  "implementationSubjectDigest": "e6bcec1156c81bead271be36b25845bbcd523b5c227977f8dd90f59e9d0e1c1d",
   "aggregatePassed": true,
-  "generatedAt": "2026-07-29T20:22:00+09:00"
+  "generatedAt": "2026-07-29T13:17:06.529Z"
 }

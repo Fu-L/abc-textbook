@@ -22,7 +22,7 @@ export async function exportLearningRecords(
     schemaVersion: '1.0.0',
     exportedAt: options.exportedAt ?? new Date().toISOString(),
     catalogVersionAtExport: options.catalogVersion,
-    records: records.filter(({ problemId }) => options.catalogProblemIds.has(problemId)),
+    records,
     orphanedProblemIds,
   });
 }

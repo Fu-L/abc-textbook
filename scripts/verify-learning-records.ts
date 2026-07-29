@@ -1,3 +1,4 @@
+import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -10,7 +11,7 @@ import {
 } from '../src/lib/domain/schemas.js';
 
 const root = process.cwd();
-const generatedAt = '2026-07-29T20:22:00+09:00';
+const generatedAt = new Date().toISOString();
 const problemIds = [
   'abc212-g',
   'abc215-e',
@@ -21,13 +22,29 @@ const problemIds = [
   'abc252-e',
   'abc256-f',
 ] as const;
-const engines = ['chromium', 'firefox', 'webkit'] as const;
-const durations = { chromium: 549, firefox: 1900, webkit: 1200 } as const;
-const revisions = {
-  chromium: 'playwright-1.61.1-chromium',
-  firefox: 'playwright-1.61.1-firefox',
-  webkit: 'playwright-1.61.1-webkit',
-} as const;
+interface CommandResult {
+  readonly command: string;
+  readonly exitCode: number;
+  readonly stdout: string;
+  readonly stderr: string;
+}
+
+const run = (command: string, args: readonly string[]): CommandResult => {
+  const result = spawnSync(command, args, {
+    cwd: root,
+    encoding: 'utf8',
+    env: { ...process.env, FORCE_COLOR: '0', NO_COLOR: '1' },
+    maxBuffer: 64 * 1024 * 1024,
+  });
+  const exitCode = result.status ?? 1;
+  const commandText = [command, ...args].join(' ');
+  if (exitCode !== 0) {
+    throw new Error(
+      `${commandText} failed (${String(exitCode)}).\n${result.stdout.slice(-4000)}\n${result.stderr.slice(-4000)}`,
+    );
+  }
+  return { command: commandText, exitCode, stdout: result.stdout, stderr: result.stderr };
+};
 
 const readJson = async (relativePath: string): Promise<Record<string, unknown>> =>
   JSON.parse(await readFile(path.join(root, relativePath), 'utf8')) as Record<string, unknown>;
@@ -46,46 +63,126 @@ const writeJson = async (relativePath: string, value: unknown) => {
 const fileDigest = async (relativePath: string) =>
   canonicalDigest(await readFile(path.join(root, relativePath), 'utf8'));
 
+const vitestRun = run(path.join(root, 'node_modules/.bin/vitest'), ['run', '--reporter=json']);
+const checkRun = run('npm', ['run', 'check']);
+const lintRun = run('npm', ['run', 'lint']);
+const formatRun = run('npm', ['run', 'format:check']);
+const buildRun = run('npm', ['run', 'build']);
+const staticQualityRun: CommandResult = {
+  command: `${checkRun.command} && ${lintRun.command} && ${formatRun.command} && ${buildRun.command}`,
+  exitCode: Math.max(checkRun.exitCode, lintRun.exitCode, formatRun.exitCode, buildRun.exitCode),
+  stdout: `${checkRun.stdout}\n${lintRun.stdout}\n${formatRun.stdout}\n${buildRun.stdout}`,
+  stderr: `${checkRun.stderr}\n${lintRun.stderr}\n${formatRun.stderr}\n${buildRun.stderr}`,
+};
+const playwrightRun = run(path.join(root, 'node_modules/.bin/playwright'), [
+  'test',
+  'tests/e2e/learning-records.spec.ts',
+  '--reporter=json',
+]);
+
+interface VitestReport {
+  readonly numTotalTestSuites: number;
+  readonly numPassedTestSuites: number;
+  readonly numTotalTests: number;
+  readonly numPassedTests: number;
+  readonly numFailedTests: number;
+  readonly testResults: readonly { status: string }[];
+}
+interface PlaywrightAttachment {
+  readonly name: string;
+  readonly body?: string;
+  readonly path?: string;
+}
+interface PlaywrightResult {
+  readonly status: string;
+  readonly duration: number;
+  readonly attachments: readonly PlaywrightAttachment[];
+}
+interface PlaywrightTestResult {
+  readonly projectName: 'chromium' | 'firefox' | 'webkit';
+  readonly results: readonly PlaywrightResult[];
+}
+interface PlaywrightSpec {
+  readonly title: string;
+  readonly tests: readonly PlaywrightTestResult[];
+}
+interface PlaywrightSuite {
+  readonly specs?: readonly PlaywrightSpec[];
+  readonly suites?: readonly PlaywrightSuite[];
+}
+interface PlaywrightReport {
+  readonly suites: readonly PlaywrightSuite[];
+  readonly errors: readonly unknown[];
+}
+
+const vitestReport = JSON.parse(vitestRun.stdout) as VitestReport;
+const playwrightReport = JSON.parse(playwrightRun.stdout) as PlaywrightReport;
+const collectSpecs = (suites: readonly PlaywrightSuite[]): PlaywrightSpec[] =>
+  suites.flatMap((suite) => [...(suite.specs ?? []), ...collectSpecs(suite.suites ?? [])]);
+const decodeAttachment = async (attachment: PlaywrightAttachment) => {
+  if (attachment.body) return Buffer.from(attachment.body, 'base64').toString('utf8');
+  if (attachment.path) return readFile(attachment.path, 'utf8');
+  throw new Error('LearningRecord E2E attachment has no body or path.');
+};
+
 const previewManifest = await readJson('staging/previews/initial-v1/preview-manifest.json');
 const workManifest = await readJson('docs/work-manifests/initial/us3/manifest.json');
 const releaseDigest = String(previewManifest.manifestDigest);
-const rawEvidenceDigest = canonicalDigest({
-  command: 'npm run test:e2e:built -- tests/e2e/learning-records.spec.ts',
-  testFileDigest: await fileDigest('tests/e2e/learning-records.spec.ts'),
-  passed: 51,
-  failed: 0,
-  completedAt: generatedAt,
-});
+const rawReportPath = 'docs/verification/previews/initial-v1/learning-records/raw-playwright.json';
+await writeJson(rawReportPath, playwrightReport);
+const rawEvidenceDigest = await fileDigest(rawReportPath);
 
-const runs = engines.flatMap((engine, engineIndex) =>
-  problemIds.flatMap((problemId, problemIndex) =>
-    [1, 2].map((run) => {
-      const startedMonotonicMs = engineIndex * 100_000 + problemIndex * 10_000 + run * 1_000;
-      const timestamp = `2026-07-29T20:${String(10 + engineIndex * 3 + run).padStart(2, '0')}:${String(problemIndex).padStart(2, '0')}+09:00`;
-      return {
-        engine,
-        engineRevision: revisions[engine],
-        os: 'macOS-local-playwright',
-        problemId,
-        startMarker: 'problem-detail-render-complete' as const,
-        endMarker: 'both-save-confirmations-visible' as const,
-        startedMonotonicMs,
-        completedMonotonicMs: startedMonotonicMs + durations[engine],
-        durationMs: durations[engine],
-        statusPersisted: true as const,
-        reviewPersisted: true as const,
-        statusUpdatedAt: timestamp,
-        reviewUpdatedAt: timestamp,
-        reloadCompleted: true as const,
-        reloadedStatus: 'completed' as const,
-        reloadedNeedsReview: true as const,
-        reloadedStatusUpdatedAt: timestamp,
-        reloadedReviewUpdatedAt: timestamp,
-        rollbackPassed: true as const,
-      };
-    }),
+const sharedSpecs = collectSpecs(playwrightReport.suites).filter(({ title }) =>
+  title.includes('uses the shared learning-record contract'),
+);
+const runs = await Promise.all(
+  sharedSpecs.flatMap((spec) =>
+    spec.tests.flatMap((testResult) =>
+      testResult.results
+        .filter(({ status }) => status === 'passed')
+        .map(async (result) => {
+          const attachment = result.attachments.find(({ name }) => name === 'learning-record-run');
+          if (!attachment) throw new Error(`${spec.title} has no learning-record-run attachment.`);
+          const actual = JSON.parse(await decodeAttachment(attachment)) as {
+            problemId: string;
+            startedMonotonicMs: number;
+            completedMonotonicMs: number;
+            durationMs: number;
+            engineRevision: string;
+            rollbackPassed: boolean;
+            status: string;
+            statusUpdatedAt: string;
+            needsReview: boolean;
+            needsReviewUpdatedAt: string;
+          };
+          return {
+            engine: testResult.projectName,
+            engineRevision: actual.engineRevision,
+            os: `${process.platform}-${process.arch}`,
+            problemId: actual.problemId,
+            startMarker: 'problem-detail-render-complete' as const,
+            endMarker: 'both-save-confirmations-visible' as const,
+            startedMonotonicMs: actual.startedMonotonicMs,
+            completedMonotonicMs: actual.completedMonotonicMs,
+            durationMs: actual.durationMs,
+            statusPersisted: actual.status === 'completed',
+            reviewPersisted: actual.needsReview,
+            statusUpdatedAt: actual.statusUpdatedAt,
+            reviewUpdatedAt: actual.needsReviewUpdatedAt,
+            reloadCompleted: true as const,
+            reloadedStatus: actual.status,
+            reloadedNeedsReview: actual.needsReview,
+            reloadedStatusUpdatedAt: actual.statusUpdatedAt,
+            reloadedReviewUpdatedAt: actual.needsReviewUpdatedAt,
+            rollbackPassed: actual.rollbackPassed,
+          };
+        }),
+    ),
   ),
 );
+if (runs.length !== 48 || playwrightReport.errors.length > 0) {
+  throw new Error(`Expected 48 passing engine runs, received ${String(runs.length)}.`);
+}
 
 const e2eEvidence = LearningRecordE2eEvidenceSchema.parse({
   schemaVersion: '1.0.0',
@@ -106,9 +203,22 @@ const acceptance = {
   catalogSubjectDigest: releaseDigest,
   problemIds,
   checks: {
-    vitest: { passedFiles: 39, passedTests: 340, failedTests: 0 },
-    sharedContractE2e: { passed: 51, failed: 0, engineRuns: 48, storageFailureRuns: 3 },
-    representativeTiming: { maximumObservedMs: 1900, requiredMaximumMs: 30000, passed: true },
+    vitest: {
+      passedFiles: vitestReport.testResults.filter(({ status }) => status === 'passed').length,
+      passedTests: vitestReport.numPassedTests,
+      failedTests: vitestReport.numFailedTests,
+    },
+    sharedContractE2e: {
+      passed: collectSpecs(playwrightReport.suites).length,
+      failed: playwrightReport.errors.length,
+      engineRuns: runs.length,
+      storageFailureRuns: 3,
+    },
+    representativeTiming: {
+      maximumObservedMs: Math.max(...runs.map(({ durationMs }) => durationMs)),
+      requiredMaximumMs: 30000,
+      passed: runs.every(({ durationMs }) => durationMs <= 30000),
+    },
     reload: { checkedEngineRuns: 48, preservedEngineRuns: 48, passed: true },
     restore: {
       recordCount: 120,
@@ -126,6 +236,19 @@ const acceptance = {
   },
   e2eEvidencePath: e2ePath,
   e2eEvidenceDigest: await fileDigest(e2ePath),
+  rawReportPath,
+  rawReportDigest: rawEvidenceDigest,
+  implementationSubjectDigest: canonicalDigest(
+    await Promise.all(
+      [
+        'src/lib/learning-records/database.ts',
+        'src/lib/learning-records/store.ts',
+        'src/lib/learning-records/import-apply.ts',
+        'src/components/LearningRecordControl.tsx',
+        'src/components/LearningRecordSettings.tsx',
+      ].map(fileDigest),
+    ),
+  ),
   aggregatePassed: true,
   generatedAt,
 };
@@ -138,24 +261,20 @@ const subjectDigest = canonicalDigest({
   e2eDigest: await fileDigest(e2ePath),
 });
 const checks = [
-  ['check-us3-unit', 'npm test', acceptancePath],
-  ['check-us3-integration', 'npm run test:integration -- learning-record', acceptancePath],
-  ['check-us3-e2e', 'npm run test:e2e:built -- tests/e2e/learning-records.spec.ts', e2ePath],
-  [
-    'check-us3-static-quality',
-    'npm run check && npm run lint && npm run format:check',
-    acceptancePath,
-  ],
+  ['check-us3-unit', vitestRun, acceptancePath],
+  ['check-us3-integration', vitestRun, acceptancePath],
+  ['check-us3-e2e', playwrightRun, e2ePath],
+  ['check-us3-static-quality', staticQualityRun, acceptancePath],
 ] as const;
 const applicableChecks = await Promise.all(
-  checks.map(async ([checkId, command, resultPath]) => ({
+  checks.map(async ([checkId, result, resultPath]) => ({
     checkId,
-    command,
+    command: result.command,
     subjectDigest,
     resultPath,
     resultDigest: await fileDigest(resultPath),
-    exitCode: 0,
-    passed: true,
+    exitCode: result.exitCode,
+    passed: result.exitCode === 0,
     completedAt: generatedAt,
     executedByReviewerId: 'person-maintainer',
   })),
@@ -250,7 +369,7 @@ const reviewPath =
 await writeJson(reviewPath, review);
 
 const artifactFiles = await Promise.all(
-  [acceptancePath, e2ePath, reviewPath].map(async (artifactPath) => ({
+  [acceptancePath, e2ePath, rawReportPath, reviewPath].map(async (artifactPath) => ({
     path: artifactPath,
     digest: await fileDigest(artifactPath),
   })),

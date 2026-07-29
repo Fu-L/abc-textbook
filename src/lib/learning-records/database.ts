@@ -121,13 +121,14 @@ export async function openLearningRecordDatabase(
           ? transaction.objectStore(LEARNING_RECORD_STORE_NAME)
           : database.createObjectStore(LEARNING_RECORD_STORE_NAME, { keyPath: 'problemId' });
         if (oldVersion > 0 && oldVersion < LEARNING_RECORD_DATABASE_VERSION) {
-          void (async () => {
-            let cursor = await store.openCursor();
-            while (cursor) {
-              await cursor.update(migrateLegacyLearningRecord(cursor.value));
-              cursor = await cursor.continue();
-            }
-          })();
+          void store
+            .getAll()
+            .then((records) =>
+              Promise.all(records.map((record) => store.put(migrateLegacyLearningRecord(record)))),
+            )
+            .catch(() => {
+              transaction.abort();
+            });
         }
       },
       blocked() {

@@ -1,6 +1,7 @@
 ---
 import ReviewProblemList from '../../components/ReviewProblemList.tsx';
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
+import { previewCatalog } from '../../lib/catalog/preview-ui-catalog.js';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -11,6 +12,17 @@ const base = import.meta.env.BASE_URL;
 >
   <h1>要復習</h1>
   <p>初期条件は「要復習」です。追加条件を組み合わせて絞り込めます。</p>
+  <p>
+    <a href={`${base === '/' ? '' : base.replace(/\/$/u, '')}/settings/learning-records/`}
+      >バックアップと復元</a
+    >
+  </p>
   <noscript><p>復習記録の表示にはJavaScriptが必要です。</p></noscript>
-  <ReviewProblemList client:load {base} />
+  <ReviewProblemList
+    client:load
+    {base}
+    problems={previewCatalog.problems}
+    tags={previewCatalog.tags}
+    learningUnits={previewCatalog.learningUnits}
+  />
 </TextbookLayout>

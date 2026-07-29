@@ -1,0 +1,2527 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.4.0/bin/node",
+      "/Users/fuma/Desktop/VSCode/abc-textbook/node_modules/.bin/playwright",
+      "test",
+      "tests/e2e/learning-records.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "/Users/fuma/Desktop/VSCode/abc-textbook/playwright.config.ts",
+    "rootDir": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": { "actualWorkers": 5 },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/fuma/Desktop/VSCode/abc-textbook/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": { "actualWorkers": 5 },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/fuma/Desktop/VSCode/abc-textbook/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": { "actualWorkers": 5 },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/fuma/Desktop/VSCode/abc-textbook/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": { "actualWorkers": 5 },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/fuma/Desktop/VSCode/abc-textbook/tests/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [["json"]],
+    "reportSlowTests": { "max": 5, "threshold": 300000 },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 5,
+    "webServer": {
+      "command": "npm run preview -- --host 127.0.0.1 --port 4321",
+      "url": "http://127.0.0.1:4321/",
+      "reuseExistingServer": false,
+      "timeout": 120000,
+      "env": { "BASE_PATH": "/", "SITE_URL": "http://127.0.0.1:4321" }
+    }
+  },
+  "suites": [
+    {
+      "title": "learning-records.spec.ts",
+      "file": "learning-records.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "abc212-g run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 525,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:41.027Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTItZyIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6NTQwLjQ1NTY2NiwiY29tcGxldGVkTW9ub3RvbmljTXMiOjcwMS4yMjgzNzUsImR1cmF0aW9uTXMiOjE2MC43NzI3MDkwMDAwMDAwOCwicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDEuMzUyWiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDEuNDUwWiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-964ddf712d5b902a6878",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc212-g run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 508,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:41.016Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTItZyIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6NTYzLjMzNDI1LCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6NzM1LjkzMjM3NSwiZHVyYXRpb25NcyI6MTcyLjU5ODEyNDk5OTk5OTk4LCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0MS4zNzVaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0MS40NzhaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-b9a0a9d4ba38f99bc1f9",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc215-e run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 519,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:41.016Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTUtZSIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6NTUzLjEzMzE2NywiY29tcGxldGVkTW9ub3RvbmljTXMiOjcwNC44MjYxNjcsImR1cmF0aW9uTXMiOjE1MS42OTMwMDAwMDAwMDAxLCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0MS4zNjNaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0MS40NTBaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-5419d1dcb181424af9b4",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc215-e run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 517,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:41.029Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTUtZSIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6NTYxLjk2MzQxNywiY29tcGxldGVkTW9ub3RvbmljTXMiOjczNi42MzU1LCJkdXJhdGlvbk1zIjoxNzQuNjcyMDgyOTk5OTk5OTMsInJvbGxiYWNrUGFzc2VkIjp0cnVlLCJzdGF0dXMiOiJjb21wbGV0ZWQiLCJzdGF0dXNVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQxLjM3NFoiLCJuZWVkc1JldmlldyI6dHJ1ZSwibmVlZHNSZXZpZXdVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQxLjQ3OFoifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-df2525dd05dbf6392c24",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc218-f run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 549,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:41.016Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTgtZiIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6NTQ5LjIwMzQxNywiY29tcGxldGVkTW9ub3RvbmljTXMiOjcwMy42NjA1NDIsImR1cmF0aW9uTXMiOjE1NC40NTcxMjUwMDAwMDAwMiwicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDEuMzYwWiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDEuNDUxWiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-9625bf6e98cb5f50941a",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc218-f run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 447,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:41.667Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTgtZiIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTAwOC45OTY5NTgsImNvbXBsZXRlZE1vbm90b25pY01zIjoxMTg0LjY3NjY2NiwiZHVyYXRpb25NcyI6MTc1LjY3OTcwODAwMDAwMDEyLCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0MS44MjBaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0MS45MzBaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-de61d288b87be8102bcf",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc222-g run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 408,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:41.674Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMjItZyIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTAwMi4wNDY3OTIsImNvbXBsZXRlZE1vbm90b25pY01zIjoxMTQ1LjUzMzg3NSwiZHVyYXRpb25NcyI6MTQzLjQ4NzA4MzAwMDAwMDEsInJvbGxiYWNrUGFzc2VkIjp0cnVlLCJzdGF0dXMiOiJjb21wbGV0ZWQiLCJzdGF0dXNVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQxLjgxNloiLCJuZWVkc1JldmlldyI6dHJ1ZSwibmVlZHNSZXZpZXdVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQxLjg5M1oifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-ec5b7a6878c211c44892",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc222-g run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 403,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:41.675Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMjItZyIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6OTk4LjQ0NjI1LCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6MTE0NC4zNjQ2NjcsImR1cmF0aW9uTXMiOjE0NS45MTg0MTcwMDAwMDAxLCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0MS44MDhaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0MS44OTNaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-cf582802f0f77726b365",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc223-f run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 510,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:41.685Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMjMtZiIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTAyNC40NjkxNjYsImNvbXBsZXRlZE1vbm90b25pY01zIjoxMTgyLjM2NzI1LCJkdXJhdGlvbk1zIjoxNTcuODk4MDgzOTk5OTk5OTMsInJvbGxiYWNrUGFzc2VkIjp0cnVlLCJzdGF0dXMiOiJjb21wbGV0ZWQiLCJzdGF0dXNVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQxLjgzNloiLCJuZWVkc1JldmlldyI6dHJ1ZSwibmVlZHNSZXZpZXdVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQxLjkzMFoifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-664138ae69e3d1f5da21",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc223-f run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 477,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:41.703Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMjMtZiIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTA0NC4zNjE3MDksImNvbXBsZXRlZE1vbm90b25pY01zIjoxMTg1LjA1OCwiZHVyYXRpb25NcyI6MTQwLjY5NjI5MDk5OTk5OTk3LCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0MS44NTFaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0MS45MzBaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-23c462ce00ba6bd32837",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc232-e run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 419,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:42.087Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMzItZSIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTQwMi4zMzA3OTIsImNvbXBsZXRlZE1vbm90b25pY01zIjoxNTcxLjgsImR1cmF0aW9uTXMiOjE2OS40NjkyMDc5OTk5OTk5OCwicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDIuMjEyWiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDIuMzExWiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-53ffe157b504231359eb",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc232-e run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 413,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:42.089Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMzItZSIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTQwMi43MjQzNzUsImNvbXBsZXRlZE1vbm90b25pY01zIjoxNTcxLjI4NjU0MiwiZHVyYXRpb25NcyI6MTY4LjU2MjE2NzAwMDAwMDA0LCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0Mi4yMTBaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0Mi4zMTFaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-aa6d008e0bf2dae99fa2",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc252-e run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 457,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:42.124Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyNTItZSIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTQ2Ni45OTk1LCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6MTYyMy40NTQ3OTEsImR1cmF0aW9uTXMiOjE1Ni40NTUyOTEsInJvbGxiYWNrUGFzc2VkIjp0cnVlLCJzdGF0dXMiOiJjb21wbGV0ZWQiLCJzdGF0dXNVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQyLjI4MFoiLCJuZWVkc1JldmlldyI6dHJ1ZSwibmVlZHNSZXZpZXdVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQyLjM3MloifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-3f15d549c35827cf1a5c",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc252-e run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 437,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:42.195Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyNTItZSIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTUwOC43NDAyMDksImNvbXBsZXRlZE1vbm90b25pY01zIjoxNjY5LjU0ODA4NCwiZHVyYXRpb25NcyI6MTYwLjgwNzg3NDk5OTk5OTk3LCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0Mi4zMjBaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0Mi40MTZaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-49b8ae8e1c5c86587d28",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc256-f run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 432,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:42.204Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyNTYtZiIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTUyMy42MTksImNvbXBsZXRlZE1vbm90b25pY01zIjoxNjY3LjA2ODk1OCwiZHVyYXRpb25NcyI6MTQzLjQ0OTk1ODAwMDAwMDE1LCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0Mi4zMzRaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0Mi40MTZaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-0392a655d3389d0c90c0",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc256-f run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 380,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:42.510Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyNTYtZiIsImVuZ2luZVJldmlzaW9uIjoiMTQ5LjAuNzgyNy41NSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTgwMC43MDM2NjcsImNvbXBsZXRlZE1vbm90b25pY01zIjoxOTQ4LjA5NzkxNywiZHVyYXRpb25NcyI6MTQ3LjM5NDI1MDAwMDAwMDA2LCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0Mi42MDdaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0Mi42OTRaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-769d9e20e82b0b1ff89d",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "storage failure leaves the textbook readable and disables only the controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 170,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:42.512Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-0fa9eccb2780ebfb9d64",
+          "file": "learning-records.spec.ts",
+          "line": 116,
+          "column": 1
+        },
+        {
+          "title": "version 1 records migrate atomically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 220,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:42.588Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-23288812da18ec5b261b",
+          "file": "learning-records.spec.ts",
+          "line": 128,
+          "column": 1
+        },
+        {
+          "title": "migration failure aborts database open and disables controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 201,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:42.639Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-f21696d1d3cc5282b553",
+          "file": "learning-records.spec.ts",
+          "line": 164,
+          "column": 1
+        },
+        {
+          "title": "problem details reach the review page with all extra filters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 329,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:42.644Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-e5a616070920321d731a",
+          "file": "learning-records.spec.ts",
+          "line": 197,
+          "column": 1
+        },
+        {
+          "title": "restore requires an explicit policy after showing component details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 328,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:42.691Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-aa8a67cfadaef8fa6741",
+          "file": "learning-records.spec.ts",
+          "line": 210,
+          "column": 1
+        },
+        {
+          "title": "abc212-g run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1957,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:43.101Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTItZyIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjI5NDQuOTY0OTU4LCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6MzIwMi4wNjYsImR1cmF0aW9uTXMiOjI1Ny4xMDEwNDE5OTk5OTk4LCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0NS44NThaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0NS45NjVaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-8a0719bbfaf8066d57e8",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc212-g run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 1246,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:43.110Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTItZyIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjEzMDkuMTY0NzA5LCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6MTQ1OS45NzU0MTcsImR1cmF0aW9uTXMiOjE1MC44MTA3MDgwMDAwMDAyLCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0NC4yMzNaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0NC4zMzJaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-76a9be263300483fd43c",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc215-e run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 2019,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:43.145Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTUtZSIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjM0NDAuOTcwMjUsImNvbXBsZXRlZE1vbm90b25pY01zIjozNzE5LjAyNDc1LCJkdXJhdGlvbk1zIjoyNzguMDU0NTAwMDAwMDAwMiwicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDYuNDYwWiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDYuNjQ2WiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-d5aabe65fdaa180fd1a3",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc215-e run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1561,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:43.285Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTUtZSIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjE2MjMuMTgwOTU4LCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6MTk0My4xMzM1ODMsImR1cmF0aW9uTXMiOjMxOS45NTI2MjUwMDAwMDAxLCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0NC42ODJaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0NC45MjlaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-5beeeff15bd823ea6fe9",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc218-f run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 1682,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:43.316Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTgtZiIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjIxMTguNjgxNTQxLCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6MjMxMi44MzUzMzMsImR1cmF0aW9uTXMiOjE5NC4xNTM3OTIwMDAwMDAwNywicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDUuMjI0WiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDUuMzYyWiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-60bbeef3837a7034c985",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc218-f run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 786,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:44.816Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTgtZiIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjIyMjcuMTM2Mzc1LCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6MjM0Ny4wMjIzNzUsImR1cmF0aW9uTXMiOjExOS44ODU5OTk5OTk5OTk5Nywicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDUuMTM3WiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDUuMjIzWiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-7133c1281625eb46df47",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc222-g run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 884,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:45.414Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMjItZyIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjI3NzQuNzY0OTE3LCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6Mjg4Ny4wMjEwODMsImR1cmF0aW9uTXMiOjExMi4yNTYxNjYwMDAwMDAxMiwicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDUuODE2WiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDUuODkxWiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-3704f351851e795572f6",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc222-g run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 751,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:45.612Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMjItZyIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjI5NDguMTY3OTE3LCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6MzAzOC4zODk3OTIsImR1cmF0aW9uTXMiOjkwLjIyMTg3NDk5OTk5OTczLCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0NS44NThaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0NS45MjZaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-9ad6962c050fc5987c6c",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc223-f run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 906,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:45.808Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMjMtZiIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjMxNzcuOTUzMjUsImNvbXBsZXRlZE1vbm90b25pY01zIjozMzIwLjUwMjE2NiwiZHVyYXRpb25NcyI6MTQyLjU0ODkxNjAwMDAwMDIsInJvbGxiYWNrUGFzc2VkIjp0cnVlLCJzdGF0dXMiOiJjb21wbGV0ZWQiLCJzdGF0dXNVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQ2LjI4OFoiLCJuZWVkc1JldmlldyI6dHJ1ZSwibmVlZHNSZXZpZXdVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQ2LjM3OFoifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-c39b030dc288dc0350b1",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc223-f run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 785,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:46.305Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMjMtZiIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjM2MDkuOTI0NTQyLCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6MzcxNy4yNDU3MDgsImR1cmF0aW9uTXMiOjEwNy4zMjExNjU5OTk5OTk3Miwicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDYuNjQzWiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDYuNzI3WiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-c7bb434afaffe245f4bb",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc232-e run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 827,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:46.369Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMzItZSIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjM3OTcuMjE2ODM0LCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6MzkzMC4zMDg0MTcsImR1cmF0aW9uTXMiOjEzMy4wOTE1ODMwMDAwMDAzNiwicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDYuNzA4WiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDYuNzg2WiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-8812997009a7971e3fea",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc232-e run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 967,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:46.504Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMzItZSIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjQwNzEuMzc3MDQxLCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6NDIxOC44NjczNzUsImR1cmF0aW9uTXMiOjE0Ny40OTAzMzM5OTk5OTk2Miwicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDYuOTc1WiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDcuMDc5WiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-c479fdecce76610093b6",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc252-e run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 831,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:46.724Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyNTItZSIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjQwMTYuODYzNTgzLCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6NDEyNC45MzcxMjUsImR1cmF0aW9uTXMiOjEwOC4wNzM1NDIwMDAwMDA1NCwicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDcuMTA1WiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDcuMTgxWiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-84db2339d5a7ec11efe1",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc252-e run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 800,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:47.096Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyNTItZSIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjQ0MjUuNzM5NDE3LCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6NDUxOS43MTg4NzUsImR1cmF0aW9uTXMiOjkzLjk3OTQ1Nzk5OTk5OTgsInJvbGxiYWNrUGFzc2VkIjp0cnVlLCJzdGF0dXMiOiJjb21wbGV0ZWQiLCJzdGF0dXNVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQ3LjQ2MVoiLCJuZWVkc1JldmlldyI6dHJ1ZSwibmVlZHNSZXZpZXdVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQ3LjUyOVoifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-51b76a784e5fb91ddaf0",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc256-f run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1051,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:47.127Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyNTYtZiIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjQ1OTkuODY0NzkyLCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6NDg1MC4xODYxMjUsImR1cmF0aW9uTXMiOjI1MC4zMjEzMzI5OTk5OTk4Nywicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDcuNTY1WiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDcuNzU0WiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-f613697ef78e392514d3",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc256-f run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 842,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:47.207Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyNTYtZiIsImVuZ2luZVJldmlzaW9uIjoiMTUxLjAiLCJzdGFydGVkTW9ub3RvbmljTXMiOjQ2NjAuMTU3NjI1LCJjb21wbGV0ZWRNb25vdG9uaWNNcyI6NDgwNS4zMTkyNSwiZHVyYXRpb25NcyI6MTQ1LjE2MTYyNDk5OTk5OTczLCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0Ny41NzVaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0Ny42NzJaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-3c5633572bec08ae7c5f",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "storage failure leaves the textbook readable and disables only the controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 415,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:47.479Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-93ce327639a95a41a4a2",
+          "file": "learning-records.spec.ts",
+          "line": 116,
+          "column": 1
+        },
+        {
+          "title": "version 1 records migrate atomically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 520,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:47.560Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-b160b795a01627c3a62f",
+          "file": "learning-records.spec.ts",
+          "line": 128,
+          "column": 1
+        },
+        {
+          "title": "migration failure aborts database open and disables controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 465,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:47.911Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-721744a9bd5d267ed6df",
+          "file": "learning-records.spec.ts",
+          "line": 164,
+          "column": 1
+        },
+        {
+          "title": "problem details reach the review page with all extra filters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 639,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:47.912Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-98f7d3225731697b538f",
+          "file": "learning-records.spec.ts",
+          "line": 197,
+          "column": 1
+        },
+        {
+          "title": "restore requires an explicit policy after showing component details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 570,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:48.056Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-ce1db24bc75321d1aeb4",
+          "file": "learning-records.spec.ts",
+          "line": 210,
+          "column": 1
+        },
+        {
+          "title": "abc212-g run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 1251,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:48.629Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTItZyIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTIyMC43MDMwNDIsImNvbXBsZXRlZE1vbm90b25pY01zIjoxNDU3LjAyODU0MiwiZHVyYXRpb25NcyI6MjM2LjMyNTQ5OTk5OTk5OTkyLCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0OS42ODZaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0OS43NzZaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-8045878b7b3e87f8bdf5",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc212-g run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 1164,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:48.711Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTItZyIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTExMi4xNTI3NSwiY29tcGxldGVkTW9ub3RvbmljTXMiOjEyODkuNzExNjY3LCJkdXJhdGlvbk1zIjoxNzcuNTU4OTE3MDAwMDAwMDYsInJvbGxiYWNrUGFzc2VkIjp0cnVlLCJzdGF0dXMiOiJjb21wbGV0ZWQiLCJzdGF0dXNVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQ5LjYzN1oiLCJuZWVkc1JldmlldyI6dHJ1ZSwibmVlZHNSZXZpZXdVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjQ5Ljc1MVoifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-66a4289d8400a4df478e",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc215-e run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1052,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:48.890Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTUtZSIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTIwNy40Nzg4MzMsImNvbXBsZXRlZE1vbm90b25pY01zIjoxMzA5LjAxMjUsImR1cmF0aW9uTXMiOjEwMS41MzM2NjcwMDAwMDAxNSwicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDkuODYyWiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NDkuOTI5WiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-bc14b26cee4e5abf5efe",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc215-e run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1055,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:49.135Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTUtZSIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTE2NS4xMTE5MTcsImNvbXBsZXRlZE1vbm90b25pY01zIjoxMjk4LjcyMjIwOCwiZHVyYXRpb25NcyI6MTMzLjYxMDI5MDk5OTk5OTk2LCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo0OS45ODFaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MC4wNjNaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-24210029f6943f0ec858",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc218-f run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 1025,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:49.228Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTgtZiIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTIyNS4xMDI2NjYsImNvbXBsZXRlZE1vbm90b25pY01zIjoxMzcwLjU3ODMzMywiZHVyYXRpb25NcyI6MTQ1LjQ3NTY2Njk5OTk5OTkzLCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MC4xMjFaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MC4yMTNaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-7d84535b92853c591290",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc218-f run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 655,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:50.055Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTgtZiIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTg5OC40MzY4MzMsImNvbXBsZXRlZE1vbm90b25pY01zIjoxOTY3LjAxMzQxNywiZHVyYXRpb25NcyI6NjguNTc2NTgzOTk5OTk5OTEsInJvbGxiYWNrUGFzc2VkIjp0cnVlLCJzdGF0dXMiOiJjb21wbGV0ZWQiLCJzdGF0dXNVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjUwLjM5NloiLCJuZWVkc1JldmlldyI6dHJ1ZSwibmVlZHNSZXZpZXdVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjUwLjQ0M1oifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-131468ef1d9dedc15e3f",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc222-g run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 721,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:50.102Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMjItZyIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MjAxNS45MTc2MjUsImNvbXBsZXRlZE1vbm90b25pY01zIjoyMTQ3LjYzNTA0MiwiZHVyYXRpb25NcyI6MTMxLjcxNzQxNjk5OTk5OTg0LCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MC40MTRaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MC41MTFaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-0bbdd112f18301dec673",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc222-g run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 617,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:50.234Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMjItZyIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTg4My41OTU4NzUsImNvbXBsZXRlZE1vbm90b25pY01zIjoyMDAwLjQ3NDA0MSwiZHVyYXRpb25NcyI6MTE2Ljg3ODE2NTk5OTk5OTk2LCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MC41MzJaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MC42MDlaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-bdbb92370153aa036647",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc223-f run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 718,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:50.432Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMjMtZiIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTkyNi4xNTg1NDIsImNvbXBsZXRlZE1vbm90b25pY01zIjoyMDEzLjc0NDUsImR1cmF0aW9uTXMiOjg3LjU4NTk1ODAwMDAwMDEyLCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MC43NTJaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MC44MDVaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-8b267d2ed75e278c8746",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc223-f run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 666,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:50.547Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMjMtZiIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MTk1NS40Mzc0NTgsImNvbXBsZXRlZE1vbm90b25pY01zIjoyMDM2LjYzMTUsImR1cmF0aW9uTXMiOjgxLjE5NDA0MTk5OTk5OTg1LCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MC44NDNaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MC44OThaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-67c05c219ae8c128c55c",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc232-e run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 656,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:50.722Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMzItZSIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MjU1Ni4wMTQwNDIsImNvbXBsZXRlZE1vbm90b25pY01zIjoyNjM2LjUzMzg3NSwiZHVyYXRpb25NcyI6ODAuNTE5ODMzMDAwMDAwMjksInJvbGxiYWNrUGFzc2VkIjp0cnVlLCJzdGF0dXMiOiJjb21wbGV0ZWQiLCJzdGF0dXNVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjUxLjA1OVoiLCJuZWVkc1JldmlldyI6dHJ1ZSwibmVlZHNSZXZpZXdVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjUxLjEwOFoifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-a4b6c473a573f649f88a",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc232-e run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 618,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:50.838Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyMzItZSIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MjcyMi44MzA3NSwiY29tcGxldGVkTW9ub3RvbmljTXMiOjI3OTguODYwMzMzLCJkdXJhdGlvbk1zIjo3Ni4wMjk1ODMsInJvbGxiYWNrUGFzc2VkIjp0cnVlLCJzdGF0dXMiOiJjb21wbGV0ZWQiLCJzdGF0dXNVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjUxLjEyM1oiLCJuZWVkc1JldmlldyI6dHJ1ZSwibmVlZHNSZXZpZXdVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjUxLjE3OVoifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-e9b46f16d798c86b4034",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc252-e run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 575,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:50.869Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyNTItZSIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MjUwMy44OTI2NjYsImNvbXBsZXRlZE1vbm90b25pY01zIjoyNjA0LjYxMTU0MSwiZHVyYXRpb25NcyI6MTAwLjcxODg3NTAwMDAwMDAzLCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MS4xNTNaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MS4yMjRaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-a92c26a02717ef22f3ed",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc252-e run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 637,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:51.161Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyNTItZSIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MjYwMy45NzU3MDgsImNvbXBsZXRlZE1vbm90b25pY01zIjoyNzE3LjQyMTkxNywiZHVyYXRpb25NcyI6MTEzLjQ0NjIwOTAwMDAwMDE4LCJyb2xsYmFja1Bhc3NlZCI6dHJ1ZSwic3RhdHVzIjoiY29tcGxldGVkIiwic3RhdHVzVXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MS40MzJaIiwibmVlZHNSZXZpZXciOnRydWUsIm5lZWRzUmV2aWV3VXBkYXRlZEF0IjoiMjAyNi0wNy0yOVQxMzoxNzo1MS41MDZaIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-1d5c57acb312b8b6cd6b",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc256-f run 1 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 612,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:51.238Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyNTYtZiIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MjY0MC45NzkyOTEsImNvbXBsZXRlZE1vbm90b25pY01zIjoyNzA2LjQyODc5MSwiZHVyYXRpb25NcyI6NjUuNDQ5NDk5OTk5OTk5NzIsInJvbGxiYWNrUGFzc2VkIjp0cnVlLCJzdGF0dXMiOiJjb21wbGV0ZWQiLCJzdGF0dXNVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjUxLjUyN1oiLCJuZWVkc1JldmlldyI6dHJ1ZSwibmVlZHNSZXZpZXdVcGRhdGVkQXQiOiIyMDI2LTA3LTI5VDEzOjE3OjUxLjU3M1oifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-d25a5ede2427af15f33a",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "abc256-f run 2 uses the shared learning-record contract and persists both actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 602,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:51.391Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "learning-record-run",
+                      "contentType": "application/json",
+                      "body": "eyJwcm9ibGVtSWQiOiJhYmMyNTYtZiIsImVuZ2luZVJldmlzaW9uIjoiMjYuNSIsInN0YXJ0ZWRNb25vdG9uaWNNcyI6MzE3OS41NTcyNSwiY29tcGxldGVkTW9ub3RvbmljTXMiOjMyNjguMTUwNTQyLCJkdXJhdGlvbk1zIjo4OC41OTMyOTIwMDAwMDAwMiwicm9sbGJhY2tQYXNzZWQiOnRydWUsInN0YXR1cyI6ImNvbXBsZXRlZCIsInN0YXR1c1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NTEuNjg1WiIsIm5lZWRzUmV2aWV3Ijp0cnVlLCJuZWVkc1Jldmlld1VwZGF0ZWRBdCI6IjIwMjYtMDctMjlUMTM6MTc6NTEuNzQwWiJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-441072580600fefec582",
+          "file": "learning-records.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "storage failure leaves the textbook readable and disables only the controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 426,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:51.461Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-8e7982bfe70f0519ec0b",
+          "file": "learning-records.spec.ts",
+          "line": 116,
+          "column": 1
+        },
+        {
+          "title": "version 1 records migrate atomically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 456,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:51.465Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-310f56720d14111625bc",
+          "file": "learning-records.spec.ts",
+          "line": 128,
+          "column": 1
+        },
+        {
+          "title": "migration failure aborts database open and disables controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 459,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:51.812Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-c62ebc765b48e23c65a2",
+          "file": "learning-records.spec.ts",
+          "line": 164,
+          "column": 1
+        },
+        {
+          "title": "problem details reach the review page with all extra filters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 4,
+                  "status": "passed",
+                  "duration": 512,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:51.865Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-1bb3dd118db779a7db0b",
+          "file": "learning-records.spec.ts",
+          "line": 197,
+          "column": 1
+        },
+        {
+          "title": "restore requires an explicit policy after showing component details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 492,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-29T13:17:51.898Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d3d1876ec6868033c2d-19e6528cc5cbbaa0bb9c",
+          "file": "learning-records.spec.ts",
+          "line": 210,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-07-29T13:17:39.889Z",
+    "duration": 12536.802000000001,
+    "expected": 63,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

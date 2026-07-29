@@ -1,17 +1,24 @@
 import { useEffect, useState } from 'react';
 
-import { previewCatalog } from '../lib/catalog/preview-ui-catalog.js';
+import type { PreviewProblem } from '../lib/catalog/preview-ui-catalog.js';
 import { openLearningRecordDatabase } from '../lib/learning-records/database.js';
 import { joinAndFilterLearningRecords } from '../lib/learning-records/filter.js';
 import { listLearningRecords } from '../lib/learning-records/store.js';
+import type { LearningStatus } from '../lib/learning-records/types.js';
 
 interface Props {
   readonly base: string;
+  readonly learningUnits: readonly { readonly id: string; readonly title: string }[];
+  readonly problems: readonly PreviewProblem[];
+  readonly tags: readonly { readonly id: string; readonly name: string }[];
 }
 
-export default function ReviewProblemList({ base }: Props) {
+export default function ReviewProblemList({ base, learningUnits, problems, tags }: Props) {
   const [contest, setContest] = useState('');
   const [slot, setSlot] = useState('');
+  const [tag, setTag] = useState('');
+  const [unit, setUnit] = useState('');
+  const [status, setStatus] = useState<LearningStatus | ''>('');
   const [items, setItems] = useState<ReturnType<typeof joinAndFilterLearningRecords>>([]);
   const [message, setMessage] = useState('復習対象を読み込んでいます。');
 
@@ -24,9 +31,12 @@ export default function ReviewProblemList({ base }: Props) {
         const records = await listLearningRecords(opened);
         if (active) {
           setItems(
-            joinAndFilterLearningRecords(previewCatalog.problems, records, {
+            joinAndFilterLearningRecords(problems, records, {
               contest,
               slot,
+              tag,
+              unit,
+              status,
               needsReview: true,
             }),
           );
@@ -40,7 +50,7 @@ export default function ReviewProblemList({ base }: Props) {
       active = false;
       database?.close();
     };
-  }, [contest, slot]);
+  }, [contest, problems, slot, status, tag, unit]);
 
   const prefix = base === '/' ? '' : base.replace(/\/$/u, '');
   return (
@@ -55,9 +65,55 @@ export default function ReviewProblemList({ base }: Props) {
           }}
         >
           <option value="">すべて</option>
-          {[...new Set(previewCatalog.problems.map(({ contestId }) => contestId))].map((id) => (
+          {[...new Set(problems.map(({ contestId }) => contestId))].map((id) => (
             <option key={id}>{id}</option>
           ))}
+        </select>
+      </label>
+      <label>
+        典型タグ
+        <select
+          value={tag}
+          onChange={(event) => {
+            setTag(event.target.value);
+          }}
+        >
+          <option value="">すべて</option>
+          {tags.map(({ id, name }) => (
+            <option key={id} value={id}>
+              {name}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label>
+        学習単位
+        <select
+          value={unit}
+          onChange={(event) => {
+            setUnit(event.target.value);
+          }}
+        >
+          <option value="">すべて</option>
+          {learningUnits.map(({ id, title }) => (
+            <option key={id} value={id}>
+              {title}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label>
+        学習状況
+        <select
+          value={status}
+          onChange={(event) => {
+            setStatus(event.target.value as LearningStatus | '');
+          }}
+        >
+          <option value="">すべて</option>
+          <option value="unstarted">未着手</option>
+          <option value="in_progress">学習中</option>
+          <option value="completed">修了</option>
         </select>
       </label>
       <label>
@@ -69,7 +125,7 @@ export default function ReviewProblemList({ base }: Props) {
           }}
         >
           <option value="">すべて</option>
-          {[...new Set(previewCatalog.problems.map(({ label }) => label))].map((label) => (
+          {[...new Set(problems.map(({ label }) => label))].map((label) => (
             <option key={label}>{label}</option>
           ))}
         </select>

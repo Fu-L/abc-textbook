@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { openLearningRecordDatabase } from '../lib/learning-records/database.js';
+import { formatLearningRecordTimestamp } from '../lib/learning-records/format-timestamp.js';
 import {
   getLearningRecord,
   updateLearningStatus,
@@ -21,19 +22,6 @@ const statusLabels: Readonly<Record<LearningStatus, string>> = {
   in_progress: '学習中',
   completed: '修了',
 };
-
-function formatTimestamp(value: string | null) {
-  if (!value) return '更新記録なし';
-  return new Intl.DateTimeFormat('ja-JP', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    timeZoneName: 'short',
-  }).format(new Date(value));
-}
 
 export default function LearningRecordControl({ problemId }: Props) {
   const [database, setDatabase] = useState<LearningRecordDatabase | null>(null);
@@ -124,7 +112,7 @@ export default function LearningRecordControl({ problemId }: Props) {
           ))}
         </select>
       </label>
-      <p>状況更新: {formatTimestamp(record?.statusUpdatedAt ?? null)}</p>
+      <p>状況更新: {formatLearningRecordTimestamp(record?.statusUpdatedAt ?? null)}</p>
       <label>
         <input
           type="checkbox"
@@ -134,7 +122,7 @@ export default function LearningRecordControl({ problemId }: Props) {
         />
         要復習
       </label>
-      <p>復習設定更新: {formatTimestamp(record?.needsReviewUpdatedAt ?? null)}</p>
+      <p>復習設定更新: {formatLearningRecordTimestamp(record?.needsReviewUpdatedAt ?? null)}</p>
       <p role={unavailable ? 'alert' : 'status'} aria-live="polite">
         {message}
       </p>

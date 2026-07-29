@@ -33,6 +33,27 @@ describe('learning record backup and restore', () => {
     expect(target.records.size).toBe(120);
   });
 
+  it('round-trips full orphaned records across catalog versions', async () => {
+    const orphan = record(0, {
+      status: 'in_progress',
+      statusUpdatedAt: '2026-07-29T08:00:00-04:00',
+      needsReview: true,
+      needsReviewUpdatedAt: '2026-07-29T21:30:00+09:00',
+    });
+    const backup = await exportLearningRecords(new InMemoryLearningRecordDatabase([orphan]), {
+      catalogVersion: '2026.07.1',
+      catalogProblemIds: new Set(),
+      exportedAt: '2026-07-29T22:00:00+09:00',
+    });
+    expect(backup.records).toEqual([orphan]);
+    expect(backup.orphanedProblemIds).toEqual([orphan.problemId]);
+    const target = new InMemoryLearningRecordDatabase();
+    const preview = previewLearningRecordImport(backup, [], new Set());
+    expect(preview.items[0]?.classification).toBe('unknown_problem_id');
+    await applyLearningRecordImport(target, preview, 'newer-wins');
+    expect(target.records.get(orphan.problemId)).toEqual(orphan);
+  });
+
   it('classifies all five outcomes and merges newer components independently with local tie wins', () => {
     const local = record(0, {
       status: 'in_progress',
@@ -88,5 +109,31 @@ describe('learning record backup and restore', () => {
       'すべて取り消しました',
     );
     expect(target.records.size).toBe(0);
+  });
+
+  it('re-reads the latest local record inside the apply transaction', async () => {
+    const oldLocal = record(0, { statusUpdatedAt: '2026-07-29T10:00:00+09:00' });
+    const incoming = record(0, {
+      status: 'in_progress',
+      statusUpdatedAt: '2026-07-29T11:00:00+09:00',
+    });
+    const preview = previewLearningRecordImport(
+      {
+        schemaVersion: '1.0.0',
+        exportedAt: '2026-07-29T12:30:00+09:00',
+        catalogVersionAtExport: '2026.07.1',
+        records: [incoming],
+        orphanedProblemIds: [],
+      },
+      [oldLocal],
+      new Set([incoming.problemId]),
+    );
+    const newerLocal = record(0, {
+      status: 'completed',
+      statusUpdatedAt: '2026-07-29T12:00:00+09:00',
+    });
+    const target = new InMemoryLearningRecordDatabase([newerLocal]);
+    await applyLearningRecordImport(target, preview, 'newer-wins');
+    expect(target.records.get(incoming.problemId)?.status).toBe('completed');
   });
 });

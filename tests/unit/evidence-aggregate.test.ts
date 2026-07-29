@@ -14,7 +14,7 @@ const sha = (character: string): string => character.repeat(64);
 const at = '2026-07-17T12:00:00+09:00';
 
 describe('fail-closed evidence aggregates', () => {
-  it('rejects duplicate/overlapping backup records and stale restore previews', () => {
+  it('rejects duplicate/lost orphan backup records and stale restore previews', () => {
     const record = {
       problemId: 'abc212-e',
       status: 'unstarted',
@@ -36,10 +36,19 @@ describe('fail-closed evidence aggregates', () => {
         schemaVersion: '1.0.0',
         exportedAt: at,
         catalogVersionAtExport: '2026.07.17',
-        records: [record],
+        records: [],
         orphanedProblemIds: ['abc212-e'],
       }).success,
     ).toBe(false);
+    expect(
+      LearningRecordBackupSchema.safeParse({
+        schemaVersion: '1.0.0',
+        exportedAt: at,
+        catalogVersionAtExport: '2026.07.17',
+        records: [record],
+        orphanedProblemIds: ['abc212-e'],
+      }).success,
+    ).toBe(true);
     expect(
       LearningRecordImportPreviewSchema.safeParse({
         schemaVersion: '1.0.0',

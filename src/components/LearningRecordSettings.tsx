@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { previewCatalog } from '../lib/catalog/preview-ui-catalog.js';
 import { openLearningRecordDatabase } from '../lib/learning-records/database.js';
 import { exportLearningRecordsJson } from '../lib/learning-records/export.js';
 import { applyLearningRecordImport } from '../lib/learning-records/import-apply.js';
@@ -11,13 +10,17 @@ import {
 import { listLearningRecords } from '../lib/learning-records/store.js';
 import type { LearningRecordDatabase } from '../lib/learning-records/types.js';
 
-const problemIds = new Set(previewCatalog.problems.map(({ id }) => id));
+interface Props {
+  readonly catalogProblemIds: readonly string[];
+  readonly catalogVersion: string;
+}
 
-export default function LearningRecordSettings() {
+export default function LearningRecordSettings({ catalogProblemIds, catalogVersion }: Props) {
+  const problemIds = new Set(catalogProblemIds);
   const [database, setDatabase] = useState<LearningRecordDatabase | null>(null);
   const [status, setStatus] = useState('保存状態を確認しています。');
   const [preview, setPreview] = useState<LearningRecordImportPreview | null>(null);
-  const [policy, setPolicy] = useState<'newer-wins' | 'backup-wins' | 'cancel'>('newer-wins');
+  const [policy, setPolicy] = useState<'' | 'newer-wins' | 'backup-wins' | 'cancel'>('');
 
   useEffect(() => {
     let opened: LearningRecordDatabase | null = null;
@@ -37,7 +40,7 @@ export default function LearningRecordSettings() {
   const download = async () => {
     if (!database) return;
     const json = await exportLearningRecordsJson(database, {
-      catalogVersion: '2026.07.1',
+      catalogVersion,
       catalogProblemIds: problemIds,
     });
     const url = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
@@ -65,7 +68,7 @@ export default function LearningRecordSettings() {
   };
 
   const apply = async () => {
-    if (!database || !preview) return;
+    if (!database || !preview || !policy) return;
     try {
       const result = await applyLearningRecordImport(database, preview, policy);
       setStatus(
@@ -74,6 +77,7 @@ export default function LearningRecordSettings() {
           : `${String(result.appliedCount)}件を復元しました。`,
       );
       setPreview(null);
+      setPolicy('');
     } catch (error) {
       setStatus(error instanceof Error ? error.message : '復元に失敗しました。');
     }
@@ -112,7 +116,40 @@ export default function LearningRecordSettings() {
             <ul>
               {preview.items.map((item, index) => (
                 <li key={`${item.problemId}-${String(index)}`}>
-                  {item.problemId}: {item.classification}（{item.reason}）
+                  <strong>{item.problemId}</strong>: {item.classification}（{item.reason}）
+                  {item.incoming && (
+                    <dl>
+                      <dt>backup status</dt>
+                      <dd>
+                        {item.incoming.status} / {item.incoming.statusUpdatedAt ?? '更新記録なし'}
+                      </dd>
+                      <dt>local status</dt>
+                      <dd>
+                        {item.local?.status ?? '記録なし'} /{' '}
+                        {item.local?.statusUpdatedAt ?? '更新記録なし'}
+                      </dd>
+                      <dt>backup needsReview</dt>
+                      <dd>
+                        {String(item.incoming.needsReview)} /{' '}
+                        {item.incoming.needsReviewUpdatedAt ?? '更新記録なし'}
+                      </dd>
+                      <dt>local needsReview</dt>
+                      <dd>
+                        {item.local ? String(item.local.needsReview) : '記録なし'} /{' '}
+                        {item.local?.needsReviewUpdatedAt ?? '更新記録なし'}
+                      </dd>
+                    </dl>
+                  )}
+                  {item.components.length > 0 && (
+                    <ul>
+                      {item.components.map((component) => (
+                        <li key={component.component}>
+                          {component.component}: 採用元 {component.source} / 理由 {component.reason}{' '}
+                          / 結果 {String(component.result)}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
             </ul>
@@ -134,7 +171,20 @@ export default function LearningRecordSettings() {
               </label>
             ))}
           </fieldset>
-          <button type="button" disabled={!preview.applicable} onClick={() => void apply()}>
+          {policy && (
+            <p role="status">
+              {policy === 'newer-wins'
+                ? '各componentの実時刻を比較し、新しい側を採用します。同時刻はlocalを維持します。'
+                : policy === 'backup-wins'
+                  ? '表示したbackupの値と日時でlocal recordを上書きします。'
+                  : '変更を適用せずキャンセルします。'}
+            </p>
+          )}
+          <button
+            type="button"
+            disabled={!preview.applicable || !policy}
+            onClick={() => void apply()}
+          >
             方針を確認して適用
           </button>
         </section>

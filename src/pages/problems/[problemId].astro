@@ -1,6 +1,7 @@
 ---
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
 import LearningRecordControl from '../../components/LearningRecordControl.tsx';
+import LearningRecordTimestamp from '../../components/LearningRecordTimestamp.astro';
 import {
   getProblemGroup,
   previewCatalog,
@@ -74,6 +75,15 @@ const base = import.meta.env.BASE_URL;
       }
     </ul>
   </section>
-  <noscript><p>学習状況の保存にはJavaScriptが必要です。教材本文はそのまま読めます。</p></noscript>
+  <noscript>
+    <p>学習状況の保存にはJavaScriptが必要です。教材本文はそのまま読めます。</p>
+    <p><LearningRecordTimestamp value={null} label="状況更新" /></p>
+    <p><LearningRecordTimestamp value={null} label="復習設定更新" /></p>
+  </noscript>
   <LearningRecordControl client:load problemId={problem.id} />
+  <p>
+    <a href={withBase('/review/', base)}>要復習一覧</a> / <a
+      href={withBase('/settings/learning-records/', base)}>学習記録のバックアップ</a
+    >
+  </p>
 </TextbookLayout>
