@@ -46,6 +46,15 @@ describe('US5 update validation', () => {
     'staging/previews/initial-v1/candidate-pool.json',
     'staging/previews/initial-v1/taxonomy/index.json',
     'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
+    'src/content/sources/authoring/initial-v1.json',
+    '.agents/skills/abc-explanation-author/SKILL.md',
+    '.agents/skills/abc-explanation-author/references/input-output-contract.md',
+    '.agents/skills/abc-explanation-author/references/placement-policy.md',
+    '.agents/skills/abc-explanation-author/references/review-policy.md',
+    '.agents/skills/abc-explanation-author/references/source-policy.md',
+    '.agents/skills/abc-explanation-author/references/writing-policy.md',
+    '.agents/skills/abc-explanation-author/templates/abbreviated-explanation.md',
+    '.agents/skills/abc-explanation-author/templates/full-explanation.md',
   ];
 
   const copyReviewValidationArtifacts = async (outputRoot: string): Promise<void> => {
@@ -367,9 +376,6 @@ describe('US5 update validation', () => {
       await verifyPreviewReleaseSimulation({
         previewId: 'initial-v1',
         update: { updateId: update.updateId, publicationUpdate: update },
-        publicWrites: [],
-        productionReleaseMetadataWrites: [],
-        deploymentWrites: [],
       }),
     ).toEqual(verification);
   });
@@ -391,9 +397,6 @@ describe('US5 update validation', () => {
     const result = await verifyPreviewReleaseSimulation({
       previewId: 'initial-v1',
       update: { updateId: update.updateId, publicationUpdate: broken },
-      publicWrites: [],
-      productionReleaseMetadataWrites: [],
-      deploymentWrites: [],
     });
     expect(result).toMatchObject({ stagingClosed: false, aggregatePassed: false });
     expect(result.findings).toContain(

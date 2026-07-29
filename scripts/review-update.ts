@@ -1,8 +1,9 @@
 import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { canonicalDigest } from '../src/lib/domain/canonical-json.js';
+import { canonicalDigest, digestWithoutField } from '../src/lib/domain/canonical-json.js';
 import { HumanContentReviewEvidenceSchema } from '../src/lib/domain/schema-parts/review-evidence.js';
 import { PublicationUpdateSchema } from '../src/lib/domain/schema-parts/release.js';
 import {
@@ -193,16 +194,49 @@ export const validatePreviewUpdateReview = async (input: {
   };
   const candidatePool = (await readJson('staging/previews/initial-v1/candidate-pool.json')) as {
     readonly candidatePoolDigest: string;
+    readonly [key: string]: unknown;
   };
   const taxonomy = (await readJson('staging/previews/initial-v1/taxonomy/index.json')) as {
     readonly taxonomyDigest: string;
+    readonly [key: string]: unknown;
   };
   const skillManifest = (await readJson(
     'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
   )) as {
     readonly authoringSkillVersion: string;
     readonly authoringSkillDigest: string;
+    readonly authoringSkillName: string;
+    readonly sourceNormalizationVersion: string;
+    readonly artifacts: readonly { readonly path: string; readonly digest: string }[];
+    readonly sourcePacket: { readonly path: string; readonly digest: string };
+    readonly inputContract: unknown;
+    readonly outputContract: unknown;
+    readonly reviewPolicy: unknown;
   };
+  const sourcePacket = (await readJson(skillManifest.sourcePacket.path)) as Record<string, unknown>;
+  const skillArtifacts = await Promise.all(
+    skillManifest.artifacts.map(async (artifact) => ({
+      path: artifact.path,
+      digest: createHash('sha256')
+        .update(await readFile(path.join(root, artifact.path)))
+        .digest('hex'),
+    })),
+  );
+  const sourcePacketDigest = canonicalDigest(
+    Object.fromEntries(
+      Object.entries(sourcePacket).filter(([key]) => key !== 'authoringSkillDigest'),
+    ),
+  );
+  const calculatedSkillDigest = canonicalDigest({
+    authoringSkillName: skillManifest.authoringSkillName,
+    authoringSkillVersion: skillManifest.authoringSkillVersion,
+    sourceNormalizationVersion: skillManifest.sourceNormalizationVersion,
+    artifacts: skillArtifacts,
+    sourcePacketDigest,
+    inputContract: skillManifest.inputContract,
+    outputContract: skillManifest.outputContract,
+    reviewPolicy: skillManifest.reviewPolicy,
+  });
   if (
     verification.updateId !== update.updateId ||
     verification.publicationUpdateDigest !== canonicalDigest(update)
@@ -222,13 +256,19 @@ export const validatePreviewUpdateReview = async (input: {
     component.manifestDigest === previewManifest.manifestDigest &&
     component.candidatePoolDigest === previewManifest.candidatePoolDigest &&
     component.candidatePoolDigest === candidatePool.candidatePoolDigest &&
+    digestWithoutField(candidatePool, 'candidatePoolDigest') ===
+      candidatePool.candidatePoolDigest &&
     canonicalDigest([...component.problemIds].sort()) ===
       canonicalDigest([...previewManifest.selectedProblemIds].sort()) &&
     canonicalDigest([...component.sourceRevisionIds].sort()) ===
       canonicalDigest([...previewManifest.sourceRevisionIds].sort()) &&
     component.provisionalTaxonomyDigest === taxonomy.taxonomyDigest &&
+    digestWithoutField(taxonomy, 'taxonomyDigest') === taxonomy.taxonomyDigest &&
     component.authoringSkillVersion === skillManifest.authoringSkillVersion &&
-    component.authoringSkillDigest === skillManifest.authoringSkillDigest;
+    component.authoringSkillDigest === skillManifest.authoringSkillDigest &&
+    canonicalDigest(skillArtifacts) === canonicalDigest(skillManifest.artifacts) &&
+    sourcePacketDigest === skillManifest.sourcePacket.digest &&
+    calculatedSkillDigest === skillManifest.authoringSkillDigest;
   if (
     component.artifactDigest !== canonicalDigest(verification) ||
     subjectDigest !== evidence.subjectDigest ||

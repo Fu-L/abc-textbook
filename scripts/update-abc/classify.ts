@@ -130,6 +130,12 @@ export const deriveFrozenClassification = (input: {
   const groupPlacementProblemIds = input.groups.flatMap((group) =>
     group.placements.map(({ problemId }) => problemId),
   );
+  const groupDeclarationsAreComplete = input.groups.every((group) =>
+    sameSet(
+      group.problemIds,
+      group.placements.map(({ problemId }) => problemId),
+    ),
+  );
   const tagsResolve = input.index.tags.every((tag) =>
     tag.prerequisiteTagIds.every((id) => knownTagIds.has(id)),
   );
@@ -163,6 +169,7 @@ export const deriveFrozenClassification = (input: {
     sameSet(groupPlacementProblemIds, input.selectedProblemIds) &&
     sameSet(input.index.standardUnitOrder, unitIds) &&
     entityMatchesIndex &&
+    groupDeclarationsAreComplete &&
     prerequisitesResolve;
   const validProblemIds = new Set<string>();
   for (const problemId of input.selectedProblemIds) {

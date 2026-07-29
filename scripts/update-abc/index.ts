@@ -90,7 +90,11 @@ interface LearningArtifact {
 }
 
 interface TaxonomyIndex extends FrozenTaxonomyIndex {
-  readonly groupRefs: readonly { readonly path: string; readonly digest: string }[];
+  readonly groupRefs: readonly {
+    readonly domain: string;
+    readonly path: string;
+    readonly digest: string;
+  }[];
 }
 
 const readJson = async <T>(root: string, relativePath: string): Promise<T> =>
@@ -149,12 +153,13 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
     learningPaths.map((candidate) => readJson<LearningArtifact>(root, candidate)),
   );
   const taxonomyGroups = await Promise.all(
-    taxonomy.groupRefs.map(async ({ path: groupPath, digest }) => {
+    taxonomy.groupRefs.map(async ({ domain, path: groupPath, digest }) => {
       const group = await readJson<FrozenTaxonomyGroup & { readonly groupDigest: string }>(
         root,
         groupPath,
       );
       if (
+        group.domain !== domain ||
         group.groupDigest !== digest ||
         digestWithoutField(group as unknown as Record<string, unknown>, 'groupDigest') !== digest
       )
