@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import type { PreviewProblem } from '../lib/catalog/preview-ui-catalog.js';
+import { openLearningRecordDatabase } from '../lib/learning-records/database.js';
+import { joinAndFilterLearningRecords } from '../lib/learning-records/filter.js';
+import { listLearningRecords } from '../lib/learning-records/store.js';
+import type { LearningRecord, LearningStatus } from '../lib/learning-records/types.js';
 
 interface Props {
   readonly base: string;
@@ -15,42 +19,93 @@ export default function ProblemFilters({ base, problems, tagNames, unitTitles }:
   const [slot, setSlot] = useState('');
   const [tag, setTag] = useState('');
   const [unit, setUnit] = useState('');
-  const [applied, setApplied] = useState({ name: '', contest: '', slot: '', tag: '', unit: '' });
+  const [status, setStatus] = useState<LearningStatus | ''>('');
+  const [needsReview, setNeedsReview] = useState<'' | 'yes' | 'no'>('');
+  const [records, setRecords] = useState<LearningRecord[]>([]);
+  const [storageMessage, setStorageMessage] = useState('端末内の学習状態を読み込んでいます。');
+  const [applied, setApplied] = useState({
+    name: '',
+    contest: '',
+    slot: '',
+    tag: '',
+    unit: '',
+    status: '' as LearningStatus | '',
+    needsReview: '' as '' | 'yes' | 'no',
+  });
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
+    const statusParameter = params.get('status');
+    const parsedStatus: LearningStatus | '' =
+      statusParameter === 'unstarted' ||
+      statusParameter === 'in_progress' ||
+      statusParameter === 'completed'
+        ? statusParameter
+        : '';
+    const reviewParameter = params.get('needsReview');
+    const parsedReview: '' | 'yes' | 'no' =
+      reviewParameter === 'yes' || reviewParameter === 'no' ? reviewParameter : '';
     const next = {
       name: params.get('q') ?? '',
       contest: params.get('contest') ?? '',
       slot: params.get('slot') ?? '',
       tag: params.get('tag') ?? '',
       unit: params.get('unit') ?? '',
+      status: parsedStatus,
+      needsReview: parsedReview,
     };
     setName(next.name);
     setContest(next.contest);
     setSlot(next.slot);
     setTag(next.tag);
     setUnit(next.unit);
+    setStatus(next.status);
+    setNeedsReview(next.needsReview);
     setApplied(next);
+  }, []);
+  useEffect(() => {
+    let active = true;
+    let database: Awaited<ReturnType<typeof openLearningRecordDatabase>> | null = null;
+    void openLearningRecordDatabase()
+      .then(async (opened) => {
+        database = opened;
+        const saved = await listLearningRecords(opened);
+        if (active) {
+          setRecords(saved);
+          setStorageMessage('学習状態はこの端末内だけで絞り込みます。');
+        }
+      })
+      .catch(() => {
+        if (active) setStorageMessage('端末内保存を利用できないため、静的条件だけで絞り込みます。');
+      });
+    return () => {
+      active = false;
+      database?.close();
+    };
   }, []);
   const filtered = useMemo(
     () =>
-      problems.filter(
-        (problem) =>
-          (!applied.name ||
+      joinAndFilterLearningRecords(problems, records, {
+        contest: applied.contest,
+        slot: applied.slot,
+        tag: applied.tag,
+        unit: applied.unit,
+        status: applied.status,
+        needsReview: applied.needsReview === '' ? null : applied.needsReview === 'yes',
+      })
+        .map(({ problem }) => problem)
+        .filter(
+          (problem) =>
+            !applied.name ||
             `${problem.id} ${problem.title}`
               .toLocaleLowerCase('ja')
-              .includes(applied.name.toLocaleLowerCase('ja'))) &&
-          (!applied.contest || problem.contestId === applied.contest) &&
-          (!applied.slot || problem.label === applied.slot) &&
-          (!applied.tag || problem.tagIds.includes(applied.tag)) &&
-          (!applied.unit || problem.learningUnitId === applied.unit),
-      ),
-    [applied, problems],
+              .includes(applied.name.toLocaleLowerCase('ja')),
+        ),
+    [applied, problems, records],
   );
 
   const apply = () => {
-    const next = { name, contest, slot, tag, unit };
+    const next = { name, contest, slot, tag, unit, status, needsReview };
     setApplied(next);
     const params = new URLSearchParams();
     if (name) params.set('q', name);
@@ -58,6 +113,8 @@ export default function ProblemFilters({ base, problems, tagNames, unitTitles }:
     if (slot) params.set('slot', slot);
     if (tag) params.set('tag', tag);
     if (unit) params.set('unit', unit);
+    if (status) params.set('status', status);
+    if (needsReview) params.set('needsReview', needsReview);
     history.replaceState(null, '', `${location.pathname}${params.size ? `?${params}` : ''}`);
   };
   const reset = () => {
@@ -66,7 +123,9 @@ export default function ProblemFilters({ base, problems, tagNames, unitTitles }:
     setSlot('');
     setTag('');
     setUnit('');
-    setApplied({ name: '', contest: '', slot: '', tag: '', unit: '' });
+    setStatus('');
+    setNeedsReview('');
+    setApplied({ name: '', contest: '', slot: '', tag: '', unit: '', status: '', needsReview: '' });
     history.replaceState(null, '', location.pathname);
   };
 
@@ -149,6 +208,33 @@ export default function ProblemFilters({ base, problems, tagNames, unitTitles }:
             ))}
           </select>
         </label>
+        <label>
+          学習状況
+          <select
+            value={status}
+            onChange={(event) => {
+              setStatus(event.target.value as LearningStatus | '');
+            }}
+          >
+            <option value="">すべて</option>
+            <option value="unstarted">未着手</option>
+            <option value="in_progress">学習中</option>
+            <option value="completed">修了</option>
+          </select>
+        </label>
+        <label>
+          要復習
+          <select
+            value={needsReview}
+            onChange={(event) => {
+              setNeedsReview(event.target.value as '' | 'yes' | 'no');
+            }}
+          >
+            <option value="">すべて</option>
+            <option value="yes">要復習のみ</option>
+            <option value="no">要復習でないもの</option>
+          </select>
+        </label>
         <div>
           <button type="submit">適用</button>
           <button type="button" onClick={reset}>
@@ -156,6 +242,7 @@ export default function ProblemFilters({ base, problems, tagNames, unitTitles }:
           </button>
         </div>
       </form>
+      <p>{storageMessage}</p>
       <p aria-live="polite">
         {filtered.length > 0
           ? `${String(filtered.length)}件の問題が該当します。`

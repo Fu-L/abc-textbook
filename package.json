@@ -61,6 +61,7 @@
     "link:check": "npm run build && npm run link:check:built",
     "link:check:built": "tsx scripts/validate/links.ts",
     "verify:fast": "tsx scripts/verify/fast.ts",
+    "verify:learning-records": "tsx scripts/verify-learning-records.ts",
     "abc:update": "tsx scripts/update-abc/index.ts",
     "release:bootstrap": "tsx scripts/update-abc/bootstrap.ts",
     "verify:release": "tsx scripts/verify-release.ts",

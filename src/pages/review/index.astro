@@ -1,0 +1,16 @@
+---
+import ReviewProblemList from '../../components/ReviewProblemList.tsx';
+import TextbookLayout from '../../layouts/TextbookLayout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<TextbookLayout
+  title="要復習"
+  description="この端末で要復習にした問題"
+  breadcrumbs={[{ label: '要復習' }]}
+>
+  <h1>要復習</h1>
+  <p>初期条件は「要復習」です。追加条件を組み合わせて絞り込めます。</p>
+  <noscript><p>復習記録の表示にはJavaScriptが必要です。</p></noscript>
+  <ReviewProblemList client:load {base} />
+</TextbookLayout>

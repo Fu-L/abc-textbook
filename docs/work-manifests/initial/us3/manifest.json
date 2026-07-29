@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T079-us3",
+  "taskId": "T079",
+  "scopeDigest": "e8a284ec06196afb4b005025796e80d036f250bf87349d948708a69b8aa4b759",
+  "digest": "f17a645d3917174a0e3f1371c8212d58289a420091004ba13bb3043959d31850",
+  "changeKind": "mixed",
+  "requiredRequirementIds": ["FR-020", "FR-021", "SC-012", "SC-018"],
+  "learningOutcomeIds": ["outcome-us3-backup-restore", "outcome-us3-local-learning-records"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T079-learning-record-storage",
+      "changeKind": "mixed",
+      "paths": [
+        "src/components/LearningRecordControl.tsx",
+        "src/components/LearningRecordTimestamp.astro",
+        "src/lib/learning-records/database.ts",
+        "src/lib/learning-records/store.ts",
+        "src/lib/learning-records/types.ts",
+        "tests/integration/learning-record-control.test.ts",
+        "tests/unit/learning-record-store.test.ts"
+      ],
+      "itemIds": [
+        "us3.independent-actions",
+        "us3.indexeddb",
+        "us3.storage-failure",
+        "us3.timestamp"
+      ],
+      "requirementIds": ["FR-020", "SC-012"],
+      "learningOutcomeIds": ["outcome-us3-local-learning-records"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-us3-e2e", "check-us3-unit"],
+      "evidenceRoles": ["learning_record_control_test"],
+      "maintenanceBenefit": "Problem ID keyed shared storage and import contracts keep preview and future full-corpus routes on one implementation path.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T079-learning-record-backup",
+      "changeKind": "mixed",
+      "paths": [
+        "src/components/LearningRecordSettings.tsx",
+        "src/components/ReviewProblemList.tsx",
+        "src/lib/learning-records/export.ts",
+        "src/lib/learning-records/filter.ts",
+        "src/lib/learning-records/import-apply.ts",
+        "src/lib/learning-records/import-preview.ts",
+        "src/pages/review/index.astro",
+        "src/pages/settings/learning-records.astro",
+        "tests/e2e/learning-records.spec.ts",
+        "tests/integration/learning-record-backup.test.ts"
+      ],
+      "itemIds": ["us3.backup", "us3.import-preview", "us3.review-filter", "us3.rollback"],
+      "requirementIds": ["FR-021", "SC-018"],
+      "learningOutcomeIds": ["outcome-us3-backup-restore"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": ["RU-T079-learning-record-storage"],
+      "checkIds": ["check-us3-e2e", "check-us3-integration"],
+      "evidenceRoles": ["learning_record_backup_test"],
+      "maintenanceBenefit": "Problem ID keyed shared storage and import contracts keep preview and future full-corpus routes on one implementation path.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": "Problem ID keyed shared storage and import contracts keep preview and future full-corpus routes on one implementation path.",
+  "state": "planned",
+  "createdAt": "2026-07-29T20:00:00+09:00",
+  "updatedAt": "2026-07-29T20:00:00+09:00"
+}

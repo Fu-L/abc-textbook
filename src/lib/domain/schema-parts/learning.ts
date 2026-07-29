@@ -1,7 +1,16 @@
 import { z } from 'zod';
 
 import { defineZodContractSchema, strictObject } from '../contract-schema.js';
-import { OffsetDateTimeSchema, ProblemIdSchema } from './catalog.js';
+import { isOffsetDateTime } from '../date-time.js';
+import {
+  OffsetDateTimeSchema as StructuralOffsetDateTimeSchema,
+  ProblemIdSchema,
+} from './content-common.js';
+
+const OffsetDateTimeSchema = StructuralOffsetDateTimeSchema.refine(
+  isOffsetDateTime,
+  'Invalid RFC 3339 date-time.',
+);
 
 export const LearningRecordSchema = strictObject({
   problemId: ProblemIdSchema,

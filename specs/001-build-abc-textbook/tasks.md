@@ -190,25 +190,25 @@ T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/w
 
 ### Tests for User Story 3
 
-- [ ] T079 [US3] Freeze the US3 learning-outcome review units before story changes and add failing IndexedDB schema, migration, default-state, and catalog-update preservation tests in `docs/work-manifests/initial/us3/manifest.json` and `tests/unit/learning-record-store.test.ts`
-- [ ] T080 [P] [US3] Add failing status/needsReview independent-transaction, timestamp, reload, and error-feedback component tests in `tests/integration/learning-record-control.test.ts`
-- [ ] T081 [P] [US3] Add failing five-class preview, component-wise newer-wins, tie, invalid-item, rollback, unknown-ID, and 100-record restore tests in `tests/integration/learning-record-backup.test.ts`
-- [ ] T082 [P] [US3] Add failing Chromium/Firefox/WebKit shared-contract E2E and 30-second operator-flow tests in `tests/e2e/learning-records.spec.ts`
+- [X] T079 [US3] Freeze the US3 learning-outcome review units before story changes and add failing IndexedDB schema, migration, default-state, and catalog-update preservation tests in `docs/work-manifests/initial/us3/manifest.json` and `tests/unit/learning-record-store.test.ts`
+- [X] T080 [P] [US3] Add failing status/needsReview independent-transaction, timestamp, reload, and error-feedback component tests in `tests/integration/learning-record-control.test.ts`
+- [X] T081 [P] [US3] Add failing five-class preview, component-wise newer-wins, tie, invalid-item, rollback, unknown-ID, and 100-record restore tests in `tests/integration/learning-record-backup.test.ts`
+- [X] T082 [P] [US3] Add failing Chromium/Firefox/WebKit shared-contract E2E and 30-second operator-flow tests in `tests/e2e/learning-records.spec.ts`
 
 ### Implementation for User Story 3
 
-- [ ] T083 [US3] Implement versioned IndexedDB opening, migrations, and catalog-independent Problem-ID records, and first run the same contract against the `initial-v1` preview catalog without changing Problem IDs in `src/lib/learning-records/database.ts` and `staging/previews/initial-v1/`; apply the full-corpus catalog only after T154
-- [ ] T084 [US3] Implement independent atomic status and needsReview actions with offset timestamps in `src/lib/learning-records/store.ts`
-- [ ] T085 [US3] Build the shared accessible learning-record control and no-JavaScript/IndexedDB-unavailable states in `src/components/LearningRecordControl.tsx`
-- [ ] T086 [US3] Implement stable localized date/time/timezone display and `更新記録なし` handling in `src/components/LearningRecordTimestamp.astro`
-- [ ] T087 [US3] Implement Problem-ID joins and combined contest/slot/tag/unit/status/needsReview filters in `src/lib/learning-records/filter.ts`
-- [ ] T088 [US3] Implement versioned privacy-minimal JSON export in `src/lib/learning-records/export.ts`
-- [ ] T089 [US3] Implement schema-first five-class import preview with component-level source/reason/result details in `src/lib/learning-records/import-preview.ts`
-- [ ] T090 [US3] Implement `newer-wins`, `backup-wins`, `cancel`, tie handling, and one-transaction rollback in `src/lib/learning-records/import-apply.ts`
-- [ ] T091 [US3] Build backup selection, preview, conflict-policy confirmation, apply result, and storage status UI in `src/pages/settings/learning-records.astro`
-- [ ] T092 [US3] Build the initial `needsReview=1` page with extra filters and no external state transmission in `src/pages/review/index.astro`
-- [ ] T093 [US3] Run the shared-contract E2E, representative raw timing, reload, and 100+ record restore checks against the frozen `initial-v1` catalog and record preview-only evidence in `docs/verification/previews/initial-v1/learning-records/`
-- [ ] T094 [US3] Have the policy-selected reviewer confirm the `initial-v1` LearningRecord component coverage, resolve preview findings, and write current-subject mode-labeled evidence plus the component digest to `docs/verification/previews/initial-v1/components/learning-records.json` and `docs/reviews/human-content/previews/initial-v1/us3/`; full-corpus validation remains a T139/T146 concern
+- [X] T083 [US3] Implement versioned IndexedDB opening, migrations, and catalog-independent Problem-ID records, and first run the same contract against the `initial-v1` preview catalog without changing Problem IDs in `src/lib/learning-records/database.ts` and `staging/previews/initial-v1/`; apply the full-corpus catalog only after T154
+- [X] T084 [US3] Implement independent atomic status and needsReview actions with offset timestamps in `src/lib/learning-records/store.ts`
+- [X] T085 [US3] Build the shared accessible learning-record control and no-JavaScript/IndexedDB-unavailable states in `src/components/LearningRecordControl.tsx`
+- [X] T086 [US3] Implement stable localized date/time/timezone display and `更新記録なし` handling in `src/components/LearningRecordTimestamp.astro`
+- [X] T087 [US3] Implement Problem-ID joins and combined contest/slot/tag/unit/status/needsReview filters in `src/lib/learning-records/filter.ts`
+- [X] T088 [US3] Implement versioned privacy-minimal JSON export in `src/lib/learning-records/export.ts`
+- [X] T089 [US3] Implement schema-first five-class import preview with component-level source/reason/result details in `src/lib/learning-records/import-preview.ts`
+- [X] T090 [US3] Implement `newer-wins`, `backup-wins`, `cancel`, tie handling, and one-transaction rollback in `src/lib/learning-records/import-apply.ts`
+- [X] T091 [US3] Build backup selection, preview, conflict-policy confirmation, apply result, and storage status UI in `src/pages/settings/learning-records.astro`
+- [X] T092 [US3] Build the initial `needsReview=1` page with extra filters and no external state transmission in `src/pages/review/index.astro`
+- [X] T093 [US3] Run the shared-contract E2E, representative raw timing, reload, and 100+ record restore checks against the frozen `initial-v1` catalog and record preview-only evidence in `docs/verification/previews/initial-v1/learning-records/`
+- [X] T094 [US3] Have the policy-selected reviewer confirm the `initial-v1` LearningRecord component coverage, resolve preview findings, and write current-subject mode-labeled evidence plus the component digest to `docs/verification/previews/initial-v1/components/learning-records.json` and `docs/reviews/human-content/previews/initial-v1/us3/`; full-corpus validation remains a T139/T146 concern
 
 **Checkpoint**: Status and review state are independent, local-only, recoverable, and preserved across content changes.
 

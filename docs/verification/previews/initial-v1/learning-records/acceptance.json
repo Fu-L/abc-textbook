@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0.0",
+  "previewId": "initial-v1",
+  "catalogSubjectDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "problemIds": [
+    "abc212-g",
+    "abc215-e",
+    "abc218-f",
+    "abc222-g",
+    "abc223-f",
+    "abc232-e",
+    "abc252-e",
+    "abc256-f"
+  ],
+  "checks": {
+    "vitest": { "passedFiles": 39, "passedTests": 340, "failedTests": 0 },
+    "sharedContractE2e": { "passed": 51, "failed": 0, "engineRuns": 48, "storageFailureRuns": 3 },
+    "representativeTiming": {
+      "maximumObservedMs": 1900,
+      "requiredMaximumMs": 30000,
+      "passed": true
+    },
+    "reload": { "checkedEngineRuns": 48, "preservedEngineRuns": 48, "passed": true },
+    "restore": {
+      "recordCount": 120,
+      "restoredCount": 120,
+      "partialCountAfterInjectedFailure": 0,
+      "fiveClassPreview": true,
+      "passed": true
+    },
+    "privacy": {
+      "localOnly": true,
+      "externalTransmission": false,
+      "accountFields": false,
+      "syncFields": false
+    }
+  },
+  "e2eEvidencePath": "docs/verification/previews/initial-v1/learning-records/e2e.json",
+  "e2eEvidenceDigest": "cb778676612324c5632ff5c0cf9e7d6d2e9a9d07756d8dfa8e24e53322559c12",
+  "aggregatePassed": true,
+  "generatedAt": "2026-07-29T20:22:00+09:00"
+}

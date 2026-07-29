@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "3.0.0",
+  "id": "human-content-review-initial-v1-us3",
+  "scopeType": "merge",
+  "scopeId": "initial-v1-us3-learning-records",
+  "releaseVersion": null,
+  "subjectDigest": "b76c289e9fc6eff3b62c40d8abcb1445419ea42d1bade41480b0941767eac167",
+  "inventoryPath": "docs/work-manifests/initial/us3/manifest.json",
+  "inventoryDigest": "f17a645d3917174a0e3f1371c8212d58289a420091004ba13bb3043959d31850",
+  "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
+  "reviewMode": "self",
+  "applicableChecks": [
+    {
+      "checkId": "check-us3-unit",
+      "command": "npm test",
+      "subjectDigest": "b76c289e9fc6eff3b62c40d8abcb1445419ea42d1bade41480b0941767eac167",
+      "resultPath": "docs/verification/previews/initial-v1/learning-records/acceptance.json",
+      "resultDigest": "b6aa04b584420aa60cfdf266c11cc8d8e0f35184cf5e41053e4cf69d4c54f05c",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-29T20:22:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    },
+    {
+      "checkId": "check-us3-integration",
+      "command": "npm run test:integration -- learning-record",
+      "subjectDigest": "b76c289e9fc6eff3b62c40d8abcb1445419ea42d1bade41480b0941767eac167",
+      "resultPath": "docs/verification/previews/initial-v1/learning-records/acceptance.json",
+      "resultDigest": "b6aa04b584420aa60cfdf266c11cc8d8e0f35184cf5e41053e4cf69d4c54f05c",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-29T20:22:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    },
+    {
+      "checkId": "check-us3-e2e",
+      "command": "npm run test:e2e:built -- tests/e2e/learning-records.spec.ts",
+      "subjectDigest": "b76c289e9fc6eff3b62c40d8abcb1445419ea42d1bade41480b0941767eac167",
+      "resultPath": "docs/verification/previews/initial-v1/learning-records/e2e.json",
+      "resultDigest": "cb778676612324c5632ff5c0cf9e7d6d2e9a9d07756d8dfa8e24e53322559c12",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-29T20:22:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    },
+    {
+      "checkId": "check-us3-static-quality",
+      "command": "npm run check && npm run lint && npm run format:check",
+      "subjectDigest": "b76c289e9fc6eff3b62c40d8abcb1445419ea42d1bade41480b0941767eac167",
+      "resultPath": "docs/verification/previews/initial-v1/learning-records/acceptance.json",
+      "resultDigest": "b6aa04b584420aa60cfdf266c11cc8d8e0f35184cf5e41053e4cf69d4c54f05c",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-29T20:22:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    }
+  ],
+  "applicableCheckCount": 4,
+  "passedApplicableCheckCount": 4,
+  "reviewerExecutedCheckSetDigest": "b9a6eccbf13fbc58ec4d49a99dc2b8faaeb5ebd6626253e40ca700147ff003e8",
+  "authors": [
+    {
+      "personId": "person-maintainer",
+      "authoredItemIds": ["us3.local-learning-records", "us3.backup-restore"]
+    }
+  ],
+  "reviewer": { "personId": "person-maintainer", "mode": "self" },
+  "reviewItems": [
+    {
+      "reviewItemId": "human-review-item-us3-local-records",
+      "kind": "outcome_coverage",
+      "subjectPaths": [
+        "src/components/LearningRecordControl.tsx",
+        "src/lib/learning-records/database.ts",
+        "src/lib/learning-records/store.ts"
+      ],
+      "authorIds": ["person-maintainer"],
+      "learningOutcomeIds": ["outcome-us3-local-learning-records"],
+      "reviewerId": "person-maintainer",
+      "reviewBasis": "Problem IDだけを永続keyとし、独立transaction、offset timestamp、reload、no-JavaScript、storage unavailableの挙動を3 browserで確認した。",
+      "decision": "approved",
+      "findings": [],
+      "reviewedAt": "2026-07-29T20:22:00+09:00"
+    },
+    {
+      "reviewItemId": "human-review-item-us3-backup-restore",
+      "kind": "outcome_coverage",
+      "subjectPaths": [
+        "src/components/LearningRecordSettings.tsx",
+        "src/lib/learning-records/import-preview.ts",
+        "src/lib/learning-records/import-apply.ts"
+      ],
+      "authorIds": ["person-maintainer"],
+      "learningOutcomeIds": ["outcome-us3-backup-restore"],
+      "reviewerId": "person-maintainer",
+      "reviewBasis": "privacy-minimal export、5分類preview、component-wise newer-wins、backup-wins、cancel、tie、unknown ID、invalid item、120件復元、失敗時0件反映を確認した。",
+      "decision": "approved",
+      "findings": [],
+      "reviewedAt": "2026-07-29T20:22:00+09:00"
+    }
+  ],
+  "inventoryItemCount": 2,
+  "reviewedItemCount": 2,
+  "approvedItemCount": 2,
+  "changesRequestedItemCount": 0,
+  "unreviewedItemCount": 0,
+  "outcomeCoverageReview": {
+    "reviewerId": "person-maintainer",
+    "authorIds": ["person-maintainer"],
+    "decision": "confirmed",
+    "learningOutcomeIds": ["outcome-us3-backup-restore", "outcome-us3-local-learning-records"],
+    "subjectPaths": [
+      "docs/work-manifests/initial/us3/manifest.json",
+      "docs/verification/previews/initial-v1/learning-records/acceptance.json",
+      "docs/verification/previews/initial-v1/learning-records/e2e.json"
+    ],
+    "rationale": "US3の2 review unitは端末内記録操作とbackup/restoreの観察可能な成果を分離して網羅する。",
+    "noOutcomeImpactRationale": null,
+    "confirmedAt": "2026-07-29T20:22:00+09:00"
+  },
+  "outcomeCoverageConfirmed": true,
+  "aggregatePassed": true,
+  "generatedAt": "2026-07-29T20:22:00+09:00",
+  "evidenceDigest": "3100a5686be5ca420d69f820995c61b1c737b231a8f48eebfd0375d196495bc2"
+}
