@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "3.0.0",
+  "id": "human-content-review-initial-v1-us5-update-simulation",
+  "scopeType": "merge",
+  "scopeId": "initial-v1-us5-update-simulation",
+  "releaseVersion": null,
+  "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
+  "inventoryPath": "docs/work-manifests/initial/us5/manifest.json",
+  "inventoryDigest": "d2b77b9176417e5dcd9a4abe2a9f8396b8f3689d9621af97fa999a4452da6965",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewMode": "self",
+  "applicableChecks": [
+    {
+      "checkId": "check-us5-discovery",
+      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-04ea38e2db1d7b390448b807/manifest.json --simulation-only",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
+      "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
+      "resultDigest": "9d991162f73a9021430c552a9d658a8496056c68b3452a0cc2ca8446ce3b17ea",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-28T15:00:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    },
+    {
+      "checkId": "check-us5-prepare",
+      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-04ea38e2db1d7b390448b807/manifest.json --simulation-only",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
+      "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
+      "resultDigest": "9d991162f73a9021430c552a9d658a8496056c68b3452a0cc2ca8446ce3b17ea",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-28T15:00:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    },
+    {
+      "checkId": "check-us5-review",
+      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-04ea38e2db1d7b390448b807/manifest.json --simulation-only",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
+      "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
+      "resultDigest": "9d991162f73a9021430c552a9d658a8496056c68b3452a0cc2ca8446ce3b17ea",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-28T15:00:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    },
+    {
+      "checkId": "check-us5-validation",
+      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-04ea38e2db1d7b390448b807/manifest.json --simulation-only",
+      "subjectDigest": "d7c989bf3213613c66b1c235729afb375ed6242721e302ae4c914dcb7a98c498",
+      "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
+      "resultDigest": "9d991162f73a9021430c552a9d658a8496056c68b3452a0cc2ca8446ce3b17ea",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-07-28T15:00:00+09:00",
+      "executedByReviewerId": "person-maintainer"
+    }
+  ],
+  "applicableCheckCount": 4,
+  "passedApplicableCheckCount": 4,
+  "reviewerExecutedCheckSetDigest": "7659a3be25af4bf32e05195146a68954c526ad75d7e0ce778166e159818cb08a",
+  "authors": [
+    {
+      "personId": "person-maintainer",
+      "authoredItemIds": [
+        "human-review-item-ru-t112-discovery-acquisition",
+        "human-review-item-ru-t112-authoring-classification",
+        "human-review-item-ru-t112-validation-resume"
+      ]
+    }
+  ],
+  "reviewer": {
+    "personId": "person-maintainer",
+    "mode": "self"
+  },
+  "reviewItems": [
+    {
+      "reviewItemId": "human-review-item-ru-t112-discovery-acquisition",
+      "kind": "outcome_coverage",
+      "subjectPaths": [
+        "scripts/update-abc/acquire.ts",
+        "scripts/update-abc/discover.ts",
+        "tests/integration/update-discovery.test.ts"
+      ],
+      "authorIds": ["person-maintainer"],
+      "learningOutcomeIds": ["outcome-us5-discovery-acquisition"],
+      "reviewerId": "person-maintainer",
+      "reviewBasis": "The current fixture subject was checked with abc-explanation-author 1.1.1 (6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa).",
+      "decision": "approved",
+      "findings": [],
+      "reviewedAt": "2026-07-28T15:00:00+09:00"
+    },
+    {
+      "reviewItemId": "human-review-item-ru-t112-authoring-classification",
+      "kind": "outcome_coverage",
+      "subjectPaths": [
+        "scripts/update-abc/author.ts",
+        "scripts/update-abc/classify.ts",
+        "scripts/update-abc/stage.ts",
+        "tests/integration/update-prepare.test.ts"
+      ],
+      "authorIds": ["person-maintainer"],
+      "learningOutcomeIds": ["outcome-us5-authoring-classification"],
+      "reviewerId": "person-maintainer",
+      "reviewBasis": "The current fixture subject was checked with abc-explanation-author 1.1.1 (6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa).",
+      "decision": "approved",
+      "findings": [],
+      "reviewedAt": "2026-07-28T15:00:00+09:00"
+    },
+    {
+      "reviewItemId": "human-review-item-ru-t112-validation-resume",
+      "kind": "outcome_coverage",
+      "subjectPaths": [
+        "scripts/review-update.ts",
+        "scripts/update-abc/bootstrap.ts",
+        "scripts/update-abc/correction-impact.ts",
+        "scripts/update-abc/index.ts",
+        "scripts/update-abc/validate.ts",
+        "scripts/verify-release.ts",
+        "tests/integration/update-validation.test.ts"
+      ],
+      "authorIds": ["person-maintainer"],
+      "learningOutcomeIds": ["outcome-us5-validation-resume"],
+      "reviewerId": "person-maintainer",
+      "reviewBasis": "The current fixture subject was checked with abc-explanation-author 1.1.1 (6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa).",
+      "decision": "approved",
+      "findings": [],
+      "reviewedAt": "2026-07-28T15:00:00+09:00"
+    }
+  ],
+  "inventoryItemCount": 3,
+  "reviewedItemCount": 3,
+  "approvedItemCount": 3,
+  "changesRequestedItemCount": 0,
+  "unreviewedItemCount": 0,
+  "outcomeCoverageReview": {
+    "reviewerId": "person-maintainer",
+    "authorIds": ["person-maintainer"],
+    "decision": "confirmed",
+    "learningOutcomeIds": [
+      "outcome-us5-authoring-classification",
+      "outcome-us5-discovery-acquisition",
+      "outcome-us5-validation-resume"
+    ],
+    "subjectPaths": [
+      "scripts/update-abc/acquire.ts",
+      "scripts/update-abc/discover.ts",
+      "tests/integration/update-discovery.test.ts",
+      "scripts/update-abc/author.ts",
+      "scripts/update-abc/classify.ts",
+      "scripts/update-abc/stage.ts",
+      "tests/integration/update-prepare.test.ts",
+      "scripts/review-update.ts",
+      "scripts/update-abc/bootstrap.ts",
+      "scripts/update-abc/correction-impact.ts",
+      "scripts/update-abc/index.ts",
+      "scripts/update-abc/validate.ts",
+      "scripts/verify-release.ts",
+      "tests/integration/update-validation.test.ts"
+    ],
+    "rationale": "The frozen US5 review units cover discovery, authoring classification, and resumable validation.",
+    "noOutcomeImpactRationale": null,
+    "confirmedAt": "2026-07-28T15:00:00+09:00"
+  },
+  "outcomeCoverageConfirmed": true,
+  "aggregatePassed": true,
+  "generatedAt": "2026-07-28T15:00:00+09:00",
+  "evidenceDigest": "350df6584c37906775296500fe133aef1827c62a598e68de71dfa95b5c4d95b7"
+}

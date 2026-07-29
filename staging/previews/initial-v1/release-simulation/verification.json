@@ -1,0 +1,25 @@
+{
+  "previewId": "initial-v1",
+  "updateId": "update-04ea38e2db1d7b390448b807",
+  "publicationUpdateDigest": "a8e66f934576727fd99fb179b92650a68739fb41a9b7d4f0856de88dacd1bbf3",
+  "stagingClosed": true,
+  "publicWriteCount": 0,
+  "productionReleaseMetadataWriteCount": 0,
+  "deploymentWriteCount": 0,
+  "applicableCheckIds": [
+    "check-us5-discovery",
+    "check-us5-prepare",
+    "check-us5-review",
+    "check-us5-validation"
+  ],
+  "checks": [
+    "staging-public-closure",
+    "immutable-preview-digest",
+    "validation-inventory",
+    "no-production-release-metadata",
+    "no-deployment"
+  ],
+  "aggregatePassed": true,
+  "findings": [],
+  "immutablePreviewDigest": "f0ee0e4f95339f8f774f16f21ab725f3bcd76212d3b5892400a09fc67ede3a64"
+}

@@ -1,0 +1,26 @@
+{
+  "contests": [
+    {
+      "contestId": "abc500",
+      "startsAt": "2026-07-18T21:00:00+09:00",
+      "endsAt": "2026-07-18T22:40:00+09:00",
+      "tasks": [
+        { "label": "A", "sourceRevisionId": "source-abc500-a" },
+        { "label": "D", "sourceRevisionId": "source-abc500-d" },
+        { "label": "E", "sourceRevisionId": "source-abc500-e" },
+        { "label": "F", "sourceRevisionId": "source-abc500-f" },
+        { "label": "I", "sourceRevisionId": "source-abc500-i" },
+        { "label": "Ex", "sourceRevisionId": "source-abc500-ex" }
+      ]
+    },
+    {
+      "contestId": "abc501",
+      "startsAt": "2026-08-01T21:00:00+09:00",
+      "endsAt": "2026-08-01T22:40:00+09:00",
+      "tasks": [
+        { "label": "D", "sourceRevisionId": "source-abc501-d" },
+        { "label": "E", "sourceRevisionId": "source-abc501-e" }
+      ]
+    }
+  ]
+}

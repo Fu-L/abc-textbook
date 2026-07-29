@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T112-us5",
+  "taskId": "T112",
+  "scopeDigest": "0483f358915ec7140b405bc66e9971c8b8eb1c8330ad337a6c46b8bc11e6b933",
+  "digest": "d2b77b9176417e5dcd9a4abe2a9f8396b8f3689d9621af97fa999a4452da6965",
+  "changeKind": "mixed",
+  "requiredRequirementIds": [
+    "FR-023",
+    "FR-024",
+    "FR-025",
+    "FR-026",
+    "FR-028",
+    "SC-006",
+    "SC-007",
+    "SC-020"
+  ],
+  "learningOutcomeIds": [
+    "outcome-us5-authoring-classification",
+    "outcome-us5-discovery-acquisition",
+    "outcome-us5-validation-resume"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T112-discovery-acquisition",
+      "changeKind": "mixed",
+      "paths": [
+        "scripts/update-abc/acquire.ts",
+        "scripts/update-abc/discover.ts",
+        "tests/integration/update-discovery.test.ts"
+      ],
+      "itemIds": ["us5.discovery", "us5.metadata"],
+      "requirementIds": ["FR-024", "SC-006", "SC-020"],
+      "learningOutcomeIds": ["outcome-us5-discovery-acquisition"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-us5-discovery"],
+      "evidenceRoles": ["integration_test"],
+      "maintenanceBenefit": "One shared deterministic state machine serves preview simulation and later full-catalog updates without publishing preview-only taxonomy.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T112-authoring-classification",
+      "changeKind": "mixed",
+      "paths": [
+        "scripts/update-abc/author.ts",
+        "scripts/update-abc/classify.ts",
+        "scripts/update-abc/stage.ts",
+        "tests/integration/update-prepare.test.ts"
+      ],
+      "itemIds": ["us5.authoring", "us5.idempotency"],
+      "requirementIds": ["FR-023", "FR-025", "SC-007"],
+      "learningOutcomeIds": ["outcome-us5-authoring-classification"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": ["RU-T112-discovery-acquisition"],
+      "checkIds": ["check-us5-prepare"],
+      "evidenceRoles": ["integration_test"],
+      "maintenanceBenefit": "One shared deterministic state machine serves preview simulation and later full-catalog updates without publishing preview-only taxonomy.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T112-validation-resume",
+      "changeKind": "mixed",
+      "paths": [
+        "scripts/review-update.ts",
+        "scripts/update-abc/bootstrap.ts",
+        "scripts/update-abc/correction-impact.ts",
+        "scripts/update-abc/index.ts",
+        "scripts/update-abc/validate.ts",
+        "scripts/verify-release.ts",
+        "tests/integration/update-validation.test.ts"
+      ],
+      "itemIds": ["us5.correction-impact", "us5.review", "us5.validation-resume"],
+      "requirementIds": ["FR-024", "FR-026", "FR-028", "SC-006"],
+      "learningOutcomeIds": ["outcome-us5-validation-resume"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [
+        "RU-T112-authoring-classification",
+        "RU-T112-discovery-acquisition"
+      ],
+      "checkIds": ["check-us5-review", "check-us5-validation"],
+      "evidenceRoles": ["component_evidence"],
+      "maintenanceBenefit": "One shared deterministic state machine serves preview simulation and later full-catalog updates without publishing preview-only taxonomy.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": "One shared deterministic state machine serves preview simulation and later full-catalog updates without publishing preview-only taxonomy.",
+  "state": "planned",
+  "createdAt": "2026-07-28T15:00:00+09:00",
+  "updatedAt": "2026-07-28T15:00:00+09:00"
+}
