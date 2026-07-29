@@ -1,5 +1,6 @@
 import { canonicalDigest } from '../src/lib/domain/canonical-json.js';
 import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { PublicationUpdateSchema } from '../src/lib/domain/schema-parts/release.js';
 
@@ -8,7 +9,17 @@ export const isProductionReleaseEligible = (update: {
   readonly fixtureMode: boolean;
 }): boolean => update.state === 'ELIGIBLE_FOR_BATCH' && !update.fixtureMode;
 
-export const verifyPreviewReleaseSimulation = (input: {
+const sameSet = (left: readonly string[], right: readonly string[]): boolean => {
+  const rightSet = new Set(right);
+  return (
+    new Set(left).size === left.length &&
+    rightSet.size === right.length &&
+    left.length === right.length &&
+    left.every((value) => rightSet.has(value))
+  );
+};
+
+export const verifyPreviewReleaseSimulation = async (input: {
   readonly previewId: 'initial-v1';
   readonly update: {
     readonly updateId: string;
@@ -17,17 +28,55 @@ export const verifyPreviewReleaseSimulation = (input: {
   readonly publicWrites: readonly string[];
   readonly productionReleaseMetadataWrites: readonly string[];
   readonly deploymentWrites: readonly string[];
+  readonly repositoryRoot?: string;
 }) => {
   const findings: string[] = [];
   if (input.publicWrites.length > 0) findings.push('PUBLIC_WRITE_DETECTED');
   if (input.productionReleaseMetadataWrites.length > 0)
     findings.push('PRODUCTION_RELEASE_METADATA_WRITE_DETECTED');
   if (input.deploymentWrites.length > 0) findings.push('DEPLOYMENT_WRITE_DETECTED');
+  const root = path.resolve(input.repositoryRoot ?? process.cwd());
+  const update = PublicationUpdateSchema.parse(input.update.publicationUpdate);
+  const operationPaths = new Set<string>();
+  const affectedProblemIds = new Set<string>();
+  const problemOperationIds: string[] = [];
+  for (const operation of update.operations) {
+    if (operationPaths.has(operation.path))
+      findings.push(`DUPLICATE_OPERATION_PATH:${operation.path}`);
+    operationPaths.add(operation.path);
+    for (const problemId of operation.affectedProblemIds) affectedProblemIds.add(problemId);
+    if (operation.entityType === 'problem') problemOperationIds.push(operation.entityId);
+    const absolutePath = path.resolve(root, operation.path);
+    if (absolutePath !== root && !absolutePath.startsWith(`${root}${path.sep}`)) {
+      findings.push(`OPERATION_PATH_OUTSIDE_REPOSITORY:${operation.path}`);
+      continue;
+    }
+    try {
+      const artifact = JSON.parse(await readFile(absolutePath, 'utf8')) as unknown;
+      if (canonicalDigest(artifact) !== operation.afterDigest) {
+        findings.push(`OPERATION_DIGEST_MISMATCH:${operation.path}`);
+      }
+    } catch {
+      findings.push(`OPERATION_ARTIFACT_UNREADABLE:${operation.path}`);
+    }
+  }
+  if (!sameSet(problemOperationIds, update.targetProblemIds)) {
+    findings.push('PROBLEM_OPERATION_SCOPE_MISMATCH');
+  }
+  if (!sameSet([...affectedProblemIds], update.targetProblemIds)) {
+    findings.push('AFFECTED_PROBLEM_SCOPE_MISMATCH');
+  }
+  const closureFindings = findings.filter(
+    (finding) =>
+      finding.startsWith('OPERATION_') ||
+      finding.startsWith('DUPLICATE_OPERATION_') ||
+      finding.endsWith('_SCOPE_MISMATCH'),
+  );
   const inventory = {
     previewId: input.previewId,
     updateId: input.update.updateId,
     publicationUpdateDigest: canonicalDigest(input.update.publicationUpdate),
-    stagingClosed: true,
+    stagingClosed: closureFindings.length === 0,
     publicWriteCount: input.publicWrites.length,
     productionReleaseMetadataWriteCount: input.productionReleaseMetadataWrites.length,
     deploymentWriteCount: input.deploymentWrites.length,
@@ -72,7 +121,7 @@ if (isMain()) {
     const update = PublicationUpdateSchema.parse(
       JSON.parse(await readFile(manifestPath, 'utf8')) as unknown,
     );
-    const verification = verifyPreviewReleaseSimulation({
+    const verification = await verifyPreviewReleaseSimulation({
       previewId: 'initial-v1',
       update: { updateId: update.updateId, publicationUpdate: update },
       publicWrites: [],

@@ -5,6 +5,11 @@ import { pathToFileURL } from 'node:url';
 import { canonicalDigest } from '../src/lib/domain/canonical-json.js';
 import { HumanContentReviewEvidenceSchema } from '../src/lib/domain/schema-parts/review-evidence.js';
 import { PublicationUpdateSchema } from '../src/lib/domain/schema-parts/release.js';
+import {
+  componentEvidenceDigest,
+  componentSubjectDigest,
+  type ComponentEvidence,
+} from '../src/lib/preview/preview-snapshot.js';
 import { validateContentWorkManifest } from '../src/lib/validation/content-work-manifest.js';
 import {
   validateHumanContentReview,
@@ -179,10 +184,24 @@ export const validatePreviewUpdateReview = async (input: {
     readonly publicationUpdateDigest?: unknown;
     readonly applicableCheckIds?: readonly string[];
   };
-  const component = (await readJson(componentPath)) as {
-    readonly subjectDigest?: unknown;
-    readonly artifactDigest?: unknown;
-    readonly problemIds?: readonly string[];
+  const component = (await readJson(componentPath)) as ComponentEvidence;
+  const previewManifest = (await readJson('staging/previews/initial-v1/preview-manifest.json')) as {
+    readonly manifestDigest: string;
+    readonly candidatePoolDigest: string;
+    readonly selectedProblemIds: readonly string[];
+    readonly sourceRevisionIds: readonly string[];
+  };
+  const candidatePool = (await readJson('staging/previews/initial-v1/candidate-pool.json')) as {
+    readonly candidatePoolDigest: string;
+  };
+  const taxonomy = (await readJson('staging/previews/initial-v1/taxonomy/index.json')) as {
+    readonly taxonomyDigest: string;
+  };
+  const skillManifest = (await readJson(
+    'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
+  )) as {
+    readonly authoringSkillVersion: string;
+    readonly authoringSkillDigest: string;
   };
   if (
     verification.updateId !== update.updateId ||
@@ -190,11 +209,34 @@ export const validatePreviewUpdateReview = async (input: {
   ) {
     throw new Error('REVIEW_UPDATE_SUBJECT_MISMATCH');
   }
+  const { componentDigest, ...componentSubject } = component;
+  const {
+    subjectDigest,
+    checkResults: _checkResults,
+    reviewEvidence: _reviewEvidence,
+    ...currentSubject
+  } = componentSubject;
+  void _checkResults;
+  void _reviewEvidence;
+  const componentMatchesCurrentArtifacts =
+    component.manifestDigest === previewManifest.manifestDigest &&
+    component.candidatePoolDigest === previewManifest.candidatePoolDigest &&
+    component.candidatePoolDigest === candidatePool.candidatePoolDigest &&
+    canonicalDigest([...component.problemIds].sort()) ===
+      canonicalDigest([...previewManifest.selectedProblemIds].sort()) &&
+    canonicalDigest([...component.sourceRevisionIds].sort()) ===
+      canonicalDigest([...previewManifest.sourceRevisionIds].sort()) &&
+    component.provisionalTaxonomyDigest === taxonomy.taxonomyDigest &&
+    component.authoringSkillVersion === skillManifest.authoringSkillVersion &&
+    component.authoringSkillDigest === skillManifest.authoringSkillDigest;
   if (
     component.artifactDigest !== canonicalDigest(verification) ||
-    component.subjectDigest !== evidence.subjectDigest ||
-    canonicalDigest([...(component.problemIds ?? [])].sort()) !==
-      canonicalDigest([...update.targetProblemIds].sort())
+    subjectDigest !== evidence.subjectDigest ||
+    componentSubjectDigest(currentSubject) !== subjectDigest ||
+    componentEvidenceDigest(componentSubject) !== componentDigest ||
+    canonicalDigest([...component.problemIds].sort()) !==
+      canonicalDigest([...update.targetProblemIds].sort()) ||
+    !componentMatchesCurrentArtifacts
   ) {
     throw new Error('REVIEW_COMPONENT_SUBJECT_DIGEST_MISMATCH');
   }

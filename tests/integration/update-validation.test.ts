@@ -35,6 +35,26 @@ describe('US5 update validation', () => {
   const updateId = 'update-04ea38e2db1d7b390448b807';
   const evidencePath =
     'docs/reviews/human-content/previews/initial-v1/us5/update-simulation-review.json';
+  const componentPath = 'docs/verification/previews/initial-v1/components/update-simulation.json';
+  const reviewValidationPaths = [
+    evidencePath,
+    'docs/work-manifests/initial/us5/manifest.json',
+    componentPath,
+    'staging/previews/initial-v1/release-simulation/verification.json',
+    `staging/previews/initial-v1/release-simulation/${updateId}/manifest.json`,
+    'staging/previews/initial-v1/preview-manifest.json',
+    'staging/previews/initial-v1/candidate-pool.json',
+    'staging/previews/initial-v1/taxonomy/index.json',
+    'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
+  ];
+
+  const copyReviewValidationArtifacts = async (outputRoot: string): Promise<void> => {
+    for (const relativePath of reviewValidationPaths) {
+      const destination = path.join(outputRoot, relativePath);
+      await mkdir(path.dirname(destination), { recursive: true });
+      await copyFile(new URL(`../../${relativePath}`, import.meta.url), destination);
+    }
+  };
 
   it('enumerates every affected content and derived index surface', () => {
     const impact = enumerateCorrectionImpacts({
@@ -121,6 +141,32 @@ describe('US5 update validation', () => {
           ],
         },
       ],
+      index: {
+        problemIds: ['abc500-e'],
+        tags: [
+          { id: 'tag-basics', prerequisiteTagIds: [] },
+          { id: 'tag-graphs', prerequisiteTagIds: ['tag-basics'] },
+        ],
+        outcomes: [
+          { id: 'outcome-basics', prerequisiteOutcomeIds: [] },
+          { id: 'outcome-graphs', prerequisiteOutcomeIds: ['outcome-basics'] },
+        ],
+        units: [
+          { id: 'unit-basics', prerequisiteUnitIds: [] },
+          { id: 'unit-graphs', prerequisiteUnitIds: ['unit-basics'] },
+        ],
+        placements: [
+          {
+            problemId: 'abc500-e',
+            tagIds: ['tag-graphs'],
+            outcomeIds: ['outcome-graphs'],
+            unitIds: ['unit-graphs'],
+            sourceRevisionIds: ['source-abc500-e'],
+            classificationRationale: 'Shortest paths.',
+          },
+        ],
+        standardUnitOrder: ['unit-basics', 'unit-graphs'],
+      },
     } as const;
     expect(deriveFrozenClassification(base)).toMatchObject({
       proposals: [],
@@ -146,6 +192,17 @@ describe('US5 update validation', () => {
       validProblemIds: [],
       proposals: [expect.objectContaining({ problemId: 'abc500-e' })],
     });
+    const danglingPrerequisite = {
+      ...base,
+      index: {
+        ...base.index,
+        tags: [base.index.tags[0], { ...base.index.tags[1], prerequisiteTagIds: ['tag-missing'] }],
+      },
+    };
+    expect(deriveFrozenClassification(danglingPrerequisite)).toMatchObject({
+      taxonomyValid: false,
+      validProblemIds: [],
+    });
   });
 
   it('never admits fixture updates through the production release gate', () => {
@@ -159,19 +216,8 @@ describe('US5 update validation', () => {
 
   it('rejects review evidence whose trusted review-item scope was replaced', async () => {
     const outputRoot = await mkdtemp(path.join(tmpdir(), 'abc-review-scope-'));
-    const requiredPaths = [
-      evidencePath,
-      'docs/work-manifests/initial/us5/manifest.json',
-      'docs/verification/previews/initial-v1/components/update-simulation.json',
-      'staging/previews/initial-v1/release-simulation/verification.json',
-      `staging/previews/initial-v1/release-simulation/${updateId}/manifest.json`,
-    ];
     try {
-      for (const relativePath of requiredPaths) {
-        const destination = path.join(outputRoot, relativePath);
-        await mkdir(path.dirname(destination), { recursive: true });
-        await copyFile(new URL(`../../${relativePath}`, import.meta.url), destination);
-      }
+      await copyReviewValidationArtifacts(outputRoot);
       const evidence = JSON.parse(await readFile(path.join(outputRoot, evidencePath), 'utf8')) as {
         evidenceDigest: string;
         reviewItems: { reviewItemId: string }[];
@@ -192,6 +238,29 @@ describe('US5 update validation', () => {
           repositoryRoot: outputRoot,
         }),
       ).rejects.toThrow('REVIEW_ITEM_INVENTORY_INVALID');
+    } finally {
+      await rm(outputRoot, { recursive: true, force: true });
+    }
+  });
+
+  it('rejects stale component evidence digests', async () => {
+    const outputRoot = await mkdtemp(path.join(tmpdir(), 'abc-review-component-'));
+    try {
+      await copyReviewValidationArtifacts(outputRoot);
+      const component = JSON.parse(
+        await readFile(path.join(outputRoot, componentPath), 'utf8'),
+      ) as ComponentEvidence;
+      await writeFile(
+        path.join(outputRoot, componentPath),
+        `${JSON.stringify({ ...component, componentDigest: '0'.repeat(64) })}\n`,
+      );
+      await expect(
+        validatePreviewUpdateReview({
+          updateId,
+          evidencePath,
+          repositoryRoot: outputRoot,
+        }),
+      ).rejects.toThrow('REVIEW_COMPONENT_SUBJECT_DIGEST_MISMATCH');
     } finally {
       await rm(outputRoot, { recursive: true, force: true });
     }
@@ -295,7 +364,7 @@ describe('US5 update validation', () => {
       }),
     ).resolves.toMatchObject({ aggregatePassed: true });
     expect(
-      verifyPreviewReleaseSimulation({
+      await verifyPreviewReleaseSimulation({
         previewId: 'initial-v1',
         update: { updateId: update.updateId, publicationUpdate: update },
         publicWrites: [],
@@ -303,5 +372,32 @@ describe('US5 update validation', () => {
         deploymentWrites: [],
       }),
     ).toEqual(verification);
+  });
+
+  it('fails release simulation when an operation artifact is missing or stale', async () => {
+    const update = PublicationUpdateSchema.parse(
+      await json(
+        'staging/previews/initial-v1/release-simulation/update-04ea38e2db1d7b390448b807/manifest.json',
+      ),
+    );
+    const broken = {
+      ...update,
+      operations: update.operations.map((operation, index) =>
+        index === 0
+          ? { ...operation, path: 'staging/previews/initial-v1/missing.json' }
+          : operation,
+      ),
+    };
+    const result = await verifyPreviewReleaseSimulation({
+      previewId: 'initial-v1',
+      update: { updateId: update.updateId, publicationUpdate: broken },
+      publicWrites: [],
+      productionReleaseMetadataWrites: [],
+      deploymentWrites: [],
+    });
+    expect(result).toMatchObject({ stagingClosed: false, aggregatePassed: false });
+    expect(result.findings).toContain(
+      'OPERATION_ARTIFACT_UNREADABLE:staging/previews/initial-v1/missing.json',
+    );
   });
 });

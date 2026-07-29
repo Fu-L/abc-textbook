@@ -1,3 +1,5 @@
+import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
+
 export interface TechniqueCandidate {
   readonly problemId: string;
   readonly techniqueKey: string;
@@ -24,12 +26,42 @@ export interface FrozenTaxonomyGroup {
   readonly unit: { readonly id: string; readonly prerequisiteUnitIds: readonly string[] };
   readonly placements: readonly {
     readonly problemId: string;
+    readonly placementId?: string;
+    readonly id?: string;
     readonly tagIds: readonly string[];
     readonly outcomeIds: readonly string[];
     readonly unitIds: readonly string[];
     readonly sourceRevisionIds: readonly string[];
     readonly classificationRationale: string;
+    readonly [key: string]: unknown;
   }[];
+}
+
+interface FrozenTaxonomyTag {
+  readonly id: string;
+  readonly prerequisiteTagIds: readonly string[];
+  readonly [key: string]: unknown;
+}
+
+interface FrozenTaxonomyOutcome {
+  readonly id: string;
+  readonly prerequisiteOutcomeIds: readonly string[];
+  readonly [key: string]: unknown;
+}
+
+interface FrozenTaxonomyUnit {
+  readonly id: string;
+  readonly prerequisiteUnitIds: readonly string[];
+  readonly [key: string]: unknown;
+}
+
+export interface FrozenTaxonomyIndex {
+  readonly problemIds: readonly string[];
+  readonly tags: readonly FrozenTaxonomyTag[];
+  readonly outcomes: readonly FrozenTaxonomyOutcome[];
+  readonly units: readonly FrozenTaxonomyUnit[];
+  readonly placements: FrozenTaxonomyGroup['placements'];
+  readonly standardUnitOrder: readonly string[];
 }
 
 const sameSet = (left: readonly string[], right: readonly string[]): boolean => {
@@ -44,6 +76,7 @@ export const deriveFrozenClassification = (input: {
   readonly selectedProblemIds: readonly string[];
   readonly candidates: readonly FrozenClassificationCandidate[];
   readonly groups: readonly FrozenTaxonomyGroup[];
+  readonly index: FrozenTaxonomyIndex;
 }) => {
   const candidateByProblem = new Map(
     input.candidates.map((candidate) => [candidate.problemId, candidate]),
@@ -67,6 +100,70 @@ export const deriveFrozenClassification = (input: {
     }));
   });
   const classified = classifyTechniques(candidates, existingTaxonomy);
+  const uniqueIds = (values: readonly string[]): boolean => new Set(values).size === values.length;
+  const tagIds = input.index.tags.map(({ id }) => id);
+  const outcomeIds = input.index.outcomes.map(({ id }) => id);
+  const unitIds = input.index.units.map(({ id }) => id);
+  const knownTagIds = new Set(tagIds);
+  const knownOutcomeIds = new Set(outcomeIds);
+  const knownUnitIds = new Set(unitIds);
+  const unitOrder = new Map(input.index.standardUnitOrder.map((id, index) => [id, index]));
+  const entityMatchesIndex = input.groups.every((group) => {
+    const tag = input.index.tags.find(({ id }) => id === group.tag.id);
+    const outcome = input.index.outcomes.find(({ id }) => id === group.outcome.id);
+    const unit = input.index.units.find(({ id }) => id === group.unit.id);
+    return (
+      tag !== undefined &&
+      outcome !== undefined &&
+      unit !== undefined &&
+      canonicalDigest(tag) === canonicalDigest(group.tag) &&
+      canonicalDigest(outcome) === canonicalDigest(group.outcome) &&
+      canonicalDigest(unit) === canonicalDigest(group.unit) &&
+      group.placements.every((placement) => {
+        const indexed = input.index.placements.find(
+          ({ problemId }) => problemId === placement.problemId,
+        );
+        return indexed !== undefined && canonicalDigest(indexed) === canonicalDigest(placement);
+      })
+    );
+  });
+  const groupPlacementProblemIds = input.groups.flatMap((group) =>
+    group.placements.map(({ problemId }) => problemId),
+  );
+  const tagsResolve = input.index.tags.every((tag) =>
+    tag.prerequisiteTagIds.every((id) => knownTagIds.has(id)),
+  );
+  const outcomesResolve = input.index.outcomes.every((outcome) =>
+    outcome.prerequisiteOutcomeIds.every((id) => knownOutcomeIds.has(id)),
+  );
+  const unitsResolve = input.index.units.every((unit) => {
+    const unitPosition = unitOrder.get(unit.id);
+    return unit.prerequisiteUnitIds.every((id) => {
+      const prerequisitePosition = unitOrder.get(id);
+      return (
+        knownUnitIds.has(id) &&
+        prerequisitePosition !== undefined &&
+        unitPosition !== undefined &&
+        prerequisitePosition < unitPosition
+      );
+    });
+  });
+  const prerequisitesResolve = tagsResolve && outcomesResolve && unitsResolve;
+  const taxonomyValid =
+    uniqueIds(tagIds) &&
+    uniqueIds(outcomeIds) &&
+    uniqueIds(unitIds) &&
+    uniqueIds(input.groups.map(({ candidateOutcomeId }) => candidateOutcomeId)) &&
+    uniqueIds(groupPlacementProblemIds) &&
+    sameSet(input.index.problemIds, input.selectedProblemIds) &&
+    sameSet(
+      input.index.placements.map(({ problemId }) => problemId),
+      input.selectedProblemIds,
+    ) &&
+    sameSet(groupPlacementProblemIds, input.selectedProblemIds) &&
+    sameSet(input.index.standardUnitOrder, unitIds) &&
+    entityMatchesIndex &&
+    prerequisitesResolve;
   const validProblemIds = new Set<string>();
   for (const problemId of input.selectedProblemIds) {
     const candidate = candidateByProblem.get(problemId);
@@ -91,7 +188,7 @@ export const deriveFrozenClassification = (input: {
       sameSet(placement.unitIds, [group.unit.id]) &&
       placement.classificationRationale === classification.rationale
     ) {
-      validProblemIds.add(problemId);
+      if (taxonomyValid) validProblemIds.add(problemId);
     }
   }
   const taxonomyEdges: (readonly [string, string])[] = input.groups.flatMap((group) => [
@@ -103,6 +200,7 @@ export const deriveFrozenClassification = (input: {
     ...classified,
     validProblemIds: [...validProblemIds].sort(),
     taxonomyEdges,
+    taxonomyValid,
   };
 };
 

@@ -8,6 +8,7 @@ import {
   deriveFrozenClassification,
   type FrozenClassificationCandidate,
   type FrozenTaxonomyGroup,
+  type FrozenTaxonomyIndex,
 } from './classify.js';
 import { discoverContests } from './discover.js';
 import { bootstrapPreviewSeed } from './bootstrap.js';
@@ -88,16 +89,7 @@ interface LearningArtifact {
   };
 }
 
-interface TaxonomyIndex {
-  readonly problemIds: readonly string[];
-  readonly placements: readonly {
-    readonly problemId: string;
-    readonly placementId?: string;
-    readonly id?: string;
-    readonly tagIds: readonly string[];
-    readonly outcomeIds: readonly string[];
-    readonly unitIds: readonly string[];
-  }[];
+interface TaxonomyIndex extends FrozenTaxonomyIndex {
   readonly groupRefs: readonly { readonly path: string; readonly digest: string }[];
 }
 
@@ -329,6 +321,7 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
     selectedProblemIds: manifest.selectedProblemIds,
     candidates: candidatePool.candidates,
     groups: taxonomyGroups,
+    index: taxonomy,
   });
   const validClassificationIds = new Set(classification.validProblemIds);
   const placementByProblem = new Map(
@@ -356,6 +349,7 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
       const placement = placementByProblem.get(problemId);
       const inventory = inventoryEntries.find((entry) => entry.problemId === problemId);
       const candidate = candidatePool.candidates.find((entry) => entry.problemId === problemId);
+      const indexedUnit = taxonomy.units.find(({ id }) => id === owner?.learningUnit.id);
       return {
         problemId,
         sourceAvailable,
@@ -375,6 +369,9 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
           placement !== undefined &&
           taxonomy.problemIds.includes(problemId) &&
           placement.unitIds.includes(owner.learningUnit.id) &&
+          indexedUnit !== undefined &&
+          canonicalDigest(indexedUnit.prerequisiteUnitIds) ===
+            canonicalDigest(owner.learningUnit.prerequisiteUnitIds) &&
           candidate.sourceRevisionIds.length === problemInput.sourceRevisionIds.length &&
           candidate.sourceRevisionIds.every((sourceId) =>
             problemInput.sourceRevisionIds.includes(sourceId),
