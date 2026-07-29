@@ -40,6 +40,14 @@ export interface LearningRecordImportPreview {
 const problemIdPattern = /^abc\d{3,}-[a-z][a-z0-9+_-]*$/u;
 
 function isValidEnvelope(input: unknown): boolean {
+  if (
+    !input ||
+    typeof input !== 'object' ||
+    !('records' in input) ||
+    !Array.isArray(Reflect.get(input, 'records'))
+  ) {
+    return false;
+  }
   const parsed = LearningRecordBackupSchema.safeParse(input);
   if (parsed.success) return true;
   // Invalid and duplicate records are reported as item-level classifications below.

@@ -13,10 +13,10 @@
     "abc256-f"
   ],
   "checks": {
-    "vitest": { "passedFiles": 40, "passedTests": 346, "failedTests": 0 },
+    "vitest": { "passedFiles": 40, "passedTests": 348, "failedTests": 0 },
     "sharedContractE2e": { "passed": 66, "failed": 0, "engineRuns": 48, "storageFailureRuns": 9 },
     "representativeTiming": {
-      "maximumObservedMs": 262.32795799999985,
+      "maximumObservedMs": 356.54108399999996,
       "requiredMaximumMs": 30000,
       "passed": true
     },
@@ -36,9 +36,9 @@
     }
   },
   "e2eEvidencePath": "docs/verification/previews/initial-v1/learning-records/e2e.json",
-  "e2eEvidenceDigest": "65a5f10255f130bf26a85cb64504a6694ce19a1e01225978b9a7713b17fd9e02",
+  "e2eEvidenceDigest": "5818b3c4ce470d81add4b4d9776312bdc5b4a7900e4d3ed5293784139f274db8",
   "rawReportPath": "docs/verification/previews/initial-v1/learning-records/raw-playwright.json",
-  "rawReportDigest": "dc688767ac3376433b8cce4fa585a720e3e29c86e98f77cc3bd61880fb3a04cd",
+  "rawReportDigest": "e295afcc3eea266834ef8f7f4d708deceb3d32ca3a371ddd899e68906af109ef",
   "implementationSubjects": [
     {
       "path": "package.json",
@@ -94,7 +94,7 @@
     },
     {
       "path": "src/lib/learning-records/import-preview.ts",
-      "digest": "803639b08384ffe2a91ae18e1ca4a2b701f1f5039dea1fe5bcb94644d139566e"
+      "digest": "84a50f17f2651bf950d98fc484d14a43f59dac59d8b072974ca14fffd914d83b"
     },
     {
       "path": "src/lib/learning-records/store.ts",
@@ -130,7 +130,7 @@
     },
     {
       "path": "tests/integration/learning-record-backup.test.ts",
-      "digest": "04b0cbfb18bf412add7d0993d738c45ab421823701064aeecbfd41c1855ae739"
+      "digest": "43f7a8ce87e5206a17c00f1804369efeb120b245c090deed8b63406a000dbb0f"
     },
     {
       "path": "tests/integration/learning-record-control.test.ts",
@@ -149,7 +149,7 @@
       "digest": "2d4b81f53cb0148b8a9d3b590e6ef64a363d5fdaf5cc08b1ff6402d9a8fb039d"
     }
   ],
-  "implementationSubjectDigest": "1534f286e79441355c7bbec8aac715a4cea07cfcb4b456aef073802c22ea4eda",
+  "implementationSubjectDigest": "e89bd9f6cec7960613dec721c873d1ca9fbd2824e95201da566c61677d566d6f",
   "aggregatePassed": true,
-  "generatedAt": "2026-07-29T13:35:27.337Z"
+  "generatedAt": "2026-07-29T13:40:16.687Z"
 }

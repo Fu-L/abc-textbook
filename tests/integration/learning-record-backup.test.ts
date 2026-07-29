@@ -81,6 +81,27 @@ describe('learning record backup and restore', () => {
     });
   });
 
+  it.each([
+    { name: 'a missing records collection', input: { schemaVersion: '1.0.0' } },
+    {
+      name: 'a non-array records collection',
+      input: {
+        schemaVersion: '1.0.0',
+        exportedAt: '2026-07-29T12:30:00+09:00',
+        catalogVersionAtExport: '2026.07.1',
+        records: 'invalid',
+        orphanedProblemIds: [],
+      },
+    },
+  ])('blocks apply for $name', ({ input }) => {
+    const preview = previewLearningRecordImport(input, [], new Set());
+    expect(preview.applicable).toBe(false);
+    expect(preview.items[0]).toMatchObject({
+      problemId: 'abc000-invalid-envelope',
+      classification: 'invalid_item',
+    });
+  });
+
   it('classifies all five outcomes and merges newer components independently with local tie wins', () => {
     const local = record(0, {
       status: 'in_progress',

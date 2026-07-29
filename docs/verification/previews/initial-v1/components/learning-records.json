@@ -13,8 +13,8 @@
     "abc256-f"
   ],
   "inputDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
-  "artifactDigest": "9064ed2abb30bdfcc655cca18822b9ad9c13e1fbb1df893a940e978faa54087e",
-  "outputDigest": "65e2ec7d4912f8f5f8c9c82f0b23925080e031ebd2c4d1bdc754389d0fa5f22e",
+  "artifactDigest": "1422d198bc1d9dfd29bb2b00fb8db78cd6343560ac7102b62b3b8407b7332b88",
+  "outputDigest": "ea417136512b311540d4d46ae9225934dc3a311eb218aa5a6018b1d86e4b142d",
   "catalogSubjectDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
   "status": "passed",
   "workManifestPath": "docs/work-manifests/initial/us3/manifest.json",
@@ -22,25 +22,25 @@
   "artifactFiles": [
     {
       "path": "docs/verification/previews/initial-v1/learning-records/acceptance.json",
-      "digest": "26e03ae11a3033acaae295ce3fe2a81f4668b769732e7e81241ec030a99efdf8"
+      "digest": "e7ac0eacf4b83ea022d5cd7351541ae8d6ae151c705b5141b1c0789b1e623dd5"
     },
     {
       "path": "docs/verification/previews/initial-v1/learning-records/e2e.json",
-      "digest": "65a5f10255f130bf26a85cb64504a6694ce19a1e01225978b9a7713b17fd9e02"
+      "digest": "5818b3c4ce470d81add4b4d9776312bdc5b4a7900e4d3ed5293784139f274db8"
     },
     {
       "path": "docs/verification/previews/initial-v1/learning-records/raw-playwright.json",
-      "digest": "dc688767ac3376433b8cce4fa585a720e3e29c86e98f77cc3bd61880fb3a04cd"
+      "digest": "e295afcc3eea266834ef8f7f4d708deceb3d32ca3a371ddd899e68906af109ef"
     },
     {
       "path": "docs/reviews/human-content/previews/initial-v1/us3/learning-records-review.json",
-      "digest": "a554d0d4c59010d870eaccd1f6d52a4c99c45a90241177b14b9abc72a2098881"
+      "digest": "f4e165ff31ed2e55b8b479c04c6e45ab886d9c0ae47815cf6ebaa8636f33e2bb"
     }
   ],
   "reviewEvidence": {
     "path": "docs/reviews/human-content/previews/initial-v1/us3/learning-records-review.json",
-    "digest": "a554d0d4c59010d870eaccd1f6d52a4c99c45a90241177b14b9abc72a2098881",
-    "subjectDigest": "c3890472e7094839fee9954cd3ff85b48a70f94cc3d04191a625eb21ae60bb73",
+    "digest": "f4e165ff31ed2e55b8b479c04c6e45ab886d9c0ae47815cf6ebaa8636f33e2bb",
+    "subjectDigest": "23cd86661cff33cb51c53e661f5fd2993910bcdb2eeb197e25c8474a75e7b32c",
     "reviewMode": "self",
     "aggregatePassed": true
   }

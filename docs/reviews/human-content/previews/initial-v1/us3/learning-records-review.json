@@ -4,7 +4,7 @@
   "scopeType": "merge",
   "scopeId": "initial-v1-us3-learning-records",
   "releaseVersion": null,
-  "subjectDigest": "c3890472e7094839fee9954cd3ff85b48a70f94cc3d04191a625eb21ae60bb73",
+  "subjectDigest": "23cd86661cff33cb51c53e661f5fd2993910bcdb2eeb197e25c8474a75e7b32c",
   "inventoryPath": "docs/work-manifests/initial/us3/manifest.json",
   "inventoryDigest": "4deae6354b0b0a47206822ef0d7f6d0d33752a8b7e945bde9b2784378cb8459e",
   "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
@@ -13,51 +13,51 @@
     {
       "checkId": "check-us3-unit",
       "command": "/Users/fuma/Desktop/VSCode/abc-textbook/node_modules/.bin/vitest run --reporter=json",
-      "subjectDigest": "c3890472e7094839fee9954cd3ff85b48a70f94cc3d04191a625eb21ae60bb73",
+      "subjectDigest": "23cd86661cff33cb51c53e661f5fd2993910bcdb2eeb197e25c8474a75e7b32c",
       "resultPath": "docs/verification/previews/initial-v1/learning-records/acceptance.json",
-      "resultDigest": "26e03ae11a3033acaae295ce3fe2a81f4668b769732e7e81241ec030a99efdf8",
+      "resultDigest": "e7ac0eacf4b83ea022d5cd7351541ae8d6ae151c705b5141b1c0789b1e623dd5",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-07-29T13:35:27.337Z",
+      "completedAt": "2026-07-29T13:40:16.687Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-us3-integration",
       "command": "/Users/fuma/Desktop/VSCode/abc-textbook/node_modules/.bin/vitest run --reporter=json",
-      "subjectDigest": "c3890472e7094839fee9954cd3ff85b48a70f94cc3d04191a625eb21ae60bb73",
+      "subjectDigest": "23cd86661cff33cb51c53e661f5fd2993910bcdb2eeb197e25c8474a75e7b32c",
       "resultPath": "docs/verification/previews/initial-v1/learning-records/acceptance.json",
-      "resultDigest": "26e03ae11a3033acaae295ce3fe2a81f4668b769732e7e81241ec030a99efdf8",
+      "resultDigest": "e7ac0eacf4b83ea022d5cd7351541ae8d6ae151c705b5141b1c0789b1e623dd5",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-07-29T13:35:27.337Z",
+      "completedAt": "2026-07-29T13:40:16.687Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-us3-e2e",
       "command": "/Users/fuma/Desktop/VSCode/abc-textbook/node_modules/.bin/playwright test tests/e2e/learning-records.spec.ts --reporter=json",
-      "subjectDigest": "c3890472e7094839fee9954cd3ff85b48a70f94cc3d04191a625eb21ae60bb73",
+      "subjectDigest": "23cd86661cff33cb51c53e661f5fd2993910bcdb2eeb197e25c8474a75e7b32c",
       "resultPath": "docs/verification/previews/initial-v1/learning-records/e2e.json",
-      "resultDigest": "65a5f10255f130bf26a85cb64504a6694ce19a1e01225978b9a7713b17fd9e02",
+      "resultDigest": "5818b3c4ce470d81add4b4d9776312bdc5b4a7900e4d3ed5293784139f274db8",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-07-29T13:35:27.337Z",
+      "completedAt": "2026-07-29T13:40:16.687Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-us3-static-quality",
       "command": "npm run check && npm run lint && npm run format:check && npm run build",
-      "subjectDigest": "c3890472e7094839fee9954cd3ff85b48a70f94cc3d04191a625eb21ae60bb73",
+      "subjectDigest": "23cd86661cff33cb51c53e661f5fd2993910bcdb2eeb197e25c8474a75e7b32c",
       "resultPath": "docs/verification/previews/initial-v1/learning-records/acceptance.json",
-      "resultDigest": "26e03ae11a3033acaae295ce3fe2a81f4668b769732e7e81241ec030a99efdf8",
+      "resultDigest": "e7ac0eacf4b83ea022d5cd7351541ae8d6ae151c705b5141b1c0789b1e623dd5",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-07-29T13:35:27.337Z",
+      "completedAt": "2026-07-29T13:40:16.687Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 4,
   "passedApplicableCheckCount": 4,
-  "reviewerExecutedCheckSetDigest": "d527fbe69f08f291625e0a93f0bde33a973fa5ce69bb83a6f3b8bf60aeeb3067",
+  "reviewerExecutedCheckSetDigest": "ff88fddc1ddf011a4daf96d41a621007a96e47bb9eaa2d7389c9559168cff7eb",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -80,7 +80,7 @@
       "reviewBasis": "Problem IDだけを永続keyとし、独立transaction、offset timestamp、reload、no-JavaScript、storage unavailableの挙動を3 browserで確認した。",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-07-29T13:35:27.337Z"
+      "reviewedAt": "2026-07-29T13:40:16.687Z"
     },
     {
       "reviewItemId": "human-review-item-us3-backup-restore",
@@ -96,7 +96,7 @@
       "reviewBasis": "privacy-minimal export、5分類preview、component-wise newer-wins、backup-wins、cancel、tie、unknown ID、invalid item、120件復元、失敗時0件反映を確認した。",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-07-29T13:35:27.337Z"
+      "reviewedAt": "2026-07-29T13:40:16.687Z"
     }
   ],
   "inventoryItemCount": 2,
@@ -116,10 +116,10 @@
     ],
     "rationale": "US3の2 review unitは端末内記録操作とbackup/restoreの観察可能な成果を分離して網羅する。",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-07-29T13:35:27.337Z"
+    "confirmedAt": "2026-07-29T13:40:16.687Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-07-29T13:35:27.337Z",
-  "evidenceDigest": "3a690949a3ee97277bc774e403e1f24b831dbb974886e22804cbc92f2c1de2fa"
+  "generatedAt": "2026-07-29T13:40:16.687Z",
+  "evidenceDigest": "847f9fd062f8c04ce9c53cf0d146cf27422f94399545bf3420344406801639ed"
 }
