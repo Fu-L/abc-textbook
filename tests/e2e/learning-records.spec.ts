@@ -194,6 +194,42 @@ test('migration failure aborts database open and disables controls', async ({ pa
   await expect(page.getByRole('alert')).toBeVisible();
 });
 
+test('a blocking tab rejects database open with actionable guidance', async ({ context, page }) => {
+  const blocker = await context.newPage();
+  await blocker.goto('learn/');
+  await blocker.evaluate(async () => {
+    await new Promise<void>((resolve, reject) => {
+      const remove = indexedDB.deleteDatabase('abc-textbook-learning-records');
+      remove.onsuccess = () => {
+        resolve();
+      };
+      remove.onerror = () => {
+        reject(remove.error ?? new Error('IndexedDB delete failed.'));
+      };
+    });
+    const request = indexedDB.open('abc-textbook-learning-records', 1);
+    Reflect.set(
+      globalThis,
+      'learningRecordBlockingDatabase',
+      await new Promise<IDBDatabase>((resolve, reject) => {
+        request.onupgradeneeded = () => {
+          request.result.createObjectStore('learning-records', { keyPath: 'problemId' });
+        };
+        request.onsuccess = () => {
+          resolve(request.result);
+        };
+        request.onerror = () => {
+          reject(request.error ?? new Error('IndexedDB open failed.'));
+        };
+      }),
+    );
+  });
+  await page.goto('problems/abc212-g/');
+  await expect(page.getByLabel('学習状況')).toBeDisabled();
+  await expect(page.getByRole('alert')).toContainText('ほかのタブを閉じてください');
+  await blocker.close();
+});
+
 test('problem details reach the review page with all extra filters', async ({ page }) => {
   await page.goto('problems/abc212-g/');
   await expect(page.getByText('端末内だけに保存します。外部送信は行いません。')).toBeVisible();

@@ -13,34 +13,34 @@
     "abc256-f"
   ],
   "inputDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
-  "artifactDigest": "0825ab2efc1237b1668c9a8ba9bafd374a7db1bee12b57a6533209b1b3264b61",
-  "outputDigest": "a931342d3602043cee0427642a1646892b745be340c436c7fab8dc237ca61df5",
+  "artifactDigest": "9064ed2abb30bdfcc655cca18822b9ad9c13e1fbb1df893a940e978faa54087e",
+  "outputDigest": "65e2ec7d4912f8f5f8c9c82f0b23925080e031ebd2c4d1bdc754389d0fa5f22e",
   "catalogSubjectDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
   "status": "passed",
   "workManifestPath": "docs/work-manifests/initial/us3/manifest.json",
-  "workManifestDigest": "f17a645d3917174a0e3f1371c8212d58289a420091004ba13bb3043959d31850",
+  "workManifestDigest": "4deae6354b0b0a47206822ef0d7f6d0d33752a8b7e945bde9b2784378cb8459e",
   "artifactFiles": [
     {
       "path": "docs/verification/previews/initial-v1/learning-records/acceptance.json",
-      "digest": "cf51877e0e6243064d8ebab1a7deef237329a46c11d984844815a1123bd9801d"
+      "digest": "26e03ae11a3033acaae295ce3fe2a81f4668b769732e7e81241ec030a99efdf8"
     },
     {
       "path": "docs/verification/previews/initial-v1/learning-records/e2e.json",
-      "digest": "3dfdf14ba6d4456ea7541c5b32abbef9ce2e6dcb15ac0e2eb64ef1fb03ba1ce3"
+      "digest": "65a5f10255f130bf26a85cb64504a6694ce19a1e01225978b9a7713b17fd9e02"
     },
     {
       "path": "docs/verification/previews/initial-v1/learning-records/raw-playwright.json",
-      "digest": "9264a6a5eca21d19961d2ea1ca4e0ca11dc06f01d04524261ecaf3be74616fd0"
+      "digest": "dc688767ac3376433b8cce4fa585a720e3e29c86e98f77cc3bd61880fb3a04cd"
     },
     {
       "path": "docs/reviews/human-content/previews/initial-v1/us3/learning-records-review.json",
-      "digest": "2f56eb8f91ed74373debb111c7ea932937955883281d85921e559e20ba2ecb8e"
+      "digest": "a554d0d4c59010d870eaccd1f6d52a4c99c45a90241177b14b9abc72a2098881"
     }
   ],
   "reviewEvidence": {
     "path": "docs/reviews/human-content/previews/initial-v1/us3/learning-records-review.json",
-    "digest": "2f56eb8f91ed74373debb111c7ea932937955883281d85921e559e20ba2ecb8e",
-    "subjectDigest": "5c4593af236ea4de7de78c8e2a1336cf8064362a81f785fd5aa989bd77623dae",
+    "digest": "a554d0d4c59010d870eaccd1f6d52a4c99c45a90241177b14b9abc72a2098881",
+    "subjectDigest": "c3890472e7094839fee9954cd3ff85b48a70f94cc3d04191a625eb21ae60bb73",
     "reviewMode": "self",
     "aggregatePassed": true
   }

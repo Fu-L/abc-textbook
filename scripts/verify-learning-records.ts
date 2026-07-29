@@ -135,6 +135,13 @@ const rawEvidenceDigest = await fileDigest(rawReportPath);
 const sharedSpecs = collectSpecs(playwrightReport.suites).filter(({ title }) =>
   title.includes('uses the shared learning-record contract'),
 );
+const allSpecs = collectSpecs(playwrightReport.suites);
+const storageFailureRuns = allSpecs.filter(
+  ({ title }) =>
+    title.includes('storage failure') ||
+    title.includes('migration failure') ||
+    title.includes('blocking tab'),
+).length;
 const runs = await Promise.all(
   sharedSpecs.flatMap((spec) =>
     spec.tests.flatMap((testResult) =>
@@ -197,6 +204,42 @@ const e2eEvidence = LearningRecordE2eEvidenceSchema.parse({
 const e2ePath = 'docs/verification/previews/initial-v1/learning-records/e2e.json';
 await writeJson(e2ePath, e2eEvidence);
 
+const implementationSubjectPaths = [
+  'package.json',
+  'scripts/verify-learning-records.ts',
+  'src/components/LearningRecordControl.tsx',
+  'src/components/LearningRecordSettings.tsx',
+  'src/components/LearningRecordTimestamp.astro',
+  'src/components/ProblemFilters.tsx',
+  'src/components/ReviewProblemList.tsx',
+  'src/lib/domain/schema-parts/learning.ts',
+  'src/lib/learning-records/database.ts',
+  'src/lib/learning-records/export.ts',
+  'src/lib/learning-records/filter.ts',
+  'src/lib/learning-records/format-timestamp.ts',
+  'src/lib/learning-records/import-apply.ts',
+  'src/lib/learning-records/import-preview.ts',
+  'src/lib/learning-records/store.ts',
+  'src/lib/learning-records/types.ts',
+  'src/pages/problems/[problemId].astro',
+  'src/pages/problems/index.astro',
+  'src/pages/review/index.astro',
+  'src/pages/settings/learning-records.astro',
+  'tests/e2e/learning-records.spec.ts',
+  'tests/fixtures/in-memory-learning-record-database.ts',
+  'tests/integration/learning-record-backup.test.ts',
+  'tests/integration/learning-record-control.test.ts',
+  'tests/unit/evidence-aggregate.test.ts',
+  'tests/unit/learning-record-store.test.ts',
+  'tests/unit/learning-record-timestamp.test.ts',
+] as const;
+const implementationSubjects = await Promise.all(
+  implementationSubjectPaths.map(async (subjectPath) => ({
+    path: subjectPath,
+    digest: await fileDigest(subjectPath),
+  })),
+);
+
 const acceptance = {
   schemaVersion: '1.0.0',
   previewId: 'initial-v1',
@@ -209,17 +252,25 @@ const acceptance = {
       failedTests: vitestReport.numFailedTests,
     },
     sharedContractE2e: {
-      passed: collectSpecs(playwrightReport.suites).length,
+      passed: allSpecs.length,
       failed: playwrightReport.errors.length,
       engineRuns: runs.length,
-      storageFailureRuns: 3,
+      storageFailureRuns,
     },
     representativeTiming: {
       maximumObservedMs: Math.max(...runs.map(({ durationMs }) => durationMs)),
       requiredMaximumMs: 30000,
       passed: runs.every(({ durationMs }) => durationMs <= 30000),
     },
-    reload: { checkedEngineRuns: 48, preservedEngineRuns: 48, passed: true },
+    reload: {
+      checkedEngineRuns: runs.length,
+      preservedEngineRuns: runs.filter(
+        ({ statusPersisted, reviewPersisted }) => statusPersisted && reviewPersisted,
+      ).length,
+      passed: runs.every(
+        ({ statusPersisted, reviewPersisted }) => statusPersisted && reviewPersisted,
+      ),
+    },
     restore: {
       recordCount: 120,
       restoredCount: 120,
@@ -238,17 +289,8 @@ const acceptance = {
   e2eEvidenceDigest: await fileDigest(e2ePath),
   rawReportPath,
   rawReportDigest: rawEvidenceDigest,
-  implementationSubjectDigest: canonicalDigest(
-    await Promise.all(
-      [
-        'src/lib/learning-records/database.ts',
-        'src/lib/learning-records/store.ts',
-        'src/lib/learning-records/import-apply.ts',
-        'src/components/LearningRecordControl.tsx',
-        'src/components/LearningRecordSettings.tsx',
-      ].map(fileDigest),
-    ),
-  ),
+  implementationSubjects,
+  implementationSubjectDigest: canonicalDigest(implementationSubjects),
   aggregatePassed: true,
   generatedAt,
 };

@@ -112,7 +112,13 @@ export async function openLearningRecordDatabase(
   const indexedDbApi: unknown = Reflect.get(globalThis, 'indexedDB');
   if (!indexedDbApi) throw new Error('このブラウザーでは端末内の学習記録を利用できません。');
 
-  const database = await openDB<LearningRecordDbSchema>(
+  let openedDatabase: IDBPDatabase<LearningRecordDbSchema> | null = null;
+  let blockedError: Error | null = null;
+  let rejectBlocked!: (error: Error) => void;
+  const blocked = new Promise<never>((_resolve, reject) => {
+    rejectBlocked = reject;
+  });
+  const opening = openDB<LearningRecordDbSchema>(
     options.name ?? LEARNING_RECORD_DATABASE_NAME,
     LEARNING_RECORD_DATABASE_VERSION,
     {
@@ -132,9 +138,23 @@ export async function openLearningRecordDatabase(
         }
       },
       blocked() {
-        throw new Error('別のタブがデータベース更新を妨げています。ほかのタブを閉じてください。');
+        blockedError = new Error(
+          '別のタブがデータベース更新を妨げています。ほかのタブを閉じてください。',
+        );
+        rejectBlocked(blockedError);
+      },
+      blocking() {
+        openedDatabase?.close();
       },
     },
   );
+  void opening.then(
+    (database) => {
+      if (blockedError) database.close();
+    },
+    () => undefined,
+  );
+  const database = await Promise.race([opening, blocked]);
+  openedDatabase = database;
   return new BrowserLearningRecordDatabase(database);
 }

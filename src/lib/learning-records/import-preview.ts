@@ -1,9 +1,8 @@
-import { LearningRecordSchema } from '../domain/schema-parts/learning.js';
+import { compareOffsetDateTimes, parseOffsetDateTime } from '../domain/date-time.js';
 import {
-  compareOffsetDateTimes,
-  isOffsetDateTime,
-  parseOffsetDateTime,
-} from '../domain/date-time.js';
+  LearningRecordBackupSchema,
+  LearningRecordSchema,
+} from '../domain/schema-parts/learning.js';
 import type { LearningRecord } from './types.js';
 
 export const IMPORT_CLASSIFICATIONS = [
@@ -38,31 +37,14 @@ export interface LearningRecordImportPreview {
   readonly applicable: boolean;
 }
 
-interface BackupEnvelope {
-  schemaVersion?: unknown;
-  exportedAt?: unknown;
-  catalogVersionAtExport?: unknown;
-  records?: unknown;
-  orphanedProblemIds?: unknown;
-}
-
 const problemIdPattern = /^abc\d{3,}-[a-z][a-z0-9+_-]*$/u;
 
-function isValidEnvelope(envelope: BackupEnvelope): boolean {
-  const orphanedProblemIds = envelope.orphanedProblemIds;
-  return (
-    envelope.schemaVersion === '1.0.0' &&
-    typeof envelope.exportedAt === 'string' &&
-    isOffsetDateTime(envelope.exportedAt) &&
-    typeof envelope.catalogVersionAtExport === 'string' &&
-    /^\d{4}\.\d{2}\.\d+$/u.test(envelope.catalogVersionAtExport) &&
-    Array.isArray(envelope.records) &&
-    Array.isArray(orphanedProblemIds) &&
-    orphanedProblemIds.every(
-      (problemId) => typeof problemId === 'string' && problemIdPattern.test(problemId),
-    ) &&
-    new Set(orphanedProblemIds).size === orphanedProblemIds.length
-  );
+function isValidEnvelope(input: unknown): boolean {
+  const parsed = LearningRecordBackupSchema.safeParse(input);
+  if (parsed.success) return true;
+  // Invalid and duplicate records are reported as item-level classifications below.
+  // Every other issue is an envelope/backup-contract failure and blocks apply.
+  return parsed.error.issues.every(({ path }) => path[0] === 'records');
 }
 
 function compareComponent(
@@ -113,7 +95,10 @@ export function previewLearningRecordImport(
   localRecords: readonly LearningRecord[],
   catalogProblemIds: ReadonlySet<string>,
 ): LearningRecordImportPreview {
-  const envelope = input && typeof input === 'object' ? (input as BackupEnvelope) : {};
+  const envelope =
+    input && typeof input === 'object'
+      ? (input as { readonly records?: unknown })
+      : { records: undefined };
   const rawRecords = Array.isArray(envelope.records) ? envelope.records : [];
   const localById = new Map(localRecords.map((record) => [record.problemId, record]));
   const seenIds = new Set<string>();
@@ -170,7 +155,7 @@ export function previewLearningRecordImport(
       components,
     };
   });
-  if (!isValidEnvelope(envelope)) {
+  if (!isValidEnvelope(input)) {
     items.unshift({
       problemId: 'abc000-invalid-envelope',
       classification: 'invalid_item',

@@ -54,6 +54,33 @@ describe('learning record backup and restore', () => {
     expect(target.records.get(orphan.problemId)).toEqual(orphan);
   });
 
+  it.each([
+    {
+      name: 'an orphan ID without its full record',
+      override: { orphanedProblemIds: ['abc501-e'] },
+    },
+    {
+      name: 'an unknown top-level property',
+      override: { unexpected: true },
+    },
+  ])('blocks apply for $name', ({ override }) => {
+    const input = {
+      schemaVersion: '1.0.0',
+      exportedAt: '2026-07-29T12:30:00+09:00',
+      catalogVersionAtExport: '2026.07.1',
+      records: [record(0)],
+      orphanedProblemIds: [],
+      ...override,
+    };
+    const preview = previewLearningRecordImport(input, [], new Set([record(0).problemId]));
+    expect(preview.applicable).toBe(false);
+    expect(preview.items[0]).toMatchObject({
+      problemId: 'abc000-invalid-envelope',
+      classification: 'invalid_item',
+      reason: 'unsupported_or_missing_backup_schema',
+    });
+  });
+
   it('classifies all five outcomes and merges newer components independently with local tie wins', () => {
     const local = record(0, {
       status: 'in_progress',
