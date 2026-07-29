@@ -3,6 +3,11 @@ import { readFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { PublicationUpdateSchema } from '../src/lib/domain/schema-parts/release.js';
 
+export const isProductionReleaseEligible = (update: {
+  readonly state: string;
+  readonly fixtureMode: boolean;
+}): boolean => update.state === 'ELIGIBLE_FOR_BATCH' && !update.fixtureMode;
+
 export const verifyPreviewReleaseSimulation = (input: {
   readonly previewId: 'initial-v1';
   readonly update: {
@@ -78,7 +83,7 @@ if (isMain()) {
       process.stdout.write(`${JSON.stringify(verification)}\n`);
       process.exitCode = verification.aggregatePassed ? 0 : 2;
     } else {
-      const releaseEligible = update.state === 'ELIGIBLE_FOR_BATCH';
+      const releaseEligible = isProductionReleaseEligible(update);
       const summary = {
         command: 'verify:release',
         updateId: update.updateId,

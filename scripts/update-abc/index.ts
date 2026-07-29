@@ -4,11 +4,15 @@ import { pathToFileURL } from 'node:url';
 
 import { prepareAuthoringResults } from './author.js';
 import { acquireOfficialMetadata } from './acquire.js';
-import { classifyTechniques } from './classify.js';
+import {
+  deriveFrozenClassification,
+  type FrozenClassificationCandidate,
+  type FrozenTaxonomyGroup,
+} from './classify.js';
 import { discoverContests } from './discover.js';
 import { bootstrapPreviewSeed } from './bootstrap.js';
 import { validatePreparedUpdate } from './validate.js';
-import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
+import { canonicalDigest, digestWithoutField } from '../../src/lib/domain/canonical-json.js';
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
 
 export interface PipelineOptions {
@@ -41,6 +45,12 @@ interface PreviewManifest {
   readonly selectedProblemIds: readonly string[];
   readonly sourceRevisionIds: readonly string[];
   readonly metadataBatchDigest: string;
+  readonly candidatePoolDigest: string;
+}
+
+interface CandidatePool {
+  readonly candidates: readonly FrozenClassificationCandidate[];
+  readonly candidatePoolDigest: string;
 }
 
 interface ContestArtifact {
@@ -63,9 +73,16 @@ interface ProblemArtifact {
   readonly id: string;
 }
 
+interface InventoryArtifact {
+  readonly problemId: string;
+  readonly sourceRevisionIds: readonly string[];
+}
+
 interface LearningArtifact {
   readonly learningUnit: {
     readonly problemIds: readonly string[];
+    readonly id: string;
+    readonly prerequisiteUnitIds: readonly string[];
     readonly explanation: string;
     readonly examples: readonly unknown[];
   };
@@ -77,7 +94,11 @@ interface TaxonomyIndex {
     readonly problemId: string;
     readonly placementId?: string;
     readonly id?: string;
+    readonly tagIds: readonly string[];
+    readonly outcomeIds: readonly string[];
+    readonly unitIds: readonly string[];
   }[];
+  readonly groupRefs: readonly { readonly path: string; readonly digest: string }[];
 }
 
 const readJson = async <T>(root: string, relativePath: string): Promise<T> =>
@@ -107,6 +128,21 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
   );
   const packetPath = 'src/content/sources/authoring/initial-v1.json';
   const packet = await readJson<SourcePacket>(root, packetPath);
+  const candidatePool = await readJson<CandidatePool>(
+    root,
+    'staging/previews/initial-v1/candidate-pool.json',
+  );
+  if (candidatePool.candidatePoolDigest !== manifest.candidatePoolDigest) {
+    throw new Error('CANDIDATE_POOL_DIGEST_MISMATCH');
+  }
+  if (
+    digestWithoutField(
+      candidatePool as unknown as Record<string, unknown>,
+      'candidatePoolDigest',
+    ) !== candidatePool.candidatePoolDigest
+  ) {
+    throw new Error('CANDIDATE_POOL_DIGEST_STALE');
+  }
   const taxonomy = await readJson<TaxonomyIndex>(
     root,
     'staging/previews/initial-v1/taxonomy/index.json',
@@ -119,6 +155,20 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
   ];
   const learning = await Promise.all(
     learningPaths.map((candidate) => readJson<LearningArtifact>(root, candidate)),
+  );
+  const taxonomyGroups = await Promise.all(
+    taxonomy.groupRefs.map(async ({ path: groupPath, digest }) => {
+      const group = await readJson<FrozenTaxonomyGroup & { readonly groupDigest: string }>(
+        root,
+        groupPath,
+      );
+      if (
+        group.groupDigest !== digest ||
+        digestWithoutField(group as unknown as Record<string, unknown>, 'groupDigest') !== digest
+      )
+        throw new Error(`TAXONOMY_GROUP_DIGEST_MISMATCH:${groupPath}`);
+      return group;
+    }),
   );
   const contestIds = [
     ...new Set(
@@ -160,7 +210,9 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
   const inventoryEntries = await Promise.all(
     manifest.selectedProblemIds.map(async (problemId) => {
       const inventoryPath = `staging/previews/initial-v1/technique-inventory/${problemId}.json`;
-      const inventory = await readJson<unknown>(root, inventoryPath);
+      const inventory = await readJson<InventoryArtifact>(root, inventoryPath);
+      if (inventory.problemId !== problemId)
+        throw new Error(`INVENTORY_PROBLEM_ID_MISMATCH:${problemId}`);
       return { problemId, inventoryPath, inventory };
     }),
   );
@@ -273,11 +325,14 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
           },
     ),
   });
+  const classification = deriveFrozenClassification({
+    selectedProblemIds: manifest.selectedProblemIds,
+    candidates: candidatePool.candidates,
+    groups: taxonomyGroups,
+  });
+  const validClassificationIds = new Set(classification.validProblemIds);
   const placementByProblem = new Map(
-    taxonomy.placements.map((placement) => [
-      placement.problemId,
-      placement.placementId ?? placement.id ?? `placement-${placement.problemId}`,
-    ]),
+    taxonomy.placements.map((placement) => [placement.problemId, placement]),
   );
   const sourceById = new Map(
     packet.sources.map((source) => [source.sourceRevisionId, source.path]),
@@ -298,39 +353,50 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
       const owner = learning.find((artifact) =>
         artifact.learningUnit.problemIds.includes(problemId),
       );
-      const placementId = placementByProblem.get(problemId);
+      const placement = placementByProblem.get(problemId);
+      const inventory = inventoryEntries.find((entry) => entry.problemId === problemId);
+      const candidate = candidatePool.candidates.find((entry) => entry.problemId === problemId);
       return {
         problemId,
         sourceAvailable,
         explanationComplete:
           options.failAt !== 'validate' && Boolean(owner?.learningUnit.explanation.trim()),
         examplesValid: Boolean(owner && owner.learningUnit.examples.length > 0),
-        placementIds: placementId === undefined ? [] : [placementId],
+        placementIds:
+          placement === undefined
+            ? []
+            : [placement.placementId ?? placement.id ?? `placement-${problemId}`],
         crossReferencesValid:
+          validClassificationIds.has(problemId) &&
+          inventory !== undefined &&
+          candidate !== undefined &&
+          problemInput !== undefined &&
+          owner !== undefined &&
+          placement !== undefined &&
           taxonomy.problemIds.includes(problemId) &&
-          inventoryEntries.some((entry) => entry.problemId === problemId),
+          placement.unitIds.includes(owner.learningUnit.id) &&
+          candidate.sourceRevisionIds.length === problemInput.sourceRevisionIds.length &&
+          candidate.sourceRevisionIds.every((sourceId) =>
+            problemInput.sourceRevisionIds.includes(sourceId),
+          ) &&
+          candidate.sourceRevisionIds.length === inventory.inventory.sourceRevisionIds.length &&
+          candidate.sourceRevisionIds.every((sourceId) =>
+            inventory.inventory.sourceRevisionIds.includes(sourceId),
+          ),
       };
     }),
   );
-  void classifyTechniques(
-    inventoryEntries.map(({ problemId }) => ({
-      problemId,
-      techniqueKey: 'frozen-preview-taxonomy',
-    })),
-    {
-      'frozen-preview-taxonomy': {
-        tagId: 'provisional-tag-frozen',
-        outcomeId: 'outcome-provisional-frozen',
-        unitId: 'provisional-unit-frozen',
-      },
-    },
-  );
+  const reachableProblemIds = [
+    ...new Set(learning.flatMap(({ learningUnit }) => learningUnit.problemIds)),
+  ];
+  const indexedProblemIds = [...new Set(taxonomy.placements.map(({ problemId }) => problemId))];
+  const catalogProblemIds = problemEntries.map(({ problemId }) => problemId);
   const validation = validatePreparedUpdate({
     problems,
-    taxonomyEdges: [],
-    reachableProblemIds: taxonomy.problemIds,
-    indexedProblemIds: taxonomy.problemIds,
-    catalogProblemIds: manifest.selectedProblemIds,
+    taxonomyEdges: classification.taxonomyEdges,
+    reachableProblemIds,
+    indexedProblemIds,
+    catalogProblemIds,
   });
   const resultCounts = authoring.reduce(
     (result, item) => ({ ...result, [item.resultType]: result[item.resultType] + 1 }),

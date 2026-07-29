@@ -1,9 +1,71 @@
 import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import { canonicalDigest } from '../src/lib/domain/canonical-json.js';
 import { HumanContentReviewEvidenceSchema } from '../src/lib/domain/schema-parts/review-evidence.js';
+import { PublicationUpdateSchema } from '../src/lib/domain/schema-parts/release.js';
 import { validateContentWorkManifest } from '../src/lib/validation/content-work-manifest.js';
+import {
+  validateHumanContentReview,
+  type TrustedReviewCheckInventory,
+} from '../src/lib/validation/human-content-review.js';
+
+const workManifestPath = 'docs/work-manifests/initial/us5/manifest.json';
+const componentPath = 'docs/verification/previews/initial-v1/components/update-simulation.json';
+const verificationPath = 'staging/previews/initial-v1/release-simulation/verification.json';
+
+interface WorkManifest {
+  readonly digest: string;
+  readonly learningOutcomeIds: readonly string[];
+  readonly reviewPolicy: {
+    readonly requiredMode: 'self' | 'third_party';
+    readonly riskReasons: readonly string[];
+  };
+  readonly reviewUnits: readonly {
+    readonly reviewUnitId: string;
+    readonly paths: readonly string[];
+    readonly learningOutcomeIds: readonly string[];
+    readonly checkIds: readonly string[];
+    readonly owner: string;
+  }[];
+}
+
+const reviewItemId = (reviewUnitId: string): string =>
+  `human-review-item-${reviewUnitId.toLowerCase()}`;
+
+const trustedReviewInventory = (input: {
+  readonly manifest: WorkManifest;
+  readonly subjectDigest: string;
+  readonly updatePath: string;
+}): TrustedReviewCheckInventory => {
+  const command = `node --import tsx scripts/verify-release.ts --manifest ${input.updatePath} --simulation-only`;
+  return {
+    subjectDigest: input.subjectDigest,
+    inventoryDigest: input.manifest.digest,
+    reviewPolicy: input.manifest.reviewPolicy,
+    workManifest: {
+      learningOutcomeIds: input.manifest.learningOutcomeIds,
+      reviewUnits: input.manifest.reviewUnits.map((unit) => ({
+        reviewUnitId: unit.reviewUnitId,
+        subjectPaths: unit.paths,
+        learningOutcomeIds: unit.learningOutcomeIds,
+        owner: unit.owner,
+      })),
+    },
+    applicableChecks: [...new Set(input.manifest.reviewUnits.flatMap((unit) => unit.checkIds))].map(
+      (checkId) => ({ checkId, command }),
+    ),
+    reviewItems: input.manifest.reviewUnits.map((unit) => ({
+      reviewItemId: reviewItemId(unit.reviewUnitId),
+      reviewUnitId: unit.reviewUnitId,
+      kind: 'outcome_coverage' as const,
+      subjectPaths: unit.paths,
+      authorIds: [unit.owner],
+      learningOutcomeIds: unit.learningOutcomeIds,
+    })),
+  };
+};
 
 export const createPreviewUpdateReview = (input: {
   readonly subjectDigest: string;
@@ -13,6 +75,8 @@ export const createPreviewUpdateReview = (input: {
   readonly resultDigest: string;
   readonly resultCommand: string;
   readonly riskReasons?: readonly string[];
+  readonly workManifest: WorkManifest;
+  readonly updatePath: string;
 }) => {
   const reviewMode =
     input.riskReasons && input.riskReasons.length > 0
@@ -32,17 +96,12 @@ export const createPreviewUpdateReview = (input: {
     completedAt,
     executedByReviewerId: reviewerId,
   }));
-  const learningOutcomeIds = [
-    'outcome-us5-authoring-classification',
-    'outcome-us5-discovery-acquisition',
-    'outcome-us5-validation-resume',
-  ];
-  const reviewItems = learningOutcomeIds.map((outcomeId) => ({
-    reviewItemId: `human-review-item-${outcomeId.replace('outcome-', '')}`,
+  const reviewItems = input.workManifest.reviewUnits.map((unit) => ({
+    reviewItemId: reviewItemId(unit.reviewUnitId),
     kind: 'outcome_coverage' as const,
-    subjectPaths: ['scripts/update-abc/index.ts', resultPath],
-    authorIds: ['person-maintainer'],
-    learningOutcomeIds: [outcomeId],
+    subjectPaths: unit.paths,
+    authorIds: [unit.owner],
+    learningOutcomeIds: unit.learningOutcomeIds,
     reviewerId,
     reviewBasis: `The current fixture subject was checked with abc-explanation-author ${input.authoringSkillVersion} (${input.authoringSkillDigest}).`,
     decision: 'approved' as const,
@@ -56,8 +115,8 @@ export const createPreviewUpdateReview = (input: {
     scopeId: 'initial-v1-us5-update-simulation',
     releaseVersion: null,
     subjectDigest: input.subjectDigest,
-    inventoryPath: 'docs/work-manifests/initial/us5/manifest.json',
-    inventoryDigest: 'd2b77b9176417e5dcd9a4abe2a9f8396b8f3689d9621af97fa999a4452da6965',
+    inventoryPath: workManifestPath,
+    inventoryDigest: input.workManifest.digest,
     reviewPolicy: { requiredMode: reviewMode, riskReasons: input.riskReasons ?? [] },
     reviewMode,
     applicableChecks,
@@ -67,7 +126,7 @@ export const createPreviewUpdateReview = (input: {
     authors: [
       {
         personId: 'person-maintainer',
-        authoredItemIds: ['us5.discovery', 'us5.authoring', 'us5.validation-resume'],
+        authoredItemIds: reviewItems.map(({ reviewItemId }) => reviewItemId),
       },
     ],
     reviewer: { personId: reviewerId, mode: reviewMode },
@@ -81,8 +140,8 @@ export const createPreviewUpdateReview = (input: {
       reviewerId,
       authorIds: ['person-maintainer'],
       decision: 'confirmed' as const,
-      learningOutcomeIds,
-      subjectPaths: ['docs/work-manifests/initial/us5/manifest.json', resultPath],
+      learningOutcomeIds: input.workManifest.learningOutcomeIds,
+      subjectPaths: input.workManifest.reviewUnits.flatMap((unit) => unit.paths),
       rationale:
         'The frozen US5 review units cover discovery, authoring classification, and resumable validation.',
       noOutcomeImpactRationale: null,
@@ -98,6 +157,72 @@ export const createPreviewUpdateReview = (input: {
   });
 };
 
+export const validatePreviewUpdateReview = async (input: {
+  readonly updateId: string;
+  readonly evidencePath: string;
+  readonly repositoryRoot?: string;
+}): Promise<ReturnType<typeof HumanContentReviewEvidenceSchema.parse>> => {
+  const root = input.repositoryRoot ?? process.cwd();
+  const readJson = async (relativePath: string): Promise<unknown> =>
+    JSON.parse(await readFile(path.join(root, relativePath), 'utf8')) as unknown;
+  const updatePath = `staging/previews/initial-v1/release-simulation/${input.updateId}/manifest.json`;
+  const update = PublicationUpdateSchema.parse(await readJson(updatePath));
+  if (update.updateId !== input.updateId) throw new Error('REVIEW_UPDATE_ID_MISMATCH');
+  const evidence = HumanContentReviewEvidenceSchema.parse(await readJson(input.evidencePath));
+  const manifest = (await readJson(workManifestPath)) as WorkManifest;
+  validateContentWorkManifest(manifest);
+  if (evidence.inventoryPath !== workManifestPath || evidence.inventoryDigest !== manifest.digest) {
+    throw new Error('REVIEW_INVENTORY_DIGEST_MISMATCH');
+  }
+  const verification = (await readJson(verificationPath)) as {
+    readonly updateId?: unknown;
+    readonly publicationUpdateDigest?: unknown;
+    readonly applicableCheckIds?: readonly string[];
+  };
+  const component = (await readJson(componentPath)) as {
+    readonly subjectDigest?: unknown;
+    readonly artifactDigest?: unknown;
+    readonly problemIds?: readonly string[];
+  };
+  if (
+    verification.updateId !== update.updateId ||
+    verification.publicationUpdateDigest !== canonicalDigest(update)
+  ) {
+    throw new Error('REVIEW_UPDATE_SUBJECT_MISMATCH');
+  }
+  if (
+    component.artifactDigest !== canonicalDigest(verification) ||
+    component.subjectDigest !== evidence.subjectDigest ||
+    canonicalDigest([...(component.problemIds ?? [])].sort()) !==
+      canonicalDigest([...update.targetProblemIds].sort())
+  ) {
+    throw new Error('REVIEW_COMPONENT_SUBJECT_DIGEST_MISMATCH');
+  }
+  const expectedDigest = canonicalDigest(
+    Object.fromEntries(Object.entries(evidence).filter(([key]) => key !== 'evidenceDigest')),
+  );
+  if (expectedDigest !== evidence.evidenceDigest)
+    throw new Error('REVIEW_EVIDENCE_DIGEST_MISMATCH');
+  const trustedInventory = trustedReviewInventory({
+    manifest,
+    subjectDigest: component.subjectDigest,
+    updatePath,
+  });
+  validateHumanContentReview(evidence, trustedInventory);
+  for (const check of evidence.applicableChecks) {
+    if (check.resultPath !== verificationPath) {
+      throw new Error(`REVIEW_CHECK_RESULT_PATH_MISMATCH:${check.checkId}`);
+    }
+    if (check.resultDigest !== canonicalDigest(verification)) {
+      throw new Error(`REVIEW_CHECK_RESULT_DIGEST_MISMATCH:${check.checkId}`);
+    }
+    if (!verification.applicableCheckIds?.includes(check.checkId)) {
+      throw new Error(`REVIEW_CHECK_RESULT_SCOPE_MISMATCH:${check.checkId}`);
+    }
+  }
+  return evidence;
+};
+
 const argument = (name: string): string | undefined => {
   const index = process.argv.indexOf(name);
   return index < 0 ? undefined : process.argv[index + 1];
@@ -106,44 +231,14 @@ const isMain = (): boolean =>
   process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href;
 
 if (isMain()) {
+  const updateId = argument('--update');
   const evidencePath = argument('--evidence');
-  if (!evidencePath) {
-    process.stderr.write('Usage: npm run abc:review -- --evidence PATH\n');
+  if (!updateId || !evidencePath) {
+    process.stderr.write('Usage: npm run abc:review -- --update UPDATE_ID --evidence PATH\n');
     process.stdout.write(`${JSON.stringify({ command: 'abc:review', exitCode: 64 })}\n`);
     process.exitCode = 64;
   } else {
-    const evidence = HumanContentReviewEvidenceSchema.parse(
-      JSON.parse(await readFile(evidencePath, 'utf8')) as unknown,
-    );
-    const validDigest = canonicalDigest(
-      Object.fromEntries(Object.entries(evidence).filter(([key]) => key !== 'evidenceDigest')),
-    );
-    if (validDigest !== evidence.evidenceDigest) throw new Error('REVIEW_EVIDENCE_DIGEST_MISMATCH');
-    const inventory = JSON.parse(await readFile(evidence.inventoryPath, 'utf8')) as unknown;
-    validateContentWorkManifest(inventory);
-    if ((inventory as { readonly digest?: unknown }).digest !== evidence.inventoryDigest) {
-      throw new Error('REVIEW_INVENTORY_DIGEST_MISMATCH');
-    }
-    for (const check of evidence.applicableChecks) {
-      const result = JSON.parse(await readFile(check.resultPath, 'utf8')) as {
-        readonly applicableCheckIds?: readonly string[];
-      };
-      if (canonicalDigest(result) !== check.resultDigest) {
-        throw new Error(`REVIEW_CHECK_RESULT_DIGEST_MISMATCH:${check.checkId}`);
-      }
-      if (!result.applicableCheckIds?.includes(check.checkId)) {
-        throw new Error(`REVIEW_CHECK_RESULT_SCOPE_MISMATCH:${check.checkId}`);
-      }
-    }
-    const component = JSON.parse(
-      await readFile(
-        'docs/verification/previews/initial-v1/components/update-simulation.json',
-        'utf8',
-      ),
-    ) as { readonly subjectDigest?: unknown };
-    if (component.subjectDigest !== evidence.subjectDigest) {
-      throw new Error('REVIEW_COMPONENT_SUBJECT_DIGEST_MISMATCH');
-    }
+    const evidence = await validatePreviewUpdateReview({ updateId, evidencePath });
     process.stdout.write(
       `${JSON.stringify({ command: 'abc:review', evidenceId: evidence.id, reviewMode: evidence.reviewMode, aggregatePassed: evidence.aggregatePassed })}\n`,
     );

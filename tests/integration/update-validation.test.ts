@@ -1,11 +1,16 @@
-import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
 import { enumerateCorrectionImpacts } from '../../scripts/update-abc/correction-impact.js';
-import { verifyPreviewReleaseSimulation } from '../../scripts/verify-release.js';
+import {
+  isProductionReleaseEligible,
+  verifyPreviewReleaseSimulation,
+} from '../../scripts/verify-release.js';
+import { deriveFrozenClassification } from '../../scripts/update-abc/classify.js';
+import { validatePreviewUpdateReview } from '../../scripts/review-update.js';
 import {
   persistPublicationUpdate,
   resumeUpdate,
@@ -27,6 +32,10 @@ const json = async (relativePath: string): Promise<unknown> =>
   JSON.parse(await readFile(new URL(`../../${relativePath}`, import.meta.url), 'utf8')) as unknown;
 
 describe('US5 update validation', () => {
+  const updateId = 'update-04ea38e2db1d7b390448b807';
+  const evidencePath =
+    'docs/reviews/human-content/previews/initial-v1/us5/update-simulation-review.json';
+
   it('enumerates every affected content and derived index surface', () => {
     const impact = enumerateCorrectionImpacts({
       correctionId: 'correction-abc500-e',
@@ -72,6 +81,120 @@ describe('US5 update validation', () => {
       expect.arrayContaining(['DEPENDENCY_CYCLE', 'PROBLEM_UNREACHABLE', 'INDEX_MISSING']),
     );
     expect(result.aggregatePassed).toBe(false);
+  });
+
+  it('derives classification mappings and DAG edges from frozen artifacts', () => {
+    const base = {
+      selectedProblemIds: ['abc500-e'],
+      candidates: [
+        {
+          problemId: 'abc500-e',
+          sourceRevisionIds: ['source-abc500-e'],
+          classifications: [
+            {
+              domain: 'graphs',
+              outcomeId: 'outcome-candidate-graphs',
+              sourceRevisionIds: ['source-abc500-e'],
+              rationale: 'Shortest paths.',
+            },
+          ],
+        },
+      ],
+      groups: [
+        {
+          domain: 'graphs',
+          candidateOutcomeId: 'outcome-candidate-graphs',
+          problemIds: ['abc500-e'],
+          sourceRevisionIds: ['source-abc500-e'],
+          tag: { id: 'tag-graphs', prerequisiteTagIds: ['tag-basics'] },
+          outcome: { id: 'outcome-graphs', prerequisiteOutcomeIds: ['outcome-basics'] },
+          unit: { id: 'unit-graphs', prerequisiteUnitIds: ['unit-basics'] },
+          placements: [
+            {
+              problemId: 'abc500-e',
+              tagIds: ['tag-graphs'],
+              outcomeIds: ['outcome-graphs'],
+              unitIds: ['unit-graphs'],
+              sourceRevisionIds: ['source-abc500-e'],
+              classificationRationale: 'Shortest paths.',
+            },
+          ],
+        },
+      ],
+    } as const;
+    expect(deriveFrozenClassification(base)).toMatchObject({
+      proposals: [],
+      validProblemIds: ['abc500-e'],
+      taxonomyEdges: [
+        ['tag-basics', 'tag-graphs'],
+        ['outcome-basics', 'outcome-graphs'],
+        ['unit-basics', 'unit-graphs'],
+      ],
+    });
+    const broken = {
+      ...base,
+      candidates: [
+        {
+          ...base.candidates[0],
+          classifications: [
+            { ...base.candidates[0].classifications[0], outcomeId: 'outcome-missing' },
+          ],
+        },
+      ],
+    };
+    expect(deriveFrozenClassification(broken)).toMatchObject({
+      validProblemIds: [],
+      proposals: [expect.objectContaining({ problemId: 'abc500-e' })],
+    });
+  });
+
+  it('never admits fixture updates through the production release gate', () => {
+    expect(isProductionReleaseEligible({ state: 'ELIGIBLE_FOR_BATCH', fixtureMode: true })).toBe(
+      false,
+    );
+    expect(isProductionReleaseEligible({ state: 'ELIGIBLE_FOR_BATCH', fixtureMode: false })).toBe(
+      true,
+    );
+  });
+
+  it('rejects review evidence whose trusted review-item scope was replaced', async () => {
+    const outputRoot = await mkdtemp(path.join(tmpdir(), 'abc-review-scope-'));
+    const requiredPaths = [
+      evidencePath,
+      'docs/work-manifests/initial/us5/manifest.json',
+      'docs/verification/previews/initial-v1/components/update-simulation.json',
+      'staging/previews/initial-v1/release-simulation/verification.json',
+      `staging/previews/initial-v1/release-simulation/${updateId}/manifest.json`,
+    ];
+    try {
+      for (const relativePath of requiredPaths) {
+        const destination = path.join(outputRoot, relativePath);
+        await mkdir(path.dirname(destination), { recursive: true });
+        await copyFile(new URL(`../../${relativePath}`, import.meta.url), destination);
+      }
+      const evidence = JSON.parse(await readFile(path.join(outputRoot, evidencePath), 'utf8')) as {
+        evidenceDigest: string;
+        reviewItems: { reviewItemId: string }[];
+        [key: string]: unknown;
+      };
+      const firstItem = evidence.reviewItems[0];
+      if (!firstItem) throw new Error('Review fixture has no review items.');
+      firstItem.reviewItemId = 'human-review-item-replaced';
+      const subject = Object.fromEntries(
+        Object.entries(evidence).filter(([key]) => key !== 'evidenceDigest'),
+      );
+      evidence.evidenceDigest = canonicalDigest(subject);
+      await writeFile(path.join(outputRoot, evidencePath), `${JSON.stringify(evidence)}\n`);
+      await expect(
+        validatePreviewUpdateReview({
+          updateId,
+          evidencePath,
+          repositoryRoot: outputRoot,
+        }),
+      ).rejects.toThrow('REVIEW_ITEM_INVENTORY_INVALID');
+    } finally {
+      await rm(outputRoot, { recursive: true, force: true });
+    }
   });
 
   it('resumes an on-hold operation without changing its update identity', async () => {
@@ -165,6 +288,12 @@ describe('US5 update validation', () => {
     expect(componentSubjectDigest(currentSubject)).toBe(subjectDigest);
     expect(componentEvidenceDigest(componentSubject)).toBe(componentDigest);
     expect(component.artifactDigest).toBe(canonicalDigest(verification));
+    await expect(
+      validatePreviewUpdateReview({
+        updateId: update.updateId,
+        evidencePath,
+      }),
+    ).resolves.toMatchObject({ aggregatePassed: true });
     expect(
       verifyPreviewReleaseSimulation({
         previewId: 'initial-v1',
