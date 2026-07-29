@@ -13,8 +13,8 @@
     "abc256-f"
   ],
   "inputDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
-  "artifactDigest": "1422d198bc1d9dfd29bb2b00fb8db78cd6343560ac7102b62b3b8407b7332b88",
-  "outputDigest": "ea417136512b311540d4d46ae9225934dc3a311eb218aa5a6018b1d86e4b142d",
+  "artifactDigest": "c9ff17a9aeedfc7ce722613ab5d188821a1317b62ad6f78a54bef17390d43166",
+  "outputDigest": "1906433821e29974c6f458ce2eb915f94ac517be4e0447aa4fe30821a6c72234",
   "catalogSubjectDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
   "status": "passed",
   "workManifestPath": "docs/work-manifests/initial/us3/manifest.json",
@@ -22,25 +22,25 @@
   "artifactFiles": [
     {
       "path": "docs/verification/previews/initial-v1/learning-records/acceptance.json",
-      "digest": "e7ac0eacf4b83ea022d5cd7351541ae8d6ae151c705b5141b1c0789b1e623dd5"
+      "digest": "9e8132322b89d89c64e9026cda701399164dac6786962d7842664debf1389242"
     },
     {
       "path": "docs/verification/previews/initial-v1/learning-records/e2e.json",
-      "digest": "5818b3c4ce470d81add4b4d9776312bdc5b4a7900e4d3ed5293784139f274db8"
+      "digest": "5cb97142ba100e99e68138c4d4c8d82378b2883bd07cf6ebcd868a9e5e6d0fd9"
     },
     {
       "path": "docs/verification/previews/initial-v1/learning-records/raw-playwright.json",
-      "digest": "e295afcc3eea266834ef8f7f4d708deceb3d32ca3a371ddd899e68906af109ef"
+      "digest": "b1be837d87fc5e4058fed5e29eec41145facf40924e6a2d0ab8e1a0dedae2ef5"
     },
     {
       "path": "docs/reviews/human-content/previews/initial-v1/us3/learning-records-review.json",
-      "digest": "f4e165ff31ed2e55b8b479c04c6e45ab886d9c0ae47815cf6ebaa8636f33e2bb"
+      "digest": "e5f8965e497295d2d082de7a8296dc23ddbb1b9b816d87df149ce400e0c335c1"
     }
   ],
   "reviewEvidence": {
     "path": "docs/reviews/human-content/previews/initial-v1/us3/learning-records-review.json",
-    "digest": "f4e165ff31ed2e55b8b479c04c6e45ab886d9c0ae47815cf6ebaa8636f33e2bb",
-    "subjectDigest": "23cd86661cff33cb51c53e661f5fd2993910bcdb2eeb197e25c8474a75e7b32c",
+    "digest": "e5f8965e497295d2d082de7a8296dc23ddbb1b9b816d87df149ce400e0c335c1",
+    "subjectDigest": "ebf3d42d895dc4f489422f2563918ab260a4c783d0330ba913ee76d3b088a4eb",
     "reviewMode": "self",
     "aggregatePassed": true
   }

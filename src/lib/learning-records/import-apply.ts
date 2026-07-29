@@ -50,7 +50,8 @@ export async function applyLearningRecordImport(
   if (!preview.applicable) throw new Error('無効な項目を含むバックアップは適用できません。');
 
   const candidates = preview.items.filter(
-    (item) => item.incoming !== null && item.classification !== 'same',
+    (item) =>
+      item.incoming !== null && (policy === 'backup-wins' || item.classification !== 'same'),
   );
   const transaction = database.transaction('readwrite');
   try {

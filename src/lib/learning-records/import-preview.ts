@@ -64,6 +64,7 @@ function compareComponent(
   const incomingTimestamp = incoming[timestampKey];
   const localTimestamp = local[timestampKey];
   const result = incoming[component];
+  const valuesEqual = incoming[component] === local[component];
   if (
     incomingTimestamp === localTimestamp ||
     (incomingTimestamp !== null &&
@@ -75,8 +76,10 @@ function compareComponent(
   ) {
     return {
       component,
-      source: 'same',
-      reason: 'timestamp_tie_local_preserved',
+      source: valuesEqual ? 'same' : 'local',
+      reason: valuesEqual
+        ? 'component_values_and_timestamps_equal'
+        : 'timestamp_tie_local_preserved',
       result: local[component],
     };
   }
@@ -157,7 +160,7 @@ export function previewLearningRecordImport(
     return {
       problemId: incoming.problemId,
       classification: same ? 'same' : 'updated',
-      reason: same ? 'all_components_equal_or_tied' : 'component_merge_available',
+      reason: same ? 'all_components_equal' : 'component_merge_available',
       incoming,
       local,
       components,

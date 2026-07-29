@@ -119,18 +119,20 @@ describe('learning record backup and restore', () => {
         record(1),
         record(2),
         { problemId: 'abc503-e', status: 'broken' },
+        record(4),
       ],
     };
     const preview = previewLearningRecordImport(
       input,
       [local, record(2)],
-      new Set(['abc500-e', 'abc502-e', 'abc503-e']),
+      new Set(['abc500-e', 'abc502-e', 'abc503-e', 'abc504-e']),
     );
     expect(preview.items.map(({ classification }) => classification)).toEqual([
       'updated',
       'unknown_problem_id',
       'same',
       'invalid_item',
+      'new',
     ]);
     expect(preview.items[0]?.components).toEqual([
       expect.objectContaining({ component: 'status', source: 'local' }),
@@ -183,5 +185,71 @@ describe('learning record backup and restore', () => {
     const target = new InMemoryLearningRecordDatabase([newerLocal]);
     await applyLearningRecordImport(target, preview, 'newer-wins');
     expect(target.records.get(incoming.problemId)?.status).toBe('completed');
+  });
+
+  it.each([
+    { policy: 'newer-wins' as const, expectedStatus: 'in_progress' },
+    { policy: 'backup-wins' as const, expectedStatus: 'completed' },
+  ])(
+    'resolves equal-timestamp different values with $policy',
+    async ({ policy, expectedStatus }) => {
+      const local = record(0, {
+        status: 'in_progress',
+        statusUpdatedAt: '2026-07-29T11:00:00+09:00',
+      });
+      const incoming = record(0, {
+        status: 'completed',
+        statusUpdatedAt: '2026-07-29T11:00:00+09:00',
+      });
+      const preview = previewLearningRecordImport(
+        {
+          schemaVersion: '1.0.0',
+          exportedAt: '2026-07-29T12:30:00+09:00',
+          catalogVersionAtExport: '2026.07.1',
+          records: [incoming],
+          orphanedProblemIds: [],
+        },
+        [local],
+        new Set([incoming.problemId]),
+      );
+      expect(preview.items[0]).toMatchObject({
+        classification: 'updated',
+        components: [
+          {
+            component: 'status',
+            source: 'local',
+            reason: 'timestamp_tie_local_preserved',
+            result: 'in_progress',
+          },
+          expect.objectContaining({ component: 'needsReview', source: 'same' }),
+        ],
+      });
+      const target = new InMemoryLearningRecordDatabase([local]);
+      await applyLearningRecordImport(target, preview, policy);
+      expect(target.records.get(incoming.problemId)?.status).toBe(expectedStatus);
+    },
+  );
+
+  it('backup-wins re-applies an item that changed after an identical preview', async () => {
+    const incoming = record(0);
+    const preview = previewLearningRecordImport(
+      {
+        schemaVersion: '1.0.0',
+        exportedAt: '2026-07-29T12:30:00+09:00',
+        catalogVersionAtExport: '2026.07.1',
+        records: [incoming],
+        orphanedProblemIds: [],
+      },
+      [incoming],
+      new Set([incoming.problemId]),
+    );
+    expect(preview.items[0]?.classification).toBe('same');
+    const changedAfterPreview = record(0, {
+      status: 'in_progress',
+      statusUpdatedAt: incoming.statusUpdatedAt,
+    });
+    const target = new InMemoryLearningRecordDatabase([changedAfterPreview]);
+    await applyLearningRecordImport(target, preview, 'backup-wins');
+    expect(target.records.get(incoming.problemId)).toEqual(incoming);
   });
 });

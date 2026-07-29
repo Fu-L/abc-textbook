@@ -9,6 +9,14 @@ import {
   HumanContentReviewEvidenceSchema,
   LearningRecordE2eEvidenceSchema,
 } from '../src/lib/domain/schemas.js';
+import { exportLearningRecords } from '../src/lib/learning-records/export.js';
+import { applyLearningRecordImport } from '../src/lib/learning-records/import-apply.js';
+import {
+  IMPORT_CLASSIFICATIONS,
+  previewLearningRecordImport,
+} from '../src/lib/learning-records/import-preview.js';
+import type { LearningRecord } from '../src/lib/learning-records/types.js';
+import { InMemoryLearningRecordDatabase } from '../tests/fixtures/in-memory-learning-record-database.js';
 
 const root = process.cwd();
 const generatedAt = new Date().toISOString();
@@ -240,6 +248,131 @@ const implementationSubjects = await Promise.all(
   })),
 );
 
+const acceptanceRecord = (
+  index: number,
+  overrides: Partial<LearningRecord> = {},
+): LearningRecord => ({
+  problemId: `abc${String(500 + index)}-e`,
+  status: 'completed',
+  statusUpdatedAt: '2026-07-29T10:00:00+09:00',
+  needsReview: false,
+  needsReviewUpdatedAt: '2026-07-29T10:00:00+09:00',
+  ...overrides,
+});
+
+const verifyRestoreAcceptance = async () => {
+  const records = Array.from({ length: 120 }, (_, index) => acceptanceRecord(index));
+  const ids = new Set(records.map(({ problemId }) => problemId));
+  const backup = await exportLearningRecords(new InMemoryLearningRecordDatabase(records), {
+    catalogVersion: '2026.07.1',
+    catalogProblemIds: ids,
+    exportedAt: '2026-07-29T10:30:00+09:00',
+  });
+  const restored = new InMemoryLearningRecordDatabase();
+  const restorePreview = previewLearningRecordImport(backup, [], ids);
+  await applyLearningRecordImport(restored, restorePreview, 'newer-wins');
+  const restoredCount = restored.records.size;
+  const valuesAndTimestampsMatch = records.every(
+    (record) => JSON.stringify(restored.records.get(record.problemId)) === JSON.stringify(record),
+  );
+
+  const rollbackTarget = new InMemoryLearningRecordDatabase();
+  rollbackTarget.failOnPutNumber = 2;
+  try {
+    await applyLearningRecordImport(rollbackTarget, restorePreview, 'backup-wins');
+  } catch {
+    // The observed record count below proves whether the transaction rolled back atomically.
+  }
+  const partialCountAfterInjectedFailure = rollbackTarget.records.size;
+
+  const localUpdated = acceptanceRecord(0, {
+    status: 'in_progress',
+    statusUpdatedAt: '2026-07-29T11:00:00+09:00',
+  });
+  const classificationPreview = previewLearningRecordImport(
+    {
+      schemaVersion: '1.0.0',
+      exportedAt: '2026-07-29T12:30:00+09:00',
+      catalogVersionAtExport: '2026.07.1',
+      orphanedProblemIds: [],
+      records: [
+        acceptanceRecord(0, {
+          needsReview: true,
+          needsReviewUpdatedAt: '2026-07-29T12:00:00+09:00',
+        }),
+        acceptanceRecord(1),
+        acceptanceRecord(2),
+        { problemId: 'abc503-e', status: 'broken' },
+        acceptanceRecord(4),
+      ],
+    },
+    [localUpdated, acceptanceRecord(2)],
+    new Set(['abc500-e', 'abc502-e', 'abc503-e', 'abc504-e']),
+  );
+  const observedClassifications = new Set(
+    classificationPreview.items.map(({ classification }) => classification),
+  );
+  const fiveClassPreview = IMPORT_CLASSIFICATIONS.every((classification) =>
+    observedClassifications.has(classification),
+  );
+
+  const backupJson = JSON.stringify(backup);
+  const accountFields = /"(?:account|user|owner)(?:Id)?"\s*:/iu.test(backupJson);
+  const syncFields = /"(?:sync|telemetry)[^"]*"\s*:/iu.test(backupJson);
+  const runtimeSubjects = implementationSubjectPaths.filter((subjectPath) =>
+    subjectPath.startsWith('src/'),
+  );
+  const runtimeSource = (
+    await Promise.all(runtimeSubjects.map((subjectPath) => readFile(subjectPath, 'utf8')))
+  ).join('\n');
+  const externalTransmission =
+    /\b(?:fetch|XMLHttpRequest|WebSocket|EventSource)\s*(?:\(|\.)|navigator\.sendBeacon/u.test(
+      runtimeSource,
+    );
+  const restorePassed =
+    records.length >= 100 &&
+    restoredCount === records.length &&
+    valuesAndTimestampsMatch &&
+    partialCountAfterInjectedFailure === 0 &&
+    fiveClassPreview;
+  const privacyPassed = !externalTransmission && !accountFields && !syncFields;
+  return {
+    restore: {
+      recordCount: records.length,
+      restoredCount,
+      valuesAndTimestampsMatch,
+      partialCountAfterInjectedFailure,
+      observedClassifications: IMPORT_CLASSIFICATIONS.filter((classification) =>
+        observedClassifications.has(classification),
+      ),
+      fiveClassPreview,
+      passed: restorePassed,
+    },
+    privacy: {
+      checkedRuntimePaths: runtimeSubjects,
+      localOnly: !externalTransmission,
+      externalTransmission,
+      accountFields,
+      syncFields,
+      passed: privacyPassed,
+    },
+  };
+};
+const directAcceptance = await verifyRestoreAcceptance();
+const acceptanceAggregatePassed =
+  vitestReport.numFailedTests === 0 &&
+  playwrightReport.errors.length === 0 &&
+  staticQualityRun.exitCode === 0 &&
+  runs.every(
+    ({ durationMs, statusPersisted, reviewPersisted }) =>
+      durationMs <= 30000 && statusPersisted && reviewPersisted,
+  ) &&
+  directAcceptance.restore.passed &&
+  directAcceptance.privacy.passed;
+if (!acceptanceAggregatePassed) {
+  throw new Error('LearningRecord acceptance checks did not all pass.');
+}
+
 const acceptance = {
   schemaVersion: '1.0.0',
   previewId: 'initial-v1',
@@ -271,19 +404,8 @@ const acceptance = {
         ({ statusPersisted, reviewPersisted }) => statusPersisted && reviewPersisted,
       ),
     },
-    restore: {
-      recordCount: 120,
-      restoredCount: 120,
-      partialCountAfterInjectedFailure: 0,
-      fiveClassPreview: true,
-      passed: true,
-    },
-    privacy: {
-      localOnly: true,
-      externalTransmission: false,
-      accountFields: false,
-      syncFields: false,
-    },
+    restore: directAcceptance.restore,
+    privacy: directAcceptance.privacy,
   },
   e2eEvidencePath: e2ePath,
   e2eEvidenceDigest: await fileDigest(e2ePath),
@@ -291,7 +413,7 @@ const acceptance = {
   rawReportDigest: rawEvidenceDigest,
   implementationSubjects,
   implementationSubjectDigest: canonicalDigest(implementationSubjects),
-  aggregatePassed: true,
+  aggregatePassed: acceptanceAggregatePassed,
   generatedAt,
 };
 const acceptancePath = 'docs/verification/previews/initial-v1/learning-records/acceptance.json';
