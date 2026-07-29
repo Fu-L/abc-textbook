@@ -1,0 +1,13 @@
+---
+interface Props {
+  value: string | null;
+  label: string;
+}
+const { value, label } = Astro.props;
+import { formatLearningRecordTimestamp } from '../lib/learning-records/format-timestamp.js';
+const formatted = formatLearningRecordTimestamp(value);
+---
+
+<span data-learning-record-timestamp>
+  {label}: {value ? <time datetime={value}>{formatted}</time> : formatted}
+</span>

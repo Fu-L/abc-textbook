@@ -1,7 +1,16 @@
 import { z } from 'zod';
 
 import { defineZodContractSchema, strictObject } from '../contract-schema.js';
-import { OffsetDateTimeSchema, ProblemIdSchema } from './catalog.js';
+import { isOffsetDateTime } from '../date-time.js';
+import {
+  OffsetDateTimeSchema as StructuralOffsetDateTimeSchema,
+  ProblemIdSchema,
+} from './content-common.js';
+
+const OffsetDateTimeSchema = StructuralOffsetDateTimeSchema.refine(
+  isOffsetDateTime,
+  'Invalid RFC 3339 date-time.',
+);
 
 export const LearningRecordSchema = strictObject({
   problemId: ProblemIdSchema,
@@ -34,11 +43,12 @@ export const LearningRecordBackupSchema = strictObject({
       message: 'Orphan IDs must be unique.',
     });
   }
-  const overlap = recordIds.find((problemId) => orphanIds.includes(problemId));
-  if (overlap) {
+  const missingRecord = orphanIds.find((problemId) => !recordIds.includes(problemId));
+  if (missingRecord) {
     context.addIssue({
       code: 'custom',
-      message: `${overlap} cannot be both a record and an orphan.`,
+      path: ['orphanedProblemIds'],
+      message: `${missingRecord} must retain its full record in the backup.`,
     });
   }
 });

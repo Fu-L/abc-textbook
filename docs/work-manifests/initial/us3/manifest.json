@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T079-us3",
+  "taskId": "T079",
+  "scopeDigest": "15b67c548d3253c882dd750cf030bf1dab9fc77bf18b84a0df11060d3ab68d45",
+  "digest": "4deae6354b0b0a47206822ef0d7f6d0d33752a8b7e945bde9b2784378cb8459e",
+  "changeKind": "mixed",
+  "requiredRequirementIds": ["FR-020", "FR-021", "SC-012", "SC-018"],
+  "learningOutcomeIds": ["outcome-us3-backup-restore", "outcome-us3-local-learning-records"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T079-learning-record-storage",
+      "changeKind": "mixed",
+      "paths": [
+        "src/components/LearningRecordControl.tsx",
+        "src/components/LearningRecordTimestamp.astro",
+        "src/lib/learning-records/database.ts",
+        "src/lib/learning-records/format-timestamp.ts",
+        "src/lib/learning-records/store.ts",
+        "src/lib/learning-records/types.ts",
+        "src/pages/problems",
+        "tests/integration/learning-record-control.test.ts",
+        "tests/unit/learning-record-store.test.ts",
+        "tests/unit/learning-record-timestamp.test.ts"
+      ],
+      "itemIds": [
+        "us3.independent-actions",
+        "us3.indexeddb",
+        "us3.storage-failure",
+        "us3.timestamp"
+      ],
+      "requirementIds": ["FR-020", "SC-012"],
+      "learningOutcomeIds": ["outcome-us3-local-learning-records"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-us3-e2e", "check-us3-unit"],
+      "evidenceRoles": ["learning_record_control_test"],
+      "maintenanceBenefit": "Problem ID keyed shared storage and import contracts keep preview and future full-corpus routes on one implementation path.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T079-learning-record-backup",
+      "changeKind": "mixed",
+      "paths": [
+        "package.json",
+        "scripts/verify-learning-records.ts",
+        "src/components/LearningRecordSettings.tsx",
+        "src/components/ProblemFilters.tsx",
+        "src/components/ReviewProblemList.tsx",
+        "src/lib/domain/schema-parts/learning.ts",
+        "src/lib/learning-records/export.ts",
+        "src/lib/learning-records/filter.ts",
+        "src/lib/learning-records/import-apply.ts",
+        "src/lib/learning-records/import-preview.ts",
+        "src/pages/problems/index.astro",
+        "src/pages/review/index.astro",
+        "src/pages/settings/learning-records.astro",
+        "tests/e2e/learning-records.spec.ts",
+        "tests/fixtures/in-memory-learning-record-database.ts",
+        "tests/integration/learning-record-backup.test.ts",
+        "tests/unit/evidence-aggregate.test.ts"
+      ],
+      "itemIds": ["us3.backup", "us3.import-preview", "us3.review-filter", "us3.rollback"],
+      "requirementIds": ["FR-021", "SC-018"],
+      "learningOutcomeIds": ["outcome-us3-backup-restore"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": ["RU-T079-learning-record-storage"],
+      "checkIds": ["check-us3-e2e", "check-us3-integration"],
+      "evidenceRoles": ["learning_record_backup_test"],
+      "maintenanceBenefit": "Problem ID keyed shared storage and import contracts keep preview and future full-corpus routes on one implementation path.",
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": "Problem ID keyed shared storage and import contracts keep preview and future full-corpus routes on one implementation path.",
+  "state": "planned",
+  "createdAt": "2026-07-29T20:00:00+09:00",
+  "updatedAt": "2026-07-29T20:00:00+09:00"
+}

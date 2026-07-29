@@ -1,0 +1,20 @@
+---
+import LearningRecordSettings from '../../components/LearningRecordSettings.tsx';
+import TextbookLayout from '../../layouts/TextbookLayout.astro';
+import { previewCatalog } from '../../lib/catalog/preview-ui-catalog.js';
+
+const catalogProblemIds = previewCatalog.problems.map(({ id }) => id);
+const catalogVersion = '2026.07.1';
+---
+
+<TextbookLayout
+  title="学習記録のバックアップ"
+  description="端末内の学習記録をJSONでバックアップ・復元します"
+  breadcrumbs={[{ label: '学習記録のバックアップ' }]}
+>
+  <h1>学習記録のバックアップ</h1>
+  <noscript
+    ><p>バックアップと復元にはJavaScriptが必要です。教材本文は引き続き閲覧できます。</p></noscript
+  >
+  <LearningRecordSettings client:load {catalogProblemIds} {catalogVersion} />
+</TextbookLayout>

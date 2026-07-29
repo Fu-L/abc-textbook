@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0.0",
+  "previewId": "initial-v1",
+  "catalogSubjectDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "problemIds": [
+    "abc212-g",
+    "abc215-e",
+    "abc218-f",
+    "abc222-g",
+    "abc223-f",
+    "abc232-e",
+    "abc252-e",
+    "abc256-f"
+  ],
+  "checks": {
+    "vitest": { "passedFiles": 40, "passedTests": 351, "failedTests": 0 },
+    "sharedContractE2e": { "passed": 66, "failed": 0, "engineRuns": 48, "storageFailureRuns": 9 },
+    "representativeTiming": {
+      "maximumObservedMs": 388.39995799999997,
+      "requiredMaximumMs": 30000,
+      "passed": true
+    },
+    "reload": { "checkedEngineRuns": 48, "preservedEngineRuns": 48, "passed": true },
+    "restore": {
+      "recordCount": 120,
+      "restoredCount": 120,
+      "valuesAndTimestampsMatch": true,
+      "partialCountAfterInjectedFailure": 0,
+      "observedClassifications": ["new", "updated", "same", "unknown_problem_id", "invalid_item"],
+      "fiveClassPreview": true,
+      "passed": true
+    },
+    "privacy": {
+      "checkedRuntimePaths": [
+        "src/components/LearningRecordControl.tsx",
+        "src/components/LearningRecordSettings.tsx",
+        "src/components/LearningRecordTimestamp.astro",
+        "src/components/ProblemFilters.tsx",
+        "src/components/ReviewProblemList.tsx",
+        "src/lib/domain/schema-parts/learning.ts",
+        "src/lib/learning-records/database.ts",
+        "src/lib/learning-records/export.ts",
+        "src/lib/learning-records/filter.ts",
+        "src/lib/learning-records/format-timestamp.ts",
+        "src/lib/learning-records/import-apply.ts",
+        "src/lib/learning-records/import-preview.ts",
+        "src/lib/learning-records/store.ts",
+        "src/lib/learning-records/types.ts",
+        "src/pages/problems/[problemId].astro",
+        "src/pages/problems/index.astro",
+        "src/pages/review/index.astro",
+        "src/pages/settings/learning-records.astro"
+      ],
+      "localOnly": true,
+      "externalTransmission": false,
+      "accountFields": false,
+      "syncFields": false,
+      "passed": true
+    }
+  },
+  "e2eEvidencePath": "docs/verification/previews/initial-v1/learning-records/e2e.json",
+  "e2eEvidenceDigest": "5cb97142ba100e99e68138c4d4c8d82378b2883bd07cf6ebcd868a9e5e6d0fd9",
+  "rawReportPath": "docs/verification/previews/initial-v1/learning-records/raw-playwright.json",
+  "rawReportDigest": "b1be837d87fc5e4058fed5e29eec41145facf40924e6a2d0ab8e1a0dedae2ef5",
+  "implementationSubjects": [
+    {
+      "path": "package.json",
+      "digest": "b9abd9fbade05965dc771736f031f706d0b0778d27ef7b987af7eca74aa1cba0"
+    },
+    {
+      "path": "scripts/verify-learning-records.ts",
+      "digest": "24d3ef9e7d1e6d5f0b96dd352749026e7662d7bd03d5ee2a5253afaf1134f0ad"
+    },
+    {
+      "path": "src/components/LearningRecordControl.tsx",
+      "digest": "bc100c9498ae00f627f189d7317d8e9b20968f489c07f12b0282f720d967304e"
+    },
+    {
+      "path": "src/components/LearningRecordSettings.tsx",
+      "digest": "c199c313c85b6e8d93e6e17b3f50fbdf5e1e489bc4fb2769682e4a25fec75cf9"
+    },
+    {
+      "path": "src/components/LearningRecordTimestamp.astro",
+      "digest": "7c6357392b15434b340f3cadcebab932aba19369c6293d6632d4da353aa57aa4"
+    },
+    {
+      "path": "src/components/ProblemFilters.tsx",
+      "digest": "06baab27e4abd6f5efc781e669b1745e0e5e357736e71af35b12595cb4ac1da5"
+    },
+    {
+      "path": "src/components/ReviewProblemList.tsx",
+      "digest": "009038985beb2f192504feed53c57bb8a050c2968ce26ffd40608baa21c4f51a"
+    },
+    {
+      "path": "src/lib/domain/schema-parts/learning.ts",
+      "digest": "c449f119379fa528a0c376b4c252b429b25e519995f9d0f58abff3d37ec6c8d0"
+    },
+    {
+      "path": "src/lib/learning-records/database.ts",
+      "digest": "dff8109d06631514ca73d97ce4b878955a0da2df48124743799807d607d0e6f7"
+    },
+    {
+      "path": "src/lib/learning-records/export.ts",
+      "digest": "23f1c1722a357a2552b218a003667a2fe96a3e6e05d01a4219d4a101cf98f646"
+    },
+    {
+      "path": "src/lib/learning-records/filter.ts",
+      "digest": "662711c97698d93c1a81788db9baf5bf37039bccbf317fdf3799f7ab5a361146"
+    },
+    {
+      "path": "src/lib/learning-records/format-timestamp.ts",
+      "digest": "131e6b5739c6daa7d22423d625cc60e426a65812b01ddb6772da462d45e1f239"
+    },
+    {
+      "path": "src/lib/learning-records/import-apply.ts",
+      "digest": "fb93c3b11b91936b1b6f6f9b5b6ebcf85cdc82d714a16726a787d1f4da6facb7"
+    },
+    {
+      "path": "src/lib/learning-records/import-preview.ts",
+      "digest": "85c77322d0664c147e110e755d1bfedf79dc9641a50a9b425050447768dd6054"
+    },
+    {
+      "path": "src/lib/learning-records/store.ts",
+      "digest": "5756e6b5b8a41d17720f650e4ffaa68e6df76be1f49e89e56f8a08289ead154c"
+    },
+    {
+      "path": "src/lib/learning-records/types.ts",
+      "digest": "26a3514c7f4bd30182fa1447da69df0d2947c684e83040aca49ef0e15a95e124"
+    },
+    {
+      "path": "src/pages/problems/[problemId].astro",
+      "digest": "f8475ddd2ee61ccd94bf3e9e4e5d057002102ee69477000e1402cd2f5ec66e75"
+    },
+    {
+      "path": "src/pages/problems/index.astro",
+      "digest": "6a16649597f3e4172d9afd62032c9277703fb469a8706ea074ea3d1ddeb0b7aa"
+    },
+    {
+      "path": "src/pages/review/index.astro",
+      "digest": "243128fe5f518b5651e35dc88742736860fc79f99c68d06830b79de48752e714"
+    },
+    {
+      "path": "src/pages/settings/learning-records.astro",
+      "digest": "b47e25e96bd3c4a10fdc09883f755e72a5c86ec2d30a0a60cd8b4cdfc8687820"
+    },
+    {
+      "path": "tests/e2e/learning-records.spec.ts",
+      "digest": "3fa608c798e89654f093554b52e2bf685343670ebbb169140fd01909c5e6a8a3"
+    },
+    {
+      "path": "tests/fixtures/in-memory-learning-record-database.ts",
+      "digest": "371cd647b19e37d95880dbd9cf0ff15d096b3306d7b54b83683c49ae8aabae95"
+    },
+    {
+      "path": "tests/integration/learning-record-backup.test.ts",
+      "digest": "733b54fa0f632422dbf8243c5794efa30669b4288e54637b459c0adbcefe371b"
+    },
+    {
+      "path": "tests/integration/learning-record-control.test.ts",
+      "digest": "4b827e90657cfb2e70c9564ca05a7facf41784d339d2ed0a28b6222387665226"
+    },
+    {
+      "path": "tests/unit/evidence-aggregate.test.ts",
+      "digest": "22872812054ea9aee387cd964432cdbc1bee96ea1f5aadce3e3874598b159e9c"
+    },
+    {
+      "path": "tests/unit/learning-record-store.test.ts",
+      "digest": "a67586f878ebc907519550175416940d9f434f5d2378fe9cd378f2a0ced4773d"
+    },
+    {
+      "path": "tests/unit/learning-record-timestamp.test.ts",
+      "digest": "2d4b81f53cb0148b8a9d3b590e6ef64a363d5fdaf5cc08b1ff6402d9a8fb039d"
+    }
+  ],
+  "implementationSubjectDigest": "c0e746dedace0a6b8eaffc3e3944f3d6f33411f96223aca1e08077cd679c3bd2",
+  "aggregatePassed": true,
+  "generatedAt": "2026-07-29T14:12:49.133Z"
+}

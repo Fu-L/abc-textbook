@@ -1,0 +1,47 @@
+{
+  "componentId": "learning-records",
+  "previewId": "initial-v1",
+  "manifestDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "problemIds": [
+    "abc212-g",
+    "abc215-e",
+    "abc218-f",
+    "abc222-g",
+    "abc223-f",
+    "abc232-e",
+    "abc252-e",
+    "abc256-f"
+  ],
+  "inputDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "artifactDigest": "c9ff17a9aeedfc7ce722613ab5d188821a1317b62ad6f78a54bef17390d43166",
+  "outputDigest": "1906433821e29974c6f458ce2eb915f94ac517be4e0447aa4fe30821a6c72234",
+  "catalogSubjectDigest": "ddfc097dc739cce1332863606e5e6fd589319b990b629c46b77d62281bb89d10",
+  "status": "passed",
+  "workManifestPath": "docs/work-manifests/initial/us3/manifest.json",
+  "workManifestDigest": "4deae6354b0b0a47206822ef0d7f6d0d33752a8b7e945bde9b2784378cb8459e",
+  "artifactFiles": [
+    {
+      "path": "docs/verification/previews/initial-v1/learning-records/acceptance.json",
+      "digest": "9e8132322b89d89c64e9026cda701399164dac6786962d7842664debf1389242"
+    },
+    {
+      "path": "docs/verification/previews/initial-v1/learning-records/e2e.json",
+      "digest": "5cb97142ba100e99e68138c4d4c8d82378b2883bd07cf6ebcd868a9e5e6d0fd9"
+    },
+    {
+      "path": "docs/verification/previews/initial-v1/learning-records/raw-playwright.json",
+      "digest": "b1be837d87fc5e4058fed5e29eec41145facf40924e6a2d0ab8e1a0dedae2ef5"
+    },
+    {
+      "path": "docs/reviews/human-content/previews/initial-v1/us3/learning-records-review.json",
+      "digest": "e5f8965e497295d2d082de7a8296dc23ddbb1b9b816d87df149ce400e0c335c1"
+    }
+  ],
+  "reviewEvidence": {
+    "path": "docs/reviews/human-content/previews/initial-v1/us3/learning-records-review.json",
+    "digest": "e5f8965e497295d2d082de7a8296dc23ddbb1b9b816d87df149ce400e0c335c1",
+    "subjectDigest": "ebf3d42d895dc4f489422f2563918ab260a4c783d0330ba913ee76d3b088a4eb",
+    "reviewMode": "self",
+    "aggregatePassed": true
+  }
+}
