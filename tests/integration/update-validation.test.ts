@@ -376,6 +376,8 @@ describe('US5 update validation', () => {
       await verifyPreviewReleaseSimulation({
         previewId: 'initial-v1',
         update: { updateId: update.updateId, publicationUpdate: update },
+        executeSimulation: () =>
+          Promise.resolve({ updateId: update.updateId, publicationUpdate: update }),
       }),
     ).toEqual(verification);
   });
@@ -397,6 +399,8 @@ describe('US5 update validation', () => {
     const result = await verifyPreviewReleaseSimulation({
       previewId: 'initial-v1',
       update: { updateId: update.updateId, publicationUpdate: broken },
+      executeSimulation: () =>
+        Promise.resolve({ updateId: update.updateId, publicationUpdate: broken }),
     });
     expect(result).toMatchObject({ stagingClosed: false, aggregatePassed: false });
     expect(result.findings).toContain(

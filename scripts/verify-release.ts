@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { PublicationUpdateSchema } from '../src/lib/domain/schema-parts/release.js';
+import { runUpdatePipeline } from './update-abc/index.js';
 
 export const isProductionReleaseEligible = (update: {
   readonly state: string;
@@ -63,6 +64,10 @@ export const verifyPreviewReleaseSimulation = async (input: {
     readonly updateId: string;
     readonly publicationUpdate: unknown;
   };
+  readonly executeSimulation: () => Promise<{
+    readonly updateId: string;
+    readonly publicationUpdate: unknown;
+  }>;
   readonly repositoryRoot?: string;
 }) => {
   const findings: string[] = [];
@@ -73,6 +78,13 @@ export const verifyPreviewReleaseSimulation = async (input: {
     snapshotRoots(root, ['dist']),
   ]);
   const update = PublicationUpdateSchema.parse(input.update.publicationUpdate);
+  const simulated = await input.executeSimulation();
+  if (
+    simulated.updateId !== update.updateId ||
+    canonicalDigest(simulated.publicationUpdate) !== canonicalDigest(update)
+  ) {
+    findings.push('SIMULATION_RESULT_MISMATCH');
+  }
   const operationPaths = new Set<string>();
   const affectedProblemIds = new Set<string>();
   const problemOperationIds: string[] = [];
@@ -172,6 +184,10 @@ if (isMain()) {
     const verification = await verifyPreviewReleaseSimulation({
       previewId: 'initial-v1',
       update: { updateId: update.updateId, publicationUpdate: update },
+      executeSimulation: async () => {
+        const result = await runUpdatePipeline({ fixture: 'initial-v1' });
+        return { updateId: result.updateId, publicationUpdate: result.publicationUpdate };
+      },
     });
     if (process.argv.includes('--simulation-only')) {
       process.stdout.write(`${JSON.stringify(verification)}\n`);
