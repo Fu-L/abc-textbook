@@ -85,6 +85,9 @@ const inventoryItem = (problemId: string, sourceRevisionId: string) => {
       ),
     },
     typicalTechniques: [],
+    typicalTechniqueOmissionReason: claim(
+      `The ${problemId} fixture has no separate reusable technique beyond its invariant.`,
+    ),
     problemSpecificInsights: [
       {
         insight: `Only the current invariant changes future choices in ${problemId}.`,

@@ -20,7 +20,7 @@ export interface TechniqueAuthoringAnalysis {
   readonly structureId: string;
   readonly complexityEssential: boolean;
   readonly problemComplexityRecorded: boolean;
-  readonly classificationMode: 'reviewed_analysis' | 'heuristic_draft';
+  readonly classificationMode: 'source_bound_draft' | 'heuristic_draft';
 }
 
 interface TechniqueSignal {
@@ -2145,19 +2145,7 @@ export const authorProblemAnalysisRecord = (
         : '制約と状態構造から、列挙対象を縮約する方針を分析候補として残す。',
     evidenceIds,
   };
-  const candidateApproaches = [
-    adoptedApproach,
-    ...(hasReviewedBinding
-      ? [
-          {
-            approach: '状態を縮約せず、元の候補をそのまま全列挙する。',
-            decision: 'rejected' as const,
-            decisionReason: '公式制約内で必要な計算量へ収まらず、主解法の構造も利用できない。',
-            evidenceIds,
-          },
-        ]
-      : []),
-  ];
+  const candidateApproaches = [adoptedApproach];
   const item = ProblemAnalysisRecordSchema.parse({
     problemId: input.problem.id,
     sourceRevisionIds,
@@ -2180,14 +2168,7 @@ export const authorProblemAnalysisRecord = (
       application: signal.action,
       evidenceIds,
     })),
-    problemSpecificInsights: [
-      {
-        insight: `${input.problem.title} では、${structure.description}のどの情報が以後の判断を変えるかを切り分ける。`,
-        reusablePerspective:
-          '制約と操作を小さい状態で追い、同じ将来を持つ状態をまとめられないかを先に調べる。',
-        evidenceIds,
-      },
-    ],
+    problemSpecificInsights: [],
     ...(complexity.value === undefined
       ? {}
       : {
@@ -2209,7 +2190,7 @@ export const authorProblemAnalysisRecord = (
       ),
     ],
     authorId: input.authorId ?? 'person-maintainer',
-    reviewStatus: hasReviewedBinding ? 'reviewed' : 'draft',
+    reviewStatus: 'draft',
     reviewFindings: [],
   });
   return {
@@ -2218,7 +2199,7 @@ export const authorProblemAnalysisRecord = (
     structureId: structure.id,
     complexityEssential: complexity.essential,
     problemComplexityRecorded: complexity.fromSource,
-    classificationMode: hasReviewedBinding ? 'reviewed_analysis' : 'heuristic_draft',
+    classificationMode: hasReviewedBinding ? 'source_bound_draft' : 'heuristic_draft',
   };
 };
 

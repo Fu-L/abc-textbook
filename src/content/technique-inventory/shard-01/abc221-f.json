@@ -27,12 +27,6 @@
         "decision": "adopted",
         "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
         "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
-        "decision": "rejected",
-        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
-        "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
@@ -68,13 +62,7 @@
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [
-    {
-      "insight": "Diameter set 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
-      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    }
-  ],
+  "problemSpecificInsights": [],
   "prerequisiteCandidates": [
     {
       "text": "幅優先探索",
@@ -108,6 +96,6 @@
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed",
+  "reviewStatus": "draft",
   "reviewFindings": []
 }

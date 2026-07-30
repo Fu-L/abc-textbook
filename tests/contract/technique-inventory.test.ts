@@ -105,7 +105,7 @@ describe('US2 Technique Inventory contract', () => {
     expect(item).not.toHaveProperty('provisionalLearningUnitIds');
   });
 
-  it('requires a source-backed reasoning path, insights, outcomes, and review advice', () => {
+  it('requires a source-backed reasoning path, outcomes, and review advice', () => {
     const item = catalogFixture().techniqueInventory[0];
     if (!item) throw new Error('Technique Inventory fixture is missing.');
     const requiredMutations = [
@@ -122,7 +122,6 @@ describe('US2 Technique Inventory contract', () => {
         ...item,
         reasoningPath: { ...item.reasoningPath, keyInsights: [] },
       },
-      { ...item, problemSpecificInsights: [] },
       { ...item, outcomeCandidates: [] },
       { ...item, reviewAdvice: [] },
     ];
@@ -147,7 +146,7 @@ describe('US2 Technique Inventory contract', () => {
     ).toBe(true);
   });
 
-  it('rejects claim evidence outside the record source set and incomplete reviewed analysis', () => {
+  it('rejects claim evidence outside the record source set and a reviewed analysis without an adopted approach', () => {
     const item = catalogFixture().techniqueInventory[0];
     if (!item) throw new Error('Technique Inventory fixture is missing.');
 
@@ -184,6 +183,53 @@ describe('US2 Technique Inventory contract', () => {
             ({ decision }) => decision === 'adopted',
           ),
         },
+      }).success,
+    ).toBe(true);
+    expect(
+      CatalogSchema.shape.techniqueInventory.element.safeParse({
+        ...item,
+        reasoningPath: {
+          ...item.reasoningPath,
+          candidateApproaches: item.reasoningPath.candidateApproaches.filter(
+            ({ decision }) => decision === 'rejected',
+          ),
+        },
+      }).success,
+    ).toBe(false);
+  });
+
+  it('allows optional learning parts to be omitted without inventing content', () => {
+    const item = catalogFixture().techniqueInventory[0];
+    if (!item) throw new Error('Technique Inventory fixture is missing.');
+    const omissionReason = {
+      text: '公式Sourceから問題固有として分離する追加要素は確認できない。',
+      evidenceIds: item.reasoningPath.algorithmConnection.evidenceIds,
+    };
+
+    expect(
+      CatalogSchema.shape.techniqueInventory.element.safeParse({
+        ...item,
+        problemSpecificInsights: [],
+        reviewStatus: 'draft',
+      }).success,
+    ).toBe(true);
+    expect(
+      CatalogSchema.shape.techniqueInventory.element.safeParse({
+        ...item,
+        problemSpecificInsights: [],
+      }).success,
+    ).toBe(false);
+    expect(
+      CatalogSchema.shape.techniqueInventory.element.safeParse({
+        ...item,
+        problemSpecificInsights: [],
+        problemSpecificInsightOmissionReason: omissionReason,
+      }).success,
+    ).toBe(true);
+    expect(
+      CatalogSchema.shape.techniqueInventory.element.safeParse({
+        ...item,
+        problemSpecificInsightOmissionReason: omissionReason,
       }).success,
     ).toBe(false);
   });

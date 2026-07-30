@@ -55,7 +55,7 @@ interface AuthoredRecord {
   readonly structureId: string;
   readonly complexityEssential: boolean;
   readonly problemComplexityRecorded: boolean;
-  readonly classificationMode: 'reviewed_analysis' | 'heuristic_draft';
+  readonly classificationMode: 'source_bound_draft' | 'heuristic_draft';
 }
 
 const isNodeError = (error: unknown): error is NodeJS.ErrnoException =>

@@ -58,13 +58,7 @@
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [
-    {
-      "insight": "Binary Operation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
-      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    }
-  ],
+  "problemSpecificInsights": [],
   "prerequisiteCandidates": [
     {
       "text": "文字列の添字と prefix",

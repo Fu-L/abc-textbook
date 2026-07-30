@@ -110,10 +110,11 @@ taxonomy・最終Outcome・公開解説の作成前に、全Problemへちょう�
 | `problemId` | 全対象Problemを一回だけ所有 |
 | `sourceRevisionIds` | 重複しない判断根拠。当該Problemの`officialTaskId`へ結び付く公式問題revisionを一つ以上含み、個別公式解説を参照する場合も同じtask IDへ結び付く |
 | `reasoningPath.observations` | 制約、操作、小さい例から得られる観察。正解を知った後の解法要約だけを置かない |
-| `reasoningPath.candidateApproaches` | 候補方針、`adopted` / `rejected`、採用・棄却理由。`reviewed`では両decisionを一つ以上持つ |
+| `reasoningPath.candidateApproaches` | 候補方針、`adopted` / `rejected`、採用・棄却理由。`reviewed`では採用方針を一つ以上持ち、実際に比較した妥当な候補がある場合だけ棄却方針を残す |
 | `reasoningPath.keyInsights` / `algorithmConnection` | 鍵となる着眼点と、それを実行可能なアルゴリズムへ接続する説明 |
-| `typicalTechniques[]` | 典型知識の名前、発動条件、このProblemでの適用。他問題へ移せる粒度で記録する |
-| `problemSpecificInsights[]` | 問題固有の気づきと、類題で同種の気づきを再現するために注目する観点 |
+| `typicalTechniques[]` | 典型知識の名前、発動条件、このProblemでの適用。他問題へ移せる粒度で記録し、実質的要素がなければ空を許す |
+| `problemSpecificInsights[]` | 問題固有の気づきと、類題で同種の気づきを再現するために注目する観点。実質的要素がなければ空を許す |
+| `typicalTechniqueOmissionReason` / `problemSpecificInsightOmissionReason` | 対応する配列が空の`reviewed` recordで、無理に要素を作らなかった理由をsource-backedに短く示す。配列に要素がある場合は持たない |
 | `asymptoticComplexity` | 任意。計算量解析自体が解法選択や実現可能性の本質となる特殊な場合に限り、公式解説または問題固有の解析で確定した解法全体の時間・空間計算量のうち一つ以上を持つ。通常の計算量や部分テクニックの汎用fallback値を代入してはならない |
 | `prerequisiteCandidates` | 必要知識候補。最終Learning Unitの前提を確定しない |
 | `implementationConcerns` | 境界条件、状態、更新順などの実装上の注意 |

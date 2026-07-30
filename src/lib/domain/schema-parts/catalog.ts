@@ -501,7 +501,9 @@ export const ProblemAnalysisRecordSchema = strictObject({
     algorithmConnection: SourceBackedAnalysisClaimSchema,
   }),
   typicalTechniques: z.array(TypicalTechniqueCandidateSchema),
-  problemSpecificInsights: z.array(ProblemSpecificInsightSchema).min(1),
+  typicalTechniqueOmissionReason: SourceBackedAnalysisClaimSchema.optional(),
+  problemSpecificInsights: z.array(ProblemSpecificInsightSchema),
+  problemSpecificInsightOmissionReason: SourceBackedAnalysisClaimSchema.optional(),
   asymptoticComplexity: strictObject({
     time: nonEmptyText.optional(),
     space: nonEmptyText.optional(),
@@ -525,7 +527,13 @@ export const ProblemAnalysisRecordSchema = strictObject({
     ...record.reasoningPath.keyInsights.map(({ evidenceIds }) => evidenceIds),
     record.reasoningPath.algorithmConnection.evidenceIds,
     ...record.typicalTechniques.map(({ evidenceIds }) => evidenceIds),
+    ...(record.typicalTechniqueOmissionReason === undefined
+      ? []
+      : [record.typicalTechniqueOmissionReason.evidenceIds]),
     ...record.problemSpecificInsights.map(({ evidenceIds }) => evidenceIds),
+    ...(record.problemSpecificInsightOmissionReason === undefined
+      ? []
+      : [record.problemSpecificInsightOmissionReason.evidenceIds]),
     ...(record.asymptoticComplexity === undefined ? [] : [record.asymptoticComplexity.evidenceIds]),
     ...record.prerequisiteCandidates.map(({ evidenceIds }) => evidenceIds),
     ...record.implementationConcerns.map(({ evidenceIds }) => evidenceIds),
@@ -586,15 +594,44 @@ export const ProblemAnalysisRecordSchema = strictObject({
   const approachDecisions = new Set(
     record.reasoningPath.candidateApproaches.map(({ decision }) => decision),
   );
-  if (
-    record.reviewStatus === 'reviewed' &&
-    (!approachDecisions.has('adopted') || !approachDecisions.has('rejected'))
-  ) {
+  if (record.reviewStatus === 'reviewed' && !approachDecisions.has('adopted')) {
     context.addIssue({
       code: 'custom',
       path: ['reasoningPath', 'candidateApproaches'],
-      message: 'Reviewed analysis requires both an adopted and a rejected candidate approach.',
+      message: 'Reviewed analysis requires an adopted candidate approach.',
     });
+  }
+  const optionalSections = [
+    {
+      path: 'typicalTechniques',
+      values: record.typicalTechniques,
+      omissionReason: record.typicalTechniqueOmissionReason,
+    },
+    {
+      path: 'problemSpecificInsights',
+      values: record.problemSpecificInsights,
+      omissionReason: record.problemSpecificInsightOmissionReason,
+    },
+  ] as const;
+  for (const section of optionalSections) {
+    if (section.values.length > 0 && section.omissionReason !== undefined) {
+      context.addIssue({
+        code: 'custom',
+        path: [section.path],
+        message: `${section.path} cannot have an omission reason when substantive items exist.`,
+      });
+    }
+    if (
+      record.reviewStatus === 'reviewed' &&
+      section.values.length === 0 &&
+      section.omissionReason === undefined
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: [section.path],
+        message: `Reviewed analysis must explain why ${section.path} is empty.`,
+      });
+    }
   }
   if (record.reviewStatus === 'changes_requested' && record.reviewFindings.length === 0) {
     context.addIssue({

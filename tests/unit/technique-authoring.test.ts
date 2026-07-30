@@ -24,7 +24,10 @@ describe('source-backed technique inventory authoring', () => {
     expect(analysis.problemComplexityRecorded).toBe(true);
     expect(analysis.item.asymptoticComplexity?.time).toContain('O(N[N+M])');
     expect(analysis.item.sourceRevisionIds).toEqual(['source-editorial', 'source-problem']);
-    expect(analysis.item.reviewStatus).toBe('reviewed');
+    expect(analysis.classificationMode).toBe('source_bound_draft');
+    expect(analysis.item.reviewStatus).toBe('draft');
+    expect(analysis.item.reasoningPath.candidateApproaches).toHaveLength(1);
+    expect(analysis.item.problemSpecificInsights).toEqual([]);
   });
 
   it('does not invent a generic complexity when the source does not state one', () => {

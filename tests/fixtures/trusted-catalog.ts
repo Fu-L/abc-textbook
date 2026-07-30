@@ -45,6 +45,13 @@ export const makeProblemAnalysisFixture = (
       ),
     },
     typicalTechniques: [],
+    ...(reviewStatus === 'reviewed'
+      ? {
+          typicalTechniqueOmissionReason: claim(
+            'The fixture has no separate reusable technique beyond its stated invariant.',
+          ),
+        }
+      : {}),
     problemSpecificInsights: [
       {
         insight: 'Only the current transition state changes future choices.',

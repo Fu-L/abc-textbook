@@ -878,11 +878,11 @@
   ],
   "classificationModeCounts": {
     "heuristic_draft": 749,
-    "reviewed_analysis": 119
+    "source_bound_draft": 119
   },
   "reviewStatusCounts": {
-    "draft": 749,
-    "reviewed": 119
+    "draft": 860,
+    "reviewed": 8
   },
   "assignments": [
     {
@@ -905,7 +905,7 @@
       "problemId": "abc212-g",
       "signalIds": ["primitive-root-divisor-aggregation"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -921,7 +921,7 @@
       "problemId": "abc213-e",
       "signalIds": ["zero-one-bfs"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -985,7 +985,7 @@
       "problemId": "abc215-e",
       "signalIds": ["last-symbol-bitmask-dp"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1089,7 +1089,7 @@
       "problemId": "abc218-f",
       "signalIds": ["shortest-path-edge-recomputation"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": true,
       "problemComplexityRecorded": true
     },
@@ -1113,7 +1113,7 @@
       "problemId": "abc219-e",
       "signalIds": ["complete-enumeration"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1121,7 +1121,7 @@
       "problemId": "abc219-f",
       "signalIds": ["lattice-translation-classes"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1129,7 +1129,7 @@
       "problemId": "abc219-g",
       "signalIds": ["degree-sqrt-decomposition"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1161,7 +1161,7 @@
       "problemId": "abc220-g",
       "signalIds": ["computational-geometry", "complete-enumeration"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1185,7 +1185,7 @@
       "problemId": "abc221-f",
       "signalIds": ["breadth-first-search", "combinatorics-binomial"],
       "structureId": "tree",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1225,7 +1225,7 @@
       "problemId": "abc222-g",
       "signalIds": ["multiplicative-order-divisor-search"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1241,7 +1241,7 @@
       "problemId": "abc223-e",
       "signalIds": ["complete-enumeration"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1249,7 +1249,7 @@
       "problemId": "abc223-f",
       "signalIds": ["parenthesis-monoid-segment-tree"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1289,7 +1289,7 @@
       "problemId": "abc224-g",
       "signalIds": ["probability-expectation-dp"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1353,7 +1353,7 @@
       "problemId": "abc226-g",
       "signalIds": ["greedy-exchange"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1465,7 +1465,7 @@
       "problemId": "abc230-e",
       "signalIds": ["floor-quotient-blocks"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1497,7 +1497,7 @@
       "problemId": "abc231-e",
       "signalIds": ["memoized-recursion"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1529,7 +1529,7 @@
       "problemId": "abc232-e",
       "signalIds": ["four-state-rook-dp"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1553,7 +1553,7 @@
       "problemId": "abc232-h",
       "signalIds": ["recursive-construction"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1561,7 +1561,7 @@
       "problemId": "abc233-e",
       "signalIds": ["decimal-carry-scan"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1593,7 +1593,7 @@
       "problemId": "abc234-e",
       "signalIds": ["complete-enumeration"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1601,7 +1601,7 @@
       "problemId": "abc234-ex",
       "signalIds": ["spatial-bucketing"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1753,7 +1753,7 @@
       "problemId": "abc239-e",
       "signalIds": ["bounded-top-k-merge"],
       "structureId": "tree",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1769,7 +1769,7 @@
       "problemId": "abc239-f",
       "signalIds": ["disjoint-set-union", "greedy-exchange"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1801,7 +1801,7 @@
       "problemId": "abc240-f",
       "signalIds": ["piecewise-quadratic-optimization"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1841,7 +1841,7 @@
       "problemId": "abc241-g",
       "signalIds": ["max-flow-min-cut"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1849,7 +1849,7 @@
       "problemId": "abc242-e",
       "signalIds": ["combinatorics-binomial"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1873,7 +1873,7 @@
       "problemId": "abc242-g",
       "signalIds": ["mo-algorithm"],
       "structureId": "interval",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1937,7 +1937,7 @@
       "problemId": "abc244-g",
       "signalIds": ["depth-first-search", "recursive-construction"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -1961,7 +1961,7 @@
       "problemId": "abc245-f",
       "signalIds": ["reverse-topological-pruning"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2025,7 +2025,7 @@
       "problemId": "abc247-f",
       "signalIds": ["disjoint-set-union", "dynamic-programming"],
       "structureId": "permutation",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2041,7 +2041,7 @@
       "problemId": "abc248-e",
       "signalIds": ["computational-geometry", "complete-enumeration"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2049,7 +2049,7 @@
       "problemId": "abc248-ex",
       "signalIds": ["lazy-segment-tree"],
       "structureId": "permutation",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2065,7 +2065,7 @@
       "problemId": "abc248-g",
       "signalIds": ["tree-dp"],
       "structureId": "tree",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2161,7 +2161,7 @@
       "problemId": "abc251-g",
       "signalIds": ["computational-geometry"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2169,7 +2169,7 @@
       "problemId": "abc252-e",
       "signalIds": ["shortest-path-tree-edge-selection"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2177,7 +2177,7 @@
       "problemId": "abc252-ex",
       "signalIds": ["balanced-xor-necklace-mitm"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": true,
       "problemComplexityRecorded": true
     },
@@ -2217,7 +2217,7 @@
       "problemId": "abc253-f",
       "signalIds": ["fenwick-tree"],
       "structureId": "query",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2225,7 +2225,7 @@
       "problemId": "abc253-g",
       "signalIds": ["sequence-reversal-composition"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2265,7 +2265,7 @@
       "problemId": "abc255-e",
       "signalIds": ["frequency-candidate-counting"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2273,7 +2273,7 @@
       "problemId": "abc255-ex",
       "signalIds": ["ordered-set"],
       "structureId": "interval",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2281,7 +2281,7 @@
       "problemId": "abc255-f",
       "signalIds": ["tree-traversal-reconstruction"],
       "structureId": "tree",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2313,7 +2313,7 @@
       "problemId": "abc256-f",
       "signalIds": ["polynomial-moment-fenwick"],
       "structureId": "query",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2441,7 +2441,7 @@
       "problemId": "abc260-f",
       "signalIds": ["pair-witness-pigeonhole"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2489,7 +2489,7 @@
       "problemId": "abc262-e",
       "signalIds": ["combinatorics-binomial"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2697,7 +2697,7 @@
       "problemId": "abc268-f",
       "signalIds": ["greedy-exchange"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2729,7 +2729,7 @@
       "problemId": "abc269-f",
       "signalIds": ["prefix-sum-difference", "modular-arithmetic"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2793,7 +2793,7 @@
       "problemId": "abc271-f",
       "signalIds": ["diagonal-xor-mitm"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": true,
       "problemComplexityRecorded": true
     },
@@ -2809,7 +2809,7 @@
       "problemId": "abc272-e",
       "signalIds": ["complete-enumeration", "frequency-candidate-counting"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -2977,7 +2977,7 @@
       "problemId": "abc277-ex",
       "signalIds": ["two-sat-implication-graph"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -3033,7 +3033,7 @@
       "problemId": "abc279-e",
       "signalIds": ["prefix-suffix-permutation-effect"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -3097,7 +3097,7 @@
       "problemId": "abc281-e",
       "signalIds": ["ordered-set"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -3241,7 +3241,7 @@
       "problemId": "abc285-f",
       "signalIds": ["fenwick-tree"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -3281,7 +3281,7 @@
       "problemId": "abc286-g",
       "signalIds": ["disjoint-set-union", "euler-trail-parity"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -3289,7 +3289,7 @@
       "problemId": "abc287-e",
       "signalIds": ["sorted-neighbor-lcp"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -3369,7 +3369,7 @@
       "problemId": "abc289-f",
       "signalIds": ["reflection-parity-construction"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -3513,7 +3513,7 @@
       "problemId": "abc294-e",
       "signalIds": ["two-pointers"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -3577,7 +3577,7 @@
       "problemId": "abc296-e",
       "signalIds": ["functional-graph"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -3585,7 +3585,7 @@
       "problemId": "abc296-ex",
       "signalIds": ["frontier-connectivity-dp"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -3593,7 +3593,7 @@
       "problemId": "abc296-f",
       "signalIds": ["fenwick-tree"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -3793,7 +3793,7 @@
       "problemId": "abc302-g",
       "signalIds": ["greedy-exchange"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4025,7 +4025,7 @@
       "problemId": "abc310-e",
       "signalIds": ["dynamic-programming"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4089,7 +4089,7 @@
       "problemId": "abc312-e",
       "signalIds": ["complete-enumeration"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4121,7 +4121,7 @@
       "problemId": "abc313-e",
       "signalIds": ["run-length-recurrence"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4241,7 +4241,7 @@
       "problemId": "abc317-g",
       "signalIds": ["regular-bipartite-factorization"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4249,7 +4249,7 @@
       "problemId": "abc318-e",
       "signalIds": ["sandwich-triple-counting"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4265,7 +4265,7 @@
       "problemId": "abc318-f",
       "signalIds": ["critical-distance-interval-enumeration"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4281,7 +4281,7 @@
       "problemId": "abc319-e",
       "signalIds": ["periodic-residue-precomputation"],
       "structureId": "query",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4393,7 +4393,7 @@
       "problemId": "abc323-g",
       "signalIds": ["matrix-tree-characteristic-polynomial"],
       "structureId": "permutation",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4401,7 +4401,7 @@
       "problemId": "abc324-e",
       "signalIds": ["subsequence-prefix-suffix-pairing"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4529,7 +4529,7 @@
       "problemId": "abc329-f",
       "signalIds": ["small-to-large-set-merge"],
       "structureId": "query",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4545,7 +4545,7 @@
       "problemId": "abc330-e",
       "signalIds": ["dynamic-mex-maintenance"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4657,7 +4657,7 @@
       "problemId": "abc334-g",
       "signalIds": ["lowlink-articulation"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4673,7 +4673,7 @@
       "problemId": "abc335-f",
       "signalIds": ["step-size-sqrt-dp"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": true,
       "problemComplexityRecorded": true
     },
@@ -4697,7 +4697,7 @@
       "problemId": "abc336-f",
       "signalIds": ["bidirectional-rotation-mitm"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": true,
       "problemComplexityRecorded": true
     },
@@ -4713,7 +4713,7 @@
       "problemId": "abc337-e",
       "signalIds": ["binary-information-encoding"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4721,7 +4721,7 @@
       "problemId": "abc337-f",
       "signalIds": ["circular-capped-window-counting"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4729,7 +4729,7 @@
       "problemId": "abc337-g",
       "signalIds": ["euler-tour", "fenwick-tree"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4753,7 +4753,7 @@
       "problemId": "abc338-g",
       "signalIds": ["expression-segment-composition"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4769,7 +4769,7 @@
       "problemId": "abc339-f",
       "signalIds": ["modular-product-fingerprinting"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4785,7 +4785,7 @@
       "problemId": "abc340-e",
       "signalIds": ["range-distribution-data-structure"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4857,7 +4857,7 @@
       "problemId": "abc343-e",
       "signalIds": ["complete-enumeration"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4865,7 +4865,7 @@
       "problemId": "abc343-f",
       "signalIds": ["top-two-segment-tree"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -4929,7 +4929,7 @@
       "problemId": "abc346-e",
       "signalIds": ["reverse-paint-processing"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5033,7 +5033,7 @@
       "problemId": "abc350-f",
       "signalIds": ["parenthesis-direction-traversal"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5041,7 +5041,7 @@
       "problemId": "abc350-g",
       "signalIds": ["query-block-rebuild"],
       "structureId": "tree",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": true,
       "problemComplexityRecorded": true
     },
@@ -5049,7 +5049,7 @@
       "problemId": "abc351-e",
       "signalIds": ["manhattan-coordinate-transform"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5225,7 +5225,7 @@
       "problemId": "abc358-f",
       "signalIds": ["exact-length-maze-construction"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5337,7 +5337,7 @@
       "problemId": "abc363-e",
       "signalIds": ["priority-flood-bottleneck"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5401,7 +5401,7 @@
       "problemId": "abc365-g",
       "signalIds": ["interval-heavy-light-overlap"],
       "structureId": "query",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5457,7 +5457,7 @@
       "problemId": "abc368-e",
       "signalIds": ["event-sweep-delay-propagation"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5529,7 +5529,7 @@
       "problemId": "abc371-e",
       "signalIds": ["absence-gap-subarray-counting"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5673,7 +5673,7 @@
       "problemId": "abc377-e",
       "signalIds": ["permutation-cycle-power"],
       "structureId": "permutation",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5681,7 +5681,7 @@
       "problemId": "abc377-f",
       "signalIds": ["attack-line-overlap-counting"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5745,7 +5745,7 @@
       "problemId": "abc380-e",
       "signalIds": ["ordered-set"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5873,7 +5873,7 @@
       "problemId": "abc385-f",
       "signalIds": ["adjacent-visibility-dominance"],
       "structureId": "interval",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -5993,7 +5993,7 @@
       "problemId": "abc390-f",
       "signalIds": ["absence-gap-subarray-counting"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -6361,7 +6361,7 @@
       "problemId": "abc405-g",
       "signalIds": ["mo-frequency-bucket-aggregation"],
       "structureId": "interval",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": true,
       "problemComplexityRecorded": true
     },
@@ -6433,7 +6433,7 @@
       "problemId": "abc408-g",
       "signalIds": ["continued-fraction-open-interval"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -6465,7 +6465,7 @@
       "problemId": "abc410-e",
       "signalIds": ["dynamic-programming"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -6473,7 +6473,7 @@
       "problemId": "abc410-f",
       "signalIds": ["thin-grid-zero-sum-rectangles"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": true,
       "problemComplexityRecorded": true
     },
@@ -6497,7 +6497,7 @@
       "problemId": "abc411-f",
       "signalIds": ["small-to-large-graph-contraction"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": true,
       "problemComplexityRecorded": true
     },
@@ -6657,7 +6657,7 @@
       "problemId": "abc418-e",
       "signalIds": ["slope-midpoint-pair-counting"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -6721,7 +6721,7 @@
       "problemId": "abc420-g",
       "signalIds": ["signed-divisor-factorization"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -6737,7 +6737,7 @@
       "problemId": "abc421-f",
       "signalIds": ["amortized-linked-list-erasure"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": true,
       "problemComplexityRecorded": true
     },
@@ -6785,7 +6785,7 @@
       "problemId": "abc423-f",
       "signalIds": ["subset-mobius-exact-conditions"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -6889,7 +6889,7 @@
       "problemId": "abc427-g",
       "signalIds": ["canonical-transition-sequence-merge"],
       "structureId": "query",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -6937,7 +6937,7 @@
       "problemId": "abc429-g",
       "signalIds": ["modular-progression-sqrt-decomposition"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": true,
       "problemComplexityRecorded": true
     },
@@ -7001,7 +7001,7 @@
       "problemId": "abc432-f",
       "signalIds": ["balanced-subset-partition-dp"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -7089,7 +7089,7 @@
       "problemId": "abc436-e",
       "signalIds": ["permutation-cycle-minimum-swaps"],
       "structureId": "permutation",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -7105,7 +7105,7 @@
       "problemId": "abc436-g",
       "signalIds": ["radix-convolution-recurrence"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -7169,7 +7169,7 @@
       "problemId": "abc439-f",
       "signalIds": ["endpoint-pattern-subsequence-counting"],
       "structureId": "permutation",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -7201,7 +7201,7 @@
       "problemId": "abc440-g",
       "signalIds": ["layered-component-top-two-dp"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -7209,7 +7209,7 @@
       "problemId": "abc441-e",
       "signalIds": ["prefix-difference-order-counting"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -7361,7 +7361,7 @@
       "problemId": "abc447-f",
       "signalIds": ["tree-dp"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -7425,7 +7425,7 @@
       "problemId": "abc450-e",
       "signalIds": ["implicit-fibonacci-word-prefix"],
       "structureId": "string",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -7457,7 +7457,7 @@
       "problemId": "abc451-f",
       "signalIds": ["small-to-large-bipartite-dsu"],
       "structureId": "graph",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": true,
       "problemComplexityRecorded": true
     },
@@ -7697,7 +7697,7 @@
       "problemId": "abc461-f",
       "signalIds": ["divisor-product-score-dp"],
       "structureId": "sequence",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -7713,7 +7713,7 @@
       "problemId": "abc462-e",
       "signalIds": ["symmetry-piecewise-linear-endpoints"],
       "structureId": "number",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -7761,7 +7761,7 @@
       "problemId": "abc464-e",
       "signalIds": ["two-dimensional-suffix-maximum"],
       "structureId": "grid",
-      "classificationMode": "reviewed_analysis",
+      "classificationMode": "source_bound_draft",
       "complexityEssential": false,
       "problemComplexityRecorded": false
     },
@@ -7984,6 +7984,6 @@
     "string": 110,
     "tree": 46
   },
-  "inventoryDigest": "3630de5197b4b209092900ac436288ede9288839abebba1cd4fb6e0febfb7a5e",
-  "evidenceDigest": "8bb19032c13149143123c4a2533bd9b41c91b13c360bae2afc9562170116e53f"
+  "inventoryDigest": "8bf60ff701e0a0579206dcf061e2a3bdec580a48e9d69708924a6069853e7a04",
+  "evidenceDigest": "280eb50651d6330a399ca119155bcef6c9b2e45eec96cca0e6d48d70f66da714"
 }
