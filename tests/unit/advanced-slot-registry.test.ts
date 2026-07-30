@@ -28,6 +28,7 @@ import {
   parseOfficialEditorialItem,
   parseOfficialTaskList,
 } from '../../src/lib/catalog/official-task-list.js';
+import { makeProblemAnalysisFixture } from '../fixtures/trusted-catalog.js';
 
 const ABC500_TASK_IDS: Readonly<Record<string, string>> = {
   A: 'abc500_a',
@@ -472,21 +473,7 @@ describe('official advanced slot registry', () => {
           placementId: null,
         },
       ],
-      techniqueInventory: [
-        {
-          problemId: 'abc212-e',
-          sourceRevisionIds: ['source-abc212-e'],
-          coreMethod: 'Fixture method.',
-          proofIdeas: ['Fixture proof.'],
-          asymptoticComplexity: { time: 'O(1)', space: 'O(1)' },
-          prerequisiteCandidates: [],
-          implementationConcerns: [],
-          outcomeCandidates: ['Fixture outcome.'],
-          adHocElements: [],
-          authorId: 'author-fixture',
-          reviewStatus: 'draft',
-        },
-      ],
+      techniqueInventory: [makeProblemAnalysisFixture('abc212-e', 'source-abc212-e', 'draft')],
       tags: [],
       learningOutcomes: [],
       learningUnits: [],

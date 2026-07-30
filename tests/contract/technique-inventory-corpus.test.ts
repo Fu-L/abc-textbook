@@ -50,18 +50,60 @@ const problemSourceId = (problemId: string): string => `source-${problemId}-prob
 const taskListSourceId = (contestId: string): string => `source-${contestId}-tasks`;
 const editorialIndexSourceId = (contestId: string): string => `source-${contestId}-editorial-index`;
 
-const inventoryItem = (problemId: string, sourceRevisionId: string) => ({
-  problemId,
-  sourceRevisionIds: [sourceRevisionId],
-  coreMethod: `Derive the invariant needed by ${problemId}.`,
-  proofIdeas: ['Prove that each transition preserves the stated invariant.'],
-  prerequisiteCandidates: ['Asymptotic analysis'],
-  implementationConcerns: ['Check the smallest valid input.'],
-  outcomeCandidates: ['Select and justify the invariant before implementation.'],
-  adHocElements: [],
-  authorId: 'person-maintainer',
-  reviewStatus: 'reviewed' as const,
-});
+const inventoryItem = (problemId: string, sourceRevisionId: string) => {
+  const evidenceId = 'evidence-official-analysis';
+  const evidence = {
+    id: evidenceId,
+    sourceRevisionIds: [sourceRevisionId],
+    rationale: `The official ${problemId} fixture source supports this analysis.`,
+  };
+  const evidenceIds = [evidenceId];
+  const claim = (text: string) => ({ text, evidenceIds });
+  return {
+    problemId,
+    sourceRevisionIds: [sourceRevisionId],
+    evidence: [evidence],
+    reasoningPath: {
+      observations: [claim(`The ${problemId} constraints expose a reusable transition state.`)],
+      candidateApproaches: [
+        {
+          approach: `Derive and reuse the invariant needed by ${problemId}.`,
+          decision: 'adopted' as const,
+          decisionReason: 'The invariant preserves exactly the information needed by later steps.',
+          evidenceIds,
+        },
+        {
+          approach: `Enumerate every complete execution history for ${problemId}.`,
+          decision: 'rejected' as const,
+          decisionReason: 'Equivalent histories repeat the same future computation.',
+          evidenceIds,
+        },
+      ],
+      keyInsights: [claim('Each transition preserves the stated invariant and its meaning.')],
+      algorithmConnection: claim(
+        `Propagate the invariant for ${problemId} through every valid transition.`,
+      ),
+    },
+    typicalTechniques: [],
+    problemSpecificInsights: [
+      {
+        insight: `Only the current invariant changes future choices in ${problemId}.`,
+        reusablePerspective:
+          'Compare histories using only the information needed by their next move.',
+        evidenceIds,
+      },
+    ],
+    prerequisiteCandidates: [claim('Understand state invariants and transition preservation.')],
+    implementationConcerns: [claim('Check the smallest valid input and every state boundary.')],
+    outcomeCandidates: [claim('Select and justify the invariant before implementation.')],
+    reviewAdvice: [
+      claim('Reconstruct the invariant from the constraints before reviewing the solution.'),
+    ],
+    authorId: 'person-maintainer',
+    reviewStatus: 'reviewed' as const,
+    reviewFindings: [],
+  };
+};
 
 const makeValidCorpus = (): LoadedTechniqueInventoryCorpus => {
   const contests: LoadedTechniqueInventoryCorpus['contests'][number][] = [];
@@ -645,7 +687,13 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
           ...firstInventory,
           entity: {
             ...firstInventory.entity,
-            coreMethod: 'staging/previews/initial-v1 must not become a canonical method.',
+            reasoningPath: {
+              ...firstInventory.entity.reasoningPath,
+              algorithmConnection: {
+                ...firstInventory.entity.reasoningPath.algorithmConnection,
+                text: 'staging/previews/initial-v1 must not become canonical analysis.',
+              },
+            },
           },
         },
         ...validCorpus.inventory.slice(1),
@@ -768,11 +816,16 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
     );
   });
 
-  it('rejects shallow, placeholder, duplicate-method, and non-asymptotic inventory prose', () => {
+  it('rejects shallow, placeholder, duplicate-algorithm, and non-asymptotic prose', () => {
     const first = validCorpus.inventory[0];
     const second = validCorpus.inventory[1];
     if (!first || !second) throw new Error('Inventory quality fixture is incomplete.');
-    const duplicateMethod = first.entity.coreMethod;
+    const firstObservation = first.entity.reasoningPath.observations[0];
+    const firstOutcome = first.entity.outcomeCandidates[0];
+    if (!firstObservation || !firstOutcome) {
+      throw new Error('Inventory quality prose fixture is incomplete.');
+    }
+    const duplicateConnection = first.entity.reasoningPath.algorithmConnection;
     const degraded = {
       ...validCorpus,
       inventory: validCorpus.inventory.map((loaded, index) =>
@@ -781,14 +834,38 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
               ...loaded,
               entity: {
                 ...loaded.entity,
-                coreMethod: 'TODO: 公式解説参照',
-                proofIdeas: ['short'],
-                outcomeCandidates: ['unknown'],
-                asymptoticComplexity: { time: 'linear', space: 'constant' },
+                reasoningPath: {
+                  ...loaded.entity.reasoningPath,
+                  observations: [
+                    {
+                      ...firstObservation,
+                      text: 'short',
+                    },
+                  ],
+                  algorithmConnection: {
+                    ...loaded.entity.reasoningPath.algorithmConnection,
+                    text: 'TODO: 公式解説参照',
+                  },
+                },
+                outcomeCandidates: [{ ...firstOutcome, text: 'unknown' }],
+                asymptoticComplexity: {
+                  time: 'linear',
+                  space: 'constant',
+                  evidenceIds: loaded.entity.reasoningPath.algorithmConnection.evidenceIds,
+                },
               },
             }
           : index === 1 || index === 2
-            ? { ...loaded, entity: { ...loaded.entity, coreMethod: duplicateMethod } }
+            ? {
+                ...loaded,
+                entity: {
+                  ...loaded.entity,
+                  reasoningPath: {
+                    ...loaded.entity.reasoningPath,
+                    algorithmConnection: duplicateConnection,
+                  },
+                },
+              }
             : loaded,
       ),
     };
@@ -796,7 +873,7 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
     expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_ANALYSIS_TOO_SHALLOW');
     expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_COMPLEXITY_NOT_EXPLICIT');
     expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_PLACEHOLDER_TEXT');
-    expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_CORE_METHOD_DUPLICATE');
+    expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_ALGORITHM_CONNECTION_DUPLICATE');
     expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_COMPLEXITY_POLICY_MISMATCH');
   });
 
@@ -815,6 +892,25 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
       ),
     };
     expect(validateTechniqueInventoryCorpus(withCanonicalDraft)).toEqual([]);
+
+    const withChangesRequested = {
+      ...validCorpus,
+      inventory: validCorpus.inventory.map((loaded, index) =>
+        index === draftIndex
+          ? {
+              ...loaded,
+              entity: {
+                ...loaded.entity,
+                reviewStatus: 'changes_requested' as const,
+                reviewFindings: ['採用理由を同一taskの公式解説へ結び直す。'],
+              },
+            }
+          : loaded,
+      ),
+    };
+    expect(
+      validateTechniqueInventoryCorpus(withChangesRequested).map(({ code }) => code),
+    ).toContain('TECHNIQUE_INVENTORY_CHANGES_REQUESTED');
 
     const withPreviewDraft = {
       ...validCorpus,

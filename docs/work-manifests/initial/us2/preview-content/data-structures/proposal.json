@@ -9,7 +9,7 @@
     "decision": "approved",
     "reviewedAt": "2026-07-28T09:30:00+09:00",
     "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。",
-    "approvedSubjectDigest": "114c75ebf85144499a8ea8f2229a8105dbe12166a782e0e66697981376f229d9"
+    "approvedSubjectDigest": "770b0eedcd456f80cf94098dbefc1c35819d5349a640f9b816a879f39f70a241"
   },
   "outcome": {
     "id": "outcome-provisional-range-aggregate-under-updates",

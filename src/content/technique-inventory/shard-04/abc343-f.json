@@ -4,19 +4,92 @@
     "source-abc343-editorial-9429-f957c82a79fb9fa65f5a79a28c8ef600eed7e0a6018d5e5492765d86106a5cbd",
     "source-abc343-f-problem-118f15a1cd72a4d857e84ed257e673b547e83f09d03607b7bd2a8cf5c9f3a603"
   ],
-  "coreMethod": "abc343-f「Second Largest Query」では、各 segment node に異なる最大値・第二最大値と各個数を保持し、子の高々四候補を merge する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "区間全体の上位二種類の値は左右の上位二種類の候補集合に必ず含まれ、同値の個数を足せば正確に復元できる。",
-    "Second Largest Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc343-editorial-9429-f957c82a79fb9fa65f5a79a28c8ef600eed7e0a6018d5e5492765d86106a5cbd",
+        "source-abc343-f-problem-118f15a1cd72a4d857e84ed257e673b547e83f09d03607b7bd2a8cf5c9f3a603"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["segment tree と固定個数の候補 merge"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc343-f「Second Largest Query」では、各 segment node に異なる最大値・第二最大値と各個数を保持し、子の高々四候補を merge する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc343-f「Second Largest Query」では、各 segment node に異なる最大値・第二最大値と各個数を保持し、子の高々四候補を merge する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "区間全体の上位二種類の値は左右の上位二種類の候補集合に必ず含まれ、同値の個数を足せば正確に復元できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Second Largest Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc343-f「Second Largest Query」では、各 segment node に異なる最大値・第二最大値と各個数を保持し、子の高々四候補を merge する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "segment tree と固定個数の候補 merge",
+      "trigger": "制約と操作を整理したときに segment tree と固定個数の候補 merge の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc343-f「Second Largest Query」では、各 segment node に異なる最大値・第二最大値と各個数を保持し、子の高々四候補を merge する。この状態表現から答えを構成する。で segment tree と固定個数の候補 merge を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Second Largest Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "segment tree と固定個数の候補 merge",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "同じ値の個数を合算してから上位二種類を選び、候補が一種類の node に sentinel を置く。"
+    {
+      "text": "同じ値の個数を合算してから上位二種類を選び、候補が一種類の node に sentinel を置く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Second Largest Query 型の問題に対し、segment tree と固定個数の候補 mergeを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Second Largest Query 型の問題に対し、segment tree と固定個数の候補 mergeを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "同じ値の個数を合算してから上位二種類を選び、候補が一種類の node に sentinel を置く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

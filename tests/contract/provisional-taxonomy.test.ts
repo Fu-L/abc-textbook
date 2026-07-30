@@ -15,25 +15,25 @@ const problems = [
   {
     problemId: 'abc218-f',
     sourceRevisionIds: ['source-abc218-f-problem', 'source-abc218-f-editorial'],
-    outcomeCandidates: ['最短路構造を復元し、変更の影響範囲を限定できる。'],
+    outcomeCandidates: [{ text: '最短路構造を復元し、変更の影響範囲を限定できる。' }],
     reviewStatus: 'reviewed' as const,
   },
   {
     problemId: 'abc252-e',
     sourceRevisionIds: ['source-abc252-e-problem', 'source-abc252-e-editorial'],
-    outcomeCandidates: ['最短路木を構成し、採用辺の正当性を説明できる。'],
+    outcomeCandidates: [{ text: '最短路木を構成し、採用辺の正当性を説明できる。' }],
     reviewStatus: 'reviewed' as const,
   },
   {
     problemId: 'abc215-e',
     sourceRevisionIds: ['source-abc215-e-problem', 'source-abc215-e-editorial'],
-    outcomeCandidates: ['同値な状態を圧縮して動的計画法を設計できる。'],
+    outcomeCandidates: [{ text: '同値な状態を圧縮して動的計画法を設計できる。' }],
     reviewStatus: 'reviewed' as const,
   },
   {
     problemId: 'abc232-e',
     sourceRevisionIds: ['source-abc232-e-problem', 'source-abc232-e-editorial'],
-    outcomeCandidates: ['対称性を使って状態を圧縮できる。'],
+    outcomeCandidates: [{ text: '対称性を使って状態を圧縮できる。' }],
     reviewStatus: 'reviewed' as const,
   },
 ] as const;

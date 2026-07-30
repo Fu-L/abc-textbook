@@ -4,19 +4,94 @@
     "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
     "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
   ],
-  "coreMethod": "abc215-e「Chain Contestant」では、使用済み種類集合と最後に選んだ種類を状態にし、現在文字を選ばない・同種を続ける・未使用種へ移る遷移を数える。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "各種類が一つの連続 block だけに現れる条件は、再登場を使用済み mask で禁じ、現在 block を末尾種類で識別すれば必要十分になる。",
-    "Chain Contestant 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+        "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["bitmask DP と末尾状態"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "選ぶ部分列では同じ文字が一つの連続区間にだけ現れるため、過去の並び全体ではなく使用済み文字集合と末尾文字が次の選択可否を決める。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "使用済み文字の bitmask と末尾文字を状態にし、選ばない・同じ文字を続ける・未使用文字へ移る遷移を数える。",
+        "decision": "adopted",
+        "decisionReason": "この二情報が「一度離れた文字へ戻れない」という条件を必要十分に表す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各位置を選ぶか選ばないかで全ての部分列を列挙する。",
+        "decision": "rejected",
+        "decisionReason": "2^N 通りとなり、同じ使用済み集合と末尾を持つ履歴をまとめられない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "同じ文字を続ける遷移だけは使用済みでも許し、別文字へ移った後の再登場を mask で禁止する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "文字列を左から走査し、mask と末尾文字の DP を三種類の遷移で更新して空でない状態を合計する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "bitmask DP",
+      "trigger": "種類数が小さく、各種類を使ったかどうかが将来の可否を決めるとき。",
+      "application": "使用済み文字集合を bitmask で保持する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "末尾状態による履歴圧縮",
+      "trigger": "直前と同種かどうかだけが継続条件を変えるとき。",
+      "application": "現在の連続区間の文字を末尾状態として持つ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "「各文字が高々一ブロック」という全体条件を、再登場禁止と同種継続という局所遷移へ言い換える。",
+      "reusablePerspective": "部分列の履歴条件を、使用済み集合と現在開いている区間の種類へ分解できないか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "bitmask DP と末尾状態",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "空部分列を答えから除き、同種継続と新しい種類の開始を別遷移として modulus 上で加算する。"
+    {
+      "text": "空部分列を答えから除き、同種継続と新しい種類の開始を別遷移として modulus 上で加算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Chain Contestant 型の問題に対し、bitmask DP と末尾状態を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Chain Contestant 型の問題に対し、bitmask DP と末尾状態を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "mask だけでは同種継続を区別できない理由を、小さい文字列で反例から説明する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

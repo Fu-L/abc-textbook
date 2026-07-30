@@ -4,19 +4,96 @@
     "source-abc437-editorial-14891-8e01dd8035d7e76c1dc9842c0d289021678532fec32f01c9901a6228611703a7",
     "source-abc437-f-problem-31ca98501d7cea40b88574c6ad692175c9d92992d30517409358061afde8c90e"
   ],
-  "coreMethod": "abc437-f「Manhattan Christmas Tree 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
-    "Manhattan Christmas Tree 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc437-editorial-14891-8e01dd8035d7e76c1dc9842c0d289021678532fec32f01c9901a6228611703a7",
+        "source-abc437-f-problem-31ca98501d7cea40b88574c6ad692175c9d92992d30517409358061afde8c90e"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["online query の計算量設計", "セグメント木と monoid"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc437-f「Manhattan Christmas Tree 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc437-f「Manhattan Christmas Tree 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Manhattan Christmas Tree 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc437-f「Manhattan Christmas Tree 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "online query の計算量設計",
+      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc437-f「Manhattan Christmas Tree 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "セグメント木と monoid",
+      "trigger": "制約と操作を整理したときに セグメント木と monoid の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc437-f「Manhattan Christmas Tree 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で セグメント木と monoid を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Manhattan Christmas Tree 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "online query の計算量設計",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "セグメント木と monoid",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。"
+    {
+      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Manhattan Christmas Tree 2 型の 更新と問い合わせの時系列に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Manhattan Christmas Tree 2 型の 更新と問い合わせの時系列に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

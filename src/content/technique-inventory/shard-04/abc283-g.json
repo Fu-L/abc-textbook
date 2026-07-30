@@ -4,20 +4,90 @@
     "source-abc283-editorial-5430-affe38163eed0a16411c251e484bd226d779be9a3b4ce68d334786d4c72afff4",
     "source-abc283-g-problem-421a25e6e43a500d4c47305bf939cbea7c8edaba3eb10f08b58cb3abb5994a0d"
   ],
-  "coreMethod": "abc283-g「Partial Xor Enumeration」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "列の順序と prefix 状態と解候補の対応を双方向に示し、列挙の漏れと重複がないことを確認する。",
-    "Partial Xor Enumeration 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc283-editorial-5430-affe38163eed0a16411c251e484bd226d779be9a3b4ce68d334786d4c72afff4",
+        "source-abc283-g-problem-421a25e6e43a500d4c47305bf939cbea7c8edaba3eb10f08b58cb3abb5994a0d"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc283-g「Partial Xor Enumeration」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc283-g「Partial Xor Enumeration」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "列の順序と prefix 状態と解候補の対応を双方向に示し、列挙の漏れと重複がないことを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Partial Xor Enumeration 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc283-g「Partial Xor Enumeration」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "配列と prefix の添字管理",
+      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc283-g「Partial Xor Enumeration」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Partial Xor Enumeration 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "配列と prefix の添字管理",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
-    "状態 key と更新順序を固定し、同じ候補を二重に数えない。"
+    {
+      "text": "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "状態 key と更新順序を固定し、同じ候補を二重に数えない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Partial Xor Enumeration 型の 列の順序と prefix 状態に対し、状態縮約を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Partial Xor Enumeration 型の 列の順序と prefix 状態に対し、状態縮約を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

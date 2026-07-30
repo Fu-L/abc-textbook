@@ -4,19 +4,96 @@
     "source-abc296-editorial-6070-b5928528038187f1b949dfb21f42a524e70864b1ac6f8ee5a13996ec0cb4556d",
     "source-abc296-g-problem-d9afff8c741acc3edb639a2230ca8b48afa26b9f844da97b64b74fb6f9cd2e3b"
   ],
-  "coreMethod": "abc296-g「Polygon and Points」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "外積の符号が有向面積と回転方向を表すため、幾何条件を符号条件として必要十分に判定できる。",
-    "Polygon and Points 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc296-editorial-6070-b5928528038187f1b949dfb21f42a524e70864b1ac6f8ee5a13996ec0cb4556d",
+        "source-abc296-g-problem-d9afff8c741acc3edb639a2230ca8b48afa26b9f844da97b64b74fb6f9cd2e3b"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "計算幾何の外積・内積"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc296-g「Polygon and Points」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc296-g「Polygon and Points」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "外積の符号が有向面積と回転方向を表すため、幾何条件を符号条件として必要十分に判定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Polygon and Points 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc296-g「Polygon and Points」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "グラフの到達可能性",
+      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc296-g「Polygon and Points」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "計算幾何の外積・内積",
+      "trigger": "制約と操作を整理したときに 計算幾何の外積・内積 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc296-g「Polygon and Points」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 計算幾何の外積・内積 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Polygon and Points 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "グラフの到達可能性",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "計算幾何の外積・内積",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "座標積の overflow、collinear な境界点、開区間と閉区間の交差を区別する。"
+    {
+      "text": "座標積の overflow、collinear な境界点、開区間と閉区間の交差を区別する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Polygon and Points 型の 頂点と辺からなる状態グラフに対し、計算幾何の外積・内積を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Polygon and Points 型の 頂点と辺からなる状態グラフに対し、計算幾何の外積・内積を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "座標積の overflow、collinear な境界点、開区間と閉区間の交差を区別する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

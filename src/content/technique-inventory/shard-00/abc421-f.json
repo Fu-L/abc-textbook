@@ -4,22 +4,106 @@
     "source-abc421-editorial-13787-433e8d0a684c462cc1e7cceabc14552e13947bbf5910cabd3c98196fd12e0564",
     "source-abc421-f-problem-0ab28e8057b1b056ea75492696f2deba87c12925e65a0fb80b14697fe8aea8b9"
   ],
-  "coreMethod": "abc421-f「Erase between X and Y」では、値を node ID とする next 配列で列を表し、両端から交互に辿って先に相手へ届いた区間を splice・削除する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "探索歩数は削除要素数の定数倍で、各 node は追加後に高々一度しか削除されないため全 query で線形になる。",
-    "Erase between X and Y 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc421-editorial-13787-433e8d0a684c462cc1e7cceabc14552e13947bbf5910cabd3c98196fd12e0564",
+        "source-abc421-f-problem-0ab28e8057b1b056ea75492696f2deba87c12925e65a0fb80b14697fe8aea8b9"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
+  ],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc421-f「Erase between X and Y」では、値を node ID とする next 配列で列を表し、両端から交互に辿って先に相手へ届いた区間を splice・削除する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc421-f「Erase between X and Y」では、値を node ID とする next 配列で列を表し、両端から交互に辿って先に相手へ届いた区間を splice・削除する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "探索歩数は削除要素数の定数倍で、各 node は追加後に高々一度しか削除されないため全 query で線形になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Erase between X and Y 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc421-f「Erase between X and Y」では、値を node ID とする next 配列で列を表し、両端から交互に辿って先に相手へ届いた区間を splice・削除する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "連結リストと償却解析",
+      "trigger": "制約と操作を整理したときに 連結リストと償却解析 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc421-f「Erase between X and Y」では、値を node ID とする next 配列で列を表し、両端から交互に辿って先に相手へ届いた区間を splice・削除する。この状態表現から答えを構成する。で 連結リストと償却解析 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "特殊な漸近計算量の見積もり",
+      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc421-f「Erase between X and Y」では、値を node ID とする next 配列で列を表し、両端から交互に辿って先に相手へ届いた区間を splice・削除する。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Erase between X and Y 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "asymptoticComplexity": {
-    "time": "O(Q)（公式解法全体。特殊な計算量解析を含む）"
+    "time": "O(Q)（公式解法全体。特殊な計算量解析を含む）",
+    "evidenceIds": ["evidence-official-analysis"]
   },
-  "prerequisiteCandidates": ["連結リストと償却解析", "特殊な漸近計算量の見積もり"],
+  "prerequisiteCandidates": [
+    {
+      "text": "連結リストと償却解析",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "特殊な漸近計算量の見積もり",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "両方向探索の一時和を分け、到達した向きだけを採用して端点自身を削除しない。"
+    {
+      "text": "両方向探索の一時和を分け、到達した向きだけを採用して端点自身を削除しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Erase between X and Y 型の問題に対し、連結リストと償却解析を選び、状態・証明・特殊計算量を一貫して設計できる。"
+    {
+      "text": "Erase between X and Y 型の問題に対し、連結リストと償却解析を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "両方向探索の一時和を分け、到達した向きだけを採用して端点自身を削除しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

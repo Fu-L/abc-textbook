@@ -105,7 +105,7 @@ describe('US2 Technique Inventory contract', () => {
     expect(item).not.toHaveProperty('provisionalLearningUnitIds');
   });
 
-  it('requires source-backed method, proof, and outcome analysis', () => {
+  it('requires a source-backed reasoning path, insights, outcomes, and review advice', () => {
     const item = catalogFixture().techniqueInventory[0];
     if (!item) throw new Error('Technique Inventory fixture is missing.');
     const requiredMutations = [
@@ -114,9 +114,17 @@ describe('US2 Technique Inventory contract', () => {
         ...item,
         sourceRevisionIds: ['source-revision-abc212-e', 'source-revision-abc212-e'],
       },
-      { ...item, coreMethod: '' },
-      { ...item, proofIdeas: [] },
+      {
+        ...item,
+        reasoningPath: { ...item.reasoningPath, observations: [] },
+      },
+      {
+        ...item,
+        reasoningPath: { ...item.reasoningPath, keyInsights: [] },
+      },
+      { ...item, problemSpecificInsights: [] },
       { ...item, outcomeCandidates: [] },
+      { ...item, reviewAdvice: [] },
     ];
 
     for (const invalid of requiredMutations) {
@@ -126,13 +134,76 @@ describe('US2 Technique Inventory contract', () => {
     expect(
       CatalogSchema.shape.techniqueInventory.element.safeParse({
         ...item,
-        asymptoticComplexity: {},
+        asymptoticComplexity: {
+          evidenceIds: item.reasoningPath.algorithmConnection.evidenceIds,
+        },
       }).success,
     ).toBe(false);
     expect(
       CatalogSchema.shape.techniqueInventory.element.safeParse({
         ...item,
         asymptoticComplexity: undefined,
+      }).success,
+    ).toBe(true);
+  });
+
+  it('rejects claim evidence outside the record source set and incomplete reviewed analysis', () => {
+    const item = catalogFixture().techniqueInventory[0];
+    if (!item) throw new Error('Technique Inventory fixture is missing.');
+
+    expect(
+      CatalogSchema.shape.techniqueInventory.element.safeParse({
+        ...item,
+        evidence: item.evidence.map((evidence, index) =>
+          index === 0
+            ? { ...evidence, sourceRevisionIds: ['source-revision-not-declared'] }
+            : evidence,
+        ),
+      }).success,
+    ).toBe(false);
+
+    expect(
+      CatalogSchema.shape.techniqueInventory.element.safeParse({
+        ...item,
+        reasoningPath: {
+          ...item.reasoningPath,
+          algorithmConnection: {
+            ...item.reasoningPath.algorithmConnection,
+            evidenceIds: ['evidence-not-declared'],
+          },
+        },
+      }).success,
+    ).toBe(false);
+
+    expect(
+      CatalogSchema.shape.techniqueInventory.element.safeParse({
+        ...item,
+        reasoningPath: {
+          ...item.reasoningPath,
+          candidateApproaches: item.reasoningPath.candidateApproaches.filter(
+            ({ decision }) => decision === 'adopted',
+          ),
+        },
+      }).success,
+    ).toBe(false);
+  });
+
+  it('requires an unresolved finding only for changes-requested review state', () => {
+    const item = catalogFixture().techniqueInventory[0];
+    if (!item) throw new Error('Technique Inventory fixture is missing.');
+
+    expect(
+      CatalogSchema.shape.techniqueInventory.element.safeParse({
+        ...item,
+        reviewStatus: 'changes_requested',
+        reviewFindings: [],
+      }).success,
+    ).toBe(false);
+    expect(
+      CatalogSchema.shape.techniqueInventory.element.safeParse({
+        ...item,
+        reviewStatus: 'changes_requested',
+        reviewFindings: ['採用理由を公式解説の該当箇所へ結び直す。'],
       }).success,
     ).toBe(true);
   });

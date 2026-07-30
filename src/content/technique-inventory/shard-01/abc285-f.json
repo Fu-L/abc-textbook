@@ -4,17 +4,92 @@
     "source-abc285-editorial-5514-f0cf5ec578f21c4e25e6935f1cfb627c0f33938c92db221be26a2baccff8d67f",
     "source-abc285-f-problem-6d8ce7ff5954705114fc278f73dd10a21f946f8fb7294f88d110aa6306466ab7"
   ],
-  "coreMethod": "abc285-f「Substring of Sorted String」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
-    "Substring of Sorted String 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc285-editorial-5514-f0cf5ec578f21c4e25e6935f1cfb627c0f33938c92db221be26a2baccff8d67f",
+        "source-abc285-f-problem-6d8ce7ff5954705114fc278f73dd10a21f946f8fb7294f88d110aa6306466ab7"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["Fenwick tree"],
-  "implementationConcerns": ["内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc285-f「Substring of Sorted String」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc285-f「Substring of Sorted String」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Substring of Sorted String 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc285-f「Substring of Sorted String」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "Fenwick tree",
+      "trigger": "制約と操作を整理したときに Fenwick tree の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc285-f「Substring of Sorted String」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。で Fenwick tree を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Substring of Sorted String 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "Fenwick tree",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Substring of Sorted String 型の問題に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Substring of Sorted String 型の問題に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

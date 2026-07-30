@@ -4,17 +4,96 @@
     "source-abc282-editorial-5403-a6fc1b073b674859f239b20188df61ec3a08834c8b5f8c17af1ca21e9ccd56e4",
     "source-abc282-f-problem-86da67b53a7e864329b60455cddbbc086b4f398d45a9087c6e381fc9847ec1d8"
   ],
-  "coreMethod": "abc282-f「Union of Two Sets」では、主解法候補として、冪長でも冪等な区間要約を二冪長ごとに前計算し、二区間から query を答える。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "冪等演算では重なる二つの二冪区間を合成しても値が変わらず、任意区間を覆える。",
-    "Union of Two Sets 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc282-editorial-5403-a6fc1b073b674859f239b20188df61ec3a08834c8b5f8c17af1ca21e9ccd56e4",
+        "source-abc282-f-problem-86da67b53a7e864329b60455cddbbc086b4f398d45a9087c6e381fc9847ec1d8"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["online query の計算量設計", "Sparse Table と冪等演算"],
-  "implementationConcerns": ["区間長の floor log を事前計算し、空区間を問い合わせない。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc282-f「Union of Two Sets」では、主解法候補として、冪長でも冪等な区間要約を二冪長ごとに前計算し、二区間から query を答える。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc282-f「Union of Two Sets」では、主解法候補として、冪長でも冪等な区間要約を二冪長ごとに前計算し、二区間から query を答える。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "冪等演算では重なる二つの二冪区間を合成しても値が変わらず、任意区間を覆える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Union of Two Sets 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc282-f「Union of Two Sets」では、主解法候補として、冪長でも冪等な区間要約を二冪長ごとに前計算し、二区間から query を答える。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "online query の計算量設計",
+      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc282-f「Union of Two Sets」では、主解法候補として、冪長でも冪等な区間要約を二冪長ごとに前計算し、二区間から query を答える。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Sparse Table と冪等演算",
+      "trigger": "制約と操作を整理したときに Sparse Table と冪等演算 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc282-f「Union of Two Sets」では、主解法候補として、冪長でも冪等な区間要約を二冪長ごとに前計算し、二区間から query を答える。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で Sparse Table と冪等演算 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Union of Two Sets 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "online query の計算量設計",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Sparse Table と冪等演算",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "区間長の floor log を事前計算し、空区間を問い合わせない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Union of Two Sets 型の 更新と問い合わせの時系列に対し、Sparse Table と冪等演算を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Union of Two Sets 型の 更新と問い合わせの時系列に対し、Sparse Table と冪等演算を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "区間長の floor log を事前計算し、空区間を問い合わせない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

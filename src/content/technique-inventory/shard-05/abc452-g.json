@@ -4,17 +4,96 @@
     "source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938",
     "source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08"
   ],
-  "coreMethod": "abc452-g「221 Substring」では、主解法候補として、列を run-length encoding し、末尾 run から逆向きに長さと操作回数の漸化式を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "有効入力では非 1 の run が隣接せず、操作による増減は直後の run 長だけで決まるため圧縮状態で再現できる。",
-    "221 Substring 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938",
+        "source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["文字列の添字と prefix", "Run-Length Encoding と逆向き漸化式"],
-  "implementationConcerns": ["不可能となる隣接条件を先に検査し、各加算を modulus 上で正規化する。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc452-g「221 Substring」では、主解法候補として、列を run-length encoding し、末尾 run から逆向きに長さと操作回数の漸化式を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc452-g「221 Substring」では、主解法候補として、列を run-length encoding し、末尾 run から逆向きに長さと操作回数の漸化式を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "有効入力では非 1 の run が隣接せず、操作による増減は直後の run 長だけで決まるため圧縮状態で再現できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "221 Substring 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc452-g「221 Substring」では、主解法候補として、列を run-length encoding し、末尾 run から逆向きに長さと操作回数の漸化式を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "文字列の添字と prefix",
+      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc452-g「221 Substring」では、主解法候補として、列を run-length encoding し、末尾 run から逆向きに長さと操作回数の漸化式を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Run-Length Encoding と逆向き漸化式",
+      "trigger": "制約と操作を整理したときに Run-Length Encoding と逆向き漸化式 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc452-g「221 Substring」では、主解法候補として、列を run-length encoding し、末尾 run から逆向きに長さと操作回数の漸化式を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Run-Length Encoding と逆向き漸化式 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "221 Substring 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "文字列の添字と prefix",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Run-Length Encoding と逆向き漸化式",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "不可能となる隣接条件を先に検査し、各加算を modulus 上で正規化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "221 Substring 型の 文字列の prefix・suffix と一致関係に対し、Run-Length Encoding と逆向き漸化式を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "221 Substring 型の 文字列の prefix・suffix と一致関係に対し、Run-Length Encoding と逆向き漸化式を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "不可能となる隣接条件を先に検査し、各加算を modulus 上で正規化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

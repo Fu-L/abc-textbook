@@ -4,19 +4,92 @@
     "source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014",
     "source-abc219-f-problem-81357b19bc73aa408a3ae3da0732b554e100dd724249f7455f547dfa6db1cbf5"
   ],
-  "coreMethod": "abc219-f「Cleaning Robot」では、反復移動を一周期の変位ベクトルによる平行移動同値類へ分け、各類の訪問区間の和を数える。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "一周期後の位置は常に同じ変位だけ移るため、変位方向に直交する不変量ごとに訪問点が一次元区間へ対応する。",
-    "Cleaning Robot 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014",
+        "source-abc219-f-problem-81357b19bc73aa408a3ae3da0732b554e100dd724249f7455f547dfa6db1cbf5"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["格子点と gcd による方向ベクトル正規化"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc219-f「Cleaning Robot」では、反復移動を一周期の変位ベクトルによる平行移動同値類へ分け、各類の訪問区間の和を数える。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc219-f「Cleaning Robot」では、反復移動を一周期の変位ベクトルによる平行移動同値類へ分け、各類の訪問区間の和を数える。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "一周期後の位置は常に同じ変位だけ移るため、変位方向に直交する不変量ごとに訪問点が一次元区間へ対応する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Cleaning Robot 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc219-f「Cleaning Robot」では、反復移動を一周期の変位ベクトルによる平行移動同値類へ分け、各類の訪問区間の和を数える。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "格子点と gcd による方向ベクトル正規化",
+      "trigger": "制約と操作を整理したときに 格子点と gcd による方向ベクトル正規化 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc219-f「Cleaning Robot」では、反復移動を一周期の変位ベクトルによる平行移動同値類へ分け、各類の訪問区間の和を数える。この状態表現から答えを構成する。で 格子点と gcd による方向ベクトル正規化 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Cleaning Robot 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "格子点と gcd による方向ベクトル正規化",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "総変位が零の場合を分離し、負方向を含む同値類 key と区間端点を正規化する。"
+    {
+      "text": "総変位が零の場合を分離し、負方向を含む同値類 key と区間端点を正規化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Cleaning Robot 型の問題に対し、格子点と gcd による方向ベクトル正規化を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Cleaning Robot 型の問題に対し、格子点と gcd による方向ベクトル正規化を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "総変位が零の場合を分離し、負方向を含む同値類 key と区間端点を正規化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

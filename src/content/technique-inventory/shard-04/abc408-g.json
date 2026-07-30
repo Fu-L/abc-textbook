@@ -4,19 +4,92 @@
     "source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f",
     "source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c"
   ],
-  "coreMethod": "abc408-g「A/B < p/q < C/D」では、開区間の両端から共通整数部を除き、1 未満なら逆数で端点を反転する Euclid 型再帰で最小分母分数を得る。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "整数平行移動と逆数変換は区間内分数を全単射で対応させ、各段で連分数の一係数が確定する。",
-    "A/B < p/q < C/D 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f",
+        "source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["連分数と Euclid の互除法"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc408-g「A/B < p/q < C/D」では、開区間の両端から共通整数部を除き、1 未満なら逆数で端点を反転する Euclid 型再帰で最小分母分数を得る。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc408-g「A/B < p/q < C/D」では、開区間の両端から共通整数部を除き、1 未満なら逆数で端点を反転する Euclid 型再帰で最小分母分数を得る。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "整数平行移動と逆数変換は区間内分数を全単射で対応させ、各段で連分数の一係数が確定する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "A/B < p/q < C/D 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc408-g「A/B < p/q < C/D」では、開区間の両端から共通整数部を除き、1 未満なら逆数で端点を反転する Euclid 型再帰で最小分母分数を得る。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "連分数と Euclid の互除法",
+      "trigger": "制約と操作を整理したときに 連分数と Euclid の互除法 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc408-g「A/B < p/q < C/D」では、開区間の両端から共通整数部を除き、1 未満なら逆数で端点を反転する Euclid 型再帰で最小分母分数を得る。この状態表現から答えを構成する。で 連分数と Euclid の互除法 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "A/B < p/q < C/D 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "連分数と Euclid の互除法",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "開区間の等号を混ぜず、逆数時に端点順を交換し、分子分母の積を広い整数型で比較する。"
+    {
+      "text": "開区間の等号を混ぜず、逆数時に端点順を交換し、分子分母の積を広い整数型で比較する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "A/B < p/q < C/D 型の問題に対し、連分数と Euclid の互除法を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "A/B < p/q < C/D 型の問題に対し、連分数と Euclid の互除法を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "開区間の等号を混ぜず、逆数時に端点順を交換し、分子分母の積を広い整数型で比較する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

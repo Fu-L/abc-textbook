@@ -4,19 +4,96 @@
     "source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5",
     "source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd"
   ],
-  "coreMethod": "abc233-f「Swap and Sort」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
-    "Swap and Sort 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5",
+        "source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["順列と逆写像", "Union-Find"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc233-f「Swap and Sort」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc233-f「Swap and Sort」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Swap and Sort 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc233-f「Swap and Sort」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "順列と逆写像",
+      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc233-f「Swap and Sort」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Union-Find",
+      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc233-f「Swap and Sort」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Swap and Sort 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "順列と逆写像",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Union-Find",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。"
+    {
+      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Swap and Sort 型の 順列の位置と値の対応に対し、Union-Findを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Swap and Sort 型の 順列の位置と値の対応に対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

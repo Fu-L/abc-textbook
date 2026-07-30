@@ -19,6 +19,7 @@ import {
   deriveExecutableExampleInventory,
   executableExampleInventoryDigest,
 } from '../../src/lib/catalog/build-catalog.js';
+import { makeProblemAnalysisFixture } from '../fixtures/trusted-catalog.js';
 
 const execFileAsync = promisify(execFile);
 const sha = (character: string): string => character.repeat(64);
@@ -282,21 +283,7 @@ describe('catalog release evidence inventory', () => {
           placementId: null,
         },
       ],
-      techniqueInventory: [
-        {
-          problemId: 'abc212-x45',
-          sourceRevisionIds: ['source-revision-abc212-e'],
-          coreMethod: 'Fixture method.',
-          proofIdeas: ['Fixture proof.'],
-          asymptoticComplexity: { time: 'O(1)', space: 'O(1)' },
-          prerequisiteCandidates: [],
-          implementationConcerns: [],
-          outcomeCandidates: ['Fixture outcome.'],
-          adHocElements: [],
-          authorId: 'person-author',
-          reviewStatus: 'reviewed' as const,
-        },
-      ],
+      techniqueInventory: [makeProblemAnalysisFixture('abc212-x45', 'source-revision-abc212-e')],
       tags: [
         {
           id: 'tag-graphs',

@@ -41,12 +41,12 @@
     ],
     "selectedCanonicalProblemCount": 8,
     "selectedFixtureProblemCount": 0,
-    "previewInventoryDigest": "f513f27b5e105b6c58922a3870d6bdc04a4c5850bf2d11ce46392d0121298f5a",
-    "previewComponentDigest": "8ebb3b324b1972d98321b1249d6f387acbb54757ed8460638e6a6747eb150da7"
+    "previewInventoryDigest": "dd446c52c04230aabff4dac595040a5f756c338e726971fa8b98243a56c3b0db",
+    "previewComponentDigest": "d41319304107e355c62e0989fd15308a9fb95d234480b865c23e9648fbae386c"
   },
   "metadataDigest": "11bf55bf55b5d979da94087022f63b9cae77ee6133406fded929c0ec6ead1ac4",
-  "inventoryDigest": "d694dbae100dc8e7a1fa446c61795d0fe82150a517b403f071f1b3c4dae7d2c4",
-  "corpusDigest": "f760e53d4265e9afe8d01ba002e762178bec71143be18710daf4abbe5d8eaac5",
+  "inventoryDigest": "777548cce957abbd4416c658a4f4769cc3b0cf05e798849388aa31476d7cf00e",
+  "corpusDigest": "98f9fa7d36bbcd2ea2956f045d7148b6272e9dce3b236341aed18a379b394769",
   "shards": [
     {
       "shardId": "shard-00",
@@ -188,7 +188,7 @@
         "abc465-e"
       ],
       "problemIdsDigest": "f85b034b58c2a073991c62368e03ca861138270f6f6886bd253ac154bc363656",
-      "contentDigest": "60cac944303bd1eb5a4c0f00d6f0a07173c2a9709748132bff729465798efed1"
+      "contentDigest": "11882ac261c5e74d232dc8ec6e208e7b38b926ac27af56b6d57502016b3133d2"
     },
     {
       "shardId": "shard-01",
@@ -344,7 +344,7 @@
         "abc463-g"
       ],
       "problemIdsDigest": "719a2217e214f5485674d1fb210ac33f1d7e574aaed5f8f6c7033bb4b19916cd",
-      "contentDigest": "f275ec7c8d8b6467bcc7d600fc8adcbb73e44b6e10ec232c8c1211eb00dfaa22"
+      "contentDigest": "4d0bba1d7d000c97906e0a758892454478cb69b9f107801960c044597d35638d"
     },
     {
       "shardId": "shard-02",
@@ -503,7 +503,7 @@
         "abc457-g"
       ],
       "problemIdsDigest": "d58210d1a6f7cf4c860a252326a39a2dd193c7635193f3a24fda2604c49c9078",
-      "contentDigest": "9c2f7e255c229f7cc6f876a3fce7c7c2a1560078af0026a23c792c143560da8e"
+      "contentDigest": "05aeb079bfb14aa6311933846255083cf34be63a1697f3ce58db1497e80c09e9"
     },
     {
       "shardId": "shard-03",
@@ -623,7 +623,7 @@
         "abc466-f"
       ],
       "problemIdsDigest": "6f1b107e9573a849fd65297290a42aa41136c8549d6092e419afc74259b06777",
-      "contentDigest": "b0b4ceaf85d4a95d57e86f013ce564e027e8fcf35d484c03ff76c26275318539"
+      "contentDigest": "e2da23dd302c41a38216d608619ae868f0249cc0f52b988f6a1c7f84541014bb"
     },
     {
       "shardId": "shard-04",
@@ -795,7 +795,7 @@
         "abc465-f"
       ],
       "problemIdsDigest": "9823c690e0a177bdc3dfab0b9815c9b1853575e8b5da3c34d867ee08c0bf4539",
-      "contentDigest": "2e097986af5e8116d55936fd84ed55f0f1e1d6d80c80356daa2a847d380a1f5f"
+      "contentDigest": "7f1c0bddcf3258ac12bc29fb056e73eaf95ec088437720c8631e35a2abe11029"
     },
     {
       "shardId": "shard-05",
@@ -962,9 +962,9 @@
         "abc466-g"
       ],
       "problemIdsDigest": "e8b425fb4eb4c73b4a0f11870a5a662ea26f39f6ea33f328f157241da7083d5d",
-      "contentDigest": "59d11969530b0ad5097ede868ada46099193ad2a274066a9cee75b4bbb9376b2"
+      "contentDigest": "42c1d2f75055027a4e58bf82e905087b9f7f6dbd76d547c3b5643b4a7e2d0fad"
     }
   ],
   "diagnostics": [],
-  "evidenceDigest": "560a05c213100a7b2bbb98b50ebe65f97952684a81266f086b7e30ca4924ff31"
+  "evidenceDigest": "152e038bcb0f4368604d8f580d17f7c90d9a825b620fddf31df4bceaa2e4980e"
 }

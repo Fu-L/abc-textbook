@@ -4,19 +4,94 @@
     "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
     "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"
   ],
-  "coreMethod": "abc252-e「Road Reduction」では、Dijkstra の各頂点への最終緩和で predecessor edge を記録し、根以外へ一本ずつ選んで最短路木を残す。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "各 predecessor は距離を厳密に満たす最短路の一辺で、根からの辺数に関する帰納で全頂点の元最短距離が保たれる。",
-    "Road Reduction 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+        "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["Dijkstra 法と shortest-path tree"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "頂点 1 から全頂点への最短距離を保ちながら辺を N-1 本残すので、各頂点へ至る最短路の直前辺を一本ずつ選べばよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "Dijkstra の最終緩和で各頂点の predecessor edge を記録し、根以外の N-1 本を出力する。",
+        "decision": "adopted",
+        "decisionReason": "各 predecessor は最短距離等式を満たし、距離の小さい側から辿れば頂点 1 へ至る最短路木になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "辺重みの総和が最小になる minimum spanning tree を構成する。",
+        "decision": "rejected",
+        "decisionReason": "MST は木全体の重みを最小化するが、頂点 1 から各頂点への元の最短距離を保存する保証がない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "必要なのは全域木の総重み最小化ではなく、各頂点の dist[v]=dist[parent]+w を満たす辺を一本選ぶこと。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "Dijkstra で距離が改善されたときに edge id を保存し、頂点 2..N の保存辺を出力する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "最短路木",
+      "trigger": "単一始点最短距離を保つ疎な部分グラフが必要なとき。",
+      "application": "各頂点への最短路 predecessor を一本選んで木を構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Dijkstra 法",
+      "trigger": "非負重みグラフで単一始点最短路を求めるとき。",
+      "application": "距離の緩和と同時に採用候補の edge id を更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "「N-1 本」という語から MST へ飛びつかず、保存すべき量が全体重みか各頂点の距離かを比較する。",
+      "reusablePerspective": "木を求める問題では、最適化目的と保持すべき不変量から MST・DFS 木・最短路木を区別する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "Dijkstra 法と shortest-path tree",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "同距離候補は任意の一本でよく、priority queue の stale entry から predecessor を更新しない。"
+    {
+      "text": "同距離候補は任意の一本でよく、priority queue の stale entry から predecessor を更新しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Road Reduction 型の問題に対し、Dijkstra 法と shortest-path treeを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Road Reduction 型の問題に対し、Dijkstra 法と shortest-path treeを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "MST が失敗する小さい重み付きグラフを作り、最短路木が距離を保つ帰納法を説明する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

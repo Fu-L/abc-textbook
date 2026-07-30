@@ -4,19 +4,96 @@
     "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
     "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"
   ],
-  "coreMethod": "abc228-h「Histogram」では、主解法候補として、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "各遷移候補を一次関数へ対応させると、求める最適値は query 点での直線群の包絡線に一致する。",
-    "Histogram 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
+        "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "Convex Hull Trick"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc228-h「Histogram」では、主解法候補として、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc228-h「Histogram」では、主解法候補として、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "各遷移候補を一次関数へ対応させると、求める最適値は query 点での直線群の包絡線に一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Histogram 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc228-h「Histogram」では、主解法候補として、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "配列と prefix の添字管理",
+      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc228-h「Histogram」では、主解法候補として、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Convex Hull Trick",
+      "trigger": "制約と操作を整理したときに Convex Hull Trick の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc228-h「Histogram」では、主解法候補として、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で Convex Hull Trick を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Histogram 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "配列と prefix の添字管理",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Convex Hull Trick",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "傾き単調性の有無で構造を選び、積の overflow と等傾き直線を処理する。"
+    {
+      "text": "傾き単調性の有無で構造を選び、積の overflow と等傾き直線を処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Histogram 型の 列の順序と prefix 状態に対し、Convex Hull Trickを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Histogram 型の 列の順序と prefix 状態に対し、Convex Hull Trickを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "傾き単調性の有無で構造を選び、積の overflow と等傾き直線を処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

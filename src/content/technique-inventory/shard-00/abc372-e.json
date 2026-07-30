@@ -4,19 +4,96 @@
     "source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59",
     "source-abc372-editorial-10967-abf15d02f03a6ce0612e3ba16d6281389413d47d0d0a4904b7c4235a262c1011"
   ],
-  "coreMethod": "abc372-e「K-th Largest Connected Components」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
-    "K-th Largest Connected Components 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59",
+        "source-abc372-editorial-10967-abf15d02f03a6ce0612e3ba16d6281389413d47d0d0a4904b7c4235a262c1011"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "Union-Find"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc372-e「K-th Largest Connected Components」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc372-e「K-th Largest Connected Components」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "K-th Largest Connected Components 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc372-e「K-th Largest Connected Components」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "グラフの到達可能性",
+      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc372-e「K-th Largest Connected Components」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Union-Find",
+      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc372-e「K-th Largest Connected Components」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "K-th Largest Connected Components 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "グラフの到達可能性",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Union-Find",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。"
+    {
+      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "K-th Largest Connected Components 型の 頂点と辺からなる状態グラフに対し、Union-Findを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "K-th Largest Connected Components 型の 頂点と辺からなる状態グラフに対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

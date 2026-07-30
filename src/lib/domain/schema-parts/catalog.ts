@@ -454,26 +454,166 @@ export const ProblemSchema = strictObject({
     ],
   });
 
-export const TechniqueInventoryItemSchema = strictObject({
+export const ProblemAnalysisEvidenceSchema = strictObject({
+  id: EntityIdSchema,
+  sourceRevisionIds: uniqueArray(EntityIdSchema).min(1),
+  rationale: nonEmptyText,
+});
+
+export const SourceBackedAnalysisClaimSchema = strictObject({
+  text: nonEmptyText,
+  evidenceIds: uniqueArray(EntityIdSchema).min(1),
+});
+
+const ReasoningApproachSchema = strictObject({
+  approach: nonEmptyText,
+  decision: z.enum(['adopted', 'rejected']),
+  decisionReason: nonEmptyText,
+  evidenceIds: uniqueArray(EntityIdSchema).min(1),
+});
+
+const TypicalTechniqueCandidateSchema = strictObject({
+  name: nonEmptyText,
+  trigger: nonEmptyText,
+  application: nonEmptyText,
+  evidenceIds: uniqueArray(EntityIdSchema).min(1),
+});
+
+const ProblemSpecificInsightSchema = strictObject({
+  insight: nonEmptyText,
+  reusablePerspective: nonEmptyText,
+  evidenceIds: uniqueArray(EntityIdSchema).min(1),
+});
+
+/**
+ * The source-backed analysis record written before taxonomy and explanation authoring.
+ * It records a reproducible route from observations to an algorithm; it does not decide
+ * final Tags, Outcomes, Units, or full/similar/supplement placement.
+ */
+export const ProblemAnalysisRecordSchema = strictObject({
   problemId: ProblemIdSchema,
   sourceRevisionIds: uniqueArray(EntityIdSchema).min(1),
-  coreMethod: nonEmptyText,
-  proofIdeas: z.array(nonEmptyText).min(1),
+  evidence: z.array(ProblemAnalysisEvidenceSchema).min(1),
+  reasoningPath: strictObject({
+    observations: z.array(SourceBackedAnalysisClaimSchema).min(1),
+    candidateApproaches: z.array(ReasoningApproachSchema).min(1),
+    keyInsights: z.array(SourceBackedAnalysisClaimSchema).min(1),
+    algorithmConnection: SourceBackedAnalysisClaimSchema,
+  }),
+  typicalTechniques: z.array(TypicalTechniqueCandidateSchema),
+  problemSpecificInsights: z.array(ProblemSpecificInsightSchema).min(1),
   asymptoticComplexity: strictObject({
     time: nonEmptyText.optional(),
     space: nonEmptyText.optional(),
+    evidenceIds: uniqueArray(EntityIdSchema).min(1),
   })
     .refine((complexity) => complexity.time !== undefined || complexity.space !== undefined, {
       message: 'At least one problem-specific complexity bound is required when present.',
     })
     .optional(),
-  prerequisiteCandidates: z.array(nonEmptyText),
-  implementationConcerns: z.array(nonEmptyText),
-  outcomeCandidates: z.array(nonEmptyText).min(1),
-  adHocElements: z.array(nonEmptyText),
+  prerequisiteCandidates: z.array(SourceBackedAnalysisClaimSchema),
+  implementationConcerns: z.array(SourceBackedAnalysisClaimSchema),
+  outcomeCandidates: z.array(SourceBackedAnalysisClaimSchema).min(1),
+  reviewAdvice: z.array(SourceBackedAnalysisClaimSchema).min(1),
   authorId: EntityIdSchema,
   reviewStatus: z.enum(['draft', 'reviewed', 'changes_requested']),
+  reviewFindings: z.array(nonEmptyText),
+}).superRefine((record, context) => {
+  const evidenceIdSets = [
+    ...record.reasoningPath.observations.map(({ evidenceIds }) => evidenceIds),
+    ...record.reasoningPath.candidateApproaches.map(({ evidenceIds }) => evidenceIds),
+    ...record.reasoningPath.keyInsights.map(({ evidenceIds }) => evidenceIds),
+    record.reasoningPath.algorithmConnection.evidenceIds,
+    ...record.typicalTechniques.map(({ evidenceIds }) => evidenceIds),
+    ...record.problemSpecificInsights.map(({ evidenceIds }) => evidenceIds),
+    ...(record.asymptoticComplexity === undefined ? [] : [record.asymptoticComplexity.evidenceIds]),
+    ...record.prerequisiteCandidates.map(({ evidenceIds }) => evidenceIds),
+    ...record.implementationConcerns.map(({ evidenceIds }) => evidenceIds),
+    ...record.outcomeCandidates.map(({ evidenceIds }) => evidenceIds),
+    ...record.reviewAdvice.map(({ evidenceIds }) => evidenceIds),
+  ];
+  const declaredEvidenceIds = new Set(record.evidence.map(({ id }) => id));
+  if (declaredEvidenceIds.size !== record.evidence.length) {
+    context.addIssue({
+      code: 'custom',
+      path: ['evidence'],
+      message: 'Problem analysis evidence IDs must be unique within a record.',
+    });
+  }
+  const citedEvidenceIds = new Set(evidenceIdSets.flat());
+  for (const evidenceId of citedEvidenceIds) {
+    if (!declaredEvidenceIds.has(evidenceId)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['evidence'],
+        message: `Claim references undeclared evidence ${evidenceId}.`,
+      });
+    }
+  }
+  for (const evidenceId of declaredEvidenceIds) {
+    if (!citedEvidenceIds.has(evidenceId)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['evidence'],
+        message: `Declared evidence ${evidenceId} is not used by any analysis claim.`,
+      });
+    }
+  }
+
+  const citedSourceIds = new Set(
+    record.evidence.flatMap(({ sourceRevisionIds }) => sourceRevisionIds),
+  );
+  const declaredSourceIds = new Set(record.sourceRevisionIds);
+  for (const sourceRevisionId of citedSourceIds) {
+    if (!declaredSourceIds.has(sourceRevisionId)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['sourceRevisionIds'],
+        message: `Evidence source ${sourceRevisionId} is not declared by this analysis record.`,
+      });
+    }
+  }
+  for (const sourceRevisionId of declaredSourceIds) {
+    if (!citedSourceIds.has(sourceRevisionId)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['sourceRevisionIds'],
+        message: `Declared Source Revision ${sourceRevisionId} is not used by any analysis claim.`,
+      });
+    }
+  }
+
+  const approachDecisions = new Set(
+    record.reasoningPath.candidateApproaches.map(({ decision }) => decision),
+  );
+  if (
+    record.reviewStatus === 'reviewed' &&
+    (!approachDecisions.has('adopted') || !approachDecisions.has('rejected'))
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['reasoningPath', 'candidateApproaches'],
+      message: 'Reviewed analysis requires both an adopted and a rejected candidate approach.',
+    });
+  }
+  if (record.reviewStatus === 'changes_requested' && record.reviewFindings.length === 0) {
+    context.addIssue({
+      code: 'custom',
+      path: ['reviewFindings'],
+      message: 'Changes-requested analysis requires at least one unresolved review finding.',
+    });
+  }
+  if (record.reviewStatus !== 'changes_requested' && record.reviewFindings.length > 0) {
+    context.addIssue({
+      code: 'custom',
+      path: ['reviewFindings'],
+      message: 'Only changes-requested analysis may retain unresolved review findings.',
+    });
+  }
 });
+
+/** @deprecated Use ProblemAnalysisRecordSchema for new code. */
+export const TechniqueInventoryItemSchema = ProblemAnalysisRecordSchema;
 
 export const TechniqueTagSchema = strictObject({
   id: EntityIdSchema,
@@ -879,7 +1019,7 @@ export const CatalogSchema = strictObject({
   contestGaps: z.array(OfficialContestGapMetadataSchema),
   contestSlots: z.array(ContestSlotRecordSchema),
   problems: z.array(ProblemSchema),
-  techniqueInventory: z.array(TechniqueInventoryItemSchema),
+  techniqueInventory: z.array(ProblemAnalysisRecordSchema),
   tags: z.array(TechniqueTagSchema),
   learningOutcomes: z.array(LearningOutcomeSchema),
   learningUnits: z.array(LearningUnitSchema),

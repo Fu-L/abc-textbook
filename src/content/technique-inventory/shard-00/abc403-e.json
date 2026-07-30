@@ -4,19 +4,96 @@
     "source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23",
     "source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"
   ],
-  "coreMethod": "abc403-e「Forbidden Prefix」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
-    "Forbidden Prefix 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc403-e-problem-a22e29b8f029d78c328c2ea1a831511d5157aeb33df34d4bd540d650d5adcb23",
+        "source-abc403-editorial-12825-096a73f0a3867c69a66e98f4a178f82325d99092fd960d007ecfb43ffdc9a8be"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["文字列の添字と prefix", "Trie"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc403-e「Forbidden Prefix」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc403-e「Forbidden Prefix」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Forbidden Prefix 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc403-e「Forbidden Prefix」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "文字列の添字と prefix",
+      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc403-e「Forbidden Prefix」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Trie",
+      "trigger": "制約と操作を整理したときに Trie の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc403-e「Forbidden Prefix」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Trie を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Forbidden Prefix 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "文字列の添字と prefix",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Trie",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。"
+    {
+      "text": "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Forbidden Prefix 型の 文字列の prefix・suffix と一致関係に対し、Trieを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Forbidden Prefix 型の 文字列の prefix・suffix と一致関係に対し、Trieを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

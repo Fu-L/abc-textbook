@@ -4,19 +4,94 @@
     "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
     "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
   ],
-  "coreMethod": "abc222-g「222」では、repdigit 条件を 10^n≡1 mod M' へ変形し、Euler の定理から n を φ(M') の約数へ限定して昇順検査する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "最小指数 n と φ(M') の gcd も解になるため最小性から n は φ(M') を割り、最初に成功する約数が乗法的位数である。",
-    "222 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+        "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["Euler の定理、Euler φ、乗法的位数"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "同じ数字を並べた整数の K による割り切れ条件は、2 と 5 の因子を分離した法 M' 上の 10^n≡1 へ変形できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "Euler の定理で指数を φ(M') の約数へ限定し、昇順に modular power を検査して最小の乗法的位数を求める。",
+        "decision": "adopted",
+        "decisionReason": "最小の解 n は φ(M') を割るため、長さを一つずつ試さず有限個の約数だけ調べればよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "余りを更新しながら長さ n を 1 から順に試す。",
+        "decision": "rejected",
+        "decisionReason": "周期長が大きいケースで各 query の反復回数を制約内に抑えられない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "10^n≡1 を満たす最小 n は 10 の M' における乗法的位数であり、φ(M') の約数である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "解なし条件を先に判定し、φ(M') を計算してその約数を昇順に modular exponentiation で検査する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "乗法的位数",
+      "trigger": "同じ桁の反復や等比数列が a^n≡1 の最小指数へ帰着するとき。",
+      "application": "repdigit の長さを 10 の法 M' における位数として扱う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Euler の定理と約数列挙",
+      "trigger": "底と法が互いに素で最小周期を求めるとき。",
+      "application": "候補指数を φ(M') の約数へ限定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "repdigit の式をそのまま追わず、定数倍を払って 10^n≡1 の形にすると周期問題が見える。",
+      "reusablePerspective": "反復桁・等比和の割り切れ条件では、分母と法の gcd を処理して冪の合同式へ直せないか試す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "Euler の定理、Euler φ、乗法的位数",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "M' が 2 または 5 と共通因子を持つ場合を解なしにし、modular power の積を安全な型で計算する。"
+    {
+      "text": "M' が 2 または 5 と共通因子を持つ場合を解なしにし、modular power の積を安全な型で計算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "222 型の問題に対し、Euler の定理、Euler φ、乗法的位数を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "222 型の問題に対し、Euler の定理、Euler φ、乗法的位数を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "最小指数が φ(M') を割る理由を、位数と Euler の定理から自力で証明する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

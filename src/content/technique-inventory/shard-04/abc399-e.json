@@ -4,17 +4,96 @@
     "source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2",
     "source-abc399-editorial-12564-6e1510563de5279b95e284c4e0c13c4772bcba726ff97494a39c00e3e1e5b0f4"
   ],
-  "coreMethod": "abc399-e「Replace」では、主解法候補として、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "削除頂点からは rank が真に減るので無限歩できず、残存頂点は残存辺を選び続けて有限グラフ上の閉路へ到達する。",
-    "Replace 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc399-e-problem-1d4ea03ba95452a9e586d2815b0d5f1cd2e42e692a526f490d5ea576b453bab2",
+        "source-abc399-editorial-12564-6e1510563de5279b95e284c4e0c13c4772bcba726ff97494a39c00e3e1e5b0f4"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["文字列の添字と prefix", "逆向き topological pruning"],
-  "implementationConcerns": ["逆辺を保持し、出次数が零になった瞬間だけ queue へ追加する。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc399-e「Replace」では、主解法候補として、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc399-e「Replace」では、主解法候補として、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "削除頂点からは rank が真に減るので無限歩できず、残存頂点は残存辺を選び続けて有限グラフ上の閉路へ到達する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Replace 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc399-e「Replace」では、主解法候補として、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "文字列の添字と prefix",
+      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc399-e「Replace」では、主解法候補として、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "逆向き topological pruning",
+      "trigger": "制約と操作を整理したときに 逆向き topological pruning の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc399-e「Replace」では、主解法候補として、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 逆向き topological pruning を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Replace 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "文字列の添字と prefix",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "逆向き topological pruning",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "逆辺を保持し、出次数が零になった瞬間だけ queue へ追加する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Replace 型の 文字列の prefix・suffix と一致関係に対し、逆向き topological pruningを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Replace 型の 文字列の prefix・suffix と一致関係に対し、逆向き topological pruningを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "逆辺を保持し、出次数が零になった瞬間だけ queue へ追加する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

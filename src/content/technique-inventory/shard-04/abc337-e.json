@@ -4,19 +4,92 @@
     "source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107",
     "source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"
   ],
-  "coreMethod": "abc337-e「Bad Juice」では、対象番号を二進 codeword に割り当て、各 bit が 1 の対象集合を一回の検査へまとめて結果から番号を復号する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "ceil(log2 N) bit の codeword は N 個の対象を一意に区別し、各検査結果が対応 bit をそのまま与える。",
-    "Bad Juice 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107",
+        "source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["二進表現と情報量の下界"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc337-e「Bad Juice」では、対象番号を二進 codeword に割り当て、各 bit が 1 の対象集合を一回の検査へまとめて結果から番号を復号する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc337-e「Bad Juice」では、対象番号を二進 codeword に割り当て、各 bit が 1 の対象集合を一回の検査へまとめて結果から番号を復号する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "ceil(log2 N) bit の codeword は N 個の対象を一意に区別し、各検査結果が対応 bit をそのまま与える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Bad Juice 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc337-e「Bad Juice」では、対象番号を二進 codeword に割り当て、各 bit が 1 の対象集合を一回の検査へまとめて結果から番号を復号する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "二進表現と情報量の下界",
+      "trigger": "制約と操作を整理したときに 二進表現と情報量の下界 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc337-e「Bad Juice」では、対象番号を二進 codeword に割り当て、各 bit が 1 の対象集合を一回の検査へまとめて結果から番号を復号する。この状態表現から答えを構成する。で 二進表現と情報量の下界 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Bad Juice 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "二進表現と情報量の下界",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "番号の 0-origin・1-origin を変換し、空の検査集合と対話出力の flush を扱う。"
+    {
+      "text": "番号の 0-origin・1-origin を変換し、空の検査集合と対話出力の flush を扱う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Bad Juice 型の問題に対し、二進表現と情報量の下界を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Bad Juice 型の問題に対し、二進表現と情報量の下界を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "番号の 0-origin・1-origin を変換し、空の検査集合と対話出力の flush を扱う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

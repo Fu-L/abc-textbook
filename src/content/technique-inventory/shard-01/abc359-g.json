@@ -4,19 +4,96 @@
     "source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6",
     "source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc"
   ],
-  "coreMethod": "abc359-g「Sum of Tree Distance」では、主解法候補として、木を重心で再帰分割し、重心をまたぐ寄与だけを各階層で集計する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "重心除去後の各連結成分が半分以下になるため、各頂点の寄与は対数個の階層でちょうど一度ずつ処理される。",
-    "Sum of Tree Distance 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6",
+        "source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["木の連結性と一意な単純路", "木の重心と再帰分割"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc359-g「Sum of Tree Distance」では、主解法候補として、木を重心で再帰分割し、重心をまたぐ寄与だけを各階層で集計する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc359-g「Sum of Tree Distance」では、主解法候補として、木を重心で再帰分割し、重心をまたぐ寄与だけを各階層で集計する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "重心除去後の各連結成分が半分以下になるため、各頂点の寄与は対数個の階層でちょうど一度ずつ処理される。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Sum of Tree Distance 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc359-g「Sum of Tree Distance」では、主解法候補として、木を重心で再帰分割し、重心をまたぐ寄与だけを各階層で集計する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "木の連結性と一意な単純路",
+      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc359-g「Sum of Tree Distance」では、主解法候補として、木を重心で再帰分割し、重心をまたぐ寄与だけを各階層で集計する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "木の重心と再帰分割",
+      "trigger": "制約と操作を整理したときに 木の重心と再帰分割 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc359-g「Sum of Tree Distance」では、主解法候補として、木を重心で再帰分割し、重心をまたぐ寄与だけを各階層で集計する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の重心と再帰分割 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Sum of Tree Distance 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "木の連結性と一意な単純路",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "木の重心と再帰分割",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "重心を除いた成分ごとの集計を分離し、同一成分内の過剰計上を差し引く。"
+    {
+      "text": "重心を除いた成分ごとの集計を分離し、同一成分内の過剰計上を差し引く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Sum of Tree Distance 型の 根付き木・部分木・パスの関係に対し、木の重心と再帰分割を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Sum of Tree Distance 型の 根付き木・部分木・パスの関係に対し、木の重心と再帰分割を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "重心を除いた成分ごとの集計を分離し、同一成分内の過剰計上を差し引く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

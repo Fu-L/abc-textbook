@@ -4,19 +4,94 @@
     "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
     "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
   ],
-  "coreMethod": "abc212-g「Power Pair」では、非零剰余を原始根の指数へ写して冪条件を一次合同式にし、gcd(P-1,a) ごとに個数を約数上で集約する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "原始根の指数写像は非零剰余との全単射で、an≡b の可解な b の個数は (P-1)/gcd(P-1,a) になる。",
-    "Power Pair 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+        "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["原始根、一次合同式、約数反転型集計"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "P が素数なので非零剰余は位数 P-1 の巡回群をなし、x^a=y という冪条件を指数の合同式へ移せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "原始根の指数へ写し、gcd(P-1,a) ごとに到達可能な y の個数を約数上で集約する。",
+        "decision": "adopted",
+        "decisionReason": "冪写像の像の大きさが gcd(P-1,a) だけで決まり、指数 a を個別に調べず数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全ての x と a について冪を計算し、得られる組を直接数える。",
+        "decision": "rejected",
+        "decisionReason": "候補組を直接走査すると P の大きさに対して間に合わず、同じ gcd を持つ指数の重複も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "an≡b mod(P-1) が解を持つ b は (P-1)/gcd(P-1,a) 個である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "P-1 の約数ごとに gcd がその値になる指数数を求め、冪写像の像の大きさとの積を加算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "原始根による指数化",
+      "trigger": "素数法の非零剰余に積と冪が現れるとき。",
+      "application": "乗法群を Z/(P-1)Z の加法的な指数へ写す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "約数上の包除的集計",
+      "trigger": "値が gcd(P-1,a) のみに依存するとき。",
+      "application": "倍数側の個数を大きい約数から差し引き、gcd が各約数に等しい個数を得る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "x=0 を非零剰余の巡回群から先に分離すると、残りを原始根の指数だけで統一できる。",
+      "reusablePerspective": "演算が有限体の乗法に閉じる部分と例外値を分け、群構造へ写せる範囲を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "原始根、一次合同式、約数反転型集計",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "x=0 を分離し、P-1 の全約数を列挙して gcd が各約数になる指数数を大きい順に差し引く。"
+    {
+      "text": "x=0 を分離し、P-1 の全約数を列挙して gcd が各約数になる指数数を大きい順に差し引く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Power Pair 型の問題に対し、原始根、一次合同式、約数反転型集計を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Power Pair 型の問題に対し、原始根、一次合同式、約数反転型集計を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "式を暗記せず、固定した a に対する冪写像の核と像の大きさを gcd から再導出する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

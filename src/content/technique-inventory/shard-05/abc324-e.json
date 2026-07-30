@@ -4,19 +4,92 @@
     "source-abc324-e-problem-122462833dadb1a89dbaa3b7de191d7423f1c4b68966e12b5abbd2ed0bcb20e8",
     "source-abc324-editorial-7407-ac1b02cade60fe34b326d626abed852b9d908175f319770f619c493b275c28ba"
   ],
-  "coreMethod": "abc324-e「Joint Two Strings」では、各文字列が目標文字列の prefix と suffix を何文字 subsequence として取れるか求め、補完可能な組を整列して数える。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "連結後に目標を subsequence として含むことは、前半が取れる prefix 長と後半が取れる suffix 長の和が目標長以上であることと同値になる。",
-    "Joint Two Strings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc324-e-problem-122462833dadb1a89dbaa3b7de191d7423f1c4b68966e12b5abbd2ed0bcb20e8",
+        "source-abc324-editorial-7407-ac1b02cade60fe34b326d626abed852b9d908175f319770f619c493b275c28ba"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["subsequence の貪欲照合と二分探索"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc324-e「Joint Two Strings」では、各文字列が目標文字列の prefix と suffix を何文字 subsequence として取れるか求め、補完可能な組を整列して数える。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc324-e「Joint Two Strings」では、各文字列が目標文字列の prefix と suffix を何文字 subsequence として取れるか求め、補完可能な組を整列して数える。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "連結後に目標を subsequence として含むことは、前半が取れる prefix 長と後半が取れる suffix 長の和が目標長以上であることと同値になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Joint Two Strings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc324-e「Joint Two Strings」では、各文字列が目標文字列の prefix と suffix を何文字 subsequence として取れるか求め、補完可能な組を整列して数える。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "subsequence の貪欲照合と二分探索",
+      "trigger": "制約と操作を整理したときに subsequence の貪欲照合と二分探索 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc324-e「Joint Two Strings」では、各文字列が目標文字列の prefix と suffix を何文字 subsequence として取れるか求め、補完可能な組を整列して数える。この状態表現から答えを構成する。で subsequence の貪欲照合と二分探索 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Joint Two Strings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "subsequence の貪欲照合と二分探索",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "空 prefix・空 suffix を許し、同じ文字列を両側に選べる ordered pair として数える。"
+    {
+      "text": "空 prefix・空 suffix を許し、同じ文字列を両側に選べる ordered pair として数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Joint Two Strings 型の問題に対し、subsequence の貪欲照合と二分探索を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Joint Two Strings 型の問題に対し、subsequence の貪欲照合と二分探索を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "空 prefix・空 suffix を許し、同じ文字列を両側に選べる ordered pair として数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

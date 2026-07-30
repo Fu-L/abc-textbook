@@ -4,19 +4,92 @@
     "source-abc440-editorial-15033-e736b20251169d62c9695d54e2699f8cab16ab21ed6a0a06466c5f30ddecfb92",
     "source-abc440-g-problem-3878da44dd24e2554a0f3a6202d860f40957ffa364bd7f2c634c695900fde4a2"
   ],
-  "coreMethod": "abc440-g「Haunted House」では、各階を連結成分へ縮約した層状 graph 上で、梯子使用状態の DP を下階から計算し、除外最大値を上位二候補で高速化する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "同一遷移先を除く最大値は全候補の一位または二位に必ずあり、梯子使用有無が将来に必要な履歴を全て表す。",
-    "Haunted House 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc440-editorial-15033-e736b20251169d62c9695d54e2699f8cab16ab21ed6a0a06466c5f30ddecfb92",
+        "source-abc440-g-problem-3878da44dd24e2554a0f3a6202d860f40957ffa364bd7f2c634c695900fde4a2"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["層状 graph DP と top-two trick"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc440-g「Haunted House」では、各階を連結成分へ縮約した層状 graph 上で、梯子使用状態の DP を下階から計算し、除外最大値を上位二候補で高速化する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc440-g「Haunted House」では、各階を連結成分へ縮約した層状 graph 上で、梯子使用状態の DP を下階から計算し、除外最大値を上位二候補で高速化する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "同一遷移先を除く最大値は全候補の一位または二位に必ずあり、梯子使用有無が将来に必要な履歴を全て表す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Haunted House 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc440-g「Haunted House」では、各階を連結成分へ縮約した層状 graph 上で、梯子使用状態の DP を下階から計算し、除外最大値を上位二候補で高速化する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "層状 graph DP と top-two trick",
+      "trigger": "制約と操作を整理したときに 層状 graph DP と top-two trick の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc440-g「Haunted House」では、各階を連結成分へ縮約した層状 graph 上で、梯子使用状態の DP を下階から計算し、除外最大値を上位二候補で高速化する。この状態表現から答えを構成する。で 層状 graph DP と top-two trick を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Haunted House 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "層状 graph DP と top-two trick",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "階間辺を成分単位で重複排除し、最大候補の遷移先 ID も保持して自己除外を判定する。"
+    {
+      "text": "階間辺を成分単位で重複排除し、最大候補の遷移先 ID も保持して自己除外を判定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Haunted House 型の問題に対し、層状 graph DP と top-two trickを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Haunted House 型の問題に対し、層状 graph DP と top-two trickを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "階間辺を成分単位で重複排除し、最大候補の遷移先 ID も保持して自己除外を判定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

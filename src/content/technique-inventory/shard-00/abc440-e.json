@@ -4,22 +4,96 @@
     "source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29",
     "source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"
   ],
-  "coreMethod": "abc440-e「Cookies」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "親部分木の上位 K 個に入らない子内要素は、同じ子だけで K 個以上に負けるため親でも候補にならない。",
-    "Cookies 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29",
+        "source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
+  ],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc440-e「Cookies」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc440-e「Cookies」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "親部分木の上位 K 個に入らない子内要素は、同じ子だけで K 個以上に負けるため親でも候補にならない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Cookies 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc440-e「Cookies」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "整数論の基本的な割り切れ関係",
+      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc440-e「Cookies」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "small-to-large merge と上位 K 個の保持",
+      "trigger": "制約と操作を整理したときに small-to-large merge と上位 K 個の保持 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc440-e「Cookies」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で small-to-large merge と上位 K 個の保持 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Cookies 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "prerequisiteCandidates": [
-    "整数論の基本的な割り切れ関係",
-    "small-to-large merge と上位 K 個の保持"
+    {
+      "text": "整数論の基本的な割り切れ関係",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "small-to-large merge と上位 K 個の保持",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "implementationConcerns": [
-    "K の全体上限だけ保持し、query の 1-origin 順位と vector index を変換する。"
+    {
+      "text": "K の全体上限だけ保持し、query の 1-origin 順位と vector index を変換する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Cookies 型の 整数の約数・剰余構造に対し、small-to-large merge と上位 K 個の保持を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Cookies 型の 整数の約数・剰余構造に対し、small-to-large merge と上位 K 個の保持を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "K の全体上限だけ保持し、query の 1-origin 順位と vector index を変換する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

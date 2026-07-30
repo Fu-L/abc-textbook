@@ -4,19 +4,96 @@
     "source-abc324-editorial-7405-5317d02fe307ce10102a7967c7f3daf33d3d92a95198f8b7d90c973e18e2e531",
     "source-abc324-f-problem-a176553a647da6e3d14065cf470eec98dd1f7f0cfc7f9e784e56d782ecb04ce2"
   ],
-  "coreMethod": "abc324-f「Beautiful Path」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "判定の真偽が境界の片側で閉じる単調性を示せば、各比較で答えを含む区間を半分に保てる。",
-    "Beautiful Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc324-editorial-7405-5317d02fe307ce10102a7967c7f3daf33d3d92a95198f8b7d90c973e18e2e531",
+        "source-abc324-f-problem-a176553a647da6e3d14065cf470eec98dd1f7f0cfc7f9e784e56d782ecb04ce2"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "二分探索と単調性"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc324-f「Beautiful Path」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc324-f「Beautiful Path」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "判定の真偽が境界の片側で閉じる単調性を示せば、各比較で答えを含む区間を半分に保てる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Beautiful Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc324-f「Beautiful Path」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "グラフの到達可能性",
+      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc324-f「Beautiful Path」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "二分探索と単調性",
+      "trigger": "制約と操作を整理したときに 二分探索と単調性 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc324-f「Beautiful Path」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 二分探索と単調性 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Beautiful Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "グラフの到達可能性",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "二分探索と単調性",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。"
+    {
+      "text": "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Beautiful Path 型の 頂点と辺からなる状態グラフに対し、二分探索と単調性を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Beautiful Path 型の 頂点と辺からなる状態グラフに対し、二分探索と単調性を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

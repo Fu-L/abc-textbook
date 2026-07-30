@@ -4,25 +4,106 @@
     "source-abc429-editorial-14242-8c586c50b71364483aa2f1a0744f0edc53b0499f21359991f124117fb9446215",
     "source-abc429-g-problem-8e2a8092102af19fac9206f28a8823b9ba90edb38486977ad961bb232cda385a"
   ],
-  "coreMethod": "abc429-g「Sum of Pow of Mod of Linear」では、(Ak+B) mod M の列を鳩の巣原理で得た短い差分を用いて O(√M) 本の等差数列へ分解し、各列の冪和をまとめて求める。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "最初の O(√M) 項には差が O(√M) 以下の二項があり、その index 差で列を分けると wrap 回数の総和も O(√M) 本に抑えられる。",
-    "Sum of Pow of Mod of Linear 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc429-editorial-14242-8c586c50b71364483aa2f1a0744f0edc53b0499f21359991f124117fb9446215",
+        "source-abc429-g-problem-8e2a8092102af19fac9206f28a8823b9ba90edb38486977ad961bb232cda385a"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
+  ],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc429-g「Sum of Pow of Mod of Linear」では、(Ak+B) mod M の列を鳩の巣原理で得た短い差分を用いて O(√M) 本の等差数列へ分解し、各列の冪和をまとめて求める。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc429-g「Sum of Pow of Mod of Linear」では、(Ak+B) mod M の列を鳩の巣原理で得た短い差分を用いて O(√M) 本の等差数列へ分解し、各列の冪和をまとめて求める。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "最初の O(√M) 項には差が O(√M) 以下の二項があり、その index 差で列を分けると wrap 回数の総和も O(√M) 本に抑えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Sum of Pow of Mod of Linear 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc429-g「Sum of Pow of Mod of Linear」では、(Ak+B) mod M の列を鳩の巣原理で得た短い差分を用いて O(√M) 本の等差数列へ分解し、各列の冪和をまとめて求める。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "鳩の巣原理、等差数列分解、等比数列の和",
+      "trigger": "制約と操作を整理したときに 鳩の巣原理、等差数列分解、等比数列の和 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc429-g「Sum of Pow of Mod of Linear」では、(Ak+B) mod M の列を鳩の巣原理で得た短い差分を用いて O(√M) 本の等差数列へ分解し、各列の冪和をまとめて求める。この状態表現から答えを構成する。で 鳩の巣原理、等差数列分解、等比数列の和 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "特殊な漸近計算量の見積もり",
+      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc429-g「Sum of Pow of Mod of Linear」では、(Ak+B) mod M の列を鳩の巣原理で得た短い差分を用いて O(√M) 本の等差数列へ分解し、各列の冪和をまとめて求める。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Sum of Pow of Mod of Linear 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "asymptoticComplexity": {
-    "time": "O(√M log M)（公式解法全体。特殊な計算量解析を含む）"
+    "time": "O(√M log M)（公式解法全体。特殊な計算量解析を含む）",
+    "evidenceIds": ["evidence-official-analysis"]
   },
   "prerequisiteCandidates": [
-    "鳩の巣原理、等差数列分解、等比数列の和",
-    "特殊な漸近計算量の見積もり"
+    {
+      "text": "鳩の巣原理、等差数列分解、等比数列の和",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "特殊な漸近計算量の見積もり",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "implementationConcerns": [
-    "差分の向きと modulo の正規化を固定し、各等差列の長さと初項を整数演算で求める。"
+    {
+      "text": "差分の向きと modulo の正規化を固定し、各等差列の長さと初項を整数演算で求める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Sum of Pow of Mod of Linear 型の問題に対し、鳩の巣原理、等差数列分解、等比数列の和を選び、状態・証明・特殊計算量を一貫して設計できる。"
+    {
+      "text": "Sum of Pow of Mod of Linear 型の問題に対し、鳩の巣原理、等差数列分解、等比数列の和を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "差分の向きと modulo の正規化を固定し、各等差列の長さと初項を整数演算で求める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

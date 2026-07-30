@@ -4,19 +4,96 @@
     "source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412",
     "source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48"
   ],
-  "coreMethod": "abc226-h「Random Kth Max」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
-    "Random Kth Max 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412",
+        "source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["半開区間の扱い", "条件付き期待値と確率 DP"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc226-h「Random Kth Max」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc226-h「Random Kth Max」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Random Kth Max 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc226-h「Random Kth Max」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "半開区間の扱い",
+      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc226-h「Random Kth Max」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "条件付き期待値と確率 DP",
+      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc226-h「Random Kth Max」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Random Kth Max 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "半開区間の扱い",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "条件付き期待値と確率 DP",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。"
+    {
+      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Random Kth Max 型の 区間端点と包含関係に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Random Kth Max 型の 区間端点と包含関係に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

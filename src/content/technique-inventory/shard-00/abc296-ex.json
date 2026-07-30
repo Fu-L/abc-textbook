@@ -4,19 +4,92 @@
     "source-abc296-editorial-6119-ac80203d7028d704d5d765eb1d8dbd94b2cdcfd612591e482994c1f616f2edf7",
     "source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475"
   ],
-  "coreMethod": "abc296-ex「Unite」では、幅の小さい grid を走査し、frontier の塗色と連結成分 partition を正規化した profile DP を行う。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "未処理領域と接し得るのは frontier 上の頂点だけなので、その連結 partition が将来に必要な情報を全て含む。",
-    "Unite 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc296-editorial-6119-ac80203d7028d704d5d765eb1d8dbd94b2cdcfd612591e482994c1f616f2edf7",
+        "source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["profile DP と連結成分状態の正規化"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc296-ex「Unite」では、幅の小さい grid を走査し、frontier の塗色と連結成分 partition を正規化した profile DP を行う。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc296-ex「Unite」では、幅の小さい grid を走査し、frontier の塗色と連結成分 partition を正規化した profile DP を行う。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "未処理領域と接し得るのは frontier 上の頂点だけなので、その連結 partition が将来に必要な情報を全て含む。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Unite 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc296-ex「Unite」では、幅の小さい grid を走査し、frontier の塗色と連結成分 partition を正規化した profile DP を行う。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "profile DP と連結成分状態の正規化",
+      "trigger": "制約と操作を整理したときに profile DP と連結成分状態の正規化 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc296-ex「Unite」では、幅の小さい grid を走査し、frontier の塗色と連結成分 partition を正規化した profile DP を行う。この状態表現から答えを構成する。で profile DP と連結成分状態の正規化 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Unite 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "profile DP と連結成分状態の正規化",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "frontier から消える成分を再接続不能として判定し、成分 label を毎遷移後に canonicalize する。"
+    {
+      "text": "frontier から消える成分を再接続不能として判定し、成分 label を毎遷移後に canonicalize する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Unite 型の問題に対し、profile DP と連結成分状態の正規化を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Unite 型の問題に対し、profile DP と連結成分状態の正規化を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "frontier から消える成分を再接続不能として判定し、成分 label を毎遷移後に canonicalize する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

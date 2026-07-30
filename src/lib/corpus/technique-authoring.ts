@@ -1,4 +1,4 @@
-import { TechniqueInventoryItemSchema } from '../domain/schema-parts/catalog.js';
+import { ProblemAnalysisRecordSchema } from '../domain/schema-parts/catalog.js';
 
 export interface TechniqueAuthoringProblem {
   readonly id: string;
@@ -15,12 +15,12 @@ export interface TechniqueAuthoringInput {
 }
 
 export interface TechniqueAuthoringAnalysis {
-  readonly item: ReturnType<typeof TechniqueInventoryItemSchema.parse>;
+  readonly item: ReturnType<typeof ProblemAnalysisRecordSchema.parse>;
   readonly signalIds: readonly string[];
   readonly structureId: string;
   readonly complexityEssential: boolean;
   readonly problemComplexityRecorded: boolean;
-  readonly classificationMode: 'reviewed_binding' | 'official_term_detection';
+  readonly classificationMode: 'reviewed_analysis' | 'heuristic_draft';
 }
 
 interface TechniqueSignal {
@@ -2086,7 +2086,7 @@ const selectReviewedComplexity = (
 
 const unique = (values: readonly string[]): readonly string[] => [...new Set(values)];
 
-export const authorTechniqueInventoryItem = (
+export const authorProblemAnalysisRecord = (
   input: TechniqueAuthoringInput,
 ): TechniqueAuthoringAnalysis => {
   const statementText = normalizeText(input.statementText);
@@ -2104,7 +2104,7 @@ export const authorTechniqueInventoryItem = (
     signals.length > 0
       ? signals.map(({ action }) => action).join('。さらに、')
       : `${structure.description}を同値な状態へ縮約し、必要な候補だけを制約内で列挙する`;
-  const proofIdeas = unique([
+  const keyInsights = unique([
     ...(signals.length > 0
       ? signals.slice(0, 2).map(({ proof }) => proof)
       : [
@@ -2125,26 +2125,92 @@ export const authorTechniqueInventoryItem = (
           '状態 key と更新順序を固定し、同じ候補を二重に数えない。',
         ],
   );
-  const item = TechniqueInventoryItemSchema.parse({
+  const sourceRevisionIds = [...input.problem.sourceRevisionIds].sort();
+  const analysisEvidence = {
+    id: 'evidence-official-analysis',
+    sourceRevisionIds,
+    rationale: '同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。',
+  };
+  const evidenceIds = [analysisEvidence.id];
+  const sourceBackedClaim = (text: string) => ({
+    text,
+    evidenceIds,
+  });
+  const adoptedApproach = {
+    approach: methodActions,
+    decision: 'adopted' as const,
+    decisionReason:
+      signals.length > 0
+        ? '公式解説がこの状態表現と処理を主方針として接続している。'
+        : '制約と状態構造から、列挙対象を縮約する方針を分析候補として残す。',
+    evidenceIds,
+  };
+  const candidateApproaches = [
+    adoptedApproach,
+    ...(hasReviewedBinding
+      ? [
+          {
+            approach: '状態を縮約せず、元の候補をそのまま全列挙する。',
+            decision: 'rejected' as const,
+            decisionReason: '公式制約内で必要な計算量へ収まらず、主解法の構造も利用できない。',
+            evidenceIds,
+          },
+        ]
+      : []),
+  ];
+  const item = ProblemAnalysisRecordSchema.parse({
     problemId: input.problem.id,
-    sourceRevisionIds: [...input.problem.sourceRevisionIds].sort(),
-    coreMethod: `${input.problem.id}「${input.problem.title}」では、${
-      hasReviewedBinding ? '' : '主解法候補として、'
-    }${methodActions}。${
-      hasReviewedBinding
-        ? 'この状態表現から答えを構成する。'
-        : `${structure.description}を必要十分な状態だけで表し、答えを構成する。`
-    }`,
-    proofIdeas,
-    ...(complexity.value === undefined ? {} : { asymptoticComplexity: { time: complexity.value } }),
-    prerequisiteCandidates: prerequisites,
-    implementationConcerns: concerns,
-    outcomeCandidates: [
-      `${input.problem.title} 型の${hasReviewedBinding ? '問題' : ` ${structure.description}`}に対し、${primary?.prerequisite ?? '状態縮約'}を選び、${complexity.value === undefined ? '状態と証明' : '状態・証明・特殊計算量'}を一貫して設計できる。`,
+    sourceRevisionIds,
+    evidence: [analysisEvidence],
+    reasoningPath: {
+      observations: [
+        sourceBackedClaim(
+          `${input.problem.constraintsSummary}という制約の下で、${structure.description}だけを将来の判断に必要な状態として整理する。`,
+        ),
+      ],
+      candidateApproaches,
+      keyInsights: keyInsights.map((text) => sourceBackedClaim(text)),
+      algorithmConnection: sourceBackedClaim(
+        `${methodActions}。この処理を${structure.description}へ適用して答えを構成する。`,
+      ),
+    },
+    typicalTechniques: signals.map((signal) => ({
+      name: signal.prerequisite,
+      trigger: `${structure.description}を直接扱うと状態または候補が多く、${signal.prerequisite}の構造が現れるとき。`,
+      application: signal.action,
+      evidenceIds,
+    })),
+    problemSpecificInsights: [
+      {
+        insight: `${input.problem.title} では、${structure.description}のどの情報が以後の判断を変えるかを切り分ける。`,
+        reusablePerspective:
+          '制約と操作を小さい状態で追い、同じ将来を持つ状態をまとめられないかを先に調べる。',
+        evidenceIds,
+      },
     ],
-    adHocElements: [],
+    ...(complexity.value === undefined
+      ? {}
+      : {
+          asymptoticComplexity: {
+            time: complexity.value,
+            evidenceIds,
+          },
+        }),
+    prerequisiteCandidates: prerequisites.map((text) => sourceBackedClaim(text)),
+    implementationConcerns: concerns.map((text) => sourceBackedClaim(text)),
+    outcomeCandidates: [
+      sourceBackedClaim(
+        `${input.problem.title} 型の${hasReviewedBinding ? '問題' : ` ${structure.description}`}に対し、${primary?.prerequisite ?? '状態縮約'}を選び、${complexity.value === undefined ? '状態と成立理由' : '状態・成立理由・特殊計算量'}を一貫して設計できる。`,
+      ),
+    ],
+    reviewAdvice: [
+      sourceBackedClaim(
+        `復習時は、${structure.description}から${primary?.prerequisite ?? '状態縮約'}を候補に挙げる発動条件と、採用理由を自力で説明する。`,
+      ),
+    ],
     authorId: input.authorId ?? 'person-maintainer',
     reviewStatus: hasReviewedBinding ? 'reviewed' : 'draft',
+    reviewFindings: [],
   });
   return {
     item,
@@ -2152,6 +2218,9 @@ export const authorTechniqueInventoryItem = (
     structureId: structure.id,
     complexityEssential: complexity.essential,
     problemComplexityRecorded: complexity.fromSource,
-    classificationMode: hasReviewedBinding ? 'reviewed_binding' : 'official_term_detection',
+    classificationMode: hasReviewedBinding ? 'reviewed_analysis' : 'heuristic_draft',
   };
 };
+
+/** @deprecated Use authorProblemAnalysisRecord for new analysis authoring. */
+export const authorTechniqueInventoryItem = authorProblemAnalysisRecord;

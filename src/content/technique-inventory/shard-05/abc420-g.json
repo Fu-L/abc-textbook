@@ -4,17 +4,92 @@
     "source-abc420-editorial-13733-e64a00a448e785a6e17abd4176a44596ef536f2b5911f4ad0b3bcd8ade2a99c4",
     "source-abc420-g-problem-2dff6a1126bda66a46d02fa7128a758855a0d61e22afc818f692e51469319fbf"
   ],
-  "coreMethod": "abc420-g「sqrt(n²+n+X)」では、平方根条件を二つの一次因子の積 (2m+2n+1)(2m-2n-1)=4X-1 に変形し、符号付き約数を列挙する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "各整数解は積の約数対を一意に定め、逆に parity・積・m≥0 を満たす約数対から元の整数解を復元できる。",
-    "sqrt(n²+n+X) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc420-editorial-13733-e64a00a448e785a6e17abd4176a44596ef536f2b5911f4ad0b3bcd8ade2a99c4",
+        "source-abc420-g-problem-2dff6a1126bda66a46d02fa7128a758855a0d61e22afc818f692e51469319fbf"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["差の平方と約数列挙"],
-  "implementationConcerns": ["正負両方の約数、2 で割れる parity、復元後の代入確認を行う。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc420-g「sqrt(n²+n+X)」では、平方根条件を二つの一次因子の積 (2m+2n+1)(2m-2n-1)=4X-1 に変形し、符号付き約数を列挙する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc420-g「sqrt(n²+n+X)」では、平方根条件を二つの一次因子の積 (2m+2n+1)(2m-2n-1)=4X-1 に変形し、符号付き約数を列挙する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "各整数解は積の約数対を一意に定め、逆に parity・積・m≥0 を満たす約数対から元の整数解を復元できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "sqrt(n²+n+X) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc420-g「sqrt(n²+n+X)」では、平方根条件を二つの一次因子の積 (2m+2n+1)(2m-2n-1)=4X-1 に変形し、符号付き約数を列挙する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "差の平方と約数列挙",
+      "trigger": "制約と操作を整理したときに 差の平方と約数列挙 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc420-g「sqrt(n²+n+X)」では、平方根条件を二つの一次因子の積 (2m+2n+1)(2m-2n-1)=4X-1 に変形し、符号付き約数を列挙する。この状態表現から答えを構成する。で 差の平方と約数列挙 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "sqrt(n²+n+X) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "差の平方と約数列挙",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "正負両方の約数、2 で割れる parity、復元後の代入確認を行う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "sqrt(n²+n+X) 型の問題に対し、差の平方と約数列挙を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "sqrt(n²+n+X) 型の問題に対し、差の平方と約数列挙を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "正負両方の約数、2 で割れる parity、復元後の代入確認を行う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

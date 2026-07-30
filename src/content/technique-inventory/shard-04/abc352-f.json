@@ -4,17 +4,96 @@
     "source-abc352-editorial-9924-9f4a632245687078caf887539d0a943a3fdae14d244b269cc96b7f0c6dbb80a1",
     "source-abc352-f-problem-35d14022d92c00f83a01507e4d6b5bc77077b50b3809064a4417b574c01caa21"
   ],
-  "coreMethod": "abc352-f「Estimate Order」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
-    "Estimate Order 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc352-editorial-9924-9f4a632245687078caf887539d0a943a3fdae14d244b269cc96b7f0c6dbb80a1",
+        "source-abc352-f-problem-35d14022d92c00f83a01507e4d6b5bc77077b50b3809064a4417b574c01caa21"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["online query の計算量設計", "深さ優先探索"],
-  "implementationConcerns": ["再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc352-f「Estimate Order」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc352-f「Estimate Order」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Estimate Order 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc352-f「Estimate Order」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "online query の計算量設計",
+      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc352-f「Estimate Order」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "深さ優先探索",
+      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc352-f「Estimate Order」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Estimate Order 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "online query の計算量設計",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "深さ優先探索",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Estimate Order 型の 更新と問い合わせの時系列に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Estimate Order 型の 更新と問い合わせの時系列に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

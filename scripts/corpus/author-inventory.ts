@@ -5,7 +5,7 @@ import { load } from 'cheerio';
 import { z } from 'zod';
 
 import { corpusBatches, getCorpusBatch, type CorpusBatch } from '../../src/lib/corpus/batches.js';
-import { authorTechniqueInventoryItem } from '../../src/lib/corpus/technique-authoring.js';
+import { authorProblemAnalysisRecord } from '../../src/lib/corpus/technique-authoring.js';
 import {
   FrozenPreviewCohortSchema,
   techniqueInventoryShardId,
@@ -50,12 +50,12 @@ type CachedPage = z.infer<typeof cachedPageSchema>;
 
 interface AuthoredRecord {
   readonly problem: CorpusProblemMetadata;
-  readonly item: ReturnType<typeof authorTechniqueInventoryItem>['item'];
+  readonly item: ReturnType<typeof authorProblemAnalysisRecord>['item'];
   readonly signalIds: readonly string[];
   readonly structureId: string;
   readonly complexityEssential: boolean;
   readonly problemComplexityRecorded: boolean;
-  readonly classificationMode: 'reviewed_binding' | 'official_term_detection';
+  readonly classificationMode: 'reviewed_analysis' | 'heuristic_draft';
 }
 
 const isNodeError = (error: unknown): error is NodeJS.ErrnoException =>
@@ -278,7 +278,7 @@ const authorRecord = (input: {
     );
   });
 
-  const analysis = authorTechniqueInventoryItem({
+  const analysis = authorProblemAnalysisRecord({
     problem: input.problem,
     statementText: extractStatementText(problemPage.body, input.problem.id),
     editorialText: editorialTexts.join(' '),

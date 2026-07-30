@@ -4,22 +4,106 @@
     "source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd",
     "source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf"
   ],
-  "coreMethod": "abc411-f「Contraction」では、縮約する二頂点の駒数と次数の和を比較し、小さい側の駒・隣接辺だけを大きい側へ移す。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "移された対象の所属サイズは少なくとも倍になるため、各駒・辺が移動する回数は対数回に限られる。",
-    "Contraction 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd",
+        "source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
+  ],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc411-f「Contraction」では、縮約する二頂点の駒数と次数の和を比較し、小さい側の駒・隣接辺だけを大きい側へ移す。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc411-f「Contraction」では、縮約する二頂点の駒数と次数の和を比較し、小さい側の駒・隣接辺だけを大きい側へ移す。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "状態を縮約せず、元の候補をそのまま全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "公式制約内で必要な処理量に収まらず、解法の構造も利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "移された対象の所属サイズは少なくとも倍になるため、各駒・辺が移動する回数は対数回に限られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Contraction 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc411-f「Contraction」では、縮約する二頂点の駒数と次数の和を比較し、小さい側の駒・隣接辺だけを大きい側へ移す。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "small-to-large merge と単純グラフ縮約",
+      "trigger": "制約と操作を整理したときに small-to-large merge と単純グラフ縮約 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc411-f「Contraction」では、縮約する二頂点の駒数と次数の和を比較し、小さい側の駒・隣接辺だけを大きい側へ移す。この状態表現から答えを構成する。で small-to-large merge と単純グラフ縮約 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "特殊な漸近計算量の見積もり",
+      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc411-f「Contraction」では、縮約する二頂点の駒数と次数の和を比較し、小さい側の駒・隣接辺だけを大きい側へ移す。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Contraction 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "asymptoticComplexity": {
-    "time": "O(Q + [N+M] log[N+M] log N)（公式解法全体。特殊な計算量解析を含む）"
+    "time": "O(Q + [N+M] log[N+M] log N)（公式解法全体。特殊な計算量解析を含む）",
+    "evidenceIds": ["evidence-official-analysis"]
   },
-  "prerequisiteCandidates": ["small-to-large merge と単純グラフ縮約", "特殊な漸近計算量の見積もり"],
+  "prerequisiteCandidates": [
+    {
+      "text": "small-to-large merge と単純グラフ縮約",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "特殊な漸近計算量の見積もり",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "自己 loop と多重辺を除きながら両端の隣接 set を同期し、駒から現頂点への写像も更新する。"
+    {
+      "text": "自己 loop と多重辺を除きながら両端の隣接 set を同期し、駒から現頂点への写像も更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Contraction 型の問題に対し、small-to-large merge と単純グラフ縮約を選び、状態・証明・特殊計算量を一貫して設計できる。"
+    {
+      "text": "Contraction 型の問題に対し、small-to-large merge と単純グラフ縮約を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "自己 loop と多重辺を除きながら両端の隣接 set を同期し、駒から現頂点への写像も更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

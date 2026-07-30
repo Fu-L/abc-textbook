@@ -5,7 +5,7 @@ import {
   FrozenPreviewCohortSchema,
   PreviewTechniqueInventoryComponentSchema,
 } from '../../src/lib/corpus/technique-inventory.js';
-import { TechniqueInventoryItemSchema } from '../../src/lib/domain/schema-parts/catalog.js';
+import { ProblemAnalysisRecordSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { canonicalJson } from '../../src/lib/domain/canonical-json.js';
 import {
   buildProvisionalTaxonomyArtifacts,
@@ -64,7 +64,7 @@ try {
   );
   const inventoryItems = await Promise.all(
     manifest.selectedProblemIds.map(async (problemId) =>
-      TechniqueInventoryItemSchema.parse(
+      ProblemAnalysisRecordSchema.parse(
         await readJson(path.join(INVENTORY_ROOT, `${problemId}.json`)),
       ),
     ),

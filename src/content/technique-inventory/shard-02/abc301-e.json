@@ -4,17 +4,96 @@
     "source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e",
     "source-abc301-editorial-6343-b11e11924058addc198935bbd91d06286574d2bfb73d521c8b78cb42849fa957"
   ],
-  "coreMethod": "abc301-e「Pac-Takahashi」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "各部分解を選択集合と終端状態で一意に分類し、最後の一手を外す帰納法で遷移の完全性を示す。",
-    "Pac-Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e",
+        "source-abc301-editorial-6343-b11e11924058addc198935bbd91d06286574d2bfb73d521c8b78cb42849fa957"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["grid の座標表現", "bitmask と subset DP"],
-  "implementationConcerns": ["集合への追加判定、部分集合列挙、状態数 2^N の型と配列長を確認する。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc301-e「Pac-Takahashi」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc301-e「Pac-Takahashi」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "各部分解を選択集合と終端状態で一意に分類し、最後の一手を外す帰納法で遷移の完全性を示す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Pac-Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc301-e「Pac-Takahashi」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "grid の座標表現",
+      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc301-e「Pac-Takahashi」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "bitmask と subset DP",
+      "trigger": "制約と操作を整理したときに bitmask と subset DP の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc301-e「Pac-Takahashi」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で bitmask と subset DP を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "Pac-Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+      "reusablePerspective": "制約と小さい状態を追い、どの情報が以後の判断を変えるかを切り分けて再利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "prerequisiteCandidates": [
+    {
+      "text": "grid の座標表現",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "bitmask と subset DP",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "集合への追加判定、部分集合列挙、状態数 2^N の型と配列長を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Pac-Takahashi 型の 盤面上の位置と局所遷移に対し、bitmask と subset DPを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Pac-Takahashi 型の 盤面上の位置と局所遷移に対し、bitmask と subset DPを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "集合への追加判定、部分集合列挙、状態数 2^N の型と配列長を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

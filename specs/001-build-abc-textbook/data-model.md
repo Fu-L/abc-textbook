@@ -101,26 +101,31 @@ E/F/G/Hは固定enumではない。現在存在する通常labelとしてregistr
 
 ## 3. Corpus-first learning model
 
-### TechniqueInventoryItem
+### ProblemAnalysisRecord (Technique Inventory)
 
-taxonomy作成前に全Problemへちょうど一件作る分析正本である。
+taxonomy・最終Outcome・公開解説の作成前に、全Problemへちょうど一件作る分析正本である。公式解説の要約ではなく、`.agents/skills/abc-explanation-author/references/writing-policy.md`に従って、制約や小さい例から方針へ到達する再現可能な考察を保持する。
 
 | Field | Rule |
 |---|---|
 | `problemId` | 全対象Problemを一回だけ所有 |
 | `sourceRevisionIds` | 重複しない判断根拠。当該Problemの`officialTaskId`へ結び付く公式問題revisionを一つ以上含み、個別公式解説を参照する場合も同じtask IDへ結び付く |
-| `coreMethod` | 主たる解法の短い正規化記述 |
-| `proofIdeas` | 証明上の着眼点 |
+| `reasoningPath.observations` | 制約、操作、小さい例から得られる観察。正解を知った後の解法要約だけを置かない |
+| `reasoningPath.candidateApproaches` | 候補方針、`adopted` / `rejected`、採用・棄却理由。`reviewed`では両decisionを一つ以上持つ |
+| `reasoningPath.keyInsights` / `algorithmConnection` | 鍵となる着眼点と、それを実行可能なアルゴリズムへ接続する説明 |
+| `typicalTechniques[]` | 典型知識の名前、発動条件、このProblemでの適用。他問題へ移せる粒度で記録する |
+| `problemSpecificInsights[]` | 問題固有の気づきと、類題で同種の気づきを再現するために注目する観点 |
 | `asymptoticComplexity` | 任意。計算量解析自体が解法選択や実現可能性の本質となる特殊な場合に限り、公式解説または問題固有の解析で確定した解法全体の時間・空間計算量のうち一つ以上を持つ。通常の計算量や部分テクニックの汎用fallback値を代入してはならない |
-| `prerequisiteCandidates` | 必要知識候補 |
-| `implementationConcerns` | 実装上の注意 |
-| `outcomeCandidates` | 観察可能な学習成果候補 |
-| `adHocElements` | 一般化しない要素 |
-| `authorId` / `reviewStatus` | 棚卸しの責任と確認状態。問題単位で主解法を確認した項目だけ`reviewed`、公式解説の用語検出で作った候補は`draft`とする |
+| `prerequisiteCandidates` | 必要知識候補。最終Learning Unitの前提を確定しない |
+| `implementationConcerns` | 境界条件、状態、更新順などの実装上の注意 |
+| `outcomeCandidates` | 観察可能な学習成果候補。最終Learning Outcomeを確定しない |
+| `reviewAdvice` | 解法暗記でなく、次回再現すべき観察・発動条件・境界条件を確認する助言 |
+| `authorId` / `reviewStatus` / `reviewFindings` | 分析の責任と`draft`, `reviewed`, `changes_requested`の状態。`changes_requested`だけが未解決findingを持ち、findingがない変更要求や解消済みfindingの残置を拒否する |
 
-公開taxonomyを作る前に、対象Problem ID集合とInventoryのProblem ID集合が完全一致しなければならない。
-T044は全Problemのsource-boundなrecord coverageを固定する段階であり、`draft`を`reviewed`と偽装しない。`draft`候補はT159のfinal taxonomy受理前に問題単位で確認し、未確認または`changes_requested`の項目を正式なTag・Outcome・Unitの根拠にしてはならない。preview cohortは後続の設計検証へ進むため、T038時点で全件`reviewed`を要求する。
-Technique Inventoryは、平方根分割、償却解析、出力依存、実用上重要な定数倍などの計算量解析が主テクニックの成立理由となり、かつ解法全体の計算量が根拠から確定できる場合だけ`asymptoticComplexity`を持つ。通常の計算量は公式解説に明記されていても省略する。計算量を明示しない公式解説に対して、主テクニック単体の典型計算量や入力サイズを仮定した時間・空間上界を補完しない。完全解説を公開する後続工程では、問題固有の実装を確定したうえでFR-005の計算量・制約整合を別途満たす。
+recordの`evidence[]`はlocal evidence ID、`sourceRevisionIds`、根拠説明を持つ。`observations`、候補方針、鍵、アルゴリズム接続、典型、問題固有の着眼点、計算量、前提、実装注意、成果候補、復習助言は、いずれも一つ以上の`evidenceIds`からこの構造を参照する。未定義または未使用のevidence IDを許さず、evidenceのSource Revisionはrecordの`sourceRevisionIds`に含まれ、recordへ宣言したSource Revisionは一つ以上のevidenceから利用されなければならない。Catalog/corpus検証はSource Revisionの存在に加え、公式Problem revisionの存在、同一Contest・同一`officialTaskId`への結び付きを確認する。
+
+公開taxonomyを作る前に、対象Problem ID集合とInventoryのProblem ID集合が完全一致しなければならない。Problem Analysisはfinal Tag、Outcome、Unit、DAG、標準学習順、Problem Placementの`full / similar / supplement`を確定せず、これらはT159とProblemAuthoringUnit側で決定する。
+T044は全Problemのsource-boundなrecord coverageを固定する段階であり、heuristic draftを`reviewed`と偽装しない。`draft`候補はT159のfinal taxonomy受理前に問題単位で確認し、未確認または`changes_requested`の項目を正式なTag・Outcome・Unitの根拠にしてはならない。preview cohortは後続の設計検証へ進むため、T038時点で全件`reviewed`を要求する。
+Problem Analysisは、平方根分割、償却解析、出力依存、実用上重要な定数倍などの計算量解析が主テクニックの成立理由となり、かつ解法全体の計算量が根拠から確定できる場合だけ`asymptoticComplexity`を持つ。通常の計算量は公式解説に明記されていても省略する。計算量を明示しない公式解説に対して、主テクニック単体の典型計算量や入力サイズを仮定した時間・空間上界を補完しない。完全解説を公開する後続工程では、問題固有の実装を確定したうえでFR-005の計算量・制約整合を別途満たす。
 
 ### PreviewCohortCandidatePool
 
