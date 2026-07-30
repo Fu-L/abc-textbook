@@ -4,19 +4,90 @@
     "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
     "source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7"
   ],
-  "coreMethod": "abc220-e「Distance on Large Perfect Binary Tree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
-    "Distance on Large Perfect Binary Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
+        "source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "剰余演算と modular inverse"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc220-e「Distance on Large Perfect Binary Tree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc220-e「Distance on Large Perfect Binary Tree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Distance on Large Perfect Binary Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc220-e「Distance on Large Perfect Binary Tree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "グラフの到達可能性",
+      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc220-e「Distance on Large Perfect Binary Tree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "剰余演算と modular inverse",
+      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc220-e「Distance on Large Perfect Binary Tree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "グラフの到達可能性",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "剰余演算と modular inverse",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。"
+    {
+      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Distance on Large Perfect Binary Tree 型の 頂点と辺からなる状態グラフに対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Distance on Large Perfect Binary Tree 型の 頂点と辺からなる状態グラフに対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

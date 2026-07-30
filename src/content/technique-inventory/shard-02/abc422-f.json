@@ -4,19 +4,90 @@
     "source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01",
     "source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1"
   ],
-  "coreMethod": "abc422-f「Eat and Ride」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
-    "Eat and Ride 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01",
+        "source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "DAG とトポロジカル順序"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc422-f「Eat and Ride」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc422-f「Eat and Ride」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Eat and Ride 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc422-f「Eat and Ride」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "グラフの到達可能性",
+      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc422-f「Eat and Ride」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "DAG とトポロジカル順序",
+      "trigger": "制約と操作を整理したときに DAG とトポロジカル順序 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc422-f「Eat and Ride」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で DAG とトポロジカル順序 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "グラフの到達可能性",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "DAG とトポロジカル順序",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。"
+    {
+      "text": "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Eat and Ride 型の 頂点と辺からなる状態グラフに対し、DAG とトポロジカル順序を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Eat and Ride 型の 頂点と辺からなる状態グラフに対し、DAG とトポロジカル順序を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

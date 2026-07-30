@@ -4,19 +4,80 @@
     "source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015",
     "source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4"
   ],
-  "coreMethod": "abc234-ex「Enumerate Pairs」では、座標平面を距離閾値幅の bucket に分け、同一または隣接 bucket の点対だけを列挙する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "距離条件を満たす二点の bucket 座標差は定数範囲に限られるため、遠い bucket を調べる必要がない。",
-    "Enumerate Pairs 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015",
+        "source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["空間 bucket と距離比較"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc234-ex「Enumerate Pairs」では、座標平面を距離閾値幅の bucket に分け、同一または隣接 bucket の点対だけを列挙する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc234-ex「Enumerate Pairs」では、座標平面を距離閾値幅の bucket に分け、同一または隣接 bucket の点対だけを列挙する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "距離条件を満たす二点の bucket 座標差は定数範囲に限られるため、遠い bucket を調べる必要がない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Enumerate Pairs 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc234-ex「Enumerate Pairs」では、座標平面を距離閾値幅の bucket に分け、同一または隣接 bucket の点対だけを列挙する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "空間 bucket と距離比較",
+      "trigger": "制約と操作を整理したときに 空間 bucket と距離比較 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc234-ex「Enumerate Pairs」では、座標平面を距離閾値幅の bucket に分け、同一または隣接 bucket の点対だけを列挙する。この状態表現から答えを構成する。で 空間 bucket と距離比較 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "空間 bucket と距離比較",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "負座標の floor 除算、境界上の点、同一点対を一度だけ出力する順序を統一する。"
+    {
+      "text": "負座標の floor 除算、境界上の点、同一点対を一度だけ出力する順序を統一する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Enumerate Pairs 型の問題に対し、空間 bucket と距離比較を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Enumerate Pairs 型の問題に対し、空間 bucket と距離比較を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "負座標の floor 除算、境界上の点、同一点対を一度だけ出力する順序を統一する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

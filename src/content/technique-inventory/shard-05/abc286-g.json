@@ -4,21 +4,98 @@
     "source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a",
     "source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa"
   ],
-  "coreMethod": "abc286-g「Unique Walk」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
-    "元の歩道から必須辺だけを射影すると Euler trail になり、逆に成分内の自由経路で trail の隣接必須辺を接続できる。",
-    "Unique Walk 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a",
+        "source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["Union-Find", "Euler trail の存在条件"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc286-g「Unique Walk」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc286-g「Unique Walk」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "元の歩道から必須辺だけを射影すると Euler trail になり、逆に成分内の自由経路で trail の隣接必須辺を接続できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Unique Walk 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc286-g「Unique Walk」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "Union-Find",
+      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc286-g「Unique Walk」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。この状態表現から答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Euler trail の存在条件",
+      "trigger": "制約と操作を整理したときに Euler trail の存在条件 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc286-g「Unique Walk」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。この状態表現から答えを構成する。で Euler trail の存在条件 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "Union-Find",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Euler trail の存在条件",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
-    "自己 loop と多重辺を許した次数 parity を数え、縮約成分の連結性を保つ。"
+    {
+      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "自己 loop と多重辺を許した次数 parity を数え、縮約成分の連結性を保つ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Unique Walk 型の問題に対し、Union-Findを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Unique Walk 型の問題に対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

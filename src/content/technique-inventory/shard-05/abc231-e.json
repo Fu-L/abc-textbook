@@ -4,19 +4,80 @@
     "source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c",
     "source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb"
   ],
-  "coreMethod": "abc231-e「Minimal payments」では、丸めた二候補だけへ分岐する再帰を定義し、同じ部分問題を memoize して再利用する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "最小単位の端数は切り捨て側か切り上げ側のどちらかで清算すればよく、他の選択はそれらより改善しない。",
-    "Minimal payments 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c",
+        "source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["メモ化再帰と最適部分構造"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc231-e「Minimal payments」では、丸めた二候補だけへ分岐する再帰を定義し、同じ部分問題を memoize して再利用する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc231-e「Minimal payments」では、丸めた二候補だけへ分岐する再帰を定義し、同じ部分問題を memoize して再利用する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "最小単位の端数は切り捨て側か切り上げ側のどちらかで清算すればよく、他の選択はそれらより改善しない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Minimal payments 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc231-e「Minimal payments」では、丸めた二候補だけへ分岐する再帰を定義し、同じ部分問題を memoize して再利用する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "メモ化再帰と最適部分構造",
+      "trigger": "制約と操作を整理したときに メモ化再帰と最適部分構造 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc231-e「Minimal payments」では、丸めた二候補だけへ分岐する再帰を定義し、同じ部分問題を memoize して再利用する。この状態表現から答えを構成する。で メモ化再帰と最適部分構造 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "メモ化再帰と最適部分構造",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "再帰 key の単位を揃え、切り上げ側で一段上へ carry する境界を処理する。"
+    {
+      "text": "再帰 key の単位を揃え、切り上げ側で一段上へ carry する境界を処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Minimal payments 型の問題に対し、メモ化再帰と最適部分構造を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Minimal payments 型の問題に対し、メモ化再帰と最適部分構造を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "再帰 key の単位を揃え、切り上げ側で一段上へ carry する境界を処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

@@ -4,17 +4,90 @@
     "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
     "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
   ],
-  "coreMethod": "abc459-g「Golf 2」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "整数線形結合で表せる値の集合が gcd の倍数全体なので、割り切れ条件が可解性の必要十分条件になる。",
-    "Golf 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+        "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "gcd と拡張 Euclid"],
-  "implementationConcerns": ["0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc459-g「Golf 2」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc459-g「Golf 2」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "整数線形結合で表せる値の集合が gcd の倍数全体なので、割り切れ条件が可解性の必要十分条件になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Golf 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc459-g「Golf 2」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "整数論の基本的な割り切れ関係",
+      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc459-g「Golf 2」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "gcd と拡張 Euclid",
+      "trigger": "制約と操作を整理したときに gcd と拡張 Euclid の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc459-g「Golf 2」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で gcd と拡張 Euclid を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "整数論の基本的な割り切れ関係",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "gcd と拡張 Euclid",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Golf 2 型の 整数の約数・剰余構造に対し、gcd と拡張 Euclidを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Golf 2 型の 整数の約数・剰余構造に対し、gcd と拡張 Euclidを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

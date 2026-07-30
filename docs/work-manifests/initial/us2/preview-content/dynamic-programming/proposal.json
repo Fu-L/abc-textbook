@@ -9,7 +9,7 @@
     "decision": "approved",
     "reviewedAt": "2026-07-28T09:30:00+09:00",
     "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。",
-    "approvedSubjectDigest": "6a7d5f4ed0b7c12552128442adc27a751e395ba3141362a7b038b0bbcd87c808"
+    "approvedSubjectDigest": "9736a1e2deccf8d3ceea696a992984199610516158f56678519adf0b27f74315"
   },
   "outcome": {
     "id": "outcome-provisional-compressed-dp-state",

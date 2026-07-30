@@ -4,19 +4,80 @@
     "source-abc350-editorial-9820-549515ed8d09eb95e0a434d4ec275e0301e82b6916862a383d68a0842b756fd5",
     "source-abc350-f-problem-4739078c1c1a4520eff726101b57fa7e3fd82c645cc07c657b265f658b31d0d6"
   ],
-  "coreMethod": "abc350-f「Transpose」では、対応括弧を stack で結び、括弧へ着いたら相方へ jump して走査方向を反転し、深さ parity で英字大小を変換する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "各括弧対の内部は外側と逆向きに一度だけ走査され、入れ子深さの parity が文字反転回数と一致する。",
-    "Transpose 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc350-editorial-9820-549515ed8d09eb95e0a434d4ec275e0301e82b6916862a383d68a0842b756fd5",
+        "source-abc350-f-problem-4739078c1c1a4520eff726101b57fa7e3fd82c645cc07c657b265f658b31d0d6"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["括弧列の stack matching と方向反転"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc350-f「Transpose」では、対応括弧を stack で結び、括弧へ着いたら相方へ jump して走査方向を反転し、深さ parity で英字大小を変換する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc350-f「Transpose」では、対応括弧を stack で結び、括弧へ着いたら相方へ jump して走査方向を反転し、深さ parity で英字大小を変換する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "各括弧対の内部は外側と逆向きに一度だけ走査され、入れ子深さの parity が文字反転回数と一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Transpose 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc350-f「Transpose」では、対応括弧を stack で結び、括弧へ着いたら相方へ jump して走査方向を反転し、深さ parity で英字大小を変換する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "括弧列の stack matching と方向反転",
+      "trigger": "制約と操作を整理したときに 括弧列の stack matching と方向反転 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc350-f「Transpose」では、対応括弧を stack で結び、括弧へ着いたら相方へ jump して走査方向を反転し、深さ parity で英字大小を変換する。この状態表現から答えを構成する。で 括弧列の stack matching と方向反転 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "括弧列の stack matching と方向反転",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "jump 後に現在方向へ一歩進み、括弧自体を出力せず、大小変換を ASCII 前提にしない。"
+    {
+      "text": "jump 後に現在方向へ一歩進み、括弧自体を出力せず、大小変換を ASCII 前提にしない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Transpose 型の問題に対し、括弧列の stack matching と方向反転を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Transpose 型の問題に対し、括弧列の stack matching と方向反転を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "jump 後に現在方向へ一歩進み、括弧自体を出力せず、大小変換を ASCII 前提にしない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

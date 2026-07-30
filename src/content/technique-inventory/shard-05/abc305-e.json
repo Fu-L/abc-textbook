@@ -4,19 +4,90 @@
     "source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f",
     "source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"
   ],
-  "coreMethod": "abc305-e「Art Gallery on Graph」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
-    "Art Gallery on Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f",
+        "source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "Dijkstra 法と緩和"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc305-e「Art Gallery on Graph」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc305-e「Art Gallery on Graph」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Art Gallery on Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc305-e「Art Gallery on Graph」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "グラフの到達可能性",
+      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc305-e「Art Gallery on Graph」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Dijkstra 法と緩和",
+      "trigger": "制約と操作を整理したときに Dijkstra 法と緩和 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc305-e「Art Gallery on Graph」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で Dijkstra 法と緩和 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "グラフの到達可能性",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Dijkstra 法と緩和",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。"
+    {
+      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Art Gallery on Graph 型の 頂点と辺からなる状態グラフに対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Art Gallery on Graph 型の 頂点と辺からなる状態グラフに対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

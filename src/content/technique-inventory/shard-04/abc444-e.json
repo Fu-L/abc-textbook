@@ -4,19 +4,90 @@
     "source-abc444-e-problem-dc6db3fa5a4cb75c262b4e86744c59364aa2f83ae4b1c38d2d3dc6579157e802",
     "source-abc444-editorial-15690-15f66914a3c17025b5a7d8a595e6ae7f123f8769f39b8f98bc440e91ec61e759"
   ],
-  "coreMethod": "abc444-e「Sparse Range」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
-    "Sparse Range 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc444-e-problem-dc6db3fa5a4cb75c262b4e86744c59364aa2f83ae4b1c38d2d3dc6579157e802",
+        "source-abc444-editorial-15690-15f66914a3c17025b5a7d8a595e6ae7f123f8769f39b8f98bc440e91ec61e759"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["半開区間の扱い", "平衡二分探索木"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc444-e「Sparse Range」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc444-e「Sparse Range」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Sparse Range 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc444-e「Sparse Range」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "半開区間の扱い",
+      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc444-e「Sparse Range」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "平衡二分探索木",
+      "trigger": "制約と操作を整理したときに 平衡二分探索木 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc444-e「Sparse Range」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 平衡二分探索木 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "半開区間の扱い",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "平衡二分探索木",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。"
+    {
+      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Sparse Range 型の 区間端点と包含関係に対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Sparse Range 型の 区間端点と包含関係に対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

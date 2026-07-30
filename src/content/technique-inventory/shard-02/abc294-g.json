@@ -4,17 +4,90 @@
     "source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f",
     "source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971"
   ],
-  "coreMethod": "abc294-g「Distance Queries on a Tree」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "DFS で頂点へ入ってから出るまでに訪れる頂点はちょうどその部分木なので、時刻区間との対応が成立する。",
-    "Distance Queries on a Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f",
+        "source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "Euler tour による木の一次元化"],
-  "implementationConcerns": ["入時刻の半開区間と頂点値・辺値のどちらを記録するかを統一する。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc294-g「Distance Queries on a Tree」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc294-g「Distance Queries on a Tree」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "DFS で頂点へ入ってから出るまでに訪れる頂点はちょうどその部分木なので、時刻区間との対応が成立する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Distance Queries on a Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc294-g「Distance Queries on a Tree」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "グラフの到達可能性",
+      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc294-g「Distance Queries on a Tree」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Euler tour による木の一次元化",
+      "trigger": "制約と操作を整理したときに Euler tour による木の一次元化 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc294-g「Distance Queries on a Tree」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で Euler tour による木の一次元化 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "グラフの到達可能性",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Euler tour による木の一次元化",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "入時刻の半開区間と頂点値・辺値のどちらを記録するかを統一する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Distance Queries on a Tree 型の 頂点と辺からなる状態グラフに対し、Euler tour による木の一次元化を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Distance Queries on a Tree 型の 頂点と辺からなる状態グラフに対し、Euler tour による木の一次元化を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "入時刻の半開区間と頂点値・辺値のどちらを記録するかを統一する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

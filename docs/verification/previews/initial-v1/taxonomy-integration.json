@@ -3,8 +3,8 @@
   "evidenceId": "preview-initial-v1-taxonomy-integration",
   "previewId": "initial-v1",
   "status": "evidence_frozen",
-  "taxonomyDigest": "445360ca2af20f0e4df97fcd023addbda7b22095077f68af52c919bffe57e620",
-  "inventoryComponentDigest": "8ebb3b324b1972d98321b1249d6f387acbb54757ed8460638e6a6747eb150da7",
+  "taxonomyDigest": "83fc1c85ea4639121d8b1e5ef022555840c45bd9908910548e15ad7db1b402d5",
+  "inventoryComponentDigest": "d41319304107e355c62e0989fd15308a9fb95d234480b865c23e9648fbae386c",
   "classificationsDigest": "11b17a24d6822e5299905170f0f63ddccae874c5098701d2d46dbadecab958f2",
   "proposalDigest": "f3a14c96d975d6c65be539dece43e3d14461f52c060e0d73471646df2f8d9ab0",
   "finalDecisionTask": "T159",
@@ -647,5 +647,5 @@
       }
     }
   ],
-  "integrationDigest": "9ca98dacf24843dcacb18486cbbb1af348bf75155ac0ba67a4e6aa2ea50970c7"
+  "integrationDigest": "76e5bea883739a9ff89350c50f92fb858469817590c5479c11c2b6577627c4f1"
 }

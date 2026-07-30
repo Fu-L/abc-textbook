@@ -4,19 +4,80 @@
     "source-abc363-e-problem-5c1cd2b6791656de944ce3c4d0c033f141306ce329dc5b745ef599446b586900",
     "source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"
   ],
-  "coreMethod": "abc363-e「Sinking Land」では、海に接する境界を始点に、各 cell が到達可能になる最小水位を min-heap で伝播する priority flood を行う。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "cell の水没水位は経路上標高最大値の最小値であり、max(現在水位, 隣接標高) の Dijkstra 緩和と一致する。",
-    "Sinking Land 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc363-e-problem-5c1cd2b6791656de944ce3c4d0c033f141306ce329dc5b745ef599446b586900",
+        "source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["minimax path と Dijkstra 法"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc363-e「Sinking Land」では、海に接する境界を始点に、各 cell が到達可能になる最小水位を min-heap で伝播する priority flood を行う。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc363-e「Sinking Land」では、海に接する境界を始点に、各 cell が到達可能になる最小水位を min-heap で伝播する priority flood を行う。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "cell の水没水位は経路上標高最大値の最小値であり、max(現在水位, 隣接標高) の Dijkstra 緩和と一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Sinking Land 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc363-e「Sinking Land」では、海に接する境界を始点に、各 cell が到達可能になる最小水位を min-heap で伝播する priority flood を行う。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "minimax path と Dijkstra 法",
+      "trigger": "制約と操作を整理したときに minimax path と Dijkstra 法 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc363-e「Sinking Land」では、海に接する境界を始点に、各 cell が到達可能になる最小水位を min-heap で伝播する priority flood を行う。この状態表現から答えを構成する。で minimax path と Dijkstra 法 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "minimax path と Dijkstra 法",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "同じ cell の古い heap entry を捨て、水位別回答は新規水没数の prefix sum として出す。"
+    {
+      "text": "同じ cell の古い heap entry を捨て、水位別回答は新規水没数の prefix sum として出す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Sinking Land 型の問題に対し、minimax path と Dijkstra 法を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Sinking Land 型の問題に対し、minimax path と Dijkstra 法を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "同じ cell の古い heap entry を捨て、水位別回答は新規水没数の prefix sum として出す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

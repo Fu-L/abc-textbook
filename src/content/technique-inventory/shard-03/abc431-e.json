@@ -4,17 +4,90 @@
     "source-abc431-e-problem-aea5e8bc55c0fa23b159bfddf8b55bc876c2e47eea1ef3ef0541c2e1a4d1bf24",
     "source-abc431-editorial-14483-a92eb04ac846e8663319adb90bc5e8e2a713a25188f00fa53d73c9d38bde3b8e"
   ],
-  "coreMethod": "abc431-e「Reflection on Grid」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "deque の先頭距離は非減少で、重み 0 の緩和を前、重み 1 を後へ置くことで Dijkstra と同じ確定順を保つ。",
-    "Reflection on Grid 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc431-e-problem-aea5e8bc55c0fa23b159bfddf8b55bc876c2e47eea1ef3ef0541c2e1a4d1bf24",
+        "source-abc431-editorial-14483-a92eb04ac846e8663319adb90bc5e8e2a713a25188f00fa53d73c9d38bde3b8e"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["grid の座標表現", "0-1 BFS"],
-  "implementationConcerns": ["改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc431-e「Reflection on Grid」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc431-e「Reflection on Grid」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "deque の先頭距離は非減少で、重み 0 の緩和を前、重み 1 を後へ置くことで Dijkstra と同じ確定順を保つ。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Reflection on Grid 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc431-e「Reflection on Grid」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "grid の座標表現",
+      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc431-e「Reflection on Grid」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "0-1 BFS",
+      "trigger": "制約と操作を整理したときに 0-1 BFS の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc431-e「Reflection on Grid」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 0-1 BFS を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "grid の座標表現",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "0-1 BFS",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Reflection on Grid 型の 盤面上の位置と局所遷移に対し、0-1 BFSを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Reflection on Grid 型の 盤面上の位置と局所遷移に対し、0-1 BFSを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

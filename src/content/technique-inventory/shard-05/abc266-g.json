@@ -4,17 +4,90 @@
     "source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f",
     "source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc"
   ],
-  "coreMethod": "abc266-g「Yet Another RGB Sequence」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
-    "Yet Another RGB Sequence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f",
+        "source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["文字列の添字と prefix", "包除原理"],
-  "implementationConcerns": ["空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc266-g「Yet Another RGB Sequence」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc266-g「Yet Another RGB Sequence」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Yet Another RGB Sequence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc266-g「Yet Another RGB Sequence」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "文字列の添字と prefix",
+      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc266-g「Yet Another RGB Sequence」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "包除原理",
+      "trigger": "制約と操作を整理したときに 包除原理 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc266-g「Yet Another RGB Sequence」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 包除原理 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "文字列の添字と prefix",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "包除原理",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Yet Another RGB Sequence 型の 文字列の prefix・suffix と一致関係に対し、包除原理を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Yet Another RGB Sequence 型の 文字列の prefix・suffix と一致関係に対し、包除原理を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

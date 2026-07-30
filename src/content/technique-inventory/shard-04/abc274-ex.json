@@ -4,19 +4,90 @@
     "source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838",
     "source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f"
   ],
-  "coreMethod": "abc274-ex「XOR Sum of Arrays」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "prefix hash の差から位置に依存しない部分文字列 hash を復元でき、等しい文字列は同じ値になる。",
-    "XOR Sum of Arrays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838",
+        "source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "Rolling Hash"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc274-ex「XOR Sum of Arrays」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc274-ex「XOR Sum of Arrays」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "prefix hash の差から位置に依存しない部分文字列 hash を復元でき、等しい文字列は同じ値になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "XOR Sum of Arrays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc274-ex「XOR Sum of Arrays」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "グラフの到達可能性",
+      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc274-ex「XOR Sum of Arrays」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Rolling Hash",
+      "trigger": "制約と操作を整理したときに Rolling Hash の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc274-ex「XOR Sum of Arrays」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で Rolling Hash を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "グラフの到達可能性",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Rolling Hash",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "衝突確率を抑える複数 modulus または十分広い整数型を選び、負値を正規化する。"
+    {
+      "text": "衝突確率を抑える複数 modulus または十分広い整数型を選び、負値を正規化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "XOR Sum of Arrays 型の 頂点と辺からなる状態グラフに対し、Rolling Hashを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "XOR Sum of Arrays 型の 頂点と辺からなる状態グラフに対し、Rolling Hashを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "衝突確率を抑える複数 modulus または十分広い整数型を選び、負値を正規化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

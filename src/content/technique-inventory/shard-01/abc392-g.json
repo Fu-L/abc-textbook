@@ -4,17 +4,90 @@
     "source-abc392-editorial-12175-d00afb91d1eb85a0a43b828ca1e68d4aff9b65365ce8a51e2724334e95acd568",
     "source-abc392-g-problem-0ecceae1087a498df7b9a28343f0cd4bd59d0a352b474711ebed70002f6dbc4b"
   ],
-  "coreMethod": "abc392-g「Fine Triplets」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
-    "Fine Triplets 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc392-editorial-12175-d00afb91d1eb85a0a43b828ca1e68d4aff9b65365ce8a51e2724334e95acd568",
+        "source-abc392-g-problem-0ecceae1087a498df7b9a28343f0cd4bd59d0a352b474711ebed70002f6dbc4b"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["整数論の基本的な割り切れ関係", "畳み込みと NTT"],
-  "implementationConcerns": ["必要な係数長、padding 長、法が NTT に対応するかを確認する。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc392-g「Fine Triplets」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc392-g「Fine Triplets」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Fine Triplets 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc392-g「Fine Triplets」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "整数論の基本的な割り切れ関係",
+      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc392-g「Fine Triplets」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "畳み込みと NTT",
+      "trigger": "制約と操作を整理したときに 畳み込みと NTT の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc392-g「Fine Triplets」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 畳み込みと NTT を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "整数論の基本的な割り切れ関係",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "畳み込みと NTT",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "必要な係数長、padding 長、法が NTT に対応するかを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Fine Triplets 型の 整数の約数・剰余構造に対し、畳み込みと NTTを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Fine Triplets 型の 整数の約数・剰余構造に対し、畳み込みと NTTを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "必要な係数長、padding 長、法が NTT に対応するかを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

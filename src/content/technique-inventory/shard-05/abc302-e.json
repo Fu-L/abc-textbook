@@ -4,19 +4,90 @@
     "source-abc302-e-problem-11b090eb53471a5e3315ce1c2837d74511b3dbb4e27cef33f24c523b09821da0",
     "source-abc302-editorial-6410-4a22dd9ce6220c919d246e3b7809bb34dc5372fbfdb9e41e7caacacdd5e5fe8e"
   ],
-  "coreMethod": "abc302-e「Isolation」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
-    "Isolation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc302-e-problem-11b090eb53471a5e3315ce1c2837d74511b3dbb4e27cef33f24c523b09821da0",
+        "source-abc302-editorial-6410-4a22dd9ce6220c919d246e3b7809bb34dc5372fbfdb9e41e7caacacdd5e5fe8e"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "平衡二分探索木"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc302-e「Isolation」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc302-e「Isolation」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Isolation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc302-e「Isolation」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "グラフの到達可能性",
+      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc302-e「Isolation」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "平衡二分探索木",
+      "trigger": "制約と操作を整理したときに 平衡二分探索木 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc302-e「Isolation」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 平衡二分探索木 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "グラフの到達可能性",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "平衡二分探索木",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。"
+    {
+      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Isolation 型の 頂点と辺からなる状態グラフに対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Isolation 型の 頂点と辺からなる状態グラフに対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

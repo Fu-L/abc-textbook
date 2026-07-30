@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { authorTechniqueInventoryItem } from '../../src/lib/corpus/technique-authoring.js';
+import { authorProblemAnalysisRecord } from '../../src/lib/corpus/technique-authoring.js';
 
 const problem = {
   id: 'abc218-f',
@@ -11,7 +11,7 @@ const problem = {
 
 describe('source-backed technique inventory authoring', () => {
   it('selects a source-stated total complexity and specialized graph technique', () => {
-    const analysis = authorTechniqueInventoryItem({
+    const analysis = authorProblemAnalysisRecord({
       problem,
       statementText: 'Find the shortest path after removing each directed edge.',
       editorialText:
@@ -24,11 +24,14 @@ describe('source-backed technique inventory authoring', () => {
     expect(analysis.problemComplexityRecorded).toBe(true);
     expect(analysis.item.asymptoticComplexity?.time).toContain('O(N[N+M])');
     expect(analysis.item.sourceRevisionIds).toEqual(['source-editorial', 'source-problem']);
-    expect(analysis.item.reviewStatus).toBe('reviewed');
+    expect(analysis.classificationMode).toBe('source_bound_draft');
+    expect(analysis.item.reviewStatus).toBe('draft');
+    expect(analysis.item.reasoningPath.candidateApproaches).toHaveLength(1);
+    expect(analysis.item.problemSpecificInsights).toEqual([]);
   });
 
   it('does not invent a generic complexity when the source does not state one', () => {
-    const analysis = authorTechniqueInventoryItem({
+    const analysis = authorProblemAnalysisRecord({
       problem: { ...problem, id: 'abc218-g', title: 'Game on Tree 2' },
       statementText: 'A game is played on a tree.',
       editorialText: 'Consider each possible state and transition. Each transition takes O(1).',
@@ -36,13 +39,15 @@ describe('source-backed technique inventory authoring', () => {
 
     expect(analysis.signalIds).toEqual([]);
     expect(analysis.complexityEssential).toBe(false);
-    expect(analysis.item.coreMethod).toContain('必要な候補だけを制約内で列挙');
+    expect(analysis.item.reasoningPath.algorithmConnection.text).toContain(
+      '必要な候補だけを制約内で列挙',
+    );
     expect(analysis.item.asymptoticComplexity).toBeUndefined();
     expect(analysis.item.reviewStatus).toBe('draft');
   });
 
   it('omits an ordinary total complexity even when the official source states it', () => {
-    const analysis = authorTechniqueInventoryItem({
+    const analysis = authorProblemAnalysisRecord({
       problem: { ...problem, id: 'abc223-f', title: 'Parenthesis Checking' },
       statementText: 'Process swaps and validity queries on a parenthesis string.',
       editorialText:
@@ -56,7 +61,7 @@ describe('source-backed technique inventory authoring', () => {
   });
 
   it('does not substitute a different bound for a reviewed Problem-level analysis', () => {
-    const analysis = authorTechniqueInventoryItem({
+    const analysis = authorProblemAnalysisRecord({
       problem,
       statementText: 'Find a shortest path in a directed graph.',
       editorialText: 'One queue operation takes O(1). A simplified discussion says O(NM).',
@@ -68,7 +73,7 @@ describe('source-backed technique inventory authoring', () => {
   });
 
   it('does not infer a technique from an algorithm-shaped word in the title', () => {
-    const analysis = authorTechniqueInventoryItem({
+    const analysis = authorProblemAnalysisRecord({
       problem: { ...problem, id: 'abc999-e', title: '1D Bucket Tool' },
       statementText: 'Process repaint and color count queries on a row of cells.',
       editorialText:
@@ -80,7 +85,7 @@ describe('source-backed technique inventory authoring', () => {
   });
 
   it('selects the primary editorial method before a later alternative', () => {
-    const analysis = authorTechniqueInventoryItem({
+    const analysis = authorProblemAnalysisRecord({
       problem: { ...problem, id: 'abc999-f', title: 'Battles in a Row' },
       statementText: 'Defeat monsters while tracking health and magic.',
       editorialText:
@@ -92,7 +97,7 @@ describe('source-backed technique inventory authoring', () => {
   });
 
   it('does not mistake degree conditions in a tree DP for square-root decomposition', () => {
-    const analysis = authorTechniqueInventoryItem({
+    const analysis = authorProblemAnalysisRecord({
       problem: { ...problem, id: 'abc999-g', title: 'Centipede Graph' },
       statementText: 'Find a longest degree-constrained path in a tree.',
       editorialText:
@@ -104,12 +109,12 @@ describe('source-backed technique inventory authoring', () => {
   });
 
   it('keeps ordinary words prime and bit from matching Prim and BIT abbreviations', () => {
-    const prime = authorTechniqueInventoryItem({
+    const prime = authorProblemAnalysisRecord({
       problem: { ...problem, id: 'abc227-g', title: 'Divisors of Binomial Coefficient' },
       statementText: 'Count divisors of a binomial coefficient.',
       editorialText: 'Use prime factorization and add each prime exponent.',
     });
-    const bit = authorTechniqueInventoryItem({
+    const bit = authorProblemAnalysisRecord({
       problem: { ...problem, id: 'abc261-e', title: 'Many Operations' },
       statementText: 'Apply bitwise operations to an integer.',
       editorialText: 'For each bit, compose the effect of the operations from left to right.',

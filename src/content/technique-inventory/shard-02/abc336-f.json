@@ -4,22 +4,94 @@
     "source-abc336-editorial-9077-0cd54d18f7cc11b31dcadd7717f47d87708c62acb78535738776c658707e70f8",
     "source-abc336-f-problem-a8622f4a21e80664937f8b887d949e748d985863cfc0fec2d26b8c93ceb99fb0"
   ],
-  "coreMethod": "abc336-f「Rotation Puzzle」では、初期盤面と完成盤面の双方から深さ K/2 まで状態を列挙し、到達 layer の共通状態から最小操作回数を復元する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "長さ K 以下の任意の操作列は中央で二分でき、後半を逆操作として完成盤面側から辿れば、両側の到達集合が必ず中央状態で交わる。",
-    "Rotation Puzzle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc336-editorial-9077-0cd54d18f7cc11b31dcadd7717f47d87708c62acb78535738776c658707e70f8",
+        "source-abc336-f-problem-a8622f4a21e80664937f8b887d949e748d985863cfc0fec2d26b8c93ceb99fb0"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "asymptoticComplexity": {
-    "time": "O(3^{K/2} KHW)（公式解法全体。特殊な計算量解析を含む）"
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc336-f「Rotation Puzzle」では、初期盤面と完成盤面の双方から深さ K/2 まで状態を列挙し、到達 layer の共通状態から最小操作回数を復元する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc336-f「Rotation Puzzle」では、初期盤面と完成盤面の双方から深さ K/2 まで状態を列挙し、到達 layer の共通状態から最小操作回数を復元する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "長さ K 以下の任意の操作列は中央で二分でき、後半を逆操作として完成盤面側から辿れば、両側の到達集合が必ず中央状態で交わる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Rotation Puzzle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc336-f「Rotation Puzzle」では、初期盤面と完成盤面の双方から深さ K/2 まで状態を列挙し、到達 layer の共通状態から最小操作回数を復元する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   },
-  "prerequisiteCandidates": ["双方向探索と半分全列挙", "特殊な漸近計算量の見積もり"],
+  "typicalTechniques": [
+    {
+      "name": "双方向探索と半分全列挙",
+      "trigger": "制約と操作を整理したときに 双方向探索と半分全列挙 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc336-f「Rotation Puzzle」では、初期盤面と完成盤面の双方から深さ K/2 まで状態を列挙し、到達 layer の共通状態から最小操作回数を復元する。この状態表現から答えを構成する。で 双方向探索と半分全列挙 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "特殊な漸近計算量の見積もり",
+      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc336-f「Rotation Puzzle」では、初期盤面と完成盤面の双方から深さ K/2 まで状態を列挙し、到達 layer の共通状態から最小操作回数を復元する。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "asymptoticComplexity": {
+    "time": "O(3^{K/2} KHW)（公式解法全体。特殊な計算量解析を含む）",
+    "evidenceIds": ["evidence-official-analysis"]
+  },
+  "prerequisiteCandidates": [
+    {
+      "text": "双方向探索と半分全列挙",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "特殊な漸近計算量の見積もり",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "直前操作の即時打ち消しを除外し、盤面を衝突しない canonical key で保存する。"
+    {
+      "text": "直前操作の即時打ち消しを除外し、盤面を衝突しない canonical key で保存する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Rotation Puzzle 型の問題に対し、双方向探索と半分全列挙を選び、状態・証明・特殊計算量を一貫して設計できる。"
+    {
+      "text": "Rotation Puzzle 型の問題に対し、双方向探索と半分全列挙を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "直前操作の即時打ち消しを除外し、盤面を衝突しない canonical key で保存する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

@@ -4,19 +4,90 @@
     "source-abc348-e-problem-823e6b5e6f018b5c00d4d94d6bd9bf1fe258ca5d9a46580b391823fef195d866",
     "source-abc348-editorial-9706-57a215cd911ca45ed5e672c5b31b51ffbcfc636f4ebb913932872b2cdaceed73"
   ],
-  "coreMethod": "abc348-e「Minimize Sum of Distances」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "各有向辺の部分問題を辺の反対側だけから合成すれば、根を移しても必要な寄与を重複なく再利用できる。",
-    "Minimize Sum of Distances 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc348-e-problem-823e6b5e6f018b5c00d4d94d6bd9bf1fe258ca5d9a46580b391823fef195d866",
+        "source-abc348-editorial-9706-57a215cd911ca45ed5e672c5b31b51ffbcfc636f4ebb913932872b2cdaceed73"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["木の連結性と一意な単純路", "全方位木 DP"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc348-e「Minimize Sum of Distances」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc348-e「Minimize Sum of Distances」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "各有向辺の部分問題を辺の反対側だけから合成すれば、根を移しても必要な寄与を重複なく再利用できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Minimize Sum of Distances 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc348-e「Minimize Sum of Distances」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "木の連結性と一意な単純路",
+      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc348-e「Minimize Sum of Distances」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "全方位木 DP",
+      "trigger": "制約と操作を整理したときに 全方位木 DP の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc348-e「Minimize Sum of Distances」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 全方位木 DP を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "木の連結性と一意な単純路",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "全方位木 DP",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "単位元と合成順序を明示し、子を除いた値を prefix・suffix から構成する。"
+    {
+      "text": "単位元と合成順序を明示し、子を除いた値を prefix・suffix から構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Minimize Sum of Distances 型の 根付き木・部分木・パスの関係に対し、全方位木 DPを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Minimize Sum of Distances 型の 根付き木・部分木・パスの関係に対し、全方位木 DPを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "単位元と合成順序を明示し、子を除いた値を prefix・suffix から構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

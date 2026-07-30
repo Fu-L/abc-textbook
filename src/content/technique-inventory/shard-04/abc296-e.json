@@ -4,19 +4,80 @@
     "source-abc296-e-problem-d20cd3f48bf987b0261459fa8579faa57de6822c5f637a3d263bf0c442985204",
     "source-abc296-editorial-6116-dbe4ddefbb6d44eab7ed7f4d8bd3b687af7526bb5b0e973a6dd18f091a411f0b"
   ],
-  "coreMethod": "abc296-e「Transition Game」では、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "遷移を続けると有限頂点上で必ず再訪が起こり、経路は前置き木と一つの閉路へ一意に分かれる。",
-    "Transition Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc296-e-problem-d20cd3f48bf987b0261459fa8579faa57de6822c5f637a3d263bf0c442985204",
+        "source-abc296-editorial-6116-dbe4ddefbb6d44eab7ed7f4d8bd3b687af7526bb5b0e973a6dd18f091a411f0b"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["関数グラフの閉路分解"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc296-e「Transition Game」では、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc296-e「Transition Game」では、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "遷移を続けると有限頂点上で必ず再訪が起こり、経路は前置き木と一つの閉路へ一意に分かれる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Transition Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc296-e「Transition Game」では、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "関数グラフの閉路分解",
+      "trigger": "制約と操作を整理したときに 関数グラフの閉路分解 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc296-e「Transition Game」では、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。この状態表現から答えを構成する。で 関数グラフの閉路分解 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "関数グラフの閉路分解",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。"
+    {
+      "text": "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Transition Game 型の問題に対し、関数グラフの閉路分解を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Transition Game 型の問題に対し、関数グラフの閉路分解を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

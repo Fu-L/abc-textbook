@@ -4,19 +4,80 @@
     "source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed",
     "source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"
   ],
-  "coreMethod": "abc219-g「Propagation」では、頂点を次数の閾値で heavy と light に分け、低次数更新は隣接先へ即時反映し高次数更新は時刻を遅延保持する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "light 頂点の走査長は閾値未満で、heavy 頂点数は次数和を閾値で割った個数以下になる。",
-    "Propagation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed",
+        "source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["次数による平方分割"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc219-g「Propagation」では、頂点を次数の閾値で heavy と light に分け、低次数更新は隣接先へ即時反映し高次数更新は時刻を遅延保持する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc219-g「Propagation」では、頂点を次数の閾値で heavy と light に分け、低次数更新は隣接先へ即時反映し高次数更新は時刻を遅延保持する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "light 頂点の走査長は閾値未満で、heavy 頂点数は次数和を閾値で割った個数以下になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Propagation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc219-g「Propagation」では、頂点を次数の閾値で heavy と light に分け、低次数更新は隣接先へ即時反映し高次数更新は時刻を遅延保持する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "次数による平方分割",
+      "trigger": "制約と操作を整理したときに 次数による平方分割 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc219-g「Propagation」では、頂点を次数の閾値で heavy と light に分け、低次数更新は隣接先へ即時反映し高次数更新は時刻を遅延保持する。この状態表現から答えを構成する。で 次数による平方分割 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "次数による平方分割",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "各値の更新時刻を比較し、heavy 隣接表から最も新しい遅延更新だけを反映する。"
+    {
+      "text": "各値の更新時刻を比較し、heavy 隣接表から最も新しい遅延更新だけを反映する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Propagation 型の問題に対し、次数による平方分割を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Propagation 型の問題に対し、次数による平方分割を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "各値の更新時刻を比較し、heavy 隣接表から最も新しい遅延更新だけを反映する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

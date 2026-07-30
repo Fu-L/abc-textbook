@@ -4,19 +4,80 @@
     "source-abc242-e-problem-105c649ecb269302c3783a0fc0425f5042be2f65892d32c9e1a658283a51fa21",
     "source-abc242-editorial-3516-341f0c2b714e9d00396dc06071f467ad103a6c56d7f034cb2d80284e09c1d2f7"
   ],
-  "coreMethod": "abc242-e「(∀x∀)」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
-    "(∀x∀) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc242-e-problem-105c649ecb269302c3783a0fc0425f5042be2f65892d32c9e1a658283a51fa21",
+        "source-abc242-editorial-3516-341f0c2b714e9d00396dc06071f467ad103a6c56d7f034cb2d80284e09c1d2f7"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["組合せ数と二項係数"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc242-e「(∀x∀)」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc242-e「(∀x∀)」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "(∀x∀) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc242-e「(∀x∀)」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "組合せ数と二項係数",
+      "trigger": "制約と操作を整理したときに 組合せ数と二項係数 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc242-e「(∀x∀)」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。で 組合せ数と二項係数 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "組合せ数と二項係数",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。"
+    {
+      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "(∀x∀) 型の問題に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "(∀x∀) 型の問題に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

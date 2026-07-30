@@ -4,20 +4,84 @@
     "source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb",
     "source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96"
   ],
-  "coreMethod": "abc270-g「Sequence in mod P」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "列の順序と prefix 状態と解候補の対応を双方向に示し、列挙の漏れと重複がないことを確認する。",
-    "Sequence in mod P 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb",
+        "source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc270-g「Sequence in mod P」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc270-g「Sequence in mod P」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "列の順序と prefix 状態と解候補の対応を双方向に示し、列挙の漏れと重複がないことを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Sequence in mod P 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc270-g「Sequence in mod P」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "配列と prefix の添字管理",
+      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc270-g「Sequence in mod P」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "配列と prefix の添字管理",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
-    "状態 key と更新順序を固定し、同じ候補を二重に数えない。"
+    {
+      "text": "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "状態 key と更新順序を固定し、同じ候補を二重に数えない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Sequence in mod P 型の 列の順序と prefix 状態に対し、状態縮約を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Sequence in mod P 型の 列の順序と prefix 状態に対し、状態縮約を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

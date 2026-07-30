@@ -4,19 +4,80 @@
     "source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4",
     "source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b"
   ],
-  "coreMethod": "abc340-e「Mancala 2」では、一山の個数を商と余りに分け、全周への一様加算と余り個分の循環区間加算を lazy data structure で処理する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "各位置へ floor(x/N) 個を配った残り x mod N 個が操作位置の直後から連続して一個ずつ配られる。",
-    "Mancala 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc340-e-problem-2739bd0ea499a6055ddfc9471834e0c70283a59edc35aa44e90e3ed93997dfa4",
+        "source-abc340-editorial-9251-d24f7d167cde6a7d6dd2df592eccc90228c4a02ac371153348ebba531655e07b"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["range add・point query と商余り分解"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc340-e「Mancala 2」では、一山の個数を商と余りに分け、全周への一様加算と余り個分の循環区間加算を lazy data structure で処理する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc340-e「Mancala 2」では、一山の個数を商と余りに分け、全周への一様加算と余り個分の循環区間加算を lazy data structure で処理する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "各位置へ floor(x/N) 個を配った残り x mod N 個が操作位置の直後から連続して一個ずつ配られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Mancala 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc340-e「Mancala 2」では、一山の個数を商と余りに分け、全周への一様加算と余り個分の循環区間加算を lazy data structure で処理する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "range add・point query と商余り分解",
+      "trigger": "制約と操作を整理したときに range add・point query と商余り分解 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc340-e「Mancala 2」では、一山の個数を商と余りに分け、全周への一様加算と余り個分の循環区間加算を lazy data structure で処理する。この状態表現から答えを構成する。で range add・point query と商余り分解 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "range add・point query と商余り分解",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "循環区間を高々二区間へ分割し、取り出す位置を零へ戻してから配布加算する。"
+    {
+      "text": "循環区間を高々二区間へ分割し、取り出す位置を零へ戻してから配布加算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Mancala 2 型の問題に対し、range add・point query と商余り分解を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Mancala 2 型の問題に対し、range add・point query と商余り分解を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "循環区間を高々二区間へ分割し、取り出す位置を零へ戻してから配布加算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

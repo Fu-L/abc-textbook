@@ -4,17 +4,90 @@
     "source-abc375-editorial-11134-46a7d0b5e5b2d6b4f15c42bbcd674364d05a6523a2c867c4bfb122cd6efe4ec3",
     "source-abc375-f-problem-3fa1c95ca2546d4c0f0158de162875929649a584d8ac3344dd32fbfd96a07704"
   ],
-  "coreMethod": "abc375-f「Road Blocked」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "許可する中継頂点集合について帰納し、最適路が新頂点を使う場合と使わない場合を網羅する。",
-    "Road Blocked 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc375-editorial-11134-46a7d0b5e5b2d6b4f15c42bbcd674364d05a6523a2c867c4bfb122cd6efe4ec3",
+        "source-abc375-f-problem-3fa1c95ca2546d4c0f0158de162875929649a584d8ac3344dd32fbfd96a07704"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["online query の計算量設計", "Floyd–Warshall 法"],
-  "implementationConcerns": ["到達不能値同士を加算せず、更新順序 k-i-j を崩さない。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc375-f「Road Blocked」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc375-f「Road Blocked」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "許可する中継頂点集合について帰納し、最適路が新頂点を使う場合と使わない場合を網羅する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Road Blocked 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc375-f「Road Blocked」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "online query の計算量設計",
+      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc375-f「Road Blocked」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Floyd–Warshall 法",
+      "trigger": "制約と操作を整理したときに Floyd–Warshall 法 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc375-f「Road Blocked」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で Floyd–Warshall 法 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "online query の計算量設計",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Floyd–Warshall 法",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "到達不能値同士を加算せず、更新順序 k-i-j を崩さない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Road Blocked 型の 更新と問い合わせの時系列に対し、Floyd–Warshall 法を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Road Blocked 型の 更新と問い合わせの時系列に対し、Floyd–Warshall 法を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "到達不能値同士を加算せず、更新順序 k-i-j を崩さない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

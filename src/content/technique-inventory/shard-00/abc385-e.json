@@ -4,19 +4,90 @@
     "source-abc385-e-problem-31f1e48e1b47f94d6bfe746b537b31b8fd3189cc059f04a525da7a930b91abe4",
     "source-abc385-editorial-11640-df769f63cf1103b792437bd9b3be1880bc948f70c7a9e56e6de1c5f0ee721a93"
   ],
-  "coreMethod": "abc385-e「Snowflake Tree」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "親部分木の上位 K 個に入らない子内要素は、同じ子だけで K 個以上に負けるため親でも候補にならない。",
-    "Snowflake Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc385-e-problem-31f1e48e1b47f94d6bfe746b537b31b8fd3189cc059f04a525da7a930b91abe4",
+        "source-abc385-editorial-11640-df769f63cf1103b792437bd9b3be1880bc948f70c7a9e56e6de1c5f0ee721a93"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "small-to-large merge と上位 K 個の保持"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc385-e「Snowflake Tree」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc385-e「Snowflake Tree」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "親部分木の上位 K 個に入らない子内要素は、同じ子だけで K 個以上に負けるため親でも候補にならない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Snowflake Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc385-e「Snowflake Tree」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "グラフの到達可能性",
+      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc385-e「Snowflake Tree」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "small-to-large merge と上位 K 個の保持",
+      "trigger": "制約と操作を整理したときに small-to-large merge と上位 K 個の保持 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc385-e「Snowflake Tree」では、主解法候補として、各部分木が必要な上位 K 個だけを保持し、子の候補を merge・降順 truncate して query に答える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で small-to-large merge と上位 K 個の保持 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "グラフの到達可能性",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "small-to-large merge と上位 K 個の保持",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "K の全体上限だけ保持し、query の 1-origin 順位と vector index を変換する。"
+    {
+      "text": "K の全体上限だけ保持し、query の 1-origin 順位と vector index を変換する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Snowflake Tree 型の 頂点と辺からなる状態グラフに対し、small-to-large merge と上位 K 個の保持を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Snowflake Tree 型の 頂点と辺からなる状態グラフに対し、small-to-large merge と上位 K 個の保持を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "K の全体上限だけ保持し、query の 1-origin 順位と vector index を変換する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

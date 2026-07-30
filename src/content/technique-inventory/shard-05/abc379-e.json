@@ -4,19 +4,90 @@
     "source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461",
     "source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"
   ],
-  "coreMethod": "abc379-e「Sum of All Substrings」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "floor(N/i) の異なる値は平方根より小さい商と平方根以下の添字から全て得られ、各区間端は除算で計算できる。",
-    "Sum of All Substrings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461",
+        "source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["文字列の添字と prefix", "floor 除算の商区間列挙"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc379-e「Sum of All Substrings」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc379-e「Sum of All Substrings」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "floor(N/i) の異なる値は平方根より小さい商と平方根以下の添字から全て得られ、各区間端は除算で計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Sum of All Substrings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc379-e「Sum of All Substrings」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "文字列の添字と prefix",
+      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc379-e「Sum of All Substrings」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "floor 除算の商区間列挙",
+      "trigger": "制約と操作を整理したときに floor 除算の商区間列挙 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc379-e「Sum of All Substrings」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で floor 除算の商区間列挙 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "文字列の添字と prefix",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "floor 除算の商区間列挙",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。"
+    {
+      "text": "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Sum of All Substrings 型の 文字列の prefix・suffix と一致関係に対し、floor 除算の商区間列挙を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Sum of All Substrings 型の 文字列の prefix・suffix と一致関係に対し、floor 除算の商区間列挙を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

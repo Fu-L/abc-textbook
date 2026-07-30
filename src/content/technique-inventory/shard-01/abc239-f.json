@@ -4,21 +4,98 @@
     "source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5",
     "source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5"
   ],
-  "coreMethod": "abc239-f「Construct Highway」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
-    "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
-    "Construct Highway 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5",
+        "source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["Union-Find", "greedy choice と交換論法"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc239-f「Construct Highway」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc239-f「Construct Highway」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Construct Highway 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc239-f「Construct Highway」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "Union-Find",
+      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc239-f「Construct Highway」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "greedy choice と交換論法",
+      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc239-f「Construct Highway」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "Union-Find",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "greedy choice と交換論法",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
-    "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。"
+    {
+      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Construct Highway 型の問題に対し、Union-Findを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Construct Highway 型の問題に対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

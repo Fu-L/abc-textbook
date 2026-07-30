@@ -4,21 +4,98 @@
     "source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e",
     "source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427"
   ],
-  "coreMethod": "abc244-g「Construct Good Path」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。さらに、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
-    "追加部分が既存構成と衝突せず、始点・終点・被覆条件を保つことをサイズに関する帰納法で示す。",
-    "Construct Good Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc244-editorial-3600-c4c8d81e3b5842d82e680dd4c6364ee09a0ac396e283caed8d528569ac61d02e",
+        "source-abc244-g-problem-88ea6771faa07fcb57593f83a18d31b44e9d79bb30ee509a3cc692c531bd4427"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["深さ優先探索", "再帰的構成と帰納法"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc244-g「Construct Good Path」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。さらに、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc244-g「Construct Good Path」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。さらに、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "追加部分が既存構成と衝突せず、始点・終点・被覆条件を保つことをサイズに関する帰納法で示す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Construct Good Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc244-g「Construct Good Path」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。さらに、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "深さ優先探索",
+      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc244-g「Construct Good Path」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。さらに、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "再帰的構成と帰納法",
+      "trigger": "制約と操作を整理したときに 再帰的構成と帰納法 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc244-g「Construct Good Path」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。さらに、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。で 再帰的構成と帰納法 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "深さ優先探索",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "再帰的構成と帰納法",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
-    "最小幅の基底ケース、行列の転置、再帰で変換した終点座標を個別に確認する。"
+    {
+      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "最小幅の基底ケース、行列の転置、再帰で変換した終点座標を個別に確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Construct Good Path 型の問題に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Construct Good Path 型の問題に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

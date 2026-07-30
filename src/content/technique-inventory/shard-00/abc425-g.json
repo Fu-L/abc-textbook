@@ -4,19 +4,90 @@
     "source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69",
     "source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"
   ],
-  "coreMethod": "abc425-g「Sum of Min of XOR」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
-    "Sum of Min of XOR 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69",
+        "source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "Trie"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc425-g「Sum of Min of XOR」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc425-g「Sum of Min of XOR」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Sum of Min of XOR 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc425-g「Sum of Min of XOR」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "配列と prefix の添字管理",
+      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc425-g「Sum of Min of XOR」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Trie",
+      "trigger": "制約と操作を整理したときに Trie の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc425-g「Sum of Min of XOR」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で Trie を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "配列と prefix の添字管理",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Trie",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。"
+    {
+      "text": "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Sum of Min of XOR 型の 列の順序と prefix 状態に対し、Trieを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Sum of Min of XOR 型の 列の順序と prefix 状態に対し、Trieを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

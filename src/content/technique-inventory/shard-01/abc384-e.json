@@ -4,17 +4,90 @@
     "source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f",
     "source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"
   ],
-  "coreMethod": "abc384-e「Takahashi is Slime 2」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "未処理候補の最小または最大 key を常に選ぶ greedy-choice property を保つ。",
-    "Takahashi is Slime 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f",
+        "source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["grid の座標表現", "priority queue"],
-  "implementationConcerns": ["更新前の古い entry を識別して読み飛ばし、tie-break を決定的にする。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc384-e「Takahashi is Slime 2」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc384-e「Takahashi is Slime 2」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "未処理候補の最小または最大 key を常に選ぶ greedy-choice property を保つ。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Takahashi is Slime 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc384-e「Takahashi is Slime 2」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "grid の座標表現",
+      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc384-e「Takahashi is Slime 2」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "priority queue",
+      "trigger": "制約と操作を整理したときに priority queue の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc384-e「Takahashi is Slime 2」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で priority queue を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "grid の座標表現",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "priority queue",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "更新前の古い entry を識別して読み飛ばし、tie-break を決定的にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Takahashi is Slime 2 型の 盤面上の位置と局所遷移に対し、priority queueを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Takahashi is Slime 2 型の 盤面上の位置と局所遷移に対し、priority queueを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "更新前の古い entry を識別して読み飛ばし、tie-break を決定的にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

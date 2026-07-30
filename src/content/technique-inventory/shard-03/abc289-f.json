@@ -4,19 +4,80 @@
     "source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d",
     "source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8"
   ],
-  "coreMethod": "abc289-f「Teleporter Takahashi」では、反射を二回組み合わせた ±2 平行移動を基本操作とし、座標 parity と退化区間を判定して操作列を構成する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "一回の反射は座標 parity を保ち、異なる二中心での連続反射が差の二倍の平行移動になる。",
-    "Teleporter Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d",
+        "source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["一次元反射の合成と parity"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc289-f「Teleporter Takahashi」では、反射を二回組み合わせた ±2 平行移動を基本操作とし、座標 parity と退化区間を判定して操作列を構成する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc289-f「Teleporter Takahashi」では、反射を二回組み合わせた ±2 平行移動を基本操作とし、座標 parity と退化区間を判定して操作列を構成する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "一回の反射は座標 parity を保ち、異なる二中心での連続反射が差の二倍の平行移動になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Teleporter Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc289-f「Teleporter Takahashi」では、反射を二回組み合わせた ±2 平行移動を基本操作とし、座標 parity と退化区間を判定して操作列を構成する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "一次元反射の合成と parity",
+      "trigger": "制約と操作を整理したときに 一次元反射の合成と parity の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc289-f「Teleporter Takahashi」では、反射を二回組み合わせた ±2 平行移動を基本操作とし、座標 parity と退化区間を判定して操作列を構成する。この状態表現から答えを構成する。で 一次元反射の合成と parity を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "一次元反射の合成と parity",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "区間幅が零の軸、奇数回が必要な初手、二座標の操作回数 parity を揃える。"
+    {
+      "text": "区間幅が零の軸、奇数回が必要な初手、二座標の操作回数 parity を揃える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Teleporter Takahashi 型の問題に対し、一次元反射の合成と parityを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Teleporter Takahashi 型の問題に対し、一次元反射の合成と parityを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "区間幅が零の軸、奇数回が必要な初手、二座標の操作回数 parity を揃える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

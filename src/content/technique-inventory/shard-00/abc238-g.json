@@ -4,17 +4,90 @@
     "source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc",
     "source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f"
   ],
-  "coreMethod": "abc238-g「Cubic?」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "算術の基本定理により正整数の素因数指数表現は一意で、積・割り切れ条件を指数ごとに判定できる。",
-    "Cubic? 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc",
+        "source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "素因数分解と約数列挙"],
-  "implementationConcerns": ["試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc238-g「Cubic?」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc238-g「Cubic?」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "算術の基本定理により正整数の素因数指数表現は一意で、積・割り切れ条件を指数ごとに判定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Cubic? 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc238-g「Cubic?」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "配列と prefix の添字管理",
+      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc238-g「Cubic?」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "素因数分解と約数列挙",
+      "trigger": "制約と操作を整理したときに 素因数分解と約数列挙 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc238-g「Cubic?」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 素因数分解と約数列挙 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "配列と prefix の添字管理",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "素因数分解と約数列挙",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Cubic? 型の 列の順序と prefix 状態に対し、素因数分解と約数列挙を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Cubic? 型の 列の順序と prefix 状態に対し、素因数分解と約数列挙を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

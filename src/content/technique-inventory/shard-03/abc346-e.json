@@ -4,17 +4,80 @@
     "source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec",
     "source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb"
   ],
-  "coreMethod": "abc346-e「Paint」では、上書き paint query を逆順に処理し、まだ確定していない行・列の交点数だけを色別に加算する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "逆順で最初に出会う paint が各 cell へ最後に適用された操作であり、未確定な反対軸との交点を一度だけ数える。",
-    "Paint 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec",
+        "source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["上書き操作の逆順処理"],
-  "implementationConcerns": ["同じ行・列の二回目以降を無視し、最後に未確定 cell を色 0 へ加える。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc346-e「Paint」では、上書き paint query を逆順に処理し、まだ確定していない行・列の交点数だけを色別に加算する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc346-e「Paint」では、上書き paint query を逆順に処理し、まだ確定していない行・列の交点数だけを色別に加算する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "逆順で最初に出会う paint が各 cell へ最後に適用された操作であり、未確定な反対軸との交点を一度だけ数える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Paint 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc346-e「Paint」では、上書き paint query を逆順に処理し、まだ確定していない行・列の交点数だけを色別に加算する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "上書き操作の逆順処理",
+      "trigger": "制約と操作を整理したときに 上書き操作の逆順処理 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc346-e「Paint」では、上書き paint query を逆順に処理し、まだ確定していない行・列の交点数だけを色別に加算する。この状態表現から答えを構成する。で 上書き操作の逆順処理 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "上書き操作の逆順処理",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "同じ行・列の二回目以降を無視し、最後に未確定 cell を色 0 へ加える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Paint 型の問題に対し、上書き操作の逆順処理を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Paint 型の問題に対し、上書き操作の逆順処理を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "同じ行・列の二回目以降を無視し、最後に未確定 cell を色 0 へ加える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

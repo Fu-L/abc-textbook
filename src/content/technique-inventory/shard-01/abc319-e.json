@@ -4,19 +4,80 @@
     "source-abc319-e-problem-c4a4219b20dece617d23d754c99682f553521931e1092d89b0e73b7592f56b84",
     "source-abc319-editorial-7100-2a5438d3186735365beab74de2e9243b47adce3c143ef6f82170241133983151"
   ],
-  "coreMethod": "abc319-e「Bus Stops」では、各待ち時間の法をまとめた最小公倍数 L に対し、出発時刻の剰余ごとの所要時間を前計算する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "全ての待ち条件が時刻 modulo L だけで決まり、L の倍数だけずらした行程の到着時刻も同じだけ平行移動する。",
-    "Bus Stops 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc319-e-problem-c4a4219b20dece617d23d754c99682f553521931e1092d89b0e73b7592f56b84",
+        "source-abc319-editorial-7100-2a5438d3186735365beab74de2e9243b47adce3c143ef6f82170241133983151"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["合同式と最小公倍数による周期化"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc319-e「Bus Stops」では、各待ち時間の法をまとめた最小公倍数 L に対し、出発時刻の剰余ごとの所要時間を前計算する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc319-e「Bus Stops」では、各待ち時間の法をまとめた最小公倍数 L に対し、出発時刻の剰余ごとの所要時間を前計算する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "全ての待ち条件が時刻 modulo L だけで決まり、L の倍数だけずらした行程の到着時刻も同じだけ平行移動する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Bus Stops 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc319-e「Bus Stops」では、各待ち時間の法をまとめた最小公倍数 L に対し、出発時刻の剰余ごとの所要時間を前計算する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "合同式と最小公倍数による周期化",
+      "trigger": "制約と操作を整理したときに 合同式と最小公倍数による周期化 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc319-e「Bus Stops」では、各待ち時間の法をまとめた最小公倍数 L に対し、出発時刻の剰余ごとの所要時間を前計算する。この状態表現から答えを構成する。で 合同式と最小公倍数による周期化 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "合同式と最小公倍数による周期化",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "固定の始端・終端時間を行程内へ入れる位置と、負でない modulo の定義を統一する。"
+    {
+      "text": "固定の始端・終端時間を行程内へ入れる位置と、負でない modulo の定義を統一する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Bus Stops 型の問題に対し、合同式と最小公倍数による周期化を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Bus Stops 型の問題に対し、合同式と最小公倍数による周期化を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "固定の始端・終端時間を行程内へ入れる位置と、負でない modulo の定義を統一する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

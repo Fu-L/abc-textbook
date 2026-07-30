@@ -4,19 +4,80 @@
     "source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651",
     "source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c"
   ],
-  "coreMethod": "abc253-g「Swap Many Times」では、大量の swap の辞書順区間を完全な行と端の部分行へ分け、完全行を少数回の列反転として合成する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "一行分の swap 列が suffix の cyclic shift に等しく、連続する完全行の合成が二回の反転と一致する。",
-    "Swap Many Times 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651",
+        "source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["配列反転と操作列の合成"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc253-g「Swap Many Times」では、大量の swap の辞書順区間を完全な行と端の部分行へ分け、完全行を少数回の列反転として合成する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc253-g「Swap Many Times」では、大量の swap の辞書順区間を完全な行と端の部分行へ分け、完全行を少数回の列反転として合成する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "一行分の swap 列が suffix の cyclic shift に等しく、連続する完全行の合成が二回の反転と一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Swap Many Times 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc253-g「Swap Many Times」では、大量の swap の辞書順区間を完全な行と端の部分行へ分け、完全行を少数回の列反転として合成する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "配列反転と操作列の合成",
+      "trigger": "制約と操作を整理したときに 配列反転と操作列の合成 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc253-g「Swap Many Times」では、大量の swap の辞書順区間を完全な行と端の部分行へ分け、完全行を少数回の列反転として合成する。この状態表現から答えを構成する。で 配列反転と操作列の合成 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "配列反転と操作列の合成",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "L・R を行内 offset へ変換し、完全行の前後に残る O(N) 個の swap だけを直接実行する。"
+    {
+      "text": "L・R を行内 offset へ変換し、完全行の前後に残る O(N) 個の swap だけを直接実行する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Swap Many Times 型の問題に対し、配列反転と操作列の合成を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Swap Many Times 型の問題に対し、配列反転と操作列の合成を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "L・R を行内 offset へ変換し、完全行の前後に残る O(N) 個の swap だけを直接実行する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

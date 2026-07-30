@@ -4,19 +4,80 @@
     "source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b",
     "source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e"
   ],
-  "coreMethod": "abc260-f「Find 4-cycle」では、小さい側の頂点対ごとに最初の共通隣接点を記録し、二個目を見つけた時点で 4-cycle を復元する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "4-cycle は小さい側の二頂点と、それらを共有する異なる二隣接点の組に必要十分に対応する。",
-    "Find 4-cycle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b",
+        "source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["鳩ノ巣原理と二部グラフの 4-cycle"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc260-f「Find 4-cycle」では、小さい側の頂点対ごとに最初の共通隣接点を記録し、二個目を見つけた時点で 4-cycle を復元する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc260-f「Find 4-cycle」では、小さい側の頂点対ごとに最初の共通隣接点を記録し、二個目を見つけた時点で 4-cycle を復元する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "4-cycle は小さい側の二頂点と、それらを共有する異なる二隣接点の組に必要十分に対応する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Find 4-cycle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc260-f「Find 4-cycle」では、小さい側の頂点対ごとに最初の共通隣接点を記録し、二個目を見つけた時点で 4-cycle を復元する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "鳩ノ巣原理と二部グラフの 4-cycle",
+      "trigger": "制約と操作を整理したときに 鳩ノ巣原理と二部グラフの 4-cycle の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc260-f「Find 4-cycle」では、小さい側の頂点対ごとに最初の共通隣接点を記録し、二個目を見つけた時点で 4-cycle を復元する。この状態表現から答えを構成する。で 鳩ノ巣原理と二部グラフの 4-cycle を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "鳩ノ巣原理と二部グラフの 4-cycle",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "同一頂点対を unordered に正規化し、最初の witness と現在頂点が異なることを確認する。"
+    {
+      "text": "同一頂点対を unordered に正規化し、最初の witness と現在頂点が異なることを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Find 4-cycle 型の問題に対し、鳩ノ巣原理と二部グラフの 4-cycleを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Find 4-cycle 型の問題に対し、鳩ノ巣原理と二部グラフの 4-cycleを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "同一頂点対を unordered に正規化し、最初の witness と現在頂点が異なることを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

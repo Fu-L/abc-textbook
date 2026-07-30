@@ -4,17 +4,90 @@
     "source-abc379-editorial-11309-8919f169b4e747b33f78529614802e8cbe94424c249443424ee87563093fb8c5",
     "source-abc379-f-problem-82dc25ffda54fdaed747134be3455bd303a1e2dc789ce44d64a96f6517140140"
   ],
-  "coreMethod": "abc379-f「Buildings 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
-    "Buildings 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc379-editorial-11309-8919f169b4e747b33f78529614802e8cbe94424c249443424ee87563093fb8c5",
+        "source-abc379-f-problem-82dc25ffda54fdaed747134be3455bd303a1e2dc789ce44d64a96f6517140140"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["半開区間の扱い", "Fenwick tree"],
-  "implementationConcerns": ["内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc379-f「Buildings 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc379-f「Buildings 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Buildings 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc379-f「Buildings 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "半開区間の扱い",
+      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc379-f「Buildings 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Fenwick tree",
+      "trigger": "制約と操作を整理したときに Fenwick tree の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc379-f「Buildings 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で Fenwick tree を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "半開区間の扱い",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Fenwick tree",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Buildings 2 型の 区間端点と包含関係に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Buildings 2 型の 区間端点と包含関係に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

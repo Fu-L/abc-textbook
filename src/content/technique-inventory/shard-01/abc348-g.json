@@ -4,19 +4,90 @@
     "source-abc348-editorial-9707-e31a81617e57dd150c2c05cfe814e6a9b424cc80720ccfe1da0f26a7f8fad44a",
     "source-abc348-g-problem-c6f9ebb220dc35e4c233cabf0a3b5e1898952199a2414b14ee2c8587232d84a4"
   ],
-  "coreMethod": "abc348-g「Max (Sum - Max)」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "全対象が左・右・境界をまたぐものの三種に分かれ、再帰解と merge が互いに重複なく覆う。",
-    "Max (Sum - Max) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc348-editorial-9707-e31a81617e57dd150c2c05cfe814e6a9b424cc80720ccfe1da0f26a7f8fad44a",
+        "source-abc348-g-problem-c6f9ebb220dc35e4c233cabf0a3b5e1898952199a2414b14ee2c8587232d84a4"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["配列と prefix の添字管理", "分割統治"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc348-g「Max (Sum - Max)」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc348-g「Max (Sum - Max)」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "全対象が左・右・境界をまたぐものの三種に分かれ、再帰解と merge が互いに重複なく覆う。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Max (Sum - Max) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc348-g「Max (Sum - Max)」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "配列と prefix の添字管理",
+      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc348-g「Max (Sum - Max)」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "分割統治",
+      "trigger": "制約と操作を整理したときに 分割統治 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc348-g「Max (Sum - Max)」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 分割統治 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "配列と prefix の添字管理",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "分割統治",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。"
+    {
+      "text": "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Max (Sum - Max) 型の 列の順序と prefix 状態に対し、分割統治を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Max (Sum - Max) 型の 列の順序と prefix 状態に対し、分割統治を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

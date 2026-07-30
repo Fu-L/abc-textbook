@@ -4,19 +4,90 @@
     "source-abc277-editorial-5206-14af14904ec3ad231acf4708459f0200d373946b9f51e04c31502e64f36edd55",
     "source-abc277-g-problem-2ed36a8919af830606b7492d0612289cead83ec578ec2c13b7213708d642c787"
   ],
-  "coreMethod": "abc277-g「Random Walk to Millionaire」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
-    "Random Walk to Millionaire 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc277-editorial-5206-14af14904ec3ad231acf4708459f0200d373946b9f51e04c31502e64f36edd55",
+        "source-abc277-g-problem-2ed36a8919af830606b7492d0612289cead83ec578ec2c13b7213708d642c787"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["グラフの到達可能性", "条件付き期待値と確率 DP"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc277-g「Random Walk to Millionaire」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc277-g「Random Walk to Millionaire」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Random Walk to Millionaire 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc277-g「Random Walk to Millionaire」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "グラフの到達可能性",
+      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc277-g「Random Walk to Millionaire」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "条件付き期待値と確率 DP",
+      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc277-g「Random Walk to Millionaire」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "グラフの到達可能性",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "条件付き期待値と確率 DP",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。"
+    {
+      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Random Walk to Millionaire 型の 頂点と辺からなる状態グラフに対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Random Walk to Millionaire 型の 頂点と辺からなる状態グラフに対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

@@ -4,19 +4,80 @@
     "source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37",
     "source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"
   ],
-  "coreMethod": "abc323-g「Inversion of Tree」では、条件付き辺へ形式変数を付けた Laplacian minor の行列式を作り、係数として条件別の全域木数を取り出す。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "Matrix-Tree 定理で各全域木の辺重み積が行列式へ一度現れ、形式変数の次数が選んだ対象辺数に一致する。",
-    "Inversion of Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37",
+        "source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["Matrix-Tree 定理と行列式多項式"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc323-g「Inversion of Tree」では、条件付き辺へ形式変数を付けた Laplacian minor の行列式を作り、係数として条件別の全域木数を取り出す。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc323-g「Inversion of Tree」では、条件付き辺へ形式変数を付けた Laplacian minor の行列式を作り、係数として条件別の全域木数を取り出す。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "Matrix-Tree 定理で各全域木の辺重み積が行列式へ一度現れ、形式変数の次数が選んだ対象辺数に一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Inversion of Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc323-g「Inversion of Tree」では、条件付き辺へ形式変数を付けた Laplacian minor の行列式を作り、係数として条件別の全域木数を取り出す。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "Matrix-Tree 定理と行列式多項式",
+      "trigger": "制約と操作を整理したときに Matrix-Tree 定理と行列式多項式 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc323-g「Inversion of Tree」では、条件付き辺へ形式変数を付けた Laplacian minor の行列式を作り、係数として条件別の全域木数を取り出す。この状態表現から答えを構成する。で Matrix-Tree 定理と行列式多項式 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "Matrix-Tree 定理と行列式多項式",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "有限体上で評価・補間する場合は相異なる評価点を選び、特異な shift と符号を処理する。"
+    {
+      "text": "有限体上で評価・補間する場合は相異なる評価点を選び、特異な shift と符号を処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Inversion of Tree 型の問題に対し、Matrix-Tree 定理と行列式多項式を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Inversion of Tree 型の問題に対し、Matrix-Tree 定理と行列式多項式を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "有限体上で評価・補間する場合は相異なる評価点を選び、特異な shift と符号を処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

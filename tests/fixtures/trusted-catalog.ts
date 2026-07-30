@@ -2,6 +2,76 @@ import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 
 const sha = (character: string): string => character.repeat(64);
 
+export const makeProblemAnalysisFixture = (
+  problemId: string,
+  sourceRevisionId: string,
+  reviewStatus: 'draft' | 'reviewed' = 'reviewed',
+) => {
+  const evidenceId = 'evidence-official-analysis';
+  const evidence = {
+    id: evidenceId,
+    sourceRevisionIds: [sourceRevisionId],
+    rationale: 'The official fixture source supports this analysis.',
+  };
+  const evidenceIds = [evidenceId];
+  const claim = (text: string) => ({ text, evidenceIds });
+  return {
+    problemId,
+    sourceRevisionIds: [sourceRevisionId],
+    evidence: [evidence],
+    reasoningPath: {
+      observations: [claim('The fixture constraints expose one reusable transition state.')],
+      candidateApproaches: [
+        {
+          approach: 'Track and reuse the transition state.',
+          decision: 'adopted' as const,
+          decisionReason: 'It preserves exactly the information required by the next step.',
+          evidenceIds,
+        },
+        ...(reviewStatus === 'reviewed'
+          ? [
+              {
+                approach: 'Enumerate every complete transition history.',
+                decision: 'rejected' as const,
+                decisionReason: 'It repeats histories that have identical future behavior.',
+                evidenceIds,
+              },
+            ]
+          : []),
+      ],
+      keyInsights: [claim('Equal transition states have equal future behavior.')],
+      algorithmConnection: claim(
+        'Store each transition state once and propagate its result to the next state.',
+      ),
+    },
+    typicalTechniques: [],
+    ...(reviewStatus === 'reviewed'
+      ? {
+          typicalTechniqueOmissionReason: claim(
+            'The fixture has no separate reusable technique beyond its stated invariant.',
+          ),
+        }
+      : {}),
+    problemSpecificInsights: [
+      {
+        insight: 'Only the current transition state changes future choices.',
+        reusablePerspective: 'Compare histories by the information needed for their next move.',
+        evidenceIds,
+      },
+    ],
+    asymptoticComplexity: { time: 'O(1)', space: 'O(1)', evidenceIds },
+    prerequisiteCandidates: [],
+    implementationConcerns: [],
+    outcomeCandidates: [claim('Identify the reusable state and justify every transition from it.')],
+    reviewAdvice: [
+      claim('Reconstruct why the transition state is sufficient before reading the solution.'),
+    ],
+    authorId: 'person-author',
+    reviewStatus,
+    reviewFindings: [],
+  };
+};
+
 const registrySubject = {
   version: '1.0.0' as const,
   labels: ['E' as const],
@@ -119,21 +189,7 @@ export const makeTrustedCatalog = (releaseOverrides: Record<string, unknown>) =>
       placementId: null,
     },
   ],
-  techniqueInventory: [
-    {
-      problemId: 'abc212-x45',
-      sourceRevisionIds: ['source-revision-abc212-e'],
-      coreMethod: 'Fixture method.',
-      proofIdeas: ['Fixture proof.'],
-      asymptoticComplexity: { time: 'O(1)', space: 'O(1)' },
-      prerequisiteCandidates: [],
-      implementationConcerns: [],
-      outcomeCandidates: ['Fixture outcome.'],
-      adHocElements: [],
-      authorId: 'person-author',
-      reviewStatus: 'reviewed' as const,
-    },
-  ],
+  techniqueInventory: [makeProblemAnalysisFixture('abc212-x45', 'source-revision-abc212-e')],
   tags: [
     {
       id: 'tag-graphs',

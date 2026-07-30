@@ -4,17 +4,90 @@
     "source-abc329-e-problem-08b77404997243d3c43a9cdd8e62a6b077cdb9a32d67f7f1dfbfbc31f15343a0",
     "source-abc329-editorial-7724-b6c3d4eacfc178c8ae6a1c4b47a0f4f371762ce09d782ddfdf1650f19e7b9c61"
   ],
-  "coreMethod": "abc329-e「Stamp」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
-  "proofIdeas": [
-    "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
-    "Stamp 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc329-e-problem-08b77404997243d3c43a9cdd8e62a6b077cdb9a32d67f7f1dfbfbc31f15343a0",
+        "source-abc329-editorial-7724-b6c3d4eacfc178c8ae6a1c4b47a0f4f371762ce09d782ddfdf1650f19e7b9c61"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["文字列の添字と prefix", "greedy choice と交換論法"],
-  "implementationConcerns": ["同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc329-e「Stamp」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc329-e「Stamp」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Stamp 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc329-e「Stamp」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "文字列の添字と prefix",
+      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc329-e「Stamp」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "greedy choice と交換論法",
+      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc329-e「Stamp」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "文字列の添字と prefix",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "greedy choice と交換論法",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Stamp 型の 文字列の prefix・suffix と一致関係に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Stamp 型の 文字列の prefix・suffix と一致関係に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

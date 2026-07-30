@@ -4,17 +4,80 @@
     "source-abc385-editorial-11664-76d5a0bbd1baef5fe071c2d300507fca7164300e970ad633d9c5f17e3591e920",
     "source-abc385-f-problem-75176a21b1f00a0a84ff4c1c5737571a51db5a16d6aefba6f634abe016ff81d2"
   ],
-  "coreMethod": "abc385-f「Visible Buildings」では、全ての建物対の可視条件を、中間点による支配関係を使って隣接対だけの高さ下限へ縮約する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "非隣接対の間から任意の建物を取ると、二つの短い対の少なくとも一方が元の対以上に厳しい制約を与える。",
-    "Visible Buildings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc385-editorial-11664-76d5a0bbd1baef5fe071c2d300507fca7164300e970ad633d9c5f17e3591e920",
+        "source-abc385-f-problem-75176a21b1f00a0a84ff4c1c5737571a51db5a16d6aefba6f634abe016ff81d2"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["直線の傾きと支配関係"],
-  "implementationConcerns": ["分子を整数で交差計算して桁落ちを避け、除算は最後に一度だけ行う。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc385-f「Visible Buildings」では、全ての建物対の可視条件を、中間点による支配関係を使って隣接対だけの高さ下限へ縮約する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc385-f「Visible Buildings」では、全ての建物対の可視条件を、中間点による支配関係を使って隣接対だけの高さ下限へ縮約する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "非隣接対の間から任意の建物を取ると、二つの短い対の少なくとも一方が元の対以上に厳しい制約を与える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Visible Buildings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc385-f「Visible Buildings」では、全ての建物対の可視条件を、中間点による支配関係を使って隣接対だけの高さ下限へ縮約する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "直線の傾きと支配関係",
+      "trigger": "制約と操作を整理したときに 直線の傾きと支配関係 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc385-f「Visible Buildings」では、全ての建物対の可視条件を、中間点による支配関係を使って隣接対だけの高さ下限へ縮約する。この状態表現から答えを構成する。で 直線の傾きと支配関係 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "直線の傾きと支配関係",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "分子を整数で交差計算して桁落ちを避け、除算は最後に一度だけ行う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Visible Buildings 型の問題に対し、直線の傾きと支配関係を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Visible Buildings 型の問題に対し、直線の傾きと支配関係を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "分子を整数で交差計算して桁落ちを避け、除算は最後に一度だけ行う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

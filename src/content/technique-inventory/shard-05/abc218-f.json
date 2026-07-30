@@ -4,22 +4,102 @@
     "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
     "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"
   ],
-  "coreMethod": "abc218-f「Blocked Roads」では、元 graph で最短路を一本復元し、その路上辺を削除した場合だけ BFS を再実行し、他辺は元距離を再利用する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "選んだ最短路に含まれない辺を削除してもその路が残るため距離は変わらず、再計算対象は高々 N-1 辺である。",
-    "Blocked Roads 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+        "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
+  ],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "一辺削除後の最短距離を全辺について求めるが、元グラフの最短路を一本固定すると、その路にない辺の削除後も同じ路が残る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "元の最短路を一本復元し、その路上の辺を削除する場合だけ BFS を再実行する。",
+        "decision": "adopted",
+        "decisionReason": "答えが変わり得る辺を高々 N-1 本へ限定でき、他の辺には元距離をそのまま使える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "M 本の各辺を一つずつ削除して毎回 BFS を行う。",
+        "decision": "rejected",
+        "decisionReason": "正しいが O(M(N+M)) となり、最短路外の辺について同じ探索を繰り返す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "固定した最短路に含まれない辺を削除しても、その最短路は削除後のグラフに残る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "一度目の BFS で距離と predecessor edge を記録し、復元した路上辺だけ edge id で無効化して再探索する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "最短路復元による影響範囲限定",
+      "trigger": "要素を一つ除いた各ケースを問われ、元の最適解が残るケースを判別できるとき。",
+      "application": "元の最短路を証明用 witness として固定し、路上辺だけ再計算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "BFS",
+      "trigger": "無向または有向の単位重みグラフで最短距離を求めるとき。",
+      "application": "削除対象の edge id を読み飛ばして始点から距離を再計算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [
+    {
+      "insight": "最短路は全て列挙せず一本だけ固定すればよく、その一本が残るかどうかで再計算の必要性を判定できる。",
+      "reusablePerspective": "各変更後の再計算問題では、元の解を witness として固定し、変更がその witness を壊す場合だけを抽出する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "asymptoticComplexity": {
-    "time": "O(N[N+M])（公式解法全体。特殊な計算量解析を含む）"
+    "time": "O(N[N+M])（公式解法全体。特殊な計算量解析を含む）",
+    "evidenceIds": ["evidence-official-analysis"]
   },
-  "prerequisiteCandidates": ["BFS と最短路復元", "特殊な漸近計算量の見積もり"],
+  "prerequisiteCandidates": [
+    {
+      "text": "BFS と最短路復元",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "特殊な漸近計算量の見積もり",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "辺を端点 pair でなく edge id で無効化し、元々終点へ到達不能な場合を全問 -1 とする。"
+    {
+      "text": "辺を端点 pair でなく edge id で無効化し、元々終点へ到達不能な場合を全問 -1 とする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Blocked Roads 型の問題に対し、BFS と最短路復元を選び、状態・証明・特殊計算量を一貫して設計できる。"
+    {
+      "text": "Blocked Roads 型の問題に対し、BFS と最短路復元を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "「最短路にない辺の削除で距離が短くならない／長くならない」の両方向を説明してから計算量を導く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "reviewed",
+  "reviewFindings": []
 }

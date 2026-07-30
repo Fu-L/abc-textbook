@@ -10,9 +10,9 @@ import {
   ContestSchema,
   ContestSlotRecordSchema,
   OfficialContestGapMetadataSchema,
+  ProblemAnalysisRecordSchema,
   ProblemSchema,
   SourceRevisionSchema,
-  TechniqueInventoryItemSchema,
 } from '../domain/schema-parts/catalog.js';
 import { canonicalDigest, digestWithoutField } from '../domain/canonical-json.js';
 import { normalizeProblemLabel, stableContestId, stableProblemId } from '../domain/identity.js';
@@ -36,7 +36,7 @@ type Contest = z.infer<typeof ContestSchema>;
 type ContestSlotRecord = z.infer<typeof ContestSlotRecordSchema>;
 type Problem = z.infer<typeof ProblemSchema>;
 type SourceRevision = z.infer<typeof SourceRevisionSchema>;
-type TechniqueInventoryItem = z.infer<typeof TechniqueInventoryItemSchema>;
+type TechniqueInventoryItem = z.infer<typeof ProblemAnalysisRecordSchema>;
 
 const nonEmptyText = z.string().trim().min(1);
 const sha256 = z.string().regex(SHA_256);
@@ -581,7 +581,7 @@ const loadCanonicalInventory = async (
       const entity = await parseJson(
         path.join(absoluteShard, entry.name),
         relativeFile,
-        TechniqueInventoryItemSchema,
+        ProblemAnalysisRecordSchema,
       );
       if (entry.name !== `${entity.problemId}.json`) {
         throw new CorpusInventoryLoadError(
@@ -607,7 +607,7 @@ const loadPreviewInventory = async (
     const entity = await parseJson(
       file.absolutePath,
       file.relativePath,
-      TechniqueInventoryItemSchema,
+      ProblemAnalysisRecordSchema,
     );
     if (path.basename(file.relativePath) !== `${entity.problemId}.json`) {
       throw new CorpusInventoryLoadError(
@@ -839,9 +839,23 @@ const PLACEHOLDER_TEXT =
 const ASYMPTOTIC_NOTATION = /(?:O|Θ)\s*\([^()\r\n]+\)/u;
 const codePointLength = (value: string): number => Array.from(value.trim()).length;
 const hasShallowInventoryAnalysis = (item: TechniqueInventoryItem): boolean =>
-  codePointLength(item.coreMethod) < 20 ||
-  item.proofIdeas.some((proofIdea) => codePointLength(proofIdea) < 15) ||
-  item.outcomeCandidates.some((outcome) => codePointLength(outcome) < 15);
+  item.reasoningPath.observations.some(({ text }) => codePointLength(text) < 15) ||
+  item.reasoningPath.candidateApproaches.some(
+    ({ approach, decisionReason }) =>
+      codePointLength(approach) < 15 || codePointLength(decisionReason) < 15,
+  ) ||
+  item.reasoningPath.keyInsights.some(({ text }) => codePointLength(text) < 15) ||
+  codePointLength(item.reasoningPath.algorithmConnection.text) < 20 ||
+  item.typicalTechniques.some(
+    ({ trigger, application }) =>
+      codePointLength(trigger) < 15 || codePointLength(application) < 15,
+  ) ||
+  item.problemSpecificInsights.some(
+    ({ insight, reusablePerspective }) =>
+      codePointLength(insight) < 15 || codePointLength(reusablePerspective) < 15,
+  ) ||
+  item.outcomeCandidates.some(({ text }) => codePointLength(text) < 15) ||
+  item.reviewAdvice.some(({ text }) => codePointLength(text) < 15);
 const hasExplicitAsymptoticComplexity = (item: TechniqueInventoryItem): boolean => {
   const complexity = item.asymptoticComplexity;
   if (!complexity) return true;
@@ -1216,17 +1230,19 @@ export const validateTechniqueInventoryCorpus = (
       add('TECHNIQUE_INVENTORY_ORPHAN', problemId, problemId);
     }
   }
-  const coreMethodOwners = new Map<string, string[]>();
+  const algorithmConnectionOwners = new Map<string, string[]>();
   for (const item of inventory) {
-    const normalizedCoreMethod = item.coreMethod.trim().normalize('NFC');
-    const owners = coreMethodOwners.get(normalizedCoreMethod) ?? [];
+    const normalizedConnection = item.reasoningPath.algorithmConnection.text
+      .trim()
+      .normalize('NFC');
+    const owners = algorithmConnectionOwners.get(normalizedConnection) ?? [];
     owners.push(item.problemId);
-    coreMethodOwners.set(normalizedCoreMethod, owners);
+    algorithmConnectionOwners.set(normalizedConnection, owners);
   }
-  for (const [coreMethod, ownerIds] of coreMethodOwners) {
+  for (const [algorithmConnection, ownerIds] of algorithmConnectionOwners) {
     if (ownerIds.length > 1) {
       for (const problemId of ownerIds) {
-        add('TECHNIQUE_INVENTORY_CORE_METHOD_DUPLICATE', coreMethod, problemId);
+        add('TECHNIQUE_INVENTORY_ALGORITHM_CONNECTION_DUPLICATE', algorithmConnection, problemId);
       }
     }
   }
@@ -1264,7 +1280,7 @@ export const validateTechniqueInventoryCorpus = (
     if (hasShallowInventoryAnalysis(item)) {
       add(
         'TECHNIQUE_INVENTORY_ANALYSIS_TOO_SHALLOW',
-        'coreMethod/proofIdeas/outcomeCandidates do not meet the minimum substantive length.',
+        'Reasoning path, insights, outcomes, or review advice do not meet the minimum substantive length.',
         item.problemId,
       );
     }

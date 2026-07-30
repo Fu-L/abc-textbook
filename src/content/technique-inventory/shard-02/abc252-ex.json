@@ -4,22 +4,94 @@
     "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
     "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"
   ],
-  "coreMethod": "abc252-ex「K-th beautiful Necklace」では、色ごとの選択数の積が均衡するよう色集合を二分し、各半分の XOR を列挙して binary trie の共有走査で K 番目を上位 bit から決める。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "各ネックレスは左右の選択の組へ一意に分かれ、trie の分岐数が現在の prefix を満たす組数になるため、組数との比較で答えの各 bit を確定できる。",
-    "K-th beautiful Necklace 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
+        "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "asymptoticComplexity": {
-    "time": "O(3^{N/6} log V)（公式解法全体。特殊な計算量解析を含む）"
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc252-ex「K-th beautiful Necklace」では、色ごとの選択数の積が均衡するよう色集合を二分し、各半分の XOR を列挙して binary trie の共有走査で K 番目を上位 bit から決める。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc252-ex「K-th beautiful Necklace」では、色ごとの選択数の積が均衡するよう色集合を二分し、各半分の XOR を列挙して binary trie の共有走査で K 番目を上位 bit から決める。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "各ネックレスは左右の選択の組へ一意に分かれ、trie の分岐数が現在の prefix を満たす組数になるため、組数との比較で答えの各 bit を確定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "K-th beautiful Necklace 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc252-ex「K-th beautiful Necklace」では、色ごとの選択数の積が均衡するよう色集合を二分し、各半分の XOR を列挙して binary trie の共有走査で K 番目を上位 bit から決める。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   },
-  "prerequisiteCandidates": ["半分全列挙、binary trie、XOR の辞書順", "特殊な漸近計算量の見積もり"],
+  "typicalTechniques": [
+    {
+      "name": "半分全列挙、binary trie、XOR の辞書順",
+      "trigger": "制約と操作を整理したときに 半分全列挙、binary trie、XOR の辞書順 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc252-ex「K-th beautiful Necklace」では、色ごとの選択数の積が均衡するよう色集合を二分し、各半分の XOR を列挙して binary trie の共有走査で K 番目を上位 bit から決める。この状態表現から答えを構成する。で 半分全列挙、binary trie、XOR の辞書順 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "特殊な漸近計算量の見積もり",
+      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc252-ex「K-th beautiful Necklace」では、色ごとの選択数の積が均衡するよう色集合を二分し、各半分の XOR を列挙して binary trie の共有走査で K 番目を上位 bit から決める。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "asymptoticComplexity": {
+    "time": "O(3^{N/6} log V)（公式解法全体。特殊な計算量解析を含む）",
+    "evidenceIds": ["evidence-official-analysis"]
+  },
+  "prerequisiteCandidates": [
+    {
+      "text": "半分全列挙、binary trie、XOR の辞書順",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "特殊な漸近計算量の見積もり",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "左右の列挙数が均衡するよう色単位で分割し、前の bit で到達した trie node から探索を再開する。"
+    {
+      "text": "左右の列挙数が均衡するよう色単位で分割し、前の bit で到達した trie node から探索を再開する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "K-th beautiful Necklace 型の問題に対し、半分全列挙、binary trie、XOR の辞書順を選び、状態・証明・特殊計算量を一貫して設計できる。"
+    {
+      "text": "K-th beautiful Necklace 型の問題に対し、半分全列挙、binary trie、XOR の辞書順を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "左右の列挙数が均衡するよう色単位で分割し、前の bit で到達した trie node から探索を再開する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

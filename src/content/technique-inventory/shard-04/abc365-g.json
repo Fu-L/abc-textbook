@@ -4,19 +4,80 @@
     "source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9",
     "source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c"
   ],
-  "coreMethod": "abc365-g「AtCoder Office」では、各人の在室区間数を閾値 C で heavy・light に分け、heavy との重なりを全走査で前計算し light 同士は query 時に merge する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "light pair は区間 merge が O(C)、heavy は人数が高々 M/C なので全時系列との前計算総量が閾値で抑えられる。",
-    "AtCoder Office 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc365-editorial-10584-a5807169b9966b0e2c2aaffe6dc1028c54cafcfd98b98df716c1673375602dc9",
+        "source-abc365-g-problem-037b69f2373e1359ee5535729f241e515b954962a237d897aa4d6233af554a4c"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["区間列 merge と heavy-light 分類"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc365-g「AtCoder Office」では、各人の在室区間数を閾値 C で heavy・light に分け、heavy との重なりを全走査で前計算し light 同士は query 時に merge する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc365-g「AtCoder Office」では、各人の在室区間数を閾値 C で heavy・light に分け、heavy との重なりを全走査で前計算し light 同士は query 時に merge する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "light pair は区間 merge が O(C)、heavy は人数が高々 M/C なので全時系列との前計算総量が閾値で抑えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "AtCoder Office 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc365-g「AtCoder Office」では、各人の在室区間数を閾値 C で heavy・light に分け、heavy との重なりを全走査で前計算し light 同士は query 時に merge する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "区間列 merge と heavy-light 分類",
+      "trigger": "制約と操作を整理したときに 区間列 merge と heavy-light 分類 の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc365-g「AtCoder Office」では、各人の在室区間数を閾値 C で heavy・light に分け、heavy との重なりを全走査で前計算し light 同士は query 時に merge する。この状態表現から答えを構成する。で 区間列 merge と heavy-light 分類 を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "区間列 merge と heavy-light 分類",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "入退室 event を半開区間へ変換し、C を Q·C と M·N/C の釣り合いから選ぶ。"
+    {
+      "text": "入退室 event を半開区間へ変換し、C を Q·C と M·N/C の釣り合いから選ぶ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "AtCoder Office 型の問題に対し、区間列 merge と heavy-light 分類を選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "AtCoder Office 型の問題に対し、区間列 merge と heavy-light 分類を選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "入退室 event を半開区間へ変換し、C を Q·C と M·N/C の釣り合いから選ぶ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

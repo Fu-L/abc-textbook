@@ -54,7 +54,7 @@ export interface ProvisionalTaxonomyManifestInput {
 export interface ProvisionalInventoryItemInput {
   readonly problemId: string;
   readonly sourceRevisionIds: readonly string[];
-  readonly outcomeCandidates: readonly string[];
+  readonly outcomeCandidates: readonly { readonly text: string }[];
   readonly reviewStatus: 'draft' | 'reviewed' | 'changes_requested';
 }
 

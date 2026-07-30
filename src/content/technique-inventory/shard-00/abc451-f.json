@@ -4,22 +4,94 @@
     "source-abc451-editorial-18091-ee0e42ed4ad9b07800e171e23a7943b9727d1666e268304fbe47d241fe0b351a",
     "source-abc451-f-problem-1795336b8ffdf013868cbc1740d0a0261d6fb20324849793e539548d9821aeb5"
   ],
-  "coreMethod": "abc451-f「Make Bipartite 3」では、各二部連結成分の二色集合を管理し、新辺で成分を結ぶ際に小さい側だけを必要なら反転して DSU merge する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "二部成分の彩色は全反転を除き一意で、小さい成分の頂点は走査されるたび所属成分サイズが倍以上になる。",
-    "Make Bipartite 3 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc451-editorial-18091-ee0e42ed4ad9b07800e171e23a7943b9727d1666e268304fbe47d241fe0b351a",
+        "source-abc451-f-problem-1795336b8ffdf013868cbc1740d0a0261d6fb20324849793e539548d9821aeb5"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "asymptoticComplexity": {
-    "time": "O(Q α[N] + N log N)（公式解法全体。特殊な計算量解析を含む）"
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc451-f「Make Bipartite 3」では、各二部連結成分の二色集合を管理し、新辺で成分を結ぶ際に小さい側だけを必要なら反転して DSU merge する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc451-f「Make Bipartite 3」では、各二部連結成分の二色集合を管理し、新辺で成分を結ぶ際に小さい側だけを必要なら反転して DSU merge する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "二部成分の彩色は全反転を除き一意で、小さい成分の頂点は走査されるたび所属成分サイズが倍以上になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Make Bipartite 3 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc451-f「Make Bipartite 3」では、各二部連結成分の二色集合を管理し、新辺で成分を結ぶ際に小さい側だけを必要なら反転して DSU merge する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   },
-  "prerequisiteCandidates": ["二部彩色、DSU、small-to-large merge", "特殊な漸近計算量の見積もり"],
+  "typicalTechniques": [
+    {
+      "name": "二部彩色、DSU、small-to-large merge",
+      "trigger": "制約と操作を整理したときに 二部彩色、DSU、small-to-large merge の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc451-f「Make Bipartite 3」では、各二部連結成分の二色集合を管理し、新辺で成分を結ぶ際に小さい側だけを必要なら反転して DSU merge する。この状態表現から答えを構成する。で 二部彩色、DSU、small-to-large merge を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "特殊な漸近計算量の見積もり",
+      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc451-f「Make Bipartite 3」では、各二部連結成分の二色集合を管理し、新辺で成分を結ぶ際に小さい側だけを必要なら反転して DSU merge する。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "asymptoticComplexity": {
+    "time": "O(Q α[N] + N log N)（公式解法全体。特殊な計算量解析を含む）",
+    "evidenceIds": ["evidence-official-analysis"]
+  },
+  "prerequisiteCandidates": [
+    {
+      "text": "二部彩色、DSU、small-to-large merge",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "特殊な漸近計算量の見積もり",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "implementationConcerns": [
-    "同一成分内の同色辺で以後不可能を固定し、成分寄与 min(白,黒) を merge 前後で差分更新する。"
+    {
+      "text": "同一成分内の同色辺で以後不可能を固定し、成分寄与 min(白,黒) を merge 前後で差分更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
   "outcomeCandidates": [
-    "Make Bipartite 3 型の問題に対し、二部彩色、DSU、small-to-large mergeを選び、状態・証明・特殊計算量を一貫して設計できる。"
+    {
+      "text": "Make Bipartite 3 型の問題に対し、二部彩色、DSU、small-to-large mergeを選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "同一成分内の同色辺で以後不可能を固定し、成分寄与 min(白,黒) を merge 前後で差分更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }

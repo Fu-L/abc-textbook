@@ -4,17 +4,80 @@
     "source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577",
     "source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238"
   ],
-  "coreMethod": "abc334-g「Christmas Color Grid 2」では、DFS 木の訪問順と lowlink を計算し、頂点除去で連結成分が分かれる条件を判定する。この状態表現から答えを構成する。",
-  "proofIdeas": [
-    "子部分木から祖先へ戻れる最小訪問順を lowlink に保つと、親より上へ戻れない子ごとに頂点除去後の成分が一つ増える。",
-    "Christmas Color Grid 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。"
+  "evidence": [
+    {
+      "id": "evidence-official-analysis",
+      "sourceRevisionIds": [
+        "source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577",
+        "source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238"
+      ],
+      "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
+    }
   ],
-  "prerequisiteCandidates": ["DFS 木と lowlink"],
-  "implementationConcerns": ["根だけは DFS 木の子数で判定し、親への木辺と多重辺を区別する。"],
+  "reasoningPath": {
+    "observations": [
+      {
+        "text": "abc334-g「Christmas Color Grid 2」では、DFS 木の訪問順と lowlink を計算し、頂点除去で連結成分が分かれる条件を判定する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "candidateApproaches": [
+      {
+        "approach": "abc334-g「Christmas Color Grid 2」では、DFS 木の訪問順と lowlink を計算し、頂点除去で連結成分が分かれる条件を判定する。この状態表現から答えを構成する。",
+        "decision": "adopted",
+        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "keyInsights": [
+      {
+        "text": "子部分木から祖先へ戻れる最小訪問順を lowlink に保つと、親より上へ戻れない子ごとに頂点除去後の成分が一つ増える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Christmas Color Grid 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      }
+    ],
+    "algorithmConnection": {
+      "text": "abc334-g「Christmas Color Grid 2」では、DFS 木の訪問順と lowlink を計算し、頂点除去で連結成分が分かれる条件を判定する。この状態表現から答えを構成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  },
+  "typicalTechniques": [
+    {
+      "name": "DFS 木と lowlink",
+      "trigger": "制約と操作を整理したときに DFS 木と lowlink の構造が現れ、直接列挙を避けられる場合。",
+      "application": "abc334-g「Christmas Color Grid 2」では、DFS 木の訪問順と lowlink を計算し、頂点除去で連結成分が分かれる条件を判定する。この状態表現から答えを構成する。で DFS 木と lowlink を問題固有の状態へ適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "problemSpecificInsights": [],
+  "prerequisiteCandidates": [
+    {
+      "text": "DFS 木と lowlink",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
+  "implementationConcerns": [
+    {
+      "text": "根だけは DFS 木の子数で判定し、親への木辺と多重辺を区別する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "outcomeCandidates": [
-    "Christmas Color Grid 2 型の問題に対し、DFS 木と lowlinkを選び、状態と証明を一貫して設計できる。"
+    {
+      "text": "Christmas Color Grid 2 型の問題に対し、DFS 木と lowlinkを選び、状態と証明を一貫して設計できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
   ],
-  "adHocElements": [],
+  "reviewAdvice": [
+    {
+      "text": "根だけは DFS 木の子数で判定し、親への木辺と多重辺を区別する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "authorId": "person-maintainer",
-  "reviewStatus": "reviewed"
+  "reviewStatus": "draft",
+  "reviewFindings": []
 }
