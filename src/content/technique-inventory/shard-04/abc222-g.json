@@ -17,7 +17,11 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "同じ数字を並べた整数の K による割り切れ条件は、2 と 5 の因子を分離した法 M' 上の 10^n≡1 へ変形できる。",
+        "text": "n 桁の数は 2(10^n-1)/9 である。g=gcd(K,2) とおくと、K がこの数を割る条件は M'=9K/g が 10^n-1 を割る条件、すなわち 10^n≡1 (mod M') と同値になる。これは 9 の法逆元を取る変形ではなく、整数の可除性による変形である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "この合同式に解があるのは gcd(10,M')=1 のときだけである。共通素因子 2 または 5 があれば矛盾し、互いに素なら Euler の定理により n=φ(M') が一つの解になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
@@ -25,24 +29,24 @@
       {
         "approach": "Euler の定理で指数を φ(M') の約数へ限定し、昇順に modular power を検査して最小の乗法的位数を求める。",
         "decision": "adopted",
-        "decisionReason": "最小の解 n は φ(M') を割るため、長さを一つずつ試さず有限個の約数だけ調べればよい。",
+        "decisionReason": "gcd(10,M')=1 のとき求める最小 n は 10 の乗法的位数で、φ(M') を割る。したがって長さを順に試さず、φ(M') の約数だけを検査できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
         "approach": "余りを更新しながら長さ n を 1 から順に試す。",
         "decision": "rejected",
-        "decisionReason": "周期長が大きいケースで各 query の反復回数を制約内に抑えられない。",
+        "decisionReason": "最悪 O(M') 回の余り更新が必要で、M'≤9×10^8 のケースを T≤200 件処理する制約に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "10^n≡1 を満たす最小 n は 10 の M' における乗法的位数であり、φ(M') の約数である。",
+        "text": "gcd(10,M')=1 のとき求める n は ord_{M'}(10) である。これは有限群 (Z/M'Z)^× の元の位数なので φ(M') を割り、φ(M') の約数を昇順に調べて最初に 10^d≡1 となる d が最小解である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "解なし条件を先に判定し、φ(M') を計算してその約数を昇順に modular exponentiation で検査する。",
+      "text": "各 K について g=gcd(K,2), M'=9K/g を作る。gcd(10,M')>1 なら -1 とし、そうでなければ試し割りで φ(M') を求め、その正約数を昇順に列挙して powmod(10,d,M')=1 となる最初の d を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
@@ -58,36 +62,46 @@
       "trigger": "底と法が互いに素で最小周期を求めるとき。",
       "application": "候補指数を φ(M') の約数へ限定する。",
       "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "係数・分母を含む可除性の gcd 変形",
+      "trigger": "整数等比和 c(a^n-1)/b の K による割り切れを冪合同式へ直すとき。",
+      "application": "係数 2 は gcd(K,2) だけ消し、分母 9 は法を 9 倍して M'=9K/gcd(K,2) を作る。",
+      "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "problemSpecificInsights": [
     {
-      "insight": "repdigit の式をそのまま追わず、定数倍を払って 10^n≡1 の形にすると周期問題が見える。",
-      "reusablePerspective": "反復桁・等比和の割り切れ条件では、分母と法の gcd を処理して冪の合同式へ直せないか試す。",
+      "insight": "数字 2 の反復では係数 2 を gcd(K,2) だけ消し、分母 9 は法逆元にせず法を 9 倍するため、M'=9K/gcd(K,2) が現れる。",
+      "reusablePerspective": "反復桁・等比和の割り切れでは分母を安易に法逆元へせず、整数の可除性と gcd で冪合同式の法を作る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "prerequisiteCandidates": [
     {
-      "text": "Euler の定理、Euler φ、乗法的位数",
+      "text": "整数の可除性と gcd、Euler の φ 関数、Euler の定理、有限群における乗法的位数。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "M' が 2 または 5 と共通因子を持つ場合を解なしにし、modular power の積を安全な型で計算する。",
+      "text": "M'=9K/gcd(K,2) を 64-bit 整数で計算し、gcd(10,M')>1 なら -1 とする。φ の計算では各素因数を一度だけ反映し、約数を重複なく昇順に並べ、powmod の積も 64-bit 整数で持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "222 型の問題に対し、Euler の定理、Euler φ、乗法的位数を選び、状態と証明を一貫して設計できる。",
+      "text": "反復桁の割り切れを M'=9K/gcd(K,2) 上の乗法的位数へ変換し、解なし判定と φ(M') の約数探索で最小桁数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "最小指数が φ(M') を割る理由を、位数と Euler の定理から自力で証明する。",
+      "text": "2(10^n-1)/9 の「9 で割る」を法 K 上の逆元にせず、M'=9K/gcd(K,2) を整数の可除性から再導出する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "K=1,2,4,5,6,10 を余り更新による全探索と比較し、偶数を全て解なしにしていないか、4 または 5 の因子を見落としていないか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

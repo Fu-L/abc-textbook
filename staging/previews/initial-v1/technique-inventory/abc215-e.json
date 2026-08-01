@@ -17,7 +17,7 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "選ぶ部分列では同じ文字が一つの連続区間にだけ現れるため、過去の並び全体ではなく使用済み文字集合と末尾文字が次の選択可否を決める。",
+        "text": "文字の種類は A..J の 10 種類だけである。選ぶ部分列では各文字が高々一つの連続区間に現れるため、過去の並び全体ではなく使用済み文字集合と現在の末尾文字が次の選択可否を決める。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
@@ -26,6 +26,12 @@
         "approach": "使用済み文字の bitmask と末尾文字を状態にし、選ばない・同じ文字を続ける・未使用文字へ移る遷移を数える。",
         "decision": "adopted",
         "decisionReason": "この二情報が「一度離れた文字へ戻れない」という条件を必要十分に表す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "使用済み文字の bitmask だけを状態にして部分列を数える。",
+        "decision": "rejected",
+        "decisionReason": "同じ mask でも末尾が現在の文字かどうかで、使用済み文字を続けられるかが変わるため、将来の遷移を決定できない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
@@ -42,7 +48,7 @@
       }
     ],
     "algorithmConnection": {
-      "text": "文字列を左から走査し、mask と末尾文字の DP を三種類の遷移で更新して空でない状態を合計する。",
+      "text": "文字列を左から走査し、各位置の文字 x について current から next へ、選ばない・last=x なら同じブロックを続ける・bit x が未使用なら新ブロックを始める遷移を行う。さらにその位置だけを選ぶ singleton を next[1<<x][x] へ加え、最後に全ての非空状態を合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
@@ -69,25 +75,29 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "bitmask DP と末尾状態",
+      "text": "種類数が小さいときに使用済み集合を 2^K 状態で表す bitmask DP と、直前の種類を追加して履歴条件を局所遷移へ圧縮する考え方。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空部分列を答えから除き、同種継続と新しい種類の開始を別遷移として modulus 上で加算する。",
+      "text": "各位置ごとに next を別配列として作り、更新途中の状態から同じ位置の文字を再利用しない。選ばない遷移も current から next へ移す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "新ブロック開始は bit x が未使用の場合だけ許し、singleton の初期化を忘れない。全加算を mod 998244353 で行い、空部分列は答えに含めない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Chain Contestant 型の問題に対し、bitmask DP と末尾状態を選び、状態と証明を一貫して設計できる。",
+      "text": "各種類が高々一つの連続ブロックに現れる部分列条件を、使用済み集合と末尾種類の DP へ変換して数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "mask だけでは同種継続を区別できない理由を、小さい文字列で反例から説明する。",
+      "text": "AAB と ABA で許される部分列を列挙し、mask だけでは同種継続と再登場を区別できない理由、二層配列で同じ位置の再利用を防ぐ理由を説明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

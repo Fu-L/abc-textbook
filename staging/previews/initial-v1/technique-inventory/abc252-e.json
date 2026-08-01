@@ -17,15 +17,19 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "頂点 1 から全頂点への最短距離を保ちながら辺を N-1 本残すので、各頂点へ至る最短路の直前辺を一本ずつ選べばよい。",
+        "text": "全道路を使えるときの都市 1 から都市 v への最短距離を D_v とする。道路を N-1 本に減らした部分グラフ上の距離 d_v は必ず D_v 以上なので、目的値には Σ_{v=2}^N D_v という下界がある。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各 v≠1 について D_v=D_u+C_{uv} を満たす直前辺を一本選ぶ。C_{uv}>0 より D_u<D_v なので、親を辿るたび距離が厳密に減って都市 1 へ到達し、選んだ N-1 本は全頂点を結ぶ木になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "Dijkstra の最終緩和で各頂点の predecessor edge を記録し、根以外の N-1 本を出力する。",
+        "approach": "Dijkstra で dist[v] が厳密に改善された緩和ごとに predecessor edge を更新し、計算終了後に頂点 2..N の保存辺を出力する。",
         "decision": "adopted",
-        "decisionReason": "各 predecessor は最短距離等式を満たし、距離の小さい側から辿れば頂点 1 へ至る最短路木になる。",
+        "decisionReason": "各保存辺は dist[v]=dist[parent]+w を満たし、w>0 なので親の距離が厳密に小さい。親を辿れば都市 1 へ到達するため、N-1 本で全ての最短距離 D_v を同時に保つ木になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
@@ -37,12 +41,12 @@
     ],
     "keyInsights": [
       {
-        "text": "必要なのは全域木の総重み最小化ではなく、各頂点の dist[v]=dist[parent]+w を満たす辺を一本選ぶこと。",
+        "text": "各 d_v の個別下界 D_v を一つの最短路木で同時に達成できるため、距離和を別の全域木最適化として扱う必要はない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "Dijkstra で距離が改善されたときに edge id を保存し、頂点 2..N の保存辺を出力する。",
+      "text": "隣接辺 (v,to,w,id) で dist[to]>dist[v]+w となるたび dist[to] と parentEdge[to]=id を更新する。Dijkstra 終了後、頂点 2..N の parentEdge を出力すれば、距離和の下界を達成する N-1 本が得られる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
@@ -75,19 +79,19 @@
   ],
   "implementationConcerns": [
     {
-      "text": "同距離候補は任意の一本でよく、priority queue の stale entry から predecessor を更新しない。",
+      "text": "最短距離は最大で約 2×10^14 になるため 64-bit 整数で持つ。同距離の別候補へ更新する必要はなく、priority queue から取り出した距離が現在の dist と異なる stale entry は捨てる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Road Reduction 型の問題に対し、Dijkstra 法と shortest-path treeを選び、状態と証明を一貫して設計できる。",
+      "text": "各頂点の最短距離を個別下界として捉え、Dijkstra の predecessor 辺から全ての下界を同時に達成する最短路木を構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "MST が失敗する小さい重み付きグラフを作り、最短路木が距離を保つ帰納法を説明する。",
+      "text": "MST が距離和の下界を達成しない小グラフを作り、正の辺重みにより parent の距離が厳密に減ることから、選択辺が閉路を持たず都市 1 へ連結する証明を再構成する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

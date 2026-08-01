@@ -17,7 +17,11 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "各手で同じ行または列の別マスへ移るが、将来の遷移数は終点と行が同じか・列が同じかだけで決まる。",
+        "text": "H,W は最大 10^9 なので H×W 個のマスを状態にできない。一方 K≤10^6 なので、各手を定数個の状態で更新できれば十分間に合う。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "終点との行一致・列一致の真偽でマスを 4 分類すると、同じ分類のマスは次に各分類へ移る行先数が等しい。開始位置も、終点そのもの・同じ行だけ・同じ列だけ・どちらも異なる、のいずれかとして初期化できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
@@ -25,7 +29,7 @@
       {
         "approach": "現在位置を終点との行一致・列一致の 4 状態へ圧縮し、状態間の遷移回数を K 回更新する。",
         "decision": "adopted",
-        "decisionReason": "同じ分類内のマスは終点に対して対称で、以後の遷移先数が等しい。",
+        "decisionReason": "同じ分類内のマスは終点に対して対称で、各分類への遷移先数が等しいため、分類全体への到達通り数だけで次の値を計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
@@ -39,10 +43,14 @@
       {
         "text": "座標そのものではなく、終点の行・列との一致関係が遷移に関する十分統計量になる。",
         "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各状態には分類全体への到達通り数を持つ。例えば「終点と同じ行・異なる列」からは、終点へ 1 通り、同じ分類へ W-2 通り、行も列も異なる分類へ H-1 通り移れる。",
+        "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "4 状態それぞれから同一行・同一列へ移る行先個数を係数にして K 回 DP する。",
+      "text": "状態を A=終点、B=同じ行だけ、C=同じ列だけ、D=どちらも異なる、とする。次の値は A'=B+C、B'=(W-1)A+(W-2)B+D、C'=(H-1)A+(H-2)C+D、D'=(H-1)B+(W-1)C+(H+W-4)D であり、開始位置の分類を 1 として K 回更新した A を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
@@ -51,6 +59,12 @@
       "name": "対称性による状態圧縮 DP",
       "trigger": "多数の具体状態が目標との同じ関係を持ち、遷移先数も等しいとき。",
       "application": "終点との行・列一致だけを状態として同値なマスをまとめる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "遷移先個数による重み付き DP",
+      "trigger": "同値類間の遷移が、具体的な行先の個数だけで決まるとき。",
+      "application": "4 分類それぞれから各分類へ移れるマス数を係数として、分類全体の通り数を更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -63,25 +77,25 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "対称性による状態圧縮 DP",
+      "text": "遷移と目的に対して区別不能な状態を同値類へまとめ、類間の遷移先個数を係数にする状態圧縮 DP。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "X=1 または Y=1 で X-2・Y-2 が負になる項は、到達不能状態との積として安全に扱う。",
+      "text": "制約は H,W≥2 なので負の遷移係数は現れない。H=2 または W=2 では H-2・W-2 が 0 になる遷移を含め、開始点と終点の行・列一致から初期 4 状態を取り違えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Rook Path 型の問題に対し、対称性による状態圧縮 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な盤面上の歩数 DP を、終点との行・列一致という 4 つの同値類へ圧縮し、O(K) の状態遷移 DP として構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "4 状態から各状態への係数を図なしで数え直し、H=1 または W=1 の係数も確認する。",
+      "text": "4 分類の各状態から 1 手後の行先個数を数え直し、H=2 または W=2 で係数 0 になる遷移と、開始点=終点を含む 4 通りの初期状態を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

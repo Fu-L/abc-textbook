@@ -4,7 +4,7 @@
   "scopeType": "merge",
   "scopeId": "initial-v1-us5-update-simulation",
   "releaseVersion": null,
-  "subjectDigest": "a27a2c4311f03618e1ebd73ad072ac68225ba053215fbe3b88db1f833a715add",
+  "subjectDigest": "89f6bc272bd72972ad3056392009520b60523547f31173d6ae96d095dfa0df30",
   "inventoryPath": "docs/work-manifests/initial/us5/manifest.json",
   "inventoryDigest": "d2b77b9176417e5dcd9a4abe2a9f8396b8f3689d9621af97fa999a4452da6965",
   "reviewPolicy": {
@@ -15,10 +15,10 @@
   "applicableChecks": [
     {
       "checkId": "check-us5-discovery",
-      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-e73d31a7bf8befdf1bf78b98/manifest.json --simulation-only",
-      "subjectDigest": "a27a2c4311f03618e1ebd73ad072ac68225ba053215fbe3b88db1f833a715add",
+      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-2661fc1615b0f12e3619aedd/manifest.json --simulation-only",
+      "subjectDigest": "89f6bc272bd72972ad3056392009520b60523547f31173d6ae96d095dfa0df30",
       "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
-      "resultDigest": "6f75fcfe219118fa1495c5b273ea8b9793dbf1e7e0601859f6c29d60a9cf17f7",
+      "resultDigest": "fc51731497d4caab4f666f8725fd5b04fe5aacbd35e260f1a998cd2cd4acc1b4",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-28T15:00:00+09:00",
@@ -26,10 +26,10 @@
     },
     {
       "checkId": "check-us5-prepare",
-      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-e73d31a7bf8befdf1bf78b98/manifest.json --simulation-only",
-      "subjectDigest": "a27a2c4311f03618e1ebd73ad072ac68225ba053215fbe3b88db1f833a715add",
+      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-2661fc1615b0f12e3619aedd/manifest.json --simulation-only",
+      "subjectDigest": "89f6bc272bd72972ad3056392009520b60523547f31173d6ae96d095dfa0df30",
       "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
-      "resultDigest": "6f75fcfe219118fa1495c5b273ea8b9793dbf1e7e0601859f6c29d60a9cf17f7",
+      "resultDigest": "fc51731497d4caab4f666f8725fd5b04fe5aacbd35e260f1a998cd2cd4acc1b4",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-28T15:00:00+09:00",
@@ -37,10 +37,10 @@
     },
     {
       "checkId": "check-us5-review",
-      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-e73d31a7bf8befdf1bf78b98/manifest.json --simulation-only",
-      "subjectDigest": "a27a2c4311f03618e1ebd73ad072ac68225ba053215fbe3b88db1f833a715add",
+      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-2661fc1615b0f12e3619aedd/manifest.json --simulation-only",
+      "subjectDigest": "89f6bc272bd72972ad3056392009520b60523547f31173d6ae96d095dfa0df30",
       "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
-      "resultDigest": "6f75fcfe219118fa1495c5b273ea8b9793dbf1e7e0601859f6c29d60a9cf17f7",
+      "resultDigest": "fc51731497d4caab4f666f8725fd5b04fe5aacbd35e260f1a998cd2cd4acc1b4",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-28T15:00:00+09:00",
@@ -48,10 +48,10 @@
     },
     {
       "checkId": "check-us5-validation",
-      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-e73d31a7bf8befdf1bf78b98/manifest.json --simulation-only",
-      "subjectDigest": "a27a2c4311f03618e1ebd73ad072ac68225ba053215fbe3b88db1f833a715add",
+      "command": "node --import tsx scripts/verify-release.ts --manifest staging/previews/initial-v1/release-simulation/update-2661fc1615b0f12e3619aedd/manifest.json --simulation-only",
+      "subjectDigest": "89f6bc272bd72972ad3056392009520b60523547f31173d6ae96d095dfa0df30",
       "resultPath": "staging/previews/initial-v1/release-simulation/verification.json",
-      "resultDigest": "6f75fcfe219118fa1495c5b273ea8b9793dbf1e7e0601859f6c29d60a9cf17f7",
+      "resultDigest": "fc51731497d4caab4f666f8725fd5b04fe5aacbd35e260f1a998cd2cd4acc1b4",
       "exitCode": 0,
       "passed": true,
       "completedAt": "2026-07-28T15:00:00+09:00",
@@ -60,7 +60,7 @@
   ],
   "applicableCheckCount": 4,
   "passedApplicableCheckCount": 4,
-  "reviewerExecutedCheckSetDigest": "56f657bc75e768fa575bf67474466ba2a2bdff8f5ae9529cc1a3e76157b140b6",
+  "reviewerExecutedCheckSetDigest": "84b8c6e8ffe00bfcbfb06204dbec403eb02135878e56c8d53bb6ce03b8815ce2",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -167,5 +167,5 @@
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
   "generatedAt": "2026-07-28T15:00:00+09:00",
-  "evidenceDigest": "a260db16e38d390b9722c4f53b824ab6c9fd407dfc888c88ab7c947c22f125b3"
+  "evidenceDigest": "3695bad8706daab012ccc75250455f6642d92494824bf69d0c6e38d6d0b0a8e4"
 }

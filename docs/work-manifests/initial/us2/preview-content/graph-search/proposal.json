@@ -7,9 +7,9 @@
   "review": {
     "reviewerId": "person-maintainer",
     "decision": "approved",
-    "reviewedAt": "2026-07-28T09:30:00+09:00",
+    "reviewedAt": "2026-08-01T19:52:56+09:00",
     "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。",
-    "approvedSubjectDigest": "a4aec8406c5e2d0c847e379d774287757df218e1655081029db0f592ab312e29"
+    "approvedSubjectDigest": "c00eee424dda7665821b2c5b060d4ff4937b75daddeba80266f3243d482eb8b0"
   },
   "outcome": {
     "id": "outcome-provisional-shortest-path-structure",

@@ -17,7 +17,11 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "一辺削除後の最短距離を全辺について求めるが、元グラフの最短路を一本固定すると、その路にない辺の削除後も同じ路が残る。",
+        "text": "M 本それぞれについて辺を一つ削除して BFS する素朴解は O(M(N+M)) で、M≤N(N-1) では重い。再探索が必要な辺を絞る必要がある。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "元グラフで頂点 1 から N への最短路 P を一本固定する。P にない辺 e を削除しても P は残り、辺削除によって最短距離が短くなることもないため、e∉P の答えは元の距離と等しい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
@@ -37,12 +41,12 @@
     ],
     "keyInsights": [
       {
-        "text": "固定した最短路に含まれない辺を削除しても、その最短路は削除後のグラフに残る。",
+        "text": "元の最短距離を d とすると、辺削除後の距離は d 以上である。一方 e∉P なら長さ d の P が残るので d 以下でもあり、両方向の不等式から答えは d と決まる。再探索候補は |P|≤N-1 本だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "一度目の BFS で距離と predecessor edge を記録し、復元した路上辺だけ edge id で無効化して再探索する。",
+      "text": "まず BFS し、頂点 N が到達不能なら全 M 個を -1 とする。到達可能なら元距離 d を全辺の初期答えにし、predecessor edge から P を復元する。P 上の各 edge id だけを一つずつ無効化して BFS し、その距離を対応する答えへ上書きする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
@@ -73,11 +77,11 @@
   },
   "prerequisiteCandidates": [
     {
-      "text": "BFS と最短路復元",
+      "text": "有向単位重みグラフの BFS と predecessor edge による最短路復元。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "特殊な漸近計算量の見積もり",
+      "text": "辺削除では利用可能な経路が減るため最短距離が短くならない、という単調性。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -89,13 +93,17 @@
   ],
   "outcomeCandidates": [
     {
-      "text": "Blocked Roads 型の問題に対し、BFS と最短路復元を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "text": "一本の最短路を witness として削除の影響範囲を路上の高々 N-1 辺へ絞り、全辺の削除後距離を O(N(N+M)) で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
       "text": "「最短路にない辺の削除で距離が短くならない／長くならない」の両方向を説明してから計算量を導く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "元々到達不能、削除辺が P の外、P 上だが別の同長最短路が残る、P 上の辺削除で終点が不達になる小グラフを、全 M 回 BFS する実装と照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

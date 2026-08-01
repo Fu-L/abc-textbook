@@ -7,9 +7,9 @@
   "review": {
     "reviewerId": "person-maintainer",
     "decision": "approved",
-    "reviewedAt": "2026-07-28T09:30:00+09:00",
+    "reviewedAt": "2026-08-01T19:52:56+09:00",
     "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。",
-    "approvedSubjectDigest": "770b0eedcd456f80cf94098dbefc1c35819d5349a640f9b816a879f39f70a241"
+    "approvedSubjectDigest": "96535e59c44a16f6b41c1ff54cb2e15b072f9edc2145380f7cd33ac3c5083370"
   },
   "outcome": {
     "id": "outcome-provisional-range-aggregate-under-updates",

@@ -17,32 +17,36 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "P が素数なので非零剰余は位数 P-1 の巡回群をなし、x^a=y という冪条件を指数の合同式へ移せる。",
+        "text": "x=0 なら正の整数 n に対して x^n=0 なので、寄与する組は (x,y)=(0,0) の 1 組だけである。残る非零剰余を乗法群として扱えばよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "P が素数なので非零剰余は位数 m=P-1 の巡回群をなす。原始根 r を取り x=r^a,y=r^b と書くと、ある n で x^n=y となる条件は an≡b (mod m) へ移る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "原始根の指数へ写し、gcd(P-1,a) ごとに到達可能な y の個数を約数上で集約する。",
+        "approach": "原始根の指数へ写し、g=gcd(m,a) ごとに指数 a の個数と到達可能な b の個数を約数上で集約する。",
         "decision": "adopted",
-        "decisionReason": "冪写像の像の大きさが gcd(P-1,a) だけで決まり、指数 a を個別に調べず数えられる。",
+        "decisionReason": "寄与は g=gcd(m,a) だけで決まり、g は m の約数に限られる。m<10^12 の約数数は高々 6720 なので、約数列挙と約数間の差し引きで制約内に収まる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "approach": "全ての x と a について冪を計算し、得られる組を直接数える。",
+        "approach": "a=1..m を全走査し、各 a について m/gcd(m,a) を答えへ加える。",
         "decision": "rejected",
-        "decisionReason": "候補組を直接走査すると P の大きさに対して間に合わず、同じ gcd を持つ指数の重複も利用できない。",
+        "decisionReason": "式自体は正しいが O(P) となり P≤10^12 に間に合わないため、同じ gcd を持つ a をまとめる必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "an≡b mod(P-1) が解を持つ b は (P-1)/gcd(P-1,a) 個である。",
+        "text": "an≡b (mod m) が n について解を持つのは gcd(m,a) が b を割るときに限る。したがって固定した a から到達できる b は m/gcd(m,a) 個であり、a の gcd ごとに寄与をまとめられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "P-1 の約数ごとに gcd がその値になる指数数を求め、冪写像の像の大きさとの積を加算する。",
+      "text": "m の約数を降順に処理し、f(g)=m/g−Σ_{h:g|h,h>g}f(h) により gcd(m,a)=g となる a の個数を求める。最後に (0,0) の寄与を含む 1+Σ_g f(g)(m/g) を mod 998244353 で計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
@@ -69,25 +73,29 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "原始根、一次合同式、約数反転型集計",
+      "text": "素数法の非零剰余が位数 P-1 の巡回群をなすこと、一次合同式 an≡b (mod m) の可解条件、約数列挙と倍数側からの差し引き。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "x=0 を分離し、P-1 の全約数を列挙して gcd が各約数になる指数数を大きい順に差し引く。",
+      "text": "m の全約数を列挙して大きい順に処理し、f(g) からは g の真の倍数に対応する既計算値だけを差し引く。最後に巡回群外の (0,0) を 1 組加える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "m/g と f(g) はそれぞれ 10^12 規模になり得るため、両因子を mod 998244353 へ落としてから 64-bit 整数で掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Power Pair 型の問題に対し、原始根、一次合同式、約数反転型集計を選び、状態と証明を一貫して設計できる。",
+      "text": "素数法の冪到達可能性を原始根で一次合同式へ変換し、gcd ごとの個数を約数上で集計できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "式を暗記せず、固定した a に対する冪写像の核と像の大きさを gcd から再導出する。",
+      "text": "固定した a に対する冪写像の像の大きさを gcd から再導出し、P=2 を含む小さい素数で (0,0) の 1 組と約数上の差し引きを全列挙結果に照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
