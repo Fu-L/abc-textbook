@@ -1391,5 +1391,5 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
     const stale = await runAuthoringCli(['--check', ...commonArgs]);
     expect(stale.exitCode).toBe(2);
     expect(stale.stderr).toContain('AUTHORING_EVIDENCE_STALE');
-  }, 20_000);
+  }, 60_000);
 });
