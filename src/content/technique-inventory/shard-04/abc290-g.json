@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc290-g「Edge Elimination」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "頂点vを最高点として残すと初期成分は深さD-hの完全K分木になり、以後の一切断は完全部分木V_i=(K^(i+1)-1)/(K-1)を一つ除く操作である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc290-g「Edge Elimination」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "最高点深さを列挙し、大きい部分木から削る貪欲",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "削除数V_(D-h)-XをV_i硬貨の最小枚数で表す正準性があり、その枚数に親辺切断を加えて各hを評価できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全ての切断集合を探索",
+        "decision": "rejected",
+        "decisionReason": "完全木の頂点数は10^18級で、辺を展開できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Edge Elimination 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "V_(i+1)=1+K V_iという桁構造により、大きいV_iを使えるだけ使う貪欲が最小切断数となり、その表現を実際の部分木削除として実現できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc290-g「Edge Elimination」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "h=0..Dを列挙し、初期サイズV_(D-h)がX以上なら差をV_(D-h-1)..V_0で貪欲に割って削除辺数を数え、親辺切断を含む最小値を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc290-g「Edge Elimination」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "構造付きコイン貪欲",
+      "trigger": "削除可能サイズが完全K分木の等比和になる。",
+      "application": "目標削除数を大きいV_iから割って切断数を最小化する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "greedy choice と交換論法",
-      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc290-g「Edge Elimination」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "name": "根候補の深さ列挙",
+      "trigger": "残す連結成分の最高点を選べる。",
+      "application": "h=0..Dごとに初期成分サイズと親辺切断の有無を評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "切断問題を「完全部分木サイズを硬貨とする支払い」へ変えると、K進的な額面関係から貪欲性を説明できる。",
+      "reusablePerspective": "階層構造の部分木削除は、削除サイズの数体系を調べて硬貨問題へ写す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "greedy choice と交換論法",
+      "text": "完全K分木の頂点数をオーバーフローしないよう計算し、貪欲硬貨表現を扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "Xを含めない深さ候補を捨て、h>0の最初の親辺切断を数える。V_iは10^18上限で飽和計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Edge Elimination 型の 頂点と辺からなる状態グラフに対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "text": "ちょうどX頂点の連結成分を残すための最小切断辺数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "小さい完全木の切断全探索と比較し、X=全頂点、X=1、最高点が根でない最適例を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

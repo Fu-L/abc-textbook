@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc229-h「Advance or Eat」では、主解法候補として、各部分ゲームの Grundy 数を mex で求め、xor 和から勝敗または手を判定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "駒の前進は同じ列の盤面だけを変え、相手駒を食べる操作も選んだ一駒が属する列だけを変えるため、盤面は N 個の列ゲームの直和である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "白番と黒番では動かせる色と食べられる色が異なるので、遷移集合が手番に依存し、通常の不偏ゲームの Grundy 数は適用できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc229-h「Advance or Eat」では、主解法候補として、各部分ゲームの Grundy 数を mex で求め、xor 和から勝敗または手を判定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各列の Grundy 数を求め、その XOR で盤面全体の勝敗を判定する。",
+        "decision": "rejected",
+        "decisionReason": "白と黒で許される手が異なる partisan game であり、同じ状態からの遷移を共有する Grundy 理論の前提を満たさない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "一列の 3 の N 乗状態 DAG に白手・黒手の辺を張り、両者の後継評価の間にある最も単純な二進有理数を評価値として計算し、列評価の総和で勝敗を判定する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "このゲームでは全状態の左右後継評価が分離して数が定義でき、独立な列ゲームの和は評価値の加算に対応する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "Sprague–Grundy 定理により impartial game は同じ Grundy 数の Nim heap と等価で、直和は xor になる。",
+        "text": "状態 v の白手後継評価の最大値より大きく、黒手後継評価の最小値より小さい最も単純な dyadic rational を eval(v) とすると、正なら先手白が勝つ。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Advance or Eat 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "白手と黒手が干渉しない場合は操作順を交換した共通状態を作れ、干渉する食べる・進める場合にも一方から他方への辺があるため、左後継評価は右後継評価より小さい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc229-h「Advance or Eat」では、主解法候補として、各部分ゲームの Grundy 数を mex で求め、xor 和から勝敗または手を判定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "列状態を三進数で列挙した有限 partisan game DAG に Conway 型の数値評価を付け、入力各列の評価値を厳密な二進有理数として合計して符号を判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc229-h「Advance or Eat」では、主解法候補として、各部分ゲームの Grundy 数を mex で求め、xor 和から勝敗または手を判定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "独立ゲームの直和分解",
+      "trigger": "一手が複数領域のうち一領域だけを変え、領域間で合法手が干渉しないとき。",
+      "application": "各列を独立なゲーム成分として評価し、列評価を加算して盤面全体を扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Sprague–Grundy theorem",
-      "trigger": "制約と操作を整理したときに Sprague–Grundy theorem の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc229-h「Advance or Eat」では、主解法候補として、各部分ゲームの Grundy 数を mex で求め、xor 和から勝敗または手を判定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で Sprague–Grundy theorem を問題固有の状態へ適用する。",
+      "name": "partisan game の数値評価",
+      "trigger": "二人の合法手が異なるが、全ての左選択肢が全ての右選択肢より小さい数ゲームとして表せるとき。",
+      "application": "白後継の上界と黒後継の下界の間にある最小絶対値の整数、なければ最小分母の二進有理数を選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "食べる操作は任意列の駒を消せるが、一手で変わるのはその駒の列だけなので、見かけに反して列分解を壊さない。",
+      "reusablePerspective": "操作対象を全盤面から自由に選べても、状態変更が一成分内に閉じるならゲーム和への分解を検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Sprague–Grundy theorem",
+      "text": "不偏ゲームと partisan game の違い、および独立ゲーム和で評価を合成する考え方を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "到達 Grundy 値の重複を除いて mex を取り、終端状態を 0 とする。",
+      "text": "一列状態を各マスの空・白・黒の三進数で表し、駒数減少または上方移動により必ず進む順序で評価する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "評価値は分母が 2 の冪の有理数として厳密に比較・加算し、浮動小数の丸めで総和の符号を誤判定しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Advance or Eat 型の 盤面上の位置と局所遷移に対し、Sprague–Grundy theoremを選び、状態と証明を一貫して設計できる。",
+      "text": "手番で合法手が異なる独立ゲームを列状態 DAG の数値評価へ落とし、評価和の符号で勝敗判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "到達 Grundy 値の重複を除いて mex を取り、終端状態を 0 とする。",
+      "text": "ゲームを見て即座に Grundy 数へ進まず、両プレイヤーが各状態から同じ遷移を選べる不偏性を先に確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "数ゲームの評価可能性は、任意の白手後継が任意の黒手後継より小さいことを操作交換図で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

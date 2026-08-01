@@ -17,85 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc248-e「K-colinear Line」では、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。さらに、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "K=1 なら、与えられた任意の 1 点を通る直線だけでも傾きを連続的に変えられるため無限本存在する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "K≥2 なら条件を満たす直線は必ず与えられた相異なる 2 点で一意に定まり、候補は点対から得られる有限個に限られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc248-e「K-colinear Line」では、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。さらに、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+        "approach": "全点対が定める直線について全 N 点の共線性を外積で調べ、K 点以上なら正規化した直線表現を set に入れる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N≤300 なので点対×全点を調べられ、正規化 key により同一直線を一度だけ数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各点対が K 点以上を通るたびに、そのまま答えを 1 増やす。",
+        "decision": "rejected",
+        "decisionReason": "m 点が同一直線上にあると同じ直線を mC2 回数えてしまい、重複除去がない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "外積の符号が有向面積と回転方向を表すため、幾何条件を符号条件として必要十分に判定できる。",
+        "text": "点 A,B,P の共線条件は (B_x-A_x)(P_y-A_y)=(B_y-A_y)(P_x-A_x) で、傾きの除算を使わず垂直線も同じ式で扱える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "K-colinear Line 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "直線 Ax+By+C=0 の係数を gcd で割り、最初の非零係数が正になるよう符号をそろえると、同一直線が同一の整数 tuple になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc248-e「K-colinear Line」では、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。さらに、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+      "text": "K=1 なら Infinity を出力する。それ以外は i<j の各点対から直線を作り、全点を外積で数えて K 以上なら canonical (A,B,C) を set へ挿入し、set size を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "計算幾何の外積・内積",
-      "trigger": "制約と操作を整理したときに 計算幾何の外積・内積 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc248-e「K-colinear Line」では、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。さらに、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。で 計算幾何の外積・内積 を問題固有の状態へ適用する。",
+      "name": "2 点で決まる候補の全列挙",
+      "trigger": "求める幾何対象が任意の 2 入力点で一意に決まり、N が数百程度のとき。",
+      "application": "O(N^2) 個の候補直線ごとに全点の共線性を検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc248-e「K-colinear Line」では、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。さらに、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "整数係数による幾何正規化",
+      "trigger": "同じ直線や方向を浮動小数なしで重複排除したいとき。",
+      "application": "直線係数を gcd と符号で canonicalize し、tuple を set key にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "K=1 の無限性と K≥2 の『必ず点対で決まる』を分けることで、連続な直線集合が有限候補列挙へ変わる。",
+      "reusablePerspective": "幾何数え上げでは、必要な入力点数で対象が一意に決まる閾値を先に確認し、退化時だけ別処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "計算幾何の外積・内積",
+      "text": "外積による共線判定",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "全探索と候補数の上界評価",
+      "text": "gcd と符号による整数 tuple の正規化",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "set による重複排除",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "座標積の overflow、collinear な境界点、開区間と閉区間の交差を区別する。",
+      "text": "座標差と積は大きくなるため、外積および C 係数の計算には十分な幅の整数型を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "垂直線・水平線も含めて gcd(|A|,|B|,|C|) と符号規約を一貫させ、同じ線の点対順による符号反転を除く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "K-colinear Line 型の問題に対し、計算幾何の外積・内積を選び、状態と証明を一貫して設計できる。",
+      "text": "K 点以上を通る直線を、退化条件の分離・点対列挙・整数正規化により重複なく数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "座標積の overflow、collinear な境界点、開区間と閉区間の交差を区別する。",
+      "text": "3 点が同一直線上にある例で 3 点対が 1 key に潰れることと、K=1 だけが Infinity になる理由を別々に確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

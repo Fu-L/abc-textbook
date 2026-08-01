@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc446-e「Multiple-Free Sequences」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "数列を mod M で見れば連続二項 (x,y) から次状態 (y,(Ay+Bx) mod M) が一意に決まる functional graph になる。0を含むことは第一成分0の状態へ到達することと同値である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc446-e「Multiple-Free Sequences」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "M^2 状態の遷移を逆向きに張り、(0,t) 全てを始点として BFS/DFS し、そこへ到達可能な初期状態をまとめて印付けする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各初期二項と状態が一対一で、その後の列は唯一の path なので、逆 graph の多点探索が「いつか0へ至る」全状態を漏れなく列挙する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各 (s_1,s_2) から個別に数列を生成し、0または周期へ入るまで追跡する。",
+        "decision": "rejected",
+        "decisionReason": "初期状態が M^2 個あり各探索も M^2 長になり得て、同じ後続 path を繰り返し辿る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+        "text": "整数数列と mod M 数列は各項の剰余が一致し、M の倍数を含む条件は剰余0の出現だけで判定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Multiple-Free Sequences 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "目標集合への到達性は辺を反転して目標から探索すれば、全始点について一回の graph traversal で求まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc446-e「Multiple-Free Sequences」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "全 x,y∈[0,M) について successor を計算して reverse adjacency へ辺を加える。全 (0,t) を queue に入れて逆到達集合を求め、未訪問状態数を条件を満たさない初期値として数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc446-e「Multiple-Free Sequences」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc446-e「Multiple-Free Sequences」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "functional graph の逆到達探索",
+      "trigger": "決定的遷移を繰り返したとき、どの初期状態が目標集合へ至るかを全件求めたいとき。",
+      "application": "遷移を逆向きにして目標集合から多点 BFS する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "線形漸化式も modulus 上では有限オートマトンになり、直前二項だけが将来を決める。",
+      "reusablePerspective": "全始点 query は個別 simulation せず、終点集合から reverse reachability を一括計算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "幅優先探索",
+      "text": "functional graph の逆到達探索と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "s_1=0 または s_2=0 の初期列も目標集合へ含まれる状態表現か確認する。状態 index x*M+y と逆辺の向きを統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Multiple-Free Sequences 型の 列の順序と prefix 状態に対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "二項線形漸化式が M の倍数を含む初期値を、M^2 状態の逆探索で一括分類できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "状態 (s_k,s_{k+1}) と一回遷移の対応を確認し、0が第二成分に現れた場合も次状態で第一成分0へ移ることを追う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

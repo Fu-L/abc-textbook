@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc408-f「Athletic」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "移動するたび高さは少なくとも D 下がるため DAG 的であり、低い足場の dp を先に確定して高さ順に計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "高さは1..Nの permutation なので逆置換 p_h を使えば、高さ h の足場位置を O(1) で得られる。遷移元は高さ≤h-Dかつ位置が p_h±R の範囲にある足場である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc408-f「Athletic」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "高さ h を昇順に走査し、利用可能になった高さ h-D の dp を位置添字 segment tree へ点更新して、現在位置周辺の区間最大を取る",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "segment tree にはちょうど高さ≤h-Dの状態だけが入り、各 dp を O(log N) で計算して全体 O(N log N) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各足場から距離 R 以内の全位置、または高さ差 D 以上の全足場を列挙する",
+        "decision": "rejected",
+        "decisionReason": "R,D とも N まであり、条件の片方だけで候補を絞っても最悪 O(N^2) の pair を調べる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "h を一つ進めるごとに新たに遷移元となるのは高さ h-D の足場一個だけなので、二条件のうち高さ条件を incremental な点追加にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Athletic 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "segment tree の添字を高さではなく位置にすることで、残る |i-j|≤R を一つの区間最大 query として処理できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc408-f「Athletic」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "p_{H_i}=i を作り、segment tree を -INF で初期化する。h=1..N で h>D なら位置 p_{h-D} に確定済み dp を挿入し、[max(1,p_h-R),min(N,p_h+R)] の最大値 best から、存在すれば dp[p_h]=best+1、なければ0とする。全 dp の最大を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc408-f「Athletic」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "DAG 順 DP",
+      "trigger": "遷移で評価量が必ず狭義減少し、その順序で状態を並べられるとき。",
+      "application": "高さ昇順に、より低い遷移先の最大移動回数から現在値を作る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc408-f「Athletic」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "sweep と eligible 集合",
+      "trigger": "二条件の一方が走査変数に対する閾値で単調に増えるとき。",
+      "application": "高さ h-D に達した状態を一個ずつ data structure へ有効化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "segment tree の区間最大",
+      "trigger": "動的な点集合から位置区間内の最大 DP 値を得たいとき。",
+      "application": "有効な低い足場の dp を位置に置き、p_h±R を range maximum query する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "高さ条件を segment tree の値判定に入れず、sweep 時刻で満たす要素だけを挿入すると、木は位置距離条件だけを担当すればよい。",
+      "reusablePerspective": "二軸条件の遷移では、一軸を offline sweep で有効化し、もう一軸を range data structure に任せる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "置換の逆配列、segment tree の一点更新・区間最大、DAG DP を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "遷移元がない -INF の場合は dp=0 とする。h-D を挿入してから h を query し、位置区間端を1..Nへ clamp する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Athletic 型の 順列の位置と値の対応に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "高さ差と位置差の二条件を sweep＋区間最大へ分解し、最大移動回数を O(N log N) で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "D>Nの実質遷移なし、R=N、単調な位置配置、高さ h-D が区間端にある場合を O(N^2) DP と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

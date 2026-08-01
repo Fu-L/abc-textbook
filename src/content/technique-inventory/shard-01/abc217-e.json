@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc217-e「Sorting Queries」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "操作3の直後に存在した要素は昇順のまま先頭側に並び、その後の操作1で加わる要素だけが末尾へ到着順に連なる。したがって、現在の列は「ソート済み部分」と「まだ一度もソートされていない追加部分」に分けて考えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "操作2が必要とするのは列全体ではなく先頭だけであり、ソート済み部分からは最小値、未ソート部分からは最古の要素だけを取り出せればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc217-e「Sorting Queries」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "未ソート部分を FIFO queue、ソート済み部分を min-priority queue で別々に持ち、操作3で前者の全要素を後者へ移す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "操作1の到着順と操作3後の昇順を同時に保てる。各要素が queue から heap へ移るのは高々一度なので、操作3の一回の重さではなく全クエリを通した仕事量で評価できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "列を一つの配列で保持し、操作3のたびに配列全体をソートする。",
+        "decision": "rejected",
+        "decisionReason": "操作1を大量に行った後で操作3を繰り返す入力では同じ要素を何度もソートし、Q が 2×10^5 の制約に収まらない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "未処理候補の最小または最大 key を常に選ぶ greedy-choice property を保つ。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Sorting Queries 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "heap が空でなければその最小値が必ず列の先頭であり、heap が空になって初めて queue の先頭が列の先頭になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc217-e「Sorting Queries」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "操作1では queue へ追加し、操作2では heap が非空ならその最小値、空なら queue の先頭を出力して削除する。操作3では queue が空になるまで要素を heap へ移し、明示的な全体ソートを行わない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc217-e「Sorting Queries」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "列の状態分割",
+      "trigger": "一部の操作だけが既存要素を並べ替え、その後の追加要素は並べ替え済み部分の後ろに残るとき。",
+      "application": "操作履歴の境界で列をソート済み部分と未処理 suffix に分け、それぞれに必要な順序だけを持つデータ構造を割り当てる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "priority queue",
-      "trigger": "制約と操作を整理したときに priority queue の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc217-e「Sorting Queries」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で priority queue を問題固有の状態へ適用する。",
+      "name": "償却解析",
+      "trigger": "一回だけ見ると重い一括移動がある一方、各要素がその移動を経験する回数を制限できるとき。",
+      "application": "操作3で移した個数の総和を、操作1で追加された全要素数以下として数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "「sort」は過去の全要素だけを heap 側へ確定させ、以後に append された要素の FIFO 順までは壊さない。",
+      "reusablePerspective": "更新が列全体へ及ぶように見えたら、更新時点より前と後の要素で意味が変わらないかを調べ、履歴の境界を状態として残す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "priority queue",
+      "text": "FIFO queue、min-priority queue、償却計算量",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "更新前の古い entry を識別して読み飛ばし、tie-break を決定的にする。",
+      "text": "queue の先頭削除を配列の shift で実装せず、deque または読み取り index を使う。重複値は heap に個別要素としてそのまま保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sorting Queries 型の 列の順序と prefix 状態に対し、priority queueを選び、状態と証明を一貫して設計できる。",
+      "text": "操作履歴で順序規則が変わる列に対し、状態を queue と priority queue に分解し、一括移動を償却解析できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "更新前の古い entry を識別して読み飛ばし、tie-break を決定的にする。",
+      "text": "サンプル1の操作3の直後と、その後に 0 を追加した直後を書き出し、heap を queue より先に読む理由を言葉で再確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

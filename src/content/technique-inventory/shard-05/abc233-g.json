@@ -17,77 +17,87 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc233-g「Strongest Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "高さ A、幅 B の部分長方形にある全ブロックは、その長方形を含む一辺 max(A,B) の正方形を一回選べば必ず消せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "この基準費用より小さく消せる場合、部分長方形にはブロックのない行または列があり、その空線をまたぐ操作なしに左右・上下へ分割できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc233-g「Strongest Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各ブロックの周囲で小さい正方形を貪欲に選び、重なったブロックをまとめて破壊する。",
+        "decision": "rejected",
+        "decisionReason": "局所的な正方形選択が後のまとめ方を変え、最小体力を保証する交換則がない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全部分長方形 dp[top,bottom,left,right] を持ち、長辺長の一括破壊と全水平・垂直分割の和の最小を取る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "最適解が基準費用未満なら空行・空列による分割で表せ、基準費用の場合も初期値で含められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Strongest Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "正方形操作の位置を直接状態にせず、残っているブロックを囲む長方形の四辺だけを状態にして分割統治する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc233-g「Strongest Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "部分長方形を一辺長コストで一括消去する上界と、水平・垂直 cut で独立問題へ分ける遷移を持つ四次元区間 DP を小領域から計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc233-g「Strongest Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc233-g「Strongest Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "二次元区間 DP",
+      "trigger": "長方形領域の対象を一括処理するか、一本の水平・垂直線で二領域へ分ける再帰が成立するとき。",
+      "application": "四つの境界を状態にし、全 cut 位置で二つの部分長方形の答えを加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "費用が長方形の長辺長 C 未満なら各操作正方形の辺長も C 未満であり、全ブロック行列を横断できないことから空の分離線が現れる。",
+      "reusablePerspective": "一括処理コストより良い解の各操作サイズが制限されるとき、対象配置に必ずセパレータが生じるかを調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "区間長の小さい順に四境界 DP を計算し、二次元 prefix sum で空領域を判定できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "ブロックが一つもない長方形の値は 0 とし、単純な max(height,width) 初期値のままにしない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "半開区間など境界表現を統一し、水平・垂直 cut の両側が真に小さい長方形となる順序で更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Strongest Takahashi 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "正方形範囲操作の最小費用を、一括消去上界と空セパレータの性質から二次元区間 DP にできる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "範囲操作の選び方を列挙せず、任意領域を一回で処理する自明上界と、それを下回る解に必要な分離構造を探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "四次元 DP の正当性は、最適解が一括処理か、どこか一線で独立に分けられるかという網羅性で説明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

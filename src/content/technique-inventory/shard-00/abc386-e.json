@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc386-e「Maximize XOR」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "制約はN自体でなく組合せ数C(N,K)≤10^6を保証しているため、最終候補集合は全列挙できる。ただし素朴DFSの途中node数はKがNに近いと中央binomialまで膨らむ。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "選択K個のXORは、全要素XORと非選択N-K個のXORとのXORで復元できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc386-e「Maximize XOR」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "min(K,N-K)側のsubsetを組合せ列挙し、必要なら全体XORで補集合へ戻す",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "探索深さを小さい側に選べば列挙数はC(N,K)、一候補の処理もmin(K,N-K)で、保証された上限内に収まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "常に選択K個をinclude/exclude DFSで列挙する",
+        "decision": "rejected",
+        "decisionReason": "KがNに近いと答え候補数は少なくても途中で巨大な浅いsubset群を通り、C(N,⌊N/2⌋)級の呼出しが発生し得る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+        "text": "XORではtotal XOR = selected XOR xor omitted XORなので、補集合の値からselected値を定数時間で得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Maximize XOR 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "C(N,K)=C(N,N-K)により補集合側へ替えても候補数は変わらず、深さだけを小さくできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc386-e「Maximize XOR」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "allXorを計算する。r=min(K,N-K)個のindex組合せを列挙してxorを求め、K≤N-Kならそのxor、そうでなければallXor xor xorを候補として最大化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "多項式の係数演算",
-      "trigger": "制約と操作を整理したときに 多項式の係数演算 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc386-e「Maximize XOR」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。で 多項式の係数演算 を問題固有の状態へ適用する。",
+      "name": "補集合の全探索",
+      "trigger": "選ぶ個数が全体に近く、選ばない個数が小さいとき。",
+      "application": "XORの可逆性を使って非選択集合だけを列挙する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc386-e「Maximize XOR」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "出力候補数保証の直接利用",
+      "trigger": "入力sizeでなく組合せ総数そのものが制約されているとき。",
+      "application": "C(N,K)個の候補を漏れなく列挙する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "組合せ数が小さくても通常のbinary DFS木は小さいとは限らず、列挙器が完成候補にほぼ比例して動くかまで評価する必要がある。",
+      "reusablePerspective": "特殊制約を読む際は答え状態数だけでなく、選んだ列挙アルゴリズムの中間状態数も同じ上限で抑えられるか確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "多項式の係数演算",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "全探索と候補数の上界評価",
+      "text": "XORの補集合関係と組合せ列挙を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "値は60 bitなので64 bit unsigned相当で持つ。K=Nではr=0の空組合せを一度処理し、組合せiteratorの終了条件を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Maximize XOR 型の 多項式係数と組合せ和の対応に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "小さいbinomial制約を補集合列挙まで含めて正しく活用し、最大subset XORを求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "(N,K)=(100,98)のような補集合有利例とK=N,1を試し、N≤20ではbitmask全探索の最大値と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

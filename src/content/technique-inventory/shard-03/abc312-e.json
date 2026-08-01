@@ -17,67 +17,87 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc312-e「Tangency of Cuboids」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "全座標が整数かつ 0..100 なので、空間を単位立方体へ離散化しても面接触の正面積を失わない。直方体同士は正体積で重ならないため各単位立方体の所有者は高々一つである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "二直方体が面積正で接することは、それぞれに属する単位立方体が六近傍で隣接することと同値になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc312-e「Tangency of Cuboids」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+        "approach": "100³ の voxel に所有直方体番号を書き、隣接 voxel の異なる所有者ペアを列挙する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "座標上限が小さく、面積正という条件を単位面一枚の存在へ正確に離散化できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全直方体対について、一軸の端面一致と残る二軸区間の正の重なりを調べる。",
+        "decision": "rejected",
+        "decisionReason": "N=10^5 に対する N² 組は、各判定が定数時間でも処理できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+        "text": "辺や点だけで触れる場合は六近傍の単位立方体対が存在せず、正面積の接触だけが自然に抽出される。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Tangency of Cuboids 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じ直方体対が広い面で何度も現れるので、番号ペアを正規化して set/unique し、最後に両端の次数へ一度だけ加える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc312-e「Tangency of Cuboids」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+      "text": "各直方体 i の半開整数領域 [x1,x2)×[y1,y2)×[z1,z2) の voxel を owner=i で塗る。全 voxel から正方向三近傍を見て、所有者が異なり両方存在すれば min/max のペアを収集する。重複除去後、各ペアの両頂点を加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc312-e「Tangency of Cuboids」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "小座標空間の voxel 化",
+      "trigger": "幾何対象数は多いが座標範囲が小さく整数境界を持つとき。",
+      "application": "連続空間を単位セル所有者配列へ変え、接触を隣接セルとして検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "「表面の共通部分が正面積」は単位立方体間の face adjacency にちょうど対応し、edge/corner 接触を追加判定なしで除ける。",
+      "reusablePerspective": "離散幾何では、求める交差の次元に対応するセル隣接を選ぶと境界条件が簡潔になる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "全探索と候補数の上界評価",
+      "text": "半開区間による格子領域表現",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "重複ペアの sort/unique",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "直方体を塗る loop は上端を含めない。配列外と未所有 voxel を接触相手に数えず、同一ペアは面積にかかわらず一回だけ数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Tangency of Cuboids 型の問題に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "多数の直方体対を直接比較せず、小さい座標空間の六近傍走査で全ての面接触関係を列挙できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "座標上限 100 を見たら N より空間側を全探索する発想を持つ。正面積・線分・一点の違いがどの近傍関係に対応するか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

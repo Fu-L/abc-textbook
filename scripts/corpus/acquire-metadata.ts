@@ -3,13 +3,13 @@ import path from 'node:path';
 
 import {
   acquireCorpusMetadataBatch,
+  acquisitionCacheScope,
   createFetchTransport,
   SerialOfficialPageClient,
   verifyApprovedPolicies,
 } from '../../src/lib/corpus/acquisition.js';
 import { corpusBatches, getCorpusBatch, type CorpusBatch } from '../../src/lib/corpus/batches.js';
 import type { CorpusMetadataBatch, PolicyApprovalManifest } from '../../src/lib/corpus/types.js';
-import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import {
   verifyCorpusMetadataBatch,
   verifyPolicyApprovalManifest,
@@ -55,7 +55,7 @@ try {
   const checkedAt = requiredArgument(values, '--checked-at');
   const upstream = createFetchTransport();
   const cacheDirectory = values.get('--cache-dir');
-  const cacheScope = canonicalDigest({ checkedAt, policyApproval });
+  const cacheScope = acquisitionCacheScope(checkedAt, policyApproval);
   const repositoryRoot = path.resolve(import.meta.dirname, '../..');
   const cache = cacheDirectory
     ? await createPrivateResponseCache({

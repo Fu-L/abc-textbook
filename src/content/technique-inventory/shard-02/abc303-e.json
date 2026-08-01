@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc303-e「A Gift From the Stars」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "与えられた木は複数のstarを所定の方法で連結してできており、葉の隣は必ず元のstarの中心である。中心間の距離は3の倍数なので、一つの中心を基準に距離の剰余で全中心を識別できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc303-e「A Gift From the Stars」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "葉の隣を始点に距離を求め、距離mod 3で中心を抽出する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "構成由来の距離規則を使えば、一回のDFS/BFSだけで全starのlevelを中心の次数として復元できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "葉を反復的に削除しながらstarを一つずつ復元する",
+        "decision": "rejected",
+        "decisionReason": "実現可能だが削除順と残存次数の管理が複雑で、距離剰余による一括分類の方が不変条件を明確に保てる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "A Gift From the Stars 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "葉の隣にある中心からの距離が0 mod 3の頂点だけが中心になり、中心でない葉までの距離は0 mod 3にならない。したがって選んだ始点に依存せず、該当頂点の次数が元の各starのlevelである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc303-e「A Gift From the Stars」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "任意の次数1頂点を見つけ、その唯一の隣接頂点を始点に木をDFSまたはBFSする。距離が3の倍数である頂点の次数を答え列へ追加し、昇順にsortして出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc303-e「A Gift From the Stars」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "木上の距離剰余",
+      "trigger": "反復構造の接続間隔が一定で、同じ役割の頂点同士の距離が固定modulusに揃う。",
+      "application": "既知の中心から距離mod 3を付け、中心という役割を剰余類0として復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc303-e「A Gift From the Stars」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "構成逆算",
+      "trigger": "最終グラフが既知の部品を規則的に接続して作られている。",
+      "application": "葉という確実な局所特徴から部品中心を一つ特定し、全体の周期構造へ広げる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "starのlevelは中心の次数に等しく、中心集合さえ距離mod 3で特定できれば、元の接続手順そのものを逆再生する必要はない。",
+      "reusablePerspective": "構成問題の復元では、部品の識別標識と部品間距離の周期性を探すと削除simulationを避けられる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "幅優先探索",
+      "text": "木のDFS/BFS、頂点次数、距離の剰余類。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "始点は葉そのものではなく葉の唯一の隣である中心にする。親を除外して木を走査し、最後にlevel列を問題指定どおり昇順にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "A Gift From the Stars 型の 頂点と辺からなる状態グラフに対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "木を構成した全starのlevelを重複込みで復元し、昇順に出力できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "単一star、levelの異なるstarのchain、複数の葉から別の始点を選んだ場合で、抽出される中心次数multisetが一致することを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc454-g「Mode in the Subtree」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各subtreeで必要なのは色ごとの出現回数と、その最大回数を持つ色数だけである。色番号がN以下なので hash map を使わず配列で頻度を持てる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc454-g「Mode in the Subtree」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "heavy child の集計を残し light child の Euler区間を追加し直す DSU on Tree を行い、cnt[color]、num[freq]、現在最大freqを配列で更新する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各頂点が add される回数は root path 上の light edge 数+1で O(log N) に抑えられ、subtree query時にはちょうどそのsubtree全体の頻度表が残る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各subtreeの色頻度 unordered_map を small-to-large merge する。",
+        "decision": "rejected",
+        "decisionReason": "漸近的には可能でも N=2.5×10^6 では hash node の時間・空間定数が大きく、実用的な制限を超える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+        "text": "最大subtree sizeの子をheavyにすると、light edgeを下るたびsubtree sizeが半分以下になり、一頂点の再追加回数が対数回になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Mode in the Subtree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "色 x を追加すると num[cnt[x]]を減らし cnt[x]を増やして numを増やすだけで、mode回数 mx とその色数 num[mx]を即時取得できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc454-g「Mode in the Subtree」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "最初のDFSでsubtree size、heavy child、Euler区間を求める。solve(v,keep) でlight childをkeep=false、heavyをtrueで処理し、light各Euler区間とvをaddする。答え(mx,num[mx])を保存し、keep=falseなら触れた範囲をresetする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc454-g「Mode in the Subtree」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "DSU on Tree",
+      "trigger": "全subtreeの頻度統計を、色値域配列で軽量に求めたいとき。",
+      "application": "heavy childのtableを再利用しlight subtreeだけ追加・削除する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Union-Find",
-      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc454-g「Mode in the Subtree」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "name": "頻度の頻度配列",
+      "trigger": "要素追加中にmode頻度とmode種類数を即時取得したいとき。",
+      "application": "cnt[color]とnum[count]を同時更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "small-to-large の計算量だけでなく、巨大Nではcontainer一要素の実メモリを見て配列ベースの traversal reuseを選ぶ。",
+      "reusablePerspective": "mode queryは全色を走査せず、frequency histogramを持つと最大bucketだけで答えられる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Union-Find",
+      "text": "DSU on Tree、頻度の頻度配列と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "再帰stackと巨大配列のmemoryを抑え、resetで全配列clearせず実際に追加したEuler範囲だけ戻す。num[0]の扱いをqueryに混ぜない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Mode in the Subtree 型の 根付き木・部分木・パスの関係に対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "text": "250万頂点の全subtree mode統計を、配列ベースDSU on Treeで現実的な定数倍に計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "light edge数が対数回となるsize半減証明と、solve(v,keep)終了時のtable内容を小木で追って確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc466-f「Many Mod Calculation」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "連続整数[0,x)をmod Mへ写すと、剰余0..M-1のfull cycleがfloor(x/M)個とprefix[0,x mod M)一個になる。値multisetはprefix intervalの重み付き集合として閉じる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc466-f「Many Mod Calculation」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "同じ終端xのinterval [0,x) を係数付きでまとめ、priority queue/mapで管理し、各mod操作ごとに各終端を[0,M)と[0,x mod M)へ分解して同終端を併合する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "共通[0,M)部分は全intervalから一つの係数へ集約でき、残余終端はx自身またはx/2未満へ減るため、一つの起点が生成する非共通終端数は対数個に抑えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "0..X-1の全整数を保持し、各modulusを一要素ずつ順番に適用する。",
+        "decision": "rejected",
+        "decisionReason": "Xが巨大で初期要素列挙だけで不可能で、同じ剰余prefixが大量重複する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "一つの[0,x)の係数kは[0,M)へk×floor(x/M)、[0,x mod M)へkだけ寄与する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Many Mod Calculation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "操作ごとに生成される共通終端Mを一括し、同じ終端の係数をmergeすればinterval数の爆発を防げる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc466-f「Many Mod Calculation」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "multisetをend→count mapとend順priority queueで持つ。mod Mを処理する際、各distinct xのcountを取り出し、full countをend Mへ加え、remainder>0ならend remainderへ加える。同一endをcombineし、最終multisetから要求統計を計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc466-f「Many Mod Calculation」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "値multisetのprefix interval表現",
+      "trigger": "連続整数集合へmod操作を繰り返し適用するとき。",
+      "application": "剰余frequencyを[0,x)の重み付き和として保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc466-f「Many Mod Calculation」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "終端別の同類項merge",
+      "trigger": "各変換で同じ標準objectが多数生成されるとき。",
+      "application": "mapで係数をまとめ、priority queueにはdistinct終端だけを載せる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "各値を追う代わりに、modが連続区間へ作る剰余分布の形をbasis objectとして持つ。",
+      "reusablePerspective": "変換で毎回生まれる共通項と縮小する残余項を分けると、object数を償却解析できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "値multisetのprefix interval表現、終端別の同類項mergeと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "x mod M=0の空intervalを入れず、M≥xならfloor0でend xがそのまま残る。heap stale keyと大きなcountのmodulus処理を管理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Many Mod Calculation 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な連続整数multisetへの多数mod操作を、prefix intervalの係数変換として準線形個数でsimulationできる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "小さなx,Mで剰余frequencyを書き、full cycle係数とremainder prefixがinterval変換式に一致するか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

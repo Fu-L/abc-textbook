@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc396-g「Flip Row or Col」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "column flip集合XをW-bit maskとするとrow pattern B_iはB_i xor Xになり、その後rowをflipするかは1数cとW-cの小さい方を選べば独立に決まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "求めるcostはmask頻度freq[B]とHamming距離だけに依存するXOR convolution型Σ_B freq[B]g(B xor X)だが、W≤18なのでbit DPでも全Xをまとめられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc396-g「Flip Row or Col」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "mask頻度を作り、bitごとにHamming距離countを畳み込むDPで全Xのcostを計算する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "dp[X][j][c]を下位j bitの候補中で距離cとなるrow数として更新すればO(HW+2^W W²)で、2^W·H全探索を避けられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全column mask XごとにH rowsのpopcountを足す",
+        "decision": "rejected",
+        "decisionReason": "O(H2^W)でH=2×10^5,W=18では大きすぎる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各部分解を選択集合と終端状態で一意に分類し、最後の一手を外す帰納法で遷移の完全性を示す。",
+        "text": "column flip後のrow flip最適costはmin(popcount(B xor X),W-popcount(B xor X))である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Flip Row or Col 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "j bit目を一致側から取る遷移とX xor 2^j側から不一致として取る遷移で、Hamming距離分布を一bitずつ構築できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc396-g「Flip Row or Col」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各rowをmask化してfreqを数える。dp[X][0][0]=freq[X]からbit jを増やし、dp[X][j+1][c]+=dp[X][j][c]、dp[X][j+1][c+1]+=dp[X xor 2^j][j][c]とする。全XでΣ_c dp[X][W][c]min(c,W-c)の最小を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc396-g「Flip Row or Col」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "bitmask化によるrow/column flip分離",
+      "trigger": "一方の次元が小さく、flipがXOR作用になる0/1 matrix最適化。",
+      "application": "column集合をmask、各rowをpattern頻度として扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "bitmask と subset DP",
-      "trigger": "制約と操作を整理したときに bitmask と subset DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc396-g「Flip Row or Col」では、主解法候補として、選択済み集合を bitmask で表し、最後の要素または残り条件を加えた subset DP を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で bitmask と subset DP を問題固有の状態へ適用する。",
+      "name": "Hamming distance distribution DP",
+      "trigger": "全query maskに対するpatternとの距離別頻度を求めたいとき。",
+      "application": "bitを追加し一致・不一致の二遷移で集約する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "row操作はcolumn maskを決めた後に完全独立なので、二種類の操作順序を考えずHamming距離の対称costへ消去できる。",
+      "reusablePerspective": "行列flip問題では小さい幅をmask化し、もう一方の操作をmaskごとの最適応答として先に畳み込む。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "bitmask と subset DP",
+      "text": "bitmask、XOR、popcountとbit DPを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "集合への追加判定、部分集合列挙、状態数 2^N の型と配列長を確認する。",
+      "text": "bit順とrow文字のmask bit対応を統一する。dpをjごとにrollingする場合、同じlayerを上書きしない。count×costは64 bit。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Flip Row or Col 型の 盤面上の位置と局所遷移に対し、bitmask と subset DPを選び、状態と証明を一貫して設計できる。",
+      "text": "巨大H・小Wの行列flip最小化を、row pattern頻度と全mask Hamming分布DPで解ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "集合への追加判定、部分集合列挙、状態数 2^N の型と配列長を確認する。",
+      "text": "H,W≤7で全row/column flip集合を列挙し、complement rowが多いcase、W=1、同pattern集中を比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

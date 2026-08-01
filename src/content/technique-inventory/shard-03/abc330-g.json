@@ -17,77 +17,135 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc330-g「Inversion Squared」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "inversion数I=Σ_{l<r}1[P_l>P_r]なので、I²はorderedなindex-pair2本のindicator積の和へ展開できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "未確定位置数をq、未使用値を昇順u_1..u_qとすると、補完は未使用値の順位の一様ランダム順列πを未確定位置へ割り当てることと同じで、総和はq!倍の期待値になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Iは確定位置同士のinversion定数a、未確定位置同士のinversion U(π)、確定位置と未確定位置の寄与B(π)の和に分けられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc330-g「Inversion Squared」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "I=a+U+Bへ分解し、一様ランダム順列上のU・Bの二次momentとcross momentをO(N^2)集計してq!倍する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "公式のindicator積の型分けをmoment計算へ整理し、4 index全列挙を避けながら共有endpointの依存も条件付き期待値で扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全q!個の未使用値割当を列挙して各inversion数を数える。",
+        "decision": "rejected",
+        "decisionReason": "qは最大3000でpermutation列挙不能である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各inversion indicatorの確率だけを足して期待inversionを求め、その値を二乗する。",
+        "decision": "rejected",
+        "decisionReason": "求めるのはE[I²]であり(E[I])²ではなく、indicator間の相関を含むcross termが必要である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+        "text": "未確定位置pへ未使用値の順位vを置いたときの確定値とのinversion数をw[p][v]=左の確定値>u_vの個数＋右の確定値<u_vの個数とすると、B=Σ_p w[p][π_p]になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Inversion Squared 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Uの既知momentはE[U]=q(q-1)/4、Var(U)=q(q-1)(2q+5)/72で、E[U²]=Var+E[U]²である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "π_p=vで条件付けたUの期待値はC(q-1,2)/2+((p-1)(q-v)+(q-p)(v-1))/(q-1)となり、Σw[p][v]との積でE[UB]を二次loopだけで求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc330-g「Inversion Squared」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "確定位置同士のinversion aと、各未確定位置p・未使用値の順位vのw[p][v]をposition/value prefix countで作る。S_p=Σ_vw[p][v]、value列方向のsumも集計し、E[B]=(ΣS_p)/q、E[B²]=Σw²/q＋((ΣS)^2−ΣS_p²−Σ_v((Σ_pw)^2−Σ_pw²))/(q(q-1))を求める。q≥2なら条件付きU式を全p,vへ掛けてE[UB]=(1/q)Σw[p][v]E[U|π_p=v]とする。E[I²]=a²+E[U²]+E[B²]+2a(E[U]+E[B])+2E[UB]をmod 998244353で組み、q!を掛ける。q=0,1は分母0の項を個別に省く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc330-g「Inversion Squared」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "indicator積への展開",
+      "trigger": "count Iの二乗総和を求めたいとき。",
+      "application": "I²をevent pairの同時成立数または二次momentへ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc330-g「Inversion Squared」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "一様ランダム順列のmoment",
+      "trigger": "未確定位置へ未使用値を一様bijectionで割り当てる全補完を集計するとき。",
+      "application": "全和をq!倍の期待値として計算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "条件付き期待値でcross term計算",
+      "trigger": "permutation inversion数と位置別assignment costの相関を求めるとき。",
+      "application": "1位置のrankを固定した残りpermutationのexpected inversionを閉形式化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "without-replacementな二次和の集約",
+      "trigger": "Σ_p w_p(V_p)の二乗momentを一様bijectionで求めるとき。",
+      "application": "row sum・column sum・二乗和から同値割当を除く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "type A/B/Cのpair case splitは、確定値由来の定数a、未確定部分のpermutation自身のinversion U、position-value cost matrix Bへまとめると、依存がU-B cross moment1つに集約される。",
+      "reusablePerspective": "複雑なindicator pair分類は、ランダム補完上の既知統計量とassignment costへ分解してmoment公式に再編できる場合がある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
+      "text": "inversion数",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "全探索と候補数の上界評価",
+      "text": "期待値・分散・二次moment",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "一様ランダム順列",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "2次元prefix count",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "q=0なら補完は1つでanswer=a²、q=1ではq(q-1)の逆元を使うoff-diagonal項とE[UB]を0として分岐する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "wのrow/column sum式ではorderedなp≠r cross termを使い、B²の係数2を別に重ねない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "4,72,q,q-1のdivisionはmodular inverseで行い、最後にfactorial q!を掛けて期待値を全補完の総和へ戻す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Inversion Squared 型の 順列の位置と値の対応に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "部分的に固定されたpermutation全補完のinversion数二乗和を、二次moment集計でmod 998244353計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "q=2の2補完を直接列挙し、E[UB]がw[1][2]+w[2][1]の半分になることと、E[B²]のwithout-replacement除外を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

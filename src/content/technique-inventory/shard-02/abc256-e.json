@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc256-e「Takahashi's Anguish」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各頂点からちょうど一本の辺i→X_iが出るfunctional graphでは、弱連結成分ごとに閉路がちょうど一つあり、それ以外の頂点は閉路へ向かう木を作る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc256-e「Takahashi's Anguish」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "閉路だけを抽出して各最小Cを足す",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "木部分は葉側から順序を選べば不満を発生させず、閉路では少なくとも一人の不満が避けられないため、最小費用一人だけを犠牲にするのが最適である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全員のCを払う、または局所的に安い頂点を選ぶ",
+        "decision": "rejected",
+        "decisionReason": "必要な支払いは各連結成分の閉路に一つだけであり、木頂点や同じ閉路の複数頂点を払うのは過剰になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "遷移を続けると有限頂点上で必ず再訪が起こり、経路は前置き木と一つの閉路へ一意に分かれる。",
+        "text": "閉路外の頂点は入次数0の頂点から除いていけば全て消え、残った頂点がちょうど全閉路を構成する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Takahashi's Anguish 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "閉路上では循環する希望順を全て満たせないが、最小Cの頂点を最後の破れにすればその一人分で実現できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc256-e「Takahashi's Anguish」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各頂点の入次数を求め、入次数0をキューに入れて辺を順に削除する。最後まで残る閉路頂点を未訪問ごとに一周し、その閉路上のC最小値を答えへ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc256-e「Takahashi's Anguish」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "functional graphの閉路抽出",
+      "trigger": "全頂点の出次数が1で、各成分の唯一の閉路だけが必要になる。",
+      "application": "入次数0からのトポロジカル削除後に残る頂点を閉路として列挙する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "関数グラフの閉路分解",
-      "trigger": "制約と操作を整理したときに 関数グラフの閉路分解 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc256-e「Takahashi's Anguish」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 関数グラフの閉路分解 を問題固有の状態へ適用する。",
+      "name": "閉路ごとの局所最適化",
+      "trigger": "木部分は制約を満たせるが、循環依存で一箇所の違反が不可避になる。",
+      "application": "各閉路で違反させる費用が最小の頂点を一つ選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "不満の原因を人の列全体で追う代わりに、希望関係をfunctional graphへ写すと、避けられない費用が閉路ごとに一つだけだと分かる。",
+      "reusablePerspective": "各頂点が一つだけ依存先を持つ順序問題では、木部分を消去し閉路上の不可避コストを最適化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
+      "text": "functional graphの各連結成分が一つの閉路を持つことを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "関数グラフの閉路分解",
+      "text": "入次数による閉路外頂点の削除、または訪問色による閉路検出を実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。",
+      "text": "答えは最大2×10^14になるため64ビットで保持し、削除後の閉路を各一度だけ巡回する。X_i≠iだが、実装は閉路長に依存しない形にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Takahashi's Anguish 型の 順列の位置と値の対応に対し、関数グラフの閉路分解を選び、状態と証明を一貫して設計できる。",
+      "text": "全ての人を並べたときに生じる不満度合計の最小値を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。",
+      "text": "小さいNの全順列と比較し、複数成分、長い木が閉路へ入る例、閉路ごとの最小Cが先頭・末尾にある例を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

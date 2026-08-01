@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc410-g「Longest Chord Chain」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "残す弦は互いに交差しないので、最終的な交点は追加弦と残存弦の間だけに生じる。追加弦と交わる残存弦は、円周上で一本の入れ子列として並ぶ形に正規化できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "円を点1で切って各弦を区間 [L_i,R_i] と見ると、選択可能集合は一つの入れ子 chain、またはある切断座標 X の左右に完全に分かれた二つの入れ子 chain に一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc410-g「Longest Chord Chain」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "R_i 昇順に区間を処理し、L_i の最長減少部分列 DP と segment tree で、一 chain と左右二 chain の最大を求める",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "prefix の最大 nesting 長と、全区間 DP のうち L>X の最大を各 X=R_i で足せば二 chain case を網羅し、全体 O(N log N) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "元の弦交差 graph を作り、非交差集合とそれら全てを横切る追加弦を直接探索する",
+        "decision": "rejected",
+        "decisionReason": "交差辺は O(N^2) あり得て、一般の独立集合として扱うと円周順序が与える入れ子構造を失う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "R が昇順の二区間 I_a,I_b で I_a⊂I_b となる条件は L_a>L_b なので、入れ子最大数は L 列の最長狭義減少部分列になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Longest Chord Chain 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "左右二 chain の分割座標は任意実数を試さず R_i だけでよい。R_i≤X の区間集合は区間内で一定で、X を直前の R_i へ戻すと右側候補を減らさない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc410-g「Longest Chord Chain」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各弦を L=min(A,B),R=max(A,B) として R 昇順に sort する。segment tree で dp[L]=1+max_{x>L}dp[x] を更新し、各 prefix の全体最大 pref[i] を保存する。完成した dp から suffix range max max_{x>R_i}dp[x] を取り、単一 chain 最大と max_i(pref[i]+suffix(R_i+1)) の最大を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc410-g「Longest Chord Chain」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "区間包含と最長減少部分列",
+      "trigger": "右端順に並べた区間から最長の strict nesting chain を選ぶとき。",
+      "application": "左端が狭義減少する subsequence として segment tree DP を行う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc410-g「Longest Chord Chain」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "分割点 sweep",
+      "trigger": "互いに素な左右領域から独立な最適構造を一つずつ選ぶとき。",
+      "application": "候補 X を右端座標へ離散化し、左 prefix 最適と右側 endpoint 条件の最適を足す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "幾何配置の区間化",
+      "trigger": "円周上の非交差弦と一本の transversal の関係を扱うとき。",
+      "application": "円を切って端点順を区間の包含または左右分離へ翻訳する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "追加弦と交わる非交差弦の端点順は往路で外向き、復路で逆向きになるため、切断点をまたぐか否かだけで一 chain／二 chain に分類できる。",
+      "reusablePerspective": "円環の対象を直線へ切ると解が境界をまたぐ場合があるため、単一構造に加えて左右二構造の合成を調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "弦の交差条件、区間の strict containment、最長減少部分列の segment tree DP を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "全端点は相異なるが各弦で L<R に正規化する。range max の strict 条件 x>L と x>R_i、prefix に含める index を統一し、空側は0として扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Longest Chord Chain 型の 区間端点と包含関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "残す非交差弦と自由に追加する一弦の最大交点数を、区間 nesting chain の O(N log N) DP として求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "全弦が一重入れ子、二つの離れた入れ子群、元から交差する弦群、N=1 を小さい subset と追加端点区間の全探索で比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

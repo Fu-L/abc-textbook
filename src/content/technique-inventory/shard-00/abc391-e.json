@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc391-e「Hierarchical Majority Vote」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "長さ3のmajority nodeを反転するには、現在の多数派を構成するchildのうち必要数を反転すればよい。葉変更の影響は完全な三分木上を上へ伝わる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "childが3つ同値なら安い2つを、2対1なら多数派側の安い1つを反転すれば親のmajorityが変わる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc391-e「Hierarchical Majority Vote」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各三分木nodeの現在値と、その値を反転する最小leaf変更数をbottom-up DPする",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各nodeの最適変更は三childの値・costだけで局所的に決まり、全node数O(3^N)を一度処理すればroot答えが得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "leaf subsetを変更数順に列挙して最終majorityを再計算する",
+        "decision": "rejected",
+        "decisionReason": "leaf数3^Nに対するsubsetは二重指数的であり、階層構造を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "leafの反転costは1。内部nodeでは現在多数派と同じ値のchildだけが親反転へ寄与する候補になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Hierarchical Majority Vote 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同値3個なら一個だけ反転しても2対1で親値は変わらないため、二つの最小costを足す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc391-e「Hierarchical Majority Vote」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "文字を(value,cost=1)のleafとし、3要素ずつまとめる。親valueをmajorityで求め、多数派childが2個ならcostのmin、3個ならcostの小さい2個の和を親costとする。N層後のcostを出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc391-e「Hierarchical Majority Vote」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "tree DPによる局所感度",
+      "trigger": "階層的な集約関数の最終出力を反転する最小入力変更数を求めるとき。",
+      "application": "各nodeに現在値と反転costを持たせる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc391-e「Hierarchical Majority Vote」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "majority gateの最小cut",
+      "trigger": "奇数個majorityの出力を変えるcostがchild別に異なるとき。",
+      "application": "現多数派を過半数未満にする最安child集合を選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最終bitだけを目標にしても、各subtreeでは「現在値を逆にするcost」一つだけで上位の全判断に十分である。",
+      "reusablePerspective": "Boolean回路の出力反転最小costでは、gateごとに出力0/1の最小costまたは現在値反転costをbottom-upする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "完全木上のbottom-up DPとmajority条件を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "三つ全同値と2対1を分け、多数派でないchildのcostを誤って選ばない。3^N長を整数で正しく構築する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Hierarchical Majority Vote 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "階層majorityの最終結果を変える最小leaf反転数を、局所gate DPで線形時間に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "N≤3で全leaf変更subsetを列挙し、3同値・2対1が各層で混ざるcaseのvalue/costをnodeごとに比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

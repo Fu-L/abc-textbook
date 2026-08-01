@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc227-g「Divisors of Binomial Coefficient」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "約数個数は素因数指数から求まるが、Nは10^12なのでN!や二項係数そのものを構築できない。一方Kは10^6以下で、分子は[N-K+1,N]という短い連続区間、分母はK!である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "sqrt(N)は最大10^6でKと同程度なので、sqrt(N)までの素数を列挙し、短い分子区間をまとめて割る方針なら制約に合う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc227-g「Divisors of Binomial Coefficient」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "二項係数を法998244353で計算し、その剰余を素因数分解する。",
+        "decision": "rejected",
+        "decisionReason": "剰余から元の巨大整数の素因数指数は復元できず、約数個数も保存されない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "K!と連続区間[N-K+1,N]を篩の要領で素因数分解し、各素数の分子指数から分母指数を引く。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "扱う整数は2K個に限られ、必要な素数もsqrt(N)以下までの篩で列挙できるため、Nの大きさに比例せず指数表を得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "算術の基本定理により正整数の素因数指数表現は一意で、積・割り切れ条件を指数ごとに判定できる。",
+        "text": "C(N,K)=N(N-1)…(N-K+1)/K!なので、素数pごとの指数は分子区間の指数総和からK!の指数を引けばよく、巨大な積を持つ必要がない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Divisors of Binomial Coefficient 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "分子の各数をsqrt(N)以下の全素数で割り切った後に1より大きく残る因子は素数である。短い区間を配列に保持することで、区間篩と同様に各倍数だけを訪問できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc227-g「Divisors of Binomial Coefficient」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "sqrt(N)までを篩って素数を列挙する。各素数について分子区間内の最初の倍数から繰り返し割って指数を加え、K!中の指数を減らす。最後に各要素の残存素因数も加え、全ての指数eについて(e+1)をmod 998244353で掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "多項式の係数演算",
-      "trigger": "制約と操作を整理したときに 多項式の係数演算 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc227-g「Divisors of Binomial Coefficient」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。で 多項式の係数演算 を問題固有の状態へ適用する。",
+      "name": "積・商を素因数指数の加減算へ移す",
+      "trigger": "巨大な整数の積や組合せ数そのものではなく、約数個数・平方性・割り切れ方を求めるとき。",
+      "application": "二項係数の分子と分母を別々に因数分解し、素数ごとの指数差から約数個数を計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "素因数分解と約数列挙",
-      "trigger": "制約と操作を整理したときに 素因数分解と約数列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc227-g「Divisors of Binomial Coefficient」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。で 素因数分解と約数列挙 を問題固有の状態へ適用する。",
+      "name": "区間篩による連続整数の素因数分解",
+      "trigger": "値自体は大きいが、因数分解したい整数が短い連続区間にまとまっており、sqrt(最大値)までの素数を列挙できるとき。",
+      "application": "[N-K+1,N]の残存値を配列に置き、各素数pの区間内倍数だけをpで割って指数を回収する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "N≤10^12とK≤10^6からsqrt(N)≤10^6が成り立ち、分子区間の長さと試す素数範囲の両方が実行可能な大きさに揃っている。",
+      "reusablePerspective": "巨大な端点と短い区間が同時に現れたら、区間全体を走査しつつsqrt(端点)までの素数でまとめて処理する segmented sieve を疑う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "多項式の係数演算",
+      "text": "素因数指数と約数個数の公式",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "素因数分解と約数列挙",
+      "text": "エラトステネスの篩と区間内の最初の倍数の求め方",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。",
+      "text": "区間値・N・倍数計算には64bit整数を使い、ceil(L/p)×pで最初の倍数を求める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "K=0では二項係数が1で答えも1となる。篩後に各分子要素へ残った1より大きい因子を忘れず指数表へ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Divisors of Binomial Coefficient 型の 多項式係数と組合せ和の対応に対し、素因数分解と約数列挙を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な二項係数を構築せず、短い分子区間とK!を区間篩で因数分解して、素因数指数から約数個数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。",
+      "text": "組合せ数の乗法的性質を問われたら、まずC(N,K)を短い分子区間÷K!と書き、値ではなく素因数指数を持つ方針を検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "制約のKとsqrt(N)が同じ10^6に収まることを見落とさず、単発の試し割りではなく区間篩へつなげる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

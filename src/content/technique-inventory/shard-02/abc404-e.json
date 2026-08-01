@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc404-e「Bowls and Beans」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "操作順は現在もっとも後ろにある豆を先に動かす形へ交換でき、同じ茶碗の豆を複数の行き先へ分割せず一か所へまとめても最適性を失わない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "茶碗 r から同じ豆を k 回動かして到達可能な位置は区間 [l,r] をなし、次の一手後の左端は min_{i∈[l,r]}(i-C_i) になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc404-e「Bowls and Beans」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "豆のある茶碗を 0 に近い順に処理し、到達可能区間の左端を反復更新して直前までに統合した豆へ届く最小手数を足す",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "後続の豆は先行する豆の位置へ到達した時点で合流できる。答えは高々 N-1 なので区間最小を毎回走査しても O(N^2) に収まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各茶碗の豆数と各分配先を頂点にした全状態 BFS を行う",
+        "decision": "rejected",
+        "decisionReason": "一操作で豆を任意分割できるため状態数と分岐数が指数的になり、交換・非分割の性質を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+        "text": "先にある豆へ後ろの豆が到達すれば、以後は同じ茶碗の一塊として動かせるため、その後ろの豆について独立に 0 まで運ぶ必要はない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Bowls and Beans 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "到達可能集合が穴のない区間になるので、次状態は個々の経路ではなく左端 l だけで表せる。右端 r は開始位置として固定したままよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc404-e「Bowls and Beans」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "A_i=1 の位置を昇順に見る。最初は目標を茶碗 0、各豆について [l,r]=[x,x] から l=min_{i∈[l,r]}(i-C_i) を繰り返し、区間が直前の統合位置へ届くまでの回数を答えへ加えて豆を合流させる。単純走査なら全体 O(N^2)、区間最小構造なら高速化もできる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc404-e「Bowls and Beans」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "交換論",
+      "trigger": "自由な操作順や分割がある最小回数問題で、正規形の操作列へ並べ替えられそうなとき。",
+      "application": "後ろの豆を優先し、分配を一か所へまとめる操作列だけ考えてよいことを示す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "セグメント木と monoid",
-      "trigger": "制約と操作を整理したときに セグメント木と monoid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc404-e「Bowls and Beans」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で セグメント木と monoid を問題固有の状態へ適用する。",
+      "name": "到達可能区間の拡張",
+      "trigger": "一手の遷移先が連続区間で、複数手後の可到達集合も連続性を保つとき。",
+      "application": "左端を区間内の i-C_i の最小値で更新し、目的位置を含むまで反復する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "合流による状態圧縮",
+      "trigger": "複数対象が同じ位置へ来た後の操作を共有できるとき。",
+      "application": "先行する豆に届いた後続の豆を一塊として扱い、以後のコストを二重計上しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "豆を一粒ずつ追う代わりに「この手数で置ける茶碗の区間」を追い、別の豆へ届いた瞬間に将来の経路を共有させる。",
+      "reusablePerspective": "移動対象が合流可能な問題では、各対象を終点まで運ぶコストではなく、すでに処理した成分へ接続するまでの増分を数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "セグメント木と monoid",
+      "text": "交換論による操作列の正規化と、区間最小値の素朴計算を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "茶碗 0 では C_0 を参照せず、目的位置を区間が含んだ時点で止める。A_i=0 の位置を新しい豆として処理しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Bowls and Beans 型の 区間端点と包含関係に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。",
+      "text": "複雑な豆の分配を到達区間と合流回数へ落とし、N≤2000 なら二次時間で最小操作回数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "豆が一つだけ、全茶碗に豆がある、C_i=1、C_i=i、到達区間が既存の豆をちょうど端で含む場合を小規模 BFS と照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -38,6 +38,12 @@ import { verifyCorpusMetadataBatch, verifyPolicyApprovalManifest } from './verif
 const SHA_256 = /^[a-f0-9]{64}$/u;
 const RETRYABLE_STATUS = new Set([408, 429, 500, 502, 503, 504]);
 
+/** Bind a private raw-response cache to one acquisition timestamp and approved policy set. */
+export const acquisitionCacheScope = (
+  checkedAt: string,
+  policyApproval: PolicyApprovalManifest,
+): string => canonicalDigest({ checkedAt, policyApproval });
+
 export class CorpusAcquisitionError extends Error {
   readonly code: string;
 

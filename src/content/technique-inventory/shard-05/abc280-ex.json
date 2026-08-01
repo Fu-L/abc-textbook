@@ -17,77 +17,111 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc280-ex「Substring Sort」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "全substring tripleは総数Mが二次規模になり得るため実体化できないが、各substringはある元string suffixの非空prefixとして一意に表せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "suffixを辞書順に並べると、同じprefix文字列を持つsuffixはLCP条件で連続区間になり、その文字列のoccurrence tripleも連続blockとして数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc280-ex「Substring Sort」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全stringをseparator付きで連結してsuffix array/LCPを作り、LCP intervalをmonotone stackで辞書順blockへ圧縮し、query rankを累積個数から逆算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "suffix総数は10^5で、最大二次個のsubstring occurrenceをO(total length)個のLCP blockとして扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各suffixの全prefix tripleを生成し、文字列比較でsortする。",
+        "decision": "rejected",
+        "decisionReason": "substring数Mが各|S_i|²の和で、memory・sortingとも制約を超える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "suffix の辞書順と共通接頭辞長が部分文字列比較の最初の不一致位置を一意に決める。",
+        "text": "separatorを全英小文字より小さく置いた連結stringのsuffix順は、separatorで切った各元suffixの辞書順を保つ。LCPは元string末尾までにcapする。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Substring Sort 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "suffix区間[i,j]についてa=max(LCP[i-1],LCP[j])、b=min(LCP[i…j-1])なら、a<R≤bの各prefix長はちょうどj-i+1個の等しいsubstring occurrenceを持つ。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "有効な(i,j) blockはLCPのCartesian/stack構造上線形個しかなく、所与xがblock内ならoffsetをmultiplicityで割ってprefix長とoccurrenceを復元できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc280-ex「Substring Sort」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各S_iにseparatorを付けて連結しSAとLCPを構築、separator suffixを除いたT=(string id,start)とcap済みLCPを得る。stackで有効(i,j,a,b)を辞書順に走査しblock size=(j-i+1)(b-a)を累積する。昇順query xが入るblockでRとT内occurrenceを選び(K,L,L+R-1)を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc280-ex「Substring Sort」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "suffix arrayとLCP",
+      "trigger": "多数のsuffix/prefix由来文字列を辞書順に扱い、共通prefix区間を知りたいとき。",
+      "application": "全suffixをsortし、隣接LCPから同prefixを共有する連続範囲を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Suffix Array と LCP",
-      "trigger": "制約と操作を整理したときに Suffix Array と LCP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc280-ex「Substring Sort」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Suffix Array と LCP を問題固有の状態へ適用する。",
+      "name": "LCP intervalのmonotone stack",
+      "trigger": "suffix tree相当のprefix groupを明示treeなしで線形列挙したいとき。",
+      "application": "LCPの増減をstackで管理し、有効なsuffix区間と深さ範囲をblock化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "巨大sorted multisetのrank selection",
+      "trigger": "要素総数は巨大だが等値groupのsizeを圧縮して順に数えられるとき。",
+      "application": "block累積数でrankをlocateし、block内offsetから代表要素を復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "substringの辞書順multisetは、suffix順とLCP intervalごとのprefix長帯(a,b]を組み合わせると線形個の長方形blockに分解できる。",
+      "reusablePerspective": "quadraticなsubstring occurrenceを扱うときは、suffixを起点にし、同prefixのoccurrence区間×長さ区間として圧縮する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
+      "text": "suffix array・Kasai LCP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Suffix Array と LCP",
+      "text": "separatorを用いる複数string連結",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "monotone stackとrank累積",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "suffix 長が異なる比較と sentinel の順序を統一する。",
+      "text": "separatorを跨ぐLCPを元suffix長で必ずcapし、separator始まりsuffixと空prefixをTから除外する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Mとblock累積は文字列長の二次規模で32 bitを超え得るため64 bitを使い、block内のequal occurrenceは任意順でよいという出力許容を利用する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Substring Sort 型の 文字列の prefix・suffix と一致関係に対し、Suffix Array と LCPを選び、状態と証明を一貫して設計できる。",
+      "text": "複数stringの全substring occurrenceの辞書順rank queryを、SA/LCPの線形個blockから具体tripletへ復元できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "suffix 長が異なる比較と sentinel の順序を統一する。",
+      "text": "suffix群abab,bab,ab…のprefixをLCP区間へ並べ、同じ'ab'が区間[i,j]・長さR=2のmultiplicityとして現れることを手で確かめる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

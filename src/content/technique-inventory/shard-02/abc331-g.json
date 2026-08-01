@@ -17,77 +17,105 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc331-g「Collect Them All」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "全種類を得るまでの回数Tは、tail-sum公式E[T]=Σ_{n≥0}Pr(T>n)で表せる。n回で全種類を得る確率へ包除原理を適用すると、subset Sだけから引く確率(Σ_{i∈S}C_i/N)^nが現れる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "subsetごとの寄与はC_iの総和kだけで決まり、nについての無限和はN/(N-k)という等比級数へ閉じる。残る課題は同じkを持つsubsetの符号和を全kについて求めることである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc331-g「Collect Them All」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "包除原理を母関数∏(1-X^{C_i})へまとめ、積をdivide-and-conquer convolutionする",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "subset符号和を次数Nの多項式係数として一括計算でき、NTTによる積でO(N(log N)^2)に抑えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "未収集種類subsetを状態とするcoupon collector DP",
+        "decision": "rejected",
+        "decisionReason": "Mは2×10^5で2^M状態を持てず、種類ごとの出現確率も異なるため収集種類数だけには圧縮できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "DP[m][k]で多項式積を逐次更新する",
+        "decision": "rejected",
+        "decisionReason": "式は正しいがO(MN)となり、双方が最大2×10^5では実行できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+        "text": "係数d_k=[X^k](-1)^{M-1}∏(1-X^{C_i})は、総枚数kになるsubsetの(-1)^{M-1-|S|}の総和そのものである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Collect Them All 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "全集合S=Uではf(S)=1となって等比級数が発散するが、tail probabilityの変形ではS⊊Uだけが残るため次数Nの項を除きk=0..N-1だけを使う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc331-g「Collect Them All」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各iの疎多項式(1-X^{C_i})を用意し、次数Nで打ち切りながら小さい多項式同士を優先してconvolutionする。得た係数へ全体符号を掛け、Σ_{k=0}^{N-1} d_k×N/(N-k)をmod 998244353で計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc331-g「Collect Them All」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "tail-sum formulaと包除原理",
+      "trigger": "非負整数停止時刻の期待値を、時刻nまでに全条件を満たす確率から求められるとき。",
+      "application": "未完了確率を全nで足し、種類subsetだけを引く確率へ展開する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "包除原理",
-      "trigger": "制約と操作を整理したときに 包除原理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc331-g「Collect Them All」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 包除原理 を問題固有の状態へ適用する。",
+      "name": "subset和の母関数化",
+      "trigger": "subsetの寄与が選択要素の重み総和と選択数の符号だけに依存するとき。",
+      "application": "符号付きsubset sumを∏(1-X^{C_i})の係数へ集約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "divide-and-conquer polynomial product",
+      "trigger": "多数の低次数多項式の積を所要次数まで高速に得たいとき。",
+      "application": "NTT convolutionを積木状に行いO(N(log N)^2)で係数を求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "非一様coupon collectorの無限時間期待値が、包除後にはカード枚数subset sum kごとの有限な多項式係数とN/(N-k)の内積になる。",
+      "reusablePerspective": "確率過程の無限和でも、イベントを包除して各項を等比級数にできれば有限の組合せ集計へ落ちることがある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "期待値のtail-sum公式と包除原理を扱える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "包除原理",
+      "text": "母関数・NTT convolution・次数打ち切りを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "多項式の全体符号と各因子の負号を二重に扱わない。次数N項は分母0なので加えず、mod除算には逆元を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Collect Them All 型の 整数の約数・剰余構造に対し、包除原理を選び、状態と証明を一貫して設計できる。",
+      "text": "非一様coupon collectorの期待値をtail-sum・包除・母関数積へ変換し、高速convolutionで計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "M=1とC_i=1の等確率ケースを既知のNH_Mと照合し、小さいNではsubset包除の直接計算と係数・符号・k=N除外を比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

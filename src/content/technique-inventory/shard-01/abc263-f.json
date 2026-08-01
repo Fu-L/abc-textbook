@@ -1,15 +1,15 @@
 {
   "problemId": "abc263-f",
   "sourceRevisionIds": [
-    "source-abc263-editorial-4550-b6e2922d0d6dd7c13db4dd4ddb7bb9d9b79ac9e390f694ef5317da5f15264315",
-    "source-abc263-f-problem-29c43defca98c2a963108037041bb5b6dcc5966f30ac660724107a28ed5d9274"
+    "source-abc263-f-problem-29c43defca98c2a963108037041bb5b6dcc5966f30ac660724107a28ed5d9274",
+    "source-abc263-editorial-4550-b6e2922d0d6dd7c13db4dd4ddb7bb9d9b79ac9e390f694ef5317da5f15264315"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc263-editorial-4550-b6e2922d0d6dd7c13db4dd4ddb7bb9d9b79ac9e390f694ef5317da5f15264315",
-        "source-abc263-f-problem-29c43defca98c2a963108037041bb5b6dcc5966f30ac660724107a28ed5d9274"
+        "source-abc263-f-problem-29c43defca98c2a963108037041bb5b6dcc5966f30ac660724107a28ed5d9274",
+        "source-abc263-editorial-4550-b6e2922d0d6dd7c13db4dd4ddb7bb9d9b79ac9e390f694ef5317da5f15264315"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc263-f「Tournament」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "固定された対戦表は参加者を葉とする深さ N の完全二分木で、各内部ノードでは左右部分木の勝者だけが対戦する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "部分木から誰が勝ち上がるかを固定すれば、その人以外で部分木内に確定する賞金の最大値を状態にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc263-f「Tournament」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各試合の勝者を全内部ノードについて二択で列挙し、総賞金を計算する。",
+        "decision": "rejected",
+        "decisionReason": "試合数は2^N−1で、勝敗列挙は二重指数的になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "dp[node][person] を person がその部分木を勝ち上がるとき、既に敗退した人の賞金最大値として木の下からマージする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "勝つ側を固定したとき相手部分木の最適敗者は勝者本人に依存せず、相手側の最大値を前計算して二重全探索を避けられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "左の j が親で勝つ場合、左 dp[j] に max_k(right dp[k]+C[k][h]) を足せばよい。h は k が敗れるまでに勝った試合数である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Tournament 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "根まで勝ち残ったchampionだけは敗退時に賞金が確定しないので、最後に C[champion][N] を加えて最大を取る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc263-f「Tournament」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "fixed bracket tournament を complete binary tree DP とし、merge の片側全探索を winner-independent maximum へ畳み込む。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc263-f「Tournament」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "勝ち上がり者を状態にするトーナメント木DP",
+      "trigger": "固定トーナメント表で勝敗を選び、各参加者の到達roundに応じた利得を最大化するとき。",
+      "application": "各部分木について勝者候補ごとの最適値を持ち、左右勝者の対戦で親へ遷移する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc263-f「Tournament」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "遷移相手の最大値前計算",
+      "trigger": "二群の状態をマージする際、一方を固定した評価が相手の識別子に依存せず最大値だけ必要なとき。",
+      "application": "相手部分木で敗者賞金込みの最大値を一度計算し、全勝者候補へ共通加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "同じ深さの全ノードで勝者候補集合は葉を分割しており、dp状態総数は各深さ2^N個、全体でN×2^N個に収まる。",
+      "reusablePerspective": "木DPの状態数はノード数×全候補数で粗く見ず、同じ層で候補集合が分割されるかを数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "完全二分木上のbottom-up DPと、勝者・敗者の報酬確定時点を扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "葉では本人が勝ち上がり、まだ誰も賞金確定していない値0を初期状態にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "賞金合計は大きくなるため64 bit整数を使い、round添字 h と入力 C_{i,j} の1始まりを合わせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Tournament 型の 区間端点と包含関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "固定表トーナメントの勝敗を最適化し、勝利数依存賞金の最大総額を木DPで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "トーナメント問題は列の反復処理ではなく、葉区間が固定された完全二分木として描く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "左右候補の二重ループが見えたら、勝者を固定した評価が敗者側の最大値だけで決まらないか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

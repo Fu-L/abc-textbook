@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc377-g「Edit to Match」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "過去文字列 T を S_k に変える最小操作数は |S_k|+|T|-2·lcp(S_k,T) である。各 prefix p について、p を接頭辞にもつ過去文字列の最小長だけ分かれば全 T の最小を取れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc377-g「Edit to Match」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "過去文字列を trie に挿入し、各 node にその prefix をもつ文字列の最小長を保持して、S_k の root-to-leaf path 上で式を最小化する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "必要な候補は S_k の各 prefix に対応する O(|S_k|) 個へ集約され、全長和に比例する時間で query と挿入ができる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "新しい文字列ごとに全過去文字列との LCP を直接比較する。",
+        "decision": "rejected",
+        "decisionReason": "文字列数と総長が2×10^5でも、類似した長い文字列が多いと比較総量が二乗になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "削除して LCP まで戻り、残りを追加する編集だけなので距離式は長さと LCP だけで決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Edit to Match 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "固定 prefix 長 i の候補では |T| が最小の過去文字列だけ残せば、他は同じ LCP で必ず劣る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc377-g「Edit to Match」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "trie root を空文字列長0で初期化する。S_k を辿りながら node の minLen を使い |S_k|+minLen-2i を評価し、出力後に path 上の minLen を |S_k| で chmin する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc377-g「Edit to Match」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc377-g「Edit to Match」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "Trie 上の prefix DP",
+      "trigger": "文字列間コストが共通 prefix 長と相手の要約値で決まるとき。",
+      "application": "各 prefix node に過去候補の最小長を集約する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "編集列を考える代わりに、最適な折返し地点が二文字列の LCP であることを式にする。",
+      "reusablePerspective": "同じ prefix を共有する候補は、将来の query に必要な min 長だけを残せる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "LCP、Trie、文字列削除・追加距離、node ごとの最小値更新を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "空文字列を過去候補として root に長さ0で入れる。答えを計算してから S_k 自身を挿入し、同時刻の自己利用を防ぐ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Edit to Match 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "過去文字列との最小編集距離を、Trie の prefix ごとの最小長だけで総文字数線形に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "距離式 |S|+|T|-2·lcp を先に導き、固定 LCP なら T のどの情報だけが必要かを問い直す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

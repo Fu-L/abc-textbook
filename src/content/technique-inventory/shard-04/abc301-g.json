@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc301-g「Worst Picture」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "撮影点pで二人以上が同一直線上に重なる場合だけ人数が減るため、最適値がNでなければpは少なくとも一つの人pair直線上にある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc301-g「Worst Picture」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "有効pair直線とその交点を有理数で列挙",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "x<0を通る各直線上単独候補と、複数直線が交わるpを調べ、各直線上人数-1の隠人数を合計すれば最小可視人数を得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "3D空間を連続最適化",
+        "decision": "rejected",
+        "decisionReason": "目的値が直線配置で離散的に変化し、座標探索では候補を保証できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Worst Picture 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "pを通る同一直線上ではx>0の人は同じrayに並び最前の一人だけ写る。複数の異なる有効直線がpで交わる時、隠人数寄与を加算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc301-g「Worst Picture」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "全person pairからx<0領域へ延びる相異なる3D直線をcanonical有理表現で作り各包含人数を数える。直線単独と全二直線交点x<0をmapで集約し、通過直線ごとの(cnt-1)最大をNから引く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc301-g「Worst Picture」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "配置が変わる臨界集合の列挙",
+      "trigger": "連続位置pでscoreがcollinearity時だけ変化する。",
+      "application": "pairが定める直線とその交点だけを候補にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "式変形と frequency map",
-      "trigger": "制約と操作を整理したときに 式変形と frequency map の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc301-g「Worst Picture」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 式変形と frequency map を問題固有の状態へ適用する。",
+      "name": "有理幾何",
+      "trigger": "3D直線の一致・交点を誤差なく扱う。",
+      "application": "整数比をcanonical化してmap keyにする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "隠れが発生するための必要条件が人pairとpの共線性なので、連続3D最適化をO(N^4)の離散交点へ落とせる。",
+      "reusablePerspective": "幾何scoreの不連続条件を列挙して候補集合を作る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "式変形と frequency map",
+      "text": "3D直線、射影交点、有理数正規化。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "添字 parity による符号反転と負数 key をそのまま正確に保持する。",
+      "text": "x<0の候補だけ採用し、同一直線重複を統合する。射影が重なる場合は別平面を使い、128ビットで積を守る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Worst Picture 型の 整数の約数・剰余構造に対し、式変形と frequency mapを選び、状態と証明を一貫して設計できる。",
+      "text": "撮影点を最適に選んだとき写真に写る人数の最小値を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "添字 parity による符号反転と負数 key をそのまま正確に保持する。",
+      "text": "小Nで候補点を直接評価し、全X同値で答N、3人以上共線、3本以上が一点交差する例を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

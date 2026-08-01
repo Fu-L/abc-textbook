@@ -17,85 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc221-f「Diameter set」では、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。さらに、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "任意の二赤頂点間距離が木の直径 D なので、赤頂点は直径 path の中心から最大半径にある必要がある。同じ中心側の成分から二頂点を選ぶと path が中心を通らず距離が D 未満になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "D が奇数なら中心は一本の辺で二成分、D が偶数なら中心は一頂点で隣接 branch が複数ある。サンプル2のように偶数直径では異なる三 branch 以上から一頂点ずつ選ぶ集合も有効になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc221-f「Diameter set」では、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。さらに、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。",
+        "approach": "直径 path とその中心を求め、中心辺の両側または中心頂点の各 branch で、中心から距離 D/2 相当の頂点数を数えて組合せを計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全ての赤頂点対が直径になる条件を、中心からの距離と「同じ branch から高々一つ」という独立な選択条件へ変えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "直径を成す頂点対だけを数え、それを赤集合の個数とする。",
+        "decision": "rejected",
+        "decisionReason": "D が偶数のときは異なる三つ以上の branch から一頂点ずつ選んだ集合も全ての対が距離 D となり、二頂点集合だけでは不足する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+        "text": "奇数 D では中心辺を切った両側から距離 (D-1)/2 の頂点を一つずつ選ぶしかなく、答えは二側の個数の積になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Diameter set 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "偶数 D では中心 C の各 branch i にある距離 D/2 の頂点数を M_i とすると、各 branch から0または1頂点を選ぶ総数 ∏(M_i+1) から選択数0と1を除けばよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc221-f「Diameter set」では、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。さらに、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。",
+      "text": "任意点から最遠点 X、X から最遠点 Y を求めて直径 path を復元する。D が奇数なら中央辺を越えない DFS で両側の対象深さ個数を数えて積を取る。偶数なら中心の各隣接 branch ごとに対象深さ個数 M_i を数え、∏(M_i+1)-1-ΣM_i を法 998244353 で求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc221-f「Diameter set」では、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。さらに、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "木の直径と中心",
+      "trigger": "全頂点対の最大距離や、互いの距離が直径に等しい頂点集合を扱うとき。",
+      "application": "二回の最遠点探索で直径 path を得て、中心頂点または中心辺を基準に構造を分ける。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "組合せ数と二項係数",
-      "trigger": "制約と操作を整理したときに 組合せ数と二項係数 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc221-f「Diameter set」では、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。さらに、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。で 組合せ数と二項係数 を問題固有の状態へ適用する。",
+      "name": "branch 独立な選択数え上げ",
+      "trigger": "中心を除く各成分から高々一要素を独立に選べるとき。",
+      "application": "各 branch の「選ばない1通り＋候補数」を掛け、必要な選択個数未満の項を引く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "直径の偶奇が、赤集合をちょうど二側から選ぶ積と、複数 branch から選べる積-minus-small-cases に分ける。",
+      "reusablePerspective": "木の等距離条件では path の中点が頂点か辺かを最初に分け、同じ中心成分内の二点が条件を満たせるか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "幅優先探索",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "組合せ数と二項係数",
+      "text": "木の直径、path 復元、中心、深さ別 DFS 数え上げ",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "奇数の場合は中央辺を探索で横断せず、偶数の場合は branch ごとに独立して距離 D/2-1 を数える。積・差し引きは負にならないよう法を正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Diameter set 型の問題に対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "木の直径中心から等距離頂点集合の branch 制約を導き、直径の偶奇別に有効集合を数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "中心が辺の path 木と中心が頂点の star を並べ、同じ側・同じ branch から二点選ぶと距離が短くなることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

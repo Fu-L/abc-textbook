@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc291-g「OR Sum」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "ORはbitごとに独立で、あるbitのORが0なのは対応するA,Bのbitが両方0の位置だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc291-g「OR Sum」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "補bit列の巡回相互相関を畳み込みで計算",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "Aを二周、Bを反転して畳み込めば全回転で両bitが0の個数が得られ、各bitのOR和を全shiftへ加算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全N回転を一つずつ評価",
+        "decision": "rejected",
+        "decisionReason": "各回転にN要素必要で二次時間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "OR Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "巡回shift jの添字和は、二周した列と逆順列の通常畳み込みの係数N-1+jとして取り出せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc291-g「OR Sum」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各5bitについて補数化したA二周列と逆順B列を畳み込み、全shiftのOR個数N-c[N-1+j]を2^bit倍して得点へ加え、最大得点を選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc291-g「OR Sum」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "畳み込みによる相互相関",
+      "trigger": "全shiftに対する二列の位置ごとの積和が必要になる。",
+      "application": "一方を反転し、もう一方を二周して巡回相関を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "畳み込みと NTT",
-      "trigger": "制約と操作を整理したときに 畳み込みと NTT の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc291-g「OR Sum」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 畳み込みと NTT を問題固有の状態へ適用する。",
+      "name": "bit分解",
+      "trigger": "値域が0..31で論理和に繰り上がりがない。",
+      "application": "5bitを独立な0/1列として処理し2^b倍で合成する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "ORの1を直接数える代わりにDe Morganで「両方0」の相関を数えると積和になり、FFT/NTTへ接続できる。",
+      "reusablePerspective": "論理演算の全shift集計は、補集合やbit分解で積和へ変形する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "畳み込みと NTT",
+      "text": "巡回相互相関の畳み込み添字と、NTT/FFTによる整数係数計算を扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "必要な係数長、padding 長、法が NTT に対応するかを確認する。",
+      "text": "Aの二周長2Nと反転Bの係数位置N-1+jを確認し、各shiftの得点は64ビットで持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "OR Sum 型の 列の順序と prefix 状態に対し、畳み込みと NTTを選び、状態と証明を一貫して設計できる。",
+      "text": "巡回shift後のΣ(A_i OR B_i)の最大値を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "必要な係数長、padding 長、法が NTT に対応するかを確認する。",
+      "text": "小さいNの全shift全評価と比較し、全0・全1、Nが変換長の境界付近、shift0とN-1を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

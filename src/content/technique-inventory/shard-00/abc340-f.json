@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc340-f「S = 1」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "三点(0,0),(X,Y),(A,B)の三角形面積は|XB-YA|/2、同値に|AY-BX|/2である。面積1の条件は整数一次不定方程式|AY-BX|=2になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc340-f「S = 1」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "gcd判定後、extended Euclidean algorithmでBézout係数を構成する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "解存在条件gcd(X,Y)|2を判定し、存在時は係数を定数倍して範囲内の整数解を直接得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "A,Bを座標範囲内で探索する",
+        "decision": "rejected",
+        "decisionReason": "各座標は±10^18で候補が広大であり、線形探索も二重探索も不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数線形結合で表せる値の集合が gcd の倍数全体なので、割り切れ条件が可解性の必要十分条件になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "S = 1 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "g=gcd(|X|,|Y|)はAY-BXの全ての値を割るためg∤2なら不可能である。g=1または2ならextended gcdを(Y,-X)へ適用してcY-dX=±gを得て、2/g倍すれば絶対値2の解になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc340-f「S = 1」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "g=gcd(abs(X),abs(Y))を求め、2 mod g≠0なら-1を出す。extended gcdでY·u+(-X)·v=gまたは-gとなる係数を得て、scale=2/gを掛けA=u·scale,B=v·scaleとする。必要なら符号を反転し出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc340-f「S = 1」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "determinantによる面積",
+      "trigger": "原点を含む格子三角形の面積条件が座標のbilinear式になる。",
+      "application": "2倍面積をdeterminant |XB-YA|として整数方程式へ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "gcd と拡張 Euclid",
-      "trigger": "制約と操作を整理したときに gcd と拡張 Euclid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc340-f「S = 1」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で gcd と拡張 Euclid を問題固有の状態へ適用する。",
+      "name": "Bézout identity",
+      "trigger": "aA+bBが指定整数2になる整数係数を構成したい。",
+      "application": "extended Euclidでgcdの線形結合を得て、gcdが2を割る分だけscaleする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "gcdが3以上なら不可能、gcdが1または2なら常に可能と完全に分類でき、座標上限もBézout係数の標準boundと2/g倍から満たせる。",
+      "reusablePerspective": "格子上のdeterminant指定は係数のgcdによる存在判定とBézout構成に直結する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "gcd と拡張 Euclid",
+      "text": "三角形のdeterminant面積、gcd、extended Euclidean algorithm。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。",
+      "text": "XまたはYが0、負数をextended gcdへ渡す時の符号を確認する。中間積は入力上限とscaleから64bit内だがabsの扱いを統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "S = 1 型の 頂点と辺からなる状態グラフに対し、gcd と拡張 Euclidを選び、状態と証明を一貫して設計できる。",
+      "text": "面積1となる整数点(A,B)を範囲内で一つ構成し、存在しない場合を判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。",
+      "text": "(X,Y)=(±1,0),(0,±2)、gcd=1,2,3の例でdeterminantを再計算し|AY-BX|=2を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

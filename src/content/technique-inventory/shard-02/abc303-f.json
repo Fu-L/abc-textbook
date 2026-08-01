@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc303-f「Damage over Time」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "討伐時点からiターン前にspell jを使った一回分の累積damageはmin(i,t_j)d_jである。同じターンでは最大のspellを選べるため、i番目の最適寄与はF(i)=max_j min(i,t_j)d_jとなる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc303-f「Damage over Time」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "tの境界ごとにF(i)の包絡線を区間和する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各区間でF(i)が一次式i·Dと定数Pの最大に限られ、巨大な答え時刻まで一ターンずつ進めず累積damageを計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各ターンで全spellのdamageを評価する",
+        "decision": "rejected",
+        "decisionReason": "必要ターン数Hもspell数Nも大きく、O(NH)では制約を満たさない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "判定の真偽が境界の片側で閉じる単調性を示せば、各比較で答えを含む区間を半分に保てる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Damage over Time 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "tの昇順境界間では、t_j>iのspellはi·d_j、t_j≤iのspellはt_jd_jを与える。したがってsuffix最大D=max d_jとprefix最大P=max t_jd_jを持てばF(i)=max(iD,P)であり、交点の前後を等差数列と定数列として総和できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc303-f「Damage over Time」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "spellをtで整理し、suffixの最大dとprefixの最大tdを用意する。tの連続する境界区間を走査し、PとiDの交点で区間を分けてFの和を加える。Hへ初めて到達する区間では累積和がH以上となる最小iを二分探索し、必要ターン数を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc303-f「Damage over Time」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "区分線形な上側包絡線",
+      "trigger": "max_j min(i,t_j)d_jが、breakpoint t_jを境に式を変える。",
+      "application": "各t区間で増加直線の最大と飽和定数の最大だけを残し、max(iD,P)へ圧縮する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "二分探索と単調性",
-      "trigger": "制約と操作を整理したときに 二分探索と単調性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc303-f「Damage over Time」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 二分探索と単調性 を問題固有の状態へ適用する。",
+      "name": "区間和と境界二分探索",
+      "trigger": "時刻上限が巨大だが、damage列が区間ごとに単純な式で単調累積する。",
+      "application": "等差和を一括加算し、目標Hを跨ぐ最後の区間だけ最初の到達時刻を二分探索する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "現在時刻からのdamageを追うより、終了時点から何ターン残っているかで一回のspellをmin(i,t)dと書くと、各ターンの最適選択が独立な最大値になる。",
+      "reusablePerspective": "継続効果の最適化は終点からの残存時間で寄与を表し直すと、時系列依存を包絡線へ変換できることがある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "二分探索と単調性",
+      "text": "prefix/suffix最大、等差数列の和、単調累積値に対する二分探索。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。",
+      "text": "tが同じspellは境界処理前に最大値へ統合する。td、iD、区間和は64bitを超え得るので128bit相当を使い、区間端の包含と交点のfloor/ceilを統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Damage over Time 型の 整数の約数・剰余構造に対し、二分探索と単調性を選び、状態と証明を一貫して設計できる。",
+      "text": "spellを最適に選び続けたとき、monsterのHPを0以下にする最小ターン数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。",
+      "text": "小さいt,HでターンごとのFを直接列挙し、P=iDの一致点、同じt、単一spell、答えがt境界上になる場合を区間和と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

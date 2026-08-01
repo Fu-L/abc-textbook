@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc220-h「Security Camera」では、主解法候補として、選択を二群に分けて各側を全列挙し、和・順序・hash lookup で組を結合する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "求めるのは監視道路数そのものではなく偶奇だけだが、N=40 なので全 2^N 配置は列挙できない。頂点を S,T の半分に分けると、各側の部分集合は約 2^20 個まで下がる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "左側の camera 集合 s を固定すると、交差辺のうち左端が未選択のものだけが右側 t の選択に依存する。その偶奇は、各右頂点への該当辺数の parity mask z_s と t の bit 内積 parity で表せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc220-h「Security Camera」では、主解法候補として、選択を二群に分けて各側を全列挙し、和・順序・hash lookup で組を結合する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "半分全列挙で左集合ごとの固定 parity と交差 mask、右集合ごとの内部 parity を作り、右側配列へ Walsh-Hadamard 変換を施して全 mask の一致個数を得る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "左右の組合せを一つずつ試さず、parity(z&t) という Boolean 内積の全 query を変換一回でまとめられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "左右を半分ずつ列挙した後、全ての組 (s,t) を照合する。",
+        "decision": "rejected",
+        "decisionReason": "各側は約 2^{N/2} に減っても直積は再び 2^N となり、半分全列挙だけでは高速化にならない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の全体選択は左右の部分選択の組へ一意に分かれるため、両側の列挙と結合で全候補を覆う。",
+        "text": "g[t]=(-1)^{R[t]} として H[z]=Σ_t (-1)^{popcount(z&t)}g[t] を求めると、H[z] は parity(z&t) xor R[t] が0の個数と1の個数の差になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Security Camera 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "右部分集合の総数を U=2^{|T|} とすれば、条件値0の個数は (U+H[z])/2、条件値1の個数は (U-H[z])/2 で復元できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc220-h「Security Camera」では、主解法候補として、選択を二群に分けて各側を全列挙し、和・順序・hash lookup で組を結合する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各 s について、S 内と選択済み S 端点が監視する辺の parity L1[s]、S\\s から各 T 頂点へ出る辺数 parity の mask L2[s] を作る。各 t の T 内 parity R[t] から符号配列を作って XOR-WHT し、L2[s] の変換値から L1[s] と打ち消し合う右集合数を加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc220-h「Security Camera」では、主解法候補として、選択を二群に分けて各側を全列挙し、和・順序・hash lookup で組を結合する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "半分全列挙",
+      "trigger": "N が40前後で全 subset は多いが、二分した各側の subset 情報を圧縮して結合できるとき。",
+      "application": "頂点集合を約半分に分け、内部寄与と交差寄与を別々の mask 情報へまとめる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "半分全列挙",
-      "trigger": "制約と操作を整理したときに 半分全列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc220-h「Security Camera」では、主解法候補として、選択を二群に分けて各側を全列挙し、和・順序・hash lookup で組を結合する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 半分全列挙 を問題固有の状態へ適用する。",
+      "name": "Walsh-Hadamard 変換",
+      "trigger": "全 mask z について parity(popcount(z&t)) に応じた和や個数差を求めたいとき。",
+      "application": "0/1 parity を ±1 の character に写し、Boolean 内積に対する全相関を butterfly で計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "交差辺の OR 条件は、左端が選択済みなら固定で監視、未選択なら右端 bit に従うと分けることで、右 subset との内積 parity へ変わる。",
+      "reusablePerspective": "辺ごとの OR/AND を mod 2 で集計するとき、一方の割当を固定して他方に残る係数を頂点 mask にまとめられないか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "半分全列挙",
+      "text": "半分全列挙、bitmask parity、Walsh-Hadamard 変換",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "左右の列挙値を sort・deduplicate する条件と、補数の境界を確認する。",
+      "text": "WHT 配列は個数ではなく ±1 の符号和で、butterfly の加減算に負値が出る。最後の (U±H)/2 は整数として計算し、最大 2^40 の答えを 64 bit に保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Security Camera 型の 整数の約数・剰余構造に対し、半分全列挙を選び、状態と証明を一貫して設計できる。",
+      "text": "グラフ上 subset の辺条件を左右に分割し、交差辺 parity を Boolean 内積へ変えて WHT で全照合できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "左右の列挙値を sort・deduplicate する条件と、補数の境界を確認する。",
+      "text": "右頂点が一つだけの小例で R[0],R[1] と H[0],H[1] を手計算し、変換値が0件と1件の「差」になることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

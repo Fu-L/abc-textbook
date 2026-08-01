@@ -125,7 +125,7 @@ taxonomy・最終Outcome・公開解説の作成前に、全Problemへちょう�
 recordの`evidence[]`はlocal evidence ID、`sourceRevisionIds`、根拠説明を持つ。`observations`、候補方針、鍵、アルゴリズム接続、典型、問題固有の着眼点、計算量、前提、実装注意、成果候補、復習助言は、いずれも一つ以上の`evidenceIds`からこの構造を参照する。未定義または未使用のevidence IDを許さず、evidenceのSource Revisionはrecordの`sourceRevisionIds`に含まれ、recordへ宣言したSource Revisionは一つ以上のevidenceから利用されなければならない。Catalog/corpus検証はSource Revisionの存在に加え、公式Problem revisionの存在、同一Contest・同一`officialTaskId`への結び付きを確認する。
 
 公開taxonomyを作る前に、対象Problem ID集合とInventoryのProblem ID集合が完全一致しなければならない。Problem Analysisはfinal Tag、Outcome、Unit、DAG、標準学習順、Problem Placementの`full / similar / supplement`を確定せず、これらはT159とProblemAuthoringUnit側で決定する。
-T044は全Problemのsource-boundなrecord coverageを固定する段階であり、heuristic draftを`reviewed`と偽装しない。`draft`候補はT159のfinal taxonomy受理前に問題単位で確認し、未確認または`changes_requested`の項目を正式なTag・Outcome・Unitの根拠にしてはならない。preview cohortは後続の設計検証へ進むため、T038時点で全件`reviewed`を要求する。
+T044の初期freezeは全Problemのsource-boundなrecord coverageを固定する段階であり、heuristic draftを`reviewed`と偽装しない。その後の全コーパス執筆レビューでは、自動検出結果を昇格させず、問題ごとに公式Problem・公式解説revisionと上記writing policyを確認する。現在のcanonical corpus検証は全件`reviewed`、finding 0、既知scaffold不在を要求し、`draft`または`changes_requested`を正式なTag・Outcome・Unitの根拠として受理しない。使用したauthoring skill、writing policy、Source Revision集合、各recordのcontent digestは`docs/verification/bootstrap/technique-inventory-authoring.json`へ固定する。preview cohortは後続の設計検証へ進むため、T038時点から全件`reviewed`を要求する。
 Problem Analysisは、平方根分割、償却解析、出力依存、実用上重要な定数倍などの計算量解析が主テクニックの成立理由となり、かつ解法全体の計算量が根拠から確定できる場合だけ`asymptoticComplexity`を持つ。通常の計算量は公式解説に明記されていても省略する。計算量を明示しない公式解説に対して、主テクニック単体の典型計算量や入力サイズを仮定した時間・空間上界を補完しない。完全解説を公開する後続工程では、問題固有の実装を確定したうえでFR-005の計算量・制約整合を別途満たす。
 
 ### PreviewCohortCandidatePool

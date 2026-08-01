@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc302-ex「Ball Collector」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "根1から頂点vへのpath上の各頂点は、値A_iとB_iのどちらか一方を選ぶpairに対応する。値を頂点、各pairを辺とする多重グラフに直すと、選べる相異なる値の最大数を連結成分ごとに評価できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc302-ex「Ball Collector」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "値グラフの連結成分量をrollback DSUでpathごとに保つ",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "DFSで根から現在頂点までのpair辺だけを追加し、戻り際にundoすれば、全vの独立な質問を共有計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各vについて根からのpathを取り出し、値の選び方を最初から解く",
+        "decision": "rejected",
+        "decisionReason": "path長の総和がO(N^2)になり得て、各pairの二択も直接探索できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Ball Collector 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "値グラフの一つの連結成分に頂点数V、辺数Eがあると、各辺から一端を選んで得られる相異なる値の最大数はmin(V,E)である。木成分なら各辺を異なる頂点へ割り当てられ、cycleを含むなら全頂点を覆える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc302-ex「Ball Collector」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "元の木を頂点1からDFSし、頂点iへ入ると値A_iとB_iを結ぶ辺をrollback DSUへ追加する。DSUは各成分の頂点数・辺数とΣmin(V,E)を持ち、その時点の総和をiの答えとして記録し、子の処理後に追加前までrollbackする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc302-ex「Ball Collector」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "rollback DSU",
+      "trigger": "DFSの現在pathに対応する辺集合へ追加し、subtree処理後に直前の状態へ戻したい。",
+      "application": "path compressionを使わずunion by sizeと変更履歴を持ち、辺追加・成分併合・同一成分内辺の増加をundoする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Union-Find",
-      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc302-ex「Ball Collector」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "name": "多重グラフ上の選択割当",
+      "trigger": "各二択から一つの値を選び、異なる選択値の個数を最大化する。",
+      "application": "二択を辺、候補値を頂点と見て、成分の辺数と頂点数だけに目的値を圧縮する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "path上のball選択問題は、値グラフの各辺をいずれかの端点へ向ける問題であり、答えは成分ごとのmin(辺数,頂点数)の和になる。",
+      "reusablePerspective": "二択の集合族はグラフ化すると、distinct代表選択の最大数を連結成分のcycle有無で捉えられる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Union-Find",
+      "text": "union by sizeによるDSU、DFSの入退場、変更履歴を用いたrollback。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "A_i=B_iのself-loopや、既に同じ成分に属する両端を結ぶ辺でも辺数だけは増える。rollback履歴には併合なしの更新も記録し、path compressionは行わない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Ball Collector 型の 根付き木・部分木・パスの関係に対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "text": "v=2,…,Nの各独立な質問について、根からvまでで拾える異なる整数の最大数を順に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "小さい木で全pathと2択を総当たりし、self-loop、平行辺、木成分がcycle成分へ変わる瞬間、兄弟subtree間で状態が漏れないことを照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

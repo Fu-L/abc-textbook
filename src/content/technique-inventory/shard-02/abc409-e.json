@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc409-e「Pair Annihilation」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "辺 e の子側部分木にある電荷総和 X_e は、その部分木内だけで消滅させても符号付きで X_e だけ余る。全消滅には少なくとも |X_e| 個の粒子が境界辺を通る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "木では子側部分木と外部を結ぶ辺が e 一本だけなので、各辺の必要通過量は独立に下界 |X_e| と定まり、葉から余剰を親へ送れば全下界を同時達成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc409-e「Pair Annihilation」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "木を根付き化して postorder で subtree の符号付き粒子和を集計し、各親辺へ |subtreeSum|×weight を加える",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "正なら陽電子、負なら電子の余剰を親へ送る構成が存在し、根では全体和0により余剰が消えるため、この cut 下界が最適値そのものになる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各陽電子と電子の pair ごとに最短距離を求めて近い順に対応付ける",
+        "decision": "rejected",
+        "decisionReason": "粒子数が大きく pair を列挙できず、局所的に近い対応は共通辺の流量を考慮した global optimum を保証しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+        "text": "部分木内でどのように annihilate しても正負の差 X_e は保存されるため、辺を横切る必要量は粒子の個別対応によらない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Pair Annihilation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "各辺の寄与は通過個数×w_e で、postorder に子の余剰を親へ一度だけ運ぶと全辺で必要量ぴったりを実現する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc409-e「Pair Annihilation」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "頂点1を根に DFS し、sub[v]=x_v+Σsub[child] を postorder で求める。子 v と親を結ぶ辺重み w について ans+=|sub[v]|w とし、sub[v] を親へ加える。最終 sub[root]=0 を確認して ans を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc409-e「Pair Annihilation」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "tree cut の保存量",
+      "trigger": "木上で正負の量を移動・相殺し、辺ごとの最小輸送量を求めるとき。",
+      "application": "各親辺が作る cut 内の総量から不可避な crossing flow を決める。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "深さ優先探索",
-      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc409-e「Pair Annihilation」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "name": "subtree sum",
+      "trigger": "各 edge cut の片側にある符号付き量を全辺について求めたいとき。",
+      "application": "postorder DFS で子の総和を親へ集約する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "粒子の対応関係を決めなくても、木の各 cut を横切る net imbalance が唯一の必要輸送量を決定する。",
+      "reusablePerspective": "木上輸送では source-sink pairing より先に subtree imbalance を計算すると、各辺の最適 flow が直接得られる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "深さ優先探索",
+      "text": "根付き木の postorder、subtree sum、cut を横切る flow の保存則を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "|sub[v]|w は 64 bit を使う。再帰深さ N の対策を行い、abs を符号付き十分幅の型で計算する。全 x の和0という保証も最終 root 値で確認できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Pair Annihilation 型の 根付き木・部分木・パスの関係に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "粒子数に依存せず、全辺の subtree imbalance の絶対値和から O(N) で最小消滅エネルギーを求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "一辺だけ、重み0、正負が同じ部分木内で相殺する例、chain の両端に大量粒子がある例を明示的な輸送と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

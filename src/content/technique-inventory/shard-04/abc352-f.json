@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc352-f「Estimate Order」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "差制約 X_A−X_B=C は同じ連結成分内の相対順位を一意に決める。DFS で各頂点の offset D_i を求めれば、成分全体は共通 shift だけが自由になる剛体 block である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "N≤16 なので、各成分が占める順位 mask の可能な shift を列挙し、成分同士が重ならない placement を subset DP で判定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc352-f「Estimate Order」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "差制約 graph を連結成分へ分け、各成分の可能位置 mask を列挙して、他成分配置の bit DP から各人物の順位が一意か判定する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "連続でない剛体形状も mask で正確に扱え、N²2^N 程度で全配置可能性を調べられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "順位1..Nの全 permutation を列挙し、M 個の差制約を検査する。",
+        "decision": "rejected",
+        "decisionReason": "N=16でも16!は扱えず、差制約が成分ごとの平行移動だけを残すことを利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+        "text": "成分内 offset を min=0 に正規化し、shift 後の全値が0..N−1で相異なる場合だけ、その occupancy mask が候補になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Estimate Order 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "人物 i の成分をある mask に固定したとき、残り成分で補集合を敷き詰められるかを prefix/suffix または除外成分 DP で判定し、可能な i の絶対位置を集める。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc352-f「Estimate Order」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "text": "無向差制約 graph を DFS し D_A=D_B+C を伝播して成分を作る。各成分について全 shift の occupancy mask と各頂点位置を列挙する。成分を順に配置する dp[mask] を行い、各対象成分を除いた配置可能 mask と候補 placement の disjoint/全被覆条件から人物ごとの可能順位集合を求め、一要素ならその順位、複数なら −1。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "online query の計算量設計",
-      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc352-f「Estimate Order」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "name": "差制約 component の平行移動",
+      "trigger": "x_u−x_v が固定された制約 graph で絶対座標だけ未定なとき。",
+      "application": "DFS potential で相対値を求め、component を剛体として全 shift する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "深さ優先探索",
-      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc352-f「Estimate Order」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "name": "形状 mask の exact cover DP",
+      "trigger": "小さい universe 上へ複数の固定形状を重ならず配置したいとき。",
+      "application": "各形状の shift mask を候補とし、occupied subset を状態にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "順位差制約を一人ずつ扱うのでなく、連結成分を「穴を含む形状」として盤面1..Nへ置く問題に変換する。",
+      "reusablePerspective": "potential が決まる制約系では、component ごとの残り自由度が translation 一つかを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "online query の計算量設計",
+      "text": "graph potential",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "深さ優先探索",
+      "text": "subset DP と popcount",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "辺の向きごとに C の符号を逆にする。成分内 offset 重複や範囲外 shift を候補にせず、複数配置で同じ人物順位が重なる場合は set で統合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Estimate Order 型の 更新と問い合わせの時系列に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "順位差 graph を剛体 component に圧縮し、全 feasible ranking における各順位の一意性を N≤16 の subset DP で判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "まず一成分の relative positions を数直線に描き、自由度が shift だけと確認する。全体解の存在と個人順位の一意性を別の判定として扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

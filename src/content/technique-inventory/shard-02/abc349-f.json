@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc349-f「Subsequence LCM」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "LCMがMになるsubsequenceはMを割らない要素を含められない。M=∏p_t^{e_t}に対し、各divisor A_iが最大指数p_t^{e_t}を供給するかをbit tで表すと、選択LCM=MはmaskのORがfullになることと同値である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc349-f「Subsequence LCM」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "mask frequencyへ圧縮し、subset zeta/Möbius transformでOR=fullを数える",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "Mのdistinct prime数K≤13なので2^K状態で全subsequenceをまとめて数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全subsequenceのLCMを列挙する",
+        "decision": "rejected",
+        "decisionReason": "N=2×10^5で2^N選択を扱えない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "算術の基本定理により正整数の素因数指数表現は一意で、積・割り切れ条件を指数ごとに判定できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Subsequence LCM 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "OR結果がmaskのsubsetに収まるsubsequence数h[mask]は、そのmaskのsubmask型を持つ全要素から任意に選ぶ2^{Σ_{s⊆mask}cnt[s]}通りである。hはexact OR個数gのsubset zeta transformなのでMöbius inversionでg[full]を得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc349-f「Subsequence LCM」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "Mをfactorizeし、各A_iでM%A_i≠0なら捨てる。残りについて各primeのmax powerで割り切れるbit maskを作りcntへ加える。cntをsubset zetaして各maskのeligible個数を得てh=2^countとし、subset Möbius transformを行ってg[full]を出す。M=1はA_i=1の個数cから2^c-1。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc349-f「Subsequence LCM」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "prime-exponent coverage mask",
+      "trigger": "LCMが各primeの最大指数を少なくとも一要素から得る条件である。",
+      "application": "divisorごとにどの最大prime powerを供給するかをbitset化し、LCMをORへ写す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "素因数分解と約数列挙",
-      "trigger": "制約と操作を整理したときに 素因数分解と約数列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc349-f「Subsequence LCM」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 素因数分解と約数列挙 を問題固有の状態へ適用する。",
+      "name": "subset zeta・Möbius transform",
+      "trigger": "OR結果がmask以内の選択数からexact OR別個数へ反転したい。",
+      "application": "submask frequency和をzetaで求め、2の冪を取った後Möbiusでexact値を復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "A_iの中間的なprime指数は、Mの最大指数に達していない限りそのprimeのLCM達成へ寄与しないので、各primeにつき一bitだけで十分である。",
+      "reusablePerspective": "target LCM固定の数え上げは、各target prime powerをcoverするset-union問題に圧縮できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "素因数分解と約数列挙",
+      "text": "素因数分解、LCMのprime指数、subset transform、modular exponentiation。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。",
+      "text": "M=1ではK=0かつempty subsequenceもOR=0なので1を引く。一般でもMを割らないA_iを必ず除外し、10^16の剰余・prime powerを64bitで扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Subsequence LCM 型の 列の順序と prefix 状態に対し、素因数分解と約数列挙を選び、状態と証明を一貫して設計できる。",
+      "text": "非空subsequenceのうちLCMがちょうどMとなるものを位置の違い込みでmod 998244353により数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。",
+      "text": "M=1、Mがprime power、複数prime、A_i=Mの重複、M非divisor要素を小N全subset LCMと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

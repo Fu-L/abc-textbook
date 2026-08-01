@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc214-g「Three Permutations」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "条件に反する順列は、ある添字 i で r_i が p_i または q_i に等しいという事象の和であり、固定した違反添字数ごとに包除できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "違反させる添字 i を辺 (p_i,q_i) とみなすと、必要なのは選んだ各辺へ相異なる端点を一つずつ割り当てる方法数である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc214-g「Three Permutations」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全ての順列 r を列挙し、各添字について p_i と q_i のどちらとも異なるかを確認する。",
+        "decision": "rejected",
+        "decisionReason": "順列は N の階乗個あり、N が 2×10⁵ の制約では生成できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "違反添字集合への包除を行い、二つの順列が作る次数 2 以下のグラフをパス・サイクルへ分解して集合サイズ別の係数を DP で集約する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "選択辺への単射な端点割当てが成分ごとの積に分かれ、全ての添字集合を個別列挙せず係数多項式として畳み込める。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+        "text": "p と q がともに順列なので、値を頂点とする全体グラフでは各頂点の次数が高々 2 となり、非自明な連結成分はパスかサイクルに限られる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Three Permutations 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "選択辺だけからなる一成分がサイクルなら端点割当ては 2 通り、頂点数 L のパスなら割り当てない頂点の選び方に対応して L 通りになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc214-g「Three Permutations」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "包除の交差項を次数 2 以下のグラフ上の端点単射数へ変換し、元の各パス・サイクル成分から選ぶ辺数別多項式を作って全体 DP と階乗係数へ合成する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc214-g「Three Permutations」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "順列制約への包除原理",
+      "trigger": "各位置に少数の禁止値があり、それらを全て避ける順列の個数を求めるとき。",
+      "application": "禁止値を取ると指定した添字集合ごとの単射数を求め、集合サイズに応じた符号と残りの階乗を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "包除原理",
-      "trigger": "制約と操作を整理したときに 包除原理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc214-g「Three Permutations」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 包除原理 を問題固有の状態へ適用する。",
+      "name": "次数 2 グラフの成分多項式",
+      "trigger": "二つの順列や対応が作るグラフで各頂点次数が高々 2 になり、選択部分をサイズ別に数えるとき。",
+      "application": "パス・サイクルごとに選択辺数別の端点割当て総数を計算し、成分間を多項式 DP で畳み込む。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "選択しない辺があるサイクルは切れたパスの集合となるため、最小の未選択辺を固定すると回転による重複を避けて二項係数で集約できる。",
+      "reusablePerspective": "サイクル上の部分集合を数える際は、全選択を別扱いし、未選択要素を一つ基準にしてパスへ切り開く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
+      "text": "事象の和集合を交差集合のサイズ別に符号付きで数える包除原理を扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "包除原理",
+      "text": "最大次数 2 のグラフをパス・サイクル・自己ループ・孤立点へ分類し、成分ごとの数を積で合成できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "p_i＝q_i の添字は自己ループとして一つの値しか選べないため、通常の二端点辺と分けて係数へ反映する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "全辺を選ぶサイクルの 2 通りを切り開いた場合の式へ混ぜず、包除の符号と未固定位置の階乗の添字を揃える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Three Permutations 型の 順列の位置と値の対応に対し、包除原理を選び、状態と証明を一貫して設計できる。",
+      "text": "二つの禁止順列を避ける数え上げを、包除と次数 2 グラフの成分別多項式へ変換して集約できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "位置ごとの禁止値が二つの順列で与えられたら、位置を辺、値を頂点とするグラフで次数制約が生まれるか確かめる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "包除の交差項では、選んだ禁止事象が同時成立する条件を「辺へ異なる端点を割り当てる」と具体化してから成分を数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

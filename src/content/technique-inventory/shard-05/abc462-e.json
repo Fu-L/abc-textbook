@@ -17,67 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc462-e「Alternating Costs」では、符号・座標・費用の対称性で A≤B, X≤Y へ正規化し、歩数 K ごとの費用を区分一次式にして端点だけ評価する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "座標符号は往復で反転できるため |X|,|Y|だけ見ればよい。総移動回数が偶数なら奇数回cost Aと偶数回cost Bの回数が等しく、軸交換も含めてA≤B、X≤Yへ正規化できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc462-e「Alternating Costs」では、符号・座標・費用の対称性で A≤B, X≤Y へ正規化し、歩数 K ごとの費用を区分一次式にして端点だけ評価する。この状態表現から答えを構成する。",
+        "approach": "X+Y偶数では半移動回数Kの実行可能区間端 K=(X+Y)/2 と K=Y の二点だけcost一次式 g(K)を評価し、奇数では最後の一歩をx/y方向に固定した二つの偶数caseへ帰着する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "正規化後、K≤Yで必要な高cost移動最小数から g(K)=2KA+(Y-K)(B-A) が一次式となり、K≥Yでは2KAでYが最小なので端点以外に最適はない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "座標(X,Y)までの最短costを広いgrid上のDijkstraで求める。",
+        "decision": "rejected",
+        "decisionReason": "座標が巨大で状態空間を列挙できず、交互costのphaseを含めるとさらに倍増する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各領域では費用が K の一次関数なので最小値は定義域端にあり、対称変換は実行可能路と費用を保存する。",
+        "text": "最適walkは折返し位置を調整して、parityが奇数なら最後の一歩を目標へ近づくXまたはY方向に限定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Alternating Costs 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "偶数2K歩では各costがK回ずつ現れ、座標達成に必要なB側move数だけがKのpiecewise-linear関数を作る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc462-e「Alternating Costs」では、符号・座標・費用の対称性で A≤B, X≤Y へ正規化し、歩数 K ごとの費用を区分一次式にして端点だけ評価する。この状態表現から答えを構成する。",
+      "text": "X,Yを絶対値化する。evenSolveでA,BとX,Yを必要に応じswapし、g((X+Y)/2),g(Y)を計算してminを返す。X+Y奇数なら有効な(X-1,Y)+Aと(X,Y-1)+BのevenSolveを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "対称性と区分線形最適化",
-      "trigger": "制約と操作を整理したときに 対称性と区分線形最適化 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc462-e「Alternating Costs」では、符号・座標・費用の対称性で A≤B, X≤Y へ正規化し、歩数 K ごとの費用を区分一次式にして端点だけ評価する。この状態表現から答えを構成する。で 対称性と区分線形最適化 を問題固有の状態へ適用する。",
+      "name": "対称性による標準化",
+      "trigger": "格子移動で座標符号・軸・交互costの役割に対称性があるとき。",
+      "application": "絶対値とswapでparameter順序を固定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "piecewise-linear目的の端点評価",
+      "trigger": "自由な余分移動回数Kに対するcostが区間ごとの一次式になるとき。",
+      "application": "傾き一定なので各定義域端だけ比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "巨大grid最短路も、移動回数parityと各cost回数を固定すると一変数の線形最適化へ落ちる。",
+      "reusablePerspective": "対称性で係数と座標を同時にsortするとcaseworkを本質的な一ケースへ縮められる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "対称性と区分線形最適化",
+      "text": "対称性による標準化、piecewise-linear目的の端点評価と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "X+Y の parity を先に処理し、正規化の swap 後も座標と費用の対応を保つ。",
+      "text": "odd caseでX=0またはY=0の負座標遷移を除外せず、絶対値対称性込みの引数を正しく渡す。積は64 bit上限を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Alternating Costs 型の問題に対し、対称性と区分線形最適化を選び、状態と証明を一貫して設計できる。",
+      "text": "交互costの巨大格子移動最小値を、parity・対称性・一次式端点の定数caseで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "X+Y の parity を先に処理し、正規化の swap 後も座標と費用の対応を保つ。",
+      "text": "2K歩中のA/B回数と必要な高costmove数を数え、g(K)の定義域二端だけで十分な理由を傾きから確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

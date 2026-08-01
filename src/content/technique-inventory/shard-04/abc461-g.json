@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc461-g「Graph Problem 2026」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各元頂点vをA_v,B_vの二頂点に複製し、元辺(u,v)ごとにA_u-B_vとA_v-B_uを結ぶと明らかな二部graphになる。元の重み最適化はこのgraphの最大独立集合sizeに一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc461-g「Graph Problem 2026」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "構成した2N頂点二部graphで最大matchingを求め、|MIS|=2N-|matching| を用いて答えを1013×|MIS|とする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "MIS indicatorから W_i=1013(f(A_i)+f(B_i)) と置けば全辺制約を満たす下界が構成でき、最小辺被覆またはLP半整数性からそれ以上の総和は不可能と示せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各W_iを0..2026で探索し、全辺のW_u+W_v≤2026を検査する。",
+        "decision": "rejected",
+        "decisionReason": "2027^N通りの割当があり、線形制約だけを直接整数探索できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+        "text": "A側とB側のcross edgeは元辺の両向きを表し、独立集合なら f(A_u)+f(B_v) と f(A_v)+f(B_u) が各1以下になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Graph Problem 2026 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "二部graphの最大独立集合は頂点数-最小頂点被覆=頂点数-最大matchingで求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc461-g「Graph Problem 2026」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "A_vを左部、B_vを右部として2N頂点を作り、各元辺に二本のcross edgeを追加する。Hopcroft-Karpまたはunit-capacity max-flowで最大matching μを求め、1013×(2N-μ)を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc461-g「Graph Problem 2026」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "変数の二層複製による二部化",
+      "trigger": "各元辺に対称な二つの組合せ制約がある重み割当問題のとき。",
+      "application": "各変数をA/B copyに分けcross制約をedgeとして表す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最大流・最小カット定理",
-      "trigger": "制約と操作を整理したときに 最大流・最小カット定理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc461-g「Graph Problem 2026」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 最大流・最小カット定理 を問題固有の状態へ適用する。",
+      "name": "二部graphの最大独立集合",
+      "trigger": "0/1選択でedge両端同時選択を禁止し総数を最大化するとき。",
+      "application": "Königの定理で最大matchingの補数として求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "連続に見えるvertex weight最適化も半整数性を示すと0/1 copy選択へ変換できる。",
+      "reusablePerspective": "対称なedge制約は変数を二copyにしてcross edgeを張ると二部MISとして現れることがある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "最大流・最小カット定理",
+      "text": "変数の二層複製による二部化、二部graphの最大独立集合と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "元無向辺ごとにcross edgeを二方向分とも追加し、同じ元頂点のA_v-B_v辺は不要である。答え係数1013とMIS頂点数を混同しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Graph Problem 2026 型の 頂点と辺からなる状態グラフに対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。",
+      "text": "graph上の整数weight最大化を2層二部graphの最大独立集合へ帰着し、matchingで高速に解ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "MISからW割当を作る下界と、なぜ上界も1013|MIS|になるかをedge coverまたはhalf-integralityのどちらかで再証明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

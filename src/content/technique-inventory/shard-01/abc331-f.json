@@ -17,77 +17,99 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc331-f「Palindrome Query」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "1点更新を挟むため、各queryでsubstringを直接反転比較すると合計O(NQ)になり得る。一方、回文条件は順方向列と逆方向列の一致なので、結合可能な要約を区間データ構造へ載せたい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "多項式hashなら、区間を左・右に結合するとき長さに応じた基数冪を掛けるだけで順方向hashと逆方向hashを合成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc331-f「Palindrome Query」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "順方向・逆方向Rolling Hashと長さをsegment treeのmonoidとして管理する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "葉の1点変更と任意substringの両向きhash取得をともにO(log N)で処理でき、回文を高確率で判定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各回文queryでS[L..R]を両端から比較する",
+        "decision": "rejected",
+        "decisionReason": "長さNのqueryがQ回続くとO(NQ)で、N=10^6,Q=10^5には間に合わない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "Manacher法で全回文半径を前計算する",
+        "decision": "rejected",
+        "decisionReason": "静的文字列には有効だが、1点更新後に多数の回文半径が変化し得て更新を局所化できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "prefix hash の差から位置に依存しない部分文字列 hash を復元でき、等しい文字列は同じ値になる。",
+        "text": "nodeを(forward hash, backward hash, power=x^length)とし、S+Tではforward=S.f×T.power+T.f、backward=S.b+S.power×T.bとすれば結合順を保てる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Palindrome Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "hash一致は決定的な同値判定ではない。十分大きい法と複数独立hashを使い、衝突確率を実用上無視できる水準へ落とす。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc331-f「Palindrome Query」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各文字をhash nodeとしてsegment treeを構築する。更新queryでは対応葉を置換し、判定queryでは[L,R]のnodeを取得してforward hashとbackward hashを全採用modulusで比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc331-f「Palindrome Query」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "Rolling Hashの結合monoid",
+      "trigger": "文字列の連結順を保つ区間情報を、更新可能な木へ載せたいとき。",
+      "application": "両向きhashと基数冪をnodeに持ち、区間結合を定数時間にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Rolling Hash",
-      "trigger": "制約と操作を整理したときに Rolling Hash の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc331-f「Palindrome Query」では、主解法候補として、文字列の polynomial hash を prefix 化し、部分文字列の同一性を定数時間で比較する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Rolling Hash を問題固有の状態へ適用する。",
+      "name": "segment treeによる動的文字列query",
+      "trigger": "1点更新と任意区間の結合可能な性質判定が混在するとき。",
+      "application": "文字更新を葉更新、substring hashを区間積としてO(log N)処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "回文を直接表す情報は結合しにくいが、同じ区間を左右から読んだ二つのhashへ言い換えるとmonoidになる。",
+      "reusablePerspective": "区間性質そのものが合成不能なら、その性質を比較可能な二つの合成可能な表現へ写す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
+      "text": "segment treeとmonoidの結合順を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Rolling Hash",
+      "text": "Rolling Hashの衝突と確率的保証を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "衝突確率を抑える複数 modulus または十分広い整数型を選び、負値を正規化する。",
+      "text": "左右nodeの長さ（または基数冪）を取り違えず、query区間のindex規約を統一する。単一modulusの衝突率を過小評価せず複数hashを用いる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Palindrome Query 型の 文字列の prefix・suffix と一致関係に対し、Rolling Hashを選び、状態と証明を一貫して設計できる。",
+      "text": "動的文字列の回文queryを、両向きhashの結合monoidとして1点更新・区間判定ともO(log N)で処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "衝突確率を抑える複数 modulus または十分広い整数型を選び、負値を正規化する。",
+      "text": "長さ1・偶数長・奇数長、先頭末尾更新、同文字への更新を素朴な反転比較とrandom testし、特に左右結合式を検証する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

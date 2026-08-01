@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc460-f「Farthest Pair Query」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "黒頂点集合Sの最大距離はSのdiameterであり、二集合S,Tをunionしたdiameterは各集合diameterの高々四端点だけから決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc460-f「Farthest Pair Query」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "vertex番号上のsegment tree各nodeに、その範囲の黒頂点集合diameter端点pairを持ち、色flipをpoint update、mergeを定数回のtree距離比較で行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "任意の外部点xから集合U内の最遠点はUのdiameter端点のどちらかなので、cross pairの最大も二組の端点四個で覆える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各flip後に全黒頂点pairの距離を列挙して最大を求める。",
+        "decision": "rejected",
+        "decisionReason": "一queryで黒頂点数の二乗pairがあり、Q回処理できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "二進展開した距離だけ祖先へ移動でき、最大の異なる祖先から一段進めば最小共通祖先になる。",
+        "text": "empty集合は単位元、一頂点集合は同じ頂点を両端とする長さ0diameterとしてmonoidを構成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Farthest Pair Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "merge時は(a,b,c,d)の全pair距離から最大の二端点を選べばS∪Tのdiameterになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc460-f「Farthest Pair Query」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "Euler tour+RMQまたはbinary liftingでLCAとdist(u,v)を前計算する。segment tree leafは黒なら(v,v)、白ならempty。内部nodeは左右の端点候補最大pairを選び、各queryのleaf更新後root端点距離を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc460-f「Farthest Pair Query」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "diameter端点のmerge monoid",
+      "trigger": "tree上の動的vertex集合で最大pair距離を保ちたいとき。",
+      "application": "部分集合ごとのdiameter二端点だけをsegment treeへ載せる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "LCA と binary lifting",
-      "trigger": "制約と操作を整理したときに LCA と binary lifting の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc460-f「Farthest Pair Query」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で LCA と binary lifting を問題固有の状態へ適用する。",
+      "name": "LCA距離oracle",
+      "trigger": "固定tree上で多数の二頂点距離比較を行うとき。",
+      "application": "depthとLCAからdistを定数・対数時間で返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "集合の全pair情報でも、tree metricではdiameter端点が外部点に対する最遠候補を代表する。",
+      "reusablePerspective": "動的subset queryをsegment treeへ載せるには、union時に閉じる最小要約とempty単位元を探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "LCA と binary lifting",
+      "text": "diameter端点のmerge monoid、LCA距離oracleと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。",
+      "text": "黒頂点0個・1個の出力規約を確認し、距離最大tieは任意端点でよい。merge一回のdistance呼出し定数を抑える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Farthest Pair Query 型の 根付き木・部分木・パスの関係に対し、LCA と binary liftingを選び、状態と証明を一貫して設計できる。",
+      "text": "tree上の黒頂点flip後の最遠pair距離を、diameter端点monoidで一query O(log N) に維持できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。",
+      "text": "外部点からdiameter端点のどちらかが最遠となる補題を使い、二集合mergeで四端点だけで十分な証明を再現する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

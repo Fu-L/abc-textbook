@@ -17,67 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc253-f「Operations on a Matrix」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "行iへの代入後に行う点取得(i,j)は、代入値xに、その代入時刻から取得時刻までに列jへ加わった量だけを足せばよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc253-f「Operations on a Matrix」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。",
+        "approach": "最終行代入へ問い合わせを結び付けるオフラインBIT",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各点取得が参照する直前の行代入を先に特定し、時間順走査中に列加算の代入時スナップショットを引けば、行列を持たずに答えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "N×M行列を更新する",
+        "decision": "rejected",
+        "decisionReason": "行列サイズが最大4×10^5同士で、保存も区間更新も不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+        "text": "取得時の列累積量をS_now[j]、直前代入時をS_set[j]とすれば答えはx+S_now[j]-S_set[j]になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Operations on a Matrix 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "代入時に全M列を記録する必要はなく、その代入へ結び付いた将来の点取得が使う列jだけをスナップショットすればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc253-f「Operations on a Matrix」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。",
+      "text": "一度目の走査で各点取得をその行の直前代入へ紐付ける。二度目は列区間加算をrange-add/point-query BITで処理し、代入時に紐付く各列のBIT値を負の補正として保存し、取得時のBIT値と代入値へ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "Fenwick tree",
-      "trigger": "制約と操作を整理したときに Fenwick tree の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc253-f「Operations on a Matrix」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。で Fenwick tree を問題固有の状態へ適用する。",
+      "name": "オフライン依存先の付け替え",
+      "trigger": "問い合わせの答えが過去の最後の更新一つと、その後の差分で決まる。",
+      "application": "行ごとの最終代入時刻を追い、将来の点取得を該当更新イベントへ接続する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "range-add point-query BIT",
+      "trigger": "列区間への加算履歴から特定列の累積値だけが必要になる。",
+      "application": "差分BITで区間加算し、代入時と取得時の二時点の値を引き算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "行代入は列ごとに異なる過去加算を全て打ち消すため、一つの行基準値では表せないが、実際に問われる列だけを代入時へ遡って差し引けばよい。",
+      "reusablePerspective": "巨大な二次元状態でも、上書き境界と一次元差分を問い合わせ単位で結び付けるオフライン化が有効である。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "Fenwick tree",
+      "text": "BITで区間加算・一点取得を実装できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "最後の更新時刻を記録し、問い合わせを過去イベントへ付随させるオフライン処理を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "直前代入がない取得は基準値0・時刻0として扱い、同じ時刻の操作順を変えない。加算総和と代入値は64ビット整数で保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Operations on a Matrix 型の問題に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。",
+      "text": "区間列加算・行一括代入が混在しても、各一点取得の値を操作順どおりに出力できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "小さい行列を直接更新する実装と比較し、代入前後に同じ列へ加算する例、代入なし、同じ行への連続代入、異なる列の取得を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

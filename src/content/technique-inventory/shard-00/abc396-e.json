@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc396-e「Min of Restricted Sum」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "constraint A_x xor A_y=zはbitごとに独立で、連結成分内では一頂点の値を決めるとpath上のxorにより全頂点値が決まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "rootを0と仮定したpotential p_vをDFSで付けると、任意解はcomponent共通mask tに対してA_v=p_v xor tとなる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc396-e「Min of Restricted Sum」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "xor potentialで整合性を検査し、各component・各bitで1の個数が少ないroot bitを選ぶ",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "bit bでt_bを反転するとcomponent全頂点のbitが反転するため、onesとsize-onesの小さい方を独立に選べばΣA_iを最小化できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "A_iを整数としてcomponentごとにgreedy決定する",
+        "decision": "rejected",
+        "decisionReason": "整数大小の局所選択はxor constraintを伝播し、各bitの独立な全体最適化を表せない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+        "text": "既訪問vertexへ別pathから到達したとき、既存p_vとp_u xor zが異なればcycle xorが非零で解なしである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Min of Restricted Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Z≤10^9なので必要bit範囲を覆えばよく、各bitの選択を組み合わせたmask tで全値を同時に構成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc396-e「Min of Restricted Sum」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各未訪問rootをp=0としてDFS/BFSし、edge(u,v,z)でp_v=p_u xor zを割り当て矛盾検査する。componentごとに各bitのonesを数え、ones>size-onesならtのbitを1にし、A_v=p_v xor tを出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc396-e「Min of Restricted Sum」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "xor potential graph",
+      "trigger": "辺が二頂点値のxor差を指定するとき。",
+      "application": "rootからpath xorをpotentialとして伝播しcycle整合性を判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc396-e「Min of Restricted Sum」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "bitwise independent minimization",
+      "trigger": "制約と目的がbitごとの重み付き和へ分離できるとき。",
+      "application": "component共通flipをbitごとに多数決の少数側へ選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "自由度は頂点ごとでなく各connected componentの共通xor mask一つだけで、その各bitを独立に選べる。",
+      "reusablePerspective": "群差constraintではroot potential＋component共通shiftとして一般解を表し、残る自由度だけ最適化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "幅優先探索",
+      "text": "xorのbit独立性とgraph potentialを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "self-edgeやparallel constraintでも既訪問整合性を検査する。0..30程度の全bitを含め、isolated vertexは全0が最小。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Min of Restricted Sum 型の 列の順序と prefix 状態に対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "xor等式graphの存在判定と最小和解構成を、component potentialとbit別選択で線形近くに行える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "小componentでroot maskを全探索し、非零cycle xor、tie bit、isolated vertexを比較して最小sumを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

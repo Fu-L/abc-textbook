@@ -17,67 +17,75 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc294-e「2xN Grid」では、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "二つのRLE列は、どちらかのrun端点に到達するまで値の組が変わらない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc294-e「2xN Grid」では、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。この状態表現から答えを構成する。",
+        "approach": "二列のrunを二ポインタでマージ",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "残り長の小さいrun分だけ同時に進め、値が等しい区間長を足せば展開せず線形処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "長さLの列へ展開",
+        "decision": "rejected",
+        "decisionReason": "Lは10^12で保存できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "右端を固定した有効左端集合が単調に移動するため、戻らない二本の pointer で全境界を一度ずつ調べられる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "2xN Grid 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "両列の累積run端点のmergeが、値ペア一定区間の完全な分割になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc294-e「2xN Grid」では、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。この状態表現から答えを構成する。",
+      "text": "各列の現在run値と残長を持ち、d=min(rem1,rem2)だけ進め、値が等しければdを答えへ加え、残長0の側を次runへ移す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "尺取り法",
-      "trigger": "制約と操作を整理したときに 尺取り法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc294-e「2xN Grid」では、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。この状態表現から答えを構成する。で 尺取り法 を問題固有の状態へ適用する。",
+      "name": "RLEの同期走査",
+      "trigger": "同じ巨大長の圧縮列同士を位置ごとに比較する。",
+      "application": "run境界を二ポインタでmergeする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "必要なのは個々の位置でなく二列の境界和集合が作る区間だけである。",
+      "reusablePerspective": "複数RLE列の位置演算は境界イベントを同期処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "尺取り法",
+      "text": "run長圧縮と二ポインタ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空区間、条件を満たす直前・直後のどちらを数えるかを loop 不変条件にする。",
+      "text": "累積長と答えを64ビットで持ち、片側だけrunが終わる場合に他側残長を保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "2xN Grid 型の問題に対し、尺取り法を選び、状態と証明を一貫して設計できる。",
+      "text": "二行で値が等しい列数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空区間、条件を満たす直前・直後のどちらを数えるかを loop 不変条件にする。",
+      "text": "展開可能な短列と比較し、run境界一致・交互境界・全区間同値を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -19,67 +19,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc439-f「Beautiful Kadomatsu」では、門松条件を「最初の比較が上昇、最後が下降」へ簡約し、内側二端を固定して外端候補数と中間 subset の重みを集計する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "順列なので隣接項は等しくない。大小関係列で山 < > の個数 x と谷 > < の個数 y を比べると、折返しは交互に現れ、x>y は部分列の最初が上り、最後が下りであることと同値になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc439-f「Beautiful Kadomatsu」では、門松条件を「最初の比較が上昇、最後が下降」へ簡約し、内側二端を固定して外端候補数と中間 subset の重みを集計する。この状態表現から答えを構成する。",
+        "approach": "部分列の第2要素位置 l と末尾直前位置 r を固定し、左の小さい候補数 p、右の小さい候補数 q、内部自由選択 2^(r-l-1) を集約する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "美しい条件が両端の二不等式だけに縮み、Fenwick/segment tree と重み付き累積で O(N log N) に数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全ての部分列を列挙し、山と谷の個数を比較する。",
+        "decision": "rejected",
+        "decisionReason": "部分列数が指数的である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "極大・極小の折返しは交互に現れるため極大が一つ多い条件は最初が上昇かつ最後が下降であることと同値になる。",
+        "text": "部分列 a_1,…,a_k が門松的である必要十分条件は a_1<a_2 かつ a_{k-1}>a_k で、内部の大小変化は答えの真偽に影響しない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Beautiful Kadomatsu 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "l=r、すなわち長さ3では同じ中央要素に対して左小候補 p と右小候補 q の積 pq を数える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "l<r では元列の l と r の間にある要素は自由に採否を決められるため 2^(r-l-1) 倍になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc439-f「Beautiful Kadomatsu」では、門松条件を「最初の比較が上昇、最後が下降」へ簡約し、内側二端を固定して外端候補数と中間 subset の重みを集計する。この状態表現から答えを構成する。",
+      "text": "各位置 l の左側で P_j<P_l の個数 p_l、各 r の右側で P_j<P_r の個数 q_r を Fenwick 木で求める。長さ3の Σp_iq_i を加え、l<r の Σp_l q_r 2^(r-l-1) は r を走査し、値条件に応じた p_l·2^{-l} の集約を Fenwick/segment tree に保持して 2^(r-1)q_r を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列の大小列と Fenwick tree",
-      "trigger": "制約と操作を整理したときに 順列の大小列と Fenwick tree の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc439-f「Beautiful Kadomatsu」では、門松条件を「最初の比較が上昇、最後が下降」へ簡約し、内側二端を固定して外端候補数と中間 subset の重みを集計する。この状態表現から答えを構成する。で 順列の大小列と Fenwick tree を問題固有の状態へ適用する。",
+      "name": "隣接比較列への変換",
+      "trigger": "数列条件が山・谷など隣接大小の変化回数だけに依存するとき。",
+      "application": "<,> 列で折返しの交互性を見て両端条件へ簡約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "端点固定の部分列数え上げ",
+      "trigger": "内部要素が自由で、最初/最後付近だけに条件がある部分列を数えるとき。",
+      "application": "第2・末尾直前位置を固定し、端候補数の積と内部の 2 の冪を掛ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "重み付き Fenwick 集約",
+      "trigger": "二重和に値の大小条件と位置差の分離可能な重みがあるとき。",
+      "application": "2^(r-l-1) を 2^(r-1)·2^{-l} に分け、P_l の値域 prefix sum へ載せる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "山と谷の差は内部の詳細でなく、比較符号列の開始符号と終了符号だけで決まる。",
+      "reusablePerspective": "部分列の自由内部が 2 の冪になる二重和は、位置差指数を左右の積へ分離して sweep できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列の大小列と Fenwick tree",
+      "text": "部分列、山・谷、Fenwick 木、座標圧縮、剰余逆元と2の冪を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "左右の小さい値個数を別々に数え、長さ3と長さ4以上の 2 の冪重みを二重計上しない。",
+      "text": "長さ3の l=r を一般 l<r 式と分ける。内部要素数 r-l-1、値の厳密不等号、左右候補が元の添字順を満たすことを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Beautiful Kadomatsu 型の問題に対し、順列の大小列と Fenwick treeを選び、状態と証明を一貫して設計できる。",
+      "text": "門松条件を両端の上り・下りへ簡約し、端点候補と内部自由選択を O(N log N) で集計できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "左右の小さい値個数を別々に数え、長さ3と長さ4以上の 2 の冪重みを二重計上しない。",
+      "text": "折返し条件との同値性と、l=r および l<r の部分列が重複なく全て数えられることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

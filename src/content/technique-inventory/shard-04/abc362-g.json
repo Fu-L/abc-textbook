@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc362-g「Count Substring Query」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "TのS中での出現回数は、SのsuffixのうちprefixがTと一致するものの個数に等しい。開始位置ごとのsubstring照合を直接行う必要はない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "suffixを辞書順に並べると、prefixがTのsuffixは連続区間をなす。その左右端はTと、全英小文字より大きい終端記号を付けたT~へのlower boundで得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc362-g「Count Substring Query」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Sのsuffix arrayを一度構築し、各Tについて辞書順区間の両端を二分探索する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全queryで共有できるsuffix順序を前処理し、query文字列との比較だけで出現開始位置数を数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各queryごとにSを先頭から走査し、全開始位置でTとの一致を調べる。",
+        "decision": "rejected",
+        "decisionReason": "Sとquery数がともに大きく、同じS上の探索をqueryごとに繰り返せない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "suffix の辞書順と共通接頭辞長が部分文字列比較の最初の不一致位置を一意に決める。",
+        "text": "T≤suffix<Tより辞書順で大きい最小境界という半開区間を作れば、Tがsuffixのprefixである条件を比較演算へ変換できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Count Substring Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "suffix arrayの要素は開始indexなので、二つの境界indexの差が重なりを含むsubstring出現回数になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc362-g「Count Substring Query」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "Sのsuffix arrayを構築する。各query Tで、suffixとTを比較するlower boundを求め、次にTへ仮想的な最大終端文字を付けた上側境界のlower boundを求める。二位置の差を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc362-g「Count Substring Query」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "suffix arrayによるpattern counting",
+      "trigger": "固定textに多数のsubstring出現数queryが来るとき。",
+      "application": "全suffixを辞書順にし、pattern-prefix集合を連続区間として数える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Suffix Array と LCP",
-      "trigger": "制約と操作を整理したときに Suffix Array と LCP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc362-g「Count Substring Query」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Suffix Array と LCP を問題固有の状態へ適用する。",
+      "name": "辞書順の番兵境界",
+      "trigger": "ある文字列をprefixに持つ全文字列の上端を表したいとき。",
+      "application": "alphabetより大きい仮想文字を末尾に置いてupper boundaryを作る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "substringの重なりは開始位置を表すsuffixを数える方式なら特別扱いせず自然に含まれる。",
+      "reusablePerspective": "出現queryは各開始位置をsuffixへ対応させ、prefix条件へ変換する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
+      "text": "suffix array",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Suffix Array と LCP",
+      "text": "辞書順二分探索",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "suffix 長が異なる比較と sentinel の順序を統一する。",
+      "text": "実体のない~を文字列へ追加できない実装では比較関数またはupper_bound相当を用意する。suffixがTより短い場合の比較を正しく扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Count Substring Query 型の 文字列の prefix・suffix と一致関係に対し、Suffix Array と LCPを選び、状態と証明を一貫して設計できる。",
+      "text": "多数のsubstring出現回数をsuffix順の連続区間長として答えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "suffix 長が異なる比較と sentinel の順序を統一する。",
+      "text": "TがS末尾に一致する例、Sより長い例、重なる出現例で左右境界を確認する。標準suffix array APIの比較規約も先に固定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

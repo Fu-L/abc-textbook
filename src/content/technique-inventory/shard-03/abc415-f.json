@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc415-f「Max Combo」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "query区間の最長同一文字runは、左右子区間内の最大runか、左suffixと右prefixが同じ文字のときその連結runのいずれかである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "merge後のprefix/suffixを正しく延長するには、子区間全体が同じ文字かどうか、または区間長を持つ必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc415-f「Max Combo」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "prefix文字・長さ、suffix文字・長さ、区間全体同一flag、内部最大runをmonoidとしてsegment treeに載せる",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "隣接二nodeを境界文字の一致でO(1) mergeでき、点更新と任意substring queryを各O(log N)で処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "更新後の各type2区間を左から走査してrun lengthを数え直す",
+        "decision": "rejected",
+        "decisionReason": "一query O(N)となりQ=5×10^5では間に合わず、変更は一点だけなのに既存区間情報を再利用しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+        "text": "境界文字が等しければcross=a.suffixLen+b.prefixLenをbest候補にする。aが全同一ならmerge prefixはa.len+b.prefixLenまで伸び、suffixも対称に処理する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Max Combo 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "空区間identityを長さ0として特別扱いすれば op(e,x)=op(x,e)=x を保証でき、標準segment treeのrange productをそのまま使える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc415-f「Max Combo」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各文字をlen=1、prefix=suffix=その文字/1、all=true、best=1のnodeへ変換してbuildする。mergeでlen、all、prefix、suffix、bestを更新する。type1はleaf置換、type2はprod(l,r)のbestを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc415-f「Max Combo」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "区間summary monoid",
+      "trigger": "query答えが左右内部の答えと境界をまたぐ候補から合成できるとき。",
+      "application": "prefix/suffix/全体flag/最大値を閉じたmerge情報として持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "セグメント木と monoid",
-      "trigger": "制約と操作を整理したときに セグメント木と monoid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc415-f「Max Combo」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で セグメント木と monoid を問題固有の状態へ適用する。",
+      "name": "segment tree",
+      "trigger": "一点更新と結合可能な区間queryが大量にあるとき。",
+      "application": "文字leafを更新し、substring nodeをO(log N)で取得する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最長run全体だけでは境界mergeできないため、境界へ接続可能なprefix/suffixを証拠として一緒に保持する。",
+      "reusablePerspective": "部分列の連続構造をsegment tree化するときは、内部最適に加えて左右境界から伸びる未完成解を状態にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "セグメント木と monoid",
+      "text": "segment treeのmonoid要件、prefix/suffix runのmergeを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "all=trueの子でのみprefix/suffixを反対側へ延長する。identityの文字値を通常文字として比較せず、l,rのhalf-open変換を統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Max Combo 型の 文字列の prefix・suffix と一致関係に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。",
+      "text": "50万回の文字変更とsubstring最長同一run queryをO(log N)ずつで処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "長さ1、全同一、境界で二runが結合／分裂する更新、queryがnode境界をまたぐ例をsubstring直接走査と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

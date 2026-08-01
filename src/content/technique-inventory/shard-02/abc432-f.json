@@ -17,67 +17,91 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc432-f「Candy Redistribution」では、平均と一致する subset を前計算し、bitmask DP で全要素を覆う balanced group 数を最大化して各 group の操作列を構成する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "全員を同じ個数にするには総和が N の倍数であることが必要で、目標値は X=ΣA_i/N に一意に決まる。操作で品物が移るのは、使った辺で結ばれた連結成分の内部だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc432-f「Candy Redistribution」では、平均と一致する subset を前計算し、bitmask DP で全要素を覆う balanced group 数を最大化して各 group の操作列を構成する。この状態表現から答えを構成する。",
+        "approach": "平均 X を持つ部分集合への分割数を subset DP で最大化し、各部分集合を木状の |V|-1 操作で均す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "成分数 s が最大なら必要操作数の下界 N-s を達成でき、N が小さいので O(N2^N) で分割を求められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全員を一つの連結成分にして N-1 回で平均化する。",
+        "decision": "rejected",
+        "decisionReason": "常に構成できるが、独立に平均 X を持つ部分集合がある場合はより少ない操作にでき、最小性を満たさない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "操作グラフの各連結成分は総和を保存するので balanced が必要で、任意の balanced group は木状の移送で十分である。",
+        "text": "操作グラフの各連結成分 V は和を外へ移せないため Σ_{v∈V}A_v=X|V| が必要で、辺数は少なくとも |V|-1 である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Candy Redistribution 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "平均 X の集合内を初期値降順に並べ、隣へ現在の余剰 a_x-X を渡すと非負量だけで順に一人を X に確定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc432-f「Candy Redistribution」では、平均と一致する subset を前計算し、bitmask DP で全要素を覆う balanced group 数を最大化して各 group の操作列を構成する。この状態表現から答えを構成する。",
+      "text": "総和が N で割れなければ不可能を出す。全 mask の要素数と和を前計算し、和=X·popcount の mask を一成分として、被覆 mask の最大成分数と復元元を subset DP で求める。復元した各成分を A 降順に並べ、隣接者へ余剰を渡す操作を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "subset DP と保存量",
-      "trigger": "制約と操作を整理したときに subset DP と保存量 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc432-f「Candy Redistribution」では、平均と一致する subset を前計算し、bitmask DP で全要素を覆う balanced group 数を最大化して各 group の操作列を構成する。この状態表現から答えを構成する。で subset DP と保存量 を問題固有の状態へ適用する。",
+      "name": "部分集合分割 DP",
+      "trigger": "小さい N の集合を条件を満たす部分集合へ分割し、部品数を最大化したいとき。",
+      "application": "平均 X の good subset を列挙し、dp[mask] を最大成分数として被覆を追加する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "連結成分による下界",
+      "trigger": "操作が二頂点間だけで保存量を移し、使われた組がグラフを作るとき。",
+      "application": "各保存量成分に |V|-1 辺が必要として操作数 N-s の下界を得る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "貪欲な構成復元",
+      "trigger": "平均を満たす集合内で、非負の移動だけを用いて全値を目標へ揃えるとき。",
+      "application": "初期値降順に隣へ余剰を送り、処理済み頂点を X に固定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最小操作数は直接操作列を探索せず、保存量を独立に均せる連結成分を最大何個作れるかへ双対化できる。",
+      "reusablePerspective": "二点移送問題では操作グラフの連結成分ごとの不変量が強い下界と構成方針を同時に与える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "subset DP と保存量",
+      "text": "subset DP、連結成分、和の保存則、DP 復元、貪欲構成を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "平均の割り切れを先に判定し、group 内を初期値降順に処理して移送量を非負に保つ。",
+      "text": "mask 和は広い整数型で計算し、dp の遷移で部分集合の重複・空集合を避ける。構成中の a_x は操作ごとに更新し z≥0 を確かめる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Candy Redistribution 型の問題に対し、subset DP と保存量を選び、状態と証明を一貫して設計できる。",
+      "text": "再分配の最小操作列を、平均保存成分の最大分割と各成分の具体構成から求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "平均の割り切れを先に判定し、group 内を初期値降順に処理して移送量を非負に保つ。",
+      "text": "各 DP 成分が正確に平均 X を持つこと、復元した操作数が Σ(|V|-1)=N-s で下界に一致することを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

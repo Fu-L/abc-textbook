@@ -17,77 +17,129 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc329-g「Delivery on Tree」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "tree edgeを各2回通るroot closed walkは、各child subtreeへ一度入り一度戻るDFS tourであり、2-child vertexごとにchild訪問順だけを選べばpathが一意に決まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "ballのsourceとgoalがLCAの異なるchild subtreeにある場合、source側childをgoal側より先に訪れる必要があり、各2-child vertexへ順序constraintが生じる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各ballはsourceからgoalへのtree pathへ乗る直前にpickupし、goalへ着いた直後にdropするのがcapacity上最適で、pickup/drop数を各vertexのincident portへ集約できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc329-g「Delivery on Tree」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "LCAでchild順constraintと各directed portのpickup/drop数を前計算し、entry load別のtree DPで許容child順を数える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "2^{branch数}のtour列挙を避け、capacity K≤1000をDP軸として各subtreeのload変化を合成できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全2-child vertexの左右順2択を列挙し、各tourでM ballをsimulationする。",
+        "decision": "rejected",
+        "decisionReason": "branch数がN規模でpath候補が指数的になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "child順constraintだけ満たすpath数を2の自由頂点数乗で数える。",
+        "decision": "rejected",
+        "decisionReason": "順序が矛盾しなくても同時運搬ball数がKを超えるtourは実行不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+        "text": "ball jのpickup portはS_jからT_jへのpathの最初のneighbor、drop portはT_jへ入る最後のneighborで、binary liftingにより各O(log N)で求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Delivery on Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "subtree vをentry load jで巡回した後のload差は、内部eventのpickup総数−drop総数としてjやchild順によらず一定だが、途中peakの可否と通り数は順序に依存する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "2-child vertexでは条件Aが許す1通りまたは2通りのpermutationを試し、各child DPを現在loadで順に合成すればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc329-g「Delivery on Tree」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "LCA/binary liftingを前計算する。各ballについてsource→goalの最初のportへpickup count、goalへ入るportへdrop countを加え、LCAが両端と異なるならsource childを先にするconstraintを設定し、逆constraintと衝突すれば0。dp[v][j]をload jでvへ初回到着したsubtree tour通り数とし、到着portのdrop、各許容child順について「vからchildへ出る直前pickup→child dp→戻った直後drop」を順に適用し、最後にparent向けpickupを加える。loadが0..K外なら棄却し、子通り数を掛けて順序間を加算する。rootのentry 0から最終load 0となるdpを答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc329-g「Delivery on Tree」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "Euler tour順の局所選択",
+      "trigger": "tree edgeを各方向1回ずつ通るclosed walkを数えるとき。",
+      "application": "各vertexのchild subtree permutationへpath選択を分解する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc329-g「Delivery on Tree」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "LCAによるsubtree順constraint",
+      "trigger": "sourceからtargetへ一回のDFS tour中に運ぶ必要があるとき。",
+      "application": "異なるLCA child間ならsource childを先行させる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "resource量付きtree DP",
+      "trigger": "subtree巡回のentry resourceで実行可能性が変わり、exit差が一定のとき。",
+      "application": "entry loadを状態にchild transferを合成する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "pickupをsourceで可能な限り遅く、dropをgoalで可能な限り早くするとcarry intervalが最短になり、任意のgood操作列のcapacityを悪化させずport eventへ正規化できる。",
+      "reusablePerspective": "運搬capacity問題では各itemの保持区間を必要pathに沿う最短intervalへ寄せ、同時保持数をevent sweep/DPへ落とす。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
+      "text": "LCAとbinary lifting",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "全探索と候補数の上界評価",
+      "text": "rooted tree DP",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "DFS Euler tour",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "capacity制約のprefix load",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "SがTのancestorなら最初のportはT側child、否则parent[S]で、goal側の最後のportも対称に場合分けする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "pickup/drop適用の時点をdirected portごとに固定し、load減算が負・加算がK超ならその順序を棄却する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "constraint conflictをDP前に検出し、leaf・1-childも同じpermutation loopで扱うとcase漏れを減らせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Delivery on Tree 型の 根付き木・部分木・パスの関係に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "全edgeを各2回通るtree tourのうち、全ballをcapacity Kで配送できるpath数をLCA制約とload tree DPで数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "異なる2 child間のballで順序が固定される例と、逆向きballもあり矛盾する例、同じ順序でもpeak loadがKを超える例を別々に追う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

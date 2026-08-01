@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc242-f「Black and White Rooks」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "一つの行に白黒両方があれば、その行で色が切り替わる隣接二 rook の間に別 rook はなく互いに攻撃する。よって白が使う行・列と黒が使う行・列はそれぞれ互いに素であることが必要十分になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "具体的な行列集合は対称なので、各色が使う行数・列数だけを固定し、選ぶ集合数を二項係数で掛ければ指数的な subset 選択を避けられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc242-f「Black and White Rooks」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "使用行列数 (i,j,k,l) を列挙し、選んだ n×m 全行全列を使って x rook を置く個数 f(n,m,x) を包除原理で前計算して組み合わせる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "色間の非攻撃条件を support 集合の disjointness、同色配置を全 support 使用の cell subset 数へ分離できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "白黒それぞれが使う行集合・列集合を bitmask で全列挙する。",
+        "decision": "rejected",
+        "decisionReason": "N,M は50で、行または列 subset だけでも指数個になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Black and White Rooks 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "f(n,m,x)=Σ_{a=0}^nΣ_{b=0}^m(-1)^{a+b}C(n,a)C(m,b)C((n-a)(m-b),x) と、空の行・列を包除すれば求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc242-f「Black and White Rooks」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "x=B,W について全 n≤N,m≤M の f を計算する。黒の使用行 i・列 k、白の使用行 j・列 l を正の範囲で選び、C(N,i)C(N-i,j)C(M,k)C(M-k,l)f(i,k,B)f(j,l,W) を全て加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc242-f「Black and White Rooks」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "support 集合のサイズ固定",
+      "trigger": "ラベル付き行列の具体的な support 選択は多いが、配置数が support の大きさだけに依存するとき。",
+      "application": "サイズを列挙し、具体的集合の選び方を binomial coefficient として後掛けする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc242-f「Black and White Rooks」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "空行・空列の包除",
+      "trigger": "選んだ長方形の全行・全列を少なくとも一度使う cell subset を数えるとき。",
+      "application": "空にする行列集合を選び、残る cell から選ぶ個数を符号付きで加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "rook の間に駒があれば遮られる規則でも、同じ行に二色が共存すれば色境界の隣接 rook が必ず攻撃するため、support disjoint が必要になる。",
+      "reusablePerspective": "遮蔽物付き攻撃条件では、同一直線上の並びで異種が隣接する境界が生じるかを見る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "全探索と候補数の上界評価",
+      "text": "包除原理、二項係数、行列 support の数え上げ",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "B>n·m などの二項係数は0として扱う。両色は1個以上なので使用行列数も正で、白用集合は黒用を除いた残りから選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Black and White Rooks 型の 盤面上の位置と局所遷移に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "二色 rook の非攻撃条件を行列 support の非交差へ変え、support サイズ列挙と包除原理で配置数を数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "同じ行に B-W-B と並ぶ例でも中央の色境界に攻撃 pair が残ることを確認し、support disjoint の必要性を説明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc310-f「Make 10 Again」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "必要なのは選んだ出目の和が 10 になるかだけなので、到達可能和 0..10 より大きい情報は将来も 10 を作る助けにならない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各サイコロ後の到達可能集合は 11 bit で表せ、出目 x を追加した集合は S | (S<<x) の下位 11 bit で一意に決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc310-f「Make 10 Again」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "到達可能和集合の bitmask ごとの確率を持つ DP を行い、各出目による shift-or を遷移させる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "状態数は 2^11、意味のある出目も 1..10 と「10超」の一群にまとめられ、N=100 で十分小さい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全サイコロの出目を列挙して、各結果に部分和 10 があるか subset sum で調べる。",
+        "decision": "rejected",
+        "decisionReason": "出目の直積が巨大であり、A_i が最大 10^6 なので列挙不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "x>10 の出目は非負和 10 以下を新しく作らないため、A_i−10 通りを状態不変の一本の遷移へ合算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Make 10 Again 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "確率を法上で扱うとき、各出目の等確率 1/A_i を逆元として掛ければ通常の加算 DP になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc310-f「Make 10 Again」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "初期 mask は bit0 のみ。各 i で全 mask と x=1..min(A_i,10) を走査し、next=mask|((mask<<x)&((1<<11)−1)) へ dp/A_i を加える。A_i>10 なら mask 自身へ (A_i−10)dp/A_i を加え、最後に bit10 が立つ確率を合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc310-f「Make 10 Again」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "subset sum 可否集合の bitset 表現",
+      "trigger": "部分集合和の目標値が小さく、要素を順に追加する過程を状態化するとき。",
+      "application": "可能和集合を shift と OR で更新し、その集合自体を bitmask DP の状態にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc310-f「Make 10 Again」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "同一遷移を生む確率事象の集約",
+      "trigger": "乱択結果の種類は多いが、多数の結果が DP 上で同じ次状態へ移るとき。",
+      "application": "10 を超える出目を状態不変遷移として個数重みでまとめる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "目標がちょうど 10 で出目が正なので、10 を超えた部分和は切り捨てても二度と必要にならない。",
+      "reusablePerspective": "小さい目標値の存在判定では、単調に増える量なら目標超過状態を安全に捨てられるか確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "bitset による subset sum",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "有限体上の確率 DP",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "bit0 は空集合として常に保持し、shift 後を 11 bit に mask する。A_i>10 の余剰出目数が負にならないよう場合分けする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Make 10 Again 型の 整数の約数・剰余構造に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な出目空間を 2048 個の到達可能集合へ圧縮し、和10を作れる確率を O(N·2^11·11) で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "確率DPでは、個々の出目ではなく「同じ次状態になる出目の個数」を数える。目標値より大きい出目が本当に無作用か、値の符号と再利用可否まで確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

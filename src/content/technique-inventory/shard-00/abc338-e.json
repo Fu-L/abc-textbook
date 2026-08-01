@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc338-e「Chords」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各chordの端点をA_i<B_iに揃え、円を1と2Nの間で切る。二本が交差するのは端点がA_i<A_j<B_i<B_jのように交互に現れる場合であり、交差がなければ開いたchord区間は互いにdisjointか完全にnestedになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc338-e「Chords」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "端点を順に走査し、open中のchordをstackで照合する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "非交差ならnested区間の閉じ順は必ずLIFOであり、一度の線形走査で交差を検出できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全chord pairの端点順を比較する",
+        "decision": "rejected",
+        "decisionReason": "pair数がO(N^2)でN=2×10^5に対応できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Chords 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "左端を見たchordをpushし、右端iを見た時にstack topがiでなければ、iの内側で開始した別chordがまだ閉じておらずA_i<A_j<B_i<B_jとなる。逆にtopが常に一致すれば全区間は正しくnestedし交差しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc338-e「Chords」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各chordで端点をmin/maxにし、位置1,…,2Nにchord IDと左/右種別を記録する。左端ならIDをpush、右端ならpopしたIDと比較し、不一致ならYesを即出力する。最後まで一致すればNo。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc338-e「Chords」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "円環のcut展開",
+      "trigger": "円周上の端点の交互配置を線形順序で判定したい。",
+      "application": "端点間の切れ目で円を開き、各chordを区間の開閉eventとして扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "平衡二分探索木",
-      "trigger": "制約と操作を整理したときに 平衡二分探索木 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc338-e「Chords」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 平衡二分探索木 を問題固有の状態へ適用する。",
+      "name": "括弧列としてのstack判定",
+      "trigger": "区間族が交差せずnested/disjointであるかを調べたい。",
+      "application": "chord IDを括弧種類とみなし、closeが直近openと一致するか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "全端点がdistinctなので、非交差chord配置の端点列はID付きの正しい括弧列と同値になる。",
+      "reusablePerspective": "区間の部分重なり検出は、laminar族なら開閉eventがLIFOになることを使える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "平衡二分探索木",
+      "text": "円環順序、区間の交互配置、stack。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "各pairをA_i<B_iへswapしてからeventを置く。right event時にstackが空になる入力は端点distinctな正規pairでは起きないが安全に分岐できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Chords 型の 区間端点と包含関係に対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。",
+      "text": "円内のN本のchordのうち、少なくとも二本が交差するかを判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "disjoint、完全nested、端点が交互の二本、外側chordを跨いで複数交差する例でstack列を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

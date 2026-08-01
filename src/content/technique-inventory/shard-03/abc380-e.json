@@ -17,67 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc380-e「1D Bucket Tool」では、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "一度の塗替えは x を含む同色連続成分全体に作用し、その後に併合し得るのは左右隣の成分だけである。各色の総セル数も成分長の移動として差分更新できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc380-e「1D Bucket Tool」では、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。この状態表現から答えを構成する。",
+        "approach": "各連続成分の左端を ordered set で持ち、左端から右端と色を特定して再着色し、同色になった左右境界を削除する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "成分境界は局所的にしか変わらず、predecessor/successor と高々二回の merge で各 query を O(log N) にできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "type 1 ごとに x から左右へ同色セルを走査して全要素を書き換える。",
+        "decision": "rejected",
+        "decisionReason": "大きな成分を何度も塗り直す query 列で Θ(NQ) になり得る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
+        "text": "境界 set で x 以下最大の左端 L と次の境界 R を取れば、x の成分は半開区間 [L,R) と一意に分かる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "1D Bucket Tool 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "再着色後に左・右と同色なら境界だけを消せばよく、内部セルを更新しなくても成分表現は正しい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc380-e「1D Bucket Tool」では、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。この状態表現から答えを構成する。",
+      "text": "各位置を長さ1成分として境界set・左端色map・色別個数を初期化する。塗替えで旧色個数を R-L 減らし新色へ足し、右境界、次に左境界を同色なら削除する。count query は色別個数を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "平衡二分探索木",
-      "trigger": "制約と操作を整理したときに 平衡二分探索木 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc380-e「1D Bucket Tool」では、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。この状態表現から答えを構成する。で 平衡二分探索木 を問題固有の状態へ適用する。",
+      "name": "run-length interval の動的管理",
+      "trigger": "区間全体への操作が同値 run を作り、隣接 run だけと併合する場合。",
+      "application": "ordered set に run 左端を持ち、境界の挿入削除で列を表す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "セル列ではなく最大同色区間を原子にすると、一操作の変更箇所が定数個の境界になる。",
+      "reusablePerspective": "区間長を色別集計へ差分反映すれば global count query も同時に解ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "平衡二分探索木",
+      "text": "ordered set の predecessor/successor、半開区間、run-length encoding の併合を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "右端番兵 N+1 を置き、右 merge 後に左 predecessor を取り直す。色map を消す境界と残す左端を取り違えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "1D Bucket Tool 型の問題に対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な同色成分の塗替えを、連続区間境界の局所更新として対数時間で処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "[L,R) の再着色前後を図にし、右併合と左併合でどの境界を消すかを個別に確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

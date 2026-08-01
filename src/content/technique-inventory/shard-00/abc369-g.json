@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc369-g「As far as possible」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "Aokiが選んだ頂点を全て含む根1からの最小部分木を往復するのがTakahashiの最短walkで、scoreはその部分木の辺重み和の2倍になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "部分木T_uのK別最適値S_u(K)の差分列は非増加になる。子vへの辺では最初の一頂点を選ぶ限界利得だけが2L+S_v(1)へ増え、以後の限界利得は子の差分を引き継ぐ。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc369-g「As far as possible」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "DFSで各子の第一限界利得に辺往復分を足し、頂点ごとに最大一つを親へ残して他と0をglobal multisetへ集める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "非増加な限界利得列のmergeとして木DPを表し、全Kの値を一つのsorted multisetのprefix和へ圧縮できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各頂点uでKごとのknapsack DPを子部分木サイズに沿ってmergeする。",
+        "decision": "rejected",
+        "decisionReason": "定義どおりだが全頂点の部分木サイズを掛け合わせる二次的処理になり、限界利得のconcavityを使えていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "DFS で頂点へ入ってから出るまでに訪れる頂点はちょうどその部分木なので、時刻区間との対応が成立する。",
+        "text": "子vから一頂点以上選ぶと辺(u,v)を必ず往復するため、子列の先頭だけへ2Lを加える。各子列が非増加なら全列から大きい順に限界利得を取るのが最適である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "As far as possible 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "u自身を選ぶ選択肢の限界利得は0であり、K=|T_u|ではuを追加してもscoreが増えないというS_u(last)=S_u(last−1)を表す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc369-g「As far as possible」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "葉はbest=0を返す。内部uでは各子vからcandidate=best_v+2L_{uv}を得て最大一つをbest_uとして親へ返し、残りcandidateとu自身分の0をglobal配列へ追加する。rootのbestとglobal配列を合わせて降順限界利得列を作り、そのprefix sumをK=1..Nの答えとして出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc369-g「As far as possible」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "concave tree DPの限界利得merge",
+      "trigger": "子ごとの選択数DPが離散concaveで、合計選択数を配分するとき。",
+      "application": "値列でなく非増加差分列をmergeして上位K個を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Euler tour による木の一次元化",
-      "trigger": "制約と操作を整理したときに Euler tour による木の一次元化 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc369-g「As far as possible」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で Euler tour による木の一次元化 を問題固有の状態へ適用する。",
+      "name": "最大要素だけのsmall-to-large圧縮",
+      "trigger": "各nodeで子列先頭の最大一つだけが親の先頭へ連鎖するとき。",
+      "application": "最大candidateを返し、確定した他のmarginalをglobal multisetへ退避する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "各辺の往復価値は、その子部分木から最初の一頂点を選ぶ瞬間だけ発生する固定bonusとして限界利得へ載る。",
+      "reusablePerspective": "subset活性化costがある資源配分では、各groupのfirst marginalだけを修正して差分列をmergeする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
+      "text": "根付き木DP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Euler tour による木の一次元化",
+      "text": "離散concavityと限界利得",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入時刻の半開区間と頂点値・辺値のどちらを記録するかを統一する。",
+      "text": "scoreは往復なので辺長を2倍する。各内部頂点につき0を一つだけ追加し、最終限界利得数がN個になることをassertする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "As far as possible 型の 根付き木・部分木・パスの関係に対し、Euler tour による木の一次元化を選び、状態と証明を一貫して設計できる。",
+      "text": "全Kのmin-max scoreを木knapsackではなく非増加な限界利得の一括sortとprefix和で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入時刻の半開区間と頂点値・辺値のどちらを記録するかを統一する。",
+      "text": "葉・chain・starで返すbestとglobalへ置く値を手計算する。S(K)差分が非増加という帰納と0追加の意味を説明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

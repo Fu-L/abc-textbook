@@ -17,67 +17,83 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc230-e「Fraction Floor Sum」では、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "i が大きくなると floor(N/i) は単調に減り、同じ商を取る i が長い連続区間としてまとまる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "商が k となる整数 i の個数は floor(N/k)−floor(N/(k＋1)) で求まり、小さい商は値ごとに一括加算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc230-e「Fraction Floor Sum」では、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。この状態表現から答えを構成する。",
+        "approach": "i＝1 から N まで順に floor(N/i) を計算して足す。",
+        "decision": "rejected",
+        "decisionReason": "N が 10 の 12 乗まであるため、N 回の除算を実行できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "sqrt(N) 以下の商は出現回数でまとめ、それより大きい商は対応する小さい i を一つずつ処理する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "商と添字の少なくとも一方が sqrt(N) 以下になる双曲線の性質により、両側を合わせても平方根程度の項だけで済む。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "floor(N/i) の異なる値は平方根より小さい商と平方根以下の添字から全て得られ、各区間端は除算で計算できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Fraction Floor Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "全ての i を走査する代わりに、floor(N/i) の値が同じ区間を数えるという商側からの集約へ視点を移す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc230-e「Fraction Floor Sum」では、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。この状態表現から答えを構成する。",
+      "text": "整数双曲線 xy≤N の格子点数え上げとして、小さい商の頻度集約と小さい除数の直接和を境界 floor(sqrt(N)) で分割する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "floor 除算の商区間列挙",
-      "trigger": "制約と操作を整理したときに floor 除算の商区間列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc230-e「Fraction Floor Sum」では、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。この状態表現から答えを構成する。で floor 除算の商区間列挙 を問題固有の状態へ適用する。",
+      "name": "floor 商の平方根分割",
+      "trigger": "floor(N/i) を i の広い範囲で集約して和や頻度を求めるとき。",
+      "application": "商 k の出現個数を除算二回の差で求め、大きい商側は小さい i だけ直接処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "k₀＝floor(sqrt(N)) とすると、商が k₀＋1 以上の i は N/(k₀＋1) 以下に限られ、集約側との重複なしに直接列挙できる。",
+      "reusablePerspective": "商と除数の対称性を使う分割では、境界の等号を式で確認して二重計上を避ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "floor 除算の商区間列挙",
+      "text": "floor(N/i)＝k を不等式へ戻し、整数解の区間端点と個数を導けること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。",
+      "text": "平方根は浮動小数に頼らず整数として補正し、k₀²≤N＜(k₀＋1)² を満たすことを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "答えは 32 bit を超えるため 64 bit 整数を使い、二つの和の添字範囲を境界で重ねない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Fraction Floor Sum 型の問題に対し、floor 除算の商区間列挙を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な floor 除算列の和を、商の頻度と平方根分割を使って列挙せず計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。",
+      "text": "floor(N/i) が並んだら、値の種類数と同値区間の端点 floor(N/k) を先に調べる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

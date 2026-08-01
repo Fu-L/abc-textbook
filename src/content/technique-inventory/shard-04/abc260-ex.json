@@ -1,15 +1,15 @@
 {
   "problemId": "abc260-ex",
   "sourceRevisionIds": [
-    "source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40",
-    "source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd"
+    "source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd",
+    "source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40",
-        "source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd"
+        "source-abc260-ex-problem-d07c2253eb6027bf7537a67461899f6ac61aac2cd22b86e9deb1c82ea83807fd",
+        "source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,77 +17,115 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc260-ex「Colorfulness」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "全 k について C(P)^k を直接足す代わりに、C(P)=t となる順列数 a_t を先に得れば F(k)=Σ_t a_t t^k と分離できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "異色境界数 C と同色境界数 D は C＋D=N−1 なので、同色境界を指定して満たす列を数える包除原理が使える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc260-ex「Colorfulness」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "色の多重集合順列を DP で列挙し、遷移回数ごとの分布を色数・個数状態で数える。",
+        "decision": "rejected",
+        "decisionReason": "色ごとの残数を状態にすると次元が色数に依存し、N=25 万では扱えない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "指定した同色隣接を満たす数 q を色ごとのブロック EGF の積で求め、二項反転で正確な分布 a を復元した後、Σ_t a_t/(1−tx) を FPS 展開する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "分布計算と全冪モーメント生成の双方を多項式積・畳み込みへ落とせ、NTT と積木、FPS 逆元を一貫して利用できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+        "text": "同色境界が正確に d 個の列数を p_d、指定した n 個以上の同色境界を満たす数を q_n とすると、q_n=Σ_{d≥n}binom(d,n)p_d であり、二項反転で p を得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Colorfulness 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "色 c の個数 m_c に対するブロック選択を g_c(x)=Σ_k binom(m_c−1,m_c−k)x^k/k! と正規化すると、積 ∏g_c の係数が多項係数付きの q 計算を表す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "モーメント列の通常型母関数は Σ_{k≥0}F(k)x^k=Σ_t a_t/(1−tx) となり、分数を積木でまとめて分母の FPS 逆元を取れば M 項を一括生成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc260-ex「Colorfulness」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "同色 run の組合せを exponential generating function で合成し、binomial inversion で分布を復元し、power moments を rational generating function の級数展開へ接続する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc260-ex「Colorfulness」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "指定事象数から正確事象数への二項反転",
+      "trigger": "ちょうど d 個成立する対象は数えにくいが、指定した n 個が全て成立する対象なら数えやすいとき。",
+      "application": "q_n=Σ binom(d,n)p_d を作り、階乗で正規化した畳み込みとして p を復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "包除原理",
-      "trigger": "制約と操作を整理したときに 包除原理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc260-ex「Colorfulness」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 包除原理 を問題固有の状態へ適用する。",
+      "name": "指数型母関数によるラベル付き合成",
+      "trigger": "独立な種類ごとの部品数を合成するときに、多項係数で配置順を混ぜる必要があるとき。",
+      "application": "係数を階乗で割った色別多項式を掛け、最終係数へ階乗を戻す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "有理型母関数と FPS 逆元",
+      "trigger": "有限分布 a_t の全冪モーメント Σa_t t^k を多数の k について求めるとき。",
+      "application": "Σa_t/(1−tx) を分子・分母の多項式へまとめ、Newton 法で分母を反転して必要次数まで展開する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "同色の球は色列を数える段階では同一視でき、最後に各色内の球番号の並べ方 ∏m_c! を掛けて元の球の順列数へ戻せる。",
+      "reusablePerspective": "評価値が属性列だけで決まるラベル付き順列は、属性列の数え上げと属性内ラベルの置換を分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "包除原理",
+      "text": "包除原理と二項反転、EGF、NTT による多項式積、FPS 逆元を扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "色別多項式や分数は次数の小さいものから priority queue で併合し、極端に偏った逐次積を避ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "同色境界数 d と異色境界数 N−1−d の添字反転、および色内ラベル置換の階乗係数を落とさない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "FPS 逆元は定数項が 1 の分母に対し u←2u−tu^2 を必要次数で切り詰めながら倍化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Colorfulness 型の 順列の位置と値の対応に対し、包除原理を選び、状態と証明を一貫して設計できる。",
+      "text": "隣接色変化数の分布から高次数までの全冪和を、包除・母関数・高速多項式演算で生成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "同じ統計量の多数の冪和を求めるなら、まず統計量の値別分布へ問題を分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "多項係数を伴う独立部品の合成では、階乗正規化により通常の畳み込みへ変わるか確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "有限分布の moment sequence は各値の等比級数を足した有理関数になる、という変換を候補にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

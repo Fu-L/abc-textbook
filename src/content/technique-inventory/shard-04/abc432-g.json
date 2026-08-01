@@ -17,77 +17,91 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc432-g「Sum of Binom(A, B)」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "求める二重和は値の頻度 C_a(i),C_b(j) でまとめられる。二項係数 i!/(j!(i-j)!) の j と i-j の部分は畳み込みの係数に一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc432-g「Sum of Binom(A, B)」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "C_b(j)/j! と 1/k! の多項式を NTT で畳み込み、係数へ C_a(i)i! を掛けて総和する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "二重和を一回の畳み込みへ変形でき、O(K log K) で全 i の内側和を得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全ての値 i,j または全 A,B の組について二項係数を加える。",
+        "decision": "rejected",
+        "decisionReason": "最大で O(K^2) または O(NM) となる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
+        "text": "h_i=Σ_{j+k=i}(C_b(j)/j!)(1/k!) とおけば、i!h_i=Σ_j C_b(j)binom(i,j) である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sum of Binom(A, B) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "binom(i,j)=0 とみなす j>i は畳み込みの係数 i に現れないため、特別な枝分けなしで除外される。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc432-g「Sum of Binom(A, B)」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "K まで factorial と inverse factorial を前計算する。f[j]=C_b(j)·invfact[j]、g[k]=invfact[k] を作り、NTT convolution h=f*g を求める。i=0…K について C_a(i)·fact[i]·h[i] を足す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "多項式の係数演算",
-      "trigger": "制約と操作を整理したときに 多項式の係数演算 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc432-g「Sum of Binom(A, B)」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。で 多項式の係数演算 を問題固有の状態へ適用する。",
+      "name": "階乗正規化による畳み込み",
+      "trigger": "二項係数を含む二重和で添字和 i=j+k の形が見えるとき。",
+      "application": "j! と k! を各列へ分離し、通常の多項式積の係数へ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "畳み込みと NTT",
-      "trigger": "制約と操作を整理したときに 畳み込みと NTT の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc432-g「Sum of Binom(A, B)」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。多項式係数と組合せ和の対応を必要十分な状態だけで表し、答えを構成する。で 畳み込みと NTT を問題固有の状態へ適用する。",
+      "name": "NTT",
+      "trigger": "法が適合し、大きな二列の畳み込みを高速に求めたいとき。",
+      "application": "頻度を階乗で正規化した多項式を O(K log K) で乗算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "値頻度への集約",
+      "trigger": "式が要素の位置でなく値だけに依存するとき。",
+      "application": "同じ A_i、B_j の寄与を頻度でまとめて値域上の式にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二項係数付き和は i! を外へ出し、両入力を逆階乗で正規化すると通常畳み込みになる。",
+      "reusablePerspective": "組合せ核 K(i,j) が j と i-j の積へ分離できれば、全組集計を convolution に落とせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "多項式の係数演算",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "畳み込みと NTT",
+      "text": "二項係数の階乗表示、形式的冪級数、畳み込み、NTT、剰余逆元を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "必要な係数長、padding 長、法が NTT に対応するかを確認する。",
+      "text": "0! と値 0 の頻度を問題の範囲に合わせて含める。畳み込み結果は長さ 2K+1 だが使用係数は i≤K だけである。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sum of Binom(A, B) 型の 多項式係数と組合せ和の対応に対し、畳み込みと NTTを選び、状態と証明を一貫して設計できる。",
+      "text": "全組の二項係数和を、頻度列の階乗正規化と NTT 一回で高速に計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "必要な係数長、padding 長、法が NTT に対応するかを確認する。",
+      "text": "h[i] の添字条件 j+k=i と、fact[i] を掛け戻した式が元の binom(i,j) に一致することを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

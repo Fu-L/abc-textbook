@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc225-e「7」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "見えない7を全て削除しても見えている個数は減らないので、残す7を全て原点から見えるように選ぶ問題と考えられる。各7が遮る方向は二端点の偏角の間の開区間で表せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc225-e「7」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各7を偏角開区間 [angle(x_i,y_i-1),angle(x_i-1,y_i)] とみなし、右端が小さい順の区間スケジューリングで交わらない最大集合を選ぶ。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全体可視性が偏角区間の非交差と同値になり、最も早く終わる区間を選ぶ交換論法をそのまま適用できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "原点から近い7、または中心の偏角が小さい7から順に残す。",
+        "decision": "rejected",
+        "decisionReason": "可視性を決めるのは距離や中心角ではなく区間全体の重なりであり、終了角を遅く残すと後続の選択肢を不必要に失う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+        "text": "二つの7がともに完全に見えるための条件は対応する偏角開区間が交わらないことで、平面上の遮蔽関係を一次元区間へ落とせる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "7 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "選べる区間のうち右端が最小のものを先に選んでも、最適解の最初の区間と交換して残りの実行可能性を悪化させない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc225-e「7」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "浮動小数の角度を使わず端点方向を外積で比較して右端順にsortし、次の左端が直前に選んだ右端以上なら選択する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc225-e「7」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "偏角区間への幾何変換",
+      "trigger": "原点から図形が占める方向の重なりが可視性・干渉を決めるとき。",
+      "application": "各図形の二本の境界半直線を区間端点とし、二次元の遮蔽を偏角上の区間非交差へ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "greedy choice と交換論法",
-      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc225-e「7」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "name": "区間スケジューリング",
+      "trigger": "同数の価値を持つ区間から、互いに重ならない最大個数を選ぶとき。",
+      "application": "右端の早い順に見て、現在の右端以降に始まる区間を貪欲に採用する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "現時点で見えない7を残す意味はないため、『削除後に見えるものの個数』を『残したものが全て見える最大集合』へ言い換えられる。",
+      "reusablePerspective": "削除問題では目的へ寄与しない残存要素を全て除いても目的値が変わらないかを確認し、選択集合問題へ単純化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "外積による第一象限の偏角比較",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "greedy choice と交換論法",
+      "text": "区間スケジューリングの交換論法",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "x_i-1 または y_i-1 が0になる端点も外積で比較できるよう軸方向を扱い、座標積は64 bit整数で保持する。開区間なので端点が一致する二区間は同時に選べる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "7 型の 頂点と辺からなる状態グラフに対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "text": "原点からの可視性を偏角区間へ変換し、厳密比較を保った区間スケジューリングとして解ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "可視性が『方向の幅』で決まる図形では、距離を追う前に原点から張る二本の境界線を区間端点として描く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

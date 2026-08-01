@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc312-g「Avoid Straight Line」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "三頂点が一本の単純路上にないとき、その三本の道が合流する分岐点 v が一意に存在し、三頂点は T−v の異なる連結成分に属する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "v を固定すると必要なのは、v を除いた各方向の成分サイズだけであり、異なる三成分から一頂点ずつ選ぶ積の和になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc312-g「Avoid Straight Line」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各頂点 v について incident edge の向こう側の成分サイズを集め、異なる三成分から選ぶ積を次数に比例する DP で足す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "条件を満たす三つ組は唯一の分岐点へ一度だけ割り当てられ、全頂点の次数和が O(N) なので全体も O(N) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全三つ組を列挙し、LCA や距離から一本の道に乗るか判定する。",
+        "decision": "rejected",
+        "decisionReason": "判定を高速化しても Θ(N³) 個の三つ組を列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "木には閉路がないため、親辺を除く部分木が独立し、帰納法で子の最適値または個数を合成できる。",
+        "text": "任意根で subtree size を求めれば、辺 v−child 側は size[child]、親側は N−size[v] として reroot なしに全方向サイズが得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Avoid Straight Line 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "成分サイズ列 c を左から見て、選択数 0..3 の積和を更新すれば [x³]∏(1+c_i x) を O(deg v) で計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc312-g「Avoid Straight Line」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "木を任意根で DFS して subtree size を求める。各 v で隣接方向ごとのサイズを作り、ways[0]=1 の三要素選択 DP を更新して ways[3] を答えへ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc312-g「Avoid Straight Line」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "木の中心分岐による組の一意な分類",
+      "trigger": "複数頂点が一本の道に載るか、異なる枝へ分かれるかを数えるとき。",
+      "application": "Steiner subtree の分岐点を固定し、削除後の異なる成分から選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "根付き木と木 DP",
-      "trigger": "制約と操作を整理したときに 根付き木と木 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc312-g「Avoid Straight Line」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 根付き木と木 DP を問題固有の状態へ適用する。",
+      "name": "辺の両側サイズ",
+      "trigger": "全頂点を仮の根にした子方向成分サイズが必要なとき。",
+      "application": "一度の subtree size から child 側 size と parent 側 N−size を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "数えたい三つ組には分岐点が一意なので、全 v で足しても重複しないことが O(N) 解法の土台になる。",
+      "reusablePerspective": "木上の組を数えるとき、各組を LCA・中心・最初の分岐など一意な頂点へ課金できるか探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
+      "text": "部分木サイズ",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "根付き木と木 DP",
+      "text": "初等対称式の逐次 DP",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "親方向成分を忘れず、v 自身はどの成分にも入れない。積と総数は N³ 規模なので 64 bit を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Avoid Straight Line 型の 根付き木・部分木・パスの関係に対し、根付き木と木 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "非共線な三頂点を唯一の分岐点へ割り当て、全次数に比例する O(N) で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "三頂点の最小連結部分木を描き、path 型か次数3の分岐型かを分類する。成分サイズの積が何を一回ずつ数えるか言葉で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

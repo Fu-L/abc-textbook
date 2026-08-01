@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc400-g「Patisserie ABC 3」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各pair価格のmaxを達成するcategoryを一つ割り当てると、2K個のcake-category選択になり、各cake高々一回・各category選択数偶数という条件だけが残る。この選択最適値と元pairing最適値は相互に構成でき一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "ちょうどi pairの最適値M_iは離散凹であるため、選択一個あたりpenalty cを引くAlien DPから指定Kを復元できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc400-g「Patisserie ABC 3」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "半整数penalty cを二分探索し、3 category parityの8-state DPでpenalized valueと選択数を同時最適化する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "固定cでは各cakeを未選択またはX/Y/Zいずれかで選ぶだけなのでO(N)。argmax pair数の単調性からO(N log maxValue)でKに対応するcを見つけ、M_K=f(c)+2Kcを得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "cakeのK disjoint pairと各pairのmax categoryを直接DPする",
+        "decision": "rejected",
+        "decisionReason": "pair候補Θ(N²)とmatching constraintが絡み、N=10^5では扱えない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "各categoryの選択数が偶数なら、同category内で任意に二つずつpairにして、そのpair価格は割当category和以上なので緩和にgapがない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Patisserie ABC 3 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "DP tie-breakで選択数も保持し、penalty増加に対して最適選択pair数が単調に減るよう一貫した側を選ぶ。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc400-g「Patisserie ABC 3」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "penaltyを2倍整数qで表し、各選択valueを2V-qとする。8 parity stateでcakeをskip/X/Y/Z選択し、valueと個数をlexicographic更新する。pair数とKの比較でqをbinary searchし、最終penalized optimumへ2Kcを戻して2で割る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc400-g「Patisserie ABC 3」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "Alien DP",
+      "trigger": "exact個数別最適値列が離散凹で、Lagrange penalty下の最適個数を求められるとき。",
+      "application": "個数constraintをpenaltyへ移し二分探索でtarget Kを支持する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc400-g「Patisserie ABC 3」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "parity state DP",
+      "trigger": "少数categoryの選択数を偶数に制約するとき。",
+      "application": "各選択で対応bitをxorし最終mask0を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "max of three sumsをpairごとに扱うのでなく、勝ったcategoryをendpointそれぞれへ付けるとpair構造自体がparityだけへ消える。",
+      "reusablePerspective": "pair scoreがmax/min of category-additive termsなら、category assignment後のdegree/parity条件へ緩和してtightnessを証明する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "Alien DPと離散凹性、tie-breakを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "bitmask parity DPを実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "half-integer cは全値を2倍してexact整数化する。DPは(value,selected count)を同じtie規約で比較し、selected countは2iなのでpair数へ直す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Patisserie ABC 3 型の 整数の約数・剰余構造に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "三属性maxのdisjoint pairingをcategory parity選択へ変換し、Alien DPでexact Kの最適値を高速に得られる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "N≤10で全matching・全category割当を列挙し、M_iの凹性、penalty境界tie、K=1,N/2を比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

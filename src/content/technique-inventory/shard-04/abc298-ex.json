@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc298-ex「Sum of Min of Length」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "二点L,Rへの距離の小さい側は、L-R path中央付近の辺で木を二領域に切ったとき一方ではR、他方ではLに固定される。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc298-ex「Sum of Min of Length」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "LCA/level ancestorと距離総和の閉形式前計算",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "境界頂点Mを求め、M部分木内のR距離和と外のL距離和を部分木size・深さ和・祖先size和から定数個の式で得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各質問で全頂点のmin距離を足す",
+        "decision": "rejected",
+        "decisionReason": "O(NQ)になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "二進展開した距離だけ祖先へ移動でき、最大の異なる祖先から一段進めば最小共通祖先になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Sum of Min of Length 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "dep_L<dep_Rへ揃え、Rからfloor((d(L,R)-1)/2)上ったMの部分木がd(j,R)<d(j,L)となる側である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc298-ex「Sum of Min of Length」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "根付き木のdep,sz,subtree depth sum,祖先sz累積とLCA/LAを前計算する。各質問でMを求め、部分木距離和関数をR側とL側に適用して補集合と合算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc298-ex「Sum of Min of Length」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "木のVoronoi二分",
+      "trigger": "二つのsiteへの近距離で全頂点を分割する。",
+      "application": "二点path中央の辺を境界にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "LCA と binary lifting",
-      "trigger": "制約と操作を整理したときに LCA と binary lifting の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc298-ex「Sum of Min of Length」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で LCA と binary lifting を問題固有の状態へ適用する。",
+      "name": "部分木距離総和",
+      "trigger": "固定頂点から部分木/補集合への距離和を多数求める。",
+      "application": "depth・subtree sizeのprefix集約で閉形式化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二点距離のmin和は木上Voronoi領域が一つの部分木になる向きへ端点を揃えると集約できる。",
+      "reusablePerspective": "木の二site最短割当は中央edgeで切る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "LCA と binary lifting",
+      "text": "LCA、level ancestor、部分木集約。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。",
+      "text": "深さ同値や距離偶奇でtieはL側へ含める式を確認し、全和は64ビットで持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sum of Min of Length 型の 根付き木・部分木・パスの関係に対し、LCA と binary liftingを選び、状態と証明を一貫して設計できる。",
+      "text": "各L,RについてΣ_j min(d(j,L),d(j,R))を高速に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。",
+      "text": "全頂点BFS和と比較し、隣接点、祖先関係、同深さ、path長の奇偶を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc278-f「Shiritori」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "同じwordは二度使えずN≤16なので、gameの履歴で将来に必要なのはused/remaining subsetと直前wordの末尾文字だけである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "有限のnormal-play gameなので、現在playerが相手の負け状態へ遷移できるなら勝ち、全遷移が相手の勝ちなら負けとなる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc278-f「Shiritori」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "remaining word subsetと要求される先頭文字を状態にしたbit DPで勝敗を小subsetから計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "wordの使用順序を2^N状態にまとめ、minimaxを通常の勝敗recurrenceで評価できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "可能なshiritori列をgame treeとして重複なく全探索する。",
+        "decision": "rejected",
+        "decisionReason": "同じsubset・末尾へ至る順序が多数あり、memo化なしではN!規模になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "状態が勝ちである必要十分条件は、先頭文字が一致するremaining wordの中に、使用後の状態が負けとなるものが1つでもあること。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Shiritori 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "初手だけ要求文字がないため、各wordを初手に選んだ後の相手状態が負けかを全wordについて調べればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc278-f「Shiritori」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "dp[mask][c]をremaining set=mask、要求先頭文字cから手番playerが勝てるかとする。使用可能word iごとにdp[mask\\{i}][last_i]がfalseならtrueとし、maskの小さい順に埋める。full maskから任意初手で勝てればFirst。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc278-f「Shiritori」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "subset game DP",
+      "trigger": "各要素を高々一度使う交互gameで、Nが20未満のとき。",
+      "application": "remaining/used subsetと局所的な接続条件を状態にして勝敗をmemo化する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc278-f「Shiritori」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "normal-play勝敗recurrence",
+      "trigger": "手がないplayerが負ける有限gameを解析するとき。",
+      "application": "負け状態への遷移があれば勝ち、なければ負けとする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "文字列本体の内容は初字・末字以外gameの合法性に影響せず、履歴の最後も末尾1文字へ圧縮できる。",
+      "reusablePerspective": "連結ルール付き列gameでは、次の合法手判定に必要なboundary情報だけを状態に残す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
+      "text": "bitmask subset DP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "combinatorial gameの勝ち/負け状態",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "remaining mask方式なら遷移先は小さいmaskなので昇順、used mask方式なら逆向きになることを揃える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "初手を表すdummy文字を26文字に混ぜず、全wordからの遷移を別に評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Shiritori 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "word再利用禁止shiritoriの最適勝者を、subset×末尾文字のgame DPで判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "手がないmaskを負けと置き、1語・2語の小例から『相手を負けへ送れる』recurrenceを逆算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

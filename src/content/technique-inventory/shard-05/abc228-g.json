@@ -17,77 +17,103 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc228-g「Digits on Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各行を左側頂点、各列を右側頂点、マス(i,j)の数字を辺(i,j)のラベルとみなすと、操作で得る長さ2Nの列は、行側から始めて二部グラフを交互に移る歩道の辺ラベル列になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "同じ数字列でも複数の行・列に到達できるため、現在頂点だけを状態にして経路数を足すと数字列を重複して数える。一方H,W≤10なので、あるprefixを読んだ後に到達可能な頂点全体をbit集合で持てる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc228-g「Digits on Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "長さごと・現在の行または列ごとに経路数をDPし、最後に合計する。",
+        "decision": "rejected",
+        "decisionReason": "問題が数えるのは経路ではなく異なる数字列なので、同じ列が複数の現在頂点へ到達すると重複する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "数字列prefixごとの到達可能頂点集合を決定性オートマトンの状態とみなし、集合別に異なるprefix数をDPする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "同じ集合に至ったprefixは、次の各数字で移る集合が完全に一致するため合流でき、集合状態数は小さい側ごとに2^Hまたは2^Wへ収まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "集合Sと次の数字dから、dと書かれた辺でSのいずれかに隣接する反対側頂点全体が次集合として一意に決まる。この決定的遷移により、経路の曖昧さを集合へ吸収できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Digits on Grid 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "異なる数字prefixが同じ集合へ到達しても、その個数はDP値として加算する。逆に同じprefixは到達可能頂点を全てまとめたただ一つの集合を持つため、二重に数えられない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc228-g「Digits on Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "行を全て含む集合を長さ0の初期状態とする。各長さで非空集合Sと数字d=1..9を列挙し、ラベルdの辺で到達する反対側集合next(S,d)へdp値を加える。行集合と列集合を交互に使い、2N文字後の全ての非空集合の値を合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc228-g「Digits on Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "グリッドの二部グラフ化",
+      "trigger": "行と列を交互に選び、交点の情報を出力する操作が続くとき。",
+      "application": "行・列を頂点、マスの数字を辺ラベルにして、操作列をラベル付き歩道として捉える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc228-g「Digits on Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "非決定的遷移の部分集合構成",
+      "trigger": "同じ入力列が複数状態へ到達し得るが、状態数が小さく、異なる入力列を重複なく数えたいとき。",
+      "application": "数字prefixの到達可能な行または列をbit集合にまとめ、数字ごとの決定的な集合遷移を作る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "集合状態DP",
+      "trigger": "将来の遷移が現在の要素集合だけで決まり、集合の母数が10程度に収まるとき。",
+      "application": "長さと到達可能頂点集合ごとに異なる数字prefixの個数を保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "現在頂点を一つ選んで状態にするのではなく、同じ数字列が実現できる全頂点を同時に保持することで、『経路数』ではなく『ラベル列数』を数えるDPになる。",
+      "reusablePerspective": "経路のラベル列を数える問題で重複が生じたら、各ラベルprefixに対する到達状態集合を一つの正規形として使えないか検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "bit集合と集合遷移",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "有限オートマトンの部分集合構成",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "奇数長では列集合、偶数長では行集合という向きをそろえ、next(S,d)が空集合なら実現不能なので遷移させない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "DP加算は問題指定の法998244353で行い、各段の配列を初期化して同じ長さの値を再利用しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Digits on Grid 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "ラベル付きグラフで異なる歩道ラベル列を数える際、到達可能頂点集合を正規状態にして経路重複を除ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "単一頂点DPが数える経路と、問題が求める数字列の違いを小さな重複例で示す。その後、各prefixが到達集合を一意に持つことを数え上げの正当性として確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

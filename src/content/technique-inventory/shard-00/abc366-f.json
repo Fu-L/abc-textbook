@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc366-f「Maximum Composition」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "二つの一次関数f_i(x)=A_i x+B_iの合成順比較では、f_i(f_j(x))−f_j(f_i(x))の符号がxに依存せず、(A_i−1)/B_iと(A_j−1)/B_jの大小で決まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "従って選ぶK個が決まれば最適順序は共通の比較keyで一意に整列でき、残る自由度はsorted列からどのK個を選ぶかだけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc366-f「Maximum Composition」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "cross multiplicationで関数を最適合成順にsortし、選択個数DPで採用・不採用を決める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "順列探索をpairwise exchangeで消去し、K≤10の部分列選択へ落とせる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "K個のindex集合とそのK!通りの適用順を探索する。",
+        "decision": "rejected",
+        "decisionReason": "順序比較が入力値だけで決まる性質を使わず、Nが大きいため集合選択だけでも列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "比率比較は除算せず(A_i−1)B_jと(A_j−1)B_iの整数cross productで行い、丸め誤差を避ける。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Maximum Composition 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "内側から得た現在値xへ外側関数を適用するため、sort方向とDP走査方向を揃えてA_i x+B_iで更新する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc366-f「Maximum Composition」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "関数を(A−1)/Bの非増加順にsortする。dp[k]をsorted順でk個選んだ合成の最大中間値として、適切な方向に走査し、不採用dp[k]と採用A_i·dp[k−1]+B_iを比較する。初期入力1からK個採用した値を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc366-f「Maximum Composition」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "隣接交換による最適順序付け",
+      "trigger": "選んだ要素の適用順がpair交換の符号だけで決まるとき。",
+      "application": "二要素の順序差を展開し、globalなsort keyを導く。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc366-f「Maximum Composition」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "順序固定後の選択DP",
+      "trigger": "最適な相対順が決まり、その列からちょうど少数個を選ぶとき。",
+      "application": "採用数だけを状態にして関数適用値を最大化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "合成結果は急速に増えるが、順序の優劣が現在値xから独立なので、選択と並べ替えを完全に分離できる。",
+      "reusablePerspective": "関数合成最適化では二関数の交換差を展開し、入力状態が消えるか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "一次関数の合成",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "選択個数DPとcustom sort",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "等しい比率ではどちら順でも値が同じだがcomparatorをstrict weak orderingにする。dp未到達値を更新せず、積の上限に合う整数型を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Maximum Composition 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "一次関数の順列最適化を比率sortで解消し、ちょうどK個の選択を小さい状態DPで行える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "二関数だけで両順序を展開しsort不等号の向きを確定する。DPが外側・内側のどちらから合成しているか例で検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

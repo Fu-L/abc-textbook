@@ -17,67 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc281-e「Least Elements」では、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "隣接windowは左端1要素を削除し右端1要素を追加するだけなので、毎回sortし直す情報の大半は共通である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "windowを小さいK個のmultiset Lと残りRに分ければ、答えはsum(L)であり、必要な不変条件は|L|=Kかつmax(L)≤min(R)である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc281-e「Least Elements」では、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。この状態表現から答えを構成する。",
+        "approach": "ordered multiset L,RとsumLを維持し、削除・挿入後に境界要素を高々1個移して|L|=Kへ戻す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "window更新2要素だけを対数時間で反映し、K最小値の和を直接保持できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各windowのM要素をcopyしてsortし先頭K個を足す。",
+        "decision": "rejected",
+        "decisionReason": "window数とMの積が二次規模になり、N≤2×10^5に間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
+        "text": "新値をmax(L)以下ならL、そうでなければRへ入れればorder不変量を保てる。削除後を含め|L|はK±1以内なので1回のrebalanceで足りる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Least Elements 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "重複値があるため、削除対象をどちらのmultisetに属するか判定し、iteratorまたは(value,index)で1個だけ消す必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc281-e「Least Elements」では、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。この状態表現から答えを構成する。",
+      "text": "初windowをsortしてK個をL、残りをRへ入れsumLを作る。slideごとにoutgoingを所属setから削除し、incomingを境界比較で挿入する。|L|<KならminRをLへ、>KならmaxLをRへ移しsumLを更新して出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "平衡二分探索木",
-      "trigger": "制約と操作を整理したときに 平衡二分探索木 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc281-e「Least Elements」では、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。この状態表現から答えを構成する。で 平衡二分探索木 を問題固有の状態へ適用する。",
+      "name": "two-multiset order statistics",
+      "trigger": "動的multisetの小さい方K個と残りを分け、その集約値を維持したいとき。",
+      "application": "境界maxL/minRとsizeを不変量にし、insert/erase後にrebalanceする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "sliding window差分更新",
+      "trigger": "連続window間で出入りする要素が少数のとき。",
+      "application": "outgoing削除とincoming挿入だけをdata structureへ反映する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "K-th値そのものではなくK最小値の和なので、balanced partitionにsum metadataを足すだけでqueryがO(1)になる。",
+      "reusablePerspective": "dynamic order statisticのprefix集約では、境界で集合を二分し片側のsum/countを持つ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "平衡二分探索木",
+      "text": "multisetのinsert/erase/begin/rbegin",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "sliding window",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "K=MでRが空の場合にmaxL比較やminR移動を空参照しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "sumLはK·A_iで64 bitが必要で、値移動・削除・挿入のたび増減を同時更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Least Elements 型の問題に対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。",
+      "text": "全固定長windowのK最小要素和を、二つのordered multisetと境界rebalanceで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "境界値が重複するwindowで同値要素がL/R両方にある例を作り、どちらから1個消しても不変量を戻せる実装を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

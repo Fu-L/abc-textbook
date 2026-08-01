@@ -17,77 +17,117 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc286-ex「Don't Swim」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "線分S–Tが凸polygonの内部を通らなければ、Euclidean直線距離が下界を達成するので迂回は不要である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "内部を横切る場合の最短pathは、Sからpolygonへのtangent、polygon境界上の連続arc、polygonからTへのtangentの組合せに変形できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "必要なtangent接点はCの全頂点にS,Tを加えたconvex hull上でS,Tに接続する頂点として現れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc286-ex「Don't Swim」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "直線が内部を通る場合にC∪{S,T}のconvex hullを作り、hull上のS–T間2方向のarc長の小さい方を取る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "tangent区間と障害物境界を1本のhull周上へ統合でき、接点候補を個別探索せず両迂回方向を比較できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "polygon頂点をvisibility graphの頂点とし、全頂点対の見通しedgeを作って最短路を解く。",
+        "decision": "rejected",
+        "decisionReason": "convex性により最適pathは境界順のarcだけで十分なのに、二次個のedgeを生成してしまう。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "S,Tに最も近いpolygon頂点を接点として選ぶ。",
+        "decision": "rejected",
+        "decisionReason": "最短の接点は距離単独ではなく内部を横切らないtangent条件で決まり、最近傍とは限らない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "外積の符号が有向面積と回転方向を表すため、幾何条件を符号条件として必要十分に判定できる。",
+        "text": "polygonへ触れる前後の折れ線は、内部へ入らない範囲で直線へ短縮できるため、曲がる可能性があるのは凸境界のtangent頂点だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Don't Swim 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "convex hullの一方のS–T arcが時計回り迂回、もう一方が反時計回り迂回に対応し、その辺長和には接線区間も自動的に含まれる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc286-ex「Don't Swim」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "まずS=Tや線分S–TがCの内部と交わらない場合を判定し、そのときはhypotで直線距離を返す。交わる場合はpolygon頂点とS,Tのconvex hullを求め、hull周上のedge長prefix sumを作る。SとTのindex間の周長を一方向でd、全周長をPとして、min(d,P-d)を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc286-ex「Don't Swim」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "凸障害物まわりの接線最短路",
+      "trigger": "平面上で1つの凸領域の内部だけを避ける最短距離を求めるとき。",
+      "application": "直線または両側のtangent＋境界arcだけを候補にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "計算幾何の外積・内積",
-      "trigger": "制約と操作を整理したときに 計算幾何の外積・内積 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc286-ex「Don't Swim」では、主解法候補として、座標条件を外積・内積・向き判定へ変換し、交差や凸性を整数演算で判定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 計算幾何の外積・内積 を問題固有の状態へ適用する。",
+      "name": "convex hullによる接点抽出",
+      "trigger": "外部点から凸polygonへの極限visibility頂点をまとめて得たいとき。",
+      "application": "障害物頂点と外部点のunionのhullを取る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "環状prefix length",
+      "trigger": "polygon周上の2点間を時計・反時計回りで比較するとき。",
+      "application": "一方向距離dと全周長P-dを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "S,Tをhullへ加えることで、接線の選択とpolygon境界arcの選択がhullの隣接edge列という同じ表現に吸収される。",
+      "reusablePerspective": "幾何の折れ線候補を直接列挙する代わりに、極点を含む凸包の境界へ最適pathを載せられないか考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "orientation・segmentとconvex polygonの交差",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "計算幾何の外積・内積",
+      "text": "convex hullとEuclidean距離",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "座標積の overflow、collinear な境界点、開区間と閉区間の交差を区別する。",
+      "text": "境界上を通ることは許されるため、線分が辺や頂点に接するだけのcaseを内部交差として誤判定しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "cross productは座標差の積が大きくなるので64bit以上で計算し、距離和はdoubleまたはlong doubleを使う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "hull構築時のcollinear点除去規則でS,Tの位置を見失わないよう、交差caseで両点のindexを明示的に取得する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Don't Swim 型の 頂点と辺からなる状態グラフに対し、計算幾何の外積・内積を選び、状態と証明を一貫して設計できる。",
+      "text": "凸polygon内部を避けるS–T最短距離を、直線またはconvex hull周上の2arcの最小値として求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "座標積の overflow、collinear な境界点、開区間と閉区間の交差を区別する。",
+      "text": "直線が障害物を外れる例・頂点に接する例・内部を横切る例を描き、最後のcaseでhullの2arcが上下2方向のtangent経路に一致するか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

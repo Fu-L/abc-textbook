@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc455-g「Balanced Subarrays」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "balanced条件は、各値がB_k回ずつ現れる場合と、ちょうどB_k種類が同回数現れる場合の二方向から数えられる。右端固定で左端候補は頻度上限・distinct数により区間へ絞れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc455-g「Balanced Subarrays」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "十分大きなmodulus上のrandom hashで値ごとの出現回数剰余または集合hashを表し、sliding windowでvalid左端範囲を保ちながら、変形したprefix hashの同値頻度をmapで数える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各値B_k回条件は回数mod B_kが全0というhash一致へ、B_k種類同頻度条件は B_k S_i-H i のprefix同値へ高確率で変換でき、左端範囲内だけを頻度表で数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各部分配列で全値のfrequency mapを作り、正の頻度が全て等しいか検査する。",
+        "decision": "rejected",
+        "decisionReason": "部分配列が二乗個あり、map構築を使い回しても全左端・右端pairの列挙を避けられない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "右端を固定した有効左端集合が単調に移動するため、戻らない二本の pointer で全境界を一度ずつ調べられる。",
+        "text": "一値がB_k+1回以上出ない左端下限を越えた範囲では、全count≡0 mod B_kが『各値0回またはB_k回』と同値になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Balanced Subarrays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "distinct集合が固定の区間ではそのhash H も固定で、等頻度条件は S_rB_k-Hr=S_lB_k-Hl というscalar key一致になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc455-g「Balanced Subarrays」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "二つの数え上げを別scanする。第一は値ごとに周期B_kで総和0となるrandom weightを割当てprefix hash一致をwindow mapで数える。第二はrightごとのちょうどB_k distinctとなるleft区間を更新し、集合Hが変わるsegmentごとに key=S_iB_k-Hi の頻度を追加して一致数を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc455-g「Balanced Subarrays」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "randomized multiset hash",
+      "trigger": "多数のwindowで全frequencyが指定剰余または等値かを軽量判定したいとき。",
+      "application": "値・回数状態へrandom weightを割り当てscalar signatureに圧縮する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "尺取り法",
-      "trigger": "制約と操作を整理したときに 尺取り法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc455-g「Balanced Subarrays」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 尺取り法 を問題固有の状態へ適用する。",
+      "name": "window集合が固定な区間の再利用",
+      "trigger": "右端更新時にdistinct集合が変わる左端境界が単調なとき。",
+      "application": "同じ集合hash H の区間だけprefix key頻度を継続管理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "正確な高次元frequency vector比較を、衝突確率を評価したrandom linear fingerprintへ落とすとwindow数え上げに載せられる。",
+      "reusablePerspective": "右端固定で集合が一意になるleft区間を見つけると、等頻度条件をprefix scalarの一致へ代数変形できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "尺取り法",
+      "text": "randomized multiset hash、window集合が固定な区間の再利用と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空区間、条件を満たす直前・直後のどちらを数えるかを loop 不変条件にする。",
+      "text": "hash衝突確率を十分小さくするmodulus・独立乱数を使い、負剰余を正規化する。二つの数え上げの重複・対象定義を問題式通りに合成する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Balanced Subarrays 型の 列の順序と prefix 状態に対し、尺取り法を選び、状態と証明を一貫して設計できる。",
+      "text": "balanced部分配列の二種類の統計を、randomized prefix hashと単調window境界で線形級に数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空区間、条件を満たす直前・直後のどちらを数えるかを loop 不変条件にする。",
+      "text": "第一scanで頻度上限が必要な理由、第二scanで H が固定ならprefix key一致になる式をそれぞれ独立に導出する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc431-g「One Time Swap 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "一回 swap した列 f(l,r) と元列 A の辞書順比較は、最初に変わる位置 l だけで決まり、A_l>A_r なら小さく、等しければ同じ、大なら逆になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc431-g「One Time Swap 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "元列より小さい・等しい・大きい swap を個数で三分し、両側では辞書順を決める小さな key 順にクエリをオフライン選択する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "列全体を生成せず swap 対 (l,r) の key だけで順序統計を処理でき、Fenwick 木等で O((N+Q)log N) 規模になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全 N(N-1)/2 個の swap 後列を構築して辞書順ソートする。",
+        "decision": "rejected",
+        "decisionReason": "列の構築だけで三乗規模となり、候補数も大きすぎる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+        "text": "A_l>A_r の小さい側では f(l,r) の順序が (l,A_r,-r) の辞書順と一致する。l が先、次に交換後の先頭値、同値なら元の大値が現れる位置を遅らせる r 降順になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "One Time Swap 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "大きい側では対称に (-l,A_r,r) の順で比較できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各 l に属する有効な r の個数を累積すれば k 番目が属する l を決め、残りは suffix の値の順序統計で選べる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc431-g「One Time Swap 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "転倒対数と昇順対数を Fenwick 木で数え、各質問 k を小・同一・大の区間へ分類する。同一なら A を返す。小側質問を k 昇順に処理し、所属 l、suffix 中 A_r<A_l の k' 番目の値、同値 r の降順を順序統計構造で求める。大側も左右の key を反転して対称処理し、選んだ一組だけ swap して出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc431-g「One Time Swap 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "辞書順の最初の相違点",
+      "trigger": "大きな列候補同士の順序が、変更された最初の少数位置だけで決まるとき。",
+      "application": "swap 後列を (l,A_r,±r) という定数長 key へ圧縮する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Fenwick tree",
-      "trigger": "制約と操作を整理したときに Fenwick tree の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc431-g「One Time Swap 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で Fenwick tree を問題固有の状態へ適用する。",
+      "name": "オフライン順序統計",
+      "trigger": "多数の k 番目候補質問を、走査に合わせて集合を更新しながら答えるとき。",
+      "application": "Fenwick 木または kth 対応集合で suffix 値の個数と k-th を得る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "対称ケース分解",
+      "trigger": "基準列より小さい・等しい・大きい候補で比較規則が単純化するとき。",
+      "application": "転倒対、等値対、昇順対を分離し、両端の群を反転した key で処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "一箇所 swap 後の辞書順は列全体でなく、最初の変更位置とそこへ来る値、同値時の二つ目の変更位置で決まる。",
+      "reusablePerspective": "巨大な派生オブジェクト集合の k 番目は、比較を生成パラメータの短い key に落として順序統計を取る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Fenwick tree",
+      "text": "辞書順、転倒数、Fenwick 木、座標圧縮、k-th order statistic、オフラインクエリを理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "問題の k の 1-index/0-index と同一列を生む A_l=A_r の範囲境界を統一する。小側の r は降順、大側の r は昇順という tie-break を逆にしない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "One Time Swap 2 型の 頂点と辺からなる状態グラフに対し、Fenwick treeを選び、状態と証明を一貫して設計できる。",
+      "text": "一回 swap で得られる全列の辞書順 k 番目を、swap 対の順序 key とオフライン選択で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "小側・大側それぞれの key を実際の最初の相違位置で証明し、k の群内 offset と r の tie-break を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

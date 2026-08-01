@@ -17,77 +17,121 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc319-g「Counting Shortest Paths」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "対象graphはほぼcompleteで、存在edgeを列挙すると二次になる一方、禁止edgeはM≤2×10^5本しかない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "BFSで未訪問集合Lを保ち、現在頂点vからL全体を走査すると、通行可能なuはその場でLから削除され、残る失敗は禁止edge(v,u)に対応する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "最短path数は前layer全体のdp和から、vとの禁止edgeを持つ前layer頂点のdpだけを引けば求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc319-g「Counting Shortest Paths」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "補graphBFSを未訪問setで行い、距離layerごとの総dp−禁止neighbor寄与で最短path数を数える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "complete側の膨大なedgeを生成せず、各頂点と禁止edgeを全体で少数回だけ処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "削除後graphの全存在edgeを生成して通常BFSとDPを行う。",
+        "decision": "rejected",
+        "decisionReason": "存在edgeがΘ(N^2)本になり得てmemory・時間とも制約を超える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "禁止edgeだけのgraphでBFSし、その距離を反転解釈する。",
+        "decision": "rejected",
+        "decisionReason": "補graphのpath長は元の禁止graphの距離から単純には復元できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+        "text": "L走査で許可edgeなら頂点が永久に削除される事象は高々N回、禁止edgeで残る事象は各禁止edgeにつき高々1回なので、総候補確認量をN+Mで抑えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Counting Shortest Paths 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "距離dのvへの全最短遷移元は距離d-1の全頂点から禁止neighborだけを除いた集合であり、存在neighborを列挙する必要がない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc319-g「Counting Shortest Paths」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "禁止edgeを判定できるsetと各頂点の禁止adjacency listを作る。未訪問ordered set Lに2..Nを入れ、queueを1から開始する。vをpopするたびLをiterator走査し、(v,u)が禁止でなければdist[u]=dist[v]+1としてqueueへ入れLからerase、禁止なら残す。距離順に頂点をbucket化し、dp[1]=1から、v∈layer dへsum[d-1]−Σ_{u∈forbidden[v],dist[u]=d-1}dp[u]を加え、dp[N]または未到達-1を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc319-g「Counting Shortest Paths」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "補graph BFS",
+      "trigger": "denseな補graphを探索し、元側の非edge集合だけが疎なとき。",
+      "application": "未訪問setから禁止されていない頂点を一括発見・削除する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc319-g「Counting Shortest Paths」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "全体和から例外を引くDP",
+      "trigger": "遷移可能集合がほぼ全体で、禁止相手だけが疎に列挙されるとき。",
+      "application": "前layer総和から禁止neighborのdpを減算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "amortizedな未訪問set走査",
+      "trigger": "scan中の成功要素を永久削除し、失敗pair総数にも疎な上界があるとき。",
+      "application": "成功N回・禁止失敗M回として全BFSを評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "距離計算とpath数計算の両方で、complete graphの存在edgeではなく削除されたedgeを例外として処理する同じ補集合発想が使える。",
+      "reusablePerspective": "dense object−sparse exceptionsという入力では、探索と集計の各段階を全体集合から例外を除く形へ書き換える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "BFSと最短path数DP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "幅優先探索",
+      "text": "ordered setの走査中erase",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "補graph",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "Lのiteratorは許可edgeでeraseした戻り値へ進め、禁止edgeでは通常incrementして無限loopを避ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "dp減算はmod 998244353で負値を正規化し、禁止neighborのうちdistが直前layerのものだけを引く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "頂点Nが未訪問ならpath数ではなく-1を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Counting Shortest Paths 型の 頂点と辺からなる状態グラフに対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "完全graphから疎なedge集合を削除したgraphで、1→Nの最短path数を補集合探索と例外差引きで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "禁止edgeしか残らずLから削除されない候補と、一度に多数削除される候補を含む小例でBFS iteratorを追い、layer DPの引く対象を照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

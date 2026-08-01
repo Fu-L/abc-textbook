@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc223-h「Xor Query」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "部分列の要素を選んだXORは、各数の二進表現を F_2 上の60次元ベクトルと見たときの線形結合である。したがって各問い合わせは区間ベクトルが X を生成するかという所属判定になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc223-h「Xor Query」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "右端を左から伸ばしながら、各pivotにできるだけ新しい添字を残すXOR線形基底を管理し、Rごとの問い合わせをその基底で判定する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "基底の次元は高々60であり、各基底ベクトルに区間左端の可否を判定する添字情報を持たせれば、N,Qの大きさに依らず一問を60bitで処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各問い合わせの A_L,…,A_R から掃き出し法をやり直して X の所属を判定する。",
+        "decision": "rejected",
+        "decisionReason": "区間長に比例して基底を作り直すため、最大2×10^5問では同じ要素を繰り返し掃き出して間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "右端 r のprefixから、各suffixのspanが変化する添字だけを残すと、その集合は全prefixのspanの基底であり、添字が l 以上のものだけで span(A_l,…,A_r) を生成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Xor Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "新しいベクトルを挿入するとき同じpivotの古いベクトルより新しい添字を優先して交換すると、各pivotの表現可能範囲を最も右へ保てる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc223-h「Xor Query」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "問い合わせをRでまとめ、A_Rを添字付き線形基底へ挿入する。Xを高bitから、添字がL以上のpivotだけで消去し、0まで落とせればYesとする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc223-h「Xor Query」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "F_2 上のXOR線形基底",
+      "trigger": "部分集合XORの実現可能性を問われ、値のbit幅が小さく固定されているとき。",
+      "application": "数をベクトルとしてpivotごとに掃き出し、目標ベクトルが生成部分空間に属するかを判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc223-h「Xor Query」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "右端オフライン走査と添字付き基底",
+      "trigger": "区間問い合わせを右端までのprefixデータへ追加でき、左端制約を要素の時刻で判定できるとき。",
+      "application": "基底ベクトルへ有効な最新添字を付け、Rを固定したまま異なるLのsuffix spanを一つの基底から取り出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "区間ごとの基底を保存する代わりに、同じpivotでは新しい添字を勝たせると、一つのprefix基底が全ての左端に答えられる。",
+      "reusablePerspective": "可逆な要約構造で区間を扱うとき、要約要素に『どこから有効か』という時刻を持たせてprefixをsuffix判定へ転用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "ビットXORを F_2 ベクトルとして扱う掃き出し法",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "剰余演算と modular inverse",
+      "text": "オフライン区間問い合わせと線形基底の添字管理",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "基底挿入時はベクトルと添字を必ず同時にswapし、60bit全てを符号なし整数で高位から処理する。X_i>0 なので空集合だけで作る0の扱いは答えに影響しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Xor Query 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "部分集合XORの区間存在判定を、最新添字付き線形基底と右端走査で処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "区間XORの『選び方』を追わず、まず生成部分空間への所属へ言い換え、左端を基底の有効時刻として持たせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

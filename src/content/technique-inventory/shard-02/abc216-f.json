@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc216-f「Max Sum Counting」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "条件 max A_i ≥ sum B_i は、選んだ集合の中で最大の A を持つ要素を一つ固定すると、残りの B の総和上限として表せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "組 (A_i,B_i) を A_i の昇順に並べれば、各非空部分集合にはソート順で最後に選ばれた一意な要素 i がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc216-f「Max Sum Counting」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全ての部分集合を列挙し、それぞれで A の最大値と B の合計を計算して条件を確認する。",
+        "decision": "rejected",
+        "decisionReason": "N 個の要素の部分集合は 2 の N 乗個あり、N＝5000 では列挙できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "A の昇順に各要素を最大値の証人として固定し、それ以前の要素から B 和が A_i−B_i 以下となる選び方を部分和 DP で数える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全ての非空部分集合を最後の要素で重複なく分類でき、以前の要素の情報は B の総和別個数だけで十分になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "最大値という集合全体の条件を、最大を担当する一要素 i の固定へ変えると、残りは加法的な B のナップサック条件になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Max Sum Counting 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "A が同値の要素が複数あっても、ソート後に最後に選んだ添字を証人にすれば各部分集合はちょうど一度だけ数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc216-f「Max Sum Counting」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "A 順の最後の選択要素で部分集合を分割し、走査済み要素の B 和別選択数を 0/1 ナップサック DP として維持して閾値以下を加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc216-f「Max Sum Counting」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "極値を担当する証人の固定",
+      "trigger": "部分集合条件に最大値または最小値が現れ、各集合を一意な極値要素で分類できるとき。",
+      "application": "A でソートし、最後に選んだ i を最大 A の担当として、残りの選択を以前の要素だけへ限定する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc216-f「Max Sum Counting」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "部分和の 0/1 ナップサック数え上げ",
+      "trigger": "各要素を高々一度選び、重み総和別の部分集合数を逐次維持するとき。",
+      "application": "走査済み要素の B 和 s ごとの個数を持ち、i を証人にする前に s≤A_i−B_i の個数を答えへ足す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "証人 i 自身の B_i も総和へ含まれるため、以前の要素へ許される上限は A_i ではなく A_i−B_i になる。",
+      "reusablePerspective": "極値要素を固定して残りを DP するときは、証人自身が加法条件へ寄与する分を先に差し引く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "ソート順で部分集合を一意な最後の要素に割り当てる数え上げを理解できること。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "0/1 ナップサックの個数 DP を重みの降順更新で実装できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "要素 i の寄与を現在の DP から数えてから B_i を追加し、i を以前の要素として同じ寄与へ混ぜない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "A_i−B_i が負なら寄与は 0 とし、B 和の DP 更新は降順に行って同じ要素の複数回使用を防ぐ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Max Sum Counting 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "部分集合の最大値条件を一意な証人へ分解し、残りの加法条件をナップサック DP で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "max と総和が同じ不等式に現れたら、max を達成する要素を固定して残りへ許される総和を導く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "極値が同値でも値だけで分類せず、ソート後の最後の添字という一意な証人を使って重複を避ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

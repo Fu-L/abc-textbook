@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc422-f「Eat and Ride」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "path上で頂点vを訪れた後に残りedge数がnなら、W_vは以後n回の燃料へ寄与しnW_vとなる。最適pathはcycleを除けるため長さはN-1以下である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc422-f「Eat and Ride」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "(vertex,残りticket数)のlayered DAG DP",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "edge移動ごとにticketが1減るためacyclicで、全path長候補をO(NM)で同時に評価できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "通常edge weightによる一回のDijkstra",
+        "decision": "rejected",
+        "decisionReason": "edge costがそれまで訪れたvertex weight累積に依存し、現在vertexだけではMarkovな固定重みにならない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Eat and Ride 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "最初にpath長d枚のticketを持ち、vertex uでn枚ならnW_uを払いedgeを渡ってn-1枚にする表現は、元の各W_uが残り全edgeで消費される総額と一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc422-f「Eat and Ride」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "全n=0..N-1のstate(1,n)をcost0にし、nを大から小へ処理する。元edgeu-vごとに(u,n)→(v,n-1) cost nW_uと逆向きをrelaxし、最終layer0の各vertex距離を出す。rolling layerでspaceを抑える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc422-f「Eat and Ride」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "時間展開DAG",
+      "trigger": "遷移回数上限があり、step残数が必ず1減る。",
+      "application": "vertex×remaining stepsへ展開して依存costを固定edge weightにする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "DAG とトポロジカル順序",
-      "trigger": "制約と操作を整理したときに DAG とトポロジカル順序 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc422-f「Eat and Ride」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で DAG とトポロジカル順序 を問題固有の状態へ適用する。",
+      "name": "寄与の順序交換",
+      "trigger": "累積weightをedgeごとに足す目的をvertexごとの残り回数寄与へ変える。",
+      "application": "pathの二重和をW_v×後続edge数として数え直す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "開始ticket数を0…N-1全て許すことで、到達先ごとに最適path長を別に選べる。",
+      "reusablePerspective": "可変長pathは全layerのsource初期化で一つのDAG shortest pathへ統合できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "DAG とトポロジカル順序",
+      "text": "二重和の主客転倒、layered DP。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。",
+      "text": "同じlayer内でedgeを連鎖させず必ずn→n-1へ遷移する。costは最大級なので64bitとINF guardを使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Eat and Ride 型の 頂点と辺からなる状態グラフに対し、DAG とトポロジカル順序を選び、状態と証明を一貫して設計できる。",
+      "text": "vertex1から各vertexへの最小燃料消費を全て求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。",
+      "text": "path/cycle graphで全simple pathを列挙し、ticket DPと元costを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

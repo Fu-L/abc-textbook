@@ -17,85 +17,107 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc286-g「Unique Walk」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "Sに含まれないedgeは何度通ってもよいので、それらだけで連結な頂点同士は、指定edgeを通る順序の間に自由に移動できる1状態へ縮約できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "縮約後、Sの各edgeをちょうど1回ずつ通るwalkは、multi-edgeやself-loopを許す縮約graph G'で全edgeを1回ずつ通るEuler trailそのものである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc286-g「Unique Walk」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。この状態表現から答えを構成する。",
+        "approach": "非S edgeの連結成分をDSUで縮約し、S edgeで作るG'の奇数次数頂点数が0または2か判定する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "繰返し可能な移動をcomponentへ消去し、残るexactly-once条件をEuler trailの必要十分条件へ変換できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "元graph上でS edgeだけの次数parityを数える。",
+        "decision": "rejected",
+        "decisionReason": "非S edgeによる自由な移動で異なる元頂点を接続できるため、縮約前の次数条件は必要条件にならない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "S edgeの通過順を全順列で試し、間を非S pathで結べるか調べる。",
+        "decision": "rejected",
+        "decisionReason": "K!候補になる一方、その順序の存在はEulerの定理だけで判定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+        "text": "G'のEuler trailがあれば、連続する指定edgeの端点は同じ非S componentに属するので、その間を非S edgeだけのwalkで補間して元graphのwalkへ戻せる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "元の歩道から必須辺だけを射影すると Euler trail になり、逆に成分内の自由経路で trail の隣接必須辺を接続できる。",
+        "text": "元graphが連結なので縮約graphも連結であり、Euler trailの判定は奇数次数頂点が0個または2個という条件へ絞れる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Unique Walk 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "S edgeが同一component内に収まるself-loopなら次数を2増やし、parityには影響しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc286-g「Unique Walk」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。この状態表現から答えを構成する。",
+      "text": "Sに属するedgeをmarkし、それ以外の全edgeでDSUをmergeする。各S edge(u,v)についてroot(u),root(v)のdegreeを1ずつ増やす。同じrootなら結果的に2増える。奇数degreeのroot数を数え、0または2ならYes、それ以外ならNoを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "Union-Find",
-      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc286-g「Unique Walk」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。この状態表現から答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "name": "自由移動componentの縮約",
+      "trigger": "一部edgeを無制限に使え、別のedgeだけに使用回数制約があるとき。",
+      "application": "無制限edgeの連結成分をDSUで1頂点へまとめる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Euler trail の存在条件",
-      "trigger": "制約と操作を整理したときに Euler trail の存在条件 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc286-g「Unique Walk」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。この状態表現から答えを構成する。で Euler trail の存在条件 を問題固有の状態へ適用する。",
+      "name": "Euler trailの次数判定",
+      "trigger": "指定された全edgeをちょうど1回ずつ使うwalkの存在を問うとき。",
+      "application": "連結性の下で奇数次数頂点が0または2かを見る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "非S edgeは補助移動として何度でも往復できるため、その具体的なpath長や重複は重要でなく、端点が同じcomponentかだけが残る。",
+      "reusablePerspective": "exactly-once対象と自由使用対象が混在するwalk問題では、自由側を先に商graphへ潰すとEuler構造が現れる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "Union-Find",
+      "text": "DSUと連結成分縮約",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Euler trail の存在条件",
+      "text": "Euler pathの必要十分条件",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "S edgeをDSUへ混ぜず、入力indexのmarkを使って二段階で処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "自己 loop と多重辺を許した次数 parity を数え、縮約成分の連結性を保つ。",
+      "text": "parallel edgeとself-loopを持つG'を明示構築する必要はなく、rootごとのdegree parityだけを管理すればよい。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Unique Walk 型の問題に対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "text": "指定edgeを各1回、他edgeを任意回使うwalkの存在を、縮約graphのEuler trail条件で線形に判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "非S pathで複数頂点が1componentになる例と、S edgeがself-loop・parallel edgeになる例を縮約し、degree parityが元walkの端点数に一致するか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

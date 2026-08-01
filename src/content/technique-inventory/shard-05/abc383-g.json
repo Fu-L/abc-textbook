@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc383-g「Bar Cover」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "長さKのbarを置く開始位置iの利得は連続和B_iであり、bar同士が重ならない条件は選んだ開始位置の距離がK以上と言い換えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各個数についての最大値列は離散凹になる。この性質により、左右区間の解を通常のmax-plus convolutionより速くmergeできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc383-g「Bar Cover」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "境界から選べない長さを状態に持つ分割統治DPを、離散凹列の傾きmergeで結合する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "K≤5なので左右境界状態はO(K^2)に抑えられ、各nodeの個数方向を凹列の傾き列として線形mergeすることで全体O(NK^2 log N)になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "dp[position][count]で次の選択位置を遷移する",
+        "decision": "rejected",
+        "decisionReason": "全countの答えを持つ二次元DPはΘ(N^2)状態になり、N=2×10^5では扱えない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全対象が左・右・境界をまたぐものの三種に分かれ、再帰解と merge が互いに重複なく覆う。",
+        "text": "dp[l][r][x][y]は左右端からx,y個の開始位置を禁止したとき、選択個数ごとの最大和を表す。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Bar Cover 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "中央を跨ぐ衝突は左側の右端禁止jと右側の左端禁止K-1-jを組にすれば排除できる。凹列のconvolutionは限界利得を降順mergeすればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc383-g「Bar Cover」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "Aの長さK window sum列Bを作る。区間を再帰分割し、各(x,y)境界状態についてj=0..K-1の左右DPを凹列としてmergeし最大を取る。rootの制約なし列から各bar本数の答えを得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc383-g「Bar Cover」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "分割統治DPと境界状態",
+      "trigger": "局所制約が区間結合時に境界近傍だけで干渉するとき。",
+      "application": "左右端の禁止幅をK未満で持ち、中央衝突だけを調整する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "分割統治",
-      "trigger": "制約と操作を整理したときに 分割統治 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc383-g「Bar Cover」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 分割統治 を問題固有の状態へ適用する。",
+      "name": "離散凹列のmax-plus convolution",
+      "trigger": "選択個数ごとの最適値が限界利得非増加になるとき。",
+      "application": "二列の差分を降順mergeしてconvolutionを線形化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "Kが小さいのは遷移幅だけでなく、区間を結ぶ際に伝えるべき情報が両端各K通りしかないことを意味する。",
+      "reusablePerspective": "長距離の答え数が多くても、相互作用が境界幅に局在し価値列が凹なら分割統治と傾き表現を検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "非重複区間選択と分割統治DPを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "分割統治",
+      "text": "離散凹関数の限界差分とmax-plus convolutionを扱える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。",
+      "text": "不可能な選択個数は負の無限大とし、短い区間ではx,yの禁止が重なる場合を正規化する。負のA_iでも0本の値を基準に壊さない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Bar Cover 型の 盤面上の位置と局所遷移に対し、分割統治を選び、状態と証明を一貫して設計できる。",
+      "text": "全選択個数に対する非重複bar利得を、境界幅Kと離散凹性を利用して準線形に計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。",
+      "text": "N≤12では開始位置subsetを全列挙し、負利得、K=1、区間長<K、中央直前直後を選ぶcaseで全個数のDP列と凹性を照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

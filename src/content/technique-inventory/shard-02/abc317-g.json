@@ -17,67 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc317-g「Rearranging」では、各値の出現を正則二部 multigraph の辺とみなし、完全マッチングを反復抽出して辺彩色を構成する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各入力要素 A_{i,j} を「行 i」と「値 A_{i,j}」を結ぶ多重辺と見ると、各行頂点も各値頂点も次数 M の M-正則二部多重グラフになる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "出力の一列は各行を一度、各値を一度使うので完全 matching であり、全 M 列を作ることは全辺を M 個の完全 matching に分解することと同値である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc317-g「Rearranging」では、各値の出現を正則二部 multigraph の辺とみなし、完全マッチングを反復抽出して辺彩色を構成する。この状態表現から答えを構成する。",
+        "approach": "二部グラフから完全 matching を一つ求め、その辺を一列へ割り当てて削除する操作を M 回繰り返す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "正則二部グラフは Hall 条件を満たし、一 matching 削除後も (M−1)-正則なので帰納的に必ず完遂できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各行を独立に並べ、列ごとに重複した値を局所 swap で直す。",
+        "decision": "rejected",
+        "decisionReason": "一つの重複解消が別列の重複を生み、全列同時の制約を保証する局所不変量がない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "正則二部グラフは Hall 条件を満たして完全マッチングを持ち、それを除くたび正則次数が一つ下がるため全辺を分解できる。",
+        "text": "左側 I から出る辺は |I|M 本で、右頂点一つの次数は M だから近傍は少なくとも |I| 個あり Hall 条件が従う。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Rearranging 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じ行・値間の多重辺も元の何番目の要素かを保持し、matching で使った一辺だけを削除すれば元の行内 multiset を正確に消費する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc317-g「Rearranging」では、各値の出現を正則二部 multigraph の辺とみなし、完全マッチングを反復抽出して辺彩色を構成する。この状態表現から答えを構成する。",
+      "text": "行 N 頂点と値 N 頂点の二部多重グラフを作る。col=1..M ごとに Hopcroft–Karp または最大流でサイズ N の matching を求め、matched value を各行の col へ出力し、対応する edge occurrence を graph から削除する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "二部マッチングと Hall の定理",
-      "trigger": "制約と操作を整理したときに 二部マッチングと Hall の定理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc317-g「Rearranging」では、各値の出現を正則二部 multigraph の辺とみなし、完全マッチングを反復抽出して辺彩色を構成する。この状態表現から答えを構成する。で 二部マッチングと Hall の定理 を問題固有の状態へ適用する。",
+      "name": "正則二部グラフの matching 分解",
+      "trigger": "各左・右頂点の次数が同じで、全辺を列や色へ均等に割り当てたいとき。",
+      "application": "Hall で完全 matching の存在を示し、削除を帰納的に繰り返す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "配列再配置の二部グラフ化",
+      "trigger": "各行から一要素ずつ選び、各ラベルも一度ずつ使う列を構成するとき。",
+      "application": "行とラベルを部集合、要素 occurrence を辺とみなす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "「各値が全体で M 回」という保証は右次数を M にし、行長 M と合わせて正則性・常時 matching 存在を与える。",
+      "reusablePerspective": "均等出現条件を見たら、行列を incidence matrix として regular bipartite graph の辺彩色へ読み替える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "二部マッチングと Hall の定理",
+      "text": "二部 matching と Hall の定理",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "多重辺の識別",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "多重辺を別々の edge id で保持し、採用した完全マッチングの辺だけを各反復で除く。",
+      "text": "同値の複数 occurrence を一辺に潰さず multiplicity を保つ。各 round で使用辺だけを削除し、matching 配列の左右対応を出力列へ正しく写す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Rearranging 型の問題に対し、二部マッチングと Hall の定理を選び、状態と証明を一貫して設計できる。",
+      "text": "行内並べ替え問題を M-正則二部多重グラフの完全 matching 分解へ帰着し、必ず構成可能であることも同時に証明できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "多重辺を別々の edge id で保持し、採用した完全マッチングの辺だけを各反復で除く。",
+      "text": "一列が満たす制約を「各行・各値を一回」と言い換えて matching を見抜く。構成可能性は入力保証ではなく、次数から Hall 条件を自分で導く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

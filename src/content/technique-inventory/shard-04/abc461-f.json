@@ -17,67 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc461-f「Total Product is N」では、N の約数だけを積状態とし、選択個数ごとに subset の個数と要素和総計を同時に更新する knapsack DP を行う。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "積がNになる選択要素は全てNの約数で、要素数bも小さい。unordered tupleの選択を数えた後にb!を掛ければ順序付き列へ戻せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc461-f「Total Product is N」では、N の約数だけを積状態とし、選択個数ごとに subset の個数と要素和総計を同時に更新する knapsack DP を行う。この状態表現から答えを構成する。",
+        "approach": "Nの約数d_aを列挙し、選択個数b・現在積cごとに選び方数dp0と選択値総和dp1を持つ0/1 knapsackを行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "d_aを選べるのはcがd_aの倍数の場合だけで、遷移元積c/d_aも約数である。N≤10^10では約数数≤2304、b≤14なので状態数が収まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "積Nとなる順序付き正整数列を全factorization treeとして列挙する。",
+        "decision": "rejected",
+        "decisionReason": "factorの順序分岐と長さ分岐が大きく、同じmultisetをb!回重複して探索する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "積が N になる選択は全要素が N の約数で、各約数を使う・使わない遷移が全 subset を一度ずつ生成する。",
+        "text": "dp1のselect遷移は旧score総和に、全旧選択それぞれへ新値d_aを足す項 dp0×d_a を加える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Total Product is N 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "1を含めてもdistinct約数を一度ずつ選ぶ0/1 DPなので、選択個数は積制約から14以下に限定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc461-f「Total Product is N」では、N の約数だけを積状態とし、選択個数ごとに subset の個数と要素和総計を同時に更新する knapsack DP を行う。この状態表現から答えを構成する。",
+      "text": "全約数をsortし積値からindexへのmapを作る。各dについてbを降順、積cを走査し、c%d=0ならdp0[b][c]+=old0[b-1][c/d]、dp1+=old1+old0×d と更新する。Σ_b dp1[b][N]b!を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "約数列挙と積 knapsack DP",
-      "trigger": "制約と操作を整理したときに 約数列挙と積 knapsack DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc461-f「Total Product is N」では、N の約数だけを積状態とし、選択個数ごとに subset の個数と要素和総計を同時に更新する knapsack DP を行う。この状態表現から答えを構成する。で 約数列挙と積 knapsack DP を問題固有の状態へ適用する。",
+      "name": "約数集合上の積knapsack",
+      "trigger": "選択要素の総積が固定Nで、候補がNの約数に限られるとき。",
+      "application": "積stateを約数indexへ圧縮して0/1選択する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "個数とscore総和の同時DP",
+      "trigger": "全組合せの個数だけでなく選択値和などの総scoreが必要なとき。",
+      "application": "count×新規寄与をscore遷移へ追加する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "積制約DPでは値域を1..Nで持たず、到達し得るNの約数だけへ圧縮する。",
+      "reusablePerspective": "順序付きobjectを直接列挙せず、distinct要素multisetを数えて最後にfactorialで順序を付ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "約数列挙と積 knapsack DP",
+      "text": "約数集合上の積knapsack、個数とscore総和の同時DPと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "積状態は c/d への遷移で overflow を避け、順列化する b! を最後に掛ける。",
+      "text": "0/1 DPなのでd処理中のbは降順に回し同じ約数を再利用しない。b=0のscore0基底とmod積を正しく置く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Total Product is N 型の問題に対し、約数列挙と積 knapsack DPを選び、状態と証明を一貫して設計できる。",
+      "text": "総積Nのdistinct factor列に関するscore総和を、約数圧縮したcount・sum knapsackで計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "積状態は c/d への遷移で overflow を避け、順列化する b! を最後に掛ける。",
+      "text": "一要素dを追加した全選択のscore和が old1+old0×d になることと、最後のb!の意味を小さいNで確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

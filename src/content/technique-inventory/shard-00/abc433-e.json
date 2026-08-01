@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc433-e「Max Matrix 2」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "行最大 X_i と列最大 Y_j が同じ値を二回含むことは、1…NM を一度ずつ使う行列では不可能である。値を大きい順に置けば、現在値 v より大きい必要最大値を持つ未使用マスだけが候補になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc433-e「Max Matrix 2」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "v=NM…1 を降順に処理し、v が X/Y に現れるかの四場合で置き場所を決め、自由マスを min(X_i,Y_j) ごとに管理する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "大きい値を先に確定することで最大値制約を壊さず、候補追加が単調なので全マスを効率よく割り当てられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全ての順列を N×M 行列へ詰め、行列最大が X,Y か検査する。",
+        "decision": "rejected",
+        "decisionReason": "(NM)! 通りあり列挙不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+        "text": "v が X_i と Y_j の両方なら交点 (i,j) に置くしかなく、片方だけなら他方の最大が v より大きい未使用交点が必要である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Max Matrix 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "どちらの最大にもない v は v<min(X_i,Y_j) の未使用マスならどこでもよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "降順処理では v を置ける候補集合は増えるだけなので、その中の任意の未使用マスを選んでも将来の小さい値を妨げない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc433-e「Max Matrix 2」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "X,Y の重複を検査し、値から行・列への逆引きを作る。min(X_i,Y_j)=v となるマスを bucket[v] に入れ、v を降順走査する。必須交点を先に検証・使用し、片側必須または自由な値は現在利用可能になった条件適合マスから一つ選ぶ。失敗なら No、全て置ければ行列を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc433-e「Max Matrix 2」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "大きい値からの貪欲配置",
+      "trigger": "行・列の最大値を指定し、全値を一度ずつ配置するとき。",
+      "application": "最大値として必須の位置を高い順に固定し、残りを両最大より小さいマスへ置く。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc433-e「Max Matrix 2」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "閾値候補のバケット管理",
+      "trigger": "候補条件が v<key で、v を単調に下げながら未使用候補を取るとき。",
+      "application": "マスを min(X_i,Y_j) で分類し、閾値を越えた bucket を候補集合へ追加する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最大値制約では大きい値ほど配置先が狭く、小さい値ほど自由なので降順貪欲が自然な交換可能性を持つ。",
+      "reusablePerspective": "行・列の二つの上限制約は各セルの許容閾値 min(X_i,Y_j) へまとめられる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "全探索と候補数の上界評価",
+      "text": "行列の行・列最大、降順貪欲、値から位置への逆引き、バケットまたは優先度付き集合を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "必須交点が既使用でないか、そこへ v を置いて両最大を超えないかを確認する。X,Y の値域・重複と全マス一回使用を検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Max Matrix 2 型の 列の順序と prefix 状態に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "指定された行最大・列最大を持つ 1…NM の順列行列を、必須位置と閾値候補の降順配置で構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "四場合それぞれで選ぶマスが該当行/列を満たし、v<min(X_i,Y_j) または必須等号を満たすことを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

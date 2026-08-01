@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc459-f「-1, +1」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "A_iをA_i-iへずらすと狭義増加化は広義増加化になる。隣接逆転を均す操作を前から繰り返した最終列は一意で、連続blockごとの総和をほぼ均等配分した形になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc459-f「-1, +1」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各要素を一blockとしてstackへ入れ、直前blockの最終値が次blockの先頭値を超える間mergeし、block和と長さから floor((S+t)/len) の均し列を表す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各block内の最適列は総和固定の最も平坦な広義単調列で、隣接block境界が逆転した場合は別々に保つ解が不可能なのでmergeが強制される。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "最左の逆転位置へ操作を一回ずつ適用し、列が単調になるまでsimulationする。",
+        "decision": "rejected",
+        "decisionReason": "値差が巨大だと操作回数も巨大になり、最終形は得られても逐次simulationは入力値に比例する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+        "text": "長さL・総和Sのblockを最も均す整数列は floor((S+t)/L), t=0..L-1 で、値は二つの隣接整数だけになる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "-1, +1 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "stack mergeは各blockを一度pushし一度popするだけなので、境界比較を定数時間にできれば全体線形である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc459-f「-1, +1」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "shift後Aを左から処理し、blockに(l,r,sum)を持つ。top二blockの均し列境界値が非単調ならsum・lengthを合併する。確定blockごとにquotient/remainderから最終Bを復元し、元AからBへの必要操作数を公式に集計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc459-f「-1, +1」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "pool adjacent violators",
+      "trigger": "単調制約下で隣接違反をblock平均化して一意解を求めるとき。",
+      "application": "stack上で違反blockをmergeし、平坦な整数列へ均す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "greedy choice と交換論法",
-      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc459-f「-1, +1」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "name": "index shiftによる単調制約変換",
+      "trigger": "隣接差が少なくとも1の整数列を作りたいとき。",
+      "application": "A_i-iで狭義単調を広義単調へ変える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "局所操作の回数を追う代わりに、保存されるblock総和と最終単調形を直接構成する。",
+      "reusablePerspective": "isotonic型問題では隣接blockの解が境界で両立しないとき、その二blockを一つの平均化問題へ統合する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "greedy choice と交換論法",
+      "text": "pool adjacent violators、index shiftによる単調制約変換と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "負のSに対する floor divisionを数学的床で実装し、remainder配置順を単調になるよう統一する。shiftの0/1-indexを混同しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "-1, +1 型の 列の順序と prefix 状態に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大回数の±1局所操作をsimulationせず、単調block mergeから一意な最終列と最小回数を線形に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "一blockのS,Lから均し列を復元し、隣接block境界違反ならmergeが必要な理由を交換法で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

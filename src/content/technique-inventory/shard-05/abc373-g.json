@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc373-g「No Cross Matching」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "二本の対応線分が交差しているなら、交点を介した三角不等式により対応先を交換すると二本の長さの総和が真に減る。したがって距離総和が最小の完全マッチングは交差を持たない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc373-g「No Cross Matching」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "P_i と Q_j のユークリッド距離をコストとする最小重み完全二部マッチングを解き、その対応 permutation を出力する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "非共線条件により交差解の交換では距離が真に減るため、任意の最小費用マッチングが要求する無交差性を満たす。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "角度順に二集合の点を並べ、同じ順位同士を貪欲に対応させる。",
+        "decision": "rejected",
+        "decisionReason": "二集合の配置は共通の凸位置を持つとは限らず、局所的な角度順だけでは内部交差を排除できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各増加路が残余グラフで最小費用なので、ポテンシャルを保った交換論により総費用の最適性が維持される。",
+        "text": "交差点 X に対し |PaX|+|XQb|>|PaQb| と対称な不等式を足すと、交差辺の swap が距離和を改善する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "No Cross Matching 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "求めるのは最短距離値ではなく対応そのものなので、Hungarian 法または min-cost flow の復元情報を保持する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc373-g「No Cross Matching」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "完全二部グラフの辺 (i,j) に点間距離を置き、Hungarian 法などで最小費用完全マッチングを求める。得られた Q 側の対応 index を各 P_i について出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc373-g「No Cross Matching」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "最小費用流と残余グラフ",
-      "trigger": "制約と操作を整理したときに 最小費用流と残余グラフ の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc373-g「No Cross Matching」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 最小費用流と残余グラフ を問題固有の状態へ適用する。",
+      "name": "uncrossing と最小重みマッチング",
+      "trigger": "幾何的な対応で交差二辺の付け替えが目的値を改善するとき。",
+      "application": "無交差制約を直接管理せず、距離和最小化へ埋め込む。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "難しい無交差条件を列挙する代わりに、交差が最適性へ反する目的関数を設計する。",
+      "reusablePerspective": "幾何構築では局所交換で違反を消せるポテンシャルがないかを探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "最小費用流と残余グラフ",
+      "text": "三角不等式、二部完全マッチング、Hungarian 法または最小費用流、解の復元を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。",
+      "text": "距離は浮動小数で、整数専用 min-cost flow への雑なスケーリングは順序を壊し得る。long double 対応の割当法と安定した比較を用いる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "No Cross Matching 型の 順列の位置と値の対応に対し、最小費用流と残余グラフを選び、状態と証明を一貫して設計できる。",
+      "text": "無交差完全対応を、交差交換で正当化された最小重み完全マッチングとして構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。",
+      "text": "交差二辺を入れ替えた四点の図を描き、どの三角不等式を足すと真の改善になるかを自力で示す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

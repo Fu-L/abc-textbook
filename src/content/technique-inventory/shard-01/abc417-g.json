@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc417-g「Binary Cat」では、主解法候補として、木を heavy path に分解し、パス問題を対数本の一次元区間へ写す。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "query位置は10^18以下なので、各S_iは先頭C=10^18文字だけ保持する設定へ変えても全回答は不変で、長さもmin(C,lenL+lenR)へsaturateできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "concat DAGを一文字まで辿ると深さQになり得る。各nodeで親に含まれる長さが大きいchildをheavy、小さい方をlightとすれば、query追跡中のlight遷移は長さ半減により高々約60回である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc417-g「Binary Cat」では、主解法候補として、木を heavy path に分解し、パス問題を対数本の一次元区間へ写す。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "heavy child chainをbinary liftingし、各queryで可能なheavy jumpをまとめ、次のlight edgeへ移る操作をbase文字まで繰り返す",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "light回数O(log C)、各heavy chain移動O(log Q)なので全体O(Q log Q log C)。jump tableには到達nodeと元文字列内offsetを持つ。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各queryでconcat元を一段ずつ辿ってS_0/S_1へ到達する",
+        "decision": "rejected",
+        "decisionReason": "node indexは減るがchain長はΘ(Q)になり、Q件でO(Q^2)となる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "light edge を通るたび部分木サイズが半減するため、任意の根付き木パスは対数本の区間へ分割できる。",
+        "text": "truncationで右childは一部しか親に含まれないことがあるため、heavy判定はchild本来の長さではなく親内のincluded lengthで行う。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Binary Cat 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "2^k heavy jump後のdescendantと累積offsetをdoublingできる。現在位置Bがそのdescendantの親内区間に入るときだけjumpし、heavyを最大限進めた後は位置がlight側にある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc417-g「Binary Cat」では、主解法候補として、木を heavy path に分解し、パス問題を対数本の一次元区間へ写す。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各新nodeでc_left,c_right、親内offset、saturated length、included lengthからheavy/lightを決め、up[node][k]とoffset[node][k]を作る。回答は(A,B)=(i+1,X_i)から、large k順にBがheavy descendant区間内ならまとめて移り、baseでなければlight childへoffsetを引いて移る。A=0/1の文字を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc417-g「Binary Cat」では、主解法候補として、木を heavy path に分解し、パス問題を対数本の一次元区間へ写す。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "heavy-light decompositionの考え方",
+      "trigger": "root-to-leaf追跡で一方のchild sizeが少なくとも半分になり、長い同系遷移をjumpしたいとき。",
+      "application": "大きいchildをheavy、小さいchildへの移動回数を対数に抑える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Heavy-Light Decomposition",
-      "trigger": "制約と操作を整理したときに Heavy-Light Decomposition の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc417-g「Binary Cat」では、主解法候補として、木を heavy path に分解し、パス問題を対数本の一次元区間へ写す。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Heavy-Light Decomposition を問題固有の状態へ適用する。",
+      "name": "binary lifting",
+      "trigger": "functionalなheavy edgeを多数回辿り、位置条件を満たす最深ancestorへ進みたいとき。",
+      "application": "2^k先nodeと累積開始offsetをtable化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "saturating length",
+      "trigger": "巨大な暗黙文字列でquery位置に上限があるとき。",
+      "application": "上限より後ろを捨て、length加算をcapしてoverflowと不要情報を防ぐ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "通常のsubtree-size HLDではなく、concat後に実際に残るprefix長をsizeとし、文字位置Bも含めたhalving argumentでlight回数を抑える。",
+      "reusablePerspective": "暗黙sequence DAGのrank queryでは、参照可能prefixへtruncateし、included child lengthによるheavy decompositionを使える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Heavy-Light Decomposition",
+      "text": "concat DAGの位置写像、heavy-lightのlight回数証明、doublingを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "頂点値か辺値かに応じて LCA 側端点を含める区間を調整する。",
+      "text": "length加算とoffsetを10^18でsaturateしつつoverflow前に比較する。右childが0文字しか含まれない場合、equal-length tie、1-index Bと0-index offsetの包含判定を統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Binary Cat 型の 文字列の prefix・suffix と一致関係に対し、Heavy-Light Decompositionを選び、状態と証明を一貫して設計できる。",
+      "text": "50万個の巨大concat文字列に対するオンライン文字参照を、実体化せずpolylog時間で答えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "頂点値か辺値かに応じて LCA 側端点を含める区間を調整する。",
+      "text": "常に左だけがcapを占めるchain、左右同長、lightを交互に辿る構造、X=1/Cを小さい実文字列生成と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc405-e「Fruit Lineup」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "最左のブドウを境界にすると、その左には全リンゴ A 個、全オレンジ B 個、そして i 個のバナナがあり、右には残り C-i 個のバナナと D-1 個のブドウだけがある。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "左側ではリンゴ全体がバナナ全体より先という順序が固定され、オレンジをその列の隙間へ挿入するだけなので C(A+B+i,B) 通りになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc405-e「Fruit Lineup」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "最左ブドウより左のバナナ数 i=0..C を全列挙し、左右の組合せ数の積を足す",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各 i の寄与は C(A+B+i,B)C(D-1+C-i,D-1)。階乗と逆階乗を前計算すれば全体を果物総数に線形な時間で求められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "A,B,C,D を状態とする四次元 DP で左から果物を置く",
+        "decision": "rejected",
+        "decisionReason": "各個数が 10^6 まであるため状態空間を保持できず、最左ブドウで依存関係が左右に分離する構造を使っていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+        "text": "最左ブドウを選んだことで「リンゴはブドウより左」「オレンジはブドウより左」の二条件が自動的に満たされ、残る左側の制約はリンゴがバナナより左だけになる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Fruit Lineup 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "i を固定すれば左右の選び方は独立で、果物は種類内で区別しないため二つの二項係数の積になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc405-e「Fruit Lineup」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "mod 998244353 で 0..A+B+C+D の factorial と inverse factorial を用意する。i=0..C について comb(A+B+i,B)×comb(D-1+C-i,D-1) を加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc405-e「Fruit Lineup」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "境界要素による場合分け",
+      "trigger": "複数の順序制約が特定種類の最初／最後の要素で分離できるとき。",
+      "application": "最左ブドウと、その左にあるバナナ数を固定して左右の配置を独立にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "組合せ数と二項係数",
-      "trigger": "制約と操作を整理したときに 組合せ数と二項係数 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc405-e「Fruit Lineup」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 組合せ数と二項係数 を問題固有の状態へ適用する。",
+      "name": "二項係数の前計算",
+      "trigger": "大きな同種要素の挿入方法を多数の引数で足し合わせるとき。",
+      "application": "階乗・逆階乗から各組合せを O(1) で計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "四種類の部分順序を直接数えず、最左ブドウ一つを separator にすると、左は固定順列へのオレンジ挿入、右は自由な二種類列になる。",
+      "reusablePerspective": "順序制約つき多重集合順列では、制約をまたぐ極値要素で切ったときに左右が独立になるかを調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "組合せ数と二項係数",
+      "text": "同種要素の並べ方を二項係数で数える方法と、素数法での階乗逆元を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "i の両端 0,C を含め、階乗表を A+B+C+D まで確保する。各積と総和を逐次 mod 998244353 にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Fruit Lineup 型の 区間端点と包含関係に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。",
+      "text": "四種類の果物の順序制約を一変数の組合せ和へ変換し、最大個数 10^6 でも数え上げられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "A=B=C=D=1、ある種類だけ個数を増やした小例を全多重集合順列で列挙し、i ごとの分類が重複も漏れもないか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

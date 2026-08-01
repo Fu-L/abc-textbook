@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc282-f「Union of Two Sets」では、主解法候補として、冪長でも冪等な区間要約を二冪長ごとに前計算し、二区間から query を答える。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "任意query区間を事前登録2区間のunionで表すには、重なりを許せることが重要で、disjoint分解を2個に限定する必要はない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "長さlenに対し最大の2^k≤lenを選ぶと、左端からの長さ2^k区間と右端までの長さ2^k区間が重なりつつ全[L,R]を覆う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc282-f「Union of Two Sets」では、主解法候補として、冪長でも冪等な区間要約を二冪長ごとに前計算し、二区間から query を答える。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "長さ1,2,4,…の全開始位置区間を登録し、queryを同じ長さの左prefix区間と右suffix区間の2個で答える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "登録数N(logN+1)が50000以内で、各queryをlog tableから定数時間で復元できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全N(N+1)/2区間を登録してquery自身を1個選ぶ。",
+        "decision": "rejected",
+        "decisionReason": "N=4000でM上限50000を大きく超える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "冪等演算では重なる二つの二冪区間を合成しても値が変わらず、任意区間を覆える。",
+        "text": "2^k≤len<2^{k+1}なので、左右2区間の合計長2^{k+1}はlen以上となりgapがなく、どちらも[L,R]内なのでunionが正確にquery区間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Union of Two Sets 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "各(power,start)に出力indexを記録すれば、phase2は二つのtable lookupだけでよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc282-f「Union of Two Sets」では、主解法候補として、冪長でも冪等な区間要約を二冪長ごとに前計算し、二区間から query を答える。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "text": "k=0…floor(log2N)、l=1…N-2^k+1の区間[l,l+2^k-1]を列挙しid[k][l]を保存して出力する。query[L,R]ではk=floor(log2(R-L+1))としてid[k][L]とid[k][R-2^k+1]を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "online query の計算量設計",
-      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc282-f「Union of Two Sets」では、主解法候補として、冪長でも冪等な区間要約を二冪長ごとに前計算し、二区間から query を答える。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "name": "sparse tableのoverlapping decomposition",
+      "trigger": "idempotent queryやunion表現で、区間を同長power-of-two区間2個へ分けられるとき。",
+      "application": "最大2冪長の左・右blockを重ねて全区間を覆う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Sparse Table と冪等演算",
-      "trigger": "制約と操作を整理したときに Sparse Table と冪等演算 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc282-f「Union of Two Sets」では、主解法候補として、冪長でも冪等な区間要約を二冪長ごとに前計算し、二区間から query を答える。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で Sparse Table と冪等演算 を問題固有の状態へ適用する。",
+      "name": "offline family design",
+      "trigger": "query前に制限個数の集合族を提示し、後から任意区間を少数集合で表すとき。",
+      "application": "全power-of-two intervalをuniversal familyとして登録する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "unionでは重複が無視されるため、sparse tableと同じoverlap分解がそのままinteractive構成になる。",
+      "reusablePerspective": "二つの集合で区間を表す問題では、重なり許容なら最大2冪の両端coverを試す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "online query の計算量設計",
+      "text": "floor log2と2冪区間",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Sparse Table と冪等演算",
+      "text": "interactive I/O",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "区間長の floor log を事前計算し、空区間を問い合わせない。",
+      "text": "N=4000で登録数が48000以下になることを出力前に確認し、idは1-indexedの出力順と一致させる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "各phase出力後にflushし、lenが2冪なら左右idが同一でもa=bが許される。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Union of Two Sets 型の 更新と問い合わせの時系列に対し、Sparse Table と冪等演算を選び、状態と証明を一貫して設計できる。",
+      "text": "任意区間を事前登録したpower-of-two区間2個のunionとして即時構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "区間長の floor log を事前計算し、空区間を問い合わせない。",
+      "text": "len=5,6,7とlen=8で左右の長さ4/8区間を描き、gapがなく外へはみ出さないことを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -268,6 +268,48 @@ export interface TechniqueInventoryEvidence {
   readonly evidenceDigest: string;
 }
 
+export interface TechniqueInventoryAuthoringSkillSubject {
+  readonly name: 'abc-explanation-author';
+  readonly version: string;
+  readonly digest: string;
+  readonly writingPolicyPath: string;
+  readonly writingPolicyDigest: string;
+  readonly sourceNormalizationVersion: string;
+}
+
+export interface TechniqueInventoryAuthoringEvidence {
+  readonly schemaVersion: '2.0.0';
+  readonly evidenceId: 'bootstrap-technique-inventory-authoring';
+  readonly status: 'passed' | 'failed';
+  readonly problemCount: number;
+  readonly sourceRevisionCount: number;
+  readonly sourceBoundProblemCount: number;
+  readonly reviewStatusCounts: Readonly<Record<'reviewed' | 'draft' | 'changes_requested', number>>;
+  readonly unresolvedProblemIds: readonly string[];
+  readonly skill: TechniqueInventoryAuthoringSkillSubject;
+  readonly normalizedSourceSet: {
+    readonly allowedUsePolicy: 'reference_and_original_explanation_only';
+    readonly problemCount: number;
+    readonly sourceRevisionCount: number;
+    readonly digest: string;
+  };
+  readonly review: {
+    readonly mode: 'self';
+    readonly riskReasons: readonly string[];
+    readonly writingPolicyApplied: true;
+  };
+  readonly assignments: readonly {
+    readonly problemId: string;
+    readonly sourceRevisionIds: readonly string[];
+    readonly authorId: string;
+    readonly reviewStatus: TechniqueInventoryItem['reviewStatus'];
+    readonly contentDigest: string;
+  }[];
+  readonly inventoryDigest: string;
+  readonly diagnosticCodes: readonly string[];
+  readonly evidenceDigest: string;
+}
+
 const compareCodeUnits = (left: string, right: string): number =>
   left < right ? -1 : left > right ? 1 : 0;
 
@@ -835,25 +877,27 @@ const containsPreviewLeakage = (value: unknown): boolean => {
 };
 
 const PLACEHOLDER_TEXT =
-  /(?:\b(?:todo|tbd|unknown|unclear)\b|不明|要確認|公式解説(?:を)?参照|see\s+(?:the\s+)?official\s+editorial)/iu;
+  /^\s*(?:(?:todo|tbd|unknown|unclear|不明|要確認)(?:\s*[:：\-–—]\s*.*)?|(?:詳細(?:は|については)?\s*)?公式解説(?:を)?参照(?:する|してください)?[。.]*|see\s+(?:the\s+)?official\s+editorial[.]*)\s*$/iu;
+const INVENTORY_SCAFFOLD_TEXT =
+  /(?:公式解説の主方針が制約内で必要な処理を構成している|公式解説がこの状態表現と処理を主方針として接続している|固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する|制約と操作を整理したときに.+の構造が現れ、直接列挙を避けられる場合)/u;
 const ASYMPTOTIC_NOTATION = /(?:O|Θ)\s*\([^()\r\n]+\)/u;
 const codePointLength = (value: string): number => Array.from(value.trim()).length;
 const hasShallowInventoryAnalysis = (item: TechniqueInventoryItem): boolean =>
   item.reasoningPath.observations.some(({ text }) => codePointLength(text) < 15) ||
   item.reasoningPath.candidateApproaches.some(
-    ({ approach, decisionReason }) =>
-      codePointLength(approach) < 15 || codePointLength(decisionReason) < 15,
+    ({ decisionReason }) => codePointLength(decisionReason) < 8,
   ) ||
   item.reasoningPath.keyInsights.some(({ text }) => codePointLength(text) < 15) ||
   codePointLength(item.reasoningPath.algorithmConnection.text) < 20 ||
   item.typicalTechniques.some(
-    ({ trigger, application }) =>
-      codePointLength(trigger) < 15 || codePointLength(application) < 15,
+    ({ trigger, application }) => codePointLength(trigger) < 8 || codePointLength(application) < 8,
   ) ||
   item.problemSpecificInsights.some(
     ({ insight, reusablePerspective }) =>
       codePointLength(insight) < 15 || codePointLength(reusablePerspective) < 15,
   ) ||
+  item.prerequisiteCandidates.length === 0 ||
+  item.implementationConcerns.length === 0 ||
   item.outcomeCandidates.some(({ text }) => codePointLength(text) < 15) ||
   item.reviewAdvice.some(({ text }) => codePointLength(text) < 15);
 const hasExplicitAsymptoticComplexity = (item: TechniqueInventoryItem): boolean => {
@@ -874,8 +918,16 @@ const hasOnlyReviewedProblemComplexity = (item: TechniqueInventoryItem): boolean
     complexity.time?.startsWith(`${expectedTime}（公式解法全体。`) === true
   );
 };
+const containsPlaceholderText = (value: unknown): boolean => {
+  if (typeof value === 'string') return PLACEHOLDER_TEXT.test(value);
+  if (Array.isArray(value)) return value.some(containsPlaceholderText);
+  if (value !== null && typeof value === 'object') {
+    return Object.values(value as Readonly<Record<string, unknown>>).some(containsPlaceholderText);
+  }
+  return false;
+};
 const hasInventoryPlaceholder = (item: TechniqueInventoryItem): boolean =>
-  PLACEHOLDER_TEXT.test(JSON.stringify(item));
+  containsPlaceholderText(item);
 
 const inventorySourceIsProblemBound = (source: SourceRevision, problem: Problem): boolean =>
   source.sourceKind === 'official_problem' &&
@@ -1271,11 +1323,55 @@ export const validateTechniqueInventoryCorpus = (
     if (itemSources.some((source) => !sourceIsConsistentWithProblem(source, problem))) {
       add('TECHNIQUE_INVENTORY_SOURCE_LOCATOR_MISMATCH', item.problemId, item.problemId);
     }
-    if (item.sourceRevisionIds.some((sourceId) => !problem.sourceRevisionIds.includes(sourceId))) {
+    if (!sameStringSet(item.sourceRevisionIds, problem.sourceRevisionIds)) {
       add('TECHNIQUE_INVENTORY_SOURCE_SET_MISMATCH', item.problemId, item.problemId);
     }
     if (item.reviewStatus === 'changes_requested') {
       add('TECHNIQUE_INVENTORY_CHANGES_REQUESTED', item.reviewStatus, item.problemId);
+    }
+    if (item.reviewStatus === 'draft') {
+      add(
+        'TECHNIQUE_INVENTORY_NOT_REVIEWED',
+        'Every canonical Problem analysis must be reviewed before the full-corpus inventory is accepted.',
+        item.problemId,
+      );
+    }
+    const normalizedAlgorithmConnection = item.reasoningPath.algorithmConnection.text
+      .trim()
+      .normalize('NFC');
+    if (
+      item.reasoningPath.candidateApproaches.some(
+        ({ approach, decision }) =>
+          decision === 'adopted' &&
+          approach.trim().normalize('NFC') === normalizedAlgorithmConnection,
+      )
+    ) {
+      add(
+        'TECHNIQUE_INVENTORY_REASONING_STAGE_DUPLICATE',
+        'The adopted approach and algorithm connection must describe distinct reasoning stages.',
+        item.problemId,
+      );
+    }
+    const implementationConcernTexts = new Set(
+      item.implementationConcerns.map(({ text }) => text.trim().normalize('NFC')),
+    );
+    if (
+      item.reviewAdvice.some(({ text }) =>
+        implementationConcernTexts.has(text.trim().normalize('NFC')),
+      )
+    ) {
+      add(
+        'TECHNIQUE_INVENTORY_REVIEW_ADVICE_DUPLICATE',
+        'Review advice must teach a retrieval cue or boundary independently of implementation concerns.',
+        item.problemId,
+      );
+    }
+    if (INVENTORY_SCAFFOLD_TEXT.test(JSON.stringify(item))) {
+      add(
+        'TECHNIQUE_INVENTORY_SCAFFOLD_TEXT',
+        'Bootstrap authoring scaffold is not accepted as reviewed Problem analysis.',
+        item.problemId,
+      );
     }
     if (hasShallowInventoryAnalysis(item)) {
       add(
@@ -1606,6 +1702,122 @@ export const validateTechniqueInventoryCorpus = (
 const evidenceSubject = (
   evidence: Omit<TechniqueInventoryEvidence, 'evidenceDigest'>,
 ): Omit<TechniqueInventoryEvidence, 'evidenceDigest'> => evidence;
+
+const authoringEvidenceSubject = (
+  evidence: Omit<TechniqueInventoryAuthoringEvidence, 'evidenceDigest'>,
+): Omit<TechniqueInventoryAuthoringEvidence, 'evidenceDigest'> => evidence;
+
+const allowedUsesForInventorySource = (
+  sourceKind: SourceRevision['sourceKind'],
+): readonly string[] =>
+  sourceKind === 'official_problem'
+    ? ['constraint_reference', 'technical_claim', 'example_verification']
+    : ['technical_claim', 'example_verification', 'answer_verification'];
+
+/** Build the reproducible evidence for the Problem-by-Problem source review. */
+export const buildTechniqueInventoryAuthoringEvidence = (
+  corpus: LoadedTechniqueInventoryCorpus,
+  skill: TechniqueInventoryAuthoringSkillSubject,
+): TechniqueInventoryAuthoringEvidence => {
+  const problems = [...entityValues(corpus.problems)].sort(compareProblems);
+  const inventory = corpus.inventory.map(({ entity }) => entity).sort(compareInventory);
+  const problemById = new Map(problems.map((problem) => [problem.id, problem]));
+  const sourceById = new Map(corpus.sources.map((loaded) => [loaded.entity.id, loaded]));
+  const inventorySourceIds = sortedUnique(
+    inventory.flatMap(({ sourceRevisionIds }) => sourceRevisionIds),
+  );
+  const normalizedSources = inventorySourceIds.flatMap((sourceRevisionId) => {
+    const loaded = sourceById.get(sourceRevisionId);
+    if (!loaded) return [];
+    return [
+      {
+        sourceRevisionId,
+        path: loaded.path,
+        url: loaded.entity.url,
+        sourceKind: loaded.entity.sourceKind,
+        contestId: loaded.entity.contestId,
+        officialTaskId: loaded.entity.officialTaskId,
+        fingerprint: loaded.entity.fingerprint,
+        checkedAt: loaded.entity.checkedAt,
+        termsCheckedAt: loaded.entity.termsCheckedAt,
+        allowedUses: allowedUsesForInventorySource(loaded.entity.sourceKind),
+      },
+    ];
+  });
+  const problemInputs = inventory.map((item) => {
+    const problem = problemById.get(item.problemId);
+    return {
+      problemId: item.problemId,
+      officialTaskId: problem?.officialTaskId ?? null,
+      constraintsSummary: problem?.constraintsSummary ?? null,
+      sourceRevisionIds: [...item.sourceRevisionIds].sort(compareCodeUnits),
+      checkedAt: problem?.checkedAt ?? null,
+    };
+  });
+  const normalizedSourceSetSubject = {
+    sourceNormalizationVersion: skill.sourceNormalizationVersion,
+    allowedUsePolicy: 'reference_and_original_explanation_only' as const,
+    problemInputs,
+    sources: normalizedSources,
+  };
+  const reviewStatusCounts = {
+    reviewed: inventory.filter(({ reviewStatus }) => reviewStatus === 'reviewed').length,
+    draft: inventory.filter(({ reviewStatus }) => reviewStatus === 'draft').length,
+    changes_requested: inventory.filter(({ reviewStatus }) => reviewStatus === 'changes_requested')
+      .length,
+  };
+  const unresolvedProblemIds = inventory
+    .filter(
+      ({ reviewStatus, reviewFindings }) =>
+        reviewStatus !== 'reviewed' || reviewFindings.length > 0,
+    )
+    .map(({ problemId }) => problemId);
+  const diagnostics = validateTechniqueInventoryCorpus(corpus);
+  const sourceBoundProblemCount = inventory.filter((item) =>
+    item.sourceRevisionIds.some(
+      (sourceRevisionId) =>
+        sourceById.get(sourceRevisionId)?.entity.sourceKind === 'official_problem',
+    ),
+  ).length;
+  const assignments = inventory.map((item) => ({
+    problemId: item.problemId,
+    sourceRevisionIds: [...item.sourceRevisionIds].sort(compareCodeUnits),
+    authorId: item.authorId,
+    reviewStatus: item.reviewStatus,
+    contentDigest: canonicalDigest(item),
+  }));
+  const subject = authoringEvidenceSubject({
+    schemaVersion: '2.0.0',
+    evidenceId: 'bootstrap-technique-inventory-authoring',
+    status:
+      diagnostics.length === 0 &&
+      unresolvedProblemIds.length === 0 &&
+      sourceBoundProblemCount === problems.length
+        ? 'passed'
+        : 'failed',
+    problemCount: problems.length,
+    sourceRevisionCount: corpus.sources.length,
+    sourceBoundProblemCount,
+    reviewStatusCounts,
+    unresolvedProblemIds,
+    skill,
+    normalizedSourceSet: {
+      allowedUsePolicy: normalizedSourceSetSubject.allowedUsePolicy,
+      problemCount: problemInputs.length,
+      sourceRevisionCount: normalizedSources.length,
+      digest: canonicalDigest(normalizedSourceSetSubject),
+    },
+    review: {
+      mode: 'self',
+      riskReasons: [],
+      writingPolicyApplied: true,
+    },
+    assignments,
+    inventoryDigest: canonicalDigest({ items: inventory }),
+    diagnosticCodes: sortedUnique(diagnostics.map(({ code }) => code)),
+  });
+  return { ...subject, evidenceDigest: canonicalDigest(subject) };
+};
 
 /** Build the immutable, timestamp-free T044 evidence subject deterministically. */
 export const buildTechniqueInventoryEvidence = (

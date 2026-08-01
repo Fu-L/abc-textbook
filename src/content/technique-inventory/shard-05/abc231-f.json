@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc231-f「Jealous Two」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "高橋への品 i、青木への品 j で喧嘩しない条件は A_i≥A_j かつ B_i≤B_j であり、二次元の半順序を満たす順序付き点対の個数になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "点を A 昇順、同じ A では B 降順に処理すると、現在点 i より前には A_j≤A_i の候補が揃い、残りは B_j≥B_i の個数問合せになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc231-f「Jealous Two」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全ての順序付き組 (i,j) について二つの不等式を直接確認する。",
+        "decision": "rejected",
+        "decisionReason": "候補が N の二乗個あり、20 万点では全組を走査できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "A で sweep し、座標圧縮した B の頻度を Fenwick tree または segment tree に蓄積して suffix 個数を問い合わせる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "一方の不等式をソート順へ吸収し、他方を一次元の動的な範囲和へ落とせる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "大小・等値関係を保つ順位写像なので、元座標での順序条件と圧縮後の条件が同値になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Jealous Two 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "A が同値の点では B の大きい順に置くことで条件を満たす向きが処理済み側に現れるが、完全に同じ点の複数個はまとめて双方向を数える必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc231-f「Jealous Two」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "喧嘩しない条件を二次元 dominance counting として、A の昇順 sweep と圧縮 B 上の suffix 頻度和を組み合わせ、同一点群を一括処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc231-f「Jealous Two」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "二次元半順序の sweep line",
+      "trigger": "点対に x の一方向不等式と y の逆方向不等式が同時に課されるとき。",
+      "application": "x をソート順で満たし、処理済み点の y 頻度から現在閾値以上の個数を取得する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "座標圧縮",
-      "trigger": "制約と操作を整理したときに 座標圧縮 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc231-f「Jealous Two」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 座標圧縮 を問題固有の状態へ適用する。",
+      "name": "座標圧縮と Fenwick tree",
+      "trigger": "座標値は大きいが、挿入と prefix・suffix 個数問合せだけを行うとき。",
+      "application": "B の順位へ一点加算し、全挿入数から B_i 未満の prefix 和を引く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "同じ品を二人へ渡すことも許されるため i＝j を含み、同一座標が c 個ならその群内だけで c² 個の順序付き組が有効になる。",
+      "reusablePerspective": "dominance counting では、不等号が非厳密か、組が順序付きか、同一点と自己対を含むかをグループ単位で確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "座標圧縮",
+      "text": "一方の座標でソートして半順序条件を一次元範囲和へ落とし、座標圧縮を適用できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。",
+      "text": "完全に同じ (A,B) の点は群サイズを数え、群全体を木へ反映する時点と答えへの寄与を統一して欠落を防ぐ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "答えは最大 N² なので 64 bit 整数を使い、B≥B_i の等号を suffix 問合せへ含める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Jealous Two 型の 整数の約数・剰余構造に対し、座標圧縮を選び、状態と証明を一貫して設計できる。",
+      "text": "非厳密な二次元半順序を満たす順序付き点対を、重複点を保った sweep line で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。",
+      "text": "二変数の不等式対が出たら、一方をソートで自動的に満たし、残る一方をデータ構造の問合せにする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "タイブレークは適当に決めず、同じ第一座標で有効な第二座標の向きが処理済み側へ来る順を選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

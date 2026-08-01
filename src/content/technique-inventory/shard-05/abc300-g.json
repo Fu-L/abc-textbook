@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc300-g「P-smooth number」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "P≤100の素数因子だけを持つ数は約2×10^9個以下で、素数集合を二分すれば各側の生成数列を現実的サイズに抑えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc300-g「P-smooth number」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "素数を生成数列サイズが小さい側へgreedy分配するmeet-in-the-middle",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各半分で許される素数冪積をN以下だけ列挙し、sort後に積≤Nとなるpair数を二ポインタで数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "1..Nをfactor判定",
+        "decision": "rejected",
+        "decisionReason": "Nは10^16で走査不能。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "P-smooth number 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "素数を個数ではなく現在の列挙数が小さい側へ追加すると、二つの直積サイズを均衡化できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc300-g「P-smooth number」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "P以下の素数を列挙し、各qについて小さい側のlistをq^e倍した値で拡張する。両listをsortし、一方昇順・他方pointer降順でuv≤Nのpair数を合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc300-g「P-smooth number」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "meet-in-the-middle",
+      "trigger": "独立な素因数選択の全積は大きいが二群なら列挙可能。",
+      "application": "素数集合を分割して半側smooth数を生成する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc300-g「P-smooth number」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "積制約pair counting",
+      "trigger": "sort済み正数列からuv≤Nを数える。",
+      "application": "overflowを避けN/uで上限pointerを動かす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "分割品質を素数数でなく実際の生成listサイズでonline均衡化するのが最大ケースを抑える。",
+      "reusablePerspective": "MITMの群分けは状態数推定を重みにする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "全探索と候補数の上界評価",
+      "text": "素数列挙、冪積DFS/反復生成、二ポインタ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "1を両listに含め、q倍でNを越える前に除算判定し、答えは64ビットで持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "P-smooth number 型の 整数の約数・剰余構造に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "N以下のP-smooth数個数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "小Nのfactor全探索と比較し、P=2、N=1、P以下最大素数の冪境界を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

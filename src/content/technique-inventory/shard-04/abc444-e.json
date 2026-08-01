@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc444-e「Sparse Range」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "左端 L を固定すると、条件を満たす右端は L..f(L) の prefix になり、L を一つ進めても既存の反例 pair は減るだけなので f(L) は単調非減少である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc444-e「Sparse Range」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "二ポインタで区間を伸縮し、区間内の値を ordered multiset に保持して、新要素の predecessor と successor が距離 D 以上かだけを調べる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "既存区間が valid なら追加値と距離 D 未満になり得る最も近い値は前後要素だけであり、各 index は高々一回追加・削除される。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各区間についてすべての要素 pair の差を調べ、条件を満たすか判定する。",
+        "decision": "rejected",
+        "decisionReason": "区間が Θ(N^2) 個あり、さらに pair 検査を行うと三乗以上になってしまう。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
+        "text": "一度 |A_i-A_j|<D の反例を含んだ区間は、右端をさらに伸ばしても valid へ戻らない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sparse Range 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "追加値 x との最小絶対差は sorted set 上で x 以下最大と x 以上最小のどちらかに現れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc444-e「Sparse Range」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "R を単調に進め、A_R の predecessor/successor が十分離れていれば set に挿入する。挿入不能になった位置で L 始まりの valid 区間数 R-L を加え、A_L を削除して次の L へ進む。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc444-e「Sparse Range」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "尺取り法",
+      "trigger": "右へ要素を加えると一度壊れた条件が復活せず、左削除では条件が緩むとき。",
+      "application": "最大 valid 右端を全左端で単調に更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "平衡二分探索木",
-      "trigger": "制約と操作を整理したときに 平衡二分探索木 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc444-e「Sparse Range」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 平衡二分探索木 を問題固有の状態へ適用する。",
+      "name": "順序集合の最近傍判定",
+      "trigger": "集合内の全要素と新値の距離下限を確認したいとき。",
+      "application": "predecessor と successor の二要素だけを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "全 pair 条件でも、新規追加による違反だけを見れば ordered set の局所二候補へ縮約できる。",
+      "reusablePerspective": "区間性質が要素追加で単調に悪化するなら、valid 区間の端点関数の単調性を探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "平衡二分探索木",
+      "text": "尺取り法、順序集合の最近傍判定と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "重複値を multiset で正しく保持し、erase は一個だけ消す。D=0 の境界と predecessor/successor 不在を分岐する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sparse Range 型の 区間端点と包含関係に対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。",
+      "text": "全要素 pair の距離条件を満たす部分配列数を、尺取りと順序集合で高速に数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "既存区間が valid という仮定の下で、新しい反例が必ず追加値を含むことと最近傍二点だけで十分なことを証明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

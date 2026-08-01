@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc405-f「Chord Crossing」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "円周上で端点が相異なる二弦が交差するのは、線形順序にした端点が a<c<b<d または c<a<d<b と交互に現れる場合である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "初期の弦同士は交差しないため、対応する区間は互いに素または包含関係にあり、その直接包含関係はダミー根 0 を加えた根付き木になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc405-f「Chord Crossing」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "初期区間の包含木を構築し、各点 x を含む最小区間 m(x) を求め、クエリを木上距離へ変換する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "クエリ弦と交差する初期区間は m(C),m(D) の祖先集合の対称差に一致するため、答えは LCA を使った二頂点間距離になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各クエリ弦について M 本すべてと端点の交互条件を判定する",
+        "decision": "rejected",
+        "decisionReason": "一問 O(M) で最大 4×10^10 回規模となり、初期区間族の laminar 構造を再利用できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "二進展開した距離だけ祖先へ移動でき、最大の異なる祖先から一段進めば最小共通祖先になる。",
+        "text": "点 x を含む初期区間は包含木上で m(x) から根へ並ぶ祖先列そのものであり、クエリ両端の片方だけを含む区間が交差する弦に一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Chord Crossing 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "二つの祖先集合の対称差の大きさは depth(u)+depth(v)-2depth(lca(u,v)) なので、幾何判定を木上距離へ置き換えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc405-f「Chord Crossing」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "位置 1..2N を走査し、開閉端点を stack で処理して包含木と各奇数点の m(x) を O(N+M) で作る。深さと binary lifting を前計算し、各 (C,D) に対して m(C),m(D) の LCA から距離を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc405-f「Chord Crossing」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "laminar 区間の包含木",
+      "trigger": "区間同士が交差せず、互いに素か包含のどちらかに限られるとき。",
+      "application": "直接包含する区間を親として、外側のダミー区間を根にした木を stack で作る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "LCA と binary lifting",
-      "trigger": "制約と操作を整理したときに LCA と binary lifting の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc405-f「Chord Crossing」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で LCA と binary lifting を問題固有の状態へ適用する。",
+      "name": "LCA と木上距離",
+      "trigger": "二つの祖先集合の対称差や、包含境界を何回またぐかを問うとき。",
+      "application": "最小包含区間二点の深さと最小共通祖先から交差本数を計算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "弦の交差判定",
+      "trigger": "円周上の端点を結ぶ弦の交差を順序だけで扱えるとき。",
+      "application": "端点が交互に現れることを「区間が一方の query 端点だけを含む」へ言い換える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "交差本数は二次元幾何ではなく、両端点から円の外側へ抜けるまでに通る入れ子境界の差として数えられる。",
+      "reusablePerspective": "非交差な対象が入れ子を作る場合、各位置の最深所属要素を木の頂点に写すと、境界横断数が木上距離になることがある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "LCA と binary lifting",
+      "text": "円周上の弦の端点交互条件、stack による括弧列型の包含木構築、LCA を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。",
+      "text": "端点の開閉順で stack の対応を崩さず、どの初期区間にも含まれない点は m(x)=0 とする。ダミー根の深さを 0 に統一し、奇数 query 端点は初期端点と一致しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Chord Crossing 型の 区間端点と包含関係に対し、LCA と binary liftingを選び、状態と証明を一貫して設計できる。",
+      "text": "非交差弦への交差本数クエリを、包含木上の LCA 距離として各 O(log M) で処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。",
+      "text": "互いに素な弦、完全な入れ子、片端が全弦の外側、m(C)=m(D)、ダミー根をまたぐ query を端点交互判定の全走査と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

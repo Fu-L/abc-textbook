@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc412-f「Socks 4」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "初めに外へ出ている色 C の一足を総数へ戻して数えると、各色総数 A_i とタンス内総数 S=ΣA_i-1 は、どの色を保持していても一定になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "二色を外に持ったときは総数の多い色を保持するのが最適で、同数なら固定順でtie-breakできる。Aを昇順に並べれば状態遷移は現在色より大きい添字へのみ変化する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc412-f「Socks 4」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "色iを保持中の残りdraw期待値 dp_i を、A_i昇順でiの降順に解く期待値DP",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "dp_i=1+Σ_{j<i}(A_j/S)dp_i+Σ_{j>i}(A_j/S)dp_j を移項し、prefix A和とsuffix A_jdp_j和を差分管理すればsort後O(N)で求まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "現在の保持色から全draw色への Bellman 方程式を密行列として解く",
+        "decision": "rejected",
+        "decisionReason": "N状態の一般連立方程式にすると三次時間・二次memoryとなり、最適保持規則による上三角な依存を使っていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "j<iを引いた場合は多い色iを保持して同じdp_iへ戻り、j=iなら即終了、j>iならjを保持して既計算dp_jへ移る。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Socks 4 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "X_i=Σ_{j<i}A_j/S、Y_i=Σ_{j>i}A_jdp_j/S とすれば dp_i=(1+Y_i)/(1-X_i)。iを一つ下げる更新は累積和の一項追加・削除だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc412-f「Socks 4」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "元のA_Cを1増やし、(A_i,固定tie順,元id)をsortしてCの新indexを記録する。S=ΣA-1、prefix sumを作り、i=N..1で dp_i=(1+suffixWeighted/S)/(1-prefix[i-1]/S) を計算後 suffixWeighted+=A_i dp_i とする。初期色のdpを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc412-f「Socks 4」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "期待値DPの自己loop消去",
+      "trigger": "一step後に同じ状態へ戻る確率を含む期待時間を求めるとき。",
+      "application": "dp=1+qdp+r を (1-q)dp=1+r と移項する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc412-f「Socks 4」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "状態順序を作る貪欲方策",
+      "trigger": "二候補から将来期待時間を小さくする一方を保持し、状態遷移を単調化できるとき。",
+      "application": "総数順に色を並べ、多い色だけへ状態が上がるようにする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "prefix/suffix集計",
+      "trigger": "各iで左側の係数和と右側の重み付きDP和が必要なとき。",
+      "application": "prefix Aと降順更新のsuffixWeightedで二重和を消す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "保持中の一足を総数へ含めると、タンス内総数と色の比較尺度が状態によらず固定され、期待値式が三角化する。",
+      "reusablePerspective": "状態により母集団が一個だけ欠ける抽選では、その要素を含む固定総数へ正規化して分母と順位を共通化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "条件付き期待値、自己loopを含む期待時間方程式、法上の除算を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "増やした後の色Cをsort後も追跡し、同数色のtie-breakを一貫させる。Sと1-X_iの逆元が取れること、A_i-1枚の同色drawは終了項であることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Socks 4 型の 整数の約数・剰余構造に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "最適な靴下保持戦略を総数順の一方向期待値DPへ変え、最大30万色でもsort後線形に期待draw数を得られる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "N=1、初期色が最小／最大、同数色、二色だけの例を有限Markov方程式またはsimulationと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

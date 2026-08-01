@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc456-e「Endless Holidays」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "曜日はW日で周期的なので、都市x・曜日wを状態にすれば翌日の可能な滞在先が固定有向辺で表せる。無限に休日移動を続けられることは有限状態pathがcycleへ入ることと同値である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc456-e「Endless Holidays」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "N×W のtime-expanded graphを構築し、open条件を満たす stay/road遷移を翌曜日layerへ張って、有向cycleをDFS色またはtopological deletionで検出する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "同じ (都市,曜日) に再訪すれば以後そのcycleを繰り返せ、無限pathが存在すれば有限頂点性により必ず状態を再訪してcycleを含む。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "日数上限を仮定して可能都市集合を日ごとにsimulationし、空になるか観察する。",
+        "decision": "rejected",
+        "decisionReason": "cycleに入るまでの長さを任意に打ち切れず、曜日情報なしの都市集合だけでは状態再訪を正しく判定できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "頂点 (x,w) からは、同都市または道路隣接都市 y が曜日w+1にもopenな場合だけ遷移できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Endless Holidays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "開始状態も任意なのでgraph内に一つでもcycleがあれば条件を満たし、特定sourceからのreachabilityは不要である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc456-e「Endless Holidays」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各open状態を頂点化し、wからw mod W+1へstay辺と各道路両方向辺を条件付きで追加する。全頂点に三色DFSを行いback edgeを見つけるか、indegree削除後に残る頂点があるかでYes/Noを返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc456-e「Endless Holidays」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "時間展開graph",
+      "trigger": "環境条件が短い周期で変わる無限時系列の移動を扱うとき。",
+      "application": "場所×周期phaseを有限状態にして一日遷移を辺にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc456-e「Endless Holidays」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "無限pathのcycle判定",
+      "trigger": "有限有向graphで任意開始から永遠に遷移可能かを問うとき。",
+      "application": "有向cycleの存在へ同値変形する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "周期的な時間依存graphはphaseを状態へ組み込むと静的graphになり、無限性はcycleへ置き換わる。",
+      "reusablePerspective": "開始点自由の無限walkではcycleへのreachabilityではなくcycle存在だけを調べればよい。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "時間展開graph、無限pathのcycle判定と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "曜日Wから1へのwrapを正しく張り、出発日・到着日のopen条件を問題定義通り両方確認する。再帰DFSならNW深さを避ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Endless Holidays 型の 文字列の prefix・suffix と一致関係に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "周期的休業下で無限旅行が可能かを、都市×曜日graphの有向cycleとして O((N+M)W) で判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "一日の遷移辺のopen条件を書き、無限pathなら有限状態の重複からcycle、cycleなら反復可能という双方向を証明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

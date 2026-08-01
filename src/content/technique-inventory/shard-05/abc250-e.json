@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc250-e「Prefix Equality」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "接頭辞に同じ値が何度現れても集合は変わらないため、各列を値が初めて現れた順だけに圧縮すると、問い合わせは異なる値の個数kごとの集合比較になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc250-e「Prefix Equality」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "初出順列と対称差集合を用いる決定的前計算",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "両列で異なる値がk個となる接頭辞集合を一段ずつ更新し、等しいkだけの真偽を全問い合わせで共有できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各問い合わせで二つの接頭辞集合を構築する",
+        "decision": "rejected",
+        "decisionReason": "問い合わせごとに線形時間を要し、N,Qが2×10^5では間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+        "text": "各位置にはその接頭辞までのdistinct数を記録すれば、元の長さが違っても同じ初出段階kへ写せる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Prefix Equality 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "AとBのk番目の新値を対称差集合へ順に反転し、集合が空かどうかを記録すればハッシュ衝突なしで判定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc250-e「Prefix Equality」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "A,Bそれぞれについて初出値の列と各位置のdistinct数を作る。kを増やしながら両初出値を対称差集合へ追加・削除し、空ならequal[k]=trueとして、問い合わせでは二つのdistinct数が等しくequal[k]かを答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc250-e「Prefix Equality」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "初出圧縮",
+      "trigger": "重複回数を無視した接頭辞集合だけが問われる。",
+      "application": "各値の最初の出現だけを並べ、元位置をdistinct数へ写像する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "セグメント木と monoid",
-      "trigger": "制約と操作を整理したときに セグメント木と monoid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc250-e「Prefix Equality」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で セグメント木と monoid を問題固有の状態へ適用する。",
+      "name": "対称差の逐次維持",
+      "trigger": "同じ段階の二集合へ要素が一つずつ追加される。",
+      "application": "追加値をトグルし、対称差が空である段階を前計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "接頭辞集合は初出の瞬間にしか変化しないため、N個の位置ではなくdistinct数の段階を比較すればよい。",
+      "reusablePerspective": "二つの単調増加集合列の一致は、各段階の対称差を差分更新して判定できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "集合の対称差が空であることと二集合の一致が同値だと理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "セグメント木と monoid",
+      "text": "初出位置と接頭辞distinct数をハッシュ集合で前計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "重複値ではdistinct数を増やさず、k=0も一致として用意する。入力値が大きいので値そのものを配列添字にせず集合で管理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Prefix Equality 型の 列の順序と prefix 状態に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。",
+      "text": "各問い合わせの二つの接頭辞が集合として等しいかを高速かつ決定的に判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "同じdistinct数だが要素が異なる例、同じ値が長く重複する例、片側だけ新値が現れる境界を含め、素朴なset比較と照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

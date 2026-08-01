@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc276-f「Double Chance」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "prefix Kでの期待値は、ordered pair (i,j) がK²通り等確率なので S_K=Σ_{i,j≤K}max(A_i,A_j) をK²で割ればよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "K-1からA_Kを追加すると新規pairは(K,K)と片方だけKの2(K-1)個で、差分は2Σ_{i<K}max(A_i,A_K)+A_Kになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc276-f「Double Chance」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "値ごとの個数と総和を2本のFenwick treeに持ち、新要素以下の個数と新要素超の総和から差分を更新する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全prefixの二重和を増分で共有し、大小別集計をprefix sum queryで得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各Kでprefixをsortして全ordered pairのmaxを計算し直す。",
+        "decision": "rejected",
+        "decisionReason": "prefixごとの再計算が二次規模以上になり、N≤2×10^5に収まらない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+        "text": "Σ_{i<K}max(A_i,a)=a·count(A_i≤a)+sum(A_i>a) と、必要量が値域上の個数prefixと総和suffixに分離する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Double Chance 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "S_Kは整数のまま更新し、出力時だけK^{-2}を掛ければ、各pairの確率を個別に扱わずに済む。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc276-f「Double Chance」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "Kを1から進め、Fenwickでcnt≤A_Kとsum≤A_Kを取得し、sumGreater=totalSum-sum≤を作る。S+=2(A_K·cnt≤+sumGreater)+A_K と更新し、S/(K²)を法上で出力してからA_Kを木へ追加する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc276-f「Double Chance」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "online二重和の差分更新",
+      "trigger": "prefix集合上の全pair関数を各prefixで求め、新要素とのpair寄与を高速集計できるとき。",
+      "application": "旧pair和を保持し、新要素が関与する行・列・対角だけを加える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Fenwick tree",
-      "trigger": "制約と操作を整理したときに Fenwick tree の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc276-f「Double Chance」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で Fenwick tree を問題固有の状態へ適用する。",
+      "name": "Fenwick treeで個数と総和",
+      "trigger": "値との大小で寄与式が分かれ、値域prefixの件数と重み和が必要なとき。",
+      "application": "2本の木でcount≤aとsum≤aを求め、残りを全体和との差にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "maxの和は新値以下をすべて新値へ置換し、新値超は元値を足す式になるため、順序統計ではなく個数と総和だけで十分である。",
+      "reusablePerspective": "pair関数min/maxでは、新要素を閾値に集合を二分し、各側の寄与がcount/sumに分離するか確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "Fenwick treeのprefix sum",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Fenwick tree",
+      "text": "剰余期待値と逆元",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "同値A_iは≤側へ含めてもmaxは同じであり、count queryの境界を一貫させる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "K²の逆元はpow(K,mod-2)²またはinv(K)²で求め、減算したsumGreaterを法で正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Double Chance 型の 整数の約数・剰余構造に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。",
+      "text": "prefixごとの2回復元抽出の最大値期待値を、pair和の差分と値域Fenwickで逐次計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "A=(5,7)でS_1=5からS_2=26へ増える4pairを列挙し、差分式の係数2と対角A_Kを照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

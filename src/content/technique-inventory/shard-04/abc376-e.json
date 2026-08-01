@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc376-e「Max × Sum」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "選ぶ K 個のうち A の最大値を与える index r を固定すると、A_r は定数になり、残り K-1 個はそれ以前の B が小さいものを選ぶだけでよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc376-e「Max × Sum」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "(A_i,B_i) を A 昇順に sort し、走査中にそれ以前の B の小さい K-1 個と総和を max-heap で維持して各 r を評価する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "最大 A の担当を全探索することで積の二要素を分離でき、各 prefix の K-1 最小和を差分更新して O(N log N) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "A が小さい K 個、または B が小さい K 個をそのまま選ぶ。",
+        "decision": "rejected",
+        "decisionReason": "目的は max A と sum B の積であり、一方だけを局所最小化しても他方との trade-off を考慮できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "未処理候補の最小または最大 key を常に選ぶ greedy-choice property を保つ。",
+        "text": "r を選択集合中で A が最大の最後の index とすれば、候補は prefix r に限定され、A の値は A_r に固定される。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Max × Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "max-heap に K-1 個を保ち、新しい B を入れて最大を捨てると、各 prefix の最小 K-1 個の和が維持される。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc376-e「Max × Sum」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "A 昇順に並べ、heap が r より前の B の最小 K-1 個を表す時だけ A_r×(B_r+sumHeap) で答えを更新する。その後 B_r を heap へ入れサイズを K-1 に戻す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc376-e「Max × Sum」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "priority queue",
-      "trigger": "制約と操作を整理したときに priority queue の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc376-e「Max × Sum」では、主解法候補として、候補を優先度付き queue に入れ、現在最良の要素だけを順に確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で priority queue を問題固有の状態へ適用する。",
+      "name": "最大要素の担当を固定",
+      "trigger": "目的関数に選択集合の max と加法量の積が含まれるとき。",
+      "application": "max を与える要素を走査し、残りを prefix 内の単純最適化へ落とす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "非線形な max×sum でも max の担当を決めれば残りは K-smallest の線形問題になる。",
+      "reusablePerspective": "ソート後の prefix 条件と heap の差分更新を組み合わせる定番形である。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "priority queue",
+      "text": "ソート、priority queue、prefix 内 K-smallest の維持、64 bit 積を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "更新前の古い entry を識別して読み飛ばし、tie-break を決定的にする。",
+      "text": "同じ A の順序は任意でも全候補を評価できる。heap に r 自身を入れる前に評価し、K=1 では空 heap を扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Max × Sum 型の 列の順序と prefix 状態に対し、priority queueを選び、状態と証明を一貫して設計できる。",
+      "text": "max と sum の積を、最大値担当の固定と prefix K-smallest 維持に分離して最小化できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "更新前の古い entry を識別して読み飛ばし、tie-break を決定的にする。",
+      "text": "集合中の最大 A を担う要素に印を付けた小例を作り、残りがなぜ B だけで選べるかを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

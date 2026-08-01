@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc401-f「Add One Edge 3」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "二treeをedge(i,j)で結んだ後のdiameterは、元diameter d1,d2か、そのedgeを通るpathのどれかである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "edgeを通る最長pathはiのeccentricity A_i＋1＋jのeccentricity B_jなのでf(i,j)=max(D,A_i+B_j+1), D=max(d1,d2)。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc401-f「Add One Edge 3」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各treeのdiameter端点から全vertex eccentricityを求め、sort＋prefix sumで全pair maxを集計する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "Bを昇順にすると各A_iについてA_i+B_j+1≥Dとなる境界を二分探索でき、下側はD×個数、上側はB prefix/suffix sumでO(log N)集計できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各(i,j)で結合treeのdiameterをBFSし直す",
+        "decision": "rejected",
+        "decisionReason": "N1N2 pairそれぞれ線形探索となり到底間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "右端を固定した有効左端集合が単調に移動するため、戻らない二本の pointer で全境界を一度ずつ調べられる。",
+        "text": "treeの任意vertex vのeccentricityはdiameter両端u,wへのdistanceのmaxである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Add One Edge 3 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "threshold jはA_iが増えるほど単調なのでtwo-pointerでも総線形、binary searchでも十分高速である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc401-f「Add One Edge 3」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "各treeで二回BFS/DFSしてdiameter endpointsとdを得て、両端からdistanceを計算しeccentricity列A,Bを作る。Bをsortしprefix sumを作り、各aのlower_bound(D-a-1)でmaxの和を足す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc401-f「Add One Edge 3」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "diameter endpointsによるeccentricity",
+      "trigger": "treeの全vertexから最遠点distanceを求めたいとき。",
+      "application": "diameter二端へのdistanceのmaxを使う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "尺取り法",
-      "trigger": "制約と操作を整理したときに 尺取り法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc401-f「Add One Edge 3」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 尺取り法 を問題固有の状態へ適用する。",
+      "name": "max(const,a+b)のsort集計",
+      "trigger": "全pairにthreshold付き線形式を足したいとき。",
+      "application": "一方をsortし境界とprefix sumで二群を計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "追加edgeを通るdiameter候補は両treeで接続点から最も遠い方向を独立に選べるため、各vertexのeccentricity一値だけで十分である。",
+      "reusablePerspective": "二構造を一edgeで繋ぐ全pairqueryでは、cross pathのendpoint最適化を各側のsummaryへ分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "尺取り法",
+      "text": "tree diameterとprefix sum付きbinary searchを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空区間、条件を満たす直前・直後のどちらを数えるかを loop 不変条件にする。",
+      "text": "tree size1ではdiameter endpointとdistance0を扱う。総和はpair数×distanceで64 bit整数を使い、threshold等号をmax側に含める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Add One Edge 3 型の 頂点と辺からなる状態グラフに対し、尺取り法を選び、状態と証明を一貫して設計できる。",
+      "text": "全接続点pairでの結合tree diameter総和を、eccentricity列のthreshold和として高速計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空区間、条件を満たす直前・直後のどちらを数えるかを loop 不変条件にする。",
+      "text": "小tree全pairを実際に結んで全点対distanceを求め、single vertex、path、starの式を比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

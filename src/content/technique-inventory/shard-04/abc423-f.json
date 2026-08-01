@@ -17,67 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc423-f「Loud Cicada」では、条件 subset ごとの lcm 倍数個数を求め、subset Möbius 変換で「ちょうどその条件集合だけ」を満たす個数へ反転する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "year yが条件iを満たすのはA_i|yである。subset Tの全条件を少なくとも満たすyear数はlcm(A_i,i∈T)の倍数個floor(Y/lcm)で求まり、exact satisfied subsetへMöbius inversionできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc423-f「Loud Cicada」では、条件 subset ごとの lcm 倍数個数を求め、subset Möbius 変換で「ちょうどその条件集合だけ」を満たす個数へ反転する。この状態表現から答えを構成する。",
+        "approach": "全subset LCMを作りsuperset Möbius transformする",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N≤20なので2^N状態で各yearを列挙せず、exactly M条件の年数を得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "1…Yの各yearで全A_iを試す",
+        "decision": "rejected",
+        "decisionReason": "Yは10^18まであり列挙不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "部分条件 T の個数は T を含む全 exact 条件 S の和なので、Boolean lattice 上の zeta 変換を反転すればよい。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Loud Cicada 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "F[T]=全i∈Tを満たす年数とG[S]=exactにSを満たす年数にはF[T]=Σ_{S⊇T}G[S]が成り立つ。superset Möbius inversion後、popcount(S)=MのG[S]を合計すればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc423-f「Loud Cicada」では、条件 subset ごとの lcm 倍数個数を求め、subset Möbius 変換で「ちょうどその条件集合だけ」を満たす個数へ反転する。この状態表現から答えを構成する。",
+      "text": "subset DPでlcm[mask]を一bit追加から計算し、Y超ならY+1へcapする。F[mask]=Y/lcm[mask]を作り、各bitについてmaskにbitなし側からあり側を引くsuperset Möbius transformでGへ変換し、popcount Mを合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "subset zeta・Möbius 変換",
-      "trigger": "制約と操作を整理したときに subset zeta・Möbius 変換 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc423-f「Loud Cicada」では、条件 subset ごとの lcm 倍数個数を求め、subset Möbius 変換で「ちょうどその条件集合だけ」を満たす個数へ反転する。この状態表現から答えを構成する。で subset zeta・Möbius 変換 を問題固有の状態へ適用する。",
+      "name": "subset LCM DP",
+      "trigger": "条件subsetの同時成立が数のLCMによる倍数条件になる。",
+      "application": "一bit除いたsubsetのLCMと新Aをgcdで安全に更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "superset Möbius inversion",
+      "trigger": "at least指定条件のcountからexactly成立条件集合のcountを復元する。",
+      "application": "F[T]=Σ_{S⊇T}G[S]をBoolean lattice上で反転する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "求めるexactly M speciesは単なるM個subset inclusion-exclusionを個別にせず、全exact maskを一括反転してpopcountで集約できる。",
+      "reusablePerspective": "exact条件数queryはexact satisfied-set distributionをsubset transformで復元する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "subset zeta・Möbius 変換",
+      "text": "LCM、subset DP、Möbius transform。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "lcm が上限を超えた時点で sentinel に丸め、乗算前の除算で overflow を避ける。",
+      "text": "lcm計算はx/gcd(x,a)>Y/aならY+1へcapしoverflowを避ける。empty maskのlcmは1。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Loud Cicada 型の問題に対し、subset zeta・Möbius 変換を選び、状態と証明を一貫して設計できる。",
+      "text": "1…Yでexactly M種がoutbreakする年数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "lcm が上限を超えた時点で sentinel に丸め、乗算前の除算で overflow を避ける。",
+      "text": "N小・Y小でyear列挙し、重複A、A_i>Y、包含関係を比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

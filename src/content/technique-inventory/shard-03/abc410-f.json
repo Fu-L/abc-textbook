@@ -17,81 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc410-f「Balanced Rectangles」では、短い方を行方向にして上下端を全列挙し、列差分の prefix sum が等しい組を密配列 frequency で数える。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "#を+1、.を-1と置けば、長方形がbalancedである条件は領域和が0であることと同値になる。転置してH≤WとするとH≤√(HW)なので、上下端O(H²)通りと横一走査O(W)を組み合わせる余地がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc410-f「Balanced Rectangles」では、短い方を行方向にして上下端を全列挙し、列差分の prefix sum が等しい組を密配列 frequency で数える。この状態表現から答えを構成する。",
+        "approach": "短辺側の上下端を固定し、列和配列の零和連続区間を密なprefix頻度配列で数える",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各上下端に対して列を一度走査するO(H²W)となり、H≤√(HW)とΣHW≤3×10^5を使えば約√(3×10^5)·3×10^5規模に抑えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "四辺をすべて列挙し、二次元累積和で各長方形を判定する",
+        "decision": "rejected",
+        "decisionReason": "判定をO(1)にしても長方形がΘ(H²W²)個あり、細長くない盤面で間に合わない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "上下端ごとにprefix sumをmapまたはsortで数える",
+        "decision": "rejected",
+        "decisionReason": "一般的な零和区間の解法だがO(H²W log W)となる。prefix値域が[-HW,HW]に限られる本問ではlog因子を除く必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "上下端固定後の平衡長方形は列差分和が零の区間と一対一で、等しい prefix sum の二位置がその区間を定める。",
+        "text": "上端uを固定して下端dを一段ずつ広げれば、各列の#−.の和C_jは新しい一行を足すだけで更新でき、Cを毎回高さ分走査する必要がない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Balanced Rectangles 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "列区間[l,r]の和が0であることは、その直前と直後のprefix sumが等しいことと同値である。値域が狭いのでhashやsortではなくoffset付き配列で出現回数を即時参照できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc410-f「Balanced Rectangles」では、短い方を行方向にして上下端を全列挙し、列差分の prefix sum が等しい組を密配列 frequency で数える。この状態表現から答えを構成する。",
+      "text": "必要なら盤面を転置してH≤Wにする。各uについて列和Cを0初期化し、d=u..Hで新しい行の±1をCへ加える。Cのprefix sumを左から計算し、同じ値の過去出現回数を答えへ足してから頻度を増やし、全(u,d)の寄与を合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "二次元累積更新と零和区間",
-      "trigger": "制約と操作を整理したときに 二次元累積更新と零和区間 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc410-f「Balanced Rectangles」では、短い方を行方向にして上下端を全列挙し、列差分の prefix sum が等しい組を密配列 frequency で数える。この状態表現から答えを構成する。で 二次元累積更新と零和区間 を問題固有の状態へ適用する。",
+      "name": "短辺の二乗全探索",
+      "trigger": "二次元領域で面積制約があり、片方の二辺を固定すると残りを線形走査できる。",
+      "application": "転置でH≤Wを保証し、上下端O(H²)と列走査O(W)に分解する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "特殊な漸近計算量の見積もり",
-      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc410-f「Balanced Rectangles」では、短い方を行方向にして上下端を全列挙し、列差分の prefix sum が等しい組を密配列 frequency で数える。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "name": "prefix sumの同値対による零和区間計数",
+      "trigger": "一次元列の総和0となる連続区間数を求めたい。",
+      "application": "同じprefix値の既出回数を加算し、値域が狭いことを利用して密配列でO(W)計数する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "ΣHW制約だけを見ると三重ループを避けたくなるが、短辺は各testの√(HW)以下なので、向きを揃えたO(H²W)は全test合計でも成立する。",
+      "reusablePerspective": "積で与えられた入力制約では、短い次元を二乗する前にmin次元≤√(積)を代入し、全testの面積和まで含めて真の上界を評価する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "asymptoticComplexity": {
     "time": "O(H²W)（公式解法全体。特殊な計算量解析を含む）",
     "evidenceIds": ["evidence-official-analysis"]
   },
   "prerequisiteCandidates": [
     {
-      "text": "二次元累積更新と零和区間",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "特殊な漸近計算量の見積もり",
+      "text": "二次元領域の次元固定、一次元prefix sum、零和連続区間の数え上げ、計算量への制約代入を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "H≤W に転置し、prefix 値域の offset と frequency 配列の初期化コストを全体計算量内へ収める。",
+      "text": "転置後のH,Wで値域offsetを確保し、prefix=0を走査前に1回登録する。頻度配列を上下端ごとに全消去すると余分な計算量になるため、触れたindexだけ戻すかtimestampを使う。答えは64 bitで持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Balanced Rectangles 型の問題に対し、二次元累積更新と零和区間を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "text": "面積和制約から短辺二乗の計算量を導き、平衡長方形を上下端固定後の零和区間へ変換してlog因子なしで数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "H≤W に転置し、prefix 値域の offset と frequency 配列の初期化コストを全体計算量内へ収める。",
+      "text": "小盤面の全長方形列挙と照合し、1×W、全て同じ記号、奇数面積、転置が発生する入力、同じprefix値が3回以上現れる場合、複数testで頻度状態が残らないことを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

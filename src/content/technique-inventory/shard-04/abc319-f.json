@@ -17,77 +17,125 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc319-f「Fighter Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "現在到達できて必要strength以下のenemyは、将来倒す予定なら今倒してもstrengthが増えるだけで不利益がなく、常に即座に倒してよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "従って選択が必要なのはmedicineを飲む順序だけであり、その個数P≤10をbitmaskで列挙できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "同じmedicine集合を飲んだ状態では、greedyに倒せるenemyを尽くした後のstrengthが大きい状態が、それ以後の全選択を支配する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc319-f「Fighter Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "dp[mask]をそのmedicine集合後にgreedy closureした最大strengthとし、最後に飲むmedicineを選ぶbitmask DP。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "最大10個だけの非可換な乗算順を列挙し、最大500個のenemyは各遷移内で単調に処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "現在倒せるenemyと到達可能medicineの全選択順をDFSする。",
+        "decision": "rejected",
+        "decisionReason": "enemyまで分岐させるとN個の順列的探索になるが、enemyは前倒し可能で分岐不要である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "medicineをg_iの大きい順に飲む。",
+        "decision": "rejected",
+        "decisionReason": "medicineへ到達するまでのenemy thresholdとtree上の依存があり、倍率だけの順序では実行可能性を保証できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "enemyをthreshold s_i順の候補構造で管理し、strengthが増えるたび条件を満たすreachable enemyを取り出してgainを加える操作を固定点まで続ける。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Fighter Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "未使用medicineはそのvertex以降のbranchを塞ぐ選択肢として扱い、現在のgreedy closureから到達できるmedicineだけを次maskへ追加する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "同maskでより大きいstrengthが得られたら、低い状態で倒せたenemyと到達できたmedicineも再現できるため、最大値だけ残せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc319-f「Fighter Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "medicineへ0..P-1のbitを付け、dp[0]をstrength 1からmedicineを跨がず倒せるenemyをすべて倒したclosureで初期化する。各reachable maskについて未使用medicine iを候補にし、そのvertexが現在の探索済み領域から到達可能ならstrengthをg_i倍してiを追加する。predecessorの到達・討伐状態を引き継ぎ、threshold以下のreachable enemyをpriority queue等で繰り返し倒して新しいclosureを作り、dp[next]を最大化する。全medicine maskを処理後、全enemyを倒した状態があればYes。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc319-f「Fighter Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "少数特殊頂点のbitmask DP",
+      "trigger": "大きいgraph/treeの中で、順序選択が必要な特殊操作だけが10個程度のとき。",
+      "application": "medicine集合をmaskにし、enemy処理を各遷移のdeterministic closureへ押し込む。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc319-f「Fighter Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "安全操作のgreedy closure",
+      "trigger": "実行可能な操作が目的を損なわずresourceを単調増加させるとき。",
+      "application": "倒せるenemyを選択肢にせず、なくなるまで即時処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "threshold priority queue",
+      "trigger": "到達済み候補のうちresource以下のthresholdだけを順に処理するとき。",
+      "application": "最小s_iのenemyから取り出し、gain後にさらに候補を解禁する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "加算enemyは前倒しして常に有利だが、乗算medicineは加算の前後で結果が変わるため、前者をclosure、後者だけをDP分岐として明確に分離する。",
+      "reusablePerspective": "操作が単調でも交換可能性が異なる場合、安全に前倒しできる操作を飽和させ、順序依存する少数操作だけを状態化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
+      "text": "bitmask DP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "tree上の到達可能領域",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "priority queueによるthreshold処理",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "同maskを更新した最大strengthに対応する討伐済み・frontier状態を一緒に保持または再simulationし、enemy gainを二重加算しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "strengthはmedicine積で64bitを超え得るため、最大enemy thresholdを十分上回る値でcapし、乗算前にoverflowを防ぐ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "medicine自身へ至るparent側pathが未突破なら、そのbitを遷移候補にしない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Fighter Takahashi 型の 根付き木・部分木・パスの関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "enemy全討伐の可否を、enemyのgreedy closureと最大10個のmedicine順序DPで判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "medicine前に倒せるenemy、medicineが塞ぐ子branch、倍率後に別branchのenemyが解禁される例を作り、mask遷移でfrontierとstrengthが同期するか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

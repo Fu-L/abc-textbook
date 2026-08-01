@@ -17,67 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc436-e「Minimum Swap」では、順列を cycle 分解し、各 swap が cycle 数を高々一つ増やすことから最小回数を N-C として cycle ごとに数える。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "順列 P の写像 i→P_i は互いに素なサイクルへ分解される。swap(i,j) は i,j が同じサイクルなら一つを二つへ分割し、異なるサイクルなら二つを結合する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc436-e「Minimum Swap」では、順列を cycle 分解し、各 swap が cycle 数を高々一つ増やすことから最小回数を N-C として cycle ごとに数える。この状態表現から答えを構成する。",
+        "approach": "順列の各サイクル長 s を求め、同じサイクル内から最初の swap 対を選ぶ個数 Σ binom(s,2) を数える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "最短回数 N-C を一手で N-(C+1) に減らす必要十分条件が同一サイクル内の二頂点選択である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "現在 P_i≠i の位置 i と P_i だけを swap する操作を候補として数える。",
+        "decision": "rejected",
+        "decisionReason": "これは最短列を構成する一方法だが、同一サイクル内の非隣接な任意二頂点もサイクルを分割し最初の操作になれる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同一 cycle 内の swap は一つの cycle を二つへ分割でき、恒等順列の N cycle まで毎回一つ増やす構成がある。",
+        "text": "サイクル数を C とすると恒等順列では C=N で、swap 一回で C は高々 1 しか増えないため最短回数は K=N-C である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Minimum Swap 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "K 手で完了するには毎手サイクル数を 1 増やす必要があり、最初の二位置が同一サイクルに属することが必要十分である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc436-e「Minimum Swap」では、順列を cycle 分解し、各 swap が cycle 数を高々一つ増やすことから最小回数を N-C として cycle ごとに数える。この状態表現から答えを構成する。",
+      "text": "visited 配列で未訪問 i から P を辿りサイクル長 s を得るたび、答えへ s(s-1)/2 を加える。全サイクルを一度ずつ走査して答えを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列の cycle 分解",
-      "trigger": "制約と操作を整理したときに 順列の cycle 分解 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc436-e「Minimum Swap」では、順列を cycle 分解し、各 swap が cycle 数を高々一つ増やすことから最小回数を N-C として cycle ごとに数える。この状態表現から答えを構成する。で 順列の cycle 分解 を問題固有の状態へ適用する。",
+      "name": "順列のサイクル分解",
+      "trigger": "swap による整列回数や、同一循環内の選択肢を数えるとき。",
+      "application": "P を関数グラフとして分解し、各成分長だけを集計する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "単調量による最短列の特徴付け",
+      "trigger": "一操作で目的指標が高々1改善し、下界を達成する操作列を分類したいとき。",
+      "application": "サイクル数 C をポテンシャルにし、毎手 +1 する操作だけが最短列に入れると示す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最短回数だけでなく最短列の最初の選択肢も、swap がサイクル数をどう変えるかで完全に分類できる。",
+      "reusablePerspective": "一手当たりの改善上限で最短下界が tight なら、最短解に使える各手は毎回最大改善を達成する必要がある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列の cycle 分解",
+      "text": "順列のサイクル分解、swap によるサイクルの分割・結合、組合せ数を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "固定点も長さ1の cycle として数え、cycle サイズごとの選択数を問題の modulus で合成する。",
+      "text": "固定点のサイクル長 1 は 0 を寄与する。答えは最大 binom(N,2) なので言語に応じて広い整数型を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Minimum Swap 型の問題に対し、順列の cycle 分解を選び、状態と証明を一貫して設計できる。",
+      "text": "順列を最短 swap で整列する操作列の最初になれる全 swap を、サイクル長から線形時間で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "固定点も長さ1の cycle として数え、cycle サイズごとの選択数を問題の modulus で合成する。",
+      "text": "同一サイクル内の任意の二位置で C が必ず1増えることと、異なるサイクルでは最短残手数が増えることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

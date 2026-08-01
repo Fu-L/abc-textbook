@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc406-f「Compare Tree Weights」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "木を任意の根で根付き化すると、辺を削除した片側は、その辺の子側頂点を根とする部分木になり、もう片側は全体からその部分木を除いた集合になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "DFS の行きがけ順では任意の部分木の頂点番号が連続区間になるため、頂点重みの一点加算と部分木和は一次元配列の一点加算・区間和へ変換できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc406-f「Compare Tree Weights」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Euler tour 順の頂点重みを Fenwick tree で管理し、全体重みも別に保持する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "edge y の子側部分木和 sub を区間和で求めれば、二成分の差は |total-2sub|。前処理 O(N)、各 query O(log N) である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "type 2 のたびに対象辺を避けて DFS し、二成分の重みを数え直す",
+        "decision": "rejected",
+        "decisionReason": "一回 O(N) となり Q=3×10^5 では間に合わず、辺が実際には削除されない固定木を再利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+        "text": "入力時の辺の向きは根付き木の親子と一致しないので、DFS 後に各 edge id について深い側の端点を保存すれば query から部分木を一意に選べる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Compare Tree Weights 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "更新後の全体和 total を同時に増やすことで、補集合の和を別のデータ構造なしに total-sub として得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc406-f「Compare Tree Weights」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "頂点 1 を根に DFS し tin[v],tout[v],parent と各辺の child を求める。Fenwick tree を初期値 1 で構築し、type 1 は tin[x] へ w 加算して total も更新、type 2 は sub=sum(tin[child]..tout[child]) として abs(total-2sub) を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc406-f「Compare Tree Weights」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "Euler tour flattening",
+      "trigger": "固定木の部分木に対する更新・集計を列データ構造へ載せたいとき。",
+      "application": "DFS 入時刻と退出時刻で各部分木を連続区間にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "深さ優先探索",
-      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc406-f「Compare Tree Weights」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "name": "Fenwick tree",
+      "trigger": "一点加算と区間和 query が大量にあるとき。",
+      "application": "Euler 順の重みを保持し、prefix sum の差から子側部分木和を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "辺削除後の二成分を両方集計せず、根を固定して「子部分木」と「全体−子部分木」に非対称化する。",
+      "reusablePerspective": "固定木の辺 query は、各辺を親子のどちら側で代表させるかを前処理すると部分木 query に変換できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "深さ優先探索",
+      "text": "根付き木の親子関係、DFS の部分木区間、Fenwick tree の一点加算・prefix sum を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "再帰 DFS は N=3×10^5 で stack overflow の恐れがあるため反復 DFSも検討する。重み総和は 64 bit とし、tout の包含／半開区間を統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Compare Tree Weights 型の 頂点と辺からなる状態グラフに対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "頂点重みが増加する固定木で、任意辺を切った二成分の重み差を対数時間で答えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "根に接続する辺、葉の辺、chain/star、同一点への連続更新を、辺を実際に除いて成分和を走査する実装と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

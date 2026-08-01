@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc407-g「Domino Covering SUM」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "domino の集合は grid graph の matching であり、覆われたセル値の総和は選んだ各辺の端点値和の総和に一致する。よって未被覆得点最大化は matching 辺重み和の最小化である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "grid graph は checkerboard 色で二部グラフになる。matching size k ごとの最小費用 f(k) を min-cost flow の流量 k の最小費用として求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc407-g「Domino Covering SUM」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "辺重みを定数 C だけ非負へ shift した二部 matching の min_cost_slope を求め、全流量 k から元費用 f_C(k)-Ck の最小を選ぶ",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "任意個の domino を許すため matching size も最適化する。source→黒、隣接辺、白→sink を容量1で結べば matching と整数 flow が一対一に対応する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "負の端点和をもつ隣接 pair を重みの小さい順に貪欲選択する",
+        "decision": "rejected",
+        "decisionReason": "一辺を選ぶと両端に接する複数辺が使えなくなるため局所最小は全体最小 matching を保証せず、cardinality 間の比較も必要である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各増加路が残余グラフで最小費用なので、ポテンシャルを保った交換論により総費用の最適性が維持される。",
+        "text": "全辺重みに C を加えた size k matching の費用を f_C(k) とすれば、元の費用は厳密に f_C(k)-Ck。shift 後の非負費用で標準 min-cost flow を使える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Domino Covering SUM 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "domino を0枚置く場合も候補なので k=0 の費用0を含めて最小化し、答えは全セル総和からその最小被覆和を引く。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc407-g「Domino Covering SUM」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各セルを parity で左右に分け、source→片側と他側→sink に容量1・費用0、隣接セル辺に容量1・費用 A_u+A_v+C を張る。min_cost_slope の各流量候補で shiftedCost-C·k を評価し、その最小を totalSum から引く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc407-g「Domino Covering SUM」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "二部 matching の最小費用流帰着",
+      "trigger": "二部グラフで互いに端点を共有しない辺集合の重み和を cardinality ごとに最小化するとき。",
+      "application": "各頂点容量を1にした source-left-right-sink network を作る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最小費用流と残余グラフ",
-      "trigger": "制約と操作を整理したときに 最小費用流と残余グラフ の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc407-g「Domino Covering SUM」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 最小費用流と残余グラフ を問題固有の状態へ適用する。",
+      "name": "コストの一様 shift",
+      "trigger": "負辺を含む固定 cardinality 最適化を、非負コストを要求する実装へ渡したいとき。",
+      "application": "全辺へ C を足し、flow k の結果から Ck を引いて元費用へ戻す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "min_cost_slope",
+      "trigger": "最適な flow 量自体も選ぶ必要があるとき。",
+      "application": "0 から最大 matching size までの費用曲線を求め、補正後の最小点を選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "未被覆和を最大化する問題では、総和を定数として「覆う二セルの和」を最小化する matching に反転すると、負のセルも自然に扱える。",
+      "reusablePerspective": "選択されなかった頂点重みの最大化は、選択辺が頂点素なら総頂点重みから matching の端点和を引く形を検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "最小費用流と残余グラフ",
+      "text": "grid の二部性、matching と単位容量 flow の対応、最小費用流を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。",
+      "text": "C は全 A_u+A_v+C が非負になる値を選ぶ。総和・費用・Ck は 64 bit を使い、slope が区間を圧縮して返す実装では各線形区間の端点で補正値を評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Domino Covering SUM 型の 盤面上の位置と局所遷移に対し、最小費用流と残余グラフを選び、状態と証明を一貫して設計できる。",
+      "text": "正負混在のセル値をもつ最大未被覆和を、任意 cardinality の最小重み二部 matching として HW≤2000 で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。",
+      "text": "1×1、1×2、全正、全負、負の辺同士が一セルを奪い合う小 grid を全 matching 列挙と比較し、k=0 と shift 補正を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

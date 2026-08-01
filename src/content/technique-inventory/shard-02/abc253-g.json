@@ -17,67 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc253-g「Swap Many Times」では、大量の swap の辞書順区間を完全な行と端の部分行へ分け、完全行を少数回の列反転として合成する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "交換列を左端lごとの行に分けると、一行全体の交換(l,l+1),(l,l+2),…,(l,N)は、位置lの要素を末尾へ送り間を一つ左へ詰める回転になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc253-g「Swap Many Times」では、大量の swap の辞書順区間を完全な行と端の部分行へ分け、完全行を少数回の列反転として合成する。この状態表現から答えを構成する。",
+        "approach": "端の部分行だけ逐次処理し、完全な連続行を反転で一括処理",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "L,Rを含む行は高々二つだけなので直接交換でき、中間の完全行が作る連続回転は二回のsuffix反転へまとめられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "LからRまで全交換をシミュレート",
+        "decision": "rejected",
+        "decisionReason": "交換回数が最大N(N-1)/2で、N=2×10^5では二次時間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "一行分の swap 列が suffix の cyclic shift に等しく、連続する完全行の合成が二回の反転と一致する。",
+        "text": "三角数の累積からL,Rが属する左端行を求めれば、範囲を先頭部分・完全行群・末尾部分へ分割できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Swap Many Times 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "連続するk個の完全行はsuffixの左回転であり、対象suffixとk個分後ろのsuffixを反転する形で線形時間に実現できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc253-g「Swap Many Times」では、大量の swap の辞書順区間を完全な行と端の部分行へ分け、完全行を少数回の列反転として合成する。この状態表現から答えを構成する。",
+      "text": "三角数を64ビットで計算してL,Rの行と行内位置を求める。最初と最後の不完全行の交換を直接行い、その間の完全行群があれば対応するsuffix回転を二回のreverseでまとめて適用する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列反転と操作列の合成",
-      "trigger": "制約と操作を整理したときに 配列反転と操作列の合成 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc253-g「Swap Many Times」では、大量の swap の辞書順区間を完全な行と端の部分行へ分け、完全行を少数回の列反転として合成する。この状態表現から答えを構成する。で 配列反転と操作列の合成 を問題固有の状態へ適用する。",
+      "name": "規則的操作列のブロック分解",
+      "trigger": "非常に長い操作列が短い行パターンの連結として定義される。",
+      "application": "順位を三角数で行へ写し、端の部分ブロックと中央の完全ブロックへ分ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "回転の反転実装",
+      "trigger": "同じ区間に対する連続した移動操作を一括適用したい。",
+      "application": "完全交換行の合成をsuffix回転とみなし、reverseの組合せで実装する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "一行の多数交換を個別操作ではなく「先頭要素を末尾へ送る回転」と認識すると、連続行の合成まで閉じた形で扱える。",
+      "reusablePerspective": "巨大な規則的操作列では、完全ブロックの合成作用を先に求め、端だけを逐次処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列反転と操作列の合成",
+      "text": "三角数の単調性から操作順位が属する行を二分探索できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "配列の回転を反転操作の組合せで実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "L・R を行内 offset へ変換し、完全行の前後に残る O(N) 個の swap だけを直接実行する。",
+      "text": "L,Rは1始まりの交換番号なので、行先頭の累積数とのずれを確認する。三角数は64ビットで持ち、L,Rが同じ行なら中央処理を行わない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Swap Many Times 型の問題に対し、配列反転と操作列の合成を選び、状態と証明を一貫して設計できる。",
+      "text": "辞書順に並ぶ交換操作のL番目からR番目だけを適用した最終順列を高速に構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "L・R を行内 offset へ変換し、完全行の前後に残る O(N) 個の swap だけを直接実行する。",
+      "text": "Nが小さい全交換シミュレーションと比較し、L=R、同一行内、行境界ちょうど、複数の完全行だけを含む範囲を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

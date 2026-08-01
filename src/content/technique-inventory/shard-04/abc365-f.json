@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc365-f「Takahashi on Grid」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "行を進められるなら先に進んでも損をせず、次行の通行可能区間[L,U]に現在yが入らなければ、その端点まで縦移動してから横へ一歩進むのが最短である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "連続行区間を通過した後のyはclamp(y,f_L,f_U)、移動回数はC+max(0,g_L−y,y−g_U)という定数個のparameterで表せ、隣接区間の合成でも形が閉じる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc365-f「Takahashi on Grid」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各行区間をclamp写像と凸な距離関数のsummaryにし、segment treeでquery範囲を順序付き合成する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "最大20万行を一歩ずつ辿らず、最終yと縦横移動costを定数サイズmonoidとしてまとめられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各queryで開始行から終了行までgreedy移動を一行ずつsimulationする。",
+        "decision": "rejected",
+        "decisionReason": "一本のqueryは正しく解けても、長い行区間を含むqueryが多数来ると同じclamp処理を繰り返す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+        "text": "clampの合成は再びclampであり、出力可能区間fは前区間端点を後区間へclampして求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Takahashi on Grid 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "cost関数も平坦区間gとそこからの距離という凸な形を保ち、合成後のCは代表点g_Lを代入して評価できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc365-f「Takahashi on Grid」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各行をsummary(f=[L_i,U_i],g=[L_i,U_i],C=1)としてsegment treeへ載せる。queryは必要なら始終点をswapし、中間の行summaryを左から合成する。開始yへsummaryのcost式を適用して横断costを得て、到達y=clamp(startY,f)からtargetYまでの差を足す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc365-f「Takahashi on Grid」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "区間関数合成segment tree",
+      "trigger": "列上の各要素が状態遷移関数で、範囲適用queryが多数あるとき。",
+      "application": "関数を定数parameterへ圧縮し、結合順を保つsegment tree積として取得する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "セグメント木と monoid",
-      "trigger": "制約と操作を整理したときに セグメント木と monoid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc365-f「Takahashi on Grid」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で セグメント木と monoid を問題固有の状態へ適用する。",
+      "name": "clampと一次凸関数の閉包",
+      "trigger": "区間制約へ射影しながら移動距離を累積するとき。",
+      "application": "到達位置をclamp、追加costを平坦区間からの距離で表す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "greedy path全体ではなく「任意の開始yをどこへ写し何歩使うか」というtransfer functionを持つとquery間で再利用できる。",
+      "reusablePerspective": "経路queryでは区間の答えを単値でなく境界状態に対する関数として要約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "segment tree上の非可換monoid",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "セグメント木と monoid",
+      "text": "clamp関数と凸区分線形関数",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "合成は交換可能でないためleft/right accumulatorの順序を守る。同じ行のquery、始終点swap、横移動回数をsummaryに含める範囲を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Takahashi on Grid 型の 盤面上の位置と局所遷移に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。",
+      "text": "行ごとのgreedy移動を閉じたtransfer functionへ圧縮し、多数の二点最短距離queryへ合成利用できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "二行だけのsummaryを全y領域で手計算して合成式と照合する。segment tree queryが返す行範囲と、最後の縦移動を別々に管理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

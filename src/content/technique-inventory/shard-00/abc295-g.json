@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc295-g「Minimum Reachable City」では、主解法候補として、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "追加辺u→vは元の親木上でvからuへのpathと交わる既存SCCを全て一つへ併合する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc295-g「Minimum Reachable City」では、主解法候補として、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "SCCをDSU、path圧縮を最小頂点jumpで管理",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各SCCの最小番号が黒木上の最上位なので、それを辿ってpath上の成分だけを併合し、一度吸収された境界を再訪しない償却処理ができる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "辺追加ごとにSCC分解",
+        "decision": "rejected",
+        "decisionReason": "Q回O(N+Q)で過大。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同一強連結成分内では相互到達可能であり、成分間を縮約すると閉路のない DAG になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Minimum Reachable City 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "各SCCは元の有向木上の連結部分木で、xから到達できる最小番号はx所属SCCの最上位頂点になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc295-g「Minimum Reachable City」では、主解法候補として、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "DSU各rootに成分最小頂点を持つ。追加クエリではv側成分からuを含む成分まで最小頂点と親を使って上りながらunionし、出力はfind(x)の最小頂点を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc295-g「Minimum Reachable City」では、主解法候補として、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "DSUによる単調SCC併合",
+      "trigger": "辺追加でSCCが分裂せず併合だけする。",
+      "application": "連結成分と最小頂点をunionで維持する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "強連結成分分解",
-      "trigger": "制約と操作を整理したときに 強連結成分分解 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc295-g「Minimum Reachable City」では、主解法候補として、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 強連結成分分解 を問題固有の状態へ適用する。",
+      "name": "path compression jump",
+      "trigger": "木path上の未併合境界を繰り返し越える。",
+      "application": "吸収済み区間を代表値で飛ばし総移動を償却する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "p_i≤iにより頂点番号が木の祖先方向と対応し、SCC最小番号がpath探索のjump pointerを兼ねる。",
+      "reusablePerspective": "単調併合問題では成分の極値を次の未処理位置として使う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "強連結成分分解",
+      "text": "DSUとfunctional/tree path上の償却圧縮。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "元頂点から成分番号への写像と、重複する成分間辺の扱いを明確にする。",
+      "text": "クエリの到達保証が示すu,vの祖先方向を取り違えず、union後の最小頂点を即更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Minimum Reachable City 型の 頂点と辺からなる状態グラフに対し、強連結成分分解を選び、状態と証明を一貫して設計できる。",
+      "text": "辺追加後に各都市から到達可能な最小番号を答えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "元頂点から成分番号への写像と、重複する成分間辺の扱いを明確にする。",
+      "text": "小木で毎回SCCを再計算し、鎖・枝分かれ・既に同SCCの追加・長path一括併合を比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

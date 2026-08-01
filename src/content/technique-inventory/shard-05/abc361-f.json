@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc361-f「x = a^b」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "x>1を素因数分解した指数の最大公約数gを取ると、x=a^bと表せる指数bはgの2以上の約数と一致する。よって完全冪の重複は指数側の約数関係で生じる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "N≤10^18では底a≥2に対する指数は60未満だけ調べればよく、各bについてa^b≤Nとなる底の最大値を安全な整数判定で求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc361-f「x = a^b」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "square-freeな指数bだけをMöbius符号付きで数え、floor(N^(1/b))−1を包除して最後にx=1を加える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "複数指数で表せる完全冪を、指数の素因数集合に対する包除でちょうど一度数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全てのa,bからa^bを生成してsetへ入れ、重複を除いて数える。",
+        "decision": "rejected",
+        "decisionReason": "平方数だけでも底が10^9まであり、全生成物を保持・列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "算術の基本定理により正整数の素因数指数表現は一意で、積・割り切れ条件を指数ごとに判定できる。",
+        "text": "bが平方因子を持つ項のMöbius係数は0で無視し、異なる素因数の個数が奇数なら加算、偶数なら減算する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "x = a^b 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "浮動小数のb乗根は境界で丸め誤差を起こすため、二分探索中の累乗をN超過時に打ち切る整数比較でfloor rootを確定する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc361-f「x = a^b」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "答えをx=1の1で始める。b=2..59についてbがsquare-freeかと素因数個数の偶奇を調べ、二分探索で最大a≥2 satisfying a^b≤Nを得る。その個数a−1を包除符号に従って加減する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc361-f「x = a^b」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "指数集合へのMöbius包除",
+      "trigger": "同じ対象が複数の倍数・約数条件で表現されるとき。",
+      "application": "square-free指数だけを素因数数のparityで符号付けして重複を消す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "素因数分解と約数列挙",
-      "trigger": "制約と操作を整理したときに 素因数分解と約数列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc361-f「x = a^b」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 素因数分解と約数列挙 を問題固有の状態へ適用する。",
+      "name": "overflow-safe整数冪判定",
+      "trigger": "大きな上限以下のk乗根を厳密に求めるとき。",
+      "application": "乗算前にlimit/baseを比較し、超過を早期検出する二分探索を行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "値xの重複表現を直接整理する代わりに、素因数指数のgcdが持つ素因数へ包除を掛けると分類が一意になる。",
+      "reusablePerspective": "冪の重複は底ではなく指数のdivisibility latticeで見るとMöbius反転が現れる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "包除原理とMöbius関数",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "素因数分解と約数列挙",
+      "text": "整数二分探索",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。",
+      "text": "a=1由来のx=1を別扱いし、各root個数からa=1を除く。累乗計算は掛け算後でなく前にoverflowを検知する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "x = a^b 型の 整数の約数・剰余構造に対し、素因数分解と約数列挙を選び、状態と証明を一貫して設計できる。",
+      "text": "完全冪の重複を指数のsquare-free包除で除き、巨大な値域を少数の整数乗根計算へ圧縮できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。",
+      "text": "64=2^6のような値で指数2,3,6から何回数えられ符号和が1になるか確認する。root境界はk^b=Nと直前直後を必ず試す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

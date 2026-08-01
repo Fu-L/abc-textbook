@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc384-f「Double Sum 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各pair和sを2で割れるだけ割った値は、v2(s)=kごとにs/2^kとして集計できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "d_kを2^kで割り切れるpairのs総和とすれば、v2(s)=kの層はd_k-d_{k+1}であり、答えはΣ(d_k-d_{k+1})/2^kになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc384-f「Double Sum 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "2冪modulusごとに補数剰余の個数・総和を辞書で数え、divisibility layerを差分する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "A_i+A_j≡0 mod 2^kを-A_jの剰余lookup一回で数えられ、kは最大25程度なのでO(N log maxA)で全d_kを得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全i≤jの和を作り、各和の2-adic valuationを求める",
+        "decision": "rejected",
+        "decisionReason": "pairがΘ(N^2)個ありN=2×10^5では列挙不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "jを昇順に処理し、現在までのA_iを剰余別のcount Cとsum Sで持つと、このjの寄与はC×A_j+Sになる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Double Sum 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "d_kはv2がk以上のpairを重複包含するため、隣接差分でちょうどkの層へ戻す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc384-f「Double Sum 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "k=0..25ごとにmod=2^kとし、空mapからjを順に見る。key=(-A_j mod mod)のcount,sumでd_kへ加算してからA_j mod modへ自身を登録する。最後に層差分式を計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc384-f「Double Sum 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "valuation層の累積差分",
+      "trigger": "量を最大冪因子などのexact level別に集計したいとき。",
+      "application": "2^kで割れる累積d_kからd_k-d_{k+1}でv2=kを取り出す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc384-f「Double Sum 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "剰余補数pair counting",
+      "trigger": "pair和のmod条件と値の総和を同時に数えたいとき。",
+      "application": "補数剰余bucketへcountと原値sumを持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "割った後の値を直接分類するのでなく、割り切れるpair和の総和を全kで数えると、valuationの重みを単純な差分として処理できる。",
+      "reusablePerspective": "exactな指数条件は「少なくともk」の累積量の方が数えやすいことが多く、隣接差分を検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "合同式と2-adic valuationを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "剰余演算と modular inverse",
+      "text": "hash mapで個数・総和を同時集計できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "i=jを含むのでlookup後ではなく、自身を登録する前後の順序を公式の添字条件に合わせる。負剰余を0..mod-1へ正規化し、総和は64 bit整数で持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Double Sum 2 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "pair和の最大2冪除去後の総和を、剰余bucketとvaluation層差分でO(N log maxA)計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "N≤30で全pairを直接計算し、奇数和、同値、i=j、和が2冪そのもののcaseごとにd_kと差分層を照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

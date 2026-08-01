@@ -17,67 +17,121 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc289-f「Teleporter Takahashi」では、反射を二回組み合わせた ±2 平行移動を基本操作とし、座標 parity と退化区間を判定して操作列を構成する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "点(x,y)中心のreflectionは(p_x,p_y)→(2x-p_x,2y-p_y)なので、各座標のparityはどの操作でも不変である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "1次元で中心区間が1点aだけなら、偶数回後はs、奇数回後は2a-sに限られる。区間にa,a+1があれば、その順の2回で+2、逆順で-2を実現できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "2次元では操作回数の偶奇を両座標で共有するため、singletonなx/y区間が要求する偶奇が矛盾しないことも必要になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc289-f「Teleporter Takahashi」では、反射を二回組み合わせた ±2 平行移動を基本操作とし、座標 parity と退化区間を判定して操作列を構成する。この状態表現から答えを構成する。",
+        "approach": "到達可能性を座標parityとsingleton軸の操作回数parityで判定し、必要なら最初に1回反射してから±2平行移動pairを並べる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "x,yを変えない2操作単位で一方ずつ調整でき、共有する偶奇だけを先に整えれば具体的な操作列を構成できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "x座標用とy座標用の1次元操作列を独立に作って単純に連結する。",
+        "decision": "rejected",
+        "decisionReason": "各reflectionは両座標へ同時に作用し、特にsingleton軸が要求する総操作回数の偶奇が衝突し得る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "現在点からtargetへ近づく中心を毎回greedyに選ぶ。",
+        "decision": "rejected",
+        "decisionReason": "reflectionは距離を単調に減らすとは限らず、到達不可能条件や10^6回上限の保証を与えない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "一回の反射は座標 parity を保ち、異なる二中心での連続反射が差の二倍の平行移動になる。",
+        "text": "(a,c),(a+1,c)の2操作はyを元へ戻してxだけ+2し、逆順ならxだけ-2する。y方向も(a,c),(a,c+1)の順序で同様に独立調整できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Teleporter Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "singleton軸でtargetが初期値なら偶数、中心反射値なら奇数を要求する。奇数が必要なら最初に(a,c)で1回反射し、残りを偶数回のtranslationへ帰着する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc289-f「Teleporter Takahashi」では、反射を二回組み合わせた ±2 平行移動を基本操作とし、座標 parity と退化区間を判定して操作列を構成する。この状態表現から答えを構成する。",
+      "text": "まずs_x≡t_x、s_y≡t_y (mod 2)を確認する。a=bならt_xがs_xまたは2a-s_xか、c=dならyも同様かを調べ、singleton軸同士の要求parityが一致しなければNo。成立時、要求parityが奇なら(a,c)を1回出力して現在点を更新する。x差が正なら(a,c),(a+1,c)、負なら逆順を|差|/2回、yも(a,c),(a,c+1)または逆順で調整し、Yesと操作列を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "一次元反射の合成と parity",
-      "trigger": "制約と操作を整理したときに 一次元反射の合成と parity の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc289-f「Teleporter Takahashi」では、反射を二回組み合わせた ±2 平行移動を基本操作とし、座標 parity と退化区間を判定して操作列を構成する。この状態表現から答えを構成する。で 一次元反射の合成と parity を問題固有の状態へ適用する。",
+      "name": "reflection合成によるtranslation",
+      "trigger": "中心反転を複数回使って目標座標へ構成的に移動するとき。",
+      "application": "近接2中心での反射を合成して±2の平行移動を作る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "不変量と退化case",
+      "trigger": "操作可能領域が区間で、長さ0の場合だけ自由度が失われるとき。",
+      "application": "座標parityに加え、singleton中心での操作回数parityを判定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "構成問題の現在状態更新",
+      "trigger": "出力操作列を段階的に組み立てるとき。",
+      "application": "各reflection後の現在座標を更新し、残差をtranslation pairで消す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "2操作を同じy中心で行えばyへの反射が相殺され、xだけを動かせるため、2次元の結合は総操作回数parity以外ほぼ分離できる。",
+      "reusablePerspective": "複数座標へ同時作用する操作は、短い操作列を合成して不要座標への作用をidentityにできないか探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "一次元反射の合成と parity",
+      "text": "点対称移動の座標式",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "parity invariant",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "constructive algorithm",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "区間幅が零の軸、奇数回が必要な初手、二座標の操作回数 parity を揃える。",
+      "text": "a=bのときa+1を、c=dのときc+1を中心として出力しない。必要な差が非zeroなら対応区間が非退化であることを判定済みにする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "最初の奇数回reflection後にcurrent x,yを両方更新してからtranslation回数を計算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "最大でも先頭1回と両座標差に比例する80万回余りで、10^6上限内だがvector容量と出力時間を考慮する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Teleporter Takahashi 型の問題に対し、一次元反射の合成と parityを選び、状態と証明を一貫して設計できる。",
+      "text": "rectangle内の格子点中心reflectionだけでtargetへ到達可能か判定し、上限内の具体的な操作列を構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "区間幅が零の軸、奇数回が必要な初手、二座標の操作回数 parity を揃える。",
+      "text": "両区間がsingletonで一方だけ反射を要求する不可能例と、片軸だけ非退化な可能例を試し、初回reflection後の±2 pairが他軸を保つか追う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

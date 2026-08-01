@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc236-g「Good Vertices」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "辺の追加時刻をその辺の重みとすると、時刻 t までにちょうど L 辺で到達可能とは、使用辺の最大重みが t 以下の L-step walk があることと同値である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "求める最早時刻は、頂点 1 から各頂点へのちょうど L 辺 walk が持つ最大辺重みの最小値という bottleneck DP になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc236-g「Good Vertices」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "移動回数 i＝1 から L まで、各辺で bottleneck DP を一段ずつ更新する。",
+        "decision": "rejected",
+        "decisionReason": "L が 10 億まであり、移動回数に比例する反復はできない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "辺時刻行列を、加法を min、乗法を max とする半環上で累乗し、長さ L の walk の最小 bottleneck を一括計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "二つの walk を連結すると最大辺重みは max、経路候補から最良を選ぶ演算は min で、行列積の結合則により二分累乗できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Good Vertices 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "(P⊗Q)_{ij}=min_k max(P_{ik},Q_{kj}) は、前半と後半の walk を中継点 k で連結したときの bottleneck 最小化そのものである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc236-g「Good Vertices」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "時刻付き有向グラフの exact-length bottleneck path DP を (min,max) semiring の行列積へ写し、隣接行列の L 乗を繰り返し二乗法で初期ベクトルへ作用させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc236-g「Good Vertices」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "半環上の行列累乗",
+      "trigger": "固定長 walk の DP 遷移が結合的な二演算で行列積と同じ形になり、長さが巨大なとき。",
+      "application": "通常の和・積を min・max に置換し、二分累乗で L 回の遷移を合成する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc236-g「Good Vertices」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "bottleneck path",
+      "trigger": "経路費用が辺重みの和でなく最大値で、候補経路間では最小を取りたいとき。",
+      "application": "辺の追加時刻を重みとし、walk の最大辺時刻をその頂点が良くなる時刻として最小化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "「ちょうど L 回」が重要で、短い到達を流用できないため、半環単位行列の対角 0 は累乗の初期化にだけ使い、元隣接行列へ勝手な待機辺を加えない。",
+      "reusablePerspective": "行列累乗で walk を数えるときは、exact length と at most length を区別し、自己ループの有無を入力通りに保つ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "行列積の path 解釈、bottleneck 費用、繰り返し二乗法を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "存在しない辺と到達不能を十分大きい INF、半環単位行列を対角 0・非対角 INF とする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "入力辺 (u_t,v_t) の行列値は t とし、最終値が INF の頂点だけ −1 を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Good Vertices 型の 頂点と辺からなる状態グラフに対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な正確歩数の最小 bottleneck 到達時刻を、(min,max) 半環の行列累乗で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "DP の一段遷移に min と max が現れたら、通常の行列積の和・積を置換した半環として結合できるか確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "時間増加グラフでは、最早時刻を「経路中の最大追加時刻の最小値」へ変換すると静的な path 問題になる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc419-f「All Included」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "文字列を左から生成すると、将来pattern出現に影響する過去情報は「末尾のうちいずれかのS_iのprefixでもある最長suffix」と既出pattern集合だけである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "全pattern長合計は高々80なので、Aho-Corasick automatonでこのsuffix状態と一文字遷移、遷移時に新たに含まれるpattern maskを小さく持てる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc419-f「All Included」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Aho-Corasick状態×既出pattern bitmaskの長さDP",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "26文字を追加してautomaton遷移し、destinationのoutput maskをORする。dpをL回進めたfull maskの総数が答えで、O(L·states·2^N·26)。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "26^L個の文字列を生成して各S_iをsubstring検索する",
+        "decision": "rejected",
+        "decisionReason": "候補数が指数的で、pattern matchingに必要なsuffix情報をautomaton stateへ共有できていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "failure link先のoutput maskもnodeへ伝播すれば、ある文字追加で終端するpatternだけでなく、そのsuffixとして同時に出現する短いpatternも一度のORで記録できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "All Included 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "未登録文字の遷移もfailure linkに従うcomplete DFAへ前計算すれば、DP内の一文字遷移をO(1)にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc419-f「All Included」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "S_iをtrieへ挿入して終端nodeにbit iを立て、BFSでfailure link・全26遷移・累積output maskを構築する。dp[start][0]=1からL文字、各state/mask/charでnextStateへ進みmask|output[nextState]へ加算し、最後にmask=(1<<N)-1を全stateで足す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc419-f「All Included」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "Aho-Corasick automaton",
+      "trigger": "複数patternのsubstring出現を文字列生成DPの有限suffix状態にしたいとき。",
+      "application": "trieとfailure linkでprefix/suffix一致をDFA遷移として前計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc419-f「All Included」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "bitmask DP",
+      "trigger": "必要pattern数N≤8で、どれが既出かを追うとき。",
+      "application": "automaton output集合をmaskへORして全包含状態を数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "文字列生成DP",
+      "trigger": "固定長のalphabet列を左から作り、有限automatonで性質を判定するとき。",
+      "application": "位置・automaton state・付加maskを状態に26遷移する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "substring条件を各patternごとのKMP状態で別々に持たず、共有prefix trieとfailure suffixで合成した一automatonにまとめる。",
+      "reusablePerspective": "複数substring制約の生成数え上げでは、AC state＋達成maskが標準的な十分統計量になる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "trie、KMP failureの考え方、Aho-Corasick、bitmask DPを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "failure link構築時にoutput maskを親failからORし、rootの欠損遷移をrootへ張る。DPはexact length L、加算はmod 998244353、rolling arrayでmemoryを抑える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "All Included 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "長さ100の全26進文字列から、最大8patternをすべてsubstringに含むものを制約内で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "patternが他patternのsubstring、共通prefix、重なって同時出現、Lが最長pattern未満の例を小alphabet全列挙と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

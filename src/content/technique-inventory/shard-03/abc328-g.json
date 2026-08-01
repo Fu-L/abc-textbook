@@ -17,77 +17,125 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc328-g「Cut and Reorder」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "split-and-reorderを複数回行っても、使った全cut位置でAを細分したblockを1回で同じ順に並べればよく、reorder操作は高々1回でよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "reorder後のAは、元indexの互いに素な連続区間を各区間内順序を保ったまま並べたpermutationとして表せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "block数がqならcut costは(q-1)Cで、各出力位置iに元indexp_iを置くvalue調整costは|A_{p_i}-B_i|である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc328-g「Cut and Reorder」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "使用済み元index集合Sを状態にし、未使用の連続区間を次blockとしてappendするsubset DP。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N≤22で全permutation N!を避け、全interval遷移数をO(N2^N)へ抑えつつblock costと位置別差を加算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "Aの全permutationを列挙し、各permutationの最小cut数とvalue差を評価する。",
+        "decision": "rejected",
+        "decisionReason": "N=22でN!候補は不可能である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各B_iへ近いA_jを独立にassignmentするminimum-cost matching。",
+        "decision": "rejected",
+        "decisionReason": "選んだindex順が元Aのcontiguous block列として実現できるcut costを無視する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "dp[S]は出力prefix長|S|までにSのindexを何らかのblock順で置いた最小確定costとし、次block[l,r]のtarget位置は|S|+1から自動的に決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Cut and Reorder 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Sと[l,r]がdisjointならappend可能で、Sが非空なら新block境界cost Cを1回加える。連続してmerge可能な冗長block表現は、より早い1区間遷移が同じ並びを安く表す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "長さk intervalを追加できるmaskは2^{N-k}個なので、全mask・全intervalの総遷移数はO(N2^N)に収まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc328-g「Cut and Reorder」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "dp[0]=0、他INFとする。各mask Sについて全original interval [l,r] whose bitmask I is disjoint from Sを列挙し、pos=popcount(S)としてadd=Σ_{t=0}^{r-l}|A_{l+t}-B_{pos+1+t}|を求める。dp[S|I]=min(dp[S|I],dp[S]+add+(S≠0?C:0))と更新する。intervalとtarget開始位置ごとのaddは前計算または延長時の累積でO(1)取得し、dp[(1<<N)-1]を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc328-g「Cut and Reorder」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "subset DPへのblock append",
+      "trigger": "元列をcontiguous blockへ分け、block順を自由に並べてtarget列へ合わせるとき。",
+      "application": "使用済みindex maskへ未使用interval maskを追加する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc328-g「Cut and Reorder」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "操作合成による一回化",
+      "trigger": "複数回のcut/reorderが、全cutの共通細分化を一度並べ替える操作で再現できるとき。",
+      "application": "最終block partitionだけを最適化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "interval長別の遷移総数評価",
+      "trigger": "subset状態からdisjoint contiguous intervalを追加するとき。",
+      "application": "長さkごとに2^{N-k}(N+1-k)を足してO(N2^N)と見る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "出力prefixの具体的な元index順を保持せず、同じ使用済み集合に至る全block順の最小costだけを残しても、次intervalのvalue costはprefix長|S|だけで決まる。",
+      "reusablePerspective": "subset DPでは履歴順が目的関数へ影響しても、将来寄与が集合sizeと新blockだけに依存するなら最小履歴へmergeできる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
+      "text": "bitmask subset DP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "contiguous interval bitmask",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "popcountとamortized遷移数",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "value差とcut costの総和は10^16級になり得るため64bit整数の上限に余裕あるINFを選び、加算overflowを避ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "最初のblockにはCを加えず、intervalの出力先B indexがpopcount(mask)から始まることを揃える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "N=22で1<<Nは32bit内だがmask計算型とbit shift literalを明示する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Cut and Reorder 型の 順列の位置と値の対応に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "block reorderと要素値調整を合わせた最小costを、連続区間append型subset DPで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "rotationを2 blockで作る例と、元順の1 block例をDP遷移にし、最初のblock無料・以後CとB位置の対応を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

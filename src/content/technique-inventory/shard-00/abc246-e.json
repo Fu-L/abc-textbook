@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc246-e「Bishop 2」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "bishop は斜めにしか進まないため、始点と終点のマス色が異なれば到達不能である。ただし同色でも pawn による分断があり、最短手数の探索が必要になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "1 手の長い斜め移動を 1 マスずつに分けると、直前と同じ方向への継続は手数 0、方向を変えて進み始めると手数 1 と表現できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc246-e「Bishop 2」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "状態を (マス,直前の斜め方向) とし、同方向への辺を重み 0、別方向への辺を重み 1 とした 01-BFS を行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各マス 4 状態と隣接 4 方向だけで bishop の任意距離移動を表し、盤面全体を線形規模で探索できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各マスから同じ斜線上で pawn までの全マスへ、1 手の辺を明示して通常 BFS を行う。",
+        "decision": "rejected",
+        "decisionReason": "開けた盤面では 1 状態から O(N) 本の辺が生じ、N≤1500 に対して辺列挙が大きくなる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "deque の先頭距離は非減少で、重み 0 の緩和を前、重み 1 を後へ置くことで Dijkstra と同じ確定順を保つ。",
+        "text": "同じ斜め方向に何マス進んでも 0-cost 辺の連鎖なので、最初に方向を選んだ 1 回だけが bishop の 1 手に対応する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Bishop 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "辺重みが 0 と 1 だけなので、距離が改善した 0-cost 状態は deque 前方、1-cost 状態は後方へ入れれば距離順に確定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc246-e「Bishop 2」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "始点から 4 方向状態へのコストを 1 として開始し、空きマス間の斜め隣接を 01-BFS する。同方向なら +0、方向変更なら +1 とし、終点の 4 状態の最小値を答える。未到達なら -1 とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc246-e「Bishop 2」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "01-BFS",
+      "trigger": "グラフの全辺重みが 0 または 1 で、最短距離を求めたいとき。",
+      "application": "方向継続を 0、方向変更を 1 として deque の前後へ緩和状態を入れる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "0-1 BFS",
-      "trigger": "制約と操作を整理したときに 0-1 BFS の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc246-e「Bishop 2」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 0-1 BFS を問題固有の状態へ適用する。",
+      "name": "直前操作を持つ状態拡張",
+      "trigger": "同じ場所への到達でも直前の選択により次のコストが変わるとき。",
+      "application": "盤面位置に 4 斜め方向を加え、次の移動が手の継続か新しい手かを判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "bishop の『任意距離を 1 手』は、方向を記憶して同方向の単位移動を無料にすることで疎な 01 最短路へ変換できる。",
+      "reusablePerspective": "長い一操作を単位遷移へ分ける際は、操作継続を 0、操作開始を 1 とする状態グラフを検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
+      "text": "deque を使う 01-BFS の緩和",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "0-1 BFS",
+      "text": "盤面探索と方向付き状態",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。",
+      "text": "始点ではまだ手を使っていないため、super source から各初期方向へコスト 1 とするか、初期距離を 1 にそろえる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "盤外または # への遷移は作らず、距離配列は N×N×4 の範囲で確保する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Bishop 2 型の 文字列の prefix・suffix と一致関係に対し、0-1 BFSを選び、状態と証明を一貫して設計できる。",
+      "text": "任意距離の斜め移動を方向付き 01-BFS に写し、最小 bishop 手数と到達不能を判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。",
+      "text": "一直線で答え 1、途中で方向転換して答え 2、始終点の色が異なり -1 の例を並べ、0-cost 継続と初期コストの対応を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

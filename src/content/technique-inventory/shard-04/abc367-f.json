@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc367-f「Rearrange Query」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "二つの区間を並べ替えて一致できる条件は、長さと各値の出現回数が一致すること、すなわちmultiset equalityである。順序情報は不要である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各値vへ独立なrandom weight h(v)を割り当て、区間hashを重みの和とすれば、同じmultisetは必ず同じ値になり、異なるものの衝突確率を小さくできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc367-f「Rearrange Query」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "A,Bそれぞれでrandom value hashのprefix sumを作り、区間長とhash差を比較する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "multiplicityを加法的に反映し、各queryを定数回のprefix差へ落とせる確率的判定である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "queryごとに両区間をcopyしてsortし、一致するか比較する。",
+        "decision": "rejected",
+        "decisionReason": "長い区間queryが多数あると同じ要素を何度もsortし、入力上限に間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+        "text": "XOR hashでは同じ値が偶数回で消えるためmultiset頻度を表せないが、random weightの加算なら出現回数に比例して寄与する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Rearrange Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "prefixH[i+1]=prefixH[i]+h(A_i)とすれば、[l,r]のhashはprefixH[r]−prefixH[l−1]で得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc367-f「Rearrange Query」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "値1..Nへ十分広いrandom hashを割り当て、AとBのhash prefix sumを構築する。各queryで区間長が異なればNo、同じなら二つの区間hashを差分で求め、一致時Yes、不一致時Noを返す。必要なら独立hashを複数併用する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc367-f「Rearrange Query」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "Zobrist型multiset hashing",
+      "trigger": "静的列の多数区間について順序を無視した一致判定をしたいとき。",
+      "application": "要素ごとのrandom weightを加算して頻度vectorのfingerprintを作る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "累積和と差分",
-      "trigger": "制約と操作を整理したときに 累積和と差分 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc367-f「Rearrange Query」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 累積和と差分 を問題固有の状態へ適用する。",
+      "name": "hash prefix sum",
+      "trigger": "加法的区間fingerprintを高速に取り出すとき。",
+      "application": "列prefixを前計算し、二端点の差でquery hashを得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "順序を無視するためpolynomial rolling hashではなく、加算の可換性を持つhashが必要である。",
+      "reusablePerspective": "比較対象の同値関係に合わせ、hashの演算も順序依存か可換かを選ぶ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
+      "text": "randomized hashing",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "累積和と差分",
+      "text": "累積和",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "乱数seed・bit幅を選び衝突確率を十分下げる。overflowを意図したunsigned加算か素数modかを統一し、区間indexのinclusive境界を合わせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Rearrange Query 型の 区間端点と包含関係に対し、累積和と差分を選び、状態と証明を一貫して設計できる。",
+      "text": "区間multiset一致を可換なrandom fingerprintへ圧縮し、多数queryを高速に確率判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "同値な並べ替え例と、同じ和だが異なるmultisetの例で通常和との差を確認する。確率解法であることとhash生成方法をレビュー時に明示する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

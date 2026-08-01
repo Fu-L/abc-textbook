@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc345-e「Colorful Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "prefixからj個削除した時、将来のballを残せるかは現在右端のcolorとvalue総和だけで決まる。ただし新ballと同colorの最良stateを除外する必要があるため、各jでcolorが異なる上位二stateを残せば十分である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc345-e「Colorful Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "削除数ごとに末尾color別DPの上位二候補だけを保持する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "keep遷移のmax over color≠CをO(1)で取り、全体O(NK)へ圧縮できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "末尾color N種類を全て持つ三次元DP",
+        "decision": "rejected",
+        "decisionReason": "状態O(N^2K)となりN=2×10^5で保持・更新できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Colorful Subsequence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "ball(C,V)を残す遷移では、直前の最良stateのcolorがCでなければ一位、Cなら二位を使うだけである。削除遷移は前段j-1の上位二候補をそのまま引き継ぐので、新しい上位二は高々三候補から選べる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc345-e「Colorful Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "color 0,value 0のsentinelを削除数0の一位として初期化する。各ballを処理しjを範囲内で更新して、削除候補としてprev[j-1]の上位二、保持候補としてprev[j]のC以外の最良値+Vをcolor Cで生成する。候補をcolor別最大へ統合しvalue上位二をnext[j]へ置き、最後のj=Kの一位を出すか未到達なら-1。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc345-e「Colorful Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "除外付きtop-2 DP圧縮",
+      "trigger": "遷移が全category最大から指定category一つを除いた最大を要求する。",
+      "application": "異なるcategoryの一位・二位を持ち、除外対象が一位の時だけ二位を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc345-e「Colorful Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "exact deletion count DP",
+      "trigger": "各要素を削除するか保持するか選び、削除数を正確にKへ合わせる。",
+      "application": "jを削除済み個数として、deleteはj+1、keepは同じjへ遷移する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "上位二stateはvalue順位だけでなくcolorを異ならせる必要があり、同colorの複数候補は先に最大へ統合する。",
+      "reusablePerspective": "category除外maxの圧縮ではtop entriesのcategory distinctnessが不変条件になる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "subsequence DP、top-2 maximum、rolling array、負の無限大sentinel。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "同一iterationのstateを再利用しないようprev/nextを分離する。jの到達可能範囲を制限し、-INFへVを加えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Colorful Subsequence 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "exactly K ballsを削除して隣接colorを全て異ならせた時の残存value総和最大を求め、不可能なら-1を出せる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "全ball同色、K=N-1、同valueで異colorのtop tie、最良colorが新ballと一致する例を色全保持DPと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

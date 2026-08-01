@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc416-e「Development」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "airport間のcomplete graphを明示すると追加のたび二次本増えるが、sky頂点を一つ置きairport→skyをT、sky→airportを0とすれば任意airport間T時間を二辺で表せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "既知のall-pairs shortest distanceへ有向edge u→v,weight wを一つ追加した後のsimple最短路は、そのedgeを使わないかdist[i][u]+w+dist[v][j]として一度使うかである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc416-e「Development」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "skyを含むN+1頂点の距離行列をFloyd-Warshallで初期化し、各追加edgeをO(N^2)でincremental更新する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "roadは両向き二辺、airportはskyとの二有向辺として追加するだけなので、Q≤1000でもO(N^3+N^2Q)に収まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "airport追加ごとに新airportと全既存airportの航路edgeを追加し、それぞれincremental APSP更新する",
+        "decision": "rejected",
+        "decisionReason": "airport一件でO(N)辺、その各辺にO(N^2)を掛けると全体O(N^4)規模になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "許可する中継頂点集合について帰納し、最適路が新頂点を使う場合と使わない場合を網羅する。",
+        "text": "airport a→sky→b のcostはT+0=Tで、skyを中継して何空港を使っても負辺がないため正しい最短路表現を保つ。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Development 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "undirected road追加はx→yとy→xを順に処理でき、非負辺なので新辺を往復してさらに短くなるcycleはない。airport追加も同様に二辺更新する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc416-e「Development」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "text": "頂点0..N-1にsky=Nを加え、road両向きと既存airportのa→sky(T),sky→a(0)を入れてFloyd-Warshallする。query1は二有向edge、query2はskyとの二edgeを各dist[i][j]=min(dist[i][j],dist[i][u]+w+dist[v][j])で全pair更新する。query3は都市間の有限distだけ合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "online query の計算量設計",
-      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc416-e「Development」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "name": "hub頂点によるclique圧縮",
+      "trigger": "ある頂点集合の任意二点間を同一costで移動でき、集合が動的に増えるとき。",
+      "application": "skyへのT辺とskyからの0辺でairport cliqueをstarへ置換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Floyd–Warshall 法",
-      "trigger": "制約と操作を整理したときに Floyd–Warshall 法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc416-e「Development」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で Floyd–Warshall 法 を問題固有の状態へ適用する。",
+      "name": "incremental APSP",
+      "trigger": "edge追加だけがあり頂点数が数百のall-pairs shortest pathを保つとき。",
+      "application": "一新辺を通る候補を全(i,j)へO(1)ずつ緩和する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Floyd-Warshall",
+      "trigger": "初期graphの全頂点対距離が必要でNが500程度のとき。",
+      "application": "skyを含む距離行列の初期closureをO(N^3)で作る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "有向weight T/0のhubにより、airport同士の一律T travelを正確に表しながらairport追加を二edgeへ固定できる。",
+      "reusablePerspective": "動的clique edge追加では、共通移動costをenter/exit costへ分けたhub表現で更新本数を削減する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "online query の計算量設計",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Floyd–Warshall 法",
+      "text": "Floyd-Warshall、edge追加時の距離行列更新、有向hub graphを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "到達不能値同士を加算せず、更新順序 k-i-j を崩さない。",
+      "text": "INFを足す前に到達性を確認し、距離・全pair和は64 bitにする。type3はskyを除くN都市だけを数え、unreachable pairは0、同airportの再追加も害なく処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Development 型の 更新と問い合わせの時系列に対し、Floyd–Warshall 法を選び、状態と証明を一貫して設計できる。",
+      "text": "道路・airportの追加後も全都市対最短時間の総和を、一更新O(N^2)で答えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "到達不能値同士を加算せず、更新順序 k-i-j を崩さない。",
+      "text": "airport0/1個、同都市airport再追加、既存最短より長いroad、roadとflightを混ぜる例を毎回Floyd再計算と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

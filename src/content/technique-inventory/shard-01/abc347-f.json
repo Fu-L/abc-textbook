@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc347-f「Non-overlapping Squares」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "互いに交わらない三つの軸平行同サイズsquareには、少なくとも一つの水平または垂直分離線があり両側にsquareが存在する。二つある側も再度分離できるため、配置は二本の平行cutによる三stripか、直交cutを組み合わせた形の計6種類へ分類できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc347-f「Non-overlapping Squares」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "M-square和と各rectangle内最大を前計算し、6分割形を全探索する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "任意の最適三square配置をいずれかの分割が捕捉し、各領域の独立最大値を足してO(N^2)で評価できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "三つのtop-left座標を全探索する",
+        "decision": "rejected",
+        "decisionReason": "候補squareがO(N^2)個あり三重選択はO(N^6)で不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Non-overlapping Squares 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "分離線で三squareを1対2へ分け、2側も分離すると、横三段・縦三列の2形と、一領域に一つ、反対側を直交方向に二分する4回転が得られる。各領域がdisjointなので、その内部で最大和のsquareを独立に選んだ和がその分割の最適値である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc347-f「Non-overlapping Squares」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "2D prefix sumで各M×M top-leftのweight BをO(1)計算する。B上で上下左右および四隅方向のprefix/suffix maximum tableをO(N^2)前計算する。二本のcut位置、または一square側の境界と反対側の直交cutを列挙し、対応する三rectangle最大を定数時間で足す。6 orientationの最大を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc347-f「Non-overlapping Squares」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "幾何配置のseparator分類",
+      "trigger": "少数のdisjoint軸平行矩形を、各領域一個になるcut patternへ分けたい。",
+      "application": "projection intervalの連結性から水平/垂直separatorを示し、有限個の分割形を列挙する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc347-f「Non-overlapping Squares」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "2D directional maximum前計算",
+      "trigger": "多数のaxis-aligned rectangleについて内部に収まるsquare weight最大が必要で、query形がprefix/suffixに限られる。",
+      "application": "top-left weight gridに四方向の累積maxを作り、各分割領域をO(1)評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "squareの非重複判定をpairごとに行う代わりに、三領域が互いにdisjointなpartitionを先に選べば、三つの選択は独立なmaximum queryになる。",
+      "reusablePerspective": "packing問題はseparator theoremで有限partitionへ分類できると組合せ依存を消せる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "全探索と候補数の上界評価",
+      "text": "2D prefix sum、axis-aligned separator、directional prefix/suffix maxima。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "領域にM×M squareが収まるcut範囲だけを列挙し、Bのtop-left座標と元grid cell境界を混同しない。weightは最大3M²·10^9なので64bitを使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Non-overlapping Squares 型の 盤面上の位置と局所遷移に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "互いに重ならない三つのM×M subgridの要素和最大を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "横三段、縦三列、L字型4回転それぞれだけが最適となる小gridを作り、square三重全探索と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

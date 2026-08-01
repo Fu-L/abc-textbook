@@ -17,67 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc350-f「Transpose」では、対応括弧を stack で結び、括弧へ着いたら相方へ jump して走査方向を反転し、深さ parity で英字大小を変換する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "文字のcase反転回数はその文字を囲むparenthesis depthに等しく、奇数depthだけ事前toggleできる。残る効果は各matched区間で走査方向を反転することだけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc350-f「Transpose」では、対応括弧を stack で結び、括弧へ着いたら相方へ jump して走査方向を反転し、深さ parity で英字大小を変換する。この状態表現から答えを構成する。",
+        "approach": "括弧matchを前計算し、pointerと方向を反転させながら一度走査する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "nested reversalを文字列の実体反転なしで表現し、各positionをO(1)回訪れて線形時間にできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "innermost pairごとにsubstringをreverseして置換する",
+        "decision": "rejected",
+        "decisionReason": "長いnested区間を何度もcopy/reverseするとO(|S|^2)になり得る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各括弧対の内部は外側と逆向きに一度だけ走査され、入れ子深さの parity が文字反転回数と一致する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Transpose 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "位置iがparenthesisなら対応位置match[i]へjumpし、directionを反転することで、その括弧内部を反対向きに読む再帰と同じ巡回順になる。括弧を跨ぐたびdirectionが戻るためnested構造も自然に処理できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc350-f「Transpose」では、対応括弧を stack で結び、括弧へ着いたら相方へ jump して走査方向を反転し、深さ parity で英字大小を変換する。この状態表現から答えを構成する。",
+      "text": "stackで全parenthesis pair matchを求める同時にdepthを走査し、letterはdepth oddならcase toggleして保存する。i=0,dir=+1から、letterなら出力、parenthesisならi=match[i],dir=-dirとし、その後i+=dirする。範囲外へ出るまで続ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "括弧列の stack matching と方向反転",
-      "trigger": "制約と操作を整理したときに 括弧列の stack matching と方向反転 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc350-f「Transpose」では、対応括弧を stack で結び、括弧へ着いたら相方へ jump して走査方向を反転し、深さ parity で英字大小を変換する。この状態表現から答えを構成する。で 括弧列の stack matching と方向反転 を問題固有の状態へ適用する。",
+      "name": "matched delimiter jump",
+      "trigger": "properly nestedな区間ごとに内部走査方向が反転する。",
+      "application": "open/close対応indexを持ち、delimiter到達時に相手側へjumpしてdirection符号を変える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "depth parityによる作用合成",
+      "trigger": "各外側括弧操作が内部文字のcaseを一回toggleする。",
+      "application": "囲む区間数の偶奇だけを持ち、odd depthの文字を一度だけ反転する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "reversalとcase toggleを分離すると、caseは静的なdepth parity、順序はdirection付きwalkとなり、複雑な操作順の独立性を直接実装できる。",
+      "reusablePerspective": "nested区間作用は可換な属性変換と順序反転を別々のparity状態へ分解できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "括弧列の stack matching と方向反転",
+      "text": "parenthesis matching、stack、case conversion、bidirectional index traversal。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "jump 後に現在方向へ一歩進み、括弧自体を出力せず、大小変換を ASCII 前提にしない。",
+      "text": "parenthesis自体は出力しない。jump後にdirectionを反転してから一歩進める順序を固定し、|S|=5×10^5でも再帰stackを使わない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Transpose 型の問題に対し、括弧列の stack matching と方向反転を選び、状態と証明を一貫して設計できる。",
+      "text": "全matched parenthesis操作後に一意に得られる最終文字列をO(|S|)で構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "jump 後に現在方向へ一歩進み、括弧自体を出力せず、大小変換を ASCII 前提にしない。",
+      "text": "括弧なし、単一(ab)、二重((ab))、連結区間(a)(b)、大小混在を手操作結果と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

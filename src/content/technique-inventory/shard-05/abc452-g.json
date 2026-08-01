@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc452-g「221 Substring」では、主解法候補として、列を run-length encoding し、末尾 run から逆向きに長さと操作回数の漸化式を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "S を run-length encoding すると、221部分文字列の内部 run は値=長さ、両端 run は値≤長さである。各 run を値・0・値の短列へ置換すると候補は0を含まない部分列へ一対一対応する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc452-g「221 Substring」では、主解法候補として、列を run-length encoding し、末尾 run から逆向きに長さと操作回数の漸化式を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "RLE から変換列 T を作り、suffix array と LCP を構築する。各 suffix の先頭から0までの長さ zerofree と直前 suffix との LCP の差の正部分を足す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "辞書順 suffix 順に初めて現れる substring 長は LCP+1 以降であり、0を含まない最大長で打ち切ると distinct な有効 substring を一度ずつ数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "S の全連続部分文字列を列挙し、run 長が221条件を満たすか set で重複除去する。",
+        "decision": "rejected",
+        "decisionReason": "候補が Θ(N^2) 個あり、文字列比較と set 格納も大きすぎる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "有効入力では非 1 の run が隣接せず、操作による増減は直後の run 長だけで決まるため圧縮状態で再現できる。",
+        "text": "run が短すぎる v>m なら使用不能で0、ぴったりなら内部可の v、余裕 v<m なら左右端利用を区切る v,0,v に置換する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "221 Substring 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "suffix p_k から始まる新規有効 substring 数は max(0,zerofree[p_k]-LCP[k]) である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc452-g「221 Substring」では、主解法候補として、列を run-length encoding し、末尾 run から逆向きに長さと操作回数の漸化式を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "S を (v_i,m_i) に圧縮して規則により T を長さO(N)で生成する。T の suffix array・LCP を作り、後ろから各位置の次の0までの長さを求め、suffix順に正部分差を64 bitで合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc452-g「221 Substring」では、主解法候補として、列を run-length encoding し、末尾 run から逆向きに長さと操作回数の漸化式を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "run-length 条件の記号列変換",
+      "trigger": "部分文字列の各 run に内部・端点で異なる制約があるとき。",
+      "application": "利用可能性を sentinel 0 付きの短列へ符号化する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Run-Length Encoding と逆向き漸化式",
-      "trigger": "制約と操作を整理したときに Run-Length Encoding と逆向き漸化式 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc452-g「221 Substring」では、主解法候補として、列を run-length encoding し、末尾 run から逆向きに長さと操作回数の漸化式を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Run-Length Encoding と逆向き漸化式 を問題固有の状態へ適用する。",
+      "name": "suffix array による distinct substring 数え上げ",
+      "trigger": "禁止記号までに限った異なる連続部分列数を数えたいとき。",
+      "application": "suffix ごとの有効 prefix 長から前 suffix との LCP を引く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "複雑な run 条件を、候補 block 列に sentinel を挿入して単なる禁止記号なし substring へ変換できる。",
+      "reusablePerspective": "distinct substring は各 suffix が辞書順で初めて追加する prefix 長区間として数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Run-Length Encoding と逆向き漸化式",
+      "text": "run-length 条件の記号列変換、suffix array による distinct substring 数え上げと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "不可能となる隣接条件を先に検査し、各加算を modulus 上で正規化する。",
+      "text": "v<m の同じ run が左右端の二役を持つため v,0,v の対応を崩さない。LCP index と zerofree の位置 mapping を一致させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "221 Substring 型の 文字列の prefix・suffix と一致関係に対し、Run-Length Encoding と逆向き漸化式を選び、状態と証明を一貫して設計できる。",
+      "text": "distinct な221部分文字列をRLE変換列の禁止0なしdistinct substringへ帰着し、suffix arrayで線形級に数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "不可能となる隣接条件を先に検査し、各加算を modulus 上で正規化する。",
+      "text": "v>m、v=m、v<m の三runを端・内部として使えるか比較し、変換 T 上の substring との一対一対応を小例で確かめる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

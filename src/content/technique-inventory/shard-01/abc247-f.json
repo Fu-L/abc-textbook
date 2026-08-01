@@ -17,85 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc247-f「Cards」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "数 1,…,N を頂点、card i を P_i と Q_i を結ぶ辺とみなすと、全数を少なくとも 1 回出す条件は、選んだ辺が全頂点を被覆することになる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "P,Q がともに permutation なので各頂点には front 側と back 側から計 2 回接続し、loop や平行辺も許した 2-正則 graph、すなわち cycle 成分の集合になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc247-f「Cards」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。",
+        "approach": "各 cycle 成分の頂点数 m を求め、cycle の辺被覆数 g(m) を Fibonacci 型漸化式で前計算して成分ごとに掛ける。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "辺被覆条件が連結成分間で独立し、各成分はサイズだけで同じ円環二値列の数え上げになる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "N 枚の card subset を全列挙し、全ての数が現れるかを検査する。",
+        "decision": "rejected",
+        "decisionReason": "候補が 2^N 個あり、N≤2×10^5 では列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+        "text": "cycle 上で辺を選ぶ/選ばないを二値化すると、各頂点を覆う条件は隣接する 2 辺を同時に非選択にしない条件である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Cards 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "path 版 f(1)=2,f(2)=3,f(m)=f(m-1)+f(m-2) を使えば cycle 版は端の扱いを分けて求まり、g(1)=1,g(2)=3,g(3)=4 となる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc247-f「Cards」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。",
+      "text": "DSU または traversal で graph の連結成分サイズを集計する。N まで f と cycle 辺被覆数 g を前計算し、各成分の g(size) を 998244353 で乗算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "Union-Find",
-      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc247-f「Cards」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "name": "permutation からできる cycle 分解",
+      "trigger": "2 個の permutation の対応を辺にすると各頂点の次数が固定されるとき。",
+      "application": "P_i,Q_i を結ぶ多重 graph が 2-正則であることから cycle 成分へ分解する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc247-f「Cards」では、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。さらに、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "円環 DP",
+      "trigger": "隣接制約を持つ選択列が cycle 上にあり、先頭と末尾の整合も必要なとき。",
+      "application": "path の Fibonacci 型数え上げを端の辺の選択で場合分けして cycle の辺被覆数にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "card を選ぶ問題を number 頂点の辺被覆へ写すと、2 つの permutation が保証する次数 2 により一般 graph ではなく cycle DP だけで済む。",
+      "reusablePerspective": "入力の『各ラベルがちょうど一度ずつ現れる』条件は、構成 graph の次数や連結成分形を強く制約する手掛かりになる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "Union-Find",
+      "text": "辺被覆の定義と連結成分ごとの独立性",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "2-正則多重 graph の cycle 構造",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Fibonacci 型 DP",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "P_i=Q_i の self-loop 成分は size 1 で、その card を選ぶ 1 通りだけなので g(1)=1 とする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "size 2 は平行な 2 辺から少なくとも 1 本を選ぶ 3 通りであり、simple graph 前提の cycle traversal にしない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Cards 型の問題に対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "text": "両面 permutation card の被覆選択数を、2-正則 graph の cycle サイズ別 DP の積として数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "self-loop、2 頂点の平行辺、通常の 3-cycle を並べ、それぞれの g(1)=1,g(2)=3,g(3)=4 を手で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

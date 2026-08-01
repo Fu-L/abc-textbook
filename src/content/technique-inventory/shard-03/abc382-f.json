@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc382-f「Falling Bars」では、主解法候補として、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "下にあるバーから最終位置を確定すると、上のバーはそれを追い越さない。各列について確定済みバーの最上段位置 m_j が分かれば、新しい水平バーは被覆列の min(m_j)-1 まで落ちる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc382-f「Falling Bars」では、主解法候補として、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "初期行の降順にバーを処理し、列配列 m に区間 min query と区間代入を行う遅延セグメント木で最終行を決める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "未来の落下を列ごとの最上障害だけへ要約でき、各バーを O(log W) で配置できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "時刻ごと・番号順に全バーの一段落下をシミュレーションする。",
+        "decision": "rejected",
+        "decisionReason": "安定までの時間は H 級で、各時刻に N バーを調べると HN が最大4×10^10になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "作用の合成則と集約演算の準同型性により、遅延値を子へ配る前後で区間の表す値が変わらない。",
+        "text": "初期位置が下のバーは上のバーより先に障害となり、上のバーが途中で下側へ回り込むことはないため処理順を固定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Falling Bars 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "バーは水平かつ剛体なので、被覆するどれか一列で最初に衝突する高さ、すなわち区間 m の最小値が全体の停止位置を決める。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc382-f「Falling Bars」では、主解法候補として、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "バーを R 降順に sort し、m_j=H+1 で初期化する。各 (R,C,L) で y=min m[C..C+L)-1 を答えにし、同区間を y へ range assign する。元 index 順に出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc382-f「Falling Bars」では、主解法候補として、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "遅延評価セグメント木",
-      "trigger": "制約と操作を整理したときに 遅延評価セグメント木 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc382-f「Falling Bars」では、主解法候補として、区間作用と区間集約を monoid として設計し、lazy segment tree で更新と取得を両立する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 遅延評価セグメント木 を問題固有の状態へ適用する。",
+      "name": "落下過程の支持面 DP",
+      "trigger": "物体が追い越さず、下から確定すると上の最終位置が決まるとき。",
+      "application": "各座標列の最高障害を区間 query/update で管理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "長時間の同時シミュレーションを止め、安定状態を下から一回だけ構築する。",
+      "reusablePerspective": "横棒の停止は被覆列の中で最も高い障害一つが支配する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "遅延評価セグメント木",
+      "text": "遅延セグメント木、区間最小・区間代入、物体順序の不変性を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "作用合成の順序、単位作用、区間長を使う写像を同じ規約で実装する。",
+      "text": "同じ初期 R のバーは非交差なので順序によらないが、sort 規約を固定する。区間は [C,C+L)、空列初期値 H+1 とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Falling Bars 型の 盤面上の位置と局所遷移に対し、遅延評価セグメント木を選び、状態と証明を一貫して設計できる。",
+      "text": "10^100 時刻後の落下配置を、下からの一回の区間 DP として高速に構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "作用合成の順序、単位作用、区間長を使う写像を同じ規約で実装する。",
+      "text": "各列の m_j が何を表すかを言語化し、min-1 がバー全体の停止位置になる図を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

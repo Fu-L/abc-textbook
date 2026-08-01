@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc421-g「Increase to make it Increasing」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "range [L,R]への+1は差分dでd[L-1]へ+1、d[R]へ-1を移す操作になる。非減少条件は内部差分d[1..N-1]を全て非負にすることなので、余剰boxから不足boxへballを運ぶ問題になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc421-g「Increase to make it Increasing」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "差分indexを頂点とするmin-cost flow",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各許可rangeを一球移動cost1の有向辺にし、不足総量を満たす最小operation数をflow costとして得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各負差分を局所的に直すgreedy",
+        "decision": "rejected",
+        "decisionReason": "一つのoperationがどの余剰sourceをどの不足へ運ぶかの組合せがあり、局所選択は全体最小costを保証しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各増加路が残余グラフで最小費用なので、ポテンシャルを保った交換論により総費用の最適性が維持される。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Increase to make it Increasing 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "d_i>0は供給、d_i<0は需要で、index Nは最終値を上げても内部非減少性を壊さない無限供給源とみなせる。range操作(L,R)はRからL-1へunitを運ぶ。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc421-g「Increase to make it Increasing」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "sourceから正d_iへcapacity d_i、負d_iからsinkへcapacity -d_i、sourceからNへINF、各rangeにR→L-1 capacity INF cost1を張る。需要Kのmin-cost flowが流れなければ-1、流れればcostを出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc421-g「Increase to make it Increasing」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "差分によるrange update変換",
+      "trigger": "range一様加算を端点二箇所の変化へ写す。",
+      "application": "Aの拡張差分d_0…d_Nで操作をunit transferとして表す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最小費用流と残余グラフ",
-      "trigger": "制約と操作を整理したときに 最小費用流と残余グラフ の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc421-g「Increase to make it Increasing」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 最小費用流と残余グラフ を問題固有の状態へ適用する。",
+      "name": "min-cost flow",
+      "trigger": "供給から需要へ許可edgeを通してunitを運び、edge使用回数和を最小化する。",
+      "application": "不足総量をrequired flowとし、range edgeだけcost1にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "末尾差分d_Nは負でもよいため、box Nを無限供給にすることで総和保存と目的制約を同時に表現できる。",
+      "reusablePerspective": "制約外の境界differenceをslack source/sinkとしてflow modelへ組み込む。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "最小費用流と残余グラフ",
+      "text": "difference array、min-cost max-flow。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。",
+      "text": "d_0=A_1とd_N=-A_Nを含むindexを正しく作り、required flowは内部0..N-1の負分だけを数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Increase to make it Increasing 型の 列の順序と prefix 状態に対し、最小費用流と残余グラフを選び、状態と証明を一貫して設計できる。",
+      "text": "非減少化の可否と最小range加算回数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。",
+      "text": "単一不足、Nからの供給必須、到達不能なtransfer graphを小整数探索と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

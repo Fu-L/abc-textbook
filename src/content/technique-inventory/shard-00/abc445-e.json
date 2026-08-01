@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc445-e「Many LCMs」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "A_k を除いた lcm の各素数 p の指数は、全 A_i における p 指数の最大値と二番目の最大値だけで決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc445-e「Many LCMs」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全数を素因数分解して各 p の最大指数 e1 と第二最大 e2 を保持し、全体 lcm L から A_k が担う最大指数分だけ p^{e1-e2} を除いて各 L_k を求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "lcm は素数ごとに指数 max を取るため、最大を担う要素を一つ除いた後の max が e2 であり、その他の素数指数は変化しない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各 k について N-1 個の lcm を先頭から掛け合わせて計算する。",
+        "decision": "rejected",
+        "decisionReason": "N 回の再計算で O(N^2) となり、値自体も巨大なのでそのまま保持できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "算術の基本定理により正整数の素因数指数表現は一意で、積・割り切れ条件を指数ごとに判定できる。",
+        "text": "同じ最大指数を複数要素が持つ場合は e2=e1 となり、どれを除いてもその素数因子は減らない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Many LCMs 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "全体 L を modulus 上で持ち、減る因子の逆元を掛ければ巨大な整数 lcm を構築せず各答えを得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc445-e「Many LCMs」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "篩の最小素因数で全 A_i を分解し、p ごとの top2 指数を更新する。L=∏p^{e1} mod MOD を作り、各 k は L から A_k の指数が e1 である p について p^{e1-e2} の逆元を掛けて出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc445-e「Many LCMs」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "素因数分解と約数列挙",
-      "trigger": "制約と操作を整理したときに 素因数分解と約数列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc445-e「Many LCMs」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 素因数分解と約数列挙 を問題固有の状態へ適用する。",
+      "name": "素数指数ごとの top-2",
+      "trigger": "一要素除外後の gcd・lcm を全要素について求めたいとき。",
+      "application": "各素数の最大指数と第二最大指数だけを十分統計として保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "一要素除外 query では、集約演算 max の最大値だけでなく次点を持つと除外後を定数情報で復元できる。",
+      "reusablePerspective": "lcm の巨大値は素数指数空間で設計し、最終的な積だけ modulus 上へ写す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "素因数分解と約数列挙",
+      "text": "素数指数ごとの top-2と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。",
+      "text": "存在しない第二指数は0とし、最大値の重複を e2=e1 として記録する。modular inverse は MOD の倍数でない因子だけに使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Many LCMs 型の 列の順序と prefix 状態に対し、素因数分解と約数列挙を選び、状態と証明を一貫して設計できる。",
+      "text": "各要素を除いた最小公倍数を、素数指数の top-2 情報から高速に全件計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。",
+      "text": "最大指数が一意な場合と複数ある場合を分け、除外後指数が e2 になる更新規則を同じ素数の例で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

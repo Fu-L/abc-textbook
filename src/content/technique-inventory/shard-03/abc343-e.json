@@ -17,67 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc343-e「7x7x7」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "volumeは三cubeの絶対位置でなく相対位置だけに依存するのでC1を(0,0,0)へ固定できる。さらに解があるならC2,C3をC1と接するまで平行移動でき、各座標差を[-7,7]に制限した解が存在する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc343-e「7x7x7」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+        "approach": "C1を固定しC2,C3の6座標を[-7,7]で全探索する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "候補は15^6程度で、各候補のpair/triple交差体積を定数時間で計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "9座標を問題の全範囲[-100,100]で探索する",
+        "decision": "rejected",
+        "decisionReason": "平行移動対称性を使わない探索空間は201^9で到底列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "7x7x7 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "pair intersection総和Pとtriple intersection Tに対し、exactly-three v3=T、exactly-two v2=P-3Tである。cube体積総和3·7^3=v1+2v2+3v3なのでv1も一意に復元できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc343-e「7x7x7」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+      "text": "C1=(0,0,0)としa2,b2,c2,a3,b3,c3を-7…7でloopする。各axisのoverlap長max(0,min(right)-max(left))を掛けて三pair交差とtriple交差を求め、v3,v2,v1を式で計算する。一致した座標をYesと出し、なければNo。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc343-e「7x7x7」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "平行移動対称性の固定",
+      "trigger": "配置問題の目的が物体間の相対位置だけで決まる。",
+      "application": "一つのcube原点を固定し、全体translationの自由度を除く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "包除的なexact coverage集計",
+      "trigger": "pair/triple intersectionからexactly k個に覆われるvolumeを求めたい。",
+      "application": "多重に数えたtriple領域の係数を補正し、体積総和式でv1を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "side lengthが7の軸平行cube同士のintersectionも軸平行直方体なので、3D体積は各axisのinterval overlap長の積へ完全分離する。",
+      "reusablePerspective": "直積形状の交差量は各次元の一次元overlapを独立計算して掛ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "全探索と候補数の上界評価",
+      "text": "軸平行interval交差、包除原理、translation invariance。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "境界で接するだけならoverlap長0であり候補範囲には±7を含める。v2=P-3v3、v1=1029-2v2-3v3の係数を混同しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "7x7x7 型の問題に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "指定V1,V2,V3を実現する三cube配置の存在を判定し、存在すれば座標を一組構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "三cube一致、全てdisjoint、pairだけoverlap、triple overlapありを手計算し、出力座標からvolumeを再検算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

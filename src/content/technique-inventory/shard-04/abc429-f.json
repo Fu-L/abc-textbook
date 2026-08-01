@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc429-f「Shortest Path Query」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "3×N グリッドの左上から右下への最短路には列を左へ戻る移動を含まない最短路が存在する。すると列 j までの三行の距離ベクトルは、直前列のベクトルと列 j の通行可否だけで決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc429-f「Shortest Path Query」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各列を三成分の距離ベクトルに作用する min-plus 写像として表し、写像の合成をセグメント木に載せる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "写像合成は結合的で、一点更新後の全列合成を O(log N) で再計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各マス更新のたびにグリッド全体で BFS をやり直す。",
+        "decision": "rejected",
+        "decisionReason": "一質問 O(N) 以上となり、Q 回に対して遅い。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+        "text": "列内では上下移動を何回か行ってから右へ進むだけなので、入力三距離から出力三距離への最短コストは固定サイズの min-plus 行列で表せる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Shortest Path Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "写像 f,g の合成 h(x)=g(f(x)) は結合的で、区間を左右に分けても全体作用が変わらない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc429-f「Shortest Path Query」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各列の障害配置から、前列各行から当列各行へ左戻りなしで移る 3×3 の min-plus 遷移行列を作る。セグメント木の積を min-plus 行列積で定義し、更新列の行列を差し替える。初期ベクトルへ全体積を作用させた第3成分を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc429-f「Shortest Path Query」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "min-plus 行列",
+      "trigger": "少数状態の最短距離 DP の遷移を合成したいとき。",
+      "application": "三行間の遷移コストを行列にし、加算を経路連結、min を中間状態選択として積を定義する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "セグメント木と monoid",
-      "trigger": "制約と操作を整理したときに セグメント木と monoid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc429-f「Shortest Path Query」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で セグメント木と monoid を問題固有の状態へ適用する。",
+      "name": "モノイドセグメント木",
+      "trigger": "一点更新があり、列順に並ぶ結合的な写像の全体合成を繰り返し求めるとき。",
+      "application": "葉へ列写像、内部節点へ左写像の後に右写像を置いた合成を保存する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "幅が定数の動的グリッド最短路は、各列を境界距離ベクトル間の小さな写像として要約できる。",
+      "reusablePerspective": "DP 遷移が結合可能なら、列更新は遷移モノイドの一点更新へ置き換えられる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "セグメント木と monoid",
+      "text": "グリッド最短路、min-plus 代数、行列による DP 遷移、セグメント木のモノイドを理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "行列積の左右順序を列順と合わせ、通行不能遷移は十分大きい INF にする。始点・終点が塞がる場合と第1列の初期化を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Shortest Path Query 型の 盤面上の位置と局所遷移に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。",
+      "text": "幅3の動的グリッド最短路を、列遷移の min-plus モノイドとして対数時間更新できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "左戻り不要の根拠、列行列が列内の全上下経路を含むこと、セグメント木の積順序を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

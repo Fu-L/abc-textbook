@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc403-f「Shortest One Formula」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "文法上、加算を含む式はそのまま乗算の因子にできない。最短の任意の <expr> と最短の乗算可能な <term> を別状態にする必要がある。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "値 i は、十進表記がすべて 1 のリテラル、j+k=i の加算、j×k=i の乗算から構成でき、加算の部分値と 1 でない乗算因子はいずれも i より小さい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc403-f「Shortest One Formula」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "値 i ごとに最短文字列 dpExpr[i] と最短の <term> 文字列 dpTerm[i] を持つ構文対応 DP",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "repunit を初期値とし、全加算分割と約数対の乗算で更新する。加算を term にする場合だけ括弧 2 文字を加えるため、文法と長さを同時に保証できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "長さ順に文字列を生成して構文解析し、値 N が現れるまで探索する",
+        "decision": "rejected",
+        "decisionReason": "利用可能な文字からなる候補数は長さに対して指数的で、同じ値・同じ構文カテゴリの膨大な式を区別してしまう。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "dpExpr は dpExpr[j]+'+'+dpExpr[k] で更新できる一方、積は dpTerm 同士に限る。dpTerm には積のほか '('+加算式+')' を候補として渡す。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Shortest One Formula 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "乗算で因子 1 を除けば依存先は真に小さくなり、i の昇順計算で循環しない。最短文字列の長さは O(log N) に抑えられるので文字列コピー込みでも制約内である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc403-f「Shortest One Formula」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各 i を昇順に処理し、repunit に一致すれば両状態を初期化する。j=1..i-1 の加算分割から expr と括弧付き term を、j|i かつ j,i/j>1 の因数分解から term 同士の積を両状態へ緩和し、dpExpr[N] を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc403-f「Shortest One Formula」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "構文カテゴリ DP",
+      "trigger": "同じ値でも、親演算子の中で括弧なしに使える式の種類が異なるとき。",
+      "application": "<expr> と <term> の最短表現を分け、BNF の生成規則だけを遷移にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc403-f「Shortest One Formula」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "構成付き最短化 DP",
+      "trigger": "最適値だけでなく、その最適値を達成する文字列を一つ出力するとき。",
+      "application": "各緩和で長さを比較し、採用した式文字列または復元元を保存する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "整数分割と約数遷移",
+      "trigger": "式の最上位演算が加算または乗算に分類できるとき。",
+      "application": "和は全分割、積は約数対だけを列挙して値 i の候補を漏れなく調べる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "括弧は単なる見栄えではなく <expr> を <term> に昇格させるコスト 2 と捉えると、演算子優先順位を二状態の最短路として扱える。",
+      "reusablePerspective": "式最短化では「値」に加えて親構文から要求される非終端記号を状態にすると、不正な式を後処理で除く必要がない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "BNF の <expr>/<term> の違いと、整数の加算分割・約数列挙を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "未到達を十分大きい長さで初期化し、積で 1 を因子にしない。括弧と演算子の 1 文字を長さ比較へ必ず含め、同長候補はどれを選んでもよい。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Shortest One Formula 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "文法に適合し値が N となる最短式を、値と構文カテゴリを状態にした DP から実際に構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "N=1、repunit、素数、平方数について、出力を構文解析して値と長さを確認し、小さい N では長さ別全探索の最短値と照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

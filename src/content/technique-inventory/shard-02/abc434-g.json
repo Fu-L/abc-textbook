@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc434-g「Keyboard」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "数字の直後に B があればその数字と B が消える操作を尽くした正規形を考える。正規化は連結と両立し、normalize(S+T)=normalize(normalize(S)+normalize(T)) なので本来はモノイドになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc434-g「Keyboard」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各区間を先頭 B 数 b、残存数字長 l、その数値 mod 998244353 の三値で要約し、必要な左区間末尾だけセグメント木の子を降りて取得する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "通常は失われる末尾情報をマージ履歴から O(log N) で補い、更新・区間積を O(log^2 N) にできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各セグメント木節点に正規化後文字列を丸ごと保存して連結・削除する。",
+        "decision": "rejected",
+        "decisionReason": "節点文字列が区間長に比例し、積やクエリが最悪 Ω(N) になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+        "text": "右データの先頭 B は左データ末尾の数字を同数だけ削除し、足りなければ余った B が結果先頭へ残る。よって積には左の末尾 min(l_left,b_right) 桁の値が必要である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Keyboard 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "三値 Data だけでは任意同士の積は閉じないが、左 Data がセグメント木節点なら子の要約を辿って必要な suffix 値を復元できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "残存数字の連結値は 10 の冪を用いて (prefix·10^len+suffix) mod p として合成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc434-g「Keyboard」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "葉を数字または B の Data にし、内部節点は左の末尾照会を使って正規化積を構築する。末尾 n 桁照会は右子から必要分を取り、足りなければ左子へ降る。点更新で祖先を再構築し、区間クエリでは canonical nodes を左から順に同じ積で合成して (l,x) を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc434-g「Keyboard」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "正規形モノイド",
+      "trigger": "局所削除規則が合流的で、連結前後の正規化が同じ結果になるとき。",
+      "application": "数字+B の削除を尽くした正規形を区間積として扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "セグメント木と monoid",
-      "trigger": "制約と操作を整理したときに セグメント木と monoid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc434-g「Keyboard」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で セグメント木と monoid を問題固有の状態へ適用する。",
+      "name": "セグメント木の履歴を使う要約補完",
+      "trigger": "定数サイズ要約同士は直接マージ不能だが、一方の元区間が木に保持され追加情報を探索できるとき。",
+      "application": "左節点の子へ二分探索し、要約から欠けた末尾 n 桁だけを O(log N) で取り出す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "十進連結のローリング値",
+      "trigger": "長い数字列の連結・suffix の値を法上で扱うとき。",
+      "application": "10^k を前計算し、長さと剰余値の組で連結を計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "定数サイズ要約が演算に閉じなくても、セグメント木が持つ分解履歴を補助 oracle にすれば必要情報だけ復元できる。",
+      "reusablePerspective": "データ構造の節点値は必ずしも自己完結モノイドでなく、木上探索込みの部分演算として設計できる場合がある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "セグメント木と monoid",
+      "text": "セグメント木、正規形、文字列書換え、十進数の法上連結、木上二分探索を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "区間クエリの canonical node は左からの順序を保って合成する。B が左の数字数を超える場合の余り、全削除時の長さ 0、10 冪添字を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Keyboard 型の 文字列の prefix・suffix と一致関係に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。",
+      "text": "backspace 型文字列の動的区間評価を、定数要約とセグメント木内部の suffix 復元で高速に処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "Data 積に本当に必要な欠落情報が左末尾だけか、末尾取得が複数節点を跨いでも O(log N) に収まるかを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

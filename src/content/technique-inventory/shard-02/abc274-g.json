@@ -1,15 +1,15 @@
 {
   "problemId": "abc274-g",
   "sourceRevisionIds": [
-    "source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee",
-    "source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83"
+    "source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83",
+    "source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee",
-        "source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83"
+        "source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83",
+        "source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc274-g「Security Camera 3」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "up-facing cameraは同じvertical obstacle-delimited runのtopへ移してdown-facingにでき、left-facingもrunのleft端へ移したright-facing cameraで置換できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各empty cellは一つのmaximal vertical runと一つのmaximal horizontal runのintersectionで、そのcellを監視するには二runsの少なくとも一方へcameraを置けばよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc274-g「Security Camera 3」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各empty cellで四方向cameraの設置有無を列挙する。",
+        "decision": "rejected",
+        "decisionReason": "Boolean choicesがgrid sizeに対して指数的で、同じrunを覆うcameraも重複する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "vertical runsとhorizontal runsをbipartite verticesにし、各empty cellを両run間のedgeとしてminimum vertex coverを求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "camera一台がrun vertex一つの選択に一致し、全cells監視条件が全edgesをcoverする条件と一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+        "text": "bipartite graphではKőnigの定理によりminimum vertex cover sizeがmaximum matching sizeに等しい。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Security Camera 3 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "source→vertical run、vertical→horizontal cell edge、horizontal→sinkのflow networkでも、unit capacitiesとinfinite constraint edgesにより同じminimum cutを表せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc274-g「Security Camera 3」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "camera directions/positionsをmaximal visibility runsへcanonicalizeし、all-cell coverageをbipartite minimum vertex coverすなわちmaximum flowへ帰着する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc274-g「Security Camera 3」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "支配関係による配置の正規化",
+      "trigger": "ある設置位置・方向を別のものへ移してもcoverageが減らないとき。",
+      "application": "cameraを各vertical runのtopでdown向き、各horizontal runのleft端でright向きに限定する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最大流・最小カット定理",
-      "trigger": "制約と操作を整理したときに 最大流・最小カット定理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc274-g「Security Camera 3」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 最大流・最小カット定理 を問題固有の状態へ適用する。",
+      "name": "二部graphのminimum vertex cover",
+      "trigger": "各requirementがleft choiceまたはright choiceの少なくとも一方を要求するとき。",
+      "application": "runsを二部vertices、empty cellsをedgesにし、maximum matching/flowのsizeを求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "同じrun内ではcanonical camera一台が全cellsを覆うため、camera candidateをcell数ではなくrun数へ集約できる。",
+      "reusablePerspective": "grid visibility問題はobstaclesで区切られたmaximal segmentsをobjectsにし、cellをsegment intersectionsとしてmodel化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "最大流・最小カット定理",
+      "text": "grid run decomposition、bipartite matching、Kőnigの定理またはmax-flow/min-cutを扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "row/column scanで各empty cellへhorizontal/vertical run IDを付け、cellごとに対応edgeを一つ追加する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "flow定式化ではcamera cost edgeをcapacity 1、coverage violation edgeを全camera数より大きいinfinityにする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Security Camera 3 型の 盤面上の位置と局所遷移に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。",
+      "text": "全empty cellsを監視するminimum camerasをbipartite matchingまたはmax flowで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "visibility placementはcoverageを広げる端点へcameraを寄せ、支配される方向・位置を候補から除く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "各cellが縦optionか横optionの二択でcoverされるなら、runsのbipartite vertex coverを疑う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

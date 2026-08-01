@@ -17,67 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc338-g「evall」では、加算と乗算の優先順位を保つ部分式状態を定義し、区間の連結を結合則のある遷移として DP 合成する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "全substringを個別評価する代わりに、各digit位置を右端とする全有効startの式評価値をまとめて更新する。通常の式を「+で確定済みの和pre」と「現在の乗算項term」に分ければ、digit・+・*ごとの更新が線形になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc338-g「evall」では、加算と乗算の優先順位を保つ部分式状態を定義し、区間の連結を結合則のある遷移として DP 合成する。この状態表現から答えを構成する。",
+        "approach": "全開始位置に対する式状態の総和をconstant個の集約変数でstreaming更新する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各文字を一度処理し、数の連結・加算・乗算の優先順位を保ったままO(|S|)で全substring和を得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全O(|S|^2) substringを切り出して式評価する",
+        "decision": "rejected",
+        "decisionReason": "|S|は10^6で、substring数だけで二乗になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各区間を確定済みの加算項と未確定の乗算項へ分ければ、境界演算子ごとの合成が元の式評価を保存する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "evall 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "各active startについてpre、現在数へ掛かる係数mul、現在項term=mul×numを考える。総和だけ持てばdigit dでtermSum←10·termSum+d·mulSum+d、mulSum←mulSum+1となる。+ではpreSum←preSum+termSum,mulSum←startCount、*ではmulSum←termSumとなりtermSumを0へ戻せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc338-g「evall」では、加算と乗算の優先順位を保つ部分式状態を定義し、区間の連結を結合則のある遷移として DP 合成する。この状態表現から答えを構成する。",
+      "text": "左から走査し、active start数cnt、Σpre、Σmul、Σtermをmodで保持する。digitでは既存の数を10倍してdを足す更新に加え、その位置から始まる新substring状態(pre=0,mul=1,term=d)を追加し、preSum+termSumを答えへ足す。+と*では上記の状態変換だけを行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "式評価 DP と monoid 合成",
-      "trigger": "制約と操作を整理したときに 式評価 DP と monoid 合成 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc338-g「evall」では、加算と乗算の優先順位を保つ部分式状態を定義し、区間の連結を結合則のある遷移として DP 合成する。この状態表現から答えを構成する。で 式評価 DP と monoid 合成 を問題固有の状態へ適用する。",
+      "name": "式評価stateの線形集約",
+      "trigger": "多数の開始位置の式を同じsuffix文字で同時に延長し、必要演算が和と積に分解できる。",
+      "application": "個別状態のpre・mul・termの総和を保ち、線形な更新を一括適用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "乗算優先順位の遅延評価",
+      "trigger": "通常の+と*を左から読み、未確定の乗算chainだけを保持したい。",
+      "application": "加算済み項preと進行中termを分離し、*ではtermの係数を次factorへ引き継ぐ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "substring開始はdigit位置ごとに一つ新状態を追加すればよく、終了については各digit時点の全active式評価和を答えへ加えるだけで全(i,j)を一度ずつ数えられる。",
+      "reusablePerspective": "全substring集計は、左端ごとの状態を可換な統計量へ圧縮できればonlineに新規開始と全終了を処理できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "式評価 DP と monoid 合成",
+      "text": "通常の式の加算・乗算優先順位、数のdecimal連結、線形な状態総和。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "加算境界で未確定項を確定し、乗算境界では係数だけを更新する状態の意味を固定する。",
+      "text": "operator位置ではsubstringを答えへ加えず、digit位置だけを右端とする。*更新でpreは確定せず、+更新でのみtermをpreへ移す。全演算をmod 998244353で行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "evall 型の問題に対し、式評価 DP と monoid 合成を選び、状態と証明を一貫して設計できる。",
+      "text": "両端がdigitである全substringの通常の式評価値を合計し、mod 998244353で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "加算境界で未確定項を確定し、乗算境界では係数だけを更新する状態の意味を固定する。",
+      "text": "数字だけの12、1+2、2*3、1+2*34、12*3+4を全substring直接評価し、streaming状態と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

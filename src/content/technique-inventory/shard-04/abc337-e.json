@@ -17,67 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc337-e「Bad Juice」では、対象番号を二進 codeword に割り当て、各 bit が 1 の対象集合を一回の検査へまとめて結果から番号を復号する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "M人の体調結果はM bitの文字列なので区別できる候補は高々2^M個である。よってN本を必ず識別するにはM≥ceil(log2 N)が必要で、各bottle番号をそのM bit符号として配れば同じ人数で達成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc337-e「Bad Juice」では、対象番号を二進 codeword に割り当て、各 bit が 1 の対象集合を一回の検査へまとめて結果から番号を復号する。この状態表現から答えを構成する。",
+        "approach": "0-based bottle番号のbinary bitごとに友人へ飲ませる",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各bottleに相異なるM-bit codeを割り当て、体調文字列をそのまま腐敗番号へ復号でき、情報量下界と一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各友人に一つの連続区間だけを割り当てる二分探索的質問",
+        "decision": "rejected",
+        "decisionReason": "結果は一晩後に一括で返りadaptiveに次の質問を選べないため、固定区間だけでは一般に最小人数で全番号を符号化できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ceil(log2 N) bit の codeword は N 個の対象を一意に区別し、各検査結果が対応 bit をそのまま与える。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Bad Juice 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "M=ceil(log2 N)なら0,…,N-1は全てM bitで一意である。友人iへi bit目が1のbottleだけ飲ませると、腐ったbottle xによる体調列Sはxのbinary表現と完全に一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc337-e「Bad Juice」では、対象番号を二進 codeword に割り当て、各 bit が 1 の対象集合を一回の検査へまとめて結果から番号を復号する。この状態表現から答えを構成する。",
+      "text": "最小のM with 2^M≥Nを出力する。各bit iについて、(j-1)のi bit目が1であるbottle jを昇順に列挙して人数と一覧を出しflushする。長さMのSを読み、S_iをbit iとして整数xを復号しx+1を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "二進表現と情報量の下界",
-      "trigger": "制約と操作を整理したときに 二進表現と情報量の下界 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc337-e「Bad Juice」では、対象番号を二進 codeword に割り当て、各 bit が 1 の対象集合を一回の検査へまとめて結果から番号を復号する。この状態表現から答えを構成する。で 二進表現と情報量の下界 を問題固有の状態へ適用する。",
+      "name": "情報量下界",
+      "trigger": "一回の非adaptive検査で各参加者から0/1だけが返る。",
+      "application": "結果pattern数2^Mが候補数N以上必要というpigeonhole principleで最小人数を下から抑える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "binary incidence coding",
+      "trigger": "各対象を、どの検査群へ含めるかのsubsetで識別したい。",
+      "application": "対象indexのbit列をmembership vectorとして使い、観測vectorからindexを復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "友人が腹痛になる条件は腐った一本を飲んだかだけなので、複数bottleを混ぜる行為がOR混同を起こさず、唯一の腐敗bottleのmembership codeを直接観測できる。",
+      "reusablePerspective": "欠陥がちょうど一つのgroup testingは、対象ごとのbinary code設計に一致する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "二進表現と情報量の下界",
+      "text": "binary表現、ceil(log2 N)、interactive I/Oとflush。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "番号の 0-origin・1-origin を変換し、空の検査集合と対話出力の flush を扱う。",
+      "text": "editorialの0-based bottle jを出力ではj+1へ戻す。Sの先頭をbit 0として配布規則と復号のbit順を一致させ、各出力後にflushする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Bad Juice 型の問題に対し、二進表現と情報量の下界を選び、状態と証明を一貫して設計できる。",
+      "text": "必要最小人数の友人への配布を提示し、返された体調patternから腐ったbottle番号を一意に特定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "番号の 0-origin・1-origin を変換し、空の検査集合と対話出力の flush を扱う。",
+      "text": "Nが2の冪の場合と直後、全0のcodeに対応するbottle 1、bit順を逆に読んだ場合をlocal interactorで確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

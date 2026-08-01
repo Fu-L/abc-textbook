@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc455-e「Unbalanced ABC Substrings」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "三種類の個数が pairwise 全て異なる条件の補集合は A=B、A=C、B=C の和集合であり、三事象の任意二つの共通部分は全て A=B=C になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc455-e「Unbalanced ABC Substrings」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "包除原理で全区間数-f(A=B)-f(A=C)-f(B=C)+2f(A=B=C) を計算し、各等式数は prefix差signatureの同値pair頻度から求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "区間内の個数等式は両端prefixの差が等しいことと同値で、scalarまたは二次元signatureが同じprefix pairをhash mapで数えれば線形時間になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全部分文字列で A,B,C の個数を数え、三値が異なるか判定する。",
+        "decision": "rejected",
+        "decisionReason": "区間候補が Θ(N^2) 個あり、prefix countで各判定を定数時間にしても間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+        "text": "f(A=B) は prefix A_i-B_i が等しい二端点、f(A=B=C) は pair (A_i-B_i,A_i-C_i) が等しい二端点の数である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Unbalanced ABC Substrings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "三つのpairwise equality事象の二重・三重intersectionはいずれも全三等値なので、係数は -3+3-1=-1、補集合では+2になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc455-e「Unbalanced ABC Substrings」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "空prefixを含め各位置の count差を更新する。三つのscalar keyと一つのpair keyについて、現在までの同key頻度を各 f へ加えてから頻度を増やす。全区間数から包除式で答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc455-e「Unbalanced ABC Substrings」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "包除原理",
+      "trigger": "複数量がpairwise相異なる条件を数えたいとき。",
+      "application": "等値事象三つのunionを全等値intersection込みで引く。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "包除原理",
-      "trigger": "制約と操作を整理したときに 包除原理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc455-e「Unbalanced ABC Substrings」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 包除原理 を問題固有の状態へ適用する。",
+      "name": "prefix signatureの同値pair",
+      "trigger": "区間内の複数count差が0になる個数を数えたいとき。",
+      "application": "差vectorが同じ二つのprefixをhash頻度で数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "区間内countの等式は、必要な独立差だけを座標とするprefix signature一致へ変換できる。",
+      "reusablePerspective": "三事象のintersectionが全て同一になる包除では係数を機械的に展開して重複補正を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "包除原理",
+      "text": "包除原理、prefix signatureの同値pairと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "prefix0の各key頻度を1で初期化し、64 bitでpair数を保持する。A=B=Cの係数+2を符号ミスしない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Unbalanced ABC Substrings 型の 文字列の prefix・suffix と一致関係に対し、包除原理を選び、状態と証明を一貫して設計できる。",
+      "text": "A・B・C個数が全て異なる部分文字列を、包除とprefix signature頻度で線形時間に数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "Venn図で等値三事象のintersectionを確認し、各prefix keyがどの区間等式を表すかを式で対応づける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc359-f「Tree Degree Optimization」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "木の次数列は各d_i≥1かつ総和2N−2を満たし、逆にこの二条件を満たす整数列は木の次数列として実現できる。したがって辺そのものではなく次数の配分だけを最適化すればよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "頂点iの次数をdからd+1へ増やす追加費用はA_i((d+1)^2−d^2)=A_i(2d+1)で、同じ頂点では選ぶたび単調に増える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc359-f「Tree Degree Optimization」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全次数を1から始め、現在の限界費用A_i(2d_i+1)が最小の頂点をpriority queueでN−2回選ぶ。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "分離された凸費用へ同数の単位増分を配る問題であり、未選択の最小増分を順に取る交換法が成立する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "候補となる木の辺集合を直接選び、得られた次数から費用を比較する。",
+        "decision": "rejected",
+        "decisionReason": "木の形は指数的に多い一方、目的関数が必要とする情報は次数だけなので不要な構造を探索している。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+        "text": "初期次数1の総和Nから必要な2N−2まで、ちょうどN−2回だけ単位増分を配ればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Tree Degree Optimization 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "各頂点の増分列3A_i,5A_i,7A_i,...は非減少なので、全列の先頭の最小値をmergeする貪欲として見られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc359-f「Tree Degree Optimization」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "answer=ΣA_i、d_i=1で初期化し、各頂点の次の増分3A_iをheapへ入れる。N−2回、最小増分をanswerへ加えた頂点のd_iを1増やし、新しいA_i(2d_i+1)をheapへ戻す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc359-f「Tree Degree Optimization」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "次数列への射影",
+      "trigger": "木の目的関数が各頂点の次数だけで決まるとき。",
+      "application": "木構造を消去し、実現可能な次数の総和制約へ置き換える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "greedy choice と交換論法",
-      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc359-f「Tree Degree Optimization」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "name": "分離凸費用の限界値貪欲",
+      "trigger": "固定個数の単位資源を、増分費用が単調な複数対象へ配るとき。",
+      "application": "priority queueで現在最小の次増分を選び続ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "Prüfer codeにより次数列の二条件が十分でもあるため、最適な次数配分を得た後に木を構成する必要さえない。",
+      "reusablePerspective": "構造最適化でも評価が低次元統計量だけなら、その統計量の実現可能領域を先に特徴付ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "木の次数和",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "greedy choice と交換論法",
+      "text": "priority queueと凸な離散増分",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "初期費用ΣA_iを忘れず、追加回数はN−2とする。増分と答えは符号付き64 bitに収まる保証を利用する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Tree Degree Optimization 型の 頂点と辺からなる状態グラフに対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "text": "木全体の探索を実現可能次数列への凸資源配分に変え、最小費用をheapで構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "目的式をd_iからd_i+1へ変えた差分まで展開する。heap要素が「現在費用」ではなく「次に1増やす費用」だと確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

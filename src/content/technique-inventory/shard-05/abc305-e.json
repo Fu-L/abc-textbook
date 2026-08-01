@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc305-e「Art Gallery on Graph」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "警備員iが頂点vを守れる条件dist(p_i,v)≤h_iは、p_iから体力h_iで出発し、辺を一つ進むたび体力を1減らして、非負のままvへ着ける条件と言い換えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "頂点vで必要なのは、どの警備員が来たかではなく到達時の残り体力の最大値d_vだけである。残り体力xでvへ来れば、隣接頂点へx−1を伝播できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc305-e「Art Gallery on Graph」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各警備員を始点に深さh_iまでBFSし、訪れた頂点を警備済みにする。",
+        "decision": "rejected",
+        "decisionReason": "警備範囲が大きく重なると同じ頂点・辺を警備員ごとに繰り返し走査し、Kとグラフサイズの積に達し得る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各頂点へ届く最大残り体力を状態にし、その値が最大の頂点から優先度付きキューで確定・伝播する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "より小さい体力で同じ頂点へ着く経路は以後も大きい体力の経路を上回れず、最大値一つへ支配関係でまとめられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
+        "text": "未確定候補で最大の体力xを持つ頂点vを取り出すと、別経路が後からvへ届ける体力はxを超えない。これは辺ごとに値が1だけ減る、Dijkstra法の符号を反転したlabel-settingである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Art Gallery on Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "複数の警備員は、各p_iの初期値をh_iにする多始点として同じ探索へ同時投入できる。警備員の個別BFSを合成する必要はない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc305-e「Art Gallery on Graph」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "dを−1で初期化し、各(p_i,h_i)でd[p_i]をh_iにして最大heapへ入れる。最大の(x,v)を取り出し、古い候補なら捨てる。x>0なら各隣接uへx−1を緩和し、最後にd[v]≥0の頂点を昇順で列挙する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc305-e「Art Gallery on Graph」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "多始点の最大値伝播",
+      "trigger": "複数の源が異なる初期資源を持ち、辺を進むたび一定量減る資源の最大到達値を求めたいとき。",
+      "application": "全警備員を初期labelとして同じ最大heapへ入れ、頂点ごとの最大残り体力だけを伝える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Dijkstra 法と緩和",
-      "trigger": "制約と操作を整理したときに Dijkstra 法と緩和 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc305-e「Art Gallery on Graph」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で Dijkstra 法と緩和 を問題固有の状態へ適用する。",
+      "name": "Dijkstra型のlabel-setting",
+      "trigger": "優先度最大の暫定値を確定でき、後続遷移がその順序を逆転させないとき。",
+      "application": "残り体力が最大の頂点から確定し、1減らした値で隣接頂点を緩和する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "距離制約h_iを『到達時に残る体力h_i−dist』へ変えると、警備員ごとの球の和集合が一つのmax-plus伝播になる。",
+      "reusablePerspective": "始点ごとに半径が異なる到達可能性では、半径から移動距離を引いた残余量を頂点labelとして統合する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "優先度付きキューとDijkstra法の確定順",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Dijkstra 法と緩和",
+      "text": "多始点グラフ探索",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "同じ頂点の古いheap entryが残るため、取り出したxが現在のd[v]と一致しなければ処理しない。x=0からは負値を伝播させない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "警備員の頂点は相異なるが、一般化して同じ始点があっても初期値の最大を取る形にしておくと更新規則が一貫する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Art Gallery on Graph 型の 頂点と辺からなる状態グラフに対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。",
+      "text": "始点ごとに異なる距離上限を持つ到達範囲を、最大残余資源の多始点探索として一度に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "警備員二人の範囲が重なる小グラフでh_i−distを直接書き、頂点ごとの大きい値だけ残しても、その先の警備可能性を失わないことを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

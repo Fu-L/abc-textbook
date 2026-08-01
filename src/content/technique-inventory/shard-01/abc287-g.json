@@ -17,77 +17,121 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc287-g「Balance Update Query」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "最大score和を得るには、quotaの範囲でscoreが高いcardから順にx枚選べばよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "score更新で将来現れる値は全queryを先読みすれば有限集合として得られ、座標圧縮できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各score帯についてcard枚数とscore×枚数の両方を持てば、上位帯を丸ごと選んだ価値と閾値帯の一部選択を計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc287-g「Balance Update Query」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全scoreを座標圧縮し、quota総数とscore総和の2本のFenwick treeで更新・上位x枚queryを処理する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "種類ごとのscore/quota変更を点更新へ変え、順位境界と価値和を対数的に取得できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "query 3ごとに全種類をscore順にsortしてquotaを消費する。",
+        "decision": "rejected",
+        "decisionReason": "最大2×10^5回のqueryで毎回N種類をsortすると間に合わない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "max heapへcardをquota枚ずつ投入して更新する。",
+        "decision": "rejected",
+        "decisionReason": "総quotaが大きく、scoreやquotaの変更で古い要素の削除・大量挿入も必要になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "大小・等値関係を保つ順位写像なので、元座標での順序条件と圧縮後の条件が同値になる。",
+        "text": "同じscoreのcardは区別不要なので、kind単位ではなくscore座標ごとのquota合計へ集約できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Balance Update Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "上位からcountがxを超える最初のscoreを境界とし、それより高い全cardのweighted sumに、残数×境界scoreを足せばよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc287-g「Balance Update Query」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "text": "初期scoreと全type-1更新値を圧縮し、Fenwick Xへ各座標のquota、Yへscore×quotaを入れる。score変更では旧座標からb_iを引き新座標へ足し、quota変更では差分を現在score座標へ反映する。type-3ではX全体がx未満なら-1。否则Fenwickのprefix lower_bound等で上位x枚の境界座標を求め、高score側のY合計と境界scoreで残りを計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "online query の計算量設計",
-      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc287-g「Balance Update Query」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "name": "offline座標圧縮",
+      "trigger": "更新値を含む大きなkey集合がquery先読みで既知になるとき。",
+      "application": "初期値と全score更新値だけを昇順indexへ写す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "座標圧縮",
-      "trigger": "制約と操作を整理したときに 座標圧縮 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc287-g「Balance Update Query」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で 座標圧縮 を問題固有の状態へ適用する。",
+      "name": "個数・重み和の二重Fenwick",
+      "trigger": "上位k個の値の総和を動的multisetで求めたいとき。",
+      "application": "frequencyで順位境界を探し、weighted sumで完全に取る範囲の価値を得る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "閾値bucketの部分採用",
+      "trigger": "同値要素をまとめた順位queryで必要数がbucket途中に達するとき。",
+      "application": "境界より上を全採用し、残数だけ同scoreから取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "各kindに10^100枚あってもquotaだけが選択可能数を決めるため、実体cardを生成せずscore別の有限なmultiplicityとして扱える。",
+      "reusablePerspective": "巨大または暗黙の要素集合でも、同値な要素をweight付きbucketへ集約できればorder statisticを処理できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "online query の計算量設計",
+      "text": "Fenwick treeのprefix sumとlower_bound",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
       "text": "座標圧縮",
       "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "greedyな上位x個選択",
+      "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。",
+      "text": "score変更時は現在quota b_iを、quota変更時は現在score a_iを使い、両arrayをquery後に更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "countとscore総和は64bit整数で持ち、score 0のbucketも圧縮対象から落とさない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Fenwickがprefix方向なら、全体−prefixでsuffix量へ変換するindex境界を揃える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Balance Update Query 型の 更新と問い合わせの時系列に対し、座標圧縮を選び、状態と証明を一貫して設計できる。",
+      "text": "score・quotaの動的更新下で、選べる上位x枚の最大score総和または不足を効率よく返せる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。",
+      "text": "同じscoreの複数kind、score 0、境界bucketを一部だけ使うqueryを作り、Xの枚数差分とYの価値差分が常に同期するか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

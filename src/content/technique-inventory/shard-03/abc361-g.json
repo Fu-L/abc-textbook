@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc361-g「Go Territory」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "石のない格子点が領域内かは、四近傍で基準点(−1,−1)へ到達できるかで決まる。ただし無限平面全体を探索する必要はなく、状態が変わるのは石の周辺だけである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "複数の石成分が入れ子になると、行上の内外は単純な一回の反転では足りない。外→内でnesting depthを増やし、内→外で減らす境界eventとして合成する必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc361-g「Go Territory」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "近接する石を成分化し、石周囲の空点で内外を判定してから、行ごとの境界eventをnesting depth付きで走査する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "有限個の石周辺だけで境界の向きを取得し、長い内部区間は座標差でまとめて数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "座標上限を越える十分大きな長方形gridを確保し、全空点をflood fillする。",
+        "decision": "rejected",
+        "decisionReason": "二次元座標範囲の面積が巨大で、石が疎でも全cellを用意できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+        "text": "石が8近傍でつながる場合は周囲8マスだけを候補graphにし、最左下側の外点から四近傍探索すると境界付近の外側を識別できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Go Territory 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "別成分が近くて内外情報を上書きしないよう、Chebyshev距離2以下の石まで同じ処理成分へまとめてから境界eventを作る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc361-g「Go Territory」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "石を近傍探索可能な集合に入れ、Chebyshev距離2以内を辺とする成分を列挙する。各成分で石の周囲空点を集め、外側基準から四近傍BFSして周辺点の内外を分類する。各行へ外→石列→内を+1、内→石列→外を−1のeventとして置き、x順にnesting depthを更新し、depth>0の石でない格子点数を区間長で加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc361-g「Go Territory」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "障害物境界だけの疎なflood fill",
+      "trigger": "無限または巨大gridで障害物数だけが少ない到達不能領域を求めるとき。",
+      "application": "障害物周囲の候補点に探索を限定して境界の内外を判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc361-g「Go Territory」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "走査線と入れ子depth",
+      "trigger": "複数の閉境界が包含関係を持ち、単純parityでなく向き付き遷移を合成するとき。",
+      "application": "行ごとの境界eventを順に足し、正のdepth区間を内部として数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "面積を埋める代わりに境界周辺だけでtopologyを決め、内部の広さは行区間の長さとして算術的に加える。",
+      "reusablePerspective": "疎な障害物による巨大領域では、探索対象を面から境界へ落とせないか考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "grid上の連結成分BFS",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "幅優先探索",
+      "text": "走査線による区間計数",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "8近傍連結だけでなく距離2の異成分を統合する条件を実装する。石自身を答えから除き、同じ行・座標のevent順と連続する石列を正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Go Territory 型の 列の順序と prefix 状態に対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な格子平面を直接展開せず、石周辺のtopologyと行方向の入れ子境界から囲まれた格子点を数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "単一輪、接触する輪、輪の入れ子を別々に描き、周辺空点の内外と行eventの符号を追う。成分統合距離は公式条件どおりか小例で検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

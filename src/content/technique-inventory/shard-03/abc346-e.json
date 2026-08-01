@@ -17,67 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc346-e「Paint」では、上書き paint query を逆順に処理し、まだ確定していない行・列の交点数だけを色別に加算する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各cellの最終色は、そのrowまたはcolumnに対して最後に行われたpaintだけで決まる。operationを逆順に見ると、まだ確定していないcellだけを初めて出会うrow/column操作で一括確定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc346-e「Paint」では、上書き paint query を逆順に処理し、まだ確定していない行・列の交点数だけを色別に加算する。この状態表現から答えを構成する。",
+        "approach": "operationを逆走査し、未処理row/column数から色countを加える",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各row/columnを高々一度だけ処理し、grid cellを列挙せずO(H+W+M)で最終頻度を得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "operationを順にgridへ直接塗る",
+        "decision": "rejected",
+        "decisionReason": "一回O(H)またはO(W)で、最大4×10^10 cell更新になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "逆順で最初に出会う paint が各 cell へ最後に適用された操作であり、未確定な反対軸との交点を一度だけ数える。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Paint 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "逆順で未処理row rをcolor xに確定すると、既に後時刻のcolumn操作で確定した列を除くW-fixedCols個だけがxになる。columnも対称にH-fixedRows個を確定する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc346-e「Paint」では、上書き paint query を逆順に処理し、まだ確定していない行・列の交点数だけを色別に加算する。この状態表現から答えを構成する。",
+      "text": "rowUsed・colUsedをfalse、fixedRows=fixedCols=0としてM-1から0へ走査する。未使用rowならcount[X]+=W-fixedColsとしてmark・fixedRows++、未使用columnならcount[X]+=H-fixedRowsとしてmark・fixedCols++する。残る(H-fixedRows)(W-fixedCols)をcolor0へ加え、正countだけ色昇順に出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "上書き操作の逆順処理",
-      "trigger": "制約と操作を整理したときに 上書き操作の逆順処理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc346-e「Paint」では、上書き paint query を逆順に処理し、まだ確定していない行・列の交点数だけを色別に加算する。この状態表現から答えを構成する。で 上書き操作の逆順処理 を問題固有の状態へ適用する。",
+      "name": "last-write-winsの逆走査",
+      "trigger": "上書き更新列の最終結果だけが必要である。",
+      "application": "時系列を逆に辿り、各対象への最初の未確定部分だけを確定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "未処理dimension数の積",
+      "trigger": "row/column全体操作の交差cellを個別に見ず、新規確定数を数えたい。",
+      "application": "既確定の反対軸本数を引き、残る列数または行数を寄与にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "同じrowへの古いoperationは、逆走査でrowが既使用なら全cellがより新しいrow/column操作により既に確定しているため完全に無視できる。",
+      "reusablePerspective": "上書き矩形処理は逆順のcovered判定で冗長な過去更新を捨てられる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "上書き操作の逆順処理",
+      "text": "逆順処理、last-write-wins、frequency map。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同じ行・列の二回目以降を無視し、最後に未確定 cell を色 0 へ加える。",
+      "text": "X_i=0のpaintも通常色としてcountへ足し、最後の未確定cellも同じcolor0へ合算する。0個のcolorは出力しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Paint 型の問題に対し、上書き操作の逆順処理を選び、状態と証明を一貫して設計できる。",
+      "text": "全paint後にgrid上へ存在する各colorのcell数を、色昇順で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同じ行・列の二回目以降を無視し、最後に未確定 cell を色 0 へ加える。",
+      "text": "同じrowの反復、rowとcolumnの上書き順逆転、全軸が一度も塗られない部分、color0によるpaintを小grid simulationと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

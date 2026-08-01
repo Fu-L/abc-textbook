@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc241-e「Putting Candies」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "次に参照する index は現在の総キャンディ数 X そのものではなく X mod N だけで決まり、residue r から (r+A_r) mod N へ移る N 状態の functional graph になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各状態の出辺は一つなので、0から進む residue 列は高々 N ステップで既出状態へ戻り、それ以降は同じ状態列と加算量を周期的に繰り返す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc241-e「Putting Candies」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "residue の初出 step と、その時点までの累積キャンディ数を記録し、cycle 検出後に残り回数を cycle 単位で飛ばす。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "K は巨大でも cycle 前と一周期は合わせて N 状態以下で、加算値も prefix 差から一括計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "2^b 回分の遷移先と加算量を全 residue について作る doubling を使う。",
+        "decision": "rejected",
+        "decisionReason": "公式に示された有効な別解だが、query は一つなので、この record では N 状態を一度たどるだけの cycle 法を採用する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Putting Candies 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じ residue に戻った二時点 s<t の間では状態遷移だけでなく加算する A の列も同じになり、cycle gain は prefix[t]-prefix[s] である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc241-e「Putting Candies」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "state=0、prefix[0]=0 から、未訪問 state に step を記録し A_state を加えて次 residue へ進む。K 回前に repeat したら cycleStart s、length p、gain を求め、K-s を商と余りに分けて prefix[s]+商·gain+cycle prefix の余りを返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc241-e「Putting Candies」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "functional graph の周期検出",
+      "trigger": "有限状態で各状態の次状態が一意、操作回数だけが非常に大きいとき。",
+      "application": "初出時刻を記録し、tail と cycle に分けて反復を飛ばす。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc241-e「Putting Candies」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "重み付き cycle の prefix sum",
+      "trigger": "状態遷移ごとに値を加算し、巨大回数後の総和が必要なとき。",
+      "application": "初出時の累積値を保存し、cycle 一周の gain と余り区間を差分で得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "総キャンディ数は単調に巨大化するが、制御に使う residue だけを状態、実際の個数を遷移重みとして分離できる。",
+      "reusablePerspective": "状態決定に値の剰余しか使わない反復では、商を捨てて有限 automaton と重みへ分ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "functional graph、cycle detection、prefix sum",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "K が repeat 前に尽きる場合を先に処理し、cycle の回数と gain の積を 64 bit で持つ。出力は residue ではなく累積キャンディ数である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Putting Candies 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "剰余で駆動する巨大回数の加算過程を重み付き functional graph にし、tail/cycle 分解で総和を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "サンプル1で residue 列と実際の X を別の行に書き、同じ residue の再訪が以後の加算列まで固定することを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

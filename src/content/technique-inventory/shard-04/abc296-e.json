@@ -17,67 +17,75 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc296-e「Transition Game」では、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "写像f(i)=A_iの反復像S_0⊇S_1⊇…の安定集合はfunctional graphの閉路頂点だけになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc296-e「Transition Game」では、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。この状態表現から答えを構成する。",
+        "approach": "入次数0からのleaf pruning",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "閉路外頂点をqueueで順に削れば残る頂点数が無限反復後にも選べる数と一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "ゲーム回数ごとに集合像を再構成",
+        "decision": "rejected",
+        "decisionReason": "安定まで最大N回、各回N走査で二次になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "遷移を続けると有限頂点上で必ず再訪が起こり、経路は前置き木と一つの閉路へ一意に分かれる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Transition Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "削除された頂点xは唯一の出辺先A_xの有効入次数を一つ減らし、新たに0なら同様に消える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc296-e「Transition Game」では、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。この状態表現から答えを構成する。",
+      "text": "全入次数を数え、0の頂点をqueueへ入れて取り出すたびA_xの入次数を減らす。削除されなかった頂点数を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "関数グラフの閉路分解",
-      "trigger": "制約と操作を整理したときに 関数グラフの閉路分解 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc296-e「Transition Game」では、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。この状態表現から答えを構成する。で 関数グラフの閉路分解 を問題固有の状態へ適用する。",
+      "name": "functional graphの閉路抽出",
+      "trigger": "各頂点の出次数が1で、反復後に残る頂点を求める。",
+      "application": "入次数0から木部分を剥がす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "ゲームの全時刻条件を写像の安定像へ変えると、functional graphのcycle membershipになる。",
+      "reusablePerspective": "有限写像の無限反復像は閉路集合である。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "関数グラフの閉路分解",
+      "text": "functional graphとKahn型pruning。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。",
+      "text": "自己loopも閉路として残し、削除済み数または残数を一度だけ更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Transition Game 型の問題に対し、関数グラフの閉路分解を選び、状態と証明を一貫して設計できる。",
+      "text": "ゲームに勝てる頂点数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。",
+      "text": "直接集合反復と比較し、自己loop、複数cycle、長いtailを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

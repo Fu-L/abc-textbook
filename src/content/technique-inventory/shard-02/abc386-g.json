@@ -17,77 +17,99 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc386-g「Many MST」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "M通りの各辺重みについてM^{N choose 2} graphを直接列挙できない。MST重みはthreshold k未満の辺からなるgraph G_kの連結成分数の和として表せ、重み付き問題を各kの無向graph数え上げへ分解できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Σ_G c(G_k)はgraphを先に数えるのでなく、その連結成分として選ばれる連結部分graph Hを先に固定する主客転倒で扱える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc386-g「Many MST」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "MST重みをthreshold成分数へ変換し、連結graphの重み付き数え上げDPを各kで行う",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "頂点数sの指定連結成分の寄与を、頂点1を含む成分を引く標準DPでO(N^2)計算でき、全kでもO(N^2M)がN,M≤500に適合する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各edge重み付けを列挙してKruskal法を実行する",
+        "decision": "rejected",
+        "decisionReason": "候補はM^{N(N-1)/2}個で指数的であり、個々のMSTを構成できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "cut property により異なる成分を結ぶ最小辺は安全であり、閉路を避けた採用を繰り返せば最適な全域木になる。",
+        "text": "0..M-1重みへshiftすると、MST重みはΣ_{k=1}^M c(G_k)-Mとなり、最後に元の重みshift分を補正する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Many MST 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "f(s)はs頂点の内部edgeがk未満/以上の重みを持つ連結graphの重み和で、全graphから頂点1の連結成分size i<sを指定する寄与を引いて求める。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc386-g「Many MST」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "binomialと冪を前計算する。k=1..Mごとにf[1..N]を連結成分DPで求め、size sの成分を選ぶC(N,s)、外部とのedgeをk以上にする冪、残り内部edgeの自由度を掛けてΣ_G c(G_k)へ加える。threshold和とshift補正をmodで合成する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc386-g「Many MST」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "MST重みのthreshold積分",
+      "trigger": "全edge重みの分布上でMST総和・期待値を数えたいとき。",
+      "application": "各thresholdでの連結成分数を足す式へ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最小全域木と cut property",
-      "trigger": "制約と操作を整理したときに 最小全域木と cut property の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc386-g「Many MST」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 最小全域木と cut property を問題固有の状態へ適用する。",
+      "name": "連結graph数え上げDP",
+      "trigger": "labelled graphの全体からconnectedなものだけを取り出すとき。",
+      "application": "頂点1を含むcomponentを固定し、非連結caseをsize別に引く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "主客転倒",
+      "trigger": "graphごとのcomponent数総和を直接数えにくいとき。",
+      "application": "component候補Hを固定して、それを成分に持つgraph数を数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "MSTそのものの組合せを追わず、Kruskalで各重み層が答えへ寄与する量を連結成分数として線形化する。",
+      "reusablePerspective": "全入力に対する最適構造の総和では、目的値をthreshold indicatorの和へ分解し、各層の構造数を数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "Kruskal法とMSTの成分数公式を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "最小全域木と cut property",
+      "text": "labelled connected graphの包除DPとmod組合せを扱える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同重み辺の順序が答えへ影響する場合は一括判定してから併合する。",
+      "text": "重みを0..M-1へshiftした補正符号、k未満/以上の選択肢数kとM-k、edge本数の指数を混同しない。0^0は1として扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Many MST 型の 頂点と辺からなる状態グラフに対し、最小全域木と cut propertyを選び、状態と証明を一貫して設計できる。",
+      "text": "全完全graph重み付けのMST総和を、threshold分解・主客転倒・連結graph DPで多項式時間に数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同重み辺の順序が答えへ影響する場合は一括判定してから併合する。",
+      "text": "N≤4,M≤3で全edge重みを列挙してKruskal結果を足し、各kの成分数総和と最終shift補正を独立に照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

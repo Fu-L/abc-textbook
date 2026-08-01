@@ -1,15 +1,15 @@
 {
   "problemId": "abc268-f",
   "sourceRevisionIds": [
-    "source-abc268-editorial-4788-500ee245e8b9d0e791a7bfb29905008e7f3873bdb534278ddf33a7f1c582d5e1",
-    "source-abc268-f-problem-d0ef7572618854b7eef2438b54d1c63814b52dbe077f7ce4f67452163b19bf28"
+    "source-abc268-f-problem-d0ef7572618854b7eef2438b54d1c63814b52dbe077f7ce4f67452163b19bf28",
+    "source-abc268-editorial-4788-500ee245e8b9d0e791a7bfb29905008e7f3873bdb534278ddf33a7f1c582d5e1"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc268-editorial-4788-500ee245e8b9d0e791a7bfb29905008e7f3873bdb534278ddf33a7f1c582d5e1",
-        "source-abc268-f-problem-d0ef7572618854b7eef2438b54d1c63814b52dbe077f7ce4f67452163b19bf28"
+        "source-abc268-f-problem-d0ef7572618854b7eef2438b54d1c63814b52dbe077f7ce4f67452163b19bf28",
+        "source-abc268-editorial-4788-500ee245e8b9d0e791a7bfb29905008e7f3873bdb534278ddf33a7f1c582d5e1"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,67 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc268-f「Best Concatenation」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "string iの内部scoreは連結順に依存せず、順序で変わるのは前stringのXと後stringのdigitのcross寄与だけである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "string iのX個数をX_i、digit和をY_iとすると、iをjより前へ置くcross寄与はX_iY_jになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc268-f「Best Concatenation」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。",
+        "approach": "N!通りの連結順を試し、各完成stringのscoreを走査する。",
+        "decision": "rejected",
+        "decisionReason": "permutation数が階乗的で、各pairの局所順序比較だけで決まる構造を使っていない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "隣接交換比較により iをjより前に置く条件 X_iY_j≥X_jY_i を導き、このcross-product comparatorで全stringをsortする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "条件に反する隣接pairは交換でscoreを改善できるため、全pairがcomparator順になった列がglobal optimumになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Best Concatenation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "順序ijとjiのscore差はX_iY_j−X_jY_iで、比Y_i/X_iの昇順に相当するが除算せずcross productで比較できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc268-f「Best Concatenation」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。",
+      "text": "pairwise separable concatenation objectiveにexchange argumentを適用し、Smith-rule型のratio orderingへ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "greedy choice と交換論法",
-      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc268-f「Best Concatenation」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "name": "隣接交換による最適sort順",
+      "trigger": "連結順の目的値がstring内部定数と順序付きpair寄与の和に分解できるとき。",
+      "application": "二要素ijとjiの差を計算し、改善交換がなくなる比較規則でsortする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "比率比較のcross multiplication",
+      "trigger": "非負整数pairの比a/bでsortしたいが、0除算や浮動誤差を避けたいとき。",
+      "application": "a_i b_jとa_j b_iの整数積を比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "X_i=0の数字だけのstringはratio Y_i/X_i=∞として後ろに置かれ、cross-product comparatorなら例外分岐なしで同じ結果になる。",
+      "reusablePerspective": "ratio順の境界値は数学的に解釈しつつ、実装はcross productで統一する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "greedy choice と交換論法",
+      "text": "exchange argument、custom comparator、文字列scoreの走査集計を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "sort後は左からX累積数を持ち、digit dごとにd×累積Xを加えれば内部・cross寄与を一走査で同時に数えられる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "cross productとscoreは32 bitを超えるため64 bit整数を使い、比較が等しいpairは任意順でよい。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Best Concatenation 型の問題に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "text": "Xと数字からなるstring群の最大連結scoreを、二統計量の比率sortで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "連結順最適化は、二つのblockだけを入れ替えた目的値差から全体sort comparatorを導く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "block間寄与が「左の量×右の量」なら、内部寄与を切り離してexchange argumentを試す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

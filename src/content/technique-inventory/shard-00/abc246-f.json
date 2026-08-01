@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc246-f「typewriter」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "ある文字列を入力できる行が 1 行以上存在すれば数えるので、求める集合は各行から入力可能な文字列集合の和集合である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "選んだ複数行すべてで入力可能な文字列に使える文字は、それらの行の文字集合の共通部分だけであり、種類数を c とすれば長さ L の列は c^L 個ある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc246-f「typewriter」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "非空な行 subset を全列挙し、文字 bitmask の AND の popcount を c として c^L を subset size の奇偶で足し引きする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N≤18 なので 2^N を列挙でき、重複する文字列を包除原理で一度だけ数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "長さ L の全小文字列を生成し、少なくとも 1 行で打てるか検査する。",
+        "decision": "rejected",
+        "decisionReason": "L≤10^9 で候補数 26^L は列挙不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+        "text": "行集合 I の共通部分を数えるとき、I に含まれない行で入力可能かどうかは問わないため、包除原理の交差項として正しく使える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "typewriter 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "文字の順序には追加制約がないので、共通 alphabet の各文字を L 箇所で独立に選び、交差集合の大きさは popcount(AND)^L になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc246-f「typewriter」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各 S_i を 26 bit mask にする。mask=1,…,2^N-1 ごとに選択行の AND と選択数を求め、共通文字数^L を高速累乗する。選択数が奇数なら加算、偶数なら減算し、998244353 で正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc246-f「typewriter」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "包除原理",
+      "trigger": "複数集合の和集合を数えたいが、要素が複数集合に重複して現れるとき。",
+      "application": "少なくとも 1 行で打てる文字列を、非空な行集合の交差数の符号付き和として数える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "包除原理",
-      "trigger": "制約と操作を整理したときに 包除原理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc246-f「typewriter」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 包除原理 を問題固有の状態へ適用する。",
+      "name": "bitmask subset 全探索",
+      "trigger": "対象集合数 N が 20 前後で、各 subset の共通属性を高速に集約できるとき。",
+      "application": "行集合を 2^N で走査し、26 bit AND と popcount で共通 alphabet を求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "入力可能文字列という巨大集合を直接持たず、行 subset の共通 alphabet の大きさだけで交差項を評価できる。",
+      "reusablePerspective": "集合要素の列挙が巨大でも、任意の集合交差の要素数に閉形式があれば包除原理が候補になる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
+      "text": "集合の和集合に対する包除原理",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "包除原理",
+      "text": "文字集合の bitmask・AND・popcount",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "剰余高速累乗",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "空 subset は含めず、符号は選択行数が奇数なら正、偶数なら負にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "共通文字数が 0 の項も L≥1 なので 0 とし、減算後は 998244353 の非負剰余へ戻す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "typewriter 型の 文字列の prefix・suffix と一致関係に対し、包除原理を選び、状態と証明を一貫して設計できる。",
+      "text": "複数行の入力可能文字列の和集合を、共通文字 mask と包除原理で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "2 行が一部だけ文字を共有する例で、単純和が共通 alphabet^L を重複計上し、偶数 subset で引くことを具体的に示す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

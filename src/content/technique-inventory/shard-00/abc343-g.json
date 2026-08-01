@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc343-g「Compress Strings」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "あるS_iが別のS_jのsubstringなら、S_iを含む条件はS_jを含む条件に包含されるため除去できる。残った文字列は最短superstring内で開始位置順に並び、隣接文字列を最大suffix-prefix overlapで重ねる形へ変形できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc343-g「Compress Strings」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "包含文字列を除去し、全ordered overlapを前計算してbitmask DPする",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N≤20なので文字列順列をsubset×末尾状態へ圧縮し、最小追加長を厳密に求められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全N!通りの連結順を生成する",
+        "decision": "rejected",
+        "decisionReason": "20!通りあり、overlap計算を前計算しても列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "既知の一致区間内では以前の値を再利用し、区間を越える比較だけが全体で線形回数になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Compress Strings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "包含関係を除いた最適superstringで、開始位置が隣接するX,Yの重なりはXのsuffixとYのprefixでなければならず、最大overlap未満ならさらに短縮できる。よって順序が決まれば追加長は|first|+Σ(|next|-ov(prev,next))である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc343-g「Compress Strings」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "同一文字列をdeduplicateし、他文字列のsubstringであるものをKMP/Z等で削除する。各ordered pair(i,j)の最大suffix-prefix一致長ov[i][j]を前計算する。dp[mask][j]をmaskを含むsuperstringで末尾がjの最小長として、未使用kへ+|S_k|-ov[j][k]を遷移しfull maskの最小を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc343-g「Compress Strings」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "冗長constraint除去",
+      "trigger": "ある要求対象が別要求対象に完全包含される。",
+      "application": "substringである文字列を先に消し、subset DPのNと重複条件を減らす。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Z algorithm または KMP",
-      "trigger": "制約と操作を整理したときに Z algorithm または KMP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc343-g「Compress Strings」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Z algorithm または KMP を問題固有の状態へ適用する。",
+      "name": "overlap TSP型bit DP",
+      "trigger": "各objectを一度ずつ順序付け、隣接pairごとの節約量で総costが決まる。",
+      "application": "訪問集合maskと最後の文字列を状態にし、次文字列の追加長をedge costにする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "substring包含を除いたことで、最適解中の文字列出現を開始位置順に一度ずつ代表化でき、非隣接の複雑な重なりも隣接最大overlapの連鎖で十分になる。",
+      "reusablePerspective": "superstring問題は包含除去後にpairwise overlapを辺重みとするHamiltonian pathへ落ちる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Z algorithm または KMP",
+      "text": "substring検索、KMP/Z algorithm、suffix-prefix overlap、bitmask DP。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "連結文字列へ置く separator が入力 alphabet と衝突しないようにする。",
+      "text": "同一文字列が複数ある時に全て削除しないよう先にdeduplicateする。ov[i][i]は遷移に使わず、dpのINF加算を避ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Compress Strings 型の 文字列の prefix・suffix と一致関係に対し、Z algorithm または KMPを選び、状態と証明を一貫して設計できる。",
+      "text": "入力全stringをsubstringとして含む文字列の最小可能長を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "連結文字列へ置く separator が入力 alphabet と衝突しないようにする。",
+      "text": "duplicate、完全包含、overlapなし、非対称overlap、三文字列の順序で節約が変わる例を全順列と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

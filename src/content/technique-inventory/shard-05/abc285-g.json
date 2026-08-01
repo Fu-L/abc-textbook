@@ -17,77 +17,107 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc285-g「Tatami」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "1×2 tileを置くことは、1でない隣接2cellを1本のmatching edgeで結ぶことに対応し、残った?は1×1 tileで覆える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "文字2のcellは必ずmatchingに含める必要がある一方、?のcellはmatchedでもunmatchedでもよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "grid隣接graphはcheckerboard parityで二部graphになるため、matching条件をunit-capacity flowへ変換できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc285-g「Tatami」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "二部matching networkの必須頂点にlower bound 1を設定し、lower-bound付きflowのfeasibilityを最大流へ帰着する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "左右どちら側にある2も必ず飽和する条件をflow conservationとして同時に表現できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "2のcellから順に空いている隣接cellへ貪欲にdominoを置く。",
+        "decision": "rejected",
+        "decisionReason": "局所選択が別の必須cellの唯一の相手を奪う場合があり、matching全体の組替えが必要になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "通常の最大matchingを1回求め、cardinalityだけで可否を決める。",
+        "decision": "rejected",
+        "decisionReason": "最大本数が同じでも、特定の2頂点をすべてcoverしているかというlower-bound条件をcardinalityだけでは表せない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+        "text": "左側頂点ではsourceからの辺、右側頂点ではsinkへの辺を流量1に強制すれば、そのcellがちょうど1本のdominoに含まれる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Tatami 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "lower bound Lを先に流したとみなして各頂点の需要差へ変換し、super source/sinkと元sink→元sourceの辺を加えるとcirculation feasibilityになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc285-g「Tatami」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "文字1のcellを除き、偶奇で左右に分けて隣接辺を容量1で張る。source→左cellと右cell→sinkも容量1とし、文字2ならその辺のlower boundを1、?なら0にする。lower bound分を頂点需要へ移し、super sourceから需要超過頂点、供給超過頂点からsuper sinkへ辺を張り、sink→sourceへ十分大きい辺を追加する。最大流でsuper sourceからの全辺を飽和できればYes。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc285-g「Tatami」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "gridの二部matching",
+      "trigger": "隣接cellを重ならないpairへ分けるtile配置問題。",
+      "application": "checkerboard parityを二部にしてdominoをmatching edgeとみなす。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最大流・最小カット定理",
-      "trigger": "制約と操作を整理したときに 最大流・最小カット定理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc285-g「Tatami」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 最大流・最小カット定理 を問題固有の状態へ適用する。",
+      "name": "lower-bound flow feasibility",
+      "trigger": "一部の辺に最低流量があり、指定頂点の飽和を強制したいとき。",
+      "application": "需要差とsuper source/sinkを導入して通常の最大流へ帰着する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "1はgraphから除外し、2だけを必須matched、?を任意matchedとすると、1×1 tile自体を明示的に選ぶ変数は不要になる。",
+      "reusablePerspective": "混在tile問題では、大きいtileだけをpackingとして選び、小さいtileで埋められる残余を自由状態として消去する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "bipartite matchingとmax flow",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "最大流・最小カット定理",
+      "text": "lower bound付きflowの需要変換",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "必須lower boundを引いた残容量と各頂点のbalanceの符号を統一し、super sourceから出る総容量が全て流れたかで判定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "H×W≤90000なのでgraphをcell indexへ変換し、隣接edgeを同じ向きで重複なく張る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Tatami 型の 盤面上の位置と局所遷移に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。",
+      "text": "1・2・?の指定を満たすmonomino/domino敷き詰めの存在を、lower-bound付き二部flowの実行可能性として判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "左右それぞれに文字2がある小さなgridで、どのsource/sink辺にlower boundが付くか、需要変換後に全必須cellが1本ずつmatchingされるかを追う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

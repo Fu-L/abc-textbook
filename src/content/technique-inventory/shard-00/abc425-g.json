@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc425-g「Sum of Min of XOR」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各 x に対する min_i(x xor A_i) は最上位 bit が一致する A_i があれば必ずそちらで達成される。x の区間 [0,M) も最上位 bit で高々二つに分けられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc425-g「Sum of Min of XOR」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "A と x の範囲を最高 bit で分割し、f(A,M,k)=Σ_{0≤x<M}min_i(x xor A_i) を再帰計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各 A_i は bit ごとの一つの部分問題だけへ入り、Trie を明示せず全体を O(N log max A) で処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各 x=0,…,M-1 について全 A_i との xor を調べる。",
+        "decision": "rejected",
+        "decisionReason": "M と N の積に比例し、値域が大きい制約では間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
+        "text": "問い合わせ側の最高 bit と一致する集合が非空なら反対側は候補にならず、一致側が空なら最高 bit の寄与 2^(k-1) が全 x に加わる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sum of Min of XOR 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "M=2^k の全区間では片側しか A がない場合、下位 bit の問い合わせが二度現れ、固定寄与は 2^(2k-2) になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc425-g「Sum of Min of XOR」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "A の値を bit k-1 で B0,B1 に分ける。M が下半分以下、全区間、上下にまたがる場合を分岐し、各 x 側に対応する非空集合へ再帰する。一致側が空なら個数×2^(k-1) を加え、k=0 または M=0 で 0 を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc425-g「Sum of Min of XOR」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "bit ごとの分割統治",
+      "trigger": "xor の最小化で、上位 bit の一致が下位 bit より常に優先されるとき。",
+      "application": "A と問い合わせ区間を同じ最高 bit で分け、選ばれる側を確定して一段下へ進む。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Trie",
-      "trigger": "制約と操作を整理したときに Trie の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc425-g「Sum of Min of XOR」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で Trie を問題固有の状態へ適用する。",
+      "name": "暗黙 Trie 再帰",
+      "trigger": "値集合を二進 Trie として扱えるが、必要なのが部分集合と深さだけのとき。",
+      "application": "配列分割を再帰状態として持ち、Trie ノードを明示構築せず総和を集約する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最小 xor の総和は各 x を独立処理せず、同じ上位 bit 接頭辞を持つ x の区間をまとめて処理できる。",
+      "reusablePerspective": "辞書順に優先される bit 評価では、候補集合と問い合わせ集合を同時に二分する再帰が有効である。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Trie",
+      "text": "xor の bit 比較、二進 Trie、半開区間の分割、再帰的な集約を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。",
+      "text": "2^(2k-2) や M·2^(k-1) は 32 bit を超えるため十分広い整数型を使う。M=2^k と空集合の各分岐を先に整理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sum of Min of XOR 型の 列の順序と prefix 状態に対し、Trieを選び、状態と証明を一貫して設計できる。",
+      "text": "最小 xor の全問い合わせ総和を、bit 分割と固定上位 bit 寄与の加算で高速に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。",
+      "text": "M≤2^(k-1)、M=2^k、途中で上下にまたがる三場合について、再帰する集合・長さ・固定寄与を式と照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

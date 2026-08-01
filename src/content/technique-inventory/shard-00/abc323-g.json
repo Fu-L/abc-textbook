@@ -17,67 +17,129 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc323-g「Inversion of Tree」では、条件付き辺へ形式変数を付けた Laplacian minor の行列式を作り、係数として条件別の全域木数を取り出す。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各inversion edgeへweight x、他edgeへweight 1を付けると、treeのweight積はx^{inversion数}であり、全spanning treeの重み和のx^K係数が求める答えになる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "weighted Matrix-Tree theoremにより、この生成多項式はpolynomial Laplacianの任意のcofactor det(M_0+xM_1)として得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "cofactor sizeはN-1で各entryがxの一次式なので、determinantのdegreeも高々N-1である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc323-g「Inversion of Tree」では、条件付き辺へ形式変数を付けた Laplacian minor の行列式を作り、係数として条件別の全域木数を取り出す。この状態表現から答えを構成する。",
+        "approach": "det(M_0+xM_1)を正則な係数matrixへ変形し、characteristic polynomialをO(N^3)で求めて全係数を復元する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N≤500で、N点のdeterminant評価を繰り返さず1回の行列多項式計算へ帰着できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "xへN個の値を代入して各determinantをGaussian eliminationし、補間する。",
+        "decision": "rejected",
+        "decisionReason": "1評価O(N^3)をN回行うO(N^4)となり、この制約では重い。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "Cayleyのtree列挙や全edge subsetからtreeだけを検査する。",
+        "decision": "rejected",
+        "decisionReason": "labelled treeだけでもN^{N-2}個あり列挙不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "Matrix-Tree 定理で各全域木の辺重み積が行列式へ一度現れ、形式変数の次数が選んだ対象辺数に一致する。",
+        "text": "係数matrix Bが正則ならdet(A+xB)=det(B)det(xI+B^{-1}A)で、後半は−B^{-1}Aのcharacteristic polynomialになる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Inversion of Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "M_1がsingularでもshift aを選んでC=M_0+aM_1を正則にし、E(z)=det(M_1+zC)をcharacteristic polynomialとして計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Q(t)=det(C+tM_1)=t^dE(1/t)なので係数reverseでQを得て、元のD(x)=Q(x-a)へpolynomial shiftすればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc323-g「Inversion of Tree」では、条件付き辺へ形式変数を付けた Laplacian minor の行列式を作り、係数として条件別の全域木数を取り出す。この状態表現から答えを構成する。",
+      "text": "全unordered pair u<vについてP_u>P_vならw=x、否则w=1としてpolynomial Laplacianを作り、1行1列を除いてM_0,M_1へ分ける。d=N-1とし、C=M_0+aM_1が正則になるfield要素aを選ぶ。C^{-1}M_1を求め、−C^{-1}M_1のcharacteristic polynomialからE(z)=det(C)det(zI+C^{-1}M_1)を得る。degree dで係数をreverseしてQ(t)=D(a+t)とし、t=x-aのTaylor shiftでD(x)へ戻し、x^0..x^{N-1}係数を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "Matrix-Tree 定理と行列式多項式",
-      "trigger": "制約と操作を整理したときに Matrix-Tree 定理と行列式多項式 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc323-g「Inversion of Tree」では、条件付き辺へ形式変数を付けた Laplacian minor の行列式を作り、係数として条件別の全域木数を取り出す。この状態表現から答えを構成する。で Matrix-Tree 定理と行列式多項式 を問題固有の状態へ適用する。",
+      "name": "weighted Matrix-Tree theorem",
+      "trigger": "spanning treeをedge属性の個数別に数えたいとき。",
+      "application": "属性edgeへ形式変数weightを付け、Laplacian cofactorを生成多項式にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "matrix pencilのdeterminant",
+      "trigger": "entryがA+xBの一次matrixでdeterminant全係数が必要なとき。",
+      "application": "正則係数を単位行列へ変えcharacteristic polynomialへ帰着する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "polynomial reversalとshift",
+      "trigger": "x係数matrixがsingularだが、ある評価点のconstant matrixは正則にできるとき。",
+      "application": "変数をshiftし逆数変換で正則matrixを最高次係数側へ移す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "treeごとのinversion edge数という離散統計を、edge weight xの積へ符号化すると、N個の答えが1本のdeterminant polynomialに同時格納される。",
+      "reusablePerspective": "構造ごとの属性個数分布は、属性要素へ形式変数を付けたweighted countの係数として一括計算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "Matrix-Tree 定理と行列式多項式",
+      "text": "weighted Matrix-Tree theorem",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Gaussian eliminationとmatrix inverse",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "characteristic polynomial",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "polynomial Taylor shift",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "有限体上で評価・補間する場合は相異なる評価点を選び、特異な shift と符号を処理する。",
+      "text": "Laplacianはedge weightを両diagへ加えoff-diagonalから引き、同じrow/columnを除いたcofactorをM_0,M_1別々に作る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "random aを使う場合はCがsingularなら選び直し、998244353上で符号・det(C)・characteristic polynomialの規約を揃える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Q係数のreverseはdegree dまでzero paddingして行い、最後のx→x-a shiftの符号を取り違えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Inversion of Tree 型の問題に対し、Matrix-Tree 定理と行列式多項式を選び、状態と証明を一貫して設計できる。",
+      "text": "permutation inversion条件を満たすedge数ごとのlabelled tree数を、weighted Laplacian determinantの全係数として求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "有限体上で評価・補間する場合は相異なる評価点を選び、特異な shift と符号を処理する。",
+      "text": "N=3で3本のedge weightからtree3通りの生成多項式を直接展開し、Laplacian cofactor、係数reverse、shift後の符号が一致するか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,67 +17,83 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc234-e「Arithmetic Number」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "等差数の十進各桁は、先頭桁、隣接桁の共通差、桁数の三つを決めれば一意に定まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "X≤10^17 なので必要な桁数は高々 18、先頭桁は 1 から 9、公差も一桁の差の範囲しかなく、候補総数は数千以下である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc234-e「Arithmetic Number」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+        "approach": "X から一つずつ整数を増やし、各数の桁差が全て等しいか検査する。",
+        "decision": "rejected",
+        "decisionReason": "次の等差数までの差に小さい上界がなく、値域を逐次探索できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "桁数・先頭桁・公差を全列挙し、全桁が 0 から 9 に収まる候補だけ整数化して X 以上の最小を取る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "生成パラメータ空間が制約上きわめて小さく、条件を満たす数だけを漏れなく直接作れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Arithmetic Number 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "数値範囲の大きさではなく、条件付きオブジェクトを決める自由パラメータ数から候補数を見積もる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc234-e「Arithmetic Number」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+      "text": "等差 digit sequence の三パラメータ表現を使って全候補を生成・検証し、下限 X を満たす最小値を単純比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc234-e「Arithmetic Number」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "構造化された数の生成全探索",
+      "trigger": "値域は大きいが、対象が少数の小さなパラメータで一意に決まるとき。",
+      "application": "桁数、初項、公差を列挙し、生成途中で桁範囲を外れた候補を捨てる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "18 桁の 111…111 が X＝10^17 に対する候補になるため、10^18 以上へ探索範囲を広げる必要がない。",
+      "reusablePerspective": "最小の上界候補を一つ具体的に構成すると、列挙するサイズやオーバーフロー境界を安全に限定できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "全探索と候補数の上界評価",
+      "text": "十進桁列を上位から整数へ復元し、生成途中の桁範囲とオーバーフローを検査できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "先頭桁は 0 を許さず、第 2 桁以降のどれかが 0 未満または 9 超ならその候補を破棄する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "一桁数は公差に依存しないため重複生成しても最小値比較には影響しないが、候補整数は 64 bit で安全に組み立てる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Arithmetic Number 型の問題に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な数値範囲でも、桁構造の自由度を数えて小さな生成全探索へ落とせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "桁条件を持つ数では、数を走査する前に「何を決めれば残りが一意か」を列挙して候補数を見積もる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

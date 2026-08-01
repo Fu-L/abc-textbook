@@ -17,67 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc337-f「Usual Color Ball Problems」では、列を二周分へ延長し、色ごとの個数を保つ two pointers で上限 K まで寄与する巡回 window を更新する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "rotation rはCを二つ連結した列C'の長さN window [l,l+N)として扱える。ある色では処理順の1,K+1,2K+1,…個目だけが新しい空箱を要求する「chance ball」になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc337-f「Usual Color Ball Problems」では、列を二周分へ延長し、色ごとの個数を保つ two pointers で上限 K まで寄与する巡回 window を更新する。この状態表現から答えを構成する。",
+        "approach": "M個目のchance ballまでの最小window端をtwo pointersで追い、答えを差分維持する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "開始位置を進めると必要な右端は単調非減少で、各ballを定数回追加削除して全rotationをO(N)で処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各rotationを先頭からsimulationする",
+        "decision": "rejected",
+        "decisionReason": "一回O(N)でN回必要となりO(N^2)になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "右端を伸ばしたときの新規寄与はその色の保有数が K 未満の場合だけ増え、左端ごとの最大 window を単調に進められる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Usual Color Ball Problems 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "window内の色c個数をcnt_cとすると、そこまでのchance ball数はceil(cnt_c/K)である。先着M個のchance ballが使うbox数を決めるため、最小r with Σ_c ceil(cnt_c/K)≥Mを取り、色cの収納ball数はmin(ceil(cnt_c/K)K,g_c)となる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc337-f「Usual Color Ball Problems」では、列を二周分へ延長し、色ごとの個数を保つ two pointers で上限 K まで寄与する巡回 window を更新する。この状態表現から答えを構成する。",
+      "text": "C'を作り、色別総数g、現在window count cnt、chance総数S、収納総数Vを持つ。各左端lで、長さN以内かつS<Mの間右端を進め、色cのceil(cnt/K)変化に応じSとmin(ceil(cnt/K)K,g_c)を差分更新する。Vを答えに記録後、左端ballを同様に削除する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "円環列の二周化と two pointers",
-      "trigger": "制約と操作を整理したときに 円環列の二周化と two pointers の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc337-f「Usual Color Ball Problems」では、列を二周分へ延長し、色ごとの個数を保つ two pointers で上限 K まで寄与する巡回 window を更新する。この状態表現から答えを構成する。で 円環列の二周化と two pointers を問題固有の状態へ適用する。",
+      "name": "circular列の二重化",
+      "trigger": "全cyclic shiftを同じ線形window処理へ統一したい。",
+      "application": "列を二つ連結し、開始l=0,…,N-1の長さN区間として表す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "two pointersと集約値の差分更新",
+      "trigger": "条件S(l,r)≥Mの最小rがlに対して単調で、要素追加削除が一色だけを変える。",
+      "application": "右端を戻さず進め、ceil(cnt/K)と収納数の変化だけをglobal値へ反映する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "boxを開く可能性があるのは各色でK個ごとのblock先頭だけなので、複雑なsmallest box番号のsimulationは全色chance ballの到着順へ置き換えられる。",
+      "reusablePerspective": "容量付き同種groupingでは、新容器を要求する周期的な要素だけをeventとして抽出する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "円環列の二周化と two pointers",
+      "text": "two pointers、ceil division、multiset頻度の差分維持、circular array。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "window 長を元の列長以下に制限し、色数上限と箱単位の切り上げを別々に更新する。",
+      "text": "M個目のchance ballが長さN内に存在しない場合は右端をl+Nまでに止める。cntがKの倍数を跨ぐ追加・削除時だけceil値が変わることを丁寧に実装する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Usual Color Ball Problems 型の問題に対し、円環列の二周化と two pointersを選び、状態と証明を一貫して設計できる。",
+      "text": "全N通りのrotationについて、手順終了後にboxへ入っているball総数を順に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "window 長を元の列長以下に制限し、色数上限と箱単位の切り上げを別々に更新する。",
+      "text": "Mが十分大きく全ballが入る場合、K=1、一色だけ、M個目がwindow末尾、左端削除でchance数が減る例を愚直simulationと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,111 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc326-e「Revenge of \"The Salary of AtCoder Inc.\"」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "salary総額は各A_iの支払indicatorの和なので、期待値の線形性によりΣA_i·Pr(A_iが支払われる)で求められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "A_iが支払われる直前のxは0..i-1のいずれかで、各状態jへ到達した後に出目iを1/Nで出すeventは互いに排反である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "p_jをstate x=jへ到達してA_jを受け取る確率、p_0=1とするとp_i=(1/N)Σ_{j<i}p_jになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc326-e「Revenge of \"The Salary of AtCoder Inc.\"」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各indexへ到達する確率p_iをprefix sumで更新し、A_i p_iを加える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "strictly increasingなstate遷移を1次元確率DPにし、全過去和を累積値1つで線形計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "die roll列をterminationまで全列挙してsalaryを平均する。",
+        "decision": "rejected",
+        "decisionReason": "長さは有限でもroll列の分岐数が指数的である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各stepの期待paymentが一定としてexpected step数を掛ける。",
+        "decision": "rejected",
+        "decisionReason": "現在xにより支払対象となる出目とpayment A_yが変わり、stepごとの分布は同じでない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+        "text": "stateは出目が現在値より大きいときだけ増え、一度訪れたiを再訪しないため、A_iの支払確率とstate iへの到達確率が同じである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Revenge of \"The Salary of AtCoder Inc.\" 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Σ_{j<i}p_jをprefとして持てばp_i=pref/N、続いてpref+=p_iと更新するだけでよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc326-e「Revenge of \"The Salary of AtCoder Inc.\"」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "mod 998244353でinvN=N^{-1}を求め、pref=p_0=1、answer=0とする。i=1..Nでp_i=pref·invN、answer+=A_i·p_i、pref+=p_iと更新する。最後にanswerを正規化して出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc326-e「Revenge of \"The Salary of AtCoder Inc.\"」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "indicator期待値",
+      "trigger": "random過程中に各rewardが高々一度発生し総額がその和になるとき。",
+      "application": "各rewardの発生確率を独立に求めて重み付き加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "条件付き期待値と確率 DP",
-      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc326-e「Revenge of \"The Salary of AtCoder Inc.\"」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "name": "単調stateの到達確率DP",
+      "trigger": "state indexが遷移ごとにstrictly増加し、前状態から同確率で飛ぶとき。",
+      "application": "過去到達確率のprefix sumで次stateを計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "processの終了時刻分布を求めず、各salary項目が一度支払われる確率だけを見ると、停止rollはDP遷移に明示せず自然に確率massから抜ける。",
+      "reusablePerspective": "期待総報酬では過程全体を追うより、各一回限りeventの到達確率へ分解できないか考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "期待値の線形性",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "条件付き期待値と確率 DP",
+      "text": "確率DPとprefix sum",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "modular inverse",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "p_0=1は実在するpaymentではなく初期state用なのでanswerへA_0を加えない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "invNはmodがprimeかつN<modなので存在し、一度だけ計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Revenge of \"The Salary of AtCoder Inc.\" 型の 列の順序と prefix 状態に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "strictly increasing die processのexpected salaryを、各payment到達確率の線形DPで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "N=2で全roll列を短く展開し、p_1=1/2、p_2=(p_0+p_1)/2と停止eventを含む確率が一致するか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

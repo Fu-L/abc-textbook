@@ -17,67 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc427-g「Takahashi's Expectation 2」では、任意の操作列を同じ遷移関数を表す単調な canonical 列へ正規化し、二冪 block を binary counter のように線形 merge する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "プレゼント列は初期テンション T から最終値への関数を表す。隣接する悪い組 (p,q) は、長さを保ったまま等価な良い組 (q-A,max(q,p-B)) へ局所変換できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc427-g「Takahashi's Expectation 2」では、任意の操作列を同じ遷移関数を表す単調な canonical 列へ正規化し、二冪 block を binary counter のように線形 merge する。この状態表現から答えを構成する。",
+        "approach": "各ブロックを等価な良い列 P_i+A≤P_{i+1} に正規化し、二進カウンタのように同じ長さのブロックを線形マージする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "良い列への問い合わせは二分探索で処理でき、追加は償却 O(log M)、全体問い合わせは O((log M)^2) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "追加のたびに全プレゼント列を保持し、質問ごとに先頭からテンションをシミュレーションする。",
+        "decision": "rejected",
+        "decisionReason": "質問一回が現在の列長に比例し、多数のクエリに耐えない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "隣接二要素の置換が全初期値で遷移関数を保ち、canonical 列同士の merge も関数合成を保つ。",
+        "text": "良い列ではテンションが下がる判定から上がる判定へ切り替わる位置が高々一度なので、その境界を二分探索して最終値を計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Takahashi's Expectation 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "列の連結は関数合成 t_{P++Q}=t_Q∘t_P であり、部分列を等価列へ置換しても全体の作用は変わらない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "良い列どうしの正規化マージはソート列のマージと同様に O(|P|+|Q|) で行える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc427-g「Takahashi's Expectation 2」では、任意の操作列を同じ遷移関数を表す単調な canonical 列へ正規化し、二冪 block を binary counter のように線形 merge する。この状態表現から答えを構成する。",
+      "text": "長さが互いに異なる 2 冪の良い列ブロックを保持する。追加を長さ 1 の良い列とし、同長ブロックがある間は順序を保って結合・正規化する。質問では古いブロックから順に、各良い列上の切替位置を二分探索してテンションを更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "関数合成の canonical form と二進 bucket",
-      "trigger": "制約と操作を整理したときに 関数合成の canonical form と二進 bucket の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc427-g「Takahashi's Expectation 2」では、任意の操作列を同じ遷移関数を表す単調な canonical 列へ正規化し、二冪 block を binary counter のように線形 merge する。この状態表現から答えを構成する。で 関数合成の canonical form と二進 bucket を問題固有の状態へ適用する。",
+      "name": "関数としての列の正規形",
+      "trigger": "列が状態への作用を表し、局所的な等価変換で照会しやすい形へ直せるとき。",
+      "application": "プレゼント列を全初期値 T に対して同じ結果を返す良い列へ正規化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "二進カウンタ型ブロック分解",
+      "trigger": "末尾追加があり、同サイズの要約を線形時間でマージできるとき。",
+      "application": "2 冪長の良い列を高々一つずつ持ち、carry のようにマージして償却計算量を抑える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "単調境界の二分探索",
+      "trigger": "正規化後の列で判定結果が一度だけ切り替わるとき。",
+      "application": "テンションが下がる区間と上がる区間の境界を探し、まとめて作用を計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "保存すべきものは値列そのものより、任意の T への作用を保つ照会容易な代表列である。",
+      "reusablePerspective": "合成可能な正規形と二進ブロックを組み合わせると、オンライン追加と全体作用の照会を両立できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "関数合成の canonical form と二進 bucket",
+      "text": "関数合成、二分探索、償却解析、二進カウンタ型のブロック管理を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "query は各 canonical block の切替点を二分探索し、追加時は同サイズ block だけを順に merge する。",
+      "text": "ブロックの連結順序を時系列どおりに保つ。局所変換の max(q,p-B) と q-A、良い条件 P_i+A≤P_{i+1} の不等号を取り違えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Takahashi's Expectation 2 型の問題に対し、関数合成の canonical form と二進 bucketを選び、状態と証明を一貫して設計できる。",
+      "text": "オンラインで伸びる状態遷移列を等価な単調正規形へ圧縮し、追加と作用照会を高速化できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "query は各 canonical block の切替点を二分探索し、追加時は同サイズ block だけを順に merge する。",
+      "text": "正規化マージがすべての初期 T で作用を保存すること、質問時にブロックを古い順へ関数合成していることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

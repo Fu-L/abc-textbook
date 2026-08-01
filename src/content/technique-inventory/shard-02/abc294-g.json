@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc294-g「Distance Queries on a Tree」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "根から頂点への距離はEuler tourで辺を入る時+w、戻る時-wと置いたprefix和になり、辺更新は二点更新にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc294-g「Distance Queries on a Tree」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Euler tour BITと静的LCA",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "木形は固定なのでLCAを前計算し、動的根距離だけをBITで更新して距離公式へ代入できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各更新後に全頂点距離を再計算",
+        "decision": "rejected",
+        "decisionReason": "Q回のDFSでO(NQ)になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "DFS で頂点へ入ってから出るまでに訪れる頂点はちょうどその部分木なので、時刻区間との対応が成立する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Distance Queries on a Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "d(u,v)=distRoot(u)+distRoot(v)-2distRoot(lca)により、動く重み情報と動かない祖先構造を分離できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc294-g「Distance Queries on a Tree」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "DFSで各辺の進入・退出時刻とLCA用tourを作る。重み変更はBITの+位置/-位置を差分更新し、距離質問は三頂点のprefix和とLCAから答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc294-g「Distance Queries on a Tree」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "Euler tour差分",
+      "trigger": "部分木へ共通に効く辺重みを動的更新する。",
+      "application": "進入+、退出-のprefix和で根距離を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Euler tour による木の一次元化",
-      "trigger": "制約と操作を整理したときに Euler tour による木の一次元化 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc294-g「Distance Queries on a Tree」では、主解法候補として、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で Euler tour による木の一次元化 を問題固有の状態へ適用する。",
+      "name": "LCA距離公式",
+      "trigger": "木上二点距離を根距離へ分解する。",
+      "application": "静的LCAと動的距離を結合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "更新されるのは重みだけなので、祖先関係を静的前計算として切り離せる。",
+      "reusablePerspective": "動的木距離は形と重みの役割を分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Euler tour による木の一次元化",
+      "text": "Euler tour、Fenwick tree、LCA。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入時刻の半開区間と頂点値・辺値のどちらを記録するかを統一する。",
+      "text": "辺番号から子側と二つのtour位置を保存し、更新は新旧差分を符号逆で加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Distance Queries on a Tree 型の 頂点と辺からなる状態グラフに対し、Euler tour による木の一次元化を選び、状態と証明を一貫して設計できる。",
+      "text": "辺重み更新と任意二頂点距離質問を処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入時刻の半開区間と頂点値・辺値のどちらを記録するかを統一する。",
+      "text": "小木で経路和と比較し、根隣接辺・同頂点・祖先子孫・同辺の反復更新を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

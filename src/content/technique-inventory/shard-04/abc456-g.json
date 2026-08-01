@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc456-g「Count Holidays」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "固定勤務日xで分断された各 '.' run は独立で、最長連休≤kの予定数 F(S,k) はrun長nごとの f(n,k) の積になる。最長連休がちょうどkは隣接kの差で得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc456-g「Count Holidays」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各run長のfrequencyをまとめ、包除原理で f(n,k) を O(n/(k+2)) に計算し、全runの積をkごとに更新して F(S,k) を列挙する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "k+1連休の開始点をm個指定すると各禁止blockが勤務1日+休日k+1日を占め、mの上限は (n+1)/(k+2) なので全kの計算量が調和級数型に収まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "2^N 通りの勤務・休日割当を列挙し、各列の最長連休を測る。",
+        "decision": "rejected",
+        "decisionReason": "自由日数に対して指数時間で、Nの制約を扱えない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+        "text": "固定xは連休を必ず切るので各 '.' run の割当選択は独立で、総数は積になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Count Holidays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "包除で k+1以上の連休開始を選ぶと、1日目を選ぶ/選ばない二ケースの g(n,k,m) が二項係数と2冪で閉形式になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc456-g「Count Holidays」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "Sをxでsplitしてrun長frequencyを作り、階乗・逆階乗・2冪を前計算する。k=0..Nで各distinct nの f(n,k) をmの交代和から求め、frequency乗してF_kを作る。F_k-F_{k-1}を所望の分布として出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc456-g「Count Holidays」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "固定separatorによる積分解",
+      "trigger": "列の禁止patternが固定記号を跨がず、自由runごとに独立なとき。",
+      "application": "run別の数え上げを掛け合わせる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "包除原理",
-      "trigger": "制約と操作を整理したときに 包除原理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc456-g「Count Holidays」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 包除原理 を問題固有の状態へ適用する。",
+      "name": "長run禁止の包除原理",
+      "trigger": "binary列で連続1の最大長を制限したいとき。",
+      "application": "違反runの開始blockを選び、圧縮配置を二項係数で数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最長値の分布は『最大≤k』の累積数を先に列挙し、差分でexact値へ戻す。",
+      "reusablePerspective": "全kで重いように見える和も、各項のstepがk+2なら二重総和を調和級数で評価できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "包除原理",
+      "text": "固定separatorによる積分解、長run禁止の包除原理と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "f(n,k)=2^n となる k≥n を早期処理し、積の0因子やmod逆元更新を安全に扱う。F_{-1}=0の差分境界を置く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Count Holidays 型の 文字列の prefix・suffix と一致関係に対し、包除原理を選び、状態と証明を一貫して設計できる。",
+      "text": "固定勤務日を含む全予定の最長連休分布を、run積と包除の調和級数計算で列挙できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "違反run開始blockが互いに必要な間隔を図示し、1日目を含む/含まない g の二式とm上限を再導出する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

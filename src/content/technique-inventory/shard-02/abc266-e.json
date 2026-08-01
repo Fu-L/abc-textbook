@@ -17,77 +17,87 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc266-e「Throwing the Die」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。入力から構成される離散状態と実行可能な遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "続行を選ぶと過去の出目は最終scoreに残らないため、将来の最適期待値は残りturn数だけで決まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "現在の出目xを見た後は、今終了してxを得るか、残りturnの最適期待値を得るかの大きい方を選べる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc266-e「Throwing the Die」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。入力から構成される離散状態と実行可能な遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全ての出目履歴と各時点の終了・続行判断を決定木として列挙する。",
+        "decision": "rejected",
+        "decisionReason": "履歴数が6^Nに増える一方、過去履歴は続行後の価値へ影響しない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "f(n)を残りn回での最適期待値とし、f(n)=Σ_{x=1}^6 max(x,f(n−1))/6 を小さいnから計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "出目を観測した後の最適行動を各xで独立に選び、その条件付き価値を平均すればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Throwing the Die 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "最適方策は出目xが継続価値f(n−1)以上なら終了し、未満なら続行するthreshold ruleになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc266-e「Throwing the Die」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。入力から構成される離散状態と実行可能な遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "有限期限optimal stoppingをBellman value iterationにし、観測後のstop payoffとcontinuation valueの最大を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "状態と遷移のモデル化",
-      "trigger": "制約と操作を整理したときに 状態と遷移のモデル化 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc266-e「Throwing the Die」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。入力から構成される離散状態と実行可能な遷移を必要十分な状態だけで表し、答えを構成する。で 状態と遷移のモデル化 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "条件付き期待値と確率 DP",
-      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc266-e「Throwing the Die」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。入力から構成される離散状態と実行可能な遷移を必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "name": "有限期限の最適停止DP",
+      "trigger": "各stepで確率結果を観測してから終了か続行を選び、期限が固定されているとき。",
+      "application": "残りstep数の価値を状態にし、各観測結果で即時報酬と継続価値の最大を平均する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "N=1では強制終了なのでf(1)=3.5となり、同じ漸化式をf(0)=0から始めてもこの基底を自然に得られる。",
+      "reusablePerspective": "期限付き停止問題は残り0stepの継続価値を定義すると基底と遷移を統一できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "状態と遷移のモデル化",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "条件付き期待値と確率 DP",
+      "text": "条件付き期待値、期待値の全確率分解、Bellman最適性を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "doubleでN回更新し、各回で1から6までのmaxを加えて6で割る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "十分な小数桁を出力して絶対・相対誤差10^{-6}を満たす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Throwing the Die 型の 入力から構成される離散状態と実行可能な遷移に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "出目を見て継続可否を選ぶサイコロゲームの最適期待値を、残り手数DPで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "最適停止では、続行後に過去情報が残るかを確認し、残らないなら残り期限だけへ状態を圧縮する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "判断が確率結果の観測後なら、期待値を取る前に各結果でmaxを取る順序を守る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

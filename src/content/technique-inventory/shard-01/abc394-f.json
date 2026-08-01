@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc394-f「Alkane」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "treeのsubgraphがconnectedなら選んだ頂点集合に対するedgeは一意で、各頂点の採用degreeを1または4にすればよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "親edgeを使う向き付き部分解では、頂点vはleafとして子0個を選ぶか、degree4として子3個を選ぶかの二択になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc394-f「Alkane」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "親へ接続する広義alkaneの最大sizeをtree DPし、top vertexで4枝を結合する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各vでchild dpの大きい3本または4本だけが必要で、全edgeを定数回処理してO(N)で最大subtreeを求められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "alkane候補の頂点subsetを列挙してdegreeを検査する",
+        "decision": "rejected",
+        "decisionReason": "treeでもconnected subsetは指数個あり、degree条件の局所性を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "木には閉路がないため、親辺を除く部分木が独立し、帰納法で子の最適値または個数を合成できる。",
+        "text": "dp[v]は親edge込みでvの最終degreeが1または4になる部分木なので、値1か1+上位3 child dpである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Alkane 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "完成alkaneの最上位vは親edgeを持たないためdegree4なら上位4 child dpを結ぶ。頂点数5以上ならdegree4を少なくとも一つ含む。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc394-f「Alkane」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "任意rootでpostorderする。各vの正のchild dpを降順に取り、dp[v]=max(1,1+top3 sum)を計算する。同時にvを完成rootとする1+top4 sum等で最大を更新し、最大が5未満なら-1を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc394-f「Alkane」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "tree DPのopen/closed state",
+      "trigger": "親辺を後から接続してdegree条件が完成する部分構造を扱うとき。",
+      "application": "親接続ありdpと完成root評価を分ける。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "根付き木と木 DP",
-      "trigger": "制約と操作を整理したときに 根付き木と木 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc394-f「Alkane」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 根付き木と木 DP を問題固有の状態へ適用する。",
+      "name": "上位k childの選択",
+      "trigger": "nodeが固定本数の枝だけ採用し、枝寄与が独立加法的なとき。",
+      "application": "child dpの上位3/4本だけを足す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "degree 1/4条件を親辺の有無で分解すると、内部nodeの必要child数が常に3、完成rootだけ4となる。",
+      "reusablePerspective": "固定degree部分木では、parent connectionを一本予約したopen stateを設計すると局所遷移になる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "根付き木と木 DP",
+      "text": "rooted tree DPとconnected subgraphの構成を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "dp[v]=1のleaf選択は常に可能だが、完成答えはdegree4頂点を含むsize≥5だけ。child数不足時にtop3/4を使わない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Alkane 型の 根付き木・部分木・パスの関係に対し、根付き木と木 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "degreeが1または4の最大tree subgraphを、親接続を予約した線形tree DPで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "path、star(degree3/4/5)、二つの高degree頂点を結ぶ木を手計算し、size1の広義解を誤って答えにしないことを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

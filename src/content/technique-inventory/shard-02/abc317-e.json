@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc317-e「Avoid Eye Contact」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "視線に入るかを先に確定できれば、残る問題は各辺コスト1の grid 最短路なので BFS である。視線は壁または人で止まり、S/G や空きマスでは止まらない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "人ごとに長い ray を愚直に伸ばしても、同方向走査なら各マスを定数回にできる。四方向からの sweep で最後に見た人の向きを管理する方法なら明確に O(HW) である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc317-e「Avoid Eye Contact」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "四方向の grid sweep で監視マスを印付け、そのマスと障害物・人を通行不可にして S から BFS する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "前処理と探索がともに O(HW) で、視線計算と最短路計算の責務を分離できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "BFS 中に各候補マスから四方向を逆走し、見張る人がいるか都度調べる。",
+        "decision": "rejected",
+        "decisionReason": "開けた行列では一移動判定に O(H+W) かかり、全体が O(HW(H+W)) まで悪化する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+        "text": "左から右の sweep では最後の blocker が右向き人ならその後の空きマスが監視下で、壁または別の人に会った時点で active を更新・解除する。残り三方向も同型である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Avoid Eye Contact 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "監視マスは通れないが視線を遮らない。視線を止めるのは # と四種の人だけなので、mark 済み空きマスで sweep を止めてはいけない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc317-e「Avoid Eye Contact」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "viewed を false で作り、各行を左右から、各列を上下から走査する。対応方向を向く人の後で blocker までの . を viewed=true にする。次に #・人・viewed を禁止として S から四近傍 BFS し、G の距離または −1 を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc317-e「Avoid Eye Contact」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "ray constraint の方向 sweep",
+      "trigger": "grid 上の直線効果が blocker まで続き、方向種類が定数個のとき。",
+      "application": "各走査線で現在 active な ray の有無だけを持って全マスを一度ずつ印付ける。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc317-e「Avoid Eye Contact」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "制約前処理＋BFS",
+      "trigger": "移動不能条件が位置だけで決まり、移動ごとに再計算する必要がないとき。",
+      "application": "危険マスを静的 obstacle に変換して単位重み最短路を解く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "監視されたことと視線を遮ることは別属性であり、前者を obstacle として BFS に使っても ray sweep の blocker にはしない。",
+      "reusablePerspective": "grid 前処理では「入れない」「効果を止める」を同じ boolean に潰さず、意味ごとに分ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "grid BFS",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "幅優先探索",
+      "text": "行列の四方向 sweep",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "S/G は監視外保証だが sweep 上では空きマス同様に視線を通す。人のマス自身は viewed にせずとも常に BFS 禁止とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Avoid Eye Contact 型の 盤面上の位置と局所遷移に対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "長い視線を各マス定数回の sweep で静的障害へ変え、最短安全経路を全体 O(HW) で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "前処理の blocker 条件と BFS の通行条件を別に列挙する。四方向実装は方向配列で共通化し、端・連続する人をテストする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

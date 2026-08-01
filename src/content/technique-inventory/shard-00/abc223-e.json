@@ -17,67 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc223-e「Placing Rectangles」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "面積の総和が XY 以下でも、整数辺長と各長方形の形のため配置できるとは限らない。一方、長方形が三つだけなら、実現可能な配置には一つを残り二つから分ける水平または垂直な直線が存在する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc223-e「Placing Rectangles」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+        "approach": "分離する一個の長方形、分離方向、A,B,C の順列を列挙し、天井除算で必要な帯幅を確保して残領域へ二個を並べられるか判定する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "三長方形に対する分離直線の存在により、連続的に見える配置を有限個の必要十分な切り分けへ落とせる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "A+B+C≤XY だけを確認して配置可能と判定する。",
+        "decision": "rejected",
+        "decisionReason": "面積には余裕があっても、各長方形が整数幅・整数高さを必要とするため、容器の縦横へ収まらない例を除けない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+        "text": "面積 S の長方形を幅 w の帯へ置くには高さ ceil(S/w) が必要十分であり、帯を切り取った後は二長方形の同じ判定へ帰着する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Placing Rectangles 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "三長方形の任意の実現可能配置では、いずれかの長方形の辺を延長することで、一個と二個を隔てる軸平行線を選べる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc223-e「Placing Rectangles」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+      "text": "A,B,C の6順列と X,Y の二方向を試し、最初の面積に必要な帯を切り取り、残った長方形で残り二面積を縦または横に分割できるか天井除算で調べる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc223-e「Placing Rectangles」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "分離補題による幾何配置の有限化",
+      "trigger": "少数の軸平行図形を重ならずに置く存在判定で、図形の辺を延長した分離線を議論できるとき。",
+      "application": "三個の配置を『一個を帯へ置き、残り二個を残領域へ置く』有限ケースとして全列挙する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "天井除算による最小必要長",
+      "trigger": "整数辺長の長方形で、一辺と必要面積からもう一辺の最小値を求めるとき。",
+      "application": "面積 S を幅 w に収める高さを ceil(S/w) とし、残る寸法を過不足なく更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "三個までなら、どの実現可能配置にも一個対二個の軸平行な分離線が存在するため、複雑な噛み合わせを考えなくてよい。",
+      "reusablePerspective": "少数の軸平行図形では、辺の延長で配置を再帰的な帯分割に標準化できるかを先に証明する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "全探索と候補数の上界評価",
+      "text": "軸平行長方形の分離と整数の天井除算",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "ceil(S/w) は (S+w-1)/w で求め、S が10^18なので加算と面積比較の整数幅を確保し、必要長が容器を超えた場合を直ちに失敗させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Placing Rectangles 型の問題に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "連続的な長方形配置を分離補題で定数個の帯分割へ落とし、整数寸法まで含めて必要十分に判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "面積総和だけで判断せず、『一個を切り離せる線があるか』を証明してから有限ケースへ落とす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

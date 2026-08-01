@@ -17,77 +17,129 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc321-g「Electric Circuit」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "最終graphの各connected componentの頂点集合Sについてindicatorを置くと、component数は非空Sのindicator和なので期待値の線形性を使える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "S内のred端子数とblue端子数が異なればSだけでcableを閉じられず、等しくmならS内端子の全matching数f(S)はm!である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Sが1componentとなる内部matching数g(S)は、f(S)から複数componentへ分かれるmatchingをsubset DPで引いて求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc321-g「Electric Circuit」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各subsetの全内部matching fからconnected matching gをanchor付きsubset recurrenceで抽出し、component indicator確率を総和する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N≤17のsubset空間でM!個の配線を列挙せず、連結成分分割をO(3^N)の一意な分解として数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "M!通りのred-blue terminal matchingを列挙し、毎回DSUでcomponent数を数える。",
+        "decision": "rejected",
+        "decisionReason": "M≤10^5でfactorial個の配線は列挙不能である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各part pair間の期待cable本数からexpected component数を直接求める。",
+        "decision": "rejected",
+        "decisionReason": "component数はedge本数の線形関数ではなく、cycleや連結性の高次依存を失う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+        "text": "Sの固定anchor aを含むcomponentをTとすると、Tはconnectedにg(T)通り、残りS\\Tは任意の内部matching f(S\\T)通りで、非連結caseを一意に分類できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Electric Circuit 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "従ってg(S)=f(S)-Σ_{T⊊S,a∈T}g(T)f(S\\T)となり、小subsetから順に計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Sが全体の1componentとなるfull matching数はg(S)(M-m)!なので、その確率はこれをM!で割った値になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc321-g「Electric Circuit」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "各partのred/blue端子数を数え、subset sumでr[S],b[S]を作る。等しいときf[S]=r[S]!、否则0。popcount昇順に、Sの最下位bit aを固定してproper submask T⊂S,a∈Tを列挙し、g[S]=f[S]-Σg[T]f[S\\T]を求める。各非空Sでm=r[S]=b[S]ならg[S](M-m)!/M!をanswerへ加え、mod 998244353で出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc321-g「Electric Circuit」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "indicator期待値",
+      "trigger": "random構造のconnected component数など、部分集合eventの個数として表せる量。",
+      "application": "各Sがちょうど1componentになる確率を足す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "条件付き期待値と確率 DP",
-      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc321-g「Electric Circuit」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "name": "connected構造のsubset DP",
+      "trigger": "全構造数f(S)からconnected構造数g(S)を抽出したいとき。",
+      "application": "anchorを含むcomponent Tで非連結構造を一意分解する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "3^N submask enumeration",
+      "trigger": "各subset Sに対しanchor条件付きの全submaskを走査するとき。",
+      "application": "S,T,S\\Tの三分類として総計を評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "terminal matchingがSの外へ1本も出ない確率と、その内部graphがconnectedな割合をg(S)(M-m)!/M!で同時に数えられる。",
+      "reusablePerspective": "subsetがcomponentになるeventは、subset内connected構造と補集合側の任意構造を積に分け、全体構造数で割る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "期待値の線形性",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "条件付き期待値と確率 DP",
+      "text": "bitmask subset DP",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "connected構造のexponential formula的分解",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "factorialとmod inverse",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "red/blue数が異なるsubsetはf=g=0とし、m=0のsingletonはedgeなしでもconnectedなのでrecurrence上g=1になる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "proper submaskだけを引き、anchor bitを含む条件で同じpartitionを重複計数しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "最後にinv(M!)を共通で掛け、mod減算を正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Electric Circuit 型の 頂点と辺からなる状態グラフに対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "randomなterminal matchingが作るpart graphのexpected connected component数を、connected subset matchingの総和で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "N=2で端子なしsingletonと両partを結ぶ1 cableのcaseを計算し、fからgを引くrecurrenceとcomponent確率の(M-m)!因子を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,105 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc216-h「Random Robots」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各ロボットの N 回の移動は、頂点 (時刻,座標) から次時刻の同座標または右隣へ進む時間 DAG 上のパスである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "二体が同時刻に同じ座標へいることは二本のパスが頂点を共有することに等しく、出発順を保つ非交差パスの組を数えればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc216-h「Random Robots」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各時刻にロボット間の全ての間隔を状態として、停止・右移動の 2 の K 乗通りを遷移する。",
+        "decision": "rejected",
+        "decisionReason": "座標差の状態数と時刻ごとの同時操作数が大きく、全配置を保持できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "固定した昇順終点への非交差パス数を LGV 行列式で表し、終点座標の走査と始点集合の bit DP で全行列式展開を同時に合計する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "一体の始点から終点へのパス数は二項係数で求まり、置換の階乗列挙を選択済み始点集合だけの状態へ圧縮できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
+        "text": "終点 y_j を固定したとき、始点 x_i からのパス数は右移動回数を選ぶ C(N,y_j−x_i) であり、LGV により非交差な K 本組はその行列式になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Random Robots 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "行列式展開の置換符号は、新しい終点へ未使用始点 p を対応させる際、既選択のうち p より大きい添字数の偶奇から更新できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc216-h「Random Robots」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "衝突回避を時間 DAG の頂点非共有パスへ移し、LGV 行列式を終点座標順に展開しながら、選択済み始点マスクと転倒数符号を持つ subset DP で全終点列を合算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc216-h「Random Robots」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "LGV 公式による非交差パス数",
+      "trigger": "DAG 上で順序付けられた複数始点・終点間の頂点非共有パス組を数えるとき。",
+      "application": "一始点一終点のパス数を行列要素にし、固定終点列への衝突しないロボット移動数を行列式で表す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "DAG とトポロジカル順序",
-      "trigger": "制約と操作を整理したときに DAG とトポロジカル順序 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc216-h「Random Robots」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で DAG とトポロジカル順序 を問題固有の状態へ適用する。",
+      "name": "行列式展開の subset DP",
+      "trigger": "行列式の置換和を、列候補の選択や座標走査と同時に合計したいとき。",
+      "application": "使用済み行のマスクを持ち、新しい列へ行 p を割り当てる二項係数と転倒数の符号を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "一次元で初期位置と終点を昇順に取ると、対応順を逆転させた二本のパスは必ず同じ時刻・座標を通るため LGV の交差条件が満たされる。",
+      "reusablePerspective": "複数粒子の衝突回避は、時刻を一軸に加えた DAG の非交差パスとして表し、順序保存性から行列式を適用できることがある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "格子状 DAG のパス数を移動回数の二項係数として数えられること。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "DAG とトポロジカル順序",
+      "text": "LGV 公式の適用条件と、行列式の置換展開における転倒数符号を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。",
+      "text": "y−x_i が 0 未満または N を超える行列要素は 0 とし、終点座標は全始点から到達し得る範囲をずらして走査する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "未使用始点 p の追加時に、既選択マスク内で p より大きい添字の個数が奇数なら項の符号を反転する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "求めた衝突しない移動列数を、全ロボットの全操作数 2 の NK 乗で割るため、その法逆元を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Random Robots 型の 整数の約数・剰余構造に対し、DAG とトポロジカル順序を選び、状態と証明を一貫して設計できる。",
+      "text": "複数ランダム歩行の非衝突確率を、LGV 行列式と終点走査付き subset DP により数え上げられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。",
+      "text": "同時刻の衝突条件を見たら、時刻と位置を頂点にした DAG 上のパス共有として可視化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "固定終点なら行列式で数えられても終点列が多い場合、置換と終点選択を別々に列挙せず一つの subset DP に融合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

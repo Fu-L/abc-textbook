@@ -17,67 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc385-f「Visible Buildings」では、全ての建物対の可視条件を、中間点による支配関係を使って隣接対だけの高さ下限へ縮約する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "原点(0,h)から各building頂点を見る直線の傾き条件を全pairで課すと二次だが、三点i<j<kでは外側pair(i,k)の制約は隣接側のどちらかに支配される。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "したがって全buildingが互いに遮られないための必要高さの最大は、隣接pair(i,i+1)だけ調べれば得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc385-f「Visible Buildings」では、全ての建物対の可視条件を、中間点による支配関係を使って隣接対だけの高さ下限へ縮約する。この状態表現から答えを構成する。",
+        "approach": "隣接building対ごとの境界高さを有理式で求め、その最大と0を取る",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "公式の三点比較により非隣接pair制約は必ず冗長で、N-1個だけをO(N)走査すれば全条件を満たす最小高さになる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全i<jの遮蔽境界を列挙する",
+        "decision": "rejected",
+        "decisionReason": "正しいがΩ(N^2)でN=2×10^5に間に合わず、隣接制約による支配関係を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "非隣接対の間から任意の建物を取ると、二つの短い対の少なくとも一方が元の対以上に厳しい制約を与える。",
+        "text": "境界は直線の傾き等式から h=(H_{i+1}X_i-H_iX_{i+1})/(X_i-X_{i+1}) と一つの分数で表す。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Visible Buildings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "差を取ってから加える形は桁落ちしやすいため、分子を整数で計算して最後に除算する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc385-f「Visible Buildings」では、全ての建物対の可視条件を、中間点による支配関係を使って隣接対だけの高さ下限へ縮約する。この状態表現から答えを構成する。",
+      "text": "i=1..N-1について隣接pairの分子H_{i+1}X_i-H_iX_{i+1}と分母X_i-X_{i+1}を広い整数で作り、浮動小数へ変換して比を求める。全比と0の最大を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "直線の傾きと支配関係",
-      "trigger": "制約と操作を整理したときに 直線の傾きと支配関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc385-f「Visible Buildings」では、全ての建物対の可視条件を、中間点による支配関係を使って隣接対だけの高さ下限へ縮約する。この状態表現から答えを構成する。で 直線の傾きと支配関係 を問題固有の状態へ適用する。",
+      "name": "局所制約による全pair制約の支配",
+      "trigger": "順序付き点列の三点性質から遠いpairの制約が隣接pairへ含意されるとき。",
+      "application": "隣接N-1条件だけへ削減する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "安定な有理式評価",
+      "trigger": "大きく近い浮動小数の差が現れる幾何計算をするとき。",
+      "application": "式を整数の単一分子・分母へ整理して最後に割る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "可視性を各pair制約として眺め、任意の中間点を入れた三点比較をすると、非隣接pairが極値候補から消える。",
+      "reusablePerspective": "全pair幾何最適化では、順序上の中間要素による支配・三角的性質を探し、隣接制約へ落とせないか試す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "直線の傾きと支配関係",
+      "text": "二点を通る直線と傾き比較を扱える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "浮動小数の桁落ちを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "分子を整数で交差計算して桁落ちを避け、除算は最後に一度だけ行う。",
+      "text": "分子積は64 bit符号付き範囲を確認し、分母の符号を統一する。最小高さは0以上で、十分な桁数を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Visible Buildings 型の問題に対し、直線の傾きと支配関係を選び、状態と証明を一貫して設計できる。",
+      "text": "全building対の可視性条件を隣接対へ縮約し、数値安定なO(N)計算で必要高さを求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "分子を整数で交差計算して桁落ちを避け、除算は最後に一度だけ行う。",
+      "text": "三点をrandom生成して全pair境界最大と隣接pair最大を高精度有理数で比較し、分子が0付近・巨大値同士の差になるcaseを重点確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

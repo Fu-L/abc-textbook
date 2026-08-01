@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc254-g「Elevators」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "始点階Yと終点階WをY≤Wに揃えると、最適経路の通過階は単調増加にでき、費用はビル間の連絡通路を使う回数だけを最小化すればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc254-g「Elevators」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "エレベーター区間の統合と到達階ダブリング",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "同一ビルの重なる区間をまとめた後、一回の連絡通路で伸ばせる最高階を遷移として座標圧縮し、2の冪回の遷移を前計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各問い合わせでエレベーターグラフをBFS",
+        "decision": "rejected",
+        "decisionReason": "エレベーター・問い合わせとも2×10^5あり、毎回全区間を探索できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "始点が含まれる統合区間では無料で最上階へ、終点が含まれる区間では無料で最下階へ動けるので、質問端点をまず正規化する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Elevators 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "現在到達階以下に入口を持つ全エレベーターの最上階へ進める一回遷移は単調であり、その反復回数をbinary liftingで数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc254-g「Elevators」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "text": "同じビルで共通部分を持つエレベーター区間をマージし、端点階を座標圧縮する。一回通路を使った後の最大到達階nextを前計算してダブリング表を作り、各質問をY≤Wへ正規化し、到達階を下から持ち上げて最小通路数を求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "online query の計算量設計",
-      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc254-g「Elevators」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "name": "区間のマージ",
+      "trigger": "同一場所の重なり合う移動可能区間は乗り換えなしで一体として使える。",
+      "application": "ビルごとに区間をソートし、共通部分を持つものを統合する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc254-g「Elevators」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "到達可能性のダブリング",
+      "trigger": "単調な一回遷移を多数回反復した最小回数を問い合わせたい。",
+      "application": "2^j回の通路利用後の最高到達階を前計算し、上位bitから遷移する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "階を上下する経路を考える必要はなく、端点を正規化すると「通路一回で最高到達階をどこまで伸ばせるか」という一次元反復になる。",
+      "reusablePerspective": "幾何的な移動でも最適経路の単調性が示せれば、区間到達と関数反復の問題へ圧縮できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "online query の計算量設計",
+      "text": "同一キーごとの区間マージと座標圧縮を実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "単調関数の反復をbinary liftingで高速化し、最小回数を復元できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "Y=Wなら同じビルは0、別ビルは1を先に処理し、Y>Wでは端点を入れ替える。端点を含む区間は等号込みで探し、正規化後にY≥Wとなる同一ビル等の例を処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Elevators 型の 更新と問い合わせの時系列に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "各二地点間の最短移動時間、すなわち必要な連絡通路回数と階差を正しく求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "小さい区間集合から状態グラフを作る全探索と比較し、接する区間のマージ、同階、同一ビル、始終点が区間内部、端点正規化で到達済みになる場合を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

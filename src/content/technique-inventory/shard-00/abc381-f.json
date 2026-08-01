@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc381-f「1122 Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "値は1..20で、1122部分列では各採用値をちょうど二回ずつ使うため長さは最大40である。採用値集合 S が同じなら、最も早く作れる終了位置だけ残せば以後の拡張可能性を完全に表せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc381-f「1122 Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "dp[S] を各値を二回ずつ並べた部分列を作れる最小終了位置とし、S から最後の値 x を除いた状態の後に x の次出現を二回辿って更新する bit DP を行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "2^20 状態と各状態の set bit 遷移で O(20·2^20)、次出現表で各遷移 O(1) にできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "長さ40以下の全ての部分列 index を DFS して 1122 条件を確認する。",
+        "decision": "rejected",
+        "decisionReason": "N が2×10^5で短い長さでも部分列数は組合せ爆発し、値集合の小ささを使えていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "同じ集合 S を作る方法のうち終了位置が早いものは、遅いものが可能な全ての将来追加を同様に行えるため支配する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "1122 Subsequence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "next(pos,x) を前計算すれば、x を二回追加した終了位置は next(next(dp[S],x),x) と書ける。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc381-f「1122 Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各位置と値の次出現 index を後ろから前計算する。dp[0]=0、他をINFとし、mask と未使用値 x について二回 next を適用して dp[mask|1<<x] を chmin する。到達 mask の最大 popcount×2を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc381-f「1122 Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc381-f「1122 Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "最早終了位置を値にする bit DP",
+      "trigger": "種類数が小さい部分列選択で、同じ集合なら早い終了だけが優越するとき。",
+      "application": "mask ごとに最小 prefix 長を保持し next occurrence で遷移する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "部分列そのものを状態にせず、採用済み値集合と将来余地を最大化する最早位置だけへ圧縮する。",
+      "reusablePerspective": "各値をちょうど二回という規則が、遷移を next の二重適用へする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "bit DP、部分列の next occurrence table、支配関係による状態圧縮を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "値を0-origin bitへ直し、INF に next を適用しない。dp[empty] の位置0と配列 index の番兵規約を統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "1122 Subsequence 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "値種類20の制約を使い、最長1122部分列を集合 bit DP と最早終了位置で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "同じ mask の二つの終了位置を比較し、早い方だけで十分という支配性を次の二出現選択から説明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

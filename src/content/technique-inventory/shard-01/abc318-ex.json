@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc318-ex「Count Strong Test Cases」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "入力の permutation graph は互いに独立な有向 cycle の集合で、Alice/Bob の正誤も cycle ごとに分類できる。全体入力の数え上げは labeled cycle components の組合せになる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "サイズ i の許容 cycle 一個の寄与を整理すると 1/i² になり、個数 C_i 個の同型 component を持つ係数 1/C_i! は exponential generating function exp でまとめられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc318-ex「Count Strong Test Cases」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "cycle type ごとの組合せ係数を EGF に整理し、f(x)=Σx^i/i² の FPS exp の x^N 係数から各正誤caseを包除する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全 cycle partition の和を一つの exp 係数へ圧縮し、FPS exp を O(N log N) で計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "permutation と辺重み permutation をそれぞれ全列挙し、二解法の出力を比較する。",
+        "decision": "rejected",
+        "decisionReason": "テストケース総数は (N!)² で、N=2×10^5 に対し列挙の余地がない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "係数比較により元の再帰・畳み込みと冪級数恒等式が次数ごとに同値であることを示す。",
+        "text": "両者正しい cycle は1-cycle、Aliceのみ正しい i≥2 cycle は最小頂点から出る辺重みが cycle 内最大のものとして 1/i の割合になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Count Strong Test Cases 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "cycle partition C に対する頂点割当・cycle 内順序・重み割当を掛けると N!²∏(1/i²)^{C_i}/C_i! となり、Σ_C は exp(f) の係数そのものになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc318-ex「Count Strong Test Cases」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "mod 上で f_i=1/i² (1≤i≤N) を作り、FPS E=exp(f) mod x^{N+1} を Newton 法で求める。AliceのみAC/BobのみAC/両者AC の重複を対称性と1-cycleのみのケースで整理し、公式式 N!²(1−2[x^N]E)+N! を計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc318-ex「Count Strong Test Cases」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "labeled components の指数型生成関数",
+      "trigger": "順列の cycle 分解など、ラベル付き対象が独立 component の集合として構成されるとき。",
+      "application": "component size i の重みを f_i に置き、任意個の unordered components を exp(f) で数える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "形式的冪級数",
-      "trigger": "制約と操作を整理したときに 形式的冪級数 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc318-ex「Count Strong Test Cases」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 形式的冪級数 を問題固有の状態へ適用する。",
+      "name": "FPS exp の Newton 法",
+      "trigger": "N 次までの exp(f) 係数が必要で N が大きいとき。",
+      "application": "微分・積分・inverse/log を使う doubling で次数を倍化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "解法の誤り方を直接数えるのでなく、functional graph の各 cycle で正誤を分類すると独立 component の積へ分離する。",
+      "reusablePerspective": "アルゴリズム判定のテストケース数え上げでは、入力構造の connected components ごとに判定が独立かを探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
+      "text": "順列の cycle 分解と EGF",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "形式的冪級数",
+      "text": "NTT を用いた FPS exp",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "必要次数で毎回 truncate し、定数項が逆元や対数の前提を満たすか確認する。",
+      "text": "f の定数項は0で exp の前提を満たす。最後の全体 case の包除符号と、全 cycle が1-cycleの N! 通りを何回足し戻すかを式から確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Count Strong Test Cases 型の 順列の位置と値の対応に対し、形式的冪級数を選び、状態と証明を一貫して設計できる。",
+      "text": "二解法の正誤を cycle component の EGF へ変換し、(N!)² 個の入力を一つの FPS exp 係数から数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "必要次数で毎回 truncate し、定数項が逆元や対数の前提を満たすか確認する。",
+      "text": "cycle size ごとの4分類を先に表にし、component 一個の重みを導出してから exp を使う。最終包除は N=1,2 の手計算で検算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

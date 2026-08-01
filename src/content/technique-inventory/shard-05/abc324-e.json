@@ -17,67 +17,107 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc324-e「Joint Two Strings」では、各文字列が目標文字列の prefix と suffix を何文字 subsequence として取れるか求め、補完可能な組を整列して数える。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各S_iについて、Tのprefixをsubsequenceとして何文字取れるかA_iと、Tのsuffixを何文字取れるかB_iを独立にgreedy scanで求められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "concatenation S_i+S_jがTを含むことは、Tの先頭A_i文字を前半で、残りを後半で取れるA_i+B_j≥|T|と同値である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "従ってiを固定した良いjの数は、B_j≥|T|-A_iを満たす文字列数という1次元threshold queryになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc324-e「Joint Two Strings」では、各文字列が目標文字列の prefix と suffix を何文字 subsequence として取れるか求め、補完可能な組を整列して数える。この状態表現から答えを構成する。",
+        "approach": "各文字列のprefix-match長Aとsuffix-match長Bを求め、Bの頻度suffix sumで全ordered pairを数える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全N^2 pairを調べず、文字列scan総長と|T|の前計算だけで各iの相手数を得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全ordered pair(i,j)についてS_i+S_jを作り、Tのsubsequence判定を行う。",
+        "decision": "rejected",
+        "decisionReason": "N≤5×10^5でpair数N^2が大きく、連結文字列生成も不要である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "S_i単体がTを含むかだけを数える。",
+        "decision": "rejected",
+        "decisionReason": "Tのprefixとsuffixを2本の文字列へ分担して初めて成立するpairを落とす。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "連結後に目標を subsequence として含むことは、前半が取れる prefix 長と後半が取れる suffix 長の和が目標長以上であることと同値になる。",
+        "text": "subsequenceとして取れるprefix最大長はS_iを左からT pointerと照合するgreedy、suffix最大長は両文字列を右から照合するgreedyで得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Joint Two Strings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "A_i最大長まで前半で取れるなら、それより短いprefixも取れるため、残りsuffixの長さだけが後半への必要条件になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc324-e「Joint Two Strings」では、各文字列が目標文字列の prefix と suffix を何文字 subsequence として取れるか求め、補完可能な組を整列して数える。この状態表現から答えを構成する。",
+      "text": "各S_iを左からscanしてA_i、右からscanしてB_iを求める。count[b]へB_iの頻度を入れ、ge[l]=Σ_{b≥l}count[b]をsuffix sumする。各iについてl=|T|-A_iを計算してge[l]をanswerへ加え、64bit整数で出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "subsequence の貪欲照合と二分探索",
-      "trigger": "制約と操作を整理したときに subsequence の貪欲照合と二分探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc324-e「Joint Two Strings」では、各文字列が目標文字列の prefix と suffix を何文字 subsequence として取れるか求め、補完可能な組を整列して数える。この状態表現から答えを構成する。で subsequence の貪欲照合と二分探索 を問題固有の状態へ適用する。",
+      "name": "subsequenceのgreedy match長",
+      "trigger": "固定patternのprefix/suffixを多数文字列がどこまで含むか求めるとき。",
+      "application": "pattern pointerを一方向scanで進める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "pair条件のthreshold集計",
+      "trigger": "ordered pair条件がA_i+B_j≥Lの形になるとき。",
+      "application": "B頻度のsuffix sumで各A_iの相手数を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "連結境界を跨ぐsubsequenceは、Tのどこで前半から後半へ担当を切り替えるかだけで、各側の最大match長の和へ圧縮できる。",
+      "reusablePerspective": "concatenation上のsubsequence条件では、patternのprefix/suffixを各部分へ割り当てる境界parameterを探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "subsequence の貪欲照合と二分探索",
+      "text": "subsequence判定",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "頻度arrayとsuffix sum",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空 prefix・空 suffix を許し、同じ文字列を両側に選べる ordered pair として数える。",
+      "text": "B_iはT suffixの長さとして0..|T|で数え、右scanのpointer方向と長さ換算を混同しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "答えは最大N^2で32bitを超えるため64bit整数を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Joint Two Strings 型の問題に対し、subsequence の貪欲照合と二分探索を選び、状態と証明を一貫して設計できる。",
+      "text": "S_i+S_jがTをsubsequenceとして含むordered pair数を、各文字列の2つのmatch長から数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空 prefix・空 suffix を許し、同じ文字列を両側に選べる ordered pair として数える。",
+      "text": "Tを前半と後半へ複数の位置で分けられる例を作り、最大A_iと最大B_jの和だけで存在判定できることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

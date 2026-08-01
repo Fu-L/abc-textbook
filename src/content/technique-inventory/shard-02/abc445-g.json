@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc445-g「Knight Placement」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "同時配置できない二マスを辺で結ぶと、求める配置は障害物を除いたマス graph の最大独立集合である。移動量 (±A,±B),(±B,±A) に応じた特別な二色塗りで graph は二部になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc445-g「Knight Placement」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "g=gcd(A,B) の block と A/g,B/g の parity から各空きマスを二色化し、攻撃辺を張って最大 matching を flow で求め、空きマス数から引く。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "示した色分けでは全攻撃辺が異色間だけに存在し、二部 graph の最大独立集合サイズは König の定理により |V|-最大 matching となる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "空きマスごとに置く・置かないを全探索し、攻撃し合わない最大集合を探す。",
+        "decision": "rejected",
+        "decisionReason": "一般の独立集合列挙は頂点数に対して指数時間で、盤面サイズの制約に対応できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数線形結合で表せる値の集合が gcd の倍数全体なので、割り切れ条件が可解性の必要十分条件になる。",
+        "text": "gcd block へ縮約した後、A/g,B/g が両方奇数なら行 block parity、一方だけ奇数なら行列 block 和 parity で攻撃辺の色が反転する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Knight Placement 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "最大 matching は最小頂点被覆と同サイズなので、その補集合が最大独立集合を与える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc445-g「Knight Placement」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "障害物でないマスを頂点化し、公式の parity 規則で左右部へ分ける。左部から有効な knight 移動先へ容量1辺を張り、source/left と right/sink も容量1で Dinic 等を実行し、空き数-flow を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc445-g「Knight Placement」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "二部 graph の最大独立集合",
+      "trigger": "競合関係 graph を二色化でき、同時選択数を最大化したいとき。",
+      "application": "最大 matching を flow で求めて頂点数から引く。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "gcd と拡張 Euclid",
-      "trigger": "制約と操作を整理したときに gcd と拡張 Euclid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc445-g「Knight Placement」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で gcd と拡張 Euclid を問題固有の状態へ適用する。",
+      "name": "gcd・parity による特殊彩色",
+      "trigger": "格子上の一定変位辺を二部化したいとき。",
+      "application": "共通尺度で block 化し、縮約変位の parity から色を定める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "通常の市松模様で二部にならない移動でも、gcd block と変位 parity を見直すと適切な二色塗りが得られる。",
+      "reusablePerspective": "配置最大化は競合 graph の独立集合へ翻訳し、二部性が証明できれば matching へ落とす。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "gcd と拡張 Euclid",
+      "text": "二部 graph の最大独立集合、gcd・parity による特殊彩色と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。",
+      "text": "A=B や0を含む移動で同じ辺を重複生成しても正しさを崩さないよう整理し、障害マスと盤外を除く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Knight Placement 型の 盤面上の位置と局所遷移に対し、gcd と拡張 Euclidを選び、状態と証明を一貫して設計できる。",
+      "text": "一般化 knight の競合 graph を数論的に二色化し、最大非攻撃配置を max-flow で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。",
+      "text": "A/g,B/g の parity 二ケースで全許容変位が色を反転することを式で示してから、König の定理へ接続する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

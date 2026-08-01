@@ -17,77 +17,115 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc328-f「Good Set Query」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "accepted constraint X_a-X_b=dは頂点a,b間のpotential差を固定するedgeであり、同じconnected component内の任意2頂点差は既存constraintから一意に決まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "a,bが別componentなら両componentの絶対offsetは自由なので、新しいdは常に矛盾なく両者を接続できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "同componentなら既に決まるX_a-X_bとdが一致するときだけconstraintを追加できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc328-f「Good Set Query」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "rootからのpotential差を持つweighted Union-Findで、各queryの既知差判定とconstraint unionを行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "通常DSUの連結性に数値差を追加し、Q≤2×10^5をほぼ定数償却で順にsimulationできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "accepted constraint graphへedgeを追加し、queryごとにDFSしてa-bの差を求める。",
+        "decision": "rejected",
+        "decisionReason": "長いcomponentを毎回辿るとNQ規模になり、過去queryの計算を再利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "通常のUnion-Findでa,bが同componentかだけを見る。",
+        "decision": "rejected",
+        "decisionReason": "同componentへ追加するconstraintが既知差と一致するかという矛盾判定にpotential値が必要である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+        "text": "find時にparent pathの差も加算して圧縮すれば、pot[v]=X_v-X_rootを取得でき、同rootならX_a-X_b=pot[a]-pot[b]である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Good Set Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "別rootをmergeするときはconstraint式から新しいroot間potentialを逆算し、union by sizeで向きを反転する場合はその符号も反転する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc328-f「Good Set Query」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "weighted DSUをN頂点で初期化する。query(a,b,d)ごとにfindして、rootが同じならpot[a]-pot[b]==dのときだけindexをanswerへ追加する。rootが異なるなら常にindexを追加し、X_a-X_b=dを満たすroot間差を設定してsizeの小さいrootを大きいrootへmergeする。最後にaccepted indexを順に出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc328-f「Good Set Query」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "weighted Union-Find",
+      "trigger": "onlineに差分等式pot(a)-pot(b)=dを追加し整合性を判定するとき。",
+      "application": "parent edgeへpotential差を持たせ、rootからの差をpath compressionで集約する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Union-Find",
-      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc328-f「Good Set Query」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "name": "相対offsetの自由度",
+      "trigger": "別connected component間にはまだ絶対基準関係がない差分constraint系。",
+      "application": "最初の接続constraintは任意dでcomponent offsetを定められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "good setを直接解方程式として持たず、constraint graphの各componentに1つだけ残る平行移動自由度と、component内の一意な差をDSUへ符号化する。",
+      "reusablePerspective": "差分方程式系では絶対値でなくroot基準potentialを管理するとonline unionと矛盾検出ができる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "Union-Find",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Union-Find",
+      "text": "potential差とpath compression",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "difference constraints",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "potの定義をX_v-X_rootなどに固定し、merge式とsame-root比較の符号を小例で統一する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "potential差は最大Q×10^9級になり得るため64bit整数を使う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "rejectしたconstraintはDSUへ追加せず、後続queryの基準集合を変えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Good Set Query 型の 列の順序と prefix 状態に対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "text": "入力順greedyで追加可能な差分constraint indexを、weighted DSUで整合性判定しながら求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "X_1-X_2=3、X_2-X_3=-1からX_1-X_3=2を導く三角形で、accepted/rejected queryとpotential符号を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

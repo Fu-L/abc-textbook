@@ -1,15 +1,15 @@
 {
   "problemId": "abc264-g",
   "sourceRevisionIds": [
-    "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2",
-    "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f"
+    "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f",
+    "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2",
-        "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f"
+        "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f",
+        "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc264-g「String Fair」では、主解法候補として、全辺緩和を反復し、負辺を含む最短路と負閉路の影響範囲を判定する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "文字を一つ末尾へ追加したとき新たに発生する長さ1〜3の出現は、その文字と追加前の末尾2文字だけで決まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "一度加点済みのprefixは将来へ影響しないため、現在文字列を末尾2文字だけの有限状態へ圧縮できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc264-g「String Fair」では、主解法候補として、全辺緩和を反復し、負辺を含む最短路と負閉路の影響範囲を判定する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "文字列長を伸ばしながら全ての文字列を列挙し、美しさの最大値を更新する。",
+        "decision": "rejected",
+        "decisionReason": "長さに上限がなく各長さで26分岐し、Infinity判定もできない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "末尾2文字を頂点、次文字追加を重み付き辺とするグラフを作り、初期状態 $$ からの最大walkと到達可能な正閉路をBellman-Ford型緩和で調べる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全文字列が始点からのwalkに一対一対応し、正重みcycleがあれば反復して無限大、なければ有限最大距離になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "辺数 k 以下の最短路は k 回の緩和後に得られ、N 回目の改善は到達可能な負閉路の存在を示す。",
+        "text": "状態 xy から文字 z を追加する辺は yz へ進み、重み P(z)+P(yz)+P(xyz) を持つ。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "String Fair 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "ダミー文字 $ を二つ置き、$を含むpatternの点数を0にすれば、長さ1・2のprefixも同じ遷移式で扱える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc264-g「String Fair」では、主解法候補として、全辺緩和を反復し、負辺を含む最短路と負閉路の影響範囲を判定する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "bounded-length substring score を de Bruijn 型 suffix automaton のedge weightへ変換し、unbounded sequence optimization を positive-cycle detection 付き longest walk にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc264-g「String Fair」では、主解法候補として、全辺緩和を反復し、負辺を含む最短路と負閉路の影響範囲を判定する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "有限suffix状態への文字列圧縮",
+      "trigger": "次の文字を加えた増分が直前の高々L文字だけで決まるとき。",
+      "application": "末尾L文字を状態、文字追加をshift遷移とする有限オートマトンを構築する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Bellman–Ford 法",
-      "trigger": "制約と操作を整理したときに Bellman–Ford 法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc264-g「String Fair」では、主解法候補として、全辺緩和を反復し、負辺を含む最短路と負閉路の影響範囲を判定する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Bellman–Ford 法 を問題固有の状態へ適用する。",
+      "name": "最大walkの正閉路判定",
+      "trigger": "長さ無制限のwalk重みを最大化し、値が有限か無限かも判定するとき。",
+      "application": "到達可能状態だけを最大距離緩和し、|V|回目にも改善すれば正cycleとしてInfinityにする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "長さ3以下の全英小文字pattern数は26+26^2+26^3で入力上限と一致し、未指定patternは重み0のtableとして直接持てる。",
+      "reusablePerspective": "短い全pattern空間が小さいときは、trieを作らず固定長lookup tableへ不足値0で展開できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Bellman–Ford 法",
+      "text": "部分文字列出現の末尾寄与、有限オートマトン、Bellman-Ford法のcycle検出を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel からの加算を避け、負閉路から到達できる頂点を追加伝播する。",
+      "text": "距離は負になり得るので未到達を十分小さい−INFで初期化し、$$だけを0にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "空文字は禁止なので始点距離0自体を有限答え候補にせず、一回以上遷移した状態の最大値を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "String Fair 型の 文字列の prefix・suffix と一致関係に対し、Bellman–Ford 法を選び、状態と証明を一貫して設計できる。",
+      "text": "短いpattern出現の線形scoreを持つ任意長文字列の最大値と無限性を、suffix状態グラフで判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel からの加算を避け、負閉路から到達できる頂点を追加伝播する。",
+      "text": "追加文字によるscore増分が局所suffixだけを見るなら、文字列全体を状態にせずweighted automatonへ変換する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "長さ無制限の最大化では、有限DPを始める前に正利益cycleの反復がInfinityを作るか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

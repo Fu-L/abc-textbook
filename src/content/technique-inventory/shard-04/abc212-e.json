@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc212-e「Safety Journey」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各晩は今いる街にも壊れた道路の相手にも移動できず、それ以外のほぼ全ての街へ移動できる。使えない組だけが M 本の道路として疎に与えられている。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "翌日のある街への到達数は、前日の全街への到達数の総和から、その街自身と壊れた道路で隣接する街からの分を除けば得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc212-e「Safety Journey」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各日について全ての出発街と到着街の組を調べ、移動可能なら到達数を加える。",
+        "decision": "rejected",
+        "decisionReason": "移動可能な組が密なので、街の組を直接列挙すると N の二乗に日数を掛けた回数の遷移が必要になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "前日の到達数の総和を先に求め、各到着街について自己ループと壊れた道路の端点に由来する寄与だけを引く。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全ての許可辺を列挙せず、各日につき街と壊れた道路だけを走査して同じ遷移を計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "密な許可関係をそのまま扱うのでなく、「全候補から疎な禁止集合を引く」という補集合側の表現に反転する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Safety Journey 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じ街に留まることも禁止されるため、入力された壊れた道路だけでなく dp の同じ添字の値も必ず総和から除く。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc212-e「Safety Journey」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "日ごとの街別到達数を DP とし、全成分和を基準値にして禁止辺の両端からの寄与を差し引くことで、完全グラフの補グラフ上の遷移を疎な更新へ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc212-e「Safety Journey」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "補集合を使う遷移高速化",
+      "trigger": "許される遷移がほぼ全てで、禁止される遷移だけが少数列挙されているとき。",
+      "application": "全状態の値の総和から自己遷移と壊れた道路に対応する値を引き、許可辺の走査を省く。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc212-e「Safety Journey」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "ローリング DP",
+      "trigger": "次の段が直前の段だけに依存し、段数分の履歴を保持する必要がないとき。",
+      "application": "前日と翌日の街別配列を分け、各晩の遷移後に交換して K 日目の街 1 の値を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "この問題の入力は道路を列挙しているが、道路は移動可能辺ではなく移動禁止辺であり、実際の遷移グラフは非常に密である。",
+      "reusablePerspective": "入力が関係の例外だけを表す問題では、例外を足す発想だけでなく、全集合から例外を引く集約式を検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "DP の各状態が表す時点と場所を定義し、前段から次段への加法的遷移を組み立てられること。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "法を取る引き算で負値を正規化し、複数回の減算後も剰余を正しく扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "壊れた道路の各端点について相手側の前日値を引き、同じ道路の寄与を逆向きにも忘れず更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "総和から複数の値を引く途中で負になり得るため、各日の更新値を法 998244353 の非負範囲へ戻す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Safety Journey 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "密な遷移が疎な禁止関係で記述された DP を、全体和と例外減算に置き換えて実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "辺数が少ないのに「辺のない組へ移動する」と書かれていたら、入力辺ではなくその補集合が本体だと読み替える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "全体和から引く対象を、入力の禁止辺だけで終えず、問題文が別に禁じる自己遷移まで列挙して確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

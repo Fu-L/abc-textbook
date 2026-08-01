@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc453-f「Avoid Division」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "N≥3 の木で各辺の両側に共通色を残すには、各元の葉が単独側になった場合にも同色頂点が反対側に必要である。使用回数2以上の色容量総和が葉数以上であることが必要になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc453-f「Avoid Division」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "元の葉数に関する centroid X を選び、X削除後の leaf groups を最大 heap で管理する。容量2以上の各色はまず異なる二groupの未着色葉へ割り当て、残りも最大groupから均衡的に塗る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各 group の葉数が L/2以下なので、未着色葉が二枚以上なら異groupから二枚選べる不変量を保て、各葉と同色の葉またはXが必ず別側に存在する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "頂点を色容量に従って任意順に塗り、各辺切断後の色集合共通性を検査しながら backtracking する。",
+        "decision": "rejected",
+        "decisionReason": "色割当は多項係数規模に分岐し、局所的な失敗から戻る探索は指数時間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+        "text": "葉数 centroid X は、削除後のどの成分も元の葉を L/2 以下しか含まないよう選べる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Avoid Division 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同色を異なる leaf group に一つずつ置けば、任意辺の X を含まない側にある葉と同色が X 側にも必ず存在する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc453-f「Avoid Division」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "N=2を別処理し、DFSで部分木葉数から centroid X を求める。X削除成分ごとに葉 list を作り、残数最大 heapへ入れる。C_i≥2 の色を異group二葉から開始して容量分配し、最後の一葉はXと同色にする。残頂点を余剰色で埋める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc453-f「Avoid Division」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "重み付き centroid による均衡分割",
+      "trigger": "木の葉を複数 group に分け、どの group も半数を超えない中心が欲しいとき。",
+      "application": "部分木葉数で centroid を選び、削除後成分を group 化する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "深さ優先探索",
-      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc453-f「Avoid Division」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "name": "最大groupを均す貪欲",
+      "trigger": "同じ色を少なくとも二groupへ配置しながら全要素を消費したいとき。",
+      "application": "残数上位の異なるgroupから先に一つずつ取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "全 edge cut 条件は、各葉の色が中心の反対側にも現れるという強い十分条件を構成すれば一括保証できる。",
+      "reusablePerspective": "均衡 centroid と最大 heap を組み合わせると、異groupからpairを取り続けられる不変量を維持できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "深さ優先探索",
+      "text": "重み付き centroid による均衡分割、最大groupを均す貪欲と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "C_i=1 の色を葉の保証用に使わず、最後の一葉とXの二頂点分容量を確保する。N=2と葉数定義を別扱いする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Avoid Division 型の 根付き木・部分木・パスの関係に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "全辺切断で共通色を持つ木彩色を、葉容量の必要十分判定と centroid group 貪欲で構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "必要条件を葉辺cutから導き、centroid group間に同色を置くと一般のedge cutにも十分な理由を pathで説明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

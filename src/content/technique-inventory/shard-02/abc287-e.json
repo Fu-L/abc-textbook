@@ -17,67 +17,103 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc287-e「Karuta」では、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "同じprefix長kを持つ文字列groupでは、長さがちょうどkの文字列はそれ以上一致できず答えkで確定する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "残りをk+1文字目で分類すると、size 1のgroupは他とk文字までしか一致せず答えk、size 2以上のgroupだけを次の深さへ再帰すればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc287-e「Karuta」では、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。この状態表現から答えを構成する。",
+        "approach": "共通prefixごとのgroupを次文字で再帰分割し、単独になった深さを各文字列の答えにする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "trieの各文字を総入力長に比例して辿るだけで、全文字列の最大LCPを同時に確定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各iについて他のN-1文字列とのLCPを先頭から比較する。",
+        "decision": "rejected",
+        "decisionReason": "文字列pairが二次個あり、総文字数5×10^5の制約では比較回数が大きすぎる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "文字列全体の最頻prefix長を1つ求め、全iへ同じ値を返す。",
+        "decision": "rejected",
+        "decisionReason": "各文字列が属するbranchの混み方によって最長共有prefixは異なる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある文字列と prefix を共有する文字列群は辞書順で連続するため、最長一致する相手は隣接位置にも存在する。",
+        "text": "ある深さのprefixを共有する文字列が2本以上なら、その全ては少なくともその深さまで誰かと一致し、1本になった直前の深さが最大値になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Karuta 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じ文字列が複数回入力されても、終端深さのgroup sizeが2以上なので文字列長そのものが答えになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc287-e「Karuta」では、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。この状態表現から答えを構成する。",
+      "text": "全indexをdepth 0のgroupとして再帰関数へ渡す。depth kで長さkの文字列へ答えkを設定し、それより長い文字列を次文字a..zでbucket分けする。bucket size 1ならそのindexの答えをk、size 2以上ならdepth k+1で再帰する。全indexの答えを入力順に出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "辞書順と longest common prefix",
-      "trigger": "制約と操作を整理したときに 辞書順と longest common prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc287-e「Karuta」では、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。この状態表現から答えを構成する。で 辞書順と longest common prefix を問題固有の状態へ適用する。",
+      "name": "trie相当のprefix分割",
+      "trigger": "多数文字列について共有prefixの深さをまとめて追いたいとき。",
+      "application": "次文字bucketへ再帰し、groupが単独になる深さを記録する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "総入力長による計算量評価",
+      "trigger": "可変長文字列をdepthごとに処理する再帰があるとき。",
+      "application": "各文字を所属文字列の1段として一度だけbucket処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "求める相手jを直接選ばず、「同じprefix nodeを通る文字列が2本以上か」という集合sizeへ置き換えると全iを同時に解ける。",
+      "reusablePerspective": "各要素の最良なpartnerを問う問題では、partnerが存在する共有分類の最深levelを求める形へ変換できないか考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "辞書順と longest common prefix",
+      "text": "LCPとtrie",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "文字別bucket分割",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "元 index を文字列と一緒に保持し、先頭・末尾では存在する片側だけを比較する。",
+      "text": "group内で文字列長が現在depthと等しいindexは終端として先に処理し、次文字へaccessしない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "再帰depthが最大文字列長になるため、stack制限が不安なら明示stackまたはtrie走査で実装する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Karuta 型の問題に対し、辞書順と longest common prefixを選び、状態と証明を一貫して設計できる。",
+      "text": "各入力文字列について、別の文字列とのLCP最大値を総文字数に比例するprefix分割で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "元 index を文字列と一緒に保持し、先頭・末尾では存在する片側だけを比較する。",
+      "text": "重複文字列、他文字列のprefixになっている文字列、最初の1文字で単独になる文字列を同時に含むtrieを描き、確定depthを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

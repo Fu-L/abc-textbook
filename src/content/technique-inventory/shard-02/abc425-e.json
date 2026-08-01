@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc425-e「Count Sequences 2」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各値 i をちょうど C_i 回含む列は、総数 S=ΣC_i 個の位置へ同じ値を配置する多項係数で数えられる。法 M は素数とは限らないため、逆元を前提にしてはいけない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc425-e「Count Sequences 2」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "パスカルの漸化式で 0≤k≤n≤5000 の二項係数を法 M で前計算し、累積個数へ C_i 個を挿入する二項係数を順に掛ける。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "加減算と乗算だけなので合成数法でも成立し、ΣC_i≤5000 の制約に収まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "階乗と逆階乗から多項係数を直接計算する。",
+        "decision": "rejected",
+        "decisionReason": "M が素数とは限らず、階乗が M と互いに素でない場合に剰余逆元が存在しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+        "text": "多項係数 S!/(C_1!…C_N!) は、前に置いた個数 s に新しい C_i 個の位置を選ぶ積 ∏ binom(s+C_i,C_i) に分解できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Count Sequences 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "パスカルの漸化式 binom(n,k)=binom(n-1,k-1)+binom(n-1,k) は任意の法で保たれる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc425-e「Count Sequences 2」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "最大 S まで二項係数表をパスカルの三角形で構築する。s=0 から各 C_i を走査し、答えへ binom(s+C_i,C_i) を掛けて s+=C_i とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc425-e「Count Sequences 2」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "多項係数の逐次分解",
+      "trigger": "同種要素の個数が複数与えられ、異なる並べ方を数えるとき。",
+      "application": "既配置 s 個と新しい C_i 個を混ぜる位置の選び方へ分解し、二項係数の積にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "組合せ数と二項係数",
-      "trigger": "制約と操作を整理したときに 組合せ数と二項係数 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc425-e「Count Sequences 2」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 組合せ数と二項係数 を問題固有の状態へ適用する。",
+      "name": "パスカルの三角形",
+      "trigger": "法が合成数で、階乗の除算を安全に使えない一方、添字上限が小さいとき。",
+      "application": "加算だけで全二項係数を前計算し、各テストケースの積を O(N) で求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "法 M の性質を問わない形へ式を変形することが核心であり、組合せ数そのものは除算なしの漸化式で計算できる。",
+      "reusablePerspective": "剰余下の割り算が危険なら、整数として同値な積分解や加法漸化式へ移す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "組合せ数と二項係数",
+      "text": "二項係数、多項係数、剰余演算、パスカルの漸化式を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "二項係数表は ΣC_i の最大値まで用意し、k=0 と k=n を 1 で初期化する。積と加算の各段階で M を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Count Sequences 2 型の 列の順序と prefix 状態に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。",
+      "text": "合成数法の数え上げで逆元を避け、多項係数を安全な二項係数の積として実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "階乗の除算を紛れ込ませていないか、積の各因子が『既存 s 個と新規 C_i 個の混ぜ方』を正しく表すかを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

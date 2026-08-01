@@ -17,67 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc245-f「Endless Walk」では、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "有限頂点の有向グラフで無限に歩けることは、選んだ辺をたどり続けて最終的に有向閉路へ入れることと同値である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "出次数 0 の頂点からは続けられない。また、行き先がすべて有限歩しかできないと確定した頂点も有限であるため、この性質を逆辺方向へ伝播できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc245-f「Endless Walk」では、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。この状態表現から答えを構成する。",
+        "approach": "各頂点の未削除の出次数を持ち、出次数 0 の頂点を queue から削除して逆辺の始点の出次数を減らす。最後まで削除されない頂点を数える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各辺を一度だけ処理し、閉路へ到達できない頂点を局所条件からまとめて除外できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各始点から DFS を行い、その始点から閉路へ到達できるかを個別に判定する。",
+        "decision": "rejected",
+        "decisionReason": "探索結果を適切に共有しなければ同じ部分グラフを何度もたどり、N,M≤2×10^5 で二次規模になり得る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "削除頂点からは rank が真に減るので無限歩できず、残存頂点は残存辺を選び続けて有限グラフ上の閉路へ到達する。",
+        "text": "削除順を番号とみなすと、削除された頂点から進める先はすべて自分より先に削除済みであり、番号が真に減るので無限歩はできない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Endless Walk 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "残った各頂点には残存頂点への出辺が少なくとも 1 本ある。その辺を選び続ければ有限個の頂点のどれかを再訪し、以後も歩き続けられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc245-f「Endless Walk」では、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。この状態表現から答えを構成する。",
+      "text": "逆隣接リストと現在出次数を作り、初期 sink を queue に入れる。頂点 v を削除したら v への各入辺 u→v について outdeg[u] を減らし、0 になった u を追加する。N から削除数を引いた値が答えになる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
       "name": "逆向き topological pruning",
-      "trigger": "制約と操作を整理したときに 逆向き topological pruning の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc245-f「Endless Walk」では、有限歩で必ず停止する頂点を sink から逆向きに削除し、最後まで残る閉路到達頂点を数える。この状態表現から答えを構成する。で 逆向き topological pruning を問題固有の状態へ適用する。",
+      "trigger": "有向グラフで、行き先を失った頂点から不可能状態を後方へ伝播したいとき。",
+      "application": "sink を起点に逆辺をたどって削除し、閉路へ到達可能な core だけを残す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "次数管理付き queue",
+      "trigger": "頂点の全隣接先が処理済みになった瞬間だけ次の処理対象にしたいとき。",
+      "application": "未削除出次数を decrement し、0 になった一度だけ enqueue する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "「良い始点を直接探す」のではなく、「必ず有限回で止まる頂点」を sink から消すと、無限歩可能な頂点が残集合として現れる。",
+      "reusablePerspective": "閉路到達性や eventual behavior では、悪い状態が局所的に閉じるなら補集合を剥がす視点が有効である。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "逆向き topological pruning",
+      "text": "有向グラフの逆辺と出次数",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "queue を用いたトポロジカル削除",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "逆辺を保持し、出次数が零になった瞬間だけ queue へ追加する。",
+      "text": "伝播には元の辺と逆向きの隣接リストが必要で、v を削除した際に u→v の u を更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "出次数が 0 になった瞬間だけ enqueue し、削除済み頂点を重複計上しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Endless Walk 型の問題に対し、逆向き topological pruningを選び、状態と証明を一貫して設計できる。",
+      "text": "無限歩可能性を閉路の直接列挙なしに、sink からの逆向き削除と残存頂点数で判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "逆辺を保持し、出次数が零になった瞬間だけ queue へ追加する。",
+      "text": "閉路そのものだけでなく閉路へ流入する頂点も残る例を使い、残集合の意味を「閉路上」に狭めていないか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

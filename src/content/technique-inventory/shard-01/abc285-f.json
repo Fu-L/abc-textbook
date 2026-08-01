@@ -17,67 +17,103 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc285-f「Substring of Sorted String」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "S全体を昇順sortしたTは各文字の連続blockからなり、S[l,r]がそのsubstringなら自身も非減少でなければならない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "区間の最小文字cと最大文字dの間にある文字は、T上でblockの途中だけを切り取れないため、S全体にある個数を区間がすべて含む必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc285-f「Substring of Sorted String」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。",
+        "approach": "26文字それぞれの位置数をsegment treeで管理し、区間内個数から非減少性と中間文字の全包含を判定する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "1点更新と任意区間の文字数をともに対数時間で処理でき、alphabet 26は定数として全条件を検査できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各更新後にS全体をsortし、質問区間が含まれるか文字列検索する。",
+        "decision": "rejected",
+        "decisionReason": "最大10^5回の更新ごとに線形以上の再構築が必要になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "区間が非減少かだけを確認する。",
+        "decision": "rejected",
+        "decisionReason": "例えば全体に中間文字が区間外にも残ると、sort後の連続blockと同じsubstringにはならない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+        "text": "区間内の各文字数C_a..C_zが分かれば、lからC_a個、次にC_b個という期待blockを置き、各block内の同文字数が長さと等しいかで非減少性を確認できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Substring of Sorted String 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "出現する最小・最大文字だけはTのblockを途中から／途中まで使えるが、その間の文字blockは丸ごと含まなければならない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc285-f「Substring of Sorted String」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。",
+      "text": "文字ごとに0/1のsegment treeを持つ。更新では旧文字の位置を0、新文字を1にする。質問では26個の区間頻度を取得し、左端から文字順にその頻度長のblockを割り当てて同じ文字が全長を占めるか検査する。さらに最小文字と最大文字の間の各文字について、区間頻度が全体頻度と一致すればYes、どれか崩れればNoとする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "Fenwick tree",
-      "trigger": "制約と操作を整理したときに Fenwick tree の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc285-f「Substring of Sorted String」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。で Fenwick tree を問題固有の状態へ適用する。",
+      "name": "文字種別の動的頻度構造",
+      "trigger": "小さいalphabetの文字列で1点更新と区間頻度queryが混在するとき。",
+      "application": "26本のsegment treeで各文字のindicator sumを管理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "sorted列のblock条件",
+      "trigger": "sort後の列のsubstringになれるかを判定するとき。",
+      "application": "端の文字blockだけ部分利用を許し、中間blockの全包含を要求する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "Tを実際に構築しなくても、文字ごとの全体頻度がblock境界を完全に決めるため、substring条件を頻度と順序の2条件へ分解できる。",
+      "reusablePerspective": "正規形が種類順の連続blockになる問題では、候補の単調性と内部種類の充足を別々に検査する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "Fenwick tree",
+      "text": "segment treeのpoint update・range sum",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "文字列sortと文字頻度",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "更新時はS[x]の旧文字側を必ず減らしてから新文字側を増やし、S本体も更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "区間に1種類しかない場合は中間文字条件が空になり、block検査だけでYesになり得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Substring of Sorted String 型の問題に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。",
+      "text": "文字の1点更新下で、指定substringがS全体のsorted文字列に現れるかをalphabet依存の対数queryで判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "非減少だが中間文字が区間外に残る例と、最小・最大文字が全体の一部だけ含まれる正例を作り、2条件が独立に必要か確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

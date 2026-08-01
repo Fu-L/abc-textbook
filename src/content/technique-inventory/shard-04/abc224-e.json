@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc224-e「Integers on Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "移動のたびに書かれた値が狭義に増えるので遷移に閉路はなく、値の大きいマスから答えを確定できる。ただし同じ行・列の全候補を毎回走査すると疎なNマスでも二乗時間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc224-e「Integers on Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "a_i の降順にマスを処理し、各行・列について既に処理した大きい値への最長移動数を rmax,cmax として集約する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "次の移動先に必要なのは同じ行と列にある大きい値のdp最大値だけであり、二つの配列から各マスを定数回で評価できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各マスから同じ行・列にある全ての大きい値のマスを列挙してdp遷移する。",
+        "decision": "rejected",
+        "decisionReason": "一つの行または列にN個近く集中すると遷移辺が二乗個になり、N=2×10^5 を処理できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "dp_i は max(rmax[r_i],cmax[c_i]) であり、rmax,cmax を『現在値より真に大きいマスの dp+1』に保てば漸化式と一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Integers on Grid 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じ a_i のマス同士は移動できないため、同値の一群は全てdpを計算してからrmax,cmaxへ反映しなければならない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc224-e「Integers on Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "N個のマスをa_i降順にsortし、等しい値のbatchごとに dp_i=max(rmax[r_i],cmax[c_i]) を先に求め、その後で両最大値をdp_i+1に更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc224-e「Integers on Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "値順オフラインDP",
+      "trigger": "遷移が値の狭義な大小方向だけに進み、値順がDAGのトポロジカル順序になるとき。",
+      "application": "大きい値から処理して遷移先のdpを確定済みにし、同値は一括処理して狭義条件を守る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc224-e「Integers on Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "属性別最大値による遷移集約",
+      "trigger": "次状態候補が同じ行・列・色など少数の属性集合の和で、必要なのが候補値の最大だけのとき。",
+      "application": "行ごと・列ごとの最大dpを保持し、明示的な全遷移辺を作らず二つの参照へ縮約する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "狭義増加条件は処理順を与えるだけでなく、同じ値の更新を遅延させる必要性まで決めている。",
+      "reusablePerspective": "値順DPでは同値間遷移の可否を先に確認し、不可ならquery段階とupdate段階をbatchで分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "トポロジカル順序としてのsortと同値batch処理",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "行・列別の最大値集約を用いるDP",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "等しいa_iの全dpを保存してから更新し、列側は必ず cmax[c_i] を更新する。入力順へ戻して答えるため元indexも保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Integers on Grid 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "狭義単調な疎grid遷移を値順DPへ直し、行列別最大値で全遷移を列挙せずに解ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "狭義不等号を見たら、同値を一件ずつ更新してはいけないことを思い出し、batchの読取りと書込みを分ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

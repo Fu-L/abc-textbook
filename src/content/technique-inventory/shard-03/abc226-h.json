@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc226-h「Random Kth Max」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "K番目に大きい値Yの期待値は、非負変数なので∫P(Y≥x)dxで求められる。各X_iの端点が0から100の整数であるため、単位区間[a,a+1]内ではP(X_i≥x)が定数または一次式になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc226-h「Random Kth Max」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各単位区間で、x以上となる変数の個数分布を係数がxの多項式であるDPとして作り、少なくともK個となる確率多項式を区間積分する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "順位統計量を直接追わずtail確率へ変えると独立変数の個数DPになり、整数端点により有限個の区間で厳密な多項式積分ができる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "乱数サンプリングでK番目の値を多数回生成し、平均を法998244353へ変換する。",
+        "decision": "rejected",
+        "decisionReason": "要求値は厳密な有理数の剰余であり、近似誤差を持つMonte Carloや数値積分から復元できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+        "text": "Y≥x はN個のうち少なくともK個がx以上であることと同値で、独立性から各変数の成功確率p_i(x)を掛けるPoisson-binomial型DPで求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Random Kth Max 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "[a,a+1]内でp_i(x)は0、1、(R_i-x)/(R_i-L_i)のいずれかなので、DP値も次数N以下の多項式となり、係数ごとに割って厳密に積分できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc226-h「Random Kth Max」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "a=0,…,99ごとに各p_i(x)の一次多項式を作り、成功個数DPを多項式として更新する。j≥Kの多項式を合計して[a,a+1]で積分し、全区間の値を法998244353で加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc226-h「Random Kth Max」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "tail確率による期待値積分",
+      "trigger": "非負の連続確率変数の期待値を求め、値以上となる事象の方が組合せ的に数えやすいとき。",
+      "application": "順位値Yそのものの密度を作らず、E[Y]=∫P(Y≥x)dxを用いて個数条件へ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "条件付き期待値と確率 DP",
-      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc226-h「Random Kth Max」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "name": "区分多項式の確率DP",
+      "trigger": "独立事象の成功確率が区間ごとに低次数多項式となり、成功個数の閾値確率が必要なとき。",
+      "application": "成功個数を状態にして一次多項式p_iと1-p_iを掛け、得たtail多項式を係数積分する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "全分布の端点が小さい整数なので、連続変数の問題でも積分区間を100個の単位区間へ固定し、各区間を有限多項式計算として扱える。",
+      "reusablePerspective": "連続分布の式が区分的に変わる問題では、全breakpointを列挙し、その間で密度・CDFが何次式になるかを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
+      "text": "連続一様分布のCDF、tail積分、順位統計量",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "条件付き期待値と確率 DP",
+      "text": "多項式係数を持つ成功個数DPと法上の積分",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "K番目に大きい値には『x以上が少なくともK個』を使う。区間端点は確率0なので開閉を過剰に分岐せず、積分時の1/(d+1)と各(R_i-L_i)の逆元を前計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Random Kth Max 型の 区間端点と包含関係に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "連続な順位統計量の期待値をtail確率と区分多項式DPへ変換し、有理数の剰余として厳密に積分できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "K番目の密度を直接微分する前に、『少なくともK個が閾値以上』というtail事象と、端点間での多項式性を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

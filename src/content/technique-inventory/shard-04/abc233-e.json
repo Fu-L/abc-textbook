@@ -17,67 +17,83 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc233-e「Σ[k=0..10^100]floor(X／10^k)」では、巨大整数を文字列の各桁として扱い、prefix 桁和と carry を下位桁から一回走査して答えの桁を確定する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "X は最大 50 万桁なので整数型に収まらず、10^k で割った正の項も X の桁数個だけ存在する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "floor(X/10^k) を右揃えで縦に足すと、答えの右から t 桁目へは X の先頭から対応位置までの全桁が一度ずつ寄与する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc233-e「Σ[k=0..10^100]floor(X／10^k)」では、巨大整数を文字列の各桁として扱い、prefix 桁和と carry を下位桁から一回走査して答えの桁を確定する。この状態表現から答えを構成する。",
+        "approach": "各 k について X の末尾を一桁削った文字列を作り、巨大整数の加算を繰り返す。",
+        "decision": "rejected",
+        "decisionReason": "桁数個の項をそれぞれ桁数に比例して加えるため、50 万桁の二乗規模になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "現在列へ寄与する X の prefix 桁和と繰り上がりを持ち、下位桁から答えを一桁ずつ確定する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各入力桁を桁和から一度引くだけで全列の寄与を更新でき、巨大整数を文字列の一走査で処理できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各出力桁へ寄与する入力 prefix が桁和に一致し、十進 carry を次桁へ渡せば筆算と同じ総和になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Σ[k=0..10^100]floor(X／10^k) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "各シフト後の数を生成するのでなく、筆算の同じ列に現れる元の数字をまとめると、その合計は prefix 桁和になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc233-e「Σ[k=0..10^100]floor(X／10^k)」では、巨大整数を文字列の各桁として扱い、prefix 桁和と carry を下位桁から一回走査して答えの桁を確定する。この状態表現から答えを構成する。",
+      "text": "巨大な切り捨て除算和を縦書き加算へ変換し、右端から prefix digit sum と carry を更新する文字列上の筆算アルゴリズムで出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "多倍長整数の桁処理",
-      "trigger": "制約と操作を整理したときに 多倍長整数の桁処理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc233-e「Σ[k=0..10^100]floor(X／10^k)」では、巨大整数を文字列の各桁として扱い、prefix 桁和と carry を下位桁から一回走査して答えの桁を確定する。この状態表現から答えを構成する。で 多倍長整数の桁処理 を問題固有の状態へ適用する。",
+      "name": "巨大整数の桁別集約",
+      "trigger": "非常に長い十進整数に対する多数の桁シフト和を正確な整数として出力するとき。",
+      "application": "同じ出力桁へ寄与する入力桁を先に合計し、通常の carry だけを下位から上位へ送る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "上限 k＝10^100 は巨大だが、k が X の桁数以上なら項は全て 0 なので反復回数には影響しない。",
+      "reusablePerspective": "和の添字上限が巨大でも、各項が恒等的に 0 になる実効的な打切り位置を対象のサイズから探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "多倍長整数の桁処理",
+      "text": "十進筆算の各列の和と繰り上がりを、文字列の逆向き走査で実装できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入力桁を全て処理した後も carry が零になるまで出力し、結果を逆順に戻す。",
+      "text": "s を全桁和、carry を 0 で始め、各桁で carry に s を足して一桁出力した後、処理した右端桁を s から引く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "全入力桁を処理後も carry が 0 になるまで上位桁を出し、逆順に蓄えた出力を最後に反転する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Σ[k=0..10^100]floor(X／10^k) 型の問題に対し、多倍長整数の桁処理を選び、状態と証明を一貫して設計できる。",
+      "text": "十進桁シフトされた巨大整数の総和を、列ごとの寄与と carry の線形走査で厳密に計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入力桁を全て処理した後も carry が零になるまで出力し、結果を逆順に戻す。",
+      "text": "巨大な floor(X/10^k) の列は個別計算せず、右揃えの筆算図を書いて同じ列に現れる桁を観察する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

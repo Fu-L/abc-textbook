@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc317-ex「Walk」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "頂点1へ戻る辺を一旦禁止すると、遷移は n から n,n+1,n+2 だけで index が戻らない。歩数母関数 F_n(x) は直前二頂点の二階線形漸化式になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "self-loop は (1−xA_n)^{-1}、前進辺は x の一次有理式係数として表せるため、2×2（prefix return も持つなら3×3）行列積を product tree で高速に計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc317-ex「Walk」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "戻り無し excursion の母関数 F_N と1へ戻る primitive walk の母関数 xG_N を多項式行列積で求め、F_N/(1−xG_N) の x^K 係数を取る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "任意 walk は「1へ戻る primitive excursion の0回以上反復＋最後のN行き」に一意分解でき、N・K 双方を準線形多項式演算で扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "歩数ごとに全頂点の到達数を配る通常 DP を K 回行う。",
+        "decision": "rejected",
+        "decisionReason": "O(NK) は最大2.5×10^10で、辺の前方局所性と戻りの excursion 構造を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "戻り辺を除いた F は F_n=P_n(Q_nF_{n−1}+R_nF_{n−2}) と表され、分母 (1−x) の冪を共通化すれば polynomial matrix product にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Walk 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "1へ戻るたび walk を切ると primitive return の列は自由連結なので幾何級数 1/(1−xG_N)、最後の区間だけ F_N を掛ける。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc317-ex「Walk」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "次数 K で打ち切った polynomial を使う。product tree で局所遷移行列を掛け、戻り辺を使わない 1→n の F_n と G_N=ΣD_nF_n を求める。最終生成関数 H=F_N·inv(1−xG_N) mod x^{K+1} を NTT/FPS inverse で計算し [x^K]H を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc317-ex「Walk」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "walk の first-return 分解",
+      "trigger": "特定頂点へ何度も戻れる walk を数え、戻らない区間は扱いやすいとき。",
+      "application": "primitive return を atom とし、任意回連結を生成関数の幾何級数へ変える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc317-ex「Walk」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "多項式係数行列の product tree",
+      "trigger": "位置方向の低階漸化式を持つ生成関数を、多数位置にわたり高速合成するとき。",
+      "application": "各位置を小行列にし、分割統治と NTT で全積を求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "唯一の大きな後退先が頂点1なので、一般 graph walk ではなく renewal process と前向き DP の積として分離できる。",
+      "reusablePerspective": "遷移がほぼ単調で少数の reset edge だけを持つなら、reset 間の excursion を生成関数化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "母関数と FPS inverse",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "NTT・分割統治行列積",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "A_1=D_1 の self-loop を primitive return と前向き F の双方で二重計上しない定義を固定する。全 polynomial は x^{K+1} で truncate し、行列添字 n±1 を境界条件に合わせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Walk 型の 頂点と辺からなる状態グラフに対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "局所前進＋頂点1 reset の walk を excursion 生成関数へ分解し、O(N log²N+K log K) で長さ K の個数を得られる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "まず戻り辺を消した graph で F_n の二階漸化式を書く。その後、任意 walk を「最後に1を出た区間」とそれ以前の return 区間へ一意に切る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

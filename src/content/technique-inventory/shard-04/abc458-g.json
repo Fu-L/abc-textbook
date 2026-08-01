@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc458-g「Children Yearn for the Evil Kindergarten」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "B_i>0なので m人全員を脱出させられれば任意のm'<m人でも可能であり、最大mを二分探索できる。固定mでは日ごとの最適所持medalが残人数xの上に凸な関数になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc458-g「Children Yearn for the Evil Kindergarten」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "mの実現可能性を二分探索し、dp[x]=各日終了時にx人残る最大medalを、一次関数加算・負区間切捨て・傾きC_iでの左側closureとしてslope trickの折れ線dequeで更新する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "reachable xは常に区間でdpはconcaveを保ち、各日追加されるbreakpointは高々一つ、端から削除されるbreakpointは全期間で一度だけなので一判定を線形時間にできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "固定mごとに日数×残人数の表 dp[i][x] を全て更新する。",
+        "decision": "rejected",
+        "decisionReason": "一判定 O(Nm) でmもN級となり、二分探索を重ねると二乗以上になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "日iの収支は全stateへ A_i-B_i x という一次関数を加え、負になった両端stateを不可能として削る操作である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Children Yearn for the Evil Kindergarten 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "一人脱出させる遷移 dp[x]=max(dp[x],dp[x+1]-C_i) は、左から傾きC_i以上のsegmentを削り、傾きC_iのsegmentを非負範囲へ延ばす操作になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc458-g「Children Yearn for the Evil Kindergarten」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "feasible(m)をdp[0][m]=0の一点折れ線で初期化する。各日、global切片・傾きへA_i,-B_iを加え、左右端を値0との交点までtrimし、C_iに基づき左側の傾きstackをpop/extendする。最後にx=0がdomain内ならtrueとし、mを整数二分探索する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc458-g「Children Yearn for the Evil Kindergarten」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "人数に対する可能性二分探索",
+      "trigger": "対象人数を減らすと手順をそのまま流用できるresource配分問題のとき。",
+      "application": "固定mの全員脱出可能性を単調predicateにする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc458-g「Children Yearn for the Evil Kindergarten」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "slope trickによるconcave DP",
+      "trigger": "一変数DPが区間domainとconcave折れ線を保ち、一次加算・max closureを繰り返すとき。",
+      "application": "傾き変化点をdequeで管理して各breakpointを償却定数回処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "人数dimensionのDPを配列として走査せず、関数形のconcavityとbreakpoint列そのものをstateにできる。",
+      "reusablePerspective": "遷移式を値更新ではなくグラフへの一次関数加算・切断・傾き制約として幾何的に読むとslope trickが見える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "人数に対する可能性二分探索、slope trickによるconcave DPと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "問題のdpは最大値なので上に凸/concaveの用語と傾き順を実装規約に合わせる。domain端の非負判定、-∞状態、整数交点の丸めを厳密に扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Children Yearn for the Evil Kindergarten 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "最大脱出人数を、単調二分探索とconcave折れ線DPの線形判定で制約内に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "素朴dpの二遷移を先に式で確認し、それぞれが折れ線へ行う三操作を小さいmの配列とgraphで対応づける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

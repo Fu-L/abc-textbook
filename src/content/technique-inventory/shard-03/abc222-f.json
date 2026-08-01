@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc222-f「Expensive Expense」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各始点 i で求める値は、木上距離 d(i,j) に行先だけの加点 D_j を足した最大値であり、N=2×10^5 なので始点ごとに全行先を探索する余裕はない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc222-f「Expensive Expense」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各頂点 j に重み D_j の補助辺と葉 j' を付け、拡張木の直径の両端への距離から全頂点の最大値を求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "d(i,j)+D_j が拡張木での d(i,j') そのものになり、木の任意の頂点からの最遠点を直径の二端点だけで代表できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "子方向と親方向の最大寄与を合成する全方位木DPを構成する。",
+        "decision": "rejected",
+        "decisionReason": "この方法も正しいが、最大化対象を補助葉へ移すと二つの直径端点だけで済み、今回はより状態の少ない直径解法を採用できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各有向辺の部分問題を辺の反対側だけから合成すれば、根を移しても必要な寄与を重複なく再利用できる。",
+        "text": "頂点加点 D_j を長さ D_j の垂れ下がり辺へ移すと、異なる種類だった『距離』と『行先加点』が一つの木上距離になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Expensive Expense 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "直径端の補助葉の親を始点にした場合は j=i を選べないため、その端自身ではなく反対側の直径端までの距離を使う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc222-f「Expensive Expense」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "補助葉を含む重み付き木で直径端 s',t' を求め、両端から全頂点への距離を計算し、端の親に対する除外だけ補正して二距離の最大を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc222-f「Expensive Expense」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "頂点重みの補助葉への変換",
+      "trigger": "目的関数が距離に行先頂点だけの重みを加えた形で、全始点について最大値を求めるとき。",
+      "application": "各行先へ重み付き補助辺を付け、頂点重み込みの評価を通常の木上距離へ統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全方位木 DP",
-      "trigger": "制約と操作を整理したときに 全方位木 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc222-f「Expensive Expense」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 全方位木 DP を問題固有の状態へ適用する。",
+      "name": "木の直径端による全頂点最遠距離",
+      "trigger": "木で全頂点からの最遠距離を求められ、評価対象を通常の頂点へ表現できたとき。",
+      "application": "直径の両端から距離配列を作り、各頂点の最遠距離をその二値の最大として得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "観光費 D_j を頂点に置いたまま扱わず、j の外側に葉を生やすと、行先加点付き距離が木の直径問題へ変わる。",
+      "reusablePerspective": "距離に片端だけの加点が付くときは、その加点を辺長として持つ補助頂点を追加できないか試す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "重み付き木の距離計算と直径の最遠点性質",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "全方位木 DP",
+      "text": "頂点重みを補助辺へ移すグラフ変換",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "単位元と合成順序を明示し、子を除いた値を prefix・suffix から構成する。",
+      "text": "距離と答えは64 bit整数で保持し、直径端が補助葉であることと、始点自身の補助葉を候補から除く二つの例外を混同しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Expensive Expense 型の 列の順序と prefix 状態に対し、全方位木 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "頂点加点付きの全始点最遠距離を補助葉へ変換し、木の直径の二端点で一括して求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "単位元と合成順序を明示し、子を除いた値を prefix・suffix から構成する。",
+      "text": "『距離＋行先だけの報酬』を見たら、報酬を垂れ下がり辺へ移して通常の距離にできるかを最初に検討する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

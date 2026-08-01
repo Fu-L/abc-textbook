@@ -17,67 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc302-g「Sort from 1 to 4」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "目標は昇順列なので、各位置について現在値iと目標値jだけを数えれば、同じ型の位置は交換上区別しなくてよい。値が1～4に限られるため、不一致は4×4行列Cに圧縮できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc302-g「Sort from 1 to 4」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。",
+        "approach": "不一致行列と4値の全順列24通りを用いる",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "任意swapの最小回数を、定数個のpotentialの最大値としてO(N)で厳密に計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "現在列のinversion数を答えとみなす",
+        "decision": "rejected",
+        "decisionReason": "一回の操作で任意の二位置を交換でき、隣接swapとは異なるためinversion数は操作回数を表さない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Sort from 1 to 4 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "C[i][j]を現在値i・目標値jの位置数とする。値の順列pごとにF(p)=Σ_{a<b}C[p_a][p_b]を置くと、一回のswapでF(p)は高々1しか減らず下界になる。逆向きpairの相殺後に残るbalancedな誤配置cycleを解消することで、この下界の最大値を達成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc302-g「Sort from 1 to 4」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。",
+      "text": "入力をsortした目標列と比較してCを作る。1,2,3,4の全24順列pを列挙し、pで前に置いた値から後に置いた値への誤配置数ΣC[p_a][p_b]を計算し、その最大値を最小swap回数として出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "greedy choice と交換論法",
-      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc302-g「Sort from 1 to 4」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "name": "小さい値域への頻度圧縮",
+      "trigger": "列長は大きいが、交換の振る舞いが現在値と目標値の組だけで決まる。",
+      "application": "各位置を4×4の誤配置型へ集約し、位置列を定数サイズの状態へ落とす。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "有限全探索によるpotential最大化",
+      "trigger": "値種類数が4で、順序を固定した下界を全順序から選べる。",
+      "application": "24通りの順列を列挙し、swap一回あたり変化量が1以下のpotentialの最大を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二要素の直接相殺だけでなく、3-cycle・4-cycleとして残る誤配置も、値順序pに対する向き付き誤配置数で一括して数えられる。",
+      "reusablePerspective": "任意交換による分類修正は、誤配置flowと、一操作で高々1変わる順序potentialから最適回数を証明できることがある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "greedy choice と交換論法",
+      "text": "頻度行列、順列全探索、置換cycleと下界・構成の一致。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "Cの添字は「現在値→目標値」の向きに統一し、順列内のa<bと組み合わせる。対角成分は既に正しいので和へ入れない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sort from 1 to 4 型の問題に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "text": "1～4からなる列を昇順にするための任意二位置swapの最小回数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "Nの小さい全列でswap BFSの真値と比較し、2-cycleだけ、3-cycle、4-cycle、同値が多数ある場合を含めて式の向きを検証する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

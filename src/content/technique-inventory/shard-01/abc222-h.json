@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc222-h「Beautiful Binary Tree」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "小さい木で操作を追うと、成功可能性は操作順そのものではなく、根と葉が1であること、1の総数がNであること、0同士が親子にならないことという静的な条件で決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc222-h「Beautiful Binary Tree」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "根が1の木と根が0の部分木を母関数で分け、関数方程式をラグランジュ反転して必要な一係数を漸化式で求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N=10^7 では木のサイズごとの畳み込みを直接計算できず、反転公式で答えを低次数多項式の冪の一係数へ落とす必要がある。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "左右部分木の1の総数を分配する通常の木DPで a_i,b_i を順に計算する。",
+        "decision": "rejected",
+        "decisionReason": "漸化式に全ての分割 j+(i-j) の畳み込みが現れて二乗時間となり、N=10^7 の制約に届かない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "根が1の木の母関数を A、根が0の許容部分木を B とすると、子の置き方から B=2A+A^2、A=x(1+A+B)^2=x(1+3A+A^2)^2 を得る。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Beautiful Binary Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "ラグランジュ反転により答えは (1/N)[x^(N-1)](1+3x+x^2)^(2N) となり、低次数多項式の冪は微分恒等式から二項漸化式で係数を順に出せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc222-h「Beautiful Binary Tree」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "m=2N、u_k=[x^k](1+3x+x^2)^m として u_0=1 から u_k={3(m+1-k)u_(k-1)+(2m+2-k)u_(k-2)}/k を進め、u_(N-1)/N を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc222-h「Beautiful Binary Tree」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "根付き木の母関数分解",
+      "trigger": "木を根の型と左右の独立な部分木へ分解でき、サイズ別個数の畳み込みが現れるとき。",
+      "application": "根ラベル0・1の二種類を A,B に分け、空の子を含む左右の選択を積として関数方程式へ写す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc222-h「Beautiful Binary Tree」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "ラグランジュの反転公式",
+      "trigger": "求める母関数が F=xφ(F) の形で暗黙に定義され、特定次数の係数だけが必要なとき。",
+      "application": "[x^N]F を (1/N)[x^(N-1)]φ(x)^N に変え、暗黙方程式を直接解かずに係数を取り出す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "微分恒等式による係数漸化式",
+      "trigger": "固定次数の多項式 T の大きな冪 U=T^m の係数を先頭から多数求めるとき。",
+      "application": "TU'=mT'U の係数を比較し、直前の少数係数だけを見るP-recursiveな漸化式を作る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最大 N-1 回の加算操作による到達可能性が、『根・葉は1、1の総数はN、隣接する0はない』という局所条件へ完全に置き換わる。",
+      "reusablePerspective": "操作列を数える前に、最終状態へ到達できる入力の不変量と局所禁止パターンを必要十分条件として探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "通常型母関数と根付き木の再帰分解",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "ラグランジュ反転、形式微分、modular inverse",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "u_(k-2) を使う漸化式の初期境界を分け、k と N の逆元を正しく掛ける。N<998244353 なので必要な除数は全て可逆である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Beautiful Binary Tree 型の 頂点と辺からなる状態グラフに対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "木の操作条件を静的なラベル制約へ直し、母関数方程式、反転公式、係数漸化式まで一貫して導出できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "巨大な N の木数え上げでは、DPを速くする前に F=xφ(F) の形と『欲しいのは一係数だけ』という構造を探す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

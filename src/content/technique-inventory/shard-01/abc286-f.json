@@ -17,77 +17,121 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc286-f「Guess The Number 2」では、主解法候補として、複数の合同条件を gcd で整合性検査し、中国剰余定理で一つの剰余類へ併合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "写像Aに長さcのcycleを作ると、judgeのB=f^NはそのcycleをN mod cだけ回転させるため、応答から合同式N≡r (mod c)を読める。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "互いに素なcycle長の積が10^9を超えれば、全合同式を満たす[0,LCM)の値はhidden Nに一意に一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "cycle長4,9,5,7,11,13,17,19,23は互いに素で、頂点数の和108≤110、積1338557220>10^9を同時に満たす。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc286-f「Guess The Number 2」では、主解法候補として、複数の合同条件を gcd で整合性検査し、中国剰余定理で一つの剰余類へ併合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "108頂点を指定した9個の互いに素なcycleへ分け、各回転量を中国剰余定理で統合する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "query長制約内で復元範囲がhidden Nの上限を超え、1回の応答から正確に決定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "29以下の全prime長2,3,5,…,29のcycleを使う。",
+        "decision": "rejected",
+        "decisionReason": "LCMは十分大きいがcycle長の和が129となりM≤110を超える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "1本の長いcycleだけでNを復元する。",
+        "decision": "rejected",
+        "decisionReason": "M≤110なので得られる剰余はmod 110以下で、10^9通りを区別できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "差が gcd で割り切れることが解存在の必要十分条件で、拡張 Euclid により併合解を構成できる。",
+        "text": "block先頭をsとする長さcのcycleをs→s+1→…→s+c-1→sと張れば、residueは(B_s-s+c) mod cで得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Guess The Number 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "cycle長にはprimeそのものだけでなくprime power 4,9を使うと、互いに素性を保ったまま、同程度の頂点数でLCMを大きくできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc286-f「Guess The Number 2」では、主解法候補として、複数の合同条件を gcd で整合性検査し、中国剰余定理で一つの剰余類へ併合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "長さ[4,9,5,7,11,13,17,19,23]の各連続blockをcycleにしたAを出力してflushする。Bを受け取り、各block先頭の移動量からN mod cを復元する。得た9合同式を中国剰余定理で統合し、[0,1338557220)の解を出力して直ちに終了する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc286-f「Guess The Number 2」では、主解法候補として、複数の合同条件を gcd で整合性検査し、中国剰余定理で一つの剰余類へ併合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "中国剰余定理によるhidden値復元",
+      "trigger": "1回の観測から複数modulusの剰余を独立に得られるとき。",
+      "application": "互いに素なcycleの回転量を合同式として統合する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "中国剰余定理",
-      "trigger": "制約と操作を整理したときに 中国剰余定理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc286-f「Guess The Number 2」では、主解法候補として、複数の合同条件を gcd で整合性検査し、中国剰余定理で一つの剰余類へ併合する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 中国剰余定理 を問題固有の状態へ適用する。",
+      "name": "functional graphのcycle encoding",
+      "trigger": "写像の反復回数を応答から推定するinteractive問題。",
+      "application": "cycle上の位置ずれへ反復回数の剰余を符号化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "modulusのpacking",
+      "trigger": "観測サイズの和に制限があり、LCMを閾値以上へしたいとき。",
+      "application": "互いに素なprime powerを選び、和108で積を10^9超へする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "各cycleはNの別々の剰余を並列に返す独立な計測器であり、A全体をpermutationとして構成すればBの1位置だけで回転量を読める。",
+      "reusablePerspective": "interactive設計では、応答を解析しやすい独立componentに分け、各componentへ合同情報を埋め込む。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "中国剰余定理",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "中国剰余定理",
+      "text": "permutation cycleと写像反復",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "interactive I/Oのflush",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "lcm 計算の overflow と負の剰余を正規化し、非互いに素な法も扱う。",
+      "text": "A,Bは1-indexed頂点番号なので、block内offsetとresidueの0-index差を混同しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "出力のたびにnewlineとflushを行い、judgeから-1を受け取った場合や最終回答後は即終了する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "CRTの積と途中計算は32bitを超えるため64bit整数を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Guess The Number 2 型の 列の順序と prefix 状態に対し、中国剰余定理を選び、状態と証明を一貫して設計できる。",
+      "text": "長さ108のpermutationへの1回の反復応答から、1≤N≤10^9を合同式の一意解として復元できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "lcm 計算の overflow と負の剰余を正規化し、非互いに素な法も扱う。",
+      "text": "短いcycleでN=2のB先頭位置からresidueを手計算し、9長の和・互いに素性・積の範囲とinteractive出力順を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

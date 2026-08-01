@@ -17,67 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc241-g「Round Robin」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "候補 p が単独優勝できる completion があるなら、未消化の p の試合を全て p 勝利へ変えても p の勝数だけが増え相手は減るので、単独優勝は壊れない。まず p の最終勝数 win を最大に固定してよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "残る各試合は勝者を二人のどちらかへ一勝として割り当て、各 i≠p の合計勝数を win-1 以下に抑える配分問題になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc241-g「Round Robin」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。この状態表現から答えを構成する。",
+        "approach": "試合 node へ source から1流し、可能な winner の player node を経て各選手の勝数上限へ流す max-flow feasibility を p ごとに判定する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "一試合一勝の選択と選手別 capacity を整数 flow がそのまま表し、全試合分を流せることが必要十分になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "未消化試合の勝敗を全列挙し、最終勝数を比較する。",
+        "decision": "rejected",
+        "decisionReason": "未消化試合は最大 N(N-1)/2 個あり、二択の全列挙はできない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Round Robin 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "既に終了した試合 node は実際の winner だけへ、未終了試合 node は両 player へ辺を張れば、fixed result と自由選択を同じ network で扱える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc241-g「Round Robin」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。この状態表現から答えを構成する。",
+      "text": "各 p について未終了の p 戦を p 勝利に固定して win を数える。source→全試合 node に容量1、試合→許される winner、player p→sink に win、他 player→sink に win-1 を置き、全試合数だけ flow が流れれば p を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "最大流・最小カット定理",
-      "trigger": "制約と操作を整理したときに 最大流・最小カット定理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc241-g「Round Robin」では、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。この状態表現から答えを構成する。で 最大流・最小カット定理 を問題固有の状態へ適用する。",
+      "name": "割当問題の max-flow 化",
+      "trigger": "各 item を候補先の一つへ割り当て、各受け手に上限があるとき。",
+      "application": "source-item-recipient-sink の層 graph で item の単位流と recipient capacity を表す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "候補解の有利な正規化",
+      "trigger": "ある候補を最適にできるか判定し、その候補に有利な未確定選択へ変えても実現可能性を失わないとき。",
+      "application": "候補自身の未確定試合を全勝に固定し、他者の上限だけを feasibility 条件にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "単独優勝の strict 条件は、候補の勝数 win を固定すると他選手ごとの容量 win-1 という独立な上限制約になる。",
+      "reusablePerspective": "strict な最大者の存在判定では候補値を先に固定し、他者を候補値-1以下へ配る問題に変える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "最大流・最小カット定理",
+      "text": "最大流、二部割当、round-robin の勝数",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "win=0 では他選手上限が負になるため即不可能とする。終了済み試合の向きを誤らず、最大 flow が全試合 node 数と一致するかで判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Round Robin 型の問題に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。",
+      "text": "round-robin の未確定勝敗を単位 flow の割当へ変え、候補ごとの単独優勝可能性を判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "候補 p が負ける未確定試合を p 勝ちへ反転したとき、p と相手以外を含め順位条件が悪化しないことを先に証明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

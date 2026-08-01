@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc458-f「Critical Misread」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "禁止文字列をまだ含まないprefixの将来は、禁止patternのprefixでもある最長suffixだけで決まる。この状態集合はAho-Corasick trieのnodeに一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc458-f「Critical Misread」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "禁止patternからAho-Corasick automatonを作り、禁止出力stateを除いた文字遷移数行列 M を構築して、初期vectorに M^N を掛ける。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "automaton stateがpattern出現判定に必要十分なsuffix情報を保持し、長さ一文字のDP遷移は時刻に依存しないため巨大Nを行列二分累乗できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "末尾最大K文字をそのままstateにしたDPをN段行う。",
+        "decision": "rejected",
+        "decisionReason": "state数が26^K、段数がN≤10^9で両方とも制約を超える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "failure linkにより現在suffixに文字cを足した後の最長pattern prefix suffixへ定数時間遷移できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Critical Misread 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じstate pairへ移る文字種類数を行列要素として足し、pattern terminalまたはそのfailure祖先terminalのstateへの遷移を除外する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc458-f「Critical Misread」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "全patternをtrieへ入れfailure linkとcomplete gotoをBFS構築し、terminal伝播する。safe node間で26文字の遷移をcountしたmatrixを作り、root one-hot vectorをbinary exponentiationでN回遷移させ、safe state成分を総和する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc458-f「Critical Misread」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "Aho-Corasick automaton DP",
+      "trigger": "複数禁止patternを含まない文字列数を数えたいとき。",
+      "application": "最長prefix-suffix状態とfailure linkで全patternを同時監視する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc458-f「Critical Misread」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "遷移行列の二分累乗",
+      "trigger": "有限automaton上の固定遷移を巨大長だけ繰り返すとき。",
+      "application": "文字種類数を重みとするstate遷移行列を累乗する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "末尾文字列DPは、将来patternを完成させる可能性が同じsuffixをautomaton stateとして最小化できる。",
+      "reusablePerspective": "長さが巨大なautomaton DPは、遷移が時間一様なら線形漸化式の行列累乗へ移す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "Aho-Corasick automaton DP、遷移行列の二分累乗と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "failure先terminalを含むnodeも禁止stateとして伝播し、そこへの遷移を数えない。行列の行列vector向きとN=0基底を統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Critical Misread 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "複数禁止patternを避ける長さN文字列数を、Aho-Corasick状態圧縮と行列累乗で対数段に計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "pattern prefix集合とfailure遷移を小例で構築し、terminal伝播後のsafe遷移行列が一文字DPを正確に表すか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

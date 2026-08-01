@@ -17,67 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc408-g「A/B < p/q < C/D」では、開区間の両端から共通整数部を除き、1 未満なら逆数で端点を反転する Euclid 型再帰で最小分母分数を得る。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "最小分母 q>1 に対して区間内の分子 p は一意になる。二つの連続分子 p,p+1 が同じ q で入るなら、その間の p/(q-1) がより小さい分母で入って矛盾する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "両端から共通の整数部分 n=floor(A/B) を引く操作と、0<left<right≤1 で逆数を取り順序を反転する操作により、求める最簡分母 pair を Euclid algorithm と同様に再帰できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc408-g「A/B < p/q < C/D」では、開区間の両端から共通整数部を除き、1 未満なら逆数で端点を反転する Euclid 型再帰で最小分母分数を得る。この状態表現から答えを構成する。",
+        "approach": "開区間内で分母最小、q=1なら分子最小の pair f(A/B,C/D) を、整数部分除去と逆数・分子分母swapで求める",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "lower を [0,1) に正規化後、upper>1なら (1,1) が基底。upper≤1なら reciprocal interval を再帰し pair をswapする。連分数展開なので各 case 対数ステップで終わる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "q=1,2,... と増やし、floor(Aq/B)+1 が Cq/D 未満かを調べる",
+        "decision": "rejected",
+        "decisionReason": "答えの q 自体が 10^18 規模を超えて大きくなり得て、T=2×10^5 で分母を逐次探索できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数平行移動と逆数変換は区間内分数を全単射で対応させ、各段で連分数の一係数が確定する。",
+        "text": "区間を n だけ平行移動して再帰解が p/q なら、元の解は (p+nq)/q で分母を保つ。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "A/B < p/q < C/D 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "0≤left<right≤1 では逆数で 1/right<q/p<1/left となり、再帰解の分子・分母を交換すれば元区間の pair へ戻る。これは連分数の一段に相当する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc408-g「A/B < p/q < C/D」では、開区間の両端から共通整数部を除き、1 未満なら逆数で端点を反転する Euclid 型再帰で最小分母分数を得る。この状態表現から答えを構成する。",
+      "text": "各 testcase で n=floor(A/B) を取り両端から n を引く。正規化後の上端が1より大きければ pair=(1,1)、そうでなければ端点を逆数にして f(D/C,B/A) を再帰し pair をswapする。戻りながら p+=nq とし q を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "連分数と Euclid の互除法",
-      "trigger": "制約と操作を整理したときに 連分数と Euclid の互除法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc408-g「A/B < p/q < C/D」では、開区間の両端から共通整数部を除き、1 未満なら逆数で端点を反転する Euclid 型再帰で最小分母分数を得る。この状態表現から答えを構成する。で 連分数と Euclid の互除法 を問題固有の状態へ適用する。",
+      "name": "連分数／Euclid 再帰",
+      "trigger": "二有理数の間にある分母最小の有理数を求めるとき。",
+      "application": "共通整数部分を除き、(0,1] 区間では逆数を取って分子分母の役割を交換する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "fractional linear transformation",
+      "trigger": "有理数区間の最適 pair を整数平行移動や逆数で小さい同型問題へ移したいとき。",
+      "application": "pair (p,q) を移動で (p+nq,q)、逆数で (q,p) に写す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "厳密不等号の開区間でも、最小分母 pair の一意性と連分数変換を保ったまま直接求められる。",
+      "reusablePerspective": "分母を外側から探索せず、区間両端の共通連分数 prefix を剥がして最初に分岐する位置で最小 pair を決める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "連分数と Euclid の互除法",
+      "text": "有理数の大小比較、Euclid algorithm、連分数の整数部分と逆数操作を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "開区間の等号を混ぜず、逆数時に端点順を交換し、分子分母の積を広い整数型で比較する。",
+      "text": "積による大小比較と p+nq は 128 bit または多倍長を使う。整数端点・strict inequality、正規化後lower=0で逆数上端が∞になる場合を sentinel または個別分岐で扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "A/B < p/q < C/D 型の問題に対し、連分数と Euclid の互除法を選び、状態と証明を一貫して設計できる。",
+      "text": "最大 10^18 の二有理数の開区間に入る分母最小の有理数を、一 testcase あたり対数時間で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "開区間の等号を混ぜず、逆数時に端点順を交換し、分子分母の積を広い整数型で比較する。",
+      "text": "区間内に整数がある場合、上端が整数ちょうど、lower=0相当へ正規化される場合、Farey 隣接な端点を小さい q の全探索と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

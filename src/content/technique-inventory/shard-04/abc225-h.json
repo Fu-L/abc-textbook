@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc225-h「Social Distance 2」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "固定済みの座席を境界にすると空席はK+1個の区間へ分かれ、隣り合う着席位置の差の積も各区間内の選び方の寄与の積へ分解できる。未着席者の個体差は最後に順列係数として戻せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc225-h「Social Distance 2」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "両端・片端・無端が着席済みの区間ごとの人数別スコア和を二項係数で閉じ、各区間の多項式を畳み込みで掛けてM-K次係数を取る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "固定席で区間が独立になり、区間へ何人配るかだけが多項式積の次数として結合するため、高速畳み込みが使える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "左から席を見て、直前の着席位置と着席人数を持つ通常DPで全配置を加算する。",
+        "decision": "rejected",
+        "decisionReason": "距離積を更新するため直前位置まで状態に含めるとNとMにまたがる二乗規模となり、N=2×10^5 に届かない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "係数比較により元の再帰・畳み込みと冪級数恒等式が次数ごとに同値であることを示す。",
+        "text": "長さnの区間へk人追加するスコア和は、両端着席で C(n+k-1,2k+1)、片端着席で C(n+k-1,2k)、両端なしで C(n+k-1,2k-1) と表せる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Social Distance 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "区間ごとの係数列を多項式にすると、積のd次係数が合計d人を各区間へ配る全方法とスコア積の総和を同時に表す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc225-h「Social Distance 2」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "固定席からK+1個の区間多項式を作り、次数M-Kまでに切って小さいものから畳み込み、係数[M-K]へ未着席者の並べ方(M-K)!を掛ける。K=0は両端なしの式を直接使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc225-h「Social Distance 2」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "固定点による区間独立化",
+      "trigger": "一次元配置の評価が隣接選択点間の積で、いくつかの選択点が既に固定されているとき。",
+      "application": "固定点間と両端の区間を分離し、各区間へ追加する人数だけを共有変数として残す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "形式的冪級数",
-      "trigger": "制約と操作を整理したときに 形式的冪級数 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc225-h「Social Distance 2」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 形式的冪級数 を問題固有の状態へ適用する。",
+      "name": "生成多項式の積による人数配分",
+      "trigger": "独立な部品ごとに使用個数別の重みがあり、全部品で使う総数を固定したいとき。",
+      "application": "各区間のk人分のスコア和をx^kの係数にし、多項式積の指定次数を畳み込みで求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "距離の積という非加法的なスコアが、固定席で切った各区間のスコアの積としてちょうど因数分解する。",
+      "reusablePerspective": "隣接要素間の積を全配置で足す問題では、固定境界で独立成分へ切り、各成分の重みを生成関数の係数にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
+      "text": "二項係数によるgap配置の数え上げ",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "形式的冪級数",
+      "text": "NTT畳み込みと多項式の積の指定次数",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "必要次数で毎回 truncate し、定数項が逆元や対数の前提を満たすか確認する。",
+      "text": "端区間と内部区間でf1,f2,f3を取り違えず、各多項式をM-K次で打ち切る。未着席者を区別しない集計後に(M-K)!を掛け戻す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Social Distance 2 型の 区間端点と包含関係に対し、形式的冪級数を選び、状態と証明を一貫して設計できる。",
+      "text": "固定席で距離積を区間ごとに因数分解し、人数別重みの生成多項式を畳み込んで全配置を数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "必要次数で毎回 truncate し、定数項が逆元や対数の前提を満たすか確認する。",
+      "text": "隣接距離の積は足し算DPへ急いで落とさず、固定点で切ったとき区間ごとの積へ分解するかを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

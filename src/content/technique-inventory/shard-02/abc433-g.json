@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc433-g「Substring Game」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "ゲーム中に作られる文字列は S の部分文字列であり、手番では末尾へ一文字追加してなお部分文字列である遷移を選ぶ。これは Suffix Automaton の初期状態からの遷移グラフそのものである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc433-g「Substring Game」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "S の Suffix Automaton を構築し、各状態をゲーム局面として DAG 上の勝敗を後退解析する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "状態・遷移数がともに O(|S|) で、同じ右文脈を持つ多数の部分文字列を一状態へ圧縮できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "現在文字列そのものを set に持って全ての相異なる部分文字列を列挙する。",
+        "decision": "rejected",
+        "decisionReason": "相異なる部分文字列は Θ(N^2) 個になり得る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "suffix の辞書順と共通接頭辞長が部分文字列比較の最初の不一致位置を一意に決める。",
+        "text": "Suffix Automaton の各遷移は表す部分文字列へ一文字追加する操作に対応し、len が増えるため遷移グラフは DAG である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Substring Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "出辺のない状態は手番プレイヤーの負け、負け状態へ移れる状態は勝ち、全遷移先が勝ちなら負けとなる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc433-g「Substring Game」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "S を一文字ずつ追加して Suffix Automaton を構築する。状態を len の降順に処理し、出辺先に losing が一つでもあれば winning、なければ losing とする。空文字列を表す初期状態の勝敗から Alice/Bob を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc433-g「Substring Game」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "Suffix Automaton",
+      "trigger": "文字列の全相異なる部分文字列を、末尾への文字追加遷移を保った線形個の状態へ圧縮したいとき。",
+      "application": "ゲーム局面の同値な right context を automaton の状態として共有する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Suffix Array と LCP",
-      "trigger": "制約と操作を整理したときに Suffix Array と LCP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc433-g「Substring Game」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Suffix Array と LCP を問題固有の状態へ適用する。",
+      "name": "DAG ゲームの後退解析",
+      "trigger": "各手で非巡回グラフの辺を進み、動けない側が負ける impartial game の勝敗を求めるとき。",
+      "application": "長さ降順に、遷移先の勝敗から現在状態を決める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "部分文字列ゲームの将来の合法手は文字列の右文脈だけで決まり、Suffix Automaton がその Myhill–Nerode 型同値類を表す。",
+      "reusablePerspective": "局面数が多い文字列ゲームは、合法な一文字拡張を受理する automaton 上のゲームへ圧縮できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Suffix Array と LCP",
+      "text": "Suffix Automaton の state/link/transition、部分文字列認識、DAG 上の勝敗 DP を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "suffix 長が異なる比較と sentinel の順序を統一する。",
+      "text": "clone 状態を含む全状態を len 降順に処理する。terminal フラグではなく出辺の有無がゲーム終了条件である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Substring Game 型の 文字列の prefix・suffix と一致関係に対し、Suffix Array と LCPを選び、状態と証明を一貫して設計できる。",
+      "text": "部分文字列を伸ばすゲームの勝者を、Suffix Automaton と線形時間の後退解析で判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "suffix 長が異なる比較と sentinel の順序を統一する。",
+      "text": "automaton が suffix だけでなく全 substring の一文字拡張を表すこと、初期状態を空文字列局面として評価することを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

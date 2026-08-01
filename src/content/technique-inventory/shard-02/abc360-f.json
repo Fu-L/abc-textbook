@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc360-f「InterSections」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "入力区間[L_i,R_i]と[l,r]が交差する条件はL_i<l<R_i<rまたはl<L_i<r<R_iで、(l,r)平面では互いに重ならない二つの長方形になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "最適座標は端点の直前・直後など有限個の候補だけ調べればよく、lを走査すると各長方形はr軸上の区間加算eventになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc360-f「InterSections」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "候補座標を圧縮してl方向にevent sweepし、lazy segment treeでr区間加算・全体最大と最左argmaxを管理する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各入力区間が作る二長方形の被覆数最大化を、一方向の追加削除と一次元最大値へ落とせる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "候補(l,r)を二重列挙し、各入力区間との交差数を数える。",
+        "decision": "rejected",
+        "decisionReason": "候補を端点周辺へ絞っても組数が二次になり、全区間の判定まで重ねられない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "大小・等値関係を保つ順位写像なので、元座標での順序条件と圧縮後の条件が同値になる。",
+        "text": "strict不等号を整数座標へ直すと、L_i+1、R_i−1、R_i+1などが長方形境界候補になり、圧縮時にも空区間を除く必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "InterSections 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じ最大交差数ならl最小、さらにr最小なので、lを昇順走査し、segment treeは最大値を達成する最小rを返す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc360-f「InterSections」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各区間から二つの有効な(l範囲,r範囲)長方形を作り、l開始時の+1と終了後の−1 eventへする。l候補を昇順に処理してr圧縮区間へrange addし、rootの最大値と最小argmaxで答えを辞書順更新する。最大値0なら(0,1)も候補に含める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc360-f「InterSections」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "長方形被覆の平面走査",
+      "trigger": "二変数の条件が軸平行長方形の和集合・重なりへ分解できるとき。",
+      "application": "一軸をevent化し、もう一軸の被覆数をrange addで維持する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "座標圧縮",
-      "trigger": "制約と操作を整理したときに 座標圧縮 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc360-f「InterSections」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 座標圧縮 を問題固有の状態へ適用する。",
+      "name": "最大値と最左位置のlazy segment tree",
+      "trigger": "区間加算中の最大値だけでなく同率時の最小座標も必要なとき。",
+      "application": "各nodeにmaxとその最小indexを持たせ、mergeでtie-breakする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "区間の「交差」を一次元のまま扱うより、未知区間の両端(l,r)を点と見れば条件が長方形になる。",
+      "reusablePerspective": "複数の不等式を満たすパラメータ最適化は、parameter space上の領域被覆へ描き直す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
+      "text": "座標圧縮",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "座標圧縮",
+      "text": "区間加算・区間最大のlazy segment tree",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。",
+      "text": "strict境界を±1へ変換した結果l<rを満たさない長方形は捨てる。削除eventの時刻と、最大値0時の既定解(0,1)を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "InterSections 型の 区間端点と包含関係に対し、座標圧縮を選び、状態と証明を一貫して設計できる。",
+      "text": "未知区間との交差数最大化を長方形重なり最大点へ変換し、辞書順最小の端点も同時に復元できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。",
+      "text": "二種類の交差順序を別々の長方形として紙に描く。圧縮候補・eventの閉区間・tie-breakを独立したテストで確かめる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

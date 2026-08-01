@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc348-g「Max (Sum - Max)」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "B昇順にsortすると、左右区間の両方から選ぶ集合のmax Bは必ず右区間側で決まる。よって左からj個選ぶ寄与はAの上位j個prefix和、右からk個選ぶ寄与は右部分問題の答えとして分離できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc348-g「Max (Sum - Max)」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "B順divide-and-conquerとconcave max-plus convolutionを行う",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各区間のk個選択答えを統合し、左prefix和のconcavityからMonotone Minimaで全kを準二次未満に計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各kについて候補max-B indexと選ぶAを全探索する",
+        "decision": "rejected",
+        "decisionReason": "kとmax位置の二重以上の探索になり、全kでO(N^2)を超える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全対象が左・右・境界をまたぐものの三種に分かれ、再帰解と merge が互いに重複なく覆う。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Max (Sum - Max) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "左区間のAを降順にしたprefix sum x_jは差分が非増加なのでconcaveである。cross answer z_i=max_{j+k=i}(x_j+y_k)の行列はMonge/total monotoneとなり、最適jがiに対して単調に動くためdivide-and-conquer optimizationで求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc348-g「Max (Sum - Max)」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "pair(A_i,B_i)をB昇順sortする。solve(l,r)は各選択数の最大値vectorを返し、左右を再帰する。merge時に左Aを降順sortしたprefix x、右answer yからmonotone max-plus convolution zをO(len log len)で計算し、left-only、right-only、cross zの最大を各kへ格納する。root vectorの1…Nを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc348-g「Max (Sum - Max)」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "分割統治による最大要素の所在分離",
+      "trigger": "目的に集合内max Bがあり、B順区間を左右に分けられる。",
+      "application": "両側選択時のpenalty担当を右側へ固定し、左側はA和だけにする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "分割統治",
-      "trigger": "制約と操作を整理したときに 分割統治 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc348-g「Max (Sum - Max)」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 分割統治 を問題固有の状態へ適用する。",
+      "name": "concave max-plus convolution",
+      "trigger": "z_i=max_j(x_j+y_{i-j})を多数iで求め、xの差分が単調である。",
+      "application": "Monge性からargmax単調性を使い、Monotone Minimaまたは分割統治最適化で計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "max penaltyをB sortで右端側へ割り当てることで、通常は非分離なΣA-maxBを、concaveな自由選択prefixと再帰部分問題のconvolutionへ変えられる。",
+      "reusablePerspective": "集合objectiveのmax項はkey順divide-and-conquerでmaxを含む側へ責任を持たせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "分割統治",
+      "text": "divide and conquer、Monge array、Monotone Minima、max-plus convolution、concave sequence。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。",
+      "text": "0個選択は問題答えとして-∞としつつ、cross用x_0=0を許す範囲を明示する。A,Bが負でもsort・prefix・-INF演算を64bitで安全に行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Max (Sum - Max) 型の 列の順序と prefix 状態に対し、分割統治を選び、状態と証明を一貫して設計できる。",
+      "text": "各k=1,…,Nについて、k indexを選んだΣA_i-max B_iの最大値を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。",
+      "text": "N小で全subsetを列挙し、A負値、B tie、最適集合が左右片側だけ・両側に跨る場合をmerge結果と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

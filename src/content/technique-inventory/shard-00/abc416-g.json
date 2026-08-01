@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc416-g「Concat (1st)」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "特殊順序X≼YをX+Y<Y+X（同値時X≤Y）で定めた最小文字列S_minの無限反復T∞は、選択回数を無限にしたときの辞書順最小列になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "有限Kの最小連結T_KはT∞のprefixでなければならず、問題は「入力文字列をちょうどK個使って作れるT∞のprefixのうち最短」を求めることへ変わる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc416-g「Concat (1st)」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "T∞のphase pと使用文字列数nを状態に、prefix一致する入力長だけで最短総長を更新するDP",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "|S_min|≤10、各S_i長≤10なので、phase pごとにどの長さℓのprefix文字列が入力に存在するかを前計算すればO(K|S_min|·10)で解ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各stepで現在の候補文字列へ全N文字列を連結し、辞書順最小の実文字列を保持する",
+        "decision": "rejected",
+        "decisionReason": "O(NK)遷移と最大10K文字の比較・copyが必要で、prefix構造と短い文字列長を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "あるphase pから選べるS_iはT∞[p:p+|S_i|]と完全一致するものだけで、それ以外を一度選ぶと生成列はT∞のprefixではなくなる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Concat (1st) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じphase・使用個数へ到達するprefixは長さが短い方だけ残せばよい。次phaseは(p+ℓ) mod |S_min|で決まり、実文字列をDPに保存する必要はない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc416-g「Concat (1st)」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "比較X+Y vs Y+XでS_minを求めm=|S_min|とする。各phase p=0..m-1、長さℓ=1..10についてT∞の対応substringと等しい入力文字列があるかavailable[p][ℓ]を作る。dp[0][0]=0からK回、availableなℓでphaseを進め総長を最小化し、min_p dp[K][p]文字のT∞prefixを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc416-g「Concat (1st)」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "concatenation comparator",
+      "trigger": "文字列を反復・連結した辞書順を比較してcanonical最小blockを選ぶとき。",
+      "application": "X+YとY+X、同値時のX≤Yで全順序を作り最小Sを選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc416-g「Concat (1st)」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "周期文字列上のphase DP",
+      "trigger": "目標が短いperiodの無限文字列prefixで、可変長tokenを連結するとき。",
+      "application": "現在位置mod periodとtoken数だけを状態にして一致token長を遷移する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "候補文字列の長さ別圧縮",
+      "trigger": "文字列長上限が小さく、同じ内容・長さの候補が遷移上同値なとき。",
+      "application": "phaseごとに利用可能な長さのbooleanへN文字列を圧縮する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "辞書順最小列そのものを比較し続けず、無限最適列のprefixであるという強い必要条件から、目的を最短prefix長へ反転する。",
+      "reusablePerspective": "有限最適解がcanonical無限列のprefixになる問題では、lex比較を消してtokenizationの最短長DPへ落とせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "文字列連結の辞書順比較、周期文字列、最短路型DPを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "X+Y=Y+Xのtie-breakまで≼比較に入れる。T∞ substringはmod mで生成し、dpはexactly K個、到達不能を∞、出力長は最大10Kとして構成する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Concat (1st) 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "N^K候補を列挙せず、長さ10以下のperiodとtoken長だけから辞書順最小concatenationを求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "同じ文字列重複、'a'と'aa'の可換tie、最短prefixに複数tokenizationがある例を小N,Kの全列挙と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

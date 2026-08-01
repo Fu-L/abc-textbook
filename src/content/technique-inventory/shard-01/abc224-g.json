@@ -17,67 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc224-g「Roll or Increment」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "出目だけが将来を決めるがNは10^9なので状態別DPは作れない。増加した直後に目標へ着く前に振り直す戦略は、最初から振り直すよりA円だけ損である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc224-g「Roll or Increment」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。この状態表現から答えを構成する。",
+        "approach": "目標Tの直前X個の出目だけ増加を選ぶ閾値戦略へ絞り、振り直し後の期待費用 f(X)=A(X-1)/2+BN/X を整数X上で最小化する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "支配される『増加してから振る』を除くと増加を選ぶ状態はT直前の連続区間になり、凸な一変数関数だけを比較すればよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "1からNまで各出目の最適期待費用をBellman方程式で反復計算する。",
+        "decision": "rejected",
+        "decisionReason": "N=10^9 の状態を保持・走査できず、振り直しが全状態へ遷移するため素朴な更新も重い。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+        "text": "閾値区間へ入る確率はX/Nなので入るまでの振り直し回数の期待値はN/X、入った位置は一様なのでTまでの増加回数の期待値は(X-1)/2である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Roll or Increment 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "f(x) は下に凸で実数上の最小点が sqrt(2BN/A) にあるため、整数解はその近傍と範囲端だけを調べればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc224-g「Roll or Increment」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。この状態表現から答えを構成する。",
+      "text": "S≤Tなら直接増加するA(T-S)も候補にし、1≤X≤Tへ丸めた sqrt(2BN/A) 前後の整数について f(X) を評価して最小値を出す。S=Tなら0である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "条件付き期待値と確率 DP",
-      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc224-g「Roll or Increment」では、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。この状態表現から答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "name": "支配関係からの閾値方策",
+      "trigger": "順序付き状態で二操作を選び、一方を選んだ後に他方へ戻る行動が常に損になるとき。",
+      "application": "増加を選ぶ状態が目標直前のsuffixになることを示し、方策全体を区間長X一つへ圧縮する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "連続緩和による離散凸最小化",
+      "trigger": "巨大な整数範囲上の目的関数が凸で、実数上の停留点を閉形式で求められるとき。",
+      "application": "相加相乗平均または微分で sqrt(2BN/A) を得て、その近傍整数だけを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "『増加した後に振り直す』が支配されることから、複雑に見える最適方策がT直前の連続X状態だけを増加する形へ固定される。",
+      "reusablePerspective": "確率制御では各状態の方程式を書く前に、操作列の支配関係から方策の単調性・閾値性を証明する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "条件付き期待値と確率 DP",
+      "text": "幾何分布の期待値、凸関数、整数近傍の評価",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "sqrtで得た候補を1からTへclampし、床・天井とその近傍を評価する。BNやA(T-S)は10^18級なので整数積と浮動小数変換の範囲に注意する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Roll or Increment 型の問題に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な確率状態空間を閾値方策へ圧縮し、期待費用を一変数の離散凸最小化として解ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "二操作の最適戦略では、まず『片方をしてからもう片方』が支配されないかを調べ、状態ごとの方程式より先に閾値を探す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

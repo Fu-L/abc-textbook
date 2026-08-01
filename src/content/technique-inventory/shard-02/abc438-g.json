@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc438-g「Sum of Min」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "添字 i を mod N の剰余 k ごとに分けると、参照する B の添字は k+cN mod M と進む。gcd(N,M)=1 なら掛け算 N による置換で、B を並べ替えた円環上の連続区間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc438-g「Sum of Min」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "gcd で独立な剰余類へ分け、各クラスで B'_{t}=B_{Nt mod M} を作り、Σ min(x,B') の円環区間質問を値 x の昇順にオフライン処理する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各 A_k が高々二つの通常区間質問になり、Fenwick 木で小さい B' の個数・和を高速に得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "i=0,…,K-1 を直接走査して min(A_{i mod N},B_{i mod M}) を足す。",
+        "decision": "rejected",
+        "decisionReason": "K が非常に大きい場合に比例時間を使えない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数線形結合で表せる値の集合が gcd の倍数全体なので、割り切れ条件が可解性の必要十分条件になる。",
+        "text": "g=gcd(N,M) なら i mod N と i mod M は同じ mod g を持つため、問題を g 個の互いに素な長さの組へ分離できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sum of Min 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "区間で Σmin(x,b)=Σ_{b<x}b+x·#{b≥x} なので、x 昇順に b を activate し個数と和を Fenwick 木で管理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "長さが周期 M を超える部分は全周期の寄与×周回数へ分け、余り区間は円環の折返しで高々二区間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc438-g「Sum of Min」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "まず gcd ごとに A,B の対応剰余類を抽出する。互いに素なクラスで B' を N ステップ順に並べる。各 A_k から出現回数と B' 上の開始・長さを計算し、全周回を分離して余りを1〜2区間質問にする。質問を x=A_k 昇順に並べ、B' の値昇順 sweep と二本の Fenwick 木で count/sum を答えて合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc438-g「Sum of Min」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "gcd による周期分解",
+      "trigger": "二つの異なる周期 i mod N,i mod M が同時に現れるとき。",
+      "application": "共通剰余 mod gcd で独立クラスへ分け、各クラスの周期を互いに素にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "gcd と拡張 Euclid",
-      "trigger": "制約と操作を整理したときに gcd と拡張 Euclid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc438-g「Sum of Min」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で gcd と拡張 Euclid を問題固有の状態へ適用する。",
+      "name": "剰余列の置換",
+      "trigger": "step と modulus が互いに素で、k+c·step mod M を走査するとき。",
+      "application": "B を step 倍添字順へ並べ替え、算術進行を連続円環区間にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "offline Fenwick sweep",
+      "trigger": "区間内の Σmin(x,a_i) を多数の異なる x について求めるとき。",
+      "application": "値が x 未満の位置を activate し、区間の個数と値和から答えを復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二周期の同期列は gcd で分解した後、互いに素な step を添字置換すれば一次元円環区間になる。",
+      "reusablePerspective": "min 関数の区間総和は閾値未満の count/sum に分解し、値順オフライン処理できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "gcd と拡張 Euclid",
+      "text": "最大公約数、合同式、周期列、Fenwick 木、オフラインクエリ、Σmin の分解を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。",
+      "text": "K の各剰余クラスでの要素数は ceil((K-k)/N) を負にならないよう扱う。全周回・余り長、円環 wrap、gcd 分割後の添字写像を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sum of Min 型の 列の順序と prefix 状態に対し、gcd と拡張 Euclidを選び、状態と証明を一貫して設計できる。",
+      "text": "巨大長の二周期列に対する min 総和を、gcd 分解・円環区間化・offline Fenwick で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。",
+      "text": "B' の開始添字に N の逆元/割り算が絡む対応を小例で照合し、周期全体と余り区間を重複なく分ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

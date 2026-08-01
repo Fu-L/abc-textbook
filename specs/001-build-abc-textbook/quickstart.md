@@ -58,13 +58,24 @@ fixtureには、graph/search、dynamic-programming、data-structures/algorithm-d
 
 ## Scenario C — 全コーパスTechnique Inventory
 
+公式ページの検証済みprivate cacheから執筆用review packetを再生成する場合は、cacheと出力先をrepository外に置く。metadataには検証済みbatch artifactのpathを指定できる。出力先はまだ存在しない絶対pathを指定し、packet自体はcommitしない。
+
+```bash
+npm run corpus:export-inventory-review-packets -- \
+  --metadata-dir /absolute/private/metadata \
+  --cache-scope-dir /absolute/private/cache/CACHE_SCOPE_DIGEST \
+  --output-dir /absolute/private/new-review-packets
+```
+
 ```bash
 npm run catalog:validate -- --fixture tests/fixtures/catalog/technique-inventory
+npm run corpus:verify-authoring
 ```
 
 期待結果:
 
 - 対象Problem ID集合とTechniqueInventoryItemのProblem ID集合が完全一致する。
+- 全itemが問題単位の公式Source Revisionとwriting policyに結び付いた`reviewed`であり、`draft`、`changes_requested`、未解決finding、既知のbootstrap scaffoldを残さない。authoring evidenceは使用skillと各recordのcontent digestまで再計算して一致する。
 - 主解法、証明着眼点、前提、実装注意、成果候補が欠けるitemを拒否する。計算量は解析自体が解法の本質となる特殊な場合に、解法全体について根拠から確定できた値だけを受理する。通常の計算量と部分テクニック由来の汎用fallback値を拒否する。
 - Contestごとの同義仮Tag、Problem一問の言い換えTag、ad-hocだけのTagを正式化できない。
 - 同じ典型を持つ別ContestのProblemが共通Outcome/Tagへまとまる。

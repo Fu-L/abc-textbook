@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc378-e「Mod Sigma Problem」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "区間和 mod M は prefix 剰余 S_r-S_{l-1} に、負なら M を足した値である。従って各右端の寄与は通常の差の総和と、過去 prefix が S_r より大きい個数に分離できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc378-e「Mod Sigma Problem」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "prefix 剰余の総和を累積し、Fenwick tree で過去 S の度数を管理して S_{l-1}>S_r の個数を数える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各右端について式 S_r·r-ΣpastS+M·countGreater を O(log M) で計算でき、全区間を列挙しない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全ての l,r を列挙して prefix sum の差を M で割る。",
+        "decision": "rejected",
+        "decisionReason": "区間和自体が O(1) でも区間数が Θ(N^2) である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+        "text": "0≤a,b<M なら (b-a) mod M=b-a+M·[a>b] で、mod による非線形部分は大小比較一つだけになる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Mod Sigma Problem 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "過去 prefix の個数と総和を分けて持てば、固定 S_r に対する全 l の差の和をまとめて計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc378-e「Mod Sigma Problem」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "S_0=0 を Fenwick tree と prefix総和へ入れる。r=1..N で S_r を更新し、過去値のうち S_r より大きい数を取得して寄与を加えた後、S_r を登録する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc378-e「Mod Sigma Problem」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "累積和と差分",
-      "trigger": "制約と操作を整理したときに 累積和と差分 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc378-e「Mod Sigma Problem」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 累積和と差分 を問題固有の状態へ適用する。",
+      "name": "mod 差の wrap 回数の数え上げ",
+      "trigger": "剰余化された prefix 差の総和を求めるとき。",
+      "application": "通常差と一周分 M を足す大小条件へ分離する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "mod を直接集計せず、代表元同士の差が負になる回数だけ補正する。",
+      "reusablePerspective": "区間の二重和は右端固定で prefix の個数・総和・順位統計へ落とせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "累積和と差分",
+      "text": "累積和、Fenwick tree、転倒数型の大小 pair counting、剰余代表元を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "S_0 を必ず含め、greater は strict に数える。同値 prefix では M を足さず、答えは 64 bit に収める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Mod Sigma Problem 型の 列の順序と prefix 状態に対し、累積和と差分を選び、状態と証明を一貫して設計できる。",
+      "text": "全区間の剰余和を、prefix 剰余の線形項と wrap pair 数へ分解して計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "(b-a) mod M の二ケース式を書き、Fenwick tree が数える pair の不等号を小例で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

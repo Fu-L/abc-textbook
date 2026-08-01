@@ -17,71 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc283-g「Partial Xor Enumeration」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "subsequence xor全体はAの60-bit vectorが張るF_2部分空間で、distinct値数はrank rに対して2^rである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "任意linear basisでは係数bit順と数値順が一致しないが、各pivot bitが他basis vectorで0になるreduced basisなら順序を制御できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc283-g「Partial Xor Enumeration」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Gaussian eliminationでpivot列を相互消去したreduced xor basisを作り、数値昇順に並べ、rank indexのbinary係数でxorを復元する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "2^r個を生成・sortせず、任意のL…R番目をbasis本数≤60の計算で直接得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全basis coefficient 2^r通りのxorを列挙してsortする。",
+        "decision": "rejected",
+        "decisionReason": "rは60まであり、列挙不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "列の順序と prefix 状態と解候補の対応を双方向に示し、列挙の漏れと重複がないことを確認する。",
+        "text": "basis vector e_tのmsbが全て異なり、そのpivot bitが他vectorで0なら、二つの係数maskの最高相違bitがxor値の大小も決める。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Partial Xor Enumeration 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "e_0<…<e_{r-1}と並べると、0-index index qのbit tが1なe_tをxorした値が、部分空間のq番目に小さい値になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc283-g「Partial Xor Enumeration」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "Aを上位bitpivotでbasisへ挿入し、全pivotが他rowから消えるようbackward/forward消去する。非零basisを数値昇順に並べ、q=L-1,…,R-1ごとにset bitのbasisをxorして出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc283-g「Partial Xor Enumeration」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "XOR linear basis",
+      "trigger": "subsequence xorのdistinct集合やrankを扱うとき。",
+      "application": "F_2 Gaussian eliminationで独立vectorだけを残す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "reduced basisによるk-th xor",
+      "trigger": "span要素を数値順に直接列挙・選択したいとき。",
+      "application": "pivot列を相互消去し、係数maskのbinary順とxor値順を一致させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "basisのpivot bitを他rowから消す追加消去が、単なるrepresentability判定用basisをorder-statistic用basisへ変える。",
+      "reusablePerspective": "linear basisでk-th値が必要なら、row echelonだけでなくreduced formとpivot順を整える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "F_2 Gaussian elimination",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "msbと整数大小",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "64 bit bit演算",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+      "text": "入力L,Rは1-indexedなので係数maskはL-1…R-1とし、rank60の2^60境界をsigned overflowさせない。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "状態 key と更新順序を固定し、同じ候補を二重に数えない。",
+      "text": "dependentな0 vectorはbasisへ含めず、同じxorを複数subsequenceが作ってもdistinct集合では1回だけ出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Partial Xor Enumeration 型の 列の順序と prefix 状態に対し、状態縮約を選び、状態と証明を一貫して設計できる。",
+      "text": "subsequence xorのsorted distinct集合の任意連続rankを、reduced xor basisから直接列挙できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+      "text": "2本basisでpivot列の相互消去前後を比べ、mask00,01,10,11のxorが昇順になる条件を検証する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

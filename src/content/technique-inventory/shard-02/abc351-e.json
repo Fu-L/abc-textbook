@@ -17,67 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc351-e「Jump Distance Sum」では、到達可能性を parity 別に分け、u=x+y と v=x-y へ座標変換して Manhattan 距離和を一次元絶対値和へ分離する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "斜め四方向へ一歩動くたび x+y または x−y が2だけ変わる。u=x+y,v=x−y へ45度変換すると移動は二軸いずれかを±2する Manhattan 型になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "x+y の parity が異なる二点間は到達不能で距離0。同 parity group 内では距離が (|Δu|+|Δv|)/2 となり、二軸の絶対値和を独立に数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc351-e「Jump Distance Sum」では、到達可能性を parity 別に分け、u=x+y と v=x-y へ座標変換して Manhattan 距離和を一次元絶対値和へ分離する。この状態表現から答えを構成する。",
+        "approach": "点を parity 別に分け、u=x+y と v=x−y の各一次元 pairwise absolute difference sum を sort と prefix sum で求め、2で割る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "到達可能性と距離式が変換後に分離し、N² 点対を四本の一次元走査へ圧縮できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各点対について BFS 的に最短ジャンプ数または座標差式を計算する。",
+        "decision": "rejected",
+        "decisionReason": "一対の距離が O(1) でも N=2×10^5 の全 N² 対は列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同 parity 点では Chebyshev 型の移動距離が変換後の |Δu|+|Δv| の半分に等しく、各軸の寄与を独立に数えられる。",
+        "text": "同 parity なら u,v も同 parity なので |Δu|+|Δv| は偶数で、最後の2除算は常に整数になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Jump Distance Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "sorted z_0≤…≤z_{m−1} では z_i が過去との絶対値和へ i·z_i−prefix を寄与し、全対を一走査で数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc351-e「Jump Distance Sum」では、到達可能性を parity 別に分け、u=x+y と v=x-y へ座標変換して Manhattan 距離和を一次元絶対値和へ分離する。この状態表現から答えを構成する。",
+      "text": "各点を (x+y)%2 の二群に分け、それぞれ u=x+y 列と v=x−y 列を sort する。各列で prefix sum を持ち Σ_i(i z_i−prefix_i) を加算し、四列の合計を2で割る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "45度座標変換と絶対値和",
-      "trigger": "制約と操作を整理したときに 45度座標変換と絶対値和 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc351-e「Jump Distance Sum」では、到達可能性を parity 別に分け、u=x+y と v=x-y へ座標変換して Manhattan 距離和を一次元絶対値和へ分離する。この状態表現から答えを構成する。で 45度座標変換と絶対値和 を問題固有の状態へ適用する。",
+      "name": "45度座標変換",
+      "trigger": "斜め移動や max(|dx|,|dy|) 型距離が現れ、x±y で軸方向へ直せるとき。",
+      "application": "u=x+y,v=x−y に写し、到達 parity と距離を Manhattan 成分へ分解する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "一次元絶対値総和",
+      "trigger": "多数点の全 pair |z_i−z_j| を求めるとき。",
+      "application": "sort 後に各要素の左側への寄与を prefix sum から計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "距離0の「到達不能」は座標変換前の parity invariant で先に分離しないと、異なる連結成分の差を誤加算する。",
+      "reusablePerspective": "移動問題では距離公式の前に状態空間の連結成分を不変量で分類する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "45度座標変換と絶対値和",
+      "text": "parity invariant",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "sort と prefix sum",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "parity group を混ぜず、sort 後の prefix sum で各差を一度だけ数え、最後の 2 除算を扱う。",
+      "text": "v=x−y は負になり得るが通常の signed 64 bit で sort する。全点対距離和は 64 bit、合計後に2で割る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Jump Distance Sum 型の問題に対し、45度座標変換と絶対値和を選び、状態と証明を一貫して設計できる。",
+      "text": "斜めジャンプ距離を parity 別の二本の一次元差へ変換し、全点対和を O(N log N) で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "parity group を混ぜず、sort 後の prefix sum で各差を一度だけ数え、最後の 2 除算を扱う。",
+      "text": "x±y 変換後に一歩がどう動くかを書き、到達条件と距離の1/2を同時に導く。絶対値和は小さい sorted 列で寄与式を検算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

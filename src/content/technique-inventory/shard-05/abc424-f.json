@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc424-f「Adding Chords」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "円を1とNの間で開くと、採用済みchordは交差しない区間族、すなわちlaminarな括弧構造になる。left endpointを+1、rightを-1とすればcandidate内部の既存端点がbalancedかで交差を判定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc424-f「Adding Chords」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "prefix minimumとsumを持つsegment treeでcandidate区間の括弧列を判定する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各端点は一度しか現れず、range foldと二点updateをO(log N)で処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "新chordと全採用chordをpairwise比較する",
+        "decision": "rejected",
+        "decisionReason": "全て採用されるとqueryごとO(Q)、合計O(Q²)になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Adding Chords 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "candidate[A,B]が既存intervalと交差しない iff (A,B)内のendpoint列に、外から入るunmatched closeも外へ出るunmatched openもない。これは区間sum=0かつrelative prefix minimum≥0という正しい括弧列条件である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc424-f「Adding Chords」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "segment tree leafを未使用0とし、nodeに(sum,minPrefix)を持つ。各[A_i,B_i]について内部rangeをfoldしsum=0かつminPrefix≥0ならYesとしてAへ+1、Bへ-1をpoint updateし、そうでなければNoとして何もしない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc424-f「Adding Chords」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "laminar intervalと括弧列",
+      "trigger": "交差しない区間族の開閉endpointがproper nestingを作る。",
+      "application": "left/rightをparenthesisとしてcandidate内部のbalanceを検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "セグメント木と monoid",
-      "trigger": "制約と操作を整理したときに セグメント木と monoid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc424-f「Adding Chords」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で セグメント木と monoid を問題固有の状態へ適用する。",
+      "name": "括弧monoid segment tree",
+      "trigger": "動的な二点括弧挿入とsubstring validity queryが必要である。",
+      "application": "(sum,minPrefix)をassociative mergeしてrange foldする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "全query endpointがdistinctなので、candidate端に既存括弧がなく、内部endpoint列だけを調べる条件がそのまま使える。",
+      "reusablePerspective": "endpoint衝突がないdynamic interval insertionは括弧列monoidへ直接写せる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "セグメント木と monoid",
+      "text": "円環のcut、laminar interval、segment tree monoid。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "内部を(A,B)とするか[A,B]としても端leafは挿入前0だが、index規約を統一する。不採用queryは更新しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Adding Chords 型の 区間端点と包含関係に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。",
+      "text": "各chord queryを既存chordと交差しない時だけ採用しYes/Noを出せる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "nested、disjoint、交互endpoint、外側candidate追加をbrute intersectionと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

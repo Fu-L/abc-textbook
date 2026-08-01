@@ -17,67 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc255-f「Pre-order and In-order」では、preorder の先頭を根とし、inorder の根位置で左右区間を分割して二分木を再帰復元する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "先行順区間の先頭が部分木の根であり、その根の中間順位置より左が左部分木、右が右部分木なので、左右の頂点数まで一意に決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc255-f「Pre-order and In-order」では、preorder の先頭を根とし、inorder の根位置で左右区間を分割して二分木を再帰復元する。この状態表現から答えを構成する。",
+        "approach": "中間順の逆位置を使う区間再帰",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各根位置をO(1)で引き、対応する先行順区間を同じサイズに分割すれば、存在する場合の唯一の木を線形時間で復元・検証できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各再帰で中間順区間を走査して根を探す",
+        "decision": "rejected",
+        "decisionReason": "一本鎖の木では長い区間走査が繰り返され、二次時間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "根と左右部分木の要素集合・長さが二つの traversal から一意に定まり、各部分区間へ同じ議論を適用できる。",
+        "text": "先行順と中間順の部分問題は同じ頂点集合でなければならず、根の中間順位置が現在区間外なら入力は不整合である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Pre-order and In-order 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "左部分木サイズを中間順から求めると、先行順でも根直後の同じ長さが左部分木になり、残りが右部分木になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc255-f「Pre-order and In-order」では、preorder の先頭を根とし、inorder の根位置で左右区間を分割して二分木を再帰復元する。この状態表現から答えを構成する。",
+      "text": "各頂点の中間順位置invを前計算し、(preL,inL,len)を持つ部分問題を処理する。根=P[preL]の位置が中間順区間内か検証し、左右サイズで二部分へ分け、空でなければその先頭を子として記録する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "二分木の preorder と inorder",
-      "trigger": "制約と操作を整理したときに 二分木の preorder と inorder の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc255-f「Pre-order and In-order」では、preorder の先頭を根とし、inorder の根位置で左右区間を分割して二分木を再帰復元する。この状態表現から答えを構成する。で 二分木の preorder と inorder を問題固有の状態へ適用する。",
+      "name": "巡回列からの二分木復元",
+      "trigger": "先行順と中間順が与えられ、子関係を構成したい。",
+      "application": "先行順先頭を根とし、中間順の根位置で左右部分木を再帰分割する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "逆置換による位置参照",
+      "trigger": "再帰ごとに同じ配列内の要素位置を探す。",
+      "application": "中間順の逆位置配列を作り、各根の位置を定数時間で得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二つの巡回列は木が存在すれば左右部分木区間を一意に決める一方、根位置が区間外という局所検査で不可能性も検出できる。",
+      "reusablePerspective": "構造復元では部分列をコピーせず境界だけを持ち、要素位置の逆引きを前計算して全要素を一度ずつ処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "二分木の preorder と inorder",
+      "text": "二分木の先行順・中間順巡回の定義と部分木の連続性を理解している。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "再帰区間の長さを保って左右へ分割できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "値から inorder 位置への逆配列を使い、不整合区間や根が 1 でない入力を拒否する。",
+      "text": "問題で根は頂点1なのでP_1≠1なら即-1とする。N=2×10^5の一本鎖で再帰スタックが溢れないよう反復スタックを使い、子なしは0を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Pre-order and In-order 型の問題に対し、二分木の preorder と inorderを選び、状態と証明を一貫して設計できる。",
+      "text": "巡回列に整合する根1の二分木があれば各頂点の左右の子を復元し、なければ-1と判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "値から inorder 位置への逆配列を使い、不整合区間や根が 1 でない入力を拒否する。",
+      "text": "復元後に実際の先行順・中間順を再生成して入力と一致するか確認し、一本鎖、完全木、根位置が部分区間外になる不正例を試す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

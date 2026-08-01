@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc387-f「Count Arrays」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "辺A_i→iを張ると各頂点の入次数が1のfunctional graphになり、各連結成分は一つのcycleとそこへ流れ込む木からなる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "cycle上では不等式が一周してx_1≤x_2≤…≤x_1となるため全値が等しく、cycle全体を一つのrootへ縮約できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc387-f「Count Arrays」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "cycleを縮約した各rooted treeで、root値別の木DPを累積和高速化する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "親値以上/以下という辺制約を子部分木のprefix sumで合成でき、全成分の通り数をO(NM)で求めて積にできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各x_iを1..Mで全探索し不等式を検査する",
+        "decision": "rejected",
+        "decisionReason": "M^N通りであり、functional graphのcycle強制等値と木構造を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "遷移を続けると有限頂点上で必ず再訪が起こり、経路は前置き木と一つの閉路へ一意に分かれる。",
+        "text": "root値jを固定した部分木通り数dp[v][j]は、各childの許容値1..jの通り数の積になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Count Arrays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "子ごとにdpのprefix sumを一度作れば、各辺について全jの寄与をO(M)でmergeできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc387-f「Count Arrays」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "functional graphの各cycleを検出・縮約し、逆向き辺を持つforestを作る。postorderでdp[v][j]=∏child Σ_{k≤j}dp[child][k]を計算し、各component rootのΣ_j dp[root][j]を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc387-f「Count Arrays」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "functional graphのcycle縮約",
+      "trigger": "各頂点が一つの親を持ち、cycle上の制約が全頂点を同値化するとき。",
+      "application": "cycleを一頂点としてrooted treeへ変える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "関数グラフの閉路分解",
-      "trigger": "制約と操作を整理したときに 関数グラフの閉路分解 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc387-f「Count Arrays」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 関数グラフの閉路分解 を問題固有の状態へ適用する。",
+      "name": "tree DPの累積和高速化",
+      "trigger": "親値に応じて子値のprefix/suffix範囲を合計するとき。",
+      "application": "子dpのprefix sumを全jへ使い回す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "循環不等式は矛盾でなくcycle全体の等値を強制するので、cycle長を状態へ持つ必要がない。",
+      "reusablePerspective": "有向cycle上に単調な順序制約が閉じている場合、全辺が等号になり縮約できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "functional graphのcycle検出とtree DPを実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "関数グラフの閉路分解",
+      "text": "累積和で値域DPを高速化できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。",
+      "text": "自己loopもcycleとして一rootにする。縮約後のchild重複を避け、mod積とprefix sumを各mergeで正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Count Arrays 型の 列の順序と prefix 状態に対し、関数グラフの閉路分解を選び、状態と証明を一貫して設計できる。",
+      "text": "functional graph上の単調labeling数を、cycle等値縮約とO(NM)木DPで数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。",
+      "text": "自己loop、長いcycle、cycle頂点ごとに木が付くN≤8例を全M^N列挙し、縮約前後の条件とcomponent積を照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

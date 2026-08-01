@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc244-f「Shortest Good Path」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "good 条件が区別するのは各頂点の訪問回数の偶奇だけで、同じ parity mask と末尾頂点に到達した二つの path は、その後の最適延長について等価である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "隣接頂点 u を末尾へ追加すると、末尾は u になり mask の u bit だけが反転するため、状態遷移は単位重み graph になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc244-f「Shortest Good Path」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "(mask,last) を頂点とする graph を作り、全 singleton state を距離1の source とした multi-source BFS で全状態の最短長を求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N≤17 により N·2^N 状態を持て、全 parity pattern の最短 path を一度の探索で共有できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各 S ごとに独立して path を探索し、訪問回数を記録する。",
+        "decision": "rejected",
+        "decisionReason": "target mask が2^N個あり、探索を繰り返すと状態空間を指数回重複して調べる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Shortest Good Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "target mask S の最短長は min_last dist[S][last] であり、mask=0 だけは singleton からの BFS ではなく空 path の長さ0を採用する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc244-f「Shortest Good Path」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各 v について dist[1<<v][v]=1 を queue に入れる。状態 (mask,v) から各 neighbor u へ (mask xor (1<<u),u) を距離+1で緩和し、BFS 後に mask=1..2^N-1 の min_v dist と mask0の0を合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc244-f「Shortest Good Path」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "bitmask parity state",
+      "trigger": "各要素の使用回数 mod 2 が条件で、操作が一要素の parity を反転するとき。",
+      "application": "訪問 parity 全体を bitmask にし、操作対象 bit を XOR する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc244-f「Shortest Good Path」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "product graph の multi-source BFS",
+      "trigger": "開始状態が複数あり、全 target state の単位重み最短距離をまとめて求めたいとき。",
+      "application": "全初期状態を正しい初期距離で queue に入れ、一回の BFS を行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "path は頂点の重複を許すため、単純 path では届かない parity mask もあり、履歴を mask と last だけへ圧縮して再訪を積極的に使う。",
+      "reusablePerspective": "walk の最短化では、単純 path 仮定を置く前に再訪が状態量を改善・反転する役割を持つか確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "幅優先探索",
+      "text": "BFS、bitmask、parity、状態空間 graph",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "問題の length は edge 数でなく sequence 要素数なので singleton の初期距離は1である。mask0の答えは空列0とし、dist 配列の index 順と bit 番号を揃える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Shortest Good Path 型の 文字列の prefix・suffix と一致関係に対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "訪問 parity と末尾からなる product graph を構成し、全2^N条件の最短 good path を一度の BFS で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "同じ mask でも末尾が違うと次の合法遷移が違う例を作り、mask だけでは状態が足りない理由を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

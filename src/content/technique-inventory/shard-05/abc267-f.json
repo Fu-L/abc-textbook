@@ -1,15 +1,15 @@
 {
   "problemId": "abc267-f",
   "sourceRevisionIds": [
-    "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba",
-    "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1"
+    "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1",
+    "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba",
-        "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1"
+        "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1",
+        "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc267-f「Exactly K Steps」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "木の直径端点をL,Rとすると、任意の頂点uから最遠の頂点の一つはLまたはRである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "uから距離Kの頂点がどこかに存在すれば、uからLまたはRへのpathのうち長さK以上の方に、距離ちょうどKの頂点が必ずある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc267-f「Exactly K Steps」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各queryでuからBFSし、距離Kの頂点を探す。",
+        "decision": "rejected",
+        "decisionReason": "木全体の探索をQ回繰り返すことになる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "直径端点L,Rをそれぞれ根にDFSし、root-to-current path stackからuのK個上の祖先をquery回答候補として二回調べる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "uから各端点へのpathは根付き木の祖先列であり、直径性により二本のどちらかを試せば存在する全queryを覆う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "二進展開した距離だけ祖先へ移動でき、最大の異なる祖先から一段進めば最小共通祖先になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Exactly K Steps 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "root Xでuの深さがK以上なら、path stackの深さ depth(u)−K の頂点がuからX方向へK進んだ答えになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc267-f「Exactly K Steps」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "arbitrary-distance witness queryをdiameter endpoint coverで二つのlevel-ancestor queryへ帰着し、offline DFS stackで解く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc267-f「Exactly K Steps」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "木の直径端点による最遠点cover",
+      "trigger": "任意頂点から指定距離のwitnessを一つ求め、方向を全分岐へ探したくないとき。",
+      "application": "直径両端への二本のpathだけを候補にし、いずれか十分長い方から頂点を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "LCA と binary lifting",
-      "trigger": "制約と操作を整理したときに LCA と binary lifting の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc267-f「Exactly K Steps」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で LCA と binary lifting を問題固有の状態へ適用する。",
+      "name": "offline level ancestor",
+      "trigger": "固定rootの木で、各頂点に付いた祖先深さqueryをまとめて答えるとき。",
+      "application": "DFS中のroot-to-current pathをstackに保ち、対象深さを配列indexで参照する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "必要なのは任意の一頂点なので、uを中心とする距離K球全体を表現せず、直径方向の一つのwitnessへ限定できる。",
+      "reusablePerspective": "witness queryは全候補を列挙するより、必ず候補を含む少数のcanonical pathを探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "LCA と binary lifting",
+      "text": "木の直径、最遠点性質、DFS path stackによるlevel ancestorを理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。",
+      "text": "任意頂点から最遠点Lを求め、Lから最遠点Rを求める二回のDFS/BFSで直径端点を得る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "各queryを頂点uへ付け、L根の走査で未回答ならR根の走査を試し、両方でdepth<Kなら−1にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Exactly K Steps 型の 根付き木・部分木・パスの関係に対し、LCA と binary liftingを選び、状態と証明を一貫して設計できる。",
+      "text": "木上で指定頂点から距離Kの任意witnessを、直径端点rootの祖先queryで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。",
+      "text": "木で指定距離の任意点を求める問題は、直径端点へのpathが全距離を代表できないか確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "queryを先読みできるlevel ancestorはbinary liftingを作る前にDFS path stackで線形処理できるか検討する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

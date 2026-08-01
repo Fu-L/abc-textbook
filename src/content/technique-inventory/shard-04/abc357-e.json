@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc357-e「Reachability in Functional Graph」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "outdegree 1 の functional graph の各弱連結成分は、唯一の有向cycleと、そこへ流れ込むreverse treesからなる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "cycle上の頂点からはcycle長 c 個すべてへ到達し、tree頂点uからはcycle c 個に加えてcycleまでのpath上の depth(u) 個へ到達する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc357-e「Reachability in Functional Graph」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "indegree削除またはSCCでcycleを特定し、cycle長を基底値としてreverse edge方向へ到達数+1を伝播する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各頂点・辺を定数回だけ処理し、全uのreachable countを O(N) で得て合計できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各始点uからa_iを辿り、最初の重複まで訪問数を数える。",
+        "decision": "rejected",
+        "decisionReason": "長いtailを多数の始点が共有する場合、同じsuffixを繰り返し歩いて O(N²) になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "遷移を続けると有限頂点上で必ず再訪が起こり、経路は前置き木と一つの閉路へ一意に分かれる。",
+        "text": "Kahn法でindegree0を順に除いた後に残る頂点はcycle頂点だけで、各cycleを一周して同じ長さを全頂点へ設定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Reachability in Functional Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "cycleからreverse graphを外向きにたどると、子uのreachable数は親a_uの値+1となり、共有suffixを一度だけ再利用できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc357-e「Reachability in Functional Graph」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "全indegreeとreverse adjacencyを作り、queueでindegree0頂点を削除し順序を保存する。残存未訪問頂点ごとにcycleを列挙して長さ c をansCountへ代入する。削除順を逆にたどり count[u]=count[a_u]+1 とし、全 count を64 bitで合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc357-e「Reachability in Functional Graph」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "functional graph のcycle peeling",
+      "trigger": "各頂点の遷移先が一意で、cycleと流入木を分離したいとき。",
+      "application": "indegree0から除去し、残存部分をcycle、除去逆順をtree DP順とする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "関数グラフの閉路分解",
-      "trigger": "制約と操作を整理したときに 関数グラフの閉路分解 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc357-e「Reachability in Functional Graph」では、主解法候補として、各頂点の出次数が一つの関数グラフを、木部分と閉路部分へ分解して処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 関数グラフの閉路分解 を問題固有の状態へ適用する。",
+      "name": "共有suffixのDP",
+      "trigger": "各始点の一意な遷移列が途中から合流し、到達数を全点で求めるとき。",
+      "application": "次頂点の答え+1を逆topological順に伝える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "到達可能数はcomponent全体サイズではなく「自分からcycleまでのdepth＋cycle長」で、reverse subtreeの兄弟へは到達しない。",
+      "reusablePerspective": "functional graphではundirected componentとdirected reachable setを混同せず、tailとcycleへ分ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "functional graph",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "関数グラフの閉路分解",
+      "text": "Kahn法とreverse graph",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。",
+      "text": "self-loopもcycle長1として扱う。答えは最大N²なので64 bitを使い、peel順を逆にしないまま更新しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Reachability in Functional Graph 型の 頂点と辺からなる状態グラフに対し、関数グラフの閉路分解を選び、状態と証明を一貫して設計できる。",
+      "text": "各始点の重複探索をcycle長＋tail深さへ圧縮し、全到達pairを O(N) で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "閉路上の頂点と流入木の頂点を別に印付けし、距離と閉路長を混同しない。",
+      "text": "一成分をcycleと逆向き木に描き、どの頂点へは到達しないかも確認する。peeling後の残存条件と逆順DPをセットで覚える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

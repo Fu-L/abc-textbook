@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc379-e「Sum of All Substrings」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各部分文字列の値を桁寄与でまとめると、元の j 桁目 S_j は右端 i≥j ごとに j·S_j·10^{N-i} を寄与する。従って係数列 A_i=Σ_{j≤i}jS_j を下位桁から足せばよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc379-e「Sum of All Substrings」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "A_i の累積を作り、i=N から逆順に carry へ A_i を加えて一桁ずつ10進の筆算を行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "答えそのものは非常に長く通常整数に入らないが、各桁と繰上りだけなら O(N) 回の整数演算で構成できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各部分文字列を数値へ変換して総和へ加える。",
+        "decision": "rejected",
+        "decisionReason": "部分文字列が Θ(N^2) 個あり、各値も最大 N 桁なので時間も整数サイズも過大になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "floor(N/i) の異なる値は平方根より小さい商と平方根以下の添字から全て得られ、各区間端は除算で計算できる。",
+        "text": "固定右端 i の全左端を足すと、S_j は j 個の部分文字列に現れるため A_i=ΣjS_j という単純な prefix が得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sum of All Substrings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "答えは Σ10^{N-i}A_i なので、最下位から carry+=A_i、digit=carry mod10、carry/=10 と通常の加算筆算にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc379-e「Sum of All Substrings」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "文字 digit を整数化し prefixWeighted += i×digit として A_i を保存する。逆順に carry へ A_i を足して digit を出力用 buffer に積み、全 A を使った後も carry が0になるまで桁を伸ばし、反転して出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc379-e「Sum of All Substrings」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "floor 除算の商区間列挙",
-      "trigger": "制約と操作を整理したときに floor 除算の商区間列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc379-e「Sum of All Substrings」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で floor 除算の商区間列挙 を問題固有の状態へ適用する。",
+      "name": "巨大整数の桁別寄与と筆算",
+      "trigger": "答えが多数桁だが10冪係数の和として表せるとき。",
+      "application": "係数を下位から繰上り処理して文字列として構成する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "部分文字列の位置ごとの寄与を、左端数 j と右端側の10冪に分離する。",
+      "reusablePerspective": "多倍長整数ライブラリがなくても、基数10の係数列なら carry 正規化で十分である。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "floor 除算の商区間列挙",
+      "text": "部分文字列の桁寄与、累積和、10進筆算と carry を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。",
+      "text": "問題の index は1-originで係数が j になる。最後の carry を全て吐き、出力 buffer の反転と先頭0を正しく扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sum of All Substrings 型の 文字列の prefix・suffix と一致関係に対し、floor 除算の商区間列挙を選び、状態と証明を一貫して設計できる。",
+      "text": "全部分文字列の巨大な整数和を、桁寄与の累積と線形回数の筆算で正確に出力できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。",
+      "text": "N=3 の全部分文字列を展開し、各 S_j の係数が j を含む prefix A_i になる過程を手で確かめる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

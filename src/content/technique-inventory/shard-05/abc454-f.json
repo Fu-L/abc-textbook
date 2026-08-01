@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc454-f「Make it Palindrome 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "中央をまたぐ区間加算は左右へ分割・相殺できるため禁止してよい。左右対称位置の差 B_i=A_i-A_{N+1-i} mod M を全0にすれば palindrome になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc454-f「Make it Palindrome 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "B の差分列 C_i=B_i-B_{i-1} mod M（両端0番兵）を作り、C の非零値を sort して、公式で定まる個数の小さい値の和を最小操作数とする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "B の区間±1は C の二点への+1/-1移送に対応し、各 C_i を増加側か減少側のどちらかだけで0へ送る最適化は、選択個数固定なら小さい C_i を選ぶのが最良である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "A の区間と加算方向を状態にして palindrome になるまで BFS する。",
+        "decision": "rejected",
+        "decisionReason": "状態数は M^N 級で、区間操作の候補も二乗個あるため探索不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "C の総和は M の倍数で、増加操作総数と減少操作総数を一致させれば二点移送として全操作をpairingできる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Make it Palindrome 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "増加側集合 X の最適サイズは |X|=N''-ΣC/M で、そのサイズでは必要増加数と減少数が一致し、最小 C の和が答えになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc454-f「Make it Palindrome 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "N'=floor(N/2) の B を計算し、B_0=B_{N'+1}=0 として N''=N'+1 個の C を0..M-1に正規化する。C を昇順sortし、k=N''-ΣC/M 個のprefix sumを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc454-f「Make it Palindrome 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "区間操作の差分二点化",
+      "trigger": "range ±1で数列を目標値へ揃える最小操作を考えるとき。",
+      "application": "差分列で区間端二点の単位移送へ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc454-f「Make it Palindrome 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "方向分割とsort最適化",
+      "trigger": "各剰余を増やすか減らすか選び、両方向回数の最大を最小化するとき。",
+      "application": "最適な選択個数を導き、その個数の最小値を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "palindrome 条件は対称pair差へ落とし、range operation はさらに差分の二点 operationへ落とすと一次元輸送問題になる。",
+      "reusablePerspective": "subsetが個数と総和だけで評価されるなら、個数固定後はsort prefixが最適になる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "区間操作の差分二点化、方向分割とsort最適化と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "mod差を常に0..M-1へ正規化し、B末尾の0番兵から生じる最後のCを忘れない。kが0やN''になる境界を許す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Make it Palindrome 2 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "modulo区間加算によるpalindrome化を、対称差・差分列・sort prefixの閉形式へ変換できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "一回の左側区間操作が B と C をどう変えるかを追い、増加側集合サイズ k の導出を操作回数二式から再現する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

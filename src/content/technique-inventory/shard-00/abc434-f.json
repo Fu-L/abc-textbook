@@ -19,77 +19,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc434-f「Concat (2nd)」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "任意順連結の辞書順最小順序は XY<YX を比較規則としてソートした列 S' で得られる。求める二番目では、最小順序からの転倒を最小限だけ増やす候補に絞れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc434-f「Concat (2nd)」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "XY 対 YX を短い方の長さに比例して比較できるよう各文字列の Z 配列を持ち、ソート後に二番目候補を局所的に構成する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "総比較コストを O(Σ|S_i|log N) に抑え、後半の候補も高々二つの連結比較で決められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "比較ごとに XY と YX を実際に生成して標準ソートする。",
+        "decision": "rejected",
+        "decisionReason": "長い同一文字列が多数回比較されると Ω(N|S_i|) となり、総文字数制約だけでは抑えられない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "既知の一致区間内では以前の値を再利用し、区間を越える比較だけが全体で線形回数になる。",
+        "text": "隣接 S'_i,S'_{i+1} が可換なら swap しても同じ最小文字列がもう一度現れるため、二番目も最小連結文字列になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Concat (2nd) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "全隣接対が非可換なら転倒数 2 以上の順序にはそれより小さい列が少なくとも二つあるので候補外で、最後付近の転倒数 1 の二候補だけが残る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "|X|≥|Y| の XY 対 YX は、Y と X の対応区間を直接 O(|Y|) 比較し、X 内部同士の長い比較を Z_X で O(1) にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc434-f「Concat (2nd)」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各 S_i の Z 配列を前計算し、XY<YX comparator を O(min(|X|,|Y|)) で実装してソートする。隣接可換対があれば sorted 連結を返す。なければ末尾二要素を入れ替える列と、末尾三要素中の別の隣接入替え列を構成し、連結結果の小さい方を返す。N=2 は定義された一候補を処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc434-f「Concat (2nd)」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "連結順序 comparator",
+      "trigger": "文字列群の連結結果を辞書順最小化するとき。",
+      "application": "X<Y を XY<YX で定義し、交換法で最適ソート順を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Z algorithm または KMP",
-      "trigger": "制約と操作を整理したときに Z algorithm または KMP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc434-f「Concat (2nd)」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Z algorithm または KMP を問題固有の状態へ適用する。",
+      "name": "Z 配列による自己部分文字列比較",
+      "trigger": "比較中に同じ長い文字列内の二区間の LCP が必要なとき。",
+      "application": "各文字列の Z 値を保持し、ずれた suffix と prefix の一致長を定数時間で得る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "転倒数による第二候補の絞り込み",
+      "trigger": "全順列の二番目を、最小順序からの局所交換として特徴付けられるとき。",
+      "application": "転倒数 2 以上を排除し、接頭辞を最大限共有する末尾付近の二候補だけ比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "比較一回の最悪長より、各要素がソート全体で何文字読まれるかを抑える comparator 設計が必要である。",
+      "reusablePerspective": "辞書順二番目は最小解との最長共通接頭辞を持つ局所的な一転倒へ絞れる場合がある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Z algorithm または KMP",
+      "text": "辞書順、XY<YX ソート、Z-algorithm、転倒数、交換法による最適性を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "連結文字列へ置く separator が入力 alphabet と衝突しないようにする。",
+      "text": "comparator は等価な XY=YX に対して strict weak ordering を壊さないよう false を返す。N=2 と可換対ありを先に処理し、候補の添字を範囲内にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Concat (2nd) 型の 文字列の prefix・suffix と一致関係に対し、Z algorithm または KMPを選び、状態と証明を一貫して設計できる。",
+      "text": "大量・長大な文字列の連結結果について、効率的な comparator と一転倒候補から辞書順二番目を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "連結文字列へ置く separator が入力 alphabet と衝突しないようにする。",
+      "text": "比較が O(min長) に収まる区間分解と、非可換時に残す二つの末尾候補が公式の順序どおりかを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

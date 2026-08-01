@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc438-f「Sum of Mex」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "mex f(i,j) の総和は tail sum Σ_{k≥1}c_k に変形できる。ここで c_k はパス i-j が頂点 0,…,k-1 を全て含む組数である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc438-f「Sum of Mex」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "必須頂点集合が一本のパス上にある間、その包含する最小パスの端点 x_k,y_k を増分更新し、含む端点組数 c_k を数える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "端点は新頂点 k の追加ごとに高々一方だけ更新され、LCA と部分木サイズで各段階を O(log N) 処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全 i≤j のパスを調べて mex を直接計算する。",
+        "decision": "rejected",
+        "decisionReason": "頂点組が O(N^2) あり、各パス確認も必要になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "二進展開した距離だけ祖先へ移動でき、最大の異なる祖先から一段進めば最小共通祖先になる。",
+        "text": "Σ f(i,j)=Σ_{k≥1}#{f(i,j)≥k} という非負整数の tail-sum 恒等式を使う。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sum of Mex 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "既存端点 x,y に k を加えた三頂点が一本のパス上なら、y が path(x,k) 上なら端点を (x,k)、x が path(k,y) 上なら (k,y) に更新できる。どちらでもなければ以降 c_k=0 である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "x≠y の必須パスを含む i-j は、x から y と逆側へ伸びる成分と y から x と逆側へ伸びる成分から端点を一つずつ選ぶ組に対応する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc438-f「Sum of Mex」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "LCA、depth、subtree size を前計算し、距離等式で頂点がパス上か判定する。k を昇順に端点 (x,y) へ追加し、一本のパス性を更新する。成立中は x,y から互い方向の最初の辺を除いた外側成分サイズを求めて積を c_k とし、x=y の場合はその頂点を含む全 i≤j の組を隣接成分サイズから数え、答えへ足す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc438-f「Sum of Mex」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "tail-sum 公式",
+      "trigger": "非負整数値の総和を閾値以上となる対象数へ変換したいとき。",
+      "application": "mex の値 k ごとの直接分類を、0…k-1 が全てパスにある条件へ変える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "LCA と binary lifting",
-      "trigger": "制約と操作を整理したときに LCA と binary lifting の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc438-f「Sum of Mex」では、主解法候補として、根付き木の祖先を二冪ごとに前計算し、深さを揃えて最小共通祖先を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で LCA と binary lifting を問題固有の状態へ適用する。",
+      "name": "パス集合の増分維持",
+      "trigger": "木上の頂点を一つずつ追加し、それら全てを含む一本のパスが存在するか判定するとき。",
+      "application": "現在の極端二頂点だけを持ち、新頂点が延長可能か LCA/距離で調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "部分木サイズによるパス包含組数",
+      "trigger": "固定パスを包含する端点対の個数を数えるとき。",
+      "application": "両端の外側成分サイズを求め、その直積として数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "mex 総和を閾値条件へ変えると、『小番号頂点集合が一本の木パスに載るか』という幾何的な増分問題になる。",
+      "reusablePerspective": "木上の点集合がパスに収まるなら、集合の情報はその最小包含パスの二端点へ圧縮できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "LCA と binary lifting",
+      "text": "mex の tail-sum、LCA、木上距離、部分木サイズ、パス包含判定を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。",
+      "text": "頂点番号 k の追加と c_k が要求する集合 0…k-1 の添字をずらさない。x=y の退化ケース、i≤j の unordered pair 数、根方向成分サイズを正しく数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sum of Mex 型の 頂点と辺からなる状態グラフに対し、LCA と binary liftingを選び、状態と証明を一貫して設計できる。",
+      "text": "全頂点対パスの mex 総和を、必須小番号頂点の包含パス端点を維持して O(N log N) で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "存在しない祖先の sentinel と根の深さを統一し、log 幅を最大深さから決める。",
+      "text": "tail-sum の k と端点更新順、固定 x-y パスを含む端点対の成分積が i≤j を一度ずつ数えることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

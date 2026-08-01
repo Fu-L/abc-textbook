@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc291-ex「Balanced Tree」では、主解法候補として、木を重心で再帰分割し、重心をまたぐ寄与だけを各階層で集計する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各頂点で子部分木が自身の部分木の半分以下という条件は、その部分木の根が重心であることを再帰的に要求している。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc291-ex「Balanced Tree」では、主解法候補として、木を重心で再帰分割し、重心をまたぐ寄与だけを各階層で集計する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "重心分解木を答えとして構成",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "元木の重心を根とし、重心除去後の各成分を独立に再帰処理すれば、サイズ半減条件とパス包含条件を同時に満たせる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "任意の根から元の木をそのまま根付き化",
+        "decision": "rejected",
+        "decisionReason": "大きい子部分木が半分を超えることがあり、平衡条件を保証できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "重心除去後の各連結成分が半分以下になるため、各頂点の寄与は対数個の階層でちょうど一度ずつ処理される。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Balanced Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "元木のx-yパスが重心を通らない組は同じ除去後成分内に限られるため、成分ごとの再帰結果を重心の子へ接続してよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc291-ex「Balanced Tree」では、主解法候補として、木を重心で再帰分割し、重心をまたぐ寄与だけを各階層で集計する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "現在成分の重心を求めて分解木の根とし、重心を除いた各連結成分を再帰処理して得た根の親をその重心に設定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc291-ex「Balanced Tree」では、主解法候補として、木を重心で再帰分割し、重心をまたぐ寄与だけを各階層で集計する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "重心分解",
+      "trigger": "木を各段階で半分以下の連結成分へ再帰分割したい。",
+      "application": "部分木サイズから重心を求め、分解木の親子を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "木の重心と再帰分割",
-      "trigger": "制約と操作を整理したときに 木の重心と再帰分割 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc291-ex「Balanced Tree」では、主解法候補として、木を重心で再帰分割し、重心をまたぐ寄与だけを各階層で集計する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の重心と再帰分割 を問題固有の状態へ適用する。",
+      "name": "分割統治",
+      "trigger": "重心を通らない制約が除去後成分内で独立になる。",
+      "application": "各成分を別問題として再帰し、その根を重心へ結ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "求める木は元の辺を保つ必要がなく、元木上のパス条件だけを重心が媒介すればよい。",
+      "reusablePerspective": "出力構成問題では、条件が分離するseparatorを新しい親子関係に使う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "木の重心と再帰分割",
+      "text": "木の重心の存在証明と、削除済み頂点を除いた部分木サイズ計算を実装できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "重心を除いた成分ごとの集計を分離し、同一成分内の過剰計上を差し引く。",
+      "text": "全体O(N log N)になるよう各分解段で現成分だけを走査し、深い通常再帰によるstack overflowを避ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Balanced Tree 型の 根付き木・部分木・パスの関係に対し、木の重心と再帰分割を選び、状態と証明を一貫して設計できる。",
+      "text": "二つの要求を満たす根付き木の親配列を構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "重心を除いた成分ごとの集計を分離し、同一成分内の過剰計上を差し引く。",
+      "text": "出力木について全親子部分木サイズを検査し、小木では全頂点対の元パス条件も確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

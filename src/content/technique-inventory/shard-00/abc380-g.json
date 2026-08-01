@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc380-g「Another Shuffle Window」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "長さ K の窓を shuffle して変わるのは窓内二要素の相対順だけで、窓外との転倒関係は位置ブロックが保たれる。一様 permutation の窓内期待転倒数は K(K-1)/4 である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc380-g「Another Shuffle Window」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "元全体の転倒数から各窓の元転倒数を引き、K(K-1)/4 を足す。窓転倒数は Fenwick tree で削除・追加寄与を更新する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "期待値の線形性で shuffle の分布を窓内 pair の1/2へ集約でき、全窓の転倒数を O(N log N) で走査できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各窓について K! 通りの並べ替えを列挙し、転倒数を平均する。",
+        "decision": "rejected",
+        "decisionReason": "K は2×10^5まであり permutation 列挙は不可能で、窓ごとの O(K log K) 再計算も O(NK) になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+        "text": "窓内の任意の異なる二要素は shuffle 後の前後が半々なので、値に関係なく各 pair の期待寄与は1/2になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Another Shuffle Window 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "左端要素を除くとその要素が左側として作った「より小さい右要素」数を引き、右端要素追加では「より大きい既存要素」数を足す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc380-g「Another Shuffle Window」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "Fenwick tree で元 permutation の全転倒数と最初の窓の転倒数を求める。窓を一つずつずらして削除・追加の順位数を反映し、各窓の期待値を足して窓数で割る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc380-g「Another Shuffle Window」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "期待値の線形性による pair 分解",
+      "trigger": "random shuffle 後の転倒数など pair 指示変数の和を扱うとき。",
+      "application": "各窓内 pair の確率1/2を独立性なしで加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "条件付き期待値と確率 DP",
-      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc380-g「Another Shuffle Window」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "name": "sliding window inversion",
+      "trigger": "固定長窓の転倒数を全位置で求めたいとき。",
+      "application": "Fenwick tree で出入り要素の転倒寄与だけを更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "shuffle が窓外との相対位置を変えないことをブロック X,Y,Z で分離すると、差分は窓内だけになる。",
+      "reusablePerspective": "期待転倒数は各 pair の確率だけでよく、pair 間の依存を考えなくてよい。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "条件付き期待値と確率 DP",
+      "text": "転倒数、Fenwick tree、期待値の線形性、modular inverse を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "K(K-1)/4 は法上で inv2 を使い、全窓平均でも窓数の逆元を掛ける。削除・追加時の strict 比較方向を揃える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Another Shuffle Window 型の 順列の位置と値の対応に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "ランダム窓 shuffle 後の転倒数期待値を、全体値と sliding-window 転倒数の差分として求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "窓内・窓外の六種類の pair を分類し、どの関係だけが random 化されるかを先に確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

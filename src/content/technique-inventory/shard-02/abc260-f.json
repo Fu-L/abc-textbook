@@ -1,15 +1,15 @@
 {
   "problemId": "abc260-f",
   "sourceRevisionIds": [
-    "source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b",
-    "source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e"
+    "source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e",
+    "source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b",
-        "source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e"
+        "source-abc260-f-problem-cdeb74ee8abe8ff151e1a5f4608728f3eaaa54d071f3df636b41281d86980f3e",
+        "source-abc260-editorial-4437-b3ba3b06d77e60c16895f85058b48209a1ae9a0cdbca62613ac9ed1afffef89b"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,67 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc260-f「Find 4-cycle」では、小さい側の頂点対ごとに最初の共通隣接点を記録し、二個目を見つけた時点で 4-cycle を復元する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "二部グラフの4-cycleは、片側の異なる二頂点 x,y が、反対側に共通隣接頂点を二つ持つことと同値である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "小さい側 V_2 の頂点対は T^2 個程度しかなく、最初にその対を作った V_1 頂点だけを記録できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc260-f「Find 4-cycle」では、小さい側の頂点対ごとに最初の共通隣接点を記録し、二個目を見つけた時点で 4-cycle を復元する。この状態表現から答えを構成する。",
+        "approach": "各頂点対について共通隣接頂点数を隣接行列積で求める。",
+        "decision": "rejected",
+        "decisionReason": "S が 30 万まである密行列を構築・乗算する必要はなく、見つけた時点で終了できる性質も使えない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各 z∈V_1 の隣接リスト内の組 (x,y) を列挙し、pairOwner[x][y] に最初の z を保存し、二回目の z で4-cycleを出力する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "同じ V_2 頂点対を別の V_1 頂点が作った瞬間に必要な四頂点が揃い、対表は T×T に収まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "4-cycle は小さい側の二頂点と、それらを共有する異なる二隣接点の組に必要十分に対応する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Find 4-cycle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "4-cycleがない間は各 V_2 頂点対が高々一度しか現れないため、全隣接リストの二重ループも鳩ノ巣原理で V_2 頂点対数に抑えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc260-f「Find 4-cycle」では、小さい側の頂点対ごとに最初の共通隣接点を記録し、二個目を見つけた時点で 4-cycle を復元する。この状態表現から答えを構成する。",
+      "text": "短い偶閉路の検出を、二歩パスの両端対に中点を記録する collision detection として実装する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "鳩ノ巣原理と二部グラフの 4-cycle",
-      "trigger": "制約と操作を整理したときに 鳩ノ巣原理と二部グラフの 4-cycle の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc260-f「Find 4-cycle」では、小さい側の頂点対ごとに最初の共通隣接点を記録し、二個目を見つけた時点で 4-cycle を復元する。この状態表現から答えを構成する。で 鳩ノ巣原理と二部グラフの 4-cycle を問題固有の状態へ適用する。",
+      "name": "共通隣接頂点対による4-cycle検出",
+      "trigger": "二部グラフで長さ4の閉路を一つ見つけたいとき。",
+      "application": "片側二頂点の共通隣接頂点を一つ記録し、別の共通隣接頂点との衝突を探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "早期終了と鳩ノ巣原理による列挙上界",
+      "trigger": "同じ有限キーを二回生成した時点で答えが確定する列挙処理。",
+      "application": "未発見中は各キーを一度しか処理しないため、見かけ上の次数二乗和をキー空間の大きさで抑える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "S と T は非対称で、T≤3000 の側の頂点対をキーに選ぶことで二次元表を現実的な大きさにできる。",
+      "reusablePerspective": "二部構造で片側だけが小さいときは、小さい側の組を状態空間にして大きい側を走査する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "鳩ノ巣原理と二部グラフの 4-cycle",
+      "text": "二部グラフの4-cycleの特徴付け、隣接リスト、鳩ノ巣原理を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一頂点対を unordered に正規化し、最初の witness と現在頂点が異なることを確認する。",
+      "text": "各隣接リストでは x<y の組だけを列挙し、同一頂点対や順序違いを重複処理しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "pairOwner は未登録を −1 とし、登録済み w を見つけたら z,w,x,y の四頂点を元の番号で出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Find 4-cycle 型の問題に対し、鳩ノ巣原理と二部グラフの 4-cycleを選び、状態と証明を一貫して設計できる。",
+      "text": "大きさが非対称な二部グラフから、共通隣接対の衝突で4-cycleを検出できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一頂点対を unordered に正規化し、最初の witness と現在頂点が異なることを確認する。",
+      "text": "短い閉路は、閉路そのものより同じ両端を持つ複数の短いパスとして捉える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "次数二乗和が一見大きくても、答え未発見中に同じキーを再訪できないならキー数で償却できるか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

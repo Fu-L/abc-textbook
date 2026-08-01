@@ -17,67 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc447-f「Centipede Graph」では、木を根付き化し、部分木の状態を辺を介して親へ合成する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "長さ x のムカデ graph を木が含むことは、端点の元木次数が3以上、内部頂点の次数が4以上である長さ x の単純 path を含むことと同値である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc447-f「Centipede Graph」では、木を根付き化し、部分木の状態を辺を介して親へ合成する。この状態表現から答えを構成する。",
+        "approach": "木を根付き化し、dp[v] を部分木内で v を端とする次数条件付き path の最大長として、子の上位値から一本延長または v で二本結合して答えを更新する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "木上の任意の path は最高点で二つの子方向 path に一意に分かれ、頂点次数に応じて開始・延長可能性が局所的に決まるため postorder DP で全候補を覆える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全頂点 pair の単純 path を列挙し、各 path の次数列を検査する。",
+        "decision": "rejected",
+        "decisionReason": "pair が Θ(N^2) 個あり、path 検査まで行うと線形・二乗制約に収まらない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "木には閉路がないため、親辺を除く部分木が独立し、帰納法で子の最適値または個数を合成できる。",
+        "text": "deg(v)≥4 なら子 path を延長でき、deg(v)=3 なら端点として長さ1を開始できるが内部にはなれず、deg(v)≤2 は使えない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Centipede Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "v を path の内部最高点にする場合は、異なる二子から来る dp の上位二本を v で結ぶ。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc447-f「Centipede Graph」では、木を根付き化し、部分木の状態を辺を介して親へ合成する。この状態表現から答えを構成する。",
+      "text": "親を除いた子を postorder で処理し、その dp 上位二つを取る。次数3なら dp[v]=1、次数4以上なら dp[v]=1+max child dp とし、端点ケースと二本結合ケースで最大長を更新する。x=1の基底も扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "根付き木と木 DP",
-      "trigger": "制約と操作を整理したときに 根付き木と木 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc447-f「Centipede Graph」では、木を根付き化し、部分木の状態を辺を介して親へ合成する。この状態表現から答えを構成する。で 根付き木と木 DP を問題固有の状態へ適用する。",
+      "name": "木上の次数制約 path DP",
+      "trigger": "path の端点と内部で異なる局所条件があり、最大長を求めるとき。",
+      "application": "頂点を端とする最良一本と、頂点で結ぶ上位二本を計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "求める部分木の枝を除くと中心 spine の path と元木次数下限だけが残り、特殊 graph 検出が path DP になる。",
+      "reusablePerspective": "木の最大 path 問題では、親へ渡す一本の状態と、その場で完結する二本結合の答えを分ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "根付き木と木 DP",
+      "text": "木上の次数制約 path DPと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "問題の path 長は辺数ではなく頂点数である。root の親除外後子数ではなく元木の degree で3・4条件を判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Centipede Graph 型の問題に対し、根付き木と木 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "木に含まれる最大ムカデ長を、元次数条件を組み込んだ線形木 DP で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "ムカデの脚を消した spine と元木次数の対応を導き、deg=3 が開始のみ、deg≥4 が延長可能となる遷移を図示する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

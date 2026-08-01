@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc303-ex「Constrained Tree Degree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "label付き木を直接数える代わりにPrüfer codeへ写すと、長さN-2の列で頂点iの出現回数がdeg(i)-1になる。全頂点に同じ許容次数集合が課される条件は、各文字の許容出現回数へ独立化できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc303-ex「Constrained Tree Degree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Prüfer codeと指数型母関数の係数を計算する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "次数制約を各labelの出現回数制約へ変換し、多項式のN乗の一係数として全木をまとめて数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "N頂点の木を列挙して各次数を検査する",
+        "decision": "rejected",
+        "decisionReason": "label付き木はN^(N-2)個あり、列挙も個別の次数検査も制約に対して不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Constrained Tree Degree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "許容出現回数集合R={d-1 | dは許容次数}に対しF(x)=Σ_{r∈R}x^r/r!と置く。各labelの出現回数を合計N-2にするmultinomial係数が係数へ組み込まれるため、答えは(N-2)!·[x^(N-2)]F(x)^Nとなる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc303-ex「Constrained Tree Degree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "factorialと逆factorialを前計算して次数N-2以下のFを作る。F^Nをbinary exponentiationとNTT畳み込みで計算し、各積をN-2次で打ち切る。最後にx^(N-2)の係数へ(N-2)!を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc303-ex「Constrained Tree Degree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "Prüfer code",
+      "trigger": "label付き木の次数だけに条件があり、辺配置を直接扱う必要がない。",
+      "application": "木を長さN-2のlabel列へ全単射で移し、deg(i)-1をlabel iの出現数として扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc303-ex「Constrained Tree Degree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "指数型母関数と高速多項式冪",
+      "trigger": "各labelに同じ出現回数制約があり、総出現数を固定してmultinomialに重み付けしたい。",
+      "application": "1/r!を係数とする多項式をN乗し、NTTで必要次数まで高速に畳み込む。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "通常型母関数ではなく1/r!を係数にすると、係数抽出後の(N-2)!が各出現回数配分に正しいmultinomial係数を与える。",
+      "reusablePerspective": "区別される位置へ種類別個数を割り当てる数え上げは、指数型母関数で独立条件を積へ分離できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "Prüfer codeの次数対応、factorial・逆factorial、NTTによる多項式積とbinary exponentiation。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "N=2ではcode長が0なので定数項を正しく扱う。Fと全中間多項式を次数N-2で切り、許容次数dは出現回数d-1へずらす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Constrained Tree Degree 型の 頂点と辺からなる状態グラフに対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "全頂点の次数が指定集合に属するlabel付き木の個数を、指定modulusで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "N≤6で全Prüfer列を列挙し、許容次数が空に近い場合、次数1のみ、全次数許容、N=2を係数式と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

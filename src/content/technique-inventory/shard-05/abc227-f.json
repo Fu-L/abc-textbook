@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc227-f「Treasure Hunting」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "右・下だけの経路でも候補数は二項係数個あるため全経路は試せない。通常の経路DPは加法的なコストを扱えるが、今回は経路上の大きい方K個だけの和であり、そのままでは局所遷移に分解できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各経路についてK番目に大きい値をXと固定すると、Xを超えた分の総和とK個分のXに分離できる。Xの候補は盤面に現れる値だけで十分である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc227-f「Treasure Hunting」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "経路ごとに通過値を保持し、終点でsortして上位K個を求める。",
+        "decision": "rejected",
+        "decisionReason": "単調経路の本数が指数的なうえ、通過値集合が同じマスへの履歴を合流させない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "閾値Xを盤面の各値に固定し、各マスの重みmax(A[i][j]-X,0)に対する最小経路和をDPで求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "任意の経路の上位K個の和はmin_X(KX+Σmax(a-X,0))で表せ、固定Xなら加法的な経路コストになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "値を大きい順にb1≥…≥bLとすると、X=bKでKX+Σmax(bi-X,0)=Σ_{i=1}^K biとなる。他のXではこの値以上なので、上位K個という非加法的評価を閾値最小化へ変換できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Treasure Hunting 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じ値Xが複数マスにあってもmax(A-X,0)はXと等しい要素を0として扱うため、K番目の同値要素をどれとみなすかを区別する必要がない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc227-f「Treasure Hunting」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "盤面の各A[p][q]をXとして、dp[i][j]=左上から(i,j)までのΣmax(A-X,0)の最小値を上・左から更新する。終点の値にKXを加え、全Xでの最小値を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc227-f「Treasure Hunting」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "順序統計量の閾値固定による線形化",
+      "trigger": "集合や経路の最大側K個の和など、順位で選ばれる要素の総和を最適化するとき。",
+      "application": "K番目の値Xを外側で固定し、各要素の寄与をmax(a-X,0)と定数KXに分解して、内側を加法的最適化にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc227-f「Treasure Hunting」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "単調grid経路DP",
+      "trigger": "右・下など遷移方向が非巡回で、経路評価がマスごとの加法的コストになったとき。",
+      "application": "固定閾値で線形化したマス重みについて、各マスへの最小和を上と左の小さい方から更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "外側で試す閾値は任意の整数ではなく、K番目の値になり得る盤面上の値HW個に限ればよい。",
+      "reusablePerspective": "順位に依存する目的関数を閾値化したら、最適値が変化する臨界点を入力値から列挙できないか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "DAGとしての単調gridと最短経路DP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "順位統計量と閾値による寄与分解",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "KXと経路和は32bitを超えるため64bit整数を使い、始点の重みも一度だけ加える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "同値のXを重複して試しても正しいが、盤面値をuniqueにしておくと不要なDPを省ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Treasure Hunting 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "上位K個の和を閾値Xと超過分へ分解し、非加法的な経路評価を通常のgrid DPへ変換できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "「大きい方K個」が見えたら、K番目をXと置いてKX+超過分の式を小さいソート済み列で再導出する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "閾値固定後に各要素の寄与が独立になったことを確認してから、元問題の経路DPへ戻す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

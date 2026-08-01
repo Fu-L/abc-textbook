@@ -17,81 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc421-f「Erase between X and Y」では、値を node ID とする next 配列で列を表し、両端から交互に辿って先に相手へ届いた区間を splice・削除する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "挿入される値iは一意で既存値xの直後に置かれるため、現在列は値をnode IDとするnext配列だけで表せる。区間削除も、先に現れる端点から後の端点までnextを辿って一本のlinkを張り替えればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc421-f「Erase between X and Y」では、値を node ID とする next 配列で列を表し、両端から交互に辿って先に相手へ届いた区間を splice・削除する。この状態表現から答えを構成する。",
+        "approach": "x側とy側からnextを交互に進め、到達した向きの中間nodeだけを集計・spliceする",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "数値x<yから列内順序は分からないが、両探索を同速にすれば正しい向きが端点間距離で到達し、他方もそれ以上進まない。走査量を削除node数へ償却して全体O(Q)にできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各queryで先頭0からx,yの位置を探す",
+        "decision": "rejected",
+        "decisionReason": "端点間が短くても長いprefixを毎回走査し、削除されないnodeをΘ(Q²)回通る入力を作れる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "平衡二分木で列順と区間和を管理する",
+        "decision": "rejected",
+        "decisionReason": "O(Q log Q)では解ける可能性があるが、操作が一意値の直後挿入と永久削除に限られるため、next配列と償却解析だけでより単純な線形解法が得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "探索歩数は削除要素数の定数倍で、各 node は追加後に高々一度しか削除されないため全 query で線形になる。",
+        "text": "type 1はold=next[x]を保存してnext[x]=i,next[i]=oldとするだけで、配列上の位置を持つ必要がない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Erase between X and Y 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "type 2で削除される中間node数をkとすると、勝つ探索はk+1歩、反対側も高々k+1歩で止まる。Σkは追加総数以下なので、queryごとの定数項を加えて総歩数O(Q)となる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc421-f「Erase between X and Y」では、値を node ID とする next 配列で列を表し、両端から交互に辿って先に相手へ届いた区間を splice・削除する。この状態表現から答えを構成する。",
+      "text": "next[0]=-1から始め、挿入は二本のnextを更新する。削除queryではcurX=x,curY=yと二つの一時和を持ち、両側を一歩ずつ進める。curXがyへ届けばx側の和を出してnext[x]=y、curYがxへ届けばy側の和を出してnext[y]=xとし、中間nodeを列から切り離す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "連結リストと償却解析",
-      "trigger": "制約と操作を整理したときに 連結リストと償却解析 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc421-f「Erase between X and Y」では、値を node ID とする next 配列で列を表し、両端から交互に辿って先に相手へ届いた区間を splice・削除する。この状態表現から答えを構成する。で 連結リストと償却解析 を問題固有の状態へ適用する。",
+      "name": "配列による連結リスト",
+      "trigger": "要素IDが小さい整数で一意であり、既知node直後への挿入と連続区間のspliceだけを行う。",
+      "application": "値そのものをindexとしてnextを持ち、挿入と区間切断をlink更新だけで表す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "特殊な漸近計算量の見積もり",
-      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc421-f「Erase between X and Y」では、値を node ID とする next 配列で列を表し、両端から交互に辿って先に相手へ届いた区間を splice・削除する。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "name": "削除への償却解析",
+      "trigger": "一回の操作は長く走査し得るが、走査対象の主要部分が直後に永久削除される。",
+      "application": "両向き探索の歩数を削除node数の定数倍へ抑え、全queryの総和を線形にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "x<yは値の大小にすぎず列順を教えないが、nextしか持たなくても両端から交互に探索すれば、余計なprevや順序data structureなしで先行端点を特定できる。",
+      "reusablePerspective": "一方向構造で二点の順序が未知なら、両候補を同じ速度で進め、正しい側の到達距離に反対側の仕事量も拘束できるかを調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "asymptoticComplexity": {
     "time": "O(Q)（公式解法全体。特殊な計算量解析を含む）",
     "evidenceIds": ["evidence-official-analysis"]
   },
   "prerequisiteCandidates": [
     {
-      "text": "連結リストと償却解析",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "特殊な漸近計算量の見積もり",
+      "text": "単方向連結リストのlink更新、二方向の並行探索、削除要素へ走査量を課金する償却解析を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "両方向探索の一時和を分け、到達した向きだけを採用して端点自身を削除しない。",
+      "text": "端点自身は和へ加えず、nextが相手に到達した時点でその向きだけを採用する。末尾-1へ達した側はそれ以上進めず、勝つ側の探索を続ける。切り離したnodeの古いnextは残っても、以後query端点にならない保証を利用できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Erase between X and Y 型の問題に対し、連結リストと償却解析を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "text": "一意ID列の挿入・区間削除をnext配列へ落とし、未知の端点順序を並行探索で決めて総走査量を削除数へ償却できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "両方向探索の一時和を分け、到達した向きだけを採用して端点自身を削除しない。",
+      "text": "標準vectorで小さい列を愚直更新する実装と比較し、端点が隣接する空区間、逆順端点、片側が先に末尾へ着く場合、長区間削除後の挿入、削除和が64 bitになる場合を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

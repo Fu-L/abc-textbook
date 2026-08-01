@@ -17,67 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc279-e「Cheating Amidakuji」では、全 swap 適用後の逆位置と各時点までの prefix 状態を持ち、一操作を除いた影響を二要素の交換として復元する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "query iごとにM-1回のswapをやり直すと二次になるが、完全なswap列との差はi番目の隣接swap1回だけである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "ある時点で隣接位置にいる二つの値x,yは、その後の同じswap列を通しても役割だけが入れ替わり、他の値の最終位置は変わらない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc279-e「Cheating Amidakuji」では、全 swap 適用後の逆位置と各時点までの prefix 状態を持ち、一操作を除いた影響を二要素の交換として復元する。この状態表現から答えを構成する。",
+        "approach": "全swap後の各値の最終位置posを求め、prefix permutationを進めながら省略swap直前の二値x,yを見て、1の最終位置をposから答える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全queryに共通のsuffix作用を1回の完全simulationへ共有し、各省略を定数時間で処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各iについて初期permutationからA_iだけ飛ばして全M swapをsimulationする。",
+        "decision": "rejected",
+        "decisionReason": "N,M≤2×10^5に対してM²操作になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "除いた swap より後の操作は二つの label の役割だけを交換するため、完全適用結果の逆写像から答え位置を得られる。",
+        "text": "省略版は完全版の最終配列でxとyのlabelだけを交換したものになる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Cheating Amidakuji 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "swap直前にx,yのどちらも1でなければ答えはpos[1]、x=1ならpos[y]、y=1ならpos[x]である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc279-e「Cheating Amidakuji」では、全 swap 適用後の逆位置と各時点までの prefix 状態を持ち、一操作を除いた影響を二要素の交換として復元する。この状態表現から答えを構成する。",
+      "text": "まずidentityへ全A_k swapを適用してvalue→final positionのposを作る。次にidentityのprefix配列C'を持ち、iを昇順に、A_iの両位置の値x,yから答えを決めた後、そのswapをC'へ適用する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列の合成と逆写像",
-      "trigger": "制約と操作を整理したときに 順列の合成と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc279-e「Cheating Amidakuji」では、全 swap 適用後の逆位置と各時点までの prefix 状態を持ち、一操作を除いた影響を二要素の交換として復元する。この状態表現から答えを構成する。で 順列の合成と逆写像 を問題固有の状態へ適用する。",
+      "name": "全操作との差分query",
+      "trigger": "各queryが共通の操作列から1操作だけ除いた結果を問うとき。",
+      "application": "完全結果と省略直前の影響対象を使い、suffix作用を共有する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "permutationのlabel追跡",
+      "trigger": "swap列が二つの要素の将来trajectoryを交換する性質を使えるとき。",
+      "application": "省略したswapの二labelだけが完全版と入れ替わるとみなす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "必要なのは配列全体でなくlabel 1の位置だけなので、省略swapが1を含むかと、相方labelの完全版最終位置だけを見ればよい。",
+      "reusablePerspective": "single-object queryでは、差分操作が対象objectに触れない場合を切り出し、触れる場合も交換相手の軌道へ置換する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列の合成と逆写像",
+      "text": "permutationと隣接swap",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "prefix simulationとinverse position",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "値から位置への逆配列と、除外操作直前の二要素を区別して更新する。",
+      "text": "posはfinal配列のposition→valueではなくvalue→positionとして構築するとcase式を直接引ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "各queryのx,yはそのswapをprefixへ適用する前に読み、その後でC'を更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Cheating Amidakuji 型の問題に対し、順列の合成と逆写像を選び、状態と証明を一貫して設計できる。",
+      "text": "1つのswapを省いた全結果を、完全permutationとprefixの二label追跡で線形に列挙できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "値から位置への逆配列と、除外操作直前の二要素を区別して更新する。",
+      "text": "完全列でx,yの最終位置を色分けし、i番目swapを省くとその二labelだけが交換されることをsuffix swap1個ずつで確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc409-g「Accumulation of Wealth」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "k≥2 が操作 i で初登場するには、それ以前 i-1 回で新値追加が k-2 回、i 回目も新値追加であり、その確率は二項係数と p^{k-1}(1-p)^{i-k+1} で表せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "k が一個存在し列長 n のとき、既存値を選ぶ操作による期待増分は (1-p)c/n。したがって以後の期待個数は現在個数へ (n+1-p)/n を掛ける形で、初登場時刻だけに依存する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc409-g「Accumulation of Wealth」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "初登場時刻で条件付けた E_k の和を factorial 形へ変形し、全 k の和を二多項式の convolution の係数として一括計算する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "成長係数 f(j) と (1-p)^i/i! を前計算すると、E_k は p^{k-1}/(k-2)! 倍の一つの積係数になり、O(N log N) で全期待値を得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各 k と各初登場時刻 i の二重loopで期待値公式を直接加算する",
+        "decision": "rejected",
+        "decisionReason": "各項は O(1) でも総和 O(N^2) となり N=10^5 に間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+        "text": "f(0)=1、f(x)=f(x-1)(N-x+1-p)/(N-x) として、初登場後 x 回の preferential attachment による期待倍率を O(N) で列挙できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Accumulation of Wealth 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "F_j=f(j)(N-j-2)!、G_i=(1-p)^i/i! と置けば、k≥2 の内側の和は [x^{N-k}]F(x)G(x) になり、k の違いは読む係数と外側係数だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc409-g「Accumulation of Wealth」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "mod 998244353 上で p=P/100、factorial・inverse factorial・p の累乗と f を前計算する。F(x)=Σ_{j=0}^{N-2}f(j)(N-j-2)!x^j、G(x)=Σ_{i=0}^{N-2}(1-p)^i/i!x^i を convolution し、E_k=p^{k-1}/(k-2)!·coef[N-k] を k=2..N で得る。E_1=N-Σ_{k=2}^N E_k とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc409-g「Accumulation of Wealth」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "初登場時刻による条件付け",
+      "trigger": "種類 k の出現と、その後の対称な増殖過程を分けて期待値を求めるとき。",
+      "application": "k が初めて追加される操作を列挙し、残期間の期待倍率 f を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "条件付き期待値と確率 DP",
-      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc409-g「Accumulation of Wealth」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "name": "期待値の乗法漸化式",
+      "trigger": "個数 c の次step期待値が c の定数倍になる reinforced process のとき。",
+      "application": "列長 n ごとの倍率 (n+1-p)/n を前計算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "生成関数と convolution",
+      "trigger": "全 k に対する Σ_i a_i b_{N-k-i} 型の和を同時に求めるとき。",
+      "application": "factorial を係数へ吸収して二多項式積の係数として読む。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "新番号の生成確率と、生成後に出現頻度比例で選ばれる成長を分離すると、番号 k に依らない成長 kernel が現れて畳み込める。",
+      "reusablePerspective": "全種類の期待値で birth time の和がずれて現れる場合、birth 分布と age-dependent 成長率を convolution にできないか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "条件付き期待値と確率 DP",
+      "text": "条件付き期待値、二項係数、形式的冪級数の係数と NTT convolution を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "p=0,1 を含め mod 値として扱い、分母 1..N は法と互いに素である。F の factorial 添字 N-j-2、係数 N-k、k=1 の保存則による計算をずらさない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Accumulation of Wealth 型の 列の順序と prefix 状態に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "確率的な新種生成と頻度比例成長の全種類別期待個数を、一回の多項式畳み込みで O(N log N) に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "P=0ならE_1=N、P=100なら全E_k=1、N=2,3 の全操作列を列挙し、期待個数の総和が常にNになることも確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

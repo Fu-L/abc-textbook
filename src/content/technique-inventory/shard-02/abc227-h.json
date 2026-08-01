@@ -17,77 +17,111 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc227-h「Eat Them All」では、主解法候補として、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "3×3盤面を9頂点12辺の無向二部グラフとみる。各マスでは餌を食べるたびに1本の辺から出発し、最終的に始点へ戻るので、頂点vを端点とする辺の総通過回数は2A_vでなければならない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "A_vは最大100で行動列を直接探索する分岐は大きいが、盤面の辺数は12で固定されている。先に各辺を何回通るか決めれば、残る条件は次数と正の辺の連結性になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc227-h「Eat Them All」では、主解法候補として、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "現在位置と9マスの残量を状態にして、行動列をDFSまたはDPで探索する。",
+        "decision": "rejected",
+        "decisionReason": "残量状態は最大101^9通りで、同じ最終的な辺通過回数へ至る多数の順序も重複してしまう。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "連結性を保証するspanning treeを列挙し、その辺へ1の下限制約を置いた次数充足問題を二部グラフの最大流で解く。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "12辺の部分集合は全列挙でき、tree分を引いた残余次数は各辺の追加通過回数を流量とするbipartite flowに一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "元の歩道から必須辺だけを射影すると Euler trail になり、逆に成分内の自由経路で trail の隣接必須辺を接続できる。",
+        "text": "辺eの通過回数x_eを多重辺数とみなすと、各頂点の次数は2A_vで全て偶数になる。正の多重辺のsupportが連結ならEuler閉路が存在し、その各出発がちょうど1缶を消費するので元の行動列へ戻せる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Eat Them All 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "gridは市松模様の二部グラフなので、黒頂点の残余次数をsource側、白頂点の残余次数をsink側に置き、盤面辺へ流す量を追加通過回数と解釈できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc227-h「Eat Them All」では、主解法候補として、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "12辺の部分集合から9頂点を結ぶtreeを選び、各tree辺を1回使う分だけ端点の要求次数2A_vを減らす。残余要求を最大流で全て満たせたら辺多重度を復元し、(1,1)からHierholzer法でEuler閉路を構築して各辺をL/R/U/Dへ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc227-h「Eat Them All」では、主解法候補として、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "閉じたwalkの辺多重度とEuler閉路への変換",
+      "trigger": "各頂点での訪問・出発回数が指定され、実際のwalkを構成する問題で、順序より辺の使用回数を先に決められるとき。",
+      "application": "消費回数を頂点次数へ翻訳し、偶数次数かつ連結な多重グラフを作ってHierholzer法で行動順を復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Euler trail の存在条件",
-      "trigger": "制約と操作を整理したときに Euler trail の存在条件 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc227-h「Eat Them All」では、主解法候補として、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で Euler trail の存在条件 を問題固有の状態へ適用する。",
+      "name": "二部グラフ上の次数列実現を最大流で解く",
+      "trigger": "二部グラフの各頂点に必要次数があり、各辺へ非負整数の多重度を割り当てたいとき。",
+      "application": "黒側要求をsource容量、白側要求をsink容量、盤面辺を十分大きい容量として、全要求を満たすflowを辺多重度にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "小さい辺集合で連結性のwitnessを全列挙する",
+      "trigger": "量の割当はflowなどで解ける一方、正の辺の連結性だけが非線形で、候補辺数が十分小さいとき。",
+      "application": "連結supportが含むspanning treeを12辺から列挙し、tree辺に下限1を課すことで連結性を局所的な次数制約へ落とす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "固定3×3盤面では辺が12本しかないため、通常は扱いにくい「使用辺が連結」という条件をspanning treeの全列挙で保証できる。",
+      "reusablePerspective": "構成のsupport条件に困ったら、入力全体ではなく候補辺数が小さくないかを数え、連結性の証人となるtreeを先に固定する方法を検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "Euler閉路の存在条件とHierholzer法",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Euler trail の存在条件",
+      "text": "最大流と辺容量による整数割当",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "二部グラフとspanning tree",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop と多重辺を許した次数 parity を数え、縮約成分の連結性を保つ。",
+      "text": "tree辺の下限1を引いた後の残余次数が負ならそのtreeは不可能であり、黒側と白側の残余次数総和も一致する必要がある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Euler構築では無向辺の残り多重度を両端で共有して1ずつ減らし、帰りがけに記録した頂点列を反転して移動文字へ直す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Eat Them All 型の 盤面上の位置と局所遷移に対し、Euler trail の存在条件を選び、状態と証明を一貫して設計できる。",
+      "text": "訪問回数付きwalk構成を辺多重度の次数条件へ変換し、spanning tree列挙・最大流・Euler閉路構築を接続して解ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop と多重辺を許した次数 parity を数え、縮約成分の連結性を保つ。",
+      "text": "行動列を直接追う前に、各頂点から何回出るかを数え、閉じたwalkなら次数がその2倍になることを小さい往復で確かめる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "次数が合うだけでは離れた閉路ができる反例を忘れず、連結性をspanning treeという明示的witnessで保証する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }
