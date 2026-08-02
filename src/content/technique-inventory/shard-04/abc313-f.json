@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc313-f「Flip Machines」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "X_j≠Y_j の機械を一度でもカード i に接続して選ぶと、最後に i に触る機械の二択対称性から、i の裏向き確率は過去によらず 1/2 になる。期待値はカードごとに独立に足せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "確定反転 X=Y を有利な時だけ先に処理した後、機械で触ると得するカード Q と、|A−B|/2 だけ損するカード P に分かれる。N≤40 なので小さい側だけ指数探索できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc313-f「Flip Machines」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "|P| と |Q| の小さい側を選び、P の subset 全探索または Q-mask の bit DP を使い分ける meet-in-the-middle 型最適化を行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "機械選択は「触れた頂点集合」の重み付き被覆へ帰着し、P∪Q=N より min(|P|,|Q|)≤20 を必ず利用できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "M 台それぞれを使う/使わないで全 subset を探索する。",
+        "decision": "rejected",
+        "decisionReason": "M は 10^5 で 2^M は不可能であり、同じ端点ペアの機械が期待値上同じ効果を持つことも無視している。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+        "text": "P-P 辺は損だけなので不要、Q-Q 辺は利益だけなので採用してよい。P-Q 辺では触る P 集合を固定すれば、その P に隣接する全 Q を触るのが最適になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Flip Machines 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "P が小さければその subset を直接評価し、Q が小さければ P を順に採否して現在覆われた Q-mask を持つ DP にする。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc313-f「Flip Machines」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "X=Y の機械による確定反転を有利なカードだけ適用し基準和を作る。D_i=|A_i−B_i|/2 と P,Q を定義し、Q-Q の隣接利益を確定する。|P|≤|Q| なら全 P subset に対し −ΣD_P+ΣD_{隣接Q} を評価し、逆なら Q-mask DP で各 P の選択とその隣接 mask の OR を遷移する。最大増分を基準へ足す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc313-f「Flip Machines」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "最後の乱択による確率のリセット",
+      "trigger": "独立な確率1/2の反転を同じ対象へ複数回適用するとき。",
+      "application": "最後に対象へ触る試行で parity が一様になるため、回数でなく一度でも触るかだけを見る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "条件付き期待値と確率 DP",
-      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc313-f「Flip Machines」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "name": "二分割の小さい側を指数化",
+      "trigger": "要素が利得側と損失側へ分かれ、全体 N は40程度のとき。",
+      "application": "min(|P|,|Q|) の側に応じて subset 列挙と mask DP を切り替える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "確率過程が最終的に weighted vertex coverage へ落ち、機械の順序・重複が消えることが最大の簡約である。",
+      "reusablePerspective": "確率1/2の反転を見たら parity 分布が最終試行で一様化しないか調べ、選択問題へ分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "期待値の線形性",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "条件付き期待値と確率 DP",
+      "text": "subset 列挙と bitmask DP",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "期待値の 1/2 は double で扱うか全値を2倍して最後に割る。X=Y の確定反転を確率1/2扱いせず、処理後の表裏を基準に P,Q を作る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Flip Machines 型の 整数の約数・剰余構造に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "10^5 台の確率機械を触れたカード集合の最適化へ圧縮し、O(M+N2^{N/2}) で最大期待値を得られる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "まず固定した機械集合の期待値をカード単位で完全に解く。最適化へ進むのは、各カードが「未接触/一様」の二状態になることを証明してからにする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

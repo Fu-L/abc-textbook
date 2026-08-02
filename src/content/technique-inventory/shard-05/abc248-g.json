@@ -17,67 +17,105 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc248-g「GCD cost on the tree」では、木を根付き化し、部分木の状態を辺を介して親へ合成する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "path cost は『path 上の頂点数』と『path 全体の gcd』の積であり、根から各頂点への path を gcd 値ごとに集約すれば部分木 merge で組合せられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "根 r からの path gcd は必ず A_r の約数なので、値域 10^5 全体ではなく実際に現れる少数の gcd だけを map に持てる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc248-g「GCD cost on the tree」では、木を根付き化し、部分木の状態を辺を介して親へ合成する。この状態表現から答えを構成する。",
+        "approach": "DFS の帰りがけに子部分木を親へ merge し、根からの path gcd x ごとの頂点数 cnt[x] と path 頂点数和 sum[x] を保持する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "子をまたぐ全頂点対の gcd と path 長和を集約値同士の積で加算でき、各部分木の全 pair を列挙せずに済む。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全頂点対 s,t について path を復元し、その長さと gcd を計算する。",
+        "decision": "rejected",
+        "decisionReason": "頂点対だけで二次個あり、N≤10^5 では path query を高速化しても全列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "木には閉路がないため、親辺を除く部分木が独立し、帰納法で子の最適値または個数を合成できる。",
+        "text": "親側 group x と子側 group y の頂点対では path gcd が gcd(x,y)、path の頂点数が親根からの長さと子根からの長さの和になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "GCD cost on the tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "したがって cross 寄与は gcd(x,y)×(cnt_parent[x]·sum_child[y]+sum_parent[x]·cnt_child[y]) でまとめて加算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "子 map を親 root r の基準へ移すと y は gcd(A_r,y) へ変わり、各 path は親子 edge 分だけ 1 長くなるので sum に cnt を加える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc248-g「GCD cost on the tree」では、木を根付き化し、部分木の状態を辺を介して親へ合成する。この状態表現から答えを構成する。",
+      "text": "各頂点を cnt[A_v]=sum[A_v]=1、部分木内答え 0 で初期化する。子の DP を受け取り、全 gcd group 対で cross pair の寄与を答えへ加えた後、子の key y を gcd(A_v,y) に写して cnt と sum+cnt を親 map へ統合する。root の答えを 998244353 で出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "根付き木と木 DP",
-      "trigger": "制約と操作を整理したときに 根付き木と木 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc248-g「GCD cost on the tree」では、木を根付き化し、部分木の状態を辺を介して親へ合成する。この状態表現から答えを構成する。で 根付き木と木 DP を問題固有の状態へ適用する。",
+      "name": "gcd 状態圧縮",
+      "trigger": "列や path を延長するたび gcd を取るため、到達値が始点値の約数に限られるとき。",
+      "application": "根からの path gcd ごとに cnt と長さ和をまとめ、0 件の値は保持しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "木 DP の部分木 merge",
+      "trigger": "求める pair の path が LCA 付近で異なる子/既処理部分へ分かれ、group 集約同士で cross 寄与を計算できるとき。",
+      "application": "親の累積部分木と新しい子部分木の group 全組を掛け合わせて新規 pair を一度だけ数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "cost が gcd×path 頂点数なので、gcd group ごとに個数だけでなく根からの頂点数和も持てば、cross pair の長さ総和が cnt×sum の 2 項に分離する。",
+      "reusablePerspective": "pair cost が『group 間で決まる係数×片側量の和』なら、各 group の count と量の総和だけで全 pair を merge できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "根付き木と木 DP",
+      "text": "根付き木の DFS と部分木 merge",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "path gcd の更新と約数への状態圧縮",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "cross pair の個数・距離和の集約",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "子の answer は先に加え、cross 寄与は親 map を更新する前の子 map と組ませることで各頂点対を重複なく数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "cnt は N、sum と積はさらに大きくなるため 64 bit を使い、乗算ごとに 998244353 で剰余を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "GCD cost on the tree 型の問題に対し、根付き木と木 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "木上全頂点対の path 長×path gcd の総和を、gcd 別 count・長さ和を merge する木 DP で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "親側 u と子側 v の path 頂点数が f(parent,u)+f(child,v) になる小さな木を描き、cross 式の 2 項と子 sum+cnt の意味を照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

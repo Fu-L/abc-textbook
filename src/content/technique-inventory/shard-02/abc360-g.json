@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc360-g「Suitable Edit for LIS」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "元列のLIS長をLとすると、一要素の変更で増やせる長さは高々1であり、変更値を元に戻す選択もできるため答えはLまたはL+1に限られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "LISへ新しい一要素を挿入するには、変更位置より左の増加部分列末尾aと右の増加部分列先頭bの間に整数yが必要で、a+1<bが条件になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc360-g「Suitable Edit for LIS」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "未変更・変更済みの二状態を持つLIS DPを、値座標上のrange maximum構造でin-place更新する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "変更値を直前要素+1へ正規化でき、通常LISに定数個の状態を足した遷移として処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各変更位置と任意の変更値を試し、その都度列全体のLISを計算する。",
+        "decision": "rejected",
+        "decisionReason": "位置だけでN通りあり、変更値も無限に見えるため、挿入可能性の境界情報を共有しないと処理できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "大小・等値関係を保つ順位写像なので、元座標での順序条件と圧縮後の条件が同値になる。",
+        "text": "長さL+1の解では、変更要素を除くと元列の長さLの増加部分列になるので、一変更で2以上伸びないことが分かる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Suitable Edit for LIS 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "通常のLIS DPは一要素につき値A_iの一点だけ改善するため、変更使用フラグを加えてもsegment tree上でprefix maxを取る形を保てる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc360-g「Suitable Edit for LIS」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "A_iと必要な隣接候補値を座標化し、値ごとの最良長を持つ構造を未変更・変更済み用に用意する。左から各iを処理し、通常採用のprefix最大+1と、ここで変更を使う遷移、既に変更済みからA_iを採る遷移を更新する。全状態の最大を答えとする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc360-g「Suitable Edit for LIS」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "フラグ付きLIS DP",
+      "trigger": "列への操作回数が小さく、操作前後で通常の部分列DPを接続できるとき。",
+      "application": "操作未使用・使用済みを別layerにし、値のstrict順序をprefix maximumで課す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "座標圧縮",
-      "trigger": "制約と操作を整理したときに 座標圧縮 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc360-g「Suitable Edit for LIS」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 座標圧縮 を問題固有の状態へ適用する。",
+      "name": "変更値候補の正規化",
+      "trigger": "変更後の整数が任意で直接列挙できないとき。",
+      "application": "増加部分列の隙間を作る役割だけ残し、境界直後の代表値へ寄せる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最適値そのものより「元のLISに一要素を挿入できるか」という二択へ落とすと、変更操作の影響が局所的になる。",
+      "reusablePerspective": "一要素編集で目的値がどこまで変わり得るか先に上界を示し、達成判定問題へ変える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "LISのsegment tree DP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "座標圧縮",
+      "text": "座標圧縮と状態追加DP",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。",
+      "text": "狭義増加なので問い合わせは値未満とし、同じiの更新を同じ遷移で再利用しないよう旧値を先に取得する。任意整数の隙間にはa+1<bが必要である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Suitable Edit for LIS 型の 列の順序と prefix 状態に対し、座標圧縮を選び、状態と証明を一貫して設計できる。",
+      "text": "任意整数への一回変更を定数状態のLIS遷移へ吸収し、LまたはL+1の最適値を判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。",
+      "text": "変更要素を最終LISが使う場合・使わない場合を分け、一変更で増える上限を証明する。strict条件と同一iteration内更新の順序を重点的に確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

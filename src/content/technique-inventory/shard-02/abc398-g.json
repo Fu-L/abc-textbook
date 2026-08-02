@@ -17,71 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc398-g「Not Only Tree Game」では、主解法候補として、頂点と辺からなる状態グラフを同値な状態へ縮約し、必要な候補だけを制約内で列挙する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各connected componentはbipartiteだが、component同士を初めて結ぶ際は片方の彩色を反転できる。最終complete bipartite graphのpart size parityが、総手数のparityを左右する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "component内部で追加できる残edge数xと、part size parity type ee,oo,eo,isolatedだけを残せば、以後のmerge gameの勝敗分類に十分である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc398-g「Not Only Tree Game」では、主解法候補として、頂点と辺からなる状態グラフを同値な状態へ縮約し、必要な候補だけを制約内で列挙する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各componentを二部分彩色して公式のparity invariantとeo個数による場合分けで勝者を判定する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "巨大なgame stateを探索せず、N parity、x、ee/oo/eo/isoの有限分類に対する戦略証明でO(N+M)判定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "componentの結び方と追加edge順をminimax探索する",
+        "decision": "rejected",
+        "decisionReason": "合法edge数がΘ(N²)でgame treeは指数的だが、勝敗はcomponent size parityだけへ圧縮できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "頂点と辺からなる状態グラフと解候補の対応を双方向に示し、列挙の漏れと重複がないことを確認する。",
+        "text": "xは各component内で現在追加可能なcross-part未edge数Σ(a_cb_c-m_c)である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Not Only Tree Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "N奇数なら最終part積は常にevenでoo+x parityが勝敗を決める。N偶数ではeo=1,2が先手勝ち、eo=0はiso/2+x、eo≥3はoo+xのparityへ帰着する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc398-g「Not Only Tree Game」では、主解法候補として、頂点と辺からなる状態グラフを同値な状態へ縮約し、必要な候補だけを制約内で列挙する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "全componentをBFS二色塗りしpart sizes(a,b)、size、edge数を集計してx,ee,oo,eo,isoを求める。公式の四caseを適用し、奇数ならAoki、偶数ならTakahashiを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc398-g「Not Only Tree Game」では、主解法候補として、頂点と辺からなる状態グラフを同値な状態へ縮約し、必要な候補だけを制約内で列挙する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "game stateのparity invariant",
+      "trigger": "毎手edgeが一つ増え、terminal graphのedge parityが少数特徴量で決まるとき。",
+      "application": "勝敗を残手数parityへ落とす。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "bipartite component type classification",
+      "trigger": "component mergeで彩色反転自由度があり、part size parityだけが重要なとき。",
+      "application": "(even,even),(odd,odd),(even,odd),isolatedへ分類する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "disconnectedでは二部分彩色がcomponentごとに反転可能なので、単純な全体part積でなく、merge後parityを操作できるeo/isolated componentがgameの戦略自由度になる。",
+      "reusablePerspective": "component merge gameでは、各componentのorientation自由度と、mergeで変わるsize parity classを抽象stateにする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "bipartite component彩色とnormal-play parity gameを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "状態 key と更新順序を固定し、同じ候補を二重に数えない。",
+      "text": "isolated(size1)を一般eoへ混ぜず別countする。xは64 bitでΣa·b-Mとしても計算でき、勝者名は先手Aokiに対応させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Not Only Tree Game 型の 頂点と辺からなる状態グラフに対し、状態縮約を選び、状態と証明を一貫して設計できる。",
+      "text": "一般bipartite graphのedge追加gameを、component彩色sizeのparity分類だけで線形時間判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+      "text": "N≤8の全bipartite graphについて合法手minimaxをmemo化し、四case境界eo=0,1,2,3とisolated数で分類式を照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

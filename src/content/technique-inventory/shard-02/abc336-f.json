@@ -17,81 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc336-f「Rotation Puzzle」では、初期盤面と完成盤面の双方から深さ K/2 まで状態を列挙し、到達 layer の共通状態から最小操作回数を復元する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "一手は4種類の(H-1)×(W-1) rectangleの180度回転で、各操作は自分自身が逆操作である。20手を片側から列挙せず、初期状態と完成状態から各10手の到達集合を作ればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc336-f「Rotation Puzzle」では、初期盤面と完成盤面の双方から深さ K/2 まで状態を列挙し、到達 layer の共通状態から最小操作回数を復元する。この状態表現から答えを構成する。",
+        "approach": "両端からdepth 10までBFSするmeet-in-the-middle",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "自己逆操作により中間状態で二つのpathを連結でき、探索深さを20から10へ半減できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "初期状態からdepth 20まで全状態を探索する",
+        "decision": "rejected",
+        "decisionReason": "直前と同じ操作を除いても約4·3^19通りとなり現実的でない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "長さ K 以下の任意の操作列は中央で二分でき、後半を逆操作として完成盤面側から辿れば、両側の到達集合が必ず中央状態で交わる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Rotation Puzzle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "最短距離20以下のpathには、初期から10手以内かつ目標から10手以内の中間状態が必ずある。両側で各状態への最短depthを記録すれば、共通状態に対するdistStart+distGoalの最小値が答えになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc336-f「Rotation Puzzle」では、初期盤面と完成盤面の双方から深さ K/2 まで状態を列挙し、到達 layer の共通状態から最小操作回数を復元する。この状態表現から答えを構成する。",
+      "text": "grid配列をcanonicalなstate keyへencodeし、初期と完成gridを始点にそれぞれ4回転を辺とするBFSをdepth 10まで行う。二つのdistance mapの小さい側を走査して共通keyを探し、距離和の最小が20以下なら出力、なければ-1とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "双方向探索と半分全列挙",
-      "trigger": "制約と操作を整理したときに 双方向探索と半分全列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc336-f「Rotation Puzzle」では、初期盤面と完成盤面の双方から深さ K/2 まで状態を列挙し、到達 layer の共通状態から最小操作回数を復元する。この状態表現から答えを構成する。で 双方向探索と半分全列挙 を問題固有の状態へ適用する。",
+      "name": "meet-in-the-middle探索",
+      "trigger": "操作数上限が20でbranchingは小さいが片側全探索は指数的に大きい。",
+      "application": "pathを10+10に分割し、両端の到達state集合のintersectionを取る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "特殊な漸近計算量の見積もり",
-      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc336-f「Rotation Puzzle」では、初期盤面と完成盤面の双方から深さ K/2 まで状態を列挙し、到達 layer の共通状態から最小操作回数を復元する。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "name": "involutionの逆向き探索",
+      "trigger": "各操作が180度回転で、同じ操作をもう一度行うと元に戻る。",
+      "application": "目標からも同じ遷移生成器でBFSし、逆操作実装を別に持たない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
-  "asymptoticComplexity": {
-    "time": "O(3^{K/2} KHW)（公式解法全体。特殊な計算量解析を含む）",
-    "evidenceIds": ["evidence-official-analysis"]
-  },
+  "problemSpecificInsights": [
+    {
+      "insight": "各操作が四隅のどれか一cellを除いた大rectangleを反転するだけなので、盤面全体をstateとしても10層なら探索可能である。",
+      "reusablePerspective": "短い操作列の最短化では、可逆な操作なら両端BFSで指数の肩を半分にできる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "双方向探索と半分全列挙",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "特殊な漸近計算量の見積もり",
+      "text": "BFS、meet-in-the-middle、盤面stateのhash/encode、involution。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "直前操作の即時打ち消しを除外し、盤面を衝突しない canonical key で保存する。",
+      "text": "各側で最初に訪れたdepthだけを保存しdepth 10からは展開しない。HW≤64なので各値を6bitでpackできるが、衝突しないkey表現を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Rotation Puzzle 型の問題に対し、双方向探索と半分全列挙を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "text": "完成配置へ20回以内で到達できるか判定し、可能なら最小操作回数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "直前操作の即時打ち消しを除外し、盤面を衝突しない canonical key で保存する。",
+      "text": "初期=完成、1手で完成、同じ回転2回、最短10・11・20手、到達不能を片側の浅いBFSで検証する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
+  "asymptoticComplexity": {
+    "time": "O(3^{K/2} KHW)（公式解法全体。特殊な計算量解析を含む）",
+    "evidenceIds": ["evidence-official-analysis"]
+  },
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

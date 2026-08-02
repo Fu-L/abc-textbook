@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc353-f「Tile Distance」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "小 tile だけを通る経路の toll は通常の Manhattan 距離で、まず有効な上界になる。これより改善する経路は必ず大 tile を少なくとも一つ通る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "開始点が小 tile 内なら最初に入る大 tile は上下左右に最初に当たる高々4個、終了側も同様なので、大 tile を使う経路は入口・出口の高々16組へ絞れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc353-f「Tile Distance」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "直行 Manhattan 解と、始終点近傍の大 tile 候補対をすべて結ぶ解を比較し、大 tile 間距離を格子座標の閉形式で求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "無限盤面を定数個の候補へ圧縮でき、大 tile graph の規則性から候補対距離も O(1) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "通過 tile を頂点とする無限 graph 上で Dijkstra 法を行う。",
+        "decision": "rejected",
+        "decisionReason": "座標が2×10^16で探索範囲を有限に制限できず、周期的 tile 配置の距離式を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+        "text": "大 tile を使う最適路の最初と最後を固定すれば、その外側区間は小 tile だけを直進して到達する候補に置き換えても最適値を失わない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Tile Distance 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "大 tile index 差 dx,dy の移動 toll は K=2 の特殊な横隣接と、K≠2 で対角方向の一点共有を使う場合で式が異なる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc353-f「Tile Distance」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "K=1 は Manhattan 距離を返す。K≥2 では各点を含む block の parity から、その点が大 tile 内なら一候補、小 tile なら四方向で最初の大 tile と入口 toll を列挙する。始終候補全組について、公式の大 tile 間距離式（K=2 とその他を分岐）＋両端 toll を計算し、直行解との最小を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc353-f「Tile Distance」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "周期盤面の gateway 列挙",
+      "trigger": "広大・無限な周期空間で、低コスト領域へ入るまでの候補方向が定数個のとき。",
+      "application": "始終点から最初/最後に使う gateway を列挙し、内部距離を閉形式化する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc353-f「Tile Distance」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "格子距離の座標変換",
+      "trigger": "checkerboard 状の大 block 間移動が対角・軸方向で異なるとき。",
+      "application": "block index の和差または dx,dy から最小 toll を算出する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "大 tile を使わない上界を先に持つことで、「使うなら最初と最後の大 tile だけを決める」という経路正規化ができる。",
+      "reusablePerspective": "特殊な高速領域がある最短路では、通常経路上界と高速領域への gateway 分解を試す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "Manhattan 距離",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "全探索と候補数の上界評価",
+      "text": "周期 checkerboard の parity",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "K=1 と K=2 は距離式の例外として分岐する。floor(x/K) の parity と tile の実座標を混同せず、全計算を 64 bit 以上で行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Tile Distance 型の 頂点と辺からなる状態グラフに対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "10^16 規模の周期 tile 最短路を定数個の gateway 対と閉形式距離へ圧縮し、O(1) で解ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "大 tile graph を小さい K で描き、対角接触と横移動の toll を数えて式を導く。例外 K=2 を一般式へ無理に混ぜない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

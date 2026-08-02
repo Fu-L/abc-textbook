@@ -17,77 +17,115 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc288-g「3^N Minesweeper」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各ternary桁で中心digit 0,1,2のneighbor許容集合はそれぞれ{0,1},{0,1,2},{1,2}であり、入力Aはこれらの直積領域にあるbomb数である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "求めるBは各桁を{0},{1},{2}へ固定した直積領域の値なので、各次元の3個の区間和から3個のsingleton値を逆変換すればよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "近傍条件が桁ごとの直積なので、N次元変換は1次元の逆変換を各桁へ順に施すtensor productとして分離できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc288-g「3^N Minesweeper」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各ternary桁について3値の局所逆変換を全3^N entryへ適用する多次元差分変換。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "3×3の関係をN軸へ順番に解くだけで、入力の近傍和から各位置の0/1を復元できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "3^N個のbomb有無を未知数とする一般の連立一次方程式をGaussian eliminationする。",
+        "decision": "rejected",
+        "decisionReason": "行列dimensionが最大531441で、直積構造を無視した一般消去は不可能である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全bomb配置2^(3^N)を列挙してAと一致するか調べる。",
+        "decision": "rejected",
+        "decisionReason": "位置数自体が指数的であり、そのpower setは到底列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+        "text": "1次元で近傍和をF_0=v_0+v_1、F_1=v_0+v_1+v_2、F_2=v_1+v_2とすると、v_0=F_1-F_2、v_1=F_0+F_2-F_1、v_2=F_1-F_0で復元できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "3^N Minesweeper 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "他の桁条件を固定したまま同じ3式が成立するため、1軸変換後の値を次軸の入力としてin-placeに更新できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc288-g「3^N Minesweeper」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "AをindexのN桁ternary配列とみなす。各axisのstride=3^axisについて、他桁が同じ3 entry (f0,f1,f2)を全blockから取り出し、(f1-f2, f0+f2-f1, f1-f0)へ同時更新する。全N軸の処理後、array[index]がその位置のbomb有無B_indexなので順に出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc288-g「3^N Minesweeper」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "多次元累積和の逆変換",
+      "trigger": "入力が各座標軸の小区間の直積上の和で与えられるとき。",
+      "application": "各軸の局所差分を順に適用してpoint値へ戻す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "累積和と差分",
-      "trigger": "制約と操作を整理したときに 累積和と差分 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc288-g「3^N Minesweeper」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 累積和と差分 を問題固有の状態へ適用する。",
+      "name": "Kronecker積構造の分離",
+      "trigger": "高次元線形変換が同じ小行列の各軸作用として表せるとき。",
+      "application": "巨大行列を作らず、strideごとの小変換を反復する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "ternary digit差≤1というneighbor定義は、数直線上の距離ではなく各桁独立の3値区間なので、近傍和matrixが完全にtensor分解する。",
+      "reusablePerspective": "座標が進数digitで定義された問題では、条件がdigitwiseなら状態空間全体の演算を各桁変換へ分解できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "3進数indexとstride走査",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "累積和と差分",
+      "text": "多次元prefix/difference transform",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "線形変換のtensor product",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "3値をin-placeに1つずつ上書きせず、旧f0,f1,f2を一時変数へ保存してから同時更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "値は中間的に負になり得るのでsigned整数を使い、全軸後の値が保証により0または1になることを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "axis順とindexのlowest ternary digitに対応するstride=1,3,9,…を揃える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "3^N Minesweeper 型の 整数の約数・剰余構造に対し、累積和と差分を選び、状態と証明を一貫して設計できる。",
+      "text": "全位置のneighbor bomb数から、一貫するbomb配置をN軸の局所逆変換で復元できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "N=1で3本の式を直接逆算し、N=2では一方の桁を固定した3-entry更新を縦横に1回ずつ施してsingleton値になるか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc313-ex「Group Photo」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "前列順列 a を固定すると、後列位置 i が越えるべき閾値は c_1=a_1、c_{N+1}=a_N、内部は min(a_{i−1},a_i) である。後列 B を並べられる条件は sorted B_i>sorted C_i である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "A を高さ昇順に挿入すると、既に隣接が確定した辺だけを結んだ path fragments の形が残り、閾値 C のうち現在高さ以下の個数は「挿入済み数＋連結成分数」だけで決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc313-ex「Group Photo」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "A を昇順に挿入し、確定隣接辺が作る連結成分数を状態とする O(N²) の挿入 DP を行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "具体的な fragment の長さや順序を係数へ集約でき、各高さ段で B との Hall 型 sorted 条件も成分数から判定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "前列の N! 順列を列挙し、閾値列 C を sort して B と比較する。",
+        "decision": "rejected",
+        "decisionReason": "N=5000 で順列列挙は不可能で、条件が局所隣接 min だけに依存する構造を使えていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "新しい最大要素を挿入したとき、単独 fragment を作る・既存 fragment の端へ付く・二 fragment をつなぐ、の三類型で成分数の変化と配置数を数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Group Photo 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "段 i、成分数 j なら現在までに確定する閾値数 k=i+j。新たに増える C の値が A_{i+1} 以下の区間に対し、対応する sorted B が十分大きいかだけ検査すればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc313-ex「Group Photo」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "A,B を昇順 sort する。dp[i][j] を小さい A を i 人挿入し path fragment が j 個ある部分構造数とし、新要素の置き方三種を組合せ係数付きで遷移する。k=i+j で現在確定した C の個数を追い、新しく確定する区間に B_t>A_{i+1} が成り立たない遷移を捨てる。dp[N][1] に対応する完成数を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc313-ex「Group Photo」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "最大要素からの挿入 DP",
+      "trigger": "順列の隣接関係だけが評価に効き、値の大小がすべて異なるとき。",
+      "application": "値順に頂点を足し、確定隣接辺が作る path component 数を状態にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc313-ex「Group Photo」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "sorted matching condition",
+      "trigger": "二集合を一対一に対応させ、各組で片方が閾値を超える必要があるとき。",
+      "application": "両者の昇順列を比較する条件へ Hall の条件を圧縮する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "隣接 min の multiset は、値を小さい順に見たときの挿入済み path fragments 数によって prefix 個数が決まる。",
+      "reusablePerspective": "順列の隣接 min/max を数える問題では、値 sweep 中の連結成分を状態にする挿入 DP を疑う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "挿入 DP と組合せ係数",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "ソート済み二部 matching の必要十分条件",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "端点 c_1,c_{N+1} も C に入るため閾値数が i+j になる理由を境界込みで確認する。遷移係数は fragment の左右端と隙間を区別して導く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Group Photo 型の 頂点と辺からなる状態グラフに対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "N! 個の前列順列を path fragments の成分数へ圧縮し、後列配置可能性を組み込んだ O(N²) DP で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "まず固定順列から閾値 multiset C を導き、後列条件を sorted 比較へ落とす。その後、値を一つ挿入したとき C の確定数がどう変わるかを図示する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

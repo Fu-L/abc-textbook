@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc220-f「Distance Sums 2」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各始点から独立に距離和を求めると同じ木を何度も探索する。一つの根1についてなら、全頂点の深さの和がそのまま ans(1) になり、同じ DFS で各部分木サイズも得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "根を親 p から子 c へ一辺移すと、c の部分木内の sub(c) 頂点への距離は1減り、それ以外の N-sub(c) 頂点への距離は1増える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc220-f「Distance Sums 2」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "最初の DFS で ans(1) と部分木サイズを求め、二回目の DFS で ans(c)=ans(p)+N-2sub(c) を全辺へ伝播する rerooting を行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "根を一辺移した差分が切断された二成分のサイズだけで決まり、各頂点の距離を再計算せず全回答を共有できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各頂点を始点に BFS または DFS を実行して距離和を足す。",
+        "decision": "rejected",
+        "decisionReason": "木でも一回の探索に N が必要で、N 個の始点について二乗時間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Distance Sums 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "辺 p-c をまたぐ reroot 差分は、近くなる sub(c) 個の -1 と遠くなる N-sub(c) 個の +1 の合計 N-2sub(c) である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc220-f「Distance Sums 2」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "頂点1を根に DFS し、depth の総和と sub[v] を計算する。ans[1] をその総和で初期化し、親から子へ進むたび ans[child]=ans[parent]+N-2sub[child] を代入して全頂点を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc220-f「Distance Sums 2」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "全方位木 DP（rerooting）",
+      "trigger": "各頂点を根にした値が必要で、隣接する二つの根の答えの差を辺の両側の情報から求められるとき。",
+      "application": "一つの根で基準値と部分木情報を作り、辺ごとの差分を全頂点へ伝える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "深さ優先探索",
-      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc220-f「Distance Sums 2」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "name": "辺切断による寄与差分",
+      "trigger": "根や始点を一辺動かしたとき、対象が辺のどちら側にあるかで寄与変化が一定になるとき。",
+      "application": "部分木側と補集合側の個数を数え、距離変化をまとめて加減する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "距離和全体の reroot に必要なのは各距離値ではなく、移動した辺の子側に何頂点あるかだけである。",
+      "reusablePerspective": "全始点への集約量では、始点を隣へ動かしたとき各対象の寄与が何種類の差分に分かれるかを調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "深さ優先探索",
+      "text": "根付き木、部分木サイズ、DFS、rerooting",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "距離和は最大で N(N-1)/2 なので 64 bit で持つ。深い path 木では再帰 stack が不足し得るため iterative DFS または stack 設定を検討し、親辺を逆走しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Distance Sums 2 型の 根付き木・部分木・パスの関係に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "一つの根の距離和と部分木サイズから、辺をまたぐ差分式を作って全頂点の距離和へ reroot できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "辺を一本切って子側へ丸を付け、始点を親から子へ移したとき「近くなる個数」と「遠くなる個数」を数えて式を再導出する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

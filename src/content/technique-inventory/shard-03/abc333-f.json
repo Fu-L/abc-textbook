@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc333-f「Bomb Game 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "列にi人いる状態から最初の一人が除かれるまで、除去されず末尾へ回る操作が何周でも続き得る。最初に除かれる位置kの確率は、一周分の確率へ無限等比級数を足すことで閉じた式にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc333-f「Bomb Game 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "人数iと先頭からの位置jを状態にする確率DPを、隣接j間の漸化式で高速化する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "素朴な除去位置全和を最初のjだけ計算し、残りをO(1)更新して全体O(N^2)にできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各dp[i][j]から全ての除去位置へ三重loopで遷移する",
+        "decision": "rejected",
+        "decisionReason": "状態O(N^2)に一遷移O(N)が掛かるO(N^3)となり、N=3000では重い。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Bomb Game 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "除去確率p=1/2とすると、i人中の位置kが最初に除かれる確率はp^k/(1-p^i)である。新しいrowのjとj+1の加重和はほぼp倍のshiftで、wrapする一項だけ補正すればよく、正規化後はnew[j+1]=p·new[j]+p·old[j]となる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc333-f「Bomb Game 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "dp[1][0]=1から人数を一人ずつ増やす。m人のnew[0]はdp[m-1]を逆順にpの冪で重み付けしp/(1-p^m)を掛けてO(m)で求める。その後j=0,…,m-2についてnew[j+1]=p(new[j]+dp[m-1][j])でrowを埋め、dp[N]を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc333-f「Bomb Game 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "吸収までの無限等比級数",
+      "trigger": "同じ列配置が一周ごとに確率p^iを掛けて再訪される。",
+      "application": "一周内で位置kが除かれる確率を1/(1-p^i)で正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc333-f「Bomb Game 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "DP遷移のsliding更新",
+      "trigger": "隣接する出力状態の畳み込み重みが一段shiftし、一項だけ出入りする。",
+      "application": "new[0]だけ全和を計算し、new[j+1]をnew[j]とold[j]から定数時間で更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "確率過程を一操作ずつ追わず「現在人数から最初に誰が消えるか」までまとめると、人数が一つ減る有限DPへ変換できる。",
+      "reusablePerspective": "自己loopを含む確率過程は、次に状態が本質的に変化する時点までを幾何級数で吸収するとDAG状DPにできる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "modular inverse、無限等比級数、確率DPと巡回するindex対応。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "pはmod 998244353で2の逆元として扱い、1-p^mの逆元を用いる。0-index/1-indexと逆順重み、new rowで参照するold rowの人数を混同しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Bomb Game 2 型の 整数の約数・剰余構造に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "各person iが最後の一人として残る確率をmod 998244353で全員分求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "N=2を手計算の(1/3,2/3)と照合し、各Nで確率総和が1になること、O(N^3)の直接遷移と小Nで一致することを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

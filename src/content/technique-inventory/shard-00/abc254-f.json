@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc254-f「Rectangle GCD」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "長方形内の全A_i+B_jのgcdは、基準値A_h1+B_w1と、行方向の隣接差A_i-A_(i-1)、列方向の隣接差B_j-B_(j-1)のgcdに等しい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc254-f「Rectangle GCD」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "差分列の区間gcdと基準一点",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "gcdが差を取っても不変な性質により、二次元長方形を二つの一次元差分区間と一値へ分解できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "長方形内の全要素を列挙",
+        "decision": "rejected",
+        "decisionReason": "一問い合わせで最大N^2個の値があり、Q=2×10^5では処理できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数線形結合で表せる値の集合が gcd の倍数全体なので、割り切れ条件が可解性の必要十分条件になる。",
+        "text": "同じ列の値同士を引けばAの隣接差が、同じ行の値同士を引けばBの隣接差が得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Rectangle GCD 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "逆に基準値と全隣接差から長方形内の任意のA_i+B_jを加減算で復元できるため、二つのgcdは一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc254-f「Rectangle GCD」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "差分配列dA[i]=A_i-A_(i-1)、dB[j]=B_j-B_(j-1)を区間gcd可能な構造へ載せる。各質問でgcd(A_h1+B_w1, gcd(dA[h1+1..h2]), gcd(dB[w1+1..w2]))を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc254-f「Rectangle GCD」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "gcdの差分不変性",
+      "trigger": "多数の和で作る集合のgcdを少数の基準値と差へ変えたい。",
+      "application": "一つの基準値から他値を引き、行・列の隣接差へ分離する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "gcd と拡張 Euclid",
-      "trigger": "制約と操作を整理したときに gcd と拡張 Euclid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc254-f「Rectangle GCD」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で gcd と拡張 Euclid を問題固有の状態へ適用する。",
+      "name": "静的区間gcd",
+      "trigger": "変更のない差分列へ多数の区間gcd質問が来る。",
+      "application": "セグメント木やsparse tableで二つの差分区間のgcdを得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "加法分離された行列A_i+B_jでは、全長方形の情報が左上の一値と二方向の一次元差分だけに縮約される。",
+      "reusablePerspective": "gcd集合へ共通基準を含め、他要素との差の生成系を探すと、高次元質問を低次元へ分解できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "gcd(x,y)=gcd(x,y-x)という不変性を使える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "gcd と拡張 Euclid",
+      "text": "差分配列に対する静的区間gcdデータ構造を実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。",
+      "text": "差分は負になり得るので絶対値または符号に依存しないgcdを使う。h1=h2やw1=w2の空差分区間はgcdの単位元0として扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Rectangle GCD 型の 盤面上の位置と局所遷移に対し、gcd と拡張 Euclidを選び、状態と証明を一貫して設計できる。",
+      "text": "各長方形に含まれる全てのA_i+B_jの最大公約数を高速に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。",
+      "text": "小さい配列で長方形を全列挙したgcdと比較し、1×1、1行、1列、負の差分、全要素が同じ場合を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,67 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc242-g「Range Pairing Query」では、offline 区間 query を Mo 順に並べ、左右端を一要素ずつ伸縮しながら集約値を更新する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "区間内で色 c が cnt_c 人なら作れる pair は floor(cnt_c/2) で、答えは色ごとのこの値の和になる。query 間で端点を一つ動かすと変化するのは追加・削除した一色だけである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "色を一個追加したとき旧個数が奇数なら pair が1増え、削除時は旧個数が偶数なら1減るため、区間状態を定数時間で更新できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc242-g「Range Pairing Query」では、offline 区間 query を Mo 順に並べ、左右端を一要素ずつ伸縮しながら集約値を更新する。この状態表現から答えを構成する。",
+        "approach": "query を Mo's algorithm の順に並べ、現在区間の色頻度と pair 総数を四種類の端点移動で保つ。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各 query を独立集計せず、近い区間間で O(1) update を共有でき、Q=10^6にも対応できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各 query で区間を走査して色頻度を作り直す。",
+        "decision": "rejected",
+        "decisionReason": "長い区間 query が多数あると総走査量が NQ になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "add・remove が現在区間の集約を正しく保ち、block 順で端点総移動回数が平方根上界に収まる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Range Pairing Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "非線形な floor(cnt/2) でも、一個の増減差は cnt の偶奇だけで決まるため Mo の add/remove に必要な十分状態は頻度と総 pair 数だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc242-g「Range Pairing Query」では、offline 区間 query を Mo 順に並べ、左右端を一要素ずつ伸縮しながら集約値を更新する。この状態表現から答えを構成する。",
+      "text": "query を左端 block と右端で Mo 順に sort する。現在 [L,R] を伸縮し、add(x) は count[A_x] が奇数なら ans++、remove(x) は削除前 count[A_x] が偶数なら ans-- として頻度を更新し、元 query index へ ans を保存する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "Mo’s algorithm",
-      "trigger": "制約と操作を整理したときに Mo’s algorithm の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc242-g「Range Pairing Query」では、offline 区間 query を Mo 順に並べ、左右端を一要素ずつ伸縮しながら集約値を更新する。この状態表現から答えを構成する。で Mo’s algorithm を問題固有の状態へ適用する。",
+      "name": "Mo's algorithm",
+      "trigger": "静的配列の多数の offline range query で、要素一個の追加・削除から答えを更新できるとき。",
+      "application": "端点移動総数が小さくなる block 順へ query を並べ替える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "頻度関数の差分更新",
+      "trigger": "答えが Σg(cnt_c) の形で、cnt を±1した差が簡単なとき。",
+      "application": "対象色の g(new)-g(old) だけを総和へ反映する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "pair 数の増減条件が追加前は奇数、削除前は偶数と逆になる。",
+      "reusablePerspective": "floor や parity を含む頻度集計では add/remove の差を別々に式で導き、対称だと決めつけない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "Mo’s algorithm",
+      "text": "Mo's algorithm、平方分割、頻度配列、offline query",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "右端を block ごとに交互順へ sort し、add と remove の更新前後の個数条件を逆にしない。",
+      "text": "remove 判定は count を減らす前の偶奇で行う。Q が10^6なので query object、sort comparator、入出力の定数倍を抑え、右端順を block ごとに反転する実装も検討する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Range Pairing Query 型の問題に対し、Mo’s algorithmを選び、状態と証明を一貫して設計できる。",
+      "text": "色頻度の pair 総数を O(1) add/remove で維持し、大量 range query を Mo 順で処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "右端を block ごとに交互順へ sort し、add と remove の更新前後の個数条件を逆にしない。",
+      "text": "同じ色の個数を0→1→2→1→0と動かし、pair 数の差と add/remove の判定時点を表にして覚える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

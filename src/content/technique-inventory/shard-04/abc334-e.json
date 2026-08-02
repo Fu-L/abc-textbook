@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc334-e「Christmas Color Grid 1」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "赤cellを一つ緑にすると変化するのは、そのcellに隣接する既存の緑連結成分だけである。隣接する相異なる成分数をxとすれば、それらx個と新cellが一つへまとまり、全体の成分数はC-x+1になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc334-e「Christmas Color Grid 1」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "緑cellの成分IDを前計算し、各赤cellの四近傍IDをdeduplicateする",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "一回のBFS/DFS後は各選択結果を定数個の近傍だけで評価できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "赤cellごとに塗り替えて連結成分を数え直す",
+        "decision": "rejected",
+        "decisionReason": "赤cell数回の全grid探索が必要でO((HW)^2)になり得る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Christmas Color Grid 1 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "x=0でも式C-x+1は新しい孤立成分が増える場合を正しく表す。四近傍に同じ成分のcellが複数あってもmergeされる成分は一つなので、cell数でなく成分IDのdistinct数を数える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc334-e「Christmas Color Grid 1」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "全# cellをBFS/DFSして成分IDを付け、元の成分数Cを得る。各. cellについて四近傍のIDを小配列またはsetで重複除去し、C+1-xを総和する。赤cell数Rで割るためRのmod逆元を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc334-e「Christmas Color Grid 1」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "連結成分labeling",
+      "trigger": "多数の局所変更が同じ固定グラフの成分構造を参照する。",
+      "application": "最初に全緑cellへcomponent IDを付け、変更点の近傍関係だけを調べる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc334-e「Christmas Color Grid 1」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "期待値の全事象平均",
+      "trigger": "選択は全赤cellから一様で、各選択後の値を独立に計算できる。",
+      "application": "各cellの成分数をmodで合計し、候補数の逆元を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "追加頂点が接する相異なる既存成分数xだけで成分数差1-xが決まり、内部形状や接する辺数は不要である。",
+      "reusablePerspective": "頂点追加によるcomponent変化は、隣接componentのdistinct数へ圧縮できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "幅優先探索",
+      "text": "grid BFS/DFS、連結成分ID、modular inverse。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "四近傍の同じIDを重複して数えない。赤cell数は少なくとも1であり、C+1-xの負値をmod正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Christmas Color Grid 1 型の 盤面上の位置と局所遷移に対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "一様に選んだ赤cellを緑へ変えた後の緑連結成分数の期待値をmod 998244353で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "緑が0個、赤cellが同一成分へ複数辺で接する、2～4成分を橋渡しする、grid端のcellを含む例を直接塗り替えと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

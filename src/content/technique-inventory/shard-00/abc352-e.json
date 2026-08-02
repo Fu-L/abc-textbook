@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc352-e「Clique Connect」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "集合 K_i 内へ重み C_i の clique を張ると辺数は二乗になるが、同じ重みの clique 内では一頂点を中心とする K_i−1 本だけで全頂点を同重み以下で連結できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Kruskal 法では、ある辺の両端がその辺以下の重みの別 path で既に結ばれるなら、その辺を候補から除いても MST 重みは変わらない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc352-e「Clique Connect」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各 clique を任意の代表と他頂点を結ぶ star K_i−1 辺へ縮約し、全 star 辺へ Kruskal 法を適用する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "削除した clique 辺は同じ重みの star path で代替でき、候補辺総数が ΣK_i に落ちる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各集合内の全頂点対に辺を生成して通常の Kruskal 法を行う。",
+        "decision": "rejected",
+        "decisionReason": "一集合 K_i=N のとき Θ(N²) 辺となり、ΣK_i≤4×10^5 という入力サイズ保証を活かせない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "cut property により異なる成分を結ぶ最小辺は安全であり、閉路を避けた採用を繰り返せば最適な全域木になる。",
+        "text": "star path は二辺かかっても MST の目的は辺数でなく重み総和であり、cycle property により同重み clique 辺を削除できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Clique Connect 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "全候補処理後に DSU component が一つでなければ、元の全 clique graph でも連結不能なので −1 である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc352-e「Clique Connect」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "各操作 i について A_{i,1} と A_{i,j}(j≥2) の辺 (C_i) だけを生成する。重み昇順に sort し、DSU で異 component を結ぶ辺の重みを加算する。採用辺が N−1 本なら総和、そうでなければ −1 を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc352-e「Clique Connect」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "密な同重み clique の sparse certificate",
+      "trigger": "暗黙に追加される完全グラフの全辺が同じ重みで、連結性だけが重要なとき。",
+      "application": "任意 spanning tree だけ残し、同重み path を代替証明にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最小全域木と cut property",
-      "trigger": "制約と操作を整理したときに 最小全域木と cut property の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc352-e「Clique Connect」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 最小全域木と cut property を問題固有の状態へ適用する。",
+      "name": "Kruskal 法と cycle property",
+      "trigger": "辺候補を安全に削減して MST を求めたいとき。",
+      "application": "辺以下の重みで端点を結ぶ別 path がある辺を除外する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "clique の完全な隣接情報は不要で、MST に必要な「同コストで集合内を連結できる証明書」は star で十分である。",
+      "reusablePerspective": "暗黙 dense graph では、目的関数が保持される sparse certificate をまず探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "最小全域木と Kruskal 法",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "最小全域木と cut property",
+      "text": "Union-Find",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同重み辺の順序が答えへ影響する場合は一括判定してから併合する。",
+      "text": "star の中心は集合内ならどれでもよく、同重み辺の sort 順は任意。総重みは最大10^9(N−1)なので 64 bit を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Clique Connect 型の 頂点と辺からなる状態グラフに対し、最小全域木と cut propertyを選び、状態と証明を一貫して設計できる。",
+      "text": "二乗本の暗黙 clique 辺を Σ(K_i−1) 本へ落とし、O(ΣK_i log ΣK_i) で MST または非連結を判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同重み辺の順序が答えへ影響する場合は一括判定してから併合する。",
+      "text": "「二辺の代替だから高くなる」と誤解せず、Kruskal の時点で同重み連結になっていることを考える。縮約後の連結性も確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

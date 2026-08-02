@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc404-g「Specified Range Sums」では、主解法候補として、全辺緩和を反復し、負辺を含む最短路と負閉路の影響範囲を判定する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "正整数列 A の区間和制約は、B_k=Σ_{j=1}^k A_j と置けば B_R-B_{L-1}=S という二点間の差へ変わる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "等式を二本の不等式へ分け、正値条件を B_j-B_{j-1}≥1 と書くと、すべて X_v-X_u≤c 型の差分制約になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc404-g「Specified Range Sums」では、主解法候補として、全辺緩和を反復し、負辺を含む最短路と負閉路の影響範囲を判定する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "B_N=0 へ平行移動し、差分制約グラフの最短路で最大可能な B_0 を求めて答え -B_0 を得る",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各制約を有向辺にし Bellman-Ford 法を使えば、負閉路による実行不能判定と目的値の最適化を N,M≤4000 で同時に扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "区間和の等式だけを連立方程式として解き、未決定変数を任意に埋める",
+        "decision": "rejected",
+        "decisionReason": "A_j≥1 の不等式と総和の最小化を反映できず、整合する等式系でも正整数解が存在しない場合を判定できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "辺数 k 以下の最短路は k 回の緩和後に得られ、N 回目の改善は到達可能な負閉路の存在を示す。",
+        "text": "B_R-B_{L-1}=S は (L-1)→R の重み S と R→(L-1) の重み -S、B_j-B_{j-1}≥1 は j→j-1 の重み -1 に対応する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Specified Range Sums 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "全 B を定数だけずらしても差は変わらない。B_N=0 とすると元の総和 B_N-B_0 は -B_0 であり、N からの最短距離が制約下での最大 B_0 を与える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc404-g「Specified Range Sums」では、主解法候補として、全辺緩和を反復し、負辺を含む最短路と負閉路の影響範囲を判定する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "頂点 0..N のグラフを作り、X_v≤X_u+c を辺 u→v, 重み c に変換する。B_N=0 を始点として Bellman-Ford で距離を緩和し、N 回後にも更新があれば -1、なければ -dist[0] を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc404-g「Specified Range Sums」では、主解法候補として、全辺緩和を反復し、負辺を含む最短路と負閉路の影響範囲を判定する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "累積和による区間制約変換",
+      "trigger": "多数の区間和の等式・不等式を同時に扱うとき。",
+      "application": "区間和を二つの prefix sum の差として、変数二個の制約へ変える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Bellman–Ford 法",
-      "trigger": "制約と操作を整理したときに Bellman–Ford 法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc404-g「Specified Range Sums」では、主解法候補として、全辺緩和を反復し、負辺を含む最短路と負閉路の影響範囲を判定する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で Bellman–Ford 法 を問題固有の状態へ適用する。",
+      "name": "差分制約と Bellman-Ford",
+      "trigger": "制約が X_v-X_u≤c に統一でき、実行可能性と一変数の極値が必要なとき。",
+      "application": "制約を有向辺へ写し、最短距離と負閉路検出で最大 B_0 を求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "総和を直接最小化せず終点を 0 に固定して始点を最大化すると、区間和の平行移動不変性が最短路の目的関数へ一致する。",
+      "reusablePerspective": "差だけで定まる変数系では一変数を固定して平行移動自由度を消し、求める差を別頂点の極値として読む。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Bellman–Ford 法",
+      "text": "累積和、X_v≤X_u+c と辺の対応、Bellman-Ford 法の負閉路判定を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel からの加算を避け、負閉路から到達できる頂点を追加伝播する。",
+      "text": "S_i と距離は 32 bit を超えうるので 64 bit を使う。等式の両向き辺と正値条件の向きを取り違えず、到達可能な負閉路の更新を判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Specified Range Sums 型の 区間端点と包含関係に対し、Bellman–Ford 法を選び、状態と証明を一貫して設計できる。",
+      "text": "区間和等式と各要素の正値条件を差分制約へ統合し、実行不能判定と最小総和を一つの最短路計算で得られる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel からの加算を避け、負閉路から到達できる頂点を追加伝播する。",
+      "text": "同一区間に異なる S がある矛盾、S が区間長未満、制約のない位置を含む例、N=1 を小さい A の全探索と照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

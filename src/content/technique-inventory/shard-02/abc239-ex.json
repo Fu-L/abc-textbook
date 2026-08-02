@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc239-ex「Dice Product 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "現在値そのものを状態にすると M 個必要だが、現在の積 p から停止せず掛けられる上限 x=floor(M/p) だけで未来は決まる。出目 i の後はこの上限が floor(x/i) へ移る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "出目1では状態 x に留まる自己ループがあるため、期待値式の f(x) を右辺から移項すると f(x)=(N+Σ_{i=2}^N f(floor(x/i)))/(N-1) になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc239-ex「Dice Product 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "floor(x/i) が同じになる出目区間をまとめ、f(M) から必要になった商状態だけを memoize する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "一状態の和を quotient block ごとに計算でき、再帰で現れる状態も floor(M/d) の形に閉じて約平方根個に限られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各状態 x で出目1..Nを全て走査し、x=0..M の期待値を順に計算する。",
+        "decision": "rejected",
+        "decisionReason": "N,M はともに10^9まであり、状態数も一状態の遷移数も列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "floor(floor(M/i)/j)=floor(M/(ij)) なので、memo 再帰を何段進めても引数は M をある正整数で割った商になり、新しい任意の整数状態は現れない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Dice Product 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "l を区間先頭、q=floor(x/l) とすれば同じ商を持つ末尾は floor(x/q) であり、N までに切って multiplicity を一括加算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc239-ex「Dice Product 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "f(0)=0 とし、未計算の x では i=2 から min(N,x) までを quotient block [l,r] に分け、(r-l+1)f(floor(x/l)) を加える。N とこの和を足して N-1 の法逆元を掛け、map に memoize して f(M) を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc239-ex「Dice Product 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "商が一定な区間の一括処理",
+      "trigger": "Σ f(floor(n/i)) のように切り捨て商だけが遷移先を決めるとき。",
+      "application": "次の境界 r=floor(n/floor(n/l)) を使って同じ商の係数をまとめる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc239-ex「Dice Product 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "期待値 DP の自己ループ除去",
+      "trigger": "確率遷移に同じ状態へ戻る結果が含まれるとき。",
+      "application": "自己遷移確率を左辺へ移し、未確定の f(x) が右辺に残らない式へ解く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "積の進行を残り許容倍率 floor(M/p) へ反転すると、掛け算が切り捨て除算の遷移になり、商集合の少なさを使える。",
+      "reusablePerspective": "値が単調に乗算される過程では、閾値までの余裕を商で表すと状態圧縮できないか考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "期待値の一次方程式、切り捨て除算、商列挙、memoization、法逆元",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "i=1 の自己ループを quotient loop に含めない。i>x の項は f(0)=0 なので省略でき、block 末尾は min(N,floor(x/q)) とする。係数と期待値は法10^9+7で正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Dice Product 2 型の 整数の約数・剰余構造に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "乗法的な確率過程を残り倍率の期待値 DP に変換し、自己ループを解消して quotient grouping と商状態 memoization で評価できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "N=2 の式で出目1のやり直しを左辺へ移し f(1)=2 を導いてから、nested floor が一つの除数積へ潰れることを再確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

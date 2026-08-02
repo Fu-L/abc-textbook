@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc449-f「Grid Clipping」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "切り出し開始位置 (r_0,c_0) が黒マスを含む条件は、各黒マスが開始位置平面上に作る axis-aligned rectangle の和集合へ入ることと同値である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc449-f「Grid Clipping」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各黒マスの開始位置 rectangle を有効範囲で clip し、行方向の追加・削除 event を sort して、active 列 interval の union 長を保つ sweep line で被覆面積を求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "行座標間では active interval 集合が変わらず、union 長×行幅を加算すれば全 rectangle 和集合を O(N log N) で数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全 (H-h+1)(W-w+1) 個の切り出し位置で、内部に黒マスがあるか走査する。",
+        "decision": "rejected",
+        "decisionReason": "盤面寸法が巨大で開始位置を列挙できず、各窓検査も重複が大きい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
+        "text": "黒マス (R,C) を含む開始位置は [R-h+1,R]×[C-w+1,C] で、合法開始範囲との共通部分だけを残す。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Grid Clipping 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "rectangle は上端で列 interval を追加し下端+1で削除する差分 event になり、同じ行の event はまとめてから次区間面積へ進む。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc449-f「Grid Clipping」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各 rectangle を clip して (rL,+interval),(rR+1,-interval) を作る。r 昇順に走査し、前行との差×現在union長を加算してから event を multiset/map構造へ反映する。全合法窓数からunion面積を引く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc449-f「Grid Clipping」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "rectangle union の sweep line",
+      "trigger": "疎な点が巨大な座標平面上の長方形領域を被覆するとき。",
+      "application": "一軸を event 化し、他軸 interval の union 長を動的管理する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "平衡二分探索木",
-      "trigger": "制約と操作を整理したときに 平衡二分探索木 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc449-f「Grid Clipping」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 平衡二分探索木 を問題固有の状態へ適用する。",
+      "name": "逆像としての窓位置数え上げ",
+      "trigger": "各対象物を含む sliding window の開始位置を数えたいとき。",
+      "application": "対象物ごとの開始位置 rectangle の和集合へ写す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "窓を盤面上で動かす代わりに、一つの黒マスから見た『このマスを含む窓の左上』領域へ視点を反転する。",
+      "reusablePerspective": "巨大座標の面積は座標を全走査せず、状態が変わる境界 event 間を幅付きでまとめる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "平衡二分探索木",
+      "text": "rectangle union の sweep line、逆像としての窓位置数え上げと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "開始位置の合法範囲へ両軸を clip し、空 rectangle は捨てる。閉区間を rR+1 の event と半開区間長へ一貫変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Grid Clipping 型の 盤面上の位置と局所遷移に対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。",
+      "text": "黒マスを含まない切り出し位置数を、開始位置 rectangle の和集合面積として O(N log N) で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "一つの黒マスで開始位置 rectangle を導き、複数 rectangle の重複を inclusion-exclusion でなく union sweep が処理することを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

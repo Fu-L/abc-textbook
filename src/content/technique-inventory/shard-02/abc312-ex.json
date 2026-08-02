@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc312-ex「snukesnuke」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "二つの反復文字列 S_i^{k},S_j^{l} が等しくなるのは、S_i と S_j が同じ primitive root T の反復で、総長が等しい場合に限られる。よって primitive root ごとに独立化できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "S_i=T^n と書けば、選ぶ k は既使用の指数集合 X に含まれない最小の n の倍数を探す問題になる。最終指数は総入力長 L 以下に抑えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc312-ex「snukesnuke」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Z algorithm で各文字列の最小周期 primitive root を求め、group 内で各 n の次候補をメモしながら未使用倍数を探す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "文字列比較を整数指数問題へ変え、各 n で失敗する試行は高々 L/n 回なので調和級数的に償却できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各人について S_i,S_i²,…を実文字列として生成し、既使用文字列 set へ無いものまで試す。",
+        "decision": "rejected",
+        "decisionReason": "長い反復文字列の生成・比較が総入力長では抑えられず、共通周期を持つ異なる S 同士の衝突も非効率に再発見する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "既知の一致区間内では以前の値を再利用し、区間を越える比較だけが全体で線形回数になる。",
+        "text": "周期 p が |S| を割り、S[j]=S[j−p] を満たす最小 p を Z 値から選べば、prefix 長 p が一意な primitive root になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "snukesnuke 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じ n の次探索位置を保存すると、使用済み倍数 m を飛ばす検査は group 全体で単調に進み、Σ L/n=O(L log L) 回に収まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc312-ex「snukesnuke」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各 S_i に Z algorithm を行い最小周期 p_i と T_i=S_i[0:p_i]、指数 n_i=|S_i|/p_i を得る。T ごとに使用済み指数 set と next[n] を持ち、next[n],next[n]+n,…から最初の未使用 m を選ぶ。m を登録し next[n]=m+n、答え k_i=m/n_i とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc312-ex「snukesnuke」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "primitive root による反復文字列の正規化",
+      "trigger": "文字列の任意回反復同士の等価性・衝突を扱うとき。",
+      "application": "最小周期文字列と反復指数の組へ変換し、同じ root だけを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Z algorithm または KMP",
-      "trigger": "制約と操作を整理したときに Z algorithm または KMP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc312-ex「snukesnuke」では、主解法候補として、prefix との最長一致長または failure link を線形走査で前計算し、文字列の出現位置を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Z algorithm または KMP を問題固有の状態へ適用する。",
+      "name": "次候補ポインタの償却",
+      "trigger": "クエリごとに一定刻みの最小未使用値を探し、同じ刻みが繰り返されるとき。",
+      "application": "前回失敗した位置より先から再開し、各使用済み候補を刻みごとに一度だけ検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "ニックネーム文字列を保存する代わりに「primitive root の group と総反復指数」だけで完全に同一性を判定できる。",
+      "reusablePerspective": "反復文字列が絡む重複排除では、hash より先に周期の標準形で決定的に整数化できないか考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
+      "text": "Z algorithm と文字列周期",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Z algorithm または KMP",
+      "text": "set と調和級数による償却解析",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "連結文字列へ置く separator が入力 alphabet と衝突しないようにする。",
+      "text": "周期候補は |S| を割る条件も必要で、単なる border 長を採用しない。出力は総指数 m ではなく元 S_i の反復回数 m/n_i である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "snukesnuke 型の 文字列の prefix・suffix と一致関係に対し、Z algorithm または KMPを選び、状態と証明を一貫して設計できる。",
+      "text": "反復文字列の衝突を primitive root 別の倍数 mex へ変換し、決定的に O(L(log L)²) で全 k_i を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "連結文字列へ置く separator が入力 alphabet と衝突しないようにする。",
+      "text": "文字列そのものを伸ばす前に、等しくなる必要十分条件を primitive root と長さで書く。償却では各刻み n の走査上限 L/n を明示する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

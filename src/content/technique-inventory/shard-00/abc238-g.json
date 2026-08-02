@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc238-g「Cubic?」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "区間積が立方数であることは、区間内の各素数 p の指数合計が全て 3 の倍数であることと同値である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "素数ごとの指数 mod 3 ベクトルを全 prefix に保存すると次元とメモリが大きいが、ゼロベクトルかどうかだけなら乱択 fingerprint に圧縮できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc238-g「Cubic?」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各素数について指数の累積和を持ち、クエリごとに全素数の指数差が 3 の倍数か調べる。",
+        "decision": "rejected",
+        "decisionReason": "10 の 6 乗以下の素数と N 個の prefix の積を保存・走査できず、Q=20 万にも対応できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各素数 p に独立な 64 bit 値 a_p,b_p を与え、p の出現へ a_p,b_p,a_p XOR b_p を周期的に割り当て、要素ごとの XOR 累積 hash を作る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "同じ素数の三出現は XOR で 0 になり、非立方区間が偶然 hash 0 になる確率だけを 2 の 64 乗分の 1 に抑えて各クエリを O(1) 判定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "算術の基本定理により正整数の素因数指数表現は一意で、積・割り切れ条件を指数ごとに判定できる。",
+        "text": "a_p XOR b_p XOR (a_p XOR b_p)=0 なので、連続する素因数出現を三個周期で符号化すると、任意区間の p の指数が 3 の倍数の場合だけ寄与が必ず消える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Cubic? 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "区間 hash は prefixHash[R] XOR prefixHash[L−1] で得られ、少なくとも一素数の指数が非零 mod 3 なら独立一様乱数を含むため 0 との衝突確率は 2 の 64 乗分の 1 である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc238-g「Cubic?」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "素因数指数の Z/3Z ベクトルを 64 bit XOR 空間へランダム線形写像し、prefix fingerprint の等値比較として range product の完全三乗性を判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc238-g「Cubic?」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "素因数指数 mod k の乱択 fingerprint",
+      "trigger": "積が完全 k 乗かを多数区間で判定したいが、全素数の指数ベクトルを明示できないとき。",
+      "application": "同じ素数の k 個分が打ち消し合う乱数表現を与え、全素数の状態を固定長 hash へ圧縮する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "素因数分解と約数列挙",
-      "trigger": "制約と操作を整理したときに 素因数分解と約数列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc238-g「Cubic?」では、主解法候補として、整数を素因数または最小素因数へ分解し、約数ごとの独立な条件として処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 素因数分解と約数列挙 を問題固有の状態へ適用する。",
+      "name": "XOR 累積 hash",
+      "trigger": "要素ごとの可換な XOR fingerprint があり、静的区間の fingerprint を高速に取得したいとき。",
+      "application": "prefix XOR を構築し、左右 prefix の XOR 差で区間値を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "素因数 p の出現番号は配列全体で左から数え、三周期の割当を継続することで、任意の切り出し区間でも三個分の XOR が相殺する。",
+      "reusablePerspective": "区間で個数 mod k を判定する周期 hash は、各要素内ではなく全 prefix を通じた出現位相を管理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "素因数分解と約数列挙",
+      "text": "素因数分解、完全冪の指数条件、XOR 累積和、Monte Carlo アルゴリズムの誤り確率を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。",
+      "text": "最小素因数表などで A_i を分解し、同じ素数の重複指数も一回ずつ出現として hash に反映する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "符号なし 64 bit 整数で XOR を行い、素数ごとの a_p,b_p を独立性の高い乱数生成器から用意する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Cubic? 型の 列の順序と prefix 状態に対し、素因数分解と約数列挙を選び、状態と証明を一貫して設計できる。",
+      "text": "静的区間積が立方数かを、素因数指数の三周期 hash と prefix XOR で高速に判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "試し割り後に残る 1 より大きい素因数と、p² の overflow を処理する。",
+      "text": "完全 k 乗判定は積そのものを扱わず、各素因数の指数を mod k でゼロ判定する問題へ移す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "高次元状態を hash へ圧縮する解法では、真のケースが必ず通ることと偽陽性の確率上界を分けて確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

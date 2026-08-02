@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc438-e「Heavy Buckets」では、主解法候補として、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "一つのバケツに注目すると、操作ごとに持ち主 i から A_i へ移り、その時の注水量が現在持ち主だけで決まる。これは functional graph 上の遷移と経路重み和である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc438-e「Heavy Buckets」では、主解法候補として、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "2^d 回後の持ち主 P[d][i] と追加水量 Q[d][i] をダブリング前計算し、各質問の T を二進分解する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "遷移先と重み和が結合可能で、O((N+Q)log T) で巨大な操作回数を処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各質問で T 回の操作を逐一シミュレーションする。",
+        "decision": "rejected",
+        "decisionReason": "T は最大 10^9 で実行不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の遷移回数は異なる二冪の和として一意に表せ、前計算した遷移の関数合成で同じ終点へ到達する。",
+        "text": "2^(d-1) 回後の持ち主 j=P[d-1][i] からさらに同回数進むので、P[d][i]=P[d-1][j] である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Heavy Buckets 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "追加水量も前半 Q[d-1][i] と後半 Q[d-1][j] の和として同じ合成則を持つ。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc438-e「Heavy Buckets」では、主解法候補として、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "text": "一回遷移から P[0][i] と Q[0][i] を作る。d ごとに中間 j を介して遷移と和を倍化する。質問では current と water を初期化し、T の立っている bit d ごとに water+=Q[d][current]、current=P[d][current] と更新して答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "online query の計算量設計",
-      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc438-e「Heavy Buckets」では、主解法候補として、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "name": "重み付きダブリング",
+      "trigger": "決定的遷移を多数回適用した後の状態と、途中の加法的コストを問うとき。",
+      "application": "jump table に遷移先と区間重み和を対で保存する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "ダブリングと二進展開",
-      "trigger": "制約と操作を整理したときに ダブリングと二進展開 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc438-e「Heavy Buckets」では、主解法候補として、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で ダブリングと二進展開 を問題固有の状態へ適用する。",
+      "name": "functional graph",
+      "trigger": "各頂点の出次数が1で、同じ遷移を反復するとき。",
+      "application": "人を頂点、バケツの受け渡しを有向辺として捉える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "反復操作で必要な情報が終状態と加法的集約なら、両方を同じ二進持ち上げで合成できる。",
+      "reusablePerspective": "ダブリングは祖先取得だけでなく、モノイド値を遷移区間に付加して経路集約にも使える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "online query の計算量設計",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "ダブリングと二進展開",
+      "text": "二進表現、ダブリング、functional graph、経路重みの加算を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "必要な最大 bit 数と遷移不能 sentinel を先に決め、表の参照範囲を揃える。",
+      "text": "質問処理では Q を足してから P へ移る順序をテーブル定義と合わせる。最大水量に耐える整数型と必要 bit 数を確保する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Heavy Buckets 型の 更新と問い合わせの時系列に対し、ダブリングと二進展開を選び、状態と証明を一貫して設計できる。",
+      "text": "決定的なバケツ移動を10^9回行った後の持ち主と累積水量を対数時間で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "必要な最大 bit 数と遷移不能 sentinel を先に決め、表の参照範囲を揃える。",
+      "text": "P[d],Q[d] の後半が中間頂点 j から始まることと、質問の bit 適用順を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

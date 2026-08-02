@@ -17,81 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc411-f「Contraction」では、縮約する二頂点の駒数と次数の和を比較し、小さい側の駒・隣接辺だけを大きい側へ移す。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "queryが指す元の辺(u,v)は、駒u,vが別の縮約頂点にある限り、その辺の像として現在も両頂点を結ぶ。したがって縮約可否は駒u,vの所属頂点が同じかだけで判定でき、難所は単純化後の隣接集合と辺数の更新である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc411-f「Contraction」では、縮約する二頂点の駒数と次数の和を比較し、小さい側の駒・隣接辺だけを大きい側へ移す。この状態表現から答えを構成する。",
+        "approach": "駒数と次数の和が小さい縮約頂点を大きい側へsmall-to-large mergeする",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "移す駒と隣接辺だけを走査し、隣接setで自己loop・多重辺を除ける。小さい側を選ぶことで各対象の所属規模が倍増し、全更新量を対数回へ償却できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "DSUだけで縮約成分を管理する",
+        "decision": "rejected",
+        "decisionReason": "駒の同一成分判定はできるが、縮約で重複する辺を数えて現在の単純グラフの辺数を更新するには、成分ごとの隣接集合も必要になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "縮約のたびに全頂点・全辺から現在グラフを再構築する",
+        "decision": "rejected",
+        "decisionReason": "一回O(N+M)、全体O(Q(N+M))となり、N,M,Q≤3×10^5では不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "移された対象の所属サイズは少なくとも倍になるため、各駒・辺が移動する回数は対数回に限られる。",
+        "text": "頂点rの重みを「所属する駒数+現在次数」とし、軽い側sを重い側bへ移す。自己loop・重複辺を削除しない仮想過程では移動後の所属重みが少なくとも2倍になり、各駒・辺の移動はO(log(N+M))回である。実際の単純化は走査対象を減らすだけで、残す端点が変わっても縮約後状態は同じなので、この上界を超えない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Contraction 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "s-x辺は必ず消えるので辺数を1減らし、x=bなら自己loopとして終了し、x≠bかつb-xが未存在のときだけ新しい辺を追加して1戻す。この局所更新で多重辺の単純化を正確に反映できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc411-f「Contraction」では、縮約する二頂点の駒数と次数の和を比較し、小さい側の駒・隣接辺だけを大きい側へ移す。この状態表現から答えを構成する。",
+      "text": "各現在頂点に駒一覧と順序付き隣接setを持ち、各駒から所属頂点への写像も持つ。query端点の所属が異なれば重みの小さい側を選び、その全駒の写像を更新し、全隣接先から旧辺を削除して必要な新辺だけ大側との間へ挿入する。辺数を各削除・挿入に同期させて出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "small-to-large merge と単純グラフ縮約",
-      "trigger": "制約と操作を整理したときに small-to-large merge と単純グラフ縮約 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc411-f「Contraction」では、縮約する二頂点の駒数と次数の和を比較し、小さい側の駒・隣接辺だけを大きい側へ移す。この状態表現から答えを構成する。で small-to-large merge と単純グラフ縮約 を問題固有の状態へ適用する。",
+      "name": "small-to-large merge",
+      "trigger": "集合を破壊的に併合し、要素一個の移動・挿入を対数時間で処理できる。",
+      "application": "駒数と次数の合計が小さい縮約頂点だけを走査し、移動回数を所属規模の倍増へ課金する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "特殊な漸近計算量の見積もり",
-      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc411-f「Contraction」では、縮約する二頂点の駒数と次数の和を比較し、小さい側の駒・隣接辺だけを大きい側へ移す。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "name": "隣接setによる動的単純グラフ",
+      "trigger": "頂点併合時に自己loopを捨て、多重辺の存在判定をしながら単純辺数を保ちたい。",
+      "application": "両端のsetを同期して旧辺を消し、未存在の新辺だけを挿入する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "query対象が元グラフの辺に限定されるため、その端点の駒が別成分なら現在グラフでも必ず隣接し、動的な辺存在判定を縮約可否に使う必要がない。",
+      "reusablePerspective": "縮約後の構造を追う問題では、元の辺や関係が商構造へどう写るかを先に確認し、判定用状態と更新用状態を分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "asymptoticComplexity": {
     "time": "O(Q + [N+M] log[N+M] log N)（公式解法全体。特殊な計算量解析を含む）",
     "evidenceIds": ["evidence-official-analysis"]
   },
   "prerequisiteCandidates": [
     {
-      "text": "small-to-large merge と単純グラフ縮約",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "特殊な漸近計算量の見積もり",
+      "text": "辺縮約、単純グラフの隣接集合、small-to-large mergeと倍増による償却解析を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop と多重辺を除きながら両端の隣接 set を同期し、駒から現頂点への写像も更新する。",
+      "text": "隣接setは両端で必ず同期し、走査中のsmall側setを直接壊さない。small-big辺を自己loopとして除き、共通隣接先では新辺を二重加算しない。駒写像の更新完了後にsmall側の容器を空にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Contraction 型の問題に対し、small-to-large merge と単純グラフ縮約を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "text": "縮約可否を元辺の不変性から簡約し、駒集合と隣接集合をsmall-to-largeで併合して単純グラフの辺数を償却的に維持できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop と多重辺を除きながら両端の隣接 set を同期し、駒から現頂点への写像も更新する。",
+      "text": "小グラフの愚直な縮約シミュレータと比較し、同じ辺queryの反復、一本辺、三角形で共通隣接辺が重複する場合、星と鎖、small側がqueryごとに入れ替わる場合を検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

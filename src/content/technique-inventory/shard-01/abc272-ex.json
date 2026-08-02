@@ -1,15 +1,15 @@
 {
   "problemId": "abc272-ex",
   "sourceRevisionIds": [
-    "source-abc272-editorial-4963-2fab3266c32ba5ad324a1e421e6f7965abecb00b9e8fbd6bf7be0ce24b25d477",
-    "source-abc272-ex-problem-13a1b5608d7d4c4ef6a93585f42563a31743bd693135ae3e339b3dbcbf3657ba"
+    "source-abc272-ex-problem-13a1b5608d7d4c4ef6a93585f42563a31743bd693135ae3e339b3dbcbf3657ba",
+    "source-abc272-editorial-4963-2fab3266c32ba5ad324a1e421e6f7965abecb00b9e8fbd6bf7be0ce24b25d477"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc272-editorial-4963-2fab3266c32ba5ad324a1e421e6f7965abecb00b9e8fbd6bf7be0ce24b25d477",
-        "source-abc272-ex-problem-13a1b5608d7d4c4ef6a93585f42563a31743bd693135ae3e339b3dbcbf3657ba"
+        "source-abc272-ex-problem-13a1b5608d7d4c4ef6a93585f42563a31743bd693135ae3e339b3dbcbf3657ba",
+        "source-abc272-editorial-4963-2fab3266c32ba5ad324a1e421e6f7965abecb00b9e8fbd6bf7be0ce24b25d477"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc272-ex「Flipping Coins 2」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "rotation symmetryにより全coinのface-up probabilityは等しく、期待face-up数はN倍のcoin N−1がface upである確率でよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "coin N−1をflipするassignment数Kの分布F(K)を直接数える代わりに、L個の指定条件を満たす総数G(L)を数えると G(L)=Σ_{K≥L}C(K,L)F(K) というbinomial transformになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc272-ex「Flipping Coins 2」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "条件を満たすindex数を状態にするpermutation DPでG(0),…,G(N)を求める。",
+        "decision": "rejected",
+        "decisionReason": "dp[i][j]の全遷移がO(N^2)となりN=20万を扱えない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "DP generating functionへe^xを掛けてderivative termを対角化し、積polynomial h(x)=∏(x+C_i)を整数点0,…,Nでmultipoint evaluationする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N個のDP stepがh(j)の一括評価へ変わり、subproduct treeとNTTでO(N log^2 N)にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+        "text": "indexを反転したDPの母関数f_iは f_i=x(f_{i−1}+f'_{i−1})+C_i f_{i−1} を満たし、g_i=f_i e^xなら係数ごとに g_{i,j}=(j+C_i)g_{i−1,j} と分離する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Flipping Coins 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "h(j)=∏_i(j+C_i)を全jで得た後、e^{-x}とのconvolutionでf_NとGを戻し、もう一度exponential generating-functionのbinomial inversionでFを復元できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc272-ex「Flipping Coins 2」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "permutation counting DPをexponential generating functionsでdiagonalizeし、product polynomialのmultipoint evaluationとbinomial inversionへ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc272-ex「Flipping Coins 2」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "多項式の多点評価",
+      "trigger": "一つの高次polynomialを連続する多数の点で評価すればDP coefficientsを得られるとき。",
+      "application": "subproduct treeでh(x)=∏(x+C_i)を作り、remainder treeでh(0),…,h(N)を求める。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "包除原理",
-      "trigger": "制約と操作を整理したときに 包除原理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc272-ex「Flipping Coins 2」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 包除原理 を問題固有の状態へ適用する。",
+      "name": "指数母関数によるbinomial変換",
+      "trigger": "二列がΣ C(K,L)F(K)型の包含count関係を持つとき。",
+      "application": "factorial scaling後のgenerating functionsにe^xまたはe^{-x}を掛けてGとFを相互変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "coin N−1のflip回数Kが偶数ならface upなので、復元したFのeven coefficientsを合計しN/N!倍して期待値にする。",
+      "reusablePerspective": "期待個数はindicatorの線形性と対称性で一対象の分布へ縮約し、最後に対象数を掛ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "包除原理",
+      "text": "inclusion-exclusion、formal power series、NTT、subproduct/remainder treeによるmultipoint evaluationを扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "AをsortしてB_i=N−1−A_iとC_i=N−B_i+1−iを同じ0/1-based規約で作り、DP式のoff-by-oneを避ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "factorial・inverse factorialとe^{±x}の係数符号を揃え、各polynomialを必要次数Nでtruncateする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Flipping Coins 2 型の 順列の位置と値の対応に対し、包除原理を選び、状態と証明を一貫して設計できる。",
+      "text": "random permutation後のface-up coin数の期待値を高速多項式演算で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "全要素が回転対称なら期待値の線形性で一要素のevent-count distributionへ落とす。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "derivativeを含むpolynomial DPはe^xを掛ける積の微分で係数ごとに独立化できないか試す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

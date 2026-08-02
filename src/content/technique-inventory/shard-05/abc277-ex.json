@@ -17,67 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc277-ex「Constrained Sums」では、整数条件を threshold ごとの真偽変数へ分解し、各制約を 2-SAT の含意辺として表す。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各X_iは0,…,Mの小さな整数だが、Q個のsum区間制約がcycleを作るため、変数順に決める単純DPにはならない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "threshold命題P_{i,j}: j≤X_iを導入すると、整数値1個がjに関してtrueからfalseへ一度だけ切り替わるboolean列になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc277-ex「Constrained Sums」では、整数条件を threshold ごとの真偽変数へ分解し、各制約を 2-SAT の含意辺として表す。この状態表現から答えを構成する。",
+        "approach": "各threshold P_{i,j}を2-SAT変数にし、上下界のsum条件を全tに対する2-literal clauseへ変換してSCCで解く。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "M≤100によりNM変数を持て、二変数和の整数不等式をthreshold ORへ正確に線形化できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各X_iのM+1候補を頂点にした一般CSPをbacktrackingする。",
+        "decision": "rejected",
+        "decisionReason": "constraint graphに木構造の保証がなく、候補割当ては指数的になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各二項制約と二つの含意辺が論理的に同値で、変数と否定が同じ強連結成分にないことが充足可能性の必要十分条件になる。",
+        "text": "L≤X_A+X_Bは全整数tについて P_{A,t}∨P_{B,L-t+1}、X_A+X_B≤Rは ¬P_{A,t}∨¬P_{B,R-t+1} と同値になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Constrained Sums 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "P_{i,0}=true、P_{i,M+1}=false、P_{i,j}⇒P_{i,j-1}を加えると、satisfying assignmentから最大true thresholdをX_iとして復元できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc277-ex「Constrained Sums」では、整数条件を threshold ごとの真偽変数へ分解し、各制約を 2-SAT の含意辺として表す。この状態表現から答えを構成する。",
+      "text": "iごとにthreshold 0,…,M+1を用意し、端のunit clauseと単調clauseを張る。各queryと関連tについてlower/upperの2-SAT clauseを追加し、implication graphのSCCで矛盾を判定する。可解なら各iの最大true jを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "2-SAT と implication graph",
-      "trigger": "制約と操作を整理したときに 2-SAT と implication graph の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc277-ex「Constrained Sums」では、整数条件を threshold ごとの真偽変数へ分解し、各制約を 2-SAT の含意辺として表す。この状態表現から答えを構成する。で 2-SAT と implication graph を問題固有の状態へ適用する。",
+      "name": "threshold boolean化",
+      "trigger": "小範囲整数変数への大小・和不等式をboolean制約へ落としたいとき。",
+      "application": "j≤Xという単調命題列を作り、値をtrue prefixの長さとして表す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "2-SAT",
+      "trigger": "各制約が二つのboolean literalのORへ表せ、全体の可解性と一解が必要なとき。",
+      "application": "clauseを2本のimplicationへし、literalと否定が同SCCか調べる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二変数和のlower/upper boundは、全cut位置tで『片方がcutを越える』というORの族に変換できる。",
+      "reusablePerspective": "整数和制約では閾値を一方へ配分するcutを全列挙し、forbiddenな同時閾値を二項clauseにできないか考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "2-SAT と implication graph",
+      "text": "2-SATとimplication graph",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "threshold encoding",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "SCCとassignment復元",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "変数と否定の vertex index、threshold の単調含意、常真・常偽 literal を一貫して符号化する。",
+      "text": "threshold indexが0未満なら常true、M+1超なら常falseとしてclauseを簡約し、配列外参照を避ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "A_i=B_iのqueryでも同じ変数のliteralを正しく簡約し、復元後に全sum制約を再検査すると安全である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Constrained Sums 型の問題に対し、2-SAT と implication graphを選び、状態と証明を一貫して設計できる。",
+      "text": "bounded整数列のpair-sum区間制約をthreshold 2-SATへ変換し、可否判定と具体解構成を行える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "変数と否定の vertex index、threshold の単調含意、常真・常偽 literal を一貫して符号化する。",
+      "text": "L=5のlower boundでt=X_A+1を選ぶ反証と、true thresholdがprefixになる単調clauseを小さなMで確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc437-e「Sort Arrays」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "可変長整数列の辞書順では、最初に異なる要素が小さい方が先で、片方が prefix なら短い方が先になる。この順序は列を根からのラベル列とする Trie の DFS 順に一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc437-e「Sort Arrays」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全数列を Trie へ挿入し、終端の元添字を昇順で出力してから子を辺ラベル昇順に DFS する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "共通 prefix を共有し、総要素数に比例する構築と順序走査で辞書順を直接生成できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "一般 comparator で数列を比較してソートする。",
+        "decision": "rejected",
+        "decisionReason": "正しいが長い共通 prefix を比較ごとに読み直し、最悪の比較コスト管理が難しい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
+        "text": "Trie のある節点へ到達した時点は、その prefix と完全一致する列が、その先へ続く全列より先に来る位置である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sort Arrays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "兄弟部分木の順序は次の要素ラベルの大小そのものなので、辺ラベル昇順に潜れば辞書順になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "同一数列の複数添字は完全に等価なので、問題指定の tie-break に合わせて添字昇順でまとめて出す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc437-e「Sort Arrays」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "root から各 A_i の要素を辿り、map に子がなければ作り、終端節点へ i を追加する。DFS ではまず節点の終端添字を昇順に答えへ追加し、その後 map の key 昇順で子を再帰する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc437-e「Sort Arrays」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "Trie",
+      "trigger": "多数の列・文字列を共通 prefix ごとに共有し、prefix 順序を扱うとき。",
+      "application": "整数を辺ラベルとして全数列を木に格納する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Trie",
-      "trigger": "制約と操作を整理したときに Trie の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc437-e「Sort Arrays」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で Trie を問題固有の状態へ適用する。",
+      "name": "辞書順 DFS",
+      "trigger": "Trie 上で全キーを辞書順に列挙したいとき。",
+      "application": "終端処理を子より先、兄弟をラベル昇順に訪問する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "辞書順ソートは比較ソートをせず、全キーの prefix 階層を一度構築して順序付き走査することでも実現できる。",
+      "reusablePerspective": "総入力長が支配的な可変長列では、共通 prefix の比較を共有する Trie が自然である。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Trie",
+      "text": "辞書順、Trie、連想配列、DFS、prefix と終端の順序を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。",
+      "text": "同じ列の添字を一節点に蓄え昇順出力する。再帰深さが総長に達し得るため、必要なら明示 stack を使い訪問順を保つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sort Arrays 型の 順列の位置と値の対応に対し、Trieを選び、状態と証明を一貫して設計できる。",
+      "text": "可変長整数列群を共通 prefix Trie の走査で辞書順に並べられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。",
+      "text": "節点終端を子より前に出すこと、子 map が数値ラベル昇順で走査されることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

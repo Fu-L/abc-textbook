@@ -17,77 +17,109 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc284-g「Only Once」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "全頂点は対称なので、全写像Aに対するS_1の総和だけを求め、最後にN倍すれば全頂点分になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "1からfunctional graphを辿り、最初の重複までに異なる頂点がl個、戻り先がpath上のp番目なら、ちょうど1回訪れる頂点数はp-1である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc284-g「Only Once」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "軌道の異なる頂点数lと戻り先pで写像を分類し、pathの順列・未使用遷移・寄与p-1を積で数える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N^N個の写像を直接扱わず、lごとの閉形式へまとめられ、合成数modulusでも整数演算で計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "すべてのA_1..A_Nを列挙して各functional graphをsimulationする。",
+        "decision": "rejected",
+        "decisionReason": "写像がN^N個あり、Nが大きい制約では列挙不能である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "l(l-1)/2をmod Mで2の逆元を掛けて求める。",
+        "decision": "rejected",
+        "decisionReason": "Mは素数とは限らず、Mが偶数なら2の逆元が存在しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+        "text": "1以外のl-1個のpath頂点の並べ方は(N-1)P(l-1)、path外N-l頂点の遷移は軌道へ影響せず各N通りである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Only Once 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "固定lで戻り先p=1..lの寄与を合計すると0+1+…+(l-1)=l(l-1)/2になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc284-g「Only Once」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "l=1..Nを走査し、falling=(N-1)P(l-1)とpow=N^(N-l)をmod Mで管理する。term=falling·pow·l(l-1)/2を加算し、最後に対称性のNを掛ける。三角数はlまたはl-1の偶数側を整数として2で割ってからmod Mへ落とし、modular inverseを使わない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc284-g「Only Once」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "functional graphの軌道分類",
+      "trigger": "各頂点の出次数が1で、開始点から最初のcycleまでの訪問性質を数えるとき。",
+      "application": "tailとcycleを、最初の重複までの長さと戻り先で表す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc284-g「Only Once」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "対称性による代表頂点",
+      "trigger": "labelled頂点すべてが同じ役割を持つ総和を求めるとき。",
+      "application": "頂点1の総寄与を数えてN倍する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "合成数modでの整数除算",
+      "trigger": "組合せ式に小さい整数除算があるがmodulusが素数とは限らないとき。",
+      "application": "積の中で割り切れる因子をmodを取る前に除く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "戻り先より前のtailだけが1回訪問され、戻り先以降のcycle頂点は無限回訪問されるため、S_1=p-1へ単純化する。",
+      "reusablePerspective": "functional graphの訪問回数条件は、tail・cycle・未到達の三分類へ分けると数えやすい。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "functional graphのtailとcycle",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "全探索と候補数の上界評価",
+      "text": "falling factorialとmodular exponentiation",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "l=1の三角数は0であり、積の更新順をずらして(N-1)P(l-1)とN^(N-l)を正しく対応させる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "M=1でも動くよう全加算・乗算をmod Mで行い、逆元に依存しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Only Once 型の 列の順序と prefix 状態に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "全N^N個の写像と全始点にわたる一度だけ訪れる頂点数の総和を、軌道長の和へ圧縮してmod Mで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "l=3の軌道を描き、戻り先p=1,2,3で寄与が0,1,2になること、path外の遷移がN^(N-l)通り自由なこと、偶数Mで逆元を使っていないことを点検する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

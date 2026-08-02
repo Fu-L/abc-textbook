@@ -17,67 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc441-e「A > B substring」では、文字数差の prefix D_i を作り、i<j かつ D_i<D_j となる pair を Fenwick tree または値域 frequency で数える。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "部分文字列内の A と B の個数差は、prefix 差 D_i=(先頭 i 文字の A 数)-(B 数) の差 D_j-D_{i-1} で表せる。したがって条件は二つの prefix 値の狭義大小だけに落ちる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc441-e「A > B substring」では、文字数差の prefix D_i を作り、i<j かつ D_i<D_j となる pair を Fenwick tree または値域 frequency で数える。この状態表現から答えを構成する。",
+        "approach": "D_0=0 から順に走査し、過去に現れた D_i のうち現在値 D_j より小さいものの個数を Fenwick tree または値域 frequency で加算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各有効部分文字列と i<j かつ D_i<D_j の組が一対一に対応し、D_i は [-N,N] に収まるため全組を高速に数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各左端から右端を伸ばし、A と B の個数を数え直す。",
+        "decision": "rejected",
+        "decisionReason": "個数差を更新できても部分文字列の候補は Θ(N^2) 個あり、N=5×10^5 では列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "部分文字列内の A-B は二つの prefix 差であり、正である条件が D_i<D_j と完全に同値になる。",
+        "text": "区間条件 A_count>B_count は D_j>D_{i-1} と同値で、空 prefix D_0 も左端1の区間を表す。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "A > B substring 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "等しい prefix 差は個数差0の区間なので数えず、strict less の query にする必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc441-e「A > B substring」では、文字数差の prefix D_i を作り、i<j かつ D_i<D_j となる pair を Fenwick tree または値域 frequency で数える。この状態表現から答えを構成する。",
+      "text": "A を +1、B を -1 として prefix 差を作る。各 D_j の処理前に過去頻度の D<D_j を答えへ加え、その後 D_j を登録する。値域を offset して累積頻度または Fenwick tree で管理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "prefix sum と転倒数型 pair counting",
-      "trigger": "制約と操作を整理したときに prefix sum と転倒数型 pair counting の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc441-e「A > B substring」では、文字数差の prefix D_i を作り、i<j かつ D_i<D_j となる pair を Fenwick tree または値域 frequency で数える。この状態表現から答えを構成する。で prefix sum と転倒数型 pair counting を問題固有の状態へ適用する。",
+      "name": "prefix 差への変換",
+      "trigger": "部分区間内の二種類の個数差や和の符号を問われるとき。",
+      "application": "区間条件を二つの prefix 値の大小関係へ変換する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "オンライン順序対の数え上げ",
+      "trigger": "i<j を保ちながら prefix 値の大小を数えたいとき。",
+      "application": "過去値の頻度に対する狭義 prefix sum を加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "文字列条件を +1/-1 の累積和にすると、部分文字列の内容ではなく端点の順序対だけを数えればよい。",
+      "reusablePerspective": "区間の和や個数差の総数では、prefix 値の大小・一致へ言い換えられないかを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "prefix sum と転倒数型 pair counting",
+      "text": "prefix 差への変換、オンライン順序対の数え上げと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空 prefix D_0 を含め、strict inequality と同値 prefix の除外を崩さない。",
+      "text": "D_0 を先に登録し、D_j 自身は query の後で登録する。同値を含めると A と B が同数の区間まで誤って数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "A > B substring 型の問題に対し、prefix sum と転倒数型 pair countingを選び、状態と証明を一貫して設計できる。",
+      "text": "A が B より多い部分文字列を、prefix 差の狭義順序対として制約内で正確に数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空 prefix D_0 を含め、strict inequality と同値 prefix の除外を崩さない。",
+      "text": "区間 [l,r] と prefix の組 (l-1,r) の対応を書き、空 prefix・狭義不等号・登録順の三点を小例で照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

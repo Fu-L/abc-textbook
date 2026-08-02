@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc313-g「Redistribution of Piles」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "操作 B の直後に A をすると全皿へ足した一個を直ちに回収して元へ戻る。同様に A が全皿から取れた直後の B も相殺なので、これらを除いた正規形だけ数えてよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "正規形は A を x 回した後 B を y 回する形で、x を固定すると袋の石数 s(x) から 0≤y≤floor(s(x)/N) が可能になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc313-g「Redistribution of Piles」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "a_i を sort して s(x)=Σmin(a_i,x) を区分線形化し、区間ごとの floor((αx+β)/N) の和を floor_sum で計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "傾きが変わるのは x=a_i だけなので O(N) 区間に分かれ、各区間を対数時間で一括加算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "x=0..max a_i を全て試し、袋の石数から y の個数を足す。",
+        "decision": "rejected",
+        "decisionReason": "max a_i=10^9 で走査回数が大きく、s(x) の区分線形性を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+        "text": "A を x 回すると皿 i から袋へ移る石は min(a_i,x) 個なので、s(x)=Σmin(a_i,x) は sorted a の隣接値間で一次式になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Redistribution of Piles 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "x≤min a の正規形では B を行わない一通りだけを扱い、それ以後は floor(s/N)+1 の y 候補を数えるという境界を分離する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc313-g「Redistribution of Piles」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "a を昇順 sort し prefix sum を作る。x の区間 [a_k,a_{k+1}) では s(x)=prefix[k]+(N−k)x と書く。各区間で floor(s(x)/N) の総和を ACL floor_sum へ渡し、y=0 の一通りも足す。最小値以前の重複する正規形は公式の境界どおり補正する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc313-g「Redistribution of Piles」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "操作列の相殺による正規形",
+      "trigger": "可逆・相殺する隣接操作があり、結果状態の重複を数えたいとき。",
+      "application": "無意味な隣接対を禁止し、各到達状態と一対一になる標準操作列を作る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc313-g「Redistribution of Piles」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "区分線形和と floor_sum",
+      "trigger": "Σmin(a_i,x) などが break point 間で一次式となり、その整数除算の総和が必要なとき。",
+      "application": "値を sort して係数一定区間へ分け、Σfloor((ax+b)/m) を Euclid 型算法で取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "状態を直接特徴付ける前に操作列の冗長な相殺を消すと、二整数 (x,y) が到達列を一意に表す。",
+      "reusablePerspective": "到達状態数では同じ結果を生む操作列が障害になるので、まず canonical sequence の存在を探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "ACL floor_sum",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "全探索と候補数の上界評価",
+      "text": "sort と prefix sum による区分線形化",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "floor_sum の引数が半開区間であることに合わせて x の端点を変換する。mod を取る前の係数・積は 64/128 bit で overflow を避ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Redistribution of Piles 型の 列の順序と prefix 状態に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "到達状態を正規形 (x,y) へ全単射し、10^9 幅の x 総和を O(N log max a) の floor_sum へ圧縮できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "二操作の直後関係を実際に相殺して、正規形と状態の一対一を先に確かめる。floor_sum は式の区間端と傾きを紙上で固定してから実装する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

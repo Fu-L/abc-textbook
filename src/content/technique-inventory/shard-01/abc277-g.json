@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc277-g「Random Walk to Millionaire」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "levelをそのままDP次元にするとtime iまで0頂点を何回踏んだかで0,…,iに広がり、vertex×time×levelは重い。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "level²は、それ以前に踏んだC=0の時刻からordered pair (x,y)を選ぶ個数と等しいため、二つのmarked時刻の有無だけで展開できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc277-g「Random Walk to Millionaire」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "random walkのprefixに対し、二つのordered markerが未選択/選択済みかを表す4状態をvertexごとに持ち、C=0到着時にmarkerを選ぶ遷移を加える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "level値を列挙せず二次式を2個のmarkerへ展開し、各stepでgraph edgeを定数状態分だけ緩和できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "dp[step][vertex][level]で確率を持ち、C=1到着時にlevel²を加える。",
+        "decision": "rejected",
+        "decisionReason": "levelがKまで増えるため、N,K≤3000では状態・遷移が一段多くなる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+        "text": "二つのmarkerはorderedで同じC=0到着時刻を選んでもよく、これがX²の対角pairも正しく含める。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Random Walk to Millionaire 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "C=1の頂点へ到着した各prefixでは、両marker選択済み状態の重みがそのprefixの確率×現在level²に一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc277-g「Random Walk to Millionaire」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "初期vertex1でmarker00の重み1から始める。各stepでcurrent vertexのdeg逆元を掛けて隣接vertexへ配り、到着先C=0なら各未選択markerについて現在時刻を選ぶ/選ばない遷移を行う。C=1到着後のstate11を答えへ加え、K回繰り返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc277-g「Random Walk to Millionaire」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "多項式量のmarker展開",
+      "trigger": "履歴中のevent数のd次式を期待値として加算し、countをDP次元に持てないとき。",
+      "application": "count^dをordered d-tupleの選択数とみなし、各markerの選択済みbitだけを持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "条件付き期待値と確率 DP",
-      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc277-g「Random Walk to Millionaire」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "name": "random walkの重みDP",
+      "trigger": "各vertexから隣接先を一様選択する有限step過程の期待値を求めるとき。",
+      "application": "path確率をdegの逆元でedgeへ配り、寄与状態を線形に加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "報酬level²を『過去のlevel-up時刻のordered pair数』に変えると、levelの大きさが二つのboolean markerへ置き換わる。",
+      "reusablePerspective": "履歴countの低次多項式は、marked eventの組を数えることで定数個のflag DPへ落とせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "期待値の線形性",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "条件付き期待値と確率 DP",
+      "text": "random walk確率DP",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "count²とordered pairの対応",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "遷移確率は出発vertexのdegreeの逆元であり、到着vertexのdegreeではない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "C=0到着時に両markerを同時に現在stepへ置く遷移を含め、C=1到着時にはmarker更新せずstate11だけを報酬へ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Random Walk to Millionaire 型の 頂点と辺からなる状態グラフに対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "level二乗報酬をmarker付きrandom-walk DPへ変換し、level次元なしで期待総額を計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "0頂点を2回踏んだ後のlevel²=4を、(1,1),(1,2),(2,1),(2,2)の4 marker pairとして列挙する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,67 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc371-e「I Hate Sigma Problems」では、指定値が現れる位置へ番兵を加え、隣接出現位置間の gap ごとの三角数から、その値を含まない部分列数を数える。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "求める distinct 数の総和は、値ごとに「その値を含む連続部分列の個数」を足す形へ寄与を交換できる。各値の出現回数の総和は N なので、値ごとの処理を出現位置数に比例させれば全体を線形にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc371-e「I Hate Sigma Problems」では、指定値が現れる位置へ番兵を加え、隣接出現位置間の gap ごとの三角数から、その値を含まない部分列数を数える。この状態表現から答えを構成する。",
+        "approach": "各値について全区間数からその値を含まない区間数を引き、出現位置間の gap ごとに三角数を足す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "値 i の非出現区間は隣接する出現位置の間へ一意に属し、全値にわたる出現位置の総数が N なので O(N) で集計できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "左端を固定して右へ伸ばし、集合で distinct 数を更新する。",
+        "decision": "rejected",
+        "decisionReason": "一つの左端には O(N) 個の右端があり、distinct 数を定数時間で更新しても O(N^2) となる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "指定値を含まない部分列は二つの連続する出現位置の間へ一意に属し、各 gap 長 g は g(g+1)/2 個を与える。",
+        "text": "値 i の出現位置に 0 と N+1 を番兵として加えると、長さ g の各 gap が i を含まない区間を g(g+1)/2 個だけ生む。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "I Hate Sigma Problems 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "全区間数 N(N+1)/2 から非出現区間数を引いた量が、値 i が答えへ 1 を寄与する区間数そのものである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc371-e「I Hate Sigma Problems」では、指定値が現れる位置へ番兵を加え、隣接出現位置間の gap ごとの三角数から、その値を含まない部分列数を数える。この状態表現から答えを構成する。",
+      "text": "各値の出現位置列を作り、番兵を含む隣接位置差から非出現区間数を計算する。全区間数との差を全値について加算し、64 bit 整数で答えを得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "余事象と出現位置列",
-      "trigger": "制約と操作を整理したときに 余事象と出現位置列 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc371-e「I Hate Sigma Problems」では、指定値が現れる位置へ番兵を加え、隣接出現位置間の gap ごとの三角数から、その値を含まない部分列数を数える。この状態表現から答えを構成する。で 余事象と出現位置列 を問題固有の状態へ適用する。",
+      "name": "寄与の交換と余事象",
+      "trigger": "区間ごとの distinct 数の総和のように、対象ごとの 0/1 寄与へ分解できるとき。",
+      "application": "区間を列挙せず、各値が含まれる区間数を余事象から数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "出現位置と gap の数え上げ",
+      "trigger": "ある値を避ける連続区間を数えたいとき。",
+      "application": "出現位置間の空白を独立な区間として三角数で集計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "distinct 数を値ごとの指示関数へ分解すると二重和の順序を交換できる。",
+      "reusablePerspective": "区間統計の総和では、各要素が寄与する区間を数える視点を最初に試す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "余事象と出現位置列",
+      "text": "連続部分列の総数、二重和の寄与交換、三角数、出現位置列を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "両端番兵を含め、複数値を避ける条件では位置集合を merge して同じ gap 式を適用する。",
+      "text": "番兵 0,N+1 と gap 長 x_{j+1}-x_j-1 を混同せず、N=2×10^5 の総和を 64 bit 整数で保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "I Hate Sigma Problems 型の問題に対し、余事象と出現位置列を選び、状態と証明を一貫して設計できる。",
+      "text": "distinct 数の区間総和を値ごとの余事象へ分解し、出現位置の総数に比例する時間で計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "両端番兵を含め、複数値を避ける条件では位置集合を merge して同じ gap 式を適用する。",
+      "text": "「各区間に何種類あるか」ではなく「各値が何区間に現れるか」へ和を交換できることと、非出現区間が gap に分割されることを再現する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

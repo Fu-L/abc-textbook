@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc240-e「Ranges on Tree」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "異なる葉の部分木は互いに素なので、その区間も互いに交わらなければならない。葉が M 個なら少なくとも M 個の異なる正整数が必要で、最大値は M 未満にできない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "DFS で葉を訪問順に1..Mと番号付けすると、任意の部分木に属する葉は DFS 順の連続区間を占める。よってその最小番号と最大番号を頂点の区間にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc240-e「Ranges on Tree」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "葉だけへ DFS 順の連番を与え、内部頂点の [L,R] を子区間の最小左端・最大右端として bottom-up に作る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "葉数 M という下界と同じ最大値で、包含する部分木は包含区間、互いに素な部分木は非交差区間になる構成を与える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全頂点へ preorder 番号を付け、部分木の Euler tour 区間をそのまま出力する。",
+        "decision": "rejected",
+        "decisionReason": "条件は満たせるが最大値が N まで増え、葉数 M<N の木では最小性を達成しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Ranges on Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "最適値を決めるのは頂点数ではなく、互いに素な最小部分木である葉の個数であり、内部頂点は葉区間の包として新しい整数を消費しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc240-e「Ranges on Tree」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "根1から DFS し、子を持たない頂点に counter の現在値を L=R として割り当てて増やす。内部頂点では全 child の L の最小と R の最大を取り、全頂点の区間を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc240-e「Ranges on Tree」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "DFS 順の部分木連続性",
+      "trigger": "部分木や連結な再帰部分が並び順上の区間になる表現を作りたいとき。",
+      "application": "各子部分木を連続して処理し、葉または頂点の訪問時刻の min/max を要約にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "深さ優先探索",
-      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc240-e「Ranges on Tree」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "name": "下界と一致する構成",
+      "trigger": "最大使用値などを最小化する構成問題で最適性も示す必要があるとき。",
+      "application": "互いに異なる値を強制する対象から下界を出し、その個数だけで全条件を満たす構成を作る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "葉だけが互いに素な区間のための新しい座標を必要とし、内部頂点の区間は配下の葉番号の hull で十分である。",
+      "reusablePerspective": "階層区間の構成では、独立な原子だけへ座標を割り当て、祖先を原子集合の min/max で表せないか考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "深さ優先探索",
+      "text": "根付き木、DFS 順、部分木区間、構成の下界証明",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "葉は無向次数1ではなく、根付け後に子が0個の頂点として判定する。path 木では根以外の末端一つだけが葉になり、全区間が [1,1] でも正しい。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Ranges on Tree 型の 根付き木・部分木・パスの関係に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "葉数による最適下界を示し、DFS 葉順の連続性から最小座標の包含・非交差区間を構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "star と path の二例で葉数と最適最大値を比べ、全頂点の Euler 番号では余計な整数を使う理由を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

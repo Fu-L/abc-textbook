@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc395-e「Flip Edge」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "全edge反転操作で必要なのは反転回数そのものでなく偶奇だけで、偶数回なら元向き、奇数回なら逆向きである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "(現在頂点,反転parity)をstateにすれば、移動cost1とparity切替costXはいずれも通常の有向edgeになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc395-e「Flip Edge」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "元/反転の二layer graphを構築してDijkstra法を行う",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全操作列とlayer graph上のpathがcostを保って一対一対応し、2N頂点・2M+2N辺の非負最短路として解ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "反転回数を固定して元graph/逆graphの到達性を交互に探索する",
+        "decision": "rejected",
+        "decisionReason": "移動と反転の最適な挿入位置を別々に列挙する必要があり、同じstateを重複探索する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
+        "text": "元edgeu→vはparity0でu→v、parity1でv→uとして二layerへ張る。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Flip Edge 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "各頂点vでlayer間をcostXの双方向edgeで結べば、任意時点の全edge反転を表せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc395-e「Flip Edge」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "2N state graphを作り、(1,0)からDijkstraする。移動edgeはcost1、(v,0)↔(v,1)はcostXとし、min(dist[N,0],dist[N,1])を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc395-e「Flip Edge」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "状態拡張最短路",
+      "trigger": "global modeが少数状態で、操作により切り替わるとき。",
+      "application": "頂点×反転parityをgraph stateにする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Dijkstra 法と緩和",
-      "trigger": "制約と操作を整理したときに Dijkstra 法と緩和 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc395-e「Flip Edge」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で Dijkstra 法と緩和 を問題固有の状態へ適用する。",
+      "name": "layered graph",
+      "trigger": "mode別に利用可能edge方向が変わるとき。",
+      "application": "各mode内edgeとmode切替edgeを分ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "全graphへ作用する操作でも、その効果が反転偶奇だけならglobal履歴を一bitのpath stateへ閉じ込められる。",
+      "reusablePerspective": "操作回数のmod小数だけが将来の遷移を決めるなら、頂点との直積graphを作る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Dijkstra 法と緩和",
+      "text": "Dijkstra法とstate-expanded graphを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "answerは両parityのN stateのminを取る。距離はXとpath長の和なので64 bitで持ち、元edgeの逆layer方向を取り違えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Flip Edge 型の 頂点と辺からなる状態グラフに対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。",
+      "text": "global edge反転をparity layerへ局所化し、通常の非負最短路として最小costを求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "Xが非常に小さい/大きい、反転を連続二回するpath、逆向きedgeだけで到達する小graphを操作列全探索と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

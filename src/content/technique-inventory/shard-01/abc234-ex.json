@@ -17,67 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc234-ex「Enumerate Pairs」では、座標平面を距離閾値幅の bucket に分け、同一または隣接 bucket の点対だけを列挙する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "平面を一辺 K の正方形バケットへ分けると、距離 K 以下の二点は x・y のどちらのバケット番号も高々 1 しか違わない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "したがって各点の相手候補は自バケットと周囲 8 バケットだけだが、一バケットに点が集中する場合の比較数も評価する必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc234-ex「Enumerate Pairs」では、座標平面を距離閾値幅の bucket に分け、同一または隣接 bucket の点対だけを列挙する。この状態表現から答えを構成する。",
+        "approach": "全ての二点組についてユークリッド距離を計算し、K 以下なら出力する。",
+        "decision": "rejected",
+        "decisionReason": "出力が少なくても点対自体は N の二乗個あり、20 万点では走査できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "座標を K で割ったバケットへ点を格納し、各点について 3×3 個の隣接バケット内だけを全探索する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "幾何的に候補漏れがなく、密なバケットはそれ自体が多数の真の近距離ペアを生むため、比較総数を入力数と出力数で抑えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "距離条件を満たす二点の bucket 座標差は定数範囲に限られるため、遠い bucket を調べる必要がない。",
+        "text": "一辺 K のバケットをさらに定数個の直径 K 以下の小正方形で覆えるので、バケット内点数 B が大きければ真の出力ペアも B² に比例して多い。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Enumerate Pairs 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "隣接バケット間の候補積 B_uB_v も B_u²＋B_v² で抑えられ、出力上限 4×10^5 が探索量の上限証明に使える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc234-ex「Enumerate Pairs」では、座標平面を距離閾値幅の bucket に分け、同一または隣接 bucket の点対だけを列挙する。この状態表現から答えを構成する。",
+      "text": "距離閾値をセル幅にした spatial hashing で局所候補だけを列挙し、セル密度が真の出力数へ下界を与えることから output-sensitive な全探索を正当化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "空間 bucket と距離比較",
-      "trigger": "制約と操作を整理したときに 空間 bucket と距離比較 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc234-ex「Enumerate Pairs」では、座標平面を距離閾値幅の bucket に分け、同一または隣接 bucket の点対だけを列挙する。この状態表現から答えを構成する。で 空間 bucket と距離比較 を問題固有の状態へ適用する。",
+      "name": "固定半径近傍の空間ハッシュ",
+      "trigger": "距離 R 以下の全点対を列挙し、座標範囲は大きいが閾値 R が共通のとき。",
+      "application": "セル幅 R で座標を割り、同一・隣接セルの点だけを距離検査する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "出力依存計算量の密度評価",
+      "trigger": "候補集合が局所的に密になる可能性がある一方、真の出力個数に上限が与えられているとき。",
+      "application": "セル内候補数の二乗が実際の近距離ペア数でも下から抑えられることを示す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "一辺 K のセル内の全点対が必ず近いわけではないが、4 個の直径 K 以下の領域で覆う鳩ノ巣原理により十分多くの真ペアが存在する。",
+      "reusablePerspective": "粗い空間分割の偽陽性を評価するとき、各セルを定数個の「内部全対が真」な領域で被覆して出力下界を作る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "空間 bucket と距離比較",
+      "text": "整数座標のハッシュ分割と、平方距離による浮動小数を使わない距離比較を実装できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "負座標の floor 除算、境界上の点、同一点対を一度だけ出力する順序を統一する。",
+      "text": "各候補対は p＜q の向きで一度だけ調べ、距離二乗と K² は 64 bit 整数で比較する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "見つけた組は辞書順にソートしてから個数とともに出力し、同座標の異なる点も距離 0 の別ペアとして扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Enumerate Pairs 型の問題に対し、空間 bucket と距離比較を選び、状態と証明を一貫して設計できる。",
+      "text": "固定距離以下の全点対を空間バケットで候補化し、出力上限を使って比較量まで証明できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "負座標の floor 除算、境界上の点、同一点対を一度だけ出力する順序を統一する。",
+      "text": "近傍列挙でセル分割を使う際は候補漏れだけでなく、セル集中時の偽陽性比較数を出力数から抑えられるか確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "距離閾値とセル幅を同じにし、何セル先まで見れば十分かを各座標差から導く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

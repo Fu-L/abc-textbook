@@ -17,77 +17,107 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc245-ex「Product Modulo 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "M≤10^12 は全剰余を状態にできない一方、素因数分解は試し割りで扱える範囲であり、M を互いに素な素数冪へ分解できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "法 p^q では、積が特定の剰余 N になる列数は N の単元部分そのものではなく、打ち切った p 進指数 min(v_p(N),q) だけで決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc245-ex「Product Modulo 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "M を素数冪 p^q に分け、各法で p 進指数 q+1 状態の線形遷移を作る。K 回分を行列累乗し、各素数冪の答えを掛ける。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "中国剰余定理で独立化し、K≤10^9 を小さな行列の二分累乗へ、M≤10^12 を高々対数個の指数状態へ縮約できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "長さごとに全剰余 x mod M の個数を持ち、次の A_i=0,…,M-1 を掛ける DP を K 回行う。",
+        "decision": "rejected",
+        "decisionReason": "M≤10^12、K≤10^9 の双方に対して状態数・遷移回数が大きすぎる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "互いに素な各 p^q への剰余の組は法 M の剰余と一対一対応するため、各座標で積が N と一致する列数を独立に数えて積を取れる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Product Modulo 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "p^q ごとに t=min(v_p(n),q) で F(p,q,k,n) を分類すると値は q+1 種類だけで、要素を 1 個追加する操作は固定行列による線形変換になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc245-ex「Product Modulo 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "M を ∏p^q に分解する。各素数冪について、目標剰余を打ち切り p 進指数で分類した q+1 次元 vector と 1 要素追加の遷移行列を構成し、K 乗を二分累乗で適用する。N mod p^q の指数に対応する成分を取り、全因子分を 998244353 で掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc245-ex「Product Modulo 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "中国剰余定理による素数冪分解",
+      "trigger": "法が合成数で、条件が互いに素な素数冪ごとの合同条件へ分離できるとき。",
+      "application": "法 M の積合同を各 p^q の合同へ分け、列数を因子ごとに求めて掛け合わせる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc245-ex「Product Modulo 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "p 進指数による状態圧縮",
+      "trigger": "素数冪 modulo の乗法で、値そのものより素因数 p の個数が遷移を支配するとき。",
+      "application": "非零指数 0,…,q-1 と 0 を表す打ち切り指数 q の q+1 状態へ剰余を集約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "行列累乗",
+      "trigger": "同一の線形遷移を非常に多い K 回繰り返すとき。",
+      "application": "素数冪ごとの固定遷移行列を二分累乗し、K≤10^9 回の積選択をまとめる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "巨大な法 M 上の積 DP は、CRT で素数冪へ分け、さらに各素数冪で目標の p 進指数だけを見ると小次元の反復遷移になる。",
+      "reusablePerspective": "巨大な剰余状態では、法の直積分解と、各局所環で結果を不変にする分類量を二段階で探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "素因数分解と中国剰余定理",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "剰余演算と modular inverse",
+      "text": "p 進指数 v_p と指数を q で打ち切る意味",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "剰余行列の二分累乗",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "N≡0 mod p^q は指数 q の専用状態として扱い、通常の v_p を無限に回そうとしない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "遷移係数の導出で p や p-1 による除算を使う実装は、それらが 998244353 の倍数だと逆元が存在しない。整数として数えた係数を除算なしで剰余化する形にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Product Modulo 2 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な法・長さの積合同列数を、素数冪ごとの q+1 状態と行列累乗へ縮約して数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "N=0 の素数冪成分と、p または p-1 が答えの法 998244353 で 0 になる場合を分け、遷移係数が不正な modular division に依存していないか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

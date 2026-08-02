@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc245-g「Foreign Friends」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "友達にする辺の費用は非負なので、ある人から人気者までに必要な最小総費用は重み付き無向グラフの最短距離である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "求める始点ごとに許される人気者の国が異なるが、各頂点で距離の短い異なる 2 国分まで分かれば、自国と異なる候補が必ずその中にある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc245-g「Foreign Friends」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "人気者を距離 0・所属国ラベル付きの始点として同時に Dijkstra 法を行い、各頂点で異なる国から来た最短状態を 2 個まで確定する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "国×頂点を全列挙せず、各頂点の必要な 2 ラベルだけに制限して非負辺最短路を共有できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各人気者から Dijkstra 法を行い、各人について自国以外の結果の最小値を取る。",
+        "decision": "rejected",
+        "decisionReason": "人気者数 L も N まで増えるため、同じグラフを L 回探索する計算量は制約に収まらない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
+        "text": "頂点 v に到達する国別距離の上位 2 国を保持すれば、A_v と異なる国は少なくとも一方であり、3 番目以降の距離が答えになることはない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Foreign Friends 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "優先度付き queue の状態を (距離, 頂点, 始点の国) とし、同じ頂点・同じ国の後続状態は捨てることで、各頂点の確定回数を 2 回に抑えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc245-g「Foreign Friends」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "全人気者 (B_i, A_{B_i}) を距離 0 で queue に入れる。Dijkstra 順に取り出し、頂点ごとに未確定の国なら最短 2 国まで記録して隣接辺へ緩和する。最後に各頂点の記録から A_i と異なる国の最小距離を選び、なければ -1 とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc245-g「Foreign Friends」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "ラベル付き multi-source Dijkstra",
+      "trigger": "複数の始点群からの最短距離が必要で、始点のカテゴリも答えの条件になるとき。",
+      "application": "人気者を所属国ラベル付きで同時投入し、距離順を保ったまま国別候補を伝播する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Dijkstra 法と緩和",
-      "trigger": "制約と操作を整理したときに Dijkstra 法と緩和 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc245-g「Foreign Friends」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で Dijkstra 法と緩和 を問題固有の状態へ適用する。",
+      "name": "上位少数状態の枝刈り",
+      "trigger": "カテゴリ別状態は多いが、各地点の答えに距離順の少数カテゴリしか影響しないとき。",
+      "application": "各頂点では異なる国の最短 2 状態だけを確定し、それ以降を展開しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "除外されるカテゴリが各人の自国 1 個だけなので、国別最短距離の上位 2 個があれば必ず最良の許容候補を復元できる。",
+      "reusablePerspective": "「1 カテゴリを除く最小値」は、全カテゴリを持たず異なるカテゴリの上位 2 候補を持つことで処理できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "非負重みグラフの Dijkstra 法",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Dijkstra 法と緩和",
+      "text": "multi-source 最短路と状態ラベルの重複排除",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "同一国の人気者が複数いても、頂点ごとの 2 枠には国を重複登録しない。古い queue state と 3 国目以降も展開しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "辺費用の経路和は 32 bit を超え得るため 64 bit 整数と十分大きい INF を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Foreign Friends 型の 列の順序と prefix 状態に対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。",
+      "text": "始点カテゴリに除外条件がある最短路を、ラベル付き multi-source Dijkstra と各頂点 2 状態で解ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "最寄り人気者が自国、2 番目が他国、さらに同じ自国の人気者が複数ある例で、「2 人」ではなく「異なる 2 国」を保持する理由を説明させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

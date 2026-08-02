@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc224-h「Security Camera 2」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "左頂点のカメラ数l_i、右頂点のカメラ数r_jと置くと、全条件は l_i+r_j≥C_ij、目的はΣA_i l_i+ΣB_j r_jの最小化という線形不等式系になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc224-h「Security Camera 2」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "線形計画の双対を取り、行容量A_i、列容量B_j、単位流あたり報酬C_ijの二部ネットワークとして最小費用流で解く。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "元の下限制約へ非負係数を掛けた最良の下界が双対となり、その行列は二部フローとして表せて整数最適解も保証される。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各頂点に置くカメラ数を0から100まで列挙する多次元DPを行う。",
+        "decision": "rejected",
+        "decisionReason": "最大200頂点の選択が直積になり、頂点ごとの個数を状態として保持できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各増加路が残余グラフで最小費用なので、ポテンシャルを保った交換論により総費用の最適性が維持される。",
+        "text": "双対変数k_ijの制約はΣ_j k_ij≤A_i、Σ_i k_ij≤B_jであり、左から右へ流す量の行・列容量そのものになる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Security Camera 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "二部構造の整数性により実数LPへ緩和しても整数最適解が存在し、双対の整数容量フローから元問題の整数答えが得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc224-h「Security Camera 2」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "sourceから左iへ容量A_i、左iから右jへ報酬C_ij、右jからsinkへ容量B_jを張り、送流を任意にできる最大費用流、または符号を反転した最小費用流を計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc224-h「Security Camera 2」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "線形計画の双対化",
+      "trigger": "非負変数に対する多数の一次下限制約と線形費用の最小化があり、制約の重み付き和が目的関数の下界を与えるとき。",
+      "application": "各l_i+r_j≥C_ijへ双対変数k_ijを置き、頂点費用を行・列の容量制約へ移す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最小費用流と残余グラフ",
-      "trigger": "制約と操作を整理したときに 最小費用流と残余グラフ の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc224-h「Security Camera 2」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 最小費用流と残余グラフ を問題固有の状態へ適用する。",
+      "name": "二部ネットワークの最小費用流",
+      "trigger": "非負変数k_ijに行和・列和の上限があり、セルごとの線形報酬を最大化するとき。",
+      "application": "行と列を二部頂点にし、容量をsource側・sink側、C_ijを中央辺の負費用として表す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "元問題ではA_i,B_jがカメラ一個の価格だが、双対ではそのまま左・右頂点から流せる総量の容量になる。",
+      "reusablePerspective": "『変数ごとの価格』と『変数対の下限制約』が交差するLPでは、双対を取って価格を容量、下限値を報酬へ交換する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "線形計画の弱双対・強双対と整数性",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "最小費用流と残余グラフ",
+      "text": "最小費用流の容量・費用モデリング",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。",
+      "text": "報酬C_ijを負費用として扱う場合、負の改善路がなくなれば止めるか、0費用の迂回辺を加えて固定流量を送る。費用総和は64 bitで保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Security Camera 2 型の 頂点と辺からなる状態グラフに対し、最小費用流と残余グラフを選び、状態と証明を一貫して設計できる。",
+      "text": "二部頂点対の下限制約をLP双対で行列容量付きフローへ変換し、整数最適値を計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。",
+      "text": "二部の各組に l_i+r_j≥C_ij が並ぶ形を見たら、制約へ掛ける係数を流量とみなす双対を紙上で作る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

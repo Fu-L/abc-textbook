@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc463-e「Roads and Gates」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "特別な移動は任意の出発頂点iからcost X_iで共通地点へ入り、固定cost Yを経て任意jへcost X_jで出る一つのrouteとして表せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc463-e「Roads and Gates」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "二超頂点 W_S,W_T を追加し、i-W_SにX_i、W_S-W_TにY、W_T-jにX_jの有向辺を張って通常道路と合わせ、Dijkstraを一回行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "超頂点route一回が特別移動と同costで対応し、非負辺最短路は通常道路と特別移動の任意組合せを自動的に比較する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "Dijkstra中に各確定頂点iから全jへ X_i+Y+X_j の辺を直接緩和する。",
+        "decision": "rejected",
+        "decisionReason": "完全graph相当のN^2特別辺を生成・緩和することになり、疎な入力制約を失う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
+        "text": "全iから共通入口へのcostがX_i、共通出口から全jへのcostがX_jというseparable edge weightを超頂点でfactorizeできる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Roads and Gates 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "W_S→W_Tを有向にすることで、問題が許す特別移動方向・回数だけを表し不要な逆routeを作らない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc463-e「Roads and Gates」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "N+2頂点graphを作り、M本道路と各iの二本の超頂点接続、中央辺を追加する。指定sourceからpriority queue Dijkstraを実行し、各元頂点のdistを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc463-e「Roads and Gates」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "Dijkstra 法と緩和",
-      "trigger": "制約と操作を整理したときに Dijkstra 法と緩和 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc463-e「Roads and Gates」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で Dijkstra 法と緩和 を問題固有の状態へ適用する。",
+      "name": "完全辺costの超頂点分解",
+      "trigger": "任意i,j間のedge costがf(i)+constant+g(j)に分離できるとき。",
+      "application": "入口・出口supernodeでO(N)辺に置換する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "全点間shortcutを明示せず、edge weightのseparabilityを中間nodeを通るpathとしてgraph化する。",
+      "reusablePerspective": "特殊操作を通常最短路へ埋め込むと、使用回数や道路との組合せを別caseで考えずに済む。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Dijkstra 法と緩和",
+      "text": "完全辺costの超頂点分解と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "道路の有向・無向と超辺方向を問題定義に合わせ、distanceは複数X,Y和に十分な64 bitを使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Roads and Gates 型の 整数の約数・剰余構造に対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。",
+      "text": "全点対型の特別移動を二超頂点へ圧縮し、元の疎graph規模で最短距離を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "一回の特別移動i→jと三辺pathのcost対応を確認し、超頂点を複数回通るpathも元操作列へ解釈できることを確かめる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

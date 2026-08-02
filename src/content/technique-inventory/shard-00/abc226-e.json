@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc226-e「Just one」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各頂点の出次数を1にすると、連結成分内の出次数総和は頂点数V'、一方で各無向辺は向きを一つ持つので総和は辺数E'である。したがって成分ごとにV'=E'が必要になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc226-e「Just one」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "DFSで各連結成分の頂点数と辺数を数え、全成分が単一サイクルを持つV'=E'なら成分ごとの2方向を掛け合わせる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "V'=E'の連結グラフは葉を剥がすと一つのサイクルになり、木部分の向きは強制、サイクルだけが時計回り・反時計回りの2択になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "M本の辺の向きを2^M通り列挙し、各頂点の出次数を検査する。",
+        "decision": "rejected",
+        "decisionReason": "Mは2×10^5まであり、成分構造を使わない指数列挙は不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+        "text": "連結成分でE'=V'ならちょうど一つの閉路を持つ単一サイクル付き木であり、次数1の頂点から出る唯一の辺は外向きに強制される。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Just one 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "葉とその強制辺を繰り返し除くとサイクルだけが残り、各頂点の出次数を1にする向きはサイクルを一周する二方向だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc226-e「Just one」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "未訪問頂点からDFSを行って成分のV'と次数和/2のE'を求め、不一致が一つでもあれば0、全て一致するなら2^(連結成分数)を998244353で返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc226-e「Just one」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "連結成分ごとの独立な数え上げ",
+      "trigger": "辺の制約と選択が連結成分をまたがず、全体の方法数が成分ごとの積になるとき。",
+      "application": "各成分の実現可能性と方法数を別々に求め、不可能判定または積へ集約する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "深さ優先探索",
-      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc226-e「Just one」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "name": "単一サイクル連結成分の判定",
+      "trigger": "連結無向グラフで頂点数と辺数が等しいという条件が現れるとき。",
+      "application": "E=Vから閉路数が一つと判断し、葉を剥がした核がサイクルになる構造を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "『各頂点からちょうど一本』を全頂点で足すだけで、向き付けを考える前に成分ごとの辺数=頂点数という強い必要条件が得られ、それが十分条件にもなる。",
+      "reusablePerspective": "局所次数条件は成分内で総和を取り、辺が何回数えられるかと比較して先にグラフ構造を絞る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "連結成分、次数和、単一サイクルグラフ",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "深さ優先探索",
+      "text": "DFSによる頂点数・辺数の集計と剰余累乗",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "無向辺を隣接リストで二回数える場合は次数和を2で割る。孤立頂点を含む成分もV'≠E'として正しく0にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Just one 型の 頂点と辺からなる状態グラフに対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "局所的な出次数条件を成分の辺頂点数と単一サイクル構造へ変換し、向き付け数を積で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "全頂点の次数条件はまず成分内で足し、EとVの関係が木・単一サイクル・多重サイクルのどれを強制するかを見る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

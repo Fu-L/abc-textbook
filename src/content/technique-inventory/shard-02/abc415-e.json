@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc415-e「Hungry Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "右／下へ一歩進むたびi+jが1増えるため、cell(i,j)を訪れる日はpathによらずi+j-1日目に固定される。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "B_{i,j}=A_{i,j}-P_{i+j-1} とすれば各cell到着時の所持金変化になり、必要なのは全prefix所持金を非負にできるright/down pathと最小初期額である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc415-e「Hungry Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "dp[i][j]をcell到着直前に必要な最小所持金としてgoalから逆向きに計算する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "次cellへ必要な額の小さい方を選び、現在の純増Bを差し引いて0未満をclampすれば dp=max(0,min(down,right)-B)。局所最適が将来必要額を完全に表す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "初期額xをbinary searchし、各xについて到達可能cellと最大残金をforward DPする",
+        "decision": "rejected",
+        "decisionReason": "判定一回O(HW)にさらにlog answerが掛かり、必要資金を逆算すれば一回のDPで厳密値が得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "dpは現在cellでcoinsを回収・食費を払う前の額なので、現在のnet Bを得た後に次cellの必要額を満たす条件はcash≥nextNeed-Bである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Hungry Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "必要額は非負に制限されるためBが十分正なら0でよい。grid外の遷移を∞とすればedge/cornerも同じ式で処理できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc415-e「Hungry Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各cellのB=A-P_{i+j-1}を計算する。i=H..1,j=W..1の逆順で、goalはmax(0,-B)、他はmax(0,min(dp[i+1][j],dp[i][j+1])-B)とする。dp[1][1]を出力し、rolling rowでもO(W) memoryにできる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc415-e「Hungry Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "必要資源の逆向きDP",
+      "trigger": "各地点で資源が増減し、終点までprefix非負にする最小開始資源を求めるとき。",
+      "application": "後続の必要額から現在の純増を引き、0でclampして逆算する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc415-e「Hungry Takahashi」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "時刻の座標不変量",
+      "trigger": "monotone grid pathでevent costがstep番号に依存するとき。",
+      "application": "i+j-1が訪問日と固定されることからcell weightへ日別costを埋め込む。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "日ごとの食費をpath状態として持たず、monotone移動の対角線番号へ吸収すると、通常のweighted grid DPになる。",
+      "reusablePerspective": "step依存costがある格子路では、全pathが同じ座標へ同じstepで着くrank関数がないか先に調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "right/down grid DP、逆向きの必要量計算、境界の∞sentinelを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "goalでもその日の回収後にPを払うためmax(0,-B_goal)が必要。差と累積必要額は64 bitを使い、H=1またはW=1の唯一pathも扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Hungry Takahashi 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "pathと初期coinsを同時探索せず、各cellからの必要額をO(HW)で逆算して最小xを得られる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "1×1、全B正、最初に大赤字後で黒字、二pathで最終利益とprefix不足が逆転する例を全pathのprefix和と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,71 +17,121 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc323-f「Push and Carry」では、主解法候補として、整数の約数・剰余構造を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "cargo初期位置Bを原点へ平行移動すると、cargoを+xへ押すには人が(-1,0)、-xなら(1,0)、+yなら(0,-1)、-yなら(0,1)を必ず一度訪れる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "cargoのpush回数は|X_C-X_B|+|Y_C-Y_B|から減らせず、残る最適化は人が必要な1個または2個の押出し位置へ原点を通らず移動する距離である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "同一直線上で開始点と必要位置が原点を挟む場合だけ、Manhattan最短路がcargo位置を通るため2歩の迂回が必要になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc323-f「Push and Carry」では、主解法候補として、整数の約数・剰余構造を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Bを原点に正規化し、必要な押出し位置への障害物付きManhattan距離とpush回数を足す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "64通りの方向caseを、最大2点の訪問順と原点迂回という共通式へまとめられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "広いgrid上で人とcargoの位置pairをBFSする。",
+        "decision": "rejected",
+        "decisionReason": "座標が10^17まであり状態空間を列挙できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "人→cargo距離−1とcargo→target距離を常に足す。",
+        "decision": "rejected",
+        "decisionReason": "押す向きの反対側へ回り込む必要や、x方向からy方向へ切り替える2歩を数え落とす。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数の約数・剰余構造と解候補の対応を双方向に示し、列挙の漏れと重複がないことを確認する。",
+        "text": "normalized start A'からstance pへの距離は通常Manhattan距離で、A',pが同じ座標軸上の原点反対側にあるときだけ+2する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Push and Carry 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "x,y両方向のpushが必要ならstanceは直交する2点で、その間は原点を避けて常に2歩なので、先に訪れる方だけを2候補比較すればよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "stanceへ到着後の各push action自体はcargoのManhattan移動量と1対1に対応する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc323-f「Push and Carry」では、主解法候補として、整数の約数・剰余構造を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "A'=(X_A-X_B,Y_A-Y_B)、D=(X_C-X_B,Y_C-Y_B)とする。D_x>0なら(-1,0)、D_x<0なら(1,0)をrequiredへ入れ、yも符号と逆側の点を入れる。avoidDist(A',p)=Manhattan距離に、同一axisで原点を挟む場合だけ2を足す。requiredが1点ならwalk=avoidDist、2点ならwalk=min(avoidDist(A',p_1),avoidDist(A',p_2))+2。答えはwalk+|D_x|+|D_y|。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc323-f「Push and Carry」では、主解法候補として、整数の約数・剰余構造を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "平行移動による正規化",
+      "trigger": "点配置問題で相対位置だけが操作を決めるとき。",
+      "application": "cargo初期位置を原点に移し、人とtargetを差分座標にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "必須通過点への縮約",
+      "trigger": "対象を各方向へ動かすため特定の隣接位置へ立つ必要があるとき。",
+      "application": "push方向ごとのstanceを列挙し、その訪問距離だけ最適化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Manhattan最短路の一点障害",
+      "trigger": "格子最短路で唯一避ける点があり、端点が同一axis上にあるとき。",
+      "application": "障害点を挟む唯一のcaseへ2歩加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "cargoと人の連成移動を、cargoの不可避push数と、人がpush方向を準備するための最大2 stance訪問へ分解できる。",
+      "reusablePerspective": "押す操作の最短化では、対象物の移動量と操作者の向き変更・回り込みcostを別々に数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "Manhattan距離",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "格子上の一点回避",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "対称性と座標正規化",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+      "text": "座標差・距離和は最大10^18近くなるため64bit整数を使い、符号判定を差の積ではなく比較で行う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "状態 key と更新順序を固定し、同じ候補を二重に数えない。",
+      "text": "D_xまたはD_yが0なら対応stanceを追加せず、requiredはB≠Cの保証により空にならない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Push and Carry 型の 整数の約数・剰余構造に対し、状態縮約を選び、状態と証明を一貫して設計できる。",
+      "text": "cargoを目標へ押す最小action数を、必要stanceの定数個比較として求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+      "text": "人と必要stanceがcargoを挟んで一直線の例、x/y両pushで順序を替える例を描き、+2迂回とstance間2歩を区別する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

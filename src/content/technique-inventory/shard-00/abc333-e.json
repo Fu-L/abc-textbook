@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc333-e「Takahashi Quest」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "monster type xを倒すには、それ以前に見つけた未使用の同type potionが一つ必要である。使うなら利用可能な中で最も遅く見つけたpotionを対応させると、それより早いpotionの保持期間を不必要に延ばさずに済む。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc333-e「Takahashi Quest」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全potionを仮に拾い、type別stackから最新の一本をmonsterへ割り当てる",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "不足判定を正しく行いつつ、交換argumentにより所持本数の最大値Kを最小化する対応を構成できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "monsterごとに最も早く見つけたpotionを使う",
+        "decision": "rejected",
+        "decisionReason": "遅いpotionを将来まで持ち越して同時所持数を増やし得て、K最小化の保証がない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Takahashi Quest 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "最適戦略があるmonsterで貪欲より早いpotionを使っていれば、貪欲が選ぶ遅いpotionが未使用なら置換し、後のmonsterに使われるなら二本の割当を交換できる。いずれも各時点の所持数を増やさないため、全割当を最新優先へ変形できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc333-e「Takahashi Quest」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "typeごとに発見event indexのstackを持つ。t=1ではindexをpushし、t=2では対応stackが空なら-1、そうでなければtopをpopしてその発見を採用とmarkする。最後まで成功したら採用markを時系列に走査し、採用時+1、monster時-1としてprefix最大Kと各t=1の0/1を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc333-e「Takahashi Quest」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "type別LIFO対応",
+      "trigger": "資源と要求にtypeがあり、要求以前の利用可能資源のうち最も遅いものを使いたい。",
+      "application": "各typeの発見indexをstackで管理し、monster時に最新indexを取り出す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "greedy choice と交換論法",
-      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc333-e「Takahashi Quest」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "name": "interval重なりのprefix集計",
+      "trigger": "採用potionは発見から対応monsterまで所持数へ1寄与する。",
+      "application": "採用発見で+1、各monster消費で-1として時系列prefixの最大を求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "全potionを拾うsimulationで最後まで未使用のものを事後的に捨てたことにすれば、実際に拾う0/1とmonsterへの割当を同時に決められる。",
+      "reusablePerspective": "optionalな資源選択は一旦全て受け入れて必要分だけmatchingし、未対応資源を後から除くと構成しやすい。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "greedy choice と交換論法",
+      "text": "stack、greedy交換argument、prefix sumによる同時保持数の計算。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "出力する0/1はt=1 eventだけの入力順である。失敗時は行動列を出さず-1とし、成功時のK計算では採用されなかったpotionを加算しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Takahashi Quest 型の 列の順序と prefix 状態に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "text": "全monsterを倒せるか判定し、可能なら最大同時所持potion数を最小にするKと具体的な取得行動を構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "同typeのpotionが連続する例、typeごとの不足、最後まで余るpotion、複数typeが交差して保持区間が重なる例を小規模全戦略と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

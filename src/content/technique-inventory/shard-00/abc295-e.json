@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc295-e「Kth Number」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "K番目の値Xの期待値はΣ_(x=1)^M Pr[X≥x]であり、閾値ごとなら0の置換成功数だけを数えればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc295-e「Kth Number」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "閾値ごとの二項分布計数",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "固定x以上の既知要素数と0個数から、少なくともN+1-K個がx以上となる確率を二項係数和で求められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全M^zero通りの置換を列挙",
+        "decision": "rejected",
+        "decisionReason": "0が最大2000個あり指数的。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Kth Number 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "0一個がx以上になる確率は(M-x+1)/Mで独立なので、必要成功数以上のbinomial tailになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc295-e「Kth Number」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "x=1..Mを走査し、既知の≥x個数を更新しながら、0の成功数が不足分以上となる確率を二項係数と冪で合計して期待値へ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc295-e「Kth Number」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "tail-sum formula",
+      "trigger": "有限非負整数値確率変数の期待値を求める。",
+      "application": "E[X]=ΣPr[X≥x]へ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "条件付き期待値と確率 DP",
-      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc295-e「Kth Number」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "name": "二項分布",
+      "trigger": "同一確率の独立な0置換の成功数を数える。",
+      "application": "閾値以上へ置換される個数のtailを計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "順序統計量そのものの分布より、各閾値を越えるために必要な成功個数の方が単純になる。",
+      "reusablePerspective": "期待順位値は閾値確率へ分解する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "条件付き期待値と確率 DP",
+      "text": "順序統計量と二項係数の法上確率。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "K番目が昇順であるため必要な≥x個数はN+1-K。確率の分母M^zeroを法逆元で扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Kth Number 型の 列の順序と prefix 状態に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "0を一様置換後のK番目要素の期待値を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "小N,Mの全置換と比較し、0なし、全0、K=1,N、閾値不足が0以下の例を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

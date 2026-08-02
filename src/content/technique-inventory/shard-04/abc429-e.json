@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc429-e「Hit and Away」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "危険頂点 V を一度訪れて安全頂点から別の安全頂点へ移る最短時間は、V に近い相異なる安全頂点二つまでの距離の和に等しい。全辺重みは 1 なので探索順で近い候補を得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc429-e「Hit and Away」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全安全頂点を同時に始点とし、各状態に始点ラベルを付けた multi-source BFS で各頂点へ異なる二始点からの最短到達を保存する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各頂点は異なる始点ラベルについて高々二回だけ確定され、全体 O(N+M) で二近傍を得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各安全頂点から個別に BFS して全頂点への距離を求める。",
+        "decision": "rejected",
+        "decisionReason": "安全頂点数に比例して同じ辺を走査し、最悪 O(N(N+M)) になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+        "text": "経路 U→V→U' は条件を満たし、これより短い経路があれば V までの二つの部分距離の少なくとも一方が二番目に近い安全頂点より短くなるため矛盾する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Hit and Away 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じ始点ラベルからの二度目の到達は新しい安全頂点候補にならないので捨て、相異なるラベルだけを各頂点で二つ受理する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc429-e「Hit and Away」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "全安全頂点 (u,u,0) をキューへ入れる。状態 (v,source,dist) を取り出し、v がその source を既受理なら無視し、未受理で二件未満なら登録して隣接頂点へ dist+1 を伝播する。各危険頂点の二件の距離を足す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc429-e「Hit and Away」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "ラベル付き multi-source BFS",
+      "trigger": "複数始点から近い始点を一つでなく上位 k 個求めたいとき。",
+      "application": "始点 ID を波面に持たせ、各頂点が異なる二 ID を受理するまで探索を継続する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc429-e「Hit and Away」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "k-best 状態の枝刈り",
+      "trigger": "同じ場所への候補が多数あるが、将来必要なのが異なる出所の上位定数個だけのとき。",
+      "application": "頂点ごとに二つの始点と距離だけを保存し、それ以降の到達を展開しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "求める往復型経路は V を境に独立な二本の最短路へ分かれ、必要なのは最近傍ではなく相異なる二始点の最近傍である。",
+      "reusablePerspective": "multi-source 探索に出所ラベルを残すと、Voronoi の最近傍だけでなく定数個の近傍を線形規模で求められる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "幅優先探索",
+      "text": "BFS、multi-source BFS、最短路の部分構造、始点ラベル付き状態を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "同じ安全頂点 source の状態を二回数えない。キューの距離順を保ち、二件確定後の頂点からは不要な三件目を展開しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Hit and Away 型の 文字列の prefix・suffix と一致関係に対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "各危険頂点を経由する安全頂点間の最短移動を、二近傍 multi-source BFS で線形時間に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "各頂点の二候補が相異なる安全頂点由来であることと、危険頂点自身の二距離の和が求める経路を構成することを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc342-e「Last Train」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "station Bから時刻TまでにNへ到達できると分かっている時、schedule A→Bで使う価値があるのはarrival t+c≤Tを満たす最も遅いdepartureだけである。これにより最新出発時刻を大きい順に確定するDijkstra型探索になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc342-e「Last Train」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "逆辺を辿るmax-heap Dijkstraで各stationのlatest feasible timeを求める",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "等差scheduleから条件内の最終便をO(1)計算し、確定済みstationからpredecessorへ単調に緩和できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各train便を個別頂点・辺として展開する",
+        "decision": "rejected",
+        "decisionReason": "一情報あたりk_iが10^9まであり、全便の列挙は不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Last Train 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "scheduleのdepartureはl+djで、Bのdeadline Tに接続可能な最大jはmin(k-1,floor((T-c-l)/d))である。j≥0ならそのdepartureがAの候補となり、それより早い同schedule便はlatest値を改善しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc342-e「Last Train」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各Bに入るschedule情報をreverse adjacencyへ持つ。f[N]=十分大きい∞、他=-∞としてmax-heapにNを入れる。最大Tのstation Bを取り出し未確定なら確定し、各(A→B)について上式のjとcandidate departureを求めf[A]をchmaxしてheapへ入れる。1…N-1を値またはUnreachableで出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc342-e「Last Train」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "latest-time版Dijkstra",
+      "trigger": "各状態の評価が到達可能な最遅時刻で、後段deadlineから前段の最適時刻が単調に決まる。",
+      "application": "min距離の代わりにmax時刻をpriority queueで確定し、逆向きに緩和する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Dijkstra 法と緩和",
-      "trigger": "制約と操作を整理したときに Dijkstra 法と緩和 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc342-e「Last Train」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で Dijkstra 法と緩和 を問題固有の状態へ適用する。",
+      "name": "等差scheduleのfloor検索",
+      "trigger": "大量の出発時刻l,l+d,…に対しdeadline以下の最後の一つが欲しい。",
+      "application": "floor divisionでindexを求め0…k-1へclampする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "時間を逆向きに見ると「待てるなら早い便より遅い便が常に有利」になり、一scheduleをdeadlineごとの一便へ圧縮できる。",
+      "reusablePerspective": "時刻表最適化では待機可能性を使い、同一路線の支配される便を算術的に選別する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Dijkstra 法と緩和",
+      "text": "Dijkstraのlabel-setting原理、逆graph、floor division、等差数列。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "T-c<lなら利用可能便なし。∞からの計算とl+(k-1)dは64bitで扱い、priority queueの古いentryをf値比較で捨てる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Last Train 型の 列の順序と prefix 状態に対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。",
+      "text": "各station 1…N-1からstation Nへ到達できる最も遅い出発可能時刻を求め、不能stationを識別できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "最終便ちょうど接続、一本前しか間に合わない、乗換同時刻、cycleを含む路線、到達不能を便列挙可能な小例と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

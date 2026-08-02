@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc364-e「Maximum Glutton」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "食事が終了するのは、直前までの甘さまたはしょっぱさが上限を超えた後である。したがって最後に食べる一皿を除いた集合の二合計はX,Y以下である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "二合計を上限内に保って選べる最大皿数をmとすると、答えは全皿を選べる場合を除いてm+1である。最後の一皿の値は上限内である必要がない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc364-e「Maximum Glutton」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "選択個数と甘さ合計をkey、最小しょっぱさをvalueとするknapsack DPでmを求め、min(m+1,N)を返す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "大きい二予算の片方を最小化valueへ移し、Nが小さいことを状態軸として活用できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "甘さ合計・しょっぱさ合計の二次元表に最大個数を持つ。",
+        "decision": "rejected",
+        "decisionReason": "XとYがともに10000で積の状態数が大きく、料理数80という小さい軸を使えていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "dp[k][a]を甘さ合計aでk皿選ぶ最小しょっぱさとすれば、bを足す通常0/1 knapsackで存在性を圧縮できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Maximum Glutton 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "m<Nなら上限内集合を先に食べ、未選択の任意一皿を最後に食べることでm+1皿を必ず達成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc364-e「Maximum Glutton」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "dp[0][0]=0、他を∞とする。各料理(A_i,B_i)についてkと甘さaを降順に走査し、dp[k+1][a+A_i]をdp[k][a]+B_iでmin更新する。a≤Xかつdp[k][a]≤Yとなる最大kを探し、min(k+1,N)を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc364-e「Maximum Glutton」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "DPのkey-value交換",
+      "trigger": "二つの資源上限の積が大きいが、選択個数が小さいとき。",
+      "application": "一方の資源と個数をindexにし、もう一方の最小消費をvalueにする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc364-e「Maximum Glutton」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "停止直前集合への変換",
+      "trigger": "閾値超過を起こす最後の操作も回数に含まれるとき。",
+      "application": "最後の一手を外したfeasible集合を最適化し、答えへ一つ戻す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "制約を満たす皿数そのものではなく、その直後に閾値を超える一皿も食べ終えられるため+1が付く。",
+      "reusablePerspective": "processが違反検出後に停止するなら、違反を起こしたactionが成果に含まれるか確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
+      "text": "0/1 knapsack",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "Paretoな資源最小化DP",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "0/1選択なのでkとaを降順更新する。a+A_iはXを超える状態を保持せず、答えの+1はNでcapする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Maximum Glutton 型の 区間端点と包含関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "二資源制約を個数×一資源の最小値DPへ圧縮し、停止を起こす最後の一皿まで正しく数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "「食べられる」と「次を選べる」の時点を区別し、N=1や全皿が上限内の例で+1処理を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

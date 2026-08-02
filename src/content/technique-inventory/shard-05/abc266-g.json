@@ -1,15 +1,15 @@
 {
   "problemId": "abc266-g",
   "sourceRevisionIds": [
-    "source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f",
-    "source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc"
+    "source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc",
+    "source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f",
-        "source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc"
+        "source-abc266-g-problem-4ee5a91fce373f12f362921ad22798809578cc0fd909c2c1a3baf936d3b339fc",
+        "source-abc266-editorial-4669-9e5b9c4574319b5c66e34de1c935e8aa4ec76cd1f3d87c7e83aa2825f22fb22f"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc266-g「Yet Another RGB Sequence」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "pattern RG は自己重複しないため、ちょうどK個の全RGを一つのtoken Xへ縮約できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "縮約後はXがK個、単独RがR−K個、単独GがG−K個、BがB個で、単独Rの直後に単独Gが来るRGを一つも作らない条件になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc266-g「Yet Another RGB Sequence」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "R,G,Bの残数と直前文字、現在RG数を持つDPで全文字列を数える。",
+        "decision": "rejected",
+        "decisionReason": "R,G,Bが各100万で三次元残数状態を持てない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "先にX・G・Bを並べ、各Gの直前以外のgapへ残るRを重複可で挿入する組合せを数える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "禁止patternがRの挿入禁止gapとして局所化し、base多重集合順列とstars-and-barsの積で閉形式になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+        "text": "X・G・Bの並べ方は (G+B)!/(K!(G−K)!B!) 通りである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Yet Another RGB Sequence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "base列のG−K個の直前gapを除くと許可gapはB+K+1個で、R−K個の同一Rの挿入法は binom(R+B,R−K) 通りになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc266-g「Yet Another RGB Sequence」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "exact nonoverlapping pattern countをpattern contractionでavoidance problemへ変え、multiset permutationとforbidden-gap insertionに分解する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc266-g「Yet Another RGB Sequence」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "非重複patternのtoken縮約",
+      "trigger": "出現回数を指定されたpatternが互いに重なれず、縮約後の余分なpatternを禁止条件にできるとき。",
+      "application": "指定個のpatternを新tokenへ置換し、残り文字列で同patternを避ける。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "包除原理",
-      "trigger": "制約と操作を整理したときに 包除原理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc266-g「Yet Another RGB Sequence」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 包除原理 を問題固有の状態へ適用する。",
+      "name": "禁止gapを除く挿入数え上げ",
+      "trigger": "ある文字をbase列へ挿入し、特定種類の文字の直前だけ使用できないとき。",
+      "application": "許可gap数を数え、同一文字を重複可で配るstars-and-barsを使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "X=RGの境界では、Xの前へRを置いてもRRG、後へGを置いてもRGGとなり、新しいRG出現は増えないためtoken化が可逆である。",
+      "reusablePerspective": "pattern縮約の全単射性は、token前後で新たな境界出現が生じないことまで確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "包除原理",
+      "text": "多重集合順列、二項係数、stars-and-bars、patternの自己重複を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "階乗・逆階乗をR+G+Bまで前計算し、K=0やR−K=0でも同じ式を用いる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "baseのG個ではなく単独GのG−K個だけがR挿入禁止gapを作る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Yet Another RGB Sequence 型の 文字列の prefix・suffix と一致関係に対し、包除原理を選び、状態と証明を一貫して設計できる。",
+      "text": "RGをちょうどK個含む多重集合文字列を、token縮約とgap挿入の組合せ式で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "短いpatternの正確出現数は、そのpatternに自己重複がなければ全出現をtoken化する方針を試す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "隣接禁止を持つ多重集合列は、一方の文字を後挿入して禁止されるgapを数えると閉形式になりやすい。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

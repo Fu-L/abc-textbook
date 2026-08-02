@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc367-e「Permute K times」では、主解法候補として、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "一回の操作後の位置iには元のX_i番目の要素が来るため、操作は値ではなくsource index写像P(i)=X_iとして合成できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "2^k回後のsource写像P_kはP_k(i)=P_{k−1}(P_{k−1}(i))で得られ、Kのbinary digitごとに必要な写像だけ合成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc367-e「Permute K times」では、主解法候補として、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "source index写像のdoubling tableを作り、Kの立ったbitを恒等写像へ合成して最終indexを得る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "Kが10^18でも必要な合成段数はbit数だけで、全位置を同時に追跡できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "数列を実際にK回並べ替える。",
+        "decision": "rejected",
+        "decisionReason": "一回は線形でもKが巨大で、同じpermutation写像の反復構造を使えていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の遷移回数は異なる二冪の和として一意に表せ、前計算した遷移の関数合成で同じ終点へ到達する。",
+        "text": "P_k[i]は「現在のiから移る先」ではなく「最終位置iへ元のどのindexが来るか」であり、合成の参照順をこの定義に合わせる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Permute K times 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "K=0では恒等写像Q_i=iのままで、答えは元列Aになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc367-e「Permute K times」では、主解法候補として、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "P[0]=Xとし、k=1..59でP[k][i]=P[k−1][P[k−1][i]]を作る。Q_i=iから始め、Kのk bitが1ならQ_i=P[k][Q_i]へ全位置を更新する。最後に各iへA[Q_i]を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc367-e「Permute K times」では、主解法候補として、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "写像のdoubling",
+      "trigger": "固定の関数・permutationを巨大回数適用するとき。",
+      "application": "2冪回の合成tableを自己合成で構築する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "ダブリングと二進展開",
-      "trigger": "制約と操作を整理したときに ダブリングと二進展開 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc367-e「Permute K times」では、主解法候補として、遷移先を二冪回ごとに前計算し、回数を二進展開して高速に合成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で ダブリングと二進展開 を問題固有の状態へ適用する。",
+      "name": "binary decompositionによる写像合成",
+      "trigger": "任意回数の反復を2冪のprecomputeから組み立てるとき。",
+      "application": "恒等写像へKのset bitに対応する写像を順次合成する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "数列の値を更新する代わりに、各出力位置のsource indexだけを追えばAの内容に依存しない前計算になる。",
+      "reusablePerspective": "rearrangement反復ではpayloadとindex mappingを分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "binary lifting",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "ダブリングと二進展開",
+      "text": "関数合成",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "必要な最大 bit 数と遷移不能 sentinel を先に決め、表の参照範囲を揃える。",
+      "text": "1-index/0-indexをtable全体で統一し、Q更新をin-placeしてよい合成方向か確かめる。Kの最上位bitまで64 bitで走査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Permute K times 型の 列の順序と prefix 状態に対し、ダブリングと二進展開を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大回数の並べ替えをsource写像の二冪合成へ変換し、最終配列を復元できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "必要な最大 bit 数と遷移不能 sentinel を先に決め、表の参照範囲を揃える。",
+      "text": "一回・二回操作した小配列を手で追い、P[P[i]]の順序が定義どおりか確認する。K=0も独立に試す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

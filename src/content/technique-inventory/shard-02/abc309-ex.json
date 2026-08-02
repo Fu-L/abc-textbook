@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc309-ex「Simple Path Counting Problem」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "高さ 1..M の単純路を一段進む遷移は、位置を −1,0,+1 だけ動かす線形作用である。N は 10^9 なので段数 DP はできない一方、幅 M は 10^5 に収まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "端 0 と M+1 から外へ出る歩道を排除する境界条件だけが平行移動不変性を壊しており、鏡像の負符号でその寄与を相殺できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc309-ex「Simple Path Counting Problem」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "長さ 2M+2 の符号付き鏡像列へ拡張し、循環畳み込み (x^{-1}+1+x)^{N−1} を高速累乗する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "境界を鏡像で吸収すると各段が同じ巡回畳み込みになり、NTT と二乗法で O(M log M log N) にできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "M 状態の遷移行列を二乗して N−1 段をまとめる。",
+        "decision": "rejected",
+        "decisionReason": "疎行列でも二乗後は密になり、M=10^5 に対する行列積・保持は不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "開始分布を位置 j に正、鏡位置 2M+2−j に負で置くと、禁止境界を越えて戻る経路が一対一に逆符号で対応して消える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Simple Path Counting Problem 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "巡回添字を x^{2M+2}=1 とみなせば、一段の遷移は多項式への (x^{-1}+1+x) の乗算そのものになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc309-ex「Simple Path Counting Problem」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "長さ D=2M+2 の f を作り、各開始 A_i の係数を +1、D−A_i を −1 とする。環 Z[x]/(x^D−1) で g=x^{-1}+1+x を N−1 乗し f と畳み込み、B_i の係数を合計する。各積は NTT 後に次数を D 周期で折り返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc309-ex「Simple Path Counting Problem」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "鏡像法による境界条件の除去",
+      "trigger": "一様なランダムウォーク・格子路で、壁だけが畳み込み構造を妨げるとき。",
+      "application": "反射位置へ逆符号の初期値を置き、壁越え経路を相殺する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc309-ex「Simple Path Counting Problem」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "多項式遷移の高速累乗",
+      "trigger": "巨大な反復回数に対し、一段の線形遷移が平行移動不変な小 kernel で表せるとき。",
+      "application": "状態列を多項式とみなし、商環上で kernel を二分累乗する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "鏡像法は確率の閉形式だけでなく、有限区間 DP を巡回畳み込みへ変換するためにも使える。",
+      "reusablePerspective": "巨大な時間軸と中程度の空間軸を見たら、境界を処理して遷移を convolution にできないか検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "NTT による多項式畳み込み",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "商環での二分累乗と鏡像法",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "x^{-1} は配列添字 D−1 に置き、畳み込み後の次数を D で正しく折り返す。負係数を法で正規化し、問題文の B の重複もそのまま加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Simple Path Counting Problem 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "壁付き三近傍 DP を符号付き巡回畳み込みへ変換し、N=10^9 でも O(M log M log N) で終点総数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "巨大回数の DP ではまず一段作用が線形かを見る。その後、境界だけを切り離し、鏡像で translation invariant に戻せるかを追う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,125 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc284-ex「Count Unlabeled Graphs」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "頂点置換で同一視するunlabeled graphは、各graphを一律N!で割れないため、置換群S_Nの作用に対するBurnsideの補題で固定点を平均する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "置換のcycleごとに頂点色は一定でなければならず、edge集合もunordered pair上の置換orbitごとに採用・不採用が一定になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "最初にc色を使用可能とする固定点数F(c)を数え、全K色を実際に使う条件は色集合の包含排除で課せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc284-ex「Count Unlabeled Graphs」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "S_Nの置換をcycle typeでまとめ、固定される頂点彩色数とedge subset数をBurnsideで加算してから、使用色について包含排除する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N≤30ではinteger partitionだけを列挙すればよく、自己同型によるorbit sizeの差も正確に扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "label付きの彩色graph数を数えてN!で割る。",
+        "decision": "rejected",
+        "decisionReason": "graphごとに自己同型群の大きさが異なり、labelingの個数が一律N!ではない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "N!個の頂点置換を1つずつ列挙して固定点を数える。",
+        "decision": "rejected",
+        "decisionReason": "同じcycle typeの置換は固定点数が等しいのに、N!列挙はN≤30で不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+        "text": "cycle長列d_1..d_mに対し、固定されるc色彩色は各cycleの色を選ぶc^m通りである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Count Unlabeled Graphs 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "edge orbit数は、同一cycle d_i内がfloor(d_i/2)、異なる2cycle d_i,d_j間がgcd(d_i,d_j)なので、その総和Eに対してedge集合は2^E通りである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "長さdのcycleがm_d個あるcycle typeの置換数はN!/(∏d^{m_d}m_d!)である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc284-ex「Count Unlabeled Graphs」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "Nの各integer partitionをcycle長列として列挙する。cycle数m、edge orbit数E、type内の置換数を求め、各c=0..KのF(c)へtypeCount·c^m·2^Eを加える。全typeの和へ(N!)^{-1}を掛けてBurnside平均を取り、答えをΣ_c(-1)^(K-c) C(K,c)F(c)で求める。P>Nの素数なので必要なfactorial inverseが存在する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc284-ex「Count Unlabeled Graphs」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "Burnsideの補題",
+      "trigger": "labelの置換で同一視した構造を数え、自己同型の大きさが対象ごとに異なるとき。",
+      "application": "各頂点置換が固定する彩色graph数を平均する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "包除原理",
-      "trigger": "制約と操作を整理したときに 包除原理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc284-ex「Count Unlabeled Graphs」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 包除原理 を問題固有の状態へ適用する。",
+      "name": "cycle typeによる群要素圧縮",
+      "trigger": "置換の固定点数がcycle構造だけで決まるとき。",
+      "application": "N!個の置換をinteger partitionごとの重み付き和へ置き換える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "包含排除",
+      "trigger": "K種類すべてを少なくとも1回使うsurjectiveな割当を数えるとき。",
+      "application": "使用可能色をc色に制限したF(c)から欠けた色を除く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "undirected edgeはunordered pairなので、1本のcycle内の距離rとd-rが同じorbitになりfloor(d/2)個、異なるcycle間では位相差がgcd個残る。",
+      "reusablePerspective": "置換で不変な部分集合を数えるときは、基礎要素上に誘導された作用のorbit数を求め、各orbitを丸ごと選ぶ2択へ変える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "Burnsideの補題と置換のcycle分解",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "包除原理",
+      "text": "integer partitionと包含排除",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "mod素数上のfactorial inverse",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "cycle typeの個数はmultiplicityごとにd^{m_d}m_d!で割り、同じpartitionを重複生成しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "同一cycle内のedge orbit数にloopは含めずfloor(d/2)とし、異なるcycle対は各unordered pairを一度だけ加える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "包含排除の負値は都度Pを足して正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Count Unlabeled Graphs 型の 頂点と辺からなる状態グラフに対し、包除原理を選び、状態と証明を一貫して設計できる。",
+      "text": "全K色を使う頂点彩色付きunlabeled simple graphの個数を、cycle type列挙とBurnside・包含排除でmod P計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "N=3のcycle type 1+1+1、2+1、3で、3-cycle内の3辺が1orbitになることと各typeの置換数の総和が3!になることを照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

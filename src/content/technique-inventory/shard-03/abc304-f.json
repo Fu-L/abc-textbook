@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc304-f「Shift Table」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "青木のshiftが周期tを持つなら、最初のt日だけで全N日が決まる。tはNの約数だけを考えればよく、各剰余類で青木が欠勤できるかは、その類の全日に高橋が出勤するかだけで決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc304-f「Shift Table」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各周期の個数を数え、約数DPで最小周期別へ反転する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "周期tのshift数A_tは2の冪で直接求まり、A_t=Σ_{s|t}M_sから重複を正確に除ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全ての青木の2^N通りのshiftを生成して最小周期を調べる",
+        "decision": "rejected",
+        "decisionReason": "N日分の二択列挙は指数時間であり、周期による同値な繰り返しを利用できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Shift Table 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "周期tの各剰余類では青木の出勤は常に選べ、欠勤はその類の全日で高橋が出勤する場合だけ選べる。そのような剰余類がp個ならA_t=2^pである。一方、周期tを持つshiftは一意な最小周期s|tを持つためA_t=Σ_{s|t}M_sとなる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc304-f「Shift Table」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "Nの約数tを昇順に列挙する。各tについて全剰余類を調べ、欠勤を選べる類の数pからA_t=2^pを求める。M_t=A_t-Σ_{s|t,s<t}M_sをmod 998244353で計算し、t≠NのM_tを合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc304-f「Shift Table」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "周期列の剰余類分解",
+      "trigger": "長さNの列が周期tを持ち、tがNを割り切る。",
+      "application": "位置をmod tの剰余類へまとめ、先頭t個の選択が全列を一意に決めることを使う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc304-f「Shift Table」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "約数DPによる最小周期の抽出",
+      "trigger": "周期tを持つ対象の数には、最小周期がtの真の対象だけでなく全ての約数周期が含まれる。",
+      "application": "約数を昇順に処理し、A_tから既計算の真約数sのM_sを引く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "青木がある剰余類で欠勤を選ぶと、その類の全日に欠勤が繰り返されるため、高橋の勤務条件は一日ではなく剰余類全体のANDとして判定する。",
+      "reusablePerspective": "周期制約下の局所選択は、各residue classで繰り返される全位置の条件を集約して独立な自由度を数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "約数列挙、周期と最小周期、modular exponentiationまたは2の冪前計算。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "t=Nは答えの合計から除くが、約数関係の計算自体ではM_Nも定義できる。減算ごとにmodを正規化し、剰余類の全位置を漏れなく調べる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Shift Table 型の 文字列の prefix・suffix と一致関係に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "毎日少なくとも一人が出勤し、かつ青木のshiftの最小周期がN未満であるshift表の個数をmod 998244353で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "Nの小さい全binary shiftを列挙し、全日高橋勤務、欠勤可能な剰余類が0個、Nが素数、複数の真約数を持つ場合でM_tと答えを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

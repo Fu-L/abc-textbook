@@ -17,67 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc296-f「Simultaneous Swap」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "操作はAとBで同時に一回ずつ互換を行うため、要素が全て異なる場合は二列の反転数parityのxorが不変である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc296-f「Simultaneous Swap」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。",
+        "approach": "multiset一致と重複有無・反転parity判定",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "値集合が違えば不能、重複があれば同値要素の交換でparityを自由に反転でき、なければparity一致が必要十分となる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "操作列を探索",
+        "decision": "rejected",
+        "decisionReason": "状態数が順列対で指数的。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Simultaneous Swap 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "重複値二個の識別ラベルを交換しても元配列は変わらないため、必要な置換parityを選べる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc296-f「Simultaneous Swap」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。",
+      "text": "A,Bをsortしてmultiset一致を確認し、重複があればYes。全相異ならFenwick tree等で両反転数parityを求め、一致するときだけYes。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "Fenwick tree",
-      "trigger": "制約と操作を整理したときに Fenwick tree の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc296-f「Simultaneous Swap」では、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。で Fenwick tree を問題固有の状態へ適用する。",
+      "name": "置換parity不変量",
+      "trigger": "二列へ同時に互換を施す。",
+      "application": "反転数の偶奇変化を追う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "重複によるparity自由化",
+      "trigger": "同値要素があり識別順を交換しても観測列が変わらない。",
+      "application": "一方のparityを任意に反転できるとみなす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "同時swap制約は全相異時だけ効き、重複一組があるだけでparity障害が消える。",
+      "reusablePerspective": "重複を持つ並べ替えでは置換符号が一意でなくなる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "Fenwick tree",
+      "text": "反転数parityとmultiset比較。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "multiset不一致を先に除外し、parityだけなら反転数全値でなくmod2更新でよい。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Simultaneous Swap 型の問題に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。",
+      "text": "同時swap操作でA,Bを一致させられるか判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "小Nの状態BFSと比較し、重複なしの奇偶両例、重複あり、multiset不一致を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

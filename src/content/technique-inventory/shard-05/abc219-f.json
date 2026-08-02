@@ -17,67 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc219-f「Cleaning Robot」では、反復移動を一周期の変位ベクトルによる平行移動同値類へ分け、各類の訪問区間の和を数える。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "S を一回実行して訪れる重複なしの集合 V と、終了変位 v=(a,b) を求めると、r 回目に訪れる集合は V+(r-1)v である。K は巨大でも、異なる形を K 回シミュレーションしているわけではない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "二つの基準点 p,q が異なる反復で同じマスを生成するのは q-p が v の整数倍のときだけである。したがって V を v に平行な同一直線・同じ剰余の orbit ごとに分ければ、重複は一次元の平行移動として数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc219-f「Cleaning Robot」では、反復移動を一周期の変位ベクトルによる平行移動同値類へ分け、各類の訪問区間の和を数える。この状態表現から答えを構成する。",
+        "approach": "V の各点を変位 v による orbit key で分類し、orbit 内の整数位置 q をソートして、次の基準点までの gap と K の小さい方を足す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各基準点が新しいマスを生む反復回数は、正方向で次に V と重なる最小 shift d に対する min(d,K) であり、隣接 gap だけから求められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "S を K 回連結した経路を順にたどり、訪問座標を hash set に入れる。",
+        "decision": "rejected",
+        "decisionReason": "K は 10^12 まであり、同じ平行移動構造を反復回数分展開できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "一周期後の位置は常に同じ変位だけ移るため、変位方向に直交する不変量ごとに訪問点が一次元区間へ対応する。",
+        "text": "a≠0 としたとき q=floor(X/a)、s=X-qa、t=Y-qb を使うと、二点の (s,t) が等しいことと差が v の整数倍であることが同値になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Cleaning Robot 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じ group の q を q_1<…<q_m とすると、各 q_r の寄与は r<m なら min(q_{r+1}-q_r,K)、最後は K である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc219-f「Cleaning Robot」では、反復移動を一周期の変位ベクトルによる平行移動同値類へ分け、各類の訪問区間の和を数える。この状態表現から答えを構成する。",
+      "text": "一回分の全 prefix 座標を set で重複除去して V とする。v=0 なら |V| を返す。そうでなければ必要なら座標軸を交換して a≠0 とし、各点を (s,t,q) へ正規化して (s,t) ごとに q をソートし、隣接 gap の min と末尾の K を合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "格子点と gcd による方向ベクトル正規化",
-      "trigger": "制約と操作を整理したときに 格子点と gcd による方向ベクトル正規化 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc219-f「Cleaning Robot」では、反復移動を一周期の変位ベクトルによる平行移動同値類へ分け、各類の訪問区間の和を数える。この状態表現から答えを構成する。で 格子点と gcd による方向ベクトル正規化 を問題固有の状態へ適用する。",
+      "name": "反復経路の平行移動分解",
+      "trigger": "同じ移動列を非常に多く繰り返し、一周期後の変位が一定であるとき。",
+      "application": "一周期の訪問集合を求め、全体をその集合の等差的な平行移動の union として扱う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "格子点の orbit 正規化",
+      "trigger": "点集合の重複条件が固定ベクトルの整数倍差で表されるとき。",
+      "application": "ベクトル方向の整数座標 q と、それに不変な剰余 key を作り、group 内を一次元ソートする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "各基準点の K 個の像を全て数えるのではなく、その像が V の別基準点の系列へ初めて吸収される正の shift d までだけ新規と数える。",
+      "reusablePerspective": "有限集合を同じベクトルで多数回動かした union では、各 orbit の開始点列と隣接 gap が新規出現数を決める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "格子点と gcd による方向ベクトル正規化",
+      "text": "二次元累積変位、hash set、floor division、grouping と sort",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "総変位が零の場合を分離し、負方向を含む同値類 key と区間端点を正規化する。",
+      "text": "V には開始点と一周期終了点を含めて重複除去する。a=0 なら x,y を交換し、さらに a>0 へ座標全体を反転すると正規化しやすい。負の X に対する floor divisionを切り捨て除算で代用せず、積と答えは 64 bit にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Cleaning Robot 型の問題に対し、格子点と gcd による方向ベクトル正規化を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大回数の同一経路反復を一周期集合の平行移動 union と見なし、格子 orbit の gap 集計へ落とせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "総変位が零の場合を分離し、負方向を含む同値類 key と区間端点を正規化する。",
+      "text": "変位が0の例と、同じ orbit に q=0,2 がある例を手計算し、後者の最初の基準点が min(2,K) 回だけ新規マスを作る理由を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

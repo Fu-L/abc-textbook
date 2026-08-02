@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc275-f「Erase Subarrays」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "最終的に各 a_i を残すか消すかを b_i∈{1,0} で表すと、目標和は Σa_i b_i=x になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "1 回の操作で消せるのは元の添字上で連続する 0 の塊であり、必要操作数は 0-run の個数、すなわち 1→0 の境界数になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc275-f「Erase Subarrays」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "prefix、残した要素の和、直前を残したかの DP で、0-run を開始する時だけ費用 1 を加える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "和の knapsack 状態に直前 bit を足すだけで、区間削除回数を局所遷移として数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "通常の部分和 DP で消した要素数を最小化する。",
+        "decision": "rejected",
+        "decisionReason": "同じ個数を消しても連続なら 1 操作、分散すれば複数操作なので、削除個数は目的関数を表さない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "b_0=1 と仮定すれば、先頭から削除する場合も通常の 1→0 遷移として数えられ、端の特別扱いが消える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Erase Subarrays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "a_i は正なので、残した和が M を超えた状態は将来 1,…,M に戻らず、保持しなくてよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc275-f「Erase Subarrays」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "dp[sum][last] を最小操作数として dp[0][1]=0 から始める。a_i を残すなら sum+a_i,last=1 へ同費用、消すなら sum,last=0 へ last=1 のときだけ +1 して更新し、各 x の min(dp[x][0],dp[x][1]) を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc275-f「Erase Subarrays」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "run 数を数える 0/1 DP",
+      "trigger": "選択結果の連続 block 数が費用になり、左から 1 要素ずつ決められるとき。",
+      "application": "直前の選択状態を持ち、block を開始する境界でだけ費用を増やす。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc275-f「Erase Subarrays」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "目的値で切る knapsack",
+      "trigger": "重みが正で、必要な部分和が上限 M までに限られるとき。",
+      "application": "sum≤M の状態だけを保持して全 x の最小費用を同時に求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "区間を何度消すかという操作列を、最終的な keep/delete 列の 0-run 数へ変換すると、操作順序が消えて局所 DP になる。",
+      "reusablePerspective": "区間操作の最小回数では、最終状態を二値列にして変化点や連結成分数として費用を書けないか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "0/1 knapsack の最小値 DP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "二値列の run と境界",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "到達不能を十分大きい INF で初期化し、rolling array を使う場合は各 i で次配列を初期化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "最後が削除中でもその 0-run は開始時に既に数えているため、末尾で追加費用は不要である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Erase Subarrays 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "複数の区間削除後に得られる和ごとの最小操作数を、keep/delete run の knapsack DP で一括計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "keep/delete 列 1001011000 の 0-run と操作数を対応させ、先頭・末尾の 0-run が遷移のどこで数えられるか追跡する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

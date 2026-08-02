@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc393-e「GCD of Subset」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "A_iを含むK要素のGCD候補dはA_iの約数であり、さらに列全体でdの倍数がK個以上なければならない。この二条件は十分でもある。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "値上限10^6なので、各dの倍数個数を倍数sieveで全て数え、条件を満たすdをその倍数へ配れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc393-e「GCD of Subset」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "frequencyの倍数和でvalid divisorを判定し、valid dを倍数nの答えへ昇順上書きする",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "t[d]=Σ_{multiple}freqをO(V log V)で求め、t[d]≥Kなら全multiple nのbest[n]=dを更新すれば最大valid divisorが残る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各A_iの全約数を列挙し、その都度全配列で倍数個数を数える",
+        "decision": "rejected",
+        "decisionReason": "要素ごとの重複計算が大きく、同じ値・同じ約数の判定を何度も繰り返す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数線形結合で表せる値の集合が gcd の倍数全体なので、割り切れ条件が可解性の必要十分条件になる。",
+        "text": "GCDをちょうどdにする必要はなく「少なくともdで割れる」K個を選べば、そのGCDはd以上で、最大候補探索の十分性が得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "GCD of Subset 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "dを昇順に処理してbest[multiple]=dと代入すれば、最後の値が最大のvalid約数になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc393-e「GCD of Subset」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "freq[value]を数える。d=1..Vでmultipleを走査してt[d]を求める。t[d]≥Kのdについて全multipleへbest[multiple]=dを設定し、各A_iにbest[A_i]を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc393-e「GCD of Subset」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "倍数sieve",
+      "trigger": "全dについて入力中のdの倍数個数を求めたいとき。",
+      "application": "frequencyをmultiple方向に足す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "gcd と拡張 Euclid",
-      "trigger": "制約と操作を整理したときに gcd と拡張 Euclid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc393-e「GCD of Subset」では、主解法候補として、gcd で可解性を分離し、必要なら拡張 Euclid により一次合同式の係数を構成する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で gcd と拡張 Euclid を問題固有の状態へ適用する。",
+      "name": "約数条件の倍数配布",
+      "trigger": "各nに対する最大valid divisorを一括計算したいとき。",
+      "application": "valid dからその倍数nへ値を伝播する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "選ぶK要素の組合せを考えず、候補GCD dごとに「選択可能な母集団size」だけ判定すればよい。",
+      "reusablePerspective": "subsetのGCD最大化では、dで割れる要素数という単調な可否条件へ切り替える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "gcd と拡張 Euclid",
+      "text": "約数・倍数列挙の調和級数計算量を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。",
+      "text": "V=max(A)までに配列を絞り、t[d]とfrequencyはNを保持できる型にする。昇順上書きか降順初回代入のどちらかを一貫する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "GCD of Subset 型の 列の順序と prefix 状態に対し、gcd と拡張 Euclidを選び、状態と証明を一貫して設計できる。",
+      "text": "各要素を含むK-subsetの最大可能GCDを、倍数個数と約数配布で一括計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "0 を含む gcd、負係数、lcm を積から計算するときの overflow を扱う。",
+      "text": "N≤12で各iを含むK-combinationを全列挙し、duplicate値、K=1,N、A_i=1をsieve結果と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

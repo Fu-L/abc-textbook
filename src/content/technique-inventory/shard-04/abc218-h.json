@@ -17,77 +17,91 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc218-h「Red and Blue Lamps」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "赤青を交換しても異色になる隣接辺は変わらないため、選ぶ少数色の個数を min(R,N-R) としてよい。A_i は全て正なので、公式の交換操作により少数色が隣り合わない最適解を選べる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "少数色のランプ i を孤立して選ぶと、左右の境界辺の報酬をまとめた B_i=A_{i-1}+A_i を得る。端では存在する一辺だけを使うため、問題は列 B から隣接しない R 個を選ぶ最大和へ変わる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc218-h「Red and Blue Lamps」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "B の最大要素を選ぶたび、隣接三要素を一つの補正値へ縮約する公式の貪欲法を、priority queue と双方向連結で実装する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "局所三要素の「中央を選ぶ／両隣を選ぶ」という二場合を補正値 B_{i-1}-B_i+B_{i+1} に保存でき、選択数を一つ減らした同型問題へ帰着できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "位置と選んだ個数を状態にした通常の DP で、隣接しない R 要素の最大和を求める。",
+        "decision": "rejected",
+        "decisionReason": "正しいが状態数が N×R となり、R が N/2 程度まである制約では実行できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "選択一個ごとの罰金を導入し、個数付き線形 DP と二分探索を行う。",
+        "decision": "rejected",
+        "decisionReason": "公式に示された有効な別解だが、個数に関する上凸性と tie-break を伴うため、この record では局所縮約を直接追える貪欲法を採用する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Red and Blue Lamps 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "内部の最大値 B_i を確定した後、三要素を B_{i-1}-B_i+B_{i+1} に置き換えると、元問題で中央を選ばない場合の両隣の利益差まで縮約後の一要素が表す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc218-h「Red and Blue Lamps」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "R を min(R,N-R) にし、B_1=A_1、B_N=A_{N-1}、内部 B_i=A_{i-1}+A_i を作る。最大 B_i を R 回取り出して答えへ加え、端なら二要素を、内部なら両隣を削除して補正値を置き、隣接 link と heap を更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc218-h「Red and Blue Lamps」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "色反転による少数側への正規化",
+      "trigger": "二色の役割を交換しても目的値が不変で、片方の個数だけが指定されるとき。",
+      "application": "選ぶ色の個数を min(R,N-R) に抑え、構造定理を少数側に適用する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "greedy choice と交換論法",
-      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc218-h「Red and Blue Lamps」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "name": "隣接非選択最大和の局所縮約",
+      "trigger": "列から隣接しない要素を固定個数選び、最大値の選択を補正値付きの短い列へ移せるとき。",
+      "application": "最大要素と両隣を縮約し、priority queue と linked list で貪欲選択を反復する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "元の報酬は辺に付くが、少数色が孤立する最適解を示すことで、各少数色ランプへ隣接二辺の報酬を重複なく移せる。",
+      "reusablePerspective": "局所境界に報酬が付く二色列では、同色ブロックの交換で最適解の形を絞り、辺の重みを選択頂点の重みへ移せないか考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "greedy choice と交換論法",
+      "text": "交換法、priority queue、双方向 linked list、隣接非選択 DP の構造",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "heap 内の古い候補を version または alive 情報で捨て、縮約後の左右 link を正しくつなぐ。端点の縮約は内部の三要素式と分け、重み和は 64 bit にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Red and Blue Lamps 型の 区間端点と包含関係に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "text": "隣接辺報酬の二色列を隣接非選択問題へ変形し、局所補正を保存する priority-queue 貪欲法を設計できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "三要素で中央を選ぶ解と両端を選ぶ解を比較し、補正値 B_left-B_mid+B_right が何を持ち越すかを式から再導出する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,107 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc238-ex「Removing People」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "残り k 人の各段階で選ぶ人は k 通り等確率なので、全選択履歴は N! 通りが等確率であり、総コストを全履歴で足して N! で割れば期待値になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "削除順を逆にして人を円へ戻すと、新しく置く人を直前に除いた候補は、その時点で両隣にいる人のうち新しい人の方向を向く者だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc238-ex「Removing People」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "残っている人の集合を状態にして、各段階で選ぶ人と削除される人を前向きに遷移する。",
+        "decision": "rejected",
+        "decisionReason": "削除後の隣接関係は集合全体に依存し、2 の N 乗状態になって N=300 を扱えない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "削除を逆再生し、配置済みの端点 l,r の間を埋める手順数 num[l][r] と全手順のコスト総和 cost[l][r] を区間 DP で求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "区間内で最初に戻す人 i を決めると残りは (l,i) と (i,r) に独立分割され、両側の配置順だけを二項係数で混ぜればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "i を戻す方法数 c1 は S_l=R と S_r=L の成立個数で、対応するコスト総和 c2 は前者なら i−l、後者なら r−i を足した値になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Removing People 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "左右の内部人数を x,y とすると、一組の左右手順を混ぜる順序は binom(x+y,x) 通りであり、手順数とコスト総和を積の微分則のように合成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc238-ex「Removing People」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "円環上の逐次削除を reverse process の挿入木へ変え、最初の挿入を根とする interval decomposition と count/sum の二量 DP で全履歴を集計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc238-ex「Removing People」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "削除過程の逆再生",
+      "trigger": "前向き削除では隣接関係が複雑に変わるが、逆向き挿入では新要素の両隣が一意に定まるとき。",
+      "application": "削除順を逆にして空隙へ人を挿入し、直前の削除者候補を空隙の両端だけに限定する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc238-ex「Removing People」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "最初の要素で分割する区間 DP",
+      "trigger": "区間内で最初に処理する位置を決めると左右が独立になり、処理順を自由に interleave できるとき。",
+      "application": "分割位置 i を全探索し、左右の手順数、コスト総和、二項係数を合成する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "期待値の全事象総和化",
+      "trigger": "確率過程の全履歴が同じ確率を持ち、各履歴の加算量を組合せ DP で数えられるとき。",
+      "application": "各状態で手順数とコスト総和を同時に持ち、最後に全履歴数 N! の逆元を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "区間 (l,r) を初めて分割する i の削除者は、時計回りを向く l と反時計回りを向く r の高々二人であり、同じ挿入順でも削除履歴が二通りになり得る。",
+      "reusablePerspective": "逆過程で一つの構造に複数の前向き操作が対応する場合、可否だけでなく対応数と各操作の重み総和を遷移係数にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "円環区間の扱い、区間 DP、二項係数による独立列の interleaving、法上の期待値を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "隣接端点では num=1、cost=0 とし、長さの短い円環区間から計算する。左右の空区間もこの基底で統一する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "最後に残る人と二番目に残る人を順序付きで選び、二人が切る二つの円環区間の DP を interleave して、二人だけの段階の移動コストも加える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "cost の合成では、新規コスト×左右手順数に加え、左 cost×右手順数×c1 と左手順数×右 cost×c1 の両項を入れる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Removing People 型の 文字列の prefix・suffix と一致関係に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "円環上の等確率削除過程の期待総コストを、逆挿入の区間 DP で全履歴の重み総和として求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "削除後の状態が非局所的なら、最終状態から要素を戻したときに境界だけで遷移を記述できないか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "期待値 DP が複雑なときは、等確率な履歴を数える DP と、その履歴上の量の総和 DP に分離する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

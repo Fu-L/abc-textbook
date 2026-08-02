@@ -17,77 +17,135 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc327-g「Many Good Tuple Problems」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各pair(S_i,T_i)をlabel iのdirected edgeと見ると、条件を満たす0/1頂点彩色が存在することはunderlying multigraphがbipartiteであることと同値である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "bipartite multigraphにはloopがなく、各undirected labeled edgeの向きが2通りなので、原問題の答えはundirected edge-labeled bipartite multigraph数a(N,M)の2^M倍になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "parallel edgeを1本へ潰したsupportがk-edge simple bipartite graphなら、M labeled edgeをk support edgeへsurjectiveに割り当てる通り数b(M,k)だけ元multigraphが対応する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc327-g「Many Good Tuple Problems」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "simple bipartite graphをedge数別にconnected-component DPで数え、surjection数を掛けてmultigraphへ戻す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "巨大Mはi^Mの高速冪だけへ閉じ込め、N≤30のsimple support edge上限L≤225で全計数を行える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "頂点の2-coloringを選びcross edge列を数えて全coloring数で割る。",
+        "decision": "rejected",
+        "decisionReason": "同じdisconnected bipartite graphのvalid coloring数はcomponent数で変わり、一律な係数では重複を除けない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "N^{2M}個のendpoint sequence pairを列挙してbipartite判定する。",
+        "decision": "rejected",
+        "decisionReason": "Mが10^9で列挙不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "colored simple bipartite graph数はg(n,m)=Σ_{i=0}^n C(n,i)C(i(n-i),m)で、i black・n-i white間のedgeを選ぶ。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Many Good Tuple Problems 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "anchor頂点を含むconnected componentで分ける除原理により、colored connected数hをgから抽出し、connected uncolored bipartite graph数はh/2になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "uncolored graph fはconnected componentをanchor付きで組み立て直し、最後にa(N,M)=Σ_k f(N,k)b(M,k)とする。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc327-g「Many Good Tuple Problems」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "L=floor(N/2)ceil(N/2)までbinomialを前計算しg(n,m)を作る。h(n,m)=g(n,m)−Σ_{i<n,j}C(n-1,i-1)h(i,j)g(n-i,m-j)でcolored connected数を求め、c=h/2とする。f(0,0)=1から、vertex 1を含むconnected componentを選ぶ標準漸化式f(n,m)=Σ_{i=1..n,j}C(n-1,i-1)c(i,j)f(n-i,m-j)でsimple bipartite graphを数える。b(M,k)=Σ_{i=0}^k(-1)^{k-i}C(k,i)i^Mを求め、2^MΣ_{k=0}^L f(N,k)b(M,k)を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc327-g「Many Good Tuple Problems」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "multigraphのsimple support化",
+      "trigger": "parallel edgeを許すlabel付きgraphを数え、異なるedge種類数が小さいとき。",
+      "application": "support graphとedge labelのsurjectionへ分解する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc327-g「Many Good Tuple Problems」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "connected構造の除原理DP",
+      "trigger": "全labelled構造gからconnected構造hを抽出し、再びcomponent集合を組み立てたいとき。",
+      "application": "anchor vertexのcomponentを固定してconvolutionする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "surjectionの包含排除",
+      "trigger": "M labeled要素をk個の箱すべてへ少なくとも1個入れるとき。",
+      "application": "Σ(-1)^{k-i}C(k,i)i^Mで数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "proper coloringの重複補正",
+      "trigger": "connected bipartite graphをproper 2-coloring付きで数えたとき。",
+      "application": "connectedならcolor swapの2通りなので2で割る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "Mが巨大でも、bipartite simple supportのedge種類数は最大floor(N²/4)なので、M依存はsupport edgeへのsurjectionだけに分離できる。",
+      "reusablePerspective": "巨大個数の反復要素を持つ構造は、distinct supportとlabel付きmultiplicity割当へ分けると小dimension DP＋高速冪になる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "bipartite graphとproper 2-coloring",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "labelled connected graphのcomponent DP",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "第2種Stirling数・surjection",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "modular exponentiation",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "singleton zero-edge componentではh(1,0)=2、c(1,0)=1となるため、m=0をDP tableから落とさない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "fのcomponent recurrenceはvertex 1を含むconnected componentを一意に選び、binomial係数とi,n-iの向きを揃える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "M≥1なのでb(M,0)=0とし、包含排除の負値とinv2をmod 998244353で正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Many Good Tuple Problems 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "good sequence pair数を、simple bipartite supportのedge数分布とlabeled-edge surjectionの積和として求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "N=3,m=0でempty graphがf=1になるcomponent recurrenceと、1本edge supportへM labeled parallel edgeを割り当てるb(M,1)=1を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

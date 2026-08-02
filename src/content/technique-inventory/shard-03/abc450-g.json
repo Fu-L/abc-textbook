@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc450-g「Random Subtraction」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "最終値 x は各 A_i に符号 c_i∈{±1} を掛けた和である。操作の対称性により、任意 pair の E[c_i c_j] は同じで N のみに依存する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc450-g「Random Subtraction」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "C_N=Σ_{i<j}E[c_ic_j] の recurrence C_N=-1+(N-3)/(N-1) C_{N-1} を求め、ΣA_i^2 と Σ_{i<j}A_iA_j から E[x^2] を計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "最初に二要素を引くとその二符号積は-1、他要素との交差項は相殺し、残り同士は N-1 要素問題と同じ分布になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "ランダムな二要素選択と引く向きを全操作列について列挙し、最終値の二乗を平均する。",
+        "decision": "rejected",
+        "decisionReason": "操作列の分岐数は超指数的で、確率分布を値ごとに保持することもできない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+        "text": "x^2=ΣA_i^2+2Σ_{i<j}c_ic_j A_iA_j なので、必要な確率情報は pair 符号積の期待値一種類だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Random Subtraction 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Σ_{i<j}A_iA_j=((ΣA_i)^2-ΣA_i^2)/2 から入力依存部分も二つの scalar sum に圧縮できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc450-g「Random Subtraction」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "modulus 上で C_1=0 から N まで recurrence を回す。pair 一個当たり期待値 C_N/binom(N,2) を求め、sumSq と pairProduct を使って sumSq+2×expectPair×pairProduct を計算する。N=1は別処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc450-g「Random Subtraction」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "交換対称性による期待値圧縮",
+      "trigger": "ランダム過程の最終係数が index permutation に対して対称なとき。",
+      "application": "全 pair の相関を一つの N 依存値へまとめる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "条件付き期待値と確率 DP",
-      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc450-g「Random Subtraction」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "name": "一次 moment recurrence",
+      "trigger": "最初の操作で二要素をまとめると小さい同型問題になるとき。",
+      "application": "固定された交差項と残り問題の期待値を足して漸化式を作る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最終値分布を求めず、目的関数を展開して必要な二次 moment だけを対称性で分類する。",
+      "reusablePerspective": "ランダム縮約過程では最初の一手を固定し、残った object が一サイズ小さい同分布になるかを見る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "条件付き期待値と確率 DP",
+      "text": "交換対称性による期待値圧縮、一次 moment recurrenceと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "N=1では binom(N,2) の逆元を取らない。modular fraction の分母 N-1 と pair数が0でない範囲を分ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Random Subtraction 型の 列の順序と prefix 状態に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "ランダム減算の全履歴を列挙せず、符号相関の一次 recurrence から最終二乗期待値を線形時間で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "最初の二要素に関する三種類の pair（互い・片方と外部・外部同士）の寄与を分けて C_N の式を再導出する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,81 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc335-f「Hop Sugoroku」では、遷移幅 A_i を閾値 b で分け、小さい幅は剰余別の遅延 DP へ蓄積し、大きい幅だけ遷移先を直接列挙する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "駒はindexが厳密に増えるので、移動列と最終的な黒square集合は一対一に対応する。dp[i]をiへ到達する移動列数とすると、iからはj≡i mod A_iかつj>iの全squareへ加算する必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc335-f「Hop Sugoroku」では、遷移幅 A_i を閾値 b で分け、小さい幅は剰余別の遅延 DP へ蓄積し、大きい幅だけ遷移先を直接列挙する。この状態表現から答えを構成する。",
+        "approach": "A_iをsqrt Nで大小分割し、小stepは剰余別累積、大stepは遷移先列挙する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "小stepの多数遷移をlazyなbucketで共有し、大stepは遷移先が少ないため、両方の総量をO(N√N)へ均衡できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全iからi+A_i,i+2A_i,…へdp[i]を直接配る",
+        "decision": "rejected",
+        "decisionReason": "A_i=1が多数あると一頂点からO(N)遷移し、合計O(N^2)になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "小さい幅の更新種類は b 個で各位置の受取をまとめられ、大きい幅からの遷移数は一要素あたり N/b 以下なので、両処理が全遷移を重複なく覆う。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Hop Sugoroku 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "境界B≈√Nに対し、d≤Bはbucket[d][r]へdp[i]を足せば、以後同じ剰余rの位置が到着時にまとめて受け取れる。d>Bは一つのiからの遷移先が高々N/B個なので直接加算してよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc335-f「Hop Sugoroku」では、遷移幅 A_i を閾値 b で分け、小さい幅は剰余別の遅延 DP へ蓄積し、大きい幅だけ遷移先を直接列挙する。この状態表現から答えを構成する。",
+      "text": "dp[1]=1としindexを昇順に処理する。iでは全d≤Bのbucket[d][i mod d]をdp[i]へ加える。A_i≤Bならdp[i]をbucket[A_i][i mod A_i]へ蓄え、A_i>Bならj=i+A_iからNまでstep A_iでdp[j]へ加える。最後に全dp[i]を合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "DP と平方根分割による遷移数評価",
-      "trigger": "制約と操作を整理したときに DP と平方根分割による遷移数評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc335-f「Hop Sugoroku」では、遷移幅 A_i を閾値 b で分け、小さい幅は剰余別の遅延 DP へ蓄積し、大きい幅だけ遷移先を直接列挙する。この状態表現から答えを構成する。で DP と平方根分割による遷移数評価 を問題固有の状態へ適用する。",
+      "name": "平方分割",
+      "trigger": "更新step dが小さいと遷移先が多く、大きいと少ないという反比例構造がある。",
+      "application": "d≤√Nを剰余bucket、d>√Nを陽な列挙に分ける。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "特殊な漸近計算量の見積もり",
-      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc335-f「Hop Sugoroku」では、遷移幅 A_i を閾値 b で分け、小さい幅は剰余別の遅延 DP へ蓄積し、大きい幅だけ遷移先を直接列挙する。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "name": "剰余classへのlazy加算",
+      "trigger": "遷移条件がj≡i mod dで、同じd,rから将来位置への寄与が共通する。",
+      "application": "bucket[d][r]に到達数を保存し、位置jで該当する全小dの値を受け取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
-  "asymptoticComplexity": {
-    "time": "O(N√N)（公式解法全体。特殊な計算量解析を含む）",
-    "evidenceIds": ["evidence-official-analysis"]
-  },
+  "problemSpecificInsights": [
+    {
+      "insight": "小stepから未来全体へ配る代わりに、未来位置が自分の剰余classを照会する向きへ主客転倒すると一更新O(1)になる。",
+      "reusablePerspective": "等差数列更新はstepが小さい範囲をmod別の受取累積へ反転できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "DP と平方根分割による遷移数評価",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "特殊な漸近計算量の見積もり",
+      "text": "DAG型数え上げDP、剰余class、平方分割の計算量均衡。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "幅ごとの index の剰余を揃え、現在位置の寄与を遅延表へ加える順序を固定する。",
+      "text": "bucketへdp[i]を入れるのは、その時点までの全到達寄与をdp[i]へ集めた後に行う。停止は任意なので答えはdp[N]だけでなくΣdp[i]である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Hop Sugoroku 型の問題に対し、DP と平方根分割による遷移数評価を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "text": "操作終了時に黒くなり得るsquare集合の種類数をmod 998244353で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "幅ごとの index の剰余を揃え、現在位置の寄与を遅延表へ加える順序を固定する。",
+      "text": "全A_i=1、全A_i>N/2、A_iが境界B前後、N=1を、全path列挙と比較しbucketの自己寄与が混ざらないことを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
+  "asymptoticComplexity": {
+    "time": "O(N√N)（公式解法全体。特殊な計算量解析を含む）",
+    "evidenceIds": ["evidence-official-analysis"]
+  },
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

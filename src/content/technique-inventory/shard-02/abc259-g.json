@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc259-g「Grid Card Game」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "行と列を何も選ばなければ得点0なので、−10^100の大失敗を含む選択は最適にならない。従って負のマスで行と列を同時に選ぶ組合せは、禁止制約として扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "正のマスを全て獲得したΣ+を基準にすると、最大化は『取り逃した正値』『獲得した負値』『大失敗』による減点を最小化する問題へ変わる。これらは行・列の二値選択に対する単項費用と組合せ費用である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc259-g「Grid Card Game」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "H個の行またはW個の列の選択を全列挙し、残り側の最善選択を評価する。",
+        "decision": "rejected",
+        "decisionReason": "H,Wはともに100まであり、片側だけでも2^100通りになる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "Σ+からの減点をs-t cutの容量として表し、最小カットを最大流で求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "行・列の選択側をcutの所属で表すと、正値の取り逃しは有限辺、負値上の同時選択禁止は無限容量辺として正確に符号化できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+        "text": "cutでR_iがT側なら行iを選択、C_jがS側なら列jを選択と対応させる。S→R_iは行選択時の負値総和、C_j→Tは列選択時の負値総和を課す。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Grid Card Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "A_ij>0ではR_i→C_jに容量A_ijを置くと、行も列も非選択のときだけ辺がS側からT側へ切れて取り逃しを払う。A_ij<0ではC_j→R_iを無限容量にすると、行・列の同時選択だけが禁止される。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc259-g「Grid Card Game」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "S,T、行頂点R_i、列頂点C_jを作る。S→R_iへ行内負値の絶対値和、C_j→Tへ列内負値の絶対値和を張る。正マスはR_i→C_jへA_ij、負マスはC_j→R_iへ十分大きい容量を張る。答えはΣ+−最大流、すなわちΣ+−最小カット容量である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc259-g「Grid Card Game」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "利益最大化から損失最小化への基準移動",
+      "trigger": "正負の利益が混在する二値選択で、全ての正利益を得た仮想状態からの逸失として費用を書けるとき。",
+      "application": "全正値和Σ+を先に得たとみなし、各選択による減点だけをcut容量へ割り当てる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最大流・最小カット定理",
-      "trigger": "制約と操作を整理したときに 最大流・最小カット定理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc259-g「Grid Card Game」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 最大流・最小カット定理 を問題固有の状態へ適用する。",
+      "name": "二値選択の最小s-t cut",
+      "trigger": "変数ごとの単項費用と、二変数の特定組合せへの非負費用・禁止制約を有向辺で表せるとき。",
+      "application": "行・列の選択をcutの所属に対応させ、減点が発生する所属パターンだけで辺が切れるネットワークを作る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "負マスの絶対値を行と列の両方の単項費用へ入れても、無限容量辺が同時選択を禁じるため二重払いは起きない。この禁止制約が単項化を成立させる。",
+      "reusablePerspective": "相互作用費用を変数ごとへ配るときは、二重計上する組合せが別の制約で不可能になっていないかを確認するとcut表現が簡単になる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "最大流・最小カット定理",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "最大流・最小カット定理",
+      "text": "cutの所属による二値選択の符号化",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "無限容量は、全ての有限減点の総和より大きい64bit整数にする。Σ+、行列の負値和、最大流も64bitで保持する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "R_iとC_jでは『選択』に対応するcut側が逆である。四つの選択組合せごとに各有向辺が切れる条件を表にして向きを検算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Grid Card Game 型の 盤面上の位置と局所遷移に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。",
+      "text": "行・列の協調選択と符号付き得点を損失最小化へ直し、有限費用と禁止制約を最小カットへ写せる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "ネットワーク図だけで済ませず、R_i・C_jの各cut側が選択のどちらを表すかを宣言し、正マスの四場合と負マスの同時選択で切断容量が目的の減点に一致するかを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc218-e「Destruction」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "削除した辺の C_i を得る問題は、全辺をいったん削除した総額から、連結にするため戻す辺の C_i を差し引く問題と見られる。したがって、残す辺の重み和を小さくしたい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "C_i<0 の辺は削除すると罰金になる一方、余分に残しても連結性を損なわないので、全域木に選ばれなかった負辺も削除しない方がよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc218-e「Destruction」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "辺を C_i の昇順に Kruskal 法で処理し、異なる連結成分を結ぶ辺は残し、既に連結な両端を持つ正辺だけを削除報酬へ加える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "連結に必要な辺を最小全域木と同じ交換則で選びながら、MST 外の負辺を残すという例外も符号判定で正しく扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "正の大きい辺から実際に削除し、そのたびにグラフが連結か判定する。",
+        "decision": "rejected",
+        "decisionReason": "貪欲な選択自体は成立するが、辺削除を伴う動的連結性を各回高速に判定する実装が必要になり、単純な BFS/DFS の反復では制約に収まらない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "cut property により異なる成分を結ぶ最小辺は安全であり、閉路を避けた採用を繰り返せば最適な全域木になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Destruction 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Kruskal 法で両端が既に同じ成分にある辺は連結維持には不要であり、その重みが正のときだけ削除する価値がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc218-e「Destruction」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "全辺を重み昇順に並べて DSU で処理する。成分が異なれば unite して辺を残し、同じ成分なら C_i>0 の場合だけ答えに C_i を加え、C_i≤0 なら報酬を悪化させないため残す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc218-e「Destruction」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "削除利益から残存コストへの反転",
+      "trigger": "要素を削る利益を最大化しつつ、残した集合が連結などの被覆条件を満たすとき。",
+      "application": "全削除時の利益を基準に、条件を満たすため戻す要素のコスト最小化として考える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最小全域木と cut property",
-      "trigger": "制約と操作を整理したときに 最小全域木と cut property の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc218-e「Destruction」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 最小全域木と cut property を問題固有の状態へ適用する。",
+      "name": "Kruskal 法と DSU",
+      "trigger": "無向グラフを連結に保つため必要な辺を、辺重みの和を小さく選びたいとき。",
+      "application": "軽い辺から成分間だけを採用し、cycle を作る正辺を不要と判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最小全域木だけを残すのではなく、MST に入らない負辺も残す必要がある。負辺は「余分な辺」でも削除報酬が負だからである。",
+      "reusablePerspective": "最適な基底を使う変形では、基底外の要素を自由に残せるか、その符号が目的値を改善するかを別に確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "最小全域木と cut property",
+      "text": "最小全域木、Kruskal 法、Disjoint Set Union、符号付き目的関数の変形",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同重み辺の順序が答えへ影響する場合は一括判定してから併合する。",
+      "text": "自己ループや多重辺も DSU の「既に同成分」で自然に処理できる。C_i=0 は加算してもしなくても値は同じだが、答えは 64 bit 整数で保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Destruction 型の 頂点と辺からなる状態グラフに対し、最小全域木と cut propertyを選び、状態と証明を一貫して設計できる。",
+      "text": "連結性を保つ削除最適化を残存辺の最小化へ反転し、MST と負辺の例外を同時に扱える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同重み辺の順序が答えへ影響する場合は一括判定してから併合する。",
+      "text": "負辺だけで cycle ができる小例を作り、「MST にないから削除」が誤りになることを先に確認してから Kruskal の分岐を復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

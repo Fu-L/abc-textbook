@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc225-g「X」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "同じ斜め方向に連続してXを付けたマスは一本の線分でつながる。したがって必要線分数は、二つの対角方向それぞれで『選択マスだが一つ前の斜めマスは未選択』となるrunの始点数である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc225-g「X」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "総和ΣAから、未選択マスのAと斜めrun開始のCを足す最小コストを引く形にし、各マスの選択をsource側とするs-t最小カットへ変換する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "利益と罰金が二値ラベル間の局所コストへ分解でき、選択→斜め前未選択のCが有向cut辺と一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各マスを独立に A_ij-2C が正なら選ぶ。",
+        "decision": "rejected",
+        "decisionReason": "隣接して選んだXは線分を共有するため一マスの費用は独立でなく、斜め方向のrun構造を無視すると最適集合を失う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+        "text": "source→cellに容量Aを張るとcellを未選択側へ置くcut費用になり、cell→斜め前cellの容量Cは前者だけ選択したrun開始時に限って切られる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "X 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "盤外は常に未選択とみなすため、上端から始まる二方向のrunにはcell→sinkの容量Cをそれぞれ張れば同じ局所式で扱える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc225-g「X」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各マスへsourceからA_ij、二つの上側斜め前マスへ各C、前マスが盤外ならsinkへCの辺を張り、ΣA_ij−mincutを答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc225-g「X」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "連続runの開始点数え上げ",
+      "trigger": "隣接する選択要素を一操作でまとめられ、費用が連結成分やrunの個数で決まるとき。",
+      "application": "各対角線上の選択列を見て、0から1へ変わる位置だけを新しい線分の開始として数える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最大流・最小カット定理",
-      "trigger": "制約と操作を整理したときに 最大流・最小カット定理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc225-g「X」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 最大流・最小カット定理 を問題固有の状態へ適用する。",
+      "name": "二値ラベル最適化のs-t最小カット",
+      "trigger": "選択・未選択の単項コストと、特定の向きのラベル不一致に対する非負罰金の和を最小化するとき。",
+      "application": "単項コストをsource/sink辺、不一致罰金をラベル間の有向辺としてcut容量に一致させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "X一個を二線分と数えるのでなく、各対角方向の選択runの開始だけを数えると、線分共有が隣接二状態の局所罰金になる。",
+      "reusablePerspective": "描画や起動の共有費用は、連続区間の個数を0→1境界の個数へ書き換えて局所化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "grid対角線上のrunと二値ラベルの局所コスト",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "最大流・最小カット定理",
+      "text": "s-t最小カットによる利益最大化",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "二つの対角方向を両方張り、盤外前駆をsinkとして扱う。ΣAとcut容量は64 bitにし、答えは必ずΣA−maxflowの符号で復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "X 型の 盤面上の位置と局所遷移に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。",
+      "text": "共有線分の利益最大化をrun境界の局所費用へ直し、二値ラベル最小カットとして構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "連続すると費用を共有する選択では、一要素の費用を決めず、各方向の0→1境界だけに費用を置けないか考える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

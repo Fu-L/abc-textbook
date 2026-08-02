@@ -17,77 +17,91 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc431-f「Almost Sorted 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "値 v 未満の要素の相対順が決まった時、v を置ける隙間は v-D 以上 v 未満の要素の直後と末尾だけで、その個数は Σ_{u=v-D}^{v-1}cnt[u]+1 である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc431-f「Almost Sorted 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "値を昇順に挿入し、同値 cnt[v] 個を許される隙間へ分配する組合せ数を値ごとに掛ける。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "挿入位置数が既配置列の具体的順序によらず頻度だけで決まり、積 ∏ binom(窓内個数+cnt[v],cnt[v]) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "A の全ての相異なる順列を生成し、almost sorted 条件を検査する。",
+        "decision": "rejected",
+        "decisionReason": "重複要素を除いても順列数が階乗規模になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "v の直前に v+D より大きい値を置けない条件から、v は値差 D 未満の既配置要素の後ろにだけ挿入できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Almost Sorted 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "区別できない cnt[v] 個を区別できる g 個の隙間へ配る方法数は重複組合せ binom(g+cnt[v]-1,cnt[v]) である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc431-f「Almost Sorted 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "値の頻度 cnt を作り、スライド窓で w=cnt[v-D]+…+cnt[v-1] を保つ。各 v で答えに binom(w+cnt[v],cnt[v]) を掛け、窓へ cnt[v] を追加して古い頻度を除く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc431-f「Almost Sorted 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "挿入 DP",
+      "trigger": "値順に要素を追加すると、既存要素の相対順を保ったまま挿入箇所を数えられるとき。",
+      "application": "各値の同一要素群を現在列の許可された隙間へまとめて分配する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc431-f「Almost Sorted 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "重複組合せ",
+      "trigger": "同一視される複数要素を区別される箱へ個数制限なしで配るとき。",
+      "application": "cnt[v] 個を w+1 個の挿入隙間へ配り二項係数を得る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "頻度のスライド窓",
+      "trigger": "値 v の遷移が直前 D 幅の頻度和だけに依存するとき。",
+      "application": "値を一つ進めるごとに cnt[v] を追加し cnt[v-D] を削除する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "条件を壊さない挿入箇所が完成途中の並びではなく値域窓の総個数だけで決まるため、DP 状態が積へ退化する。",
+      "reusablePerspective": "値順挿入で配置の詳細が消えるなら、各段階の分岐数を独立な組合せ因子として掛けられる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "挿入 DP、stars and bars、二項係数、頻度配列とスライド窓を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "cnt の添字が 1 未満の範囲は 0 とし、二項係数を N まで前計算する。w は v を加える前の [v-D,v-1] に一致させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Almost Sorted 2 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "almost sorted 条件を満たす重複順列数を、値順挿入と重複組合せの積で線形時間に数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "挿入可能な隙間数が w+1 で、因子が binom(w+cnt[v],cnt[v]) になることを小例で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,67 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc255-e「Lucky Numbers」では、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "A_1=Zと置くと和条件から全項が一意に伝播し、A_i=(-1)^(i+1)Z+B_iというZの係数が±1の形になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc255-e「Lucky Numbers」では、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。この状態表現から答えを構成する。",
+        "approach": "各位置・ラッキーナンバーが要求するZへの投票",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "A_i=X_jとなるZを全N M組から計算し、同じZの頻度を数えれば、そのZでラッキーになる位置数を直接最大化できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "Zの数値範囲を走査する",
+        "decision": "rejected",
+        "decisionReason": "S_i,X_jが±10^9でZ候補範囲は広く、必要な候補は入力から導かれるN M個だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
+        "text": "B_1=0、B_i=S_(i-1)-B_(i-1)とすればZに依存しない部分を線形時間で作れる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Lucky Numbers 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "A_i=X_jはZ=(-1)^(i+1)(X_j-B_i)と同値なので、最適Zは必ずこの候補集合に含まれる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc255-e「Lucky Numbers」では、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。この状態表現から答えを構成する。",
+      "text": "Bを漸化式で作り、全i,jについて候補Z=(-1)^(i+1)(X_j-B_i)を連想配列で数える。最大頻度を答えとする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "式変形と frequency map",
-      "trigger": "制約と操作を整理したときに 式変形と frequency map の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc255-e「Lucky Numbers」では、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。この状態表現から答えを構成する。で 式変形と frequency map を問題固有の状態へ適用する。",
+      "name": "一次自由度のアフィン伝播",
+      "trigger": "隣接項の式があり、一つの初期値を決めると全列が決まる。",
+      "application": "A_1をパラメータZとし、各項を符号付きZと定数B_iへ分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "候補パラメータの頻度最大化",
+      "trigger": "各制約を満たすパラメータ値が一意に求まる。",
+      "application": "位置と目標値の各組が要求するZを数え、最多票のZを選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "交互和で現れる符号反転を保ったまま一変数化すると、数列最適化が候補値の同値数え上げへ変わる。",
+      "reusablePerspective": "一自由度の構成で評価条件が等式なら、各評価項目が要求するパラメータ値を列挙して投票問題へ落とせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "式変形と frequency map",
+      "text": "線形漸化式から各項を初期値のアフィン式として表せる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "64ビット整数をキーにした頻度表を使える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "添字 parity による符号反転と負数 key をそのまま正確に保持する。",
+      "text": "B_iと候補Zは負になり得るため符号付き64ビットで保持し、iの偶奇による符号を一致させる。X_jは相異なるので一位置が同じZへ二重投票しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Lucky Numbers 型の問題に対し、式変形と frequency mapを選び、状態と証明を一貫して設計できる。",
+      "text": "条件を満たす数列の中でラッキーナンバーとなる要素数の最大値を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "添字 parity による符号反転と負数 key をそのまま正確に保持する。",
+      "text": "小さい範囲のZを全探索した結果と比較し、正負のS・X、偶奇位置、同じZへ多くの位置が集まる例を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

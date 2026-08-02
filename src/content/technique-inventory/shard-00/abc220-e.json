@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc220-e「Distance on Large Perfect Binary Tree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "頂点数は 2^N-1 なので頂点を生成できないが、同じ深さの頂点は残りの部分木高さも子孫数も全て等しい。深さ d の頂点数自体も 2^d と式で扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "順序付き対 (i,j) を LCA v で一意に分類し、v から両端までの距離を k と D-k に分けると、両端が部分木の高さ内に収まるかと、最初の辺が左右別になるかだけで個数が決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc220-e「Distance on Large Perfect Binary Tree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "LCA の深さごとに、片端が LCA の場合と両端が左右の子部分木にある場合を式で数え、同深さの頂点数を掛ける。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "完全二分木の対称性により個々の頂点を消し、さらに有効な距離分割 k が連続区間になるため、その個数も端点だけで求められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "2^N-1 頂点の木を構築し、各頂点から距離 D の頂点を探索する。",
+        "decision": "rejected",
+        "decisionReason": "N は 10^6 で、木の頂点数そのものが指数的なため入力上の構造を展開できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "残り高さ H=N-1-d に対し、0<k<D の有効範囲は max(1,D-H)≤k≤min(D-1,H) という一つの整数区間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Distance on Large Perfect Binary Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "有効な内部 split 一つにつき、左右の向きを含む順序付き対は 2^{D-1} 個であり、片端が LCA の場合は k=0,D を別々に数える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc220-e「Distance on Large Perfect Binary Tree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "2 の冪を法 998244353 で前計算する。各深さ d で H=N-1-d とし、D≤H なら片端が LCA の 2×2^D を加え、内部 split 区間の長さに 2^{D-1} を掛けて加える。その一頂点分へ 2^d を掛け、全深さを合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc220-e「Distance on Large Perfect Binary Tree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "LCA による頂点対の一意分類",
+      "trigger": "根付き木で二頂点間 path の長さを固定して対を数えるとき。",
+      "application": "LCA から両端への距離分割を列挙し、同じ対を重複させず部分木ごとに数える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc220-e「Distance on Large Perfect Binary Tree」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "対称構造の深さ集約",
+      "trigger": "完全木などで、頂点に依存する量が深さだけで決まるとき。",
+      "application": "一頂点分の数を深さから求め、その深さの頂点数を掛けて明示的な木を消す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "距離 split k を一つずつ調べる必要もなく、高さ制約二つの共通部分が整数区間なので、内部 split 数を区間長だけで集約できる。",
+      "reusablePerspective": "対称な木の path 数え上げで深さ二条件が現れたら、自由変数の可動域が連続区間にならないかを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "根付き木の LCA、完全二分木の深さ別個数、modular exponentiation",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "問題の pair は順序付きなので左右反転と k=0,D の両方を落とさない。内部区間が空なら0とし、D=1 のとき 2^{D-1} を使う項が発生しない境界も分ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Distance on Large Perfect Binary Tree 型の 頂点と辺からなる状態グラフに対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "指数個の完全木を展開せず、LCA・深さ対称性・距離 split 区間から順序付き頂点対を数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "N=3,D=2 で LCA が根の10対と深さ1の各2対を分け、サンプルの14対へ一致させて向きの係数を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

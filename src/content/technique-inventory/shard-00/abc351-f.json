@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc351-f「Double Sum」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "項 (i,j) の寄与は i<j かつ A_i<A_j のとき A_j−A_i である。j を右端として走査すれば、過去の A_i<A_j の個数と総和だけで寄与を計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "値は10^8だが大小関係しか query index に使わないため、座標圧縮して Fenwick Tree の prefix count/sum を利用できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc351-f「Double Sum」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "左から走査し、値別の過去個数 Fenwick と過去値和 Fenwick から A_i<A_j の寄与を一括取得する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各 j の寄与が count·A_j−sum と分離し、query/update 各 O(log N) で全体 O(N log N) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "すべての i<j を列挙して max(A_j−A_i,0) を足す。",
+        "decision": "rejected",
+        "decisionReason": "N=4×10^5 に対する Θ(N²) 項は処理できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "大小・等値関係を保つ順位写像なので、元座標での順序条件と圧縮後の条件が同値になる。",
+        "text": "条件を満たす過去集合 I に対し Σ_{i∈I}(A_j−A_i)=|I|A_j−Σ_{i∈I}A_i なので count と sum の二集約で十分である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Double Sum 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "等値 A_i=A_j の寄与は0なので prefix を < にしても ≤ にしても数値は同じだが、条件の意味を strict に保つと証明が明瞭になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc351-f「Double Sum」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "A の unique sorted 値で rank を作る。j=1..N で rank(A_j) 未満の count c と sum s を二本の Fenwick Tree から得て、答えへ cA_j−s を加える。その後 rank へ count+1,sum+A_j を更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc351-f「Double Sum」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "平面走査＋Fenwick Tree",
+      "trigger": "index 順と値順の二条件を満たす過去要素の集約が必要なとき。",
+      "application": "一方を走査順へ移し、他方を座標圧縮した prefix query で処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "座標圧縮",
-      "trigger": "制約と操作を整理したときに 座標圧縮 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc351-f「Double Sum」では、主解法候補として、比較に必要な順序だけを保って値を座標圧縮し、密な index 上の構造へ写す。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 座標圧縮 を問題固有の状態へ適用する。",
+      "name": "差の総和の count/sum 分解",
+      "trigger": "固定値 x と条件付き集合の Σ(x−a) を求めるとき。",
+      "application": "集合の個数と要素和だけを持ち、x·count−sum とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二重和の max は大小条件を切り出すと線形式になり、必要な統計量が count と sum の二つに落ちる。",
+      "reusablePerspective": "max(x−y,0) を見たら領域 x>y で場合分けし、線形式の係数別集約を探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "座標圧縮",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "座標圧縮",
+      "text": "Fenwick Tree の prefix sum",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。",
+      "text": "値和と答えは 64 bit を使う。query してから現在値を update し、i<j の向きを守る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Double Sum 型の 列の順序と prefix 状態に対し、座標圧縮を選び、状態と証明を一貫して設計できる。",
+      "text": "N² 個の正の差を値順 prefix の count/sum に圧縮し、O(N log N) で二重和を計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "区間端点の隣接関係が必要なら隙間用座標も追加し、lower_bound の重複を除く。",
+      "text": "差を足す対象条件と式を先に展開し、どの統計量が必要か逆算する。Fenwick の query 境界が strict 条件と合うか重複値で試す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

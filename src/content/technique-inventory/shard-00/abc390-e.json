@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc390-e「Vitamin Balance」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各foodはvitamin一種類だけなので、vitaminごとの選択はcalorie予算配分を除けば独立である。まず各種類について予算s以下で得られる最大量M_v[s]を0/1 knapsackで作れる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "残る目的max_{s1+s2+s3=X}min(M1[s1],M2[s2],M3[s3])は三つの非減少列へのbudget配分であり、現在値が最小の列へ次の1 calorieを渡すwater-filling greedyが使える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc390-e「Vitamin Balance」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "vitamin別0/1 knapsackを行い、三列の現在最小値へcalorieを一単位ずつ配る",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "DPがO(NX)、配分がO(X)で済む。最小でない列へ先に予算を足しても現在のminimumを改善せず、後でそのincrementを最小列側と交換できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "food全体で三vitamin摂取量を状態に持つ多次元knapsack",
+        "decision": "rejected",
+        "decisionReason": "摂取量A_iが大きく状態空間を制約できず、種類間の独立性を捨てている。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "各M_v[s]はexact calorie DPのprefix maximumを取って「s以下」へ直すことで非減少になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Vitamin Balance 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "tieした最小列のどれを増やしてもよく、X回後の三予算に対するminimumが最適値になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc390-e「Vitamin Balance」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "v=1,2,3ごとに該当foodだけで0/1 knapsackし、budget prefix max M_vを作る。s_v=0からX回、M_v[s_v]が最小のvを一つ選んでs_v++し、最後の三値のminを答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc390-e「Vitamin Balance」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "category分離knapsack",
+      "trigger": "itemが一categoryだけへ価値を与え、category間は総budgetのみ共有するとき。",
+      "application": "categoryごとの価値-予算frontierを独立計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc390-e「Vitamin Balance」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "water-filling greedy",
+      "trigger": "複数の非減少関数のminimumを総resource制約下で最大化するとき。",
+      "application": "現在最小の関数へresourceを配る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "三vitaminを同時にDPせず、それぞれのPareto frontier M_v[s]だけ作れば、結合は一次元budgetの配分問題になる。",
+      "reusablePerspective": "複数objectiveのmax-minでは、各objectiveのresource-response curveを先に求めてから公平配分する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "0/1 knapsackとprefix maximumを実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "max-min resource allocationの交換論を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "exact DPの到達不能値を0と混同せず、予算以下配列へ変換してからgreedyする。s_v=Xでそれ以上進めない境界も扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Vitamin Balance 型の 整数の約数・剰余構造に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "三種類のmax-min選択を独立knapsack frontierとwater-fillingへ分解しO(NX)で解ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "X≤12でfood subset全探索と全(s1,s2,s3)列挙を行い、step状のM_vとtieが多いcaseでgreedyを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

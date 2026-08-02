@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc360-e「Random Swaps of Balls」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "操作は位置2..Nを対称に扱うため、黒球が先頭にある確率pだけ分かれば、他の各位置の確率はすべて(1−p)/(N−1)となる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "一回の操作で先頭から外へ移る確率は2(N−1)/N²、外から先頭へ移る条件付き確率は2/N²であり、状態数を二つに縮約できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc360-e「Random Swaps of Balls」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "黒球が先頭か否かの二状態確率をK回更新し、最後に位置番号の期待値へ戻す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "対称性によりN個の位置分布を一変数で完全に復元でき、K回の線形漸化式で足りる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "黒球の各位置について確率配列を持ち、全ての交換pairから遷移を加える。",
+        "decision": "rejected",
+        "decisionReason": "区別する必要のないN−1位置を展開し、Nが法に近いほど大きい制約に対応できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "順序付きに独立に二位置を選ぶため、黒球を先頭と外の間で交換する選び方をN²で割る。二位置が同じ場合も「留まる」側へ含まれる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Random Swaps of Balls 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "最終期待値はp×1+(1−p)×(2+…+N)/(N−1)で、確率はmod 998244353の逆元により表す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc360-e「Random Swaps of Balls」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "p=1からK回、leave=2(N−1)/N²、enter=2/N²としてp←p(1−leave)+(1−p)enterを法上で更新する。最後に先頭以外の位置番号平均を用いて期待値を計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc360-e「Random Swaps of Balls」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "対称性によるMarkov状態圧縮",
+      "trigger": "多数の状態が操作に対して同じ役割を持つ確率過程。",
+      "application": "特別な位置とその他というorbitだけを状態にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc360-e「Random Swaps of Balls」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "有限体上の確率計算",
+      "trigger": "答えが分数を素数modで求める形式のとき。",
+      "application": "N²やN−1の除算を逆元へ置き換えて漸化式を実行する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "欲しい期待値を直接遷移させるより、唯一非対称な「位置1にいる確率」を追うと閉じた一次元漸化式になる。",
+      "reusablePerspective": "確率過程では操作群が同一視する状態をまとめ、目的量をその集約状態から復元する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
+      "text": "条件付き確率",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "modular inverse",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "N=1ではN−1で割らず答えは常に1と処理する。ordered pairのN²通りと、異なる二位置を選ぶ場合を混同しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Random Swaps of Balls 型の 区間端点と包含関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な位置集合を先頭・非先頭の二状態へ縮約し、K回後の期待位置を法上で計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "遷移確率は「現在が先頭」「現在が外」の二行を別々に数える。最後の期待値復元まで含めてN=1,2で手計算と照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

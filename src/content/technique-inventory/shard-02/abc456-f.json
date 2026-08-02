@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc456-f「Plan Holidays」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "休日列の局所条件は、各日を休日にする/しない二状態のmin-cost DPで表せる。長さK windowごとに同じ2×2 min-plus遷移の積を求める問題になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc456-f「Plan Holidays」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各A_iを写像 f_a(x,y)=(y,min(x,y)+a) または2×2 min-plus行列として表し、長さKのsliding productをSWAGで維持して全開始位置を評価する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "写像合成は結合的で固定4係数の形に閉じ、SWAGは非可換でもqueue前後stackの累積積により各要素を定数回だけ処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "最初の休日候補 l ごとに長さKの二状態DPを最初から計算する。",
+        "decision": "rejected",
+        "decisionReason": "window数Nに各K段かかり Θ(NK) となる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "隣り合う休日間を2日以上空けない条件は、現在日を休まない状態が直前休日状態からだけ遷移する式 dp0'=dp1 を与える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Plan Holidays 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "最初と最後の休日距離はK-1またはKだけ見ればよく、window境界の A_{l-1}=INF を含む初期vectorで二ケースを吸収できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc456-f「Plan Holidays」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各日の min-plus matrix [[INF,0],[A_i,A_i]] を作る。SWAGで順序付き長さK積をslideし、初期vector (0,A_{l-1}) へ作用させた休日終了stateの最小を答えへ反映する。端点ケースを番兵INFで処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc456-f「Plan Holidays」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "DP遷移のmin-plus行列化",
+      "trigger": "短い状態DPを多数の連続windowで再評価したいとき。",
+      "application": "各要素の遷移を小行列として区間積へ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc456-f「Plan Holidays」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "SWAG",
+      "trigger": "非可換なassociative積をsliding windowごとに求めたいとき。",
+      "application": "front/back stackの向き付き累積積でqueue積を維持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "windowごとのDPは状態数が小さければ、入力要素を遷移operatorに変えてsliding product問題へ移せる。",
+      "reusablePerspective": "min-plus写像も結合則があれば通常のmonoid queueと同じdata structureで扱える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "DP遷移のmin-plus行列化、SWAGと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "matrix積の左右順を日付順に合わせ、SWAG二stackの積順を逆にしない。INF加算overflowとK/N境界を処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Plan Holidays 型の 整数の約数・剰余構造に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "全連続windowの休日計画DPを、2×2 min-plus積とSWAGで線形時間に評価できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "一日遷移をmatrix×vectorへ書き、二日分の合成順とSWAGのfrontProduct⊗backProductを具体値で照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc344-g「Points and Comparison」では、主解法候補として、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "query(A,B)は各点のscore_A(i)=-A X_i+Y_iがB以上かを数える問題である。Aを昇順に処理すれば各scoreはAの一次関数で、二点の順序は両点を結ぶslopeを跨ぐ時に高々一度だけ反転する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc344-g「Points and Comparison」では、主解法候補として、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "queryをA順にsortし、点score順を隣接swap eventでkineticに維持する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全pairの順序反転は高々O(N^2)回で、各queryは現在のsorted score列をbinary searchできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各queryでN点のinequalityを直接判定する",
+        "decision": "rejected",
+        "decisionReason": "Qは10^7でNQは最大5×10^10となり実行できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある文字列と prefix を共有する文字列群は辞書順で連続するため、最長一致する相手は隣接位置にも存在する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Points and Comparison 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "現在score順で隣接するXの異なる二点は、等値になるrational slopeを越えた時だけswapする。最小の次crossingをpriority queueで処理し、swap後に新しく隣接したpairのeventだけを追加すればsorted orderを連続的に保てる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc344-g「Points and Comparison」では、主解法候補として、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "生成器からQ個の(A,B)を作りA昇順にsortする。点列はA→-∞での順序に対応する(X,Y)辞書順から始め、隣接crossing slopeをexact rational keyのheapへ入れる。各query A前にslope≤Aの有効eventを処理してswap・隣接event更新し、現在順のscore=-AX+Yへlower_boundしてscore≥Bの個数を加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc344-g「Points and Comparison」では、主解法候補として、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "kinetic sorting",
+      "trigger": "parameter Aの変化に伴いlinear keyのsorted orderが変わり、多数の同parameter queryがある。",
+      "application": "隣接要素の次crossingだけをevent queueで管理し、局所swapで全順序を更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "辞書順と longest common prefix",
-      "trigger": "制約と操作を整理したときに 辞書順と longest common prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc344-g「Points and Comparison」では、主解法候補として、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 辞書順と longest common prefix を問題固有の状態へ適用する。",
+      "name": "offline query sorting",
+      "trigger": "query同士は独立で、parameterを単調順に並べるとdata structure更新を共有できる。",
+      "application": "生成した(A,B)をA昇順に処理し、点順序を戻さず進める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "N本の一次関数のarrangementを全Aで構築せず、query Aへ到達するまでの隣接交差だけ処理すると、順序変更総数をpair数O(N^2)で抑えられる。",
+      "reusablePerspective": "moving-order queryは隣接swap eventのkinetic data structureとして扱える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "辞書順と longest common prefix",
+      "text": "rational slope比較、priority queue、kinetic sorting、binary search、疑似乱数生成。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "元 index を文字列と一緒に保持し、先頭・末尾では存在する片側だけを比較する。",
+      "text": "heap eventは登録後に隣接関係が変わり得るので、取り出し時に両点が現在も隣接し向きも一致するか検証する。slope対integer A比較とscore=-AX+Yは128bitで行い、同じAのtieを一貫処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Points and Comparison 型の 整数の約数・剰余構造に対し、辞書順と longest common prefixを選び、状態と証明を一貫して設計できる。",
+      "text": "生成されるQ本の直線それぞれについて上側の点数を数え、その総和を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "元 index を文字列と一緒に保持し、先頭・末尾では存在する片側だけを比較する。",
+      "text": "X同値でswapしないpair、複数pairが同slopeで交差、同A query、R_a=0をN小の全点sort真値と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

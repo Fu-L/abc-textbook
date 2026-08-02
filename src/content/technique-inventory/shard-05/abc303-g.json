@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc303-g「Bags Game」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "どの行動でも列の左右から何個かを取るため、行動後に残るbagは必ず連続区間である。ゲーム状態は残存区間だけで決まり、現在手番の「自分の利益−相手の利益」を区間DPにできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc303-g「Bags Game」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "区間minimax DPの遷移をsliding minimumでまとめる",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "一手で残す同じ長さの全subintervalから最小値を選ぶ形へ変形でき、各長さの全始点を線形に処理してO(N^2)へ収められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各区間で取り方を全列挙する素朴なminimax DP",
+        "decision": "rejected",
+        "decisionReason": "状態がO(N^2)、一状態の残存区間候補もO(N)となりO(N^3)でN=3000に間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Bags Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "長さi・左端jの総額をS(i,j)、行動後に残す長さをk、支払額をZとする。残す区間の左端lに対する手番側の得点差はS(i,j)-S(k,l)-Z-dp[k,l]なので、必要なのは範囲j≤l≤j+i-kでのS(k,l)+dp[k,l]の最小値である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc303-g「Bags Game」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "dp[i][j]を残存区間[j,j+i)から手番の人が得る最適得点差とする。三行動に対応する(k,Z)=(i-1,0),(max(i-B,0),A),(max(i-D,0),C)ごとに、配列S(k,l)+dp[k,l]の幅i-k+1のsliding minimumをdequeで求め、S(i,j)-Z-minを候補として最大を取る。答えはdp[N][0]。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc303-g「Bags Game」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "zero-sum区間ゲームDP",
+      "trigger": "両者の目的がX-Yの最大化・最小化で、操作後も連続区間だけが残る。",
+      "application": "手番側から見た得点差を状態値にし、獲得額−支払額−次手番のdpで符号反転を吸収する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc303-g「Bags Game」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "sliding window minimum",
+      "trigger": "各始点jで、固定長kの残存区間候補lが連続範囲を一つずつずらして現れる。",
+      "application": "S(k,l)+dp[k,l]のrange minimumをmonotone dequeで全jまとめて求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "複数個を左右から取る全手順は、最終的にどの連続subintervalを残したかだけで同値になるため、2^(取得数)の手順を残存区間の左端選択へ圧縮できる。",
+      "reusablePerspective": "端からの反復削除は、削除順ではなく残った区間を状態・遷移にすると選択肢を線形範囲へまとめられる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "prefix sum、区間minimax DP、monotone dequeによるsliding minimum。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "i≤Bまたはi≤Dではk=0となり空区間のdpと和を0にする。各actionの支払額を取得額から引き、次手番dpも引く符号を崩さない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Bags Game 型の 区間端点と包含関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "両者が最適に行動したときのTakahashiの利益XとAokiの利益Yの差X-Yを求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "Nの小さい列で全手順minimaxを実装して比較し、BやDが残数以上、支払う行動が不利、左右どちらも同額となる場合を検証する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

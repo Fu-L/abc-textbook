@@ -17,67 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc219-e「Moat」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "頂点が整数格子上、辺が軸平行なので、堀の内部か外部かは 4×4 の各単位正方形について決まる。異なる単純な堀は異なる内部セル集合を作るため、連続図形を 16 bit の選択へ置き換えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "内部セル集合は全ての村を含むだけでは足りない。内部が4近傍で一つにつながり、外部も盤面の外側から4近傍で全て到達できなければ、境界が複数になったり穴を囲んだりして一つの自己交差しない多角形にならない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc219-e「Moat」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+        "approach": "2^16 個の内部セル mask を全列挙し、村の包含、内部の4連結、穴のない外部連結を flood fill で判定する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "盤面サイズが固定で全候補を調べられ、幾何条件を有限グリッド上の連結性へ正確に移せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "格子点を順にたどって軸平行多角形の頂点列を直接生成する。",
+        "decision": "rejected",
+        "decisionReason": "同じ境界の始点や向きによる重複を除く必要があり、自己交差、複数境界、穴の判定も複雑になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Moat 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "有効な mask は「村セルを全て含む」「選択セルが一成分」「非選択セルが盤外と一成分」の三条件で特徴付けられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc219-e「Moat」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。",
+      "text": "各 mask について村 bit が全て立っているか確認し、選択セルを4近傍探索して選択数と到達数を比較する。さらに盤面を外枠付きに拡張し、外枠から非選択セルだけを探索して未到達の空セルがなければ答えへ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc219-e「Moat」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。この状態表現から答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "小固定盤面の bitmask 全探索",
+      "trigger": "連続的に見える構成が少数セルの内外選択で一意に表せるとき。",
+      "application": "各単位領域を1 bit に対応させ、全候補へ局所・連結条件を検査する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "外枠からの flood fill による穴判定",
+      "trigger": "選択領域が穴を持たないこと、または全ての空領域が外部につながることを判定するとき。",
+      "application": "盤面を一周広げた外側から非選択セルを探索し、囲まれた未到達セルの有無を調べる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "堀そのものを数える代わりに、堀が決める16領域の内外分類を数えると一対一対応になり、幾何の例外が二種類の4連結性へ落ちる。",
+      "reusablePerspective": "整数格子上の直交多角形では、境界列挙より先にセル集合との双対表現を探し、内部と補集合の連結性を確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "全探索と候補数の上界評価",
+      "text": "bitmask 全探索、グリッド BFS/DFS、4連結領域と穴の関係",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "外部判定は4×4 内の空セル一個から始めず、6×6 などの外枠を置いて盤外から始める。内部連結の起点は mask の立っている任意の1 bit とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Moat 型の問題に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "格子上の直交多角形をセル mask に離散化し、内部・外部双方の連結性で単純な境界を判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "村を全て含むが内部が二成分の mask と、内部は連結だが空洞を持つ mask を一つずつ描き、二回の flood fill が別々に必要な理由を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

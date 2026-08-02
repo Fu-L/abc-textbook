@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc241-f「Skate」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "盤面は最大10^9×10^9だが、一手の停止位置は衝突した障害物の直前に限られる。したがって開始点を除く到達候補は各障害物の上下左右に隣接する O(N) マスしかない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "現在位置から一方向の遷移先は、同じ行または列でその方向に最も近い障害物があれば、その一つ手前として一意に決まる。障害物がなければ崖へ落ちるためその手自体が禁止される。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc241-f「Skate」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "行ごと・列ごとに障害物座標を sort し、BFS の各状態から predecessor/successor を二分探索して最大4遷移を生成する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "巨大な空白マスを graph から除き、停止可能点だけの sparse implicit graph として最短手数を求められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全盤面の空きマスを頂点にし、一手で滑る先を探索する BFS を行う。",
+        "decision": "rejected",
+        "decisionReason": "H,W は10^9まであり、盤面を列挙も記憶もできない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Skate 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "通過するだけのマスは次の手を選べないので状態に不要であり、goal も障害物直前として実際に停止できた場合だけ到達扱いになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc241-f「Skate」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "障害物を row→sorted columns と column→sorted rows に格納する。start から BFS し、上下左右それぞれ nearest obstacle を lower_bound で探し、その直前マスが別状態なら距離+1で enqueue する。goal の距離が得られなければ -1 とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc241-f「Skate」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "巨大グリッドの重要点圧縮",
+      "trigger": "座標範囲は巨大だが、移動規則により停止・分岐できる点が障害物周辺などに限られるとき。",
+      "application": "重要点だけを graph vertex とし、空白区間を一辺の遷移へ圧縮する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc241-f「Skate」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "sorted 障害物の predecessor/successor",
+      "trigger": "同じ行・列で最寄りの壁や点まで一気に移動するとき。",
+      "application": "行列別の sorted list へ二分探索し、四方向の最寄り要素を取得する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "崖は停止壁ではなく「その方向へ動けない」条件なので、盤面境界を仮想障害物として加えてはいけない。",
+      "reusablePerspective": "滑走問題では境界で止まる規則か、壁がなければ操作禁止かを区別して遷移 graph を作る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "幅優先探索",
+      "text": "BFS、座標圧縮、ordered map/list、二分探索",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "障害物が隣接して遷移先が現在地になる self-loop は無視する。候補座標が盤内か確認し、visited は座標 pair の hash/map で管理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Skate 型の 盤面上の位置と局所遷移に対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大盤面の滑走最短路を障害物隣接点だけの implicit graph に圧縮し、最寄り障害物検索付き BFS で解ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "goal を通過するが次の障害物直前ではない例を描き、なぜ BFS 頂点へ goal を置くだけでは到達にしてはいけないか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

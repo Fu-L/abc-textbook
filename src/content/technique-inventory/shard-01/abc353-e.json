@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc353-e「Yet Another Sigma Problem」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "LCP(S_i,S_j) は二文字列が共有する非空 prefix の個数に等しい。したがって各 prefix p について、それを持つ文字列 pair 数を足せば同じ答えになる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "全入力長が3×10^5なので、全 prefix を Trie の node として共有すれば、同じ文字列断片を重複保持せずに頻度を集計できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc353-e「Yet Another Sigma Problem」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "文字列を順に Trie へ挿入し、各 prefix node を過去に通った文字列数を今回の寄与へ加える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各 pair は共有する各 prefix node で一回ずつ数えられ、処理量は総文字数に比例する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全文字列 pair ごとに先頭から一致長を比較する。",
+        "decision": "rejected",
+        "decisionReason": "文字列が似ている最悪例で pair 数 N² と比較長が重なり、総入力長制約内でも二乗時間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "根からの辺列と prefix が一対一に対応するため、同じ prefix の候補を一つの部分木として扱える。",
+        "text": "S_j の各 prefix node の count は、それを共有する i<j の本数なので、その総和が j と過去全文字列との LCP 合計になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Yet Another Sigma Problem 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "文字列末端かどうかではなく、root 以外の通過 node すべてへ count を持つことで prefix 一個ごとの寄与を表す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc353-e「Yet Another Sigma Problem」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "空 Trie を用意し、j=1..N の順に S_j の文字をたどる。各文字後の node で現在 count を答えへ加え、その後（または二段目の走査で）S_j が通る全 node の count を1増やす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc353-e「Yet Another Sigma Problem」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "LCP の共通 prefix 数への分解",
+      "trigger": "全 pair の longest common prefix 長総和を求めるとき。",
+      "application": "長さを共有 prefix ごとの indicator sum に展開する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Trie",
-      "trigger": "制約と操作を整理したときに Trie の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc353-e「Yet Another Sigma Problem」では、主解法候補として、文字列または bit 列を Trie に格納し、prefix ごとの候補を共有して探索する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Trie を問題固有の状態へ適用する。",
+      "name": "Trie 上の通過頻度",
+      "trigger": "多数文字列の prefix ごとの出現数を総入力長で集計したいとき。",
+      "application": "prefix を node に共有し、挿入時に path count を更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最大一致長という max 型量を「長さ k 以上である」の layer cake に分けると、prefix node ごとの単純な pair 数になる。",
+      "reusablePerspective": "整数値の総和は threshold indicator の和へ展開すると、共有構造で数えやすくなる場合がある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
+      "text": "Trie",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Trie",
+      "text": "pairwise sum の寄与交換",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。",
+      "text": "count を加えてから今回文字列を登録し、自分自身との pair を数えない。空 prefix root は LCP 長に寄与しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Yet Another Sigma Problem 型の 文字列の prefix・suffix と一致関係に対し、Trieを選び、状態と証明を一貫して設計できる。",
+      "text": "全 pair の LCP を共有 prefix ごとの寄与へ転換し、総文字数に比例する Trie 走査で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "終端印と重複個数を分け、binary Trie では最上位 bit の位置を固定する。",
+      "text": "LCP=共有prefix数という等式を短い二文字列で確認する。Trie node の count が「末端数」でなく「通過文字列数」であることに注意する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc254-e「Small d and k」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各頂点の次数が高々3で探索深さkも高々3なので、始点から距離k以内に現れる頂点は粗く数えても1+3+9+27=40個以下である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc254-e「Small d and k」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "深さkで打ち切る局所BFSまたはDFS",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各問い合わせで実際に到達する定数個程度の頂点だけを訪ねれば、Q=1.5×10^5でも十分高速である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "毎回グラフ全体をBFSする",
+        "decision": "rejected",
+        "decisionReason": "一回O(M)となり、全Q問い合わせでO(MQ)かかる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+        "text": "大きいQだけを見ると探索の反復は難しそうだが、次数上限と深さ上限の積が探索木の大きさを定数へ抑える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Small d and k 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "グラフに閉路があるので、同じ頂点を複数経路から数えないための訪問済み管理は必要である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc254-e「Small d and k」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "各問い合わせ(x,k)ごとにxからBFSまたは深さ制限DFSを行い、距離kへ達した頂点から先へは進まない。訪れた頂点番号を一度ずつ合計し、訪問印は今回触れた頂点だけ戻す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc254-e「Small d and k」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "パラメータ制限付き局所探索",
+      "trigger": "問い合わせ数は多いが、探索半径と最大次数がともに小さい。",
+      "application": "距離k以内だけBFS/DFSし、全グラフを走査しない。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc254-e「Small d and k」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "触れた要素だけの初期化",
+      "trigger": "各問い合わせで訪問配列のごく一部しか変更しない。",
+      "application": "訪問頂点リストを保存し、その頂点の印だけを探索後に消す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "制約の「次数3以下」と「k≤3」は別々ではなく、組み合わせることで一問い合わせの探索量そのものを40程度へ制限する。",
+      "reusablePerspective": "多数問い合わせでも、分岐数^深さが十分小さいなら前計算より問い合わせごとの打ち切り探索が単純で強い。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "BFSで始点からの距離を管理し、指定深さで展開を止められる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "幅優先探索",
+      "text": "閉路グラフで訪問済み頂点を一度だけ数える必要性を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "距離kの頂点は合計へ含めるが隣接先へは展開しない。問い合わせ間の訪問印を全N初期化せず、今回訪れた頂点だけ戻す。k=0ではxのみを答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Small d and k 型の 頂点と辺からなる状態グラフに対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "各問い合わせについて、始点から距離k以下にある頂点番号の総和を高速に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "全点BFSとのランダム比較に加え、k=0、次数3の木、三角形など複数経路で同じ頂点へ着くグラフ、孤立頂点を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

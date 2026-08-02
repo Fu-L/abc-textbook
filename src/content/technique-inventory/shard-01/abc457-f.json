@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc457-f「Second Gap」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "順列を後ろから相対順位で挿入すると、新要素が最大・第二最大か、それ以下かの三場合だけを考えればよい。後者では最大位置が変わらず、条件は D_i=D_{i+1} に縮む。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc457-f「Second Gap」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "dp[i][a]をsuffix (P_i..P_N)の最大値位置aである相対順列数とし、最大・第二最大の二つの一点遷移と、それ以下全体へのscalar倍をin-place管理する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "第二最大位置をstateから捨てても、上位二値に入る遷移では直前最大aだけで新gapが決まり、入らない遷移では既存gapが保存されるため情報が十分である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "suffixごとに最大位置と第二最大位置の両方をstateに持つ挿入DPをそのまま実装する。",
+        "decision": "rejected",
+        "decisionReason": "O(N^2) stateを各段で走査して高次時間となり、第二最大位置が遷移に不要な構造を使えていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "新要素が最大または第二最大なら直前最大位置は a=i+D_i に強制され、それぞれ新最大位置iまたはaへ一点加算する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Second Gap 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "それ以下の相対順位は個数N-1-i通りで、D_i=D_{i+1}の場合に全dp stateへ同じ倍率として作用する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc457-f「Second Gap」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "末尾二要素の基底dpを置き、iを降順に進める。global multiplierで全stateの一括倍率をlazy保持し、必要なstate i+D_iを実値化して最大・第二最大遷移の二点を加算する。条件不一致なら下位順位遷移を0にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc457-f「Second Gap」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "相対順位の挿入DP",
+      "trigger": "順列条件がprefix/suffix内の上位少数要素位置だけに依存するとき。",
+      "application": "新要素の相対rank別に状態遷移を数える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc457-f「Second Gap」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "DP全体のscalar lazy",
+      "trigger": "各段の大部分が全state同一倍率で、例外が少数点だけのとき。",
+      "application": "global係数を外出ししpoint値だけ補正する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "上位二要素の条件でも、挿入時に第二最大位置を明示せず遷移条件へ消去できるか検討する。",
+      "reusablePerspective": "DPの全state同一操作は配列走査せずlazy scalarとして持ち、少数例外だけ更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "相対順位の挿入DP、DP全体のscalar lazyと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "global multiplierが0になり逆元で実値化できない場合を避ける表現を選ぶ。i+D_iの範囲とD_i=D_{i+1}境界を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Second Gap 型の 順列の位置と値の対応に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "最大・第二最大位置gapを満たす順列数を、state削減とscalar lazy付き挿入DPで線形級に数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "新要素rank三場合の上位二位置を小順列で追い、なぜb stateが不要かと全体倍率の実装不変量を説明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

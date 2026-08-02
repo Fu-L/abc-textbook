@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc373-f「Knapsack with Diminishing Values」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "同じ品物を k 個選ぶ価値 kv-k^2 は、1個目から順に v-1,v-3,v-5,…という限界利得の和である。同じ重さの品物群では、限界利得の大きい順に取れば個数 k ごとの最適値が得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc373-f「Knapsack with Diminishing Values」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "重さ w ごとに priority queue で限界利得を取り出して f_w(k) を作り、容量 j と選択個数 k の grouped knapsack 遷移を行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "重さ別に選択個数だけへ圧縮でき、遷移総量 ΣW^2/w=O(W^2 log W) が W≤3000 に収まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "品物種類ごとに選ぶ個数を 0..W/w まで試す多重ナップサックを行う。",
+        "decision": "rejected",
+        "decisionReason": "N 個の各種類で容量と個数を走査すると O(NW^2) 級になり、価値逓減の共通構造を利用できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "各種類の次の一個の利得は2ずつ減るので、複数の降順列を priority queue で merge するだけで重さ w の最良 k 個が分かる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Knapsack with Diminishing Values 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "重さ w の品物を k 個取ると容量増分は必ず kw であり、種類の区別は f_w(k) の中へ吸収できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc373-f「Knapsack with Diminishing Values」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各 w について価値 v の初期限界利得 v-1 を heap に入れ、最大を取って2減らして戻し f_w を前計算する。旧 dp[j-kw]+f_w(k) の最大で容量 dp を更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc373-f「Knapsack with Diminishing Values」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "離散限界利得の貪欲",
+      "trigger": "同一選択肢を繰り返す価値が凹で、次の一個の利得が単調減少するとき。",
+      "application": "全候補の次利得を heap で比較して個数別最適値を作る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc373-f「Knapsack with Diminishing Values」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "重さ別 grouped knapsack",
+      "trigger": "容量が小さく、同じ重さの品物群を個数別価値へまとめられるとき。",
+      "application": "重さごとに f_w(k) を用いて DP を一括遷移する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二次式の総価値は差分を取ると等差数列になり、凹資源配分の貪欲へ変わる。",
+      "reusablePerspective": "種類数 N ではなく異なる重さ W を外側に置くことで調和級数の計算量を得る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "0/1・多重 knapsack、凹関数の限界利得、priority queue、調和級数評価を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "負の限界利得も容量を埋めるため候補になり得る。dp の未到達値と 64 bit の価値総和を正しく扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Knapsack with Diminishing Values 型の 整数の約数・剰余構造に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "逓減価値の多重選択を限界利得列へ分解し、重さ別 DP として制約内に実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "kv-k^2 を差分列へ展開し、heap が「各種類から次に一個取る」選択を正確に表すことを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

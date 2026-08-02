@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc402-g「Sum of Prod of Mod of Linear」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "r_b(k)=(Ak+B)-M floor((Ak+B)/M)と展開すると、求める積和はkの二次多項式和、k^p floor、そして二つのfloorの積和へ分かれる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "B1≤B2なら二floorの差cは0または1だけでc(c-1)=0。これを展開するとfloor積を各floorの一乗・二乗の線形結合へ消去できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc402-g「Sum of Prod of Mod of Linear」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "剰余積を一般化floor sum f_{p,q}の有限な線形結合へ変形してEuclid再帰で計算する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "必要次数p,q≤2は定数で、各case O(log M)。T=10^5でもNを走査せず処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "k=0..N-1を各test caseで直接走査して剰余積を足す",
+        "decision": "rejected",
+        "decisionReason": "T×Nは最大10^11で間に合わず、linear floorの周期/Euclid構造を使っていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "floor(N/i) の異なる値は平方根より小さい商と平方根以下の添字から全て得られ、各区間端は除算で計算できる。",
+        "text": "floor差が0/1なのは0≤B2-B1<Mで同じAkを加えるため、一つのM境界しか跨がないことによる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sum of Prod of Mod of Linear 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "通常のΣk^0,k,k²とf_{p,q}(N,M,A,B)をexact integerで組み合わせ、floor積の1/2は全体が偶数になる恒等式から安全に割れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc402-g「Sum of Prod of Mod of Linear」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "必要ならB1,B2をswapする。剰余積展開のpolynomial項を閉形式で求め、各mixed項を一般化floor sumへ渡す。floor1·floor2は差cの恒等式でq=1,2の単独floor和へ置換し、全項を64/128 bit整数で合成する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc402-g「Sum of Prod of Mod of Linear」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "generalized floor sum",
+      "trigger": "Σk^p floor((Ak+B)/M)^qを巨大Nで求めたいとき。",
+      "application": "Euclidean algorithm型再帰でO(log M)計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "floor 除算の商区間列挙",
-      "trigger": "制約と操作を整理したときに floor 除算の商区間列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc402-g「Sum of Prod of Mod of Linear」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で floor 除算の商区間列挙 を問題固有の状態へ適用する。",
+      "name": "差がbinaryな二floorの積消去",
+      "trigger": "同じlinear numeratorでoffsetだけが一mod未満異なる二floorがあるとき。",
+      "application": "差c∈{0,1}のc(c-1)=0を展開する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二つのfloorの積は一般の二変量集計に見えるが、offset差がM未満という入力正規化により単独momentだけへ還元できる。",
+      "reusablePerspective": "floor積では二floorの差の値域を先に調べ、小集合なら満たす低次数多項式恒等式でcross termを消す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "floor 除算の商区間列挙",
+      "text": "floor sumのEuclid再帰と多項式和を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。",
+      "text": "最終値は非常に大きいので128 bit以上または多倍長整数を使う。B順swap、1/2の除算順、A=0,M=1を検証する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sum of Prod of Mod of Linear 型の 整数の約数・剰余構造に対し、floor 除算の商区間列挙を選び、状態と証明を一貫して設計できる。",
+      "text": "linear剰余二列の積和を、binary floor差恒等式と一般化floor sumで各case対数時間に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。",
+      "text": "小N,M全探索とrandom比較し、B1=B2、B差M-1、A=0、wrapが毎step起きるcaseで各展開項を照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

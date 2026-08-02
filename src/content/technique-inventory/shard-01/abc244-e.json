@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc244-e「King Bombee」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "頂点 S から K 辺の walk を数えるだけなら、step 数と現在頂点の DP で足りる。追加条件は X の正確な訪問回数ではなく偶奇だけなので、必要な履歴は1 bit に圧縮できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "walk の次頂点 j を追加した瞬間に j=X なら parity を反転すれば、sequence A_0..A_K に現れる X を漏れなく数えられる。X≠S なので初期 parity は偶数である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc244-e「King Bombee」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "dp[step][v][parity] を持ち、各無向辺を両方向へ遷移して X 到着時だけ parity を XOR する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "通常の walk DP と二状態 automaton の直積だけで条件を表し、過去の訪問列を保存しなくてよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "S-T の K-step walk を列挙し、各列で X の出現回数を数える。",
+        "decision": "rejected",
+        "decisionReason": "各 step で分岐する walk 数は指数的で、K=2000では列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "King Bombee 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "「偶数回」という global 条件は、各 X 訪問で状態を0↔1に切り替える有限 automaton として局所遷移へ組み込める。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc244-e「King Bombee」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "cur[S][0]=1 から K 回、辺 (u,v) ごとに u→v と v→u を更新し、到着先が X なら parity を1反転する。rolling array で step を進め、cur[T][0] を法998244353で出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc244-e「King Bombee」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "DP と有限 automaton の直積",
+      "trigger": "path/walk に出現回数 mod m や禁止 pattern などの履歴条件が付くとき。",
+      "application": "graph vertex に小さな automaton state を掛け、edge 遷移時に状態を更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc244-e「King Bombee」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "固定長 walk DP",
+      "trigger": "辺をちょうど K 回通る walk の個数を疎 graph 上で数えるとき。",
+      "application": "step ごとに全 edge を両方向へ走査して次層へ加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "X の訪問判定は出発時でなく次頂点を sequence へ追加する時に行い、A_0=S を初期状態へ反映する。",
+      "reusablePerspective": "walk の頂点出現条件では、sequence のどの位置を各遷移で数えるかを明示して off-by-one を防ぐ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "graph walk DP、parity、rolling array",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "無向辺は二方向を更新し、next 配列を各 step で0 clearする。X≠S,T の保証はあるが、一般化するなら初期頂点分の parity も初期化に反映する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "King Bombee 型の 頂点と辺からなる状態グラフに対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "固定長 graph walk の個数 DP に訪問 parity automaton を積み、偶数回条件を数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "長さ1の edge walkで A_0 と A_1 のどちらをいつ数えるかを書き、到着時 XOR の規約を固定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

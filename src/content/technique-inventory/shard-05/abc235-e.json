@@ -17,77 +17,87 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc235-e「MST + 1」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "追加辺 e=(u,v,w) が Kruskal 法で選ばれるかは、重み w 未満の元グラフ辺を処理した時点で u と v がまだ非連結かだけで決まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各クエリは独立で追加辺を実際には残さないため、全クエリの判定中に Union-Find を変化させるのは元グラフ辺だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc235-e「MST + 1」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各クエリで追加後の全辺をソートし直し、Kruskal 法で MST を再構築する。",
+        "decision": "rejected",
+        "decisionReason": "M と Q がともに 20 万で、各クエリに全辺走査を行えない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "元辺と全クエリを重み順に一緒に並べ、元辺では Union、クエリでは現在の連結性を読むだけの一回の sweep を行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各クエリを個別 Kruskal の重み w 時点まで進めた状態が、共通の元辺 sweep 上で完全に一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "cut property により異なる成分を結ぶ最小辺は安全であり、閉路を避けた採用を繰り返せば最適な全域木になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "MST + 1 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "答えを知るには完成した MST 自体は不要で、候補辺が現れる瞬間の軽い辺による連結性という途中状態だけで十分である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc235-e「MST + 1」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "Kruskal の選択条件を重み閾値付き連結性クエリへ切り出し、独立クエリを元辺だけが更新するオフライン Union-Find sweep に並列化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc235-e「MST + 1」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "最小全域木と cut property",
-      "trigger": "制約と操作を整理したときに 最小全域木と cut property の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc235-e「MST + 1」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 最小全域木と cut property を問題固有の状態へ適用する。",
+      "name": "Kruskal 順のオフラインクエリ",
+      "trigger": "候補辺が MST に入るかを多数問われ、各候補追加は他クエリへ影響しないとき。",
+      "application": "重み順イベント列で元辺を併合し、候補辺イベントでは端点 root の一致だけを判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "クエリ重みは元辺重みと異なる保証があるため、同重みで元辺を先に入れるか後に入れるかという MST のタイ処理が不要である。",
+      "reusablePerspective": "重み sweep の問合せでは、判定が「未満」か「以下」かを確認し、同値イベントの処理順を入力保証と合わせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "最小全域木と cut property",
+      "text": "Kruskal 法で辺が採用される条件と、Union-Find の連結性判定を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同重み辺の順序が答えへ影響する場合は一括判定してから併合する。",
+      "text": "イベントに元辺かクエリかと元のクエリ番号を保持し、ソート後も答えを入力順へ戻す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "クエリイベントでは非連結なら Yes と記録するだけで、その端点を Union して後続状態を変えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "MST + 1 型の 頂点と辺からなる状態グラフに対し、最小全域木と cut propertyを選び、状態と証明を一貫して設計できる。",
+      "text": "独立な MST 候補辺判定を、共通の Kruskal sweep と Union-Find で一括処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同重み辺の順序が答えへ影響する場合は一括判定してから併合する。",
+      "text": "MST クエリでは完成木を毎回作る前に、Kruskal のどの瞬間で答えが確定するかを切り出す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "クエリが独立なら、問合せイベントを更新せず観測だけにして全クエリを一つの sweep へ載せる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

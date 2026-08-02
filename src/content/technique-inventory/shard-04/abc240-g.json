@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc240-g「Teleporting Takahashi」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "一次元で n 歩後に座標 x へ着く経路は、到達可能性 n≥|x| と parity が合う場合に正方向歩数を固定でき、二項係数一つで数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "三次元の六方向を直接方向回数へ分けると自由度が多いが、z 軸へ使う k 回を固定すれば、残り N-k 回は独立な二次元格子問題になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc240-g「Teleporting Takahashi」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "z 移動回数 k を総和し、z 部分を一次元公式、xy 部分を (x+y,x-y) 変換で二つの一次元公式へ分解して二項係数を掛ける。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各 k の寄与を組合せ公式だけで評価でき、方向回数の二重列挙を一つの和へ減らせる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "±x,±y,±z の六方向回数を全て列挙し、多項係数を足す。",
+        "decision": "rejected",
+        "decisionReason": "終点条件を入れても複数の自由変数が残り、N が10^7のとき二重以上の列挙はできない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "xy 平面で (u,v)=(x+y,x-y) とすると、一回の四方向移動が u,v それぞれ独立な ±1 になり、f_2(n,x,y)=f_1(n,x+y)f_1(n,x-y) と積に分かれる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Teleporting Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "k 個の z 手を N 個の時刻から選ぶ binomial(N,k) が、z の経路と xy の経路を元の時系列へ interleave する係数になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc240-g「Teleporting Takahashi」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "階乗と逆階乗を N まで前計算し、到達不能なら0を返す一次元関数 f1(n,x)=C(n,(n+|x|)/2) を用意する。k=0..N について C(N,k)f1(k,Z)f1(N-k,X+Y)f1(N-k,X-Y) を加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc240-g「Teleporting Takahashi」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "座標変換による独立化",
+      "trigger": "二次元の一手候補が二つの符号選択の直積へ写せるとき。",
+      "application": "(x+y,x-y) 座標で各成分の一次元 walk を独立に数える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc240-g「Teleporting Takahashi」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "操作列の interleave",
+      "trigger": "異なる種類の操作をそれぞれ内部順序付きで選び、全時系列へ混ぜるとき。",
+      "application": "種類ごとの回数を固定し、binomial coefficient で配置時刻を選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "三次元を一度に解かず、z 手数を固定して「一次元×変換済み二次元」へ段階的に次元を落とす。",
+      "reusablePerspective": "高次元 walk は一軸の使用回数を外側で和にし、残り次元に独立化できる変換がないか探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "二項係数、格子 walk の parity、45度座標変換、組合せの積の法則",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "f1 は n<|x| または n-|x| が奇数なら0とする。N<998244353 なので階乗逆元を使え、k の全範囲で負の combination index を参照しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Teleporting Takahashi 型の 盤面上の位置と局所遷移に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "三次元格子 walk を軸手数で分解し、座標変換と一次元二項係数の積・interleave として数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "一回の x/y 四方向を (u,v) の四符号へ写し、独立選択が元方向へ一意に戻ることを表で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

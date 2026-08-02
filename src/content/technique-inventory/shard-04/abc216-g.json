@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc216-g「01Sequence」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "区間 [L_i,R_i] に 1 が X_i 個以上という条件は、その区間にある 0 の個数が R_i−L_i＋1−X_i 以下という条件へ置き換えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "B_i を先頭 i 要素の 0 の個数とすると、区間条件も各要素が 0/1 である条件も B の差に対する上限制約として書ける。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc216-g「01Sequence」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "左から各 A_i を 0 または 1 に決め、未充足の区間制約をその都度検査しながら探索する。",
+        "decision": "rejected",
+        "decisionReason": "局所的な選択が多数の重なる区間へ影響し、二進列の候補を直接探索すると指数的になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "0 の prefix 個数 B に対する差分制約グラフを作り、頂点 0 からの最短距離を求めて B_N を最大化する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全制約が d_j−d_i≤w の形になり、辺重みも非負なのでダイクストラ法で同時に満たす最大の上界を得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
+        "text": "1 の個数最小化を直接扱わず、補数である 0 の prefix 個数 B_N の最大化へ反転すると差分制約の上界問題になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "01Sequence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "B_i≤B_{i+1} と B_{i+1}≤B_i＋1 を同時に課すことで、隣接 prefix 差が必ず 0 または 1 となり二進列を復元できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc216-g「01Sequence」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "区間内 1 の下限制約を prefix 0 数の差の上限へ翻訳し、各不等式を有向辺として最短路距離に符号化して、距離差から最小 1 列を復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc216-g「01Sequence」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "区間個数制約の prefix 変換",
+      "trigger": "多数の区間について要素和の上限・下限が課され、各要素が小さな差分値を取るとき。",
+      "application": "prefix の 0 個数を導入し、区間の 1 下限を二つの prefix の差上限へ変える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Dijkstra 法と緩和",
-      "trigger": "制約と操作を整理したときに Dijkstra 法と緩和 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc216-g「01Sequence」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で Dijkstra 法と緩和 を問題固有の状態へ適用する。",
+      "name": "差分制約の最短路帰着",
+      "trigger": "変数間の制約が d_j−d_i≤w の形で並び、特定の差を最大化したいとき。",
+      "application": "i から j へ重み w の辺を張り、始点からの最短距離を実現可能な最大 prefix 値として使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "区間の 1 下限をそのまま prefix 1 数の下限制約にする代わりに、0 の上限制約へ補うことで非負辺だけのグラフが得られる。",
+      "reusablePerspective": "最小化対象の補数を最大化すると、不等号の向きや辺重みが扱いやすくなる場合がある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "区間和を二つの prefix 和の差として表し、不等式の向きを保って変形できること。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Dijkstra 法と緩和",
+      "text": "差分制約 d_j−d_i≤w を i から j への重み w の辺へ対応させる最短路モデルを理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "区間条件には L_i−1 から R_i へ重み R_i−L_i＋1−X_i の辺を張り、添字を一つずらす。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "各 i について i＋1 から i へ重み 0、i から i＋1 へ重み 1 の両辺を張り、B_i−B_{i−1} が 1 なら A_i＝0 と復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "01Sequence 型の 列の順序と prefix 状態に対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。",
+      "text": "二進列への区間個数制約と最小化目的を、補数 prefix の差分制約へ変換して最短路から構成解を復元できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "区間の下限制約が扱いにくいときは、区間長から引いた補数の上限制約を作れるか確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "差分制約グラフでは式 d_j≤d_i＋w と辺 i→j を対応させ、目的変数の最大値が最短距離になる理由を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

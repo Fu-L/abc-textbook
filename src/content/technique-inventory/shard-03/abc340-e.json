@@ -17,67 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc340-e「Mancala 2」では、一山の個数を商と余りに分け、全周への一様加算と余り個分の循環区間加算を lazy data structure で処理する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "箱BのX個を一球ずつ配る操作は、N個単位のfull lapと残りX mod N個へ分けられる。全箱へfloor(X/N)を加えた後、B+1から循環順にX mod N箱へ1を加えるだけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc340-e「Mancala 2」では、一山の個数を商と余りに分け、全周への一様加算と余り個分の循環区間加算を lazy data structure で処理する。この状態表現から答えを構成する。",
+        "approach": "range add・point get/set可能なlazy segment treeで操作をまとめる",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "一操作を定数回の区間加算と一点更新へ変換し、M回をO(M log N)で処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "ballを一個ずつ次箱へ移す",
+        "decision": "rejected",
+        "decisionReason": "A_iや途中の箱内ball数は非常に大きく、総ball数に比例するsimulationはできない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各位置へ floor(x/N) 個を配った残り x mod N 個が操作位置の直後から連続して一個ずつ配られる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Mancala 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "q=floor(X/N)周では各箱が正確にq個受け取り、r=X mod N個だけがBの直後から連続する循環区間へ一つずつ入る。r<Nなのでwrapしても通常区間二つ以内に分割できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc340-e「Mancala 2」では、一山の個数を商と余りに分け、全周への一様加算と余り個分の循環区間加算を lazy data structure で処理する。この状態表現から答えを構成する。",
+      "text": "range-add lazy segment treeへ初期Aを入れる。各B_iでpoint queryしてXを得て、その点へ-Xを加えて0にする。全区間へq=X/Nを加え、r=X mod Nについて[B+1,B+1+r)をmod Nで一つまたは二つのrangeへ分けて+1する。最後に各pointを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "range add・point query と商余り分解",
-      "trigger": "制約と操作を整理したときに range add・point query と商余り分解 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc340-e「Mancala 2」では、一山の個数を商と余りに分け、全周への一様加算と余り個分の循環区間加算を lazy data structure で処理する。この状態表現から答えを構成する。で range add・point query と商余り分解 を問題固有の状態へ適用する。",
+      "name": "周期操作の商と剰余分解",
+      "trigger": "同じ順序でN箱を何周も巡って一個ずつ配る。",
+      "application": "個数XをqN+rに分け、qを全体一括、rを一つの循環区間として処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "range add・point query",
+      "trigger": "更新が全体または連続区間への同値加算で、次操作では一点値が必要である。",
+      "application": "lazy segment treeまたは差分Fenwick treeで区間加算し、指定箱の現在値を取得する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "循環区間の長さrは必ずN未満なので、開始indexをずらして末尾を超えた時だけ二区間へ割ればよい。",
+      "reusablePerspective": "cyclicな均等配布はfull cycleとresidual arcへ分けるとrange updateになる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "range add・point query と商余り分解",
+      "text": "商・剰余、循環区間、lazy propagation。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "循環区間を高々二区間へ分割し、取り出す位置を零へ戻してから配布加算する。",
+      "text": "箱番号は0-basedで、残り配布はB自身でなくB+1から始まる。一点を0にする更新は現在値を取得して-Xする形ならlazy値と整合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Mancala 2 型の問題に対し、range add・point query と商余り分解を選び、状態と証明を一貫して設計できる。",
+      "text": "M回のMancala操作後の全N箱のball数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "循環区間を高々二区間へ分割し、取り出す位置を零へ戻してから配布加算する。",
+      "text": "X=0、X<N、XがNの倍数、remainderがindex Nを跨ぐ場合を一球simulationと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

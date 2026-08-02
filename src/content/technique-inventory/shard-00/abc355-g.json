@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc355-g「Baseball」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "選んだ位置 x_1<…<x_K は、端0,N+1を加えた path と見られる。区間 (i,j) 内の各 y の最近選択点距離寄与 c(i,j) は P と yP の prefix sum から O(1) で計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "ちょうど K+1 辺の最短路 DP は O(KN²) だが、区間距離 cost c は交差する区間の寄与比較から Monge inequality を満たす。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc355-g「Baseball」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "一辺 penalty λ の Aliens DP で辺数次元を消し、各 λ の Monge shortest-path DP を分割統治 monotone minima/LARSCH等で高速評価する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "λ を探索して最適辺数を K+1 に合わせ、N²K をおおむね準線形×log値域へ下げられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "dp[k][j]=min_{i<j}(dp[k−1][i]+c(i,j)) を全 i,j,k で計算する。",
+        "decision": "rejected",
+        "decisionReason": "N=5×10^4で O(KN²) は不可能で、Monge 性と辺数制約の双対化を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "各 edge cost に λ を加えた unconstrained shortest path では、λ を増やすほど採用辺数が非増加になり、value−λ(K+1) の最大が固定辺数最適値を復元する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Baseball 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Monge 行列では最適遷移元 index が j とともに単調になるため、online依存を分割統治で解消すれば各 λ の DP を高速化できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc355-g「Baseball」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "P と yP の prefix sum から c(i,j) oracle を作る。整数 λ に対し dp[j]=min_{i<j}(dp[i]+c(i,j)+λ) と使用辺数を lexicographic に計算し、分割統治＋monotone minima（または簡易LARSCH/CHT）で評価する。辺数が K+1 を跨ぐ λ を凸探索し、dp[N+1]−λ(K+1) の最大を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc355-g「Baseball」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "Aliens trick（Lagrangian relaxation）",
+      "trigger": "最適化に「ちょうど d 個」の次元があり、各選択へ一様 penalty を加えた問題が速く解けるとき。",
+      "application": "個数制約を λ へ双対化し、最適個数の単調性から λ を探索する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc355-g「Baseball」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "Monge shortest path optimization",
+      "trigger": "区間 cost が quadrangle inequality を満たす DAG 最短路 DP。",
+      "application": "最適遷移元の単調性を monotone minima/SMAWK/LARSCH で利用する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "期待値の確率分母 S は問題が既に掛けた値を要求するため、目的は各 y の重み P_y を持つ一次元 k-median に一致する。",
+      "reusablePerspective": "一次元施設配置では隣接施設間への割当 cost が Monge になりやすく、Aliens DP の典型候補になる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "Monge 配列と monotone minima",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "Aliens DP のtie-break付き個数管理",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "同じ penalized cost では辺数の大小を一貫して tie-break し、λ探索の単調性を守る。端0,N+1の cost 定義と必要辺数 K+1 をずらさない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Baseball 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "重み付き一次元 K-center 型目的を Monge DAG の固定辺数最短路へし、Aliens DP で大規模制約を処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "高速化の前に path edge cost が各 y の最近点寄与を一度ずつ含むか確かめる。Monge証明と λ の個数tie-breakを別々に検証する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

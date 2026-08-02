@@ -32,7 +32,7 @@ const json = async (relativePath: string): Promise<unknown> =>
   JSON.parse(await readFile(new URL(`../../${relativePath}`, import.meta.url), 'utf8')) as unknown;
 
 describe('US5 update validation', () => {
-  const updateId = 'update-e73d31a7bf8befdf1bf78b98';
+  const updateId = 'update-2661fc1615b0f12e3619aedd';
   const evidencePath =
     'docs/reviews/human-content/previews/initial-v1/us5/update-simulation-review.json';
   const componentPath = 'docs/verification/previews/initial-v1/components/update-simulation.json';
@@ -316,7 +316,7 @@ describe('US5 update validation', () => {
   it('freezes canonical update, work-manifest, review, and component evidence contracts', async () => {
     const update = PublicationUpdateSchema.parse(
       await json(
-        'staging/previews/initial-v1/release-simulation/update-e73d31a7bf8befdf1bf78b98/manifest.json',
+        'staging/previews/initial-v1/release-simulation/update-2661fc1615b0f12e3619aedd/manifest.json',
       ),
     );
     expect(update.authoringResults).toHaveLength(8);
@@ -385,7 +385,7 @@ describe('US5 update validation', () => {
   it('fails release simulation when an operation artifact is missing or stale', async () => {
     const update = PublicationUpdateSchema.parse(
       await json(
-        'staging/previews/initial-v1/release-simulation/update-e73d31a7bf8befdf1bf78b98/manifest.json',
+        'staging/previews/initial-v1/release-simulation/update-2661fc1615b0f12e3619aedd/manifest.json',
       ),
     );
     const broken = {

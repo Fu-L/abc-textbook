@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc420-e「Reachability Query」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "edge追加だけの無向graphではconnected componentsはmergeするだけで分裂せず、type3の答えはvのcomponent内にblack vertexが一個以上あるかだけで決まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各vertexの色toggleはその時点のrootが持つblack countを±1すればよく、merge時は二componentのcountを加算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc420-e「Reachability Query」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "componentごとのblack vertex数を追加情報として持つDSU",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "type1はunion時にsizeとblackCountを合成、type2はcolor配列を反転してfind(v)のcountを更新、type3はroot count>0を判定する。各queryほぼ定数時間。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "type3ごとにvからBFSしてblack vertexを探す",
+        "decision": "rejected",
+        "decisionReason": "Q=6×10^5で大componentを何度も走査しO(NQ)になり得る。edge削除がないためcomponentを再探索する必要はない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+        "text": "toggle対象vのcomponent代表は過去のunionで変わり得るので、保存した古いrootではなく毎回find(v)してblackCountを更新する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Reachability Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "union by size/rankで新rootを決めた直後に二rootのblackCountを足せば、個々のblack vertexを移し替えずcomponent aggregateを保てる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc420-e「Reachability Query」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "parent,size,blackCount,colorを初期化する。type1(u,v)はrootsが異なればunionしてcount和を新rootへ置く。type2(v)はr=find(v)としてwhite→blackならcount[r]++、逆なら--しcolorを反転。type3(v)はblackCount[find(v)]>0ならYes。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc420-e「Reachability Query」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "augmented DSU",
+      "trigger": "merge-only componentに対する集計値queryとvertex属性更新があるとき。",
+      "application": "rootにblack数を持ち、unionで加法mergeする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Union-Find",
-      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc420-e「Reachability Query」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "name": "component aggregate",
+      "trigger": "queryがcomponent内の存在判定で、要素ごとのboolean和で表せるとき。",
+      "application": "black存在をblack count>0へ置き換える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "DSUのconnectivityだけでなく、toggle可能な頂点属性の総数をrootへ持たせればcomponent存在queryまで同じ構造で処理できる。",
+      "reusablePerspective": "merge可能aggregateに加えて要素更新があるDSUでは、更新時に現在rootへ差分を入れればよい。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Union-Find",
+      "text": "Union-Findのfind/union、rootへの集計値保持を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "同component内へのedge追加ではcountを二重加算しない。toggle前のcolorを保持し、path compression後のrootへ±1する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Reachability Query 型の 頂点と辺からなる状態グラフに対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "text": "edge追加・色反転・component内black存在判定を最大60万queryまでamortized inverse-Ackermann時間で処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "isolated vertexのtoggle、同component内edge追加、black頂点を含む二componentのmerge、最後のblackをwhiteへ戻す例を愚直component探索と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

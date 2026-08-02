@@ -17,85 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc244-g「Construct Good Path」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。さらに、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "元 graph の余分な辺は使わなくてもよく、連結性から任意の spanning tree 上だけで path を構成できる。木なら子部分木を往復する DFS walk により、部分木内の parity を bottom-up に確定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "子 c の構成列が c で始まり c で終われば、親 v からその列へ入り v へ戻れる。c の parity が不足した場合に (v,c) を余分に挟むと c だけを1回、vを後の帰還と合わせて2回追加して補正できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc244-g「Construct Good Path」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。さらに、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。",
+        "approach": "spanning tree を根付け、各子の閉じた walk を連結しながら子根 parity を局所 gadget で直し、最後に根だけを補正する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "処理済み子孫の parity を壊さず親へ戻る不変条件を保ち、各 tree edge を定数回使う長さ上限付き構成になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "s_i=1 の頂点を個別に訪れる path を連結していく。",
+        "decision": "rejected",
+        "decisionReason": "二つの目的地を結ぶ途中頂点の訪問 parity も変わり、独立な要求として処理すると既に合わせた頂点を壊す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+        "text": "子 c の parity が不一致なら A_c の後に v,c を置き、その後の通常の v 帰還まで含めると、c は奇数回、v は偶数回だけ追加される。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "追加部分が既存構成と衝突せず、始点・終点・被覆条件を保つことをサイズに関する帰納法で示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Construct Good Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "根以外を全て確定した後、根だけ不一致なら neighbor u,r,u を末尾へ足すと u は2回、根は1回増えて根だけを反転できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc244-g「Construct Good Path」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。さらに、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。",
+      "text": "全0 target なら空 path を出してよい。それ以外は spanning tree を作り、各 v で v を置いて子の列を再帰連結し、子 parity が target と違えば v,c を追加して v へ戻る。root 列完成後に必要なら u,root,u を追加し、長さと列を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "深さ優先探索",
-      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc244-g「Construct Good Path」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。さらに、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "name": "spanning tree 上の構成",
+      "trigger": "連結 graph で任意の辺を使えるが、構成の正当性を階層的に管理したいとき。",
+      "application": "余分な辺を捨てて tree にし、部分木ごとの不変条件を帰納的に保つ。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "再帰的構成と帰納法",
-      "trigger": "制約と操作を整理したときに 再帰的構成と帰納法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc244-g「Construct Good Path」では、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。さらに、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。で 再帰的構成と帰納法 を問題固有の状態へ適用する。",
+      "name": "局所 parity 補正 gadget",
+      "trigger": "walk の連結性を保ちながら特定頂点の訪問 parity だけを直したいとき。",
+      "application": "tree edge の往復回数を組み合わせ、他頂点への追加を偶数回にする短い列を設計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "子補正 v,c と次の v への帰還を一まとまりで見ると、親への影響が偶数に相殺され、子だけを確定できる。",
+      "reusablePerspective": "parity 構成では操作列を単発で見ず、局所 gadget 全体の各要素出現 vector mod 2 を計算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "深さ優先探索",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "再帰的構成と帰納法",
+      "text": "spanning tree、DFS walk、parity invariant、構成的アルゴリズム",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "最小幅の基底ケース、行列の転置、再帰で変換した終点座標を個別に確認する。",
+      "text": "連結列の隣接頂点が必ず tree edge になる順序を守り、実際に append するたび parity 配列を XOR すると判定が安全になる。最後に長さ≤4Nと全 bit一致を検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Construct Good Path 型の問題に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "任意の頂点訪問 parity を、spanning tree の閉じた部分 walk と局所補正で長さ制限内に構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "leaf c の target が0/1の二場合で出力列中の v,c の追加回数を mod 2 で数え、親 parityを途中で確定しない理由を理解する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc243-f「Lottery」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各賞 i が c_i 回出る具体的 count vector の確率は multinomial coefficient K!/∏c_i! と ∏p_i^{c_i} の積である。exactly M 種類という条件は c_i>0 の index 数だけで表せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "K! は全 count vector に共通なので外へ出し、賞ごとの因子 p_i^{c_i}/c_i! を一種類ずつ掛ける DP にすれば、draw の並び順を直接列挙せずに済む。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc243-f「Lottery」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "処理済み賞数、正の count を持つ種類数、割当済み draw 数を状態にし、次の賞へ c=0..残りを割り当てる DP を行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "multinomial の分母と確率積が賞ごとに分離し、M 種類条件も c=0か正かで更新できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "使用する M 種類の subset を列挙し、その subset が全て一度以上出る確率を個別に計算する。",
+        "decision": "rejected",
+        "decisionReason": "C(N,M) が大きく、重みの異なる賞ごとに subset をまとめられない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Lottery 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "dp の中では順序なし count vector の重み ∏p_i^{c_i}/c_i! を足し、最後に K! を一度掛けることで全 draw sequence の multinomial 個数を復元する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc243-f「Lottery」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "p_i=W_i/(ΣW) を法上で求め、dp[usedKinds][draws] を初期 dp[0][0]=1 とする。賞 i ごとに c=0..K-draws を試し、c=0なら種類数据え置き、c>0なら+1し、p_i^c/c! を掛ける。最後に dp[M][K]·K! を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc243-f「Lottery」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "multinomial の種類別 DP",
+      "trigger": "独立試行の結果 count と、正の count を持つカテゴリ数を同時に数えたいとき。",
+      "application": "共通 K! を外へ出し、各カテゴリの p^c/c! を生成関数係数として畳み込む。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc243-f「Lottery」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "法上の確率計算",
+      "trigger": "有理確率の分母が法と互いに素で、答えを有限体上で求めるとき。",
+      "application": "総重みの逆元で確率を表し、階乗逆元と冪を法上で掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "exactly M distinct は draw 順では複雑だが、count vector では非零成分数という単純な統計量になる。",
+      "reusablePerspective": "反復試行の distinct 数条件では、sequence から occupancy counts へ視点を移し multinomial 重みを分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "multinomial coefficient、確率 DP、階乗と法逆元",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "c=0 の因子は1で distinct 数を増やさない。M>K なら自然に0となり、p_i の冪と inverse factorial を K まで前計算して rolling DP を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Lottery 型の 整数の約数・剰余構造に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "重み付き独立抽選の distinct 種類数確率を count vector の multinomial DP として計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "K=3で count (2,1) の並びが3通りになることを、DP 内の 1/(2!1!) と最後の3!の積から再現する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

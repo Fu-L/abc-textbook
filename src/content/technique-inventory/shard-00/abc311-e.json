@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc311-e「Defect-free Squares」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "正方形を左上・右下の二点で列挙すると候補が多いが、右下マスを固定すると、存在する辺長は 1 から最大値まで途切れない。よって最大辺長一つが個数も表す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "右下 (i,j) の正方形を一段拡張するには、上・左・左上を右下とする三つの正方形がすべて必要で、最小の辺長がボトルネックになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc311-e「Defect-free Squares」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各マスを右下とする穴なし正方形の最大辺長を、上・左・左上の最小値＋1 で DP する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各正方形を右下で一意に分類でき、最大辺長 k がその右下からの k 個の正方形をまとめて数えるため O(HW) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各左上マスと辺長を列挙し、二次元累積和で穴数を判定する。",
+        "decision": "rejected",
+        "decisionReason": "一回の判定は O(1) でも候補が Θ(HW min(H,W)) あり、3000×3000 では多すぎる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "穴マスでは dp=0、通常マスでは dp=min(dp_up,dp_left,dp_diag)+1 とすれば、新たに加わる下辺・右辺も三小正方形の和で覆われる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Defect-free Squares 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "dp[i][j]=k なら同じ右下を持つ辺長 1..k がすべて有効なので、全 dp の総和が重複のない答えになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc311-e「Defect-free Squares」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "穴を boolean grid に記録し、上と左に 0 の番兵行列を置く。行優先で、穴なら 0、そうでなければ三近傍の min+1 を計算して 64 bit の答えへ加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc311-e「Defect-free Squares」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "最大サイズ DP で全サイズを数える",
+      "trigger": "固定した端点に対する有効サイズが 1..k の prefix をなす図形を数えるとき。",
+      "application": "端点ごとの最大サイズを求め、その値自体を個数として足す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc311-e「Defect-free Squares」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "最大正方形の三近傍遷移",
+      "trigger": "grid 上で全マスが条件を満たす正方形を扱うとき。",
+      "application": "右下を固定し、上・左・左上の最大辺長の最小値を使って一段拡張する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "「最大を求める DP」がそのまま「全部を数える」答えになるのは、辺長に関する下方閉性があるためである。",
+      "reusablePerspective": "数え上げ候補がサイズで入れ子なら、端点ごとの最大有効サイズへ圧縮できないかを見る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "二次元 DP と番兵",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "正方形領域の包含関係",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "答えは最大で HW min(H,W) 級なので 64 bit を使う。穴座標の 1-index/0-index と番兵行・列を揃える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Defect-free Squares 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "各右下端点の最大正方形だけを求めることで、すべての穴なし正方形を O(HW+N) で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "数えたい対象を一意な端点へ割り当て、サイズ集合が連続かを確かめる。三近傍の min が必要な理由は図に一段拡張を書いて確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

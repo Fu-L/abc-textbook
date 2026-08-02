@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc295-ex「E or m」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "行を上から処理すると将来との接続可能性は各列の最下端bitだけで表せ、許される次行はfrontier maskの部分集合とprefixを1で埋める形に分類できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc295-ex「E or m」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "frontier mask DPとsubset zeta型遷移",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "幅M≤18なので2^M状態を持ち、次行候補の部分集合和を高速ゼータ変換の要領でまとめられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全?マスを列挙",
+        "decision": "rejected",
+        "decisionReason": "最大324マスで指数が大きすぎる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "E or m 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "左から最初に新しい連結が止まる0を境界にすると、prefix全1＋残りfrontier部分集合という互いに重ならない遷移分類になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc295-ex「E or m」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各行でdp[mask]を入力0/1/?制約に合わせて変換し、部分集合和を一回のzeta sweepで計算しつつ各prefix全1ケースを次maskへ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc295-ex「E or m」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "bitmask frontier DP",
+      "trigger": "幅が小さい格子を行単位で処理し、将来に影響する境界だけを保持する。",
+      "application": "各列が上から伸長可能かをmaskにする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc295-ex「E or m」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "subset zeta transform",
+      "trigger": "全maskからその部分集合への和が必要。",
+      "application": "行遷移の多数の部分集合和をO(M2^M)で求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "遷移をprefixの最初の0で一意分類することで、複数回の部分集合和を一回のzeta変換へ畳める。",
+      "reusablePerspective": "frontier遷移は重複しない境界イベントで分類する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "bitmask DPと高速ゼータ変換。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "固定0/1に反するmaskを除外し、prefix全1ケースの追加タイミングと法998244353を統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "E or m 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "条件を満たす0/1/?格子の完成方法数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "小格子の全?埋めと比較し、全0・全1、固定値が遷移を遮る行、M=1を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

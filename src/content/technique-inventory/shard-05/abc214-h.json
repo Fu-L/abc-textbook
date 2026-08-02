@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc214-h「Collecting」では、主解法候補として、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "同じ強連結成分へ一度入れば成分内を巡って全ての落とし物を回収できるため、成分を一頂点へ縮約し重みを合計してよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "縮約後は DAG 上で始点から K 本の経路を選び、どれかの経路が初めて通る頂点の重みだけを一度得る問題になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc214-h「Collecting」では、主解法候補として、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "強連結成分を縮約した後、各人の最良経路を独立に選び、その得点を合計する。",
+        "decision": "rejected",
+        "decisionReason": "複数人が同じ頂点を訪れても落とし物は一度しか得られず、経路間の重複を独立な最長路では扱えない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "縮約 DAG の各頂点を入出力に分割し、最初の一単位だけ報酬を得る容量辺と再訪用の辺を置いて K 単位の最小費用流へ帰着する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各流量が一人の経路に対応し、容量 1 の辺が頂点報酬を全経路を通じて一度だけ数える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同一強連結成分内では相互到達可能であり、成分間を縮約すると閉路のない DAG になる。",
+        "text": "頂点 u の in から out へ、容量 1 の報酬辺と容量無限の無報酬辺を並べると、訪問回数にかかわらず X_u を高々一度だけ獲得できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Collecting 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "トポロジカル順の重みの prefix sum を使って「通らなかった重み」を費用化すると、負の報酬辺を全て非負費用へ置き換えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc214-h「Collecting」では、主解法候補として、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "SCC 縮約で移動を DAG の経路へ変え、頂点報酬を容量付き node-splitting 辺で共有し、トポロジカル prefix による再重み付け後の最小費用流として K 経路を同時最適化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc214-h「Collecting」では、主解法候補として、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "SCC 縮約",
+      "trigger": "有向グラフで同一強連結成分内を自由に巡回でき、頂点資源をまとめて回収できるとき。",
+      "application": "各成分の落とし物数を合計して一頂点にし、成分間辺だけからなる DAG を構成する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "強連結成分分解",
-      "trigger": "制約と操作を整理したときに 強連結成分分解 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc214-h「Collecting」では、主解法候補として、強連結成分を縮約し、成分 DAG 上で到達関係や DP を処理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 強連結成分分解 を問題固有の状態へ適用する。",
+      "name": "一度だけ得る頂点報酬の最小費用流",
+      "trigger": "複数の経路が頂点を共有できるが、その価値は全経路を通じて一回だけ加算されるとき。",
+      "application": "頂点分割後に容量 1 と無限容量の二辺を置き、K 単位の流れで経路と報酬共有を表す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "全頂点重みを各流量の基準得点とし、経路が飛ばしたトポロジカル区間の重みを費用にすると、答えは K×重み総和から最小費用を引いて復元できる。",
+      "reusablePerspective": "負報酬が最短路処理を難しくするときは、全候補の定数報酬から未取得分を非負費用として引く再表現を探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "強連結成分分解と縮約 DAG のトポロジカル順を構成できること。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "強連結成分分解",
+      "text": "頂点分割、容量、費用を用いて複数経路の共有資源を最小費用流としてモデル化できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "元頂点から成分番号への写像と、重複する成分間辺の扱いを明確にする。",
+      "text": "縮約後の頂点を始点成分から到達可能な範囲でトポロジカル順に並べ、成分重みと prefix sum の添字を一致させる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "容量無限は必要流量 K 以上で十分とし、辺費用と総費用には重み和を保持できる整数型を用いる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Collecting 型の 頂点と辺からなる状態グラフに対し、強連結成分分解を選び、状態と証明を一貫して設計できる。",
+      "text": "複数の DAG 経路が共有する一回限りの頂点報酬を、SCC 縮約と最小費用流で同時に最適化できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "元頂点から成分番号への写像と、重複する成分間辺の扱いを明確にする。",
+      "text": "複数人が同じ資源を一度だけ回収する問題では、各人別 DP より先に「最初の一流量だけ安い容量 1 辺」を検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "負辺除去の式は、一本の経路について取得重みと飛ばした区間費用の和が全重みになることから確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

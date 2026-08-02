@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc394-g「Dense Buildings」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "高さXのwalkwayだけで二building間を移動できるのは、高さX以上のcellだけを残したgridで両cellが連結なことと同値である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "二cellが連結でいられる最大threshold Mが分かれば、実際に使う高さはmin(M,Y,Z)で、階段回数はY+Z-2min(M,Y,Z)になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc394-g「Dense Buildings」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "隣接edgeのcapacity=min(F_u,F_v)でthreshold connectivityをDSU処理し、全queryをparallel binary searchする",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "高さmidでの連結判定をquery間で共有し、各roundにedgeを降順追加する一回のDSU sweepで全queryを更新できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "queryごとに高さを二分探索し、その都度grid BFSする",
+        "decision": "rejected",
+        "decisionReason": "一判定O(HW)をQ logF回行い、最大2×10^5 queryでは不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+        "text": "thresholdを下げるほど利用可能cell/edgeが増えるのでconnectivityは単調である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Dense Buildings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "edge capacityは両端buildingの低い方で、その高さ以下なら同階walkwayを渡れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc394-g「Dense Buildings」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "text": "全grid隣接edgeをcapacity降順にsortする。各queryの[L,R) thresholdを持ち、mid別bucketを作るroundごとにDSUを初期化してedgeをthresholdまで追加し、endpoint連結ならL=mid、否ならR=midと更新する。確定Mから式を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "online query の計算量設計",
-      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc394-g「Dense Buildings」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "name": "offline dynamic connectivity by threshold",
+      "trigger": "edgeがkey threshold以下/以上で単調に追加され、多数のpair接続閾値を求めるとき。",
+      "application": "edge sortとDSU sweepを共有する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Union-Find",
-      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc394-g「Dense Buildings」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "name": "parallel binary search",
+      "trigger": "多数queryが同じ単調更新列上でbinary searchするとき。",
+      "application": "同じmid判定を一roundのdata structure sweepへまとめる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "walkway回数は無料なのでpath長でなく「path上の最小building高さを最大化するwidest path」だけがstairs最小化を決める。",
+      "reusablePerspective": "移動costが高度を一度下げて戻す形なら、空間部分はbottleneck connectivityへ分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "online query の計算量設計",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Union-Find",
+      "text": "DSU、widest path、parallel binary searchを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "same cell queryでもfloorが異なるcaseはMをbuilding高さ相当として式が成り立つ。mid bucket処理のedge≥mid境界とL/R初期値を統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Dense Buildings 型の 更新と問い合わせの時系列に対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "text": "大量のgrid移動queryを最大通行高度のoffline connectivityへ変換し、最小階段回数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "小gridで全threshold BFSとmax-min pathを列挙し、同cell、隣接cell、start/end floorがbottleneckより低いcaseを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

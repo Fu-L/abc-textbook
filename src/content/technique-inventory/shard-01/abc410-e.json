@@ -17,67 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc410-e「Battles in a Row」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "i 体まで倒した後、同じ残り魔力 m なら残り体力が大きい状態が常に優越するため、二資源の全組を boolean 状態にせず各 m の最大体力だけ残せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "モンスターは順番固定なので、i-1 体撃破後の状態から体力 A_i を払うか魔力 B_i を払うかの二遷移だけを考えればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc410-e「Battles in a Row」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。",
+        "approach": "dp[m] を現在まで倒して残り魔力 m のときの最大残り体力とする一次元 frontier DP",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各層で物理攻撃は同じ m へ hp-A_i、魔法攻撃は m-B_i へ hp を遷移する。同じ m の劣る hp を捨てても将来の可否に影響せず O(NM) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "倒した数・残り体力・残り魔力の全三次元 reachable DP",
+        "decision": "rejected",
+        "decisionReason": "H,M,N が各3000で O(NHM) の状態を持てず、同じ魔力で最大体力だけ残せる支配関係を使っていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "将来の行動条件は体力と魔力が各必要量以上かだけなので、魔力を固定したとき小さい体力の状態が大きい体力を上回ることはない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Battles in a Row 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "i 層がすべて未到達になった最初のモンスター以後は進めないため、その直前の i-1 が答え。各層に到達状態があれば i を更新できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc410-e「Battles in a Row」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。",
+      "text": "dp[M]=H、他を -1 で初期化する。各 (A_i,B_i) で next を -1 にし、dp[m]≥A_i なら next[m]をdp[m]-A_iで、m≥B_iならnext[m-B_i]をdp[m]で最大更新する。next が全 -1 なら直前の撃破数を出力し、最後まで到達すれば N。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc410-e「Battles in a Row」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "Pareto frontier の DP 圧縮",
+      "trigger": "二資源状態で一方を固定すると他方の大きい値が常に優越するとき。",
+      "application": "残り魔力ごとに最大体力だけを保持する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "層別 rolling DP",
+      "trigger": "順番固定の選択を一段ずつ処理し、遷移が直前層だけに依存するとき。",
+      "application": "current/next 配列を分けて同じモンスターを二度倒す in-place 更新を防ぐ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "体力と魔力を対称に全列挙せず、上限の小さい一資源を index、もう一資源を優越値にすると二次元 frontier が一次元になる。",
+      "reusablePerspective": "複数消費資源の到達 DP では、固定した座標上で最大化できる残量が将来を完全に代表するか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "動的計画法の状態設計",
+      "text": "0/1 選択型 DP、状態の支配関係、rolling array を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "hp=A_i、m=B_i は使用可能で残量0になる。next は毎層初期化し、物理・魔法の両遷移を同じ旧 dp から行う。-1 と有効な体力0を区別する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Battles in a Row 型の問題に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "二つの消費資源から毎戦一方を選ぶ過程を O(NM) 時間・O(M) memory で追い、倒せる最長 prefix を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "初戦で両方不足、ちょうど0を残す選択、同じ魔力で異なる体力が合流する例、全撃破可能例を全選択列挙と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

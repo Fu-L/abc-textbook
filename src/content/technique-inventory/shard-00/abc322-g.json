@@ -17,77 +17,125 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc322-g「Two Kinds of Base」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "X>0かつdigitが非負なのでa=bでは差0、a<bでは差が負となり、解では必ずa>bである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "k=2では差がS_1(a-b)だけになり、S_1|Xを固定するとs=a-b=X/S_1、bの範囲と自由な末尾digit S_2を直接数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "k≥3では各a^e-b^eがa-bの倍数なのでs=a-bはXの約数で、さらにleading exponentが2以上だからa²-b²=s(2b+s)≤Xが必要になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc322-g「Two Kinds of Base」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "k=2をdivisorごとの閉形式で数え、k≥3はdivisor sと有限なbを列挙してsuperincreasingなweightのgreedy表現を検査する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "Nが10^9でも候補(a,b)をXだけに依存する範囲へ絞り、各pairの有効Sが高々1つという構造を使える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "a,b≤Nを全組列挙し、長さとdigit列をDPする。",
+        "decision": "rejected",
+        "decisionReason": "N^2 pairだけで最大10^18となり、Xが小さいという制約を利用していない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "通常のbase-a表現とbase-b表現を別々に列挙して一致を探す。",
+        "decision": "rejected",
+        "decisionReason": "同じdigit列Sを両baseで共有する制約が結合しており、独立な表現の照合では候補が膨らむ。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "digit上限d=min(10,b)に対し、weight D_e=a^e-b^eはD_e>(d-1)Σ_{i<e}D_iを満たすため、大きいweightから係数を決めるgreedy表現が一意になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Two Kinds of Base 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "固定(a,b)では最大D_e≤Xから降順にquotientをdigitとして引き、各digit<dかつ最終remainder 0ならleadingから定まるS prefixが唯一存在する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "末尾digit S_kはweight a^0-b^0=0で差へ影響せず、valid prefixごとにd通り選べる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc322-g「Two Kinds of Base」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "k=2はS_1=1..9かつS_1|Xを走査し、s=X/S_1、b∈[S_1+1,N-s]ごとの末尾digit数min(10,b)を区間和で加える。k≥3は各divisor s of Xについて1≤b≤min(N-s,floor((X/s-s)/2))、a=b+sを列挙する。D_e=a^e-b^eをXでcapしながらe≥2まで作り、最大weightからXをgreedy分解してdigitが0..min(10,b)-1、leading非zero、remainder 0ならmin(10,b)を加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc322-g「Two Kinds of Base」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "差の因数による候補圧縮",
+      "trigger": "a^e-b^eの線形結合がXに等しくa,bの上限が巨大なとき。",
+      "application": "a-b|Xと二乗差≤Xからsmall parameterを列挙する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc322-g「Two Kinds of Base」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "superincreasing weightのgreedy復号",
+      "trigger": "各weightが小さいweightの最大総寄与を上回るbounded-digit表現。",
+      "application": "最大weightからquotientを一意なdigitとして決める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "自由な零weight桁の分離",
+      "trigger": "表現の末尾項がparameter差に寄与しないとき。",
+      "application": "有効prefixごとに末尾digitの選択数を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "同一digit列を2つのbaseで評価した差はD_e=a^e-b^eをweightにした非標準進数表現であり、そのweightがdigit上限に対して十分急増する。",
+      "reusablePerspective": "2種類の評価関数の差を、係数制限付きweight表現として見て一意復号性や因数条件を探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "a^k-b^kの因数分解",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "剰余演算と modular inverse",
+      "text": "約数列挙",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "greedyな位取り表現",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "k=2のb範囲和Σmin(10,b)はb≤9とb≥10に分け、N-sが下端未満なら0とする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "power差の生成はa,bが10^9なので128bitとX+1でのcapを使い、overflow前に停止する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "k≥3のgreedyでは最大exponentが少なくとも2であることとleading digit>0を確認し、k=2との重複を避ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Two Kinds of Base 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "巨大なbase上限を走査せず、f(S,a)-f(S,b)=Xを満たす全triplesを約数候補と一意greedy表現で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "k=2で末尾digitが自由になる理由と、k=3以上でD_eが下位digit最大和を上回る不等式を小さいa,bで確かめ、同じSを二重計数しないか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

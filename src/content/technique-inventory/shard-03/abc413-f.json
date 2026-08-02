@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc413-f「No Passage」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "非goal cellの値は、四方向へ進んだ後のdist+1のうち小さい方から二番目になる。Aokiが最良方向を一つ禁止しても、Takahashiは残る中の最良を選ぶからである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "未知値を再帰式から直接解くとcycleするが、有限distの小さい順に確定すると、隣接する有限値が二個確定した瞬間にそのcellの二番目の値も確定する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc413-f「No Passage」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全goalをdist0として始め、各cellで確定済みneighbor数を数えるretrograde BFS",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "queueはdist非減少で出るため二個目に確定したneighborのdistが二番目に小さい。countが2になったcellをそのdist+1で確定し、各grid edgeを定数回処理する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各cellのsecond-min方程式を値が変わらなくなるまで反復緩和する",
+        "decision": "rejected",
+        "decisionReason": "自己参照とcycleがあり収束回数を制約内に保証できず、有限状態がgoalから距離順に広がる単調性を使っていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+        "text": "盤外方向は動かず同じ状態へ戻るため、有限解を作る有効neighborとは数えない。boundaryで有限neighborが一つしかないcellは、その方向をAokiに禁止されるので到達不能になり得る。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "No Passage 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "あるcellが確定したとき影響するのは四近傍だけであり、一つのcellはcount=2の一回だけqueueへ入るため、H×Wが900万でも線形処理で済む。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc413-f「No Passage」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "distを∞、goalsを0でqueueへ入れる。distの小さい順にcell vをpopし、未確定の各grid neighbor uのfixedNeighborCountを増やす。2になった瞬間dist[u]=dist[v]+1としてpushする。最後に有限distを全て加え、∞cellは問題指定どおり0寄与とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc413-f「No Passage」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "ゲームの後退解析",
+      "trigger": "min/max双方の選択がある到達gameで、terminalから勝敗・手数を逆向きに確定できるとき。",
+      "application": "goalを基底に、相手が一手を妨害しても残る二番目の遷移値から状態を確定する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc413-f「No Passage」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "k-th smallest の多源BFS",
+      "trigger": "状態値がneighbor値の第k小値+1で、値を小さい順に確定できるとき。",
+      "application": "各cellはk個目のneighborがpopされた時点でdistを決める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "局所count伝播",
+      "trigger": "確定済み後続状態の個数が閾値に達したら前状態が確定するとき。",
+      "application": "四近傍の確定countだけを持ち、全cellを一度だけactivateする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "Aokiが禁止できる方向が一つなので通常の最短路のminimumではなくsecond minimumになり、逆探索では必要な確定neighbor数がちょうど2になる。",
+      "reusablePerspective": "相手が最大b個の行動を潰すreachability gameでは、(b+1)番目の後続値と確定後続数b+1によるretrograde解析を検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "幅優先探索",
+      "text": "min-max gameのBellman式、多源BFS、後退解析を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "goalは隣接countに関係なくdist0で一度だけqueueへ入れる。盤外をneighborとして数えず、同じuを二重確定しない。dist総和は64 bitを使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "No Passage 型の 盤面上の位置と局所遷移に対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "全開始cellの最適game手数／到達不能を O(HW) で同時に求め、その有限値総和を計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "cornerにgoal一個、boundaryの一本道、二方向だけgoalへ近づけるcell、到達不能領域を小盤面のvalue iterationと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

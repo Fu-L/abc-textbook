@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc347-g「Grid Coloring 2」では、主解法候補として、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "最終値は0を残さず1へ変えてもcostが増えないため、各可変cellのlabelは1…5に限定できる。隣接cost(a-b)^2はordered labelに対するMonge関数で、threshold変数[cell value>k]を使うs-t min-cutへ表現できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc347-g「Grid Coloring 2」では、主解法候補として、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各cellを4個のthreshold nodeへ展開し、Monge pairwise costをmin-cutで最小化する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "固定label制約と全隣接二次costを一つのsubmodular cut energyとして厳密に解き、cutからgridも復元できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "0-cellの5^(個数)通りを全探索する",
+        "decision": "rejected",
+        "decisionReason": "最大400可変cellで指数探索は不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある文字列と prefix を共有する文字列群は辞書順で連続するため、最長一致する相手は隣接位置にも存在する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Grid Coloring 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "label bはb>kが真となるthreshold k=1,…,b-1のprefixで一意に表せる。隣接x,yには同threshold間capacity 1と異thresholdl<k間capacity 2の両向きarcを張ると、cutへ1+3+…+(2|a-b|-1)=|a-b|²だけ寄与する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc347-g「Grid Coloring 2」では、主解法候補として、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "cell xごとにnode x_{>1},…,x_{>4}を作り、x_{>k+1}→x_{>k}へINFを張る。固定A_x=aにはs→x_{>a-1}とx_{>a}→tの必要なINF arcでexact labelを強制する。各隣接cell pairの両方向に、同threshold capacity1とl<kのcross-threshold capacity2 arcを張る。max-flow後、source reachableなthreshold数+1をB_xとして出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc347-g「Grid Coloring 2」では、主解法候補として、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "multi-label graph cut",
+      "trigger": "orderedな有限labelとunary制約、pairwise Monge costのenergy最小化である。",
+      "application": "labelをthreshold binary変数へ展開し、submodularな差分costをcut capacityで表す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "辞書順と longest common prefix",
-      "trigger": "制約と操作を整理したときに 辞書順と longest common prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc347-g「Grid Coloring 2」では、主解法候補として、文字列を辞書順に sort し、各文字列と直前・直後の文字列との LCP の最大値だけを調べる。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 辞書順と longest common prefix を問題固有の状態へ適用する。",
+      "name": "threshold encoding",
+      "trigger": "値1…dをbinary node d-1個で順序を保って表したい。",
+      "application": "INF chainでtruth集合をprefixに限定し、source側node数からlabelを復号する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "平方差は奇数和d²=1+3+…+(2d-1)へ分解でき、その各増分がthreshold順序のcrossing arcとして実装される。",
+      "reusablePerspective": "convexなordered-label差costは離散一次差・二次差をthreshold cutへ配分できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "辞書順と longest common prefix",
+      "text": "s-t min-cut/max-flow、Monge/submodular pairwise energy、threshold encoding、Dinic。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "元 index を文字列と一緒に保持し、先頭・末尾では存在する片側だけを比較する。",
+      "text": "INFは全有限cost上界より大きく取る。各undirected隣接pairで必要arcを両方向に張り、固定値1や5では存在しないthreshold端のconstraintを省く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Grid Coloring 2 型の 盤面上の位置と局所遷移に対し、辞書順と longest common prefixを選び、状態と証明を一貫して設計できる。",
+      "text": "固定cellを保ちながら0-cellへ1…5を割り当て、隣接差平方和を最小にするgridを一つ構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "元 index を文字列と一緒に保持し、先頭・末尾では存在する片側だけを比較する。",
+      "text": "N=1、全固定、二cellの端label、0だけのgridを小規模5^z全探索し、cut costと復号Bの実costを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

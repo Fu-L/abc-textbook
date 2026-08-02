@@ -1,15 +1,15 @@
 {
   "problemId": "abc263-ex",
   "sourceRevisionIds": [
-    "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228",
-    "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e"
+    "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e",
+    "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228",
-        "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e"
+        "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e",
+        "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,77 +17,103 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc263-ex「Intersection 2」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "半径 r 以内の交点数は r に対して単調非減少なので、K 番目の距離を答え二分探索できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "円を横切る各直線を円内の弦とみなすと、二直線の交点が円内にあることは二弦の端点が円周上で交互に並ぶことと同値である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc263-ex「Intersection 2」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全ての直線対の交点座標と原点距離を計算し、K番目を選ぶ。",
+        "decision": "rejected",
+        "decisionReason": "交点が約 N^2 個あり、N=5万では列挙も保存もできない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "半径 r の円との各直線の二交点を偏角順に並べ、各弦を区間 [L_i,R_i] として端点交互配置の組数を BIT で数える判定を二分探索する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "平面内の交点判定を円周上の一次元区間交差へ移せ、各半径の交点対数を直線対列挙なしで得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "判定の真偽が境界の片側で閉じる単調性を示せば、各比較で答えを含む区間を半分に保てる。",
+        "text": "円周を一点で切って端点へ順位を付けると、二弦が交差する条件は L_i<L_j<R_i<R_j またはその対称形になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Intersection 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "区間を R の昇順に処理し、既処理区間の開区間 (L,R) へ加算して現在の L を一点照会すれば、交互配置の各組を一度数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc263-ex「Intersection 2」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "geometric order statistic を parametric counting にし、line-circle dualization で chord intersection、さらに circular order の interval crossing count へ段階的に落とす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc263-ex「Intersection 2」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "幾何量の答え二分探索",
+      "trigger": "距離などのK番目を直接列挙できず、閾値以内の対象数を高速に数えられるとき。",
+      "application": "半径 r 内の交点対数が K 以上かを判定して境界を絞る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "二分探索と単調性",
-      "trigger": "制約と操作を整理したときに 二分探索と単調性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc263-ex「Intersection 2」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 二分探索と単調性 を問題固有の状態へ適用する。",
+      "name": "円内直線交点の弦交差化",
+      "trigger": "多数の直線対について共通の凸領域内で交わるかを数えたいとき。",
+      "application": "各直線と境界円の二交点を弦端点とし、端点の円周順が交互かを判定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "端点交互区間のBIT数え上げ",
+      "trigger": "L_i<L_j<R_i<R_j 型の区間対を数えるとき。",
+      "application": "右端順に sweep し、過去区間の内部をrange add、現在左端をpoint queryする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "原点からの距離が r より大きい直線は円と交わらず、その直線が作る交点は円内に存在しないため判定から除外できる。",
+      "reusablePerspective": "境界との交点を使う幾何変換では、対象領域を通過しないオブジェクトを先に除く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "二分探索と単調性",
+      "text": "実数二分探索、直線と円の交点、偏角ソート、BITによる区間加算・一点取得を扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。",
+      "text": "二分探索上限は係数範囲とCramerの公式から全交点距離を覆う値にし、許容誤差に十分な反復回数を取る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "円との交点と偏角の計算は long double などで行い、弦端点の二つの順位を小さい順に L,R とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Intersection 2 型の 整数の約数・剰余構造に対し、二分探索と単調性を選び、状態と証明を一貫して設計できる。",
+      "text": "K番目に近い直線交点の距離を、円内交点数の弦交差カウントで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。",
+      "text": "多数の交点の距離順位は、交点を作るのでなく固定領域内に何対あるかを数える判定へ変える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "凸領域を横切る線分同士の交差は、境界上の端点順序だけで判定できることを利用する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

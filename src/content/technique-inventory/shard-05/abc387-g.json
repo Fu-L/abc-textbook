@@ -17,77 +17,99 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc387-g「Prime Circuit」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "全circuitが素数長なら偶数長circuitは存在しない。二つのcycleが頂点を共有すると、その対称差や連結したclosed trailから偶数長circuitを作れるため、cycle同士はvertex-disjointでなければならない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "条件を満たすconnected graphは、素数長cycle blockとbridgeからなるvertex-disjoint cactusである。rooted labelled構造の指数型母関数Fは、G(x)=x+Σ_{prime p≥3}x^p/2としてF=G(x exp F)を満たす。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc387-g「Prime Circuit」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "cactusのrooted EGF方程式を立て、Kinoshita–Li形式的冪級数合成を用いたNewton法または逆関数で解く",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N=2.5×10^5では平方根次数の古典的compositionも重く、合成をO(N log²N)で行えば暗黙方程式の係数を制約内で得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "graphのedge subsetやcycle配置を直接列挙する",
+        "decision": "rejected",
+        "decisionReason": "単純graphは2^{N choose 2}個あり、cactusへ特徴付けてもlabel配置を個別に数えるのは指数的である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "係数比較により元の再帰・畳み込みと冪級数恒等式が次数ごとに同値であることを示す。",
+        "text": "rootに付く独立な子構造はx exp F、rootを含むprime cycleはその構造をp個環状に並べ、二方向の対称性で2除算する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Prime Circuit 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "power projection [x^n]f(x)^i g(x)をBostan–Mori型に計算し、転置原理で線形写像を逆順・転置すると高速composition g(f(x))が得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc387-g「Prime Circuit」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "prime indicatorからGをN次まで構成する。F=G(x exp F)に対し、compositionをKinoshita–Li法で評価してFPS Newton iterationする（またはH=exp Gからx/H(x)のcompositional inverseを求める）。最後にrooted EGF係数をfactorialで戻す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc387-g「Prime Circuit」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "block decompositionと指数型母関数",
+      "trigger": "labelled connected構造がroot周りのsetとcycle blockへ分解できるとき。",
+      "application": "vertex-disjoint prime cycle cactusをF=G(x exp F)で表す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "形式的冪級数",
-      "trigger": "制約と操作を整理したときに 形式的冪級数 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc387-g「Prime Circuit」では、主解法候補として、数え上げの関係を形式的冪級数へ移し、積・逆元・微分積分などの演算として計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 形式的冪級数 を問題固有の状態へ適用する。",
+      "name": "転置原理によるFPS composition",
+      "trigger": "既知の高速線形変換の転置が欲しい係数写像になるとき。",
+      "application": "power projectionを転置してKinoshita–Li合成を得る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "FPS Newton iteration",
+      "trigger": "形式的冪級数の暗黙方程式を高次数まで解くとき。",
+      "application": "A(F)=0を倍精度反復し、各評価に高速compositionを使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "circuitを単純cycleだけと同一視せず、二cycleが共有頂点を持つと合成closed trailが偶数になることまで使うと、数えられるvertex-disjoint cactusへ強く特徴付けられる。",
+      "reusablePerspective": "graphの全trail条件は、複数cycleを組み合わせた新しいtrailが作る禁止構造を調べ、block構造へ翻訳する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "labelled構造の指数型母関数とcactus block分解を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "形式的冪級数",
+      "text": "Bostan–Mori、転置原理、FPS composition/Newton法を実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "必要次数で毎回 truncate し、定数項が逆元や対数の前提を満たすか確認する。",
+      "text": "prime cycleは単純graphなのでp≥3のみで、環の二方向対称性の1/2を入れる。EGF係数からlabelled個数へのfactorial係数とroot付き/なしの換算を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Prime Circuit 型の 頂点と辺からなる状態グラフに対し、形式的冪級数を選び、状態と証明を一貫して設計できる。",
+      "text": "prime circuit条件をvertex-disjoint cactusへ特徴付け、最新の高速FPS compositionでN=2.5×10^5まで数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "必要次数で毎回 truncate し、定数項が逆元や対数の前提を満たすか確認する。",
+      "text": "N≤7で全simple graphを列挙し、circuit条件と「vertex-disjoint prime cycles」の同値を検査する。母関数の低次係数もこの列挙値と照合してから高速compositionを信頼する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

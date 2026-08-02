@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc416-f「Paint Tree 2」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "白pathを最大K回塗る操作の最終結果は、treeから高々K本のvertex-disjoint pathを選ぶことと同値である。pathの順序は結果に影響しない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "rooted subtreeをparentへ接続できる情報として、rootが未選択か、選択componentのendpointとして開いているか、既に内部頂点で閉じているかを区別すればchildをknapsack mergeできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc416-f「Paint Tree 2」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "選択path数kとrootの接続statusを持つtree DPを、各childについてO(K^2)でmergeする",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "child側のroot endpointと現在rootのopen pathをedgeで結ぶと二componentが一pathへmergeされ、path数が1減る。root degreeは最大2なのでvertex-disjoint path条件を局所的に保てる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "pathの端点pairを全て列挙し、重ならない最大K本の組合せを探索する",
+        "decision": "rejected",
+        "decisionReason": "tree上にもΘ(N^2)本のpathがあり、その集合packingを直接扱えない。Kが小さいことはsubtree DPのcount軸に使うべきである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "木には閉路がないため、親辺を除く部分木が独立し、帰納法で子の最適値または個数を合成できる。",
+        "text": "vertex vを単独で選ぶ状態をweight A_v・path数1のopen componentとして初期化し、child endpointと一回結べばvはendpoint、二回結べば内部になり、それ以上は接続できない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Paint Tree 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "edgeを使わずchildの解を並置する遷移ではpath数を足し、edgeで二open componentを結ぶ遷移ではpath数を足して1引く。このcomponent数管理が操作回数に一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc416-f「Paint Tree 2」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "treeをroot化し、各vで未選択／vをendpointに含むopen／vを内部に含むclosedなどの配列dp[status][k]を初期化する。childの同配列と、edge不使用の並置または両endpoint接続を全k分割でmergeし、vの次数0..2を更新する。rootで全status・k≤Kの最大を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc416-f「Paint Tree 2」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "tree knapsack",
+      "trigger": "各subtreeから選ぶcomponent数に小さい上限Kがあり、child解を分配して併合するとき。",
+      "application": "path数kを軸にchildごとO(K^2) mergeする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "根付き木と木 DP",
-      "trigger": "制約と操作を整理したときに 根付き木と木 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc416-f「Paint Tree 2」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 根付き木と木 DP を問題固有の状態へ適用する。",
+      "name": "open/closed component DP",
+      "trigger": "subtree境界のrootを介して選択構造がparentへ延長される可能性を区別するとき。",
+      "application": "rootがpath endpointか内部か未選択かを状態にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "vertex-disjoint path packing",
+      "trigger": "tree上でdegree≤2の選択forestを最大重み化するとき。",
+      "application": "選択頂点の局所degreeを0..2に制限し、component数をpath本数として数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "path本体を保存せず、subtree境界で外へ接続できるendpointがvにあるかだけを伝えると、重なり禁止を局所mergeで保証できる。",
+      "reusablePerspective": "tree上の連結部分構造packingでは、parent edgeを通じて未完構造が何本出られるかをboundary stateに圧縮する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "根付き木と木 DP",
+      "text": "根付き木DP、knapsack merge、path componentのdegreeと端点を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "不可能状態を十分小さい値にし、同じvertexを複数pathへ含めない。単頂点pathを許し、0本選択の値0、最大値と総和は64 bit、深いtreeのstackにも注意する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Paint Tree 2 型の 頂点と辺からなる状態グラフに対し、根付き木と木 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "20万頂点でもK≤5を使い、最大K本のvertex-disjoint pathの最大頂点重み和をO(NK^2)で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "K=1、star中心を使うpath、chainで複数区間、単頂点pathが最適な小treeを全path subset列挙と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc435-e「Cover query」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "白マス集合は互いに素な極大区間の順序付き集合として持てる。黒くする [L,R] と交差する区間だけを削除し、左右にはみ出した部分を高々二つ戻せばよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc435-e「Cover query」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "白い極大区間を始点順の ordered set で管理し、[L,R] と交差する連続した区間だけ列挙・分割する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各クエリの境界処理は定数個、完全削除区間は全体で O(Q) 個なので O(Q log Q) に償却できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "長さ N の配列で各マスの色を持ち、クエリ区間を全走査する。",
+        "decision": "rejected",
+        "decisionReason": "N や区間長が大きく、同じ黒マスを何度も処理して O(NQ) になり得る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
+        "text": "交差区間は順序付き集合中で連続し、最初は r≥L となる区間を lower_bound で見つければよい。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Cover query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "一回の削除で区間数が増えるのは一つの区間が左右へ割れる場合だけで増分 1。したがって完全に消される区間の総数も初期数+全増分に抑えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc435-e「Cover query」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "set に [1,N] を入れ白マス総数 total=N とする。各 [L,R] で r≥L の最初の区間から l≤R の間だけ erase し、交差長を total から引く。l<L なら [l,L-1]、R<r なら [R+1,r] を insert し、total を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc435-e「Cover query」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "互いに素な区間の ordered set",
+      "trigger": "単調に削除される一次元集合へ範囲削除を行い、残存長を求めるとき。",
+      "application": "白い連続成分だけを保持し、交差成分の split/erase に限定する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "平衡二分探索木",
-      "trigger": "制約と操作を整理したときに 平衡二分探索木 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc435-e「Cover query」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 平衡二分探索木 を問題固有の状態へ適用する。",
+      "name": "削除の償却解析",
+      "trigger": "一回の更新で多数の区間を消すが、新しい区間の生成数が定数のとき。",
+      "application": "各消滅区間を過去の初期・生成イベントへ課金して総反復数を O(Q) にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "単調な塗りつぶしでは既に消えた点を再訪せず、現在の連続成分単位で処理するのが本質である。",
+      "reusablePerspective": "範囲更新で大量 erase が起きても、split による要素増加が小さければ ordered set 走査を償却できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "平衡二分探索木",
+      "text": "半開/閉区間、順序付き集合、lower_bound、区間分割、償却解析を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "探索 key が始点基準なら L を含み得る直前区間も確認する。erase 中の iterator 更新、左右残片の空区間除外、total の差分を正確に行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Cover query 型の 盤面上の位置と局所遷移に対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な一次元盤面の単調区間塗りつぶしと残数照会を、極大区間集合で高速処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "[L,R] と交差する最初の区間を取り逃さず、各交差長を一度だけ total から引いているかを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc465-g「Sum of Mex of Mod of Linear」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各start剰余xからA上を円環連続して進める長さd_xを定めると、mex総和は固定weight c_xとの内積 Σc_xd_x になる。queryで変わるのはAの連続run境界だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc465-g「Sum of Mex of Mod of Linear」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Aに含まれる剰余を円環interval集合として管理し、toggle前後で分割・結合されるrunが答えへ与える差を、c_xの座標圧縮prefix sumからO(1)区間式で加減する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "一つのrun [l,r] はその内部startのd_xがr-x+1となる三角形状寄与を持ち、run merge/split差は少数のc区間和・重み付き区間和だけで表せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各query後に全x=0..M-1でd_xを一つずつ延ばし、Σc_xd_xを再計算する。",
+        "decision": "rejected",
+        "decisionReason": "Mが大きく全剰余を走査できず、Aの要素数Nだけが小さい疎性を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "c_xは合同式 Ck+x≡0 mod M のk個数で全query不変なので、必要なx座標だけでprefix sumを前計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sum of Mex of Mod of Linear 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "toggle点の左右が同runか別runかにより、局所変化は新run生成・端延長・二run結合またはその逆の定数caseに限られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc465-g「Sum of Mex of Mod of Linear」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "queryに現れる座標と必要境界でc_xおよびc_x×xのprefixを用意する。ordered setでAのrun端を円環上に保持し、toggle時に左右neighborを探して旧run寄与を引き新run寄与を足す。全M剰余が埋まるcaseと一欠けcaseを別前計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc465-g「Sum of Mex of Mod of Linear」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "円環runの動的merge・split",
+      "trigger": "subset toggleで連続区間長由来の総和を維持したいとき。",
+      "application": "前後neighborから局所runだけを削除・追加する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc465-g「Sum of Mex of Mod of Linear」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "固定weightの区間moment",
+      "trigger": "run内で距離に一次なweight総和を繰り返し求めるとき。",
+      "application": "Σc_xとΣxc_xのprefixから閉形式寄与を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "mexの各queryを直接追わず、start剰余ごとの連続被覆長d_xへ二重和を交換する。",
+      "reusablePerspective": "dynamic binary circleのglobal統計は、run寄与関数が区間momentで計算できれば局所merge/splitだけで維持できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "円環runの動的merge・split、固定weightの区間momentと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "0とM-1を跨ぐrunを二倍座標または専用caseで扱い、全周埋まりでは通常の境界探索を使わない。cの合同式解数を正確に計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sum of Mex of Mod of Linear 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "線形剰余列のmex総和を、円環runの局所更新と固定weight prefix momentでqueryごとに高速維持できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "一runが各startのd_xへ作る寄与を式にし、点toggleの四つの左右在否caseで旧新run差を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

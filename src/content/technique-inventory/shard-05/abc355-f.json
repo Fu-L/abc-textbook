@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc355-f「MST Query」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "辺重みが1..10と極端に小さい。G_k を重み k 以下の辺だけの graph とすると、Kruskal の telescoping から MST 重みは Σ_{k=0}^{9}(components(G_k)−1) で表せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "辺 (u,v,w) の追加は全 k≥w の G_k に同じ connectivity edge を追加するだけで、削除がないため各 threshold を Union-Find で独立管理できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc355-f「MST Query」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "重み threshold 0..9 ごとの DSU と component 数を持ち、追加辺を該当 threshold 全てへ unite する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "threshold 数が定数10で、union 成功のたび components が1減りMST和も1減るため一 query ほぼ定数で更新できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各辺追加後に全辺を重み順に走査して Kruskal 法をやり直す。",
+        "decision": "rejected",
+        "decisionReason": "辺数が Q とともに増え、全 query 合計が O(Q(N+Q)) になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "cut property により異なる成分を結ぶ最小辺は安全であり、閉路を避けた採用を繰り返せば最適な全域木になる。",
+        "text": "MST の重み w は「重み≥1,…,w の層を一つずつ払う」と分解でき、層 k+1 で必要な辺数が c(G_k)−1 になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "MST Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "k≥w の各 DSU で u,v が別 component の時だけ answer を1減らすと、Σ(c_k−1) を直接維持できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc355-f「MST Query」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "10個の DSU を初期化し、初期木の各辺 (a,b,c) を k=c..9 へ unite する。component 数から ans=Σ_{k=0}^9(c_k−1) を作る。query (u,v,w) では k=w..9 で unite が成功するたび ans-- し、更新後 ans を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc355-f「MST Query」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "小重みの threshold 分解",
+      "trigger": "重み種類数 W が小さく、MST/最小 bottleneck 情報を追加辺下で維持するとき。",
+      "application": "重み≤k の連結性を全 k で持ち、目的値を component 数の層和にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最小全域木と cut property",
-      "trigger": "制約と操作を整理したときに 最小全域木と cut property の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc355-f「MST Query」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 最小全域木と cut property を問題固有の状態へ適用する。",
+      "name": "追加専用 connectivity の並列 DSU",
+      "trigger": "複数の単調な edge filter graph に同じ追加が波及するとき。",
+      "application": "filter ごとに Union-Find を持ち、successful union だけ集約量へ反映する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "動的 MST の一般データ構造ではなく、重み上限10を使って MST重みそのものを connectivity layers の面積として表す。",
+      "reusablePerspective": "重み値域が小さいとき、weighted quantity を threshold indicator の総和へ主客転倒する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "Kruskal 法",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "最小全域木と cut property",
+      "text": "Union-Find と component 数",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同重み辺の順序が答えへ影響する場合は一括判定してから併合する。",
+      "text": "G_0 は辺なし、G_10 は常に連結で和には k=0..9 を使う。追加重み w の辺は threshold k≥w だけへ入れる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "MST Query 型の 頂点と辺からなる状態グラフに対し、最小全域木と cut propertyを選び、状態と証明を一貫して設計できる。",
+      "text": "一般の動的 MST を10層の追加専用連結性へ変換し、O(10(N+Q)α(N)) で各重み和を更新できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同重み辺の順序が答えへ影響する場合は一括判定してから併合する。",
+      "text": "MST辺一本の重みを threshold 層へ分解し、Σ(c_k−1) の式を自分で telescoping する。DSU merge失敗時に答えを変えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

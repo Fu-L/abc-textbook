@@ -17,67 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc420-g「sqrt(n²+n+X)」では、平方根条件を二つの一次因子の積 (2m+2n+1)(2m-2n-1)=4X-1 に変形し、符号付き約数を列挙する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "m=sqrt(n^2+n+X)≥0を整数とすると、平方完成の差から(2m+2n+1)(2m-2n-1)=4X-1となる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "D=4X-1は0にならず、各整数解(n,m)はDのsigned divisor pair(d,D/d)へ一意に対応するため、有限個の約数を調べれば全解を列挙できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc420-g「sqrt(n²+n+X)」では、平方根条件を二つの一次因子の積 (2m+2n+1)(2m-2n-1)=4X-1 に変形し、符号付き約数を列挙する。この状態表現から答えを構成する。",
+        "approach": "|D|の正約数をsqrtまで列挙して全signed divisor dを生成し、factor pairからm,nを復元して整数性とm≥0を検査する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "d=2m+2n+1,e=D/dからm=(d+e)/4、n=(d-e-2)/4。全候補をsetに入れてsortすれば漏れも重複もない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "nをある範囲で走査してn^2+n+Xが平方か判定する",
+        "decision": "rejected",
+        "decisionReason": "nには入力から明示的な有限範囲がなく、解の有限性はdifference-of-squaresのfactorizationを使って初めて得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各整数解は積の約数対を一意に定め、逆に parity・積・m≥0 を満たす約数対から元の整数解を復元できる。",
+        "text": "Dはoddなのでdivisor pairもoddだが、/4の整数性は符号・順序に依存する。numeratorが4で割り切れることを明示確認するのが安全である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "sqrt(n²+n+X) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "negative XではDもnegativeでfactor二つの符号が逆になるため、positive divisorだけでなく±dを候補にし、m≥0で平方根の符号を選別する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc420-g「sqrt(n²+n+X)」では、平方根条件を二つの一次因子の積 (2m+2n+1)(2m-2n-1)=4X-1 に変形し、符号付き約数を列挙する。この状態表現から答えを構成する。",
+      "text": "D=4X-1、V=|D|とする。q=1..floor(sqrt V)でV%q=0ならq,V/qの各positive divisorを集め、それぞれ±をdとしてe=D/dを計算する。d+eとd-e-2が4の倍数でm=(d+e)/4≥0ならnをsetへ加え、昇順に出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "差の平方と約数列挙",
-      "trigger": "制約と操作を整理したときに 差の平方と約数列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc420-g「sqrt(n²+n+X)」では、平方根条件を二つの一次因子の積 (2m+2n+1)(2m-2n-1)=4X-1 に変形し、符号付き約数を列挙する。この状態表現から答えを構成する。で 差の平方と約数列挙 を問題固有の状態へ適用する。",
+      "name": "difference of squares",
+      "trigger": "二次式が平方になるinteger解をfactor pairへ変換するとき。",
+      "application": "4m^2-(2n+1)^2=4X-1として二因子に分ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "signed divisor enumeration",
+      "trigger": "積が負にもなるDiophantine equationの全整数factor pairを調べるとき。",
+      "application": "|D|の正約数から±dを作り、対応するe=D/dを得る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "合同条件による復元",
+      "trigger": "factor pairから線形連立で元変数を戻す際に整数性が必要なとき。",
+      "application": "二つのnumeratorの4 divisibilityとm非負を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "無限に見えるn探索を、常にoddで非零な定数4X-1の有限signed factorizationへ閉じ込める。",
+      "reusablePerspective": "二次Diophantine式では平方完成後に(u-v)(u+v)=constantを作れると全解がdivisor列挙になる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "差の平方と約数列挙",
+      "text": "平方完成、整数の約数列挙、線形方程式からの整数性判定を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "正負両方の約数、2 で割れる parity、復元後の代入確認を行う。",
+      "text": "X<0でも|D|を安全な64 bitで取り、q*q overflowを避けq≤V/qでloopする。平方約数の重複と異なるdからの重複nはsetで除く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "sqrt(n²+n+X) 型の問題に対し、差の平方と約数列挙を選び、状態と証明を一貫して設計できる。",
+      "text": "範囲のない整数nの全解を、|4X-1|の約数個に対応する有限候補として列挙できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "正負両方の約数、2 で割れる parity、復元後の代入確認を行う。",
+      "text": "X=0、正負X、|D|が平方、m=0の解を広い小n範囲の直接square判定と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

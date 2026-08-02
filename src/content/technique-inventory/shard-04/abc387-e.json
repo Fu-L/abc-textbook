@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc387-e「Digit Sum Divisible 2」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "Nは10万桁で通常整数に収まらない一方、必要なのは[N,2N)内の一つの構成である。桁和が1,3,9ならそれぞれ自動的にその桁和で割り切れる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "十分大きいNでは、上位数桁だけで桁和を2または8に調整し、長い0 suffixで偶数性または8の倍数性を保証すると、a+1の桁和を3または9にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc387-e「Digit Sum Divisible 2」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "小さいNは範囲全探索し、大きいNは上位2桁区間ごとの有限なprefix表と0 suffixで構成する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "公式のprefix候補17,26,35,62,107等は全て双子良整数を作り、上位2桁の区分により必ずN≤a<2Nを満たす候補を選べる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "Nから順にgood判定して最初の連続pairを探す",
+        "decision": "rejected",
+        "decisionReason": "Nが10万桁で探索幅の保証がなく、除算と桁和計算を繰り返す方法は実行不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+        "text": "aの末尾を十分な個数の0にすればa+1でcarryが起きず、桁和はちょうど1増える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Digit Sum Divisible 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "範囲保証とgood性を分離し、前者は先頭桁の区間被覆、後者は桁和と2・8・3・9の倍数判定で証明する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc387-e「Digit Sum Divisible 2」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "N<10^6ならa=N..2N-1を走査して二数を直接判定する。それ以外は桁数と上位2桁を読み、対応表からprefixを選んで適切な個数の0を付けたaを文字列で出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc387-e「Digit Sum Divisible 2」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "constructive problemの有限パターン被覆",
+      "trigger": "巨大な範囲から一例だけ求め、局所条件を固定suffixで保証できるとき。",
+      "application": "先頭桁区間を少数のprefix候補で覆う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc387-e「Digit Sum Divisible 2」では、主解法候補として、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "桁和と倍数判定",
+      "trigger": "桁和で割り切れる数を構成したいとき。",
+      "application": "桁和1,3,9と末尾による2・8の倍数性を組み合わせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "大整数を数値として扱わず、上位prefixが大小範囲を、0 suffixが割り切り条件を担当する二層構成にする。",
+      "reusablePerspective": "巨大桁の構成では、比較を決める上位桁と合同条件を決める下位桁を独立に設計できないか探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "十進桁和と2,3,8,9の倍数判定を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "全探索と候補数の上界評価",
+      "text": "長大整数を文字列で比較・構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "小N探索の上端はa+1≤2Nを満たす2N-1。大Nではprefix 107により桁数が一つ増えるcaseを含め、先頭0を出力しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Digit Sum Divisible 2 型の 整数の約数・剰余構造に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "10万桁のNに対しても、桁和・末尾・prefix区間被覆を分業させて双子良整数を構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "各prefix候補について桁和と末尾の倍数判定を独立に証明し、区間境界16/17,25/26,34/35,61/62,99/100付近を文字列比較で検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

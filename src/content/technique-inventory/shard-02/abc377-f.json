@@ -17,67 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc377-f「Avoid Queen Attack」では、駒が利く行・列・二方向の対角線を一意化して総延長を足し、異方向の線の交点だけを列挙して重複を補正する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "盤面は N^2 と巨大だが、M 個の queen が攻撃する行・列・二種の対角線は各 O(M) 本である。単純に各線の長さを足した時の重複は、異なる線同士の交点にしか起きず O(M^2) 個である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc377-f「Avoid Queen Attack」では、駒が利く行・列・二方向の対角線を一意化して総延長を足し、異方向の線の交点だけを列挙して重複を補正する。この状態表現から答えを構成する。",
+        "approach": "重複する攻撃線を種類ごとに除去し、各線の盤面内セル数を足しながら、既に数えた他方向線との交点だけを列挙して重複分を引く。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "線そのものは O(M)、異方向の交点候補は O(M^2) で、N=10^9 のマスを一切列挙せず攻撃セル数を求められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各 queen から8方向へ盤面端までマスを走査して攻撃済み集合へ入れる。",
+        "decision": "rejected",
+        "decisionReason": "一方向だけで長さ N に達し、N≤10^9 なので M が1000でも走査不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同方向の重複線を除けば多重計上される cell は異なる方向の線の交点に限られ、その総数は O(M^2) である。",
+        "text": "同方向の同一直線は完全に一致するので先に unique 化し、重複補正を線の追加順で「以前の線との交点」に限定すると包除の高次項を直接扱わずに済む。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Avoid Queen Attack 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "行・列・対角線の交点座標は整数条件と盤面内条件を満たす場合だけ一セルを共有し、同じ交点は集合で一度だけ数える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc377-f「Avoid Queen Attack」では、駒が利く行・列・二方向の対角線を一意化して総延長を足し、異方向の線の交点だけを列挙して重複を補正する。この状態表現から答えを構成する。",
+      "text": "行 r、列 c、対角 r-c、反対角 r+c の集合を作る。各 unique line の長さを計算し、方向を一つずつ追加するとき既存方向との有効交点を列挙して、その線上で既出の交点数を差し引く。N^2 から攻撃和集合を引く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "包除原理と格子直線の交点",
-      "trigger": "制約と操作を整理したときに 包除原理と格子直線の交点 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc377-f「Avoid Queen Attack」では、駒が利く行・列・二方向の対角線を一意化して総延長を足し、異方向の線の交点だけを列挙して重複を補正する。この状態表現から答えを構成する。で 包除原理と格子直線の交点 を問題固有の状態へ適用する。",
+      "name": "疎な直線和集合の交点補正",
+      "trigger": "巨大格子で少数の行・列・対角線が覆うセル数を求めるとき。",
+      "application": "線長の和と O(M^2) 個の交点だけを管理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "巨大な被覆集合でも、複数方向から覆われる点の複雑度は入力本数の二乗に抑えられる。",
+      "reusablePerspective": "線を順に加え、新しい線上の既出セルだけを集合で数えると多重交点も過不足なく処理できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "包除原理と格子直線の交点",
+      "text": "格子対角線の式、集合の和集合、整数交点判定、包除の逐次適用を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "盤外交点、非整数交点、同一点へ三方向以上が集まる場合を multiplicity で補正する。",
+      "text": "対角線同士の交点は parity が合うときだけ整数座標になる。queen 自身のセル、多方向が同一点で交わる場合、N^2 の 64 bit を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Avoid Queen Attack 型の問題に対し、包除原理と格子直線の交点を選び、状態と証明を一貫して設計できる。",
+      "text": "10^9 四方の盤面でも、攻撃線とその O(M^2) 交点だけから非攻撃セル数を計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "盤外交点、非整数交点、同一点へ三方向以上が集まる場合を multiplicity で補正する。",
+      "text": "各方向の線を一つずつ追加する順序を固定し、その時に新しく重複するセル集合を具体的に書いて検算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

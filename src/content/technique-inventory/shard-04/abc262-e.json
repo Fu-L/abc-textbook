@@ -17,67 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc262-e「Red and Blue Graph」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "赤頂点の次数和 S では赤赤辺を二回、赤青辺を一回数えるため、異色辺数 D と S の偶奇は一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "次数和の偶奇へ寄与するのは奇数次数の赤頂点だけなので、辺の具体的な接続関係は次数parityへ圧縮できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc262-e「Red and Blue Graph」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。",
+        "approach": "K 個の赤頂点集合を全て列挙し、各辺の両端色を確認する。",
+        "decision": "rejected",
+        "decisionReason": "赤集合の組合せ数が指数的で、N=20 万では列挙できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "奇数次数頂点数 O と偶数次数頂点数 E を数え、偶数個 i の奇数次数頂点と K−i 個の偶数次数頂点を選ぶ組合せを足す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "異色辺数が偶数という条件が i の偶奇だけになり、各 i の選び方は binom(O,i)binom(E,K−i) である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Red and Blue Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "S=2R+D を modulo 2 で見ると、cut edge の偶奇が選択頂点の次数parityの XOR に等しい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc262-e「Red and Blue Graph」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。",
+      "text": "グラフcutのparity条件を handshaking identity で頂点属性の選択個数へ移し、二種類から固定個数を選ぶ組合せ和として計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "組合せ数と二項係数",
-      "trigger": "制約と操作を整理したときに 組合せ数と二項係数 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc262-e「Red and Blue Graph」では、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。この状態表現から答えを構成する。で 組合せ数と二項係数 を問題固有の状態へ適用する。",
+      "name": "次数和による cut parity",
+      "trigger": "選択頂点集合と補集合をまたぐ辺数の偶奇だけが条件になるとき。",
+      "application": "選択側の次数和を取り、内部辺の二重寄与を modulo 2 で消す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "属性別の固定個数選択",
+      "trigger": "要素が二種類に分かれ、一方から選ぶ個数の偶奇と総選択数だけが制約になるとき。",
+      "application": "許される i を列挙して二つの二項係数の積を合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "赤赤辺数 R は未知でも係数2で現れるため、偶奇判定では完全に消えて異色辺だけが残る。",
+      "reusablePerspective": "辺を端点から数え直すと、内部寄与が法で消えて境界寄与だけ抽出できる場合がある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "組合せ数と二項係数",
+      "text": "次数和公式、modulo 2 の議論、法上の二項係数前計算を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "i は偶数だけを走査し、0≤i≤O かつ 0≤K−i≤E を満たす項だけ加える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "階乗と逆階乗を N まで前計算し、K=0 を含む境界の二項係数を正しく扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Red and Blue Graph 型の問題に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。",
+      "text": "異色辺数の偶奇制約付き頂点彩色を、奇数次数頂点の赤選択数だけで数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "cutの辺数parityを見たら、片側頂点の次数和で内部辺を二回数える恒等式を試す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "グラフ構造が必要に見えても、mod 2 では各頂点の次数parityだけに落ちないか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

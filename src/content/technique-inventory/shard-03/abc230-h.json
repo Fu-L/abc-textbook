@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc230-h「Bullion」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "一つの袋の状態は、重さ 1 の外袋と、その中に入る非空袋または金塊の順序を持たない多重集合から再帰的に構成される。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "中身が空の多重集合は非空袋の条件から除く必要があり、同じ状態の子袋や同重量金塊は区別されない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc230-h「Bullion」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "重さごとに全ての中身の多重集合を列挙し、子袋の状態を再帰的に組み合わせる。",
+        "decision": "rejected",
+        "decisionReason": "入れ子構造と重複可能な多重集合の候補数が急増し、W＝25 万まで列挙できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "多重集合構造の母関数を exp と置換 x→x^k で表し、暗黙方程式を微分して得る係数漸化式を分割統治 FFT でオンライン計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "順序を持たない再帰構造を正確に母関数へ移し、漸化式中の長い畳み込みを高速化できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+        "text": "非空袋の母関数 F、金塊の母関数 G、H＝F＋G とすると、F＝x(exp(Σ_{k>0}H(x^k)/k)−1) が構造をそのまま表す。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Bullion 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "J＝Σ_{k>0}H*(x^k) の係数は j_n＝Σ_{d|n}d(f_d＋g_d) という約数和になり、微分後の式は F と J の畳み込みになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc230-h「Bullion」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "unlabeled multiset の組合せ構造から暗黙母関数を立て、対数微分で約数和列と自己畳み込みの係数再帰へ落とし、確定済み係数を CDQ 型 FFT で未来へ送る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc230-h「Bullion」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "多重集合構造の母関数",
+      "trigger": "区別しない部品を重複可・順序なしで集めた構造を重み別に数えるとき。",
+      "application": "MULTISET(A) を exp(Σ_{k>0}A(x^k)/k) へ写し、袋の再帰定義を形式冪級数方程式にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "組合せ数と二項係数",
-      "trigger": "制約と操作を整理したときに 組合せ数と二項係数 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc230-h「Bullion」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 組合せ数と二項係数 を問題固有の状態へ適用する。",
+      "name": "暗黙母関数の微分とオンライン畳み込み",
+      "trigger": "母関数方程式は得られたが、係数を順に求める再帰に自己畳み込みが現れるとき。",
+      "application": "微分して n f_n を含む式を作り、既知の f と j の積から新係数を分割統治 FFT で計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "外袋の重さ x を掛け、中身が空の一通りを引くことで、「袋自体は存在するが中身が空なら持ち帰れない」という条件を式へ正確に反映する。",
+      "reusablePerspective": "組合せ構造を母関数化するときは、空構造を許す箇所と禁止する箇所を定数項 1 の加減として逐一確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "形式冪級数の微分・指数関数と、順序なし多重集合の母関数公式を扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "組合せ数と二項係数",
+      "text": "確定済み区間から未来区間への畳み込み寄与を送る分割統治 FFT を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "f₀＝f₁＝0 を基底とし、n≥2 で n−1 の逆元を掛ける係数式を使って 0 除算を避ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "f_n が確定するとその倍数添字の j へ n f_n を加える依存も生じるため、CDQ の区間開始が 0 の場合とそれ以外で更新時点を分ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Bullion 型の 整数の約数・剰余構造に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。",
+      "text": "入れ子の unlabeled multiset 構造を母関数へ翻訳し、約数和とオンライン畳み込みから重量別個数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "容器の中身が順序なし・同型要素を区別しないなら、列や通常積でなく MULTISET 構造の母関数を選ぶ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "暗黙母関数を得た後は、微分により対象係数を一次で孤立させ、残りが畳み込み・約数和へ分かれるかを見る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

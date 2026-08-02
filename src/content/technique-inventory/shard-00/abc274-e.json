@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc274-e「Booster」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "townsとchestsを合わせても17 pointsで、visited subsetから必須townsの達成状況と取得booster数の両方を復元できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "visited chests数がkなら現在speedは2^kであり、次pointまでのtravel timeはEuclidean distance/2^kとなる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc274-e「Booster」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "訪問するchest subsetを固定し、その各caseで別々にtown/chest TSPを解く。",
+        "decision": "rejected",
+        "decisionReason": "可能ではあるがchest subset列挙とpath DPが重なり2^N3^Mの余分なfactorを持つ。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全pointsを同じbitmaskへ入れ、dp[mask][last]をそのvisited集合でlastへいるminimum timeとして遷移する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "chestを訪問しない選択もmask列挙に自然に含まれ、booster countを追加stateなしで計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "同じmask,lastに達した経路は現在speedと残りpointsが一致するため、所要時間の最小値だけを保持すればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Booster 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "全town bitsを含む任意mask,lastからoriginへ戻るtimeを加えれば、そのmaskに含まれないchestsを訪ねず終了する候補になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc274-e「Booster」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "optional pickups that alter speedをsubset TSPへ統合し、visited-mask-derived resource levelでedge costsを評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc274-e「Booster」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "訪問集合bit DP",
+      "trigger": "対象点が20個未満で、経路の将来がvisited subsetとcurrent pointだけで決まるとき。",
+      "application": "未訪問point jを追加し、dp[mask∪{j}][j]へcurrent-to-j travel timeをrelaxする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc274-e「Booster」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "optional verticesの同一state化",
+      "trigger": "必須訪問点と任意訪問点が同じ移動graph上にあり、任意点の効果をmaskから計算できるとき。",
+      "application": "town/chestを同じpoint listに置き、終端条件だけをall-town-bits includedとする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "booster countはpopcount(mask & chestMask)なので、speedをDP dimensionとして重複保持しない。",
+      "reusablePerspective": "resourceが特定visited itemsの個数だけで単調に変わるならsubset自体から導出する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "traveling-salesman subset DP、bitmask/popcount、floating-point distanceを扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "originをmask外のstart/endとしてdp singletonをdistance from originで初期化し、N+M=0相当の空case規約も明確にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "distanceはhypotでdouble計算し、infinity初期値と2^kによる除算を一貫させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Booster 型の 整数の約数・剰余構造に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "任意のboostersを選びながら全townを巡回するminimum timeを一つのsubset DPで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "少数のoptional visitsは外側でsubset固定せず、必須pointsと同じvisited maskへ統合する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "訪問で変化するspeed/resourceは、同じmaskなら一意かを確認してstate dimensionを削る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

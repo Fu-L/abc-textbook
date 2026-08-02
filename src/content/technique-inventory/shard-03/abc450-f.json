@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc450-f「Strongly Connected 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "元の強連結 graph から辺を残す見方より、基礎となる N頂点N-1辺の graph に M 辺を選択追加して強連結化する数え上げへ補集合を取ると状態が作りやすい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc450-f「Strongly Connected 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "追加候補辺を X 昇順に処理し、dp[r] を頂点1から到達できる最大番号 r とする。区間倍加・区間和・一点更新を lazy segment tree で遷移する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "辺 (X,Y) の採否が reach prefix の端 r に与える効果は r<X、X≤r<Y、r=Y、r>Y の連続区間ごとに同一で、遷移を range operation へまとめられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "M 本の辺の残す・削るを全て列挙し、各 subgraph の強連結性を SCC で検査する。",
+        "decision": "rejected",
+        "decisionReason": "2^M 通りの選択があり、M が大きいため graph 検査以前に列挙不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "X≤r<Y の状態で辺を採用すると reachable 最大値が Y へ伸び、非採用分だけが r に残る。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Strongly Connected 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "r<X または r>Y では辺を採用しても state r が変わらないため、採用・非採用の二通りで dp[r] が倍になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc450-f「Strongly Connected 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "辺を (X,Y) 方向に整理して X 昇順 sort する。dp 初期状態を segment tree に置き、各辺で必要区間の和を取得し、range multiply 2 と Y への point add/assign を公式遷移順に行う。最終 dp[N] を読む。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc450-f「Strongly Connected 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "到達 prefix の状態圧縮 DP",
+      "trigger": "頂点順に処理した graph で reachable 集合が prefix として表せるとき。",
+      "application": "最大到達番号だけを state にして辺追加効果を分類する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc450-f「Strongly Connected 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "DP 遷移の lazy segment tree 化",
+      "trigger": "状態値の連続区間へ同一倍率を掛け、一部に区間和由来の加算をするとき。",
+      "application": "range multiply・range sum・point update を一つの木で行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "辺 subset 数え上げは、各辺の効果が同じ state 範囲を見つけると区間一括 DP にできる。",
+      "reusablePerspective": "強連結条件そのものではなく、特殊な基礎 graph に対する頂点1の reach frontier として進捗を測る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "到達 prefix の状態圧縮 DP、DP 遷移の lazy segment tree 化と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "in-place 更新で区間和は更新前 dp から読む順序を守る。X,Y の向き、閉区間端、不要な r<X 更新省略の影響を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Strongly Connected 2 型の 頂点と辺からなる状態グラフに対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "辺 subset の強連結化数を、到達 frontier DP と遅延 segment tree により高速に数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "一辺 (X,Y) に対する四つの r 範囲で採用・非採用後 state を表にし、その式と data structure 操作を一対一に対応させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

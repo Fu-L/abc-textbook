@@ -17,77 +17,103 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc285-e「Work or Rest」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "曜日は円環だが休日を少なくとも1つ置くので、回転対称性を使って曜日1を休日に固定してよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "2つの休日の間に平日がd日連続すると、その区間の生産量はB_d=Σ_{k=1..d} A_{floor((k+1)/2)}だけで決まり、他の区間と独立に加算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc285-e「Work or Rest」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "曜日1を休日に固定し、処理済み位置と直前の休日から続く平日数を状態にしたDPを行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "円環の境界を最後の区間へのB加算だけに閉じ込め、休日で区間を閉じるたびに利益を確定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "休日のsubsetを全列挙して各曜日の最寄り休日を調べる。",
+        "decision": "rejected",
+        "decisionReason": "候補が2^N通りあり、N≤5000では扱えない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "線形列として両端を独立に処理する。",
+        "decision": "rejected",
+        "decisionReason": "週の末尾と先頭を跨ぐ最寄り休日を無視し、円環上の生産量を誤る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "長さdの平日列では両端から距離1の曜日が2つ、距離2が2つと並ぶため、B_dはA_1,A_1,A_2,A_2,…のprefix sumで前計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Work or Rest 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "新しい休日を置く遷移で直前の平日列B_jを加え、最後に残った平日列も固定した曜日1の休日へ接続してB_jを加える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc285-e「Work or Rest」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "B_0=0とし、d≥1についてB_d=B_{d-1}+A_{floor((d+1)/2)}を前計算する。dp[i][j]を曜日iまで決めて末尾に平日がj日続く最大値とし、dp[1][0]=0から、次を平日にするdp[i+1][j+1]、休日にしてdp[i+1][0]へdp[i][j]+B_jを遷移する。全曜日後にmax_j(dp[N][j]+B_j)を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc285-e「Work or Rest」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "円環の基準点固定",
+      "trigger": "円環上に必ず存在する特別な要素があり、回転で位置を固定できるとき。",
+      "application": "休日1つを曜日1へ固定し、跨ぎ区間だけを終端処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc285-e「Work or Rest」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "区間寄与DP",
+      "trigger": "選んだseparator間の寄与が区間長だけで決まるとき。",
+      "application": "休日をseparatorとして平日列を閉じるたびB_jを加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "各平日の価値は左右の休日までの短い方の距離なので、休日間の配置詳細は平日列長dだけへ圧縮される。",
+      "reusablePerspective": "局所価値が左右の境界までの距離で決まる問題では、境界を選ぶDPとgap長の前計算へ分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "円環DPの基準点固定",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "max DPとprefix sum",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "不可能状態は十分小さい値で初期化し、A_iの和が32bitを超えるため64bit整数を使う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "曜日1は休日として固定済みなので、その生産量を加えず、最後のB_jで週跨ぎ区間を一度だけ精算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Work or Rest 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "円環上の休日配置による週の最大生産量を、休日間gapの利益前計算と二次DPで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "休日間に平日が1〜5日ある場合のB列を手で並べ、DPで途中のgapと最終gapがそれぞれ一度だけ加算されるかを追う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

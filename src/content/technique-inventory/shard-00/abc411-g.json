@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc411-g「Count Cycles」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "同じ二頂点間の異なる二辺は長さ2の cycle を作り、その数は各 pair について C_{u,v} choose 2 で、頂点数3以上の simple cycle とは分けて数える必要がある。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "長さ3以上の cycle は最大頂点 s を一意に持つ。s から頂点を重複せず辿る subset path DP を頂点1..sだけで行えば、cycleを最大頂点ごとに重複なく分類できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc411-g「Count Cycles」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "辺多重度 C_{u,v} を遷移重みとする subset DP を最大頂点 s ごとに実行し、閉路を閉じる寄与を2で割る",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "dp[S][i] は s から S を一度ずつ通り i に至る path 数。未訪問 j への遷移と i→s の閉辺選択で multiedge の選び方も数えられ、N≤20で O(2^N N^2)。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "M 本の辺 subset を列挙して各集合が cycle か判定する",
+        "decision": "rejected",
+        "decisionReason": "multi-edge により M は2×10^5あり 2^M は不可能で、cycleの頂点順序と各pairの辺選択を分離していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "一つの長さ≥3の無向 cycle は s から時計回り／反時計回りに辿る二方向だけ dp に現れるため、closing sum へ inv2 を掛ける。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Count Cycles 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "遷移 dp[S∪{j}][j]+=dp[S][i]C_{i,j}、閉じるときさらに C_{i,s} を掛けることで、同じ頂点列でも各隣接 pair の平行辺選択を独立に数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc411-g「Count Cycles」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "全 edge を C[u][v] に集計し、長さ2の寄与 Σ_{u<v}C_{u,v}(C_{u,v}-1)/2 を先に答えへ加える。s=3..Nごとに dp[{s}][s]=1 から、S⊆{1..s}、未訪問 j<s へ多重度付き遷移する。|S|≥3 の各末端 i から C_{i,s} で閉じる総和だけを inv2 倍し、長さ3以上の寄与として答えへ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc411-g「Count Cycles」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "Hamilton path 型 subset DP",
+      "trigger": "小さい頂点集合上で頂点重複のない path/cycle を数えるとき。",
+      "application": "訪問maskと末端頂点を状態にし、未訪問頂点だけへ伸ばす。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc411-g「Count Cycles」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "canonical maximum による重複排除",
+      "trigger": "同じ部分構造を複数の頂点集合範囲で数えそうなとき。",
+      "application": "cycleの最大番号sを固定し、使用頂点を1..sに制限する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "multi-edge の multiplicity 重み",
+      "trigger": "頂点遷移は同じでも選べる辺自体を区別して数えるとき。",
+      "application": "遷移ごとに端点間辺数 C_{i,j} を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "長さ2 cycleだけは二頂点間の平行辺二本という別構文で数え、長さ3以上は最大頂点を根にした二方向 path として数える。",
+      "reusablePerspective": "multi-graphのcycle数え上げでは、頂点列のDPと各stepの辺多重度を分け、通常graphにない最短cycleを先に切り出す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "bitmask DP、無向cycleの向きによる二重計数、組合せ C(c,2) を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "長さ2をsubset DPへ混ぜず、|S|≥3だけ閉じる。C_{u,v} とDP積は毎回modを取り、各sでdpを初期化・再利用してmemoryを抑える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Count Cycles 型の 順列の位置と値の対応に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "頂点数20・辺数20万のmulti-graphでも、辺subsetとして異なる全simple cycleを法上で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "平行辺だけの二頂点graph、triangle各辺の多重度積、一つの4-cycle、chord付き小graphをedge subset全列挙と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

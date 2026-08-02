@@ -17,81 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc350-g「Mediator」では、online query を平方根個ずつの block に分け、確定済み forest を親・連結成分へ rebuild し、block 内の新辺だけ直接調べる。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "現在グラフは常にforestなので、u,vが同じ木にあり共通隣接点wを持つなら、任意に根を付けたときwはparent[u]またはparent[v]のどちらかである。最終forestを先読みできれば候補は二つだが、queryが直前回答で暗号化されているためonlineで近似的に固定する必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc350-g「Mediator」では、online query を平方根個ずつの block に分け、確定済み forest を親・連結成分へ rebuild し、block 内の新辺だけ直接調べる。この状態表現から答えを構成する。",
+        "approach": "queryをblock分割し、block前のforestだけ親・成分を再構築してblock内新辺を直接検査する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "一blockごとのO(N)再構築と一queryごとのO(B)pending辺走査に分けられ、O(NQ/B+BQ)をB≈√NでO(Q√N)へ均衡できる。暗号化queryも到着順に復号して扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全queryを復号して最終forestに根を付け、各質問でparent候補だけを見る",
+        "decision": "rejected",
+        "decisionReason": "次queryの復号が過去のtype 2回答に依存するため、回答前に将来の辺を確定するoffline処理は循環してしまう。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "辺追加のたびに現在forest全体のparentと成分を再計算する",
+        "decision": "rejected",
+        "decisionReason": "一回O(N)、Q回でO(NQ)となり、N,Q≤10^5では実行できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "過去 block の辺は rebuild 状態へ完全に集約され、現在 block の高々 B 辺を追加検査すれば query 時点の forest を再現できる。",
+        "text": "block開始時forest G_0でu,vが同一成分なら、共通隣接点候補はparent[u],parent[v]だけである。別成分なのに現在は共通隣接点を持つなら、その二辺の少なくとも一方は現在blockで追加されたのでpending辺の走査で候補を拾える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Mediator 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "過去blockの全辺は親・component IDへO(N)で圧縮し、現在blockの高々B辺だけを未反映差分として残す。このbase+delta不変条件がonline性と平方根計算量を両立させる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc350-g「Mediator」では、online query を平方根個ずつの block に分け、確定済み forest を親・連結成分へ rebuild し、block 内の新辺だけ直接調べる。この状態表現から答えを構成する。",
+      "text": "B件ごとに、それまでの全辺からforestをDFSしてparentとcomponentを再計算しpendingを空にする。辺追加は全体の隣接判定構造とpendingへ記録する。質問ではbase成分が同じなら二つのparent候補、異なるならuまたはvに接するpending辺の反対端を候補にし、現在辺集合で両隣接を確認して唯一のwまたは0を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "平方分割と forest の親関係",
-      "trigger": "制約と操作を整理したときに 平方分割と forest の親関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc350-g「Mediator」では、online query を平方根個ずつの block に分け、確定済み forest を親・連結成分へ rebuild し、block 内の新辺だけ直接調べる。この状態表現から答えを構成する。で 平方分割と forest の親関係 を問題固有の状態へ適用する。",
+      "name": "query平方分割",
+      "trigger": "更新を完全反映した全体再構築は重いが、少数の未反映更新ならquery時に直接走査できる。",
+      "application": "過去辺をO(N)の親・成分情報へ固め、block内のO(B)辺をdeltaとして残す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "特殊な漸近計算量の見積もり",
-      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc350-g「Mediator」では、online query を平方根個ずつの block に分け、確定済み forest を親・連結成分へ rebuild し、block 内の新辺だけ直接調べる。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "name": "根付きforestの距離2候補",
+      "trigger": "forest上で二頂点に共通して隣接する頂点を求めたい。",
+      "application": "同一treeではparent[u]とparent[v]だけを候補にして実辺の存在を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "暗号化はoffline化だけを封じており、過去を定期的に固定するblock処理は可能である。baseで別成分という情報が、答えを作る辺の少なくとも一方をdelta側へ限定する。",
+      "reusablePerspective": "online制約下では、全履歴を固定部分と小さい差分に分け、固定部分で候補を定数個へ絞るか、差分に証人が必ず現れることを示す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "asymptoticComplexity": {
     "time": "O(Q√N)（公式解法全体。特殊な計算量解析を含む）",
     "evidenceIds": ["evidence-official-analysis"]
   },
   "prerequisiteCandidates": [
     {
-      "text": "平方分割と forest の親関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "特殊な漸近計算量の見積もり",
+      "text": "根付き木の親関係、forestの一意経路、平方根分割の再構築＋差分モデル、償却でない総計算量の均衡を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "暗号化された入力を直前回答で復号してから分類し、block 境界で pending edge を漏れなく取り込む。",
+      "text": "a,b,cは必ず直前のtype 2回答を使って64 bitで復号し、その後にquery種別を判定する。pendingには現在blockで既に処理した辺だけを入れ、rootのparent=0を候補から除き、無向辺keyは端点順を正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Mediator 型の問題に対し、平方分割と forest の親関係を選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "text": "暗号化されたonline forest queryを、定期再構築した親・成分情報とblock内差分へ分け、証人候補を漏れなくO(√N)で検査できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "暗号化された入力を直前回答で復号してから分類し、block 境界で pending edge を漏れなく取り込む。",
+      "text": "小さいforestの隣接list全走査と比較し、u,vがbaseで同成分・別成分の両場合、共通点を作る一辺がpendingの場合、block先頭と末尾、答え0後の復号、rootが端点になる場合を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc366-e「Manhattan Multifocal Ellipse」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "Manhattan距離和はf(x)=Σ|x−x_i|とg(y)=Σ|y−y_i|に分離され、条件はf(x)+g(y)≤Dとなる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "候補座標は入力座標絶対値の最大MからDだけ外側までで十分で、その有限範囲ではf,gを隣接座標への差分で一括計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc366-e「Manhattan Multifocal Ellipse」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全候補x,yの一次元距離和列を作ってsortし、二列の和がD以下のpair数をtwo pointersで数える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "二次元点列挙を独立な一次元costのpair countingへ変換し、全組を直接調べずに済む。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "bounding box内の各格子点でN点へのManhattan距離を加算する。",
+        "decision": "rejected",
+        "decisionReason": "二次元範囲の面積とNの積になり、距離のx,y分離を利用できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "右端を固定した有効左端集合が単調に移動するため、戻らない二本の pointer で全境界を一度ずつ調べられる。",
+        "text": "sorted x_iに対し座標xを1増やすと、左側点数だけfが増え右側点数だけ減るため、pointerで差分更新できる。gも同様である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Manhattan Multifocal Ellipse 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "F,Gを昇順にすると、Fを大きい側から見るにつれて許されるGの上端が単調に動き、尺取りでpair数を足せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc366-e「Manhattan Multifocal Ellipse」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "R=max座標絶対値+Dとし、x座標列をsortしてf(−R)を直接求め、−R..Rを点数差分で更新してFを作る。yについてGも作る。両列をsortし、各F値に対してG≤D−Fの個数を単調pointerで数えて総和する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc366-e「Manhattan Multifocal Ellipse」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "Manhattan距離の軸分離",
+      "trigger": "点群へのL1距離総和で格子点を数えるとき。",
+      "application": "xとyの絶対値和を独立な一次元costへ分ける。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "尺取り法",
-      "trigger": "制約と操作を整理したときに 尺取り法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc366-e「Manhattan Multifocal Ellipse」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 尺取り法 を問題固有の状態へ適用する。",
+      "name": "距離和列の差分生成と尺取り",
+      "trigger": "凸な一次元costを連続整数上で列挙し、その二列の和制約pairを数えるとき。",
+      "application": "傾きを左右点数で更新し、sort後の単調境界を走査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二次元の楕円状領域でも、各軸costの値分布さえ作れば答えは二配列の和の組数になる。",
+      "reusablePerspective": "separable objectiveの格子点計数では、座標でなく各軸costのhistogramを組み合わせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "絶対値和の凸性",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "尺取り法",
+      "text": "two pointersによるpair counting",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空区間、条件を満たす直前・直後のどちらを数えるかを loop 不変条件にする。",
+      "text": "探索範囲端を十分外へ取り、負座標からのindex変換を統一する。距離和と格子点pair数は64 bitで保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Manhattan Multifocal Ellipse 型の 整数の約数・剰余構造に対し、尺取り法を選び、状態と証明を一貫して設計できる。",
+      "text": "Manhattan距離和領域の格子点数を、二つの一次元距離分布と単調pair countingへ還元できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空区間、条件を満たす直前・直後のどちらを数えるかを loop 不変条件にする。",
+      "text": "一点だけの場合に領域がdiamondとなる個数と照合する。f(x)差分の「x未満」と「x以上」の境界を重複座標で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

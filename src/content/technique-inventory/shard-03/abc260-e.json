@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc260-e「At Least One」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "区間が全ての組 (A_i,B_i) と少なくとも一端で交われば、その区間を左右へ広げても条件を失わない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "左端 L を固定すると条件を満たす右端は、最小の R から M までの連続範囲になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc260-e「At Least One」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全区間 [L,R] を列挙し、N 個の組それぞれについて端点を含むか検査する。",
+        "decision": "rejected",
+        "decisionReason": "区間が二乗個あり、各区間の判定まで行うと制約規模を扱えない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各組の現在区間内端点数と、一端以上を含む組数を管理しながら二つの端を単調に動かす尺取り法を行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "右端は左端を進めても後退せず、座標を出入りする組だけ更新すれば全区間境界を一走査で得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "右端を固定した有効左端集合が単調に移動するため、戻らない二本の pointer で全境界を一度ずつ調べられる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "At Least One 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "固定 L の最小良区間長を d=R−L＋1 とすると、長さ d から M−L＋1 までへ一つずつ寄与するので、長さ軸の差分配列で一括加算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc260-e「At Least One」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "包含に関して上向き閉じた区間条件を two pointers で最小右端へ圧縮し、各左端が作る長さ範囲を imos で集計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc260-e「At Least One」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "単調区間条件の尺取り法",
+      "trigger": "区間を右へ広げると一度成立した条件が壊れず、左端の進行に対する最小右端も単調なとき。",
+      "application": "全組を一つ以上覆うまで R を伸ばし、L を一つ進めるたびに退出要素だけを削除する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "尺取り法",
-      "trigger": "制約と操作を整理したときに 尺取り法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc260-e「At Least One」では、主解法候補として、左右端点を単調に進め、条件を満たす最大または最小区間を two pointers で走査する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 尺取り法 を問題固有の状態へ適用する。",
+      "name": "答え長への区間加算",
+      "trigger": "一つの状態が連続する複数の長さへ同じ寄与を与えるとき。",
+      "application": "最小長から最大長までを差分配列へ加え、最後に累積して f(k) を復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "座標 x ごとに x を端点として持つ組の一覧を用意すれば、x の追加・削除で該当する組の被覆数だけを更新できる。",
+      "reusablePerspective": "多数の集合条件を窓で管理するとき、要素から所属制約への逆引きを作って変更箇所だけ反映する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "尺取り法",
+      "text": "尺取り法、制約ごとの被覆回数管理、差分配列による区間加算を扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空区間、条件を満たす直前・直後のどちらを数えるかを loop 不変条件にする。",
+      "text": "組 i の区間内端点数が 0→1、1→0 に変わる瞬間だけ、満たした組の総数を増減する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "固定 L の寄与範囲は [R−L＋1,M−L＋1] であり、差分配列の右端の一つ後ろを減算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "At Least One 型の 列の順序と prefix 状態に対し、尺取り法を選び、状態と証明を一貫して設計できる。",
+      "text": "全ての二点組を少なくとも一端で覆う区間を、長さ別に尺取りと差分加算で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空区間、条件を満たす直前・直後のどちらを数えるかを loop 不変条件にする。",
+      "text": "区間を広げたとき保存される条件なら、各左端について成立する最初の右端だけを探せば十分か確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "区間そのものではなく長さ別の個数が必要な場合、各境界から得る長さの連続範囲を差分加算へ移す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

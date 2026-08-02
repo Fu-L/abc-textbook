@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc398-f「ABCBA」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "Sをprefixに持つ長さ|S|+kのpalindromeでは、追加suffixはS先頭k文字のreverseに一意に決まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "この構成が可能な必要十分条件は、Sの残るsuffix S[k..]自体がpalindromeであることなので、k最小化は最長palindromic suffix探索になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc398-f「ABCBA」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Manacher法で全中心のpalindrome半径を求め、末尾へ達する最長substringを選んで不足prefixを反転追加する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全palindromic suffixをO(N)で判定でき、|S|=5×10^5でも最短追加長を線形時間で求められる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "k=0..Nを順に試し、各suffixを両端比較する",
+        "decision": "rejected",
+        "decisionReason": "同じ文字比較を繰り返して最悪O(N²)になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "floor(N/i) の異なる値は平方根より小さい商と平方根以下の添字から全て得られ、各区間端は除算で計算できる。",
+        "text": "最長palindromic suffixの開始位置kが分かれば、答えはS+reverse(S[0..k))である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "ABCBA 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "偶数長・奇数長suffixの双方を扱うため、Manacherの二種類半径またはseparator変換を使う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc398-f「ABCBA」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "S（またはseparator込み列）へManacher法を適用する。各centerの半径から右端がNに達するpalindromeの最小start kを求め、Sへprefix[0,k)のreverseを連結する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc398-f「ABCBA」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "palindrome completion",
+      "trigger": "文字列をprefixに保ったまま末尾追加でpalindrome化するとき。",
+      "application": "最長palindromic suffixを残し、不足prefixをreverseする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "floor 除算の商区間列挙",
-      "trigger": "制約と操作を整理したときに floor 除算の商区間列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc398-f「ABCBA」では、主解法候補として、floor 除算の商が変わらない添字区間をまとめ、小さい添字側と小さい商側を平方根境界で分割する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で floor 除算の商区間列挙 を問題固有の状態へ適用する。",
+      "name": "Manacher algorithm",
+      "trigger": "全centerの最長palindrome半径を線形時間で求めたいとき。",
+      "application": "末尾到達するodd/even palindromeを探索する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "完成文字列を探索せず、追加部分が既存prefixから強制されることを先に示すと、自由度は残すpalindromic suffixの長さだけになる。",
+      "reusablePerspective": "最小append/prepend palindrome問題は、反対側の最長palindromic borderへ帰着する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "floor 除算の商区間列挙",
+      "text": "回文の対称性とManacher法を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。",
+      "text": "長さ1、全体が既にpalindrome、even suffixを扱う。prefixをreverseする範囲はpalindromic suffix開始位置より前だけ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "ABCBA 型の 文字列の prefix・suffix と一致関係に対し、floor 除算の商区間列挙を選び、状態と証明を一貫して設計できる。",
+      "text": "最短palindrome補完を最長palindromic suffixへ帰着し、線形時間で文字列を構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "次の区間右端を N/quotient から求め、整数除算の切り捨てと loop の進行を保証する。",
+      "text": "短い全stringをk全探索と比較し、既回文、palindrome suffix長1、最長suffixが偶数/奇数のcaseを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc451-e「Tree Distance」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "正辺重みの木 metric が存在するなら、頂点1を根とした i の祖先 j は A_{1,j}+A_{j,i}=A_{1,i} を満たし、そのうち i に最も近いものが親である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc451-e「Tree Distance」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各 i≠1 について祖先条件を満たす j の中から A_{i,j} 最小を親候補にして重み A_{i,j} の辺を張り、完成候補木の全点対距離を再計算して入力行列と照合する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "木 path 上の加法性が祖先を必要十分に特徴付け、正重みにより最も近い真祖先が一意な親になる。最後の全距離検証が局所構成で見落とす全 metric 公理を保証する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "三角不等式など距離行列の局所条件だけを検査し、木を構築せず Yes と判定する。",
+        "decision": "rejected",
+        "decisionReason": "一般 metric 条件だけでは tree metric の十分条件にならず、同じ局所等式を満たしても全体 path 構造が矛盾し得る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+        "text": "j が root-to-i path 上なら距離加法 A_{1,j}+A_{j,i}=A_{1,i} が成立し、木では逆も成立する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Tree Distance 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "候補親を全頂点で選んだ後に N-1 辺の木として得た距離が A と完全一致すれば、それが存在証明そのものになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc451-e「Tree Distance」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "対称化した A を使い、各 i の祖先候補を O(N) 走査して最短の j を選ぶ。候補なしなら No。辺を構築後、各始点から tree DFS で距離を求め、全 A_{i,j} と一致した場合だけ Yes と辺集合を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc451-e「Tree Distance」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "距離行列からの木復元",
+      "trigger": "正重み木の全点対距離が与えられ、存在判定と構成を行うとき。",
+      "application": "root 距離の加法等式から祖先・親を特定する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "深さ優先探索",
-      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc451-e「Tree Distance」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "name": "候補構成後の完全検証",
+      "trigger": "局所条件で唯一候補を作れるが十分性の直接判定が複雑なとき。",
+      "application": "候補 object の定義量を再計算して入力と全一致させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "存在するなら一意に決まる構造では、必要条件で候補を強制構成し、最後に直接検証する方が判定条件を簡潔にできる。",
+      "reusablePerspective": "木距離の equality は path 上包含を表し、root を選ぶことで親子関係へ順序化できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "深さ優先探索",
+      "text": "距離行列からの木復元、候補構成後の完全検証と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "対角0・対称性・正辺を全距離再計算で検出し、親候補 tie も最終検証へ任せる場合は cycle/連結性を安全に確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Tree Distance 型の 根付き木・部分木・パスの関係に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "全点対距離行列から正重み木の唯一候補を二乗時間で復元し、存在を完全検証できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "祖先等式の必要十分性と「最も近い祖先=親」を tree path で証明し、構成後検証が反例を全て排除する理由を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

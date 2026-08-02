@@ -17,77 +17,91 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc427-e「Wind Cleaning」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "高橋君は動かず、風による各操作は盤面上の全ごみを同方向へ一マス平行移動し、盤外へ出たごみだけが消える。したがって状態は人物位置ではなく残存する初期ごみの範囲と累積移動量で決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc427-e「Wind Cleaning」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "残存する初期座標の矩形 [lx,rx)×[ly,ry) と累積変位 (dx,dy) を状態にして BFS する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "到達可能状態は六つの整数で O(H^3W^3) 個に抑えられ、各状態から四方向の辺だけを調べれば最短操作数になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各盤面のごみ配置を HW bit の集合として BFS する。",
+        "decision": "rejected",
+        "decisionReason": "一般には 2^(HW) 状態を想定してしまい、平行移動と切り落としが保つ矩形構造を利用できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+        "text": "同じ風を全ごみに適用し続けるので、残存ごみは初期盤面のある軸平行矩形内のごみを一様に (dx,dy) だけずらした形に限られる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Wind Cleaning 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "一方向へ動かしたとき、盤外に出る初期座標の端一行または一列を矩形から削り、変位を更新すれば次状態になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc427-e「Wind Cleaning」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "初期矩形全体と変位 0 を始点に、六変数を key として BFS する。四方向ごとに変位を一つ進め、盤外へ出る側の矩形端を必要なだけ縮める。矩形内の初期ごみが 0 になった最初の距離を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc427-e「Wind Cleaning」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "状態空間 BFS",
+      "trigger": "各操作のコストが 1 で、状態を多項式個の正規形へ圧縮できるとき。",
+      "application": "矩形境界と平行移動量を頂点、四方向の風を有向辺として最短距離を求める。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc427-e「Wind Cleaning」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "変換前座標での状態圧縮",
+      "trigger": "全要素が同じ変換を受け、境界から脱落するだけの過程を扱うとき。",
+      "application": "残った初期座標の範囲と共通変位だけを保持し、個々のごみ位置を再構築しない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "二次元累積和",
+      "trigger": "任意の初期矩形に対象が残るかを繰り返し判定するとき。",
+      "application": "矩形内の初期ごみ個数を O(1) で得て空状態を検出する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "風の履歴そのものは不要で、共通変位と初期盤面の切り抜き矩形が将来を完全に決める。",
+      "reusablePerspective": "一様変換と境界削除から成る系では、元データ上の生存範囲を状態にすると指数的配置を圧縮できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "幅優先探索",
+      "text": "幅優先探索、平行移動、半開矩形、二次元累積和による矩形和を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "上下左右で縮める初期矩形の端と変位の符号を対応させる。ごみを含まない端行・端列も正規化して同じ配置の重複状態を避ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Wind Cleaning 型の 盤面上の位置と局所遷移に対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "盤面全体への一様な風操作を六変数の状態へ圧縮し、最小掃除回数を BFS で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "六変数から復元される位置が盤内にある条件と、遷移後に削る矩形端の対応を小さな盤面で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

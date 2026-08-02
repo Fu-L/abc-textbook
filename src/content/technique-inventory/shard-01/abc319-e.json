@@ -17,67 +17,107 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc319-e「Bus Stops」では、各待ち時間の法をまとめた最小公倍数 L に対し、出発時刻の剰余ごとの所要時間を前計算する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "stop iへ時刻xで着くと、次のdepartureはceil(x/P_i)P_iで、次stop到着はその値+T_iと一意に決まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "全P_iは1..8なので、その公倍数L=lcm(1,..,8)=840だけ出発時刻をずらすと、各stopで待ち時間が同じになり到着時刻もLだけずれる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "したがって家を出てからの所要時間は出発時刻mod 840だけで決まり、Q queryに共通の840通りを前計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc319-e「Bus Stops」では、各待ち時間の法をまとめた最小公倍数 L に対し、出発時刻の剰余ごとの所要時間を前計算する。この状態表現から答えを構成する。",
+        "approach": "出発時刻r=0..839を全routeでsimulationして所要時間を保存し、queryをq mod 840で参照する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N本のroute計算を840回に限定し、各queryは定数時間で到着時刻へ戻せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各queryごとにN-1本のbusを順にsimulationする。",
+        "decision": "rejected",
+        "decisionReason": "N≤10^5,Q≤2×10^5でNQ遷移になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "P_iの最大値8を周期として扱う。",
+        "decision": "rejected",
+        "decisionReason": "例えばP=3とP=8が混在すると8だけのshiftではdeparture residueが保存されず、共通周期は公倍数でなければならない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全ての待ち条件が時刻 modulo L だけで決まり、L の倍数だけずらした行程の到着時刻も同じだけ平行移動する。",
+        "text": "xとx+Lは各P_iで同じremainderを持つため、ceil待ちの増分は常にLで、区間ごとの所要時間差は0になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Bus Stops 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "前計算値は絶対到着時刻ではなくelapsed[r]=arrival(r)-rとして持つと、任意qの答えをq+elapsed[q mod L]で得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc319-e「Bus Stops」では、各待ち時間の法をまとめた最小公倍数 L に対し、出発時刻の剰余ごとの所要時間を前計算する。この状態表現から答えを構成する。",
+      "text": "L=840とする。各r=0..L-1についてtime=r+Xから始め、i=1..N-1でtime=((time+P_i-1)/P_i)P_i+T_i、最後にYを加え、elapsed[r]=time-rを保存する。各query qにはq+elapsed[q%L]を64bitで出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "合同式と最小公倍数による周期化",
-      "trigger": "制約と操作を整理したときに 合同式と最小公倍数による周期化 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc319-e「Bus Stops」では、各待ち時間の法をまとめた最小公倍数 L に対し、出発時刻の剰余ごとの所要時間を前計算する。この状態表現から答えを構成する。で 合同式と最小公倍数による周期化 を問題固有の状態へ適用する。",
+      "name": "小LCMによる周期前計算",
+      "trigger": "遷移が小さいmodulus群への丸めで決まり、そのLCMが小さいとき。",
+      "application": "全840 residueのroute所要時間だけをsimulationする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "時刻表の切上げ遷移",
+      "trigger": "周期Pの次eventを到着時刻xから求めるとき。",
+      "application": "(x+P-1)/P·Pで最初のdepartureへ丸める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "絶対時刻はLずつ増えても、各bus区間の待ち時間と乗車時間は完全に同じなので、周期的なのはarrivalそのものではなくelapsed timeである。",
+      "reusablePerspective": "shift equivariantなsimulationでは、出力から入力shiftを引いた量が有限residueだけに依存しないか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "合同式と最小公倍数による周期化",
+      "text": "LCMと合同式",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "integer ceiling division",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "固定の始端・終端時間を行程内へ入れる位置と、負でない modulo の定義を統一する。",
+      "text": "ceil divisionは到着時刻がちょうどP_iの倍数なら待ち時間0になる式を使う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "T_iの累積やquery時刻を含む到着時刻は32bitを超えるため64bit整数で持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Bus Stops 型の問題に対し、合同式と最小公倍数による周期化を選び、状態と証明を一貫して設計できる。",
+      "text": "多数の出発時刻queryに対する最早到着時刻を、840 residueの所要時間前計算で返せる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "固定の始端・終端時間を行程内へ入れる位置と、負でない modulo の定義を統一する。",
+      "text": "P=3,8を含む短いrouteでrとr+840を並行simulationし、各待ち時間が等しく絶対到着だけ840ずれることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc367-g「Sum of (XOR^K or 0)」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各xor値zについて、長さがMの倍数の部分列数C_zが分かれば、答えはΣC_z·z^Kである。長さ条件は生成関数の次数をx^M=1として扱うと定数項に集約できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各A_iの「選ばない1、選ぶxをxor index A_iへ置く」配列をxor convolutionすると全部分列を表し、Walsh-Hadamard変換後はindexごとに通常の多項式積へ変わる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc367-g「Sum of (XOR^K or 0)」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "xor軸をHadamard変換し、各周波数で(1+x)^B(1−x)^(N−B) mod(x^M−1)の定数項を求めて逆変換する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "xor convolutionと部分列長生成関数を別軸で対角化し、2^20個のsubset状態を個別更新せずに済む。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "部分列を一要素ずつ追加し、長さmod Mとxor値の二次元DPを更新する。",
+        "decision": "rejected",
+        "decisionReason": "一要素ごとにM·2^20状態を触るため、Nも大きい制約では反復できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "積の k 次係数が添字和 k を満たす項の総和なので、元の組合せ和と係数が一致する。",
+        "text": "frequency tでHadamard符号が+1となるA_iの個数をB_tとすると、全要素の変換後積は(1+x)^{B_t}(1−x)^{N−B_t}になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sum of (XOR^K or 0) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "値frequency cntへFWTを掛ければH(cnt)_t=2B_t−Nなので、B_t=(H(cnt)_t+N)/2を全tで求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc367-g「Sum of (XOR^K or 0)」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "値頻度cntを長さ2^20で作りFWTして各tのB_tを得る。b=0..Nについて多項式(1+x)^b(1−x)^(N−b)をx^M−1で剰余した定数項F[b]を前計算し、transform領域の値Vhat[t]=F[B_t]とする。inverse FWTでC_zを復元し、ΣC_z·z^Kを法上で計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc367-g「Sum of (XOR^K or 0)」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "XOR convolutionのWalsh-Hadamard変換",
+      "trigger": "subset選択の集約値がxorで、全xor値の係数が必要なとき。",
+      "application": "xor convolutionをfrequencyごとの積へ対角化する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "畳み込みと NTT",
-      "trigger": "制約と操作を整理したときに 畳み込みと NTT の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc367-g「Sum of (XOR^K or 0)」では、主解法候補として、組合せの二重和を多項式積へ変換し、convolution で全係数をまとめて求める。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 畳み込みと NTT を問題固有の状態へ適用する。",
+      "name": "巡回多項式による長さmod管理",
+      "trigger": "選択個数が特定modに属する係数だけ必要なとき。",
+      "application": "x^M=1として次数を折り返し、長さMの倍数を定数項へ集める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "Hadamard後の各要素factorは符号だけが異なる1±xなので、2^20周波数ごとの多項式をBというN+1種類へ再圧縮できる。",
+      "reusablePerspective": "transform後の値が少数parameterだけで決まるなら、parameter別前計算を共有する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "Walsh-Hadamard transform",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "畳み込みと NTT",
+      "text": "生成関数と多項式剰余",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "必要な係数長、padding 長、法が NTT に対応するかを確認する。",
+      "text": "inverse FWTの2^20逆元を掛ける。A_i=0では同じindexの1とxを加えた1+xになり、空部分列も長さ0として含まれる仕様を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sum of (XOR^K or 0) 型の 列の順序と prefix 状態に対し、畳み込みと NTTを選び、状態と証明を一貫して設計できる。",
+      "text": "xorと部分列長という二軸の条件をHadamard変換と巡回生成関数で分離し、全xor別個数から加重和を得られる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "必要な係数長、padding 長、法が NTT に対応するかを確認する。",
+      "text": "Nが小さい場合に全部分列列挙とC_zを照合する。FWTのforward/inverse正規化とx^M=1で折り返す向きを独立にテストする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

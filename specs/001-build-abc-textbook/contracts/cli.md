@@ -12,6 +12,31 @@
 - repo-relative pathだけを扱い、absolute、`..`、symlink escape、重複pathを拒否する。
 - update identityに影響するinputが同じなら既存active artifactを冪等再利用する。
 
+`corpus:export-inventory-review-packets`だけは、転載対象になり得る執筆用packetをrepositoryへ置かないための明示的な例外である。このcommandはcacheと新規出力先にrepository外の絶対pathを要求し、実pathを解決した後にもrepository内・repositoryを包含するpath・symlink経由の再侵入を拒否する。
+
+## `corpus:export-inventory-review-packets` — private執筆packetの再生成
+
+```bash
+npm run corpus:export-inventory-review-packets -- \
+  --metadata-dir PATH \
+  --cache-scope-dir ABSOLUTE_PRIVATE_PATH \
+  --output-dir ABSOLUTE_NEW_PRIVATE_PATH
+```
+
+- networkへ接続せず、検証済みmetadataと同一scopeの公式page cacheだけを読む。
+- Problemと個別公式解説を再parseし、Source Revision fingerprintがmetadataと一致する場合だけ一Problem一packetを新規directoryへ書く。
+- 全packetを検証・構築してから同一parentの一時directoryへ書き、最後に新規出力pathへatomic renameする。途中失敗時は一時directoryを除去し、既存出力pathは上書きしない。
+- packetは参照と独自説明の執筆にだけ使い、repositoryへcommitしない。
+- 成功時はProblem数、Source Revision数、cache page数、出力pathをmachine-readable JSONで返す。
+
+## `corpus:verify-authoring` — 全Inventoryの執筆証跡検証
+
+```bash
+npm run corpus:verify-authoring
+```
+
+全Problemが`reviewed`、finding 0、source-boundであることに加え、使用skill、writing policy、全Problemの正規化Source Revision集合、各Inventory contentのdigestを再計算し、`docs/verification/bootstrap/technique-inventory-authoring.json`とbyte一致しなければ終了2とする。private review packet本文のdigestではなく、公式Source Revisionのfingerprint・URL・task bindingを固定する。更新は明示的な`npm run corpus:verify-authoring:write`だけが行う。
+
 ## `abc:update` — 一操作の更新準備
 
 ```bash

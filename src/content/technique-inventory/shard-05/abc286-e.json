@@ -17,77 +17,103 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc286-e「Souvenir」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "最優先はflight本数の最小化であり、その同率解の間だけsouvenir価値を最大化するので、経路評価は(distance, value)の辞書式順序になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "最短pathは同じ都市を繰り返さないため、頂点価値は出発都市を一度加え、edge u→vを通るたび到着都市A_vを加える形へ移せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc286-e「Souvenir」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全点対Floyd–Warshallの値を最短距離と同距離での最大価値のpairに拡張する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N≤300で全queryを一括前計算でき、距離優先・価値優先の更新規則を厳密に実装できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各edge costを1-εA_vとする浮動小数最短路。",
+        "decision": "rejected",
+        "decisionReason": "概念上は優先順位を埋め込めても、εと丸め誤差によりflight本数と価値の比較が壊れ得る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "flight本数だけの最短距離を求めた後、任意の到達pathから価値を集計する。",
+        "decision": "rejected",
+        "decisionReason": "同じ最短距離を持つ複数pathから最大価値のものを選ぶ情報が失われる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "許可する中継頂点集合について帰納し、最適路が新頂点を使う場合と使わない場合を網羅する。",
+        "text": "候補は距離が小さければ常に優先し、距離が等しいときだけ価値が大きい方へ更新すれば、問題の二段階最適化と一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Souvenir 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "i→kとk→jを連結すると都市kの価値を二重に数えるため、価値はval[i][k]+val[k][j]-A_kで合成する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc286-e「Souvenir」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "dist[i][i]=0,val[i][i]=A_i、direct flight i→jにはdist=1,val=A_i+A_jを設定し、他は到達不能とする。各k,i,jで到達可能なら候補(distance=dist[i][k]+dist[k][j], value=val[i][k]+val[k][j]-A_k)を作り、distance最小・同率value最大で更新する。queryは到達不能ならImpossible、否则pairを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc286-e「Souvenir」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "多目的最短路の辞書式pair",
+      "trigger": "最優先costを最適化し、その同率解でsecondary scoreを最適化するとき。",
+      "application": "比較演算を距離昇順・価値降順に定義してrelaxする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Floyd–Warshall 法",
-      "trigger": "制約と操作を整理したときに Floyd–Warshall 法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc286-e「Souvenir」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Floyd–Warshall 法 を問題固有の状態へ適用する。",
+      "name": "Floyd–Warshallの半環拡張",
+      "trigger": "全点対queryが多く、path情報を結合可能な値として持てるとき。",
+      "application": "pairの選択と中継点での結合を定義して三重loopを適用する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "都市価値をedge到着時の加点へ変換すると、出発点だけを初期値に持たせればpathの各都市を一度ずつ数えられる。",
+      "reusablePerspective": "頂点重み付きpathは、開始点の初期寄与と入辺通過時の到着点寄与へ分解すると標準的な最短路更新へ載せやすい。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
+      "text": "Floyd–Warshall法",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Floyd–Warshall 法",
+      "text": "辞書式最適化と頂点重みpath",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "到達不能値同士を加算せず、更新順序 k-i-j を崩さない。",
+      "text": "到達不能なpairを加算せず、価値総和は最大約300×10^9なので64bit整数を使う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "中継合成ではA_kを一度引き、direct edgeの両端価値や始点価値を欠落・二重計上しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Souvenir 型の 文字列の prefix・suffix と一致関係に対し、Floyd–Warshall 法を選び、状態と証明を一貫して設計できる。",
+      "text": "任意の都市対について、最少flight本数と、その最短route中の最大souvenir総価値を全点対前計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "到達不能値同士を加算せず、更新順序 k-i-j を崩さない。",
+      "text": "同じ2-edge距離で価値だけ異なる2経路を作って更新順を確認し、i→k→jのkが一度だけ加算されることとImpossible判定を照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

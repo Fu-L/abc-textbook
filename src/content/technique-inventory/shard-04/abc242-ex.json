@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc242-ex「Random Painting」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "抽選済みの異なる区間集合 S がまだ全盤面を覆わない間、次に S 外の区間が初めて出るまでの待ち時間は成功確率 (M-|S|)/M の幾何分布で、期待値は M/(M-|S|) である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "異なる区間が i 種類集まった時点の集合は全 C(M,i) subset に対称であり、そのうち union が [1,N] でない割合だけ、その stage の待ち時間が完了前に発生する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc242-ex「Random Painting」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "被覆する i-subset 数 f(i) を interval-union DP で数え、各 i<M の非被覆割合 (C(M,i)-f(i))/C(M,i) に stage 待ち時間 M/(M-i) を掛けて足す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "無限回の確率過程を distinct-set size ごとの有限な期待値和へ変え、残る組合せ数を区間構造で計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "抽選された ball の列または2^M個の既出集合を状態に期待値 DP を行う。",
+        "decision": "rejected",
+        "decisionReason": "同じ ball の反復で列は無限、distinct subset も M=400 に対して指数個ある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "次状態による条件付き分解と全確率・期待値の線形性から、各状態の漸化式が成立する。",
+        "text": "区間を (L,R) 昇順に処理すると、選択区間の union が gap なしの prefix [1,j] である状態だけを持てる。新 interval は j<L-1 なら選べず、重なるなら右端を R へ伸ばし、既に含まれるなら j を保つ。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Random Painting 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "f(i)=dp[N][i] が i 個で全被覆する subset 数となり、期待値は i=0..M-1 の stage 寄与の和である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc242-ex「Random Painting」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "interval を L,R 順に sort し、dp[j][k] を選択 union が [1,j]、選択数 k の subset 数として skip/select 遷移する。f(k)=dp[N][k] を得た後、Σ_{k=0}^{M-1}(1-f(k)/C(M,k))·M/(M-k) を法998244353で計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc242-ex「Random Painting」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "coupon stage による期待値分解",
+      "trigger": "復元抽選で異なる種類が増え、ある集合性質を初めて満たすまでの回数を求めるとき。",
+      "application": "distinct 集合サイズごとの滞在確率と、次の新種類までの幾何分布期待値を掛けて足す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "条件付き期待値と確率 DP",
-      "trigger": "制約と操作を整理したときに 条件付き期待値と確率 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc242-ex「Random Painting」では、主解法候補として、確率過程の状態を縮約し、全確率または期待値の漸化式を DP として解く。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 条件付き期待値と確率 DP を問題固有の状態へ適用する。",
+      "name": "区間 union の prefix DP",
+      "trigger": "区間を選んだ union が gap なしで始点からどこまで覆うかを数えたいとき。",
+      "application": "左端順に処理し、covered right endpoint と選択数を状態にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "抽選順を直接追わず、「異なる区間が i 個そろった stage でまだ被覆しているか」へ期待値を分解すると、順序確率と subset 数え上げが分離する。",
+      "reusablePerspective": "with-replacement 過程では、distinct set が増える瞬間だけを埋め込んだ過程として観察する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "条件付き期待値と確率 DP",
+      "text": "幾何分布の期待値、組合せ対称性、区間 DP、法逆元",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "期待値和は M-k が0になる k=M を含めない。in-place DP なら j の降順などで同じ interval を二度使わないようにし、C(M,k)=0でない範囲の法逆元を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Random Painting 型の 整数の約数・剰余構造に対し、条件付き期待値と確率 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "反復抽選の被覆完了期待値を distinct-set stage に分解し、interval subset の全被覆数 DP と結合できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop を右辺から移項し、modulus 上の除算では逆元の存在を確認する。",
+      "text": "i 個の distinct ball が集まった時の subset が一様であることと、次の新 ball まで M/(M-i) 回かかることを別々に導く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc465-f「Sjeltzer?」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各IDの六桁size sをcoordinate-wise box x≤s≤y で集計するqueryである。下端0のprefix box総和を全10^6座標に前計算すれば一般boxは六次元包除で得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc465-f「Sjeltzer?」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "sizeをbase10六次元indexにして6方向のzeta transformを行い、各queryでx_k>y_kなら0、そうでなければ下端条件を64個のprefix boxへ包除する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各dimensionの累積和を順に適用するとzeta[y]=Σ_{s_k≤y_k}weight(s)になり、直方体[x,y]は各dimensionで上端yか下端x-1を選ぶ標準包除で完全に復元できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各queryで全IDを走査し、六桁が各区間内か比較してsizeを足す。",
+        "decision": "rejected",
+        "decisionReason": "NQ回の六次元比較となり、座標値域10^6が固定である利点を使えていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+        "text": "base10 indexの桁kを一つずつ累積すると、他の桁を固定したline上のprefix sumを全座標へin-place伝播できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sjeltzer? 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "下端x_k=0のdimensionでx_k-1を選ぶ包除項は空boxなので0としてskipする。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc465-f「Sjeltzer?」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "10^6配列に各ID weightを加える。k=0..5で全indexを走査しdigit_k>0ならzeta[idx]+=zeta[idx-10^k]とする。queryはmask0..63で bound_k=(mask bit?x_k-1:y_k)、符号(-1)^{popcount}を付けzeta[bound]を合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc465-f「Sjeltzer?」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "多次元zeta transform",
+      "trigger": "各座標が小さく固定次元で、coordinate-wise prefix box総和を多数問うとき。",
+      "application": "dimensionごとの一次元累積を全gridへ順次適用する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "累積和と差分",
-      "trigger": "制約と操作を整理したときに 累積和と差分 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc465-f「Sjeltzer?」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 累積和と差分 を問題固有の状態へ適用する。",
+      "name": "直方体の包除原理",
+      "trigger": "prefix box oracleから一般axis-aligned box総和を求めたいとき。",
+      "application": "各dimensionの上端・下端直前を2^D通り選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "六桁decimal IDを一整数でなく各桁独立座標として見ると、固定10^6gridの多次元prefix sumになる。",
+      "reusablePerspective": "次元6は2^6包除が小さいため、query数が多くても定数64項で処理できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "累積和と差分",
+      "text": "多次元zeta transform、直方体の包除原理と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "leading zeroを含む六桁分解を固定し、idxのdigit判定でdecimal carryを跨がない。weight総和に十分な64 bitを使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sjeltzer? 型の 文字列の prefix・suffix と一致関係に対し、累積和と差分を選び、状態と証明を一貫して設計できる。",
+      "text": "百万通りの六次元size box queryを、6D zeta前計算と64項包除で高速に回答できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "二次元版のprefix rectangle包除を先に書き、base10 indexで一dimension累積がidx-10^kになる条件を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

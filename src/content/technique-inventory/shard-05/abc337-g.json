@@ -17,85 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc337-g「Tree Inversion」では、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。さらに、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "pair(v,w), v<wがf(u)へ寄与する条件は、頂点wを削除したforestでuとvが異なるcomponentに属することと同値である。木をroot化すると、そのu集合はあるchild subtree全体か、その補集合になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc337-g「Tree Inversion」では、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。さらに、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。",
+        "approach": "subtree内のlabel<w個数をoffline BITで求め、subtree range addで全f(u)を構成する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "O(N)個のpair集約queryと範囲寄与へ分解でき、全(v,w,u)を列挙せずO(N log N)で処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各uをrootとして全(v,w)を数え直す",
+        "decision": "rejected",
+        "decisionReason": "一つのuでも木全体の情報が必要で、N回行うとO(N^2)以上になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "DFS で頂点へ入ってから出るまでに訪れる頂点はちょうどその部分木なので、時刻区間との対応が成立する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Tree Inversion 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "頂点wについて親側componentにあるv<wの個数a=(w-1)-less(subtree(w),w)はsubtree(w)の全uへ寄与する。一方child pのsubtreeにあるv<wの個数b=less(subtree(p),w)はsubtree(p)外の全uへ寄与する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc337-g「Tree Inversion」では、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。さらに、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。",
+      "text": "任意rootでEuler tourして各subtreeを[tin,tout)にする。qを昇順に処理し、label<qの頂点tinへ1を入れたBITで必要なless(interval,q)を求める。各wのaをsubtree(w)へ加え、各child pのbを全体へ加えてsubtree(p)から引くrange-addをEuler差分または木imosで集約し、各頂点値を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "Euler tour による木の一次元化",
-      "trigger": "制約と操作を整理したときに Euler tour による木の一次元化 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc337-g「Tree Inversion」では、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。さらに、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。で Euler tour による木の一次元化 を問題固有の状態へ適用する。",
+      "name": "Euler tourによるsubtree区間化",
+      "trigger": "寄与先がsubtreeまたはその補集合で、範囲加算したい。",
+      "application": "subtreeを連続区間へ写し、区間addと全体add-minus-subtreeで表す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Fenwick tree",
-      "trigger": "制約と操作を整理したときに Fenwick tree の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc337-g「Tree Inversion」では、木の入時刻・出時刻を Euler tour で一次元化し、部分木を連続区間として処理する。さらに、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。この状態表現から答えを構成する。で Fenwick tree を問題固有の状態へ適用する。",
+      "name": "offline二次元counting",
+      "trigger": "subtree区間内でvertex labelがthreshold未満の個数をO(N)回求めたい。",
+      "application": "threshold順に頂点をBITへ追加し、Euler区間sumで矩形countを得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "pair(v,w)をuごとに数える代わりに、wを切った時のv側componentを特定し、その補集合に属する全uへ一括加算する。",
+      "reusablePerspective": "path包含条件はcut vertexでcomponentを分け、寄与先集合へのrange updateへ主客転倒できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "Euler tour による木の一次元化",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Fenwick tree",
+      "text": "rooted tree、Euler tour、Fenwick tree、offline query、tree imos。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入時刻の半開区間と頂点値・辺値のどちらを記録するかを統一する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "labelはvertex番号そのものなのでq=wの処理前には1,…,w-1だけをBITへ入れる。補集合加算はglobal加算とsubtree減算の組で実装し符号を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Tree Inversion 型の問題に対し、Euler tour による木の一次元化を選び、状態と証明を一貫して設計できる。",
+      "text": "全頂点uについて、path(u,v)がwを含みv<wである順序付きpair(v,w)の個数f(u)を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入時刻の半開区間と頂点値・辺値のどちらを記録するかを統一する。",
+      "text": "path、star、rootを跨ぐpairでN小の三重loop真値と比較し、subtree境界の半開区間とv=w除外を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

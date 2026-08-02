@@ -1,0 +1,956 @@
+{
+  "schemaVersion": "2.0.0",
+  "updateId": "update-2661fc1615b0f12e3619aedd",
+  "kind": "bootstrap",
+  "baseReleaseVersion": null,
+  "contestId": null,
+  "sourceSetFingerprint": "6c7711d6f1c7b87a11d3994e43985d7adaa67ced91e3b1d1cb8550d8892135d7",
+  "advancedSlotLabels": ["E", "F", "G"],
+  "targetProblemIds": [
+    "abc212-g",
+    "abc215-e",
+    "abc218-f",
+    "abc222-g",
+    "abc223-f",
+    "abc232-e",
+    "abc252-e",
+    "abc256-f"
+  ],
+  "operations": [
+    {
+      "operationId": "operation-0c97e7a189ee78b3dc7b",
+      "entityType": "contest",
+      "entityId": "abc212",
+      "action": "add",
+      "path": "src/content/contests/abc212-abc263/abc212.json",
+      "beforeDigest": null,
+      "afterDigest": "f2a02d015d4ef02bc68511a931b05d84d12c875e7a925d8cf16da63713a09bc3",
+      "affectedEntities": [
+        {
+          "entityType": "contest",
+          "entityId": "abc212",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc212-g"]
+    },
+    {
+      "operationId": "operation-4dea8d9b80e83e639869",
+      "entityType": "contest",
+      "entityId": "abc215",
+      "action": "add",
+      "path": "src/content/contests/abc212-abc263/abc215.json",
+      "beforeDigest": null,
+      "afterDigest": "97229e54edf36e5a418473975e2287aa358f402260f2436ccf858bad2d93595d",
+      "affectedEntities": [
+        {
+          "entityType": "contest",
+          "entityId": "abc215",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc215-e"]
+    },
+    {
+      "operationId": "operation-8f222ac14e65eeda4bfd",
+      "entityType": "contest",
+      "entityId": "abc218",
+      "action": "add",
+      "path": "src/content/contests/abc212-abc263/abc218.json",
+      "beforeDigest": null,
+      "afterDigest": "14e8862616cb928fd5531f68d00cc70067bf52c72696deb812799f1fb3f67cac",
+      "affectedEntities": [
+        {
+          "entityType": "contest",
+          "entityId": "abc218",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc218-f"]
+    },
+    {
+      "operationId": "operation-684f5877650a759d8ad9",
+      "entityType": "contest",
+      "entityId": "abc222",
+      "action": "add",
+      "path": "src/content/contests/abc212-abc263/abc222.json",
+      "beforeDigest": null,
+      "afterDigest": "bcdd89fc3a4adff0a2f0887ca77ee8739787c746daf245521e4a046398c96ccc",
+      "affectedEntities": [
+        {
+          "entityType": "contest",
+          "entityId": "abc222",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc222-g"]
+    },
+    {
+      "operationId": "operation-3d569db1a9ba5b260e73",
+      "entityType": "contest",
+      "entityId": "abc223",
+      "action": "add",
+      "path": "src/content/contests/abc212-abc263/abc223.json",
+      "beforeDigest": null,
+      "afterDigest": "8bd1e482c8a667f620d83384798597a55da64e336a47f1f376219c445f04b9ac",
+      "affectedEntities": [
+        {
+          "entityType": "contest",
+          "entityId": "abc223",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc223-f"]
+    },
+    {
+      "operationId": "operation-b4bad92f027eccfbfc5e",
+      "entityType": "contest",
+      "entityId": "abc232",
+      "action": "add",
+      "path": "src/content/contests/abc212-abc263/abc232.json",
+      "beforeDigest": null,
+      "afterDigest": "fdf98f5ebd93d1150d407498699336793512a14103ecaf57ea11c1df0254a089",
+      "affectedEntities": [
+        {
+          "entityType": "contest",
+          "entityId": "abc232",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc232-e"]
+    },
+    {
+      "operationId": "operation-f266e5a5577d7320d5f6",
+      "entityType": "contest",
+      "entityId": "abc252",
+      "action": "add",
+      "path": "src/content/contests/abc212-abc263/abc252.json",
+      "beforeDigest": null,
+      "afterDigest": "7c2d1260267e6b958c7615727805e7fe02ab04ffb1b60a8d00d07822486b7333",
+      "affectedEntities": [
+        {
+          "entityType": "contest",
+          "entityId": "abc252",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc252-e"]
+    },
+    {
+      "operationId": "operation-a764435ee4c047f48d7e",
+      "entityType": "contest",
+      "entityId": "abc256",
+      "action": "add",
+      "path": "src/content/contests/abc212-abc263/abc256.json",
+      "beforeDigest": null,
+      "afterDigest": "0171c6a11fc43a6bca550617ac2b841fce0d6715d5664928fa595d2d96211316",
+      "affectedEntities": [
+        {
+          "entityType": "contest",
+          "entityId": "abc256",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc256-f"]
+    },
+    {
+      "operationId": "operation-f948fc49054ed4020386",
+      "entityType": "problem",
+      "entityId": "abc212-g",
+      "action": "add",
+      "path": "src/content/problems/abc212-abc263/abc212-g.json",
+      "beforeDigest": null,
+      "afterDigest": "7f09c5cf4eda976ae9a1d68e26f7365ff007fb00f505d897be07e4bfcea87ef3",
+      "affectedEntities": [
+        {
+          "entityType": "problem",
+          "entityId": "abc212-g",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc212-g"]
+    },
+    {
+      "operationId": "operation-641017a7c8aeb8cbf1f0",
+      "entityType": "problem",
+      "entityId": "abc215-e",
+      "action": "add",
+      "path": "src/content/problems/abc212-abc263/abc215-e.json",
+      "beforeDigest": null,
+      "afterDigest": "0d7dabe198e57be772330326c03350570267507cc0dfb8b17c74e82cad2fe745",
+      "affectedEntities": [
+        {
+          "entityType": "problem",
+          "entityId": "abc215-e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc215-e"]
+    },
+    {
+      "operationId": "operation-37e0722c40964d894853",
+      "entityType": "problem",
+      "entityId": "abc218-f",
+      "action": "add",
+      "path": "src/content/problems/abc212-abc263/abc218-f.json",
+      "beforeDigest": null,
+      "afterDigest": "f7e9992e8dc4c90c949c824d9b4f85f98aee3ac62adc3b7b5763eb9aa6742874",
+      "affectedEntities": [
+        {
+          "entityType": "problem",
+          "entityId": "abc218-f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc218-f"]
+    },
+    {
+      "operationId": "operation-dc2b6ed955d424542f9a",
+      "entityType": "problem",
+      "entityId": "abc222-g",
+      "action": "add",
+      "path": "src/content/problems/abc212-abc263/abc222-g.json",
+      "beforeDigest": null,
+      "afterDigest": "dd1b58925cdc5cedecfbc631ee77a5bf62ae69e4769d49b601f91172b5ecbab8",
+      "affectedEntities": [
+        {
+          "entityType": "problem",
+          "entityId": "abc222-g",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc222-g"]
+    },
+    {
+      "operationId": "operation-725a7fa556ef23de6145",
+      "entityType": "problem",
+      "entityId": "abc223-f",
+      "action": "add",
+      "path": "src/content/problems/abc212-abc263/abc223-f.json",
+      "beforeDigest": null,
+      "afterDigest": "3d71f469d6565a5ea083a9d3f774ba90720f15a5c39a10a2dc0e2cae209ad8b7",
+      "affectedEntities": [
+        {
+          "entityType": "problem",
+          "entityId": "abc223-f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc223-f"]
+    },
+    {
+      "operationId": "operation-0a0e346aa338e8c1ae59",
+      "entityType": "problem",
+      "entityId": "abc232-e",
+      "action": "add",
+      "path": "src/content/problems/abc212-abc263/abc232-e.json",
+      "beforeDigest": null,
+      "afterDigest": "a957c29573f7986a2a65c395bec02b46b5a95d4aaf317559712ab0237b183875",
+      "affectedEntities": [
+        {
+          "entityType": "problem",
+          "entityId": "abc232-e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc232-e"]
+    },
+    {
+      "operationId": "operation-ac02ad7fc261251b7bbd",
+      "entityType": "problem",
+      "entityId": "abc252-e",
+      "action": "add",
+      "path": "src/content/problems/abc212-abc263/abc252-e.json",
+      "beforeDigest": null,
+      "afterDigest": "b73266e143f9c173309bec81e26976102bb223252a7a71af07f5271394299099",
+      "affectedEntities": [
+        {
+          "entityType": "problem",
+          "entityId": "abc252-e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc252-e"]
+    },
+    {
+      "operationId": "operation-6b6ad6d0a76bb95443cb",
+      "entityType": "problem",
+      "entityId": "abc256-f",
+      "action": "add",
+      "path": "src/content/problems/abc212-abc263/abc256-f.json",
+      "beforeDigest": null,
+      "afterDigest": "45123d86b1825d213d8666e95b9321e4fde2036ab29119dbed9d26c7d46c7cfe",
+      "affectedEntities": [
+        {
+          "entityType": "problem",
+          "entityId": "abc256-f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc256-f"]
+    },
+    {
+      "operationId": "operation-993fc81fa0035396f983",
+      "entityType": "source",
+      "entityId": "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05.json",
+      "beforeDigest": null,
+      "afterDigest": "f83c86f58100726571890d9ed39226951f1158088e84b1ffe781d20597622984",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc212-g"]
+    },
+    {
+      "operationId": "operation-17c7853480bca8a15908",
+      "entityType": "source",
+      "entityId": "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5.json",
+      "beforeDigest": null,
+      "afterDigest": "4fdf18c07f835b9d5fb811d331248fbec57176a24958e6ec7a733c0b05119b9e",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc212-g"]
+    },
+    {
+      "operationId": "operation-555b36fd87746a0c6757",
+      "entityType": "source",
+      "entityId": "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846.json",
+      "beforeDigest": null,
+      "afterDigest": "70d9df4f28053c413c6aaa6c4bf688bf056967c0c03d9723a885dcf9aad79419",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc215-e"]
+    },
+    {
+      "operationId": "operation-48b1974b14bab60d1b9b",
+      "entityType": "source",
+      "entityId": "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f.json",
+      "beforeDigest": null,
+      "afterDigest": "42c2d62684cb131c4244c0fe47347fcf0206ebe2c9b96ca729fedccc990cc6fc",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc215-e"]
+    },
+    {
+      "operationId": "operation-9e7cffd9d7bbff94fe6a",
+      "entityType": "source",
+      "entityId": "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339.json",
+      "beforeDigest": null,
+      "afterDigest": "9e1a8bea60e27ab36cd03a2188b0a3321151639c7084a0550458095a63544cd2",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc218-f"]
+    },
+    {
+      "operationId": "operation-84da5a4d1ddda3824bdd",
+      "entityType": "source",
+      "entityId": "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023.json",
+      "beforeDigest": null,
+      "afterDigest": "c2ffa21c25d4cfebfc8afdf643d4aa436d04f50c4247b3eceda30f75d2eabfa9",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc218-f"]
+    },
+    {
+      "operationId": "operation-5ec2088db3be85a6cfa5",
+      "entityType": "source",
+      "entityId": "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95.json",
+      "beforeDigest": null,
+      "afterDigest": "0478ec6d7a1976f5fbda8cd8c09df5c17011d1d1036772887e97ec52c83ad8dc",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc222-g"]
+    },
+    {
+      "operationId": "operation-f0a51f0543828f8756b9",
+      "entityType": "source",
+      "entityId": "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378.json",
+      "beforeDigest": null,
+      "afterDigest": "67b159a96b065b7418f3c975db4eda79d3c9f0ebb01a5b32d845b2eb9cd93df3",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc222-g"]
+    },
+    {
+      "operationId": "operation-901587086ad2f59b0acd",
+      "entityType": "source",
+      "entityId": "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf.json",
+      "beforeDigest": null,
+      "afterDigest": "a44102650a06fa01c1a7b4f883d01bee6151daf636550369ee909fafed386774",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc223-f"]
+    },
+    {
+      "operationId": "operation-e0cca5295b0663464452",
+      "entityType": "source",
+      "entityId": "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306.json",
+      "beforeDigest": null,
+      "afterDigest": "e36df645addf7ba5833bae2727b387b36c251d5219c543df7e0acf8565ba9f69",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc223-f"]
+    },
+    {
+      "operationId": "operation-b18eacdea51e412c3dd1",
+      "entityType": "source",
+      "entityId": "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46.json",
+      "beforeDigest": null,
+      "afterDigest": "d2c6050d92616465477442f28d576a77bd9e8715d8045206d0cdca6430307f2f",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc232-e"]
+    },
+    {
+      "operationId": "operation-61e91ca50b1f43e44671",
+      "entityType": "source",
+      "entityId": "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d.json",
+      "beforeDigest": null,
+      "afterDigest": "9375b5e06de7383dd3e8cbdf40e5f2577c443a76a3fb6dca14ff530b1f400b4f",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc232-e"]
+    },
+    {
+      "operationId": "operation-0b12b5fc5263225d42f9",
+      "entityType": "source",
+      "entityId": "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a.json",
+      "beforeDigest": null,
+      "afterDigest": "b30f9bc735c8fdc9a6130db82bc9b57fdccbc9451fc4de9169f7c5b33cc8c979",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc252-e"]
+    },
+    {
+      "operationId": "operation-78fe97d4937034090cee",
+      "entityType": "source",
+      "entityId": "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2.json",
+      "beforeDigest": null,
+      "afterDigest": "2ddaf08d624508e1ec44357b691d6c3af1f1aae5d5ebf1522be6c943c39443ce",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc252-e"]
+    },
+    {
+      "operationId": "operation-64f18f869170a57df268",
+      "entityType": "source",
+      "entityId": "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a.json",
+      "beforeDigest": null,
+      "afterDigest": "7464e46de45672742b808b22bab118125b159a742d70e581fc82a33c0e2a6832",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc256-f"]
+    },
+    {
+      "operationId": "operation-87624115610dced0caa5",
+      "entityType": "source",
+      "entityId": "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965",
+      "action": "add",
+      "path": "src/content/sources/abc212-abc263/source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965.json",
+      "beforeDigest": null,
+      "afterDigest": "ea4c2965efab5ae3034deb2fb27ddb21e568424ad645e8a5919ea3547193234c",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc256-f"]
+    },
+    {
+      "operationId": "operation-3c627c4acb1c8b58b82c",
+      "entityType": "learning_unit",
+      "entityId": "preview-learning-data-structures",
+      "action": "add",
+      "path": "staging/previews/initial-v1/learning/data-structures/learning-unit.json",
+      "beforeDigest": null,
+      "afterDigest": "7ddfff957ca7c77b9ce6cf422304156b28b157b080504edc2515f0f4f99ce657",
+      "affectedEntities": [
+        {
+          "entityType": "learning_unit",
+          "entityId": "preview-learning-data-structures",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc223-f", "abc256-f"]
+    },
+    {
+      "operationId": "operation-51d40e8f27ec3bd785fb",
+      "entityType": "learning_unit",
+      "entityId": "preview-learning-dynamic-programming",
+      "action": "add",
+      "path": "staging/previews/initial-v1/learning/dynamic-programming/learning-unit.json",
+      "beforeDigest": null,
+      "afterDigest": "0b23f2a3e24cd33bd6d45c81a5ae9b0800bc0cf095626d042bf90ca4f670e543",
+      "affectedEntities": [
+        {
+          "entityType": "learning_unit",
+          "entityId": "preview-learning-dynamic-programming",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc215-e", "abc232-e"]
+    },
+    {
+      "operationId": "operation-09e2e355cde254761ae4",
+      "entityType": "learning_unit",
+      "entityId": "preview-learning-graph-search",
+      "action": "add",
+      "path": "staging/previews/initial-v1/learning/graph-search/learning-unit.json",
+      "beforeDigest": null,
+      "afterDigest": "5154ee2739a1a89d39b025c944234e322d838b1e1bb94ab84ea62101dfea5298",
+      "affectedEntities": [
+        {
+          "entityType": "learning_unit",
+          "entityId": "preview-learning-graph-search",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc218-f", "abc252-e"]
+    },
+    {
+      "operationId": "operation-ac83767a8ee18c662109",
+      "entityType": "learning_unit",
+      "entityId": "preview-learning-mathematics",
+      "action": "add",
+      "path": "staging/previews/initial-v1/learning/mathematics/learning-unit.json",
+      "beforeDigest": null,
+      "afterDigest": "a8bfccc2fc833c3c8f56fb7c28abcea86bc7e3b45a27cf79f54e5e9718148ec3",
+      "affectedEntities": [
+        {
+          "entityType": "learning_unit",
+          "entityId": "preview-learning-mathematics",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc212-g", "abc222-g"]
+    },
+    {
+      "operationId": "operation-7b0775f5fec86e521dd6",
+      "entityType": "placement",
+      "entityId": "preview-placement-index",
+      "action": "add",
+      "path": "staging/previews/initial-v1/taxonomy/index.json",
+      "beforeDigest": null,
+      "afterDigest": "f7f1478d404d5411510b5a3d8be3ab86418831bbf2b8bcfd499ee019e34b84fe",
+      "affectedEntities": [
+        {
+          "entityType": "placement",
+          "entityId": "preview-placement-index",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc212-g",
+        "abc215-e",
+        "abc218-f",
+        "abc222-g",
+        "abc223-f",
+        "abc232-e",
+        "abc252-e",
+        "abc256-f"
+      ]
+    },
+    {
+      "operationId": "operation-1baea92e7ce234b77342",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc212-g",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc212-g.json",
+      "beforeDigest": null,
+      "afterDigest": "1a7436faa5d34b9d5223c25d5f4824f86439ee23ca2a637c4f5ff5ab9cb57514",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc212-g",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc212-g"]
+    },
+    {
+      "operationId": "operation-b61fee19399ecbe56c9d",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc215-e",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc215-e.json",
+      "beforeDigest": null,
+      "afterDigest": "34e26fee3f2c491d0a79faac104ac994415f3fb72dd998b04a0b82526b75e52b",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc215-e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc215-e"]
+    },
+    {
+      "operationId": "operation-f2368109a9411281ea3c",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc218-f",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc218-f.json",
+      "beforeDigest": null,
+      "afterDigest": "180af7cf5e7a650a3222a1631882739b48d5d28d5f9f95b317fba35e5299cf2e",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc218-f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc218-f"]
+    },
+    {
+      "operationId": "operation-a160499058aa05f0d7e5",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc222-g",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc222-g.json",
+      "beforeDigest": null,
+      "afterDigest": "94c4b3060da923915512ee296f12239901abe2cf2c13bf50da62915acf829d12",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc222-g",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc222-g"]
+    },
+    {
+      "operationId": "operation-d26e9bffa58e3b29fe0e",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc223-f",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc223-f.json",
+      "beforeDigest": null,
+      "afterDigest": "b114b5f6ce80d477d7535bf3bfa1718d5a3b08b31da0093f95d1a13107686963",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc223-f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc223-f"]
+    },
+    {
+      "operationId": "operation-49a9dcd02c4bedea016e",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc232-e",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc232-e.json",
+      "beforeDigest": null,
+      "afterDigest": "76a0a10062d26055f75defd8fd4b6a7adee25a12328d2fa3f96ccd6d476e80ef",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc232-e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc232-e"]
+    },
+    {
+      "operationId": "operation-ccc15512407bab15621c",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc252-e",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc252-e.json",
+      "beforeDigest": null,
+      "afterDigest": "d0ff9a97668eb1bbd2fdae49fb52496a41cb036d7c28f68abbb29b9dd3a8be1b",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc252-e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc252-e"]
+    },
+    {
+      "operationId": "operation-378173046cbe8774112f",
+      "entityType": "technique_inventory",
+      "entityId": "inventory-abc256-f",
+      "action": "add",
+      "path": "staging/previews/initial-v1/technique-inventory/abc256-f.json",
+      "beforeDigest": null,
+      "afterDigest": "e7a5adc492e635a32dd8324078004c960247de652ae52c0abb4f5669d4d8a4dc",
+      "affectedEntities": [
+        {
+          "entityType": "technique_inventory",
+          "entityId": "inventory-abc256-f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": ["abc256-f"]
+    }
+  ],
+  "authoringResults": [
+    {
+      "problemId": "abc212-g",
+      "slotLabel": "G",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc215-e",
+      "slotLabel": "E",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc218-f",
+      "slotLabel": "F",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc222-g",
+      "slotLabel": "G",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc223-f",
+      "slotLabel": "F",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc232-e",
+      "slotLabel": "E",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc252-e",
+      "slotLabel": "E",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc256-f",
+      "slotLabel": "F",
+      "resultType": "authoring_required",
+      "draftPath": null,
+      "packetPath": "src/content/sources/authoring/initial-v1.json",
+      "templatePath": ".agents/skills/abc-explanation-author/templates/full-explanation.md",
+      "reasonCode": "AUTHORING_REQUIRED",
+      "reason": "Complete authoring inputs are ready for the frozen authoring skill.",
+      "retryCondition": null
+    }
+  ],
+  "correctionImpactIds": [],
+  "validationSummary": {
+    "checkIds": [
+      "source",
+      "explanation",
+      "example",
+      "placement",
+      "dag",
+      "order",
+      "catalog",
+      "index",
+      "cross-reference"
+    ],
+    "problemResults": [
+      {
+        "problemId": "abc212-g",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc215-e",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc218-f",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc222-g",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc223-f",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc232-e",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc252-e",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc256-f",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      }
+    ],
+    "blockingFindingCount": 0,
+    "aggregatePassed": true,
+    "resultDigest": "ae3482d4afddbaa6cbc4671af543612f11335f9b1739e04ffac82ff71da8b4d7"
+  },
+  "state": "ON_HOLD",
+  "createdAt": "2026-07-28T15:00:00+09:00",
+  "updatedAt": "2026-07-28T15:00:00+09:00",
+  "fixtureMode": true
+}

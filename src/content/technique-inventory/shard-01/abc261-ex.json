@@ -1,15 +1,15 @@
 {
   "problemId": "abc261-ex",
   "sourceRevisionIds": [
-    "source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d",
-    "source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d"
+    "source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d",
+    "source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d",
-        "source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d"
+        "source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d",
+        "source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc261-ex「Game on Graph」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "状態は頂点 v と手番 t の組で、出次数 0 の状態はどちらの手番でも有限値 0 の終了状態である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "高橋手番は有限な遷移先が一つあれば終了を選べるが、青木手番が有限になるには全遷移先が有限でなければならない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc261-ex「Game on Graph」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "DAG の minimax DP と同じ再帰をメモ化し、未計算の遷移先を再帰的に辿る。",
+        "decision": "rejected",
+        "decisionReason": "有向閉路では依存関係が循環し、有限終了の可否も値も再帰順だけでは確定できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "終了状態から逆辺を辿る後退解析を行い、高橋状態は優先度付きキューで最小候補を確定し、青木状態は全出辺確定後に最大候補を確定する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "存在条件と全称条件を別々の確定規則にでき、非負辺重みの最小側だけ Dijkstra 型の順序で処理すれば minimax 値も同時に得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "有限な高橋状態の値は min(C(v,u)+dp[u][1])、有限な青木状態の値は max(C(v,u)+dp[u][0]) である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Game on Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "青木状態では未確定遷移数を出次数から減らし、0 になった瞬間に蓄積した最大値を確定する。高橋状態は最小候補がキューから出た瞬間に確定する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc261-ex「Game on Graph」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "reachability game の retrograde analysis に、AND/OR 状態の確定規則と nonnegative minimax distance の Dijkstra ordering を組み合わせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc261-ex「Game on Graph」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "ゲームグラフの後退解析",
+      "trigger": "閉路を含む有限ゲームで、終端へ到達できる勝敗・有限性を逆向きに確定したいとき。",
+      "application": "終端状態をキューへ入れ、逆辺を通じて存在条件の状態と全称条件の状態を伝播する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc261-ex「Game on Graph」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "Dijkstra 型 minimax 値確定",
+      "trigger": "min 側は複数の確定済み候補の最小、max 側は全候補確定後の最大を取る非負重みゲーム。",
+      "application": "min 候補を優先度付きキューへ入れ、max 候補は残り出辺カウンタと最大値で集約する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "両者の第一目的が終了可否なので、値の min/max を計算する前提となる有限状態だけを終端から生成し、最後まで未確定の状態を INFINITY とできる。",
+      "reusablePerspective": "辞書式目的を持つゲームでは、最優先の勝敗・終了性で状態領域を確定してから二次評価を伝播する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "minimax DP、AND/OR グラフの後退解析、Dijkstra 法を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "元の各辺 v→u を逆隣接リストにも保存し、候補値へ必ず辺重み C(v,u) を加える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "状態ごとの確定済み flag を持ち、優先度付きキューの古い候補による二重確定やカウンタの二重減算を防ぐ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "累積値は辺重みが経路上で重なるため 64 bit 整数で保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Game on Graph 型の 頂点と辺からなる状態グラフに対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "閉路を含む有向グラフ上の終了優先minimaxゲームについて、有限性と最適総重みを同時に求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "手番ごとの有限性条件が「一つあればよい」か「全て必要」かを、プレイヤーの目的から先に論理式へする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "閉路付きゲームDPは、再帰を工夫するより終端から値が確定する条件を逆向きに設計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

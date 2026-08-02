@@ -1,15 +1,15 @@
 {
   "problemId": "abc261-g",
   "sourceRevisionIds": [
-    "source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa",
-    "source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6"
+    "source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6",
+    "source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa",
-        "source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6"
+        "source-abc261-g-problem-0e5d0c930bef53a488260b0e2bb3c4f1c2968f47cc67199c76db0817dba4c1c6",
+        "source-abc261-editorial-4485-4cefe1ace6da40af088fda7c27b22f6e03cb33ebdaa3a218c83ec7695afd13aa"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc261-g「Replace」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各操作は一文字を空でない文字列へ置換するため、一つの元文字から最終的に生じる文字は T の連続部分文字列を占める。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "右辺 A_k の各文字が作る部分文字列を順に連結すれば、規則 C_k→A_k 一回と各部分の導出コストから C_k の導出コストを作れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc261-g「Replace」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "現在文字列を頂点として BFS し、全置換位置・規則を辺として T までの最短路を探す。",
+        "decision": "rejected",
+        "decisionReason": "途中文字列の種類が爆発し、長さ50でも状態空間を列挙できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "dp[l][r][c] を文字 c から T[l..r] を作る最小費用とし、各規則右辺を区間分割 DP で合成し、同じ区間内の一文字規則閉包を Dijkstra 法で解く。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "長さ二以上の右辺は厳密に短い部分区間へ分かれ、循環し得る一文字置換だけを26文字の最短路として分離できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "A_k の先頭 h 文字から T[l..r] を作る補助 DP は、最後の文字が作る suffix の切れ目 m を全探索して prefix と dp[m+1][r][A_k[h]] を足す。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Replace 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "一文字規則 c→d は dp[d] から dp[c] への重み1の辺なので、多文字規則候補と一致基底を仮想始点距離にして逆向き文字グラフを走れば閉包が得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc261-g「Replace」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "single-symbol rewriting を weighted context-free derivation とみなし、CYK 型 interval parsing に unit-production closure の shortest paths を組み込む。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc261-g「Replace」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "文字列導出の区間 DP",
+      "trigger": "元の各記号が目標文字列の連続区間を生成し、生成列の連結順序が保存されるとき。",
+      "application": "記号と目標区間を状態にし、規則右辺の各記号へ区間を非空分割して費用を合成する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc261-g「Replace」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "unit production の最短路閉包",
+      "trigger": "同じサイズの DP 状態間を単項規則が循環させる一方、他の規則候補は既に計算済みのとき。",
+      "application": "単項規則を有向重み辺、既知候補を多点始点距離として Dijkstra 法を行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "置換右辺は空でないため、長さ二以上の右辺を使う導出では各文字が T の非空部分を担当し、依存区間が必ず短くなる。",
+      "reusablePerspective": "文法的 DP の計算順は、再帰規則が状態サイズを厳密に減らす部分と同サイズ循環を作る部分を分離して決める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "区間 DP、文字列の分割、重み付き文法解析、Dijkstra 法を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "基底は l=r かつ T_l=c のとき費用0であり、規則を一回使う候補には必ず +1 する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "区間長の短い順に、多文字右辺の分割候補、文字グラフの閉包、右辺prefix補助状態の順で依存を満たして更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "最後は S を右辺とする費用0の仮想規則、または同じ連結分割 DP で T 全体への費用を求め、INF なら −1 を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Replace 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "単文字から文字列への置換系の最小操作回数を、区間導出DPと単項規則最短路で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "文字列書換えを状態探索する前に、各元記号が最終文字列のどの連続区間を生成するかという導出木へ視点を移す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "DP内の循環依存が単項遷移だけに閉じているなら、その層を最短路閉包として別処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

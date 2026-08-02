@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc304-e「Good Graph」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "初期グラフ内では頂点そのものではなく連結成分だけが到達可能性を決める。query辺(p,q)の追加で新たに結ばれるのはpの成分とqの成分なので、禁止頂点pairも成分pairへ圧縮できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc304-e「Good Graph」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "DSUで成分を求め、禁止成分pairをsetに保持する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各queryを二つの代表元の非順序pairが禁止集合にあるかという一回のmembership判定へ落とせる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "queryごとに辺を仮追加して禁止pair間の到達可能性を探索する",
+        "decision": "rejected",
+        "decisionReason": "Q回それぞれにグラフ探索が必要となり、queryが独立である利点を使えず制約を超える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Good Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "辺(p,q)を加えて禁止pair(x_i,y_i)が初めて連結になる必要十分条件は、非順序対{id(p),id(q)}が{id(x_i),id(y_i)}と一致することである。元グラフがgoodであるため、禁止pairの両端は初期状態で別成分にある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc304-e「Good Graph」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "全M辺をDSUへunionする。各禁止pair(x_i,y_i)を代表元pair(min(root(x_i),root(y_i)),max(...))へ正規化してsetへ入れる。各query(p,q)も同様に正規化し、setに含まれればNo、含まれなければYesを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc304-e「Good Graph」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "連結成分の縮約",
+      "trigger": "以後の判定が初期グラフ内の個々のpathではなく、どの成分同士を新しい一辺で結ぶかだけに依存する。",
+      "application": "DSUの代表元を成分IDとして、頂点pairを成分pairへ置き換える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "平衡二分探索木",
-      "trigger": "制約と操作を整理したときに 平衡二分探索木 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc304-e「Good Graph」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 平衡二分探索木 を問題固有の状態へ適用する。",
+      "name": "非順序pairの正規化",
+      "trigger": "無向辺と禁止関係では(a,b)と(b,a)を同一視する必要がある。",
+      "application": "代表元の小さい方を先にしたpairをsetまたはhash setのkeyにする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "各queryは独立で実際にはグラフを更新しないため、禁止成分pairは初期DSU上で一度だけ作ればよく、query後のunionは不要である。",
+      "reusablePerspective": "仮想的な一辺追加queryでは、独立性を確認して基礎グラフの成分縮約を固定すると判定を静的集合検索にできる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "平衡二分探索木",
+      "text": "DSUによる連結成分管理、無向pairの正規化、setのmembership判定。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "禁止pairとquery pairの双方で同じmin/max正規化を使う。queryは互いに独立なのでYesの場合でもDSUをunionしない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Good Graph 型の 頂点と辺からなる状態グラフに対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。",
+      "text": "各辺追加queryについて、追加後も全禁止頂点pairが非連結のgood graphであるかをYes/Noで判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "同一成分内のquery、禁止pairの向きを逆にしたquery、重複する禁止成分pair、複数queryを順に処理してもDSUが変わらないことを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

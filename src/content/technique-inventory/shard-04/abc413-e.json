@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc413-e「Reverse 2^i」では、主解法候補として、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "長さ2^Nの列を左右半分に分けると、長さ2^N全体の反転以外の操作は要素を半分間で移さず、全体反転は左右の要素集合を丸ごと交換する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "全体反転は最後に高々一度だけ行う形へ並べ替えられるため、各半分で独立に得られる辞書順最小列 A,B から、A+BまたはB+Aだけを比較すればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc413-e「Reverse 2^i」では、主解法候補として、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "power-of-two区間を再帰的に解き、最小化した左右半分を先頭要素の小さい順に連結する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "PはpermutationなのでA_0≠B_0で、辞書順比較は先頭だけで決まる。B+Aも両半分を反転してから全体を反転すれば実現できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "許される全区間反転の適用有無や順序を探索して到達permutationを列挙する",
+        "decision": "rejected",
+        "decisionReason": "操作は重なって非可換で到達候補が巨大になり、dyadic区間の再帰的な半分不変性を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "追加部分が既存構成と衝突せず、始点・終点・被覆条件を保つことをサイズに関する帰納法で示す。",
+        "text": "全体反転を使ってB+Aを得たいときは、先に各半分をreverse(A),reverse(B)へ到達させてから全体を反転すればよく、単純な全体反転で内部順が崩れる問題を解消できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Reverse 2^i 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "各再帰nodeで子結果の小さい先頭を前に置けば、そのnodeの要素集合から到達可能な最小列を帰納的に構成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc413-e「Reverse 2^i」では、主解法候補として、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "長さ1ならその要素を返す。区間を等分して左右を再帰的に最小化し、left[0]<right[0]ならleft+right、逆ならright+leftを返す。根の結果を出力し、各levelでのcopyを含め O(N·2^N) とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc413-e「Reverse 2^i」では、主解法候補として、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "divide and conquer",
+      "trigger": "許可操作区間が2冪境界に整列し、最大操作だけが左右blockを交換するとき。",
+      "application": "左右の最適形を独立に求め、親で順序だけ決める。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "再帰的構成と帰納法",
-      "trigger": "制約と操作を整理したときに 再帰的構成と帰納法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc413-e「Reverse 2^i」では、主解法候補として、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 再帰的構成と帰納法 を問題固有の状態へ適用する。",
+      "name": "辞書順最小化",
+      "trigger": "候補列の先頭要素が必ず相異なるとき。",
+      "application": "二つのblockの先頭を比較するだけで連結順を決定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "操作列の正規化",
+      "trigger": "大域操作と局所操作の順序を交換・共役できるとき。",
+      "application": "全体反転を最後へ移し、局所最適化後のblock swapとして扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "区間反転なのに再帰nodeでは「子blockを内部順を保ってswap」できる点が核心で、その実現に子反転2回と親反転1回を使う。",
+      "reusablePerspective": "階層的reverse操作では、親reverseが子の順序も反転するため、子側で事前にreverseして純粋なblock swapを合成できるか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "再帰的構成と帰納法",
+      "text": "辞書順比較、2冪区間の再帰分割、reverse操作の合成を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "最小幅の基底ケース、行列の転置、再帰で変換した終点座標を個別に確認する。",
+      "text": "入力は0-index列名でも値は1..2^Nのpermutationで、先頭値は必ず異なる。長さ1のbase caseと出力順を確認し、過剰なvector copyの定数にも注意する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Reverse 2^i 型の 順列の位置と値の対応に対し、再帰的構成と帰納法を選び、状態と証明を一貫して設計できる。",
+      "text": "指数的に見えるdyadic反転の到達集合から、再帰二分だけで辞書順最小permutationを構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "最小幅の基底ケース、行列の転置、再帰で変換した終点座標を個別に確認する。",
+      "text": "N=1,2,左右半分の最小先頭が逆転する例を全操作closureと比較し、B+Aの到達性も実際の三反転で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

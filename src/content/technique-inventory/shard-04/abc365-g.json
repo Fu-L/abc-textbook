@@ -17,67 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc365-g「AtCoder Office」では、各人の在室区間数を閾値 C で heavy・light に分け、heavy との重なりを全走査で前計算し light 同士は query 時に merge する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各人の入退室記録をpairにすれば、在室時間は互いに素な時間区間列S_iになる。二人が同時にいた時間は二つのsorted区間列のintersection長である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "区間数が少ない二人ならtwo pointersで速い一方、区間数の多い人は少数しかいないので、その人と全員の答えを一括前計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc365-g「AtCoder Office」では、各人の在室区間数を閾値 C で heavy・light に分け、heavy との重なりを全走査で前計算し light 同士は query 時に merge する。この状態表現から答えを構成する。",
+        "approach": "区間数thresholdでlight/heavyを分け、light-light queryはmerge、heavyを含むpairは全event走査で前計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "queryごとの短い処理と重い人ごとの一括処理を釣り合わせ、偏った入退室回数にも対応する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全ての人pairについて同時在室時間を事前計算する。",
+        "decision": "rejected",
+        "decisionReason": "人の組数が二次で、実際にqueryされないlight同士まで表を作る空間と時間を払う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "light pair は区間 merge が O(C)、heavy は人数が高々 M/C なので全時系列との前計算総量が閾値で抑えられる。",
+        "text": "light同士は区間右端が小さい側を進め、overlap=max(0,min(r1,r2)−max(l1,l2))を足すと両列の長さ和だけで済む。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "AtCoder Office 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "heavy人物hを固定して時刻順eventを走査し、hの在室flagが立つ区間で他人物の入退室を積算すればhとの全pair値を同時に得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc365-g「AtCoder Office」では、各人の在室区間数を閾値 C で heavy・light に分け、heavy との重なりを全走査で前計算し light 同士は query 時に merge する。この状態表現から答えを構成する。",
+      "text": "記録(T_i,P_i)を人別の在室区間列へ変換する。threshold Cを入力規模とquery数に応じて選び、区間数>Cの人ごとに全eventを走査して全相手との同時時間を保存する。queryでheavyが含まれれば表を返し、両者lightなら二区間列をtwo pointersで交差集計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "区間列 merge と heavy-light 分類",
-      "trigger": "制約と操作を整理したときに 区間列 merge と heavy-light 分類 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc365-g「AtCoder Office」では、各人の在室区間数を閾値 C で heavy・light に分け、heavy との重なりを全走査で前計算し light 同士は query 時に merge する。この状態表現から答えを構成する。で 区間列 merge と heavy-light 分類 を問題固有の状態へ適用する。",
+      "name": "sqrt decompositionによるheavy-light分類",
+      "trigger": "要素ごとの出現数が偏り、pair queryを多数処理するとき。",
+      "application": "低頻度pairはon demand、高頻度要素は全相手をprecomputeする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "sorted区間列のintersection",
+      "trigger": "互いに重ならない二つの時間区間集合の共通長を求めるとき。",
+      "application": "右端の早い区間を進めるtwo pointersで重なりを一度ずつ数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "thresholdは固定の平方根ではなく、light query総作業QCとheavy前計算作業のtrade-offを入力N,M,Qから釣り合わせる。",
+      "reusablePerspective": "sqrt decompositionでは二項のcost式を書き、制約の非対称性に合わせて境界を選ぶ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "区間列 merge と heavy-light 分類",
+      "text": "区間列のtwo pointers",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "頻度分割",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入退室 event を半開区間へ変換し、C を Q·C と M·N/C の釣り合いから選ぶ。",
+      "text": "各人の記録は入室・退室が交互なので隣接pairを半開区間として作る。queryのA<B順に依存せずheavy側を正しく選び、時間差は64 bitで持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "AtCoder Office 型の問題に対し、区間列 merge と heavy-light 分類を選び、状態と証明を一貫して設計できる。",
+      "text": "在室履歴の疎密に応じてquery処理と一括前計算を分担し、同時在室時間を効率よく答えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入退室 event を半開区間へ変換し、C を Q·C と M·N/C の釣り合いから選ぶ。",
+      "text": "heavy数の上界を全区間数から導き、選んだCで二種類の総作業量を見積もる。端点が接するだけの区間は共通時間0として扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

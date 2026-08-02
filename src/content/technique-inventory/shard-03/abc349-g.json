@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc349-g「Palindrome Construction」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各iの内側palindrome条件は対称位置同士のequality、もう一つ外側までpalindromeでない条件は外側pairのinequalityになる。equality edgeをDSUで縮約し、inequality edgeをcomponent間の色違い制約として扱える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc349-g「Palindrome Construction」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Manacher型の再利用でO(N)本のequality unionだけ生成し、縮約graphをgreedy coloringする",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "本来O(ΣA_i)本ある対称pairの連結性を線形に保ち、最終検証込みで大入力へ対応できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各iで距離1…A_iの全対称pairをunionする",
+        "decision": "rejected",
+        "decisionReason": "A_iが大きいcenterが多数あるとequality edge数がO(N^2)になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Palindrome Construction 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "既に処理したcenterのradius情報で重なるpalindrome内部のequalityをmirrorから再利用し、新しく右端を伸ばす対称pairだけunionすれば、Manacherと同じ償却でunion回数をO(N)にできる。得たcomponent内にinequality edge両端が入れば不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc349-g「Palindrome Construction」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "modified Manacher走査で各center iの要求radius A_iまで、既知mirror範囲をskipしつつ新規対称位置をDSU unionする。境界内なら(i-A_i-1,i+A_i+1)をinequality edgeにする。自己loopがなければ元index昇順に未着色componentへ、既着色のinequality neighborが使わない最小正整数を割り当てる。生成Sを通常Manacherで検証し全radius=A_iなら出力、違えばNo。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc349-g「Palindrome Construction」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "Manacher型の対称制約圧縮",
+      "trigger": "多数centerのpalindrome equality区間が大きく重複する。",
+      "application": "既知の右端とmirror radiusを再利用し、未確認部分だけ対称pairを接続する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "greedy choice と交換論法",
-      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc349-g「Palindrome Construction」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "name": "equality縮約後のgreedy coloring",
+      "trigger": "等しい変数群と、異なる必要がある群pairがあり、正整数color数に上限がない。",
+      "application": "DSU componentを最初の出現順に処理し、colored neighborのmexを割り当てる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "lexicographic最小化はindexを左から見て、そのindexのcomponentが初出の時に利用可能な最小値を選べばよい。未来componentは無制限な新色で必ず調整できるため、このgreedyを妨げない。",
+      "reusablePerspective": "unbounded graph coloringのlexicographic最小列はcomponent初出順のneighbor-color mexで構成できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "greedy choice と交換論法",
+      "text": "palindrome radius、Manacher algorithm、DSU、graph coloringのmex。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "modified union生成は入力が不整合でも仮定付きなので、構成後に標準ManacherでradiusがAと完全一致するか必ず検証する。inequality self-loopを先に弾く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Palindrome Construction 型の 頂点と辺からなる状態グラフに対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "text": "各中心の最大odd-palindrome radius条件を満たす正整数列の存在を判定し、存在すればlexicographically smallestなSを構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "A_i=0、全体palindrome、重なるradiusが矛盾する配列、inequality self-loopを小Nのpartition/color全探索と比較し最終radiusを再計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

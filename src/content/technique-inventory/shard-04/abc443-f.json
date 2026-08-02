@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc443-f「Non-Increasing Number」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "良い整数を左から作ると、将来付けられる桁は現在の末尾桁以上に制限される。数値そのものは N での剰余だけ分かれば次の剰余を計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc443-f「Non-Increasing Number」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "状態 (remainder,lastDigit) を頂点とし、lastDigit 以上の桁を末尾へ付ける辺を張ったグラフを BFS して最短桁数を求め、親を逆走して答えを復元する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "状態数は10Nで各遷移は桁追加を一回表すため BFS が最小桁数を保証し、同距離では桁を昇順に展開すれば数値の辞書順も最小になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "非減少桁の正整数を値の小さい順に生成し、N の倍数が出るまで試す。",
+        "decision": "rejected",
+        "decisionReason": "答えの桁数は大きくなり得て、巨大整数の列挙数も値域も制約できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "x の後ろへ c を付けた剰余は (10x+c) mod N で、単調桁制約は次の c≥lastDigit のみに依存する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Non-Increasing Number 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "BFS の同一層で小さい桁から enqueue し、状態を初回到達で確定すれば、最短の中で最小の整数を復元できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc443-f「Non-Increasing Number」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "先頭0を除く初期一桁状態を昇順に queue へ入れる。各状態から c=last..9 の次状態を未訪問なら親と桁を記録して追加し、remainder=0 の初回到達から親を辿って文字列を反転する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc443-f「Non-Increasing Number」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc443-f「Non-Increasing Number」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "剰余オートマトンの BFS",
+      "trigger": "桁列条件を満たす最小の N の倍数を探し、値を直接保持できないとき。",
+      "application": "剰余と局所桁条件だけを状態にして一桁追加を辺とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "巨大整数探索は、割り切れ方を剰余、文字列制約を末尾桁へ要約すると有限状態最短路になる。",
+      "reusablePerspective": "最短文字列の数値最小化では、BFS 層順と遷移文字の昇順を組み合わせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "剰余オートマトンの BFSと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "先頭0を初期状態に入れず、最終 remainder=0 の状態と数0を混同しない。親配列は状態番号と採用桁を保存する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Non-Increasing Number 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "非減少桁からなる最小の N の倍数を、10N状態の BFS と親復元で構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "状態が保持しない過去情報でも、次遷移と目標判定に本当に不要かを確認し、BFS の tie-break を説明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc302-e「Isolation」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各query後に必要なのは孤立頂点数だけである。辺追加で変化するのは両端、頂点vの全辺削除で変化するのはvとその隣接頂点だけなので、全頂点を数え直す必要はない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc302-e「Isolation」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "頂点ごとの隣接集合と孤立頂点数を動的に保つ",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "局所的な次数0↔正の変化だけを反映でき、削除対象の隣接頂点も直接列挙できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各query後に全頂点の次数を走査する",
+        "decision": "rejected",
+        "decisionReason": "1回O(N)となり、Q回のqueryに対して制約を超える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全順序の隣接要素だけが次の候補になる条件を示せば、集合 query が必要候補を漏れなく返す。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Isolation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "頂点vから削除される各辺は、それ以前の追加queryで存在するようになった辺である。したがって全削除queryを通した隣接頂点列挙回数は辺追加回数以下に償却できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc302-e「Isolation」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "初期値を孤立頂点数Nとする。辺(u,v)追加時は追加前の隣接集合が空なら各端点について1減らして相互に挿入する。全辺削除時はvの各隣接uからvを消し、uが空になれば1増やし、最後にvを空にして必要なら1増やす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc302-e「Isolation」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "動的グラフの隣接集合",
+      "trigger": "辺の追加と、指定頂点に接続する全辺の削除が混在する。",
+      "application": "各頂点の隣接先をsetで持ち、追加・削除と次数0判定を同じ表現で行う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "平衡二分探索木",
-      "trigger": "制約と操作を整理したときに 平衡二分探索木 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc302-e「Isolation」では、主解法候補として、順序付き集合で未処理要素の predecessor・successor と挿入削除を管理する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 平衡二分探索木 を問題固有の状態へ適用する。",
+      "name": "償却計算量",
+      "trigger": "一つの更新が多数の辺を消すが、消した辺は再追加されるまで再び消されない。",
+      "application": "削除時の走査を辺単位で課金し、全queryでの総走査量を追加回数に抑える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "孤立頂点数は辺集合全体ではなく、更新で次数0の境界をまたぐ頂点だけを見れば保てる。",
+      "reusablePerspective": "大域的な個数を問われても、1更新で状態が変わり得る要素を局所化して差分管理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "平衡二分探索木",
+      "text": "setによる無向グラフの隣接管理と、償却計算量の考え方。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "全辺削除中にvの集合そのものを変更するとiteratorが無効化され得るため、隣接先を走査して相手側だけを消し、v側は走査後に一括clearする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Isolation 型の 頂点と辺からなる状態グラフに対し、平衡二分探索木を選び、状態と証明を一貫して設計できる。",
+      "text": "各query後の孤立頂点数を、辺追加と削除の総数に対して十分高速に出力できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "重複要素を持つ場合は値と一意 index の組にし、存在しない predecessor を分岐する。",
+      "text": "同じ辺の再追加、すでに孤立している頂点への削除、次数1の隣接頂点が同時に孤立する例で差分更新を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

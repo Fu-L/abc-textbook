@@ -17,67 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc339-f「Product Equality」では、巨大整数を複数の法で fingerprint 化し、値と積の fingerprint の frequency を照合して三つ組を数える。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "A_iは1000桁だが、必要なのは積そのものではなくA_iA_jが入力multiset内のどの値と一致するかである。複数の大きなmodulusに対するresidue vectorをfingerprintにすれば、積keyをmachine integer演算で作れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc339-f「Product Equality」では、巨大整数を複数の法で fingerprint 化し、値と積の fingerprint の frequency を照合して三つ組を数える。この状態表現から答えを構成する。",
+        "approach": "複数のrandom large primesによるmodular fingerprintで積を照合する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各巨大整数を短いresidue vectorへ前計算し、N^2 pairを高速にfrequency lookupでき、誤判定確率を十分小さくできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全N^2積を1000桁以上の多倍長整数で計算してmap検索する",
+        "decision": "rejected",
+        "decisionReason": "各積に高価なbig-integer乗算と巨大key処理が必要で、N=1000では厳しい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "真に等しい積は全ての法で同じ剰余になり、十分大きい法または複数法では異なる値の衝突確率を制御できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Product Equality 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "p×q≠rなのに一つのprime modulus xで一致するのは、非零整数pq-rをxが割る時だけである。|pq-r|<10^2000が持つ10^9以上の相異なるprime factorは高々約222個なので、広い範囲から複数primeを選ぶと全てでcollisionする確率は極小になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc339-f「Product Equality」では、巨大整数を複数の法で fingerprint 化し、値と積の fingerprint の frequency を照合して三つ組を数える。この状態表現から答えを構成する。",
+      "text": "10^9～2×10^9から独立に約20個のprimeを選び、各A_iをdecimal文字列から各mod residueへ変換してvector keyを作りfrequency mapへ入れる。全順序付きpair(i,j)についてcomponentwise residue積keyを作り、そのkeyの入力frequencyを答えへ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "modular fingerprint と frequency map",
-      "trigger": "制約と操作を整理したときに modular fingerprint と frequency map の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc339-f「Product Equality」では、巨大整数を複数の法で fingerprint 化し、値と積の fingerprint の frequency を照合して三つ組を数える。この状態表現から答えを構成する。で modular fingerprint と frequency map を問題固有の状態へ適用する。",
+      "name": "randomized modular fingerprint",
+      "trigger": "巨大整数の等値性を大量に判定し、false positiveだけを十分低確率へ抑えられる。",
+      "application": "複数の独立なprime mod residue tupleをhash keyとして使う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "multiset frequency集計",
+      "trigger": "kの値が同じ入力indexを個別に探索せず、積値ごとの一致数が欲しい。",
+      "application": "residue vectorごとの出現数をmapにし、各(i,j)の積keyに対応するk数を一括加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "product equalityを三重loopにせず、(i,j)のN^2個を生成側、A_kのmultisetをlookup側へ分けると、k次元をfrequencyで消せる。",
+      "reusablePerspective": "三変数の等式数え上げは二変数演算結果を残り一変数の頻度表へ照合する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "modular fingerprint と frequency map",
+      "text": "decimal文字列のmod計算、modular multiplication、randomized hashingとcollision確率。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "積を取る前に広い整数型へ上げ、衝突を許す確率的解法か exact な多倍長比較かを明記する。",
+      "text": "選ぶmodulusは実際にprime判定しdistinctにする。residue tuple全体をkeyに含め、答えは最大N^3なので64bitを使い、乱数seedの扱いも再現可能性を考慮する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Product Equality 型の問題に対し、modular fingerprint と frequency mapを選び、状態と証明を一貫して設計できる。",
+      "text": "A_i×A_j=A_kを満たす順序付きtriple(i,j,k)の個数を、高確率で正しく求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "積を取る前に広い整数型へ上げ、衝突を許す確率的解法か exact な多倍長比較かを明記する。",
+      "text": "小桁入力では多倍長の真値と比較し、重複値、1、多数の同じ積、単一modで意図的にcollisionする値も複数modで区別されることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

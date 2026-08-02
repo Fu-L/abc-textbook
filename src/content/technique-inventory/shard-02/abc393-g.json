@@ -17,77 +17,99 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc393-g「Unevenness」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "目的Σ隣接|B_u-B_v|とbudget Σ|B_v-A_v|≤Kは、差分に区分線形凸costを持つLPである。Lagrange multiplier λをbudgetへ付けると、固定λでの最小化は費用流双対へ一致する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "固定λの最適値f(λ)は整数傾きを持つ区分線形凸関数で、breakpointは分母・分子がO(N²maxA)に抑えられる有理数である。浮動小数探索でなくStern–Brocot上で境界を特定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc393-g「Unevenness」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "λ固定問題を最小費用循環流で解きpotentialを復元し、有理数λをStern–Brocot探索して境界二解を補間する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N≤10なので重いflow反復も許され、強双対性により値と構成を同時に正確に求め、2^-51という厳しいU誤差へ対応できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "double上の一般LP solverまたは実数λの三分探索を使う",
+        "decision": "rejected",
+        "decisionReason": "最適λは整数とは限らず、要求精度が極端に厳しい。black-box倍精度LPや近似探索ではUの保証と最適B復元を満たせない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各増加路が残余グラフで最小費用なので、ポテンシャルを保った交換論により総費用の最適性が維持される。",
+        "text": "grid edgeを両向き容量1 cost0、super nodeと各cell間を容量λ・cost±A_vで結ぶcirculationが双対flowになる。最適flowの残余graphの差分制約からBellman–Fordで主問題potential Bを復元できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Unevenness 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "budget costがKを跨ぐλ_L,λ_Rで得たpotentialを、Σ|A-B|がちょうどKになる重み付き平均にすれば、凸性により最適configurationを構成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc393-g「Unevenness」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "rational λごとに分母倍した整数容量でmin-cost circulationを解き、残余graphからpotential B(λ)、変更cost、f(λ)を得る。costがK以上/未満を判定にStern–Brocot探索し、両端のf+KλのminをU、両potentialの適切な凸結合をBとして高精度出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc393-g「Unevenness」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "Lagrangian relaxationとLP双対",
+      "trigger": "凸な目的とL1 budget制約を持ち、固定乗数問題を組合せ最適化へ落とせるとき。",
+      "application": "budgetへλを付け、費用流双対からmin-cost circulationを得る。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最小費用流と残余グラフ",
-      "trigger": "制約と操作を整理したときに 最小費用流と残余グラフ の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc393-g「Unevenness」では、主解法候補として、残余グラフ上の最小費用流として容量と費用を設計し、必要流量を逐次送る。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 最小費用流と残余グラフ を問題固有の状態へ適用する。",
+      "name": "相補性によるpotential復元",
+      "trigger": "dual flowだけでなくprimalの頂点potential構成が必要なとき。",
+      "application": "最適残余graphの差分制約を最短路で解く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Stern–Brocot search",
+      "trigger": "breakpointが有界分母の有理数で、判定がλに単調なとき。",
+      "application": "浮動誤差なくbudget costを跨ぐ隣接候補を探す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "画像平滑化型のtotal variation最小化が、cell値Bをflow dualのpotentialと読むことで離散最適化へ変わり、さらに二potentialの補間で実数解も復元できる。",
+      "reusablePerspective": "絶対値差の和はhinge関数の和なので、graph上のconvex potential問題を見たら費用流双対を検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "LP強双対・相補性とmin-cost flow residual graphを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "最小費用流と残余グラフ",
+      "text": "有理数のStern–Brocot探索と高精度出力を実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。",
+      "text": "λの分母倍で全capacityを整数化し、負cost辺を正しく扱う。Uは有理数のまま最後まで計算し、B補間係数とbudget等号、Kが常に余るcorner caseを分岐する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Unevenness 型の 盤面上の位置と局所遷移に対し、最小費用流と残余グラフを選び、状態と証明を一貫して設計できる。",
+      "text": "L1 budget下のgrid unevenness最小化を費用流双対として厳密に解き、最適値と実現configurationを復元できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "負辺を含む残余グラフではポテンシャル更新と到達不能頂点を分けて扱う。",
+      "text": "2×2の小gridをpiecewise-linear LPとして全breakpoint列挙し、flow値・potential cost・補間後budget/Uを高精度有理計算と照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc344-e「Insert or Erase」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "queryは既知の値xの直後挿入またはx自身の削除であり、位置indexによるrandom accessは不要である。各valueから前後valueへ直接辿れるようにすれば、変更箇所は常に定数本のlinkだけになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc344-e「Insert or Erase」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "valueをnode keyとするdoubly linked listをhash mapで実装する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "xのnodeをO(1)期待で特定し、挿入・削除を前後pointerの定数更新で処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "vectorの途中へinsert/eraseする",
+        "decision": "rejected",
+        "decisionReason": "後続要素のshiftが一query O(|A|)となり、合計二乗時間になり得る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Insert or Erase 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "distinct value保証によりvalue自身をnode identityとして使える。xの直後y挿入ではy.prev=x,y.next=x.nextとし両隣を繋ぎ直し、x削除ではx.prev.next=x.nextとx.next.prev=x.prevだけを更新すれば順序不変条件が保たれる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc344-e「Insert or Erase」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各valueに(prev,next)を持つ連想配列を作り、head/tail sentinelも接続する。type 1はxとそのnextの間へy nodeを挿入し、type 2はxの両隣を直結してmapからxを消す。最後にhead.nextからtailまでnextを辿り出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc344-e「Insert or Erase」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "doubly linked list",
+      "trigger": "既知node位置での挿入・削除を頻繁に行い、最後に順序走査したい。",
+      "application": "prev/next双方を持ち、局所linkの張替えだけで操作する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "式変形と frequency map",
-      "trigger": "制約と操作を整理したときに 式変形と frequency map の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc344-e「Insert or Erase」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 式変形と frequency map を問題固有の状態へ適用する。",
+      "name": "key-to-node indexing",
+      "trigger": "操作対象が位置でなく一意なvalueで指定される。",
+      "application": "hash mapでvalueからlink情報へ直接accessし、linear searchを避ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "通常のlist iteratorを保存する代わりに、値が全て一意という条件を利用してprev/nextをvalue同士のmapとして直接表せる。",
+      "reusablePerspective": "一意key指定のlinked sequenceはnode objectなしでもkey→neighbor mapsで実装できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "式変形と frequency map",
+      "text": "doubly linked list、hash map、sentinel node。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "添字 parity による符号反転と負数 key をそのまま正確に保持する。",
+      "text": "先頭・末尾削除をsentinelで統一し、挿入時は旧nextを保存してから4本のlinkを更新する。削除済みnode情報を後のlookupに残さない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Insert or Erase 型の 列の順序と prefix 状態に対し、式変形と frequency mapを選び、状態と証明を一貫して設計できる。",
+      "text": "全insert/erase query後のsequenceを正しい順序で出力できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "添字 parity による符号反転と負数 key をそのまま正確に保持する。",
+      "text": "head/tail削除、末尾挿入、挿入直後の削除、長さ1を保つ操作列でlinkの双方向整合性を検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

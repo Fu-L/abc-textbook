@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc277-e「Crystal Switches」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "全edgeの通行可否はswitchを押した回数の偶奇だけで決まり、過去の押下時刻や回数そのものは不要である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Moveだけが答えの費用を1増やし、switch押下は何回行っても費用0なので、遷移costは0/1になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc277-e「Crystal Switches」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "状態を(vertex,switch parity)の2層にし、通行可能edgeをcost1、switch頂点の層間をcost0として01-BFSする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "globalなedge反転を2N状態の局所遷移へ変え、求めるMove回数をそのまま最短距離にできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "switchを押す時点の全組合せを列挙し、各固定passability graphで経路探索する。",
+        "decision": "rejected",
+        "decisionReason": "訪問途中に何度でも押せるため候補列が指数的で、経路と押下を分離できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "未確定頂点の最小暫定距離より短い迂回路は非負辺から作れないため、取り出した距離を確定できる。",
+        "text": "入力edge a_iは初期状態parity0でa_i=1なら使え、parity1ではa_i=0なら使えるため、各edgeは対応する一方のlayerだけに置かれる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Crystal Switches 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "目的頂点Nではparityを問わないので、(N,0),(N,1)の短い方が答えになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc277-e「Crystal Switches」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "(1,0)を距離0で開始する。各入力edgeを使用可能なparity層のcost1辺にし、各switch sを(s,0)↔(s,1)のcost0辺にする。dequeで01-BFSし、Nの2状態が未到達なら-1を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc277-e「Crystal Switches」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "状態空間のlayer化",
+      "trigger": "global modeが少数で、同じ頂点でもmodeにより使える遷移が変わるとき。",
+      "application": "switch偶奇を2層として元graphを複製する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Dijkstra 法と緩和",
-      "trigger": "制約と操作を整理したときに Dijkstra 法と緩和 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc277-e「Crystal Switches」では、主解法候補として、非負辺重みの暫定距離を priority queue で管理し、Dijkstra 法で最短距離を確定する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で Dijkstra 法と緩和 を問題固有の状態へ適用する。",
+      "name": "01-BFS",
+      "trigger": "操作costが0と1だけで、最小costを求めるとき。",
+      "application": "押下をdeque前方、移動を後方へ緩和する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "全edgeの一斉反転は巨大なgraph更新ではなく、現在modeを反転する0-cost層間edgeとして表せる。",
+      "reusablePerspective": "global toggle操作では、対象を実際に更新せずtoggle回数mod周期を状態に追加する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "01-BFS",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Dijkstra 法と緩和",
+      "text": "parity付き状態graph",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "edgeを置くlayerは、parity0ならa=1、parity1ならa=0であり、1-a_iというindex規約を取り違えない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "switchが始点や終点にある場合もcost0遷移を許し、訪問済みだけでなく距離改善でdequeへ入れる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Crystal Switches 型の 頂点と辺からなる状態グラフに対し、Dijkstra 法と緩和を選び、状態と証明を一貫して設計できる。",
+      "text": "全辺反転switch付きgraphの最小移動回数を、2層0/1最短路として求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "priority queue の古い距離を読み飛ばし、距離加算の整数 overflow を避ける。",
+      "text": "a=1とa=0のedgeを1本ずつ持つ小graphで、各parity層にどちらが現れ、switch edgeがどう接続するか描く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

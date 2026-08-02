@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc281-g「Farthest City」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "root1からの距離layerを固定すると、各非root頂点は直前layerへのedgeを少なくとも1本持ち、2層以上離れたedgeを持たないことが必要十分である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "vertex Nだけが最遠なので、まず1…N-1を非空layerへ順に配置・配線し、最後にNをその次layerへ単独で接続すれば重複なく数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc281-g「Farthest City」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "既に配置した通常頂点数nと最新layer size kのDPで、次layerの頂点集合・前layerへの非空edge・layer内edgeをまとめて遷移する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "距離列そのものを列挙せず、次の配線数に必要な最新layer sizeだけへ状態圧縮できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各頂点のdistance labelを全割当てし、その後全edge subsetがBFS条件を満たすか数える。",
+        "decision": "rejected",
+        "decisionReason": "distance割当てとedge subsetが指数的で、N≤500に使えない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "単位コスト辺では queue から取り出す距離が非減少なので、初回到達距離が最短距離になる。",
+        "text": "次layerにl個選ぶ方法は残りlabelからC(rem,l)、各新頂点の前layer接続は(2^k-1)^l、同layer内edgeは2^{l(l-1)/2}通りで独立である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Farthest City 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "全通常頂点を配置後、Nは最新layerの非空subsetへ接続する2^k-1通りだけで、これにより他全頂点より距離が1大きい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc281-g「Farthest City」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "dp[1][1]=1から、remaining=N-1-nの通常頂点よりl≥1を選び、C(remaining,l)(2^k-1)^l2^{C(l,2)}を掛けてdp[n+l][l]へ送る。n=N-1になった各kから(2^k-1)を掛けて合計する。全演算は入力M modulo。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc281-g「Farthest City」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "BFS layer数え上げ",
+      "trigger": "rootからの最短距離条件を満たすlabelled graphを数えるとき。",
+      "application": "distance layerを順に作り、直前layerへの非空接続と禁止edgeで特徴付ける。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "幅優先探索",
-      "trigger": "制約と操作を整理したときに 幅優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc281-g「Farthest City」では、主解法候補として、状態グラフを距離の層ごとに BFS し、最小遷移回数と到達可能性を求める。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 幅優先探索 を問題固有の状態へ適用する。",
+      "name": "layer size DP",
+      "trigger": "次遷移が配置済み数とfrontier layerの大きさだけに依存するとき。",
+      "application": "個々のlayer頂点ではなく(n,k)へ集約する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最遠vertex Nを最後の単独layerとして後付けすると、『他は全て近い』条件を自然に強制できる。",
+      "reusablePerspective": "distinguishedな唯一最遠点を持つgraph数え上げでは、その点を通常layer生成から除外し最後に接続する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "BFS tree/layerの必要十分条件",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "幅優先探索",
+      "text": "labelled集合の二項係数DP",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "法Mはprimeとは限らないのでfactorial inverseでC(n,k)を作らず、Pascal recurrence等でmod Mの組合せを前計算する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "rootをn=1,k=1に含め、通常頂点の残数とdistinguished Nを二重に数えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Farthest City 型の 頂点と辺からなる状態グラフに対し、幅優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "指定vertexだけがrootから最遠となるlabelled connected graphを、BFS layer size DPで数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "訪問済み判定は enqueue 時に行い、同じ状態の重複追加を防ぐ。",
+      "text": "N=3でroot layer{1}、通常layer{2}、最遠{3}しかないことから答え1を遷移式で再現する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

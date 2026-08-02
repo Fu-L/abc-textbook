@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc389-f「Rated Range」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "初期rating xからi contest後の値D_i(x)はxについて単調非減少で、一度二つの軌道が同値になれば以後も同じ更新を受ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "contest [L,R]で+1される初期値xの集合は、単調なD(x)のpreimageなので一つの連続区間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc389-f「Rated Range」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全初期ratingの現在値をrange-add segment treeで持ち、各contestのpreimage区間をtree上探索して+1する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各contestでD(x)∈[L,R]となる最初・最後のxをmonoid searchでO(log X)に求め、区間加算できるため全体O((N+Q)log X)となる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "queryごとにN contestを逐次simulationする",
+        "decision": "rejected",
+        "decisionReason": "O(NQ)でN=2×10^5,Q=3×10^5に間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "D配列は単調だがstrict増加とは限らないため、lower_bound(L)とupper_bound(R)でpreimage境界を取る。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Rated Range 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "rating上限は初期最大にcontest増分を見込んだ範囲までsegment treeへ確保するか、query対象domainだけを管理する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc389-f「Rated Range」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "D[x]=xで初期化する。各[L_i,R_i]についてD値がL_i以上になる最初lとR_iより大きくなる最初rをsegment treeのsearchで求め、初期index区間[l,r)へ+1する。最後にquery Xの点値を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc389-f「Rated Range」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "monotone functionのpreimage更新",
+      "trigger": "多数の初期状態へ同じ単調transitionを適用し、条件成立域が値区間で与えられるとき。",
+      "application": "現在値配列のlower/upper boundを求め初期状態区間へ作用する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc389-f「Rated Range」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "range addとsegment-tree search",
+      "trigger": "単調配列を区間加算しながら値境界を検索するとき。",
+      "application": "lazy treeのmax_right/min_leftでpreimage端を求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "時間軸をqueryごとに辿る代わりに、全初期値を横に並べた写像Dを一括更新すると、rating条件が区間作用になる。",
+      "reusablePerspective": "独立simulationが多数あるとき、初期条件→現在状態の単調写像をまとめて持てないか検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "lazy segment treeのrange addと境界探索を実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "同じD値が連続するので二分探索条件の≤/<を区別する。segment treeの管理domainが全query Xを含むことを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Rated Range 型の 区間端点と包含関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "多数の初期rating simulationを単調写像のpreimage range updateへ転置し、全queryを高速化できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "初期値軌道が合流するcase、L=R、更新区間が空/全域になる小domainを全simulationと比較し、upper bound境界を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

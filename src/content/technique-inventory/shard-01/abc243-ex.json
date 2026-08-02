@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc243-ex「Builder Takahashi (Enhanced version)」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "4近傍 path を遮る壁集合は、壁セル中心を8近傍で結び盤外も利用した閉じた barrier として見られる。平面上で S と G を分けるかどうかは、固定した S-G 曲線と barrier の交差回数の偶奇で判定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "交差回数そのものを覚える必要はなく parity だけでよいので、壁候補 graph の各位置を parity 0/1 の二層へ持ち上げれば、分離条件は同じ位置へ奇 parity で戻る閉路になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc243-ex「Builder Takahashi (Enhanced version)」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "固定した S-G grid path とその片側を使って各8近傍遷移の crossing bit を定め、parity-expanded graph 上の最短閉路とその本数を shortest-path DP で求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "平面的な分離条件を局所 edge の XOR へ変え、壁数最小化と最短路数え上げを同じ状態 graph で扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "node-splitting max-flow で最小頂点 cut を求める。",
+        "decision": "rejected",
+        "decisionReason": "最小壁数だけなら候補だが、minimum cut を達成する壁集合の総数 r を一般の flow 値だけから数えられない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "閉曲線に沿って内外は交差のたび反転するため、S と G が別側にあることと、固定 S-G 曲線を barrier が奇数回横切ることが同値である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Builder Takahashi (Enhanced version) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "壁にできない O/S/G は barrier 頂点から除き、盤外を padding した graph に含めることで、grid boundary を使う separator も同じ閉路表現に入る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc243-ex「Builder Takahashi (Enhanced version)」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "S から G への単純 path を一つ固定し、赤 path とその片側の青領域の境を跨ぐ8近傍 edge に bit1を付ける。constructible cell と盤外からなる graph を (position,parity) に拡張し、公式の canonical start ごとに odd parity で戻る最短距離と経路数を求め、最小壁数と総数を集約する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc243-ex「Builder Takahashi (Enhanced version)」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "平面 separator と交差 parity",
+      "trigger": "grid/planar graph で二点を分断する閉曲線を数えたいとき。",
+      "application": "二点間の基準曲線を固定し、separator との交差数 mod 2 を分離の判定量にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc243-ex「Builder Takahashi (Enhanced version)」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "parity-expanded shortest path",
+      "trigger": "path の edge 属性 XOR が0か1という条件付きで最短距離と本数を求めるとき。",
+      "application": "各 vertex を parity 二層に複製し、edge bit で層を遷移する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "壁による到達不能を cut の集合条件のまま数えず、8近傍 barrier の閉路と固定 S-G path の奇交差へ双対化する。",
+      "reusablePerspective": "平面 grid の cut 数え上げでは primal の削除集合より、dual な barrier/closed curve 表現を探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "平面グラフの分離、8近傍 barrier、交差 parity、最短路数え上げ",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "盤外を十分な padding で明示し、corner の8近傍と path 片側の crossing 判定を統一する。同じ壁集合を開始点や向き違いで重複計数しない canonicalization と、同距離 path 数の法加算が必要である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Builder Takahashi (Enhanced version) 型の 盤面上の位置と局所遷移に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "grid の最小壁 separator とその個数を、平面上の barrier・交差 parity・二層最短路へ変換して扱える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "固定 S-G 線を横切るたび barrier の内外が切り替わる図を描き、偶数交差では同じ側、奇数交差で別側になることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

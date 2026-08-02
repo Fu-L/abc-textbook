@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc452-e「You WILL Like Sigma Problem」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "固定 j で quotient k=floor(i/j) が同じ i は連続区間 [jk,min(j(k+1)-1,N)] をなし、その区間では i mod j=i-jk と一次式になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc452-e「You WILL Like Sigma Problem」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "ΣA_i と ΣiA_i の prefix sum を作り、各 j について quotient block k=1..floor(N/j) を走査して区間寄与を定数時間で加える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各 block の寄与は B_j(ΣiA_i-jkΣA_i) で二本の prefix sum から得られ、block 総数 Σ_j floor(N/j)=O(N log N) に収まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全 (i,j) pair を列挙して i mod j を直接計算する。",
+        "decision": "rejected",
+        "decisionReason": "pair は Θ(N^2) 個あり、N=5×10^5 では二重 loop が間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "剰余は quotient が一定の区間で i-jk という affine 式になり、A_i 付き総和も二種類の prefix sumへ分解できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "You WILL Like Sigma Problem 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "j ごとの block 数 N/j の総和は調和級数で N log N 程度であり、全 j でも許容される。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc452-e「You WILL Like Sigma Problem」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "PA[t]=Σ_{i≤t}A_i、PIA[t]=ΣiA_i を構築する。各 j と k=1..floor(N/j) で l=jk,r=min(j(k+1)-1,N) を取り、B_j((PIA[r]-PIA[l-1])-jk(PA[r]-PA[l-1])) を加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc452-e「You WILL Like Sigma Problem」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "商一定区間の分割",
+      "trigger": "floor(i/j) や i mod j を全 pair で総和したいとき。",
+      "application": "固定 divisor ごとに quotient が一定の連続区間を走査する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc452-e「You WILL Like Sigma Problem」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "重み付き prefix sum",
+      "trigger": "区間内で係数が index の一次式になる総和を求めたいとき。",
+      "application": "ΣA_i と ΣiA_i を組み合わせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "mod を不規則な値として扱わず、quotient ごとの一次式へほどくと区間集約できる。",
+      "reusablePerspective": "二重 loop でも内側長が N/j なら、総計を調和級数で評価して採用可能性を判断する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "商一定区間の分割、重み付き prefix sumと、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "k=0 の i<j が問題の添字範囲に含まれるかを式と合わせる。jkB_j と prefix総和の積は十分広い整数型・mod処理を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "You WILL Like Sigma Problem 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "剰余を含む二重和を quotient block と二本の累積和で O(N log N) に計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "一つの j で quotient block を列挙し、i mod j=i-jk の区間寄与式と全 block 数の調和級数評価を手で導く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc458-e「Count 123」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "1と3が隣り合わない条件は、1・3だけを抜き出した列Bの交互run境界すべてに少なくとも一個の2を挿入する条件へ変わる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc458-e「Count 123」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Bの先頭・末尾が1/3の四caseに分け、1-run数と3-run数をiでparameter化して、正の分割数 part と残り2の挿入二項係数の積を総和する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "固定run数では各記号個数のrun長分配が C(X-1,r-1) で数えられ、異記号境界への必須2を先に置けば残り2はgapへの通常挿入として二項係数で数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "長さ X_1+X_2+X_3 の全ternary列を生成し、個数と隣接条件を検査する。",
+        "decision": "rejected",
+        "decisionReason": "multinomial個の候補が指数的で、総長が大きい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "B両端が同記号なら両run数は1差、異記号なら等しく、1/3境界数はそれぞれ2i-2または2i-1になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Count 123 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "各1/3境界へ必須2を一個置いた後、残る2はBの要素間・両端へ自由挿入でき、その位置数が公式のbinomになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc458-e「Count 123」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "階乗・逆階乗を総長まで前計算し、part(n,k)=C(n-1,k-1)を範囲外0で実装する。四endpoint caseそれぞれで可能iを走査し、part(X1,r1)part(X3,r3)C(total-boundaries,X1+X3)を加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc458-e「Count 123」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "run構造による列数え上げ",
+      "trigger": "二記号間の直接隣接を第三記号で禁止するmultiset列のとき。",
+      "application": "二記号subsequenceの交互run数と端記号で分類する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc458-e「Count 123」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "正の整数分割とgap挿入",
+      "trigger": "同記号個数を非空runへ分け、separatorを配置したいとき。",
+      "application": "part(n,k)=C(n-1,k-1)と残余要素の二項係数を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "禁止adjacencyは対象二記号だけを抽出し、そのrun境界にseparatorが必要という配置問題へ変換できる。",
+      "reusablePerspective": "列のendpointを固定すると交互run数の関係が決まり、複雑なcaseが一変数和になる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "run構造による列数え上げ、正の整数分割とgap挿入と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "X1またはX3が0のcaseでpartの範囲外定義を正しく使い、必須2数がX2を超える項を0にする。異端caseは対称な二通りを数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Count 123 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "1と3が隣接しない指定個数ternary列を、run分割とseparator挿入のO(N)組合せ和で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "四endpoint caseでrun数と境界数を表にし、必須2を置いた後のbinom上側がどう得られるかを小列で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

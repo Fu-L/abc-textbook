@@ -17,77 +17,103 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc228-f「Stamp Game」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "高橋が黒くした長方形を固定すると、得点はその長方形の総和から、青木が白くする重なり部分の総和を引いた値になる。全要素が正なので、青木は重なりを最大化する白長方形を選ぶ。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "白スタンプが黒スタンプより大きい方向は、重なりだけを考えれば黒スタンプと同じ長さに切り詰めてよい。切り詰め後は、青木の最適な重なりを黒長方形の内部に完全に収められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc228-f「Stamp Game」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "黒スタンプの各位置について、重なる全ての白スタンプ位置を列挙して最悪得点を求める。",
+        "decision": "rejected",
+        "decisionReason": "盤面が1000×1000まであり、黒位置ごとに白位置を走査すると組合せが多すぎる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "長方形和を二次元累積和で求め、各黒長方形内に収まる白長方形和の最大値を二次元スライド最大値として前計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各配置の和を定数時間で得られ、包含範囲ごとの最大値も横・縦の一方向窓へ分解して全盤面をまとめて処理できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+        "text": "青木の手を『白スタンプの盤面上の位置』で追う必要はなく、固定した黒長方形の内部で最大和となる h2×w2 長方形を引く最小最大問題に変換できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Stamp Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "白長方形の左上ごとの和を配列にすると、黒長方形内で許される左上座標は長方形範囲になる。その最大値は、横幅w1-w2+1、縦幅h1-h2+1のスライド最大値である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc228-f「Stamp Game」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "h2,w2をh1,w1以下へ切り詰め、二次元累積和で全ての黒・白長方形和を作る。白長方形和へdequeによる横方向、次に縦方向の窓最大値を適用し、各黒位置について黒和−内部の白最大和を求め、その最大を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc228-f「Stamp Game」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "固定した一手に対する最悪応答への変換",
+      "trigger": "二人の選択後の評価が、先手の領域量から後手との重なり量を引く形になるとき。",
+      "application": "黒長方形を固定し、青木の最小化を内部の白長方形和の最大化として表す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "累積和と差分",
-      "trigger": "制約と操作を整理したときに 累積和と差分 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc228-f「Stamp Game」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 累積和と差分 を問題固有の状態へ適用する。",
+      "name": "二次元累積和",
+      "trigger": "静的な盤面上で同じ大きさの長方形和を多数評価するとき。",
+      "application": "各黒スタンプと白スタンプの配置が覆う要素の総和を定数回の参照で求める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "二次元スライド最大値",
+      "trigger": "二次元配列の各長方形窓について最大値を求め、窓を一方向ずつに分解できるとき。",
+      "application": "白長方形和に横方向と縦方向のdeque処理を順に行い、各黒長方形内の最大値を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "Aの全要素が正であるため、青木の白スタンプが黒長方形からはみ出す配置より、同じ大きさの重なりを内部へ寄せた配置が不利にならない。これが包含する白長方形だけを調べてよい根拠になる。",
+      "reusablePerspective": "領域同士のゲームでは、盤面上の絶対位置より交差領域が評価を決めないか、また重みの符号から交差を包含配置へ正規化できないかを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "二次元累積和と半開長方形",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "累積和と差分",
+      "text": "単調dequeによるスライド最大値",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "最初にh2=min(h2,h1), w2=min(w2,w1)とし、白長方形の左上座標配列と最大値配列の添字範囲を別々に確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "要素値と長方形面積の積は32bitを超えるため、累積和と得点を64bit整数で保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Stamp Game 型の 盤面上の位置と局所遷移に対し、累積和と差分を選び、状態と証明を一貫して設計できる。",
+      "text": "長方形同士の最小最大問題を包含窓の最大値へ変換し、累積和と二次元スライド最大値を組み合わせて評価できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "青木の候補を黒長方形内へ制限する証明では、h2,w2の切り詰めとAが正である条件を明示する。窓最大値の実装説明だけでこのゲーム上の変換を省略しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

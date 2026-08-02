@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc252-g「Pre-Order」では、主解法候補として、連続区間を状態とし、最後の分割点または端点操作を列挙する interval DP を行う。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "先行順巡回では各部分木の頂点が連続区間になり、子を頂点番号昇順で訪れる条件は、次の子部分木の根番号に大小制約を与える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc252-g「Pre-Order」では、主解法候補として、連続区間を状態とし、最後の分割点または端点操作を列挙する interval DP を行う。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "部分木区間を分割する区間DP",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "先行順列の連続区間を一つの部分木として数え、最初の子部分木の終端を列挙すれば、根番号条件を確認しながら二つの独立な区間へ分解できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各頂点の親を独立に選んで木を列挙",
+        "decision": "rejected",
+        "decisionReason": "親候補の組合せが指数的なうえ、連結性と巡回順の整合を後から判定する必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "最適解の最後の分割・操作で独立な小区間へ分けると、全候補がちょうど一つの遷移に対応する。",
+        "text": "先行順の先頭要素が区間部分木の根であり、その直後から各子部分木が途切れず並ぶ。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Pre-Order 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "仮想根や空区間を用意すると、最初の子を取らない場合と一つの子部分木を切り出す場合を同じ漸化式で数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc252-g「Pre-Order」では、主解法候補として、連続区間を状態とし、最後の分割点または端点操作を列挙する interval DP を行う。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "先行順列に仮想根を加え、dp[l][r]を区間[l,r)から条件を満たす森・部分木を作る数として定義する。最初の子部分木の終端kを列挙し、根番号の大小条件を満たすとき左右区間の積を加え、法998244353で答えを得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc252-g「Pre-Order」では、主解法候補として、連続区間を状態とし、最後の分割点または端点操作を列挙する interval DP を行う。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "先行順の区間性",
+      "trigger": "木の巡回列から部分木の境界を復元・数え上げたい。",
+      "application": "各部分木を先行順上の連続区間として区間DPの状態にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "区間 DP",
-      "trigger": "制約と操作を整理したときに 区間 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc252-g「Pre-Order」では、主解法候補として、連続区間を状態とし、最後の分割点または端点操作を列挙する interval DP を行う。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 区間 DP を問題固有の状態へ適用する。",
+      "name": "区間分割DP",
+      "trigger": "列の先頭を含む構造と残りが境界位置で独立になる。",
+      "application": "子部分木の終端を列挙し、部分問題の積を加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "子を番号昇順で訪れる規則は、巡回列そのものの単調性ではなく、連続する子部分木の根同士の条件として区間分割時に検査する。",
+      "reusablePerspective": "巡回順制約付き木の数え上げでは、部分木の連続性と兄弟順の局所条件を組み合わせて区間DPへ落とす。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
+      "text": "先行順巡回で部分木が連続区間になる性質を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "区間 DP",
+      "text": "空区間の基底を含む区間DPと、部分問題の積による数え上げを設計できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "区間長の短い順に計算し、半開区間と閉区間を混在させない。",
+      "text": "区間を半開区間で統一し、空部分の値を1とする。仮想根の添字、根番号比較の向き、答えに使う区間を小ケースで確認し、全加算を法998244353で行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Pre-Order 型の 根付き木・部分木・パスの関係に対し、区間 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "与えられた先行順列を持ち、各頂点で子を番号昇順に訪れる根付き木の個数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "区間長の短い順に計算し、半開区間と閉区間を混在させない。",
+      "text": "N≤8で全親配列を列挙した答えと比較し、単調な順列、根直下に複数子がある木、深い一本鎖、分割端が空になる場合を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

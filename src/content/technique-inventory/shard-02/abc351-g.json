@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc351-g「Hash on Tree」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "一回の A_v 更新が通常の木 DP f(v)=A_v+∏f(child) を変えるのは v の祖先全体で、鎖なら深さ N、星なら一頂点再計算に次数 N がかかる。単純な祖先更新では両方を同時に避けられない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "木 DP は vertex/add-edge/rake/compress という cluster の結合演算として表せ、根側・遠端側の boundary を持つ path cluster の作用は affine function ax+b に閉じる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc351-g「Hash on Tree」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "重さで平衡化した Static Top Tree に木 DP の cluster 情報を載せ、葉 A_v 更新から根まで再計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "merge tree の深さが O(log N) で各 cluster 合成が定数時間なので、任意形状の木でも一点更新・全体値取得を O(log N) にできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "更新頂点から根まで f を再計算し、各親で全子の積を取り直す。",
+        "decision": "rejected",
+        "decisionReason": "鎖の祖先数または高次数頂点の子走査が O(N) になり、Q=2×10^5 で O(NQ) に達する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "木には閉路がないため、親辺を除く部分木が独立し、帰納法で子の最適値または個数を合成できる。",
+        "text": "point cluster は virtual root 配下の子積、path cluster は遠端に値 x の subtree を接続したとき近端 hash が ax+b になる二係数を持てば、rake は積、compress は affine composition にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Hash on Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "HLD の heavy path と light subtrees を単なる segment tree 連鎖にせず、cluster 含有頂点数で二分 merge を平衡化することで全 merge tree 深さを O(log N) にする。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc351-g「Hash on Tree」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "元木を heavy/light 分解し、path cluster の compress と point cluster の rake を頂点数 balance で組み上げた Static Top Tree を構築する。各 leaf vertex に A_v を持たせ、五種の cluster constructor/merge で hash 情報を計算する。query では leaf を更新し merge-tree 祖先だけ再計算し、root cluster の値を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc351-g「Hash on Tree」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "Static Top Tree による動的木 DP",
+      "trigger": "木構造は固定で頂点値だけ更新され、全体の木 DP 値を毎回求めるとき。",
+      "application": "木を深さ O(log N) の二分 cluster merge tree に変換し、DP 合成則を載せる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "根付き木と木 DP",
-      "trigger": "制約と操作を整理したときに 根付き木と木 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc351-g「Hash on Tree」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 根付き木と木 DP を問題固有の状態へ適用する。",
+      "name": "path cluster の affine 作用",
+      "trigger": "一つの未確定 boundary 値を通じて cluster 外部と接続し、DP 式が一次式に閉じるとき。",
+      "application": "cluster を ax+b として表し、compress を関数合成にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "木 DP の式を速くするのでなく、「木を組み立てる計算グラフ」自体を平衡二分木へ変える発想が核心である。",
+      "reusablePerspective": "静的構造・動的ラベルの全体 DP では、再計算依存 DAG を balance できないか考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
+      "text": "重軽分解",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "根付き木と木 DP",
+      "text": "Static Top Tree の rake/compress と affine composition",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "leaf の f は子なしなら A_v であり、A_v+空積= A_v+1 としてはいけない。path/point cluster の boundary orientation を全 merge で統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Hash on Tree 型の 根付き木・部分木・パスの関係に対し、根付き木と木 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "任意形状の固定木に対する hash 木 DP を平衡 cluster 計算へ載せ、構築 O(N log N) 以内・各更新 O(log N) で処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "まず五つの cluster 操作ごとに情報の意味を式で検証し、その後に平衡化へ進む。特に葉の例と一子の鎖で affine 係数を手計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc251-f「Two Spanning Trees」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "無向グラフのDFS木では非木辺の両端が祖先・子孫になり、BFS木では辺の両端の深さ差が高々1なので非木辺が祖先・子孫にはならない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc251-f「Two Spanning Trees」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "同じ根からDFS木とBFS木を構成",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "二つの探索木がそれぞれ要求された非木辺の関係を直接満たし、連結グラフなのでどちらもN-1辺になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "任意の全域木を二つ作る",
+        "decision": "rejected",
+        "decisionReason": "全域であるだけでは非木辺の祖先関係に制約がなく、二種類の条件を保証できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+        "text": "無向DFSで探索済み頂点への辺を見つけた時、その頂点は現在の再帰スタック上の祖先であり、交差辺は生じない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Two Spanning Trees 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "BFSでは元の辺で結ばれた頂点の距離層は高々1違い、木上で親子でない祖先・子孫なら深さ差が2以上になるため矛盾する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc251-f「Two Spanning Trees」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "頂点1を根にDFSし、未訪問頂点を初めて発見した辺を第一の木として出力する。続いて頂点1からBFSし、同様に発見辺を第二の木として出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc251-f「Two Spanning Trees」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "DFS木の非木辺性質",
+      "trigger": "無向グラフで全ての非木辺を祖先・子孫関係にしたい。",
+      "application": "深さ優先探索の発見辺を全域木にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "深さ優先探索",
-      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc251-f「Two Spanning Trees」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "name": "BFS層",
+      "trigger": "元グラフの辺の両端を木上の離れた祖先・子孫にしたくない。",
+      "application": "最短距離層を作り、幅優先探索の発見辺を全域木にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "問題の二つの相反する祖先条件は、無向グラフにおけるDFS木とBFS木の標準的な構造そのものである。",
+      "reusablePerspective": "全域木の追加条件が非木辺の深さ関係なら、探索順が保証する辺分類や距離層を利用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
+      "text": "無向グラフのDFSとBFSで、発見時に親辺を記録できる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "深さ優先探索",
+      "text": "根付き木の祖先関係と探索木の辺分類を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "N=2×10^5なのでDFSは反復実装も検討し、頂点はキューやスタックへ入れる発見時点で訪問済みにする。各木で必ずN-1辺を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Two Spanning Trees 型の 根付き木・部分木・パスの関係に対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "要求された二種類の非木辺条件を満たす全域木を、それぞれ辺集合として構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "出力木が連結かつN-1辺かを機械的に検査し、全ての元辺について第一木・第二木の祖先条件を小グラフ上で直接確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

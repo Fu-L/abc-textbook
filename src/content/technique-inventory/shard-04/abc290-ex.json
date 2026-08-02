@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc290-ex「Bow Meow Optimization」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "中央から離れるほど同種族内の順位差が増えるため、不満係数の大きい動物ほど中央へ置く交換が解を悪化させない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc290-ex「Bow Meow Optimization」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "偶奇別に中央を処理して左右割当DP",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "最適列を中央へ向け係数昇順となる左右二列へ正規化でき、係数順に各動物を左列Pか右列Qへ割り当てる状態DPで最小値を得られる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全動物の順列を列挙",
+        "decision": "rejected",
+        "decisionReason": "最大600匹の順列は扱えず、同種族内の交換可能性を利用していない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Bow Meow Optimization 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "犬猫それぞれの中央個体を隣接させ最大係数を置く交換論により、奇数個を前処理で除けば両種族偶数の左右分割問題へ帰着する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc290-ex「Bow Meow Optimization」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "偶数化後に全動物を係数順に走査し、dp[i][j][k]で左列Pへ入れた犬猫数を持って左右配置時の偏り費用を加え、指定個数状態の最小値を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc290-ex「Bow Meow Optimization」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "並べ替え不等式と交換論",
+      "trigger": "位置ごとの偏りが中央から単調に増える。",
+      "application": "大係数を小偏りへ寄せ、中央へ向かう係数順を正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc290-ex「Bow Meow Optimization」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "個数制約付き割当DP",
+      "trigger": "係数順に要素を二群へ配り、各群の種別個数が指定される。",
+      "application": "dp[i][dogP][catP]で左右どちらへ置くかを選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "種族ごとの中央値の位置関係を先に固定すると、複雑な混合順列が「昇順列P＋反転列Q」という二群割当に縮む。",
+      "reusablePerspective": "順列最適化では交換で標準形を示してから、残る割当だけをDPする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "交換前後の偏り差を係数大小で比較でき、三次元DPの各配置費用を計算できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "N,Mの偶奇4ケースで中央除去と費用を正しく反映し、総費用は64ビットで持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Bow Meow Optimization 型の 区間端点と包含関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "犬猫の並べ方による不満度合計の最小値を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "小規模の全順列と比較し、各偶奇組合せ、同じ係数、中央の最大係数を除く前処理を検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

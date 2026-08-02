@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc246-ex「01? Queries」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各 ? の置換結果を個別に数えるのではなく、いずれかの置換後文字列の部分列として得られる異なる非空文字列の和集合を数える必要がある。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "prefix から作れる文字列を末尾 0 と末尾 1 の個数に分けると、次の 1 文字による重複除去込みの更新が 2 変数の affine 変換で閉じる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc246-ex「01? Queries」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "文字 0,1,? ごとの 3×3 affine 遷移行列を作り、順序付き行列積を segment tree で保持して点更新する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "1 文字変更を 1 leaf の行列変更にでき、全 prefix DP の合成結果を各 query で対数時間に更新できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各 query 後に左から prefix DP を N 文字分やり直す。",
+        "decision": "rejected",
+        "decisionReason": "1 回は線形だが N,Q≤10^5 の積になり、全 query には間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "d_0,d_1 を作れる非空文字列のうち末尾が 0,1 の個数とすると、0 の追加は (d_0,d_1)→(d_0+d_1+1,d_1)、1 は対称、? は両方を同時に更新する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "01? Queries 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "定数 +1 を第 3 成分 1 として持てば各更新は線形行列になり、区間の文字列連結は行列積の結合則で segment tree に載る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc246-ex「01? Queries」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "leaf i に A_{s_i} を置く。左区間を先に適用してから右区間を適用するため、親の積を M_right×M_left とする。点更新後、root 行列を (0,0,1)^T に作用させ、先頭 2 成分の和を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc246-ex「01? Queries」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "DP 遷移の行列化",
+      "trigger": "少数状態の同型遷移が列要素ごとに変わり、区間単位で合成したいとき。",
+      "application": "末尾文字別 DP と定数成分を 3 次元 vector にし、各文字を 3×3 行列にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc246-ex「01? Queries」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "非可換 monoid segment tree",
+      "trigger": "点更新のたびに順序依存の結合可能な全体積を求めたいとき。",
+      "application": "行列積の順序を文字列の適用順に合わせて各 node に保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "wildcard を全置換する代わりに、『どれかの置換で作れる部分列』の集合を末尾文字で分類すると、重複を除いた個数が 2 状態で更新できる。",
+      "reusablePerspective": "動的な列 DP では、局所遷移を小さな写像として表し、その合成が結合的なら segment tree で点更新できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
+      "text": "異なる部分列数の末尾文字 DP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "affine 変換の同次座標化",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "segment tree と非可換な積順",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "結合順は交換できない。区間 [l,r] の変換は右側行列×左側行列で、入力 vector へ右から作用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "初期 vector は空文字列を定数成分だけに持つ (0,0,1) とし、出力は d_0+d_1 なので空文字列を加えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "01? Queries 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "点更新される wildcard 文字列の部分列集合数を、3 状態行列積の segment tree として維持できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "長さ 2 の 01 と 10 で行列積順を実計算し、さらに単独 ? で答えが 2 になることから、定数項と空文字列の扱いを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

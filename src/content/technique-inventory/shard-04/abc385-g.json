@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc385-g「Counting Buildings」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "順列へ値を降順に挿入すると、新要素は既存要素より小さい。左端なら左可視数Lだけが1増え、右端ならRだけが1増え、中間i箇所ではどちらも変わらない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "差k=L-Rだけを追う挿入DPはdp_{i+1}[k]=dp_i[k-1]+i·dp_i[k]+dp_i[k+1]となり、生成関数では二次式(1+ix+x^2)の積になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc385-g「Counting Buildings」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "挿入DPを生成関数へ変換し、二次多項式群を分割統治NTTで積む",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "欲しい差Kの個数を積の係数へ帰着し、次数総和O(N)の積をO(N(log N)^2)で計算してN=2×10^5に対応できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "差kを全範囲持つ挿入DPをN段更新する",
+        "decision": "rejected",
+        "decisionReason": "状態数が段数に比例して増え合計O(N^2)となる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "Laurent多項式のx^{-1},1,xを全体でx^{N-1}shiftすると、通常多項式∏_{i=0}^{N-2}(1+ix+x^2)の係数K+N-1を取ればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Counting Buildings 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "多項式を前から一つずつ掛けると再び二次になるため、次数の近いものをmergeするか均等分割して各levelの次数総和をO(N)に保つ。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc385-g「Counting Buildings」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "i=0..N-2の多項式1+ix+x^2を作り、priority queueによるsmall-to-largeまたは分割統治でconvolutionする。最終積の次数K+N-1の係数をmodで出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc385-g「Counting Buildings」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "順列の挿入DP",
+      "trigger": "最大または最小要素を挿入した際に統計量の変化が位置種別だけで決まるとき。",
+      "application": "最小要素の左端・右端・中間挿入でL-Rの変化を分類する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc385-g「Counting Buildings」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "多数多項式のbalanced product",
+      "trigger": "次数総和が小さい多数の因子を高速に掛けたいとき。",
+      "application": "分割統治またはmerge techniqueでconvolution treeを平衡化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "左右可視数を別々に持たず要求値L-Rへ射影すると、挿入位置N通りが変化+1,-1,0の三種類へ潰れる。",
+      "reusablePerspective": "順列統計の差・和だけを問う場合、挿入で必要な統計量へ直接圧縮し、遷移係数を生成関数の因子として読む。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
+      "text": "挿入DPと生成関数の係数対応を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "NTT convolutionとdivide-and-conquer積を使える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "Kが負でもindex K+N-1へ正しくshiftする。i=0因子やN=1の空積を扱い、convolution結果は必要次数までに保つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Counting Buildings 型の 順列の位置と値の対応に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "可視building数の差を挿入DPから多項式積へ変換し、balanced NTTで高速に数え上げられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "N≤8の全順列でL,Rを直接数え、Kの対称性ans(K)=ans(-K)、係数shift、N=1を照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

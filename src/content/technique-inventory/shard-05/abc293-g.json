@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc293-g「Triple Index」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "区間に値xを一個追加すると同値三つ組はC(cnt_x,2)個増え、削除時も逆順で定数時間更新できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc293-g「Triple Index」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Mo's algorithmで区間端を並べ替える",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全質問が事前にあり、左右端一歩の追加削除がO(1)なので総移動量を約N√Qへ抑えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各質問で頻度を数え直す",
+        "decision": "rejected",
+        "decisionReason": "区間長の総和がO(NQ)になり得る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Triple Index 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "答えΣ_x C(cnt_x,3)を直接持てば、追加前cntのC(cnt,2)を足し、削除後のcntに対する同値を引くだけでよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc293-g「Triple Index」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "質問を左端blockと右端順でソートし、現在区間を伸縮しながらfreq[A_i]と三つ組数を差分更新して元の質問順へ答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc293-g「Triple Index」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "Mo's algorithm",
+      "trigger": "静的配列の多数区間質問で端点一歩更新が軽い。",
+      "application": "質問順をblock分割で並べ替えて区間移動を共有する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "式変形と frequency map",
-      "trigger": "制約と操作を整理したときに 式変形と frequency map の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc293-g「Triple Index」では、主解法候補として、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 式変形と frequency map を問題固有の状態へ適用する。",
+      "name": "組合せ数の差分",
+      "trigger": "頻度cに一要素を加えた統計量C(c,3)の変化を知りたい。",
+      "application": "C(c+1,3)-C(c,3)=C(c,2)を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "三重ループをせず、値別頻度の三項組合せ和をオンライン維持できる。",
+      "reusablePerspective": "区間内k組数は追加時に既存(k-1)組数を足す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "式変形と frequency map",
+      "text": "Mo法のblock順序と組合せ差分。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "添字 parity による符号反転と負数 key をそのまま正確に保持する。",
+      "text": "追加と削除のfreq更新順を逆にし、答えは64ビットで保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Triple Index 型の 列の順序と prefix 状態に対し、式変形と frequency mapを選び、状態と証明を一貫して設計できる。",
+      "text": "各区間の同値な添字三つ組数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "添字 parity による符号反転と負数 key をそのまま正確に保持する。",
+      "text": "素朴三重ループと照合し、全同値・全相異・長さ3未満・同じ区間の重複質問を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

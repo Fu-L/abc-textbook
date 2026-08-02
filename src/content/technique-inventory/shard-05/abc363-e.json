@@ -17,67 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc363-e「Sinking Land」では、海に接する境界を始点に、各 cell が到達可能になる最小水位を min-heap で伝播する priority flood を行う。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "区画は海へ接するまでは沈まず、年kに初めて海へ接したならmax(k,A_{i,j})年に沈む。沈没時刻は隣接区画の沈没から一方向に伝播する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "標高と年Yが整数で上限も小さいため、沈没予定年ごとのbucketを用意できる。同じ年のbucketへ追加された低地もその年中に連鎖して沈む。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc363-e「Sinking Land」では、海に接する境界を始点に、各 cell が到達可能になる最小水位を min-heap で伝播する priority flood を行う。この状態表現から答えを構成する。",
+        "approach": "外周を初期海岸として、沈没年bucketを1..Yの順に処理し、新たに接した隣接区画を予定年へ登録する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各cellを海へ接した最初の一度だけ登録し、その年までの沈没数を逐次集計できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各年ごとに全gridを走査し、海に接する高さ以下の区画がなくなるまで更新する。",
+        "decision": "rejected",
+        "decisionReason": "地形が一列ずつ沈む場合に同じcellを年ごと・連鎖段階ごとに繰り返し調べる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "cell の水没水位は経路上標高最大値の最小値であり、max(現在水位, 隣接標高) の Dijkstra 緩和と一致する。",
+        "text": "外周cellは時刻0に海へ接したとみなし、A≤Yならbucket Aへ入れる。visitedは沈没時でなく初回登録時に立てて重複投入を防ぐ。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sinking Land 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "年kに沈むcellの隣がA≤kなら同じbucket kの末尾へ入るため、一年内のflood fillも通常queue処理に含まれる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc363-e「Sinking Land」では、海に接する境界を始点に、各 cell が到達可能になる最小水位を min-heap で伝播する priority flood を行う。この状態表現から答えを構成する。",
+      "text": "remaining=HWとし、外周の未登録cellを標高bucketへ入れる。k=1..Yでbucket[k]をqueueとして最後まで処理し、cellを沈めてremainingを減らす。未登録の四近傍はyear=max(k,A)がY以下ならそのbucketへ登録する。各年処理後のremainingを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "minimax path と Dijkstra 法",
-      "trigger": "制約と操作を整理したときに minimax path と Dijkstra 法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc363-e「Sinking Land」では、海に接する境界を始点に、各 cell が到達可能になる最小水位を min-heap で伝播する priority flood を行う。この状態表現から答えを構成する。で minimax path と Dijkstra 法 を問題固有の状態へ適用する。",
+      "name": "時刻bucket付きflood fill",
+      "trigger": "event時刻が小整数で、到達により将来eventが一度だけ発生するとき。",
+      "application": "priority queueの代わりに年別queueを昇順処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "境界からの浸水伝播",
+      "trigger": "外部と連結した低い領域だけが閾値に応じて有効化されるgrid問題。",
+      "application": "外周をsourceとし、到達時刻とcell固有閾値のmaxを次時刻にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "単にA≤kのcellを消すのではなく、海への連結性が満たされた時刻とのmaxが実際の沈没年になる。",
+      "reusablePerspective": "閾値と到達性が組み合わさる過程では、event時刻をmax(arrival,threshold)で伝播する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "minimax path と Dijkstra 法",
+      "text": "grid BFS",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "bucket queue",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同じ cell の古い heap entry を捨て、水位別回答は新規水没数の prefix sum として出す。",
+      "text": "四隅を外周四辺から重複登録しない。A>Yのcellもvisited扱いをどうするか統一し、同年bucketの動的追加を最後まで処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sinking Land 型の問題に対し、minimax path と Dijkstra 法を選び、状態と証明を一貫して設計できる。",
+      "text": "各区画の初回海接触だけをevent化し、年ごとの残存面積を一度のgrid伝播で得られる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同じ cell の古い heap entry を捨て、水位別回答は新規水没数の prefix sum として出す。",
+      "text": "低い盆地が高い外壁の沈没年に同時連鎖する例を追う。visitedを「海へ接した」時点にする理由とbucketへの登録年をセットで検証する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

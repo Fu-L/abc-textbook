@@ -17,67 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc232-h「King's Tour」では、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "キングは縦横だけでなく斜めにも一マス動けるため、幅 2 の帯では上下を交互に通る経路と端を回る経路を柔軟につなげられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "任意終点へ合わせた全盤面の蛇行を直接場合分けすると端・角の例外が増えるが、外周の細い経路を先に通れば一辺短い同型問題が残る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc232-h「King's Tour」では、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。",
+        "approach": "行ごとの通常の蛇行順を作り、末尾を指定マスへ局所的に入れ替える。",
+        "decision": "rejected",
+        "decisionReason": "終点が内部や端にある場合に未訪問領域が分断され、局所修正だけでは全マス一回訪問を保証できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "幅 2 を明示構成の基底とし、指定終点を避ける L 字境界 S を先に訪問して、転置・反転した小さい長方形へ再帰する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各段階で訪問済み帯と残りが一つの長方形になり、開始角と指定終点を保つ同じ問題へ縮小できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "追加部分が既存構成と衝突せず、始点・終点・被覆条件を保つことをサイズに関する帰納法で示す。",
+        "text": "S＝第一列全体と (H,2) を通る経路の末尾は、第一列を除いて上下反転した残り盤面の左上角に対応する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "King's Tour 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "終点が S 内にある場合は行列を転置すると、同じ形の境界が終点を含まない向きへ交換できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc232-h「King's Tour」では、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。",
+      "text": "長方形 Hamilton path の構成不変条件を「左上開始・任意の別終点」とし、対称変換で終点を境界から外して一列ずつ剥がす再帰構成を行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "再帰的構成と帰納法",
-      "trigger": "制約と操作を整理したときに 再帰的構成と帰納法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc232-h「King's Tour」では、小さい instance の構成を基底として、端の帯または部分構造を追加する再帰的構成を行う。この状態表現から答えを構成する。で 再帰的構成と帰納法 を問題固有の状態へ適用する。",
+      "name": "構成問題の再帰的不変条件",
+      "trigger": "大きい盤面の一部を固定経路で消費すると、座標変換後に同じ条件の小さい盤面が残るとき。",
+      "application": "L 字境界を出力し、残りを上下反転・平行移動した幅 W−1 の問題として再帰する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "転置・反転による場合分け削減",
+      "trigger": "行と列が対称で、困難な境界位置を別向きの標準ケースへ写せるとき。",
+      "application": "W＝2 や終点が境界 S 内のケースを盤面転置で既存ケースへ移す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "除く領域を単なる一列でなく末尾に隣列の一マスを加えた L 字にすることで、経路末尾が反転後の残り長方形の開始角へ接続する。",
+      "reusablePerspective": "再帰構成では削る領域の大きさだけでなく、固定経路の出口が残り問題の標準始点に一致する形を設計する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "再帰的構成と帰納法",
+      "text": "盤面の転置・反転・平行移動を通じて局所座標と元座標を相互変換できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "最小幅の基底ケース、行列の転置、再帰で変換した終点座標を個別に確認する。",
+      "text": "H＝2 の基底構成では列 b の終点だけを最後へ回し、b＝1 や b＝W の空区間も重複なく処理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "再帰ごとの転置・上下反転を座標変換として合成し、出力が元盤面で全 HW マスを一度ずつ含むようにする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "King's Tour 型の問題に対し、再帰的構成と帰納法を選び、状態と証明を一貫して設計できる。",
+      "text": "任意終点のキング全盤面巡回路を、対称変換と幅縮小の再帰的不変条件から構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "最小幅の基底ケース、行列の転置、再帰で変換した終点座標を個別に確認する。",
+      "text": "構成の特殊ケースが増えたら、固定した帯を訪問した後の未訪問領域が同じ問題になる削り方を探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "再帰構成は出力列を眺めるだけでなく、各段階の開始点・終了点・未訪問長方形の三つを不変条件として検証する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

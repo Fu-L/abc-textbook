@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc233-f「Swap and Sort」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "操作辺をグラフの辺とみなすと、駒は最初に属する連結成分の外へ移動できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各頂点 i と駒 i の現在位置が同じ連結成分なら、成分内の spanning tree だけを使っても駒を任意に運べる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc233-f「Swap and Sort」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "未配置の駒を元グラフ上の最短路で順に目標頂点へ運ぶ。",
+        "decision": "rejected",
+        "decisionReason": "後の経路が既に正しく置いた駒を再び動かし、確定状態を保てない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各連結成分の spanning tree を作り、葉 v に駒 v を木内の一意な経路で運んでから葉を削除する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "削除した葉は以後の経路に使われず、一頂点ずつ正しい駒を永久に確定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Swap and Sort 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "連結性だけが操作可能性を決めるので余分な辺を捨てて森にし、葉から処理することで経路選択と確定済み頂点の干渉を消す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc233-f「Swap and Sort」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "Union-Find で feasibility と spanning forest を構成し、各木を葉除去順に処理して、駒の現在位置から目標葉までの木路上の辺 ID を交換列として出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc233-f「Swap and Sort」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "spanning tree 上の葉固定構成",
+      "trigger": "連結グラフ上の隣接交換で各頂点へ指定トークンを配置し、既配置を壊さず順に確定したいとき。",
+      "application": "葉の目標駒を木路で運び、葉とその駒を問題から取り除いて残りの木へ帰納する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Union-Find",
-      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc233-f「Swap and Sort」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "name": "連結成分による実現可能性判定",
+      "trigger": "操作がグラフ辺上の交換だけで、トークンが成分境界を越えられないとき。",
+      "application": "各値 i の現在頂点と目標頂点 i の Union-Find root が一致するか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "N≤1000 なので各葉で木路を探索し直してもよく、交換回数も最悪 999＋998＋…＋1＝499500 で出力上限に収まる。",
+      "reusablePerspective": "構成問題では計算時間だけでなく出力長上限を、帰納の各段階で使う操作数の総和から先に証明する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Union-Find",
+      "text": "Union-Find で spanning forest を作り、木の葉除去と一意なパス探索を実装できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "各交換後に頂点上の駒配列と駒から現在頂点への逆配列を両方更新し、出力には spanning tree の元辺 ID を記録する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "葉 v へ駒 v を運ぶパスは未削除頂点だけで探索し、確定後に v を木から除いて次数 1 になった頂点を追加する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Swap and Sort 型の 順列の位置と値の対応に対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "text": "グラフ辺交換による順列整列を、成分判定と spanning tree の葉固定で制限内の操作列として構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "グラフ上のトークン交換では、まず不変量である連結成分を確認し、余分な辺を捨てた木で十分かを考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "一度正しく置いた駒を壊さない構成には、経路の通過点にならない葉から確定する帰納を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

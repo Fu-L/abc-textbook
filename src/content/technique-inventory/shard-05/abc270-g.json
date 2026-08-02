@@ -1,15 +1,15 @@
 {
   "problemId": "abc270-g",
   "sourceRevisionIds": [
-    "source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb",
-    "source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96"
+    "source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96",
+    "source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb",
-        "source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96"
+        "source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96",
+        "source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,71 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc270-g「Sequence in mod P」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "A≠0ならf(x)=Ax+Bはfield modulo P上のbijectionで、inverseもaffine functionとして計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "有限集合上のbijection orbitではGが現れるなら最初のP step以内なので、indexをiM+jへ分けてmeet-in-the-middleできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc270-g「Sequence in mod P」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Sからrecurrenceを順にsimulationし、Gまたは重複状態に達するまで進める。",
+        "decision": "rejected",
+        "decisionReason": "一caseでP=10^9 stepかかり得る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "M≈√Pとし、G,f^{-1}(G),…,f^{-(M−1)}(G)をmapへ置き、S,f^M(S),…とのintersectionを探す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "一致 f^{iM}(S)=f^{-j}(G) から候補index iM+jを復元でき、各caseをO(√P log P)以内で処理できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "列の順序と prefix 状態と解候補の対応を双方向に示し、列挙の漏れと重複がないことを確認する。",
+        "text": "affine mapsはpair(a,b)で表し、compositionによりf^MもO(M)またはbinary exponentiationで一つのaffine mapとして得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sequence in mod P 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "baby valuesに重複がある場合は最小jを保持し、得られたiM+jの最小値を取らないと最初の到達時刻を保証できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc270-g「Sequence in mod P」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "invertible affine recurrenceのorbit searchへBaby-Step Giant-Stepを適用し、forward giant stepsとbackward baby stepsを衝突させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc270-g「Sequence in mod P」では、主解法候補として、列の順序と prefix 状態を同値な状態へ縮約し、必要な候補だけを制約内で列挙する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "Baby-Step Giant-Step",
+      "trigger": "invertible functionの反復でf^n(x)=yとなる最小nを、状態空間全走査より速く求めたいとき。",
+      "application": "targetからinverseをM回辿るbaby tableと、startからf^Mを反復するgiant sequenceを照合する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "affine mapの合成と逆写像",
+      "trigger": "modular recurrenceがax+bで、反復・逆向き遷移をまとめたいとき。",
+      "application": "pair(a,b)のcompositionでpower mapを作り、a^{-1}からinverse affine mapを導く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "A=0ではX_0=S、その後は常にBなので別処理し、A≠0のときだけinverse-based BSGSを使える。",
+      "reusablePerspective": "inverseを要求するorbit algorithmでは、非可逆parameterを先に分類して小さな直接解へ落とす。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "finite fieldのinverse、affine function composition、hash mapによるmeet-in-the-middleを扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+      "text": "candidate iM+jはP以下の範囲だけを採用し、S=Gなら必ず0を最小解として返す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "状態 key と更新順序を固定し、同じ候補を二重に数えない。",
+      "text": "P近傍の積は64 bitで保持してmoduloを取り、baby tableのduplicateは必要なjの向きに合わせて更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sequence in mod P 型の 列の順序と prefix 状態に対し、状態縮約を選び、状態と証明を一貫して設計できる。",
+      "text": "affine modular sequenceがtargetへ初めて達するindexを平方根分割で判定・復元できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入力の最小ケース、最大ケース、同値な候補の境界を個別にテストする。",
+      "text": "function iterationの到達時刻はindexをblock quotientとremainderに分け、inverse側とのmeet-in-the-middleを考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "BSGSで存在判定だけでなく最小indexが必要なら、tableのduplicateと候補の走査順を別途証明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

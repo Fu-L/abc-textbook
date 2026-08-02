@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc336-g「16 Integers」では、主解法候補として、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "長さ4のpattern(i,j,k,l)を、3bit状態(i,j,k)から(j,k,l)への有向辺と見る。各pattern出現回数Xはその多重辺数であり、条件を満たすbinary列は全辺を一度ずつ使うEuler trailと一対一対応する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc336-g「16 Integers」では、主解法候補として、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "8頂点多重有向graphのEuler trailをBEST定理と有向行列木定理で数える",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "辺総数Nが大きくても頂点数は8に固定され、degree・factorial・小行列式だけで計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "16種類のpatternを置く順序をDPで列挙する",
+        "decision": "rejected",
+        "decisionReason": "残個数vectorの状態数がXに対して指数的で、N=10^6を扱えない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "元の歩道から必須辺だけを射影すると Euler trail になり、逆に成分内の自由経路で trail の隣接必須辺を接続できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "16 Integers 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "始点・終点候補を8通りずつ調べ、degree差がEuler trail条件を満たす場合は終点から始点への補助辺を加えてEuler閉路へ帰着できる。区別された辺の閉路数はBEST定理の有向全域木数×∏(outdeg(v)-1)!で、全域木数は有向Laplacian minorの行列式になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc336-g「16 Integers」では、主解法候補として、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "16本種のXから8頂点の入出次数を作る。各始点s・終点tについてdegree条件と非零辺部分の連結性を確認し、必要な補助辺t→sを加える。mod 998244353で8×8 Laplacian minorをGaussian eliminationしてarborescence数を求め、BESTのfactorial積を掛け、同一patternのX_e!による重複を割って該当する列数を合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc336-g「16 Integers」では、主解法候補として、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "de Bruijn graphへの変換",
+      "trigger": "固定長substringの出現回数を指定された列を数える。",
+      "application": "長さ3のprefix/suffixを頂点、長さ4 patternをshift辺として、列をEuler trailに対応させる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Euler trail の存在条件",
-      "trigger": "制約と操作を整理したときに Euler trail の存在条件 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc336-g「16 Integers」では、主解法候補として、自由移動できる連結成分を縮約し、必須辺だけの multigraph で Euler trail の次数条件を判定する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で Euler trail の存在条件 を問題固有の状態へ適用する。",
+      "name": "BEST定理と有向行列木定理",
+      "trigger": "頂点数が小さい多重有向graphで全辺を使うtrail数が必要である。",
+      "application": "edge順序のfactorial積とLaplacian minor determinantからEuler閉路数を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "同じ4bit patternの辺は列から区別できないため、区別辺に対するBESTの数を各X_e!で割る正規化が必要である。",
+      "reusablePerspective": "substring頻度列挙ではEuler路化に加え、同label多重辺のindistinguishabilityをfactorialで補正する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Euler trail の存在条件",
+      "text": "Euler trailのdegree条件、BEST定理、有向matrix-tree theorem、mod行列式とfactorial。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "自己 loop と多重辺を許した次数 parity を数え、縮約成分の連結性を保つ。",
+      "text": "辺が存在する頂点だけの連結性と、s=tのEuler circuit caseを分岐する。self-loopはdegreeとfactorialには含めるがarborescence用Laplacianでは適切に除外し、0!を1とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "16 Integers 型の 列の順序と prefix 状態に対し、Euler trail の存在条件を選び、状態と証明を一貫して設計できる。",
+      "text": "指定された全16種類の長さ4 substring出現回数を持つbinary列の個数をmod 998244353で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "自己 loop と多重辺を許した次数 parity を数え、縮約成分の連結性を保つ。",
+      "text": "Nの小さい全binary列を列挙し、全辺がself-loop、open trail、closed trail、degree不整合、同pattern多重辺を公式計数と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

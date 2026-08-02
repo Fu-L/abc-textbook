@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc419-g「Count Simple Paths 2」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "cycle rank K=M-N+1≤21で、任意二頂点間のsimple path数はcycle spaceとのXOR写像から高々2^Kである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "大graphのうちterminal以外のdegree1頂点は1-N simple pathに使われず、残ったdegree2 chainは長さweightをもつ一本のedgeへ縮約できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc419-g「Count Simple Paths 2」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "leaf pruning後にbranch/terminalだけのweighted multigraph Hへ縮約し、H上の全simple 1-N pathをDFS列挙して長さ別に数える",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "coreの頂点数≤2K+2、辺数≤3K+1で、simple path総数も≤2^K。前処理O(N)、列挙O(K2^K)になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "元のN頂点graphでsimple path DFSをそのまま行う",
+        "decision": "rejected",
+        "decisionReason": "path数自体は少なくても各pathが長いdegree2 chainを一頂点ずつ辿り、最大N2^K回の再帰呼出しになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+        "text": "terminal以外のleafをqueueで反復削除しても1-N path集合は変わらない。削除後のdegree総和とcycle rankからdegree≥3頂点数は2K以下に抑えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Count Simple Paths 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "縮約edgeのweightを元chainのedge数にすれば、H上pathのweight和が元simple pathのedge数へ正確に戻る。parallel edgeは異なるchainとして別々に列挙する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc419-g「Count Simple Paths 2」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "degree1非terminalをpeelingし、S={1,N}∪{deg≥3}を作る。各S頂点から未処理edgeを辿って次のS頂点までのdegree2 chainをweighted edge化する。Hでvisited vertexを持つDFSを1から行い、N到着時にans[weightSum]++し、ans[1..N-1]を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc419-g「Count Simple Paths 2」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "2-core型leaf pruning",
+      "trigger": "指定terminal間simple pathに絶対含まれない枝を除きたいとき。",
+      "application": "terminal以外のdegree1頂点を反復削除する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "組合せ数と二項係数",
-      "trigger": "制約と操作を整理したときに 組合せ数と二項係数 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc419-g「Count Simple Paths 2」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 組合せ数と二項係数 を問題固有の状態へ適用する。",
+      "name": "degree-2 chain compression",
+      "trigger": "path選択に分岐を生まない長いchainがあり、長さだけ保持すればよいとき。",
+      "application": "branch/terminal間をweighted multiedgeへ縮約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "小cycle rankによるpath列挙",
+      "trigger": "M-N+1が小さくsimple path総数が2^K以下に抑えられるとき。",
+      "application": "縮約core上でvisitedを持つDFSを行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "Nが20万でも「余分なedgeが21本」というparameterでbranch coreをO(K)頂点にkernelizeし、全pathを直接列挙できる。",
+      "reusablePerspective": "near-tree graphではcycle rankをparameterに、leaf除去とdegree2圧縮で小kernelを作って指数部をKだけに閉じ込める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "組合せ数と二項係数",
+      "text": "cycle space/rank、leaf peeling、weighted multigraph上のsimple path DFSを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "1,Nはdegree1でも削除しない。parallel縮約edgeをまとめず別edgeとして保持し、self-loopはsimple pathに使えない。weight和はN-1以下、countは64 bitにする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Count Simple Paths 2 型の 頂点と辺からなる状態グラフに対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。",
+      "text": "near-treeな巨大graphの全1-N simple pathを、edge数別にO(N+K2^K)で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "tree、terminalへの枝、theta graphのparallel chains、cycleから不要leafが伸びる例を元graphのsimple path列挙と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

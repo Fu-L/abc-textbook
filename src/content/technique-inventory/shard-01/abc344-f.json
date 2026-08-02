@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc344-f「Earn to Advance」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "過去に訪れたcellではいつでもstayして稼げるため、稼ぐrateはpath上のP最大値だけを使えばよい。またmoneyが必要になるまでstayを遅らせても行動数は変わらず、各move直後のmoneyを最小限の稼ぎ方で一意に決められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc344-f「Earn to Advance」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "cell・path上最大Pの出所を状態にし、(action数,money)をlexicographic DPする",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "経路ごとに必要な履歴を最大rateへ圧縮し、同状態ではaction最小・tie時money最大の一つだけ残せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "money額そのものをDP次元にする",
+        "decision": "rejected",
+        "decisionReason": "edge costが10^9でmoney範囲が巨大になり、有限な配列状態へ収まらない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Earn to Advance 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同じcellと最大rate pでaction数が等しい二状態ならmoneyが多い方が以後常に有利である。move cost cに不足する時だけceil((c-money)/p)回stayすれば、余分に先払いして稼ぐ必要はない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc344-f「Earn to Advance」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "DP[cell][maxP-cell]に最良(action,money)を持ち、開始(1,1)を(0,0)とする。右/下move cost cごとにw=max(0,ceil((c-money)/p))を求め、(action+w+1,money+wp-c)を遷移先へ送る。遷移先のPが大きければmaxP出所を更新し、action小・tieでmoney大にchmaxする。終点の最小actionを出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc344-f「Earn to Advance」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "支配関係によるDP状態圧縮",
+      "trigger": "同じ位置・将来の収入rateで、過去差が行動数と所持金だけに現れる。",
+      "application": "action数を最小化し、同数ならmoney最大の代表だけを残すPareto順序を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc344-f「Earn to Advance」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "必要時のceiling補給",
+      "trigger": "rate pで何回でも資源を増やし、cost cを払う前の不足だけ補いたい。",
+      "application": "不足額をceil divisionして最小stay回数を算出する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "過去Pの集合全体でなく最大値を持つcellだけを記録すればよく、その候補はpath上のN^2 cellのいずれかなので巨大moneyを離散stateから外せる。",
+      "reusablePerspective": "反復可能な収入源は最大rateだけが支配し、resource量は目的値tie-breakとして保持できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "grid DAG DP、ceiling division、lexicographic/Pareto最適化。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "money≥costならstay 0回とし、ceilは正の不足にだけ適用する。action数とmoney積は64bitを用い、maxPが同値の時は既存出所へ統一してstate重複を抑えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Earn to Advance 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "(1,1)から(N,N)へ到達するまでのstayとmoveを合わせた最小action数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "最初のPが最大、途中でrate更新、所持金ちょうどcost、同actionでmoneyだけ異なる二pathを小Nのresource探索と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

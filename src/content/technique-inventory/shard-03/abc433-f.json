@@ -17,77 +17,91 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc433-f「1122 Subsequence 2」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "1122部分列の中央左側の文字を位置 i の数字 S_i に固定する。左側で同じ数字を選べる個数を p、右側で S_i+1 を選べる個数を q とすると、長さ 2k の候補数は binom(p,k-1)binom(q,k) である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc433-f「1122 Subsequence 2」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各 i を中央位置として寄与を一意に数え、Vandermonde の畳み込みで長さ k の和を binom(p+q,p+1) に閉じる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "p,q は prefix/suffix 頻度で O(1)、二項係数も前計算できるため全体 O(N) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全ての部分列を列挙し、前半同値・後半が+1かを調べる。",
+        "decision": "rejected",
+        "decisionReason": "部分列は 2^N 個存在する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+        "text": "各非空 1122 部分列は前半最後、すなわち |T|/2 文字目の元位置 i をちょうど一つ持つため、i ごとの和に重複がない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "1122 Subsequence 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Σ_{k≥1}binom(p,k-1)binom(q,k)=binom(p+q,p+1) は Vandermonde の畳み込みである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc433-f「1122 Subsequence 2」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各数字の prefix count または左右総数を用意する。i を左から走査し、p=左側の S_i 個数、q=右側の S_i+1 個数を求め、fact/invfact で binom(p+q,p+1) を答えへ足す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc433-f「1122 Subsequence 2」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "代表位置による部分列分割",
+      "trigger": "各対象部分列に中央・最初・最後など一意な代表添字を割り当てられるとき。",
+      "application": "1122部分列を前半最後の位置 i で分類し、左右の選択を独立にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "累積和と差分",
-      "trigger": "制約と操作を整理したときに 累積和と差分 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc433-f「1122 Subsequence 2」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 累積和と差分 を問題固有の状態へ適用する。",
+      "name": "Vandermonde の畳み込み",
+      "trigger": "Σ_k binom(p,k+a)binom(q,k+b) のように選択数 k を全て足すとき。",
+      "application": "長さ別の積和を一つの二項係数 binom(p+q,p+1) へ簡約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "左右頻度の累積管理",
+      "trigger": "各位置に対して左の同値個数と右の別値個数が必要なとき。",
+      "application": "prefix count と総頻度から p,q を定数時間で取得する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "部分列長を DP 状態に残さず、中央位置固定後の長さ別和を組合せ恒等式で消去できる。",
+      "reusablePerspective": "一意な代表で分割した後に左右選択の積和が出たら、Vandermonde 型へ変形できないか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "累積和と差分",
+      "text": "部分列の数え上げ、二項係数、Vandermonde の畳み込み、累積頻度を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "p は i 自身を含まない左側、q は i より右側だけを数える。p+1 が範囲外なら二項係数を 0 とする規約を統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "1122 Subsequence 2 型の 文字列の prefix・suffix と一致関係に対し、累積和と差分を選び、状態と証明を一貫して設計できる。",
+      "text": "1122型部分列を中央位置で一意分解し、組合せ恒等式により線形時間で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "長さ 2k で左から k 番目が i となる選択数と、閉形式 binom(p+q,p+1) の対応を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

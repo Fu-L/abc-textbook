@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc348-e「Minimize Sum of Distances」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "treeを一つroot化すると、ある頂点から全頂点への重み付き距離和と各subtreeのC総和が分かれば、rootをedge一本隣へ移した時の値を差分計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc348-e「Minimize Sum of Distances」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "subtree weightを求めた後、rerooting式で全f(v)を計算する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "二回のDFSで全頂点の目的値をO(N)計算し、その最小を取れる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各vからDFSして距離和を計算する",
+        "decision": "rejected",
+        "decisionReason": "一頂点O(N)をN回行いO(N^2)になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各有向辺の部分問題を辺の反対側だけから合成すれば、根を移しても必要な寄与を重複なく再利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Minimize Sum of Distances 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "parent vからchild uへ基準点を移すと、subtree(u)内の各距離は1減り、それ以外は1増える。total weightをT、sub[u]をsとすればf(u)=f(v)-s+(T-s)=f(v)+T-2sである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc348-e「Minimize Sum of Distances」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "頂点1をrootにDFSしdepthとsubtree weight sub[v]を求め、f(1)=ΣC_v·depth[v]を計算する。二度目のDFSで各parent-childにf[child]=f[parent]+T-2sub[child]を適用し、全fの最小を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc348-e「Minimize Sum of Distances」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "rerooting DP",
+      "trigger": "rootに依存する全頂点への距離和を全rootについて求めたい。",
+      "application": "edgeを跨いだ時に近づくsubtree量と遠ざかる補集合量の差で更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "全方位木 DP",
-      "trigger": "制約と操作を整理したときに 全方位木 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc348-e「Minimize Sum of Distances」では、主解法候補として、部分木 DP を子方向と親方向に分け、prefix・suffix 合成で全頂点を根とする値へ reroot する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 全方位木 DP を問題固有の状態へ適用する。",
+      "name": "重み付きsubtree集計",
+      "trigger": "各頂点が異なるmultiplicity C_iで距離へ寄与する。",
+      "application": "頂点数の代わりにsubtree内C総和をpostorderで持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "unweighted centroidのsize式をC重みへそのまま一般化し、移動差の符号からweighted centroidも解釈できる。",
+      "reusablePerspective": "距離和rerootingは対象数を任意の非負weight総量に置き換えて成立する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "全方位木 DP",
+      "text": "tree DFS、subtree sum、rerooting recurrence。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "単位元と合成順序を明示し、子を除いた値を prefix・suffix から構成する。",
+      "text": "fは約5×10^18まで達するのでsigned 64bitを使い、2×fのような不要な倍化を避ける。N=1ではf=0である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Minimize Sum of Distances 型の 根付き木・部分木・パスの関係に対し、全方位木 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "全vertex vのΣC_i·d(v,i)の最小値を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "単位元と合成順序を明示し、子を除いた値を prefix・suffix から構成する。",
+      "text": "path、star、重い頂点一つ、N=1を全点BFSの距離和と比較しreroot差を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc228-e「Integer Sequence Fair」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "長さNの整数列は各要素にK通りの選択肢があるためK^N通りあり、それぞれにM通りの点数を独立に付けられる。したがって求める個数は M^(K^N) だが、N・K・Mが10^18以下なので指数そのものは構成できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "法P=998244353は素数である。底MがPの倍数でなければFermatの小定理により指数をP-1で割った余りだけ求めればよい一方、MがPの倍数なら同じ簡約をしてはいけない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc228-e「Integer Sequence Fair」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "K^Nを通常の整数として計算してから、Mをその回数だけ掛ける。",
+        "decision": "rejected",
+        "decisionReason": "指数は入力の時点で10^18乗まで膨らみ、値の保持も回数分の反復もできない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "M mod Pを場合分けし、非零ならK^N mod (P-1)を高速冪で求め、その値を指数としてMの高速冪を計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "Fermatの小定理で巨大指数をP-1周期へ落とせ、二段の高速冪はいずれも指数のビット数に比例する反復で済む。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "M≡0 (mod P) のとき指数K^Nは正なので答えは0である。この場合に指数をP-1で簡約すると、余り0から誤って0^0を扱う可能性があるため先に分岐する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Integer Sequence Fair 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "MとPが互いに素なら M^(P-1)≡1 (mod P) なので、K^NをP-1で割った商の分は全て消え、余りだけが結果を決める。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc228-e「Integer Sequence Fair」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "M mod P=0なら0を出力する。そうでなければ二分累乗法で e=K^N mod (P-1) を計算し、続けて M^e mod P を計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc228-e「Integer Sequence Fair」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "Fermatの小定理による指数の簡約",
+      "trigger": "素数法Pの下で、Pと互いに素な底を巨大な指数へ累乗したいとき。",
+      "application": "指数K^NをP-1で割った余りへ置き換え、外側の累乗を計算可能な大きさにする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc228-e「Integer Sequence Fair」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "二分累乗法",
+      "trigger": "指数が非常に大きく、累乗を剰余付きで求めたいとき。",
+      "application": "K^N mod (P-1) と M^e mod P の両方を、指数を2進展開して計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "指数をP-1で簡約できるかは、外側の底MがPと互いに素かで決まり、内側の底Kとは無関係である。",
+      "reusablePerspective": "累乗塔を剰余で扱うときは、各段で使う周期の前提を底ごとに確認し、0や非互いに素の例外を先に分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "二分累乗法",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "剰余演算と modular inverse",
+      "text": "Fermatの小定理と乗法群の周期",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "MをPで割った余りが0かを指数簡約より先に判定し、二つの高速冪で法P-1と法Pを取り違えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Integer Sequence Fair 型の 列の順序と prefix 状態に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な指数を持つ剰余累乗について、底の可逆性を確認して周期へ落とし、例外を含めて計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "『指数はP-1で割ればよい』だけで済ませず、その根拠がM≠0 (mod P) に依存することと、M≡0の場合の指数が正であることを別々に説明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

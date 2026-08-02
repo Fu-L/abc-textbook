@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc237-ex「Hakata」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "同じ回文が複数箇所に現れても互いに同じ文字列を部分文字列として含むため、異なる回文文字列だけを候補にすればよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "異なる回文文字列の種類数は |S| 以下であり、包含関係は長さが増える向きの半順序を作る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc237-ex「Hakata」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "列挙した回文の全部分集合を試し、どの二つも包含関係にない最大集合を探す。",
+        "decision": "rejected",
+        "decisionReason": "回文種類数は 200 まであり、2 の N 乗の選択は列挙できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "回文を頂点、厳密な部分文字列関係を比較可能性辺とする DAG を作り、Dilworth の定理で最大反鎖を最小鎖分解へ、さらに二部最大マッチングへ変換する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "同時に選べる集合は半順序の反鎖そのもので、最小鎖分解数は頂点数から二部最大マッチング数を引いて求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
+        "text": "禁止条件は回文区間の交差ではなく、回文文字列同士の substring 比較可能性なので、求める量は包含半順序の幅である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Hakata 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "各回文を左右に複製し、左 i から右 j へ「i が j の部分文字列」の辺を張った二部グラフで、答えは N−最大マッチング数になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc237-ex「Hakata」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "文字列包含を半順序として明示し、最大 antichain → minimum chain cover → bipartite matching という Dilworth の定理の標準変換を適用する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc237-ex「Hakata」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "Dilworth の定理による最大反鎖",
+      "trigger": "二つの要素が半順序で比較可能なら同時に選べず、最大の互いに比較不能な集合を求めるとき。",
+      "application": "最大反鎖の大きさを最小鎖分解数へ置き換え、N−最大マッチングで計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "DAG とトポロジカル順序",
-      "trigger": "制約と操作を整理したときに DAG とトポロジカル順序 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc237-ex「Hakata」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で DAG とトポロジカル順序 を問題固有の状態へ適用する。",
+      "name": "DAG 最小パス被覆の二部マッチング変換",
+      "trigger": "DAG の頂点を最少本数の頂点素なパスで覆いたいとき。",
+      "application": "各頂点を左右へ複製して到達可能な対を結び、最大マッチング一辺ごとに二つの鎖を連結する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "文字列へ一文字追加したとき新たな回文は高々一種類なので、S に現れる異なる回文は高々 |S| 種類である。",
+      "reusablePerspective": "対象区間が二乗個あっても distinct object の個数に強い上界があるなら、重複除去後の関係グラフを直接構築できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "DAG とトポロジカル順序",
+      "text": "回文部分文字列の列挙、半順序・反鎖、二部最大マッチングを理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。",
+      "text": "全回文部分文字列を文字列として重複除去し、同一頂点への自己辺は張らない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "包含辺は長さの短い回文から長い回文へ張ると DAG の向きが明確になり、N が 200 以下なので全対比較と単純な増加路法で十分である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Hakata 型の 文字列の prefix・suffix と一致関係に対し、DAG とトポロジカル順序を選び、状態と証明を一貫して設計できる。",
+      "text": "部分文字列包含で競合する回文の最大選択数を、半順序の幅と二部最大マッチングで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。",
+      "text": "ペアごとの禁止条件が推移的なら、一般グラフの独立集合ではなく半順序の反鎖として扱えないか確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "区間の個数ではなく異なる内容の個数を数え、重複除去後に初めてグラフ規模を見積もる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

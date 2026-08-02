@@ -7,9 +7,9 @@
   "review": {
     "reviewerId": "person-maintainer",
     "decision": "approved",
-    "reviewedAt": "2026-07-28T09:30:00+09:00",
+    "reviewedAt": "2026-08-01T19:52:56+09:00",
     "basis": "Outcome、説明、例、演習、解答、navigationをT064 source packetと照合し、適用checkを確認した。",
-    "approvedSubjectDigest": "9736a1e2deccf8d3ceea696a992984199610516158f56678519adf0b27f74315"
+    "approvedSubjectDigest": "f39ade63588c3af8544c471094f8715735ceef1b06747ca4a0dd1266665d9566"
   },
   "outcome": {
     "id": "outcome-provisional-compressed-dp-state",

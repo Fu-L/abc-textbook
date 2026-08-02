@@ -1,15 +1,15 @@
 {
   "problemId": "abc268-ex",
   "sourceRevisionIds": [
-    "source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81",
-    "source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a"
+    "source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a",
+    "source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81",
-        "source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a"
+        "source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a",
+        "source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,77 +17,103 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc268-ex「Taboo」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "文字を*へ変える操作は新しい小文字patternを作らないため、元Sに現れる全禁止語区間へ少なくとも一つ変更位置を置けば十分かつ必要である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "同じ開始位置に複数の禁止語が一致するなら、最短区間をhitすればそれを含む全長区間も同時にhitする。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc268-ex「Taboo」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各開始位置と各禁止語を直接比較し、全出現区間を列挙する。",
+        "decision": "rejected",
+        "decisionReason": "|S|と禁止語数・総長の積が大きく、一致判定を全組で行えない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "Sと全Tを連結したsuffix array/LCPを作り、短いTからそのprefixを持つSA区間内の未割当S suffixへ最短長を配り、得た区間群を右端貪欲でhitする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "pattern一致suffixはSA上の連続区間になり、各S開始位置を最初の一回だけ削除するordered setで総割当量を線形に抑えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "suffix の辞書順と共通接頭辞長が部分文字列比較の最初の不一致位置を一意に決める。",
+        "text": "二suffixのLCPはSA順位間のLCP配列最小値なので、RMQと二分探索でpattern Tをprefixに持つsuffix順位区間を求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Taboo 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "区間hittingの最少点数は右端昇順に見て、直前の選択点が区間外ならその右端を選ぶ標準貪欲で得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc268-ex「Taboo」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "multi-pattern occurrence detectionをsuffix-order range assignmentへ変換し、substring destructionをminimum interval stabbingへ帰着する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc268-ex「Taboo」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "suffix arrayとLCPによるpattern一致区間",
+      "trigger": "多数のpatternについて、全text suffixのうちpatternをprefixに持つものをまとめて求めたいとき。",
+      "application": "pattern開始suffixのSA順位からLCP閾値を保つ左右境界をRMQ二分探索する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Suffix Array と LCP",
-      "trigger": "制約と操作を整理したときに Suffix Array と LCP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc268-ex「Taboo」では、主解法候補として、全 suffix を辞書順へ並べ、LCP と区間構造を組み合わせて文字列比較を処理する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で Suffix Array と LCP を問題固有の状態へ適用する。",
+      "name": "短い順の区間割当とordered set削除",
+      "trigger": "各対象へそれを覆う候補の最小サイズだけを割り当て、候補範囲が順序区間になるとき。",
+      "application": "候補をサイズ昇順に処理し、SA区間内の未割当位置をsetから列挙・削除する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "区間を刺す最小点の右端貪欲",
+      "trigger": "全区間へ少なくとも一点を置く最小点数を求めるとき。",
+      "application": "右端が小さい区間から処理し、未hitならその右端を選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "連結文字列では各S,Tの境界を越える偽一致を防ぐため、入力alphabet外のseparatorを入れる。",
+      "reusablePerspective": "複数文字列を一つのsuffix構造へ載せるときは、境界横断substringを無効化するseparator設計を行う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Suffix Array と LCP",
+      "text": "suffix array、LCP配列とRMQ、ordered set、interval stabbing greedyを理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "suffix 長が異なる比較と sentinel の順序を統一する。",
+      "text": "ordered setにはS内開始位置に対応するSA順位だけを入れ、T側やseparator開始suffixを割り当てない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "最短一致長が得られた開始iだけ区間[i,i+len−1]を作り、右端でsortしてgreedyを行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Taboo 型の 文字列の prefix・suffix と一致関係に対し、Suffix Array と LCPを選び、状態と証明を一貫して設計できる。",
+      "text": "多数の禁止substringを全て壊す最小文字変更数を、SA最短一致と区間hittingで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "suffix 長が異なる比較と sentinel の順序を統一する。",
+      "text": "同じ開始位置のpattern出現が包含関係なら、最小区間だけ残してhitting制約を圧縮する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "substringを壊す位置選択は、出現検出部分と区間stabbing部分を独立に設計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

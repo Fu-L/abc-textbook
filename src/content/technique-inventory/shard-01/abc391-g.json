@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc391-g「Many LCS」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "LCS DPの一rowはdp[0]=0かつ隣接差が0または1の非減少列なので、長さN≤10なら差分bitmaskで高々2^N状態しかない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Tへ一文字追加した次rowは、現在rowとその文字だけから標準LCS遷移で一意に決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc391-g「Many LCS」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "LCS rowをN-bit差分maskへ圧縮し、26文字の遷移を前計算して長さMのautomaton DPを行う",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "状態数2^N、遷移26でO(M·26·2^N·N)または前計算後O(M·26·2^N)となり、26^M文字列を一括集計できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全26^M個のTを生成して各LCSを計算する",
+        "decision": "rejected",
+        "decisionReason": "M≤100で指数的に不可能で、LCS rowの状態圧縮を使えていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "maskのpopcountがrow末尾dp[N]、すなわち現在prefix TとSのLCS長になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Many LCS 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "文字cごとのnext maskはrowを復元して一行だけ標準遷移すれば求まり、同じstateから何度でも再利用できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc391-g「Many LCS」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "全maskとc∈a..zについてLCS一行更新後のnext[mask][c]を前計算する。count[0]=1からM回、全state・文字へ遷移加算し、最後にpopcount(state)=kのcountをk別に集める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc391-g「Many LCS」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "DP rowの差分bitmask圧縮",
+      "trigger": "単調列の隣接差が小さい有限集合に限られるとき。",
+      "application": "LCS rowを0/1差分N個で表す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc391-g「Many LCS」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "automaton上の文字列数え上げ",
+      "trigger": "prefix処理の十分状態と各文字transitionが有限なとき。",
+      "application": "全長M文字列をstate count DPで集計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "LCS値全体ではなく、固定短文字列S方向のfrontier形状だけを状態にすると、相手Tの長さ100でも状態数がS長だけで決まる。",
+      "reusablePerspective": "片側が短いsequence DPでは、長い側prefixごとのDP rowを正規化・差分圧縮してautomaton化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "LCSの標準DPとbitmask状態圧縮を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "next row更新は同一row内の左遷移を使うためj順を守る。最後の分類はmask値でなくpopcountで行い、mod加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Many LCS 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "26^M文字列のLCS長分布を、LCS frontier automatonの2^N状態DPで数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "N≤4,M≤4で全Tを列挙し、同文字を含むS・全異なるSについてnext maskとLCS長分布をfull DPと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

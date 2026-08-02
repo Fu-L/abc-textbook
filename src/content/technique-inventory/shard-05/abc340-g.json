@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc340-g「Leaf Color」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "頂点数2以上の連結誘導subtreeは少なくとも二つのleafを持ち、その共通色cは一意である。色cを固定すると、使われ得るbranch端は色c頂点だけで、必要な分岐関係はそれらとLCAからなるvirtual treeへ圧縮できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc340-g「Leaf Color」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "色ごとにvirtual treeを構築し、leaf条件を数える木DPを行う",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "色cの出現数mに対しO(m)頂点へ縮約でき、全色のvirtual treeサイズ総和をO(N)に抑えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各色について元のN頂点tree全体をDPする",
+        "decision": "rejected",
+        "decisionReason": "色数がO(N)あり、合計O(N^2)になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "木には閉路がないため、親辺を除く部分木が独立し、帰納法で子の最適値または個数を合成できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Leaf Color 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "virtual treeで親辺も選ばれるopen状態g_vを考える。子branch選択積P=∏(1+g_child)、ちょうど一子を選ぶ和Q=Σg_childとすると、親接続時は子0ならvがleafなのでg_v=(P-1)+[A_v=c]。vをtopmostとする閉subtreeは子1の時だけvの色条件が必要で、(P-1-Q)+[A_v=c]Qとなる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc340-g「Leaf Color」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "元treeをEuler tourしLCA前計算する。各色cの頂点をtin順に並べ隣接LCAを追加・再sortしてstackでvirtual treeを作る。postorderでP,Q,gを計算し、各vのclosed countを色cの答えへ加算する。全色分のsize≥2 subtree数を合計し、degree 0で条件を満たすN個のsingletonを一度だけ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc340-g「Leaf Color」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "virtual tree",
+      "trigger": "特定色の頂点間の祖先・分岐関係だけが必要で、全元頂点を色ごとに走査したくない。",
+      "application": "対象頂点と隣接Euler順LCAを残し、元pathを圧縮辺にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "根付き木と木 DP",
-      "trigger": "制約と操作を整理したときに 根付き木と木 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc340-g「Leaf Color」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 根付き木と木 DP を問題固有の状態へ適用する。",
+      "name": "境界degreeを持つ木DP",
+      "trigger": "connected subtreeのleafだけにmark条件があり、親辺を選ぶかで頂点degreeが変わる。",
+      "application": "親へopenな状態とtopmostで閉じる寄与を分け、選択child数0・1・2以上を積と一次和で集計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "圧縮辺内部の頂点は選ばれるならdegree 2でleafにならず、valid subtreeのtopmost leafは色c頂点、branch頂点はLCAなのでvirtual tree上の選択だけで元subtreeを一意に表せる。",
+      "reusablePerspective": "path内部が制約対象外のdegreeになる場合、terminalとbranching LCAだけを残す圧縮が数え上げも保つ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "根付き木と木 DP",
+      "text": "Euler tourとLCA、virtual tree構築、積型tree DP、modular counting。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "同色頂点が一つの場合もvirtual treeを作れるようにし、singletonは色ごとに重複加算せず最後にNを足す。P,Qの更新順とmod減算を正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Leaf Color 型の 頂点と辺からなる状態グラフに対し、根付き木と木 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "連結な非空誘導subtreeで、degree 1の全頂点が同色となるvertex subset数をmod 998244353で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "N=1、pathで両端同色/異色、starで選ぶleaf色、同色頂点一つ、virtual edgeが長い例を全subset列挙と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

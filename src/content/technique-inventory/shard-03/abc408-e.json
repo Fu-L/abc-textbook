@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc408-e「Minimum OR Path」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "mask x に含まれる bit だけをもつ辺、すなわち w OR x=x の辺だけで 1 から N へ到達できれば、その経路の OR も x の submask である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "到達可能な mask の集合は bit を追加する方向に単調であるため、上位 bit から 0 にできるか試すことで数値として最小の mask を確定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc408-e「Minimum OR Path」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全30 bitを立てた mask から上位 bit を順に仮消去し、許可辺だけの DSU connectivity が保たれるなら消去を確定する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各判定は edge label が候補 mask の submask かを調べて DSU で結ぶだけで、全体 O(30(N+M)α(N)) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各頂点に数値として最小の OR 値を一つだけ持つ Dijkstra 風緩和",
+        "decision": "rejected",
+        "decisionReason": "数値が小さい mask が bit 集合として別 mask の subset とは限らず、途中の最小値一つが将来の辺との OR に対して常に優越するとは限らない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+        "text": "simple path 条件は connectivity 判定を妨げない。許可辺で walk があれば cycle を除いて simple path にでき、その OR は増えない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Minimum OR Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "ある候補 x が可能なら x に bit を足した mask も同じ経路を許すので、lexicographic な bit 最小化と同様に高位から貪欲決定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc408-e「Minimum OR Path」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "ans=(1<<30)-1 とする。b=29..0 について cand=ans without bit b を作り、(w_i|cand)==cand の辺だけで DSU を再構築する。1,N が連結なら ans=cand とし、最後の ans を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc408-e「Minimum OR Path」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "bit ごとの貪欲最小化",
+      "trigger": "実行可能 mask が bit 追加に対して上向き閉集合で、数値最小を求めるとき。",
+      "application": "最上位から各 bit を外した候補の実行可能性を判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "greedy choice と交換論法",
-      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc408-e「Minimum OR Path」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "name": "submask 制約の connectivity",
+      "trigger": "path 上の全 edge label の OR を指定 mask 以下に抑えたいとき。",
+      "application": "label の立っている bit が mask にすべて含まれる辺だけ残して連結性を見る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "DSU",
+      "trigger": "同じ edge filter で無向グラフの二点連結性だけ判定したいとき。",
+      "application": "候補 mask ごとに初期化し、許可辺の端点を union する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "OR の値を path cost として直接比較せず、「この bit 集合だけで通れるか」という decision problem にすると単調性が現れる。",
+      "reusablePerspective": "bitwise 集約量の最小化では、候補 mask が許可する要素集合を作り、実行可能性 oracle と上位 bit 貪欲を組み合わせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "greedy choice と交換論法",
+      "text": "bitwise OR と submask 判定、無向グラフの連結性、DSU を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "label は bit 0..29 だけなので初期 mask を正確に 2^30-1 とする。各 bit 判定で DSU を初期化し直し、禁止 bit を一つでも含む辺を混ぜない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Minimum OR Path 型の 頂点と辺からなる状態グラフに対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "text": "最大 2×10^5 辺のグラフで、path edge label OR の数値最小値を30回の連結性判定で得られる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "重み0だけの path、低位bitの少ない値と高位bitのある値が競合する path、bridge に特定bitが必要な例を全 simple path 列挙と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

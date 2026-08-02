@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc223-g「Vertex Deletion」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "頂点 v を消しても最大マッチング数が変わらないことは、元の木に v を使わない最大マッチングが存在することと同値である。候補ごとに木DPをやり直すと二乗時間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc223-g「Vertex Deletion」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各頂点を根とした葉側からの貪欲マッチングで根が未使用になるかを判定し、その判定を全方位木DPで全ての根へ伝播する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "木では未使用の子があれば親と組にする後順の貪欲法が最大マッチングを作り、削除可能性が最終的な根の未使用状態だけに現れる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各頂点を実際に削除し、残った森の最大マッチングを木DPで再計算する。",
+        "decision": "rejected",
+        "decisionReason": "一回の判定に木全体を走査するため N 個の削除候補で二乗時間となり、N=2×10^5 に間に合わない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+        "text": "根から遠い順に、白い子があればその子と親をマッチして親を黒にする手順は、各部分木で作れる最大本数を失わない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Vertex Deletion 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "この貪欲処理後に根が白なら最大マッチングは根を使わずに達成され、根を削除しても最大本数が保たれる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc223-g「Vertex Deletion」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "有向辺の反対側を処理したときの白黒状態を木DPで求め、親側と子側の寄与をrerootして、各頂点を根にしたとき白で終わる頂点を数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc223-g「Vertex Deletion」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "木の最大マッチングの葉側貪欲",
+      "trigger": "木のマッチングで、葉側から局所的に辺を確定しても循環による競合が起きないとき。",
+      "application": "未使用の子を持つ親を一つの子と結び、部分木ごとの最大本数と根の使用可否を同時に管理する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最大流・最小カット定理",
-      "trigger": "制約と操作を整理したときに 最大流・最小カット定理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc223-g「Vertex Deletion」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 最大流・最小カット定理 を問題固有の状態へ適用する。",
+      "name": "全方位木DP",
+      "trigger": "ある頂点を根とした判定を全頂点について求め、隣接部分木の要約を根の移動時に再利用できるとき。",
+      "application": "各方向の白黒要約を合成し、根を一つずつ試す代わりに全頂点の根状態を一括計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "削除後の値を直接比較せず、『最大マッチングの中にその頂点を使わないものがあるか』へ言い換えると、根の白黒一値で判定できる。",
+      "reusablePerspective": "最適値を保つ要素削除は、その要素を避けた最適解の存在として捉え、DPに使用・不使用状態を持たせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
+      "text": "木の最大マッチングと葉からの貪欲構成",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "最大流・最小カット定理",
+      "text": "全方位木DPと隣接寄与の合成",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "次数の大きい頂点でも子を除いた状態を定数時間で作れるよう、白い隣接方向の個数など必要な集約量だけを保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Vertex Deletion 型の 根付き木・部分木・パスの関係に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。",
+      "text": "木の各頂点について、最大マッチングを保ったままその頂点を避けられるかをrerootingで判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "『削除しても最適値が同じ』を見たら、削除をシミュレートする前に、その要素を使わない最適解の存在へ言い換える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc430-f「Back and Forth Filling」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "L/R 制約から各整数 i が置かれ得る順位は穴のない一つの区間になる。その両端は i の左右に連続する同方向の文字列長だけで決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc430-f「Back and Forth Filling」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各 i について左右の連続 L/R 長を前計算し、可能順位区間 [l_i,r_i] を公式から求めて差分配列へ加算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全 i の区間を O(1) で求め、各順位に置ける整数数を累積和で O(N) 集計できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "制約を満たす全順列を生成し、各整数の出現順位を記録する。",
+        "decision": "rejected",
+        "decisionReason": "可能な並べ方が指数的に増え、N が大きい場合は列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+        "text": "下限 l_i は左側で i より前を強制される連続 R 数と、右側で i より前を強制される連続 L 数に 1 を加えた値である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Back and Forth Filling 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "上限 r_i は N から、左側の連続 L 数と右側の連続 R 数を引いた値である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "連続制約が途切れた外側の列は i の左右どちらへも挿入できるため、l_i と r_i の間の全順位が実現できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc430-f「Back and Forth Filling」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "S の各位置から左・右へ続く L と R の run 長を四配列で前計算する。i ごとに l_i=leftR(i-1)+rightL(i)+1、r_i=N-leftL(i-1)-rightR(i) を求め、差分[l_i]++, 差分[r_i+1]-- として順位別個数を復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc430-f「Back and Forth Filling」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "連長の前計算",
+      "trigger": "各位置の答えが左右へ連続する同一文字数で決まるとき。",
+      "application": "左右走査で L/R それぞれの run 長を持ち、全 i の境界を定数時間で出す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "累積和と差分",
-      "trigger": "制約と操作を整理したときに 累積和と差分 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc430-f「Back and Forth Filling」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 累積和と差分 を問題固有の状態へ適用する。",
+      "name": "区間加算の差分配列",
+      "trigger": "各対象が連続した答え位置区間すべてへ 1 寄与するとき。",
+      "application": "可能順位 [l_i,r_i] を二点更新し、最後の累積和で各順位の候補数を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "局所的な大小制約が連鎖して i の前後を強制するのは、i に接する同方向 run の範囲だけである。",
+      "reusablePerspective": "各対象の実現可能集合が区間になると証明できれば、対象×位置の判定を区間加算へ圧縮できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "累積和と差分",
+      "text": "L/R による相対順序制約、連続区間の前計算、差分配列、構成可能性の区間証明を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "i=1,N では存在しない S_0,S_N の run 長を 0 とする。順位は 1-indexed の公式に合わせ、r_i+1 の番兵領域を確保する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Back and Forth Filling 型の 盤面上の位置と局所遷移に対し、累積和と差分を選び、状態と証明を一貫して設計できる。",
+      "text": "相対順序制約下で各順位に置ける整数の個数を、可能順位区間と差分配列で線形時間に集計できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "l_i,r_i の四つの run の方向と開始位置を例で照合し、区間内の全順位が実現可能である理由を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

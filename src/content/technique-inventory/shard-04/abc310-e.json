@@ -17,67 +17,87 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc310-e「NAND repeatedly」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "右端 i を固定すると、各左端からの NAND の畳み込み結果は 0 か 1 の二種類しかない。新しい bit を右へ付けたとき、必要なのは各結果の個数であって左端そのものではない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "NAND は入力 bit が 0 なら過去の結果をすべて 1 にし、1 なら過去の 0/1 を 1/0 に反転させるため、二個の count を定数時間で更新できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc310-e「NAND repeatedly」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。",
+        "approach": "各右端で NAND 結果が 0/1 になる部分文字列数だけを持ち、新しい文字による写像で更新する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "結果空間が二値に閉じ、全左端の状態を同値類二つへ完全に集約できるので O(N) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全区間について左から NAND を計算し直して 1 になるものを数える。",
+        "decision": "rejected",
+        "decisionReason": "区間数だけで Θ(N²) あり、N=10^6 の制約を満たせない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "前段で結果 r だった各部分文字列は append した bit b により r NAND b へ一斉に移るので、個数の遷移として扱える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "NAND repeatedly 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "長さ 1 の新しい部分文字列は演算を行わず bit 自身が値になるため、既存区間の写像とは別に一個加える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc310-e「NAND repeatedly」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。",
+      "text": "zero,one を直前位置で終わる部分文字列の結果別個数とする。b=0 なら (zero,one)=(1,zero+one)、b=1 なら (zero,one)=(one,zero+1) と更新し、毎回 one を答えへ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc310-e「NAND repeatedly」では、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。この状態表現から答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "終点を伸ばす区間 DP の集約",
+      "trigger": "全部分配列を数えるが、末尾要素の追加後の状態が小さい有限集合に閉じるとき。",
+      "application": "左端を列挙せず、直前の各状態に属する区間数をまとめて遷移させる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "非結合な NAND でも評価順が問題文で固定されているため、現在値だけを状態にした逐次更新が成立する。",
+      "reusablePerspective": "演算が結合的かより、prefix の評価結果から次結果が決まる有限オートマトンかを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "動的計画法の状態設計",
+      "text": "真理値演算 NAND",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "区間の右端固定による数え上げ",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "更新前の zero と one を同時に参照するので一時変数を使う。答えは部分文字列数規模になるため 64 bit 整数で保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "NAND repeatedly 型の問題に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "N² 個の部分文字列を二状態の個数へ圧縮し、NAND が 1 になる総数を一走査で計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "小さい真理値表を実際に書き、append が各状態をどこへ写すかを確認する。長さ1の区間を遷移へ入れ忘れない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc448-e「Simple Division」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "floor(N/M) mod 10007 を知るには N mod (M×10007) だけで十分である。巨大な連結数 N は各 block c_i 個の repunit を桁 shift して足す形に分解できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc448-e「Simple Division」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "modulus X=M×10007 上で 10^k と repunit R_k を doubling し、各 block を右から shift・加算して N mod X を構成する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N=qM+r をさらに q mod10007 で見ると N mod(M×10007) から floor(r/M) が得られ、repunit doubling は9の逆元なしで任意長を対数時間に計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "R_k=(10^k-1)/9 を modulus 上で9の逆元を掛けて求める。",
+        "decision": "rejected",
+        "decisionReason": "M×10007 と9が互いに素とは限らず逆元が存在しないため、modular division は正当化できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "R_{a+b}=R_a×10^b+R_b なので、(10^len,R_len) の pair は文字列結合と同じ結合則を持つ。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Simple Division 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "X=M×10007 に対する剰余 r を得た後、floor(r/M) が元の商を10007で割った余りになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc448-e「Simple Division」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "2^k 桁について pow10[k] と rep[k] を doubling 前計算する。各 l_i の bit から R_{l_i} と10^{l_i}を組み、現在値を必要桁 shift して c_i R_{l_i} を加える。最終剰余を M で整数除算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc448-e「Simple Division」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "連結演算の doubling",
+      "trigger": "巨大長の同一桁列や文字列値を composite modulus 上で扱うとき。",
+      "application": "長さ2冪の 10乗と repunit を結合則で前計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc448-e「Simple Division」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "商剰余の modulus 拡張",
+      "trigger": "floor(N/M) をさらに K で割った余りだけ欲しいとき。",
+      "application": "N mod(MK) を求め、その剰余を M で割る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "除算結果の剰余は元の数を divisor×modulus で見れば復元できる。",
+      "reusablePerspective": "逆元がない repunit は分数式を避け、桁列結合そのものを associative operation として累乗する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "連結演算の doubling、商剰余の modulus 拡張と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "block の左右順と10^lengthの shift方向を統一する。X≤10^9でも積 c_i×R は64 bitで剰余を取りながら扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Simple Division 型の 文字列の prefix・suffix と一致関係に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な反復桁からなる整数の商の剰余を、合成数 modulus 上の doubling で安全に計算できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "N=qM+r を mod M×10007 で展開して商復元式を確認し、R_{a+b} の結合順を短い桁列で試す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

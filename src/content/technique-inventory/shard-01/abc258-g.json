@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc258-g「Triangle」では、主解法候補として、真偽状態を machine word の bit 列へ詰め、集合遷移を bit 演算で並列化する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "辺(i,j)を一つ固定すると三角形の第三頂点kはiとjの共通隣接頂点であり、その個数は隣接bitsetのANDのpopcountで得られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc258-g「Triangle」では、主解法候補として、真偽状態を machine word の bit 列へ詰め、集合遷移を bit 演算で並列化する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各辺について隣接bitsetの積集合を数える",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "N頂点の隣接行を64ビット語へ圧縮し、O(N^2)組の共通隣接数を語単位で求めればN=3000を処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "三頂点組を全て通常ループで調べる",
+        "decision": "rejected",
+        "decisionReason": "約N^3/6組を一つずつ判定し、N=3000では遅い。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各 bit が元の一状態に対応し、shift・論理演算が元の遷移を成分ごとに同時実行する。",
+        "text": "i<jかつA_ij=1の組だけを調べ、popcount(row_i AND row_j)を足すと、各三角形はその三辺ごとにちょうど3回数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Triangle 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "隣接行列の一行を集合のbitsetとみなすと、共通隣接集合の積がワード並列ANDへ置き換わる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc258-g「Triangle」では、主解法候補として、真偽状態を machine word の bit 列へ詰め、集合遷移を bit 演算で並列化する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "各頂点の隣接行をbitsetとして保存する。全i<jで辺がある場合だけ(row_i & row_j).count()を合計し、各三角形の三重計数を除くため3で割る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc258-g「Triangle」では、主解法候補として、真偽状態を machine word の bit 列へ詰め、集合遷移を bit 演算で並列化する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "bitset集合演算",
+      "trigger": "多数の頂点対について共通隣接頂点数を求めたい。",
+      "application": "隣接集合を64ビット語列にし、ANDとpopcountで積集合サイズを数える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "bitset による集合演算",
-      "trigger": "制約と操作を整理したときに bitset による集合演算 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc258-g「Triangle」では、主解法候補として、真偽状態を machine word の bit 列へ詰め、集合遷移を bit 演算で並列化する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で bitset による集合演算 を問題固有の状態へ適用する。",
+      "name": "辺を基準にした三角形数え上げ",
+      "trigger": "三角形を頂点三重ループ以外の形で数えたい。",
+      "application": "各辺へ共通隣接頂点を付け、一定の重複数で最後に割る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "三角形条件の三つの辺のうち一辺を外側で固定すると、残り二辺は二つの隣接集合の積というbitset向きの演算になる。",
+      "reusablePerspective": "小さめNの密グラフ部分構造は、隣接集合の論理演算で64頂点ずつ並列判定できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "隣接行列をbitsetへ変換し、AND結果のpopcountを取れる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "bitset による集合演算",
+      "text": "同じ構造を辺ごとに数えたときの重複回数を説明できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "末尾 word の不要 bit と shift が word 境界をまたぐ場合を処理する。",
+      "text": "辺でない(i,j)は加算せず、i<jだけ走査する。この数え方では各三角形を3回数えるので6ではなく3で割り、合計は64ビット整数で持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Triangle 型の 頂点と辺からなる状態グラフに対し、bitset による集合演算を選び、状態と証明を一貫して設計できる。",
+      "text": "単純無向グラフに含まれる三角形の個数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "末尾 word の不要 bit と shift が word 境界をまたぐ場合を処理する。",
+      "text": "Nが小さい三頂点全列挙と比較し、三角形なし、完全グラフ、共有辺を持つ複数三角形、3割と6割の数え方の違いを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

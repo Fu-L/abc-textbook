@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc388-g「Simultaneous Kagamimochi 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "上段として連続K個i=L..L+K-1を使うとき、各iに対して条件を満たす最小下段index B_iを前計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "必要な右端はL+K-1+max(K,max_{i∈[L,L+K)}(B_i-i))と表せ、この式はKについて単調非減少である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc388-g「Simultaneous Kagamimochi 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "B_i-iのrange maximumをsegment treeで持ち、queryごとに最大Kをtree上で二分探索する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "K候補の可否を区間最大だけで判定でき、segment treeのmax_right等を用いれば各query O(log N)、全体O(N+Q log N)となる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各query区間を取り出してE問題のtwo-pointerを最初から実行する",
+        "decision": "rejected",
+        "decisionReason": "区間長に比例し、Q=2×10^5ではΘ(NQ)になり得る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+        "text": "B_iは昇順Aに対するtwo-pointerで全iまとめてO(N)計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Simultaneous Kagamimochi 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "max(B_i-i,K)は、下段が上段K個の直後以降で重複しない条件と、各上餅のサイズ条件を同時に表す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc388-g「Simultaneous Kagamimochi 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "two-pointerで各iの最小適合index B_iを求め、D_i=B_i-iのrange-max segment treeを作る。query(L,R)では可否式の左辺≤Rとなる最大Kをmonotonic searchする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc388-g「Simultaneous Kagamimochi 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "必要位置のoffset化",
+      "trigger": "各itemの最小partner indexが単調列から求まるとき。",
+      "application": "B_i-iを持ち、連続block全体の必要余白をrange maxにする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "セグメント木と monoid",
-      "trigger": "制約と操作を整理したときに セグメント木と monoid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc388-g「Simultaneous Kagamimochi 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で セグメント木と monoid を問題固有の状態へ適用する。",
+      "name": "segment tree上の二分探索",
+      "trigger": "prefixを伸ばした集約値に単調な可否条件があるとき。",
+      "application": "max_rightで最大Kを対数時間に特定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "query内のpairingを毎回作らず、上段各位置が要求する下段offsetの最大値一つへ縮約する。",
+      "reusablePerspective": "連続区間から同数pairを作るqueryでは、各要素の最小partnerを前計算し、区間のworst offsetを集約する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
+      "text": "two-pointerとrange maximum segment treeを使える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "セグメント木と monoid",
+      "text": "max_right等のmonoid searchを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "B_iがN外なら十分大きいsentinelにする。0/1-indexと半開区間[L,L+K)を統一し、K=0を常に可能とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Simultaneous Kagamimochi 2 型の 区間端点と包含関係に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。",
+      "text": "部分列queryごとの最大鏡餅数を、最小partner offsetのrange maxへ変換して対数時間で答えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "小区間を全matching列挙し、B_iが範囲外、Kが区間長/2、等号境界のqueryで可否式とsegment-tree searchを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

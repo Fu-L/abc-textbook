@@ -17,77 +17,103 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc284-e「Count Simple Paths」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "数える対象は頂点1から始まる単純pathであり、DFS中の現在の再帰stackがそのまま1本のpathを表す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "答えは10^6へ達した時点で打ち切ってよいので、指数個になり得る単純pathを最後まで列挙する必要はない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc284-e「Count Simple Paths」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "現在path上の頂点だけをvisitedにし、進入時に1本を数えて未訪問neighborへDFSし、復帰時にunmarkする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "単純性を保ちながら異なるpathで同じ頂点を再利用でき、上限到達時には探索全体を直ちに終了できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "一度訪れた頂点を探索終了までvisitedのままにする通常の到達性DFS。",
+        "decision": "rejected",
+        "decisionReason": "同じ頂点へ別の単純pathから到達する場合まで捨て、path本数を過小評価する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "上限を考えず全単純pathを列挙してから10^6との最小値を取る。",
+        "decision": "rejected",
+        "decisionReason": "単純path数は指数的になり得て、答えが早く上限へ達する入力でも探索が終わらない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各未訪問状態を一度だけ展開することで、到達可能な辺と頂点を漏れなく処理できる。",
+        "text": "頂点vへ入った瞬間のstackは始点1からvまでの新しい単純pathなので、長さ0のpathも含めて各呼出しを1回数えればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Count Simple Paths 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "visitedはgraph全体の確定情報ではなく現在pathの禁止集合であり、backtrack時の解除が数え上げの核心になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc284-e「Count Simple Paths」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "visited[1]=trueとしてDFS(1)を始め、各呼出しの冒頭でcountを1増やす。countが10^6なら終了flagを立てて全再帰から戻る。各neighborについて未訪問ならmarkして再帰し、戻ったらunmarkする。最後にcountを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc284-e「Count Simple Paths」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "backtracking DFS",
+      "trigger": "単純pathや重複なし列を列挙し、使用済み集合が現在候補にだけ依存するとき。",
+      "application": "再帰の前後で頂点をmark/unmarkしてpath上の重複だけを禁止する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "深さ優先探索",
-      "trigger": "制約と操作を整理したときに 深さ優先探索 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc284-e「Count Simple Paths」では、主解法候補として、状態またはグラフを DFS し、連結性・順序・部分問題を再帰的に集約する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 深さ優先探索 を問題固有の状態へ適用する。",
+      "name": "上限付き列挙",
+      "trigger": "必要な答えがmin(候補数,C)で、Cが十分小さいとき。",
+      "application": "C件見つけた時点で終了を全再帰へ伝播する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "最大次数10なので、10^6個を見つけるまでの各DFS状態から試すedge数も小さく抑えられる。",
+      "reusablePerspective": "列挙数にcapがある探索では、訪問状態数だけでなく各状態の分岐確認量も合わせて実行可能性を判断する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "DFSと再帰stack",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "深さ優先探索",
+      "text": "backtrackingによる使用済み集合の復元",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "終了flagまたはcount判定を各loopと再帰復帰直後に確認し、10^6到達後に別branchへ進まない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "頂点1だけのpathも数えるため、edgeを選ぶ前に現在状態を加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Count Simple Paths 型の 頂点と辺からなる状態グラフに対し、深さ優先探索を選び、状態と証明を一貫して設計できる。",
+      "text": "頂点1から始まる単純path数を、10^6を上限としてbacktracking DFSで数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度上限、親辺、訪問色を区別して無限再帰を防ぐ。",
+      "text": "三角形で1→2→3と1→3がともに数えられることを手計算し、2から戻った後に頂点をunmarkする位置と上限終了の伝播を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

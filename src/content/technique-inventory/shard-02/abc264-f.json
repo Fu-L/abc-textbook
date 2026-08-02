@@ -1,15 +1,15 @@
 {
   "problemId": "abc264-f",
   "sourceRevisionIds": [
-    "source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694",
-    "source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6"
+    "source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6",
+    "source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694"
   ],
   "evidence": [
     {
       "id": "evidence-official-analysis",
       "sourceRevisionIds": [
-        "source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694",
-        "source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6"
+        "source-abc264-f-problem-a49a4475102768a9fa99c60715edf21004bb6dbaca713d6223d205dd858d48c6",
+        "source-abc264-editorial-4588-1142d2110429e09e1541685a676a3524b7a47216f3b07f87a2ec53a643d1c694"
       ],
       "rationale": "同一taskの公式問題文と公式解説から、観察・解法・成立理由を追跡する。"
     }
@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc264-f「Monochromatic Path」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "同じ行・列を二回反転する意味はなく、各行flip r_i と各列flip c_j の0/1だけを決めれば最終色は A_{i,j} XOR r_i XOR c_j になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "右下へ進むpathでは新しい行へ初めて入るのは下移動、新しい列へ初めて入るのは右移動なので、その瞬間に対応flipを決められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc264-f「Monochromatic Path」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全ての行・列の反転集合を列挙し、単色pathの存在を調べる。",
+        "decision": "rejected",
+        "decisionReason": "反転選択が2^{H+W}通りあり、path探索以前に列挙不能である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "目標色 t を固定し、dp[i][j][r][c] を現在行・列のflipが r,c で単色pathを作る最小費用として右・下へ遷移する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "次セルで既知なのは共有する現在行または列のflipだけで、新規側のflipは目標色条件から選べるため4状態へ圧縮できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "下へ進むと列flip c は保存され、新行flip r' を選んで A_{i+1,j} XOR r' XOR c=t を満たし、r'=1ならR_{i+1}を払う。右移動も対称である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Monochromatic Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "白pathと黒pathは目標色 t=0,1 の同じDPで求められ、その小さい方が答えになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc264-f「Monochromatic Path」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "global row/column XOR choices を monotone path の frontier state へ局所化し、cell×current-line parities の shortest-path DP にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc264-f「Monochromatic Path」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "行列反転の XOR モデル",
+      "trigger": "行・列を反転する操作があり、各マスへの作用が二つの選択のparityで決まるとき。",
+      "application": "各操作有無をbitにし、最終セル値を元値とのXORで表す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc264-f「Monochromatic Path」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "単調path上のfrontier DP",
+      "trigger": "右下へ進む際、過去の行列選択のうち現在行・列だけが次セルに影響するとき。",
+      "application": "現在行flipと現在列flipだけを状態に残し、新しい行・列へ入る時に費用を払う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "path外の行列反転は単色pathの成立に寄与せず費用が正なので、DPで初めて訪れる行・列だけを決めれば十分である。",
+      "reusablePerspective": "存在する一経路だけが重要な正費用操作では、経路に接しないglobal decisionsを最適解から除ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "XORによる反転表現と、格子の右下単調path DPを理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "始点では r,c の4通りを試し、A_{1,1} XOR r XOR c=t のものへ rR_1+cC_1 を設定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "費用和は64 bit整数、到達不能値は十分大きいINFとし、必要なら行ごとのrolling arrayでメモリを抑える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Monochromatic Path 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "有料の行列反転後に存在する単色単調pathの最小費用を、各セル4状態のDPで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "行列flip問題では、現在セルの最終色を決めるparityのうち次の移動へ持ち越すものだけを状態に残す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "単色条件は隣接一致として曖昧に持たず、目標色を0/1で固定すると遷移条件を単純化できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

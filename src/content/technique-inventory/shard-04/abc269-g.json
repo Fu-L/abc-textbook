@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc269-g「Reversible Cards 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "front-side sum S_Aからcard iをflipするとvisible sumはC_i=B_i−A_iだけ変わるため、各targetは差分のsubset sumで表せる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Σ|C_i|≤Σ(A_i+B_i)=Mなので、非零な異なる差分値の種類数と、そのmultiplicityをbinary decompositionした総group数はO(√M)に抑えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc269-g「Reversible Cards 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "cardを一枚ずつ処理するminimum-card subset-sum DPを行う。",
+        "decision": "rejected",
+        "decisionReason": "状態幅O(M)の遷移をN回行うためO(NM)となる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "同じCのcardsをまとめ、個数をpowers of twoとremainderへ分割して0/1 knapsack itemsに変換する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "0からmultiplicityまでの任意個数をgroup subsetで表せ、全group数O(√M)に対するDPでO(N+M√M)となる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "multiplicity nを1,2,4,…と残余へ分ければ、0,…,nの全個数をgroup sizesのsubset sumとして表現できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Reversible Cards 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "size sのgroupは差分sC、flip cost sの一つの0/1 itemなので、DP値を選択枚数の最小値としてそのまま更新できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc269-g「Reversible Cards 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "equal flip deltasをfrequency compressionし、binary-split bounded knapsackへ帰着して全visible sumsのminimum flipsを同時に得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc269-g「Reversible Cards 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "個数制限付きknapsackの二進分割",
+      "trigger": "同じweight/costのitemが多数あり、0から上限まで任意個選べるとき。",
+      "application": "同じCのfrequencyを二進groupへ分け、各groupを一度だけ選べるitemとしてminimum-cost DPする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc269-g「Reversible Cards 2」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "L1 budgetによる種類数の評価",
+      "trigger": "整数値の絶対値総和に上限があり、異なる値ごとの処理回数を評価したいとき。",
+      "application": "Σ|C_i|≤Mからfrequency階層ごとの異なるCの数を評価し、binary groups総数をO(√M)と示す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "答えkはDP index k−S_Aに対応し、Cが負でも差分軸をoffset付き配列にすれば同じsubset-sum transitionで扱える。",
+      "reusablePerspective": "二択の総和問題は一方をbaselineとし、選択変更量のsubset sumへ移すと目的値とcostを分離できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "minimum-cost subset-sum DP、frequency counting、multiplicityのbinary decompositionを扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "C=0のcardはflipしてもsumを変えず最小枚数を改善しないため、group化せず無視できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "正負両方のshiftで同一itemを二重使用しないよう、各groupごとに更新元DPを分離するか走査方向を厳密に選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Reversible Cards 2 型の 区間端点と包含関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "全k=0,…,Mについて到達可能性とminimum flip countをbounded-knapsack DPで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "二面cardの総和はfrontをbaselineにしてflip deltaだけを集め、同値deltaのfrequencyを活用する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "値の絶対値総和が小さい制約は、DP幅だけでなく異なる値やbinary groupsの総数評価にも使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

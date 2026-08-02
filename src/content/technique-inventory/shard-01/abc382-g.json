@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc382-g「Tile Distance 3」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "敷き詰めは回転・反転・K 単位の平行移動で同型になり、始点を一つの基本ブロックへ正規化できる。遠方への距離は対角ブロックを一つ縮めるごとに一定だけ減る再帰性を持つ。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc382-g「Tile Distance 3」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "対称変換で座標を標準形へ移し、始点の局所 offset と終点 tile index を飽和させた有限ケースへ分類し、ブロック差の再帰式と基底表で距離を O(1) 算出する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "K や座標は10^16でも、距離に影響する局所量は max(S_y,K-3)、min(k,2)、parity 等へ縮約でき、遠距離分は閉形式で剥がせる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各 tile を頂点とするグラフを作り、始点から BFS する。",
+        "decision": "rejected",
+        "decisionReason": "座標範囲が10^16で tile 数は無限に近く、局所探索だけでは遠方 query を処理できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "deque の先頭距離は非減少で、重み 0 の緩和を前、重み 1 を後へ置くことで Dijkstra と同じ確定順を保つ。",
+        "text": "i,j>0 の一般位置では (i,j) から (i-1,j-1) へ縮約すると最短距離がちょうど2減るため、対角方向の大部分を一括処理できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Tile Distance 3 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "始点が境界から十分離れた offset や終点 tile 内の k≥2 は到達距離を変えず、少数の境界ケースだけ残る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc382-g「Tile Distance 3」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "符号・軸・平行移動を使って 0≤Sx,Sy<K、Tx,Ty≥0 へ正規化し終点 tile (i,j,k) を特定する。min(i,j) などを再帰式で引き、残る i=0/j=0/(1,1) の基底ケースを K=2、parity、飽和 offset ごとの式で評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc382-g「Tile Distance 3」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "0-1 BFS",
-      "trigger": "制約と操作を整理したときに 0-1 BFS の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc382-g「Tile Distance 3」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 0-1 BFS を問題固有の状態へ適用する。",
+      "name": "周期幾何の対称性・再帰縮約",
+      "trigger": "巨大周期タイル上の最短距離で局所形が繰り返されるとき。",
+      "application": "標準領域へ正規化し、一定距離を持つブロック移動を閉形式化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "casework を座標値そのものではなく、距離が変わる境界までの飽和値と parity に整理する。",
+      "reusablePerspective": "愚直 0-1 BFS は小座標の oracle として使い、有限ケース式の検証へ回す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "0-1 BFS",
+      "text": "周期グラフ、対称変換、格子 parity、再帰式による距離縮約、場合分け検証を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。",
+      "text": "負座標の floor division を数学的床で実装し、軸交換・反転後の tile orientation を揃える。K=2 と基底領域は専用ケースを網羅する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Tile Distance 3 型の 頂点と辺からなる状態グラフに対し、0-1 BFSを選び、状態と証明を一貫して設計できる。",
+      "text": "巨大座標の周期タイル距離を、対称性・飽和局所状態・定数個の基底式へ圧縮して求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。",
+      "text": "一般位置の (i,j)→(i-1,j-1)+2 をまず証明し、残った有限ケースは小範囲 BFS と全列挙比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

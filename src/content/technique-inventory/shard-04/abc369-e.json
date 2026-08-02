@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc369-e「Sightseeing Tour」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "指定橋以外の移動には制約がないので、全頂点pairの通常最短距離を前計算すれば、指定橋間の移動は端点間距離の参照に置き換えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "queryで必須な橋は高々5本であり、最適walkはそれらを渡る順列と各橋を渡る向きの全候補から選べる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc369-e「Sightseeing Tour」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全点対最短距離を前計算し、各queryで必須橋の順列と向きを列挙して接続距離を評価する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "大きいgraph部分を共通距離表へ圧縮し、query固有の組合せは小さいKだけに限定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "queryごとに「何本の指定橋を通過済みか」を状態にして元graph上を最短路探索する。",
+        "decision": "rejected",
+        "decisionReason": "最大3000 queryで大きいgraph探索を繰り返し、K≤5だから可能な小さな順序列挙を活かせない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "許可する中継頂点集合について帰納し、最適路が新頂点を使う場合と使わない場合を網羅する。",
+        "text": "順番と向きをx_1→y_1,...,x_K→y_Kと固定すれば、費用はdist(1,x_1)+Σ(edgeCost+dist(y_i,x_{i+1}))+edgeCost_K+dist(y_K,N)で一意に最小化される。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Sightseeing Tour 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "指定橋は通常移動中に先に通ってもよいが、最適walkで「必須として数える最初の通過順」を選べば列挙候補に含まれ、距離表利用は正当である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc369-e「Sightseeing Tour」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "text": "Floyd-Warshallでdist[u][v]を全pairについて求める。各queryのK橋indexをpermutationし、各bit maskで端点方向を決め、島1から各橋入口、橋出口から次入口、最後の出口から島Nまでのdistと橋重みを足す。全候補最小を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "online query の計算量設計",
-      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc369-e「Sightseeing Tour」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "name": "全点対最短路による経路segment圧縮",
+      "trigger": "多数queryで少数の必須edge・地点を任意順に訪れるとき。",
+      "application": "制約のない区間をendpoint間distのlookupへ置き換える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Floyd–Warshall 法",
-      "trigger": "制約と操作を整理したときに Floyd–Warshall 法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc369-e「Sightseeing Tour」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で Floyd–Warshall 法 を問題固有の状態へ適用する。",
+      "name": "小Kの順列・向き全探索",
+      "trigger": "必須対象数だけが非常に小さく、順序とorientationが未知なとき。",
+      "application": "permutationとbit maskを直積列挙して各固定caseを評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "元graphの辺数は大きいがN=400なので、query前にmetric closureを作ることでqueryをK個の橋だけの問題にできる。",
+      "reusablePerspective": "static graph上の多数routing queryでは、端点候補が小さくなる前にmetric closureを検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "online query の計算量設計",
+      "text": "Floyd-Warshall法",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Floyd–Warshall 法",
+      "text": "permutation列挙",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "到達不能値同士を加算せず、更新順序 k-i-j を崩さない。",
+      "text": "平行辺があればdist初期化をminにし、dist[i][i]=0とする。橋重みは順序によらず一度ずつ足し、64 bitでINF加算を避ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sightseeing Tour 型の 更新と問い合わせの時系列に対し、Floyd–Warshall 法を選び、状態と証明を一貫して設計できる。",
+      "text": "graph全体の自由移動を距離表へ畳み、各queryを少数必須橋の順序・方向探索として解ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "到達不能値同士を加算せず、更新順序 k-i-j を崩さない。",
+      "text": "K=1で両方向の式を手計算し、開始1・終了Nとの接続を確認する。permutation配列はqueryごとに初期sortして全候補を生成する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

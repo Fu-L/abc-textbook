@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc221-g「Jumping sequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "元座標では各 D_i を x 軸か y 軸のどちらか一方へ使う選択が結び付いている。座標を (u,v)=(x+y,x-y) に変えると、右・左・上・下の各跳躍は (±D_i,±D_i) の四つの符号組に一対一対応する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "この四符号組は u と v の符号を独立に選んだ全組合せなので、目標 (A+B,A-B) へ届く条件は、同じ重み列 D に対する二つの独立な ± subset sum へ分離できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc221-g「Jumping sequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "二つの符号和を通常の subset sum target に変換し、bitset の shift-or DP で到達可能性を求め、選択を復元して各 jump の方向へ戻す。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "総和 S は最大 3.6×10^6 で scalar DP は重いが、bitset なら64個の和を一語で更新でき、二つの target は同じ到達表から復元できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各 jump について四方向を試す二次元 DP を座標ごとに更新する。",
+        "decision": "rejected",
+        "decisionReason": "二次元の到達領域は総距離の二乗規模になり、N=2000 と座標範囲に対して保持できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "一次元 subset sum を bool 配列で一要素ずつ更新する。",
+        "decision": "rejected",
+        "decisionReason": "状態数 S に対して N 回の scalar 更新が必要で、最大約 7.2×10^9 回になるため bitset 高速化が必要である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "S=ΣD_i とすると、二 target は P=(S+A+B)/2、Q=(S+A-B)/2 である。どちらかが整数でない、負、または S 超過なら不可能と先に判定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Jumping sequence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "復元した subset bit (p_i,q_i) は (1,1)=R、(0,0)=L、(1,0)=U、(0,1)=D と元の方向へ戻せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc221-g「Jumping sequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "dp の bit s を先頭から選んで和 s が可能かとして、各 D_i で dp|=dp<<D_i を行う。P,Q の到達を確認し、prefix 履歴または分割統治で各 target の採否列を復元し、二列の bit pair を R/L/U/D に変換して出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc221-g「Jumping sequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "45度座標変換",
+      "trigger": "二次元で各操作が x 軸または y 軸方向を選び、符号選択を分離したいとき。",
+      "application": "(x+y,x-y) へ写して cardinal direction を二つの独立な符号へ変える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc221-g「Jumping sequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "bitset subset sum と復元",
+      "trigger": "重み総和が数百万、要素数も多く、到達可否だけでなく一つの選択列が必要なとき。",
+      "application": "shift-or で到達集合を語並列更新し、prefix 履歴または分割統治再計算で target を逆追跡する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "45度回転後の四方向が単に候補を減らすのではなく、二符号の全直積になるため、二つの subset sum を別々に解いても必ず一つの実方向へ合成できる。",
+      "reusablePerspective": "多次元操作の候補集合が符号や小集合の直積になる座標系を探し、各成分を独立問題へ分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "線形座標変換、±和から subset sum への変形、bitset DP、解の復元",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "P,Q の偶奇・範囲を bitset 参照前に検査する。全 prefix bitset は約900MBと上限に近いので packed storage を使い、余裕が必要なら公式の分割統治復元で履歴を再計算して削減する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Jumping sequence 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "四方向 jump の構成問題を座標変換で二つの subset sum に分離し、bitset 到達判定から方向列まで復元できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "R,L,U,D を (u,v) の符号 pair に書き直し、四組が欠けず重複もしないことを確認してから target 式を再導出する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

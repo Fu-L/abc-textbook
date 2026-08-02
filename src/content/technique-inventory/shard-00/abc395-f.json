@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc395-f「Smooth Occlusion」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "最終sum Hを固定すると削る総量はΣ(U_i+D_i)-NHで構成によらないため、cost最小化は実現可能なH最大化と同値である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各上歯a_iは0≤a_i≤U_iかつ0≤H-a_i≤D_iより区間[max(0,H-D_i),min(U_i,H)]に入り、隣接差≤Xを満たす列の存在判定になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc395-f「Smooth Occlusion」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Hを二分探索し、左から到達可能なa_iの区間を伝播して可否判定する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "Hの可否は下方向に単調で、各位置の可能区間を前区間±XとのintersectionでO(N)更新できるためO(N log maxHeight)で解ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各歯の最終上長を個別にgreedyで最大化する",
+        "decision": "rejected",
+        "decisionReason": "隣接差制約が連鎖するため局所最大選択は将来区間を空にし得て、共通Hも保証しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "判定の真偽が境界の片側で閉じる単調性を示せば、各比較で答えを含む区間を半分に保てる。",
+        "text": "前位置で可能な値が連続区間[l,r]なら、次位置へ差X以内で移れる値全体も[l-X,r+X]という区間である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Smooth Occlusion 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Hが実現できれば適切に上下歯を追加で削って任意の小さいHも実現でき、binary searchの単調性が成立する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc395-f「Smooth Occlusion」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "H候補ごとにpossible=[max(0,H-D_1),min(U_1,H)]から始め、iを進めてpossibleを[possible.low-X,possible.high+X]と歯iの許容区間で交差する。空ならNo。最大Yes Hから総和-NHを出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc395-f「Smooth Occlusion」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "区間到達可能性DP",
+      "trigger": "一次元列で各値が区間制約と隣接Lipschitz制約を満たすか判定するとき。",
+      "application": "到達値集合を一つのintervalとして伝播する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "二分探索と単調性",
-      "trigger": "制約と操作を整理したときに 二分探索と単調性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc395-f「Smooth Occlusion」では、主解法候補として、答え候補に単調な判定問題を定義し、二分探索で境界値を求める。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 二分探索と単調性 を問題固有の状態へ適用する。",
+      "name": "実現可能値最大化の二分探索",
+      "trigger": "目的が共通parameter Hの単調可否と線形に結び付くとき。",
+      "application": "最大feasible Hを探す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "削り方のcostを直接最適化せず、上下和Hを固定すると目的が消え、上歯だけの区間列feasibilityへ変わる。",
+      "reusablePerspective": "総量削減問題では最終総和parameterを固定し、局所変数の可到達区間を調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "二分探索と単調性",
+      "text": "整数二分探索とinterval propagationを実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。",
+      "text": "許容区間下端max(0,H-D_i)、上端min(U_i,H)を使い、交差空判定を等号込みで行う。Σ(U+D)-NHは64 bit整数。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Smooth Occlusion 型の 整数の約数・剰余構造に対し、二分探索と単調性を選び、状態と証明を一貫して設計できる。",
+      "text": "歯の平滑化cost最小化を、共通height最大化と線形時間の区間feasibilityへ分解できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "整数・実数の境界規約、mid の丸め、半開区間の loop 不変条件を固定する。",
+      "text": "N≤7、小heightで全最終U'_iを列挙し、H=0、区間が一点、差がXちょうどのcaseを二分探索判定と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc413-g「Big Banned Grid」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "free-cell graphでsourceからtargetへpathがあることは、各隣接edgeを両端freeなら容量1、どちらかblockedなら0としたnetworkのmax flowが正であることと同値である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "planar max-flow/min-cut dualityにより、到達不能はsource-targetを分ける容量0 cut、すなわち分割した外側face二端子を0-weight dual edgeだけで結ぶpathの存在に一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc413-g「Big Banned Grid」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "障害物に接するcapacity0 primal edgeだけをdual face間のunionとして処理し、二つの外側arc terminalの連結性をDSUで判定する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各障害物は高々4本の隣接edgeを0にするので、巨大なHW個のcell/faceを生成せずO(K)個の関連faceだけhash mapで持てる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "H×W全cellを頂点として通常BFSする",
+        "decision": "rejected",
+        "decisionReason": "H,Wは各2×10^5でHWは4×10^10になり得る一方、障害物は2×10^5個しかなく疎性を使う必要がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+        "text": "外側faceはsource-target間のboundary arcで二つにsplitし、top+right側を一端子、left+bottom側を他端子とする。この二端子を結ぶdual pathがprimalのs-t cutになる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Big Banned Grid 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "horizontal primal edgeの上下face、vertical edgeの左右faceを、そのedgeの少なくとも一端が障害物ならunionする。内部faceは障害物近傍だけ遅延生成すればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc413-g「Big Banned Grid」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "dual terminal U=top/right outer arc、D=left/bottom outer arcを作る。各obstacleと上下左右のgrid内neighborが作るprimal edgeを一度ずつ見て、horizontalなら上・下face、verticalなら左・右faceをDSUで結ぶ。boundary側faceはU/Dへ対応させる。最後にU,Dが同componentならNo、そうでなければYes。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc413-g「Big Banned Grid」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "planar duality",
+      "trigger": "平面graphの二点間path存在を、cutを横切るdual pathで判定したいとき。",
+      "application": "0容量s-t cutを、0-weight dual edgeだけの外側arc間pathへ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最大流・最小カット定理",
-      "trigger": "制約と操作を整理したときに 最大流・最小カット定理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc413-g「Big Banned Grid」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 最大流・最小カット定理 を問題固有の状態へ適用する。",
+      "name": "疎なdual graphのDSU",
+      "trigger": "巨大gridで非零eventが少なく、必要なのが特定edge集合のconnectivityだけのとき。",
+      "application": "障害物に接するedge周辺のfaceだけ座標mapで生成しunionする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "outer face splitting",
+      "trigger": "sourceとtargetが平面graphの外周にあり、s-t cutをdual shortest pathへ写すとき。",
+      "application": "外周をsからtへの二arcに分けて別dual terminalとして扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "free cellを探索する代わりに、障害物が作る0-cost境界がtop/right arcとleft/bottom arcをつなぐかだけを見るため、計算量が面積でなく障害物数になる。",
+      "reusablePerspective": "巨大領域の到達性では、通行可能領域を圧縮するほか、障害物側のseparator connectivityをplanar dualで調べる方向もある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "最大流・最小カット定理",
+      "text": "最大流最小cut、平面dual graph、grid edgeに隣接するfaceの対応、DSUを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "同じprimal edgeを複数回処理してもよいがface座標を一意にmapする。H=1またはW=1では一edgeの両側が二outer terminalになり得る。source/targetは障害物でない保証を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Big Banned Grid 型の 盤面上の位置と局所遷移に対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。",
+      "text": "最大4×10^10 cellのgridでも、20万障害物が作るdual zero-edge connectivityだけから到達可能性を判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "H=1/W=1、source隣接二cellの斜め障害物、top-bottom barrier、top-rightだけを結ぶ非separatorを小grid BFSと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

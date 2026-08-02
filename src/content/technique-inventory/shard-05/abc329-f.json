@@ -17,67 +17,107 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc329-f「Colored Ball」では、各箱の色集合を保持し、小さい集合を大きい集合へ併合する small-to-large merge を行う。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各boxについて必要なのは含まれるcolorの集合で、同colorのballが複数あっても出力への寄与は1である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "query後のbox bはset[a]∪set[b]、box aは空なので、物理containerを交換してから小さいsetを大きいsetへinsertしても論理結果は同じである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "小集合の要素が移動すると所属集合のsizeは少なくとも2倍になるため、各colorの移動回数は対数回に抑えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc329-f「Colored Ball」では、各箱の色集合を保持し、小さい集合を大きい集合へ併合する small-to-large merge を行う。この状態表現から答えを構成する。",
+        "approach": "boxごとにcolor setを持ち、sizeの小さいsetを大きいsetへmergeして必要ならcontainerをswapする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "queryの向きと物理merge方向をhandle交換で分離し、全insert回数をsmall-to-largeで償却できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "常にset[a]の全colorをset[b]へ順にinsertする。",
+        "decision": "rejected",
+        "decisionReason": "大集合aを小集合bへ繰り返し移すquery列で、同じ多数colorを何度も処理する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各boxにN色のboolean arrayを持ってunionする。",
+        "decision": "rejected",
+        "decisionReason": "1 queryあたりN走査と全体N^2 memoryが必要になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "要素が移されるたび所属集合サイズが少なくとも倍になるので、各要素の移動回数は高々対数回になる。",
+        "text": "set[a]が大きいときset[a],set[b]自体をswapすれば、その後smallなaをlargeなbへmergeしても、最終的にunionがbox b、空がbox aになる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Colored Ball 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "重複colorのinsertが集合sizeを増やさない場合も、移動元set size≤移動先set sizeなので要素処理の償却上界は維持される。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc329-f「Colored Ball」では、各箱の色集合を保持し、小さい集合を大きい集合へ併合する small-to-large merge を行う。この状態表現から答えを構成する。",
+      "text": "初期box iのsetへC_iを1つ入れる。query(a,b)でsize(set[a])>size(set[b])なら2つのset handleをswapする。その後set[a]の全colorをset[b]へinsertし、set[a]をclearする。size(set[b])を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "small-to-large merge",
-      "trigger": "制約と操作を整理したときに small-to-large merge の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc329-f「Colored Ball」では、各箱の色集合を保持し、小さい集合を大きい集合へ併合する small-to-large merge を行う。この状態表現から答えを構成する。で small-to-large merge を問題固有の状態へ適用する。",
+      "name": "small-to-large merging",
+      "trigger": "集合union queryが続き、片方containerを空にできるとき。",
+      "application": "常に小集合の要素を大集合へ移す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "logical IDとphysical containerのswap",
+      "trigger": "操作結果の格納先IDが固定だが効率的なmerge方向は逆になり得るとき。",
+      "application": "container handleをO(1)交換して意味を合わせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "「aからbへ移す」という向きはballの論理状態だけの指定で、set objectのidentityには意味がないため、merge前のswapで計算量を最適化できる。",
+      "reusablePerspective": "可変集合問題では外部IDと内部containerをpointerで分離するとsmall-to-largeの向きを自由に選べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "small-to-large merge",
+      "text": "set union",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "small-to-largeの倍増解析",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "集合本体を swap してから小さい側を走査し、移動元を空にする問題仕様を保つ。",
+      "text": "swap後もloop対象が小さい論理set[a]、結果が論理box bのset[b]になる順序を守る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "merge終了後set[a]を必ず空にし、次queryで古いcolorを残さない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Colored Ball 型の問題に対し、small-to-large mergeを選び、状態と証明を一貫して設計できる。",
+      "text": "全ball移動query後のdestination boxのdistinct color数を、償却的なset mergeで出力できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "集合本体を swap してから小さい側を走査し、移動元を空にする問題仕様を保つ。",
+      "text": "a側が大きいqueryでset objectをswapしてからmergeし、最終的なbox aが空・box bがunionになっているかIDを追う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

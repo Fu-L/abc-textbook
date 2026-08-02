@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc232-f「Simple Operations on Sequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "ある要素を増減してから隣と交換する操作は、先に交換して移動先で同じ増減を行う操作へ入れ替えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "したがって全交換を先、全増減を後に行ってよく、最終的に A のどの元要素を B の各位置へ対応させるかという順列を選ぶ問題になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc232-f「Simple Operations on Sequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "A の全順列を列挙し、転倒数による交換費用と B への増減費用を計算する。",
+        "decision": "rejected",
+        "decisionReason": "N＝18 でも N の階乗個の順列は列挙できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "B の左から対応元を決め、既に使用した A の添字集合だけを状態とする subset DP を行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "次に元添字 x を置く増減費用と、新たに確定する転倒数が使用済み集合と x だけから決まる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Simple Operations on Sequence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "x を次に置くと、まだ未使用で x より小さい元添字は全て後ろへ来るので、その個数が x を左端とする転倒数としてこの時点で確定する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc232-f「Simple Operations on Sequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "操作の交換可能性で解を「順列＋位置別補正」へ正規化し、順列の prefix で確定する転倒寄与を使用済みビット集合の遷移コストとして最短 DP を行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc232-f「Simple Operations on Sequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "操作順の正規化",
+      "trigger": "二種類の操作が交換可能で、片方を全て先に寄せると最終構造を離散的に表せるとき。",
+      "application": "交換を全て先にして A の順列を確定し、その後の増減費用を位置ごとの絶対差に分離する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc232-f「Simple Operations on Sequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "順列最適化の subset DP",
+      "trigger": "順列を左から構成する追加費用が、使用済み要素集合と次要素だけに依存するとき。",
+      "application": "mask の popcount を次の B 添字とし、未使用 x の対応費用と確定転倒数を加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "増減費用は要素がどこへ移動したかだけ、交換費用は元添字順列の転倒数だけに依存し、操作列の細部を捨てられる。",
+      "reusablePerspective": "値変更と位置変更が混在する最適化では、両操作を可換にして「対応」と「移動距離」の独立な費用へ分けられないか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "隣接交換の最小回数が順列の転倒数に等しいことと、bitmask DP の構成順を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "mask の要素数を k とすると次の対応先は B_k であり、未使用かつ x より小さい添字数を Y 倍する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Y と転倒数の積を含む費用は非常に大きいため 64 bit 整数と十分な INF を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Simple Operations on Sequence 型の 列の順序と prefix 状態に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "混在する値変更・隣接交換操作を順列選択へ正規化し、転倒数付き subset DP で最小費用を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "操作が任意順なら、隣接する異種操作を交換して一方を前へ寄せても結果と費用が保たれるかを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "順列の転倒数は完成後に数えるのでなく、次要素を置いた瞬間に確定する未使用要素との対として分配する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

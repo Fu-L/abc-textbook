@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc379-f「Buildings 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "l と r の両方から見える r より東のビル x は、実は l から見えるだけで十分である。l から x の間が全て H_x 未満なら、その部分区間である r から x の間も同じ条件を満たす。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc379-f「Buildings 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "l を右から左へ走査し、l から見える東側ビルの index を単調 stack で管理し、各 query は stack 内で r より大きい要素数を二分探索する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "可視ビル列は高さの単調 stack として差分更新でき、query を左端別にまとめれば全体 O((N+Q)log N) で数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各 query で r より右の全ビルを走査し、l,r から見えるか判定する。",
+        "decision": "rejected",
+        "decisionReason": "N,Q がともに2×10^5で最悪 O(NQ) になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各節点が末尾 bit で決まる区間を保持し、その区間分割が prefix を重複なく被覆する。",
+        "text": "共通可視性の r 側条件は l 側条件に包含されるため、二つの視点の集合交差を求める必要がない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Buildings 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "l を一つ左へ動かすと、新しい H_l 以上の既存候補を stack から除き、残った index 列は単調なので r 境界を二分探索できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc379-f「Buildings 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "query を l ごとに bucket する。右から左へ高さ monotone stack を更新し、各 (l,r) で stack の index 列中 r より大きい位置の個数を lower_bound などで取得する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc379-f「Buildings 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "Fenwick tree",
-      "trigger": "制約と操作を整理したときに Fenwick tree の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc379-f「Buildings 2」では、主解法候補として、加法可能な量を Fenwick tree に分解し、点更新と prefix 集約を対数時間で処理する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で Fenwick tree を問題固有の状態へ適用する。",
+      "name": "可視要素の monotone stack",
+      "trigger": "各位置から右を見た record high の列を多数 query したいとき。",
+      "application": "走査方向を揃えて可視候補を stack で維持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二条件の一方が他方を含意することを証明すると、共通集合問題が一視点だけの query になる。",
+      "reusablePerspective": "query を左端でオフライン整列すると、位置ごとの可視 stack を一度ずつ構成できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Fenwick tree",
+      "text": "monotone stack、オフライン query、ソート済み index 列の二分探索を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "問題の「東」は index が大きい側で、r 自身を数えない境界を合わせる。高さは permutation なので等号処理は不要だが比較向きを固定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Buildings 2 型の 区間端点と包含関係に対し、Fenwick treeを選び、状態と証明を一貫して設計できる。",
+      "text": "二地点から共通に見えるビル数を、一方の可視候補 stack と index 境界 query に簡約できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "内部 index を 1-origin に統一し、差分更新と実値代入を混同しない。",
+      "text": "l から見える x なら r からも見えるという包含証明を先に行い、stack に残る index の順序を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,105 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc282-g「Similar Permutation」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "permutationを左から作ると、次の大小方向は現在値より大きい未使用値を選ぶか小さい未使用値を選ぶかだけで決まる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "具体的な未使用集合ではなく、現在A_iより大きい残数kと現在B_iより大きい残数lを持てば、次のrank選択後の状態範囲が連続区間になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc282-g「Similar Permutation」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "長さi、similarity j、A/Bそれぞれのgreater-remaining数k,lの挿入DPを行い、遷移元の4 rectangle和を2D累積和で求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "next rankの全組を個別に試さず、同方向/逆方向の条件を長方形領域へまとめられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "二つのpermutationを全列挙して隣接増減方向を比較する。",
+        "decision": "rejected",
+        "decisionReason": "候補が(N!)²でN≤100でも不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "次Aが増加なら新kは0…k-1、減少ならk…remaining-1のどれかに一対一対応し、B側も同様である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Similar Permutation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "similarityが増えるのはA,Bがともに増加またはともに減少する2 rectangle、増えないのは方向が異なる2 rectangleである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "固定(i,j)のk,l平面に2D prefix sumを作れば、各次状態へのrectangle総和を定数個のcorner差で取れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc282-g「Similar Permutation」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "i=1では各初期値pairに対応してdp[1][0][k][l]=1とする。各i,j layerの2D累積和から同方向rectangleをj+1、逆方向rectangleをjへ遷移させる。i=Nでk=l=0かつj=Kの値をP moduloで出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc282-g「Similar Permutation」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "rank-based permutation DP",
+      "trigger": "permutationを順に構成し、比較が現在値に対する未使用値のrankだけで決まるとき。",
+      "application": "greater remaining数を状態にし、次rankを区間として表す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc282-g「Similar Permutation」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "DP遷移の2D rectangle sum",
+      "trigger": "遷移元/先が二つの独立rank条件の直積区間になるとき。",
+      "application": "各layerに二次元累積和を作りrectangle寄与をO(1)取得する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二つの隣接差の積が正という条件は、増増・減減の二rectangleだけでsimilarityを1増やす。",
+      "reusablePerspective": "複数permutationの比較方向一致は、各rank軸のup/down半区間の直積として扱う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
+      "text": "挿入/順位permutation DP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "二次元累積和",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "隣接増減pattern",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "iからi+1でremaining上限が1減るため、k,lのvalid rangeとrectangle端をlayerごとに合わせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "法Pは大きいprimeだが遷移は加減だけで、prefix差の負値をPで正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Similar Permutation 型の 順列の位置と値の対応に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "二つのpermutationの隣接方向一致数分布を、rank状態と2D rectangle-sum DPで数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "remaining値を小さい順に並べ、現在値より上を選ぶと新greater数が0…k-1を各1回取ることを小Nで確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

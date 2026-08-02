@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc268-e「Chinese Restaurant (Three-Star Version)」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各人iについて料理iが正面に来る回転数t_iを中心に、不満度は円環距離 min(|x−t_i|,N−|x−t_i|) という三角波になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "三角波は円環を切れば、傾き+1で増える区間と傾き−1で減る区間の高々二本の一次式に分かれる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc268-e「Chinese Restaurant (Three-Star Version)」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "回転数x=0,…,N−1ごとに全N人の円環距離を計算する。",
+        "decision": "rejected",
+        "decisionReason": "N^2個の距離計算になりN=20万を扱えない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "回転軸を0…2N−1へ展開し、各人の一周期を区間一次式として傾き・切片の差分配列へ加え、xとx+Nをfoldして全回転の総和を得る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "mod Nをまたぐ三角波を通常の線形区間にでき、一人当たり定数回のrange affine addで全回転へ寄与を配れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+        "text": "一次式 ax+bの区間加算はaとbを別々のimos配列へ加え、累積後にa_x x+b_xを評価すればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Chinese Restaurant (Three-Star Version) 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "長さNの半開区間 [t_i,t_i+N) は各rotation residue xについてxまたはx+Nのちょうど一方を含み、円環波形を二倍配列から復元できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc268-e「Chinese Restaurant (Three-Star Version)」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "sum of circular absolute-distance functionsをperiod doublingでpiecewise-linear range additionsへ変え、coefficient-wise imosで全評価点を一括計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc268-e「Chinese Restaurant (Three-Star Version)」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "区間一次式のimos法",
+      "trigger": "多数の寄与が区間ごとにax+bで表され、全整数点で総和を求めるとき。",
+      "application": "傾きと切片の二差分配列を持ち、累積した係数へ各xを代入する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "累積和と差分",
-      "trigger": "制約と操作を整理したときに 累積和と差分 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc268-e「Chinese Restaurant (Three-Star Version)」では、主解法候補として、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 累積和と差分 を問題固有の状態へ適用する。",
+      "name": "円環区間の二倍展開",
+      "trigger": "周期境界をまたぐpiecewise関数や区間を通常の連続区間として扱いたいとき。",
+      "application": "index範囲を2周期へ広げ、一周期分の区間をwrapなしで加算してresidueへfoldする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "dish d の初期正面personをpos[d]とすれば、正面一致の中心回転は t_d=(d−pos[d]) mod N である。",
+      "reusablePerspective": "円環配置では対象物の現在位置から目標位置へのrotation offsetを先に逆permutationで求める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "累積和と差分",
+      "text": "円環距離、piecewise linear関数、係数別imosと二倍配列を扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "Nの偶奇で三角波の頂上が一つか二つかが変わるため、floor(N/2)とceil(N/2)で半開区間端を導く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "総不満度はN^2規模になり得るため64 bit整数を使い、差分配列は終端2Nまで確保する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Chinese Restaurant (Three-Star Version) 型の 整数の約数・剰余構造に対し、累積和と差分を選び、状態と証明を一貫して設計できる。",
+      "text": "全回転に対する円環距離総和を、三角波の一次式imosで求めて最小化できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "円環上の距離和は、各対象の理想offsetを中心とする三角波として全候補同時評価を考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "区間上で線形な寄与は値を直接足さず、傾き・切片を別々にrange addする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

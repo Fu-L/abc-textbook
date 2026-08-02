@@ -17,77 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc213-h「Stroll」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "時刻 t に街 s へ着く散歩コース数を d[s,t] とすると、道路 i を最後に渡る遷移は、出発側の時系列と長さ別通行方法数 p_i の畳み込みになる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "道路の長さは正なので、時刻 t の値は t より前の時刻だけに依存し、時間軸上には循環しない依存関係がある。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc213-h「Stroll」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各時刻と道路について、利用可能な全ての道路長を走査して以前の DP 値を加える。",
+        "decision": "rejected",
+        "decisionReason": "時刻の組を二重に扱う畳み込みが道路ごとに発生し、T の二乗規模の計算になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "時間区間を分割統治し、左半分で確定した DP 列と各道路の p_i を高速畳み込みして右半分へ寄与させる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "未来の値を使わない依存順を守りながら、同じ区間間の畳み込みを NTT でまとめて計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全対象が左・右・境界をまたぐものの三種に分かれ、再帰解と merge が互いに重複なく覆う。",
+        "text": "普通の一括畳み込みでは d 自身が未確定なので計算できないが、分割統治なら左区間の確定値だけを右区間へ送れる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Stroll 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "無向道路では一つの p_i が両方向の遷移に使われるため、左区間の各端点の系列から反対側へ対称に寄与を加える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc213-h「Stroll」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "時間 DAG 上の自己参照型畳み込み DP を CDQ 型の分割統治で因果順に確定し、各区間間の道路遷移を NTT による多項式積として高速化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc213-h「Stroll」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "オンライン畳み込みの分割統治",
+      "trigger": "時系列 DP の現在値が過去列との畳み込みで定まり、全入力列を一度に確定できないとき。",
+      "application": "左時間区間を先に解き、その確定値から右時間区間への畳み込み寄与を加えてから右を再帰的に解く。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "分割統治",
-      "trigger": "制約と操作を整理したときに 分割統治 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc213-h「Stroll」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 分割統治 を問題固有の状態へ適用する。",
+      "name": "NTT による多項式積",
+      "trigger": "法が変換に適し、長い係数列どうしの畳み込みを多数まとめて計算するとき。",
+      "application": "街ごとの DP 係数列と道路の長さ別係数列の区間積を求め、対応する到着時刻へ加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "正の道路長が時間方向の厳密な前進を保証するため、左区間から右区間への寄与だけを送る分割統治が成立する。",
+      "reusablePerspective": "再帰的な畳み込み式では、添字が必ず増える因果性を見つけると、確定済み区間から未確定区間へのオフライン更新に分解できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "DP の遷移和を係数列の畳み込みとして読み替えられること。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "分割統治",
+      "text": "NTT の畳み込みと、左を解いてから右へ寄与を送る CDQ 分割統治の順序を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。",
+      "text": "基底 d[1,0] を一度だけ設定し、各分割区間で既に加算済みの寄与を再度送って二重計上しない不変条件を保つ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "畳み込み結果の添字を道路長との和へ正しく対応させ、右区間の範囲外や T を超える係数を切り捨てる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Stroll 型の 列の順序と prefix 状態に対し、分割統治を選び、状態と証明を一貫して設計できる。",
+      "text": "過去の DP 値と固定核の畳み込みで定まる時系列を、分割統治と NTT で因果順に高速評価できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。",
+      "text": "遷移が「過去時刻×長さ別係数」の和なら、まず畳み込み式を書き、未知列を含むため一括変換できない点まで確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "分割統治の正当性は、再帰へ入る時点でどの時刻からの寄与が既に反映済みかを区間ごとに説明して確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

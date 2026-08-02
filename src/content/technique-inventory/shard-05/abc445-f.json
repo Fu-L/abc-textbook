@@ -17,77 +17,79 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc445-f「Exactly K Steps 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "ちょうど k 回移動する最小コスト行列 c^k は、経路を a 歩と b 歩に分けることで min-plus 積 c^a⊗c^b を満たす。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc445-f「Exactly K Steps 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "一歩のコスト行列を min-plus 半環上で二分累乗し、K の立っている bit に対応する行列を min-plus 乗算して c^K を求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "経路の中継頂点で最小を取る min-plus 積が歩数の加法に対して結合的で、通常の行列累乗と同じ繰り返し二乗が使える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "歩数0からKまで dp[step][vertex] を一段ずつ更新する。",
+        "decision": "rejected",
+        "decisionReason": "K は最大10^9で、各段の N^2 遷移以前に step 数へ比例する処理が不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
+        "text": "(A⊗B)_{i,k}=min_j(A_{i,j}+B_{j,k}) は、前半経路の終点 j を全探索して連結した最小コストである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Exactly K Steps 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "単位行列は対角0・非対角∞で、0歩経路を正しく表して累乗 accumulator の初期値になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc445-f「Exactly K Steps 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "cost を base、min-plus 単位行列を acc とする。K の bit を下から見て、bit が1なら acc=acc⊗base、各段で base=base⊗base と更新し、要求された成分または行列を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc445-f「Exactly K Steps 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc445-f「Exactly K Steps 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "min-plus 行列累乗",
+      "trigger": "固定グラフ上で巨大なちょうど K 歩の最短コストを求めるとき。",
+      "application": "歩数結合を min-plus 行列積として繰り返し二乗する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "通常の和・積を min・加算へ置換しても結合則と単位元があれば、二分累乗の枠組みをそのまま使える。",
+      "reusablePerspective": "巨大回数の同一遷移は、状態間遷移を半環行列として累乗できないか検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "min-plus 行列累乗と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "∞との加算で overflow しない上限・分岐を設ける。ちょうどK歩なので通常の最短路の0歩待機を勝手に許さない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Exactly K Steps 2 型の 頂点と辺からなる状態グラフに対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な K に対するちょうど K 辺経路の最小費用を min-plus 行列の二分累乗で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "二歩の小例で中継点 j の min-plus 積を手計算し、単位行列と bit 合成が「ちょうど」の歩数を保つことを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

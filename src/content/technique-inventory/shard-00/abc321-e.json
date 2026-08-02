@@ -17,77 +17,121 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc321-e「Complete Binary Tree」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "heap番号のtreeでは頂点vから下へd段の子孫labelが連続区間[v·2^d,(v+1)·2^d)になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "Xから距離Kの頂点Yは、そのLCAがX自身か、Xの各ancestorのいずれかという高々tree高さ個のcaseへ一意に分かれる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "ancestor zをLCAとするcaseは、zから残りd段の全子孫からXへ向かうchild subtree分を引けば数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc321-e「Complete Binary Tree」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Xからrootまでancestorを列挙し、各LCA caseを子孫label区間の長さでO(1)計数する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "Nが10^18でもtree高さは約60で、頂点やedgeを生成せず各testを処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "頂点Xから通常のBFSをK layer行う。",
+        "decision": "rejected",
+        "decisionReason": "Nが最大10^18でtreeを明示できず、Kも非常に大きい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "深さがdepth(X)±Kの全labelを数える。",
+        "decision": "rejected",
+        "decisionReason": "同じ深さ差でもLCA位置によりXからの距離が異なり、不要な別subtreeを含む。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+        "text": "countDesc(v,d)はmax(0,min(N+1,(v+1)2^d)-v2^d)で、label上限Nとの区間intersectionだけになる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Complete Binary Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Xからu段上のancestor zについてd=K-uが0ならz自身1個、d>0ならcountDesc(z,d)-countDesc(child,d-1)が寄与する。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "u=0、すなわちLCA=XのcaseはcountDesc(X,K)として最初に数える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc321-e「Complete Binary Tree」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "overflowを避けるcountDesc(v,d)を用意し、まずanswer=countDesc(X,K)とする。child=X,z=floor(X/2),u=1からz=0またはu>Kまで上る。d=K-uが0なら1を加え、正ならcountDesc(z,d)-countDesc(child,d-1)を加える。その後child=z,z=floor(z/2)へ更新し、各testのanswerを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc321-e「Complete Binary Tree」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "implicit complete binary tree",
+      "trigger": "親i/2・子2i,2i+1で巨大treeが番号だけ与えられるとき。",
+      "application": "子孫levelを連続label区間として数える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "セグメント木と monoid",
-      "trigger": "制約と操作を整理したときに セグメント木と monoid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc321-e「Complete Binary Tree」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で セグメント木と monoid を問題固有の状態へ適用する。",
+      "name": "LCA位置での経路分類",
+      "trigger": "固定始点から距離Kの頂点をrooted treeで数えるとき。",
+      "application": "pathが上へ何段進んでから下るかをancestorごとに分ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "全体subtreeから進入branchを引く",
+      "trigger": "LCAを特定ancestorに固定し、始点側branchを除外したいとき。",
+      "application": "ancestorのd段子孫数からpath childのd-1段子孫数を引く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "heap labelでは同じ深さの子孫が区間になるため、通常ならsubtree size前計算が必要な距離計数を端点2つの算術へ変えられる。",
+      "reusablePerspective": "implicit treeの番号規則から、depth固定のsubtreeがinterval・等差列などの数えやすい集合にならないか確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
+      "text": "complete binary treeのheap index",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "セグメント木と monoid",
+      "text": "LCAとtree distance",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "半開区間のintersection",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "2^dやv·2^dが64bitを超える前に、dが十分大きい・v>N>>dならcount 0と判定してshift overflowを避ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "KはN-1までで64bit値なのでint loop上限に変換せず、実際のancestorが尽きる約60回だけ回す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Complete Binary Tree 型の 根付き木・部分木・パスの関係に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。",
+      "text": "最大10^18頂点のimplicit binary treeで、Xから距離Kの頂点数をancestor列挙とlabel区間計数で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "Xの子孫case、親自身case、祖先の反対側subtree caseを小さいheap treeに色分けし、同じ頂点を重複せず全て数えるか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc349-e「Weighted Tic-Tac-Toe」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "盤面は各cellがwhite/red/blueの3状態で高々3^9通りしかない。手番は塗られたcell数のparityで決まり、終了していなければ現在playerは「一手先に自分が勝つstateがあるか」だけを選べばよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc349-e「Weighted Tic-Tac-Toe」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "盤面stateをmemo化したminimax再帰で勝者を判定する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "全game treeの同一盤面を共有し、有限DAG上の勝敗を高々3^9×9遷移で解ける。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "局所的に最高weightのcellをgreedyに取る",
+        "decision": "rejected",
+        "decisionReason": "三目完成による即勝利がscoreより優先され、相手のthreatもあるためweightだけの局所選択は最適でない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全ての辺がトポロジカル順の前から後へ向くため、処理時には必要な先行状態が確定している。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Weighted Tic-Tac-Toe 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "terminalで同色三目があればその色のplayerが勝ち、全埋まりならred取得weight和とblue取得weight和を比較する。非terminalでは一つでもcurrent player勝利となるchildがあれば勝ち、全childが相手勝利なら負ける。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc349-e「Weighted Tic-Tac-Toe」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "redMask,blueMaskまたはternary codeをstate keyにする。8本のwinning maskを検査し、full boardならmask別weight sumを比較する。未終了ではmove数偶数ならTakahashi、奇数ならAokiとして各empty cellを自色へ追加し再帰し、自分勝ちchildを見つけたらtrueをmemoする。初期stateのwinnerを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc349-e「Weighted Tic-Tac-Toe」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "有限完全情報gameのminimax",
+      "trigger": "運要素がなく、双方が勝利を目的に最適行動し、state遷移がacyclicである。",
+      "application": "terminal winnerをbaseに、存在/全称でcurrent playerの勝敗を後ろ向きに決める。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "DAG とトポロジカル順序",
-      "trigger": "制約と操作を整理したときに DAG とトポロジカル順序 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc349-e「Weighted Tic-Tac-Toe」では、主解法候補として、依存関係を DAG として表し、トポロジカル順に値を伝播する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で DAG とトポロジカル順序 を問題固有の状態へ適用する。",
+      "name": "bitmask盤面表現",
+      "trigger": "3×3盤面の占有とwinning line包含を高速に検査したい。",
+      "application": "playerごとの9-bit maskを持ち、(mask&line)==lineで三目を判定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "score最大化gameではなく勝敗gameなので、途中の三目は残りweightに関係なく即終了し、score比較は9手完了時だけ行う。",
+      "reusablePerspective": "複数終了規則のgame DPではrule priorityをterminal evaluatorにそのまま反映する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "DAG とトポロジカル順序",
+      "text": "minimax、memoized recursion、bitmask、terminal-state evaluation。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。",
+      "text": "三目判定をfull-board scoreより先に行う。Aは負でもscoreをsigned 64bitで合計し、総和odd保証によりfull board tieはない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Weighted Tic-Tac-Toe 型の 盤面上の位置と局所遷移に対し、DAG とトポロジカル順序を選び、状態と証明を一貫して設計できる。",
+      "text": "両者が勝利のため最適に指す時、TakahashiとAokiのどちらが勝つか判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "入次数更新後に零になった頂点だけを一度 enqueue し、閉路の有無を処理数で検査する。",
+      "text": "即勝ちを取る局面、相手三目をblockする局面、三目なしで負weightを含むscore決着を手作業minimaxと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

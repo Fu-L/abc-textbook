@@ -17,77 +17,87 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc297-ex「Diff Adjacent」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "隣接要素が異なる列は、同値runの境界違反へ包除を掛けるとrun長jの重み(-1)^(j-1)x^(ij)y^jで表せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc297-ex「Diff Adjacent」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "二変数母関数をy微分し形式冪級数計算",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "長さ総和は∂/∂yをy=1で評価でき、必要級数を約数列挙で作って多項式逆元を計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "総和Nの全compositionを列挙",
+        "decision": "rejected",
+        "decisionReason": "2^(N-1)個ありN=2×10^5では不可能。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Diff Adjacent 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "列をrun部品の列と見るとf=1/(1-g)で、長さmark yの微分が全列の長さ合計を抽出する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc297-ex「Diff Adjacent」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "次数NまでG=Σ x^i/(1+x^i)とH=Σx^i/(1+x^i)^2を約数寄与で構成し、H/(1-G)^2のx^N係数をNTTとFPS逆元で求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc297-ex「Diff Adjacent」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "包除付き母関数",
+      "trigger": "局所禁止条件をrunの重みへ織り込む。",
+      "application": "同値run長に交代符号を付ける。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "包除原理",
-      "trigger": "制約と操作を整理したときに 包除原理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc297-ex「Diff Adjacent」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 包除原理 を問題固有の状態へ適用する。",
+      "name": "marking variableの微分",
+      "trigger": "全構造の要素数総和を数える。",
+      "application": "長さをyでmarkしy微分する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "形式冪級数逆元",
+      "trigger": "1/(1-G)^2の係数を高速に得る。",
+      "application": "NTT/Newton法で次数Nまで計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "隣接非同値制約を値ごとのrun包除に変えると、正整数列の総和・長さが二変数生成関数へまとまる。",
+      "reusablePerspective": "局所一致禁止はcluster/run法で母関数化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "包除原理",
+      "text": "母関数、包除、FPS逆元。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "次数Nで全級数をtruncateし、符号と微分後の分子、法998244353のNTT長を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Diff Adjacent 型の 列の順序と prefix 状態に対し、包除原理を選び、状態と証明を一貫して設計できる。",
+      "text": "総和Nの隣接相異なる正整数列について長さ総和を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "小Nのcomposition全列挙と係数を比較し、N=1,2とrun包除符号を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

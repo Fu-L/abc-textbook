@@ -17,67 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc226-g「The baggage」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "荷物重量と体力は1から5の五種類しかない一方、個数は10^16なので個人・荷物単位のマッチングは作れない。総重量だけでは、体力3の人に重さ2を二個載せられないような容量の断片化を判定できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc226-g「The baggage」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。",
+        "approach": "体力別の人数を残り体力bucketとして持ち、重さ5、4、3、2、1の順に、将来の小荷物を最も収めやすく保つ固定順で個数をまとめて割り当てる。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "種類数が定数であり、重い荷物の必要条件と重さ2に使える偶数容量を最大化する交換論法により、各bucket間の一括移動だけで実現可能性を判定できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "荷物の総重量が全員の体力総和以下かだけを確認する。",
+        "decision": "rejected",
+        "decisionReason": "総余力が十分でも一人の上限をまたいで荷物を分割できず、例えば体力3へ重さ2を二個は載せられないため十分条件にならない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+        "text": "重さ5・4・3の荷物は一人が高々一個しか持てないため、5→体力5、4→体力4の後5、3→体力3の後5、最後に4という順で割り当てても実現可能解を失わない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "The baggage 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "重さ3を体力4へ載せる人数を最後に抑えることが、残余体力の奇数個数を最小化し、重さ2を載せられるfloor(残余体力/2)の総和を最大化する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc226-g「The baggage」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。",
+      "text": "人数bucketを用い、5→5、4→4,5、3→3,5,4、2→残り体力2以上、1→残り体力1以上の順でmin個ずつ一括消費し、最後に荷物が残らないか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "greedy choice と交換論法",
-      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc226-g「The baggage」では、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。この状態表現から答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "name": "定数種類のbucket貪欲",
+      "trigger": "値・容量の種類が小さな定数で個数だけが巨大であり、同じ種類の対象を区別する必要がないとき。",
+      "application": "残り容量ごとの人数と重量ごとの荷物数だけを持ち、一回のmin演算で同種の割当てをまとめて進める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "残余容量の断片化を守る交換論法",
+      "trigger": "総容量だけでは不十分で、次に置く荷物が特定の剰余・最小bucketを必要とするとき。",
+      "application": "重い荷物の割当て順を交換し、重さ2に使える偶数部分の総量を最大に保つ順序を選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "重さ3を載せる先は強い人から単純に使うのではなく、体力5を体力4より先に使うことで、後の重さ2に使えない余り1を増やさずに済む。",
+      "reusablePerspective": "bin packing型の貪欲順は残余総和だけでなく、次の品物単位に対する余りの剰余分布まで比較する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "greedy choice と交換論法",
+      "text": "容量bucketの一括シミュレーションと交換論法",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "個数は10^16なので全bucketと重量和を64 bitで持ち、各割当てはmin個を一括で移す。重さ3の体力5・4への順序を入れ替えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "The baggage 型の問題に対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "text": "種類数が小さく個数が巨大な容量割当てを、残余の断片化まで保つbucket貪欲として定数回で判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "総重量条件だけで満足せず、次に重い単位が入る『まとまった残余容量』を何個残せるかまで追う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

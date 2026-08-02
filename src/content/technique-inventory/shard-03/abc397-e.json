@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc397-e「Path Decomposition of a Tree」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "treeをK頂点pathへ分割できるなら、leaf側から見た未確定componentは親方向へ延びる一本のpathでなければならない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "subtree内で既にK頂点になったcomponentはその場で切り離せる。K未満なら親へ渡し、K超なら二度と縮められないので失敗である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc397-e「Path Decomposition of a Tree」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "postorderで未切離しsubtreeのsizeとbranch数を管理し、K到達時にpathとして削除するgreedy tree DP",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "leafから最初に完成するK頂点componentはどの有効分解でも一pathでなければならず、局所判定・削除を繰り返すことが必要十分でO(NK)=O(vertex数)となる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "N本のpath候補を列挙してexact coverを解く",
+        "decision": "rejected",
+        "decisionReason": "path候補数が多く一般の集合分割になり、tree上のleaf-side強制構造を使っていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "木には閉路がないため、親辺を除く部分木が独立し、帰納法で子の最適値または個数を合成できる。",
+        "text": "vで未確定child componentが2本以上ありsize<Kなら、親edgeも加わってdegree≥3となるため一pathにはできない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Path Decomposition of a Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "size=Kならvでの未確定child数が2以下ならcomponentはpathであり、sizeを0へresetして親へ何も渡す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc397-e「Path Decomposition of a Tree」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "任意rootでpostorderし、vの未削除childのsizeを足してs=1+Σs_childとする。s<Kならactive child≤1、s=Kならactive child≤2を要求して0へ、s>KならNo。root処理後0ならYes。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "木の連結性と一意な単純路",
-      "trigger": "制約と操作を整理したときに 木の連結性と一意な単純路 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc397-e「Path Decomposition of a Tree」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 木の連結性と一意な単純路 を問題固有の状態へ適用する。",
+      "name": "leaf stripping greedy on tree",
+      "trigger": "固定sizeのconnected pathへtree全体を分割するとき。",
+      "application": "leaf側で完成した強制componentを順に切り離す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "根付き木と木 DP",
-      "trigger": "制約と操作を整理したときに 根付き木と木 DP の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc397-e「Path Decomposition of a Tree」では、主解法候補として、木を根付き化し、部分木の状態を辺を介して親へ合成する。根付き木・部分木・パスの関係を必要十分な状態だけで表し、答えを構成する。で 根付き木と木 DP を問題固有の状態へ適用する。",
+      "name": "open component tree DP",
+      "trigger": "親へ続く未完成部分構造のsizeと形を管理するとき。",
+      "application": "一本pathというbranch数制約を持って渡す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "任意のK-subtreeを探すのでなく、postorderで未処理sizeがKになった瞬間に切ると、親側との選択自由度を残さず必要条件を検査できる。",
+      "reusablePerspective": "tree partitionではleaf側の最小未完成componentが全解でどう扱われるかを調べ、強制greedyを作る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "木の連結性と一意な単純路",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "根付き木と木 DP",
+      "text": "rooted treeのpostorderとpathのdegree条件を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "N,Kの記号と実頂点数NKを混同しない。K=1では各頂点が即resetされ、root最終sizeが0か確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Path Decomposition of a Tree 型の 根付き木・部分木・パスの関係に対し、根付き木と木 DPを選び、状態と証明を一貫して設計できる。",
+      "text": "treeの等長path分解可能性を、leaf側の未完成pathを切る線形DPで判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰深度と親辺の除外を管理し、部分木サイズに応じた配列境界を守る。",
+      "text": "頂点数≤12のtreeとK divisorでpath partitionをbacktracking全探索し、branchがK到達前/直後に生じるcaseを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

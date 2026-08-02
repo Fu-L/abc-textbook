@@ -16,6 +16,7 @@ export interface VerificationStep {
     | 'check'
     | 'test'
     | 'corpus'
+    | 'authoring'
     | 'taxonomy'
     | 'learning-content'
     | 'build'
@@ -30,6 +31,7 @@ export const VERIFICATION_STEPS: readonly VerificationStep[] = [
   { id: 'check', script: 'check' },
   { id: 'test', script: 'test' },
   { id: 'corpus', script: 'corpus:verify' },
+  { id: 'authoring', script: 'corpus:verify-authoring' },
   { id: 'taxonomy', script: 'preview:taxonomy' },
   { id: 'learning-content', script: 'preview:learning-content' },
   { id: 'build', script: 'build' },

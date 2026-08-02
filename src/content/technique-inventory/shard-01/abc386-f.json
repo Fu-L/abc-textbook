@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc386-f「Operate K」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "通常の編集距離DPは|S||T|だが、dp[i][j]≥|i-j|である。判定閾値K≤20を超える|i-j|のcellは最終的なYes経路へ参加できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "挿入・削除・置換の各遷移は距離を減らさないので、対角線から幅Kのbandだけ正確に計算すれば判定結果を保てる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc386-f「Operate K」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Levenshtein DPを|i-j|≤Kの帯状領域だけで計算する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各rowの有効cellがO(K)個になり、標準遷移をそのままO((|S|+|T|)K)へ削減できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全(|S|+1)(|T|+1) cellの編集距離DP",
+        "decision": "rejected",
+        "decisionReason": "文字列長が5×10^5で二次時間・メモリとも不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "長さ差がKを超えるなら編集距離も必ずK超なので即Noにできる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Operate K 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "band外をINF=K+1として扱えば、境界から誤って安い遷移が入ることを防げる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc386-f「Operate K」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "まず長さ差を判定する。rolling arrayでiを進め、jを[max(0,i-K),min(|T|,i+K)]だけ走査し、削除・挿入・一致/置換の標準三遷移をK+1でcapする。最後がK以下か答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc386-f「Operate K」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "banded edit-distance DP",
+      "trigger": "編集距離が小さいかだけを、小さい閾値Kで判定するとき。",
+      "application": "下界|i-j|で不要cellを除き対角帯だけ計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc386-f「Operate K」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "閾値DPのcap",
+      "trigger": "K以下かだけが必要で値が単調非減少するとき。",
+      "application": "K+1以上を同じINFへ丸めて状態を安全に制限する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "入力長は巨大でもYesとなり得るalignmentは主対角からK以上ずれられず、制約KがDPの幾何的な幅を決める。",
+      "reusablePerspective": "二次元DPで目的値に簡単な下界があるなら、閾値判定では下界が閾値を超える領域を切り落とす。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "Levenshtein距離の標準DPを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "rowごとにj範囲がずれるためrolling index対応を明示し、空prefixの初期値をband内だけ設定する。|S|-|T|の絶対値を先に確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Operate K 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "長大文字列の編集距離K以下判定を、下界によるband化でO(NK)へ高速化できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "空prefix境界、長さ差がKちょうど/K+1、全一致、挿入と削除が交互に必要な短列をfull DPとrandom比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

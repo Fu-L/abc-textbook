@@ -17,77 +17,117 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc288-e「Wish List」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "最終的に買うitem集合を昇順B_1<…<B_Kと固定すると、B_i購入時に先行するB_1..B_{i-1}のうち既購入の個数xだけ、売れ残り中のrankがB_i-xへ下がる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "xは0..i-1を取り得るため、B_iの追加費用はA_{B_i}+min(C_{B_i},C_{B_i-1},…,C_{B_i-i+1})以上で、この下界は購入順を選べば同時に達成できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "したがって購入順自体を状態にせず、買う集合を番号順に選ぶ最適化へ帰着できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc288-e「Wish List」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "cost(i,j)=min C_{i-j..i}を前計算し、先頭i itemからj個買った最小費用をDPする。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "欲しいitemの強制選択と任意itemの追加購入を同じ遷移で扱い、固定集合に対する達成可能な最小費用を加算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "その時点で最も安い購入価格のitemをgreedyに選ぶ。",
+        "decision": "rejected",
+        "decisionReason": "任意itemを先に買うことで将来のrankとCが変わるため、現在価格だけの局所選択は後続費用を評価できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "欲しいM itemだけを買う前提で順番を最適化する。",
+        "decision": "rejected",
+        "decisionReason": "安い追加itemを買ってrankをずらす方が、合計で得になる場合を除外してしまう。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "固定集合で各itemが得られる最小Cは、そのitemより小さい購入予定item数だけで決まり、具体的な購入時刻は消去できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Wish List 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "cost(i,j)=min(cost(i,j-1),C_{i-j})なので、全i,jの区間最小を二次時間で前計算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc288-e「Wish List」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各iについてcost(i,0)=C_iからjを増やしてsuffix minimumを作る。dp[i][j]をitem 1..iの選択を決め、そのうちj個を買う最小費用とし、dp[0][0]=0。item i+1を買うならdp[i+1][j+1]へA_{i+1}+cost(i+1,j)を加え、不要itemなら買わない遷移も行う。wishlist itemでは買わない遷移を禁止し、min_j dp[N][j]を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc288-e「Wish List」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "操作順の集合コスト化",
+      "trigger": "選んだ対象集合を固定すると、最適な操作順の費用が各要素のrankだけで表せるとき。",
+      "application": "購入順を消去し、昇順集合B_iごとの下界兼達成値へ置き換える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc288-e「Wish List」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "選択個数DP",
+      "trigger": "番号順に必須・任意要素を選び、次のcostが過去の選択数に依存するとき。",
+      "application": "prefixで買った個数jを状態にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "区間minの漸化前計算",
+      "trigger": "左端を1つずつ伸ばす区間最小を全長について使うとき。",
+      "application": "直前のminimumと新要素のminで更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "item B_iを買う瞬間のrank候補はB_i,B_i-1,…,B_i-i+1に限られ、その中の最安Cを全itemで同時達成できる購入順がある。",
+      "reusablePerspective": "順序依存操作では、固定した最終集合に対する各要素の可能rank範囲と、個別下界が同時達成可能かを分けて証明する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "選択DP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "区間minimumの前計算",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "cost(i,j)のC indexはi-j以上1であり、jはiより前に買えるitem数までに制限する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "費用総和は32bitを超えるので64bit整数と十分大きいINFを使う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "wishlist判定をboolean arrayにし、必須itemでskip遷移を入れない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Wish List 型の 整数の約数・剰余構造に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "追加itemの購入も許したうえでwishlistを全て得る最小費用を、集合コスト化と二次DPで求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "3 item程度で追加itemを買うcaseを固定し、各B_iのrank候補とcost下界を達成する購入順、DPのjが一致するかを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

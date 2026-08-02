@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc423-g「Small Multiple 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "Kの桁数dに対し、Sの後へd桁を付けた区間には必ずKのmultipleがあるので、最小解はSの前後に合計高々d桁を加えた形だけ調べればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc423-g「Small Multiple 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "前後追加桁数を分け、小さい側を列挙して線形合同式を解く",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各splitで高々10^{min(u,l)}候補だけを列挙し、d≤10なので実行可能である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "Sを含む整数を1から順に探索する",
+        "decision": "rejected",
+        "decisionReason": "最小multiple自体が最大50万桁級で数値列挙できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Small Multiple 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "candidateをupper+S+lowerとしu+l=dへpaddingできる。u<lならupper列挙後に必要lower residueを直接得る。u≥lならlowerを列挙し、10^{|S|+l}upper≡rhs mod Kをgcdで縮約して逆元から最小upper residueを得る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc423-g「Small Multiple 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "S mod Kと10冪を前計算する。各split(u,l)で小さい側を0…10^size-1列挙し合同式を解き、反対側が指定桁数内ならzero-padして候補文字列を作る。leading zeroを除いた(length,string)順で全d+1候補の最小を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc423-g「Small Multiple 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "桁列連結のmod合同式",
+      "trigger": "巨大decimal stringの前後へ短いdigit列を足しKのmultipleにしたい。",
+      "application": "concat value mod Kを10冪で表し、一変数線形合同式として解く。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc423-g「Small Multiple 2」では、主解法候補として、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "meet-in-the-middle的桁分割",
+      "trigger": "追加できるd桁を前後へ分け、一方の全列挙と他方の代数解法を組み合わせる。",
+      "application": "各splitで短い側だけ10^size列挙して最大10^{d/2}に抑える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "解の数値比較は巨大整数化せず、leading zero除去後の桁数とdecimal lexicographic順で比較できる。",
+      "reusablePerspective": "巨大非負整数候補はcanonical decimal stringの(length,lex)で順序付ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "linear congruence、gcd・mod inverse、decimal string remainder。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "S前のupperはleading zeroを許すがlowerは固定桁zero-padする。合同式ax=bはgcd(a,K)|bを確認し、reduced modulusで逆元を取る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Small Multiple 2 型の 文字列の prefix・suffix と一致関係に対し、剰余演算と modular inverseを選び、状態と証明を一貫して設計できる。",
+      "text": "Kのmultipleでdecimal表現にSを含む最小正整数を構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "K小でbrute forceし、upper/lower各側が最適、gcd非可逆case、S自身がmultipleを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

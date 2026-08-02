@@ -17,81 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc451-f「Make Bipartite 3」では、各二部連結成分の二色集合を管理し、新辺で成分を結ぶ際に小さい側だけを必要なら反転して DSU merge する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "二部な連結成分の彩色は全頂点の白黒反転を除いて一意なので、黒頂点数の最小寄与はmin(c_0,c_1)である。全体の答えは成分寄与の和で、辺追加時に変わるのは端点を含む成分だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc451-f「Make Bipartite 3」では、各二部連結成分の二色集合を管理し、新辺で成分を結ぶ際に小さい側だけを必要なら反転して DSU merge する。この状態表現から答えを構成する。",
+        "approach": "DSUと明示的な二色頂点集合を持ち、小さい成分だけを必要なら反転して併合する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "同一成分なら端点色だけで奇cycleを判定でき、別成分なら一方の彩色反転で必ず接続できる。小さい側だけを走査すれば各頂点の移動回数をO(log N)へ償却できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各辺追加後にグラフ全体をBFSして二部彩色し直す",
+        "decision": "rejected",
+        "decisionReason": "一回O(N+Q)、全queryでは二次規模となり、過去に確定した成分彩色を再利用できていない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "成分併合のたびに任意の側を全反転・全移動する",
+        "decision": "rejected",
+        "decisionReason": "同じ大成分を繰り返し走査する入力でΘ(N²)になり、端点を逆色にする局所条件は満たしても全体計算量を保証できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "二部成分の彩色は全反転を除き一意で、小さい成分の頂点は走査されるたび所属成分サイズが倍以上になる。",
+        "text": "端点が同じ成分なら、異色の場合は既存彩色を保てるが、同色の場合は奇閉路が生じて以後の辺追加でも二部性は戻らない。別成分なら同色のとき片側全体を反転してから併合すればよい。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Make Bipartite 3 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "頂点数が小さい成分を走査して大きい成分へ移すと、走査された頂点の所属成分サイズは少なくとも2倍になる。各頂点は高々log₂N回しか走査されず、全反転・移動を合計O(N log N)にできる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc451-f「Make Bipartite 3」では、各二部連結成分の二色集合を管理し、新辺で成分を結ぶ際に小さい側だけを必要なら反転して DSU merge する。この状態表現から答えを構成する。",
+      "text": "各DSU成分に色0・1の頂点数とmember一覧を持ち、globalAns=Σmin(c_0,c_1)を管理する。別成分を結ぶときは両寄与を引き、小さい成分の端点色が大側端点と同じなら全memberの色を反転し、memberを大側へ移してDSUを併合し、新寄与を足す。同一成分の同色辺を見つけたら以後-1を出す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "二部彩色、DSU、small-to-large merge",
-      "trigger": "制約と操作を整理したときに 二部彩色、DSU、small-to-large merge の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc451-f「Make Bipartite 3」では、各二部連結成分の二色集合を管理し、新辺で成分を結ぶ際に小さい側だけを必要なら反転して DSU merge する。この状態表現から答えを構成する。で 二部彩色、DSU、small-to-large merge を問題固有の状態へ適用する。",
+      "name": "二部彩色の成分反転",
+      "trigger": "連結成分ごとの二色制約があり、成分間を新しい不同色辺で接続する。",
+      "application": "端点色が同じ場合だけ片方の成分を全反転し、色数を入れ替えて整合させる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "特殊な漸近計算量の見積もり",
-      "trigger": "制約と操作を整理したときに 特殊な漸近計算量の見積もり の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc451-f「Make Bipartite 3」では、各二部連結成分の二色集合を管理し、新辺で成分を結ぶ際に小さい側だけを必要なら反転して DSU merge する。この状態表現から答えを構成する。で 特殊な漸近計算量の見積もり を問題固有の状態へ適用する。",
+      "name": "DSUとsmall-to-large merge",
+      "trigger": "連結成分をオンライン併合しつつ、成員ごとの状態更新が避けられない。",
+      "application": "DSUで同一成分を判定し、member一覧は小さい成分から大きい成分へだけ移す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "求めるのは一つの固定彩色の黒数ではなく、各成分を独立に反転できる自由度を使ったΣmin(c_0,c_1)であり、merge前後の二成分だけ差分更新できる。",
+      "reusablePerspective": "制約充足解が成分ごとの対称操作を持つときは、その軌道内の最小コストを成分寄与にして、構造変更時の局所差分として管理する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "asymptoticComplexity": {
     "time": "O(Q α[N] + N log N)（公式解法全体。特殊な計算量解析を含む）",
     "evidenceIds": ["evidence-official-analysis"]
   },
   "prerequisiteCandidates": [
     {
-      "text": "二部彩色、DSU、small-to-large merge",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "特殊な漸近計算量の見積もり",
+      "text": "二部グラフの彩色一意性、奇閉路、DSU、small-to-large mergeによる倍増償却を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一成分内の同色辺で以後不可能を固定し、成分寄与 min(白,黒) を merge 前後で差分更新する。",
+      "text": "merge前に両成分のmin寄与を引き、反転時はsmall側全頂点の色と色数を一貫して入れ替える。DSUのleader選択とmember容器の所有者を同期し、非二部化後は状態更新を省略して-1を出し続ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Make Bipartite 3 型の問題に対し、二部彩色、DSU、small-to-large mergeを選び、状態・証明・特殊計算量を一貫して設計できる。",
+      "text": "増分辺グラフの二部性と最小黒頂点数を成分反転の自由度へ分解し、DSUとsmall-to-largeで彩色・成分寄与を更新できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一成分内の同色辺で以後不可能を固定し、成分寄与 min(白,黒) を merge 前後で差分更新する。",
+      "text": "小グラフで全2^N彩色を試すoracleと比較し、孤立点、異色辺の成分内追加、三角形で初めて非二部化する瞬間、同サイズ成分の反転merge、色数が大きく偏る星・鎖を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

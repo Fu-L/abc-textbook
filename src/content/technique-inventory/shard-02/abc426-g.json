@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc426-g「Range Knapsack Query」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各クエリは部分配列 [L,R] 内の 0/1 ナップサックで、容量 C は小さい。区間ごとに DP を作ると重複が大きいが、分割点をまたぐクエリは左右の DP を合成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc426-g「Range Knapsack Query」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "配列を分割統治し、各節点で中央をまたぐ全クエリへ左 suffix DP と右 prefix DP を構築して答える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各要素は深さごとに一度 DP 更新へ寄与し、各クエリも一節点で処理されるため O(K(N log N+Q)) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "クエリごとに [L,R] の全アイテムでナップサック DP をやり直す。",
+        "decision": "rejected",
+        "decisionReason": "区間の重複を共有できず O(NKQ) に達する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "全対象が左・右・境界をまたぐものの三種に分かれ、再帰解と merge が互いに重複なく覆う。",
+        "text": "区間 [l,r] の中央 m に対し、L<m≤R のクエリだけをこの節点で処理し、片側に収まるものは再帰へ送る。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Range Knapsack Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "容量 j を左に、C-j を右に配る全分割を試せば、左右で独立に選んだ最適値の和が区間全体の最適値になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc426-g「Range Knapsack Query」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "solve(l,r) で m を定め、i=m-1…l の suffix ナップサック dp_l[i][j] と i=m…r の prefix ナップサック dp_r[i][j] を容量 K まで作る。中央をまたぐ各クエリを max_j(dp_l[L][j]+dp_r[R][C-j]) で答え、残りを左右へ再帰する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "半開区間の扱い",
-      "trigger": "制約と操作を整理したときに 半開区間の扱い の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc426-g「Range Knapsack Query」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 半開区間の扱い を問題固有の状態へ適用する。",
+      "name": "オフライン区間分割統治",
+      "trigger": "静的配列上の多数の区間クエリを、中央をまたぐものと片側のものへ分類できるとき。",
+      "application": "各クエリを両端が初めて分かれる節点で一度だけ処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "分割統治",
-      "trigger": "制約と操作を整理したときに 分割統治 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc426-g「Range Knapsack Query」では、主解法候補として、問題を独立な半区間へ再帰分割し、境界をまたぐ情報だけを merge する。区間端点と包含関係を必要十分な状態だけで表し、答えを構成する。で 分割統治 を問題固有の状態へ適用する。",
+      "name": "prefix・suffix ナップサック DP",
+      "trigger": "区間が固定境界をまたぎ、左右の選択が容量配分だけで結合するとき。",
+      "application": "中央から外向きにアイテムを追加した DP を全端点分共有する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "クエリ区間そのものではなく、再帰木で両端が分離する唯一の節点を担当箇所にすると DP の再利用範囲が最大化する。",
+      "reusablePerspective": "結合条件が小さい容量だけなら、左右の区間情報を容量配分の max-plus 畳み込みで合成できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "半開区間の扱い",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "分割統治",
+      "text": "0/1 ナップサック DP、オフラインクエリ、配列の分割統治、容量分割による DP 合成を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。",
+      "text": "左 DP は m-1 から降順、右 DP は m から昇順にコピー更新する。容量以下の最大値として j=0 を 0 に初期化し、到達不能値の扱いを統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Range Knapsack Query 型の 区間端点と包含関係に対し、分割統治を選び、状態と証明を一貫して設計できる。",
+      "text": "小容量の部分配列ナップサッククエリを、分割統治で DP を共有して一括処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "再帰の基底、同一要素を二重計上しない merge 境界、作業配列の再利用を確認する。",
+      "text": "中央をまたぐ条件を L<m≤R と統一し、各クエリがちょうど一つの再帰節点で回答されることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

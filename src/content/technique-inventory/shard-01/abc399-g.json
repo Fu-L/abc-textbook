@@ -17,77 +17,99 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc399-g「Colorful Spanning Tree」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "color上限はpartition matroid、cycleを含まないedge集合はgraphic matroidであり、colorful spanning tree存在は両matroidのcommon independent set rankがN-1かに等しい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "両matroidを有限体上の線形表現A_1,A_2へ写すと、random diagonal Dを挟むM=A_1DA_2^Tのrankが高確率でintersection rankになる。color interval[L,R]はA_1の対応row blockだけを残すことに一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc399-g「Colorful Spanning Tree」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "partition/graphic matroidの線形表現からrandomized intersection matrixを作り、連続row区間のrank N-1可否をbasis sweepで数える",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "ΣA_c≤300,N≤150なので、各Lからrowを追加するGaussian basisまたはABC223H型offline basisで最小Rを求め、可否の単調性から全interval数を多項式時間で集計できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各(L,R)で一般matroid intersectionを独立に実行する",
+        "decision": "rejected",
+        "decisionReason": "O(C²)区間×大きなedge集合で重く、colorが連続row blockになる線形構造を捨てている。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "整数容量の増加路とカットの対応を使い、実行可能解と流量が双方向に変換できることを示す。",
+        "text": "graphic matroidはoriented incidence columns、color cのpartition matroidはA_c行のVandermonde columnsで線形表現できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Colorful Spanning Tree 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Schwartz–Zippelにより各edge変数へ大きな有限体の乱数を代入したrankは真のsymbolic rankを高確率で保つ。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc399-g「Colorful Spanning Tree」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "A_1のcolor別row blockとincidence A_2からrandomized Mを構成する。各Lについてrow S_L..をcolor順にbasisへ追加しrankが初めてN-1になるRを記録し、それ以降のRを加算する。必要ならoffline sliding-basis techniqueでO(N²ΣA)へ高速化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc399-g「Colorful Spanning Tree」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "linear matroid intersectionのrandom rank",
+      "trigger": "二つの線形matroidの最大common independent sizeだけが必要なとき。",
+      "application": "A_1 diag(random) A_2^Tのrankを計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最大流・最小カット定理",
-      "trigger": "制約と操作を整理したときに 最大流・最小カット定理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc399-g「Colorful Spanning Tree」では、主解法候補として、選択条件を容量制約へ写し、最大流・最小カットまたは二部マッチングとして解く。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 最大流・最小カット定理 を問題固有の状態へ適用する。",
+      "name": "Vandermonde representation of partition matroid",
+      "trigger": "group cから高々A_c列を独立に選ばせたいとき。",
+      "application": "color blockのA_c行へedge indexの冪を置く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "連続row区間rank query",
+      "trigger": "color interval制約がmatrixの連続row選択に対応するとき。",
+      "application": "basis追加と可否単調性で最小右端を求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "color容量制約とspanning-tree制約を別々に満たすedge選択が、一枚のrandom matrixのrow interval rankへ圧縮される。",
+      "reusablePerspective": "matroid intersectionで両matroidが線形表現できるなら、構成不要のrank判定をrandomized matrix algebraへ落とす。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "partition/graphic matroidと線形matroid intersectionを理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "最大流・最小カット定理",
+      "text": "有限体Gaussian eliminationと乱択誤り評価を扱える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "有限体と乱数を十分大きくし、再現可能性が必要ならseedを固定または複数回検査する。incidence rankはN-1なので一rowを落とし、color prefix S_cのoff-by-oneを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Colorful Spanning Tree 型の 頂点と辺からなる状態グラフに対し、最大流・最小カット定理を選び、状態と証明を一貫して設計できる。",
+      "text": "color上限付きspanning treeの全interval存在判定を、線形matroid交差のrandom rankへ変換して数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "有向辺と逆辺の index を対で保持し、残余容量の更新漏れを防ぐ。",
+      "text": "N≤7,C≤5でedge subsetから全spanning treeを列挙し、各intervalの真値と複数seedのrank判定・最小R単調性を比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

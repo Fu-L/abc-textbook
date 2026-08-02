@@ -17,67 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc318-f「Octopus」では、距離の適否が変化する臨界座標 X_i±L_j を列挙し、隣接臨界点間の代表値で sorted distance 条件を判定する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "頭位置 k を固定すると宝までの距離を昇順 Y_i に並べ、Y_i≤L_i が全 i で成立することが matching 可能性の必要十分条件になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "k を全整数で試せないが、適否が k と k+1 で変わるのは、ある距離が足長境界を跨ぐ k=X_i+L_j または X_i−L_j−1 のときだけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc318-f「Octopus」では、距離の適否が変化する臨界座標 X_i±L_j を列挙し、隣接臨界点間の代表値で sorted distance 条件を判定する。この状態表現から答えを構成する。",
+        "approach": "全 O(N²) 個の変化点を sort し、隣接変化点間の代表位置で距離列を判定して有効整数区間長を加える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "判定値が各区間で一定で、N≤200 なので O(N²) 区間×O(N) 判定の O(N³) が可能である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "頭位置について最小から最大座標まで整数を一つずつ動かして判定する。",
+        "decision": "rejected",
+        "decisionReason": "座標範囲が 10^18 級で、N が小さくても位置列挙はできない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各 |X_i-k| と L_j の比較結果は臨界座標をまたぐまで変わらないため、各整数区間の一点を調べれば区間全体の可否が決まる。",
+        "text": "sorted distance と sorted L の成分比較は、近い宝を短い足へ割り当てる greedy matching であり、失敗時は遠い宝の本数に対する Hall 条件に反する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Octopus 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "適否を変える可能性のある整数境界を両側 X_i+L_j と X_i−L_j−1 から全列挙すれば、負座標や巨大な空白も区間長としてまとめられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc318-f「Octopus」では、距離の適否が変化する臨界座標 X_i±L_j を列挙し、隣接臨界点間の代表値で sorted distance 条件を判定する。この状態表現から答えを構成する。",
+      "text": "S={X_i+L_j, X_i−L_j−1} を sort unique する。各連続境界について代表 k（公式の端点規約では右端 S_t）を選び、|X_i−k| を sort して全 Y_i≤L_i か検査する。有効なら前境界+1..現境界の整数個数を答えへ加える。外側無限区間は十分遠方で必ず失敗する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "絶対値の区分線形性と臨界点列挙",
-      "trigger": "制約と操作を整理したときに 絶対値の区分線形性と臨界点列挙 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc318-f「Octopus」では、距離の適否が変化する臨界座標 X_i±L_j を列挙し、隣接臨界点間の代表値で sorted distance 条件を判定する。この状態表現から答えを構成する。で 絶対値の区分線形性と臨界点列挙 を問題固有の状態へ適用する。",
+      "name": "離散イベント点による整数区間圧縮",
+      "trigger": "巨大座標上の可否が有限個の不等式境界を跨ぐ時だけ変わるとき。",
+      "application": "全境界を列挙し、その間を代表点一つで判定して区間長を加える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "sorted greedy matching",
+      "trigger": "能力が昇順の資源を、要求値だけを持つ同数の対象へ一対一割当てるとき。",
+      "application": "要求も昇順にし、各順位で要求≤能力かを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "可否関数自体は単調でなくても、変化点が O(N²) なら全ての定常区間を走査できる。",
+      "reusablePerspective": "二分探索できない座標判定では、真偽が変わる等式条件を列挙して piecewise constant に分解する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "絶対値の区分線形性と臨界点列挙",
+      "text": "貪欲 matching の Hall 条件",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "絶対値不等式の境界列挙",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "臨界点自身と開区間内の整数を分け、距離列と長さ列を同じ順序で sort して比較する。",
+      "text": "整数境界の −1 を落とすと区間端で off-by-one になる。座標和差と答えは 10^18 を越え得る範囲を考慮した整数型を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Octopus 型の問題に対し、絶対値の区分線形性と臨界点列挙を選び、状態と証明を一貫して設計できる。",
+      "text": "10^18 幅の頭位置を O(N²) 個の変化区間へ圧縮し、O(N³) で有効な整数位置数を数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "臨界点自身と開区間内の整数を分け、距離列と長さ列を同じ順序で sort して比較する。",
+      "text": "可否が単調かを決めつけず、k→k+1 でどの不等式だけが変化できるかを書く。代表点と加える区間の対応を数直線で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

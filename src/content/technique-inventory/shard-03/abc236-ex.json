@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc236-ex「Distinct Multiples」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各 i の候補値は D_i の倍数だが、M が 10 の 18 乗なので値を列挙して異なる代表を割り当てる DP は作れない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "相異なる条件は、各対 (i,j) の等値事象 A_i＝A_j を全て避ける条件なので、等値辺集合への包除原理を適用できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc236-ex「Distinct Multiples」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "各 i へ D_i の倍数を順に割り当て、使用済み値集合を持つ探索を行う。",
+        "decision": "rejected",
+        "decisionReason": "一変数だけでも M/D_i 個の候補があり、巨大な値域と使用済み集合を扱えない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全等値対への包除を、選択辺グラフの連結成分分割ごとにまとめ、各成分の共通倍数候補数と符号和を subset partition DP で合成する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "同じ連結成分の A_i は全て等しくなり、候補数は D_i の lcm だけで決まるため、辺集合を頂点集合の分割へ圧縮できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "ある対象が k 個の条件に該当するとき寄与の二項係数交代和が 1 または 0 になる。",
+        "text": "頂点集合 T が一等値成分になる値の候補数は g(T)=floor(M/lcm_{i∈T}D_i) である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Distinct Multiples 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "|T| 頂点上の連結グラフを辺数符号付きで足した値は h(|T|)=(-1)^{|T|−1}(|T|−1)! となり、成分内部の全辺選択を一係数へ畳み込める。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc236-ex「Distinct Multiples」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "非衝突条件の edge inclusion-exclusion を set partition の重み積へ変換し、固定頂点を含む一成分 T' を選ぶ再帰 dp[T]=Σg(T')h(|T'|)dp[T\\T'] で計算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc236-ex「Distinct Multiples」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "等値事象の包除と連結成分圧縮",
+      "trigger": "複数変数を相異ならせたいが各値域が巨大で、対ごとの等値制約だけは数えやすいとき。",
+      "application": "等値辺の連結成分ごとに変数を一値へ束ね、辺集合の符号和を成分サイズ係数へ置き換える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "包除原理",
-      "trigger": "制約と操作を整理したときに 包除原理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc236-ex「Distinct Multiples」では、主解法候補として、満たしてはいけない条件集合を列挙し、交差部分の符号付き和を inclusion–exclusion で数える。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 包除原理 を問題固有の状態へ適用する。",
+      "name": "部分集合の集合分割 DP",
+      "trigger": "ラベル付き要素集合を成分へ分割し、各成分の重みの積を全分割について足すとき。",
+      "application": "最小 bit を含む成分だけを列挙して分割の順序重複を避ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "等値成分の共通値は全 D_i の公倍数でなければならず、最小公倍数が M を超えた時点で候補数は 0 になる。",
+      "reusablePerspective": "巨大上限下の共通倍数数え上げでは、lcm を上限で飽和させて値域列挙と整数 overflow を同時に避ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "包除原理",
+      "text": "包除原理、lcm の subset 前計算、固定要素付き部分集合列挙を扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "mask の lcm は gcd で約分してから掛け、M を超える場合は番兵 M＋1 に飽和させる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "成分候補 T' は対象 mask の固定最下位 bit を必ず含め、h の交互符号を法 998244353 で正規化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Distinct Multiples 型の 列の順序と prefix 状態に対し、包除原理を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な倍数候補から相異なる値を選ぶ数え上げを、等値包除と集合分割 DP へ変換できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "空集合の項と符号を揃え、部分集合列挙の計算量を制約と照合する。",
+      "text": "distinct 条件と巨大値域が組み合わさったら、衝突する対の等値事象を包除して成分単位にまとめる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "辺集合包除が大きすぎる場合、選択辺の効果が連結成分だけで決まるなら分割重みへ圧縮する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

@@ -208,7 +208,7 @@ previewは次の縦切りを同一cohortで通す。
 preview後も、公開taxonomyは全コーパスから再計算する。初期制作は次の順序を守る。
 
 1. ABC 212〜466の全ContestとDより後の全slot/problem metadataを収集し、欠落・公式状態を確定する。
-2. 全Problemについて、公式根拠から主たる解法、証明着眼点、必要前提、実装上の注意、候補成果を`TechniqueInventoryItem`として棚卸しする。問題単位で主解法を確認した項目だけ`reviewed`とし、公式解説の用語検出による候補は`draft`のまま保持してT159のfinal taxonomy受理前に確認する。計算量解析自体が解法選択や実現可能性の本質となる特殊な場合に限り、公式解説または問題固有の解析で確定した解法全体の計算量を任意欄へ記録する。通常の計算量と、部分テクニックの汎用fallback計算量は生成しない。
+2. 全Problemについて、公式根拠から主たる解法、証明着眼点、必要前提、実装上の注意、候補成果を`TechniqueInventoryItem`として棚卸しする。初期棚卸しでは公式解説の用語検出による候補を`draft`のまま保持し、その後、問題単位で公式Source Revisionとwriting policyを確認して執筆・self-reviewした項目だけを`reviewed`にする。自動検出だけでの昇格は行わず、全コーパスjoinは未確認`draft`、`changes_requested`、既知scaffoldを拒否する。計算量解析自体が解法選択や実現可能性の本質となる特殊な場合に限り、公式解説または問題固有の解析で確定した解法全体の計算量を任意欄へ記録する。通常の計算量と、部分テクニックの汎用fallback計算量は生成しない。
 3. 全inventoryを横断して、正式Tag、Learning Outcome、Tag前提DAG、Learning Unit前提DAG、標準学習順、Problem Placementを設計する。同義の仮Tagや一問専用Unitを正本へ残さない。
 4. T154のpreview PASS後に、T159がT044でfreezeした全Inventoryからfinal Tag/Outcome/Unit候補、二つのDAG、標準順、全ProblemPlacement、完全なTaxonomyIntegrationMapを決定生成し、policy-selected review後に一つの`FinalTaxonomyBuild` digestとして受理する。T047–T050はそのaccepted digestをcanonical entityへmaterializeするだけで、preview候補を直接正本にしない。preview用のT051–T054はcomponent digestを固定した時点で完了し、canonicalな全コーパス展開はT055–T056とT155–T158の別taskで行う。その後T065で`outcomeId`ごとにProblem IDを公式順で並べ、最大8 Problemの連続したOutcome/Problem shardへ分割し、shardごとに独立したwork manifest、paths、checks、review evidenceと同一`indexDigest`を生成する。
 5. 各Problemを主たるLearning Outcomeのshardへ一意に割り当て、完全解説または根拠付きの類題/補充問題を執筆する。

@@ -17,67 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc334-g「Christmas Color Grid 2」では、DFS 木の訪問順と lowlink を計算し、頂点除去で連結成分が分かれる条件を判定する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "緑cellを一つ削除したとき、その所属連結成分が何個へ分裂するかを全頂点について求めればよい。これはDFS木のordとlowから、削除頂点を通らず祖先側へ戻れない子subtreeを数えて判定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc334-g「Christmas Color Grid 2」では、DFS 木の訪問順と lowlink を計算し、頂点除去で連結成分が分かれる条件を判定する。この状態表現から答えを構成する。",
+        "approach": "緑graph全体にlowlinkを行い、各頂点削除後のcomponent数を集計する",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "一回のDFSで全articulation効果を求め、全選択の期待値を線形時間で計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各緑cellを一つずつ消してBFSする",
+        "decision": "rejected",
+        "decisionReason": "緑頂点数回の全graph探索となり、最大100万cellで実行できない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "子部分木から祖先へ戻れる最小訪問順を lowlink に保つと、親より上へ戻れない子ごとに頂点除去後の成分が一つ増える。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Christmas Color Grid 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "非root頂点vではlow[w]≥ord[v]を満たすDFS子wごとに独立成分が一つ生じ、残りの親側がもう一成分なのでparts(v)=c+1である。DFS rootでは親側がなくparts(v)=子数cとなる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc334-g「Christmas Color Grid 2」では、DFS 木の訪問順と lowlink を計算し、頂点除去で連結成分が分かれる条件を判定する。この状態表現から答えを構成する。",
+      "text": "gridの#を無向graphとして各未訪問頂点からDFSし、ord・lowと初期成分数Cを求める。同時に各vの分離子数cを数え、rootならparts=c、非rootならparts=c+1とする。削除後全体はC-1+parts(v)なので全緑vで平均する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "DFS 木と lowlink",
-      "trigger": "制約と操作を整理したときに DFS 木と lowlink の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc334-g「Christmas Color Grid 2」では、DFS 木の訪問順と lowlink を計算し、頂点除去で連結成分が分かれる条件を判定する。この状態表現から答えを構成する。で DFS 木と lowlink を問題固有の状態へ適用する。",
+      "name": "lowlinkとarticulation point",
+      "trigger": "全頂点について削除時の連結成分分裂数が必要である。",
+      "application": "DFS子のlowと親のordを比較し、親を介さず外へ出られないsubtreeを数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "非連結graphのcomponent補正",
+      "trigger": "削除が影響するのは所属する一成分だけで、他成分は不変である。",
+      "application": "初期Cから所属成分を1引き、削除後のparts(v)を足す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "articulationか否かのbooleanだけでなく、条件を満たす子subtree数を数えることで、削除後に何成分増えるかまで同じlowlink情報から得られる。",
+      "reusablePerspective": "lowlinkは切断点検出を、頂点削除後component数という定量値へ拡張できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "DFS 木と lowlink",
+      "text": "無向graphのDFS木、ord/low、rootと非rootのarticulation条件。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "根だけは DFS 木の子数で判定し、親への木辺と多重辺を区別する。",
+      "text": "parentへの木辺だけをback edgeとして使わず、grid graphでも再帰深度がHWになり得るためiterative DFSまたは十分なstackを検討する。孤立rootはparts=0になる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Christmas Color Grid 2 型の問題に対し、DFS 木と lowlinkを選び、状態と証明を一貫して設計できる。",
+      "text": "一様に選んだ緑cellを赤へ変えた後の緑連結成分数の期待値をmod 998244353で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "根だけは DFS 木の子数で判定し、親への木辺と多重辺を区別する。",
+      "text": "孤立緑cell、pathの中央、cycle、複数DFS成分、rootの子が0・1・複数の例で削除後BFSの成分数と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

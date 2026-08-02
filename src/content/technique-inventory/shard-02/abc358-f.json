@@ -17,67 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc358-f「Easiest Maze」では、短い基準経路から、壁の局所 gadget を開くたび経路長が一定量増える蛇行迷路を構成して目標 K に合わせる。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "入口cell (1,M) と出口cell (N,M) の最短simple pathはN cellsなのでK≥Nが必要。gridは二部彩色されpath上の色が交互になるため、端点色から K≡N (mod2) も必要である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "これらを満たせば、右端縦pathの一部を隣接二列のコの字迂回へ置換するたび通過cell数を2増やし、最大NMまで任意の許容Kを構成できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc358-f「Easiest Maze」では、短い基準経路から、壁の局所 gadget を開くたび経路長が一定量増える蛇行迷路を構成して目標 K に合わせる。この状態表現から答えを構成する。",
+        "approach": "条件判定後に長さKの自己交差しないsnake pathを構成し、全壁からpath隣接pairの壁だけ除く。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "path列を先に確定すれば「branchなし」は次数がpath通りで自動保証され、壁出力の複雑な場合分けを分離できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各壁を局所的に開閉しながら、到達path長がKになるまで調整する。",
+        "decision": "rejected",
+        "decisionReason": "局所変更がbranchやshortcutを生み、唯一pathの長さと連結性を同時に保証しにくい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各 gadget は入口・出口と単純路性を保ったまま増分だけを独立に加え、基準値から最大値まで許容 parity の全長を表せる。",
+        "text": "checkerboard parityは任意のgrid pathに対する不変条件で、Kの偶奇必要性を与える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Easiest Maze 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "全cell間を壁で閉じてから選んだpathの連続辺だけ開ければ、通路graphは一本のpathそのものになり余分なbranchが存在しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc358-f「Easiest Maze」では、短い基準経路から、壁の局所 gadget を開くたび経路長が一定量増える蛇行迷路を構成して目標 K に合わせる。この状態表現から答えを構成する。",
+      "text": "K<Nまたは(K−N)奇数ならNo。残りextra=(K−N)/2を、行pair/列snakeの定型構成でコの字迂回へ割り当て、(1,M)から(N,M)までK個のdistinct cells列を作る。水平・垂直の壁配列を全て閉じ、pathの連続cell間だけ対応壁を開け、入口・出口も開けて出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "構成問題の局所 gadget と parity",
-      "trigger": "制約と操作を整理したときに 構成問題の局所 gadget と parity の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc358-f「Easiest Maze」では、短い基準経路から、壁の局所 gadget を開くたび経路長が一定量増える蛇行迷路を構成して目標 K に合わせる。この状態表現から答えを構成する。で 構成問題の局所 gadget と parity を問題固有の状態へ適用する。",
+      "name": "二部graphのpath parity",
+      "trigger": "grid上で指定端点間のpath頂点数に制約がある構成問題。",
+      "application": "checkerboard色からpath長の必要parityを得る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "path-first constructive output",
+      "trigger": "壁配置など表現が複雑だが、望む通路graphは単純な形のとき。",
+      "application": "先に頂点列を構成し、出力表現を後から機械的に生成する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "長さを一マスずつでなく2マス単位のdetourで増やすことが、parity必要条件とそのまま対応して十分性を示す。",
+      "reusablePerspective": "構成問題では必要条件の差分単位を実現する局所gadgetを作り、最小構成から積み上げる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "構成問題の局所 gadget と parity",
+      "text": "gridの市松彩色",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "simple pathのsnake構成",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "K の実現可能範囲と parity を先に判定し、未使用 cell から shortcut が生じないよう壁を置く。",
+      "text": "K≤NMでも端点・N,Mの偶奇に応じてsnake末尾を正しく右端へ戻す。pathがcellを重複せず、壁文字列の寸法・入口出口位置が仕様通りか検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Easiest Maze 型の問題に対し、構成問題の局所 gadget と parityを選び、状態と証明を一貫して設計できる。",
+      "text": "path長の必要十分条件をparityで特徴付け、長さ2のdetour gadgetからbranchなしmazeを構成できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "K の実現可能範囲と parity を先に判定し、未使用 cell から shortcut が生じないよう壁を置く。",
+      "text": "条件判定、path頂点列、壁への変換を三段に分ける。小さい2×M・3×Mで全許容Kを描いてconstructionの端処理を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

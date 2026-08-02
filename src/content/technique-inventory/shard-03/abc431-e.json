@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc431-e「Reflection on Grid」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "光線がマスへ入る方向まで含めれば、その後の遷移先は鏡の置き方で決まる。元の鏡を使う遷移は変更数 0、別の置き方を選ぶ遷移は変更数 1 とみなせる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc431-e「Reflection on Grid」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "状態 (x,y,入射方向) を頂点とし、可能な出射方向への辺重みを鏡変更の要否 0/1 として 01-BFS する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "経路上で変更したマス数が辺重み和に一致し、重みが 0/1 なので線形時間最短路になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "変更するマス集合を列挙し、そのたび光線をシミュレーションする。",
+        "decision": "rejected",
+        "decisionReason": "鏡配置が指数通りあり、同じ部分経路を繰り返し調べる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "deque の先頭距離は非減少で、重み 0 の緩和を前、重み 1 を後へ置くことで Dijkstra と同じ確定順を保つ。",
+        "text": "同じマスを経路中に再訪して異なる変更要求が起きる懸念は、最短路を単純路にできるため状態グラフの最短コストとして扱える。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Reflection on Grid 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "反対方向へそのまま戻る出射は不可で、残りの出射方向のうち現在の鏡型に対応するものだけがコスト 0 である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc431-e「Reflection on Grid」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "四方向を符号化して dist[x][y][dir] を INF で初期化する。各状態から逆向き以外の ndir へ、鏡 A/B/C がその組を接続するなら 0、変更が必要なら 1 の辺で隣接マス状態へ進み、deque による 01-BFS で出口までの最小値を求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc431-e「Reflection on Grid」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "状態拡張グラフ",
+      "trigger": "位置だけでは次の遷移が決まらず、到着方向など小さな履歴が必要なとき。",
+      "application": "グリッド辺の向きを状態へ加え、鏡による入射―出射の対応を通常の有向辺にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "0-1 BFS",
-      "trigger": "制約と操作を整理したときに 0-1 BFS の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc431-e「Reflection on Grid」では、主解法候補として、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 0-1 BFS を問題固有の状態へ適用する。",
+      "name": "01-BFS",
+      "trigger": "辺コストが 0 または 1 の最短路を求めるとき。",
+      "application": "元配置の遷移を deque 前方、変更を要する遷移を後方へ追加する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "『鏡を変える』という配置選択を先に決めず、光線が使う局所遷移へ変更コストを課すと最短路になる。",
+      "reusablePerspective": "局所設定の変更回数最小化は、設定を使う状態遷移に 0/1 コストを付ける形へ帰着できることがある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "0-1 BFS",
+      "text": "01-BFS、方向付きグリッド状態、鏡の入射・反射対応、deque を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。",
+      "text": "方向番号と xor による鏡型判定を表と照合し、盤外へ出る遷移を終点として扱う。距離更新時だけ deque へ追加する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Reflection on Grid 型の 盤面上の位置と局所遷移に対し、0-1 BFSを選び、状態と証明を一貫して設計できる。",
+      "text": "鏡グリッドで目的の出口へ到達する最小変更数を、方向状態上の 01-BFS で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。",
+      "text": "コスト 0 の出射方向が各鏡型に対して正しいか、逆戻り方向を候補から除いているかを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

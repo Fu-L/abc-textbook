@@ -17,85 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc272-e「Add and Mex」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。さらに、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "長さNのsequenceのmexは必ず0,…,Nの範囲なので、operation j後の値A_i+ijが[0,N)に入る場合だけを記録すればよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "固定iで重要になるjの個数は高々⌈N/i⌉であり、全iの合計はharmonic sum O(N log N)になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc272-e「Add and Mex」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。さらに、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。この状態表現から答えを構成する。",
+        "approach": "各operationでN要素を更新し、setからmexを求め直す。",
+        "decision": "rejected",
+        "decisionReason": "N×Mが最大4×10^10となる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各iについて0≤A_i+ij<Nとなるjだけを列挙し、operation jのbucketへ値を入れてbucketごとにmexを走査する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "mexに影響するpair (i,j)だけの総数がO(N log N)で、不要な巨大値を完全に省ける。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の実行可能解が列挙した候補のちょうど一つに対応し、判定条件が必要十分であることを示す。",
+        "text": "A_iが負でも、最初に非負となるj=max(1,ceil(−A_i/i))から始めれば無駄なnegative valuesを列挙しない。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "基準変数を一つ固定すると列全体が一意に決まり、各成功条件はその変数の一候補値と同値になる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Add and Mex 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "各bucketの要素数をsとするとmexは高々sなので、0から見つかるまでのscan総量もbucket sizesの総和に比例する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc272-e「Add and Mex」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。さらに、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。この状態表現から答えを構成する。",
+      "text": "mexの値域boundで全time-element pairsをsparse eventsへ絞り、arithmetic progressionの有効区間列挙とoffline bucketsで処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "全探索と候補数の上界評価",
-      "trigger": "制約と操作を整理したときに 全探索と候補数の上界評価 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc272-e「Add and Mex」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。さらに、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。この状態表現から答えを構成する。で 全探索と候補数の上界評価 を問題固有の状態へ適用する。",
+      "name": "mexの値域による枝刈り",
+      "trigger": "集合の要素数がNで、mex以外の巨大値が答えに影響しないとき。",
+      "application": "各時刻で[0,N)に入る値だけをpresence候補として保存する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "式変形と frequency map",
-      "trigger": "制約と操作を整理したときに 式変形と frequency map の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc272-e「Add and Mex」では、制約で小さく抑えられた候補集合を全列挙し、必要十分条件を各候補へ直接検査する。さらに、各制約が要求する基準変数の候補値を導出し、frequency map で最頻候補を数える。この状態表現から答えを構成する。で 式変形と frequency map を問題固有の状態へ適用する。",
+      "name": "調和級数による疎な列挙",
+      "trigger": "index iごとの有効event数がO(N/i)で抑えられるとき。",
+      "application": "A_i+ijがmex範囲にある連続j区間だけを歩き、総event数をO(N log N)と評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "j回目の値は初期値を逐次更新せずA_i+ijと直接書けるため、要素ごとに有効時刻を逆列挙できる。",
+      "reusablePerspective": "全時刻simulationが重いときは、各objectが答えのrelevant rangeへ入る時刻だけをofflineに配る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "全探索と候補数の上界評価",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "式変形と frequency map",
+      "text": "mexの上界、ceil division、harmonic-series amortizationを扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "jの下端・上端を整数除算で求める際はnegative A_iのceil divisionを誤らず、[1,M]と交差させる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "添字 parity による符号反転と負数 key をそのまま正確に保持する。",
+      "text": "同じbucketにduplicate値があってもpresenceだけを立て、mex scan用arrayをtimestamp方式で再利用できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Add and Mex 型の問題に対し、全探索と候補数の上界評価を選び、状態と証明を一貫して設計できる。",
+      "text": "全M operations後のmexを、答えに関与するO(N log N)個の値だけで列挙できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同一対象の異なる表現を正規化し、重複計上と境界候補の欠落を防ぐ。",
+      "text": "mex問題では、まずsequence lengthから答えの上界を固定し、その範囲外の値を捨てる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "要素ごとの値が時刻の一次式なら、値域に入る時刻区間を解いてevent総数を評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

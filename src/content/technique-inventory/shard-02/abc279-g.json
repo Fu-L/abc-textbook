@@ -17,77 +17,105 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc279-g「At Most 2 Colors」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "直前Kマスの具体的な色列を状態にするとC^Kだが、合法列ではactiveな色は高々2色で、色名の対称性も大きい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "2色がactiveなら片方は必ず直前マスの色であり、もう片方について必要なのは最後に現れた位置だけである。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc279-g「At Most 2 Colors」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "直近が単色の列数singと、直前色以外のactive色が最後に現れた位置p別のdp[p]を持ち、sliding window和で遷移する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "色名と片方の位置を捨て、dp区間和をprefix sumで求めてN≤10^6を線形に処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "直前Kマスの色patternを正規化してDPする。",
+        "decision": "rejected",
+        "decisionReason": "色名を同型化してもset partition型のpattern数がKとともに急増し、K≤10^6には使えない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "単色suffixから異色を選ぶとC-1通りで、旧直前色の最終位置i-1をsecond color位置とするdp[i-1]へ入る。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "At Most 2 Colors 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "二色状態でsecond colorを次に塗ると二色の役割が交換され、新しいsecond color最終位置もi-1になる。直前色を続ける場合は状態がそのまま残る。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "second color位置がi-Kまで古くなると直近Kマスから消え、列はsing状態へ移る。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc279-g「At Most 2 Colors」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "位置1でsing=C、dp=0とする。i=2…Nでsingへdp[i-K]を加え、dp[i-1]=sing(C-1)+Σ_{p=i-K+1}^{i-2}dp[p]を作る。区間和はdp prefixで求め、最後はsingとactive範囲のdpを合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc279-g「At Most 2 Colors」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "色名対称性による状態圧縮",
+      "trigger": "制約が色の一致/不一致だけに依存し、実際のlabelを区別する必要がないとき。",
+      "application": "active色の役割と新色選択数C-1だけを残す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc279-g「At Most 2 Colors」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "last occurrence DP",
+      "trigger": "sliding window内にカテゴリが残っているかが最終出現位置で決まるとき。",
+      "application": "second colorのlast positionを状態にし、window外へ出る時に単色状態へ移す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "active 2色のうち直前色は位置情報不要なので、『もう一色の最終位置』という1次元だけでwindowの色数制約を記述できる。",
+      "reusablePerspective": "複数last occurrence状態では、最新要素が固定するカテゴリを除き、残りのranked last positionだけを持てないか考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "sliding windowとlast occurrence",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "累積和付きDP",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "色labelの対称性",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "dp[i-K]をsingへ移した後、active区間和の左端はi-K+1とし、古いdp値を配列から消さず参照範囲だけで除外する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "Cは10^9でも法上のC,C-1として扱い、最終active dp範囲の端をN,Kに合わせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "At Most 2 Colors 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "任意K-windowが高々2色となる彩色数を、単色状態とsecond-color最終位置DPで数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "K=3で列AAB→ABB→BBBと進む時、second color位置の更新とwindow外へ出てsingになる瞬間を図示する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

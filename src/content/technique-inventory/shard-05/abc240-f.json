@@ -17,67 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc240-f「Sum Sum Max」では、等差変化する区間内の累積値を二次式で表し、端点と頂点近傍だけを評価して最大値を求める。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "C の同値 block を一項ずつ展開すると M が10^9まであるが、block 開始時の累積値を A_0,B_0 とすれば、block 内 n 項後は B=B_0+xn、A=A_0+B_0n+x n(n+1)/2 と閉じた式になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "block 内の A は整数 n 上の二次式で、隣接差は B_0+xn という等差数列である。したがって最大候補は端点、または差分の符号が正から負へ変わる付近に限られる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc240-f「Sum Sum Max」では、等差変化する区間内の累積値を二次式で表し、端点と頂点近傍だけを評価して最大値を求める。この状態表現から答えを構成する。",
+        "approach": "各 run の二次式を作り、x≥0 なら両端、x<0 なら離散差分が0を跨ぐ整数付近と両端だけを評価する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "y_i の大きさに依存せず、上凸・下凸という形から block 内最大を定数個の候補へ絞れる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "圧縮列 C を y_i 回ずつ展開し、B と A を逐次更新する。",
+        "decision": "rejected",
+        "decisionReason": "総長 M は10^9であり、run 数 N が小さくても項単位の走査はできない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各 run 内の目的関数は離散二次関数なので、差分の符号が変わる点と区間端以外に最大候補はない。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Sum Sum Max 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "A(n)-A(n-1)=B_0+xn なので、x<0 のとき最大点はこの値が非負である最後の n とその隣にあり、微分ではなく整数差分で境界を決められる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc240-f「Sum Sum Max」では、等差変化する区間内の累積値を二次式で表し、端点と頂点近傍だけを評価して最大値を求める。この状態表現から答えを構成する。",
+      "text": "各 (x,y) で f(n)=A+B n+x n(n+1)/2 を定義し、n=1,y と、x<0 なら -B/x 付近を [1,y] に clamp した候補を評価して全体最大を更新する。その後 A←f(y)、B←B+xy として次 block へ進む。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "等差数列の和と離散凸・凹関数",
-      "trigger": "制約と操作を整理したときに 等差数列の和と離散凸・凹関数 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc240-f「Sum Sum Max」では、等差変化する区間内の累積値を二次式で表し、端点と頂点近傍だけを評価して最大値を求める。この状態表現から答えを構成する。で 等差数列の和と離散凸・凹関数 を問題固有の状態へ適用する。",
+      "name": "run-length 圧縮列の閉形式更新",
+      "trigger": "同じ値が巨大回数続く累積和を扱うとき。",
+      "application": "等差数列和を使い、run 末尾の状態を項数に依存せず更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "離散凸・離散凹関数の極値",
+      "trigger": "整数区間上の目的関数の一階差分が単調なとき。",
+      "application": "端点と差分の符号反転点付近だけを候補にする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "C が一定な run では B が一次、A が二次になるため、二重 prefix sum を巨大列としてではなく放物線の区間として読める。",
+      "reusablePerspective": "複数回 prefix sum を取る run-length 列では、run 内が何次多項式になるかを先に求める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "等差数列の和と離散凸・凹関数",
+      "text": "等差数列の和、二重累積和、離散凸性",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "頂点の floor・ceil 両方を区間へ clamp し、積と累積和を十分広い整数型で持つ。",
+      "text": "A,B と x·y(y+1)/2 は 64 bit で計算し、候補 n は必ず1..yへ clamp して前後も評価する。答えの対象は A_1..A_M なので各 block の n=0だけを新候補にしない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Sum Sum Max 型の問題に対し、等差数列の和と離散凸・凹関数を選び、状態と証明を一貫して設計できる。",
+      "text": "巨大な run-length 列の二重累積和を block ごとの二次式へ変え、離散差分から最大点を特定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "頂点の floor・ceil 両方を区間へ clamp し、積と累積和を十分広い整数型で持つ。",
+      "text": "x<0 の run で B が正から負へ変わる小例を書き、A の最大が B の値そのものではなく A の隣接差分の境界にあることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

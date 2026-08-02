@@ -17,77 +17,119 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc440-f「Egoism」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "各馬の満足度に掛かる係数は、先頭なら 1、それ以外なら直前の馬の B_i であり、1 または 2 に限られる。したがって全馬を係数 2 とした 2ΣA_i を基準に置き、係数 1 になる馬の A_i の総和を最小化すればよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "B_i=1 の馬の頭数を z とする。末尾が B_i=1 でない並びは巡回移動して満足度を下げずに末尾を B_i=1 にできるため、0<z<N では係数 1 の馬をちょうど z 頭とする場合だけ調べれば足りる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "0<z<N のとき、係数 1 にする z 頭の集合は B_i=2 の馬を少なくとも 1 頭含む必要がある。逆にこの条件を満たす任意の集合は、B と希望係数による四分類を所定の順に並べることで実現できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc440-f「Egoism」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "並び順の最適化を、A_i の小さい z 頭を選ぶ問題へ言い換える。値 A ごとの B=1 の個数、B=2 の個数、A の総和をセグメント木に持ち、点更新後に z 番目の値と B=2 の最小値を順序統計として求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "集合の必要十分条件まで示せば並び順を状態に持たずに済み、各更新を値域上の O(log M) 個の節点だけで処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各クエリ後に全馬を A_i の昇順へ並べ直し、先頭から z 頭と B_i=2 の候補を走査する。",
+        "decision": "rejected",
+        "decisionReason": "一回の更新ごとに N 頭を整列または走査すると、N,Q がともに 2×10^5 の制約では間に合わない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "馬を一頭ずつ置く貪欲法として、直前の B_i と次の A_i の積がその場で最大になる馬を選ぶ。",
+        "decision": "rejected",
+        "decisionReason": "現在の選択が次の係数と B_i=2 を含むという全体条件を同時に変えるため、局所的な積の大小から最適な並びは決められない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+        "text": "z=0 なら先頭だけが係数 1 なので答えは 2ΣA_i−min A_i、z=N なら全員が係数 1 なので答えは ΣA_i となり、中間の場合と分離できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Egoism 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "0<z<N では A_i が小さい z 頭の集合 T に B_i=2 が含まれれば T が最適である。含まれなければ、T 内の最大 A_i を全体で最小の B_i=2 の馬へ置き換えるのが最小の修正になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "選んだ集合を係数 1 にできる並べ方の構成は、この集合最適化が単なる下界ではなく実際に達成可能な答えであることを保証する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc440-f「Egoism」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "text": "値 A を添字とするセグメント木に B=1 の個数 c_1、B=2 の個数 c_2、A の総和 s を保持する。更新前の馬を削除して更新後の馬を追加し、0<z<N なら累積個数が z 以上となる最小値 r を木上で探索する。A≤r の集計から余分な同値要素を引いた z 個分の和を求め、そこに B=2 がなければ値 r の一頭を最小の B=2 へ交換し、最後に 2ΣA_i からその和を引く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "online query の計算量設計",
-      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc440-f「Egoism」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "name": "基準値からの差分による目的関数変形",
+      "trigger": "各要素の係数が少数の値しか取らず、最大の係数を全要素へ与えた仮想的な総和から損失だけを最小化できる場合。",
+      "application": "係数をすべて 2 とした 2ΣA_i を基準にし、係数 1 を割り当てる実現可能な集合の A_i 総和を最小化する問題へ変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "セグメント木と monoid",
-      "trigger": "制約と操作を整理したときに セグメント木と monoid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc440-f「Egoism」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で セグメント木と monoid を問題固有の状態へ適用する。",
+      "name": "セグメント木上の順序統計",
+      "trigger": "値の多重集合が点更新され続け、k 番目の値、先頭 k 個の総和、条件付き最小値を毎回高速に求めたい場合。",
+      "application": "A の値域に個数と総和を載せ、累積個数が z に達する境界 r、z 個の総和、B=2 の最小 A を木上の降下で取得する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "各馬が受ける係数の集合を先に特徴付けると、順列の自由度は「B_i=2 の馬を一頭以上含む z 要素部分集合」という静的な条件へ潰れる。",
+      "reusablePerspective": "前後関係を直接最適化しにくいときは、各位置が受ける係数の多重集合と、その割り当てを実現できる条件を先に求める。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "online query の計算量設計",
+      "text": "順列上で直前要素が作る係数を数え、巡回移動後も目的値が悪化しないことを比較する交換・回転論法。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "セグメント木と monoid",
+      "text": "個数と重み和を持つセグメント木で、k 番目の値や条件を満たす最小の値を根から探索する方法。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "A_i の重複を許すため、境界値 r の個数を丸ごと足さず、累積個数の超過分だけ r を総和から引いて正確に z 頭を選ぶ。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "点更新では旧い (A_i,B_i) を木から削除してから新しい組を追加し、全体和と z も同じ順序で同期させる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "z=0 と z=N を中間式へ流さず、総和や 2 倍した値は 64 bit 整数で保持する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Egoism 型の 更新と問い合わせの時系列に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。",
+      "text": "動的な順列最適化を、実現可能な係数集合の証明と値域セグメント木による最小重み部分集合の管理へ分離して処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "データ構造を見る前に、係数 1 の集合について必要性だけでなく任意の適合集合を実現する並べ方まで説明できているかを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "A_i が同値の馬を多数含む例と、更新で z が 0、1、N−1、N をまたぐ例を用意し、境界 r の補正と場合分けを重点的に検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

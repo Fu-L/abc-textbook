@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc447-e「Divide Graph」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "削除辺コスト最小化は、全辺コストから「残しても graph が非連結な辺」の総和最大化を引く問題である。重み2^iは上位一辺が全下位辺の総和より大きい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc447-e「Divide Graph」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "辺番号を M から1へ降順に見て、追加後も graph が非連結ならその辺を残す貪欲を DSU で実行する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "2進重みでは採否が異なる最大番号の辺だけで総和の大小が決まり、より高い辺を残せるなら全ての低い辺より優先すべきだからである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "二つの連結成分への頂点分割を全探索し、cross edge の削除コストを比較する。",
+        "decision": "rejected",
+        "decisionReason": "cut は指数個存在し、一般の重み付き cut 列挙として扱うと頂点数の制約に耐えない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "任意の最適解の最初に異なる選択を交換しても実行可能性と評価が悪化しないことを示す。",
+        "text": "最適解が三成分以上でも、成分間の一部の辺を戻して二成分にしてコストを増やさないため「非連結」まで条件を緩めても最適値は同じ。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Divide Graph 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "現在 component 数が2で異なる成分を結ぶ辺だけは追加すると連結になるので捨て、それ以外は高い順に必ず採用できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc447-e「Divide Graph」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "DSU を孤立頂点で初期化し、i=M..1 を処理する。端点が別成分で componentCount=2 なら辺 i を削除側へ、そうでなければ残して必要なら union する。powers of two の和を指定 modulus/表現で集計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc447-e「Divide Graph」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "超増加重みの辞書順貪欲",
+      "trigger": "各重みがそれより小さい全重み和を上回る選択問題のとき。",
+      "application": "番号降順に実行可能なら採用し、高位 bit を最優先する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "greedy choice と交換論法",
-      "trigger": "制約と操作を整理したときに greedy choice と交換論法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc447-e「Divide Graph」では、主解法候補として、局所的に最も制約を悪化させない候補を選び、greedy に解を延長する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で greedy choice と交換論法 を問題固有の状態へ適用する。",
+      "name": "DSU による増分連結性",
+      "trigger": "辺追加だけで graph が連結になる瞬間を判定したいとき。",
+      "application": "成分数と端点 root から追加可否を決める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "2^i の目的関数は総和最大化を採用 bit 列の辞書順最大化へ変えるため、交換法が単純になる。",
+      "reusablePerspective": "削除問題は残す側へ補集合を取ると、制約を壊さない最大独立系風の増分構成になる場合がある。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "greedy choice と交換論法",
+      "text": "超増加重みの辞書順貪欲、DSU による増分連結性と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "同一成分内の辺は component 数を変えないので常に残せる。全辺和と残辺和のどちらを答えにするか、modulus 上の減算を統一する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Divide Graph 型の 頂点と辺からなる状態グラフに対し、greedy choice と交換論法を選び、状態と証明を一貫して設計できる。",
+      "text": "2冪重みの graph 分割コストを、高位辺優先の貪欲と DSU で最適化できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同値候補の tie-break が将来の実行可能性へ影響しない条件を確認する。",
+      "text": "採否が異なる最大辺 x を用いた交換証明と、component 数2のときだけ union が禁止される条件を別々に説明する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

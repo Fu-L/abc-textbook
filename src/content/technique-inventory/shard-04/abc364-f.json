@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc364-f「Range Connect MST」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "query iは補助頂点N+iと区間[L_i,R_i]の全頂点を同じcost C_iで結ぶ。辺を明示すると総数がNQに達するが、Kruskalでは区間内の未連結な隣接境界だけが重要である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "cost昇順に区間を処理すると、補助頂点をL_iへ結ぶ一辺は必ず採用でき、以降jへ必要な辺は元頂点j−1とjがまだ別成分かに一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc364-f「Range Connect MST」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "未接続の隣接境界indexをordered setで持ち、各区間内の境界を列挙・削除しながらKruskal費用を加える。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各境界は全処理を通して一度しか削除されず、暗黙の大量辺を必要な接続数へまとめられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "N+Q頂点間に区間内の全辺を生成して通常Kruskalを行う。",
+        "decision": "rejected",
+        "decisionReason": "長い区間が多数あると辺数が入力サイズの積になり、生成もsortも不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "cut property により異なる成分を結ぶ最小辺は安全であり、閉路を避けた採用を繰り返せば最適な全域木になる。",
+        "text": "区間[L,R]が消せる未接続境界数をkとすると、この補助頂点から採用する辺は基点への一辺を含むk+1本で、費用寄与は(k+1)Cである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Range Connect MST 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "最後に未接続境界が残ることと元頂点群全体が非連結であることが同値なので、その場合は−1となる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc364-f「Range Connect MST」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "queryをC昇順にsortし、setへ境界1..N−1を入れる。各(L,R,C)でlower_bound(L)からR未満の境界を順に取り出して削除し、その個数kに対して(k+1)Cを答えへ加える。全query後にsetが空なら答え、残れば−1を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc364-f「Range Connect MST」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "implicit graphのKruskal",
+      "trigger": "規則的な大量辺が同一costで生成される最小全域木問題。",
+      "application": "辺を列挙せず、そのcost段階で新たに結ぶcomponent境界だけを処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "最小全域木と cut property",
-      "trigger": "制約と操作を整理したときに 最小全域木と cut property の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc364-f「Range Connect MST」では、主解法候補として、辺を重み順に調べ、連結成分を併合しながら最小全域木を構成する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 最小全域木と cut property を問題固有の状態へ適用する。",
+      "name": "削除型ordered set走査",
+      "trigger": "多数の区間内にある未処理位置を列挙し、処理後は永久に不要になるとき。",
+      "application": "lower_boundから該当要素を消しながら進み、全体の列挙回数を抑える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "区間hubとの連結性は、線形順序上の隣接頂点が繋がったかというN−1個のgapだけで表せる。",
+      "reusablePerspective": "区間が点群をまとめるgraphでは、点間の全関係より連続境界の消滅を追う。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "Kruskal法",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "最小全域木と cut property",
+      "text": "ordered setのlower_bound",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "同重み辺の順序が答えへ影響する場合は一括判定してから併合する。",
+      "text": "境界indexの対象はL≤j<Rで、R自身を消さない。kが0でも補助頂点を接続する一辺分Cを加え、合計は64 bitで持つ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Range Connect MST 型の 頂点と辺からなる状態グラフに対し、最小全域木と cut propertyを選び、状態と証明を一貫して設計できる。",
+      "text": "区間が生む暗黙辺を隣接gapの削除へ置換し、最小全域木費用と非連結判定を行える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "同重み辺の順序が答えへ影響する場合は一括判定してから併合する。",
+      "text": "小区間[L,L]ではgapが0個でも一辺必要なことを確認する。set iteratorはeraseの戻り値で進め、境界の半開区間を固定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

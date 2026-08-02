@@ -17,77 +17,121 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc287-ex「Directed Graph and Query」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "Warshall法で中継頂点を1,2,…の順に許可すると、外側loop k終了時のreach[i][j]は中継に番号≤kの頂点だけを使うpathの存在を表す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "path costには両端も含むため、query(s,t)の答えはk≥max(s,t)かつreach[s][t]になった最初のkである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "boolean reachability rowをbitsetにすると、i→kがあるときの全j更新をrow[i] |= row[k]のword並列演算へ変えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc287-ex「Directed Graph and Query」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "bitset版Warshallを番号順に進め、各段階で未確定queryの初回到達を記録する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "minimax costをthreshold kの到達可能性へ変え、N≤2000のtransitive closureを64bit並列化できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各queryについてcost thresholdを二分探索し、許可頂点subgraphでDFSする。",
+        "decision": "rejected",
+        "decisionReason": "最大10^4 queryごとに複数回graph探索が必要で、共通するreachability計算を再利用できない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "boolean matrixをscalar三重loopでWarshall更新する。",
+        "decision": "rejected",
+        "decisionReason": "N=2000では約N^3のboolean更新が重く、row ORによるword並列化を使える。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "許可する中継頂点集合について帰納し、最適路が新頂点を使う場合と使わない場合を網羅する。",
+        "text": "最大頂点番号を最小化する問題は、番号k以下を使用可能にする単調なthreshold判定として見ると、最初に到達可能になるkが答えになる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Directed Graph and Query 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Warshallの更新reach[i][j] |= reach[i][k] & reach[k][j]は、reach[i][k]がtrueなrowだけreach[k]を丸ごとORすれば同値である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc287-ex「Directed Graph and Query」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "各direct edge a→bにbit reach[a][b]を立てる。k=1..Nについて、reach[i][k]が立つ全iでreach[i] |= reach[k]をin-place実行する。その段階で未回答queryを走査し、k≥max(s,t)かつreach[s][t]ならanswer=kを記録する。最後まで未回答なら-1を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc287-ex「Directed Graph and Query」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "minimax値のthreshold sweep",
+      "trigger": "path costが使用要素の最大keyで、許可thresholdに対し可否が単調なとき。",
+      "application": "頂点をkey順に追加し、初めて到達可能になる段階を答えにする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Floyd–Warshall 法",
-      "trigger": "制約と操作を整理したときに Floyd–Warshall 法 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc287-ex「Directed Graph and Query」では、主解法候補として、中継頂点を順に許可する全点対 DP で最短距離または到達関係を更新する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で Floyd–Warshall 法 を問題固有の状態へ適用する。",
+      "name": "bitset transitive closure",
+      "trigger": "boolean Warshallのj方向更新を集合unionとして表せるとき。",
+      "application": "到達先集合をmachine word列で持ち、row ORで一括更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "Floyd–Warshallの段階不変条件",
+      "trigger": "中継候補を順序付きで解禁し、その時点の情報へqueryしたいとき。",
+      "application": "外側loop終了時に許可済み中継集合だけのpathを表す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "通常は最終closureだけを使うWarshallの途中状態が、この問題ではpath上の最大labelという最適値をちょうど符号化している。",
+      "reusablePerspective": "DPの各段階が制約thresholdを表すなら、完成値だけでなく「初めて成立する段階」を回答として利用できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
+      "text": "Warshall法とtransitive closure",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Floyd–Warshall 法",
+      "text": "bitsetのOR演算",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "minimax pathの単調性",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "到達不能値同士を加算せず、更新順序 k-i-j を崩さない。",
+      "text": "reachabilityだけでは端点番号のcostを反映しないため、回答条件へk≥max(s,t)を必ず入れる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "bitsetのindexと頂点番号の0/1-indexを揃え、未回答queryだけを最初の成立時に確定する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "in-place row ORは外側loopをkに固定し、reach[i][k]判定後に行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Directed Graph and Query 型の 頂点と辺からなる状態グラフに対し、Floyd–Warshall 法を選び、状態と証明を一貫して設計できる。",
+      "text": "有向path上の最大頂点番号の最小値を、多queryまとめてbitset Warshallの初回到達段階として求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "到達不能値同士を加算せず、更新順序 k-i-j を崩さない。",
+      "text": "端点番号が大きいdirect edgeと、小さい中継だけで繋がるpathを比較し、reachが早くtrueでもmax(s,t)未満では回答しないことを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

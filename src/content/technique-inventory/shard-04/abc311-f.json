@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc311-f「Yet Another Grid Task」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "黒マスなら直下と右下も黒という条件を閉包として先に入力へ反映してよい。反映後は各右下がり対角線で白の prefix と黒の suffix に分かれる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "対角線 c=i−j ごとの最左黒列 L_c は、隣の対角線へ進むにつれて広義単調減少する。この境界列を数えれば grid 全体を一意に数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc311-f「Yet Another Grid Task」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "強制黒を下方へ伝播した後、対角線ごとの白黒境界位置を状態にして suffix sum DP を行う。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "美しい grid と単調な境界列が一対一で、各対角線の遷移を累積和により O(M)、全体 O(NM) で処理できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "未確定マスを上から順に白黒へ塗り、局所条件違反を枝刈りする。",
+        "decision": "rejected",
+        "decisionReason": "条件があっても自由な境界が多数あり、マス単位の 2^{NM} 探索を制約内へ落とせない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "局所含意をすべて閉包した grid は既に美しく、追加で黒くする自由度は対角線上の切替点だけに残る。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Yet Another Grid Task 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "前対角線の境界 k が現在の j 以上という単調条件なので、dp[c][j]=Σ_{k≥j}dp[c−1][k] を右からの累積和で更新できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc311-f「Yet Another Grid Task」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "入力の # から下・右下へ強制黒を伝播する。c=−M+1..N−1 を走査し、境界 j ごとの dp を前段の suffix sum から作る。対角線外の状態と、強制黒より右へ境界を置いて矛盾する状態を 0 にし、最終段を合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc311-f「Yet Another Grid Task」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "局所制約の閉包と境界線 DP",
+      "trigger": "二値 grid の単調な含意が、各走査線を一つの切替点へ圧縮するとき。",
+      "application": "強制状態を先に伝播し、対角線ごとの境界位置だけを DP 状態にする。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc311-f「Yet Another Grid Task」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "単調遷移の累積和高速化",
+      "trigger": "dp の遷移元が k≥j など連続区間全体になるとき。",
+      "application": "前段の suffix sum を一走査で作り、各 j の総和を O(1) で得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "行列を行・列ではなく条件が伝播する右下がり対角線で切ると、美しさが単調な一次元境界になる。",
+      "reusablePerspective": "局所条件の方向ベクトルを見て、それに直交する走査線上で frontier が低次元化しないか探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "grid 上の含意閉包",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "累積和で高速化する DP",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "存在しない対角線マスと外側を黒とみなす番兵 M+1 を区別する。強制黒 (i,j) が境界 j+1 以降を禁じる添字を図で合わせる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Yet Another Grid Task 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "美しい grid を単調な対角境界列へ写し、強制マスを含む全塗り分けを O(NM) で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "局所条件を見たら、まず入力をその条件で閉包しても答えが変わらないか試す。その後、小例に白黒の境界を描いて走査方向を選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

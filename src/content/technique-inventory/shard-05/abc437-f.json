@@ -17,77 +17,85 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc437-f「Manhattan Christmas Tree 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "45度回転座標 U=X+Y,V=X-Y を使うと、マンハッタン距離は max(|u-U|,|v-V|) になる。固定 u から値集合への絶対差最大は集合の最小値か最大値で達成される。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc437-f「Manhattan Christmas Tree 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "U_i,V_i の各区間 min/max を持つセグメント木を構築し、更新と [L,R] 最遠距離質問を処理する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各質問は四端点との差の最大だけで決まり、一点更新・区間集約とも O(log N) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "質問ごとに i=L…R を走査して全マンハッタン距離を計算する。",
+        "decision": "rejected",
+        "decisionReason": "区間長の総和が大きいと O(NQ) になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "結合演算の単位元と結合則が成り立つため、任意区間を互いに素な節点区間へ分解して同じ要約を得られる。",
+        "text": "|x-X_i|+|y-Y_i|=max(|(x+y)-(X_i+Y_i)|,|(x-y)-(X_i-Y_i)|) である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Manhattan Christmas Tree 2 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "max_i|u-U_i|=max(u-min U,max U-u) なので内部の値分布は不要である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc437-f「Manhattan Christmas Tree 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "text": "各点を (U_i,V_i) に変換し、葉に (minU,maxU,minV,maxV) を持つセグメント木を作る。点更新で四値を差し替える。照会 [L,R],(x,y) では区間四値を取得し、u=x+y,v=x-y との差四候補の最大を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "online query の計算量設計",
-      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc437-f「Manhattan Christmas Tree 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "name": "マンハッタン距離の45度回転",
+      "trigger": "二次元 L1 距離の最大値を座標ごとの一次元絶対差へ分離したいとき。",
+      "application": "X+Y と X-Y に写し、L∞ 距離として扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "セグメント木と monoid",
-      "trigger": "制約と操作を整理したときに セグメント木と monoid の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc437-f「Manhattan Christmas Tree 2」では、主解法候補として、必要な区間情報を結合可能な要約へし、segment tree で点更新・区間取得を行う。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で セグメント木と monoid を問題固有の状態へ適用する。",
+      "name": "区間 min/max セグメント木",
+      "trigger": "動的配列の区間内で、問い合わせ値から最も遠い要素を求めたいとき。",
+      "application": "変換二座標それぞれの最小・最大だけを区間モノイドとして保存する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二次元マンハッタン最遠点は回転座標ごとの極値四つだけで決まり、点集合全体を保持する必要がない。",
+      "reusablePerspective": "距離最大化では変換後の凸関数が区間端で最大になるため、極値要約と相性がよい。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "online query の計算量設計",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "セグメント木と monoid",
+      "text": "マンハッタン距離、座標変換、絶対値最大、セグメント木の区間 min/max を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "X-Y は負になり得るため符号付きの広い整数型を使う。入力の区間端の inclusive/exclusive 変換と更新後の U,V 再計算を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Manhattan Christmas Tree 2 型の 更新と問い合わせの時系列に対し、セグメント木と monoidを選び、状態と証明を一貫して設計できる。",
+      "text": "動的な点列の部分区間に対するマンハッタン最遠距離を、四極値から対数時間で答えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の規約、結合順序、単位元を固定し、非可換な要約を逆順にしない。",
+      "text": "45度回転の式と、U/V 各軸で最小・最大の両方との差を比較しているかを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

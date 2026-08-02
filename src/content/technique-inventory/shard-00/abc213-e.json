@@ -17,67 +17,101 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc213-e「Stronger Takahashi」では、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "通路どうしは上下左右へ自由に移動でき、費用が増えるのは 2×2 の領域をパンチして壁を壊すときだけである。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "パンチは実際に通行が必要になった時点まで遅らせられるため、過去にどの壁を壊したかを状態として保持する必要はない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc213-e「Stronger Takahashi」では、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。この状態表現から答えを構成する。",
+        "approach": "現在位置に加えて、これまでに破壊した全ての 2×2 領域または壁集合を状態として探索する。",
+        "decision": "rejected",
+        "decisionReason": "破壊履歴の組合せが膨大であり、同じ位置への到達を履歴ごとに分ける必要もない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "徒歩を重み 0、現在位置に隣接する 2×2 領域へのパンチ後の移動を重み 1 の辺としてマス間グラフを作る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各操作の費用が 0 または 1 で、位置ごとの最小パンチ数だけを 0-1 BFS で確定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "deque の先頭距離は非減少で、重み 0 の緩和を前、重み 1 を後へ置くことで Dijkstra と同じ確定順を保つ。",
+        "text": "壊した壁を永続的な盤面状態として追う代わりに、パンチ一回で到達可能になる近傍マスへの有料辺へ操作を畳み込む。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Stronger Takahashi 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "徒歩辺は元から通路の上下左右だけだが、パンチ辺の到着先は元のマスが壁か通路かにかかわらず利用できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc213-e「Stronger Takahashi」では、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。この状態表現から答えを構成する。",
+      "text": "不可逆な盤面変更を位置間の 0・1 重み付き遷移へ置換し、距離更新が 0 の頂点を deque の前、1 の頂点を後ろへ入れる最短路探索を行う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
       "name": "0-1 BFS",
-      "trigger": "制約と操作を整理したときに 0-1 BFS の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc213-e「Stronger Takahashi」では、辺重み 0 と 1 を deque の前後へ分けて追加し、距離順を保つ 0-1 BFS を行う。この状態表現から答えを構成する。で 0-1 BFS を問題固有の状態へ適用する。",
+      "trigger": "グラフの辺重みが 0 と 1 だけで、頂点までの最小費用を求めるとき。",
+      "application": "無料の徒歩移動を deque の前、有料のパンチ移動を後ろへ追加して最小パンチ数を更新する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "操作履歴の辺への圧縮",
+      "trigger": "環境を変更する操作があるが、必要になる直前へ遅延しても最適性が失われないとき。",
+      "application": "破壊済み壁集合を持たず、パンチ一回後に到達できる一定範囲のマスへ重み 1 の辺を張る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "2×2 のパンチ領域を現在位置に隣接させて選べば、一回のパンチで 5×5 近傍の四隅を除く範囲へ移れる。",
+      "reusablePerspective": "局所的な破壊操作では、操作領域そのものより「現在地から一操作後に到達できる位置集合」を列挙すると状態を減らせる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "0-1 BFS",
+      "text": "重み 0 と 1 の辺に対する deque を用いた最短路更新を説明し実装できること。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "グリッド上の局所操作から到達可能な相対座標を導き、盤外判定を行えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。",
+      "text": "パンチ候補は縦横差がともに 2 以下の範囲から四隅を除き、各候補について盤外かだけを確認する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "徒歩の重み 0 辺は到着先が通路の場合だけ張り、パンチの重み 1 辺では元の壁判定を条件にしない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Stronger Takahashi 型の問題に対し、0-1 BFSを選び、状態と証明を一貫して設計できる。",
+      "text": "盤面を変更する操作の履歴を局所的な重み付き辺へ圧縮し、0-1 BFS で最小操作回数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "改善時だけ deque へ追加し、重み 0 と 1 の挿入方向を逆にしない。",
+      "text": "破壊状態が指数的に見えたら、破壊を必要になる瞬間まで延期できるかを検討し、位置だけの状態へ戻せないか考える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "パンチ範囲の図を単に暗記せず、現在地に隣接する各 2×2 領域から到達可能な相対位置の和集合として復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

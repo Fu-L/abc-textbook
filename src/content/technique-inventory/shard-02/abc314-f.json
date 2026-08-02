@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc314-f「A Certain Game」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "試合ごとに二チームは一つへ統合され二度と分裂しないので、統合履歴は葉が選手、内部節点が試合の二分木になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "選手 i の期待勝利数は、所属チームが参加する各試合の勝率の和であり、期待値の線形性により試合間の勝敗依存を追う必要がない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc314-f「A Certain Game」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "Union-Find で各時点のチーム代表を追い、統合木を作って根から辺勝率の prefix 和を葉へ配る。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各試合の勝率をその子チーム全員へ一括加算する操作が、統合木の一辺重みとして表現され全体 O(N α(N)) になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "試合ごとに両チームの全メンバーを列挙し、それぞれの期待値へ勝率を加える。",
+        "decision": "rejected",
+        "decisionReason": "偏った統合順では同じ大チームを何度も走査して Θ(N²) になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "代表元が同じことと現在までの追加辺で連結であることを不変条件として保つ。",
+        "text": "サイズ a,b の統合節点から各子への辺に a/(a+b), b/(a+b) を置くと、その subtree の全葉が当該試合で得る期待寄与を表す。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "A Certain Game 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "最終チームに対応する根から選手葉までの辺和は、その選手が参加した試合を過不足なく一つずつ含む。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc314-f「A Certain Game」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "最初の N 葉を各一人チームとする。各試合で p,q の DSU representative に対応する現チーム節点 u,v を得て、新節点 w を作り u,v を子にし、辺重み size(u)/(size(u)+size(v)) 等を設定して union する。最後の根から DFS し累積辺和を各葉へ出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc314-f「A Certain Game」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "merge tree（統合木）",
+      "trigger": "集合が時系列に二つずつ不可逆に併合され、各併合の寄与を当時の全要素へ与えるとき。",
+      "application": "併合を内部節点として記録し、要素ごとの履歴を根葉 path に変換する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Union-Find",
-      "trigger": "制約と操作を整理したときに Union-Find の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc314-f「A Certain Game」では、主解法候補として、連結成分を Union-Find で管理し、辺や制約の追加に応じて成分を併合する。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で Union-Find を問題固有の状態へ適用する。",
+      "name": "期待値の線形性",
+      "trigger": "複数試行の勝利回数の期待値を求め、試行結果に依存があるとき。",
+      "application": "各試合の勝利 indicator の期待値を個別に足し、同時分布を追わない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "勝ったチームだけが残るのではなく試合後は必ず両者が統合されるため、勝敗は将来の所属に影響せず期待寄与だけを足せる。",
+      "reusablePerspective": "確率イベントが構造更新に影響するかを確認し、影響しないなら履歴木と線形性で分離する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "Union-Find",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Union-Find",
+      "text": "根付き木の prefix 和 DFS と法逆元",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "DSU representative と統合木節点番号を別に管理する。勝率分母は統合前サイズ和で、mod 998244353 の逆元を使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "A Certain Game 型の 整数の約数・剰余構造に対し、Union-Findを選び、状態と証明を一貫して設計できる。",
+      "text": "全選手への試合寄与を統合木の path sum として共有し、N−1 試合をほぼ線形時間で処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "経路圧縮と union by size を併用し、成分付随情報は新しい代表元へ集約する。",
+      "text": "併合履歴を小例で木にし、葉から根までにどの試合が並ぶか確認する。勝率を勝者確率ではなく、その子チーム全員の期待加算と捉える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

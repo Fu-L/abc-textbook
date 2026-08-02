@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc299-f「Square Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "同じ部分列文字列を重複なく数えるには、各文字を常に直前位置より右で最左の出現から取るcanonical embeddingを固定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc299-f「Square Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "後継位置σと前後半同時DP",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "TTの後半先頭q1を固定し、前半位置pと後半位置qを同じ次文字で最左遷移させれば、文字列Tを一度ずつ数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "部分列の取り出し方を全列挙",
+        "decision": "rejected",
+        "decisionReason": "同じTTを多数回数え、2^Nの候補も大きい。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Square Subsequence 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "q1=xを固定するとT_1=S_xと前半p1の最左位置が決まり、終了条件σ(p_last,T_1)=xが前半と後半の境界を保証する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc299-f「Square Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。",
+      "text": "全位置i・文字cのnext σ(i,c)を前計算する。各xをq1としてdp[p][q]を初期化し、26文字で(dp[next(p,c)][next(q,c)])へ遷移し、σ(p,S_x)=xを満たす状態を答えに加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "文字列の添字と prefix",
-      "trigger": "制約と操作を整理したときに 文字列の添字と prefix の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc299-f「Square Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 文字列の添字と prefix を問題固有の状態へ適用する。",
+      "name": "distinct subsequenceのcanonical embedding",
+      "trigger": "同一文字列の複数取り出し方を一度だけ数える。",
+      "application": "各文字を常に最左の可能位置から選ぶ。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc299-f「Square Subsequence」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。文字列の prefix・suffix と一致関係を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "二列同期遷移DP",
+      "trigger": "同じ未知文字列を二つのsubsequenceとして並行に埋め込む。",
+      "application": "前半・後半位置対を状態にし同じ文字で進める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "square TTの二コピーを同時に追い、後半の最初位置で分類すると重複除去条件を局所化できる。",
+      "reusablePerspective": "繰返しsubsequenceは複数embeddingを最左規則で正規化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "文字列の添字と prefix",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "next occurrence tableとDAG状位置DP。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "nextが∞の遷移を除き、長さ0のTを数えず、終了条件を各状態で重複加算しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Square Subsequence 型の 文字列の prefix・suffix と一致関係に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "Sの部分列として現れる非空square文字列の種類数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "N≤12の全subsequence文字列setと比較し、同文字反復、重なるembedding、長さ奇数でsquare不能な例を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

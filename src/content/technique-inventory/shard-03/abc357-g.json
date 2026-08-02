@@ -17,77 +17,93 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc357-g「Stair-like Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "階段形gridは N×N gridに、各段差の直外側へ O(N) 個の追加wallを置いた最短path問題として埋め込める。wall回避数え上げはtopological順の包除DPになる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "入力wallはM≤50なので愚直遷移できるが、規則的追加wall同士の O(N²) 遷移だけが障害で、そのpath数はindex差だけの二項係数kernelになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc357-g「Stair-like Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "規則wall間の包除DPをCDQ divide-and-conquer convolution/NTTで処理し、少数入力wallとの遷移だけ直接計算する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "translation invariantなkernel部分を O(N log²N)、例外M点を O(M(N+M)) に分離できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "階段gridの全マスへ通常の右下DPを行う。",
+        "decision": "rejected",
+        "decisionReason": "grid面積がΘ(N²)で N=2.5×10^5 のため、壁が少なくても走査不能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "wall w_iへ到達するpathから以前のwallを最後に通るものを引く dp_i=−Σ_{j<i}g(w_j,w_i)dp_j により、全wall回避pathを包除の部分集合列挙なしで得る。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Stair-like Grid 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "二列の規則wall w_{t,1},w_{t,2} 間の g は t差に応じた四種類のcombinationで、2×2 convolutionとしてblock間へ一括加算できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc357-g「Stair-like Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。",
+      "text": "始点・終点、M個の実wall、階段境界を表す二系列の仮wallをtopological順に置く。combinationでg(a,b)を O(1) 評価し、実wallを含む遷移は直接加算する。仮wall系列間はCDQで左halfの確定dpと差kernelをNTT畳み込みし右halfへ反映する。終点dpの符号を直して答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "grid の座標表現",
-      "trigger": "制約と操作を整理したときに grid の座標表現 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc357-g「Stair-like Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で grid の座標表現 を問題固有の状態へ適用する。",
+      "name": "障害物grid pathの包除DP",
+      "trigger": "右下移動pathを少数wallを避けて数え、点間path数が組合せで得られるとき。",
+      "application": "topological順に「最初/最後のwall」を課金して到達数を引く。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc357-g「Stair-like Grid」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。盤面上の位置と局所遷移を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "CDQ convolution",
+      "trigger": "online DP遷移が index差だけのkernelとの畳み込みで、左から値が確定するとき。",
+      "application": "分割統治で左block→右block寄与をFFT/NTTでまとめる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "巨大な欠けたgridを埋込むとwall数もO(N)になるが、その大半が規則列なので「少数例外＋畳み込みkernel」として扱える。",
+      "reusablePerspective": "巨大形状DPでは境界を障害物列へ変え、規則部分のtranslation invarianceを探す。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "grid の座標表現",
+      "text": "二項係数による格子路数",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "包除DPとNTT/CDQ",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "到達不能な点対はg=0にし、同じ座標wallやtopological tieを整理する。四kernelのrow type対応とdpの負符号を固定する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Stair-like Grid 型の 盤面上の位置と局所遷移に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "面積Θ(N²)の階段gridをO(N) wall包除へ変え、規則遷移を畳み込みで O(N log²N+M(N+M)) に高速化できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "まずO(|S|²)のwall包除式を正しく導いてから規則wallだけを切り出す。kernelが本当にi−jだけに依存するか四typeすべて確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

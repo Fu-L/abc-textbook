@@ -17,67 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc418-e「Trapezium」では、点対を既約方向ベクトルごとに数えて平行辺対を足し、同一中点の対角線対で平行四辺形の二重計上を引く。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "四点がtrapezoidを作るたび、平行な対辺pairが一組あれば同じdirectionの二segmentとして数えられる。parallelogramだけは平行対辺が二組あるので二重に数えられる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "四点がparallelogramを作る必要十分条件は二diagonalのmidpointが一致することであり、segment pairのmidpoint keyから個数を数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc418-e「Trapezium」では、点対を既約方向ベクトルごとに数えて平行辺対を足し、同一中点の対角線対で平行四辺形の二重計上を引く。この状態表現から答えを構成する。",
+        "approach": "全点pairの正規化direction別にC(c,2)を足し、midpoint別のC(d,2)を引く",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "前半は非parallelogram trapezoidを1回、parallelogramを2回数え、後半はparallelogramを1回ずつ数えるため最終的に全対象が一回になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "四点subsetを全列挙し、並べ替えて辺の平行性を判定する",
+        "decision": "rejected",
+        "decisionReason": "C(N,4)=Θ(N^4)でN=2000に使えず、parallel sideとdiagonal midpointというpair統計へ分解できていない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "非平行四辺形の台形は一組、平行四辺形は二組の平行辺を持ち、後者は対角線中点一致と必要十分である。",
+        "text": "direction(dx,dy)はgcd(|dx|,|dy|)で割り、最初の非零成分が正になるよう符号を統一すれば、verticalを含め浮動小数なしに平行判定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Trapezium 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "midpointは((x_i+x_j)/2,(y_i+y_j)/2)だが、keyを座標和(x_i+x_j,y_i+y_j)にすれば分数を使わず完全一致を判定できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc418-e「Trapezium」では、点対を既約方向ベクトルごとに数えて平行辺対を足し、同一中点の対角線対で平行四辺形の二重計上を引く。この状態表現から答えを構成する。",
+      "text": "i<jの全pairについてcanonical(dx,dy)の頻度と(x_i+x_j,y_i+y_j)の頻度をmapへ加える。ans=Σ_direction c(c-1)/2-Σ_midpoint d(d-1)/2を64 bitで計算して出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "有理傾きの正規化と平行四辺形の対角線",
-      "trigger": "制約と操作を整理したときに 有理傾きの正規化と平行四辺形の対角線 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc418-e「Trapezium」では、点対を既約方向ベクトルごとに数えて平行辺対を足し、同一中点の対角線対で平行四辺形の二重計上を引く。この状態表現から答えを構成する。で 有理傾きの正規化と平行四辺形の対角線 を問題固有の状態へ適用する。",
+      "name": "pair invariant の頻度数え上げ",
+      "trigger": "四要素構造が同じ不変量を持つ二pairとして特徴づくとき。",
+      "application": "全O(N^2) pairをdirection/midpoint keyでgroup化してpair-of-pairsを数える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "有理方向の正規化",
+      "trigger": "segmentの傾き一致をexactに比較したいとき。",
+      "application": "差vectorをgcdでprimitive化し、符号をcanonicalにする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "二重計数の補正",
+      "trigger": "特殊構造だけが複数の証拠を持ち主計数で重複するとき。",
+      "application": "二組の平行辺を持つparallelogramをdiagonal midpointで一回数えて引く。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "trapezoidの平行辺pairを数えた後、二証拠を持つparallelogramだけを別のpair invariantで抽出して一回補正する。",
+      "reusablePerspective": "対象ごとのcertificate数が通常1・特殊case2なら、certificate総数から特殊case数を引く設計が使える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "有理傾きの正規化と平行四辺形の対角線",
+      "text": "vectorの平行条件、gcd正規化、parallelogramのdiagonal二等分性を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "方向の符号を正規化し、中点は 2 倍座標の整数 pair として浮動小数点を使わず hash する。",
+      "text": "dx=0/dy=0の符号規約を統一する。同directionの二segmentがendpointを共有するcaseは三点共線禁止で生じない。頻度pair数と答えは64 bitを使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Trapezium 型の問題に対し、有理傾きの正規化と平行四辺形の対角線を選び、状態と証明を一貫して設計できる。",
+      "text": "四点全探索をせず、O(N^2 log N)程度のsegment pair集計でtrapezoid数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "方向の符号を正規化し、中点は 2 倍座標の整数 pair として浮動小数点を使わず hash する。",
+      "text": "parallelogram一個、平行辺一組だけのtrapezoid、vertical/horizontal、同directionが多数ある小点集合を四点全列挙と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

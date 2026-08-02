@@ -17,77 +17,89 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc249-g「Xor Cards」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "カード集合の選択は(AのXOR,BのXOR)という対で表せ、各カードを60ビットのベクトルとして行基本変形しても実現可能な対の集合は変わらない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc249-g「Xor Cards」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "連結した60ビット上のXOR基底と上限制約の桁探索",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "最大1000枚を階数高々60の基底へ圧縮し、Aの上位ビット制約を守りながら、制約が緩んだ後はB側を最大XORにできる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "全ての部分集合を列挙する",
+        "decision": "rejected",
+        "decisionReason": "選択肢が2^N個あり、N=1000では不可能である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "対象を互いに素な選択手順へ分割し、各手順数の積と選択位置の二項係数が一対一に対応する。",
+        "text": "AとBの基底を別々に作ると同じカードを選ぶ対応が失われるため、必ず(A,B)を連結した一つのベクトルとして消去する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Xor Cards 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Aの接頭辞がKより小さいと確定した時点で残りのAビットは自由になり、残ったB成分だけの線形空間で最大XORを取れる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc249-g「Xor Cards」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。",
+      "text": "(A_i,B_i)を連結したベクトルにガウス消去を行い、A側の上位ビットからK以下となる分岐を探索する。Kとの大小が確定した各候補で残余基底によるBの最大XORを求め、最大値を採用する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "整数論の基本的な割り切れ関係",
-      "trigger": "制約と操作を整理したときに 整数論の基本的な割り切れ関係 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc249-g「Xor Cards」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 整数論の基本的な割り切れ関係 を問題固有の状態へ適用する。",
+      "name": "XOR線形基底",
+      "trigger": "部分集合XORの実現可能集合を小さい階数で表したい。",
+      "application": "カードの対をF2上の基底に圧縮し、行基本変形後の生成空間を探索する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "組合せ数と二項係数",
-      "trigger": "制約と操作を整理したときに 組合せ数と二項係数 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc249-g「Xor Cards」では、主解法候補として、選択順序を組合せ係数へ分離し、階乗・逆階乗または漸化式で数え上げる。整数の約数・剰余構造を必要十分な状態だけで表し、答えを構成する。で 組合せ数と二項係数 を問題固有の状態へ適用する。",
+      "name": "二進接頭辞制約",
+      "trigger": "XOR値にA≤Kという数値上限が付く。",
+      "application": "上位ビットからKと同じか小さいかを管理し、小さいと確定した枝で目的側Bを貪欲最大化する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "制約値Aと目的値Bを一体のベクトルにすることが、同一部分集合という相関を保ったまま線形代数を使う鍵である。",
+      "reusablePerspective": "線形空間上の辞書順制約は、接頭辞が境界未満になる最初の位置を列挙して自由な接尾辞最適化へ分ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "整数論の基本的な割り切れ関係",
+      "text": "F2上のガウス消去とXOR基底による最大XORを実装できる。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "組合せ数と二項係数",
+      "text": "二進数の上限制約を上位ビットから比較する考え方を理解している。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "A側30ビットとB側30ビットの並び、符号なし64ビットのシフト、空集合だけで得られる(0,0)と非空部分集合の区別を確認し、実現不能なら-1を返す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Xor Cards 型の 整数の約数・剰余構造に対し、組合せ数と二項係数を選び、状態と証明を一貫して設計できる。",
+      "text": "AのXORがK以下となる非空カード集合の中で、BのXORの最大値を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "階乗前計算の上限、modulus より大きい添字、重複要素の除算条件を確認する。",
+      "text": "N≤20の部分集合全探索と比較し、線形従属なカード、零ベクトル、K=0、A側の上位ビットで初めて境界未満になる各分岐を検査する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

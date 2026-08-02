@@ -17,77 +17,103 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc228-h「Histogram」では、主解法候補として、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "棒をAの昇順に並べる。完成後の高さに逆転があれば、前側の高い完成値を後側の低い完成値まで下げても、減らした枚数は増えず種類数も増えないため、最適解の完成値は非減少としてよい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "同じ完成値にそろえる連続区間を一つのグループとみなせる。その完成値は区間右端の元の高さA_rまで下げても実現可能性と種類数を保ち、削除費用を減らせるので、候補は右端値だけで十分である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc228-h「Histogram」では、主解法候補として、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "昇順列を連続グループへ分ける区間DPを、そのまま全ての直前境界について遷移する。",
+        "decision": "rejected",
+        "decisionReason": "グループ末尾rごとに全てのl<rを調べる二乗遷移はN≤2×10^5に間に合わない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "区間DPの遷移をA_rにおける一次関数の最小値queryへ変形し、傾きとqueryの単調性を使うConvex Hull Trickで処理する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各境界lの寄与が傾き−R_l、切片D_lの直線になり、累積本数R_lとソート済みA_rによって追加・queryの順序がともに単調になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "各遷移候補を一次関数へ対応させると、求める最適値は query 点での直線群の包絡線に一致する。",
+        "text": "R_i=Σ_{j≤i}C_jとすると、区間(l,r]を高さA_rへそろえる最終面積は(R_r−R_l)A_rである。全体で元面積ΣA_iC_iを最後に引けば、追加する棒の枚数と種類ごとの固定費XだけをDPできる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Histogram 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "D_r=min_{l<r}{D_l+X+(R_r−R_l)A_r}=R_rA_r+X+min_l{(−R_l)A_r+D_l} と分離すると、過去状態が直線、現在のA_rがquery座標になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc228-h「Histogram」では、主解法候補として、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。",
+      "text": "(A,C)をA順にソートし、D_0=0、R_0=0の直線から始める。rを昇順に走査してx=A_rで直線群の最小値をqueryしD_rを求め、傾き−R_r・切片D_rの直線を単調dequeへ追加する。最後にD_N−ΣA_iC_iを出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "配列と prefix の添字管理",
-      "trigger": "制約と操作を整理したときに 配列と prefix の添字管理 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc228-h「Histogram」では、主解法候補として、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で 配列と prefix の添字管理 を問題固有の状態へ適用する。",
+      "name": "交換論による単調な正規形",
+      "trigger": "値を一方向にだけ変更でき、異なる完成値の個数にも費用がかかるとき。",
+      "application": "元の高さ順に完成値を非減少へ正規化し、同値グループを連続区間として扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Convex Hull Trick",
-      "trigger": "制約と操作を整理したときに Convex Hull Trick の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc228-h「Histogram」では、主解法候補として、DP 遷移を直線の最小・最大値 query に変形し、Convex Hull Trick または Li Chao tree で処理する。列の順序と prefix 状態を必要十分な状態だけで表し、答えを構成する。で Convex Hull Trick を問題固有の状態へ適用する。",
+      "name": "分割DP",
+      "trigger": "ソート後の列を連続グループへ分割し、各グループの費用が端点と累積量で書けるとき。",
+      "application": "最後のグループ(l,r]を高さA_rへそろえる費用を使ってprefixの最小費用を遷移する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "単調Convex Hull Trick",
+      "trigger": "DP遷移が一次関数群への最小値queryになり、直線の傾きとquery座標がともに単調なとき。",
+      "application": "境界lを傾き−R_l・切片D_lの直線にし、x=A_rで最小の遷移元をdequeから得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "削除費用を直接数える代わりに、完成後の総面積を最小化して元面積を最後に引くと、区間費用が(R_r−R_l)A_rという一次式になりCHTへつながる。",
+      "reusablePerspective": "増減量の費用が扱いにくいときは、初期総量が定数であることを使って完成総量の最適化へ置き換え、遷移の代数形を単純化する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "配列と prefix の添字管理",
+      "text": "ソートと交換論による最適解の正規化",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "Convex Hull Trick",
+      "text": "分割DPとConvex Hull Trick",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "傾き単調性の有無で構造を選び、積の overflow と等傾き直線を処理する。",
+      "text": "R_iA_iやDP値は64bit範囲で管理し、直線が不要かを判定する交差積はさらに広い整数型で比較して除算誤差を避ける。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "R_iはC_i>0により狭義増加するため傾きは狭義減少し、A_iはソートにより非減少する。この向きに合わせてdequeの先頭・末尾を更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Histogram 型の 列の順序と prefix 状態に対し、Convex Hull Trickを選び、状態と証明を一貫して設計できる。",
+      "text": "一方向変更と種類固定費を持つ最適化を、単調な区間分割へ正規化し、分割DPをCHTで高速化できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "傾き単調性の有無で構造を選び、積の overflow と等傾き直線を処理する。",
+      "text": "CHTの式だけを提示せず、完成値を非減少にできる交換論、各グループの値を右端A_rにできる理由、元面積を引く変換の順に導出を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

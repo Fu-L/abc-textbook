@@ -17,7 +17,11 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "三重累積和 D_x への A_i の寄与回数は (x-i+1)(x-i+2)/2 で、i に関する二次式へ展開できる。",
+        "text": "一点代入のたびに B,C,D を作り直すと 1 query が Θ(N) であり、N,Q≤2×10^5 には間に合わない。更新される A の一点が各 D_x へ与える寄与を直接管理したい。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "i≤x の A_i は B へ 1 回、C_x へ x-i+1 回、D_x へ (x-i+1)(x-i+2)/2 回寄与する。この係数は i に関する二次式へ展開できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
@@ -42,7 +46,7 @@
       }
     ],
     "algorithmConnection": {
-      "text": "A_i の差分を三つの重み 1,i,i² で Fenwick tree へ加え、x の係数との線形結合を 2 の逆元で割る。",
+      "text": "S_r(x)=Σ_{i=1}^x i^r A_i (r=0,1,2) を 3 本の Fenwick tree で管理し、D_x={S_2(x)-(2x+3)S_1(x)+(x+1)(x+2)S_0(x)}/2 を計算する。代入更新は旧値との差分を 3 種類の重みで加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
@@ -69,25 +73,25 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "二項係数の展開と Fenwick tree",
+      "text": "多重累積和における一要素の寄与回数、二項係数の多項式展開、点更新と prefix 和を扱う Fenwick tree。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "2 の modular inverse、i の1-origin、値の代入更新を旧値との差分へ変換する処理を統一する。",
+      "text": "添字を 1-origin で統一し、代入更新は Δ=(v-old) mod 998244353 として負値を正規化する。i² や x を含む係数も乗算前に法を取り、最後に 2 の逆元を掛ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Cumulative Cumulative Cumulative Sum 型の問題に対し、二項係数の展開と Fenwick treeを選び、状態と証明を一貫して設計できる。",
+      "text": "三重累積和の点更新と prefix query を、一要素の寄与係数の二次展開と 0 次から 2 次の moment を持つ Fenwick tree により各 O(log N) で処理できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "小さい x で A_i の寄与回数を手計算し、二次式と三本の Fenwick tree の係数を再導出する。",
+      "text": "x=1,2,3 で各 A_i の寄与回数を手計算して展開式を再導出し、値を小さくする代入で負になる差分も直接再計算と照合する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

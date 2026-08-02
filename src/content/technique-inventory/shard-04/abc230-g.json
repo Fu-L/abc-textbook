@@ -17,77 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc230-g「GCD Permutation」では、主解法候補として、倍数・約数上の累積関係を Möbius inversion で反転し、exact な個数を復元する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "GCD(i,j)≠1 は、i と j が共通して持つ 2 以上の約数の存在条件であり、P_i,P_j 側も同じ形をしている。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "各 GCD の「1 でない」を約数上の符号和で指示できれば、二条件の積を a,b の倍数である位置数へ交換して集約できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc230-g「GCD Permutation」では、主解法候補として、倍数・約数上の累積関係を Möbius inversion で反転し、exact な個数を復元する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "全ての i≤j を列挙し、二つの最大公約数を個別に計算する。",
+        "decision": "rejected",
+        "decisionReason": "位置対が N の二乗規模あり、N＝20 万では調べられない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "約数和が n≥2 の指示関数になる修正 Möbius 係数を両軸に適用し、a の倍数位置を走査して P_i の square-free 約数 b ごとの個数を集計する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "条件を約数対 (a,b) ごとの位置集合へ分解でき、非零係数を持つ b の個数が各 P_i で少ない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "約数 lattice 上で Möbius 関数の和が恒等元以外で 0 になるため、zeta 変換との逆変換になる。",
+        "text": "num(a,b) を i が a の倍数かつ P_i が b の倍数となる位置数とすると、i≤j の組数は num(a,b)(num(a,b)＋1)/2 になる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "GCD Permutation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "修正係数は 1 を除く square-free 数だけで非零になり、20 万以下では相異なる素因数が高々 6 個なので列挙約数は高々 63 個である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc230-g「GCD Permutation」では、主解法候補として、倍数・約数上の累積関係を Möbius inversion で反転し、exact な個数を復元する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。",
+      "text": "二つの非互いに素条件を修正 Möbius 反転で約数対へ展開し、倍数走査と P_i の非零 square-free 約数列挙から num(a,b) の三角数を符号付き加算する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順列と逆写像",
-      "trigger": "制約と操作を整理したときに 順列と逆写像 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc230-g「GCD Permutation」では、主解法候補として、倍数・約数上の累積関係を Möbius inversion で反転し、exact な個数を復元する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で 順列と逆写像 を問題固有の状態へ適用する。",
+      "name": "Möbius 反転による GCD 条件の指示化",
+      "trigger": "GCD が 1、または 1 でないという条件を約数の倍数条件へ分解したいとき。",
+      "application": "約数和が n≥2 で 1 となる修正係数を使い、両 GCD 条件を独立な約数和へ展開する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "Möbius inversion",
-      "trigger": "制約と操作を整理したときに Möbius inversion の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc230-g「GCD Permutation」では、主解法候補として、倍数・約数上の累積関係を Möbius inversion で反転し、exact な個数を復元する。順列の位置と値の対応を必要十分な状態だけで表し、答えを構成する。で Möbius inversion を問題固有の状態へ適用する。",
+      "name": "倍数走査と square-free 約数列挙",
+      "trigger": "非零 Möbius 係数を持つ約数だけを各値について集計すればよいとき。",
+      "application": "固定 a の倍数位置 i を巡り、P_i の相異なる素因数部分集合から b を生成してカウンタを増やす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "二条件が位置 i と値 P_i に分かれており、P が順列なので各値の素因数分解・約数列を一度だけ前計算して再利用できる。",
+      "reusablePerspective": "順列上で添字と値の算術条件が並ぶ問題は、添字側を倍数走査し値側を前計算テーブルで処理する二軸分解を検討する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "順列と逆写像",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "Möbius inversion",
+      "text": "Möbius 関数の約数和と、square-free 約数を素因数部分集合から生成する方法を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "約数向きと倍数向きのどちらを反転するか、添字 1 の初期値を確認する。",
+      "text": "i＝j も数えるため個数 c から c(c＋1)/2 を使い、通常の二要素組 c(c−1)/2 と取り違えない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "a ごとの b カウンタは触れた添字だけを記録して初期化し、N×N の全消去を発生させない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "GCD Permutation 型の 順列の位置と値の対応に対し、Möbius inversionを選び、状態と証明を一貫して設計できる。",
+      "text": "添字と順列値の二重 GCD 条件を約数包除へ変換し、倍数・square-free 約数の疎な走査で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "約数向きと倍数向きのどちらを反転するか、添字 1 の初期値を確認する。",
+      "text": "GCD 条件が複数あるときは、各条件を約数指示関数へ展開して和の順序を交換した後に残る集計量を定義する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "約数列挙の計算量は約数個数全体でなく、係数が非零な square-free 約数の個数を素因数数から評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

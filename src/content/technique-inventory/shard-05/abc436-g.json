@@ -17,67 +17,95 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc436-g「Linear Inequation」では、非負解を基数 d の商 Q と桁 R に分け、A·R の分布との畳み込みで境界係数列を縮約する操作を反復する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "求める f(A,M) は非負整数ベクトル X で A·X≤M となる個数である。各 X_i を基数 d で X=dQ+R、0≤R_i<d と一意分解すると、下位桁 R の重み和分布を介した再帰になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc436-g「Linear Inequation」では、非負解を基数 d の商 Q と桁 R に分け、A·R の分布との畳み込みで境界係数列を縮約する操作を反復する。この状態表現から答えを構成する。",
+        "approach": "係数列 c_i による線形結合 Σc_i f(A,i) をまとめて基数 d 変換し、畳み込みで添字幅を保ちながら O(log_d M) 回縮約する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "最大非零添字が各回 1/d 以下になり、係数列の幅は O(dΣA) に抑えられるため高速畳み込みが使える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "X_1,…,X_N を上限内で再帰列挙する通常の多次元 DP を行う。",
+        "decision": "rejected",
+        "decisionReason": "M や変数数に対して状態・遷移が大きく、巨大な上限を直接扱えない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "X=dQ+R は一意で、各桁和 s ごとの残余問題 f(A,floor((M-s)/d)) が全解を重複なく分割する。",
+        "text": "R 全体の多重集合 S={A·R} に対して f(A,M)=Σ_{s∈S}f(A,⌊(M-s)/d⌋) が成り立つ。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "Linear Inequation 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "Σ_i c_i f(A,i) を変換すると新係数は c'_q=Σ_{j=0}^{d-1}Σ_{s∈S}c_{dq+j+s} であり、S の頻度列との convolution と d 個ごとの集約で計算できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "開始係数 c_M=1 を反復変換し、非零添字が 0 以下だけになれば f(A,i<0)=0,f(A,0)=1 より答えは c_0 になる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc436-g「Linear Inequation」では、非負解を基数 d の商 Q と桁 R に分け、A·R の分布との畳み込みで境界係数列を縮約する操作を反復する。この状態表現から答えを構成する。",
+      "text": "小さな d を選び、各 i の R_i∈[0,d) による A_iR_i の分布を多項式積で作って S の頻度を得る。係数列 c を一点 M で初期化し、S との畳み込みと residue block 集約で c' を作る操作を最大添字が 0 になるまで繰り返し、c[0] を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "基数分解、生成関数、畳み込み",
-      "trigger": "制約と操作を整理したときに 基数分解、生成関数、畳み込み の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc436-g「Linear Inequation」では、非負解を基数 d の商 Q と桁 R に分け、A·R の分布との畳み込みで境界係数列を縮約する操作を反復する。この状態表現から答えを構成する。で 基数分解、生成関数、畳み込み を問題固有の状態へ適用する。",
+      "name": "基数分解による再帰",
+      "trigger": "非負整数変数の重み付き不等式で上限 M が非常に大きいとき。",
+      "application": "各変数を quotient と digit に分け、上限を 1/d へ縮める再帰式を作る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "線形結合の係数遷移",
+      "trigger": "同じ再帰関数 f の多数の引数評価を個別に展開すると重複が大きいとき。",
+      "application": "Σc_i f(i) 全体を一度に次の係数列へ移し、最終的な基底値だけ読む。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "多項式畳み込み",
+      "trigger": "独立な digit の重み和分布や係数列との shift 和を高速に求めるとき。",
+      "application": "各 R_i の生成多項式を積み、変換式の Σ_s を convolution で処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "巨大上限の格子点計数を、全変数の下位桁分布と上位桁の同型問題へ分解する。",
+      "reusablePerspective": "再帰値の集合を直接 memoize せず、必要評価の係数分布を逆向きに伝播すると添字範囲を制御できる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "基数分解、生成関数、畳み込み",
+      "text": "整数の商と余り、内積、生成関数、畳み込み/NTT、線形作用素を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "負 index の係数を零として扱い、support 幅を証明した上で NTT の padding と法を選ぶ。",
+      "text": "負添字を含む係数配列の offset を明示し、floor 除算を数学的な床として扱う。畳み込み後の d 個区間和と添字反転を式どおりに実装する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Linear Inequation 型の問題に対し、基数分解、生成関数、畳み込みを選び、状態と証明を一貫して設計できる。",
+      "text": "巨大 M の線形不等式の非負整数解数を、基数縮約と有限幅の畳み込み反復で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "負 index の係数を零として扱い、support 幅を証明した上で NTT の padding と法を選ぶ。",
+      "text": "c'_q の添字式を小さな d,N で愚直比較し、反復終了時に負添字寄与が f=0 として消えることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

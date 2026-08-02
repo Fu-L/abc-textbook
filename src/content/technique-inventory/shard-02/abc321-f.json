@@ -17,77 +17,117 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc321-f「#(subset sum = K) with Add and Erase」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "箱内の各ballを選ぶか否かは生成関数のfactor (1+z^x)に対応し、dp[s]は全factor積のz^s係数である。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "ball xの追加は通常の0/1 subset sumとしてsを降順にdp[s]+=dp[s-x]と更新すれば、同じballを一度だけ使う。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "削除前oldと削除後newはold[s]=new[s]+new[s-x]を満たすので、s昇順にnew[s]=old[s]-new[s-x]と逆変換できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc321-f「#(subset sum = K) with Add and Erase」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+        "approach": "長さK+1のsubset-sum DPを保持し、追加遷移を降順、削除をその逆の昇順減算で更新する。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各operationをKに比例する処理で反映し、distinguishableな重複ballもfactor単位で正確に扱える。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "各query後に箱内の全ballからsubset-sum DPを作り直す。",
+        "decision": "rejected",
+        "decisionReason": "Q回それまでのball数を再走査し、最大でQ^2K規模になる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "削除時も追加と同じ降順でdp[s]-=dp[s-x]とする。",
+        "decision": "rejected",
+        "decisionReason": "右辺に必要なのは削除後new[s-x]だが、降順ではまだold値のままで逆変換にならない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
+        "text": "追加のin-place更新を逆に解くとloop方向も逆になり、昇順ならdp[s-x]が既にnewへ更新済みである。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "#(subset sum = K) with Add and Erase 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "sum Kより大きい係数は非負weightしかないためdp[0..K]へ戻って影響せず、truncateしたまま可逆更新できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc321-f「#(subset sum = K) with Add and Erase」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。",
+      "text": "dp[0]=1、他0で始める。+xではs=K..xの降順にdp[s]+=dp[s-x]、-xではs=x..Kの昇順にdp[s]-=dp[s-x]を行い、mod 998244353で正規化する。各operation後のdp[K]を出力する。x>Kなら保持範囲の係数は変化しない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "online query の計算量設計",
-      "trigger": "制約と操作を整理したときに online query の計算量設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc321-f「#(subset sum = K) with Add and Erase」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で online query の計算量設計 を問題固有の状態へ適用する。",
+      "name": "動的subset-sum DP",
+      "trigger": "itemの追加削除後に同じ目標和の個数を繰り返し問われるとき。",
+      "application": "生成関数factorの乗除を係数array上の一次更新として行う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc321-f「#(subset sum = K) with Add and Erase」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。更新と問い合わせの時系列を必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "in-place遷移の逆演算",
+      "trigger": "triangularなDP更新をonlineで取り消したいとき。",
+      "application": "依存方向を反転し、既に復元済みの値から元factorを除く。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "次数truncate",
+      "trigger": "weightが非負で目標係数Kだけを必要とするとき。",
+      "application": "degree>Kを保持せず更新する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "削除を別data structureへ持ち込まず、追加式old=new·(1+z^x)を低次数から解くことでfactor divisionをO(K)の整数DPへ落とせる。",
+      "reusablePerspective": "online削除では、追加遷移が三角行列なら走査順を逆にして局所的にinvertできないか調べる。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "online query の計算量設計",
+      "text": "0/1 subset sum DP",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "動的計画法の状態設計",
+      "text": "生成関数の係数",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "loop方向とin-place依存",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "同じ値のballも区別されるので、追加・削除1回ごとにfactorを1つだけ掛け外し、個数でまとめて0/1扱いしない。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "減算後は負値へmodを足し、dp[0]=1が全operation後も保たれることを確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "#(subset sum = K) with Add and Erase 型の 更新と問い合わせの時系列に対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "distinguishable ball multisetの追加・削除ごとに、subset sum Kの選び方をonline更新できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "同じxのballを2個追加して1個削除する例で係数1,2,1が1,1へ戻ることを追い、削除loopが昇順である理由を確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

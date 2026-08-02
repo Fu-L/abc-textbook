@@ -16,6 +16,7 @@ const validEnvironment = {
 describe('verify:fast exit code contract', () => {
   it('checks frozen preview learning content after taxonomy and before build', () => {
     const ids = VERIFICATION_STEPS.map(({ id }) => id);
+    expect(ids.indexOf('authoring')).toBe(ids.indexOf('corpus') + 1);
     expect(ids.indexOf('learning-content')).toBe(ids.indexOf('taxonomy') + 1);
     expect(ids.indexOf('learning-content')).toBeLessThan(ids.indexOf('build'));
   });

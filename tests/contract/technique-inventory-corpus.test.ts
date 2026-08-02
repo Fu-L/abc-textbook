@@ -1,5 +1,6 @@
 import { spawn } from 'node:child_process';
-import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { mkdtemp, mkdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 
@@ -9,6 +10,7 @@ import { refreezeVerifiedPreviewCohort } from '../../src/lib/corpus/cohort.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import {
   buildPreviewTechniqueInventoryComponent,
+  buildTechniqueInventoryAuthoringEvidence,
   buildTechniqueInventoryEvidence,
   candidatePoolMetadataBatchDigest,
   defaultCorpusInventoryLayout,
@@ -29,6 +31,7 @@ import {
 } from '../../src/lib/preview/cohort-selection.js';
 
 const sha = (value: string): string => canonicalDigest({ value });
+const sha256Bytes = (value: string): string => createHash('sha256').update(value).digest('hex');
 const checkedAt = '2026-07-24T12:00:00+09:00';
 
 const compareCodeUnits = (left: string, right: string): number =>
@@ -457,6 +460,63 @@ const materializeCorpus = async (
   await Promise.all(writes);
 };
 
+const materializeAuthoringSkill = async (root: string): Promise<void> => {
+  const writingPolicyPath = '.agents/skills/abc-explanation-author/references/writing-policy.md';
+  const writingPolicy = '# Writing policy\n\nDerive the solution from the constraints.\n';
+  const artifacts = [{ path: writingPolicyPath, digest: sha256Bytes(writingPolicy) }];
+  const sourcePacketPath = 'src/content/sources/authoring/initial-v1.json';
+  const sourcePacketSubject = {
+    schemaVersion: '1.0.0',
+    packetId: 'authoring-sources-initial-v1',
+    authoringSkillVersion: '1.1.1',
+    sourceNormalizationVersion: '1.0.0',
+    allowedUsePolicy: {
+      mode: 'reference_and_original_explanation_only',
+      prohibitUnnecessaryReproduction: true,
+      missingOrStaleSourceAction: 'hold_with_retry_condition',
+    },
+    problemInputs: [],
+    sources: [],
+  };
+  const sourcePacketDigest = canonicalDigest(sourcePacketSubject);
+  const inputContract = { requiredFields: ['problemId'] };
+  const outputContract = { writingPolicyPath };
+  const reviewPolicy = { defaultMode: 'self' };
+  const authoringSkillDigest = canonicalDigest({
+    authoringSkillName: 'abc-explanation-author',
+    authoringSkillVersion: '1.1.1',
+    sourceNormalizationVersion: '1.0.0',
+    artifacts,
+    sourcePacketDigest,
+    inputContract,
+    outputContract,
+    reviewPolicy,
+  });
+  await Promise.all([
+    writeJson(root, sourcePacketPath, {
+      ...sourcePacketSubject,
+      authoringSkillDigest,
+    }),
+    writeJson(root, 'docs/verification/authoring-skill/initial-v1/skill-manifest.json', {
+      schemaVersion: '1.0.0',
+      manifestId: 'abc-explanation-author-initial-v1',
+      status: 'frozen',
+      authoringSkillName: 'abc-explanation-author',
+      authoringSkillVersion: '1.1.1',
+      authoringSkillDigest,
+      sourceNormalizationVersion: '1.0.0',
+      artifacts,
+      sourcePacket: { path: sourcePacketPath, digest: sourcePacketDigest },
+      inputContract,
+      outputContract,
+      reviewPolicy,
+    }),
+  ]);
+  const absoluteWritingPolicyPath = path.join(root, writingPolicyPath);
+  await mkdir(path.dirname(absoluteWritingPolicyPath), { recursive: true });
+  await writeFile(absoluteWritingPolicyPath, writingPolicy);
+};
+
 const runInventoryCli = async (
   args: readonly string[],
 ): Promise<{ readonly exitCode: number; readonly stdout: string; readonly stderr: string }> =>
@@ -486,6 +546,35 @@ const runInventoryCli = async (
     });
   });
 
+const runAuthoringCli = async (
+  args: readonly string[],
+): Promise<{ readonly exitCode: number; readonly stdout: string; readonly stderr: string }> =>
+  new Promise((resolve, reject) => {
+    const child = spawn(
+      process.execPath,
+      ['--import', 'tsx', 'scripts/corpus/verify-inventory-authoring.ts', ...args],
+      { cwd: process.cwd(), stdio: ['ignore', 'pipe', 'pipe'] },
+    );
+    let stdout = '';
+    let stderr = '';
+    child.stdout.setEncoding('utf8');
+    child.stderr.setEncoding('utf8');
+    child.stdout.on('data', (chunk: string) => {
+      stdout += chunk;
+    });
+    child.stderr.on('data', (chunk: string) => {
+      stderr += chunk;
+    });
+    child.once('error', reject);
+    child.once('exit', (code, signal) => {
+      if (signal) {
+        reject(new Error(`verify-inventory-authoring terminated by ${signal}.`));
+        return;
+      }
+      resolve({ exitCode: code ?? 70, stdout, stderr });
+    });
+  });
+
 describe('T038-T044 corpus Technique Inventory contract', () => {
   const validCorpus = makeValidCorpus();
   let repositoryRoot = '';
@@ -493,6 +582,7 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
   beforeAll(async () => {
     repositoryRoot = await mkdtemp(path.join(os.tmpdir(), 'abc-inventory-corpus-'));
     await materializeCorpus(repositoryRoot, validCorpus);
+    await materializeAuthoringSkill(repositoryRoot);
   });
 
   afterAll(async () => {
@@ -525,6 +615,16 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
     const loaded = await loadTechniqueInventoryCorpus(defaultCorpusInventoryLayout(repositoryRoot));
     const first = buildTechniqueInventoryEvidence(loaded);
     const second = buildTechniqueInventoryEvidence(loaded);
+    const authoringSkill = {
+      name: 'abc-explanation-author' as const,
+      version: '1.1.1',
+      digest: sha('authoring-skill'),
+      writingPolicyPath: '.agents/skills/abc-explanation-author/references/writing-policy.md',
+      writingPolicyDigest: sha('writing-policy'),
+      sourceNormalizationVersion: '1.0.0',
+    };
+    const firstAuthoring = buildTechniqueInventoryAuthoringEvidence(loaded, authoringSkill);
+    const secondAuthoring = buildTechniqueInventoryAuthoringEvidence(loaded, authoringSkill);
 
     expect(first.diagnostics).toEqual([]);
     expect(first.status).toBe('passed');
@@ -536,6 +636,15 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
     expect(first.shards).toHaveLength(6);
     expect(first).toEqual(second);
     expect(first.evidenceDigest).toMatch(/^[a-f0-9]{64}$/u);
+    expect(firstAuthoring).toEqual(secondAuthoring);
+    expect(firstAuthoring.status).toBe('passed');
+    expect(firstAuthoring.reviewStatusCounts).toEqual({
+      reviewed: 255,
+      draft: 0,
+      changes_requested: 0,
+    });
+    expect(firstAuthoring.sourceBoundProblemCount).toBe(255);
+    expect(firstAuthoring.unresolvedProblemIds).toEqual([]);
   });
 
   it('rejects unknown fields instead of accepting a loose metadata envelope', async () => {
@@ -598,6 +707,25 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
     const codes = validateTechniqueInventoryCorpus(wrongSource).map(({ code }) => code);
     expect(codes).toContain('TECHNIQUE_INVENTORY_OFFICIAL_PROBLEM_SOURCE_MISSING');
     expect(codes).toContain('TECHNIQUE_INVENTORY_SOURCE_LOCATOR_MISMATCH');
+    expect(codes).toContain('TECHNIQUE_INVENTORY_SOURCE_SET_MISMATCH');
+
+    const omittedInventorySource = {
+      ...validCorpus,
+      inventory: validCorpus.inventory.map((loaded) =>
+        loaded === firstInventory
+          ? {
+              ...loaded,
+              entity: {
+                ...loaded.entity,
+                sourceRevisionIds: [],
+              },
+            }
+          : loaded,
+      ),
+    };
+    expect(
+      validateTechniqueInventoryCorpus(omittedInventorySource).map(({ code }) => code),
+    ).toContain('TECHNIQUE_INVENTORY_SOURCE_SET_MISMATCH');
 
     const firstProblem = validCorpus.problems[0];
     const contestWideSource = validCorpus.sources.find(
@@ -825,7 +953,8 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
     if (!first || !second) throw new Error('Inventory quality fixture is incomplete.');
     const firstObservation = first.entity.reasoningPath.observations[0];
     const firstOutcome = first.entity.outcomeCandidates[0];
-    if (!firstObservation || !firstOutcome) {
+    const firstApproach = first.entity.reasoningPath.candidateApproaches[0];
+    if (!firstObservation || !firstOutcome || !firstApproach) {
       throw new Error('Inventory quality prose fixture is incomplete.');
     }
     const duplicateConnection = first.entity.reasoningPath.algorithmConnection;
@@ -842,7 +971,13 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
                   observations: [
                     {
                       ...firstObservation,
-                      text: 'short',
+                      text: '公式解説の主方針が制約内で必要な処理を構成している。',
+                    },
+                  ],
+                  candidateApproaches: [
+                    {
+                      ...firstApproach,
+                      approach: 'TODO: 公式解説参照',
                     },
                   ],
                   algorithmConnection: {
@@ -850,6 +985,7 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
                     text: 'TODO: 公式解説参照',
                   },
                 },
+                reviewAdvice: loaded.entity.implementationConcerns,
                 outcomeCandidates: [{ ...firstOutcome, text: 'unknown' }],
                 asymptoticComplexity: {
                   time: 'linear',
@@ -878,9 +1014,74 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
     expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_PLACEHOLDER_TEXT');
     expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_ALGORITHM_CONNECTION_DUPLICATE');
     expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_COMPLEXITY_POLICY_MISMATCH');
+    expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_REASONING_STAGE_DUPLICATE');
+    expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_REVIEW_ADVICE_DUPLICATE');
+    expect(qualityCodes).toContain('TECHNIQUE_INVENTORY_SCAFFOLD_TEXT');
+
+    const missingRequiredSections = {
+      ...validCorpus,
+      inventory: validCorpus.inventory.map((loaded, index) =>
+        index === 0
+          ? {
+              ...loaded,
+              entity: {
+                ...loaded.entity,
+                prerequisiteCandidates: [],
+                implementationConcerns: [],
+              },
+            }
+          : loaded,
+      ),
+    };
+    expect(
+      validateTechniqueInventoryCorpus(missingRequiredSections).map(({ code }) => code),
+    ).toContain('TECHNIQUE_INVENTORY_ANALYSIS_TOO_SHALLOW');
   });
 
-  it('allows canonical drafts but keeps the reviewed preview boundary', () => {
+  it('allows a concise candidate name and technical unknown wording when substantive', () => {
+    const previewProblemIds = new Set(validCorpus.previewManifest.selectedProblemIds);
+    const candidateIndex = validCorpus.inventory.findIndex(
+      ({ entity }) => !previewProblemIds.has(entity.problemId),
+    );
+    const first = validCorpus.inventory[candidateIndex];
+    const firstApproach = first?.entity.reasoningPath.candidateApproaches[0];
+    const firstObservation = first?.entity.reasoningPath.observations[0];
+    if (!first || !firstApproach || !firstObservation) {
+      throw new Error('Inventory quality fixture is incomplete.');
+    }
+    const concise = {
+      ...validCorpus,
+      inventory: validCorpus.inventory.map((loaded, index) =>
+        index === candidateIndex
+          ? {
+              ...loaded,
+              entity: {
+                ...loaded.entity,
+                reasoningPath: {
+                  ...loaded.entity.reasoningPath,
+                  observations: [
+                    {
+                      ...firstObservation,
+                      text: '入力時点で値が不明な要素も、状態に保持した既知情報だけで遷移できる。',
+                    },
+                  ],
+                  candidateApproaches: [
+                    {
+                      ...firstApproach,
+                      approach: 'DP',
+                      decisionReason: '候補数が十分小さく、全件を検査できる。',
+                    },
+                  ],
+                },
+              },
+            }
+          : loaded,
+      ),
+    };
+    expect(validateTechniqueInventoryCorpus(concise)).toEqual([]);
+  });
+
+  it('rejects unresolved canonical and preview drafts', () => {
     const selectedProblemIds = new Set(validCorpus.previewManifest.selectedProblemIds);
     const draftIndex = validCorpus.inventory.findIndex(
       ({ entity }) => !selectedProblemIds.has(entity.problemId),
@@ -894,7 +1095,9 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
           : loaded,
       ),
     };
-    expect(validateTechniqueInventoryCorpus(withCanonicalDraft)).toEqual([]);
+    expect(validateTechniqueInventoryCorpus(withCanonicalDraft).map(({ code }) => code)).toContain(
+      'TECHNIQUE_INVENTORY_NOT_REVIEWED',
+    );
 
     const withChangesRequested = {
       ...validCorpus,
@@ -964,4 +1167,229 @@ describe('T038-T044 corpus Technique Inventory contract', () => {
     expect(unownedOutput.exitCode).toBe(64);
     expect(unownedOutput.stderr).toContain('OUTPUT_PATH_NOT_OWNED');
   }, 20_000);
+
+  it('freezes complete full-corpus authoring evidence and verifies its skill subject', async () => {
+    const commonArgs = ['--repository-root', repositoryRoot] as const;
+    const missingRepository = await runAuthoringCli([
+      '--check',
+      '--repository-root',
+      path.join(repositoryRoot, 'missing-repository'),
+    ]);
+    expect(missingRepository.exitCode).toBe(73);
+    expect(missingRepository.stderr).toContain('ENOENT');
+
+    const missingManifest = await runAuthoringCli([
+      '--check',
+      ...commonArgs,
+      '--skill-manifest',
+      'docs/verification/authoring-skill/initial-v1/missing.json',
+    ]);
+    expect(missingManifest.exitCode).toBe(73);
+    expect(missingManifest.stderr).toContain('AUTHORING_SKILL_MANIFEST_UNREADABLE');
+
+    const manifestPath = path.join(
+      repositoryRoot,
+      'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
+    );
+    const manifestBytes = await readFile(manifestPath, 'utf8');
+    const manifest = JSON.parse(manifestBytes) as Readonly<Record<string, unknown>>;
+    await writeFile(manifestPath, `${JSON.stringify({ ...manifest, status: 'draft' }, null, 2)}\n`);
+    const unfrozenManifest = await runAuthoringCli(['--check', ...commonArgs]);
+    expect(unfrozenManifest.exitCode).toBe(65);
+    expect(unfrozenManifest.stderr).toContain('AUTHORING_SKILL_MANIFEST_INVALID');
+    await writeFile(manifestPath, manifestBytes);
+
+    const missing = await runAuthoringCli(['--check', ...commonArgs]);
+    expect(missing.exitCode).toBe(2);
+    expect(missing.stderr).toContain('AUTHORING_EVIDENCE_MISSING');
+
+    const firstWrite = await runAuthoringCli(['--write', ...commonArgs]);
+    expect(firstWrite.exitCode).toBe(0);
+    const evidencePath = path.join(
+      repositoryRoot,
+      'docs/verification/bootstrap/technique-inventory-authoring.json',
+    );
+    const firstBytes = await readFile(evidencePath, 'utf8');
+    const evidence = JSON.parse(firstBytes) as {
+      readonly schemaVersion: string;
+      readonly problemCount: number;
+      readonly sourceBoundProblemCount: number;
+      readonly reviewStatusCounts: Readonly<Record<string, number>>;
+      readonly unresolvedProblemIds: readonly string[];
+      readonly skill: {
+        readonly name: string;
+        readonly version: string;
+        readonly digest: string;
+        readonly writingPolicyPath: string;
+        readonly writingPolicyDigest: string;
+      };
+      readonly normalizedSourceSet: {
+        readonly problemCount: number;
+        readonly sourceRevisionCount: number;
+        readonly digest: string;
+      };
+      readonly review: {
+        readonly mode: string;
+        readonly riskReasons: readonly string[];
+        readonly writingPolicyApplied: boolean;
+      };
+      readonly assignments: readonly {
+        readonly problemId: string;
+        readonly contentDigest: string;
+      }[];
+      readonly diagnosticCodes: readonly string[];
+      readonly evidenceDigest: string;
+    };
+    expect(evidence.schemaVersion).toBe('2.0.0');
+    expect(evidence.problemCount).toBe(255);
+    expect(evidence.sourceBoundProblemCount).toBe(255);
+    expect(evidence.reviewStatusCounts).toEqual({
+      reviewed: 255,
+      draft: 0,
+      changes_requested: 0,
+    });
+    expect(evidence.unresolvedProblemIds).toEqual([]);
+    expect(evidence.skill).toMatchObject({
+      name: 'abc-explanation-author',
+      version: '1.1.1',
+      writingPolicyPath: '.agents/skills/abc-explanation-author/references/writing-policy.md',
+    });
+    expect(evidence.skill.digest).toMatch(/^[a-f0-9]{64}$/u);
+    expect(evidence.skill.writingPolicyDigest).toMatch(/^[a-f0-9]{64}$/u);
+    expect(evidence.normalizedSourceSet).toMatchObject({
+      problemCount: 255,
+      sourceRevisionCount: 255,
+    });
+    expect(evidence.normalizedSourceSet.digest).toMatch(/^[a-f0-9]{64}$/u);
+    expect(evidence.review).toEqual({
+      mode: 'self',
+      riskReasons: [],
+      writingPolicyApplied: true,
+    });
+    expect(evidence.assignments).toHaveLength(255);
+    expect(
+      evidence.assignments.every(({ contentDigest }) => /^[a-f0-9]{64}$/u.test(contentDigest)),
+    ).toBe(true);
+    expect(evidence.diagnosticCodes).toEqual([]);
+    expect(evidence.evidenceDigest).toMatch(/^[a-f0-9]{64}$/u);
+
+    const secondWrite = await runAuthoringCli(['--write', ...commonArgs]);
+    expect(secondWrite.exitCode).toBe(0);
+    await expect(readFile(evidencePath, 'utf8')).resolves.toBe(firstBytes);
+    const check = await runAuthoringCli(['--check', ...commonArgs]);
+    expect(check.exitCode).toBe(0);
+
+    const inventoryPath = path.join(repositoryRoot, validCorpus.inventory[0]?.path ?? '');
+    const inventoryBytes = await readFile(inventoryPath, 'utf8');
+    const inventoryEntity = JSON.parse(inventoryBytes) as Readonly<Record<string, unknown>>;
+    await writeFile(
+      inventoryPath,
+      `${JSON.stringify({ ...inventoryEntity, reviewStatus: 'draft' }, null, 2)}\n`,
+    );
+    const incomplete = await runAuthoringCli(['--check', ...commonArgs]);
+    expect(incomplete.exitCode).toBe(2);
+    expect(incomplete.stderr).toContain('INVENTORY_AUTHORING_INCOMPLETE');
+    expect(JSON.parse(incomplete.stdout.trim().split('\n').at(-1) ?? '{}')).toMatchObject({
+      command: 'verify-inventory-authoring',
+      mode: 'check',
+      status: 'failed',
+      unresolvedProblemCount: 1,
+    });
+    await writeFile(inventoryPath, inventoryBytes);
+
+    const linkedManifestPath = path.join(
+      repositoryRoot,
+      'docs/verification/authoring-skill/initial-v1/linked-manifest.json',
+    );
+    await symlink(manifestPath, linkedManifestPath);
+    const linkedManifest = await runAuthoringCli([
+      '--check',
+      ...commonArgs,
+      '--skill-manifest',
+      'docs/verification/authoring-skill/initial-v1/linked-manifest.json',
+    ]);
+    expect(linkedManifest.exitCode).toBe(64);
+    expect(linkedManifest.stderr).toContain('INPUT_FILE_UNSAFE');
+
+    const linkedOutputPath = path.join(
+      repositoryRoot,
+      'docs/verification/bootstrap/linked-authoring.json',
+    );
+    await symlink(evidencePath, linkedOutputPath);
+    const linkedOutput = await runAuthoringCli([
+      '--write',
+      ...commonArgs,
+      '--output',
+      'docs/verification/bootstrap/linked-authoring.json',
+    ]);
+    expect(linkedOutput.exitCode).toBe(2);
+    expect(linkedOutput.stderr).toContain('AUTHORING_EVIDENCE_DESTINATION_INVALID');
+
+    const linkedParentPath = path.join(repositoryRoot, 'docs/verification/bootstrap/linked-parent');
+    await symlink(path.join(repositoryRoot, 'docs'), linkedParentPath);
+    const linkedParent = await runAuthoringCli([
+      '--write',
+      ...commonArgs,
+      '--output',
+      'docs/verification/bootstrap/linked-parent/authoring.json',
+    ]);
+    expect(linkedParent.exitCode).toBe(64);
+    expect(linkedParent.stderr).toContain('OUTPUT_PARENT_UNSAFE');
+
+    const writingPolicyPath = path.join(
+      repositoryRoot,
+      '.agents/skills/abc-explanation-author/references/writing-policy.md',
+    );
+    const writingPolicyBytes = await readFile(writingPolicyPath, 'utf8');
+    await writeFile(writingPolicyPath, `${writingPolicyBytes}\nchanged\n`);
+    const staleSkill = await runAuthoringCli(['--check', ...commonArgs]);
+    expect(staleSkill.exitCode).toBe(2);
+    expect(staleSkill.stderr).toContain('AUTHORING_SKILL_ARTIFACT_STALE');
+    await writeFile(writingPolicyPath, writingPolicyBytes);
+
+    const sourcePacketPath = path.join(
+      repositoryRoot,
+      'src/content/sources/authoring/initial-v1.json',
+    );
+    const sourcePacketBytes = await readFile(sourcePacketPath, 'utf8');
+    const sourcePacket = JSON.parse(sourcePacketBytes) as Readonly<Record<string, unknown>>;
+    await writeFile(sourcePacketPath, 'null\n');
+    const malformedSourcePacket = await runAuthoringCli(['--check', ...commonArgs]);
+    expect(malformedSourcePacket.exitCode).toBe(65);
+    expect(malformedSourcePacket.stderr).toContain('AUTHORING_SKILL_SOURCE_PACKET_INVALID');
+
+    await writeFile(
+      sourcePacketPath,
+      `${JSON.stringify({ ...sourcePacket, authoringSkillVersion: '9.9.9' }, null, 2)}\n`,
+    );
+    const mismatchedSourcePacketVersion = await runAuthoringCli(['--check', ...commonArgs]);
+    expect(mismatchedSourcePacketVersion.exitCode).toBe(2);
+    expect(mismatchedSourcePacketVersion.stderr).toContain(
+      'AUTHORING_SKILL_SOURCE_PACKET_VERSION_MISMATCH',
+    );
+
+    await writeFile(
+      sourcePacketPath,
+      `${JSON.stringify({ ...sourcePacket, sourceNormalizationVersion: '9.9.9' }, null, 2)}\n`,
+    );
+    const mismatchedSourcePacketNormalization = await runAuthoringCli(['--check', ...commonArgs]);
+    expect(mismatchedSourcePacketNormalization.exitCode).toBe(2);
+    expect(mismatchedSourcePacketNormalization.stderr).toContain(
+      'AUTHORING_SKILL_SOURCE_PACKET_NORMALIZATION_MISMATCH',
+    );
+
+    await writeFile(
+      sourcePacketPath,
+      `${JSON.stringify({ ...sourcePacket, authoringSkillDigest: sha('wrong-skill') }, null, 2)}\n`,
+    );
+    const mismatchedSourcePacket = await runAuthoringCli(['--check', ...commonArgs]);
+    expect(mismatchedSourcePacket.exitCode).toBe(2);
+    expect(mismatchedSourcePacket.stderr).toContain('AUTHORING_SKILL_SOURCE_PACKET_MISMATCH');
+    await writeFile(sourcePacketPath, sourcePacketBytes);
+
+    await writeFile(evidencePath, `${firstBytes.trimEnd()} \n`);
+    const stale = await runAuthoringCli(['--check', ...commonArgs]);
+    expect(stale.exitCode).toBe(2);
+    expect(stale.stderr).toContain('AUTHORING_EVIDENCE_STALE');
+  }, 60_000);
 });

@@ -17,77 +17,81 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc335-e「Non-Decreasing Colorful Path」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "非減少pathではAが小さい頂点から大きい頂点へしか辺を進めず、Aが等しい辺だけは双方向に使える。同じ値の辺で連結な頂点群は、入った場所から任意の出口へ移れてscore増分も一度だけなので一頂点へ縮約できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc335-e「Non-Decreasing Colorful Path」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+        "approach": "同値連結成分をDSUで縮約し、値が増えるDAG上で最長path DPを行う",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "等値cycleを消した後は全辺がAの小さい成分から大きい成分へ向き、値順に安全に遷移できる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "元graph上で頂点番号順にdpを更新する",
+        "decision": "rejected",
+        "decisionReason": "依存順は頂点番号でなくAの大小で決まり、等値辺のcycleもあるため一回の走査では伝播しない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "同じ状態に到達した履歴は以後の選択肢と評価が一致するため、最適部分構造または加法的な数え上げを利用できる。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Non-Decreasing Colorful Path 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "等値成分内の移動ではdistinct値数は増えず、異なる値の成分へ移るたび必ず1増える。縮約後の辺は値が厳密増加するためDAGであり、simple path条件もcycleを除いた最長pathの構成を妨げない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc335-e「Non-Decreasing Colorful Path」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。",
+      "text": "A_u=A_vの全辺をDSUでunionする。各元辺の異なる代表元間に小さいAから大きいAへの有向辺を作る。頂点1の成分dp=1、他を到達不能として、成分をA昇順に処理しdp[next]=max(dp[next],dp[cur]+1)を行い、頂点Nの成分値を出力する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "グラフの到達可能性",
-      "trigger": "制約と操作を整理したときに グラフの到達可能性 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc335-e「Non-Decreasing Colorful Path」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で グラフの到達可能性 を問題固有の状態へ適用する。",
+      "name": "同値辺のcomponent縮約",
+      "trigger": "同じlabel間の移動が双方向でcost増分0となりcycleを作る。",
+      "application": "DSUで同値連結部分をまとめ、内部pathを一状態として扱う。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "動的計画法の状態設計",
-      "trigger": "制約と操作を整理したときに 動的計画法の状態設計 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc335-e「Non-Decreasing Colorful Path」では、主解法候補として、将来に必要な情報だけを状態へ圧縮し、依存順に DP 遷移を評価する。頂点と辺からなる状態グラフを必要十分な状態だけで表し、答えを構成する。で 動的計画法の状態設計 を問題固有の状態へ適用する。",
+      "name": "DAG最長path",
+      "trigger": "縮約後の遷移ごとにlabelが厳密増加し、scoreが1増える。",
+      "application": "label昇順をtopological orderとしてdp最大値を伝播する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "scoreは訪問頂点数ではなくdistinctなAの数なので、同じAの連結領域を何頂点通っても一段として数える。",
+      "reusablePerspective": "非減少label pathでは、等値移動を0-cost componentへ縮約して厳密増加DAGへ変える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "グラフの到達可能性",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "動的計画法の状態設計",
+      "text": "DSU、component graph、DAG上の最長path DP。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "A_1>A_Nなど到達不能なら答え0とする。同じ代表元の辺は捨て、並行辺は残しても正しさは変わらないがdeduplicate可能である。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Non-Decreasing Colorful Path 型の 頂点と辺からなる状態グラフに対し、動的計画法の状態設計を選び、状態と証明を一貫して設計できる。",
+      "text": "頂点1からNへのsimple pathのうち、A列が非減少なpathのdistinct値数最大を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "未到達 sentinel、初期状態、更新前後の配列を区別し、同一段の二重更新を防ぐ。",
+      "text": "1とNが同じ等値成分、等値cycleから複数出口、値が下がる辺しかない場合を小graphの全simple pathと比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }

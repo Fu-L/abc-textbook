@@ -17,85 +17,97 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "abc269-f「Numbered Checker」では、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。さらに、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。この状態表現から答えを構成する。という方針へ進む前に、制約下で将来の判断に必要な状態だけを切り分ける。",
+        "text": "rectangle内の各行ではi+jが偶数の列だけが残り、その値 (i−1)M+j は公差2のarithmetic progressionを成す。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "同じparityの行を2行おきに見ると、選ばれる列数は一定で、各行の和も一定公差のarithmetic progressionになる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "abc269-f「Numbered Checker」では、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。さらに、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。この状態表現から答えを構成する。",
+        "approach": "各query rectangleのcellを列挙して、checkerboard上の非零値を加える。",
+        "decision": "rejected",
+        "decisionReason": "N,Mが10^9でrectangle areaに依存する処理はできない。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "approach": "rectangleをrow parity別に分け、各parityで列方向と行方向の二段のarithmetic-progression sumを閉形式で求める。",
         "decision": "adopted",
-        "decisionReason": "公式解説の主方針が制約内で必要な処理を構成している。",
+        "decisionReason": "各queryをparity二ケースの定数回の四則演算だけで評価できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "prefix の差が元区間の総和になり、差分への端点加算を累積すると各位置の寄与がちょうど復元される。",
+        "text": "row parityが決まれば残るcolumn parityも決まり、[C,D]内の個数・最初の列・最後の列から一行分の和を求められる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "加減乗算と可逆元による除算が同じ剰余類を保つことを式変形ごとに確認する。",
-        "evidenceIds": ["evidence-official-analysis"]
-      },
-      {
-        "text": "Numbered Checker 固有の境界条件でも、状態の意味と遷移の不変条件が保たれることを確認する。",
+        "text": "同parityの隣接行はrow indexが2増えるので、各selected cellの値は2M増え、一行和の公差は2M×selected-column-countとなる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "abc269-f「Numbered Checker」では、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。さらに、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。この状態表現から答えを構成する。",
+      "text": "checkerboard filterを二つのparity classへ分割し、nested arithmetic progression sumsで巨大rectangle queryをO(1)評価する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "累積和と差分",
-      "trigger": "制約と操作を整理したときに 累積和と差分 の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc269-f「Numbered Checker」では、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。さらに、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。この状態表現から答えを構成する。で 累積和と差分 を問題固有の状態へ適用する。",
+      "name": "parity別の分解",
+      "trigger": "格子点の採否や式が座標和の偶奇だけで切り替わるとき。",
+      "application": "odd rowsとeven rowsを別々に扱い、それぞれ対応するcolumn parityだけを数える。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "剰余演算と modular inverse",
-      "trigger": "制約と操作を整理したときに 剰余演算と modular inverse の構造が現れ、直接列挙を避けられる場合。",
-      "application": "abc269-f「Numbered Checker」では、局所量を差分または prefix sum へ変換し、区間寄与をまとめて加算・復元する。さらに、式を modulus 上で整理し、逆元・高速冪・組合せ前計算を使って値を計算する。この状態表現から答えを構成する。で 剰余演算と modular inverse を問題固有の状態へ適用する。",
+      "name": "等差数列の閉形式",
+      "trigger": "巨大な連続範囲で値またはblock sumが一定差ずつ変化するとき。",
+      "application": "まず一行内の公差2の列を合計し、次に2行おきのrow sumsをもう一度合計する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
-  "problemSpecificInsights": [],
+  "problemSpecificInsights": [
+    {
+      "insight": "rectangleの先頭二行についてrow sumを作れば、それ以降は同じparityごとに公差2Mxで増える。",
+      "reusablePerspective": "二次元のaffine gridに周期maskが掛かるとき、residue classごとに一次元の等差列を入れ子にする。",
+      "evidenceIds": ["evidence-official-analysis"]
+    }
+  ],
   "prerequisiteCandidates": [
     {
-      "text": "累積和と差分",
-      "evidenceIds": ["evidence-official-analysis"]
-    },
-    {
-      "text": "剰余演算と modular inverse",
+      "text": "区間内の指定parity個数、arithmetic progression sum、modular division by 2を扱えること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "[C,D]内で必要parityを持つ最初の列と個数をfloor/ceilの規約を固定して求め、個数0も同じ式で処理する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "減算後の負値、積の整数幅、逆元を取る値と modulus の互いに素性を確認する。",
+      "text": "元のcell valueは10^18まで達するため、積をmodulo 998244353へ逐次落とし、2での除算はmodular inverseを使う。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "Numbered Checker 型の問題に対し、累積和と差分を選び、状態と証明を一貫して設計できる。",
+      "text": "各checkerboard rectangleの値の和をparity別の等差数列として定数時間で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "半開区間の右端、prefix 配列の先頭 0、modulus の負値補正を統一する。",
+      "text": "周期mask付き格子和では、まずresidue classを固定して各行の値がどんな数列になるかを見る。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "一行分を閉形式にした後、そのrow sum自体が行方向の等差数列にならないか確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "authorId": "person-maintainer",
-  "reviewStatus": "draft",
+  "reviewStatus": "reviewed",
   "reviewFindings": []
 }
