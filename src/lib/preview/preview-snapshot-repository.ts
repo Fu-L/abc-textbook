@@ -29,8 +29,8 @@ export interface PreviewSnapshotTransaction {
 }
 
 /**
- * Storage boundary used by the commit service. The future filesystem adapter
- * implements these operations with same-directory temp-file/rename semantics;
+ * Storage boundary used by the commit service. The filesystem adapter implements
+ * these operations with same-directory temp-file/rename semantics;
  * tests can supply an in-memory adapter without changing the service contract.
  */
 export interface PreviewSnapshotRepository {
@@ -56,6 +56,16 @@ const transactionPaths = (previewId: string, joinDigest: string) => ({
 
 const transactionId = (previewId: string, joinDigest: string): string =>
   `preview-snapshot:${previewId}:${joinDigest}`;
+
+const isTransactionPhase = (value: unknown): value is PreviewSnapshotTransactionPhase =>
+  typeof value === 'string' &&
+  [
+    'prepared',
+    'snapshot_committed',
+    'reference_committed',
+    'verified',
+    'recovery_required',
+  ].includes(value);
 
 export interface PreviewSnapshotCommitOptions {
   readonly interruptAfterSnapshot?: boolean;
@@ -109,8 +119,7 @@ export class PreviewSnapshotCommitService {
 
   async recover(previewId: string, joinDigest: string): Promise<PreviewSnapshotTransaction> {
     const paths = transactionPaths(previewId, joinDigest);
-    const current = await this.repository.getTransaction(previewId, joinDigest);
-    const baseTransaction: PreviewSnapshotTransaction = current ?? {
+    const freshTransaction: PreviewSnapshotTransaction = {
       transactionId: transactionId(previewId, joinDigest),
       previewId,
       joinDigest,
@@ -119,7 +128,45 @@ export class PreviewSnapshotCommitService {
       canonicalSnapshotDigest: null,
       recoveryReason: null,
     };
-    const snapshot = await this.repository.getSnapshot(previewId, joinDigest);
+    let current: PreviewSnapshotTransaction | undefined;
+    try {
+      const loaded = await this.repository.getTransaction(previewId, joinDigest);
+      if (
+        loaded?.transactionId === freshTransaction.transactionId &&
+        loaded.previewId === previewId &&
+        loaded.joinDigest === joinDigest &&
+        loaded.canonicalSnapshotPath === paths.canonicalSnapshotPath &&
+        loaded.referencePath === paths.referencePath &&
+        isTransactionPhase(loaded.phase)
+      ) {
+        current = {
+          ...freshTransaction,
+          phase: loaded.phase,
+          canonicalSnapshotDigest:
+            typeof loaded.canonicalSnapshotDigest === 'string'
+              ? loaded.canonicalSnapshotDigest
+              : null,
+          recoveryReason: typeof loaded.recoveryReason === 'string' ? loaded.recoveryReason : null,
+        };
+      }
+    } catch {
+      current = undefined;
+    }
+    const baseTransaction = current ?? freshTransaction;
+    let snapshot: PreviewSnapshot | undefined;
+    try {
+      snapshot = await this.repository.getSnapshot(previewId, joinDigest);
+    } catch {
+      await this.repository.deleteReference(previewId, joinDigest);
+      const recoveryRequired: PreviewSnapshotTransaction = {
+        ...baseTransaction,
+        phase: 'recovery_required',
+        canonicalSnapshotDigest: null,
+        recoveryReason: 'CANONICAL_SNAPSHOT_UNREADABLE',
+      };
+      await this.repository.saveTransaction(recoveryRequired);
+      return recoveryRequired;
+    }
     if (!snapshot) {
       const recoveryRequired: PreviewSnapshotTransaction = {
         ...baseTransaction,
@@ -144,7 +191,13 @@ export class PreviewSnapshotCommitService {
       return recoveryRequired;
     }
 
-    const reference = await this.repository.getReference(previewId, joinDigest);
+    let reference: PreviewSnapshotReference | undefined;
+    try {
+      reference = await this.repository.getReference(previewId, joinDigest);
+    } catch {
+      await this.repository.deleteReference(previewId, joinDigest);
+      reference = undefined;
+    }
     const expectedSnapshotDigest = canonicalDigest(snapshot);
     const referenceIsCurrent =
       reference?.previewId === previewId &&
@@ -153,6 +206,14 @@ export class PreviewSnapshotCommitService {
       reference.canonicalSnapshotDigest === expectedSnapshotDigest &&
       reference.status === snapshot.status &&
       reference.transactionId === baseTransaction.transactionId;
+    if (
+      referenceIsCurrent &&
+      baseTransaction.phase === 'verified' &&
+      baseTransaction.canonicalSnapshotDigest === expectedSnapshotDigest &&
+      baseTransaction.recoveryReason === null
+    ) {
+      return baseTransaction;
+    }
     if (!referenceIsCurrent) {
       await this.writeReference(previewId, joinDigest);
     }
@@ -163,7 +224,9 @@ export class PreviewSnapshotCommitService {
       canonicalSnapshotDigest: expectedSnapshotDigest,
       recoveryReason: null,
     };
-    await this.repository.saveTransaction(referenceCommitted);
+    if (baseTransaction.phase !== 'reference_committed' && baseTransaction.phase !== 'verified') {
+      await this.repository.saveTransaction(referenceCommitted);
+    }
     const verified: PreviewSnapshotTransaction = {
       ...referenceCommitted,
       phase: 'verified',
