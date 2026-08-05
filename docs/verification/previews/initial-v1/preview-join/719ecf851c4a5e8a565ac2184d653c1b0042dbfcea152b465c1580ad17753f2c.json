@@ -1,0 +1,8 @@
+{
+  "previewId": "initial-v1",
+  "joinDigest": "719ecf851c4a5e8a565ac2184d653c1b0042dbfcea152b465c1580ad17753f2c",
+  "canonicalSnapshotPath": "staging/previews/initial-v1/snapshots/719ecf851c4a5e8a565ac2184d653c1b0042dbfcea152b465c1580ad17753f2c.json",
+  "canonicalSnapshotDigest": "3f92846e91d7552c549588550bcd1f34de0c644145a4140c75ba74b7e4ba54d5",
+  "status": "passed",
+  "transactionId": "preview-snapshot:initial-v1:719ecf851c4a5e8a565ac2184d653c1b0042dbfcea152b465c1580ad17753f2c"
+}

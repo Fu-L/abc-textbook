@@ -55,6 +55,7 @@
     "preview:taxonomy:write": "tsx scripts/corpus/freeze-provisional-taxonomy.ts --write",
     "preview:learning-content": "tsx scripts/corpus/freeze-preview-learning-content.ts --check",
     "preview:learning-content:write": "tsx scripts/corpus/freeze-preview-learning-content.ts --write",
+    "preview:verify": "tsx scripts/preview-verify.ts",
     "corpus:verify": "tsx scripts/corpus/verify-inventory.ts --check",
     "corpus:verify:write": "tsx scripts/corpus/verify-inventory.ts --write",
     "test:e2e": "npm run build && npm run test:e2e:built --",
