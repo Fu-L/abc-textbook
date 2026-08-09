@@ -2,8 +2,6 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { z } from 'zod';
-
 import {
   AnswerMaterialEvidenceContract,
   CatalogContract,
@@ -59,13 +57,7 @@ export const contractSchemaEntries: readonly ContractSchemaDefinition[] = [
 
 export const generateContractJsonSchemas = (): Record<string, JsonSchemaDocument> =>
   Object.fromEntries(
-    contractSchemaEntries.map((definition) => [
-      definition.fileName,
-      z.toJSONSchema(definition.schema, {
-        target: 'draft-2020-12',
-        ...(definition.reuseJsonSchemaReferences ? { reused: 'ref' as const } : {}),
-      }),
-    ]),
+    contractSchemaEntries.map((definition) => [definition.fileName, definition.jsonSchema]),
   );
 
 const contractsDirectory = path.resolve('specs/001-build-abc-textbook/contracts');
