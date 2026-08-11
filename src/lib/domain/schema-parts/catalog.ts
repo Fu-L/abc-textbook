@@ -1085,6 +1085,31 @@ export const ProblemAnalysisClaimRefSchema = strictObject({
   sourceRevisionIds: uniqueArray(EntityIdSchema).min(1),
 });
 
+const InventoryClaimDispositionKindSchema = z.enum([
+  'primary',
+  'supporting',
+  'same_tag',
+  'baseline',
+  'problem_specific',
+]);
+
+/** The explicit taxonomy treatment of one Technique Inventory claim. */
+export const InventoryClaimDispositionSchema = strictObject({
+  claimRef: ProblemAnalysisClaimRefSchema,
+  kind: InventoryClaimDispositionKindSchema,
+  tagIds: uniqueArray(FinalTagIdSchema),
+  rationale: nonEmptyText,
+}).superRefine((disposition, context) => {
+  const requiresTag = ['primary', 'supporting', 'same_tag'].includes(disposition.kind);
+  if (requiresTag !== disposition.tagIds.length > 0) {
+    context.addIssue({
+      code: 'custom',
+      path: ['tagIds'],
+      message: 'Only primary, supporting, and same-tag claim dispositions name a final Tag.',
+    });
+  }
+});
+
 const TaxonomyReviewPolicySchema = strictObject({
   requiredMode: ContentReviewModeSchema,
   riskReasons: uniqueArray(ContentReviewRiskReasonSchema),
@@ -1201,7 +1226,9 @@ export const FinalProblemPlacementProjectionSchema = strictObject({
   primaryOutcomeId: FinalOutcomeIdSchema,
   supportingOutcomeIds: uniqueArray(FinalOutcomeIdSchema),
   learningUnitIds: uniqueArray(FinalLearningUnitIdSchema).min(1),
+  presentationUnitId: FinalLearningUnitIdSchema,
   adHocElements: uniqueArray(nonEmptyText),
+  claimDispositions: uniqueArray(InventoryClaimDispositionSchema).min(1),
   analysisEvidenceRefs: uniqueArray(ProblemAnalysisClaimRefSchema).min(1),
 }).superRefine((placement, context) => {
   const isFull = placement.kind === 'full';
@@ -1246,6 +1273,13 @@ export const FinalProblemPlacementProjectionSchema = strictObject({
       code: 'custom',
       path: ['supportingOutcomeIds'],
       message: 'The primary Outcome cannot also be supporting.',
+    });
+  }
+  if (!placement.learningUnitIds.includes(placement.presentationUnitId)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['presentationUnitId'],
+      message: 'The presentation Unit must be one of the placement learning Units.',
     });
   }
   const assignedOutcomeIds = [placement.primaryOutcomeId, ...placement.supportingOutcomeIds];

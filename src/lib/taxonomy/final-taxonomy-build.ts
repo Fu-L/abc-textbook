@@ -1313,6 +1313,7 @@ const decisionEvidenceRefs = (decision: FinalPrimaryDecision): ProblemAnalysisCl
     ...decision.supportingTagDecisions.flatMap(({ decisionBasis }) =>
       decisionBasis.map(policyClaimReference),
     ),
+    ...decision.claimDispositions.map(({ claimRef }) => policyClaimReference(claimRef)),
     ...decision.adHocElements.map(({ claimRef }) => policyClaimReference(claimRef)),
   ]);
 
@@ -1333,12 +1334,21 @@ const targetEvidenceRefsForDecision = (
     return false;
   };
   if (kind === 'tag') {
+    const dispositionRefs = decision.claimDispositions
+      .filter(({ tagIds }) => tagIds.includes(targetId))
+      .map(({ claimRef }) => policyClaimReference(claimRef));
     if (decision.primaryTagIds.includes(targetId)) {
-      return normalizeClaimRefs(decision.decisionBasis.map(policyClaimReference));
+      return normalizeClaimRefs([
+        ...decision.decisionBasis.map(policyClaimReference),
+        ...dispositionRefs,
+      ]);
     }
     const supporting = decision.supportingTagDecisions.find(({ tagId }) => tagId === targetId);
     if (supporting) {
-      return normalizeClaimRefs(supporting.decisionBasis.map(policyClaimReference));
+      return normalizeClaimRefs([
+        ...supporting.decisionBasis.map(policyClaimReference),
+        ...dispositionRefs,
+      ]);
     }
     return NON_PRIMARY_TAG_IDS.includes(targetId) &&
       [...decision.primaryTagIds, ...decision.supportingTagIds].some((tagId) =>
@@ -1403,7 +1413,22 @@ const representativeDecisionRefs = (
 ): ProblemAnalysisClaimRef[] =>
   normalizeClaimRefs(
     decisions.slice(0, maximum).flatMap((decision) => {
-      const reference = targetEvidenceRefsForDecision(decision, targetId, kind)[0];
+      const targetReferences = targetEvidenceRefsForDecision(decision, targetId, kind);
+      const dispositionReference =
+        kind === 'tag'
+          ? decision.claimDispositions.find(({ tagIds }) => tagIds.includes(targetId))?.claimRef
+          : undefined;
+      const preferredPath =
+        kind === 'outcome' &&
+        [decision.primaryOutcomeId, ...decision.additionalPrimaryOutcomeIds].includes(targetId)
+          ? '/outcomeCandidates/0'
+          : kind === 'tag' && dispositionReference === undefined
+            ? '/reasoningPath/algorithmConnection'
+            : undefined;
+      const reference = dispositionReference
+        ? policyClaimReference(dispositionReference)
+        : (targetReferences.find(({ claimPath }) => claimPath === preferredPath) ??
+          targetReferences[0]);
       return reference === undefined ? [] : [reference];
     }),
   );
@@ -1513,16 +1538,13 @@ const policyDecisionSupportIsValid = (decision: FinalPrimaryDecision): boolean =
  * checks, but are not invented as additional semantic assignments.
  */
 const directLearningUnitIdsForDecision = (decision: FinalPrimaryDecision): string[] => {
-  const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
   const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
-  const assignedTagIds = [...decision.primaryTagIds, ...decision.supportingTagIds];
   const assignedOutcomeIds = [
     decision.primaryOutcomeId,
     ...supportingOutcomeIdsForDecision(decision),
   ];
   const directUnitIds = sortedUnique([
     ...decision.learningUnitCandidateIds,
-    ...assignedTagIds.flatMap((tagId) => tagById.get(tagId)?.learningUnitCandidateIds ?? []),
     ...assignedOutcomeIds.flatMap(
       (outcomeId) => outcomeById.get(outcomeId)?.learningUnitCandidateIds ?? [],
     ),
@@ -1564,8 +1586,8 @@ const materializePolicyLearningUnits = (
   const unitsById = new Map(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => [unit.id, unit]));
   const problemsByUnitId = new Map<string, string[]>();
   for (const decision of decisions) {
-    for (const unitId of directLearningUnitIdsForDecision(decision)) {
-      for (const coveredUnitId of learningUnitAndAncestorIds(unitId, unitsById)) {
+    for (const directUnitId of decision.learningUnitCandidateIds) {
+      for (const coveredUnitId of learningUnitAndAncestorIds(directUnitId, unitsById)) {
         const problemIds = problemsByUnitId.get(coveredUnitId) ?? [];
         problemIds.push(decision.problemId);
         problemsByUnitId.set(coveredUnitId, problemIds);
@@ -1583,6 +1605,7 @@ const finalCandidatesFromPolicy = (
 ): FinalTaxonomyCandidate[] => {
   const materializedUnits = materializePolicyLearningUnits(decisions);
   const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
+  const decisionByProblemId = new Map(decisions.map((decision) => [decision.problemId, decision]));
   const tagHasAncestor = (tagId: string, ancestorId: string): boolean => {
     const visited = new Set<string>();
     let currentId: string | null = tagId;
@@ -1594,23 +1617,31 @@ const finalCandidatesFromPolicy = (
     return false;
   };
   const tagCandidates = FINAL_TAXONOMY_TAGS.map((tag): FinalTaxonomyCandidate => {
-    const supportingDecisions = decisions.filter((decision) =>
-      [...decision.primaryTagIds, ...decision.supportingTagIds].includes(tag.id),
+    const representativeDecisions = tag.representativeProblemIds.map((problemId) => {
+      const decision = decisionByProblemId.get(problemId);
+      if (!decision) {
+        throw new FinalTaxonomyBuildError(
+          'TAG_REPRESENTATIVE_PROBLEM_MISSING',
+          `${tag.id}/${problemId}`,
+        );
+      }
+      const usesTag = decision.primaryTagIds.some(
+        (tagId) => tagId === tag.id || (tag.parentId === null && tagHasAncestor(tagId, tag.id)),
+      );
+      if (!usesTag) {
+        throw new FinalTaxonomyBuildError(
+          'TAG_REPRESENTATIVE_ASSIGNMENT_MISMATCH',
+          `${tag.id}/${problemId}`,
+        );
+      }
+      return decision;
+    });
+    const evidenceRefs = representativeDecisionRefs(
+      representativeDecisions,
+      tag.id,
+      'tag',
+      representativeDecisions.length,
     );
-    const descendantDecisions =
-      supportingDecisions.length === 0 && tag.parentId === null
-        ? decisions.filter((decision) =>
-            [...decision.primaryTagIds, ...decision.supportingTagIds].some((tagId) =>
-              tagHasAncestor(tagId, tag.id),
-            ),
-          )
-        : [];
-    const evidenceRefs =
-      supportingDecisions.length > 0
-        ? representativeDecisionRefs(supportingDecisions, tag.id, 'tag')
-        : normalizeClaimRefs(descendantDecisions.slice(0, 3).flatMap(decisionEvidenceRefs));
-    const representativeDecisions =
-      supportingDecisions.length > 0 ? supportingDecisions : descendantDecisions;
     return FinalTaxonomyCandidateSchema.parse({
       kind: 'tag',
       entity: {
@@ -1620,11 +1651,9 @@ const finalCandidatesFromPolicy = (
         parentId: tag.parentId,
         prerequisiteTagIds: tag.prerequisiteTagIds,
         learningOutcomeIds: tag.learningOutcomeIds,
-        representativeProblemIds: representativeDecisions
-          .slice(0, 3)
-          .map(({ problemId }) => problemId),
-        aliases: [],
-        formerNames: [],
+        representativeProblemIds: tag.representativeProblemIds,
+        aliases: tag.aliases,
+        formerNames: tag.formerNames,
         lifecycle: 'active',
         replacementTagIds: [],
       },
@@ -1757,7 +1786,16 @@ const placementsFromPolicy = (
       primaryOutcomeId: decision.primaryOutcomeId,
       supportingOutcomeIds,
       learningUnitIds,
+      presentationUnitId: decision.presentationUnitId,
       adHocElements: decision.adHocElements.map(adHocProjectionText),
+      claimDispositions: decision.claimDispositions.map(
+        ({ claimRef, kind, tagIds, rationale }) => ({
+          claimRef: policyClaimReference(claimRef),
+          kind,
+          tagIds,
+          rationale,
+        }),
+      ),
       analysisEvidenceRefs: evidenceRefs,
     });
   });
@@ -1899,7 +1937,7 @@ const semanticIntegrationEntriesFromPolicy = (
             fromPreviewEntityId: decision.previewEntityId,
             targets: decision.finalEntityIds.map((finalEntityId) => ({
               finalEntityId,
-              aliases: [],
+              aliases: humanSurfaceAliases(decision.aliasesOrRedirects),
             })),
             ambiguousRedirectOmittedReason:
               'A split preview entity has no single canonical redirect target.',
@@ -2122,16 +2160,15 @@ export const buildFinalTaxonomyFromPolicy = (
     table.decisions.some(
       (decision) =>
         decision.competingTagIds.length > 0 ||
-        (decision.decisionKind === 'semantic_signature'
-          ? decision.ambiguityStatus !== 'unambiguous' ||
-            decision.matchedSemanticDimensions.length === 0 ||
-            (decision.scoreGap !== null && decision.scoreGap <= 0)
-          : decision.ambiguityStatus !== 'curated_override' || decision.scoreGap !== null),
+        (decision.decisionKind === 'curated_semantic_override'
+          ? decision.ambiguityStatus !== 'curated_override'
+          : decision.ambiguityStatus !== 'proposed_assignment') ||
+        decision.scoreGap !== null,
     )
   ) {
     throw new FinalTaxonomyBuildError(
       'FINAL_TAXONOMY_AMBIGUOUS_DECISION',
-      'Every returned primary decision must be unambiguous or an explicit proposed authoring override.',
+      'Every primary decision must distinguish a reviewed curated override from an explicit, still-proposed Inventory assignment.',
     );
   }
   if (table.decisions.some((decision) => !policyDecisionSupportIsValid(decision))) {
@@ -2391,6 +2428,7 @@ export const validateFinalTaxonomyBuildAgainstContext = (
   const placementByProblemId = new Map(
     build.placements.map((placement) => [placement.problemId, placement]),
   );
+  const standardOrderIndex = new Map(build.standardOrder.map((unitId, index) => [unitId, index]));
   for (const placement of build.placements) {
     const record = recordsById.get(placement.problemId);
     if (placement.kind !== 'full') {
@@ -2420,6 +2458,70 @@ export const validateFinalTaxonomyBuildAgainstContext = (
       add(
         'PLACEMENT_AD_HOC_ELEMENTS_INCOMPLETE',
         'Every problem-specific insight must remain visible as an ad-hoc element.',
+        placement.problemId,
+      );
+    }
+    const expectedDispositionPaths = sortedUnique([
+      ...(record?.typicalTechniques.map((_, index) => `/typicalTechniques/${String(index)}`) ?? []),
+      ...(record?.prerequisiteCandidates.map(
+        (_, index) => `/prerequisiteCandidates/${String(index)}`,
+      ) ?? []),
+    ]);
+    const dispositionPaths = sortedUnique(
+      placement.claimDispositions.map(({ claimRef }) => claimRef.claimPath),
+    );
+    if (!sameOrderedValues(expectedDispositionPaths, dispositionPaths)) {
+      add(
+        'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_INCOMPLETE',
+        'Every typical Technique and prerequisite claim requires an explicit disposition.',
+        placement.problemId,
+      );
+    }
+    const assignedTagIds = new Set([...placement.primaryTagIds, ...placement.supportingTagIds]);
+    if (
+      placement.claimDispositions.some(
+        ({ claimRef, kind, tagIds }) =>
+          claimRef.problemId !== placement.problemId ||
+          tagIds.some((tagId) => !assignedTagIds.has(tagId)) ||
+          (kind === 'primary' &&
+            tagIds.some((tagId) => !placement.primaryTagIds.includes(tagId))) ||
+          (kind === 'supporting' &&
+            tagIds.some((tagId) => !placement.supportingTagIds.includes(tagId))),
+      )
+    ) {
+      add(
+        'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_INVALID',
+        'Claim dispositions must be owned by the Problem and use its declared primary/supporting Tags.',
+        placement.problemId,
+      );
+    }
+    const evidenceRefKeys = new Set(
+      placement.analysisEvidenceRefs.map(
+        ({ problemId, claimPath }) => `${problemId}\u0000${claimPath}`,
+      ),
+    );
+    if (
+      placement.claimDispositions.some(
+        ({ claimRef }) => !evidenceRefKeys.has(`${claimRef.problemId}\u0000${claimRef.claimPath}`),
+      )
+    ) {
+      add(
+        'PLACEMENT_INVENTORY_CLAIM_EVIDENCE_INCOMPLETE',
+        'Every claim disposition must remain in the placement evidence closure.',
+        placement.problemId,
+      );
+    }
+    const presentationIndex = standardOrderIndex.get(placement.presentationUnitId);
+    if (
+      presentationIndex === undefined ||
+      placement.learningUnitIds.some(
+        (unitId) =>
+          (standardOrderIndex.get(unitId) ?? Number.POSITIVE_INFINITY) > presentationIndex,
+      )
+    ) {
+      add(
+        'PLACEMENT_PRESENTED_BEFORE_PREREQUISITE_UNIT',
+        'The presentation Unit must follow every primary and supporting Unit used by the Problem.',
         placement.problemId,
       );
     }
@@ -2517,10 +2619,14 @@ export const validateFinalTaxonomyBuildAgainstContext = (
     }
     for (const problemId of tag.representativeProblemIds) {
       const placement = placementByProblemId.get(problemId);
-      if (placement === undefined || !placementUsesCandidate(placement, 'tag', tag.id)) {
+      const usesTagAsPrimary =
+        placement?.primaryTagIds.some(
+          (tagId) => tagId === tag.id || (tag.parentId === null && tagHasAncestor(tagId, tag.id)),
+        ) ?? false;
+      if (!usesTagAsPrimary) {
         add(
           'TAG_REPRESENTATIVE_MISMATCH',
-          `${problemId} does not use representative Tag ${tag.id}.`,
+          `${problemId} does not use representative Tag ${tag.id} as its primary abstraction.`,
           tag.id,
         );
       }

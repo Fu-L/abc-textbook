@@ -103,7 +103,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc412-f': 'tag-stochastic-expectation-dp',
   'abc412-g': 'tag-flow-matching-cut',
   'abc413-e': 'tag-divide-enumerate',
-  'abc413-f': 'tag-game-grundy-dp',
+  'abc413-f': 'tag-game-value-dp',
   // Planar duality reduces the sparse obstacle boundary to DSU connectivity.
   'abc413-g': 'tag-dsu-connectivity',
   'abc414-e': 'tag-integer-boundary-blocks',
@@ -116,7 +116,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc416-e': 'tag-shortest-path',
   // Path count and endpoint status are composed over rooted subtrees.
   'abc416-f': 'tag-tree-aggregation-reroot',
-  'abc416-g': 'tag-recursive-compressed-string',
+  'abc416-g': 'tag-dp-state-equivalence',
   'abc417-e': 'tag-greedy-exchange-order',
   'abc417-f': 'tag-lazy-segment-action',
   // HLD only accelerates navigation in the already compressed concat DAG.
@@ -127,12 +127,13 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc418-g': 'tag-dp-state-equivalence',
   'abc419-e': 'tag-knapsack-resource',
   'abc419-f': 'tag-prefix-matching-automata',
-  'abc419-g': 'tag-parameterized-graph-kernelization',
+  'abc419-g': 'tag-graph-core-peeling',
   'abc420-e': 'tag-dsu-connectivity',
   'abc420-f': 'tag-monotone-stack-queue',
   'abc420-g': 'tag-prime-divisor-decomposition',
   'abc421-e': 'tag-stochastic-expectation-dp',
-  'abc421-f': 'tag-amortized-heavy-light',
+  // The reusable abstraction is the ID-indexed linked list; amortization bounds the splice walk.
+  'abc421-f': 'tag-linked-list-index',
   'abc421-g': 'tag-flow-matching-cut',
   'abc422-e': 'tag-geometry-orientation-transform',
   'abc422-f': 'tag-dp-state-equivalence',
@@ -184,7 +185,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc436-f': 'tag-contribution-reordering',
   'abc436-g': 'tag-convolution-fps',
   // The Trie is used as the canonical prefix-state representation for ordering.
-  'abc437-e': 'tag-prefix-matching-automata',
+  'abc437-e': 'tag-trie-prefix',
   'abc437-f': 'tag-geometry-orientation-transform',
   'abc437-g': 'tag-flow-matching-cut',
   'abc438-e': 'tag-functional-graph-doubling',
@@ -223,7 +224,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   // This is concatenation-monoid doubling, not a functional-graph jump.
   'abc448-e': 'tag-linear-recurrence-matrix',
   'abc448-f': 'tag-constructive-witness',
-  'abc448-g': 'tag-convex-hull-halfplane',
+  'abc448-g': 'tag-convex-hull-trick',
   'abc449-e': 'tag-sweep-coordinate-compression',
   'abc449-f': 'tag-sweep-coordinate-compression',
   'abc449-g': 'tag-convolution-fps',
@@ -240,7 +241,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   // RLE is preparatory; distinctness is decided by suffix order and LCP.
   'abc452-g': 'tag-suffix-lcp-index',
   'abc453-e': 'tag-sweep-coordinate-compression',
-  'abc453-f': 'tag-tree-balanced-separator',
+  'abc453-f': 'tag-constructive-witness',
   'abc453-g': 'tag-persistent-rollback',
   'abc454-e': 'tag-constructive-witness',
   'abc454-f': 'tag-prefix-difference',
@@ -266,7 +267,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc459-g': 'tag-gcd-diophantine',
   'abc460-e': 'tag-gcd-diophantine',
   'abc460-f': 'tag-monoid-segment-tree',
-  'abc460-g': 'tag-tree-path-decomposition',
+  'abc460-g': 'tag-tree-aggregation-reroot',
   'abc461-e': 'tag-fenwick-weighted-prefix',
   'abc461-f': 'tag-knapsack-resource',
   'abc461-g': 'tag-flow-matching-cut',

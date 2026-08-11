@@ -336,7 +336,16 @@ const placements = (): z.input<typeof FinalProblemPlacementProjectionSchema>[] =
     primaryOutcomeId: 'outcome-core',
     supportingOutcomeIds: [],
     learningUnitIds: ['unit-core'],
+    presentationUnitId: 'unit-core',
     adHocElements: index === 0 ? ['Problem-specific boundary handling.'] : [],
+    claimDispositions: [
+      {
+        claimRef: evidenceRef(index),
+        kind: 'primary',
+        tagIds: ['tag-core'],
+        rationale: 'The fixture claim directly supports the primary Tag.',
+      },
+    ],
     analysisEvidenceRefs: [evidenceRef(index)],
   }));
 

@@ -349,7 +349,19 @@ const createBuild = (
     primaryOutcomeId: outcomeIds[0] ?? 'outcome-core',
     supportingOutcomeIds: [],
     learningUnitIds: ['unit-core'],
+    presentationUnitId: 'unit-core',
     adHocElements: [],
+    claimDispositions: [
+      {
+        claimRef: {
+          ...evidenceRef(0),
+          problemId,
+        },
+        kind: 'primary' as const,
+        tagIds: ['tag-core'],
+        rationale: 'The fixture claim directly supports the primary Tag.',
+      },
+    ],
     analysisEvidenceRefs: [evidenceRef(0)],
   }));
   const correctionImpacts = [

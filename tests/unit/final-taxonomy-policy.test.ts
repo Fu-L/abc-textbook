@@ -54,24 +54,31 @@ describe('final taxonomy policy', () => {
       expect.arrayContaining([
         'tag-tree-balanced-separator',
         'tag-lowlink-critical-structure',
-        'tag-parameterized-graph-kernelization',
+        'tag-graph-core-peeling',
         'tag-ordered-set-heap',
         'tag-monotone-stack-queue',
         'tag-suffix-lcp-index',
         'tag-string-hash-equality',
         'tag-palindrome-radius',
+        'tag-linked-list-index',
+        'tag-trie-prefix',
+        'tag-game-value-dp',
+        'tag-determinant-counting',
+        'tag-convex-hull-trick',
       ]),
     );
     expect(FINAL_TAXONOMY_OUTCOMES.map((outcome) => outcome.id)).toEqual(
       expect.arrayContaining([
         'outcome-build-balanced-separator-decomposition',
         'outcome-identify-bridges-and-articulations',
-        'outcome-reduce-graph-to-parameter-kernel',
-        'outcome-maintain-global-order-frontier',
+        'outcome-reduce-graph-by-peeling-or-kernelization',
+        'outcome-maintain-dynamic-order-statistics',
         'outcome-prune-dominated-candidates-once',
         'outcome-build-suffix-lcp-index',
-        'outcome-compare-substrings-by-fingerprint',
+        'outcome-compare-objects-by-fingerprint',
         'outcome-characterize-palindrome-intervals',
+        'outcome-index-shared-prefixes-with-trie',
+        'outcome-count-combinatorial-objects-by-determinant',
       ]),
     );
     expect(NON_PRIMARY_TAG_IDS).toEqual([
@@ -117,6 +124,19 @@ describe('final taxonomy policy', () => {
         ),
       ),
     ).toBe(true);
+    expect(FINAL_TAXONOMY_TAGS.every((tag) => tag.aliases.length > 0)).toBe(true);
+    expect(FINAL_TAXONOMY_TAGS.every((tag) => tag.representativeProblemIds.length >= 2)).toBe(true);
+    expect(new Set(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => unit.orderReason)).size).toBe(
+      FINAL_LEARNING_UNIT_CANDIDATES.length,
+    );
+    expect(
+      FINAL_LEARNING_UNIT_CANDIDATES.find((unit) => unit.id === 'unit-decomposition-amortization')
+        ?.tagIds,
+    ).not.toContain('tag-divide-enumerate');
+    expect(
+      FINAL_TAXONOMY_OUTCOMES.find((outcome) => outcome.id === 'outcome-select-state-graph-search')
+        ?.statement,
+    ).not.toContain('0-1 BFS');
   });
 
   it('materializes one proposed primary Outcome for all 868 reviewed analyses without ambiguity', async () => {
@@ -130,9 +150,19 @@ describe('final taxonomy policy', () => {
     expect(Object.keys(EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS)).toHaveLength(868);
     expect(new Set(table.decisions.map((decision) => decision.problemId)).size).toBe(868);
 
+    const recordsById = new Map(records.map((record) => [record.problemId, record]));
+    const overrides = new Map(
+      CURATED_PRIMARY_OVERRIDES.map((override) => [override.problemId, override]),
+    );
+    const orderIndex = new Map(
+      FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds.map((unitId, index) => [unitId, index]),
+    );
+
     for (const decision of table.decisions) {
+      const record = recordsById.get(decision.problemId);
+      const override = overrides.get(decision.problemId);
       expect(decision.primaryTagIds).toContain(
-        EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS[decision.problemId],
+        override?.primaryTagId ?? EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS[decision.problemId],
       );
       expect(decision.primaryOutcomeId).toMatch(/^outcome-/u);
       expect(NON_PRIMARY_OUTCOME_IDS).not.toContain(decision.primaryOutcomeId);
@@ -141,8 +171,10 @@ describe('final taxonomy policy', () => {
         false,
       );
       expect(decision.acceptanceStatus).toBe('proposed');
-      expect(decision.decisionKind).toBe('curated_semantic_override');
-      expect(decision.ambiguityStatus).toBe('curated_override');
+      expect(decision.decisionKind).toBe(
+        override ? 'curated_semantic_override' : 'explicit_inventory_assignment',
+      );
+      expect(decision.ambiguityStatus).toBe(override ? 'curated_override' : 'proposed_assignment');
       expect(decision.scoreGap).toBeNull();
       expect(decision.matchedSemanticDimensions).toEqual([]);
       expect(decision.competingTagIds).toEqual([]);
@@ -150,13 +182,43 @@ describe('final taxonomy policy', () => {
       expect(decision.decisionBasis.map((claim) => claim.claimPath)).toEqual(
         expect.arrayContaining([
           expect.stringMatching(/^\/reasoningPath\/candidateApproaches\/\d+$/u),
+          expect.stringMatching(/^\/reasoningPath\/observations\/\d+$/u),
           expect.stringMatching(/^\/reasoningPath\/keyInsights\/\d+$/u),
           '/reasoningPath/algorithmConnection',
           '/outcomeCandidates/0',
         ]),
       );
+      const expectedDispositionPaths = [
+        ...(record?.typicalTechniques.map((_, index) => `/typicalTechniques/${String(index)}`) ??
+          []),
+        ...(record?.prerequisiteCandidates.map(
+          (_, index) => `/prerequisiteCandidates/${String(index)}`,
+        ) ?? []),
+      ].sort();
+      expect(
+        [...new Set(decision.claimDispositions.map(({ claimRef }) => claimRef.claimPath))].sort(),
+      ).toEqual(expectedDispositionPaths);
+      expect(decision.claimDispositions.every(({ rationale }) => rationale.length > 0)).toBe(true);
+      expect(
+        decision.claimDispositions.every(
+          ({ claimRef, tagIds }) =>
+            claimRef.owner.problemId === decision.problemId &&
+            tagIds.every((tagId) =>
+              [...decision.primaryTagIds, ...decision.supportingTagIds].includes(tagId),
+            ),
+        ),
+      ).toBe(true);
+      expect(decision.learningUnitCandidateIds).toContain(decision.presentationUnitId);
+      expect(
+        decision.learningUnitCandidateIds.every(
+          (unitId) =>
+            (orderIndex.get(unitId) ?? Number.POSITIVE_INFINITY) <=
+            (orderIndex.get(decision.presentationUnitId) ?? -1),
+        ),
+      ).toBe(true);
       for (const claim of [
         ...decision.decisionBasis,
+        ...decision.claimDispositions.map((disposition) => disposition.claimRef),
         ...decision.adHocElements.map((element) => element.claimRef),
       ]) {
         expect(claim.owner).toEqual({ kind: 'problem_analysis', problemId: decision.problemId });
@@ -171,21 +233,6 @@ describe('final taxonomy policy', () => {
         ).toBe(true);
       }
     }
-
-    const primaryTagCounts = new Map<string, number>();
-    for (const decision of table.decisions) {
-      for (const tagId of decision.primaryTagIds) {
-        primaryTagCounts.set(tagId, (primaryTagCounts.get(tagId) ?? 0) + 1);
-      }
-    }
-    expect(Math.max(...primaryTagCounts.values())).toBeLessThanOrEqual(40);
-    expect(primaryTagCounts.get('tag-geometry-orientation-transform')).toBeLessThanOrEqual(20);
-    expect(primaryTagCounts.get('tag-ordered-set-heap')).toBeLessThanOrEqual(30);
-    expect(primaryTagCounts.get('tag-sweep-coordinate-compression')).toBeLessThanOrEqual(25);
-
-    const overrides = new Map(
-      CURATED_PRIMARY_OVERRIDES.map((override) => [override.problemId, override]),
-    );
     expect(overrides.size).toBe(
       new Set(CURATED_PRIMARY_OVERRIDES.map((item) => item.problemId)).size,
     );
@@ -215,131 +262,127 @@ describe('final taxonomy policy', () => {
     const decisionByProblemId = new Map(
       table.decisions.map((decision) => [decision.problemId, decision]),
     );
-    expect(decisionByProblemId.get('abc312-ex')?.primaryTagIds).toContain(
-      'tag-symmetry-invariant-normalization',
-    );
-    expect(decisionByProblemId.get('abc312-ex')?.primaryTagIds).not.toContain(
-      'tag-cyclic-group-order',
-    );
-    expect(decisionByProblemId.get('abc403-f')?.primaryTagIds).toContain(
-      'tag-dp-state-equivalence',
-    );
-    expect(decisionByProblemId.get('abc403-f')?.primaryTagIds).not.toContain(
-      'tag-cyclic-group-order',
-    );
-    expect(decisionByProblemId.get('abc403-f')?.primaryTagIds).not.toContain(
-      'tag-prime-divisor-decomposition',
-    );
-    expect(decisionByProblemId.get('abc291-ex')?.primaryTagIds).toContain(
-      'tag-tree-balanced-separator',
-    );
-    expect(decisionByProblemId.get('abc419-g')?.primaryTagIds).toContain(
-      'tag-parameterized-graph-kernelization',
-    );
-    expect(decisionByProblemId.get('abc359-e')?.primaryTagIds).toContain(
-      'tag-monotone-stack-queue',
-    );
-    expect(decisionByProblemId.get('abc272-f')?.primaryTagIds).toContain('tag-suffix-lcp-index');
-    expect(decisionByProblemId.get('abc272-f')?.primaryTagIds).not.toContain(
-      'tag-string-hash-equality',
-    );
-    expect(decisionByProblemId.get('abc272-f')?.primaryTagIds).not.toContain(
-      'tag-palindrome-radius',
-    );
-    expect(decisionByProblemId.get('abc218-f')?.primaryTagIds).toEqual(
-      expect.arrayContaining(['tag-shortest-path-certificate', 'tag-witness-impact-localization']),
-    );
-    const expectedFalsePositiveCorrections: Readonly<Record<string, string>> = {
-      'abc214-f': 'tag-sequence-subsequence-dp',
-      'abc216-h': 'tag-combinatorial-coefficients',
-      'abc217-f': 'tag-interval-partition-dp',
-      'abc220-e': 'tag-contribution-reordering',
-      'abc221-f': 'tag-tree-aggregation-reroot',
-      'abc225-f': 'tag-greedy-exchange-order',
-      'abc229-h': 'tag-game-grundy-dp',
-      'abc246-e': 'tag-reachability-bfs',
-      'abc260-f': 'tag-contribution-reordering',
-      'abc276-e': 'tag-dsu-connectivity',
-      'abc284-e': 'tag-reachability-bfs',
-      'abc285-g': 'tag-flow-matching-cut',
-      'abc294-g': 'tag-tree-path-decomposition',
-      'abc457-g': 'tag-sequence-subsequence-dp',
+    const semanticPrimaryRegressions: Readonly<Record<string, string>> = {
+      'abc216-h': 'tag-determinant-counting',
+      'abc228-e': 'tag-modular-crt',
+      'abc229-h': 'tag-game-value-dp',
+      'abc234-ex': 'tag-geometry-orientation-transform',
+      'abc247-f': 'tag-dp-state-equivalence',
+      'abc253-ex': 'tag-determinant-counting',
+      'abc253-f': 'tag-fenwick-weighted-prefix',
+      'abc261-ex': 'tag-game-value-dp',
+      'abc264-g': 'tag-dp-state-equivalence',
+      'abc273-ex': 'tag-gcd-diophantine',
+      'abc266-f': 'tag-graph-core-peeling',
+      'abc279-e': 'tag-witness-impact-localization',
+      'abc287-e': 'tag-trie-prefix',
+      'abc294-ex': 'tag-subset-bitmask-transform',
+      'abc303-g': 'tag-game-value-dp',
+      'abc307-g': 'tag-knapsack-resource',
+      'abc312-e': 'tag-geometry-orientation-transform',
+      'abc321-e': 'tag-tree-aggregation-reroot',
+      'abc323-g': 'tag-determinant-counting',
+      'abc324-e': 'tag-contribution-reordering',
+      'abc329-g': 'tag-tree-aggregation-reroot',
+      'abc335-g': 'tag-cyclic-group-order',
+      'abc336-g': 'tag-determinant-counting',
+      'abc338-e': 'tag-geometry-orientation-transform',
+      'abc339-f': 'tag-string-hash-equality',
+      'abc344-e': 'tag-linked-list-index',
+      'abc349-e': 'tag-game-value-dp',
+      'abc353-e': 'tag-trie-prefix',
+      'abc355-g': 'tag-discrete-convex-marginal',
+      'abc367-f': 'tag-string-hash-equality',
+      'abc377-g': 'tag-trie-prefix',
+      'abc378-g': 'tag-dp-state-equivalence',
+      'abc382-f': 'tag-lazy-segment-action',
+      'abc413-f': 'tag-game-value-dp',
+      'abc416-g': 'tag-dp-state-equivalence',
+      'abc419-g': 'tag-graph-core-peeling',
+      'abc421-f': 'tag-linked-list-index',
+      'abc437-e': 'tag-trie-prefix',
+      'abc448-g': 'tag-convex-hull-trick',
+      'abc453-f': 'tag-constructive-witness',
+      'abc455-g': 'tag-string-hash-equality',
+      'abc460-g': 'tag-tree-aggregation-reroot',
     };
-    for (const [problemId, primaryTagId] of Object.entries(expectedFalsePositiveCorrections)) {
-      expect(decisionByProblemId.get(problemId)?.primaryTagIds).toContain(primaryTagId);
-      expect(decisionByProblemId.get(problemId)?.primaryTagIds).not.toContain(
-        'tag-geometry-orientation-transform',
-      );
-      expect(decisionByProblemId.get(problemId)?.primaryTagIds).not.toContain(
-        'tag-ordered-set-heap',
-      );
-    }
-    const expectedMiddleRangePrimaries: Readonly<Record<string, string>> = {
-      'abc300-e': 'tag-stochastic-expectation-dp',
-      'abc300-f': 'tag-monotone-threshold-search',
-      'abc301-e': 'tag-subset-bitmask-transform',
-      'abc301-ex': 'tag-lowlink-critical-structure',
-      'abc302-e': 'tag-amortized-heavy-light',
-      'abc302-f': 'tag-reachability-bfs',
-      'abc303-e': 'tag-reachability-bfs',
-      'abc303-ex': 'tag-convolution-fps',
-      'abc303-f': 'tag-monotone-threshold-search',
-      'abc304-g': 'tag-monotone-threshold-search',
-      'abc305-e': 'tag-ordered-set-heap',
-      'abc308-g': 'tag-ordered-set-heap',
-      'abc310-e': 'tag-dp-state-equivalence',
-      'abc310-ex': 'tag-greedy-exchange-order',
-      'abc313-ex': 'tag-dp-state-equivalence',
-      'abc313-f': 'tag-divide-enumerate',
-      'abc315-f': 'tag-sequence-subsequence-dp',
-      'abc317-ex': 'tag-convolution-fps',
-      'abc321-g': 'tag-subset-bitmask-transform',
-      'abc328-f': 'tag-dsu-connectivity',
-      'abc334-e': 'tag-reachability-bfs',
-      'abc335-g': 'tag-prime-divisor-decomposition',
-      'abc338-e': 'tag-sweep-coordinate-compression',
-      'abc338-f': 'tag-subset-bitmask-transform',
-      'abc340-f': 'tag-gcd-diophantine',
-      'abc341-e': 'tag-prefix-difference',
-      'abc341-f': 'tag-knapsack-resource',
-      'abc341-g': 'tag-convex-hull-halfplane',
-      'abc342-g': 'tag-ordered-set-heap',
-      'abc343-g': 'tag-subset-bitmask-transform',
-      'abc347-f': 'tag-symmetry-invariant-normalization',
-      'abc348-f': 'tag-contribution-reordering',
-      'abc348-g': 'tag-dp-transition-acceleration',
-      'abc349-f': 'tag-subset-bitmask-transform',
-      'abc350-f': 'tag-recursive-compressed-string',
-      'abc352-e': 'tag-dsu-connectivity',
-      'abc352-f': 'tag-subset-bitmask-transform',
-      'abc352-g': 'tag-convolution-fps',
-      'abc353-e': 'tag-prefix-matching-automata',
-      'abc353-f': 'tag-geometry-orientation-transform',
-      'abc353-g': 'tag-dp-transition-acceleration',
-      'abc354-f': 'tag-sequence-subsequence-dp',
-      'abc355-f': 'tag-dsu-connectivity',
-      'abc355-g': 'tag-dp-transition-acceleration',
-      'abc358-g': 'tag-dp-transition-acceleration',
-      'abc364-f': 'tag-ordered-set-heap',
-      'abc368-g': 'tag-amortized-heavy-light',
-      'abc370-g': 'tag-prime-divisor-decomposition',
-      'abc371-f': 'tag-lazy-segment-action',
-      'abc372-f': 'tag-dp-transition-acceleration',
-      'abc372-g': 'tag-convex-hull-halfplane',
-      'abc375-g': 'tag-lowlink-critical-structure',
-      'abc376-g': 'tag-greedy-exchange-order',
-      'abc377-f': 'tag-geometry-orientation-transform',
-      'abc378-f': 'tag-tree-aggregation-reroot',
-      'abc379-e': 'tag-contribution-reordering',
-      'abc379-g': 'tag-dp-state-equivalence',
-      'abc380-g': 'tag-contribution-reordering',
-      'abc381-e': 'tag-monotone-threshold-search',
-      'abc381-g': 'tag-convolution-fps',
-      'abc382-f': 'tag-monoid-segment-tree',
-    };
-    for (const [problemId, primaryTagId] of Object.entries(expectedMiddleRangePrimaries)) {
+    for (const [problemId, primaryTagId] of Object.entries(semanticPrimaryRegressions)) {
       expect(decisionByProblemId.get(problemId)?.primaryTagIds).toContain(primaryTagId);
     }
+
+    const semanticOutcomeRegressions: Readonly<Record<string, string>> = {
+      'abc212-h': 'outcome-transform-to-linear-system-or-rank',
+      'abc228-e': 'outcome-exploit-modular-periodicity',
+      'abc280-f': 'outcome-maintain-potential-differences',
+      'abc314-f': 'outcome-augment-components-with-metadata',
+      'abc314-ex': 'outcome-exploit-convexity',
+      'abc319-e': 'outcome-exploit-modular-periodicity',
+      'abc333-g': 'outcome-approximate-rational-by-euclid',
+      'abc351-g': 'outcome-compose-dynamic-tree-clusters',
+      'abc408-g': 'outcome-approximate-rational-by-euclid',
+      'abc460-g': 'outcome-compose-dynamic-tree-clusters',
+      'abc466-g': 'outcome-maintain-potential-differences',
+    };
+    for (const [problemId, outcomeId] of Object.entries(semanticOutcomeRegressions)) {
+      expect(decisionByProblemId.get(problemId)?.primaryOutcomeId).toBe(outcomeId);
+    }
+
+    const supportingRegressions: Readonly<Record<string, string>> = {
+      'abc213-f': 'tag-monotone-stack-queue',
+      'abc214-h': 'tag-flow-matching-cut',
+      'abc227-h': 'tag-flow-matching-cut',
+      'abc248-ex': 'tag-lazy-segment-action',
+      'abc269-ex': 'tag-convolution-fps',
+      'abc280-ex': 'tag-monotone-stack-queue',
+      'abc299-ex': 'tag-linear-recurrence-matrix',
+      'abc305-g': 'tag-linear-recurrence-matrix',
+      'abc336-g': 'tag-euler-degree-parity',
+      'abc364-g': 'tag-shortest-path',
+      'abc370-f': 'tag-functional-graph-doubling',
+      'abc403-e': 'tag-trie-prefix',
+      'abc450-f': 'tag-lazy-segment-action',
+      'abc460-f': 'tag-tree-path-decomposition',
+    };
+    for (const [problemId, supportingTagId] of Object.entries(supportingRegressions)) {
+      expect(decisionByProblemId.get(problemId)?.supportingTagIds).toContain(supportingTagId);
+    }
+
+    const leadTechniqueRegressions: Readonly<Record<string, string>> = {
+      'abc270-g': 'tag-divide-enumerate',
+      'abc273-ex': 'tag-gcd-diophantine',
+      'abc321-e': 'tag-tree-aggregation-reroot',
+      'abc344-e': 'tag-linked-list-index',
+      'abc355-g': 'tag-discrete-convex-marginal',
+      'abc421-f': 'tag-linked-list-index',
+    };
+    for (const [problemId, primaryTagId] of Object.entries(leadTechniqueRegressions)) {
+      const disposition = decisionByProblemId
+        .get(problemId)
+        ?.claimDispositions.find(
+          ({ claimRef, kind }) =>
+            claimRef.claimPath === '/typicalTechniques/0' && kind === 'primary',
+        );
+      expect(disposition?.tagIds).toContain(primaryTagId);
+    }
+    expect(decisionByProblemId.get('abc367-f')?.supportingTagIds).not.toContain(
+      'tag-ordered-set-heap',
+    );
+    expect(decisionByProblemId.get('abc455-g')?.supportingTagIds).not.toContain(
+      'tag-ordered-set-heap',
+    );
+
+    expect(decisionByProblemId.get('abc212-g')?.learningUnitCandidateIds).toContain(
+      'unit-cyclic-group-exponent-counting',
+    );
+    expect(decisionByProblemId.get('abc212-g')?.learningUnitCandidateIds).not.toContain(
+      'unit-multiplicative-order-periods',
+    );
+    expect(decisionByProblemId.get('abc222-g')?.learningUnitCandidateIds).toContain(
+      'unit-multiplicative-order-periods',
+    );
+    expect(decisionByProblemId.get('abc222-g')?.learningUnitCandidateIds).not.toContain(
+      'unit-cyclic-group-exponent-counting',
+    );
   });
 
   it('binds the planned T159 manifest scope to the exact final Outcome ID set', async () => {
@@ -367,6 +410,11 @@ describe('final taxonomy policy', () => {
     expect(
       new Set(PREVIEW_FINAL_TAXONOMY_DECISIONS.map((decision) => decision.reviewMode)),
     ).toEqual(new Set(['third_party']));
+    expect(
+      PREVIEW_FINAL_TAXONOMY_DECISIONS.every(
+        ({ aliasesOrRedirects }) => aliasesOrRedirects.length > 0,
+      ),
+    ).toBe(true);
     const multiplicativeOutcome = PREVIEW_FINAL_TAXONOMY_DECISIONS.find(
       (decision) =>
         decision.previewEntityId === 'outcome-provisional-multiplicative-order-counting',

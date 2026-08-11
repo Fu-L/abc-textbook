@@ -30,7 +30,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc216-f': 'tag-knapsack-resource',
   'abc216-g': 'tag-shortest-path',
   // LGV turns collision avoidance into a determinant; the remaining subset DP counts its terms.
-  'abc216-h': 'tag-combinatorial-coefficients',
+  'abc216-h': 'tag-determinant-counting',
 
   // Queue-to-heap migration is safe because each element crosses the boundary at most once.
   'abc217-e': 'tag-amortized-heavy-light',
@@ -91,15 +91,15 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   // The degree-multiplicity model and Euler tour are fixed before flow fills residual degrees.
   'abc227-h': 'tag-euler-degree-parity',
 
-  'abc228-e': 'tag-cyclic-group-order',
+  'abc228-e': 'tag-modular-crt',
   'abc228-f': 'tag-monotone-stack-queue',
   'abc228-g': 'tag-subset-bitmask-transform',
-  'abc228-h': 'tag-convex-hull-halfplane',
+  'abc228-h': 'tag-convex-hull-trick',
 
   'abc229-e': 'tag-reverse-offline',
   'abc229-f': 'tag-dp-state-equivalence',
   'abc229-g': 'tag-monotone-threshold-search',
-  'abc229-h': 'tag-game-grundy-dp',
+  'abc229-h': 'tag-game-value-dp',
 
   'abc230-e': 'tag-integer-boundary-blocks',
   'abc230-f': 'tag-interval-partition-dp',
@@ -122,7 +122,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc233-g': 'tag-interval-partition-dp',
 
   'abc234-e': 'tag-divide-enumerate',
-  'abc234-ex': 'tag-sweep-coordinate-compression',
+  'abc234-ex': 'tag-geometry-orientation-transform',
   'abc234-f': 'tag-combinatorial-coefficients',
   'abc234-g': 'tag-monotone-stack-queue',
 
@@ -173,7 +173,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc243-g': 'tag-dp-transition-acceleration',
 
   'abc244-e': 'tag-dp-state-equivalence',
-  'abc244-ex': 'tag-convex-hull-halfplane',
+  'abc244-ex': 'tag-convex-hull-trick',
   'abc244-f': 'tag-subset-bitmask-transform',
   'abc244-g': 'tag-constructive-witness',
 
@@ -189,7 +189,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc247-e': 'tag-contribution-reordering',
   'abc247-ex': 'tag-convolution-fps',
-  'abc247-f': 'tag-combinatorial-coefficients',
+  'abc247-f': 'tag-dp-state-equivalence',
   'abc247-g': 'tag-flow-matching-cut',
 
   'abc248-e': 'tag-geometry-orientation-transform',
@@ -209,7 +209,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc250-g': 'tag-discrete-convex-marginal',
 
   'abc251-e': 'tag-dp-state-equivalence',
-  'abc251-ex': 'tag-recursive-compressed-string',
+  'abc251-ex': 'tag-linear-recurrence-matrix',
   'abc251-f': 'tag-constructive-witness',
   'abc251-g': 'tag-convex-hull-halfplane',
 
@@ -219,8 +219,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc252-g': 'tag-interval-partition-dp',
 
   'abc253-e': 'tag-dp-transition-acceleration',
-  'abc253-ex': 'tag-combinatorial-coefficients',
-  'abc253-f': 'tag-reverse-offline',
+  'abc253-ex': 'tag-determinant-counting',
+  'abc253-f': 'tag-fenwick-weighted-prefix',
   'abc253-g': 'tag-integer-boundary-blocks',
 
   'abc254-e': 'tag-reachability-bfs',
@@ -261,7 +261,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   // Each bit becomes an independently composable unary-function monoid.
   'abc261-e': 'tag-monoid-segment-tree',
-  'abc261-ex': 'tag-game-grundy-dp',
+  'abc261-ex': 'tag-game-value-dp',
   'abc261-f': 'tag-contribution-reordering',
   'abc261-g': 'tag-interval-partition-dp',
 
@@ -278,7 +278,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc264-e': 'tag-reverse-offline',
   'abc264-ex': 'tag-amortized-heavy-light',
   'abc264-f': 'tag-dp-state-equivalence',
-  'abc264-g': 'tag-prefix-matching-automata',
+  'abc264-g': 'tag-dp-state-equivalence',
 
   'abc265-e': 'tag-dp-state-equivalence',
   'abc265-ex': 'tag-convolution-fps',
@@ -288,7 +288,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc266-e': 'tag-stochastic-expectation-dp',
   'abc266-ex': 'tag-sweep-coordinate-compression',
   // Repeated leaf deletion is the reusable reduction to the unique cycle kernel.
-  'abc266-f': 'tag-parameterized-graph-kernelization',
+  'abc266-f': 'tag-graph-core-peeling',
   'abc266-g': 'tag-combinatorial-coefficients',
 
   'abc267-e': 'tag-monotone-threshold-search',
@@ -323,7 +323,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc273-e': 'tag-persistent-rollback',
   // Continued-fraction-style unary descents are skipped as equal-boundary blocks.
-  'abc273-ex': 'tag-integer-boundary-blocks',
+  // The compressed recursion follows Stern--Brocot/continued-fraction quotients; set merging is secondary.
+  'abc273-ex': 'tag-gcd-diophantine',
   'abc273-f': 'tag-interval-partition-dp',
   'abc273-g': 'tag-dp-state-equivalence',
 
@@ -352,8 +353,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc278-f': 'tag-game-grundy-dp',
   'abc278-g': 'tag-game-grundy-dp',
 
-  // Each omission is normalized to the full permutation followed by one label swap.
-  'abc279-e': 'tag-symmetry-invariant-normalization',
+  // The full swap run is a witness; omitting one swap changes only the two labels it touches.
+  'abc279-e': 'tag-witness-impact-localization',
   'abc279-ex': 'tag-convolution-fps',
   'abc279-f': 'tag-dsu-connectivity',
   'abc279-g': 'tag-dp-state-equivalence',
@@ -393,7 +394,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc286-f': 'tag-modular-crt',
   'abc286-g': 'tag-euler-degree-parity',
 
-  'abc287-e': 'tag-prefix-matching-automata',
+  'abc287-e': 'tag-trie-prefix',
   'abc287-ex': 'tag-monotone-threshold-search',
   'abc287-f': 'tag-tree-aggregation-reroot',
   'abc287-g': 'tag-fenwick-weighted-prefix',
@@ -406,7 +407,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc289-e': 'tag-reachability-bfs',
   'abc289-ex': 'tag-convolution-fps',
   'abc289-f': 'tag-constructive-witness',
-  'abc289-g': 'tag-convex-hull-halfplane',
+  'abc289-g': 'tag-convex-hull-trick',
 
   'abc290-e': 'tag-contribution-reordering',
   'abc290-ex': 'tag-greedy-exchange-order',
@@ -430,14 +431,14 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc294-e': 'tag-two-pointers-window',
   // Low-degree deletion/contracting is used to expose a small subset-convolution kernel.
-  'abc294-ex': 'tag-parameterized-graph-kernelization',
+  'abc294-ex': 'tag-subset-bitmask-transform',
   'abc294-f': 'tag-monotone-threshold-search',
   'abc294-g': 'tag-tree-path-decomposition',
 
   'abc295-e': 'tag-stochastic-expectation-dp',
   'abc295-ex': 'tag-subset-bitmask-transform',
   'abc295-f': 'tag-digit-automaton-dp',
-  'abc295-g': 'tag-dsu-connectivity',
+  'abc295-g': 'tag-directed-condensation-toposort',
 
   'abc296-e': 'tag-functional-graph-doubling',
   'abc296-ex': 'tag-dp-state-equivalence',
