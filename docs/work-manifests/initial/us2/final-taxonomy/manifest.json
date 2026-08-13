@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T159-final-taxonomy",
   "taskId": "T159",
-  "scopeDigest": "25b1a25841c9c55a7940eee5942544e3d34e7956eec6a73cdb83a478174a577d",
-  "digest": "1ac541b79a3617dcc623a2508aabe29cf32a88f94b86fa4d05c7505d2e457f9e",
+  "scopeDigest": "87634723fc7436250da095ae2c57d7f8e65a288126a7c2b4de3c1ae6491924bc",
+  "digest": "5e23cdcecf4db367ec077edffddce5cd1af8f17754f6902be9a15c3322eb734a",
   "changeKind": "mixed",
   "requiredRequirementIds": [
     "FR-007",
@@ -32,9 +32,11 @@
     "outcome-classify-game-states",
     "outcome-compare-objects-by-fingerprint",
     "outcome-compose-dynamic-tree-clusters",
+    "outcome-compute-transitive-closure",
     "outcome-condense-and-order-directed-graph",
     "outcome-correct-overlap-by-inversion",
     "outcome-count-combinatorial-objects-by-determinant",
+    "outcome-count-orbits-by-fixed-points",
     "outcome-count-prefix-constrained-objects",
     "outcome-count-through-cyclic-exponents",
     "outcome-decompose-by-prime-or-divisor",
@@ -56,6 +58,7 @@
     "outcome-exploit-convexity",
     "outcome-exploit-modular-periodicity",
     "outcome-factor-and-accelerate-transitions",
+    "outcome-factor-separable-linear-transform",
     "outcome-find-period-by-multiplicative-order",
     "outcome-formulate-combinatorial-coefficients",
     "outcome-identify-bridges-and-articulations",
@@ -97,7 +100,8 @@
     "outcome-solve-stochastic-recurrence",
     "outcome-split-enumeration-space",
     "outcome-transform-to-linear-system-or-rank",
-    "outcome-transform-to-math-structure"
+    "outcome-transform-to-math-structure",
+    "outcome-use-tree-diameter-extrema"
   ],
   "outcomeImpact": {
     "kind": "affects_learning_outcomes",
@@ -148,9 +152,11 @@
         "outcome-classify-game-states",
         "outcome-compare-objects-by-fingerprint",
         "outcome-compose-dynamic-tree-clusters",
+        "outcome-compute-transitive-closure",
         "outcome-condense-and-order-directed-graph",
         "outcome-correct-overlap-by-inversion",
         "outcome-count-combinatorial-objects-by-determinant",
+        "outcome-count-orbits-by-fixed-points",
         "outcome-count-prefix-constrained-objects",
         "outcome-count-through-cyclic-exponents",
         "outcome-decompose-by-prime-or-divisor",
@@ -172,6 +178,7 @@
         "outcome-exploit-convexity",
         "outcome-exploit-modular-periodicity",
         "outcome-factor-and-accelerate-transitions",
+        "outcome-factor-separable-linear-transform",
         "outcome-find-period-by-multiplicative-order",
         "outcome-formulate-combinatorial-coefficients",
         "outcome-identify-bridges-and-articulations",
@@ -213,7 +220,8 @@
         "outcome-solve-stochastic-recurrence",
         "outcome-split-enumeration-space",
         "outcome-transform-to-linear-system-or-rank",
-        "outcome-transform-to-math-structure"
+        "outcome-transform-to-math-structure",
+        "outcome-use-tree-diameter-extrema"
       ],
       "outcomeImpact": {
         "kind": "affects_learning_outcomes",

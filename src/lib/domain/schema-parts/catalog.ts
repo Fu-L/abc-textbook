@@ -1224,6 +1224,7 @@ export const FinalProblemPlacementProjectionSchema = strictObject({
   primaryTagIds: uniqueArray(FinalTagIdSchema).min(1),
   supportingTagIds: uniqueArray(FinalTagIdSchema),
   primaryOutcomeId: FinalOutcomeIdSchema,
+  additionalPrimaryOutcomeIds: uniqueArray(FinalOutcomeIdSchema),
   supportingOutcomeIds: uniqueArray(FinalOutcomeIdSchema),
   learningUnitIds: uniqueArray(FinalLearningUnitIdSchema).min(1),
   presentationUnitId: FinalLearningUnitIdSchema,
@@ -1268,11 +1269,15 @@ export const FinalProblemPlacementProjectionSchema = strictObject({
       message: 'Primary and supporting Tag assignments must be disjoint.',
     });
   }
-  if (placement.supportingOutcomeIds.includes(placement.primaryOutcomeId)) {
+  const primaryOutcomeIds = [placement.primaryOutcomeId, ...placement.additionalPrimaryOutcomeIds];
+  if (
+    placement.additionalPrimaryOutcomeIds.includes(placement.primaryOutcomeId) ||
+    placement.supportingOutcomeIds.some((outcomeId) => primaryOutcomeIds.includes(outcomeId))
+  ) {
     context.addIssue({
       code: 'custom',
       path: ['supportingOutcomeIds'],
-      message: 'The primary Outcome cannot also be supporting.',
+      message: 'Primary and supporting Outcome assignments must be disjoint.',
     });
   }
   if (!placement.learningUnitIds.includes(placement.presentationUnitId)) {
@@ -1282,7 +1287,7 @@ export const FinalProblemPlacementProjectionSchema = strictObject({
       message: 'The presentation Unit must be one of the placement learning Units.',
     });
   }
-  const assignedOutcomeIds = [placement.primaryOutcomeId, ...placement.supportingOutcomeIds];
+  const assignedOutcomeIds = [...primaryOutcomeIds, ...placement.supportingOutcomeIds];
   if (placement.sharedOutcomeIds.some((id) => !assignedOutcomeIds.includes(id))) {
     context.addIssue({
       code: 'custom',
@@ -2234,6 +2239,7 @@ export const FinalTaxonomyBuildSchema = strictObject({
       placement.primaryTagIds.some((id) => !tagIdSet.has(id)) ||
       placement.supportingTagIds.some((id) => !tagIdSet.has(id)) ||
       !outcomeIdSet.has(placement.primaryOutcomeId) ||
+      placement.additionalPrimaryOutcomeIds.some((id) => !outcomeIdSet.has(id)) ||
       placement.supportingOutcomeIds.some((id) => !outcomeIdSet.has(id)) ||
       placement.learningUnitIds.some((id) => !unitIdSet.has(id))
     ) {
@@ -2249,7 +2255,41 @@ export const FinalTaxonomyBuildSchema = strictObject({
       return unit === undefined ? [] : [unit];
     });
     const assignedTagIds = [...placement.primaryTagIds, ...placement.supportingTagIds];
-    const assignedOutcomeIds = [placement.primaryOutcomeId, ...placement.supportingOutcomeIds];
+    const primaryOutcomeIds = [
+      placement.primaryOutcomeId,
+      ...placement.additionalPrimaryOutcomeIds,
+    ];
+    const assignedOutcomeIds = [...primaryOutcomeIds, ...placement.supportingOutcomeIds];
+    if (
+      primaryOutcomeIds.some(
+        (outcomeId) =>
+          !outcomeById
+            .get(outcomeId)
+            ?.scopeIds.some((tagId) => placement.primaryTagIds.includes(tagId)),
+      ) ||
+      placement.primaryTagIds.some((tagId) =>
+        primaryOutcomeIds.every(
+          (outcomeId) => !outcomeById.get(outcomeId)?.scopeIds.includes(tagId),
+        ),
+      ) ||
+      placement.supportingOutcomeIds.some(
+        (outcomeId) =>
+          !outcomeById
+            .get(outcomeId)
+            ?.scopeIds.some((tagId) => placement.supportingTagIds.includes(tagId)),
+      ) ||
+      placement.supportingTagIds.some((tagId) =>
+        placement.supportingOutcomeIds.every(
+          (outcomeId) => !outcomeById.get(outcomeId)?.scopeIds.includes(tagId),
+        ),
+      )
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['placements'],
+        message: `Placement ${placement.id} has inconsistent primary/supporting Outcome roles.`,
+      });
+    }
     if (
       assignedUnits.some((unit) => !unit.problemIds.includes(placement.problemId)) ||
       assignedTagIds.some((id) => !assignedUnits.some((unit) => unit.tagIds.includes(id))) ||
@@ -2266,7 +2306,13 @@ export const FinalTaxonomyBuildSchema = strictObject({
     if (placement.primaryProblemId !== null) {
       const primary = placementByProblemId.get(placement.primaryProblemId);
       const primaryOutcomeIds =
-        primary === undefined ? [] : [primary.primaryOutcomeId, ...primary.supportingOutcomeIds];
+        primary === undefined
+          ? []
+          : [
+              primary.primaryOutcomeId,
+              ...primary.additionalPrimaryOutcomeIds,
+              ...primary.supportingOutcomeIds,
+            ];
       if (
         primary?.kind !== 'full' ||
         placement.sharedOutcomeIds.some(
@@ -2301,7 +2347,13 @@ export const FinalTaxonomyBuildSchema = strictObject({
       );
     }
     if (kind === 'outcome') {
-      if ([placement.primaryOutcomeId, ...placement.supportingOutcomeIds].includes(targetId)) {
+      if (
+        [
+          placement.primaryOutcomeId,
+          ...placement.additionalPrimaryOutcomeIds,
+          ...placement.supportingOutcomeIds,
+        ].includes(targetId)
+      ) {
         return true;
       }
       const target = outcomeById.get(targetId);
@@ -2339,7 +2391,11 @@ export const FinalTaxonomyBuildSchema = strictObject({
               : entry.previewEntityKind === 'outcome'
                 ? placement === undefined
                   ? []
-                  : [placement.primaryOutcomeId, ...placement.supportingOutcomeIds]
+                  : [
+                      placement.primaryOutcomeId,
+                      ...placement.additionalPrimaryOutcomeIds,
+                      ...placement.supportingOutcomeIds,
+                    ]
                 : (placement?.learningUnitIds ?? []);
           if (!assignedIds.includes(assignment.finalEntityId)) {
             context.addIssue({

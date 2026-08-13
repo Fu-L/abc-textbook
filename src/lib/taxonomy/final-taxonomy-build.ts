@@ -44,12 +44,14 @@ import {
 import {
   FINAL_LEARNING_UNIT_CANDIDATES,
   FINAL_LEARNING_UNIT_ORDER_POLICY,
+  FINAL_TAXONOMY_CLAIM_DECISIONS,
   FINAL_TAXONOMY_OUTCOMES,
   FINAL_TAXONOMY_TAGS,
   NON_PRIMARY_OUTCOME_IDS,
   NON_PRIMARY_TAG_IDS,
   PREVIEW_FINAL_TAXONOMY_DECISIONS,
   CURATED_PRIMARY_OVERRIDES,
+  EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS,
   buildFullCorpusPrimaryDecisionTable,
   validateFinalTaxonomyPolicy,
   type FinalPrimaryDecision,
@@ -765,6 +767,7 @@ const normalizePlacement = (
     evidenceIds: sortedUnique(placement.evidenceIds),
     primaryTagIds: sortedUnique(placement.primaryTagIds),
     supportingTagIds: sortedUnique(placement.supportingTagIds),
+    additionalPrimaryOutcomeIds: sortedUnique(placement.additionalPrimaryOutcomeIds),
     supportingOutcomeIds: sortedUnique(placement.supportingOutcomeIds),
     learningUnitIds: sortedUnique(placement.learningUnitIds),
     adHocElements: sortedUnique(placement.adHocElements),
@@ -1386,20 +1389,15 @@ const targetEvidenceRefsForDecision = (
     decision.additionalPrimaryOutcomeIds.some(
       (outcomeId) =>
         outcomeById.get(outcomeId)?.learningUnitCandidateIds.includes(targetId) === true,
-    ) ||
-    decision.primaryTagIds.some(
-      (tagId) => tagById.get(tagId)?.learningUnitCandidateIds.includes(targetId) === true,
     );
   const references = [
     ...(primarySupportsUnit ? decision.decisionBasis : []),
     ...decision.supportingTagDecisions.flatMap((supporting) => {
-      const tagSupports =
-        tagById.get(supporting.tagId)?.learningUnitCandidateIds.includes(targetId) === true;
       const outcomeSupports = supporting.outcomeIds.some(
         (outcomeId) =>
           outcomeById.get(outcomeId)?.learningUnitCandidateIds.includes(targetId) === true,
       );
-      return tagSupports || outcomeSupports ? supporting.decisionBasis : [];
+      return outcomeSupports ? supporting.decisionBasis : [];
     }),
   ];
   return normalizeClaimRefs(references.map(policyClaimReference));
@@ -1487,9 +1485,7 @@ const claimRefsForTargetProblems = (
   );
 
 const supportingOutcomeIdsForDecision = (decision: FinalPrimaryDecision): string[] =>
-  sortedUnique([...decision.additionalPrimaryOutcomeIds, ...decision.supportingOutcomeIds]).filter(
-    (outcomeId) => outcomeId !== decision.primaryOutcomeId,
-  );
+  sortedUnique(decision.supportingOutcomeIds);
 
 const policyDecisionSupportIsValid = (decision: FinalPrimaryDecision): boolean => {
   const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
@@ -1541,6 +1537,7 @@ const directLearningUnitIdsForDecision = (decision: FinalPrimaryDecision): strin
   const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
   const assignedOutcomeIds = [
     decision.primaryOutcomeId,
+    ...decision.additionalPrimaryOutcomeIds,
     ...supportingOutcomeIdsForDecision(decision),
   ];
   const directUnitIds = sortedUnique([
@@ -1664,9 +1661,11 @@ const finalCandidatesFromPolicy = (
   });
   const outcomeCandidates = FINAL_TAXONOMY_OUTCOMES.map((outcome): FinalTaxonomyCandidate => {
     const supportingDecisions = decisions.filter((decision) =>
-      [decision.primaryOutcomeId, ...supportingOutcomeIdsForDecision(decision)].includes(
-        outcome.id,
-      ),
+      [
+        decision.primaryOutcomeId,
+        ...decision.additionalPrimaryOutcomeIds,
+        ...supportingOutcomeIdsForDecision(decision),
+      ].includes(outcome.id),
     );
     const descendantDecisions =
       supportingDecisions.length === 0 && NON_PRIMARY_OUTCOME_IDS.includes(outcome.id)
@@ -1771,9 +1770,6 @@ const placementsFromPolicy = (
         `決定種別=${decision.decisionKind}`,
         `著者判断状態=${decision.acceptanceStatus}`,
         `曖昧性=${decision.ambiguityStatus}`,
-        `スコア差=${decision.scoreGap === null ? '非適用' : String(decision.scoreGap)}`,
-        `未解決競合Tag=${decision.competingTagIds.join(',') || 'なし'}`,
-        `一致した意味次元=${decision.matchedSemanticDimensions.join(',') || '個別判断'}`,
         `選択理由: ${decision.selectionRationale}`,
         ...decision.supportingTagDecisions.map(
           ({ tagId, outcomeIds, selectionRationale }) =>
@@ -1784,6 +1780,7 @@ const placementsFromPolicy = (
       primaryTagIds: decision.primaryTagIds,
       supportingTagIds: decision.supportingTagIds,
       primaryOutcomeId: decision.primaryOutcomeId,
+      additionalPrimaryOutcomeIds: decision.additionalPrimaryOutcomeIds,
       supportingOutcomeIds,
       learningUnitIds,
       presentationUnitId: decision.presentationUnitId,
@@ -2051,7 +2048,6 @@ const semanticImpactsFromEntries = (
     ),
   );
   return entries.map((entry) => {
-    const affectedLearningUnitCandidateIds = affectedUnitIdsForEntry(entry, candidates);
     const representativeProblemIds =
       entry.action === 'split'
         ? entry.splitProblemAssignments.flatMap(({ representativeProblemIds: ids }) => ids)
@@ -2062,6 +2058,12 @@ const semanticImpactsFromEntries = (
       ...entry.affectedProblemIds,
       ...representativeProblemIds,
     ]);
+    const affectedLearningUnitCandidateIds = affectedUnitIdsForEntry(entry, candidates).filter(
+      (unitId) =>
+        evidenceOwnerProblemIds.some(
+          (problemId) => unitById.get(unitId)?.problemIds.includes(problemId) === true,
+        ),
+    );
     const evidenceRefs = claimRefsForProblems(evidenceOwnerProblemIds, decisionByProblemId);
     const derivedIndexPaths = ['src/content/indexes/taxonomy.json'];
     const surfaceAssessments: SemanticCorrectionImpact['surfaceAssessments'] = [
@@ -2135,6 +2137,8 @@ export const finalTaxonomyPolicyRulesDigest = (): string =>
     outcomes: FINAL_TAXONOMY_OUTCOMES,
     learningUnits: FINAL_LEARNING_UNIT_CANDIDATES,
     orderPolicy: FINAL_LEARNING_UNIT_ORDER_POLICY,
+    explicitPrimaryAssignments: EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS,
+    claimDecisions: FINAL_TAXONOMY_CLAIM_DECISIONS,
     primaryOverrides: CURATED_PRIMARY_OVERRIDES,
     previewDecisions: PREVIEW_FINAL_TAXONOMY_DECISIONS,
     nonPrimaryTagIds: NON_PRIMARY_TAG_IDS,
@@ -2157,13 +2161,10 @@ export const buildFinalTaxonomyFromPolicy = (
     );
   }
   if (
-    table.decisions.some(
-      (decision) =>
-        decision.competingTagIds.length > 0 ||
-        (decision.decisionKind === 'curated_semantic_override'
-          ? decision.ambiguityStatus !== 'curated_override'
-          : decision.ambiguityStatus !== 'proposed_assignment') ||
-        decision.scoreGap !== null,
+    table.decisions.some((decision) =>
+      decision.decisionKind === 'curated_semantic_override'
+        ? decision.ambiguityStatus !== 'curated_override'
+        : decision.ambiguityStatus !== 'proposed_assignment',
     )
   ) {
     throw new FinalTaxonomyBuildError(
@@ -2477,21 +2478,66 @@ export const validateFinalTaxonomyBuildAgainstContext = (
         placement.problemId,
       );
     }
+    const dispositionIdentityKeys = placement.claimDispositions.map(
+      ({ claimRef, kind, tagIds }) =>
+        `${claimRef.claimPath}\u0000${kind}\u0000${sortedUnique(tagIds).join('\u0000')}`,
+    );
+    const dispositionKindsByPath = new Map<string, Set<string>>();
+    for (const { claimRef, kind } of placement.claimDispositions) {
+      const kinds = dispositionKindsByPath.get(claimRef.claimPath) ?? new Set<string>();
+      kinds.add(kind);
+      dispositionKindsByPath.set(claimRef.claimPath, kinds);
+    }
+    if (
+      new Set(dispositionIdentityKeys).size !== dispositionIdentityKeys.length ||
+      [...dispositionKindsByPath.values()].some(
+        (kinds) => kinds.size > 1 && (kinds.has('baseline') || kinds.has('problem_specific')),
+      )
+    ) {
+      add(
+        'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_CONFLICT',
+        'A claim cannot repeat a disposition or mix a terminal role with Tag-bearing roles.',
+        placement.problemId,
+      );
+    }
     const assignedTagIds = new Set([...placement.primaryTagIds, ...placement.supportingTagIds]);
     if (
       placement.claimDispositions.some(
         ({ claimRef, kind, tagIds }) =>
           claimRef.problemId !== placement.problemId ||
           tagIds.some((tagId) => !assignedTagIds.has(tagId)) ||
-          (kind === 'primary' &&
+          ((kind === 'primary' || kind === 'same_tag') &&
             tagIds.some((tagId) => !placement.primaryTagIds.includes(tagId))) ||
           (kind === 'supporting' &&
-            tagIds.some((tagId) => !placement.supportingTagIds.includes(tagId))),
+            tagIds.some((tagId) => !placement.supportingTagIds.includes(tagId))) ||
+          ((kind === 'baseline' || kind === 'problem_specific') && tagIds.length > 0),
       )
     ) {
       add(
         'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_INVALID',
         'Claim dispositions must be owned by the Problem and use its declared primary/supporting Tags.',
+        placement.problemId,
+      );
+    }
+    const primaryDispositionTagIds = new Set(
+      placement.claimDispositions.flatMap(({ kind, tagIds }) => (kind === 'primary' ? tagIds : [])),
+    );
+    if (placement.primaryTagIds.some((tagId) => !primaryDispositionTagIds.has(tagId))) {
+      add(
+        'PLACEMENT_PRIMARY_TAG_DISPOSITION_MISSING',
+        'Every primary Tag must be justified by an explicit primary inventory-claim disposition.',
+        placement.problemId,
+      );
+    }
+    const supportingDispositionTagIds = new Set(
+      placement.claimDispositions.flatMap(({ kind, tagIds }) =>
+        kind === 'supporting' ? tagIds : [],
+      ),
+    );
+    if (placement.supportingTagIds.some((tagId) => !supportingDispositionTagIds.has(tagId))) {
+      add(
+        'PLACEMENT_SUPPORTING_TAG_DISPOSITION_MISSING',
+        'Every supporting Tag must be justified by an explicit supporting inventory-claim disposition.',
         placement.problemId,
       );
     }
@@ -2572,7 +2618,13 @@ export const validateFinalTaxonomyBuildAgainstContext = (
       );
     }
     if (kind === 'outcome') {
-      if ([placement.primaryOutcomeId, ...placement.supportingOutcomeIds].includes(targetId)) {
+      if (
+        [
+          placement.primaryOutcomeId,
+          ...placement.additionalPrimaryOutcomeIds,
+          ...placement.supportingOutcomeIds,
+        ].includes(targetId)
+      ) {
         return true;
       }
       const target = outcomeById.get(targetId);
@@ -2598,10 +2650,49 @@ export const validateFinalTaxonomyBuildAgainstContext = (
         );
       }
     }
-    if (genericOutcomeIds.has(placement.primaryOutcomeId)) {
+    for (const outcomeId of [
+      placement.primaryOutcomeId,
+      ...placement.additionalPrimaryOutcomeIds,
+    ]) {
+      if (genericOutcomeIds.has(outcomeId)) {
+        add(
+          'GENERIC_OUTCOME_USED_AS_PRIMARY',
+          `${outcomeId} cannot own a Problem shard.`,
+          placement.problemId,
+        );
+      }
+    }
+    const primaryOutcomeIds = [
+      placement.primaryOutcomeId,
+      ...placement.additionalPrimaryOutcomeIds,
+    ];
+    if (
+      primaryOutcomeIds.some(
+        (outcomeId) =>
+          !outcomeById
+            .get(outcomeId)
+            ?.scopeIds.some((tagId) => placement.primaryTagIds.includes(tagId)),
+      ) ||
+      placement.primaryTagIds.some((tagId) =>
+        primaryOutcomeIds.every(
+          (outcomeId) => !outcomeById.get(outcomeId)?.scopeIds.includes(tagId),
+        ),
+      ) ||
+      placement.supportingOutcomeIds.some(
+        (outcomeId) =>
+          !outcomeById
+            .get(outcomeId)
+            ?.scopeIds.some((tagId) => placement.supportingTagIds.includes(tagId)),
+      ) ||
+      placement.supportingTagIds.some((tagId) =>
+        placement.supportingOutcomeIds.every(
+          (outcomeId) => !outcomeById.get(outcomeId)?.scopeIds.includes(tagId),
+        ),
+      )
+    ) {
       add(
-        'GENERIC_OUTCOME_USED_AS_PRIMARY',
-        `${placement.primaryOutcomeId} cannot own a Problem shard.`,
+        'PLACEMENT_OUTCOME_ROLE_MISMATCH',
+        'Primary and supporting Outcomes must cover exactly their respective assigned Tags.',
         placement.problemId,
       );
     }

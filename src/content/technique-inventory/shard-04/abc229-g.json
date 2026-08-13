@@ -62,6 +62,12 @@
       "trigger": "複数の値を一つの共通値へ動かすコストが絶対差の総和であるとき。",
       "application": "各窓の中央要素を目標にし、左右の費用を累積和から求める。",
       "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "長さの単調可否に対する答え二分探索",
+      "trigger": "長さ m の対象を予算内で構成できれば、それより短い対象も構成できるとき。",
+      "application": "各長さ m の窓を中央値へ揃える最小費用が K 以下か判定し、可能な最大 m を二分探索する。",
+      "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "problemSpecificInsights": [

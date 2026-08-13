@@ -20,7 +20,11 @@ const assignedEntityIds = (
   kind === 'tag'
     ? [...placement.primaryTagIds, ...placement.supportingTagIds]
     : kind === 'outcome'
-      ? [placement.primaryOutcomeId, ...placement.supportingOutcomeIds]
+      ? [
+          placement.primaryOutcomeId,
+          ...placement.additionalPrimaryOutcomeIds,
+          ...placement.supportingOutcomeIds,
+        ]
       : placement.learningUnitIds;
 
 describe('T159 frozen preview integration and correction impact', () => {

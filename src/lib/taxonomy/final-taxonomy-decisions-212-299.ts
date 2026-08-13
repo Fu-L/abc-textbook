@@ -56,12 +56,12 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc220-h': 'tag-divide-enumerate',
 
   'abc221-e': 'tag-fenwick-weighted-prefix',
-  'abc221-f': 'tag-tree-aggregation-reroot',
+  'abc221-f': 'tag-tree-metric-diameter',
   'abc221-g': 'tag-subset-bitmask-transform',
   'abc221-h': 'tag-dp-transition-acceleration',
 
   'abc222-e': 'tag-knapsack-resource',
-  'abc222-f': 'tag-tree-aggregation-reroot',
+  'abc222-f': 'tag-tree-metric-diameter',
   'abc222-g': 'tag-cyclic-group-order',
   'abc222-h': 'tag-convolution-fps',
 
@@ -70,7 +70,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc223-g': 'tag-tree-aggregation-reroot',
   'abc223-h': 'tag-linear-algebra-xor',
 
-  'abc224-e': 'tag-dp-state-equivalence',
+  'abc224-e': 'tag-dp-transition-acceleration',
   'abc224-f': 'tag-contribution-reordering',
   'abc224-g': 'tag-discrete-convex-marginal',
   'abc224-h': 'tag-flow-matching-cut',
@@ -86,7 +86,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc226-h': 'tag-stochastic-expectation-dp',
 
   'abc227-e': 'tag-dp-state-equivalence',
-  'abc227-f': 'tag-dp-state-equivalence',
+  'abc227-f': 'tag-discrete-convex-marginal',
   'abc227-g': 'tag-prime-divisor-decomposition',
   // The degree-multiplicity model and Euler tour are fixed before flow fills residual degrees.
   'abc227-h': 'tag-euler-degree-parity',
@@ -182,7 +182,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc245-f': 'tag-directed-condensation-toposort',
   'abc245-g': 'tag-shortest-path',
 
-  'abc246-e': 'tag-reachability-bfs',
+  'abc246-e': 'tag-shortest-path',
   'abc246-ex': 'tag-monoid-segment-tree',
   'abc246-f': 'tag-inclusion-exclusion',
   'abc246-g': 'tag-monotone-threshold-search',
@@ -215,12 +215,12 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc252-e': 'tag-shortest-path-certificate',
   'abc252-ex': 'tag-divide-enumerate',
-  'abc252-f': 'tag-ordered-set-heap',
+  'abc252-f': 'tag-greedy-exchange-order',
   'abc252-g': 'tag-interval-partition-dp',
 
   'abc253-e': 'tag-dp-transition-acceleration',
   'abc253-ex': 'tag-determinant-counting',
-  'abc253-f': 'tag-fenwick-weighted-prefix',
+  'abc253-f': 'tag-reverse-offline',
   'abc253-g': 'tag-integer-boundary-blocks',
 
   'abc254-e': 'tag-reachability-bfs',
@@ -293,7 +293,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc267-e': 'tag-monotone-threshold-search',
   'abc267-ex': 'tag-convolution-fps',
-  'abc267-f': 'tag-tree-path-decomposition',
+  'abc267-f': 'tag-tree-metric-diameter',
   'abc267-g': 'tag-combinatorial-coefficients',
 
   'abc268-e': 'tag-prefix-difference',
@@ -380,7 +380,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc283-g': 'tag-linear-algebra-xor',
 
   'abc284-e': 'tag-reachability-bfs',
-  'abc284-ex': 'tag-combinatorial-coefficients',
+  'abc284-ex': 'tag-symmetry-invariant-normalization',
   'abc284-f': 'tag-prefix-matching-automata',
   'abc284-g': 'tag-functional-graph-doubling',
 
@@ -395,14 +395,14 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc286-g': 'tag-euler-degree-parity',
 
   'abc287-e': 'tag-trie-prefix',
-  'abc287-ex': 'tag-monotone-threshold-search',
+  'abc287-ex': 'tag-reachability-bfs',
   'abc287-f': 'tag-tree-aggregation-reroot',
   'abc287-g': 'tag-fenwick-weighted-prefix',
 
   'abc288-e': 'tag-knapsack-resource',
   'abc288-ex': 'tag-digit-automaton-dp',
   'abc288-f': 'tag-interval-partition-dp',
-  'abc288-g': 'tag-subset-bitmask-transform',
+  'abc288-g': 'tag-linear-algebra-xor',
 
   'abc289-e': 'tag-reachability-bfs',
   'abc289-ex': 'tag-convolution-fps',
@@ -452,7 +452,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc298-e': 'tag-stochastic-expectation-dp',
   'abc298-ex': 'tag-tree-path-decomposition',
-  'abc298-f': 'tag-ordered-set-heap',
+  'abc298-f': 'tag-greedy-exchange-order',
   'abc298-g': 'tag-interval-partition-dp',
 
   'abc299-e': 'tag-constructive-witness',

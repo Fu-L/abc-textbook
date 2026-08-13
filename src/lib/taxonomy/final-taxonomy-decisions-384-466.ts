@@ -63,7 +63,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc400-f': 'tag-interval-partition-dp',
   'abc400-g': 'tag-discrete-convex-marginal',
   'abc401-e': 'tag-dsu-connectivity',
-  'abc401-f': 'tag-tree-aggregation-reroot',
+  'abc401-f': 'tag-tree-metric-diameter',
   'abc401-g': 'tag-flow-matching-cut',
   'abc402-e': 'tag-stochastic-expectation-dp',
   'abc402-f': 'tag-divide-enumerate',
@@ -154,7 +154,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc427-f': 'tag-divide-enumerate',
   // Equal transition functions are merged into a composable normal form.
   'abc427-g': 'tag-symmetry-invariant-normalization',
-  'abc428-e': 'tag-tree-aggregation-reroot',
+  'abc428-e': 'tag-tree-metric-diameter',
   'abc428-f': 'tag-amortized-heavy-light',
   // Burnside counts rotation orbits after quotienting by cyclic symmetry.
   'abc428-g': 'tag-symmetry-invariant-normalization',

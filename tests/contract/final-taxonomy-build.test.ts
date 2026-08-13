@@ -36,6 +36,18 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(new Set(build.placements.map(({ problemId }) => problemId)).size).toBe(
       FINAL_TAXONOMY_PROBLEM_COUNT,
     );
+    const placementByProblemId = new Map(
+      build.placements.map((placement) => [placement.problemId, placement]),
+    );
+    expect(placementByProblemId.get('abc218-f')?.additionalPrimaryOutcomeIds).toEqual([
+      'outcome-build-shortest-path-certificate',
+    ]);
+    expect(placementByProblemId.get('abc218-f')?.supportingOutcomeIds).not.toContain(
+      'outcome-build-shortest-path-certificate',
+    );
+    expect(placementByProblemId.get('abc335-g')?.additionalPrimaryOutcomeIds).toEqual([
+      'outcome-find-period-by-multiplicative-order',
+    ]);
     expect(build.placements.every(({ kind }) => kind === 'full')).toBe(true);
     expect(build.integrationMap.entries).toHaveLength(FINAL_TAXONOMY_PREVIEW_ENTITY_COUNT);
     expect(build.sourceRevisionIds).toHaveLength(1738);
@@ -124,9 +136,11 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       } else if (candidate.kind === 'outcome') {
         expect(candidate.materializationTask).toBe('T048');
         const directAssignments = build.placements.filter((placement) =>
-          [placement.primaryOutcomeId, ...placement.supportingOutcomeIds].includes(
-            candidate.entity.id,
-          ),
+          [
+            placement.primaryOutcomeId,
+            ...placement.additionalPrimaryOutcomeIds,
+            ...placement.supportingOutcomeIds,
+          ].includes(candidate.entity.id),
         );
         if (NON_PRIMARY_OUTCOME_IDS.includes(candidate.entity.id)) {
           expect(directAssignments).toEqual([]);
@@ -166,9 +180,11 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     );
     expect(
       build.placements.every((placement) =>
-        [placement.primaryOutcomeId, ...placement.supportingOutcomeIds].every((outcomeId) =>
-          canonicalOutcomeIds.has(outcomeId),
-        ),
+        [
+          placement.primaryOutcomeId,
+          ...placement.additionalPrimaryOutcomeIds,
+          ...placement.supportingOutcomeIds,
+        ].every((outcomeId) => canonicalOutcomeIds.has(outcomeId)),
       ),
     ).toBe(true);
   }, 30_000);
