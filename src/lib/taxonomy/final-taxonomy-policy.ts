@@ -4,6 +4,7 @@ import {
   FINAL_TAG_LEARNER_ALIASES,
   FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS,
 } from './final-taxonomy-content.js';
+import { FINAL_TAXONOMY_BASELINE_CLAIM_REGISTRY } from './final-taxonomy-baseline.js';
 import { FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 } from './final-taxonomy-claims-212-299.js';
 import { FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 } from './final-taxonomy-claims-300-383.js';
 import { FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 } from './final-taxonomy-claims-384-466.js';
@@ -248,7 +249,19 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'unit-decomposition-amortization': [
     '探索空間を分けて候補を列挙・照合するmeet-in-the-middleや分割統治。',
   ],
+  'unit-change-impact-localization': [
+    '存在する解を一つ復元するだけで、変更後も同じwitnessが有効かを判定しない問題。',
+  ],
+  'unit-randomized-algorithms': [
+    '誤り確率の評価を伴わない固定hash、および入力全体を確定的に列挙できる探索。',
+  ],
+  'unit-interactive-protocol': [
+    '入力を最初からすべて読める通常問題、および問い合わせ上限やflushを持たない模擬入出力。',
+  ],
   'unit-dp-state-design': ['状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。'],
+  'unit-dp-grid-table': [
+    '一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。',
+  ],
   'unit-dp-subset-resource': ['入力順や区間端点だけを状態にし、集合・容量軸を持たないDP。'],
   'unit-dp-sequence-interval': ['bitmask集合や容量だけを状態にし、列順・区間分割を持たないDP。'],
   'unit-dp-digit-string': [
@@ -260,12 +273,25 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'unit-dp-transition-optimization': ['固定線形遷移の巨大回累乗。'],
   'unit-linear-recurrence': ['一般のDP遷移の区間集約・単調最適化。'],
   'unit-graph-search': ['非負重み付き距離の緩和・確定と最短路certificateの復元。'],
-  'unit-shortest-path-certificates': ['辺重みや最短距離を扱わず、到達可否だけを求める探索。'],
+  'unit-shortest-path-certificates': [
+    '辺重みや最短距離を扱わず、到達可否だけを求める探索、および最短路に限らない一般の変更影響解析。',
+  ],
   'unit-connectivity': ['距離・訪問順を求める探索、および有向グラフの強連結成分と順序。'],
+  'unit-bipartite-structure': [
+    '重み付き最短路、一般の彩色問題、および容量付きmatching・min-cutの最適化。',
+  ],
+  'unit-spanning-tree-optimization': [
+    '任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。',
+  ],
   'unit-directed-condensation': ['無向辺追加だけを扱うDSU連結成分管理。'],
   'unit-functional-graph': ['各頂点から複数の後続を選べる一般のグラフ探索・強連結成分への縮約。'],
   'unit-tree-metric': ['根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。'],
-  'unit-tree-aggregation': ['木上パスの連続区間分解と、重心による再帰分解。'],
+  'unit-tree-aggregation': [
+    '木上パスの連続区間分解、重心による再帰分解、および更新のためのTop Tree cluster化。',
+  ],
+  'unit-static-top-tree': [
+    '更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition。',
+  ],
   'unit-flow-matching': ['Eulerウォークの次数・偶奇条件。'],
   'unit-euler-degree': ['容量付きフロー・マッチング・最小カットへの帰着。'],
   'unit-tree-decomposition': ['重心による成分サイズの半減と再帰分解。'],
@@ -283,18 +309,39 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'unit-ordered-set-heap': ['支配関係で一度捨てた候補を戻さない単調stack・queue。'],
   'unit-monotone-stack-queue': ['全候補から極値を反復取得するheap・ordered set。'],
   'unit-mo-offline-range': ['オンラインのpriority queue・multiset、および単調stack・queue。'],
+  'unit-bitset-word-parallel': [
+    '集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。',
+  ],
+  'unit-cartesian-tree': [
+    '最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。',
+  ],
+  'unit-binary-trie': ['文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。'],
   'unit-trie-prefix': ['failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。'],
   'unit-string-prefix-automata': ['接尾辞・LCPの索引、文字列hash、回文半径。'],
+  'unit-string-automata': [
+    '数値上限・桁・繰り上がりを状態にする桁DP、および接頭辞一致長だけを求めるKMP・Z法。',
+  ],
+  'unit-suffix-automaton': [
+    '接尾辞を辞書順に並べるSuffix Array、および複数patternの辞書照合だけを行うAho–Corasick。',
+  ],
   'unit-suffix-lcp-index': ['rolling hashによる一致比較と回文半径。'],
   'unit-string-hash': ['全接尾辞の辞書順索引と回文半径。'],
   'unit-palindrome-radius': ['一般の部分文字列hash比較と、接尾辞・LCPの索引。'],
   'unit-recursive-compressed-string': ['明示された文字列への接尾辞索引の構築。'],
-  'unit-modular-arithmetic': ['剰余列・冪の周期利用、および素因数ごとの指数分解・約数列挙。'],
+  'unit-modular-arithmetic': [
+    '複数の合同条件を統合する一次合同・CRT、および剰余列の最小周期を求める問題。',
+  ],
+  'unit-modular-congruence': [
+    '可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。',
+  ],
   'unit-modular-periodicity': [
     '逆元・一次合同・CRTによる合同条件の統合、および巡回群の位数を使う計数。',
   ],
   'unit-gcd-diophantine': [
     '連分数・Stern–Brocotによる有理近似、および複数の合同類をCRTで統合する構成。',
+  ],
+  'unit-numerical-semigroup-reachability': [
+    '負の係数も許す整数線形結合のgcd可解性だけを判定する問題、および使用回数に上限がある有限knapsack。',
   ],
   'unit-rational-approximation': [
     '整除性や一次不定方程式の可解判定だけを行う問題、および合同類をCRTで統合する構成。',
@@ -305,8 +352,19 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'unit-multiplicative-order-periods': ['約数格子上の指数計数・包除。'],
   'unit-combinatorial-coefficients': ['重なりを交互加減する包除・Möbius反転。'],
   'unit-inclusion-exclusion': ['選択順を二項係数だけで式化する数え上げ。'],
-  'unit-polynomial-convolution': ['行列消去・階数・XOR基底。'],
+  'unit-polynomial-convolution': [
+    '組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。',
+  ],
+  'unit-generating-functions': [
+    '係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。',
+  ],
+  'unit-formal-power-series': [
+    '積を一回求めるだけの畳み込み、および生成関数へ符号化するだけで高度な多項式演算を使わない計数。',
+  ],
   'unit-linear-algebra-xor': ['通常の多項式畳み込み・生成関数と、幾何の面積行列式。'],
+  'unit-finite-field-extension': [
+    '素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。',
+  ],
   'unit-geometry-primitives': ['凸包の境界候補列挙・半平面交差。'],
   'unit-convex-geometry': ['凸性を使わない一般のイベント走査・座標圧縮。'],
   'unit-discrete-convex': ['真偽値の単調境界探索と、交換論だけで決まる貪欲順。'],
@@ -407,6 +465,33 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     5,
   ),
   section(
+    'unit-change-impact-localization',
+    '基準witnessから変更影響を局所化する',
+    'unit-chapter-modeling',
+    [],
+    2,
+    2,
+    6,
+  ),
+  section(
+    'unit-randomized-algorithms',
+    '乱択の成功条件と誤り確率を設計する',
+    'unit-chapter-modeling',
+    [],
+    3,
+    3,
+    7,
+  ),
+  section(
+    'unit-interactive-protocol',
+    '対話protocolを守って情報を取得する',
+    'unit-chapter-modeling',
+    [],
+    1,
+    1,
+    8,
+  ),
+  section(
     'unit-dp-state-design',
     '最小十分状態からDPを設計する',
     'unit-chapter-dynamic-programming',
@@ -414,6 +499,15 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     1,
     0,
     0,
+  ),
+  section(
+    'unit-dp-grid-table',
+    'グリッド・多次元表の局所DPを設計する',
+    'unit-chapter-dynamic-programming',
+    ['unit-dp-state-design'],
+    2,
+    1,
+    1,
   ),
   section(
     'unit-dp-subset-resource',
@@ -499,12 +593,30 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-connectivity',
-    '連結成分を管理する',
+    '連結成分を管理し縮約する',
     'unit-chapter-graph',
     ['unit-graph-search'],
     2,
     1,
     2,
+  ),
+  section(
+    'unit-bipartite-structure',
+    '二部彩色と成分構造を扱う',
+    'unit-chapter-graph',
+    ['unit-graph-search'],
+    2,
+    1,
+    3,
+  ),
+  section(
+    'unit-spanning-tree-optimization',
+    'cut・cycle性質から最適全域木を構成する',
+    'unit-chapter-graph',
+    ['unit-connectivity', 'unit-greedy-exchange'],
+    3,
+    3,
+    3,
   ),
   section(
     'unit-directed-condensation',
@@ -541,6 +653,15 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     2,
     2,
     6,
+  ),
+  section(
+    'unit-static-top-tree',
+    'rake・compressで動的木DPを保つ',
+    'unit-chapter-graph',
+    ['unit-tree-aggregation'],
+    4,
+    5,
+    7,
   ),
   section(
     'unit-tree-decomposition',
@@ -598,7 +719,7 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-prefix-aggregate',
-    '累積和・差分によって静的な区間情報を線形化する',
+    '一次元・二次元累積和と差分で区間情報を線形化する',
     'unit-chapter-query',
     [],
     1,
@@ -607,7 +728,7 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-monoid-segment-tree',
-    'モノイドとして区間要約を設計する',
+    'Segment Treeで区間をcanonical分解し、結合的要約を保つ',
     'unit-chapter-query',
     [],
     2,
@@ -616,7 +737,7 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-weighted-prefix-fenwick',
-    '重み付き接頭辞統計をFenwick Treeで保つ',
+    '反転数・重み付き接頭辞統計をFenwick Treeで保つ',
     'unit-chapter-query',
     ['unit-prefix-aggregate'],
     2,
@@ -677,6 +798,25 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     3,
     8,
   ),
+  section(
+    'unit-bitset-word-parallel',
+    'bitsetで集合演算をword並列化する',
+    'unit-chapter-query',
+    [],
+    2,
+    2,
+    9,
+  ),
+  section(
+    'unit-cartesian-tree',
+    '大小関係をCartesian treeへ変換する',
+    'unit-chapter-query',
+    ['unit-monotone-stack-queue'],
+    3,
+    3,
+    10,
+  ),
+  section('unit-binary-trie', 'bit列をTrieで索引化する', 'unit-chapter-query', [], 2, 2, 11),
   section('unit-trie-prefix', 'Trieで共有接頭辞を索引化する', 'unit-chapter-string', [], 1, 1, 0),
   section(
     'unit-string-prefix-automata',
@@ -686,6 +826,24 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     1,
     1,
     1,
+  ),
+  section(
+    'unit-string-automata',
+    '禁止語・複数patternを有限状態へ圧縮する',
+    'unit-chapter-string',
+    ['unit-dp-state-design'],
+    2,
+    3,
+    2,
+  ),
+  section(
+    'unit-suffix-automaton',
+    'Suffix Automatonで部分文字列集合を表す',
+    'unit-chapter-string',
+    ['unit-string-automata'],
+    3,
+    4,
+    3,
   ),
   section(
     'unit-suffix-lcp-index',
@@ -725,12 +883,21 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-modular-arithmetic',
-    '逆元・一次合同・CRTで合同条件を統合する',
+    '法上の四則演算・高速累乗・逆元',
     'unit-chapter-math-geometry',
-    ['unit-gcd-diophantine'],
-    2,
-    2,
+    [],
+    1,
+    1,
     0,
+  ),
+  section(
+    'unit-modular-congruence',
+    '一次合同・CRTで解の類を統合する',
+    'unit-chapter-math-geometry',
+    ['unit-gcd-diophantine', 'unit-modular-arithmetic'],
+    2,
+    2,
+    1,
   ),
   section(
     'unit-modular-periodicity',
@@ -749,6 +916,15 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     1,
     1,
     1,
+  ),
+  section(
+    'unit-numerical-semigroup-reachability',
+    '数値半群のconductor以後を一括到達とみなす',
+    'unit-chapter-math-geometry',
+    ['unit-gcd-diophantine'],
+    2,
+    3,
+    3,
   ),
   section(
     'unit-rational-approximation',
@@ -807,12 +983,30 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-polynomial-convolution',
-    '生成関数・多項式・畳み込みで数える',
+    'NTT・FFTで畳み込みと相互相関を求める',
     'unit-chapter-math-geometry',
-    ['unit-combinatorial-coefficients'],
+    [],
+    2,
+    3,
+    8,
+  ),
+  section(
+    'unit-generating-functions',
+    '組合せを生成関数へ符号化する',
+    'unit-chapter-math-geometry',
+    ['unit-combinatorial-coefficients', 'unit-polynomial-convolution'],
     3,
     4,
-    8,
+    9,
+  ),
+  section(
+    'unit-formal-power-series',
+    'FPS演算・多点評価・合成を行う',
+    'unit-chapter-math-geometry',
+    ['unit-polynomial-convolution'],
+    4,
+    5,
+    10,
   ),
   section(
     'unit-linear-algebra-xor',
@@ -822,6 +1016,15 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     3,
     4,
     9,
+  ),
+  section(
+    'unit-finite-field-extension',
+    '拡大有限体の表現と四則演算を構成する',
+    'unit-chapter-math-geometry',
+    ['unit-modular-arithmetic'],
+    4,
+    5,
+    10,
   ),
   section(
     'unit-geometry-primitives',
@@ -887,10 +1090,18 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
     '全探索を半分または再帰部分へ分け、列挙結果を重複なく合成して扱える入力規模を広げる。',
   'unit-decomposition-amortization':
     '各操作ではなく操作列全体の変化回数を数え、軽重分類や一度限りの移動で総計算量を抑える。',
+  'unit-change-impact-localization':
+    '変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。',
+  'unit-randomized-algorithms':
+    '乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。',
+  'unit-interactive-protocol':
+    '問い合わせ形式・回数上限・応答依存性・flushを明示し、通常のアルゴリズムをjudgeとの対話列として安全に実行する。',
   'unit-constructive-witness':
     '存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。',
   'unit-dp-state-design':
     '初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。',
+  'unit-dp-grid-table':
+    '状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。',
   'unit-dp-subset-resource':
     '最小十分状態を設計できるようになった後、集合bitmaskや容量を軸にした遷移と更新順へ進む。',
   'unit-dp-sequence-interval':
@@ -912,7 +1123,11 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-shortest-path-certificates':
     '状態グラフを構成できた後、辺重みと緩和条件を加えて最短距離を求め、距離等式から経路や変更影響を復元する。',
   'unit-connectivity':
-    '連結成分を探索できるようになった後、差分辺のpotential累積と、辺追加に対する成分・付加情報のDSU管理を学ぶ。',
+    '連結成分を探索できるようになった後、成分縮約、差分辺のpotential累積、辺追加に対する付加情報つきDSU管理を学ぶ。',
+  'unit-bipartite-structure':
+    '無向グラフを探索できることを前提に、辺をまたぐたび色を反転し、矛盾検出と成分ごとの二部サイズ集約を行う。',
+  'unit-spanning-tree-optimization':
+    '連結成分管理と貪欲の交換論を土台に、cut・cycle性質からKruskal法と辺の採否条件を導く。',
   'unit-directed-condensation':
     '到達可能性を理解した後、相互到達する頂点を強連結成分へまとめ、DAG順の伝播へ変換する。',
   'unit-functional-graph':
@@ -921,6 +1136,8 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
     '木を探索して距離を求められることを前提に、直径の二端点が最遠候補を代表する性質と、中心による分岐の整理を学ぶ。',
   'unit-tree-aggregation':
     '探索で親子関係を作りDP状態を定義できた後、子側の集約と親側への差し替えで木全体の値を求める。',
+  'unit-static-top-tree':
+    '木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。',
   'unit-tree-decomposition':
     '基本的な木DFSと祖先関係を使い、木上パスをLCA・HLD・virtual treeの少数区間へ分解する。',
   'unit-tree-balanced-separators':
@@ -934,11 +1151,11 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-graph-core-peeling':
     '連結性を探索できることを前提に、低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。',
   'unit-prefix-aggregate':
-    '配列の線形走査と加減算を土台に、静的区間量を接頭辞の差へ変換する最初の要約法として学ぶ。',
+    '一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。',
   'unit-monoid-segment-tree':
-    '結合則を持つ要約を定義し、区間を分割・合成して動的な問い合わせへ答える。',
+    '区間を少数のcanonical nodeへ分解して対象を配置する方法と、結合則を持つ要約を定義して動的な問い合わせへ答える方法を学ぶ。',
   'unit-weighted-prefix-fenwick':
-    '静的な接頭辞差分を理解した後、点更新を伴う重み付き接頭辞統計をFenwick Treeで保つ。',
+    '静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。',
   'unit-range-actions':
     '結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。',
   'unit-persistence-rollback':
@@ -951,10 +1168,20 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
     '候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。',
   'unit-mo-offline-range':
     '区間への要素の追加・削除を定義し、問い合わせ順を並べ替えて端点移動の総量を抑える。',
+  'unit-bitset-word-parallel':
+    '集合の交差・和・shiftを機械語word単位で同時処理し、要素ごとの走査をword幅だけ短縮する。',
+  'unit-cartesian-tree':
+    '単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。',
+  'unit-binary-trie':
+    '整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。',
   'unit-trie-prefix':
     '文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。',
   'unit-string-prefix-automata':
     '接頭辞と接尾辞の一致長を状態化し、失敗時の遷移を再利用して照合を線形化する。',
+  'unit-string-automata':
+    '未来の禁止語到達や複数pattern一致だけを決める接尾辞状態を作り、遷移表上のDP・行列計算へ接続する。',
+  'unit-suffix-automaton':
+    '有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。',
   'unit-suffix-lcp-index':
     '全接尾辞の辞書順と隣接LCPを索引化し、部分文字列の出現範囲・順位・個数へ答える。',
   'unit-string-hash':
@@ -964,10 +1191,14 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
     '明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。',
   'unit-gcd-diophantine':
     '最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。',
+  'unit-numerical-semigroup-reachability':
+    '生成元をgcdで正規化し、非負整数結合の到達集合がconductor以後の全整数を含むことを示して巨大距離を有限prefixへ縮約する。',
   'unit-rational-approximation':
     'Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。',
   'unit-modular-arithmetic':
-    'gcdとBézoutで一次合同の可解性を扱えた後、逆元を構成し、複数の合同条件をCRTで統合する。',
+    '剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。',
+  'unit-modular-congruence':
+    '法上の演算とBézout等式を使えることを前提に、一次合同の可解性を判定して複数条件をCRTで統合する。',
   'unit-modular-periodicity':
     '剰余列や冪が有限状態で周期化することを示し、周期前計算や指数法則で巨大な反復を短縮する。',
   'unit-prime-divisor':
@@ -983,9 +1214,15 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-inclusion-exclusion':
     '単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。',
   'unit-polynomial-convolution':
-    '組合せ係数で局所選択を式化した後、その合成を生成関数の積と畳み込みへ持ち上げる。',
+    '係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。',
+  'unit-generating-functions':
+    '局所選択の係数を定義できた後、和・積・逆数が表す組合せ構造を説明して欲しい係数へ帰着する。',
+  'unit-formal-power-series':
+    '高速畳み込みを部品に、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。',
   'unit-linear-algebra-xor':
     '制約や多次元変換を線形方程式・基底・軸別変換・行列式へ写し、消去と分離によって解く。',
+  'unit-finite-field-extension':
+    '素体上の演算を土台に、既約関係で元を標準化し、加減乗除が閉じる拡大体として扱う。',
   'unit-geometry-primitives':
     '座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。',
   'unit-convex-geometry':
@@ -1336,6 +1573,36 @@ const TAG_SEEDS: readonly TagSeed[] = [
     priority: 63,
   },
   {
+    id: 'tag-randomized-algorithm',
+    name: '乱択・Monte Carloアルゴリズム',
+    definition:
+      '乱数で候補またはfingerprintを選び、成功条件と誤り確率を評価して反復や事後検証を設計する。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-design-and-bound-randomized-algorithm'],
+    unitIds: ['unit-randomized-algorithms'],
+    recall: ['randomized algorithm', '乱択', 'monte.?carlo', 'las.?vegas', 'random sampling'],
+    object: ['乱数', 'sample', '候補', '確率変数'],
+    trigger: ['ランダムに選', '乱択', '試行を繰り返', 'sampling'],
+    invariant: ['誤り確率', '高確率', '独立試行', '事後検証'],
+    goal: ['高確率で発見', '衝突回避', '候補を得る'],
+    priority: 93,
+  },
+  {
+    id: 'tag-interactive-protocol',
+    name: '対話protocolとquery設計',
+    definition:
+      'judgeとの問い合わせ・応答列をprotocolどおり実行し、回数上限内で必要な情報を識別する。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-maintain-interactive-query-protocol'],
+    unitIds: ['unit-interactive-protocol'],
+    recall: ['interactive', 'インタラクティブ', '対話型', 'flush', 'query protocol'],
+    object: ['judge', 'query', '応答', '問い合わせ回数'],
+    trigger: ['問い合わせを出力', '応答を読む', '対話', 'flush'],
+    invariant: ['protocol', '回数上限', '応答に応じて', '終了宣言'],
+    goal: ['情報を特定', '答えを宣言', 'query数を抑える'],
+    priority: 98,
+  },
+  {
     id: 'tag-dp-state-equivalence',
     name: 'DPの最小十分状態',
     definition: '将来の選択肢と答えが同じprefixを同一状態に縮約する。',
@@ -1357,6 +1624,21 @@ const TAG_SEEDS: readonly TagSeed[] = [
     invariant: ['十分', '最後', '同一視', '圧縮'],
     goal: ['場合の数', '最適', '可否', '状態数'],
     priority: 28,
+  },
+  {
+    id: 'tag-grid-table-dp',
+    name: 'グリッド・多次元表の局所DP',
+    definition:
+      'グリッド経路や多次元表の依存関係をDAG順に並べ、隣接する小さな状態集合から各セル・各添字を更新する。',
+    parentId: 'tag-dp-state-transition',
+    outcomeIds: ['outcome-design-grid-table-dp'],
+    unitIds: ['unit-dp-grid-table'],
+    recall: ['grid.?dp', 'グリッド.?DP', '二次元.?DP', 'table.?dp', '格子経路.?DP'],
+    object: ['グリッド', '表', '行', '列', 'セル', 'DAG'],
+    trigger: ['上と左', '近傍状態', '行ごとに', '小さい添字から', '単調経路'],
+    invariant: ['依存先を計算済み', '局所遷移', 'DAG順', '境界の番兵'],
+    goal: ['経路の最適値', '最大正方形', '多次元状態の値', '場合の数'],
+    priority: 72,
   },
   {
     id: 'tag-subset-bitmask-transform',
@@ -1577,8 +1859,8 @@ const TAG_SEEDS: readonly TagSeed[] = [
     ],
     object: ['状態', '頂点', 'マス', 'グリッド', 'グラフ'],
     trigger: ['到達', '隣接', '探索', '追加される辺'],
-    invariant: ['queue', '距離順', '訪問済み', '未到達', '訪問状態を戻す'],
-    goal: ['到達判定', '最小手数', '連結領域', '単純pathの列挙'],
+    invariant: ['queue', '距離順', '訪問済み', '未到達', '外部からの到達', '訪問状態を戻す'],
+    goal: ['到達判定', '最小手数', '連結領域', '穴の検出', '単純pathの列挙'],
     priority: 58,
   },
   {
@@ -1626,23 +1908,23 @@ const TAG_SEEDS: readonly TagSeed[] = [
   {
     id: 'tag-witness-impact-localization',
     name: '基準解による変更影響の局所化',
-    definition: '基準となる解に含まれない変更は答えを変えないと示し、再計算対象を絞る。',
-    parentId: 'tag-graph-model-structure',
-    prerequisiteTagIds: ['tag-shortest-path-certificate'],
+    definition:
+      '変更前の解・実行列をwitnessとし、それを壊さない変更では答えが変わらないと示して再計算対象を絞る。',
+    parentId: 'tag-model-reduction',
     outcomeIds: ['outcome-localize-change-impact-by-witness'],
-    unitIds: ['unit-shortest-path-certificates'],
-    recall: ['辺削除ごとの最短路', 'replacement paths', '影響範囲', 'witness'],
-    object: ['辺削除', '変更', '基準解', '経路'],
-    trigger: ['各辺', '除いたとき', '再計算'],
-    invariant: ['基準経路に含まれない', 'witness', '答えは変わらない'],
-    goal: ['変更後の答え', '各削除', '影響'],
+    unitIds: ['unit-change-impact-localization'],
+    recall: ['replacement paths', '変更影響', '感度解析', 'witness'],
+    object: ['変更', '削除', '基準解', '実行列', 'witness'],
+    trigger: ['各操作を除く', '一箇所変更', '再計算'],
+    invariant: ['witnessが壊れない', '基準解に含まれない', '答えは変わらない'],
+    goal: ['変更後の答え', '各削除', '影響範囲'],
     priority: 95,
   },
   {
     id: 'tag-dsu-connectivity',
-    name: 'DSU・差分辺グラフによる成分管理',
+    name: '連結成分の管理・縮約とDSU',
     definition:
-      'DSUによる成分併合、または差分辺グラフの探索により、連結性、頂点間potential、成分metadata・merge履歴を保つ。',
+      '探索またはDSUで連結成分を同定・併合し、頂点間potential、成分metadata・merge履歴、成分間の縮約辺を保つ。',
     parentId: 'tag-graph-model-structure',
     outcomeIds: [
       'outcome-maintain-connectivity-components',
@@ -1659,16 +1941,52 @@ const TAG_SEEDS: readonly TagSeed[] = [
       '重み付きunion',
       'potential dsu',
       'disjoint set union',
+      'component contraction',
+      '連結成分.*縮約',
+    ],
+    object: ['連結成分', '頂点', '辺', '集合', '縮約グラフ'],
+    trigger: ['辺追加', 'merge', 'union', '同じ成分', '成分ごとにまとめる'],
+    invariant: ['root', 'leader', '成分サイズ', '同じ成分内を一頂点にする'],
+    goal: ['連結判定', '成分数', 'サイズ', '成分間の辺'],
+    priority: 83,
+  },
+  {
+    id: 'tag-bipartite-structure',
+    name: '二部グラフの彩色と成分構造',
+    definition:
+      '無向グラフを二色に塗れる条件を探索で検証し、各連結成分の二部サイズ・反転対称性を集約する。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-color-and-classify-bipartite-components'],
+    unitIds: ['unit-bipartite-structure'],
+    recall: ['bipartite graph', '二部グラフ', '二部彩色', '2.?coloring', 'odd cycle'],
+    object: ['無向グラフ', '連結成分', '二つの部', '頂点色'],
+    trigger: ['隣接頂点を異なる色', '二色に塗る', '奇閉路', '部ごとの個数'],
+    invariant: ['辺の両端は異色', '成分ごとに色反転できる', '奇閉路がない'],
+    goal: ['二部性判定', '二部サイズ', '彩色の復元', '成分型の分類'],
+    priority: 82,
+  },
+  {
+    id: 'tag-spanning-tree-optimization',
+    name: '最小・最大全域木とcut・cycle性質',
+    definition:
+      '辺重み順の成分併合を交換論で正当化し、最小または最大全域木を構成して辺の採否を判定する。',
+    parentId: 'tag-graph-model-structure',
+    prerequisiteTagIds: ['tag-dsu-connectivity', 'tag-greedy-exchange-order'],
+    outcomeIds: ['outcome-construct-optimal-spanning-tree'],
+    unitIds: ['unit-spanning-tree-optimization'],
+    recall: [
       'kruskal',
       'minimum spanning tree',
       'maximum spanning tree',
       '最小全域木',
+      '最大全域木',
+      '\\bmst\\b',
     ],
-    object: ['連結成分', '頂点', '辺', '集合'],
-    trigger: ['辺追加', 'merge', 'union', '同じ成分'],
-    invariant: ['root', 'leader', '成分サイズ'],
-    goal: ['連結判定', '成分数', 'サイズ'],
-    priority: 83,
+    object: ['重み付き無向グラフ', '辺重み', '全域木', 'spanning tree'],
+    trigger: ['重み順に辺', '連結成分を結ぶ', '辺を採用できる'],
+    invariant: ['cut property', 'cycle property', '採用辺は閉路を作らない'],
+    goal: ['最小重み', '最大重み', '全域木', '辺の採否'],
+    priority: 94,
   },
   {
     id: 'tag-directed-condensation-toposort',
@@ -1744,11 +2062,7 @@ const TAG_SEEDS: readonly TagSeed[] = [
     definition:
       '根付き木の子側情報を合成し、必要な問題だけ親側の差し替えやcluster結合で全体の値を更新する。',
     parentId: 'tag-graph-model-structure',
-    outcomeIds: [
-      'outcome-aggregate-rooted-tree',
-      'outcome-reroot-tree-aggregation',
-      'outcome-compose-dynamic-tree-clusters',
-    ],
+    outcomeIds: ['outcome-aggregate-rooted-tree', 'outcome-reroot-tree-aggregation'],
     unitIds: ['unit-tree-aggregation'],
     recall: [
       '木.?dp',
@@ -1758,8 +2072,6 @@ const TAG_SEEDS: readonly TagSeed[] = [
       'postorder.?dp',
       'reroot',
       '全方位木.?dp',
-      'top tree',
-      'static top tree',
       'implicit complete binary tree',
       '暗黙.*完全二分木',
     ],
@@ -1768,6 +2080,22 @@ const TAG_SEEDS: readonly TagSeed[] = [
     invariant: ['親側', '子側', '合成', '部分木サイズ'],
     goal: ['各頂点', '距離和', '部分木', '木全体'],
     priority: 81,
+  },
+  {
+    id: 'tag-static-top-tree',
+    name: 'Static Top Treeによる動的木DP',
+    definition:
+      '境界頂点つきtree clusterをrake・compressで二分合成し、局所更新後の木DP値を根まで再計算する。',
+    parentId: 'tag-graph-model-structure',
+    prerequisiteTagIds: ['tag-tree-aggregation-reroot'],
+    outcomeIds: ['outcome-compose-dynamic-tree-clusters'],
+    unitIds: ['unit-static-top-tree'],
+    recall: ['top tree', 'static top tree', 'rake.?compress', 'tree contraction'],
+    object: ['木', 'cluster', '境界頂点', '木DP'],
+    trigger: ['頂点更新', '辺更新', 'rake', 'compress'],
+    invariant: ['境界頂点', 'cluster合成', '二分木', '局所再計算'],
+    goal: ['更新後の木全体', '動的木DP', '全体の値'],
+    priority: 97,
   },
   {
     id: 'tag-tree-path-decomposition',
@@ -1815,7 +2143,10 @@ const TAG_SEEDS: readonly TagSeed[] = [
     name: 'flow・matching・cut帰着',
     definition: '容量制約付きの選択・対応付け・排反をnetwork flowまたはmatchingに帰着する。',
     parentId: 'tag-graph-model-structure',
-    outcomeIds: ['outcome-reduce-selection-to-network-optimization'],
+    outcomeIds: [
+      'outcome-reduce-selection-to-network-optimization',
+      'outcome-characterize-bipartite-feasibility-by-hall',
+    ],
     unitIds: ['unit-flow-matching'],
     recall: [
       'max.?flow',
@@ -1909,7 +2240,7 @@ const TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-prefix-difference',
     name: '累積和・差分配列',
     definition:
-      '連続区間の情報または一括加算を接頭辞・端点の差へ変換し、query・数え上げ・復元に使う。',
+      '一次元区間や二次元矩形の情報、または一括加算を接頭辞・端点の差へ変換し、query・数え上げ・復元に使う。',
     parentId: 'tag-query-sufficient-aggregate',
     outcomeIds: ['outcome-linearize-static-range-information'],
     unitIds: ['unit-prefix-aggregate'],
@@ -1931,26 +2262,30 @@ const TAG_SEEDS: readonly TagSeed[] = [
   },
   {
     id: 'tag-fenwick-weighted-prefix',
-    name: 'Fenwick Treeと重み付き接頭辞統計',
-    definition: '動的な接頭辞和を複数本組み合わせ、次数付きの区間式を評価する。',
+    name: 'Fenwick Tree・反転数・重み付き接頭辞統計',
+    definition:
+      '値や座標の頻度を動的な接頭辞和で数えて反転数を求めるか、複数本を組み合わせて次数付きの区間式を評価する。',
     parentId: 'tag-query-sufficient-aggregate',
     outcomeIds: ['outcome-maintain-weighted-prefix-statistics'],
     unitIds: ['unit-weighted-prefix-fenwick'],
-    recall: ['fenwick', 'binary indexed tree', '\\bbit\\b', '重み付き累積和'],
-    object: ['prefix', '添字付き和', '重み', '配列'],
-    trigger: ['point update', '一点更新', '接頭辞和', '累積和'],
-    invariant: ['複数本の', '係数', 'bit'],
-    goal: ['区間式', '動的和', 'query'],
+    recall: ['fenwick', 'binary indexed tree', '\\bbit\\b', '重み付き累積和', '反転数'],
+    object: ['prefix', '添字付き和', '頻度', '反転数', '重み', '配列'],
+    trigger: ['point update', '一点更新', '接頭辞和', '累積和', '左側に大きい値'],
+    invariant: ['処理済み頻度', '複数本の', '係数', 'bit'],
+    goal: ['反転数', '区間式', '動的和', 'query'],
     exclude: ['bit.?mask', 'bit.?dp', 'bitset'],
     priority: 86,
   },
   {
     id: 'tag-monoid-segment-tree',
-    name: '結合的要約・Segment Tree・SWAG',
+    name: '区間分解・結合的要約・Segment Tree・SWAG',
     definition:
-      '結合的な演算と単位元を持つ要約を設計し、prefix fold・Segment Tree・SWAGの適切な形で保つ。',
+      '区間をO(log N)個のcanonical nodeへ分解するか、結合的な演算と単位元を持つ要約を設計し、Segment Tree・prefix fold・SWAGの適切な形で扱う。',
     parentId: 'tag-query-sufficient-aggregate',
-    outcomeIds: ['outcome-design-associative-range-summary'],
+    outcomeIds: [
+      'outcome-design-associative-range-summary',
+      'outcome-decompose-ranges-into-segment-tree-nodes',
+    ],
     unitIds: ['unit-monoid-segment-tree'],
     recall: [
       'segment.?tree',
@@ -1962,11 +2297,23 @@ const TAG_SEEDS: readonly TagSeed[] = [
       'range.?minimum.?query',
       'sparse table',
       '\\bswag\\b',
+      'canonical (?:cover|node)',
+      'segment.?tree graph',
+      '時間.*segment.?tree',
+      '区間.*分解',
     ],
-    object: ['区間', '要約', 'ノード', '配列'],
-    trigger: ['point update', '更新', '区間query', '合成'],
-    invariant: ['結合法則', '単位元', 'merge'],
-    goal: ['区間の', '全体の値', 'query'],
+    object: ['区間', '要約', 'ノード', '配列', 'range object', '時間軸', '区間グラフ'],
+    trigger: [
+      'point update',
+      '更新',
+      '区間query',
+      '合成',
+      'canonical node',
+      'range edge',
+      '生存区間',
+    ],
+    invariant: ['結合法則', '単位元', 'merge', 'canonical cover', 'O\\(log N\\)'],
+    goal: ['区間の', '全体の値', 'query', 'range object', 'range-edge graph', '時間区間'],
     priority: 85,
   },
   {
@@ -2101,6 +2448,52 @@ const TAG_SEEDS: readonly TagSeed[] = [
     priority: 93,
   },
   {
+    id: 'tag-bitset-word-parallel',
+    name: 'bitsetによるword並列集合演算',
+    definition:
+      '真偽集合をbit列へ詰め、交差・和・shift・popcountをword単位で実行して遷移や組数計算を加速する。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-accelerate-set-operations-with-bitsets'],
+    unitIds: ['unit-bitset-word-parallel'],
+    recall: ['bitset', 'word.?parallel', 'bit parallel', 'ビット集合', 'popcount'],
+    object: ['集合', '隣接集合', '真偽配列', 'bit列'],
+    trigger: ['集合の積', '一括shift', 'bitset.*and', 'word単位'],
+    invariant: ['各bitが要素', 'word幅', 'popcount'],
+    goal: ['共通要素数', '到達集合', '遷移高速化'],
+    exclude: ['binary indexed tree', 'fenwick'],
+    priority: 92,
+  },
+  {
+    id: 'tag-cartesian-tree',
+    name: 'Cartesian treeによる区間極値分解',
+    definition: '配列順と値のheap順を同時に保つ木を構成し、区間極値を根とする再帰分割へ変換する。',
+    parentId: 'tag-query-sufficient-aggregate',
+    prerequisiteTagIds: ['tag-monotone-stack-queue'],
+    outcomeIds: ['outcome-build-cartesian-tree-decomposition'],
+    unitIds: ['unit-cartesian-tree'],
+    recall: ['cartesian tree', 'デカルト木', 'min.?cartesian', 'max.?cartesian'],
+    object: ['配列', '区間最小', '区間最大', '木'],
+    trigger: ['最小値の位置で分割', '単調stackで親', '大小関係を木'],
+    invariant: ['inorderが元の順序', 'heap order', '部分木が連続区間'],
+    goal: ['区間を再帰分割', '最近小さい要素', '部分問題の合成'],
+    priority: 94,
+  },
+  {
+    id: 'tag-binary-trie',
+    name: 'binary Trieによるbit列索引',
+    definition:
+      '整数を上位bitから分岐するTrieへ格納し、XOR・大小・距離条件に合う候補をbitごとに選ぶ。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-query-bitwise-order-with-trie'],
+    unitIds: ['unit-binary-trie'],
+    recall: ['binary trie', 'bitwise trie', 'xor trie', '01.?trie'],
+    object: ['整数集合', 'bit列', 'xor', '上位bit'],
+    trigger: ['bitごとに分岐', 'xorを最小', 'xorを最大', '二進Trie'],
+    invariant: ['部分木の要素数', '共通上位bit', '0と1の子'],
+    goal: ['最小xor', '最大xor', 'k番目', '条件を満たす整数'],
+    priority: 93,
+  },
+  {
     id: 'tag-trie-prefix',
     name: 'Trieによる共有接頭辞の索引',
     definition:
@@ -2128,7 +2521,6 @@ const TAG_SEEDS: readonly TagSeed[] = [
       'zアルゴリズム',
       'prefix function',
       '接頭辞と接尾辞',
-      'aho.?corasick',
       'z.?array',
       'z.?配列',
       'failure function',
@@ -2138,6 +2530,33 @@ const TAG_SEEDS: readonly TagSeed[] = [
     invariant: ['failure', 'z値', '最長の一致'],
     goal: ['検索', '出現位置', '構成可能'],
     priority: 88,
+  },
+  {
+    id: 'tag-string-automata',
+    name: '有限文字列automaton・Aho–Corasick・SAM',
+    definition:
+      '未来の文字追加に必要な接尾辞同値類を有限状態へ圧縮し、禁止語・複数pattern・全部分文字列を遷移グラフで扱う。',
+    parentId: 'tag-string-state-representation',
+    outcomeIds: [
+      'outcome-build-finite-string-automaton',
+      'outcome-build-multi-pattern-automaton',
+      'outcome-build-suffix-automaton',
+    ],
+    unitIds: ['unit-string-automata', 'unit-suffix-automaton'],
+    recall: [
+      'aho.?corasick',
+      'suffix automaton',
+      '接尾辞automaton',
+      '有限automaton',
+      '\\bsam\\b',
+      'failure link',
+    ],
+    object: ['文字列集合', 'pattern', '接尾辞状態', 'automaton', '部分文字列'],
+    trigger: ['一文字追加', '禁止部分文字列', '複数pattern', '全部分文字列'],
+    invariant: ['有限状態', 'failure link', 'suffix link', 'endpos', 'clone'],
+    goal: ['回避する文字列数', 'pattern出現集合', '部分文字列の遷移', '状態数を圧縮'],
+    requireObjectForStrictRecall: true,
+    priority: 96,
   },
   {
     id: 'tag-suffix-lcp-index',
@@ -2210,47 +2629,71 @@ const TAG_SEEDS: readonly TagSeed[] = [
     priority: 82,
   },
   {
-    id: 'tag-modular-crt',
-    name: '合同算術・周期・CRT',
+    id: 'tag-modular-arithmetic',
+    name: '法上の四則演算・高速累乗・逆元',
     definition:
-      '剰余類上の演算・周期前計算・巨大指数の簡約を行い、必要な問題では逆元・一次合同・CRTで解を構成する。',
+      '剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算・確率・零を含む動的積を計算する。',
     parentId: 'tag-math-geometry-transformation',
+    outcomeIds: ['outcome-compute-in-modular-arithmetic'],
+    unitIds: ['unit-modular-arithmetic'],
+    recall: [
+      'modular arithmetic',
+      'modular inverse',
+      'モジュラ逆元',
+      '法逆元',
+      'modular exponentiation',
+      '剰余高速累乗',
+      'zero.?aware.*product',
+      '零を含む積',
+      'modint',
+    ],
+    object: ['剰余', '法', 'mod', '逆元', '確率', '因子', '積'],
+    trigger: ['法で割る', '逆元を掛ける', '二分累乗', 'modを取る', '因子を更新'],
+    invariant: ['合同類', '逆元の存在', '乗法単位元', '正規化', 'zero count', '非零因子積'],
+    goal: ['法上の値', '剰余での確率', '巨大冪', '法上の除算', '動的な積'],
+    priority: 78,
+  },
+  {
+    id: 'tag-modular-crt',
+    name: '一次合同・剰余周期・CRT',
+    definition: '一次合同の可解性を判定して複数の合同類をCRTで統合するか、剰余列の周期を利用する。',
+    parentId: 'tag-math-geometry-transformation',
+    prerequisiteTagIds: ['tag-modular-arithmetic'],
     outcomeIds: ['outcome-solve-modular-constraints', 'outcome-exploit-modular-periodicity'],
-    unitIds: ['unit-modular-arithmetic', 'unit-modular-periodicity'],
+    unitIds: ['unit-modular-congruence', 'unit-modular-periodicity'],
     recall: [
       'chinese remainder',
       '\\bcrt\\b',
       '中国剰余定理',
       '合同式',
       '一次合同',
-      'モジュラ逆元',
       'fermat',
       'オイラーの定理',
       'lcm.*周期',
-      'modular inverse',
-      '法逆元',
-      'modular exponentiation',
-      '剰余高速累乗',
-      'modular arithmetic',
     ],
     object: ['余り', '法', 'mod', '合同'],
-    trigger: ['複数の法', '逆元', '割り算', '一致'],
+    trigger: ['複数の法', '一次合同', '周期', '一致'],
     invariant: ['gcd', '互いに素', '合同類'],
     goal: ['整数解', '最小の解', '余り'],
     priority: 82,
   },
   {
     id: 'tag-gcd-diophantine',
-    name: 'Euclid・gcd・有理近似',
+    name: 'Euclid・gcd・数値半群・有理近似',
     definition:
-      'Euclid互除法から、整除・差分の周期・Bézout整数解・連分数による最良有理近似を導く。',
+      'Euclid互除法から、整除・差分の周期・Bézout整数解、正の生成元の非負整数結合がconductor以後を覆う性質、連分数による最良有理近似を導く。',
     parentId: 'tag-math-geometry-transformation',
     outcomeIds: [
       'outcome-characterize-integer-solvability',
       'outcome-reduce-integer-structure-by-gcd',
+      'outcome-bound-reachability-in-numerical-semigroup',
       'outcome-approximate-rational-by-euclid',
     ],
-    unitIds: ['unit-gcd-diophantine', 'unit-rational-approximation'],
+    unitIds: [
+      'unit-gcd-diophantine',
+      'unit-numerical-semigroup-reachability',
+      'unit-rational-approximation',
+    ],
     recall: [
       'greatest common divisor',
       '\\bgcd\\b',
@@ -2262,11 +2705,16 @@ const TAG_SEEDS: readonly TagSeed[] = [
       'continued fraction',
       '連分数',
       'stern.?brocot',
+      'numerical semigroup',
+      '数値半群',
+      'frobenius coin',
+      'フロベニウス',
+      'conductor',
     ],
-    object: ['整数', '整除', '倍数', '線形結合'],
-    trigger: ['割り切れる', '何回で', '整数解'],
-    invariant: ['gcd', '最大公約数', '線形結合'],
-    goal: ['成立判定', '最小値', '整数解'],
+    object: ['整数', '整除', '倍数', '線形結合', '正の生成元', '到達距離', 'step長'],
+    trigger: ['割り切れる', '何回で', '整数解', '任意回加える', '十分大きい距離'],
+    invariant: ['gcd', '最大公約数', '線形結合', 'conductor以後', 'Frobenius数'],
+    goal: ['成立判定', '最小値', '整数解', '到達可能性', '有限prefix'],
     priority: 73,
   },
   {
@@ -2401,10 +2849,20 @@ const TAG_SEEDS: readonly TagSeed[] = [
   {
     id: 'tag-convolution-fps',
     name: '畳み込み・生成関数・FPS',
-    definition: '組合せの合成を係数列の畳み込みとして符号化し、多項式演算で計算する。',
+    definition:
+      '係数積和を高速畳み込みで計算し、生成関数への符号化、FPS演算、多点評価・合成へ発展させる。',
     parentId: 'tag-math-geometry-transformation',
-    outcomeIds: ['outcome-encode-counting-by-generating-function'],
-    unitIds: ['unit-polynomial-convolution'],
+    outcomeIds: [
+      'outcome-compute-convolution-or-correlation',
+      'outcome-encode-counting-by-generating-function',
+      'outcome-apply-formal-power-series-operations',
+      'outcome-evaluate-and-compose-polynomials',
+    ],
+    unitIds: [
+      'unit-polynomial-convolution',
+      'unit-generating-functions',
+      'unit-formal-power-series',
+    ],
     recall: [
       'convolution',
       '畳み込み',
@@ -2418,9 +2876,9 @@ const TAG_SEEDS: readonly TagSeed[] = [
       '生成多項式',
     ],
     object: ['係数', '多項式', '数列', '生成関数'],
-    trigger: ['畳み込み', '係数の積', '分割の合成'],
-    invariant: ['係数', '次数', '多項式積'],
-    goal: ['係数列', '場合の数', '高速化'],
+    trigger: ['畳み込み', '係数の積', '分割の合成', '逆数', '多点評価', '多項式合成'],
+    invariant: ['係数', '次数制限', '多項式積', '形式的等式'],
+    goal: ['係数列', '場合の数', '相互相関', 'FPSの値', '高速化'],
     priority: 91,
   },
   {
@@ -2454,6 +2912,28 @@ const TAG_SEEDS: readonly TagSeed[] = [
     invariant: ['rank', '線形独立', '行基本変形', 'テンソル積'],
     goal: ['解の個数', '最大xor', '可解性', '正逆変換'],
     priority: 89,
+  },
+  {
+    id: 'tag-finite-field-extension',
+    name: '拡大有限体の表現と演算',
+    definition:
+      '素体上の多項式剰余または基底座標で有限体の元を表し、標準化された加減乗除を構成する。',
+    parentId: 'tag-math-geometry-transformation',
+    prerequisiteTagIds: ['tag-modular-arithmetic'],
+    outcomeIds: ['outcome-compute-in-finite-field-extension'],
+    unitIds: ['unit-finite-field-extension'],
+    recall: [
+      'extension field',
+      'finite field extension',
+      '拡大有限体',
+      'quadratic extension',
+      'nim product',
+    ],
+    object: ['有限体', '基底', '既約多項式', '拡大次数', 'nim積'],
+    trigger: ['根を添加', '多項式で割った余り', '基底係数', '体を拡大'],
+    invariant: ['標準形', '演算で閉じる', '零でない元は可逆', '既約関係'],
+    goal: ['体上の四則演算', '平方根を表現', '有限体で計算'],
+    priority: 98,
   },
   {
     id: 'tag-determinant-counting',
@@ -2529,7 +3009,7 @@ const TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-discrete-convex-marginal',
     name: '凸最適化・傾き・限界費用',
     definition:
-      '凸・凹性から傾き、breakpoint、Lagrange penaltyまたは限界費用を追い、連続・離散の最適点を絞る。',
+      '絶対値和の中央値性や一般の凸・凹性から、傾き、breakpoint、Lagrange penaltyまたは限界費用を追い、連続・離散の最適点を絞る。',
     parentId: 'tag-math-geometry-transformation',
     outcomeIds: ['outcome-exploit-convexity'],
     unitIds: ['unit-discrete-convex'],
@@ -2546,11 +3026,13 @@ const TAG_SEEDS: readonly TagSeed[] = [
       'lagrangian relaxation',
       'pool adjacent violators',
       'l1 clamp',
+      'median.*l1',
+      '中央値.*絶対値',
     ],
-    object: ['配分', '個数', '凸関数', '費用'],
-    trigger: ['一つ追加', '均す', '傾き', '二次'],
-    invariant: ['限界費用', '単調な差分', '凸'],
-    goal: ['最小費用', '最適配分', '総和'],
+    object: ['配分', '個数', '座標', '絶対値和', '凸関数', '費用'],
+    trigger: ['中央値', '一つ追加', '均す', '傾き', '二次'],
+    invariant: ['左右の個数', '限界費用', '単調な差分', '凸'],
+    goal: ['L1距離和', '最小費用', '最適配分', '総和'],
     priority: 86,
   },
   {
@@ -2604,8 +3086,14 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     'pivot・上位bit・短い側を選ぶ基準を示し、重複なく部分問題へ再帰分割できる。',
   'outcome-bound-total-work':
     '軽重・倍化・単調な一度限りの移動や削除から、操作列全体の仕事量の上界を説明できる。',
+  'outcome-design-and-bound-randomized-algorithm':
+    '乱数で選ぶ対象と成功条件を定め、誤り確率を上から評価して必要な反復回数または決定的な事後検証を設計できる。',
+  'outcome-maintain-interactive-query-protocol':
+    '問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる。',
   'outcome-design-minimal-sufficient-state':
     '採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。',
+  'outcome-design-grid-table-dp':
+    'グリッドまたは多次元表の依存方向と境界状態を定め、計算済みの局所近傍からDAG順に全状態を更新できる。',
   'outcome-enumerate-subset-state-space':
     'bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。',
   'outcome-design-resource-dp': '資源軸の上限と更新順を選び、選択の重複を避けられる。',
@@ -2624,7 +3112,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-accelerate-fixed-linear-transition':
     '固定線形遷移を行列または漸化式にし、巨大回数後の値を求められる。',
   'outcome-select-state-graph-search':
-    '状態・重みなし辺・訪問条件を定義し、BFS・DFS・backtrackingから目的に合う探索を選べる。',
+    '状態・重みなし辺・訪問条件を定義し、BFS・DFS・backtrackingを選ぶか、外枠から補集合をflood fillして囲まれた穴を検出できる。',
   'outcome-compute-transitive-closure':
     '各始点探索または中継許可集合の段階不変条件を保つWarshall更新で推移閉包を求め、必要なら初回到達段階も記録できる。',
   'outcome-model-and-compute-shortest-path':
@@ -2638,7 +3126,11 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-maintain-potential-differences':
     '差分辺を累積するグラフ探索、またはDSUの親辺にpotential差を持たせ、同一成分内の頂点間差と矛盾を判定できる。',
   'outcome-augment-components-with-metadata':
-    'DSUの根へ成分metadataまたはmerge履歴を集約し、併合後の代表情報を答えられる。',
+    '成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。',
+  'outcome-color-and-classify-bipartite-components':
+    '各連結成分を二色に塗って矛盾を検出し、二つの部の大きさと色反転の自由度を成分ごとに集約できる。',
+  'outcome-construct-optimal-spanning-tree':
+    'cut・cycle性質で辺の安全性を証明し、Kruskal法または同値な選択で最小・最大全域木を構成できる。',
   'outcome-condense-and-order-directed-graph':
     '有向グラフの閉路を扱い、必要なら強連結成分へ縮約してDAG順に情報を伝播できる。',
   'outcome-decompose-functional-graph':
@@ -2659,6 +3151,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる。',
   'outcome-reduce-selection-to-network-optimization':
     '選択制約を容量・カット・マッチングに対応させ、最適値と具体的な選択を復元できる。',
+  'outcome-characterize-bipartite-feasibility-by-hall':
+    '二部割当が可能であることを近傍集合の大きさに関するHall条件で特徴付け、必要ならmin-cut条件と対応させられる。',
   'outcome-characterize-walk-by-degrees':
     '全辺ウォークの成立条件または選択辺集合の次数parity条件を定式化し、連結性・奇数次数・葉からの処理で判定または構成できる。',
   'outcome-identify-bridges-and-articulations':
@@ -2666,11 +3160,13 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-reduce-graph-by-peeling-or-kernelization':
     '削除可能な葉・低次数頂点を反復除去してcycle coreと各頂点の所属を特定するか、terminal以外の葉除去とdegree-2 chain縮約によってcycle rankに依存する小kernelを構成できる。',
   'outcome-linearize-static-range-information':
-    '区間情報を接頭辞の差または端点差分へ変換し、query・数え上げ・復元へ利用できる。',
+    '一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる。',
   'outcome-maintain-weighted-prefix-statistics':
-    '必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。',
+    '処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。',
   'outcome-design-associative-range-summary':
     '要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。',
+  'outcome-decompose-ranges-into-segment-tree-nodes':
+    '区間をO(log N)個のcanonical nodeへ分解し、range objectの登録、時間生存区間への配置、またはrange-edge graphの少数辺表現を構築できる。',
   'outcome-design-range-update-action':
     '更新作用の合成順と要約への適用を定義し、遅延評価で保てる。',
   'outcome-share-or-revert-versions':
@@ -2683,10 +3179,22 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '候補を捨てられる支配条件を証明し、各候補を高々一度だけ単調stack・queueから削除できる。',
   'outcome-schedule-range-query-updates':
     '区間問い合わせの順序と追加・削除操作を設計し、端点移動の総量を評価できる。',
+  'outcome-accelerate-set-operations-with-bitsets':
+    '集合をbit列へ符号化し、交差・和・shift・popcountをword並列に実行した計算量を評価できる。',
+  'outcome-build-cartesian-tree-decomposition':
+    '配列順とheap順を保つCartesian treeを単調stackで構成し、各部分木が表す連続区間へ問題を分解できる。',
+  'outcome-query-bitwise-order-with-trie':
+    '整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる。',
   'outcome-index-shared-prefixes-with-trie':
     '文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる。',
   'outcome-build-prefix-match-state':
     '接頭辞と接尾辞の一致長を状態にし、failure linkまたはZ値を線形時間で構成できる。',
+  'outcome-build-finite-string-automaton':
+    '禁止語到達など未来の遷移を決める有限な接尾辞状態を定義し、全文字遷移を構成してDPや行列累乗に接続できる。',
+  'outcome-build-multi-pattern-automaton':
+    '複数patternのTrieへfailure linkと出力情報を加え、Aho–Corasick automaton上で一致状態を更新できる。',
+  'outcome-build-suffix-automaton':
+    'endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる。',
   'outcome-build-suffix-lcp-index':
     '接尾辞の辞書順とLCPを索引化し、出現範囲・部分文字列順位・distinct数・巡回shiftを処理できる。',
   'outcome-compare-objects-by-fingerprint':
@@ -2695,6 +3203,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '各中心の回文半径を求め、左右対称な区間の成立条件を判定できる。',
   'outcome-query-recursively-defined-string':
     '圧縮・反復・再帰または入れ子で定義された文字列を展開せず、block長・対応区切り・作用から照会・変換・評価できる。',
+  'outcome-compute-in-modular-arithmetic':
+    '剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。更新可能な積では零因子数と可逆な非零因子の積を分離し、非零因子だけを逆元で差し替えられる。',
   'outcome-solve-modular-constraints':
     '合同条件の可解性を判定し、逆元・一次合同・CRTで解の類を構成できる。',
   'outcome-exploit-modular-periodicity':
@@ -2703,6 +3213,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '整除条件や一次不定方程式の可解性をgcdで特徴付けられる。',
   'outcome-reduce-integer-structure-by-gcd':
     'gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる。',
+  'outcome-bound-reachability-in-numerical-semigroup':
+    '正の生成元をgcdで正規化し、Frobenius数・conductorまたは剰余類ごとの最小到達値から、それ以後の全距離が非負整数結合で到達可能だと証明して有限prefixだけを調べられる。',
   'outcome-approximate-rational-by-euclid':
     'Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる。',
   'outcome-decompose-by-prime-or-divisor':
@@ -2721,10 +3233,18 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。',
   'outcome-encode-counting-by-generating-function':
     '組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。',
+  'outcome-compute-convolution-or-correlation':
+    '係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。',
+  'outcome-apply-formal-power-series-operations':
+    '定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる。',
+  'outcome-evaluate-and-compose-polynomials':
+    '積木・剰余木などの分割統治を設計し、多点評価・補間・power projection・多項式合成を計算できる。',
   'outcome-transform-to-linear-system-or-rank':
     '制約を線形結合・基底へ変換するか、XOR畳み込みをWalsh–Hadamard変換で点ごとの積へ移し、逆変換まで求められる。',
   'outcome-factor-separable-linear-transform':
     'Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる。',
+  'outcome-compute-in-finite-field-extension':
+    '基底と既約関係を定めて拡大有限体の元を一意に表し、標準形を保つ加減乗除を実装できる。',
   'outcome-count-combinatorial-objects-by-determinant':
     '非交差経路またはspanning treeを行列のminorへ対応させ、行列式から個数を求められる。',
   'outcome-reduce-geometry-to-algebraic-predicates':
@@ -2734,7 +3254,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-optimize-by-line-envelope':
     '一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる。',
   'outcome-exploit-convexity':
-    '凸・凹性を示し、傾き・breakpoint・Lagrange penalty・限界費用から連続または離散の最適点を求められる。',
+    '絶対値和を中央値で最小化するか、凸・凹性を示し、傾き・breakpoint・Lagrange penalty・限界費用から連続または離散の最適点を求められる。',
   'outcome-recover-valid-witness':
     '成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。',
 };
@@ -2743,10 +3263,27 @@ const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
 
 const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
   'outcome-build-shortest-path-certificate': ['outcome-model-and-compute-shortest-path'],
-  'outcome-localize-change-impact-by-witness': ['outcome-build-shortest-path-certificate'],
+  'outcome-construct-optimal-spanning-tree': [
+    'outcome-maintain-connectivity-components',
+    'outcome-prove-greedy-order',
+  ],
+  'outcome-color-and-classify-bipartite-components': ['outcome-select-state-graph-search'],
+  'outcome-compose-dynamic-tree-clusters': ['outcome-aggregate-rooted-tree'],
+  'outcome-build-cartesian-tree-decomposition': ['outcome-prune-dominated-candidates-once'],
   'outcome-design-range-update-action': ['outcome-design-associative-range-summary'],
   'outcome-use-tree-diameter-extrema': ['outcome-select-state-graph-search'],
-  'outcome-solve-modular-constraints': ['outcome-characterize-integer-solvability'],
+  'outcome-solve-modular-constraints': [
+    'outcome-characterize-integer-solvability',
+    'outcome-compute-in-modular-arithmetic',
+  ],
+  'outcome-bound-reachability-in-numerical-semigroup': ['outcome-reduce-integer-structure-by-gcd'],
+  'outcome-encode-counting-by-generating-function': [
+    'outcome-formulate-combinatorial-coefficients',
+    'outcome-compute-convolution-or-correlation',
+  ],
+  'outcome-apply-formal-power-series-operations': ['outcome-compute-convolution-or-correlation'],
+  'outcome-evaluate-and-compose-polynomials': ['outcome-compute-convolution-or-correlation'],
+  'outcome-compute-in-finite-field-extension': ['outcome-compute-in-modular-arithmetic'],
   'outcome-count-through-cyclic-exponents': [
     'outcome-exploit-modular-periodicity',
     'outcome-decompose-by-prime-or-divisor',
@@ -2765,13 +3302,22 @@ const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
 const OUTCOME_LEARNING_UNIT_IDS: Readonly<Record<string, readonly string[]>> = {
   'outcome-normalize-equivalent-states': ['unit-normalization'],
   'outcome-count-orbits-by-fixed-points': ['unit-combinatorial-coefficients'],
-  'outcome-solve-modular-constraints': ['unit-modular-arithmetic'],
+  'outcome-build-finite-string-automaton': ['unit-string-automata'],
+  'outcome-build-multi-pattern-automaton': ['unit-string-automata'],
+  'outcome-build-suffix-automaton': ['unit-suffix-automaton'],
+  'outcome-compute-in-modular-arithmetic': ['unit-modular-arithmetic'],
+  'outcome-solve-modular-constraints': ['unit-modular-congruence'],
   'outcome-exploit-modular-periodicity': ['unit-modular-periodicity'],
   'outcome-characterize-integer-solvability': ['unit-gcd-diophantine'],
   'outcome-reduce-integer-structure-by-gcd': ['unit-gcd-diophantine'],
+  'outcome-bound-reachability-in-numerical-semigroup': ['unit-numerical-semigroup-reachability'],
   'outcome-approximate-rational-by-euclid': ['unit-rational-approximation'],
   'outcome-count-through-cyclic-exponents': ['unit-cyclic-group-exponent-counting'],
   'outcome-find-period-by-multiplicative-order': ['unit-multiplicative-order-periods'],
+  'outcome-compute-convolution-or-correlation': ['unit-polynomial-convolution'],
+  'outcome-encode-counting-by-generating-function': ['unit-generating-functions'],
+  'outcome-apply-formal-power-series-operations': ['unit-formal-power-series'],
+  'outcome-evaluate-and-compose-polynomials': ['unit-formal-power-series'],
 };
 
 export const FINAL_TAXONOMY_OUTCOMES: readonly ObservableOutcomePolicy[] =
@@ -2789,6 +3335,15 @@ export const FINAL_TAXONOMY_OUTCOMES: readonly ObservableOutcomePolicy[] =
 export const NON_PRIMARY_OUTCOME_IDS = FINAL_TAXONOMY_OUTCOMES.filter((outcome) =>
   outcome.scopeTagIds.some((tagId) => NON_PRIMARY_TAG_IDS.includes(tagId)),
 ).map((outcome) => outcome.id);
+
+/**
+ * The reviewed corpus currently contains one canonical Suffix Automaton construction.
+ * Keep that learner-visible boundary instead of merging state/link/clone into a generic DFA
+ * Outcome merely to satisfy a two-problem sampling heuristic. The build gate requires this
+ * exception to remain supported by exactly one Problem and reports it once reuse grows.
+ */
+export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = ['outcome-build-suffix-automaton'];
+export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = ['unit-suffix-automaton'];
 
 const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
 
@@ -2972,10 +3527,10 @@ export const CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
   },
   {
     problemId: 'abc272-g',
-    primaryTagId: 'tag-prime-divisor-decomposition',
-    primaryOutcomeId: 'outcome-decompose-by-prime-or-divisor',
+    primaryTagId: 'tag-randomized-algorithm',
+    primaryOutcomeId: 'outcome-design-and-bound-randomized-algorithm',
     rationale:
-      '同一余りを作るmodulusは値の差の素因数に限られるため、random sampling後の本質的な候補は素因数分解である。',
+      'majority集合から候補差をsamplingする成功確率を評価し、素因数候補を決定的に検証するMonte Carlo設計が主である。',
     decisionAuthorId: 'person-maintainer',
   },
   {
@@ -3010,8 +3565,9 @@ export const CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
   {
     problemId: 'abc307-ex',
     primaryTagId: 'tag-convolution-fps',
-    primaryOutcomeId: 'outcome-encode-counting-by-generating-function',
-    rationale: 'wildcard patternと各marquee stateの不一致数を係数列の畳み込みとして一括計算する。',
+    primaryOutcomeId: 'outcome-compute-convolution-or-correlation',
+    rationale:
+      'wildcard patternと各marquee stateの不一致数を反転した係数列の相互相関として一括計算する。',
     decisionAuthorId: 'person-maintainer',
   },
   {
@@ -3025,7 +3581,9 @@ export const CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
     problemId: 'abc311-e',
     primaryTagId: 'tag-dp-state-equivalence',
     primaryOutcomeId: 'outcome-design-minimal-sufficient-state',
-    rationale: '各右下端で未来の数え上げに十分な情報を最大正方形の辺長一つに圧縮する。',
+    additionalPrimaryTagIds: ['tag-grid-table-dp'],
+    rationale:
+      '各右下端で未来の数え上げに十分な情報を最大正方形の辺長一つに圧縮し、三近傍から更新するgrid table DPとして実装する。',
     decisionAuthorId: 'person-maintainer',
   },
   {
@@ -3131,9 +3689,10 @@ export const CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
   },
   {
     problemId: 'abc238-g',
-    primaryTagId: 'tag-prime-divisor-decomposition',
-    primaryOutcomeId: 'outcome-decompose-by-prime-or-divisor',
-    rationale: '区間積の立方数性を素数ごとの指数 mod 3 に分解し、XOR fingerprintで一括比較する。',
+    primaryTagId: 'tag-randomized-algorithm',
+    primaryOutcomeId: 'outcome-design-and-bound-randomized-algorithm',
+    rationale:
+      '素因数指数ベクトルを乱択XOR fingerprintへ写し、非零ベクトルが零へ衝突する確率を評価する設計が主である。',
     decisionAuthorId: 'person-maintainer',
   },
   {
@@ -3153,9 +3712,10 @@ export const CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
   },
   {
     problemId: 'abc281-f',
-    primaryTagId: 'tag-divide-enumerate',
-    primaryOutcomeId: 'outcome-divide-search-space-recursively',
-    rationale: 'XORの最上位bitで候補集合を二分し、支配されるgroupを捨てて小さい側だけを再帰する。',
+    primaryTagId: 'tag-binary-trie',
+    primaryOutcomeId: 'outcome-query-bitwise-order-with-trie',
+    rationale:
+      '整数集合を上位bitで分岐するbinary Trieとして再帰し、共通XOR後の最大値を小さくする分岐を選ぶ。',
     decisionAuthorId: 'person-maintainer',
   },
   {
@@ -3341,6 +3901,78 @@ export const CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
       '重み付きcentroidを一度だけseparatorとして選び、leaf groupをheap順に彩色して具体構成を復元する。再帰的な重心分解は行わない。',
     decisionAuthorId: 'person-maintainer',
   },
+  {
+    problemId: 'abc227-f',
+    primaryTagId: 'tag-discrete-convex-marginal',
+    primaryOutcomeId: 'outcome-exploit-convexity',
+    additionalPrimaryTagIds: ['tag-grid-table-dp'],
+    rationale:
+      '順位統計量を閾値固定で加法的costへ変換することが主であり、変換後は単調grid上の最短路DPを典型技能として発動する。',
+    decisionAuthorId: 'person-maintainer',
+  },
+  {
+    problemId: 'abc228-e',
+    primaryTagId: 'tag-modular-crt',
+    primaryOutcomeId: 'outcome-exploit-modular-periodicity',
+    additionalPrimaryTagIds: ['tag-modular-arithmetic'],
+    rationale:
+      'Fermat周期による巨大指数の簡約が主であり、内外二段の剰余累乗を二分累乗で計算する技能も主解法に不可欠である。',
+    decisionAuthorId: 'person-maintainer',
+  },
+  {
+    problemId: 'abc274-ex',
+    primaryTagId: 'tag-string-hash-equality',
+    primaryOutcomeId: 'outcome-compare-objects-by-fingerprint',
+    additionalPrimaryTagIds: ['tag-finite-field-extension'],
+    rationale:
+      'rolling hashによるLCP比較が主であり、XORを加法として保つnimber fieldの選択がhash合成を成立させる独立の典型技能である。',
+    decisionAuthorId: 'person-maintainer',
+  },
+  {
+    problemId: 'abc305-f',
+    primaryTagId: 'tag-reachability-bfs',
+    primaryOutcomeId: 'outcome-select-state-graph-search',
+    additionalPrimaryTagIds: ['tag-interactive-protocol'],
+    rationale:
+      '未訪問頂点を辿るonline DFSが主であり、訪問時だけ得られる隣接情報と実移動を対話protocolとして維持する技能も不可欠である。',
+    decisionAuthorId: 'person-maintainer',
+  },
+  {
+    problemId: 'abc355-e',
+    primaryTagId: 'tag-constructive-witness',
+    primaryOutcomeId: 'outcome-recover-valid-witness',
+    additionalPrimaryTagIds: ['tag-interactive-protocol'],
+    rationale:
+      '境界graphの最短路から質問列を復元する構成が主であり、辺の向きに応じて応答を合成する対話protocolも典型技能として発動する。',
+    decisionAuthorId: 'person-maintainer',
+  },
+  {
+    problemId: 'abc398-e',
+    primaryTagId: 'tag-game-grundy-dp',
+    primaryOutcomeId: 'outcome-classify-game-states',
+    additionalPrimaryTagIds: ['tag-bipartite-structure'],
+    rationale:
+      '合法手数のparityによるgame分類が主であり、connected bipartite graphの一意彩色から合法なcross-part辺を確定する技能も主解法を担う。',
+    decisionAuthorId: 'person-maintainer',
+  },
+  {
+    problemId: 'abc398-g',
+    primaryTagId: 'tag-game-grundy-dp',
+    primaryOutcomeId: 'outcome-classify-game-states',
+    additionalPrimaryTagIds: ['tag-bipartite-structure'],
+    rationale:
+      '残手数parityによるgame分類が主であり、彩色反転自由度を含むbipartite componentの型分類も独立した典型技能である。',
+    decisionAuthorId: 'person-maintainer',
+  },
+  {
+    problemId: 'abc411-e',
+    primaryTagId: 'tag-contribution-reordering',
+    primaryOutcomeId: 'outcome-reorder-counting-contributions',
+    additionalPrimaryTagIds: ['tag-modular-arithmetic'],
+    rationale:
+      'CDF差分による期待値寄与の並べ替えが主であり、零因子数と非零因子積を分離して法上の動的積を保つ技能も主解法に不可欠である。',
+    decisionAuthorId: 'person-maintainer',
+  },
 ];
 
 export const EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS: Readonly<Record<string, string>> =
@@ -3487,12 +4119,12 @@ export const PREVIEW_FINAL_TAXONOMY_DECISIONS: readonly PreviewFinalDecision[] =
     action: 'split',
     finalEntityIds: ['tag-shortest-path-certificate', 'tag-witness-impact-localization'],
     affectedProblemIds: ['abc218-f', 'abc252-e'],
-    representativeProblemIds: ['abc218-f', 'abc243-e', 'abc252-e', 'abc308-ex'],
+    representativeProblemIds: ['abc218-f', 'abc252-e', 'abc279-e', 'abc308-ex'],
     splitAssignments: [
       {
         finalEntityId: 'tag-witness-impact-localization',
         problemIds: ['abc218-f'],
-        representativeProblemIds: ['abc218-f', 'abc243-e'],
+        representativeProblemIds: ['abc218-f', 'abc279-e'],
       },
       {
         finalEntityId: 'tag-shortest-path-certificate',
@@ -3501,7 +4133,7 @@ export const PREVIEW_FINAL_TAXONOMY_DECISIONS: readonly PreviewFinalDecision[] =
       },
     ],
     aliasesOrRedirects: ['最短路の構造復元と再利用'],
-    evidenceOwnerProblemIds: ['abc218-f', 'abc243-e', 'abc252-e', 'abc308-ex'],
+    evidenceOwnerProblemIds: ['abc218-f', 'abc252-e', 'abc279-e', 'abc308-ex'],
     rationale:
       '変更影響をwitnessで局所化する能力と、距離等式からcertificateを構成する能力を分ける。',
     reviewMode: 'third_party',
@@ -3515,12 +4147,12 @@ export const PREVIEW_FINAL_TAXONOMY_DECISIONS: readonly PreviewFinalDecision[] =
       'outcome-localize-change-impact-by-witness',
     ],
     affectedProblemIds: ['abc218-f', 'abc252-e'],
-    representativeProblemIds: ['abc218-f', 'abc243-e', 'abc252-e', 'abc308-ex'],
+    representativeProblemIds: ['abc218-f', 'abc252-e', 'abc279-e', 'abc308-ex'],
     splitAssignments: [
       {
         finalEntityId: 'outcome-localize-change-impact-by-witness',
         problemIds: ['abc218-f'],
-        representativeProblemIds: ['abc218-f', 'abc243-e'],
+        representativeProblemIds: ['abc218-f', 'abc279-e'],
       },
       {
         finalEntityId: 'outcome-build-shortest-path-certificate',
@@ -3529,21 +4161,33 @@ export const PREVIEW_FINAL_TAXONOMY_DECISIONS: readonly PreviewFinalDecision[] =
       },
     ],
     aliasesOrRedirects: ['最短路witnessから構造を復元し変更影響を絞る'],
-    evidenceOwnerProblemIds: ['abc218-f', 'abc243-e', 'abc252-e', 'abc308-ex'],
+    evidenceOwnerProblemIds: ['abc218-f', 'abc252-e', 'abc279-e', 'abc308-ex'],
     rationale: '同じ最短路基盤でも到達目標は別能力である。',
     reviewMode: 'third_party',
   },
   {
     previewEntityId: 'provisional-unit-shortest-path-structure',
     previewEntityKind: 'unit',
-    action: 'merge',
-    finalEntityIds: ['unit-shortest-path-certificates'],
+    action: 'split',
+    finalEntityIds: ['unit-change-impact-localization', 'unit-shortest-path-certificates'],
     affectedProblemIds: ['abc218-f', 'abc252-e'],
-    representativeProblemIds: ['abc218-f', 'abc243-e', 'abc252-e', 'abc308-ex'],
-    splitAssignments: [],
+    representativeProblemIds: ['abc218-f', 'abc252-e', 'abc279-e', 'abc308-ex'],
+    splitAssignments: [
+      {
+        finalEntityId: 'unit-change-impact-localization',
+        problemIds: ['abc218-f'],
+        representativeProblemIds: ['abc218-f', 'abc279-e'],
+      },
+      {
+        finalEntityId: 'unit-shortest-path-certificates',
+        problemIds: ['abc218-f', 'abc252-e'],
+        representativeProblemIds: ['abc218-f', 'abc252-e', 'abc308-ex'],
+      },
+    ],
     aliasesOrRedirects: ['最短路の構造復元と再利用'],
-    evidenceOwnerProblemIds: ['abc218-f', 'abc243-e', 'abc252-e', 'abc308-ex'],
-    rationale: '最短路witnessの利用という同一教材セクション内で別outcomeとして扱う。',
+    evidenceOwnerProblemIds: ['abc218-f', 'abc252-e', 'abc279-e', 'abc308-ex'],
+    rationale:
+      '一般のwitnessによる変更影響局所化と、最短距離等式からcertificateを復元する教材を分ける。',
     reviewMode: 'third_party',
   },
   {
@@ -3793,6 +4437,10 @@ const claimDispositionsFor = (
   const dispositions = claimDecision.dispositions.map(
     ({ claimPath, kind, tagIds }): InventoryClaimDisposition => {
       const normalizedTagIds = sortedUnique(tagIds);
+      const baselineClassification =
+        kind === 'baseline'
+          ? FINAL_TAXONOMY_BASELINE_CLAIM_REGISTRY[`${record.problemId}${claimPath}`]
+          : undefined;
       if (
         ((kind === 'baseline' || kind === 'problem_specific') && normalizedTagIds.length > 0) ||
         ((kind === 'primary' || kind === 'supporting' || kind === 'same_tag') &&
@@ -3813,11 +4461,17 @@ const claimDispositionsFor = (
           `FINAL_TAXONOMY_PRIMARY_CLAIM_NOT_TECHNIQUE: ${record.problemId}${claimPath}`,
         );
       }
+      if (kind === 'baseline' && baselineClassification === undefined) {
+        throw new Error(`FINAL_TAXONOMY_BASELINE_SCOPE_INVALID: ${record.problemId}${claimPath}`);
+      }
       return {
         claimRef: inventoryClaimReference(record, claimPath),
         kind,
         tagIds: normalizedTagIds,
-        rationale: dispositionRationale(kind),
+        rationale:
+          baselineClassification === undefined
+            ? dispositionRationale(kind)
+            : `${dispositionRationale(kind)} 共通前提カテゴリ: ${baselineClassification.categoryIds.join(', ')}。`,
       };
     },
   );
@@ -4054,6 +4708,26 @@ export const buildFullCorpusPrimaryDecisionTable = (
       `FINAL_TAXONOMY_EXPLICIT_ASSIGNMENT_TARGET_MISSING: ${unappliedExplicitAssignments.join(',')}`,
     );
   }
+  const actualBaselineClaimKeys = sortedUnique(
+    decisions.flatMap((decision) =>
+      decision.claimDispositions.flatMap(({ claimRef, kind }) =>
+        kind === 'baseline' ? [`${decision.problemId}${claimRef.claimPath}`] : [],
+      ),
+    ),
+  );
+  const classifiedBaselineClaimKeys = Object.keys(FINAL_TAXONOMY_BASELINE_CLAIM_REGISTRY).sort(
+    compareIds,
+  );
+  if (
+    actualBaselineClaimKeys.length !== classifiedBaselineClaimKeys.length ||
+    actualBaselineClaimKeys.some(
+      (claimKey, index) => claimKey !== classifiedBaselineClaimKeys[index],
+    )
+  ) {
+    throw new Error(
+      `FINAL_TAXONOMY_BASELINE_CLASSIFICATION_COVERAGE: actual=[${actualBaselineClaimKeys.join(',')}]; classified=[${classifiedBaselineClaimKeys.join(',')}]`,
+    );
+  }
   return {
     schemaVersion: '1.0.0',
     policyVersion: '1.0.0',
@@ -4108,6 +4782,14 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
   const knownTagIds = new Set(FINAL_TAXONOMY_TAGS.map((tag) => tag.id));
   const knownOutcomeIds = new Set(FINAL_TAXONOMY_OUTCOMES.map((outcome) => outcome.id));
   const knownUnitIds = new Set(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => unit.id));
+  for (const outcomeId of SINGLE_PROBLEM_OUTCOME_IDS) {
+    if (!knownOutcomeIds.has(outcomeId)) {
+      diagnostics.push(`UNKNOWN_SINGLE_PROBLEM_OUTCOME:${outcomeId}`);
+    }
+  }
+  for (const unitId of SINGLE_PROBLEM_UNIT_IDS) {
+    if (!knownUnitIds.has(unitId)) diagnostics.push(`UNKNOWN_SINGLE_PROBLEM_UNIT:${unitId}`);
+  }
   for (const unitId of Object.keys(UNIT_ORDER_REASONS)) {
     if (!knownUnitIds.has(unitId)) diagnostics.push(`UNKNOWN_UNIT_ORDER_REASON:${unitId}`);
   }

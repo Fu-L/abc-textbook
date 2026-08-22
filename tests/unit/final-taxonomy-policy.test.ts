@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
+import { FINAL_TAXONOMY_BASELINE_CLAIMS } from '../../src/lib/taxonomy/final-taxonomy-baseline.js';
 import {
   CURATED_PRIMARY_OVERRIDES,
   EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS,
@@ -73,6 +74,7 @@ describe('final taxonomy policy', () => {
         'outcome-identify-bridges-and-articulations',
         'outcome-reduce-graph-by-peeling-or-kernelization',
         'outcome-maintain-dynamic-order-statistics',
+        'outcome-decompose-ranges-into-segment-tree-nodes',
         'outcome-prune-dominated-candidates-once',
         'outcome-build-suffix-lcp-index',
         'outcome-compare-objects-by-fingerprint',
@@ -115,6 +117,18 @@ describe('final taxonomy policy', () => {
         (outcome) => outcome.id === 'outcome-count-prefix-constrained-objects',
       )?.statement,
     ).toContain('個数または最適値');
+    expect(
+      FINAL_TAXONOMY_TAGS.find((tag) => tag.id === 'tag-monoid-segment-tree')?.definition,
+    ).toContain('canonical node');
+    expect(
+      FINAL_TAXONOMY_OUTCOMES.find(
+        (outcome) => outcome.id === 'outcome-decompose-ranges-into-segment-tree-nodes',
+      )?.statement,
+    ).toContain('range-edge graph');
+    expect(
+      FINAL_LEARNING_UNIT_CANDIDATES.find((unit) => unit.id === 'unit-monoid-segment-tree')
+        ?.learningOutcomeIds,
+    ).toContain('outcome-decompose-ranges-into-segment-tree-nodes');
     const sections = FINAL_LEARNING_UNIT_CANDIDATES.filter((unit) => unit.kind === 'section');
     expect(sections.every((unit) => unit.excludedTopics.length > 0)).toBe(true);
     expect(
@@ -149,9 +163,7 @@ describe('final taxonomy policy', () => {
     expect(outcomePrerequisites.get('outcome-build-shortest-path-certificate')).toEqual([
       'outcome-model-and-compute-shortest-path',
     ]);
-    expect(outcomePrerequisites.get('outcome-localize-change-impact-by-witness')).toEqual([
-      'outcome-build-shortest-path-certificate',
-    ]);
+    expect(outcomePrerequisites.get('outcome-localize-change-impact-by-witness')).toEqual([]);
     expect(outcomePrerequisites.get('outcome-design-range-update-action')).toEqual([
       'outcome-design-associative-range-summary',
     ]);
@@ -160,6 +172,7 @@ describe('final taxonomy policy', () => {
     ]);
     expect(outcomePrerequisites.get('outcome-solve-modular-constraints')).toEqual([
       'outcome-characterize-integer-solvability',
+      'outcome-compute-in-modular-arithmetic',
     ]);
     expect(outcomePrerequisites.get('outcome-exploit-modular-periodicity')).toEqual([]);
     expect(outcomePrerequisites.get('outcome-count-through-cyclic-exponents')).toEqual([
@@ -181,11 +194,19 @@ describe('final taxonomy policy', () => {
         .sort(),
     ).toEqual(
       [
+        'outcome-apply-formal-power-series-operations',
+        'outcome-bound-reachability-in-numerical-semigroup',
+        'outcome-build-cartesian-tree-decomposition',
         'outcome-build-shortest-path-certificate',
+        'outcome-color-and-classify-bipartite-components',
+        'outcome-compose-dynamic-tree-clusters',
+        'outcome-compute-in-finite-field-extension',
+        'outcome-construct-optimal-spanning-tree',
         'outcome-count-through-cyclic-exponents',
         'outcome-design-range-update-action',
+        'outcome-encode-counting-by-generating-function',
+        'outcome-evaluate-and-compose-polynomials',
         'outcome-find-period-by-multiplicative-order',
-        'outcome-localize-change-impact-by-witness',
         'outcome-restrict-geometric-candidates-to-boundary',
         'outcome-solve-modular-constraints',
         'outcome-use-tree-diameter-extrema',
@@ -204,7 +225,7 @@ describe('final taxonomy policy', () => {
     expect(
       FINAL_TAXONOMY_OUTCOMES.find((outcome) => outcome.id === 'outcome-solve-modular-constraints')
         ?.learningUnitCandidateIds,
-    ).toEqual(['unit-modular-arithmetic']);
+    ).toEqual(['unit-modular-congruence']);
     expect(
       FINAL_TAXONOMY_OUTCOMES.find(
         (outcome) => outcome.id === 'outcome-exploit-modular-periodicity',
@@ -381,6 +402,7 @@ describe('final taxonomy policy', () => {
     );
     const semanticPrimaryRegressions: Readonly<Record<string, string>> = {
       'abc216-h': 'tag-determinant-counting',
+      'abc218-e': 'tag-spanning-tree-optimization',
       'abc221-f': 'tag-tree-metric-diameter',
       'abc222-f': 'tag-tree-metric-diameter',
       'abc224-e': 'tag-dp-transition-acceleration',
@@ -388,16 +410,18 @@ describe('final taxonomy policy', () => {
       'abc228-e': 'tag-modular-crt',
       'abc229-h': 'tag-game-value-dp',
       'abc234-ex': 'tag-geometry-orientation-transform',
+      'abc235-e': 'tag-spanning-tree-optimization',
       'abc247-f': 'tag-dp-state-equivalence',
       'abc246-e': 'tag-shortest-path',
       'abc252-f': 'tag-greedy-exchange-order',
       'abc253-ex': 'tag-determinant-counting',
       'abc253-f': 'tag-reverse-offline',
       'abc261-ex': 'tag-game-value-dp',
-      'abc264-g': 'tag-dp-state-equivalence',
+      'abc264-g': 'tag-string-automata',
       'abc273-ex': 'tag-gcd-diophantine',
       'abc266-f': 'tag-graph-core-peeling',
       'abc267-f': 'tag-tree-metric-diameter',
+      'abc270-f': 'tag-spanning-tree-optimization',
       'abc279-e': 'tag-witness-impact-localization',
       'abc284-ex': 'tag-symmetry-invariant-normalization',
       'abc287-e': 'tag-trie-prefix',
@@ -406,6 +430,7 @@ describe('final taxonomy policy', () => {
       'abc294-ex': 'tag-subset-bitmask-transform',
       'abc298-f': 'tag-greedy-exchange-order',
       'abc303-g': 'tag-game-value-dp',
+      'abc305-g': 'tag-string-automata',
       'abc307-g': 'tag-knapsack-resource',
       'abc312-e': 'tag-geometry-orientation-transform',
       'abc321-e': 'tag-tree-aggregation-reroot',
@@ -420,6 +445,7 @@ describe('final taxonomy policy', () => {
       'abc339-f': 'tag-string-hash-equality',
       'abc344-e': 'tag-linked-list-index',
       'abc349-e': 'tag-game-value-dp',
+      'abc351-g': 'tag-static-top-tree',
       'abc353-e': 'tag-trie-prefix',
       'abc355-g': 'tag-discrete-convex-marginal',
       'abc361-e': 'tag-contribution-reordering',
@@ -428,16 +454,19 @@ describe('final taxonomy policy', () => {
       'abc378-g': 'tag-dp-state-equivalence',
       'abc382-f': 'tag-lazy-segment-action',
       'abc401-f': 'tag-tree-metric-diameter',
+      'abc406-f': 'tag-tree-path-decomposition',
       'abc413-f': 'tag-game-value-dp',
+      'abc415-e': 'tag-grid-table-dp',
       'abc416-g': 'tag-dp-state-equivalence',
       'abc419-g': 'tag-graph-core-peeling',
       'abc421-f': 'tag-linked-list-index',
+      'abc433-g': 'tag-string-automata',
       'abc428-e': 'tag-tree-metric-diameter',
       'abc437-e': 'tag-trie-prefix',
       'abc448-g': 'tag-convex-hull-trick',
       'abc453-f': 'tag-constructive-witness',
       'abc455-g': 'tag-string-hash-equality',
-      'abc460-g': 'tag-tree-aggregation-reroot',
+      'abc460-g': 'tag-static-top-tree',
     };
     for (const [problemId, primaryTagId] of Object.entries(semanticPrimaryRegressions)) {
       expect(decisionByProblemId.get(problemId)?.primaryTagIds).toContain(primaryTagId);
@@ -451,6 +480,7 @@ describe('final taxonomy policy', () => {
       'abc227-f': 'outcome-exploit-convexity',
       'abc228-e': 'outcome-exploit-modular-periodicity',
       'abc246-e': 'outcome-model-and-compute-shortest-path',
+      'abc272-ex': 'outcome-evaluate-and-compose-polynomials',
       'abc252-f': 'outcome-prove-greedy-order',
       'abc253-f': 'outcome-reverse-update-time',
       'abc267-f': 'outcome-use-tree-diameter-extrema',
@@ -460,24 +490,30 @@ describe('final taxonomy policy', () => {
       'abc292-e': 'outcome-compute-transitive-closure',
       'abc288-g': 'outcome-factor-separable-linear-transform',
       'abc298-f': 'outcome-prove-greedy-order',
+      'abc305-g': 'outcome-build-finite-string-automaton',
+      'abc307-ex': 'outcome-compute-convolution-or-correlation',
       'abc314-f': 'outcome-augment-components-with-metadata',
       'abc314-ex': 'outcome-exploit-convexity',
+      'abc318-ex': 'outcome-apply-formal-power-series-operations',
       'abc319-e': 'outcome-exploit-modular-periodicity',
       'abc333-g': 'outcome-approximate-rational-by-euclid',
       'abc334-e': 'outcome-reorder-counting-contributions',
       'abc351-g': 'outcome-compose-dynamic-tree-clusters',
       'abc361-e': 'outcome-reorder-counting-contributions',
       'abc408-g': 'outcome-approximate-rational-by-euclid',
+      'abc433-g': 'outcome-build-suffix-automaton',
       'abc460-g': 'outcome-compose-dynamic-tree-clusters',
       'abc466-g': 'outcome-maintain-potential-differences',
-      'abc281-f': 'outcome-divide-search-space-recursively',
+      'abc281-f': 'outcome-query-bitwise-order-with-trie',
       'abc282-ex': 'outcome-divide-search-space-recursively',
       'abc238-e': 'outcome-maintain-connectivity-components',
-      'abc383-e': 'outcome-augment-components-with-metadata',
+      'abc383-e': 'outcome-construct-optimal-spanning-tree',
       'abc392-e': 'outcome-augment-components-with-metadata',
       'abc399-e': 'outcome-decompose-functional-graph',
       'abc401-e': 'outcome-augment-components-with-metadata',
       'abc401-f': 'outcome-use-tree-diameter-extrema',
+      'abc406-f': 'outcome-decompose-tree-path-queries',
+      'abc415-e': 'outcome-design-grid-table-dp',
       'abc420-e': 'outcome-augment-components-with-metadata',
       'abc428-e': 'outcome-use-tree-diameter-extrema',
       'abc428-g': 'outcome-count-orbits-by-fixed-points',
@@ -486,9 +522,10 @@ describe('final taxonomy policy', () => {
       'abc436-e': 'outcome-decompose-functional-graph',
       'abc438-e': 'outcome-jump-deterministic-transition',
       'abc438-g': 'outcome-reduce-integer-structure-by-gcd',
-      'abc451-f': 'outcome-augment-components-with-metadata',
+      'abc451-f': 'outcome-color-and-classify-bipartite-components',
       'abc459-g': 'outcome-characterize-integer-solvability',
-      'abc460-e': 'outcome-characterize-integer-solvability',
+      'abc460-e': 'outcome-solve-modular-constraints',
+      'abc387-g': 'outcome-evaluate-and-compose-polynomials',
       'abc241-e': 'outcome-decompose-functional-graph',
       'abc371-g': 'outcome-decompose-functional-graph',
       'abc377-e': 'outcome-jump-deterministic-transition',
@@ -512,6 +549,37 @@ describe('final taxonomy policy', () => {
       'outcome-exploit-modular-periodicity',
     ]);
 
+    const dualPrimaryRegressions = {
+      'abc227-f': ['tag-grid-table-dp', 'outcome-design-grid-table-dp'],
+      'abc228-e': ['tag-modular-arithmetic', 'outcome-compute-in-modular-arithmetic'],
+      'abc274-ex': ['tag-finite-field-extension', 'outcome-compute-in-finite-field-extension'],
+      'abc305-f': ['tag-interactive-protocol', 'outcome-maintain-interactive-query-protocol'],
+      'abc311-e': ['tag-grid-table-dp', 'outcome-design-grid-table-dp'],
+      'abc355-e': ['tag-interactive-protocol', 'outcome-maintain-interactive-query-protocol'],
+      'abc398-e': ['tag-bipartite-structure', 'outcome-color-and-classify-bipartite-components'],
+      'abc398-g': ['tag-bipartite-structure', 'outcome-color-and-classify-bipartite-components'],
+      'abc411-e': ['tag-modular-arithmetic', 'outcome-compute-in-modular-arithmetic'],
+    } as const;
+    for (const [problemId, [tagId, outcomeId]] of Object.entries(dualPrimaryRegressions)) {
+      const decision = decisionByProblemId.get(problemId);
+      expect(decision?.primaryTagIds).toContain(tagId);
+      expect(decision?.additionalPrimaryOutcomeIds).toContain(outcomeId);
+      expect(decision?.supportingTagIds).not.toContain(tagId);
+      expect(decision?.supportingOutcomeIds).not.toContain(outcomeId);
+    }
+    expect(decisionByProblemId.get('abc306-g')?.additionalPrimaryOutcomeIds).toContain(
+      'outcome-bound-reachability-in-numerical-semigroup',
+    );
+    expect(decisionByProblemId.get('abc317-g')?.additionalPrimaryOutcomeIds).toContain(
+      'outcome-characterize-bipartite-feasibility-by-hall',
+    );
+    expect(decisionByProblemId.get('abc279-e')?.learningUnitCandidateIds).toContain(
+      'unit-change-impact-localization',
+    );
+    expect(decisionByProblemId.get('abc279-e')?.learningUnitCandidateIds).not.toContain(
+      'unit-shortest-path-certificates',
+    );
+
     const supportingRegressions: Readonly<Record<string, string>> = {
       'abc213-f': 'tag-monotone-stack-queue',
       'abc214-h': 'tag-flow-matching-cut',
@@ -522,20 +590,342 @@ describe('final taxonomy policy', () => {
       'abc280-ex': 'tag-monotone-stack-queue',
       'abc299-ex': 'tag-linear-recurrence-matrix',
       'abc305-g': 'tag-linear-recurrence-matrix',
+      'abc261-f': 'tag-fenwick-weighted-prefix',
+      'abc334-e': 'tag-modular-arithmetic',
       'abc336-g': 'tag-euler-degree-parity',
       'abc364-g': 'tag-shortest-path',
       'abc375-g': 'tag-shortest-path',
+      'abc387-f': 'tag-dp-transition-acceleration',
       'abc370-f': 'tag-functional-graph-doubling',
       'abc361-e': 'tag-tree-metric-diameter',
       'abc403-e': 'tag-trie-prefix',
+      'abc427-e': 'tag-prefix-difference',
+      'abc440-g': 'tag-dsu-connectivity',
       'abc450-f': 'tag-lazy-segment-action',
       'abc460-f': 'tag-tree-path-decomposition',
     };
     for (const [problemId, supportingTagId] of Object.entries(supportingRegressions)) {
       expect(decisionByProblemId.get(problemId)?.supportingTagIds).toContain(supportingTagId);
     }
+
+    const directClaimRegressions = [
+      [
+        'abc318-f',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-flow-matching-cut',
+        'outcome-characterize-bipartite-feasibility-by-hall',
+      ],
+      [
+        'abc342-g',
+        '/typicalTechniques/0',
+        'supporting',
+        'tag-monoid-segment-tree',
+        'outcome-decompose-ranges-into-segment-tree-nodes',
+      ],
+      [
+        'abc342-g',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-monoid-segment-tree',
+        'outcome-decompose-ranges-into-segment-tree-nodes',
+      ],
+      [
+        'abc363-g',
+        '/typicalTechniques/0',
+        'supporting',
+        'tag-monoid-segment-tree',
+        'outcome-decompose-ranges-into-segment-tree-nodes',
+      ],
+      [
+        'abc363-g',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-flow-matching-cut',
+        'outcome-characterize-bipartite-feasibility-by-hall',
+      ],
+      [
+        'abc363-g',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-monoid-segment-tree',
+        'outcome-decompose-ranges-into-segment-tree-nodes',
+      ],
+      [
+        'abc363-g',
+        '/prerequisiteCandidates/1',
+        'supporting',
+        'tag-flow-matching-cut',
+        'outcome-characterize-bipartite-feasibility-by-hall',
+      ],
+      [
+        'abc384-g',
+        '/prerequisiteCandidates/1',
+        'supporting',
+        'tag-sweep-coordinate-compression',
+        'outcome-linearize-events',
+      ],
+      [
+        'abc405-g',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-combinatorial-coefficients',
+        'outcome-formulate-combinatorial-coefficients',
+      ],
+      ['abc406-f', '/typicalTechniques/0', 'primary', 'tag-tree-path-decomposition', null],
+      ['abc406-f', '/prerequisiteCandidates/0', 'same_tag', 'tag-tree-path-decomposition', null],
+      [
+        'abc406-g',
+        '/typicalTechniques/2',
+        'supporting',
+        'tag-ordered-set-heap',
+        'outcome-maintain-dynamic-order-statistics',
+      ],
+      [
+        'abc409-f',
+        '/typicalTechniques/0',
+        'supporting',
+        'tag-dsu-connectivity',
+        'outcome-maintain-connectivity-components',
+      ],
+      [
+        'abc409-g',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-combinatorial-coefficients',
+        'outcome-formulate-combinatorial-coefficients',
+      ],
+      [
+        'abc412-f',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-greedy-exchange-order',
+        'outcome-prove-greedy-order',
+      ],
+      [
+        'abc412-f',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-modular-arithmetic',
+        'outcome-compute-in-modular-arithmetic',
+      ],
+      ['abc412-g', '/typicalTechniques/2', 'same_tag', 'tag-flow-matching-cut', null],
+      [
+        'abc413-f',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-reachability-bfs',
+        'outcome-select-state-graph-search',
+      ],
+      [
+        'abc413-f',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-reachability-bfs',
+        'outcome-select-state-graph-search',
+      ],
+      [
+        'abc414-g',
+        '/typicalTechniques/0',
+        'supporting',
+        'tag-monoid-segment-tree',
+        'outcome-decompose-ranges-into-segment-tree-nodes',
+      ],
+      [
+        'abc414-g',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-monoid-segment-tree',
+        'outcome-decompose-ranges-into-segment-tree-nodes',
+      ],
+      ['abc415-e', '/typicalTechniques/0', 'primary', 'tag-grid-table-dp', null],
+      ['abc415-e', '/typicalTechniques/1', 'same_tag', 'tag-grid-table-dp', null],
+      ['abc415-e', '/prerequisiteCandidates/0', 'same_tag', 'tag-grid-table-dp', null],
+      [
+        'abc417-f',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-modular-arithmetic',
+        'outcome-compute-in-modular-arithmetic',
+      ],
+      [
+        'abc422-g',
+        '/typicalTechniques/0',
+        'supporting',
+        'tag-combinatorial-coefficients',
+        'outcome-formulate-combinatorial-coefficients',
+      ],
+      [
+        'abc422-g',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-combinatorial-coefficients',
+        'outcome-formulate-combinatorial-coefficients',
+      ],
+      [
+        'abc429-f',
+        '/typicalTechniques/0',
+        'supporting',
+        'tag-shortest-path',
+        'outcome-model-and-compute-shortest-path',
+      ],
+      [
+        'abc429-f',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-shortest-path',
+        'outcome-model-and-compute-shortest-path',
+      ],
+      [
+        'abc431-g',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-sweep-coordinate-compression',
+        'outcome-linearize-events',
+      ],
+      [
+        'abc432-f',
+        '/typicalTechniques/2',
+        'supporting',
+        'tag-greedy-exchange-order',
+        'outcome-prove-greedy-order',
+      ],
+      [
+        'abc432-f',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-greedy-exchange-order',
+        'outcome-prove-greedy-order',
+      ],
+      [
+        'abc432-g',
+        '/typicalTechniques/0',
+        'supporting',
+        'tag-combinatorial-coefficients',
+        'outcome-formulate-combinatorial-coefficients',
+      ],
+      [
+        'abc432-g',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-combinatorial-coefficients',
+        'outcome-formulate-combinatorial-coefficients',
+      ],
+      [
+        'abc434-e',
+        '/typicalTechniques/2',
+        'supporting',
+        'tag-sweep-coordinate-compression',
+        'outcome-linearize-events',
+      ],
+      [
+        'abc434-e',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-sweep-coordinate-compression',
+        'outcome-linearize-events',
+      ],
+      [
+        'abc439-f',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-sweep-coordinate-compression',
+        'outcome-linearize-events',
+      ],
+      [
+        'abc453-f',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-greedy-exchange-order',
+        'outcome-prove-greedy-order',
+      ],
+      [
+        'abc453-f',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-greedy-exchange-order',
+        'outcome-prove-greedy-order',
+      ],
+      [
+        'abc453-g',
+        '/typicalTechniques/0',
+        'supporting',
+        'tag-monoid-segment-tree',
+        'outcome-design-associative-range-summary',
+      ],
+      [
+        'abc453-g',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-monoid-segment-tree',
+        'outcome-design-associative-range-summary',
+      ],
+      [
+        'abc456-g',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-combinatorial-coefficients',
+        'outcome-formulate-combinatorial-coefficients',
+      ],
+      [
+        'abc462-g',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-amortized-heavy-light',
+        'outcome-bound-total-work',
+      ],
+      [
+        'abc462-g',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-amortized-heavy-light',
+        'outcome-bound-total-work',
+      ],
+      [
+        'abc464-g',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-greedy-exchange-order',
+        'outcome-prove-greedy-order',
+      ],
+      [
+        'abc464-g',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-greedy-exchange-order',
+        'outcome-prove-greedy-order',
+      ],
+    ] as const;
+    for (const [problemId, claimPath, kind, tagId, supportingOutcomeId] of directClaimRegressions) {
+      const decision = decisionByProblemId.get(problemId);
+      const matchingDisposition = decision?.claimDispositions.find(
+        (disposition) =>
+          disposition.claimRef.claimPath === claimPath &&
+          disposition.kind === kind &&
+          disposition.tagIds.includes(tagId),
+      );
+      expect(matchingDisposition, `${problemId}${claimPath} -> ${kind}:${tagId}`).toBeDefined();
+      if (supportingOutcomeId) {
+        expect(decision?.supportingOutcomeIds).toContain(supportingOutcomeId);
+      }
+    }
     expect(decisionByProblemId.get('abc460-f')?.supportingTagIds).toContain(
       'tag-tree-metric-diameter',
+    );
+
+    const baselineClaimKeys = table.decisions
+      .flatMap((decision) =>
+        decision.claimDispositions.flatMap(({ claimRef, kind, rationale }) =>
+          kind === 'baseline'
+            ? [`${decision.problemId}${claimRef.claimPath}\u0000${rationale}`]
+            : [],
+        ),
+      )
+      .sort();
+    expect(baselineClaimKeys).toHaveLength(69);
+    expect(baselineClaimKeys.every((key) => key.includes('共通前提カテゴリ:'))).toBe(true);
+    expect(baselineClaimKeys.map((key) => key.split('\u0000')[0])).toEqual(
+      FINAL_TAXONOMY_BASELINE_CLAIMS.map(({ key }) => key).sort(),
     );
 
     const leadTechniqueRegressions: Readonly<Record<string, string>> = {
@@ -643,5 +1033,93 @@ describe('final taxonomy policy', () => {
         .filter((assignment) => assignment.problemIds.includes('abc218-f'))
         .map((assignment) => assignment.finalEntityId),
     ).toEqual(['tag-witness-impact-localization', 'tag-shortest-path-certificate']);
+  });
+
+  it('keeps the new reusable skills at observable textbook boundaries', () => {
+    const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
+    const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
+    const unitById = new Map(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => [unit.id, unit]));
+
+    expect(tagById.get('tag-witness-impact-localization')).toMatchObject({
+      parentId: 'tag-model-reduction',
+      prerequisiteTagIds: [],
+      learningUnitCandidateIds: ['unit-change-impact-localization'],
+    });
+    expect(outcomeById.get('outcome-localize-change-impact-by-witness')).toMatchObject({
+      prerequisiteOutcomeIds: [],
+      learningUnitCandidateIds: ['unit-change-impact-localization'],
+    });
+
+    expect(tagById.get('tag-modular-arithmetic')?.learningOutcomeIds).toEqual([
+      'outcome-compute-in-modular-arithmetic',
+    ]);
+    expect(outcomeById.get('outcome-compute-in-modular-arithmetic')).toMatchObject({
+      prerequisiteOutcomeIds: [],
+      learningUnitCandidateIds: ['unit-modular-arithmetic'],
+    });
+    expect(outcomeById.get('outcome-compute-in-modular-arithmetic')?.statement).toContain(
+      '零因子数',
+    );
+    expect(outcomeById.has('outcome-maintain-zero-aware-modular-product')).toBe(false);
+    expect(tagById.get('tag-modular-arithmetic')?.aliases).toContain('zero-aware modular product');
+    expect(outcomeById.get('outcome-solve-modular-constraints')).toMatchObject({
+      learningUnitCandidateIds: ['unit-modular-congruence'],
+    });
+
+    expect(tagById.has('tag-numerical-semigroup-reachability')).toBe(false);
+    expect(tagById.get('tag-gcd-diophantine')?.learningOutcomeIds).toContain(
+      'outcome-bound-reachability-in-numerical-semigroup',
+    );
+    expect(tagById.get('tag-gcd-diophantine')?.learningUnitCandidateIds).toContain(
+      'unit-numerical-semigroup-reachability',
+    );
+    expect(tagById.get('tag-gcd-diophantine')?.representativeProblemIds).toEqual(
+      expect.arrayContaining(['abc388-f', 'abc306-g']),
+    );
+    expect(tagById.get('tag-gcd-diophantine')?.aliases).toContain('Frobenius coin problem');
+    expect(outcomeById.get('outcome-bound-reachability-in-numerical-semigroup')).toMatchObject({
+      prerequisiteOutcomeIds: ['outcome-reduce-integer-structure-by-gcd'],
+      scopeTagIds: ['tag-gcd-diophantine'],
+      learningUnitCandidateIds: ['unit-numerical-semigroup-reachability'],
+    });
+    expect(
+      outcomeById.get('outcome-bound-reachability-in-numerical-semigroup')?.statement,
+    ).toContain('conductor');
+    expect(
+      unitById.get('unit-numerical-semigroup-reachability')?.additionalPrerequisiteUnitIds,
+    ).toEqual(['unit-gcd-diophantine']);
+    expect(unitById.get('unit-numerical-semigroup-reachability')?.orderReason).toContain(
+      'conductor',
+    );
+
+    expect(tagById.get('tag-convolution-fps')?.learningOutcomeIds).toEqual([
+      'outcome-compute-convolution-or-correlation',
+      'outcome-encode-counting-by-generating-function',
+      'outcome-apply-formal-power-series-operations',
+      'outcome-evaluate-and-compose-polynomials',
+    ]);
+    expect(tagById.get('tag-string-automata')?.learningOutcomeIds).toEqual([
+      'outcome-build-finite-string-automaton',
+      'outcome-build-multi-pattern-automaton',
+      'outcome-build-suffix-automaton',
+    ]);
+    expect(outcomeById.get('outcome-compose-dynamic-tree-clusters')?.scopeTagIds).toEqual([
+      'tag-static-top-tree',
+    ]);
+    expect(unitById.get('unit-static-top-tree')?.additionalPrerequisiteUnitIds).toContain(
+      'unit-tree-aggregation',
+    );
+
+    expect([...tagById.keys()]).toEqual(
+      expect.arrayContaining([
+        'tag-spanning-tree-optimization',
+        'tag-randomized-algorithm',
+        'tag-bitset-word-parallel',
+        'tag-cartesian-tree',
+        'tag-interactive-protocol',
+        'tag-binary-trie',
+        'tag-finite-field-extension',
+      ]),
+    );
   });
 });

@@ -5,8 +5,12 @@ import path from 'node:path';
 
 import type { z } from 'zod';
 
-import { canonicalDigest } from '../domain/canonical-json.js';
-import { FinalTaxonomyBuildSchema, OffsetDateTimeSchema } from '../domain/schema-parts/catalog.js';
+import { canonicalDigest, canonicalJson } from '../domain/canonical-json.js';
+import {
+  FinalTaxonomyBuildSchema,
+  OffsetDateTimeSchema,
+  TaxonomyIntegrationMapSchema,
+} from '../domain/schema-parts/catalog.js';
 import {
   ContentWorkManifestSchema,
   HumanContentReviewEvidenceSchema,
@@ -21,7 +25,12 @@ export const FINAL_TAXONOMY_PROBLEM_COUNT = 868;
 export const FINAL_TAXONOMY_REVIEW_CHECKS = Object.freeze([
   {
     checkId: 'check-corpus-final-taxonomy',
-    command: 'npx vitest run tests/contract/final-taxonomy-build.test.ts',
+    command:
+      'npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts',
+  },
+  {
+    checkId: 'check-current-final-taxonomy-output',
+    command: 'npm run corpus:final-taxonomy',
   },
   {
     checkId: 'check-human-content-review',
@@ -44,12 +53,13 @@ export const FINAL_TAXONOMY_REVIEW_EVIDENCE_PATH =
 export const FINAL_TAXONOMY_REVIEW_EVIDENCE_ID =
   'human-content-review-bootstrap-us2-final-taxonomy';
 
-const FINAL_TAXONOMY_INTEGRATION_PATH =
+export const FINAL_TAXONOMY_INTEGRATION_PATH =
   'docs/verification/previews/initial-v1/taxonomy-integration.json';
 const FINAL_TAXONOMY_REVIEW_UNIT_ID = 'RU-T159-final-taxonomy';
 const FINAL_TAXONOMY_REVIEW_ITEM_ID = 'human-review-item-ru-t159-final-taxonomy';
 
 type FinalTaxonomyBuild = z.infer<typeof FinalTaxonomyBuildSchema>;
+type TaxonomyIntegrationMap = z.infer<typeof TaxonomyIntegrationMapSchema>;
 type ContentWorkManifest = z.infer<typeof ContentWorkManifestSchema>;
 type HumanContentReviewEvidence = z.infer<typeof HumanContentReviewEvidenceSchema>;
 type ReviewCheck = (typeof FINAL_TAXONOMY_REVIEW_CHECKS)[number];
@@ -94,6 +104,8 @@ export type FinalTaxonomyCheckRunner = (
   check: ReviewCheck,
   repositoryRoot: string,
 ) => Promise<FinalTaxonomyCheckExecution>;
+
+export type FinalTaxonomyGeneratedSubjectLoader = (repositoryRoot: string) => Promise<string>;
 
 export interface FinalTaxonomyReviewResult {
   readonly evidence: HumanContentReviewEvidence;
@@ -228,6 +240,18 @@ const parseWorkManifest = (value: unknown): ContentWorkManifest => {
   return parsed.data;
 };
 
+const parseIntegrationMap = (value: unknown): TaxonomyIntegrationMap => {
+  const parsed = TaxonomyIntegrationMapSchema.safeParse(value);
+  if (!parsed.success) {
+    throw new FinalTaxonomyReviewError(
+      'FINAL_TAXONOMY_INTEGRATION_SCHEMA_INVALID',
+      parsed.error.message,
+      FINAL_TAXONOMY_INTEGRATION_PATH,
+    );
+  }
+  return parsed.data;
+};
+
 const assertManifestAndProposalCoverage = (
   manifest: ContentWorkManifest,
   build: FinalTaxonomyBuild,
@@ -268,26 +292,45 @@ const assertManifestAndProposalCoverage = (
 
 const loadFixedContext = async (
   repositoryRoot: string,
-): Promise<{ readonly build: FinalTaxonomyBuild; readonly manifest: ContentWorkManifest }> => {
-  const [buildValue, manifestValue] = await Promise.all([
+): Promise<{
+  readonly build: FinalTaxonomyBuild;
+  readonly manifest: ContentWorkManifest;
+}> => {
+  const [buildValue, integrationValue, manifestValue] = await Promise.all([
     readRepositoryJson(repositoryRoot, FINAL_TAXONOMY_PROPOSED_BUILD_PATH),
+    readRepositoryJson(repositoryRoot, FINAL_TAXONOMY_INTEGRATION_PATH),
     readRepositoryJson(repositoryRoot, FINAL_TAXONOMY_WORK_MANIFEST_PATH),
   ]);
   const build = parseProposedBuild(buildValue);
+  const integrationMap = parseIntegrationMap(integrationValue);
   const manifest = parseWorkManifest(manifestValue);
   assertManifestAndProposalCoverage(manifest, build);
+  if (canonicalJson(integrationMap) !== canonicalJson(build.integrationMap)) {
+    throw new FinalTaxonomyReviewError(
+      'FINAL_TAXONOMY_REVIEW_INTEGRATION_MISMATCH',
+      'The saved integration map is not the integration map embedded in the proposal.',
+      FINAL_TAXONOMY_INTEGRATION_PATH,
+    );
+  }
   return { build, manifest };
 };
 
-const commandInvocation = (
+export const resolveFinalTaxonomyReviewCheckInvocation = (
   check: ReviewCheck,
 ): { readonly executable: string; readonly args: readonly string[] } => {
   switch (check.checkId) {
     case 'check-corpus-final-taxonomy':
       return {
         executable: 'npx',
-        args: ['vitest', 'run', 'tests/contract/final-taxonomy-build.test.ts'],
+        args: [
+          'vitest',
+          'run',
+          'tests/contract/final-taxonomy-build.test.ts',
+          'tests/unit/final-taxonomy-policy.test.ts',
+        ],
       };
+    case 'check-current-final-taxonomy-output':
+      return { executable: 'npm', args: ['run', 'corpus:final-taxonomy'] };
     case 'check-taxonomy-integration':
       return {
         executable: 'npx',
@@ -307,7 +350,7 @@ export const runFinalTaxonomyReviewCheck: FinalTaxonomyCheckRunner = async (
   check,
   repositoryRoot,
 ) => {
-  const invocation = commandInvocation(check);
+  const invocation = resolveFinalTaxonomyReviewCheckInvocation(check);
   return await new Promise<FinalTaxonomyCheckExecution>((resolve, reject) => {
     const child = spawn(invocation.executable, invocation.args, {
       cwd: repositoryRoot,
@@ -598,12 +641,41 @@ const validateExistingEvidence = async (input: {
   return evidence;
 };
 
+export const loadCurrentGeneratedFinalTaxonomySubjectDigest: FinalTaxonomyGeneratedSubjectLoader =
+  async (repositoryRoot) => {
+    const {
+      buildFinalTaxonomyFromPolicy,
+      defaultFinalTaxonomyBuildLayout,
+      loadFinalTaxonomySourceContext,
+    } = await import('./final-taxonomy-build.js');
+    const context = await loadFinalTaxonomySourceContext(
+      defaultFinalTaxonomyBuildLayout(repositoryRoot),
+    );
+    return buildFinalTaxonomyFromPolicy(context).taxonomySubjectDigest;
+  };
+
+const assertCurrentGeneratedSubjectMatchesProposal = async (input: {
+  readonly repositoryRoot: string;
+  readonly proposal: FinalTaxonomyBuild;
+  readonly loadGeneratedSubject: FinalTaxonomyGeneratedSubjectLoader;
+}): Promise<void> => {
+  const generatedSubjectDigest = await input.loadGeneratedSubject(input.repositoryRoot);
+  if (generatedSubjectDigest !== input.proposal.taxonomySubjectDigest) {
+    throw new FinalTaxonomyReviewError(
+      'FINAL_TAXONOMY_REVIEW_GENERATED_SUBJECT_MISMATCH',
+      'The saved proposal is not the subject generated by the current taxonomy sources.',
+      FINAL_TAXONOMY_PROPOSED_BUILD_PATH,
+    );
+  }
+};
+
 export const reviewFinalTaxonomy = async (input: {
   readonly reviewerId: string;
   readonly approve: boolean;
   readonly reviewBasis: string;
   readonly repositoryRoot?: string;
   readonly runCheck?: FinalTaxonomyCheckRunner;
+  readonly loadGeneratedSubject?: FinalTaxonomyGeneratedSubjectLoader;
   readonly now?: () => string;
 }): Promise<FinalTaxonomyReviewResult> => {
   if (!input.approve) {
@@ -634,6 +706,13 @@ export const reviewFinalTaxonomy = async (input: {
       'The reviewer cannot be a manifest owner or author of this taxonomy subject.',
     );
   }
+  const loadGeneratedSubject =
+    input.loadGeneratedSubject ?? loadCurrentGeneratedFinalTaxonomySubjectDigest;
+  await assertCurrentGeneratedSubjectMatchesProposal({
+    repositoryRoot,
+    proposal: initial.build,
+    loadGeneratedSubject,
+  });
 
   const existingEvidence = await readRepositoryJson(
     repositoryRoot,
@@ -679,6 +758,11 @@ export const reviewFinalTaxonomy = async (input: {
       'The proposed taxonomy subject or work manifest changed during review.',
     );
   }
+  await assertCurrentGeneratedSubjectMatchesProposal({
+    repositoryRoot,
+    proposal: current.build,
+    loadGeneratedSubject,
+  });
   const checkResults = validateFinalTaxonomyReviewCheckResults(
     {
       schemaVersion: '1.0.0',

@@ -23,8 +23,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc215-e': 'tag-dp-state-equivalence',
   'abc215-f': 'tag-monotone-threshold-search',
   'abc215-g': 'tag-contribution-reordering',
-  // Hall constraints become a mask-indexed transform before any coefficient manipulation.
-  'abc215-h': 'tag-subset-bitmask-transform',
+  // Hall's condition is the reusable feasibility theorem; mask transforms evaluate all subsets.
+  'abc215-h': 'tag-flow-matching-cut',
 
   'abc216-e': 'tag-monotone-threshold-search',
   'abc216-f': 'tag-knapsack-resource',
@@ -38,7 +38,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc217-g': 'tag-combinatorial-coefficients',
   'abc217-h': 'tag-discrete-convex-marginal',
 
-  'abc218-e': 'tag-greedy-exchange-order',
+  'abc218-e': 'tag-spanning-tree-optimization',
   'abc218-f': 'tag-witness-impact-localization',
   // DFS entry/exit rollback is what makes the root-to-current-path median reusable.
   'abc218-g': 'tag-persistent-rollback',
@@ -126,7 +126,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc234-f': 'tag-combinatorial-coefficients',
   'abc234-g': 'tag-monotone-stack-queue',
 
-  'abc235-e': 'tag-dsu-connectivity',
+  'abc235-e': 'tag-spanning-tree-optimization',
   'abc235-ex': 'tag-convolution-fps',
   'abc235-f': 'tag-digit-automaton-dp',
   'abc235-g': 'tag-inclusion-exclusion',
@@ -144,8 +144,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc238-e': 'tag-dsu-connectivity',
   'abc238-ex': 'tag-reverse-offline',
   'abc238-f': 'tag-sequence-subsequence-dp',
-  // The decisive invariant is the prime-exponent vector modulo three, before hashing it.
-  'abc238-g': 'tag-prime-divisor-decomposition',
+  // A randomized fingerprint is what makes the prime-exponent vector queryable in O(1).
+  'abc238-g': 'tag-randomized-algorithm',
 
   'abc239-e': 'tag-tree-aggregation-reroot',
   'abc239-ex': 'tag-integer-boundary-blocks',
@@ -224,7 +224,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc253-g': 'tag-integer-boundary-blocks',
 
   'abc254-e': 'tag-reachability-bfs',
-  'abc254-ex': 'tag-greedy-exchange-order',
+  'abc254-ex': 'tag-binary-trie',
   'abc254-f': 'tag-gcd-diophantine',
   'abc254-g': 'tag-functional-graph-doubling',
 
@@ -247,7 +247,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc258-e': 'tag-two-pointers-window',
   'abc258-ex': 'tag-linear-recurrence-matrix',
   'abc258-f': 'tag-geometry-orientation-transform',
-  'abc258-g': 'tag-contribution-reordering',
+  'abc258-g': 'tag-bitset-word-parallel',
 
   'abc259-e': 'tag-prime-divisor-decomposition',
   'abc259-ex': 'tag-amortized-heavy-light',
@@ -278,7 +278,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc264-e': 'tag-reverse-offline',
   'abc264-ex': 'tag-amortized-heavy-light',
   'abc264-f': 'tag-dp-state-equivalence',
-  'abc264-g': 'tag-dp-state-equivalence',
+  'abc264-g': 'tag-string-automata',
 
   'abc265-e': 'tag-dp-state-equivalence',
   'abc265-ex': 'tag-convolution-fps',
@@ -308,7 +308,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc270-e': 'tag-monotone-threshold-search',
   'abc270-ex': 'tag-stochastic-expectation-dp',
-  'abc270-f': 'tag-greedy-exchange-order',
+  'abc270-f': 'tag-spanning-tree-optimization',
   'abc270-g': 'tag-divide-enumerate',
 
   'abc271-e': 'tag-sequence-subsequence-dp',
@@ -319,7 +319,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc272-e': 'tag-amortized-heavy-light',
   'abc272-ex': 'tag-convolution-fps',
   'abc272-f': 'tag-suffix-lcp-index',
-  'abc272-g': 'tag-prime-divisor-decomposition',
+  'abc272-g': 'tag-randomized-algorithm',
 
   'abc273-e': 'tag-persistent-rollback',
   // Continued-fraction-style unary descents are skipped as equal-boundary blocks.
@@ -334,7 +334,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc274-g': 'tag-flow-matching-cut',
 
   'abc275-e': 'tag-stochastic-expectation-dp',
-  'abc275-ex': 'tag-discrete-convex-marginal',
+  'abc275-ex': 'tag-cartesian-tree',
   'abc275-f': 'tag-knapsack-resource',
   'abc275-g': 'tag-convex-hull-halfplane',
 
@@ -366,10 +366,10 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc281-e': 'tag-ordered-set-heap',
   'abc281-ex': 'tag-convolution-fps',
-  'abc281-f': 'tag-divide-enumerate',
+  'abc281-f': 'tag-binary-trie',
   'abc281-g': 'tag-dp-state-equivalence',
 
-  'abc282-e': 'tag-greedy-exchange-order',
+  'abc282-e': 'tag-spanning-tree-optimization',
   'abc282-ex': 'tag-divide-enumerate',
   'abc282-f': 'tag-constructive-witness',
   'abc282-g': 'tag-dp-transition-acceleration',

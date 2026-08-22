@@ -1,12 +1,21 @@
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+
 import { describe, expect, it } from 'vitest';
 
-import { canonicalDigest, canonicalJson } from '../../src/lib/domain/canonical-json.js';
+import {
+  canonicalDigest,
+  canonicalJson,
+  digestWithoutField,
+} from '../../src/lib/domain/canonical-json.js';
 import { FinalTaxonomyBuildSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import {
   FINAL_TAXONOMY_PREVIEW_ENTITY_COUNT,
   FINAL_TAXONOMY_PROBLEM_COUNT,
+  assertFrozenProvisionalEvidenceBoundToPreview,
   buildFinalTaxonomyFromPolicy,
   createFinalTaxonomyVerificationEvidence,
+  defaultFinalTaxonomyBuildLayout,
   loadFinalTaxonomySourceContext,
   validateFinalTaxonomyBuildAgainstContext,
 } from '../../src/lib/taxonomy/final-taxonomy-build.js';
@@ -14,22 +23,27 @@ import { FINAL_TAXONOMY_REVIEW_CHECK_RESULTS_PATH } from '../../src/lib/taxonomy
 import {
   NON_PRIMARY_OUTCOME_IDS,
   NON_PRIMARY_TAG_IDS,
+  SINGLE_PROBLEM_OUTCOME_IDS,
+  SINGLE_PROBLEM_UNIT_IDS,
 } from '../../src/lib/taxonomy/final-taxonomy-policy.js';
 
-const loaded = loadFinalTaxonomySourceContext().then((context) => ({
-  context,
-  build: buildFinalTaxonomyFromPolicy(context),
-}));
+const loadedContext = loadFinalTaxonomySourceContext();
+const loadBuild = async () => {
+  const context = await loadedContext;
+  return { context, build: buildFinalTaxonomyFromPolicy(context) };
+};
 
 describe('T159 deterministic full-corpus taxonomy build', () => {
   it('builds one schema-valid, source-closed placement for every accepted Problem', async () => {
-    const { context, build } = await loaded;
+    const { context, build } = await loadBuild();
 
     expect(FinalTaxonomyBuildSchema.parse(build)).toEqual(build);
     expect(
       validateFinalTaxonomyBuildAgainstContext(context, build, {
         nonPrimaryTagIds: NON_PRIMARY_TAG_IDS,
         nonPrimaryOutcomeIds: NON_PRIMARY_OUTCOME_IDS,
+        singleProblemOutcomeIds: SINGLE_PROBLEM_OUTCOME_IDS,
+        singleProblemUnitIds: SINGLE_PROBLEM_UNIT_IDS,
       }),
     ).toEqual([]);
     expect(build.placements).toHaveLength(FINAL_TAXONOMY_PROBLEM_COUNT);
@@ -66,7 +80,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
   }, 30_000);
 
   it('is byte-stable and does not use preview candidates to synthesize canonical taxonomy', async () => {
-    const { context, build } = await loaded;
+    const { context, build } = await loadBuild();
     const reversedContext = { ...context, records: [...context.records].reverse() };
     const reversedBuild = buildFinalTaxonomyFromPolicy(reversedContext);
 
@@ -86,8 +100,85 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(build.placementDigest).toBe(canonicalDigest(build.placements));
   }, 30_000);
 
+  it('binds the exact T154 metadata component and provisional integration, not only its taxonomy digest', async () => {
+    const context = await loadedContext;
+    const changedCandidates = context.provisionalEvidence.candidates.map((candidate, index) =>
+      index === 0
+        ? { ...candidate, rationale: `${candidate.rationale} Changed after T154.` }
+        : candidate,
+    );
+    const changedEvidenceWithoutDigest = {
+      ...context.provisionalEvidence,
+      candidates: changedCandidates,
+    };
+    const changedEvidence = {
+      ...changedEvidenceWithoutDigest,
+      integrationDigest: digestWithoutField(changedEvidenceWithoutDigest, 'integrationDigest'),
+    };
+    const binding = {
+      previewSnapshot: context.previewSnapshot,
+      previewSnapshotPath: context.previewReference.canonicalSnapshotPath,
+      metadataComponentPath: context.layout.provisionalMetadataComponentPath,
+      provisionalIntegrationPath: context.layout.provisionalIntegrationPath,
+    } as const;
+
+    expect(() => {
+      assertFrozenProvisionalEvidenceBoundToPreview({
+        ...binding,
+        metadataComponent: context.provisionalMetadataComponent,
+        provisionalEvidence: context.provisionalEvidence,
+      });
+    }).not.toThrow();
+
+    expect(() => {
+      assertFrozenProvisionalEvidenceBoundToPreview({
+        ...binding,
+        metadataComponent: context.provisionalMetadataComponent,
+        provisionalEvidence: changedEvidence,
+      });
+    }).toThrow(/PREVIEW_PROVISIONAL_INTEGRATION_DIGEST_MISMATCH/u);
+
+    expect(() => {
+      assertFrozenProvisionalEvidenceBoundToPreview({
+        ...binding,
+        metadataComponent: {
+          ...context.provisionalMetadataComponent,
+          integrationDigest: changedEvidence.integrationDigest,
+        },
+        provisionalEvidence: changedEvidence,
+      });
+    }).toThrow(/PREVIEW_METADATA_COMPONENT_DIGEST_MISMATCH/u);
+  }, 30_000);
+
+  it('rejects a changed T154 metadata component through the source-context loader', async () => {
+    const layout = defaultFinalTaxonomyBuildLayout();
+    const temporaryRoot = await mkdtemp(
+      path.join(layout.repositoryRoot, '.final-taxonomy-metadata-test-'),
+    );
+    try {
+      const sourcePath = path.join(layout.repositoryRoot, layout.provisionalMetadataComponentPath);
+      const metadata = JSON.parse(await readFile(sourcePath, 'utf8')) as Record<string, unknown>;
+      const changedMetadataPath = path.join(temporaryRoot, 'metadata-inventory-taxonomy.json');
+      await writeFile(
+        changedMetadataPath,
+        `${JSON.stringify({ ...metadata, proposalDigest: '0'.repeat(64) }, null, 2)}\n`,
+        'utf8',
+      );
+      const changedMetadataRelativePath = path.relative(layout.repositoryRoot, changedMetadataPath);
+
+      await expect(
+        loadFinalTaxonomySourceContext({
+          ...layout,
+          provisionalMetadataComponentPath: changedMetadataRelativePath,
+        }),
+      ).rejects.toThrow(/PREVIEW_METADATA_COMPONENT_DIGEST_MISMATCH/u);
+    } finally {
+      await rm(temporaryRoot, { recursive: true, force: true });
+    }
+  }, 30_000);
+
   it('preserves decision audit data, ad-hoc insights, reuse gates, and parent-before-child order', async () => {
-    const { context, build } = await loaded;
+    const { context, build } = await loadBuild();
     const recordsById = new Map(context.records.map((record) => [record.problemId, record]));
     const placementByProblemId = new Map(
       build.placements.map((placement) => [placement.problemId, placement]),
@@ -97,6 +188,19 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         candidate.kind === 'tag' && candidate.entity.parentId === null ? [candidate.entity.id] : [],
       ),
     );
+    const parentTagIdByTagId = new Map(
+      build.finalCandidates.flatMap((candidate) =>
+        candidate.kind === 'tag' ? [[candidate.entity.id, candidate.entity.parentId] as const] : [],
+      ),
+    );
+    const isSameOrDescendantTag = (tagId: string, ancestorTagId: string): boolean => {
+      let currentTagId: string | null = tagId;
+      while (currentTagId !== null) {
+        if (currentTagId === ancestorTagId) return true;
+        currentTagId = parentTagIdByTagId.get(currentTagId) ?? null;
+      }
+      return false;
+    };
     for (const placement of build.placements) {
       expect(placement.primaryTagIds.some((id) => rootTagIds.has(id))).toBe(false);
       expect(placement.primaryTagIds.some((id) => NON_PRIMARY_TAG_IDS.includes(id))).toBe(false);
@@ -131,7 +235,11 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         );
         expect(assigned.length).toBeGreaterThanOrEqual(2);
         for (const problemId of candidate.entity.representativeProblemIds) {
-          expect(placementByProblemId.get(problemId)?.primaryTagIds).toContain(candidate.entity.id);
+          expect(
+            placementByProblemId
+              .get(problemId)
+              ?.primaryTagIds.some((tagId) => isSameOrDescendantTag(tagId, candidate.entity.id)),
+          ).toBe(true);
         }
       } else if (candidate.kind === 'outcome') {
         expect(candidate.materializationTask).toBe('T048');
@@ -145,11 +253,18 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         if (NON_PRIMARY_OUTCOME_IDS.includes(candidate.entity.id)) {
           expect(directAssignments).toEqual([]);
           expect(candidate.evidenceRefs.length).toBeGreaterThan(0);
+        } else if (SINGLE_PROBLEM_OUTCOME_IDS.includes(candidate.entity.id)) {
+          expect(directAssignments).toHaveLength(1);
         } else {
           expect(directAssignments.length).toBeGreaterThanOrEqual(2);
         }
       } else if (candidate.kind === 'unit' && candidate.entity.kind !== 'chapter') {
-        expect(new Set(candidate.entity.problemIds).size).toBeGreaterThanOrEqual(2);
+        const problemCount = new Set(candidate.entity.problemIds).size;
+        if (SINGLE_PROBLEM_UNIT_IDS.includes(candidate.entity.id)) {
+          expect(problemCount).toBe(1);
+        } else {
+          expect(problemCount).toBeGreaterThanOrEqual(2);
+        }
         expect(candidate.entity.excludedTopics.length).toBeGreaterThan(0);
       }
     }
@@ -190,7 +305,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
   }, 30_000);
 
   it('binds review artifacts directly to the subject digest and stays on hold until acceptance', async () => {
-    const { context, build } = await loaded;
+    const { context, build } = await loadBuild();
     const verification = createFinalTaxonomyVerificationEvidence(context, build);
 
     expect(verification.taxonomySubjectDigest).toBe(build.taxonomySubjectDigest);
@@ -200,7 +315,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
   }, 30_000);
 
   it('rejects unknown references, cycles, order drift, unclassified Problems, and incomplete impacts', async () => {
-    const { build } = await loaded;
+    const { build } = await loadBuild();
 
     const unknownReference = structuredClone(build);
     const firstPlacement = unknownReference.placements[0];

@@ -10,13 +10,16 @@ import { canonicalDigest, digestWithoutField } from '../../src/lib/domain/canoni
 import { FinalTaxonomyBuildSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import type { FinalTaxonomyCandidateSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { ContentWorkManifestSchema } from '../../src/lib/domain/schema-parts/review-evidence.js';
+import { calculateContentWorkManifestScopeDigest } from '../../src/lib/validation/content-work-manifest.js';
 import {
   FINAL_TAXONOMY_PROBLEM_COUNT,
+  FINAL_TAXONOMY_INTEGRATION_PATH,
   FINAL_TAXONOMY_PROPOSED_BUILD_PATH,
   FINAL_TAXONOMY_REVIEW_CHECKS,
   FINAL_TAXONOMY_REVIEW_CHECK_RESULTS_PATH,
   FINAL_TAXONOMY_REVIEW_EVIDENCE_PATH,
   FINAL_TAXONOMY_WORK_MANIFEST_PATH,
+  resolveFinalTaxonomyReviewCheckInvocation,
   reviewFinalTaxonomy,
   validateFinalTaxonomyReviewCheckResults,
   type FinalTaxonomyCheckRunner,
@@ -461,13 +464,29 @@ const createBuild = (
 const createRepository = async () => {
   const repositoryRoot = await mkdtemp(path.join(os.tmpdir(), 'final-taxonomy-review-'));
   temporaryRoots.push(repositoryRoot);
-  const manifest = ContentWorkManifestSchema.parse(
+  const sourceManifest = ContentWorkManifestSchema.parse(
     JSON.parse(await readFile(manifestSourcePath, 'utf8')),
   );
+  const manifestWithUpdatedChecks = {
+    ...sourceManifest,
+    reviewUnits: sourceManifest.reviewUnits.map((unit) => ({
+      ...unit,
+      checkIds: FINAL_TAXONOMY_REVIEW_CHECKS.map(({ checkId }) => checkId),
+    })),
+  };
+  const manifestWithoutDigest = {
+    ...manifestWithUpdatedChecks,
+    scopeDigest: calculateContentWorkManifestScopeDigest(manifestWithUpdatedChecks),
+  };
+  const manifest = ContentWorkManifestSchema.parse({
+    ...manifestWithoutDigest,
+    digest: digestWithoutField(manifestWithoutDigest, 'digest'),
+  });
   const build = FinalTaxonomyBuildSchema.parse(createBuild(manifest));
   await Promise.all([
     writeJson(repositoryRoot, FINAL_TAXONOMY_WORK_MANIFEST_PATH, manifest),
     writeJson(repositoryRoot, FINAL_TAXONOMY_PROPOSED_BUILD_PATH, build),
+    writeJson(repositoryRoot, FINAL_TAXONOMY_INTEGRATION_PATH, build.integrationMap),
   ]);
   return { repositoryRoot, manifest, build };
 };
@@ -479,7 +498,41 @@ const passingRunner = (): FinalTaxonomyCheckRunner => (check) =>
     stderr: '',
   });
 
+const matchingGeneratedSubject = (build: z.infer<typeof FinalTaxonomyBuildSchema>) => () =>
+  Promise.resolve(build.taxonomySubjectDigest);
+
+const changedIntegrationMap = (
+  integration: z.infer<typeof FinalTaxonomyBuildSchema>['integrationMap'],
+) => {
+  const [firstEntry, ...remainingEntries] = integration.entries;
+  if (firstEntry === undefined) throw new Error('Expected an integration entry.');
+  const withoutDigests = {
+    ...integration,
+    entries: [
+      { ...firstEntry, rationale: `${firstEntry.rationale} Changed independently.` },
+      ...remainingEntries,
+    ],
+    integrationSubjectDigest: '0'.repeat(64),
+    integrationDigest: '0'.repeat(64),
+  };
+  const withSubjectDigest = {
+    ...withoutDigests,
+    integrationSubjectDigest: canonicalDigest(integrationSubject(withoutDigests)),
+  };
+  return {
+    ...withSubjectDigest,
+    integrationDigest: digestWithoutField(withSubjectDigest, 'integrationDigest'),
+  };
+};
+
 describe('T159 explicit third-party taxonomy review', () => {
+  it('keeps each trusted command declaration identical to its spawn invocation', () => {
+    for (const check of FINAL_TAXONOMY_REVIEW_CHECKS) {
+      const invocation = resolveFinalTaxonomyReviewCheckInvocation(check);
+      expect([invocation.executable, ...invocation.args].join(' ')).toBe(check.command);
+    }
+  });
+
   it('requires explicit approval, a supplied person ID, and exactly one nonempty basis source', async () => {
     expect(() =>
       parseFinalTaxonomyReviewArguments([
@@ -533,7 +586,7 @@ describe('T159 explicit third-party taxonomy review', () => {
     expect(runCheck).not.toHaveBeenCalled();
   });
 
-  it('binds the manifest-declared Outcome set, both manifest paths, the proposed subject, and four exact checks', async () => {
+  it('binds the manifest-declared Outcome set, both manifest paths, the proposed subject, and the exact trusted checks', async () => {
     const { repositoryRoot, manifest, build } = await createRepository();
     const runCheck = vi.fn(passingRunner());
     const input = {
@@ -543,6 +596,7 @@ describe('T159 explicit third-party taxonomy review', () => {
       reviewBasis:
         'Compared every promote/merge/split/retire decision, placement, DAG, order, and correction surface with the frozen source-backed inventory.',
       runCheck,
+      loadGeneratedSubject: matchingGeneratedSubject(build),
       now: () => reviewedAt,
     } as const;
 
@@ -566,6 +620,15 @@ describe('T159 explicit third-party taxonomy review', () => {
     expect(
       first.evidence.applicableChecks.map(({ checkId, command }) => ({ checkId, command })),
     ).toEqual(FINAL_TAXONOMY_REVIEW_CHECKS);
+    expect(
+      FINAL_TAXONOMY_REVIEW_CHECKS.find(({ checkId }) => checkId === 'check-corpus-final-taxonomy')
+        ?.command,
+    ).toContain('tests/unit/final-taxonomy-policy.test.ts');
+    expect(
+      FINAL_TAXONOMY_REVIEW_CHECKS.find(
+        ({ checkId }) => checkId === 'check-current-final-taxonomy-output',
+      )?.command,
+    ).toBe('npm run corpus:final-taxonomy');
     expect(first.evidence.reviewItems[0]?.reviewItemId).toBe(
       'human-review-item-ru-t159-final-taxonomy',
     );
@@ -583,8 +646,8 @@ describe('T159 explicit third-party taxonomy review', () => {
         taxonomySubjectDigest: build.taxonomySubjectDigest,
         reviewerId: 'person-independent-reviewer',
       }).results,
-    ).toHaveLength(4);
-    expect(runCheck).toHaveBeenCalledTimes(4);
+    ).toHaveLength(FINAL_TAXONOMY_REVIEW_CHECKS.length);
+    expect(runCheck).toHaveBeenCalledTimes(FINAL_TAXONOMY_REVIEW_CHECKS.length);
     const evidenceBytes = await readFile(
       path.join(repositoryRoot, FINAL_TAXONOMY_REVIEW_EVIDENCE_PATH),
       'utf8',
@@ -592,7 +655,7 @@ describe('T159 explicit third-party taxonomy review', () => {
 
     const second = await reviewFinalTaxonomy(input);
     expect(second.written).toBe(false);
-    expect(runCheck).toHaveBeenCalledTimes(4);
+    expect(runCheck).toHaveBeenCalledTimes(FINAL_TAXONOMY_REVIEW_CHECKS.length);
     expect(
       await readFile(path.join(repositoryRoot, FINAL_TAXONOMY_REVIEW_EVIDENCE_PATH), 'utf8'),
     ).toBe(evidenceBytes);
@@ -606,6 +669,7 @@ describe('T159 explicit third-party taxonomy review', () => {
       approve: true,
       reviewBasis: 'Reviewed the proposed taxonomy.',
       runCheck: passingRunner(),
+      loadGeneratedSubject: matchingGeneratedSubject(build),
       now: () => reviewedAt,
     } as const;
     await reviewFinalTaxonomy(input);
@@ -619,6 +683,136 @@ describe('T159 explicit third-party taxonomy review', () => {
     await expect(reviewFinalTaxonomy(input)).rejects.toThrow(
       /FINAL_TAXONOMY_REVIEW_CHECK_RESULTS_STALE/u,
     );
+  });
+
+  it('rejects a saved proposal that is not the current generated taxonomy subject', async () => {
+    const { repositoryRoot } = await createRepository();
+    const runCheck = vi.fn(passingRunner());
+
+    await expect(
+      reviewFinalTaxonomy({
+        repositoryRoot,
+        reviewerId: 'person-independent-reviewer',
+        approve: true,
+        reviewBasis: 'Reviewed the proposed taxonomy.',
+        runCheck,
+        loadGeneratedSubject: () => Promise.resolve('f'.repeat(64)),
+        now: () => reviewedAt,
+      }),
+    ).rejects.toThrow(/FINAL_TAXONOMY_REVIEW_GENERATED_SUBJECT_MISMATCH/u);
+    expect(runCheck).not.toHaveBeenCalled();
+    await expect(
+      access(path.join(repositoryRoot, FINAL_TAXONOMY_REVIEW_CHECK_RESULTS_PATH)),
+    ).rejects.toThrow();
+    await expect(
+      access(path.join(repositoryRoot, FINAL_TAXONOMY_REVIEW_EVIDENCE_PATH)),
+    ).rejects.toThrow();
+  });
+
+  it('uses the current-source generator by default instead of trusting the saved proposal', async () => {
+    const { repositoryRoot } = await createRepository();
+    const runCheck = vi.fn(passingRunner());
+
+    await expect(
+      reviewFinalTaxonomy({
+        repositoryRoot,
+        reviewerId: 'person-independent-reviewer',
+        approve: true,
+        reviewBasis: 'Reviewed the proposed taxonomy.',
+        runCheck,
+        now: () => reviewedAt,
+      }),
+    ).rejects.toThrow(/FINAL_TAXONOMY_INPUT_MISSING/u);
+    expect(runCheck).not.toHaveBeenCalled();
+    await expect(
+      access(path.join(repositoryRoot, FINAL_TAXONOMY_REVIEW_EVIDENCE_PATH)),
+    ).rejects.toThrow();
+  });
+
+  it('rebuilds the current subject after all checks before writing review evidence', async () => {
+    const { repositoryRoot, build } = await createRepository();
+    const loadGeneratedSubject = vi
+      .fn<() => Promise<string>>()
+      .mockResolvedValueOnce(build.taxonomySubjectDigest)
+      .mockResolvedValue('f'.repeat(64));
+    const runCheck = vi.fn(passingRunner());
+
+    await expect(
+      reviewFinalTaxonomy({
+        repositoryRoot,
+        reviewerId: 'person-independent-reviewer',
+        approve: true,
+        reviewBasis: 'Reviewed the proposed taxonomy.',
+        runCheck,
+        loadGeneratedSubject,
+        now: () => reviewedAt,
+      }),
+    ).rejects.toThrow(/FINAL_TAXONOMY_REVIEW_GENERATED_SUBJECT_MISMATCH/u);
+    expect(loadGeneratedSubject).toHaveBeenCalledTimes(2);
+    expect(runCheck).toHaveBeenCalledTimes(FINAL_TAXONOMY_REVIEW_CHECKS.length);
+    await expect(
+      access(path.join(repositoryRoot, FINAL_TAXONOMY_REVIEW_CHECK_RESULTS_PATH)),
+    ).rejects.toThrow();
+    await expect(
+      access(path.join(repositoryRoot, FINAL_TAXONOMY_REVIEW_EVIDENCE_PATH)),
+    ).rejects.toThrow();
+  });
+
+  it('requires the external integration artifact to equal the proposal projection', async () => {
+    const { repositoryRoot, build } = await createRepository();
+    const runCheck = vi.fn(passingRunner());
+    await writeJson(
+      repositoryRoot,
+      FINAL_TAXONOMY_INTEGRATION_PATH,
+      changedIntegrationMap(build.integrationMap),
+    );
+
+    await expect(
+      reviewFinalTaxonomy({
+        repositoryRoot,
+        reviewerId: 'person-independent-reviewer',
+        approve: true,
+        reviewBasis: 'Reviewed the proposed taxonomy.',
+        runCheck,
+        loadGeneratedSubject: matchingGeneratedSubject(build),
+        now: () => reviewedAt,
+      }),
+    ).rejects.toThrow(/FINAL_TAXONOMY_REVIEW_INTEGRATION_MISMATCH/u);
+    expect(runCheck).not.toHaveBeenCalled();
+  });
+
+  it('rechecks the external integration artifact after all trusted checks', async () => {
+    const { repositoryRoot, build } = await createRepository();
+    let invocation = 0;
+    const runCheck: FinalTaxonomyCheckRunner = async (check) => {
+      invocation += 1;
+      if (invocation === FINAL_TAXONOMY_REVIEW_CHECKS.length) {
+        await writeJson(
+          repositoryRoot,
+          FINAL_TAXONOMY_INTEGRATION_PATH,
+          changedIntegrationMap(build.integrationMap),
+        );
+      }
+      return { exitCode: 0, stdout: check.checkId, stderr: '' };
+    };
+
+    await expect(
+      reviewFinalTaxonomy({
+        repositoryRoot,
+        reviewerId: 'person-independent-reviewer',
+        approve: true,
+        reviewBasis: 'Reviewed the proposed taxonomy.',
+        runCheck,
+        loadGeneratedSubject: matchingGeneratedSubject(build),
+        now: () => reviewedAt,
+      }),
+    ).rejects.toThrow(/FINAL_TAXONOMY_REVIEW_INTEGRATION_MISMATCH/u);
+    await expect(
+      access(path.join(repositoryRoot, FINAL_TAXONOMY_REVIEW_CHECK_RESULTS_PATH)),
+    ).rejects.toThrow();
+    await expect(
+      access(path.join(repositoryRoot, FINAL_TAXONOMY_REVIEW_EVIDENCE_PATH)),
+    ).rejects.toThrow();
   });
 
   it('rechecks the immutable proposal after commands and withholds evidence on drift or failure', async () => {
@@ -645,6 +839,7 @@ describe('T159 explicit third-party taxonomy review', () => {
         approve: true,
         reviewBasis: 'Reviewed the proposed taxonomy.',
         runCheck: mutatingRunner,
+        loadGeneratedSubject: matchingGeneratedSubject(build),
         now: () => reviewedAt,
       }),
     ).rejects.toThrow();
@@ -660,6 +855,7 @@ describe('T159 explicit third-party taxonomy review', () => {
         approve: true,
         reviewBasis: 'Reviewed the proposed taxonomy.',
         runCheck: () => Promise.resolve({ exitCode: 1, stdout: '', stderr: 'failure' }),
+        loadGeneratedSubject: matchingGeneratedSubject(second.build),
         now: () => reviewedAt,
       }),
     ).rejects.toThrow(/FINAL_TAXONOMY_REVIEW_CHECK_FAILED/u);
@@ -669,7 +865,7 @@ describe('T159 explicit third-party taxonomy review', () => {
   });
 
   it('writes no partial aggregate, so a failed reviewer does not block a later reviewer', async () => {
-    const { repositoryRoot } = await createRepository();
+    const { repositoryRoot, build } = await createRepository();
     let firstReviewerInvocation = 0;
     await expect(
       reviewFinalTaxonomy({
@@ -685,6 +881,7 @@ describe('T159 explicit third-party taxonomy review', () => {
             stderr: firstReviewerInvocation === 2 ? 'failed' : '',
           });
         },
+        loadGeneratedSubject: matchingGeneratedSubject(build),
         now: () => reviewedAt,
       }),
     ).rejects.toThrow(/FINAL_TAXONOMY_REVIEW_CHECK_FAILED/u);
@@ -698,6 +895,7 @@ describe('T159 explicit third-party taxonomy review', () => {
       approve: true,
       reviewBasis: 'Second independent review completed from the frozen subject.',
       runCheck: passingRunner(),
+      loadGeneratedSubject: matchingGeneratedSubject(build),
       now: () => reviewedAt,
     });
     expect(second.written).toBe(true);

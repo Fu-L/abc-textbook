@@ -18,9 +18,11 @@ const previewManifestPath = 'staging/previews/initial-v1/preview-manifest.json';
 const authoringSkillManifestPath =
   'docs/verification/authoring-skill/initial-v1/skill-manifest.json';
 
+export const FROZEN_PREVIEW_METADATA_COMPONENT_PATH =
+  'docs/verification/previews/initial-v1/components/metadata-inventory-taxonomy.json';
+
 const componentPaths = {
-  'metadata-inventory-taxonomy':
-    'docs/verification/previews/initial-v1/components/metadata-inventory-taxonomy.json',
+  'metadata-inventory-taxonomy': FROZEN_PREVIEW_METADATA_COMPONENT_PATH,
   'content-graph-search':
     'docs/verification/previews/initial-v1/components/content/graph-search.json',
   'content-dynamic-programming':
@@ -82,7 +84,7 @@ const structuredComponentSchema = z.strictObject({
   componentDigest: digest,
 });
 
-const metadataComponentSchema = z.strictObject({
+export const FrozenPreviewMetadataComponentSchema = z.strictObject({
   componentId: z.literal('metadata-inventory-taxonomy'),
   previewId: nonEmptyString,
   manifestDigest: digest,
@@ -510,7 +512,7 @@ export const buildFrozenPreviewSnapshot = async (
   )?.load;
   const parsedMetadata =
     metadataLoad?.state === 'loaded'
-      ? metadataComponentSchema.safeParse(metadataLoad.value)
+      ? FrozenPreviewMetadataComponentSchema.safeParse(metadataLoad.value)
       : { success: false as const };
   let provisionalTaxonomyDigest = '0'.repeat(64);
   if (!metadataLoad || metadataLoad.state === 'missing') {

@@ -2098,7 +2098,7 @@ export const FinalTaxonomyBuildSchema = strictObject({
     const unit = candidate.entity;
     if (
       !sameFinalTaxonomySet(unit.sourceRevisionIds, candidate.sourceRevisionIds) ||
-      (unit.kind !== 'chapter' && unit.problemIds.length < 2) ||
+      (unit.kind !== 'chapter' && unit.problemIds.length < 1) ||
       (unit.parentId !== null && !unitIdSet.has(unit.parentId)) ||
       unit.additionalPrerequisiteUnitIds.some((id) => !unitIdSet.has(id)) ||
       unit.tagIds.some((id) => !tagIdSet.has(id)) ||

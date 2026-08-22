@@ -30,6 +30,10 @@ import {
   type PreviewSnapshot,
 } from '../preview/preview-snapshot.js';
 import type { PreviewSnapshotReference } from '../preview/preview-snapshot-repository.js';
+import {
+  FROZEN_PREVIEW_METADATA_COMPONENT_PATH,
+  FrozenPreviewMetadataComponentSchema,
+} from '../preview/frozen-preview-join.js';
 import { validateContentWorkManifest } from '../validation/content-work-manifest.js';
 import {
   validateHumanContentReview,
@@ -46,6 +50,8 @@ import {
   FINAL_LEARNING_UNIT_ORDER_POLICY,
   FINAL_TAXONOMY_CLAIM_DECISIONS,
   FINAL_TAXONOMY_OUTCOMES,
+  SINGLE_PROBLEM_OUTCOME_IDS,
+  SINGLE_PROBLEM_UNIT_IDS,
   FINAL_TAXONOMY_TAGS,
   NON_PRIMARY_OUTCOME_IDS,
   NON_PRIMARY_TAG_IDS,
@@ -81,6 +87,7 @@ export interface FinalTaxonomyBuildLayout {
   readonly inventoryEvidencePath: string;
   readonly authoringEvidencePath: string;
   readonly previewReferenceRoot: string;
+  readonly provisionalMetadataComponentPath: string;
   readonly provisionalIntegrationPath: string;
   readonly workManifestPath: string;
   readonly reviewCheckResultsPath: string;
@@ -95,6 +102,7 @@ export const defaultFinalTaxonomyBuildLayout = (
   inventoryEvidencePath: 'docs/verification/bootstrap/technique-inventory.json',
   authoringEvidencePath: 'docs/verification/bootstrap/technique-inventory-authoring.json',
   previewReferenceRoot: 'docs/verification/previews/initial-v1/preview-join',
+  provisionalMetadataComponentPath: FROZEN_PREVIEW_METADATA_COMPONENT_PATH,
   provisionalIntegrationPath: 'docs/verification/previews/initial-v1/taxonomy-integration.json',
   workManifestPath: 'docs/work-manifests/initial/us2/final-taxonomy/manifest.json',
   reviewCheckResultsPath: FINAL_TAXONOMY_REVIEW_CHECK_RESULTS_PATH,
@@ -112,6 +120,7 @@ export type PreMaterializationCorrectionImpact = z.infer<
 export type TaxonomyIntegrationMap = z.infer<typeof TaxonomyIntegrationMapSchema>;
 export type TaxonomyIntegrationEntry = TaxonomyIntegrationMap['entries'][number];
 export type FrozenProvisionalTaxonomyEvidence = TaxonomyIntegrationMap['provisionalEvidence'];
+export type FrozenPreviewMetadataComponent = z.infer<typeof FrozenPreviewMetadataComponentSchema>;
 export type ProblemAnalysisClaimRef = z.infer<typeof ProblemAnalysisClaimRefSchema>;
 export type ReviewEvidenceReference = z.infer<typeof ReviewEvidenceReferenceSchema>;
 type ContentWorkManifest = z.infer<typeof ContentWorkManifestSchema>;
@@ -125,6 +134,7 @@ export interface LoadedFinalTaxonomySourceContext {
   readonly previewReference: PreviewSnapshotReference;
   readonly previewSnapshot: PreviewSnapshot;
   readonly previewTransaction: Readonly<Record<string, unknown>>;
+  readonly provisionalMetadataComponent: FrozenPreviewMetadataComponent;
   readonly provisionalEvidence: FrozenProvisionalTaxonomyEvidence;
   readonly records: readonly ProblemAnalysisRecord[];
   readonly knownSourceRevisionIds: readonly string[];
@@ -454,6 +464,47 @@ export const parseFrozenProvisionalTaxonomyEvidence = (
   return parsed.data;
 };
 
+export const assertFrozenProvisionalEvidenceBoundToPreview = (input: {
+  readonly previewSnapshot: PreviewSnapshot;
+  readonly metadataComponent: FrozenPreviewMetadataComponent;
+  readonly provisionalEvidence: FrozenProvisionalTaxonomyEvidence;
+  readonly previewSnapshotPath: string;
+  readonly metadataComponentPath: string;
+  readonly provisionalIntegrationPath: string;
+}): void => {
+  if (input.metadataComponent.status !== 'passed') {
+    throw new FinalTaxonomyBuildError(
+      'PREVIEW_METADATA_COMPONENT_NOT_PASSED',
+      'The T154 metadata, inventory, and provisional-taxonomy component must be passed.',
+      input.metadataComponentPath,
+    );
+  }
+  if (!input.previewSnapshot.componentDigests.includes(canonicalDigest(input.metadataComponent))) {
+    throw new FinalTaxonomyBuildError(
+      'PREVIEW_METADATA_COMPONENT_DIGEST_MISMATCH',
+      'The passed T154 snapshot does not bind the current metadata component.',
+      input.metadataComponentPath,
+    );
+  }
+  if (input.metadataComponent.integrationDigest !== input.provisionalEvidence.integrationDigest) {
+    throw new FinalTaxonomyBuildError(
+      'PREVIEW_PROVISIONAL_INTEGRATION_DIGEST_MISMATCH',
+      'The final-taxonomy integration input differs from the integration frozen by T154.',
+      input.provisionalIntegrationPath,
+    );
+  }
+  if (
+    input.metadataComponent.taxonomyDigest !== input.provisionalEvidence.taxonomyDigest ||
+    input.previewSnapshot.provisionalTaxonomyDigest !== input.provisionalEvidence.taxonomyDigest
+  ) {
+    throw new FinalTaxonomyBuildError(
+      'PREVIEW_PROVISIONAL_TAXONOMY_DIGEST_MISMATCH',
+      'The passed T154 snapshot, metadata component, and provisional integration disagree.',
+      input.previewSnapshotPath,
+    );
+  }
+};
+
 const assertAcceptedEvidenceMatchesCorpus = (
   acceptedInventory: TechniqueInventoryEvidence,
   acceptedAuthoring: TechniqueInventoryAuthoringEvidence,
@@ -519,6 +570,7 @@ export const loadFinalTaxonomySourceContext = async (
   const [
     inventoryValue,
     authoringValue,
+    provisionalMetadataComponentValue,
     provisionalValue,
     workManifest,
     reviewCheckResults,
@@ -526,6 +578,7 @@ export const loadFinalTaxonomySourceContext = async (
   ] = await Promise.all([
     readRepositoryJson(layout.repositoryRoot, layout.inventoryEvidencePath),
     readRepositoryJson(layout.repositoryRoot, layout.authoringEvidencePath),
+    readRepositoryJson(layout.repositoryRoot, layout.provisionalMetadataComponentPath),
     readRepositoryJson(layout.repositoryRoot, layout.provisionalIntegrationPath),
     readRepositoryJson(layout.repositoryRoot, layout.workManifestPath),
     readOptionalRepositoryJson(layout.repositoryRoot, layout.reviewCheckResultsPath),
@@ -584,6 +637,16 @@ export const loadFinalTaxonomySourceContext = async (
     provisionalValue,
     layout.provisionalIntegrationPath,
   );
+  const parsedMetadataComponent = FrozenPreviewMetadataComponentSchema.safeParse(
+    provisionalMetadataComponentValue,
+  );
+  if (!parsedMetadataComponent.success) {
+    throw new FinalTaxonomyBuildError(
+      'PREVIEW_METADATA_COMPONENT_INVALID',
+      parsedMetadataComponent.error.message,
+      layout.provisionalMetadataComponentPath,
+    );
+  }
   const parsedWorkManifest = ContentWorkManifestSchema.safeParse(workManifest);
   if (!parsedWorkManifest.success) {
     throw new FinalTaxonomyBuildError(
@@ -601,16 +664,21 @@ export const loadFinalTaxonomySourceContext = async (
       layout.workManifestPath,
     );
   }
-  if (
-    previewSnapshot.provisionalTaxonomyDigest !== provisionalEvidence.taxonomyDigest ||
-    previewSnapshot.holdReasons.length !== 0
-  ) {
+  if (previewSnapshot.holdReasons.length !== 0) {
     throw new FinalTaxonomyBuildError(
       'PREVIEW_EVIDENCE_CHAIN_MISMATCH',
-      'The passed T154 snapshot does not bind the frozen provisional taxonomy.',
+      'The passed T154 snapshot retains hold reasons.',
       previewReference.canonicalSnapshotPath,
     );
   }
+  assertFrozenProvisionalEvidenceBoundToPreview({
+    previewSnapshot,
+    metadataComponent: parsedMetadataComponent.data,
+    provisionalEvidence,
+    previewSnapshotPath: previewReference.canonicalSnapshotPath,
+    metadataComponentPath: layout.provisionalMetadataComponentPath,
+    provisionalIntegrationPath: layout.provisionalIntegrationPath,
+  });
   const knownSourceRevisionIds = sortedUnique(corpus.sources.map(({ entity }) => entity.id));
   const referencedSourceRevisionIds = sortedUnique(
     records.flatMap(({ sourceRevisionIds }) => sourceRevisionIds),
@@ -633,6 +701,7 @@ export const loadFinalTaxonomySourceContext = async (
     previewReference,
     previewSnapshot,
     previewTransaction,
+    provisionalMetadataComponent: parsedMetadataComponent.data,
     provisionalEvidence,
     records,
     knownSourceRevisionIds,
@@ -665,11 +734,16 @@ export interface FinalTaxonomyAssemblyInput {
   /** Policy concepts that are useful as supporting labels but too broad to own a Problem shard. */
   readonly nonPrimaryTagIds?: readonly string[];
   readonly nonPrimaryOutcomeIds?: readonly string[];
+  /** Reviewed skills kept as observable boundaries despite one current corpus observation. */
+  readonly singleProblemOutcomeIds?: readonly string[];
+  readonly singleProblemUnitIds?: readonly string[];
 }
 
 export interface FinalTaxonomySemanticGates {
   readonly nonPrimaryTagIds?: readonly string[];
   readonly nonPrimaryOutcomeIds?: readonly string[];
+  readonly singleProblemOutcomeIds?: readonly string[];
+  readonly singleProblemUnitIds?: readonly string[];
 }
 
 export interface FinalTaxonomyDiagnostic {
@@ -1286,6 +1360,12 @@ export const assembleFinalTaxonomyBuild = (
     ...(input.nonPrimaryOutcomeIds === undefined
       ? {}
       : { nonPrimaryOutcomeIds: input.nonPrimaryOutcomeIds }),
+    ...(input.singleProblemOutcomeIds === undefined
+      ? {}
+      : { singleProblemOutcomeIds: input.singleProblemOutcomeIds }),
+    ...(input.singleProblemUnitIds === undefined
+      ? {}
+      : { singleProblemUnitIds: input.singleProblemUnitIds }),
   });
   return build;
 };
@@ -2143,6 +2223,8 @@ export const finalTaxonomyPolicyRulesDigest = (): string =>
     previewDecisions: PREVIEW_FINAL_TAXONOMY_DECISIONS,
     nonPrimaryTagIds: NON_PRIMARY_TAG_IDS,
     nonPrimaryOutcomeIds: NON_PRIMARY_OUTCOME_IDS,
+    singleProblemOutcomeIds: SINGLE_PROBLEM_OUTCOME_IDS,
+    singleProblemUnitIds: SINGLE_PROBLEM_UNIT_IDS,
   });
 
 /** Build the deterministic full-corpus proposal strictly from policy + accepted Inventory. */
@@ -2216,6 +2298,8 @@ export const buildFinalTaxonomyFromPolicy = (
     correctionImpacts: impacts,
     nonPrimaryTagIds: NON_PRIMARY_TAG_IDS,
     nonPrimaryOutcomeIds: NON_PRIMARY_OUTCOME_IDS,
+    singleProblemOutcomeIds: SINGLE_PROBLEM_OUTCOME_IDS,
+    singleProblemUnitIds: SINGLE_PROBLEM_UNIT_IDS,
   });
 };
 
@@ -2592,6 +2676,8 @@ export const validateFinalTaxonomyBuildAgainstContext = (
   );
   const nonPrimaryTagIds = new Set([...(gates.nonPrimaryTagIds ?? []), ...rootTagIds]);
   const genericOutcomeIds = new Set(gates.nonPrimaryOutcomeIds ?? []);
+  const singleProblemOutcomeIds = new Set(gates.singleProblemOutcomeIds ?? []);
+  const singleProblemUnitIds = new Set(gates.singleProblemUnitIds ?? []);
   const tagById = new Map(tagCandidates.map(({ entity }) => [entity.id, entity]));
   const outcomeById = new Map(outcomeCandidates.map(({ entity }) => [entity.id, entity]));
   const tagHasAncestor = (tagId: string, ancestorId: string): boolean => {
@@ -2727,19 +2813,38 @@ export const validateFinalTaxonomyBuildAgainstContext = (
     const supportingProblemCount = build.placements.filter((placement) =>
       placementUsesCandidate(placement, 'outcome', outcome.id),
     ).length;
-    if (supportingProblemCount < 2) {
+    const minimumSupport = singleProblemOutcomeIds.has(outcome.id) ? 1 : 2;
+    if (supportingProblemCount < minimumSupport) {
       add(
         'OUTCOME_REUSE_SUPPORT_INSUFFICIENT',
-        `${outcome.id} has fewer than two semantically classified Problems.`,
+        `${outcome.id} has fewer than ${String(minimumSupport)} semantically classified Problems.`,
+        outcome.id,
+      );
+    } else if (singleProblemOutcomeIds.has(outcome.id) && supportingProblemCount !== 1) {
+      add(
+        'SINGLE_PROBLEM_OUTCOME_EXCEPTION_STALE',
+        `${outcome.id} no longer has exactly one semantically classified Problem.`,
         outcome.id,
       );
     }
   }
   for (const { entity: unit } of unitCandidates) {
-    if (unit.kind !== 'chapter' && new Set(unit.problemIds).size < 2) {
+    const supportingProblemCount = new Set(unit.problemIds).size;
+    const minimumSupport = singleProblemUnitIds.has(unit.id) ? 1 : 2;
+    if (unit.kind !== 'chapter' && supportingProblemCount < minimumSupport) {
       add(
         'LEARNING_UNIT_REUSE_SUPPORT_INSUFFICIENT',
-        `${unit.id} has fewer than two Problems.`,
+        `${unit.id} has fewer than ${String(minimumSupport)} Problems.`,
+        unit.id,
+      );
+    } else if (
+      unit.kind !== 'chapter' &&
+      singleProblemUnitIds.has(unit.id) &&
+      supportingProblemCount !== 1
+    ) {
+      add(
+        'SINGLE_PROBLEM_UNIT_EXCEPTION_STALE',
+        `${unit.id} no longer has exactly one Problem.`,
         unit.id,
       );
     }
@@ -3029,6 +3134,8 @@ export const createFinalTaxonomyVerificationEvidence = (
   const diagnostics = validateFinalTaxonomyBuildAgainstContext(context, build, {
     nonPrimaryTagIds: NON_PRIMARY_TAG_IDS,
     nonPrimaryOutcomeIds: NON_PRIMARY_OUTCOME_IDS,
+    singleProblemOutcomeIds: SINGLE_PROBLEM_OUTCOME_IDS,
+    singleProblemUnitIds: SINGLE_PROBLEM_UNIT_IDS,
   });
   const withoutDigest = {
     schemaVersion: '1.0.0' as const,
