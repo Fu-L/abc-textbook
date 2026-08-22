@@ -97,7 +97,7 @@ export const FINAL_TAXONOMY_BASELINE_CATEGORIES = Object.freeze({
     label: '木・重みなしグラフ・グリッドの DFS/BFS',
     specBasis: '木、重みなしグラフ、グリッドに対する深さ優先探索と幅優先探索を実装できる。',
     includedScope:
-      '訪問済み管理、親・深さ・距離・連結成分の記録、多始点化、固定した禁止頂点を避ける探索。',
+      '訪問済み管理、親・深さ・距離・連結成分の記録、木の辺数・次数の直接集計、多始点化、固定した禁止頂点を避ける探索。',
     excludedScope: 'SCC、縮約、Euler tour、次数 peeling、重み付き最短路、動的連結性、高度な木 DP。',
   },
   'modular-arithmetic': {
@@ -230,6 +230,7 @@ const BASELINE_CLAIM_CLASSIFICATIONS = [
   c('abc317-e', '/prerequisiteCandidates/0', 'tree-unweighted-grid-dfs-bfs'),
   c('abc318-e', '/prerequisiteCandidates/0', 'integer-string-array-handling'),
   c('abc319-e', '/prerequisiteCandidates/1', 'integer-string-array-handling'),
+  c('abc319-f', '/prerequisiteCandidates/1', 'tree-unweighted-grid-dfs-bfs'),
   c('abc321-e', '/prerequisiteCandidates/2', 'integer-string-array-handling'),
   c('abc324-e', '/prerequisiteCandidates/0', 'integer-string-array-handling'),
   c(
@@ -239,6 +240,7 @@ const BASELINE_CLAIM_CLASSIFICATIONS = [
     'one-dimensional-prefix-sum',
   ),
   c('abc325-f', '/prerequisiteCandidates/2', 'integer-string-array-handling'),
+  c('abc328-e', '/prerequisiteCandidates/0', 'tree-unweighted-grid-dfs-bfs'),
   c('abc329-f', '/prerequisiteCandidates/0', 'map-set-handling'),
   c('abc330-e', '/prerequisiteCandidates/1', 'integer-string-array-handling'),
   c('abc330-f', '/prerequisiteCandidates/1', 'one-dimensional-prefix-sum'),
@@ -251,6 +253,7 @@ const BASELINE_CLAIM_CLASSIFICATIONS = [
     'integer-string-array-handling',
     'one-dimensional-prefix-sum',
   ),
+  c('abc359-f', '/prerequisiteCandidates/0', 'tree-unweighted-grid-dfs-bfs'),
   c(
     'abc359-g',
     '/prerequisiteCandidates/1',
@@ -265,6 +268,8 @@ const BASELINE_CLAIM_CLASSIFICATIONS = [
   c('abc384-f', '/prerequisiteCandidates/1', 'integer-string-array-handling', 'map-set-handling'),
   c('abc385-e', '/prerequisiteCandidates/0', 'integer-string-array-handling', 'sorting'),
   c('abc387-e', '/prerequisiteCandidates/1', 'integer-string-array-handling'),
+  c('abc424-e', '/typicalTechniques/1', 'map-set-handling', 'sorting'),
+  c('abc430-f', '/typicalTechniques/0', 'integer-string-array-handling'),
   c(
     'abc433-f',
     '/typicalTechniques/2',

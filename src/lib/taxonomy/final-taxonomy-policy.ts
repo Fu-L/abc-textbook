@@ -829,7 +829,7 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-string-automata',
-    '禁止語・複数patternを有限状態へ圧縮する',
+    '禁止・要求patternを有限状態へ圧縮する',
     'unit-chapter-string',
     ['unit-dp-state-design'],
     2,
@@ -1179,7 +1179,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-string-prefix-automata':
     '接頭辞と接尾辞の一致長を状態化し、失敗時の遷移を再利用して照合を線形化する。',
   'unit-string-automata':
-    '未来の禁止語到達や複数pattern一致だけを決める接尾辞状態を作り、遷移表上のDP・行列計算へ接続する。',
+    '未来の禁止・要求pattern到達や複数pattern一致だけを決める進行段階・接尾辞状態を作り、遷移表上のDP・行列計算へ接続する。',
   'unit-suffix-automaton':
     '有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。',
   'unit-suffix-lcp-index':
@@ -2535,7 +2535,7 @@ const TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-string-automata',
     name: '有限文字列automaton・Aho–Corasick・SAM',
     definition:
-      '未来の文字追加に必要な接尾辞同値類を有限状態へ圧縮し、禁止語・複数pattern・全部分文字列を遷移グラフで扱う。',
+      '未来の文字追加に対して同じ受理・違反判定をする履歴を有限状態へ圧縮し、禁止・要求pattern・複数pattern・全部分文字列を遷移グラフで扱う。',
     parentId: 'tag-string-state-representation',
     outcomeIds: [
       'outcome-build-finite-string-automaton',
@@ -2551,10 +2551,22 @@ const TAG_SEEDS: readonly TagSeed[] = [
       '\\bsam\\b',
       'failure link',
     ],
-    object: ['文字列集合', 'pattern', '接尾辞状態', 'automaton', '部分文字列'],
-    trigger: ['一文字追加', '禁止部分文字列', '複数pattern', '全部分文字列'],
-    invariant: ['有限状態', 'failure link', 'suffix link', 'endpos', 'clone'],
-    goal: ['回避する文字列数', 'pattern出現集合', '部分文字列の遷移', '状態数を圧縮'],
+    object: ['文字列集合', 'pattern', '進行段階', '接尾辞状態', 'automaton', '部分文字列'],
+    trigger: [
+      '一文字追加',
+      '禁止・要求subsequence',
+      '禁止部分文字列',
+      '複数pattern',
+      '全部分文字列',
+    ],
+    invariant: ['未来等価', '有限状態', 'failure link', 'suffix link', 'endpos', 'clone'],
+    goal: [
+      '回避する文字列数',
+      'pattern進行',
+      'pattern出現集合',
+      '部分文字列の遷移',
+      '状態数を圧縮',
+    ],
     requireObjectForStrictRecall: true,
     priority: 96,
   },
@@ -3190,7 +3202,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-build-prefix-match-state':
     '接頭辞と接尾辞の一致長を状態にし、failure linkまたはZ値を線形時間で構成できる。',
   'outcome-build-finite-string-automaton':
-    '禁止語到達など未来の遷移を決める有限な接尾辞状態を定義し、全文字遷移を構成してDPや行列累乗に接続できる。',
+    '禁止・要求patternへの到達など未来の遷移を決める有限状態を定義し、接尾辞状態やsubsequenceの進行段階から全文字遷移を構成してDPや行列累乗に接続できる。',
   'outcome-build-multi-pattern-automaton':
     '複数patternのTrieへfailure linkと出力情報を加え、Aho–Corasick automaton上で一致状態を更新できる。',
   'outcome-build-suffix-automaton':

@@ -57,7 +57,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc221-e': 'tag-fenwick-weighted-prefix',
   'abc221-f': 'tag-tree-metric-diameter',
-  'abc221-g': 'tag-subset-bitmask-transform',
+  'abc221-g': 'tag-bitset-word-parallel',
   'abc221-h': 'tag-dp-transition-acceleration',
 
   'abc222-e': 'tag-knapsack-resource',
@@ -167,7 +167,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc242-f': 'tag-inclusion-exclusion',
   'abc242-g': 'tag-mo-offline-range',
 
-  'abc243-e': 'tag-witness-impact-localization',
+  'abc243-e': 'tag-shortest-path',
   'abc243-ex': 'tag-shortest-path',
   'abc243-f': 'tag-combinatorial-coefficients',
   'abc243-g': 'tag-dp-transition-acceleration',
@@ -228,7 +228,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc254-f': 'tag-gcd-diophantine',
   'abc254-g': 'tag-functional-graph-doubling',
 
-  'abc255-e': 'tag-symmetry-invariant-normalization',
+  'abc255-e': 'tag-contribution-reordering',
   'abc255-ex': 'tag-ordered-set-heap',
   'abc255-f': 'tag-constructive-witness',
   'abc255-g': 'tag-game-grundy-dp',
@@ -256,7 +256,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc260-e': 'tag-two-pointers-window',
   'abc260-ex': 'tag-convolution-fps',
-  'abc260-f': 'tag-contribution-reordering',
+  'abc260-f': 'tag-constructive-witness',
   'abc260-g': 'tag-prefix-difference',
 
   // Each bit becomes an independently composable unary-function monoid.
@@ -435,7 +435,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc294-f': 'tag-monotone-threshold-search',
   'abc294-g': 'tag-tree-path-decomposition',
 
-  'abc295-e': 'tag-stochastic-expectation-dp',
+  'abc295-e': 'tag-contribution-reordering',
   'abc295-ex': 'tag-subset-bitmask-transform',
   'abc295-f': 'tag-digit-automaton-dp',
   'abc295-g': 'tag-directed-condensation-toposort',

@@ -139,6 +139,19 @@ describe('final taxonomy policy', () => {
       ),
     ).toBe(true);
     expect(FINAL_TAXONOMY_TAGS.every((tag) => tag.aliases.length > 0)).toBe(true);
+    const learnerTermOwners = new Map<string, string[]>();
+    for (const tag of FINAL_TAXONOMY_TAGS) {
+      for (const term of [...tag.aliases, ...tag.formerNames]) {
+        const normalizedTerm = term.normalize('NFKC').trim().toLocaleLowerCase('en-US');
+        learnerTermOwners.set(normalizedTerm, [
+          ...(learnerTermOwners.get(normalizedTerm) ?? []),
+          tag.id,
+        ]);
+      }
+    }
+    expect(
+      [...learnerTermOwners.entries()].filter(([, tagIds]) => new Set(tagIds).size > 1),
+    ).toEqual([]);
     expect(FINAL_TAXONOMY_TAGS.every((tag) => tag.representativeProblemIds.length >= 2)).toBe(true);
     expect(new Set(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => unit.orderReason)).size).toBe(
       FINAL_LEARNING_UNIT_CANDIDATES.length,
@@ -404,6 +417,7 @@ describe('final taxonomy policy', () => {
       'abc216-h': 'tag-determinant-counting',
       'abc218-e': 'tag-spanning-tree-optimization',
       'abc221-f': 'tag-tree-metric-diameter',
+      'abc221-g': 'tag-bitset-word-parallel',
       'abc222-f': 'tag-tree-metric-diameter',
       'abc224-e': 'tag-dp-transition-acceleration',
       'abc227-f': 'tag-discrete-convex-marginal',
@@ -411,11 +425,14 @@ describe('final taxonomy policy', () => {
       'abc229-h': 'tag-game-value-dp',
       'abc234-ex': 'tag-geometry-orientation-transform',
       'abc235-e': 'tag-spanning-tree-optimization',
+      'abc243-e': 'tag-shortest-path',
       'abc247-f': 'tag-dp-state-equivalence',
       'abc246-e': 'tag-shortest-path',
       'abc252-f': 'tag-greedy-exchange-order',
       'abc253-ex': 'tag-determinant-counting',
       'abc253-f': 'tag-reverse-offline',
+      'abc255-e': 'tag-contribution-reordering',
+      'abc260-f': 'tag-constructive-witness',
       'abc261-ex': 'tag-game-value-dp',
       'abc264-g': 'tag-string-automata',
       'abc273-ex': 'tag-gcd-diophantine',
@@ -428,12 +445,16 @@ describe('final taxonomy policy', () => {
       'abc287-ex': 'tag-reachability-bfs',
       'abc288-g': 'tag-linear-algebra-xor',
       'abc294-ex': 'tag-subset-bitmask-transform',
+      'abc295-e': 'tag-contribution-reordering',
       'abc298-f': 'tag-greedy-exchange-order',
+      'abc301-f': 'tag-string-automata',
       'abc303-g': 'tag-game-value-dp',
       'abc305-g': 'tag-string-automata',
       'abc307-g': 'tag-knapsack-resource',
+      'abc309-ex': 'tag-convolution-fps',
       'abc312-e': 'tag-geometry-orientation-transform',
       'abc321-e': 'tag-tree-aggregation-reroot',
+      'abc321-f': 'tag-knapsack-resource',
       'abc323-g': 'tag-determinant-counting',
       'abc324-e': 'tag-contribution-reordering',
       'abc329-g': 'tag-tree-aggregation-reroot',
@@ -444,6 +465,7 @@ describe('final taxonomy policy', () => {
       'abc338-e': 'tag-geometry-orientation-transform',
       'abc339-f': 'tag-string-hash-equality',
       'abc344-e': 'tag-linked-list-index',
+      'abc347-f': 'tag-divide-enumerate',
       'abc349-e': 'tag-game-value-dp',
       'abc351-g': 'tag-static-top-tree',
       'abc353-e': 'tag-trie-prefix',
@@ -463,6 +485,8 @@ describe('final taxonomy policy', () => {
       'abc433-g': 'tag-string-automata',
       'abc428-e': 'tag-tree-metric-diameter',
       'abc437-e': 'tag-trie-prefix',
+      'abc442-g': 'tag-divide-enumerate',
+      'abc443-e': 'tag-grid-table-dp',
       'abc448-g': 'tag-convex-hull-trick',
       'abc453-f': 'tag-constructive-witness',
       'abc455-g': 'tag-string-hash-equality',
@@ -474,15 +498,20 @@ describe('final taxonomy policy', () => {
 
     const semanticOutcomeRegressions: Readonly<Record<string, string>> = {
       'abc212-h': 'outcome-transform-to-linear-system-or-rank',
+      'abc213-h': 'outcome-compute-convolution-or-correlation',
       'abc221-f': 'outcome-use-tree-diameter-extrema',
+      'abc221-g': 'outcome-accelerate-set-operations-with-bitsets',
       'abc222-f': 'outcome-use-tree-diameter-extrema',
       'abc224-e': 'outcome-factor-and-accelerate-transitions',
       'abc227-f': 'outcome-exploit-convexity',
       'abc228-e': 'outcome-exploit-modular-periodicity',
+      'abc243-e': 'outcome-model-and-compute-shortest-path',
       'abc246-e': 'outcome-model-and-compute-shortest-path',
       'abc272-ex': 'outcome-evaluate-and-compose-polynomials',
       'abc252-f': 'outcome-prove-greedy-order',
       'abc253-f': 'outcome-reverse-update-time',
+      'abc255-e': 'outcome-reorder-counting-contributions',
+      'abc260-f': 'outcome-recover-valid-witness',
       'abc267-f': 'outcome-use-tree-diameter-extrema',
       'abc280-f': 'outcome-maintain-potential-differences',
       'abc284-ex': 'outcome-count-orbits-by-fixed-points',
@@ -490,18 +519,25 @@ describe('final taxonomy policy', () => {
       'abc292-e': 'outcome-compute-transitive-closure',
       'abc288-g': 'outcome-factor-separable-linear-transform',
       'abc298-f': 'outcome-prove-greedy-order',
+      'abc295-e': 'outcome-reorder-counting-contributions',
+      'abc301-f': 'outcome-build-finite-string-automaton',
       'abc305-g': 'outcome-build-finite-string-automaton',
       'abc307-ex': 'outcome-compute-convolution-or-correlation',
+      'abc309-ex': 'outcome-compute-convolution-or-correlation',
       'abc314-f': 'outcome-augment-components-with-metadata',
       'abc314-ex': 'outcome-exploit-convexity',
       'abc318-ex': 'outcome-apply-formal-power-series-operations',
       'abc319-e': 'outcome-exploit-modular-periodicity',
+      'abc321-f': 'outcome-design-resource-dp',
       'abc333-g': 'outcome-approximate-rational-by-euclid',
       'abc334-e': 'outcome-reorder-counting-contributions',
+      'abc347-f': 'outcome-split-enumeration-space',
       'abc351-g': 'outcome-compose-dynamic-tree-clusters',
       'abc361-e': 'outcome-reorder-counting-contributions',
       'abc408-g': 'outcome-approximate-rational-by-euclid',
       'abc433-g': 'outcome-build-suffix-automaton',
+      'abc442-g': 'outcome-split-enumeration-space',
+      'abc443-e': 'outcome-design-grid-table-dp',
       'abc460-g': 'outcome-compose-dynamic-tree-clusters',
       'abc466-g': 'outcome-maintain-potential-differences',
       'abc281-f': 'outcome-query-bitwise-order-with-trie',
@@ -610,6 +646,34 @@ describe('final taxonomy policy', () => {
 
     const directClaimRegressions = [
       [
+        'abc300-ex',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-subset-bitmask-transform',
+        'outcome-enumerate-subset-state-space',
+      ],
+      [
+        'abc222-e',
+        '/typicalTechniques/0',
+        'supporting',
+        'tag-contribution-reordering',
+        'outcome-reorder-counting-contributions',
+      ],
+      [
+        'abc224-e',
+        '/prerequisiteCandidates/0',
+        'supporting',
+        'tag-directed-condensation-toposort',
+        'outcome-condense-and-order-directed-graph',
+      ],
+      [
+        'abc302-g',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-divide-enumerate',
+        'outcome-split-enumeration-space',
+      ],
+      [
         'abc318-f',
         '/prerequisiteCandidates/0',
         'supporting',
@@ -636,6 +700,13 @@ describe('final taxonomy policy', () => {
         'supporting',
         'tag-monoid-segment-tree',
         'outcome-decompose-ranges-into-segment-tree-nodes',
+      ],
+      [
+        'abc363-f',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-prime-divisor-decomposition',
+        'outcome-decompose-by-prime-or-divisor',
       ],
       [
         'abc363-g',
@@ -819,6 +890,13 @@ describe('final taxonomy policy', () => {
         'outcome-linearize-events',
       ],
       [
+        'abc436-g',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-dp-transition-acceleration',
+        'outcome-factor-and-accelerate-transitions',
+      ],
+      [
         'abc434-e',
         '/prerequisiteCandidates/0',
         'supporting',
@@ -912,6 +990,37 @@ describe('final taxonomy policy', () => {
     expect(decisionByProblemId.get('abc460-f')?.supportingTagIds).toContain(
       'tag-tree-metric-diameter',
     );
+    expect(decisionByProblemId.get('abc302-g')?.presentationUnitId).toBe('unit-divide-enumeration');
+    expect(decisionByProblemId.get('abc436-g')?.presentationUnitId).toBe(
+      'unit-generating-functions',
+    );
+
+    for (const [problemId, claimPaths, primaryTagId, presentationUnitId] of [
+      ['abc241-f', ['/typicalTechniques/1'], 'tag-reachability-bfs', 'unit-graph-search'],
+      [
+        'abc267-e',
+        ['/typicalTechniques/1'],
+        'tag-monotone-threshold-search',
+        'unit-monotone-search',
+      ],
+      [
+        'abc287-g',
+        ['/typicalTechniques/0', '/prerequisiteCandidates/1'],
+        'tag-fenwick-weighted-prefix',
+        'unit-weighted-prefix-fenwick',
+      ],
+    ] as const) {
+      const decision = decisionByProblemId.get(problemId);
+      for (const claimPath of claimPaths) {
+        expect(
+          decision?.claimDispositions.find(
+            (disposition) => disposition.claimRef.claimPath === claimPath,
+          ),
+        ).toMatchObject({ kind: 'problem_specific', tagIds: [] });
+      }
+      expect(decision?.primaryTagIds).toContain(primaryTagId);
+      expect(decision?.presentationUnitId).toBe(presentationUnitId);
+    }
 
     const baselineClaimKeys = table.decisions
       .flatMap((decision) =>
@@ -922,7 +1031,7 @@ describe('final taxonomy policy', () => {
         ),
       )
       .sort();
-    expect(baselineClaimKeys).toHaveLength(69);
+    expect(baselineClaimKeys).toHaveLength(74);
     expect(baselineClaimKeys.every((key) => key.includes('共通前提カテゴリ:'))).toBe(true);
     expect(baselineClaimKeys.map((key) => key.split('\u0000')[0])).toEqual(
       FINAL_TAXONOMY_BASELINE_CLAIMS.map(({ key }) => key).sort(),
@@ -969,6 +1078,113 @@ describe('final taxonomy policy', () => {
     expect(decisionByProblemId.get('abc334-f')?.supportingTagIds).toContain(
       'tag-monotone-stack-queue',
     );
+
+    const problemSpecificClaimRegressions = [
+      [
+        'abc214-g',
+        '/prerequisiteCandidates/1',
+        'tag-graph-core-peeling',
+        'unit-graph-core-peeling',
+        'unit-generating-functions',
+      ],
+      [
+        'abc247-f',
+        '/typicalTechniques/0',
+        'tag-graph-core-peeling',
+        'unit-graph-core-peeling',
+        'unit-dp-state-design',
+      ],
+      [
+        'abc247-f',
+        '/prerequisiteCandidates/1',
+        'tag-graph-core-peeling',
+        'unit-graph-core-peeling',
+        'unit-dp-state-design',
+      ],
+      [
+        'abc252-f',
+        '/typicalTechniques/1',
+        'tag-reverse-offline',
+        'unit-events-offline',
+        'unit-ordered-set-heap',
+      ],
+      [
+        'abc289-e',
+        '/prerequisiteCandidates/2',
+        'tag-euler-degree-parity',
+        'unit-euler-degree',
+        'unit-graph-search',
+      ],
+      [
+        'abc431-g',
+        '/typicalTechniques/2',
+        'tag-symmetry-invariant-normalization',
+        'unit-normalization',
+        'unit-ordered-set-heap',
+      ],
+      [
+        'abc454-e',
+        '/typicalTechniques/0',
+        'tag-bipartite-structure',
+        'unit-bipartite-structure',
+        'unit-constructive-witness',
+      ],
+    ] as const;
+    for (const [
+      problemId,
+      claimPath,
+      forbiddenTagId,
+      forbiddenUnitId,
+      presentationUnitId,
+    ] of problemSpecificClaimRegressions) {
+      const decision = decisionByProblemId.get(problemId);
+      expect(
+        decision?.claimDispositions.find(
+          (disposition) => disposition.claimRef.claimPath === claimPath,
+        ),
+      ).toMatchObject({ kind: 'problem_specific', tagIds: [] });
+      expect(decision?.supportingTagIds).not.toContain(forbiddenTagId);
+      expect(decision?.learningUnitCandidateIds).not.toContain(forbiddenUnitId);
+      expect(decision?.presentationUnitId).toBe(presentationUnitId);
+    }
+
+    const abc286F = decisionByProblemId.get('abc286-f');
+    expect(
+      abc286F?.claimDispositions.find(
+        ({ claimRef, kind }) =>
+          claimRef.claimPath === '/typicalTechniques/1' && kind === 'supporting',
+      )?.tagIds,
+    ).toEqual(['tag-functional-graph-doubling']);
+    expect(
+      abc286F?.claimDispositions.find(
+        ({ claimRef, kind }) =>
+          claimRef.claimPath === '/prerequisiteCandidates/2' && kind === 'supporting',
+      )?.tagIds,
+    ).toEqual(['tag-interactive-protocol']);
+
+    const abc347F = decisionByProblemId.get('abc347-f');
+    expect(
+      abc347F?.claimDispositions.find(
+        ({ claimRef, kind }) => claimRef.claimPath === '/typicalTechniques/0' && kind === 'primary',
+      )?.tagIds,
+    ).toEqual(['tag-divide-enumerate']);
+    expect(
+      abc347F?.claimDispositions.find(
+        ({ claimRef, kind }) =>
+          claimRef.claimPath === '/typicalTechniques/1' && kind === 'supporting',
+      )?.tagIds,
+    ).toEqual(['tag-grid-table-dp']);
+    expect(
+      abc347F?.claimDispositions.find(
+        ({ claimRef, kind }) =>
+          claimRef.claimPath === '/prerequisiteCandidates/0' && kind === 'supporting',
+      )?.tagIds,
+    ).toEqual(['tag-grid-table-dp', 'tag-prefix-difference']);
+    expect(abc347F?.supportingOutcomeIds).toEqual([
+      'outcome-design-grid-table-dp',
+      'outcome-linearize-static-range-information',
+    ]);
+    expect(abc347F?.presentationUnitId).toBe('unit-divide-enumeration');
 
     expect(decisionByProblemId.get('abc212-g')?.learningUnitCandidateIds).toContain(
       'unit-cyclic-group-exponent-counting',

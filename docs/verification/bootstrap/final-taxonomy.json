@@ -8,14 +8,14 @@
   "integrationMapPath": "docs/verification/previews/initial-v1/taxonomy-integration.json",
   "reviewCheckResultsPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
   "reviewEvidencePath": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-  "taxonomySubjectDigest": "59f4be615bf5e5cf15fae43dd2f6a8179080bbe14659f70e8bc28d1be6cf10ec",
-  "buildDigest": "81f95b7f58a3a29f67738d480d7ecbee0b1bf72685454faff9d6ff986f8d54e2",
+  "taxonomySubjectDigest": "c4e061076df9e9aa68fb31c713853b278c65214bc9bfcb859c730ff954b946bf",
+  "buildDigest": "84ca0fd9ec6864110d04f6af75fe0233629ba0dd6fe54c42ca3d3ee24ec5ddd5",
   "integrationMapDigest": "e5ac7bab0dfa907000ce3bc7b3227dcb915f07cc3d7e56c829ef2b2d549bf4e8",
-  "taxonomyDigest": "1635108037c6dcf0323c902f1cbeb125c891f4fc624122a0b1ee2d8212862508",
+  "taxonomyDigest": "b82ed663a4f59cb00608005776f9cf91639b0898061651be64b18e7983819dcd",
   "tagDagDigest": "66dfbce08d6e0b10d0a07e771ef46800aa9160e4e2fca202fc2e67edec02ffbd",
   "learningUnitDagDigest": "146c6e3a061eefd1fef04b64b5f455d673c1fa5677497e41c664bc2f7c251258",
   "orderDigest": "f67c8e6e39f6b5c8b8a9aa06a1973681125a2e04937f8d79a5ee948fc9ed7f36",
-  "placementDigest": "e61a63e647f3caf3b355764720cdf21ef767d541f00149a0094958d5bdaba414",
+  "placementDigest": "2e5a06a2d1bbd84f80596514822dcd7df7ca57e1f3a28ba3c8ac8039fc7b0960",
   "correctionImpactDigest": "5c4f5ee31dbeea7400de4b2719aeeda9b4fc9a8729f3d22f60dd8d367c083fe7",
   "problemCount": 868,
   "sourceRevisionCount": 1738,
@@ -30,5 +30,5 @@
   "canonicalMaterializationAllowed": false,
   "holdReasons": ["CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE"],
   "diagnosticCodes": [],
-  "evidenceDigest": "876f9f8b5bae4388e100fff3243b6873513b18fc3cfb69f2239b3db345df03ad"
+  "evidenceDigest": "ec1523fce6cdefc4f2cfdde8c5366405267c61158e1fed53d72e92f270196c47"
 }
