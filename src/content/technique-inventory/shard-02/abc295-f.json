@@ -54,9 +54,9 @@
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "digit block固定計数",
-      "trigger": "十進表記の指定位置にpatternを固定する。",
-      "application": "上位・下位自由桁を数値式へ写して上限以下を数える。",
+      "name": "出現位置を固定する主客転倒",
+      "trigger": "全対象に含まれるpatternの総出現回数を数える。",
+      "application": "patternの開始桁を先に固定し、その位置にpatternを持つ整数を生成順に数える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -69,7 +69,7 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "桁DP的な上限制約と10冪の安全計算。",
+      "text": "10冪を使う整数構成、単調な整数列に対する二分探索、先頭ゼロの扱い。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

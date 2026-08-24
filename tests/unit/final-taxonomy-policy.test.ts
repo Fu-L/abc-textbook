@@ -9,6 +9,7 @@ import {
   EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS,
   FINAL_LEARNING_UNIT_CANDIDATES,
   FINAL_LEARNING_UNIT_ORDER_POLICY,
+  FINAL_TAXONOMY_PLACEMENT_PRINCIPLES,
   FINAL_TAXONOMY_OUTCOMES,
   FINAL_TAXONOMY_TAGS,
   KNOWN_UNMATCHED_CURATED_OVERRIDE_PROBLEM_IDS,
@@ -53,6 +54,11 @@ describe('final taxonomy policy', () => {
     );
     expect(FINAL_TAXONOMY_TAGS.map((tag) => tag.id)).toEqual(
       expect.arrayContaining([
+        'tag-bounded-enumeration',
+        'tag-carry-mixed-radix-dp',
+        'tag-coordinate-compression',
+        'tag-event-sweep',
+        'tag-implicit-binary-tree-arithmetic',
         'tag-tree-balanced-separator',
         'tag-lowlink-critical-structure',
         'tag-graph-core-peeling',
@@ -70,6 +76,15 @@ describe('final taxonomy policy', () => {
     );
     expect(FINAL_TAXONOMY_OUTCOMES.map((outcome) => outcome.id)).toEqual(
       expect.arrayContaining([
+        'outcome-answer-tree-ancestor-queries',
+        'outcome-build-virtual-tree',
+        'outcome-compress-sparse-keys',
+        'outcome-count-implicit-binary-tree-layers',
+        'outcome-design-carry-or-mixed-radix-dp',
+        'outcome-encode-threshold-constraints-as-two-sat',
+        'outcome-enumerate-bounded-candidates-or-cases',
+        'outcome-flatten-tree-by-euler-order',
+        'outcome-represent-convex-intersection-by-halfplanes',
         'outcome-build-balanced-separator-decomposition',
         'outcome-identify-bridges-and-articulations',
         'outcome-reduce-graph-by-peeling-or-kernelization',
@@ -111,7 +126,32 @@ describe('final taxonomy policy', () => {
     expect(
       FINAL_TAXONOMY_TAGS.find((tag) => tag.id === 'tag-directed-condensation-toposort')
         ?.definition,
-    ).toContain('必要なら強連結成分へ縮約');
+    ).toContain('2-SAT');
+    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.boundaries).toContain(
+      '座標圧縮とevent sweepと単純scan',
+    );
+    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.boundaries).toContain(
+      'tight・automatonを接頭辞更新する桁DP',
+    );
+    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.boundaries).toContain(
+      '親・選択記録から具体解を復元する構成法',
+    );
+    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.boundaries).toContain(
+      '専用primary技能だけで列挙を説明し切れる場合',
+    );
+    expect(
+      FINAL_LEARNING_UNIT_CANDIDATES.find((unit) => unit.id === 'unit-events-offline')?.title,
+    ).toContain('逆走査');
+    for (const tagId of ['tag-event-sweep', 'tag-coordinate-compression']) {
+      const excludedPatterns =
+        FINAL_TAXONOMY_TAGS.find((tag) => tag.id === tagId)?.semanticSignature.excludedPatterns ??
+        [];
+      expect(
+        excludedPatterns.some((pattern) =>
+          new RegExp(pattern, 'iu').test('座標圧縮とevent sweepを併用する'),
+        ),
+      ).toBe(false);
+    }
     expect(
       FINAL_TAXONOMY_OUTCOMES.find(
         (outcome) => outcome.id === 'outcome-count-prefix-constrained-objects',
@@ -201,6 +241,9 @@ describe('final taxonomy policy', () => {
     expect(outcomePrerequisites.get('outcome-restrict-geometric-candidates-to-boundary')).toEqual([
       'outcome-reduce-geometry-to-algebraic-predicates',
     ]);
+    expect(outcomePrerequisites.get('outcome-represent-convex-intersection-by-halfplanes')).toEqual(
+      ['outcome-reduce-geometry-to-algebraic-predicates'],
+    );
     expect(
       FINAL_TAXONOMY_OUTCOMES.filter((outcome) => outcome.prerequisiteOutcomeIds.length > 0)
         .map((outcome) => outcome.id)
@@ -220,6 +263,7 @@ describe('final taxonomy policy', () => {
         'outcome-encode-counting-by-generating-function',
         'outcome-evaluate-and-compose-polynomials',
         'outcome-find-period-by-multiplicative-order',
+        'outcome-represent-convex-intersection-by-halfplanes',
         'outcome-restrict-geometric-candidates-to-boundary',
         'outcome-solve-modular-constraints',
         'outcome-use-tree-diameter-extrema',
@@ -413,6 +457,211 @@ describe('final taxonomy policy', () => {
     const decisionByProblemId = new Map(
       table.decisions.map((decision) => [decision.problemId, decision]),
     );
+    const problemIdsUsingTag = (tagId: string): string[] =>
+      table.decisions
+        .filter((decision) =>
+          [...decision.primaryTagIds, ...decision.supportingTagIds].includes(tagId),
+        )
+        .map((decision) => decision.problemId)
+        .sort();
+
+    expect(problemIdsUsingTag('tag-event-sweep')).toEqual([
+      'abc214-e',
+      'abc223-h',
+      'abc224-e',
+      'abc231-f',
+      'abc233-ex',
+      'abc235-e',
+      'abc240-ex',
+      'abc245-e',
+      'abc250-ex',
+      'abc254-g',
+      'abc257-ex',
+      'abc263-ex',
+      'abc266-ex',
+      'abc268-ex',
+      'abc274-f',
+      'abc280-g',
+      'abc283-f',
+      'abc287-ex',
+      'abc296-g',
+      'abc301-ex',
+      'abc306-f',
+      'abc308-f',
+      'abc309-f',
+      'abc311-g',
+      'abc320-e',
+      'abc327-f',
+      'abc332-g',
+      'abc337-g',
+      'abc344-g',
+      'abc346-g',
+      'abc351-f',
+      'abc360-f',
+      'abc361-g',
+      'abc368-e',
+      'abc393-f',
+      'abc394-g',
+      'abc401-e',
+      'abc407-f',
+      'abc408-f',
+      'abc410-g',
+      'abc411-e',
+      'abc431-g',
+      'abc433-e',
+      'abc436-f',
+      'abc438-g',
+      'abc447-g',
+      'abc449-e',
+      'abc449-f',
+      'abc453-e',
+    ]);
+    expect(problemIdsUsingTag('tag-coordinate-compression')).toEqual([
+      'abc221-e',
+      'abc231-f',
+      'abc232-g',
+      'abc254-g',
+      'abc262-ex',
+      'abc266-ex',
+      'abc273-f',
+      'abc276-ex',
+      'abc287-g',
+      'abc306-f',
+      'abc309-f',
+      'abc320-g',
+      'abc351-f',
+      'abc354-f',
+      'abc356-f',
+      'abc360-f',
+      'abc360-g',
+      'abc374-f',
+      'abc384-g',
+      'abc431-g',
+      'abc434-e',
+      'abc439-f',
+      'abc465-g',
+    ]);
+    expect(problemIdsUsingTag('tag-bounded-enumeration')).toEqual([
+      'abc220-g',
+      'abc223-e',
+      'abc226-f',
+      'abc227-f',
+      'abc227-h',
+      'abc234-e',
+      'abc234-ex',
+      'abc240-ex',
+      'abc240-f',
+      'abc248-e',
+      'abc254-e',
+      'abc257-f',
+      'abc258-f',
+      'abc260-f',
+      'abc270-f',
+      'abc271-ex',
+      'abc284-e',
+      'abc290-g',
+      'abc293-f',
+      'abc298-g',
+      'abc301-g',
+      'abc302-g',
+      'abc323-f',
+      'abc328-e',
+      'abc331-e',
+      'abc343-e',
+      'abc347-f',
+      'abc353-f',
+      'abc369-e',
+      'abc386-e',
+      'abc387-e',
+      'abc409-f',
+      'abc410-f',
+      'abc418-e',
+      'abc419-g',
+      'abc442-g',
+      'abc459-g',
+    ]);
+    expect(problemIdsUsingTag('tag-divide-enumerate')).toEqual([
+      'abc213-h',
+      'abc220-h',
+      'abc230-h',
+      'abc247-ex',
+      'abc252-ex',
+      'abc260-ex',
+      'abc267-ex',
+      'abc269-ex',
+      'abc270-g',
+      'abc271-f',
+      'abc272-ex',
+      'abc273-ex',
+      'abc281-ex',
+      'abc281-f',
+      'abc282-ex',
+      'abc300-g',
+      'abc304-g',
+      'abc313-f',
+      'abc317-ex',
+      'abc326-f',
+      'abc331-g',
+      'abc336-f',
+      'abc345-g',
+      'abc348-g',
+      'abc352-g',
+      'abc357-g',
+      'abc381-g',
+      'abc383-g',
+      'abc385-g',
+      'abc402-f',
+      'abc413-e',
+      'abc423-g',
+      'abc425-g',
+      'abc426-g',
+      'abc427-f',
+      'abc439-g',
+      'abc464-f',
+    ]);
+    expect(problemIdsUsingTag('tag-carry-mixed-radix-dp')).toEqual(['abc231-e', 'abc466-g']);
+    expect(problemIdsUsingTag('tag-implicit-binary-tree-arithmetic')).toEqual([
+      'abc220-e',
+      'abc321-e',
+      'abc424-e',
+    ]);
+    expect(problemIdsUsingTag('tag-tree-path-decomposition')).toEqual([
+      'abc267-f',
+      'abc294-g',
+      'abc298-ex',
+      'abc329-g',
+      'abc337-g',
+      'abc340-g',
+      'abc351-g',
+      'abc405-f',
+      'abc406-f',
+      'abc438-f',
+      'abc460-f',
+    ]);
+    const boundaryHardNegatives: Readonly<Record<string, readonly string[]>> = {
+      'abc220-e': ['tag-tree-path-decomposition', 'tag-tree-aggregation-reroot'],
+      'abc227-f': ['tag-discrete-convex-marginal', 'tag-divide-enumerate'],
+      'abc231-e': ['tag-digit-automaton-dp'],
+      'abc234-e': ['tag-divide-enumerate'],
+      'abc295-f': ['tag-digit-automaton-dp'],
+      'abc317-e': ['tag-event-sweep', 'tag-coordinate-compression'],
+      'abc321-e': ['tag-tree-path-decomposition', 'tag-tree-aggregation-reroot'],
+      'abc328-e': ['tag-divide-enumerate'],
+      'abc347-f': ['tag-divide-enumerate'],
+      'abc378-f': ['tag-tree-path-decomposition'],
+      'abc386-e': ['tag-divide-enumerate'],
+      'abc442-g': ['tag-divide-enumerate'],
+      'abc466-g': ['tag-digit-automaton-dp'],
+    };
+    for (const [problemId, forbiddenTagIds] of Object.entries(boundaryHardNegatives)) {
+      const decision = decisionByProblemId.get(problemId);
+      const assignedTagIds = [
+        ...(decision?.primaryTagIds ?? []),
+        ...(decision?.supportingTagIds ?? []),
+      ];
+      for (const tagId of forbiddenTagIds) expect(assignedTagIds).not.toContain(tagId);
+    }
+
     const semanticPrimaryRegressions: Readonly<Record<string, string>> = {
       'abc216-h': 'tag-determinant-counting',
       'abc218-e': 'tag-spanning-tree-optimization',
@@ -420,9 +669,11 @@ describe('final taxonomy policy', () => {
       'abc221-g': 'tag-bitset-word-parallel',
       'abc222-f': 'tag-tree-metric-diameter',
       'abc224-e': 'tag-dp-transition-acceleration',
-      'abc227-f': 'tag-discrete-convex-marginal',
+      'abc227-f': 'tag-bounded-enumeration',
       'abc228-e': 'tag-modular-crt',
       'abc229-h': 'tag-game-value-dp',
+      'abc231-e': 'tag-carry-mixed-radix-dp',
+      'abc234-e': 'tag-bounded-enumeration',
       'abc234-ex': 'tag-geometry-orientation-transform',
       'abc235-e': 'tag-spanning-tree-optimization',
       'abc243-e': 'tag-shortest-path',
@@ -453,7 +704,8 @@ describe('final taxonomy policy', () => {
       'abc307-g': 'tag-knapsack-resource',
       'abc309-ex': 'tag-convolution-fps',
       'abc312-e': 'tag-geometry-orientation-transform',
-      'abc321-e': 'tag-tree-aggregation-reroot',
+      'abc317-e': 'tag-reachability-bfs',
+      'abc321-e': 'tag-implicit-binary-tree-arithmetic',
       'abc321-f': 'tag-knapsack-resource',
       'abc323-g': 'tag-determinant-counting',
       'abc324-e': 'tag-contribution-reordering',
@@ -465,7 +717,8 @@ describe('final taxonomy policy', () => {
       'abc338-e': 'tag-geometry-orientation-transform',
       'abc339-f': 'tag-string-hash-equality',
       'abc344-e': 'tag-linked-list-index',
-      'abc347-f': 'tag-divide-enumerate',
+      'abc328-e': 'tag-bounded-enumeration',
+      'abc347-f': 'tag-bounded-enumeration',
       'abc349-e': 'tag-game-value-dp',
       'abc351-g': 'tag-static-top-tree',
       'abc353-e': 'tag-trie-prefix',
@@ -485,7 +738,8 @@ describe('final taxonomy policy', () => {
       'abc433-g': 'tag-string-automata',
       'abc428-e': 'tag-tree-metric-diameter',
       'abc437-e': 'tag-trie-prefix',
-      'abc442-g': 'tag-divide-enumerate',
+      'abc386-e': 'tag-bounded-enumeration',
+      'abc442-g': 'tag-bounded-enumeration',
       'abc443-e': 'tag-grid-table-dp',
       'abc448-g': 'tag-convex-hull-trick',
       'abc453-f': 'tag-constructive-witness',
@@ -503,11 +757,15 @@ describe('final taxonomy policy', () => {
       'abc221-g': 'outcome-accelerate-set-operations-with-bitsets',
       'abc222-f': 'outcome-use-tree-diameter-extrema',
       'abc224-e': 'outcome-factor-and-accelerate-transitions',
-      'abc227-f': 'outcome-exploit-convexity',
+      'abc227-f': 'outcome-enumerate-bounded-candidates-or-cases',
       'abc228-e': 'outcome-exploit-modular-periodicity',
+      'abc231-e': 'outcome-design-carry-or-mixed-radix-dp',
+      'abc234-e': 'outcome-enumerate-bounded-candidates-or-cases',
       'abc243-e': 'outcome-model-and-compute-shortest-path',
+      'abc251-g': 'outcome-represent-convex-intersection-by-halfplanes',
       'abc246-e': 'outcome-model-and-compute-shortest-path',
       'abc272-ex': 'outcome-evaluate-and-compose-polynomials',
+      'abc277-ex': 'outcome-encode-threshold-constraints-as-two-sat',
       'abc252-f': 'outcome-prove-greedy-order',
       'abc253-f': 'outcome-reverse-update-time',
       'abc255-e': 'outcome-reorder-counting-contributions',
@@ -520,6 +778,7 @@ describe('final taxonomy policy', () => {
       'abc288-g': 'outcome-factor-separable-linear-transform',
       'abc298-f': 'outcome-prove-greedy-order',
       'abc295-e': 'outcome-reorder-counting-contributions',
+      'abc295-f': 'outcome-reorder-counting-contributions',
       'abc301-f': 'outcome-build-finite-string-automaton',
       'abc305-g': 'outcome-build-finite-string-automaton',
       'abc307-ex': 'outcome-compute-convolution-or-correlation',
@@ -528,15 +787,19 @@ describe('final taxonomy policy', () => {
       'abc314-ex': 'outcome-exploit-convexity',
       'abc318-ex': 'outcome-apply-formal-power-series-operations',
       'abc319-e': 'outcome-exploit-modular-periodicity',
+      'abc321-e': 'outcome-count-implicit-binary-tree-layers',
       'abc321-f': 'outcome-design-resource-dp',
       'abc333-g': 'outcome-approximate-rational-by-euclid',
       'abc334-e': 'outcome-reorder-counting-contributions',
-      'abc347-f': 'outcome-split-enumeration-space',
+      'abc337-g': 'outcome-flatten-tree-by-euler-order',
+      'abc340-g': 'outcome-build-virtual-tree',
+      'abc347-f': 'outcome-enumerate-bounded-candidates-or-cases',
       'abc351-g': 'outcome-compose-dynamic-tree-clusters',
       'abc361-e': 'outcome-reorder-counting-contributions',
+      'abc374-f': 'outcome-compress-sparse-keys',
       'abc408-g': 'outcome-approximate-rational-by-euclid',
       'abc433-g': 'outcome-build-suffix-automaton',
-      'abc442-g': 'outcome-split-enumeration-space',
+      'abc442-g': 'outcome-enumerate-bounded-candidates-or-cases',
       'abc443-e': 'outcome-design-grid-table-dp',
       'abc460-g': 'outcome-compose-dynamic-tree-clusters',
       'abc466-g': 'outcome-maintain-potential-differences',
@@ -548,7 +811,8 @@ describe('final taxonomy policy', () => {
       'abc399-e': 'outcome-decompose-functional-graph',
       'abc401-e': 'outcome-augment-components-with-metadata',
       'abc401-f': 'outcome-use-tree-diameter-extrema',
-      'abc406-f': 'outcome-decompose-tree-path-queries',
+      'abc405-f': 'outcome-answer-tree-ancestor-queries',
+      'abc406-f': 'outcome-flatten-tree-by-euler-order',
       'abc415-e': 'outcome-design-grid-table-dp',
       'abc420-e': 'outcome-augment-components-with-metadata',
       'abc428-e': 'outcome-use-tree-diameter-extrema',
@@ -586,7 +850,6 @@ describe('final taxonomy policy', () => {
     ]);
 
     const dualPrimaryRegressions = {
-      'abc227-f': ['tag-grid-table-dp', 'outcome-design-grid-table-dp'],
       'abc228-e': ['tag-modular-arithmetic', 'outcome-compute-in-modular-arithmetic'],
       'abc274-ex': ['tag-finite-field-extension', 'outcome-compute-in-finite-field-extension'],
       'abc305-f': ['tag-interactive-protocol', 'outcome-maintain-interactive-query-protocol'],
@@ -623,6 +886,12 @@ describe('final taxonomy policy', () => {
       'abc248-ex': 'tag-lazy-segment-action',
       'abc269-ex': 'tag-convolution-fps',
       'abc267-f': 'tag-tree-path-decomposition',
+      'abc220-e': 'tag-implicit-binary-tree-arithmetic',
+      'abc221-g': 'tag-constructive-witness',
+      'abc243-e': 'tag-witness-impact-localization',
+      'abc276-ex': 'tag-coordinate-compression',
+      'abc287-ex': 'tag-event-sweep',
+      'abc287-g': 'tag-coordinate-compression',
       'abc280-ex': 'tag-monotone-stack-queue',
       'abc299-ex': 'tag-linear-recurrence-matrix',
       'abc305-g': 'tag-linear-recurrence-matrix',
@@ -634,17 +903,77 @@ describe('final taxonomy policy', () => {
       'abc387-f': 'tag-dp-transition-acceleration',
       'abc370-f': 'tag-functional-graph-doubling',
       'abc361-e': 'tag-tree-metric-diameter',
+      'abc366-g': 'tag-constructive-witness',
+      'abc369-f': 'tag-constructive-witness',
       'abc403-e': 'tag-trie-prefix',
+      'abc392-e': 'tag-constructive-witness',
+      'abc396-e': 'tag-constructive-witness',
+      'abc406-g': 'tag-constructive-witness',
       'abc427-e': 'tag-prefix-difference',
       'abc440-g': 'tag-dsu-connectivity',
       'abc450-f': 'tag-lazy-segment-action',
+      'abc443-f': 'tag-constructive-witness',
+      'abc424-e': 'tag-implicit-binary-tree-arithmetic',
+      'abc465-g': 'tag-coordinate-compression',
       'abc460-f': 'tag-tree-path-decomposition',
     };
     for (const [problemId, supportingTagId] of Object.entries(supportingRegressions)) {
       expect(decisionByProblemId.get(problemId)?.supportingTagIds).toContain(supportingTagId);
     }
+    expect(decisionByProblemId.get('abc351-g')?.supportingOutcomeIds).toContain(
+      'outcome-apply-heavy-light-decomposition',
+    );
 
     const directClaimRegressions = [
+      [
+        'abc221-g',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-constructive-witness',
+        'outcome-recover-valid-witness',
+      ],
+      [
+        'abc243-e',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-witness-impact-localization',
+        'outcome-localize-change-impact-by-witness',
+      ],
+      [
+        'abc276-ex',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-coordinate-compression',
+        'outcome-compress-sparse-keys',
+      ],
+      [
+        'abc276-ex',
+        '/typicalTechniques/2',
+        'supporting',
+        'tag-constructive-witness',
+        'outcome-recover-valid-witness',
+      ],
+      [
+        'abc287-ex',
+        '/typicalTechniques/0',
+        'supporting',
+        'tag-event-sweep',
+        'outcome-linearize-events',
+      ],
+      [
+        'abc287-g',
+        '/typicalTechniques/0',
+        'supporting',
+        'tag-coordinate-compression',
+        'outcome-compress-sparse-keys',
+      ],
+      [
+        'abc287-g',
+        '/prerequisiteCandidates/1',
+        'supporting',
+        'tag-coordinate-compression',
+        'outcome-compress-sparse-keys',
+      ],
       [
         'abc300-ex',
         '/typicalTechniques/1',
@@ -670,8 +999,8 @@ describe('final taxonomy policy', () => {
         'abc302-g',
         '/typicalTechniques/1',
         'supporting',
-        'tag-divide-enumerate',
-        'outcome-split-enumeration-space',
+        'tag-bounded-enumeration',
+        'outcome-enumerate-bounded-candidates-or-cases',
       ],
       [
         'abc318-f',
@@ -733,8 +1062,29 @@ describe('final taxonomy policy', () => {
         'abc384-g',
         '/prerequisiteCandidates/1',
         'supporting',
-        'tag-sweep-coordinate-compression',
-        'outcome-linearize-events',
+        'tag-coordinate-compression',
+        'outcome-compress-sparse-keys',
+      ],
+      [
+        'abc396-e',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-constructive-witness',
+        'outcome-recover-valid-witness',
+      ],
+      [
+        'abc424-e',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-implicit-binary-tree-arithmetic',
+        'outcome-count-implicit-binary-tree-layers',
+      ],
+      [
+        'abc465-g',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-coordinate-compression',
+        'outcome-compress-sparse-keys',
       ],
       [
         'abc405-g',
@@ -851,7 +1201,7 @@ describe('final taxonomy policy', () => {
         'abc431-g',
         '/prerequisiteCandidates/0',
         'supporting',
-        'tag-sweep-coordinate-compression',
+        'tag-event-sweep',
         'outcome-linearize-events',
       ],
       [
@@ -886,8 +1236,8 @@ describe('final taxonomy policy', () => {
         'abc434-e',
         '/typicalTechniques/2',
         'supporting',
-        'tag-sweep-coordinate-compression',
-        'outcome-linearize-events',
+        'tag-coordinate-compression',
+        'outcome-compress-sparse-keys',
       ],
       [
         'abc436-g',
@@ -900,15 +1250,15 @@ describe('final taxonomy policy', () => {
         'abc434-e',
         '/prerequisiteCandidates/0',
         'supporting',
-        'tag-sweep-coordinate-compression',
-        'outcome-linearize-events',
+        'tag-coordinate-compression',
+        'outcome-compress-sparse-keys',
       ],
       [
         'abc439-f',
         '/prerequisiteCandidates/0',
         'supporting',
-        'tag-sweep-coordinate-compression',
-        'outcome-linearize-events',
+        'tag-coordinate-compression',
+        'outcome-compress-sparse-keys',
       ],
       [
         'abc453-f',
@@ -967,6 +1317,13 @@ describe('final taxonomy policy', () => {
         'outcome-prove-greedy-order',
       ],
       [
+        'abc466-g',
+        '/typicalTechniques/1',
+        'supporting',
+        'tag-carry-mixed-radix-dp',
+        'outcome-design-carry-or-mixed-radix-dp',
+      ],
+      [
         'abc464-g',
         '/prerequisiteCandidates/0',
         'supporting',
@@ -990,7 +1347,9 @@ describe('final taxonomy policy', () => {
     expect(decisionByProblemId.get('abc460-f')?.supportingTagIds).toContain(
       'tag-tree-metric-diameter',
     );
-    expect(decisionByProblemId.get('abc302-g')?.presentationUnitId).toBe('unit-divide-enumeration');
+    expect(decisionByProblemId.get('abc302-g')?.presentationUnitId).toBe(
+      'unit-bounded-enumeration',
+    );
     expect(decisionByProblemId.get('abc436-g')?.presentationUnitId).toBe(
       'unit-generating-functions',
     );
@@ -1002,12 +1361,6 @@ describe('final taxonomy policy', () => {
         ['/typicalTechniques/1'],
         'tag-monotone-threshold-search',
         'unit-monotone-search',
-      ],
-      [
-        'abc287-g',
-        ['/typicalTechniques/0', '/prerequisiteCandidates/1'],
-        'tag-fenwick-weighted-prefix',
-        'unit-weighted-prefix-fenwick',
       ],
     ] as const) {
       const decision = decisionByProblemId.get(problemId);
@@ -1031,7 +1384,7 @@ describe('final taxonomy policy', () => {
         ),
       )
       .sort();
-    expect(baselineClaimKeys).toHaveLength(74);
+    expect(baselineClaimKeys).toHaveLength(71);
     expect(baselineClaimKeys.every((key) => key.includes('共通前提カテゴリ:'))).toBe(true);
     expect(baselineClaimKeys.map((key) => key.split('\u0000')[0])).toEqual(
       FINAL_TAXONOMY_BASELINE_CLAIMS.map(({ key }) => key).sort(),
@@ -1040,7 +1393,7 @@ describe('final taxonomy policy', () => {
     const leadTechniqueRegressions: Readonly<Record<string, string>> = {
       'abc270-g': 'tag-divide-enumerate',
       'abc273-ex': 'tag-gcd-diophantine',
-      'abc321-e': 'tag-tree-aggregation-reroot',
+      'abc321-e': 'tag-implicit-binary-tree-arithmetic',
       'abc344-e': 'tag-linked-list-index',
       'abc355-g': 'tag-discrete-convex-marginal',
       'abc421-f': 'tag-linked-list-index',
@@ -1065,6 +1418,7 @@ describe('final taxonomy policy', () => {
       'abc283-e': ['tag-fenwick-weighted-prefix'],
       'abc287-e': ['tag-suffix-lcp-index'],
       'abc301-g': ['tag-symmetry-invariant-normalization'],
+      'abc303-e': ['tag-constructive-witness'],
       'abc304-e': ['tag-symmetry-invariant-normalization'],
       'abc334-e': ['tag-stochastic-expectation-dp', 'tag-modular-crt'],
       'abc334-f': ['tag-gcd-diophantine', 'tag-monoid-segment-tree'],
@@ -1167,7 +1521,7 @@ describe('final taxonomy policy', () => {
       abc347F?.claimDispositions.find(
         ({ claimRef, kind }) => claimRef.claimPath === '/typicalTechniques/0' && kind === 'primary',
       )?.tagIds,
-    ).toEqual(['tag-divide-enumerate']);
+    ).toEqual(['tag-bounded-enumeration']);
     expect(
       abc347F?.claimDispositions.find(
         ({ claimRef, kind }) =>
@@ -1184,7 +1538,7 @@ describe('final taxonomy policy', () => {
       'outcome-design-grid-table-dp',
       'outcome-linearize-static-range-information',
     ]);
-    expect(abc347F?.presentationUnitId).toBe('unit-divide-enumeration');
+    expect(abc347F?.presentationUnitId).toBe('unit-dp-grid-table');
 
     expect(decisionByProblemId.get('abc212-g')?.learningUnitCandidateIds).toContain(
       'unit-cyclic-group-exponent-counting',

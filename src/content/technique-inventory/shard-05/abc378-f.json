@@ -23,9 +23,9 @@
     ],
     "candidateApproaches": [
       {
-        "approach": "木を根付き化し、次数3の頂点だけを伝播路として、各方向に到達できる次数2端点数を bottom-up に集計して異なる枝の組を数える。",
+        "approach": "木を根付き化し、次数3の頂点だけを伝播路として、各子方向から到達できる次数2端点数をbottom-upに集計して異なる方向の組を数える。",
         "decision": "adopted",
-        "decisionReason": "数える対象を条件付き単純 path へ言い換えると各 path の LCA で一度だけ数えられ、木 DP を O(N) で構成できる。",
+        "decisionReason": "数える対象を次数列が制限された単純pathへ言い換えると、頂点ごとの子方向の集約だけで各pathを一度だけ数え、O(N)の木DPにできる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
@@ -37,7 +37,7 @@
     ],
     "keyInsights": [
       {
-        "text": "端点から一歩以上の次数3連鎖を通って到達する次数2頂点数を各子方向ごとに持つと、LCA が内部点となる path は異なる二方向の積で数えられる。",
+        "text": "端点から一歩以上の次数3連鎖を通って到達する次数2頂点数を各子方向ごとに持つと、現在頂点を内部に含むpathは異なる二方向の積で数えられる。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
@@ -46,15 +46,15 @@
       }
     ],
     "algorithmConnection": {
-      "text": "任意根で DFS し、各 child が返す有効端点数を集める。次数3頂点では異なる方向間の pair と、必要なら自身端点ケースを答えへ加え、合計を親へ返す。次数2/その他は定義に従い返値を切り替える。",
+      "text": "任意根でDFSし、a_vを「vが次数2ならその1頂点、次数3なら子方向から次数3だけを内部にして到達できる次数2端点数」とする。deg(v)=2では、最初の内部頂点を必ず1個含めるためdeg(child)=3のchildについてだけΣa_childを答えへ加え、a_v=1とする。deg(v)=3ではΣ_{i<j}a_i a_jを加えてa_v=Σa_iとし、それ以外はa_v=0とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "path の LCA 分解による木 DP",
-      "trigger": "条件を満たす端点 pair とその間の path を数えるとき。",
-      "application": "各 path を端点の LCA または向きで一意に担当させる。",
+      "name": "次数条件で伝播を切り替える木DP",
+      "trigger": "端点と内部で異なる頂点条件を満たす木上pathを数えるとき。",
+      "application": "次数3だけを通る端点候補数を子から集約し、現在頂点の次数に応じて組の加算と親への返値を切り替える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -67,13 +67,13 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "木の一意 path、LCA による pair 分解、bottom-up 木 DP、次数条件を理解していること。",
+      "text": "木の一意path、rooted treeの子方向、bottom-up木DP、次数条件を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "path は3頂点以上なので端点同士が隣接するケースを除く。親方向を含む数え方と各 path の一意担当を実装方針に合わせる。",
+      "text": "pathは3頂点以上なので端点同士が隣接するケースを除く。各pathは根付き木上の最高点または上側端点で一度だけ数え、親方向とのpairを同じ頂点で重ねて数えない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

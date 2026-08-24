@@ -82,6 +82,12 @@
       "trigger": "deadlineを延ばすとedgeだけが増えて実行可能性が単調になるとき。",
       "application": "matching成立の最初の候補時刻を探索する。",
       "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "候補時刻の座標圧縮",
+      "trigger": "時刻上限は大きいが、flow graphで区別すべき時刻が有限個の候補に限られるとき。",
+      "application": "各reelでdigitが現れる最初のN時刻を集めてsort-uniqueし、順序と等値性を保つtime頂点IDへ写す。",
+      "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "problemSpecificInsights": [

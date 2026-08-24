@@ -221,13 +221,6 @@ const BASELINE_CLAIM_CLASSIFICATIONS = [
   c('abc313-e', '/prerequisiteCandidates/1', 'elementary-one-dimensional-dp', 'modular-arithmetic'),
   c('abc314-e', '/prerequisiteCandidates/1', 'elementary-one-dimensional-dp'),
   c('abc315-e', '/prerequisiteCandidates/1', 'tree-unweighted-grid-dfs-bfs'),
-  c(
-    'abc317-e',
-    '/typicalTechniques/1',
-    'integer-string-array-handling',
-    'tree-unweighted-grid-dfs-bfs',
-  ),
-  c('abc317-e', '/prerequisiteCandidates/0', 'tree-unweighted-grid-dfs-bfs'),
   c('abc318-e', '/prerequisiteCandidates/0', 'integer-string-array-handling'),
   c('abc319-e', '/prerequisiteCandidates/1', 'integer-string-array-handling'),
   c('abc319-f', '/prerequisiteCandidates/1', 'tree-unweighted-grid-dfs-bfs'),
@@ -268,7 +261,6 @@ const BASELINE_CLAIM_CLASSIFICATIONS = [
   c('abc384-f', '/prerequisiteCandidates/1', 'integer-string-array-handling', 'map-set-handling'),
   c('abc385-e', '/prerequisiteCandidates/0', 'integer-string-array-handling', 'sorting'),
   c('abc387-e', '/prerequisiteCandidates/1', 'integer-string-array-handling'),
-  c('abc424-e', '/typicalTechniques/1', 'map-set-handling', 'sorting'),
   c('abc430-f', '/typicalTechniques/0', 'integer-string-array-handling'),
   c(
     'abc433-f',

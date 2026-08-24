@@ -48,6 +48,7 @@ import {
 import {
   FINAL_LEARNING_UNIT_CANDIDATES,
   FINAL_LEARNING_UNIT_ORDER_POLICY,
+  FINAL_TAXONOMY_PLACEMENT_PRINCIPLES,
   FINAL_TAXONOMY_CLAIM_DECISIONS,
   FINAL_TAXONOMY_OUTCOMES,
   SINGLE_PROBLEM_OUTCOME_IDS,
@@ -1702,7 +1703,7 @@ const finalCandidatesFromPolicy = (
           `${tag.id}/${problemId}`,
         );
       }
-      const usesTag = decision.primaryTagIds.some(
+      const usesTag = [...decision.primaryTagIds, ...decision.supportingTagIds].some(
         (tagId) => tagId === tag.id || (tag.parentId === null && tagHasAncestor(tagId, tag.id)),
       );
       if (!usesTag) {
@@ -2213,6 +2214,7 @@ const semanticImpactsFromEntries = (
 
 export const finalTaxonomyPolicyRulesDigest = (): string =>
   canonicalDigest({
+    placementPrinciples: FINAL_TAXONOMY_PLACEMENT_PRINCIPLES,
     tags: FINAL_TAXONOMY_TAGS,
     outcomes: FINAL_TAXONOMY_OUTCOMES,
     learningUnits: FINAL_LEARNING_UNIT_CANDIDATES,
@@ -2796,14 +2798,16 @@ export const validateFinalTaxonomyBuildAgainstContext = (
     }
     for (const problemId of tag.representativeProblemIds) {
       const placement = placementByProblemId.get(problemId);
-      const usesTagAsPrimary =
-        placement?.primaryTagIds.some(
-          (tagId) => tagId === tag.id || (tag.parentId === null && tagHasAncestor(tagId, tag.id)),
-        ) ?? false;
-      if (!usesTagAsPrimary) {
+      const usesTag = [
+        ...(placement?.primaryTagIds ?? []),
+        ...(placement?.supportingTagIds ?? []),
+      ].some(
+        (tagId) => tagId === tag.id || (tag.parentId === null && tagHasAncestor(tagId, tag.id)),
+      );
+      if (!usesTag) {
         add(
           'TAG_REPRESENTATIVE_MISMATCH',
-          `${problemId} does not use representative Tag ${tag.id} as its primary abstraction.`,
+          `${problemId} does not use representative Tag ${tag.id} as an observable primary or supporting skill.`,
           tag.id,
         );
       }

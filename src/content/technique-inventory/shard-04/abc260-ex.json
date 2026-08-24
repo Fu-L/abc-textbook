@@ -74,7 +74,7 @@
     {
       "name": "有理型母関数と FPS 逆元",
       "trigger": "有限分布 a_t の全冪モーメント Σa_t t^k を多数の k について求めるとき。",
-      "application": "Σa_t/(1−tx) を分子・分母の多項式へまとめ、Newton 法で分母を反転して必要次数まで展開する。",
+      "application": "Σa_t/(1−tx) の分子・分母を積木でbalancedにまとめ、Newton 法で総分母を反転して必要次数まで展開する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

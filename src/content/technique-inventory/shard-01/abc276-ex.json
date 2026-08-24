@@ -64,13 +64,13 @@
     {
       "name": "rectangle queryのprefix corner化",
       "trigger": "長方形和/xorの線形制約が多数あり、cell変数を減らしたいとき。",
-      "application": "2D prefix値を変数にして各式を4 cornerだけで表す。",
+      "application": "各式を4 cornerだけで表し、全queryに現れる高々4Q個のcorner座標をsort-uniqueしてdenseな変数IDへ写す。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
       "name": "bitset Gaussian elimination",
       "trigger": "F_2上の変数・式が数千規模で、密な連立方程式の可解性と一解が必要なとき。",
-      "application": "rowをbitset化してpivot消去し、矛盾行を検出する。",
+      "application": "rowをbitset化してpivot消去し、矛盾行を検出する。pivot情報から一解を復元し、2D差分で出力matrixへ戻す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -91,7 +91,7 @@
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "F_2掃き出し法と2D imos",
+      "text": "F_2掃き出し法の一解復元と2D imos",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

@@ -23,7 +23,7 @@
     ],
     "candidateApproaches": [
       {
-        "approach": "weighted DSUでprefix変数間の差制約を統合・矛盾検出し、独立な必要十分区間式へ整理する。その後、各A_jのbit選択と各式のcarry vectorをstateにした30桁binary DPで解数を数える。",
+        "approach": "weighted DSUでprefix変数間の差制約を統合・矛盾検出し、独立な必要十分区間式へ整理する。その後、各A_jのbit選択と各式のcarry vectorだけを状態にして下位bitから進むcarry DPで解数を数える。",
         "decision": "adopted",
         "decisionReason": "DSU potentialが同成分内の全prefix差を一意に決め、独立式数は高々Nになる。N≤8なのでcarry state積≤1024、各bitの2^N選択を前計算して全遷移を列挙できる。",
         "evidenceIds": ["evidence-official-analysis"]
@@ -58,22 +58,22 @@
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "加算carryのbinary digit DP",
+      "name": "加算式のbitwise carry DP",
       "trigger": "少数変数の複数subset sum等式を大きな値域で数えたいとき。",
-      "application": "各等式のcarry vectorと各変数の現在bitをstate遷移にする。",
+      "application": "各等式のcarry vectorだけを桁間状態として下位bitから遷移する。数値上限との一致を追うtight flagは持たない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "problemSpecificInsights": [
     {
-      "insight": "区間和等式はprefix差制約として線形依存を先に除くと、digit DPで追う式数とcarry空間を縮められる。",
+      "insight": "区間和等式はprefix差制約として線形依存を先に除くと、bitwise carry DPで追う式数とcarry空間を縮められる。",
       "reusablePerspective": "複数加算式も下位bitから処理すれば、過去情報は各式の小さなcarryだけに圧縮できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "prerequisiteCandidates": [
     {
-      "text": "weighted DSUの差制約、加算carryのbinary digit DPと、その不変条件・境界条件を説明できること。",
+      "text": "weighted DSUの差制約と、tight flagを使わず加算式のcarryだけを下位bitから渡すDPの不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -85,7 +85,7 @@
   ],
   "outcomeCandidates": [
     {
-      "text": "少数変数の区間和制約解数を、weighted DSUの独立化とcarry vector binary DPで有限・0・Infinityまで判定できる。",
+      "text": "少数変数の区間和制約解数を、weighted DSUの独立化とbitwise carry vector DPで有限・0・Infinityまで判定できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

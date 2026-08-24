@@ -31,7 +31,7 @@
     ],
     "candidateApproaches": [
       {
-        "approach": "Xからrootまでancestorを列挙し、各LCA caseを子孫label区間の長さでO(1)計数する。",
+        "approach": "Xからrootまでancestorを算術で列挙し、各ancestorをpathの折返し点とするcaseを子孫label区間の長さでO(1)計数する。",
         "decision": "adopted",
         "decisionReason": "Nが10^18でもtree高さは約60で、頂点やedgeを生成せず各testを処理できる。",
         "evidenceIds": ["evidence-official-analysis"]
@@ -76,9 +76,9 @@
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "LCA位置での経路分類",
+      "name": "ancestor位置での距離case分解",
       "trigger": "固定始点から距離Kの頂点をrooted treeで数えるとき。",
-      "application": "pathが上へ何段進んでから下るかをancestorごとに分ける。",
+      "application": "pathが上へ何段進んでから別の枝へ下るかをancestorごとに分ける。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
@@ -101,7 +101,7 @@
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "LCAとtree distance",
+      "text": "共通祖先とtree distanceの関係",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {

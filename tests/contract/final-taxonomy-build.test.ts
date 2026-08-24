@@ -236,9 +236,10 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         expect(assigned.length).toBeGreaterThanOrEqual(2);
         for (const problemId of candidate.entity.representativeProblemIds) {
           expect(
-            placementByProblemId
-              .get(problemId)
-              ?.primaryTagIds.some((tagId) => isSameOrDescendantTag(tagId, candidate.entity.id)),
+            [
+              ...(placementByProblemId.get(problemId)?.primaryTagIds ?? []),
+              ...(placementByProblemId.get(problemId)?.supportingTagIds ?? []),
+            ].some((tagId) => isSameOrDescendantTag(tagId, candidate.entity.id)),
           ).toBe(true);
         }
       } else if (candidate.kind === 'outcome') {

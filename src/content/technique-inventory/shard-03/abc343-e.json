@@ -50,7 +50,7 @@
     {
       "name": "平行移動対称性の固定",
       "trigger": "配置問題の目的が物体間の相対位置だけで決まる。",
-      "application": "一つのcube原点を固定し、全体translationの自由度を除く。",
+      "application": "一つのcubeを原点へ固定し、接触まで平行移動できることから残る6座標を[-7,7]へ界して15^6候補を全列挙する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {

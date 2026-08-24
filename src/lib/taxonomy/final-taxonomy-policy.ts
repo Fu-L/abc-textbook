@@ -15,6 +15,18 @@ import { CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 } from './final-taxonomy-decisi
 export type TaxonomyIntegrationAction = 'promote' | 'merge' | 'split' | 'retire';
 export type TaxonomyEntityKind = 'tag' | 'outcome' | 'unit';
 
+/** Semantic rules used when turning reviewed Inventory claims into textbook placements. */
+export const FINAL_TAXONOMY_PLACEMENT_PRINCIPLES = Object.freeze({
+  primary:
+    '主解法の成立と計算量を決め、読者が解後に再利用可能な形で説明・実装できる技能だけをprimaryにする。',
+  supporting:
+    '主解法とは別の観察可能な技能を実際に発動するときだけsupportingとし、用語が説明に現れるだけではUnitを付与しない。',
+  fallback:
+    '対象読者の共通前提はbaseline、独立した再利用技能にならない問題固有の工夫はproblem_specificにする。',
+  boundaries:
+    '候補数を直接界す独立工程の列挙とmeet-in-the-middleを区別し、部分集合・約数・DP遷移などの専用primary技能だけで列挙を説明し切れる場合はgenericなbounded列挙を重ねない。座標圧縮とevent sweepと単純scan、tight・automatonを接頭辞更新する桁DPと整除鎖・加算式のcarryだけを下位桁から渡すDP、概念上のLCAと実装するancestor・Euler・HLD・virtual tree、存在判定だけの解法と親・選択記録から具体解を復元する構成法を区別する。',
+});
+
 export interface ProblemAnalysisEvidenceInput {
   readonly id: string;
   readonly sourceRevisionIds: readonly string[];
@@ -241,11 +253,19 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
   ],
   'unit-two-pointers-window': ['値域上の真偽境界を探す二分探索・パラメトリックサーチ。'],
   'unit-events-offline': [
-    '入力順のまま処理でき、イベント整列や寄与順の交換を要しないオンライン更新。',
+    'sort-uniqueした疎なkeyをdense indexへ写すだけの座標圧縮、および固定配列・行列を入力順のまま読むだけのscan。',
+  ],
+  'unit-coordinate-compression': [
+    '値・時刻順にactive集合を増減するevent sweep、および固定配列・行列を入力順のまま読むだけのscan。',
   ],
   'unit-normalization': ['交換論による貪欲順の証明。'],
   'unit-greedy-exchange': ['対称操作による状態の正規化。'],
-  'unit-divide-enumeration': ['軽重分類や変化回数によって総仕事量を界す償却解析。'],
+  'unit-bounded-enumeration': [
+    '探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。',
+  ],
+  'unit-divide-enumeration': [
+    '候補数を制約・生成パラメータ・有限caseで直接界して全列挙する探索、軽重分類による償却解析、および入力木・trie・区間DPの構造をそのまま辿るだけの再帰。',
+  ],
   'unit-decomposition-amortization': [
     '探索空間を分けて候補を列挙・照合するmeet-in-the-middleや分割統治。',
   ],
@@ -265,7 +285,10 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'unit-dp-subset-resource': ['入力順や区間端点だけを状態にし、集合・容量軸を持たないDP。'],
   'unit-dp-sequence-interval': ['bitmask集合や容量だけを状態にし、列順・区間分割を持たないDP。'],
   'unit-dp-digit-string': [
-    '桁・繰り上がり・上限との一致を状態に持たない、一般の文字列オートマトン。',
+    '上限との一致や文字列automatonを持たず、整除鎖・加算式のcarryだけを状態にするDP。',
+  ],
+  'unit-dp-carry-mixed-radix': [
+    '数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。',
   ],
   'unit-dp-stochastic': ['二人零和ゲームの勝敗・Grundy数。'],
   'unit-dp-game': ['得点差・最適手数・partisan局面値を求めるminimax評価。'],
@@ -287,14 +310,19 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'unit-functional-graph': ['各頂点から複数の後続を選べる一般のグラフ探索・強連結成分への縮約。'],
   'unit-tree-metric': ['根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。'],
   'unit-tree-aggregation': [
-    '木上パスの連続区間分解、重心による再帰分解、および更新のためのTop Tree cluster化。',
+    'heap番号で暗黙に表された完全二分木の区間算術、木上パスの連続区間分解、重心による再帰分解、および更新のためのTop Tree cluster化。',
+  ],
+  'unit-implicit-binary-tree': [
+    '子を明示した一般木の木DP・rerooting、およびLCA・Euler順・HLD・virtual treeを実装するpath query。完全二分木でも個々の頂点を列挙する処理。',
   ],
   'unit-static-top-tree': [
     '更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition。',
   ],
   'unit-flow-matching': ['Eulerウォークの次数・偶奇条件。'],
   'unit-euler-degree': ['容量付きフロー・マッチング・最小カットへの帰着。'],
-  'unit-tree-decomposition': ['重心による成分サイズの半減と再帰分解。'],
+  'unit-tree-decomposition': [
+    'LCAという概念で対象を一意分類するだけで、ancestor query・Euler区間化・HLD・virtual treeを実装利用しない数え上げ、および重心による再帰分解。',
+  ],
   'unit-tree-balanced-separators': ['LCA・HLDによる固定木上パスの区間分解。'],
   'unit-lowlink-critical-structure': [
     '次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。',
@@ -366,7 +394,7 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
     '素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。',
   ],
   'unit-geometry-primitives': ['凸包の境界候補列挙・半平面交差。'],
-  'unit-convex-geometry': ['凸性を使わない一般のイベント走査・座標圧縮。'],
+  'unit-convex-geometry': ['凸性を使わない一般のevent sweepや座標圧縮。'],
   'unit-discrete-convex': ['真偽値の単調境界探索と、交換論だけで決まる貪欲順。'],
   'unit-constructive-witness': ['存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。'],
 };
@@ -437,18 +465,36 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-events-offline',
-    'イベント・寄与・時間の向きを組み替える',
+    'event・逆走査・寄与分解で処理順を組み替える',
     'unit-chapter-modeling',
     [],
     1,
     1,
     1,
   ),
+  section(
+    'unit-coordinate-compression',
+    '疎なkeyの順序を保ってdense indexへ圧縮する',
+    'unit-chapter-modeling',
+    [],
+    1,
+    0,
+    2,
+  ),
   section('unit-normalization', '同値な状態を正規化する', 'unit-chapter-modeling', [], 1, 1, 2),
   section('unit-greedy-exchange', '交換論から選択順を導く', 'unit-chapter-modeling', [], 1, 1, 3),
   section(
+    'unit-bounded-enumeration',
+    '候補数を界して全列挙・有限case分解する',
+    'unit-chapter-modeling',
+    [],
+    1,
+    1,
+    4,
+  ),
+  section(
     'unit-divide-enumeration',
-    '探索空間を分けて列挙・分割統治する',
+    '探索空間を分けて照合・再帰分割する',
     'unit-chapter-modeling',
     [],
     2,
@@ -529,10 +575,19 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-dp-digit-string',
-    '桁・繰り上がり・接頭辞制約を状態にするDP',
+    '上限制約・文字列状態を接頭辞から更新するDP',
     'unit-chapter-dynamic-programming',
     ['unit-dp-state-design'],
     3,
+    2,
+    3,
+  ),
+  section(
+    'unit-dp-carry-mixed-radix',
+    '繰り上がり・借り・混合基数を状態にするDP',
+    'unit-chapter-dynamic-programming',
+    ['unit-dp-state-design'],
+    2,
     2,
     3,
   ),
@@ -581,7 +636,15 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     3,
     8,
   ),
-  section('unit-graph-search', '状態グラフ探索と到達関係', 'unit-chapter-graph', [], 1, 0, 0),
+  section(
+    'unit-graph-search',
+    '方向別scan・状態グラフ探索・到達関係',
+    'unit-chapter-graph',
+    [],
+    1,
+    0,
+    0,
+  ),
   section(
     'unit-shortest-path-certificates',
     '重み付き最短路・経路復元・変更影響',
@@ -620,7 +683,7 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-directed-condensation',
-    '有向グラフの閉路を整理しDAG順に処理する',
+    'SCCで閉路・DAG順・2-SATを処理する',
     'unit-chapter-graph',
     ['unit-graph-search'],
     2,
@@ -655,6 +718,15 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     6,
   ),
   section(
+    'unit-implicit-binary-tree',
+    '対称性・深さ・label区間で巨大な完全二分木を数える',
+    'unit-chapter-graph',
+    [],
+    2,
+    1,
+    6,
+  ),
+  section(
     'unit-static-top-tree',
     'rake・compressで動的木DPを保つ',
     'unit-chapter-graph',
@@ -665,7 +737,7 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-tree-decomposition',
-    '木上のパスを祖先関係と連続区間に分解する',
+    'ancestor query・Euler順・HLD・virtual treeで木を分解する',
     'unit-chapter-graph',
     [],
     3,
@@ -692,7 +764,7 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-euler-degree',
-    '次数の偶奇からウォークの成立性を特徴付ける',
+    '次数parityからwalkや選択辺集合を判定・構成する',
     'unit-chapter-graph',
     ['unit-graph-search'],
     2,
@@ -1037,7 +1109,7 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-convex-geometry',
-    '凸幾何と直線包絡から境界候補を選ぶ',
+    '凸境界・半平面制約・直線包絡を扱う',
     'unit-chapter-math-geometry',
     ['unit-geometry-primitives'],
     2,
@@ -1082,12 +1154,16 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-two-pointers-window':
     '窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。',
   'unit-events-offline':
-    '入力順に固執せず、時刻・座標・寄与の順を並べ替えることで、更新や集計を一方向の走査へ変換する。',
+    '入力順に固執せず、値・時刻・座標順のeventとactive集合を設計する、更新を逆順にして未来依存を消す、または答えを独立な局所寄与へ分けて集計順を交換する。疎なkeyの添字化だけは座標圧縮として分離する。',
+  'unit-coordinate-compression':
+    '比較に必要なのが順序と等値性だけであることを確認し、疎な初期値・将来更新値・event座標をsort-uniqueしたdense indexへ写す。',
   'unit-normalization':
     '対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。',
   'unit-greedy-exchange': '局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。',
+  'unit-bounded-enumeration':
+    '制約、生成パラメータ、固定選択数、有限な幾何caseから候補総数を先に界し、全候補を漏れなく評価する。',
   'unit-divide-enumeration':
-    '全探索を半分または再帰部分へ分け、列挙結果を重複なく合成して扱える入力規模を広げる。',
+    '探索空間を独立な二集合または再帰部分へ分けるか、部分結果をbalancedな積木・remainder tree・CDQで合成し、重複なく扱える入力規模を広げる。',
   'unit-decomposition-amortization':
     '各操作ではなく操作列全体の変化回数を数え、軽重分類や一度限りの移動で総計算量を抑える。',
   'unit-change-impact-localization':
@@ -1107,7 +1183,9 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-dp-sequence-interval':
     '状態設計を土台に、列順を保つ選択と区間の分割点という二つの合成方法を学ぶ。',
   'unit-dp-digit-string':
-    '状態設計を土台に、上限との一致・桁・繰り上がりを有限状態として持つ数え上げへ進む。',
+    '状態設計を土台に、数値上限との一致や文字列automatonの進行状態を接頭辞ごとに更新する数え上げへ進む。',
+  'unit-dp-carry-mixed-radix':
+    '状態設計を土台に、整除鎖の丸めや複数項の加算で次の桁へ渡すcarryだけを有限状態として保つ。',
   'unit-dp-stochastic':
     '状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。',
   'unit-dp-game':
@@ -1119,7 +1197,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-linear-recurrence':
     '一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。',
   'unit-graph-search':
-    '既知のDFS・BFS実装を土台に、問題の状態を頂点、合法操作を辺として設計し、必要なら中継点を順に許可して到達関係全体を求める。',
+    '既知のDFS・BFS実装を土台に、方向別scanで静的な進入禁止条件を前計算するか、問題の状態を頂点、合法操作を辺として設計し、必要なら中継点を順に許可して到達関係全体を求める。',
   'unit-shortest-path-certificates':
     '状態グラフを構成できた後、辺重みと緩和条件を加えて最短距離を求め、距離等式から経路や変更影響を復元する。',
   'unit-connectivity':
@@ -1129,23 +1207,25 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-spanning-tree-optimization':
     '連結成分管理と貪欲の交換論を土台に、cut・cycle性質からKruskal法と辺の採否条件を導く。',
   'unit-directed-condensation':
-    '到達可能性を理解した後、相互到達する頂点を強連結成分へまとめ、DAG順の伝播へ変換する。',
+    '到達可能性を理解した後、相互到達する頂点を強連結成分へまとめ、DAG順の伝播またはimplication graphの矛盾判定へ使う。',
   'unit-functional-graph':
     '状態グラフを理解した後、後続が一意という制約からcycleと流入木への分解やダブリングを導く。',
   'unit-tree-metric':
     '木を探索して距離を求められることを前提に、直径の二端点が最遠候補を代表する性質と、中心による分岐の整理を学ぶ。',
   'unit-tree-aggregation':
     '探索で親子関係を作りDP状態を定義できた後、子側の集約と親側への差し替えで木全体の値を求める。',
+  'unit-implicit-binary-tree':
+    '指数個の頂点を持つ完全二分木を展開せず、深さごとの対称性と2冪で集約するか、heap番号の祖先移動と深さ別子孫label区間で数える。',
   'unit-static-top-tree':
     '木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。',
   'unit-tree-decomposition':
-    '基本的な木DFSと祖先関係を使い、木上パスをLCA・HLD・virtual treeの少数区間へ分解する。',
+    '基本的な木DFSを土台に、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。',
   'unit-tree-balanced-separators':
     '部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える。',
   'unit-flow-matching':
     '頂点と辺のモデルを作れることを前提に、選択制約を容量・カット・マッチングへ翻訳する。',
   'unit-euler-degree':
-    'グラフを探索できることを前提に、全辺を使うwalkを次数の偶奇と連結性で特徴付ける。',
+    'グラフを探索できることを前提に、全辺walkの成立性や選択辺集合の端点条件を次数parityで特徴付け、葉から判定・構成する。',
   'unit-lowlink-critical-structure':
     'DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。',
   'unit-graph-core-peeling':
@@ -1226,7 +1306,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-geometry-primitives':
     '座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。',
   'unit-convex-geometry':
-    '向きと交差を判定できた後、凸境界へ候補を絞り、直線包絡から最適候補を選ぶ。',
+    '向きと交差を判定できた後、凸境界への候補限定、半平面制約の共通部分、直線包絡による最適化を区別して扱う。',
   'unit-discrete-convex':
     '目的関数の凸・凹性と傾き変化を捉え、breakpointや限界費用から最適点を求める。',
 };
@@ -1411,14 +1491,14 @@ const TAG_SEEDS: readonly TagSeed[] = [
     priority: 78,
   },
   {
-    id: 'tag-sweep-coordinate-compression',
-    name: 'イベント走査・座標圧縮',
-    definition: 'イベント座標を離散化・整列し、走査中に有効な情報を更新する。',
+    id: 'tag-event-sweep',
+    name: 'event・値順のオフライン走査',
+    definition:
+      '値・時刻・座標順にeventを並べ、同値eventの処理順を定めてactive集合や集約を増分更新する。',
     parentId: 'tag-model-reduction',
     outcomeIds: ['outcome-linearize-events'],
     unitIds: ['unit-events-offline'],
     recall: [
-      '座標圧縮',
       '走査線',
       'sweep line',
       'event sweep',
@@ -1429,11 +1509,28 @@ const TAG_SEEDS: readonly TagSeed[] = [
       'オフライン.*走査',
       '平面走査',
     ],
-    object: ['座標', 'event', '区間', '時刻'],
-    trigger: ['sort', 'ソート', '圧縮', 'sweep', '差分'],
-    invariant: ['active', '隣接座標', '座標間'],
+    object: ['event', '区間', '時刻', '値', 'threshold'],
+    trigger: ['sort', 'ソート', 'sweep', 'activate', 'deactivate'],
+    invariant: ['active', '同値eventの順序', '処理済み境界'],
     goal: ['全体', '面積', '同時', '区間'],
+    exclude: ['座標圧縮だけ', 'sort.?uniqueだけ', '固定.*方向.*scanだけ', '単純scanだけ'],
     priority: 72,
+  },
+  {
+    id: 'tag-coordinate-compression',
+    name: '座標・値の順序保存圧縮',
+    definition:
+      '疎な初期値・将来更新値・event座標をsort-uniqueし、順序と等値性を保つdense indexまたは有限状態へ写す。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-compress-sparse-keys'],
+    unitIds: ['unit-coordinate-compression'],
+    recall: ['座標圧縮', '値圧縮', 'coordinate compression', 'rank compression', 'sort.?unique'],
+    object: ['座標', '値', 'key', '更新値', '疎な状態'],
+    trigger: ['sort', 'unique', '大小関係だけ', '将来のqueryを先読み'],
+    invariant: ['順序を保つ', '等値性を保つ', 'dense index', '有限候補'],
+    goal: ['配列添字化', 'Fenwick Tree', 'Segment Tree', '有限状態化'],
+    exclude: ['固定.*方向.*scanだけ', '単純scanだけ', 'linear scan only'],
+    priority: 73,
   },
   {
     id: 'tag-reverse-offline',
@@ -1523,10 +1620,34 @@ const TAG_SEEDS: readonly TagSeed[] = [
     priority: 70,
   },
   {
-    id: 'tag-divide-enumerate',
-    name: '構造化列挙・分割統治',
+    id: 'tag-bounded-enumeration',
+    name: '有界全列挙・有限case分解',
     definition:
-      '少数の生成パラメータへ落として候補を直接列挙するか、探索空間を独立な集合へ分けて照合・再帰分割する。',
+      '制約、少数の生成パラメータ、固定選択数、有限な幾何caseから候補総数を直接界し、全候補を評価する。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-enumerate-bounded-candidates-or-cases'],
+    unitIds: ['unit-bounded-enumeration'],
+    recall: [
+      '生成全探索',
+      '全組合せ',
+      '固定size.*列挙',
+      'bounded exhaustive search',
+      'brute force',
+      '有限.*case',
+      '定数個.*場合分け',
+    ],
+    object: ['候補', '組合せ', '生成パラメータ', '配置', 'case'],
+    trigger: ['候補数', '高々', '固定個', '全て試す', '場合分け'],
+    invariant: ['漏れなく', '重複なく', '候補総数の上界'],
+    goal: ['最適値', '存在判定', '構成', '全caseの評価'],
+    exclude: ['meet.?in.?the.?middle', '半分.*列挙', 'divide.?and.?conquer', '分割統治'],
+    priority: 67,
+  },
+  {
+    id: 'tag-divide-enumerate',
+    name: '分割列挙・分割統治',
+    definition:
+      '探索空間を独立に列挙できる集合へ分けて照合するか、pivot・bit・短い側で再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで合成する。',
     parentId: 'tag-model-reduction',
     outcomeIds: ['outcome-split-enumeration-space', 'outcome-divide-search-space-recursively'],
     unitIds: ['unit-divide-enumeration'],
@@ -1539,13 +1660,46 @@ const TAG_SEEDS: readonly TagSeed[] = [
       'pivot',
       'baby.?step.?giant.?step',
       '\\bbsgs\\b',
-      '構造化.*生成全探索',
-      '生成全探索',
+      'product tree',
+      'subproduct',
+      'remainder tree',
+      '積木',
+      '\\bcdq\\b',
+      'balanced.*merge',
     ],
-    object: ['部分集合', '候補', '探索空間', '選択', 'path', '経路', 'xor'],
-    trigger: ['半分', '列挙', '組合せを分', 'anti-diagonal', '中央.*分'],
-    invariant: ['合成', '独立', '照合'],
-    goal: ['存在判定', '個数', '最適値'],
+    object: [
+      '部分集合',
+      '候補',
+      '探索空間',
+      '選択',
+      'path',
+      '経路',
+      'xor',
+      '多項式',
+      'event',
+      'target',
+    ],
+    trigger: [
+      '半分',
+      '列挙',
+      '組合せを分',
+      'anti-diagonal',
+      '中央.*分',
+      '再帰分割',
+      'balanced',
+      'product tree',
+    ],
+    invariant: ['合成', '独立', '照合', '重複なく', 'balanced'],
+    goal: ['存在判定', '個数', '最適値', '一括評価', '高速合成'],
+    exclude: [
+      '固定size.*全列挙',
+      '生成パラメータ.*全探索',
+      '有限.*case',
+      '入力木.*そのまま.*再帰',
+      'trie.*そのまま.*再帰',
+      '区間DP.*分割点',
+      '重心分解',
+    ],
     priority: 68,
   },
   {
@@ -1708,19 +1862,42 @@ const TAG_SEEDS: readonly TagSeed[] = [
     priority: 76,
   },
   {
-    id: 'tag-digit-automaton-dp',
-    name: '桁・繰り上がり・automaton DP',
+    id: 'tag-carry-mixed-radix-dp',
+    name: '繰り上がり・混合基数DP',
     definition:
-      '数値や文字列を接頭辞から構成し、上限との一致・繰り上がり・残数・automaton状態を保つ。',
+      '整除鎖の丸め、支払いと釣銭、複数項の加算を下位桁から処理し、次の桁へ渡すcarry・borrowだけを状態に保つ。',
+    parentId: 'tag-dp-state-transition',
+    outcomeIds: ['outcome-design-carry-or-mixed-radix-dp'],
+    unitIds: ['unit-dp-carry-mixed-radix'],
+    recall: [
+      'carry.?dp',
+      '繰り上がり.?dp',
+      '繰り下がり.?dp',
+      '混合基数',
+      'mixed.?radix',
+      '支払い.*釣銭',
+    ],
+    object: ['桁', 'carry', 'borrow', '額面', '整除鎖', '混合基数'],
+    trigger: ['下位桁から', '繰り上がり', '切り上げ', '切り下げ', '釣銭'],
+    invariant: ['次桁へのcarry', '整除関係', '端数', '有限carry vector'],
+    goal: ['最小枚数', '加算制約', '可解性', '解数'],
+    exclude: ['tight', '未満フラグ', '文字列automaton'],
+    priority: 81,
+  },
+  {
+    id: 'tag-digit-automaton-dp',
+    name: '桁上限・文字列automaton DP',
+    definition:
+      '数値や文字列を接頭辞から構成し、上限との一致・残数・禁止または要求patternのautomaton状態を保つ。',
     parentId: 'tag-dp-state-transition',
     outcomeIds: ['outcome-count-prefix-constrained-objects'],
     unitIds: ['unit-dp-digit-string'],
     recall: ['桁.?dp', 'digit.?dp', 'automaton.?dp', 'オートマトン.?dp'],
-    object: ['桁', '上限', '数字列', '十進表記', '混合基数'],
-    trigger: ['prefix', '未満フラグ', '残数', '桁ごと', '繰り上がり', '繰り下がり'],
-    invariant: ['上限と一致', '先頭ゼロ', 'automaton', 'carry'],
-    goal: ['以下の個数', '条件を満たす数', '辞書順', '最小コスト'],
-    exclude: ['syntax', '文法', '構文木', 'parser'],
+    object: ['桁', '上限', '数字列', '十進表記', '文字列pattern'],
+    trigger: ['prefix', '未満フラグ', '残数', '桁ごと', 'automaton'],
+    invariant: ['上限と一致', '先頭ゼロ', 'automaton', 'tight flag'],
+    goal: ['以下の個数', '条件を満たす数', '辞書順'],
+    exclude: ['syntax', '文法', '構文木', 'parser', 'carryだけ', '混合基数'],
     requireObjectForStrictRecall: true,
     priority: 82,
   },
@@ -1839,7 +2016,7 @@ const TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-reachability-bfs',
     name: '状態グラフ探索・推移閉包',
     definition:
-      '状態を頂点、一手を辺として探索するか、中継頂点を順に許可して重みなしの到達関係を推移閉包として求める。',
+      '必要なら方向別scanで長い静的制約を通行可否へ前処理し、状態を頂点、一手を辺として探索するか、中継頂点を順に許可して到達関係を求める。',
     parentId: 'tag-graph-model-structure',
     outcomeIds: ['outcome-select-state-graph-search', 'outcome-compute-transitive-closure'],
     unitIds: ['unit-graph-search'],
@@ -1990,10 +2167,14 @@ const TAG_SEEDS: readonly TagSeed[] = [
   },
   {
     id: 'tag-directed-condensation-toposort',
-    name: '有向グラフの閉路・SCC・DAG順序',
-    definition: '有向グラフの閉路と依存関係を整理し、必要なら強連結成分へ縮約してDAG順に処理する。',
+    name: '有向グラフの閉路・SCC・DAG順序・2-SAT',
+    definition:
+      '有向グラフの閉路と依存関係を整理し、強連結成分への縮約、DAG順の処理、またはimplication graphによる2-SAT判定を行う。',
     parentId: 'tag-graph-model-structure',
-    outcomeIds: ['outcome-condense-and-order-directed-graph'],
+    outcomeIds: [
+      'outcome-condense-and-order-directed-graph',
+      'outcome-encode-threshold-constraints-as-two-sat',
+    ],
     unitIds: ['unit-directed-condensation'],
     recall: [
       '強連結成分',
@@ -2002,11 +2183,14 @@ const TAG_SEEDS: readonly TagSeed[] = [
       'topological',
       '連結成分の?縮約',
       '\\bdag\\b',
+      '2.?sat',
+      'implication graph',
+      '含意グラフ',
     ],
-    object: ['有向グラフ', '頂点', '有向辺', 'dag'],
-    trigger: ['相互到達', '依存関係', '順序'],
-    invariant: ['scc', '縮約', '入次数', '閉路なし'],
-    goal: ['順序', '最長路', '到達関係', '成分'],
+    object: ['有向グラフ', '頂点', '有向辺', 'dag', 'boolean命題'],
+    trigger: ['相互到達', '依存関係', '順序', '二項clause', 'implication'],
+    invariant: ['scc', '縮約', '入次数', '閉路なし', '変数と否定が別SCC'],
+    goal: ['順序', '最長路', '到達関係', '成分', '充足割当'],
     priority: 84,
   },
   {
@@ -2057,6 +2241,28 @@ const TAG_SEEDS: readonly TagSeed[] = [
     priority: 82,
   },
   {
+    id: 'tag-implicit-binary-tree-arithmetic',
+    name: '暗黙・対称な完全二分木の深さ算術',
+    definition:
+      '巨大な完全二分木を展開せず、同じ深さの対称性と2冪で集約するか、heap番号の祖先移動と深さdの子孫label区間を使って数える。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-count-implicit-binary-tree-layers'],
+    unitIds: ['unit-implicit-binary-tree'],
+    recall: [
+      'implicit complete binary tree',
+      '暗黙.*完全二分木',
+      '完全二分木.*深さ.*集約',
+      'heap index',
+      'heap番号',
+      '子孫.*区間',
+    ],
+    object: ['完全二分木', '深さ', 'heap番号', '共通祖先', '子孫'],
+    trigger: ['頂点数が指数的', '深さだけで同型', '2倍', '2v', '2v+1', 'ancestorを上る'],
+    invariant: ['同じ深さの部分木は同型', '深さdの子孫は2冪個または連続区間', '親はfloor(v/2)'],
+    goal: ['距離層の個数', '頂点対の個数', '子孫数', '深さ別集約'],
+    priority: 80,
+  },
+  {
     id: 'tag-tree-aggregation-reroot',
     name: '木DP・部分木集約・全方位木DP',
     definition:
@@ -2072,8 +2278,6 @@ const TAG_SEEDS: readonly TagSeed[] = [
       'postorder.?dp',
       'reroot',
       '全方位木.?dp',
-      'implicit complete binary tree',
-      '暗黙.*完全二分木',
     ],
     object: ['木', '親', '子', '部分木'],
     trigger: ['根付け', '子の答え', '全頂点を根'],
@@ -2099,11 +2303,16 @@ const TAG_SEEDS: readonly TagSeed[] = [
   },
   {
     id: 'tag-tree-path-decomposition',
-    name: '木上パスの分解・LCA・HLD',
+    name: '祖先query・Euler順・HLD・virtual tree',
     definition:
-      '木上のパスを祖先関係・Euler順の連続区間・virtual treeへ分解し、query・数え上げを処理する。',
+      'binary lifting等でancestor/LCAを実際に問い合わせるか、Euler順・HLD・virtual treeへ木構造を明示的に分解してquery・数え上げを処理する。',
     parentId: 'tag-graph-model-structure',
-    outcomeIds: ['outcome-decompose-tree-path-queries'],
+    outcomeIds: [
+      'outcome-answer-tree-ancestor-queries',
+      'outcome-flatten-tree-by-euler-order',
+      'outcome-apply-heavy-light-decomposition',
+      'outcome-build-virtual-tree',
+    ],
     unitIds: ['unit-tree-decomposition'],
     recall: [
       'heavy.?light',
@@ -2990,17 +3199,21 @@ const TAG_SEEDS: readonly TagSeed[] = [
   },
   {
     id: 'tag-convex-hull-halfplane',
-    name: '凸包・半平面・幾何境界',
-    definition: '点・半平面の幾何的な内外と交差を整理し、凸境界上の候補だけを調べる。',
+    name: '凸包・半平面制約・幾何境界',
+    definition:
+      '凸境界上へ候補を限定するか、凸多角形を向き付き辺の半平面制約の共通部分として表し、平行な制約を最も強い右辺へ集約する。',
     parentId: 'tag-math-geometry-transformation',
     prerequisiteTagIds: ['tag-geometry-orientation-transform'],
-    outcomeIds: ['outcome-restrict-geometric-candidates-to-boundary'],
+    outcomeIds: [
+      'outcome-restrict-geometric-candidates-to-boundary',
+      'outcome-represent-convex-intersection-by-halfplanes',
+    ],
     unitIds: ['unit-convex-geometry'],
     recall: ['convex hull', '凸包', 'half.?plane', '半平面', '回転キャリパー'],
-    object: ['点集合', '多角形', '直線', '境界'],
-    trigger: ['内側', '外側', '極値', '支配'],
-    invariant: ['凸', 'cross', '境界上', '接線'],
-    goal: ['面積', '最適点', '含まれる', '候補絞り込み'],
+    object: ['点集合', '凸多角形', '直線', '半平面', '境界'],
+    trigger: ['内側', '外側', '極値', '支配', '全ての平行移動後', '線形不等式'],
+    invariant: ['凸', 'cross', '境界上', '接線', '同じ法線の最強制約'],
+    goal: ['面積', '最適点', '包含判定', '候補絞り込み', '共通部分'],
     priority: 88,
   },
   {
@@ -3082,7 +3295,9 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-maintain-monotone-window':
     '一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。',
   'outcome-linearize-events':
-    'イベントを離散化・整列し、走査中に有効な情報と端点処理を設計できる。',
+    '値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。',
+  'outcome-compress-sparse-keys':
+    '初期値・将来更新値・疎なevent座標をsort-uniqueし、順序と等値性を保つdense indexまたは有限状態へ写せる。',
   'outcome-reverse-update-time':
     '時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる。',
   'outcome-reorder-counting-contributions':
@@ -3092,10 +3307,12 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '群作用の固定点数を群要素のcycle typeごとに数え、BurnsideまたはPólyaの平均でorbit数を求められる。',
   'outcome-prove-greedy-order':
     '局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。',
+  'outcome-enumerate-bounded-candidates-or-cases':
+    '制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。',
   'outcome-split-enumeration-space':
-    '候補を直接構造化列挙するか、探索空間を小集合に分けて列挙結果を照合できる。',
+    '探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。',
   'outcome-divide-search-space-recursively':
-    'pivot・上位bit・短い側を選ぶ基準を示し、重複なく部分問題へ再帰分割できる。',
+    'pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。',
   'outcome-bound-total-work':
     '軽重・倍化・単調な一度限りの移動や削除から、操作列全体の仕事量の上界を説明できる。',
   'outcome-design-and-bound-randomized-algorithm':
@@ -3112,8 +3329,10 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-design-order-preserving-dp': '列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。',
   'outcome-design-interval-split-dp':
     '区間または接頭辞の分割点を列挙し、小問題の答えを合成できる。',
+  'outcome-design-carry-or-mixed-radix-dp':
+    '整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。',
   'outcome-count-prefix-constrained-objects':
-    '上限との一致・繰り上がり・残数などを状態にし、個数または最適値を求められる。',
+    '上限との一致・先頭ゼロ・残数・文字列automaton状態を接頭辞ごとに更新し、個数または最適値を求められる。',
   'outcome-solve-stochastic-recurrence': '確率遷移から期待値または到達確率の再帰式を立てて解ける。',
   'outcome-classify-game-states':
     '後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。',
@@ -3124,7 +3343,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-accelerate-fixed-linear-transition':
     '固定線形遷移を行列または漸化式にし、巨大回数後の値を求められる。',
   'outcome-select-state-graph-search':
-    '状態・重みなし辺・訪問条件を定義し、BFS・DFS・backtrackingを選ぶか、外枠から補集合をflood fillして囲まれた穴を検出できる。',
+    '必要なら方向別scanで長い静的制約を通行可否へ前処理し、状態・重みなし辺・訪問条件を定義してBFS・DFS・backtrackingを選べる。',
   'outcome-compute-transitive-closure':
     '各始点探索または中継許可集合の段階不変条件を保つWarshall更新で推移閉包を求め、必要なら初回到達段階も記録できる。',
   'outcome-model-and-compute-shortest-path':
@@ -3145,20 +3364,30 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     'cut・cycle性質で辺の安全性を証明し、Kruskal法または同値な選択で最小・最大全域木を構成できる。',
   'outcome-condense-and-order-directed-graph':
     '有向グラフの閉路を扱い、必要なら強連結成分へ縮約してDAG順に情報を伝播できる。',
+  'outcome-encode-threshold-constraints-as-two-sat':
+    '整数変数をthreshold命題列へ符号化し、単調性と二項制約をimplication graphへ張り、SCCから可否と充足割当を復元できる。',
   'outcome-decompose-functional-graph':
     '後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる。',
   'outcome-jump-deterministic-transition':
     '一意な遷移の2の冪回先を前計算し、巨大回数後の状態または区間到達を求められる。',
   'outcome-use-tree-diameter-extrema':
     '二回の木探索で直径端点を求め、任意点の最遠候補・木の中心・部分集合の直径を少数の端点で代表できる。',
+  'outcome-count-implicit-binary-tree-layers':
+    '同じ深さの対称性と2冪で距離splitを集約するか、heap番号の祖先case分解と子孫label区間を使い、巨大な完全二分木を展開せず数えられる。',
   'outcome-aggregate-rooted-tree':
-    '根付き木で子側の状態を合成するか暗黙木の祖先・子孫方向を分け、部分木・距離層・木全体の値を求められる。',
+    '根付き木で子側の状態を合成し、部分木または木全体の値を求められる。',
   'outcome-reroot-tree-aggregation':
     '子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。',
   'outcome-compose-dynamic-tree-clusters':
     '境界頂点を持つtree clusterの要約と結合を定義し、局所更新後の木DP値を保てる。',
-  'outcome-decompose-tree-path-queries':
-    '木上のパスを祖先関係・連続区間・virtual treeへ分解し、問い合わせまたは数え上げを処理できる。',
+  'outcome-answer-tree-ancestor-queries':
+    'binary lifting等を前計算し、level ancestor・LCA・木距離をqueryとして取得できる。',
+  'outcome-flatten-tree-by-euler-order':
+    'Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる。',
+  'outcome-apply-heavy-light-decomposition':
+    'heavy childを選んで木をheavy path列へ分け、path range queryまたはbalanced tree-cluster構築へ接続できる。',
+  'outcome-build-virtual-tree':
+    '対象頂点と必要なLCAだけをEuler順・stackで結び、元の木上pathを保つvirtual treeを構成できる。',
   'outcome-build-balanced-separator-decomposition':
     '各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる。',
   'outcome-reduce-selection-to-network-optimization':
@@ -3222,7 +3451,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-exploit-modular-periodicity':
     '剰余類上の周期または指数法則を示し、周期状態の前計算や巨大指数の簡約で値を求められる。',
   'outcome-characterize-integer-solvability':
-    '整除条件や一次不定方程式の可解性をgcdで特徴付けられる。',
+    '整除条件や一次不定方程式の可解性をgcdで特徴付け、必要なら拡張EuclidでBézout整数解を構成できる。',
   'outcome-reduce-integer-structure-by-gcd':
     'gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる。',
   'outcome-bound-reachability-in-numerical-semigroup':
@@ -3263,6 +3492,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。',
   'outcome-restrict-geometric-candidates-to-boundary':
     '目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる。',
+  'outcome-represent-convex-intersection-by-halfplanes':
+    '凸多角形を向き付き辺の線形半平面制約へ変換し、平行移動後も左辺が同じ制約を最強の右辺へ集約して共通部分への包含を判定できる。',
   'outcome-optimize-by-line-envelope':
     '一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる。',
   'outcome-exploit-convexity':
@@ -3309,6 +3540,9 @@ const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
   'outcome-restrict-geometric-candidates-to-boundary': [
     'outcome-reduce-geometry-to-algebraic-predicates',
   ],
+  'outcome-represent-convex-intersection-by-halfplanes': [
+    'outcome-reduce-geometry-to-algebraic-predicates',
+  ],
 };
 
 const OUTCOME_LEARNING_UNIT_IDS: Readonly<Record<string, readonly string[]>> = {
@@ -3349,12 +3583,17 @@ export const NON_PRIMARY_OUTCOME_IDS = FINAL_TAXONOMY_OUTCOMES.filter((outcome) 
 ).map((outcome) => outcome.id);
 
 /**
- * The reviewed corpus currently contains one canonical Suffix Automaton construction.
- * Keep that learner-visible boundary instead of merging state/link/clone into a generic DFA
- * Outcome merely to satisfy a two-problem sampling heuristic. The build gate requires this
- * exception to remain supported by exactly one Problem and reports it once reuse grows.
+ * Keep narrow but learner-visible skills distinct when this 868-problem window contains one
+ * canonical exercise. The build gate requires each exception to have exactly one Problem and
+ * reports it once another exercise appears.
  */
-export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = ['outcome-build-suffix-automaton'];
+export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
+  'outcome-apply-heavy-light-decomposition',
+  'outcome-build-suffix-automaton',
+  'outcome-build-virtual-tree',
+  'outcome-encode-threshold-constraints-as-two-sat',
+  'outcome-represent-convex-intersection-by-halfplanes',
+];
 export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = ['unit-suffix-automaton'];
 
 const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
@@ -3717,7 +3956,7 @@ export const CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
   {
     problemId: 'abc277-ex',
     primaryTagId: 'tag-directed-condensation-toposort',
-    primaryOutcomeId: 'outcome-condense-and-order-directed-graph',
+    primaryOutcomeId: 'outcome-encode-threshold-constraints-as-two-sat',
     rationale:
       '整数変数のthresholdをboolean化し、2-SAT implication graphのSCCで可解性を判定して具体解を復元する。',
     decisionAuthorId: 'person-maintainer',
@@ -3911,15 +4150,6 @@ export const CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
     primaryOutcomeId: 'outcome-recover-valid-witness',
     rationale:
       '重み付きcentroidを一度だけseparatorとして選び、leaf groupをheap順に彩色して具体構成を復元する。再帰的な重心分解は行わない。',
-    decisionAuthorId: 'person-maintainer',
-  },
-  {
-    problemId: 'abc227-f',
-    primaryTagId: 'tag-discrete-convex-marginal',
-    primaryOutcomeId: 'outcome-exploit-convexity',
-    additionalPrimaryTagIds: ['tag-grid-table-dp'],
-    rationale:
-      '順位統計量を閾値固定で加法的costへ変換することが主であり、変換後は単調grid上の最短路DPを典型技能として発動する。',
     decisionAuthorId: 'person-maintainer',
   },
   {

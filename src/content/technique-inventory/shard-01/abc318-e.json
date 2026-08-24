@@ -27,7 +27,7 @@
     ],
     "candidateApproaches": [
       {
-        "approach": "中央位置を左から sweep し、値別左右頻度と内積 total を一点差分で維持する。",
+        "approach": "中央位置を左から一度走査し、値別左右頻度と内積totalを一点差分で維持する。",
         "decision": "adopted",
         "decisionReason": "各 j の寄与 total−left[A_j]right[A_j] を O(1) で得られ、全体 O(N) になる。",
         "evidenceIds": ["evidence-official-analysis"]
@@ -63,7 +63,7 @@
     },
     {
       "name": "頻度ベクトル内積の差分更新",
-      "trigger": "sweep で左右 multiset が一点ずつ変わり、Σf_xg_x が毎回必要なとき。",
+      "trigger": "入力indexを一方向に走査すると左右multisetが一点ずつ変わり、Σf_xg_xが毎回必要なとき。",
       "application": "変化する x の旧寄与だけ引き、新寄与だけ足す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
@@ -81,7 +81,7 @@
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "sweep line の差分更新",
+      "text": "左からの一回走査に伴う左右頻度の一点差分更新",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

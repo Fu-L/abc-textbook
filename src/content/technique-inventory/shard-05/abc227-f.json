@@ -21,7 +21,7 @@
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "各経路についてK番目に大きい値をXと固定すると、Xを超えた分の総和とK個分のXに分離できる。Xの候補は盤面に現れる値だけで十分である。",
+        "text": "大きい方からK番目の値をXと固定すると、Xより大きい通過マスは全て採用し、Xと等しい通過マスから不足分を選んで、ちょうどK個の採用値和として評価できる。Xの候補は盤面に現れる値だけで十分である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
@@ -33,38 +33,38 @@
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "approach": "閾値Xを盤面の各値に固定し、各マスの重みmax(A[i][j]-X,0)に対する最小経路和をDPで求める。",
+        "approach": "閾値Xを盤面の各値に固定し、X以上の値をちょうどk個採用した最小和をdp[k][i][j]で求める。",
         "decision": "adopted",
-        "decisionReason": "任意の経路の上位K個の和はmin_X(KX+Σmax(a-X,0))で表せ、固定Xなら加法的な経路コストになる。",
+        "decisionReason": "a>Xは採用、a<Xは不採用を強制し、a=Xだけ採用・不採用の両遷移を許せば、同値を含む上位K個をちょうど選んだ状態を局所遷移で表せる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "keyInsights": [
       {
-        "text": "値を大きい順にb1≥…≥bLとすると、X=bKでKX+Σmax(bi-X,0)=Σ_{i=1}^K biとなる。他のXではこの値以上なので、上位K個という非加法的評価を閾値最小化へ変換できる。",
+        "text": "Xが大きい方からK番目なら、Xより大きい値の個数はK未満で、X以上の値の個数はK以上である。したがって全ての>Xと必要個数の=Xを採用すれば、採用値は上位K個と一致する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "同じ値Xが複数マスにあってもmax(A-X,0)はXと等しい要素を0として扱うため、K番目の同値要素をどれとみなすかを区別する必要がない。",
+        "text": "値がXのマスでは採用してkを1増やす遷移と、不採用のまま進む遷移の両方が必要である。片方だけにすると同値Xが複数ある経路で、ちょうどK個を選ぶ解を失う。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "盤面の各A[p][q]をXとして、dp[i][j]=左上から(i,j)までのΣmax(A-X,0)の最小値を上・左から更新する。終点の値にKXを加え、全Xでの最小値を答える。",
+      "text": "盤面の各A[p][q]をXとして、dp[k][i][j]を左上から(i,j)まででX以上の値をちょうどk個採用した採用値和の最小値とする。次の値aがXより大きければ採用だけ、小さければ不採用だけ、等しければ両方へ遷移する。始点も同じ規則で初期化し、全Xに対するdp[K][H-1][W-1]の最小を答える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
   "typicalTechniques": [
     {
-      "name": "順序統計量の閾値固定による線形化",
+      "name": "K番目の値の有限候補列挙",
       "trigger": "集合や経路の最大側K個の和など、順位で選ばれる要素の総和を最適化するとき。",
-      "application": "K番目の値Xを外側で固定し、各要素の寄与をmax(a-X,0)と定数KXに分解して、内側を加法的最適化にする。",
+      "application": "K番目の値Xは入力値のいずれかなので、盤面上の値を外側で全列挙し、各Xに対する最適経路を比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "単調grid経路DP",
-      "trigger": "右・下など遷移方向が非巡回で、経路評価がマスごとの加法的コストになったとき。",
-      "application": "固定閾値で線形化したマス重みについて、各マスへの最小和を上と左の小さい方から更新する。",
+      "name": "閾値・採用個数付き単調grid DP",
+      "trigger": "右・下の単調経路で、閾値以上からちょうどK個を選んだ最小和を求めるとき。",
+      "application": "位置(i,j)に採用個数kを加え、値とXの大小に応じて採用・不採用を遷移する。境界a=Xでは両遷移を残す。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -77,37 +77,37 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "DAGとしての単調gridと最短経路DP",
+      "text": "単調gridをDAGとみなす局所DPと、採用個数を追加軸にしたexact-k状態設計",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "順位統計量と閾値による寄与分解",
+      "text": "K番目の値を入力値から列挙する根拠と、閾値と等しい要素の採否を両方残す境界処理",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "KXと経路和は32bitを超えるため64bit整数を使い、始点の重みも一度だけ加える。",
+      "text": "採用値和は32bitを超えるため64bit整数を使い、始点でもa>X、a<X、a=Xの同じ遷移規則を適用する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "同値のXを重複して試しても正しいが、盤面値をuniqueにしておくと不要なDPを省ける。",
+      "text": "各XのDPはO(HWK)、候補は高々HW個なので全体O(H^2W^2K)、メモリO(HWK)である。同値のXをuniqueにすれば同じDPの重複を省ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "上位K個の和を閾値Xと超過分へ分解し、非加法的な経路評価を通常のgrid DPへ変換できる。",
+      "text": "K番目候補Xを有限列挙し、>X・<X・=Xを区別するexact-k grid DPで各経路の上位K個和を正しく最小化できる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "「大きい方K個」が見えたら、K番目をXと置いてKX+超過分の式を小さいソート済み列で再導出する。",
+      "text": "「大きい方K個」が見えたら、K番目をXと固定したときに>Xを全採用し、=Xから何個選ぶべきかを小さいソート済み列で確認する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "閾値固定後に各要素の寄与が独立になったことを確認してから、元問題の経路DPへ戻す。",
+      "text": "a=Xで採用・不採用の両遷移を実装し、終点で採用個数がちょうどKの状態だけを比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

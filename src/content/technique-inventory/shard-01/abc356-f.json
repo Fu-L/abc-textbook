@@ -66,6 +66,12 @@
       "trigger": "binary edge列で連続する1の区間端と、その区間の頂点数を動的に求めるとき。",
       "application": "range aggregate と max_right/min_left を組み合わせる。",
       "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "全query値のoffline座標圧縮",
+      "trigger": "更新値を先読みでき、疎な整数key上へsegment treeを構築したいとき。",
+      "application": "全queryのxをsort-uniqueして順序を保つdense indexへ写し、存在bitと右隣接edge bitの配列を確保する。",
+      "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "problemSpecificInsights": [

@@ -86,7 +86,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc226-h': 'tag-stochastic-expectation-dp',
 
   'abc227-e': 'tag-dp-state-equivalence',
-  'abc227-f': 'tag-discrete-convex-marginal',
+  'abc227-f': 'tag-bounded-enumeration',
   'abc227-g': 'tag-prime-divisor-decomposition',
   // The degree-multiplicity model and Euler tour are fixed before flow fills residual degrees.
   'abc227-h': 'tag-euler-degree-parity',
@@ -106,8 +106,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc230-g': 'tag-inclusion-exclusion',
   'abc230-h': 'tag-convolution-fps',
 
-  'abc231-e': 'tag-digit-automaton-dp',
-  'abc231-f': 'tag-sweep-coordinate-compression',
+  'abc231-e': 'tag-carry-mixed-radix-dp',
+  'abc231-f': 'tag-event-sweep',
   'abc231-g': 'tag-contribution-reordering',
   'abc231-h': 'tag-flow-matching-cut',
 
@@ -121,7 +121,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc233-f': 'tag-constructive-witness',
   'abc233-g': 'tag-interval-partition-dp',
 
-  'abc234-e': 'tag-divide-enumerate',
+  'abc234-e': 'tag-bounded-enumeration',
   'abc234-ex': 'tag-geometry-orientation-transform',
   'abc234-f': 'tag-combinatorial-coefficients',
   'abc234-g': 'tag-monotone-stack-queue',
@@ -286,7 +286,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc265-g': 'tag-lazy-segment-action',
 
   'abc266-e': 'tag-stochastic-expectation-dp',
-  'abc266-ex': 'tag-sweep-coordinate-compression',
+  'abc266-ex': 'tag-event-sweep',
   // Repeated leaf deletion is the reusable reduction to the unique cycle kernel.
   'abc266-f': 'tag-graph-core-peeling',
   'abc266-g': 'tag-combinatorial-coefficients',
@@ -330,7 +330,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc274-e': 'tag-subset-bitmask-transform',
   'abc274-ex': 'tag-string-hash-equality',
-  'abc274-f': 'tag-sweep-coordinate-compression',
+  'abc274-f': 'tag-event-sweep',
   'abc274-g': 'tag-flow-matching-cut',
 
   'abc275-e': 'tag-stochastic-expectation-dp',
@@ -376,7 +376,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc283-e': 'tag-dp-state-equivalence',
   'abc283-ex': 'tag-integer-boundary-blocks',
-  'abc283-f': 'tag-sweep-coordinate-compression',
+  'abc283-f': 'tag-event-sweep',
   'abc283-g': 'tag-linear-algebra-xor',
 
   'abc284-e': 'tag-reachability-bfs',
@@ -437,7 +437,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc295-e': 'tag-contribution-reordering',
   'abc295-ex': 'tag-subset-bitmask-transform',
-  'abc295-f': 'tag-digit-automaton-dp',
+  'abc295-f': 'tag-contribution-reordering',
   'abc295-g': 'tag-directed-condensation-toposort',
 
   'abc296-e': 'tag-functional-graph-doubling',

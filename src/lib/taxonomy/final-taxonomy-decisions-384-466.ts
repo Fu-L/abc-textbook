@@ -12,7 +12,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc385-e': 'tag-greedy-exchange-order',
   'abc385-f': 'tag-geometry-orientation-transform',
   'abc385-g': 'tag-convolution-fps',
-  'abc386-e': 'tag-divide-enumerate',
+  'abc386-e': 'tag-bounded-enumeration',
   'abc386-f': 'tag-sequence-subsequence-dp',
   // The MST total is first linearized into threshold component counts.
   'abc386-g': 'tag-contribution-reordering',
@@ -203,7 +203,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc441-g': 'tag-lazy-segment-action',
   'abc442-e': 'tag-geometry-orientation-transform',
   'abc442-f': 'tag-dp-transition-acceleration',
-  'abc442-g': 'tag-divide-enumerate',
+  'abc442-g': 'tag-bounded-enumeration',
   'abc443-e': 'tag-grid-table-dp',
   'abc443-f': 'tag-reachability-bfs',
   'abc443-g': 'tag-integer-boundary-blocks',
@@ -225,8 +225,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc448-e': 'tag-linear-recurrence-matrix',
   'abc448-f': 'tag-constructive-witness',
   'abc448-g': 'tag-convex-hull-trick',
-  'abc449-e': 'tag-sweep-coordinate-compression',
-  'abc449-f': 'tag-sweep-coordinate-compression',
+  'abc449-e': 'tag-event-sweep',
+  'abc449-f': 'tag-event-sweep',
   'abc449-g': 'tag-convolution-fps',
   'abc450-e': 'tag-recursive-compressed-string',
   // Reachable-prefix maximum is the sufficient state; the lazy tree only batches transitions.
@@ -240,7 +240,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc452-f': 'tag-two-pointers-window',
   // RLE is preparatory; distinctness is decided by suffix order and LCP.
   'abc452-g': 'tag-suffix-lcp-index',
-  'abc453-e': 'tag-sweep-coordinate-compression',
+  'abc453-e': 'tag-event-sweep',
   'abc453-f': 'tag-constructive-witness',
   'abc453-g': 'tag-persistent-rollback',
   'abc454-e': 'tag-constructive-witness',
