@@ -12,6 +12,7 @@ import { FinalTaxonomyBuildSchema } from '../../src/lib/domain/schema-parts/cata
 import {
   FINAL_TAXONOMY_PREVIEW_ENTITY_COUNT,
   FINAL_TAXONOMY_PROBLEM_COUNT,
+  assembleFinalTaxonomyBuild,
   assertFrozenProvisionalEvidenceBoundToPreview,
   buildFinalTaxonomyFromPolicy,
   createFinalTaxonomyVerificationEvidence,
@@ -24,6 +25,7 @@ import {
   NON_PRIMARY_OUTCOME_IDS,
   NON_PRIMARY_TAG_IDS,
   SINGLE_PROBLEM_OUTCOME_IDS,
+  SINGLE_PROBLEM_TAG_IDS,
   SINGLE_PROBLEM_UNIT_IDS,
 } from '../../src/lib/taxonomy/final-taxonomy-policy.js';
 
@@ -42,6 +44,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       validateFinalTaxonomyBuildAgainstContext(context, build, {
         nonPrimaryTagIds: NON_PRIMARY_TAG_IDS,
         nonPrimaryOutcomeIds: NON_PRIMARY_OUTCOME_IDS,
+        singleProblemTagIds: SINGLE_PROBLEM_TAG_IDS,
         singleProblemOutcomeIds: SINGLE_PROBLEM_OUTCOME_IDS,
         singleProblemUnitIds: SINGLE_PROBLEM_UNIT_IDS,
       }),
@@ -233,7 +236,9 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         const assigned = build.placements.filter((placement) =>
           [...placement.primaryTagIds, ...placement.supportingTagIds].includes(candidate.entity.id),
         );
-        expect(assigned.length).toBeGreaterThanOrEqual(2);
+        expect(assigned.length).toBeGreaterThanOrEqual(
+          SINGLE_PROBLEM_TAG_IDS.includes(candidate.entity.id) ? 1 : 2,
+        );
         for (const problemId of candidate.entity.representativeProblemIds) {
           expect(
             [
@@ -270,6 +275,16 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       }
     }
     const orderIndex = new Map(build.standardOrder.map((id, index) => [id, index]));
+    const learningUnitIds = new Set(
+      build.finalCandidates.flatMap((candidate) =>
+        candidate.kind === 'unit' ? [candidate.entity.id] : [],
+      ),
+    );
+    const outcomeById = new Map(
+      build.finalCandidates.flatMap((candidate) =>
+        candidate.kind === 'outcome' ? [[candidate.entity.id, candidate] as const] : [],
+      ),
+    );
     const unitOrderReasons = build.finalCandidates.flatMap((candidate) =>
       candidate.kind === 'unit' ? [candidate.entity.orderReason] : [],
     );
@@ -283,8 +298,18 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     }
     for (const placement of build.placements) {
       const presentationIndex = orderIndex.get(placement.presentationUnitId) ?? -1;
+      const primaryLearningUnitIds = [
+        placement.primaryOutcomeId,
+        ...placement.additionalPrimaryOutcomeIds,
+      ].flatMap(
+        (outcomeId) =>
+          outcomeById
+            .get(outcomeId)
+            ?.entity.scopeIds.filter((scopeId) => learningUnitIds.has(scopeId)) ?? [],
+      );
+      expect(primaryLearningUnitIds.length).toBeGreaterThan(0);
       expect(
-        placement.learningUnitIds.every(
+        primaryLearningUnitIds.every(
           (unitId) => (orderIndex.get(unitId) ?? Number.POSITIVE_INFINITY) <= presentationIndex,
         ),
       ).toBe(true);
@@ -315,8 +340,8 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(verification.canonicalMaterializationAllowed).toBe(build.status === 'accepted');
   }, 30_000);
 
-  it('rejects unknown references, cycles, order drift, unclassified Problems, and incomplete impacts', async () => {
-    const { build } = await loadBuild();
+  it('rejects unknown references, cycles, order drift, unclassified Problems, incomplete impacts, and supporting Home ownership', async () => {
+    const { context, build } = await loadBuild();
 
     const unknownReference = structuredClone(build);
     const firstPlacement = unknownReference.placements[0];
@@ -348,5 +373,50 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     if (firstImpact === undefined) throw new Error('Expected at least one correction impact.');
     firstImpact.surfaceAssessments.pop();
     expect(FinalTaxonomyBuildSchema.safeParse(incompleteImpact).success).toBe(false);
+
+    const supportingUnitAsHome = structuredClone(build);
+    const cyclicExponentPlacement = supportingUnitAsHome.placements.find(
+      ({ problemId }) => problemId === 'abc212-g',
+    );
+    if (cyclicExponentPlacement === undefined) {
+      throw new Error('Expected the abc212-g placement.');
+    }
+    expect(cyclicExponentPlacement.learningUnitIds).toContain('unit-divisor-mobius-inversion');
+    cyclicExponentPlacement.presentationUnitId = 'unit-divisor-mobius-inversion';
+    const integrationEntries = supportingUnitAsHome.integrationMap.entries.map((entry) => {
+      const { reviewEvidenceId: _reviewEvidenceId, status: _status, ...semanticEntry } = entry;
+      void _reviewEvidenceId;
+      void _status;
+      return semanticEntry;
+    });
+    const correctionImpacts = supportingUnitAsHome.correctionImpacts.map((impact) => {
+      const {
+        impactSubjectDigest: _impactSubjectDigest,
+        verificationStatus: _verificationStatus,
+        ...semanticImpact
+      } = impact;
+      void _impactSubjectDigest;
+      void _verificationStatus;
+      return semanticImpact;
+    });
+    expect(() =>
+      assembleFinalTaxonomyBuild(context, {
+        policy: {
+          name: supportingUnitAsHome.policy.name,
+          version: supportingUnitAsHome.policy.version,
+          inputScope: supportingUnitAsHome.policy.inputScope,
+          rulesDigest: supportingUnitAsHome.policy.rulesDigest,
+        },
+        finalCandidates: supportingUnitAsHome.finalCandidates,
+        placements: supportingUnitAsHome.placements,
+        integrationEntries,
+        correctionImpacts,
+        nonPrimaryTagIds: NON_PRIMARY_TAG_IDS,
+        nonPrimaryOutcomeIds: NON_PRIMARY_OUTCOME_IDS,
+        singleProblemTagIds: SINGLE_PROBLEM_TAG_IDS,
+        singleProblemOutcomeIds: SINGLE_PROBLEM_OUTCOME_IDS,
+        singleProblemUnitIds: SINGLE_PROBLEM_UNIT_IDS,
+      }),
+    ).toThrow(/PLACEMENT_PRIMARY_HOME_UNIT_INVALID/u);
   }, 30_000);
 });

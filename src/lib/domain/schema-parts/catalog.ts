@@ -2068,7 +2068,6 @@ export const FinalTaxonomyBuildSchema = strictObject({
     if (
       tag.lifecycle !== 'active' ||
       tag.replacementTagIds.length > 0 ||
-      (tag.parentId !== null && tag.representativeProblemIds.length < 2) ||
       (tag.parentId !== null && !tagIdSet.has(tag.parentId)) ||
       tag.prerequisiteTagIds.some((id) => !tagIdSet.has(id)) ||
       tag.learningOutcomeIds.some((id) => !outcomeIdSet.has(id)) ||
@@ -2331,6 +2330,16 @@ export const FinalTaxonomyBuildSchema = strictObject({
   const candidateKindById = new Map(
     build.finalCandidates.map((candidate) => [candidate.entity.id, candidate.kind]),
   );
+  const unitHasAncestor = (unitId: string, ancestorId: string): boolean => {
+    const visited = new Set<string>();
+    let currentId: string | null = unitId;
+    while (currentId !== null && !visited.has(currentId)) {
+      if (currentId === ancestorId) return true;
+      visited.add(currentId);
+      currentId = unitById.get(currentId)?.parentId ?? null;
+    }
+    return false;
+  };
   const placementUsesTarget = (
     placement: (typeof build.placements)[number] | undefined,
     kind: 'tag' | 'outcome' | 'unit',
@@ -2366,7 +2375,7 @@ export const FinalTaxonomyBuildSchema = strictObject({
         ) === true
       );
     }
-    return placement.learningUnitIds.includes(targetId);
+    return placement.learningUnitIds.some((unitId) => unitHasAncestor(unitId, targetId));
   };
   for (const entry of build.integrationMap.entries) {
     if (
@@ -2397,7 +2406,11 @@ export const FinalTaxonomyBuildSchema = strictObject({
                       ...placement.supportingOutcomeIds,
                     ]
                 : (placement?.learningUnitIds ?? []);
-          if (!assignedIds.includes(assignment.finalEntityId)) {
+          const usesAssignedTarget =
+            entry.previewEntityKind === 'unit'
+              ? placementUsesTarget(placement, 'unit', assignment.finalEntityId)
+              : assignedIds.includes(assignment.finalEntityId);
+          if (!usesAssignedTarget) {
             context.addIssue({
               code: 'custom',
               path: ['integrationMap'],

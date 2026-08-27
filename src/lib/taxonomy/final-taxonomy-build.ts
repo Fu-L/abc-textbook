@@ -52,6 +52,7 @@ import {
   FINAL_TAXONOMY_CLAIM_DECISIONS,
   FINAL_TAXONOMY_OUTCOMES,
   SINGLE_PROBLEM_OUTCOME_IDS,
+  SINGLE_PROBLEM_TAG_IDS,
   SINGLE_PROBLEM_UNIT_IDS,
   FINAL_TAXONOMY_TAGS,
   NON_PRIMARY_OUTCOME_IDS,
@@ -736,6 +737,7 @@ export interface FinalTaxonomyAssemblyInput {
   readonly nonPrimaryTagIds?: readonly string[];
   readonly nonPrimaryOutcomeIds?: readonly string[];
   /** Reviewed skills kept as observable boundaries despite one current corpus observation. */
+  readonly singleProblemTagIds?: readonly string[];
   readonly singleProblemOutcomeIds?: readonly string[];
   readonly singleProblemUnitIds?: readonly string[];
 }
@@ -743,6 +745,7 @@ export interface FinalTaxonomyAssemblyInput {
 export interface FinalTaxonomySemanticGates {
   readonly nonPrimaryTagIds?: readonly string[];
   readonly nonPrimaryOutcomeIds?: readonly string[];
+  readonly singleProblemTagIds?: readonly string[];
   readonly singleProblemOutcomeIds?: readonly string[];
   readonly singleProblemUnitIds?: readonly string[];
 }
@@ -1361,6 +1364,9 @@ export const assembleFinalTaxonomyBuild = (
     ...(input.nonPrimaryOutcomeIds === undefined
       ? {}
       : { nonPrimaryOutcomeIds: input.nonPrimaryOutcomeIds }),
+    ...(input.singleProblemTagIds === undefined
+      ? {}
+      : { singleProblemTagIds: input.singleProblemTagIds }),
     ...(input.singleProblemOutcomeIds === undefined
       ? {}
       : { singleProblemOutcomeIds: input.singleProblemOutcomeIds }),
@@ -1464,19 +1470,35 @@ const targetEvidenceRefsForDecision = (
       : [];
   }
   const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
+  const parentUnitIdById = new Map(
+    FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => [unit.id, unit.parentId]),
+  );
+  const unitHasAncestor = (unitId: string, ancestorId: string): boolean => {
+    const visited = new Set<string>();
+    let currentId: string | null = unitId;
+    while (currentId !== null && !visited.has(currentId)) {
+      if (currentId === ancestorId) return true;
+      visited.add(currentId);
+      currentId = parentUnitIdById.get(currentId) ?? null;
+    }
+    return false;
+  };
+  const outcomeSupportsUnit = (outcomeId: string, unitId: string): boolean =>
+    outcomeById
+      .get(outcomeId)
+      ?.learningUnitCandidateIds.some((candidateUnitId) =>
+        unitHasAncestor(candidateUnitId, unitId),
+      ) === true;
   const primarySupportsUnit =
-    outcomeById.get(decision.primaryOutcomeId)?.learningUnitCandidateIds.includes(targetId) ===
-      true ||
-    decision.additionalPrimaryOutcomeIds.some(
-      (outcomeId) =>
-        outcomeById.get(outcomeId)?.learningUnitCandidateIds.includes(targetId) === true,
+    outcomeSupportsUnit(decision.primaryOutcomeId, targetId) ||
+    decision.additionalPrimaryOutcomeIds.some((outcomeId) =>
+      outcomeSupportsUnit(outcomeId, targetId),
     );
   const references = [
     ...(primarySupportsUnit ? decision.decisionBasis : []),
     ...decision.supportingTagDecisions.flatMap((supporting) => {
-      const outcomeSupports = supporting.outcomeIds.some(
-        (outcomeId) =>
-          outcomeById.get(outcomeId)?.learningUnitCandidateIds.includes(targetId) === true,
+      const outcomeSupports = supporting.outcomeIds.some((outcomeId) =>
+        outcomeSupportsUnit(outcomeId, targetId),
       );
       return outcomeSupports ? supporting.decisionBasis : [];
     }),
@@ -2225,6 +2247,7 @@ export const finalTaxonomyPolicyRulesDigest = (): string =>
     previewDecisions: PREVIEW_FINAL_TAXONOMY_DECISIONS,
     nonPrimaryTagIds: NON_PRIMARY_TAG_IDS,
     nonPrimaryOutcomeIds: NON_PRIMARY_OUTCOME_IDS,
+    singleProblemTagIds: SINGLE_PROBLEM_TAG_IDS,
     singleProblemOutcomeIds: SINGLE_PROBLEM_OUTCOME_IDS,
     singleProblemUnitIds: SINGLE_PROBLEM_UNIT_IDS,
   });
@@ -2300,6 +2323,7 @@ export const buildFinalTaxonomyFromPolicy = (
     correctionImpacts: impacts,
     nonPrimaryTagIds: NON_PRIMARY_TAG_IDS,
     nonPrimaryOutcomeIds: NON_PRIMARY_OUTCOME_IDS,
+    singleProblemTagIds: SINGLE_PROBLEM_TAG_IDS,
     singleProblemOutcomeIds: SINGLE_PROBLEM_OUTCOME_IDS,
     singleProblemUnitIds: SINGLE_PROBLEM_UNIT_IDS,
   });
@@ -2516,6 +2540,16 @@ export const validateFinalTaxonomyBuildAgainstContext = (
     build.placements.map((placement) => [placement.problemId, placement]),
   );
   const standardOrderIndex = new Map(build.standardOrder.map((unitId, index) => [unitId, index]));
+  const learningUnitCandidateIds = new Set(
+    build.finalCandidates.flatMap((candidate) =>
+      candidate.kind === 'unit' ? [candidate.entity.id] : [],
+    ),
+  );
+  const placementOutcomeById = new Map(
+    build.finalCandidates.flatMap((candidate) =>
+      candidate.kind === 'outcome' ? [[candidate.entity.id, candidate] as const] : [],
+    ),
+  );
   for (const placement of build.placements) {
     const record = recordsById.get(placement.problemId);
     if (placement.kind !== 'full') {
@@ -2643,17 +2677,31 @@ export const validateFinalTaxonomyBuildAgainstContext = (
         placement.problemId,
       );
     }
-    const presentationIndex = standardOrderIndex.get(placement.presentationUnitId);
-    if (
-      presentationIndex === undefined ||
-      placement.learningUnitIds.some(
-        (unitId) =>
-          (standardOrderIndex.get(unitId) ?? Number.POSITIVE_INFINITY) > presentationIndex,
+    const primaryLearningUnitIds = sortedUnique(
+      [placement.primaryOutcomeId, ...placement.additionalPrimaryOutcomeIds].flatMap(
+        (outcomeId) =>
+          placementOutcomeById
+            .get(outcomeId)
+            ?.entity.scopeIds.filter((scopeId) => learningUnitCandidateIds.has(scopeId)) ?? [],
+      ),
+    );
+    const expectedPresentationUnitId = [...primaryLearningUnitIds]
+      .sort(
+        (left, right) =>
+          (standardOrderIndex.get(left) ?? Number.POSITIVE_INFINITY) -
+            (standardOrderIndex.get(right) ?? Number.POSITIVE_INFINITY) ||
+          (left < right ? -1 : left > right ? 1 : 0),
       )
+      .at(-1);
+    if (
+      primaryLearningUnitIds.length === 0 ||
+      expectedPresentationUnitId === undefined ||
+      !standardOrderIndex.has(placement.presentationUnitId) ||
+      placement.presentationUnitId !== expectedPresentationUnitId
     ) {
       add(
-        'PLACEMENT_PRESENTED_BEFORE_PREREQUISITE_UNIT',
-        'The presentation Unit must follow every primary and supporting Unit used by the Problem.',
+        'PLACEMENT_PRIMARY_HOME_UNIT_INVALID',
+        'The presentation Unit must be exactly the latest Unit that directly teaches a primary or co-primary Outcome; supporting Units cannot take Home ownership.',
         placement.problemId,
       );
     }
@@ -2678,10 +2726,12 @@ export const validateFinalTaxonomyBuildAgainstContext = (
   );
   const nonPrimaryTagIds = new Set([...(gates.nonPrimaryTagIds ?? []), ...rootTagIds]);
   const genericOutcomeIds = new Set(gates.nonPrimaryOutcomeIds ?? []);
+  const singleProblemTagIds = new Set(gates.singleProblemTagIds ?? []);
   const singleProblemOutcomeIds = new Set(gates.singleProblemOutcomeIds ?? []);
   const singleProblemUnitIds = new Set(gates.singleProblemUnitIds ?? []);
   const tagById = new Map(tagCandidates.map(({ entity }) => [entity.id, entity]));
   const outcomeById = new Map(outcomeCandidates.map(({ entity }) => [entity.id, entity]));
+  const unitById = new Map(unitCandidates.map(({ entity }) => [entity.id, entity]));
   const tagHasAncestor = (tagId: string, ancestorId: string): boolean => {
     const visited = new Set<string>();
     let currentId: string | null = tagId;
@@ -2689,6 +2739,16 @@ export const validateFinalTaxonomyBuildAgainstContext = (
       if (currentId === ancestorId) return true;
       visited.add(currentId);
       currentId = tagById.get(currentId)?.parentId ?? null;
+    }
+    return false;
+  };
+  const unitHasAncestor = (unitId: string, ancestorId: string): boolean => {
+    const visited = new Set<string>();
+    let currentId: string | null = unitId;
+    while (currentId !== null && !visited.has(currentId)) {
+      if (currentId === ancestorId) return true;
+      visited.add(currentId);
+      currentId = unitById.get(currentId)?.parentId ?? null;
     }
     return false;
   };
@@ -2726,7 +2786,7 @@ export const validateFinalTaxonomyBuildAgainstContext = (
         ) === true
       );
     }
-    return placement.learningUnitIds.includes(targetId);
+    return placement.learningUnitIds.some((unitId) => unitHasAncestor(unitId, targetId));
   };
   for (const placement of build.placements) {
     for (const tagId of placement.primaryTagIds) {
@@ -2789,10 +2849,21 @@ export const validateFinalTaxonomyBuildAgainstContext = (
     const assignedProblems = build.placements.filter((placement) =>
       [...placement.primaryTagIds, ...placement.supportingTagIds].includes(tag.id),
     );
-    if (tag.parentId !== null && assignedProblems.length < 2) {
+    const minimumSupport = singleProblemTagIds.has(tag.id) ? 1 : 2;
+    if (tag.parentId !== null && assignedProblems.length < minimumSupport) {
       add(
         'TAG_REUSE_SUPPORT_INSUFFICIENT',
-        `${tag.id} has fewer than two semantically classified Problems.`,
+        `${tag.id} has fewer than ${String(minimumSupport)} semantically classified Problems.`,
+        tag.id,
+      );
+    } else if (
+      tag.parentId !== null &&
+      singleProblemTagIds.has(tag.id) &&
+      assignedProblems.length !== 1
+    ) {
+      add(
+        'SINGLE_PROBLEM_TAG_EXCEPTION_STALE',
+        `${tag.id} no longer has exactly one semantically classified Problem.`,
         tag.id,
       );
     }
@@ -3138,6 +3209,7 @@ export const createFinalTaxonomyVerificationEvidence = (
   const diagnostics = validateFinalTaxonomyBuildAgainstContext(context, build, {
     nonPrimaryTagIds: NON_PRIMARY_TAG_IDS,
     nonPrimaryOutcomeIds: NON_PRIMARY_OUTCOME_IDS,
+    singleProblemTagIds: SINGLE_PROBLEM_TAG_IDS,
     singleProblemOutcomeIds: SINGLE_PROBLEM_OUTCOME_IDS,
     singleProblemUnitIds: SINGLE_PROBLEM_UNIT_IDS,
   });

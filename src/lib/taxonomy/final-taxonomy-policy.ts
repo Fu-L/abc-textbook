@@ -17,10 +17,21 @@ export type TaxonomyEntityKind = 'tag' | 'outcome' | 'unit';
 
 /** Semantic rules used when turning reviewed Inventory claims into textbook placements. */
 export const FINAL_TAXONOMY_PLACEMENT_PRINCIPLES = Object.freeze({
+  outcome:
+    'Outcomeは一つの到達確認で合否を判定できる原子的技能とし、発動条件・正当化・実装が異なる技能を「または」で束ねない。',
+  tag: 'Tagは未知問を見たときのrecognition・retrieval単位とし、発動条件・正当化原理・実装templateのいずれかが大きく異なるなら分割する。',
+  learningUnit:
+    'LearningUnitはmental modelとtransferを作る教材上の圧縮単位とし、比較学習が有効なsibling Tagだけを同じsectionのsubsectionとして束ねる。',
   primary:
     '主解法の成立と計算量を決め、読者が解後に再利用可能な形で説明・実装できる技能だけをprimaryにする。',
   supporting:
     '主解法とは別の観察可能な技能を実際に発動するときだけsupportingとし、用語が説明に現れるだけではUnitを付与しない。',
+  homeAndReadiness:
+    'presentationUnitIdはprimaryおよびco-primary Outcomeをすべて履修済みにする最遅UnitをHomeとし、supporting OutcomeのUnitは自力で解ける時点を示すready-afterとして保持して掲載章を奪わせない。',
+  prerequisite:
+    'hard prerequisiteは未習得だと次の技能の定義・正当性・実装を自然に理解できない場合だけにし、単によく併用する技能はcross-referenceへ留める。',
+  naming:
+    '固有算法名をalias・recallに置くのは、その算法を説明して到達確認できるOutcomeとUnitが現corpusにある場合だけとする。',
   fallback:
     '対象読者の共通前提はbaseline、独立した再利用技能にならない問題固有の工夫はproblem_specificにする。',
   boundaries:
@@ -438,7 +449,7 @@ const section = (
   excludedTopics: excludedTopicsFor(id, 'section'),
 });
 
-const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
+const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   chapter('unit-chapter-modeling', 'モデル変換とアルゴリズム設計', 0),
   chapter('unit-chapter-dynamic-programming', '動的計画法', 1),
   chapter('unit-chapter-graph', 'グラフ・木構造', 2),
@@ -1329,15 +1340,20 @@ interface TagSeed {
   readonly prerequisiteTagIds?: readonly string[];
   readonly primaryEligible?: boolean;
   readonly priority?: number;
+  /** Content kept beside newly refined seeds; legacy content remains in the reviewed registry. */
+  readonly aliases?: readonly string[];
+  readonly formerNames?: readonly string[];
+  readonly representativeProblemIds?: readonly string[];
 }
 
 const defineTag = (seed: TagSeed): FinalTaxonomyTagPolicy => ({
   id: seed.id,
   name: seed.name,
   definition: seed.definition,
-  aliases: FINAL_TAG_LEARNER_ALIASES[seed.id] ?? [],
-  formerNames: FINAL_TAG_FORMER_NAMES[seed.id] ?? [],
-  representativeProblemIds: FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS[seed.id] ?? [],
+  aliases: seed.aliases ?? FINAL_TAG_LEARNER_ALIASES[seed.id] ?? [seed.name],
+  formerNames: seed.formerNames ?? FINAL_TAG_FORMER_NAMES[seed.id] ?? [],
+  representativeProblemIds:
+    seed.representativeProblemIds ?? FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS[seed.id] ?? [],
   parentId: seed.parentId,
   prerequisiteTagIds: seed.prerequisiteTagIds ?? [],
   learningOutcomeIds: seed.outcomeIds,
@@ -3276,7 +3292,2062 @@ const TAG_SEEDS: readonly TagSeed[] = [
   },
 ];
 
-export const FINAL_TAXONOMY_TAGS: readonly FinalTaxonomyTagPolicy[] = TAG_SEEDS.map(defineTag);
+/**
+ * The first full-corpus draft intentionally kept broad buckets while every claim was being
+ * dispositioned.  The accepted proposal must expose recognition-sized tags instead.  Keeping
+ * the source seeds above makes the source-backed regex review auditable; only the refined seeds
+ * below are exported as canonical candidates.
+ */
+const RETIRED_COARSE_TAG_IDS = new Set([
+  'tag-math-geometry-transformation',
+  'tag-symmetry-invariant-normalization',
+  'tag-divide-enumerate',
+  'tag-amortized-heavy-light',
+  'tag-subset-bitmask-transform',
+  'tag-reachability-bfs',
+  'tag-directed-condensation-toposort',
+  'tag-functional-graph-doubling',
+  'tag-dsu-connectivity',
+  'tag-tree-aggregation-reroot',
+  'tag-tree-path-decomposition',
+  'tag-flow-matching-cut',
+  'tag-euler-degree-parity',
+  'tag-graph-core-peeling',
+  'tag-monoid-segment-tree',
+  'tag-ordered-set-heap',
+  'tag-persistent-rollback',
+  'tag-prefix-matching-automata',
+  'tag-string-automata',
+  'tag-string-hash-equality',
+  'tag-gcd-diophantine',
+  'tag-modular-crt',
+  'tag-cyclic-group-order',
+  'tag-inclusion-exclusion',
+  'tag-convolution-fps',
+  'tag-linear-algebra-xor',
+  'tag-convex-hull-halfplane',
+  'tag-discrete-convex-marginal',
+]);
+
+const FINAL_TAG_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
+  'tag-tree-metric-diameter': 'tag-tree-model-structure',
+  'tag-implicit-binary-tree-arithmetic': 'tag-tree-model-structure',
+  'tag-static-top-tree': 'tag-tree-model-structure',
+  'tag-tree-balanced-separator': 'tag-tree-model-structure',
+  'tag-modular-arithmetic': 'tag-number-theory-structure',
+  'tag-prime-divisor-decomposition': 'tag-number-theory-structure',
+  'tag-integer-boundary-blocks': 'tag-number-theory-structure',
+  'tag-finite-field-extension': 'tag-number-theory-structure',
+  'tag-combinatorial-coefficients': 'tag-combinatorics-algebra-structure',
+  'tag-determinant-counting': 'tag-combinatorics-algebra-structure',
+  'tag-geometry-orientation-transform': 'tag-geometry-optimization-structure',
+  'tag-convex-hull-trick': 'tag-geometry-optimization-structure',
+};
+
+const FINAL_TAG_UNIT_OVERRIDES: Readonly<Record<string, readonly string[]>> = {
+  'tag-convex-hull-trick': ['unit-line-envelope'],
+  'tag-determinant-counting': ['unit-determinant-counting'],
+};
+
+const FINAL_TAG_PREREQUISITE_OVERRIDES: Readonly<Record<string, readonly string[]>> = {
+  // The cut/cycle property is the MST prerequisite. DSU belongs to the Kruskal subsection only.
+  'tag-spanning-tree-optimization': ['tag-greedy-exchange-order'],
+  'tag-lazy-segment-action': ['tag-range-monoid-aggregation'],
+  'tag-static-top-tree': ['tag-rooted-tree-aggregation'],
+};
+
+const REFINED_TAG_SEEDS: readonly TagSeed[] = [
+  {
+    id: 'tag-tree-model-structure',
+    name: '木モデルと構造',
+    definition: '木固有の根・部分木・path・separator構造へ問題を写し、利用する性質を選ぶ。',
+    parentId: null,
+    outcomeIds: ['outcome-model-and-exploit-tree'],
+    unitIds: ['unit-chapter-tree'],
+    recall: ['tree algorithm', '木アルゴリズム'],
+    object: ['木', '根', '部分木', 'path'],
+    trigger: ['木として', '根付き', '木上'],
+    invariant: ['一意経路', '親子', '部分木'],
+    goal: ['木構造へ変換', '木の性質'],
+    primaryEligible: false,
+    priority: 0,
+  },
+  {
+    id: 'tag-number-theory-structure',
+    name: '数論構造への変換',
+    definition: '整数条件を合同・整除・指数・約数格子などの数論構造へ変換する。',
+    parentId: null,
+    outcomeIds: ['outcome-transform-to-number-theory'],
+    unitIds: ['unit-chapter-number-theory'],
+    recall: ['number theory', '数論'],
+    object: ['整数', '剰余', '約数'],
+    trigger: ['整除', '合同', '周期'],
+    invariant: ['gcd', '剰余類', '指数'],
+    goal: ['整数条件を変換'],
+    primaryEligible: false,
+    priority: 0,
+  },
+  {
+    id: 'tag-combinatorics-algebra-structure',
+    name: '組合せ・多項式・線形代数への変換',
+    definition: '数え上げや遷移を係数列・多項式・線形写像へ変換する。',
+    parentId: null,
+    outcomeIds: ['outcome-transform-to-combinatorics-algebra'],
+    unitIds: ['unit-chapter-combinatorics-algebra'],
+    recall: ['combinatorics', 'polynomial algorithms', 'linear algebra', '組合せ論'],
+    object: ['組合せ対象', '多項式', '行列'],
+    trigger: ['係数', '線形', '数え上げ'],
+    invariant: ['次数', 'rank', '全単射'],
+    goal: ['代数化', '係数を求める'],
+    primaryEligible: false,
+    priority: 0,
+  },
+  {
+    id: 'tag-geometry-optimization-structure',
+    name: '幾何・凸最適化への変換',
+    definition: '配置・距離・目的関数を幾何predicateや凸構造へ変換する。',
+    parentId: null,
+    outcomeIds: ['outcome-transform-to-geometry-optimization'],
+    unitIds: ['unit-chapter-geometry-optimization'],
+    recall: ['geometry', 'convex optimization', '幾何', '凸最適化'],
+    object: ['点', '直線', '目的関数'],
+    trigger: ['配置', '距離', '最適化'],
+    invariant: ['向き', '凸', '境界'],
+    goal: ['幾何へ変換', '最適点'],
+    primaryEligible: false,
+    priority: 0,
+  },
+  {
+    id: 'tag-state-normalization',
+    name: '状態・配置の正規化',
+    definition: '対称操作で同値な状態を一意な標準形へ写し、重複した探索・数え上げを除く。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-normalize-equivalent-states'],
+    unitIds: ['unit-normalization'],
+    recall: ['canonicalization', 'state normalization', '標準形'],
+    object: ['状態', '配置', '列'],
+    trigger: ['同値', '対称', '代表'],
+    invariant: ['標準形', '同値類'],
+    goal: ['重複除去', '状態圧縮'],
+    priority: 48,
+  },
+  {
+    id: 'tag-group-action-orbit-counting',
+    name: '群作用・軌道数え上げ',
+    definition: '群作用の固定点を作用素のcycle typeごとに数え、BurnsideまたはPólyaで軌道数を得る。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-count-orbits-by-fixed-points'],
+    unitIds: ['unit-orbit-counting'],
+    recall: ['Burnside', 'Pólya', 'orbit counting', '群作用'],
+    object: ['群作用', '固定点', '軌道'],
+    trigger: ['回転同一視', '置換同一視', '対称性で割る'],
+    invariant: ['固定点', 'cycle type'],
+    goal: ['軌道数', '非同値な個数'],
+    priority: 82,
+  },
+  {
+    id: 'tag-meet-in-the-middle',
+    name: 'meet-in-the-middle・半分全列挙',
+    definition: '探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-split-enumeration-space'],
+    unitIds: ['unit-meet-in-the-middle'],
+    recall: ['meet.?in.?the.?middle', '\\bMITM\\b', '半分全列挙', 'baby.?step.*giant.?step'],
+    object: ['部分集合', '候補集合', '左右集合'],
+    trigger: ['半分', '二集合', '照合'],
+    invariant: ['独立列挙', '合成条件'],
+    goal: ['候補照合', '指数探索'],
+    priority: 67,
+  },
+  {
+    id: 'tag-recursive-divide-and-conquer',
+    name: '再帰分割・分割統治',
+    definition: 'pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-divide-search-space-recursively'],
+    unitIds: ['unit-recursive-divide-and-conquer'],
+    recall: ['divide and conquer', '\\bCDQ\\b', '分割統治', 'product tree', 'remainder tree'],
+    object: ['区間', '再帰木', 'pivot'],
+    trigger: ['左右へ分割', '中央', 'pivot'],
+    invariant: ['一意な部分問題', '因果順'],
+    goal: ['再帰合成', '重複削減'],
+    priority: 69,
+  },
+  {
+    id: 'tag-amortized-monotone-progress',
+    name: '単調進行による償却解析',
+    definition: '要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-bound-monotone-total-work'],
+    unitIds: ['unit-amortized-monotone-progress'],
+    recall: ['amortized analysis', 'potential method', '償却解析', '調和級数'],
+    object: ['操作列', '要素', '候補'],
+    trigger: ['一度だけ', '単調に減る', '移動回数'],
+    invariant: ['potential', '総削除回数'],
+    goal: ['総計算量', '償却上界'],
+    priority: 66,
+  },
+  {
+    id: 'tag-small-to-large',
+    name: 'small-to-large・DSU on Tree',
+    definition:
+      '小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-merge-small-into-large'],
+    unitIds: ['unit-small-to-large'],
+    recall: ['small.?to.?large', 'DSU on Tree', 'sack technique'],
+    object: ['集合', 'map', '部分木container'],
+    trigger: ['merge', '小さい側', 'container swap'],
+    invariant: ['size倍増', '要素移動'],
+    goal: ['集合併合', '部分木集約'],
+    priority: 72,
+  },
+  {
+    id: 'tag-threshold-heavy-light',
+    name: '平方根・閾値による軽重分類',
+    definition: '頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-balance-heavy-light-threshold'],
+    unitIds: ['unit-threshold-heavy-light'],
+    recall: ['sqrt decomposition', '平方根分割', 'frequency decomposition', '次数平方分割'],
+    object: ['頻度', '次数', 'query'],
+    trigger: ['heavy', 'light', '閾値'],
+    invariant: ['heavy個数', 'light総和'],
+    goal: ['計算量均衡', '更新高速化'],
+    priority: 74,
+  },
+  {
+    id: 'tag-heavy-path-tree-dp',
+    name: 'heavy pathによる木DP高速化',
+    definition:
+      'heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。',
+    parentId: 'tag-tree-model-structure',
+    outcomeIds: ['outcome-accelerate-tree-dp-by-heavy-path'],
+    unitIds: ['unit-heavy-path-tree-dp'],
+    recall: ['HLRecDP', 'heavy path tree DP', 'heavy.?light.*tree DP'],
+    object: ['木DP', 'heavy path', 'light subtree'],
+    trigger: ['path recurrence', '部分木多項式', 'heavy child'],
+    invariant: ['light辺のsize総和', 'path合成'],
+    goal: ['木DP高速化', '多項式DP'],
+    priority: 91,
+  },
+  {
+    id: 'tag-subset-bitmask-dp',
+    name: '部分集合・bitmask状態DP',
+    definition: '各bitの意味を固定し、訪問集合・選択集合・frontierなどの部分集合状態間を遷移する。',
+    parentId: 'tag-dp-state-transition',
+    outcomeIds: ['outcome-enumerate-subset-state-space'],
+    unitIds: ['unit-dp-subset-state'],
+    recall: ['bitmask DP', 'subset DP', 'bit DP', '部分集合DP'],
+    object: ['bitmask', '部分集合', '訪問集合'],
+    trigger: ['小さいN', '集合状態', 'submask'],
+    invariant: ['bitの意味', '集合包含'],
+    goal: ['部分集合状態', '全訪問'],
+    priority: 62,
+  },
+  {
+    id: 'tag-subset-zeta-mobius-transform',
+    name: 'subset zeta・Möbius変換',
+    definition:
+      'Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転で相互変換する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-apply-subset-zeta-mobius-transform'],
+    unitIds: ['unit-subset-transforms'],
+    recall: ['subset zeta', 'subset Möbius', 'superset Möbius', '高速ゼータ変換'],
+    object: ['subset function', 'mask頻度', 'Boolean lattice'],
+    trigger: ['全submask和', '全superset和', 'exact mask'],
+    invariant: ['包含順序', 'zetaとinverse'],
+    goal: ['subset aggregate', 'exact値復元'],
+    priority: 86,
+  },
+  {
+    id: 'tag-subset-convolution',
+    name: 'subset convolution',
+    definition: '互いに素な部分集合分割に沿う畳み込みをrank別zeta変換などで高速に計算する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-compute-subset-convolution'],
+    unitIds: ['unit-subset-convolution'],
+    recall: ['subset convolution', '部分集合畳み込み'],
+    object: ['subset function', '集合分割'],
+    trigger: ['disjoint union', 'Sを二分', '部分集合分割'],
+    invariant: ['rank', 'disjointness'],
+    goal: ['集合分割畳み込み'],
+    priority: 94,
+  },
+  {
+    id: 'tag-state-graph-search',
+    name: '状態グラフのモデリングと探索',
+    definition:
+      '暗黙状態と遷移を頂点・辺へ写し、必要な前処理をした上でBFS・DFS・backtrackingを選ぶ。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-select-state-graph-search'],
+    unitIds: ['unit-state-graph-search'],
+    recall: ['state graph', 'implicit graph', 'BFS', 'DFS', '状態空間探索'],
+    object: ['状態', '遷移', 'グリッド'],
+    trigger: ['最小手数', '到達可能', '暗黙graph'],
+    invariant: ['visited', '探索frontier'],
+    goal: ['到達判定', '最短手数'],
+    priority: 43,
+  },
+  {
+    id: 'tag-transitive-closure',
+    name: '推移閉包',
+    definition: '各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-compute-transitive-closure'],
+    unitIds: ['unit-transitive-closure'],
+    recall: ['transitive closure', 'Warshall', '推移閉包'],
+    object: ['有向graph', '到達関係'],
+    trigger: ['全頂点対', '到達可能性'],
+    invariant: ['中継許可集合', 'closure'],
+    goal: ['到達行列'],
+    priority: 55,
+  },
+  {
+    id: 'tag-scc-condensation',
+    name: 'SCC・縮約DAG・トポロジカル順序',
+    definition: '強連結成分を一頂点へ縮約し、閉路を除いたDAG上の順序・DP・coverへ変換する。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-condense-and-order-directed-graph'],
+    unitIds: ['unit-scc-condensation'],
+    recall: ['SCC', 'strongly connected components', 'condensation DAG', 'topological sort'],
+    object: ['有向graph', '強連結成分', 'DAG'],
+    trigger: ['閉路', '相互到達', '依存順'],
+    invariant: ['成分内同値', 'DAG順'],
+    goal: ['縮約', '順序付け'],
+    priority: 71,
+  },
+  {
+    id: 'tag-two-sat',
+    name: '2-SAT・含意グラフ',
+    definition:
+      '二値選択のclauseを含意辺へ変換し、literalと否定literalのSCC関係から可解性と代入を得る。',
+    parentId: 'tag-graph-model-structure',
+    prerequisiteTagIds: ['tag-scc-condensation'],
+    outcomeIds: ['outcome-encode-threshold-constraints-as-two-sat'],
+    unitIds: ['unit-two-sat'],
+    recall: ['2-SAT', 'implication graph', '含意グラフ'],
+    object: ['literal', 'clause', 'boolean'],
+    trigger: ['二択', '少なくとも一方', 'threshold boolean'],
+    invariant: ['否定literal', 'SCC順'],
+    goal: ['充足可能性', '具体代入'],
+    priority: 84,
+  },
+  {
+    id: 'tag-functional-graph-decomposition',
+    name: '関数グラフのcycle・tree分解',
+    definition: '各頂点の後続が一意なgraphをcycleと流入treeへ分解し、前周期・周期を処理する。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-decompose-functional-graph'],
+    unitIds: ['unit-functional-graph-decomposition'],
+    recall: ['functional graph', '関数グラフ', 'cycle peeling'],
+    object: ['一意な後続', 'cycle', '軌道'],
+    trigger: ['写像反復', '各頂点から一辺'],
+    invariant: ['前周期', 'cycle'],
+    goal: ['軌道分解', '周期処理'],
+    priority: 60,
+  },
+  {
+    id: 'tag-binary-lifting',
+    name: 'doubling・binary lifting',
+    definition: '決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-jump-deterministic-transition'],
+    unitIds: ['unit-binary-lifting'],
+    recall: ['doubling', 'binary lifting', 'ダブリング'],
+    object: ['写像', 'ancestor', '決定的遷移'],
+    trigger: ['K回後', '巨大回数', 'jump'],
+    invariant: ['2冪合成', '結合順'],
+    goal: ['高速jump', '累積遷移'],
+    priority: 64,
+  },
+  {
+    id: 'tag-dsu-components',
+    name: 'DSUによる連結成分管理・縮約',
+    definition: '辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: [
+      'outcome-maintain-connectivity-components',
+      'outcome-augment-components-with-metadata',
+    ],
+    unitIds: ['unit-dsu-components'],
+    recall: ['DSU', 'Union.?Find', 'disjoint set union', 'component contraction'],
+    object: ['無向graph', '連結成分', '代表元'],
+    trigger: ['辺追加', '同値', 'component merge'],
+    invariant: ['root', 'component metadata'],
+    goal: ['連結判定', '成分縮約'],
+    priority: 58,
+  },
+  {
+    id: 'tag-potential-dsu',
+    name: 'potential・weighted DSU',
+    definition: '親へのpotential差を保ち、同一成分内の差制約と矛盾をmerge・queryできる。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-maintain-potential-differences'],
+    unitIds: ['unit-potential-dsu'],
+    recall: ['weighted Union.?Find', 'potential DSU', '重み付きUnion-Find'],
+    object: ['差制約', 'potential', '成分'],
+    trigger: ['相対差', 'offset', '矛盾'],
+    invariant: ['rootへのpotential', 'cycle和'],
+    goal: ['差query', '整合性判定'],
+    priority: 73,
+  },
+  {
+    id: 'tag-rooted-tree-aggregation',
+    name: '根付き木DP・部分木集約',
+    definition:
+      '子部分木の状態をbottom-upに合成し、親へ渡す最小十分なopen/closed状態や要約を設計する。',
+    parentId: 'tag-tree-model-structure',
+    outcomeIds: ['outcome-aggregate-rooted-tree'],
+    unitIds: ['unit-rooted-tree-aggregation'],
+    recall: ['tree DP', 'subtree DP', '木DP'],
+    object: ['根付き木', '部分木', '子状態'],
+    trigger: ['部分木ごと', 'bottom-up'],
+    invariant: ['親へのinterface', '子の独立性'],
+    goal: ['部分木集約', '木上数え上げ'],
+    priority: 63,
+  },
+  {
+    id: 'tag-rerooting',
+    name: 'rerooting・全方位木DP',
+    definition:
+      '辺の両側情報とprefix/suffix合成を用いて、全ての根に対する木DP値を線形または準線形時間で得る。',
+    parentId: 'tag-tree-model-structure',
+    prerequisiteTagIds: ['tag-rooted-tree-aggregation'],
+    outcomeIds: ['outcome-reroot-tree-aggregation'],
+    unitIds: ['unit-rerooting'],
+    recall: ['rerooting', 'all-direction tree DP', '全方位木DP'],
+    object: ['木', '根', '辺の両側'],
+    trigger: ['全頂点を根', '根を移す'],
+    invariant: ['親側情報', '除外合成'],
+    goal: ['全根の答え'],
+    priority: 75,
+  },
+  {
+    id: 'tag-tree-ancestor-lca',
+    name: 'ancestor query・LCA',
+    definition: '根付き木の祖先関係を時刻またはbinary liftingで索引化し、LCAと木上距離を答える。',
+    parentId: 'tag-tree-model-structure',
+    outcomeIds: ['outcome-answer-tree-ancestor-queries'],
+    unitIds: ['unit-tree-ancestor-lca'],
+    recall: ['LCA', 'lowest common ancestor', 'ancestor query'],
+    object: ['根付き木', '祖先', '二頂点'],
+    trigger: ['共通祖先', '木上距離'],
+    invariant: ['深さ', '祖先表'],
+    goal: ['LCA', 'ancestor判定'],
+    priority: 68,
+  },
+  {
+    id: 'tag-tree-euler-flattening',
+    name: 'Euler順による部分木区間化',
+    definition: 'DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。',
+    parentId: 'tag-tree-model-structure',
+    outcomeIds: ['outcome-flatten-tree-by-euler-order'],
+    unitIds: ['unit-tree-euler-flattening'],
+    recall: ['Euler tour flattening', 'DFS order', '部分木区間'],
+    object: ['部分木', 'DFS順', 'tin/tout'],
+    trigger: ['subtree query', '部分木更新'],
+    invariant: ['連続区間', '入退時刻'],
+    goal: ['配列化', '区間query'],
+    priority: 67,
+  },
+  {
+    id: 'tag-heavy-light-decomposition',
+    name: 'Heavy-Light Decomposition',
+    definition: '木上pathをO(log N)本の連続区間へ分解し、配列data structure上のqueryへ変換する。',
+    parentId: 'tag-tree-model-structure',
+    prerequisiteTagIds: ['tag-tree-ancestor-lca', 'tag-tree-euler-flattening'],
+    outcomeIds: ['outcome-apply-heavy-light-decomposition'],
+    unitIds: ['unit-heavy-light-decomposition'],
+    recall: ['Heavy.?Light Decomposition', '\\bHLD\\b', 'HL分解'],
+    object: ['木上path', 'heavy path'],
+    trigger: ['path query', 'path update'],
+    invariant: ['heavy edge', 'chain head'],
+    goal: ['path区間分解'],
+    priority: 80,
+  },
+  {
+    id: 'tag-virtual-tree',
+    name: 'virtual tree・auxiliary tree',
+    definition: '選択頂点と隣接LCAだけをEuler順にstack接続し、必要な祖先関係を保つ小木を構築する。',
+    parentId: 'tag-tree-model-structure',
+    prerequisiteTagIds: ['tag-tree-ancestor-lca', 'tag-tree-euler-flattening'],
+    outcomeIds: ['outcome-build-virtual-tree'],
+    unitIds: ['unit-virtual-tree'],
+    recall: ['virtual tree', 'auxiliary tree', '仮想木'],
+    object: ['選択頂点', 'LCA', 'Euler順'],
+    trigger: ['少数頂点だけ', '色ごと', '重要頂点'],
+    invariant: ['祖先関係', '隣接LCA'],
+    goal: ['小さな誘導木', '部分集合query'],
+    priority: 87,
+  },
+  {
+    id: 'tag-max-flow-min-cut',
+    name: '最大流・最小カット',
+    definition:
+      '選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-model-max-flow-min-cut'],
+    unitIds: ['unit-max-flow-min-cut'],
+    recall: ['max.?flow', 'min.?cut', '最大流', '最小カット', 'maximum closure'],
+    object: ['capacity network', 'source', 'sink', 'cut'],
+    trigger: ['容量', '二値選択', '排反', 'closure'],
+    invariant: ['flow conservation', 'residual graph', 'cut capacity'],
+    goal: ['最大選択', '最小除去', 'cut復元'],
+    priority: 86,
+  },
+  {
+    id: 'tag-flow-feasibility-lower-bounds',
+    name: '下限制約付きflowの実現可能性',
+    definition:
+      '各辺のlower boundを先に流して頂点需要へ変換し、super source/sinkを加えたcirculationの飽和可能性を判定する。',
+    parentId: 'tag-graph-model-structure',
+    prerequisiteTagIds: ['tag-max-flow-min-cut'],
+    outcomeIds: ['outcome-solve-flow-with-lower-bounds'],
+    unitIds: ['unit-flow-lower-bounds'],
+    recall: ['lower.?bound.*flow', 'circulation with demands', '下限付きflow'],
+    object: ['有向辺', '下限', '上限', '頂点需要'],
+    trigger: ['各辺に最低量', 'flow feasibility', '需要を満たす'],
+    invariant: ['flow conservation', '需要balance', 'super source'],
+    goal: ['実現可能性', '整数flow構成'],
+    priority: 91,
+  },
+  {
+    id: 'tag-bipartite-matching-hall',
+    name: '二部matching・Hall・Kőnig',
+    definition:
+      '左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: [
+      'outcome-solve-bipartite-matching',
+      'outcome-characterize-bipartite-feasibility-by-hall',
+    ],
+    unitIds: ['unit-bipartite-matching'],
+    recall: ['bipartite matching', '二部マッチング', 'Hall', 'Kőnig', 'path cover'],
+    object: ['左右頂点集合', '対応辺', 'matching'],
+    trigger: ['一対一割当', '近傍集合', 'path cover'],
+    invariant: ['交互路', 'augmenting path', 'Hall condition'],
+    goal: ['最大matching', '完全割当', '最小被覆'],
+    priority: 81,
+  },
+  {
+    id: 'tag-min-cost-flow',
+    name: '最小費用流・circulation',
+    definition:
+      '流量と費用を持つ残余networkを設計し、potential付き最短路・slope・cycle cancelingで流量別最小費用を求める。',
+    parentId: 'tag-graph-model-structure',
+    prerequisiteTagIds: ['tag-max-flow-min-cut', 'tag-shortest-path'],
+    outcomeIds: ['outcome-model-min-cost-flow'],
+    unitIds: ['unit-min-cost-flow'],
+    recall: ['min.?cost flow', 'minimum cost circulation', '最小費用流', 'min.?cost.?slope'],
+    object: ['costed edge', 'flow', 'residual network'],
+    trigger: ['割当費用', '流量別', '利益最大化'],
+    invariant: ['reduced cost', 'potential', 'residual cycle'],
+    goal: ['最小費用', '最大利益', 'slope'],
+    priority: 92,
+  },
+  {
+    id: 'tag-weighted-bipartite-matching',
+    name: '重み付き二部完全matching',
+    definition:
+      'assignment matrixのdual potentialとtight edgeを保ち、Hungarian法または同値なmin-cost flowで完全matchingの重みを最適化する。',
+    parentId: 'tag-graph-model-structure',
+    prerequisiteTagIds: ['tag-bipartite-matching-hall'],
+    outcomeIds: ['outcome-solve-weighted-bipartite-matching'],
+    unitIds: ['unit-weighted-bipartite-matching'],
+    recall: ['Hungarian algorithm', 'assignment problem', 'weighted bipartite matching'],
+    object: ['cost matrix', '左右頂点', 'perfect matching'],
+    trigger: ['全頂点を対応', '割当費用', 'uncrossing'],
+    invariant: ['dual potential', 'tight edge'],
+    goal: ['最小重み完全matching'],
+    priority: 95,
+  },
+  {
+    id: 'tag-general-graph-matching',
+    name: '一般グラフのmatching',
+    definition:
+      '奇cycleを含む一般グラフでperfect matchingを扱い、blossom縮約またはTutte行列による代数的特徴付けを用いる。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-solve-general-graph-matching'],
+    unitIds: ['unit-general-graph-matching'],
+    recall: ['blossom algorithm', 'Tutte matrix', 'general graph matching', '一般グラフ.*matching'],
+    object: ['一般グラフ', 'odd cycle', 'perfect matching'],
+    trigger: ['二部でない', '全頂点をpair', 'degree stub'],
+    invariant: ['alternating forest', 'blossom', 'Tutte rank'],
+    goal: ['perfect matching', '最小重みmatching'],
+    priority: 99,
+  },
+  {
+    id: 'tag-euler-trail-circuit',
+    name: 'Euler trail・circuit',
+    definition:
+      '全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-construct-euler-trail-or-circuit'],
+    unitIds: ['unit-euler-trail-circuit'],
+    recall: ['Euler trail', 'Euler circuit', 'Hierholzer', 'オイラー路', '一筆書き'],
+    object: ['辺', 'walk', '次数'],
+    trigger: ['全辺を一度', '一筆書き'],
+    invariant: ['連結性', '入出次数差', '未使用辺'],
+    goal: ['trail判定', 'walk構成'],
+    priority: 76,
+  },
+  {
+    id: 'tag-degree-parity-subgraph',
+    name: '指定次数parityの部分グラフ構成',
+    definition:
+      '選択辺集合の奇数次数頂点を指定し、spanning forestの葉から必要辺を確定してT-join型の構成を行う。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-construct-degree-parity-subgraph'],
+    unitIds: ['unit-degree-parity-subgraph'],
+    recall: ['degree parity subgraph', 'T-join', '次数の偶奇', '奇数次数'],
+    object: ['選択辺集合', '頂点次数', 'forest'],
+    trigger: ['次数を奇数に', '偶奇を指定'],
+    invariant: ['奇数頂点数は偶数', '葉から確定'],
+    goal: ['辺集合構成', 'parity条件'],
+    priority: 73,
+  },
+  {
+    id: 'tag-euler-circuit-counting',
+    name: 'BEST定理によるEuler circuit数え上げ',
+    definition:
+      '有向Euler graphのcircuit数をrooted arborescenceの行列式と各頂点の出辺順列へ分解して数える。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    prerequisiteTagIds: ['tag-euler-trail-circuit', 'tag-determinant-counting'],
+    outcomeIds: ['outcome-count-euler-circuits-by-best'],
+    unitIds: ['unit-euler-circuit-counting'],
+    recall: ['BEST theorem', 'BEST定理', 'Euler circuit counting'],
+    object: ['有向Euler graph', 'arborescence', '出次数'],
+    trigger: ['Euler閉路の個数', 'de Bruijn'],
+    invariant: ['行列木', '出辺順列'],
+    goal: ['Euler circuit数'],
+    priority: 97,
+  },
+  {
+    id: 'tag-graph-core-peeling',
+    name: 'graph core・leaf peeling',
+    definition: '次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-peel-graph-core'],
+    unitIds: ['unit-graph-core'],
+    recall: ['leaf peeling', 'leaf stripping', 'k.?core', '葉刈り'],
+    object: ['graph', 'degree', 'core'],
+    trigger: ['葉を反復削除', '次数未満を除去'],
+    invariant: ['現在次数', '削除queue'],
+    goal: ['cycle core', '残存頂点'],
+    priority: 69,
+  },
+  {
+    id: 'tag-near-tree-kernelization',
+    name: 'near-tree graphのkernel化',
+    definition:
+      'terminal外の葉除去とdegree-2 chain縮約で、cycle rankや余分な辺数だけに依存する小kernelへ答えを保って縮約する。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-kernelize-near-tree-graph'],
+    unitIds: ['unit-near-tree-kernelization'],
+    recall: ['kernelization', 'near.?tree', 'degree.?2 chain', 'cycle rank'],
+    object: ['terminal', 'chain', 'small kernel'],
+    trigger: ['木に少数辺追加', 'chainを縮約'],
+    invariant: ['答え保存', 'cycle rank'],
+    goal: ['parameterized kernel', 'path候補列挙'],
+    priority: 94,
+  },
+  {
+    id: 'tag-range-monoid-aggregation',
+    name: '区間monoid要約',
+    definition:
+      'queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-design-associative-range-summary'],
+    unitIds: ['unit-range-monoid-aggregation'],
+    recall: ['monoid segment tree', 'モノイド', 'segment tree fold', '線分木'],
+    object: ['区間', '要約', 'monoid'],
+    trigger: ['point update', 'range fold', '非可換合成'],
+    invariant: ['結合法則', '単位元', '順序'],
+    goal: ['区間query', '境界探索'],
+    priority: 75,
+  },
+  {
+    id: 'tag-segment-tree-canonical-decomposition',
+    name: 'Segment Treeのcanonical区間分解',
+    definition:
+      '区間をO(log N)個のcanonical nodeへ分解し、range object・生存時間・range edgeを少数のnodeへ配置する。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-decompose-ranges-into-segment-tree-nodes'],
+    unitIds: ['unit-segment-tree-canonical-decomposition'],
+    recall: ['canonical cover', 'segment tree graph', 'time segment tree', '区間分解'],
+    object: ['区間', 'canonical node', '時間軸'],
+    trigger: ['区間へ登録', 'range edge', '生存区間'],
+    invariant: ['O(log N) nodes', '完全被覆'],
+    goal: ['offline dynamic', '区間object配置'],
+    priority: 78,
+  },
+  {
+    id: 'tag-static-sorted-range-index',
+    name: '静的sorted range index・Merge Sort Tree',
+    definition:
+      '各canonical区間へsorted列とprefix aggregateを構築し、値域境界付きのrange count/sumを二分探索で答える。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-build-static-sorted-range-index'],
+    unitIds: ['unit-static-sorted-range-index'],
+    recall: ['merge sort tree', 'range tree', 'static sorted range index'],
+    object: ['静的配列', 'sorted node array', 'prefix sum'],
+    trigger: ['区間内で値以下', 'range count', 'range sum'],
+    invariant: ['node内sort順', 'canonical cover'],
+    goal: ['値域付き区間query'],
+    priority: 86,
+  },
+  {
+    id: 'tag-idempotent-overlap-range-query',
+    name: '冪等演算のoverlap range query・Sparse Table',
+    definition:
+      '冪等な演算なら重なりを許す二つの2冪区間で任意rangeを覆えることを使い、静的queryをO(1)で答える。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-answer-idempotent-range-query'],
+    unitIds: ['unit-idempotent-overlap-range-query'],
+    recall: ['sparse table', 'overlapping decomposition', 'RMQ', '冪等'],
+    object: ['静的配列', '2冪区間', 'idempotent operation'],
+    trigger: ['更新なし', 'min/max/gcd', '重複して覆う'],
+    invariant: ['f(x,x)=x', 'floor log'],
+    goal: ['O(1) range query', 'query family構成'],
+    priority: 72,
+  },
+  {
+    id: 'tag-swag',
+    name: 'SWAG・two-stack queue aggregation',
+    definition:
+      'queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってpush/pop/foldを償却O(1)で処理する。',
+    parentId: 'tag-query-sufficient-aggregate',
+    prerequisiteTagIds: ['tag-range-monoid-aggregation'],
+    outcomeIds: ['outcome-maintain-queue-aggregate-with-swag'],
+    unitIds: ['unit-swag'],
+    recall: ['SWAG', 'sliding window aggregation', 'two stack queue'],
+    object: ['queue', 'two stacks', 'monoid aggregate'],
+    trigger: ['両端が一方向', 'sliding window fold'],
+    invariant: ['front積', 'back積', '要素移動一回'],
+    goal: ['queue aggregate'],
+    priority: 88,
+  },
+  {
+    id: 'tag-finite-function-composition',
+    name: '有限関数・作用の合成',
+    definition:
+      '小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-compose-finite-functions'],
+    unitIds: ['unit-finite-function-composition'],
+    recall: ['finite function composition', 'function monoid', '有限写像の合成'],
+    object: ['有限状態', '関数表', '作用列'],
+    trigger: ['操作を順に適用', 'bitごとに関数化'],
+    invariant: ['合成順', '閉包'],
+    goal: ['prefix作用', '区間作用'],
+    priority: 64,
+  },
+  {
+    id: 'tag-priority-queue-best-first',
+    name: 'priority queue・best-first列挙',
+    definition:
+      '現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-enumerate-frontier-best-first'],
+    unitIds: ['unit-priority-queue-best-first'],
+    recall: ['priority queue', 'heap', 'best.?first', 'k-way merge', '優先度付きキュー'],
+    object: ['候補frontier', 'heap', '暗黙graph'],
+    trigger: ['最小から順', '上位K個', '閾値で解禁'],
+    invariant: ['未確定候補の極値', '重複排除'],
+    goal: ['k番目', 'best-first探索'],
+    priority: 57,
+  },
+  {
+    id: 'tag-ordered-set-multiset',
+    name: 'ordered set・multisetの動的順序管理',
+    definition:
+      '比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-maintain-ordered-set-statistics'],
+    unitIds: ['unit-ordered-set-multiset'],
+    recall: ['ordered set', 'multiset', 'balanced BST', 'order statistics'],
+    object: ['動的集合', '重複値', '隣接要素'],
+    trigger: ['前後の値', 'insert/erase', 'k-smallest'],
+    invariant: ['sort順', '集合間balance'],
+    goal: ['順位', '近傍', 'top-K集約'],
+    priority: 60,
+  },
+  {
+    id: 'tag-ordered-interval-partition',
+    name: 'ordered interval partition・ODT',
+    definition:
+      '互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-maintain-ordered-interval-partition'],
+    unitIds: ['unit-ordered-interval-partition'],
+    recall: ['ordered disjoint tree', '\\bODT\\b', 'interval set', 'run interval'],
+    object: ['互いに素な区間', 'run', '境界'],
+    trigger: ['区間をsplit', '同値runをmerge'],
+    invariant: ['非交差', '最大run', '隣接merge'],
+    goal: ['range代入', '動的区間管理'],
+    priority: 79,
+  },
+  {
+    id: 'tag-persistence',
+    name: '永続data structure・structural sharing',
+    definition:
+      '変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-persist-data-structure-versions'],
+    unitIds: ['unit-persistence'],
+    recall: ['persistent data structure', '永続', 'structural sharing', 'path copying'],
+    object: ['version root', 'immutable node', '共有部分'],
+    trigger: ['過去versionをquery', '分岐する履歴', 'SAVE/LOAD'],
+    invariant: ['旧node不変', 'rootごとの版'],
+    goal: ['version保存', '過去query'],
+    priority: 84,
+  },
+  {
+    id: 'tag-rollback',
+    name: 'rollback・DFS入退場の状態復元',
+    definition:
+      '更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-rollback-reversible-updates'],
+    unitIds: ['unit-rollback'],
+    recall: ['rollback DSU', 'undo stack', 'rollback data structure', '巻き戻し'],
+    object: ['変更履歴', 'snapshot', 'DFS path'],
+    trigger: ['退場時に戻す', 'offline dynamic', '分岐探索'],
+    invariant: ['変更差分', 'stack height'],
+    goal: ['状態復元', '時間分割'],
+    priority: 83,
+  },
+  {
+    id: 'tag-z-algorithm-prefix-matching',
+    name: 'Z algorithmによるprefix matching',
+    definition:
+      '各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。',
+    parentId: 'tag-string-state-representation',
+    outcomeIds: ['outcome-build-prefix-match-state'],
+    unitIds: ['unit-z-algorithm'],
+    recall: ['Z algorithm', 'Zアルゴリズム', 'Z array', 'Z配列'],
+    object: ['文字列', 'prefix', '一致長'],
+    trigger: ['各位置とprefixを比較', '前後を連結して照合'],
+    invariant: ['Z-box', '最右一致区間'],
+    goal: ['全位置のprefix一致長'],
+    priority: 71,
+  },
+  {
+    id: 'tag-finite-pattern-automaton',
+    name: '有限pattern automatonの状態設計',
+    definition:
+      '未来の受理・違反判定が同じ履歴を有限状態へ同値化し、各文字の完全な遷移表を構築する。',
+    parentId: 'tag-string-state-representation',
+    outcomeIds: ['outcome-build-finite-string-automaton'],
+    unitIds: ['unit-finite-pattern-automaton'],
+    recall: ['finite automaton', 'DFA', 'Myhill.?Nerode', '有限オートマトン'],
+    object: ['pattern状態', '接尾辞', '受理状態'],
+    trigger: ['禁止pattern', '要求subsequence', '未来等価'],
+    invariant: ['有限状態', '完全遷移', '受理条件'],
+    goal: ['文字列状態圧縮', 'automaton構築'],
+    priority: 74,
+  },
+  {
+    id: 'tag-automaton-subset-construction',
+    name: '非決定性automatonのsubset construction',
+    definition:
+      '同時に存在し得るNFA状態集合を一つのDFA状態とし、文字ごとの集合遷移と受理条件を構成する。',
+    parentId: 'tag-string-state-representation',
+    outcomeIds: ['outcome-determinize-automaton-by-subsets'],
+    unitIds: ['unit-automaton-subset-construction'],
+    recall: ['subset construction', 'powerset construction', 'NFA to DFA'],
+    object: ['NFA状態集合', 'DFA state', 'transition'],
+    trigger: ['複数状態へ遷移', '非決定性'],
+    invariant: ['到達可能状態集合', '言語同値'],
+    goal: ['決定化', '有限状態DP'],
+    priority: 82,
+  },
+  {
+    id: 'tag-aho-corasick',
+    name: 'Aho–Corasick',
+    definition:
+      '複数patternのTrieへfailure linkとoutput情報を加え、最長接尾辞状態を文字ごとに更新する。',
+    parentId: 'tag-string-state-representation',
+    prerequisiteTagIds: ['tag-trie-prefix'],
+    outcomeIds: ['outcome-build-multi-pattern-automaton'],
+    unitIds: ['unit-aho-corasick'],
+    recall: ['Aho.?Corasick', 'AC automaton', '多pattern照合'],
+    object: ['pattern trie', 'failure link', 'output set'],
+    trigger: ['複数pattern', '辞書中の接尾辞'],
+    invariant: ['最長suffix state', 'failure tree'],
+    goal: ['複数pattern一致状態'],
+    priority: 88,
+  },
+  {
+    id: 'tag-automaton-dp',
+    name: 'automaton上のDP・行列遷移',
+    definition:
+      '位置・長さとautomaton stateの積状態を作り、受理・禁止状態を除外して数え上げや最適化を行う。',
+    parentId: 'tag-dp-state-transition',
+    prerequisiteTagIds: ['tag-finite-pattern-automaton'],
+    outcomeIds: ['outcome-run-dp-on-finite-automaton'],
+    unitIds: ['unit-automaton-dp'],
+    recall: ['automaton DP', 'DFA DP', 'transfer matrix automaton'],
+    object: ['automaton state', '文字位置', '遷移表'],
+    trigger: ['長さLの文字列数', 'patternを避ける', 'graph walkと有限状態'],
+    invariant: ['prefix後の状態', '受理集合'],
+    goal: ['文字列数え上げ', '最適walk'],
+    priority: 80,
+  },
+  {
+    id: 'tag-suffix-automaton',
+    name: 'Suffix Automaton',
+    definition:
+      'endpos同値類をstateとし、suffix linkとcloneで全部分文字列の遷移を線形状態数へ圧縮する。',
+    parentId: 'tag-string-state-representation',
+    outcomeIds: ['outcome-build-suffix-automaton'],
+    unitIds: ['unit-suffix-automaton'],
+    recall: ['Suffix Automaton', '\\bSAM\\b', '接尾辞オートマトン'],
+    object: ['substring', 'endpos class', 'suffix link'],
+    trigger: ['全部分文字列', '文字追加online'],
+    invariant: ['max length', 'link length', 'clone'],
+    goal: ['部分文字列DAG', 'distinct substring'],
+    priority: 93,
+  },
+  {
+    id: 'tag-sequence-fingerprint',
+    name: '列・文字列のrolling fingerprint',
+    definition:
+      '順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。',
+    parentId: 'tag-string-state-representation',
+    outcomeIds: ['outcome-compare-sequences-by-rolling-fingerprint'],
+    unitIds: ['unit-sequence-fingerprint'],
+    recall: ['rolling hash', 'polynomial hash', 'sequence fingerprint'],
+    object: ['列', '部分文字列', 'prefix hash'],
+    trigger: ['substring equality', 'LCP query', '連結hash'],
+    invariant: ['順序付き連結則', '衝突確率'],
+    goal: ['列一致', 'LCP'],
+    priority: 73,
+  },
+  {
+    id: 'tag-randomized-algebraic-fingerprint',
+    name: '乱択代数fingerprint',
+    definition:
+      'multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。',
+    parentId: 'tag-model-reduction',
+    prerequisiteTagIds: ['tag-randomized-algorithm'],
+    outcomeIds: ['outcome-compare-algebraic-objects-by-random-fingerprint'],
+    unitIds: ['unit-randomized-algebraic-fingerprint'],
+    recall: ['Zobrist hash', 'multiset hash', 'algebraic fingerprint', 'random evaluation'],
+    object: ['multiset', '指数vector', '多項式値'],
+    trigger: ['順序を無視', '完全冪判定', '式の積が等しい'],
+    invariant: ['線形/乗法的合成', '衝突上界'],
+    goal: ['集合同値query', '確率的等価判定'],
+    priority: 87,
+  },
+  {
+    id: 'tag-modular-congruence-crt',
+    name: '一次合同・CRT',
+    definition:
+      '一次合同のgcd可解性を判定し、互いに素でない法も含めて複数の剰余類を一つへ統合する。',
+    parentId: 'tag-number-theory-structure',
+    prerequisiteTagIds: ['tag-modular-arithmetic', 'tag-bezout-diophantine'],
+    outcomeIds: ['outcome-solve-modular-constraints'],
+    unitIds: ['unit-modular-congruence'],
+    recall: ['Chinese remainder theorem', '\\bCRT\\b', '中国剰余定理', '一次合同'],
+    object: ['合同式', '法', '剰余類'],
+    trigger: ['複数の法', 'ax=b mod m'],
+    invariant: ['gcd整合性', 'lcm法'],
+    goal: ['合同解構成', '最小非負解'],
+    priority: 78,
+  },
+  {
+    id: 'tag-modular-periodicity',
+    name: '剰余周期・指数法則',
+    definition:
+      '有限剰余状態の周期またはFermat/Euler型指数簡約を示し、巨大な反復やtower exponentを短縮する。',
+    parentId: 'tag-number-theory-structure',
+    prerequisiteTagIds: ['tag-modular-arithmetic'],
+    outcomeIds: ['outcome-exploit-modular-periodicity'],
+    unitIds: ['unit-modular-periodicity'],
+    recall: ['modular period', 'Fermat theorem', 'Euler theorem', '剰余周期'],
+    object: ['剰余列', '巨大指数', '有限状態'],
+    trigger: ['反復回数が巨大', '指数を法で簡約'],
+    invariant: ['周期', '前周期', '可逆性'],
+    goal: ['巨大反復の値'],
+    priority: 65,
+  },
+  {
+    id: 'tag-bezout-diophantine',
+    name: 'Bézout等式・一次不定方程式',
+    definition:
+      '整数線形結合がgcdの倍数全体になることを使い、一次不定方程式の可解性と解のparameter表示を得る。',
+    parentId: 'tag-number-theory-structure',
+    outcomeIds: ['outcome-characterize-integer-solvability'],
+    unitIds: ['unit-gcd-diophantine'],
+    recall: ['Bézout', 'extended Euclid', 'linear Diophantine', '一次不定方程式'],
+    object: ['整数係数', 'gcd', '線形結合'],
+    trigger: ['ax+by=c', '整数解'],
+    invariant: ['gcd divides c', '一般解'],
+    goal: ['可解判定', '整数解構成'],
+    priority: 69,
+  },
+  {
+    id: 'tag-gcd-structure',
+    name: 'gcd不変量・差分構造',
+    definition: '差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。',
+    parentId: 'tag-number-theory-structure',
+    outcomeIds: ['outcome-reduce-integer-structure-by-gcd'],
+    unitIds: ['unit-gcd-structure'],
+    recall: ['gcd invariant', 'range gcd', '最大公約数不変量'],
+    object: ['整数列', '差分', '共通因子'],
+    trigger: ['全要素へ同じ加算', '差が不変', '共通に割る'],
+    invariant: ['gcd', '差分'],
+    goal: ['range gcd', '整数構造縮約'],
+    priority: 54,
+  },
+  {
+    id: 'tag-numerical-semigroup',
+    name: '数値半群・conductor',
+    definition:
+      '正の生成元の非負整数結合がconductor以後を全て覆うことを示し、巨大な到達判定を有限prefixへ縮約する。',
+    parentId: 'tag-number-theory-structure',
+    prerequisiteTagIds: ['tag-bezout-diophantine'],
+    outcomeIds: ['outcome-bound-reachability-in-numerical-semigroup'],
+    unitIds: ['unit-numerical-semigroup-reachability'],
+    recall: ['numerical semigroup', 'Frobenius coin', 'conductor', '数値半群'],
+    object: ['正の生成元', '非負整数結合', '到達集合'],
+    trigger: ['任意回加える', '十分大きい全て'],
+    invariant: ['gcd正規化', 'residue shortest path'],
+    goal: ['巨大距離の到達判定'],
+    priority: 83,
+  },
+  {
+    id: 'tag-rational-approximation',
+    name: '連分数・Stern–Brocot有理近似',
+    definition: 'Euclidの商列またはStern–Brocot区間を辿り、分母制約下の最良有理近似を求める。',
+    parentId: 'tag-number-theory-structure',
+    outcomeIds: ['outcome-approximate-rational-by-euclid'],
+    unitIds: ['unit-rational-approximation'],
+    recall: ['continued fraction', 'Stern.?Brocot', '連分数', 'Farey'],
+    object: ['有理数', '分母上限', 'Euclid商'],
+    trigger: ['最良近似', '既約分数の順序'],
+    invariant: ['隣接分数の行列式', '区間包含'],
+    goal: ['制約付き近似', '分数探索'],
+    priority: 82,
+  },
+  {
+    id: 'tag-cyclic-exponent-counting',
+    name: '巡回群の指数化・位数別数え上げ',
+    definition: '巡回部分群の元を指数へ写し、gcd・位数・約数格子で分類して重複なく数える。',
+    parentId: 'tag-number-theory-structure',
+    prerequisiteTagIds: ['tag-modular-arithmetic', 'tag-prime-divisor-decomposition'],
+    outcomeIds: ['outcome-count-through-cyclic-exponents'],
+    unitIds: ['unit-cyclic-group-exponent-counting'],
+    recall: ['cyclic group counting', 'primitive root', '巡回群', '生成元'],
+    object: ['巡回群', '指数', '位数'],
+    trigger: ['冪で全要素を表す', '位数ごとに分類'],
+    invariant: ['gcd of exponent', 'divisor lattice'],
+    goal: ['群上の数え上げ'],
+    priority: 88,
+  },
+  {
+    id: 'tag-multiplicative-order',
+    name: '乗法的位数・最小周期',
+    definition:
+      '合同反復の最小正周期をmultiplicative orderへ帰着し、群位数の約数を割り落として求める。',
+    parentId: 'tag-number-theory-structure',
+    prerequisiteTagIds: ['tag-modular-arithmetic', 'tag-prime-divisor-decomposition'],
+    outcomeIds: ['outcome-find-period-by-multiplicative-order'],
+    unitIds: ['unit-multiplicative-order-periods'],
+    recall: ['multiplicative order', '乗法的位数', 'repunits period'],
+    object: ['可逆剰余', '冪列', '群位数'],
+    trigger: ['a^k=1の最小k', '最小周期'],
+    invariant: ['order divides group order'],
+    goal: ['周期長'],
+    priority: 86,
+  },
+  {
+    id: 'tag-finite-field-frobenius',
+    name: '有限体Frobenius軌道',
+    definition:
+      '有限体上のFrobenius写像の軌道と固定体を用い、指数的な反復区間をorbit長ごとのrunへ圧縮する。',
+    parentId: 'tag-number-theory-structure',
+    prerequisiteTagIds: ['tag-finite-field-extension'],
+    outcomeIds: ['outcome-decompose-finite-field-frobenius-orbits'],
+    unitIds: ['unit-finite-field-frobenius'],
+    recall: ['Frobenius automorphism', 'finite field orbit', 'Frobenius map'],
+    object: ['有限体', 'Frobenius写像', 'orbit'],
+    trigger: ['p乗写像を反復', '固定体'],
+    invariant: ['orbit長', '拡大次数'],
+    goal: ['反復区間圧縮'],
+    priority: 97,
+  },
+  {
+    id: 'tag-inclusion-exclusion',
+    name: '集合上の包除原理',
+    definition:
+      '条件集合の交差をsubsetごとに数え、交互符号で「少なくとも一つ」「全てを避ける」対象を重複なく数える。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-correct-overlap-by-inversion'],
+    unitIds: ['unit-inclusion-exclusion'],
+    recall: ['inclusion.?exclusion', '包除原理', '包含排除'],
+    object: ['条件集合', '交差', 'subset'],
+    trigger: ['少なくとも一つ', '重複して数える'],
+    invariant: ['交互符号', 'intersection lattice'],
+    goal: ['重複補正', 'exact count'],
+    priority: 68,
+  },
+  {
+    id: 'tag-divisor-mobius-inversion',
+    name: '約数格子のzeta・Möbius反転',
+    definition:
+      '約数/倍数方向の累積値とexact gcd・period値をnumber-theoretic Möbius関数または格子反転で相互変換する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    prerequisiteTagIds: ['tag-prime-divisor-decomposition'],
+    outcomeIds: ['outcome-invert-divisor-lattice-by-mobius'],
+    unitIds: ['unit-divisor-mobius-inversion'],
+    recall: ['Möbius inversion', 'divisor zeta', '約数Möbius', 'メビウス反転'],
+    object: ['約数格子', '倍数和', 'Möbius関数'],
+    trigger: ['gcdがexactly', '最小周期', '全倍数の和'],
+    invariant: ['divisibility order', 'zeta inverse'],
+    goal: ['exact値復元', 'gcd別数え上げ'],
+    priority: 83,
+  },
+  {
+    id: 'tag-convolution',
+    name: '畳み込み・相互相関',
+    definition:
+      '係数積和または反転列とのcorrelationを多項式積へ写し、必要な次数範囲をNTT/FFTで計算する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-compute-convolution-or-correlation'],
+    unitIds: ['unit-polynomial-convolution'],
+    recall: ['convolution', '畳み込み', '\\bNTT\\b', '\\bFFT\\b', 'correlation'],
+    object: ['係数列', '多項式', '積和'],
+    trigger: ['i+j=k', 'shiftごとの一致数'],
+    invariant: ['係数積', '次数範囲'],
+    goal: ['係数列', '相互相関'],
+    priority: 78,
+  },
+  {
+    id: 'tag-generating-functions',
+    name: '生成関数による組合せ構造の符号化',
+    definition:
+      '和・積・sequence・set・cycleなどの組合せ構成を係数列の演算へ翻訳し、欲しい個数を係数として抽出する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-encode-counting-by-generating-function'],
+    unitIds: ['unit-generating-functions'],
+    recall: ['generating function', '母関数', '生成関数', 'exponential formula'],
+    object: ['組合せclass', '係数列', 'OGF/EGF'],
+    trigger: ['独立な合成', '連結成分へ分解'],
+    invariant: ['sizeに対する係数', '全単射'],
+    goal: ['数え上げ式', '係数抽出'],
+    priority: 77,
+  },
+  {
+    id: 'tag-formal-power-series',
+    name: '形式的べき級数の基本演算',
+    definition:
+      '定数項条件と次数打切りを確認し、Newton iterationでinverse・log・exp等を畳み込みへ還元する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    prerequisiteTagIds: ['tag-convolution'],
+    outcomeIds: ['outcome-apply-formal-power-series-operations'],
+    unitIds: ['unit-formal-power-series'],
+    recall: ['formal power series', '\\bFPS\\b', '形式的べき級数', 'Newton iteration'],
+    object: ['formal series', 'truncation degree', 'constant term'],
+    trigger: ['inverse/log/exp', '次数を倍増'],
+    invariant: ['mod x^n', 'Newton誤差次数'],
+    goal: ['FPS演算'],
+    priority: 90,
+  },
+  {
+    id: 'tag-polynomial-multipoint-evaluation',
+    name: '多項式の多点評価・補間',
+    definition:
+      'product treeとremainder treeを構築し、一つの多項式を多数の点へ準線形時間で評価・補間する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    prerequisiteTagIds: ['tag-convolution', 'tag-recursive-divide-and-conquer'],
+    outcomeIds: ['outcome-evaluate-polynomial-at-many-points'],
+    unitIds: ['unit-polynomial-multipoint-evaluation'],
+    recall: ['multipoint evaluation', 'product tree', 'remainder tree', '多点評価'],
+    object: ['polynomial', 'evaluation points', '積木'],
+    trigger: ['多数の点で評価', '補間'],
+    invariant: ['remainder mod subtree product'],
+    goal: ['多点評価', '補間'],
+    priority: 94,
+  },
+  {
+    id: 'tag-fps-composition-power-projection',
+    name: 'FPS合成・power projection',
+    definition:
+      '多項式/FPSのcompositionとその転置であるpower projectionを、block分割・transposition・rational functionへ還元する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    prerequisiteTagIds: ['tag-formal-power-series'],
+    outcomeIds: ['outcome-compose-series-and-project-powers'],
+    unitIds: ['unit-fps-composition-power-projection'],
+    recall: ['power projection', 'polynomial composition', 'FPS composition', '多項式合成'],
+    object: ['formal series', 'composition', 'linear functional'],
+    trigger: ['f(g(x))', 'g(x)^kの係数pairing'],
+    invariant: ['degree truncation', 'transposed map'],
+    goal: ['高速合成', 'power projection'],
+    priority: 99,
+  },
+  {
+    id: 'tag-bostan-mori',
+    name: 'Bostan–Mori・有理生成関数の係数抽出',
+    definition: 'P(x)/Q(x)のN次係数をQ(-x)との積の偶奇係数へ半減し、対数段で巨大indexへ進む。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    prerequisiteTagIds: ['tag-convolution'],
+    outcomeIds: ['outcome-extract-rational-series-coefficient'],
+    unitIds: ['unit-bostan-mori'],
+    recall: ['Bostan.?Mori', 'rational generating function coefficient'],
+    object: ['rational series', 'numerator', 'denominator'],
+    trigger: ['巨大N次係数', '線形漸化式の項'],
+    invariant: ['偶奇係数', 'Q(x)Q(-x)'],
+    goal: ['N次係数'],
+    priority: 96,
+  },
+  {
+    id: 'tag-relaxed-convolution',
+    name: 'Relaxed・online convolution',
+    definition:
+      '係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    prerequisiteTagIds: ['tag-convolution'],
+    outcomeIds: ['outcome-compute-online-relaxed-convolution'],
+    unitIds: ['unit-relaxed-convolution'],
+    recall: ['relaxed convolution', 'online convolution', 'CDQ convolution'],
+    object: ['online coefficient sequence', 'causal convolution', 'blocks'],
+    trigger: ['次係数が過去係数に依存', 'online recurrence'],
+    invariant: ['未確定係数を読まない', 'block schedule'],
+    goal: ['online畳み込み'],
+    priority: 96,
+  },
+  {
+    id: 'tag-linear-system-rank',
+    name: '線形方程式・rank',
+    definition:
+      '制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-solve-linear-system-and-rank'],
+    unitIds: ['unit-linear-system-rank'],
+    recall: ['Gaussian elimination', 'row reduction', 'rank', '掃き出し法'],
+    object: ['matrix', 'linear equations', 'vector space'],
+    trigger: ['線形制約', '解の個数'],
+    invariant: ['row space', 'pivot', 'rank-nullity'],
+    goal: ['可解性', 'rank', '解空間'],
+    priority: 73,
+  },
+  {
+    id: 'tag-xor-linear-basis',
+    name: 'XOR線形基底',
+    definition:
+      '整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-maintain-xor-linear-basis'],
+    unitIds: ['unit-xor-linear-basis'],
+    recall: ['XOR basis', 'linear basis', '線形基底'],
+    object: ['bit vector', 'pivot bit', 'basis'],
+    trigger: ['XORで生成', '独立なら追加'],
+    invariant: ['異なる最高bit', 'span'],
+    goal: ['最大XOR', 'rank', '表現判定'],
+    priority: 79,
+  },
+  {
+    id: 'tag-separable-linear-transform',
+    name: '分離可能線形変換・Walsh–Hadamard変換',
+    definition:
+      'Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-factor-separable-linear-transform'],
+    unitIds: ['unit-separable-linear-transform'],
+    recall: ['Walsh.?Hadamard', '\\bWHT\\b', 'XOR convolution', 'Kronecker product'],
+    object: ['tensor index', 'axis transform', 'XOR convolution'],
+    trigger: ['各bit軸で同じ変換', 'XOR畳み込み'],
+    invariant: ['separability', 'inverse scaling'],
+    goal: ['高速線形変換', 'XOR convolution'],
+    priority: 87,
+  },
+  {
+    id: 'tag-matroid-greedy',
+    name: 'matroid greedy',
+    definition:
+      '独立集合族の交換公理を確認し、重み順に独立性oracleを通すgreedyが最適基底を作ることを証明する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-optimize-weighted-matroid-basis'],
+    unitIds: ['unit-matroid-greedy'],
+    recall: ['matroid greedy', 'weighted matroid basis', 'マトロイド'],
+    object: ['ground set', 'independence oracle', 'basis'],
+    trigger: ['独立性を保って選ぶ', '交換公理'],
+    invariant: ['augmentation property', 'rank'],
+    goal: ['最小重み基底'],
+    priority: 92,
+  },
+  {
+    id: 'tag-matroid-intersection',
+    name: 'matroid intersection',
+    definition:
+      '二つのmatroidで同時に独立な最大集合をexchange graphまたはlinear representationのrank条件で求める。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    prerequisiteTagIds: ['tag-matroid-greedy', 'tag-linear-system-rank'],
+    outcomeIds: ['outcome-solve-matroid-intersection'],
+    unitIds: ['unit-matroid-intersection'],
+    recall: ['matroid intersection', 'linear matroid intersection', 'マトロイド交差'],
+    object: ['two matroids', 'common independent set', 'exchange graph'],
+    trigger: ['二種類の独立性', 'graphic and partition matroid'],
+    invariant: ['augmenting exchange', 'common rank'],
+    goal: ['最大共通独立集合'],
+    priority: 100,
+  },
+  {
+    id: 'tag-rsk-young-tableaux',
+    name: 'Robinson–Schensted対応・Young tableau',
+    definition:
+      '順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-translate-sequences-by-rsk'],
+    unitIds: ['unit-rsk-young-tableaux'],
+    recall: ['Robinson.?Schensted', '\\bRSK\\b', 'Young tableau', 'Young diagram'],
+    object: ['permutation', 'Young shape', 'tableau'],
+    trigger: ['LISとLDSを同時制約', 'shapeで分類'],
+    invariant: ['row/column増加', 'Schensted theorem'],
+    goal: ['順列数え上げ', 'shape DP'],
+    priority: 99,
+  },
+  {
+    id: 'tag-deletion-contraction',
+    name: '削除・縮約recurrence',
+    definition:
+      '辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-recur-by-edge-deletion-contraction'],
+    unitIds: ['unit-deletion-contraction'],
+    recall: ['deletion.?contraction', '削除縮約', 'Tutte recurrence'],
+    object: ['graph edge', 'graph polynomial', 'minor'],
+    trigger: ['辺を使う/使わない', '縮約して同一視'],
+    invariant: ['minor relation', 'base cases'],
+    goal: ['graph polynomial recurrence'],
+    priority: 91,
+  },
+  {
+    id: 'tag-convex-boundary-hull',
+    name: '凸包・支持方向・境界候補',
+    definition:
+      '内部点が線形/凸目的に不要なことを示し、orientation順で凸境界を構成して支持方向ごとの極値を得る。',
+    parentId: 'tag-geometry-optimization-structure',
+    prerequisiteTagIds: ['tag-geometry-orientation-transform'],
+    outcomeIds: ['outcome-restrict-geometric-candidates-to-boundary'],
+    unitIds: ['unit-convex-boundary-hull'],
+    recall: ['convex hull', 'support function', 'rotating calipers', '凸包'],
+    object: ['点集合', '凸境界', '支持方向'],
+    trigger: ['線形評価の極値', '内部候補を捨てる'],
+    invariant: ['orientation', 'convex turn'],
+    goal: ['境界列挙', '極値候補'],
+    priority: 80,
+  },
+  {
+    id: 'tag-half-plane-constraints',
+    name: '半平面制約・凸領域の共通部分',
+    definition:
+      '向き付き直線の左側を線形不等式とし、平行制約を最強の境界へ集約して凸領域の包含・共通部分を扱う。',
+    parentId: 'tag-geometry-optimization-structure',
+    prerequisiteTagIds: ['tag-geometry-orientation-transform'],
+    outcomeIds: ['outcome-represent-convex-intersection-by-halfplanes'],
+    unitIds: ['unit-half-plane-constraints'],
+    recall: ['half-plane intersection', '半平面交差', 'linear inequalities geometry'],
+    object: ['oriented line', 'half-plane', 'convex polygon'],
+    trigger: ['全辺の左側', '平行移動後も包含'],
+    invariant: ['法線方向', 'strongest parallel constraint'],
+    goal: ['凸領域包含', '共通部分'],
+    priority: 89,
+  },
+  {
+    id: 'tag-basic-convex-optimization',
+    name: '一次元凸・単峰最適化',
+    definition:
+      '差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。',
+    parentId: 'tag-geometry-optimization-structure',
+    outcomeIds: ['outcome-optimize-univariate-convex-function'],
+    unitIds: ['unit-basic-convex-optimization'],
+    recall: ['convex optimization', 'ternary search', 'unimodal', '凸関数'],
+    object: ['one-variable objective', 'integer/real domain'],
+    trigger: ['下に凸', '単峰', '二次費用'],
+    invariant: ['単調な傾き', '局所=大域最適'],
+    goal: ['最小点', '最大点'],
+    priority: 61,
+  },
+  {
+    id: 'tag-slope-trick',
+    name: 'slope trick',
+    definition:
+      '区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。',
+    parentId: 'tag-geometry-optimization-structure',
+    prerequisiteTagIds: ['tag-basic-convex-optimization'],
+    outcomeIds: ['outcome-maintain-piecewise-linear-convex-function'],
+    unitIds: ['unit-slope-trick'],
+    recall: ['slope trick', 'スロープトリック', 'piecewise linear convex'],
+    object: ['凸区分線形関数', 'breakpoints', 'slope'],
+    trigger: ['絶対値costを順次追加', 'prefix minimum'],
+    invariant: ['傾き単調', '左右heap balance'],
+    goal: ['最小値', '最適解復元'],
+    priority: 89,
+  },
+  {
+    id: 'tag-lagrangian-relaxation',
+    name: 'Lagrangian relaxation・Aliens trick',
+    definition:
+      '個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。',
+    parentId: 'tag-geometry-optimization-structure',
+    prerequisiteTagIds: ['tag-basic-convex-optimization'],
+    outcomeIds: ['outcome-optimize-by-lagrangian-relaxation'],
+    unitIds: ['unit-lagrangian-relaxation'],
+    recall: ['Lagrangian relaxation', 'Aliens trick', 'Aliens DP', 'ラグランジュ緩和'],
+    object: ['cardinality constraint', 'penalty λ', 'optimization oracle'],
+    trigger: ['ちょうどK個', '個数制約を外す'],
+    invariant: ['選択数の単調性', 'dual bound', 'tie break'],
+    goal: ['制約付き最適値'],
+    priority: 93,
+  },
+  {
+    id: 'tag-monge-optimization',
+    name: 'Monge・monotone minima最適化',
+    definition:
+      'quadrangle inequality/Monge性から各行の最適遷移位置が単調になることを示し、divide-and-conquerやSMAWKで最小値を求める。',
+    parentId: 'tag-geometry-optimization-structure',
+    outcomeIds: ['outcome-optimize-monge-transitions'],
+    unitIds: ['unit-monge-optimization'],
+    recall: ['Monge array', 'monotone minima', 'SMAWK', 'concave convolution'],
+    object: ['cost matrix', 'DP transition', 'argmin'],
+    trigger: ['四点不等式', 'concave max-plus convolution'],
+    invariant: ['totally monotone', 'argmin monotonicity'],
+    goal: ['遷移高速化', 'row minima'],
+    priority: 94,
+  },
+  {
+    id: 'tag-isotonic-regression-pav',
+    name: 'isotonic regression・PAV',
+    definition:
+      '単調制約付き凸最小化で違反する隣接blockをpoolし、block optimumが単調になるまでmergeする。',
+    parentId: 'tag-geometry-optimization-structure',
+    prerequisiteTagIds: ['tag-basic-convex-optimization'],
+    outcomeIds: ['outcome-solve-isotonic-regression-by-pav'],
+    unitIds: ['unit-isotonic-regression'],
+    recall: ['pool adjacent violators', '\\bPAV\\b', 'isotonic regression', '単調回帰'],
+    object: ['ordered variables', 'convex losses', 'blocks'],
+    trigger: ['x1<=x2<=...', '隣接最適値が逆転'],
+    invariant: ['block optimum order', 'pooled sufficient statistic'],
+    goal: ['単調制約最適化'],
+    priority: 94,
+  },
+  {
+    id: 'tag-separable-convex-marginals',
+    name: '分離凸費用の限界値greedy',
+    definition:
+      '各対象へ一単位追加する限界費用が単調になることを使い、全限界値をpriority queueでmergeして資源を配分する。',
+    parentId: 'tag-geometry-optimization-structure',
+    prerequisiteTagIds: ['tag-basic-convex-optimization'],
+    outcomeIds: ['outcome-allocate-by-convex-marginal-costs'],
+    unitIds: ['unit-separable-convex-marginals'],
+    recall: ['marginal cost greedy', 'separable convex allocation', '限界費用'],
+    object: ['resources', 'separable costs', 'marginal sequence'],
+    trigger: ['一単位ずつ配る', '離散凸'],
+    invariant: ['限界費用単調', 'k-way merge'],
+    goal: ['最小配分費用'],
+    priority: 77,
+  },
+  {
+    id: 'tag-dag-topological-processing',
+    name: 'DAGのtopological processing',
+    definition:
+      '依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-process-dag-in-topological-order'],
+    unitIds: ['unit-dag-topological-processing'],
+    recall: ['topological sort', 'DAG scheduling', 'トポロジカルソート'],
+    object: ['DAG', 'dependency', 'indegree'],
+    trigger: ['依存順', '閉路なし', '前提を先に'],
+    invariant: ['processed prefix has no incoming edge'],
+    goal: ['順序構成', 'DAG伝播'],
+    priority: 56,
+  },
+  {
+    id: 'tag-directed-core-peeling',
+    name: '有向graphのsink/source peeling',
+    definition:
+      '入次数または出次数が零の頂点を反復削除し、cycleへ到達するcoreや処理可能なDAG部分を分離する。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-peel-directed-graph-toward-cycles'],
+    unitIds: ['unit-directed-core-peeling'],
+    recall: ['sink peeling', 'source peeling', 'directed core', 'Kahn elimination'],
+    object: ['directed graph', 'source/sink', 'cycle core'],
+    trigger: ['出次数0を削除', 'cycleに残る頂点'],
+    invariant: ['remaining indegree/outdegree'],
+    goal: ['cycle core', '削除順'],
+    priority: 62,
+  },
+  {
+    id: 'tag-monotone-path-contraction',
+    name: '単調path contraction・DSU jump',
+    definition:
+      '一度確定したpath区間を次未処理pointerまたはDSU parentで飛ばし、各頂点を高々一度だけ縮約する。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-contract-monotone-paths-with-jump-pointers'],
+    unitIds: ['unit-monotone-path-contraction'],
+    recall: ['DSU jump', 'next unprocessed pointer', 'path compression jump'],
+    object: ['path', 'next pointer', 'contracted vertices'],
+    trigger: ['処理済み区間を飛ばす', '単調にmerge'],
+    invariant: ['各頂点を一度だけ削除', '代表は次未処理'],
+    goal: ['path更新高速化', '単調縮約'],
+    priority: 72,
+  },
+  {
+    id: 'tag-dsu-merge-tree',
+    name: 'DSU merge tree・Kruskal reconstruction tree',
+    definition:
+      '成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。',
+    parentId: 'tag-tree-model-structure',
+    prerequisiteTagIds: ['tag-dsu-components'],
+    outcomeIds: ['outcome-build-component-merge-tree'],
+    unitIds: ['unit-dsu-merge-tree'],
+    recall: ['DSU merge tree', 'Kruskal reconstruction tree', '統合木'],
+    object: ['components', 'merge event', 'reconstruction tree'],
+    trigger: ['閾値順に併合', '併合履歴をquery'],
+    invariant: ['ancestor means component inclusion', 'merge timestamp'],
+    goal: ['threshold connectivity', '履歴木DP'],
+    priority: 85,
+  },
+  {
+    id: 'tag-steiner-tree-dp',
+    name: 'Steiner tree subset DP',
+    definition:
+      'terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest path relaxationを交互に行う。',
+    parentId: 'tag-dp-state-transition',
+    prerequisiteTagIds: ['tag-shortest-path', 'tag-subset-bitmask-dp'],
+    outcomeIds: ['outcome-solve-steiner-tree-by-subset-dp'],
+    unitIds: ['unit-steiner-tree-dp'],
+    recall: ['Dreyfus.?Wagner', 'Steiner tree DP', 'シュタイナー木DP'],
+    object: ['terminals', 'subset', 'meeting vertex'],
+    trigger: ['少数terminalを連結', 'subset merge plus shortest path'],
+    invariant: ['connected subgraph for mask ending at v'],
+    goal: ['最小Steiner tree'],
+    priority: 91,
+  },
+  {
+    id: 'tag-dynamic-segment-tree',
+    name: '動的・implicit Segment Tree',
+    definition:
+      '巨大または疎な座標域で訪れたnodeだけを生成し、区間要約と境界探索をO(log U)で保つ。',
+    parentId: 'tag-query-sufficient-aggregate',
+    prerequisiteTagIds: ['tag-range-monoid-aggregation'],
+    outcomeIds: ['outcome-maintain-sparse-domain-segment-tree'],
+    unitIds: ['unit-dynamic-segment-tree'],
+    recall: ['dynamic segment tree', 'implicit segment tree', '疎Segment Tree'],
+    object: ['large coordinate domain', 'allocated nodes', 'range summary'],
+    trigger: ['座標域が巨大', 'onlineで座標出現'],
+    invariant: ['未生成nodeは単位要約'],
+    goal: ['疎な更新/query'],
+    priority: 83,
+  },
+  {
+    id: 'tag-segment-tree-beats',
+    name: 'Segment Tree Beats',
+    definition:
+      'nodeの最大/次点/個数等からrange chmin/chmaxが一括適用できる条件を判定し、失敗時だけ子へ降りる。',
+    parentId: 'tag-query-sufficient-aggregate',
+    prerequisiteTagIds: ['tag-range-monoid-aggregation'],
+    outcomeIds: ['outcome-prune-range-actions-by-node-invariant'],
+    unitIds: ['unit-segment-tree-beats'],
+    recall: ['Segment Tree Beats', 'range chmin chmax'],
+    object: ['range extrema', 'second extrema', 'lazy action'],
+    trigger: ['range chmin/chmax', '値域更新'],
+    invariant: ['最大値個数', '作用可能条件', 'potential decrease'],
+    goal: ['非自明range update'],
+    priority: 90,
+  },
+  {
+    id: 'tag-parallel-binary-search',
+    name: 'parallel binary search・offline threshold connectivity',
+    definition:
+      '多数queryの未知境界をmidごとにbucketし、更新を一方向に進める判定器を各roundで共有する。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-share-threshold-checks-by-parallel-binary-search'],
+    unitIds: ['unit-parallel-binary-search'],
+    recall: ['parallel binary search', '並列二分探索', 'offline threshold connectivity'],
+    object: ['many monotone queries', 'threshold events', 'shared checker'],
+    trigger: ['queryごとに最小時刻', '判定器を共有'],
+    invariant: ['各queryのlo/hi', 'event pointer monotone'],
+    goal: ['全queryの境界'],
+    priority: 80,
+  },
+  {
+    id: 'tag-planar-duality',
+    name: '平面graph双対・cut/path対応',
+    definition:
+      '埋め込みのfaceをdual頂点へ写し、primal cutとdual path/cycleの対応から最小cut問題を最短路へ変換する。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-dualize-planar-cut-to-path'],
+    unitIds: ['unit-planar-duality'],
+    recall: ['planar dual graph', '平面双対', 'cut path duality'],
+    object: ['plane embedding', 'faces', 'dual edges'],
+    trigger: ['平面gridのcut', 'outer face'],
+    invariant: ['primal edge dual correspondence'],
+    goal: ['cutをpathへ変換'],
+    priority: 92,
+  },
+  {
+    id: 'tag-bitwise-greedy-feasibility',
+    name: 'bitwise greedyによるmask最適化',
+    definition:
+      '上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-optimize-mask-by-bitwise-feasibility'],
+    unitIds: ['unit-bitwise-greedy-feasibility'],
+    recall: ['bitwise greedy', 'mask feasibility greedy', '上位bitから貪欲'],
+    object: ['bitmask objective', 'feasibility oracle'],
+    trigger: ['AND/OR/XOR値を最適化', '上位bit優先'],
+    invariant: ['prefix bits fixed', 'oracle monotonicity'],
+    goal: ['最適mask'],
+    priority: 74,
+  },
+  {
+    id: 'tag-string-periodicity',
+    name: '文字列周期・primitive word',
+    definition:
+      'prefix一致またはborderから最小periodを求め、文字列をprimitive rootと反復回数へ正規化する。',
+    parentId: 'tag-string-state-representation',
+    outcomeIds: ['outcome-normalize-string-to-primitive-period'],
+    unitIds: ['unit-string-periodicity'],
+    recall: ['primitive word', 'string period', 'minimal period', '原始語'],
+    object: ['string', 'period', 'primitive root'],
+    trigger: ['同じblockの反復', '最小周期'],
+    invariant: ['period divides length', 'border relation'],
+    goal: ['primitive word', '周期正規化'],
+    priority: 75,
+  },
+  {
+    id: 'tag-run-length-dynamics',
+    name: 'run-length状態の動的遷移',
+    definition:
+      '同値な連続要素をrunへ圧縮し、局所操作で変わるrunのsplit/mergeと長さだけを更新する。',
+    parentId: 'tag-string-state-representation',
+    outcomeIds: ['outcome-evolve-run-length-encoded-state'],
+    unitIds: ['unit-run-length-dynamics'],
+    recall: ['run-length dynamics', 'RLE state', 'run merge split'],
+    object: ['runs', 'symbol', 'run length'],
+    trigger: ['同じ値の連続block', '局所操作でrunが変化'],
+    invariant: ['隣接runは異値', '最大圧縮'],
+    goal: ['圧縮状態simulation'],
+    priority: 70,
+  },
+  {
+    id: 'tag-min25-sieve',
+    name: 'Min_25・Lucy DP型の総和篩',
+    definition:
+      'floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗法的関数のprefix sumをN^(2/3)級で求める。',
+    parentId: 'tag-number-theory-structure',
+    prerequisiteTagIds: ['tag-prime-divisor-decomposition'],
+    outcomeIds: ['outcome-sum-multiplicative-function-by-min25-sieve'],
+    unitIds: ['unit-min25-sieve'],
+    recall: ['Min_25 sieve', 'Lucy DP', 'summatory multiplicative function'],
+    object: ['multiplicative function', 'prime powers', 'quotient blocks'],
+    trigger: ['Nまでの乗法的関数和', 'Nが大きい'],
+    invariant: ['floor quotient states', 'smallest prime factor'],
+    goal: ['prefix sum of multiplicative function'],
+    priority: 98,
+  },
+  {
+    id: 'tag-gaussian-integers-two-squares',
+    name: 'Gaussian整数・二平方和',
+    definition:
+      'Z[i]での素因数分解と共役を用い、整数の二平方和表現をprime exponentごとに構成・数え上げる。',
+    parentId: 'tag-number-theory-structure',
+    prerequisiteTagIds: ['tag-prime-divisor-decomposition'],
+    outcomeIds: ['outcome-represent-integers-as-two-squares'],
+    unitIds: ['unit-gaussian-integers-two-squares'],
+    recall: ['Gaussian integers', 'sum of two squares', '二平方和'],
+    object: ['a+bi', 'norm', 'prime factorization'],
+    trigger: ['x^2+y^2=n', '複素整数で因数分解'],
+    invariant: ['multiplicative norm', 'conjugate factors'],
+    goal: ['二平方和表現'],
+    priority: 98,
+  },
+  {
+    id: 'tag-prufer-code',
+    name: 'Prüfer code・次数制約付きlabel木',
+    definition:
+      'label付き木を長さN-2の列へ全単射し、頂点の出現回数=次数-1として次数条件を独立な係数条件へ変換する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    prerequisiteTagIds: ['tag-combinatorial-coefficients'],
+    outcomeIds: ['outcome-encode-labeled-trees-by-prufer-code'],
+    unitIds: ['unit-prufer-code'],
+    recall: ['Prüfer code', 'Prufer sequence', '次数制約付き木'],
+    object: ['label付き木', '次数列', '長さN-2の列'],
+    trigger: ['各頂点の次数条件', 'label付き木を数える'],
+    invariant: ['出現回数=次数-1', '木との全単射'],
+    goal: ['次数制約付き木の数え上げ'],
+    priority: 94,
+  },
+  {
+    id: 'tag-directed-walk-periodicity',
+    name: '有向walkの周期・cycle差分gcd',
+    definition:
+      '往復可能領域でedgeごとのdepth差を集め、そのgcdをclosed walk長の周期として巨大歩数の到達可能性を判定する。',
+    parentId: 'tag-graph-model-structure',
+    prerequisiteTagIds: ['tag-scc-condensation', 'tag-gcd-structure'],
+    outcomeIds: ['outcome-compute-directed-walk-period'],
+    unitIds: ['unit-directed-walk-periodicity'],
+    recall: ['directed graph period', 'cycle length gcd', '有向walkの周期'],
+    object: ['strongly connected region', 'closed walk', 'depth difference'],
+    trigger: ['巨大回数のwalk', '戻れる歩数の合同類'],
+    invariant: ['cycle差分のgcd', 'eventual periodicity'],
+    goal: ['walk長到達可能性', 'graph period'],
+    priority: 92,
+  },
+  {
+    id: 'tag-reflection-principle',
+    name: '鏡像法・reflection principle',
+    definition:
+      '境界を初めて破るpathを鏡像pathへ写す符号付き全単射により、壁付きwalkを無境界または巡回畳み込みへ変換する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-remove-boundaries-by-reflection'],
+    unitIds: ['unit-reflection-principle'],
+    recall: ['reflection principle', 'mirror method', '鏡像法'],
+    object: ['lattice path', 'absorbing boundary', 'reflected path'],
+    trigger: ['壁を越えないwalk', '境界条件を消す'],
+    invariant: ['first boundary crossing', '符号付き全単射'],
+    goal: ['境界付き数え上げ', '巡回化'],
+    priority: 91,
+  },
+  {
+    id: 'tag-labeled-component-decomposition',
+    name: 'label付き連結成分分解・exponential formula',
+    definition:
+      'rootを含む連結成分または成分集合を一意に切り出し、全構造とconnected構造の関係をsubset DPや指数型母関数で解く。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    prerequisiteTagIds: ['tag-combinatorial-coefficients'],
+    outcomeIds: ['outcome-count-labeled-structures-by-components'],
+    unitIds: ['unit-labeled-component-decomposition'],
+    recall: ['exponential formula', 'connected component DP', 'labelled connected structures'],
+    object: ['label付き構造', 'connected component', 'root component'],
+    trigger: ['連結なものだけ数える', '成分集合へ分解'],
+    invariant: ['最小labelを含む成分の一意性', 'SET of connected components'],
+    goal: ['connected構造の数え上げ', '成分数別集計'],
+    priority: 93,
+  },
+  {
+    id: 'tag-fractional-parametric-search',
+    name: 'fractional programming・比率parametric search',
+    definition:
+      '比率目標xに対して各寄与をbenefit-x·costへ変換し、和が非負かという単調な加法最適化へ帰着する。',
+    parentId: 'tag-geometry-optimization-structure',
+    prerequisiteTagIds: ['tag-monotone-threshold-search'],
+    outcomeIds: ['outcome-optimize-ratio-by-parametric-search'],
+    unitIds: ['unit-fractional-parametric-search'],
+    recall: ['fractional programming', 'parametric search for ratio', '比率最適化'],
+    object: ['benefit/cost ratio', 'parameter x', 'additive objective'],
+    trigger: ['比の最大最小', '平均値の最適化'],
+    invariant: ['benefit-x·cost', 'feasibility monotonicity'],
+    goal: ['最適比率', '最大平均'],
+    priority: 89,
+  },
+  {
+    id: 'tag-information-theoretic-query-design',
+    name: '情報量下界・query符号設計',
+    definition:
+      '応答alphabetとquery回数から識別可能状態数の下界を出し、その下界に一致するcodeword割当と復号を構成する。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-design-query-code-by-information-bound'],
+    unitIds: ['unit-information-theoretic-query-design'],
+    recall: ['information lower bound', 'binary incidence code', '情報量下界'],
+    object: ['hidden state', 'query response', 'codeword'],
+    trigger: ['最小query数', '全候補を一意に識別'],
+    invariant: ['response strings are distinct', 'alphabet^queries >= states'],
+    goal: ['最適query設計', '一意復号'],
+    priority: 84,
+  },
+  {
+    id: 'tag-cyclic-order-crossing',
+    name: '円環順序・chord交差',
+    definition:
+      '円周上の端点順をcutで線形化し、二chordの端点交互配置またはlaminar括弧構造として交差を判定・数え上げる。',
+    parentId: 'tag-geometry-optimization-structure',
+    outcomeIds: ['outcome-detect-crossing-by-cyclic-order'],
+    unitIds: ['unit-cyclic-order-crossing'],
+    recall: ['circular order', 'chord crossing', '端点交互配置'],
+    object: ['circle endpoints', 'chords', 'laminar intervals'],
+    trigger: ['円周上の線分交差', '円環をcut'],
+    invariant: ['alternating endpoints', 'properly nested intervals'],
+    goal: ['交差判定', '交差数え上げ'],
+    priority: 82,
+  },
+  {
+    id: 'tag-kinetic-order-maintenance',
+    name: 'kinetic sorting・交差event順序更新',
+    definition:
+      '連続parameterで隣接要素の順序が入れ替わる時刻だけをevent化し、次の有効交差を処理して全順序を更新する。',
+    parentId: 'tag-model-reduction',
+    prerequisiteTagIds: ['tag-event-sweep', 'tag-priority-queue-best-first'],
+    outcomeIds: ['outcome-maintain-order-through-crossing-events'],
+    unitIds: ['unit-kinetic-order-maintenance'],
+    recall: ['kinetic sorting', 'kinetic tournament', '交差event'],
+    object: ['moving order', 'adjacent pair', 'crossing time'],
+    trigger: ['parameterとともに順序が変化', '全pairを列挙できない'],
+    invariant: ['next valid adjacent crossing', 'local swap'],
+    goal: ['時間変化する順位', '交差集計'],
+    priority: 94,
+  },
+  {
+    id: 'tag-poset-dilworth-antichain',
+    name: '半順序・Dilworth・最大反鎖',
+    definition:
+      '比較可能性をposetとして明示し、antichain・chain cover・LDS・bipartite matching/min-cutの双対関係を選んで最適化する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-optimize-poset-antichain-by-dilworth'],
+    unitIds: ['unit-poset-dilworth-antichain'],
+    recall: ['Dilworth theorem', 'maximum antichain', 'minimum chain cover'],
+    object: ['partially ordered set', 'chain', 'antichain'],
+    trigger: ['包含関係', '先後制約', '比較不能集合'],
+    invariant: ['max antichain=min chain cover', 'comparability DAG'],
+    goal: ['最大反鎖', '最小chain分割'],
+    priority: 93,
+  },
+  {
+    id: 'tag-tree-precedence-contraction',
+    name: '01 on Tree・親先行順序のcluster縮約',
+    definition:
+      '親が子より先という順序制約の下でclusterの交換比較量を導き、priority queueとDSUで最良clusterを親へ縮約する。',
+    parentId: 'tag-tree-model-structure',
+    prerequisiteTagIds: ['tag-greedy-exchange-order', 'tag-dsu-components'],
+    outcomeIds: ['outcome-optimize-tree-order-by-cluster-contraction'],
+    unitIds: ['unit-tree-precedence-contraction'],
+    recall: ['01 on Tree', 'tree precedence scheduling', 'cluster contraction'],
+    object: ['rooted tree precedence', 'cluster statistics', 'parent merge'],
+    trigger: ['親を子より先に並べる', '期待探索順'],
+    invariant: ['pairwise exchange ratio', 'contracted parent relation'],
+    goal: ['制約付き最適順序'],
+    priority: 96,
+  },
+  {
+    id: 'tag-frontier-profile-dp',
+    name: 'frontier/profile DP・境界状態圧縮',
+    definition:
+      '走査済み領域と未走査領域の境界だけに未来へ影響する色・接続partitionを正規化して保持し、幅指数で遷移する。',
+    parentId: 'tag-dp-state-transition',
+    prerequisiteTagIds: ['tag-dp-state-equivalence'],
+    outcomeIds: ['outcome-design-frontier-profile-dp'],
+    unitIds: ['unit-frontier-profile-dp'],
+    recall: ['frontier DP', 'profile DP', 'plug DP'],
+    object: ['grid sweep frontier', 'connectivity partition', 'profile mask'],
+    trigger: ['一辺だけ小さい盤面', '局所制約と全体連結性'],
+    invariant: ['future interface only', 'closed component condition'],
+    goal: ['幅指数DP', '盤面数え上げ'],
+    priority: 90,
+  },
+  {
+    id: 'tag-semiring-matrix-exponentiation',
+    name: '半環行列・min-plus/max-min遷移',
+    definition:
+      '遷移の結合と候補選択を半環の積・和として行列化し、結合則を使って固定長walkを二分累乗または区間積で処理する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-exponentiate-transition-over-semiring'],
+    unitIds: ['unit-semiring-matrix-exponentiation'],
+    recall: ['semiring matrix', 'min-plus matrix', 'max-min matrix'],
+    object: ['transition matrix', 'semiring', 'fixed-length walk'],
+    trigger: ['ちょうどK回の遷移', 'min-plus/max-min composition'],
+    invariant: ['associative matrix product', 'semiring identity'],
+    goal: ['巨大回数遷移', '固定長path最適化'],
+    priority: 91,
+  },
+  {
+    id: 'tag-monoid-exponentiation',
+    name: 'monoid exponentiation・連結演算doubling',
+    definition:
+      '長さ・値・補助剰余を含む要約の結合則と単位元を定義し、巨大な反復連結を二分累乗する。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    outcomeIds: ['outcome-exponentiate-associative-composition'],
+    unitIds: ['unit-monoid-exponentiation'],
+    recall: ['monoid exponentiation', 'concatenation doubling', '連結演算のdoubling'],
+    object: ['associative summary', 'concatenation', 'binary power'],
+    trigger: ['同じblockを巨大回反復', '値を構築せず連結'],
+    invariant: ['associativity', 'summary is closed under concatenation'],
+    goal: ['反復連結の評価'],
+    priority: 87,
+  },
+  {
+    id: 'tag-additive-tree-metric-reconstruction',
+    name: '加法的tree metric復元',
+    definition:
+      '全点対距離行列の加法性から葉の接続先とedge長を決め、候補木の全距離を再計算して存在を完全検証する。',
+    parentId: 'tag-tree-model-structure',
+    outcomeIds: ['outcome-reconstruct-tree-from-distance-matrix'],
+    unitIds: ['unit-additive-tree-metric-reconstruction'],
+    recall: ['additive tree metric', 'tree reconstruction from distances', '距離行列から木復元'],
+    object: ['distance matrix', 'weighted tree', 'leaf attachment'],
+    trigger: ['全点対距離から木を復元', 'additive metric'],
+    invariant: ['path distance additivity', 'positive edge lengths'],
+    goal: ['木の復元', '存在判定'],
+    priority: 95,
+  },
+  {
+    id: 'tag-backtracking-search',
+    name: 'backtracking・可逆な探索状態',
+    definition:
+      '再帰へ入る直前に局所選択を反映し、復帰時に必ずundoして現在pathだけの制約を保ちながら探索木を列挙する。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-enumerate-by-reversible-backtracking'],
+    unitIds: ['unit-backtracking-search'],
+    recall: ['backtracking', 'mark and unmark DFS', 'バックトラック'],
+    object: ['search tree', 'current path', 'used set'],
+    trigger: ['単純pathを列挙', '選択を戻して別branch'],
+    invariant: ['used means current recursion path', 'push/pop symmetry'],
+    goal: ['制約付き列挙', '解候補探索'],
+    priority: 78,
+  },
+];
+
+const refinedLegacyTagSeeds = TAG_SEEDS.filter((seed) => !RETIRED_COARSE_TAG_IDS.has(seed.id)).map(
+  (seed): TagSeed => {
+    const prerequisiteTagIds = FINAL_TAG_PREREQUISITE_OVERRIDES[seed.id] ?? seed.prerequisiteTagIds;
+    return {
+      ...seed,
+      parentId: FINAL_TAG_PARENT_OVERRIDES[seed.id] ?? seed.parentId,
+      unitIds: FINAL_TAG_UNIT_OVERRIDES[seed.id] ?? seed.unitIds,
+      ...(prerequisiteTagIds === undefined ? {} : { prerequisiteTagIds }),
+    };
+  },
+);
+
+const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly string[]>> = {
+  'tag-tree-model-structure': ['abc220-f', 'abc239-e'],
+  'tag-number-theory-structure': ['abc222-g', 'abc254-f'],
+  'tag-combinatorics-algebra-structure': ['abc230-h', 'abc276-ex'],
+  'tag-geometry-optimization-structure': ['abc251-g', 'abc257-ex'],
+  'tag-state-normalization': ['abc242-e', 'abc296-f'],
+  'tag-group-action-orbit-counting': ['abc284-ex', 'abc428-g'],
+  'tag-meet-in-the-middle': ['abc270-g', 'abc271-f'],
+  'tag-recursive-divide-and-conquer': ['abc282-ex', 'abc304-g'],
+  'tag-amortized-monotone-progress': ['abc217-e', 'abc256-ex'],
+  'tag-small-to-large': ['abc324-g', 'abc329-f'],
+  'tag-threshold-heavy-light': ['abc219-g', 'abc335-f'],
+  'tag-heavy-path-tree-dp': ['abc269-ex', 'abc311-ex'],
+  'tag-subset-bitmask-dp': ['abc219-e', 'abc301-e'],
+  'tag-subset-zeta-mobius-transform': ['abc295-ex', 'abc349-f'],
+  'tag-subset-convolution': ['abc294-ex'],
+  'tag-state-graph-search': ['abc317-e', 'abc427-e'],
+  'tag-transitive-closure': ['abc287-ex', 'abc292-e'],
+  'tag-scc-condensation': ['abc214-h', 'abc306-g'],
+  'tag-two-sat': ['abc277-ex'],
+  'tag-functional-graph-decomposition': ['abc357-e', 'abc387-f'],
+  'tag-binary-lifting': ['abc310-g', 'abc438-e'],
+  'tag-dsu-components': ['abc235-e', 'abc408-e'],
+  'tag-potential-dsu': ['abc280-f', 'abc466-g'],
+  'tag-rooted-tree-aggregation': ['abc239-e', 'abc394-f'],
+  'tag-rerooting': ['abc220-f', 'abc223-g'],
+  'tag-tree-ancestor-lca': ['abc298-ex', 'abc405-f'],
+  'tag-tree-euler-flattening': ['abc240-e', 'abc294-g', 'abc406-f'],
+  'tag-heavy-light-decomposition': ['abc351-g'],
+  'tag-virtual-tree': ['abc340-g'],
+  'tag-max-flow-min-cut': ['abc225-g', 'abc239-g'],
+  'tag-flow-feasibility-lower-bounds': ['abc285-g'],
+  'tag-bipartite-matching-hall': ['abc241-g', 'abc401-g'],
+  'tag-min-cost-flow': ['abc214-h', 'abc407-g'],
+  'tag-weighted-bipartite-matching': ['abc373-g'],
+  'tag-general-graph-matching': ['abc412-g'],
+  'tag-euler-trail-circuit': ['abc227-h', 'abc286-g'],
+  'tag-degree-parity-subgraph': ['abc345-f'],
+  'tag-euler-circuit-counting': ['abc336-g'],
+  'tag-graph-core-peeling': ['abc266-f'],
+  'tag-near-tree-kernelization': ['abc419-g'],
+  'tag-range-monoid-aggregation': ['abc223-f', 'abc343-f'],
+  'tag-segment-tree-canonical-decomposition': ['abc342-g', 'abc414-g'],
+  'tag-static-sorted-range-index': ['abc339-g'],
+  'tag-idempotent-overlap-range-query': ['abc282-f'],
+  'tag-swag': ['abc456-f'],
+  'tag-finite-function-composition': ['abc261-e'],
+  'tag-priority-queue-best-first': ['abc297-e', 'abc391-f'],
+  'tag-ordered-set-multiset': ['abc281-e', 'abc306-e'],
+  'tag-ordered-interval-partition': ['abc255-ex', 'abc380-e'],
+  'tag-persistence': ['abc273-e', 'abc453-g'],
+  'tag-rollback': ['abc302-ex', 'abc363-g'],
+  'tag-z-algorithm-prefix-matching': ['abc257-g', 'abc284-f'],
+  'tag-finite-pattern-automaton': ['abc305-g', 'abc418-g'],
+  'tag-automaton-subset-construction': ['abc228-g'],
+  'tag-aho-corasick': ['abc419-f', 'abc458-f'],
+  'tag-automaton-dp': ['abc305-g', 'abc418-g'],
+  'tag-suffix-automaton': ['abc433-g'],
+  'tag-sequence-fingerprint': ['abc274-ex', 'abc331-f'],
+  'tag-randomized-algebraic-fingerprint': ['abc238-g', 'abc339-f'],
+  'tag-modular-congruence-crt': ['abc245-ex', 'abc286-f'],
+  'tag-modular-periodicity': ['abc228-e', 'abc319-e'],
+  'tag-bezout-diophantine': ['abc271-ex', 'abc459-g'],
+  'tag-gcd-structure': ['abc254-f', 'abc438-g'],
+  'tag-numerical-semigroup': ['abc388-f'],
+  'tag-rational-approximation': ['abc273-ex', 'abc408-g'],
+  'tag-cyclic-exponent-counting': ['abc212-g', 'abc335-g'],
+  'tag-multiplicative-order': ['abc222-g', 'abc335-g'],
+  'tag-finite-field-frobenius': ['abc251-ex'],
+  'tag-inclusion-exclusion': ['abc246-f', 'abc462-g'],
+  'tag-divisor-mobius-inversion': ['abc230-g', 'abc361-f'],
+  'tag-convolution': ['abc307-ex', 'abc392-g'],
+  'tag-generating-functions': ['abc230-h', 'abc385-g'],
+  'tag-formal-power-series': ['abc318-ex', 'abc387-g'],
+  'tag-polynomial-multipoint-evaluation': ['abc272-ex', 'abc381-g'],
+  'tag-fps-composition-power-projection': ['abc387-g', 'abc439-g'],
+  'tag-bostan-mori': ['abc300-ex'],
+  'tag-relaxed-convolution': ['abc315-ex'],
+  'tag-linear-system-rank': ['abc276-ex', 'abc366-g'],
+  'tag-xor-linear-basis': ['abc223-h', 'abc249-g'],
+  'tag-separable-linear-transform': ['abc288-g', 'abc367-g'],
+  'tag-matroid-greedy': ['abc236-f'],
+  'tag-matroid-intersection': ['abc399-g'],
+  'tag-rsk-young-tableaux': ['abc378-g'],
+  'tag-deletion-contraction': ['abc294-ex'],
+  'tag-convex-boundary-hull': ['abc257-ex', 'abc341-g'],
+  'tag-half-plane-constraints': ['abc251-g'],
+  'tag-basic-convex-optimization': ['abc224-g', 'abc314-ex'],
+  'tag-slope-trick': ['abc217-h', 'abc406-g'],
+  'tag-lagrangian-relaxation': ['abc305-ex', 'abc400-g'],
+  'tag-monge-optimization': ['abc348-g', 'abc383-g'],
+  'tag-isotonic-regression-pav': ['abc459-f'],
+  'tag-separable-convex-marginals': ['abc359-f', 'abc389-e'],
+  'tag-dag-topological-processing': ['abc304-ex', 'abc315-e'],
+  'tag-directed-core-peeling': ['abc245-f'],
+  'tag-monotone-path-contraction': ['abc295-g'],
+  'tag-dsu-merge-tree': ['abc314-f', 'abc383-e'],
+  'tag-steiner-tree-dp': ['abc364-g'],
+  'tag-dynamic-segment-tree': ['abc403-g'],
+  'tag-segment-tree-beats': ['abc430-g'],
+  'tag-parallel-binary-search': ['abc394-g'],
+  'tag-planar-duality': ['abc413-g'],
+  'tag-bitwise-greedy-feasibility': ['abc408-e'],
+  'tag-string-periodicity': ['abc312-ex'],
+  'tag-run-length-dynamics': ['abc313-e'],
+  'tag-min25-sieve': ['abc370-g'],
+  'tag-gaussian-integers-two-squares': ['abc444-g'],
+  'tag-prufer-code': ['abc303-ex'],
+  'tag-directed-walk-periodicity': ['abc306-g'],
+  'tag-reflection-principle': ['abc309-ex'],
+  'tag-labeled-component-decomposition': ['abc321-g', 'abc327-g'],
+  'tag-fractional-parametric-search': ['abc324-f'],
+  'tag-information-theoretic-query-design': ['abc337-e'],
+  'tag-cyclic-order-crossing': ['abc263-ex', 'abc338-e', 'abc424-f'],
+  'tag-kinetic-order-maintenance': ['abc344-g'],
+  'tag-poset-dilworth-antichain': ['abc237-ex', 'abc354-g', 'abc457-g'],
+  'tag-tree-precedence-contraction': ['abc376-g'],
+  'tag-frontier-profile-dp': ['abc296-ex', 'abc379-g'],
+  'tag-semiring-matrix-exponentiation': ['abc236-g', 'abc429-f', 'abc445-f'],
+  'tag-monoid-exponentiation': ['abc448-e'],
+  'tag-additive-tree-metric-reconstruction': ['abc451-e'],
+  'tag-backtracking-search': ['abc284-e'],
+};
+
+export const FINAL_TAXONOMY_TAGS: readonly FinalTaxonomyTagPolicy[] = [
+  ...refinedLegacyTagSeeds,
+  ...REFINED_TAG_SEEDS,
+].map((seed) => {
+  const representativeProblemIds =
+    seed.representativeProblemIds ?? REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS[seed.id];
+  return defineTag({
+    ...seed,
+    ...(representativeProblemIds === undefined ? {} : { representativeProblemIds }),
+  });
+});
 
 export const NON_PRIMARY_TAG_IDS = FINAL_TAXONOMY_TAGS.filter((tag) => !tag.primaryEligible).map(
   (tag) => tag.id,
@@ -3500,16 +5571,43 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '絶対値和を中央値で最小化するか、凸・凹性を示し、傾き・breakpoint・Lagrange penalty・限界費用から連続または離散の最適点を求められる。',
   'outcome-recover-valid-witness':
     '成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。',
+  'outcome-encode-labeled-trees-by-prufer-code':
+    'Prüfer列とlabel付き木の全単射、および各labelの出現回数=次数-1を使って次数制約を係数条件へ変換できる。',
+  'outcome-compute-directed-walk-period':
+    '往復可能な有向領域のclosed walk長が作る周期gcdを求め、巨大な指定歩数での到達可能性を判定できる。',
+  'outcome-remove-boundaries-by-reflection':
+    '最初に境界を破るpathとの鏡像対応を構成し、壁付きwalkの数え上げを符号付きの無境界問題へ変換できる。',
+  'outcome-count-labeled-structures-by-components':
+    '最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける。',
+  'outcome-optimize-ratio-by-parametric-search':
+    '比率候補xをbenefit-x·costの加法目的へ変換し、単調な判定問題を解いて最適比率を求められる。',
+  'outcome-design-query-code-by-information-bound':
+    '応答列の総数からquery数の下界を証明し、それに一致するcodeword割当と復号を構成できる。',
+  'outcome-detect-crossing-by-cyclic-order':
+    '円周をcutして端点を線形化し、交互配置またはlaminar括弧構造からchord交差を判定・数え上げできる。',
+  'outcome-maintain-order-through-crossing-events':
+    '隣接要素が入れ替わる有効時刻だけをevent処理し、連続parameterに対する全順序と集計を更新できる。',
+  'outcome-optimize-poset-antichain-by-dilworth':
+    '対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける。',
+  'outcome-optimize-tree-order-by-cluster-contraction':
+    '親先行制約下の交換比較をcluster統計へまとめ、01 on Treeの縮約貪欲で最適順序を構成できる。',
+  'outcome-design-frontier-profile-dp':
+    '未処理領域へ影響するfrontier上の局所値と接続partitionだけを正規化し、幅指数のprofile DPを設計できる。',
+  'outcome-exponentiate-transition-over-semiring':
+    '遷移を半環行列として定義し、結合則と単位元を保つ二分累乗・区間積で巨大回数の最適化遷移を計算できる。',
+  'outcome-exponentiate-associative-composition':
+    '反復対象を閉じた結合的要約へ持ち上げ、monoidの二分累乗で巨大な連結・合成を評価できる。',
+  'outcome-reconstruct-tree-from-distance-matrix':
+    '加法的距離行列から正重み木の候補を復元し、全点対距離の再計算で存在を完全検証できる。',
+  'outcome-enumerate-by-reversible-backtracking':
+    '再帰の前後で使用状態を対称に更新・復元し、現在pathだけの制約を保って探索木を漏れなく列挙できる。',
 };
 
 const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
 
 const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
   'outcome-build-shortest-path-certificate': ['outcome-model-and-compute-shortest-path'],
-  'outcome-construct-optimal-spanning-tree': [
-    'outcome-maintain-connectivity-components',
-    'outcome-prove-greedy-order',
-  ],
+  'outcome-construct-optimal-spanning-tree': ['outcome-prove-greedy-order'],
   'outcome-color-and-classify-bipartite-components': ['outcome-select-state-graph-search'],
   'outcome-compose-dynamic-tree-clusters': ['outcome-aggregate-rooted-tree'],
   'outcome-build-cartesian-tree-decomposition': ['outcome-prune-dominated-candidates-once'],
@@ -3525,7 +5623,6 @@ const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
     'outcome-compute-convolution-or-correlation',
   ],
   'outcome-apply-formal-power-series-operations': ['outcome-compute-convolution-or-correlation'],
-  'outcome-evaluate-and-compose-polynomials': ['outcome-compute-convolution-or-correlation'],
   'outcome-compute-in-finite-field-extension': ['outcome-compute-in-modular-arithmetic'],
   'outcome-count-through-cyclic-exponents': [
     'outcome-exploit-modular-periodicity',
@@ -3543,19 +5640,35 @@ const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
   'outcome-represent-convex-intersection-by-halfplanes': [
     'outcome-reduce-geometry-to-algebraic-predicates',
   ],
+  'outcome-encode-labeled-trees-by-prufer-code': ['outcome-formulate-combinatorial-coefficients'],
+  'outcome-compute-directed-walk-period': [
+    'outcome-condense-and-order-directed-graph',
+    'outcome-reduce-integer-structure-by-gcd',
+  ],
+  'outcome-count-labeled-structures-by-components': [
+    'outcome-formulate-combinatorial-coefficients',
+  ],
+  'outcome-optimize-ratio-by-parametric-search': ['outcome-prove-and-search-threshold'],
+  'outcome-maintain-order-through-crossing-events': ['outcome-linearize-events'],
+  'outcome-optimize-tree-order-by-cluster-contraction': [
+    'outcome-augment-components-with-metadata',
+    'outcome-prove-greedy-order',
+  ],
+  'outcome-design-frontier-profile-dp': ['outcome-design-minimal-sufficient-state'],
 };
 
 const OUTCOME_LEARNING_UNIT_IDS: Readonly<Record<string, readonly string[]>> = {
   'outcome-normalize-equivalent-states': ['unit-normalization'],
-  'outcome-count-orbits-by-fixed-points': ['unit-combinatorial-coefficients'],
-  'outcome-build-finite-string-automaton': ['unit-string-automata'],
-  'outcome-build-multi-pattern-automaton': ['unit-string-automata'],
+  'outcome-count-orbits-by-fixed-points': ['unit-orbit-counting'],
+  'outcome-build-prefix-match-state': ['unit-z-algorithm'],
+  'outcome-build-finite-string-automaton': ['unit-finite-pattern-automaton'],
+  'outcome-build-multi-pattern-automaton': ['unit-aho-corasick'],
   'outcome-build-suffix-automaton': ['unit-suffix-automaton'],
   'outcome-compute-in-modular-arithmetic': ['unit-modular-arithmetic'],
   'outcome-solve-modular-constraints': ['unit-modular-congruence'],
   'outcome-exploit-modular-periodicity': ['unit-modular-periodicity'],
   'outcome-characterize-integer-solvability': ['unit-gcd-diophantine'],
-  'outcome-reduce-integer-structure-by-gcd': ['unit-gcd-diophantine'],
+  'outcome-reduce-integer-structure-by-gcd': ['unit-gcd-structure'],
   'outcome-bound-reachability-in-numerical-semigroup': ['unit-numerical-semigroup-reachability'],
   'outcome-approximate-rational-by-euclid': ['unit-rational-approximation'],
   'outcome-count-through-cyclic-exponents': ['unit-cyclic-group-exponent-counting'],
@@ -3563,15 +5676,25 @@ const OUTCOME_LEARNING_UNIT_IDS: Readonly<Record<string, readonly string[]>> = {
   'outcome-compute-convolution-or-correlation': ['unit-polynomial-convolution'],
   'outcome-encode-counting-by-generating-function': ['unit-generating-functions'],
   'outcome-apply-formal-power-series-operations': ['unit-formal-power-series'],
-  'outcome-evaluate-and-compose-polynomials': ['unit-formal-power-series'],
 };
 
 export const FINAL_TAXONOMY_OUTCOMES: readonly ObservableOutcomePolicy[] =
   FINAL_TAXONOMY_TAGS.flatMap((tag) =>
     tag.learningOutcomeIds.map((outcomeId) => ({
       id: outcomeId,
-      statement: OUTCOME_STATEMENTS[outcomeId] ?? '',
-      prerequisiteOutcomeIds: [...(OUTCOME_PREREQUISITE_IDS[outcomeId] ?? [])].sort(),
+      statement:
+        OUTCOME_STATEMENTS[outcomeId] ??
+        `${tag.definition} 発動条件、正当性、計算量を説明し、未知問へ実装できる。`,
+      prerequisiteOutcomeIds: [
+        ...new Set([
+          ...(OUTCOME_PREREQUISITE_IDS[outcomeId] ?? []),
+          ...tag.prerequisiteTagIds.flatMap(
+            (prerequisiteTagId) =>
+              FINAL_TAXONOMY_TAGS.find((candidateTag) => candidateTag.id === prerequisiteTagId)
+                ?.learningOutcomeIds ?? [],
+          ),
+        ]),
+      ].sort(),
       scopeTagIds: [tag.id],
       learningUnitCandidateIds:
         OUTCOME_LEARNING_UNIT_IDS[outcomeId] ?? tag.learningUnitCandidateIds,
@@ -3588,21 +5711,427 @@ export const NON_PRIMARY_OUTCOME_IDS = FINAL_TAXONOMY_OUTCOMES.filter((outcome) 
  * reports it once another exercise appears.
  */
 export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
+  'outcome-answer-idempotent-range-query',
   'outcome-apply-heavy-light-decomposition',
+  'outcome-build-static-sorted-range-index',
   'outcome-build-suffix-automaton',
   'outcome-build-virtual-tree',
+  'outcome-compose-finite-functions',
+  'outcome-compute-online-relaxed-convolution',
+  'outcome-compute-subset-convolution',
+  'outcome-construct-degree-parity-subgraph',
+  'outcome-contract-monotone-paths-with-jump-pointers',
+  'outcome-count-euler-circuits-by-best',
+  'outcome-decompose-finite-field-frobenius-orbits',
+  'outcome-determinize-automaton-by-subsets',
+  'outcome-dualize-planar-cut-to-path',
+  'outcome-encode-labeled-trees-by-prufer-code',
+  'outcome-enumerate-by-reversible-backtracking',
   'outcome-encode-threshold-constraints-as-two-sat',
+  'outcome-evolve-run-length-encoded-state',
+  'outcome-extract-rational-series-coefficient',
+  'outcome-exponentiate-associative-composition',
+  'outcome-compute-directed-walk-period',
+  'outcome-design-query-code-by-information-bound',
+  'outcome-kernelize-near-tree-graph',
+  'outcome-maintain-queue-aggregate-with-swag',
+  'outcome-maintain-sparse-domain-segment-tree',
+  'outcome-normalize-string-to-primitive-period',
+  'outcome-bound-reachability-in-numerical-semigroup',
+  'outcome-maintain-order-through-crossing-events',
+  'outcome-optimize-ratio-by-parametric-search',
+  'outcome-optimize-mask-by-bitwise-feasibility',
+  'outcome-optimize-weighted-matroid-basis',
+  'outcome-peel-directed-graph-toward-cycles',
+  'outcome-peel-graph-core',
+  'outcome-prune-range-actions-by-node-invariant',
+  'outcome-recur-by-edge-deletion-contraction',
   'outcome-represent-convex-intersection-by-halfplanes',
+  'outcome-represent-integers-as-two-squares',
+  'outcome-reconstruct-tree-from-distance-matrix',
+  'outcome-remove-boundaries-by-reflection',
+  'outcome-share-threshold-checks-by-parallel-binary-search',
+  'outcome-solve-flow-with-lower-bounds',
+  'outcome-solve-general-graph-matching',
+  'outcome-solve-isotonic-regression-by-pav',
+  'outcome-solve-matroid-intersection',
+  'outcome-solve-steiner-tree-by-subset-dp',
+  'outcome-solve-weighted-bipartite-matching',
+  'outcome-sum-multiplicative-function-by-min25-sieve',
+  'outcome-translate-sequences-by-rsk',
+  'outcome-optimize-tree-order-by-cluster-contraction',
 ];
-export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = ['unit-suffix-automaton'];
+export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
+  'unit-additive-tree-metric-reconstruction',
+  'unit-backtracking-search',
+  'unit-automaton-subset-construction',
+  'unit-bitwise-greedy-feasibility',
+  'unit-bostan-mori',
+  'unit-degree-parity-subgraph',
+  'unit-deletion-contraction',
+  'unit-directed-walk-periodicity',
+  'unit-directed-core-peeling',
+  'unit-dynamic-segment-tree',
+  'unit-euler-circuit-counting',
+  'unit-finite-field-frobenius',
+  'unit-finite-function-composition',
+  'unit-flow-lower-bounds',
+  'unit-fractional-parametric-search',
+  'unit-gaussian-integers-two-squares',
+  'unit-general-graph-matching',
+  'unit-graph-core',
+  'unit-half-plane-constraints',
+  'unit-heavy-light-decomposition',
+  'unit-idempotent-overlap-range-query',
+  'unit-information-theoretic-query-design',
+  'unit-isotonic-regression',
+  'unit-kinetic-order-maintenance',
+  'unit-matroid-greedy',
+  'unit-matroid-intersection',
+  'unit-min25-sieve',
+  'unit-monoid-exponentiation',
+  'unit-monotone-path-contraction',
+  'unit-near-tree-kernelization',
+  'unit-numerical-semigroup-reachability',
+  'unit-parallel-binary-search',
+  'unit-planar-duality',
+  'unit-prufer-code',
+  'unit-reflection-principle',
+  'unit-relaxed-convolution',
+  'unit-rsk-young-tableaux',
+  'unit-run-length-dynamics',
+  'unit-segment-tree-beats',
+  'unit-static-sorted-range-index',
+  'unit-steiner-tree-dp',
+  'unit-string-periodicity',
+  'unit-subset-convolution',
+  'unit-suffix-automaton',
+  'unit-swag',
+  'unit-two-sat',
+  'unit-tree-precedence-contraction',
+  'unit-virtual-tree',
+  'unit-weighted-bipartite-matching',
+];
+export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
+  'tag-additive-tree-metric-reconstruction',
+  'tag-backtracking-search',
+  'tag-automaton-subset-construction',
+  'tag-bitwise-greedy-feasibility',
+  'tag-bostan-mori',
+  'tag-degree-parity-subgraph',
+  'tag-deletion-contraction',
+  'tag-directed-walk-periodicity',
+  'tag-directed-core-peeling',
+  'tag-dynamic-segment-tree',
+  'tag-euler-circuit-counting',
+  'tag-finite-field-frobenius',
+  'tag-finite-function-composition',
+  'tag-flow-feasibility-lower-bounds',
+  'tag-fractional-parametric-search',
+  'tag-gaussian-integers-two-squares',
+  'tag-general-graph-matching',
+  'tag-graph-core-peeling',
+  'tag-half-plane-constraints',
+  'tag-heavy-light-decomposition',
+  'tag-idempotent-overlap-range-query',
+  'tag-information-theoretic-query-design',
+  'tag-isotonic-regression-pav',
+  'tag-kinetic-order-maintenance',
+  'tag-matroid-greedy',
+  'tag-matroid-intersection',
+  'tag-min25-sieve',
+  'tag-monoid-exponentiation',
+  'tag-monotone-path-contraction',
+  'tag-near-tree-kernelization',
+  'tag-numerical-semigroup',
+  'tag-parallel-binary-search',
+  'tag-planar-duality',
+  'tag-prufer-code',
+  'tag-reflection-principle',
+  'tag-relaxed-convolution',
+  'tag-rsk-young-tableaux',
+  'tag-run-length-dynamics',
+  'tag-segment-tree-beats',
+  'tag-steiner-tree-dp',
+  'tag-static-sorted-range-index',
+  'tag-string-periodicity',
+  'tag-subset-convolution',
+  'tag-suffix-automaton',
+  'tag-swag',
+  'tag-two-sat',
+  'tag-tree-precedence-contraction',
+  'tag-virtual-tree',
+  'tag-weighted-bipartite-matching',
+];
 
 const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
 
-const orderedUnitSeeds = deterministicTopologicalOrder(LEARNING_UNIT_SEEDS, (unit) => [
-  unit.stageRank,
-  unit.difficultyRank,
-  unit.representativeRank,
+const REFINED_CHAPTER_SEEDS: readonly LearningUnitSeed[] = [
+  {
+    ...chapter('unit-chapter-tree', '木構造', 3),
+    orderReason:
+      '一般グラフから独立させ、根・部分木・一意path・separatorという木固有の不変量を体系的に積み上げる。',
+  },
+  {
+    ...chapter('unit-chapter-number-theory', '数論', 6),
+    orderReason:
+      '整数条件をgcd・合同・素因数指数・約数格子へ翻訳し、有限状態化と反転の基礎を作る。',
+  },
+  {
+    ...chapter('unit-chapter-combinatorics-algebra', '組合せ・多項式・線形代数', 7),
+    orderReason: '数え上げを全単射・係数列・線形写像へ変換し、高速変換と構造定理へ接続する。',
+  },
+  {
+    ...chapter('unit-chapter-geometry-optimization', '幾何・凸最適化', 8),
+    orderReason:
+      'orientationなどの幾何predicateから凸境界・傾き・dual penaltyへ進み、候補を構造的に削減する。',
+  },
+];
+
+const LEGACY_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
+  'unit-tree-metric': 'unit-chapter-tree',
+  'unit-tree-aggregation': 'unit-chapter-tree',
+  'unit-implicit-binary-tree': 'unit-chapter-tree',
+  'unit-static-top-tree': 'unit-chapter-tree',
+  'unit-tree-decomposition': 'unit-chapter-tree',
+  'unit-tree-balanced-separators': 'unit-chapter-tree',
+  'unit-gcd-diophantine': 'unit-chapter-number-theory',
+  'unit-numerical-semigroup-reachability': 'unit-chapter-number-theory',
+  'unit-rational-approximation': 'unit-chapter-number-theory',
+  'unit-modular-arithmetic': 'unit-chapter-number-theory',
+  'unit-modular-congruence': 'unit-chapter-number-theory',
+  'unit-modular-periodicity': 'unit-chapter-number-theory',
+  'unit-prime-divisor': 'unit-chapter-number-theory',
+  'unit-integer-boundary-blocks': 'unit-chapter-number-theory',
+  'unit-cyclic-group-exponent-counting': 'unit-chapter-number-theory',
+  'unit-multiplicative-order-periods': 'unit-chapter-number-theory',
+  'unit-finite-field-extension': 'unit-chapter-number-theory',
+  'unit-combinatorial-coefficients': 'unit-chapter-combinatorics-algebra',
+  'unit-inclusion-exclusion': 'unit-chapter-combinatorics-algebra',
+  'unit-polynomial-convolution': 'unit-chapter-combinatorics-algebra',
+  'unit-generating-functions': 'unit-chapter-combinatorics-algebra',
+  'unit-formal-power-series': 'unit-chapter-combinatorics-algebra',
+  'unit-linear-algebra-xor': 'unit-chapter-combinatorics-algebra',
+  'unit-geometry-primitives': 'unit-chapter-geometry-optimization',
+  'unit-convex-geometry': 'unit-chapter-geometry-optimization',
+  'unit-discrete-convex': 'unit-chapter-geometry-optimization',
+};
+
+const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
+  'unit-meet-in-the-middle': 'unit-divide-enumeration',
+  'unit-recursive-divide-and-conquer': 'unit-divide-enumeration',
+  'unit-amortized-monotone-progress': 'unit-decomposition-amortization',
+  'unit-small-to-large': 'unit-decomposition-amortization',
+  'unit-threshold-heavy-light': 'unit-decomposition-amortization',
+  'unit-heavy-path-tree-dp': 'unit-tree-aggregation',
+  'unit-dp-subset-state': 'unit-dp-subset-resource',
+  'unit-state-graph-search': 'unit-graph-search',
+  'unit-transitive-closure': 'unit-graph-search',
+  'unit-scc-condensation': 'unit-directed-condensation',
+  'unit-two-sat': 'unit-directed-condensation',
+  'unit-dag-topological-processing': 'unit-directed-condensation',
+  'unit-directed-core-peeling': 'unit-directed-condensation',
+  'unit-functional-graph-decomposition': 'unit-functional-graph',
+  'unit-binary-lifting': 'unit-functional-graph',
+  'unit-dsu-components': 'unit-connectivity',
+  'unit-potential-dsu': 'unit-connectivity',
+  'unit-rooted-tree-aggregation': 'unit-tree-aggregation',
+  'unit-rerooting': 'unit-tree-aggregation',
+  'unit-tree-ancestor-lca': 'unit-tree-decomposition',
+  'unit-tree-euler-flattening': 'unit-tree-decomposition',
+  'unit-heavy-light-decomposition': 'unit-tree-decomposition',
+  'unit-virtual-tree': 'unit-tree-decomposition',
+  'unit-max-flow-min-cut': 'unit-flow-matching',
+  'unit-flow-lower-bounds': 'unit-flow-matching',
+  'unit-bipartite-matching': 'unit-flow-matching',
+  'unit-min-cost-flow': 'unit-flow-matching',
+  'unit-weighted-bipartite-matching': 'unit-flow-matching',
+  'unit-general-graph-matching': 'unit-flow-matching',
+  'unit-euler-trail-circuit': 'unit-euler-degree',
+  'unit-degree-parity-subgraph': 'unit-euler-degree',
+  'unit-graph-core': 'unit-graph-core-peeling',
+  'unit-near-tree-kernelization': 'unit-graph-core-peeling',
+  'unit-range-monoid-aggregation': 'unit-monoid-segment-tree',
+  'unit-segment-tree-canonical-decomposition': 'unit-monoid-segment-tree',
+  'unit-static-sorted-range-index': 'unit-monoid-segment-tree',
+  'unit-idempotent-overlap-range-query': 'unit-monoid-segment-tree',
+  'unit-swag': 'unit-monoid-segment-tree',
+  'unit-finite-function-composition': 'unit-monoid-segment-tree',
+  'unit-dynamic-segment-tree': 'unit-monoid-segment-tree',
+  'unit-segment-tree-beats': 'unit-range-actions',
+  'unit-priority-queue-best-first': 'unit-ordered-set-heap',
+  'unit-ordered-set-multiset': 'unit-ordered-set-heap',
+  'unit-ordered-interval-partition': 'unit-ordered-set-heap',
+  'unit-persistence': 'unit-persistence-rollback',
+  'unit-rollback': 'unit-persistence-rollback',
+  'unit-z-algorithm': 'unit-string-prefix-automata',
+  'unit-finite-pattern-automaton': 'unit-string-automata',
+  'unit-automaton-subset-construction': 'unit-string-automata',
+  'unit-aho-corasick': 'unit-string-automata',
+  'unit-automaton-dp': 'unit-dp-digit-string',
+  'unit-sequence-fingerprint': 'unit-string-hash',
+  'unit-randomized-algebraic-fingerprint': 'unit-randomized-algorithms',
+  'unit-gcd-structure': 'unit-gcd-diophantine',
+  'unit-divisor-mobius-inversion': 'unit-inclusion-exclusion',
+  'unit-subset-transforms': 'unit-inclusion-exclusion',
+  'unit-subset-convolution': 'unit-subset-transforms',
+  'unit-polynomial-multipoint-evaluation': 'unit-formal-power-series',
+  'unit-fps-composition-power-projection': 'unit-formal-power-series',
+  'unit-bostan-mori': 'unit-formal-power-series',
+  'unit-relaxed-convolution': 'unit-polynomial-convolution',
+  'unit-linear-system-rank': 'unit-linear-algebra-xor',
+  'unit-xor-linear-basis': 'unit-linear-algebra-xor',
+  'unit-separable-linear-transform': 'unit-linear-algebra-xor',
+  'unit-matroid-greedy': 'unit-linear-algebra-xor',
+  'unit-matroid-intersection': 'unit-linear-algebra-xor',
+  'unit-convex-boundary-hull': 'unit-convex-geometry',
+  'unit-half-plane-constraints': 'unit-convex-geometry',
+  'unit-basic-convex-optimization': 'unit-discrete-convex',
+  'unit-slope-trick': 'unit-discrete-convex',
+  'unit-lagrangian-relaxation': 'unit-discrete-convex',
+  'unit-monge-optimization': 'unit-discrete-convex',
+  'unit-isotonic-regression': 'unit-discrete-convex',
+  'unit-separable-convex-marginals': 'unit-discrete-convex',
+  'unit-directed-walk-periodicity': 'unit-directed-condensation',
+  'unit-frontier-profile-dp': 'unit-dp-state-design',
+  'unit-kinetic-order-maintenance': 'unit-events-offline',
+  'unit-cyclic-order-crossing': 'unit-geometry-primitives',
+};
+
+const rootChapterIdForTag = (tagId: string): string => {
+  let current = tagById.get(tagId);
+  while (current?.parentId) current = tagById.get(current.parentId);
+  switch (current?.id) {
+    case 'tag-dp-state-transition':
+      return 'unit-chapter-dynamic-programming';
+    case 'tag-graph-model-structure':
+      return 'unit-chapter-graph';
+    case 'tag-tree-model-structure':
+      return 'unit-chapter-tree';
+    case 'tag-query-sufficient-aggregate':
+      return 'unit-chapter-query';
+    case 'tag-string-state-representation':
+      return 'unit-chapter-string';
+    case 'tag-number-theory-structure':
+      return 'unit-chapter-number-theory';
+    case 'tag-combinatorics-algebra-structure':
+      return 'unit-chapter-combinatorics-algebra';
+    case 'tag-geometry-optimization-structure':
+      return 'unit-chapter-geometry-optimization';
+    default:
+      return 'unit-chapter-modeling';
+  }
+};
+
+const refinedLegacyUnitSeeds = LEGACY_LEARNING_UNIT_SEEDS.filter(
+  (unit) => unit.id !== 'unit-chapter-math-geometry',
+).map((unit): LearningUnitSeed => ({
+  ...unit,
+  title: unit.id === 'unit-chapter-graph' ? 'グラフアルゴリズム' : unit.title,
+  parentId: LEGACY_UNIT_PARENT_OVERRIDES[unit.id] ?? unit.parentId,
+  representativeRank:
+    unit.id === 'unit-chapter-query'
+      ? 4
+      : unit.id === 'unit-chapter-string'
+        ? 5
+        : unit.representativeRank,
+}));
+
+const declaredUnitIds = new Set([
+  ...refinedLegacyUnitSeeds.map((unit) => unit.id),
+  ...REFINED_CHAPTER_SEEDS.map((unit) => unit.id),
 ]);
+const autoRefinedUnitSeeds: LearningUnitSeed[] = [];
+for (const tag of FINAL_TAXONOMY_TAGS) {
+  for (const unitId of tag.learningUnitCandidateIds) {
+    if (declaredUnitIds.has(unitId)) continue;
+    declaredUnitIds.add(unitId);
+    const explicitParentId = REFINED_UNIT_PARENT_OVERRIDES[unitId];
+    const parentId = explicitParentId ?? rootChapterIdForTag(tag.id);
+    const parentIsChapter = parentId.startsWith('unit-chapter-');
+    const prerequisiteIds = [
+      ...new Set(
+        tag.prerequisiteTagIds.flatMap(
+          (prerequisiteTagId) => tagById.get(prerequisiteTagId)?.learningUnitCandidateIds ?? [],
+        ),
+      ),
+    ]
+      .sort()
+      .filter((prerequisiteUnitId) => prerequisiteUnitId !== unitId);
+    autoRefinedUnitSeeds.push({
+      id: unitId,
+      kind: parentIsChapter ? 'section' : 'subsection',
+      title: tag.name,
+      parentId,
+      prerequisiteIds,
+      stageRank: parentIsChapter ? 3 : 4,
+      difficultyRank: Math.max(1, Math.floor(tag.primaryPriority / 20)),
+      representativeRank: tag.primaryPriority,
+      orderReason: `${tag.definition} 発動条件と正当化原理を比較可能な独立教材として学ぶ。`,
+      excludedTopics: [`${tag.name}の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。`],
+    });
+  }
+}
+
+const BASE_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
+  ...refinedLegacyUnitSeeds,
+  ...REFINED_CHAPTER_SEEDS,
+  ...autoRefinedUnitSeeds,
+];
+
+const parentUnitIdById = new Map(BASE_LEARNING_UNIT_SEEDS.map((unit) => [unit.id, unit.parentId]));
+const unitIsSameOrDescendant = (unitId: string, ancestorUnitId: string): boolean => {
+  const visited = new Set<string>();
+  let currentId: string | null = unitId;
+  while (currentId !== null && !visited.has(currentId)) {
+    if (currentId === ancestorUnitId) return true;
+    visited.add(currentId);
+    currentId = parentUnitIdById.get(currentId) ?? null;
+  }
+  return false;
+};
+
+const derivedPrerequisiteUnitIdsByUnitId = new Map<string, Set<string>>();
+for (const outcome of FINAL_TAXONOMY_OUTCOMES) {
+  for (const unitId of outcome.learningUnitCandidateIds) {
+    const prerequisiteUnitIds = derivedPrerequisiteUnitIdsByUnitId.get(unitId) ?? new Set<string>();
+    for (const prerequisiteOutcomeId of outcome.prerequisiteOutcomeIds) {
+      for (const prerequisiteUnitId of outcomeById.get(prerequisiteOutcomeId)
+        ?.learningUnitCandidateIds ?? []) {
+        if (prerequisiteUnitId !== unitId && !unitIsSameOrDescendant(unitId, prerequisiteUnitId)) {
+          prerequisiteUnitIds.add(prerequisiteUnitId);
+        }
+      }
+    }
+    derivedPrerequisiteUnitIdsByUnitId.set(unitId, prerequisiteUnitIds);
+  }
+}
+
+const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = BASE_LEARNING_UNIT_SEEDS.map((unit) => ({
+  ...unit,
+  prerequisiteIds: [
+    ...new Set([
+      ...unit.prerequisiteIds,
+      ...(derivedPrerequisiteUnitIdsByUnitId.get(unit.id) ?? []),
+    ]),
+  ].sort(),
+}));
+
+const unitSeedById = new Map(LEARNING_UNIT_SEEDS.map((unit) => [unit.id, unit]));
+const orderedUnitSeeds: readonly LearningUnitSeed[] = deterministicTopologicalOrder(
+  LEARNING_UNIT_SEEDS.map((unit) => ({
+    ...unit,
+    prerequisiteIds: [
+      ...new Set([...unit.prerequisiteIds, ...(unit.parentId === null ? [] : [unit.parentId])]),
+    ],
+  })),
+  (unit) => [unit.stageRank, unit.difficultyRank, unit.representativeRank],
+).map((orderedUnit) => {
+  const originalUnit = unitSeedById.get(orderedUnit.id);
+  if (originalUnit === undefined)
+    throw new Error(`FINAL_TAXONOMY_ORDERED_UNIT_MISSING:${orderedUnit.id}`);
+  return originalUnit;
+});
 
 export const FINAL_LEARNING_UNIT_CANDIDATES: readonly MetadataLearningUnitCandidate[] =
   orderedUnitSeeds.map((unit) => ({
@@ -3611,17 +6140,19 @@ export const FINAL_LEARNING_UNIT_CANDIDATES: readonly MetadataLearningUnitCandid
     title: unit.title,
     parentId: unit.parentId,
     additionalPrerequisiteUnitIds: unit.prerequisiteIds,
-    tagIds: FINAL_TAXONOMY_TAGS.filter((tag) => tag.learningUnitCandidateIds.includes(unit.id)).map(
-      (tag) => tag.id,
-    ),
+    tagIds: FINAL_TAXONOMY_TAGS.filter((tag) =>
+      tag.learningUnitCandidateIds.some((tagUnitId) => unitIsSameOrDescendant(tagUnitId, unit.id)),
+    ).map((tag) => tag.id),
     learningOutcomeIds: FINAL_TAXONOMY_OUTCOMES.filter((outcome) =>
-      outcome.learningUnitCandidateIds.includes(unit.id),
+      outcome.learningUnitCandidateIds.some((outcomeUnitId) =>
+        unitIsSameOrDescendant(outcomeUnitId, unit.id),
+      ),
     ).map((outcome) => outcome.id),
     problemIds: [],
     stageRank: unit.stageRank,
     difficultyRank: unit.difficultyRank,
     representativeRank: unit.representativeRank,
-    orderReason: UNIT_ORDER_REASONS[unit.id] ?? '',
+    orderReason: UNIT_ORDER_REASONS[unit.id] ?? unit.orderReason,
     excludedTopics: unit.excludedTopics,
   }));
 
@@ -3660,7 +6191,7 @@ export const KNOWN_UNMATCHED_CURATED_OVERRIDE_PROBLEM_IDS = [
   'abc450-e',
 ] as const;
 
-export const CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
+const RAW_CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
   {
     problemId: 'abc273-e',
     primaryTagId: 'tag-persistent-rollback',
@@ -4217,7 +6748,7 @@ export const CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
   },
 ];
 
-export const EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS: Readonly<Record<string, string>> =
+const RAW_EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS: Readonly<Record<string, string>> =
   Object.freeze({
     ...CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299,
     ...CURATED_PRIMARY_TAG_ASSIGNMENTS_300_383,
@@ -4230,21 +6761,27 @@ export const PREVIEW_FINAL_TAXONOMY_DECISIONS: readonly PreviewFinalDecision[] =
     previewEntityKind: 'tag',
     action: 'split',
     finalEntityIds: [
-      'tag-cyclic-group-order',
-      'tag-gcd-diophantine',
+      'tag-cyclic-exponent-counting',
+      'tag-multiplicative-order',
+      'tag-bezout-diophantine',
       'tag-prime-divisor-decomposition',
-      'tag-inclusion-exclusion',
+      'tag-divisor-mobius-inversion',
     ],
     affectedProblemIds: ['abc212-g', 'abc222-g'],
-    representativeProblemIds: ['abc212-g', 'abc222-g', 'abc246-f', 'abc335-g'],
+    representativeProblemIds: ['abc212-g', 'abc222-g', 'abc230-g', 'abc335-g'],
     splitAssignments: [
       {
-        finalEntityId: 'tag-cyclic-group-order',
-        problemIds: ['abc212-g', 'abc222-g'],
-        representativeProblemIds: ['abc212-g', 'abc222-g', 'abc335-g'],
+        finalEntityId: 'tag-cyclic-exponent-counting',
+        problemIds: ['abc212-g'],
+        representativeProblemIds: ['abc212-g', 'abc335-g'],
       },
       {
-        finalEntityId: 'tag-gcd-diophantine',
+        finalEntityId: 'tag-multiplicative-order',
+        problemIds: ['abc222-g'],
+        representativeProblemIds: ['abc222-g', 'abc335-g'],
+      },
+      {
+        finalEntityId: 'tag-bezout-diophantine',
         problemIds: ['abc212-g', 'abc222-g'],
         representativeProblemIds: ['abc212-g', 'abc222-g'],
       },
@@ -4254,15 +6791,15 @@ export const PREVIEW_FINAL_TAXONOMY_DECISIONS: readonly PreviewFinalDecision[] =
         representativeProblemIds: ['abc212-g', 'abc222-g', 'abc335-g'],
       },
       {
-        finalEntityId: 'tag-inclusion-exclusion',
+        finalEntityId: 'tag-divisor-mobius-inversion',
         problemIds: ['abc212-g'],
-        representativeProblemIds: ['abc212-g', 'abc246-f'],
+        representativeProblemIds: ['abc212-g', 'abc230-g'],
       },
     ],
     aliasesOrRedirects: ['乗法的構造と位数による数え上げ'],
-    evidenceOwnerProblemIds: ['abc212-g', 'abc222-g', 'abc246-f', 'abc335-g'],
+    evidenceOwnerProblemIds: ['abc212-g', 'abc222-g', 'abc230-g', 'abc335-g'],
     rationale:
-      '群構造は共通するが、数え上げと最小周期は別outcomeで、補助的なgcd・素因数・包除も独立Tagに保つ。',
+      '群構造は共通するが、指数化した数え上げと最小周期は別Outcomeで、補助的なBézout・素因数分解・約数Möbius反転も独立Tagに保つ。',
     reviewMode: 'third_party',
   },
   {
@@ -4462,12 +6999,12 @@ export const PREVIEW_FINAL_TAXONOMY_DECISIONS: readonly PreviewFinalDecision[] =
     previewEntityId: 'provisional-unit-range-aggregate-under-updates',
     previewEntityKind: 'unit',
     action: 'split',
-    finalEntityIds: ['unit-monoid-segment-tree', 'unit-weighted-prefix-fenwick'],
+    finalEntityIds: ['unit-range-monoid-aggregation', 'unit-weighted-prefix-fenwick'],
     affectedProblemIds: ['abc223-f', 'abc256-f'],
     representativeProblemIds: ['abc223-f', 'abc256-f'],
     splitAssignments: [
       {
-        finalEntityId: 'unit-monoid-segment-tree',
+        finalEntityId: 'unit-range-monoid-aggregation',
         problemIds: ['abc223-f'],
         representativeProblemIds: ['abc223-f'],
       },
@@ -4488,11 +7025,1119 @@ const compareIds = (left: string, right: string): number =>
   left < right ? -1 : left > right ? 1 : 0;
 const sortedUnique = (values: readonly string[]): string[] => [...new Set(values)].sort(compareIds);
 
-export const FINAL_TAXONOMY_CLAIM_DECISIONS: Readonly<Record<string, CuratedProblemClaimDecision>> =
+const RAW_FINAL_TAXONOMY_CLAIM_DECISIONS: Readonly<Record<string, CuratedProblemClaimDecision>> =
   Object.freeze({
     ...FINAL_TAXONOMY_CLAIM_DECISIONS_212_299,
     ...FINAL_TAXONOMY_CLAIM_DECISIONS_300_383,
     ...FINAL_TAXONOMY_CLAIM_DECISIONS_384_466,
+  });
+
+interface OutcomeRefinementGroup {
+  readonly from: string;
+  readonly to: string;
+  readonly problemIds: readonly string[];
+}
+
+/**
+ * Every entry below was checked against the complete 868-problem Inventory.  It is deliberately
+ * problem-qualified: a broad draft Outcome is never split by a keyword heuristic at build time.
+ */
+const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
+  {
+    from: 'outcome-bound-total-work',
+    to: 'outcome-balance-heavy-light-threshold',
+    problemIds: [
+      'abc219-g',
+      'abc230-e',
+      'abc242-g',
+      'abc259-ex',
+      'abc335-f',
+      'abc345-g',
+      'abc350-g',
+      'abc365-g',
+      'abc405-g',
+    ],
+  },
+  {
+    from: 'outcome-bound-total-work',
+    to: 'outcome-accelerate-tree-dp-by-heavy-path',
+    problemIds: ['abc269-ex', 'abc311-ex'],
+  },
+  {
+    from: 'outcome-bound-total-work',
+    to: 'outcome-merge-small-into-large',
+    problemIds: [
+      'abc273-ex',
+      'abc275-ex',
+      'abc324-g',
+      'abc329-f',
+      'abc369-g',
+      'abc411-f',
+      'abc451-f',
+      'abc454-g',
+      'abc462-g',
+    ],
+  },
+  {
+    from: 'outcome-bound-total-work',
+    to: 'outcome-bound-monotone-total-work',
+    problemIds: [
+      'abc217-e',
+      'abc254-e',
+      'abc255-ex',
+      'abc256-ex',
+      'abc260-f',
+      'abc264-ex',
+      'abc272-e',
+      'abc295-g',
+      'abc302-e',
+      'abc305-f',
+      'abc307-f',
+      'abc312-ex',
+      'abc319-g',
+      'abc368-g',
+      'abc403-e',
+      'abc417-g',
+      'abc421-f',
+      'abc426-f',
+      'abc427-g',
+      'abc428-f',
+      'abc430-g',
+      'abc435-e',
+    ],
+  },
+  {
+    from: 'outcome-reduce-selection-to-network-optimization',
+    to: 'outcome-model-min-cost-flow',
+    problemIds: ['abc214-h', 'abc224-h', 'abc231-h', 'abc247-g', 'abc407-g', 'abc421-g'],
+  },
+  {
+    from: 'outcome-reduce-selection-to-network-optimization',
+    to: 'outcome-solve-weighted-bipartite-matching',
+    problemIds: ['abc373-g'],
+  },
+  {
+    from: 'outcome-reduce-selection-to-network-optimization',
+    to: 'outcome-optimize-by-lagrangian-relaxation',
+    problemIds: ['abc393-g'],
+  },
+  {
+    from: 'outcome-reduce-selection-to-network-optimization',
+    to: 'outcome-solve-general-graph-matching',
+    problemIds: ['abc412-g'],
+  },
+  {
+    from: 'outcome-reduce-selection-to-network-optimization',
+    to: 'outcome-solve-flow-with-lower-bounds',
+    problemIds: ['abc285-g'],
+  },
+  {
+    from: 'outcome-reduce-selection-to-network-optimization',
+    to: 'outcome-solve-bipartite-matching',
+    problemIds: [
+      'abc241-g',
+      'abc274-g',
+      'abc313-ex',
+      'abc317-g',
+      'abc320-g',
+      'abc374-g',
+      'abc401-g',
+      'abc437-g',
+      'abc445-g',
+      'abc461-g',
+    ],
+  },
+  {
+    from: 'outcome-reduce-selection-to-network-optimization',
+    to: 'outcome-model-max-flow-min-cut',
+    problemIds: [
+      'abc225-g',
+      'abc227-h',
+      'abc239-g',
+      'abc259-g',
+      'abc263-g',
+      'abc318-g',
+      'abc326-g',
+      'abc332-g',
+      'abc347-g',
+      'abc397-g',
+      'abc413-g',
+    ],
+  },
+  {
+    from: 'outcome-characterize-walk-by-degrees',
+    to: 'outcome-construct-euler-trail-or-circuit',
+    problemIds: ['abc227-h', 'abc286-g', 'abc336-g'],
+  },
+  {
+    from: 'outcome-characterize-walk-by-degrees',
+    to: 'outcome-construct-degree-parity-subgraph',
+    problemIds: ['abc345-f'],
+  },
+  {
+    from: 'outcome-reduce-graph-by-peeling-or-kernelization',
+    to: 'outcome-peel-graph-core',
+    problemIds: ['abc266-f'],
+  },
+  {
+    from: 'outcome-reduce-graph-by-peeling-or-kernelization',
+    to: 'outcome-kernelize-near-tree-graph',
+    problemIds: ['abc419-g'],
+  },
+  {
+    from: 'outcome-maintain-dynamic-order-statistics',
+    to: 'outcome-maintain-ordered-interval-partition',
+    problemIds: ['abc255-ex', 'abc256-ex', 'abc380-e', 'abc435-e', 'abc465-g', 'abc466-f'],
+  },
+  {
+    from: 'outcome-maintain-dynamic-order-statistics',
+    to: 'outcome-enumerate-frontier-best-first',
+    problemIds: [
+      'abc214-e',
+      'abc217-e',
+      'abc218-h',
+      'abc249-f',
+      'abc250-g',
+      'abc252-f',
+      'abc297-e',
+      'abc304-ex',
+      'abc305-e',
+      'abc307-f',
+      'abc308-f',
+      'abc319-f',
+      'abc320-e',
+      'abc331-e',
+      'abc342-g',
+      'abc359-f',
+      'abc373-f',
+      'abc376-e',
+      'abc376-g',
+      'abc384-e',
+      'abc391-f',
+      'abc407-e',
+      'abc409-f',
+      'abc433-e',
+      'abc440-e',
+      'abc464-g',
+    ],
+  },
+  {
+    from: 'outcome-maintain-dynamic-order-statistics',
+    to: 'outcome-maintain-ordered-set-statistics',
+    problemIds: [
+      'abc218-g',
+      'abc245-e',
+      'abc268-ex',
+      'abc273-ex',
+      'abc275-ex',
+      'abc281-e',
+      'abc306-e',
+      'abc308-g',
+      'abc314-g',
+      'abc319-g',
+      'abc324-g',
+      'abc330-e',
+      'abc356-f',
+      'abc364-f',
+      'abc368-g',
+      'abc406-g',
+      'abc407-f',
+      'abc418-f',
+      'abc431-g',
+      'abc440-f',
+      'abc444-e',
+    ],
+  },
+  {
+    from: 'outcome-share-or-revert-versions',
+    to: 'outcome-persist-data-structure-versions',
+    problemIds: ['abc273-e', 'abc453-g'],
+  },
+  {
+    from: 'outcome-share-or-revert-versions',
+    to: 'outcome-rollback-reversible-updates',
+    problemIds: ['abc218-g', 'abc302-ex', 'abc363-g'],
+  },
+  {
+    from: 'outcome-compare-objects-by-fingerprint',
+    to: 'outcome-compare-sequences-by-rolling-fingerprint',
+    problemIds: ['abc274-ex', 'abc331-f'],
+  },
+  {
+    from: 'outcome-compare-objects-by-fingerprint',
+    to: 'outcome-compare-algebraic-objects-by-random-fingerprint',
+    problemIds: ['abc238-g', 'abc339-f', 'abc367-f', 'abc455-g'],
+  },
+  {
+    from: 'outcome-exploit-convexity',
+    to: 'outcome-maintain-piecewise-linear-convex-function',
+    problemIds: ['abc217-h', 'abc250-g', 'abc275-ex', 'abc406-g', 'abc458-g'],
+  },
+  {
+    from: 'outcome-exploit-convexity',
+    to: 'outcome-optimize-by-lagrangian-relaxation',
+    problemIds: ['abc305-ex', 'abc355-g', 'abc393-g', 'abc400-g'],
+  },
+  {
+    from: 'outcome-exploit-convexity',
+    to: 'outcome-optimize-monge-transitions',
+    problemIds: ['abc348-g', 'abc383-g'],
+  },
+  {
+    from: 'outcome-exploit-convexity',
+    to: 'outcome-solve-isotonic-regression-by-pav',
+    problemIds: ['abc459-f'],
+  },
+  {
+    from: 'outcome-exploit-convexity',
+    to: 'outcome-allocate-by-convex-marginal-costs',
+    problemIds: ['abc359-f', 'abc369-g', 'abc373-f', 'abc389-e'],
+  },
+  {
+    from: 'outcome-exploit-convexity',
+    to: 'outcome-optimize-univariate-convex-function',
+    problemIds: [
+      'abc224-g',
+      'abc229-g',
+      'abc240-f',
+      'abc263-g',
+      'abc314-ex',
+      'abc330-f',
+      'abc459-g',
+      'abc462-e',
+    ],
+  },
+  {
+    from: 'outcome-transform-to-linear-system-or-rank',
+    to: 'outcome-maintain-xor-linear-basis',
+    problemIds: ['abc220-h', 'abc223-h', 'abc249-g', 'abc283-g', 'abc451-g'],
+  },
+  {
+    from: 'outcome-transform-to-linear-system-or-rank',
+    to: 'outcome-factor-separable-linear-transform',
+    problemIds: ['abc212-h', 'abc265-ex', 'abc367-g'],
+  },
+  {
+    from: 'outcome-transform-to-linear-system-or-rank',
+    to: 'outcome-maintain-potential-differences',
+    problemIds: ['abc396-e'],
+  },
+  {
+    from: 'outcome-transform-to-linear-system-or-rank',
+    to: 'outcome-optimize-weighted-matroid-basis',
+    problemIds: ['abc236-f'],
+  },
+  {
+    from: 'outcome-transform-to-linear-system-or-rank',
+    to: 'outcome-solve-matroid-intersection',
+    problemIds: ['abc399-g'],
+  },
+  {
+    from: 'outcome-transform-to-linear-system-or-rank',
+    to: 'outcome-solve-linear-system-and-rank',
+    problemIds: ['abc276-ex', 'abc278-ex', 'abc323-g', 'abc366-g', 'abc412-g'],
+  },
+  {
+    from: 'outcome-evaluate-and-compose-polynomials',
+    to: 'outcome-evaluate-polynomial-at-many-points',
+    problemIds: ['abc272-ex', 'abc323-g', 'abc381-g'],
+  },
+  {
+    from: 'outcome-evaluate-and-compose-polynomials',
+    to: 'outcome-compose-series-and-project-powers',
+    problemIds: ['abc387-g', 'abc439-g'],
+  },
+  {
+    from: 'outcome-enumerate-subset-state-space',
+    to: 'outcome-compute-subset-convolution',
+    problemIds: ['abc294-ex'],
+  },
+  {
+    from: 'outcome-enumerate-subset-state-space',
+    to: 'outcome-determinize-automaton-by-subsets',
+    problemIds: ['abc228-g'],
+  },
+  {
+    from: 'outcome-enumerate-subset-state-space',
+    to: 'outcome-apply-subset-zeta-mobius-transform',
+    problemIds: ['abc215-h', 'abc295-ex', 'abc349-f', 'abc423-f', 'abc465-f'],
+  },
+  {
+    from: 'outcome-enumerate-subset-state-space',
+    to: 'outcome-solve-steiner-tree-by-subset-dp',
+    problemIds: ['abc364-g'],
+  },
+  {
+    from: 'outcome-correct-overlap-by-inversion',
+    to: 'outcome-invert-divisor-lattice-by-mobius',
+    problemIds: ['abc212-g', 'abc230-g', 'abc304-f', 'abc335-g', 'abc361-f'],
+  },
+  {
+    from: 'outcome-correct-overlap-by-inversion',
+    to: 'outcome-apply-subset-zeta-mobius-transform',
+    problemIds: ['abc423-f'],
+  },
+  {
+    from: 'outcome-condense-and-order-directed-graph',
+    to: 'outcome-process-dag-in-topological-order',
+    problemIds: ['abc277-f', 'abc291-e', 'abc304-ex', 'abc315-e'],
+  },
+  {
+    from: 'outcome-condense-and-order-directed-graph',
+    to: 'outcome-peel-directed-graph-toward-cycles',
+    problemIds: ['abc245-f'],
+  },
+  {
+    from: 'outcome-condense-and-order-directed-graph',
+    to: 'outcome-contract-monotone-paths-with-jump-pointers',
+    problemIds: ['abc295-g'],
+  },
+  {
+    from: 'outcome-condense-and-order-directed-graph',
+    to: 'outcome-solve-bipartite-matching',
+    problemIds: ['abc374-g'],
+  },
+  {
+    from: 'outcome-design-associative-range-summary',
+    to: 'outcome-compose-finite-functions',
+    problemIds: ['abc261-e'],
+  },
+  {
+    from: 'outcome-design-associative-range-summary',
+    to: 'outcome-build-static-sorted-range-index',
+    problemIds: ['abc339-g'],
+  },
+  {
+    from: 'outcome-design-associative-range-summary',
+    to: 'outcome-maintain-queue-aggregate-with-swag',
+    problemIds: ['abc456-f'],
+  },
+  {
+    from: 'outcome-design-associative-range-summary',
+    to: 'outcome-maintain-sparse-domain-segment-tree',
+    problemIds: ['abc403-g'],
+  },
+  {
+    from: 'outcome-design-range-update-action',
+    to: 'outcome-prune-range-actions-by-node-invariant',
+    problemIds: ['abc430-g'],
+  },
+  {
+    from: 'outcome-recover-valid-witness',
+    to: 'outcome-answer-idempotent-range-query',
+    problemIds: ['abc282-f'],
+  },
+  {
+    from: 'outcome-recover-valid-witness',
+    to: 'outcome-select-state-graph-search',
+    problemIds: ['abc355-e'],
+  },
+  {
+    from: 'outcome-design-minimal-sufficient-state',
+    to: 'outcome-determinize-automaton-by-subsets',
+    problemIds: ['abc228-g'],
+  },
+  {
+    from: 'outcome-design-minimal-sufficient-state',
+    to: 'outcome-translate-sequences-by-rsk',
+    problemIds: ['abc378-g'],
+  },
+  {
+    from: 'outcome-accelerate-fixed-linear-transition',
+    to: 'outcome-decompose-finite-field-frobenius-orbits',
+    problemIds: ['abc251-ex'],
+  },
+  {
+    from: 'outcome-evaluate-compressed-integer-blocks',
+    to: 'outcome-maintain-ordered-interval-partition',
+    problemIds: ['abc251-ex'],
+  },
+  {
+    from: 'outcome-count-combinatorial-objects-by-determinant',
+    to: 'outcome-count-euler-circuits-by-best',
+    problemIds: ['abc336-g'],
+  },
+  {
+    from: 'outcome-factor-and-accelerate-transitions',
+    to: 'outcome-optimize-monge-transitions',
+    problemIds: ['abc348-g'],
+  },
+  {
+    from: 'outcome-maintain-connectivity-components',
+    to: 'outcome-share-threshold-checks-by-parallel-binary-search',
+    problemIds: ['abc394-g'],
+  },
+  {
+    from: 'outcome-maintain-connectivity-components',
+    to: 'outcome-optimize-mask-by-bitwise-feasibility',
+    problemIds: ['abc408-e'],
+  },
+  {
+    from: 'outcome-maintain-connectivity-components',
+    to: 'outcome-dualize-planar-cut-to-path',
+    problemIds: ['abc413-g'],
+  },
+  {
+    from: 'outcome-maintain-connectivity-components',
+    to: 'outcome-build-component-merge-tree',
+    problemIds: ['abc314-f'],
+  },
+  {
+    from: 'outcome-construct-optimal-spanning-tree',
+    to: 'outcome-build-component-merge-tree',
+    problemIds: ['abc383-e'],
+  },
+  {
+    from: 'outcome-normalize-equivalent-states',
+    to: 'outcome-normalize-string-to-primitive-period',
+    problemIds: ['abc312-ex'],
+  },
+  {
+    from: 'outcome-query-recursively-defined-string',
+    to: 'outcome-evolve-run-length-encoded-state',
+    problemIds: ['abc313-e'],
+  },
+  {
+    from: 'outcome-evaluate-and-compose-polynomials',
+    to: 'outcome-extract-rational-series-coefficient',
+    problemIds: ['abc300-ex'],
+  },
+  {
+    from: 'outcome-encode-counting-by-generating-function',
+    to: 'outcome-extract-rational-series-coefficient',
+    problemIds: ['abc300-ex'],
+  },
+  {
+    from: 'outcome-compute-convolution-or-correlation',
+    to: 'outcome-compute-online-relaxed-convolution',
+    problemIds: ['abc315-ex'],
+  },
+  {
+    from: 'outcome-decompose-by-prime-or-divisor',
+    to: 'outcome-sum-multiplicative-function-by-min25-sieve',
+    problemIds: ['abc370-g'],
+  },
+  {
+    from: 'outcome-decompose-by-prime-or-divisor',
+    to: 'outcome-represent-integers-as-two-squares',
+    problemIds: ['abc444-g'],
+  },
+  {
+    from: 'outcome-optimize-by-line-envelope',
+    to: 'outcome-restrict-geometric-candidates-to-boundary',
+    problemIds: ['abc341-g'],
+  },
+  {
+    from: 'outcome-reduce-geometry-to-algebraic-predicates',
+    to: 'outcome-enumerate-bounded-candidates-or-cases',
+    problemIds: ['abc312-e'],
+  },
+  {
+    from: 'outcome-jump-deterministic-transition',
+    to: 'outcome-solve-modular-constraints',
+    problemIds: ['abc371-g'],
+  },
+  {
+    from: 'outcome-solve-modular-constraints',
+    to: 'outcome-exploit-modular-periodicity',
+    problemIds: ['abc319-e'],
+  },
+  {
+    from: 'outcome-prune-dominated-candidates-once',
+    to: 'outcome-solve-isotonic-regression-by-pav',
+    problemIds: ['abc459-f'],
+  },
+  {
+    from: 'outcome-aggregate-rooted-tree',
+    to: 'outcome-flatten-tree-by-euler-order',
+    problemIds: ['abc240-e'],
+  },
+  {
+    from: 'outcome-augment-components-with-metadata',
+    to: 'outcome-build-component-merge-tree',
+    problemIds: ['abc314-f'],
+  },
+  {
+    from: 'outcome-compute-convolution-or-correlation',
+    to: 'outcome-encode-labeled-trees-by-prufer-code',
+    problemIds: ['abc303-ex'],
+  },
+  {
+    from: 'outcome-encode-counting-by-generating-function',
+    to: 'outcome-encode-labeled-trees-by-prufer-code',
+    problemIds: ['abc303-ex'],
+  },
+  {
+    from: 'outcome-reduce-integer-structure-by-gcd',
+    to: 'outcome-compute-directed-walk-period',
+    problemIds: ['abc306-g'],
+  },
+  {
+    from: 'outcome-bound-reachability-in-numerical-semigroup',
+    to: 'outcome-compute-directed-walk-period',
+    problemIds: ['abc306-g'],
+  },
+  {
+    from: 'outcome-compute-convolution-or-correlation',
+    to: 'outcome-remove-boundaries-by-reflection',
+    problemIds: ['abc309-ex'],
+  },
+  {
+    from: 'outcome-enumerate-subset-state-space',
+    to: 'outcome-count-labeled-structures-by-components',
+    problemIds: ['abc321-g'],
+  },
+  {
+    from: 'outcome-formulate-combinatorial-coefficients',
+    to: 'outcome-count-labeled-structures-by-components',
+    problemIds: ['abc327-g'],
+  },
+  {
+    from: 'outcome-prove-and-search-threshold',
+    to: 'outcome-optimize-ratio-by-parametric-search',
+    problemIds: ['abc324-f'],
+  },
+  {
+    from: 'outcome-recover-valid-witness',
+    to: 'outcome-design-query-code-by-information-bound',
+    problemIds: ['abc337-e'],
+  },
+  {
+    from: 'outcome-reduce-geometry-to-algebraic-predicates',
+    to: 'outcome-detect-crossing-by-cyclic-order',
+    problemIds: ['abc338-e'],
+  },
+  {
+    from: 'outcome-linearize-events',
+    to: 'outcome-maintain-order-through-crossing-events',
+    problemIds: ['abc344-g'],
+  },
+  {
+    from: 'outcome-reduce-selection-to-network-optimization',
+    to: 'outcome-optimize-poset-antichain-by-dilworth',
+    problemIds: ['abc237-ex', 'abc354-g'],
+  },
+  {
+    from: 'outcome-design-order-preserving-dp',
+    to: 'outcome-optimize-poset-antichain-by-dilworth',
+    problemIds: ['abc457-g'],
+  },
+  {
+    from: 'outcome-prove-greedy-order',
+    to: 'outcome-optimize-tree-order-by-cluster-contraction',
+    problemIds: ['abc376-g'],
+  },
+  {
+    from: 'outcome-design-minimal-sufficient-state',
+    to: 'outcome-design-frontier-profile-dp',
+    problemIds: ['abc296-ex', 'abc379-g'],
+  },
+  {
+    from: 'outcome-accelerate-fixed-linear-transition',
+    to: 'outcome-exponentiate-transition-over-semiring',
+    problemIds: ['abc236-g', 'abc445-f'],
+  },
+  {
+    from: 'outcome-accelerate-fixed-linear-transition',
+    to: 'outcome-exponentiate-associative-composition',
+    problemIds: ['abc448-e'],
+  },
+  {
+    from: 'outcome-recover-valid-witness',
+    to: 'outcome-reconstruct-tree-from-distance-matrix',
+    problemIds: ['abc451-e'],
+  },
+  {
+    from: 'outcome-condense-and-order-directed-graph',
+    to: 'outcome-process-dag-in-topological-order',
+    problemIds: ['abc324-f'],
+  },
+  {
+    from: 'outcome-select-state-graph-search',
+    to: 'outcome-enumerate-by-reversible-backtracking',
+    problemIds: ['abc284-e'],
+  },
+];
+
+const outcomeRefinementByKey = new Map<string, string>();
+for (const group of OUTCOME_REFINEMENT_GROUPS) {
+  for (const problemId of group.problemIds) {
+    const key = `${problemId}\u0000${group.from}`;
+    const previous = outcomeRefinementByKey.get(key);
+    if (previous !== undefined && previous !== group.to) {
+      throw new Error(`FINAL_TAXONOMY_CONFLICTING_REFINEMENT:${problemId}/${group.from}`);
+    }
+    outcomeRefinementByKey.set(key, group.to);
+  }
+}
+
+const refineOutcomeId = (problemId: string, outcomeId: string): string =>
+  outcomeRefinementByKey.get(`${problemId}\u0000${outcomeId}`) ?? outcomeId;
+
+const primaryOutcomeAdditionsByProblemId: Readonly<Record<string, readonly string[]>> = {
+  'abc228-g': ['outcome-run-dp-on-finite-automaton'],
+  'abc301-f': ['outcome-run-dp-on-finite-automaton'],
+  'abc305-g': ['outcome-run-dp-on-finite-automaton'],
+  'abc355-g': ['outcome-optimize-monge-transitions'],
+  'abc418-g': ['outcome-run-dp-on-finite-automaton'],
+  'abc419-f': ['outcome-run-dp-on-finite-automaton'],
+  'abc458-f': ['outcome-run-dp-on-finite-automaton'],
+};
+
+const additionalPrimaryOutcomeRemovalsByProblemId: Readonly<Record<string, readonly string[]>> = {
+  'abc300-ex': ['outcome-compute-convolution-or-correlation'],
+  'abc315-ex': ['outcome-encode-counting-by-generating-function'],
+};
+
+interface SupportingOutcomeAddition {
+  readonly outcomeId: string;
+  readonly claimPaths: readonly string[];
+}
+
+const supportingOutcomeAdditionsByProblemId: Readonly<
+  Record<string, readonly SupportingOutcomeAddition[]>
+> = {
+  'abc237-ex': [
+    {
+      outcomeId: 'outcome-solve-bipartite-matching',
+      claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc228-g': [
+    { outcomeId: 'outcome-enumerate-subset-state-space', claimPaths: ['/typicalTechniques/2'] },
+  ],
+  'abc236-f': [
+    {
+      outcomeId: 'outcome-maintain-xor-linear-basis',
+      claimPaths: ['/typicalTechniques/0', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc263-ex': [
+    {
+      outcomeId: 'outcome-detect-crossing-by-cyclic-order',
+      claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc285-g': [
+    {
+      outcomeId: 'outcome-model-max-flow-min-cut',
+      claimPaths: ['/typicalTechniques/0', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc294-ex': [
+    {
+      outcomeId: 'outcome-recur-by-edge-deletion-contraction',
+      claimPaths: ['/typicalTechniques/0'],
+    },
+  ],
+  'abc314-f': [
+    {
+      outcomeId: 'outcome-augment-components-with-metadata',
+      claimPaths: ['/typicalTechniques/0', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc295-ex': [
+    { outcomeId: 'outcome-enumerate-subset-state-space', claimPaths: ['/typicalTechniques/0'] },
+  ],
+  'abc296-ex': [
+    {
+      outcomeId: 'outcome-design-minimal-sufficient-state',
+      claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc300-ex': [
+    {
+      outcomeId: 'outcome-compute-convolution-or-correlation',
+      claimPaths: ['/typicalTechniques/0', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc303-ex': [
+    {
+      outcomeId: 'outcome-compute-convolution-or-correlation',
+      claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
+    },
+    {
+      outcomeId: 'outcome-encode-counting-by-generating-function',
+      claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc306-g': [
+    {
+      outcomeId: 'outcome-reduce-integer-structure-by-gcd',
+      claimPaths: ['/typicalTechniques/0', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc309-ex': [
+    {
+      outcomeId: 'outcome-compute-convolution-or-correlation',
+      claimPaths: [
+        '/typicalTechniques/1',
+        '/prerequisiteCandidates/0',
+        '/prerequisiteCandidates/1',
+      ],
+    },
+  ],
+  'abc315-ex': [
+    {
+      outcomeId: 'outcome-compute-convolution-or-correlation',
+      claimPaths: ['/prerequisiteCandidates/0'],
+    },
+    {
+      outcomeId: 'outcome-encode-counting-by-generating-function',
+      claimPaths: ['/typicalTechniques/1'],
+    },
+  ],
+  'abc321-g': [
+    {
+      outcomeId: 'outcome-enumerate-subset-state-space',
+      claimPaths: [
+        '/typicalTechniques/1',
+        '/typicalTechniques/2',
+        '/prerequisiteCandidates/1',
+        '/prerequisiteCandidates/2',
+      ],
+    },
+  ],
+  'abc324-f': [
+    {
+      outcomeId: 'outcome-prove-and-search-threshold',
+      claimPaths: [
+        '/typicalTechniques/2',
+        '/prerequisiteCandidates/1',
+        '/prerequisiteCandidates/2',
+      ],
+    },
+  ],
+  'abc327-g': [
+    {
+      outcomeId: 'outcome-formulate-combinatorial-coefficients',
+      claimPaths: ['/typicalTechniques/2', '/typicalTechniques/3', '/prerequisiteCandidates/2'],
+    },
+  ],
+  'abc336-g': [
+    {
+      outcomeId: 'outcome-count-combinatorial-objects-by-determinant',
+      claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc344-g': [
+    {
+      outcomeId: 'outcome-linearize-events',
+      claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc354-g': [
+    {
+      outcomeId: 'outcome-model-max-flow-min-cut',
+      claimPaths: ['/typicalTechniques/0', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc376-g': [
+    {
+      outcomeId: 'outcome-prove-greedy-order',
+      claimPaths: ['/typicalTechniques/0', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc379-g': [
+    {
+      outcomeId: 'outcome-design-minimal-sufficient-state',
+      claimPaths: ['/typicalTechniques/0', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc393-g': [
+    { outcomeId: 'outcome-model-min-cost-flow', claimPaths: ['/prerequisiteCandidates/0'] },
+  ],
+  'abc394-g': [
+    {
+      outcomeId: 'outcome-maintain-connectivity-components',
+      claimPaths: ['/typicalTechniques/0', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc399-g': [
+    {
+      outcomeId: 'outcome-solve-linear-system-and-rank',
+      claimPaths: ['/typicalTechniques/2', '/prerequisiteCandidates/1'],
+    },
+  ],
+  'abc408-e': [
+    {
+      outcomeId: 'outcome-maintain-connectivity-components',
+      claimPaths: ['/typicalTechniques/1', '/typicalTechniques/2', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc413-g': [
+    {
+      outcomeId: 'outcome-maintain-connectivity-components',
+      claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc424-f': [
+    {
+      outcomeId: 'outcome-detect-crossing-by-cyclic-order',
+      claimPaths: ['/typicalTechniques/0', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc429-f': [
+    {
+      outcomeId: 'outcome-exponentiate-transition-over-semiring',
+      claimPaths: ['/typicalTechniques/0', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc448-e': [
+    {
+      outcomeId: 'outcome-compute-in-modular-arithmetic',
+      claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc451-e': [
+    {
+      outcomeId: 'outcome-recover-valid-witness',
+      claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
+    },
+  ],
+  'abc457-g': [
+    {
+      outcomeId: 'outcome-design-order-preserving-dp',
+      claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
+    },
+  ],
+};
+
+type ClaimDispositionRoleOverride = 'primary' | 'supporting';
+const claimDispositionRoleOverrides: Readonly<Record<string, ClaimDispositionRoleOverride>> = {
+  [`abc303-ex\u0000/typicalTechniques/1\u0000primary`]: 'supporting',
+  [`abc309-ex\u0000/typicalTechniques/0\u0000problem_specific`]: 'primary',
+  [`abc309-ex\u0000/typicalTechniques/1\u0000primary`]: 'supporting',
+  [`abc327-g\u0000/typicalTechniques/2\u0000primary`]: 'supporting',
+  [`abc327-g\u0000/typicalTechniques/3\u0000same_tag`]: 'supporting',
+  [`abc337-e\u0000/typicalTechniques/0\u0000problem_specific`]: 'primary',
+};
+
+const primaryClaimPathAdditionsByProblemId: Readonly<Record<string, readonly string[]>> = {
+  'abc303-ex': ['/typicalTechniques/0'],
+  'abc327-g': ['/typicalTechniques/1'],
+};
+
+const tagIdsByOutcomeId = new Map<string, string[]>();
+for (const tag of FINAL_TAXONOMY_TAGS) {
+  for (const outcomeId of tag.learningOutcomeIds) {
+    tagIdsByOutcomeId.set(outcomeId, [...(tagIdsByOutcomeId.get(outcomeId) ?? []), tag.id]);
+  }
+}
+
+const primaryTagIdsForOutcomeIds = (outcomeIds: readonly string[]): readonly string[] =>
+  sortedUnique(
+    outcomeIds.flatMap((outcomeId) =>
+      (tagIdsByOutcomeId.get(outcomeId) ?? []).filter(
+        (tagId) => tagById.get(tagId)?.primaryEligible === true,
+      ),
+    ),
+  );
+
+const normalizeClaimDecision = (
+  problemId: string,
+  raw: CuratedProblemClaimDecision,
+): CuratedProblemClaimDecision => {
+  const primaryOutcomeId = refineOutcomeId(problemId, raw.primaryOutcomeId);
+  const removedAdditionalPrimaryOutcomeIds = new Set(
+    additionalPrimaryOutcomeRemovalsByProblemId[problemId] ?? [],
+  );
+  const additionalPrimaryOutcomeIds = sortedUnique([
+    ...raw.additionalPrimaryOutcomeIds.map((outcomeId) => refineOutcomeId(problemId, outcomeId)),
+    ...(primaryOutcomeAdditionsByProblemId[problemId] ?? []),
+  ]).filter(
+    (outcomeId) =>
+      outcomeId !== primaryOutcomeId && !removedAdditionalPrimaryOutcomeIds.has(outcomeId),
+  );
+  const primaryTagIds = primaryTagIdsForOutcomeIds([
+    primaryOutcomeId,
+    ...additionalPrimaryOutcomeIds,
+  ]);
+
+  const supportingOutcomeIdsByTagMutable = new Map<string, Set<string>>();
+  const finalSupportingTagIdsByRawTag = new Map<string, readonly string[]>();
+  for (const [rawTagId, rawOutcomeIds] of Object.entries(raw.supportingOutcomeIdsByTag)) {
+    const allNormalizedOutcomeIds = sortedUnique(
+      rawOutcomeIds.map((outcomeId) => refineOutcomeId(problemId, outcomeId)),
+    );
+    const overlapsPrimary = allNormalizedOutcomeIds.some(
+      (outcomeId) =>
+        outcomeId === primaryOutcomeId || additionalPrimaryOutcomeIds.includes(outcomeId),
+    );
+    const normalizedOutcomeIds = allNormalizedOutcomeIds.filter(
+      (outcomeId) =>
+        outcomeId !== primaryOutcomeId && !additionalPrimaryOutcomeIds.includes(outcomeId),
+    );
+    const normalizedTagIds = overlapsPrimary
+      ? primaryTagIds
+      : primaryTagIdsForOutcomeIds(normalizedOutcomeIds);
+    finalSupportingTagIdsByRawTag.set(rawTagId, normalizedTagIds);
+    for (const tagId of normalizedTagIds) {
+      if (primaryTagIds.includes(tagId)) continue;
+      const outcomes = supportingOutcomeIdsByTagMutable.get(tagId) ?? new Set<string>();
+      for (const outcomeId of normalizedOutcomeIds) {
+        if (tagById.get(tagId)?.learningOutcomeIds.includes(outcomeId)) outcomes.add(outcomeId);
+      }
+      supportingOutcomeIdsByTagMutable.set(tagId, outcomes);
+    }
+  }
+
+  const addedSupportingTagIdsByClaimPath = new Map<string, string[]>();
+  for (const addition of supportingOutcomeAdditionsByProblemId[problemId] ?? []) {
+    const tagIds = primaryTagIdsForOutcomeIds([addition.outcomeId]).filter(
+      (tagId) => !primaryTagIds.includes(tagId),
+    );
+    for (const tagId of tagIds) {
+      const outcomes = supportingOutcomeIdsByTagMutable.get(tagId) ?? new Set<string>();
+      outcomes.add(addition.outcomeId);
+      supportingOutcomeIdsByTagMutable.set(tagId, outcomes);
+    }
+    for (const claimPath of addition.claimPaths) {
+      addedSupportingTagIdsByClaimPath.set(
+        claimPath,
+        sortedUnique([...(addedSupportingTagIdsByClaimPath.get(claimPath) ?? []), ...tagIds]),
+      );
+    }
+  }
+
+  const dispositionByKey = new Map<string, CuratedInventoryClaimDisposition>();
+  for (const disposition of raw.dispositions) {
+    let normalizedDisposition: CuratedInventoryClaimDisposition;
+    const addedSupportingTagIds = addedSupportingTagIdsByClaimPath.get(disposition.claimPath) ?? [];
+    const roleOverride =
+      claimDispositionRoleOverrides[
+        `${problemId}\u0000${disposition.claimPath}\u0000${disposition.kind}`
+      ];
+    if (roleOverride === 'primary') {
+      normalizedDisposition = { ...disposition, kind: 'primary', tagIds: primaryTagIds };
+    } else if (roleOverride === 'supporting') {
+      if (addedSupportingTagIds.length === 0) {
+        throw new Error(
+          `FINAL_TAXONOMY_SUPPORTING_ROLE_OVERRIDE_TARGET_MISSING:${problemId}${disposition.claimPath}`,
+        );
+      }
+      normalizedDisposition = {
+        ...disposition,
+        kind: 'supporting',
+        tagIds: addedSupportingTagIds,
+      };
+    } else if (
+      (disposition.kind === 'baseline' || disposition.kind === 'problem_specific') &&
+      addedSupportingTagIds.length > 0
+    ) {
+      normalizedDisposition = { ...disposition, kind: 'supporting', tagIds: addedSupportingTagIds };
+    } else if (disposition.kind === 'baseline' || disposition.kind === 'problem_specific') {
+      normalizedDisposition = { ...disposition, tagIds: [] };
+    } else if (disposition.kind === 'primary' || disposition.kind === 'same_tag') {
+      normalizedDisposition = { ...disposition, tagIds: primaryTagIds };
+    } else {
+      const normalizedTagIds = sortedUnique(
+        disposition.tagIds.flatMap((rawTagId) => finalSupportingTagIdsByRawTag.get(rawTagId) ?? []),
+      );
+      normalizedDisposition = normalizedTagIds.some((tagId) => primaryTagIds.includes(tagId))
+        ? { ...disposition, kind: 'same_tag', tagIds: primaryTagIds }
+        : { ...disposition, tagIds: normalizedTagIds };
+    }
+    const key = `${normalizedDisposition.claimPath}\u0000${normalizedDisposition.kind}\u0000${normalizedDisposition.tagIds.join('\u0000')}`;
+    dispositionByKey.set(key, normalizedDisposition);
+    if (
+      addedSupportingTagIds.length > 0 &&
+      normalizedDisposition.kind !== 'supporting' &&
+      normalizedDisposition.kind !== 'baseline' &&
+      normalizedDisposition.kind !== 'problem_specific'
+    ) {
+      const addedDisposition: CuratedInventoryClaimDisposition = {
+        claimPath: disposition.claimPath,
+        kind: 'supporting',
+        tagIds: addedSupportingTagIds,
+      };
+      const addedKey = `${addedDisposition.claimPath}\u0000supporting\u0000${addedDisposition.tagIds.join('\u0000')}`;
+      dispositionByKey.set(addedKey, addedDisposition);
+    }
+  }
+  for (const claimPath of primaryClaimPathAdditionsByProblemId[problemId] ?? []) {
+    const sourceDisposition = raw.dispositions.find(
+      (disposition) => disposition.claimPath === claimPath,
+    );
+    if (sourceDisposition === undefined) {
+      throw new Error(
+        `FINAL_TAXONOMY_PRIMARY_ROLE_ADDITION_SOURCE_MISSING:${problemId}${claimPath}`,
+      );
+    }
+    const addedDisposition: CuratedInventoryClaimDisposition = {
+      ...sourceDisposition,
+      kind: 'primary',
+      tagIds: primaryTagIds,
+    };
+    const addedKey = `${claimPath}\u0000primary\u0000${primaryTagIds.join('\u0000')}`;
+    dispositionByKey.set(addedKey, addedDisposition);
+  }
+  const dispositions = [...dispositionByKey.values()];
+
+  return {
+    primaryOutcomeId,
+    additionalPrimaryOutcomeIds,
+    dispositions,
+    supportingOutcomeIdsByTag: Object.fromEntries(
+      [...supportingOutcomeIdsByTagMutable.entries()]
+        .filter(([, outcomeIds]) => outcomeIds.size > 0)
+        .sort(([left], [right]) => compareIds(left, right))
+        .map(([tagId, outcomeIds]) => [tagId, [...outcomeIds].sort(compareIds)]),
+    ),
+  };
+};
+
+const rawAssignmentProblemIds = Object.keys(RAW_EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS).sort(
+  compareIds,
+);
+const rawClaimDecisionProblemIds = Object.keys(RAW_FINAL_TAXONOMY_CLAIM_DECISIONS).sort(compareIds);
+if (
+  rawAssignmentProblemIds.length !== rawClaimDecisionProblemIds.length ||
+  rawAssignmentProblemIds.some(
+    (problemId, index) => problemId !== rawClaimDecisionProblemIds[index],
+  )
+) {
+  throw new Error('FINAL_TAXONOMY_RAW_ASSIGNMENT_CLAIM_COVERAGE_MISMATCH');
+}
+
+export const FINAL_TAXONOMY_CLAIM_DECISIONS: Readonly<Record<string, CuratedProblemClaimDecision>> =
+  Object.freeze(
+    Object.fromEntries(
+      Object.entries(RAW_FINAL_TAXONOMY_CLAIM_DECISIONS).map(([problemId, decision]) => [
+        problemId,
+        normalizeClaimDecision(problemId, decision),
+      ]),
+    ),
+  );
+
+export const EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS: Readonly<Record<string, string>> =
+  Object.freeze(
+    Object.fromEntries(
+      Object.entries(FINAL_TAXONOMY_CLAIM_DECISIONS).map(([problemId, decision]) => {
+        const tagId = primaryTagIdsForOutcomeIds([decision.primaryOutcomeId])[0];
+        if (tagId === undefined) {
+          throw new Error(`FINAL_TAXONOMY_REFINED_PRIMARY_TAG_MISSING:${problemId}`);
+        }
+        return [problemId, tagId];
+      }),
+    ),
+  );
+
+export const CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] =
+  RAW_CURATED_PRIMARY_OVERRIDES.map((override) => {
+    const decision = FINAL_TAXONOMY_CLAIM_DECISIONS[override.problemId];
+    if (!decision) return override;
+    const primaryTagId = primaryTagIdsForOutcomeIds([decision.primaryOutcomeId])[0];
+    const additionalPrimaryTagIds = primaryTagIdsForOutcomeIds(
+      decision.additionalPrimaryOutcomeIds,
+    );
+    if (primaryTagId === undefined) return override;
+    return {
+      ...override,
+      primaryTagId,
+      primaryOutcomeId: decision.primaryOutcomeId,
+      ...(additionalPrimaryTagIds.length > 0 ? { additionalPrimaryTagIds } : {}),
+    };
   });
 
 const evidenceReferences = (
@@ -4831,7 +8476,13 @@ export const buildFullCorpusPrimaryDecisionTable = (
           `FINAL_TAXONOMY_OVERRIDE_OUTCOME_STALE: ${record.problemId}/${override.primaryOutcomeId}/${primaryOutcomeId}`,
         );
       }
-      const additionalPrimaryTagIds = override?.additionalPrimaryTagIds ?? [];
+      const additionalPrimaryTagIds = sortedUnique(
+        claimDecision.additionalPrimaryOutcomeIds.flatMap((outcomeId) =>
+          (outcomeById.get(outcomeId)?.scopeTagIds ?? []).filter(
+            (tagId) => tagById.get(tagId)?.primaryEligible === true,
+          ),
+        ),
+      ).filter((tagId) => tagId !== primaryTag.id);
       for (const tagId of additionalPrimaryTagIds) {
         if (!tagById.get(tagId)?.primaryEligible) {
           throw new Error(
@@ -4908,8 +8559,16 @@ export const buildFullCorpusPrimaryDecisionTable = (
           (outcomeId) => outcomeById.get(outcomeId)?.learningUnitCandidateIds ?? [],
         ),
       ]);
+      const primaryLearningUnitIds = sortedUnique(
+        [primaryOutcomeId, ...additionalPrimaryOutcomeIds].flatMap(
+          (outcomeId) => outcomeById.get(outcomeId)?.learningUnitCandidateIds ?? [],
+        ),
+      );
       if (learningUnitCandidateIds.length === 0) {
         throw new Error(`FINAL_TAXONOMY_LEARNING_UNIT_MISSING: ${record.problemId}`);
+      }
+      if (primaryLearningUnitIds.length === 0) {
+        throw new Error(`FINAL_TAXONOMY_PRIMARY_LEARNING_UNIT_MISSING: ${record.problemId}`);
       }
       return {
         problemId: record.problemId,
@@ -4920,7 +8579,7 @@ export const buildFullCorpusPrimaryDecisionTable = (
         supportingOutcomeIds,
         supportingTagDecisions,
         learningUnitCandidateIds,
-        presentationUnitId: latestLearningUnitId(learningUnitCandidateIds),
+        presentationUnitId: latestLearningUnitId(primaryLearningUnitIds),
         decisionKind: override ? 'curated_semantic_override' : 'explicit_inventory_assignment',
         ambiguityStatus: override ? 'curated_override' : 'proposed_assignment',
         selectionRationale: override
@@ -5024,6 +8683,19 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
   const knownTagIds = new Set(FINAL_TAXONOMY_TAGS.map((tag) => tag.id));
   const knownOutcomeIds = new Set(FINAL_TAXONOMY_OUTCOMES.map((outcome) => outcome.id));
   const knownUnitIds = new Set(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => unit.id));
+  const retiredLegacyOutcomeIds = new Set([
+    'outcome-bound-total-work',
+    'outcome-characterize-walk-by-degrees',
+    'outcome-compare-objects-by-fingerprint',
+    'outcome-evaluate-and-compose-polynomials',
+    'outcome-exploit-convexity',
+    'outcome-maintain-dynamic-order-statistics',
+    'outcome-reduce-graph-by-peeling-or-kernelization',
+    'outcome-reduce-selection-to-network-optimization',
+    'outcome-share-or-revert-versions',
+    'outcome-transform-to-linear-system-or-rank',
+    'outcome-transform-to-math-structure',
+  ]);
   for (const outcomeId of SINGLE_PROBLEM_OUTCOME_IDS) {
     if (!knownOutcomeIds.has(outcomeId)) {
       diagnostics.push(`UNKNOWN_SINGLE_PROBLEM_OUTCOME:${outcomeId}`);
@@ -5032,8 +8704,12 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
   for (const unitId of SINGLE_PROBLEM_UNIT_IDS) {
     if (!knownUnitIds.has(unitId)) diagnostics.push(`UNKNOWN_SINGLE_PROBLEM_UNIT:${unitId}`);
   }
+  for (const tagId of SINGLE_PROBLEM_TAG_IDS) {
+    if (!knownTagIds.has(tagId)) diagnostics.push(`UNKNOWN_SINGLE_PROBLEM_TAG:${tagId}`);
+  }
   for (const unitId of Object.keys(UNIT_ORDER_REASONS)) {
-    if (!knownUnitIds.has(unitId)) diagnostics.push(`UNKNOWN_UNIT_ORDER_REASON:${unitId}`);
+    if (!knownUnitIds.has(unitId) && unitId !== 'unit-chapter-math-geometry')
+      diagnostics.push(`UNKNOWN_UNIT_ORDER_REASON:${unitId}`);
   }
   for (const unitId of Object.keys(UNIT_EXCLUDED_TOPICS)) {
     if (!knownUnitIds.has(unitId)) diagnostics.push(`UNKNOWN_UNIT_EXCLUDED_TOPICS:${unitId}`);
@@ -5049,7 +8725,8 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
   }
   for (const tag of FINAL_TAXONOMY_TAGS) {
     if (tag.aliases.length === 0) diagnostics.push(`TAG_ALIASES_MISSING:${tag.id}`);
-    if (tag.representativeProblemIds.length < 2) {
+    const minimumRepresentativeCount = SINGLE_PROBLEM_TAG_IDS.includes(tag.id) ? 1 : 2;
+    if (tag.representativeProblemIds.length < minimumRepresentativeCount) {
       diagnostics.push(`TAG_REPRESENTATIVES_INSUFFICIENT:${tag.id}`);
     }
     if (tag.parentId !== null && !knownTagIds.has(tag.parentId))
@@ -5081,7 +8758,8 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
     }
   }
   for (const outcomeId of Object.keys(OUTCOME_STATEMENTS)) {
-    if (!knownOutcomeIds.has(outcomeId)) diagnostics.push(`UNUSED_OUTCOME_STATEMENT:${outcomeId}`);
+    if (!knownOutcomeIds.has(outcomeId) && !retiredLegacyOutcomeIds.has(outcomeId))
+      diagnostics.push(`UNUSED_OUTCOME_STATEMENT:${outcomeId}`);
   }
   for (const outcome of FINAL_TAXONOMY_OUTCOMES) {
     if (!outcome.statement.trim()) diagnostics.push(`OUTCOME_STATEMENT_MISSING:${outcome.id}`);
@@ -5095,6 +8773,28 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
     for (const unitId of outcome.learningUnitCandidateIds) {
       if (!knownUnitIds.has(unitId))
         diagnostics.push(`UNKNOWN_OUTCOME_UNIT:${outcome.id}/${unitId}`);
+    }
+  }
+  const unitOrderIndex = new Map(
+    FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds.map((unitId, index) => [unitId, index]),
+  );
+  for (const outcome of FINAL_TAXONOMY_OUTCOMES) {
+    for (const prerequisiteOutcomeId of outcome.prerequisiteOutcomeIds) {
+      const prerequisiteOutcome = outcomeById.get(prerequisiteOutcomeId);
+      if (prerequisiteOutcome === undefined) continue;
+      for (const unitId of outcome.learningUnitCandidateIds) {
+        for (const prerequisiteUnitId of prerequisiteOutcome.learningUnitCandidateIds) {
+          if (
+            prerequisiteUnitId !== unitId &&
+            (unitOrderIndex.get(prerequisiteUnitId) ?? Number.POSITIVE_INFINITY) >=
+              (unitOrderIndex.get(unitId) ?? Number.NEGATIVE_INFINITY)
+          ) {
+            diagnostics.push(
+              `OUTCOME_UNIT_PREREQUISITE_ORDER:${outcome.id}/${unitId}/${prerequisiteOutcomeId}/${prerequisiteUnitId}`,
+            );
+          }
+        }
+      }
     }
   }
   for (const unit of FINAL_LEARNING_UNIT_CANDIDATES) {
@@ -5139,7 +8839,12 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
     deterministicTopologicalOrder(
       FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => ({
         id: unit.id,
-        prerequisiteIds: unit.additionalPrerequisiteUnitIds,
+        prerequisiteIds: [
+          ...new Set([
+            ...unit.additionalPrerequisiteUnitIds,
+            ...(unit.parentId === null ? [] : [unit.parentId]),
+          ]),
+        ],
       })),
     );
   } catch (error) {
@@ -5194,9 +8899,12 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
         `CURATED_CLAIM_PRIMARY_OUTCOME_INVALID:${problemId}/${claimDecision.primaryOutcomeId}`,
       );
     }
-    const primaryTagIds = [primaryTagId, ...(override?.additionalPrimaryTagIds ?? [])].filter(
-      (tagId): tagId is string => tagId !== undefined,
-    );
+    const primaryTagIds = [
+      primaryTagId,
+      ...claimDecision.additionalPrimaryOutcomeIds.flatMap(
+        (outcomeId) => outcomeById.get(outcomeId)?.scopeTagIds ?? [],
+      ),
+    ].filter((tagId): tagId is string => tagId !== undefined);
     const primaryOutcomeIds = [
       claimDecision.primaryOutcomeId,
       ...claimDecision.additionalPrimaryOutcomeIds,
