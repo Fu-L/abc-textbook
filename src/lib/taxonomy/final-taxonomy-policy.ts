@@ -5891,7 +5891,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-identify-bridges-and-articulations':
     'DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。',
   'outcome-use-cycle-space-basis':
-    '無向graphの全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning forest Fと各non-tree edge eが作る唯一のcycleからfundamental cycle basisを構築して、連結成分数Cに対するdim C(G)=M-N+Cを導ける。連結graphではC=1となる。さらにABC419-Gでは固定したs-t path P_0に対し、Phi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pであることから単射性を示し、simple s-t path数を2^(M-N+1)以下に抑えられる。',
+    '無向graphの全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning forestと各non-tree edgeが作るfundamental cycleからbasisを構成して、連結成分数Cに対するdim C(G)=M-N+Cを導ける。連結graphではC=1となる。さらに同一連結成分内のs,tに対して固定したs-t path P_0を取ると、任意のs-t path PについてPhi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pからこの写像が単射であることを示せる。したがってcycle-space dimensionを用いて、s-t path族の大きさを2^(dim C(G))以下に抑えられる。',
   'outcome-reduce-graph-by-peeling-or-kernelization':
     '削除可能な葉・低次数頂点を反復除去してcycle coreと各頂点の所属を特定するか、terminal以外の葉除去とdegree-2 chain縮約によってcycle rankに依存する小kernelを構成できる。',
   'outcome-linearize-static-range-information':

@@ -27,7 +27,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "81fb1a99f3b5b9d839e65f584aa43aa81d2edf39489f6ed848b3afc2c17b03d6",
+    "rulesDigest": "62cecb5f5fbf425b46016d261ad3c8a8be6f8afd23fff959058a2ea869986640",
     "requiredReviewMode": "third_party",
     "riskReasons": ["major_classification_change"],
     "authoringSkillName": "abc-explanation-author",
@@ -30205,7 +30205,7 @@
       "kind": "outcome",
       "entity": {
         "id": "outcome-use-cycle-space-basis",
-        "statement": "無向graphの全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning forest Fと各non-tree edge eが作る唯一のcycleからfundamental cycle basisを構築して、連結成分数Cに対するdim C(G)=M-N+Cを導ける。連結graphではC=1となる。さらにABC419-Gでは固定したs-t path P_0に対し、Phi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pであることから単射性を示し、simple s-t path数を2^(M-N+1)以下に抑えられる。",
+        "statement": "無向graphの全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning forestと各non-tree edgeが作るfundamental cycleからbasisを構成して、連結成分数Cに対するdim C(G)=M-N+Cを導ける。連結graphではC=1となる。さらに同一連結成分内のs,tに対して固定したs-t path P_0を取ると、任意のs-t path PについてPhi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pからこの写像が単射であることを示せる。したがってcycle-space dimensionを用いて、s-t path族の大きさを2^(dim C(G))以下に抑えられる。",
         "prerequisiteOutcomeIds": [],
         "scopeIds": ["abc419-g", "tag-cycle-space-basis", "unit-cycle-space-basis"]
       },
@@ -305992,8 +305992,8 @@
     "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"
   ],
   "reviewEvidenceRefs": [],
-  "taxonomySubjectDigest": "760a4021bd6360e7bf8e0f00661fefcad79e1bc7cae92b362582ce3db06573b6",
-  "taxonomyDigest": "4d6d1b216d0efad930caee137a64770a6d69a2638e60274b2055273975e6a88f",
+  "taxonomySubjectDigest": "d7e57083ec0d6c975244379f5eb443a84751e58b1a4135d1e99b22e961ff45d3",
+  "taxonomyDigest": "10fb9cce7e8b4518e4f4717182b2e99f0d4920c03123dea73c04a6f40bf39ea7",
   "tagDagDigest": "596fef488a932c9d90801e159dcf7ecdad2c9bf449b1bd956f66dfaa7f38330d",
   "learningUnitDagDigest": "41221efeee3621e39f625773e632dd4a731c9c241552e59fda8d25098d097633",
   "orderDigest": "a9c295fab81de3429c0d4de327f7e558fbfff07f4a859d6c8bc153f6a2916127",
@@ -306003,5 +306003,5 @@
   "acceptedAt": null,
   "holdReasons": ["CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE"],
   "canonicalMaterializationAllowed": false,
-  "buildDigest": "d3021cdceb86641757a77fca1a009914d402a20b9d8ae3d59a3c748ee8fb0de0"
+  "buildDigest": "ef144007631b2780733b0c1e6683114d0bd3f3c0680e5799f5ddb7430b0a521d"
 }

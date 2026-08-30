@@ -665,6 +665,10 @@ describe('final taxonomy policy', () => {
     expect(outcomeById.get('outcome-use-cycle-space-basis')?.statement).toContain(
       '連結graphではC=1',
     );
+    expect(outcomeById.get('outcome-use-cycle-space-basis')?.statement).toContain(
+      '同一連結成分内のs,t',
+    );
+    expect(outcomeById.get('outcome-use-cycle-space-basis')?.statement).not.toContain('ABC419-G');
     expect(outcomeById.get('outcome-use-cycle-space-basis')?.statement).toContain('P XOR P_0');
   });
 
