@@ -1100,8 +1100,9 @@ export const FINAL_TAG_DIRECTED_RELATION_SEEDS: readonly FinalTagRelationSeed[] 
   {
     sourceTagId: 'tag-bostan-mori',
     targetTagId: 'tag-generating-functions',
-    type: 'specialization',
-    rationale: '有理生成関数の巨大次数係数を偶奇分離で抽出する目的へ特殊化する。',
+    type: 'extension',
+    rationale:
+      '組合せ構造を生成関数へ符号化する技能に対し、既に与えられた有理生成関数から巨大次数係数を偶奇分離で抽出する新しい目的・操作を加える。',
   },
   {
     sourceTagId: 'tag-steiner-tree-dp',
@@ -1211,8 +1212,9 @@ export const FINAL_TAG_DIRECTED_RELATION_SEEDS: readonly FinalTagRelationSeed[] 
   {
     sourceTagId: 'tag-polynomial-taylor-shift',
     targetTagId: 'tag-convolution',
-    type: 'implementation_substrate',
-    rationale: '二項展開を階乗で正規化し、反転した係数列との一回の畳み込みへ落とす。',
+    type: 'reduction',
+    rationale:
+      'P(x+a)の係数式を階乗で正規化し、係数反転を施した二列の一回の畳み込みへ意味保存変換する。',
   },
   {
     sourceTagId: 'tag-formal-power-series',
@@ -1223,8 +1225,9 @@ export const FINAL_TAG_DIRECTED_RELATION_SEEDS: readonly FinalTagRelationSeed[] 
   {
     sourceTagId: 'tag-poset-dilworth-antichain',
     targetTagId: 'tag-bipartite-matching-hall',
-    type: 'implementation_substrate',
-    rationale: 'posetのchain coverを二部matchingへ写し、Dilworth型双対を計算する。',
+    type: 'reduction',
+    rationale:
+      'posetの比較可能性から二部graphを構成し、最小chain cover・最大antichainの最適化を最大二部matchingへ意味保存変換する。',
   },
   {
     sourceTagId: 'tag-tree-precedence-contraction',

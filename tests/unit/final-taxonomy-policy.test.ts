@@ -376,13 +376,21 @@ describe('final taxonomy policy', () => {
     expect(tagById.get('tag-subset-convolution')?.relatedTags).toContainEqual(
       expect.objectContaining({ tagId: 'tag-convolution', type: 'analogy' }),
     );
+    expect(tagById.get('tag-bostan-mori')?.relatedTags).toContainEqual(
+      expect.objectContaining({ tagId: 'tag-generating-functions', type: 'extension' }),
+    );
+    expect(tagById.get('tag-polynomial-taylor-shift')?.relatedTags).toContainEqual(
+      expect.objectContaining({ tagId: 'tag-convolution', type: 'reduction' }),
+    );
+    expect(tagById.get('tag-poset-dilworth-antichain')?.relatedTags).toContainEqual(
+      expect.objectContaining({ tagId: 'tag-bipartite-matching-hall', type: 'reduction' }),
+    );
     expect(
       FINAL_TAG_DIRECTED_RELATION_SEEDS.filter(({ type }) => type === 'specialization').map(
         ({ sourceTagId, targetTagId }) => `${sourceTagId}->${targetTagId}`,
       ),
     ).toEqual([
       'tag-aho-corasick->tag-finite-pattern-automaton',
-      'tag-bostan-mori->tag-generating-functions',
       'tag-steiner-tree-dp->tag-subset-bitmask-dp',
     ]);
     expect(tagById.get('tag-subset-zeta-mobius-transform')?.relatedTags).toContainEqual(

@@ -27,7 +27,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "a13d11af1c1d893bcf58c538c97b83414d8c99bf494987b2bb7b0ee7b3d788cf",
+    "rulesDigest": "986d911a2343f052a986f06a2fa289e59b99ca41cad5d443bd2cbfab4010a735",
     "requiredReviewMode": "third_party",
     "riskReasons": ["major_classification_change"],
     "authoringSkillName": "abc-explanation-author",
@@ -6086,8 +6086,8 @@
         "relatedTags": [
           {
             "tagId": "tag-generating-functions",
-            "type": "specialization",
-            "rationale": "有理生成関数の巨大次数係数を偶奇分離で抽出する目的へ特殊化する。"
+            "type": "extension",
+            "rationale": "組合せ構造を生成関数へ符号化する技能に対し、既に与えられた有理生成関数から巨大次数係数を偶奇分離で抽出する新しい目的・操作を加える。"
           }
         ],
         "learningOutcomeIds": ["outcome-extract-rational-series-coefficient"],
@@ -12548,8 +12548,8 @@
         "relatedTags": [
           {
             "tagId": "tag-convolution",
-            "type": "implementation_substrate",
-            "rationale": "二項展開を階乗で正規化し、反転した係数列との一回の畳み込みへ落とす。"
+            "type": "reduction",
+            "rationale": "P(x+a)の係数式を階乗で正規化し、係数反転を施した二列の一回の畳み込みへ意味保存変換する。"
           }
         ],
         "learningOutcomeIds": ["outcome-shift-polynomial-by-factorial-convolution"],
@@ -12601,8 +12601,8 @@
         "relatedTags": [
           {
             "tagId": "tag-bipartite-matching-hall",
-            "type": "implementation_substrate",
-            "rationale": "posetのchain coverを二部matchingへ写し、Dilworth型双対を計算する。"
+            "type": "reduction",
+            "rationale": "posetの比較可能性から二部graphを構成し、最小chain cover・最大antichainの最適化を最大二部matchingへ意味保存変換する。"
           }
         ],
         "learningOutcomeIds": ["outcome-optimize-poset-antichain-by-dilworth"],
@@ -305900,8 +305900,8 @@
     "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"
   ],
   "reviewEvidenceRefs": [],
-  "taxonomySubjectDigest": "8f6422cb1426e060d6a8b76df3a57caa8f5c48005efd78f7a75d44ffda5b4b0a",
-  "taxonomyDigest": "ddf525db277cc07a6ceafa7c6c9601f32d8f50c0331f175b42884b91382190f8",
+  "taxonomySubjectDigest": "f31dfac07b54bcaf00cdcf150b38ea71854815eaf1061ab69badf99e4ea8d9ef",
+  "taxonomyDigest": "f95d5e12afa3bba5654928bd471ef9ea77a8ced653324eb1595fbd65bde2723a",
   "tagDagDigest": "89b9b6fbee17902c8c2b0565adf9c249d784c31909ac1ae31d281666f8b8a098",
   "learningUnitDagDigest": "2c9d8c934b607a820c15c8dfa5b48e7ceea71a3e5894e8ef39f836b9dd55fc80",
   "orderDigest": "494259b90e99dd7028602fba5ad48168b918befef0463eb153630e1f004ada51",
@@ -305911,5 +305911,5 @@
   "acceptedAt": null,
   "holdReasons": ["CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE"],
   "canonicalMaterializationAllowed": false,
-  "buildDigest": "92a5548c116b5846f11a81a9a96b2743a8dd21bc3dcf8c53f692fc21e1512fbc"
+  "buildDigest": "8136f803fe10dcc546498b1779805d1e2854a445a1f28194e715f24845184249"
 }
