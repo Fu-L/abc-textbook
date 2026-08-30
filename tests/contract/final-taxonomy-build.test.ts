@@ -65,6 +65,36 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(placementByProblemId.get('abc335-g')?.additionalPrimaryOutcomeIds).toEqual([
       'outcome-find-period-by-multiplicative-order',
     ]);
+    expect(placementByProblemId.get('abc419-g')).toMatchObject({
+      primaryTagIds: ['tag-cycle-space-basis', 'tag-near-tree-kernelization'],
+      primaryOutcomeId: 'outcome-kernelize-near-tree-graph',
+      additionalPrimaryOutcomeIds: ['outcome-use-cycle-space-basis'],
+      presentationUnitId: 'unit-near-tree-kernelization',
+    });
+    const nearTreeTag = build.finalCandidates.find(
+      (candidate) =>
+        candidate.kind === 'tag' && candidate.entity.id === 'tag-near-tree-kernelization',
+    );
+    const nearTreeUnit = build.finalCandidates.find(
+      (candidate) =>
+        candidate.kind === 'unit' && candidate.entity.id === 'unit-near-tree-kernelization',
+    );
+    const cycleSpaceOutcome = build.finalCandidates.find(
+      (candidate) =>
+        candidate.kind === 'outcome' && candidate.entity.id === 'outcome-use-cycle-space-basis',
+    );
+    expect(nearTreeTag?.entity).toMatchObject({
+      prerequisiteTagIds: ['tag-cycle-space-basis', 'tag-graph-core-peeling'],
+    });
+    expect(nearTreeUnit?.entity).toMatchObject({
+      additionalPrerequisiteUnitIds: ['unit-cycle-space-basis', 'unit-graph-core'],
+    });
+    expect(cycleSpaceOutcome?.evidenceRefs).toEqual([
+      expect.objectContaining({
+        problemId: 'abc419-g',
+        claimPath: '/outcomeCandidates/1',
+      }),
+    ]);
     expect(build.placements.every(({ kind }) => kind === 'full')).toBe(true);
     expect(build.integrationMap.entries).toHaveLength(FINAL_TAXONOMY_PREVIEW_ENTITY_COUNT);
     expect(build.sourceRevisionIds).toHaveLength(1738);

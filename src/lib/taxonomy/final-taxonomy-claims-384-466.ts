@@ -1185,10 +1185,17 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     [
       ['typicalTechniques', 0, 'primary', 'tag-graph-core-peeling'],
       ['typicalTechniques', 1, 'same_tag', 'tag-graph-core-peeling'],
-      ['typicalTechniques', 2, 'supporting', 'tag-bounded-enumeration'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-graph-core-peeling'],
+      ['typicalTechniques', 2, 'primary', 'tag-cycle-space-basis'],
+      ['typicalTechniques', 3, 'supporting', 'tag-bounded-enumeration'],
+      ['typicalTechniques', 4, 'supporting', 'tag-backtracking-search'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-cycle-space-basis'],
+      ['prerequisiteCandidates', 1, 'same_tag', 'tag-graph-core-peeling'],
+      ['prerequisiteCandidates', 2, 'supporting', 'tag-backtracking-search'],
     ],
-    { 'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'] },
+    {
+      'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'],
+      'tag-backtracking-search': ['outcome-enumerate-by-reversible-backtracking'],
+    },
   ),
   'abc420-e': decision('outcome-augment-components-with-metadata', [
     ['typicalTechniques', 0, 'primary', 'tag-dsu-connectivity'],

@@ -17,7 +17,11 @@
   "reasoningPath": {
     "observations": [
       {
-        "text": "cycle rank K=M-N+1≤21で、任意二頂点間のsimple path数はcycle spaceとのXOR写像から高々2^Kである。",
+        "text": "すべての頂点の次数が偶数となる辺部分集合全体は、XOR（対称差）を加法としてF_2上のcycle spaceをなす。spanning tree Tを一つ固定すると、各non-tree edge eについてT+eに生じる唯一のcycleがfundamental cycle basisをなし、連結graphではdim C(G)=M-N+1=Kとなる。",
+        "evidenceIds": ["evidence-official-analysis"]
+      },
+      {
+        "text": "固定した1-N simple path P_0に対し、各simple path PをPhi(P)=P XOR P_0へ写す。端点を含む全頂点で次数parityが打ち消されるのでPhi(P)はcycle spaceに属し、さらにPhi(P) XOR P_0=PよりPを一意に復元できる。したがってPhiは単射で、simple path総数は|C(G)|=2^K以下である。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
@@ -68,9 +72,21 @@
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "小cycle rankによるpath列挙",
-      "trigger": "M-N+1が小さくsimple path総数が2^K以下に抑えられるとき。",
-      "application": "縮約core上でvisitedを持つDFSを行う。",
+      "name": "cycle space・fundamental cycle basis",
+      "trigger": "連結無向graphでM-N+1が小さく、cycleやterminal間pathの候補数を理論的に抑えたいとき。",
+      "application": "全頂点が偶数次数となる辺集合をF_2上のcycle spaceとし、spanning tree Tと各non-tree edge eが作る唯一のcycleからfundamental cycle basisを構成する。dim C(G)=M-N+1を導き、Phi(P)=P XOR P_0がcycle spaceに入り、かつPを復元できることから、simple s-t path数を2^(M-N+1)以下に抑える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "小さなcycle rankをparameterとする候補全列挙",
+      "trigger": "候補数が2^K以下と証明でき、Kが十分小さいとき。",
+      "application": "前処理で各1-N simple pathあたりの仕事量をO(K)に抑えたうえで、全候補をO(K 2^K)で直接評価する。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "name": "可逆なvisited状態によるsimple path backtracking",
+      "trigger": "同じ頂点を再訪問しないpathを、現在の再帰pathだけを状態にして全列挙するとき。",
+      "application": "頂点に入るときvisitedをmarkし、未訪問隣接へ再帰し、戻るときにunmarkして別branchの状態を汚さない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -83,7 +99,15 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "cycle space/rank、leaf peeling、weighted multigraph上のsimple path DFSを理解している。",
+      "text": "DFSでspanning treeを構築し、辺集合のXOR（対称差）をF_2上の加法として扱える。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "terminalを削除しないleaf peelingと、元chainの長さを辺weightへ移すdegree-2 chain縮約を理解している。",
+      "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "simple path DFSでvisitedを現在の再帰pathに対応させ、再帰から戻るときに更新をundoできる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -97,11 +121,15 @@
     {
       "text": "near-treeな巨大graphの全1-N simple pathを、edge数別にO(N+K2^K)で数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
+    },
+    {
+      "text": "全頂点が偶数次数となる辺集合をcycle spaceとして扱い、fundamental cycle basisからdim C(G)=M-N+1を導ける。さらに固定pathとのXORがcycle spaceへの写像となり、逆写像を持つことからs-t path族上で単射であると証明できる。",
+      "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "reviewAdvice": [
     {
-      "text": "tree、terminalへの枝、theta graphのparallel chains、cycleから不要leafが伸びる例を元graphのsimple path列挙と比較する。",
+      "text": "tree・単一cycle・theta graphでfundamental cycle basisとdim C(G)を確認し、異なるs-t pathがP XOR P_0で異なるcycle-space要素へ写ることを検証する。その上でterminalへの枝、parallel chains、不要leafが伸びる例を元graphのsimple path列挙と比較する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

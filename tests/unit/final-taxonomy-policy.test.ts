@@ -61,9 +61,9 @@ const loadedDecisionTable = loadedRecords.then((records) =>
 describe('final taxonomy policy', () => {
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
-    expect(FINAL_TAXONOMY_TAGS).toHaveLength(189);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(192);
-    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(209);
+    expect(FINAL_TAXONOMY_TAGS).toHaveLength(190);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(193);
+    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(210);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
       'tag-dp-state-transition',
@@ -105,6 +105,7 @@ describe('final taxonomy policy', () => {
         'tag-polynomial-taylor-shift',
         'tag-linear-matroid-intersection',
         'tag-min-weight-general-perfect-matching',
+        'tag-cycle-space-basis',
         'tag-graph-potential-propagation',
         'tag-difference-constraints',
         'tag-kruskal-threshold-sweep',
@@ -152,6 +153,7 @@ describe('final taxonomy policy', () => {
     expect(tagById.get('tag-min-weight-general-perfect-matching')?.aliases).toContain(
       'minimum-weight perfect matching',
     );
+    expect(tagById.get('tag-cycle-space-basis')?.aliases).toContain('cycle space');
 
     const learnerTermOwners = new Map<string, string[]>();
     for (const tag of FINAL_TAXONOMY_TAGS) {
@@ -596,6 +598,66 @@ describe('final taxonomy policy', () => {
     expect(unitById.size).toBe(FINAL_LEARNING_UNIT_CANDIDATES.length);
   });
 
+  it('separates cycle-space reasoning from near-tree kernelization without a lowlink prerequisite', async () => {
+    const table = await loadedDecisionTable;
+    const decision = table.decisions.find(({ problemId }) => problemId === 'abc419-g');
+    const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
+    const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
+    const unitById = new Map(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => [unit.id, unit]));
+    const orderIndex = new Map(
+      FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds.map((unitId, index) => [unitId, index]),
+    );
+
+    expect(decision?.primaryTagIds).toEqual([
+      'tag-cycle-space-basis',
+      'tag-near-tree-kernelization',
+    ]);
+    expect(decision?.primaryOutcomeId).toBe('outcome-kernelize-near-tree-graph');
+    expect(decision?.additionalPrimaryOutcomeIds).toEqual(['outcome-use-cycle-space-basis']);
+    expect(decision?.presentationUnitId).toBe('unit-near-tree-kernelization');
+    expect(decision?.supportingTagIds).toEqual([
+      'tag-backtracking-search',
+      'tag-bounded-enumeration',
+    ]);
+    expect(
+      decision?.claimDispositions.find(
+        ({ claimRef, kind }) => claimRef.claimPath === '/typicalTechniques/2' && kind === 'primary',
+      )?.tagIds,
+    ).toEqual(['tag-cycle-space-basis']);
+
+    expect(tagById.get('tag-near-tree-kernelization')?.prerequisiteTagIds).toEqual([
+      'tag-cycle-space-basis',
+      'tag-graph-core-peeling',
+    ]);
+    expect(tagById.get('tag-near-tree-kernelization')?.prerequisiteTagIds).not.toContain(
+      'tag-lowlink-critical-structure',
+    );
+    expect(tagById.get('tag-cycle-space-basis')?.relatedTags).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ tagId: 'tag-degree-parity-subgraph', type: 'analogy' }),
+        expect.objectContaining({ tagId: 'tag-xor-linear-basis', type: 'analogy' }),
+      ]),
+    );
+    expect(unitById.get('unit-cycle-space-basis')).toMatchObject({
+      kind: 'section',
+      parentId: 'unit-chapter-graph',
+    });
+    expect(unitById.get('unit-cycle-space-basis')?.excludedTopics).toEqual(
+      expect.arrayContaining([expect.stringContaining('橋・関節点')]),
+    );
+    expect(unitById.get('unit-near-tree-kernelization')?.additionalPrerequisiteUnitIds).toEqual([
+      'unit-cycle-space-basis',
+      'unit-graph-core',
+    ]);
+    expect(orderIndex.get('unit-cycle-space-basis') ?? Number.POSITIVE_INFINITY).toBeLessThan(
+      orderIndex.get('unit-near-tree-kernelization') ?? -1,
+    );
+    expect(outcomeById.get('outcome-use-cycle-space-basis')?.statement).toMatch(
+      /dim C\(G\)=M-N\+1/u,
+    );
+    expect(outcomeById.get('outcome-use-cycle-space-basis')?.statement).toContain('P XOR P_0');
+  });
+
   it('keeps advanced recognition skills as Home and implementation substrates as supporting', async () => {
     const table = await loadedDecisionTable;
     const byProblemId = new Map(table.decisions.map((decision) => [decision.problemId, decision]));
@@ -938,7 +1000,7 @@ describe('final taxonomy policy', () => {
     const multiPrimaryDecisions = table.decisions.filter(
       (decision) => decision.additionalPrimaryOutcomeIds.length > 0,
     );
-    expect(multiPrimaryDecisions).toHaveLength(50);
+    expect(multiPrimaryDecisions).toHaveLength(51);
     expect(
       multiPrimaryDecisions.some((decision) =>
         decision.claimDispositions.some(

@@ -5,12 +5,12 @@
   "inputs": {
     "inventory": {
       "evidencePath": "docs/verification/bootstrap/technique-inventory.json",
-      "evidenceDigest": "fcb9557ded3208bf5f380eae3d5f1f5320fc689e62b5813dfa0f49cbd1bcd1a9",
-      "inventoryDigest": "38708367165792691030ef62b15a90f3343633d0d5338e19537de1c054e5f952",
-      "corpusDigest": "009e4110050f7beef56ff6c1adb547928190e2c7149bc08215dc846050858cca",
+      "evidenceDigest": "790f98c0ce2806421627b930cfb033d7f05ab9cf8a5fa86ecb73bc76dd24399f",
+      "inventoryDigest": "ba6570b3b345f19c9c099043e0d4ca3d961614d695c0242db8e94ff4429e3cae",
+      "corpusDigest": "c51c9d55f0a1331a480db1ef087672fd7da900c92378c6d8bafa02bdbce18118",
       "authoringEvidencePath": "docs/verification/bootstrap/technique-inventory-authoring.json",
-      "authoringEvidenceDigest": "9201a51f1c9281c2f8d925b9d40a6325b6ed63684d19f70bb4cc12160392f96e",
-      "authoringInventoryDigest": "0e2da085bdec5d066567b76c8fa273b2dd84147b8766dd4a00a08d6966e77e1c",
+      "authoringEvidenceDigest": "56ae5415635e635a96708d48bb4757e07ead349021b8de48a375184174652dc0",
+      "authoringInventoryDigest": "49a77b3d2e22730a6a6dbb3fb91aa6fb4988c35cca8b9446ea72f18a54825efa",
       "normalizedSourceSetDigest": "ab1f7d2fde4351b84651aafe5d9321269a45a84d9d739be59c8b1ed32f7cb771"
     },
     "previewSnapshot": {
@@ -27,7 +27,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "2fec3783dfe9c2ba4dc01b7785ce69ade09b0c40cafa168450179b8359afc652",
+    "rulesDigest": "423a135ddc92395dc9d42eaa898da2535128586ce20ac68f7a099876de9ef3c1",
     "requiredReviewMode": "third_party",
     "riskReasons": ["major_classification_change"],
     "authoringSkillName": "abc-explanation-author",
@@ -37,13 +37,13 @@
     "writingPolicyDigest": "0f93019c063fe7806f341c962258066aa7f58e4bc85d5dc3ddd870754706e2e4",
     "sourceNormalizationVersion": "1.0.0",
     "workManifestPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-    "workManifestDigest": "347cd01880a237bc154d20a890715b4e0e1b3abb5171ab850e05ed9030646b6b"
+    "workManifestDigest": "4b45cf260e4014a8ae7a9b4e11c668a69b4335d05c31f206443b09d3aa6f0a03"
   },
   "integrationMap": {
     "schemaVersion": "2.0.0",
     "evidenceId": "final-taxonomy-integration-initial-v1",
     "previewId": "initial-v1",
-    "inventoryDigest": "38708367165792691030ef62b15a90f3343633d0d5338e19537de1c054e5f952",
+    "inventoryDigest": "ba6570b3b345f19c9c099043e0d4ca3d961614d695c0242db8e94ff4429e3cae",
     "previewSnapshotDigest": "719ecf851c4a5e8a565ac2184d653c1b0042dbfcea152b465c1580ad17753f2c",
     "provisionalEvidence": {
       "schemaVersion": "1.0.0",
@@ -5256,10 +5256,10 @@
     ],
     "status": "proposed",
     "canonicalMaterializationAllowed": false,
-    "integrationSubjectDigest": "51992962c01dbf0f079395b6a33abc35b9fa4c0ca26d708ae5762b226e6fe1e1",
-    "integrationDigest": "f60fbda6af7018a92011fdfca282c9b977e7ac49f195bdcdd2aef669fa037f7a"
+    "integrationSubjectDigest": "e6686bb6800f44344e82e717decee6b3a810d9ae616a7621fe61e1533f83e75d",
+    "integrationDigest": "a559498ff3ba314be7649b38c94719efef269e63c69812104bf066c6b43f3b75"
   },
-  "integrationMapDigest": "f60fbda6af7018a92011fdfca282c9b977e7ac49f195bdcdd2aef669fa037f7a",
+  "integrationMapDigest": "a559498ff3ba314be7649b38c94719efef269e63c69812104bf066c6b43f3b75",
   "finalCandidates": [
     {
       "kind": "tag",
@@ -5599,7 +5599,7 @@
           }
         ],
         "learningOutcomeIds": ["outcome-enumerate-by-reversible-backtracking"],
-        "representativeProblemIds": ["abc284-e"],
+        "representativeProblemIds": ["abc284-e", "abc419-g"],
         "aliases": ["backtracking", "mark-and-unmark DFS", "バックトラック"],
         "formerNames": [],
         "lifecycle": "active",
@@ -5607,7 +5607,9 @@
       },
       "sourceRevisionIds": [
         "source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1",
-        "source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"
+        "source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f",
+        "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+        "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
       ],
       "evidenceRefs": [
         {
@@ -5617,6 +5619,15 @@
           "sourceRevisionIds": [
             "source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1",
             "source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/typicalTechniques/4",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
           ]
         }
       ],
@@ -6871,6 +6882,70 @@
     {
       "kind": "tag",
       "entity": {
+        "id": "tag-cycle-space-basis",
+        "name": "cycle space・fundamental cycle basis",
+        "definition": "連結無向graphで全頂点が偶数次数となる辺集合をF_2上のcycle spaceとして扱い、spanning tree Tと各non-tree edge eが作る唯一のcycleからfundamental cycle basisと次元M-N+1を導く。",
+        "parentId": "tag-graph-model-structure",
+        "prerequisiteTagIds": [],
+        "semanticSignature": {
+          "objectPatterns": [
+            "non-tree edge",
+            "s-t path",
+            "spanning tree",
+            "辺集合",
+            "連結無向graph"
+          ],
+          "triggerPatterns": ["M-N+1が小さい", "cycle族", "simple path数を抑える", "辺集合をXOR"],
+          "invariantPatterns": [
+            "P XOR P_0",
+            "dim C(G)=M-N+1",
+            "全頂点の次数が偶数",
+            "対称差に関して閉じる"
+          ],
+          "goalPatterns": ["cycle basis構築", "cycle空間の列挙", "simple path数の上界"],
+          "excludedPatterns": [],
+          "minimumDimensions": 2,
+          "requireObjectForStrictRecall": false
+        },
+        "relatedTags": [
+          {
+            "tagId": "tag-degree-parity-subgraph",
+            "type": "analogy",
+            "rationale": "cycle spaceはincidence境界が0の辺集合全体であり、奇数次数頂点集合Tを固定したT-joinの解集合は、解が存在すればcycle spaceのaffine cosetになる。特に同じTを実現する二つの辺集合のXORはcycle spaceに属する。"
+          },
+          {
+            "tagId": "tag-xor-linear-basis",
+            "type": "analogy",
+            "rationale": "辺集合の対称差と整数のbitwise XORはどちらもF_2上の線形結合・独立性・基底で整理できるが、cycle spaceは偶数次数制約とfundamental cycleに固有の構成を持つ。"
+          }
+        ],
+        "learningOutcomeIds": ["outcome-use-cycle-space-basis"],
+        "representativeProblemIds": ["abc419-g"],
+        "aliases": ["cycle space", "fundamental cycle basis", "サイクル基底", "サイクル空間"],
+        "formerNames": [],
+        "lifecycle": "active",
+        "replacementTagIds": []
+      },
+      "sourceRevisionIds": [
+        "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+        "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/typicalTechniques/2",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        }
+      ],
+      "materializationTask": "T047"
+    },
+    {
+      "kind": "tag",
+      "entity": {
         "id": "tag-cyclic-exponent-counting",
         "name": "巡回群の指数化・位数別数え上げ",
         "definition": "巡回部分群の元を指数へ写し、gcd・位数・約数格子で分類して重複なく数える。",
@@ -7055,7 +7130,13 @@
           "minimumDimensions": 2,
           "requireObjectForStrictRecall": false
         },
-        "relatedTags": [],
+        "relatedTags": [
+          {
+            "tagId": "tag-cycle-space-basis",
+            "type": "analogy",
+            "rationale": "cycle spaceはincidence境界が0の辺集合全体であり、奇数次数頂点集合Tを固定したT-joinの解集合は、解が存在すればcycle spaceのaffine cosetになる。特に同じTを実現する二つの辺集合のXORはcycle spaceに属する。"
+          }
+        ],
         "learningOutcomeIds": ["outcome-construct-degree-parity-subgraph"],
         "representativeProblemIds": ["abc345-f"],
         "aliases": ["T-join", "degree parity subgraph", "次数偶奇部分グラフ"],
@@ -11877,7 +11958,7 @@
         "name": "near-tree graphのkernel化",
         "definition": "terminal外の葉除去とdegree-2 chain縮約で、cycle rankや余分な辺数だけに依存する小kernelへ答えを保って縮約する。",
         "parentId": "tag-graph-model-structure",
-        "prerequisiteTagIds": ["tag-graph-core-peeling", "tag-lowlink-critical-structure"],
+        "prerequisiteTagIds": ["tag-cycle-space-basis", "tag-graph-core-peeling"],
         "semanticSignature": {
           "objectPatterns": ["chain", "small kernel", "terminal"],
           "triggerPatterns": ["chainを縮約", "木に少数辺追加"],
@@ -16140,7 +16221,13 @@
           "minimumDimensions": 2,
           "requireObjectForStrictRecall": false
         },
-        "relatedTags": [],
+        "relatedTags": [
+          {
+            "tagId": "tag-cycle-space-basis",
+            "type": "analogy",
+            "rationale": "辺集合の対称差と整数のbitwise XORはどちらもF_2上の線形結合・独立性・基底で整理できるが、cycle spaceは偶数次数制約とfundamental cycleに固有の構成を持つ。"
+          }
+        ],
         "learningOutcomeIds": ["outcome-maintain-xor-linear-basis"],
         "representativeProblemIds": ["abc223-h", "abc249-g"],
         "aliases": ["XOR basis", "XOR線形基底", "linear basis over F2"],
@@ -21558,11 +21645,13 @@
         "id": "outcome-enumerate-by-reversible-backtracking",
         "statement": "再帰の前後で使用状態を対称に更新・復元し、現在pathだけの制約を保って探索木を漏れなく列挙できる。",
         "prerequisiteOutcomeIds": [],
-        "scopeIds": ["abc284-e", "tag-backtracking-search", "unit-backtracking-search"]
+        "scopeIds": ["abc284-e", "abc419-g", "tag-backtracking-search", "unit-backtracking-search"]
       },
       "sourceRevisionIds": [
         "source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1",
-        "source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"
+        "source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f",
+        "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+        "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
       ],
       "evidenceRefs": [
         {
@@ -21572,6 +21661,15 @@
           "sourceRevisionIds": [
             "source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1",
             "source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/prerequisiteCandidates/2",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
           ]
         }
       ],
@@ -23413,10 +23511,7 @@
       "entity": {
         "id": "outcome-kernelize-near-tree-graph",
         "statement": "terminal外の葉除去とdegree-2 chain縮約で、cycle rankや余分な辺数だけに依存する小kernelへ答えを保って縮約する。 発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "prerequisiteOutcomeIds": [
-          "outcome-identify-bridges-and-articulations",
-          "outcome-peel-graph-core"
-        ],
+        "prerequisiteOutcomeIds": ["outcome-peel-graph-core", "outcome-use-cycle-space-basis"],
         "scopeIds": ["abc419-g", "tag-near-tree-kernelization", "unit-near-tree-kernelization"]
       },
       "sourceRevisionIds": [
@@ -30108,6 +30203,31 @@
     {
       "kind": "outcome",
       "entity": {
+        "id": "outcome-use-cycle-space-basis",
+        "statement": "全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning tree Tと各non-tree edge eが作る唯一のcycleからfundamental cycle basisを構築してdim C(G)=M-N+1を導ける。さらに固定したs-t path P_0に対し、Phi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pであることから単射性を示し、simple s-t path数を2^(M-N+1)以下に抑えられる。",
+        "prerequisiteOutcomeIds": [],
+        "scopeIds": ["abc419-g", "tag-cycle-space-basis", "unit-cycle-space-basis"]
+      },
+      "sourceRevisionIds": [
+        "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+        "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/outcomeCandidates/1",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        }
+      ],
+      "materializationTask": "T048"
+    },
+    {
+      "kind": "outcome",
+      "entity": {
         "id": "outcome-use-tree-diameter-extrema",
         "statement": "一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。",
         "prerequisiteOutcomeIds": [],
@@ -30186,7 +30306,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 95,
-        "globalIndex": 98,
+        "globalIndex": 99,
         "orderReason": "木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -30285,7 +30405,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 88,
-        "globalIndex": 173,
+        "globalIndex": 174,
         "orderReason": "有限状態automatonの構成・Trieによる共有接頭辞の索引で得た考え方と実装を再利用し、Aho–Corasickの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -30489,7 +30609,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 66,
-        "globalIndex": 120,
+        "globalIndex": 121,
         "orderReason": "要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -30683,7 +30803,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 150,
+        "globalIndex": 151,
         "orderReason": "有限pattern automatonの完全遷移を構成できるようになった後、位置・長さとの直積状態で受理列を数え、桁上限がある場合だけ桁DPと組み合わせる。"
       },
       "sourceRevisionIds": [
@@ -30937,7 +31057,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 82,
-        "globalIndex": 155,
+        "globalIndex": 156,
         "orderReason": "有限状態automatonの構成で得た考え方と実装を再利用し、非決定性automatonのsubset constructionの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -31150,11 +31270,13 @@
         ],
         "sourceRevisionIds": [
           "source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1",
-          "source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"
+          "source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f",
+          "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+          "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
         ],
         "tagIds": ["tag-backtracking-search"],
         "learningOutcomeIds": ["outcome-enumerate-by-reversible-backtracking"],
-        "problemIds": ["abc284-e"],
+        "problemIds": ["abc284-e", "abc419-g"],
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 78,
@@ -31163,7 +31285,9 @@
       },
       "sourceRevisionIds": [
         "source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1",
-        "source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"
+        "source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f",
+        "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+        "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
       ],
       "evidenceRefs": [
         {
@@ -31237,6 +31361,24 @@
             "source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1",
             "source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"
           ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/prerequisiteCandidates/2",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/typicalTechniques/4",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
         }
       ],
       "materializationTask": "T050"
@@ -31277,7 +31419,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 61,
-        "globalIndex": 114,
+        "globalIndex": 115,
         "orderReason": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -31427,7 +31569,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 64,
-        "globalIndex": 118,
+        "globalIndex": 119,
         "orderReason": "決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -31888,7 +32030,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 81,
-        "globalIndex": 153,
+        "globalIndex": 154,
         "orderReason": "二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -32618,7 +32760,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 96,
-        "globalIndex": 204,
+        "globalIndex": 205,
         "orderReason": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、Bostan–Mori・有理生成関数の係数抽出の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -34447,6 +34589,7 @@
           "tag-binary-lifting",
           "tag-bipartite-matching-hall",
           "tag-bipartite-structure",
+          "tag-cycle-space-basis",
           "tag-dag-topological-processing",
           "tag-degree-parity-subgraph",
           "tag-difference-constraints",
@@ -34515,7 +34658,8 @@
           "outcome-solve-flow-with-lower-bounds",
           "outcome-solve-min-weight-general-perfect-matching",
           "outcome-solve-weighted-bipartite-matching",
-          "outcome-sweep-connectivity-by-kruskal-threshold"
+          "outcome-sweep-connectivity-by-kruskal-threshold",
+          "outcome-use-cycle-space-basis"
         ],
         "problemIds": [
           "abc212-f",
@@ -37301,7 +37445,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 151,
+        "globalIndex": 152,
         "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、凸包・支持方向・境界候補の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -37796,6 +37940,139 @@
     {
       "kind": "unit",
       "entity": {
+        "id": "unit-cycle-space-basis",
+        "kind": "section",
+        "title": "cycle space・fundamental cycle basis",
+        "parentId": "unit-chapter-graph",
+        "baselineId": "prereq-abc-advanced-v1",
+        "baselineVersion": "1.0.0",
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [
+          "ord/lowを用いた橋・関節点の検出、および偶数次数辺集合のcycle-space構造を使わない単なるcycle検出。"
+        ],
+        "sourceRevisionIds": [
+          "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+          "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+        ],
+        "tagIds": ["tag-cycle-space-basis"],
+        "learningOutcomeIds": ["outcome-use-cycle-space-basis"],
+        "problemIds": ["abc419-g"],
+        "stageRank": 3,
+        "difficultyRank": 4,
+        "representativeRank": 92,
+        "globalIndex": 95,
+        "orderReason": "全域木を構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basis・次元・path族への単射を一つの線形構造から導く。"
+      },
+      "sourceRevisionIds": [
+        "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+        "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/outcomeCandidates/1",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/reasoningPath/keyInsights/1",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/reasoningPath/observations/1",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/reasoningPath/observations/2",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/typicalTechniques/2",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        }
+      ],
+      "materializationTask": "T050"
+    },
+    {
+      "kind": "unit",
+      "entity": {
         "id": "unit-cyclic-group-exponent-counting",
         "kind": "section",
         "title": "巡回群を指数化して数える",
@@ -37816,7 +38093,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 4,
-        "globalIndex": 208,
+        "globalIndex": 209,
         "orderReason": "乗法的位数とその約数分類を先に学び、巡回群の元を指数へ写して位数別に重複なく数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する。"
       },
       "sourceRevisionIds": [
@@ -37973,7 +38250,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 82,
-        "globalIndex": 156,
+        "globalIndex": 157,
         "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -38106,7 +38383,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 56,
-        "globalIndex": 107,
+        "globalIndex": 108,
         "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -38500,7 +38777,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 73,
-        "globalIndex": 145,
+        "globalIndex": 146,
         "orderReason": "Euler trail・circuitで得た考え方と実装を再利用し、指定次数parityの部分グラフ構成の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -38635,7 +38912,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 132,
+        "globalIndex": 133,
         "orderReason": "線形方程式・rankで得た考え方と実装を再利用し、行列式による数え上げの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -38900,7 +39177,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 93,
-        "globalIndex": 185,
+        "globalIndex": 186,
         "orderReason": "最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。"
       },
       "sourceRevisionIds": [
@@ -39084,7 +39361,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 82,
-        "globalIndex": 157,
+        "globalIndex": 158,
         "orderReason": "接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。"
       },
       "sourceRevisionIds": [
@@ -39588,7 +39865,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 62,
-        "globalIndex": 115,
+        "globalIndex": 116,
         "orderReason": "三色DFSのrecursion stackまたは入次数・出次数零の反復削除により有向cycleを検出し、必要ならcycleへ到達するcoreと処理可能なDAG部分を分離する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -39759,7 +40036,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 181,
+        "globalIndex": 182,
         "orderReason": "gcd不変量・差分構造・SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、有向walkの周期・cycle差分gcdの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -39865,7 +40142,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 72,
-        "globalIndex": 129,
+        "globalIndex": 130,
         "orderReason": "各行・各列を固定方向に一度ずつscanし、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する。"
       },
       "sourceRevisionIds": [
@@ -40451,7 +40728,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 83,
-        "globalIndex": 158,
+        "globalIndex": 159,
         "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -42679,7 +42956,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 62,
-        "globalIndex": 116,
+        "globalIndex": 117,
         "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43032,7 +43309,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 58,
-        "globalIndex": 109,
+        "globalIndex": 110,
         "orderReason": "辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43117,7 +43394,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 85,
-        "globalIndex": 110,
+        "globalIndex": 111,
         "orderReason": "DSUによる連結成分管理・縮約で得た考え方と実装を再利用し、DSU merge tree・Kruskal reconstruction treeの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43306,7 +43583,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 83,
-        "globalIndex": 159,
+        "globalIndex": 160,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、動的・implicit Segment Treeの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43412,7 +43689,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 97,
-        "globalIndex": 144,
+        "globalIndex": 145,
         "orderReason": "行列式による数え上げ・Euler trail・circuitで得た考え方と実装を再利用し、BEST定理によるEuler circuit数え上げの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43718,7 +43995,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 76,
-        "globalIndex": 143,
+        "globalIndex": 144,
         "orderReason": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -44210,7 +44487,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 97,
-        "globalIndex": 196,
+        "globalIndex": 197,
         "orderReason": "通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。"
       },
       "sourceRevisionIds": [
@@ -44318,7 +44595,7 @@
         "stageRank": 4,
         "difficultyRank": 5,
         "representativeRank": 10,
-        "globalIndex": 200,
+        "globalIndex": 201,
         "orderReason": "素体上の演算を土台に、既約関係で元を標準化し、加減乗除が閉じる拡大体として扱う。"
       },
       "sourceRevisionIds": [
@@ -44498,7 +44775,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 97,
-        "globalIndex": 201,
+        "globalIndex": 202,
         "orderReason": "拡大有限体の表現と演算で得た考え方と実装を再利用し、有限体Frobenius軌道の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -44595,7 +44872,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 64,
-        "globalIndex": 119,
+        "globalIndex": 120,
         "orderReason": "小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -44696,7 +44973,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 74,
-        "globalIndex": 134,
+        "globalIndex": 135,
         "orderReason": "文字を一つ加えた後の未来の挙動が等しい履歴を有限状態へ同値化し、pattern suffix・部分列進行・圧縮DP rowなどから全文字の完全遷移表を構築する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -44941,7 +45218,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 91,
-        "globalIndex": 179,
+        "globalIndex": 180,
         "orderReason": "最大流・最小カットで得た考え方と実装を再利用し、下限制約付きflowの実現可能性の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -45397,7 +45674,7 @@
         "stageRank": 4,
         "difficultyRank": 5,
         "representativeRank": 10,
-        "globalIndex": 202,
+        "globalIndex": 203,
         "orderReason": "生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。"
       },
       "sourceRevisionIds": [
@@ -45725,7 +46002,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 99,
-        "globalIndex": 205,
+        "globalIndex": 206,
         "orderReason": "形式的べき級数の基本演算で得た考え方と実装を再利用し、FPS合成・power projectionの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -46060,7 +46337,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 90,
-        "globalIndex": 177,
+        "globalIndex": 178,
         "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -46523,7 +46800,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 60,
-        "globalIndex": 112,
+        "globalIndex": 113,
         "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、関数グラフのcycle・tree分解の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -46705,7 +46982,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 98,
-        "globalIndex": 99,
+        "globalIndex": 100,
         "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、Gaussian整数・二平方和の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -46919,7 +47196,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 54,
-        "globalIndex": 105,
+        "globalIndex": 106,
         "orderReason": "差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -47452,7 +47729,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 69,
-        "globalIndex": 124,
+        "globalIndex": 125,
         "orderReason": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -47657,6 +47934,15 @@
         },
         {
           "problemId": "abc419-g",
+          "claimPath": "/outcomeCandidates/1",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
           "claimPath": "/reasoningPath/algorithmConnection",
           "evidenceIds": ["evidence-official-analysis"],
           "sourceRevisionIds": [
@@ -47711,7 +47997,25 @@
         },
         {
           "problemId": "abc419-g",
+          "claimPath": "/reasoningPath/observations/2",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
           "claimPath": "/typicalTechniques/0",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/typicalTechniques/2",
           "evidenceIds": ["evidence-official-analysis"],
           "sourceRevisionIds": [
             "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
@@ -47746,7 +48050,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 86,
-        "globalIndex": 164,
+        "globalIndex": 165,
         "orderReason": "通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。"
       },
       "sourceRevisionIds": [
@@ -48350,7 +48654,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 89,
-        "globalIndex": 175,
+        "globalIndex": 176,
         "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、半平面制約・凸領域の共通部分の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -48456,7 +48760,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 152,
+        "globalIndex": 153,
         "orderReason": "ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、Heavy-Light Decompositionの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -48501,7 +48805,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 91,
-        "globalIndex": 180,
+        "globalIndex": 181,
         "orderReason": "heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -48681,7 +48985,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 72,
-        "globalIndex": 139,
+        "globalIndex": 140,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -49534,7 +49838,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 188,
+        "globalIndex": 189,
         "orderReason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、isotonic regression・PAVの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -49631,7 +49935,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 189,
+        "globalIndex": 190,
         "orderReason": "event・値順のオフライン走査で得た考え方と実装を再利用し、kinetic sorting・交差event順序更新の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -49723,7 +50027,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 93,
-        "globalIndex": 186,
+        "globalIndex": 187,
         "orderReason": "DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。"
       },
       "sourceRevisionIds": [
@@ -49971,7 +50275,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 93,
-        "globalIndex": 95,
+        "globalIndex": 96,
         "orderReason": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -50121,7 +50425,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 93,
-        "globalIndex": 187,
+        "globalIndex": 188,
         "orderReason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、Lagrangian relaxation・Aliens trickの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -50384,7 +50688,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 84,
-        "globalIndex": 161,
+        "globalIndex": 162,
         "orderReason": "非交差区間族を括弧列として走査し、stack topを直接包含親にして包含関係を木へ変換する。その後の包含差分queryをLCAや木上距離へ接続する。"
       },
       "sourceRevisionIds": [
@@ -50494,7 +50798,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 93,
-        "globalIndex": 96,
+        "globalIndex": 97,
         "orderReason": "一次関数の候補を傾き・交点順に管理し、各query点で最小または最大となる直線を選ぶ。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -50979,7 +51283,7 @@
         "stageRank": 4,
         "difficultyRank": 5,
         "representativeRank": 100,
-        "globalIndex": 206,
+        "globalIndex": 207,
         "orderReason": "matroidの独立性・交換公理、線形方程式のrank計算、乱択誤り評価を学んだ後、二つの線形matroidの共通独立rankを一枚の乱択行列へ圧縮する。"
       },
       "sourceRevisionIds": [
@@ -51303,7 +51607,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 73,
-        "globalIndex": 131,
+        "globalIndex": 132,
         "orderReason": "制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -51682,7 +51986,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 11,
-        "globalIndex": 104,
+        "globalIndex": 105,
         "orderReason": "DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。"
       },
       "sourceRevisionIds": [
@@ -51900,7 +52204,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 182,
+        "globalIndex": 183,
         "orderReason": "Matroidの独立集合族と交換公理を定義した後、重み順greedyが最適基底を作る必要十分な構造を証明する。"
       },
       "sourceRevisionIds": [
@@ -52191,7 +52495,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 86,
-        "globalIndex": 166,
+        "globalIndex": 167,
         "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -52397,7 +52701,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 67,
-        "globalIndex": 121,
+        "globalIndex": 122,
         "orderReason": "探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -52654,7 +52958,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 183,
+        "globalIndex": 184,
         "orderReason": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、最小費用流・circulationの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -52908,7 +53212,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 99,
-        "globalIndex": 197,
+        "globalIndex": 198,
         "orderReason": "二部matchingでは表せないpairing模型を作った後、奇cycleを扱うweighted blossomまたは重み付きTutte多項式で最小重みまで求める。"
       },
       "sourceRevisionIds": [
@@ -53014,7 +53318,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 98,
-        "globalIndex": 100,
+        "globalIndex": 101,
         "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、Min_25・Lucy DP型の総和篩の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -54001,7 +54305,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 190,
+        "globalIndex": 191,
         "orderReason": "DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge・monotone minima最適化の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -55072,7 +55376,7 @@
         "stageRank": 5,
         "difficultyRank": 3,
         "representativeRank": 3,
-        "globalIndex": 207,
+        "globalIndex": 208,
         "orderReason": "合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。"
       },
       "sourceRevisionIds": [
@@ -55211,7 +55515,7 @@
         "parentId": "unit-graph-core-peeling",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
-        "additionalPrerequisiteUnitIds": ["unit-graph-core", "unit-lowlink-critical-structure"],
+        "additionalPrerequisiteUnitIds": ["unit-cycle-space-basis", "unit-graph-core"],
         "excludedTopics": [
           "near-tree graphのkernel化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
         ],
@@ -55225,8 +55529,8 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 191,
-        "orderReason": "graph core・leaf peeling・lowlinkによる橋・関節点の検出で得た考え方と実装を再利用し、near-tree graphのkernel化の発動条件・正当化・境界を重複なく学ぶ。"
+        "globalIndex": 192,
+        "orderReason": "cycle space・fundamental cycle basis・graph core・leaf peelingで得た考え方と実装を再利用し、near-tree graphのkernel化の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
         "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
@@ -55236,6 +55540,15 @@
         {
           "problemId": "abc419-g",
           "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/outcomeCandidates/1",
           "evidenceIds": ["evidence-official-analysis"],
           "sourceRevisionIds": [
             "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
@@ -55298,7 +55611,25 @@
         },
         {
           "problemId": "abc419-g",
+          "claimPath": "/reasoningPath/observations/2",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
           "claimPath": "/typicalTechniques/0",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/typicalTechniques/2",
           "evidenceIds": ["evidence-official-analysis"],
           "sourceRevisionIds": [
             "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
@@ -55798,7 +56129,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 79,
-        "globalIndex": 148,
+        "globalIndex": 149,
         "orderReason": "ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -56106,7 +56437,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 60,
-        "globalIndex": 113,
+        "globalIndex": 114,
         "orderReason": "比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -56524,7 +56855,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 99,
-        "globalIndex": 198,
+        "globalIndex": 199,
         "orderReason": "path matchingの交互構造を使い、最小edgeの採用後も残りの全cardinality最適値を保存する補正縮約を導いてheapと双方向linkで実装する。"
       },
       "sourceRevisionIds": [
@@ -56623,7 +56954,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 84,
-        "globalIndex": 162,
+        "globalIndex": 163,
         "orderReason": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -57035,7 +57366,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 167,
+        "globalIndex": 168,
         "orderReason": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、平面graph双対・cut/path対応の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -57382,7 +57713,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 203,
+        "globalIndex": 204,
         "orderReason": "形式的べき級数の基本演算・再帰分割・分割統治で得た考え方と実装を再利用し、多項式の多点評価・補間の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -57520,7 +57851,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 95,
-        "globalIndex": 193,
+        "globalIndex": 194,
         "orderReason": "畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。"
       },
       "sourceRevisionIds": [
@@ -57576,7 +57907,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 93,
-        "globalIndex": 154,
+        "globalIndex": 155,
         "orderReason": "二部matching・Hall・Kőnig・列・subsequence DPで得た考え方と実装を再利用し、半順序・Dilworth・最大反鎖の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -57828,7 +58159,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 73,
-        "globalIndex": 165,
+        "globalIndex": 166,
         "orderReason": "DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -58406,7 +58737,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 57,
-        "globalIndex": 108,
+        "globalIndex": 109,
         "orderReason": "現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -58498,7 +58829,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 97,
+        "globalIndex": 98,
         "orderReason": "組合せ係数・数え上げで得た考え方と実装を再利用し、Prüfer code・次数制約付きlabel木の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -58590,7 +58921,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 87,
-        "globalIndex": 170,
+        "globalIndex": 171,
         "orderReason": "乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -59117,7 +59448,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 3,
-        "globalIndex": 138,
+        "globalIndex": 139,
         "orderReason": "結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。"
       },
       "sourceRevisionIds": [
@@ -59306,7 +59637,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 75,
-        "globalIndex": 137,
+        "globalIndex": 138,
         "orderReason": "queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -59685,7 +60016,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 2,
-        "globalIndex": 102,
+        "globalIndex": 103,
         "orderReason": "明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。"
       },
       "sourceRevisionIds": [
@@ -59933,7 +60264,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 69,
-        "globalIndex": 125,
+        "globalIndex": 126,
         "orderReason": "pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -60126,7 +60457,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 96,
-        "globalIndex": 195,
+        "globalIndex": 196,
         "orderReason": "畳み込み・相互相関で得た考え方と実装を再利用し、Relaxed・online convolutionの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -60411,7 +60742,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 75,
-        "globalIndex": 140,
+        "globalIndex": 141,
         "orderReason": "根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -60588,7 +60919,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 83,
-        "globalIndex": 160,
+        "globalIndex": 161,
         "orderReason": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -60857,7 +61188,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 63,
-        "globalIndex": 117,
+        "globalIndex": 118,
         "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -61057,7 +61388,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 99,
-        "globalIndex": 101,
+        "globalIndex": 102,
         "orderReason": "順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -61264,7 +61595,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 71,
-        "globalIndex": 126,
+        "globalIndex": 127,
         "orderReason": "DAGのtopological processingで得た考え方と実装を再利用し、SCC・縮約DAG・トポロジカル順序の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -61428,7 +61759,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 90,
-        "globalIndex": 178,
+        "globalIndex": 179,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、Segment Tree Beatsの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -61529,7 +61860,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 78,
-        "globalIndex": 147,
+        "globalIndex": 148,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -61811,7 +62142,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 77,
-        "globalIndex": 146,
+        "globalIndex": 147,
         "orderReason": "離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。"
       },
       "sourceRevisionIds": [
@@ -62069,7 +62400,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 87,
-        "globalIndex": 171,
+        "globalIndex": 172,
         "orderReason": "Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -62217,7 +62548,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 73,
-        "globalIndex": 133,
+        "globalIndex": 134,
         "orderReason": "順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -62673,7 +63004,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 184,
+        "globalIndex": 185,
         "orderReason": "最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。"
       },
       "sourceRevisionIds": [
@@ -62913,7 +63244,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 89,
-        "globalIndex": 176,
+        "globalIndex": 177,
         "orderReason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、slope trickの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -63118,7 +63449,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 72,
-        "globalIndex": 130,
+        "globalIndex": 131,
         "orderReason": "小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -63563,7 +63894,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 43,
-        "globalIndex": 103,
+        "globalIndex": 104,
         "orderReason": "暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -63700,7 +64031,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 86,
-        "globalIndex": 168,
+        "globalIndex": 169,
         "orderReason": "Segment Treeのcanonical区間分解で得た考え方と実装を再利用し、静的sorted range index・Merge Sort Treeの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -63790,7 +64121,7 @@
         "stageRank": 4,
         "difficultyRank": 5,
         "representativeRank": 7,
-        "globalIndex": 199,
+        "globalIndex": 200,
         "orderReason": "木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。"
       },
       "sourceRevisionIds": [
@@ -63963,7 +64294,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 91,
-        "globalIndex": 142,
+        "globalIndex": 143,
         "orderReason": "最短路モデル・部分集合・bitmask状態DPで得た考え方と実装を再利用し、Steiner tree subset DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -64543,7 +64874,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 75,
-        "globalIndex": 128,
+        "globalIndex": 129,
         "orderReason": "Z algorithmによるprefix matchingで得た考え方と実装を再利用し、文字列周期・primitive wordの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -64842,7 +65173,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 192,
+        "globalIndex": 193,
         "orderReason": "畳み込み・相互相関・subset zeta・Möbius変換で得た考え方と実装を再利用し、subset convolutionの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -64937,7 +65268,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 86,
-        "globalIndex": 169,
+        "globalIndex": 170,
         "orderReason": "集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -65101,7 +65432,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 3,
-        "globalIndex": 135,
+        "globalIndex": 136,
         "orderReason": "有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。"
       },
       "sourceRevisionIds": [
@@ -65454,7 +65785,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 88,
-        "globalIndex": 174,
+        "globalIndex": 175,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、SWAG・two-stack queue aggregationの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -65565,7 +65896,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 74,
-        "globalIndex": 136,
+        "globalIndex": 137,
         "orderReason": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -65686,7 +66017,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 55,
-        "globalIndex": 106,
+        "globalIndex": 107,
         "orderReason": "各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -66167,7 +66498,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 68,
-        "globalIndex": 123,
+        "globalIndex": 124,
         "orderReason": "doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -66739,7 +67070,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 67,
-        "globalIndex": 122,
+        "globalIndex": 123,
         "orderReason": "DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -67204,7 +67535,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 96,
-        "globalIndex": 111,
+        "globalIndex": 112,
         "orderReason": "DSUによる連結成分管理・縮約・貪欲法と交換論で得た考え方と実装を再利用し、01 on Tree・親先行順序のcluster縮約の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -67652,7 +67983,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 84,
-        "globalIndex": 163,
+        "globalIndex": 164,
         "orderReason": "SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、2-SAT・含意グラフの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -67758,7 +68089,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 87,
-        "globalIndex": 172,
+        "globalIndex": 173,
         "orderReason": "ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、virtual tree・auxiliary treeの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -67846,7 +68177,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 95,
-        "globalIndex": 194,
+        "globalIndex": 195,
         "orderReason": "二部matching・Hall・Kőnigで得た考え方と実装を再利用し、重み付き二部完全matchingの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -68155,7 +68486,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 75,
-        "globalIndex": 141,
+        "globalIndex": 142,
         "orderReason": "基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。"
       },
       "sourceRevisionIds": [
@@ -68350,7 +68681,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 79,
-        "globalIndex": 149,
+        "globalIndex": 150,
         "orderReason": "整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -68536,7 +68867,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 71,
-        "globalIndex": 127,
+        "globalIndex": 128,
         "orderReason": "各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -69008,11 +69339,11 @@
     },
     {
       "nodeId": "tag-near-tree-kernelization",
-      "prerequisiteId": "tag-graph-core-peeling"
+      "prerequisiteId": "tag-cycle-space-basis"
     },
     {
       "nodeId": "tag-near-tree-kernelization",
-      "prerequisiteId": "tag-lowlink-critical-structure"
+      "prerequisiteId": "tag-graph-core-peeling"
     },
     {
       "nodeId": "tag-numerical-semigroup",
@@ -69526,11 +69857,11 @@
     },
     {
       "nodeId": "unit-near-tree-kernelization",
-      "prerequisiteId": "unit-graph-core"
+      "prerequisiteId": "unit-cycle-space-basis"
     },
     {
       "nodeId": "unit-near-tree-kernelization",
-      "prerequisiteId": "unit-lowlink-critical-structure"
+      "prerequisiteId": "unit-graph-core"
     },
     {
       "nodeId": "unit-numerical-semigroup-reachability",
@@ -69837,6 +70168,7 @@
     "unit-deletion-contraction",
     "unit-reflection-principle",
     "unit-semiring-matrix-exponentiation",
+    "unit-cycle-space-basis",
     "unit-labeled-component-decomposition",
     "unit-line-envelope",
     "unit-prufer-code",
@@ -213011,14 +213343,22 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=curated_semantic_override; 著者判断状態=proposed; 曖昧性=curated_override; 選択理由: terminal以外の葉を落とし、degree-2 chainを縮約してcycle rankだけに依存する小kernelを作ることが主である。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。",
+      "rationale": "決定種別=curated_semantic_override; 著者判断状態=proposed; 曖昧性=curated_override; 選択理由: cycle spaceとfundamental cycle basisから次元K=M-N+1とsimple path数の2^K上界を導き、terminal以外の葉除去とdegree-2 chain縮約でKだけに依存する小kernelを作る。理論的な候補数評価と高速化の両方をco-primaryとし、Homeは後者とする。; 補助Tag=tag-backtracking-search; 補助Outcome=outcome-enumerate-by-reversible-backtracking; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-backtracking-search / outcome-enumerate-by-reversible-backtracking を補助技能として使う。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。",
       "evidenceIds": ["evidence-official-analysis"],
-      "primaryTagIds": ["tag-near-tree-kernelization"],
-      "supportingTagIds": ["tag-bounded-enumeration"],
+      "primaryTagIds": ["tag-cycle-space-basis", "tag-near-tree-kernelization"],
+      "supportingTagIds": ["tag-backtracking-search", "tag-bounded-enumeration"],
       "primaryOutcomeId": "outcome-kernelize-near-tree-graph",
-      "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": ["outcome-enumerate-bounded-candidates-or-cases"],
-      "learningUnitIds": ["unit-bounded-enumeration", "unit-near-tree-kernelization"],
+      "additionalPrimaryOutcomeIds": ["outcome-use-cycle-space-basis"],
+      "supportingOutcomeIds": [
+        "outcome-enumerate-bounded-candidates-or-cases",
+        "outcome-enumerate-by-reversible-backtracking"
+      ],
+      "learningUnitIds": [
+        "unit-backtracking-search",
+        "unit-bounded-enumeration",
+        "unit-cycle-space-basis",
+        "unit-near-tree-kernelization"
+      ],
       "presentationUnitId": "unit-near-tree-kernelization",
       "adHocElements": [
         "Nが20万でも「余分なedgeが21本」というparameterでbranch coreをO(K)頂点にkernelizeし、全pathを直接列挙できる。（再利用可能な見方: near-tree graphではcycle rankをparameterに、leaf除去とdegree2圧縮で小kernelを作って指数部をKだけに閉じ込める。）"
@@ -213062,8 +213402,36 @@
               "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
             ]
           },
+          "kind": "primary",
+          "tagIds": ["tag-cycle-space-basis"],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc419-g",
+            "claimPath": "/typicalTechniques/3",
+            "evidenceIds": ["evidence-official-analysis"],
+            "sourceRevisionIds": [
+              "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+              "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+            ]
+          },
           "kind": "supporting",
           "tagIds": ["tag-bounded-enumeration"],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc419-g",
+            "claimPath": "/typicalTechniques/4",
+            "evidenceIds": ["evidence-official-analysis"],
+            "sourceRevisionIds": [
+              "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+              "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": ["tag-backtracking-search"],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
@@ -213077,8 +213445,36 @@
             ]
           },
           "kind": "same_tag",
+          "tagIds": ["tag-cycle-space-basis"],
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc419-g",
+            "claimPath": "/prerequisiteCandidates/1",
+            "evidenceIds": ["evidence-official-analysis"],
+            "sourceRevisionIds": [
+              "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+              "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+            ]
+          },
+          "kind": "same_tag",
           "tagIds": ["tag-near-tree-kernelization"],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc419-g",
+            "claimPath": "/prerequisiteCandidates/2",
+            "evidenceIds": ["evidence-official-analysis"],
+            "sourceRevisionIds": [
+              "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+              "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": ["tag-backtracking-search"],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -213093,7 +213489,34 @@
         },
         {
           "problemId": "abc419-g",
+          "claimPath": "/outcomeCandidates/1",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
           "claimPath": "/prerequisiteCandidates/0",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/prerequisiteCandidates/1",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/prerequisiteCandidates/2",
           "evidenceIds": ["evidence-official-analysis"],
           "sourceRevisionIds": [
             "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
@@ -213165,6 +213588,15 @@
         },
         {
           "problemId": "abc419-g",
+          "claimPath": "/reasoningPath/observations/2",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
           "claimPath": "/typicalTechniques/0",
           "evidenceIds": ["evidence-official-analysis"],
           "sourceRevisionIds": [
@@ -213184,6 +213616,24 @@
         {
           "problemId": "abc419-g",
           "claimPath": "/typicalTechniques/2",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/typicalTechniques/3",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc419-g",
+          "claimPath": "/typicalTechniques/4",
           "evidenceIds": ["evidence-official-analysis"],
           "sourceRevisionIds": [
             "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
@@ -305541,16 +305991,16 @@
     "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"
   ],
   "reviewEvidenceRefs": [],
-  "taxonomySubjectDigest": "69fe43360c4dc5a5323a1f36501026443c5ce85b2402e0bff4e116d55d15ce26",
-  "taxonomyDigest": "e2f87ad49d4805bb43d900120ad01b98bf01b761ff261b3b553eff3a128704bb",
-  "tagDagDigest": "c464319093a916ea90b1d53254e67cf7e6ca07306db6c8e99d16a0dae55d16cb",
-  "learningUnitDagDigest": "65763a426d54e2dcd326d60934e8122da0f51067486d4b3dcfdf01d4a7151aa1",
-  "orderDigest": "1a8d03eb8694da2f9e82cde51f7ad7d99da9fcf461090cfb7a370b9683b615f8",
-  "placementDigest": "182b2d8481f6c8d11a37fa7b0a53869c18f572b76464f396051abd0ae5c072f4",
+  "taxonomySubjectDigest": "7d4c45f5c9c51d7aadce7368c99bad01b6ecb5f52b6419c0603112ce8b94b803",
+  "taxonomyDigest": "f0d7f023fe763a09e450921923578be67c0bc78c52307cd72ba3d50d6b33b55a",
+  "tagDagDigest": "596fef488a932c9d90801e159dcf7ecdad2c9bf449b1bd956f66dfaa7f38330d",
+  "learningUnitDagDigest": "41221efeee3621e39f625773e632dd4a731c9c241552e59fda8d25098d097633",
+  "orderDigest": "a9c295fab81de3429c0d4de327f7e558fbfff07f4a859d6c8bc153f6a2916127",
+  "placementDigest": "d3768ff88ae3f35aab03ea5e6ef3acca3492824e810494be2202ce7430bcc1db",
   "correctionImpactDigest": "2018d73f108f710f104388b3e4406a575710529afb10aa0f0e21f0482773782e",
   "status": "proposed",
   "acceptedAt": null,
   "holdReasons": ["CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE"],
   "canonicalMaterializationAllowed": false,
-  "buildDigest": "934946059ca3b111ed30dcef090d13407969e475bf1b5cb969d0ef2f633322a1"
+  "buildDigest": "8702023199ea943ba5fced74ee01cc24eb496866e98afa55c9bd0d9ed521cf5a"
 }

@@ -353,6 +353,9 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
     'LCAという概念で対象を一意分類するだけで、ancestor query・Euler区間化・HLD・virtual treeを実装利用しない数え上げ、および重心による再帰分解。',
   ],
   'unit-tree-balanced-separators': ['LCA・HLDによる固定木上パスの区間分解。'],
+  'unit-cycle-space-basis': [
+    'ord/lowを用いた橋・関節点の検出、および偶数次数辺集合のcycle-space構造を使わない単なるcycle検出。',
+  ],
   'unit-lowlink-critical-structure': [
     '次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。',
   ],
@@ -1258,6 +1261,8 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
     '頂点と辺のモデルを作れることを前提に、選択制約を容量・カット・マッチングへ翻訳する。',
   'unit-euler-degree':
     'グラフを探索できることを前提に、全辺walkの成立性や選択辺集合の端点条件を次数parityで特徴付け、葉から判定・構成する。',
+  'unit-cycle-space-basis':
+    '全域木を構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basis・次元・path族への単射を一つの線形構造から導く。',
   'unit-lowlink-critical-structure':
     'DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。',
   'unit-graph-core-peeling':
@@ -3484,7 +3489,7 @@ const FINAL_TAG_CURRICULUM_PREREQUISITE_ADDITIONS: Readonly<Record<string, reado
   'tag-bipartite-matching-hall': ['tag-bipartite-structure'],
   'tag-min-weight-general-perfect-matching': ['tag-bipartite-matching-hall'],
   'tag-degree-parity-subgraph': ['tag-euler-trail-circuit'],
-  'tag-near-tree-kernelization': ['tag-graph-core-peeling', 'tag-lowlink-critical-structure'],
+  'tag-near-tree-kernelization': ['tag-cycle-space-basis', 'tag-graph-core-peeling'],
   'tag-planar-duality': ['tag-max-flow-min-cut', 'tag-shortest-path'],
   'tag-kruskal-threshold-sweep': ['tag-spanning-tree-optimization'],
   'tag-additive-tree-metric-reconstruction': ['tag-tree-metric-diameter'],
@@ -4145,6 +4150,21 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     invariant: ['行列木', '出辺順列'],
     goal: ['Euler circuit数'],
     priority: 97,
+  },
+  {
+    id: 'tag-cycle-space-basis',
+    name: 'cycle space・fundamental cycle basis',
+    definition:
+      '連結無向graphで全頂点が偶数次数となる辺集合をF_2上のcycle spaceとして扱い、spanning tree Tと各non-tree edge eが作る唯一のcycleからfundamental cycle basisと次元M-N+1を導く。',
+    parentId: 'tag-graph-model-structure',
+    outcomeIds: ['outcome-use-cycle-space-basis'],
+    unitIds: ['unit-cycle-space-basis'],
+    recall: ['cycle space', 'cycle basis', 'fundamental cycle', 'サイクル空間', 'サイクル基底'],
+    object: ['連結無向graph', '辺集合', 'spanning tree', 'non-tree edge', 's-t path'],
+    trigger: ['M-N+1が小さい', '辺集合をXOR', 'cycle族', 'simple path数を抑える'],
+    invariant: ['全頂点の次数が偶数', '対称差に関して閉じる', 'dim C(G)=M-N+1', 'P XOR P_0'],
+    goal: ['cycle basis構築', 'cycle空間の列挙', 'simple path数の上界'],
+    priority: 92,
   },
   {
     id: 'tag-graph-core-peeling',
@@ -5613,6 +5633,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-euler-trail-circuit': ['abc227-h', 'abc286-g'],
   'tag-degree-parity-subgraph': ['abc345-f'],
   'tag-euler-circuit-counting': ['abc336-g'],
+  'tag-cycle-space-basis': ['abc419-g'],
   'tag-graph-core-peeling': ['abc266-f', 'abc267-e'],
   'tag-near-tree-kernelization': ['abc419-g'],
   'tag-range-monoid-aggregation': ['abc223-f', 'abc343-f'],
@@ -5701,7 +5722,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-kruskal-threshold-sweep': ['abc235-e', 'abc250-ex', 'abc301-ex', 'abc383-e'],
   'tag-path-matching-contraction': ['abc464-g'],
   'tag-eventual-unbounded-knapsack': ['abc415-g'],
-  'tag-backtracking-search': ['abc284-e'],
+  'tag-backtracking-search': ['abc284-e', 'abc419-g'],
 };
 
 export const FINAL_TAXONOMY_TAGS: readonly FinalTaxonomyTagPolicy[] = [
@@ -5869,6 +5890,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '全辺ウォークの成立条件または選択辺集合の次数parity条件を定式化し、連結性・奇数次数・葉からの処理で判定または構成できる。',
   'outcome-identify-bridges-and-articulations':
     'DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。',
+  'outcome-use-cycle-space-basis':
+    '全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning tree Tと各non-tree edge eが作る唯一のcycleからfundamental cycle basisを構築してdim C(G)=M-N+1を導ける。さらに固定したs-t path P_0に対し、Phi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pであることから単射性を示し、simple s-t path数を2^(M-N+1)以下に抑えられる。',
   'outcome-reduce-graph-by-peeling-or-kernelization':
     '削除可能な葉・低次数頂点を反復除去してcycle coreと各頂点の所属を特定するか、terminal以外の葉除去とdegree-2 chain縮約によってcycle rankに依存する小kernelを構成できる。',
   'outcome-linearize-static-range-information':
@@ -6095,6 +6118,7 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-answer-idempotent-range-query',
   'outcome-precompute-directional-grid-effects',
   'outcome-build-laminar-interval-containment-tree',
+  'outcome-use-cycle-space-basis',
   'outcome-find-orbit-hit-by-bsgs',
   'outcome-apply-heavy-light-decomposition',
   'outcome-build-static-sorted-range-index',
@@ -6109,7 +6133,6 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-determinize-automaton-by-subsets',
   'outcome-dualize-planar-cut-to-path',
   'outcome-encode-labeled-trees-by-prufer-code',
-  'outcome-enumerate-by-reversible-backtracking',
   'outcome-encode-threshold-constraints-as-two-sat',
   'outcome-evolve-run-length-encoded-state',
   'outcome-extract-rational-series-coefficient',
@@ -6147,7 +6170,7 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-additive-tree-metric-reconstruction',
   'unit-directional-grid-effect-scan',
   'unit-laminar-interval-containment-tree',
-  'unit-backtracking-search',
+  'unit-cycle-space-basis',
   'unit-baby-step-giant-step',
   'unit-automaton-subset-construction',
   'unit-bitwise-greedy-feasibility',
@@ -6199,7 +6222,7 @@ export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-additive-tree-metric-reconstruction',
   'tag-directional-grid-effect-scan',
   'tag-laminar-interval-containment-tree',
-  'tag-backtracking-search',
+  'tag-cycle-space-basis',
   'tag-baby-step-giant-step',
   'tag-automaton-subset-construction',
   'tag-bitwise-greedy-feasibility',
@@ -6483,7 +6506,9 @@ for (const tag of FINAL_TAXONOMY_TAGS) {
         prerequisiteNames.length === 0
           ? `${tag.definition} 発動条件と正当化原理を比較可能な独立教材として学ぶ。`
           : `${prerequisiteNames.join('・')}で得た考え方と実装を再利用し、${tag.name}の発動条件・正当化・境界を重複なく学ぶ。`,
-      excludedTopics: [`${tag.name}の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。`],
+      excludedTopics: UNIT_EXCLUDED_TOPICS[unitId] ?? [
+        `${tag.name}の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。`,
+      ],
     });
   }
 }
@@ -6629,7 +6654,7 @@ const RAW_CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
     primaryTagId: 'tag-graph-core-peeling',
     primaryOutcomeId: 'outcome-reduce-graph-by-peeling-or-kernelization',
     rationale:
-      'terminal以外の葉を落とし、degree-2 chainを縮約してcycle rankだけに依存する小kernelを作ることが主である。',
+      'cycle spaceとfundamental cycle basisから次元K=M-N+1とsimple path数の2^K上界を導き、terminal以外の葉除去とdegree-2 chain縮約でKだけに依存する小kernelを作る。理論的な候補数評価と高速化の両方をco-primaryとし、Homeは後者とする。',
     decisionAuthorId: 'person-maintainer',
   },
   {
@@ -8115,6 +8140,7 @@ const primaryOutcomeAdditionsByProblemId: Readonly<Record<string, readonly strin
   'abc357-g': ['outcome-compute-online-relaxed-convolution'],
   'abc418-g': ['outcome-run-dp-on-finite-automaton'],
   'abc419-f': ['outcome-run-dp-on-finite-automaton'],
+  'abc419-g': ['outcome-use-cycle-space-basis'],
   'abc458-f': ['outcome-run-dp-on-finite-automaton'],
 };
 
@@ -8899,8 +8925,17 @@ const decisionBasisFor = (
     record.reasoningPath.algorithmConnection.text,
     record.reasoningPath.algorithmConnection.evidenceIds,
   );
-  const outcome = record.outcomeCandidates[0];
-  if (!outcome) throw new Error(`FINAL_TAXONOMY_OUTCOME_CLAIM_MISSING: ${record.problemId}`);
+  const outcomes = record.outcomeCandidates.map((outcome, index) =>
+    claimReference(
+      record,
+      `/outcomeCandidates/${String(index)}`,
+      outcome.text,
+      outcome.evidenceIds,
+    ),
+  );
+  if (outcomes.length === 0) {
+    throw new Error(`FINAL_TAXONOMY_OUTCOME_CLAIM_MISSING: ${record.problemId}`);
+  }
   if (primaryClaimPaths.length === 0) {
     throw new Error(`FINAL_TAXONOMY_PRIMARY_CLAIM_MISSING: ${record.problemId}`);
   }
@@ -8910,7 +8945,7 @@ const decisionBasisFor = (
     ...keyInsights,
     algorithmConnection,
     ...primaryClaimPaths.map((claimPath) => inventoryClaimReference(record, claimPath)),
-    claimReference(record, '/outcomeCandidates/0', outcome.text, outcome.evidenceIds),
+    ...outcomes,
   ];
 };
 

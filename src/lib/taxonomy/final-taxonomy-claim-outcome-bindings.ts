@@ -586,6 +586,16 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
       supporting('outcome-enumerate-subset-state-space'),
     ],
   },
+  'abc419-g': {
+    '/typicalTechniques/0': [primary('outcome-kernelize-near-tree-graph')],
+    '/typicalTechniques/1': [sameTag('outcome-kernelize-near-tree-graph')],
+    '/typicalTechniques/2': [primary('outcome-use-cycle-space-basis')],
+    '/typicalTechniques/3': [supporting('outcome-enumerate-bounded-candidates-or-cases')],
+    '/typicalTechniques/4': [supporting('outcome-enumerate-by-reversible-backtracking')],
+    '/prerequisiteCandidates/0': [sameTag('outcome-use-cycle-space-basis')],
+    '/prerequisiteCandidates/1': [sameTag('outcome-kernelize-near-tree-graph')],
+    '/prerequisiteCandidates/2': [supporting('outcome-enumerate-by-reversible-backtracking')],
+  },
   'abc422-g': {
     '/typicalTechniques/0': [
       primary('outcome-encode-counting-by-generating-function'),

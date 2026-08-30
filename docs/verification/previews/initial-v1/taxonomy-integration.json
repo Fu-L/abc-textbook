@@ -2,7 +2,7 @@
   "schemaVersion": "2.0.0",
   "evidenceId": "final-taxonomy-integration-initial-v1",
   "previewId": "initial-v1",
-  "inventoryDigest": "38708367165792691030ef62b15a90f3343633d0d5338e19537de1c054e5f952",
+  "inventoryDigest": "ba6570b3b345f19c9c099043e0d4ca3d961614d695c0242db8e94ff4429e3cae",
   "previewSnapshotDigest": "719ecf851c4a5e8a565ac2184d653c1b0042dbfcea152b465c1580ad17753f2c",
   "provisionalEvidence": {
     "schemaVersion": "1.0.0",
@@ -5215,6 +5215,6 @@
   ],
   "status": "proposed",
   "canonicalMaterializationAllowed": false,
-  "integrationSubjectDigest": "51992962c01dbf0f079395b6a33abc35b9fa4c0ca26d708ae5762b226e6fe1e1",
-  "integrationDigest": "f60fbda6af7018a92011fdfca282c9b977e7ac49f195bdcdd2aef669fa037f7a"
+  "integrationSubjectDigest": "e6686bb6800f44344e82e717decee6b3a810d9ae616a7621fe61e1533f83e75d",
+  "integrationDigest": "a559498ff3ba314be7649b38c94719efef269e63c69812104bf066c6b43f3b75"
 }

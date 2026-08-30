@@ -105,6 +105,12 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
     'computational geometry',
     'Manhattan transform',
   ],
+  'tag-cycle-space-basis': [
+    'サイクル空間',
+    'サイクル基底',
+    'cycle space',
+    'fundamental cycle basis',
+  ],
   'tag-graph-core-peeling': ['2-core', '葉刈り', 'graph peeling'],
   'tag-graph-model-structure': ['グラフ理論', 'graph algorithms'],
   'tag-greedy-exchange-order': ['貪欲法', '交換法', 'greedy algorithm'],
@@ -892,6 +898,20 @@ export const FINAL_TAG_SYMMETRIC_RELATION_SEEDS: readonly FinalTagRelationSeed[]
     targetTagId: 'tag-directed-core-peeling',
     type: 'analogy',
     rationale: '局所次数条件を満たさない頂点をqueueで除き、残存核の不変条件を読む発想が共通する。',
+  },
+  {
+    sourceTagId: 'tag-cycle-space-basis',
+    targetTagId: 'tag-xor-linear-basis',
+    type: 'analogy',
+    rationale:
+      '辺集合の対称差と整数のbitwise XORはどちらもF_2上の線形結合・独立性・基底で整理できるが、cycle spaceは偶数次数制約とfundamental cycleに固有の構成を持つ。',
+  },
+  {
+    sourceTagId: 'tag-cycle-space-basis',
+    targetTagId: 'tag-degree-parity-subgraph',
+    type: 'analogy',
+    rationale:
+      'cycle spaceはincidence境界が0の辺集合全体であり、奇数次数頂点集合Tを固定したT-joinの解集合は、解が存在すればcycle spaceのaffine cosetになる。特に同じTを実現する二つの辺集合のXORはcycle spaceに属する。',
   },
   {
     sourceTagId: 'tag-directional-grid-effect-scan',

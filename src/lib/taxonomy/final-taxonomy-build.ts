@@ -1533,16 +1533,22 @@ const representativeDecisionRefs = (
         kind === 'tag'
           ? decision.claimDispositions.find(({ tagIds }) => tagIds.includes(targetId))?.claimRef
           : undefined;
+      const primaryOutcomeIndex = [
+        decision.primaryOutcomeId,
+        ...decision.additionalPrimaryOutcomeIds,
+      ].indexOf(targetId);
       const preferredPath =
-        kind === 'outcome' &&
-        [decision.primaryOutcomeId, ...decision.additionalPrimaryOutcomeIds].includes(targetId)
-          ? '/outcomeCandidates/0'
+        kind === 'outcome' && primaryOutcomeIndex >= 0
+          ? `/outcomeCandidates/${String(primaryOutcomeIndex)}`
           : kind === 'tag' && dispositionReference === undefined
             ? '/reasoningPath/algorithmConnection'
             : undefined;
       const reference = dispositionReference
         ? policyClaimReference(dispositionReference)
         : (targetReferences.find(({ claimPath }) => claimPath === preferredPath) ??
+          (kind === 'outcome'
+            ? targetReferences.find(({ claimPath }) => claimPath === '/outcomeCandidates/0')
+            : undefined) ??
           targetReferences[0]);
       return reference === undefined ? [] : [reference];
     }),

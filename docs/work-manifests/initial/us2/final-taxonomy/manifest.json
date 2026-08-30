@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T159-final-taxonomy",
   "taskId": "T159",
-  "scopeDigest": "c92b18ef0642ee87da178493fe2ce243d458325a581c01365ff8047721869678",
-  "digest": "347cd01880a237bc154d20a890715b4e0e1b3abb5171ab850e05ed9030646b6b",
+  "scopeDigest": "7710f4477e8f9cb41fb172954cddee95ce24dbfb67a2678c1b8d8663b7d53707",
+  "digest": "4b45cf260e4014a8ae7a9b4e11c668a69b4335d05c31f206443b09d3aa6f0a03",
   "changeKind": "mixed",
   "requiredRequirementIds": [
     "FR-007",
@@ -208,6 +208,7 @@
     "outcome-transform-to-geometry-optimization",
     "outcome-transform-to-number-theory",
     "outcome-translate-sequences-by-rsk",
+    "outcome-use-cycle-space-basis",
     "outcome-use-tree-diameter-extrema"
   ],
   "outcomeImpact": {
@@ -435,6 +436,7 @@
         "outcome-transform-to-geometry-optimization",
         "outcome-transform-to-number-theory",
         "outcome-translate-sequences-by-rsk",
+        "outcome-use-cycle-space-basis",
         "outcome-use-tree-diameter-extrema"
       ],
       "outcomeImpact": {
