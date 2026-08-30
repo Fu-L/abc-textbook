@@ -11,6 +11,7 @@ import {
   PreMaterializationCorrectionImpactSchema,
   ProblemAnalysisClaimRefSchema,
   TaxonomyIntegrationMapSchema,
+  TechniqueTagRelationTypeSchema,
   TechniqueTagSchema,
 } from '../../src/lib/domain/schema-parts/catalog.js';
 
@@ -539,6 +540,10 @@ describe('strict T159 staging schemas', () => {
       Object.entries(tagCandidate?.entity ?? {}).filter(([field]) => field !== 'semanticSignature'),
     );
     expect(TechniqueTagSchema.safeParse(withoutSignature).success).toBe(false);
+    expect(tagCandidate?.entity.relatedTags).toEqual([]);
+    expect(TechniqueTagSchema.safeParse(tagCandidate?.entity).success).toBe(true);
+    expect(TechniqueTagRelationTypeSchema.safeParse('extension').success).toBe(true);
+    expect(TechniqueTagRelationTypeSchema.safeParse('reduction').success).toBe(true);
     expect(
       TechniqueTagSchema.safeParse({
         ...tagCandidate?.entity,

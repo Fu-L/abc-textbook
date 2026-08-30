@@ -21,7 +21,10 @@ import {
   validateFinalTaxonomyPolicy,
   type ProblemAnalysisInput,
 } from '../../src/lib/taxonomy/final-taxonomy-policy.js';
-import { FINAL_TAG_LEARNER_ALIASES } from '../../src/lib/taxonomy/final-taxonomy-content.js';
+import {
+  FINAL_TAG_DIRECTED_RELATION_SEEDS,
+  FINAL_TAG_LEARNER_ALIASES,
+} from '../../src/lib/taxonomy/final-taxonomy-content.js';
 import { validateContentWorkManifest } from '../../src/lib/validation/content-work-manifest.js';
 
 const inventoryRoot = path.join(process.cwd(), 'src/content/technique-inventory');
@@ -352,9 +355,36 @@ describe('final taxonomy policy', () => {
     expect(tagById.get('tag-parallel-binary-search')?.relatedTags).toContainEqual(
       expect.objectContaining({
         tagId: 'tag-monotone-threshold-search',
-        type: 'specialization',
+        type: 'extension',
       }),
     );
+    expect(tagById.get('tag-directional-grid-effect-scan')?.relatedTags).toContainEqual(
+      expect.objectContaining({ tagId: 'tag-event-sweep', type: 'analogy' }),
+    );
+    expect(tagById.get('tag-event-sweep')?.semanticSignature.excludedPatterns).toContain(
+      '固定.*方向.*scanだけ',
+    );
+    expect(tagById.get('tag-flow-feasibility-lower-bounds')?.relatedTags).toContainEqual(
+      expect.objectContaining({ tagId: 'tag-max-flow-min-cut', type: 'reduction' }),
+    );
+    expect(tagById.get('tag-min-cost-flow')?.relatedTags).toContainEqual(
+      expect.objectContaining({ tagId: 'tag-max-flow-min-cut', type: 'extension' }),
+    );
+    expect(tagById.get('tag-difference-constraints')?.relatedTags).toContainEqual(
+      expect.objectContaining({ tagId: 'tag-shortest-path', type: 'reduction' }),
+    );
+    expect(tagById.get('tag-subset-convolution')?.relatedTags).toContainEqual(
+      expect.objectContaining({ tagId: 'tag-convolution', type: 'analogy' }),
+    );
+    expect(
+      FINAL_TAG_DIRECTED_RELATION_SEEDS.filter(({ type }) => type === 'specialization').map(
+        ({ sourceTagId, targetTagId }) => `${sourceTagId}->${targetTagId}`,
+      ),
+    ).toEqual([
+      'tag-aho-corasick->tag-finite-pattern-automaton',
+      'tag-bostan-mori->tag-generating-functions',
+      'tag-steiner-tree-dp->tag-subset-bitmask-dp',
+    ]);
     expect(tagById.get('tag-subset-zeta-mobius-transform')?.relatedTags).toContainEqual(
       expect.objectContaining({ tagId: 'tag-divisor-mobius-inversion', type: 'analogy' }),
     );

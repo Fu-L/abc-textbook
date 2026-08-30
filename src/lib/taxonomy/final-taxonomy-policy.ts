@@ -35,7 +35,7 @@ export const FINAL_TAXONOMY_PLACEMENT_PRINCIPLES = Object.freeze({
   prerequisite:
     'curriculum prerequisiteは論理的な最小依存ではなく、先に学ぶことで後続Unitの説明・実装・考察が自然になり、重複を避けて段階的に到達できるときの教材上のprecedence constraintとする。単なる併用・類似・対比は前提にせずtyped relationへ分離する。',
   relatedTags:
-    'Tag間のcontrast・specialization・analogy・often_combined・implementation_substrateはcurriculum prerequisiteと独立に保持し、未知問での想起、比較学習、実装選択に使える具体的理由を付ける。',
+    'Tag間のcontrast・analogy・specialization・extension・reduction・often_combined・implementation_substrateはcurriculum prerequisiteと独立に保持し、未知問で再利用すべき思考が区別できる具体的理由を付ける。specializationは変形なしに成り立つ狭い一種、extensionは新しい目的・制約・操作・interfaceを加える拡張、reductionはsourceからtargetへの意味保存変換に限る。該当関係がないTagは空配列のままとする。',
   naming:
     '固有算法名をalias・recallに置くのは、その算法を説明して到達確認できるOutcomeとUnitが現corpusにある場合だけとする。',
   fallback:
@@ -88,6 +88,7 @@ export interface ProblemAnalysisInput {
   readonly reviewFindings: readonly string[];
 }
 
+/** Internal RegExp sources for machine recognition; never learner-facing prose by themselves. */
 export interface SemanticSignaturePolicy {
   readonly objectPatterns: readonly string[];
   readonly triggerPatterns: readonly string[];

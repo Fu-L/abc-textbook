@@ -660,15 +660,25 @@ export const TechniqueTagSemanticSignatureSchema = strictObject({
   excludedPatterns: uniqueArray(nonEmptyText),
   minimumDimensions: z.number().int().min(1).max(4),
   requireObjectForStrictRecall: z.boolean(),
+}).meta({
+  description:
+    'The *Patterns arrays contain machine-readable RegExp source strings evaluated with the iu flags. They are internal recognition rules and are not learner-facing prose to display verbatim.',
 });
 
-export const TechniqueTagRelationTypeSchema = z.enum([
-  'contrast',
-  'specialization',
-  'analogy',
-  'often_combined',
-  'implementation_substrate',
-]);
+export const TechniqueTagRelationTypeSchema = z
+  .enum([
+    'contrast',
+    'analogy',
+    'specialization',
+    'extension',
+    'reduction',
+    'often_combined',
+    'implementation_substrate',
+  ])
+  .meta({
+    description:
+      'contrast/analogy/often_combined are symmetric. For directed relations source specializes or extends target, reduces to target, or uses target as an implementation substrate.',
+  });
 
 export const SYMMETRIC_TECHNIQUE_TAG_RELATION_TYPES = [
   'contrast',
@@ -689,7 +699,10 @@ export const TechniqueTagSchema = strictObject({
   parentId: EntityIdSchema.nullable(),
   prerequisiteTagIds: entityIds,
   semanticSignature: TechniqueTagSemanticSignatureSchema,
-  relatedTags: uniqueArray(TechniqueTagRelationSchema),
+  relatedTags: uniqueArray(TechniqueTagRelationSchema).meta({
+    description:
+      'Zero or more reviewed non-prerequisite Tag relations. An empty array is canonical when no meaningful relation applies.',
+  }),
   learningOutcomeIds: entityIds.min(1),
   representativeProblemIds: z.array(ProblemIdSchema).min(1),
   aliases: uniqueArray(nonEmptyText),

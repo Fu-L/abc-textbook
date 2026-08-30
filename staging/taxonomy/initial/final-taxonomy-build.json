@@ -27,7 +27,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "030fad2659d195a37fdfccf08fcbeed0f4b516836712605578a4c9e1d9578dea",
+    "rulesDigest": "a13d11af1c1d893bcf58c538c97b83414d8c99bf494987b2bb7b0ee7b3d788cf",
     "requiredReviewMode": "third_party",
     "riskReasons": ["major_classification_change"],
     "authoringSkillName": "abc-explanation-author",
@@ -6724,6 +6724,11 @@
             "tagId": "tag-generating-functions",
             "type": "often_combined",
             "rationale": "組合せの合成を生成関数の積へ符号化し、その係数を畳み込みで計算する流れで併用する。"
+          },
+          {
+            "tagId": "tag-subset-convolution",
+            "type": "analogy",
+            "rationale": "分解ごとの積を足す二項演算としては共通するが、通常の添字加算 i+j=k とdisjoint subset分割は異なる合成則であり、互いを特殊化とはみなさない。"
           }
         ],
         "learningOutcomeIds": ["outcome-compute-convolution-or-correlation"],
@@ -7197,8 +7202,8 @@
         "relatedTags": [
           {
             "tagId": "tag-shortest-path",
-            "type": "specialization",
-            "rationale": "差の不等式を緩和辺へ写し、最短路の不変条件で可解性と極値を求める特殊化である。"
+            "type": "reduction",
+            "rationale": "各不等式 x_v-x_u<=c を有向辺 u->v の緩和条件へ写し、可解性・極値を最短路または負閉路判定へ帰着する。"
           }
         ],
         "learningOutcomeIds": ["outcome-solve-difference-constraints"],
@@ -7460,8 +7465,8 @@
         "relatedTags": [
           {
             "tagId": "tag-event-sweep",
-            "type": "specialization",
-            "rationale": "active状態を更新するevent sweepの見方を、各行・各列の固定方向scanへ特殊化する。"
+            "type": "analogy",
+            "rationale": "順序に沿って進みながら少数のactive状態だけを更新する発想は共通する。一方、固定方向scanにはeventのsort・追加・削除がなく、event sweepそのものとは区別する。"
           }
         ],
         "learningOutcomeIds": ["outcome-precompute-directional-grid-effects"],
@@ -7889,8 +7894,8 @@
         "relatedTags": [
           {
             "tagId": "tag-range-monoid-aggregation",
-            "type": "specialization",
-            "rationale": "必要な節点だけを生成し、巨大・疎な添字域へ区間monoid集約を拡張する。"
+            "type": "extension",
+            "rationale": "区間monoid集約へ必要な節点だけを生成する疎な表現を加え、巨大またはonlineで現れる添字域まで扱う。"
           }
         ],
         "learningOutcomeIds": ["outcome-maintain-sparse-domain-segment-tree"],
@@ -8044,6 +8049,11 @@
             "tagId": "tag-coordinate-compression",
             "type": "often_combined",
             "rationale": "疎なevent座標を圧縮してFenwick TreeやSegment Tree上でactive情報を更新する構成で頻繁に併用する。"
+          },
+          {
+            "tagId": "tag-directional-grid-effect-scan",
+            "type": "analogy",
+            "rationale": "順序に沿って進みながら少数のactive状態だけを更新する発想は共通する。一方、固定方向scanにはeventのsort・追加・削除がなく、event sweepそのものとは区別する。"
           },
           {
             "tagId": "tag-ordered-set-multiset",
@@ -8290,8 +8300,8 @@
         "relatedTags": [
           {
             "tagId": "tag-finite-field-extension",
-            "type": "specialization",
-            "rationale": "拡大有限体上のp乗写像とその軌道構造に焦点を当てた特殊化である。"
+            "type": "extension",
+            "rationale": "拡大有限体の表現と四則演算へFrobenius写像・固定体・orbit長の構造を加え、反復区間の圧縮まで扱う。"
           }
         ],
         "learningOutcomeIds": ["outcome-decompose-finite-field-frobenius-orbits"],
@@ -8433,8 +8443,8 @@
         "relatedTags": [
           {
             "tagId": "tag-max-flow-min-cut",
-            "type": "specialization",
-            "rationale": "通常の容量制約に下限と需要balanceを加え、補助source・sinkで実現可能性を判定する。"
+            "type": "reduction",
+            "rationale": "各辺の下限を先に差し引いて頂点需要へ移し、super source/sinkからの全需要辺を飽和できるかというmax-flow問題へ帰着する。"
           }
         ],
         "learningOutcomeIds": ["outcome-solve-flow-with-lower-bounds"],
@@ -8540,8 +8550,8 @@
         "relatedTags": [
           {
             "tagId": "tag-formal-power-series",
-            "type": "specialization",
-            "rationale": "基本FPS演算を前提に、合成・power projectionという高次演算へ進む。"
+            "type": "extension",
+            "rationale": "inverse・log・exp等の基本FPS演算を土台に、合成・power projectionとその転置という高次演算を加える。"
           }
         ],
         "learningOutcomeIds": ["outcome-compose-series-and-project-powers"],
@@ -8599,8 +8609,8 @@
         "relatedTags": [
           {
             "tagId": "tag-monotone-threshold-search",
-            "type": "specialization",
-            "rationale": "比率目的を加法判定へ変換した上で単調境界探索を適用する特殊化である。"
+            "type": "reduction",
+            "rationale": "比率目的を benefit-x·cost の加法判定へ意味保存変換し、その成立境界を単調閾値探索へ帰着する。"
           }
         ],
         "learningOutcomeIds": ["outcome-optimize-ratio-by-parametric-search"],
@@ -10276,8 +10286,8 @@
           },
           {
             "tagId": "tag-spanning-tree-optimization",
-            "type": "specialization",
-            "rationale": "Kruskal順のprefixを閾値部分graphとして利用するMST系の特殊化である。"
+            "type": "extension",
+            "rationale": "Kruskalの辺順とcut性質を、MST構築だけでなく閾値部分graphの連結時刻・成分metadataの増分処理へ拡張する。"
           }
         ],
         "learningOutcomeIds": ["outcome-sweep-connectivity-by-kruskal-threshold"],
@@ -11065,8 +11075,8 @@
         "relatedTags": [
           {
             "tagId": "tag-max-flow-min-cut",
-            "type": "specialization",
-            "rationale": "flow量の実現に加えて費用最小化を扱う拡張として位置付ける。"
+            "type": "extension",
+            "rationale": "容量と保存則を持つflow模型へ辺費用と流量別最適化を加え、reduced costや残余cycleまで管理する拡張である。"
           },
           {
             "tagId": "tag-shortest-path",
@@ -12182,8 +12192,8 @@
         "relatedTags": [
           {
             "tagId": "tag-monotone-threshold-search",
-            "type": "specialization",
-            "rationale": "単一queryの単調境界探索を、多数queryで判定器を共有するround処理へ特殊化する。"
+            "type": "extension",
+            "rationale": "単一queryの単調境界探索を、多数queryのmidをbucket化して判定器を共有するoffline round処理へ拡張する。"
           }
         ],
         "learningOutcomeIds": ["outcome-share-threshold-checks-by-parallel-binary-search"],
@@ -13457,8 +13467,8 @@
         "relatedTags": [
           {
             "tagId": "tag-convolution",
-            "type": "specialization",
-            "rationale": "係数が逐次確定する依存を保ったまま畳み込みをonline計算する特殊化である。"
+            "type": "extension",
+            "rationale": "一括入力の畳み込みへ「係数が逐次確定し、未来の係数を参照できない」というinterface制約を加え、online計算を可能にする。"
           }
         ],
         "learningOutcomeIds": ["outcome-compute-online-relaxed-convolution"],
@@ -13904,8 +13914,8 @@
         "relatedTags": [
           {
             "tagId": "tag-range-monoid-aggregation",
-            "type": "specialization",
-            "rationale": "通常の一様な遅延作用で閉じないchmin/chmax更新を、追加要約で処理する特殊化である。"
+            "type": "extension",
+            "rationale": "区間monoid要約へ最大値・次点・個数と作用可能条件を加え、通常の一様な遅延作用で閉じないchmin/chmax更新まで扱う。"
           }
         ],
         "learningOutcomeIds": ["outcome-prune-range-actions-by-node-invariant"],
@@ -14829,8 +14839,8 @@
         "relatedTags": [
           {
             "tagId": "tag-rooted-tree-aggregation",
-            "type": "specialization",
-            "rationale": "木DPの合成則をboundary付きclusterへ持ち上げ、局所変更へ対応する特殊化である。"
+            "type": "extension",
+            "rationale": "根付き木DPの合成則をboundary付きclusterの結合へ持ち上げ、局所変更後の再計算を対数個のclusterに限定する。"
           }
         ],
         "learningOutcomeIds": ["outcome-compose-dynamic-tree-clusters"],
@@ -15170,8 +15180,8 @@
         "relatedTags": [
           {
             "tagId": "tag-convolution",
-            "type": "specialization",
-            "rationale": "添字加算ではなくdisjoint subset分割を合成則にした畳み込みへ特殊化する。"
+            "type": "analogy",
+            "rationale": "分解ごとの積を足す二項演算としては共通するが、通常の添字加算 i+j=k とdisjoint subset分割は異なる合成則であり、互いを特殊化とはみなさない。"
           }
         ],
         "learningOutcomeIds": ["outcome-compute-subset-convolution"],
@@ -16124,8 +16134,8 @@
         "relatedTags": [
           {
             "tagId": "tag-bipartite-matching-hall",
-            "type": "specialization",
-            "rationale": "二部matchingに辺重みと完全割当の目的を加えた最適化版として学ぶ。"
+            "type": "extension",
+            "rationale": "二部matchingの割当模型へ辺重みと完全割当の最適化目的を加え、dual potentialとtight edgeという新しい不変条件まで扱う。"
           }
         ],
         "learningOutcomeIds": ["outcome-solve-weighted-bipartite-matching"],
@@ -305890,8 +305900,8 @@
     "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"
   ],
   "reviewEvidenceRefs": [],
-  "taxonomySubjectDigest": "f8760711a3c820b374c67632d373b37ec81dac10e97038348f53c0578dbfa8e3",
-  "taxonomyDigest": "2e65153153466300ca3b51df89bfa06e9024468032a452df216677df00346252",
+  "taxonomySubjectDigest": "8f6422cb1426e060d6a8b76df3a57caa8f5c48005efd78f7a75d44ffda5b4b0a",
+  "taxonomyDigest": "ddf525db277cc07a6ceafa7c6c9601f32d8f50c0331f175b42884b91382190f8",
   "tagDagDigest": "89b9b6fbee17902c8c2b0565adf9c249d784c31909ac1ae31d281666f8b8a098",
   "learningUnitDagDigest": "2c9d8c934b607a820c15c8dfa5b48e7ceea71a3e5894e8ef39f836b9dd55fc80",
   "orderDigest": "494259b90e99dd7028602fba5ad48168b918befef0463eb153630e1f004ada51",
@@ -305901,5 +305911,5 @@
   "acceptedAt": null,
   "holdReasons": ["CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE"],
   "canonicalMaterializationAllowed": false,
-  "buildDigest": "80df4f9d5eb99688eec64866e6672f49e81338af74be744e3bde9c96ad283af3"
+  "buildDigest": "92a5548c116b5846f11a81a9a96b2743a8dd21bc3dcf8c53f692fc21e1512fbc"
 }

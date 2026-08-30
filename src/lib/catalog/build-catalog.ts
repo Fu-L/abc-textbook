@@ -191,7 +191,13 @@ export interface CatalogLike {
     readonly relatedTags: readonly {
       readonly tagId: string;
       readonly type:
-        'contrast' | 'specialization' | 'analogy' | 'often_combined' | 'implementation_substrate';
+        | 'contrast'
+        | 'analogy'
+        | 'specialization'
+        | 'extension'
+        | 'reduction'
+        | 'often_combined'
+        | 'implementation_substrate';
       readonly rationale: string;
     }[];
     readonly parentId: string | null;

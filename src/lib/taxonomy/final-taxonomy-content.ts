@@ -778,7 +778,13 @@ export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, reado
 };
 
 export type FinalTagRelationType =
-  'contrast' | 'specialization' | 'analogy' | 'often_combined' | 'implementation_substrate';
+  | 'contrast'
+  | 'analogy'
+  | 'specialization'
+  | 'extension'
+  | 'reduction'
+  | 'often_combined'
+  | 'implementation_substrate';
 
 export interface FinalTagRelationSeed {
   readonly sourceTagId: string;
@@ -898,6 +904,20 @@ export const FINAL_TAG_SYMMETRIC_RELATION_SEEDS: readonly FinalTagRelationSeed[]
     rationale: '局所次数条件を満たさない頂点をqueueで除き、残存核の不変条件を読む発想が共通する。',
   },
   {
+    sourceTagId: 'tag-directional-grid-effect-scan',
+    targetTagId: 'tag-event-sweep',
+    type: 'analogy',
+    rationale:
+      '順序に沿って進みながら少数のactive状態だけを更新する発想は共通する。一方、固定方向scanにはeventのsort・追加・削除がなく、event sweepそのものとは区別する。',
+  },
+  {
+    sourceTagId: 'tag-subset-convolution',
+    targetTagId: 'tag-convolution',
+    type: 'analogy',
+    rationale:
+      '分解ごとの積を足す二項演算としては共通するが、通常の添字加算 i+j=k とdisjoint subset分割は異なる合成則であり、互いを特殊化とはみなさない。',
+  },
+  {
     sourceTagId: 'tag-event-sweep',
     targetTagId: 'tag-coordinate-compression',
     type: 'often_combined',
@@ -996,55 +1016,59 @@ export const FINAL_TAG_SYMMETRIC_RELATION_SEEDS: readonly FinalTagRelationSeed[]
   },
 ];
 
-/** Directed semantics: source specializes target, or source uses target as an implementation substrate. */
+/**
+ * Directed semantics: source specializes or extends target, reduces to target, or uses target as an
+ * implementation substrate.
+ */
 export const FINAL_TAG_DIRECTED_RELATION_SEEDS: readonly FinalTagRelationSeed[] = [
   {
     sourceTagId: 'tag-parallel-binary-search',
     targetTagId: 'tag-monotone-threshold-search',
-    type: 'specialization',
-    rationale: '単一queryの単調境界探索を、多数queryで判定器を共有するround処理へ特殊化する。',
+    type: 'extension',
+    rationale:
+      '単一queryの単調境界探索を、多数queryのmidをbucket化して判定器を共有するoffline round処理へ拡張する。',
   },
   {
     sourceTagId: 'tag-fractional-parametric-search',
     targetTagId: 'tag-monotone-threshold-search',
-    type: 'specialization',
-    rationale: '比率目的を加法判定へ変換した上で単調境界探索を適用する特殊化である。',
-  },
-  {
-    sourceTagId: 'tag-directional-grid-effect-scan',
-    targetTagId: 'tag-event-sweep',
-    type: 'specialization',
-    rationale: 'active状態を更新するevent sweepの見方を、各行・各列の固定方向scanへ特殊化する。',
+    type: 'reduction',
+    rationale:
+      '比率目的を benefit-x·cost の加法判定へ意味保存変換し、その成立境界を単調閾値探索へ帰着する。',
   },
   {
     sourceTagId: 'tag-weighted-bipartite-matching',
     targetTagId: 'tag-bipartite-matching-hall',
-    type: 'specialization',
-    rationale: '二部matchingに辺重みと完全割当の目的を加えた最適化版として学ぶ。',
+    type: 'extension',
+    rationale:
+      '二部matchingの割当模型へ辺重みと完全割当の最適化目的を加え、dual potentialとtight edgeという新しい不変条件まで扱う。',
   },
   {
     sourceTagId: 'tag-flow-feasibility-lower-bounds',
     targetTagId: 'tag-max-flow-min-cut',
-    type: 'specialization',
-    rationale: '通常の容量制約に下限と需要balanceを加え、補助source・sinkで実現可能性を判定する。',
+    type: 'reduction',
+    rationale:
+      '各辺の下限を先に差し引いて頂点需要へ移し、super source/sinkからの全需要辺を飽和できるかというmax-flow問題へ帰着する。',
   },
   {
     sourceTagId: 'tag-min-cost-flow',
     targetTagId: 'tag-max-flow-min-cut',
-    type: 'specialization',
-    rationale: 'flow量の実現に加えて費用最小化を扱う拡張として位置付ける。',
+    type: 'extension',
+    rationale:
+      '容量と保存則を持つflow模型へ辺費用と流量別最適化を加え、reduced costや残余cycleまで管理する拡張である。',
   },
   {
     sourceTagId: 'tag-dynamic-segment-tree',
     targetTagId: 'tag-range-monoid-aggregation',
-    type: 'specialization',
-    rationale: '必要な節点だけを生成し、巨大・疎な添字域へ区間monoid集約を拡張する。',
+    type: 'extension',
+    rationale:
+      '区間monoid集約へ必要な節点だけを生成する疎な表現を加え、巨大またはonlineで現れる添字域まで扱う。',
   },
   {
     sourceTagId: 'tag-segment-tree-beats',
     targetTagId: 'tag-range-monoid-aggregation',
-    type: 'specialization',
-    rationale: '通常の一様な遅延作用で閉じないchmin/chmax更新を、追加要約で処理する特殊化である。',
+    type: 'extension',
+    rationale:
+      '区間monoid要約へ最大値・次点・個数と作用可能条件を加え、通常の一様な遅延作用で閉じないchmin/chmax更新まで扱う。',
   },
   {
     sourceTagId: 'tag-aho-corasick',
@@ -1055,26 +1079,23 @@ export const FINAL_TAG_DIRECTED_RELATION_SEEDS: readonly FinalTagRelationSeed[] 
   {
     sourceTagId: 'tag-finite-field-frobenius',
     targetTagId: 'tag-finite-field-extension',
-    type: 'specialization',
-    rationale: '拡大有限体上のp乗写像とその軌道構造に焦点を当てた特殊化である。',
+    type: 'extension',
+    rationale:
+      '拡大有限体の表現と四則演算へFrobenius写像・固定体・orbit長の構造を加え、反復区間の圧縮まで扱う。',
   },
   {
     sourceTagId: 'tag-fps-composition-power-projection',
     targetTagId: 'tag-formal-power-series',
-    type: 'specialization',
-    rationale: '基本FPS演算を前提に、合成・power projectionという高次演算へ進む。',
+    type: 'extension',
+    rationale:
+      'inverse・log・exp等の基本FPS演算を土台に、合成・power projectionとその転置という高次演算を加える。',
   },
   {
     sourceTagId: 'tag-relaxed-convolution',
     targetTagId: 'tag-convolution',
-    type: 'specialization',
-    rationale: '係数が逐次確定する依存を保ったまま畳み込みをonline計算する特殊化である。',
-  },
-  {
-    sourceTagId: 'tag-subset-convolution',
-    targetTagId: 'tag-convolution',
-    type: 'specialization',
-    rationale: '添字加算ではなくdisjoint subset分割を合成則にした畳み込みへ特殊化する。',
+    type: 'extension',
+    rationale:
+      '一括入力の畳み込みへ「係数が逐次確定し、未来の係数を参照できない」というinterface制約を加え、online計算を可能にする。',
   },
   {
     sourceTagId: 'tag-bostan-mori',
@@ -1091,20 +1112,23 @@ export const FINAL_TAG_DIRECTED_RELATION_SEEDS: readonly FinalTagRelationSeed[] 
   {
     sourceTagId: 'tag-static-top-tree',
     targetTagId: 'tag-rooted-tree-aggregation',
-    type: 'specialization',
-    rationale: '木DPの合成則をboundary付きclusterへ持ち上げ、局所変更へ対応する特殊化である。',
+    type: 'extension',
+    rationale:
+      '根付き木DPの合成則をboundary付きclusterの結合へ持ち上げ、局所変更後の再計算を対数個のclusterに限定する。',
   },
   {
     sourceTagId: 'tag-kruskal-threshold-sweep',
     targetTagId: 'tag-spanning-tree-optimization',
-    type: 'specialization',
-    rationale: 'Kruskal順のprefixを閾値部分graphとして利用するMST系の特殊化である。',
+    type: 'extension',
+    rationale:
+      'Kruskalの辺順とcut性質を、MST構築だけでなく閾値部分graphの連結時刻・成分metadataの増分処理へ拡張する。',
   },
   {
     sourceTagId: 'tag-difference-constraints',
     targetTagId: 'tag-shortest-path',
-    type: 'specialization',
-    rationale: '差の不等式を緩和辺へ写し、最短路の不変条件で可解性と極値を求める特殊化である。',
+    type: 'reduction',
+    rationale:
+      '各不等式 x_v-x_u<=c を有向辺 u->v の緩和条件へ写し、可解性・極値を最短路または負閉路判定へ帰着する。',
   },
   {
     sourceTagId: 'tag-lazy-segment-action',

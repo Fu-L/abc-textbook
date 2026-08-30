@@ -8,10 +8,10 @@
   "integrationMapPath": "docs/verification/previews/initial-v1/taxonomy-integration.json",
   "reviewCheckResultsPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
   "reviewEvidencePath": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-  "taxonomySubjectDigest": "f8760711a3c820b374c67632d373b37ec81dac10e97038348f53c0578dbfa8e3",
-  "buildDigest": "80df4f9d5eb99688eec64866e6672f49e81338af74be744e3bde9c96ad283af3",
+  "taxonomySubjectDigest": "8f6422cb1426e060d6a8b76df3a57caa8f5c48005efd78f7a75d44ffda5b4b0a",
+  "buildDigest": "92a5548c116b5846f11a81a9a96b2743a8dd21bc3dcf8c53f692fc21e1512fbc",
   "integrationMapDigest": "f60fbda6af7018a92011fdfca282c9b977e7ac49f195bdcdd2aef669fa037f7a",
-  "taxonomyDigest": "2e65153153466300ca3b51df89bfa06e9024468032a452df216677df00346252",
+  "taxonomyDigest": "ddf525db277cc07a6ceafa7c6c9601f32d8f50c0331f175b42884b91382190f8",
   "tagDagDigest": "89b9b6fbee17902c8c2b0565adf9c249d784c31909ac1ae31d281666f8b8a098",
   "learningUnitDagDigest": "2c9d8c934b607a820c15c8dfa5b48e7ceea71a3e5894e8ef39f836b9dd55fc80",
   "orderDigest": "494259b90e99dd7028602fba5ad48168b918befef0463eb153630e1f004ada51",
@@ -30,5 +30,5 @@
   "canonicalMaterializationAllowed": false,
   "holdReasons": ["CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE"],
   "diagnosticCodes": [],
-  "evidenceDigest": "ad67bbd2554f8e5d3b4d86808cbee977487056e9dcb846541c38500acfd20542"
+  "evidenceDigest": "5dff3fe97e383b3bf112ff2b413bee19cdb3bafbbef96d740ff7b3ba66870465"
 }
