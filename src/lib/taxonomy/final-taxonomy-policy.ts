@@ -1262,7 +1262,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-euler-degree':
     'グラフを探索できることを前提に、全辺walkの成立性や選択辺集合の端点条件を次数parityで特徴付け、葉から判定・構成する。',
   'unit-cycle-space-basis':
-    '全域木を構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basis・次元・path族への単射を一つの線形構造から導く。',
+    '無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。',
   'unit-lowlink-critical-structure':
     'DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。',
   'unit-graph-core-peeling':
@@ -4155,14 +4155,14 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-cycle-space-basis',
     name: 'cycle space・fundamental cycle basis',
     definition:
-      '連結無向graphで全頂点が偶数次数となる辺集合をF_2上のcycle spaceとして扱い、spanning tree Tと各non-tree edge eが作る唯一のcycleからfundamental cycle basisと次元M-N+1を導く。',
+      '無向graphで全頂点が偶数次数となる辺集合をF_2上のcycle space C(G)として扱い、連結成分数C、spanning forest F、各non-tree edge eが作る唯一のcycleからfundamental cycle basisとdim C(G)=M-N+Cを導く。連結graphではC=1なのでM-N+1となる。',
     parentId: 'tag-graph-model-structure',
     outcomeIds: ['outcome-use-cycle-space-basis'],
     unitIds: ['unit-cycle-space-basis'],
     recall: ['cycle space', 'cycle basis', 'fundamental cycle', 'サイクル空間', 'サイクル基底'],
-    object: ['連結無向graph', '辺集合', 'spanning tree', 'non-tree edge', 's-t path'],
-    trigger: ['M-N+1が小さい', '辺集合をXOR', 'cycle族', 'simple path数を抑える'],
-    invariant: ['全頂点の次数が偶数', '対称差に関して閉じる', 'dim C(G)=M-N+1', 'P XOR P_0'],
+    object: ['無向graph', '連結成分', '辺集合', 'spanning forest', 'non-tree edge', 's-t path'],
+    trigger: ['M-N+Cが小さい', '辺集合をXOR', 'cycle族', 'simple path数を抑える'],
+    invariant: ['全頂点の次数が偶数', '対称差に関して閉じる', 'dim C(G)=M-N+C', 'P XOR P_0'],
     goal: ['cycle basis構築', 'cycle空間の列挙', 'simple path数の上界'],
     priority: 92,
   },
@@ -5891,7 +5891,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-identify-bridges-and-articulations':
     'DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。',
   'outcome-use-cycle-space-basis':
-    '全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning tree Tと各non-tree edge eが作る唯一のcycleからfundamental cycle basisを構築してdim C(G)=M-N+1を導ける。さらに固定したs-t path P_0に対し、Phi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pであることから単射性を示し、simple s-t path数を2^(M-N+1)以下に抑えられる。',
+    '無向graphの全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning forest Fと各non-tree edge eが作る唯一のcycleからfundamental cycle basisを構築して、連結成分数Cに対するdim C(G)=M-N+Cを導ける。連結graphではC=1となる。さらにABC419-Gでは固定したs-t path P_0に対し、Phi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pであることから単射性を示し、simple s-t path数を2^(M-N+1)以下に抑えられる。',
   'outcome-reduce-graph-by-peeling-or-kernelization':
     '削除可能な葉・低次数頂点を反復除去してcycle coreと各頂点の所属を特定するか、terminal以外の葉除去とdegree-2 chain縮約によってcycle rankに依存する小kernelを構成できる。',
   'outcome-linearize-static-range-information':

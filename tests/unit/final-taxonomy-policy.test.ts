@@ -645,6 +645,13 @@ describe('final taxonomy policy', () => {
     expect(unitById.get('unit-cycle-space-basis')?.excludedTopics).toEqual(
       expect.arrayContaining([expect.stringContaining('橋・関節点')]),
     );
+    expect(tagById.get('tag-cycle-space-basis')?.definition).toMatch(
+      /spanning forest.*dim C\(G\)=M-N\+C/u,
+    );
+    expect(tagById.get('tag-cycle-space-basis')?.semanticSignature.objectPatterns).toContain(
+      '連結成分',
+    );
+    expect(tagById.get('tag-cycle-space-basis')?.definition).toContain('連結graphではC=1');
     expect(unitById.get('unit-near-tree-kernelization')?.additionalPrerequisiteUnitIds).toEqual([
       'unit-cycle-space-basis',
       'unit-graph-core',
@@ -653,7 +660,10 @@ describe('final taxonomy policy', () => {
       orderIndex.get('unit-near-tree-kernelization') ?? -1,
     );
     expect(outcomeById.get('outcome-use-cycle-space-basis')?.statement).toMatch(
-      /dim C\(G\)=M-N\+1/u,
+      /spanning forest.*dim C\(G\)=M-N\+C/u,
+    );
+    expect(outcomeById.get('outcome-use-cycle-space-basis')?.statement).toContain(
+      '連結graphではC=1',
     );
     expect(outcomeById.get('outcome-use-cycle-space-basis')?.statement).toContain('P XOR P_0');
   });

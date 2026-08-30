@@ -5,12 +5,12 @@
   "inputs": {
     "inventory": {
       "evidencePath": "docs/verification/bootstrap/technique-inventory.json",
-      "evidenceDigest": "790f98c0ce2806421627b930cfb033d7f05ab9cf8a5fa86ecb73bc76dd24399f",
-      "inventoryDigest": "ba6570b3b345f19c9c099043e0d4ca3d961614d695c0242db8e94ff4429e3cae",
-      "corpusDigest": "c51c9d55f0a1331a480db1ef087672fd7da900c92378c6d8bafa02bdbce18118",
+      "evidenceDigest": "56f6a69af654f6c352c361d0b06fdca8092e5cbf427e7d8e23ad8eb060d4a7a1",
+      "inventoryDigest": "f357942ae246c0914bc426584559e594bd0b8beb88a2fa71ba576dd63ac70441",
+      "corpusDigest": "f3c69b2b3e0a0702ea1f3d76eff4e68b3c90ee23669e03e33ae1976890300f3c",
       "authoringEvidencePath": "docs/verification/bootstrap/technique-inventory-authoring.json",
-      "authoringEvidenceDigest": "56ae5415635e635a96708d48bb4757e07ead349021b8de48a375184174652dc0",
-      "authoringInventoryDigest": "49a77b3d2e22730a6a6dbb3fb91aa6fb4988c35cca8b9446ea72f18a54825efa",
+      "authoringEvidenceDigest": "16c19dbfe14cbc4deb5541cfd4746f95a12b8e97b3385cf42b5ece8a724794f4",
+      "authoringInventoryDigest": "46f8d441f1780ceb91f2e8226655d021d56adef1b05331ba0ea4474f7438045c",
       "normalizedSourceSetDigest": "ab1f7d2fde4351b84651aafe5d9321269a45a84d9d739be59c8b1ed32f7cb771"
     },
     "previewSnapshot": {
@@ -27,7 +27,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "423a135ddc92395dc9d42eaa898da2535128586ce20ac68f7a099876de9ef3c1",
+    "rulesDigest": "81fb1a99f3b5b9d839e65f584aa43aa81d2edf39489f6ed848b3afc2c17b03d6",
     "requiredReviewMode": "third_party",
     "riskReasons": ["major_classification_change"],
     "authoringSkillName": "abc-explanation-author",
@@ -43,7 +43,7 @@
     "schemaVersion": "2.0.0",
     "evidenceId": "final-taxonomy-integration-initial-v1",
     "previewId": "initial-v1",
-    "inventoryDigest": "ba6570b3b345f19c9c099043e0d4ca3d961614d695c0242db8e94ff4429e3cae",
+    "inventoryDigest": "f357942ae246c0914bc426584559e594bd0b8beb88a2fa71ba576dd63ac70441",
     "previewSnapshotDigest": "719ecf851c4a5e8a565ac2184d653c1b0042dbfcea152b465c1580ad17753f2c",
     "provisionalEvidence": {
       "schemaVersion": "1.0.0",
@@ -5256,10 +5256,10 @@
     ],
     "status": "proposed",
     "canonicalMaterializationAllowed": false,
-    "integrationSubjectDigest": "e6686bb6800f44344e82e717decee6b3a810d9ae616a7621fe61e1533f83e75d",
-    "integrationDigest": "a559498ff3ba314be7649b38c94719efef269e63c69812104bf066c6b43f3b75"
+    "integrationSubjectDigest": "19f255576a648aa3c513930a0e351d68977413203831c83af32cadc2c9bbb9cf",
+    "integrationDigest": "19c16722b13bd8e26c7ad2cb8946d593063b7b7c223e7acf49ce2696a08e09ae"
   },
-  "integrationMapDigest": "a559498ff3ba314be7649b38c94719efef269e63c69812104bf066c6b43f3b75",
+  "integrationMapDigest": "19c16722b13bd8e26c7ad2cb8946d593063b7b7c223e7acf49ce2696a08e09ae",
   "finalCandidates": [
     {
       "kind": "tag",
@@ -6884,21 +6884,22 @@
       "entity": {
         "id": "tag-cycle-space-basis",
         "name": "cycle space・fundamental cycle basis",
-        "definition": "連結無向graphで全頂点が偶数次数となる辺集合をF_2上のcycle spaceとして扱い、spanning tree Tと各non-tree edge eが作る唯一のcycleからfundamental cycle basisと次元M-N+1を導く。",
+        "definition": "無向graphで全頂点が偶数次数となる辺集合をF_2上のcycle space C(G)として扱い、連結成分数C、spanning forest F、各non-tree edge eが作る唯一のcycleからfundamental cycle basisとdim C(G)=M-N+Cを導く。連結graphではC=1なのでM-N+1となる。",
         "parentId": "tag-graph-model-structure",
         "prerequisiteTagIds": [],
         "semanticSignature": {
           "objectPatterns": [
             "non-tree edge",
             "s-t path",
-            "spanning tree",
+            "spanning forest",
+            "無向graph",
             "辺集合",
-            "連結無向graph"
+            "連結成分"
           ],
-          "triggerPatterns": ["M-N+1が小さい", "cycle族", "simple path数を抑える", "辺集合をXOR"],
+          "triggerPatterns": ["M-N+Cが小さい", "cycle族", "simple path数を抑える", "辺集合をXOR"],
           "invariantPatterns": [
             "P XOR P_0",
-            "dim C(G)=M-N+1",
+            "dim C(G)=M-N+C",
             "全頂点の次数が偶数",
             "対称差に関して閉じる"
           ],
@@ -30204,7 +30205,7 @@
       "kind": "outcome",
       "entity": {
         "id": "outcome-use-cycle-space-basis",
-        "statement": "全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning tree Tと各non-tree edge eが作る唯一のcycleからfundamental cycle basisを構築してdim C(G)=M-N+1を導ける。さらに固定したs-t path P_0に対し、Phi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pであることから単射性を示し、simple s-t path数を2^(M-N+1)以下に抑えられる。",
+        "statement": "無向graphの全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning forest Fと各non-tree edge eが作る唯一のcycleからfundamental cycle basisを構築して、連結成分数Cに対するdim C(G)=M-N+Cを導ける。連結graphではC=1となる。さらにABC419-Gでは固定したs-t path P_0に対し、Phi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pであることから単射性を示し、simple s-t path数を2^(M-N+1)以下に抑えられる。",
         "prerequisiteOutcomeIds": [],
         "scopeIds": ["abc419-g", "tag-cycle-space-basis", "unit-cycle-space-basis"]
       },
@@ -37961,7 +37962,7 @@
         "difficultyRank": 4,
         "representativeRank": 92,
         "globalIndex": 95,
-        "orderReason": "全域木を構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basis・次元・path族への単射を一つの線形構造から導く。"
+        "orderReason": "無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。"
       },
       "sourceRevisionIds": [
         "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
@@ -305991,8 +305992,8 @@
     "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"
   ],
   "reviewEvidenceRefs": [],
-  "taxonomySubjectDigest": "7d4c45f5c9c51d7aadce7368c99bad01b6ecb5f52b6419c0603112ce8b94b803",
-  "taxonomyDigest": "f0d7f023fe763a09e450921923578be67c0bc78c52307cd72ba3d50d6b33b55a",
+  "taxonomySubjectDigest": "760a4021bd6360e7bf8e0f00661fefcad79e1bc7cae92b362582ce3db06573b6",
+  "taxonomyDigest": "4d6d1b216d0efad930caee137a64770a6d69a2638e60274b2055273975e6a88f",
   "tagDagDigest": "596fef488a932c9d90801e159dcf7ecdad2c9bf449b1bd956f66dfaa7f38330d",
   "learningUnitDagDigest": "41221efeee3621e39f625773e632dd4a731c9c241552e59fda8d25098d097633",
   "orderDigest": "a9c295fab81de3429c0d4de327f7e558fbfff07f4a859d6c8bc153f6a2916127",
@@ -306002,5 +306003,5 @@
   "acceptedAt": null,
   "holdReasons": ["CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE"],
   "canonicalMaterializationAllowed": false,
-  "buildDigest": "8702023199ea943ba5fced74ee01cc24eb496866e98afa55c9bd0d9ed521cf5a"
+  "buildDigest": "d3021cdceb86641757a77fca1a009914d402a20b9d8ae3d59a3c748ee8fb0de0"
 }
