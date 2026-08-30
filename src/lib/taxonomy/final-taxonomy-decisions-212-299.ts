@@ -26,7 +26,9 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   // Hall's condition is the reusable feasibility theorem; mask transforms evaluate all subsets.
   'abc215-h': 'tag-flow-matching-cut',
 
-  'abc216-e': 'tag-monotone-threshold-search',
+  // The reusable object is the union of monotone marginal-reward sequences; threshold search
+  // is one way to select their global top K without materializing all terms.
+  'abc216-e': 'tag-discrete-convex-marginal',
   'abc216-f': 'tag-knapsack-resource',
   'abc216-g': 'tag-shortest-path',
   // LGV turns collision avoidance into a determinant; the remaining subset DP counts its terms.
@@ -117,7 +119,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc232-h': 'tag-constructive-witness',
 
   'abc233-e': 'tag-contribution-reordering',
-  'abc233-ex': 'tag-monotone-threshold-search',
+  'abc233-ex': 'tag-parallel-binary-search',
   'abc233-f': 'tag-constructive-witness',
   'abc233-g': 'tag-interval-partition-dp',
 
@@ -127,8 +129,10 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc234-g': 'tag-monotone-stack-queue',
 
   'abc235-e': 'tag-spanning-tree-optimization',
-  'abc235-ex': 'tag-convolution-fps',
-  'abc235-f': 'tag-digit-automaton-dp',
+  // The Kruskal reconstruction tree is the rare recognition step that organizes every valid
+  // operation; generating-function DP is retained as a co-primary counting layer.
+  'abc235-ex': 'tag-dsu-merge-tree',
+  'abc235-f': 'tag-digit-dp',
   'abc235-g': 'tag-inclusion-exclusion',
 
   'abc236-e': 'tag-monotone-threshold-search',
@@ -144,8 +148,9 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc238-e': 'tag-dsu-connectivity',
   'abc238-ex': 'tag-reverse-offline',
   'abc238-f': 'tag-sequence-subsequence-dp',
-  // A randomized fingerprint is what makes the prime-exponent vector queryable in O(1).
-  'abc238-g': 'tag-randomized-algorithm',
+  // The reusable recognition skill is the homomorphic algebraic fingerprint; the generic
+  // Monte Carlo error analysis is its readiness prerequisite rather than the Home.
+  'abc238-g': 'tag-randomized-algebraic-fingerprint',
 
   'abc239-e': 'tag-tree-aggregation-reroot',
   'abc239-ex': 'tag-integer-boundary-blocks',
@@ -194,7 +199,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
 
   'abc248-e': 'tag-geometry-orientation-transform',
   'abc248-ex': 'tag-monotone-stack-queue',
-  'abc248-f': 'tag-dp-state-equivalence',
+  'abc248-f': 'tag-frontier-profile-dp',
   'abc248-g': 'tag-tree-aggregation-reroot',
 
   'abc249-e': 'tag-dp-transition-acceleration',
@@ -223,7 +228,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc253-f': 'tag-reverse-offline',
   'abc253-g': 'tag-integer-boundary-blocks',
 
-  'abc254-e': 'tag-reachability-bfs',
+  'abc254-e': 'tag-bounded-enumeration',
   'abc254-ex': 'tag-binary-trie',
   'abc254-f': 'tag-gcd-diophantine',
   'abc254-g': 'tag-functional-graph-doubling',
@@ -276,7 +281,9 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc263-g': 'tag-flow-matching-cut',
 
   'abc264-e': 'tag-reverse-offline',
-  'abc264-ex': 'tag-amortized-heavy-light',
+  // The update follows ordinary tree-DP deltas; the logarithmic depth is a static size bound,
+  // not a potential/amortized argument.
+  'abc264-ex': 'tag-tree-aggregation-reroot',
   'abc264-f': 'tag-dp-state-equivalence',
   'abc264-g': 'tag-string-automata',
 
@@ -316,7 +323,9 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc271-f': 'tag-divide-enumerate',
   'abc271-g': 'tag-linear-recurrence-matrix',
 
-  'abc272-e': 'tag-amortized-heavy-light',
+  // Only (i,j) pairs that enter the mex range are generated; their harmonic count is a direct
+  // candidate-space bound rather than monotone-state amortization.
+  'abc272-e': 'tag-bounded-enumeration',
   'abc272-ex': 'tag-convolution-fps',
   'abc272-f': 'tag-suffix-lcp-index',
   'abc272-g': 'tag-randomized-algorithm',
@@ -400,7 +409,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc287-g': 'tag-fenwick-weighted-prefix',
 
   'abc288-e': 'tag-knapsack-resource',
-  'abc288-ex': 'tag-digit-automaton-dp',
+  'abc288-ex': 'tag-digit-dp',
   'abc288-f': 'tag-interval-partition-dp',
   'abc288-g': 'tag-linear-algebra-xor',
 
@@ -422,7 +431,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc292-e': 'tag-reachability-bfs',
   'abc292-ex': 'tag-monoid-segment-tree',
   'abc292-f': 'tag-monotone-threshold-search',
-  'abc292-g': 'tag-digit-automaton-dp',
+  'abc292-g': 'tag-interval-partition-dp',
 
   'abc293-e': 'tag-linear-recurrence-matrix',
   'abc293-ex': 'tag-monotone-threshold-search',

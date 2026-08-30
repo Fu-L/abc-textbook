@@ -124,23 +124,26 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       ['typicalTechniques', 0, 'supporting', 'tag-spanning-tree-optimization'],
       ['typicalTechniques', 1, 'supporting', 'tag-combinatorial-coefficients'],
       ['typicalTechniques', 1, 'supporting', 'tag-inclusion-exclusion'],
+      ['typicalTechniques', 1, 'primary', 'tag-labeled-component-decomposition'],
       ['typicalTechniques', 2, 'same_tag', 'tag-contribution-reordering'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-spanning-tree-optimization'],
       ['prerequisiteCandidates', 1, 'supporting', 'tag-combinatorial-coefficients'],
       ['prerequisiteCandidates', 1, 'supporting', 'tag-inclusion-exclusion'],
+      ['prerequisiteCandidates', 1, 'same_tag', 'tag-labeled-component-decomposition'],
     ],
     {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
       'tag-inclusion-exclusion': ['outcome-correct-overlap-by-inversion'],
       'tag-spanning-tree-optimization': ['outcome-construct-optimal-spanning-tree'],
     },
+    ['outcome-count-labeled-structures-by-components'],
   ),
   'abc387-e': decision(
     'outcome-recover-valid-witness',
     [
       ['typicalTechniques', 0, 'primary', 'tag-constructive-witness'],
       ['typicalTechniques', 0, 'supporting', 'tag-bounded-enumeration'],
-      ['typicalTechniques', 1, 'problem_specific'],
+      ['typicalTechniques', 1, 'baseline'],
       ['prerequisiteCandidates', 0, 'problem_specific'],
       ['prerequisiteCandidates', 1, 'baseline'],
     ],
@@ -675,12 +678,21 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
   ),
-  'abc405-f': decision('outcome-answer-tree-ancestor-queries', [
-    ['typicalTechniques', 0, 'same_tag', 'tag-tree-path-decomposition'],
-    ['typicalTechniques', 1, 'primary', 'tag-tree-path-decomposition'],
-    ['typicalTechniques', 2, 'same_tag', 'tag-tree-path-decomposition'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-tree-path-decomposition'],
-  ]),
+  'abc405-f': decision(
+    'outcome-build-laminar-interval-containment-tree',
+    [
+      ['typicalTechniques', 0, 'primary', 'tag-laminar-interval-containment-tree'],
+      ['typicalTechniques', 1, 'supporting', 'tag-tree-path-decomposition'],
+      ['typicalTechniques', 2, 'supporting', 'tag-cyclic-order-crossing'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-laminar-interval-containment-tree'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-tree-path-decomposition'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-cyclic-order-crossing'],
+    ],
+    {
+      'tag-cyclic-order-crossing': ['outcome-detect-crossing-by-cyclic-order'],
+      'tag-tree-path-decomposition': ['outcome-answer-tree-ancestor-queries'],
+    },
+  ),
   'abc405-g': decision(
     'outcome-schedule-range-query-updates',
     [
@@ -699,9 +711,9 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc406-e': decision('outcome-count-prefix-constrained-objects', [
-    ['typicalTechniques', 0, 'primary', 'tag-digit-automaton-dp'],
-    ['typicalTechniques', 1, 'same_tag', 'tag-digit-automaton-dp'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-digit-automaton-dp'],
+    ['typicalTechniques', 0, 'primary', 'tag-digit-dp'],
+    ['typicalTechniques', 1, 'same_tag', 'tag-digit-dp'],
+    ['prerequisiteCandidates', 0, 'same_tag', 'tag-digit-dp'],
   ]),
   'abc406-f': decision(
     'outcome-flatten-tree-by-euler-order',
@@ -2234,11 +2246,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
   'abc454-e': decision(
     'outcome-recover-valid-witness',
     [
-      ['typicalTechniques', 0, 'problem_specific'],
+      ['typicalTechniques', 0, 'supporting', 'tag-bipartite-structure'],
       ['typicalTechniques', 1, 'primary', 'tag-constructive-witness'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-constructive-witness'],
     ],
-    {},
+    { 'tag-bipartite-structure': ['outcome-color-and-classify-bipartite-components'] },
   ),
   'abc454-f': decision(
     'outcome-linearize-static-range-information',
@@ -2576,9 +2588,9 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc465-e': decision('outcome-count-prefix-constrained-objects', [
-    ['typicalTechniques', 0, 'primary', 'tag-digit-automaton-dp'],
-    ['typicalTechniques', 1, 'same_tag', 'tag-digit-automaton-dp'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-digit-automaton-dp'],
+    ['typicalTechniques', 0, 'primary', 'tag-digit-dp'],
+    ['typicalTechniques', 1, 'same_tag', 'tag-digit-dp'],
+    ['prerequisiteCandidates', 0, 'same_tag', 'tag-digit-dp'],
   ]),
   'abc465-f': decision(
     'outcome-enumerate-subset-state-space',
@@ -2618,10 +2630,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       'tag-greedy-exchange-order': ['outcome-prove-greedy-order'],
     },
   ),
-  'abc466-f': decision('outcome-maintain-dynamic-order-statistics', [
-    ['typicalTechniques', 0, 'problem_specific'],
-    ['typicalTechniques', 1, 'primary', 'tag-ordered-set-heap'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-ordered-set-heap'],
+  'abc466-f': decision('outcome-transform-multisets-in-prefix-interval-basis', [
+    ['typicalTechniques', 0, 'primary', 'tag-prefix-interval-multiset-transform'],
+    ['typicalTechniques', 1, 'same_tag', 'tag-prefix-interval-multiset-transform'],
+    ['prerequisiteCandidates', 0, 'same_tag', 'tag-prefix-interval-multiset-transform'],
   ]),
   'abc466-g': decision(
     'outcome-maintain-potential-differences',
@@ -2634,5 +2646,6 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     {
       'tag-carry-mixed-radix-dp': ['outcome-design-carry-or-mixed-radix-dp'],
     },
+    ['outcome-design-carry-or-mixed-radix-dp'],
   ),
 } as const satisfies Readonly<Record<string, ExplicitTaxonomyClaimDecision>>;

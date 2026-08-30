@@ -2184,7 +2184,7 @@
       "previewEntityId": "provisional-tag-multiplicative-order-counting",
       "previewEntityKind": "tag",
       "affectedProblemIds": ["abc212-g", "abc222-g"],
-      "rationale": "群構造は共通するが、指数化した数え上げと最小周期は別Outcomeで、補助的なBézout・素因数分解・約数Möbius反転も独立Tagに保つ。",
+      "rationale": "群構造は共通するが、指数化した数え上げと最小周期は別Outcomeで、補助的な素因数分解・約数Möbius反転も独立Tagに保つ。",
       "evidenceRefs": [
         {
           "problemId": "abc212-g",
@@ -2385,47 +2385,12 @@
       "status": "proposed",
       "action": "split",
       "finalEntityIds": [
-        "tag-bezout-diophantine",
         "tag-cyclic-exponent-counting",
         "tag-divisor-mobius-inversion",
         "tag-multiplicative-order",
         "tag-prime-divisor-decomposition"
       ],
       "splitProblemAssignments": [
-        {
-          "finalEntityId": "tag-bezout-diophantine",
-          "problemIds": ["abc212-g", "abc222-g"],
-          "evidenceRefs": [
-            {
-              "problemId": "abc212-g",
-              "claimPath": "/prerequisiteCandidates/0",
-              "evidenceIds": ["evidence-official-analysis"],
-              "sourceRevisionIds": [
-                "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-                "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
-              ]
-            },
-            {
-              "problemId": "abc222-g",
-              "claimPath": "/prerequisiteCandidates/0",
-              "evidenceIds": ["evidence-official-analysis"],
-              "sourceRevisionIds": [
-                "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
-                "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
-              ]
-            },
-            {
-              "problemId": "abc222-g",
-              "claimPath": "/typicalTechniques/2",
-              "evidenceIds": ["evidence-official-analysis"],
-              "sourceRevisionIds": [
-                "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
-                "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
-              ]
-            }
-          ],
-          "representativeProblemIds": ["abc212-g", "abc222-g"]
-        },
         {
           "finalEntityId": "tag-cyclic-exponent-counting",
           "problemIds": ["abc212-g"],
@@ -2861,16 +2826,12 @@
         }
       ],
       "decisionEvidence": {
-        "completeReclassificationProof": "群構造は共通するが、指数化した数え上げと最小周期は別Outcomeで、補助的なBézout・素因数分解・約数Möbius反転も独立Tagに保つ。"
+        "completeReclassificationProof": "群構造は共通するが、指数化した数え上げと最小周期は別Outcomeで、補助的な素因数分解・約数Möbius反転も独立Tagに保つ。"
       },
       "legacyDisposition": {
         "kind": "split_aliases",
         "fromPreviewEntityId": "provisional-tag-multiplicative-order-counting",
         "targets": [
-          {
-            "finalEntityId": "tag-bezout-diophantine",
-            "aliases": ["乗法的構造と位数による数え上げ"]
-          },
           {
             "finalEntityId": "tag-cyclic-exponent-counting",
             "aliases": ["乗法的構造と位数による数え上げ"]
@@ -3258,15 +3219,6 @@
             {
               "problemId": "abc218-f",
               "claimPath": "/outcomeCandidates/0",
-              "evidenceIds": ["evidence-official-analysis"],
-              "sourceRevisionIds": [
-                "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
-                "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"
-              ]
-            },
-            {
-              "problemId": "abc218-f",
-              "claimPath": "/prerequisiteCandidates/1",
               "evidenceIds": ["evidence-official-analysis"],
               "sourceRevisionIds": [
                 "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
@@ -4891,7 +4843,7 @@
       "reviewEvidenceId": null,
       "status": "proposed",
       "action": "split",
-      "finalEntityIds": ["unit-change-impact-localization", "unit-shortest-path-certificates"],
+      "finalEntityIds": ["unit-change-impact-localization", "unit-shortest-path-reconstruction"],
       "splitProblemAssignments": [
         {
           "finalEntityId": "unit-change-impact-localization",
@@ -5036,7 +4988,7 @@
           "representativeProblemIds": ["abc218-f", "abc279-e"]
         },
         {
-          "finalEntityId": "unit-shortest-path-certificates",
+          "finalEntityId": "unit-shortest-path-reconstruction",
           "problemIds": ["abc218-f", "abc252-e"],
           "evidenceRefs": [
             {
@@ -5050,15 +5002,6 @@
             },
             {
               "problemId": "abc218-f",
-              "claimPath": "/prerequisiteCandidates/0",
-              "evidenceIds": ["evidence-official-analysis"],
-              "sourceRevisionIds": [
-                "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
-                "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"
-              ]
-            },
-            {
-              "problemId": "abc218-f",
               "claimPath": "/reasoningPath/algorithmConnection",
               "evidenceIds": ["evidence-official-analysis"],
               "sourceRevisionIds": [
@@ -5112,26 +5055,8 @@
               ]
             },
             {
-              "problemId": "abc218-f",
-              "claimPath": "/typicalTechniques/1",
-              "evidenceIds": ["evidence-official-analysis"],
-              "sourceRevisionIds": [
-                "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
-                "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023"
-              ]
-            },
-            {
               "problemId": "abc252-e",
               "claimPath": "/outcomeCandidates/0",
-              "evidenceIds": ["evidence-official-analysis"],
-              "sourceRevisionIds": [
-                "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
-                "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"
-              ]
-            },
-            {
-              "problemId": "abc252-e",
-              "claimPath": "/prerequisiteCandidates/0",
               "evidenceIds": ["evidence-official-analysis"],
               "sourceRevisionIds": [
                 "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
@@ -5193,26 +5118,8 @@
               ]
             },
             {
-              "problemId": "abc252-e",
-              "claimPath": "/typicalTechniques/1",
-              "evidenceIds": ["evidence-official-analysis"],
-              "sourceRevisionIds": [
-                "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
-                "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2"
-              ]
-            },
-            {
               "problemId": "abc308-ex",
               "claimPath": "/outcomeCandidates/0",
-              "evidenceIds": ["evidence-official-analysis"],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/prerequisiteCandidates/0",
               "evidenceIds": ["evidence-official-analysis"],
               "sourceRevisionIds": [
                 "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
@@ -5298,7 +5205,7 @@
             "aliases": ["最短路の構造復元と再利用"]
           },
           {
-            "finalEntityId": "unit-shortest-path-certificates",
+            "finalEntityId": "unit-shortest-path-reconstruction",
             "aliases": ["最短路の構造復元と再利用"]
           }
         ],
@@ -5308,6 +5215,6 @@
   ],
   "status": "proposed",
   "canonicalMaterializationAllowed": false,
-  "integrationSubjectDigest": "b063544abe703f74f17138d1d6832a9c486c8bdb991ff3d6722b7f3f34ec3143",
-  "integrationDigest": "11826ba9035d5fd2988f2e0bc6ab2ec4bf20e60007016663b4459500b48c5827"
+  "integrationSubjectDigest": "51992962c01dbf0f079395b6a33abc35b9fa4c0ca26d708ae5762b226e6fe1e1",
+  "integrationDigest": "f60fbda6af7018a92011fdfca282c9b977e7ac49f195bdcdd2aef669fa037f7a"
 }

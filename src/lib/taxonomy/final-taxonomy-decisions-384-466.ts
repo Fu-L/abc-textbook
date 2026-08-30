@@ -78,9 +78,9 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   // Prefix sums encode constraints, but Bellman--Ford solves their feasibility.
   'abc404-g': 'tag-shortest-path',
   'abc405-e': 'tag-combinatorial-coefficients',
-  'abc405-f': 'tag-tree-path-decomposition',
+  'abc405-f': 'tag-laminar-interval-containment-tree',
   'abc405-g': 'tag-mo-offline-range',
-  'abc406-e': 'tag-digit-automaton-dp',
+  'abc406-e': 'tag-digit-dp',
   'abc406-f': 'tag-tree-path-decomposition',
   'abc406-g': 'tag-discrete-convex-marginal',
   'abc407-e': 'tag-greedy-exchange-order',
@@ -283,11 +283,11 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc464-e': 'tag-reverse-offline',
   'abc464-f': 'tag-divide-enumerate',
   'abc464-g': 'tag-ordered-set-heap',
-  'abc465-e': 'tag-digit-automaton-dp',
+  'abc465-e': 'tag-digit-dp',
   'abc465-f': 'tag-subset-bitmask-transform',
   'abc465-g': 'tag-ordered-set-heap',
   'abc466-e': 'tag-interval-partition-dp',
-  'abc466-f': 'tag-ordered-set-heap',
+  'abc466-f': 'tag-prefix-interval-multiset-transform',
   // Weighted DSU first extracts an independent system of interval constraints.
   'abc466-g': 'tag-dsu-connectivity',
 } as const satisfies Readonly<Record<string, string>>;
