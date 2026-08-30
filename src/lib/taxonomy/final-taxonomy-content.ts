@@ -776,3 +776,442 @@ export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, reado
   'tag-two-pointers-window': ['abc260-e', 'abc250-f', 'abc370-f'],
   'tag-witness-impact-localization': ['abc279-e', 'abc218-f'],
 };
+
+export type FinalTagRelationType =
+  'contrast' | 'specialization' | 'analogy' | 'often_combined' | 'implementation_substrate';
+
+export interface FinalTagRelationSeed {
+  readonly sourceTagId: string;
+  readonly targetTagId: string;
+  readonly type: FinalTagRelationType;
+  readonly rationale: string;
+}
+
+/** Peer relations are materialized in both directions for direct use from either Tag page. */
+export const FINAL_TAG_SYMMETRIC_RELATION_SEEDS: readonly FinalTagRelationSeed[] = [
+  {
+    sourceTagId: 'tag-monotone-threshold-search',
+    targetTagId: 'tag-two-pointers-window',
+    type: 'contrast',
+    rationale:
+      'どちらも単調性を使うが、値域の真偽境界を探す方法と連続区間の端を一方向へ進める方法を区別する。',
+  },
+  {
+    sourceTagId: 'tag-bounded-enumeration',
+    targetTagId: 'tag-meet-in-the-middle',
+    type: 'contrast',
+    rationale:
+      '候補全体を制約から直接界す全列挙と、探索空間を二分して部分結果を照合する半分全列挙を区別する。',
+  },
+  {
+    sourceTagId: 'tag-event-sweep',
+    targetTagId: 'tag-coordinate-compression',
+    type: 'contrast',
+    rationale:
+      '順序付きeventに沿ってactive状態を更新する走査と、順序・等値性だけを保って添字化する圧縮を区別する。',
+  },
+  {
+    sourceTagId: 'tag-digit-dp',
+    targetTagId: 'tag-carry-mixed-radix-dp',
+    type: 'contrast',
+    rationale:
+      '上限との接頭辞一致を保つ桁DPと、下位桁から繰り上がりだけを渡す混合基数DPを区別する。',
+  },
+  {
+    sourceTagId: 'tag-digit-dp',
+    targetTagId: 'tag-automaton-dp',
+    type: 'contrast',
+    rationale: '数値上限のtight状態を扱うDPと、受理条件を表す有限automatonとの直積DPを区別する。',
+  },
+  {
+    sourceTagId: 'tag-game-grundy-dp',
+    targetTagId: 'tag-game-value-dp',
+    type: 'contrast',
+    rationale:
+      'impartial gameのGrundy数と、双方の目的が異なる局面のminimax値を同じゲームDPへ混同しない。',
+  },
+  {
+    sourceTagId: 'tag-persistence',
+    targetTagId: 'tag-rollback',
+    type: 'contrast',
+    rationale:
+      '過去版を共有して保持する永続化と、現在状態をundoして探索順に戻すrollbackを区別する。',
+  },
+  {
+    sourceTagId: 'tag-graph-potential-propagation',
+    targetTagId: 'tag-potential-dsu',
+    type: 'contrast',
+    rationale:
+      '固定graph上で等式を一括伝播する方法と、辺追加に追随して差分potentialを保つ方法を区別する。',
+  },
+  {
+    sourceTagId: 'tag-convex-boundary-hull',
+    targetTagId: 'tag-half-plane-constraints',
+    type: 'contrast',
+    rationale:
+      '目的関数の候補を凸境界へ絞る見方と、線形半平面の共通部分として可行領域を表す見方を区別する。',
+  },
+  {
+    sourceTagId: 'tag-bipartite-matching-hall',
+    targetTagId: 'tag-min-weight-general-perfect-matching',
+    type: 'contrast',
+    rationale:
+      '二部性を使えるaugmenting path・Hall型議論と、odd blossomを扱う一般graph完全matchingを対比する。',
+  },
+  {
+    sourceTagId: 'tag-subset-zeta-mobius-transform',
+    targetTagId: 'tag-divisor-mobius-inversion',
+    type: 'analogy',
+    rationale:
+      'subset包含順序と約数整除順序はいずれもposet上のzeta変換とMöbius反転として統一して捉えられる。',
+  },
+  {
+    sourceTagId: 'tag-rollback',
+    targetTagId: 'tag-backtracking-search',
+    type: 'analogy',
+    rationale:
+      '再帰へ入る前の更新と復帰時のundoを対にし、現在pathだけの不変条件を保つ設計が共通する。',
+  },
+  {
+    sourceTagId: 'tag-binary-lifting',
+    targetTagId: 'tag-monoid-exponentiation',
+    type: 'analogy',
+    rationale: '2冪長の遷移を前計算し、指数のbit分解で必要な合成だけを選ぶ構造が共通する。',
+  },
+  {
+    sourceTagId: 'tag-semiring-matrix-exponentiation',
+    targetTagId: 'tag-monoid-exponentiation',
+    type: 'analogy',
+    rationale:
+      '閉じた結合的合成を二分累乗する共通原理を、行列半環と一般monoidの二つの表現から比較する。',
+  },
+  {
+    sourceTagId: 'tag-z-algorithm-prefix-matching',
+    targetTagId: 'tag-suffix-lcp-index',
+    type: 'analogy',
+    rationale: '一つのprefixとの一致長列と、全suffix間の辞書順・LCP索引を目的に応じて使い分ける。',
+  },
+  {
+    sourceTagId: 'tag-graph-core-peeling',
+    targetTagId: 'tag-directed-core-peeling',
+    type: 'analogy',
+    rationale: '局所次数条件を満たさない頂点をqueueで除き、残存核の不変条件を読む発想が共通する。',
+  },
+  {
+    sourceTagId: 'tag-event-sweep',
+    targetTagId: 'tag-coordinate-compression',
+    type: 'often_combined',
+    rationale:
+      '疎なevent座標を圧縮してFenwick TreeやSegment Tree上でactive情報を更新する構成で頻繁に併用する。',
+  },
+  {
+    sourceTagId: 'tag-event-sweep',
+    targetTagId: 'tag-ordered-set-multiset',
+    type: 'often_combined',
+    rationale:
+      'eventの追加・削除に応じてactive候補の最小値・近傍・順位を動的に保つ構成で併用する。',
+  },
+  {
+    sourceTagId: 'tag-coordinate-compression',
+    targetTagId: 'tag-fenwick-weighted-prefix',
+    type: 'often_combined',
+    rationale: '疎な値を順序保存圧縮してから、個数・重み・反転数をprefix集約する構成で併用する。',
+  },
+  {
+    sourceTagId: 'tag-monotone-threshold-search',
+    targetTagId: 'tag-dsu-components',
+    type: 'often_combined',
+    rationale: '閾値以下の辺だけを有効化する単調判定器をDSUで共有するときに併用する。',
+  },
+  {
+    sourceTagId: 'tag-generating-functions',
+    targetTagId: 'tag-convolution',
+    type: 'often_combined',
+    rationale: '組合せの合成を生成関数の積へ符号化し、その係数を畳み込みで計算する流れで併用する。',
+  },
+  {
+    sourceTagId: 'tag-inclusion-exclusion',
+    targetTagId: 'tag-subset-zeta-mobius-transform',
+    type: 'often_combined',
+    rationale:
+      '条件集合全体の包除をsubset lattice上で一括計算するときにzeta・Möbius変換を併用する。',
+  },
+  {
+    sourceTagId: 'tag-convex-hull-trick',
+    targetTagId: 'tag-dp-transition-acceleration',
+    type: 'often_combined',
+    rationale: 'DP遷移を直線の評価へ変形し、包絡線queryとして高速化する構成で併用する。',
+  },
+  {
+    sourceTagId: 'tag-max-flow-min-cut',
+    targetTagId: 'tag-bipartite-matching-hall',
+    type: 'often_combined',
+    rationale:
+      '二部matchingをunit-capacity flowへ帰着し、Kőnig型双対をmin-cutから説明するときに併用する。',
+  },
+  {
+    sourceTagId: 'tag-suffix-lcp-index',
+    targetTagId: 'tag-idempotent-overlap-range-query',
+    type: 'often_combined',
+    rationale:
+      'suffix array上の二suffixのLCPを、隣接LCP列の区間最小値queryとして求めるときに併用する。',
+  },
+  {
+    sourceTagId: 'tag-tree-euler-flattening',
+    targetTagId: 'tag-range-monoid-aggregation',
+    type: 'often_combined',
+    rationale: '部分木を連続区間へ写し、区間集約・一点更新・差分伝播へ接続するときに併用する。',
+  },
+  {
+    sourceTagId: 'tag-small-to-large',
+    targetTagId: 'tag-rooted-tree-aggregation',
+    type: 'often_combined',
+    rationale: '子部分木の集合・mapを小さい側から大きい側へmergeする木DPで併用する。',
+  },
+  {
+    sourceTagId: 'tag-interactive-protocol',
+    targetTagId: 'tag-information-theoretic-query-design',
+    type: 'often_combined',
+    rationale: 'query回数の情報量下界とcodeword構成を、実際の対話protocolへ落とすときに併用する。',
+  },
+  {
+    sourceTagId: 'tag-ordered-set-multiset',
+    targetTagId: 'tag-ordered-interval-partition',
+    type: 'often_combined',
+    rationale: '区間端点をordered setで管理し、split・mergeする区間族を動的に保つときに併用する。',
+  },
+  {
+    sourceTagId: 'tag-state-graph-search',
+    targetTagId: 'tag-shortest-path',
+    type: 'often_combined',
+    rationale:
+      '問題状態を頂点、合法操作を辺へ写してから、辺重みに応じた最短路algorithmを選ぶ流れで併用する。',
+  },
+  {
+    sourceTagId: 'tag-spanning-tree-optimization',
+    targetTagId: 'tag-dsu-components',
+    type: 'often_combined',
+    rationale:
+      'Kruskal順に採用済み成分を管理する実装ではDSUを併用するが、cut・cycle性質そのものとは分けて学ぶ。',
+  },
+];
+
+/** Directed semantics: source specializes target, or source uses target as an implementation substrate. */
+export const FINAL_TAG_DIRECTED_RELATION_SEEDS: readonly FinalTagRelationSeed[] = [
+  {
+    sourceTagId: 'tag-parallel-binary-search',
+    targetTagId: 'tag-monotone-threshold-search',
+    type: 'specialization',
+    rationale: '単一queryの単調境界探索を、多数queryで判定器を共有するround処理へ特殊化する。',
+  },
+  {
+    sourceTagId: 'tag-fractional-parametric-search',
+    targetTagId: 'tag-monotone-threshold-search',
+    type: 'specialization',
+    rationale: '比率目的を加法判定へ変換した上で単調境界探索を適用する特殊化である。',
+  },
+  {
+    sourceTagId: 'tag-directional-grid-effect-scan',
+    targetTagId: 'tag-event-sweep',
+    type: 'specialization',
+    rationale: 'active状態を更新するevent sweepの見方を、各行・各列の固定方向scanへ特殊化する。',
+  },
+  {
+    sourceTagId: 'tag-weighted-bipartite-matching',
+    targetTagId: 'tag-bipartite-matching-hall',
+    type: 'specialization',
+    rationale: '二部matchingに辺重みと完全割当の目的を加えた最適化版として学ぶ。',
+  },
+  {
+    sourceTagId: 'tag-flow-feasibility-lower-bounds',
+    targetTagId: 'tag-max-flow-min-cut',
+    type: 'specialization',
+    rationale: '通常の容量制約に下限と需要balanceを加え、補助source・sinkで実現可能性を判定する。',
+  },
+  {
+    sourceTagId: 'tag-min-cost-flow',
+    targetTagId: 'tag-max-flow-min-cut',
+    type: 'specialization',
+    rationale: 'flow量の実現に加えて費用最小化を扱う拡張として位置付ける。',
+  },
+  {
+    sourceTagId: 'tag-dynamic-segment-tree',
+    targetTagId: 'tag-range-monoid-aggregation',
+    type: 'specialization',
+    rationale: '必要な節点だけを生成し、巨大・疎な添字域へ区間monoid集約を拡張する。',
+  },
+  {
+    sourceTagId: 'tag-segment-tree-beats',
+    targetTagId: 'tag-range-monoid-aggregation',
+    type: 'specialization',
+    rationale: '通常の一様な遅延作用で閉じないchmin/chmax更新を、追加要約で処理する特殊化である。',
+  },
+  {
+    sourceTagId: 'tag-aho-corasick',
+    targetTagId: 'tag-finite-pattern-automaton',
+    type: 'specialization',
+    rationale: '複数patternの共有prefixとfailure linkを持つ有限automatonとして特殊化する。',
+  },
+  {
+    sourceTagId: 'tag-finite-field-frobenius',
+    targetTagId: 'tag-finite-field-extension',
+    type: 'specialization',
+    rationale: '拡大有限体上のp乗写像とその軌道構造に焦点を当てた特殊化である。',
+  },
+  {
+    sourceTagId: 'tag-fps-composition-power-projection',
+    targetTagId: 'tag-formal-power-series',
+    type: 'specialization',
+    rationale: '基本FPS演算を前提に、合成・power projectionという高次演算へ進む。',
+  },
+  {
+    sourceTagId: 'tag-relaxed-convolution',
+    targetTagId: 'tag-convolution',
+    type: 'specialization',
+    rationale: '係数が逐次確定する依存を保ったまま畳み込みをonline計算する特殊化である。',
+  },
+  {
+    sourceTagId: 'tag-subset-convolution',
+    targetTagId: 'tag-convolution',
+    type: 'specialization',
+    rationale: '添字加算ではなくdisjoint subset分割を合成則にした畳み込みへ特殊化する。',
+  },
+  {
+    sourceTagId: 'tag-bostan-mori',
+    targetTagId: 'tag-generating-functions',
+    type: 'specialization',
+    rationale: '有理生成関数の巨大次数係数を偶奇分離で抽出する目的へ特殊化する。',
+  },
+  {
+    sourceTagId: 'tag-steiner-tree-dp',
+    targetTagId: 'tag-subset-bitmask-dp',
+    type: 'specialization',
+    rationale: 'terminal subsetを状態にし、部分集合分割と最短路closureを組み合わせる特殊化である。',
+  },
+  {
+    sourceTagId: 'tag-static-top-tree',
+    targetTagId: 'tag-rooted-tree-aggregation',
+    type: 'specialization',
+    rationale: '木DPの合成則をboundary付きclusterへ持ち上げ、局所変更へ対応する特殊化である。',
+  },
+  {
+    sourceTagId: 'tag-kruskal-threshold-sweep',
+    targetTagId: 'tag-spanning-tree-optimization',
+    type: 'specialization',
+    rationale: 'Kruskal順のprefixを閾値部分graphとして利用するMST系の特殊化である。',
+  },
+  {
+    sourceTagId: 'tag-difference-constraints',
+    targetTagId: 'tag-shortest-path',
+    type: 'specialization',
+    rationale: '差の不等式を緩和辺へ写し、最短路の不変条件で可解性と極値を求める特殊化である。',
+  },
+  {
+    sourceTagId: 'tag-lazy-segment-action',
+    targetTagId: 'tag-range-monoid-aggregation',
+    type: 'implementation_substrate',
+    rationale: '区間要約のmonoidと、その要約へ作用する写像を基盤として遅延更新を実装する。',
+  },
+  {
+    sourceTagId: 'tag-static-sorted-range-index',
+    targetTagId: 'tag-segment-tree-canonical-decomposition',
+    type: 'implementation_substrate',
+    rationale: 'query区間をcanonical node列へ分け、各nodeのsorted列を二分探索する実装に使う。',
+  },
+  {
+    sourceTagId: 'tag-virtual-tree',
+    targetTagId: 'tag-tree-ancestor-lca',
+    type: 'implementation_substrate',
+    rationale: '選択頂点集合を祖先関係を保つ小木へ閉じるため、隣接頂点間のLCAを挿入する。',
+  },
+  {
+    sourceTagId: 'tag-virtual-tree',
+    targetTagId: 'tag-tree-euler-flattening',
+    type: 'implementation_substrate',
+    rationale: '祖先順を保ったstack構築のため、選択頂点をEuler in順に並べる。',
+  },
+  {
+    sourceTagId: 'tag-heavy-light-decomposition',
+    targetTagId: 'tag-tree-euler-flattening',
+    type: 'implementation_substrate',
+    rationale: 'heavy pathごとの頂点を連続indexへ写し、pathを少数区間へ分解する。',
+  },
+  {
+    sourceTagId: 'tag-heavy-light-decomposition',
+    targetTagId: 'tag-range-monoid-aggregation',
+    type: 'implementation_substrate',
+    rationale: '分解した各heavy path区間の値を方向付きmonoid queryで合成する。',
+  },
+  {
+    sourceTagId: 'tag-aho-corasick',
+    targetTagId: 'tag-trie-prefix',
+    type: 'implementation_substrate',
+    rationale: '複数patternの共有prefixをTrieにまとめ、failure linkを加えてautomatonを構築する。',
+  },
+  {
+    sourceTagId: 'tag-automaton-dp',
+    targetTagId: 'tag-finite-pattern-automaton',
+    type: 'implementation_substrate',
+    rationale: '位置・長さと直積する有限状態および完全遷移表をDPの状態基盤にする。',
+  },
+  {
+    sourceTagId: 'tag-min-cost-flow',
+    targetTagId: 'tag-shortest-path',
+    type: 'implementation_substrate',
+    rationale: 'potentialで非負化した残余graph上の最短路を、増加路選択の実装基盤にする。',
+  },
+  {
+    sourceTagId: 'tag-potential-dsu',
+    targetTagId: 'tag-dsu-components',
+    type: 'implementation_substrate',
+    rationale: '通常のDSUにrootまでの差分potentialを持たせ、merge時にoffsetを調整する。',
+  },
+  {
+    sourceTagId: 'tag-kruskal-threshold-sweep',
+    targetTagId: 'tag-dsu-components',
+    type: 'implementation_substrate',
+    rationale: '辺重み順に追加される閾値部分graphの連結成分をDSUで増分管理する。',
+  },
+  {
+    sourceTagId: 'tag-polynomial-multipoint-evaluation',
+    targetTagId: 'tag-recursive-divide-and-conquer',
+    type: 'implementation_substrate',
+    rationale: 'subproduct treeとremainder treeをbalancedに構築する基盤として再帰分割を使う。',
+  },
+  {
+    sourceTagId: 'tag-polynomial-multipoint-evaluation',
+    targetTagId: 'tag-convolution',
+    type: 'implementation_substrate',
+    rationale: '積木と剰余計算の多項式積を高速化する基盤として畳み込みを使う。',
+  },
+  {
+    sourceTagId: 'tag-polynomial-taylor-shift',
+    targetTagId: 'tag-convolution',
+    type: 'implementation_substrate',
+    rationale: '二項展開を階乗で正規化し、反転した係数列との一回の畳み込みへ落とす。',
+  },
+  {
+    sourceTagId: 'tag-formal-power-series',
+    targetTagId: 'tag-convolution',
+    type: 'implementation_substrate',
+    rationale: 'Newton iterationの各段で必要な積・逆数更新を高速多項式畳み込みで実装する。',
+  },
+  {
+    sourceTagId: 'tag-poset-dilworth-antichain',
+    targetTagId: 'tag-bipartite-matching-hall',
+    type: 'implementation_substrate',
+    rationale: 'posetのchain coverを二部matchingへ写し、Dilworth型双対を計算する。',
+  },
+  {
+    sourceTagId: 'tag-tree-precedence-contraction',
+    targetTagId: 'tag-dsu-components',
+    type: 'implementation_substrate',
+    rationale: 'cluster縮約後の代表と統計を管理し、既に統合した頂点を一つの成分として扱う。',
+  },
+  {
+    sourceTagId: 'tag-path-matching-contraction',
+    targetTagId: 'tag-priority-queue-best-first',
+    type: 'implementation_substrate',
+    rationale: '現在もっとも有利な局所matching候補をheapから取り出し、縮約後の候補を再挿入する。',
+  },
+];

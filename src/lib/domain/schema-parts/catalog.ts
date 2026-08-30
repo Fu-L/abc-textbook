@@ -652,12 +652,44 @@ export const ProblemAnalysisRecordSchema = strictObject({
 /** @deprecated Use ProblemAnalysisRecordSchema for new code. */
 export const TechniqueInventoryItemSchema = ProblemAnalysisRecordSchema;
 
+export const TechniqueTagSemanticSignatureSchema = strictObject({
+  objectPatterns: uniqueArray(nonEmptyText).min(1),
+  triggerPatterns: uniqueArray(nonEmptyText).min(1),
+  invariantPatterns: uniqueArray(nonEmptyText).min(1),
+  goalPatterns: uniqueArray(nonEmptyText).min(1),
+  excludedPatterns: uniqueArray(nonEmptyText),
+  minimumDimensions: z.number().int().min(1).max(4),
+  requireObjectForStrictRecall: z.boolean(),
+});
+
+export const TechniqueTagRelationTypeSchema = z.enum([
+  'contrast',
+  'specialization',
+  'analogy',
+  'often_combined',
+  'implementation_substrate',
+]);
+
+export const SYMMETRIC_TECHNIQUE_TAG_RELATION_TYPES = [
+  'contrast',
+  'analogy',
+  'often_combined',
+] as const;
+
+export const TechniqueTagRelationSchema = strictObject({
+  tagId: EntityIdSchema,
+  type: TechniqueTagRelationTypeSchema,
+  rationale: nonEmptyText,
+});
+
 export const TechniqueTagSchema = strictObject({
   id: EntityIdSchema,
   name: nonEmptyText,
   definition: nonEmptyText,
   parentId: EntityIdSchema.nullable(),
   prerequisiteTagIds: entityIds,
+  semanticSignature: TechniqueTagSemanticSignatureSchema,
+  relatedTags: uniqueArray(TechniqueTagRelationSchema),
   learningOutcomeIds: entityIds.min(1),
   representativeProblemIds: z.array(ProblemIdSchema).min(1),
   aliases: uniqueArray(nonEmptyText),
@@ -685,6 +717,21 @@ export const TechniqueTagSchema = strictObject({
         code: 'custom',
         path: ['replacementTagIds'],
         message: 'A tag cannot replace itself.',
+      });
+    }
+    if (tag.relatedTags.some(({ tagId }) => tagId === tag.id)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['relatedTags'],
+        message: 'A tag cannot relate to itself.',
+      });
+    }
+    const relationKeys = tag.relatedTags.map(({ tagId, type }) => `${tagId}\u0000${type}`);
+    if (new Set(relationKeys).size !== relationKeys.length) {
+      context.addIssue({
+        code: 'custom',
+        path: ['relatedTags'],
+        message: 'Tag relations must be unique by target and type.',
       });
     }
   })
@@ -2070,6 +2117,7 @@ export const FinalTaxonomyBuildSchema = strictObject({
       tag.replacementTagIds.length > 0 ||
       (tag.parentId !== null && !tagIdSet.has(tag.parentId)) ||
       tag.prerequisiteTagIds.some((id) => !tagIdSet.has(id)) ||
+      tag.relatedTags.some(({ tagId }) => !tagIdSet.has(tagId)) ||
       tag.learningOutcomeIds.some((id) => !outcomeIdSet.has(id)) ||
       tag.representativeProblemIds.some((id) => !problemIdSet.has(id))
     ) {
@@ -2078,6 +2126,26 @@ export const FinalTaxonomyBuildSchema = strictObject({
         path: ['finalCandidates'],
         message: `Final Tag ${tag.id} has an invalid lifecycle or reference.`,
       });
+    }
+  }
+  for (const { entity: tag } of candidatesByKind.tag) {
+    for (const relation of tag.relatedTags) {
+      if (
+        SYMMETRIC_TECHNIQUE_TAG_RELATION_TYPES.includes(
+          relation.type as (typeof SYMMETRIC_TECHNIQUE_TAG_RELATION_TYPES)[number],
+        ) &&
+        !tagById
+          .get(relation.tagId)
+          ?.relatedTags.some(
+            (reverse) => reverse.tagId === tag.id && reverse.type === relation.type,
+          )
+      ) {
+        context.addIssue({
+          code: 'custom',
+          path: ['finalCandidates'],
+          message: `Symmetric Tag relation ${tag.id}/${relation.type}/${relation.tagId} is missing its reverse edge.`,
+        });
+      }
     }
   }
   for (const { entity: outcome } of candidatesByKind.outcome) {

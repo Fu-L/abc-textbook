@@ -1,8 +1,11 @@
 import { deterministicTopologicalOrder } from '../validation/validate.js';
 import {
+  FINAL_TAG_DIRECTED_RELATION_SEEDS,
   FINAL_TAG_FORMER_NAMES,
   FINAL_TAG_LEARNER_ALIASES,
   FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS,
+  FINAL_TAG_SYMMETRIC_RELATION_SEEDS,
+  type FinalTagRelationType,
 } from './final-taxonomy-content.js';
 import { FINAL_TAXONOMY_BASELINE_CLAIM_REGISTRY } from './final-taxonomy-baseline.js';
 import { FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 } from './final-taxonomy-claims-212-299.js';
@@ -30,7 +33,9 @@ export const FINAL_TAXONOMY_PLACEMENT_PRINCIPLES = Object.freeze({
   homeAndReadiness:
     'presentationUnitIdはprimaryおよびco-primary Outcomeをすべて履修済みにする最遅UnitをHomeとし、supporting OutcomeのUnitは自力で解ける時点を示すready-afterとして保持して掲載章を奪わせない。',
   prerequisite:
-    'hard prerequisiteは未習得だと次の技能の定義・正当性・実装を自然に理解できない場合だけにし、単によく併用する技能はcross-referenceへ留める。',
+    'curriculum prerequisiteは論理的な最小依存ではなく、先に学ぶことで後続Unitの説明・実装・考察が自然になり、重複を避けて段階的に到達できるときの教材上のprecedence constraintとする。単なる併用・類似・対比は前提にせずtyped relationへ分離する。',
+  relatedTags:
+    'Tag間のcontrast・specialization・analogy・often_combined・implementation_substrateはcurriculum prerequisiteと独立に保持し、未知問での想起、比較学習、実装選択に使える具体的理由を付ける。',
   naming:
     '固有算法名をalias・recallに置くのは、その算法を説明して到達確認できるOutcomeとUnitが現corpusにある場合だけとする。',
   fallback:
@@ -93,6 +98,12 @@ export interface SemanticSignaturePolicy {
   readonly requireObjectForStrictRecall: boolean;
 }
 
+export interface FinalTaxonomyTagRelationPolicy {
+  readonly tagId: string;
+  readonly type: FinalTagRelationType;
+  readonly rationale: string;
+}
+
 export interface FinalTaxonomyTagPolicy {
   readonly id: string;
   readonly name: string;
@@ -103,7 +114,9 @@ export interface FinalTaxonomyTagPolicy {
   readonly formerNames: readonly string[];
   readonly representativeProblemIds: readonly string[];
   readonly parentId: string | null;
+  /** Textbook-order predecessor, not a claim of logical necessity. */
   readonly prerequisiteTagIds: readonly string[];
+  readonly relatedTags: readonly FinalTaxonomyTagRelationPolicy[];
   readonly learningOutcomeIds: readonly string[];
   readonly learningUnitCandidateIds: readonly string[];
   readonly strictRecallTerms: readonly string[];
@@ -1015,7 +1028,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     'unit-cyclic-group-exponent-counting',
     '巡回群を指数化して数える',
     'unit-chapter-math-geometry',
-    ['unit-modular-arithmetic', 'unit-prime-divisor'],
+    ['unit-multiplicative-order-periods'],
     3,
     3,
     4,
@@ -1069,7 +1082,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     'unit-formal-power-series',
     'FPS演算・多点評価・合成を行う',
     'unit-chapter-math-geometry',
-    ['unit-polynomial-convolution'],
+    ['unit-generating-functions'],
     4,
     5,
     10,
@@ -1219,7 +1232,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-periodic-tree-role-recovery':
     '木の距離を一度計算できることを土台に、局所特徴からanchorを定め、固定間隔で反復された部品の役割を距離剰余で一括復元する。',
   'unit-kruskal-threshold-sweep':
-    'DSUで成分を管理できるようになった後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。',
+    'DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。',
   'unit-parallel-binary-search':
     '単一queryの単調境界を二分探索できるようになった後、多数queryのmidをroundごとに束ね、一方向更新できる判定器を共有する。',
   'unit-bipartite-structure':
@@ -1308,7 +1321,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-integer-boundary-blocks':
     'floorや整数根の値が変わる境界を正確に求め、同値な整数範囲をまとめて処理する。',
   'unit-cyclic-group-exponent-counting':
-    '合同算術と約数分類を土台に、巡回群の元を指数へ写して位数別に数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する。',
+    '乗法的位数とその約数分類を先に学び、巡回群の元を指数へ写して位数別に重複なく数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する。',
   'unit-multiplicative-order-periods':
     '合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。',
   'unit-combinatorial-coefficients':
@@ -1328,9 +1341,9 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-matroid-greedy':
     'Matroidの独立集合族と交換公理を定義した後、重み順greedyが最適基底を作る必要十分な構造を証明する。',
   'unit-linear-matroid-intersection':
-    '線形方程式のrank計算と乱択誤り評価を使えるようになった後、二つの線形matroidの共通独立rankを一枚の乱択行列へ圧縮する。',
+    'matroidの独立性・交換公理、線形方程式のrank計算、乱択誤り評価を学んだ後、二つの線形matroidの共通独立rankを一枚の乱択行列へ圧縮する。',
   'unit-formal-power-series':
-    '高速畳み込みを部品に、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。',
+    '生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。',
   'unit-linear-algebra-xor':
     '制約や多次元変換を線形方程式・基底・軸別変換・行列式へ写し、消去と分離によって解く。',
   'unit-matroid-theory':
@@ -1371,6 +1384,48 @@ interface TagSeed {
   readonly representativeProblemIds?: readonly string[];
 }
 
+const finalTagRelationsById = (): Readonly<
+  Record<string, readonly FinalTaxonomyTagRelationPolicy[]>
+> => {
+  const relations = new Map<string, FinalTaxonomyTagRelationPolicy[]>();
+  const append = (sourceTagId: string, relation: FinalTaxonomyTagRelationPolicy): void => {
+    const current = relations.get(sourceTagId) ?? [];
+    current.push(relation);
+    relations.set(sourceTagId, current);
+  };
+  for (const seed of FINAL_TAG_SYMMETRIC_RELATION_SEEDS) {
+    append(seed.sourceTagId, {
+      tagId: seed.targetTagId,
+      type: seed.type,
+      rationale: seed.rationale,
+    });
+    append(seed.targetTagId, {
+      tagId: seed.sourceTagId,
+      type: seed.type,
+      rationale: seed.rationale,
+    });
+  }
+  for (const seed of FINAL_TAG_DIRECTED_RELATION_SEEDS) {
+    append(seed.sourceTagId, {
+      tagId: seed.targetTagId,
+      type: seed.type,
+      rationale: seed.rationale,
+    });
+  }
+  return Object.fromEntries(
+    [...relations.entries()].map(([tagId, tagRelations]) => [
+      tagId,
+      [...tagRelations].sort(
+        (left, right) =>
+          (left.tagId < right.tagId ? -1 : left.tagId > right.tagId ? 1 : 0) ||
+          (left.type < right.type ? -1 : left.type > right.type ? 1 : 0),
+      ),
+    ]),
+  );
+};
+
+const FINAL_TAG_RELATIONS_BY_ID = finalTagRelationsById();
+
 const defineTag = (seed: TagSeed): FinalTaxonomyTagPolicy => ({
   id: seed.id,
   name: seed.name,
@@ -1381,6 +1436,7 @@ const defineTag = (seed: TagSeed): FinalTaxonomyTagPolicy => ({
     seed.representativeProblemIds ?? FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS[seed.id] ?? [],
   parentId: seed.parentId,
   prerequisiteTagIds: seed.prerequisiteTagIds ?? [],
+  relatedTags: FINAL_TAG_RELATIONS_BY_ID[seed.id] ?? [],
   learningOutcomeIds: seed.outcomeIds,
   learningUnitCandidateIds: seed.unitIds,
   strictRecallTerms: seed.recall,
@@ -3385,11 +3441,85 @@ const FINAL_TAG_UNIT_OVERRIDES: Readonly<Record<string, readonly string[]>> = {
   'tag-shortest-path-certificate': ['unit-shortest-path-reconstruction'],
 };
 
-const FINAL_TAG_PREREQUISITE_OVERRIDES: Readonly<Record<string, readonly string[]>> = {
+const FINAL_TAG_CURRICULUM_PREREQUISITE_OVERRIDES: Readonly<Record<string, readonly string[]>> = {
   // The cut/cycle property is the MST prerequisite. DSU belongs to the Kruskal subsection only.
   'tag-spanning-tree-optimization': ['tag-greedy-exchange-order'],
   'tag-lazy-segment-action': ['tag-range-monoid-aggregation'],
   'tag-static-top-tree': ['tag-rooted-tree-aggregation'],
+  'tag-cyclic-exponent-counting': [],
+  'tag-formal-power-series': ['tag-convolution'],
+  'tag-polynomial-multipoint-evaluation': ['tag-recursive-divide-and-conquer'],
+  'tag-bostan-mori': [],
+};
+
+/**
+ * Pedagogical precedence added after auditing the complete Tag/Outcome/Unit graph.
+ * These edges need not be logical necessities: each one lets the later Unit reuse a mental model,
+ * proof pattern, or implementation developed in the earlier Unit without repeating it.
+ */
+const FINAL_TAG_CURRICULUM_PREREQUISITE_ADDITIONS: Readonly<Record<string, readonly string[]>> = {
+  'tag-grid-table-dp': ['tag-dp-state-equivalence'],
+  'tag-knapsack-resource': ['tag-dp-state-equivalence'],
+  'tag-sequence-subsequence-dp': ['tag-dp-state-equivalence'],
+  'tag-interval-partition-dp': ['tag-dp-state-equivalence'],
+  'tag-carry-mixed-radix-dp': ['tag-dp-state-equivalence'],
+  'tag-digit-dp': ['tag-dp-state-equivalence'],
+  'tag-stochastic-expectation-dp': ['tag-dp-state-equivalence'],
+  'tag-game-grundy-dp': ['tag-dp-state-equivalence'],
+  'tag-game-value-dp': ['tag-dp-state-equivalence'],
+  'tag-dp-transition-acceleration': ['tag-dp-state-equivalence'],
+  'tag-linear-recurrence-matrix': ['tag-dp-state-equivalence'],
+  'tag-subset-bitmask-dp': ['tag-dp-state-equivalence'],
+  'tag-automaton-dp': ['tag-dp-state-equivalence'],
+  'tag-shortest-path': ['tag-state-graph-search'],
+  'tag-dag-topological-processing': ['tag-state-graph-search'],
+  'tag-scc-condensation': ['tag-dag-topological-processing'],
+  'tag-functional-graph-decomposition': ['tag-state-graph-search'],
+  'tag-lowlink-critical-structure': ['tag-state-graph-search'],
+  'tag-max-flow-min-cut': ['tag-state-graph-search'],
+  'tag-graph-potential-propagation': ['tag-state-graph-search'],
+  'tag-potential-dsu': ['tag-dsu-components', 'tag-graph-potential-propagation'],
+  'tag-rooted-tree-aggregation': ['tag-dp-state-equivalence'],
+  'tag-tree-ancestor-lca': ['tag-binary-lifting'],
+  'tag-heavy-light-decomposition': ['tag-tree-ancestor-lca', 'tag-tree-euler-flattening'],
+  'tag-bipartite-matching-hall': ['tag-bipartite-structure'],
+  'tag-min-weight-general-perfect-matching': ['tag-bipartite-matching-hall'],
+  'tag-degree-parity-subgraph': ['tag-euler-trail-circuit'],
+  'tag-near-tree-kernelization': ['tag-graph-core-peeling', 'tag-lowlink-critical-structure'],
+  'tag-planar-duality': ['tag-max-flow-min-cut', 'tag-shortest-path'],
+  'tag-kruskal-threshold-sweep': ['tag-spanning-tree-optimization'],
+  'tag-additive-tree-metric-reconstruction': ['tag-tree-metric-diameter'],
+  'tag-path-matching-contraction': ['tag-greedy-exchange-order', 'tag-priority-queue-best-first'],
+  'tag-fenwick-weighted-prefix': ['tag-prefix-difference'],
+  'tag-segment-tree-canonical-decomposition': ['tag-range-monoid-aggregation'],
+  'tag-static-sorted-range-index': ['tag-segment-tree-canonical-decomposition'],
+  'tag-idempotent-overlap-range-query': ['tag-range-monoid-aggregation'],
+  'tag-ordered-interval-partition': ['tag-ordered-set-multiset'],
+  'tag-automaton-subset-construction': ['tag-finite-pattern-automaton'],
+  'tag-aho-corasick': ['tag-finite-pattern-automaton'],
+  'tag-suffix-automaton': ['tag-finite-pattern-automaton'],
+  'tag-string-periodicity': ['tag-z-algorithm-prefix-matching'],
+  'tag-directional-grid-effect-scan': ['tag-event-sweep'],
+  'tag-baby-step-giant-step': ['tag-modular-arithmetic'],
+  'tag-numerical-semigroup': ['tag-bezout-diophantine'],
+  'tag-cyclic-exponent-counting': ['tag-multiplicative-order'],
+  'tag-group-action-orbit-counting': ['tag-state-normalization'],
+  'tag-subset-zeta-mobius-transform': ['tag-inclusion-exclusion', 'tag-subset-bitmask-dp'],
+  'tag-subset-convolution': ['tag-convolution', 'tag-subset-zeta-mobius-transform'],
+  'tag-determinant-counting': ['tag-linear-system-rank'],
+  'tag-generating-functions': ['tag-combinatorial-coefficients'],
+  'tag-formal-power-series': ['tag-generating-functions'],
+  'tag-polynomial-multipoint-evaluation': ['tag-formal-power-series'],
+  'tag-bostan-mori': ['tag-generating-functions'],
+  'tag-matroid-greedy': ['tag-greedy-exchange-order'],
+  'tag-linear-matroid-intersection': ['tag-matroid-greedy'],
+  'tag-reflection-principle': ['tag-combinatorial-coefficients'],
+  'tag-labeled-component-decomposition': ['tag-generating-functions'],
+  'tag-poset-dilworth-antichain': ['tag-bipartite-matching-hall', 'tag-sequence-subsequence-dp'],
+  'tag-semiring-matrix-exponentiation': ['tag-linear-recurrence-matrix'],
+  'tag-convex-hull-trick': ['tag-basic-convex-optimization'],
+  'tag-monge-optimization': ['tag-dp-transition-acceleration'],
+  'tag-cyclic-order-crossing': ['tag-geometry-orientation-transform'],
 };
 
 const REFINED_TAG_SEEDS: readonly TagSeed[] = [
@@ -5505,15 +5635,11 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
 ];
 
 const refinedLegacyTagSeeds = TAG_SEEDS.filter((seed) => !RETIRED_COARSE_TAG_IDS.has(seed.id)).map(
-  (seed): TagSeed => {
-    const prerequisiteTagIds = FINAL_TAG_PREREQUISITE_OVERRIDES[seed.id] ?? seed.prerequisiteTagIds;
-    return {
-      ...seed,
-      parentId: FINAL_TAG_PARENT_OVERRIDES[seed.id] ?? seed.parentId,
-      unitIds: FINAL_TAG_UNIT_OVERRIDES[seed.id] ?? seed.unitIds,
-      ...(prerequisiteTagIds === undefined ? {} : { prerequisiteTagIds }),
-    };
-  },
+  (seed): TagSeed => ({
+    ...seed,
+    parentId: FINAL_TAG_PARENT_OVERRIDES[seed.id] ?? seed.parentId,
+    unitIds: FINAL_TAG_UNIT_OVERRIDES[seed.id] ?? seed.unitIds,
+  }),
 );
 
 const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly string[]>> = {
@@ -5657,8 +5783,15 @@ export const FINAL_TAXONOMY_TAGS: readonly FinalTaxonomyTagPolicy[] = [
 ].map((seed) => {
   const representativeProblemIds =
     seed.representativeProblemIds ?? REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS[seed.id];
+  const prerequisiteTagIds = [
+    ...new Set([
+      ...(FINAL_TAG_CURRICULUM_PREREQUISITE_OVERRIDES[seed.id] ?? seed.prerequisiteTagIds ?? []),
+      ...(FINAL_TAG_CURRICULUM_PREREQUISITE_ADDITIONS[seed.id] ?? []),
+    ]),
+  ].sort();
   return defineTag({
     ...seed,
+    prerequisiteTagIds,
     ...(representativeProblemIds === undefined ? {} : { representativeProblemIds }),
   });
 });
@@ -5961,7 +6094,6 @@ const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
     'outcome-characterize-integer-solvability',
     'outcome-compute-in-modular-arithmetic',
   ],
-  'outcome-apply-formal-power-series-operations': ['outcome-compute-convolution-or-correlation'],
   'outcome-compute-in-finite-field-extension': ['outcome-compute-in-modular-arithmetic'],
   'outcome-restrict-geometric-candidates-to-boundary': [
     'outcome-reduce-geometry-to-algebraic-predicates',
@@ -6419,6 +6551,10 @@ for (const tag of FINAL_TAXONOMY_TAGS) {
     ]
       .sort()
       .filter((prerequisiteUnitId) => prerequisiteUnitId !== unitId);
+    const prerequisiteNames = tag.prerequisiteTagIds.flatMap((prerequisiteTagId) => {
+      const prerequisiteTag = tagById.get(prerequisiteTagId);
+      return prerequisiteTag === undefined ? [] : [prerequisiteTag.name];
+    });
     autoRefinedUnitSeeds.push({
       id: unitId,
       kind: parentIsChapter ? 'section' : 'subsection',
@@ -6428,7 +6564,10 @@ for (const tag of FINAL_TAXONOMY_TAGS) {
       stageRank: parentIsChapter ? 3 : 4,
       difficultyRank: Math.max(1, Math.floor(tag.primaryPriority / 20)),
       representativeRank: tag.primaryPriority,
-      orderReason: `${tag.definition} 発動条件と正当化原理を比較可能な独立教材として学ぶ。`,
+      orderReason:
+        prerequisiteNames.length === 0
+          ? `${tag.definition} 発動条件と正当化原理を比較可能な独立教材として学ぶ。`
+          : `${prerequisiteNames.join('・')}で得た考え方と実装を再利用し、${tag.name}の発動条件・正当化・境界を重複なく学ぶ。`,
       excludedTopics: [`${tag.name}の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。`],
     });
   }
@@ -6520,7 +6659,9 @@ export const FINAL_LEARNING_UNIT_CANDIDATES: readonly MetadataLearningUnitCandid
 
 export const FINAL_LEARNING_UNIT_ORDER_POLICY = {
   policyVersion: '1.0.0' as const,
-  hardConstraint: 'additionalPrerequisiteUnitIds',
+  precedenceConstraintField: 'additionalPrerequisiteUnitIds',
+  semantics:
+    '教材上のcurriculum prerequisiteを先行させる。単独学習の論理的不可能性ではなく、説明の再利用と自然なprogressionを表す。',
   tieBreakRanks: ['stageRank', 'difficultyRank', 'representativeRank', 'id'] as const,
   orderedUnitIds: orderedUnitSeeds.map((unit) => unit.id),
 };
@@ -9287,6 +9428,37 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
   const knownTagIds = new Set(FINAL_TAXONOMY_TAGS.map((tag) => tag.id));
   const knownOutcomeIds = new Set(FINAL_TAXONOMY_OUTCOMES.map((outcome) => outcome.id));
   const knownUnitIds = new Set(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => unit.id));
+  for (const [ownerId, prerequisiteIds] of Object.entries({
+    ...FINAL_TAG_CURRICULUM_PREREQUISITE_OVERRIDES,
+    ...FINAL_TAG_CURRICULUM_PREREQUISITE_ADDITIONS,
+  })) {
+    if (!knownTagIds.has(ownerId)) diagnostics.push(`UNKNOWN_TAG_PREREQUISITE_OWNER:${ownerId}`);
+    for (const prerequisiteId of prerequisiteIds) {
+      if (!knownTagIds.has(prerequisiteId)) {
+        diagnostics.push(`UNKNOWN_TAG_PREREQUISITE_TARGET:${ownerId}/${prerequisiteId}`);
+      }
+    }
+  }
+  const allRelationSeeds = [
+    ...FINAL_TAG_SYMMETRIC_RELATION_SEEDS,
+    ...FINAL_TAG_DIRECTED_RELATION_SEEDS,
+  ];
+  for (const relation of allRelationSeeds) {
+    if (!knownTagIds.has(relation.sourceTagId)) {
+      diagnostics.push(`UNKNOWN_TAG_RELATION_SOURCE:${relation.sourceTagId}`);
+    }
+    if (!knownTagIds.has(relation.targetTagId)) {
+      diagnostics.push(`UNKNOWN_TAG_RELATION_TARGET:${relation.targetTagId}`);
+    }
+    if (relation.sourceTagId === relation.targetTagId) {
+      diagnostics.push(`SELF_TAG_RELATION:${relation.sourceTagId}/${relation.type}`);
+    }
+    if (!relation.rationale.trim()) {
+      diagnostics.push(
+        `TAG_RELATION_RATIONALE_MISSING:${relation.sourceTagId}/${relation.type}/${relation.targetTagId}`,
+      );
+    }
+  }
   const retiredLegacyOutcomeIds = new Set([
     'outcome-bound-total-work',
     'outcome-characterize-walk-by-degrees',
@@ -9341,6 +9513,42 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
     for (const prerequisiteId of tag.prerequisiteTagIds) {
       if (!knownTagIds.has(prerequisiteId))
         diagnostics.push(`UNKNOWN_TAG_PREREQUISITE:${tag.id}/${prerequisiteId}`);
+    }
+    const relationKeys = tag.relatedTags.map(({ tagId, type }) => `${tagId}\u0000${type}`);
+    for (const duplicateRelation of duplicateIds(relationKeys)) {
+      diagnostics.push(`DUPLICATE_TAG_RELATION:${tag.id}/${duplicateRelation}`);
+    }
+    for (const relation of tag.relatedTags) {
+      if (!knownTagIds.has(relation.tagId)) {
+        diagnostics.push(`UNKNOWN_TAG_RELATION:${tag.id}/${relation.tagId}`);
+      }
+      if (relation.tagId === tag.id)
+        diagnostics.push(`SELF_TAG_RELATION:${tag.id}/${relation.type}`);
+      if (
+        (['contrast', 'analogy', 'often_combined'] as const).includes(
+          relation.type as 'contrast' | 'analogy' | 'often_combined',
+        ) &&
+        !FINAL_TAXONOMY_TAGS.find((candidate) => candidate.id === relation.tagId)?.relatedTags.some(
+          (reverse) => reverse.tagId === tag.id && reverse.type === relation.type,
+        )
+      ) {
+        diagnostics.push(`ASYMMETRIC_TAG_RELATION:${tag.id}/${relation.type}/${relation.tagId}`);
+      }
+    }
+    const recognitionDimensions = [
+      tag.semanticSignature.objectPatterns,
+      tag.semanticSignature.triggerPatterns,
+      tag.semanticSignature.invariantPatterns,
+      tag.semanticSignature.goalPatterns,
+    ];
+    if (recognitionDimensions.some((patterns) => patterns.length === 0)) {
+      diagnostics.push(`TAG_SEMANTIC_SIGNATURE_INCOMPLETE:${tag.id}`);
+    }
+    if (
+      tag.semanticSignature.minimumDimensions >
+      recognitionDimensions.filter((patterns) => patterns.length > 0).length
+    ) {
+      diagnostics.push(`TAG_SEMANTIC_SIGNATURE_DIMENSION_INVALID:${tag.id}`);
     }
     for (const outcomeId of tag.learningOutcomeIds) {
       if (!knownOutcomeIds.has(outcomeId))

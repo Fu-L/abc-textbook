@@ -254,14 +254,16 @@ shard indexのProblem ID集合は、final Catalogの全対象Problem集合と完
 | `id` | 安定Tag ID |
 | `name` / `definition` | 正式名と短い定義 |
 | `parentId` | Tagまたはnull root |
-| `prerequisiteTagIds` | 親関係とは別のDAG |
+| `prerequisiteTagIds` | 親関係とは別のcurriculum prerequisite DAG。先行すると説明・実装・考察を再利用できる教材上のprecedence constraint |
+| `semanticSignature` | `objectPatterns`, `triggerPatterns`, `invariantPatterns`, `goalPatterns`, `excludedPatterns`, `minimumDimensions`, `requireObjectForStrictRecall`。未知問でこのTagを想起すべき条件を保持 |
+| `relatedTags` | 前提以外の`contrast`, `specialization`, `analogy`, `often_combined`, `implementation_substrate`。対象Tagと具体的な学習理由を保持 |
 | `learningOutcomeIds` | 一つ以上 |
 | `representativeProblemIds` | 一つ以上 |
 | `aliases` / `formerNames` | 全Tagで一意 |
 | `lifecycle` | active/deprecated |
 | `replacementTagIds` | deprecated時に一つ以上 |
 
-同義Tag、Problem一問だけを言い換えたTag、ad-hoc要素だけのTagを正式化してはならない。
+同義Tag、Problem一問だけを言い換えたTag、ad-hoc要素だけのTagを正式化してはならない。`specialization`はrelationを持つ側が対象Tagの特殊化、`implementation_substrate`はrelationを持つ側が対象Tagを実装基盤として使う向きとする。`contrast`, `analogy`, `often_combined`は両側から辿れる対称関係として保持する。同じ二Tag間で、学習順と意味関係の双方が成立する場合はcurriculum prerequisiteとtyped relationを併記してよい。
 
 ### LearningOutcome
 
@@ -280,7 +282,7 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 | `id` / `kind` | chapter, section, subsection |
 | `parentId` | 階層上の親またはnull |
 | `baselineId` / `baselineVersion` | 共通前提 |
-| `additionalPrerequisiteUnitIds` | 追加前提または空配列 |
+| `additionalPrerequisiteUnitIds` | 追加curriculum prerequisiteまたは空配列。単独学習が論理的に不可能という意味には限定しない |
 | `excludedTopics` | 意図的対象外 |
 | `sourceRevisionIds` | 単位本文と所有例の根拠 |
 | `tagIds` / `learningOutcomeIds` | 各一つ以上 |
@@ -290,7 +292,7 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 | `stageRank` / `difficultyRank` / `representativeRank` | 0以上の整数 |
 | `globalIndex` / `orderReason` | 生成順と説明 |
 
-親子関係と前提関係は別に検証する。標準順は前提DAGをhard constraintとし、入次数0の候補だけを3 rank、最後にUnit IDのUTF-8 byte順で比較する。
+親子関係と前提関係は別に検証する。標準順はcurriculum prerequisite DAGをprecedence constraintとし、入次数0の候補だけを3 rank、最後にUnit IDのUTF-8 byte順で比較する。単なる併用、同分野、類似実装だけでは前提辺を追加せず、`relatedTags`へ理由付きで記録する。
 
 ### ProblemPlacement
 

@@ -158,12 +158,36 @@ describe('final taxonomy policy', () => {
       expect(tag.aliases.length).toBeGreaterThan(0);
       expect(tag.learningOutcomeIds.length).toBeGreaterThan(0);
       expect(tag.learningUnitCandidateIds.length).toBeGreaterThan(0);
+      expect(tag.semanticSignature.objectPatterns.length).toBeGreaterThan(0);
+      expect(tag.semanticSignature.triggerPatterns.length).toBeGreaterThan(0);
+      expect(tag.semanticSignature.invariantPatterns.length).toBeGreaterThan(0);
+      expect(tag.semanticSignature.goalPatterns.length).toBeGreaterThan(0);
+      expect(tag.semanticSignature.minimumDimensions).toBeGreaterThanOrEqual(1);
       expect(tag.representativeProblemIds.length).toBeGreaterThanOrEqual(
         SINGLE_PROBLEM_TAG_IDS.includes(tag.id) ? 1 : 2,
       );
       for (const term of [...tag.aliases, ...tag.formerNames]) {
         const normalized = term.normalize('NFKC').trim().toLocaleLowerCase('en-US');
         learnerTermOwners.set(normalized, [...(learnerTermOwners.get(normalized) ?? []), tag.id]);
+      }
+    }
+    const symmetricRelationTypes = new Set(['contrast', 'analogy', 'often_combined']);
+    for (const tag of FINAL_TAXONOMY_TAGS) {
+      const relationKeys = tag.relatedTags.map(({ tagId, type }) => `${tagId}:${type}`);
+      expect(new Set(relationKeys).size, tag.id).toBe(relationKeys.length);
+      for (const relation of tag.relatedTags) {
+        expect(tagById.has(relation.tagId), `${tag.id}/${relation.tagId}`).toBe(true);
+        expect(relation.rationale.length).toBeGreaterThan(0);
+        if (symmetricRelationTypes.has(relation.type)) {
+          expect(
+            tagById
+              .get(relation.tagId)
+              ?.relatedTags.some(
+                (reverse) => reverse.tagId === tag.id && reverse.type === relation.type,
+              ),
+            `${tag.id}/${relation.type}/${relation.tagId}`,
+          ).toBe(true);
+        }
       }
     }
     expect([...learnerTermOwners.values()].filter((tagIds) => new Set(tagIds).size > 1)).toEqual(
@@ -240,19 +264,28 @@ describe('final taxonomy policy', () => {
     expect(tagById.get('tag-static-top-tree')?.prerequisiteTagIds).toEqual([
       'tag-rooted-tree-aggregation',
     ]);
-    expect(tagById.get('tag-generating-functions')?.prerequisiteTagIds).toEqual([]);
-    expect(tagById.get('tag-formal-power-series')?.prerequisiteTagIds).toEqual(['tag-convolution']);
-    expect(tagById.get('tag-aho-corasick')?.prerequisiteTagIds).toEqual(['tag-trie-prefix']);
+    expect(tagById.get('tag-generating-functions')?.prerequisiteTagIds).toEqual([
+      'tag-combinatorial-coefficients',
+    ]);
+    expect(tagById.get('tag-formal-power-series')?.prerequisiteTagIds).toEqual([
+      'tag-convolution',
+      'tag-generating-functions',
+    ]);
+    expect(tagById.get('tag-aho-corasick')?.prerequisiteTagIds).toEqual([
+      'tag-finite-pattern-automaton',
+      'tag-trie-prefix',
+    ]);
     expect(
       outcomeById.get('outcome-build-multi-pattern-automaton')?.prerequisiteOutcomeIds,
     ).toContain('outcome-index-shared-prefixes-with-trie');
     expect(outcomeById.get('outcome-compute-directed-walk-period')?.prerequisiteOutcomeIds).toEqual(
       ['outcome-condense-and-order-directed-graph', 'outcome-reduce-integer-structure-by-gcd'],
     );
-    expect(tagById.get('tag-baby-step-giant-step')?.prerequisiteTagIds).toEqual([]);
-    expect(tagById.get('tag-cyclic-exponent-counting')?.prerequisiteTagIds).toEqual([
+    expect(tagById.get('tag-baby-step-giant-step')?.prerequisiteTagIds).toEqual([
       'tag-modular-arithmetic',
-      'tag-prime-divisor-decomposition',
+    ]);
+    expect(tagById.get('tag-cyclic-exponent-counting')?.prerequisiteTagIds).toEqual([
+      'tag-multiplicative-order',
     ]);
     expect(tagById.get('tag-multiplicative-order')?.prerequisiteTagIds).toEqual([
       'tag-modular-arithmetic',
@@ -260,6 +293,7 @@ describe('final taxonomy policy', () => {
     ]);
     expect(tagById.get('tag-linear-matroid-intersection')?.prerequisiteTagIds).toEqual([
       'tag-linear-system-rank',
+      'tag-matroid-greedy',
       'tag-randomized-algorithm',
     ]);
     expect(unitById.get('unit-linear-matroid-intersection')?.parentId).toBe('unit-matroid-theory');
@@ -273,13 +307,15 @@ describe('final taxonomy policy', () => {
     expect(unitById.get('unit-digit-dp')?.parentId).toBe('unit-dp-digit-string');
     expect(unitById.get('unit-automaton-dp')?.parentId).toBe('unit-dp-digit-string');
     expect(tagById.has('tag-digit-automaton-dp')).toBe(false);
-    expect(tagById.get('tag-labeled-component-decomposition')?.prerequisiteTagIds).toEqual([]);
+    expect(tagById.get('tag-labeled-component-decomposition')?.prerequisiteTagIds).toEqual([
+      'tag-generating-functions',
+    ]);
     expect(
       outcomeById.get('outcome-count-labeled-structures-by-components')?.prerequisiteOutcomeIds,
-    ).toEqual([]);
+    ).toEqual(['outcome-encode-counting-by-generating-function']);
     expect(
       unitById.get('unit-labeled-component-decomposition')?.additionalPrerequisiteUnitIds,
-    ).toEqual([]);
+    ).toEqual(['unit-generating-functions']);
     expect(tagById.get('tag-parallel-binary-search')?.prerequisiteTagIds).toEqual([
       'tag-monotone-threshold-search',
     ]);
@@ -290,13 +326,44 @@ describe('final taxonomy policy', () => {
       'tag-combinatorial-coefficients',
       'tag-convolution',
     ]);
-    expect(tagById.get('tag-directional-grid-effect-scan')?.prerequisiteTagIds).toEqual([]);
+    expect(tagById.get('tag-directional-grid-effect-scan')?.prerequisiteTagIds).toEqual([
+      'tag-event-sweep',
+    ]);
     expect(tagById.get('tag-periodic-tree-role-recovery')?.prerequisiteTagIds).toEqual([]);
     expect(unitById.get('unit-flow-matching')?.kind).toBe('section');
     expect(unitById.get('unit-max-flow-min-cut')?.parentId).toBe('unit-flow-matching');
 
     expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.homeAndReadiness).toContain('co-primary Outcome');
     expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.homeAndReadiness).toContain('ready-after');
+    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.prerequisite).toContain('curriculum prerequisite');
+    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.prerequisite).toContain('precedence constraint');
+    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.relatedTags).toContain('often_combined');
+    expect(FINAL_LEARNING_UNIT_ORDER_POLICY.precedenceConstraintField).toBe(
+      'additionalPrerequisiteUnitIds',
+    );
+    expect(FINAL_LEARNING_UNIT_ORDER_POLICY.semantics).toContain('curriculum prerequisite');
+
+    expect(tagById.get('tag-event-sweep')?.relatedTags).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ tagId: 'tag-coordinate-compression', type: 'contrast' }),
+        expect.objectContaining({ tagId: 'tag-coordinate-compression', type: 'often_combined' }),
+      ]),
+    );
+    expect(tagById.get('tag-parallel-binary-search')?.relatedTags).toContainEqual(
+      expect.objectContaining({
+        tagId: 'tag-monotone-threshold-search',
+        type: 'specialization',
+      }),
+    );
+    expect(tagById.get('tag-subset-zeta-mobius-transform')?.relatedTags).toContainEqual(
+      expect.objectContaining({ tagId: 'tag-divisor-mobius-inversion', type: 'analogy' }),
+    );
+    expect(tagById.get('tag-virtual-tree')?.relatedTags).toContainEqual(
+      expect.objectContaining({
+        tagId: 'tag-tree-ancestor-lca',
+        type: 'implementation_substrate',
+      }),
+    );
   });
 
   it('classifies every reviewed inventory claim and keeps singleton exceptions exact', async () => {

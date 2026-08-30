@@ -802,6 +802,20 @@ const normalizeFinalCandidate = (candidate: FinalTaxonomyCandidate): FinalTaxono
         entity: {
           ...candidate.entity,
           prerequisiteTagIds: sortedUnique(candidate.entity.prerequisiteTagIds),
+          semanticSignature: {
+            ...candidate.entity.semanticSignature,
+            objectPatterns: sortedUnique(candidate.entity.semanticSignature.objectPatterns),
+            triggerPatterns: sortedUnique(candidate.entity.semanticSignature.triggerPatterns),
+            invariantPatterns: sortedUnique(candidate.entity.semanticSignature.invariantPatterns),
+            goalPatterns: sortedUnique(candidate.entity.semanticSignature.goalPatterns),
+            excludedPatterns: sortedUnique(candidate.entity.semanticSignature.excludedPatterns),
+          },
+          relatedTags: [...candidate.entity.relatedTags].sort(
+            (left, right) =>
+              compareCodeUnits(left.tagId, right.tagId) ||
+              compareCodeUnits(left.type, right.type) ||
+              compareCodeUnits(left.rationale, right.rationale),
+          ),
           learningOutcomeIds: sortedUnique(candidate.entity.learningOutcomeIds),
           representativeProblemIds: sortedUnique(candidate.entity.representativeProblemIds),
           aliases: sortedUnique(candidate.entity.aliases),
@@ -1750,6 +1764,8 @@ const finalCandidatesFromPolicy = (
         definition: tag.definition,
         parentId: tag.parentId,
         prerequisiteTagIds: tag.prerequisiteTagIds,
+        semanticSignature: tag.semanticSignature,
+        relatedTags: tag.relatedTags,
         learningOutcomeIds: tag.learningOutcomeIds,
         representativeProblemIds: tag.representativeProblemIds,
         aliases: tag.aliases,

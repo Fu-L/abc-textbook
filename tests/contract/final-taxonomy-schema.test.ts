@@ -11,6 +11,7 @@ import {
   PreMaterializationCorrectionImpactSchema,
   ProblemAnalysisClaimRefSchema,
   TaxonomyIntegrationMapSchema,
+  TechniqueTagSchema,
 } from '../../src/lib/domain/schema-parts/catalog.js';
 
 const sha = (character: string): string => character.repeat(64);
@@ -243,6 +244,16 @@ const finalCandidates = (): z.input<typeof FinalTaxonomyCandidateSchema>[] => [
       definition: 'A hierarchy root used only as supporting navigation.',
       parentId: null,
       prerequisiteTagIds: [],
+      semanticSignature: {
+        objectPatterns: ['algorithm'],
+        triggerPatterns: ['model'],
+        invariantPatterns: ['reusable structure'],
+        goalPatterns: ['select an algorithm'],
+        excludedPatterns: [],
+        minimumDimensions: 2,
+        requireObjectForStrictRecall: true,
+      },
+      relatedTags: [],
       learningOutcomeIds: ['outcome-core'],
       representativeProblemIds: [...problemIds],
       aliases: [],
@@ -262,6 +273,16 @@ const finalCandidates = (): z.input<typeof FinalTaxonomyCandidateSchema>[] => [
       definition: 'A reusable technique demonstrated by multiple Problems.',
       parentId: 'tag-algorithms',
       prerequisiteTagIds: [],
+      semanticSignature: {
+        objectPatterns: ['fixture object'],
+        triggerPatterns: ['fixture trigger'],
+        invariantPatterns: ['fixture invariant'],
+        goalPatterns: ['fixture goal'],
+        excludedPatterns: [],
+        minimumDimensions: 2,
+        requireObjectForStrictRecall: true,
+      },
+      relatedTags: [],
       learningOutcomeIds: ['outcome-core'],
       representativeProblemIds: [...problemIds],
       aliases: [],
@@ -504,6 +525,50 @@ describe('strict T159 staging schemas', () => {
         entity: { ...tag?.entity, id: 'unit-wrong-namespace' },
       }).success,
     ).toBe(false);
+  });
+
+  it('keeps recognition signatures and typed non-prerequisite Tag relations canonical', () => {
+    const tagCandidate = finalCandidates().find(
+      (
+        candidate,
+      ): candidate is Extract<ReturnType<typeof finalCandidates>[number], { kind: 'tag' }> =>
+        candidate.kind === 'tag' && candidate.entity.id === 'tag-core',
+    );
+    expect(tagCandidate).toBeDefined();
+    const withoutSignature = Object.fromEntries(
+      Object.entries(tagCandidate?.entity ?? {}).filter(([field]) => field !== 'semanticSignature'),
+    );
+    expect(TechniqueTagSchema.safeParse(withoutSignature).success).toBe(false);
+    expect(
+      TechniqueTagSchema.safeParse({
+        ...tagCandidate?.entity,
+        relatedTags: [
+          {
+            tagId: 'tag-core',
+            type: 'contrast',
+            rationale: 'A self relation must never be canonical.',
+          },
+        ],
+      }).success,
+    ).toBe(false);
+
+    const asymmetric = createBuild('proposed');
+    const core = asymmetric.finalCandidates.find(
+      (candidate) => candidate.kind === 'tag' && candidate.entity.id === 'tag-core',
+    );
+    if (core?.kind !== 'tag') throw new Error('tag-core fixture missing');
+    core.entity.relatedTags.push({
+      tagId: 'tag-algorithms',
+      type: 'analogy',
+      rationale: 'Fixture relation with no reverse edge.',
+    });
+    const parsed = FinalTaxonomyBuildSchema.safeParse(asymmetric);
+    expect(parsed.success).toBe(false);
+    if (!parsed.success) {
+      expect(parsed.error.issues.some(({ message }) => message.includes('reverse edge'))).toBe(
+        true,
+      );
+    }
   });
 
   it('requires qualified claim refs, ad-hoc decomposition, and complete impact surfaces', () => {
