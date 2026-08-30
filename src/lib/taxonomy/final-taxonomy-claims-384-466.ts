@@ -2630,10 +2630,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       'tag-greedy-exchange-order': ['outcome-prove-greedy-order'],
     },
   ),
-  'abc466-f': decision('outcome-transform-multisets-in-prefix-interval-basis', [
-    ['typicalTechniques', 0, 'primary', 'tag-prefix-interval-multiset-transform'],
-    ['typicalTechniques', 1, 'same_tag', 'tag-prefix-interval-multiset-transform'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-prefix-interval-multiset-transform'],
+  'abc466-f': decision('outcome-bound-monotone-total-work', [
+    ['typicalTechniques', 0, 'problem_specific'],
+    ['typicalTechniques', 1, 'primary', 'tag-amortized-monotone-progress'],
+    ['prerequisiteCandidates', 0, 'problem_specific'],
   ]),
   'abc466-g': decision(
     'outcome-maintain-potential-differences',

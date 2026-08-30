@@ -234,9 +234,11 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
   'tag-tree-aggregation-reroot': ['木DP', '全方位木DP', 'tree DP', 'rerooting DP'],
   'tag-tree-balanced-separator': ['重心分解', 'centroid decomposition', 'tree separator'],
   'tag-tree-metric-diameter': [
+    '木距離',
     '木の直径',
     '木の中心',
     '最遠点',
+    'tree metric',
     'tree diameter',
     'tree center',
     'eccentricity',
@@ -301,12 +303,6 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
   'tag-dsu-components': ['DSU', 'Union-Find', 'disjoint set union', '素集合データ構造'],
   'tag-potential-dsu': ['重み付きUnion-Find', 'weighted Union-Find', 'potential DSU'],
   'tag-rooted-tree-aggregation': ['根付き木DP', 'tree DP', 'subtree DP'],
-  'tag-periodic-tree-role-recovery': [
-    '木上の距離剰余',
-    '距離剰余labeling',
-    'distance-residue labeling',
-    'periodic tree role recovery',
-  ],
   'tag-laminar-interval-containment-tree': [
     'laminar区間包含木',
     '区間包含木',
@@ -372,12 +368,6 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
     'order statistics tree',
   ],
   'tag-ordered-interval-partition': ['ODT', '区間set', 'ordered disjoint tree'],
-  'tag-prefix-interval-multiset-transform': [
-    'prefix interval基底',
-    'prefix interval multiset',
-    'weighted prefix indicators',
-    '剰余frequency圧縮',
-  ],
   'tag-persistence': ['永続データ構造', 'persistent data structure', 'path copying'],
   'tag-rollback': ['ロールバックデータ構造', 'rollback DSU', 'undo stack'],
   'tag-z-algorithm-prefix-matching': ['Zアルゴリズム', 'Z algorithm', 'Z配列'],
@@ -770,7 +760,7 @@ export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, reado
   'tag-symmetry-invariant-normalization': ['abc242-e', 'abc296-f', 'abc382-g'],
   'tag-tree-aggregation-reroot': ['abc239-e', 'abc220-f', 'abc223-g'],
   'tag-tree-balanced-separator': ['abc359-g', 'abc291-ex'],
-  'tag-tree-metric-diameter': ['abc221-f', 'abc267-f', 'abc401-f'],
+  'tag-tree-metric-diameter': ['abc221-f', 'abc267-f', 'abc303-e', 'abc401-f'],
   'tag-tree-path-decomposition': ['abc294-g', 'abc298-ex', 'abc340-g', 'abc351-g', 'abc405-f'],
   'tag-trie-prefix': ['abc287-e', 'abc353-e', 'abc437-e'],
   'tag-two-pointers-window': ['abc260-e', 'abc250-f', 'abc370-f'],
@@ -909,6 +899,13 @@ export const FINAL_TAG_SYMMETRIC_RELATION_SEEDS: readonly FinalTagRelationSeed[]
     type: 'analogy',
     rationale:
       '順序に沿って進みながら少数のactive状態だけを更新する発想は共通する。一方、固定方向scanにはeventのsort・追加・削除がなく、event sweepそのものとは区別する。',
+  },
+  {
+    sourceTagId: 'tag-convex-hull-trick',
+    targetTagId: 'tag-basic-convex-optimization',
+    type: 'analogy',
+    rationale:
+      'どちらも凸性を語彙に持つが、一次元目的関数の単峰性から探索範囲を狭める方法と、複数直線の包絡を動的に管理する方法では発動条件・証明・実装が独立している。',
   },
   {
     sourceTagId: 'tag-subset-convolution',

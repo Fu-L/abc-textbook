@@ -39,7 +39,7 @@ export const FINAL_TAXONOMY_PLACEMENT_PRINCIPLES = Object.freeze({
   naming:
     '固有算法名をalias・recallに置くのは、その算法を説明して到達確認できるOutcomeとUnitが現corpusにある場合だけとする。',
   fallback:
-    '対象読者の共通前提はbaseline、独立した再利用技能にならない問題固有の工夫はproblem_specificにする。',
+    '対象読者の共通前提はbaseline、独立した再利用技能にならない問題固有の工夫はproblem_specificにする。単一Problemの解法を入力語だけ言い換えた抽象化は、別の未知問で使える発動条件・不変量・実装templateを独立に示せない限りTag・Outcome・Unitへ昇格させない。',
   boundaries:
     '候補数を直接界す独立工程の列挙、二集合を照合するmeet-in-the-middle、可逆写像の反復到達時刻を平方根分割するBaby-Step Giant-Stepを区別し、部分集合・約数・DP遷移などの専用primary技能だけで列挙を説明し切れる場合はgenericなbounded列挙を重ねない。座標圧縮とevent sweepと単純scan、数値上限のtight・started・剰余・digit maskを持つ桁DPと有限automaton上のDPと整除鎖・加算式のcarryだけを下位桁から渡すDP、概念上のLCAと実装するancestor・Euler・HLD・virtual tree、存在判定だけの解法と親・選択記録から具体解を復元する構成法を区別する。',
 });
@@ -323,7 +323,7 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'unit-linear-recurrence': ['一般のDP遷移の区間集約・単調最適化。'],
   'unit-graph-search': [
     '非負重み付き距離の緩和・確定と最短路certificateの復元。',
-    '方向別grid effect scanによる静的前計算。',
+    'eventをsortしてactive集合を増減するsweep line。',
   ],
   'unit-shortest-path-certificates': [
     '辺重みや最短距離を扱わず、到達可否だけを求める探索、および最短路に限らない一般の変更影響解析。',
@@ -717,7 +717,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-tree-metric',
-    '木距離の端点・中心・剰余不変量を捉える',
+    '木距離を基準点・直径・中心から捉える',
     'unit-chapter-graph',
     [],
     2,
@@ -1174,8 +1174,6 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
     '探索空間を独立な二集合または再帰部分へ分けるか、部分結果をbalancedな積木・remainder tree・CDQで合成し、重複なく扱える入力規模を広げる。',
   'unit-decomposition-amortization':
     '各操作ではなく操作列全体の変化回数を数え、軽重分類や一度限りの移動で総計算量を抑える。',
-  'unit-prefix-interval-multiset-transform':
-    '巨大なfrequency列をprefix indicatorの線形結合へ変え、変換後の共通prefixをまとめ、縮小するremainderだけを追うことでobject数を対数的に抑える。',
   'unit-change-impact-localization':
     '変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。',
   'unit-randomized-algorithms':
@@ -1215,9 +1213,9 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-linear-recurrence':
     '一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。',
   'unit-graph-search':
-    '既知のDFS・BFS実装を土台に、問題の状態を頂点、合法操作を辺として設計し、必要なら中継点を順に許可して到達関係全体を求める。',
+    '既知のDFS・BFS実装を土台に、長距離効果は探索前の方向別scanで静的な通行条件へ変換し、問題の状態を頂点、合法操作を辺として設計して到達関係を求める。',
   'unit-directional-grid-effect-scan':
-    'event sweepのactive状態という見方を各行・各列へ適用し、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する。',
+    '各行・各列を固定方向に一度ずつscanし、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する。',
   'unit-shortest-path-certificates':
     '辺重みに応じた距離計算、距離等式による経路復元、差の不等式を緩和へ写す制約系への応用を順に学ぶ。',
   'unit-weighted-shortest-path':
@@ -1230,8 +1228,6 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
     '連結成分を探索できるようになった後、成分縮約、差分辺のpotential累積、辺追加に対する付加情報つきDSU管理を学ぶ。',
   'unit-graph-potential-propagation':
     '通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。',
-  'unit-periodic-tree-role-recovery':
-    '木の距離を一度計算できることを土台に、局所特徴からanchorを定め、固定間隔で反復された部品の役割を距離剰余で一括復元する。',
   'unit-kruskal-threshold-sweep':
     'DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。',
   'unit-parallel-binary-search':
@@ -1245,7 +1241,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-functional-graph':
     '状態グラフを理解した後、後続が一意という制約からcycleと流入木への分解やダブリングを導く。',
   'unit-tree-metric':
-    '木を探索して距離を求められることを前提に、直径端点・中心が距離構造を代表する性質と、anchorからの距離剰余で反復部品の役割を復元する不変量を学ぶ。',
+    '木を探索して基準点からの距離を求められることを前提に、一意経路から得る距離labelと、直径端点・中心が距離構造を代表する性質を学ぶ。',
   'unit-tree-aggregation':
     '探索で親子関係を作りDP状態を定義できた後、子側の集約と親側への差し替えで木全体の値を求める。',
   'unit-implicit-binary-tree':
@@ -2325,13 +2321,15 @@ const TAG_SEEDS: readonly TagSeed[] = [
   },
   {
     id: 'tag-tree-metric-diameter',
-    name: '木の直径・中心・最遠点',
+    name: '木距離・直径・中心・最遠点',
     definition:
-      '木距離の最遠点性質を使い、直径端点・中心・部分集合の最遠pairを少数の端点で代表する。',
+      '木の一意経路距離を少数の基準点から一括計算し、距離label・直径端点・中心・最遠点性質で頂点集合の距離条件を整理する。',
     parentId: 'tag-graph-model-structure',
     outcomeIds: ['outcome-use-tree-diameter-extrema'],
     unitIds: ['unit-tree-metric'],
     recall: [
+      '木距離',
+      'tree metric',
       '木の直径',
       'tree diameter',
       'diameter endpoint',
@@ -2341,10 +2339,10 @@ const TAG_SEEDS: readonly TagSeed[] = [
       'eccentricity',
       '最遠点',
     ],
-    object: ['木', '距離', '直径', '中心', '端点'],
-    trigger: ['最遠', '最大距離', '直径', '中心'],
-    invariant: ['直径端点', '二端点', '中点', 'eccentricity'],
-    goal: ['最遠点', '最大距離', '中心', '直径'],
+    object: ['木', '距離', '基準点', '直径', '中心', '端点'],
+    trigger: ['木上の距離条件', '基準点からの距離', '最遠', '最大距離', '直径', '中心'],
+    invariant: ['一意経路', '基準点からの距離label', '直径端点', '二端点', '中点'],
+    goal: ['頂点分類', '距離条件', '最遠点', '最大距離', '中心', '直径'],
     priority: 82,
   },
   {
@@ -3500,7 +3498,6 @@ const FINAL_TAG_CURRICULUM_PREREQUISITE_ADDITIONS: Readonly<Record<string, reado
   'tag-aho-corasick': ['tag-finite-pattern-automaton'],
   'tag-suffix-automaton': ['tag-finite-pattern-automaton'],
   'tag-string-periodicity': ['tag-z-algorithm-prefix-matching'],
-  'tag-directional-grid-effect-scan': ['tag-event-sweep'],
   'tag-baby-step-giant-step': ['tag-modular-arithmetic'],
   'tag-numerical-semigroup': ['tag-bezout-diophantine'],
   'tag-cyclic-exponent-counting': ['tag-multiplicative-order'],
@@ -3518,7 +3515,6 @@ const FINAL_TAG_CURRICULUM_PREREQUISITE_ADDITIONS: Readonly<Record<string, reado
   'tag-labeled-component-decomposition': ['tag-generating-functions'],
   'tag-poset-dilworth-antichain': ['tag-bipartite-matching-hall', 'tag-sequence-subsequence-dp'],
   'tag-semiring-matrix-exponentiation': ['tag-linear-recurrence-matrix'],
-  'tag-convex-hull-trick': ['tag-basic-convex-optimization'],
   'tag-monge-optimization': ['tag-dp-transition-acceleration'],
   'tag-cyclic-order-crossing': ['tag-geometry-orientation-transform'],
 };
@@ -3761,7 +3757,7 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     name: '方向別grid scanによる長距離効果の前計算',
     definition:
       '各行・各列を効果の向きにscanし、最後のblockerまたはactive emitterだけを保って、直線状に続く監視・照射・到達禁止効果を全体線形時間で印付ける。',
-    parentId: 'tag-event-sweep',
+    parentId: 'tag-graph-model-structure',
     outcomeIds: ['outcome-precompute-directional-grid-effects'],
     unitIds: ['unit-directional-grid-effect-scan'],
     recall: ['directional grid scan', 'ray sweep', '四方向scan', '視線の前計算'],
@@ -3904,40 +3900,6 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     invariant: ['親へのinterface', '子の独立性'],
     goal: ['部分木集約', '木上数え上げ'],
     priority: 63,
-  },
-  {
-    id: 'tag-periodic-tree-role-recovery',
-    name: '距離剰余による周期的tree部品の役割復元',
-    definition:
-      '固定間隔で同じ役割が現れる部品木について、葉・次数などの局所特徴からanchorを一つ特定し、anchorからの距離mod pで全頂点の役割と部品parameterを復元する。',
-    parentId: 'tag-tree-model-structure',
-    outcomeIds: ['outcome-recover-periodic-tree-roles-by-distance-residue'],
-    unitIds: ['unit-periodic-tree-role-recovery'],
-    recall: [
-      '木上の距離剰余',
-      'distance-residue labeling',
-      'periodic tree role recovery',
-      '構成逆算',
-    ],
-    object: [
-      'tree built from repeated components',
-      'anchor role',
-      'distance residue',
-      'component parameter',
-    ],
-    trigger: [
-      '同じ役割の頂点間距離が一定modulus',
-      '局所特徴から一つの役割が確定',
-      '部品構成を逆算',
-    ],
-    invariant: [
-      'anchor-independent role class',
-      'component spacing modulo p',
-      'role determines local parameter',
-    ],
-    goal: ['部品役割の一括分類', '元の部品parameter列の復元'],
-    exclude: ['一般の距離行列から重み付き木を復元', '子部分木の値をbottom-up集約'],
-    priority: 74,
   },
   {
     id: 'tag-rerooting',
@@ -4348,40 +4310,6 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     invariant: ['非交差', '最大run', '隣接merge'],
     goal: ['range代入', '動的区間管理'],
     priority: 79,
-  },
-  {
-    id: 'tag-prefix-interval-multiset-transform',
-    name: 'prefix interval基底によるmultiset変換',
-    definition:
-      '巨大なfrequency列を重み付きprefix indicator [0,x) の和で表し、mod Mなどの変換を共通項 floor(x/M)[0,M) と縮小remainder [0,x mod M) へ分解して同じ終端を併合する。',
-    parentId: 'tag-model-reduction',
-    outcomeIds: ['outcome-transform-multisets-in-prefix-interval-basis'],
-    unitIds: ['unit-prefix-interval-multiset-transform'],
-    recall: [
-      'prefix interval basis',
-      'weighted prefix indicators',
-      'prefix interval multiset',
-      '剰余frequency圧縮',
-    ],
-    object: [
-      'frequency vector',
-      'weighted prefix interval',
-      'endpoint coefficient map',
-      'shrinking remainder',
-    ],
-    trigger: [
-      '巨大な連続整数multiset',
-      'mod変換を反復',
-      '変換後に共通prefixと短いremainderが生じる',
-    ],
-    invariant: [
-      'indicator sum equals the frequency vector',
-      'equal endpoints are merged',
-      'noncommon endpoint shrinks',
-    ],
-    goal: ['巨大multiset変換の圧縮simulation', '準線形個数のcanonical terms'],
-    exclude: ['互いに素なrunをsplit/mergeするODT', '各要素を列挙できる通常simulation'],
-    priority: 94,
   },
   {
     id: 'tag-persistence',
@@ -5670,7 +5598,6 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-dsu-components': ['abc235-e', 'abc408-e'],
   'tag-potential-dsu': ['abc280-f', 'abc466-g'],
   'tag-rooted-tree-aggregation': ['abc239-e', 'abc394-f'],
-  'tag-periodic-tree-role-recovery': ['abc303-e'],
   'tag-rerooting': ['abc220-f', 'abc223-g'],
   'tag-laminar-interval-containment-tree': ['abc405-f'],
   'tag-tree-ancestor-lca': ['abc298-ex', 'abc405-f'],
@@ -5697,7 +5624,6 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-priority-queue-best-first': ['abc297-e', 'abc391-f'],
   'tag-ordered-set-multiset': ['abc281-e', 'abc306-e'],
   'tag-ordered-interval-partition': ['abc255-ex', 'abc380-e'],
-  'tag-prefix-interval-multiset-transform': ['abc466-f'],
   'tag-persistence': ['abc273-e', 'abc453-g'],
   'tag-rollback': ['abc302-ex', 'abc363-g'],
   'tag-z-algorithm-prefix-matching': ['abc257-g', 'abc284-f'],
@@ -5806,12 +5732,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '問題固有の語を再利用可能な対象・操作・不変量に置き換えられる。',
   'outcome-precompute-directional-grid-effects':
     '各行・各列でactiveな向きだけを更新し、blockerと通行禁止条件を混同せず、定数方向へ伸びる全効果領域をgrid全体の線形時間で印付けられる。',
-  'outcome-recover-periodic-tree-roles-by-distance-residue':
-    '局所特徴から反復部品のanchorを定め、木上距離の剰余不変量から同じ役割の頂点と各部品parameterを一括復元できる。',
   'outcome-build-laminar-interval-containment-tree':
     'laminar区間の開閉端点をstackで処理し、直接包含関係と各点の最小包含区間を木として構築して、包含差分を木上pathへ変換できる。',
-  'outcome-transform-multisets-in-prefix-interval-basis':
-    '巨大なfrequency列をprefix interval基底へ分解し、共通項の係数併合と縮小remainderの償却上界を保って反復変換を圧縮simulationできる。',
   'outcome-propagate-static-graph-potentials':
     '辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる。',
   'outcome-solve-difference-constraints':
@@ -5920,7 +5842,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-jump-deterministic-transition':
     '一意な遷移の2の冪回先を前計算し、巨大回数後の状態または区間到達を求められる。',
   'outcome-use-tree-diameter-extrema':
-    '二回の木探索で直径端点を求め、任意点の最遠候補・木の中心・部分集合の直径を少数の端点で代表できる。',
+    '一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。',
   'outcome-count-implicit-binary-tree-layers':
     '同じ深さの対称性と2冪で距離splitを集約するか、heap番号の祖先case分解と子孫label区間を使い、巨大な完全二分木を展開せず数えられる。',
   'outcome-aggregate-rooted-tree':
@@ -6172,9 +6094,7 @@ export const NON_PRIMARY_OUTCOME_IDS = FINAL_TAXONOMY_OUTCOMES.filter((outcome) 
 export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-answer-idempotent-range-query',
   'outcome-precompute-directional-grid-effects',
-  'outcome-recover-periodic-tree-roles-by-distance-residue',
   'outcome-build-laminar-interval-containment-tree',
-  'outcome-transform-multisets-in-prefix-interval-basis',
   'outcome-find-orbit-hit-by-bsgs',
   'outcome-apply-heavy-light-decomposition',
   'outcome-build-static-sorted-range-index',
@@ -6226,9 +6146,7 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
 export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-additive-tree-metric-reconstruction',
   'unit-directional-grid-effect-scan',
-  'unit-periodic-tree-role-recovery',
   'unit-laminar-interval-containment-tree',
-  'unit-prefix-interval-multiset-transform',
   'unit-backtracking-search',
   'unit-baby-step-giant-step',
   'unit-automaton-subset-construction',
@@ -6280,9 +6198,7 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
 export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-additive-tree-metric-reconstruction',
   'tag-directional-grid-effect-scan',
-  'tag-periodic-tree-role-recovery',
   'tag-laminar-interval-containment-tree',
-  'tag-prefix-interval-multiset-transform',
   'tag-backtracking-search',
   'tag-baby-step-giant-step',
   'tag-automaton-subset-construction',
@@ -6401,14 +6317,13 @@ const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
   'unit-meet-in-the-middle': 'unit-divide-enumeration',
   'unit-recursive-divide-and-conquer': 'unit-divide-enumeration',
   'unit-amortized-monotone-progress': 'unit-decomposition-amortization',
-  'unit-prefix-interval-multiset-transform': 'unit-decomposition-amortization',
   'unit-small-to-large': 'unit-decomposition-amortization',
   'unit-threshold-heavy-light': 'unit-decomposition-amortization',
   'unit-heavy-path-tree-dp': 'unit-tree-aggregation',
   'unit-dp-subset-state': 'unit-dp-subset-resource',
   'unit-eventual-unbounded-knapsack': 'unit-dp-subset-resource',
   'unit-state-graph-search': 'unit-graph-search',
-  'unit-directional-grid-effect-scan': 'unit-events-offline',
+  'unit-directional-grid-effect-scan': 'unit-graph-search',
   'unit-transitive-closure': 'unit-graph-search',
   'unit-weighted-shortest-path': 'unit-shortest-path-certificates',
   'unit-shortest-path-reconstruction': 'unit-shortest-path-certificates',
@@ -6424,7 +6339,6 @@ const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
   'unit-graph-potential-propagation': 'unit-connectivity',
   'unit-kruskal-threshold-sweep': 'unit-spanning-tree-optimization',
   'unit-rooted-tree-aggregation': 'unit-tree-aggregation',
-  'unit-periodic-tree-role-recovery': 'unit-tree-metric',
   'unit-rerooting': 'unit-tree-aggregation',
   'unit-tree-ancestor-lca': 'unit-tree-decomposition',
   'unit-laminar-interval-containment-tree': 'unit-tree-decomposition',

@@ -287,7 +287,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc465-f': 'tag-subset-bitmask-transform',
   'abc465-g': 'tag-ordered-set-heap',
   'abc466-e': 'tag-interval-partition-dp',
-  'abc466-f': 'tag-prefix-interval-multiset-transform',
+  'abc466-f': 'tag-amortized-monotone-progress',
   // Weighted DSU first extracts an independent system of interval constraints.
   'abc466-g': 'tag-dsu-connectivity',
 } as const satisfies Readonly<Record<string, string>>;

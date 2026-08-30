@@ -163,10 +163,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     { 'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'] },
   ),
   'abc303-e': decision(
-    'outcome-recover-periodic-tree-roles-by-distance-residue',
+    'outcome-use-tree-diameter-extrema',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-periodic-tree-role-recovery'],
-      ['typicalTechniques', 1, 'same_tag', 'tag-periodic-tree-role-recovery'],
+      ['typicalTechniques', 0, 'primary', 'tag-tree-metric-diameter'],
+      ['typicalTechniques', 1, 'problem_specific'],
       ['prerequisiteCandidates', 0, 'baseline'],
     ],
     {},

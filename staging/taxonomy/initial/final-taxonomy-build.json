@@ -27,7 +27,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "986d911a2343f052a986f06a2fa289e59b99ca41cad5d443bd2cbfab4010a735",
+    "rulesDigest": "2fec3783dfe9c2ba4dc01b7785ce69ade09b0c40cafa168450179b8359afc652",
     "requiredReviewMode": "third_party",
     "riskReasons": ["major_classification_change"],
     "authoringSkillName": "abc-explanation-author",
@@ -37,7 +37,7 @@
     "writingPolicyDigest": "0f93019c063fe7806f341c962258066aa7f58e4bc85d5dc3ddd870754706e2e4",
     "sourceNormalizationVersion": "1.0.0",
     "workManifestPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-    "workManifestDigest": "c79c465ee5429d6a2c1c46cd269b6039b6f8d203f0647ce172135bd0aa99f357"
+    "workManifestDigest": "347cd01880a237bc154d20a890715b4e0e1b3abb5171ab850e05ed9030646b6b"
   },
   "integrationMap": {
     "schemaVersion": "2.0.0",
@@ -5639,7 +5639,13 @@
           "minimumDimensions": 2,
           "requireObjectForStrictRecall": false
         },
-        "relatedTags": [],
+        "relatedTags": [
+          {
+            "tagId": "tag-convex-hull-trick",
+            "type": "analogy",
+            "rationale": "どちらも凸性を語彙に持つが、一次元目的関数の単峰性から探索範囲を狭める方法と、複数直線の包絡を動的に管理する方法では発動条件・証明・実装が独立している。"
+          }
+        ],
         "learningOutcomeIds": ["outcome-optimize-univariate-convex-function"],
         "representativeProblemIds": ["abc224-g", "abc314-ex"],
         "aliases": ["ternary search", "unimodal optimization", "一次元凸最適化"],
@@ -6639,7 +6645,7 @@
         "name": "Convex Hull Trick・直線包絡",
         "definition": "一次関数の候補を傾き・交点順に管理し、各query点で最小または最大となる直線を選ぶ。",
         "parentId": "tag-geometry-optimization-structure",
-        "prerequisiteTagIds": ["tag-basic-convex-optimization"],
+        "prerequisiteTagIds": [],
         "semanticSignature": {
           "objectPatterns": ["query点", "一次関数", "傾き", "切片", "直線"],
           "triggerPatterns": ["dp遷移", "最大値query", "最小値query", "直線を追加"],
@@ -6650,6 +6656,11 @@
           "requireObjectForStrictRecall": false
         },
         "relatedTags": [
+          {
+            "tagId": "tag-basic-convex-optimization",
+            "type": "analogy",
+            "rationale": "どちらも凸性を語彙に持つが、一次元目的関数の単峰性から探索範囲を狭める方法と、複数直線の包絡を動的に管理する方法では発動条件・証明・実装が独立している。"
+          },
           {
             "tagId": "tag-dp-transition-acceleration",
             "type": "often_combined",
@@ -7438,8 +7449,8 @@
         "id": "tag-directional-grid-effect-scan",
         "name": "方向別grid scanによる長距離効果の前計算",
         "definition": "各行・各列を効果の向きにscanし、最後のblockerまたはactive emitterだけを保って、直線状に続く監視・照射・到達禁止効果を全体線形時間で印付ける。",
-        "parentId": "tag-event-sweep",
-        "prerequisiteTagIds": ["tag-event-sweep"],
+        "parentId": "tag-graph-model-structure",
+        "prerequisiteTagIds": [],
         "semanticSignature": {
           "objectPatterns": [
             "affected cells",
@@ -12294,66 +12305,6 @@
     {
       "kind": "tag",
       "entity": {
-        "id": "tag-periodic-tree-role-recovery",
-        "name": "距離剰余による周期的tree部品の役割復元",
-        "definition": "固定間隔で同じ役割が現れる部品木について、葉・次数などの局所特徴からanchorを一つ特定し、anchorからの距離mod pで全頂点の役割と部品parameterを復元する。",
-        "parentId": "tag-tree-model-structure",
-        "prerequisiteTagIds": [],
-        "semanticSignature": {
-          "objectPatterns": [
-            "anchor role",
-            "component parameter",
-            "distance residue",
-            "tree built from repeated components"
-          ],
-          "triggerPatterns": [
-            "同じ役割の頂点間距離が一定modulus",
-            "局所特徴から一つの役割が確定",
-            "部品構成を逆算"
-          ],
-          "invariantPatterns": [
-            "anchor-independent role class",
-            "component spacing modulo p",
-            "role determines local parameter"
-          ],
-          "goalPatterns": ["元の部品parameter列の復元", "部品役割の一括分類"],
-          "excludedPatterns": ["一般の距離行列から重み付き木を復元", "子部分木の値をbottom-up集約"],
-          "minimumDimensions": 2,
-          "requireObjectForStrictRecall": false
-        },
-        "relatedTags": [],
-        "learningOutcomeIds": ["outcome-recover-periodic-tree-roles-by-distance-residue"],
-        "representativeProblemIds": ["abc303-e"],
-        "aliases": [
-          "distance-residue labeling",
-          "periodic tree role recovery",
-          "木上の距離剰余",
-          "距離剰余labeling"
-        ],
-        "formerNames": [],
-        "lifecycle": "active",
-        "replacementTagIds": []
-      },
-      "sourceRevisionIds": [
-        "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
-        "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
-      ],
-      "evidenceRefs": [
-        {
-          "problemId": "abc303-e",
-          "claimPath": "/typicalTechniques/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
-            "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
-          ]
-        }
-      ],
-      "materializationTask": "T047"
-    },
-    {
-      "kind": "tag",
-      "entity": {
         "id": "tag-persistence",
         "name": "永続data structure・structural sharing",
         "definition": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。",
@@ -12774,69 +12725,6 @@
           "sourceRevisionIds": [
             "source-abc430-editorial-14331-63c2ede9cdae616804184bf8d1c72438a1e48b1b54f8c158e006b5a7a6352f20",
             "source-abc430-f-problem-f5c3abc7df1b691b9e336851067ce8f4992f4cef60bc811eba21edbacad6c6a5"
-          ]
-        }
-      ],
-      "materializationTask": "T047"
-    },
-    {
-      "kind": "tag",
-      "entity": {
-        "id": "tag-prefix-interval-multiset-transform",
-        "name": "prefix interval基底によるmultiset変換",
-        "definition": "巨大なfrequency列を重み付きprefix indicator [0,x) の和で表し、mod Mなどの変換を共通項 floor(x/M)[0,M) と縮小remainder [0,x mod M) へ分解して同じ終端を併合する。",
-        "parentId": "tag-model-reduction",
-        "prerequisiteTagIds": [],
-        "semanticSignature": {
-          "objectPatterns": [
-            "endpoint coefficient map",
-            "frequency vector",
-            "shrinking remainder",
-            "weighted prefix interval"
-          ],
-          "triggerPatterns": [
-            "mod変換を反復",
-            "変換後に共通prefixと短いremainderが生じる",
-            "巨大な連続整数multiset"
-          ],
-          "invariantPatterns": [
-            "equal endpoints are merged",
-            "indicator sum equals the frequency vector",
-            "noncommon endpoint shrinks"
-          ],
-          "goalPatterns": ["巨大multiset変換の圧縮simulation", "準線形個数のcanonical terms"],
-          "excludedPatterns": [
-            "互いに素なrunをsplit/mergeするODT",
-            "各要素を列挙できる通常simulation"
-          ],
-          "minimumDimensions": 2,
-          "requireObjectForStrictRecall": false
-        },
-        "relatedTags": [],
-        "learningOutcomeIds": ["outcome-transform-multisets-in-prefix-interval-basis"],
-        "representativeProblemIds": ["abc466-f"],
-        "aliases": [
-          "prefix interval multiset",
-          "prefix interval基底",
-          "weighted prefix indicators",
-          "剰余frequency圧縮"
-        ],
-        "formerNames": [],
-        "lifecycle": "active",
-        "replacementTagIds": []
-      },
-      "sourceRevisionIds": [
-        "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-        "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
-      ],
-      "evidenceRefs": [
-        {
-          "problemId": "abc466-f",
-          "claimPath": "/typicalTechniques/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-            "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
           ]
         }
       ],
@@ -15717,29 +15605,38 @@
       "kind": "tag",
       "entity": {
         "id": "tag-tree-metric-diameter",
-        "name": "木の直径・中心・最遠点",
-        "definition": "木距離の最遠点性質を使い、直径端点・中心・部分集合の最遠pairを少数の端点で代表する。",
+        "name": "木距離・直径・中心・最遠点",
+        "definition": "木の一意経路距離を少数の基準点から一括計算し、距離label・直径端点・中心・最遠点性質で頂点集合の距離条件を整理する。",
         "parentId": "tag-tree-model-structure",
         "prerequisiteTagIds": [],
         "semanticSignature": {
-          "objectPatterns": ["中心", "木", "直径", "端点", "距離"],
-          "triggerPatterns": ["中心", "最大距離", "最遠", "直径"],
-          "invariantPatterns": ["eccentricity", "中点", "二端点", "直径端点"],
-          "goalPatterns": ["中心", "最大距離", "最遠点", "直径"],
+          "objectPatterns": ["中心", "基準点", "木", "直径", "端点", "距離"],
+          "triggerPatterns": [
+            "中心",
+            "基準点からの距離",
+            "最大距離",
+            "最遠",
+            "木上の距離条件",
+            "直径"
+          ],
+          "invariantPatterns": ["一意経路", "中点", "二端点", "基準点からの距離label", "直径端点"],
+          "goalPatterns": ["中心", "最大距離", "最遠点", "直径", "距離条件", "頂点分類"],
           "excludedPatterns": [],
           "minimumDimensions": 2,
           "requireObjectForStrictRecall": false
         },
         "relatedTags": [],
         "learningOutcomeIds": ["outcome-use-tree-diameter-extrema"],
-        "representativeProblemIds": ["abc221-f", "abc267-f", "abc401-f"],
+        "representativeProblemIds": ["abc221-f", "abc267-f", "abc303-e", "abc401-f"],
         "aliases": [
           "eccentricity",
           "tree center",
           "tree diameter",
+          "tree metric",
           "最遠点",
           "木の中心",
-          "木の直径"
+          "木の直径",
+          "木距離"
         ],
         "formerNames": [],
         "lifecycle": "active",
@@ -15750,6 +15647,8 @@
         "source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea",
         "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba",
         "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1",
+        "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
+        "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2",
         "source-abc401-editorial-12686-947690906b5f4e3221530f4049b0833ce4f7acd8743b0ddf19dcb9db001a05a8",
         "source-abc401-f-problem-adef891681b8a3808bff938b89092b507738bebe28945f9a1407a965e1aaa9c2"
       ],
@@ -15770,6 +15669,15 @@
           "sourceRevisionIds": [
             "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba",
             "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1"
+          ]
+        },
+        {
+          "problemId": "abc303-e",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": ["evidence-official-analysis"],
+          "sourceRevisionIds": [
+            "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
+            "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
           ]
         },
         {
@@ -17047,6 +16955,7 @@
           "abc428-f",
           "abc430-g",
           "abc435-e",
+          "abc466-f",
           "tag-amortized-monotone-progress",
           "unit-amortized-monotone-progress"
         ]
@@ -22777,7 +22686,6 @@
           "abc313-g",
           "abc314-f",
           "abc314-g",
-          "abc317-e",
           "abc317-ex",
           "abc318-e",
           "abc318-f",
@@ -26179,7 +26087,7 @@
       "entity": {
         "id": "outcome-optimize-by-line-envelope",
         "statement": "一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる。",
-        "prerequisiteOutcomeIds": ["outcome-optimize-univariate-convex-function"],
+        "prerequisiteOutcomeIds": [],
         "scopeIds": [
           "abc228-h",
           "abc244-ex",
@@ -26726,7 +26634,7 @@
       "entity": {
         "id": "outcome-precompute-directional-grid-effects",
         "statement": "各行・各列でactiveな向きだけを更新し、blockerと通行禁止条件を混同せず、定数方向へ伸びる全効果領域をgrid全体の線形時間で印付けられる。",
-        "prerequisiteOutcomeIds": ["outcome-linearize-events"],
+        "prerequisiteOutcomeIds": [],
         "scopeIds": [
           "abc317-e",
           "tag-directional-grid-effect-scan",
@@ -27270,35 +27178,6 @@
           "sourceRevisionIds": [
             "source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7",
             "source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"
-          ]
-        }
-      ],
-      "materializationTask": "T048"
-    },
-    {
-      "kind": "outcome",
-      "entity": {
-        "id": "outcome-recover-periodic-tree-roles-by-distance-residue",
-        "statement": "局所特徴から反復部品のanchorを定め、木上距離の剰余不変量から同じ役割の頂点と各部品parameterを一括復元できる。",
-        "prerequisiteOutcomeIds": [],
-        "scopeIds": [
-          "abc303-e",
-          "tag-periodic-tree-role-recovery",
-          "unit-periodic-tree-role-recovery"
-        ]
-      },
-      "sourceRevisionIds": [
-        "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
-        "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
-      ],
-      "evidenceRefs": [
-        {
-          "problemId": "abc303-e",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
-            "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
           ]
         }
       ],
@@ -28882,35 +28761,6 @@
     {
       "kind": "outcome",
       "entity": {
-        "id": "outcome-transform-multisets-in-prefix-interval-basis",
-        "statement": "巨大なfrequency列をprefix interval基底へ分解し、共通項の係数併合と縮小remainderの償却上界を保って反復変換を圧縮simulationできる。",
-        "prerequisiteOutcomeIds": [],
-        "scopeIds": [
-          "abc466-f",
-          "tag-prefix-interval-multiset-transform",
-          "unit-prefix-interval-multiset-transform"
-        ]
-      },
-      "sourceRevisionIds": [
-        "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-        "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
-      ],
-      "evidenceRefs": [
-        {
-          "problemId": "abc466-f",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-            "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
-          ]
-        }
-      ],
-      "materializationTask": "T048"
-    },
-    {
-      "kind": "outcome",
-      "entity": {
         "id": "outcome-transform-to-combinatorics-algebra",
         "statement": "数え上げや遷移を係数列・多項式・線形写像へ変換する。 発動条件、正当性、計算量を説明し、未知問へ実装できる。",
         "prerequisiteOutcomeIds": [],
@@ -30259,12 +30109,13 @@
       "kind": "outcome",
       "entity": {
         "id": "outcome-use-tree-diameter-extrema",
-        "statement": "二回の木探索で直径端点を求め、任意点の最遠候補・木の中心・部分集合の直径を少数の端点で代表できる。",
+        "statement": "一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。",
         "prerequisiteOutcomeIds": [],
         "scopeIds": [
           "abc221-f",
           "abc222-f",
           "abc267-f",
+          "abc303-e",
           "abc361-e",
           "abc401-f",
           "abc428-e",
@@ -30335,8 +30186,8 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 95,
-        "globalIndex": 97,
-        "orderReason": "木の直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ。"
+        "globalIndex": 98,
+        "orderReason": "木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
         "source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7",
@@ -30434,7 +30285,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 88,
-        "globalIndex": 174,
+        "globalIndex": 173,
         "orderReason": "有限状態automatonの構成・Trieによる共有接頭辞の索引で得た考え方と実装を再利用し、Aho–Corasickの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -30632,7 +30483,8 @@
           "abc427-g",
           "abc428-f",
           "abc430-g",
-          "abc435-e"
+          "abc435-e",
+          "abc466-f"
         ],
         "stageRank": 4,
         "difficultyRank": 3,
@@ -30831,7 +30683,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 151,
+        "globalIndex": 150,
         "orderReason": "有限pattern automatonの完全遷移を構成できるようになった後、位置・長さとの直積状態で受理列を数え、桁上限がある場合だけ桁DPと組み合わせる。"
       },
       "sourceRevisionIds": [
@@ -31085,7 +30937,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 82,
-        "globalIndex": 156,
+        "globalIndex": 155,
         "orderReason": "有限状態automatonの構成で得た考え方と実装を再利用し、非決定性automatonのsubset constructionの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -31425,7 +31277,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 61,
-        "globalIndex": 113,
+        "globalIndex": 114,
         "orderReason": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -32036,7 +31888,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 81,
-        "globalIndex": 154,
+        "globalIndex": 153,
         "orderReason": "二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -32766,7 +32618,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 96,
-        "globalIndex": 206,
+        "globalIndex": 204,
         "orderReason": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、Bostan–Mori・有理生成関数の係数抽出の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -34600,6 +34452,7 @@
           "tag-difference-constraints",
           "tag-directed-core-peeling",
           "tag-directed-walk-periodicity",
+          "tag-directional-grid-effect-scan",
           "tag-dsu-components",
           "tag-euler-trail-circuit",
           "tag-flow-feasibility-lower-bounds",
@@ -34653,6 +34506,7 @@
           "outcome-optimize-path-matching-by-contraction",
           "outcome-peel-directed-graph-toward-cycles",
           "outcome-peel-graph-core",
+          "outcome-precompute-directional-grid-effects",
           "outcome-process-dag-in-topological-order",
           "outcome-propagate-static-graph-potentials",
           "outcome-select-state-graph-search",
@@ -35122,7 +34976,6 @@
           "tag-constructive-witness",
           "tag-contribution-reordering",
           "tag-coordinate-compression",
-          "tag-directional-grid-effect-scan",
           "tag-event-sweep",
           "tag-greedy-exchange-order",
           "tag-information-theoretic-query-design",
@@ -35132,7 +34985,6 @@
           "tag-model-reduction",
           "tag-monotone-threshold-search",
           "tag-parallel-binary-search",
-          "tag-prefix-interval-multiset-transform",
           "tag-randomized-algebraic-fingerprint",
           "tag-randomized-algorithm",
           "tag-recursive-divide-and-conquer",
@@ -35162,15 +35014,13 @@
           "outcome-merge-small-into-large",
           "outcome-normalize-equivalent-states",
           "outcome-optimize-mask-by-bitwise-feasibility",
-          "outcome-precompute-directional-grid-effects",
           "outcome-prove-and-search-threshold",
           "outcome-prove-greedy-order",
           "outcome-recover-valid-witness",
           "outcome-reorder-counting-contributions",
           "outcome-reverse-update-time",
           "outcome-share-threshold-checks-by-parallel-binary-search",
-          "outcome-split-enumeration-space",
-          "outcome-transform-multisets-in-prefix-interval-basis"
+          "outcome-split-enumeration-space"
         ],
         "problemIds": [
           "abc213-h",
@@ -35353,7 +35203,6 @@
           "abc313-g",
           "abc314-f",
           "abc314-g",
-          "abc317-e",
           "abc317-ex",
           "abc318-e",
           "abc318-f",
@@ -36715,7 +36564,6 @@
           "tag-heavy-path-tree-dp",
           "tag-implicit-binary-tree-arithmetic",
           "tag-laminar-interval-containment-tree",
-          "tag-periodic-tree-role-recovery",
           "tag-rerooting",
           "tag-rooted-tree-aggregation",
           "tag-static-top-tree",
@@ -36742,7 +36590,6 @@
           "outcome-model-and-exploit-tree",
           "outcome-optimize-tree-order-by-cluster-contraction",
           "outcome-reconstruct-tree-from-distance-matrix",
-          "outcome-recover-periodic-tree-roles-by-distance-residue",
           "outcome-reroot-tree-aggregation",
           "outcome-use-tree-diameter-extrema"
         ],
@@ -37454,7 +37301,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 152,
+        "globalIndex": 151,
         "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、凸包・支持方向・境界候補の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -37969,7 +37816,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 4,
-        "globalIndex": 210,
+        "globalIndex": 208,
         "orderReason": "乗法的位数とその約数分類を先に学び、巡回群の元を指数へ写して位数別に重複なく数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する。"
       },
       "sourceRevisionIds": [
@@ -38126,7 +37973,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 82,
-        "globalIndex": 157,
+        "globalIndex": 156,
         "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -38259,7 +38106,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 56,
-        "globalIndex": 106,
+        "globalIndex": 107,
         "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -38430,15 +38277,13 @@
         ],
         "tagIds": [
           "tag-amortized-monotone-progress",
-          "tag-prefix-interval-multiset-transform",
           "tag-small-to-large",
           "tag-threshold-heavy-light"
         ],
         "learningOutcomeIds": [
           "outcome-balance-heavy-light-threshold",
           "outcome-bound-monotone-total-work",
-          "outcome-merge-small-into-large",
-          "outcome-transform-multisets-in-prefix-interval-basis"
+          "outcome-merge-small-into-large"
         ],
         "problemIds": [
           "abc217-e",
@@ -38655,7 +38500,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 73,
-        "globalIndex": 146,
+        "globalIndex": 145,
         "orderReason": "Euler trail・circuitで得た考え方と実装を再利用し、指定次数parityの部分グラフ構成の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -39055,7 +38900,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 93,
-        "globalIndex": 186,
+        "globalIndex": 185,
         "orderReason": "最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。"
       },
       "sourceRevisionIds": [
@@ -39239,7 +39084,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 82,
-        "globalIndex": 158,
+        "globalIndex": 157,
         "orderReason": "接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。"
       },
       "sourceRevisionIds": [
@@ -39914,7 +39759,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 182,
+        "globalIndex": 181,
         "orderReason": "gcd不変量・差分構造・SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、有向walkの周期・cycle差分gcdの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -40003,10 +39848,10 @@
         "id": "unit-directional-grid-effect-scan",
         "kind": "subsection",
         "title": "方向別grid scanによる長距離効果の前計算",
-        "parentId": "unit-events-offline",
+        "parentId": "unit-graph-search",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
-        "additionalPrerequisiteUnitIds": ["unit-events-offline"],
+        "additionalPrerequisiteUnitIds": [],
         "excludedTopics": [
           "方向別grid scanによる長距離効果の前計算の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
         ],
@@ -40021,7 +39866,7 @@
         "difficultyRank": 3,
         "representativeRank": 72,
         "globalIndex": 129,
-        "orderReason": "event sweepのactive状態という見方を各行・各列へ適用し、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する。"
+        "orderReason": "各行・各列を固定方向に一度ずつscanし、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する。"
       },
       "sourceRevisionIds": [
         "source-abc317-e-problem-98c0a26c978ed5d74663e63fb19026ffa7ae80e5dad04f4774b3b25c359b48f1",
@@ -40606,7 +40451,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 83,
-        "globalIndex": 159,
+        "globalIndex": 158,
         "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43187,7 +43032,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 58,
-        "globalIndex": 108,
+        "globalIndex": 109,
         "orderReason": "辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43272,7 +43117,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 85,
-        "globalIndex": 109,
+        "globalIndex": 110,
         "orderReason": "DSUによる連結成分管理・縮約で得た考え方と実装を再利用し、DSU merge tree・Kruskal reconstruction treeの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43461,7 +43306,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 83,
-        "globalIndex": 160,
+        "globalIndex": 159,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、動的・implicit Segment Treeの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43567,7 +43412,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 97,
-        "globalIndex": 145,
+        "globalIndex": 144,
         "orderReason": "行列式による数え上げ・Euler trail・circuitで得た考え方と実装を再利用し、BEST定理によるEuler circuit数え上げの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43873,7 +43718,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 76,
-        "globalIndex": 144,
+        "globalIndex": 143,
         "orderReason": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -44082,7 +43927,6 @@
         ],
         "tagIds": [
           "tag-contribution-reordering",
-          "tag-directional-grid-effect-scan",
           "tag-event-sweep",
           "tag-kinetic-order-maintenance",
           "tag-reverse-offline"
@@ -44090,7 +43934,6 @@
         "learningOutcomeIds": [
           "outcome-linearize-events",
           "outcome-maintain-order-through-crossing-events",
-          "outcome-precompute-directional-grid-effects",
           "outcome-reorder-counting-contributions",
           "outcome-reverse-update-time"
         ],
@@ -44154,7 +43997,6 @@
           "abc311-g",
           "abc313-f",
           "abc314-f",
-          "abc317-e",
           "abc318-e",
           "abc320-e",
           "abc321-g",
@@ -44368,7 +44210,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 97,
-        "globalIndex": 198,
+        "globalIndex": 196,
         "orderReason": "通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。"
       },
       "sourceRevisionIds": [
@@ -44476,7 +44318,7 @@
         "stageRank": 4,
         "difficultyRank": 5,
         "representativeRank": 10,
-        "globalIndex": 202,
+        "globalIndex": 200,
         "orderReason": "素体上の演算を土台に、既約関係で元を標準化し、加減乗除が閉じる拡大体として扱う。"
       },
       "sourceRevisionIds": [
@@ -44656,7 +44498,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 97,
-        "globalIndex": 203,
+        "globalIndex": 201,
         "orderReason": "拡大有限体の表現と演算で得た考え方と実装を再利用し、有限体Frobenius軌道の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -45099,7 +44941,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 91,
-        "globalIndex": 180,
+        "globalIndex": 179,
         "orderReason": "最大流・最小カットで得た考え方と実装を再利用し、下限制約付きflowの実現可能性の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -45555,7 +45397,7 @@
         "stageRank": 4,
         "difficultyRank": 5,
         "representativeRank": 10,
-        "globalIndex": 204,
+        "globalIndex": 202,
         "orderReason": "生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。"
       },
       "sourceRevisionIds": [
@@ -45883,7 +45725,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 99,
-        "globalIndex": 207,
+        "globalIndex": 205,
         "orderReason": "形式的べき級数の基本演算で得た考え方と実装を再利用し、FPS合成・power projectionの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -46218,7 +46060,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 90,
-        "globalIndex": 178,
+        "globalIndex": 177,
         "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -46681,7 +46523,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 60,
-        "globalIndex": 111,
+        "globalIndex": 112,
         "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、関数グラフのcycle・tree分解の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -46863,7 +46705,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 98,
-        "globalIndex": 98,
+        "globalIndex": 99,
         "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、Gaussian整数・二平方和の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -47077,7 +46919,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 54,
-        "globalIndex": 104,
+        "globalIndex": 105,
         "orderReason": "差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -47904,7 +47746,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 86,
-        "globalIndex": 165,
+        "globalIndex": 164,
         "orderReason": "通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。"
       },
       "sourceRevisionIds": [
@@ -48018,7 +47860,7 @@
         "baselineVersion": "1.0.0",
         "additionalPrerequisiteUnitIds": [],
         "excludedTopics": [
-          "方向別grid effect scanによる静的前計算。",
+          "eventをsortしてactive集合を増減するsweep line。",
           "非負重み付き距離の緩和・確定と最短路certificateの復元。"
         ],
         "sourceRevisionIds": [
@@ -48029,9 +47871,14 @@
           "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9",
           "source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5"
         ],
-        "tagIds": ["tag-state-graph-search", "tag-transitive-closure"],
+        "tagIds": [
+          "tag-directional-grid-effect-scan",
+          "tag-state-graph-search",
+          "tag-transitive-closure"
+        ],
         "learningOutcomeIds": [
           "outcome-compute-transitive-closure",
+          "outcome-precompute-directional-grid-effects",
           "outcome-select-state-graph-search"
         ],
         "problemIds": [
@@ -48064,7 +47911,7 @@
         "difficultyRank": 0,
         "representativeRank": 0,
         "globalIndex": 10,
-        "orderReason": "既知のDFS・BFS実装を土台に、問題の状態を頂点、合法操作を辺として設計し、必要なら中継点を順に許可して到達関係全体を求める。"
+        "orderReason": "既知のDFS・BFS実装を土台に、長距離効果は探索前の方向別scanで静的な通行条件へ変換し、問題の状態を頂点、合法操作を辺として設計して到達関係を求める。"
       },
       "sourceRevisionIds": [
         "source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011",
@@ -48503,7 +48350,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 89,
-        "globalIndex": 176,
+        "globalIndex": 175,
         "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、半平面制約・凸領域の共通部分の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -48609,7 +48456,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 153,
+        "globalIndex": 152,
         "orderReason": "ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、Heavy-Light Decompositionの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -48654,7 +48501,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 91,
-        "globalIndex": 181,
+        "globalIndex": 180,
         "orderReason": "heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -48834,7 +48681,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 72,
-        "globalIndex": 140,
+        "globalIndex": 139,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -49687,7 +49534,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 189,
+        "globalIndex": 188,
         "orderReason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、isotonic regression・PAVの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -49784,7 +49631,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 190,
+        "globalIndex": 189,
         "orderReason": "event・値順のオフライン走査で得た考え方と実装を再利用し、kinetic sorting・交差event順序更新の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -49876,7 +49723,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 93,
-        "globalIndex": 187,
+        "globalIndex": 186,
         "orderReason": "DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。"
       },
       "sourceRevisionIds": [
@@ -50274,7 +50121,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 93,
-        "globalIndex": 188,
+        "globalIndex": 187,
         "orderReason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、Lagrangian relaxation・Aliens trickの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -50537,7 +50384,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 84,
-        "globalIndex": 162,
+        "globalIndex": 161,
         "orderReason": "非交差区間族を括弧列として走査し、stack topを直接包含親にして包含関係を木へ変換する。その後の包含差分queryをLCAや木上距離へ接続する。"
       },
       "sourceRevisionIds": [
@@ -50629,7 +50476,7 @@
         "parentId": "unit-chapter-geometry-optimization",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
-        "additionalPrerequisiteUnitIds": ["unit-basic-convex-optimization"],
+        "additionalPrerequisiteUnitIds": [],
         "excludedTopics": [
           "Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
         ],
@@ -50647,8 +50494,8 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 93,
-        "globalIndex": 114,
-        "orderReason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、Convex Hull Trick・直線包絡の発動条件・正当化・境界を重複なく学ぶ。"
+        "globalIndex": 96,
+        "orderReason": "一次関数の候補を傾き・交点順に管理し、各query点で最小または最大となる直線を選ぶ。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
         "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
@@ -51132,7 +50979,7 @@
         "stageRank": 4,
         "difficultyRank": 5,
         "representativeRank": 100,
-        "globalIndex": 208,
+        "globalIndex": 206,
         "orderReason": "matroidの独立性・交換公理、線形方程式のrank計算、乱択誤り評価を学んだ後、二つの線形matroidの共通独立rankを一枚の乱択行列へ圧縮する。"
       },
       "sourceRevisionIds": [
@@ -51835,7 +51682,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 11,
-        "globalIndex": 103,
+        "globalIndex": 104,
         "orderReason": "DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。"
       },
       "sourceRevisionIds": [
@@ -52053,7 +51900,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 183,
+        "globalIndex": 182,
         "orderReason": "Matroidの独立集合族と交換公理を定義した後、重み順greedyが最適基底を作る必要十分な構造を証明する。"
       },
       "sourceRevisionIds": [
@@ -52344,7 +52191,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 86,
-        "globalIndex": 167,
+        "globalIndex": 166,
         "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -52807,7 +52654,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 184,
+        "globalIndex": 183,
         "orderReason": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、最小費用流・circulationの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -53061,7 +52908,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 99,
-        "globalIndex": 199,
+        "globalIndex": 197,
         "orderReason": "二部matchingでは表せないpairing模型を作った後、奇cycleを扱うweighted blossomまたは重み付きTutte多項式で最小重みまで求める。"
       },
       "sourceRevisionIds": [
@@ -53167,7 +53014,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 98,
-        "globalIndex": 99,
+        "globalIndex": 100,
         "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、Min_25・Lucy DP型の総和篩の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -54154,7 +54001,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 191,
+        "globalIndex": 190,
         "orderReason": "DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge・monotone minima最適化の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -55225,7 +55072,7 @@
         "stageRank": 5,
         "difficultyRank": 3,
         "representativeRank": 3,
-        "globalIndex": 209,
+        "globalIndex": 207,
         "orderReason": "合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。"
       },
       "sourceRevisionIds": [
@@ -55378,7 +55225,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 192,
+        "globalIndex": 191,
         "orderReason": "graph core・leaf peeling・lowlinkによる橋・関節点の検出で得た考え方と実装を再利用し、near-tree graphのkernel化の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -55951,7 +55798,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 79,
-        "globalIndex": 149,
+        "globalIndex": 148,
         "orderReason": "ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -56259,7 +56106,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 60,
-        "globalIndex": 112,
+        "globalIndex": 113,
         "orderReason": "比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -56677,7 +56524,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 99,
-        "globalIndex": 200,
+        "globalIndex": 198,
         "orderReason": "path matchingの交互構造を使い、最小edgeの採用後も残りの全cardinality最適値を保存する補正縮約を導いてheapと双方向linkで実装する。"
       },
       "sourceRevisionIds": [
@@ -56754,94 +56601,6 @@
     {
       "kind": "unit",
       "entity": {
-        "id": "unit-periodic-tree-role-recovery",
-        "kind": "subsection",
-        "title": "距離剰余による周期的tree部品の役割復元",
-        "parentId": "unit-tree-metric",
-        "baselineId": "prereq-abc-advanced-v1",
-        "baselineVersion": "1.0.0",
-        "additionalPrerequisiteUnitIds": [],
-        "excludedTopics": [
-          "距離剰余による周期的tree部品の役割復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
-        ],
-        "sourceRevisionIds": [
-          "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
-          "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
-        ],
-        "tagIds": ["tag-periodic-tree-role-recovery"],
-        "learningOutcomeIds": ["outcome-recover-periodic-tree-roles-by-distance-residue"],
-        "problemIds": ["abc303-e"],
-        "stageRank": 4,
-        "difficultyRank": 3,
-        "representativeRank": 74,
-        "globalIndex": 136,
-        "orderReason": "木の距離を一度計算できることを土台に、局所特徴からanchorを定め、固定間隔で反復された部品の役割を距離剰余で一括復元する。"
-      },
-      "sourceRevisionIds": [
-        "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
-        "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
-      ],
-      "evidenceRefs": [
-        {
-          "problemId": "abc303-e",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
-            "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
-          ]
-        },
-        {
-          "problemId": "abc303-e",
-          "claimPath": "/reasoningPath/algorithmConnection",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
-            "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
-          ]
-        },
-        {
-          "problemId": "abc303-e",
-          "claimPath": "/reasoningPath/candidateApproaches/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
-            "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
-          ]
-        },
-        {
-          "problemId": "abc303-e",
-          "claimPath": "/reasoningPath/keyInsights/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
-            "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
-          ]
-        },
-        {
-          "problemId": "abc303-e",
-          "claimPath": "/reasoningPath/observations/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
-            "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
-          ]
-        },
-        {
-          "problemId": "abc303-e",
-          "claimPath": "/typicalTechniques/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
-            "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
-          ]
-        }
-      ],
-      "materializationTask": "T050"
-    },
-    {
-      "kind": "unit",
-      "entity": {
         "id": "unit-persistence",
         "kind": "subsection",
         "title": "永続data structure・structural sharing",
@@ -56864,7 +56623,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 84,
-        "globalIndex": 163,
+        "globalIndex": 162,
         "orderReason": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -57276,7 +57035,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 168,
+        "globalIndex": 167,
         "orderReason": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、平面graph双対・cut/path対応の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -57623,7 +57382,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 205,
+        "globalIndex": 203,
         "orderReason": "形式的べき級数の基本演算・再帰分割・分割統治で得た考え方と実装を再利用し、多項式の多点評価・補間の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -57761,7 +57520,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 95,
-        "globalIndex": 195,
+        "globalIndex": 193,
         "orderReason": "畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。"
       },
       "sourceRevisionIds": [
@@ -57817,7 +57576,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 93,
-        "globalIndex": 155,
+        "globalIndex": 154,
         "orderReason": "二部matching・Hall・Kőnig・列・subsequence DPで得た考え方と実装を再利用し、半順序・Dilworth・最大反鎖の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -58069,7 +57828,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 73,
-        "globalIndex": 166,
+        "globalIndex": 165,
         "orderReason": "DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -58433,103 +58192,6 @@
     {
       "kind": "unit",
       "entity": {
-        "id": "unit-prefix-interval-multiset-transform",
-        "kind": "subsection",
-        "title": "prefix interval基底によるmultiset変換",
-        "parentId": "unit-decomposition-amortization",
-        "baselineId": "prereq-abc-advanced-v1",
-        "baselineVersion": "1.0.0",
-        "additionalPrerequisiteUnitIds": [],
-        "excludedTopics": [
-          "prefix interval基底によるmultiset変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
-        ],
-        "sourceRevisionIds": [
-          "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-          "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
-        ],
-        "tagIds": ["tag-prefix-interval-multiset-transform"],
-        "learningOutcomeIds": ["outcome-transform-multisets-in-prefix-interval-basis"],
-        "problemIds": ["abc466-f"],
-        "stageRank": 4,
-        "difficultyRank": 4,
-        "representativeRank": 94,
-        "globalIndex": 193,
-        "orderReason": "巨大なfrequency列をprefix indicatorの線形結合へ変え、変換後の共通prefixをまとめ、縮小するremainderだけを追うことでobject数を対数的に抑える。"
-      },
-      "sourceRevisionIds": [
-        "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-        "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
-      ],
-      "evidenceRefs": [
-        {
-          "problemId": "abc466-f",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-            "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
-          ]
-        },
-        {
-          "problemId": "abc466-f",
-          "claimPath": "/reasoningPath/algorithmConnection",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-            "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
-          ]
-        },
-        {
-          "problemId": "abc466-f",
-          "claimPath": "/reasoningPath/candidateApproaches/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-            "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
-          ]
-        },
-        {
-          "problemId": "abc466-f",
-          "claimPath": "/reasoningPath/keyInsights/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-            "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
-          ]
-        },
-        {
-          "problemId": "abc466-f",
-          "claimPath": "/reasoningPath/keyInsights/1",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-            "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
-          ]
-        },
-        {
-          "problemId": "abc466-f",
-          "claimPath": "/reasoningPath/observations/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-            "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
-          ]
-        },
-        {
-          "problemId": "abc466-f",
-          "claimPath": "/typicalTechniques/0",
-          "evidenceIds": ["evidence-official-analysis"],
-          "sourceRevisionIds": [
-            "source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16",
-            "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
-          ]
-        }
-      ],
-      "materializationTask": "T050"
-    },
-    {
-      "kind": "unit",
-      "entity": {
         "id": "unit-prime-divisor",
         "kind": "section",
         "title": "素因数分解と約数構造",
@@ -58744,7 +58406,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 57,
-        "globalIndex": 107,
+        "globalIndex": 108,
         "orderReason": "現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -58836,7 +58498,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 96,
+        "globalIndex": 97,
         "orderReason": "組合せ係数・数え上げで得た考え方と実装を再利用し、Prüfer code・次数制約付きlabel木の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -58928,7 +58590,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 87,
-        "globalIndex": 171,
+        "globalIndex": 170,
         "orderReason": "乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -59455,7 +59117,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 3,
-        "globalIndex": 139,
+        "globalIndex": 138,
         "orderReason": "結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。"
       },
       "sourceRevisionIds": [
@@ -59644,7 +59306,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 75,
-        "globalIndex": 138,
+        "globalIndex": 137,
         "orderReason": "queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -60023,7 +59685,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 2,
-        "globalIndex": 101,
+        "globalIndex": 102,
         "orderReason": "明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。"
       },
       "sourceRevisionIds": [
@@ -60464,7 +60126,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 96,
-        "globalIndex": 197,
+        "globalIndex": 195,
         "orderReason": "畳み込み・相互相関で得た考え方と実装を再利用し、Relaxed・online convolutionの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -60749,7 +60411,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 75,
-        "globalIndex": 141,
+        "globalIndex": 140,
         "orderReason": "根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -60926,7 +60588,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 83,
-        "globalIndex": 161,
+        "globalIndex": 160,
         "orderReason": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -61395,7 +61057,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 99,
-        "globalIndex": 100,
+        "globalIndex": 101,
         "orderReason": "順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -61766,7 +61428,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 90,
-        "globalIndex": 179,
+        "globalIndex": 178,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、Segment Tree Beatsの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -61867,7 +61529,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 78,
-        "globalIndex": 148,
+        "globalIndex": 147,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -62149,7 +61811,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 77,
-        "globalIndex": 147,
+        "globalIndex": 146,
         "orderReason": "離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。"
       },
       "sourceRevisionIds": [
@@ -62407,7 +62069,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 87,
-        "globalIndex": 172,
+        "globalIndex": 171,
         "orderReason": "Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -63011,7 +62673,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 185,
+        "globalIndex": 184,
         "orderReason": "最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。"
       },
       "sourceRevisionIds": [
@@ -63251,7 +62913,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 89,
-        "globalIndex": 177,
+        "globalIndex": 176,
         "orderReason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、slope trickの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -63901,7 +63563,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 43,
-        "globalIndex": 102,
+        "globalIndex": 103,
         "orderReason": "暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -64038,7 +63700,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 86,
-        "globalIndex": 169,
+        "globalIndex": 168,
         "orderReason": "Segment Treeのcanonical区間分解で得た考え方と実装を再利用し、静的sorted range index・Merge Sort Treeの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -64128,7 +63790,7 @@
         "stageRank": 4,
         "difficultyRank": 5,
         "representativeRank": 7,
-        "globalIndex": 201,
+        "globalIndex": 199,
         "orderReason": "木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。"
       },
       "sourceRevisionIds": [
@@ -64301,7 +63963,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 91,
-        "globalIndex": 143,
+        "globalIndex": 142,
         "orderReason": "最短路モデル・部分集合・bitmask状態DPで得た考え方と実装を再利用し、Steiner tree subset DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -65180,7 +64842,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 94,
-        "globalIndex": 194,
+        "globalIndex": 192,
         "orderReason": "畳み込み・相互相関・subset zeta・Möbius変換で得た考え方と実装を再利用し、subset convolutionの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -65275,7 +64937,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 86,
-        "globalIndex": 170,
+        "globalIndex": 169,
         "orderReason": "集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -65792,7 +65454,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 88,
-        "globalIndex": 175,
+        "globalIndex": 174,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、SWAG・two-stack queue aggregationの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -65903,7 +65565,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 74,
-        "globalIndex": 137,
+        "globalIndex": 136,
         "orderReason": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -66024,7 +65686,7 @@
         "stageRank": 4,
         "difficultyRank": 2,
         "representativeRank": 55,
-        "globalIndex": 105,
+        "globalIndex": 106,
         "orderReason": "各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -67277,7 +66939,7 @@
       "entity": {
         "id": "unit-tree-metric",
         "kind": "section",
-        "title": "木距離の端点・中心・剰余不変量を捉える",
+        "title": "木距離を基準点・直径・中心から捉える",
         "parentId": "unit-chapter-tree",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
@@ -67291,11 +66953,8 @@
           "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba",
           "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1"
         ],
-        "tagIds": ["tag-periodic-tree-role-recovery", "tag-tree-metric-diameter"],
-        "learningOutcomeIds": [
-          "outcome-recover-periodic-tree-roles-by-distance-residue",
-          "outcome-use-tree-diameter-extrema"
-        ],
+        "tagIds": ["tag-tree-metric-diameter"],
+        "learningOutcomeIds": ["outcome-use-tree-diameter-extrema"],
         "problemIds": [
           "abc221-f",
           "abc222-f",
@@ -67310,7 +66969,7 @@
         "difficultyRank": 1,
         "representativeRank": 5,
         "globalIndex": 34,
-        "orderReason": "木を探索して距離を求められることを前提に、直径端点・中心が距離構造を代表する性質と、anchorからの距離剰余で反復部品の役割を復元する不変量を学ぶ。"
+        "orderReason": "木を探索して基準点からの距離を求められることを前提に、一意経路から得る距離labelと、直径端点・中心が距離構造を代表する性質を学ぶ。"
       },
       "sourceRevisionIds": [
         "source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072",
@@ -67545,7 +67204,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 96,
-        "globalIndex": 110,
+        "globalIndex": 111,
         "orderReason": "DSUによる連結成分管理・縮約・貪欲法と交換論で得た考え方と実装を再利用し、01 on Tree・親先行順序のcluster縮約の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -67993,7 +67652,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 84,
-        "globalIndex": 164,
+        "globalIndex": 163,
         "orderReason": "SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、2-SAT・含意グラフの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -68099,7 +67758,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 87,
-        "globalIndex": 173,
+        "globalIndex": 172,
         "orderReason": "ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、virtual tree・auxiliary treeの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -68187,7 +67846,7 @@
         "stageRank": 4,
         "difficultyRank": 4,
         "representativeRank": 95,
-        "globalIndex": 196,
+        "globalIndex": 194,
         "orderReason": "二部matching・Hall・Kőnigで得た考え方と実装を再利用し、重み付き二部完全matchingの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -68496,7 +68155,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 75,
-        "globalIndex": 142,
+        "globalIndex": 141,
         "orderReason": "基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。"
       },
       "sourceRevisionIds": [
@@ -68691,7 +68350,7 @@
         "stageRank": 4,
         "difficultyRank": 3,
         "representativeRank": 79,
-        "globalIndex": 150,
+        "globalIndex": 149,
         "orderReason": "整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。 発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -69096,10 +68755,6 @@
       "prerequisiteId": "tag-geometry-orientation-transform"
     },
     {
-      "nodeId": "tag-convex-hull-trick",
-      "prerequisiteId": "tag-basic-convex-optimization"
-    },
-    {
       "nodeId": "tag-cyclic-exponent-counting",
       "prerequisiteId": "tag-multiplicative-order"
     },
@@ -69134,10 +68789,6 @@
     {
       "nodeId": "tag-directed-walk-periodicity",
       "prerequisiteId": "tag-scc-condensation"
-    },
-    {
-      "nodeId": "tag-directional-grid-effect-scan",
-      "prerequisiteId": "tag-event-sweep"
     },
     {
       "nodeId": "tag-divisor-mobius-inversion",
@@ -69654,10 +69305,6 @@
       "prerequisiteId": "unit-scc-condensation"
     },
     {
-      "nodeId": "unit-directional-grid-effect-scan",
-      "prerequisiteId": "unit-events-offline"
-    },
-    {
       "nodeId": "unit-divisor-mobius-inversion",
       "prerequisiteId": "unit-prime-divisor"
     },
@@ -69807,10 +69454,6 @@
     },
     {
       "nodeId": "unit-lagrangian-relaxation",
-      "prerequisiteId": "unit-basic-convex-optimization"
-    },
-    {
-      "nodeId": "unit-line-envelope",
       "prerequisiteId": "unit-basic-convex-optimization"
     },
     {
@@ -70195,6 +69838,7 @@
     "unit-reflection-principle",
     "unit-semiring-matrix-exponentiation",
     "unit-labeled-component-decomposition",
+    "unit-line-envelope",
     "unit-prufer-code",
     "unit-additive-tree-metric-reconstruction",
     "unit-gaussian-integers-two-squares",
@@ -70213,7 +69857,6 @@
     "unit-functional-graph-decomposition",
     "unit-ordered-set-multiset",
     "unit-basic-convex-optimization",
-    "unit-line-envelope",
     "unit-directed-core-peeling",
     "unit-dp-subset-state",
     "unit-rooted-tree-aggregation",
@@ -70235,7 +69878,6 @@
     "unit-sequence-fingerprint",
     "unit-finite-pattern-automaton",
     "unit-suffix-automaton",
-    "unit-periodic-tree-role-recovery",
     "unit-threshold-heavy-light",
     "unit-range-monoid-aggregation",
     "unit-range-actions",
@@ -70292,7 +69934,6 @@
     "unit-kinetic-order-maintenance",
     "unit-monge-optimization",
     "unit-near-tree-kernelization",
-    "unit-prefix-interval-multiset-transform",
     "unit-subset-convolution",
     "unit-polynomial-taylor-shift",
     "unit-weighted-bipartite-matching",
@@ -141232,15 +140873,15 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 著者判断状態=proposed; 曖昧性=proposed_assignment; 選択理由: Inventoryの採用方針「葉の隣を始点に距離を求め、距離mod 3で中心を抽出する」、解法への接続「任意の次数1頂点を見つけ、その唯一の隣接頂点を始点に木をDFSまたはBFSする。距離が3の倍数である頂点の次数を答え列へ追加し、昇順にsortして出力する。」、学習成果「木を構成した全starのlevelを重複込みで復元し、昇順に出力できる。」を照合し、tag-periodic-tree-role-recovery / outcome-recover-periodic-tree-roles-by-distance-residue をproposal上のprimary配置とした。第三者acceptance前の明示assignmentである。",
+      "rationale": "決定種別=explicit_inventory_assignment; 著者判断状態=proposed; 曖昧性=proposed_assignment; 選択理由: Inventoryの採用方針「葉の隣を始点に距離を求め、距離mod 3で中心を抽出する」、解法への接続「任意の次数1頂点を見つけ、その唯一の隣接頂点を始点に木をDFSまたはBFSする。距離が3の倍数である頂点の次数を答え列へ追加し、昇順にsortして出力する。」、学習成果「木を構成した全starのlevelを重複込みで復元し、昇順に出力できる。」を照合し、tag-tree-metric-diameter / outcome-use-tree-diameter-extrema をproposal上のprimary配置とした。第三者acceptance前の明示assignmentである。",
       "evidenceIds": ["evidence-official-analysis"],
-      "primaryTagIds": ["tag-periodic-tree-role-recovery"],
+      "primaryTagIds": ["tag-tree-metric-diameter"],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-recover-periodic-tree-roles-by-distance-residue",
+      "primaryOutcomeId": "outcome-use-tree-diameter-extrema",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
-      "learningUnitIds": ["unit-periodic-tree-role-recovery"],
-      "presentationUnitId": "unit-periodic-tree-role-recovery",
+      "learningUnitIds": ["unit-tree-metric"],
+      "presentationUnitId": "unit-tree-metric",
       "adHocElements": [
         "starのlevelは中心の次数に等しく、中心集合さえ距離mod 3で特定できれば、元の接続手順そのものを逆再生する必要はない。（再利用可能な見方: 構成問題の復元では、部品の識別標識と部品間距離の周期性を探すと削除simulationを避けられる。）"
       ],
@@ -141256,7 +140897,7 @@
             ]
           },
           "kind": "primary",
-          "tagIds": ["tag-periodic-tree-role-recovery"],
+          "tagIds": ["tag-tree-metric-diameter"],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
@@ -141269,9 +140910,9 @@
               "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
             ]
           },
-          "kind": "same_tag",
-          "tagIds": ["tag-periodic-tree-role-recovery"],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "kind": "problem_specific",
+          "tagIds": [],
+          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
         },
         {
           "claimRef": {
@@ -239328,15 +238969,15 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 著者判断状態=proposed; 曖昧性=proposed_assignment; 選択理由: Inventoryの採用方針「同じ終端xのinterval [0,x) を係数付きでまとめ、priority queue/mapで管理し、各mod操作ごとに各終端を[0,M)と[0,x mod M)へ分解して同終端を併合する。」、解法への接続「multisetをend→count mapとend順priority queueで持つ。mod Mを処理する際、各distinct xのcountを取り出し、full countをend Mへ加え、remainder>0ならend remainderへ加える。同一endをcombineし、最終multisetから要求統計を計算する。」、学習成果「巨大な連続整数multisetへの多数mod操作を、prefix intervalの係数変換として準線形個数でsimulationできる。」を照合し、tag-prefix-interval-multiset-transform / outcome-transform-multisets-in-prefix-interval-basis をproposal上のprimary配置とした。第三者acceptance前の明示assignmentである。",
+      "rationale": "決定種別=explicit_inventory_assignment; 著者判断状態=proposed; 曖昧性=proposed_assignment; 選択理由: Inventoryの採用方針「同じ終端xのinterval [0,x) を係数付きでまとめ、priority queue/mapで管理し、各mod操作ごとに各終端を[0,M)と[0,x mod M)へ分解して同終端を併合する。」、解法への接続「multisetをend→count mapとend順priority queueで持つ。mod Mを処理する際、各distinct xのcountを取り出し、full countをend Mへ加え、remainder>0ならend remainderへ加える。同一endをcombineし、最終multisetから要求統計を計算する。」、学習成果「巨大な連続整数multisetへの多数mod操作を、prefix intervalの係数変換として準線形個数でsimulationできる。」を照合し、tag-amortized-monotone-progress / outcome-bound-monotone-total-work をproposal上のprimary配置とした。第三者acceptance前の明示assignmentである。",
       "evidenceIds": ["evidence-official-analysis"],
-      "primaryTagIds": ["tag-prefix-interval-multiset-transform"],
+      "primaryTagIds": ["tag-amortized-monotone-progress"],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-transform-multisets-in-prefix-interval-basis",
+      "primaryOutcomeId": "outcome-bound-monotone-total-work",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
-      "learningUnitIds": ["unit-prefix-interval-multiset-transform"],
-      "presentationUnitId": "unit-prefix-interval-multiset-transform",
+      "learningUnitIds": ["unit-amortized-monotone-progress"],
+      "presentationUnitId": "unit-amortized-monotone-progress",
       "adHocElements": [
         "各値を追う代わりに、modが連続区間へ作る剰余分布の形をbasis objectとして持つ。（再利用可能な見方: 変換で毎回生まれる共通項と縮小する残余項を分けると、object数を償却解析できる。）"
       ],
@@ -239351,9 +238992,9 @@
               "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
             ]
           },
-          "kind": "primary",
-          "tagIds": ["tag-prefix-interval-multiset-transform"],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "kind": "problem_specific",
+          "tagIds": [],
+          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
         },
         {
           "claimRef": {
@@ -239365,9 +239006,9 @@
               "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
             ]
           },
-          "kind": "same_tag",
-          "tagIds": ["tag-prefix-interval-multiset-transform"],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "kind": "primary",
+          "tagIds": ["tag-amortized-monotone-progress"],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -239379,9 +239020,9 @@
               "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5"
             ]
           },
-          "kind": "same_tag",
-          "tagIds": ["tag-prefix-interval-multiset-transform"],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "kind": "problem_specific",
+          "tagIds": [],
+          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -305900,16 +305541,16 @@
     "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"
   ],
   "reviewEvidenceRefs": [],
-  "taxonomySubjectDigest": "f31dfac07b54bcaf00cdcf150b38ea71854815eaf1061ab69badf99e4ea8d9ef",
-  "taxonomyDigest": "f95d5e12afa3bba5654928bd471ef9ea77a8ced653324eb1595fbd65bde2723a",
-  "tagDagDigest": "89b9b6fbee17902c8c2b0565adf9c249d784c31909ac1ae31d281666f8b8a098",
-  "learningUnitDagDigest": "2c9d8c934b607a820c15c8dfa5b48e7ceea71a3e5894e8ef39f836b9dd55fc80",
-  "orderDigest": "494259b90e99dd7028602fba5ad48168b918befef0463eb153630e1f004ada51",
-  "placementDigest": "6c71a300d43d86ca9d2ebc0eab3ac0b53445289a0d54f46e261d389a31608844",
+  "taxonomySubjectDigest": "69fe43360c4dc5a5323a1f36501026443c5ce85b2402e0bff4e116d55d15ce26",
+  "taxonomyDigest": "e2f87ad49d4805bb43d900120ad01b98bf01b761ff261b3b553eff3a128704bb",
+  "tagDagDigest": "c464319093a916ea90b1d53254e67cf7e6ca07306db6c8e99d16a0dae55d16cb",
+  "learningUnitDagDigest": "65763a426d54e2dcd326d60934e8122da0f51067486d4b3dcfdf01d4a7151aa1",
+  "orderDigest": "1a8d03eb8694da2f9e82cde51f7ad7d99da9fcf461090cfb7a370b9683b615f8",
+  "placementDigest": "182b2d8481f6c8d11a37fa7b0a53869c18f572b76464f396051abd0ae5c072f4",
   "correctionImpactDigest": "2018d73f108f710f104388b3e4406a575710529afb10aa0f0e21f0482773782e",
   "status": "proposed",
   "acceptedAt": null,
   "holdReasons": ["CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE"],
   "canonicalMaterializationAllowed": false,
-  "buildDigest": "8136f803fe10dcc546498b1779805d1e2854a445a1f28194e715f24845184249"
+  "buildDigest": "934946059ca3b111ed30dcef090d13407969e475bf1b5cb969d0ef2f633322a1"
 }

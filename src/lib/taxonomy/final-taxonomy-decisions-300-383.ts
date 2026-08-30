@@ -18,7 +18,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_300_383 = {
   'abc302-ex': 'tag-persistent-rollback',
   'abc302-f': 'tag-reachability-bfs',
   'abc302-g': 'tag-symmetry-invariant-normalization',
-  'abc303-e': 'tag-periodic-tree-role-recovery',
+  'abc303-e': 'tag-tree-metric-diameter',
   'abc303-ex': 'tag-convolution-fps',
   'abc303-f': 'tag-monotone-threshold-search',
   'abc303-g': 'tag-game-value-dp',

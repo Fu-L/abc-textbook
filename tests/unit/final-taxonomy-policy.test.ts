@@ -61,9 +61,9 @@ const loadedDecisionTable = loadedRecords.then((records) =>
 describe('final taxonomy policy', () => {
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
-    expect(FINAL_TAXONOMY_TAGS).toHaveLength(191);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(194);
-    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(211);
+    expect(FINAL_TAXONOMY_TAGS).toHaveLength(189);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(192);
+    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(209);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
       'tag-dp-state-transition',
@@ -101,9 +101,7 @@ describe('final taxonomy policy', () => {
         'tag-bostan-mori',
         'tag-baby-step-giant-step',
         'tag-directional-grid-effect-scan',
-        'tag-periodic-tree-role-recovery',
         'tag-laminar-interval-containment-tree',
-        'tag-prefix-interval-multiset-transform',
         'tag-polynomial-taylor-shift',
         'tag-linear-matroid-intersection',
         'tag-min-weight-general-perfect-matching',
@@ -250,7 +248,7 @@ describe('final taxonomy policy', () => {
     expect(unitById.get('unit-shortest-path-certificates')?.title).toBe(
       '重み付き最短路・経路復元・差分制約',
     );
-    expect(unitById.get('unit-tree-metric')?.title).toContain('剰余不変量');
+    expect(unitById.get('unit-tree-metric')?.title).toBe('木距離を基準点・直径・中心から捉える');
     expect(unitById.get('unit-tree-decomposition')?.title).toContain('包含木');
     expect(tagById.get('tag-two-sat')?.prerequisiteTagIds).toEqual(['tag-scc-condensation']);
     expect(
@@ -329,10 +327,19 @@ describe('final taxonomy policy', () => {
       'tag-combinatorial-coefficients',
       'tag-convolution',
     ]);
-    expect(tagById.get('tag-directional-grid-effect-scan')?.prerequisiteTagIds).toEqual([
-      'tag-event-sweep',
-    ]);
-    expect(tagById.get('tag-periodic-tree-role-recovery')?.prerequisiteTagIds).toEqual([]);
+    expect(tagById.get('tag-directional-grid-effect-scan')?.prerequisiteTagIds).toEqual([]);
+    expect(tagById.get('tag-convex-hull-trick')?.prerequisiteTagIds).toEqual([]);
+    expect(tagById.has('tag-periodic-tree-role-recovery')).toBe(false);
+    expect(tagById.has('tag-prefix-interval-multiset-transform')).toBe(false);
+    expect(outcomeById.has('outcome-recover-periodic-tree-roles-by-distance-residue')).toBe(false);
+    expect(outcomeById.has('outcome-transform-multisets-in-prefix-interval-basis')).toBe(false);
+    expect(unitById.has('unit-periodic-tree-role-recovery')).toBe(false);
+    expect(unitById.has('unit-prefix-interval-multiset-transform')).toBe(false);
+    expect(unitById.get('unit-directional-grid-effect-scan')?.parentId).toBe('unit-graph-search');
+    expect(
+      unitById.get('unit-directional-grid-effect-scan')?.additionalPrerequisiteUnitIds,
+    ).toEqual([]);
+    expect(unitById.get('unit-line-envelope')?.additionalPrerequisiteUnitIds).toEqual([]);
     expect(unitById.get('unit-flow-matching')?.kind).toBe('section');
     expect(unitById.get('unit-max-flow-min-cut')?.parentId).toBe('unit-flow-matching');
 
@@ -360,6 +367,9 @@ describe('final taxonomy policy', () => {
     );
     expect(tagById.get('tag-directional-grid-effect-scan')?.relatedTags).toContainEqual(
       expect.objectContaining({ tagId: 'tag-event-sweep', type: 'analogy' }),
+    );
+    expect(tagById.get('tag-convex-hull-trick')?.relatedTags).toContainEqual(
+      expect.objectContaining({ tagId: 'tag-basic-convex-optimization', type: 'analogy' }),
     );
     expect(tagById.get('tag-event-sweep')?.semanticSignature.excludedPatterns).toContain(
       '固定.*方向.*scanだけ',
@@ -624,10 +634,7 @@ describe('final taxonomy policy', () => {
       'abc295-ex': ['outcome-apply-subset-zeta-mobius-transform', 'unit-subset-transforms'],
       'abc296-ex': ['outcome-design-frontier-profile-dp', 'unit-frontier-profile-dp'],
       'abc300-ex': ['outcome-extract-rational-series-coefficient', 'unit-bostan-mori'],
-      'abc303-e': [
-        'outcome-recover-periodic-tree-roles-by-distance-residue',
-        'unit-periodic-tree-role-recovery',
-      ],
+      'abc303-e': ['outcome-use-tree-diameter-extrema', 'unit-tree-metric'],
       'abc303-ex': ['outcome-encode-labeled-trees-by-prufer-code', 'unit-prufer-code'],
       'abc306-g': ['outcome-compute-directed-walk-period', 'unit-directed-walk-periodicity'],
       'abc309-ex': ['outcome-remove-boundaries-by-reflection', 'unit-reflection-principle'],
@@ -738,10 +745,7 @@ describe('final taxonomy policy', () => {
         'unit-path-matching-contraction',
       ],
       'abc465-f': ['outcome-apply-subset-zeta-mobius-transform', 'unit-subset-transforms'],
-      'abc466-f': [
-        'outcome-transform-multisets-in-prefix-interval-basis',
-        'unit-prefix-interval-multiset-transform',
-      ],
+      'abc466-f': ['outcome-bound-monotone-total-work', 'unit-amortized-monotone-progress'],
     };
 
     for (const [problemId, [primaryOutcomeId, presentationUnitId]] of Object.entries(
@@ -842,6 +846,18 @@ describe('final taxonomy policy', () => {
     expect(byProblemId.get('abc466-g')?.additionalPrimaryOutcomeIds).toContain(
       'outcome-design-carry-or-mixed-radix-dp',
     );
+    expect(
+      byProblemId
+        .get('abc303-e')
+        ?.claimDispositions.filter(({ kind }) => kind === 'problem_specific')
+        .map(({ claimRef }) => claimRef.claimPath),
+    ).toContain('/typicalTechniques/1');
+    expect(
+      byProblemId
+        .get('abc466-f')
+        ?.claimDispositions.filter(({ kind }) => kind === 'problem_specific')
+        .map(({ claimRef }) => claimRef.claimPath),
+    ).toEqual(['/typicalTechniques/0', '/prerequisiteCandidates/0']);
   });
 
   it('keeps every co-primary claim bound to its exact skill instead of broadcasting all primary Tags', async () => {

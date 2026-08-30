@@ -8,27 +8,27 @@
   "integrationMapPath": "docs/verification/previews/initial-v1/taxonomy-integration.json",
   "reviewCheckResultsPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
   "reviewEvidencePath": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-  "taxonomySubjectDigest": "f31dfac07b54bcaf00cdcf150b38ea71854815eaf1061ab69badf99e4ea8d9ef",
-  "buildDigest": "8136f803fe10dcc546498b1779805d1e2854a445a1f28194e715f24845184249",
+  "taxonomySubjectDigest": "69fe43360c4dc5a5323a1f36501026443c5ce85b2402e0bff4e116d55d15ce26",
+  "buildDigest": "934946059ca3b111ed30dcef090d13407969e475bf1b5cb969d0ef2f633322a1",
   "integrationMapDigest": "f60fbda6af7018a92011fdfca282c9b977e7ac49f195bdcdd2aef669fa037f7a",
-  "taxonomyDigest": "f95d5e12afa3bba5654928bd471ef9ea77a8ced653324eb1595fbd65bde2723a",
-  "tagDagDigest": "89b9b6fbee17902c8c2b0565adf9c249d784c31909ac1ae31d281666f8b8a098",
-  "learningUnitDagDigest": "2c9d8c934b607a820c15c8dfa5b48e7ceea71a3e5894e8ef39f836b9dd55fc80",
-  "orderDigest": "494259b90e99dd7028602fba5ad48168b918befef0463eb153630e1f004ada51",
-  "placementDigest": "6c71a300d43d86ca9d2ebc0eab3ac0b53445289a0d54f46e261d389a31608844",
+  "taxonomyDigest": "e2f87ad49d4805bb43d900120ad01b98bf01b761ff261b3b553eff3a128704bb",
+  "tagDagDigest": "c464319093a916ea90b1d53254e67cf7e6ca07306db6c8e99d16a0dae55d16cb",
+  "learningUnitDagDigest": "65763a426d54e2dcd326d60934e8122da0f51067486d4b3dcfdf01d4a7151aa1",
+  "orderDigest": "1a8d03eb8694da2f9e82cde51f7ad7d99da9fcf461090cfb7a370b9683b615f8",
+  "placementDigest": "182b2d8481f6c8d11a37fa7b0a53869c18f572b76464f396051abd0ae5c072f4",
   "correctionImpactDigest": "2018d73f108f710f104388b3e4406a575710529afb10aa0f0e21f0482773782e",
   "problemCount": 868,
   "sourceRevisionCount": 1738,
   "knownCorpusSourceRevisionCount": 2246,
   "candidateCounts": {
-    "tags": 191,
-    "outcomes": 194,
-    "units": 211
+    "tags": 189,
+    "outcomes": 192,
+    "units": 209
   },
   "correctionImpactCount": 12,
   "reviewEvidenceRefs": [],
   "canonicalMaterializationAllowed": false,
   "holdReasons": ["CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE"],
   "diagnosticCodes": [],
-  "evidenceDigest": "73b5158dad0e9014ffe64ec1eb2095079e18670a36a3097d8e73d15962d9a8a1"
+  "evidenceDigest": "fd28544e446a6b91bd14a2ff75f08e0108753a2bb85fd5827e4057618e8724c0"
 }
