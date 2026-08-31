@@ -203,7 +203,7 @@ const makeMergeEvidence = (): Record<string, unknown> => {
     humanContentReviewEvidenceDigest: sha('5'),
     constitutionCheck: {
       constitutionPath: '.specify/memory/constitution.md',
-      constitutionVersion: '2.0.0',
+      constitutionVersion: '3.0.0',
       constitutionDigest: sha('6'),
       dependentTemplates: [
         { path: '.specify/templates/plan-template.md', sha256: sha('7'), byteLength: 1 },
@@ -233,7 +233,7 @@ const trustedMergeContext = {
     reviewerId: 'person-author',
     reviewMode: 'self',
   },
-  constitutionVersion: '2.0.0',
+  constitutionVersion: '3.0.0',
   constitutionDigest: sha('6'),
   reviewerId: 'person-author',
   checks: [{ checkId: 'check-contracts', command: 'npm run test:contract', applicable: true }],
@@ -335,6 +335,20 @@ describe('human content review gate', () => {
         humanReview: { ...trustedMergeContext.humanReview, aggregatePassed: false },
       });
     }).toThrow(/MERGE_HUMAN_REVIEW_INCOMPLETE/u);
+  });
+
+  it('rejects merge evidence for the previous constitution version', () => {
+    const staleConstitution = makeMergeEvidence();
+    const constitutionCheck = staleConstitution.constitutionCheck as {
+      constitutionVersion: string;
+    };
+    constitutionCheck.constitutionVersion = '2.0.0';
+    staleConstitution.evidenceDigest = digestWithoutField(staleConstitution, 'evidenceDigest');
+
+    expect(MergeReviewEvidenceSchema.safeParse(staleConstitution).success).toBe(false);
+    expect(() => {
+      validateMergeReviewEvidence(staleConstitution, trustedMergeContext);
+    }).toThrow(/MERGE_REVIEW_SCHEMA_INVALID/u);
   });
 
   it('rejects aggregate success with changes requested or unresolved findings', () => {

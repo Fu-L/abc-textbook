@@ -1930,6 +1930,7 @@ const placementsFromPolicy = (
 const semanticIntegrationEntriesFromPolicy = (
   decisions: readonly PreviewFinalDecision[],
   primaryDecisions: readonly FinalPrimaryDecision[],
+  reviewPolicy: ContentWorkManifest['reviewPolicy'],
 ): SemanticIntegrationEntry[] => {
   const decisionByProblemId = decisionsByProblemId(primaryDecisions);
   return decisions.map((decision): SemanticIntegrationEntry => {
@@ -1954,11 +1955,6 @@ const semanticIntegrationEntriesFromPolicy = (
       );
     }
     const correctionImpactIds = [`impact-${decision.previewEntityId}`];
-    const reviewPolicy = {
-      requiredMode: 'self' as const,
-      riskReasons: ['major_classification_change' as const],
-      highRiskSelfReviewReason: 'solo_maintainer' as const,
-    };
     const base = {
       previewEntityId: decision.previewEntityId,
       previewEntityKind: decision.previewEntityKind,
@@ -2317,6 +2313,7 @@ export const buildFinalTaxonomyFromPolicy = (
   const entries = semanticIntegrationEntriesFromPolicy(
     PREVIEW_FINAL_TAXONOMY_DECISIONS,
     table.decisions,
+    context.workManifest.reviewPolicy,
   );
   const impacts = semanticImpactsFromEntries(
     entries,

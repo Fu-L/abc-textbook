@@ -319,7 +319,7 @@ export const MergeReviewEvidenceSchema = strictObject({
   humanContentReviewEvidenceDigest: Sha256Schema,
   constitutionCheck: strictObject({
     constitutionPath: z.literal('.specify/memory/constitution.md'),
-    constitutionVersion: z.literal('2.0.0'),
+    constitutionVersion: z.literal('3.0.0'),
     constitutionDigest: Sha256Schema,
     dependentTemplates: z.array(fileEntry).min(1),
     violationCount: z.number().int().nonnegative(),

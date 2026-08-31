@@ -133,6 +133,32 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(build.placementDigest).toBe(canonicalDigest(build.placements));
   }, 30_000);
 
+  it('propagates the manifest third-party review policy to every integration entry', async () => {
+    const context = await loadedContext;
+    const thirdPartyContext = {
+      ...context,
+      workManifest: {
+        ...context.workManifest,
+        reviewPolicy: {
+          requiredMode: 'third_party' as const,
+          riskReasons: ['major_classification_change' as const],
+        },
+      },
+    };
+
+    const build = buildFinalTaxonomyFromPolicy(thirdPartyContext);
+
+    expect(build.integrationMap.entries).not.toHaveLength(0);
+    expect(
+      build.integrationMap.entries.every(
+        (entry) =>
+          entry.reviewPolicy.requiredMode === 'third_party' &&
+          entry.reviewPolicy.riskReasons.includes('major_classification_change') &&
+          entry.reviewPolicy.highRiskSelfReviewReason === undefined,
+      ),
+    ).toBe(true);
+  }, 30_000);
+
   it('binds the exact T154 metadata component and provisional integration, not only its taxonomy digest', async () => {
     const context = await loadedContext;
     const changedCandidates = context.provisionalEvidence.candidates.map((candidate, index) =>
