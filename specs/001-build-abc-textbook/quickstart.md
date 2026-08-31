@@ -190,8 +190,8 @@ npm run verify:merge -- --fixture tests/fixtures/reviews/logical-change
 - 各shardを独立にbuild・review・previewでき、全shard joinで重複Problem、未割当Problem、path overlapが0件になる。
 - previewの仮entityはpromote、merge、split、retireのいずれかへ一度だけ対応付けられ、final taxonomyは全Inventoryから再計算される。
 - 通常fixtureは外部person IDなしで、manifest ownerのself-review、outcome coverage、全適用checkを記録して完了する。
-- manifestのreview policyが公式根拠との矛盾・独自証明・重大な分類変更を示すfixtureだけは、selfに代えてthird-party modeとし、author外のperson IDを要求する。
-- self/third-party modeの取り違え、missing check、他者実行結果の追認、第三者reviewでのauthor/reviewer一致、stale digest、未解消findingを拒否する。
+- manifestのreview policyが公式根拠との矛盾・独自証明・重大な分類変更を示すfixtureは原則third-party modeとし、author外のperson IDを要求する。`highRiskSelfReviewReason: solo_maintainer`を明示するfixtureではrisk reasonを保持したowner self-reviewを許可する。
+- self/third-party modeやsolo-maintainer理由の取り違え、missing check、他者実行結果の追認、selfでのowner不一致、第三者reviewでのauthor/reviewer一致、stale digest、未解消findingを拒否する。
 - LLM、owner approval、外部cohortをHumanContentReviewEvidenceの代用として受理しない。
 
 ## Scenario L — Git releaseとrollback

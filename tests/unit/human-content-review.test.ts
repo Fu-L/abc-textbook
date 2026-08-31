@@ -148,6 +148,27 @@ const highRiskTrustedInventory = (riskReason: RiskReason) =>
     reviewPolicy: { requiredMode: 'third_party', riskReasons: [riskReason] },
   }) as const;
 
+const highRiskSelfTrustedInventory = (riskReason: RiskReason) =>
+  ({
+    ...trustedInventory,
+    reviewPolicy: {
+      requiredMode: 'self',
+      riskReasons: [riskReason],
+      highRiskSelfReviewReason: 'solo_maintainer',
+    },
+  }) as const;
+
+const makeHighRiskSelfEvidence = (riskReason: RiskReason): Record<string, unknown> => {
+  const evidence = makeEvidence();
+  evidence.reviewPolicy = {
+    requiredMode: 'self',
+    riskReasons: [riskReason],
+    highRiskSelfReviewReason: 'solo_maintainer',
+  };
+  evidence.evidenceDigest = digestWithoutField(evidence, 'evidenceDigest');
+  return evidence;
+};
+
 const makeMergeEvidence = (): Record<string, unknown> => {
   const evidence: Record<string, unknown> = {
     schemaVersion: '3.0.0',
@@ -243,6 +264,43 @@ describe('human content review gate', () => {
         );
       }).not.toThrow();
     }
+  });
+
+  it('accepts digest-bound high-risk self-review only for an explicit solo maintainer policy', () => {
+    const evidence = makeHighRiskSelfEvidence('major_classification_change');
+    expect(HumanContentReviewEvidenceSchema.safeParse(evidence).success).toBe(true);
+    expect(() => {
+      validateHumanContentReview(
+        evidence,
+        highRiskSelfTrustedInventory('major_classification_change'),
+      );
+    }).not.toThrow();
+
+    const missingReason = makeEvidence();
+    missingReason.reviewPolicy = {
+      requiredMode: 'self',
+      riskReasons: ['major_classification_change'],
+    };
+    missingReason.evidenceDigest = digestWithoutField(missingReason, 'evidenceDigest');
+    expect(HumanContentReviewEvidenceSchema.safeParse(missingReason).success).toBe(false);
+
+    const wrongReviewer = makeHighRiskSelfEvidence('major_classification_change');
+    wrongReviewer.reviewer = { personId: 'person-reviewer', mode: 'self' };
+    const [check] = wrongReviewer.applicableChecks as { executedByReviewerId: string }[];
+    const [item] = wrongReviewer.reviewItems as { reviewerId: string }[];
+    if (!check || !item) throw new Error('Fixture review inventory is missing.');
+    check.executedByReviewerId = 'person-reviewer';
+    item.reviewerId = 'person-reviewer';
+    const coverage = wrongReviewer.outcomeCoverageReview as { reviewerId: string };
+    coverage.reviewerId = 'person-reviewer';
+    wrongReviewer.reviewerExecutedCheckSetDigest = canonicalDigest(wrongReviewer.applicableChecks);
+    wrongReviewer.evidenceDigest = digestWithoutField(wrongReviewer, 'evidenceDigest');
+    expect(() => {
+      validateHumanContentReview(
+        wrongReviewer,
+        highRiskSelfTrustedInventory('major_classification_change'),
+      );
+    }).toThrow(/REVIEWER_IDENTITY_INVALID/u);
   });
 
   it('rejects a review mode that does not match the fixed policy', () => {

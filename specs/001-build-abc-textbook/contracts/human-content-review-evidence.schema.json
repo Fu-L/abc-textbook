@@ -33,52 +33,52 @@
       "$ref": "#/$defs/__schema8"
     },
     "applicableChecks": {
-      "$ref": "#/$defs/__schema11"
+      "$ref": "#/$defs/__schema12"
     },
     "applicableCheckCount": {
-      "$ref": "#/$defs/__schema15"
+      "$ref": "#/$defs/__schema16"
     },
     "passedApplicableCheckCount": {
-      "$ref": "#/$defs/__schema16"
+      "$ref": "#/$defs/__schema17"
     },
     "reviewerExecutedCheckSetDigest": {
       "$ref": "#/$defs/__schema5"
     },
     "authors": {
-      "$ref": "#/$defs/__schema17"
+      "$ref": "#/$defs/__schema18"
     },
     "reviewer": {
-      "$ref": "#/$defs/__schema19"
-    },
-    "reviewItems": {
       "$ref": "#/$defs/__schema20"
     },
-    "inventoryItemCount": {
-      "$ref": "#/$defs/__schema29"
+    "reviewItems": {
+      "$ref": "#/$defs/__schema21"
     },
-    "reviewedItemCount": {
+    "inventoryItemCount": {
       "$ref": "#/$defs/__schema30"
     },
-    "approvedItemCount": {
+    "reviewedItemCount": {
       "$ref": "#/$defs/__schema31"
     },
-    "changesRequestedItemCount": {
+    "approvedItemCount": {
       "$ref": "#/$defs/__schema32"
     },
-    "unreviewedItemCount": {
+    "changesRequestedItemCount": {
       "$ref": "#/$defs/__schema33"
     },
-    "outcomeCoverageReview": {
+    "unreviewedItemCount": {
       "$ref": "#/$defs/__schema34"
     },
-    "outcomeCoverageConfirmed": {
-      "$ref": "#/$defs/__schema40"
+    "outcomeCoverageReview": {
+      "$ref": "#/$defs/__schema35"
     },
-    "aggregatePassed": {
+    "outcomeCoverageConfirmed": {
       "$ref": "#/$defs/__schema41"
     },
+    "aggregatePassed": {
+      "$ref": "#/$defs/__schema42"
+    },
     "generatedAt": {
-      "$ref": "#/$defs/__schema13"
+      "$ref": "#/$defs/__schema14"
     },
     "evidenceDigest": {
       "$ref": "#/$defs/__schema5"
@@ -258,6 +258,9 @@
         },
         "riskReasons": {
           "$ref": "#/$defs/__schema9"
+        },
+        "highRiskSelfReviewReason": {
+          "$ref": "#/$defs/__schema11"
         }
       },
       "required": [
@@ -289,13 +292,17 @@
       ]
     },
     "__schema11": {
+      "type": "string",
+      "const": "solo_maintainer"
+    },
+    "__schema12": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema12"
+        "$ref": "#/$defs/__schema13"
       }
     },
-    "__schema12": {
+    "__schema13": {
       "type": "object",
       "properties": {
         "checkId": {
@@ -323,10 +330,10 @@
           "type": "boolean"
         },
         "completedAt": {
-          "$ref": "#/$defs/__schema13"
+          "$ref": "#/$defs/__schema14"
         },
         "executedByReviewerId": {
-          "$ref": "#/$defs/__schema14"
+          "$ref": "#/$defs/__schema15"
         }
       },
       "required": [
@@ -342,37 +349,37 @@
       ],
       "additionalProperties": false
     },
-    "__schema13": {
+    "__schema14": {
       "type": "string",
       "format": "date-time",
       "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
     },
-    "__schema14": {
+    "__schema15": {
       "type": "string",
       "pattern": "^person-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
-    "__schema15": {
+    "__schema16": {
       "type": "integer",
       "exclusiveMinimum": 0,
       "maximum": 9007199254740991
     },
-    "__schema16": {
+    "__schema17": {
       "type": "integer",
       "minimum": 0,
       "maximum": 9007199254740991
     },
-    "__schema17": {
+    "__schema18": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema18"
+        "$ref": "#/$defs/__schema19"
       }
     },
-    "__schema18": {
+    "__schema19": {
       "type": "object",
       "properties": {
         "personId": {
-          "$ref": "#/$defs/__schema14"
+          "$ref": "#/$defs/__schema15"
         },
         "authoredItemIds": {
           "minItems": 1,
@@ -389,11 +396,11 @@
       ],
       "additionalProperties": false
     },
-    "__schema19": {
+    "__schema20": {
       "type": "object",
       "properties": {
         "personId": {
-          "$ref": "#/$defs/__schema14"
+          "$ref": "#/$defs/__schema15"
         },
         "mode": {
           "$ref": "#/$defs/__schema8"
@@ -405,40 +412,40 @@
       ],
       "additionalProperties": false
     },
-    "__schema20": {
+    "__schema21": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
           "reviewItemId": {
-            "$ref": "#/$defs/__schema21"
-          },
-          "kind": {
             "$ref": "#/$defs/__schema22"
           },
-          "subjectPaths": {
+          "kind": {
             "$ref": "#/$defs/__schema23"
           },
-          "authorIds": {
+          "subjectPaths": {
             "$ref": "#/$defs/__schema24"
           },
-          "learningOutcomeIds": {
+          "authorIds": {
             "$ref": "#/$defs/__schema25"
           },
+          "learningOutcomeIds": {
+            "$ref": "#/$defs/__schema26"
+          },
           "reviewerId": {
-            "$ref": "#/$defs/__schema14"
+            "$ref": "#/$defs/__schema15"
           },
           "reviewBasis": {
             "$ref": "#/$defs/__schema3"
           },
           "decision": {
-            "$ref": "#/$defs/__schema27"
-          },
-          "findings": {
             "$ref": "#/$defs/__schema28"
           },
+          "findings": {
+            "$ref": "#/$defs/__schema29"
+          },
           "reviewedAt": {
-            "$ref": "#/$defs/__schema13"
+            "$ref": "#/$defs/__schema14"
           }
         },
         "required": [
@@ -456,11 +463,11 @@
         "additionalProperties": false
       }
     },
-    "__schema21": {
+    "__schema22": {
       "type": "string",
       "pattern": "^human-review-item-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
-    "__schema22": {
+    "__schema23": {
       "type": "string",
       "enum": [
         "outcome_coverage",
@@ -468,7 +475,7 @@
         "non_automatable_example"
       ]
     },
-    "__schema23": {
+    "__schema24": {
       "minItems": 1,
       "type": "array",
       "items": {
@@ -476,33 +483,33 @@
       },
       "uniqueItems": true
     },
-    "__schema24": {
+    "__schema25": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema14"
-      },
-      "uniqueItems": true
-    },
-    "__schema25": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/__schema26"
+        "$ref": "#/$defs/__schema15"
       },
       "uniqueItems": true
     },
     "__schema26": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema27"
+      },
+      "uniqueItems": true
+    },
+    "__schema27": {
       "type": "string",
       "pattern": "^outcome-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
-    "__schema27": {
+    "__schema28": {
       "type": "string",
       "enum": [
         "approved",
         "changes_requested"
       ]
     },
-    "__schema28": {
+    "__schema29": {
       "type": "array",
       "items": {
         "type": "object",
@@ -543,11 +550,6 @@
         "additionalProperties": false
       }
     },
-    "__schema29": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 9007199254740991
-    },
     "__schema30": {
       "type": "integer",
       "minimum": 0,
@@ -569,31 +571,36 @@
       "maximum": 9007199254740991
     },
     "__schema34": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema35": {
       "type": "object",
       "properties": {
         "reviewerId": {
-          "$ref": "#/$defs/__schema14"
+          "$ref": "#/$defs/__schema15"
         },
         "authorIds": {
-          "$ref": "#/$defs/__schema35"
-        },
-        "decision": {
           "$ref": "#/$defs/__schema36"
         },
-        "learningOutcomeIds": {
+        "decision": {
           "$ref": "#/$defs/__schema37"
         },
-        "subjectPaths": {
+        "learningOutcomeIds": {
           "$ref": "#/$defs/__schema38"
+        },
+        "subjectPaths": {
+          "$ref": "#/$defs/__schema39"
         },
         "rationale": {
           "$ref": "#/$defs/__schema3"
         },
         "noOutcomeImpactRationale": {
-          "$ref": "#/$defs/__schema39"
+          "$ref": "#/$defs/__schema40"
         },
         "confirmedAt": {
-          "$ref": "#/$defs/__schema13"
+          "$ref": "#/$defs/__schema14"
         }
       },
       "required": [
@@ -608,29 +615,29 @@
       ],
       "additionalProperties": false
     },
-    "__schema35": {
+    "__schema36": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema14"
+        "$ref": "#/$defs/__schema15"
       },
       "uniqueItems": true
     },
-    "__schema36": {
+    "__schema37": {
       "type": "string",
       "enum": [
         "confirmed",
         "no_outcome_impact_confirmed"
       ]
     },
-    "__schema37": {
+    "__schema38": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema26"
+        "$ref": "#/$defs/__schema27"
       },
       "uniqueItems": true
     },
-    "__schema38": {
+    "__schema39": {
       "minItems": 1,
       "type": "array",
       "items": {
@@ -638,7 +645,7 @@
       },
       "uniqueItems": true
     },
-    "__schema39": {
+    "__schema40": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema3"
@@ -648,10 +655,10 @@
         }
       ]
     },
-    "__schema40": {
+    "__schema41": {
       "type": "boolean"
     },
-    "__schema41": {
+    "__schema42": {
       "type": "boolean"
     }
   }

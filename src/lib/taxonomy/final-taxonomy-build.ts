@@ -981,7 +981,6 @@ export const buildFinalTaxonomyTrustedReviewInventory = (
   if (
     !sameOrderedValues(declaredCheckIds, sortedUnique([...commandById.keys()])) ||
     context.workManifest.taskId !== 'T159' ||
-    context.workManifest.reviewPolicy.requiredMode !== 'third_party' ||
     !context.workManifest.reviewPolicy.riskReasons.includes('major_classification_change')
   ) {
     throw new FinalTaxonomyBuildError(
@@ -1303,6 +1302,11 @@ export const assembleFinalTaxonomyBuild = (
     ...input.policy,
     requiredReviewMode: context.workManifest.reviewPolicy.requiredMode,
     riskReasons: sortedUnique(context.workManifest.reviewPolicy.riskReasons),
+    ...(context.workManifest.reviewPolicy.highRiskSelfReviewReason === undefined
+      ? {}
+      : {
+          highRiskSelfReviewReason: context.workManifest.reviewPolicy.highRiskSelfReviewReason,
+        }),
     authoringSkillName: context.authoringEvidence.skill.name,
     authoringSkillVersion: context.authoringEvidence.skill.version,
     authoringSkillDigest: context.authoringEvidence.skill.digest,
@@ -1366,7 +1370,7 @@ export const assembleFinalTaxonomyBuild = (
     correctionImpactDigest: canonicalDigest(correctionImpacts),
     status: accepted ? ('accepted' as const) : ('proposed' as const),
     acceptedAt: review?.evidence.generatedAt ?? null,
-    holdReasons: accepted ? [] : ['CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE'],
+    holdReasons: accepted ? [] : ['CURRENT_SUBJECT_REVIEW_MISSING_OR_STALE'],
     canonicalMaterializationAllowed: accepted,
   };
   const build = FinalTaxonomyBuildSchema.parse({
@@ -1951,8 +1955,9 @@ const semanticIntegrationEntriesFromPolicy = (
     }
     const correctionImpactIds = [`impact-${decision.previewEntityId}`];
     const reviewPolicy = {
-      requiredMode: 'third_party' as const,
+      requiredMode: 'self' as const,
       riskReasons: ['major_classification_change' as const],
+      highRiskSelfReviewReason: 'solo_maintainer' as const,
     };
     const base = {
       previewEntityId: decision.previewEntityId,
@@ -2515,6 +2520,8 @@ export const validateFinalTaxonomyBuildAgainstContext = (
       sortedUnique(build.policy.riskReasons),
       sortedUnique(context.workManifest.reviewPolicy.riskReasons),
     ) ||
+    build.policy.highRiskSelfReviewReason !==
+      context.workManifest.reviewPolicy.highRiskSelfReviewReason ||
     build.policy.name !== 'full-corpus-taxonomy-recompute' ||
     build.policy.version !== '1.0.0' ||
     build.policy.inputScope !== 'accepted-t044-complete-technique-inventory' ||
@@ -3123,8 +3130,7 @@ export const validateFinalTaxonomyBuildAgainstContext = (
   const review = currentReviewResult(context, context.layout, build.taxonomySubjectDigest);
   const expectedStatus = review === null ? ('proposed' as const) : ('accepted' as const);
   const expectedTimestamp = review?.evidence.generatedAt ?? context.workManifest.createdAt;
-  const expectedHoldReasons =
-    review === null ? ['CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE'] : [];
+  const expectedHoldReasons = review === null ? ['CURRENT_SUBJECT_REVIEW_MISSING_OR_STALE'] : [];
   if (
     build.status !== expectedStatus ||
     build.generatedAt !== expectedTimestamp ||

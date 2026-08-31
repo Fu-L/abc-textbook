@@ -27,6 +27,7 @@ export interface WorkManifestReviewUnitInput {
 export interface ContentReviewPolicy {
   readonly requiredMode: 'self' | 'third_party';
   readonly riskReasons: readonly string[];
+  readonly highRiskSelfReviewReason?: 'solo_maintainer' | undefined;
 }
 
 export interface ManifestReviewUnit {
@@ -66,6 +67,9 @@ const scopeProjection = (input: ContentWorkManifestScope): Readonly<Record<strin
   reviewPolicy: {
     requiredMode: input.reviewPolicy.requiredMode,
     riskReasons: sortedUnique(input.reviewPolicy.riskReasons),
+    ...(input.reviewPolicy.highRiskSelfReviewReason === undefined
+      ? {}
+      : { highRiskSelfReviewReason: input.reviewPolicy.highRiskSelfReviewReason }),
   },
   reviewUnits: input.reviewUnits
     .map((unit) => ({

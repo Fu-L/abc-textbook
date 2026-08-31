@@ -40,13 +40,20 @@ const outcomeImpact = strictObject({
 const reviewPolicy = strictObject({
   requiredMode: ContentReviewModeSchema,
   riskReasons: unique(ContentReviewRiskReasonSchema),
+  highRiskSelfReviewReason: z.literal('solo_maintainer').optional(),
 }).superRefine((policy, context) => {
   const isHighRisk = policy.riskReasons.length > 0;
-  if (isHighRisk !== (policy.requiredMode === 'third_party')) {
+  const isSoloMaintainerSelfReview = policy.highRiskSelfReviewReason === 'solo_maintainer';
+  const valid =
+    (!isHighRisk && policy.requiredMode === 'self' && !isSoloMaintainerSelfReview) ||
+    (isHighRisk && policy.requiredMode === 'third_party' && !isSoloMaintainerSelfReview) ||
+    (isHighRisk && policy.requiredMode === 'self' && isSoloMaintainerSelfReview);
+  if (!valid) {
     context.addIssue({
       code: 'custom',
       path: ['requiredMode'],
-      message: 'Third-party review is required exactly when a high-risk reason is declared.',
+      message:
+        'High-risk self-review requires the explicit solo-maintainer reason; other high-risk changes require third-party review.',
     });
   }
 });

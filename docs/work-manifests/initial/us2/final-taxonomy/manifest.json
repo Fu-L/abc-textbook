@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T159-final-taxonomy",
   "taskId": "T159",
-  "scopeDigest": "7710f4477e8f9cb41fb172954cddee95ce24dbfb67a2678c1b8d8663b7d53707",
-  "digest": "4b45cf260e4014a8ae7a9b4e11c668a69b4335d05c31f206443b09d3aa6f0a03",
+  "scopeDigest": "2ba50aa26f166b2d9d469930335438a2ed4f83b187edea6aac1101b128744498",
+  "digest": "b78171ff272e903220cb857902789f0d09b082e15888a80af19ca36993b5ff79",
   "changeKind": "mixed",
   "requiredRequirementIds": [
     "FR-007",
@@ -216,8 +216,9 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "third_party",
-    "riskReasons": ["major_classification_change"]
+    "requiredMode": "self",
+    "riskReasons": ["major_classification_change"],
+    "highRiskSelfReviewReason": "solo_maintainer"
   },
   "reviewUnits": [
     {

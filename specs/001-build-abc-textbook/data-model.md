@@ -206,7 +206,7 @@ Previewの仮taxonomyを全コーパスから再生成したfinal taxonomyへ統
 | `affectedProblemIds` | 仮entityが参照した全Problem。split時は各final entityへの再分類結果も保持 |
 | `rationale` / `evidenceIds` | 定義、前提、成果、代表性、全inventoryとの比較根拠 |
 | `aliasOrRedirects` | merge/retire時の旧名称・旧IDの検索/参照移行 |
-| `reviewMode` / `reviewEvidenceId` | major classification changeを含む場合は`third_party`、それ以外は固定policyに従う |
+| `reviewMode` / `reviewEvidenceId` | major classification changeを含む場合は原則`third_party`。solo maintainerを明示した場合はrisk reasonを保持した`self`を許可する |
 | `status` | `proposed`, `accepted`, `rejected`。未acceptedはcanonicalへmaterialize不可 |
 
 Integration mapは仮DAGをfinalへコピーする記録ではない。final Inventory全件からTag/Outcome/UnitのDAG、標準順、ProblemPlacementを再計算した結果と照合し、未知参照、循環、未分類Problem、影響未列挙が0件の場合だけ`accepted`にできる。
@@ -418,13 +418,13 @@ deployment adapterへ渡す最小recordであり、`schemaVersion`、`version`�
 
 ### ContentWorkManifest
 
-実装・content変更前に作るversion-controlled scopeである。top-levelにtask ID、scope digest、required requirement IDs、learning outcome IDs、固定したreview policy、review units、stateを持つ。review policyは`self`または`third_party`の必須modeと、公式根拠との矛盾・独自証明・重大な分類変更から選ぶrisk reasonを持つ。各review unitは重複しないpaths、item IDs、requirements、outcomes、依存unit、checks、evidence role、owner、statusを持つ。
+実装・content変更前に作るversion-controlled scopeである。top-levelにtask ID、scope digest、required requirement IDs、learning outcome IDs、固定したreview policy、review units、stateを持つ。review policyは`self`または`third_party`の必須modeと、公式根拠との矛盾・独自証明・重大な分類変更から選ぶrisk reasonを持つ。高リスクで`self`を選ぶ場合だけ`highRiskSelfReviewReason: solo_maintainer`を必須とし、通常selfやthird-partyではこのfieldを持たない。各review unitは重複しないpaths、item IDs、requirements、outcomes、依存unit、checks、evidence role、owner、statusを持つ。
 
 content review unitはContest batchではなくOutcome/Problem shardまたはProblem authoring unitを対象にする。文書内blockを別review unitへ分割しない。Outcome/Problem shardは一つのprimary Learning Outcomeに属するProblem IDを公式順に最大8件ずつ分割し、paths、Problem IDs、dependency unit、checks、evidenceを単独で解決できなければならない。tooling/abstractionには具体的なmaintenance benefitを必須にする。
 
 ### HumanContentReviewEvidence
 
-同じlogical change subjectについて、次を保持する。通常更新の`self` modeではmanifest ownerがreviewerを兼ね、外部person IDを要求しない。固定policyが高リスクを示す場合だけ`third_party` modeを使い、`self` reviewに代えてauthor集合と分離したreviewerが確認する。
+同じlogical change subjectについて、次を保持する。`self` modeではmanifest ownerがreviewerを兼ね、`third_party` modeではauthor集合と分離したreviewerが確認する。固定policyが高リスクを示す場合は原則`third_party`とするが、manifestが`solo_maintainer`を明示した場合はrisk reasonを保持した`self`を許可する。
 
 - 明示file inventoryとsubject digest
 - Outcome coverage reviewとreview mode、reviewer ID

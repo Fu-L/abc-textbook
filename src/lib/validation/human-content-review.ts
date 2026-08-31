@@ -20,6 +20,7 @@ interface HumanReviewShape {
   readonly reviewPolicy: {
     readonly requiredMode: 'self' | 'third_party';
     readonly riskReasons: readonly string[];
+    readonly highRiskSelfReviewReason?: 'solo_maintainer' | undefined;
   };
   readonly reviewMode: 'self' | 'third_party';
   readonly applicableChecks: readonly {
@@ -74,6 +75,7 @@ export interface TrustedReviewCheckInventory {
   readonly reviewPolicy: {
     readonly requiredMode: 'self' | 'third_party';
     readonly riskReasons: readonly string[];
+    readonly highRiskSelfReviewReason?: 'solo_maintainer' | undefined;
   };
   /** Independently validated ContentWorkManifest scope. */
   readonly workManifest: {
@@ -127,6 +129,8 @@ export const validateHumanContentReview = (
   if (
     trustedInventory.reviewPolicy.requiredMode !== evidence.reviewPolicy.requiredMode ||
     !sameStringSet(trustedInventory.reviewPolicy.riskReasons, evidence.reviewPolicy.riskReasons) ||
+    trustedInventory.reviewPolicy.highRiskSelfReviewReason !==
+      evidence.reviewPolicy.highRiskSelfReviewReason ||
     evidence.reviewMode !== trustedInventory.reviewPolicy.requiredMode
   ) {
     throw new HumanReviewError(

@@ -135,11 +135,11 @@ npm run abc:review -- --update UPDATE_ID --evidence PATH
 evidenceは次を満たさなければならない。
 
 - Work Manifestのscope、Catalogのcurrent subject、PublicationUpdateの対象範囲が一致する。
-- manifestのreview policyと同じ`reviewMode`（通常は`self`、高リスク時だけ`third_party`）を記録する。高リスク時の`third_party` reviewは同じscopeの`self` reviewに代わる。
-- `self`ではmanifest ownerがOutcome coverageを確認し、`third_party`ではauthor外のreviewerが確認する。
+- manifestのreview policyと同じ`reviewMode`を記録する。通常は`self`、高リスク時は原則`third_party`とし、`highRiskSelfReviewReason: solo_maintainer`が固定された場合だけ高リスクでも`self`を許可する。
+- `self`ではmanifest ownerがOutcome coverageを確認し、`third_party`ではauthor外のreviewerが確認する。high-risk selfでも全適用check、明示approval、review basis、blocking finding 0件を省略しない。
 - 全applicable checkの`executedByReviewerId`が証跡のreviewerと一致し、同じsubjectのresultと一致する。
 - 完全自動化不能な新規・変更Claim/Exampleの全itemをreviewerが判定し、self/third-partyの表示を混同しない。
-- current Constitution 2.0.0とdependent template inventoryを含むConstitution Checkが成功する。
+- current Constitution 3.0.0とdependent template inventoryを含むConstitution Checkが成功する。
 - blocking finding 0、`aggregatePassed=true`。
 
 他者/CI実行結果の追認、複数reviewerへのcheck分割、review policyにない第三者必須化、独自owner approval、LLM result、learner self-studyをHumanContentReviewEvidenceの代用として拒否する。必要reviewとCI checkはprotected mainのmerge条件にする。

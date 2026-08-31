@@ -1170,15 +1170,31 @@ export const InventoryClaimDispositionSchema = strictObject({
   }
 });
 
+const validHighRiskReviewPolicy = (policy: {
+  readonly requiredMode: 'self' | 'third_party';
+  readonly riskReasons: readonly string[];
+  readonly highRiskSelfReviewReason?: 'solo_maintainer' | undefined;
+}): boolean => {
+  const isHighRisk = policy.riskReasons.length > 0;
+  const isSoloMaintainerSelfReview = policy.highRiskSelfReviewReason === 'solo_maintainer';
+  return (
+    (!isHighRisk && policy.requiredMode === 'self' && !isSoloMaintainerSelfReview) ||
+    (isHighRisk && policy.requiredMode === 'third_party' && !isSoloMaintainerSelfReview) ||
+    (isHighRisk && policy.requiredMode === 'self' && isSoloMaintainerSelfReview)
+  );
+};
+
 const TaxonomyReviewPolicySchema = strictObject({
   requiredMode: ContentReviewModeSchema,
   riskReasons: uniqueArray(ContentReviewRiskReasonSchema),
+  highRiskSelfReviewReason: z.literal('solo_maintainer').optional(),
 }).superRefine((policy, context) => {
-  if (policy.riskReasons.length > 0 !== (policy.requiredMode === 'third_party')) {
+  if (!validHighRiskReviewPolicy(policy)) {
     context.addIssue({
       code: 'custom',
       path: ['requiredMode'],
-      message: 'Third-party review is required exactly when taxonomy risk reasons exist.',
+      message:
+        'High-risk taxonomy self-review requires the explicit solo-maintainer reason; otherwise third-party review is required.',
     });
   }
 });
@@ -1729,7 +1745,8 @@ export const TaxonomyIntegrationMapSchema = strictObject({
     }
     if (
       candidate?.reviewPolicy.requiredMode === 'third_party' &&
-      entry.reviewPolicy.requiredMode !== 'third_party'
+      entry.reviewPolicy.requiredMode !== 'third_party' &&
+      entry.reviewPolicy.highRiskSelfReviewReason !== 'solo_maintainer'
     ) {
       context.addIssue({
         code: 'custom',
@@ -1907,6 +1924,7 @@ const FinalTaxonomyPolicySchema = strictObject({
   rulesDigest: Sha256Schema,
   requiredReviewMode: ContentReviewModeSchema,
   riskReasons: uniqueArray(ContentReviewRiskReasonSchema),
+  highRiskSelfReviewReason: z.literal('solo_maintainer').optional(),
   authoringSkillName: nonEmptyText,
   authoringSkillVersion: semverForTaxonomy,
   authoringSkillDigest: Sha256Schema,
@@ -1916,7 +1934,15 @@ const FinalTaxonomyPolicySchema = strictObject({
   workManifestPath: SafePathSchema,
   workManifestDigest: Sha256Schema,
 }).superRefine((policy, context) => {
-  if (policy.riskReasons.length > 0 !== (policy.requiredReviewMode === 'third_party')) {
+  if (
+    !validHighRiskReviewPolicy({
+      requiredMode: policy.requiredReviewMode,
+      riskReasons: policy.riskReasons,
+      ...(policy.highRiskSelfReviewReason === undefined
+        ? {}
+        : { highRiskSelfReviewReason: policy.highRiskSelfReviewReason }),
+    })
+  ) {
     context.addIssue({
       code: 'custom',
       path: ['requiredReviewMode'],
@@ -2640,8 +2666,13 @@ export const FinalTaxonomyBuildSchema = strictObject({
         build.correctionImpacts.some(
           ({ verificationStatus }) => verificationStatus !== 'reviewed',
         ) ||
-        build.policy.requiredReviewMode !==
-          (build.policy.riskReasons.length > 0 ? 'third_party' : 'self'))) ||
+        !validHighRiskReviewPolicy({
+          requiredMode: build.policy.requiredReviewMode,
+          riskReasons: build.policy.riskReasons,
+          ...(build.policy.highRiskSelfReviewReason === undefined
+            ? {}
+            : { highRiskSelfReviewReason: build.policy.highRiskSelfReviewReason }),
+        }))) ||
     (build.status === 'rejected' && build.holdReasons.length === 0)
   ) {
     context.addIssue({

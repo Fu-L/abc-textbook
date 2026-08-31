@@ -183,7 +183,7 @@ ABC 212以降の上級問題を年代順に並べるだけでなく、必要な�
 - **FR-023**: 更新準備は対象問題ごとに、完成した解説草案、必要入力とテンプレートを伴う要執筆、具体的理由を伴う保留のいずれかを示し、未完成入力を完成草案として扱ってはならない。
 - **FR-024**: 更新候補は対象範囲、出典、解説構成、例、タグ、前提、学習順、索引、相互参照を検証し、問題ごとの結果と修正理由を示さなければならない。
 - **FR-025**: 同じ入力の更新を再実行しても重複問題、重複解説、重複索引を作ってはならない。
-- **FR-026**: mergeおよび公開前に、適用可能な自動検査を実行した人間reviewerが学習成果の被覆を明示的に確認しなければならない。リスク理由のない通常更新ではmanifest ownerが`self` reviewを行い、外部person IDなしで完了できる。公式根拠との矛盾・訂正、独自証明などの自動判定不能な新規正当化、または学習成果・典型タグ・前提・問題配置の重大な分類変更のいずれかを含む高リスク更新では、該当scopeの`self` reviewに代えて、作成者以外の第三者が`third_party` reviewを行わなければならない。review policyと証跡のreview modeは一致し、自己reviewと第三者reviewを証跡上明示的に区別しなければならない。
+- **FR-026**: mergeおよび公開前に、適用可能な自動検査を実行した人間reviewerが学習成果の被覆を明示的に確認しなければならない。リスク理由のない通常更新ではmanifest ownerが`self` reviewを行い、外部person IDなしで完了できる。公式根拠との矛盾・訂正、独自証明などの自動判定不能な新規正当化、または学習成果・典型タグ・前提・問題配置の重大な分類変更のいずれかを含む高リスク更新では、原則として作成者以外の第三者が`third_party` reviewを行う。ただしmaintainerが一人だけの場合は、全risk reasonを保持して`solo_maintainer`理由を明示したときに限りmanifest ownerの`self` reviewを選択できる。high-risk self-reviewでもcurrent subjectへのbinding、全適用checkの成功、全itemの明示approvalとreview basis、未解消blocking finding 0件を必須とする。review policyと証跡のreview modeは一致し、自己reviewと第三者reviewを証跡上明示的に区別しなければならない。
 - **FR-027**: 一つ以上の更新を含むrelease commitは、未解決の検証失敗または必要レビューの欠落がある間はprotected mainへmergeしてはならない。公開snapshot IDはmerge済みのfull Git commit hashとし、デプロイ時に別のcandidate state、owner approval、独自digestを要求してはならない。
 - **FR-028**: 公式情報の訂正、タグ再編、解説修正では、影響する本文、例、演習、解答、学習順、索引を列挙し、同じ更新単位で再確認しなければならない。
 - **FR-029**: 公開版は壊れた内部参照、未説明の検証失敗、未定義の必須用語、必要な代替テキストの欠落、再現不能な例を含んではならない。
@@ -220,7 +220,7 @@ ABC 212以降の上級問題を年代順に並べるだけでなく、必要な�
 - **Release Metadata**: version、cutoff、full Git commit hash、更新概要、検証結果URLだけを持つdeployment入力。snapshot自体はGit commitが所有する。
 - **Release**: Git commitで識別され、取り込んだ更新、変更履歴、検証要約をCatalogから追跡できる不変の公開版。
 - **Authoring Skill**: 解説候補を一貫して作る版付きの執筆指示。
-- **Review Evidence**: 対象、学習成果、固定したreview risk policy、自動検査、自己reviewまたは第三者reviewの判定、指摘と解消結果を結び付ける記録。通常更新の証跡は外部person IDを要求せず、高リスク更新はselfに代わる第三者reviewを別のreview modeとして表示する。
+- **Review Evidence**: 対象、学習成果、固定したreview risk policy、自動検査、自己reviewまたは第三者reviewの判定、指摘と解消結果を結び付ける記録。通常更新の証跡は外部person IDを要求せず、高リスク更新は原則として第三者reviewを使う。solo maintainerの例外ではrisk reasonと`solo_maintainer`理由を保持した`self` modeを明示する。
 
 ## Success Criteria *(mandatory)*
 
@@ -256,7 +256,7 @@ ABC 212以降の上級問題を年代順に並べるだけでなく、必要な�
 - 公式問題情報と利用可能な公式解説を第一の根拠とし、補助資料を使う場合も出典と確認日を残す。
 - 解説生成が利用できない場合も、更新は必要入力と手動テンプレートを作って要執筆として保留できる。これを完成草案には数えない。
 - 運用者、教材管理者、継続利用する学習者は同じ一人である。SC-009とSC-010の自己評価もこの運用者が事前固定した対象と採点基準で行う。
-- 通常更新の完全自動判定できない新規・変更された主張や例はmanifest ownerの`self` reviewで確認する。作成者以外の人間レビューが必要なのは、FR-026に列挙した固定高リスク条件に該当するscopeだけであり、その場合は`self` reviewに代えて`third_party` reviewを行う。この限定的なレビュー役は製品利用者や継続運用者ではなく、複数利用者機能を意味しない。
+- 通常更新の完全自動判定できない新規・変更された主張や例はmanifest ownerの`self` reviewで確認する。FR-026に列挙した固定高リスク条件では原則として`third_party` reviewを行うが、maintainerが一人だけの場合は明示的な`solo_maintainer` high-risk self-reviewを利用できる。この限定的なレビュー役は製品利用者や継続運用者ではなく、複数利用者機能を意味しない。
 - 公開前の品質判定に有料サービスや特定のLLM利用を必須にしない。任意の補助判定を利用しても、必須の自動検査と人間レビューを代替しない。
 - 学習記録は問題IDへ結び付け、完全な変更履歴ではなく解答状況と要復習それぞれの最新変更日時を保持する。
 - 無料とは、既に所有する機器、電気料金、通常のインターネット接続料金を除く追加の必須支出が0円であることを指す。
