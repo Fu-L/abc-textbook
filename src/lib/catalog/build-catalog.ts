@@ -1,4 +1,8 @@
-import { CatalogContract, parseAtCoderContestResourceUrl } from '../domain/schema-parts/catalog.js';
+import {
+  CatalogContract,
+  parseAtCoderContestResourceUrl,
+  SYMMETRIC_TECHNIQUE_TAG_RELATION_TYPES,
+} from '../domain/schema-parts/catalog.js';
 import { canonicalDigest } from '../domain/canonical-json.js';
 import { compareOffsetDateTimes, parseOffsetDateTime } from '../domain/date-time.js';
 import { stableProblemId } from '../domain/identity.js';
@@ -175,6 +179,27 @@ export interface CatalogLike {
     readonly formerNames: readonly string[];
     readonly lifecycle: 'active' | 'deprecated';
     readonly prerequisiteTagIds: readonly string[];
+    readonly semanticSignature: {
+      readonly objectPatterns: readonly string[];
+      readonly triggerPatterns: readonly string[];
+      readonly invariantPatterns: readonly string[];
+      readonly goalPatterns: readonly string[];
+      readonly excludedPatterns: readonly string[];
+      readonly minimumDimensions: number;
+      readonly requireObjectForStrictRecall: boolean;
+    };
+    readonly relatedTags: readonly {
+      readonly tagId: string;
+      readonly type:
+        | 'contrast'
+        | 'analogy'
+        | 'specialization'
+        | 'extension'
+        | 'reduction'
+        | 'often_combined'
+        | 'implementation_substrate';
+      readonly rationale: string;
+    }[];
     readonly parentId: string | null;
     readonly learningOutcomeIds: readonly string[];
     readonly representativeProblemIds: readonly string[];
@@ -834,6 +859,7 @@ export const validateCatalogSemantics = (
     return ids;
   };
   const tagIds = idSet('TAG', catalog.tags);
+  const tagById = new Map(catalog.tags.map((tag) => [tag.id, tag]));
   const outcomeIds = idSet('OUTCOME', catalog.learningOutcomes);
   const unitIds = idSet('LEARNING_UNIT', catalog.learningUnits);
   const learningUnitById = new Map(catalog.learningUnits.map((unit) => [unit.id, unit]));
@@ -1145,6 +1171,12 @@ export const validateCatalogSemantics = (
     }
     if (tag.parentId) requireRefs(tag.id, 'parentId', [tag.parentId], tagIds);
     requireRefs(tag.id, 'prerequisiteTagIds', tag.prerequisiteTagIds, tagIds);
+    requireRefs(
+      tag.id,
+      'relatedTags',
+      tag.relatedTags.map(({ tagId }) => tagId),
+      tagIds,
+    );
     requireRefs(tag.id, 'learningOutcomeIds', tag.learningOutcomeIds, outcomeIds);
     requireRefs(tag.id, 'representativeProblemIds', tag.representativeProblemIds, problemIds);
     requireRefs(tag.id, 'replacementTagIds', tag.replacementTagIds, tagIds);
@@ -1168,6 +1200,24 @@ export const validateCatalogSemantics = (
         entityId: tag.id,
         message: 'A tag cannot replace itself.',
       });
+    }
+    for (const relation of tag.relatedTags) {
+      if (
+        SYMMETRIC_TECHNIQUE_TAG_RELATION_TYPES.includes(
+          relation.type as (typeof SYMMETRIC_TECHNIQUE_TAG_RELATION_TYPES)[number],
+        ) &&
+        !tagById
+          .get(relation.tagId)
+          ?.relatedTags.some(
+            (reverse) => reverse.tagId === tag.id && reverse.type === relation.type,
+          )
+      ) {
+        diagnostics.push({
+          code: 'TAG_RELATION_REVERSE_MISSING',
+          entityId: tag.id,
+          message: `${tag.id}.${relation.type} -> ${relation.tagId} requires a reverse relation.`,
+        });
+      }
     }
   }
   const tagTermOwners = new Map<string, string>();

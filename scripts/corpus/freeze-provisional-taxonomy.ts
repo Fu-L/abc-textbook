@@ -36,12 +36,25 @@ const pathExists = async (filePath: string): Promise<boolean> => {
   }
 };
 
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  value !== null && typeof value === 'object' && !Array.isArray(value);
+
 const inspectFrozenOutput = async (
   filePath: string,
   value: unknown,
 ): Promise<'missing' | 'verified'> => {
   if (await pathExists(filePath)) {
-    if (canonicalJson(await readJson(filePath)) !== canonicalJson(value)) {
+    const committedValue = await readJson(filePath);
+    // T159 wraps the immutable T045/T046 value instead of rewriting it. Keep
+    // preview verification bound to that exact nested projection while the
+    // accepted integration decision receives its own digest and lifecycle.
+    const comparableValue =
+      filePath === INTEGRATION_PATH &&
+      isRecord(committedValue) &&
+      committedValue.schemaVersion === '2.0.0'
+        ? committedValue.provisionalEvidence
+        : committedValue;
+    if (canonicalJson(comparableValue) !== canonicalJson(value)) {
       throw new CorpusCliError('FROZEN_TAXONOMY_CONFLICT', filePath);
     }
     return 'verified';

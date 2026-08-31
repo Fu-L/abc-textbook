@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
-import { canonicalJson, digestWithoutField } from '../canonical-json.js';
+import { canonicalDigest, canonicalJson, digestWithoutField } from '../canonical-json.js';
 import { compareOffsetDateTimes, isOffsetDateTime, parseOffsetDateTime } from '../date-time.js';
 import {
   InlineExerciseSchema,
@@ -652,12 +652,57 @@ export const ProblemAnalysisRecordSchema = strictObject({
 /** @deprecated Use ProblemAnalysisRecordSchema for new code. */
 export const TechniqueInventoryItemSchema = ProblemAnalysisRecordSchema;
 
+export const TechniqueTagSemanticSignatureSchema = strictObject({
+  objectPatterns: uniqueArray(nonEmptyText).min(1),
+  triggerPatterns: uniqueArray(nonEmptyText).min(1),
+  invariantPatterns: uniqueArray(nonEmptyText).min(1),
+  goalPatterns: uniqueArray(nonEmptyText).min(1),
+  excludedPatterns: uniqueArray(nonEmptyText),
+  minimumDimensions: z.number().int().min(1).max(4),
+  requireObjectForStrictRecall: z.boolean(),
+}).meta({
+  description:
+    'The *Patterns arrays contain machine-readable RegExp source strings evaluated with the iu flags. They are internal recognition rules and are not learner-facing prose to display verbatim.',
+});
+
+export const TechniqueTagRelationTypeSchema = z
+  .enum([
+    'contrast',
+    'analogy',
+    'specialization',
+    'extension',
+    'reduction',
+    'often_combined',
+    'implementation_substrate',
+  ])
+  .meta({
+    description:
+      'contrast/analogy/often_combined are symmetric. For directed relations source specializes or extends target, reduces to target, or uses target as an implementation substrate.',
+  });
+
+export const SYMMETRIC_TECHNIQUE_TAG_RELATION_TYPES = [
+  'contrast',
+  'analogy',
+  'often_combined',
+] as const;
+
+export const TechniqueTagRelationSchema = strictObject({
+  tagId: EntityIdSchema,
+  type: TechniqueTagRelationTypeSchema,
+  rationale: nonEmptyText,
+});
+
 export const TechniqueTagSchema = strictObject({
   id: EntityIdSchema,
   name: nonEmptyText,
   definition: nonEmptyText,
   parentId: EntityIdSchema.nullable(),
   prerequisiteTagIds: entityIds,
+  semanticSignature: TechniqueTagSemanticSignatureSchema,
+  relatedTags: uniqueArray(TechniqueTagRelationSchema).meta({
+    description:
+      'Zero or more reviewed non-prerequisite Tag relations. An empty array is canonical when no meaningful relation applies.',
+  }),
   learningOutcomeIds: entityIds.min(1),
   representativeProblemIds: z.array(ProblemIdSchema).min(1),
   aliases: uniqueArray(nonEmptyText),
@@ -685,6 +730,21 @@ export const TechniqueTagSchema = strictObject({
         code: 'custom',
         path: ['replacementTagIds'],
         message: 'A tag cannot replace itself.',
+      });
+    }
+    if (tag.relatedTags.some(({ tagId }) => tagId === tag.id)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['relatedTags'],
+        message: 'A tag cannot relate to itself.',
+      });
+    }
+    const relationKeys = tag.relatedTags.map(({ tagId, type }) => `${tagId}\u0000${type}`);
+    if (new Set(relationKeys).size !== relationKeys.length) {
+      context.addIssue({
+        code: 'custom',
+        path: ['relatedTags'],
+        message: 'Tag relations must be unique by target and type.',
       });
     }
   })
@@ -998,7 +1058,7 @@ const ReleaseValidationSummarySchema = strictObject({
   }
 });
 
-const EvidenceReferenceSchema = strictObject({
+export const ReviewEvidenceReferenceSchema = strictObject({
   evidenceId: EntityIdSchema,
   path: SafePathSchema,
   digest: Sha256Schema,
@@ -1044,7 +1104,7 @@ export const CatalogReleaseSchema = strictObject({
   withdrawnProblemIds: z.array(ProblemIdSchema),
   taxonomyChanges: z.array(TaxonomyChangeSchema),
   validationSummary: ReleaseValidationSummarySchema,
-  humanContentReviewEvidenceRefs: z.array(EvidenceReferenceSchema).min(1),
+  humanContentReviewEvidenceRefs: z.array(ReviewEvidenceReferenceSchema).min(1),
   changelogPath: SafePathSchema,
 });
 
@@ -1066,12 +1126,1558 @@ export const CatalogSchema = strictObject({
   correctionImpacts: z.array(CorrectionImpactSchema),
 });
 
-export const CatalogContract = defineZodContractSchema('catalog.schema.json', CatalogSchema, {
-  $id: 'https://abc-textbook.local/schemas/catalog.schema.json',
-  title: 'ABC Textbook Catalog',
-  description:
-    'ABC212以降を開催済みContestと公式欠番証跡で連続被覆し、各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。',
+const FinalTagIdSchema = z.string().regex(/^tag-[a-z0-9]+(?:-[a-z0-9]+)*$/u);
+const FinalOutcomeIdSchema = z.string().regex(/^outcome-[a-z0-9]+(?:-[a-z0-9]+)*$/u);
+const FinalLearningUnitIdSchema = z.string().regex(/^unit-[a-z0-9]+(?:-[a-z0-9]+)*$/u);
+const TaxonomyEntityKindSchema = z.enum(['tag', 'outcome', 'unit']);
+const IntegrationActionSchema = z.enum(['promote', 'merge', 'split', 'retire']);
+const FinalTaxonomyStatusSchema = z.enum(['proposed', 'accepted', 'rejected']);
+const semverForTaxonomy = z.string().regex(/^\d+\.\d+\.\d+$/u);
+
+const problemAnalysisClaimPointer =
+  /^\/(?:reasoningPath\/(?:observations|candidateApproaches|keyInsights)\/[0-9]+|reasoningPath\/algorithmConnection|typicalTechniques\/[0-9]+|typicalTechniqueOmissionReason|problemSpecificInsights\/[0-9]+|problemSpecificInsightOmissionReason|asymptoticComplexity|prerequisiteCandidates\/[0-9]+|implementationConcerns\/[0-9]+|outcomeCandidates\/[0-9]+|reviewAdvice\/[0-9]+)$/u;
+
+/** A digest-stable pointer into one frozen ProblemAnalysisRecord. */
+export const ProblemAnalysisClaimRefSchema = strictObject({
+  problemId: ProblemIdSchema,
+  claimPath: z.string().regex(problemAnalysisClaimPointer),
+  evidenceIds: uniqueArray(EntityIdSchema).min(1),
+  sourceRevisionIds: uniqueArray(EntityIdSchema).min(1),
 });
+
+const InventoryClaimDispositionKindSchema = z.enum([
+  'primary',
+  'supporting',
+  'same_tag',
+  'baseline',
+  'problem_specific',
+]);
+
+/** The explicit taxonomy treatment of one Technique Inventory claim. */
+export const InventoryClaimDispositionSchema = strictObject({
+  claimRef: ProblemAnalysisClaimRefSchema,
+  kind: InventoryClaimDispositionKindSchema,
+  tagIds: uniqueArray(FinalTagIdSchema),
+  rationale: nonEmptyText,
+}).superRefine((disposition, context) => {
+  const requiresTag = ['primary', 'supporting', 'same_tag'].includes(disposition.kind);
+  if (requiresTag !== disposition.tagIds.length > 0) {
+    context.addIssue({
+      code: 'custom',
+      path: ['tagIds'],
+      message: 'Only primary, supporting, and same-tag claim dispositions name a final Tag.',
+    });
+  }
+});
+
+const TaxonomyReviewPolicySchema = strictObject({
+  requiredMode: ContentReviewModeSchema,
+  riskReasons: uniqueArray(ContentReviewRiskReasonSchema),
+}).superRefine((policy, context) => {
+  if (policy.riskReasons.length > 0 !== (policy.requiredMode === 'third_party')) {
+    context.addIssue({
+      code: 'custom',
+      path: ['requiredMode'],
+      message: 'Third-party review is required exactly when taxonomy risk reasons exist.',
+    });
+  }
+});
+
+/** T159 fixes Unit identity, prerequisites, reachability, and order without authoring T050 body blocks. */
+export const LearningUnitTaxonomyCandidateSchema = strictObject({
+  id: FinalLearningUnitIdSchema,
+  kind: z.enum(['chapter', 'section', 'subsection']),
+  title: nonEmptyText,
+  parentId: FinalLearningUnitIdSchema.nullable(),
+  baselineId: EntityIdSchema,
+  baselineVersion: semverForTaxonomy,
+  additionalPrerequisiteUnitIds: uniqueArray(FinalLearningUnitIdSchema),
+  excludedTopics: uniqueArray(nonEmptyText),
+  sourceRevisionIds: uniqueArray(EntityIdSchema).min(1),
+  tagIds: uniqueArray(FinalTagIdSchema).min(1),
+  learningOutcomeIds: uniqueArray(FinalOutcomeIdSchema).min(1),
+  problemIds: uniqueArray(ProblemIdSchema).min(1),
+  stageRank: z.number().int().nonnegative(),
+  difficultyRank: z.number().int().nonnegative(),
+  representativeRank: z.number().int().nonnegative(),
+  globalIndex: z.number().int().nonnegative(),
+  orderReason: nonEmptyText,
+}).superRefine((unit, context) => {
+  if (unit.parentId === unit.id) {
+    context.addIssue({
+      code: 'custom',
+      path: ['parentId'],
+      message: 'A Learning Unit candidate cannot parent itself.',
+    });
+  }
+  if (unit.additionalPrerequisiteUnitIds.includes(unit.id)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['additionalPrerequisiteUnitIds'],
+      message: 'A Learning Unit candidate cannot require itself.',
+    });
+  }
+});
+
+const FinalTaxonomyCandidateCommon = {
+  sourceRevisionIds: uniqueArray(EntityIdSchema).min(1),
+  evidenceRefs: uniqueArray(ProblemAnalysisClaimRefSchema).min(1),
+} satisfies z.ZodRawShape;
+
+export const FinalTaxonomyCandidateSchema = z
+  .discriminatedUnion('kind', [
+    strictObject({
+      kind: z.literal('tag'),
+      entity: TechniqueTagSchema,
+      ...FinalTaxonomyCandidateCommon,
+      materializationTask: z.literal('T047'),
+    }),
+    strictObject({
+      kind: z.literal('outcome'),
+      entity: LearningOutcomeSchema,
+      ...FinalTaxonomyCandidateCommon,
+      materializationTask: z.literal('T048'),
+    }),
+    strictObject({
+      kind: z.literal('unit'),
+      entity: LearningUnitTaxonomyCandidateSchema,
+      ...FinalTaxonomyCandidateCommon,
+      materializationTask: z.literal('T050'),
+    }),
+  ])
+  .superRefine((candidate, context) => {
+    const validId =
+      candidate.kind === 'tag'
+        ? FinalTagIdSchema.safeParse(candidate.entity.id).success
+        : candidate.kind === 'outcome'
+          ? FinalOutcomeIdSchema.safeParse(candidate.entity.id).success
+          : FinalLearningUnitIdSchema.safeParse(candidate.entity.id).success;
+    if (!validId) {
+      context.addIssue({
+        code: 'custom',
+        path: ['entity', 'id'],
+        message: `Final ${candidate.kind} IDs must use their canonical namespace.`,
+      });
+    }
+  });
+
+const PlacementComparisonSchema = strictObject({
+  method: nonEmptyText,
+  proof: nonEmptyText,
+  complexity: nonEmptyText,
+  constraints: nonEmptyText,
+  prerequisites: nonEmptyText,
+  implementation: nonEmptyText,
+});
+/** Canonical placement decision plus the exact T049 taxonomy projection. */
+export const FinalProblemPlacementProjectionSchema = strictObject({
+  id: EntityIdSchema,
+  problemId: ProblemIdSchema,
+  policyVersion: semverForTaxonomy,
+  kind: z.enum(['full', 'similar', 'supplement']),
+  primaryProblemId: ProblemIdSchema.nullable(),
+  sharedOutcomeIds: uniqueArray(FinalOutcomeIdSchema),
+  comparison: PlacementComparisonSchema,
+  additionalElement: nonEmptyText.nullable(),
+  rationale: nonEmptyText,
+  evidenceIds: uniqueArray(EntityIdSchema).min(1),
+  primaryTagIds: uniqueArray(FinalTagIdSchema).min(1),
+  supportingTagIds: uniqueArray(FinalTagIdSchema),
+  primaryOutcomeId: FinalOutcomeIdSchema,
+  additionalPrimaryOutcomeIds: uniqueArray(FinalOutcomeIdSchema),
+  supportingOutcomeIds: uniqueArray(FinalOutcomeIdSchema),
+  learningUnitIds: uniqueArray(FinalLearningUnitIdSchema).min(1),
+  presentationUnitId: FinalLearningUnitIdSchema,
+  adHocElements: uniqueArray(nonEmptyText),
+  claimDispositions: uniqueArray(InventoryClaimDispositionSchema).min(1),
+  analysisEvidenceRefs: uniqueArray(ProblemAnalysisClaimRefSchema).min(1),
+}).superRefine((placement, context) => {
+  const isFull = placement.kind === 'full';
+  const isSimilar = placement.kind === 'similar';
+  if (isFull !== (placement.primaryProblemId === null)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['primaryProblemId'],
+      message: 'Only full placement omits a primary Problem.',
+    });
+  }
+  if (placement.primaryProblemId === placement.problemId) {
+    context.addIssue({
+      code: 'custom',
+      path: ['primaryProblemId'],
+      message: 'A placement cannot use its own Problem as the primary Problem.',
+    });
+  }
+  if (isFull !== (placement.sharedOutcomeIds.length === 0)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['sharedOutcomeIds'],
+      message: 'Only abbreviated placements declare shared Outcomes.',
+    });
+  }
+  if ((isSimilar || isFull) !== (placement.additionalElement === null)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['additionalElement'],
+      message: 'Only supplement placement declares one additional element.',
+    });
+  }
+  if (placement.primaryTagIds.some((id) => placement.supportingTagIds.includes(id))) {
+    context.addIssue({
+      code: 'custom',
+      path: ['supportingTagIds'],
+      message: 'Primary and supporting Tag assignments must be disjoint.',
+    });
+  }
+  const primaryOutcomeIds = [placement.primaryOutcomeId, ...placement.additionalPrimaryOutcomeIds];
+  if (
+    placement.additionalPrimaryOutcomeIds.includes(placement.primaryOutcomeId) ||
+    placement.supportingOutcomeIds.some((outcomeId) => primaryOutcomeIds.includes(outcomeId))
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['supportingOutcomeIds'],
+      message: 'Primary and supporting Outcome assignments must be disjoint.',
+    });
+  }
+  if (!placement.learningUnitIds.includes(placement.presentationUnitId)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['presentationUnitId'],
+      message: 'The presentation Unit must be one of the placement learning Units.',
+    });
+  }
+  const assignedOutcomeIds = [...primaryOutcomeIds, ...placement.supportingOutcomeIds];
+  if (placement.sharedOutcomeIds.some((id) => !assignedOutcomeIds.includes(id))) {
+    context.addIssue({
+      code: 'custom',
+      path: ['sharedOutcomeIds'],
+      message: 'Shared Outcomes must be assigned to the abbreviated Problem.',
+    });
+  }
+});
+
+const ImpactDispositionSchema = z.enum(['materialize_change', 'verified_unaffected']);
+const ImpactEvidenceFields = {
+  disposition: ImpactDispositionSchema,
+  rationale: nonEmptyText,
+  evidenceRefs: uniqueArray(ProblemAnalysisClaimRefSchema).min(1),
+} satisfies z.ZodRawShape;
+const ProblemImpactSurfaceSchema = z.enum([
+  'body',
+  'example',
+  'exercise',
+  'answer',
+  'placement',
+  'derived_index',
+]);
+const LearningUnitImpactSurfaceSchema = z.enum([
+  'body',
+  'example',
+  'exercise',
+  'answer',
+  'standard_order',
+  'derived_index',
+]);
+const PreMaterializationImpactAssessmentSchema = z.discriminatedUnion('ownerType', [
+  strictObject({
+    ownerType: z.literal('problem'),
+    problemId: ProblemIdSchema,
+    surface: ProblemImpactSurfaceSchema,
+    ...ImpactEvidenceFields,
+  }),
+  strictObject({
+    ownerType: z.literal('learning_unit_candidate'),
+    learningUnitId: FinalLearningUnitIdSchema,
+    surface: LearningUnitImpactSurfaceSchema,
+    ...ImpactEvidenceFields,
+  }),
+  strictObject({
+    ownerType: z.literal('derived_index'),
+    path: SafePathSchema,
+    surface: z.literal('index'),
+    ...ImpactEvidenceFields,
+  }),
+]);
+
+const sameFinalTaxonomySet = (left: readonly string[], right: readonly string[]): boolean => {
+  const leftSet = new Set(left);
+  const rightSet = new Set(right);
+  return (
+    leftSet.size === left.length &&
+    rightSet.size === right.length &&
+    leftSet.size === rightSet.size &&
+    [...leftSet].every((value) => rightSet.has(value))
+  );
+};
+
+/** T159 impact inventory; T049 later expands changed surfaces to canonical content locators. */
+export const PreMaterializationCorrectionImpactSchema = strictObject({
+  id: EntityIdSchema,
+  integrationPreviewEntityIds: uniqueArray(EntityIdSchema).min(1),
+  sourceRevisionIds: uniqueArray(EntityIdSchema).min(1),
+  changeSummary: nonEmptyText,
+  affectedProblemIds: uniqueArray(ProblemIdSchema).min(1),
+  affectedLearningUnitCandidateIds: uniqueArray(FinalLearningUnitIdSchema),
+  surfaceAssessments: uniqueArray(PreMaterializationImpactAssessmentSchema).min(1),
+  affectedLearningUnitOrderIds: uniqueArray(FinalLearningUnitIdSchema),
+  derivedIndexPaths: uniqueArray(SafePathSchema).min(1),
+  canonicalMaterializationTask: z.literal('T049'),
+  coverageStatus: z.literal('complete'),
+  verificationStatus: z.enum(['pending', 'reviewed']),
+  impactSubjectDigest: Sha256Schema,
+}).superRefine((impact, context) => {
+  const requiredProblemSurfaces = ProblemImpactSurfaceSchema.options;
+  const requiredUnitSurfaces = LearningUnitImpactSurfaceSchema.options;
+  const assessmentKeys = impact.surfaceAssessments.map((assessment) =>
+    assessment.ownerType === 'problem'
+      ? `problem:${assessment.problemId}:${assessment.surface}`
+      : assessment.ownerType === 'learning_unit_candidate'
+        ? `unit:${assessment.learningUnitId}:${assessment.surface}`
+        : `index:${assessment.path}`,
+  );
+  if (new Set(assessmentKeys).size !== assessmentKeys.length) {
+    context.addIssue({
+      code: 'custom',
+      path: ['surfaceAssessments'],
+      message: 'Pre-materialization impact assessments must be unique by owner and surface.',
+    });
+  }
+  for (const problemId of impact.affectedProblemIds) {
+    const surfaces = impact.surfaceAssessments.flatMap((assessment) =>
+      assessment.ownerType === 'problem' && assessment.problemId === problemId
+        ? [assessment.surface]
+        : [],
+    );
+    if (!sameFinalTaxonomySet(surfaces, requiredProblemSurfaces)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['surfaceAssessments'],
+        message: `Affected Problem ${problemId} must assess every content, placement, and index surface.`,
+      });
+    }
+  }
+  for (const learningUnitId of impact.affectedLearningUnitCandidateIds) {
+    const surfaces = impact.surfaceAssessments.flatMap((assessment) =>
+      assessment.ownerType === 'learning_unit_candidate' &&
+      assessment.learningUnitId === learningUnitId
+        ? [assessment.surface]
+        : [],
+    );
+    if (!sameFinalTaxonomySet(surfaces, requiredUnitSurfaces)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['surfaceAssessments'],
+        message: `Affected Learning Unit ${learningUnitId} must assess every content, order, and index surface.`,
+      });
+    }
+  }
+  if (
+    impact.surfaceAssessments.some(
+      (assessment) =>
+        (assessment.ownerType === 'problem' &&
+          !impact.affectedProblemIds.includes(assessment.problemId)) ||
+        (assessment.ownerType === 'learning_unit_candidate' &&
+          !impact.affectedLearningUnitCandidateIds.includes(assessment.learningUnitId)),
+    )
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['surfaceAssessments'],
+      message: 'Impact assessment owners must be declared by the impact scope.',
+    });
+  }
+  if (
+    impact.affectedLearningUnitOrderIds.some(
+      (id) => !impact.affectedLearningUnitCandidateIds.includes(id),
+    )
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['affectedLearningUnitOrderIds'],
+      message: 'Order impacts must belong to affected Learning Unit candidates.',
+    });
+  }
+  const assessedIndexPaths = impact.surfaceAssessments.flatMap((assessment) =>
+    assessment.ownerType === 'derived_index' ? [assessment.path] : [],
+  );
+  if (!sameFinalTaxonomySet(assessedIndexPaths, impact.derivedIndexPaths)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['derivedIndexPaths'],
+      message: 'Every derived index path must have exactly one impact assessment.',
+    });
+  }
+  const impactSubject = Object.fromEntries(
+    Object.entries(impact).filter(
+      ([field]) => !['impactSubjectDigest', 'verificationStatus'].includes(field),
+    ),
+  );
+  if (impact.impactSubjectDigest !== canonicalDigest(impactSubject)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['impactSubjectDigest'],
+      message: 'Pre-materialization correction impact subject digest is stale.',
+    });
+  }
+});
+
+const ProvisionalActionAssessmentSchema = strictObject({
+  action: IntegrationActionSchema,
+  criterion: nonEmptyText,
+  evidenceRequiredAtT159: uniqueArray(EntityIdSchema).min(1),
+});
+const ProvisionalIntegrationCandidateSchema = strictObject({
+  previewEntityId: EntityIdSchema,
+  previewEntityKind: TaxonomyEntityKindSchema,
+  affectedProblemIds: uniqueArray(ProblemIdSchema).min(1),
+  rationale: nonEmptyText,
+  evidenceIds: uniqueArray(EntityIdSchema).min(1),
+  affectedSurfaces: uniqueArray(nonEmptyText).min(1),
+  actionAssessments: z.array(ProvisionalActionAssessmentSchema).length(4),
+  provisionalRecommendation: z.literal('promote'),
+  finalDecision: z.null(),
+  finalEntityIds: uniqueArray(EntityIdSchema).length(0),
+  reviewPolicy: TaxonomyReviewPolicySchema,
+}).superRefine((candidate, context) => {
+  if (
+    !sameFinalTaxonomySet(
+      candidate.actionAssessments.map(({ action }) => action),
+      IntegrationActionSchema.options,
+    )
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['actionAssessments'],
+      message: 'Provisional evidence must assess every integration action once.',
+    });
+  }
+});
+const FrozenProvisionalIntegrationEvidenceSchema = strictObject({
+  schemaVersion: z.literal('1.0.0'),
+  evidenceId: EntityIdSchema,
+  previewId: EntityIdSchema,
+  status: z.literal('evidence_frozen'),
+  taxonomyDigest: Sha256Schema,
+  inventoryComponentDigest: Sha256Schema,
+  classificationsDigest: Sha256Schema,
+  proposalDigest: Sha256Schema,
+  finalDecisionTask: z.literal('T159'),
+  canonicalMaterializationAllowed: z.literal(false),
+  candidates: z.array(ProvisionalIntegrationCandidateSchema).min(1),
+  integrationDigest: Sha256Schema,
+});
+
+const SplitProblemAssignmentSchema = strictObject({
+  finalEntityId: EntityIdSchema,
+  problemIds: uniqueArray(ProblemIdSchema).min(1),
+  evidenceRefs: uniqueArray(ProblemAnalysisClaimRefSchema).min(1),
+  representativeProblemIds: uniqueArray(ProblemIdSchema).min(1),
+});
+const RedirectLegacyDispositionSchema = strictObject({
+  kind: z.literal('redirect'),
+  fromPreviewEntityId: EntityIdSchema,
+  toFinalEntityId: EntityIdSchema,
+  aliases: uniqueArray(nonEmptyText),
+});
+const SplitLegacyDispositionSchema = strictObject({
+  kind: z.literal('split_aliases'),
+  fromPreviewEntityId: EntityIdSchema,
+  targets: z
+    .array(
+      strictObject({
+        finalEntityId: EntityIdSchema,
+        aliases: uniqueArray(nonEmptyText),
+      }),
+    )
+    .min(2),
+  ambiguousRedirectOmittedReason: nonEmptyText,
+});
+const RetiredLegacyDispositionSchema = strictObject({
+  kind: z.literal('retired'),
+  previewEntityId: EntityIdSchema,
+  replacementEntityIds: uniqueArray(EntityIdSchema),
+  retirementReason: nonEmptyText,
+});
+const IntegrationEntryCommon = {
+  previewEntityId: EntityIdSchema,
+  previewEntityKind: TaxonomyEntityKindSchema,
+  affectedProblemIds: uniqueArray(ProblemIdSchema).min(1),
+  rationale: nonEmptyText,
+  evidenceRefs: uniqueArray(ProblemAnalysisClaimRefSchema).min(1),
+  correctionImpactIds: uniqueArray(EntityIdSchema).min(1),
+  reviewPolicy: TaxonomyReviewPolicySchema,
+  reviewEvidenceId: EntityIdSchema.nullable(),
+  status: FinalTaxonomyStatusSchema,
+} satisfies z.ZodRawShape;
+const PromoteIntegrationEntrySchema = strictObject({
+  ...IntegrationEntryCommon,
+  action: z.literal('promote'),
+  finalEntityIds: uniqueArray(EntityIdSchema).length(1),
+  splitProblemAssignments: z.array(SplitProblemAssignmentSchema).length(0),
+  decisionEvidence: strictObject({
+    fullInventoryComparison: nonEmptyText,
+    representativeProblemIds: uniqueArray(ProblemIdSchema).min(1),
+  }),
+  legacyDisposition: RedirectLegacyDispositionSchema,
+});
+const MergeIntegrationEntrySchema = strictObject({
+  ...IntegrationEntryCommon,
+  action: z.literal('merge'),
+  finalEntityIds: uniqueArray(EntityIdSchema).length(1),
+  splitProblemAssignments: z.array(SplitProblemAssignmentSchema).length(0),
+  decisionEvidence: strictObject({
+    equivalenceOrContainmentProof: nonEmptyText,
+    representativeProblemIds: uniqueArray(ProblemIdSchema).min(1),
+  }),
+  legacyDisposition: RedirectLegacyDispositionSchema,
+});
+const SplitIntegrationEntrySchema = strictObject({
+  ...IntegrationEntryCommon,
+  action: z.literal('split'),
+  finalEntityIds: uniqueArray(EntityIdSchema).min(2),
+  splitProblemAssignments: z.array(SplitProblemAssignmentSchema).min(2),
+  decisionEvidence: strictObject({ completeReclassificationProof: nonEmptyText }),
+  legacyDisposition: SplitLegacyDispositionSchema,
+});
+const RetireIntegrationEntrySchema = strictObject({
+  ...IntegrationEntryCommon,
+  action: z.literal('retire'),
+  finalEntityIds: uniqueArray(EntityIdSchema).length(0),
+  splitProblemAssignments: z.array(SplitProblemAssignmentSchema).length(0),
+  decisionEvidence: strictObject({
+    retirementRationale: nonEmptyText,
+    reassignedProblemIds: uniqueArray(ProblemIdSchema).min(1),
+  }),
+  legacyDisposition: RetiredLegacyDispositionSchema,
+});
+const TaxonomyIntegrationEntrySchema = z.discriminatedUnion('action', [
+  PromoteIntegrationEntrySchema,
+  MergeIntegrationEntrySchema,
+  SplitIntegrationEntrySchema,
+  RetireIntegrationEntrySchema,
+]);
+
+const taxonomyIntegrationSubject = (integration: {
+  readonly schemaVersion: '2.0.0';
+  readonly evidenceId: string;
+  readonly previewId: string;
+  readonly inventoryDigest: string;
+  readonly previewSnapshotDigest: string;
+  readonly provisionalEvidence: z.infer<typeof FrozenProvisionalIntegrationEvidenceSchema>;
+  readonly entries: readonly z.infer<typeof TaxonomyIntegrationEntrySchema>[];
+  readonly canonicalMaterializationAllowed: false;
+}) => ({
+  schemaVersion: integration.schemaVersion,
+  evidenceId: integration.evidenceId,
+  previewId: integration.previewId,
+  inventoryDigest: integration.inventoryDigest,
+  previewSnapshotDigest: integration.previewSnapshotDigest,
+  provisionalEvidence: integration.provisionalEvidence,
+  entries: integration.entries.map((entry) =>
+    Object.fromEntries(
+      Object.entries(entry).filter(([field]) => !['reviewEvidenceId', 'status'].includes(field)),
+    ),
+  ),
+  canonicalMaterializationAllowed: integration.canonicalMaterializationAllowed,
+});
+
+export const TaxonomyIntegrationMapSchema = strictObject({
+  schemaVersion: z.literal('2.0.0'),
+  evidenceId: EntityIdSchema,
+  previewId: EntityIdSchema,
+  inventoryDigest: Sha256Schema,
+  previewSnapshotDigest: Sha256Schema,
+  provisionalEvidence: FrozenProvisionalIntegrationEvidenceSchema,
+  entries: z.array(TaxonomyIntegrationEntrySchema).min(1),
+  status: FinalTaxonomyStatusSchema,
+  canonicalMaterializationAllowed: z.literal(false),
+  integrationSubjectDigest: Sha256Schema,
+  integrationDigest: Sha256Schema,
+}).superRefine((integration, context) => {
+  const candidateIds = integration.provisionalEvidence.candidates.map(
+    ({ previewEntityId }) => previewEntityId,
+  );
+  const entryIds = integration.entries.map(({ previewEntityId }) => previewEntityId);
+  if (
+    integration.previewId !== integration.provisionalEvidence.previewId ||
+    !sameFinalTaxonomySet(candidateIds, entryIds)
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['entries'],
+      message: 'The final integration map must cover every frozen preview entity exactly once.',
+    });
+  }
+  const candidateById = new Map(
+    integration.provisionalEvidence.candidates.map((candidate) => [
+      candidate.previewEntityId,
+      candidate,
+    ]),
+  );
+  for (const entry of integration.entries) {
+    const candidate = candidateById.get(entry.previewEntityId);
+    if (
+      candidate?.previewEntityKind !== entry.previewEntityKind ||
+      !sameFinalTaxonomySet(candidate.affectedProblemIds, entry.affectedProblemIds)
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['entries'],
+        message: `Integration scope changed for ${entry.previewEntityId}.`,
+      });
+    }
+    if (
+      candidate?.reviewPolicy.requiredMode === 'third_party' &&
+      entry.reviewPolicy.requiredMode !== 'third_party'
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['entries'],
+        message: `Integration review policy was weakened for ${entry.previewEntityId}.`,
+      });
+    }
+    if (
+      candidate?.reviewPolicy.riskReasons.some(
+        (reason) => !entry.reviewPolicy.riskReasons.includes(reason),
+      )
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['entries'],
+        message: `Integration risk reasons are incomplete for ${entry.previewEntityId}.`,
+      });
+    }
+    if ((entry.status === 'accepted') !== (entry.reviewEvidenceId !== null)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['entries'],
+        message: `Only an accepted integration decision may reference completed review evidence for ${entry.previewEntityId}.`,
+      });
+    }
+    if (entry.action === 'split') {
+      const assignedFinalIds = entry.splitProblemAssignments.map(
+        ({ finalEntityId }) => finalEntityId,
+      );
+      const assignedProblemIds = entry.splitProblemAssignments.flatMap(
+        ({ problemIds }) => problemIds,
+      );
+      const assignedProblemUnion = [...new Set(assignedProblemIds)];
+      const outcomeAssignmentsOverlap =
+        entry.previewEntityKind === 'outcome' &&
+        assignedProblemUnion.length !== assignedProblemIds.length;
+      if (
+        !sameFinalTaxonomySet(assignedFinalIds, entry.finalEntityIds) ||
+        !sameFinalTaxonomySet(assignedProblemUnion, entry.affectedProblemIds) ||
+        outcomeAssignmentsOverlap
+      ) {
+        context.addIssue({
+          code: 'custom',
+          path: ['entries'],
+          message: `Split assignments are incomplete for ${entry.previewEntityId}.`,
+        });
+      }
+      if (
+        entry.legacyDisposition.fromPreviewEntityId !== entry.previewEntityId ||
+        !sameFinalTaxonomySet(
+          entry.legacyDisposition.targets.map(({ finalEntityId }) => finalEntityId),
+          entry.finalEntityIds,
+        )
+      ) {
+        context.addIssue({
+          code: 'custom',
+          path: ['entries'],
+          message: `Split aliases are incomplete for ${entry.previewEntityId}.`,
+        });
+      }
+    } else if (entry.action === 'retire') {
+      if (
+        !sameFinalTaxonomySet(
+          entry.decisionEvidence.reassignedProblemIds,
+          entry.affectedProblemIds,
+        ) ||
+        entry.legacyDisposition.previewEntityId !== entry.previewEntityId
+      ) {
+        context.addIssue({
+          code: 'custom',
+          path: ['entries'],
+          message: `Retirement coverage is incomplete for ${entry.previewEntityId}.`,
+        });
+      }
+    } else if (
+      entry.legacyDisposition.fromPreviewEntityId !== entry.previewEntityId ||
+      entry.legacyDisposition.toFinalEntityId !== entry.finalEntityIds[0]
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['entries'],
+        message: `Legacy redirect is stale for ${entry.previewEntityId}.`,
+      });
+    }
+
+    const representativeProblemIds =
+      entry.action === 'split'
+        ? entry.splitProblemAssignments.flatMap(
+            ({ representativeProblemIds: assignmentRepresentatives }) => assignmentRepresentatives,
+          )
+        : entry.action === 'promote' || entry.action === 'merge'
+          ? entry.decisionEvidence.representativeProblemIds
+          : [];
+    const allowedEvidenceOwnerIds = new Set([
+      ...entry.affectedProblemIds,
+      ...representativeProblemIds,
+    ]);
+    const evidenceOwnerIds = [
+      ...entry.evidenceRefs.map(({ problemId }) => problemId),
+      ...(entry.action === 'split'
+        ? entry.splitProblemAssignments.flatMap(({ evidenceRefs }) =>
+            evidenceRefs.map(({ problemId }) => problemId),
+          )
+        : []),
+    ];
+    if (
+      evidenceOwnerIds.some((problemId) => !allowedEvidenceOwnerIds.has(problemId)) ||
+      entry.affectedProblemIds.some((problemId) => !evidenceOwnerIds.includes(problemId))
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['entries'],
+        message: `Integration evidence ownership is incomplete for ${entry.previewEntityId}.`,
+      });
+    }
+  }
+  if (
+    integration.status === 'accepted' &&
+    integration.entries.some(({ status }) => status !== 'accepted')
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['status'],
+      message: 'An accepted integration map requires every decision to be accepted.',
+    });
+  }
+  if (
+    integration.integrationSubjectDigest !==
+    canonicalDigest(taxonomyIntegrationSubject(integration))
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['integrationSubjectDigest'],
+      message: 'Taxonomy integration review subject digest is stale.',
+    });
+  }
+  if (digestWithoutField(integration, 'integrationDigest') !== integration.integrationDigest) {
+    context.addIssue({
+      code: 'custom',
+      path: ['integrationDigest'],
+      message: 'Taxonomy integration digest is stale.',
+    });
+  }
+});
+
+const TaxonomyPrerequisiteEdgeSchema = strictObject({
+  nodeId: EntityIdSchema,
+  prerequisiteId: EntityIdSchema,
+});
+const FinalTaxonomyInputsSchema = strictObject({
+  inventory: strictObject({
+    evidencePath: SafePathSchema,
+    evidenceDigest: Sha256Schema,
+    inventoryDigest: Sha256Schema,
+    corpusDigest: Sha256Schema,
+    authoringEvidencePath: SafePathSchema,
+    authoringEvidenceDigest: Sha256Schema,
+    authoringInventoryDigest: Sha256Schema,
+    normalizedSourceSetDigest: Sha256Schema,
+  }),
+  previewSnapshot: strictObject({
+    path: SafePathSchema,
+    referencePath: SafePathSchema,
+    joinDigest: Sha256Schema,
+    canonicalSnapshotDigest: Sha256Schema,
+    transactionId: z.string().regex(/^preview-snapshot:[a-z0-9]+(?:-[a-z0-9]+)*:[a-f0-9]{64}$/u),
+    status: z.literal('passed'),
+  }),
+  integrationMapPath: SafePathSchema,
+});
+const FinalTaxonomyPolicySchema = strictObject({
+  name: nonEmptyText,
+  version: semverForTaxonomy,
+  inputScope: nonEmptyText,
+  rulesDigest: Sha256Schema,
+  requiredReviewMode: ContentReviewModeSchema,
+  riskReasons: uniqueArray(ContentReviewRiskReasonSchema),
+  authoringSkillName: nonEmptyText,
+  authoringSkillVersion: semverForTaxonomy,
+  authoringSkillDigest: Sha256Schema,
+  writingPolicyPath: SafePathSchema,
+  writingPolicyDigest: Sha256Schema,
+  sourceNormalizationVersion: semverForTaxonomy,
+  workManifestPath: SafePathSchema,
+  workManifestDigest: Sha256Schema,
+}).superRefine((policy, context) => {
+  if (policy.riskReasons.length > 0 !== (policy.requiredReviewMode === 'third_party')) {
+    context.addIssue({
+      code: 'custom',
+      path: ['requiredReviewMode'],
+      message: 'Final taxonomy review mode must follow the declared risk reasons.',
+    });
+  }
+});
+
+const finalTaxonomyCandidateId = (
+  candidate: z.infer<typeof FinalTaxonomyCandidateSchema>,
+): string => candidate.entity.id;
+
+const finalTaxonomyEdgeKey = (edge: { readonly nodeId: string; readonly prerequisiteId: string }) =>
+  `${edge.nodeId}\u0000${edge.prerequisiteId}`;
+
+const finalTaxonomyGraphHasCycle = (
+  nodeIds: readonly string[],
+  edges: readonly { readonly nodeId: string; readonly prerequisiteId: string }[],
+): boolean => {
+  const dependencies = new Map(nodeIds.map((id) => [id, [] as string[]]));
+  for (const { nodeId, prerequisiteId } of edges) dependencies.get(nodeId)?.push(prerequisiteId);
+  const states = new Map<string, 'visiting' | 'visited'>();
+  const visit = (nodeId: string): boolean => {
+    if (states.get(nodeId) === 'visiting') return true;
+    if (states.get(nodeId) === 'visited') return false;
+    states.set(nodeId, 'visiting');
+    if ((dependencies.get(nodeId) ?? []).some(visit)) return true;
+    states.set(nodeId, 'visited');
+    return false;
+  };
+  return nodeIds.some(visit);
+};
+
+const deterministicFinalLearningUnitOrder = (
+  units: readonly z.infer<typeof LearningUnitTaxonomyCandidateSchema>[],
+  edges: readonly { readonly nodeId: string; readonly prerequisiteId: string }[],
+): string[] => {
+  const remaining = new Map(
+    units.map((unit) => [
+      unit.id,
+      new Set(
+        edges
+          .filter(({ nodeId }) => nodeId === unit.id)
+          .map(({ prerequisiteId }) => prerequisiteId),
+      ),
+    ]),
+  );
+  const unitById = new Map(units.map((unit) => [unit.id, unit]));
+  const result: string[] = [];
+  while (remaining.size > 0) {
+    const ready = [...remaining.entries()]
+      .filter(([, dependencies]) => dependencies.size === 0)
+      .map(([id]) => unitById.get(id))
+      .filter(
+        (unit): unit is z.infer<typeof LearningUnitTaxonomyCandidateSchema> => unit !== undefined,
+      )
+      .sort(
+        (left, right) =>
+          left.stageRank - right.stageRank ||
+          left.difficultyRank - right.difficultyRank ||
+          left.representativeRank - right.representativeRank ||
+          (left.id < right.id ? -1 : left.id > right.id ? 1 : 0),
+      );
+    const selected = ready[0];
+    if (selected === undefined) return [];
+    result.push(selected.id);
+    remaining.delete(selected.id);
+    for (const dependencies of remaining.values()) dependencies.delete(selected.id);
+  }
+  return result;
+};
+
+export const FinalTaxonomyBuildSchema = strictObject({
+  schemaVersion: z.literal('2.0.0'),
+  id: EntityIdSchema,
+  generatedAt: OffsetDateTimeSchema,
+  inputs: FinalTaxonomyInputsSchema,
+  policy: FinalTaxonomyPolicySchema,
+  integrationMap: TaxonomyIntegrationMapSchema,
+  integrationMapDigest: Sha256Schema,
+  finalCandidates: z.array(FinalTaxonomyCandidateSchema).min(3),
+  tagPrerequisites: uniqueArray(TaxonomyPrerequisiteEdgeSchema),
+  learningUnitPrerequisites: uniqueArray(TaxonomyPrerequisiteEdgeSchema),
+  standardOrder: uniqueArray(FinalLearningUnitIdSchema).min(1),
+  placements: z.array(FinalProblemPlacementProjectionSchema).min(1),
+  correctionImpacts: z.array(PreMaterializationCorrectionImpactSchema).min(1),
+  sourceRevisionIds: uniqueArray(EntityIdSchema).min(1),
+  reviewEvidenceRefs: uniqueArray(ReviewEvidenceReferenceSchema).max(1),
+  taxonomySubjectDigest: Sha256Schema,
+  taxonomyDigest: Sha256Schema,
+  tagDagDigest: Sha256Schema,
+  learningUnitDagDigest: Sha256Schema,
+  orderDigest: Sha256Schema,
+  placementDigest: Sha256Schema,
+  correctionImpactDigest: Sha256Schema,
+  status: FinalTaxonomyStatusSchema,
+  acceptedAt: OffsetDateTimeSchema.nullable(),
+  holdReasons: uniqueArray(nonEmptyText),
+  canonicalMaterializationAllowed: z.boolean(),
+  buildDigest: Sha256Schema,
+}).superRefine((build, context) => {
+  const candidatesByKind = {
+    tag: build.finalCandidates.filter(
+      (candidate): candidate is Extract<typeof candidate, { kind: 'tag' }> =>
+        candidate.kind === 'tag',
+    ),
+    outcome: build.finalCandidates.filter(
+      (candidate): candidate is Extract<typeof candidate, { kind: 'outcome' }> =>
+        candidate.kind === 'outcome',
+    ),
+    unit: build.finalCandidates.filter(
+      (candidate): candidate is Extract<typeof candidate, { kind: 'unit' }> =>
+        candidate.kind === 'unit',
+    ),
+  };
+  if (Object.values(candidatesByKind).some((candidates) => candidates.length === 0)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['finalCandidates'],
+      message: 'Final taxonomy requires at least one Tag, Outcome, and Learning Unit candidate.',
+    });
+  }
+  const finalIds = build.finalCandidates.map(finalTaxonomyCandidateId);
+  if (
+    new Set(finalIds).size !== finalIds.length ||
+    finalIds.some((id) => /(?:^|-)(?:preview|provisional)(?:-|$)/u.test(id))
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['finalCandidates'],
+      message: 'Final taxonomy IDs must be globally unique and cannot use preview namespaces.',
+    });
+  }
+  const tagIds = candidatesByKind.tag.map(({ entity }) => entity.id);
+  const outcomeIds = candidatesByKind.outcome.map(({ entity }) => entity.id);
+  const unitIds = candidatesByKind.unit.map(({ entity }) => entity.id);
+  const problemIds = build.placements.map(({ problemId }) => problemId);
+  const tagIdSet = new Set(tagIds);
+  const outcomeIdSet = new Set(outcomeIds);
+  const unitIdSet = new Set(unitIds);
+  const problemIdSet = new Set(problemIds);
+  const sourceIdSet = new Set(build.sourceRevisionIds);
+  const tagById = new Map(candidatesByKind.tag.map(({ entity }) => [entity.id, entity]));
+  const outcomeById = new Map(candidatesByKind.outcome.map(({ entity }) => [entity.id, entity]));
+  const tagHasAncestor = (tagId: string, ancestorId: string): boolean => {
+    const visited = new Set<string>();
+    let currentId: string | null = tagId;
+    while (currentId !== null && !visited.has(currentId)) {
+      if (currentId === ancestorId) return true;
+      visited.add(currentId);
+      currentId = tagById.get(currentId)?.parentId ?? null;
+    }
+    return false;
+  };
+  if (
+    new Set(problemIds).size !== problemIds.length ||
+    new Set(build.placements.map(({ id }) => id)).size !== build.placements.length
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['placements'],
+      message: 'Every Problem and placement ID must occur exactly once.',
+    });
+  }
+
+  const allEvidenceRefs = [
+    ...build.finalCandidates.flatMap(({ evidenceRefs }) => evidenceRefs),
+    ...build.placements.flatMap(({ analysisEvidenceRefs }) => analysisEvidenceRefs),
+    ...build.integrationMap.entries.flatMap(({ evidenceRefs }) => evidenceRefs),
+    ...build.integrationMap.entries.flatMap(({ splitProblemAssignments }) =>
+      splitProblemAssignments.flatMap(({ evidenceRefs }) => evidenceRefs),
+    ),
+    ...build.correctionImpacts.flatMap(({ surfaceAssessments }) =>
+      surfaceAssessments.flatMap(({ evidenceRefs }) => evidenceRefs),
+    ),
+  ];
+  const usedSourceIds = [
+    ...new Set(allEvidenceRefs.flatMap(({ sourceRevisionIds }) => sourceRevisionIds)),
+  ];
+  if (!sameFinalTaxonomySet(build.sourceRevisionIds, usedSourceIds)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['sourceRevisionIds'],
+      message:
+        'Final taxonomy Source Revisions must exactly equal the source-backed evidence union.',
+    });
+  }
+  for (const candidate of build.finalCandidates) {
+    const evidenceSourceIds = [
+      ...new Set(candidate.evidenceRefs.flatMap(({ sourceRevisionIds }) => sourceRevisionIds)),
+    ];
+    if (!sameFinalTaxonomySet(candidate.sourceRevisionIds, evidenceSourceIds)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['finalCandidates'],
+        message: `Candidate ${candidate.entity.id} has stale Source Revision coverage.`,
+      });
+    }
+    if (candidate.sourceRevisionIds.some((id) => !sourceIdSet.has(id))) {
+      context.addIssue({
+        code: 'custom',
+        path: ['finalCandidates'],
+        message: `Candidate ${candidate.entity.id} references an unknown Source Revision.`,
+      });
+    }
+  }
+
+  for (const { entity: tag } of candidatesByKind.tag) {
+    if (
+      tag.lifecycle !== 'active' ||
+      tag.replacementTagIds.length > 0 ||
+      (tag.parentId !== null && !tagIdSet.has(tag.parentId)) ||
+      tag.prerequisiteTagIds.some((id) => !tagIdSet.has(id)) ||
+      tag.relatedTags.some(({ tagId }) => !tagIdSet.has(tagId)) ||
+      tag.learningOutcomeIds.some((id) => !outcomeIdSet.has(id)) ||
+      tag.representativeProblemIds.some((id) => !problemIdSet.has(id))
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['finalCandidates'],
+        message: `Final Tag ${tag.id} has an invalid lifecycle or reference.`,
+      });
+    }
+  }
+  for (const { entity: tag } of candidatesByKind.tag) {
+    for (const relation of tag.relatedTags) {
+      if (
+        SYMMETRIC_TECHNIQUE_TAG_RELATION_TYPES.includes(
+          relation.type as (typeof SYMMETRIC_TECHNIQUE_TAG_RELATION_TYPES)[number],
+        ) &&
+        !tagById
+          .get(relation.tagId)
+          ?.relatedTags.some(
+            (reverse) => reverse.tagId === tag.id && reverse.type === relation.type,
+          )
+      ) {
+        context.addIssue({
+          code: 'custom',
+          path: ['finalCandidates'],
+          message: `Symmetric Tag relation ${tag.id}/${relation.type}/${relation.tagId} is missing its reverse edge.`,
+        });
+      }
+    }
+  }
+  for (const { entity: outcome } of candidatesByKind.outcome) {
+    const knownScopeIds = new Set([...tagIds, ...unitIds, ...problemIds]);
+    if (
+      outcome.prerequisiteOutcomeIds.some((id) => !outcomeIdSet.has(id)) ||
+      outcome.scopeIds.some((id) => !knownScopeIds.has(id))
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['finalCandidates'],
+        message: `Final Outcome ${outcome.id} has an unknown reference.`,
+      });
+    }
+  }
+  for (const candidate of candidatesByKind.unit) {
+    const unit = candidate.entity;
+    if (
+      !sameFinalTaxonomySet(unit.sourceRevisionIds, candidate.sourceRevisionIds) ||
+      (unit.kind !== 'chapter' && unit.problemIds.length < 1) ||
+      (unit.parentId !== null && !unitIdSet.has(unit.parentId)) ||
+      unit.additionalPrerequisiteUnitIds.some((id) => !unitIdSet.has(id)) ||
+      unit.tagIds.some((id) => !tagIdSet.has(id)) ||
+      unit.learningOutcomeIds.some((id) => !outcomeIdSet.has(id)) ||
+      unit.problemIds.some((id) => !problemIdSet.has(id))
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['finalCandidates'],
+        message: `Final Learning Unit ${unit.id} has an unknown or stale reference.`,
+      });
+    }
+  }
+
+  const expectedTagEdges = candidatesByKind.tag.flatMap(({ entity }) =>
+    entity.prerequisiteTagIds.map((prerequisiteId) => ({ nodeId: entity.id, prerequisiteId })),
+  );
+  const expectedUnitEdges = candidatesByKind.unit.flatMap(({ entity }) =>
+    entity.additionalPrerequisiteUnitIds.map((prerequisiteId) => ({
+      nodeId: entity.id,
+      prerequisiteId,
+    })),
+  );
+  if (
+    !sameFinalTaxonomySet(
+      build.tagPrerequisites.map(finalTaxonomyEdgeKey),
+      expectedTagEdges.map(finalTaxonomyEdgeKey),
+    ) ||
+    build.tagPrerequisites.some(
+      ({ nodeId, prerequisiteId }) => !tagIdSet.has(nodeId) || !tagIdSet.has(prerequisiteId),
+    ) ||
+    finalTaxonomyGraphHasCycle(tagIds, build.tagPrerequisites)
+  ) {
+    context.addIssue({ code: 'custom', path: ['tagPrerequisites'], message: 'Tag DAG is stale.' });
+  }
+  if (
+    !sameFinalTaxonomySet(
+      build.learningUnitPrerequisites.map(finalTaxonomyEdgeKey),
+      expectedUnitEdges.map(finalTaxonomyEdgeKey),
+    ) ||
+    build.learningUnitPrerequisites.some(
+      ({ nodeId, prerequisiteId }) => !unitIdSet.has(nodeId) || !unitIdSet.has(prerequisiteId),
+    ) ||
+    finalTaxonomyGraphHasCycle(unitIds, build.learningUnitPrerequisites)
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['learningUnitPrerequisites'],
+      message: 'Learning Unit DAG is stale.',
+    });
+  }
+  const auxiliaryGraphs = [
+    candidatesByKind.tag.flatMap(({ entity }) =>
+      entity.parentId === null ? [] : [{ nodeId: entity.id, prerequisiteId: entity.parentId }],
+    ),
+    candidatesByKind.outcome.flatMap(({ entity }) =>
+      entity.prerequisiteOutcomeIds.map((prerequisiteId) => ({
+        nodeId: entity.id,
+        prerequisiteId,
+      })),
+    ),
+    candidatesByKind.unit.flatMap(({ entity }) =>
+      entity.parentId === null ? [] : [{ nodeId: entity.id, prerequisiteId: entity.parentId }],
+    ),
+  ] as const;
+  if (
+    finalTaxonomyGraphHasCycle(tagIds, auxiliaryGraphs[0]) ||
+    finalTaxonomyGraphHasCycle(outcomeIds, auxiliaryGraphs[1]) ||
+    finalTaxonomyGraphHasCycle(unitIds, auxiliaryGraphs[2])
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['finalCandidates'],
+      message: 'A final taxonomy hierarchy or Outcome prerequisite graph contains a cycle.',
+    });
+  }
+
+  const unitParentEdges = candidatesByKind.unit.flatMap(({ entity }) =>
+    entity.parentId === null ? [] : [{ nodeId: entity.id, prerequisiteId: entity.parentId }],
+  );
+  const expectedOrder = deterministicFinalLearningUnitOrder(
+    candidatesByKind.unit.map(({ entity }) => entity),
+    [...build.learningUnitPrerequisites, ...unitParentEdges],
+  );
+  if (
+    !sameFinalTaxonomySet(build.standardOrder, unitIds) ||
+    build.standardOrder.some((id, index) => expectedOrder[index] !== id) ||
+    candidatesByKind.unit.some(
+      ({ entity }) => build.standardOrder[entity.globalIndex] !== entity.id,
+    )
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['standardOrder'],
+      message: 'Learning Unit order or globalIndex is stale.',
+    });
+  }
+
+  const unitProblemIds = [
+    ...new Set(candidatesByKind.unit.flatMap(({ entity }) => entity.problemIds)),
+  ];
+  if (!sameFinalTaxonomySet(problemIds, unitProblemIds)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['placements'],
+      message: 'Placement and Learning Unit Problem coverage must match.',
+    });
+  }
+  const placementByProblemId = new Map(
+    build.placements.map((placement) => [placement.problemId, placement]),
+  );
+  const unitById = new Map(candidatesByKind.unit.map(({ entity }) => [entity.id, entity]));
+  for (const { entity: tag } of candidatesByKind.tag) {
+    const representativePlacements = tag.representativeProblemIds.flatMap((problemId) => {
+      const placement = placementByProblemId.get(problemId);
+      return placement === undefined ? [] : [placement];
+    });
+    if (
+      representativePlacements.length !== tag.representativeProblemIds.length ||
+      representativePlacements.some((placement) => {
+        const assignedTagIds = [...placement.primaryTagIds, ...placement.supportingTagIds];
+        return tag.parentId === null
+          ? !assignedTagIds.some((tagId) => tagHasAncestor(tagId, tag.id))
+          : !assignedTagIds.includes(tag.id);
+      }) ||
+      (tag.parentId === null &&
+        build.placements.some((placement) => placement.primaryTagIds.includes(tag.id)))
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['finalCandidates'],
+        message: `Tag ${tag.id} does not have reusable representative placement coverage.`,
+      });
+    }
+  }
+  for (const placement of build.placements) {
+    if (
+      placement.primaryTagIds.some((id) => !tagIdSet.has(id)) ||
+      placement.supportingTagIds.some((id) => !tagIdSet.has(id)) ||
+      !outcomeIdSet.has(placement.primaryOutcomeId) ||
+      placement.additionalPrimaryOutcomeIds.some((id) => !outcomeIdSet.has(id)) ||
+      placement.supportingOutcomeIds.some((id) => !outcomeIdSet.has(id)) ||
+      placement.learningUnitIds.some((id) => !unitIdSet.has(id))
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['placements'],
+        message: `Placement ${placement.id} has an unknown taxonomy reference.`,
+      });
+      continue;
+    }
+    const assignedUnits = placement.learningUnitIds.flatMap((id) => {
+      const unit = unitById.get(id);
+      return unit === undefined ? [] : [unit];
+    });
+    const assignedTagIds = [...placement.primaryTagIds, ...placement.supportingTagIds];
+    const primaryOutcomeIds = [
+      placement.primaryOutcomeId,
+      ...placement.additionalPrimaryOutcomeIds,
+    ];
+    const assignedOutcomeIds = [...primaryOutcomeIds, ...placement.supportingOutcomeIds];
+    if (
+      primaryOutcomeIds.some(
+        (outcomeId) =>
+          !outcomeById
+            .get(outcomeId)
+            ?.scopeIds.some((tagId) => placement.primaryTagIds.includes(tagId)),
+      ) ||
+      placement.primaryTagIds.some((tagId) =>
+        primaryOutcomeIds.every(
+          (outcomeId) => !outcomeById.get(outcomeId)?.scopeIds.includes(tagId),
+        ),
+      ) ||
+      placement.supportingOutcomeIds.some(
+        (outcomeId) =>
+          !outcomeById
+            .get(outcomeId)
+            ?.scopeIds.some((tagId) => placement.supportingTagIds.includes(tagId)),
+      ) ||
+      placement.supportingTagIds.some((tagId) =>
+        placement.supportingOutcomeIds.every(
+          (outcomeId) => !outcomeById.get(outcomeId)?.scopeIds.includes(tagId),
+        ),
+      )
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['placements'],
+        message: `Placement ${placement.id} has inconsistent primary/supporting Outcome roles.`,
+      });
+    }
+    if (
+      assignedUnits.some((unit) => !unit.problemIds.includes(placement.problemId)) ||
+      assignedTagIds.some((id) => !assignedUnits.some((unit) => unit.tagIds.includes(id))) ||
+      assignedOutcomeIds.some(
+        (id) => !assignedUnits.some((unit) => unit.learningOutcomeIds.includes(id)),
+      )
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['placements'],
+        message: `Placement ${placement.id} is not reachable through its Learning Units.`,
+      });
+    }
+    if (placement.primaryProblemId !== null) {
+      const primary = placementByProblemId.get(placement.primaryProblemId);
+      const primaryOutcomeIds =
+        primary === undefined
+          ? []
+          : [
+              primary.primaryOutcomeId,
+              ...primary.additionalPrimaryOutcomeIds,
+              ...primary.supportingOutcomeIds,
+            ];
+      if (
+        primary?.kind !== 'full' ||
+        placement.sharedOutcomeIds.some(
+          (id) => !assignedOutcomeIds.includes(id) || !primaryOutcomeIds.includes(id),
+        )
+      ) {
+        context.addIssue({
+          code: 'custom',
+          path: ['placements'],
+          message: `Abbreviated placement ${placement.id} has an invalid primary Problem.`,
+        });
+      }
+    }
+  }
+
+  const candidateKindById = new Map(
+    build.finalCandidates.map((candidate) => [candidate.entity.id, candidate.kind]),
+  );
+  const unitHasAncestor = (unitId: string, ancestorId: string): boolean => {
+    const visited = new Set<string>();
+    let currentId: string | null = unitId;
+    while (currentId !== null && !visited.has(currentId)) {
+      if (currentId === ancestorId) return true;
+      visited.add(currentId);
+      currentId = unitById.get(currentId)?.parentId ?? null;
+    }
+    return false;
+  };
+  const placementUsesTarget = (
+    placement: (typeof build.placements)[number] | undefined,
+    kind: 'tag' | 'outcome' | 'unit',
+    targetId: string,
+  ): boolean => {
+    if (placement === undefined) return false;
+    if (kind === 'tag') {
+      const assignedTagIds = [...placement.primaryTagIds, ...placement.supportingTagIds];
+      const target = tagById.get(targetId);
+      return (
+        assignedTagIds.includes(targetId) ||
+        (target?.parentId === null &&
+          assignedTagIds.some((tagId) => tagHasAncestor(tagId, targetId)))
+      );
+    }
+    if (kind === 'outcome') {
+      if (
+        [
+          placement.primaryOutcomeId,
+          ...placement.additionalPrimaryOutcomeIds,
+          ...placement.supportingOutcomeIds,
+        ].includes(targetId)
+      ) {
+        return true;
+      }
+      const target = outcomeById.get(targetId);
+      const assignedTagIds = [...placement.primaryTagIds, ...placement.supportingTagIds];
+      return (
+        target?.scopeIds.some(
+          (scopeId) =>
+            tagById.get(scopeId)?.parentId === null &&
+            assignedTagIds.some((tagId) => tagHasAncestor(tagId, scopeId)),
+        ) === true
+      );
+    }
+    return placement.learningUnitIds.some((unitId) => unitHasAncestor(unitId, targetId));
+  };
+  for (const entry of build.integrationMap.entries) {
+    if (
+      entry.finalEntityIds.some((id) => candidateKindById.get(id) !== entry.previewEntityKind) ||
+      entry.affectedProblemIds.some((id) => !problemIdSet.has(id))
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['integrationMap'],
+        message: `Integration entry ${entry.previewEntityId} has an unknown final target or Problem.`,
+      });
+    }
+    if (entry.action === 'split') {
+      for (const assignment of entry.splitProblemAssignments) {
+        for (const problemId of assignment.problemIds) {
+          const placement = placementByProblemId.get(problemId);
+          const assignedIds =
+            entry.previewEntityKind === 'tag'
+              ? placement === undefined
+                ? []
+                : [...placement.primaryTagIds, ...placement.supportingTagIds]
+              : entry.previewEntityKind === 'outcome'
+                ? placement === undefined
+                  ? []
+                  : [
+                      placement.primaryOutcomeId,
+                      ...placement.additionalPrimaryOutcomeIds,
+                      ...placement.supportingOutcomeIds,
+                    ]
+                : (placement?.learningUnitIds ?? []);
+          const usesAssignedTarget =
+            entry.previewEntityKind === 'unit'
+              ? placementUsesTarget(placement, 'unit', assignment.finalEntityId)
+              : assignedIds.includes(assignment.finalEntityId);
+          if (!usesAssignedTarget) {
+            context.addIssue({
+              code: 'custom',
+              path: ['integrationMap'],
+              message: `Split target ${assignment.finalEntityId} is missing from ${problemId}.`,
+            });
+          }
+        }
+      }
+    }
+    const representativeAssignments =
+      entry.action === 'split'
+        ? entry.splitProblemAssignments.map(({ finalEntityId, representativeProblemIds }) => ({
+            finalEntityId,
+            representativeProblemIds,
+          }))
+        : entry.action === 'promote' || entry.action === 'merge'
+          ? [
+              {
+                finalEntityId: entry.finalEntityIds[0],
+                representativeProblemIds: entry.decisionEvidence.representativeProblemIds,
+              },
+            ]
+          : [];
+    for (const { finalEntityId, representativeProblemIds } of representativeAssignments) {
+      for (const problemId of representativeProblemIds) {
+        const placement = placementByProblemId.get(problemId);
+        if (
+          finalEntityId === undefined ||
+          !placementUsesTarget(placement, entry.previewEntityKind, finalEntityId)
+        ) {
+          context.addIssue({
+            code: 'custom',
+            path: ['integrationMap'],
+            message: `Representative ${problemId} does not use target ${finalEntityId ?? '<missing>'}.`,
+          });
+        }
+      }
+    }
+  }
+
+  const impactIds = build.correctionImpacts.map(({ id }) => id);
+  const referencedImpactIds = build.integrationMap.entries.flatMap(
+    ({ correctionImpactIds }) => correctionImpactIds,
+  );
+  if (!sameFinalTaxonomySet(impactIds, referencedImpactIds)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['correctionImpacts'],
+      message: 'Correction impact IDs must exactly cover the integration map.',
+    });
+  }
+  for (const impact of build.correctionImpacts) {
+    const owningEntries = build.integrationMap.entries.filter(({ correctionImpactIds }) =>
+      correctionImpactIds.includes(impact.id),
+    );
+    const expectedPreviewIds = owningEntries.map(({ previewEntityId }) => previewEntityId);
+    const expectedProblemIds = [
+      ...new Set(owningEntries.flatMap(({ affectedProblemIds }) => affectedProblemIds)),
+    ];
+    if (
+      !sameFinalTaxonomySet(impact.integrationPreviewEntityIds, expectedPreviewIds) ||
+      !sameFinalTaxonomySet(impact.affectedProblemIds, expectedProblemIds) ||
+      impact.sourceRevisionIds.some((id) => !sourceIdSet.has(id)) ||
+      impact.affectedLearningUnitCandidateIds.some((id) => !unitIdSet.has(id))
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['correctionImpacts'],
+        message: `Correction impact ${impact.id} has stale integration scope.`,
+      });
+    }
+  }
+
+  if (
+    build.inputs.inventory.inventoryDigest !== build.integrationMap.inventoryDigest ||
+    build.inputs.previewSnapshot.joinDigest !== build.integrationMap.previewSnapshotDigest ||
+    build.integrationMapDigest !== build.integrationMap.integrationDigest
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['inputs'],
+      message: 'Final taxonomy input digests do not match the integration map.',
+    });
+  }
+  const subject = {
+    inputs: build.inputs,
+    policy: build.policy,
+    integrationSubjectDigest: build.integrationMap.integrationSubjectDigest,
+    finalCandidates: build.finalCandidates,
+    tagPrerequisites: build.tagPrerequisites,
+    learningUnitPrerequisites: build.learningUnitPrerequisites,
+    standardOrder: build.standardOrder,
+    placements: build.placements,
+    correctionImpacts: build.correctionImpacts.map((impact) =>
+      Object.fromEntries(
+        Object.entries(impact).filter(([field]) => field !== 'verificationStatus'),
+      ),
+    ),
+    sourceRevisionIds: build.sourceRevisionIds,
+  };
+  const expectedSubjectDigest = canonicalDigest(subject);
+  if (
+    build.taxonomySubjectDigest !== expectedSubjectDigest ||
+    build.reviewEvidenceRefs.some(
+      (reference) =>
+        reference.subjectDigest !== expectedSubjectDigest ||
+        reference.reviewMode !== build.policy.requiredReviewMode,
+    )
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['reviewEvidenceRefs'],
+      message: 'Current-subject review evidence is missing or uses the wrong review mode.',
+    });
+  }
+  const expectedDigests = {
+    integrationMapDigest: build.integrationMap.integrationDigest,
+    taxonomyDigest: canonicalDigest(build.finalCandidates),
+    tagDagDigest: canonicalDigest(build.tagPrerequisites),
+    learningUnitDagDigest: canonicalDigest(build.learningUnitPrerequisites),
+    orderDigest: canonicalDigest(build.standardOrder),
+    placementDigest: canonicalDigest(build.placements),
+    correctionImpactDigest: canonicalDigest(build.correctionImpacts),
+  };
+  for (const [field, expected] of Object.entries(expectedDigests)) {
+    if (build[field as keyof typeof expectedDigests] !== expected) {
+      context.addIssue({
+        code: 'custom',
+        path: [field],
+        message: `${field} is stale.`,
+      });
+    }
+  }
+  const accepted = build.status === 'accepted';
+  const acceptedReviewEvidenceId = build.reviewEvidenceRefs[0]?.evidenceId;
+  if (
+    accepted !== (build.acceptedAt !== null) ||
+    accepted !== build.canonicalMaterializationAllowed ||
+    (accepted &&
+      (build.reviewEvidenceRefs.length !== 1 ||
+        build.holdReasons.length > 0 ||
+        build.integrationMap.status !== 'accepted' ||
+        build.integrationMap.entries.some(
+          ({ reviewEvidenceId }) => reviewEvidenceId !== acceptedReviewEvidenceId,
+        ) ||
+        build.correctionImpacts.some(
+          ({ verificationStatus }) => verificationStatus !== 'reviewed',
+        ) ||
+        build.policy.requiredReviewMode !==
+          (build.policy.riskReasons.length > 0 ? 'third_party' : 'self'))) ||
+    (build.status === 'rejected' && build.holdReasons.length === 0)
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['status'],
+      message: 'Final taxonomy acceptance fields are inconsistent.',
+    });
+  }
+  if (digestWithoutField(build, 'buildDigest') !== build.buildDigest) {
+    context.addIssue({
+      code: 'custom',
+      path: ['buildDigest'],
+      message: 'Final taxonomy build digest is stale.',
+    });
+  }
+});
+
+export const CatalogContract = defineZodContractSchema(
+  'catalog.schema.json',
+  CatalogSchema,
+  {
+    $id: 'https://abc-textbook.local/schemas/catalog.schema.json',
+    title: 'ABC Textbook Catalog',
+    description:
+      'ABC212以降を開催済みContestと公式欠番証跡で連続被覆し、各公式問題一覧でDより後に並ぶ全問題、全コーパスTechnique Inventory、典型体系、学習単位、公開履歴を表す。problem labelは固定E〜H enumではなく公式task orderから導出する。',
+  },
+  {
+    ProblemAnalysisClaimRef: ProblemAnalysisClaimRefSchema,
+    LearningUnitTaxonomyCandidate: LearningUnitTaxonomyCandidateSchema,
+    FinalTaxonomyCandidate: FinalTaxonomyCandidateSchema,
+    FinalProblemPlacementProjection: FinalProblemPlacementProjectionSchema,
+    PreMaterializationCorrectionImpact: PreMaterializationCorrectionImpactSchema,
+    TaxonomyIntegrationMap: TaxonomyIntegrationMapSchema,
+    FinalTaxonomyBuild: FinalTaxonomyBuildSchema,
+  },
+);
 
 const semver = z.string().regex(/^\d+\.\d+\.\d+$/u);
 const portablePath = z

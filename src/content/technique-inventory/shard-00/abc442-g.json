@@ -52,9 +52,9 @@
   },
   "typicalTechniques": [
     {
-      "name": "最小公倍数による重量統一",
+      "name": "最小公倍数による有限剰余case列挙",
       "trigger": "品物の重さ種類が少数の小整数に限られる knapsack のとき。",
-      "application": "選択個数の剰余を固定し、残りを共通重量の group へまとめる。",
+      "application": "選択個数を6/iで割った剰余R_iを固定し、R_1×R_2×R_3の候補数を6×3×2=36通りに界して、残りを共通重量6のgroupへまとめる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -67,7 +67,7 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "最小公倍数による重量統一と、その不変条件・境界条件を説明できること。",
+      "text": "最小公倍数で選択個数を商と剰余へ分け、剰余候補が6×3×2=36通りで尽くされる上界と、共通重量groupの不変条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

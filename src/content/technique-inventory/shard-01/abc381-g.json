@@ -58,9 +58,9 @@
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "chirp-z transform",
-      "trigger": "多項式を等比数列上の多数点で評価したいとき。",
-      "application": "係数変形により一回の convolution へ落とす。",
+      "name": "baby-step/giant-stepとchirp-z transform",
+      "trigger": "巨大な指数範囲を平方根幅へ分け、等比数列上の多数点で評価したいとき。",
+      "application": "指数を√N×√Nに分割し、各blockの等比点評価を係数変形によるconvolutionへ落とす。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -73,7 +73,7 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "有限体、二次拡大、Fibonacci 一般項、NTT/FPS、多項式 doubling、chirp-z transform を理解していること。",
+      "text": "有限体、二次拡大、Fibonacci 一般項、baby-step/giant-step、NTT/FPS、多項式 doubling、chirp-z transform を理解していること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

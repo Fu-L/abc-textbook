@@ -58,7 +58,7 @@
     {
       "name": "交換法によるsupport削減",
       "trigger": "多数種類の同価操作を可換に組み合わせ、vector relationで同じ結果をより少ない種類へ変形できるとき。",
-      "application": "8方向moveの三種類以上の併用を置換し、optimal候補を二方向または限定された三方向形へ絞る。",
+      "application": "8方向moveの三種類以上の併用を置換し、定数個の二方向pairと限定された三方向例外を漏れなく全列挙する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {

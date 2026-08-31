@@ -21,13 +21,13 @@
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "人ごとに長い ray を愚直に伸ばしても、同方向走査なら各マスを定数回にできる。四方向からの sweep で最後に見た人の向きを管理する方法なら明確に O(HW) である。",
+        "text": "人ごとに長い ray を独立に伸ばす代わりに、各行・各列を四方向から一度ずつ読む。最後に見たblockerの種類だけを持てば各マスを定数回で処理できる。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "candidateApproaches": [
       {
-        "approach": "四方向の grid sweep で監視マスを印付け、そのマスと障害物・人を通行不可にして S から BFS する。",
+        "approach": "行列の四方向scanで監視マスを印付け、そのマスと障害物・人を通行不可にして S から BFS する。",
         "decision": "adopted",
         "decisionReason": "前処理と探索がともに O(HW) で、視線計算と最短路計算の責務を分離できる。",
         "evidenceIds": ["evidence-official-analysis"]
@@ -41,11 +41,11 @@
     ],
     "keyInsights": [
       {
-        "text": "左から右の sweep では最後の blocker が右向き人ならその後の空きマスが監視下で、壁または別の人に会った時点で active を更新・解除する。残り三方向も同型である。",
+        "text": "左から右のscanでは最後のblockerが右向き人なら、その後の空きマスは監視下にある。壁または別の人に会った時点で状態を更新し、残り三方向も同様に処理する。",
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "監視マスは通れないが視線を遮らない。視線を止めるのは # と四種の人だけなので、mark 済み空きマスで sweep を止めてはいけない。",
+        "text": "監視マスは通れないが視線を遮らない。視線を止めるのは # と四種の人だけなので、mark済み空きマスでscanを止めてはいけない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
@@ -56,9 +56,9 @@
   },
   "typicalTechniques": [
     {
-      "name": "ray constraint の方向 sweep",
+      "name": "ray制約の四方向scan",
       "trigger": "grid 上の直線効果が blocker まで続き、方向種類が定数個のとき。",
-      "application": "各走査線で現在 active な ray の有無だけを持って全マスを一度ずつ印付ける。",
+      "application": "各行・各列を一方向にscanし、現在activeなrayの有無だけを持って全マスを一度ずつ印付ける。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
@@ -70,7 +70,7 @@
   ],
   "problemSpecificInsights": [
     {
-      "insight": "監視されたことと視線を遮ることは別属性であり、前者を obstacle として BFS に使っても ray sweep の blocker にはしない。",
+      "insight": "監視されたことと視線を遮ることは別属性であり、前者をobstacleとしてBFSに使っても方向別scanのblockerにはしない。",
       "reusablePerspective": "grid 前処理では「入れない」「効果を止める」を同じ boolean に潰さず、意味ごとに分ける。",
       "evidenceIds": ["evidence-official-analysis"]
     }
@@ -81,19 +81,19 @@
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "行列の四方向 sweep",
+      "text": "行列の四方向scan",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "implementationConcerns": [
     {
-      "text": "S/G は監視外保証だが sweep 上では空きマス同様に視線を通す。人のマス自身は viewed にせずとも常に BFS 禁止とする。",
+      "text": "S/Gは監視外保証だが方向別scanでは空きマス同様に視線を通す。人のマス自身はviewedにせずとも常にBFS禁止とする。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
   "outcomeCandidates": [
     {
-      "text": "長い視線を各マス定数回の sweep で静的障害へ変え、最短安全経路を全体 O(HW) で求められる。",
+      "text": "長い視線を行列の四方向scanで静的障害へ変え、最短安全経路を全体 O(HW) で求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

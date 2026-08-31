@@ -58,7 +58,7 @@
     {
       "name": "Stern–Brocot treeと連分数的skip",
       "trigger": "coprime positive pairsがmediant operationsで生成され、naive tree depthが座標値まで伸びるとき。",
-      "application": "interval boundsを保ち、全targetsが同じ側にある最大連続step数をまとめて進める。",
+      "application": "各nodeでtargetsを左右へ再帰分割し、全targetsが同じ側にある最大連続step数はinterval boundsからまとめて進める。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {

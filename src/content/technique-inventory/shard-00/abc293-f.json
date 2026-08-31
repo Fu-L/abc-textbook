@@ -56,7 +56,7 @@
     {
       "name": "表現範囲の分離",
       "trigger": "基数候補が多そうだが桁数固定で値域が離れる。",
-      "application": "候補を一基数へ絞る。",
+      "application": "O(log N)個の桁数を列挙し、各桁数では表現範囲の非交差性から候補基数を高々一つへ絞る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

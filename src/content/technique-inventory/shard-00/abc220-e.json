@@ -27,7 +27,7 @@
     ],
     "candidateApproaches": [
       {
-        "approach": "LCA の深さごとに、片端が LCA の場合と両端が左右の子部分木にある場合を式で数え、同深さの頂点数を掛ける。",
+        "approach": "二端点のpathが最初に合流する頂点の深さごとに、片端が合流点の場合と両端が左右の子部分木にある場合を式で数え、同深さの頂点数を掛ける。",
         "decision": "adopted",
         "decisionReason": "完全二分木の対称性により個々の頂点を消し、さらに有効な距離分割 k が連続区間になるため、その個数も端点だけで求められる。",
         "evidenceIds": ["evidence-official-analysis"]
@@ -56,9 +56,9 @@
   },
   "typicalTechniques": [
     {
-      "name": "LCA による頂点対の一意分類",
-      "trigger": "根付き木で二頂点間 path の長さを固定して対を数えるとき。",
-      "application": "LCA から両端への距離分割を列挙し、同じ対を重複させず部分木ごとに数える。",
+      "name": "完全二分木の距離分割",
+      "trigger": "暗黙の完全二分木で距離を固定した頂点対を数えるとき。",
+      "application": "二端点のpathが最初に合流する深さと、そこから両端への距離分割で各対を一意に分類する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
@@ -77,7 +77,7 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "根付き木の LCA、完全二分木の深さ別個数、modular exponentiation",
+      "text": "根付き木の共通祖先と距離、完全二分木の深さ別個数、modular exponentiation",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -89,7 +89,7 @@
   ],
   "outcomeCandidates": [
     {
-      "text": "指数個の完全木を展開せず、LCA・深さ対称性・距離 split 区間から順序付き頂点対を数えられる。",
+      "text": "指数個の完全木を展開せず、共通祖先の深さ・対称性・距離split区間から順序付き頂点対を数えられる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

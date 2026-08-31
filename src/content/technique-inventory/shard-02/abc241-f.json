@@ -52,7 +52,7 @@
   },
   "typicalTechniques": [
     {
-      "name": "巨大グリッドの重要点圧縮",
+      "name": "巨大グリッドの停止候補への縮約",
       "trigger": "座標範囲は巨大だが、移動規則により停止・分岐できる点が障害物周辺などに限られるとき。",
       "application": "重要点だけを graph vertex とし、空白区間を一辺の遷移へ圧縮する。",
       "evidenceIds": ["evidence-official-analysis"]
@@ -73,7 +73,7 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "BFS、座標圧縮、ordered map/list、二分探索",
+      "text": "BFS、行・列別sorted list、ordered map/list、lower_boundによる二分探索",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

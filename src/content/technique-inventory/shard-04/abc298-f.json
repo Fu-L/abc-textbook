@@ -50,7 +50,7 @@
     {
       "name": "疎行列の行列和集約",
       "trigger": "非零cellのみ与えられ行・列合計を組み合わせる。",
-      "application": "hash mapと座標圧縮で交点補正を引く。",
+      "application": "hash mapで入力に現れる行・列・cellだけを保持し、交点のcell値を補正として引く。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {

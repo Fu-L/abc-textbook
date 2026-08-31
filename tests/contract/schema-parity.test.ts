@@ -11,6 +11,7 @@ import {
 } from '../../scripts/generate-json-schemas.js';
 import { canonicalJson } from '../../src/lib/domain/canonical-json.js';
 import { validateContractValue } from '../../src/lib/domain/contract-schema.js';
+import { CatalogContract } from '../../src/lib/domain/schema-parts/catalog.js';
 import { LearningRecordContract } from '../../src/lib/domain/schema-parts/learning.js';
 import {
   ReleaseMetadataContract,
@@ -114,6 +115,50 @@ describe('canonical Zod and JSON Schema parity', () => {
     // JSON Schema cannot express uniqueness by a nested problemId property.
     expect(validateJsonSchema(duplicateRecords)).toBe(true);
     expect(validateContractValue(LearningRecordContract, duplicateRecords)).toBe(false);
+  });
+
+  it('publishes T159 staging definitions without widening the public Catalog root', () => {
+    const properties = CatalogContract.jsonSchema.properties as Record<string, unknown>;
+    const definitions = CatalogContract.jsonSchema.$defs as Record<string, unknown>;
+
+    expect(Object.keys(properties).sort()).toEqual(
+      [
+        'schemaVersion',
+        'release',
+        'advancedSlotRegistry',
+        'contests',
+        'contestGaps',
+        'contestSlots',
+        'problems',
+        'techniqueInventory',
+        'tags',
+        'learningOutcomes',
+        'learningUnits',
+        'placements',
+        'authoringUnits',
+        'sources',
+        'correctionImpacts',
+      ].sort(),
+    );
+    expect(properties).not.toHaveProperty('finalTaxonomyBuild');
+    expect(properties).not.toHaveProperty('taxonomyIntegrationMap');
+    expect(definitions).toHaveProperty('FinalTaxonomyBuild');
+    expect(definitions).toHaveProperty('TaxonomyIntegrationMap');
+    expect(definitions).toHaveProperty('LearningUnitTaxonomyCandidate');
+
+    const ajv = new Ajv2020({ allErrors: true, strict: false });
+    addFormats(ajv);
+    ajv.addSchema(CatalogContract.jsonSchema);
+    expect(
+      ajv.getSchema(
+        'https://abc-textbook.local/schemas/catalog.schema.json#/$defs/FinalTaxonomyBuild',
+      ),
+    ).toBeTypeOf('function');
+    expect(
+      ajv.getSchema(
+        'https://abc-textbook.local/schemas/catalog.schema.json#/$defs/TaxonomyIntegrationMap',
+      ),
+    ).toBeTypeOf('function');
   });
 
   it('gives Zod and Ajv the same answer for valid, unknown-field, and duplicate inputs', () => {

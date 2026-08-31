@@ -54,7 +54,7 @@
     {
       "name": "剰余オートマトンの BFS",
       "trigger": "桁列条件を満たす最小の N の倍数を探し、値を直接保持できないとき。",
-      "application": "剰余と局所桁条件だけを状態にして一桁追加を辺とする。",
+      "application": "先頭桁と各状態からの追加桁を昇順に試し、剰余と末尾桁の未訪問状態へ初めて到達したとき親状態と追加桁を記録する。remainder=0から親を逆に辿り、反転して最短・辞書順最小の整数を復元する。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],
@@ -67,7 +67,7 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "剰余オートマトンの BFSと、その不変条件・境界条件を説明できること。",
+      "text": "剰余オートマトンを桁の昇順でBFSし、初回到達時の親状態・追加桁を記録して逆順に辿る解復元と、その不変条件・境界条件を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

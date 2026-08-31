@@ -60,7 +60,7 @@
     {
       "name": "固定weightの区間moment",
       "trigger": "run内で距離に一次なweight総和を繰り返し求めるとき。",
-      "application": "Σc_xとΣxc_xのprefixから閉形式寄与を得る。",
+      "application": "query座標と必要境界をsort-uniqueしてdense indexへ写し、Σc_xとΣxc_xのprefixから閉形式寄与を得る。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

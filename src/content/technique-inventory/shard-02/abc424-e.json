@@ -54,9 +54,9 @@
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "同値pieceのfrequency集約",
-      "trigger": "操作後に現れる長さが元A_i/2^qのdyadic値に限られる。",
-      "application": "pieceを個別生成せずlength→count mapで順位を求める。",
+      "name": "完全二分木の層数式とfrequency集約",
+      "trigger": "同じobjectへの反復二分操作が、深さqの完全二分木として対称に展開されるとき。",
+      "application": "各棒のq回分割を内部node数2^q−1・葉数2^qで数え、pieceを個別生成せずlength→count mapで順位を求める。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

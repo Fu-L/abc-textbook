@@ -11,10 +11,58 @@ export interface ContractSchemaDefinition {
   readonly reuseJsonSchemaReferences?: boolean;
 }
 
+const CONTRACT_ROOT_DEFINITION = '__contractRoot';
+
+const contractJsonSchema = (
+  schema: z.ZodType,
+  supplementalSchemas: Readonly<Record<string, z.ZodType>>,
+): JsonSchemaDocument => {
+  if (Object.keys(supplementalSchemas).length === 0) {
+    return z.toJSONSchema(schema, {
+      target: 'draft-2020-12',
+      reused: 'ref',
+    });
+  }
+
+  if (Object.hasOwn(supplementalSchemas, CONTRACT_ROOT_DEFINITION)) {
+    throw new Error(`${CONTRACT_ROOT_DEFINITION} is reserved for the contract root schema.`);
+  }
+
+  const bundleShape = Object.fromEntries([
+    [CONTRACT_ROOT_DEFINITION, schema.meta({ id: CONTRACT_ROOT_DEFINITION })],
+    ...Object.entries(supplementalSchemas).map(([name, supplementalSchema]) => [
+      name,
+      supplementalSchema.meta({ id: name }),
+    ]),
+  ]) as z.ZodRawShape;
+  const bundle = z.toJSONSchema(z.strictObject(bundleShape), {
+    target: 'draft-2020-12',
+    reused: 'ref',
+  }) as JsonSchemaDocument;
+  const definitions = bundle.$defs;
+  if (definitions === null || typeof definitions !== 'object' || Array.isArray(definitions)) {
+    throw new Error('Supplemental contract schemas did not produce JSON Schema definitions.');
+  }
+  const { [CONTRACT_ROOT_DEFINITION]: root, ...supplementalDefinitions } = definitions as Record<
+    string,
+    unknown
+  >;
+  if (root === null || typeof root !== 'object' || Array.isArray(root)) {
+    throw new Error('Contract root JSON Schema definition is missing.');
+  }
+
+  return {
+    $schema: bundle.$schema,
+    ...(root as Readonly<Record<string, unknown>>),
+    $defs: supplementalDefinitions,
+  };
+};
+
 export const defineZodContractSchema = (
   fileName: ContractSchemaDefinition['fileName'],
   schema: z.ZodType,
   metadata: Readonly<Record<string, unknown>> = {},
+  supplementalSchemas: Readonly<Record<string, z.ZodType>> = {},
 ): ContractSchemaDefinition => {
   const annotatedSchema = schema.meta({
     ...metadata,
@@ -25,10 +73,7 @@ export const defineZodContractSchema = (
   return {
     fileName,
     schema: annotatedSchema,
-    jsonSchema: z.toJSONSchema(annotatedSchema, {
-      target: 'draft-2020-12',
-      reused: 'ref',
-    }),
+    jsonSchema: contractJsonSchema(annotatedSchema, supplementalSchemas),
     semanticValidation: 'canonical-zod',
     reuseJsonSchemaReferences: true,
   };

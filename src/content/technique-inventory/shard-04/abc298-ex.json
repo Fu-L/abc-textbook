@@ -50,7 +50,7 @@
     {
       "name": "木のVoronoi二分",
       "trigger": "二つのsiteへの近距離で全頂点を分割する。",
-      "application": "二点path中央の辺を境界にする。",
+      "application": "LCAで二点間距離を求め、level ancestorで深い端点からpath中央直前まで上って境界辺を特定し、その両側へ二分する。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {

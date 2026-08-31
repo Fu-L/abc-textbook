@@ -254,14 +254,20 @@ shard indexのProblem ID集合は、final Catalogの全対象Problem集合と完
 | `id` | 安定Tag ID |
 | `name` / `definition` | 正式名と短い定義 |
 | `parentId` | Tagまたはnull root |
-| `prerequisiteTagIds` | 親関係とは別のDAG |
+| `prerequisiteTagIds` | 親関係とは別のcurriculum prerequisite DAG。先行すると説明・実装・考察を再利用できる教材上のprecedence constraint |
+| `semanticSignature` | `objectPatterns`, `triggerPatterns`, `invariantPatterns`, `goalPatterns`, `excludedPatterns`, `minimumDimensions`, `requireObjectForStrictRecall`。未知問でこのTagを想起すべき条件を保持。各`*Patterns`は`iu` flagで評価するmachine-readableな正規表現sourceであり、学習者向け文章としてそのまま表示することを要求しない |
+| `relatedTags` | 前提以外の`contrast`, `analogy`, `specialization`, `extension`, `reduction`, `often_combined`, `implementation_substrate`。該当関係がある場合だけ対象Tagと具体的な学習理由を保持し、なければ空配列を許容 |
 | `learningOutcomeIds` | 一つ以上 |
 | `representativeProblemIds` | 一つ以上 |
 | `aliases` / `formerNames` | 全Tagで一意 |
 | `lifecycle` | active/deprecated |
 | `replacementTagIds` | deprecated時に一つ以上 |
 
-同義Tag、Problem一問だけを言い換えたTag、ad-hoc要素だけのTagを正式化してはならない。
+同義Tag、Problem一問だけを言い換えたTag、ad-hoc要素だけのTagを正式化してはならない。ただし、一問からしか観測されていなくても独立した再利用技能であると明示的にreviewされたcanonical singleton Tagは許容する。
+
+relation typeは学習者が再利用すべき思考を表す。`specialization`はsourceがtargetの狭い一種で、targetの中心的な定義が変形なしに成り立つ向き、`extension`はsourceがtargetのモデル・算法へ目的、制約、操作、interfaceのいずれかを加えて新しい不変条件または算法を要する向き、`reduction`はsourceを意味保存変換した先をtargetとして解く向き、`implementation_substrate`はsourceの主たるモデル化後にtargetを実装部品として使う向きとする。`contrast`, `analogy`, `often_combined`は両側から辿れる対称関係として保持する。curriculum prerequisiteとtyped relationは意味が異なるため、同じ二Tag間で両方が成立する場合は併記してよい。
+
+`semanticSignature`の各`*Patterns`は検索・認識検査用の正規表現sourceであり、無効なpatternを受理しない。UIや教材本文はlearner-facingな`name`, `definition`, `aliases`等を使い、`sort.?unique`や`\bDP\b`のような内部patternを説明文としてそのまま表示しない。
 
 ### LearningOutcome
 
@@ -280,7 +286,7 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 | `id` / `kind` | chapter, section, subsection |
 | `parentId` | 階層上の親またはnull |
 | `baselineId` / `baselineVersion` | 共通前提 |
-| `additionalPrerequisiteUnitIds` | 追加前提または空配列 |
+| `additionalPrerequisiteUnitIds` | 追加curriculum prerequisiteまたは空配列。単独学習が論理的に不可能という意味には限定しない |
 | `excludedTopics` | 意図的対象外 |
 | `sourceRevisionIds` | 単位本文と所有例の根拠 |
 | `tagIds` / `learningOutcomeIds` | 各一つ以上 |
@@ -290,7 +296,7 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 | `stageRank` / `difficultyRank` / `representativeRank` | 0以上の整数 |
 | `globalIndex` / `orderReason` | 生成順と説明 |
 
-親子関係と前提関係は別に検証する。標準順は前提DAGをhard constraintとし、入次数0の候補だけを3 rank、最後にUnit IDのUTF-8 byte順で比較する。
+親子関係と前提関係は別に検証する。標準順はcurriculum prerequisite DAGをprecedence constraintとし、入次数0の候補だけを3 rank、最後にUnit IDのUTF-8 byte順で比較する。単なる併用、同分野、類似実装だけでは前提辺を追加せず、`relatedTags`へ理由付きで記録する。
 
 ### ProblemPlacement
 

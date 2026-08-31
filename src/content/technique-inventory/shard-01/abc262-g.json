@@ -83,7 +83,7 @@
   ],
   "implementationConcerns": [
     {
-      "text": "値は座標圧縮して種類数以下にし、空の位置区間の値を0として境界 m=i,j も統一する。",
+      "text": "値域1…50をそのままDP添字に使い、空の位置区間の値を0として境界 m=i,j も統一する。入力値は最初から小さなdense値域なので座標圧縮は不要である。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
