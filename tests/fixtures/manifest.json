@@ -62,12 +62,13 @@
       "id": "weekly-update-review-policy",
       "path": "tests/fixtures/weekly-update",
       "owner": "release-pipeline",
-      "purpose": "通常更新を外部person IDなしのself-reviewで完了し、高リスク条件だけselfに代わるthird-party reviewへ分岐することを検証する",
+      "purpose": "通常更新を外部person IDなしのself-reviewで完了し、高リスク条件ではthird-partyまたは明示的なsolo-maintainer self-reviewへ分岐することを検証する",
       "requiredCases": [
         "normal-self-review-without-external-person",
         "official-source-conflict-requires-third-party",
         "original-proof-requires-third-party",
-        "major-classification-change-requires-third-party"
+        "major-classification-change-requires-third-party",
+        "major-classification-change-allows-explicit-solo-maintainer-self-review"
       ]
     },
     {

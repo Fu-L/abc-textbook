@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0.0",
   "id": "final-taxonomy-build-initial",
-  "generatedAt": "2026-08-08T09:00:00+09:00",
+  "generatedAt": "2026-08-31T14:18:40.713Z",
   "inputs": {
     "inventory": {
       "evidencePath": "docs/verification/bootstrap/technique-inventory.json",
@@ -28,8 +28,9 @@
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
     "rulesDigest": "62cecb5f5fbf425b46016d261ad3c8a8be6f8afd23fff959058a2ea869986640",
-    "requiredReviewMode": "third_party",
+    "requiredReviewMode": "self",
     "riskReasons": ["major_classification_change"],
+    "highRiskSelfReviewReason": "solo_maintainer",
     "authoringSkillName": "abc-explanation-author",
     "authoringSkillVersion": "1.1.1",
     "authoringSkillDigest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa",
@@ -37,7 +38,7 @@
     "writingPolicyDigest": "0f93019c063fe7806f341c962258066aa7f58e4bc85d5dc3ddd870754706e2e4",
     "sourceNormalizationVersion": "1.0.0",
     "workManifestPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-    "workManifestDigest": "4b45cf260e4014a8ae7a9b4e11c668a69b4335d05c31f206443b09d3aa6f0a03"
+    "workManifestDigest": "b78171ff272e903220cb857902789f0d09b082e15888a80af19ca36993b5ff79"
   },
   "integrationMap": {
     "schemaVersion": "2.0.0",
@@ -877,11 +878,12 @@
         ],
         "correctionImpactIds": ["impact-outcome-provisional-compressed-dp-state"],
         "reviewPolicy": {
-          "requiredMode": "third_party",
-          "riskReasons": ["major_classification_change"]
+          "requiredMode": "self",
+          "riskReasons": ["major_classification_change"],
+          "highRiskSelfReviewReason": "solo_maintainer"
         },
-        "reviewEvidenceId": null,
-        "status": "proposed",
+        "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+        "status": "accepted",
         "action": "promote",
         "finalEntityIds": ["outcome-design-minimal-sufficient-state"],
         "splitProblemAssignments": [],
@@ -1094,11 +1096,12 @@
         ],
         "correctionImpactIds": ["impact-outcome-provisional-multiplicative-order-counting"],
         "reviewPolicy": {
-          "requiredMode": "third_party",
-          "riskReasons": ["major_classification_change"]
+          "requiredMode": "self",
+          "riskReasons": ["major_classification_change"],
+          "highRiskSelfReviewReason": "solo_maintainer"
         },
-        "reviewEvidenceId": null,
-        "status": "proposed",
+        "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+        "status": "accepted",
         "action": "split",
         "finalEntityIds": [
           "outcome-count-through-cyclic-exponents",
@@ -1508,11 +1511,12 @@
         ],
         "correctionImpactIds": ["impact-outcome-provisional-range-aggregate-under-updates"],
         "reviewPolicy": {
-          "requiredMode": "third_party",
-          "riskReasons": ["major_classification_change"]
+          "requiredMode": "self",
+          "riskReasons": ["major_classification_change"],
+          "highRiskSelfReviewReason": "solo_maintainer"
         },
-        "reviewEvidenceId": null,
-        "status": "proposed",
+        "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+        "status": "accepted",
         "action": "promote",
         "finalEntityIds": ["outcome-derive-updateable-aggregate"],
         "splitProblemAssignments": [],
@@ -1725,11 +1729,12 @@
         ],
         "correctionImpactIds": ["impact-outcome-provisional-shortest-path-structure"],
         "reviewPolicy": {
-          "requiredMode": "third_party",
-          "riskReasons": ["major_classification_change"]
+          "requiredMode": "self",
+          "riskReasons": ["major_classification_change"],
+          "highRiskSelfReviewReason": "solo_maintainer"
         },
-        "reviewEvidenceId": null,
-        "status": "proposed",
+        "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+        "status": "accepted",
         "action": "split",
         "finalEntityIds": [
           "outcome-build-shortest-path-certificate",
@@ -2202,11 +2207,12 @@
         ],
         "correctionImpactIds": ["impact-provisional-tag-compressed-dp-state"],
         "reviewPolicy": {
-          "requiredMode": "third_party",
-          "riskReasons": ["major_classification_change"]
+          "requiredMode": "self",
+          "riskReasons": ["major_classification_change"],
+          "highRiskSelfReviewReason": "solo_maintainer"
         },
-        "reviewEvidenceId": null,
-        "status": "proposed",
+        "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+        "status": "accepted",
         "action": "promote",
         "finalEntityIds": ["tag-dp-state-equivalence"],
         "splitProblemAssignments": [],
@@ -2419,11 +2425,12 @@
         ],
         "correctionImpactIds": ["impact-provisional-tag-multiplicative-order-counting"],
         "reviewPolicy": {
-          "requiredMode": "third_party",
-          "riskReasons": ["major_classification_change"]
+          "requiredMode": "self",
+          "riskReasons": ["major_classification_change"],
+          "highRiskSelfReviewReason": "solo_maintainer"
         },
-        "reviewEvidenceId": null,
-        "status": "proposed",
+        "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+        "status": "accepted",
         "action": "split",
         "finalEntityIds": [
           "tag-cyclic-exponent-counting",
@@ -3028,11 +3035,12 @@
         ],
         "correctionImpactIds": ["impact-provisional-tag-range-aggregate-under-updates"],
         "reviewPolicy": {
-          "requiredMode": "third_party",
-          "riskReasons": ["major_classification_change"]
+          "requiredMode": "self",
+          "riskReasons": ["major_classification_change"],
+          "highRiskSelfReviewReason": "solo_maintainer"
         },
-        "reviewEvidenceId": null,
-        "status": "proposed",
+        "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+        "status": "accepted",
         "action": "promote",
         "finalEntityIds": ["tag-query-sufficient-aggregate"],
         "splitProblemAssignments": [],
@@ -3245,11 +3253,12 @@
         ],
         "correctionImpactIds": ["impact-provisional-tag-shortest-path-structure"],
         "reviewPolicy": {
-          "requiredMode": "third_party",
-          "riskReasons": ["major_classification_change"]
+          "requiredMode": "self",
+          "riskReasons": ["major_classification_change"],
+          "highRiskSelfReviewReason": "solo_maintainer"
         },
-        "reviewEvidenceId": null,
-        "status": "proposed",
+        "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+        "status": "accepted",
         "action": "split",
         "finalEntityIds": ["tag-shortest-path-certificate", "tag-witness-impact-localization"],
         "splitProblemAssignments": [
@@ -3818,11 +3827,12 @@
         ],
         "correctionImpactIds": ["impact-provisional-unit-compressed-dp-state"],
         "reviewPolicy": {
-          "requiredMode": "third_party",
-          "riskReasons": ["major_classification_change"]
+          "requiredMode": "self",
+          "riskReasons": ["major_classification_change"],
+          "highRiskSelfReviewReason": "solo_maintainer"
         },
-        "reviewEvidenceId": null,
-        "status": "proposed",
+        "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+        "status": "accepted",
         "action": "merge",
         "finalEntityIds": ["unit-dp-state-design"],
         "splitProblemAssignments": [],
@@ -4035,11 +4045,12 @@
         ],
         "correctionImpactIds": ["impact-provisional-unit-multiplicative-order-counting"],
         "reviewPolicy": {
-          "requiredMode": "third_party",
-          "riskReasons": ["major_classification_change"]
+          "requiredMode": "self",
+          "riskReasons": ["major_classification_change"],
+          "highRiskSelfReviewReason": "solo_maintainer"
         },
-        "reviewEvidenceId": null,
-        "status": "proposed",
+        "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+        "status": "accepted",
         "action": "split",
         "finalEntityIds": [
           "unit-cyclic-group-exponent-counting",
@@ -4512,11 +4523,12 @@
         ],
         "correctionImpactIds": ["impact-provisional-unit-range-aggregate-under-updates"],
         "reviewPolicy": {
-          "requiredMode": "third_party",
-          "riskReasons": ["major_classification_change"]
+          "requiredMode": "self",
+          "riskReasons": ["major_classification_change"],
+          "highRiskSelfReviewReason": "solo_maintainer"
         },
-        "reviewEvidenceId": null,
-        "status": "proposed",
+        "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+        "status": "accepted",
         "action": "split",
         "finalEntityIds": ["unit-range-monoid-aggregation", "unit-weighted-prefix-fenwick"],
         "splitProblemAssignments": [
@@ -4878,11 +4890,12 @@
         ],
         "correctionImpactIds": ["impact-provisional-unit-shortest-path-structure"],
         "reviewPolicy": {
-          "requiredMode": "third_party",
-          "riskReasons": ["major_classification_change"]
+          "requiredMode": "self",
+          "riskReasons": ["major_classification_change"],
+          "highRiskSelfReviewReason": "solo_maintainer"
         },
-        "reviewEvidenceId": null,
-        "status": "proposed",
+        "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+        "status": "accepted",
         "action": "split",
         "finalEntityIds": ["unit-change-impact-localization", "unit-shortest-path-reconstruction"],
         "splitProblemAssignments": [
@@ -5254,12 +5267,12 @@
         }
       }
     ],
-    "status": "proposed",
+    "status": "accepted",
     "canonicalMaterializationAllowed": false,
-    "integrationSubjectDigest": "19f255576a648aa3c513930a0e351d68977413203831c83af32cadc2c9bbb9cf",
-    "integrationDigest": "19c16722b13bd8e26c7ad2cb8946d593063b7b7c223e7acf49ce2696a08e09ae"
+    "integrationSubjectDigest": "ee0eefbdb599a34f9b5e7af8150503aff28563313c91098d9fad6745871db49c",
+    "integrationDigest": "a37fc5de5d3f97b17fd2ddb0858be4d7920d96794ea37bc7e420be7dfbdca5f3"
   },
-  "integrationMapDigest": "19c16722b13bd8e26c7ad2cb8946d593063b7b7c223e7acf49ce2696a08e09ae",
+  "integrationMapDigest": "a37fc5de5d3f97b17fd2ddb0858be4d7920d96794ea37bc7e420be7dfbdca5f3",
   "finalCandidates": [
     {
       "kind": "tag",
@@ -243402,7 +243415,7 @@
       "derivedIndexPaths": ["src/content/indexes/taxonomy.json"],
       "canonicalMaterializationTask": "T049",
       "coverageStatus": "complete",
-      "verificationStatus": "pending",
+      "verificationStatus": "reviewed",
       "impactSubjectDigest": "df257e404bf7dae49f929d949f8389d798cb6b1bf5e7b42a5337140b9c28d90a"
     },
     {
@@ -248842,7 +248855,7 @@
       "derivedIndexPaths": ["src/content/indexes/taxonomy.json"],
       "canonicalMaterializationTask": "T049",
       "coverageStatus": "complete",
-      "verificationStatus": "pending",
+      "verificationStatus": "reviewed",
       "impactSubjectDigest": "abb19dd77070717501b0324ceb0511d44b0d81c2afa0a2fd3c5d78ad2e9792b3"
     },
     {
@@ -251491,7 +251504,7 @@
       "derivedIndexPaths": ["src/content/indexes/taxonomy.json"],
       "canonicalMaterializationTask": "T049",
       "coverageStatus": "complete",
-      "verificationStatus": "pending",
+      "verificationStatus": "reviewed",
       "impactSubjectDigest": "207fe8bc6f033bc62f8798a090a054a09b7929e30f57c3f509071114b6786d7c"
     },
     {
@@ -261113,7 +261126,7 @@
       "derivedIndexPaths": ["src/content/indexes/taxonomy.json"],
       "canonicalMaterializationTask": "T049",
       "coverageStatus": "complete",
-      "verificationStatus": "pending",
+      "verificationStatus": "reviewed",
       "impactSubjectDigest": "540fda3449463a9787a5753a386cdba40e7ac6676d59469d50e28f76527b0cd0"
     },
     {
@@ -264782,7 +264795,7 @@
       "derivedIndexPaths": ["src/content/indexes/taxonomy.json"],
       "canonicalMaterializationTask": "T049",
       "coverageStatus": "complete",
-      "verificationStatus": "pending",
+      "verificationStatus": "reviewed",
       "impactSubjectDigest": "d0c3b5531db245057739df765c9c3a975e049066ccfd0063ceafd37919757ee1"
     },
     {
@@ -278215,7 +278228,7 @@
       "derivedIndexPaths": ["src/content/indexes/taxonomy.json"],
       "canonicalMaterializationTask": "T049",
       "coverageStatus": "complete",
-      "verificationStatus": "pending",
+      "verificationStatus": "reviewed",
       "impactSubjectDigest": "52c14c15bab77920994a388bc07eef1d95c224293dc46d117f02864e98cb67c7"
     },
     {
@@ -280864,7 +280877,7 @@
       "derivedIndexPaths": ["src/content/indexes/taxonomy.json"],
       "canonicalMaterializationTask": "T049",
       "coverageStatus": "complete",
-      "verificationStatus": "pending",
+      "verificationStatus": "reviewed",
       "impactSubjectDigest": "a078626e23e100ced716d83fa8071671528d56205ca5abc6c53e49fb9366d3a0"
     },
     {
@@ -290486,7 +290499,7 @@
       "derivedIndexPaths": ["src/content/indexes/taxonomy.json"],
       "canonicalMaterializationTask": "T049",
       "coverageStatus": "complete",
-      "verificationStatus": "pending",
+      "verificationStatus": "reviewed",
       "impactSubjectDigest": "c5bec8635b9b06bc7df4dfb39299ded9785f2fc7f249218227cd296005139bbf"
     },
     {
@@ -293018,7 +293031,7 @@
       "derivedIndexPaths": ["src/content/indexes/taxonomy.json"],
       "canonicalMaterializationTask": "T049",
       "coverageStatus": "complete",
-      "verificationStatus": "pending",
+      "verificationStatus": "reviewed",
       "impactSubjectDigest": "2522d8601da6509fb6fa1581c2839432f1bf17ee6243e568135a07d7b5479d9e"
     },
     {
@@ -296782,7 +296795,7 @@
       "derivedIndexPaths": ["src/content/indexes/taxonomy.json"],
       "canonicalMaterializationTask": "T049",
       "coverageStatus": "complete",
-      "verificationStatus": "pending",
+      "verificationStatus": "reviewed",
       "impactSubjectDigest": "62ac43c360ec8635f80529d20f37ab5991d260152ef116349b39ba8526d1fbfe"
     },
     {
@@ -299491,7 +299504,7 @@
       "derivedIndexPaths": ["src/content/indexes/taxonomy.json"],
       "canonicalMaterializationTask": "T049",
       "coverageStatus": "complete",
-      "verificationStatus": "pending",
+      "verificationStatus": "reviewed",
       "impactSubjectDigest": "25f754787e53f69845ee7880554597de11513748488e51c2e6595800a53ece92"
     },
     {
@@ -304247,7 +304260,7 @@
       "derivedIndexPaths": ["src/content/indexes/taxonomy.json"],
       "canonicalMaterializationTask": "T049",
       "coverageStatus": "complete",
-      "verificationStatus": "pending",
+      "verificationStatus": "reviewed",
       "impactSubjectDigest": "8cf806d89a65d920b3d130c82c3be31e70122d51302e40064ade21bb88349fd5"
     }
   ],
@@ -305991,17 +306004,28 @@
     "source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5",
     "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"
   ],
-  "reviewEvidenceRefs": [],
-  "taxonomySubjectDigest": "d7e57083ec0d6c975244379f5eb443a84751e58b1a4135d1e99b22e961ff45d3",
+  "reviewEvidenceRefs": [
+    {
+      "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
+      "digest": "eb255c8ad8591437a45bb48d491e0fac5d86fdcc27182690bd52cfda04431ecd",
+      "subjectDigest": "07d8dd2b7089a6b7ff92bb140bfaccd0f20c0dcbe99989afdb9cc9abc85b3b2c",
+      "authorIds": ["person-maintainer"],
+      "reviewerIds": ["person-maintainer"],
+      "reviewMode": "self",
+      "aggregatePassed": true
+    }
+  ],
+  "taxonomySubjectDigest": "07d8dd2b7089a6b7ff92bb140bfaccd0f20c0dcbe99989afdb9cc9abc85b3b2c",
   "taxonomyDigest": "10fb9cce7e8b4518e4f4717182b2e99f0d4920c03123dea73c04a6f40bf39ea7",
   "tagDagDigest": "596fef488a932c9d90801e159dcf7ecdad2c9bf449b1bd956f66dfaa7f38330d",
   "learningUnitDagDigest": "41221efeee3621e39f625773e632dd4a731c9c241552e59fda8d25098d097633",
   "orderDigest": "a9c295fab81de3429c0d4de327f7e558fbfff07f4a859d6c8bc153f6a2916127",
   "placementDigest": "d3768ff88ae3f35aab03ea5e6ef3acca3492824e810494be2202ce7430bcc1db",
-  "correctionImpactDigest": "2018d73f108f710f104388b3e4406a575710529afb10aa0f0e21f0482773782e",
-  "status": "proposed",
-  "acceptedAt": null,
-  "holdReasons": ["CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE"],
-  "canonicalMaterializationAllowed": false,
-  "buildDigest": "ef144007631b2780733b0c1e6683114d0bd3f3c0680e5799f5ddb7430b0a521d"
+  "correctionImpactDigest": "6cbbe7f797166534abdb2b22d737a2cc5d265b87732bf457682be5d75c25ed03",
+  "status": "accepted",
+  "acceptedAt": "2026-08-31T14:18:40.713Z",
+  "holdReasons": [],
+  "canonicalMaterializationAllowed": true,
+  "buildDigest": "4fc5e94f3cb1a5be7c6d2d220faf8155e376a7d33189e9523344315d11757695"
 }

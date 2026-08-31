@@ -114,14 +114,15 @@
 
 ## 10. Review evidence
 
-**Decision**: 一つのlogical changeを明示file inventory、Learning Outcome、review risk policyで固定する。通常更新は管理者がoutcome coverageをself-reviewし、全適用自動checkを自ら実行する。公式根拠との矛盾・独自証明・重大な分類変更を含む高リスク更新だけはself-reviewに代えて`third_party` modeとし、author外reviewerを要求する。check result、review mode、review item、finding解消を同じsubject digestへ結び付ける。
+**Decision**: 一つのlogical changeを明示file inventory、Learning Outcome、review risk policyで固定する。通常更新は管理者がoutcome coverageをself-reviewし、全適用自動checkを自ら実行する。公式根拠との矛盾・独自証明・重大な分類変更を含む高リスク更新は原則として`third_party` modeとし、author外reviewerを要求する。ただしmaintainerが一人だけの場合は、risk reasonを保持し、`solo_maintainer`理由を固定した`self` modeを選択できる。どちらのmodeでもcheck result、review item、明示approval、review basis、finding解消を同じsubject digestへ結び付ける。
 
-**Rationale**: 一人の運用者が通常更新を追加調整なしで完結できる一方、事前定義した高リスク条件では第三者の異なる視点を強制できる。modeとrisk policyをdigestへ束ねることで、自己reviewを第三者reviewと誤表示せず、複数の重複panelやrole registryを増やさずに正確性と成果被覆を監査できる。
+**Rationale**: 一人の運用者が通常更新と必要な高リスク変更を第三者の恒常的な確保なしで完結できる一方、第三者がいる場合の独立性検査は維持できる。solo exception、mode、risk policyをdigestへ束ねることで、risk reasonを消したり自己reviewを第三者reviewと誤表示したりせず、複数の重複panelやrole registryを増やさずに正確性と成果被覆を監査できる。
 
 **Alternatives considered**:
 
 - CI結果の追認だけをreviewer実行とする: reviewer本人のcheck実行とならず、self/third-partyいずれのmodeでも不採用。
 - 通常更新も外部reviewer必須とする: 一人用の週次更新へ第三者可用性を持ち込み、Issue #10のSLA要件に反するため不採用。
+- solo maintainerの高リスク変更を常に保留する: 個人開発では正規のacceptance pathがなくなるため不採用。
 - 高リスク条件を自由記述だけで判定する: 条件が再現不能になり、third-party gateを回避できるため不採用。
 - external learner cohortをpublication gateにする: 1人用の初期製品に継続的な外部調整を持ち込むため不採用。
 

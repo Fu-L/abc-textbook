@@ -33,19 +33,19 @@
       "$ref": "#/$defs/__schema11"
     },
     "reviewUnits": {
-      "$ref": "#/$defs/__schema15"
+      "$ref": "#/$defs/__schema16"
     },
     "maintenanceBenefit": {
-      "$ref": "#/$defs/__schema34"
+      "$ref": "#/$defs/__schema35"
     },
     "state": {
-      "$ref": "#/$defs/__schema33"
+      "$ref": "#/$defs/__schema34"
     },
     "createdAt": {
-      "$ref": "#/$defs/__schema35"
+      "$ref": "#/$defs/__schema36"
     },
     "updatedAt": {
-      "$ref": "#/$defs/__schema35"
+      "$ref": "#/$defs/__schema36"
     }
   },
   "required": [
@@ -155,6 +155,9 @@
         },
         "riskReasons": {
           "$ref": "#/$defs/__schema13"
+        },
+        "highRiskSelfReviewReason": {
+          "$ref": "#/$defs/__schema15"
         }
       },
       "required": [
@@ -186,53 +189,57 @@
       ]
     },
     "__schema15": {
+      "type": "string",
+      "const": "solo_maintainer"
+    },
+    "__schema16": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema16"
+        "$ref": "#/$defs/__schema17"
       }
     },
-    "__schema16": {
+    "__schema17": {
       "type": "object",
       "properties": {
         "reviewUnitId": {
-          "$ref": "#/$defs/__schema17"
+          "$ref": "#/$defs/__schema18"
         },
         "changeKind": {
           "$ref": "#/$defs/__schema4"
         },
         "itemIds": {
-          "$ref": "#/$defs/__schema18"
+          "$ref": "#/$defs/__schema19"
         },
         "requirementIds": {
-          "$ref": "#/$defs/__schema20"
+          "$ref": "#/$defs/__schema21"
         },
         "learningOutcomeIds": {
-          "$ref": "#/$defs/__schema22"
+          "$ref": "#/$defs/__schema23"
         },
         "outcomeImpact": {
           "$ref": "#/$defs/__schema9"
         },
         "paths": {
-          "$ref": "#/$defs/__schema23"
+          "$ref": "#/$defs/__schema24"
         },
         "dependencyReviewUnitIds": {
-          "$ref": "#/$defs/__schema25"
+          "$ref": "#/$defs/__schema26"
         },
         "checkIds": {
-          "$ref": "#/$defs/__schema27"
+          "$ref": "#/$defs/__schema28"
         },
         "evidenceRoles": {
-          "$ref": "#/$defs/__schema29"
+          "$ref": "#/$defs/__schema30"
         },
         "maintenanceBenefit": {
-          "$ref": "#/$defs/__schema31"
-        },
-        "owner": {
           "$ref": "#/$defs/__schema32"
         },
-        "status": {
+        "owner": {
           "$ref": "#/$defs/__schema33"
+        },
+        "status": {
+          "$ref": "#/$defs/__schema34"
         }
       },
       "required": [
@@ -252,89 +259,89 @@
       ],
       "additionalProperties": false
     },
-    "__schema17": {
+    "__schema18": {
       "type": "string",
       "pattern": "^RU-T\\d{3}-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
-    "__schema18": {
+    "__schema19": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema19"
+        "$ref": "#/$defs/__schema20"
       },
       "uniqueItems": true
     },
-    "__schema19": {
+    "__schema20": {
       "type": "string",
       "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
     },
-    "__schema20": {
+    "__schema21": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema21"
+        "$ref": "#/$defs/__schema22"
       },
       "uniqueItems": true
     },
-    "__schema21": {
+    "__schema22": {
       "type": "string",
       "pattern": "^(?:FR|SC|CQ)-\\d{3}$"
     },
-    "__schema22": {
+    "__schema23": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema8"
       },
       "uniqueItems": true
     },
-    "__schema23": {
+    "__schema24": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema24"
+        "$ref": "#/$defs/__schema25"
       },
       "uniqueItems": true
     },
-    "__schema24": {
+    "__schema25": {
       "type": "string",
       "pattern": "^(?!.*(?:^|\\/)(?:con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\\.[A-Za-z0-9._-]+)?(?:\\/|$))(?:[A-Za-z0-9._-]*[A-Za-z0-9_-])(?:\\/[A-Za-z0-9._-]*[A-Za-z0-9_-])*$"
     },
-    "__schema25": {
+    "__schema26": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema26"
+        "$ref": "#/$defs/__schema27"
       },
       "uniqueItems": true
     },
-    "__schema26": {
+    "__schema27": {
       "type": "string",
       "pattern": "^RU-T\\d{3}-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
-    "__schema27": {
+    "__schema28": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema28"
+        "$ref": "#/$defs/__schema29"
       },
       "uniqueItems": true
     },
-    "__schema28": {
+    "__schema29": {
       "type": "string",
       "pattern": "^check-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
-    "__schema29": {
+    "__schema30": {
       "minItems": 1,
       "type": "array",
       "items": {
-        "$ref": "#/$defs/__schema30"
+        "$ref": "#/$defs/__schema31"
       },
       "uniqueItems": true
     },
-    "__schema30": {
+    "__schema31": {
       "type": "string",
       "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$"
     },
-    "__schema31": {
+    "__schema32": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema10"
@@ -344,11 +351,11 @@
         }
       ]
     },
-    "__schema32": {
+    "__schema33": {
       "type": "string",
       "pattern": "^person-[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
-    "__schema33": {
+    "__schema34": {
       "type": "string",
       "enum": [
         "planned",
@@ -358,7 +365,7 @@
         "blocked"
       ]
     },
-    "__schema34": {
+    "__schema35": {
       "anyOf": [
         {
           "$ref": "#/$defs/__schema10"
@@ -368,7 +375,7 @@
         }
       ]
     },
-    "__schema35": {
+    "__schema36": {
       "type": "string",
       "format": "date-time",
       "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"

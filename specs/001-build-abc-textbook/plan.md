@@ -34,14 +34,14 @@ ABC 212から公開基準日時点の最新終了済みABCまでについて、�
 
 *GATE: Phase 0開始前に評価し、Phase 1設計後に再評価する。*
 
-**Gate status — PASS (Constitution 2.0.0)**: 統治中の正本は`.specify/memory/constitution.md` 2.0.0である。旧`constitution-v2-proposal.md`は履歴上の参考資料であり、本計画の義務を変更しない。
+**Gate status — PASS (Constitution 3.0.0)**: 統治中の正本は`.specify/memory/constitution.md` 3.0.0である。旧`constitution-v2-proposal.md`は履歴上の参考資料であり、本計画の義務を変更しない。
 
 - **Learning outcomes — PASS**: 仕様は対象学習者、観察可能な共通前提、6つの学習成果、対象/対象外、SC-001〜SC-020を定義する。コンテンツ制作はコンテストbatchではなく学習成果と典型のreview unitで行い、章・解説・例・演習から成果へ追跡する。
-- **Accuracy and traceability — PASS**: 公式コンテスト情報と公式解説を第一根拠とし、URL、対象コンテスト、確認日時、取得指紋、訂正系列を保持する。通常更新は管理者の明示self-reviewで完結し、公式根拠との矛盾・独自証明・重大な分類変更の高リスク更新だけをself-reviewに代えてthird-party reviewへ送る。
+- **Accuracy and traceability — PASS**: 公式コンテスト情報と公式解説を第一根拠とし、URL、対象コンテスト、確認日時、取得指紋、訂正系列を保持する。通常更新は管理者の明示self-reviewで完結し、高リスク更新は原則third-party reviewへ送る。solo maintainerではrisk reasonと例外理由を保持したhigh-risk self-reviewを許可する。
 - **Progression and accessibility — PASS**: 全コーパス横断のTechnique Inventoryからタグと学習単位を作り、タグDAGと学習単位DAGを別々に検証する。用語初出、見出し、ランドマーク、表caption、代替テキスト、キーボード操作、色に依存しない状態表示、狭い画面での代替一覧を要求する。
 - **Reproducibility — PASS**: 実行可能例と解答資料は環境、入力、手順、期待結果を持ち、公開前に記載手順で検証する。依存版、fixture seed/digest、実行結果を固定する。
 - **Consistency and maintainability — PASS**: schema、前提baseline、placement policy、glossary、authoring skillを正本化し、表示索引と公開データは正本から生成する。Zod shapeは`schema-parts/*`だけが定義し、`schemas.ts`は公開集約に限定する。追加toolingはwork manifestへ保守上の利益を記録する。
-- **Review gate — PASS**: 一つの論理変更を学習成果単位に固定し、リスク理由のない変更は管理者が成果被覆をself-reviewして適用可能な全自動検査を自ら実行する。manifestへ固定した高リスク理由がある変更だけはself-reviewに代えてthird-party reviewerを必須とし、review modeとactorを証跡で区別する。既知失敗が残る変更をmerge・公開しない。
+- **Review gate — PASS**: 一つの論理変更を学習成果単位に固定し、管理者が成果被覆を確認して適用可能な全自動検査を自ら実行する。高リスク変更は原則third-party reviewerを必須とするが、solo maintainerでは全risk reasonと`solo_maintainer`理由を固定したself-reviewを許可する。review modeとactorを証跡で区別し、既知失敗が残る変更をmerge・公開しない。
 - **Preview and shard join — PASS**: private previewはstagingへ隔離し、同じ実装経路を複数分野・Contest・labelで一周させる。final taxonomyは全Inventoryから再生成し、Outcome/Problem shardはpath非重複・shard別review後に全件joinする。preview成功や個別shard成功をFR-001/SC-001の代替にしない。
 
 ### Phase 1設計後の再評価
@@ -236,7 +236,7 @@ previewの仮taxonomyから最終taxonomyへの統合は、T159の`FinalTaxonomy
 
 ABC 212〜466はbootstrap seedであり公開上限ではない。初版candidate直前にoffset付き`cutoffAt`を固定し、終了済み最新ABCまでの未収録Contestを昇順に通常updateへ通す。各ContestではDより後の全公式problemを列挙し、未完成解説、未解消分類、仮taxonomy、検証失敗、保留updateが一件でもあれば初版candidateを作らない。private previewはこのgateの対象範囲外であり、previewの成功を全件収録の代替にしない。
 
-bootstrapと全catch-up updateをCatalogのrelease change summaryへ束ねる。自動検査とpolicyに応じたself-reviewまたは高リスク時のthird-party reviewをprotected mainのmerge条件にし、成功したfull Git commitだけを静的hostへdeployする。cutoff後に終了したContestは次回対象とし、rollbackは既知release commitを再deployする。
+bootstrapと全catch-up updateをCatalogのrelease change summaryへ束ねる。自動検査とpolicyに応じたself-reviewまたはthird-party reviewをprotected mainのmerge条件にし、成功したfull Git commitだけを静的hostへdeployする。high-risk self-reviewはsolo maintainer理由を明示した場合だけ許可する。cutoff後に終了したContestは次回対象とし、rollbackは既知release commitを再deployする。
 
 ## Verification Strategy
 
@@ -244,9 +244,9 @@ bootstrapと全catch-up updateをCatalogのrelease change summaryへ束ねる。
 |---|---|---|
 | Preview vertical slice | T045/T051–T054/T094/T111/T126が固定したpreview component manifestとT154の`preview:verify`による固定cohortの分野/Contest/label条件、metadata→inventory→仮taxonomy→content→UI/search→LearningRecord→updateのdigest join、全Problem到達性、rollback、staging/public分離、current-subject review evidence、canonical snapshotと派生referenceのrecovery | previewを公開Releaseと誤認しないこと、full taxonomy・production release・deployをjoinへ混入させないこと、二重保存をPreviewSnapshotと誤認しないこと、欠落/stale/hold理由 |
 | 対象範囲 | 開催済みContestと公式欠番証跡による番号連続性、公式task order、Dより後の全slot/problem、動的registry、将来label fixture | 公式一覧の順序矛盾・取得不能・欠番assertion変更時だけ確認 |
-| 解説 | 必須構成、出典、前提、成果、計算量、例、skill版、内部参照、self/third-party mode | 通常は管理者self-review。公式根拠との矛盾・独自証明・重大な分類変更だけself-reviewに代えてauthor外third-party reviewerが確認 |
-| 典型体系 | inventory全件対応、Tag/Unit DAG、同義語、代表問題、到達可能性、安定順 | 通常は管理者self-review。重大なtaxonomy/classification変更だけself-reviewに代えてthird-party reviewerが確認 |
-| Preview→final taxonomy | 仮entityの全件mapping、promote/merge/split/retireの根拠、Problem/Source/Record ID不変、全影響列挙、final DAG再計算 | split/major classification changeはthird-party policyを適用 |
+| 解説 | 必須構成、出典、前提、成果、計算量、例、skill版、内部参照、self/third-party mode | 通常は管理者self-review。高リスク時は原則author外third-party、solo maintainerでは明示high-risk self-review |
+| 典型体系 | inventory全件対応、Tag/Unit DAG、同義語、代表問題、到達可能性、安定順 | 通常は管理者self-review。重大なtaxonomy/classification変更は原則third-party、solo maintainerでは明示high-risk self-review |
+| Preview→final taxonomy | 仮entityの全件mapping、promote/merge/split/retireの根拠、Problem/Source/Record ID不変、全影響列挙、final DAG再計算 | split/major classification changeはpolicy-selected high-risk reviewを適用 |
 | Outcome/Problem shards | `outcomeId`単位、公式順、最大8 Problem、path非重複、shard別check/review/preview、全shard joinの欠落0件 | shard scope外の変更を混入させていないこと |
 | 演習・解答 | Outcome参照、理由または検証方法、実行可能部分の結果、全件inventory | 自動実行不能な解答の妥当性を確認 |
 | 学習記録 | schema移行、独立日時、再読込、filter、100件backup/restore、rollback | SC-012の代表操作とSC-009/010の事前固定自己評価 |

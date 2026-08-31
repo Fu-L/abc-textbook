@@ -264,7 +264,6 @@ const assertManifestAndProposalCoverage = (
   if (
     manifest.taskId !== 'T159' ||
     manifest.manifestId !== 'work-manifest-T159-final-taxonomy' ||
-    manifest.reviewPolicy.requiredMode !== 'third_party' ||
     !manifest.reviewPolicy.riskReasons.includes('major_classification_change') ||
     manifest.reviewUnits.length !== 1 ||
     reviewUnit?.reviewUnitId !== FINAL_TAXONOMY_REVIEW_UNIT_ID ||
@@ -280,7 +279,8 @@ const assertManifestAndProposalCoverage = (
     build.placements.length !== FINAL_TAXONOMY_PROBLEM_COUNT ||
     build.policy.workManifestPath !== FINAL_TAXONOMY_WORK_MANIFEST_PATH ||
     build.policy.workManifestDigest !== manifest.digest ||
-    build.policy.requiredReviewMode !== 'third_party' ||
+    build.policy.requiredReviewMode !== manifest.reviewPolicy.requiredMode ||
+    build.policy.highRiskSelfReviewReason !== manifest.reviewPolicy.highRiskSelfReviewReason ||
     build.inputs.integrationMapPath !== FINAL_TAXONOMY_INTEGRATION_PATH
   ) {
     throw new FinalTaxonomyReviewError(
@@ -498,6 +498,7 @@ const createHumanReviewEvidence = (input: {
   readonly reviewedAt: string;
   readonly checkResults: FinalTaxonomyReviewCheckResults;
 }): HumanContentReviewEvidence => {
+  const reviewMode = input.manifest.reviewPolicy.requiredMode;
   const reviewItems = input.manifest.reviewUnits.map((unit) => ({
     reviewItemId: `human-review-item-${unit.reviewUnitId.toLowerCase()}`,
     kind: 'outcome_coverage' as const,
@@ -556,13 +557,13 @@ const createHumanReviewEvidence = (input: {
     inventoryPath: FINAL_TAXONOMY_WORK_MANIFEST_PATH,
     inventoryDigest: input.manifest.digest,
     reviewPolicy: input.manifest.reviewPolicy,
-    reviewMode: 'third_party' as const,
+    reviewMode,
     applicableChecks,
     applicableCheckCount: applicableChecks.length,
     passedApplicableCheckCount: applicableChecks.length,
     reviewerExecutedCheckSetDigest: canonicalDigest(applicableChecks),
     authors,
-    reviewer: { personId: input.reviewerId, mode: 'third_party' as const },
+    reviewer: { personId: input.reviewerId, mode: reviewMode },
     reviewItems,
     inventoryItemCount: reviewItems.length,
     reviewedItemCount: reviewItems.length,
@@ -625,7 +626,7 @@ const validateExistingEvidence = async (input: {
   const aggregateDigest = canonicalDigest(aggregate);
   if (
     evidence.reviewer.personId !== input.reviewerId ||
-    evidence.reviewMode !== 'third_party' ||
+    evidence.reviewMode !== input.manifest.reviewPolicy.requiredMode ||
     evidence.reviewItems.some(({ reviewBasis }) => reviewBasis !== input.reviewBasis) ||
     evidence.applicableChecks.some(
       ({ resultPath, resultDigest }) =>
@@ -700,10 +701,14 @@ export const reviewFinalTaxonomy = async (input: {
   const repositoryRoot = await realpath(input.repositoryRoot ?? process.cwd());
   const initial = await loadFixedContext(repositoryRoot);
   const authorIds = sortedUnique(initial.manifest.reviewUnits.map(({ owner }) => owner));
-  if (authorIds.includes(input.reviewerId)) {
+  const reviewerIdentityIsInvalid =
+    initial.manifest.reviewPolicy.requiredMode === 'self'
+      ? !authorIds.includes(input.reviewerId)
+      : authorIds.includes(input.reviewerId);
+  if (reviewerIdentityIsInvalid) {
     throw new FinalTaxonomyReviewError(
-      'FINAL_TAXONOMY_THIRD_PARTY_REVIEWER_REQUIRED',
-      'The reviewer cannot be a manifest owner or author of this taxonomy subject.',
+      'FINAL_TAXONOMY_REVIEWER_IDENTITY_INVALID',
+      'Self review requires a manifest owner; third-party review requires another person.',
     );
   }
   const loadGeneratedSubject =

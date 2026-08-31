@@ -12,9 +12,11 @@ description: "Task list template for feature implementation"
 **Validation**: Every task list MUST include the applicable constitutional checks: source and
 claim verification, executable-example validation, exercise and answer validation,
 accessibility review, and link/cross-reference checks. Automated tests are required wherever
-practical. Normal updates use an explicit maintainer self-review; record a third-party review
-task only when the fixed high-risk conditions (official-source conflict, original proof, or
-major classification change) apply, and record the review mode in the evidence.
+practical. Normal updates use an explicit maintainer self-review. Fixed high-risk conditions
+(official-source conflict, original proof, or major classification change) normally require
+third-party review; an explicitly declared solo maintainer may instead use high-risk self-review
+without removing risk reasons. Record the selected review mode and solo-maintainer reason, when
+used, in the evidence.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 

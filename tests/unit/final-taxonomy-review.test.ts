@@ -59,6 +59,7 @@ const evidenceRef = (index: number) => ({
   ],
 });
 const evidenceRefs = [evidenceRef(0), evidenceRef(1)];
+type ReviewPolicy = z.infer<typeof ContentWorkManifestSchema>['reviewPolicy'];
 
 const provisionalCandidate = (
   previewEntityId: string,
@@ -89,6 +90,7 @@ const integrationEntry = (
   previewEntityKind: 'tag' | 'outcome' | 'unit',
   finalEntityId: string,
   impactId: string,
+  reviewPolicy: ReviewPolicy,
 ) => ({
   previewEntityId,
   previewEntityKind,
@@ -96,10 +98,7 @@ const integrationEntry = (
   rationale: 'The complete corpus supports this reusable final entity.',
   evidenceRefs,
   correctionImpactIds: [impactId],
-  reviewPolicy: {
-    requiredMode: 'third_party' as const,
-    riskReasons: ['major_classification_change' as const],
-  },
+  reviewPolicy,
   reviewEvidenceId: null,
   status: 'proposed' as const,
   action: 'promote' as const,
@@ -132,7 +131,7 @@ const integrationSubject = (integration: Record<string, unknown>) => ({
   canonicalMaterializationAllowed: integration.canonicalMaterializationAllowed,
 });
 
-const createIntegrationMap = (primaryOutcomeId: string) => {
+const createIntegrationMap = (primaryOutcomeId: string, reviewPolicy: ReviewPolicy) => {
   const provisionalEvidence = {
     schemaVersion: '1.0.0' as const,
     evidenceId: 'preview-initial-v1-taxonomy-integration',
@@ -159,14 +158,27 @@ const createIntegrationMap = (primaryOutcomeId: string) => {
     previewSnapshotDigest: '7'.repeat(64),
     provisionalEvidence,
     entries: [
-      integrationEntry('provisional-tag-core', 'tag', 'tag-core', 'impact-preview-tag-core'),
+      integrationEntry(
+        'provisional-tag-core',
+        'tag',
+        'tag-core',
+        'impact-preview-tag-core',
+        reviewPolicy,
+      ),
       integrationEntry(
         'outcome-provisional-core',
         'outcome',
         primaryOutcomeId,
         'impact-preview-outcome-core',
+        reviewPolicy,
       ),
-      integrationEntry('provisional-unit-core', 'unit', 'unit-core', 'impact-preview-unit-core'),
+      integrationEntry(
+        'provisional-unit-core',
+        'unit',
+        'unit-core',
+        'impact-preview-unit-core',
+        reviewPolicy,
+      ),
     ],
     status: 'proposed' as const,
     canonicalMaterializationAllowed: false as const,
@@ -251,7 +263,10 @@ const createBuild = (
   manifest: z.infer<typeof ContentWorkManifestSchema>,
 ): z.input<typeof FinalTaxonomyBuildSchema> => {
   const outcomeIds = [...manifest.learningOutcomeIds];
-  const integrationMap = createIntegrationMap(outcomeIds[0] ?? 'outcome-core');
+  const integrationMap = createIntegrationMap(
+    outcomeIds[0] ?? 'outcome-core',
+    manifest.reviewPolicy,
+  );
   const candidates: z.input<typeof FinalTaxonomyCandidateSchema>[] = [
     {
       kind: 'tag',
@@ -419,8 +434,11 @@ const createBuild = (
     version: '1.0.0',
     inputScope: 'ABC 212 through ABC 466 advanced Problems',
     rulesDigest: 'e'.repeat(64),
-    requiredReviewMode: 'third_party' as const,
-    riskReasons: ['major_classification_change' as const],
+    requiredReviewMode: manifest.reviewPolicy.requiredMode,
+    riskReasons: manifest.reviewPolicy.riskReasons,
+    ...(manifest.reviewPolicy.highRiskSelfReviewReason === undefined
+      ? {}
+      : { highRiskSelfReviewReason: manifest.reviewPolicy.highRiskSelfReviewReason }),
     authoringSkillName: 'abc-explanation-author',
     authoringSkillVersion: '1.1.1',
     authoringSkillDigest: 'f'.repeat(64),
@@ -471,7 +489,7 @@ const createBuild = (
     correctionImpactDigest: canonicalDigest(correctionImpacts),
     status: 'proposed' as const,
     acceptedAt: null,
-    holdReasons: ['CURRENT_SUBJECT_THIRD_PARTY_REVIEW_MISSING_OR_STALE'],
+    holdReasons: ['CURRENT_SUBJECT_REVIEW_MISSING_OR_STALE'],
     canonicalMaterializationAllowed: false,
     buildDigest: '0'.repeat(64),
   };
@@ -481,7 +499,7 @@ const createBuild = (
   };
 };
 
-const createRepository = async () => {
+const createRepository = async (reviewMode: 'self' | 'third_party' = 'third_party') => {
   const repositoryRoot = await mkdtemp(path.join(os.tmpdir(), 'final-taxonomy-review-'));
   temporaryRoots.push(repositoryRoot);
   const sourceManifest = ContentWorkManifestSchema.parse(
@@ -489,6 +507,17 @@ const createRepository = async () => {
   );
   const manifestWithUpdatedChecks = {
     ...sourceManifest,
+    reviewPolicy:
+      reviewMode === 'self'
+        ? {
+            requiredMode: 'self' as const,
+            riskReasons: ['major_classification_change' as const],
+            highRiskSelfReviewReason: 'solo_maintainer' as const,
+          }
+        : {
+            requiredMode: 'third_party' as const,
+            riskReasons: ['major_classification_change' as const],
+          },
     reviewUnits: sourceManifest.reviewUnits.map((unit) => ({
       ...unit,
       checkIds: FINAL_TAXONOMY_REVIEW_CHECKS.map(({ checkId }) => checkId),
@@ -545,7 +574,7 @@ const changedIntegrationMap = (
   };
 };
 
-describe('T159 explicit third-party taxonomy review', () => {
+describe('T159 policy-selected taxonomy review', () => {
   it('keeps each trusted command declaration identical to its spawn invocation', () => {
     for (const check of FINAL_TAXONOMY_REVIEW_CHECKS) {
       const invocation = resolveFinalTaxonomyReviewCheckInvocation(check);
@@ -602,8 +631,40 @@ describe('T159 explicit third-party taxonomy review', () => {
         runCheck,
         now: () => reviewedAt,
       }),
-    ).rejects.toThrow(/FINAL_TAXONOMY_THIRD_PARTY_REVIEWER_REQUIRED/u);
+    ).rejects.toThrow(/FINAL_TAXONOMY_REVIEWER_IDENTITY_INVALID/u);
     expect(runCheck).not.toHaveBeenCalled();
+  });
+
+  it('accepts an explicit solo-maintainer high-risk self-review by the manifest owner', async () => {
+    const { repositoryRoot, manifest, build } = await createRepository('self');
+    const input = {
+      repositoryRoot,
+      reviewerId: 'person-maintainer',
+      approve: true,
+      reviewBasis:
+        'Compared every taxonomy decision and confirmed all current-subject checks passed.',
+      runCheck: passingRunner(),
+      loadGeneratedSubject: matchingGeneratedSubject(build),
+      now: () => reviewedAt,
+    } as const;
+
+    const result = await reviewFinalTaxonomy(input);
+    expect(result.evidence.reviewPolicy).toEqual(manifest.reviewPolicy);
+    expect(result.evidence.reviewer).toEqual({
+      personId: 'person-maintainer',
+      mode: 'self',
+    });
+    expect(result.evidence.aggregatePassed).toBe(true);
+
+    const outsider = await createRepository('self');
+    await expect(
+      reviewFinalTaxonomy({
+        ...input,
+        repositoryRoot: outsider.repositoryRoot,
+        reviewerId: 'person-independent-reviewer',
+        loadGeneratedSubject: matchingGeneratedSubject(outsider.build),
+      }),
+    ).rejects.toThrow(/FINAL_TAXONOMY_REVIEWER_IDENTITY_INVALID/u);
   });
 
   it('binds the manifest-declared Outcome set, both manifest paths, the proposed subject, and the exact trusted checks', async () => {

@@ -141,6 +141,39 @@ describe('domain invariants', () => {
     expect(() =>
       createContentWorkManifest({
         ...base,
+        reviewPolicy: {
+          requiredMode: 'self',
+          riskReasons: ['original_proof'],
+          highRiskSelfReviewReason: 'solo_maintainer',
+        },
+        reviewUnits: [reviewUnit],
+      }),
+    ).not.toThrow();
+    expect(() =>
+      createContentWorkManifest({
+        ...base,
+        reviewPolicy: {
+          requiredMode: 'self',
+          riskReasons: [],
+          highRiskSelfReviewReason: 'solo_maintainer',
+        },
+        reviewUnits: [reviewUnit],
+      }),
+    ).toThrow(/WORK_MANIFEST_SCHEMA_INVALID/u);
+    expect(() =>
+      createContentWorkManifest({
+        ...base,
+        reviewPolicy: {
+          requiredMode: 'third_party',
+          riskReasons: ['original_proof'],
+          highRiskSelfReviewReason: 'solo_maintainer',
+        },
+        reviewUnits: [reviewUnit],
+      }),
+    ).toThrow(/WORK_MANIFEST_SCHEMA_INVALID/u);
+    expect(() =>
+      createContentWorkManifest({
+        ...base,
         reviewUnits: [reviewUnit, { ...reviewUnit, unitId: 'RU-T024-duplicate' }],
       }),
     ).toThrow(WorkManifestError);
@@ -153,6 +186,7 @@ describe('domain invariants', () => {
       readonly reviewPolicy: {
         readonly requiredMode: 'self' | 'third_party';
         readonly riskReasons: readonly string[];
+        readonly highRiskSelfReviewReason?: 'solo_maintainer';
       };
       readonly reviewUnits: readonly {
         readonly reviewUnitId: string;

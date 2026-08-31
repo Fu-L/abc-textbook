@@ -836,11 +836,12 @@
       ],
       "correctionImpactIds": ["impact-outcome-provisional-compressed-dp-state"],
       "reviewPolicy": {
-        "requiredMode": "third_party",
-        "riskReasons": ["major_classification_change"]
+        "requiredMode": "self",
+        "riskReasons": ["major_classification_change"],
+        "highRiskSelfReviewReason": "solo_maintainer"
       },
-      "reviewEvidenceId": null,
-      "status": "proposed",
+      "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "status": "accepted",
       "action": "promote",
       "finalEntityIds": ["outcome-design-minimal-sufficient-state"],
       "splitProblemAssignments": [],
@@ -1053,11 +1054,12 @@
       ],
       "correctionImpactIds": ["impact-outcome-provisional-multiplicative-order-counting"],
       "reviewPolicy": {
-        "requiredMode": "third_party",
-        "riskReasons": ["major_classification_change"]
+        "requiredMode": "self",
+        "riskReasons": ["major_classification_change"],
+        "highRiskSelfReviewReason": "solo_maintainer"
       },
-      "reviewEvidenceId": null,
-      "status": "proposed",
+      "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "status": "accepted",
       "action": "split",
       "finalEntityIds": [
         "outcome-count-through-cyclic-exponents",
@@ -1467,11 +1469,12 @@
       ],
       "correctionImpactIds": ["impact-outcome-provisional-range-aggregate-under-updates"],
       "reviewPolicy": {
-        "requiredMode": "third_party",
-        "riskReasons": ["major_classification_change"]
+        "requiredMode": "self",
+        "riskReasons": ["major_classification_change"],
+        "highRiskSelfReviewReason": "solo_maintainer"
       },
-      "reviewEvidenceId": null,
-      "status": "proposed",
+      "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "status": "accepted",
       "action": "promote",
       "finalEntityIds": ["outcome-derive-updateable-aggregate"],
       "splitProblemAssignments": [],
@@ -1684,11 +1687,12 @@
       ],
       "correctionImpactIds": ["impact-outcome-provisional-shortest-path-structure"],
       "reviewPolicy": {
-        "requiredMode": "third_party",
-        "riskReasons": ["major_classification_change"]
+        "requiredMode": "self",
+        "riskReasons": ["major_classification_change"],
+        "highRiskSelfReviewReason": "solo_maintainer"
       },
-      "reviewEvidenceId": null,
-      "status": "proposed",
+      "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "status": "accepted",
       "action": "split",
       "finalEntityIds": [
         "outcome-build-shortest-path-certificate",
@@ -2161,11 +2165,12 @@
       ],
       "correctionImpactIds": ["impact-provisional-tag-compressed-dp-state"],
       "reviewPolicy": {
-        "requiredMode": "third_party",
-        "riskReasons": ["major_classification_change"]
+        "requiredMode": "self",
+        "riskReasons": ["major_classification_change"],
+        "highRiskSelfReviewReason": "solo_maintainer"
       },
-      "reviewEvidenceId": null,
-      "status": "proposed",
+      "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "status": "accepted",
       "action": "promote",
       "finalEntityIds": ["tag-dp-state-equivalence"],
       "splitProblemAssignments": [],
@@ -2378,11 +2383,12 @@
       ],
       "correctionImpactIds": ["impact-provisional-tag-multiplicative-order-counting"],
       "reviewPolicy": {
-        "requiredMode": "third_party",
-        "riskReasons": ["major_classification_change"]
+        "requiredMode": "self",
+        "riskReasons": ["major_classification_change"],
+        "highRiskSelfReviewReason": "solo_maintainer"
       },
-      "reviewEvidenceId": null,
-      "status": "proposed",
+      "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "status": "accepted",
       "action": "split",
       "finalEntityIds": [
         "tag-cyclic-exponent-counting",
@@ -2987,11 +2993,12 @@
       ],
       "correctionImpactIds": ["impact-provisional-tag-range-aggregate-under-updates"],
       "reviewPolicy": {
-        "requiredMode": "third_party",
-        "riskReasons": ["major_classification_change"]
+        "requiredMode": "self",
+        "riskReasons": ["major_classification_change"],
+        "highRiskSelfReviewReason": "solo_maintainer"
       },
-      "reviewEvidenceId": null,
-      "status": "proposed",
+      "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "status": "accepted",
       "action": "promote",
       "finalEntityIds": ["tag-query-sufficient-aggregate"],
       "splitProblemAssignments": [],
@@ -3204,11 +3211,12 @@
       ],
       "correctionImpactIds": ["impact-provisional-tag-shortest-path-structure"],
       "reviewPolicy": {
-        "requiredMode": "third_party",
-        "riskReasons": ["major_classification_change"]
+        "requiredMode": "self",
+        "riskReasons": ["major_classification_change"],
+        "highRiskSelfReviewReason": "solo_maintainer"
       },
-      "reviewEvidenceId": null,
-      "status": "proposed",
+      "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "status": "accepted",
       "action": "split",
       "finalEntityIds": ["tag-shortest-path-certificate", "tag-witness-impact-localization"],
       "splitProblemAssignments": [
@@ -3777,11 +3785,12 @@
       ],
       "correctionImpactIds": ["impact-provisional-unit-compressed-dp-state"],
       "reviewPolicy": {
-        "requiredMode": "third_party",
-        "riskReasons": ["major_classification_change"]
+        "requiredMode": "self",
+        "riskReasons": ["major_classification_change"],
+        "highRiskSelfReviewReason": "solo_maintainer"
       },
-      "reviewEvidenceId": null,
-      "status": "proposed",
+      "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "status": "accepted",
       "action": "merge",
       "finalEntityIds": ["unit-dp-state-design"],
       "splitProblemAssignments": [],
@@ -3994,11 +4003,12 @@
       ],
       "correctionImpactIds": ["impact-provisional-unit-multiplicative-order-counting"],
       "reviewPolicy": {
-        "requiredMode": "third_party",
-        "riskReasons": ["major_classification_change"]
+        "requiredMode": "self",
+        "riskReasons": ["major_classification_change"],
+        "highRiskSelfReviewReason": "solo_maintainer"
       },
-      "reviewEvidenceId": null,
-      "status": "proposed",
+      "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "status": "accepted",
       "action": "split",
       "finalEntityIds": [
         "unit-cyclic-group-exponent-counting",
@@ -4471,11 +4481,12 @@
       ],
       "correctionImpactIds": ["impact-provisional-unit-range-aggregate-under-updates"],
       "reviewPolicy": {
-        "requiredMode": "third_party",
-        "riskReasons": ["major_classification_change"]
+        "requiredMode": "self",
+        "riskReasons": ["major_classification_change"],
+        "highRiskSelfReviewReason": "solo_maintainer"
       },
-      "reviewEvidenceId": null,
-      "status": "proposed",
+      "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "status": "accepted",
       "action": "split",
       "finalEntityIds": ["unit-range-monoid-aggregation", "unit-weighted-prefix-fenwick"],
       "splitProblemAssignments": [
@@ -4837,11 +4848,12 @@
       ],
       "correctionImpactIds": ["impact-provisional-unit-shortest-path-structure"],
       "reviewPolicy": {
-        "requiredMode": "third_party",
-        "riskReasons": ["major_classification_change"]
+        "requiredMode": "self",
+        "riskReasons": ["major_classification_change"],
+        "highRiskSelfReviewReason": "solo_maintainer"
       },
-      "reviewEvidenceId": null,
-      "status": "proposed",
+      "reviewEvidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "status": "accepted",
       "action": "split",
       "finalEntityIds": ["unit-change-impact-localization", "unit-shortest-path-reconstruction"],
       "splitProblemAssignments": [
@@ -5213,8 +5225,8 @@
       }
     }
   ],
-  "status": "proposed",
+  "status": "accepted",
   "canonicalMaterializationAllowed": false,
-  "integrationSubjectDigest": "19f255576a648aa3c513930a0e351d68977413203831c83af32cadc2c9bbb9cf",
-  "integrationDigest": "19c16722b13bd8e26c7ad2cb8946d593063b7b7c223e7acf49ce2696a08e09ae"
+  "integrationSubjectDigest": "ee0eefbdb599a34f9b5e7af8150503aff28563313c91098d9fad6745871db49c",
+  "integrationDigest": "a37fc5de5d3f97b17fd2ddb0858be4d7920d96794ea37bc7e420be7dfbdca5f3"
 }
