@@ -1,0 +1,102 @@
+{
+  "id": "unit-heavy-light-recursive-dp",
+  "kind": "section",
+  "title": "資源DPを引数で渡すHLRecDP",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-subset-resource",
+    "unit-rooted-tree-aggregation"
+  ],
+  "excludedTopics": [
+    "資源DPを引数で渡すHLRecDPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc311-editorial-6814-952ca8df25e1dc29d36a2d97bf5823cc8ec71cafd9a762902cea712a7640e19f",
+    "source-abc311-ex-problem-e370488f1342f8751a5f37a9f0b8ab00784f5baee29786d775a1e52907cd7dc1"
+  ],
+  "tagIds": [
+    "tag-heavy-light-recursive-dp"
+  ],
+  "ownedTagIds": [
+    "tag-heavy-light-recursive-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-pass-resource-dp-through-heavy-recursion"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-pass-resource-dp-through-heavy-recursion"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/heavy-light-recursive-dp.md",
+  "problemIds": [
+    "abc311-ex"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-pass-resource-dp-through-heavy-recursion",
+      "learningOutcomeIds": [
+        "outcome-pass-resource-dp-through-heavy-recursion"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。木 DP の子 merge が高価だが、外部 DP を引数にした top-down 分岐として書き換えられるとき。 問題全体への接続は併用技能を学んだ後に読む。",
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC311 Ex「Many Illumination Plans」について、頂点削除は子を親へ付け替えるので、残した頂点集合が良い木になる条件は、祖先方向で直前に残した頂点と色が異なること、および重さ合計 X 以下である。自然な部分木 knapsack は子同士の max-plus convolution が X² になる。",
+      "procedure": [
+        "観察: 頂点削除は子を親へ付け替えるので、残した頂点集合が良い木になる条件は、祖先方向で直前に残した頂点と色が異なること、および重さ合計 X 以下である。自然な部分木 knapsack は子同士の max-plus convolution が X² になる。",
+        "観察: 結合を bottom-up で畳み込む代わりに、親側から渡された DP 配列を参照して「この頂点を残す/消す」の二分岐を top-down に評価すれば、各局所処理は O(X) になる。",
+        "着眼: top-down DP の引数は「部分木単独の答え」ではなく、ここまでの選択を織り込んだ配列であり、参照渡しと返値の意味を通常の木 DP と混同しない。",
+        "着眼: 最大子を heavy にすれば二回呼ばれる各 light 部分木は親の半分以下で、三分木型の再帰評価から指数が log_2 3 に落ちる。",
+        "方針: heavy child には DP 配列を一度だけ渡し、light child の二分岐だけ複製する重軽再帰 DP を全 heavy path の根から実行する。（再帰量が f(n)≤f(n1)+2f(n2)+O(X)≤3f(n/2)+O(X) となり、全根列挙も O(N^{log2 3}X) に収まる。）",
+        "接続: 部分木サイズから heavy child を決める。dfs(c,dp) で c を残す/削る場合の配列を O(X) で作り、heavy child は共有できる一方の経路を一回、各 light child は必要な二状態へ再帰させる。根1で全 heavy path を構成した後、各 heavy path 根から初期配列を渡すことで、その path 上の全 v の F(v) を同時に回収する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "外部の資源DP配列を受け取って部分木の選択を反映する再帰を設計し、max-plusの子DP併合を避ける。重い子は一回だけ呼び、軽い子の重複呼出しを部分木サイズの半減により評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-pass-resource-dp-through-heavy-recursion",
+      "learningOutcomeIds": [
+        "outcome-pass-resource-dp-through-heavy-recursion"
+      ],
+      "prerequisiteIds": [
+        "outcome-aggregate-rooted-tree",
+        "outcome-design-resource-dp",
+        "prereq-abc-advanced-v1",
+        "unit-dp-subset-resource",
+        "unit-rooted-tree-aggregation"
+      ],
+      "attainmentCondition": "学習成果「外部の資源DP配列を受け取って部分木の選択を反映する再帰を設計し、max-plusの子DP併合を避ける。重い子は一回だけ呼び、軽い子の重複呼出しを部分木サイズの半減により評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "assessment": {
+        "method": "ABC311 Ex「Many Illumination Plans」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「外部の資源DP配列を受け取って部分木の選択を反映する再帰を設計し、max-plusの子DP併合を避ける。重い子は一回だけ呼び、軽い子の重複呼出しを部分木サイズの半減により評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
+          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
+          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
+          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
+          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+        ],
+        "expectedResult": "外部の資源DP配列を受け取って部分木の選択を反映する再帰を設計し、max-plusの子DP併合を避ける。重い子は一回だけ呼び、軽い子の重複呼出しを部分木サイズの半減により評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 90,
+  "globalIndex": 131,
+  "orderReason": "資源軸knapsack DP・根付き木DP・部分木集約で得た考え方と実装を再利用し、資源DPを引数で渡すHLRecDPの発動条件・正当化・境界を重複なく学ぶ。"
+}

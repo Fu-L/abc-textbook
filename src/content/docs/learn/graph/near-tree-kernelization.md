@@ -3,7 +3,7 @@ title: "near-tree graphのkernel化"
 description: "前提からnear-tree graphのkernel化を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 198
+  order: 205
 ---
 
 # near-tree graphのkernel化
@@ -41,6 +41,10 @@ terminal外の葉除去とdegree-2 chain縮約で、cycle rankや余分な辺数
 ### 例 1 — terminal外の葉除去とdegree-2 chain縮約で、cycle rankや余分な辺数だけに依存する小kernelへ答えを保って縮約する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC419 G「Count Simple Paths 2」](https://atcoder.jp/contests/abc419/tasks/abc419_g)
+
+選定理由: terminal以外のleafをqueueで反復削除しても1-N path集合は変わらない。削除後のdegree総和とcycle rankからdegree≥3頂点数は2K以下に抑えられる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。指定terminal間simple pathに絶対含まれない枝を除きたいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ degree1非terminalをpeelingし、S={1,N}∪{deg≥3}を作る。各S頂点か�
 - [ABC419 G 公式解説](https://atcoder.jp/contests/abc419/editorial/13636)
 - [ABC419 G 公式問題文](https://atcoder.jp/contests/abc419/tasks/abc419_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-near-tree-kernelization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-near-tree-kernelization`

@@ -3,7 +3,7 @@ title: "Relaxed・online convolution"
 description: "前提からRelaxed・online convolutionを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 202
+  order: 209
 ---
 
 # Relaxed・online convolution
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC213 H「Stroll」](https://atcoder.jp/contests/abc213/tasks/abc213_h)
+
+選定理由: 普通の一括畳み込みでは d 自身が未確定なので計算できないが、分割統治なら左区間の確定値だけを右区間へ送れる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。時系列 DP の現在値が過去列との畳み込みで定まり、全入力列を一度に確定できないとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ sidebar:
 - [ABC281 H 公式解説](https://atcoder.jp/contests/abc281/editorial/5371)
 - [ABC281 H 公式問題文](https://atcoder.jp/contests/abc281/tasks/abc281_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-relaxed-convolution`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-relaxed-convolution`

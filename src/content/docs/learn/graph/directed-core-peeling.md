@@ -3,7 +3,7 @@ title: "有向cycle検出・sink/source peeling"
 description: "前提から有向cycle検出・sink/source peelingを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 122
+  order: 128
 ---
 
 # 有向cycle検出・sink/source peeling
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 三色DFSまたはKahn型peelingの不変条件を説明し、有向cycleの存在を判定して必要ならcycleへ残るcoreを抽出できる
 
 題材: [ABC245 F「Endless Walk」](https://atcoder.jp/contests/abc245/tasks/abc245_f)
+
+選定理由: 削除順を番号とみなすと、削除された頂点から進める先はすべて自分より先に削除済みであり、番号が真に減るので無限歩はできない。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。有向グラフで、行き先を失った頂点から不可能状態を後方へ伝播したいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -115,4 +119,4 @@ sidebar:
 - [ABC456 E 公式問題文](https://atcoder.jp/contests/abc456/tasks/abc456_e)
 - [ABC456 E 公式解説](https://atcoder.jp/contests/abc456/editorial/19849)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-directed-core-peeling`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-directed-core-peeling`

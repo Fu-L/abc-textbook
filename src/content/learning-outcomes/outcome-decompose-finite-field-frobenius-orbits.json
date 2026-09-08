@@ -1,8 +1,8 @@
 {
   "id": "outcome-decompose-finite-field-frobenius-orbits",
-  "statement": "有限体上のFrobenius写像の軌道と固定体を用い、指数的な反復区間をorbit長ごとのrunへ圧縮する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "statement": "標数pで中間の二項係数が消える恒等式 (1+x)^(p^t)=1+x^(p^t) をシフト演算へ適用し、隣接和反復をpの冪回ずつ飛ばす。圧縮列では各段のrun数の増加も評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
   "prerequisiteOutcomeIds": [
-    "outcome-compute-in-finite-field-extension"
+    "outcome-compute-in-modular-arithmetic"
   ],
   "scopeIds": [
     "abc251-ex",

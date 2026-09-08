@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC337 E「Bad Juice」](https://atcoder.jp/contests/abc337/tasks/abc337_e)
 
+選定理由: M=ceil(log2 N)なら0,…,N-1は全てM bitで一意である。友人iへi bit目が1のbottleだけ飲ませると、腐ったbottle xによる体調列Sはxのbinary表現と完全に一致する。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。一回の非adaptive検査で各参加者から0/1だけが返る。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 必要最小人数の友人への配布を提示し、返された体調patternから腐ったbottle番号を一意に特定できる。
@@ -110,4 +114,4 @@ sidebar:
 - [ABC337 E 公式問題文](https://atcoder.jp/contests/abc337/tasks/abc337_e)
 - [ABC337 E 公式解説](https://atcoder.jp/contests/abc337/editorial/9140)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-information-theoretic-query-design`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-information-theoretic-query-design`

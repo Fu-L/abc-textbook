@@ -30,9 +30,9 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [DSUによる連結成分管理・縮約](./dsu-components.md)（標準順 117）— 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-2. [静的graph等式制約のpotential伝播](./graph-potential-propagation.md)（標準順 172）— 通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。
-3. [potential・weighted DSU](./potential-dsu.md)（標準順 173）— DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。
+1. [DSUによる連結成分管理・縮約](./dsu-components.md)（標準順 123）— 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+2. [静的graph等式制約のpotential伝播](./graph-potential-propagation.md)（標準順 179）— 通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。
+3. [potential・weighted DSU](./potential-dsu.md)（標準順 180）— DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -48,7 +48,7 @@ sidebar:
 
 - **DSUによる連結成分管理・縮約** — 直接到達点: 成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる／静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる。近いが対象外: DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 - **静的graph等式制約のpotential伝播** — 直接到達点: 辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる。近いが対象外: 静的graph等式制約のpotential伝播の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **potential・weighted DSU** — 直接到達点: 差分辺を累積するグラフ探索、またはDSUの親辺にpotential差を持たせ、同一成分内の頂点間差と矛盾を判定できる。近いが対象外: potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- **potential・weighted DSU** — 直接到達点: DSUの親辺にpotential差を持たせ、経路圧縮時の差の累積と根の併合方向に応じた符号を導出し、オンラインの差制約追加と頂点間差・矛盾のqueryを処理できる。近いが対象外: potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
 **比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
 
@@ -97,4 +97,4 @@ sidebar:
 - [ABC229 E 公式問題文](https://atcoder.jp/contests/abc229/tasks/abc229_e)
 - [ABC229 E 公式解説](https://atcoder.jp/contests/abc229/editorial/2958)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-connectivity`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-connectivity`

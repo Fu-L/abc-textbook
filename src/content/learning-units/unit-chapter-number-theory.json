@@ -33,7 +33,8 @@
     "tag-number-theory-structure",
     "tag-numerical-semigroup",
     "tag-prime-divisor-decomposition",
-    "tag-rational-approximation"
+    "tag-rational-approximation",
+    "tag-stern-brocot-ancestry"
   ],
   "ownedTagIds": [
     "tag-number-theory-structure"
@@ -57,7 +58,8 @@
     "outcome-represent-integers-as-two-squares",
     "outcome-solve-modular-constraints",
     "outcome-sum-multiplicative-function-by-min25-sieve",
-    "outcome-transform-to-number-theory"
+    "outcome-transform-to-number-theory",
+    "outcome-traverse-stern-brocot-ancestors"
   ],
   "ownedLearningOutcomeIds": [
     "outcome-transform-to-number-theory"
@@ -202,6 +204,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。素数法の非零剰余に積と冪が現れるとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -238,7 +241,8 @@
         "outcome-reduce-integer-structure-by-gcd",
         "outcome-represent-integers-as-two-squares",
         "outcome-solve-modular-constraints",
-        "outcome-sum-multiplicative-function-by-min25-sieve"
+        "outcome-sum-multiplicative-function-by-min25-sieve",
+        "outcome-traverse-stern-brocot-ancestors"
       ],
       "kind": "illustrative",
       "language": "日本語（学習経路の比較）",
@@ -259,10 +263,11 @@
         "乗法的位数から最小周期を求める: 1個の直接所有Outcome、学ぶ理由「合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る」、対象外「約数格子上の指数計数・包除」を照合する。",
         "巡回群を指数化して数える: 1個の直接所有Outcome、学ぶ理由「乗法的位数とその約数分類を先に学び、巡回群の元を指数へ写して位数別に重複なく数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する」、対象外「乗法的位数から最小周期だけを求める問題」を照合する。",
         "Baby-Step Giant-Step・可逆作用の反復到達探索: 1個の直接所有Outcome、学ぶ理由「有限集合上の可逆な作用と逆作用を定義し、離散対数やaffine反復を含む反復到達時刻をbaby/giantの衝突へ変換して平方根時間で求める。合同算術が必要な問題では個別のreadinessとして接続する」、対象外「Baby-Step Giant-Step・可逆作用の反復到達探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "標数pのFrobenius恒等式による反復高速化: 1個の直接所有Outcome、学ぶ理由「法上の四則演算・高速累乗・逆元で得た考え方と実装を再利用し、標数pのFrobenius恒等式による反復高速化の発動条件・正当化・境界を重複なく学ぶ」、対象外「標数pのFrobenius恒等式による反復高速化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
         "Gaussian整数・二平方和: 1個の直接所有Outcome、学ぶ理由「素因数・約数分解で得た考え方と実装を再利用し、Gaussian整数・二平方和の発動条件・正当化・境界を重複なく学ぶ」、対象外「Gaussian整数・二平方和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
         "Min_25・Lucy DP型の総和篩: 1個の直接所有Outcome、学ぶ理由「素因数・約数分解で得た考え方と実装を再利用し、Min_25・Lucy DP型の総和篩の発動条件・正当化・境界を重複なく学ぶ」、対象外「Min_25・Lucy DP型の総和篩の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "拡大有限体の表現と四則演算を構成する: 1個の直接所有Outcome、学ぶ理由「素体上の演算を土台に、既約関係で元を標準化し、加減乗除が閉じる拡大体として扱う」、対象外「素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算」を照合する。",
-        "有限体Frobenius軌道: 1個の直接所有Outcome、学ぶ理由「拡大有限体の表現と演算で得た考え方と実装を再利用し、有限体Frobenius軌道の発動条件・正当化・境界を重複なく学ぶ」、対象外「有限体Frobenius軌道の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
+        "Stern–Brocot木の経路と祖先: 1個の直接所有Outcome、学ぶ理由「gcd不変量・差分構造で得た考え方と実装を再利用し、Stern–Brocot木の経路と祖先の発動条件・正当化・境界を重複なく学ぶ」、対象外「Stern–Brocot木の経路と祖先の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "拡大有限体の表現と四則演算を構成する: 1個の直接所有Outcome、学ぶ理由「素体上の演算を土台に、既約関係で元を標準化し、加減乗除が閉じる拡大体として扱う」、対象外「素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算」を照合する。"
       ],
       "executionTarget": null,
       "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
@@ -330,7 +335,8 @@
         "outcome-reduce-integer-structure-by-gcd",
         "outcome-represent-integers-as-two-squares",
         "outcome-solve-modular-constraints",
-        "outcome-sum-multiplicative-function-by-min25-sieve"
+        "outcome-sum-multiplicative-function-by-min25-sieve",
+        "outcome-traverse-stern-brocot-ancestors"
       ],
       "prerequisiteIds": [
         "prereq-abc-advanced-v1"

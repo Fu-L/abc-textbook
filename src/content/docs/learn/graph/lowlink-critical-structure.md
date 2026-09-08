@@ -3,7 +3,7 @@ title: "lowlinkで橋・関節点を特定する"
 description: "前提からlowlinkで橋・関節点を特定するを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 111
+  order: 116
 ---
 
 # lowlinkで橋・関節点を特定する
@@ -41,6 +41,10 @@ DFS木の到達時刻とlowlink値から、除去で連結性が変わる辺・�
 ### 例 1 — DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる
 
 題材: [ABC301 Ex「Difference of Distance」](https://atcoder.jp/contests/abc301/tasks/abc301_h)
+
+選定理由: w<Dなら更新後も≤D、w>Dなら最適pathは対象辺を使わない。w=Dだけ「D以下pathからその辺を除けるか」というbridge問題になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。path costが最大辺重み。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -115,4 +119,4 @@ DFS木の到達時刻とlowlink値から、除去で連結性が変わる辺・�
 - [ABC375 G 公式解説](https://atcoder.jp/contests/abc375/editorial/11133)
 - [ABC375 G 公式問題文](https://atcoder.jp/contests/abc375/tasks/abc375_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-lowlink-critical-structure`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-lowlink-critical-structure`

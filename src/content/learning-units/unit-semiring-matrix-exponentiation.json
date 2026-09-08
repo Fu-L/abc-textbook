@@ -47,6 +47,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。固定長 walk の DP 遷移が結合的な二演算で行列積と同じ形になり、長さが巨大なとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -99,6 +100,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 91,
-  "globalIndex": 100,
+  "globalIndex": 104,
   "orderReason": "線形遷移・行列累乗で得た考え方と実装を再利用し、半環行列・min-plus/max-min遷移の発動条件・正当化・境界を重複なく学ぶ。"
 }

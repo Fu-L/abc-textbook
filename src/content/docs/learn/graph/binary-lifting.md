@@ -3,7 +3,7 @@ title: "doubling・binary lifting"
 description: "前提からdoubling・binary liftingを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 125
+  order: 132
 ---
 
 # doubling・binary lifting
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 一意な遷移の2の冪回先を前計算し、巨大回数後の状態または区間到達を求められる
 
 題材: [ABC212 F「Greedy Takahashi」](https://atcoder.jp/contests/abc212/tasks/abc212_f)
+
+選定理由: 旅程は時刻とともに前へ進み、バスを頂点とすると各頂点の後継が高々一つの関数グラフとして表せる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各状態から次状態が一意で、同じ遷移を多数のクエリから長距離たどるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ sidebar:
 - [ABC310 G 公式解説](https://atcoder.jp/contests/abc310/editorial/6785)
 - [ABC310 G 公式問題文](https://atcoder.jp/contests/abc310/tasks/abc310_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-binary-lifting`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-binary-lifting`

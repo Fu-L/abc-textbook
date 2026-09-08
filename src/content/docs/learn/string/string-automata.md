@@ -30,9 +30,9 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [有限状態automatonの構成](./finite-pattern-automaton.md)（標準順 142）— 文字を一つ加えた後の未来の挙動が等しい履歴を有限状態へ同値化し、pattern suffix・部分列進行・圧縮DP rowなどから全文字の完全遷移表を構築する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-2. [非決定性automatonのsubset construction](./automaton-subset-construction.md)（標準順 163）— 有限状態automatonの構成で得た考え方と実装を再利用し、非決定性automatonのsubset constructionの発動条件・正当化・境界を重複なく学ぶ。
-3. [Aho–Corasick](./aho-corasick.md)（標準順 181）— 有限状態automatonの構成・Trieによる共有接頭辞の索引で得た考え方と実装を再利用し、Aho–Corasickの発動条件・正当化・境界を重複なく学ぶ。
+1. [有限状態automatonの構成](./finite-pattern-automaton.md)（標準順 149）— 文字を一つ加えた後の未来の挙動が等しい履歴を有限状態へ同値化し、pattern suffix・部分列進行・圧縮DP rowなどから全文字の完全遷移表を構築する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+2. [非決定性automatonのsubset construction](./automaton-subset-construction.md)（標準順 170）— 有限状態automatonの構成で得た考え方と実装を再利用し、非決定性automatonのsubset constructionの発動条件・正当化・境界を重複なく学ぶ。
+3. [Aho–Corasick](./aho-corasick.md)（標準順 188）— 有限状態automatonの構成・Trieによる共有接頭辞の索引で得た考え方と実装を再利用し、Aho–Corasickの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -97,4 +97,4 @@ sidebar:
 - [ABC301 F 公式解説](https://atcoder.jp/contests/abc301/editorial/6331)
 - [ABC301 F 公式問題文](https://atcoder.jp/contests/abc301/tasks/abc301_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-string-automata`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-string-automata`

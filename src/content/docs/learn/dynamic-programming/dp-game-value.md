@@ -14,7 +14,7 @@ sidebar:
 
 ## この単元でできるようになること
 
-- 手番ごとの最大化・最小化を定義し、得点差・手数・partisan局面値を後続状態から評価できる。
+- 有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う。
 
 ## 前提・学習順・対象外
 
@@ -28,83 +28,84 @@ sidebar:
 
 ## 発動条件と見分け方
 
-### minimax・局面値ゲームDP
+### 有限局面DAGのminimax
 
-両者が異なる目的で最適に手を選ぶ局面を、得点差・手数・勝敗値のminimaxで評価する。
+必ず終了するゲームの局面DAGで、終端利得と各手番の最大化・最小化から局面値を求める。
 
-検索語: minimax、partisan game、ミニマックス、得点差ゲームDP
+検索語: minimax、ミニマックス、得点差ゲームDP
 
 未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
 
 ## ガイド例
 
-### 例 1 — 手番ごとの最大化・最小化を定義し、得点差・手数・partisan局面値を後続状態から評価できる
+### 例 1 — 有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う
 
-題材: [ABC229 H「Advance or Eat」](https://atcoder.jp/contests/abc229/tasks/abc229_h)
+題材: [ABC349 E「Weighted Tic-Tac-Toe」](https://atcoder.jp/contests/abc349/tasks/abc349_e)
+
+選定理由: terminalで同色三目があればその色のplayerが勝ち、全埋まりならred取得weight和とblue取得weight和を比較する。非terminalでは一つでもcurrent player勝利となるchildがあれば勝ち、全childが相手勝利なら負ける。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。運要素がなく、双方が勝利を目的に最適行動し、state遷移がacyclicである。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
-- 手番で合法手が異なる独立ゲームを列状態 DAG の数値評価へ落とし、評価和の符号で勝敗判定できる。
+- 両者が勝利のため最適に指す時、TakahashiとAokiのどちらが勝つか判定できる。
 
 #### 観察
 
-- 駒の前進は同じ列の盤面だけを変え、相手駒を食べる操作も選んだ一駒が属する列だけを変えるため、盤面は N 個の列ゲームの直和である。
-- 白番と黒番では動かせる色と食べられる色が異なるので、遷移集合が手番に依存し、通常の不偏ゲームの Grundy 数は適用できない。
+- 盤面は各cellがwhite/red/blueの3状態で高々3^9通りしかない。手番は塗られたcell数のparityで決まり、終了していなければ現在playerは「一手先に自分が勝つstateがあるか」だけを選べばよい。
 
 #### 候補を比較する
 
-- **採用**: 一列の 3 の N 乗状態 DAG に白手・黒手の辺を張り、両者の後継評価の間にある最も単純な二進有理数を評価値として計算し、列評価の総和で勝敗を判定する。 — このゲームでは全状態の左右後継評価が分離して数が定義でき、独立な列ゲームの和は評価値の加算に対応する。
-- **棄却**: 各列の Grundy 数を求め、その XOR で盤面全体の勝敗を判定する。 — 白と黒で許される手が異なる partisan game であり、同じ状態からの遷移を共有する Grundy 理論の前提を満たさない。
+- **採用**: 盤面stateをmemo化したminimax再帰で勝者を判定する — 全game treeの同一盤面を共有し、有限DAG上の勝敗を高々3^9×9遷移で解ける。
+- **棄却**: 局所的に最高weightのcellをgreedyに取る — 三目完成による即勝利がscoreより優先され、相手のthreatもあるためweightだけの局所選択は最適でない。
 
 #### 鍵となる着眼
 
-- 状態 v の白手後継評価の最大値より大きく、黒手後継評価の最小値より小さい最も単純な dyadic rational を eval(v) とすると、正なら先手白が勝つ。
-- 白手と黒手が干渉しない場合は操作順を交換した共通状態を作れ、干渉する食べる・進める場合にも一方から他方への辺があるため、左後継評価は右後継評価より小さい。
+- terminalで同色三目があればその色のplayerが勝ち、全埋まりならred取得weight和とblue取得weight和を比較する。非terminalでは一つでもcurrent player勝利となるchildがあれば勝ち、全childが相手勝利なら負ける。
 
 #### アルゴリズムへ接続する
 
-列状態を三進数で列挙した有限 partisan game DAG に Conway 型の数値評価を付け、入力各列の評価値を厳密な二進有理数として合計して符号を判定する。
+redMask,blueMaskまたはternary codeをstate keyにする。8本のwinning maskを検査し、full boardならmask別weight sumを比較する。未終了ではmove数偶数ならTakahashi、奇数ならAokiとして各empty cellを自色へ追加し再帰し、自分勝ちchildを見つけたらtrueをmemoする。初期stateのwinnerを出力する。
 
 
 ## 転用するときの確認
 
-- **独立ゲームの直和分解**: 一手が複数領域のうち一領域だけを変え、領域間で合法手が干渉しないとき。 適用: 各列を独立なゲーム成分として評価し、列評価を加算して盤面全体を扱う。
-- **partisan game の数値評価**: 二人の合法手が異なるが、全ての左選択肢が全ての右選択肢より小さい数ゲームとして表せるとき。 適用: 白後継の上界と黒後継の下界の間にある最小絶対値の整数、なければ最小分母の二進有理数を選ぶ。
-- 操作対象を全盤面から自由に選べても、状態変更が一成分内に閉じるならゲーム和への分解を検討する。
-- ゲームを見て即座に Grundy 数へ進まず、両プレイヤーが各状態から同じ遷移を選べる不偏性を先に確認する。
-- 数ゲームの評価可能性は、任意の白手後継が任意の黒手後継より小さいことを操作交換図で確認する。
+- **有限完全情報gameのminimax**: 運要素がなく、双方が勝利を目的に最適行動し、state遷移がacyclicである。 適用: terminal winnerをbaseに、存在/全称でcurrent playerの勝敗を後ろ向きに決める。
+- **bitmask盤面表現**: 3×3盤面の占有とwinning line包含を高速に検査したい。 適用: playerごとの9-bit maskを持ち、(mask&line)==lineで三目を判定する。
+- 複数終了規則のgame DPではrule priorityをterminal evaluatorにそのまま反映する。
+- 即勝ちを取る局面、相手三目をblockする局面、三目なしで負weightを含むscore決着を手作業minimaxと比較する。
 
 ## 到達確認
 
-### 到達確認 1 — 手番ごとの最大化・最小化を定義し、得点差・手数・partisan局面値を後続状態から評価できる
+### 到達確認 1 — 有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う
 
-転移題材: [ABC261 Ex「Game on Graph」](https://atcoder.jp/contests/abc261/tasks/abc261_h)
+転移題材: [ABC303 G「Bags Game」](https://atcoder.jp/contests/abc303/tasks/abc303_g)
 
-**課題**: ABC261 Ex「Game on Graph」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
+**課題**: ABC303 G「Bags Game」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
 
-**合格条件**: 手法名の列挙に留まらず、学習成果「手番ごとの最大化・最小化を定義し、得点差・手数・partisan局面値を後続状態から評価できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
+**合格条件**: 手法名の列挙に留まらず、学習成果「有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
 
 
 ## 解答と自己評価基準
 
-<details><summary>到達確認 1 の解答基準 — 手番ごとの最大化・最小化を定義し、得点差・手数・partisan局面値を後続状態から評価できる</summary>
+<details><summary>到達確認 1 の解答基準 — 有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う</summary>
 
 **検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
 
-別題材では次の直接根拠を対象技能として切り出す: 閉路を含む有向グラフ上の終了優先minimaxゲームについて、有限性と最適総重みを同時に求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
+別題材では次の直接根拠を対象技能として切り出す: 両者が最適に行動したときのTakahashiの利益XとAokiの利益Yの差X-Yを求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
 
 根拠として照合する観点:
 
-- 閉路を含む有向グラフ上の終了優先minimaxゲームについて、有限性と最適総重みを同時に求められる。
+- 両者が最適に行動したときのTakahashiの利益XとAokiの利益Yの差X-Yを求められる。
 
-- 対象技能が担う箇所: 閉路を含む有向グラフ上の終了優先minimaxゲームについて、有限性と最適総重みを同時に求められる。
-- 転移題材の解法接続: reachability game の retrograde analysis に、AND/OR 状態の確定規則と nonnegative minimax distance の Dijkstra ordering を組み合わせる。
+- 対象技能が担う箇所: 両者が最適に行動したときのTakahashiの利益XとAokiの利益Yの差X-Yを求められる。
+- 転移題材の解法接続: dp[i][j]を残存区間[j,j+i)から手番の人が得る最適得点差とする。三行動に対応する(k,Z)=(i-1,0),(max(i-B,0),A),(max(i-D,0),C)ごとに、配列S(k,l)+dp[k,l]の幅i-k+1のsliding minimumをdequeで求め、S(i,j)-Z-minを候補として最大を取る。答えはdp[N][0]。
 - 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
 - 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
 - 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
 - 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
 
-期待する到達点: 手番ごとの最大化・最小化を定義し、得点差・手数・partisan局面値を後続状態から評価できる。
+期待する到達点: 有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う。
 
 </details>
 
@@ -113,9 +114,9 @@ sidebar:
 
 - [ABC218 G 公式解説](https://atcoder.jp/contests/abc218/editorial/2607)
 - [ABC218 G 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_g)
-- [ABC229 H 公式解説](https://atcoder.jp/contests/abc229/editorial/2977)
-- [ABC229 H 公式問題文](https://atcoder.jp/contests/abc229/tasks/abc229_h)
-- [ABC261 H 公式解説](https://atcoder.jp/contests/abc261/editorial/4449)
-- [ABC261 H 公式問題文](https://atcoder.jp/contests/abc261/tasks/abc261_h)
+- [ABC303 G 公式解説](https://atcoder.jp/contests/abc303/editorial/6444)
+- [ABC303 G 公式問題文](https://atcoder.jp/contests/abc303/tasks/abc303_g)
+- [ABC349 E 公式問題文](https://atcoder.jp/contests/abc349/tasks/abc349_e)
+- [ABC349 E 公式解説](https://atcoder.jp/contests/abc349/editorial/9780)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-dp-game-value`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-game-value`

@@ -30,8 +30,8 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [凸包・支持方向・境界候補](./convex-boundary-hull.md)（標準順 159）— 幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、凸包・支持方向・境界候補の発動条件・正当化・境界を重複なく学ぶ。
-2. [半平面制約・凸領域の共通部分](./half-plane-constraints.md)（標準順 183）— 幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、半平面制約・凸領域の共通部分の発動条件・正当化・境界を重複なく学ぶ。
+1. [凸包・支持方向・境界候補](./convex-boundary-hull.md)（標準順 166）— 幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、凸包・支持方向・境界候補の発動条件・正当化・境界を重複なく学ぶ。
+2. [半平面制約・凸領域の共通部分](./half-plane-constraints.md)（標準順 190）— 幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、半平面制約・凸領域の共通部分の発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -95,4 +95,4 @@ sidebar:
 - [ABC257 H 公式解説](https://atcoder.jp/contests/abc257/editorial/4168)
 - [ABC257 H 公式問題文](https://atcoder.jp/contests/abc257/tasks/abc257_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-convex-geometry`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-convex-geometry`

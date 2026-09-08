@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC245 Ex「Product Modulo 2」](https://atcoder.jp/contests/abc245/tasks/abc245_h)
 
+選定理由: 互いに素な各 p^q への剰余の組は法 M の剰余と一対一対応するため、各座標で積が N と一致する列数を独立に数えて積を取れる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。法が合成数で、条件が互いに素な素数冪ごとの合同条件へ分離できるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 巨大な法・長さの積合同列数を、素数冪ごとの q+1 状態と行列累乗へ縮約して数えられる。
@@ -118,4 +122,4 @@ M を ∏p^q に分解する。各素数冪について、目標剰余を打ち�
 - [ABC371 G 公式解説](https://atcoder.jp/contests/abc371/editorial/10927)
 - [ABC371 G 公式問題文](https://atcoder.jp/contests/abc371/tasks/abc371_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-modular-congruence`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-modular-congruence`

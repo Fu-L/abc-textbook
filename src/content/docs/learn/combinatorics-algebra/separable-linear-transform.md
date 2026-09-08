@@ -3,7 +3,7 @@ title: "分離可能線形変換・Walsh–Hadamard変換"
 description: "前提から分離可能線形変換・Walsh–Hadamard変換を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 178
+  order: 185
 ---
 
 # 分離可能線形変換・Walsh–Hadamard変換
@@ -41,6 +41,10 @@ Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolu
 ### 例 1 — Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる
 
 題材: [ABC212 H「Nim Counting」](https://atcoder.jp/contests/abc212/tasks/abc212_h)
+
+選定理由: 求める勝ち局面を直接数えるより、総列数から XOR が 0 の負け局面数を引くと Nim の判定条件をそのまま使える。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。複数の山から一山だけ選んで正の個数を減らす通常プレイのゲームを扱うとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -120,4 +124,4 @@ Nim の敗北条件を XOR 畳み込みの添字 0 の係数へ翻訳し、XOR �
 - [ABC288 G 公式解説](https://atcoder.jp/contests/abc288/editorial/5668)
 - [ABC288 G 公式問題文](https://atcoder.jp/contests/abc288/tasks/abc288_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-separable-linear-transform`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-separable-linear-transform`

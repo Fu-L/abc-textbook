@@ -3,7 +3,7 @@ title: "動的・implicit Segment Tree"
 description: "前提から動的・implicit Segment Treeを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 166
+  order: 173
 ---
 
 # 動的・implicit Segment Tree
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 巨大または疎な座標域で訪れたnodeだけを生成し、区間要約と境界探索をO(log U)で保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC403 G「Odd Position Sum Query」](https://atcoder.jp/contests/abc403/tasks/abc403_g)
+
+選定理由: 左の個数が偶数なら親の odd=left.odd+right.odd、even=left.even+right.even、奇数なら右の odd/even を交換して足す。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。座標域は巨大だが、オンライン点更新で実際に触る座標数が少ないとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -112,4 +116,4 @@ sidebar:
 - [ABC403 G 公式解説](https://atcoder.jp/contests/abc403/editorial/12770)
 - [ABC403 G 公式問題文](https://atcoder.jp/contests/abc403/tasks/abc403_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-dynamic-segment-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dynamic-segment-tree`

@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC250 F「One Fourth」](https://atcoder.jp/contests/abc250/tasks/abc250_f)
 
+選定理由: 面積を2倍した外積和で保持すれば、四分の一との差は|全体の2倍面積-4×部分の2倍面積|として整数だけで比較できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。一方の端点を固定した部分面積が他方の端点に対して単調に変化する。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 一つの対角線で分けた領域の面積と多角形全体の四分の一との差の最小値を求められる。
@@ -116,4 +120,4 @@ sidebar:
 - [ABC258 E 公式問題文](https://atcoder.jp/contests/abc258/tasks/abc258_e)
 - [ABC258 E 公式解説](https://atcoder.jp/contests/abc258/editorial/4215)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-two-pointers-window`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-two-pointers-window`

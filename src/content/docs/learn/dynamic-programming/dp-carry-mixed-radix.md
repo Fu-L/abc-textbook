@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC231 E「Minimal payments」](https://atcoder.jp/contests/abc231/tasks/abc231_e)
 
+選定理由: 支払い額 Y 自体を探索せず、各額面で生じる繰り上がりを 0 または 1 の状態として追う貨幣版の桁 DP と考える。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。単位が次の単位を割り切り、目標値を過不足の両方で表して支払いと釣銭を最小化するとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 整除鎖の硬貨による支払い・釣銭最小化を、各桁の丸め二択と繰り上がり DP で解ける。
@@ -113,4 +117,4 @@ sidebar:
 - [ABC466 G 公式解説](https://atcoder.jp/contests/abc466/editorial/22603)
 - [ABC466 G 公式問題文](https://atcoder.jp/contests/abc466/tasks/abc466_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-dp-carry-mixed-radix`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-carry-mixed-radix`

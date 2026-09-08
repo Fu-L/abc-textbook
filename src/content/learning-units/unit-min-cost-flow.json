@@ -52,6 +52,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。有向グラフで同一強連結成分内を自由に巡回でき、頂点資源をまとめて回収できるとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -107,6 +108,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 92,
-  "globalIndex": 190,
+  "globalIndex": 197,
   "orderReason": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、最小費用流・circulationの発動条件・正当化・境界を重複なく学ぶ。"
 }

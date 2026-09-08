@@ -3,7 +3,7 @@ title: "線形matroid交差の乱択rank判定"
 description: "前提から線形matroid交差の乱択rank判定を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 213
+  order: 219
 ---
 
 # 線形matroid交差の乱択rank判定
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 二つの線形matroid表現から乱択intersection matrixを構成し、Schwartz–Zippelの誤り上界を示したうえでrankを最大共通独立sizeとして判定できる
 
 題材: [ABC399 G「Colorful Spanning Tree」](https://atcoder.jp/contests/abc399/tasks/abc399_g)
+
+選定理由: graphic matroidはoriented incidence columns、color cのpartition matroidはA_c行のVandermonde columnsで線形表現できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。二つの線形matroidの最大common independent sizeだけが必要なとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -113,4 +117,4 @@ A_1のcolor別row blockとincidence A_2からrandomized Mを構成する。各L�
 - [ABC399 G 公式解説](https://atcoder.jp/contests/abc399/editorial/12546)
 - [ABC399 G 公式問題文](https://atcoder.jp/contests/abc399/tasks/abc399_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-linear-matroid-intersection`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-linear-matroid-intersection`

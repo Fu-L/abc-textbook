@@ -3,7 +3,7 @@ title: "凸包・支持方向・境界候補"
 description: "前提から凸包・支持方向・境界候補を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 158
+  order: 165
 ---
 
 # 凸包・支持方向・境界候補
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる
 
 題材: [ABC257 Ex「Dice Sum 2」](https://atcoder.jp/contests/abc257/tasks/abc257_h)
+
+選定理由: f_i'(1)=E[die_i]、f_i''(1)を使うとE[(総和)^2]-費用が選択ベクトル和(X,Y)上のX^2+Yになる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。独立確率変数の和の二乗期待値を選択項ごとの量へ分解したい。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ sidebar:
 - [ABC275 G 公式解説](https://atcoder.jp/contests/abc275/editorial/5111)
 - [ABC275 G 公式問題文](https://atcoder.jp/contests/abc275/tasks/abc275_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-convex-boundary-hull`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-convex-boundary-hull`

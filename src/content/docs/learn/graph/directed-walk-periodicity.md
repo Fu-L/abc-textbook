@@ -3,7 +3,7 @@ title: "有向walkの周期・cycle差分gcd"
 description: "前提から有向walkの周期・cycle差分gcdを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 188
+  order: 195
 ---
 
 # 有向walkの周期・cycle差分gcd
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 往復可能な有向領域のclosed walk長が作る周期gcdを求め、巨大な指定歩数での到達可能性を判定できる
 
 題材: [ABC306 G「Return to 1」](https://atcoder.jp/contests/abc306/tasks/abc306_g)
+
+選定理由: 全edgesでd_v≡d_u+1 mod aなら任意closed walk長はaの倍数で、違反edgeがあればtree pathsと組み合わせてa非倍数のclosed walkを作れる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。同じvertexへ戻るwalkの可能lengthを巨大なexact値について判定したいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -113,4 +117,4 @@ strongly connected directed graphのperiodをDFS potentialsに対するedge disc
 - [ABC306 G 公式解説](https://atcoder.jp/contests/abc306/editorial/6602)
 - [ABC306 G 公式問題文](https://atcoder.jp/contests/abc306/tasks/abc306_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-directed-walk-periodicity`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-directed-walk-periodicity`

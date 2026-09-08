@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC284 Ex「Count Unlabeled Graphs」](https://atcoder.jp/contests/abc284/tasks/abc284_h)
 
+選定理由: cycle長列d_1..d_mに対し、固定されるc色彩色は各cycleの色を選ぶc^m通りである。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。labelの置換で同一視した構造を数え、自己同型の大きさが対象ごとに異なるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 全K色を使う頂点彩色付きunlabeled simple graphの個数を、cycle type列挙とBurnside・包含排除でmod P計算できる。
@@ -119,4 +123,4 @@ Nの各integer partitionをcycle長列として列挙する。cycle数m、edge o
 - [ABC428 G 公式解説](https://atcoder.jp/contests/abc428/editorial/14241)
 - [ABC428 G 公式問題文](https://atcoder.jp/contests/abc428/tasks/abc428_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-orbit-counting`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-orbit-counting`

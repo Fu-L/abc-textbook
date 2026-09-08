@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC448 E「Simple Division」](https://atcoder.jp/contests/abc448/tasks/abc448_e)
 
+選定理由: R_{a+b}=R_a×10^b+R_b なので、(10^len,R_len) の pair は文字列結合と同じ結合則を持つ。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。巨大長の同一桁列や文字列値を composite modulus 上で扱うとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 巨大な反復桁からなる整数の商の剰余を、合成数 modulus 上の doubling で安全に計算できる。
@@ -111,4 +115,4 @@ sidebar:
 - [ABC448 E 公式問題文](https://atcoder.jp/contests/abc448/tasks/abc448_e)
 - [ABC448 E 公式解説](https://atcoder.jp/contests/abc448/editorial/16749)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-monoid-exponentiation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-monoid-exponentiation`

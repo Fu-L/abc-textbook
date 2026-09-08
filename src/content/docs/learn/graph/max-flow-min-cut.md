@@ -3,7 +3,7 @@ title: "最大流・最小カット"
 description: "前提から最大流・最小カットを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 173
+  order: 180
 ---
 
 # 最大流・最小カット
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC225 G「X」](https://atcoder.jp/contests/abc225/tasks/abc225_g)
+
+選定理由: source→cellに容量Aを張るとcellを未選択側へ置くcut費用になり、cell→斜め前cellの容量Cは前者だけ選択したrun開始時に限って切られる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。隣接する選択要素を一操作でまとめられ、費用が連結成分やrunの個数で決まるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ sidebar:
 - [ABC239 G 公式解説](https://atcoder.jp/contests/abc239/editorial/3393)
 - [ABC239 G 公式問題文](https://atcoder.jp/contests/abc239/tasks/abc239_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-max-flow-min-cut`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-max-flow-min-cut`

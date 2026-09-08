@@ -3,7 +3,7 @@ title: "01 on Tree・親先行順序のcluster縮約"
 description: "前提から01 on Tree・親先行順序のcluster縮約を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 118
+  order: 124
 ---
 
 # 01 on Tree・親先行順序のcluster縮約
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 親先行制約下の交換比較をcluster統計へまとめ、01 on Treeの縮約貪欲で最適順序を構成できる
 
 題材: [ABC376 G「Treasure Hunting」](https://atcoder.jp/contests/abc376/tasks/abc376_g)
+
+選定理由: 頂点 cluster を (C0,C1)=(重み総和,頂点数) とすると、二 cluster の順序比較は C0_a C1_b と C0_b C1_a の比比較になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。親が子より前という precedence 制約下で二値列の転倒型目的を最小化するとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -110,4 +114,4 @@ sidebar:
 - [ABC376 G 公式解説](https://atcoder.jp/contests/abc376/editorial/11196)
 - [ABC376 G 公式問題文](https://atcoder.jp/contests/abc376/tasks/abc376_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-tree-precedence-contraction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-tree-precedence-contraction`

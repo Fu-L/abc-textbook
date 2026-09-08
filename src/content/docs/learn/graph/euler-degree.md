@@ -30,8 +30,8 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [Euler trail・circuit](./euler-trail-circuit.md)（標準順 151）— 全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-2. [指定次数parityの部分グラフ構成](./degree-parity-subgraph.md)（標準順 153）— Euler trail・circuitで得た考え方と実装を再利用し、指定次数parityの部分グラフ構成の発動条件・正当化・境界を重複なく学ぶ。
+1. [Euler trail・circuit](./euler-trail-circuit.md)（標準順 158）— 全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+2. [指定次数parityの部分グラフ構成](./degree-parity-subgraph.md)（標準順 160）— Euler trail・circuitで得た考え方と実装を再利用し、指定次数parityの部分グラフ構成の発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -95,4 +95,4 @@ sidebar:
 - [ABC336 G 公式解説](https://atcoder.jp/contests/abc336/editorial/9060)
 - [ABC336 G 公式問題文](https://atcoder.jp/contests/abc336/tasks/abc336_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-euler-degree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-euler-degree`

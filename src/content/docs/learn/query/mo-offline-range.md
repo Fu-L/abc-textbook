@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC242 G「Range Pairing Query」](https://atcoder.jp/contests/abc242/tasks/abc242_g)
 
+選定理由: 非線形な floor(cnt/2) でも、一個の増減差は cnt の偶奇だけで決まるため Mo の add/remove に必要な十分状態は頻度と総 pair 数だけである。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。静的配列の多数の offline range query で、要素一個の追加・削除から答えを更新できるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 色頻度の pair 総数を O(1) add/remove で維持し、大量 range query を Mo 順で処理できる。
@@ -116,4 +120,4 @@ query を左端 block と右端で Mo 順に sort する。現在 [L,R] を伸�
 - [ABC384 G 公式解説](https://atcoder.jp/contests/abc384/editorial/11548)
 - [ABC384 G 公式問題文](https://atcoder.jp/contests/abc384/tasks/abc384_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-mo-offline-range`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-mo-offline-range`

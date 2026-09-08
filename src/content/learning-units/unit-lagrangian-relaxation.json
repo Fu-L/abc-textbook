@@ -48,6 +48,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "個数別最小費用f(k)を定義した後の離散凸性の証明、penalty oracle、個数の境界探索を扱う。操作の順序付けとoracle高速化は別工程として区別する。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -61,7 +62,7 @@
         "接続: affine-composition orderingからsegment-cost Monge性を導き、partition shortest pathをLagrangian relaxation/Aliens DPとconvex dual searchで解く。"
       ],
       "executionTarget": null,
-      "expectedResult": "個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "expectedResult": "個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
       "verificationStatus": "not_applicable",
       "learningUnitRole": "guided_outcome"
     }
@@ -77,10 +78,10 @@
         "prereq-abc-advanced-v1",
         "unit-basic-convex-optimization"
       ],
-      "attainmentCondition": "学習成果「個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "attainmentCondition": "学習成果「個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
       "assessment": {
         "method": "ABC355 G「Baseball」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+        "successCondition": "手法名の列挙に留まらず、学習成果「個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
       },
       "answer": {
         "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 重み付き一次元 K-center 型目的を Monge DAG の固定辺数最短路へし、Aliens DP で大規模制約を処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
@@ -92,7 +93,7 @@
           "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
           "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
         ],
-        "expectedResult": "個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "expectedResult": "個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
         "verificationStatus": "pending"
       },
       "learningUnitRole": "outcome_attainment"
@@ -101,6 +102,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 93,
-  "globalIndex": 194,
+  "globalIndex": 201,
   "orderReason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、Lagrangian relaxation・Aliens trickの発動条件・正当化・境界を重複なく学ぶ。"
 }

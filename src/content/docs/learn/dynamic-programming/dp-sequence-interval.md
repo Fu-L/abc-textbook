@@ -49,6 +49,10 @@ sidebar:
 
 題材: [ABC217 F「Make Pair」](https://atcoder.jp/contests/abc217/tasks/abc217_f)
 
+選定理由: 左端と位置 2k の生徒が仲良しなら、内側 k-1 組の処理後にその二人を消す k 操作と、右側 j-k 操作を二項係数 C(j,k) 通りに interleave できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。隣接要素の削除によって元の列の区間が独立に閉じ、最終的な対応が非交差になるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 隣接削除から非交差な区間分割を見抜き、独立部分の方法数と操作順の interleave を同じ DP 遷移で数えられる。
@@ -74,6 +78,10 @@ dp[i][j] を生徒 i+1 から i+2j を全て消す方法数とし、左端の相
 ### 例 2 — 列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる
 
 題材: [ABC214 F「Substrings」](https://atcoder.jp/contests/abc214/tasks/abc214_f)
+
+選定理由: 通常の部分列 DP における最終出現による重複排除と、隣接位置を選べないことによる一つ手前までの遷移制限を同時に適用する。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。異なる位置選択が同じ文字列を作り得るため、相異なる部分列だけを数えるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -186,4 +194,4 @@ dp[i][j] を生徒 i+1 から i+2j を全て消す方法数とし、左端の相
 - [ABC238 F 公式解説](https://atcoder.jp/contests/abc238/editorial/3354)
 - [ABC238 F 公式問題文](https://atcoder.jp/contests/abc238/tasks/abc238_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-dp-sequence-interval`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-sequence-interval`

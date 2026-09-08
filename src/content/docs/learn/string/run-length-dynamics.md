@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC313 E「Duplicate」](https://atcoder.jp/contests/abc313/tasks/abc313_e)
 
+選定理由: 末尾から一文字消える各時刻に、直前の非1数字 x はその左の 1 を x 倍へ写すため、左 run の増分を (x−1)×残り時刻としてまとめられる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。文字列操作が同じ文字の連続区間を一様に伸縮し、展開後長が巨大になるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 発散を隣接パターンで判定し、有限時の巨大な中間文字列を構築せず O(N) で操作回数を求められる。
@@ -112,4 +116,4 @@ sidebar:
 - [ABC313 E 公式問題文](https://atcoder.jp/contests/abc313/tasks/abc313_e)
 - [ABC313 E 公式解説](https://atcoder.jp/contests/abc313/editorial/6911)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-run-length-dynamics`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-run-length-dynamics`

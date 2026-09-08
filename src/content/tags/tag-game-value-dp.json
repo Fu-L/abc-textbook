@@ -1,7 +1,7 @@
 {
   "id": "tag-game-value-dp",
-  "name": "minimax・局面値ゲームDP",
-  "definition": "両者が異なる目的で最適に手を選ぶ局面を、得点差・手数・勝敗値のminimaxで評価する。",
+  "name": "有限局面DAGのminimax",
+  "definition": "必ず終了するゲームの局面DAGで、終端利得と各手番の最大化・最小化から局面値を求める。",
   "parentId": "tag-dp-state-transition",
   "prerequisiteTagIds": [
     "tag-dp-state-equivalence"
@@ -47,13 +47,12 @@
     "outcome-evaluate-adversarial-game-value"
   ],
   "representativeProblemIds": [
-    "abc261-ex",
+    "abc218-g",
     "abc303-g",
     "abc349-e"
   ],
   "aliases": [
     "minimax",
-    "partisan game",
     "ミニマックス",
     "得点差ゲームDP"
   ],

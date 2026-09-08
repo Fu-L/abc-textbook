@@ -19,6 +19,7 @@
     "tag-additive-tree-metric-reconstruction",
     "tag-dsu-merge-tree",
     "tag-heavy-light-decomposition",
+    "tag-heavy-light-recursive-dp",
     "tag-heavy-path-tree-dp",
     "tag-implicit-binary-tree-arithmetic",
     "tag-laminar-interval-containment-tree",
@@ -50,6 +51,7 @@
     "outcome-flatten-tree-by-euler-order",
     "outcome-model-and-exploit-tree",
     "outcome-optimize-tree-order-by-cluster-contraction",
+    "outcome-pass-resource-dp-through-heavy-recursion",
     "outcome-reconstruct-tree-from-distance-matrix",
     "outcome-reroot-tree-aggregation",
     "outcome-use-tree-diameter-extrema"
@@ -126,6 +128,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。暗黙の完全二分木で距離を固定した頂点対を数えるとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -158,6 +161,7 @@
         "outcome-count-implicit-binary-tree-layers",
         "outcome-flatten-tree-by-euler-order",
         "outcome-optimize-tree-order-by-cluster-contraction",
+        "outcome-pass-resource-dp-through-heavy-recursion",
         "outcome-reconstruct-tree-from-distance-matrix",
         "outcome-reroot-tree-aggregation",
         "outcome-use-tree-diameter-extrema"
@@ -178,6 +182,7 @@
         "加法的tree metric復元: 1個の直接所有Outcome、学ぶ理由「木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ」、対象外「加法的tree metric復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
         "DSU merge tree・Kruskal reconstruction tree: 1個の直接所有Outcome、学ぶ理由「DSUによる連結成分管理・縮約で得た考え方と実装を再利用し、DSU merge tree・Kruskal reconstruction treeの発動条件・正当化・境界を重複なく学ぶ」、対象外「DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
         "01 on Tree・親先行順序のcluster縮約: 1個の直接所有Outcome、学ぶ理由「DSUによる連結成分管理・縮約・貪欲法と交換論で得た考え方と実装を再利用し、01 on Tree・親先行順序のcluster縮約の発動条件・正当化・境界を重複なく学ぶ」、対象外「01 on Tree・親先行順序のcluster縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "資源DPを引数で渡すHLRecDP: 1個の直接所有Outcome、学ぶ理由「資源軸knapsack DP・根付き木DP・部分木集約で得た考え方と実装を再利用し、資源DPを引数で渡すHLRecDPの発動条件・正当化・境界を重複なく学ぶ」、対象外「資源DPを引数で渡すHLRecDPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
         "rake・compressで動的木DPを保つ: 1個の直接所有Outcome、学ぶ理由「木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する」、対象外「更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition」を照合する。"
       ],
       "executionTarget": null,
@@ -239,6 +244,7 @@
         "outcome-count-implicit-binary-tree-layers",
         "outcome-flatten-tree-by-euler-order",
         "outcome-optimize-tree-order-by-cluster-contraction",
+        "outcome-pass-resource-dp-through-heavy-recursion",
         "outcome-reconstruct-tree-from-distance-matrix",
         "outcome-reroot-tree-aggregation",
         "outcome-use-tree-diameter-extrema"

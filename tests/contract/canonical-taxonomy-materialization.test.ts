@@ -18,6 +18,7 @@ import {
 } from '../../src/lib/taxonomy/canonical-taxonomy-materialization.js';
 import { loadFinalTaxonomySourceContext } from '../../src/lib/taxonomy/final-taxonomy-build.js';
 import { SINGLE_PROBLEM_TAG_IDS } from '../../src/lib/taxonomy/final-taxonomy-policy.js';
+import { CANONICAL_GUIDED_EXAMPLES } from '../../src/lib/taxonomy/canonical-guided-examples.js';
 
 const BUILD_PATH = 'staging/taxonomy/initial/final-taxonomy-build.json';
 
@@ -38,6 +39,32 @@ const loadMaterializationInput = async () => {
 };
 
 describe('T047–T050 canonical taxonomy materialization', () => {
+  it('uses explicit teaching choices even when a simpler guide is only a supporting placement', async () => {
+    const input = await loadMaterializationInput();
+    const result = buildCanonicalTaxonomyMaterialization(input);
+    expect(Object.keys(CANONICAL_GUIDED_EXAMPLES).sort()).toEqual(
+      result.learningOutcomes.map(({ value }) => value.id).sort(),
+    );
+    const expected = {
+      'unit-dp-subset-state': 'ABC232 F',
+      'unit-potential-dsu': 'ABC328 F',
+      'unit-rational-approximation': 'ABC333 G',
+      'unit-sequence-fingerprint': 'ABC331 F',
+      'unit-binary-trie': 'ABC425 G',
+      'unit-dp-game-value': 'ABC349 E',
+      'unit-chapter-modeling': 'ABC214 E',
+    };
+    for (const [unitId, problemLabel] of Object.entries(expected)) {
+      const unit = result.learningUnits.find(({ value }) => value.id === unitId);
+      expect(
+        unit?.value.examples.find(({ learningUnitRole }) => learningUnitRole === 'guided_outcome')
+          ?.input,
+        unitId,
+      ).toContain(problemLabel);
+      expect(unit?.document).toContain('選定理由:');
+    }
+  }, 30_000);
+
   it('materializes every accepted candidate and placement without re-synthesizing taxonomy', async () => {
     const input = await loadMaterializationInput();
     const result = buildCanonicalTaxonomyMaterialization(input);
@@ -252,9 +279,9 @@ describe('T047–T050 canonical taxonomy materialization', () => {
       }
     }
 
-    expect(outcomeIds).toHaveLength(194);
-    expect(tagIds).toHaveLength(191);
-    expect(result.learningUnits).toHaveLength(214);
+    expect(outcomeIds).toHaveLength(200);
+    expect(tagIds).toHaveLength(197);
+    expect(result.learningUnits).toHaveLength(220);
     expect(
       result.learningUnits.filter(({ value }) => value.ownedLearningOutcomeIds?.length === 0),
     ).toHaveLength(24);
@@ -278,8 +305,8 @@ describe('T047–T050 canonical taxonomy materialization', () => {
       'unit-integer-boundary-blocks',
     ]);
     expect(routingUnitCount).toBe(45);
-    expect(totalExampleCount).toBe(239);
-    expect(totalExerciseCount).toBe(239);
+    expect(totalExampleCount).toBe(245);
+    expect(totalExerciseCount).toBe(245);
     for (const outcomeId of outcomeIds) {
       expect(outcomeOwnerCounts.get(outcomeId), `${outcomeId}/owner`).toBe(1);
       expect(guidedOwnerCounts.get(outcomeId), `${outcomeId}/guided`).toBe(1);

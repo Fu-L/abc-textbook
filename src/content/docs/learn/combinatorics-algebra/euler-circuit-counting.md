@@ -3,7 +3,7 @@ title: "BEST定理によるEuler circuit数え上げ"
 description: "前提からBEST定理によるEuler circuit数え上げを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 151
+  order: 158
 ---
 
 # BEST定理によるEuler circuit数え上げ
@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC336 G「16 Integers」](https://atcoder.jp/contests/abc336/tasks/abc336_g)
 
+選定理由: 始点・終点候補を8通りずつ調べ、degree差がEuler trail条件を満たす場合は終点から始点への補助辺を加えてEuler閉路へ帰着できる。区別された辺の閉路数はBEST定理の有向全域木数×∏(outdeg(v)-1)!で、全域木数は有向Laplacian minorの行列式になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。固定長substringの出現回数を指定された列を数える。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 指定された全16種類の長さ4 substring出現回数を持つbinary列の個数をmod 998244353で求められる。
@@ -61,7 +65,7 @@ sidebar:
 
 #### アルゴリズムへ接続する
 
-16本種のXから8頂点の入出次数を作る。各始点s・終点tについてdegree条件と非零辺部分の連結性を確認し、必要な補助辺t→sを加える。mod 998244353で8×8 Laplacian minorをGaussian eliminationしてarborescence数を求め、BESTのfactorial積を掛け、同一patternのX_e!による重複を割って該当する列数を合計する。
+各始点s・終点tのdegree条件を調べ、辺を持つ頂点とs,tだけをVとする。元の辺と区別する補助辺e*:t→sをs=tでも一個加え、V上の連結性と入出次数一致を確認する。e*を最初の辺に固定した閉路からe*を切ると、sからtへの線形なtrailと一対一対応する。自己ループを除いたV上の有向Laplacianから根tの行・列を除き、その余因子の行列式を求める。一頂点なら空行列式は1。これに補助辺・自己ループを含む次数の∏(outdeg(v)-1)!を掛け、元の16種類のX_e!だけで割り、始終点について合計する。X0000=1だけなら答えは1であり、未使用の7頂点を行列へ残してはいけない。
 
 
 ## 転用するときの確認
@@ -110,4 +114,4 @@ sidebar:
 - [ABC336 G 公式解説](https://atcoder.jp/contests/abc336/editorial/9060)
 - [ABC336 G 公式問題文](https://atcoder.jp/contests/abc336/tasks/abc336_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-euler-circuit-counting`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-euler-circuit-counting`

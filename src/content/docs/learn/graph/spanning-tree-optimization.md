@@ -30,7 +30,7 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [Kruskal順の閾値DSU sweep](./kruskal-threshold-sweep.md)（標準順 194）— DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。
+1. [Kruskal順の閾値DSU sweep](./kruskal-threshold-sweep.md)（標準順 201）— DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。
 
 ## 発動条件と見分け方
 
@@ -47,6 +47,10 @@ sidebar:
 ### 例 1 — cut・cycle性質で辺の安全性を証明し、Kruskal法または同値な選択で最小・最大全域木を構成できる
 
 題材: [ABC218 E「Destruction」](https://atcoder.jp/contests/abc218/tasks/abc218_e)
+
+選定理由: Kruskal 法で両端が既に同じ成分にある辺は連結維持には不要であり、その重みが正のときだけ削除する価値がある。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。要素を削る利益を最大化しつつ、残した集合が連結などの被覆条件を満たすとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -153,4 +157,4 @@ sidebar:
 - [ABC270 F 公式解説](https://atcoder.jp/contests/abc270/editorial/4879)
 - [ABC270 F 公式問題文](https://atcoder.jp/contests/abc270/tasks/abc270_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-spanning-tree-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-spanning-tree-optimization`

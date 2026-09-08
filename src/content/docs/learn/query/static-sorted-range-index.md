@@ -3,7 +3,7 @@ title: "静的sorted range index・Merge Sort Tree"
 description: "前提から静的sorted range index・Merge Sort Treeを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 175
+  order: 182
 ---
 
 # 静的sorted range index・Merge Sort Tree
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 各canonical区間へsorted列とprefix aggregateを構築し、値域境界付きのrange count/sumを二分探索で答える。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC339 G「Smaller Sum」](https://atcoder.jp/contests/abc339/tasks/abc339_g)
+
+選定理由: 完全被覆nodeではsorted配列にupper_bound(X)を行い、そのindexまでのprefix sumを返せば、値≤Xの要素だけの和になる。segment分解されたnodeはindex集合が互いにdisjointなので和を単純加算できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。静的配列に対しindex範囲と値thresholdを同時に指定するqueryが多数ある。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -110,4 +114,4 @@ segment treeをbottom-upに構築し、各nodeで子のsorted listをmergeして
 - [ABC339 G 公式解説](https://atcoder.jp/contests/abc339/editorial/9207)
 - [ABC339 G 公式問題文](https://atcoder.jp/contests/abc339/tasks/abc339_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-static-sorted-range-index`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-static-sorted-range-index`

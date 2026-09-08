@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853",
-    "acceptedAt": "2026-09-07T23:46:44.921Z"
+    "digest": "242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50",
+    "acceptedAt": "2026-09-08T13:23:02.761Z"
   },
   "taskIds": [
     "T047",
@@ -41,14 +41,14 @@
     "T050"
   ],
   "counts": {
-    "tags": 191,
-    "learningOutcomes": 194,
-    "learningUnits": 214,
-    "learningDocuments": 214,
-    "directlyOwnedTags": 191,
-    "directlyOwnedLearningOutcomes": 194,
-    "guidedOutcomeExamples": 194,
-    "outcomeAttainmentExercises": 194,
+    "tags": 197,
+    "learningOutcomes": 200,
+    "learningUnits": 220,
+    "learningDocuments": 220,
+    "directlyOwnedTags": 197,
+    "directlyOwnedLearningOutcomes": 200,
+    "guidedOutcomeExamples": 200,
+    "outcomeAttainmentExercises": 200,
     "curriculumRoutingUnits": 45,
     "placements": 868,
     "correctionImpacts": 12
@@ -64,12 +64,12 @@
     "materializationEvidence": "docs/verification/bootstrap/canonical-taxonomy-materialization.json"
   },
   "digests": {
-    "tags": "7f1f1394b803618bd87d93d9b28d0e2f948cf7bee911f037d75a7e57023497b7",
-    "learningOutcomes": "e9a7a1a1bbc1b2ccbd50220c1c3a582e6733b6f344427bc919b6629b42d781ae",
-    "learningUnits": "e2a221d90f4a950b305f18dcce2863e8a8c506f17b37891651d8e0d16b4583f5",
-    "learningDocuments": "da9ae8b693c883bee88ee96c00f7f91e6cb4cac68a82ae55d31ac43bb20d7f44",
-    "learningOrderDigest": "3856d305cc885e833189f24638dbc6f5038089f35eacec5082c4624aebedbe59",
-    "problemPlacementPolicyDigest": "33d35db5ec566bf69bc770c5049a6364b07d3103a19d9b5b03b5b7ccc5f5f048"
+    "tags": "a80b000453c133fb074b406532cdec2f81b869288fff575ffd467b753ed5c6fc",
+    "learningOutcomes": "31aef9ad0d3172bf20c3be65b92243a4e1e2fe1dee1752b94d8b17206ee342f3",
+    "learningUnits": "39305c4411c615b0ccf9d57957e20afe4f6cf02ffe0d7769e760582572de875b",
+    "learningDocuments": "f6076d7ae488441acf95ca7afb5e170b857bb621fd44c8fb414b9eca71d5806d",
+    "learningOrderDigest": "2b903636e4ab0d46efe0d30d04c644ab4b3063c52f4e3cfb9a88927e2a6acf74",
+    "problemPlacementPolicyDigest": "54df7f24c3020fed02ca770b5a6bac69fc346d26382a782dcaa71da0c883a87b"
   },
-  "materializationDigest": "5aa26d8b63a4942e0606b4a249678e15174ba4bd827f6805c47f25b30a5d2751"
+  "materializationDigest": "6fcc56adaaafc58f0c4fa19f6944f009bd94e808684fc428756f8adfd3754edd"
 }

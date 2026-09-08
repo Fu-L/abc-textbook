@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
 
+選定理由: node i で追加の全区間攻撃を k 回行うと、k≥max(A_i-j,0) かつ費用は kB_i+F_left(j+k)+F_right(j+k) になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各区間の最大値で操作費用が決まり、最大要素を境に左右が独立するとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 最大値課金の区間攻撃最適化をCartesian tree上の離散凸関数mergeへ変換し、巨大な体力軸をbreakpointだけで扱える。
@@ -119,4 +123,4 @@ sidebar:
 - [ABC435 F 公式解説](https://atcoder.jp/contests/abc435/editorial/14734)
 - [ABC435 F 公式問題文](https://atcoder.jp/contests/abc435/tasks/abc435_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-cartesian-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-cartesian-tree`

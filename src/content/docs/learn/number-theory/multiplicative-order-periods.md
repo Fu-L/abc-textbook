@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC222 G「222」](https://atcoder.jp/contests/abc222/tasks/abc222_g)
 
+選定理由: gcd(10,M')=1 のとき求める n は ord_{M'}(10) である。これは有限群 (Z/M'Z)^× の元の位数なので φ(M') を割り、φ(M') の約数を昇順に調べて最初に 10^d≡1 となる d が最小解である。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。同じ桁の反復や等比数列が a^n≡1 の最小指数へ帰着するとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 反復桁の割り切れを M'=9K/gcd(K,2) 上の乗法的位数へ変換し、解なし判定と φ(M') の約数探索で最小桁数を求められる。
@@ -116,4 +120,4 @@ sidebar:
 - [ABC335 G 公式解説](https://atcoder.jp/contests/abc335/editorial/9017)
 - [ABC335 G 公式問題文](https://atcoder.jp/contests/abc335/tasks/abc335_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-multiplicative-order-periods`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-multiplicative-order-periods`

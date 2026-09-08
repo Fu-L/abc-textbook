@@ -30,8 +30,8 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [factorial convolutionによる多項式Taylor shift](./polynomial-taylor-shift.md)（標準順 201）— 畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。
-2. [Relaxed・online convolution](./relaxed-convolution.md)（標準順 203）— 畳み込み・相互相関で得た考え方と実装を再利用し、Relaxed・online convolutionの発動条件・正当化・境界を重複なく学ぶ。
+1. [factorial convolutionによる多項式Taylor shift](./polynomial-taylor-shift.md)（標準順 208）— 畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。
+2. [Relaxed・online convolution](./relaxed-convolution.md)（標準順 210）— 畳み込み・相互相関で得た考え方と実装を再利用し、Relaxed・online convolutionの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -48,6 +48,10 @@ sidebar:
 ### 例 1 — 係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる
 
 題材: [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h)
+
+選定理由: 全体評価 (S,G)=(Σs_i, XOR g_i) に対し、先手勝ちは S>0 または S=0かつG>0 で特徴付けられる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。複数の独立局面から毎手一つを選ぶゲームで、局面ごとにpartisan値とimpartial値へ分解できるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -159,4 +163,4 @@ partisan gameのsurreal-number成分を加法群、impartial成分をXOR群と�
 - [ABC289 H 公式解説](https://atcoder.jp/contests/abc289/editorial/5712)
 - [ABC289 H 公式問題文](https://atcoder.jp/contests/abc289/tasks/abc289_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-polynomial-convolution`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-polynomial-convolution`

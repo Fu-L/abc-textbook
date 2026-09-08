@@ -129,14 +129,20 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       (candidate) => candidate.kind === 'unit' && candidate.entity.id === 'unit-heavy-path-tree-dp',
     );
     expect(heavyPathTag?.entity).toMatchObject({
-      prerequisiteTagIds: ['tag-rooted-tree-aggregation'],
+      prerequisiteTagIds: ['tag-convolution', 'tag-rooted-tree-aggregation'],
     });
     expect(heavyPathOutcome?.entity).toMatchObject({
-      prerequisiteOutcomeIds: ['outcome-aggregate-rooted-tree'],
+      prerequisiteOutcomeIds: [
+        'outcome-aggregate-rooted-tree',
+        'outcome-compute-convolution-or-correlation',
+      ],
     });
     expect(heavyPathUnit?.entity).toMatchObject({
       parentId: 'unit-tree-aggregation',
-      additionalPrerequisiteUnitIds: ['unit-rooted-tree-aggregation'],
+      additionalPrerequisiteUnitIds: [
+        'unit-polynomial-convolution',
+        'unit-rooted-tree-aggregation',
+      ],
     });
     const orderIndex = new Map(build.standardOrder.map((unitId, index) => [unitId, index]));
     expect(orderIndex.get('unit-rooted-tree-aggregation')).toBeLessThan(

@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC284 E「Count Simple Paths」](https://atcoder.jp/contests/abc284/tasks/abc284_e)
 
+選定理由: 頂点vへ入った瞬間のstackは始点1からvまでの新しい単純pathなので、長さ0のpathも含めて各呼出しを1回数えればよい。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。単純pathや重複なし列を列挙し、使用済み集合が現在候補にだけ依存するとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 頂点1から始まる単純path数を、10^6を上限としてbacktracking DFSで数えられる。
@@ -116,4 +120,4 @@ visited[1]=trueとしてDFS(1)を始め、各呼出しの冒頭でcountを1増�
 - [ABC419 G 公式解説](https://atcoder.jp/contests/abc419/editorial/13636)
 - [ABC419 G 公式問題文](https://atcoder.jp/contests/abc419/tasks/abc419_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-backtracking-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-backtracking-search`

@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC215 F「Dist Max 2」](https://atcoder.jp/contests/abc215/tasks/abc215_f)
 
+選定理由: min が K 以上という条件は二つの絶対差への AND に分解され、片方をソート順と尺取りで処理できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。最大化する整数値 K について、K を達成可能なら全ての小さい値も達成可能となるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 二座標の min 距離最大化を単調な存在判定へ変形し、二分探索と尺取りで点対列挙を避けられる。
@@ -118,4 +122,4 @@ sidebar:
 - [ABC229 G 公式解説](https://atcoder.jp/contests/abc229/editorial/2963)
 - [ABC229 G 公式問題文](https://atcoder.jp/contests/abc229/tasks/abc229_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-monotone-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-monotone-search`

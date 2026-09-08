@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC260 G「Scalene Triangle Area」](https://atcoder.jp/contests/abc260/tasks/abc260_g)
 
+選定理由: 水平区間の開始印は (s,t) から下へ M 行続き、終了印は (s,t＋2M),(s＋1,t＋2M−2),… と傾き二の対角線を進む。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。同じ形の斜辺付き領域を大量に加算し、境界が少数の格子方向へ揃っているとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 傾き二の斜辺を持つ多数の被覆領域を、縦・斜め・横の三段階累積和で一括集計できる。
@@ -122,4 +126,4 @@ sidebar:
 - [ABC268 E 公式問題文](https://atcoder.jp/contests/abc268/tasks/abc268_e)
 - [ABC268 E 公式解説](https://atcoder.jp/contests/abc268/editorial/4777)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-prefix-aggregate`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-prefix-aggregate`

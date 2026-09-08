@@ -3,7 +3,7 @@ title: "gcd不変量・差分構造"
 description: "前提からgcd不変量・差分構造を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 112
+  order: 117
 ---
 
 # gcd不変量・差分構造
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる
 
 題材: [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
+
+選定理由: 同じ列の値同士を引けばAの隣接差が、同じ行の値同士を引けばBの隣接差が得られる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数の和で作る集合のgcdを少数の基準値と差へ変えたい。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -120,4 +124,4 @@ sidebar:
 - [ABC438 G 公式解説](https://atcoder.jp/contests/abc438/editorial/14946)
 - [ABC438 G 公式問題文](https://atcoder.jp/contests/abc438/tasks/abc438_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-gcd-structure`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-gcd-structure`

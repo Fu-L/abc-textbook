@@ -30,7 +30,7 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [kinetic sorting・交差event順序更新](./kinetic-order-maintenance.md)（標準順 197）— event・値順のオフライン走査で得た考え方と実装を再利用し、kinetic sorting・交差event順序更新の発動条件・正当化・境界を重複なく学ぶ。
+1. [kinetic sorting・交差event順序更新](./kinetic-order-maintenance.md)（標準順 204）— event・値順のオフライン走査で得た考え方と実装を再利用し、kinetic sorting・交差event順序更新の発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -47,6 +47,10 @@ sidebar:
 ### 例 1 — 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる
 
 題材: [ABC231 F「Jealous Two」](https://atcoder.jp/contests/abc231/tasks/abc231_f)
+
+選定理由: A が同値の点では B の大きい順に置くことで条件を満たす向きが処理済み側に現れるが、完全に同じ点の複数個はまとめて双方向を数える必要がある。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。点対に x の一方向不等式と y の逆方向不等式が同時に課されるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -156,4 +160,4 @@ sidebar:
 - [ABC266 H 公式解説](https://atcoder.jp/contests/abc266/editorial/4664)
 - [ABC266 H 公式問題文](https://atcoder.jp/contests/abc266/tasks/abc266_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-event-sweep`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-event-sweep`

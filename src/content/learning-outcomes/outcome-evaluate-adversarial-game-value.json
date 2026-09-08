@@ -1,17 +1,13 @@
 {
   "id": "outcome-evaluate-adversarial-game-value",
-  "statement": "手番ごとの最大化・最小化を定義し、得点差・手数・partisan局面値を後続状態から評価できる。",
+  "statement": "有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う。",
   "prerequisiteOutcomeIds": [
     "outcome-design-minimal-sufficient-state"
   ],
   "scopeIds": [
     "abc218-g",
-    "abc229-h",
-    "abc261-ex",
-    "abc265-ex",
     "abc303-g",
     "abc349-e",
-    "abc413-f",
     "tag-game-value-dp",
     "unit-dp-game-value"
   ]

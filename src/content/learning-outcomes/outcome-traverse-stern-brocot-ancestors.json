@@ -1,0 +1,12 @@
+{
+  "id": "outcome-traverse-stern-brocot-ancestors",
+  "statement": "隣接分数の行列式が1であることを保ち、mediantとEuclidの商列からStern–Brocot木の経路を同方向の連続回数へ圧縮する。経路の共通prefixで祖先関係と必要な祖先集合を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-reduce-integer-structure-by-gcd"
+  ],
+  "scopeIds": [
+    "abc273-ex",
+    "tag-stern-brocot-ancestry",
+    "unit-stern-brocot-ancestry"
+  ]
+}

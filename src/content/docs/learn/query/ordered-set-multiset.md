@@ -3,7 +3,7 @@ title: "ordered set・multisetの動的順序管理"
 description: "前提からordered set・multisetの動的順序管理を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 120
+  order: 126
 ---
 
 # ordered set・multisetの動的順序管理
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC281 E「Least Elements」](https://atcoder.jp/contests/abc281/tasks/abc281_e)
+
+選定理由: 新値をmax(L)以下ならL、そうでなければRへ入れればorder不変量を保てる。削除後を含め|L|はK±1以内なので1回のrebalanceで足りる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。動的multisetの小さい方K個と残りを分け、その集約値を維持したいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -121,4 +125,4 @@ sidebar:
 - [ABC306 E 公式問題文](https://atcoder.jp/contests/abc306/tasks/abc306_e)
 - [ABC306 E 公式解説](https://atcoder.jp/contests/abc306/editorial/6607)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-ordered-set-multiset`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-ordered-set-multiset`

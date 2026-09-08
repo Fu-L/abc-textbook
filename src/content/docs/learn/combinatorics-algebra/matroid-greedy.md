@@ -3,7 +3,7 @@ title: "matroid greedy"
 description: "前提からmatroid greedyを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 189
+  order: 196
 ---
 
 # matroid greedy
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 独立集合族の交換公理を確認し、重み順に独立性oracleを通すgreedyが最適基底を作ることを証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC236 F「Spices」](https://atcoder.jp/contests/abc236/tasks/abc236_f)
+
+選定理由: 独立なベクトルを一つ追加するたびに作れる XOR の個数は 2 倍になり、N 回追加すれば 2^N 個の全ベクトルを生成できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。選んだ整数の任意 XOR で作れる値集合や、その rank を管理するとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -112,4 +116,4 @@ sidebar:
 - [ABC236 F 公式解説](https://atcoder.jp/contests/abc236/editorial/3287)
 - [ABC236 F 公式問題文](https://atcoder.jp/contests/abc236/tasks/abc236_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-matroid-greedy`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-matroid-greedy`

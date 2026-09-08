@@ -18,6 +18,7 @@
   "tagIds": [
     "tag-binary-trie",
     "tag-bitset-word-parallel",
+    "tag-bitwise-minimax-partition",
     "tag-cartesian-tree",
     "tag-dynamic-segment-tree",
     "tag-fenwick-weighted-prefix",
@@ -63,6 +64,7 @@
     "outcome-maintain-queue-aggregate-with-swag",
     "outcome-maintain-sparse-domain-segment-tree",
     "outcome-maintain-weighted-prefix-statistics",
+    "outcome-minimize-maximum-xor-by-bit-partition",
     "outcome-persist-data-structure-versions",
     "outcome-prune-dominated-candidates-once",
     "outcome-prune-range-actions-by-node-invariant",
@@ -104,7 +106,6 @@
     "abc252-ex",
     "abc252-f",
     "abc253-f",
-    "abc254-ex",
     "abc254-f",
     "abc255-ex",
     "abc256-ex",
@@ -281,6 +282,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。多数の接尾辞どうしの辞書順関係や共通接頭辞長をまとめて扱うとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -318,6 +320,7 @@
         "outcome-maintain-queue-aggregate-with-swag",
         "outcome-maintain-sparse-domain-segment-tree",
         "outcome-maintain-weighted-prefix-statistics",
+        "outcome-minimize-maximum-xor-by-bit-partition",
         "outcome-persist-data-structure-versions",
         "outcome-prune-dominated-candidates-once",
         "outcome-prune-range-actions-by-node-invariant",
@@ -345,6 +348,7 @@
         "bit列をTrieで索引化する: 1個の直接所有Outcome、学ぶ理由「整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ」、対象外「文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP」を照合する。",
         "Moの順序で区間問い合わせの差分を更新する: 1個の直接所有Outcome、学ぶ理由「区間への要素の追加・削除を定義し、問い合わせ順を並べ替えて端点移動の総量を抑える」、対象外「オンラインのpriority queue・multiset、および単調stack・queue」を照合する。",
         "大小関係をCartesian treeへ変換する: 1個の直接所有Outcome、学ぶ理由「単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う」、対象外「最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ」を照合する。",
+        "上位bitの支配関係によるXOR minimax: 1個の直接所有Outcome、学ぶ理由「最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ」、対象外「上位bitの支配関係によるXOR minimaxの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
         "区間更新を要約へ作用させる: 1個の直接所有Outcome、学ぶ理由「結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する」、対象外「過去の版の保存・rollback・構造共有」を照合する。"
       ],
       "executionTarget": null,
@@ -413,6 +417,7 @@
         "outcome-maintain-queue-aggregate-with-swag",
         "outcome-maintain-sparse-domain-segment-tree",
         "outcome-maintain-weighted-prefix-statistics",
+        "outcome-minimize-maximum-xor-by-bit-partition",
         "outcome-persist-data-structure-versions",
         "outcome-prune-dominated-candidates-once",
         "outcome-prune-range-actions-by-node-invariant",

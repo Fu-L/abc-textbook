@@ -47,6 +47,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。path costが最大辺重み。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -98,6 +99,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 11,
-  "globalIndex": 111,
+  "globalIndex": 116,
   "orderReason": "DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。"
 }

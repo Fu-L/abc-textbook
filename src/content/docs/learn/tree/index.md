@@ -35,10 +35,11 @@ sidebar:
 3. [木DP・集約・rerooting](./tree-aggregation.md)（標準順 60）— 探索で親子関係を作りDP状態を定義できた後、子側の集約と親側への差し替えで木全体の値を求める。
 4. [包含木の構築とancestor・path分解](./tree-decomposition.md)（標準順 79）— 基本的な木DFSを土台に、laminar区間をstackで包含木へ変換し、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。
 5. [重心を分離点として木を再帰分解する](./tree-balanced-separators.md)（標準順 82）— 部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える。
-6. [加法的tree metric復元](./additive-tree-metric-reconstruction.md)（標準順 106）— 木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ。
-7. [DSU merge tree・Kruskal reconstruction tree](./dsu-merge-tree.md)（標準順 118）— DSUによる連結成分管理・縮約で得た考え方と実装を再利用し、DSU merge tree・Kruskal reconstruction treeの発動条件・正当化・境界を重複なく学ぶ。
-8. [01 on Tree・親先行順序のcluster縮約](./tree-precedence-contraction.md)（標準順 119）— DSUによる連結成分管理・縮約・貪欲法と交換論で得た考え方と実装を再利用し、01 on Tree・親先行順序のcluster縮約の発動条件・正当化・境界を重複なく学ぶ。
-9. [rake・compressで動的木DPを保つ](./static-top-tree.md)（標準順 207）— 木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。
+6. [加法的tree metric復元](./additive-tree-metric-reconstruction.md)（標準順 110）— 木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ。
+7. [DSU merge tree・Kruskal reconstruction tree](./dsu-merge-tree.md)（標準順 124）— DSUによる連結成分管理・縮約で得た考え方と実装を再利用し、DSU merge tree・Kruskal reconstruction treeの発動条件・正当化・境界を重複なく学ぶ。
+8. [01 on Tree・親先行順序のcluster縮約](./tree-precedence-contraction.md)（標準順 125）— DSUによる連結成分管理・縮約・貪欲法と交換論で得た考え方と実装を再利用し、01 on Tree・親先行順序のcluster縮約の発動条件・正当化・境界を重複なく学ぶ。
+9. [資源DPを引数で渡すHLRecDP](./heavy-light-recursive-dp.md)（標準順 132）— 資源軸knapsack DP・根付き木DP・部分木集約で得た考え方と実装を再利用し、資源DPを引数で渡すHLRecDPの発動条件・正当化・境界を重複なく学ぶ。
+10. [rake・compressで動的木DPを保つ](./static-top-tree.md)（標準順 214）— 木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。
 
 ## 発動条件と見分け方
 
@@ -55,6 +56,10 @@ sidebar:
 ### 例 1 — 木固有の根・部分木・path・separator構造へ問題を写し、利用する性質を選ぶ。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC220 E「Distance on Large Perfect Binary Tree」](https://atcoder.jp/contests/abc220/tasks/abc220_e)
+
+選定理由: 残り高さ H=N-1-d に対し、0<k<D の有効範囲は max(1,D-H)≤k≤min(D-1,H) という一つの整数区間になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。暗黙の完全二分木で距離を固定した頂点対を数えるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -101,6 +106,7 @@ sidebar:
 - **加法的tree metric復元** — 直接到達点: 加法的距離行列から正重み木の候補を復元し、全点対距離の再計算で存在を完全検証できる。近いが対象外: 加法的tree metric復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 - **DSU merge tree・Kruskal reconstruction tree** — 直接到達点: 成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 - **01 on Tree・親先行順序のcluster縮約** — 直接到達点: 親先行制約下の交換比較をcluster統計へまとめ、01 on Treeの縮約貪欲で最適順序を構成できる。近いが対象外: 01 on Tree・親先行順序のcluster縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- **資源DPを引数で渡すHLRecDP** — 直接到達点: 外部の資源DP配列を受け取って部分木の選択を反映する再帰を設計し、max-plusの子DP併合を避ける。重い子は一回だけ呼び、軽い子の重複呼出しを部分木サイズの半減により評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 資源DPを引数で渡すHLRecDPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 - **rake・compressで動的木DPを保つ** — 直接到達点: 境界頂点を持つtree clusterの要約と結合を定義し、局所更新後の木DP値を保てる。近いが対象外: 更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition。
 
 **比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
@@ -196,4 +202,4 @@ sidebar:
 - [ABC221 F 公式解説](https://atcoder.jp/contests/abc221/editorial/2723)
 - [ABC221 F 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-chapter-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-chapter-tree`

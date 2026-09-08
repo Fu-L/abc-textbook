@@ -3,7 +3,7 @@ title: "Prüfer code・次数制約付きlabel木"
 description: "前提からPrüfer code・次数制約付きlabel木を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 104
+  order: 108
 ---
 
 # Prüfer code・次数制約付きlabel木
@@ -41,6 +41,10 @@ label付き木を長さN-2の列へ全単射し、頂点の出現回数=次数-1
 ### 例 1 — Prüfer列とlabel付き木の全単射、および各labelの出現回数=次数-1を使って次数制約を係数条件へ変換できる
 
 題材: [ABC303 Ex「Constrained Tree Degree」](https://atcoder.jp/contests/abc303/tasks/abc303_h)
+
+選定理由: 許容出現回数集合R={d-1 | dは許容次数}に対しF(x)=Σ_{r∈R}x^r/r!と置く。各labelの出現回数を合計N-2にするmultinomial係数が係数へ組み込まれるため、答えは(N-2)!·[x^(N-2)]F(x)^Nとなる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。label付き木の次数だけに条件があり、辺配置を直接扱う必要がない。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -110,4 +114,4 @@ factorialと逆factorialを前計算して次数N-2以下のFを作る。F^Nをb
 - [ABC303 H 公式解説](https://atcoder.jp/contests/abc303/editorial/6425)
 - [ABC303 H 公式問題文](https://atcoder.jp/contests/abc303/tasks/abc303_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-prufer-code`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-prufer-code`

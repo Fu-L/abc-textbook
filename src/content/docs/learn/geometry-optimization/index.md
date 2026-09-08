@@ -34,7 +34,7 @@ sidebar:
 2. [凸境界・半平面制約・直線包絡を扱う](./convex-geometry.md)（標準順 71）— 向きと交差を判定できた後、凸境界への候補限定、半平面制約の共通部分、直線包絡による最適化を区別して扱う。
 3. [凸性・傾き・限界費用・slope trick](./discrete-convex.md)（標準順 91）— 目的関数の凸・凹性と傾き変化を捉え、breakpointや限界費用から最適点を求める。
 4. [fractional programming・比率parametric search](./fractional-parametric-search.md)（標準順 97）— 単調境界探索で得た考え方と実装を再利用し、fractional programming・比率parametric searchの発動条件・正当化・境界を重複なく学ぶ。
-5. [Convex Hull Trick・直線包絡](./line-envelope.md)（標準順 104）— 一次関数の候補を傾き・交点順に管理し、各query点で最小または最大となる直線を選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+5. [Convex Hull Trick・直線包絡](./line-envelope.md)（標準順 108）— 一次関数の候補を傾き・交点順に管理し、各query点で最小または最大となる直線を選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 発動条件と見分け方
 
@@ -51,6 +51,10 @@ sidebar:
 ### 例 1 — 配置・距離・目的関数を幾何predicateや凸構造へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC216 E「Amusement Park」](https://atcoder.jp/contests/abc216/tasks/abc216_e)
+
+選定理由: 貪欲に一回ずつ最大値を取る結果には共通の境界値があり、境界より上は全て選び、境界値だけ必要個数を選ぶ。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。複数の単調列から大きい要素を多数選ぶが、選択回数そのものが非常に大きいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -192,4 +196,4 @@ sidebar:
 - [ABC220 G 公式解説](https://atcoder.jp/contests/abc220/editorial/2684)
 - [ABC220 G 公式問題文](https://atcoder.jp/contests/abc220/tasks/abc220_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-chapter-geometry-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-chapter-geometry-optimization`

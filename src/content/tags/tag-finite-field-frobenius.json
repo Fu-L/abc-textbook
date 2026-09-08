@@ -1,24 +1,24 @@
 {
   "id": "tag-finite-field-frobenius",
-  "name": "有限体Frobenius軌道",
-  "definition": "有限体上のFrobenius写像の軌道と固定体を用い、指数的な反復区間をorbit長ごとのrunへ圧縮する。",
+  "name": "標数pのFrobenius恒等式による反復高速化",
+  "definition": "標数pで中間の二項係数が消える恒等式 (1+x)^(p^t)=1+x^(p^t) をシフト演算へ適用し、隣接和反復をpの冪回ずつ飛ばす。圧縮列では各段のrun数の増加も評価する。",
   "parentId": "tag-number-theory-structure",
   "prerequisiteTagIds": [
-    "tag-finite-field-extension"
+    "tag-modular-arithmetic"
   ],
   "semanticSignature": {
     "objectPatterns": [
-      "Frobenius写像",
-      "orbit",
-      "有限体"
+      "シフト演算",
+      "ラン長圧縮",
+      "多項式"
     ],
     "triggerPatterns": [
-      "p乗写像を反復",
-      "固定体"
+      "pの冪ジャンプ",
+      "隣接和反復"
     ],
     "invariantPatterns": [
-      "orbit長",
-      "拡大次数"
+      "run数上界",
+      "二項係数消滅"
     ],
     "goalPatterns": [
       "反復区間圧縮"
@@ -29,9 +29,9 @@
   },
   "relatedTags": [
     {
-      "tagId": "tag-finite-field-extension",
+      "tagId": "tag-modular-arithmetic",
       "type": "extension",
-      "rationale": "拡大有限体の表現と四則演算へFrobenius写像・固定体・orbit長の構造を加え、反復区間の圧縮まで扱う。"
+      "rationale": "法pの演算から多項式・シフト演算へ進み、標数pの二項係数消滅によって隣接和反復を飛ばす。拡大体の元の軌道を求める手法ではない。"
     }
   ],
   "learningOutcomeIds": [
@@ -41,9 +41,9 @@
     "abc251-ex"
   ],
   "aliases": [
-    "Frobenius automorphism",
-    "Frobenius写像",
-    "finite-field orbit"
+    "Freshman dream",
+    "Frobenius恒等式",
+    "標数pの二項係数消滅"
   ],
   "formerNames": [],
   "lifecycle": "active",

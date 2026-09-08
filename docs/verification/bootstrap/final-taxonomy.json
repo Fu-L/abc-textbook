@@ -2,36 +2,36 @@
   "schemaVersion": "1.0.0",
   "evidenceId": "bootstrap-final-taxonomy",
   "taskId": "T159",
-  "generatedAt": "2026-09-07T23:46:44.921Z",
+  "generatedAt": "2026-09-08T13:23:02.761Z",
   "status": "passed",
   "buildPath": "staging/taxonomy/initial/final-taxonomy-build.json",
   "integrationMapPath": "docs/verification/previews/initial-v1/taxonomy-integration.json",
   "reviewCheckResultsPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
   "reviewEvidencePath": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-  "taxonomySubjectDigest": "e8a516ee6fdb6a0fda3dd683a9eb44800ab67c1723995fa70da403c68c801f6b",
-  "buildDigest": "16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853",
-  "integrationMapDigest": "a37fc5de5d3f97b17fd2ddb0858be4d7920d96794ea37bc7e420be7dfbdca5f3",
-  "taxonomyDigest": "bf7aa3dc142bdd14641d21e3f3d227eeecba64a6e99c3fae67350f7251f612d1",
-  "tagDagDigest": "e49b3d3c1ea3690cb68dd8f5bff66ab68e0d47d14bd8af4eff74bfde016319f9",
-  "learningUnitDagDigest": "b25507797c9c836067b4719e09b4b9352ddd31ecc1978c507c2d6d21dce6868b",
-  "orderDigest": "c4825c881f337560fc054bfb55041e6403820a6ea828526c0f94bd15e6038954",
-  "placementDigest": "622dcd3963d1c70f5954edd99330940d850a3c7acbe9ead68d4c357c9191707a",
+  "taxonomySubjectDigest": "3a7c70579256e1994d029b5edac52b074be8596a2311fb3de2a3d9b694077e5d",
+  "buildDigest": "242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50",
+  "integrationMapDigest": "55bddf62682df219652ff39fa0ed652de971ce1e2537110cad41d57a5ff693b0",
+  "taxonomyDigest": "74c4c519b5ff1497e51b8b25dc3d7e915be7d4394ee07bb277bb60289f968244",
+  "tagDagDigest": "10d392c3df01f27a61862043722e2d652d11d4e0ee3ae984fffe46effeedb2be",
+  "learningUnitDagDigest": "8bff4fac683eaa16f8a7bdc6ecfbf18c4f4ff35364f024871d9b052a59048075",
+  "orderDigest": "3711b978a95fbd553d54a3a26dca40bda4dd90cc313a2a7c842d307b77b7286d",
+  "placementDigest": "ab448e8b9148dfc3a1cb6b015eed7de50c801c5f31371377cb1f78e119e32cb1",
   "correctionImpactDigest": "c84fe7608952547d6672a1ea12812d27f00df2d4aef59724748e369f57311467",
   "problemCount": 868,
   "sourceRevisionCount": 1738,
   "knownCorpusSourceRevisionCount": 2246,
   "candidateCounts": {
-    "tags": 191,
-    "outcomes": 194,
-    "units": 214
+    "tags": 197,
+    "outcomes": 200,
+    "units": 220
   },
   "correctionImpactCount": 12,
   "reviewEvidenceRefs": [
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "1868ee95ca56b5b397d3a323ef9ef0a2e9ead9b82990f1b7995928e3bae4ebb0",
-      "subjectDigest": "e8a516ee6fdb6a0fda3dd683a9eb44800ab67c1723995fa70da403c68c801f6b",
+      "digest": "743f644c1f9c6de52d3ded38524c733cebb6cb0dd033e7b294489bd42a878332",
+      "subjectDigest": "3a7c70579256e1994d029b5edac52b074be8596a2311fb3de2a3d9b694077e5d",
       "authorIds": [
         "person-maintainer"
       ],
@@ -45,5 +45,5 @@
   "canonicalMaterializationAllowed": true,
   "holdReasons": [],
   "diagnosticCodes": [],
-  "evidenceDigest": "05f40b4506cf955292b655a03d70e41c84598579d60e769062c515d761ec6afe"
+  "evidenceDigest": "aa163399f8ed33e9859510da2eafeb3643b626fa6d66480ff571b39a43189490"
 }

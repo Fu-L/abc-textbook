@@ -3,7 +3,7 @@ title: "指定次数parityの部分グラフ構成"
 description: "前提から指定次数parityの部分グラフ構成を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 152
+  order: 159
 ---
 
 # 指定次数parityの部分グラフ構成
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 選択辺集合の奇数次数頂点を指定し、spanning forestの葉から必要辺を確定してT-join型の構成を行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC345 F「Many Lamps」](https://atcoder.jp/contests/abc345/tasks/abc345_f)
+
+選定理由: postorderで非root頂点vがoffならparent edgeをtoggleしてvをonに固定してからvを切り離す。この操作はvをoff→on、parentをtoggleするので全体on数は0または2増え、component終了時にはroot以外全てon、parityによりちょうど2floor(s/2)個onになる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。一操作が各component内のbitを二つ反転する。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -110,4 +114,4 @@ sidebar:
 - [ABC345 F 公式解説](https://atcoder.jp/contests/abc345/editorial/9558)
 - [ABC345 F 公式問題文](https://atcoder.jp/contests/abc345/tasks/abc345_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-degree-parity-subgraph`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-degree-parity-subgraph`

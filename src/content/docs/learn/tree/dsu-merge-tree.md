@@ -3,7 +3,7 @@ title: "DSU merge tree・Kruskal reconstruction tree"
 description: "前提からDSU merge tree・Kruskal reconstruction treeを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 117
+  order: 123
 ---
 
 # DSU merge tree・Kruskal reconstruction tree
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC235 Ex「Painting Weighted Graph」](https://atcoder.jp/contests/abc235/tasks/abc235_h)
+
+選定理由: m 個の子成分が一つになるとき、独立選択の積に含まれる「各子全体を一回ずつ塗る」X^m は、親全体を一回で塗る同じ集合 X に置き換える。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。辺重み閾値ごとの連結成分集合が操作候補となり、その包含階層上で数え上げるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ Kruskal の重み別成分併合を reconstruction forest として、葉の 1�
 - [ABC314 F 公式解説](https://atcoder.jp/contests/abc314/editorial/6953)
 - [ABC314 F 公式問題文](https://atcoder.jp/contests/abc314/tasks/abc314_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-dsu-merge-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dsu-merge-tree`

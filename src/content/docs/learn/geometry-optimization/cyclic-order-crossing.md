@@ -3,7 +3,7 @@ title: "円環順序・chord交差"
 description: "前提から円環順序・chord交差を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 163
+  order: 170
 ---
 
 # 円環順序・chord交差
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 円周をcutして端点を線形化し、交互配置またはlaminar括弧構造からchord交差を判定・数え上げできる
 
 題材: [ABC338 E「Chords」](https://atcoder.jp/contests/abc338/tasks/abc338_e)
+
+選定理由: 左端を見たchordをpushし、右端iを見た時にstack topがiでなければ、iの内側で開始した別chordがまだ閉じておらずA_i<A_j<B_i<B_jとなる。逆にtopが常に一致すれば全区間は正しくnestedし交差しない。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。円周上の端点の交互配置を線形順序で判定したい。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -115,4 +119,4 @@ sidebar:
 - [ABC405 F 公式解説](https://atcoder.jp/contests/abc405/editorial/13009)
 - [ABC405 F 公式問題文](https://atcoder.jp/contests/abc405/tasks/abc405_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-cyclic-order-crossing`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-cyclic-order-crossing`

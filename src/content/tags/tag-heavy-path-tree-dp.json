@@ -1,9 +1,10 @@
 {
   "id": "tag-heavy-path-tree-dp",
-  "name": "heavy pathによる木DP高速化",
+  "name": "heavy path上の多項式木DP",
   "definition": "heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。",
   "parentId": "tag-tree-model-structure",
   "prerequisiteTagIds": [
+    "tag-convolution",
     "tag-rooted-tree-aggregation"
   ],
   "semanticSignature": {
@@ -34,11 +35,10 @@
     "outcome-accelerate-tree-dp-by-heavy-path"
   ],
   "representativeProblemIds": [
-    "abc269-ex",
-    "abc311-ex"
+    "abc269-ex"
   ],
   "aliases": [
-    "HLRecDP",
+    "heavy-path polynomial DP",
     "heavy-path tree DP"
   ],
   "formerNames": [],

@@ -3,7 +3,7 @@ title: "半平面制約・凸領域の共通部分"
 description: "前提から半平面制約・凸領域の共通部分を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 182
+  order: 189
 ---
 
 # 半平面制約・凸領域の共通部分
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 凸多角形を向き付き辺の線形半平面制約へ変換し、平行移動後も左辺が同じ制約を最強の右辺へ集約して共通部分への包含を判定できる
 
 題材: [ABC251 G「Intersection of Polygons」](https://atcoder.jp/contests/abc251/tasks/abc251_g)
+
+選定理由: 反時計回りの辺ベクトルq_iに対し、点zが平行移動後の内部にある条件はcross(q_i,z)がその移動後頂点のcross値以上であることと書ける。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。点包含や複数凸集合の共通部分を辺ごとの線形不等式で扱いたい。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -111,4 +115,4 @@ sidebar:
 - [ABC251 G 公式解説](https://atcoder.jp/contests/abc251/editorial/3961)
 - [ABC251 G 公式問題文](https://atcoder.jp/contests/abc251/tasks/abc251_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-half-plane-constraints`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-half-plane-constraints`

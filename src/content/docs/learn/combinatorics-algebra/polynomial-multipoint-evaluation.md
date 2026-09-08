@@ -3,7 +3,7 @@ title: "多項式の多点評価・補間"
 description: "前提から多項式の多点評価・補間を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 210
+  order: 216
 ---
 
 # 多項式の多点評価・補間
@@ -41,6 +41,10 @@ product treeとremainder treeを構築し、一つの多項式を多数の点へ
 ### 例 1 — product treeとremainder treeを構築し、一つの多項式を多数の点へ準線形時間で評価・補間する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC272 Ex「Flipping Coins 2」](https://atcoder.jp/contests/abc272/tasks/abc272_h)
+
+選定理由: indexを反転したDPの母関数f_iは f_i=x(f_{i−1}+f'_{i−1})+C_i f_{i−1} を満たし、g_i=f_i e^xなら係数ごとに g_{i,j}=(j+C_i)g_{i−1,j} と分離する。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。一つの高次polynomialを連続する多数の点で評価すればDP coefficientsを得られるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ permutation counting DPをexponential generating functionsでdiagonalizeし、pr
 - [ABC381 G 公式解説](https://atcoder.jp/contests/abc381/editorial/11378)
 - [ABC381 G 公式問題文](https://atcoder.jp/contests/abc381/tasks/abc381_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-polynomial-multipoint-evaluation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-polynomial-multipoint-evaluation`

@@ -48,6 +48,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。DAG 上で順序付けられた複数始点・終点間の頂点非共有パス組を数えるとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -101,6 +102,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 92,
-  "globalIndex": 139,
+  "globalIndex": 146,
   "orderReason": "線形方程式・rankで得た考え方と実装を再利用し、行列式による数え上げの発動条件・正当化・境界を重複なく学ぶ。"
 }

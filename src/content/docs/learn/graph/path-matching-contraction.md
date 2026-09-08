@@ -3,7 +3,7 @@ title: "path matchingのheap縮約greedy"
 description: "前提からpath matchingのheap縮約greedyを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 205
+  order: 212
 ---
 
 # path matchingのheap縮約greedy
@@ -38,9 +38,18 @@ pathの非隣接edgeからk本を選ぶ最小重みmatchingを、最小edgeの�
 
 ## ガイド例
 
+### 正当化と転用の境界
+
+- 列の非隣接な要素iを選ぶことは、頂点0,…,nのpathで辺(i-1,i)を選ぶmatchingと同値。ABC218 Hの最大化はw_i=-B_iで最小化へ写り、w_l+w_r-w_iの符号を戻すとB_l+B_r-B_iとなる。個数を固定するため、途中の負の限界利益を勝手に打ち切らない。
+- 端の辺を採用したときは存在しない隣辺を通常の重み0として扱わない。その辺と唯一の隣辺を除き、内部のときだけ左右二辺と中央を補正辺へ置き換える。番兵を使う実装では実辺を表さないことと、無限値の加減算を避けることを確認する。ABC464 GとABC218 Hで端点と選択可能数を比較する。
+
 ### 例 1 — 重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる
 
 題材: [ABC464 G「Celester 2」](https://atcoder.jp/contests/abc464/tasks/abc464_g)
+
+選定理由: 最小辺を採用するたびに近傍を補正重みへ縮約することで、個数別最適値を一段ずつ得る機構を実演できる。
+
+この例で扱う範囲: 差分列から重み付きpathを作った後を扱う。ABC218 Hへの転移では列の非隣接要素をpathの辺とみなし、符号反転で最大化と最小化を対応付ける。
 
 #### このOutcomeを支える根拠
 
@@ -76,9 +85,9 @@ pathの非隣接edgeからk本を選ぶ最小重みmatchingを、最小edgeの�
 
 ### 到達確認 1 — 重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる
 
-境界検証の元題材: [ABC464 G「Celester 2」](https://atcoder.jp/contests/abc464/tasks/abc464_g)
+転移題材: [ABC218 H「Red and Blue Lamps」](https://atcoder.jp/contests/abc218/tasks/abc218_h)
 
-**課題**: ABC464 G「Celester 2」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。
+**課題**: ABC218 H「Red and Blue Lamps」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
 
 **合格条件**: 手法名の列挙に留まらず、学習成果「重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
 
@@ -89,26 +98,29 @@ pathの非隣接edgeからk本を選ぶ最小重みmatchingを、最小edgeの�
 
 **検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
 
-単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。
+別題材では次の直接根拠を対象技能として切り出す: 隣接辺報酬の二色列を隣接非選択問題へ変形し、局所補正を保存する priority-queue 貪欲法を設計できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
 
 根拠として照合する観点:
 
-- RS遷移増加の最小flip回数を、境界01列の0 matchingとheap contractionで O(N log N) に求められる。
+- 隣接辺報酬の二色列を隣接非選択問題へ変形し、局所補正を保存する priority-queue 貪欲法を設計できる。
 
-- 元の方針が必要とする対象・操作・不変量・目標を分けて書く。
-- 発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。
-- 元の正当化のうち最初に成立しなくなる命題を指摘する。
-- 計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。
-- 条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。
+- 対象技能が担う箇所: 隣接辺報酬の二色列を隣接非選択問題へ変形し、局所補正を保存する priority-queue 貪欲法を設計できる。
+- 転移題材の解法接続: R を min(R,N-R) にし、B_1=A_1、B_N=A_{N-1}、内部 B_i=A_{i-1}+A_i を作る。最大 B_i を R 回取り出して答えへ加え、端なら二要素を、内部なら両隣を削除して補正値を置き、隣接 link と heap を更新する。
+- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
+- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
+- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
+- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
 
-期待する到達点: 重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められるの適用可能範囲と破綻条件を反例付きで説明できる。
+期待する到達点: 重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる。
 
 </details>
 
 
 ## 根拠
 
+- [ABC218 H 公式解説](https://atcoder.jp/contests/abc218/editorial/2602)
+- [ABC218 H 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_h)
 - [ABC464 G 公式解説](https://atcoder.jp/contests/abc464/editorial/22263)
 - [ABC464 G 公式問題文](https://atcoder.jp/contests/abc464/tasks/abc464_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-path-matching-contraction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-path-matching-contraction`

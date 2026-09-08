@@ -30,9 +30,9 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [最短路モデル](./weighted-shortest-path.md)（標準順 149）— 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。
-2. [最短路を証明する木・経路の復元](./shortest-path-reconstruction.md)（標準順 192）— 最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。
-3. [difference constraints・不等式系の最短路化](./difference-constraints.md)（標準順 193）— 最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。
+1. [最短路モデル](./weighted-shortest-path.md)（標準順 156）— 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。
+2. [最短路を証明する木・経路の復元](./shortest-path-reconstruction.md)（標準順 199）— 最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。
+3. [difference constraints・不等式系の最短路化](./difference-constraints.md)（標準順 200）— 最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。
 
 ## 発動条件と見分け方
 
@@ -97,4 +97,4 @@ sidebar:
 - [ABC218 F 公式解説](https://atcoder.jp/contests/abc218/editorial/2606)
 - [ABC218 F 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-shortest-path-certificates`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-shortest-path-certificates`

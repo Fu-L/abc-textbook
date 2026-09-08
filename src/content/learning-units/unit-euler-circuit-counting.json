@@ -42,6 +42,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。固定長substringの出現回数を指定された列を数える。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -50,7 +51,7 @@
         "観察: 長さ4のpattern(i,j,k,l)を、3bit状態(i,j,k)から(j,k,l)への有向辺と見る。各pattern出現回数Xはその多重辺数であり、条件を満たすbinary列は全辺を一度ずつ使うEuler trailと一対一対応する。",
         "着眼: 始点・終点候補を8通りずつ調べ、degree差がEuler trail条件を満たす場合は終点から始点への補助辺を加えてEuler閉路へ帰着できる。区別された辺の閉路数はBEST定理の有向全域木数×∏(outdeg(v)-1)!で、全域木数は有向Laplacian minorの行列式になる。",
         "方針: 8頂点多重有向graphのEuler trailをBEST定理と有向行列木定理で数える（辺総数Nが大きくても頂点数は8に固定され、degree・factorial・小行列式だけで計算できる。）",
-        "接続: 16本種のXから8頂点の入出次数を作る。各始点s・終点tについてdegree条件と非零辺部分の連結性を確認し、必要な補助辺t→sを加える。mod 998244353で8×8 Laplacian minorをGaussian eliminationしてarborescence数を求め、BESTのfactorial積を掛け、同一patternのX_e!による重複を割って該当する列数を合計する。"
+        "接続: 各始点s・終点tのdegree条件を調べ、辺を持つ頂点とs,tだけをVとする。元の辺と区別する補助辺e*:t→sをs=tでも一個加え、V上の連結性と入出次数一致を確認する。e*を最初の辺に固定した閉路からe*を切ると、sからtへの線形なtrailと一対一対応する。自己ループを除いたV上の有向Laplacianから根tの行・列を除き、その余因子の行列式を求める。一頂点なら空行列式は1。これに補助辺・自己ループを含む次数の∏(outdeg(v)-1)!を掛け、元の16種類のX_e!だけで割り、始終点について合計する。X0000=1だけなら答えは1であり、未使用の7頂点を行列へ残してはいけない。"
       ],
       "executionTarget": null,
       "expectedResult": "有向Euler graphのcircuit数をrooted arborescenceの行列式と各頂点の出辺順列へ分解して数える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
@@ -94,6 +95,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 97,
-  "globalIndex": 151,
+  "globalIndex": 158,
   "orderReason": "行列式による数え上げ・Euler trail・circuitで得た考え方と実装を再利用し、BEST定理によるEuler circuit数え上げの発動条件・正当化・境界を重複なく学ぶ。"
 }

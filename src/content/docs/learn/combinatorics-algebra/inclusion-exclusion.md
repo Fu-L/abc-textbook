@@ -30,8 +30,8 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [約数格子のzeta・Möbius反転](./divisor-mobius-inversion.md)（標準順 166）— 素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。
-2. [subset zeta・Möbius変換](./subset-transforms.md)（標準順 177）— 集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。
+1. [約数格子のzeta・Möbius反転](./divisor-mobius-inversion.md)（標準順 173）— 素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。
+2. [subset zeta・Möbius変換](./subset-transforms.md)（標準順 184）— 集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -48,6 +48,10 @@ sidebar:
 ### 例 1 — 条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる
 
 題材: [ABC214 G「Three Permutations」](https://atcoder.jp/contests/abc214/tasks/abc214_g)
+
+選定理由: p と q がともに順列なので、値を頂点とする全体グラフでは各頂点の次数が高々 2 となり、非自明な連結成分はパスかサイクルに限られる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各位置に少数の禁止値があり、それらを全て避ける順列の個数を求めるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -157,4 +161,4 @@ sidebar:
 - [ABC235 G 公式解説](https://atcoder.jp/contests/abc235/editorial/3252)
 - [ABC235 G 公式問題文](https://atcoder.jp/contests/abc235/tasks/abc235_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-inclusion-exclusion`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-inclusion-exclusion`

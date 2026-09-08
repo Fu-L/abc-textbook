@@ -3,7 +3,7 @@ title: "方向別grid scanによる長距離効果の前計算"
 description: "前提から方向別grid scanによる長距離効果の前計算を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 136
+  order: 143
 ---
 
 # 方向別grid scanによる長距離効果の前計算
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 各行・各列でactiveな向きだけを更新し、blockerと通行禁止条件を混同せず、定数方向へ伸びる全効果領域をgrid全体の線形時間で印付けられる
 
 題材: [ABC317 E「Avoid Eye Contact」](https://atcoder.jp/contests/abc317/tasks/abc317_e)
+
+選定理由: 左から右のscanでは最後のblockerが右向き人なら、その後の空きマスは監視下にある。壁または別の人に会った時点で状態を更新し、残り三方向も同様に処理する。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。grid 上の直線効果が blocker まで続き、方向種類が定数個のとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -112,4 +116,4 @@ viewed を false で作り、各行を左右から、各列を上下から走査
 - [ABC317 E 公式問題文](https://atcoder.jp/contests/abc317/tasks/abc317_e)
 - [ABC317 E 公式解説](https://atcoder.jp/contests/abc317/editorial/7031)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-directional-grid-effect-scan`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-directional-grid-effect-scan`

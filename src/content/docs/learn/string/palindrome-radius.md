@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g)
 
+選定理由: 既に処理したcenterのradius情報で重なるpalindrome内部のequalityをmirrorから再利用し、新しく右端を伸ばす対称pairだけunionすれば、Manacherと同じ償却でunion回数をO(N)にできる。得たcomponent内にinequality edge両端が入れば不可能である。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数centerのpalindrome equality区間が大きく重複する。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 各中心の最大odd-palindrome radius条件を満たす正整数列の存在を判定し、存在すればlexicographically smallestなSを構成できる。
@@ -113,4 +117,4 @@ modified Manacher走査で各center iの要求radius A_iまで、既知mirror範
 - [ABC398 F 公式解説](https://atcoder.jp/contests/abc398/editorial/12501)
 - [ABC398 F 公式問題文](https://atcoder.jp/contests/abc398/tasks/abc398_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-palindrome-radius`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-palindrome-radius`

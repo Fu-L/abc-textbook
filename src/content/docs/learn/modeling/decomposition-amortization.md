@@ -30,9 +30,9 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [単調進行による償却解析](./amortized-monotone-progress.md)（標準順 128）— 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-2. [small-to-large・DSU on Tree](./small-to-large.md)（標準順 138）— 小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-3. [平方根・閾値による軽重分類](./threshold-heavy-light.md)（標準順 144）— 頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+1. [単調進行による償却解析](./amortized-monotone-progress.md)（標準順 135）— 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+2. [small-to-large・DSU on Tree](./small-to-large.md)（標準順 145）— 小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+3. [平方根・閾値による軽重分類](./threshold-heavy-light.md)（標準順 151）— 頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 発動条件と見分け方
 
@@ -47,7 +47,7 @@ sidebar:
 未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
 
 - **単調進行による償却解析** — 直接到達点: 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **small-to-large・DSU on Tree** — 直接到達点: 小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- **small-to-large・DSU on Tree** — 直接到達点: 小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 - **平方根・閾値による軽重分類** — 直接到達点: 頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
 **比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
@@ -97,4 +97,4 @@ sidebar:
 - [ABC230 E 公式問題文](https://atcoder.jp/contests/abc230/tasks/abc230_e)
 - [ABC230 E 公式解説](https://atcoder.jp/contests/abc230/editorial/3015)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-decomposition-amortization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-decomposition-amortization`

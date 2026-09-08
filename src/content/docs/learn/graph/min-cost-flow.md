@@ -3,7 +3,7 @@ title: "最小費用流・circulation"
 description: "前提から最小費用流・circulationを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 190
+  order: 197
 ---
 
 # 最小費用流・circulation
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 流量と費用を持つ残余networkを設計し、potential付き最短路・slope・cycle cancelingで流量別最小費用を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC214 H「Collecting」](https://atcoder.jp/contests/abc214/tasks/abc214_h)
+
+選定理由: 頂点 u の in から out へ、容量 1 の報酬辺と容量無限の無報酬辺を並べると、訪問回数にかかわらず X_u を高々一度だけ獲得できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。有向グラフで同一強連結成分内を自由に巡回でき、頂点資源をまとめて回収できるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ SCC 縮約で移動を DAG の経路へ変え、頂点報酬を容量付き node
 - [ABC231 H 公式解説](https://atcoder.jp/contests/abc231/editorial/3060)
 - [ABC231 H 公式問題文](https://atcoder.jp/contests/abc231/tasks/abc231_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-min-cost-flow`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-min-cost-flow`

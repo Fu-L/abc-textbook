@@ -30,9 +30,9 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [線形方程式・rank](./linear-system-rank.md)（標準順 139）— 制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-2. [XOR線形基底](./xor-linear-basis.md)（標準順 157）— 整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-3. [分離可能線形変換・Walsh–Hadamard変換](./separable-linear-transform.md)（標準順 179）— Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+1. [線形方程式・rank](./linear-system-rank.md)（標準順 146）— 制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+2. [XOR線形基底](./xor-linear-basis.md)（標準順 164）— 整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+3. [分離可能線形変換・Walsh–Hadamard変換](./separable-linear-transform.md)（標準順 186）— Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 発動条件と見分け方
 
@@ -97,4 +97,4 @@ sidebar:
 - [ABC223 H 公式解説](https://atcoder.jp/contests/abc223/editorial/2784)
 - [ABC223 H 公式問題文](https://atcoder.jp/contests/abc223/tasks/abc223_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-linear-algebra-xor`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-linear-algebra-xor`

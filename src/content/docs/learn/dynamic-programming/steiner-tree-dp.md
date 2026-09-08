@@ -3,7 +3,7 @@ title: "Steiner tree subset DP"
 description: "前提からSteiner tree subset DPを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 149
+  order: 156
 ---
 
 # Steiner tree subset DP
@@ -41,6 +41,10 @@ terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest
 ### 例 1 — terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest path relaxationを交互に行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC364 G「Last Major City」](https://atcoder.jp/contests/abc364/tasks/abc364_g)
+
+選定理由: dp[mask][v]←dp[sub][v]+dp[mask−sub][v]はvを共通接続点として二木を合併し、重複辺があれば最適解をさらに改善できるので上界遷移として安全である。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。terminal数だけが小さいweighted graphの最小接続部分graph。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -115,4 +119,4 @@ terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest
 - [ABC395 G 公式解説](https://atcoder.jp/contests/abc395/editorial/12307)
 - [ABC395 G 公式問題文](https://atcoder.jp/contests/abc395/tasks/abc395_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-steiner-tree-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-steiner-tree-dp`

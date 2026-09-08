@@ -49,6 +49,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。各頂点を根にした値が必要で、隣接する二つの根の答えの差を辺の両側の情報から求められるとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -101,6 +102,6 @@
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 75,
-  "globalIndex": 147,
+  "globalIndex": 154,
   "orderReason": "根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。"
 }

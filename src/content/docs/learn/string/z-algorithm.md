@@ -3,7 +3,7 @@ title: "Z algorithmによるprefix matching"
 description: "前提からZ algorithmによるprefix matchingを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 134
+  order: 141
 ---
 
 # Z algorithmによるprefix matching
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 既知のZ-boxを再利用してZ arrayを線形時間で構成し、各位置から始まる接尾辞と文字列全体のprefixの最大一致長を、文字列連結によるprefix照合へ利用できる
 
 題材: [ABC257 G「Prefix Concatenation」](https://atcoder.jp/contests/abc257/tasks/abc257_g)
+
+選定理由: Z-algorithmをS+区切り文字+Tへ適用すれば、全開始位置のL_iを合計線形時間で求められる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。一つのパターンSと文字列Tの全接尾辞との最長共通接頭辞が必要になる。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -117,4 +121,4 @@ S、未使用文字、Tを連結してZ値から各T位置のL_iを得る。到�
 - [ABC312 H 公式解説](https://atcoder.jp/contests/abc312/editorial/6837)
 - [ABC312 H 公式問題文](https://atcoder.jp/contests/abc312/tasks/abc312_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-z-algorithm`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-z-algorithm`

@@ -3,7 +3,7 @@ title: "DSUによる連結成分管理・縮約"
 description: "前提からDSUによる連結成分管理・縮約を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 116
+  order: 122
 ---
 
 # DSUによる連結成分管理・縮約
@@ -43,6 +43,10 @@ sidebar:
 
 題材: [ABC279 F「BOX」](https://atcoder.jp/contests/abc279/tasks/abc279_f)
 
+選定理由: DSU leaderはunion by sizeで変わり得るため、union後に返された新leaderへowner boxを設定し直す。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。集合の併合と、要素が属する集合の外部属性queryが混在するとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - ball集合の箱間一括移動・追加・所属queryを、DSUと代表元owner mapで処理できる。
@@ -69,6 +73,10 @@ sidebar:
 ### 例 2 — 静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる
 
 題材: [ABC238 E「Range Sums」](https://atcoder.jp/contests/abc238/tasks/abc238_e)
+
+選定理由: 差 b_v−b_u が既知である関係は、値そのものを保持しなくても u と v の間を移動できる無向辺として扱える。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数の区間和が与えられ、特定区間の和を既知情報から復元できるか判定するとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -186,4 +194,4 @@ sidebar:
 - [ABC372 E 公式問題文](https://atcoder.jp/contests/abc372/tasks/abc372_e)
 - [ABC372 E 公式解説](https://atcoder.jp/contests/abc372/editorial/10967)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-dsu-components`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dsu-components`

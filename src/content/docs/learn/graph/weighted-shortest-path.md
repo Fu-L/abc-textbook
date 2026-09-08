@@ -3,7 +3,7 @@ title: "最短路モデル"
 description: "前提から最短路モデルを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 148
+  order: 155
 ---
 
 # 最短路モデル
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる
 
 題材: [ABC213 E「Stronger Takahashi」](https://atcoder.jp/contests/abc213/tasks/abc213_e)
+
+選定理由: 壊した壁を永続的な盤面状態として追う代わりに、パンチ一回で到達可能になる近傍マスへの有料辺へ操作を畳み込む。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。グラフの辺重みが 0 と 1 だけで、頂点までの最小費用を求めるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ sidebar:
 - [ABC232 G 公式解説](https://atcoder.jp/contests/abc232/editorial/3141)
 - [ABC232 G 公式問題文](https://atcoder.jp/contests/abc232/tasks/abc232_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-weighted-shortest-path`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-weighted-shortest-path`

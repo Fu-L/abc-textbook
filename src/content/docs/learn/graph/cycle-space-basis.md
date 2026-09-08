@@ -3,7 +3,7 @@ title: "cycle space・fundamental cycle basis"
 description: "前提からcycle space・fundamental cycle basisを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 101
+  order: 105
 ---
 
 # cycle space・fundamental cycle basis
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 無向graphの全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning forestと各non-tree edgeが作るfundamental cycleからbasisを構成して、連結成分数Cに対するdim C(G)=M-N+Cを導ける。連結graphではC=1となる。さらに同一連結成分内のs,tに対して固定したs-t path P_0を取ると、任意のs-t path PについてPhi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pからこの写像が単射であることを示せる。したがってcycle-space dimensionを用いて、s-t path族の大きさを2^(dim C(G))以下に抑えられる
 
 題材: [ABC419 G「Count Simple Paths 2」](https://atcoder.jp/contests/abc419/tasks/abc419_g)
+
+選定理由: terminal以外のleafをqueueで反復削除しても1-N path集合は変わらない。削除後のdegree総和とcycle rankからdegree≥3頂点数は2K以下に抑えられる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。指定terminal間simple pathに絶対含まれない枝を除きたいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ degree1非terminalをpeelingし、S={1,N}∪{deg≥3}を作る。各S頂点か�
 - [ABC419 G 公式解説](https://atcoder.jp/contests/abc419/editorial/13636)
 - [ABC419 G 公式問題文](https://atcoder.jp/contests/abc419/tasks/abc419_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-cycle-space-basis`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-cycle-space-basis`

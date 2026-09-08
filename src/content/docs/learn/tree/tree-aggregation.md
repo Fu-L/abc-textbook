@@ -30,9 +30,9 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [根付き木DP・部分木集約](./rooted-tree-aggregation.md)（標準順 125）— DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。
-2. [rerooting・全方位木DP](./rerooting.md)（標準順 148）— 根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。
-3. [heavy pathによる木DP高速化](./heavy-path-tree-dp.md)（標準順 188）— 根付き木DP・部分木集約で得た考え方と実装を再利用し、heavy pathによる木DP高速化の発動条件・正当化・境界を重複なく学ぶ。
+1. [根付き木DP・部分木集約](./rooted-tree-aggregation.md)（標準順 131）— DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。
+2. [rerooting・全方位木DP](./rerooting.md)（標準順 155）— 根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。
+3. [heavy path上の多項式木DP](./heavy-path-tree-dp.md)（標準順 195）— 畳み込み・相互相関・根付き木DP・部分木集約で得た考え方と実装を再利用し、heavy path上の多項式木DPの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -48,7 +48,7 @@ sidebar:
 
 - **根付き木DP・部分木集約** — 直接到達点: 根付き木で子側の状態を合成し、部分木または木全体の値を求められる。近いが対象外: 根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 - **rerooting・全方位木DP** — 直接到達点: 子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。近いが対象外: rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **heavy pathによる木DP高速化** — 直接到達点: heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: heavy pathによる木DP高速化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- **heavy path上の多項式木DP** — 直接到達点: heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: heavy path上の多項式木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
 **比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
 
@@ -97,4 +97,4 @@ sidebar:
 - [ABC239 E 公式問題文](https://atcoder.jp/contests/abc239/tasks/abc239_e)
 - [ABC239 E 公式解説](https://atcoder.jp/contests/abc239/editorial/3385)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-tree-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-tree-aggregation`

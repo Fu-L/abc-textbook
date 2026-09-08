@@ -3,7 +3,7 @@ title: "約数格子のzeta・Möbius反転"
 description: "前提から約数格子のzeta・Möbius反転を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 165
+  order: 172
 ---
 
 # 約数格子のzeta・Möbius反転
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 約数/倍数方向の累積値とexact gcd・period値をnumber-theoretic Möbius関数または格子反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC230 G「GCD Permutation」](https://atcoder.jp/contests/abc230/tasks/abc230_g)
+
+選定理由: num(a,b) を i が a の倍数かつ P_i が b の倍数となる位置数とすると、i≤j の組数は num(a,b)(num(a,b)＋1)/2 になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。GCD が 1、または 1 でないという条件を約数の倍数条件へ分解したいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ sidebar:
 - [ABC304 F 公式解説](https://atcoder.jp/contests/abc304/editorial/6511)
 - [ABC304 F 公式問題文](https://atcoder.jp/contests/abc304/tasks/abc304_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-divisor-mobius-inversion`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-divisor-mobius-inversion`

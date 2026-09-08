@@ -3,7 +3,7 @@ title: "rollback・DFS入退場の状態復元"
 description: "前提からrollback・DFS入退場の状態復元を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 167
+  order: 174
 ---
 
 # rollback・DFS入退場の状態復元
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC218 G「Game on Tree 2」](https://atcoder.jp/contests/abc218/tasks/abc218_g)
+
+選定理由: DFS の入場時に A_v を追加し、退場時に同じ一個を削除すれば、データ構造は常に現在の root-to-v path だけを表す。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各 root-to-node path の統計量を全頂点または全葉で求め、要素の追加と rollback ができるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -117,4 +121,4 @@ sidebar:
 - [ABC363 G 公式解説](https://atcoder.jp/contests/abc363/editorial/10451)
 - [ABC363 G 公式問題文](https://atcoder.jp/contests/abc363/tasks/abc363_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-rollback`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-rollback`

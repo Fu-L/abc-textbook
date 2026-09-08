@@ -3,7 +3,7 @@ title: "推移閉包"
 description: "前提から推移閉包を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 113
+  order: 119
 ---
 
 # 推移閉包
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 各始点探索または中継許可集合の段階不変条件を保つWarshall更新で推移閉包を求め、必要なら初回到達段階も記録できる
 
 題材: [ABC287 Ex「Directed Graph and Query」](https://atcoder.jp/contests/abc287/tasks/abc287_h)
+
+選定理由: 最大頂点番号を最小化する問題は、番号k以下を使用可能にする単調なthreshold判定として見ると、最初に到達可能になるkが答えになる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。path costが使用要素の最大keyで、許可thresholdに対し可否が単調なとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -120,4 +124,4 @@ sidebar:
 - [ABC374 G 公式解説](https://atcoder.jp/contests/abc374/editorial/11099)
 - [ABC374 G 公式問題文](https://atcoder.jp/contests/abc374/tasks/abc374_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-transitive-closure`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-transitive-closure`

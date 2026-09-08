@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC321 E「Complete Binary Tree」](https://atcoder.jp/contests/abc321/tasks/abc321_e)
 
+選定理由: countDesc(v,d)はmax(0,min(N+1,(v+1)2^d)-v2^d)で、label上限Nとの区間intersectionだけになる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。親i/2・子2i,2i+1で巨大treeが番号だけ与えられるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 最大10^18頂点のimplicit binary treeで、Xから距離Kの頂点数をancestor列挙とlabel区間計数で求められる。
@@ -121,4 +125,4 @@ overflowを避けるcountDesc(v,d)を用意し、まずanswer=countDesc(X,K)と�
 - [ABC424 E 公式問題文](https://atcoder.jp/contests/abc424/tasks/abc424_e)
 - [ABC424 E 公式解説](https://atcoder.jp/contests/abc424/editorial/13858)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-implicit-binary-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-implicit-binary-tree`

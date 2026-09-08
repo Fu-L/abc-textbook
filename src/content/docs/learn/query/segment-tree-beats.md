@@ -3,7 +3,7 @@ title: "Segment Tree Beats"
 description: "前提からSegment Tree Beatsを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 185
+  order: 192
 ---
 
 # Segment Tree Beats
@@ -41,6 +41,10 @@ nodeの最大/次点/個数等からrange chmin/chmaxが一括適用できる条
 ### 例 1 — nodeの最大/次点/個数等からrange chmin/chmaxが一括適用できる条件を判定し、失敗時だけ子へ降りる。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC430 G「Range Set Modifying Query」](https://atcoder.jp/contests/abc430/tasks/abc430_g)
+
+選定理由: (O\A)∩(a∪b)=∅ なら、操作対象の各要素は区間内の全集合に含まれるか全く含まれないので、全葉のサイズ変化が同じで節点へ一括適用できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。区間写像を節点情報だけで適用できる場合とできない場合があり、失敗回数を単調量で償却できるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -112,4 +116,4 @@ nodeの最大/次点/個数等からrange chmin/chmaxが一括適用できる条
 - [ABC430 G 公式解説](https://atcoder.jp/contests/abc430/editorial/14300)
 - [ABC430 G 公式問題文](https://atcoder.jp/contests/abc430/tasks/abc430_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-segment-tree-beats`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-segment-tree-beats`

@@ -42,7 +42,7 @@
       }
     ],
     "algorithmConnection": {
-      "text": "16本種のXから8頂点の入出次数を作る。各始点s・終点tについてdegree条件と非零辺部分の連結性を確認し、必要な補助辺t→sを加える。mod 998244353で8×8 Laplacian minorをGaussian eliminationしてarborescence数を求め、BESTのfactorial積を掛け、同一patternのX_e!による重複を割って該当する列数を合計する。",
+      "text": "各始点s・終点tのdegree条件を調べ、辺を持つ頂点とs,tだけをVとする。元の辺と区別する補助辺e*:t→sをs=tでも一個加え、V上の連結性と入出次数一致を確認する。e*を最初の辺に固定した閉路からe*を切ると、sからtへの線形なtrailと一対一対応する。自己ループを除いたV上の有向Laplacianから根tの行・列を除き、その余因子の行列式を求める。一頂点なら空行列式は1。これに補助辺・自己ループを含む次数の∏(outdeg(v)-1)!を掛け、元の16種類のX_e!だけで割り、始終点について合計する。X0000=1だけなら答えは1であり、未使用の7頂点を行列へ残してはいけない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },

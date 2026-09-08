@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC222 H「Beautiful Binary Tree」](https://atcoder.jp/contests/abc222/tasks/abc222_h)
 
+選定理由: 根が1の木の母関数を A、根が0の許容部分木を B とすると、子の置き方から B=2A+A^2、A=x(1+A+B)^2=x(1+3A+A^2)^2 を得る。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。木を根の型と左右の独立な部分木へ分解でき、サイズ別個数の畳み込みが現れるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 木の操作条件を静的なラベル制約へ直し、母関数方程式、反転公式、係数漸化式まで一貫して導出できる。
@@ -117,4 +121,4 @@ m=2N、u_k=[x^k](1+3x+x^2)^m として u_0=1 から u_k={3(m+1-k)u_(k-1)+(2m+2-k
 - [ABC225 H 公式解説](https://atcoder.jp/contests/abc225/editorial/2834)
 - [ABC225 H 公式問題文](https://atcoder.jp/contests/abc225/tasks/abc225_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-generating-functions`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-generating-functions`

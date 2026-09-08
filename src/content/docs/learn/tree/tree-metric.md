@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC221 F「Diameter set」](https://atcoder.jp/contests/abc221/tasks/abc221_f)
 
+選定理由: 奇数 D では中心辺を切った両側から距離 (D-1)/2 の頂点を一つずつ選ぶしかなく、答えは二側の個数の積になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。全頂点対の最大距離や、互いの距離が直径に等しい頂点集合を扱うとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 木の直径中心から等距離頂点集合の branch 制約を導き、直径の偶奇別に有効集合を数えられる。
@@ -117,4 +121,4 @@ sidebar:
 - [ABC267 F 公式解説](https://atcoder.jp/contests/abc267/editorial/4714)
 - [ABC267 F 公式問題文](https://atcoder.jp/contests/abc267/tasks/abc267_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-tree-metric`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-tree-metric`

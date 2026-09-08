@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC408 E「Minimum OR Path」](https://atcoder.jp/contests/abc408/tasks/abc408_e)
 
+選定理由: simple path 条件は connectivity 判定を妨げない。許可辺で walk があれば cycle を除いて simple path にでき、その OR は増えない。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。実行可能 mask が bit 追加に対して上向き閉集合で、数値最小を求めるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 最大 2×10^5 辺のグラフで、path edge label OR の数値最小値を30回の連結性判定で得られる。
@@ -113,4 +117,4 @@ ans=(1<<30)-1 とする。b=29..0 について cand=ans without bit b を作り�
 - [ABC408 E 公式問題文](https://atcoder.jp/contests/abc408/tasks/abc408_e)
 - [ABC408 E 公式解説](https://atcoder.jp/contests/abc408/editorial/13159)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-bitwise-greedy-feasibility`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-bitwise-greedy-feasibility`

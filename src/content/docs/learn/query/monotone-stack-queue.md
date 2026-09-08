@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC228 F「Stamp Game」](https://atcoder.jp/contests/abc228/tasks/abc228_f)
 
+選定理由: 青木の手を『白スタンプの盤面上の位置』で追う必要はなく、固定した黒長方形の内部で最大和となる h2×w2 長方形を引く最小最大問題に変換できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。二人の選択後の評価が、先手の領域量から後手との重なり量を引く形になるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 長方形同士の最小最大問題を包含窓の最大値へ変換し、累積和と二次元スライド最大値を組み合わせて評価できる。
@@ -118,4 +122,4 @@ h2,w2をh1,w1以下へ切り詰め、二次元累積和で全ての黒・白長�
 - [ABC234 G 公式解説](https://atcoder.jp/contests/abc234/editorial/3227)
 - [ABC234 G 公式問題文](https://atcoder.jp/contests/abc234/tasks/abc234_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-monotone-stack-queue`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-monotone-stack-queue`

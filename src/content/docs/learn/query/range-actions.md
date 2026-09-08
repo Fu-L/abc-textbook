@@ -3,7 +3,7 @@ title: "区間更新を要約へ作用させる"
 description: "前提から区間更新を要約へ作用させるを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 145
+  order: 152
 ---
 
 # 区間更新を要約へ作用させる
@@ -30,7 +30,7 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [Segment Tree Beats](./segment-tree-beats.md)（標準順 186）— 区間monoid要約で得た考え方と実装を再利用し、Segment Tree Beatsの発動条件・正当化・境界を重複なく学ぶ。
+1. [Segment Tree Beats](./segment-tree-beats.md)（標準順 193）— 区間monoid要約で得た考え方と実装を再利用し、Segment Tree Beatsの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -47,6 +47,10 @@ sidebar:
 ### 例 1 — 更新作用の合成順と要約への適用を定義し、遅延評価で保てる
 
 題材: [ABC237 G「Range Sort Query」](https://atcoder.jp/contests/abc237/tasks/abc237_g)
+
+選定理由: 区間の 1 の個数を S とすれば、昇順ソート後は末尾 S 個だけが 1、降順ソート後は先頭 S 個だけが 1 になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。大小関係だけを使う更新後に、特定値の順位上の位置だけを追いたいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -155,4 +159,4 @@ sidebar:
 - [ABC265 G 公式解説](https://atcoder.jp/contests/abc265/editorial/4586)
 - [ABC265 G 公式問題文](https://atcoder.jp/contests/abc265/tasks/abc265_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-range-actions`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-range-actions`

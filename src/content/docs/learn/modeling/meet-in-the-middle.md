@@ -3,7 +3,7 @@ title: "meet-in-the-middle・半分全列挙"
 description: "前提からmeet-in-the-middle・半分全列挙を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 128
+  order: 135
 ---
 
 # meet-in-the-middle・半分全列挙
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる
 
 題材: [ABC220 H「Security Camera」](https://atcoder.jp/contests/abc220/tasks/abc220_h)
+
+選定理由: g[t]=(-1)^{R[t]} として H[z]=Σ_t (-1)^{popcount(z&t)}g[t] を求めると、H[z] は parity(z&t) xor R[t] が0の個数と1の個数の差になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。N が40前後で全 subset は多いが、二分した各側の subset 情報を圧縮して結合できるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -117,4 +121,4 @@ sidebar:
 - [ABC271 F 公式解説](https://atcoder.jp/contests/abc271/editorial/4925)
 - [ABC271 F 公式問題文](https://atcoder.jp/contests/abc271/tasks/abc271_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-meet-in-the-middle`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-meet-in-the-middle`

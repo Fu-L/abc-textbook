@@ -31,9 +31,9 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [状態グラフのモデリングと探索](./state-graph-search.md)（標準順 111）— 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-2. [推移閉包](./transitive-closure.md)（標準順 114）— 各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-3. [方向別grid scanによる長距離効果の前計算](./directional-grid-effect-scan.md)（標準順 137）— 各行・各列を固定方向に一度ずつscanし、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する。
+1. [状態グラフのモデリングと探索](./state-graph-search.md)（標準順 116）— 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+2. [推移閉包](./transitive-closure.md)（標準順 120）— 各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+3. [方向別grid scanによる長距離効果の前計算](./directional-grid-effect-scan.md)（標準順 144）— 各行・各列を固定方向に一度ずつscanし、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する。
 
 ## 発動条件と見分け方
 
@@ -98,4 +98,4 @@ sidebar:
 - [ABC257 G 公式解説](https://atcoder.jp/contests/abc257/editorial/4185)
 - [ABC257 G 公式問題文](https://atcoder.jp/contests/abc257/tasks/abc257_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-graph-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-graph-search`

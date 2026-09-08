@@ -71,6 +71,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。subarray costにminimum/maximumが含まれ、そのextremum位置を含む区間で値を固定できるとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -122,6 +123,6 @@
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 69,
-  "globalIndex": 132,
+  "globalIndex": 139,
   "orderReason": "pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

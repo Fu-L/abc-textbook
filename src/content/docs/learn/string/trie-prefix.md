@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC287 E「Karuta」](https://atcoder.jp/contests/abc287/tasks/abc287_e)
 
+選定理由: ある深さのprefixを共有する文字列が2本以上なら、その全ては少なくともその深さまで誰かと一致し、1本になった直前の深さが最大値になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数文字列について共有prefixの深さをまとめて追いたいとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 各入力文字列について、別の文字列とのLCP最大値を総文字数に比例するprefix分割で求められる。
@@ -120,4 +124,4 @@ sidebar:
 - [ABC353 E 公式問題文](https://atcoder.jp/contests/abc353/tasks/abc353_e)
 - [ABC353 E 公式解説](https://atcoder.jp/contests/abc353/editorial/9969)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-trie-prefix`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-trie-prefix`

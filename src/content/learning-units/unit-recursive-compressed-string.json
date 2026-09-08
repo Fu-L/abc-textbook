@@ -46,6 +46,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。有限base stringの巨大反復上で、指定文字の多数回先の出現位置が欲しい。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -95,6 +96,6 @@
   "stageRank": 4,
   "difficultyRank": 2,
   "representativeRank": 2,
-  "globalIndex": 109,
+  "globalIndex": 114,
   "orderReason": "明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。"
 }

@@ -3,7 +3,7 @@ title: "slope trick"
 description: "前提からslope trickを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 183
+  order: 190
 ---
 
 # slope trick
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC217 H「Snuketoon」](https://atcoder.jp/contests/abc217/tasks/abc217_h)
+
+選定理由: 移動更新 min_{|y-x|≤ΔT} f(y) は凸関数の最小値を取る区間を左へ ΔT、右へ ΔT だけ広げ、関数値の最小値自体は変えない。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。最小化 DP の状態が一次元座標で、遷移が凸区分線形関数への hinge 加算や区間 min-plus 畳み込みとして書けるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -97,7 +101,7 @@ f_0 は x=0 だけが有限な凸関数として初期化する。射撃ごと�
 - 各日に高々一回の売買操作を行える条件で、最終日に得られる所持金の最大値を求められる。
 
 - 対象技能が担う箇所: 各日に高々一回の売買操作を行える条件で、最終日に得られる所持金の最大値を求められる。
-- 転移題材の解法接続: 価格を日順に見て最小ヒープへ入れる。最小値m<P_iならmを一つ取り出して利益へP_i-mを加え、P_iを二つ挿入し、そうでなければP_iを一つ挿入する。最終利益を出力する。
+- 転移題材の解法接続: 利益を0、最小ヒープを最初の価格一個で初期化する。二日目以降は挿入前の最小値mとP_iを比較し、m<P_iならmを一つ取り出して利益へP_i-mを加え、P_iを二個挿入する。そうでなければP_iを一個挿入する。heapは取引候補の限界費用を表し、過去の売りを後から取り消してより高い価格へ付け替えられる。価格[1,2,100]では利益は1+98=99となる。全体O(N log N)。
 - 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
 - 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
 - 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
@@ -117,4 +121,4 @@ f_0 は x=0 だけが有限な凸関数として初期化する。射撃ごと�
 - [ABC275 H 公式解説](https://atcoder.jp/contests/abc275/editorial/5128)
 - [ABC275 H 公式問題文](https://atcoder.jp/contests/abc275/tasks/abc275_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-slope-trick`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-slope-trick`

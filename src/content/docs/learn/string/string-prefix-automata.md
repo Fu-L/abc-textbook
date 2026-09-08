@@ -30,7 +30,7 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [Z algorithmによるprefix matching](./z-algorithm.md)（標準順 135）— 各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+1. [Z algorithmによるprefix matching](./z-algorithm.md)（標準順 142）— 各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 発動条件と見分け方
 
@@ -93,4 +93,4 @@ sidebar:
 - [ABC312 H 公式解説](https://atcoder.jp/contests/abc312/editorial/6837)
 - [ABC312 H 公式問題文](https://atcoder.jp/contests/abc312/tasks/abc312_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-string-prefix-automata`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-string-prefix-automata`

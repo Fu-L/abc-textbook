@@ -1,7 +1,7 @@
 {
   "id": "tag-small-to-large",
   "name": "small-to-large・DSU on Tree",
-  "definition": "小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。",
+  "definition": "小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。",
   "parentId": "tag-model-reduction",
   "prerequisiteTagIds": [],
   "semanticSignature": {
@@ -16,8 +16,9 @@
       "小さい側"
     ],
     "invariantPatterns": [
-      "size倍増",
-      "要素移動"
+      "分割時の半減",
+      "所属サイズの増大",
+      "消滅要素への課金"
     ],
     "goalPatterns": [
       "部分木集約",

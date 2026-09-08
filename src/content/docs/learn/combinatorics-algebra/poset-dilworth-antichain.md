@@ -3,7 +3,7 @@ title: "半順序・Dilworth・最大反鎖"
 description: "前提から半順序・Dilworth・最大反鎖を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 161
+  order: 168
 ---
 
 # 半順序・Dilworth・最大反鎖
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける
 
 題材: [ABC237 Ex「Hakata」](https://atcoder.jp/contests/abc237/tasks/abc237_h)
+
+選定理由: 禁止条件は回文区間の交差ではなく、回文文字列同士の substring 比較可能性なので、求める量は包含半順序の幅である。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。二つの要素が半順序で比較可能なら同時に選べず、最大の互いに比較不能な集合を求めるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ sidebar:
 - [ABC457 G 公式解説](https://atcoder.jp/contests/abc457/editorial/20073)
 - [ABC457 G 公式問題文](https://atcoder.jp/contests/abc457/tasks/abc457_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-poset-dilworth-antichain`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-poset-dilworth-antichain`

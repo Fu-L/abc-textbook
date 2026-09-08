@@ -3,7 +3,7 @@ title: "非決定性automatonのsubset construction"
 description: "前提から非決定性automatonのsubset constructionを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 162
+  order: 169
 ---
 
 # 非決定性automatonのsubset construction
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 同時に存在し得るNFA状態集合を一つのDFA状態とし、文字ごとの集合遷移と受理条件を構成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC228 G「Digits on Grid」](https://atcoder.jp/contests/abc228/tasks/abc228_g)
+
+選定理由: 集合Sと次の数字dから、dと書かれた辺でSのいずれかに隣接する反対側頂点全体が次集合として一意に決まる。この決定的遷移により、経路の曖昧さを集合へ吸収できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。行と列を交互に選び、交点の情報を出力する操作が続くとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -113,4 +117,4 @@ sidebar:
 - [ABC228 G 公式解説](https://atcoder.jp/contests/abc228/editorial/2942)
 - [ABC228 G 公式問題文](https://atcoder.jp/contests/abc228/tasks/abc228_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-automaton-subset-construction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-automaton-subset-construction`

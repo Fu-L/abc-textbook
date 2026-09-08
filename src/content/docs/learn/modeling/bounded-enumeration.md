@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC227 F「Treasure Hunting」](https://atcoder.jp/contests/abc227/tasks/abc227_f)
 
+選定理由: Xが大きい方からK番目なら、Xより大きい値の個数はK未満で、X以上の値の個数はK以上である。したがって全ての>Xと必要個数の=Xを採用すれば、採用値は上位K個と一致する。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。集合や経路の最大側K個の和など、順位で選ばれる要素の総和を最適化するとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - K番目候補Xを有限列挙し、>X・<X・=Xを区別するexact-k grid DPで各経路の上位K個和を正しく最小化できる。
@@ -78,9 +82,9 @@ sidebar:
 
 ### 到達確認 1 — 制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる
 
-転移題材: [ABC234 E「Arithmetic Number」](https://atcoder.jp/contests/abc234/tasks/abc234_e)
+転移題材: [ABC219 E「Moat」](https://atcoder.jp/contests/abc219/tasks/abc219_e)
 
-**課題**: ABC234 E「Arithmetic Number」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
+**課題**: ABC219 E「Moat」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
 
 **合格条件**: 手法名の列挙に留まらず、学習成果「制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
 
@@ -91,14 +95,14 @@ sidebar:
 
 **検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
 
-別題材では次の直接根拠を対象技能として切り出す: 巨大な数値範囲でも、桁構造の自由度を数えて小さな生成全探索へ落とせる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
+別題材では次の直接根拠を対象技能として切り出す: 格子上の直交多角形をセル mask に離散化し、内部・外部双方の連結性で単純な境界を判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
 
 根拠として照合する観点:
 
-- 巨大な数値範囲でも、桁構造の自由度を数えて小さな生成全探索へ落とせる。
+- 格子上の直交多角形をセル mask に離散化し、内部・外部双方の連結性で単純な境界を判定できる。
 
-- 対象技能が担う箇所: 巨大な数値範囲でも、桁構造の自由度を数えて小さな生成全探索へ落とせる。
-- 転移題材の解法接続: 等差 digit sequence の三パラメータ表現を使って全候補を生成・検証し、下限 X を満たす最小値を単純比較する。
+- 対象技能が担う箇所: 格子上の直交多角形をセル mask に離散化し、内部・外部双方の連結性で単純な境界を判定できる。
+- 転移題材の解法接続: 各 mask について村 bit が全て立っているか確認し、選択セルを4近傍探索して選択数と到達数を比較する。さらに盤面を外枠付きに拡張し、外枠から非選択セルだけを探索して未到達の空セルがなければ答えへ加える。
 - 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
 - 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
 - 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
@@ -111,15 +115,13 @@ sidebar:
 
 ## 根拠
 
+- [ABC219 E 公式問題文](https://atcoder.jp/contests/abc219/tasks/abc219_e)
+- [ABC219 E 公式解説](https://atcoder.jp/contests/abc219/editorial/2652)
 - [ABC220 G 公式解説](https://atcoder.jp/contests/abc220/editorial/2684)
 - [ABC220 G 公式問題文](https://atcoder.jp/contests/abc220/tasks/abc220_g)
 - [ABC223 E 公式問題文](https://atcoder.jp/contests/abc223/tasks/abc223_e)
 - [ABC223 E 公式解説](https://atcoder.jp/contests/abc223/editorial/2781)
-- [ABC226 F 公式解説](https://atcoder.jp/contests/abc226/editorial/2878)
-- [ABC226 F 公式問題文](https://atcoder.jp/contests/abc226/tasks/abc226_f)
 - [ABC227 F 公式解説](https://atcoder.jp/contests/abc227/editorial/2914)
 - [ABC227 F 公式問題文](https://atcoder.jp/contests/abc227/tasks/abc227_f)
-- [ABC234 E 公式問題文](https://atcoder.jp/contests/abc234/tasks/abc234_e)
-- [ABC234 E 公式解説](https://atcoder.jp/contests/abc234/editorial/3225)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-bounded-enumeration`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-bounded-enumeration`

@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC232 H「King's Tour」](https://atcoder.jp/contests/abc232/tasks/abc232_h)
 
+選定理由: S＝第一列全体と (H,2) を通る経路の末尾は、第一列を除いて上下反転した残り盤面の左上角に対応する。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。大きい盤面の一部を固定経路で消費すると、座標変換後に同じ条件の小さい盤面が残るとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 任意終点のキング全盤面巡回路を、対称変換と幅縮小の再帰的不変条件から構成できる。
@@ -120,4 +124,4 @@ sidebar:
 - [ABC233 F 公式解説](https://atcoder.jp/contests/abc233/editorial/3164)
 - [ABC233 F 公式問題文](https://atcoder.jp/contests/abc233/tasks/abc233_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-constructive-witness`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-constructive-witness`

@@ -3,7 +3,7 @@ title: "priority queue・best-first列挙"
 description: "前提からpriority queue・best-first列挙を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 115
+  order: 121
 ---
 
 # priority queue・best-first列挙
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC297 E「Kth Takoyaki Set」](https://atcoder.jp/contests/abc297/tasks/abc297_e)
+
+選定理由: 次の金額の買い方から一個外せば既に確定済み以下の金額になるため、確定集合から一手足した候補だけ見れば十分。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。非負加算で生成される半群の小さい値を順に列挙する。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -119,4 +123,4 @@ heapへ0を入れ、最小値を取り出して直前確定値と異なる時だ
 - [ABC305 E 公式問題文](https://atcoder.jp/contests/abc305/tasks/abc305_e)
 - [ABC305 E 公式解説](https://atcoder.jp/contests/abc305/editorial/6539)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-priority-queue-best-first`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-priority-queue-best-first`

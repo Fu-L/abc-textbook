@@ -3,7 +3,7 @@ title: "区間monoid要約"
 description: "前提から区間monoid要約を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 144
+  order: 151
 ---
 
 # 区間monoid要約
@@ -41,6 +41,10 @@ queryに十分な値と結合順・単位元を定義し、Segment Treeまたは
 ### 例 1 — 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる
 
 題材: [ABC223 F「Parenthesis Checking」](https://atcoder.jp/contests/abc223/tasks/abc223_f)
+
+選定理由: minPrefix は空 prefix を含めて定義する。左 (s_L,m_L) と右 (s_R,m_R) の結合は (s_L+s_R,min(m_L,s_L+m_R))、identity は (0,0) となり、結合順を逆にできない非可換 monoid である。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。部分括弧列の正当性を判定するとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -117,4 +121,4 @@ leaf を '('=(1,0), ')'=(-1,-1)、identity を (0,0) として segment tree を�
 - [ABC246 H 公式解説](https://atcoder.jp/contests/abc246/editorial/3705)
 - [ABC246 H 公式問題文](https://atcoder.jp/contests/abc246/tasks/abc246_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-range-monoid-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-range-monoid-aggregation`

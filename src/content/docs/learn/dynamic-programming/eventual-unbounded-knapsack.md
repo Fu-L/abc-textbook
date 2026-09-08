@@ -3,7 +3,7 @@ title: "大容量unbounded knapsackのeventual linearity"
 description: "前提から大容量unbounded knapsackのeventual linearityを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 203
+  order: 210
 ---
 
 # 大容量unbounded knapsackのeventual linearity
@@ -38,9 +38,18 @@ sidebar:
 
 ## ガイド例
 
+### 正当化と転用の境界
+
+- ABC310 Exでは短いコンボの列挙までを固有の前処理とし、時間a・報酬bのitem集合が得られた後を比較する。最大密度item(a*,b*)より劣るitemの列に長さa*の剰余prefix衝突があれば、所要時間がa*の倍数となる部分を基準itemで置換して報酬を減らさずに済む。したがって例外itemを有限個へ界し、有限DPと基準itemの反復を併用する。
+- ABC415 Gの容量固定で価値を最大化する形式に対し、ABC310 Exは目標価値を満たす時間を最小化する。有限例外の時間・報酬を保持し、残り必要報酬を基準itemで切り上げて満たす。密度greedyだけでは端数を最適化できず、例外上界とceilの処理が正しさに必要である。
+
 ### 例 1 — 剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる
 
 題材: [ABC415 G「Get Many Cola」](https://atcoder.jp/contests/abc415/tasks/abc415_g)
+
+選定理由: 同じA_iならB_i最大のoptionだけがD_iも小さくvalueも大きいので他を削除でき、残る種類数はK以下になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。capacityが巨大だがitem weightが小さく、best ratio以外の使用量をboundedにできるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -78,9 +87,9 @@ sidebar:
 
 ### 到達確認 1 — 剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる
 
-境界検証の元題材: [ABC415 G「Get Many Cola」](https://atcoder.jp/contests/abc415/tasks/abc415_g)
+転移題材: [ABC310 Ex「Negative Cost」](https://atcoder.jp/contests/abc310/tasks/abc310_h)
 
-**課題**: ABC415 G「Get Many Cola」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。
+**課題**: ABC310 Ex「Negative Cost」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
 
 **合格条件**: 手法名の列挙に留まらず、学習成果「剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
 
@@ -91,26 +100,29 @@ sidebar:
 
 **検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
 
-単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。
+別題材では次の直接根拠を対象技能として切り出す: 無限に長い実行列を O(L) 長のコンボと O(L²) の例外領域へ圧縮し、O(NL²+L³) で最小使用回数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
 
 根拠として照合する観点:
 
-- 最大Aが300という小ささを使い、10^15本からの最大drink数をO(M+K^3)で求められる。
+- 無限に長い実行列を O(L) 長のコンボと O(L²) の例外領域へ圧縮し、O(NL²+L³) で最小使用回数を求められる。
 
-- 元の方針が必要とする対象・操作・不変量・目標を分けて書く。
-- 発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。
-- 元の正当化のうち最初に成立しなくなる命題を指摘する。
-- 計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。
-- 条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。
+- 対象技能が担う箇所: 無限に長い実行列を O(L) 長のコンボと O(L²) の例外領域へ圧縮し、O(NL²+L³) で最小使用回数を求められる。
+- 転移題材の解法接続: dp[len][balance] で長さ 2L 以下の基本列の最大ダメージを O(NL²) で求め、長さごとの最大値 d_len をコンボとする。効率 d_z/z 最大の z を選び、例外コンボ総コスト O(L²) までの無制限 knapsack で最大ダメージ M_x を O(L³) で計算する。各 x に不足分を z コンボで補った総手数の最小を取る。
+- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
+- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
+- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
+- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
 
-期待する到達点: 剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められるの適用可能範囲と破綻条件を反例付きで説明できる。
+期待する到達点: 剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。
 
 </details>
 
 
 ## 根拠
 
+- [ABC310 H 公式解説](https://atcoder.jp/contests/abc310/editorial/6794)
+- [ABC310 H 公式問題文](https://atcoder.jp/contests/abc310/tasks/abc310_h)
 - [ABC415 G 公式解説](https://atcoder.jp/contests/abc415/editorial/13491)
 - [ABC415 G 公式問題文](https://atcoder.jp/contests/abc415/tasks/abc415_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-eventual-unbounded-knapsack`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-eventual-unbounded-knapsack`

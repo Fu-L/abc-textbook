@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC221 E「LEQ」](https://atcoder.jp/contests/abc221/tasks/abc221_e)
 
+選定理由: 部分列全体を DP 状態にせず、最初と最後だけを固定すると中間選択が独立な二択になり、その個数が端点間距離だけの冪になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。部分列の条件が最初と最後だけに依存し、中間要素の採否が自由なとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 端点だけで決まる部分列条件を端点対の指数重みへ変え、重み分離と Fenwick Tree で集計できる。
@@ -118,4 +122,4 @@ sidebar:
 - [ABC256 F 公式解説](https://atcoder.jp/contests/abc256/editorial/4131)
 - [ABC256 F 公式問題文](https://atcoder.jp/contests/abc256/tasks/abc256_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-weighted-prefix-fenwick`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-weighted-prefix-fenwick`

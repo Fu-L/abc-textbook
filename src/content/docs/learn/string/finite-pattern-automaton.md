@@ -3,7 +3,7 @@ title: "有限状態automatonの構成"
 description: "前提から有限状態automatonの構成を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 141
+  order: 148
 ---
 
 # 有限状態automatonの構成
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 未来の一文字遷移を決める有限同値類を定義し、pattern suffix・subsequence進行・圧縮DP rowなどから完全遷移表を構成してDPや行列累乗に接続できる
 
 題材: [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
+
+選定理由: 状態 xy から文字 z を追加する辺は yz へ進み、重み P(z)+P(yz)+P(xyz) を持つ。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。次の文字を加えた増分が直前の高々L文字だけで決まるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ bounded-length substring score を de Bruijn 型 suffix automaton のedge weight
 - [ABC305 G 公式解説](https://atcoder.jp/contests/abc305/editorial/6540)
 - [ABC305 G 公式問題文](https://atcoder.jp/contests/abc305/tasks/abc305_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-finite-pattern-automaton`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-finite-pattern-automaton`

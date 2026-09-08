@@ -3,7 +3,7 @@ title: "Aho–Corasick"
 description: "前提からAho–Corasickを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 180
+  order: 187
 ---
 
 # Aho–Corasick
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 複数patternのTrieへfailure linkと出力情報を加え、Aho–Corasick automaton上で一致状態を更新できる
 
 題材: [ABC419 F「All Included」](https://atcoder.jp/contests/abc419/tasks/abc419_f)
+
+選定理由: failure link先のoutput maskもnodeへ伝播すれば、ある文字追加で終端するpatternだけでなく、そのsuffixとして同時に出現する短いpatternも一度のORで記録できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。複数patternのsubstring出現を文字列生成DPの有限suffix状態にしたいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ S_iをtrieへ挿入して終端nodeにbit iを立て、BFSでfailure link・全2
 - [ABC458 F 公式解説](https://atcoder.jp/contests/abc458/editorial/20159)
 - [ABC458 F 公式問題文](https://atcoder.jp/contests/abc458/tasks/abc458_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-aho-corasick`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-aho-corasick`

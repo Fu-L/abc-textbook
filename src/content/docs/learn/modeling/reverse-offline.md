@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC229 E「Graph Destruction」](https://atcoder.jp/contests/abc229/tasks/abc229_e)
 
+選定理由: 頂点 i を追加した直後に成分数を一つ増やし、異なる根を結ぶ辺ごとに一つ減らせば現在の連結成分数を維持できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。更新が削除だけで順序も既知だが、利用したいデータ構造が追加しか扱えないとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 削除のみの連結性推移を逆順の追加へ変換し、Union-Find で全時点の成分数を求められる。
@@ -117,4 +121,4 @@ sidebar:
 - [ABC249 F 公式解説](https://atcoder.jp/contests/abc249/editorial/3789)
 - [ABC249 F 公式問題文](https://atcoder.jp/contests/abc249/tasks/abc249_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-reverse-offline`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-reverse-offline`

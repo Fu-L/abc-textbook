@@ -3,7 +3,7 @@ title: "Euler順による部分木区間化"
 description: "前提からEuler順による部分木区間化を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 129
+  order: 136
 ---
 
 # Euler順による部分木区間化
@@ -41,6 +41,10 @@ DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・�
 ### 例 1 — Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる
 
 題材: [ABC240 E「Ranges on Tree」](https://atcoder.jp/contests/abc240/tasks/abc240_e)
+
+選定理由: 最適値を決めるのは頂点数ではなく、互いに素な最小部分木である葉の個数であり、内部頂点は葉区間の包として新しい整数を消費しない。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。部分木や連結な再帰部分が並び順上の区間になる表現を作りたいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・�
 - [ABC337 G 公式解説](https://atcoder.jp/contests/abc337/editorial/9128)
 - [ABC337 G 公式問題文](https://atcoder.jp/contests/abc337/tasks/abc337_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-tree-euler-flattening`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-tree-euler-flattening`

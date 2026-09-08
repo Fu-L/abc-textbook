@@ -30,8 +30,8 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [matroid greedy](./matroid-greedy.md)（標準順 190）— Matroidの独立集合族と交換公理を定義した後、重み順greedyが最適基底を作る必要十分な構造を証明する。
-2. [線形matroid交差の乱択rank判定](./linear-matroid-intersection.md)（標準順 214）— matroidの独立性・交換公理、線形方程式のrank計算、乱択誤り評価を学んだ後、二つの線形matroidの共通独立rankを一枚の乱択行列へ圧縮する。
+1. [matroid greedy](./matroid-greedy.md)（標準順 197）— Matroidの独立集合族と交換公理を定義した後、重み順greedyが最適基底を作る必要十分な構造を証明する。
+2. [線形matroid交差の乱択rank判定](./linear-matroid-intersection.md)（標準順 220）— matroidの独立性・交換公理、線形方程式のrank計算、乱択誤り評価を学んだ後、二つの線形matroidの共通独立rankを一枚の乱択行列へ圧縮する。
 
 ## 発動条件と見分け方
 
@@ -93,4 +93,4 @@ sidebar:
 - [ABC399 G 公式解説](https://atcoder.jp/contests/abc399/editorial/12546)
 - [ABC399 G 公式問題文](https://atcoder.jp/contests/abc399/tasks/abc399_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-matroid-theory`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-matroid-theory`

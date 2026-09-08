@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC219 F「Cleaning Robot」](https://atcoder.jp/contests/abc219/tasks/abc219_f)
 
+選定理由: a≠0 としたとき q=floor(X/a)、s=X-qa、t=Y-qb を使うと、二点の (s,t) が等しいことと差が v の整数倍であることが同値になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。同じ移動列を非常に多く繰り返し、一周期後の変位が一定であるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 巨大回数の同一経路反復を一周期集合の平行移動 union と見なし、格子 orbit の gap 集計へ落とせる。
@@ -119,4 +123,4 @@ sidebar:
 - [ABC242 E 公式問題文](https://atcoder.jp/contests/abc242/tasks/abc242_e)
 - [ABC242 E 公式解説](https://atcoder.jp/contests/abc242/editorial/3516)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-normalization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-normalization`

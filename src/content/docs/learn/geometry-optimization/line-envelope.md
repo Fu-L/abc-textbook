@@ -3,7 +3,7 @@ title: "Convex Hull Trick・直線包絡"
 description: "前提からConvex Hull Trick・直線包絡を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 103
+  order: 107
 ---
 
 # Convex Hull Trick・直線包絡
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる
 
 題材: [ABC228 H「Histogram」](https://atcoder.jp/contests/abc228/tasks/abc228_h)
+
+選定理由: R_i=Σ_{j≤i}C_jとすると、区間(l,r]を高さA_rへそろえる最終面積は(R_r−R_l)A_rである。全体で元面積ΣA_iC_iを最後に引けば、追加する棒の枚数と種類ごとの固定費XだけをDPできる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。値を一方向にだけ変更でき、異なる完成値の個数にも費用がかかるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ sidebar:
 - [ABC289 G 公式解説](https://atcoder.jp/contests/abc289/editorial/5700)
 - [ABC289 G 公式問題文](https://atcoder.jp/contests/abc289/tasks/abc289_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-line-envelope`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-line-envelope`

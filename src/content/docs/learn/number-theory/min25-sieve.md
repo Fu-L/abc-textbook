@@ -3,7 +3,7 @@ title: "Min_25・Lucy DP型の総和篩"
 description: "前提からMin_25・Lucy DP型の総和篩を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 107
+  order: 112
 ---
 
 # Min_25・Lucy DP型の総和篩
@@ -41,6 +41,10 @@ floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗�
 ### 例 1 — floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗法的関数のprefix sumをN^(2/3)級で求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC370 G「Divisible by 3」](https://atcoder.jp/contests/abc370/tasks/abc370_g)
+
+選定理由: h(p^e)=0 if σ(p^e)≡0 else g(p^e) と乗法的に延長すると、h(n)はσ(n)非零mod3のときだけg(n)に等しく、求めるindicator付き重みはg(n)−h(n)になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。乗法的量の積が0となるprime-power factorを少なくとも一つ含む対象を数えるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -112,4 +116,4 @@ floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗�
 - [ABC370 G 公式解説](https://atcoder.jp/contests/abc370/editorial/10869)
 - [ABC370 G 公式問題文](https://atcoder.jp/contests/abc370/tasks/abc370_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-min25-sieve`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-min25-sieve`

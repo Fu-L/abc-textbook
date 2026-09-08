@@ -3,7 +3,7 @@ title: "Lagrangian relaxation・Aliens trick"
 description: "前提からLagrangian relaxation・Aliens trickを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 194
+  order: 201
 ---
 
 # Lagrangian relaxation・Aliens trick
@@ -14,7 +14,7 @@ sidebar:
 
 ## この単元でできるようになること
 
-- 個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+- 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 前提・学習順・対象外
 
@@ -30,7 +30,7 @@ sidebar:
 
 ### Lagrangian relaxation・Aliens trick
 
-個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。
+個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。
 
 検索語: Aliens DP、Aliens trick、ラグランジュ緩和
 
@@ -38,9 +38,19 @@ sidebar:
 
 ## ガイド例
 
-### 例 1 — 個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
+### 正当化と転用の境界
+
+- 最小化でg(λ)=min_k(f(k)+λk)と置くと、g(λ)-λK≤f(K)は常に下界に過ぎない。f(k+1)-f(k)が単調非減少など、Kで支持直線に接する根拠を証明して初めて等号で復元できる。整数λだけを探す場合は必要な支持傾きが探索範囲にあることも確認する。
+- 反例f(0)=0,f(1)=10,f(2)=0では、どのλでもk=1は選ばれず、K=1の最大双対下界は0。個数の単調性や同点時の個数優先だけでは真の値10を復元できない。
+- 到達確認では、(1)個数別最適値の定義、(2)双対ギャップがない証明、(3)oracleの同点処理と個数単調性、(4)g(λ)-λKの復元式を別々に説明する。最小化と最大化を取り違えない。
+
+### 例 1 — 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC305 Ex「Shojin」](https://atcoder.jp/contests/abc305/tasks/abc305_h)
+
+選定理由: problem pの追加によるfatigue増分は、既存集合が大きいほど前後のaffine composition係数が大きくなり増加するため、fはsupermodularになる。
+
+この例で扱う範囲: 個数別最小費用f(k)を定義した後の離散凸性の証明、penalty oracle、個数の境界探索を扱う。操作の順序付けとoracle高速化は別工程として区別する。
 
 #### このOutcomeを支える根拠
 
@@ -76,18 +86,18 @@ affine-composition orderingからsegment-cost Monge性を導き、partition shor
 
 ## 到達確認
 
-### 到達確認 1 — 個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
+### 到達確認 1 — 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 転移題材: [ABC355 G「Baseball」](https://atcoder.jp/contests/abc355/tasks/abc355_g)
 
 **課題**: ABC355 G「Baseball」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
 
-**合格条件**: 手法名の列挙に留まらず、学習成果「個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
+**合格条件**: 手法名の列挙に留まらず、学習成果「個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
 
 
 ## 解答と自己評価基準
 
-<details><summary>到達確認 1 の解答基準 — 個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる</summary>
+<details><summary>到達確認 1 の解答基準 — 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる</summary>
 
 **検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
 
@@ -104,7 +114,7 @@ affine-composition orderingからsegment-cost Monge性を導き、partition shor
 - 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
 - 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
 
-期待する到達点: 個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+期待する到達点: 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 </details>
 
@@ -118,4 +128,4 @@ affine-composition orderingからsegment-cost Monge性を導き、partition shor
 - [ABC393 G 公式解説](https://atcoder.jp/contests/abc393/editorial/12192)
 - [ABC393 G 公式問題文](https://atcoder.jp/contests/abc393/tasks/abc393_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-lagrangian-relaxation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-lagrangian-relaxation`

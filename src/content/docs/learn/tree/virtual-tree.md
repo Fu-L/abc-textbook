@@ -3,7 +3,7 @@ title: "virtual tree・auxiliary tree"
 description: "前提からvirtual tree・auxiliary treeを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 179
+  order: 186
 ---
 
 # virtual tree・auxiliary tree
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 対象頂点と必要なLCAだけをEuler順・stackで結び、元の木上pathを保つvirtual treeを構成できる
 
 題材: [ABC340 G「Leaf Color」](https://atcoder.jp/contests/abc340/tasks/abc340_g)
+
+選定理由: virtual treeで親辺も選ばれるopen状態g_vを考える。子branch選択積P=∏(1+g_child)、ちょうど一子を選ぶ和Q=Σg_childとすると、親接続時は子0ならvがleafなのでg_v=(P-1)+[A_v=c]。vをtopmostとする閉subtreeは子1の時だけvの色条件が必要で、(P-1-Q)+[A_v=c]Qとなる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。特定色の頂点間の祖先・分岐関係だけが必要で、全元頂点を色ごとに走査したくない。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -110,4 +114,4 @@ sidebar:
 - [ABC340 G 公式解説](https://atcoder.jp/contests/abc340/editorial/9249)
 - [ABC340 G 公式問題文](https://atcoder.jp/contests/abc340/tasks/abc340_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-virtual-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-virtual-tree`

@@ -3,7 +3,7 @@ title: "乱択代数fingerprint"
 description: "前提から乱択代数fingerprintを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 177
+  order: 184
 ---
 
 # 乱択代数fingerprint
@@ -42,6 +42,10 @@ multiset・素因数指数vector・巨大整数式をランダムな体元やXOR
 
 題材: [ABC238 G「Cubic?」](https://atcoder.jp/contests/abc238/tasks/abc238_g)
 
+選定理由: a_p XOR b_p XOR (a_p XOR b_p)=0 なので、連続する素因数出現を三個周期で符号化すると、任意区間の p の指数が 3 の倍数の場合だけ寄与が必ず消える。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。積が完全 k 乗かを多数区間で判定したいが、全素数の指数ベクトルを明示できないとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 静的区間積が立方数かを、素因数指数の三周期 hash と prefix XOR で高速に判定できる。
@@ -63,7 +67,7 @@ multiset・素因数指数vector・巨大整数式をランダムな体元やXOR
 
 #### アルゴリズムへ接続する
 
-素因数指数の Z/3Z ベクトルを 64 bit XOR 空間へランダム線形写像し、prefix fingerprint の等値比較として range product の完全三乗性を判定する。
+各素数pについて全prefixを通じた出現位相を管理し、出現ごとにa_p,b_p,a_p XOR b_pを周期的にXORする。累積指数の剰余0,1,2はそれぞれ0,a_p,a_p XOR b_pに符号化され、区間積の完全三乗性は両端prefixの状態の等値判定になる。これは状態のランダム符号化であり、Z/3ZからXOR群への準同型ではない。異なる固定prefix状態の差にはa_p,b_pの少なくとも一方が奇数回現れる素数pがあり、他の乱数を固定すると一様な64 bit値が残るので衝突確率は2^(-64)。乱数と独立なQ個のquery全体ではunion boundでQ/2^64以下となる。
 
 
 ## 転用するときの確認
@@ -118,4 +122,4 @@ multiset・素因数指数vector・巨大整数式をランダムな体元やXOR
 - [ABC367 F 公式解説](https://atcoder.jp/contests/abc367/editorial/10692)
 - [ABC367 F 公式問題文](https://atcoder.jp/contests/abc367/tasks/abc367_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-randomized-algebraic-fingerprint`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-randomized-algebraic-fingerprint`

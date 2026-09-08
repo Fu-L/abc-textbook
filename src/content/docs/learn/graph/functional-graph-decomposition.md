@@ -3,7 +3,7 @@ title: "関数グラフのcycle・tree分解"
 description: "前提から関数グラフのcycle・tree分解を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 119
+  order: 125
 ---
 
 # 関数グラフのcycle・tree分解
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる
 
 題材: [ABC241 E「Putting Candies」](https://atcoder.jp/contests/abc241/tasks/abc241_e)
+
+選定理由: 同じ residue に戻った二時点 s<t の間では状態遷移だけでなく加算する A の列も同じになり、cycle gain は prefix[t]-prefix[s] である。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。有限状態で各状態の次状態が一意、操作回数だけが非常に大きいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ state=0、prefix[0]=0 から、未訪問 state に step を記録し A_state を
 - [ABC256 E 公式問題文](https://atcoder.jp/contests/abc256/tasks/abc256_e)
 - [ABC256 E 公式解説](https://atcoder.jp/contests/abc256/editorial/4135)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-functional-graph-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-functional-graph-decomposition`

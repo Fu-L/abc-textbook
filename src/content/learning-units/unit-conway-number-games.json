@@ -1,0 +1,103 @@
+{
+  "id": "unit-conway-number-games",
+  "kind": "section",
+  "title": "独立な数ゲームの和",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-game-value"
+  ],
+  "excludedTopics": [
+    "独立な数ゲームの和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c",
+    "source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb",
+    "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
+    "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5"
+  ],
+  "tagIds": [
+    "tag-conway-number-games"
+  ],
+  "ownedTagIds": [
+    "tag-conway-number-games"
+  ],
+  "learningOutcomeIds": [
+    "outcome-add-conway-number-games"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-add-conway-number-games"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/conway-number-games.md",
+  "problemIds": [
+    "abc229-h",
+    "abc265-ex"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-add-conway-number-games",
+      "learningOutcomeIds": [
+        "outcome-add-conway-number-games"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。一手が複数領域のうち一領域だけを変え、領域間で合法手が干渉しないとき。 問題全体への接続は併用技能を学んだ後に読む。",
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC229 H「Advance or Eat」について、駒の前進は同じ列の盤面だけを変え、相手駒を食べる操作も選んだ一駒が属する列だけを変えるため、盤面は N 個の列ゲームの直和である。",
+      "procedure": [
+        "観察: 駒の前進は同じ列の盤面だけを変え、相手駒を食べる操作も選んだ一駒が属する列だけを変えるため、盤面は N 個の列ゲームの直和である。",
+        "観察: 白番と黒番では動かせる色と食べられる色が異なるので、遷移集合が手番に依存し、通常の不偏ゲームの Grundy 数は適用できない。",
+        "着眼: 状態 v の白手後継評価の最大値より大きく、黒手後継評価の最小値より小さい最も単純な dyadic rational を eval(v) とすると、正なら先手白が勝つ。",
+        "着眼: 白手と黒手が干渉しない場合は操作順を交換した共通状態を作れ、干渉する食べる・進める場合にも一方から他方への辺があるため、左後継評価は右後継評価より小さい。",
+        "方針: 一列の 3 の N 乗状態 DAG に白手・黒手の辺を張り、両者の後継評価の間にある最も単純な二進有理数を評価値として計算し、列評価の総和で勝敗を判定する。（このゲームでは全状態の左右後継評価が分離して数が定義でき、独立な列ゲームの和は評価値の加算に対応する。）",
+        "接続: 列状態を三進数で列挙した有限 partisan game DAG に Conway 型の数値評価を付け、入力各列の評価値を厳密な二進有理数として合計して符号を判定する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-add-conway-number-games",
+      "learningOutcomeIds": [
+        "outcome-add-conway-number-games"
+      ],
+      "prerequisiteIds": [
+        "outcome-evaluate-adversarial-game-value",
+        "prereq-abc-advanced-v1",
+        "unit-dp-game-value"
+      ],
+      "attainmentCondition": "学習成果「全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC265 Ex「No-capture Lance Game」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 独立ゲームの数値・Grundy合成: 複数の独立局面から毎手一つを選ぶゲームで、局面ごとにpartisan値とimpartial値へ分解できるとき。 適用: 数値成分を加算し、Grundy成分をXORして全体勝敗を判定する。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 独立ゲームの数値・Grundy合成: 複数の独立局面から毎手一つを選ぶゲームで、局面ごとにpartisan値とimpartial値へ分解できるとき。 適用: 数値成分を加算し、Grundy成分をXORして全体勝敗を判定する。",
+          "転移題材の解法接続: partisan gameのsurreal-number成分を加法群、impartial成分をXOR群として、direct product group上のconvolutionを多次元Fourier変換で対角化する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 90,
+  "globalIndex": 100,
+  "orderReason": "有限局面DAGのminimaxで得た考え方と実装を再利用し、独立な数ゲームの和の発動条件・正当化・境界を重複なく学ぶ。"
+}

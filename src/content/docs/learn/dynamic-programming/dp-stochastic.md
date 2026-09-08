@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h)
 
+選定理由: Y≥x はN個のうち少なくともK個がx以上であることと同値で、独立性から各変数の成功確率p_i(x)を掛けるPoisson-binomial型DPで求められる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。非負の連続確率変数の期待値を求め、値以上となる事象の方が組合せ的に数えやすいとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 連続な順位統計量の期待値をtail確率と区分多項式DPへ変換し、有理数の剰余として厳密に積分できる。
@@ -116,4 +120,4 @@ a=0,…,99ごとに各p_i(x)の一次多項式を作り、成功個数DPを多�
 - [ABC242 H 公式解説](https://atcoder.jp/contests/abc242/editorial/3523)
 - [ABC242 H 公式問題文](https://atcoder.jp/contests/abc242/tasks/abc242_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-dp-stochastic`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-stochastic`

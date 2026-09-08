@@ -3,7 +3,7 @@ title: "ordered interval partition・ODT"
 description: "前提からordered interval partition・ODTを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 155
+  order: 162
 ---
 
 # ordered interval partition・ODT
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC255 Ex「Range Harvest Query」](https://atcoder.jp/contests/abc255/tasks/abc255_h)
+
+選定理由: 値dのブロック[l,r]からの収穫量は(D-d)Σ_(i=l)^r i=(D-d)(l+r)(r-l+1)/2と閉形式で計算できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。巨大な座標域への区間代入があり、値が区間ごとに一定となる。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ sidebar:
 - [ABC380 E 公式問題文](https://atcoder.jp/contests/abc380/tasks/abc380_e)
 - [ABC380 E 公式解説](https://atcoder.jp/contests/abc380/editorial/11356)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-ordered-interval-partition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-ordered-interval-partition`

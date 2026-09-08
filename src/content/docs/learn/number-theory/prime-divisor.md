@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC227 G「Divisors of Binomial Coefficient」](https://atcoder.jp/contests/abc227/tasks/abc227_g)
 
+選定理由: C(N,K)=N(N-1)…(N-K+1)/K!なので、素数pごとの指数は分子区間の指数総和からK!の指数を引けばよく、巨大な積を持つ必要がない。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。巨大な整数の積や組合せ数そのものではなく、約数個数・平方性・割り切れ方を求めるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 巨大な二項係数を構築せず、短い分子区間とK!を区間篩で因数分解して、素因数指数から約数個数を求められる。
@@ -120,4 +124,4 @@ sqrt(N)までを篩って素数を列挙する。各素数について分子区�
 - [ABC259 E 公式問題文](https://atcoder.jp/contests/abc259/tasks/abc259_e)
 - [ABC259 E 公式解説](https://atcoder.jp/contests/abc259/editorial/4271)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-prime-divisor`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-prime-divisor`

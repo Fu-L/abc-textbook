@@ -53,6 +53,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。グラフ query の一回の費用が中心頂点の次数に比例し、辺数の総和だけが小さいとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -103,6 +104,6 @@
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 74,
-  "globalIndex": 143,
+  "globalIndex": 150,
   "orderReason": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

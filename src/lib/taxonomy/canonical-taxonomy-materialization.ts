@@ -1,4 +1,6 @@
 import type { z } from 'zod';
+import { CANONICAL_GUIDED_EXAMPLES } from './canonical-guided-examples.js';
+import { CANONICAL_OUTCOME_NOTES } from './canonical-outcome-notes.js';
 
 import { canonicalDigest, canonicalJson } from '../domain/canonical-json.js';
 import {
@@ -250,6 +252,13 @@ const rankedRecordsForOutcome = (input: {
   readonly recordByProblemId: ReadonlyMap<string, ProblemAnalysisRecord>;
 }): ProblemAnalysisRecord[] => {
   const unitProblemSet = new Set(input.unitProblemIds);
+  const selection = CANONICAL_GUIDED_EXAMPLES[input.outcomeId];
+  if (selection === undefined) {
+    throw new CanonicalTaxonomyMaterializationError(
+      'CANONICAL_GUIDE_SELECTION_MISSING',
+      input.outcomeId,
+    );
+  }
   const evidenceIndex = new Map<string, number>();
   for (const [index, problemId] of input.outcomeEvidenceProblemIds.entries()) {
     if (!evidenceIndex.has(problemId)) evidenceIndex.set(problemId, index);
@@ -261,15 +270,17 @@ const rankedRecordsForOutcome = (input: {
     })
     .sort((left, right) => {
       const rank = (problemId: string): number =>
-        input.primaryProblemIds.has(problemId)
-          ? 0
-          : input.supportingProblemIds.has(problemId)
-            ? 1
-            : 2;
+        problemId === selection.problemId
+          ? -1
+          : input.primaryProblemIds.has(problemId)
+            ? 0
+            : input.supportingProblemIds.has(problemId)
+              ? 1
+              : 2;
       return rank(left.record.problemId) - rank(right.record.problemId) || left.index - right.index;
     })
     .map(({ record }) => record);
-  if (records.length === 0) {
+  if (records[0]?.problemId !== selection.problemId) {
     throw new CanonicalTaxonomyMaterializationError(
       'CANONICAL_UNIT_ACTIVITY_SOURCE_MISSING',
       input.outcomeId,
@@ -442,6 +453,26 @@ const renderLearningUnitDocument = (input: {
   const outcomes = activities.map(({ outcome }) => outcome);
   const guidedExamples = activities
     .map(({ outcome, record, problem, evidenceClaims }, index) => {
+      const selection = CANONICAL_GUIDED_EXAMPLES[outcome.id];
+      if (selection?.walkthrough !== undefined) {
+        return [
+          `### 例 ${String(index + 1)} — ${withoutTerminalPunctuation(outcome.statement)}`,
+          '',
+          `題材: [${problemLabel(problem)}](${problem.officialUrl})`,
+          '',
+          `選定理由: ${selection.rationale}`,
+          '',
+          `この例で扱う範囲: ${selection.scope}`,
+          '',
+          '#### このOutcomeを支える根拠',
+          '',
+          markdownList([selection.rationale]),
+          '',
+          '#### 観察から手順へ',
+          '',
+          markdownList(selection.walkthrough),
+        ].join('\n');
+      }
       const rejected = record.reasoningPath.candidateApproaches.filter(
         ({ decision }) => decision === 'rejected',
       );
@@ -452,6 +483,10 @@ const renderLearningUnitDocument = (input: {
         `### 例 ${String(index + 1)} — ${withoutTerminalPunctuation(outcome.statement)}`,
         '',
         `題材: [${problemLabel(problem)}](${problem.officialUrl})`,
+        '',
+        `選定理由: ${CANONICAL_GUIDED_EXAMPLES[outcome.id]?.rationale ?? ''}`,
+        '',
+        `この例で扱う範囲: ${CANONICAL_GUIDED_EXAMPLES[outcome.id]?.scope ?? ''}`,
         '',
         '#### このOutcomeを支える根拠',
         '',
@@ -644,6 +679,10 @@ const renderLearningUnitDocument = (input: {
     '',
     '## ガイド例',
     '',
+    ...outcomes.flatMap(({ id }) => {
+      const notes = CANONICAL_OUTCOME_NOTES[id];
+      return notes === undefined ? [] : ['### 正当化と転用の境界', '', markdownList(notes), ''];
+    }),
     guidedExamples || '- 通常のOutcomeガイド例は下位単元で扱います。',
     '',
     ...routingSection,
@@ -937,9 +976,10 @@ export const buildCanonicalTaxonomyMaterialization = (
             record.problemId,
           );
         }
-        const assessmentRecord = rankedRecords.find(
-          ({ problemId }) => problemId !== record.problemId,
-        );
+        const assessmentRecord = rankedRecords.find(({ problemId }) => {
+          const selected = CANONICAL_GUIDED_EXAMPLES[outcomeId]?.assessmentProblemId;
+          return selected === undefined ? problemId !== record.problemId : problemId === selected;
+        });
         const assessmentProblem =
           assessmentRecord === undefined ? undefined : problemById.get(assessmentRecord.problemId);
         if (assessmentRecord !== undefined && assessmentProblem === undefined) {
@@ -969,10 +1009,13 @@ export const buildCanonicalTaxonomyMaterialization = (
         learningOutcomeIds: [outcome.id],
         kind: 'illustrative' as const,
         language: '日本語（考察手順）',
-        omissions: ['問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。'],
+        omissions: [
+          CANONICAL_GUIDED_EXAMPLES[outcome.id]?.scope ?? '',
+          '問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。',
+        ],
         environment: '対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境',
         input: `${problemLabel(problem)}について、${record.reasoningPath.observations[0]?.text ?? outcome.statement}`,
-        procedure: activityProcedure(record),
+        procedure: CANONICAL_GUIDED_EXAMPLES[outcome.id]?.walkthrough ?? activityProcedure(record),
         executionTarget: null,
         expectedResult: outcome.statement,
         verificationStatus: 'not_applicable' as const,
@@ -1000,9 +1043,10 @@ export const buildCanonicalTaxonomyMaterialization = (
               : `学習成果「${withoutTerminalPunctuation(outcome.statement)}」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。`,
           assessment: {
             method:
-              assessmentKind === 'transfer_problem' && assessmentProblem !== null
+              CANONICAL_GUIDED_EXAMPLES[outcome.id]?.assessmentMethod ??
+              (assessmentKind === 'transfer_problem' && assessmentProblem !== null
                 ? `${problemLabel(assessmentProblem)}を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。`
-                : `${problemLabel(problem)}で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。`,
+                : `${problemLabel(problem)}で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。`),
             successCondition: `手法名の列挙に留まらず、学習成果「${withoutTerminalPunctuation(outcome.statement)}」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。`,
           },
           answer: {
@@ -1011,7 +1055,8 @@ export const buildCanonicalTaxonomyMaterialization = (
                 ? '単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。'
                 : `別題材では次の直接根拠を対象技能として切り出す: ${withoutTerminalPunctuation(assessmentEvidenceClaims.join('／'))}。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。`,
             procedure:
-              assessmentRecord === null
+              CANONICAL_GUIDED_EXAMPLES[outcome.id]?.assessmentProcedure ??
+              (assessmentRecord === null
                 ? [
                     '元の方針が必要とする対象・操作・不変量・目標を分けて書く。',
                     '発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。',
@@ -1019,7 +1064,7 @@ export const buildCanonicalTaxonomyMaterialization = (
                     '計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。',
                     '条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。',
                   ]
-                : transferAnswerProcedure(assessmentRecord, assessmentEvidenceClaims),
+                : transferAnswerProcedure(assessmentRecord, assessmentEvidenceClaims)),
             expectedResult:
               assessmentKind === 'transfer_problem'
                 ? outcome.statement

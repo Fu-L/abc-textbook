@@ -3,7 +3,7 @@ title: "加法的tree metric復元"
 description: "前提から加法的tree metric復元を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 105
+  order: 109
 ---
 
 # 加法的tree metric復元
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 加法的距離行列から正重み木の候補を復元し、全点対距離の再計算で存在を完全検証できる
 
 題材: [ABC451 E「Tree Distance」](https://atcoder.jp/contests/abc451/tasks/abc451_e)
+
+選定理由: j が root-to-i path 上なら距離加法 A_{1,j}+A_{j,i}=A_{1,i} が成立し、木では逆も成立する。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。正重み木の全点対距離が与えられ、存在判定と構成を行うとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -111,4 +115,4 @@ sidebar:
 - [ABC451 E 公式問題文](https://atcoder.jp/contests/abc451/tasks/abc451_e)
 - [ABC451 E 公式解説](https://atcoder.jp/contests/abc451/editorial/18053)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-additive-tree-metric-reconstruction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-additive-tree-metric-reconstruction`

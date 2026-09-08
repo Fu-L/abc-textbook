@@ -3,7 +3,7 @@ title: "下限制約付きflowの実現可能性"
 description: "前提から下限制約付きflowの実現可能性を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 186
+  order: 193
 ---
 
 # 下限制約付きflowの実現可能性
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 各辺のlower boundを先に流して頂点需要へ変換し、super source/sinkを加えたcirculationの飽和可能性を判定する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC285 G「Tatami」](https://atcoder.jp/contests/abc285/tasks/abc285_g)
+
+選定理由: 左側頂点ではsourceからの辺、右側頂点ではsinkへの辺を流量1に強制すれば、そのcellがちょうど1本のdominoに含まれる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。隣接cellを重ならないpairへ分けるtile配置問題。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -114,4 +118,4 @@ sidebar:
 - [ABC285 G 公式解説](https://atcoder.jp/contests/abc285/editorial/5500)
 - [ABC285 G 公式問題文](https://atcoder.jp/contests/abc285/tasks/abc285_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-flow-lower-bounds`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-flow-lower-bounds`

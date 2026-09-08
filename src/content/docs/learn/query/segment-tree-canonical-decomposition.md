@@ -3,7 +3,7 @@ title: "Segment Treeのcanonical区間分解"
 description: "前提からSegment Treeのcanonical区間分解を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 154
+  order: 161
 ---
 
 # Segment Treeのcanonical区間分解
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 区間をO(log N)個のcanonical nodeへ分解し、range objectの登録、時間生存区間への配置、またはrange-edge graphの少数辺表現を構築できる
 
 題材: [ABC244 Ex「Linear Maximization」](https://atcoder.jp/contests/abc244/tasks/abc244_h)
+
+選定理由: 追加-only 集合は時刻 index の prefix なので、segment tree の range decomposition を使えば一つの query を O(log Q) 個の静的点集合 query へ分解できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。固定点集合に対し、様々な方向 vector との最大内積を問うとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -117,4 +121,4 @@ sidebar:
 - [ABC363 G 公式解説](https://atcoder.jp/contests/abc363/editorial/10451)
 - [ABC363 G 公式問題文](https://atcoder.jp/contests/abc363/tasks/abc363_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-segment-tree-canonical-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-segment-tree-canonical-decomposition`

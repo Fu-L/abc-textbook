@@ -3,7 +3,7 @@ title: "Kruskal順の閾値DSU sweep"
 description: "前提からKruskal順の閾値DSU sweepを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 193
+  order: 200
 ---
 
 # Kruskal順の閾値DSU sweep
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 同重みeventの順序を正しく定め、Kruskal順にDSU成分とmetadataを併合してminimax連結閾値でquery・pairing・集計を処理できる
 
 題材: [ABC235 E「MST + 1」](https://atcoder.jp/contests/abc235/tasks/abc235_e)
+
+選定理由: 答えを知るには完成した MST 自体は不要で、候補辺が現れる瞬間の軽い辺による連結性という途中状態だけで十分である。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。候補辺が MST に入るかを多数問われ、各候補追加は他クエリへ影響しないとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ Kruskal の選択条件を重み閾値付き連結性クエリへ切り出し、
 - [ABC301 H 公式解説](https://atcoder.jp/contests/abc301/editorial/6344)
 - [ABC301 H 公式問題文](https://atcoder.jp/contests/abc301/tasks/abc301_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-kruskal-threshold-sweep`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-kruskal-threshold-sweep`

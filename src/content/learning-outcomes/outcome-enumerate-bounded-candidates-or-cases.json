@@ -3,6 +3,7 @@
   "statement": "制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。",
   "prerequisiteOutcomeIds": [],
   "scopeIds": [
+    "abc219-e",
     "abc220-g",
     "abc223-e",
     "abc226-f",

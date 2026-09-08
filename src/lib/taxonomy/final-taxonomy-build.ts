@@ -1,5 +1,6 @@
 import { lstat, readFile, readdir, realpath } from 'node:fs/promises';
 import path from 'node:path';
+import { CANONICAL_GUIDED_EXAMPLES } from './canonical-guided-examples.js';
 
 import {
   buildTechniqueInventoryAuthoringEvidence,
@@ -1873,10 +1874,22 @@ const finalCandidatesFromPolicy = (
         : [];
     const representativeDecisions =
       supportingDecisions.length > 0 ? supportingDecisions : descendantDecisions;
-    const evidenceRefs =
+    const representativeEvidenceRefs =
       supportingDecisions.length > 0
         ? representativeDecisionRefs(supportingDecisions, outcome.id, 'outcome')
         : normalizeClaimRefs(descendantDecisions.slice(0, 3).flatMap(decisionEvidenceRefs));
+    const guide = CANONICAL_GUIDED_EXAMPLES[outcome.id];
+    const guideDecision = representativeDecisions.find(
+      ({ problemId }) => problemId === guide?.problemId,
+    );
+    if (guideDecision === undefined) {
+      throw new FinalTaxonomyBuildError('OUTCOME_GUIDE_ASSIGNMENT_MISMATCH', outcome.id);
+    }
+    const guideRefs =
+      supportingDecisions.length > 0
+        ? representativeDecisionRefs([guideDecision], outcome.id, 'outcome')
+        : decisionEvidenceRefs(guideDecision);
+    const evidenceRefs = normalizeClaimRefs([...representativeEvidenceRefs, ...guideRefs]);
     return FinalTaxonomyCandidateSchema.parse({
       kind: 'outcome',
       entity: {

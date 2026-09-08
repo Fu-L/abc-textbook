@@ -30,8 +30,8 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [部分集合・bitmask状態DP](./dp-subset-state.md)（標準順 124）— DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。
-2. [大容量unbounded knapsackのeventual linearity](./eventual-unbounded-knapsack.md)（標準順 204）— 通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。
+1. [部分集合・bitmask状態DP](./dp-subset-state.md)（標準順 130）— DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。
+2. [大容量unbounded knapsackのeventual linearity](./eventual-unbounded-knapsack.md)（標準順 211）— 通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。
 
 ## 発動条件と見分け方
 
@@ -48,6 +48,10 @@ sidebar:
 ### 例 1 — 資源軸の上限と更新順を選び、選択の重複を避けられる
 
 題材: [ABC216 F「Max Sum Counting」](https://atcoder.jp/contests/abc216/tasks/abc216_f)
+
+選定理由: 最大値という集合全体の条件を、最大を担当する一要素 i の固定へ変えると、残りは加法的な B のナップサック条件になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。部分集合条件に最大値または最小値が現れ、各集合を一意な極値要素で分類できるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -157,4 +161,4 @@ A 順の最後の選択要素で部分集合を分割し、走査済み要素の
 - [ABC222 E 公式問題文](https://atcoder.jp/contests/abc222/tasks/abc222_e)
 - [ABC222 E 公式解説](https://atcoder.jp/contests/abc222/editorial/2751)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-dp-subset-resource`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-subset-resource`

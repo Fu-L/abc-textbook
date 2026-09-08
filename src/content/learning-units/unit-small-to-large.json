@@ -53,20 +53,21 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。集合union queryが続き、片方containerを空にできるとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC324 G「Generate Arrays」について、全sequenceは元permutation Aの部分列なので、各elementは一意な(original position,value)を持ち、sequence内順序はoriginal position順のままである。",
+      "input": "ABC329 F「Colored Ball」について、各boxについて必要なのは含まれるcolorの集合で、同colorのballが複数あっても出力への寄与は1である。",
       "procedure": [
-        "観察: 全sequenceは元permutation Aの部分列なので、各elementは一意な(original position,value)を持ち、sequence内順序はoriginal position順のままである。",
-        "観察: 各splitで2つに分かれるうち短い側だけのelementを別containerへ移し、長い側には既存containerを割り当てれば、1 queryの移動数をmin(両length)にできる。",
-        "着眼: type 1ではprefix長min(x,L)とsuffix長L-min(x,L)が既知で、短い方をposition setの端から列挙できる。",
-        "着眼: type 2ではvalue x以下とx超のsizeをorder-statisticまたは中央値管理で判定し、短い方をvalue setの端から列挙できる。",
-        "方針: sequenceごとにposition順・value順の2 setを持ち、短いresult側だけを移すreverse small-to-large simulation。（各elementの移動回数を逆向きmergeの倍増論法でlog N回に抑え、両種類のsplitを同じ枠組みで処理できる。）",
-        "接続: 各sequence handleにposition-ordered setとvalue-ordered setを持ち、element移動時は両方からeraseして相手containerへinsertする。type 1はcut=min(x,length)からprefix/suffixの小さい側をposition端から移す。type 2はvalue rankで≤x側と>x側のsizeを得て、小さい側をvalue端から移す。移動した側・残った側が仕様のs,iへ対応するようhandleを必要ならswapし、新sequence iのsizeを出力する。"
+        "観察: 各boxについて必要なのは含まれるcolorの集合で、同colorのballが複数あっても出力への寄与は1である。",
+        "観察: query後のbox bはset[a]∪set[b]、box aは空なので、物理containerを交換してから小さいsetを大きいsetへinsertしても論理結果は同じである。",
+        "着眼: set[a]が大きいときset[a],set[b]自体をswapすれば、その後smallなaをlargeなbへmergeしても、最終的にunionがbox b、空がbox aになる。",
+        "着眼: 小集合サイズs、移動先t≥s、重複数dとする。d≥s/2ならs回の処理をd個の消滅実体へ高々2ずつ課金する。d<s/2ならs-d個の生存実体へ高々2ずつ課金し、その所属サイズはt+s-d>3s/2となる。消滅への課金は一実体一回、生存への課金はサイズの単調増加によりO(log N)回なので、全insert試行はO(N log N)。平衡木setなら一試行O(log N)で全体O(N log²N+Q)。新規実体の再生成がある問題では別途その総数を界す。",
+        "方針: boxごとにcolor setを持ち、sizeの小さいsetを大きいsetへmergeして必要ならcontainerをswapする。（queryの向きと物理merge方向をhandle交換で分離し、全insert回数をsmall-to-largeで償却できる。）",
+        "接続: 初期box iのsetへC_iを1つ入れる。query(a,b)でsize(set[a])>size(set[b])なら2つのset handleをswapする。その後set[a]の全colorをset[b]へinsertし、set[a]をclearする。size(set[b])を出力する。"
       ],
       "executionTarget": null,
-      "expectedResult": "小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "expectedResult": "小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
       "verificationStatus": "not_applicable",
       "learningUnitRole": "guided_outcome"
     }
@@ -80,22 +81,22 @@
       "prerequisiteIds": [
         "prereq-abc-advanced-v1"
       ],
-      "attainmentCondition": "学習成果「小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "attainmentCondition": "学習成果「小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
       "assessment": {
-        "method": "ABC329 F「Colored Ball」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+        "method": "ABC324 G「Generate Arrays」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
       },
       "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全ball移動query後のdestination boxのdistinct color数を、償却的なset mergeで出力できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: position suffix splitとvalue threshold splitが混在する全sequence生成を、短い側だけのelement移動で処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
         "procedure": [
-          "対象技能が担う箇所: 全ball移動query後のdestination boxのdistinct color数を、償却的なset mergeで出力できる。",
-          "転移題材の解法接続: 初期box iのsetへC_iを1つ入れる。query(a,b)でsize(set[a])>size(set[b])なら2つのset handleをswapする。その後set[a]の全colorをset[b]へinsertし、set[a]をclearする。size(set[b])を出力する。",
+          "対象技能が担う箇所: position suffix splitとvalue threshold splitが混在する全sequence生成を、短い側だけのelement移動で処理できる。",
+          "転移題材の解法接続: 各sequence handleにposition-ordered setとvalue-ordered setを持ち、element移動時は両方からeraseして相手containerへinsertする。type 1はcut=min(x,length)からprefix/suffixの小さい側をposition端から移す。type 2はvalue rankで≤x側と>x側のsizeを得て、小さい側をvalue端から移す。移動した側・残った側が仕様のs,iへ対応するようhandleを必要ならswapし、新sequence iのsizeを出力する。",
           "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
           "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
           "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
           "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
         ],
-        "expectedResult": "小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "expectedResult": "小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
         "verificationStatus": "pending"
       },
       "learningUnitRole": "outcome_attainment"
@@ -104,6 +105,6 @@
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 72,
-  "globalIndex": 137,
-  "orderReason": "小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "globalIndex": 144,
+  "orderReason": "小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

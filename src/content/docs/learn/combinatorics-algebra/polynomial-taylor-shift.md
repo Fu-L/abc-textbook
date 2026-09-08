@@ -3,7 +3,7 @@ title: "factorial convolutionによる多項式Taylor shift"
 description: "前提からfactorial convolutionによる多項式Taylor shiftを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 200
+  order: 207
 ---
 
 # factorial convolutionによる多項式Taylor shift
@@ -41,6 +41,10 @@ P(x+a) の全係数を二項展開し、階乗倍した係数列と a^i/i! の�
 ### 例 1 — 二項係数を階乗で分離し、係数列の反転と一回の畳み込みから P(x+a) の全係数を準線形時間で復元できる
 
 題材: [ABC323 G「Inversion of Tree」](https://atcoder.jp/contests/abc323/tasks/abc323_g)
+
+選定理由: 係数matrix Bが正則ならdet(A+xB)=det(B)det(xI+B^{-1}A)で、後半は−B^{-1}Aのcharacteristic polynomialになる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。spanning treeをedge属性の個数別に数えたいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ P(x+a) の全係数を二項展開し、階乗倍した係数列と a^i/i! の�
 - [ABC323 G 公式解説](https://atcoder.jp/contests/abc323/editorial/7356)
 - [ABC323 G 公式問題文](https://atcoder.jp/contests/abc323/tasks/abc323_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-polynomial-taylor-shift`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-polynomial-taylor-shift`

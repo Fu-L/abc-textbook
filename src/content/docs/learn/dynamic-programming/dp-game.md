@@ -24,7 +24,7 @@ sidebar:
 
 ### この単元では扱わない範囲
 
-- 得点差・最適手数・partisan局面値を求めるminimax評価。
+- 有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。
 
 ## 発動条件と見分け方
 
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる
 
 題材: [ABC255 G「Constrained Nim」](https://atcoder.jp/contests/abc255/tasks/abc255_g)
+
+選定理由: 例外でないnでは、直前の例外値bar nからg(n)=n-bar n+h(bar n)と連続的に増える。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。複数の独立な山から一つを選んで動かす不偏ゲームで勝敗を求める。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -119,4 +123,4 @@ S={0,X_i}を昇順に処理し、各例外Xについて禁止遷移先X-YのGrun
 - [ABC278 F 公式解説](https://atcoder.jp/contests/abc278/editorial/5232)
 - [ABC278 F 公式問題文](https://atcoder.jp/contests/abc278/tasks/abc278_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-dp-game`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-game`

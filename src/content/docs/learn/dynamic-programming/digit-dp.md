@@ -3,7 +3,7 @@ title: "上限制約付き桁DP"
 description: "前提から上限制約付き桁DPを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 164
+  order: 171
 ---
 
 # 上限制約付き桁DP
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる
 
 題材: [ABC235 F「Variety of Digits」](https://atcoder.jp/contests/abc235/tasks/abc235_f)
+
+選定理由: 新しい数字 d を末尾へ付けると、総和は旧総和×10＋旧個数×d で更新できるため、完成数を個別に保持しなくてよい。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。上限 N 以下の整数について、十進表記に特定数字が現れる条件を数え上げるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -117,4 +121,4 @@ sidebar:
 - [ABC317 F 公式解説](https://atcoder.jp/contests/abc317/editorial/7018)
 - [ABC317 F 公式問題文](https://atcoder.jp/contests/abc317/tasks/abc317_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-digit-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-digit-dp`

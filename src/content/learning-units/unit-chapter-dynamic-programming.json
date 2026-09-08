@@ -18,6 +18,8 @@
   "tagIds": [
     "tag-automaton-dp",
     "tag-carry-mixed-radix-dp",
+    "tag-conway-number-games",
+    "tag-cyclic-minimax-game",
     "tag-digit-dp",
     "tag-dp-state-equivalence",
     "tag-dp-state-transition",
@@ -40,6 +42,7 @@
   ],
   "learningOutcomeIds": [
     "outcome-accelerate-fixed-linear-transition",
+    "outcome-add-conway-number-games",
     "outcome-classify-game-states",
     "outcome-count-prefix-constrained-objects",
     "outcome-design-carry-or-mixed-radix-dp",
@@ -54,6 +57,7 @@
     "outcome-evaluate-adversarial-game-value",
     "outcome-factor-and-accelerate-transitions",
     "outcome-run-dp-on-finite-automaton",
+    "outcome-solve-cyclic-minimax-game",
     "outcome-solve-steiner-tree-by-subset-dp",
     "outcome-solve-stochastic-recurrence",
     "outcome-stabilize-unbounded-knapsack-by-best-density"
@@ -73,7 +77,6 @@
     "abc216-h",
     "abc217-f",
     "abc218-g",
-    "abc219-e",
     "abc219-h",
     "abc221-h",
     "abc222-e",
@@ -306,6 +309,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。許される遷移がほぼ全てで、禁止される遷移だけが少数列挙されているとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -327,6 +331,7 @@
       "key": "curriculum-routing",
       "learningOutcomeIds": [
         "outcome-accelerate-fixed-linear-transition",
+        "outcome-add-conway-number-games",
         "outcome-classify-game-states",
         "outcome-count-prefix-constrained-objects",
         "outcome-design-carry-or-mixed-radix-dp",
@@ -340,6 +345,7 @@
         "outcome-evaluate-adversarial-game-value",
         "outcome-factor-and-accelerate-transitions",
         "outcome-run-dp-on-finite-automaton",
+        "outcome-solve-cyclic-minimax-game",
         "outcome-solve-steiner-tree-by-subset-dp",
         "outcome-solve-stochastic-recurrence",
         "outcome-stabilize-unbounded-knapsack-by-best-density"
@@ -358,11 +364,13 @@
         "列・区間・分割のDP: 2個の直接所有Outcome、学ぶ理由「状態設計を土台に、列順を保つ選択と区間の分割点という二つの合成方法を学ぶ」、対象外「bitmask集合や容量だけを状態にし、列順・区間分割を持たないDP」を照合する。",
         "繰り上がり・借り・混合基数を状態にするDP: 1個の直接所有Outcome、学ぶ理由「状態設計を土台に、整除鎖の丸めや複数項の加算で次の桁へ渡すcarryだけを有限状態として保つ」、対象外「数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP」を照合する。",
         "確率過程・期待値DP: 1個の直接所有Outcome、学ぶ理由「状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる」、対象外「二人零和ゲームの勝敗・Grundy数」を照合する。",
-        "ゲーム状態の勝敗とGrundy数: 1個の直接所有Outcome、学ぶ理由「状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する」、対象外「得点差・最適手数・partisan局面値を求めるminimax評価」を照合する。",
+        "ゲーム状態の勝敗とGrundy数: 1個の直接所有Outcome、学ぶ理由「状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する」、対象外「有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算」を照合する。",
         "minimax・得点差・局面値を評価するゲームDP: 1個の直接所有Outcome、学ぶ理由「状態遷移を設計できることを前提に、双方の最適行動を最大化・最小化として評価する」、対象外「勝敗だけを分類する通常の後退解析・Grundy数」を照合する。",
         "接頭辞から更新する有限状態DP: 2個の下位Outcomeへの索引、学ぶ理由「状態設計を土台に、接頭辞から決まる有限統計を更新するという共通像を作り、数値上限の桁DPと有限automaton DPの境界を比較する」、対象外「整除鎖・加算式のcarryだけを下位桁から渡すDP、および接頭辞状態を使わない一般の表DP」を照合する。",
         "DP遷移を因数分解・集約して加速する: 1個の直接所有Outcome、学ぶ理由「正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する」、対象外「固定線形遷移の巨大回累乗」を照合する。",
         "固定線形遷移を巨大回数進める: 1個の直接所有Outcome、学ぶ理由「一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める」、対象外「一般のDP遷移の区間集約・単調最適化」を照合する。",
+        "独立な数ゲームの和: 1個の直接所有Outcome、学ぶ理由「有限局面DAGのminimaxで得た考え方と実装を再利用し、独立な数ゲームの和の発動条件・正当化・境界を重複なく学ぶ」、対象外「独立な数ゲームの和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "循環局面の後退解析とminimax距離: 1個の直接所有Outcome、学ぶ理由「有限局面DAGのminimaxで得た考え方と実装を再利用し、循環局面の後退解析とminimax距離の発動条件・正当化・境界を重複なく学ぶ」、対象外「循環局面の後退解析とminimax距離の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
         "Steiner tree subset DP: 1個の直接所有Outcome、学ぶ理由「最短路モデル・部分集合・bitmask状態DPで得た考え方と実装を再利用し、Steiner tree subset DPの発動条件・正当化・境界を重複なく学ぶ」、対象外「Steiner tree subset DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
       ],
       "executionTarget": null,
@@ -415,6 +423,7 @@
       "key": "curriculum-routing",
       "learningOutcomeIds": [
         "outcome-accelerate-fixed-linear-transition",
+        "outcome-add-conway-number-games",
         "outcome-classify-game-states",
         "outcome-count-prefix-constrained-objects",
         "outcome-design-carry-or-mixed-radix-dp",
@@ -428,6 +437,7 @@
         "outcome-evaluate-adversarial-game-value",
         "outcome-factor-and-accelerate-transitions",
         "outcome-run-dp-on-finite-automaton",
+        "outcome-solve-cyclic-minimax-game",
         "outcome-solve-steiner-tree-by-subset-dp",
         "outcome-solve-stochastic-recurrence",
         "outcome-stabilize-unbounded-knapsack-by-best-density"

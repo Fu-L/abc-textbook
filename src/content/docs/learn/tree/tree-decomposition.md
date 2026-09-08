@@ -30,11 +30,11 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [Euler順による部分木区間化](./tree-euler-flattening.md)（標準順 130）— DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-2. [ancestor query・LCA](./tree-ancestor-lca.md)（標準順 131）— doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。
-3. [Heavy-Light Decomposition](./heavy-light-decomposition.md)（標準順 160）— ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、Heavy-Light Decompositionの発動条件・正当化・境界を重複なく学ぶ。
-4. [laminar区間族の包含木構築](./laminar-interval-containment-tree.md)（標準順 169）— 非交差区間族を括弧列として走査し、stack topを直接包含親にして包含関係を木へ変換する。その後の包含差分queryをLCAや木上距離へ接続する。
-5. [virtual tree・auxiliary tree](./virtual-tree.md)（標準順 180）— ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、virtual tree・auxiliary treeの発動条件・正当化・境界を重複なく学ぶ。
+1. [Euler順による部分木区間化](./tree-euler-flattening.md)（標準順 137）— DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+2. [ancestor query・LCA](./tree-ancestor-lca.md)（標準順 138）— doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。
+3. [Heavy-Light Decomposition](./heavy-light-decomposition.md)（標準順 167）— ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、Heavy-Light Decompositionの発動条件・正当化・境界を重複なく学ぶ。
+4. [laminar区間族の包含木構築](./laminar-interval-containment-tree.md)（標準順 176）— 非交差区間族を括弧列として走査し、stack topを直接包含親にして包含関係を木へ変換する。その後の包含差分queryをLCAや木上距離へ接続する。
+5. [virtual tree・auxiliary tree](./virtual-tree.md)（標準順 187）— ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、virtual tree・auxiliary treeの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -101,4 +101,4 @@ sidebar:
 - [ABC294 G 公式解説](https://atcoder.jp/contests/abc294/editorial/5997)
 - [ABC294 G 公式問題文](https://atcoder.jp/contests/abc294/tasks/abc294_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-tree-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-tree-decomposition`

@@ -13,6 +13,8 @@
     "path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
   "sourceRevisionIds": [
+    "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
+    "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70",
     "source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54",
     "source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"
   ],
@@ -31,6 +33,7 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/path-matching-contraction.md",
   "problemIds": [
+    "abc218-h",
     "abc464-g"
   ],
   "examples": [
@@ -42,6 +45,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "差分列から重み付きpathを作った後を扱う。ABC218 Hへの転移では列の非隣接要素をpathの辺とみなし、符号反転で最大化と最小化を対応付ける。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -72,21 +76,22 @@
         "unit-greedy-exchange",
         "unit-priority-queue-best-first"
       ],
-      "attainmentCondition": "学習成果「重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "attainmentCondition": "学習成果「重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
       "assessment": {
-        "method": "ABC464 G「Celester 2」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "method": "ABC218 H「Red and Blue Lamps」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
         "successCondition": "手法名の列挙に留まらず、学習成果「重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
       },
       "answer": {
-        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 隣接辺報酬の二色列を隣接非選択問題へ変形し、局所補正を保存する priority-queue 貪欲法を設計できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
         "procedure": [
-          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
-          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
-          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
-          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
-          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+          "対象技能が担う箇所: 隣接辺報酬の二色列を隣接非選択問題へ変形し、局所補正を保存する priority-queue 貪欲法を設計できる。",
+          "転移題材の解法接続: R を min(R,N-R) にし、B_1=A_1、B_N=A_{N-1}、内部 B_i=A_{i-1}+A_i を作る。最大 B_i を R 回取り出して答えへ加え、端なら二要素を、内部なら両隣を削除して補正値を置き、隣接 link と heap を更新する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
         ],
-        "expectedResult": "重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "expectedResult": "重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる。",
         "verificationStatus": "pending"
       },
       "learningUnitRole": "outcome_attainment"
@@ -95,6 +100,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 99,
-  "globalIndex": 205,
+  "globalIndex": 212,
   "orderReason": "path matchingの交互構造を使い、最小edgeの採用後も残りの全cardinality最適値を保存する補正縮約を導いてheapと双方向linkで実装する。"
 }

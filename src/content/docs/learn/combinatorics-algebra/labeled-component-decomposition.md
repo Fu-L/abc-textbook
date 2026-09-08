@@ -3,7 +3,7 @@ title: "label付き連結成分分解・exponential formula"
 description: "前提からlabel付き連結成分分解・exponential formulaを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 102
+  order: 106
 ---
 
 # label付き連結成分分解・exponential formula
@@ -41,6 +41,10 @@ rootを含む連結成分または成分集合を一意に切り出し、全構�
 ### 例 1 — 最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける
 
 題材: [ABC213 G「Connectivity 2」](https://atcoder.jp/contests/abc213/tasks/abc213_g)
+
+選定理由: 連結グラフ数 f(S) は全グラフ数から、固定した基準頂点を含む真部分集合 T がその連結成分になる場合を全て引けば得られる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。全グラフの数は容易だが、頂点集合全体が連結な場合だけを数えたいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -120,4 +124,4 @@ rootを含む連結成分または成分集合を一意に切り出し、全構�
 - [ABC318 H 公式解説](https://atcoder.jp/contests/abc318/editorial/7055)
 - [ABC318 H 公式問題文](https://atcoder.jp/contests/abc318/tasks/abc318_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-labeled-component-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-labeled-component-decomposition`

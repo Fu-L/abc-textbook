@@ -3,7 +3,7 @@ title: "difference constraints・不等式系の最短路化"
 description: "前提からdifference constraints・不等式系の最短路化を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 192
+  order: 199
 ---
 
 # difference constraints・不等式系の最短路化
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 差の不等式をconstraint graphへ変換し、緩和と負閉路判定により可解性・極値・具体解を求められる
 
 題材: [ABC216 G「01Sequence」](https://atcoder.jp/contests/abc216/tasks/abc216_g)
+
+選定理由: 1 の個数最小化を直接扱わず、補数である 0 の prefix 個数 B_N の最大化へ反転すると差分制約の上界問題になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数の区間について要素和の上限・下限が課され、各要素が小さな差分値を取るとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ sidebar:
 - [ABC404 G 公式解説](https://atcoder.jp/contests/abc404/editorial/12867)
 - [ABC404 G 公式問題文](https://atcoder.jp/contests/abc404/tasks/abc404_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-difference-constraints`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-difference-constraints`

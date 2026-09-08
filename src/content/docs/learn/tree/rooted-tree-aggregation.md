@@ -3,7 +3,7 @@ title: "根付き木DP・部分木集約"
 description: "前提から根付き木DP・部分木集約を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 124
+  order: 130
 ---
 
 # 根付き木DP・部分木集約
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 根付き木で子側の状態を合成し、部分木または木全体の値を求められる
 
 題材: [ABC239 E「Subtree K-th Max」](https://atcoder.jp/contests/abc239/tasks/abc239_e)
+
+選定理由: 上位K個だけを求める merge では、各入力集合からK位より下の要素を捨てても、union の上位K個は変わらない。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。要求される順位 K に小さい上限があり、集合の merge を繰り返すとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ sidebar:
 - [ABC248 G 公式解説](https://atcoder.jp/contests/abc248/editorial/3795)
 - [ABC248 G 公式問題文](https://atcoder.jp/contests/abc248/tasks/abc248_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-rooted-tree-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-rooted-tree-aggregation`

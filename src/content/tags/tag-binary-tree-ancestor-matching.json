@@ -1,0 +1,40 @@
+{
+  "id": "tag-binary-tree-ancestor-matching",
+  "name": "二進操作の木へのモデル化と祖先マッチング",
+  "definition": "二進末尾の削除を親への辺に写し、深い頂点で需要と供給を相殺して余剰だけを祖先へ渡す。両側の移動可能な辺を区別し、深い一致を優先する交換論法で移動数の最小性を示す。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [
+    "tag-greedy-exchange-order"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "二進表記の多重集合"
+    ],
+    "triggerPatterns": [
+      "末尾削除"
+    ],
+    "invariantPatterns": [
+      "最深の一致を優先"
+    ],
+    "goalPatterns": [
+      "最小移動回数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-match-binary-tree-ancestors"
+  ],
+  "representativeProblemIds": [
+    "abc254-ex"
+  ],
+  "aliases": [
+    "binary ancestor matching",
+    "二進操作の木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

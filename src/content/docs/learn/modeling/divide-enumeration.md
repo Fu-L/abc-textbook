@@ -30,8 +30,8 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [meet-in-the-middle・半分全列挙](./meet-in-the-middle.md)（標準順 129）— 探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-2. [再帰分割・分割統治](./recursive-divide-and-conquer.md)（標準順 133）— pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+1. [meet-in-the-middle・半分全列挙](./meet-in-the-middle.md)（標準順 136）— 探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+2. [再帰分割・分割統治](./recursive-divide-and-conquer.md)（標準順 140）— pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 発動条件と見分け方
 
@@ -95,4 +95,4 @@ sidebar:
 - [ABC230 H 公式解説](https://atcoder.jp/contests/abc230/editorial/3003)
 - [ABC230 H 公式問題文](https://atcoder.jp/contests/abc230/tasks/abc230_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-divide-enumeration`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-divide-enumeration`

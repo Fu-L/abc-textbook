@@ -3,7 +3,7 @@ title: "状態グラフのモデリングと探索"
 description: "前提から状態グラフのモデリングと探索を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 110
+  order: 115
 ---
 
 # 状態グラフのモデリングと探索
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる
 
 題材: [ABC241 F「Skate」](https://atcoder.jp/contests/abc241/tasks/abc241_f)
+
+選定理由: 通過するだけのマスは次の手を選べないので状態に不要であり、goal も障害物直前として実際に停止できた場合だけ到達扱いになる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。座標範囲は巨大だが、移動規則により停止・分岐できる点が障害物周辺などに限られるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ sidebar:
 - [ABC289 E 公式問題文](https://atcoder.jp/contests/abc289/tasks/abc289_e)
 - [ABC289 E 公式解説](https://atcoder.jp/contests/abc289/editorial/5726)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-state-graph-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-state-graph-search`

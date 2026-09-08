@@ -3,7 +3,7 @@ title: "rerooting・全方位木DP"
 description: "前提からrerooting・全方位木DPを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 147
+  order: 154
 ---
 
 # rerooting・全方位木DP
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる
 
 題材: [ABC220 F「Distance Sums 2」](https://atcoder.jp/contests/abc220/tasks/abc220_f)
+
+選定理由: 辺 p-c をまたぐ reroot 差分は、近くなる sub(c) 個の -1 と遠くなる N-sub(c) 個の +1 の合計 N-2sub(c) である。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各頂点を根にした値が必要で、隣接する二つの根の答えの差を辺の両側の情報から求められるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ sidebar:
 - [ABC311 H 公式解説](https://atcoder.jp/contests/abc311/editorial/6814)
 - [ABC311 H 公式問題文](https://atcoder.jp/contests/abc311/tasks/abc311_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-rerooting`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-rerooting`

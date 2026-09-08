@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC398 E「Tree Game」](https://atcoder.jp/contests/abc398/tasks/abc398_e)
 
+選定理由: connected bipartite graphへcross-part edgeを追加しても同じ二部分彩色が有効なので、別候補の合法性は変化しない。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各手が独立な候補を一つ消し、他候補の可否を変えないとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - odd-cycle禁止edge追加gameを固定cross-part候補のparity gameとして完全に解ける。
@@ -117,4 +121,4 @@ DFS/BFSでcolorとpart sizeを求め、未edgecross pairをsetへ列挙する。
 - [ABC398 E 公式解説](https://atcoder.jp/contests/abc398/editorial/12483)
 - [ABC398 G 公式問題文](https://atcoder.jp/contests/abc398/tasks/abc398_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-bipartite-structure`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-bipartite-structure`

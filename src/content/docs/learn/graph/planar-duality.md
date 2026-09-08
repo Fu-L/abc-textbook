@@ -3,7 +3,7 @@ title: "平面graph双対・cut/path対応"
 description: "前提から平面graph双対・cut/path対応を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 174
+  order: 181
 ---
 
 # 平面graph双対・cut/path対応
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 埋め込みのfaceをdual頂点へ写し、primal cutとdual path/cycleの対応から最小cut問題を最短路へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC413 G「Big Banned Grid」](https://atcoder.jp/contests/abc413/tasks/abc413_g)
+
+選定理由: 外側faceはsource-target間のboundary arcで二つにsplitし、top+right側を一端子、left+bottom側を他端子とする。この二端子を結ぶdual pathがprimalのs-t cutになる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。平面graphの二点間path存在を、cutを横切るdual pathで判定したいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -113,4 +117,4 @@ dual terminal U=top/right outer arc、D=left/bottom outer arcを作る。各obst
 - [ABC413 G 公式解説](https://atcoder.jp/contests/abc413/editorial/13403)
 - [ABC413 G 公式問題文](https://atcoder.jp/contests/abc413/tasks/abc413_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-planar-duality`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-planar-duality`

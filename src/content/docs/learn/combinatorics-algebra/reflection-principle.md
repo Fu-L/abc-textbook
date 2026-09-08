@@ -3,7 +3,7 @@ title: "鏡像法・reflection principle"
 description: "前提から鏡像法・reflection principleを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 99
+  order: 103
 ---
 
 # 鏡像法・reflection principle
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 最初に境界を破るpathとの鏡像対応を構成し、壁付きwalkの数え上げを符号付きの無境界問題へ変換できる
 
 題材: [ABC309 Ex「Simple Path Counting Problem」](https://atcoder.jp/contests/abc309/tasks/abc309_h)
+
+選定理由: 開始分布を位置 j に正、鏡位置 2M+2−j に負で置くと、禁止境界を越えて戻る経路が一対一に逆符号で対応して消える。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。一様なランダムウォーク・格子路で、壁だけが畳み込み構造を妨げるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -112,4 +116,4 @@ sidebar:
 - [ABC309 H 公式解説](https://atcoder.jp/contests/abc309/editorial/6751)
 - [ABC309 H 公式問題文](https://atcoder.jp/contests/abc309/tasks/abc309_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-reflection-principle`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-reflection-principle`

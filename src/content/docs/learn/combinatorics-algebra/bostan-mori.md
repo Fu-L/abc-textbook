@@ -3,7 +3,7 @@ title: "Bostan–Mori・有理生成関数の係数抽出"
 description: "前提からBostan–Mori・有理生成関数の係数抽出を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 211
+  order: 217
 ---
 
 # Bostan–Mori・有理生成関数の係数抽出
@@ -41,6 +41,10 @@ P(x)/Q(x)のN次係数をQ(-x)との積の偶奇係数へ半減し、対数段�
 ### 例 1 — P(x)/Q(x)のN次係数をQ(-x)との積の偶奇係数へ半減し、対数段で巨大indexへ進む。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC300 Ex「Fibonacci: Revisited」](https://atcoder.jp/contests/abc300/tasks/abc300_h)
+
+選定理由: Q(x)Q(-x)が偶多項式になるため、係数の偶数/奇数抽出後も次数K以下の有理式としてNTT畳み込みで更新できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。線形漸化式の巨大index項を高速取得する。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -111,4 +115,4 @@ K-bonacciのP,Qを構成し、Nを下位bitから処理する。Q(-x)を掛け�
 - [ABC300 H 公式解説](https://atcoder.jp/contests/abc300/editorial/6269)
 - [ABC300 H 公式問題文](https://atcoder.jp/contests/abc300/tasks/abc300_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-bostan-mori`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-bostan-mori`

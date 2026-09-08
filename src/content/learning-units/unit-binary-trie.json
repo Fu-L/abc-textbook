@@ -12,10 +12,10 @@
   "sourceRevisionIds": [
     "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
     "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed",
-    "source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52",
-    "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea",
-    "source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07",
-    "source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7"
+    "source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69",
+    "source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707",
+    "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+    "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
   ],
   "tagIds": [
     "tag-binary-trie"
@@ -33,8 +33,6 @@
   "docPath": "src/content/docs/learn/query/binary-trie.md",
   "problemIds": [
     "abc252-ex",
-    "abc254-ex",
-    "abc281-f",
     "abc425-g",
     "abc451-g"
   ],
@@ -47,16 +45,17 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "まず一つのxに対するXOR最小queryを取り出す。全xの総和を区間再帰でまとめる工程は転用時の拡張とする。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC254 Ex「Multiply or Divide by 2」について、非負整数を二進文字列とみなすと、Aを2で割る操作は末尾ビット削除であり、Aを2倍する操作を逆向きに見ると、B側は末尾が0のときだけその0を削除できる。",
+      "input": "ABC425 G「Sum of Min of XOR」について、各 x に対する min_i(x xor A_i) は最上位 bit が一致する A_i があれば必ずそちらで達成される。x の区間 [0,M) も最上位 bit で高々二つに分けられる。",
       "procedure": [
-        "観察: 非負整数を二進文字列とみなすと、Aを2で割る操作は末尾ビット削除であり、Aを2倍する操作を逆向きに見ると、B側は末尾が0のときだけその0を削除できる。",
-        "着眼: Aの余剰はどの末尾ビットでも削除して親へ上げられるが、Bの余剰は現在節点へ入る辺が0の場合だけ親へ上げられる。",
-        "着眼: 葉側で可能な一致を後回しにしてもより浅い一致しか得られないため、最深部から最大数を即座に対応させるのが最適である。",
-        "方針: 二進trieを葉から処理する貪欲マッチング（深い同一接頭辞でA,Bを先に対応させ、余剰だけを親へ上げれば移動回数を最小化でき、B側の上昇可否も辺ビットで判定できる。）",
-        "接続: A_i,B_iの二進表記を同じtrieへ挿入し、深い節点からA個数とB個数を相殺する。残ったAは親へ移し、残ったBは末尾辺が0なら親へ移し、1なら不可能として-1にする。全移動数を合計する。"
+        "観察: bit bでXORが0になる候補があれば、XORが1になる候補の下位bitを全て0にしても優劣は逆転しない。2^b>2^b-1だからである。",
+        "設計: W bitに幅を揃えてAをTrieへ挿入し、各部分木の要素数を保つ。query xは上位bitから、xと同じbitの子が非空ならそこへ、空なら逆の子へ進んで答えに2^bを加える。",
+        "例: A={1,6}, x=3を3 bitで考える。最上位は0側の001を選び、結果は011 XOR 001=010、すなわち2。反対側110とのXORは5である。構築O(NW)、一query O(W)。",
+        "大小queryへの接続: x XOR a<Kの個数を求める。Kのbitが1ならXORのbitを0にする子の個数を全て加え、1にする子で等号prefixを継続する。Kのbitが0なら0にする子だけを辿る。最後の等号は数えない。",
+        "境界: 空の子へは進まず、重複は部分木個数に重ねて数える。ABC425 Gではこの同じ分岐をxの区間全体へ共有する。"
       ],
       "executionTarget": null,
       "expectedResult": "整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる。",
@@ -75,14 +74,14 @@
       ],
       "attainmentCondition": "学習成果「整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
       "assessment": {
-        "method": "ABC281 F「Xor Minimization」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "method": "ABC451 G「Minimum XOR Walk」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
         "successCondition": "手法名の列挙に留まらず、学習成果「整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
       },
       "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全要素への共通XOR後の最大値を、上位bit再帰と支配group選択で最小化できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全頂点 pair の最小 xor walk 条件を、cycle span の正規代表と binary trie により O((N+M)log W) で数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
         "procedure": [
-          "対象技能が担う箇所: 全要素への共通XOR後の最大値を、上位bit再帰と支配group選択で最小化できる。",
-          "転移題材の解法接続: solve(V,b)を定義する。b<0なら0、一方groupだけならそのgroupでsolve(b-1)、両groupがあれば2^b+min(solve(V0,b-1),solve(V1,b-1))を返す。初期V=A,b=29の値が答え。",
+          "対象技能が担う箇所: 全頂点 pair の最小 xor walk 条件を、cycle span の正規代表と binary trie により O((N+M)log W) で数えられる。",
+          "転移題材の解法接続: DFSで A_v を計算し、全辺の W'_e を30 bit xor basisへ挿入・reduced canonical formにする。各 A_v を貪欲に小さくして B_v を得る。値を順に binary trieへ追加し、xorがK以下となる既存値数を上位bitから数える。",
           "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
           "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
           "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",

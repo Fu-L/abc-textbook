@@ -34,6 +34,7 @@
     "outcome-stabilize-unbounded-knapsack-by-best-density"
   ],
   "representativeProblemIds": [
+    "abc310-ex",
     "abc415-g"
   ],
   "aliases": [

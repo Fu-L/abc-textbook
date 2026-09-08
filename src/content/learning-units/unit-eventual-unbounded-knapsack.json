@@ -12,6 +12,8 @@
     "大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
   "sourceRevisionIds": [
+    "source-abc310-editorial-6794-7767ff020d4423335f0997e80c56115825006dcfae36bf7a5468095cc489bb5b",
+    "source-abc310-ex-problem-db87c46124e4ba901645279dde5b9f7c4b4c380f5d256656c04f6cee7ec94eba",
     "source-abc415-editorial-13491-7ff02c91fc89331a46e6a0fde2e67669aaeba522f010beb4e5082f6094228007",
     "source-abc415-g-problem-30342d182a7e8aad786d0e0357570b03b351ad48294fbde0112e5e3197c04006"
   ],
@@ -30,6 +32,7 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/eventual-unbounded-knapsack.md",
   "problemIds": [
+    "abc310-ex",
     "abc415-g"
   ],
   "examples": [
@@ -41,6 +44,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。capacityが巨大だがitem weightが小さく、best ratio以外の使用量をboundedにできるとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -70,21 +74,22 @@
         "prereq-abc-advanced-v1",
         "unit-dp-subset-resource"
       ],
-      "attainmentCondition": "学習成果「剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "attainmentCondition": "学習成果「剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
       "assessment": {
-        "method": "ABC415 G「Get Many Cola」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "method": "ABC310 Ex「Negative Cost」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
         "successCondition": "手法名の列挙に留まらず、学習成果「剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
       },
       "answer": {
-        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 無限に長い実行列を O(L) 長のコンボと O(L²) の例外領域へ圧縮し、O(NL²+L³) で最小使用回数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
         "procedure": [
-          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
-          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
-          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
-          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
-          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+          "対象技能が担う箇所: 無限に長い実行列を O(L) 長のコンボと O(L²) の例外領域へ圧縮し、O(NL²+L³) で最小使用回数を求められる。",
+          "転移題材の解法接続: dp[len][balance] で長さ 2L 以下の基本列の最大ダメージを O(NL²) で求め、長さごとの最大値 d_len をコンボとする。効率 d_z/z 最大の z を選び、例外コンボ総コスト O(L²) までの無制限 knapsack で最大ダメージ M_x を O(L³) で計算する。各 x に不足分を z コンボで補った総手数の最小を取る。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
         ],
-        "expectedResult": "剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "expectedResult": "剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。",
         "verificationStatus": "pending"
       },
       "learningUnitRole": "outcome_attainment"
@@ -93,6 +98,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 97,
-  "globalIndex": 203,
+  "globalIndex": 210,
   "orderReason": "通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。"
 }

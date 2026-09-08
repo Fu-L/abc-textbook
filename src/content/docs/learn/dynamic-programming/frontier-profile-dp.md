@@ -3,7 +3,7 @@ title: "frontier/profile DP・境界状態圧縮"
 description: "前提からfrontier/profile DP・境界状態圧縮を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 184
+  order: 191
 ---
 
 # frontier/profile DP・境界状態圧縮
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 未処理領域へ影響するfrontier上の局所値と接続partitionだけを正規化し、幅指数のprofile DPを設計できる
 
 題材: [ABC248 F「Keep Connect」](https://atcoder.jp/contests/abc248/tasks/abc248_f)
+
+選定理由: 状態 0 からは新しい 3 辺のうち 3 本または任意の 2 本を残すと状態 0、横辺 a_i,b_i の片方だけを残す 2 通りが状態 1 になる。両横辺を消す遷移は過去成分を孤立させる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。幅が小さい graph を一方向に構築し、連結性を保つ辺選択を数えるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -117,4 +121,4 @@ sidebar:
 - [ABC379 G 公式解説](https://atcoder.jp/contests/abc379/editorial/11331)
 - [ABC379 G 公式問題文](https://atcoder.jp/contests/abc379/tasks/abc379_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-frontier-profile-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-frontier-profile-dp`

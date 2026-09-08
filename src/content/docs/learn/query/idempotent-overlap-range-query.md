@@ -3,7 +3,7 @@ title: "冪等演算のoverlap range query・Sparse Table"
 description: "前提から冪等演算のoverlap range query・Sparse Tableを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 146
+  order: 153
 ---
 
 # 冪等演算のoverlap range query・Sparse Table
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 冪等な演算なら重なりを許す二つの2冪区間で任意rangeを覆えることを使い、静的queryをO(1)で答える。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC282 F「Union of Two Sets」](https://atcoder.jp/contests/abc282/tasks/abc282_f)
+
+選定理由: 2^k≤len<2^{k+1}なので、左右2区間の合計長2^{k+1}はlen以上となりgapがなく、どちらも[L,R]内なのでunionが正確にquery区間になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。idempotent queryやunion表現で、区間を同長power-of-two区間2個へ分けられるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -112,4 +116,4 @@ k=0…floor(log2N)、l=1…N-2^k+1の区間[l,l+2^k-1]を列挙しid[k][l]を保
 - [ABC282 F 公式解説](https://atcoder.jp/contests/abc282/editorial/5403)
 - [ABC282 F 公式問題文](https://atcoder.jp/contests/abc282/tasks/abc282_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-idempotent-overlap-range-query`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-idempotent-overlap-range-query`

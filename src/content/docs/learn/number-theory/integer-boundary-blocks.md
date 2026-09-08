@@ -43,6 +43,10 @@ floor値・整数根・表記桁数・圧縮block内の式が変わる整数境�
 
 題材: [ABC240 F「Sum Sum Max」](https://atcoder.jp/contests/abc240/tasks/abc240_f)
 
+選定理由: A(n)-A(n-1)=B_0+xn なので、x<0 のとき最大点はこの値が非負である最後の n とその隣にあり、微分ではなく整数差分で境界を決められる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。同じ値が巨大回数続く累積和を扱うとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 巨大な run-length 列の二重累積和を block ごとの二次式へ変え、離散差分から最大点を特定できる。
@@ -68,6 +72,10 @@ floor値・整数根・表記桁数・圧縮block内の式が変わる整数境�
 ### 例 2 — 床関数をconstant quotient blockまたはfloor-sum再帰で処理し、整数根・桁数の境界も誤差なく扱える
 
 題材: [ABC230 E「Fraction Floor Sum」](https://atcoder.jp/contests/abc230/tasks/abc230_e)
+
+選定理由: 全ての i を走査する代わりに、floor(N/i) の値が同じ区間を数えるという商側からの集約へ視点を移す。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。floor(N/i) を i の広い範囲で集約して和や頻度を求めるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -179,4 +187,4 @@ floor値・整数根・表記桁数・圧縮block内の式が変わる整数境�
 - [ABC253 G 公式解説](https://atcoder.jp/contests/abc253/editorial/4026)
 - [ABC253 G 公式問題文](https://atcoder.jp/contests/abc253/tasks/abc253_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-integer-boundary-blocks`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-integer-boundary-blocks`

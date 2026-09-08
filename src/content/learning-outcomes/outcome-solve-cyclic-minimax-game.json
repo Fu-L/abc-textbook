@@ -1,0 +1,13 @@
+{
+  "id": "outcome-solve-cyclic-minimax-game",
+  "statement": "終了局面から逆辺を辿り、終了側が一手選べば確定するOR局面と全手の確定を待つAND局面を区別する。未確定局面で無限継続を判定し、非負重みなら優先度付きキューで有限なminimax距離を確定する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-evaluate-adversarial-game-value"
+  ],
+  "scopeIds": [
+    "abc261-ex",
+    "abc413-f",
+    "tag-cyclic-minimax-game",
+    "unit-cyclic-minimax-game"
+  ]
+}

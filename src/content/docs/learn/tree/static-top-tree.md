@@ -3,7 +3,7 @@ title: "rake・compressで動的木DPを保つ"
 description: "前提からrake・compressで動的木DPを保つを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 206
+  order: 213
 ---
 
 # rake・compressで動的木DPを保つ
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 境界頂点を持つtree clusterの要約と結合を定義し、局所更新後の木DP値を保てる
 
 題材: [ABC351 G「Hash on Tree」](https://atcoder.jp/contests/abc351/tasks/abc351_g)
+
+選定理由: point cluster は virtual root 配下の子積、path cluster は遠端に値 x の subtree を接続したとき近端 hash が ax+b になる二係数を持てば、rake は積、compress は affine composition にできる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。木構造は固定で頂点値だけ更新され、全体の木 DP 値を毎回求めるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -115,4 +119,4 @@ sidebar:
 - [ABC460 G 公式解説](https://atcoder.jp/contests/abc460/editorial/21012)
 - [ABC460 G 公式問題文](https://atcoder.jp/contests/abc460/tasks/abc460_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-static-top-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-static-top-tree`

@@ -1,12 +1,12 @@
 ---
-title: "heavy pathによる木DP高速化"
-description: "前提からheavy pathによる木DP高速化を見抜き、方針へ接続して検証するための学習単位。"
+title: "heavy path上の多項式木DP"
+description: "前提からheavy path上の多項式木DPを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 187
+  order: 194
 ---
 
-# heavy pathによる木DP高速化
+# heavy path上の多項式木DP
 
 このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
 
@@ -19,28 +19,36 @@ sidebar:
 ## 前提・学習順・対象外
 
 - 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 根付き木DP・部分木集約
-- この位置で学ぶ理由: 根付き木DP・部分木集約で得た考え方と実装を再利用し、heavy pathによる木DP高速化の発動条件・正当化・境界を重複なく学ぶ。
+- 追加前提: NTT・FFTで畳み込みと相互相関を求める、根付き木DP・部分木集約
+- この位置で学ぶ理由: 畳み込み・相互相関・根付き木DP・部分木集約で得た考え方と実装を再利用し、heavy path上の多項式木DPの発動条件・正当化・境界を重複なく学ぶ。
 
 ### この単元では扱わない範囲
 
-- heavy pathによる木DP高速化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- heavy path上の多項式木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
 ## 発動条件と見分け方
 
-### heavy pathによる木DP高速化
+### heavy path上の多項式木DP
 
 heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。
 
-検索語: HLRecDP、heavy-path tree DP
+検索語: heavy-path polynomial DP、heavy-path tree DP
 
 未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
 
 ## ガイド例
 
+### 正当化と転用の境界
+
+- ABC269 Exではheavy path上の多項式漸化式を積と合成へまとめ、畳み込みと分割統治で評価する。必要なのは通常の多項式積を高速化できる代数構造であり、一般のmax-plus convolutionをNTTへ置き換えることはできない。
+
 ### 例 1 — heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC269 Ex「Antichain」](https://atcoder.jp/contests/abc269/tasks/abc269_h)
+
+選定理由: heavy path上でg_iをlight childrenのfの積と置くと f_i=x+g_i f_{i+1} となり、path先頭のfはprefix productsの和としてまとめて計算できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。subtreeごとの選び方が子間で独立に直積され、選択個数別の全答えが必要なとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -79,9 +87,9 @@ antichainのtree generating-function DPをheavy pathsへ分解し、path recurre
 
 ### 到達確認 1 — heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
-転移題材: [ABC311 Ex「Many Illumination Plans」](https://atcoder.jp/contests/abc311/tasks/abc311_h)
+境界検証の元題材: [ABC269 Ex「Antichain」](https://atcoder.jp/contests/abc269/tasks/abc269_h)
 
-**課題**: ABC311 Ex「Many Illumination Plans」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
+**課題**: ABC269 Ex「Antichain」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。
 
 **合格条件**: 手法名の列挙に留まらず、学習成果「heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
 
@@ -92,20 +100,19 @@ antichainのtree generating-function DPをheavy pathsへ分解し、path recurre
 
 **検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
 
-別題材では次の直接根拠を対象技能として切り出す: O(NX²) の木 knapsack merge を重軽再帰へ転換し、全根の答えを O(N^{log2 3}X)、空間 O(X log N) で列挙できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
+単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。
 
 根拠として照合する観点:
 
-- O(NX²) の木 knapsack merge を重軽再帰へ転換し、全根の答えを O(N^{log2 3}X)、空間 O(X log N) で列挙できる。
+- 全サイズKのtree antichain数をheavy-path polynomial DPで一括計算できる。
 
-- 対象技能が担う箇所: O(NX²) の木 knapsack merge を重軽再帰へ転換し、全根の答えを O(N^{log2 3}X)、空間 O(X log N) で列挙できる。
-- 転移題材の解法接続: 部分木サイズから heavy child を決める。dfs(c,dp) で c を残す/削る場合の配列を O(X) で作り、heavy child は共有できる一方の経路を一回、各 light child は必要な二状態へ再帰させる。根1で全 heavy path を構成した後、各 heavy path 根から初期配列を渡すことで、その path 上の全 v の F(v) を同時に回収する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
+- 元の方針が必要とする対象・操作・不変量・目標を分けて書く。
+- 発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。
+- 元の正当化のうち最初に成立しなくなる命題を指摘する。
+- 計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。
+- 条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。
 
-期待する到達点: heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+期待する到達点: heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できるの適用可能範囲と破綻条件を反例付きで説明できる。
 
 </details>
 
@@ -114,7 +121,5 @@ antichainのtree generating-function DPをheavy pathsへ分解し、path recurre
 
 - [ABC269 H 公式解説](https://atcoder.jp/contests/abc269/editorial/4838)
 - [ABC269 H 公式問題文](https://atcoder.jp/contests/abc269/tasks/abc269_h)
-- [ABC311 H 公式解説](https://atcoder.jp/contests/abc311/editorial/6814)
-- [ABC311 H 公式問題文](https://atcoder.jp/contests/abc311/tasks/abc311_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-heavy-path-tree-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-heavy-path-tree-dp`

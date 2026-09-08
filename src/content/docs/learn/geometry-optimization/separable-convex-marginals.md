@@ -3,7 +3,7 @@ title: "分離凸・凹の単調限界値選択"
 description: "前提から分離凸・凹の単調限界値選択を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 153
+  order: 160
 ---
 
 # 分離凸・凹の単調限界値選択
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 分離凸費用または分離凹利益を単調な限界値列へ分解し、heap mergeか閾値別の個数・総和により必要な上位・下位K項を選べる
 
 題材: [ABC216 E「Amusement Park」](https://atcoder.jp/contests/abc216/tasks/abc216_e)
+
+選定理由: 貪欲に一回ずつ最大値を取る結果には共通の境界値があり、境界より上は全て選び、境界値だけ必要個数を選ぶ。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。複数の単調列から大きい要素を多数選ぶが、選択回数そのものが非常に大きいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ sidebar:
 - [ABC369 G 公式解説](https://atcoder.jp/contests/abc369/editorial/10843)
 - [ABC369 G 公式問題文](https://atcoder.jp/contests/abc369/tasks/abc369_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-separable-convex-marginals`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-separable-convex-marginals`

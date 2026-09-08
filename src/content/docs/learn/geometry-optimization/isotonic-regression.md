@@ -3,7 +3,7 @@ title: "isotonic regression・PAV"
 description: "前提からisotonic regression・PAVを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 195
+  order: 202
 ---
 
 # isotonic regression・PAV
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 単調制約付き凸最小化で違反する隣接blockをpoolし、block optimumが単調になるまでmergeする。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC459 F「-1, +1」](https://atcoder.jp/contests/abc459/tasks/abc459_f)
+
+選定理由: 長さL・総和Sのblockを最も均す整数列は floor((S+t)/L), t=0..L-1 で、値は二つの隣接整数だけになる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。単調制約下で隣接違反をblock平均化して一意解を求めるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -111,4 +115,4 @@ shift後Aを左から処理し、blockに(l,r,sum)を持つ。top二blockの均�
 - [ABC459 F 公式解説](https://atcoder.jp/contests/abc459/editorial/20507)
 - [ABC459 F 公式問題文](https://atcoder.jp/contests/abc459/tasks/abc459_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-isotonic-regression`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-isotonic-regression`

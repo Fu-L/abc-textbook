@@ -3,7 +3,7 @@ title: "一次元凸・単峰最適化"
 description: "前提から一次元凸・単峰最適化を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 121
+  order: 127
 ---
 
 # 一次元凸・単峰最適化
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC224 G「Roll or Increment」](https://atcoder.jp/contests/abc224/tasks/abc224_g)
+
+選定理由: 閾値区間へ入る確率はX/Nなので入るまでの振り直し回数の期待値はN/X、入った位置は一様なのでTまでの増加回数の期待値は(X-1)/2である。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。順序付き状態で二操作を選び、一方を選んだ後に他方へ戻る行動が常に損になるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ S≤Tなら直接増加するA(T-S)も候補にし、1≤X≤Tへ丸めた sqrt(
 - [ABC314 H 公式解説](https://atcoder.jp/contests/abc314/editorial/6958)
 - [ABC314 H 公式問題文](https://atcoder.jp/contests/abc314/tasks/abc314_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-basic-convex-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-basic-convex-optimization`

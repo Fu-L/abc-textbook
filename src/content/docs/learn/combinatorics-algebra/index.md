@@ -38,16 +38,16 @@ sidebar:
 6. [Matroidの独立性・greedy・線形交差](./matroid-theory.md)（標準順 92）— 独立集合族と交換公理を共通言語にし、単一matroidの重み付き基底と、現corpusで観測された二つの線形matroidの共通rank判定を分けて学ぶ。
 7. [群作用・軌道数え上げ](./orbit-counting.md)（標準順 94）— 状態・配置の正規化で得た考え方と実装を再利用し、群作用・軌道数え上げの発動条件・正当化・境界を重複なく学ぶ。
 8. [monoid exponentiation・連結演算doubling](./monoid-exponentiation.md)（標準順 96）— 長さ・値・補助剰余を含む要約の結合則と単位元を定義し、巨大な反復連結を二分累乗する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-9. [削除・縮約recurrence](./deletion-contraction.md)（標準順 99）— 辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-10. [鏡像法・reflection principle](./reflection-principle.md)（標準順 100）— 組合せ係数・数え上げで得た考え方と実装を再利用し、鏡像法・reflection principleの発動条件・正当化・境界を重複なく学ぶ。
-11. [半環行列・min-plus/max-min遷移](./semiring-matrix-exponentiation.md)（標準順 101）— 線形遷移・行列累乗で得た考え方と実装を再利用し、半環行列・min-plus/max-min遷移の発動条件・正当化・境界を重複なく学ぶ。
-12. [label付き連結成分分解・exponential formula](./labeled-component-decomposition.md)（標準順 103）— 生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。
-13. [Prüfer code・次数制約付きlabel木](./prufer-code.md)（標準順 105）— 組合せ係数・数え上げで得た考え方と実装を再利用し、Prüfer code・次数制約付きlabel木の発動条件・正当化・境界を重複なく学ぶ。
-14. [Robinson–Schensted対応・Young tableau](./rsk-young-tableaux.md)（標準順 109）— 順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-15. [行列式による数え上げ](./determinant-counting.md)（標準順 140）— 線形方程式・rankで得た考え方と実装を再利用し、行列式による数え上げの発動条件・正当化・境界を重複なく学ぶ。
-16. [BEST定理によるEuler circuit数え上げ](./euler-circuit-counting.md)（標準順 152）— 行列式による数え上げ・Euler trail・circuitで得た考え方と実装を再利用し、BEST定理によるEuler circuit数え上げの発動条件・正当化・境界を重複なく学ぶ。
-17. [半順序・Dilworth・最大反鎖](./poset-dilworth-antichain.md)（標準順 162）— 二部matching・Hall・Kőnig・列・subsequence DPで得た考え方と実装を再利用し、半順序・Dilworth・最大反鎖の発動条件・正当化・境界を重複なく学ぶ。
-18. [FPS演算・多点評価・合成を行う](./formal-power-series.md)（標準順 210）— 生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。
+9. [削除・縮約recurrence](./deletion-contraction.md)（標準順 103）— 辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+10. [鏡像法・reflection principle](./reflection-principle.md)（標準順 104）— 組合せ係数・数え上げで得た考え方と実装を再利用し、鏡像法・reflection principleの発動条件・正当化・境界を重複なく学ぶ。
+11. [半環行列・min-plus/max-min遷移](./semiring-matrix-exponentiation.md)（標準順 105）— 線形遷移・行列累乗で得た考え方と実装を再利用し、半環行列・min-plus/max-min遷移の発動条件・正当化・境界を重複なく学ぶ。
+12. [label付き連結成分分解・exponential formula](./labeled-component-decomposition.md)（標準順 107）— 生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。
+13. [Prüfer code・次数制約付きlabel木](./prufer-code.md)（標準順 109）— 組合せ係数・数え上げで得た考え方と実装を再利用し、Prüfer code・次数制約付きlabel木の発動条件・正当化・境界を重複なく学ぶ。
+14. [Robinson–Schensted対応・Young tableau](./rsk-young-tableaux.md)（標準順 114）— 順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+15. [行列式による数え上げ](./determinant-counting.md)（標準順 147）— 線形方程式・rankで得た考え方と実装を再利用し、行列式による数え上げの発動条件・正当化・境界を重複なく学ぶ。
+16. [BEST定理によるEuler circuit数え上げ](./euler-circuit-counting.md)（標準順 159）— 行列式による数え上げ・Euler trail・circuitで得た考え方と実装を再利用し、BEST定理によるEuler circuit数え上げの発動条件・正当化・境界を重複なく学ぶ。
+17. [半順序・Dilworth・最大反鎖](./poset-dilworth-antichain.md)（標準順 169）— 二部matching・Hall・Kőnig・列・subsequence DPで得た考え方と実装を再利用し、半順序・Dilworth・最大反鎖の発動条件・正当化・境界を重複なく学ぶ。
+18. [FPS演算・多点評価・合成を行う](./formal-power-series.md)（標準順 216）— 生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。
 
 ## 発動条件と見分け方
 
@@ -64,6 +64,10 @@ sidebar:
 ### 例 1 — 数え上げや遷移を係数列・多項式・線形写像へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
+
+選定理由: an≡b (mod m) が n について解を持つのは gcd(m,a) が b を割るときに限る。したがって固定した a から到達できる b は m/gcd(m,a) 個であり、a の gcd ごとに寄与をまとめられる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。素数法の非零剰余に積と冪が現れるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -216,4 +220,4 @@ m の約数を降順に処理し、f(g)=m/g−Σ_{h:g|h,h>g}f(h) により gcd(m
 - [ABC213 G 公式解説](https://atcoder.jp/contests/abc213/editorial/2392)
 - [ABC213 G 公式問題文](https://atcoder.jp/contests/abc213/tasks/abc213_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-chapter-combinatorics-algebra`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-chapter-combinatorics-algebra`

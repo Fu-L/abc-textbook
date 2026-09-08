@@ -3,7 +3,7 @@ title: "削除・縮約recurrence"
 description: "前提から削除・縮約recurrenceを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 98
+  order: 102
 ---
 
 # 削除・縮約recurrence
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC294 Ex「K-Coloring」](https://atcoder.jp/contests/abc294/tasks/abc294_h)
+
+選定理由: 彩色多項式の削除縮約F(G)=F(G-e)-F(G/e)と、独立集合への色クラス分割という二表現を疎グラフの次数に応じて使い分ける。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。グラフ彩色数を辺削除と端点縮約へ分解する。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -111,4 +115,4 @@ sidebar:
 - [ABC294 H 公式解説](https://atcoder.jp/contests/abc294/editorial/5999)
 - [ABC294 H 公式問題文](https://atcoder.jp/contests/abc294/tasks/abc294_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-deletion-contraction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-deletion-contraction`

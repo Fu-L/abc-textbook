@@ -12,6 +12,8 @@
     "静的graph等式制約のpotential伝播の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
   "sourceRevisionIds": [
+    "source-abc280-editorial-5303-aea62deae9b25f1c4e4b148b805c4bf36522b9a2edc9a3e1d8ad4c9488e912b0",
+    "source-abc280-f-problem-47f71a8cdee8536d7a88cdb6ec9f45a36b4048b5445c952d60040e01ecc44ae9",
     "source-abc352-editorial-9924-9f4a632245687078caf887539d0a943a3fdae14d244b269cc96b7f0c6dbb80a1",
     "source-abc352-f-problem-35d14022d92c00f83a01507e4d6b5bc77077b50b3809064a4417b574c01caa21",
     "source-abc396-e-problem-c31b2e0500585e6c964e0c4d69feb8d69b79c20268e0b70f888a608f5050f5be",
@@ -32,6 +34,7 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/graph-potential-propagation.md",
   "problemIds": [
+    "abc280-f",
     "abc352-f",
     "abc396-e"
   ],
@@ -44,6 +47,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。辺が二頂点値のxor差を指定するとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -75,14 +79,14 @@
       ],
       "attainmentCondition": "学習成果「辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
       "assessment": {
-        "method": "ABC352 F「Estimate Order」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "method": "ABC280 F「Pay or Receive」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
         "successCondition": "手法名の列挙に留まらず、学習成果「辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
       },
       "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 差制約 component の平行移動: x_u−x_v が固定された制約 graph で絶対座標だけ未定なとき。 適用: DFS potential で相対値を求め、component を剛体として全 shift する。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 符号付きroad score queryを、component potentialと非零cycle flagによりnan/inf/有限差へ分類できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
         "procedure": [
-          "対象技能が担う箇所: 差制約 component の平行移動: x_u−x_v が固定された制約 graph で絶対座標だけ未定なとき。 適用: DFS potential で相対値を求め、component を剛体として全 shift する。",
-          "転移題材の解法接続: 無向差制約 graph を DFS し D_A=D_B+C を伝播して成分を作る。各成分について全 shift の occupancy mask と各頂点位置を列挙する。成分を順に配置する dp[mask] を行い、各対象成分を除いた配置可能 mask と候補 placement の disjoint/全被覆条件から人物ごとの可能順位集合を求め、一要素ならその順位、複数なら −1。",
+          "対象技能が担う箇所: 符号付きroad score queryを、component potentialと非零cycle flagによりnan/inf/有限差へ分類できる。",
+          "転移題材の解法接続: 未訪問vertexごとにcomponent idとpot=0を置き、(u,v,+c)をDFS緩和する。pot[v]≠pot[u]+cを見つけたcomponentをbadにする。queryはcomponent不同ならnan、badならinf、それ以外はpot[y]-pot[x]。",
           "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
           "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
           "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
@@ -97,6 +101,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 86,
-  "globalIndex": 171,
+  "globalIndex": 178,
   "orderReason": "通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。"
 }

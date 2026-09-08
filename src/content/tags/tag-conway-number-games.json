@@ -1,0 +1,42 @@
+{
+  "id": "tag-conway-number-games",
+  "name": "独立な数ゲームの和",
+  "definition": "全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-game-value-dp"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "独立な列ゲーム"
+    ],
+    "triggerPatterns": [
+      "左右選択肢の順序"
+    ],
+    "invariantPatterns": [
+      "数としての独立和"
+    ],
+    "goalPatterns": [
+      "和の符号で勝敗"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-add-conway-number-games"
+  ],
+  "representativeProblemIds": [
+    "abc229-h",
+    "abc265-ex"
+  ],
+  "aliases": [
+    "Conway number",
+    "simplicity rule",
+    "二進有理数"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

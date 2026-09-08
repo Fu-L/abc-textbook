@@ -3,7 +3,7 @@ title: "Suffix Automatonで部分文字列集合を表す"
 description: "前提からSuffix Automatonで部分文字列集合を表すを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 142
+  order: 149
 ---
 
 # Suffix Automatonで部分文字列集合を表す
@@ -41,6 +41,10 @@ endpos同値類をstateとし、suffix linkとcloneで全部分文字列の遷�
 ### 例 1 — endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる
 
 題材: [ABC433 G「Substring Game」](https://atcoder.jp/contests/abc433/tasks/abc433_g)
+
+選定理由: Suffix Automaton の各遷移は表す部分文字列へ一文字追加する操作に対応し、len が増えるため遷移グラフは DAG である。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。文字列の全相異なる部分文字列を、末尾への文字追加遷移を保った線形個の状態へ圧縮したいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -111,4 +115,4 @@ S を一文字ずつ追加して Suffix Automaton を構築する。状態を le
 - [ABC433 G 公式解説](https://atcoder.jp/contests/abc433/editorial/14604)
 - [ABC433 G 公式問題文](https://atcoder.jp/contests/abc433/tasks/abc433_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-suffix-automaton`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-suffix-automaton`

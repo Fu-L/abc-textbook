@@ -42,7 +42,8 @@ sidebar:
 10. [bit列をTrieで索引化する](./binary-trie.md)（標準順 66）— 整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。
 11. [Moの順序で区間問い合わせの差分を更新する](./mo-offline-range.md)（標準順 81）— 区間への要素の追加・削除を定義し、問い合わせ順を並べ替えて端点移動の総量を抑える。
 12. [大小関係をCartesian treeへ変換する](./cartesian-tree.md)（標準順 84）— 単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。
-13. [区間更新を要約へ作用させる](./range-actions.md)（標準順 146）— 結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。
+13. [上位bitの支配関係によるXOR minimax](./bitwise-minimax-partition.md)（標準順 100）— 最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+14. [区間更新を要約へ作用させる](./range-actions.md)（標準順 153）— 結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。
 
 ## 発動条件と見分け方
 
@@ -59,6 +60,10 @@ sidebar:
 ### 例 1 — 問い合わせに十分で、更新と合成で保てる要約を導ける
 
 題材: [ABC213 F「Common Prefixes」](https://atcoder.jp/contests/abc213/tasks/abc213_f)
+
+選定理由: 必要なのは各 LCP 問合せの値ではなくそれらの総和なので、RMQ を繰り返す代わりに「区間最小値の総和」の問題として処理する。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数の接尾辞どうしの辞書順関係や共通接頭辞長をまとめて扱うとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -110,6 +115,7 @@ sidebar:
 - **bit列をTrieで索引化する** — 直接到達点: 整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる。近いが対象外: 文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。
 - **Moの順序で区間問い合わせの差分を更新する** — 直接到達点: 区間問い合わせの順序と追加・削除操作を設計し、端点移動の総量を評価できる。近いが対象外: オンラインのpriority queue・multiset、および単調stack・queue。
 - **大小関係をCartesian treeへ変換する** — 直接到達点: 配列順とheap順を保つCartesian treeを単調stackで構成し、各部分木が表す連続区間へ問題を分解できる。近いが対象外: 最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。
+- **上位bitの支配関係によるXOR minimax** — 直接到達点: 最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 上位bitの支配関係によるXOR minimaxの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 - **区間更新を要約へ作用させる** — 直接到達点: 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。近いが対象外: 過去の版の保存・rollback・構造共有。
 
 **比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
@@ -210,4 +216,4 @@ sidebar:
 - [ABC216 G 公式解説](https://atcoder.jp/contests/abc216/editorial/2474)
 - [ABC216 G 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-chapter-query`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-chapter-query`

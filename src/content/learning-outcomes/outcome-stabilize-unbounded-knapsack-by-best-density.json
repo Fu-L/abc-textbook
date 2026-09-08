@@ -5,6 +5,7 @@
     "outcome-design-resource-dp"
   ],
   "scopeIds": [
+    "abc310-ex",
     "abc415-g",
     "tag-eventual-unbounded-knapsack",
     "unit-eventual-unbounded-knapsack"

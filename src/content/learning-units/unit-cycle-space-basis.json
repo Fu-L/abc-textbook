@@ -39,6 +39,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。指定terminal間simple pathに絶対含まれない枝を除きたいとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -89,6 +90,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 92,
-  "globalIndex": 101,
+  "globalIndex": 105,
   "orderReason": "無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。"
 }

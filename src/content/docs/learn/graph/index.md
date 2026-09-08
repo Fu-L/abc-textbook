@@ -41,9 +41,9 @@ sidebar:
 9. [cut・cycle性質から最適全域木を構成する](./spanning-tree-optimization.md)（標準順 74）— 貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。
 10. [フロー・マッチング・カットへ帰着する](./flow-matching.md)（標準順 83）— 頂点と辺のモデルを作れることを前提に、選択制約を容量・カット・マッチングへ翻訳する。
 11. [単調path contraction・DSU jump](./monotone-path-contraction.md)（標準順 86）— 一度確定したpath区間を次未処理pointerまたはDSU parentで飛ばし、各頂点を高々一度だけ縮約する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-12. [cycle space・fundamental cycle basis](./cycle-space-basis.md)（標準順 102）— 無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。
-13. [lowlinkで橋・関節点を特定する](./lowlink-critical-structure.md)（標準順 112）— DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。
-14. [平面graph双対・cut/path対応](./planar-duality.md)（標準順 175）— 最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、平面graph双対・cut/path対応の発動条件・正当化・境界を重複なく学ぶ。
+12. [cycle space・fundamental cycle basis](./cycle-space-basis.md)（標準順 106）— 無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。
+13. [lowlinkで橋・関節点を特定する](./lowlink-critical-structure.md)（標準順 117）— DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。
+14. [平面graph双対・cut/path対応](./planar-duality.md)（標準順 182）— 最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、平面graph双対・cut/path対応の発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -60,6 +60,10 @@ sidebar:
 ### 例 1 — 対象を頂点と辺に対応させ、利用するグラフ性質を示せる
 
 題材: [ABC212 F「Greedy Takahashi」](https://atcoder.jp/contests/abc212/tasks/abc212_f)
+
+選定理由: 旅程は時刻とともに前へ進み、バスを頂点とすると各頂点の後継が高々一つの関数グラフとして表せる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各状態から次状態が一意で、同じ遷移を多数のクエリから長距離たどるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -212,4 +216,4 @@ sidebar:
 - [ABC214 H 公式解説](https://atcoder.jp/contests/abc214/editorial/2441)
 - [ABC214 H 公式問題文](https://atcoder.jp/contests/abc214/tasks/abc214_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-chapter-graph`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-chapter-graph`

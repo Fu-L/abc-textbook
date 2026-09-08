@@ -3,7 +3,7 @@ title: "静的graph等式制約のpotential伝播"
 description: "前提から静的graph等式制約のpotential伝播を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 171
+  order: 178
 ---
 
 # 静的graph等式制約のpotential伝播
@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC396 E「Min of Restricted Sum」](https://atcoder.jp/contests/abc396/tasks/abc396_e)
 
+選定理由: 既訪問vertexへ別pathから到達したとき、既存p_vとp_u xor zが異なればcycle xorが非零で解なしである。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。辺が二頂点値のxor差を指定するとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - xor等式graphの存在判定と最小和解構成を、component potentialとbit別選択で線形近くに行える。
@@ -77,9 +81,9 @@ sidebar:
 
 ### 到達確認 1 — 辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる
 
-転移題材: [ABC352 F「Estimate Order」](https://atcoder.jp/contests/abc352/tasks/abc352_f)
+転移題材: [ABC280 F「Pay or Receive」](https://atcoder.jp/contests/abc280/tasks/abc280_f)
 
-**課題**: ABC352 F「Estimate Order」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
+**課題**: ABC280 F「Pay or Receive」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
 
 **合格条件**: 手法名の列挙に留まらず、学習成果「辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
 
@@ -90,14 +94,14 @@ sidebar:
 
 **検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
 
-別題材では次の直接根拠を対象技能として切り出す: 差制約 component の平行移動: x_u−x_v が固定された制約 graph で絶対座標だけ未定なとき。 適用: DFS potential で相対値を求め、component を剛体として全 shift する。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
+別題材では次の直接根拠を対象技能として切り出す: 符号付きroad score queryを、component potentialと非零cycle flagによりnan/inf/有限差へ分類できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
 
 根拠として照合する観点:
 
-- 差制約 component の平行移動: x_u−x_v が固定された制約 graph で絶対座標だけ未定なとき。 適用: DFS potential で相対値を求め、component を剛体として全 shift する。
+- 符号付きroad score queryを、component potentialと非零cycle flagによりnan/inf/有限差へ分類できる。
 
-- 対象技能が担う箇所: 差制約 component の平行移動: x_u−x_v が固定された制約 graph で絶対座標だけ未定なとき。 適用: DFS potential で相対値を求め、component を剛体として全 shift する。
-- 転移題材の解法接続: 無向差制約 graph を DFS し D_A=D_B+C を伝播して成分を作る。各成分について全 shift の occupancy mask と各頂点位置を列挙する。成分を順に配置する dp[mask] を行い、各対象成分を除いた配置可能 mask と候補 placement の disjoint/全被覆条件から人物ごとの可能順位集合を求め、一要素ならその順位、複数なら −1。
+- 対象技能が担う箇所: 符号付きroad score queryを、component potentialと非零cycle flagによりnan/inf/有限差へ分類できる。
+- 転移題材の解法接続: 未訪問vertexごとにcomponent idとpot=0を置き、(u,v,+c)をDFS緩和する。pot[v]≠pot[u]+cを見つけたcomponentをbadにする。queryはcomponent不同ならnan、badならinf、それ以外はpot[y]-pot[x]。
 - 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
 - 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
 - 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
@@ -110,9 +114,11 @@ sidebar:
 
 ## 根拠
 
+- [ABC280 F 公式解説](https://atcoder.jp/contests/abc280/editorial/5303)
+- [ABC280 F 公式問題文](https://atcoder.jp/contests/abc280/tasks/abc280_f)
 - [ABC352 F 公式解説](https://atcoder.jp/contests/abc352/editorial/9924)
 - [ABC352 F 公式問題文](https://atcoder.jp/contests/abc352/tasks/abc352_f)
 - [ABC396 E 公式問題文](https://atcoder.jp/contests/abc396/tasks/abc396_e)
 - [ABC396 E 公式解説](https://atcoder.jp/contests/abc396/editorial/12390)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-graph-potential-propagation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-graph-potential-propagation`

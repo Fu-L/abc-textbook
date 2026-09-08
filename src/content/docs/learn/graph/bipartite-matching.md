@@ -3,7 +3,7 @@ title: "二部matching・Hall・Kőnig"
 description: "前提から二部matching・Hall・Kőnigを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 160
+  order: 167
 ---
 
 # 二部matching・Hall・Kőnig
@@ -43,6 +43,10 @@ sidebar:
 
 題材: [ABC215 H「Cabbage Master」](https://atcoder.jp/contests/abc215/tasks/abc215_h)
 
+選定理由: g(S) を許可品種集合が S に含まれる一個注文の総数とすると、全注文を満たせる条件は全 S で f(S)−g(S) が非負であることになる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。複数種類の資源を、各要求が受け入れる種類のいずれかへ一対一に割り当てるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 大口注文の充足を Hall の最小余裕へ変換し、部分集合変換で最小破壊数とその個体選択数を求められる。
@@ -69,6 +73,10 @@ sidebar:
 ### 例 2 — 左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC241 G「Round Robin」](https://atcoder.jp/contests/abc241/tasks/abc241_g)
+
+選定理由: 既に終了した試合 node は実際の winner だけへ、未終了試合 node は両 player へ辺を張れば、fixed result と自由選択を同じ network で扱える。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各 item を候補先の一つへ割り当て、各受け手に上限があるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -182,4 +190,4 @@ sidebar:
 - [ABC317 G 公式解説](https://atcoder.jp/contests/abc317/editorial/7023)
 - [ABC317 G 公式問題文](https://atcoder.jp/contests/abc317/tasks/abc317_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-bipartite-matching`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-bipartite-matching`

@@ -326,7 +326,7 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
     '数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。',
   ],
   'unit-dp-stochastic': ['二人零和ゲームの勝敗・Grundy数。'],
-  'unit-dp-game': ['得点差・最適手数・partisan局面値を求めるminimax評価。'],
+  'unit-dp-game': ['有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。'],
   'unit-dp-game-value': ['勝敗だけを分類する通常の後退解析・Grundy数。'],
   'unit-dp-transition-optimization': ['固定線形遷移の巨大回累乗。'],
   'unit-linear-recurrence': ['一般のDP遷移の区間集約・単調最適化。'],
@@ -2124,12 +2124,13 @@ const TAG_SEEDS: readonly TagSeed[] = [
   },
   {
     id: 'tag-game-value-dp',
-    name: 'minimax・局面値ゲームDP',
-    definition: '両者が異なる目的で最適に手を選ぶ局面を、得点差・手数・勝敗値のminimaxで評価する。',
+    name: '有限局面DAGのminimax',
+    definition:
+      '必ず終了するゲームの局面DAGで、終端利得と各手番の最大化・最小化から局面値を求める。',
     parentId: 'tag-dp-state-transition',
     outcomeIds: ['outcome-evaluate-adversarial-game-value'],
     unitIds: ['unit-dp-game-value'],
-    recall: ['minimax', 'ミニマックス', '得点差', 'partisan', 'ゲーム木', '最悪応答', '零和.?game'],
+    recall: ['minimax', 'ミニマックス', '得点差', 'ゲーム木', '最悪応答', '零和.?game'],
     object: ['ゲーム', '手番', '局面', '得点', '先手', '後手'],
     trigger: ['最大化', '最小化', '互いに最適', '最善手'],
     invariant: ['局面値', '得点差', '手番ごとの目的'],
@@ -3624,6 +3625,102 @@ const FINAL_TAG_CURRICULUM_PREREQUISITE_ADDITIONS: Readonly<Record<string, reado
 
 const REFINED_TAG_SEEDS: readonly TagSeed[] = [
   {
+    id: 'tag-conway-number-games',
+    name: '独立な数ゲームの和',
+    definition:
+      '全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。',
+    parentId: 'tag-dp-state-transition',
+    prerequisiteTagIds: ['tag-game-value-dp'],
+    outcomeIds: ['outcome-add-conway-number-games'],
+    unitIds: ['unit-conway-number-games'],
+    recall: ['Conway number', 'simplicity rule', '二進有理数'],
+    object: ['独立な列ゲーム'],
+    trigger: ['左右選択肢の順序'],
+    invariant: ['数としての独立和'],
+    goal: ['和の符号で勝敗'],
+    priority: 90,
+  },
+  {
+    id: 'tag-cyclic-minimax-game',
+    name: '循環局面の後退解析とminimax距離',
+    definition:
+      '終了局面から逆辺を辿り、終了側が一手選べば確定するOR局面と全手の確定を待つAND局面を区別する。未確定局面で無限継続を判定し、非負重みなら優先度付きキューで有限なminimax距離を確定する。',
+    parentId: 'tag-dp-state-transition',
+    prerequisiteTagIds: ['tag-game-value-dp'],
+    outcomeIds: ['outcome-solve-cyclic-minimax-game'],
+    unitIds: ['unit-cyclic-minimax-game'],
+    recall: ['retrograde analysis', 'AND OR game', 'minimax distance'],
+    object: ['循環する局面グラフ'],
+    trigger: ['無限継続が可能'],
+    invariant: ['OR最小とAND全後続'],
+    goal: ['有限性と最適利得'],
+    priority: 90,
+  },
+  {
+    id: 'tag-heavy-light-recursive-dp',
+    name: '資源DPを引数で渡すHLRecDP',
+    definition:
+      '外部の資源DP配列を受け取って部分木の選択を反映する再帰を設計し、max-plusの子DP併合を避ける。重い子は一回だけ呼び、軽い子の重複呼出しを部分木サイズの半減により評価する。',
+    parentId: 'tag-tree-model-structure',
+    prerequisiteTagIds: ['tag-rooted-tree-aggregation', 'tag-knapsack-resource'],
+    outcomeIds: ['outcome-pass-resource-dp-through-heavy-recursion'],
+    unitIds: ['unit-heavy-light-recursive-dp'],
+    recall: ['HLRecDP', 'heavy light recursive DP'],
+    object: ['木上資源DP'],
+    trigger: ['高価なmax-plus merge'],
+    invariant: ['重い子の呼出し一回'],
+    goal: ['再帰呼出し総量'],
+    priority: 90,
+  },
+  {
+    id: 'tag-stern-brocot-ancestry',
+    name: 'Stern–Brocot木の経路と祖先',
+    definition:
+      '隣接分数の行列式が1であることを保ち、mediantとEuclidの商列からStern–Brocot木の経路を同方向の連続回数へ圧縮する。経路の共通prefixで祖先関係と必要な祖先集合を求める。',
+    parentId: 'tag-number-theory-structure',
+    prerequisiteTagIds: ['tag-gcd-structure'],
+    outcomeIds: ['outcome-traverse-stern-brocot-ancestors'],
+    unitIds: ['unit-stern-brocot-ancestry'],
+    recall: ['Stern Brocot ancestor', 'mediant', '連分数経路'],
+    object: ['既約正有理数'],
+    trigger: ['mediant挿入'],
+    invariant: ['隣接分数の行列式1'],
+    goal: ['祖先集合と経路'],
+    priority: 90,
+  },
+  {
+    id: 'tag-binary-tree-ancestor-matching',
+    name: '二進操作の木へのモデル化と祖先マッチング',
+    definition:
+      '二進末尾の削除を親への辺に写し、深い頂点で需要と供給を相殺して余剰だけを祖先へ渡す。両側の移動可能な辺を区別し、深い一致を優先する交換論法で移動数の最小性を示す。',
+    parentId: 'tag-model-reduction',
+    prerequisiteTagIds: ['tag-greedy-exchange-order'],
+    outcomeIds: ['outcome-match-binary-tree-ancestors'],
+    unitIds: ['unit-binary-tree-ancestor-matching'],
+    recall: ['binary ancestor matching', '二進操作の木'],
+    object: ['二進表記の多重集合'],
+    trigger: ['末尾削除'],
+    invariant: ['最深の一致を優先'],
+    goal: ['最小移動回数'],
+    priority: 90,
+  },
+  {
+    id: 'tag-bitwise-minimax-partition',
+    name: '上位bitの支配関係によるXOR minimax',
+    definition:
+      '最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。',
+    parentId: 'tag-query-sufficient-aggregate',
+    prerequisiteTagIds: [],
+    outcomeIds: ['outcome-minimize-maximum-xor-by-bit-partition'],
+    unitIds: ['unit-bitwise-minimax-partition'],
+    recall: ['XOR minimax', 'bitwise partition'],
+    object: ['整数集合と共通mask'],
+    trigger: ['最大XORの最小化'],
+    invariant: ['上位bitが下位bit総和を支配'],
+    goal: ['minimax値'],
+    priority: 90,
+  },
+  {
     id: 'tag-tree-model-structure',
     name: '木モデルと構造',
     definition: '木固有の根・部分木・path・separator構造へ問題を写し、利用する性質を選ぶ。',
@@ -3778,14 +3875,14 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-small-to-large',
     name: 'small-to-large・DSU on Tree',
     definition:
-      '小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。',
+      '小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。',
     parentId: 'tag-model-reduction',
     outcomeIds: ['outcome-merge-small-into-large'],
     unitIds: ['unit-small-to-large'],
     recall: ['small.?to.?large', 'DSU on Tree', 'sack technique'],
     object: ['集合', 'map', '部分木container'],
     trigger: ['merge', '小さい側', 'container swap'],
-    invariant: ['size倍増', '要素移動'],
+    invariant: ['所属サイズの増大', '消滅要素への課金', '分割時の半減'],
     goal: ['集合併合', '部分木集約'],
     priority: 72,
   },
@@ -3805,13 +3902,14 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
   },
   {
     id: 'tag-heavy-path-tree-dp',
-    name: 'heavy pathによる木DP高速化',
+    name: 'heavy path上の多項式木DP',
     definition:
       'heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。',
     parentId: 'tag-tree-model-structure',
     outcomeIds: ['outcome-accelerate-tree-dp-by-heavy-path'],
     unitIds: ['unit-heavy-path-tree-dp'],
-    recall: ['HLRecDP', 'heavy path tree DP', 'heavy.?light.*tree DP'],
+    prerequisiteTagIds: ['tag-convolution'],
+    recall: ['heavy path polynomial DP', 'heavy path tree DP'],
     object: ['木DP', 'heavy path', 'light subtree'],
     trigger: ['path recurrence', '部分木多項式', 'heavy child'],
     invariant: ['light辺のsize総和', 'path合成'],
@@ -4540,7 +4638,7 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-automaton-dp',
     name: 'automaton上のDP・行列遷移',
     definition:
-      '位置・長さとautomaton stateの積状態を作り、受理・禁止状態を除外して数え上げや最適化を行う。',
+      '位置・長さとautomaton stateの積状態を作り、禁止条件を満たす遷移を除き、処理終了時に目的言語の受理状態を集計する。禁止パターン回避では検出状態を除外し、全パターン充足では出現maskが全て立つ状態を受理する。',
     parentId: 'tag-dp-state-transition',
     prerequisiteTagIds: ['tag-finite-pattern-automaton'],
     outcomeIds: ['outcome-run-dp-on-finite-automaton'],
@@ -4721,17 +4819,17 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
   },
   {
     id: 'tag-finite-field-frobenius',
-    name: '有限体Frobenius軌道',
+    name: '標数pのFrobenius恒等式による反復高速化',
     definition:
-      '有限体上のFrobenius写像の軌道と固定体を用い、指数的な反復区間をorbit長ごとのrunへ圧縮する。',
+      '標数pで中間の二項係数が消える恒等式 (1+x)^(p^t)=1+x^(p^t) をシフト演算へ適用し、隣接和反復をpの冪回ずつ飛ばす。圧縮列では各段のrun数の増加も評価する。',
     parentId: 'tag-number-theory-structure',
-    prerequisiteTagIds: ['tag-finite-field-extension'],
+    prerequisiteTagIds: ['tag-modular-arithmetic'],
     outcomeIds: ['outcome-decompose-finite-field-frobenius-orbits'],
     unitIds: ['unit-finite-field-frobenius'],
-    recall: ['Frobenius automorphism', 'finite field orbit', 'Frobenius map'],
-    object: ['有限体', 'Frobenius写像', 'orbit'],
-    trigger: ['p乗写像を反復', '固定体'],
-    invariant: ['orbit長', '拡大次数'],
+    recall: ['Frobenius identity', 'Freshman dream', '標数p'],
+    object: ['多項式', 'シフト演算', 'ラン長圧縮'],
+    trigger: ['隣接和反復', 'pの冪ジャンプ'],
+    invariant: ['二項係数消滅', 'run数上界'],
     goal: ['反復区間圧縮'],
     priority: 97,
   },
@@ -5073,7 +5171,7 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-lagrangian-relaxation',
     name: 'Lagrangian relaxation・Aliens trick',
     definition:
-      '個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。',
+      '個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。',
     parentId: 'tag-geometry-optimization-structure',
     prerequisiteTagIds: ['tag-basic-convex-optimization'],
     outcomeIds: ['outcome-optimize-by-lagrangian-relaxation'],
@@ -5081,7 +5179,7 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     recall: ['Lagrangian relaxation', 'Aliens trick', 'Aliens DP', 'ラグランジュ緩和'],
     object: ['cardinality constraint', 'penalty λ', 'optimization oracle'],
     trigger: ['ちょうどK個', '個数制約を外す'],
-    invariant: ['選択数の単調性', 'dual bound', 'tie break'],
+    invariant: ['離散凸性', '双対ギャップなし', '選択数の単調性', 'dual bound', 'tie break'],
     goal: ['制約付き最適値'],
     priority: 93,
   },
@@ -5706,6 +5804,12 @@ const refinedLegacyTagSeeds = TAG_SEEDS.filter((seed) => !RETIRED_COARSE_TAG_IDS
 );
 
 const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly string[]>> = {
+  'tag-conway-number-games': ['abc229-h', 'abc265-ex'],
+  'tag-cyclic-minimax-game': ['abc261-ex', 'abc413-f'],
+  'tag-heavy-light-recursive-dp': ['abc311-ex'],
+  'tag-stern-brocot-ancestry': ['abc273-ex'],
+  'tag-binary-tree-ancestor-matching': ['abc254-ex'],
+  'tag-bitwise-minimax-partition': ['abc281-f'],
   'tag-tree-model-structure': ['abc220-f', 'abc239-e'],
   'tag-number-theory-structure': ['abc222-g', 'abc254-f'],
   'tag-combinatorics-algebra-structure': ['abc230-h', 'abc276-ex'],
@@ -5718,8 +5822,8 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-amortized-monotone-progress': ['abc217-e', 'abc256-ex'],
   'tag-small-to-large': ['abc324-g', 'abc329-f'],
   'tag-threshold-heavy-light': ['abc219-g', 'abc335-f'],
-  'tag-heavy-path-tree-dp': ['abc269-ex', 'abc311-ex'],
-  'tag-subset-bitmask-dp': ['abc219-e', 'abc301-e'],
+  'tag-heavy-path-tree-dp': ['abc269-ex'],
+  'tag-subset-bitmask-dp': ['abc232-f', 'abc301-e'],
   'tag-subset-zeta-mobius-transform': ['abc295-ex', 'abc349-f'],
   'tag-subset-convolution': ['abc294-ex'],
   'tag-directional-grid-effect-scan': ['abc317-e'],
@@ -5730,7 +5834,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-functional-graph-decomposition': ['abc357-e', 'abc387-f'],
   'tag-binary-lifting': ['abc310-g', 'abc438-e'],
   'tag-dsu-components': ['abc235-e', 'abc408-e'],
-  'tag-potential-dsu': ['abc280-f', 'abc466-g'],
+  'tag-potential-dsu': ['abc328-f', 'abc466-g'],
   'tag-rooted-tree-aggregation': ['abc239-e', 'abc394-f'],
   'tag-rerooting': ['abc220-f', 'abc223-g'],
   'tag-laminar-interval-containment-tree': ['abc405-f'],
@@ -5774,7 +5878,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-bezout-diophantine': ['abc271-ex', 'abc459-g'],
   'tag-gcd-structure': ['abc254-f', 'abc438-g'],
   'tag-numerical-semigroup': ['abc388-f'],
-  'tag-rational-approximation': ['abc273-ex', 'abc408-g'],
+  'tag-rational-approximation': ['abc333-g', 'abc408-g'],
   'tag-cyclic-exponent-counting': ['abc212-g', 'abc335-g'],
   'tag-multiplicative-order': ['abc222-g', 'abc335-g'],
   'tag-finite-field-frobenius': ['abc251-ex'],
@@ -5834,8 +5938,8 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-graph-potential-propagation': ['abc352-f', 'abc396-e'],
   'tag-difference-constraints': ['abc216-g', 'abc404-g'],
   'tag-kruskal-threshold-sweep': ['abc235-e', 'abc250-ex', 'abc301-ex', 'abc383-e'],
-  'tag-path-matching-contraction': ['abc464-g'],
-  'tag-eventual-unbounded-knapsack': ['abc415-g'],
+  'tag-path-matching-contraction': ['abc464-g', 'abc218-h'],
+  'tag-eventual-unbounded-knapsack': ['abc415-g', 'abc310-ex'],
   'tag-backtracking-search': ['abc284-e', 'abc419-g'],
 };
 
@@ -5943,7 +6047,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-classify-game-states':
     '後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。',
   'outcome-evaluate-adversarial-game-value':
-    '手番ごとの最大化・最小化を定義し、得点差・手数・partisan局面値を後続状態から評価できる。',
+    '有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う。',
   'outcome-factor-and-accelerate-transitions':
     '高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる。',
   'outcome-accelerate-fixed-linear-transition':
@@ -5961,7 +6065,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-maintain-connectivity-components':
     '静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる。',
   'outcome-maintain-potential-differences':
-    '差分辺を累積するグラフ探索、またはDSUの親辺にpotential差を持たせ、同一成分内の頂点間差と矛盾を判定できる。',
+    'DSUの親辺にpotential差を持たせ、経路圧縮時の差の累積と根の併合方向に応じた符号を導出し、オンラインの差制約追加と頂点間差・矛盾のqueryを処理できる。',
   'outcome-augment-components-with-metadata':
     '成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。',
   'outcome-color-and-classify-bipartite-components':
@@ -6238,6 +6342,11 @@ export const NON_PRIMARY_OUTCOME_IDS = FINAL_TAXONOMY_OUTCOMES.filter((outcome) 
  * reports it once another exercise appears.
  */
 export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
+  'outcome-accelerate-tree-dp-by-heavy-path',
+  'outcome-pass-resource-dp-through-heavy-recursion',
+  'outcome-traverse-stern-brocot-ancestors',
+  'outcome-match-binary-tree-ancestors',
+  'outcome-minimize-maximum-xor-by-bit-partition',
   'outcome-answer-idempotent-range-query',
   'outcome-precompute-directional-grid-effects',
   'outcome-build-laminar-interval-containment-tree',
@@ -6270,9 +6379,7 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-maintain-order-through-crossing-events',
   'outcome-optimize-ratio-by-parametric-search',
   'outcome-optimize-mask-by-bitwise-feasibility',
-  'outcome-optimize-path-matching-by-contraction',
   'outcome-optimize-weighted-matroid-basis',
-  'outcome-stabilize-unbounded-knapsack-by-best-density',
   'outcome-prune-range-actions-by-node-invariant',
   'outcome-recur-by-edge-deletion-contraction',
   'outcome-represent-convex-intersection-by-halfplanes',
@@ -6290,6 +6397,11 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-shift-polynomial-by-factorial-convolution',
 ];
 export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
+  'unit-heavy-path-tree-dp',
+  'unit-heavy-light-recursive-dp',
+  'unit-stern-brocot-ancestry',
+  'unit-binary-tree-ancestor-matching',
+  'unit-bitwise-minimax-partition',
   'unit-additive-tree-metric-reconstruction',
   'unit-directional-grid-effect-scan',
   'unit-laminar-interval-containment-tree',
@@ -6309,8 +6421,6 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-fractional-parametric-search',
   'unit-gaussian-integers-two-squares',
   'unit-min-weight-general-perfect-matching',
-  'unit-path-matching-contraction',
-  'unit-eventual-unbounded-knapsack',
   'unit-half-plane-constraints',
   'unit-heavy-light-decomposition',
   'unit-idempotent-overlap-range-query',
@@ -6342,6 +6452,11 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-weighted-bipartite-matching',
 ];
 export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
+  'tag-heavy-path-tree-dp',
+  'tag-heavy-light-recursive-dp',
+  'tag-stern-brocot-ancestry',
+  'tag-binary-tree-ancestor-matching',
+  'tag-bitwise-minimax-partition',
   'tag-additive-tree-metric-reconstruction',
   'tag-directional-grid-effect-scan',
   'tag-laminar-interval-containment-tree',
@@ -6361,8 +6476,6 @@ export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-fractional-parametric-search',
   'tag-gaussian-integers-two-squares',
   'tag-min-weight-general-perfect-matching',
-  'tag-path-matching-contraction',
-  'tag-eventual-unbounded-knapsack',
   'tag-half-plane-constraints',
   'tag-heavy-light-decomposition',
   'tag-idempotent-overlap-range-query',
@@ -7629,6 +7742,56 @@ interface OutcomeRefinementGroup {
  */
 const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   {
+    from: 'outcome-evaluate-adversarial-game-value',
+    to: 'outcome-add-conway-number-games',
+    problemIds: ['abc229-h', 'abc265-ex'],
+  },
+  {
+    from: 'outcome-evaluate-adversarial-game-value',
+    to: 'outcome-solve-cyclic-minimax-game',
+    problemIds: ['abc261-ex', 'abc413-f'],
+  },
+  {
+    from: 'outcome-approximate-rational-by-euclid',
+    to: 'outcome-traverse-stern-brocot-ancestors',
+    problemIds: ['abc273-ex'],
+  },
+  {
+    from: 'outcome-query-bitwise-order-with-trie',
+    to: 'outcome-match-binary-tree-ancestors',
+    problemIds: ['abc254-ex'],
+  },
+  {
+    from: 'outcome-query-bitwise-order-with-trie',
+    to: 'outcome-minimize-maximum-xor-by-bit-partition',
+    problemIds: ['abc281-f'],
+  },
+  {
+    from: 'outcome-enumerate-subset-state-space',
+    to: 'outcome-enumerate-bounded-candidates-or-cases',
+    problemIds: ['abc219-e'],
+  },
+  {
+    from: 'outcome-jump-deterministic-transition',
+    to: 'outcome-decompose-functional-graph',
+    problemIds: ['abc377-e'],
+  },
+  {
+    from: 'outcome-prove-greedy-order',
+    to: 'outcome-optimize-path-matching-by-contraction',
+    problemIds: ['abc218-h'],
+  },
+  {
+    from: 'outcome-prove-greedy-order',
+    to: 'outcome-stabilize-unbounded-knapsack-by-best-density',
+    problemIds: ['abc310-ex'],
+  },
+  {
+    from: 'outcome-bound-total-work',
+    to: 'outcome-pass-resource-dp-through-heavy-recursion',
+    problemIds: ['abc311-ex'],
+  },
+  {
     from: 'outcome-split-enumeration-space',
     to: 'outcome-find-orbit-hit-by-bsgs',
     problemIds: ['abc270-g'],
@@ -7651,7 +7814,7 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   {
     from: 'outcome-bound-total-work',
     to: 'outcome-accelerate-tree-dp-by-heavy-path',
-    problemIds: ['abc269-ex', 'abc311-ex'],
+    problemIds: ['abc269-ex'],
   },
   {
     from: 'outcome-bound-total-work',
@@ -8245,7 +8408,7 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   {
     from: 'outcome-maintain-potential-differences',
     to: 'outcome-propagate-static-graph-potentials',
-    problemIds: ['abc352-f'],
+    problemIds: ['abc280-f', 'abc352-f'],
   },
   {
     from: 'outcome-maintain-dynamic-order-statistics',

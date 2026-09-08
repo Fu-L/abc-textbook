@@ -13,8 +13,6 @@
     "potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
   "sourceRevisionIds": [
-    "source-abc280-editorial-5303-aea62deae9b25f1c4e4b148b805c4bf36522b9a2edc9a3e1d8ad4c9488e912b0",
-    "source-abc280-f-problem-47f71a8cdee8536d7a88cdb6ec9f45a36b4048b5445c952d60040e01ecc44ae9",
     "source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28",
     "source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58",
     "source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6",
@@ -35,7 +33,6 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/potential-dsu.md",
   "problemIds": [
-    "abc280-f",
     "abc328-f",
     "abc466-g"
   ],
@@ -48,20 +45,21 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。onlineに差分等式pot(a)-pot(b)=dを追加し整合性を判定するとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC280 F「Pay or Receive」について、roadを往復するとscore変化が符号反転するため、連結成分内でrootから各頂点へのpotentialが一意なら任意pathのscore差も一意になる。",
+      "input": "ABC328 F「Good Set Query」について、accepted constraint X_a-X_b=dは頂点a,b間のpotential差を固定するedgeであり、同じconnected component内の任意2頂点差は既存constraintから一意に決まる。",
       "procedure": [
-        "観察: roadを往復するとscore変化が符号反転するため、連結成分内でrootから各頂点へのpotentialが一意なら任意pathのscore差も一意になる。",
-        "観察: 同じ頂点へ異なるscoreで到達できるなら差を持つclosed walkがあり、正になる向きで何度も回ってscoreを無限に増やせる。",
-        "着眼: consistent componentでは任意のx→y walk scoreはpot[y]-pot[x]で、closed walk scoreは全て0になる。",
-        "着眼: 不整合edgeが1本でもあるcomponentでは非零closed walkを両方向のうち有利な向きに反復でき、同componentの任意x,y queryがinfになる。",
-        "方針: 各componentをDFSし、edge A→Bでpot[B]=pot[A]+Cを割り当て、既割当てとの矛盾があればcomponentをunboundedと印付ける。（連結性・有限時のscore差・非零cycleの有無を一度の前処理で得て、queryを定数時間で分類できる。）",
-        "接続: 未訪問vertexごとにcomponent idとpot=0を置き、(u,v,+c)をDFS緩和する。pot[v]≠pot[u]+cを見つけたcomponentをbadにする。queryはcomponent不同ならnan、badならinf、それ以外はpot[y]-pot[x]。"
+        "観察: accepted constraint X_a-X_b=dは頂点a,b間のpotential差を固定するedgeであり、同じconnected component内の任意2頂点差は既存constraintから一意に決まる。",
+        "観察: a,bが別componentなら両componentの絶対offsetは自由なので、新しいdは常に矛盾なく両者を接続できる。",
+        "着眼: find時にparent pathの差も加算して圧縮すれば、pot[v]=X_v-X_rootを取得でき、同rootならX_a-X_b=pot[a]-pot[b]である。",
+        "着眼: 別rootをmergeするときはconstraint式から新しいroot間potentialを逆算し、union by sizeで向きを反転する場合はその符号も反転する。",
+        "方針: rootからのpotential差を持つweighted Union-Findで、各queryの既知差判定とconstraint unionを行う。（通常DSUの連結性に数値差を追加し、Q≤2×10^5をほぼ定数償却で順にsimulationできる。）",
+        "接続: weighted DSUをN頂点で初期化する。query(a,b,d)ごとにfindして、rootが同じならpot[a]-pot[b]==dのときだけindexをanswerへ追加する。rootが異なるなら常にindexを追加し、X_a-X_b=dを満たすroot間差を設定してsizeの小さいrootを大きいrootへmergeする。最後にaccepted indexを順に出力する。"
       ],
       "executionTarget": null,
-      "expectedResult": "差分辺を累積するグラフ探索、またはDSUの親辺にpotential差を持たせ、同一成分内の頂点間差と矛盾を判定できる。",
+      "expectedResult": "DSUの親辺にpotential差を持たせ、経路圧縮時の差の累積と根の併合方向に応じた符号を導出し、オンラインの差制約追加と頂点間差・矛盾のqueryを処理できる。",
       "verificationStatus": "not_applicable",
       "learningUnitRole": "guided_outcome"
     }
@@ -80,22 +78,22 @@
         "unit-dsu-components",
         "unit-graph-potential-propagation"
       ],
-      "attainmentCondition": "学習成果「差分辺を累積するグラフ探索、またはDSUの親辺にpotential差を持たせ、同一成分内の頂点間差と矛盾を判定できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "attainmentCondition": "学習成果「DSUの親辺にpotential差を持たせ、経路圧縮時の差の累積と根の併合方向に応じた符号を導出し、オンラインの差制約追加と頂点間差・矛盾のqueryを処理できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
       "assessment": {
-        "method": "ABC328 F「Good Set Query」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「差分辺を累積するグラフ探索、またはDSUの親辺にpotential差を持たせ、同一成分内の頂点間差と矛盾を判定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+        "method": "ABC466 G「Segment Sum Constraints」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「DSUの親辺にpotential差を持たせ、経路圧縮時の差の累積と根の併合方向に応じた符号を導出し、オンラインの差制約追加と頂点間差・矛盾のqueryを処理できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
       },
       "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 入力順greedyで追加可能な差分constraint indexを、weighted DSUで整合性判定しながら求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 少数変数の区間和制約解数を、weighted DSUの独立化とbitwise carry vector DPで有限・0・Infinityまで判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
         "procedure": [
-          "対象技能が担う箇所: 入力順greedyで追加可能な差分constraint indexを、weighted DSUで整合性判定しながら求められる。",
-          "転移題材の解法接続: weighted DSUをN頂点で初期化する。query(a,b,d)ごとにfindして、rootが同じならpot[a]-pot[b]==dのときだけindexをanswerへ追加する。rootが異なるなら常にindexを追加し、X_a-X_b=dを満たすroot間差を設定してsizeの小さいrootを大きいrootへmergeする。最後にaccepted indexを順に出力する。",
+          "対象技能が担う箇所: 少数変数の区間和制約解数を、weighted DSUの独立化とbitwise carry vector DPで有限・0・Infinityまで判定できる。",
+          "転移題材の解法接続: 各Sから区間長を引き非負問題へ変換する。weighted DSUでB_{L-1},B_Rを差Sでunionし矛盾を検出、成分内隣接prefixから独立区間式を抽出する。carry vector DPをbit0..29で回し、各bitのN-bit maskからnext carryを更新する。",
           "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
           "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
           "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
           "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
         ],
-        "expectedResult": "差分辺を累積するグラフ探索、またはDSUの親辺にpotential差を持たせ、同一成分内の頂点間差と矛盾を判定できる。",
+        "expectedResult": "DSUの親辺にpotential差を持たせ、経路圧縮時の差の累積と根の併合方向に応じた符号を導出し、オンラインの差制約追加と頂点間差・矛盾のqueryを処理できる。",
         "verificationStatus": "pending"
       },
       "learningUnitRole": "outcome_attainment"
@@ -104,6 +102,6 @@
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 73,
-  "globalIndex": 172,
+  "globalIndex": 179,
   "orderReason": "DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。"
 }

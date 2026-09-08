@@ -3,7 +3,7 @@ title: "2-SAT・含意グラフ"
 description: "前提から2-SAT・含意グラフを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 170
+  order: 177
 ---
 
 # 2-SAT・含意グラフ
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 整数変数をthreshold命題列へ符号化し、単調性と二項制約をimplication graphへ張り、SCCから可否と充足割当を復元できる
 
 題材: [ABC277 Ex「Constrained Sums」](https://atcoder.jp/contests/abc277/tasks/abc277_h)
+
+選定理由: L≤X_A+X_Bは全整数tについて P_{A,t}∨P_{B,L-t+1}、X_A+X_B≤Rは ¬P_{A,t}∨¬P_{B,R-t+1} と同値になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。小範囲整数変数への大小・和不等式をboolean制約へ落としたいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -112,4 +116,4 @@ iごとにthreshold 0,…,M+1を用意し、端のunit clauseと単調clauseを�
 - [ABC277 H 公式解説](https://atcoder.jp/contests/abc277/editorial/5207)
 - [ABC277 H 公式問題文](https://atcoder.jp/contests/abc277/tasks/abc277_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-two-sat`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-two-sat`

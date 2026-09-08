@@ -14,10 +14,10 @@
   "sourceRevisionIds": [
     "source-abc218-editorial-2607-43364299e8c54da3ef94a47ec6ac5138474c324ae1a077ee7172a2a34595f6a1",
     "source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8",
-    "source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c",
-    "source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb",
-    "source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d",
-    "source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d"
+    "source-abc303-editorial-6444-5611246de28948f9c9a7b632b84c007be451b111f0e0f135a76d5e329d598ad1",
+    "source-abc303-g-problem-fbcaf504a69e006d352d0458cb7b4b758db0b7d6fce4cdda38956ce856ca348f",
+    "source-abc349-e-problem-d85b1428d634ff73f6e42fa7cec9d7e7d380c8a49707ceea3650eb6132304b14",
+    "source-abc349-editorial-9780-919791b6256f66739ac67ccbd469d346f11d403d464187d1024aa862d9bfa6e7"
   ],
   "tagIds": [
     "tag-game-value-dp"
@@ -35,12 +35,8 @@
   "docPath": "src/content/docs/learn/dynamic-programming/dp-game-value.md",
   "problemIds": [
     "abc218-g",
-    "abc229-h",
-    "abc261-ex",
-    "abc265-ex",
     "abc303-g",
-    "abc349-e",
-    "abc413-f"
+    "abc349-e"
   ],
   "examples": [
     {
@@ -51,20 +47,19 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。運要素がなく、双方が勝利を目的に最適行動し、state遷移がacyclicである。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC229 H「Advance or Eat」について、駒の前進は同じ列の盤面だけを変え、相手駒を食べる操作も選んだ一駒が属する列だけを変えるため、盤面は N 個の列ゲームの直和である。",
+      "input": "ABC349 E「Weighted Tic-Tac-Toe」について、盤面は各cellがwhite/red/blueの3状態で高々3^9通りしかない。手番は塗られたcell数のparityで決まり、終了していなければ現在playerは「一手先に自分が勝つstateがあるか」だけを選べばよい。",
       "procedure": [
-        "観察: 駒の前進は同じ列の盤面だけを変え、相手駒を食べる操作も選んだ一駒が属する列だけを変えるため、盤面は N 個の列ゲームの直和である。",
-        "観察: 白番と黒番では動かせる色と食べられる色が異なるので、遷移集合が手番に依存し、通常の不偏ゲームの Grundy 数は適用できない。",
-        "着眼: 状態 v の白手後継評価の最大値より大きく、黒手後継評価の最小値より小さい最も単純な dyadic rational を eval(v) とすると、正なら先手白が勝つ。",
-        "着眼: 白手と黒手が干渉しない場合は操作順を交換した共通状態を作れ、干渉する食べる・進める場合にも一方から他方への辺があるため、左後継評価は右後継評価より小さい。",
-        "方針: 一列の 3 の N 乗状態 DAG に白手・黒手の辺を張り、両者の後継評価の間にある最も単純な二進有理数を評価値として計算し、列評価の総和で勝敗を判定する。（このゲームでは全状態の左右後継評価が分離して数が定義でき、独立な列ゲームの和は評価値の加算に対応する。）",
-        "接続: 列状態を三進数で列挙した有限 partisan game DAG に Conway 型の数値評価を付け、入力各列の評価値を厳密な二進有理数として合計して符号を判定する。"
+        "観察: 盤面は各cellがwhite/red/blueの3状態で高々3^9通りしかない。手番は塗られたcell数のparityで決まり、終了していなければ現在playerは「一手先に自分が勝つstateがあるか」だけを選べばよい。",
+        "着眼: terminalで同色三目があればその色のplayerが勝ち、全埋まりならred取得weight和とblue取得weight和を比較する。非terminalでは一つでもcurrent player勝利となるchildがあれば勝ち、全childが相手勝利なら負ける。",
+        "方針: 盤面stateをmemo化したminimax再帰で勝者を判定する（全game treeの同一盤面を共有し、有限DAG上の勝敗を高々3^9×9遷移で解ける。）",
+        "接続: redMask,blueMaskまたはternary codeをstate keyにする。8本のwinning maskを検査し、full boardならmask別weight sumを比較する。未終了ではmove数偶数ならTakahashi、奇数ならAokiとして各empty cellを自色へ追加し再帰し、自分勝ちchildを見つけたらtrueをmemoする。初期stateのwinnerを出力する。"
       ],
       "executionTarget": null,
-      "expectedResult": "手番ごとの最大化・最小化を定義し、得点差・手数・partisan局面値を後続状態から評価できる。",
+      "expectedResult": "有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う。",
       "verificationStatus": "not_applicable",
       "learningUnitRole": "guided_outcome"
     }
@@ -80,22 +75,22 @@
         "prereq-abc-advanced-v1",
         "unit-dp-state-design"
       ],
-      "attainmentCondition": "学習成果「手番ごとの最大化・最小化を定義し、得点差・手数・partisan局面値を後続状態から評価できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "attainmentCondition": "学習成果「有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
       "assessment": {
-        "method": "ABC261 Ex「Game on Graph」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「手番ごとの最大化・最小化を定義し、得点差・手数・partisan局面値を後続状態から評価できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+        "method": "ABC303 G「Bags Game」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
       },
       "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 閉路を含む有向グラフ上の終了優先minimaxゲームについて、有限性と最適総重みを同時に求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 両者が最適に行動したときのTakahashiの利益XとAokiの利益Yの差X-Yを求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
         "procedure": [
-          "対象技能が担う箇所: 閉路を含む有向グラフ上の終了優先minimaxゲームについて、有限性と最適総重みを同時に求められる。",
-          "転移題材の解法接続: reachability game の retrograde analysis に、AND/OR 状態の確定規則と nonnegative minimax distance の Dijkstra ordering を組み合わせる。",
+          "対象技能が担う箇所: 両者が最適に行動したときのTakahashiの利益XとAokiの利益Yの差X-Yを求められる。",
+          "転移題材の解法接続: dp[i][j]を残存区間[j,j+i)から手番の人が得る最適得点差とする。三行動に対応する(k,Z)=(i-1,0),(max(i-B,0),A),(max(i-D,0),C)ごとに、配列S(k,l)+dp[k,l]の幅i-k+1のsliding minimumをdequeで求め、S(i,j)-Z-minを候補として最大を取る。答えはdp[N][0]。",
           "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
           "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
           "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
           "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
         ],
-        "expectedResult": "手番ごとの最大化・最小化を定義し、得点差・手数・partisan局面値を後続状態から評価できる。",
+        "expectedResult": "有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う。",
         "verificationStatus": "pending"
       },
       "learningUnitRole": "outcome_attainment"

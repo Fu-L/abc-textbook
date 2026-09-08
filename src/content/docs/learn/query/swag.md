@@ -3,7 +3,7 @@ title: "SWAG・two-stack queue aggregation"
 description: "前提からSWAG・two-stack queue aggregationを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 181
+  order: 188
 ---
 
 # SWAG・two-stack queue aggregation
@@ -41,6 +41,10 @@ queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってp
 ### 例 1 — queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってpush/pop/foldを償却O(1)で処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC456 F「Plan Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_f)
+
+選定理由: 隣り合う休日間を2日以上空けない条件は、現在日を休まない状態が直前休日状態からだけ遷移する式 dp0'=dp1 を与える。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。短い状態DPを多数の連続windowで再評価したいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -111,4 +115,4 @@ queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってp
 - [ABC456 F 公式解説](https://atcoder.jp/contests/abc456/editorial/19850)
 - [ABC456 F 公式問題文](https://atcoder.jp/contests/abc456/tasks/abc456_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-swag`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-swag`

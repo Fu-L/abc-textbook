@@ -3,7 +3,7 @@ title: "Robinson–Schensted対応・Young tableau"
 description: "前提からRobinson–Schensted対応・Young tableauを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 108
+  order: 113
 ---
 
 # Robinson–Schensted対応・Young tableau
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC378 G「Everlasting LIDS」](https://atcoder.jp/contests/abc378/tasks/abc378_g)
+
+選定理由: 末尾に n+0.5 を加えて長方形へなる挿入過程は、元 tableau で t_{i+1,A-1}<t_{i,A} という追加順序制約に翻訳できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。permutation の LIS/LDS を同時に固定して数えたいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -111,4 +115,4 @@ sidebar:
 - [ABC378 G 公式解説](https://atcoder.jp/contests/abc378/editorial/11283)
 - [ABC378 G 公式問題文](https://atcoder.jp/contests/abc378/tasks/abc378_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-rsk-young-tableaux`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-rsk-young-tableaux`

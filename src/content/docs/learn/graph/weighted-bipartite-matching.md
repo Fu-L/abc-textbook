@@ -3,7 +3,7 @@ title: "重み付き二部完全matching"
 description: "前提から重み付き二部完全matchingを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 201
+  order: 208
 ---
 
 # 重み付き二部完全matching
@@ -41,6 +41,10 @@ assignment matrixのdual potentialとtight edgeを保ち、Hungarian法または
 ### 例 1 — assignment matrixのdual potentialとtight edgeを保ち、Hungarian法または同値なmin-cost flowで完全matchingの重みを最適化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC373 G「No Cross Matching」](https://atcoder.jp/contests/abc373/tasks/abc373_g)
+
+選定理由: 交差点 X に対し |PaX|+|XQb|>|PaQb| と対称な不等式を足すと、交差辺の swap が距離和を改善する。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。幾何的な対応で交差二辺の付け替えが目的値を改善するとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -110,4 +114,4 @@ assignment matrixのdual potentialとtight edgeを保ち、Hungarian法または
 - [ABC373 G 公式解説](https://atcoder.jp/contests/abc373/editorial/11045)
 - [ABC373 G 公式問題文](https://atcoder.jp/contests/abc373/tasks/abc373_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-weighted-bipartite-matching`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-weighted-bipartite-matching`

@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC256 G「Black and White Stones」](https://atcoder.jp/contests/abc256/tasks/abc256_g)
 
+選定理由: 端点色を白=1、黒=0とすると遷移u→vの重みはC(D-1,k-u-v)で、範囲外の二項係数は0とする。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。局所配置数が隣接する少数状態だけで決まり、同じ遷移を長く反復する。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 全ての辺で白石数が等しくなる白黒配置総数を法998244353で求められる。
@@ -117,4 +121,4 @@ sidebar:
 - [ABC258 H 公式解説](https://atcoder.jp/contests/abc258/editorial/4214)
 - [ABC258 H 公式問題文](https://atcoder.jp/contests/abc258/tasks/abc258_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-linear-recurrence`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-linear-recurrence`

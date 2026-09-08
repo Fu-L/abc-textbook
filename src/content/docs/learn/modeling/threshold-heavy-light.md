@@ -3,7 +3,7 @@ title: "平方根・閾値による軽重分類"
 description: "前提から平方根・閾値による軽重分類を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 143
+  order: 150
 ---
 
 # 平方根・閾値による軽重分類
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC219 G「Propagation」](https://atcoder.jp/contests/abc219/tasks/abc219_g)
+
+選定理由: 頂点 v を参照する直前に、v の明示値の時刻と v に隣接する全 heavy 頂点の看板時刻を比較すれば、未配布の代入を含む現在値を復元できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。グラフ query の一回の費用が中心頂点の次数に比例し、辺数の総和だけが小さいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ sidebar:
 - [ABC259 H 公式解説](https://atcoder.jp/contests/abc259/editorial/4269)
 - [ABC259 H 公式問題文](https://atcoder.jp/contests/abc259/tasks/abc259_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-threshold-heavy-light`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-threshold-heavy-light`

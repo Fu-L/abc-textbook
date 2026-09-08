@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC214 E「Packing Under Range Regulations」](https://atcoder.jp/contests/abc214/tasks/abc214_e)
 
+選定理由: ある割当てが現在選んだ区間より右端の遅い区間を先に使っていても、両者を交換すれば可否を悪化させない。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各要素へ区間内の相異なる整数を一つずつ割り当て、実行時刻を選べるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 巨大な整数区間上の一対一割当てを、イベントジャンプと最早締切優先の貪欲法で判定できる。
@@ -78,9 +82,9 @@ sidebar:
 
 ### 到達確認 1 — 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる
 
-転移題材: [ABC218 H「Red and Blue Lamps」](https://atcoder.jp/contests/abc218/tasks/abc218_h)
+転移題材: [ABC225 E「7」](https://atcoder.jp/contests/abc225/tasks/abc225_e)
 
-**課題**: ABC218 H「Red and Blue Lamps」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
+**課題**: ABC225 E「7」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
 
 **合格条件**: 手法名の列挙に留まらず、学習成果「局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
 
@@ -91,14 +95,14 @@ sidebar:
 
 **検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
 
-別題材では次の直接根拠を対象技能として切り出す: 隣接辺報酬の二色列を隣接非選択問題へ変形し、局所補正を保存する priority-queue 貪欲法を設計できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
+別題材では次の直接根拠を対象技能として切り出す: 原点からの可視性を偏角区間へ変換し、厳密比較を保った区間スケジューリングとして解ける。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
 
 根拠として照合する観点:
 
-- 隣接辺報酬の二色列を隣接非選択問題へ変形し、局所補正を保存する priority-queue 貪欲法を設計できる。
+- 原点からの可視性を偏角区間へ変換し、厳密比較を保った区間スケジューリングとして解ける。
 
-- 対象技能が担う箇所: 隣接辺報酬の二色列を隣接非選択問題へ変形し、局所補正を保存する priority-queue 貪欲法を設計できる。
-- 転移題材の解法接続: R を min(R,N-R) にし、B_1=A_1、B_N=A_{N-1}、内部 B_i=A_{i-1}+A_i を作る。最大 B_i を R 回取り出して答えへ加え、端なら二要素を、内部なら両隣を削除して補正値を置き、隣接 link と heap を更新する。
+- 対象技能が担う箇所: 原点からの可視性を偏角区間へ変換し、厳密比較を保った区間スケジューリングとして解ける。
+- 転移題材の解法接続: 浮動小数の角度を使わず端点方向を外積で比較して右端順にsortし、次の左端が直前に選んだ右端以上なら選択する。
 - 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
 - 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
 - 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
@@ -113,9 +117,9 @@ sidebar:
 
 - [ABC214 E 公式問題文](https://atcoder.jp/contests/abc214/tasks/abc214_e)
 - [ABC214 E 公式解説](https://atcoder.jp/contests/abc214/editorial/2431)
-- [ABC218 H 公式解説](https://atcoder.jp/contests/abc218/editorial/2602)
-- [ABC218 H 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_h)
 - [ABC225 E 公式問題文](https://atcoder.jp/contests/abc225/tasks/abc225_e)
+- [ABC225 F 公式解説](https://atcoder.jp/contests/abc225/editorial/2833)
 - [ABC225 E 公式解説](https://atcoder.jp/contests/abc225/editorial/2853)
+- [ABC225 F 公式問題文](https://atcoder.jp/contests/abc225/tasks/abc225_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-greedy-exchange`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-greedy-exchange`

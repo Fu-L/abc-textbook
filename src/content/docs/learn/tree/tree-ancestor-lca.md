@@ -3,7 +3,7 @@ title: "ancestor query・LCA"
 description: "前提からancestor query・LCAを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 130
+  order: 137
 ---
 
 # ancestor query・LCA
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — binary lifting等を前計算し、level ancestor・LCA・木距離をqueryとして取得できる
 
 題材: [ABC294 G「Distance Queries on a Tree」](https://atcoder.jp/contests/abc294/tasks/abc294_g)
+
+選定理由: d(u,v)=distRoot(u)+distRoot(v)-2distRoot(lca)により、動く重み情報と動かない祖先構造を分離できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。部分木へ共通に効く辺重みを動的更新する。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -115,4 +119,4 @@ DFSで各辺の進入・退出時刻とLCA用tourを作る。重み変更はBIT�
 - [ABC298 H 公式解説](https://atcoder.jp/contests/abc298/editorial/6218)
 - [ABC298 H 公式問題文](https://atcoder.jp/contests/abc298/tasks/abc298_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-tree-ancestor-lca`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-tree-ancestor-lca`

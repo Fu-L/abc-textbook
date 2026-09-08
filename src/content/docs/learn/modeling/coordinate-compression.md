@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC374 F「Shipping」](https://atcoder.jp/contests/abc374/tasks/abc374_f)
 
+選定理由: 注文 j を i より先に出しても不満度は改善しないので、到着順の prefix を順番に処理する最適解へ交換できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。時刻上限は巨大だが、最適行動が入力時刻と固定間隔からしか起きないとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 巨大な暦上の出荷計画を O(N^2) 個の必須候補日へ圧縮し、順序付き DP で最適化できる。
@@ -118,4 +122,4 @@ sidebar:
 - [ABC374 F 公式解説](https://atcoder.jp/contests/abc374/editorial/11095)
 - [ABC374 F 公式問題文](https://atcoder.jp/contests/abc374/tasks/abc374_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-coordinate-compression`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-coordinate-compression`

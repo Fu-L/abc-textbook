@@ -1,6 +1,6 @@
 {
   "id": "outcome-optimize-by-lagrangian-relaxation",
-  "statement": "個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "statement": "個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
   "prerequisiteOutcomeIds": [
     "outcome-optimize-univariate-convex-function"
   ],

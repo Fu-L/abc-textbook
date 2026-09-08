@@ -478,11 +478,12 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     ['prerequisiteCandidates', 1, 'same_tag', 'tag-dp-state-equivalence'],
   ]),
   'abc310-ex': decision(
-    'outcome-prove-greedy-order',
+    'outcome-stabilize-unbounded-knapsack-by-best-density',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-greedy-exchange-order'],
+      ['typicalTechniques', 0, 'problem_specific'],
+      ['typicalTechniques', 1, 'primary', 'tag-eventual-unbounded-knapsack'],
       ['typicalTechniques', 1, 'supporting', 'tag-knapsack-resource'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-greedy-exchange-order'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-eventual-unbounded-knapsack'],
       ['prerequisiteCandidates', 1, 'supporting', 'tag-knapsack-resource'],
     ],
     { 'tag-knapsack-resource': ['outcome-design-resource-dp'] },

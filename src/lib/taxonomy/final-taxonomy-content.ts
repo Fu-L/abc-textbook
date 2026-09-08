@@ -1,4 +1,10 @@
 export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[]>> = {
+  'tag-conway-number-games': ['Conway number', 'simplicity rule', '二進有理数'],
+  'tag-cyclic-minimax-game': ['retrograde analysis', 'AND OR game', 'minimax distance'],
+  'tag-heavy-light-recursive-dp': ['HLRecDP', 'heavy light recursive DP'],
+  'tag-stern-brocot-ancestry': ['Stern Brocot ancestor', 'mediant', '連分数経路'],
+  'tag-binary-tree-ancestor-matching': ['binary ancestor matching', '二進操作の木'],
+  'tag-bitwise-minimax-partition': ['XOR minimax', 'bitwise partition'],
   'tag-amortized-heavy-light': [
     '償却解析',
     '平方根分割',
@@ -86,7 +92,7 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
   'tag-flow-matching-cut': ['最大流', '最小カット', '二部マッチング', 'max flow'],
   'tag-functional-graph-doubling': ['写像のダブリング', 'functional graph', 'binary lifting'],
   'tag-game-grundy-dp': ['ゲームDP', '組合せゲーム', 'combinatorial game DP', 'Nim'],
-  'tag-game-value-dp': ['minimax', 'ミニマックス', '得点差ゲームDP', 'partisan game'],
+  'tag-game-value-dp': ['minimax', 'ミニマックス', '得点差ゲームDP'],
   'tag-grid-table-dp': ['グリッドDP', '二次元DP', 'grid DP', 'table DP'],
   'tag-gcd-diophantine': [
     '最大公約数',
@@ -286,7 +292,7 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
   'tag-amortized-monotone-progress': ['償却解析', 'amortized analysis', 'potential method'],
   'tag-small-to-large': ['small-to-large', 'DSU on Tree', 'sack technique'],
   'tag-threshold-heavy-light': ['平方根分割', '次数平方分割', 'sqrt decomposition'],
-  'tag-heavy-path-tree-dp': ['HLRecDP', 'heavy-path tree DP'],
+  'tag-heavy-path-tree-dp': ['heavy-path polynomial DP', 'heavy-path tree DP'],
   'tag-subset-bitmask-dp': ['部分集合DP', 'bitmask DP', 'subset DP'],
   'tag-subset-zeta-mobius-transform': [
     '高速ゼータ変換',
@@ -423,7 +429,7 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
     'primitive-root exponentization',
   ],
   'tag-multiplicative-order': ['乗法的位数', 'multiplicative order', 'repunits period'],
-  'tag-finite-field-frobenius': ['Frobenius写像', 'Frobenius automorphism', 'finite-field orbit'],
+  'tag-finite-field-frobenius': ['Frobenius恒等式', 'Freshman dream', '標数pの二項係数消滅'],
   'tag-divisor-mobius-inversion': [
     '約数Möbius反転',
     'divisor zeta transform',
@@ -685,7 +691,7 @@ export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, reado
   'tag-amortized-heavy-light': ['abc217-e', 'abc329-f', 'abc219-g'],
   'tag-bounded-enumeration': ['abc234-e', 'abc328-e', 'abc353-f', 'abc386-e', 'abc442-g'],
   'tag-bipartite-structure': ['abc451-f', 'abc398-e', 'abc398-g'],
-  'tag-binary-trie': ['abc425-g', 'abc254-ex'],
+  'tag-binary-trie': ['abc425-g', 'abc252-ex'],
   'tag-bitset-word-parallel': ['abc258-g', 'abc348-f'],
   'tag-cartesian-tree': ['abc275-ex', 'abc420-f'],
   'tag-carry-mixed-radix-dp': ['abc231-e', 'abc466-g'],
@@ -719,7 +725,7 @@ export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, reado
   'tag-flow-matching-cut': ['abc241-g', 'abc239-g', 'abc231-h'],
   'tag-functional-graph-doubling': ['abc296-e', 'abc212-f', 'abc310-g'],
   'tag-game-grundy-dp': ['abc354-e', 'abc380-f', 'abc297-g'],
-  'tag-game-value-dp': ['abc349-e', 'abc303-g', 'abc261-ex'],
+  'tag-game-value-dp': ['abc349-e', 'abc303-g', 'abc218-g'],
   'tag-grid-table-dp': ['abc227-f', 'abc311-e'],
   'tag-gcd-diophantine': ['abc254-f', 'abc340-f', 'abc315-g', 'abc388-f', 'abc306-g'],
   'tag-geometry-orientation-transform': ['abc223-e', 'abc351-e', 'abc220-g'],
@@ -1101,10 +1107,10 @@ export const FINAL_TAG_DIRECTED_RELATION_SEEDS: readonly FinalTagRelationSeed[] 
   },
   {
     sourceTagId: 'tag-finite-field-frobenius',
-    targetTagId: 'tag-finite-field-extension',
+    targetTagId: 'tag-modular-arithmetic',
     type: 'extension',
     rationale:
-      '拡大有限体の表現と四則演算へFrobenius写像・固定体・orbit長の構造を加え、反復区間の圧縮まで扱う。',
+      '法pの演算から多項式・シフト演算へ進み、標数pの二項係数消滅によって隣接和反復を飛ばす。拡大体の元の軌道を求める手法ではない。',
   },
   {
     sourceTagId: 'tag-fps-composition-power-projection',

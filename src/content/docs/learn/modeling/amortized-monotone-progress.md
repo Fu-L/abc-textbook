@@ -3,7 +3,7 @@ title: "単調進行による償却解析"
 description: "前提から単調進行による償却解析を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 127
+  order: 134
 ---
 
 # 単調進行による償却解析
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC217 E「Sorting Queries」](https://atcoder.jp/contests/abc217/tasks/abc217_e)
+
+選定理由: heap が空でなければその最小値が必ず列の先頭であり、heap が空になって初めて queue の先頭が列の先頭になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。一部の操作だけが既存要素を並べ替え、その後の追加要素は並べ替え済み部分の後ろに残るとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ sidebar:
 - [ABC256 H 公式解説](https://atcoder.jp/contests/abc256/editorial/4113)
 - [ABC256 H 公式問題文](https://atcoder.jp/contests/abc256/tasks/abc256_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-amortized-monotone-progress`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-amortized-monotone-progress`

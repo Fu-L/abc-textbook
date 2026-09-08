@@ -3,7 +3,7 @@ title: "再帰分割・分割統治"
 description: "前提から再帰分割・分割統治を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 132
+  order: 139
 ---
 
 # 再帰分割・分割統治
@@ -41,6 +41,10 @@ pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結
 ### 例 1 — pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる
 
 題材: [ABC282 Ex「Min + Sum」](https://atcoder.jp/contests/abc282/tasks/abc282_h)
+
+選定理由: l≤M≤rなら条件はPB[r]-PB[l-1]≤S-A_Mとなり、l固定ではrのvalid集合がprefix、r固定ではlのvalid集合がsuffixになる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。subarray costにminimum/maximumが含まれ、そのextremum位置を含む区間で値を固定できるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -123,4 +127,4 @@ RMQまたはmin Cartesian treeで各区間の最小位置Mを得る。leftが短
 - [ABC413 E 公式問題文](https://atcoder.jp/contests/abc413/tasks/abc413_e)
 - [ABC413 E 公式解説](https://atcoder.jp/contests/abc413/editorial/13406)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-recursive-divide-and-conquer`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-recursive-divide-and-conquer`

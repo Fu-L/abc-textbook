@@ -39,6 +39,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。grid 上の直線効果が blocker まで続き、方向種類が定数個のとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -89,6 +90,6 @@
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 72,
-  "globalIndex": 136,
+  "globalIndex": 143,
   "orderReason": "各行・各列を固定方向に一度ずつscanし、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する。"
 }

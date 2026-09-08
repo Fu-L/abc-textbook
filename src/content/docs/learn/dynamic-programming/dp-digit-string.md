@@ -30,8 +30,8 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [automaton上のDP・行列遷移](./automaton-dp.md)（標準順 158）— 有限pattern automatonの完全遷移を構成できるようになった後、位置・長さとの直積状態で受理列を数え、桁上限がある場合だけ桁DPと組み合わせる。
-2. [上限制約付き桁DP](./digit-dp.md)（標準順 165）— 接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。
+1. [automaton上のDP・行列遷移](./automaton-dp.md)（標準順 165）— 有限pattern automatonの完全遷移を構成できるようになった後、位置・長さとの直積状態で受理列を数え、桁上限がある場合だけ桁DPと組み合わせる。
+2. [上限制約付き桁DP](./digit-dp.md)（標準順 172）— 接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。
 
 ## 発動条件と見分け方
 
@@ -45,7 +45,7 @@ sidebar:
 
 未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
 
-- **automaton上のDP・行列遷移** — 直接到達点: 位置・長さとautomaton stateの積状態を作り、受理・禁止状態を除外して数え上げや最適化を行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: automaton上のDP・行列遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- **automaton上のDP・行列遷移** — 直接到達点: 位置・長さとautomaton stateの積状態を作り、禁止条件を満たす遷移を除き、処理終了時に目的言語の受理状態を集計する。禁止パターン回避では検出状態を除外し、全パターン充足では出現maskが全て立つ状態を受理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: automaton上のDP・行列遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 - **上限制約付き桁DP** — 直接到達点: 数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。近いが対象外: 上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
 **比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
@@ -95,4 +95,4 @@ sidebar:
 - [ABC288 H 公式解説](https://atcoder.jp/contests/abc288/editorial/5663)
 - [ABC288 H 公式問題文](https://atcoder.jp/contests/abc288/tasks/abc288_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-dp-digit-string`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-digit-string`

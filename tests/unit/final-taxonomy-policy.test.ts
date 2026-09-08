@@ -59,11 +59,35 @@ const loadedDecisionTable = loadedRecords.then((records) =>
 );
 
 describe('final taxonomy policy', () => {
+  it('classifies reviewed examples by the adopted proof and transition mechanism', async () => {
+    const table = await loadedDecisionTable;
+    const expected = {
+      'abc219-e': 'outcome-enumerate-bounded-candidates-or-cases',
+      'abc377-e': 'outcome-decompose-functional-graph',
+      'abc229-h': 'outcome-add-conway-number-games',
+      'abc261-ex': 'outcome-solve-cyclic-minimax-game',
+      'abc413-f': 'outcome-solve-cyclic-minimax-game',
+      'abc311-ex': 'outcome-pass-resource-dp-through-heavy-recursion',
+      'abc273-ex': 'outcome-traverse-stern-brocot-ancestors',
+      'abc280-f': 'outcome-propagate-static-graph-potentials',
+      'abc254-ex': 'outcome-match-binary-tree-ancestors',
+      'abc281-f': 'outcome-minimize-maximum-xor-by-bit-partition',
+      'abc218-h': 'outcome-optimize-path-matching-by-contraction',
+      'abc310-ex': 'outcome-stabilize-unbounded-knapsack-by-best-density',
+    };
+    for (const [problemId, outcomeId] of Object.entries(expected)) {
+      expect(
+        table.decisions.find((decision) => decision.problemId === problemId)?.primaryOutcomeId,
+        problemId,
+      ).toBe(outcomeId);
+    }
+  });
+
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
-    expect(FINAL_TAXONOMY_TAGS).toHaveLength(191);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(194);
-    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(214);
+    expect(FINAL_TAXONOMY_TAGS).toHaveLength(197);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(200);
+    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(220);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
       'tag-dp-state-transition',
@@ -269,6 +293,7 @@ describe('final taxonomy policy', () => {
       'tag-rooted-tree-aggregation',
     ]);
     expect(tagById.get('tag-heavy-path-tree-dp')?.prerequisiteTagIds).toEqual([
+      'tag-convolution',
       'tag-rooted-tree-aggregation',
     ]);
     expect(
@@ -276,7 +301,10 @@ describe('final taxonomy policy', () => {
     ).toContain('outcome-aggregate-rooted-tree');
     expect(unitById.get('unit-heavy-path-tree-dp')).toMatchObject({
       parentId: 'unit-tree-aggregation',
-      additionalPrerequisiteUnitIds: ['unit-rooted-tree-aggregation'],
+      additionalPrerequisiteUnitIds: [
+        'unit-polynomial-convolution',
+        'unit-rooted-tree-aggregation',
+      ],
     });
     expect(orderIndex.get('unit-rooted-tree-aggregation')).toBeLessThan(
       orderIndex.get('unit-heavy-path-tree-dp') ?? -1,

@@ -38,49 +38,54 @@ Euclidの商列またはStern–Brocot区間を辿り、分母制約下の最良
 
 ## ガイド例
 
+### 正当化と転用の境界
+
+- ABC333 Gでは目標値を挟む隣接分数を保ち、分母上限を越えない最大の連続移動回数を計算する。停止後は上下両候補の誤差を分母も含めて比較する。Stern–Brocotの祖先経路を求めることと、分母制約で切った境界候補を比較することを区別する。
+
 ### 例 1 — Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる
 
-題材: [ABC273 Ex「Inv(0,1)ving Insert(1,0)n」](https://atcoder.jp/contests/abc273/tasks/abc273_h)
+題材: [ABC333 G「Nearest Fraction」](https://atcoder.jp/contests/abc333/tasks/abc333_g)
+
+選定理由: Stern–Brocot木を分母≤Nで切った探索木で、r以下の最大値xとr以上の最小値yは、rの連分数path上にある。連分数の次係数を分母がNを超えない最大値まで進めたsemiconvergentと、その直前境界からx,yを得られ、最適解はこの二つのどちらかである。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。実数へ近い有理数を分母上限付きで求めたい。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
-- 全consecutive subarraysのmediant insertion minimum countsをcompressed fraction treeで合計できる。
+- 0≤p≤q≤Nかつgcd(p,q)=1の中から、rへの絶対誤差が最小でtie時に値が小さいp/qを求められる。
 
 #### 観察
 
-- 隣接pairsの和を挿入する操作はStern–Brocot treeのinterval nodeでmediantを生成する操作そのもので、追加可能な(p,q)はprimitive pair gcd(p,q)=1である。
-- あるStern–Brocot interval nodeの操作がsubarray Tに必要なのは、そのopen interval内にTのtarget fractionが一つ以上存在するときである。
+- 入力小数rを正確な既約分数R/Dとして扱う。D≤Nならr自身が誤差0の答えであり、D>Nなら分母N以下でrを左右から挟む最隣接分数のどちらかだけを比較すればよい。
 
 #### 候補を比較する
 
-- **採用**: 全targetsをfraction順にStern–Brocot intervalへ再帰分割し、各nodeを必要とするposition集合からsubarray数を数え、unary descentはまとめてskipする。 — 必要なtree部分だけを圧縮構築し、position setsをsmall-to-large mergeすることで全nodesの寄与を集約できる。
-- **棄却**: 各subarrayについて必要なfractionsを一つずつStern–Brocot tree上で辿り、操作集合のunion sizeを求める。 — subarrayがΘ(N^2)個あり、単一fractionのdepthも座標値に比例し得る。
+- **採用**: 連分数・Stern–Brocot木で分母上限内の左右隣接分数を求める — 分母≤Nの全既約分数を列挙せず、rへのpath上のconvergentとsemiconvergentから候補を二つに絞れる。
+- **棄却**: q=1,…,Nを全て試してpをround(rq)する — Nは10^10まであり、分母の線形走査は不可能である。
 
 #### 鍵となる着眼
 
-- node interval内targetのoriginal indicesをsorted set Pとすると、そのnodeが必要なsubarraysは全subarraysからPを一つも含まないindex-gap内subarraysを引いて求められる。
-- targetsが片側childにしか入らない連続区間では、fraction boundsへ同じendpointをk回加える形をbinary searchし、そのk nodesは同じposition set寄与として一括加算できる。
+- Stern–Brocot木を分母≤Nで切った探索木で、r以下の最大値xとr以上の最小値yは、rの連分数path上にある。連分数の次係数を分母がNを超えない最大値まで進めたsemiconvergentと、その直前境界からx,yを得られ、最適解はこの二つのどちらかである。
 
 #### アルゴリズムへ接続する
 
-mediant insertion costをcompressed Stern–Brocot trie上のancestor-union countへ写し、ordered-position set mergingで全consecutive subarraysへのnode寄与を合計する。
+小数文字列から整数Rと10の冪Dを作りgcdで約分する。Euclid法で連分数係数を順に得つつconvergentの分子分母を更新し、次の完全convergentが分母Nを超える箇所では係数をfloor((N-q_prevprev)/q_prev)までに切って左右候補を構成する。|R/D-p/q|を整数cross積で比較し、tieは小さいp/qを選ぶ。
 
 
 ## 転用するときの確認
 
-- **Stern–Brocot treeと連分数的skip**: coprime positive pairsがmediant operationsで生成され、naive tree depthが座標値まで伸びるとき。 適用: 各nodeでtargetsを左右へ再帰分割し、全targetsが同じ側にある最大連続step数はinterval boundsからまとめて進める。
-- **position集合のsmall-to-large merge**: 再帰tree各nodeでdescendant itemsのoriginal positions集合に依存する統計を求めたいとき。 適用: 小さいordered setを大きいsetへ挿入し、隣接gapの変化からnodeのsubarray coverageを維持する。
-- 定義がimpossible caseを0にする集計では、invalid elementを含むrangesを単に除外し、valid runsへ分割する。
-- 生成操作がmediantなら、各targetまでの共通操作列をStern–Brocot treeのancestor setsとして共有する。
-- implicit treeの長いunary chainは、一方へ分岐し続ける最大stepを数論式でまとめて進める。
+- **連分数とsemiconvergent**: 実数へ近い有理数を分母上限付きで求めたい。 適用: continued-fraction pathを辿り、最後の係数だけ分母制約まで切ってFareyの左右隣接候補を得る。
+- **有理数の厳密比較**: 入力が18桁小数で、近似誤差やtieを浮動小数点に任せられない。 適用: 誤差|Rq-Dp|/(Dq)同士をcross multiplicationし、分数大小も整数積で比較する。
+- 分母制限付き有理近似では、連分数の完全収束分数に加えて最後の中間収束分数を確認する。
+- Nがrの既約分母以上、最適が左右それぞれにある場合、誤差tie、分母上限がsemiconvergent途中に来る小例を全分母列挙と比較する。
 
 ## 到達確認
 
 ### 到達確認 1 — Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる
 
-転移題材: [ABC333 G「Nearest Fraction」](https://atcoder.jp/contests/abc333/tasks/abc333_g)
+転移題材: [ABC408 G「A/B < p/q < C/D」](https://atcoder.jp/contests/abc408/tasks/abc408_g)
 
-**課題**: ABC333 G「Nearest Fraction」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
+**課題**: ABC408 G「A/B < p/q < C/D」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
 
 **合格条件**: 手法名の列挙に留まらず、学習成果「Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
 
@@ -91,14 +96,14 @@ mediant insertion costをcompressed Stern–Brocot trie上のancestor-union coun
 
 **検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
 
-別題材では次の直接根拠を対象技能として切り出す: 0≤p≤q≤Nかつgcd(p,q)=1の中から、rへの絶対誤差が最小でtie時に値が小さいp/qを求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
+別題材では次の直接根拠を対象技能として切り出す: 最大 10^18 の二有理数の開区間に入る分母最小の有理数を、一 testcase あたり対数時間で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
 
 根拠として照合する観点:
 
-- 0≤p≤q≤Nかつgcd(p,q)=1の中から、rへの絶対誤差が最小でtie時に値が小さいp/qを求められる。
+- 最大 10^18 の二有理数の開区間に入る分母最小の有理数を、一 testcase あたり対数時間で求められる。
 
-- 対象技能が担う箇所: 0≤p≤q≤Nかつgcd(p,q)=1の中から、rへの絶対誤差が最小でtie時に値が小さいp/qを求められる。
-- 転移題材の解法接続: 小数文字列から整数Rと10の冪Dを作りgcdで約分する。Euclid法で連分数係数を順に得つつconvergentの分子分母を更新し、次の完全convergentが分母Nを超える箇所では係数をfloor((N-q_prevprev)/q_prev)までに切って左右候補を構成する。|R/D-p/q|を整数cross積で比較し、tieは小さいp/qを選ぶ。
+- 対象技能が担う箇所: 最大 10^18 の二有理数の開区間に入る分母最小の有理数を、一 testcase あたり対数時間で求められる。
+- 転移題材の解法接続: 各 testcase で n=floor(A/B) を取り両端から n を引く。正規化後の上端が1より大きければ pair=(1,1)、そうでなければ端点を逆数にして f(D/C,B/A) を再帰し pair をswapする。戻りながら p+=nq とし q を出力する。
 - 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
 - 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
 - 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
@@ -111,11 +116,11 @@ mediant insertion costをcompressed Stern–Brocot trie上のancestor-union coun
 
 ## 根拠
 
-- [ABC273 H 公式解説](https://atcoder.jp/contests/abc273/editorial/5032)
-- [ABC273 H 公式問題文](https://atcoder.jp/contests/abc273/tasks/abc273_h)
 - [ABC333 G 公式解説](https://atcoder.jp/contests/abc333/editorial/7937)
 - [ABC333 G 公式問題文](https://atcoder.jp/contests/abc333/tasks/abc333_g)
 - [ABC393 G 公式解説](https://atcoder.jp/contests/abc393/editorial/12192)
 - [ABC393 G 公式問題文](https://atcoder.jp/contests/abc393/tasks/abc393_g)
+- [ABC408 G 公式解説](https://atcoder.jp/contests/abc408/editorial/13160)
+- [ABC408 G 公式問題文](https://atcoder.jp/contests/abc408/tasks/abc408_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-rational-approximation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-rational-approximation`

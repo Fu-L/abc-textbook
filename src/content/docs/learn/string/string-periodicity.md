@@ -3,7 +3,7 @@ title: "文字列周期・primitive word"
 description: "前提から文字列周期・primitive wordを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 135
+  order: 142
 ---
 
 # 文字列周期・primitive word
@@ -41,6 +41,10 @@ prefix一致またはborderから最小periodを求め、文字列をprimitive r
 ### 例 1 — prefix一致またはborderから最小periodを求め、文字列をprimitive rootと反復回数へ正規化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC312 Ex「snukesnuke」](https://atcoder.jp/contests/abc312/tasks/abc312_h)
+
+選定理由: 周期 p が |S| を割り、S[j]=S[j−p] を満たす最小 p を Z 値から選べば、prefix 長 p が一意な primitive root になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。文字列の任意回反復同士の等価性・衝突を扱うとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -112,4 +116,4 @@ prefix一致またはborderから最小periodを求め、文字列をprimitive r
 - [ABC312 H 公式解説](https://atcoder.jp/contests/abc312/editorial/6837)
 - [ABC312 H 公式問題文](https://atcoder.jp/contests/abc312/tasks/abc312_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-string-periodicity`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-string-periodicity`

@@ -3,7 +3,7 @@ title: "subset zeta・Möbius変換"
 description: "前提からsubset zeta・Möbius変換を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 176
+  order: 183
 ---
 
 # subset zeta・Möbius変換
@@ -30,7 +30,7 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [subset convolution](./subset-convolution.md)（標準順 200）— 畳み込み・相互相関・subset zeta・Möbius変換で得た考え方と実装を再利用し、subset convolutionの発動条件・正当化・境界を重複なく学ぶ。
+1. [subset convolution](./subset-convolution.md)（標準順 207）— 畳み込み・相互相関・subset zeta・Möbius変換で得た考え方と実装を再利用し、subset convolutionの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -47,6 +47,10 @@ Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転�
 ### 例 1 — Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC295 Ex「E or m」](https://atcoder.jp/contests/abc295/tasks/abc295_h)
+
+選定理由: 左から最初に新しい連結が止まる0を境界にすると、prefix全1＋残りfrontier部分集合という互いに重ならない遷移分類になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。幅が小さい格子を行単位で処理し、将来に影響する境界だけを保持する。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -152,4 +156,4 @@ Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転�
 - [ABC349 F 公式解説](https://atcoder.jp/contests/abc349/editorial/9771)
 - [ABC349 F 公式問題文](https://atcoder.jp/contests/abc349/tasks/abc349_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-subset-transforms`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-subset-transforms`

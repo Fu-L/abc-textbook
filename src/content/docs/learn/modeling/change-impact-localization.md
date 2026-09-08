@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC218 F「Blocked Roads」](https://atcoder.jp/contests/abc218/tasks/abc218_f)
 
+選定理由: 元の最短距離を d とすると、辺削除後の距離は d 以上である。一方 e∉P なら長さ d の P が残るので d 以下でもあり、両方向の不等式から答えは d と決まる。再探索候補は |P|≤N-1 本だけである。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。要素を一つ除いた各ケースを問われ、元の最適解が残るケースを判別できるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 一本の最短路を witness として削除の影響範囲を路上の高々 N-1 辺へ絞り、全辺の削除後距離を O(N(N+M)) で求められる。
@@ -117,4 +121,4 @@ sidebar:
 - [ABC279 E 公式問題文](https://atcoder.jp/contests/abc279/tasks/abc279_e)
 - [ABC279 E 公式解説](https://atcoder.jp/contests/abc279/editorial/5289)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-change-impact-localization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-change-impact-localization`

@@ -30,13 +30,13 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [有限関数・作用の合成](./finite-function-composition.md)（標準順 127）— 小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-2. [区間monoid要約](./range-monoid-aggregation.md)（標準順 145）— queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-3. [冪等演算のoverlap range query・Sparse Table](./idempotent-overlap-range-query.md)（標準順 147）— 区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ。
-4. [Segment Treeのcanonical区間分解](./segment-tree-canonical-decomposition.md)（標準順 155）— 区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。
-5. [動的・implicit Segment Tree](./dynamic-segment-tree.md)（標準順 167）— 区間monoid要約で得た考え方と実装を再利用し、動的・implicit Segment Treeの発動条件・正当化・境界を重複なく学ぶ。
-6. [静的sorted range index・Merge Sort Tree](./static-sorted-range-index.md)（標準順 176）— Segment Treeのcanonical区間分解で得た考え方と実装を再利用し、静的sorted range index・Merge Sort Treeの発動条件・正当化・境界を重複なく学ぶ。
-7. [SWAG・two-stack queue aggregation](./swag.md)（標準順 182）— 区間monoid要約で得た考え方と実装を再利用し、SWAG・two-stack queue aggregationの発動条件・正当化・境界を重複なく学ぶ。
+1. [有限関数・作用の合成](./finite-function-composition.md)（標準順 134）— 小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+2. [区間monoid要約](./range-monoid-aggregation.md)（標準順 152）— queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+3. [冪等演算のoverlap range query・Sparse Table](./idempotent-overlap-range-query.md)（標準順 154）— 区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ。
+4. [Segment Treeのcanonical区間分解](./segment-tree-canonical-decomposition.md)（標準順 162）— 区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。
+5. [動的・implicit Segment Tree](./dynamic-segment-tree.md)（標準順 174）— 区間monoid要約で得た考え方と実装を再利用し、動的・implicit Segment Treeの発動条件・正当化・境界を重複なく学ぶ。
+6. [静的sorted range index・Merge Sort Tree](./static-sorted-range-index.md)（標準順 183）— Segment Treeのcanonical区間分解で得た考え方と実装を再利用し、静的sorted range index・Merge Sort Treeの発動条件・正当化・境界を重複なく学ぶ。
+7. [SWAG・two-stack queue aggregation](./swag.md)（標準順 189）— 区間monoid要約で得た考え方と実装を再利用し、SWAG・two-stack queue aggregationの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -105,4 +105,4 @@ sidebar:
 - [ABC244 H 公式解説](https://atcoder.jp/contests/abc244/editorial/3602)
 - [ABC244 H 公式問題文](https://atcoder.jp/contests/abc244/tasks/abc244_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-monoid-segment-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-monoid-segment-tree`

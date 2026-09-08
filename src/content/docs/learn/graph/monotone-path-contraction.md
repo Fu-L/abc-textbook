@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC295 G「Minimum Reachable City」](https://atcoder.jp/contests/abc295/tasks/abc295_g)
 
+選定理由: 各SCCは元の有向木上の連結部分木で、xから到達できる最小番号はx所属SCCの最上位頂点になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。辺追加でSCCが分裂せず併合だけする。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 辺追加後に各都市から到達可能な最小番号を答えられる。
@@ -110,4 +114,4 @@ DSU各rootに成分最小頂点を持つ。追加クエリではv側成分から
 - [ABC295 G 公式解説](https://atcoder.jp/contests/abc295/editorial/6052)
 - [ABC295 G 公式問題文](https://atcoder.jp/contests/abc295/tasks/abc295_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-monotone-path-contraction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-monotone-path-contraction`

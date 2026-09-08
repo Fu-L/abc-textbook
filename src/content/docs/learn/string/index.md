@@ -36,9 +36,9 @@ sidebar:
 4. [回文半径と左右対称区間を特定する](./palindrome-radius.md)（標準順 51）— 各中心の左右一致を半径としてまとめ、回文区間の判定と列挙へ利用する。
 5. [禁止・要求patternを有限状態へ圧縮する](./string-automata.md)（標準順 68）— 未来の禁止・要求pattern到達や複数pattern一致だけを決める進行段階・接尾辞状態を作り、遷移表上のDP・行列計算へ接続する。
 6. [run-length状態の動的遷移](./run-length-dynamics.md)（標準順 85）— 同値な連続要素をrunへ圧縮し、局所操作で変わるrunのsplit/mergeと長さだけを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-7. [圧縮・反復・再帰文字列へ問い合わせる](./recursive-compressed-string.md)（標準順 110）— 明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。
-8. [文字列周期・primitive word](./string-periodicity.md)（標準順 136）— Z algorithmによるprefix matchingで得た考え方と実装を再利用し、文字列周期・primitive wordの発動条件・正当化・境界を重複なく学ぶ。
-9. [Suffix Automatonで部分文字列集合を表す](./suffix-automaton.md)（標準順 143）— 有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。
+7. [圧縮・反復・再帰文字列へ問い合わせる](./recursive-compressed-string.md)（標準順 115）— 明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。
+8. [文字列周期・primitive word](./string-periodicity.md)（標準順 143）— Z algorithmによるprefix matchingで得た考え方と実装を再利用し、文字列周期・primitive wordの発動条件・正当化・境界を重複なく学ぶ。
+9. [Suffix Automatonで部分文字列集合を表す](./suffix-automaton.md)（標準順 150）— 有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。
 
 ## 発動条件と見分け方
 
@@ -55,6 +55,10 @@ sidebar:
 ### 例 1 — 一致・接頭辞・接尾辞・反復に必要な文字列状態を特定できる
 
 題材: [ABC213 F「Common Prefixes」](https://atcoder.jp/contests/abc213/tasks/abc213_f)
+
+選定理由: 必要なのは各 LCP 問合せの値ではなくそれらの総和なので、RMQ を繰り返す代わりに「区間最小値の総和」の問題として処理する。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数の接尾辞どうしの辞書順関係や共通接頭辞長をまとめて扱うとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -204,4 +208,4 @@ sidebar:
 - [ABC240 H 公式解説](https://atcoder.jp/contests/abc240/editorial/3428)
 - [ABC240 H 公式問題文](https://atcoder.jp/contests/abc240/tasks/abc240_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-chapter-string`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-chapter-string`

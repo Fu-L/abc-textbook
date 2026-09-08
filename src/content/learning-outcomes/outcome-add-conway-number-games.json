@@ -1,0 +1,13 @@
+{
+  "id": "outcome-add-conway-number-games",
+  "statement": "全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-evaluate-adversarial-game-value"
+  ],
+  "scopeIds": [
+    "abc229-h",
+    "abc265-ex",
+    "tag-conway-number-games",
+    "unit-conway-number-games"
+  ]
+}

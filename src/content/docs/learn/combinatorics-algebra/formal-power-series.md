@@ -3,7 +3,7 @@ title: "FPS演算・多点評価・合成を行う"
 description: "前提からFPS演算・多点評価・合成を行うを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 209
+  order: 215
 ---
 
 # FPS演算・多点評価・合成を行う
@@ -30,9 +30,9 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [多項式の多点評価・補間](./polynomial-multipoint-evaluation.md)（標準順 211）— 形式的べき級数の基本演算・再帰分割・分割統治で得た考え方と実装を再利用し、多項式の多点評価・補間の発動条件・正当化・境界を重複なく学ぶ。
-2. [Bostan–Mori・有理生成関数の係数抽出](./bostan-mori.md)（標準順 212）— 生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、Bostan–Mori・有理生成関数の係数抽出の発動条件・正当化・境界を重複なく学ぶ。
-3. [FPS合成・power projection](./fps-composition-power-projection.md)（標準順 213）— 形式的べき級数の基本演算で得た考え方と実装を再利用し、FPS合成・power projectionの発動条件・正当化・境界を重複なく学ぶ。
+1. [多項式の多点評価・補間](./polynomial-multipoint-evaluation.md)（標準順 217）— 形式的べき級数の基本演算・再帰分割・分割統治で得た考え方と実装を再利用し、多項式の多点評価・補間の発動条件・正当化・境界を重複なく学ぶ。
+2. [Bostan–Mori・有理生成関数の係数抽出](./bostan-mori.md)（標準順 218）— 生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、Bostan–Mori・有理生成関数の係数抽出の発動条件・正当化・境界を重複なく学ぶ。
+3. [FPS合成・power projection](./fps-composition-power-projection.md)（標準順 219）— 形式的べき級数の基本演算で得た考え方と実装を再利用し、FPS合成・power projectionの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -49,6 +49,10 @@ sidebar:
 ### 例 1 — 定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる
 
 題材: [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
+
+選定理由: 同色境界が正確に d 個の列数を p_d、指定した n 個以上の同色境界を満たす数を q_n とすると、q_n=Σ_{d≥n}binom(d,n)p_d であり、二項反転で p を得られる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。ちょうど d 個成立する対象は数えにくいが、指定した n 個が全て成立する対象なら数えやすいとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -160,4 +164,4 @@ sidebar:
 - [ABC289 H 公式解説](https://atcoder.jp/contests/abc289/editorial/5712)
 - [ABC289 H 公式問題文](https://atcoder.jp/contests/abc289/tasks/abc289_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-formal-power-series`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-formal-power-series`

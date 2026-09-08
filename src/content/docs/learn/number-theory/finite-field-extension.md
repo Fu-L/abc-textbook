@@ -3,7 +3,7 @@ title: "拡大有限体の表現と四則演算を構成する"
 description: "前提から拡大有限体の表現と四則演算を構成するを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 207
+  order: 214
 ---
 
 # 拡大有限体の表現と四則演算を構成する
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 基底と既約関係を定めて拡大有限体の元を一意に表し、標準形を保つ加減乗除を実装できる
 
 題材: [ABC274 Ex「XOR Sum of Arrays」](https://atcoder.jp/contests/abc274/tasks/abc274_h)
+
+選定理由: hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数のsubstring/virtual sequenceをlexicographically比較し、prefix equalityを高速判定できるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ XORを加法とするfinite fieldへrolling hashを移植し、linear hash compo
 - [ABC381 G 公式解説](https://atcoder.jp/contests/abc381/editorial/11378)
 - [ABC381 G 公式問題文](https://atcoder.jp/contests/abc381/tasks/abc381_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-finite-field-extension`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-finite-field-extension`

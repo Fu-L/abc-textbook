@@ -3,7 +3,7 @@ title: "FPS合成・power projection"
 description: "前提からFPS合成・power projectionを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 212
+  order: 218
 ---
 
 # FPS合成・power projection
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 多項式/FPSのcompositionとその転置であるpower projectionを、block分割・transposition・rational functionへ還元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC387 G「Prime Circuit」](https://atcoder.jp/contests/abc387/tasks/abc387_g)
+
+選定理由: rootに付く独立な子構造はx exp F、rootを含むprime cycleはその構造をp個環状に並べ、二方向の対称性で2除算する。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。labelled connected構造がroot周りのsetとcycle blockへ分解できるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ prime indicatorからGをN次まで構成する。F=G(x exp F)に対し、compos
 - [ABC439 G 公式解説](https://atcoder.jp/contests/abc439/editorial/14995)
 - [ABC439 G 公式問題文](https://atcoder.jp/contests/abc439/tasks/abc439_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-fps-composition-power-projection`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-fps-composition-power-projection`

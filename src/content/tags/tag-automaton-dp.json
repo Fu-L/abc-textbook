@@ -1,7 +1,7 @@
 {
   "id": "tag-automaton-dp",
   "name": "automaton上のDP・行列遷移",
-  "definition": "位置・長さとautomaton stateの積状態を作り、受理・禁止状態を除外して数え上げや最適化を行う。",
+  "definition": "位置・長さとautomaton stateの積状態を作り、禁止条件を満たす遷移を除き、処理終了時に目的言語の受理状態を集計する。禁止パターン回避では検出状態を除外し、全パターン充足では出現maskが全て立つ状態を受理する。",
   "parentId": "tag-dp-state-transition",
   "prerequisiteTagIds": [
     "tag-dp-state-equivalence",

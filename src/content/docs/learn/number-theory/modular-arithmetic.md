@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC228 E「Integer Sequence Fair」](https://atcoder.jp/contests/abc228/tasks/abc228_e)
 
+選定理由: M≡0 (mod P) のとき指数K^Nは正なので答えは0である。この場合に指数をP-1で簡約すると、余り0から誤って0^0を扱う可能性があるため先に分岐する。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。素数法Pの下で、Pと互いに素な底を巨大な指数へ累乗したいとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 巨大な指数を持つ剰余累乗について、底の可逆性を確認して周期へ落とし、例外を含めて計算できる。
@@ -119,4 +123,4 @@ M mod P=0なら0を出力する。そうでなければ二分累乗法で e=K^N 
 - [ABC228 E 公式問題文](https://atcoder.jp/contests/abc228/tasks/abc228_e)
 - [ABC228 E 公式解説](https://atcoder.jp/contests/abc228/editorial/2932)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-modular-arithmetic`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-modular-arithmetic`

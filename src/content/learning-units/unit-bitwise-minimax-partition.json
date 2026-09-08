@@ -1,0 +1,95 @@
+{
+  "id": "unit-bitwise-minimax-partition",
+  "kind": "section",
+  "title": "上位bitの支配関係によるXOR minimax",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "上位bitの支配関係によるXOR minimaxの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07",
+    "source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7"
+  ],
+  "tagIds": [
+    "tag-bitwise-minimax-partition"
+  ],
+  "ownedTagIds": [
+    "tag-bitwise-minimax-partition"
+  ],
+  "learningOutcomeIds": [
+    "outcome-minimize-maximum-xor-by-bit-partition"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-minimize-maximum-xor-by-bit-partition"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/bitwise-minimax-partition.md",
+  "problemIds": [
+    "abc281-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-minimize-maximum-xor-by-bit-partition",
+      "learningOutcomeIds": [
+        "outcome-minimize-maximum-xor-by-bit-partition"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。共通xとのXOR後のmin/maxを最適化し、値域が固定bit幅のとき。 問題全体への接続は併用技能を学んだ後に読む。",
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC281 F「Xor Minimization」について、最大値の最小化は最上位bitから辞書順に決まり、xのbit bは全a_iのbitを同時に反転する。",
+      "procedure": [
+        "観察: 最大値の最小化は最上位bitから辞書順に決まり、xのbit bは全a_iのbitを同時に反転する。",
+        "観察: 現在候補集合のbit bが一様ならx_bを合わせて出力bitを全て0にできるが、0/1両方なら最大値のbit bは必ず1になる。",
+        "着眼: bit bが混在するとanswerへ2^bが確定し、x_b=0ならinput bit1 group、x_b=1ならbit0 groupだけが最大候補として下位bit比較に残る。",
+        "着眼: 捨てたgroupは出力bit bが0なので、下位bitが何であっても高bit1のgroupを越えず、以後考慮不要である。",
+        "方針: bitを上位から再帰し、混在時はx_b=0/1の二案で高bit1となる片側groupだけを残して小さい再帰値を選ぶ。（各要素はbit trieの1経路に沿って処理され、未知xを全列挙せず最上位差で候補を分割できる。）",
+        "接続: solve(V,b)を定義する。b<0なら0、一方groupだけならそのgroupでsolve(b-1)、両groupがあれば2^b+min(solve(V0,b-1),solve(V1,b-1))を返す。初期V=A,b=29の値が答え。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-minimize-maximum-xor-by-bit-partition",
+      "learningOutcomeIds": [
+        "outcome-minimize-maximum-xor-by-bit-partition"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "assessment": {
+        "method": "ABC281 F「Xor Minimization」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
+          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
+          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
+          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
+          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+        ],
+        "expectedResult": "最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 90,
+  "globalIndex": 99,
+  "orderReason": "最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

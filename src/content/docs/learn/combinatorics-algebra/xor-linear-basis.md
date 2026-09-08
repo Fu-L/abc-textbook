@@ -3,7 +3,7 @@ title: "XOR線形基底"
 description: "前提からXOR線形基底を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 156
+  order: 163
 ---
 
 # XOR線形基底
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC223 H「Xor Query」](https://atcoder.jp/contests/abc223/tasks/abc223_h)
+
+選定理由: 右端 r のprefixから、各suffixのspanが変化する添字だけを残すと、その集合は全prefixのspanの基底であり、添字が l 以上のものだけで span(A_l,…,A_r) を生成できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。部分集合XORの実現可能性を問われ、値のbit幅が小さく固定されているとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -116,4 +120,4 @@ sidebar:
 - [ABC249 G 公式解説](https://atcoder.jp/contests/abc249/editorial/3791)
 - [ABC249 G 公式問題文](https://atcoder.jp/contests/abc249/tasks/abc249_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-xor-linear-basis`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-xor-linear-basis`

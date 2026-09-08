@@ -3,7 +3,7 @@ title: "線形方程式・rank"
 description: "前提から線形方程式・rankを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 138
+  order: 145
 ---
 
 # 線形方程式・rank
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC276 Ex「Construct a Matrix」](https://atcoder.jp/contests/abc276/tasks/abc276_h)
+
+選定理由: prefix xor p_{i,j}を使うとrectangle parityはp_{b,d}⊕p_{a-1,d}⊕p_{b,c-1}⊕p_{a-1,c-1}で、queryに現れるcorner以外は0に固定してよい。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。有限体の非零元が小さな巡回群をなし、積条件を加法条件へ変えられるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -118,4 +122,4 @@ e=1,2のqueryだけからcorner prefix変数と右辺(e=2なら1)を作り、F_2
 - [ABC323 G 公式解説](https://atcoder.jp/contests/abc323/editorial/7356)
 - [ABC323 G 公式問題文](https://atcoder.jp/contests/abc323/tasks/abc323_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-linear-system-rank`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-linear-system-rank`

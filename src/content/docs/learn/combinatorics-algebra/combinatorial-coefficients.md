@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC217 G「Groups」](https://atcoder.jp/contests/abc217/tasks/abc217_g)
 
+選定理由: 既存 j グループのうち禁止されるのは同余りの先行者が一人ずついる floor((i-1)/M) グループであり、合流可能数は j-floor((i-1)/M) である。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。ラベルなしグループへの分割を数え、新要素が singleton を作る場合と既存群へ入る場合に分けられるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 属性衝突を伴うラベルなし集合分割を、禁止グループ数が状態詳細に依存しない順序へ並べて二次元 DP に落とせる。
@@ -120,4 +124,4 @@ dp[i][j]=dp[i-1][j-1]+(j-floor((i-1)/M))dp[i-1][j] を法 998244353 で計算し
 - [ABC226 F 公式解説](https://atcoder.jp/contests/abc226/editorial/2878)
 - [ABC226 F 公式問題文](https://atcoder.jp/contests/abc226/tasks/abc226_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-combinatorial-coefficients`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-combinatorial-coefficients`

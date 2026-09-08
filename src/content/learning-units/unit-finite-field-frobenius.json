@@ -1,15 +1,15 @@
 {
   "id": "unit-finite-field-frobenius",
   "kind": "section",
-  "title": "有限体Frobenius軌道",
+  "title": "標数pのFrobenius恒等式による反復高速化",
   "parentId": "unit-chapter-number-theory",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "additionalPrerequisiteUnitIds": [
-    "unit-finite-field-extension"
+    "unit-modular-arithmetic"
   ],
   "excludedTopics": [
-    "有限体Frobenius軌道の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+    "標数pのFrobenius恒等式による反復高速化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
   "sourceRevisionIds": [
     "source-abc251-editorial-3954-5502e77b9db90e8223bf51820c90da77bdb341a71963b77421a1a563a6336004",
@@ -41,6 +41,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。法pのパスカル変換をpの冪単位で高速化したい。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -53,7 +54,7 @@
         "接続: N-Kを七進的な7の冪ジャンプへ分解し、各ジャンプでRLE列とその7^tシフト列を法7で加算する。区間境界を分割し、隣接する同値区間を再結合しながら、最後に先頭K項を出力する。"
       ],
       "executionTarget": null,
-      "expectedResult": "有限体上のFrobenius写像の軌道と固定体を用い、指数的な反復区間をorbit長ごとのrunへ圧縮する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "expectedResult": "標数pで中間の二項係数が消える恒等式 (1+x)^(p^t)=1+x^(p^t) をシフト演算へ適用し、隣接和反復をpの冪回ずつ飛ばす。圧縮列では各段のrun数の増加も評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
       "verificationStatus": "not_applicable",
       "learningUnitRole": "guided_outcome"
     }
@@ -65,14 +66,14 @@
         "outcome-decompose-finite-field-frobenius-orbits"
       ],
       "prerequisiteIds": [
-        "outcome-compute-in-finite-field-extension",
+        "outcome-compute-in-modular-arithmetic",
         "prereq-abc-advanced-v1",
-        "unit-finite-field-extension"
+        "unit-modular-arithmetic"
       ],
-      "attainmentCondition": "学習成果「有限体上のFrobenius写像の軌道と固定体を用い、指数的な反復区間をorbit長ごとのrunへ圧縮する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "attainmentCondition": "学習成果「標数pで中間の二項係数が消える恒等式 (1+x)^(p^t)=1+x^(p^t) をシフト演算へ適用し、隣接和反復をpの冪回ずつ飛ばす。圧縮列では各段のrun数の増加も評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
       "assessment": {
         "method": "ABC251 Ex「Fill Triangle」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「有限体上のFrobenius写像の軌道と固定体を用い、指数的な反復区間をorbit長ごとのrunへ圧縮する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+        "successCondition": "手法名の列挙に留まらず、学習成果「標数pで中間の二項係数が消える恒等式 (1+x)^(p^t)=1+x^(p^t) をシフト演算へ適用し、隣接和反復をpの冪回ずつ飛ばす。圧縮列では各段のrun数の増加も評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
       },
       "answer": {
         "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
@@ -83,7 +84,7 @@
           "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
           "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
         ],
-        "expectedResult": "有限体上のFrobenius写像の軌道と固定体を用い、指数的な反復区間をorbit長ごとのrunへ圧縮する。その発動条件、正当性、計算量を説明し、未知問へ実装できるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "expectedResult": "標数pで中間の二項係数が消える恒等式 (1+x)^(p^t)=1+x^(p^t) をシフト演算へ適用し、隣接和反復をpの冪回ずつ飛ばす。圧縮列では各段のrun数の増加も評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できるの適用可能範囲と破綻条件を反例付きで説明できる。",
         "verificationStatus": "pending"
       },
       "learningUnitRole": "outcome_attainment"
@@ -92,6 +93,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 97,
-  "globalIndex": 208,
-  "orderReason": "拡大有限体の表現と演算で得た考え方と実装を再利用し、有限体Frobenius軌道の発動条件・正当化・境界を重複なく学ぶ。"
+  "globalIndex": 110,
+  "orderReason": "法上の四則演算・高速累乗・逆元で得た考え方と実装を再利用し、標数pのFrobenius恒等式による反復高速化の発動条件・正当化・境界を重複なく学ぶ。"
 }

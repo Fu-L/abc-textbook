@@ -3,7 +3,7 @@ title: "DAGのtopological processing"
 description: "前提からDAGのtopological processingを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 114
+  order: 120
 ---
 
 # DAGのtopological processing
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC277 F「Sorting a Matrix」](https://atcoder.jp/contests/abc277/tasks/abc277_f)
+
+選定理由: 非零要素を持つ行はminの昇順に並べ、直前までのmax≤次のminなら行間の全比較を満たす。全0行は既知制約を持たない。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。row permutationとcolumn permutationが可換で、最終順序条件を行間・行内へ分けられるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -117,4 +121,4 @@ sidebar:
 - [ABC291 E 公式問題文](https://atcoder.jp/contests/abc291/tasks/abc291_e)
 - [ABC291 E 公式解説](https://atcoder.jp/contests/abc291/editorial/5839)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-dag-topological-processing`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dag-topological-processing`

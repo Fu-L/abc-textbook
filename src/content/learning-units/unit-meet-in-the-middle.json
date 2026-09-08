@@ -52,6 +52,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。N が40前後で全 subset は多いが、二分した各側の subset 情報を圧縮して結合できるとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -103,6 +104,6 @@
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 67,
-  "globalIndex": 128,
+  "globalIndex": 135,
   "orderReason": "探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC233 Ex「Manhattan Christmas Tree」](https://atcoder.jp/contests/abc233/tasks/abc233_h)
 
+選定理由: 長方形内点数は x≤u＋r の prefix 個数から x＜u−r の prefix 個数を引き、各 prefix を y 区間和で求められる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。二次元の |Δx|＋|Δy| 距離球を範囲数え上げへ変換したいとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 多数のマンハッタン K 近傍距離を、回転・矩形計数・並列二分探索で一括処理できる。
@@ -115,4 +119,4 @@ K 番目距離を単調な個数判定へ変え、回転座標の矩形問合せ
 - [ABC394 G 公式解説](https://atcoder.jp/contests/abc394/editorial/12282)
 - [ABC394 G 公式問題文](https://atcoder.jp/contests/abc394/tasks/abc394_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-parallel-binary-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-parallel-binary-search`

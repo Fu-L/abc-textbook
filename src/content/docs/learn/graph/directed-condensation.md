@@ -30,11 +30,11 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [DAGのtopological processing](./dag-topological-processing.md)（標準順 115）— 状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。
-2. [有向cycle検出・sink/source peeling](./directed-core-peeling.md)（標準順 123）— 三色DFSのrecursion stackまたは入次数・出次数零の反復削除により有向cycleを検出し、必要ならcycleへ到達するcoreと処理可能なDAG部分を分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-3. [SCC・縮約DAG・トポロジカル順序](./scc-condensation.md)（標準順 134）— DAGのtopological processingで得た考え方と実装を再利用し、SCC・縮約DAG・トポロジカル順序の発動条件・正当化・境界を重複なく学ぶ。
-4. [2-SAT・含意グラフ](./two-sat.md)（標準順 171）— SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、2-SAT・含意グラフの発動条件・正当化・境界を重複なく学ぶ。
-5. [有向walkの周期・cycle差分gcd](./directed-walk-periodicity.md)（標準順 189）— gcd不変量・差分構造・SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、有向walkの周期・cycle差分gcdの発動条件・正当化・境界を重複なく学ぶ。
+1. [DAGのtopological processing](./dag-topological-processing.md)（標準順 121）— 状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。
+2. [有向cycle検出・sink/source peeling](./directed-core-peeling.md)（標準順 129）— 三色DFSのrecursion stackまたは入次数・出次数零の反復削除により有向cycleを検出し、必要ならcycleへ到達するcoreと処理可能なDAG部分を分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+3. [SCC・縮約DAG・トポロジカル順序](./scc-condensation.md)（標準順 141）— DAGのtopological processingで得た考え方と実装を再利用し、SCC・縮約DAG・トポロジカル順序の発動条件・正当化・境界を重複なく学ぶ。
+4. [2-SAT・含意グラフ](./two-sat.md)（標準順 178）— SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、2-SAT・含意グラフの発動条件・正当化・境界を重複なく学ぶ。
+5. [有向walkの周期・cycle差分gcd](./directed-walk-periodicity.md)（標準順 196）— gcd不変量・差分構造・SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、有向walkの周期・cycle差分gcdの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -101,4 +101,4 @@ sidebar:
 - [ABC245 F 公式解説](https://atcoder.jp/contests/abc245/editorial/3652)
 - [ABC245 F 公式問題文](https://atcoder.jp/contests/abc245/tasks/abc245_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-directed-condensation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-directed-condensation`

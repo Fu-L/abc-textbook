@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC291 Ex「Balanced Tree」](https://atcoder.jp/contests/abc291/tasks/abc291_h)
 
+選定理由: 元木のx-yパスが重心を通らない組は同じ除去後成分内に限られるため、成分ごとの再帰結果を重心の子へ接続してよい。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。木を各段階で半分以下の連結成分へ再帰分割したい。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 二つの要求を満たす根付き木の親配列を構成できる。
@@ -115,4 +119,4 @@ sidebar:
 - [ABC453 F 公式解説](https://atcoder.jp/contests/abc453/editorial/18542)
 - [ABC453 F 公式問題文](https://atcoder.jp/contests/abc453/tasks/abc453_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-tree-balanced-separators`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-tree-balanced-separators`

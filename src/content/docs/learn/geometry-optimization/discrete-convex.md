@@ -30,12 +30,12 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [一次元凸・単峰最適化](./basic-convex-optimization.md)（標準順 122）— 差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-2. [分離凸・凹の単調限界値選択](./separable-convex-marginals.md)（標準順 154）— 離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。
-3. [slope trick](./slope-trick.md)（標準順 184）— 一次元凸・単峰最適化で得た考え方と実装を再利用し、slope trickの発動条件・正当化・境界を重複なく学ぶ。
-4. [Lagrangian relaxation・Aliens trick](./lagrangian-relaxation.md)（標準順 195）— 一次元凸・単峰最適化で得た考え方と実装を再利用し、Lagrangian relaxation・Aliens trickの発動条件・正当化・境界を重複なく学ぶ。
-5. [isotonic regression・PAV](./isotonic-regression.md)（標準順 196）— 一次元凸・単峰最適化で得た考え方と実装を再利用し、isotonic regression・PAVの発動条件・正当化・境界を重複なく学ぶ。
-6. [Monge・monotone minima最適化](./monge-optimization.md)（標準順 198）— DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge・monotone minima最適化の発動条件・正当化・境界を重複なく学ぶ。
+1. [一次元凸・単峰最適化](./basic-convex-optimization.md)（標準順 128）— 差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+2. [分離凸・凹の単調限界値選択](./separable-convex-marginals.md)（標準順 161）— 離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。
+3. [slope trick](./slope-trick.md)（標準順 191）— 一次元凸・単峰最適化で得た考え方と実装を再利用し、slope trickの発動条件・正当化・境界を重複なく学ぶ。
+4. [Lagrangian relaxation・Aliens trick](./lagrangian-relaxation.md)（標準順 202）— 一次元凸・単峰最適化で得た考え方と実装を再利用し、Lagrangian relaxation・Aliens trickの発動条件・正当化・境界を重複なく学ぶ。
+5. [isotonic regression・PAV](./isotonic-regression.md)（標準順 203）— 一次元凸・単峰最適化で得た考え方と実装を再利用し、isotonic regression・PAVの発動条件・正当化・境界を重複なく学ぶ。
+6. [Monge・monotone minima最適化](./monge-optimization.md)（標準順 205）— DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge・monotone minima最適化の発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -52,7 +52,7 @@ sidebar:
 - **一次元凸・単峰最適化** — 直接到達点: 差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 一次元凸・単峰最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 - **分離凸・凹の単調限界値選択** — 直接到達点: 分離凸費用または分離凹利益を単調な限界値列へ分解し、heap mergeか閾値別の個数・総和により必要な上位・下位K項を選べる。近いが対象外: 分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 - **slope trick** — 直接到達点: 区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **Lagrangian relaxation・Aliens trick** — 直接到達点: 個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+- **Lagrangian relaxation・Aliens trick** — 直接到達点: 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 - **isotonic regression・PAV** — 直接到達点: 単調制約付き凸最小化で違反する隣接blockをpoolし、block optimumが単調になるまでmergeする。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: isotonic regression・PAVの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 - **Monge・monotone minima最適化** — 直接到達点: quadrangle inequality/Monge性から各行の最適遷移位置が単調になることを示し、divide-and-conquerやSMAWKで最小値を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: Monge・monotone minima最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
@@ -103,4 +103,4 @@ sidebar:
 - [ABC224 G 公式解説](https://atcoder.jp/contests/abc224/editorial/2816)
 - [ABC224 G 公式問題文](https://atcoder.jp/contests/abc224/tasks/abc224_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-discrete-convex`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-discrete-convex`

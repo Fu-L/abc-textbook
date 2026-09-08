@@ -3,7 +3,7 @@ title: "Euler trail・circuit"
 description: "前提からEuler trail・circuitを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 150
+  order: 157
 ---
 
 # Euler trail・circuit
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC227 H「Eat Them All」](https://atcoder.jp/contests/abc227/tasks/abc227_h)
+
+選定理由: 辺eの通過回数x_eを多重辺数とみなすと、各頂点の次数は2A_vで全て偶数になる。正の多重辺のsupportが連結ならEuler閉路が存在し、その各出発がちょうど1缶を消費するので元の行動列へ戻せる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各頂点での訪問・出発回数が指定され、実際のwalkを構成する問題で、順序より辺の使用回数を先に決められるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -119,4 +123,4 @@ sidebar:
 - [ABC336 G 公式解説](https://atcoder.jp/contests/abc336/editorial/9060)
 - [ABC336 G 公式問題文](https://atcoder.jp/contests/abc336/tasks/abc336_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-euler-trail-circuit`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-euler-trail-circuit`

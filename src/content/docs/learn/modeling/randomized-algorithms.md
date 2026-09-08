@@ -30,7 +30,7 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [乱択代数fingerprint](./randomized-algebraic-fingerprint.md)（標準順 178）— 乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ。
+1. [乱択代数fingerprint](./randomized-algebraic-fingerprint.md)（標準順 185）— 乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ。
 
 ## 発動条件と見分け方
 
@@ -47,6 +47,10 @@ sidebar:
 ### 例 1 — 乱数で選ぶ対象と成功条件を定め、誤り確率を上から評価して必要な反復回数または決定的な事後検証を設計できる
 
 題材: [ABC272 G「Yet Another mod M」](https://atcoder.jp/contests/abc272/tasks/abc272_g)
+
+選定理由: candidateは推測だけで返さず、A_i mod Mのfrequencyが実際にN/2を超えるかO(N)で検証するためfalse positiveはない。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。未知のgood subsetが全体の半数超を占め、その中の少数sampleから答え候補を生成できるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -155,4 +159,4 @@ hidden majority congruence classからrandom pair samplingでmodulus divisorを�
 - [ABC422 E 公式問題文](https://atcoder.jp/contests/abc422/tasks/abc422_e)
 - [ABC422 E 公式解説](https://atcoder.jp/contests/abc422/editorial/13820)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-randomized-algorithms`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-randomized-algorithms`

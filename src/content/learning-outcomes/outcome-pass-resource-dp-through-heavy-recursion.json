@@ -1,0 +1,13 @@
+{
+  "id": "outcome-pass-resource-dp-through-heavy-recursion",
+  "statement": "外部の資源DP配列を受け取って部分木の選択を反映する再帰を設計し、max-plusの子DP併合を避ける。重い子は一回だけ呼び、軽い子の重複呼出しを部分木サイズの半減により評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-aggregate-rooted-tree",
+    "outcome-design-resource-dp"
+  ],
+  "scopeIds": [
+    "abc311-ex",
+    "tag-heavy-light-recursive-dp",
+    "unit-heavy-light-recursive-dp"
+  ]
+}

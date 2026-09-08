@@ -12,10 +12,10 @@
   "sourceRevisionIds": [
     "source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2",
     "source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028",
-    "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
-    "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70",
     "source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52",
-    "source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1"
+    "source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01",
+    "source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1",
+    "source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1"
   ],
   "tagIds": [
     "tag-greedy-exchange-order"
@@ -33,7 +33,6 @@
   "docPath": "src/content/docs/learn/modeling/greedy-exchange.md",
   "problemIds": [
     "abc214-e",
-    "abc218-h",
     "abc225-e",
     "abc225-f",
     "abc226-g",
@@ -58,7 +57,6 @@
     "abc304-ex",
     "abc305-ex",
     "abc308-f",
-    "abc310-ex",
     "abc312-f",
     "abc314-g",
     "abc318-f",
@@ -106,6 +104,7 @@
       "kind": "illustrative",
       "language": "日本語（考察手順）",
       "omissions": [
+        "ここでは次の局所的な観察から対象技能を導く。各要素へ区間内の相異なる整数を一つずつ割り当て、実行時刻を選べるとき。 問題全体への接続は併用技能を学んだ後に読む。",
         "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
       ],
       "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
@@ -135,14 +134,14 @@
       ],
       "attainmentCondition": "学習成果「局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
       "assessment": {
-        "method": "ABC218 H「Red and Blue Lamps」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "method": "ABC225 E「7」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
         "successCondition": "手法名の列挙に留まらず、学習成果「局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
       },
       "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 隣接辺報酬の二色列を隣接非選択問題へ変形し、局所補正を保存する priority-queue 貪欲法を設計できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 原点からの可視性を偏角区間へ変換し、厳密比較を保った区間スケジューリングとして解ける。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
         "procedure": [
-          "対象技能が担う箇所: 隣接辺報酬の二色列を隣接非選択問題へ変形し、局所補正を保存する priority-queue 貪欲法を設計できる。",
-          "転移題材の解法接続: R を min(R,N-R) にし、B_1=A_1、B_N=A_{N-1}、内部 B_i=A_{i-1}+A_i を作る。最大 B_i を R 回取り出して答えへ加え、端なら二要素を、内部なら両隣を削除して補正値を置き、隣接 link と heap を更新する。",
+          "対象技能が担う箇所: 原点からの可視性を偏角区間へ変換し、厳密比較を保った区間スケジューリングとして解ける。",
+          "転移題材の解法接続: 浮動小数の角度を使わず端点方向を外積で比較して右端順にsortし、次の左端が直前に選んだ右端以上なら選択する。",
           "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
           "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
           "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",

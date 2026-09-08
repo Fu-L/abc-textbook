@@ -95,4 +95,4 @@ sidebar:
 - [ABC221 E 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_e)
 - [ABC221 E 公式解説](https://atcoder.jp/contests/abc221/editorial/2718)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-modular-product-foundations`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-modular-product-foundations`

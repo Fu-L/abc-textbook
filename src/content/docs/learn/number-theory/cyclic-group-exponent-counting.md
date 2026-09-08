@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
 
+選定理由: an≡b (mod m) が n について解を持つのは gcd(m,a) が b を割るときに限る。したがって固定した a から到達できる b は m/gcd(m,a) 個であり、a の gcd ごとに寄与をまとめられる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。素数法の非零剰余に積と冪が現れるとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 素数法の冪到達可能性を原始根で一次合同式へ変換し、gcd ごとの個数を約数上で集計できる。
@@ -114,4 +118,4 @@ m の約数を降順に処理し、f(g)=m/g−Σ_{h:g|h,h>g}f(h) により gcd(m
 - [ABC335 G 公式解説](https://atcoder.jp/contests/abc335/editorial/9017)
 - [ABC335 G 公式問題文](https://atcoder.jp/contests/abc335/tasks/abc335_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-cyclic-group-exponent-counting`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-cyclic-group-exponent-counting`

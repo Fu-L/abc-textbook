@@ -3,7 +3,7 @@ title: "圧縮・反復・再帰文字列へ問い合わせる"
 description: "前提から圧縮・反復・再帰文字列へ問い合わせるを見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 109
+  order: 114
 ---
 
 # 圧縮・反復・再帰文字列へ問い合わせる
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 圧縮・反復・再帰または入れ子で定義された文字列を展開せず、block長・対応区切り・作用から照会・変換・評価できる
 
 題材: [ABC346 F「SSttrriinngg in StringString」](https://atcoder.jp/contests/abc346/tasks/abc346_f)
+
+選定理由: 現在absolute位置a以降で文字cのb回目出現は、S一周期内のc個数cnt_cでfull cyclesをまとめ、S+S内の出現位置またはposition vectorのlower_boundで残りを決められる。最早出現を選ぶgreedyは後続に最大の余地を残す。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。有限base stringの巨大反復上で、指定文字の多数回先の出現位置が欲しい。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -115,4 +119,4 @@ S内の各文字の出現positionを前計算し、TにS不在文字があれば
 - [ABC417 G 公式解説](https://atcoder.jp/contests/abc417/editorial/13580)
 - [ABC417 G 公式問題文](https://atcoder.jp/contests/abc417/tasks/abc417_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-recursive-compressed-string`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-recursive-compressed-string`

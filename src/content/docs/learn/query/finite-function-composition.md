@@ -3,7 +3,7 @@ title: "有限関数・作用の合成"
 description: "前提から有限関数・作用の合成を見抜き、方針へ接続して検証するための学習単位。"
 draft: true
 sidebar:
-  order: 126
+  order: 133
 ---
 
 # 有限関数・作用の合成
@@ -41,6 +41,10 @@ sidebar:
 ### 例 1 — 小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
 
 題材: [ABC261 E「Many Operations」](https://atcoder.jp/contests/abc261/tasks/abc261_e)
+
+選定理由: i 番目の手続きは操作 i だけでなく合成済みの操作 1,…,i を前回の X に再適用するため、prefix 関数そのものを保持する必要がある。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。AND・OR・XOR だけからなる操作列で、bit 間の桁上がりや依存がないとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -112,4 +116,4 @@ bitwise operation sequence を各 bit 上の四種類の unary Boolean function 
 - [ABC261 E 公式問題文](https://atcoder.jp/contests/abc261/tasks/abc261_e)
 - [ABC261 E 公式解説](https://atcoder.jp/contests/abc261/editorial/4451)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-finite-function-composition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-finite-function-composition`

@@ -42,6 +42,10 @@ sidebar:
 
 題材: [ABC221 G「Jumping sequence」](https://atcoder.jp/contests/abc221/tasks/abc221_g)
 
+選定理由: S=ΣD_i とすると、二 target は P=(S+A+B)/2、Q=(S+A-B)/2 である。どちらかが整数でない、負、または S 超過なら不可能と先に判定できる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。二次元で各操作が x 軸または y 軸方向を選び、符号選択を分離したいとき。 問題全体への接続は併用技能を学んだ後に読む。
+
 #### このOutcomeを支える根拠
 
 - 四方向 jump の構成問題を座標変換で二つの subset sum に分離し、bitset 到達判定から方向列まで復元できる。
@@ -118,4 +122,4 @@ dp の bit s を先頭から選んで和 s が可能かとして、各 D_i で d
 - [ABC276 H 公式解説](https://atcoder.jp/contests/abc276/editorial/5169)
 - [ABC276 H 公式問題文](https://atcoder.jp/contests/abc276/tasks/abc276_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-bitset-word-parallel`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-bitset-word-parallel`

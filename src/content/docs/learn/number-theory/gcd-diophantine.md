@@ -30,7 +30,7 @@ sidebar:
 
 以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
 
-1. [gcd不変量・差分構造](./gcd-structure.md)（標準順 113）— 差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+1. [gcd不変量・差分構造](./gcd-structure.md)（標準順 118）— 差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
 ## 発動条件と見分け方
 
@@ -47,6 +47,10 @@ sidebar:
 ### 例 1 — 整除条件や一次不定方程式の可解性をgcdで特徴付け、必要なら拡張EuclidでBézout整数解を構成できる
 
 題材: [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
+
+選定理由: 非平行な二vector u,vではdeterminantから係数p,qを一意に求め、割り切れてp,q≥0ならp+qが候補になる。
+
+この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数種類の同価操作を可換に組み合わせ、vector relationで同じ結果をより少ない種類へ変形できるとき。 問題全体への接続は併用技能を学んだ後に読む。
 
 #### このOutcomeを支える根拠
 
@@ -157,4 +161,4 @@ integer lattice shortest walkをexchange argumentでconstant-support representat
 - [ABC315 G 公式解説](https://atcoder.jp/contests/abc315/editorial/6994)
 - [ABC315 G 公式問題文](https://atcoder.jp/contests/abc315/tasks/abc315_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853` / LearningUnit `unit-gcd-diophantine`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-gcd-diophantine`
