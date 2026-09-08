@@ -1,0 +1,16 @@
+{
+  "id": "outcome-accelerate-set-operations-with-bitsets",
+  "statement": "集合をbit列へ符号化し、交差・和・shift・popcountをword並列に実行した計算量を評価できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc221-g",
+    "abc258-g",
+    "abc276-ex",
+    "abc287-ex",
+    "abc348-f",
+    "abc366-g",
+    "abc430-g",
+    "tag-bitset-word-parallel",
+    "unit-bitset-word-parallel"
+  ]
+}

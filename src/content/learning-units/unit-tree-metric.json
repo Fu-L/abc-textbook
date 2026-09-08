@@ -1,0 +1,106 @@
+{
+  "id": "unit-tree-metric",
+  "kind": "section",
+  "title": "木距離を基準点・直径・中心から捉える",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072",
+    "source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea",
+    "source-abc222-editorial-2749-cb72f04445c42ee4f95179943cc79215b014c3a378e4fca01c003957191f0cd8",
+    "source-abc222-f-problem-560ed9c13e262423a180bde639aa3b84fce0a06e3f0a65a156d92c00b25dac80",
+    "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba",
+    "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1"
+  ],
+  "tagIds": [
+    "tag-tree-metric-diameter"
+  ],
+  "ownedTagIds": [
+    "tag-tree-metric-diameter"
+  ],
+  "learningOutcomeIds": [
+    "outcome-use-tree-diameter-extrema"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-use-tree-diameter-extrema"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/tree-metric.md",
+  "problemIds": [
+    "abc221-f",
+    "abc222-f",
+    "abc267-f",
+    "abc303-e",
+    "abc361-e",
+    "abc401-f",
+    "abc428-e",
+    "abc460-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-use-tree-diameter-extrema",
+      "learningOutcomeIds": [
+        "outcome-use-tree-diameter-extrema"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC221 F「Diameter set」について、任意の二赤頂点間距離が木の直径 D なので、赤頂点は直径 path の中心から最大半径にある必要がある。同じ中心側の成分から二頂点を選ぶと path が中心を通らず距離が D 未満になる。",
+      "procedure": [
+        "観察: 任意の二赤頂点間距離が木の直径 D なので、赤頂点は直径 path の中心から最大半径にある必要がある。同じ中心側の成分から二頂点を選ぶと path が中心を通らず距離が D 未満になる。",
+        "観察: D が奇数なら中心は一本の辺で二成分、D が偶数なら中心は一頂点で隣接 branch が複数ある。サンプル2のように偶数直径では異なる三 branch 以上から一頂点ずつ選ぶ集合も有効になる。",
+        "着眼: 奇数 D では中心辺を切った両側から距離 (D-1)/2 の頂点を一つずつ選ぶしかなく、答えは二側の個数の積になる。",
+        "着眼: 偶数 D では中心 C の各 branch i にある距離 D/2 の頂点数を M_i とすると、各 branch から0または1頂点を選ぶ総数 ∏(M_i+1) から選択数0と1を除けばよい。",
+        "方針: 直径 path とその中心を求め、中心辺の両側または中心頂点の各 branch で、中心から距離 D/2 相当の頂点数を数えて組合せを計算する。（全ての赤頂点対が直径になる条件を、中心からの距離と「同じ branch から高々一つ」という独立な選択条件へ変えられる。）",
+        "接続: 任意点から最遠点 X、X から最遠点 Y を求めて直径 path を復元する。D が奇数なら中央辺を越えない DFS で両側の対象深さ個数を数えて積を取る。偶数なら中心の各隣接 branch ごとに対象深さ個数 M_i を数え、∏(M_i+1)-1-ΣM_i を法 998244353 で求める。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-use-tree-diameter-extrema",
+      "learningOutcomeIds": [
+        "outcome-use-tree-diameter-extrema"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC222 F「Expensive Expense」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 頂点加点付きの全始点最遠距離を補助葉へ変換し、木の直径の二端点で一括して求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 頂点加点付きの全始点最遠距離を補助葉へ変換し、木の直径の二端点で一括して求められる。",
+          "転移題材の解法接続: 補助葉を含む重み付き木で直径端 s',t' を求め、両端から全頂点への距離を計算し、端の親に対する除外だけ補正して二距離の最大を答える。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 1,
+  "representativeRank": 5,
+  "globalIndex": 37,
+  "orderReason": "木を探索して基準点からの距離を求められることを前提に、一意経路から得る距離labelと、直径端点・中心が距離構造を代表する性質を学ぶ。"
+}

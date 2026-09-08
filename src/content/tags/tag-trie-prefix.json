@@ -1,0 +1,51 @@
+{
+  "id": "tag-trie-prefix",
+  "name": "Trieによる共有接頭辞の索引",
+  "definition": "文字列集合の各文字遷移を木として共有し、prefix通過数・prefix DP・辞書順探索をnode上で処理する。",
+  "parentId": "tag-string-state-representation",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "node",
+      "接頭辞",
+      "文字",
+      "文字列集合"
+    ],
+    "triggerPatterns": [
+      "一文字ずつ挿入",
+      "共通prefix",
+      "辞書を構築"
+    ],
+    "invariantPatterns": [
+      "prefix node",
+      "子への文字遷移",
+      "通過数"
+    ],
+    "goalPatterns": [
+      "prefix query",
+      "共通接頭辞",
+      "文字列変換",
+      "辞書順"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-index-shared-prefixes-with-trie"
+  ],
+  "representativeProblemIds": [
+    "abc287-e",
+    "abc353-e",
+    "abc437-e"
+  ],
+  "aliases": [
+    "Trie",
+    "prefix tree",
+    "トライ木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

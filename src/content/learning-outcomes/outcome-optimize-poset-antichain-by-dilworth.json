@@ -1,0 +1,16 @@
+{
+  "id": "outcome-optimize-poset-antichain-by-dilworth",
+  "statement": "対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける。",
+  "prerequisiteOutcomeIds": [
+    "outcome-characterize-bipartite-feasibility-by-hall",
+    "outcome-design-order-preserving-dp",
+    "outcome-solve-bipartite-matching"
+  ],
+  "scopeIds": [
+    "abc237-ex",
+    "abc354-g",
+    "abc457-g",
+    "tag-poset-dilworth-antichain",
+    "unit-poset-dilworth-antichain"
+  ]
+}

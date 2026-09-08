@@ -1,0 +1,61 @@
+{
+  "id": "tag-spanning-tree-optimization",
+  "name": "最小・最大全域木とcut・cycle性質",
+  "definition": "辺重み順の成分併合を交換論で正当化し、最小または最大全域木を構成して辺の採否を判定する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-greedy-exchange-order"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "spanning tree",
+      "全域木",
+      "辺重み",
+      "重み付き無向グラフ"
+    ],
+    "triggerPatterns": [
+      "辺を採用できる",
+      "連結成分を結ぶ",
+      "重み順に辺"
+    ],
+    "invariantPatterns": [
+      "cut property",
+      "cycle property",
+      "採用辺は閉路を作らない"
+    ],
+    "goalPatterns": [
+      "全域木",
+      "最大重み",
+      "最小重み",
+      "辺の採否"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-dsu-components",
+      "type": "often_combined",
+      "rationale": "Kruskal順に採用済み成分を管理する実装ではDSUを併用するが、cut・cycle性質そのものとは分けて学ぶ。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-construct-optimal-spanning-tree"
+  ],
+  "representativeProblemIds": [
+    "abc218-e",
+    "abc282-e",
+    "abc352-e"
+  ],
+  "aliases": [
+    "Kruskal法",
+    "maximum spanning tree",
+    "minimum spanning tree",
+    "最大全域木",
+    "最小全域木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

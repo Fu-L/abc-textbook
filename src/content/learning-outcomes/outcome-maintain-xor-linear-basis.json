@@ -1,0 +1,14 @@
+{
+  "id": "outcome-maintain-xor-linear-basis",
+  "statement": "整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc223-h",
+    "abc236-f",
+    "abc249-g",
+    "abc283-g",
+    "abc451-g",
+    "tag-xor-linear-basis",
+    "unit-xor-linear-basis"
+  ]
+}

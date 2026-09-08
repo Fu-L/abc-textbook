@@ -1,0 +1,68 @@
+{
+  "id": "tag-bounded-enumeration",
+  "name": "有界全列挙・有限case分解",
+  "definition": "制約、少数の生成パラメータ、固定選択数、有限な幾何caseから候補総数を直接界し、全候補を評価する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "case",
+      "候補",
+      "生成パラメータ",
+      "組合せ",
+      "配置"
+    ],
+    "triggerPatterns": [
+      "候補数",
+      "全て試す",
+      "固定個",
+      "場合分け",
+      "高々"
+    ],
+    "invariantPatterns": [
+      "候補総数の上界",
+      "漏れなく",
+      "重複なく"
+    ],
+    "goalPatterns": [
+      "全caseの評価",
+      "存在判定",
+      "最適値",
+      "構成"
+    ],
+    "excludedPatterns": [
+      "divide.?and.?conquer",
+      "meet.?in.?the.?middle",
+      "分割統治",
+      "半分.*列挙"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-meet-in-the-middle",
+      "type": "contrast",
+      "rationale": "候補全体を制約から直接界す全列挙と、探索空間を二分して部分結果を照合する半分全列挙を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-enumerate-bounded-candidates-or-cases"
+  ],
+  "representativeProblemIds": [
+    "abc234-e",
+    "abc328-e",
+    "abc353-f",
+    "abc386-e",
+    "abc442-g"
+  ],
+  "aliases": [
+    "bounded exhaustive search",
+    "finite case enumeration",
+    "制約を利用した全探索",
+    "小さい候補集合の全列挙"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

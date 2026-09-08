@@ -1,0 +1,13 @@
+{
+  "id": "outcome-apply-heavy-light-decomposition",
+  "statement": "heavy childを選んで木をheavy path列へ分け、path range queryまたはbalanced tree-cluster構築へ接続できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-answer-tree-ancestor-queries",
+    "outcome-flatten-tree-by-euler-order"
+  ],
+  "scopeIds": [
+    "abc351-g",
+    "tag-heavy-light-decomposition",
+    "unit-heavy-light-decomposition"
+  ]
+}

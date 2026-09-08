@@ -1,0 +1,47 @@
+{
+  "id": "tag-separable-linear-transform",
+  "name": "分離可能線形変換・Walsh–Hadamard変換",
+  "definition": "Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "XOR convolution",
+      "axis transform",
+      "tensor index"
+    ],
+    "triggerPatterns": [
+      "XOR畳み込み",
+      "各bit軸で同じ変換"
+    ],
+    "invariantPatterns": [
+      "inverse scaling",
+      "separability"
+    ],
+    "goalPatterns": [
+      "XOR convolution",
+      "高速線形変換"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-factor-separable-linear-transform"
+  ],
+  "representativeProblemIds": [
+    "abc220-h",
+    "abc288-g",
+    "abc367-g"
+  ],
+  "aliases": [
+    "Kronecker積変換",
+    "WHT",
+    "Walsh–Hadamard変換",
+    "XOR convolution"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

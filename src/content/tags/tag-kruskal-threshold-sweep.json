@@ -1,0 +1,67 @@
+{
+  "id": "tag-kruskal-threshold-sweep",
+  "name": "Kruskal順の閾値DSU sweep",
+  "definition": "辺とqueryを重み順に並べ、同重みの処理順を明示してDSU成分とmetadataを更新し、二点が初めて連結するminimax閾値で判定・pairing・集計を行う。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-dsu-components",
+    "tag-spanning-tree-optimization"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "component metadata",
+      "threshold components",
+      "weighted undirected graph"
+    ],
+    "triggerPatterns": [
+      "成分併合時に需要を相殺",
+      "最初に連結する時刻",
+      "重みw未満または以下で連結"
+    ],
+    "invariantPatterns": [
+      "merge time is minimax distance",
+      "processed edges equal the threshold subgraph"
+    ],
+    "goalPatterns": [
+      "MST採用可能性",
+      "最早可能なcomponent pairing",
+      "閾値別連結判定"
+    ],
+    "excludedPatterns": [
+      "再構成木を明示して後からquery",
+      "単にMST重みを求めるだけ"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-dsu-components",
+      "type": "implementation_substrate",
+      "rationale": "辺重み順に追加される閾値部分graphの連結成分をDSUで増分管理する。"
+    },
+    {
+      "tagId": "tag-spanning-tree-optimization",
+      "type": "extension",
+      "rationale": "Kruskalの辺順とcut性質を、MST構築だけでなく閾値部分graphの連結時刻・成分metadataの増分処理へ拡張する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-sweep-connectivity-by-kruskal-threshold"
+  ],
+  "representativeProblemIds": [
+    "abc235-e",
+    "abc250-ex",
+    "abc301-ex",
+    "abc383-e"
+  ],
+  "aliases": [
+    "Kruskal順DSU sweep",
+    "minimax connectivity threshold",
+    "weight-sorted offline connectivity sweep",
+    "重み順Union-Find"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

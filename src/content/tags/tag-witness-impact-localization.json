@@ -1,0 +1,50 @@
+{
+  "id": "tag-witness-impact-localization",
+  "name": "基準解による変更影響の局所化",
+  "definition": "変更前の解・実行列をwitnessとし、それを壊さない変更では答えが変わらないと示して再計算対象を絞る。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "witness",
+      "削除",
+      "基準解",
+      "変更",
+      "実行列"
+    ],
+    "triggerPatterns": [
+      "一箇所変更",
+      "再計算",
+      "各操作を除く"
+    ],
+    "invariantPatterns": [
+      "witnessが壊れない",
+      "基準解に含まれない",
+      "答えは変わらない"
+    ],
+    "goalPatterns": [
+      "各削除",
+      "変更後の答え",
+      "影響範囲"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-localize-change-impact-by-witness"
+  ],
+  "representativeProblemIds": [
+    "abc218-f",
+    "abc279-e"
+  ],
+  "aliases": [
+    "replacement paths",
+    "witness-based sensitivity analysis",
+    "変更影響の局所化"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

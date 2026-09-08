@@ -1,0 +1,46 @@
+{
+  "id": "tag-cyclic-exponent-counting",
+  "name": "巡回群の指数化・位数別数え上げ",
+  "definition": "巡回部分群の元を指数へ写し、gcd・位数・約数格子で分類して重複なく数える。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [
+    "tag-multiplicative-order"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "位数",
+      "巡回群",
+      "指数"
+    ],
+    "triggerPatterns": [
+      "位数ごとに分類",
+      "冪で全要素を表す"
+    ],
+    "invariantPatterns": [
+      "divisor lattice",
+      "gcd of exponent"
+    ],
+    "goalPatterns": [
+      "群上の数え上げ"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-count-through-cyclic-exponents"
+  ],
+  "representativeProblemIds": [
+    "abc212-g",
+    "abc335-g"
+  ],
+  "aliases": [
+    "cyclic-group counting",
+    "primitive-root exponentization",
+    "巡回群の指数化"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

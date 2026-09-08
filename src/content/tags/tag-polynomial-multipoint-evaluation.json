@@ -1,0 +1,59 @@
+{
+  "id": "tag-polynomial-multipoint-evaluation",
+  "name": "多項式の多点評価・補間",
+  "definition": "product treeとremainder treeを構築し、一つの多項式を多数の点へ準線形時間で評価・補間する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-formal-power-series",
+    "tag-recursive-divide-and-conquer"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "evaluation points",
+      "polynomial",
+      "積木"
+    ],
+    "triggerPatterns": [
+      "多数の点で評価",
+      "補間"
+    ],
+    "invariantPatterns": [
+      "remainder mod subtree product"
+    ],
+    "goalPatterns": [
+      "多点評価",
+      "補間"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-convolution",
+      "type": "implementation_substrate",
+      "rationale": "積木と剰余計算の多項式積を高速化する基盤として畳み込みを使う。"
+    },
+    {
+      "tagId": "tag-recursive-divide-and-conquer",
+      "type": "implementation_substrate",
+      "rationale": "subproduct treeとremainder treeをbalancedに構築する基盤として再帰分割を使う。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-evaluate-polynomial-at-many-points"
+  ],
+  "representativeProblemIds": [
+    "abc272-ex",
+    "abc381-g"
+  ],
+  "aliases": [
+    "multipoint evaluation",
+    "product tree",
+    "remainder tree",
+    "多点評価"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,51 @@
+{
+  "id": "tag-linear-recurrence-matrix",
+  "name": "線形遷移・行列累乗",
+  "definition": "固定線形遷移を行列または線形漸化式として巨大回数進める。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "巨大な回数",
+      "漸化式",
+      "線形遷移",
+      "行列"
+    ],
+    "triggerPatterns": [
+      "二分べき",
+      "同じ遷移",
+      "累乗"
+    ],
+    "invariantPatterns": [
+      "固定行列",
+      "特性多項式",
+      "線形"
+    ],
+    "goalPatterns": [
+      "n回後",
+      "巨大",
+      "高速化"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-accelerate-fixed-linear-transition"
+  ],
+  "representativeProblemIds": [
+    "abc256-g",
+    "abc270-ex",
+    "abc293-e"
+  ],
+  "aliases": [
+    "matrix exponentiation",
+    "行列累乗"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

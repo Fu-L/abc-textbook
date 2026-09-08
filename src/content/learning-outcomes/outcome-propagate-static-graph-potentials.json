@@ -1,0 +1,13 @@
+{
+  "id": "outcome-propagate-static-graph-potentials",
+  "statement": "辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "scopeIds": [
+    "abc352-f",
+    "abc396-e",
+    "tag-graph-potential-propagation",
+    "unit-graph-potential-propagation"
+  ]
+}

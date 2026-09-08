@@ -1,0 +1,62 @@
+{
+  "id": "tag-suffix-lcp-index",
+  "name": "接尾辞順序・LCP索引",
+  "definition": "全接尾辞の辞書順とLCPを索引化し、部分文字列の順序・出現範囲・順位・distinct数を求める。",
+  "parentId": "tag-string-state-representation",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "suffix",
+      "接尾辞",
+      "文字列",
+      "部分文字列"
+    ],
+    "triggerPatterns": [
+      "lcp",
+      "全rotation",
+      "出現範囲",
+      "辞書順"
+    ],
+    "invariantPatterns": [
+      "suffix rank",
+      "最長共通接頭辞",
+      "隣接suffix"
+    ],
+    "goalPatterns": [
+      "rotation.*数え",
+      "出現数",
+      "辞書順比較"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-idempotent-overlap-range-query",
+      "type": "often_combined",
+      "rationale": "suffix array上の二suffixのLCPを、隣接LCP列の区間最小値queryとして求めるときに併用する。"
+    },
+    {
+      "tagId": "tag-z-algorithm-prefix-matching",
+      "type": "analogy",
+      "rationale": "一つのprefixとの一致長列と、全suffix間の辞書順・LCP索引を目的に応じて使い分ける。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-suffix-lcp-index"
+  ],
+  "representativeProblemIds": [
+    "abc268-ex",
+    "abc272-f",
+    "abc362-g"
+  ],
+  "aliases": [
+    "LCP配列",
+    "suffix array",
+    "接尾辞配列"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

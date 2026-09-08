@@ -320,7 +320,9 @@ const finalCandidates = (): z.input<typeof FinalTaxonomyCandidateSchema>[] => [
       excludedTopics: [],
       sourceRevisionIds: [...sourceIds],
       tagIds: ['tag-algorithms', 'tag-core'],
+      ownedTagIds: ['tag-algorithms', 'tag-core'],
       learningOutcomeIds: ['outcome-core'],
+      ownedLearningOutcomeIds: ['outcome-core'],
       problemIds: [...problemIds],
       stageRank: 0,
       difficultyRank: 0,
@@ -411,6 +413,11 @@ const createBuild = (status: 'proposed' | 'accepted'): z.input<typeof FinalTaxon
       canonicalSnapshotDigest: sha('b'),
       transactionId: `preview-snapshot:initial-v1:${integrationMap.previewSnapshotDigest}`,
       status: 'passed' as const,
+    },
+    placementDecisionTable: {
+      path: 'src/content/policies/problem-placement.json',
+      version: '1.0.0',
+      digest: sha('f'),
     },
     integrationMapPath: 'docs/verification/previews/initial-v1/taxonomy-integration.json',
   };
@@ -526,6 +533,29 @@ describe('strict T159 staging schemas', () => {
         entity: { ...tag?.entity, id: 'unit-wrong-namespace' },
       }).success,
     ).toBe(false);
+  });
+
+  it('rejects missing direct owners and navigation closure drift inside the build schema', () => {
+    const missingOwner = createBuild('proposed');
+    const unit = missingOwner.finalCandidates.find((candidate) => candidate.kind === 'unit');
+    if (unit?.kind !== 'unit') throw new Error('Unit fixture missing.');
+    unit.entity.ownedTagIds = ['tag-algorithms'];
+    unit.entity.ownedLearningOutcomeIds = [];
+
+    const parsed = FinalTaxonomyBuildSchema.safeParse(missingOwner);
+    expect(parsed.success).toBe(false);
+    if (!parsed.success) {
+      const messages = parsed.error.issues.map(({ message }) => message);
+      expect(messages).toContain(
+        'Final Tag tag-core must have exactly one direct Learning Unit owner.',
+      );
+      expect(messages).toContain(
+        'Final Outcome outcome-core must have one direct owner matching its Unit and Tag scopes.',
+      );
+      expect(messages).toContain(
+        'Final Learning Unit unit-core navigation must be the exact direct-owner and child closure.',
+      );
+    }
   });
 
   it('keeps recognition signatures and typed non-prerequisite Tag relations canonical', () => {

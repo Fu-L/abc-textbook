@@ -1,0 +1,20 @@
+{
+  "id": "outcome-apply-formal-power-series-operations",
+  "statement": "定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-compute-convolution-or-correlation",
+    "outcome-encode-counting-by-generating-function"
+  ],
+  "scopeIds": [
+    "abc260-ex",
+    "abc289-ex",
+    "abc297-ex",
+    "abc317-ex",
+    "abc318-ex",
+    "abc387-g",
+    "abc439-g",
+    "abc449-g",
+    "tag-formal-power-series",
+    "unit-formal-power-series"
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "id": "unit-rational-approximation",
+  "kind": "section",
+  "title": "連分数・Stern–Brocotで有理近似する",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "整除性や一次不定方程式の可解判定だけを行う問題、および合同類をCRTで統合する構成。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+    "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba",
+    "source-abc333-editorial-7937-5a836e814431d363952a01dc5dbeda64c09a4350d01a20b81a2e83c91a6b3c41",
+    "source-abc333-g-problem-b2e14eaffb1822e38f5d7dd39d9676c48331b39abfc476cfc57e273fab568392",
+    "source-abc393-editorial-12192-51ff1775a4a84d6ea3fa0c64dbec89b06500e2c486d30a6f6b6b6bac1f4c3756",
+    "source-abc393-g-problem-941c6da45dc5fe62551ec4fb6a70726479c20b28a4f3308d466fa9cb8822a201"
+  ],
+  "tagIds": [
+    "tag-rational-approximation"
+  ],
+  "ownedTagIds": [
+    "tag-rational-approximation"
+  ],
+  "learningOutcomeIds": [
+    "outcome-approximate-rational-by-euclid"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-approximate-rational-by-euclid"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/rational-approximation.md",
+  "problemIds": [
+    "abc273-ex",
+    "abc333-g",
+    "abc393-g",
+    "abc408-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-approximate-rational-by-euclid",
+      "learningOutcomeIds": [
+        "outcome-approximate-rational-by-euclid"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC273 Ex「Inv(0,1)ving Insert(1,0)n」について、隣接pairsの和を挿入する操作はStern–Brocot treeのinterval nodeでmediantを生成する操作そのもので、追加可能な(p,q)はprimitive pair gcd(p,q)=1である。",
+      "procedure": [
+        "観察: 隣接pairsの和を挿入する操作はStern–Brocot treeのinterval nodeでmediantを生成する操作そのもので、追加可能な(p,q)はprimitive pair gcd(p,q)=1である。",
+        "観察: あるStern–Brocot interval nodeの操作がsubarray Tに必要なのは、そのopen interval内にTのtarget fractionが一つ以上存在するときである。",
+        "着眼: node interval内targetのoriginal indicesをsorted set Pとすると、そのnodeが必要なsubarraysは全subarraysからPを一つも含まないindex-gap内subarraysを引いて求められる。",
+        "着眼: targetsが片側childにしか入らない連続区間では、fraction boundsへ同じendpointをk回加える形をbinary searchし、そのk nodesは同じposition set寄与として一括加算できる。",
+        "方針: 全targetsをfraction順にStern–Brocot intervalへ再帰分割し、各nodeを必要とするposition集合からsubarray数を数え、unary descentはまとめてskipする。（必要なtree部分だけを圧縮構築し、position setsをsmall-to-large mergeすることで全nodesの寄与を集約できる。）",
+        "接続: mediant insertion costをcompressed Stern–Brocot trie上のancestor-union countへ写し、ordered-position set mergingで全consecutive subarraysへのnode寄与を合計する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-approximate-rational-by-euclid",
+      "learningOutcomeIds": [
+        "outcome-approximate-rational-by-euclid"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC333 G「Nearest Fraction」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 0≤p≤q≤Nかつgcd(p,q)=1の中から、rへの絶対誤差が最小でtie時に値が小さいp/qを求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 0≤p≤q≤Nかつgcd(p,q)=1の中から、rへの絶対誤差が最小でtie時に値が小さいp/qを求められる。",
+          "転移題材の解法接続: 小数文字列から整数Rと10の冪Dを作りgcdで約分する。Euclid法で連分数係数を順に得つつconvergentの分子分母を更新し、次の完全convergentが分母Nを超える箇所では係数をfloor((N-q_prevprev)/q_prev)までに切って左右候補を構成する。|R/D-p/q|を整数cross積で比較し、tieは小さいp/qを選ぶ。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 2,
+  "representativeRank": 2,
+  "globalIndex": 44,
+  "orderReason": "Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。"
+}

@@ -1,0 +1,137 @@
+{
+  "id": "unit-prefix-aggregate",
+  "kind": "section",
+  "title": "一次元・二次元累積和と差分で区間情報を線形化する",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db",
+    "source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e",
+    "source-abc228-editorial-2945-12052f0fe09662260111e151499b5f2b2c3b5c7537f68c1c357cefea7748b13c",
+    "source-abc228-f-problem-89dadce4e1a0dc6582e292f9fa5d8b96f6f301dbf03a4e01c582b05833b501da",
+    "source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9",
+    "source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be",
+    "source-abc260-editorial-4457-ea71f1cf715860eb7d2802e9bf012841420ffe11ab6158ae825429565cb4834c",
+    "source-abc260-g-problem-73b3acd1300eb54732b0a3b6005ff93bc1b32699d9c289226c60fb1a2897f67d",
+    "source-abc268-e-problem-ebb48085f9132fd7859792492da1d8ac110ddb24ce42343bc916a103a1221c9e",
+    "source-abc268-editorial-4777-26e9d1b6757939b74bb7bc9f6ed9067ff8db7f5ea5a842cdfbe08a3e624a510c"
+  ],
+  "tagIds": [
+    "tag-prefix-difference"
+  ],
+  "ownedTagIds": [
+    "tag-prefix-difference"
+  ],
+  "learningOutcomeIds": [
+    "outcome-linearize-static-range-information"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-linearize-static-range-information"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/prefix-aggregate.md",
+  "problemIds": [
+    "abc216-g",
+    "abc228-f",
+    "abc233-ex",
+    "abc233-g",
+    "abc238-e",
+    "abc253-f",
+    "abc260-g",
+    "abc268-e",
+    "abc276-ex",
+    "abc278-e",
+    "abc282-g",
+    "abc298-g",
+    "abc300-f",
+    "abc307-g",
+    "abc311-g",
+    "abc330-f",
+    "abc330-g",
+    "abc333-e",
+    "abc341-e",
+    "abc347-f",
+    "abc404-g",
+    "abc407-f",
+    "abc410-f",
+    "abc419-e",
+    "abc420-f",
+    "abc421-g",
+    "abc423-e",
+    "abc427-e",
+    "abc430-f",
+    "abc441-e",
+    "abc452-e",
+    "abc454-f",
+    "abc455-e",
+    "abc464-g",
+    "abc465-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-linearize-static-range-information",
+      "learningOutcomeIds": [
+        "outcome-linearize-static-range-information"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC260 G「Scalene Triangle Area」について、コマ (s,t) が行 u=s+d で覆う列は、d≥0 に対して t から t＋2M−1−2d までの連続区間になる。",
+      "procedure": [
+        "観察: コマ (s,t) が行 u=s+d で覆う列は、d≥0 に対して t から t＋2M−1−2d までの連続区間になる。",
+        "観察: 各行の区間へ水平 imos を行うなら、左端の +1 は縦線上、右端の次の −1 は一行下がるごとに二列左へ動く斜線上に並ぶ。",
+        "着眼: 水平区間の開始印は (s,t) から下へ M 行続き、終了印は (s,t＋2M),(s＋1,t＋2M−2),… と傾き二の対角線を進む。",
+        "着眼: 縦・斜めの差分をそれぞれ累積して水平差分配列へ合算し、各行を左から累積すれば全三角形の重ね合わせになる。",
+        "方針: 左境界を縦方向差分、右境界を遷移 (i−1,j＋2) から伝播する斜め差分で置き、最後に水平方向の累積和を取る。（三角形一個を定数個の印へ変換でき、二種類の境界を復元した後は全マスの被覆数が一括で得られる。）",
+        "接続: 非軸平行な格子三角形を、境界方向ごとに異なる prefix operator を持つ multidirectional imos として加算する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-linearize-static-range-information",
+      "learningOutcomeIds": [
+        "outcome-linearize-static-range-information"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC268 E「Chinese Restaurant (Three-Star Version)」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全回転に対する円環距離総和を、三角波の一次式imosで求めて最小化できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 全回転に対する円環距離総和を、三角波の一次式imosで求めて最小化できる。",
+          "転移題材の解法接続: sum of circular absolute-distance functionsをperiod doublingでpiecewise-linear range additionsへ変え、coefficient-wise imosで全評価点を一括計算する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 1,
+  "difficultyRank": 0,
+  "representativeRank": 0,
+  "globalIndex": 12,
+  "orderReason": "一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。"
+}

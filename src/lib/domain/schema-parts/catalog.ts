@@ -4,7 +4,7 @@ import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-
 import { canonicalDigest, canonicalJson, digestWithoutField } from '../canonical-json.js';
 import { compareOffsetDateTimes, isOffsetDateTime, parseOffsetDateTime } from '../date-time.js';
 import {
-  InlineExerciseSchema,
+  LearningUnitInlineExerciseSchema,
   LearningUnitInlineExampleSchema,
   ProblemAuthoringUnitSchema,
 } from './authoring-unit.js';
@@ -73,6 +73,11 @@ export const CorrectionImpactContentLocatorSchema = z.discriminatedUnion('ownerT
       localBlockPath('exercises'),
       exerciseDetailPath,
     ]),
+  }),
+  strictObject({
+    ownerType: z.literal('problem_placement'),
+    problemId: ProblemIdSchema,
+    path: SafePathSchema,
   }),
 ]);
 
@@ -775,18 +780,103 @@ export const LearningUnitSchema = strictObject({
   additionalPrerequisiteUnitIds: entityIds,
   excludedTopics: z.array(nonEmptyText),
   sourceRevisionIds: entityIds.min(1),
-  tagIds: entityIds.min(1),
-  learningOutcomeIds: entityIds.min(1),
+  tagIds: entityIds
+    .min(1)
+    .describe('Navigation closure of Tags owned by this Unit or any descendant Unit.'),
+  ownedTagIds: uniqueArray(EntityIdSchema)
+    .optional()
+    .describe('Tags whose explanation is authored directly in this Unit.'),
+  learningOutcomeIds: entityIds
+    .min(1)
+    .describe('Navigation closure of Outcomes owned by this Unit or any descendant Unit.'),
+  ownedLearningOutcomeIds: uniqueArray(EntityIdSchema)
+    .optional()
+    .describe('Outcomes whose teaching and attainment blocks are authored directly in this Unit.'),
+  contentPhase: z
+    .enum(['canonical_skeleton', 'full_authoring'])
+    .optional()
+    .describe(
+      'Byte-ownership phase for canonical Unit content. Full authoring takes over the generated skeleton in place.',
+    ),
   docPath: SafePathSchema,
   problemIds: z.array(ProblemIdSchema).min(1),
   examples: uniqueArray(LearningUnitInlineExampleSchema).min(1),
-  exercises: uniqueArray(InlineExerciseSchema).min(1),
+  exercises: uniqueArray(LearningUnitInlineExerciseSchema).min(1),
   stageRank: z.number().int().nonnegative(),
   difficultyRank: z.number().int().nonnegative(),
   representativeRank: z.number().int().nonnegative(),
   globalIndex: z.number().int().nonnegative(),
   orderReason: nonEmptyText,
 }).superRefine((unit, context) => {
+  if ((unit.ownedTagIds === undefined) !== (unit.ownedLearningOutcomeIds === undefined)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['ownedLearningOutcomeIds'],
+      message: 'Canonical Unit ownership fields must be declared together.',
+    });
+  }
+  if (unit.ownedTagIds?.some((tagId) => !unit.tagIds.includes(tagId)) === true) {
+    context.addIssue({
+      code: 'custom',
+      path: ['ownedTagIds'],
+      message: 'A Unit can own only Tags included in its descendant-coverage tagIds.',
+    });
+  }
+  if (
+    unit.ownedLearningOutcomeIds?.some(
+      (outcomeId) => !unit.learningOutcomeIds.includes(outcomeId),
+    ) === true
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['ownedLearningOutcomeIds'],
+      message:
+        'A Unit can own only Outcomes included in its descendant-coverage learningOutcomeIds.',
+    });
+  }
+  if (unit.ownedLearningOutcomeIds !== undefined) {
+    const ownedOutcomeIds = new Set(unit.ownedLearningOutcomeIds);
+    const validateCanonicalBlocks = (
+      field: 'examples' | 'exercises',
+      normalRole: 'guided_outcome' | 'outcome_attainment',
+    ): void => {
+      const blocks = unit[field];
+      if (blocks.some(({ learningUnitRole }) => learningUnitRole === undefined)) {
+        context.addIssue({
+          code: 'custom',
+          path: [field],
+          message: `Canonical Unit ${field} must declare learningUnitRole.`,
+        });
+      }
+      if (
+        blocks.some(({ learningOutcomeIds }) =>
+          learningOutcomeIds.some((outcomeId) => !unit.learningOutcomeIds.includes(outcomeId)),
+        )
+      ) {
+        context.addIssue({
+          code: 'custom',
+          path: [field],
+          message: `Canonical Unit ${field} may reference only covered Outcomes.`,
+        });
+      }
+      const normalOutcomeIds = blocks
+        .filter(({ learningUnitRole }) => learningUnitRole === normalRole)
+        .flatMap(({ learningOutcomeIds }) => learningOutcomeIds);
+      if (
+        normalOutcomeIds.length !== ownedOutcomeIds.size ||
+        new Set(normalOutcomeIds).size !== ownedOutcomeIds.size ||
+        normalOutcomeIds.some((outcomeId) => !ownedOutcomeIds.has(outcomeId))
+      ) {
+        context.addIssue({
+          code: 'custom',
+          path: [field],
+          message: `Canonical Unit ${field} must cover every owned Outcome exactly once with ${normalRole}.`,
+        });
+      }
+    };
+    validateCanonicalBlocks('examples', 'guided_outcome');
+    validateCanonicalBlocks('exercises', 'outcome_attainment');
+  }
   for (const field of ['examples', 'exercises'] as const) {
     const keys = unit[field].map(({ key }) => key);
     if (new Set(keys).size !== keys.length) {
@@ -997,11 +1087,23 @@ export const SourceRecordSchema = strictObject({
 export const CorrectionImpactSchema = strictObject({
   id: EntityIdSchema,
   sourceRevisionId: EntityIdSchema,
+  sourceRevisionIds: uniqueArray(EntityIdSchema).min(1).optional(),
   changeSummary: nonEmptyText,
   affectedContentLocators: uniqueArray(CorrectionImpactContentLocatorSchema).min(1),
   affectedLearningUnitOrderIds: uniqueArray(EntityIdSchema),
   derivedIndexPaths: z.array(SafePathSchema),
   verificationStatus: z.enum(['pending', 'verified', 'failed']),
+}).superRefine((impact, context) => {
+  if (
+    impact.sourceRevisionIds !== undefined &&
+    !impact.sourceRevisionIds.includes(impact.sourceRevisionId)
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['sourceRevisionIds'],
+      message: 'The primary sourceRevisionId must be included in sourceRevisionIds.',
+    });
+  }
 });
 
 const TaxonomyChangeSchema = strictObject({
@@ -1210,8 +1312,18 @@ export const LearningUnitTaxonomyCandidateSchema = strictObject({
   additionalPrerequisiteUnitIds: uniqueArray(FinalLearningUnitIdSchema),
   excludedTopics: uniqueArray(nonEmptyText),
   sourceRevisionIds: uniqueArray(EntityIdSchema).min(1),
-  tagIds: uniqueArray(FinalTagIdSchema).min(1),
-  learningOutcomeIds: uniqueArray(FinalOutcomeIdSchema).min(1),
+  tagIds: uniqueArray(FinalTagIdSchema)
+    .min(1)
+    .describe('Exact navigation closure of Tags owned by this candidate or its descendants.'),
+  ownedTagIds: uniqueArray(FinalTagIdSchema).describe(
+    'Tags explained directly by this candidate; empty is valid for a structural Unit.',
+  ),
+  learningOutcomeIds: uniqueArray(FinalOutcomeIdSchema)
+    .min(1)
+    .describe('Exact navigation closure of Outcomes owned by this candidate or its descendants.'),
+  ownedLearningOutcomeIds: uniqueArray(FinalOutcomeIdSchema).describe(
+    'Outcomes taught and assessed directly by this candidate; empty is valid for a structural Unit.',
+  ),
   problemIds: uniqueArray(ProblemIdSchema).min(1),
   stageRank: z.number().int().nonnegative(),
   difficultyRank: z.number().int().nonnegative(),
@@ -1231,6 +1343,22 @@ export const LearningUnitTaxonomyCandidateSchema = strictObject({
       code: 'custom',
       path: ['additionalPrerequisiteUnitIds'],
       message: 'A Learning Unit candidate cannot require itself.',
+    });
+  }
+  if (unit.ownedTagIds.some((tagId) => !unit.tagIds.includes(tagId))) {
+    context.addIssue({
+      code: 'custom',
+      path: ['ownedTagIds'],
+      message: 'Owned Tags must be included in the Unit Tag coverage.',
+    });
+  }
+  if (
+    unit.ownedLearningOutcomeIds.some((outcomeId) => !unit.learningOutcomeIds.includes(outcomeId))
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['ownedLearningOutcomeIds'],
+      message: 'Owned Outcomes must be included in the Unit Outcome coverage.',
     });
   }
 });
@@ -1915,6 +2043,11 @@ const FinalTaxonomyInputsSchema = strictObject({
     transactionId: z.string().regex(/^preview-snapshot:[a-z0-9]+(?:-[a-z0-9]+)*:[a-f0-9]{64}$/u),
     status: z.literal('passed'),
   }),
+  placementDecisionTable: strictObject({
+    path: SafePathSchema,
+    version: semverForTaxonomy,
+    digest: Sha256Schema,
+  }),
   integrationMapPath: SafePathSchema,
 });
 const FinalTaxonomyPolicySchema = strictObject({
@@ -2219,6 +2352,94 @@ export const FinalTaxonomyBuildSchema = strictObject({
     }
   }
 
+  const ownershipUnitById = new Map(candidatesByKind.unit.map(({ entity }) => [entity.id, entity]));
+  const ownerUnitIdsByTagId = new Map(
+    tagIds.map((tagId) => [
+      tagId,
+      candidatesByKind.unit
+        .filter(({ entity }) => entity.ownedTagIds.includes(tagId))
+        .map(({ entity }) => entity.id),
+    ]),
+  );
+  const ownerUnitIdsByOutcomeId = new Map(
+    outcomeIds.map((outcomeId) => [
+      outcomeId,
+      candidatesByKind.unit
+        .filter(({ entity }) => entity.ownedLearningOutcomeIds.includes(outcomeId))
+        .map(({ entity }) => entity.id),
+    ]),
+  );
+  for (const tagId of tagIds) {
+    if (ownerUnitIdsByTagId.get(tagId)?.length !== 1) {
+      context.addIssue({
+        code: 'custom',
+        path: ['finalCandidates'],
+        message: `Final Tag ${tagId} must have exactly one direct Learning Unit owner.`,
+      });
+    }
+  }
+  for (const { entity: outcome } of candidatesByKind.outcome) {
+    const ownerUnitIds = ownerUnitIdsByOutcomeId.get(outcome.id) ?? [];
+    const scopedUnitIds = outcome.scopeIds.filter((scopeId) => unitIdSet.has(scopeId));
+    const scopedTagOwnerUnitIds = [
+      ...new Set(
+        outcome.scopeIds
+          .filter((scopeId) => tagIdSet.has(scopeId))
+          .flatMap((tagId) => ownerUnitIdsByTagId.get(tagId) ?? []),
+      ),
+    ];
+    if (
+      ownerUnitIds.length !== 1 ||
+      !sameFinalTaxonomySet(ownerUnitIds, scopedUnitIds) ||
+      !sameFinalTaxonomySet(ownerUnitIds, scopedTagOwnerUnitIds)
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['finalCandidates'],
+        message: `Final Outcome ${outcome.id} must have one direct owner matching its Unit and Tag scopes.`,
+      });
+    }
+  }
+  for (const { entity: unit } of candidatesByKind.unit) {
+    const children = candidatesByKind.unit.filter(({ entity }) => entity.parentId === unit.id);
+    const expectedTagIds = [
+      ...unit.ownedTagIds,
+      ...children.flatMap(({ entity }) => entity.tagIds),
+    ];
+    const expectedOutcomeIds = [
+      ...unit.ownedLearningOutcomeIds,
+      ...children.flatMap(({ entity }) => entity.learningOutcomeIds),
+    ];
+    if (
+      !sameFinalTaxonomySet(unit.tagIds, expectedTagIds) ||
+      !sameFinalTaxonomySet(unit.learningOutcomeIds, expectedOutcomeIds)
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['finalCandidates'],
+        message: `Final Learning Unit ${unit.id} navigation must be the exact direct-owner and child closure.`,
+      });
+    }
+    if (
+      unit.ownedTagIds.length === 0 &&
+      unit.ownedLearningOutcomeIds.length === 0 &&
+      children.length === 0
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['finalCandidates'],
+        message: `Ownerless Learning Unit ${unit.id} must have at least one child.`,
+      });
+    }
+    if (unit.parentId !== null && !ownershipUnitById.has(unit.parentId)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['finalCandidates'],
+        message: `Final Learning Unit ${unit.id} has an unknown ownership parent.`,
+      });
+    }
+  }
+
   const expectedTagEdges = candidatesByKind.tag.flatMap(({ entity }) =>
     entity.prerequisiteTagIds.map((prerequisiteId) => ({ nodeId: entity.id, prerequisiteId })),
   );
@@ -2366,6 +2587,32 @@ export const FinalTaxonomyBuildSchema = strictObject({
       ...placement.additionalPrimaryOutcomeIds,
     ];
     const assignedOutcomeIds = [...primaryOutcomeIds, ...placement.supportingOutcomeIds];
+    const expectedAssignedUnitIds = [
+      ...new Set(
+        assignedOutcomeIds.flatMap((outcomeId) => ownerUnitIdsByOutcomeId.get(outcomeId) ?? []),
+      ),
+    ];
+    const expectedPresentationUnitId = [
+      ...new Set(
+        primaryOutcomeIds.flatMap((outcomeId) => ownerUnitIdsByOutcomeId.get(outcomeId) ?? []),
+      ),
+    ]
+      .sort(
+        (left, right) =>
+          build.standardOrder.indexOf(left) - build.standardOrder.indexOf(right) ||
+          (left < right ? -1 : left > right ? 1 : 0),
+      )
+      .at(-1);
+    if (
+      !sameFinalTaxonomySet(placement.learningUnitIds, expectedAssignedUnitIds) ||
+      placement.presentationUnitId !== expectedPresentationUnitId
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['placements'],
+        message: `Placement ${placement.id} must bind assigned Outcomes to their direct Unit owners.`,
+      });
+    }
     if (
       primaryOutcomeIds.some(
         (outcomeId) =>
@@ -2690,6 +2937,214 @@ export const FinalTaxonomyBuildSchema = strictObject({
   }
 });
 
+const CanonicalTaxonomySourceBuildSchema = strictObject({
+  id: EntityIdSchema,
+  digest: Sha256Schema,
+  acceptedAt: OffsetDateTimeSchema,
+});
+
+const CanonicalLearningOrderReasonSchema = strictObject({
+  unitId: FinalLearningUnitIdSchema,
+  globalIndex: z.number().int().nonnegative(),
+  reason: nonEmptyText,
+});
+
+/** T048 projection of the independently accepted curriculum graphs and standard Unit order. */
+export const CanonicalLearningOrderSchema = strictObject({
+  schemaVersion: z.literal('1.0.0'),
+  sourceBuild: CanonicalTaxonomySourceBuildSchema,
+  tagPrerequisites: uniqueArray(TaxonomyPrerequisiteEdgeSchema),
+  learningOutcomePrerequisites: uniqueArray(TaxonomyPrerequisiteEdgeSchema),
+  learningUnitPrerequisites: uniqueArray(TaxonomyPrerequisiteEdgeSchema),
+  standardOrder: uniqueArray(FinalLearningUnitIdSchema).min(1),
+  orderReasons: uniqueArray(CanonicalLearningOrderReasonSchema).min(1),
+  tagDagDigest: Sha256Schema,
+  learningOutcomeDagDigest: Sha256Schema,
+  learningUnitDagDigest: Sha256Schema,
+  orderDigest: Sha256Schema,
+}).superRefine((order, context) => {
+  const expectedDigests = {
+    tagDagDigest: canonicalDigest(order.tagPrerequisites),
+    learningOutcomeDagDigest: canonicalDigest(order.learningOutcomePrerequisites),
+    learningUnitDagDigest: canonicalDigest(order.learningUnitPrerequisites),
+    orderDigest: canonicalDigest(order.standardOrder),
+  };
+  for (const [field, expected] of Object.entries(expectedDigests)) {
+    if (order[field as keyof typeof expectedDigests] !== expected) {
+      context.addIssue({ code: 'custom', path: [field], message: `${field} is stale.` });
+    }
+  }
+  const reasonIds = order.orderReasons.map(({ unitId }) => unitId);
+  if (
+    !sameFinalTaxonomySet(reasonIds, order.standardOrder) ||
+    order.orderReasons.some(
+      ({ unitId, globalIndex }) => order.standardOrder[globalIndex] !== unitId,
+    )
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['orderReasons'],
+      message: 'Every standard-order Unit requires one reason at its exact global index.',
+    });
+  }
+});
+
+/** T049 canonical source for complete Problem placement and preview-taxonomy correction impact. */
+export const CanonicalProblemPlacementPolicySchema = strictObject({
+  schemaVersion: z.literal('1.0.0'),
+  sourceBuild: CanonicalTaxonomySourceBuildSchema,
+  decisionTable: strictObject({
+    path: SafePathSchema,
+    version: semverForTaxonomy,
+    digest: Sha256Schema,
+  }),
+  placements: z.array(FinalProblemPlacementProjectionSchema).min(1),
+  correctionImpacts: z.array(CorrectionImpactSchema).min(1),
+  previewTaxonomyChanges: z.array(PreMaterializationCorrectionImpactSchema).min(1),
+  placementDigest: Sha256Schema,
+  correctionImpactDigest: Sha256Schema,
+  previewTaxonomyChangeDigest: Sha256Schema,
+}).superRefine((policy, context) => {
+  const expectedDigests = {
+    placementDigest: canonicalDigest(policy.placements),
+    correctionImpactDigest: canonicalDigest(policy.correctionImpacts),
+    previewTaxonomyChangeDigest: canonicalDigest(policy.previewTaxonomyChanges),
+  };
+  for (const [field, expected] of Object.entries(expectedDigests)) {
+    if (policy[field as keyof typeof expectedDigests] !== expected) {
+      context.addIssue({ code: 'custom', path: [field], message: `${field} is stale.` });
+    }
+  }
+  if (
+    !sameFinalTaxonomySet(
+      policy.correctionImpacts.map(({ id }) => id),
+      policy.previewTaxonomyChanges.map(({ id }) => id),
+    )
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['correctionImpacts'],
+      message: 'Canonical CorrectionImpact IDs must exactly cover preview taxonomy changes.',
+    });
+  }
+  const canonicalImpactById = new Map(
+    policy.correctionImpacts.map((impact) => [impact.id, impact]),
+  );
+  const learningUnitExamplePath = new RegExp(`^examples\\.${ContentBlockKeyPattern}$`, 'u');
+  const learningUnitExercisePath = new RegExp(`^exercises\\.${ContentBlockKeyPattern}$`, 'u');
+  const learningUnitAnswerPath = new RegExp(
+    `^exercises\\.${ContentBlockKeyPattern}\\.answer$`,
+    'u',
+  );
+  for (const previewImpact of policy.previewTaxonomyChanges) {
+    const canonicalImpact = canonicalImpactById.get(previewImpact.id);
+    if (canonicalImpact === undefined) continue;
+    if (canonicalImpact.verificationStatus !== 'pending') {
+      context.addIssue({
+        code: 'custom',
+        path: ['correctionImpacts'],
+        message: `Canonical CorrectionImpact ${previewImpact.id} must remain pending until its target content and derived indexes are verified.`,
+      });
+    }
+    if (
+      canonicalImpact.sourceRevisionIds === undefined ||
+      !sameFinalTaxonomySet(canonicalImpact.sourceRevisionIds, previewImpact.sourceRevisionIds)
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['correctionImpacts'],
+        message: `Canonical CorrectionImpact ${previewImpact.id} must preserve every source revision.`,
+      });
+    }
+    if (
+      !sameFinalTaxonomySet(
+        canonicalImpact.affectedLearningUnitOrderIds,
+        previewImpact.affectedLearningUnitOrderIds,
+      ) ||
+      !sameFinalTaxonomySet(canonicalImpact.derivedIndexPaths, previewImpact.derivedIndexPaths)
+    ) {
+      context.addIssue({
+        code: 'custom',
+        path: ['correctionImpacts'],
+        message: `Canonical CorrectionImpact ${previewImpact.id} has stale order or index coverage.`,
+      });
+    }
+    for (const assessment of previewImpact.surfaceAssessments) {
+      let hasCanonicalMapping: boolean;
+      let assessmentDescription: string;
+      if (assessment.ownerType === 'problem') {
+        assessmentDescription = `${assessment.problemId}'s ${assessment.surface} surface`;
+        if (assessment.surface === 'placement') {
+          hasCanonicalMapping = canonicalImpact.affectedContentLocators.some(
+            (locator) =>
+              locator.ownerType === 'problem_placement' &&
+              locator.problemId === assessment.problemId &&
+              locator.path === 'src/content/policies/problem-placements.json',
+          );
+        } else if (assessment.surface === 'derived_index') {
+          hasCanonicalMapping = previewImpact.derivedIndexPaths.every((path) =>
+            canonicalImpact.derivedIndexPaths.includes(path),
+          );
+        } else {
+          const expectedPath =
+            assessment.surface === 'body'
+              ? 'sections.reasoning'
+              : assessment.surface === 'example'
+                ? 'examples.taxonomy-integration'
+                : assessment.surface === 'exercise'
+                  ? 'exercises.taxonomy-integration'
+                  : 'exercises.taxonomy-integration.answer';
+          hasCanonicalMapping = canonicalImpact.affectedContentLocators.some(
+            (locator) =>
+              locator.ownerType === 'problem' &&
+              locator.problemId === assessment.problemId &&
+              locator.path === expectedPath,
+          );
+        }
+      } else if (assessment.ownerType === 'learning_unit_candidate') {
+        assessmentDescription = `${assessment.learningUnitId}'s ${assessment.surface} surface`;
+        if (assessment.surface === 'standard_order') {
+          hasCanonicalMapping = canonicalImpact.affectedLearningUnitOrderIds.includes(
+            assessment.learningUnitId,
+          );
+        } else if (assessment.surface === 'derived_index') {
+          hasCanonicalMapping = previewImpact.derivedIndexPaths.every((path) =>
+            canonicalImpact.derivedIndexPaths.includes(path),
+          );
+        } else if (assessment.surface === 'body') {
+          hasCanonicalMapping = canonicalImpact.affectedContentLocators.some(
+            (locator) =>
+              locator.ownerType === 'learning_unit' &&
+              locator.learningUnitId === assessment.learningUnitId &&
+              locator.path === 'content',
+          );
+        } else {
+          hasCanonicalMapping = canonicalImpact.affectedContentLocators.some(
+            (locator) =>
+              locator.ownerType === 'learning_unit' &&
+              locator.learningUnitId === assessment.learningUnitId &&
+              (assessment.surface === 'example'
+                ? learningUnitExamplePath.test(locator.path)
+                : assessment.surface === 'exercise'
+                  ? learningUnitExercisePath.test(locator.path)
+                  : learningUnitAnswerPath.test(locator.path)),
+          );
+        }
+      } else {
+        assessmentDescription = `${assessment.path}'s derived-index surface`;
+        hasCanonicalMapping = canonicalImpact.derivedIndexPaths.includes(assessment.path);
+      }
+      if (!hasCanonicalMapping) {
+        context.addIssue({
+          code: 'custom',
+          path: ['correctionImpacts'],
+          message: `Canonical CorrectionImpact ${previewImpact.id} omits ${assessmentDescription}.`,
+        });
+      }
+    }
+  }
+});
+
 export const CatalogContract = defineZodContractSchema(
   'catalog.schema.json',
   CatalogSchema,
@@ -2707,6 +3162,8 @@ export const CatalogContract = defineZodContractSchema(
     PreMaterializationCorrectionImpact: PreMaterializationCorrectionImpactSchema,
     TaxonomyIntegrationMap: TaxonomyIntegrationMapSchema,
     FinalTaxonomyBuild: FinalTaxonomyBuildSchema,
+    CanonicalLearningOrder: CanonicalLearningOrderSchema,
+    CanonicalProblemPlacementPolicy: CanonicalProblemPlacementPolicySchema,
   },
 );
 

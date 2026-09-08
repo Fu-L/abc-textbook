@@ -1,0 +1,23 @@
+{
+  "id": "outcome-classify-game-states",
+  "statement": "後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc212-h",
+    "abc255-g",
+    "abc265-ex",
+    "abc278-f",
+    "abc278-g",
+    "abc297-g",
+    "abc354-e",
+    "abc368-f",
+    "abc380-f",
+    "abc398-e",
+    "abc398-g",
+    "abc433-g",
+    "tag-game-grundy-dp",
+    "unit-dp-game"
+  ]
+}

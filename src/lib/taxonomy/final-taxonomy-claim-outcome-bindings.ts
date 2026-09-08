@@ -556,10 +556,10 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
   },
   'abc411-e': {
     '/typicalTechniques/0': [primary('outcome-reorder-counting-contributions')],
-    '/typicalTechniques/2': [primary('outcome-compute-in-modular-arithmetic')],
+    '/typicalTechniques/2': [primary('outcome-maintain-modular-product-under-factor-updates')],
     '/prerequisiteCandidates/0': [
-      sameTag('outcome-reorder-counting-contributions', 'outcome-compute-in-modular-arithmetic'),
-      supporting('outcome-linearize-events'),
+      sameTag('outcome-reorder-counting-contributions'),
+      supporting('outcome-compute-in-modular-arithmetic', 'outcome-linearize-events'),
     ],
   },
   'abc418-g': {

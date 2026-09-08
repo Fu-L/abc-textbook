@@ -1,0 +1,49 @@
+{
+  "id": "tag-string-state-representation",
+  "name": "文字列状態表現",
+  "definition": "一致・接辞・反復を十分な文字列状態へ圧縮する。",
+  "parentId": null,
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "string",
+      "文字列",
+      "部分文字列"
+    ],
+    "triggerPatterns": [
+      "一致",
+      "反復",
+      "回文",
+      "辞"
+    ],
+    "invariantPatterns": [
+      "prefix",
+      "suffix",
+      "最長共通"
+    ],
+    "goalPatterns": [
+      "一致",
+      "検索",
+      "比較"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-model-string-state"
+  ],
+  "representativeProblemIds": [
+    "abc362-g",
+    "abc398-f",
+    "abc430-e"
+  ],
+  "aliases": [
+    "string algorithms",
+    "文字列アルゴリズム"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

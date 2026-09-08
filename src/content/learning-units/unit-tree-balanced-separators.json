@@ -1,0 +1,99 @@
+{
+  "id": "unit-tree-balanced-separators",
+  "kind": "section",
+  "title": "重心を分離点として木を再帰分解する",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "LCA・HLDによる固定木上パスの区間分解。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc291-editorial-5840-f81899847d6c0912676ee91faaba0803527dfcec357072d21460af24e7909b0c",
+    "source-abc291-ex-problem-0f5a2a3d492a1dc4e0890bcd3980e0243acdf9436eed5817e512836de4613d9d",
+    "source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6",
+    "source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc",
+    "source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538",
+    "source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0"
+  ],
+  "tagIds": [
+    "tag-tree-balanced-separator"
+  ],
+  "ownedTagIds": [
+    "tag-tree-balanced-separator"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-balanced-separator-decomposition"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-balanced-separator-decomposition"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/tree-balanced-separators.md",
+  "problemIds": [
+    "abc291-ex",
+    "abc359-g",
+    "abc453-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-build-balanced-separator-decomposition",
+      "learningOutcomeIds": [
+        "outcome-build-balanced-separator-decomposition"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC291 Ex「Balanced Tree」について、各頂点で子部分木が自身の部分木の半分以下という条件は、その部分木の根が重心であることを再帰的に要求している。",
+      "procedure": [
+        "観察: 各頂点で子部分木が自身の部分木の半分以下という条件は、その部分木の根が重心であることを再帰的に要求している。",
+        "着眼: 元木のx-yパスが重心を通らない組は同じ除去後成分内に限られるため、成分ごとの再帰結果を重心の子へ接続してよい。",
+        "方針: 重心分解木を答えとして構成（元木の重心を根とし、重心除去後の各成分を独立に再帰処理すれば、サイズ半減条件とパス包含条件を同時に満たせる。）",
+        "接続: 現在成分の重心を求めて分解木の根とし、重心を除いた各連結成分を再帰処理して得た根の親をその重心に設定する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-build-balanced-separator-decomposition",
+      "learningOutcomeIds": [
+        "outcome-build-balanced-separator-decomposition"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC359 G「Sum of Tree Distance」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 同色頂点pairの距離総和を、重心を通るpairのラベル別集計へ分割して求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 同色頂点pairの距離総和を、重心を通るpairのラベル別集計へ分割して求められる。",
+          "転移題材の解法接続: 現在成分の重心cを求め、DFSで各頂点のラベル、深さ、所属するcの子部分木を集める。ラベル別全数・深さ和からcを端点とする寄与と異なる子部分木間の寄与を加え、子部分木内だけの寄与を差し引く。cを除いた各成分へ再帰する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 3,
+  "representativeRank": 8,
+  "globalIndex": 81,
+  "orderReason": "部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える。"
+}

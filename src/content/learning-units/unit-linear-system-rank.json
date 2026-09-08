@@ -1,0 +1,104 @@
+{
+  "id": "unit-linear-system-rank",
+  "kind": "subsection",
+  "title": "線形方程式・rank",
+  "parentId": "unit-linear-algebra-xor",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "線形方程式・rankの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc276-editorial-5169-30499c5ad8dee84dc3313dc5030eb15318ac0f2c796eeb2d8ebbe00f6c34532c",
+    "source-abc276-ex-problem-9ff677eed53889aa49b0fdb815218f25f42392d1ebcf2d8b2595757bc6879c43",
+    "source-abc278-editorial-5210-0f1a56156ff30245ba49db87069bf35c61ea37eecc6e019379bf06fedd2ac83b",
+    "source-abc278-ex-problem-49227ad1d2ec3968bf08a7cbc0c1fab87d217b52980f2097766caae5bfd774f7",
+    "source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37",
+    "source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"
+  ],
+  "tagIds": [
+    "tag-linear-system-rank"
+  ],
+  "ownedTagIds": [
+    "tag-linear-system-rank"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-linear-system-and-rank"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-linear-system-and-rank"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/linear-system-rank.md",
+  "problemIds": [
+    "abc276-ex",
+    "abc278-ex",
+    "abc323-g",
+    "abc366-g",
+    "abc399-g",
+    "abc412-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-solve-linear-system-and-rank",
+      "learningOutcomeIds": [
+        "outcome-solve-linear-system-and-rank"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC276 Ex「Construct a Matrix」について、積が1または2 mod 3の長方形には0を置けず、要素を1=2^0,2=2^1と書けば積条件は2の個数のparity、すなわちF_2上の長方形xorになる。",
+      "procedure": [
+        "観察: 積が1または2 mod 3の長方形には0を置けず、要素を1=2^0,2=2^1と書けば積条件は2の個数のparity、すなわちF_2上の長方形xorになる。",
+        "観察: 積が0の条件は長方形内に少なくとも1個0があることなので、非零条件を満たす領域と0を置ける領域を分離して考えられる。",
+        "着眼: prefix xor p_{i,j}を使うとrectangle parityはp_{b,d}⊕p_{a-1,d}⊕p_{b,c-1}⊕p_{a-1,c-1}で、queryに現れるcorner以外は0に固定してよい。",
+        "着眼: 非零queryのunion外のcellはどの非零積も壊さないので全て0にできる。これで満たせない0-queryは全cellがunion内であり、どの解でもそこへ0を置けないため不可能である。",
+        "方針: 非零queryを2D prefix xorの4 corner変数によるF_2連立方程式にし、出現cornerだけをbitset Gaussian eliminationで解く。非零queryに覆われないcellを0にする。（cell N²個ではなく高々4Q個のprefix変数で方程式を表し、zero条件もcoverageで最大限満たせる構成になる。）",
+        "接続: e=1,2のqueryだけからcorner prefix変数と右辺(e=2なら1)を作り、F_2掃き出しで一解を得る。未使用prefixは0として2D差分から1/2 matrixを復元し、2D imosで非零queryに覆われないcellを0化する。最後に全queryを検証する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-solve-linear-system-and-rank",
+      "learningOutcomeIds": [
+        "outcome-solve-linear-system-and-rank"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC278 Ex「make 1」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 初回span到達となるdistinct vector列を、q-binomialによるrank数え上げとStirling反転・畳み込みで計算できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 初回span到達となるdistinct vector列を、q-binomialによるrank数え上げとStirling反転・畳み込みで計算できる。",
+          "転移題材の解法接続: q=2のq-factorialと逆元を前計算し、rank式をconvolution形へ整理してG(1…N)をNTTで求める。必要なsigned Stirling係数でF(N),F(N-1)を反転し、distinct全列−Fからgood列を作って初回goodの差を取る。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 3,
+  "representativeRank": 73,
+  "globalIndex": 138,
+  "orderReason": "制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

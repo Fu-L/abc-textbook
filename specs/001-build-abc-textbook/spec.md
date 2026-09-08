@@ -168,7 +168,7 @@ ABC 212以降の上級問題を年代順に並べるだけでなく、必要な�
 - **FR-008**: 各正式タグは名称、定義、学習成果、代表問題、親またはルート、教材上の前提タグ、同義語・旧名称に加え、未知問で想起するための対象・発動条件・不変量・目的・除外条件からなるsemantic signatureを持たなければならない。該当する前提ではないTag間関係がある場合は、その型と学習上の理由も保持しなければならない。該当関係がないTagでは空の関係集合を許容し、件数を満たすためだけの関係を作ってはならない。
 - **FR-009**: 各問題は一つ以上の典型タグに関連付き、主・補助の典型と問題固有の要素を区別しなければならない。
 - **FR-010**: タグの前提関係と学習単位の前提関係を、論理的な最小依存ではなく説明の再利用と自然なprogressionを表す教材上のprecedence constraintとして別々の循環のない関係に保持し、すべての前提が先行する決定的な標準学習順を生成しなければならない。単なる併用、対比、類似、特殊化、拡張、帰着、実装基盤の関係を前提へ押し込んではならない。
-- **FR-011**: 各学習単位は対象学習者の共通前提、追加前提または追加前提なし、対象外、学習成果、説明、例、問題、到達確認を直接参照できなければならない。
+- **FR-011**: 各学習単位は対象学習者の共通前提、追加前提または追加前提なし、対象外、説明、問題を直接参照しなければならない。各canonical TagとLearningOutcomeはそれぞれちょうど一つのUnitが直接所有し、Unitのnavigation用Tag/Outcome集合は自身の直接所有集合と直下の子Unitのnavigation集合の完全な和集合でなければならない。直接所有する各Outcomeには一つの`guided_outcome`例と一つの`outcome_attainment`演習・評価・解答をco-locateし、子を持つ各Unitには直接所有Outcomeの有無にかかわらず、子のOutcome集合だけを対象とする一つの`curriculum_routing`例と演習・評価・解答を別blockとして置かなければならない。直接所有集合が空の構造Unitは必ず子を持ち、routingだけを所有しなければならない。canonical skeletonと後続のfull authoringは明示的な`contentPhase`でbyte所有権を引き継ぎ、T160が公開projectionを切り替えるまでcanonical Markdownをroute・sidebar・検索へ公開してはならない。
 - **FR-012**: 各対象問題は完全解説を既定とし、主要な解法・証明・計算量・前提・学習成果が同じと検証できる場合だけ、根拠と差分付きの類題または補充問題にできる。
 - **FR-013**: 全対象問題は少なくとも一つの教科書学習単位または典型別問題集から到達可能でなければならず、未分類・参照不能な問題がある版を公開してはならない。
 - **FR-014**: コンテスト表は対象範囲で確認されたDより後の問題記号の和集合を公式順の列として生成し、E〜Hに固定せず将来の新しい記号も表示しなければならない。
@@ -185,7 +185,7 @@ ABC 212以降の上級問題を年代順に並べるだけでなく、必要な�
 - **FR-025**: 同じ入力の更新を再実行しても重複問題、重複解説、重複索引を作ってはならない。
 - **FR-026**: mergeおよび公開前に、適用可能な自動検査を実行した人間reviewerが学習成果の被覆を明示的に確認しなければならない。リスク理由のない通常更新ではmanifest ownerが`self` reviewを行い、外部person IDなしで完了できる。公式根拠との矛盾・訂正、独自証明などの自動判定不能な新規正当化、または学習成果・典型タグ・前提・問題配置の重大な分類変更のいずれかを含む高リスク更新では、原則として作成者以外の第三者が`third_party` reviewを行う。ただしmaintainerが一人だけの場合は、全risk reasonを保持して`solo_maintainer`理由を明示したときに限りmanifest ownerの`self` reviewを選択できる。high-risk self-reviewでもcurrent subjectへのbinding、全適用checkの成功、全itemの明示approvalとreview basis、未解消blocking finding 0件を必須とする。review policyと証跡のreview modeは一致し、自己reviewと第三者reviewを証跡上明示的に区別しなければならない。
 - **FR-027**: 一つ以上の更新を含むrelease commitは、未解決の検証失敗または必要レビューの欠落がある間はprotected mainへmergeしてはならない。公開snapshot IDはmerge済みのfull Git commit hashとし、デプロイ時に別のcandidate state、owner approval、独自digestを要求してはならない。
-- **FR-028**: 公式情報の訂正、タグ再編、解説修正では、影響する本文、例、演習、解答、学習順、索引を列挙し、同じ更新単位で再確認しなければならない。
+- **FR-028**: 公式情報の訂正、タグ再編、解説修正では、影響するProblem本文・例・演習・解答・配置、LearningUnit本文・例・演習・解答・学習順、および派生索引を所有者と具体的locatorで列挙し、同じ更新単位で再確認しなければならない。canonical materialization時点で将来taskが所有する対象は`pending`のまま、そのtaskと全Source Revisionを保持しなければならない。
 - **FR-029**: 公開版は壊れた内部参照、未説明の検証失敗、未定義の必須用語、必要な代替テキストの欠落、再現不能な例を含んではならない。
 - **FR-030**: 公開版はversion、cutoff、full Git commit hash、検証結果URL、実際に取り込んだ更新、対象範囲、追加・変更・取り下げ問題、タグ体系の変更、検証日を示す履歴を持ち、未公開の保留試行は管理者向け状態表示へ分離しなければならない。rollbackは履歴中の既知release commitを再deployして行う。
 - **FR-031**: 解説方針は目的、入力、出力、行動規則、品質確認を自己完結して定義する再利用可能で版付きの専用skillへ移し、各解説は使用版を追跡できなければならない。
@@ -210,10 +210,10 @@ ABC 212以降の上級問題を年代順に並べるだけでなく、必要な�
 - **Problem**: 一つの対象問題。コンテスト、問題記号、名称、公式参照、制約、根拠、確認日、公開状態に結び付く。
 - **Explanation**: 考察、典型・固有要素、正当性、計算量、例、注意、助言、出典、使用skill版を持つ学習用説明。
 - **Technique Tag**: 全対象問題を横断して得た再利用可能な典型または考察法。定義、学習成果、親、教材上の前提、代表問題、同義語、未知問でのrecognitionに使うsemantic signature、前提とは独立した型付きTag間関係を持つ。
-- **Learning Unit**: chapter、section、subsectionのいずれかとして配置される教材単位。前提、成果、説明、例、問題、到達確認を持つ。
-- **Problem Placement**: 問題と学習単位・タグを結び、完全解説、類題、補充問題の別と判定根拠を表す。
+- **Learning Unit**: chapter、section、subsectionのいずれかとして配置される教材単位。前提、説明、問題に加え、自身が直接所有するTag・Outcomeと子孫を含むnavigation closureを区別して持つ。直接所有Outcomeは`guided_outcome`と`outcome_attainment`、子Unitへの導線は独立した`curriculum_routing`で扱う。
+- **Problem Placement**: 問題と主・補助Tag/Outcomeを結び、各Outcomeを直接所有するUnitだけを配置先とし、主Outcome所有者から一意な表示Unitを選ぶ。完全解説、類題、補充問題の別と判定根拠も表す。
 - **Source Revision**: 公式情報の確認版、確認日時、指紋、訂正系列、利用条件を表す。
-- **Correction Impact**: 出典や分類の変更が本文、例、演習、解答、学習順、索引へ与える影響を表す。
+- **Correction Impact**: 出典や分類の変更がProblem本文・例・演習・解答・配置、LearningUnit本文・例・演習・解答・学習順、および派生索引へ与える影響を、所有者・具体的locator・全Source Revision・検証状態とともに表す。
 - **Learning Record**: 一人の学習者について、問題ID、解答状況、要復習、各更新日時を表す。
 - **Learning Record Backup**: 学習記録、形式版、作成日時、対象教材版を持つ可搬ファイル。
 - **Publication Update**: 一回の追加・訂正・再編の候補と検証結果をまとめる単位。

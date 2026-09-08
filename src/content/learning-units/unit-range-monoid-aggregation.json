@@ -1,0 +1,135 @@
+{
+  "id": "unit-range-monoid-aggregation",
+  "kind": "subsection",
+  "title": "区間monoid要約",
+  "parentId": "unit-monoid-segment-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+    "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+    "source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c",
+    "source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89",
+    "source-abc246-editorial-3705-73fb7421c296a34062f61baff4f3572476241cbc81f54aac6c14d6374e53381a",
+    "source-abc246-ex-problem-a1b21b8f8e0ba6be58e2ef77d8a5b8fd73c081165d7832ed9a18d9a5cba6efe5"
+  ],
+  "tagIds": [
+    "tag-range-monoid-aggregation"
+  ],
+  "ownedTagIds": [
+    "tag-range-monoid-aggregation"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-associative-range-summary"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-associative-range-summary"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/range-monoid-aggregation.md",
+  "problemIds": [
+    "abc223-f",
+    "abc240-ex",
+    "abc246-ex",
+    "abc248-ex",
+    "abc254-f",
+    "abc262-f",
+    "abc265-g",
+    "abc266-ex",
+    "abc268-ex",
+    "abc283-f",
+    "abc285-f",
+    "abc292-ex",
+    "abc299-g",
+    "abc309-f",
+    "abc322-f",
+    "abc331-f",
+    "abc339-e",
+    "abc343-f",
+    "abc353-g",
+    "abc354-f",
+    "abc356-f",
+    "abc357-f",
+    "abc360-g",
+    "abc365-f",
+    "abc388-g",
+    "abc408-f",
+    "abc410-g",
+    "abc415-f",
+    "abc418-f",
+    "abc424-f",
+    "abc429-f",
+    "abc432-e",
+    "abc434-g",
+    "abc437-f",
+    "abc440-f",
+    "abc447-g",
+    "abc453-g",
+    "abc460-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-design-associative-range-summary",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC223 F「Parenthesis Checking」について、query 区間を '('=+1, ')'=-1 とし、左端直前を 0 とした相対 prefix p_0,...,p_len を考える。正しい括弧列である必要十分条件は p_len=0 かつ min_j p_j≥0 である。",
+      "procedure": [
+        "観察: query 区間を '('=+1, ')'=-1 とし、左端直前を 0 とした相対 prefix p_0,...,p_len を考える。正しい括弧列である必要十分条件は p_len=0 かつ min_j p_j≥0 である。",
+        "観察: N,Q≤2×10^5 なので query ごとの線形走査は使えない。swap は二点の値変更だから、判定条件を結合可能な区間要約にできれば点更新と区間積へ落とせる。",
+        "着眼: minPrefix は空 prefix を含めて定義する。左 (s_L,m_L) と右 (s_R,m_R) の結合は (s_L+s_R,min(m_L,s_L+m_R))、identity は (0,0) となり、結合順を逆にできない非可換 monoid である。",
+        "方針: 各区間の総和と最小 prefix 和を monoid とし、segment tree で点更新と区間積を管理する。（二つの隣接区間の (sum,minPrefix) を O(1) で結合でき、swap の二点更新と query 区間の取得をともに O(log N) で処理できる。）",
+        "接続: leaf を '('=(1,0), ')'=(-1,-1)、identity を (0,0) として segment tree を構築する。type 1 は文字を交換して二点更新し、type 2 は [l,r] の積 (s,m) を取得して s=0 かつ m≥0 なら Yes、それ以外は No とする。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-design-associative-range-summary",
+      "learningOutcomeIds": [
+        "outcome-design-associative-range-summary"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC246 Ex「01? Queries」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 点更新される wildcard 文字列の部分列集合数を、3 状態行列積の segment tree として維持できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 点更新される wildcard 文字列の部分列集合数を、3 状態行列積の segment tree として維持できる。",
+          "転移題材の解法接続: leaf i に A_{s_i} を置く。左区間を先に適用してから右区間を適用するため、親の積を M_right×M_left とする。点更新後、root 行列を (0,0,1)^T に作用させ、先頭 2 成分の和を出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 3,
+  "representativeRank": 75,
+  "globalIndex": 144,
+  "orderReason": "queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

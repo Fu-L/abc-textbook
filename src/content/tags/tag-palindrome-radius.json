@@ -1,0 +1,50 @@
+{
+  "id": "tag-palindrome-radius",
+  "name": "回文半径・Manacher",
+  "definition": "各中心の最大回文半径を左右対称性と既知区間の再利用で線形に求める。",
+  "parentId": "tag-string-state-representation",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "中心",
+      "回文",
+      "左右対称",
+      "文字列"
+    ],
+    "triggerPatterns": [
+      "半径",
+      "反転して一致",
+      "回文判定",
+      "対称"
+    ],
+    "invariantPatterns": [
+      "中心",
+      "半径",
+      "最右端",
+      "鏡像"
+    ],
+    "goalPatterns": [
+      "回文区間",
+      "回文数",
+      "最長回文"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-characterize-palindrome-intervals"
+  ],
+  "representativeProblemIds": [
+    "abc349-g",
+    "abc398-f"
+  ],
+  "aliases": [
+    "Manacher's algorithm",
+    "Manacher法"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,102 @@
+{
+  "id": "unit-heavy-path-tree-dp",
+  "kind": "subsection",
+  "title": "heavy pathによる木DP高速化",
+  "parentId": "unit-tree-aggregation",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-rooted-tree-aggregation"
+  ],
+  "excludedTopics": [
+    "heavy pathによる木DP高速化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524",
+    "source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8",
+    "source-abc311-editorial-6814-952ca8df25e1dc29d36a2d97bf5823cc8ec71cafd9a762902cea712a7640e19f",
+    "source-abc311-ex-problem-e370488f1342f8751a5f37a9f0b8ab00784f5baee29786d775a1e52907cd7dc1"
+  ],
+  "tagIds": [
+    "tag-heavy-path-tree-dp"
+  ],
+  "ownedTagIds": [
+    "tag-heavy-path-tree-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-accelerate-tree-dp-by-heavy-path"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-accelerate-tree-dp-by-heavy-path"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/heavy-path-tree-dp.md",
+  "problemIds": [
+    "abc269-ex",
+    "abc311-ex"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-accelerate-tree-dp-by-heavy-path",
+      "learningOutcomeIds": [
+        "outcome-accelerate-tree-dp-by-heavy-path"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC269 Ex「Antichain」について、subtree vのantichain generating functionをempty set込みでf_v(x)とすると、vを選ぶ場合はxだけ、選ばない場合は各childから独立に選べるため f_v=x+∏f_child となる。",
+      "procedure": [
+        "観察: subtree vのantichain generating functionをempty set込みでf_v(x)とすると、vを選ぶ場合はxだけ、選ばない場合は各childから独立に選べるため f_v=x+∏f_child となる。",
+        "観察: このtree DPを素朴なpolynomial convolutionで行うと、細長い木やcentipede型で総次数処理が二乗に達する。",
+        "着眼: heavy path上でg_iをlight childrenのfの積と置くと f_i=x+g_i f_{i+1} となり、path先頭のfはprefix productsの和としてまとめて計算できる。",
+        "着眼: light edgeを子側へ渡るたびsubtree sizeは半分以下なので、light-rooted subproblemのサイズ総和には対数回分しか課金されない。",
+        "方針: 最大subtreeのchildをheavyとし、各heavy pathではlight-child積g_iを使う一次元漸化式をdivide-and-conquer polynomial productsで評価する。（light edgeを跨ぐ部分木サイズ総和がO(N log N)で、NTTによる積とpath評価を全体O(N log^3 N)に抑えられる。）",
+        "接続: antichainのtree generating-function DPをheavy pathsへ分解し、path recurrenceをNTT付きdivide and conquer、light subtreesをsize-aware mergingで合成する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-accelerate-tree-dp-by-heavy-path",
+      "learningOutcomeIds": [
+        "outcome-accelerate-tree-dp-by-heavy-path"
+      ],
+      "prerequisiteIds": [
+        "outcome-aggregate-rooted-tree",
+        "prereq-abc-advanced-v1",
+        "unit-rooted-tree-aggregation"
+      ],
+      "attainmentCondition": "学習成果「heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC311 Ex「Many Illumination Plans」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: O(NX²) の木 knapsack merge を重軽再帰へ転換し、全根の答えを O(N^{log2 3}X)、空間 O(X log N) で列挙できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: O(NX²) の木 knapsack merge を重軽再帰へ転換し、全根の答えを O(N^{log2 3}X)、空間 O(X log N) で列挙できる。",
+          "転移題材の解法接続: 部分木サイズから heavy child を決める。dfs(c,dp) で c を残す/削る場合の配列を O(X) で作り、heavy child は共有できる一方の経路を一回、各 light child は必要な二状態へ再帰させる。根1で全 heavy path を構成した後、各 heavy path 根から初期配列を渡すことで、その path 上の全 v の F(v) を同時に回収する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 91,
+  "globalIndex": 187,
+  "orderReason": "根付き木DP・部分木集約で得た考え方と実装を再利用し、heavy pathによる木DP高速化の発動条件・正当化・境界を重複なく学ぶ。"
+}

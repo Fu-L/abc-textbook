@@ -1,0 +1,18 @@
+{
+  "id": "outcome-construct-optimal-spanning-tree",
+  "statement": "cut・cycle性質で辺の安全性を証明し、Kruskal法または同値な選択で最小・最大全域木を構成できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-prove-greedy-order"
+  ],
+  "scopeIds": [
+    "abc218-e",
+    "abc270-f",
+    "abc282-e",
+    "abc352-e",
+    "abc355-f",
+    "abc364-f",
+    "abc386-g",
+    "tag-spanning-tree-optimization",
+    "unit-spanning-tree-optimization"
+  ]
+}

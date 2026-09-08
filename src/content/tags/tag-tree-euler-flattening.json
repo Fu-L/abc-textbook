@@ -1,0 +1,52 @@
+{
+  "id": "tag-tree-euler-flattening",
+  "name": "Euler順による部分木区間化",
+  "definition": "DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "DFS順",
+      "tin/tout",
+      "部分木"
+    ],
+    "triggerPatterns": [
+      "subtree query",
+      "部分木更新"
+    ],
+    "invariantPatterns": [
+      "入退時刻",
+      "連続区間"
+    ],
+    "goalPatterns": [
+      "区間query",
+      "配列化"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-range-monoid-aggregation",
+      "type": "often_combined",
+      "rationale": "部分木を連続区間へ写し、区間集約・一点更新・差分伝播へ接続するときに併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-flatten-tree-by-euler-order"
+  ],
+  "representativeProblemIds": [
+    "abc240-e",
+    "abc294-g",
+    "abc406-f"
+  ],
+  "aliases": [
+    "DFS order",
+    "Euler Tourによる部分木区間化",
+    "Euler tour flattening"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

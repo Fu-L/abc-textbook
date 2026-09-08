@@ -1,0 +1,95 @@
+{
+  "id": "unit-graph-core-peeling",
+  "kind": "section",
+  "title": "次数構造からgraph coreまたは小さなkernelへ縮約する",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "DFS時刻とlowlink値による橋・関節点の判定。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c",
+    "source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26",
+    "source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a",
+    "source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153",
+    "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+    "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+  ],
+  "tagIds": [
+    "tag-graph-core-peeling",
+    "tag-near-tree-kernelization"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-kernelize-near-tree-graph",
+    "outcome-peel-graph-core"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/graph-core-peeling.md",
+  "problemIds": [
+    "abc266-f",
+    "abc267-e",
+    "abc419-g"
+  ],
+  "examples": [
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-kernelize-near-tree-graph",
+        "outcome-peel-graph-core"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（学習経路の比較）",
+      "omissions": [
+        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
+      ],
+      "environment": "紙上での未知問のモデル化と候補比較",
+      "input": "次数構造からgraph coreまたは小さなkernelへ縮約するの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
+      "procedure": [
+        "graph core・leaf peeling: 1個の直接所有Outcome、学ぶ理由「次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件と正当化原理を比較可能な独立教材として学ぶ」、対象外「graph core・leaf peelingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "near-tree graphのkernel化: 1個の直接所有Outcome、学ぶ理由「cycle space・fundamental cycle basis・graph core・leaf peelingで得た考え方と実装を再利用し、near-tree graphのkernel化の発動条件・正当化・境界を重複なく学ぶ」、対象外「near-tree graphのkernel化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-kernelize-near-tree-graph",
+        "outcome-peel-graph-core"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
+      "assessment": {
+        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
+        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
+      },
+      "answer": {
+        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
+        "procedure": [
+          "問題を対象・操作・保つ量・求める量へ分解する。",
+          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
+          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
+          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
+        ],
+        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 2,
+  "representativeRank": 12,
+  "globalIndex": 66,
+  "orderReason": "連結性を探索できることを前提に、低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。"
+}

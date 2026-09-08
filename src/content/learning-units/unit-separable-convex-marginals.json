@@ -1,0 +1,107 @@
+{
+  "id": "unit-separable-convex-marginals",
+  "kind": "subsection",
+  "title": "分離凸・凹の単調限界値選択",
+  "parentId": "unit-discrete-convex",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-basic-convex-optimization"
+  ],
+  "excludedTopics": [
+    "分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812",
+    "source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd",
+    "source-abc359-editorial-10260-2b6d1547de087bbf4176fd0e68c8db96a391c2283b8cae857798b0b04b0ffab8",
+    "source-abc359-f-problem-2b056103c3c211859dd536326e8594c8e2edc62f670339e9bf6745247be29142",
+    "source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d",
+    "source-abc369-g-problem-2b9423c419137fa16d4dc77e6739a0ec2fe5858da5fda63a67ee7e0247093265"
+  ],
+  "tagIds": [
+    "tag-separable-convex-marginals"
+  ],
+  "ownedTagIds": [
+    "tag-separable-convex-marginals"
+  ],
+  "learningOutcomeIds": [
+    "outcome-allocate-by-convex-marginal-costs"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-allocate-by-convex-marginal-costs"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/separable-convex-marginals.md",
+  "problemIds": [
+    "abc216-e",
+    "abc359-f",
+    "abc369-g",
+    "abc373-f",
+    "abc389-e"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-allocate-by-convex-marginal-costs",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC216 E「Amusement Park」について、アトラクション i から得る幸福度は乗るたび A_i,A_i−1,… と一ずつ減り、0 未満にはならない。",
+      "procedure": [
+        "観察: アトラクション i から得る幸福度は乗るたび A_i,A_i−1,… と一ずつ減り、0 未満にはならない。",
+        "観察: 乗る順序は将来の候補値を変えないため、全アトラクションが持つ減少列を合わせた中から大きい値を K 個選ぶ問題とみなせる。",
+        "着眼: 貪欲に一回ずつ最大値を取る結果には共通の境界値があり、境界より上は全て選び、境界値だけ必要個数を選ぶ。",
+        "着眼: 一つの A_i について m より大きい幸福度は A_i から m＋1 までの連続整数なので、個数と和を等差数列で計算できる。",
+        "方針: 選ばれる幸福度の境界値 m を二分探索し、m より大きい項を等差数列の和で一括取得して残りを m で埋める。（値が閾値以上の項数は閾値に対して単調で、各減少列の個数と総和を式でまとめられる。）",
+        "接続: 減少する限界利益列の上位 K 項選択を、値域上の順位閾値探索へ変換し、各列の閾値超過部分を算術級数としてまとめて加算する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "分離凸費用または分離凹利益を単調な限界値列へ分解し、heap mergeか閾値別の個数・総和により必要な上位・下位K項を選べる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-allocate-by-convex-marginal-costs",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "prerequisiteIds": [
+        "outcome-optimize-univariate-convex-function",
+        "prereq-abc-advanced-v1",
+        "unit-basic-convex-optimization"
+      ],
+      "attainmentCondition": "学習成果「分離凸費用または分離凹利益を単調な限界値列へ分解し、heap mergeか閾値別の個数・総和により必要な上位・下位K項を選べる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC359 F「Tree Degree Optimization」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「分離凸費用または分離凹利益を単調な限界値列へ分解し、heap mergeか閾値別の個数・総和により必要な上位・下位K項を選べる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 木全体の探索を実現可能次数列への凸資源配分に変え、最小費用をheapで構成できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 木全体の探索を実現可能次数列への凸資源配分に変え、最小費用をheapで構成できる。",
+          "転移題材の解法接続: answer=ΣA_i、d_i=1で初期化し、各頂点の次の増分3A_iをheapへ入れる。N−2回、最小増分をanswerへ加えた頂点のd_iを1増やし、新しいA_i(2d_i+1)をheapへ戻す。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "分離凸費用または分離凹利益を単調な限界値列へ分解し、heap mergeか閾値別の個数・総和により必要な上位・下位K項を選べる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 3,
+  "representativeRank": 77,
+  "globalIndex": 153,
+  "orderReason": "離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。"
+}

@@ -1,0 +1,76 @@
+{
+  "id": "tag-coordinate-compression",
+  "name": "座標・値の順序保存圧縮",
+  "definition": "疎な初期値・将来更新値・event座標をsort-uniqueし、順序と等値性を保つdense indexまたは有限状態へ写す。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "key",
+      "値",
+      "座標",
+      "更新値",
+      "疎な状態"
+    ],
+    "triggerPatterns": [
+      "sort",
+      "unique",
+      "大小関係だけ",
+      "将来のqueryを先読み"
+    ],
+    "invariantPatterns": [
+      "dense index",
+      "有限候補",
+      "等値性を保つ",
+      "順序を保つ"
+    ],
+    "goalPatterns": [
+      "Fenwick Tree",
+      "Segment Tree",
+      "有限状態化",
+      "配列添字化"
+    ],
+    "excludedPatterns": [
+      "linear scan only",
+      "単純scanだけ",
+      "固定.*方向.*scanだけ"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-event-sweep",
+      "type": "contrast",
+      "rationale": "順序付きeventに沿ってactive状態を更新する走査と、順序・等値性だけを保って添字化する圧縮を区別する。"
+    },
+    {
+      "tagId": "tag-event-sweep",
+      "type": "often_combined",
+      "rationale": "疎なevent座標を圧縮してFenwick TreeやSegment Tree上でactive情報を更新する構成で頻繁に併用する。"
+    },
+    {
+      "tagId": "tag-fenwick-weighted-prefix",
+      "type": "often_combined",
+      "rationale": "疎な値を順序保存圧縮してから、個数・重み・反転数をprefix集約する構成で併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-compress-sparse-keys"
+  ],
+  "representativeProblemIds": [
+    "abc221-e",
+    "abc287-g",
+    "abc351-f",
+    "abc374-f"
+  ],
+  "aliases": [
+    "coordinate compression",
+    "rank compression",
+    "値圧縮",
+    "座標圧縮"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

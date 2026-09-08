@@ -1,0 +1,51 @@
+{
+  "id": "tag-segment-tree-beats",
+  "name": "Segment Tree Beats",
+  "definition": "nodeの最大/次点/個数等からrange chmin/chmaxが一括適用できる条件を判定し、失敗時だけ子へ降りる。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [
+    "tag-range-monoid-aggregation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "lazy action",
+      "range extrema",
+      "second extrema"
+    ],
+    "triggerPatterns": [
+      "range chmin/chmax",
+      "値域更新"
+    ],
+    "invariantPatterns": [
+      "potential decrease",
+      "作用可能条件",
+      "最大値個数"
+    ],
+    "goalPatterns": [
+      "非自明range update"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-range-monoid-aggregation",
+      "type": "extension",
+      "rationale": "区間monoid要約へ最大値・次点・個数と作用可能条件を加え、通常の一様な遅延作用で閉じないchmin/chmax更新まで扱う。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-prune-range-actions-by-node-invariant"
+  ],
+  "representativeProblemIds": [
+    "abc430-g"
+  ],
+  "aliases": [
+    "Segment Tree Beats",
+    "range chmin/chmax"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

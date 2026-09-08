@@ -1,0 +1,54 @@
+{
+  "id": "tag-range-monoid-aggregation",
+  "name": "区間monoid要約",
+  "definition": "queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "monoid",
+      "区間",
+      "要約"
+    ],
+    "triggerPatterns": [
+      "point update",
+      "range fold",
+      "非可換合成"
+    ],
+    "invariantPatterns": [
+      "単位元",
+      "結合法則",
+      "順序"
+    ],
+    "goalPatterns": [
+      "区間query",
+      "境界探索"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-tree-euler-flattening",
+      "type": "often_combined",
+      "rationale": "部分木を連続区間へ写し、区間集約・一点更新・差分伝播へ接続するときに併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-associative-range-summary"
+  ],
+  "representativeProblemIds": [
+    "abc223-f",
+    "abc343-f"
+  ],
+  "aliases": [
+    "monoid range query",
+    "segment tree",
+    "セグメント木",
+    "線分木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

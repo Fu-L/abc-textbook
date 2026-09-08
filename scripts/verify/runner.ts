@@ -19,6 +19,7 @@ export interface VerificationStep {
     | 'authoring'
     | 'taxonomy'
     | 'final-taxonomy'
+    | 'canonical-taxonomy'
     | 'learning-content'
     | 'build'
     | 'links'
@@ -35,6 +36,7 @@ export const VERIFICATION_STEPS: readonly VerificationStep[] = [
   { id: 'authoring', script: 'corpus:verify-authoring' },
   { id: 'taxonomy', script: 'preview:taxonomy' },
   { id: 'final-taxonomy', script: 'corpus:final-taxonomy' },
+  { id: 'canonical-taxonomy', script: 'corpus:materialize-taxonomy' },
   { id: 'learning-content', script: 'preview:learning-content' },
   { id: 'build', script: 'build' },
   { id: 'links', script: 'link:check:built' },

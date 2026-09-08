@@ -1,0 +1,98 @@
+{
+  "id": "unit-eventual-unbounded-knapsack",
+  "kind": "subsection",
+  "title": "大容量unbounded knapsackのeventual linearity",
+  "parentId": "unit-dp-subset-resource",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-subset-resource"
+  ],
+  "excludedTopics": [
+    "大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc415-editorial-13491-7ff02c91fc89331a46e6a0fde2e67669aaeba522f010beb4e5082f6094228007",
+    "source-abc415-g-problem-30342d182a7e8aad786d0e0357570b03b351ad48294fbde0112e5e3197c04006"
+  ],
+  "tagIds": [
+    "tag-eventual-unbounded-knapsack"
+  ],
+  "ownedTagIds": [
+    "tag-eventual-unbounded-knapsack"
+  ],
+  "learningOutcomeIds": [
+    "outcome-stabilize-unbounded-knapsack-by-best-density"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-stabilize-unbounded-knapsack-by-best-density"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/eventual-unbounded-knapsack.md",
+  "problemIds": [
+    "abc415-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-stabilize-unbounded-knapsack-by-best-density",
+      "learningOutcomeIds": [
+        "outcome-stabilize-unbounded-knapsack-by-best-density"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC415 G「Get Many Cola」について、一本飲んでexchange iを一回行うと最終的な瓶総数をD_i=A_i-B_iだけ消費し、追加でB_i本飲める。逆向きに見ると、容量Nでweight D_i・value B_iのunbounded knapsackに近い。",
+      "procedure": [
+        "観察: 一本飲んでexchange iを一回行うと最終的な瓶総数をD_i=A_i-B_iだけ消費し、追加でB_i本飲める。逆向きに見ると、容量Nでweight D_i・value B_iのunbounded knapsackに近い。",
+        "観察: ただし初期段階にはx≥B_iという実行条件がある。x≥K=max A_iになれば全B_i<Kなので条件は自動的に満たされ、以後は通常のunbounded knapsackになる。",
+        "着眼: 同じA_iならB_i最大のoptionだけがD_iも小さくvalueも大きいので他を削除でき、残る種類数はK以下になる。",
+        "着眼: 非i* itemがK個あればprefix weight和K+1個のmod D_{i*} residueに一致pairがあり、そのblockを同weightのi*複数へ交換できる。best ratioにより価値は減らない。",
+        "方針: best ratio B_i/D_i のitem i*以外を使う総weightがK(K+1)未満の最適解を利用し、小容量DP後をi*の反復で埋める（prefix x<K(K+1)だけ全itemでDPし、各到達xから残容量へi*を可能なだけ使う。鳩の巣原理でK個以上の非i* item blockは同weightのi*群へ価値を下げず交換できる。）",
+        "接続: 同じAを最大Bだけにdeduplicateし、cross multiplicationでi*を選ぶ。limit=K(K+1)付近まで、開始xを自由に選べる基底0と条件x≥B_iを反映したunbounded DPで最大追加drink数を求める。各DP state xからi*をfloor((N-x)/D*)回追加する候補を評価し、初期N本を足す。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-stabilize-unbounded-knapsack-by-best-density",
+      "learningOutcomeIds": [
+        "outcome-stabilize-unbounded-knapsack-by-best-density"
+      ],
+      "prerequisiteIds": [
+        "outcome-design-resource-dp",
+        "prereq-abc-advanced-v1",
+        "unit-dp-subset-resource"
+      ],
+      "attainmentCondition": "学習成果「剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "assessment": {
+        "method": "ABC415 G「Get Many Cola」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
+          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
+          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
+          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
+          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+        ],
+        "expectedResult": "剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 97,
+  "globalIndex": 203,
+  "orderReason": "通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。"
+}

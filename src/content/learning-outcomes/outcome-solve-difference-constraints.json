@@ -1,0 +1,13 @@
+{
+  "id": "outcome-solve-difference-constraints",
+  "statement": "差の不等式をconstraint graphへ変換し、緩和と負閉路判定により可解性・極値・具体解を求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-model-and-compute-shortest-path"
+  ],
+  "scopeIds": [
+    "abc216-g",
+    "abc404-g",
+    "tag-difference-constraints",
+    "unit-difference-constraints"
+  ]
+}

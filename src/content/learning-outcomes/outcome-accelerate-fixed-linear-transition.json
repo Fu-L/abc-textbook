@@ -1,0 +1,22 @@
+{
+  "id": "outcome-accelerate-fixed-linear-transition",
+  "statement": "固定線形遷移を行列または漸化式にし、巨大回数後の値を求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc245-ex",
+    "abc256-g",
+    "abc258-ex",
+    "abc270-ex",
+    "abc271-g",
+    "abc293-e",
+    "abc299-ex",
+    "abc300-ex",
+    "abc305-g",
+    "abc429-g",
+    "abc458-f",
+    "tag-linear-recurrence-matrix",
+    "unit-linear-recurrence"
+  ]
+}

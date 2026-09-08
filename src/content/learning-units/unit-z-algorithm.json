@@ -1,0 +1,103 @@
+{
+  "id": "unit-z-algorithm",
+  "kind": "subsection",
+  "title": "Z algorithmによるprefix matching",
+  "parentId": "unit-string-prefix-automata",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "Z algorithmによるprefix matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9",
+    "source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5",
+    "source-abc284-editorial-5469-086567d5bc108a7291f4c1d4973ccd013271e712328f658717cbe60d191ad88b",
+    "source-abc284-f-problem-cc633bf52d2810b496bd59853d6a158c16ff4f1060d5538c668187b9b09732e0",
+    "source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6",
+    "source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e"
+  ],
+  "tagIds": [
+    "tag-z-algorithm-prefix-matching"
+  ],
+  "ownedTagIds": [
+    "tag-z-algorithm-prefix-matching"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-prefix-match-state"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-prefix-match-state"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/z-algorithm.md",
+  "problemIds": [
+    "abc257-g",
+    "abc284-f",
+    "abc312-ex",
+    "abc343-g",
+    "abc430-e",
+    "abc434-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-build-prefix-match-state",
+      "learningOutcomeIds": [
+        "outcome-build-prefix-match-state"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC257 G「Prefix Concatenation」について、Tの位置iから切り出せる断片長はSとの最長共通接頭辞L_i以下の全てであり、一つの長さが使えればそれより短いSの接頭辞も全て使える。",
+      "procedure": [
+        "観察: Tの位置iから切り出せる断片長はSとの最長共通接頭辞L_i以下の全てであり、一つの長さが使えればそれより短いSの接頭辞も全て使える。",
+        "着眼: Z-algorithmをS+区切り文字+Tへ適用すれば、全開始位置のL_iを合計線形時間で求められる。",
+        "着眼: p個以下の断片で到達できる接頭辞長は区間をなし、その全開始位置からのi+L_iの最大がp+1個で届く最遠端になる。",
+        "方針: Z値と到達可能接頭辞の区間frontier DP（各開始位置iから到達可能な終端が連続区間[i+1,i+L_i]になるため、同じ使用回数で届く最遠端を走査して次のfrontierを線形に広げられる。）",
+        "接続: S、未使用文字、Tを連結してZ値から各T位置のL_iを得る。到達済み位置を左から一度ずつ走査し、現在の断片数で使える開始位置のmax(i+L_i)を次frontierとして更新する。frontierが伸びなければ-1、|T|へ達した段階数を答える。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "既知のZ-boxを再利用してZ arrayを線形時間で構成し、各位置から始まる接尾辞と文字列全体のprefixの最大一致長を、文字列連結によるprefix照合へ利用できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-build-prefix-match-state",
+      "learningOutcomeIds": [
+        "outcome-build-prefix-match-state"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「既知のZ-boxを再利用してZ arrayを線形時間で構成し、各位置から始まる接尾辞と文字列全体のprefixの最大一致長を、文字列連結によるprefix照合へ利用できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC284 F「ABCBAC」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「既知のZ-boxを再利用してZ arrayを線形時間で構成し、各位置から始まる接尾辞と文字列全体のprefixの最大一致長を、文字列連結によるprefix照合へ利用できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 条件を満たすSと切れ目iを線形時間で発見し、存在しなければ-1を判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 条件を満たすSと切れ目iを線形時間で発見し、存在しなければ-1を判定できる。",
+          "転移題材の解法接続: A=Tの前半、B=後半のreverseを作り、X=A+BとY=B+AのZ-arrayを計算する。i=0..Nについて、i=0なら第1条件、i=Nなら第2条件を空文字として扱い、それ以外はZ_X[2N-i]≥iかつZ_Y[N+i]≥N-iを確認する。最初の成立iでS=T[0,i)+T[N+i,2N)とiを出力し、なければ-1を出す。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "既知のZ-boxを再利用してZ arrayを線形時間で構成し、各位置から始まる接尾辞と文字列全体のprefixの最大一致長を、文字列連結によるprefix照合へ利用できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 3,
+  "representativeRank": 71,
+  "globalIndex": 134,
+  "orderReason": "各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

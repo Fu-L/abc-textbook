@@ -1,0 +1,64 @@
+{
+  "id": "tag-geometry-orientation-transform",
+  "name": "幾何の基本判定・配置・座標変換",
+  "definition": "交差・方向・距離・接触条件を、外積、端点順、格子占有または変換後座標の局所判定にする。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "座標",
+      "弦",
+      "点",
+      "直線",
+      "立方体",
+      "線分",
+      "距離",
+      "面"
+    ],
+    "triggerPatterns": [
+      "交差",
+      "回転",
+      "左側",
+      "幾何",
+      "接触",
+      "方向",
+      "端点順"
+    ],
+    "invariantPatterns": [
+      "cross",
+      "x-y",
+      "x\\+y",
+      "六近傍",
+      "端点の交互性",
+      "符号"
+    ],
+    "goalPatterns": [
+      "交点",
+      "判定",
+      "移動コスト",
+      "距離",
+      "隣接面"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-reduce-geometry-to-algebraic-predicates"
+  ],
+  "representativeProblemIds": [
+    "abc220-g",
+    "abc223-e",
+    "abc351-e"
+  ],
+  "aliases": [
+    "Manhattan transform",
+    "computational geometry",
+    "外積判定",
+    "計算幾何"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

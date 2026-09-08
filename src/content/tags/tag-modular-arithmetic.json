@@ -1,0 +1,55 @@
+{
+  "id": "tag-modular-arithmetic",
+  "name": "法上の四則演算・高速累乗・逆元",
+  "definition": "剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算・確率を計算する。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "mod",
+      "剰余",
+      "法",
+      "確率",
+      "逆元"
+    ],
+    "triggerPatterns": [
+      "modを取る",
+      "二分累乗",
+      "法で割る",
+      "逆元を掛ける"
+    ],
+    "invariantPatterns": [
+      "乗法単位元",
+      "合同類",
+      "正規化",
+      "逆元の存在"
+    ],
+    "goalPatterns": [
+      "剰余での確率",
+      "巨大冪",
+      "法上の値",
+      "法上の除算"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-compute-in-modular-arithmetic"
+  ],
+  "representativeProblemIds": [
+    "abc215-g",
+    "abc228-e"
+  ],
+  "aliases": [
+    "modular arithmetic",
+    "modular exponentiation",
+    "modular inverse",
+    "モジュラ逆元",
+    "法上の四則演算"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

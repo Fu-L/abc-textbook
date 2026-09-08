@@ -1,0 +1,60 @@
+{
+  "id": "tag-prefix-difference",
+  "name": "累積和・差分配列",
+  "definition": "一次元区間や二次元矩形の情報、または一括加算を接頭辞・端点の差へ変換し、query・数え上げ・復元に使う。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "grid",
+      "prefix",
+      "rectangle",
+      "区間",
+      "合計",
+      "矩形",
+      "配列"
+    ],
+    "triggerPatterns": [
+      "4.*corner",
+      "rectangle.*query",
+      "一括加算",
+      "区間和",
+      "連続区間"
+    ],
+    "invariantPatterns": [
+      "prefixの差",
+      "total.*inside",
+      "左端と右端",
+      "差分",
+      "補集合"
+    ],
+    "goalPatterns": [
+      "distinct",
+      "区間和",
+      "各位置の値",
+      "種類数",
+      "集計"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-linearize-static-range-information"
+  ],
+  "representativeProblemIds": [
+    "abc260-g",
+    "abc341-e",
+    "abc430-f"
+  ],
+  "aliases": [
+    "difference array",
+    "prefix sums",
+    "いもす法",
+    "累積和"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

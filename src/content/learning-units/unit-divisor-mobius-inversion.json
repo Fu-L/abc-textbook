@@ -1,0 +1,107 @@
+{
+  "id": "unit-divisor-mobius-inversion",
+  "kind": "subsection",
+  "title": "約数格子のzeta・Möbius反転",
+  "parentId": "unit-inclusion-exclusion",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-prime-divisor"
+  ],
+  "excludedTopics": [
+    "約数格子のzeta・Möbius反転の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd",
+    "source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae",
+    "source-abc304-editorial-6511-ddd57c50291556fbe38e4db2238919b9c70daa74e48096ec0d0655b1d6fa718e",
+    "source-abc304-f-problem-b902c20c4f077e5c415a49f03de5f281397ae7faba2c8df6f44fecad1b786fe1"
+  ],
+  "tagIds": [
+    "tag-divisor-mobius-inversion"
+  ],
+  "ownedTagIds": [
+    "tag-divisor-mobius-inversion"
+  ],
+  "learningOutcomeIds": [
+    "outcome-invert-divisor-lattice-by-mobius"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-invert-divisor-lattice-by-mobius"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/divisor-mobius-inversion.md",
+  "problemIds": [
+    "abc212-g",
+    "abc230-g",
+    "abc304-f",
+    "abc335-g",
+    "abc361-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-invert-divisor-lattice-by-mobius",
+      "learningOutcomeIds": [
+        "outcome-invert-divisor-lattice-by-mobius"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC230 G「GCD Permutation」について、GCD(i,j)≠1 は、i と j が共通して持つ 2 以上の約数の存在条件であり、P_i,P_j 側も同じ形をしている。",
+      "procedure": [
+        "観察: GCD(i,j)≠1 は、i と j が共通して持つ 2 以上の約数の存在条件であり、P_i,P_j 側も同じ形をしている。",
+        "観察: 各 GCD の「1 でない」を約数上の符号和で指示できれば、二条件の積を a,b の倍数である位置数へ交換して集約できる。",
+        "着眼: num(a,b) を i が a の倍数かつ P_i が b の倍数となる位置数とすると、i≤j の組数は num(a,b)(num(a,b)＋1)/2 になる。",
+        "着眼: 修正係数は 1 を除く square-free 数だけで非零になり、20 万以下では相異なる素因数が高々 6 個なので列挙約数は高々 63 個である。",
+        "方針: 約数和が n≥2 の指示関数になる修正 Möbius 係数を両軸に適用し、a の倍数位置を走査して P_i の square-free 約数 b ごとの個数を集計する。（条件を約数対 (a,b) ごとの位置集合へ分解でき、非零係数を持つ b の個数が各 P_i で少ない。）",
+        "接続: 二つの非互いに素条件を修正 Möbius 反転で約数対へ展開し、倍数走査と P_i の非零 square-free 約数列挙から num(a,b) の三角数を符号付き加算する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "約数/倍数方向の累積値とexact gcd・period値をnumber-theoretic Möbius関数または格子反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-invert-divisor-lattice-by-mobius",
+      "learningOutcomeIds": [
+        "outcome-invert-divisor-lattice-by-mobius"
+      ],
+      "prerequisiteIds": [
+        "outcome-decompose-by-prime-or-divisor",
+        "prereq-abc-advanced-v1",
+        "unit-prime-divisor"
+      ],
+      "attainmentCondition": "学習成果「約数/倍数方向の累積値とexact gcd・period値をnumber-theoretic Möbius関数または格子反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC304 F「Shift Table」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「約数/倍数方向の累積値とexact gcd・period値をnumber-theoretic Möbius関数または格子反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 毎日少なくとも一人が出勤し、かつ青木のshiftの最小周期がN未満であるshift表の個数をmod 998244353で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 毎日少なくとも一人が出勤し、かつ青木のshiftの最小周期がN未満であるshift表の個数をmod 998244353で求められる。",
+          "転移題材の解法接続: Nの約数tを昇順に列挙する。各tについて全剰余類を調べ、欠勤を選べる類の数pからA_t=2^pを求める。M_t=A_t-Σ_{s|t,s<t}M_sをmod 998244353で計算し、t≠NのM_tを合計する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "約数/倍数方向の累積値とexact gcd・period値をnumber-theoretic Möbius関数または格子反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 83,
+  "globalIndex": 165,
+  "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。"
+}

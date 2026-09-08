@@ -1,0 +1,17 @@
+{
+  "id": "outcome-restrict-geometric-candidates-to-boundary",
+  "statement": "目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-reduce-geometry-to-algebraic-predicates"
+  ],
+  "scopeIds": [
+    "abc244-ex",
+    "abc257-ex",
+    "abc275-g",
+    "abc286-ex",
+    "abc341-g",
+    "abc356-g",
+    "tag-convex-boundary-hull",
+    "unit-convex-boundary-hull"
+  ]
+}

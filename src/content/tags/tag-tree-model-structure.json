@@ -1,0 +1,47 @@
+{
+  "id": "tag-tree-model-structure",
+  "name": "木モデルと構造",
+  "definition": "木固有の根・部分木・path・separator構造へ問題を写し、利用する性質を選ぶ。",
+  "parentId": null,
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "path",
+      "木",
+      "根",
+      "部分木"
+    ],
+    "triggerPatterns": [
+      "木として",
+      "木上",
+      "根付き"
+    ],
+    "invariantPatterns": [
+      "一意経路",
+      "親子",
+      "部分木"
+    ],
+    "goalPatterns": [
+      "木の性質",
+      "木構造へ変換"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-model-and-exploit-tree"
+  ],
+  "representativeProblemIds": [
+    "abc220-f",
+    "abc239-e"
+  ],
+  "aliases": [
+    "tree algorithms",
+    "木アルゴリズム"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

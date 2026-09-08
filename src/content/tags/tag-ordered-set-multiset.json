@@ -1,0 +1,59 @@
+{
+  "id": "tag-ordered-set-multiset",
+  "name": "ordered set・multisetの動的順序管理",
+  "definition": "比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "動的集合",
+      "重複値",
+      "隣接要素"
+    ],
+    "triggerPatterns": [
+      "insert/erase",
+      "k-smallest",
+      "前後の値"
+    ],
+    "invariantPatterns": [
+      "sort順",
+      "集合間balance"
+    ],
+    "goalPatterns": [
+      "top-K集約",
+      "近傍",
+      "順位"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-event-sweep",
+      "type": "often_combined",
+      "rationale": "eventの追加・削除に応じてactive候補の最小値・近傍・順位を動的に保つ構成で併用する。"
+    },
+    {
+      "tagId": "tag-ordered-interval-partition",
+      "type": "often_combined",
+      "rationale": "区間端点をordered setで管理し、split・mergeする区間族を動的に保つときに併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-ordered-set-statistics"
+  ],
+  "representativeProblemIds": [
+    "abc281-e",
+    "abc306-e"
+  ],
+  "aliases": [
+    "multiset",
+    "order statistics tree",
+    "ordered set",
+    "平衡二分探索木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

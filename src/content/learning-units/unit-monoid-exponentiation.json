@@ -1,0 +1,93 @@
+{
+  "id": "unit-monoid-exponentiation",
+  "kind": "section",
+  "title": "monoid exponentiation・連結演算doubling",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "monoid exponentiation・連結演算doublingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc448-e-problem-2e75c00389f73522688e3410de62a0e400eaf627cb19ddf0616c8fa3ae397dfe",
+    "source-abc448-editorial-16749-7468a146eb2ed5b942c7fa3c4c47c44239fb8ad100daa5691a838e974f534b21"
+  ],
+  "tagIds": [
+    "tag-monoid-exponentiation"
+  ],
+  "ownedTagIds": [
+    "tag-monoid-exponentiation"
+  ],
+  "learningOutcomeIds": [
+    "outcome-exponentiate-associative-composition"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-exponentiate-associative-composition"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/monoid-exponentiation.md",
+  "problemIds": [
+    "abc448-e"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-exponentiate-associative-composition",
+      "learningOutcomeIds": [
+        "outcome-exponentiate-associative-composition"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC448 E「Simple Division」について、floor(N/M) mod 10007 を知るには N mod (M×10007) だけで十分である。巨大な連結数 N は各 block c_i 個の repunit を桁 shift して足す形に分解できる。",
+      "procedure": [
+        "観察: floor(N/M) mod 10007 を知るには N mod (M×10007) だけで十分である。巨大な連結数 N は各 block c_i 個の repunit を桁 shift して足す形に分解できる。",
+        "着眼: R_{a+b}=R_a×10^b+R_b なので、(10^len,R_len) の pair は文字列結合と同じ結合則を持つ。",
+        "着眼: X=M×10007 に対する剰余 r を得た後、floor(r/M) が元の商を10007で割った余りになる。",
+        "方針: modulus X=M×10007 上で 10^k と repunit R_k を doubling し、各 block を右から shift・加算して N mod X を構成する。（N=qM+r をさらに q mod10007 で見ると N mod(M×10007) から floor(r/M) が得られ、repunit doubling は9の逆元なしで任意長を対数時間に計算できる。）",
+        "接続: 2^k 桁について pow10[k] と rep[k] を doubling 前計算する。各 l_i の bit から R_{l_i} と10^{l_i}を組み、現在値を必要桁 shift して c_i R_{l_i} を加える。最終剰余を M で整数除算する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "反復対象を閉じた結合的要約へ持ち上げ、monoidの二分累乗で巨大な連結・合成を評価できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-exponentiate-associative-composition",
+      "learningOutcomeIds": [
+        "outcome-exponentiate-associative-composition"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「反復対象を閉じた結合的要約へ持ち上げ、monoidの二分累乗で巨大な連結・合成を評価できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "assessment": {
+        "method": "ABC448 E「Simple Division」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「反復対象を閉じた結合的要約へ持ち上げ、monoidの二分累乗で巨大な連結・合成を評価できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
+          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
+          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
+          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
+          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+        ],
+        "expectedResult": "反復対象を閉じた結合的要約へ持ち上げ、monoidの二分累乗で巨大な連結・合成を評価できるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 87,
+  "globalIndex": 95,
+  "orderReason": "長さ・値・補助剰余を含む要約の結合則と単位元を定義し、巨大な反復連結を二分累乗する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

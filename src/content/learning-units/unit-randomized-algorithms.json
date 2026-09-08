@@ -1,0 +1,156 @@
+{
+  "id": "unit-randomized-algorithms",
+  "kind": "section",
+  "title": "乱択の成功条件と誤り確率を設計する",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "誤り確率の評価を伴わない固定hash、および入力全体を確定的に列挙できる探索。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc",
+    "source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f",
+    "source-abc272-editorial-4981-11a3815cb43ca9a01f77c8e7c479f8da8cc14d3f210287c9c2c57cc6254bd952",
+    "source-abc272-g-problem-ddd168bffdcf96e57760fa8e5da7e2cb2a407776125006901a509571a5ec8370",
+    "source-abc339-editorial-9206-783ff9c3caa8b6c79125699ba25139d0f342ede0ece4c0a1081ab3044f3c70a2",
+    "source-abc339-f-problem-fd4fd095dde8aba7756de773d9f4b871b37d3563a7e3899c3f38b694662189b5",
+    "source-abc422-e-problem-44e69a3fb5e8d2422de1f335ba82aceb7f4466392b01cdcc3d8a17560541554f",
+    "source-abc422-editorial-13820-84a6d94e189cefe290ad2d1e79ce85ef37836d033117cbd8b62d65041716a864"
+  ],
+  "tagIds": [
+    "tag-randomized-algebraic-fingerprint",
+    "tag-randomized-algorithm"
+  ],
+  "ownedTagIds": [
+    "tag-randomized-algorithm"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compare-algebraic-objects-by-random-fingerprint",
+    "outcome-design-and-bound-randomized-algorithm"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-and-bound-randomized-algorithm"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/randomized-algorithms.md",
+  "problemIds": [
+    "abc238-g",
+    "abc272-g",
+    "abc339-f",
+    "abc367-f",
+    "abc399-g",
+    "abc412-g",
+    "abc422-e",
+    "abc455-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-design-and-bound-randomized-algorithm",
+      "learningOutcomeIds": [
+        "outcome-design-and-bound-randomized-algorithm"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC272 G「Yet Another mod M」について、valid Mで同じremainder Xを持つmajority index set Sを考えると、任意のi,j∈SについてM divides |A_i−A_j|となる。",
+      "procedure": [
+        "観察: valid Mで同じremainder Xを持つmajority index set Sを考えると、任意のi,j∈SについてM divides |A_i−A_j|となる。",
+        "観察: |S|>N/2なのでrandomに二indexを選んだとき両方がSに入る確率は1/4より大きく、正しいdifferenceをconstant probabilityで得られる。",
+        "着眼: candidateは推測だけで返さず、A_i mod Mのfrequencyが実際にN/2を超えるかO(N)で検証するためfalse positiveはない。",
+        "着眼: divisor closureより全divisorsの代わりにdifferenceのodd prime factorsと4だけを試しても、valid divisorがある場合のより小さいvalid candidateを拾える。",
+        "方針: random pairsのdifferenceをfactorizeし、その3以上のdivisorsを候補Mとして全Aのremainder majorityを検証する。（majority pairを引けば真のMがdifferenceのdivisorに現れ、反復でfailure probabilityが幾何的に減る。）",
+        "接続: hidden majority congruence classからrandom pair samplingでmodulus divisorを抽出し、factorization-generated candidatesをdeterministically verifyするMonte Carlo searchである。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "乱数で選ぶ対象と成功条件を定め、誤り確率を上から評価して必要な反復回数または決定的な事後検証を設計できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    },
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-compare-algebraic-objects-by-random-fingerprint"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（学習経路の比較）",
+      "omissions": [
+        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
+      ],
+      "environment": "紙上での未知問のモデル化と候補比較",
+      "input": "乱択の成功条件と誤り確率を設計するの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
+      "procedure": [
+        "乱択代数fingerprint: 1個の直接所有Outcome、学ぶ理由「乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ」、対象外「乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-design-and-bound-randomized-algorithm",
+      "learningOutcomeIds": [
+        "outcome-design-and-bound-randomized-algorithm"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「乱数で選ぶ対象と成功条件を定め、誤り確率を上から評価して必要な反復回数または決定的な事後検証を設計できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC422 E「Colinear」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「乱数で選ぶ対象と成功条件を定め、誤り確率を上から評価して必要な反復回数または決定的な事後検証を設計できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 過半数点を通るlineを高確率で発見・構成できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 過半数点を通るlineを高確率で発見・構成できる。",
+          "転移題材の解法接続: 異なるindex p,qをrandom sampleしa=y_p-y_q,b=x_q-x_p,c=x_p y_q-x_q y_pを作る。全点でax+by+c=0をcountし2count>NならYesと係数を出す。100回失敗ならNo。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "乱数で選ぶ対象と成功条件を定め、誤り確率を上から評価して必要な反復回数または決定的な事後検証を設計できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    },
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-compare-algebraic-objects-by-random-fingerprint"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
+      "assessment": {
+        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
+        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
+      },
+      "answer": {
+        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
+        "procedure": [
+          "問題を対象・操作・保つ量・求める量へ分解する。",
+          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
+          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
+          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
+        ],
+        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 3,
+  "representativeRank": 7,
+  "globalIndex": 77,
+  "orderReason": "乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。"
+}

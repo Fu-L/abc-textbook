@@ -1,0 +1,13 @@
+{
+  "id": "outcome-optimize-path-matching-by-contraction",
+  "statement": "重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-enumerate-frontier-best-first",
+    "outcome-prove-greedy-order"
+  ],
+  "scopeIds": [
+    "abc464-g",
+    "tag-path-matching-contraction",
+    "unit-path-matching-contraction"
+  ]
+}

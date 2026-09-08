@@ -15,7 +15,7 @@ export interface ExplicitTaxonomyClaimDecision {
 }
 
 type ClaimTuple = readonly [
-  collection: 'typicalTechniques' | 'prerequisiteCandidates',
+  collection: 'typicalTechniques' | 'prerequisiteCandidates' | 'implementationConcerns',
   index: number,
   kind: ExplicitInventoryClaimDispositionKind,
   ...tagIds: readonly string[],
@@ -698,16 +698,15 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     [
       ['typicalTechniques', 0, 'primary', 'tag-mo-offline-range'],
       ['typicalTechniques', 1, 'supporting', 'tag-amortized-heavy-light'],
-      ['typicalTechniques', 1, 'supporting', 'tag-modular-arithmetic'],
+      ['implementationConcerns', 0, 'supporting', 'tag-dynamic-modular-product'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-mo-offline-range'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-amortized-heavy-light'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-combinatorial-coefficients'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
     {
       'tag-amortized-heavy-light': ['outcome-bound-total-work'],
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
-      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
+      'tag-dynamic-modular-product': ['outcome-maintain-modular-product-under-factor-updates'],
     },
   ),
   'abc406-e': decision('outcome-count-prefix-constrained-objects', [
@@ -887,15 +886,16 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     [
       ['typicalTechniques', 0, 'primary', 'tag-contribution-reordering'],
       ['typicalTechniques', 1, 'supporting', 'tag-event-sweep'],
-      ['typicalTechniques', 2, 'primary', 'tag-modular-arithmetic'],
+      ['typicalTechniques', 2, 'primary', 'tag-dynamic-modular-product'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-contribution-reordering'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-event-sweep'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-modular-arithmetic'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
     {
       'tag-event-sweep': ['outcome-linearize-events'],
+      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
-    ['outcome-compute-in-modular-arithmetic'],
+    ['outcome-maintain-modular-product-under-factor-updates'],
   ),
   'abc411-f': decision('outcome-bound-total-work', [
     ['typicalTechniques', 0, 'primary', 'tag-amortized-heavy-light'],
@@ -2329,12 +2329,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     'outcome-correct-overlap-by-inversion',
     [
       ['typicalTechniques', 0, 'same_tag', 'tag-inclusion-exclusion'],
+      ['implementationConcerns', 0, 'supporting', 'tag-dynamic-modular-product'],
       ['typicalTechniques', 1, 'primary', 'tag-inclusion-exclusion'],
       ['typicalTechniques', 1, 'supporting', 'tag-combinatorial-coefficients'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-inclusion-exclusion'],
     ],
     {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
+      'tag-dynamic-modular-product': ['outcome-maintain-modular-product-under-factor-updates'],
     },
   ),
   'abc457-e': decision('outcome-prove-greedy-order', [

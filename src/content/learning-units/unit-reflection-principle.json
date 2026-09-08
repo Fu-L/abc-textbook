@@ -1,0 +1,98 @@
+{
+  "id": "unit-reflection-principle",
+  "kind": "section",
+  "title": "鏡像法・reflection principle",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-combinatorial-coefficients"
+  ],
+  "excludedTopics": [
+    "鏡像法・reflection principleの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc309-editorial-6751-6ce08329a6ac1858c581d4dcaf20125dccad02bd6b0c6a0898679de12244393d",
+    "source-abc309-ex-problem-65aeeef57cba7aec6c3dfae69feb941b8f786bc151fe34154c429e4013c949e7"
+  ],
+  "tagIds": [
+    "tag-reflection-principle"
+  ],
+  "ownedTagIds": [
+    "tag-reflection-principle"
+  ],
+  "learningOutcomeIds": [
+    "outcome-remove-boundaries-by-reflection"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-remove-boundaries-by-reflection"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/reflection-principle.md",
+  "problemIds": [
+    "abc309-ex"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-remove-boundaries-by-reflection",
+      "learningOutcomeIds": [
+        "outcome-remove-boundaries-by-reflection"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC309 Ex「Simple Path Counting Problem」について、高さ 1..M の単純路を一段進む遷移は、位置を −1,0,+1 だけ動かす線形作用である。N は 10^9 なので段数 DP はできない一方、幅 M は 10^5 に収まる。",
+      "procedure": [
+        "観察: 高さ 1..M の単純路を一段進む遷移は、位置を −1,0,+1 だけ動かす線形作用である。N は 10^9 なので段数 DP はできない一方、幅 M は 10^5 に収まる。",
+        "観察: 端 0 と M+1 から外へ出る歩道を排除する境界条件だけが平行移動不変性を壊しており、鏡像の負符号でその寄与を相殺できる。",
+        "着眼: 開始分布を位置 j に正、鏡位置 2M+2−j に負で置くと、禁止境界を越えて戻る経路が一対一に逆符号で対応して消える。",
+        "着眼: 巡回添字を x^{2M+2}=1 とみなせば、一段の遷移は多項式への (x^{-1}+1+x) の乗算そのものになる。",
+        "方針: 長さ 2M+2 の符号付き鏡像列へ拡張し、循環畳み込み (x^{-1}+1+x)^{N−1} を高速累乗する。（境界を鏡像で吸収すると各段が同じ巡回畳み込みになり、NTT と二乗法で O(M log M log N) にできる。）",
+        "接続: 長さ D=2M+2 の f を作り、各開始 A_i の係数を +1、D−A_i を −1 とする。環 Z[x]/(x^D−1) で g=x^{-1}+1+x を N−1 乗し f と畳み込み、B_i の係数を合計する。各積は NTT 後に次数を D 周期で折り返す。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "最初に境界を破るpathとの鏡像対応を構成し、壁付きwalkの数え上げを符号付きの無境界問題へ変換できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-remove-boundaries-by-reflection",
+      "learningOutcomeIds": [
+        "outcome-remove-boundaries-by-reflection"
+      ],
+      "prerequisiteIds": [
+        "outcome-formulate-combinatorial-coefficients",
+        "prereq-abc-advanced-v1",
+        "unit-combinatorial-coefficients"
+      ],
+      "attainmentCondition": "学習成果「最初に境界を破るpathとの鏡像対応を構成し、壁付きwalkの数え上げを符号付きの無境界問題へ変換できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "assessment": {
+        "method": "ABC309 Ex「Simple Path Counting Problem」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「最初に境界を破るpathとの鏡像対応を構成し、壁付きwalkの数え上げを符号付きの無境界問題へ変換できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
+          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
+          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
+          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
+          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+        ],
+        "expectedResult": "最初に境界を破るpathとの鏡像対応を構成し、壁付きwalkの数え上げを符号付きの無境界問題へ変換できるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 91,
+  "globalIndex": 99,
+  "orderReason": "組合せ係数・数え上げで得た考え方と実装を再利用し、鏡像法・reflection principleの発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "outcome-represent-convex-intersection-by-halfplanes",
+  "statement": "凸多角形を向き付き辺の線形半平面制約へ変換し、平行移動後も左辺が同じ制約を最強の右辺へ集約して共通部分への包含を判定できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-reduce-geometry-to-algebraic-predicates"
+  ],
+  "scopeIds": [
+    "abc251-g",
+    "tag-half-plane-constraints",
+    "unit-half-plane-constraints"
+  ]
+}

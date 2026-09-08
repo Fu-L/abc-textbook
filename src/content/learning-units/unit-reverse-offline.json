@@ -1,0 +1,107 @@
+{
+  "id": "unit-reverse-offline",
+  "kind": "section",
+  "title": "時間を逆向きにして未来依存を消す",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc229-e-problem-d9c76ebb631eb668dd6772d319953cc51d2956bed4f77fa174b0c2f60fba8b41",
+    "source-abc229-editorial-2958-e1f5841b40bd2ddd793fc39890bd1e7c2cc99e815182f14d0fac099106701eea",
+    "source-abc238-editorial-3361-2a85ca62e2aaf6e541f5fa85d0a9d831577cef21b0b07cf76f5995ee6ffb24f3",
+    "source-abc238-ex-problem-925c57a0268e42b5c59c90d4c02a25c085f1bf9694c506d458661cbc37071238",
+    "source-abc249-editorial-3789-522657cf400654889f6effd6e0392296e0ee0c82d90f6096f04daf7e8a3c9b5e",
+    "source-abc249-f-problem-98f2efb029580750dc65d201c0c08687414f56bc3d7ae74727e0c43dca6fd43e"
+  ],
+  "tagIds": [
+    "tag-reverse-offline"
+  ],
+  "ownedTagIds": [
+    "tag-reverse-offline"
+  ],
+  "learningOutcomeIds": [
+    "outcome-reverse-update-time"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-reverse-update-time"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/reverse-offline.md",
+  "problemIds": [
+    "abc229-e",
+    "abc238-ex",
+    "abc249-f",
+    "abc253-f",
+    "abc264-e",
+    "abc329-e",
+    "abc346-e",
+    "abc375-f",
+    "abc392-f",
+    "abc464-e"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-reverse-update-time",
+      "learningOutcomeIds": [
+        "outcome-reverse-update-time"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC229 E「Graph Destruction」について、頂点を 1 から順に削除すると残る頂点集合は常に連続した suffix だが、辺削除を直接扱う Union-Find は用意されていない。",
+      "procedure": [
+        "観察: 頂点を 1 から順に削除すると残る頂点集合は常に連続した suffix だが、辺削除を直接扱う Union-Find は用意されていない。",
+        "観察: 時系列を逆にすると、頂点 N,N−1,… を追加し、その頂点から既に存在する大きい番号の頂点への辺だけを追加する処理になる。",
+        "着眼: 頂点 i を追加した直後に成分数を一つ増やし、異なる根を結ぶ辺ごとに一つ減らせば現在の連結成分数を維持できる。",
+        "方針: 削除を逆順の追加へ変換し、追加頂点を新成分として数えた後、既存頂点との辺を Union-Find で併合する。（Union-Find が得意な単調な辺追加だけになり、各辺を一度だけ処理して全時点の成分数を得られる。）",
+        "接続: 固定順の頂点削除クエリをオフラインで逆転し、suffix グラフを頂点・辺の追加系列として Union-Find と成分数カウンタで復元する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-reverse-update-time",
+      "learningOutcomeIds": [
+        "outcome-reverse-update-time"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC238 Ex「Removing People」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 円環上の等確率削除過程の期待総コストを、逆挿入の区間 DP で全履歴の重み総和として求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 円環上の等確率削除過程の期待総コストを、逆挿入の区間 DP で全履歴の重み総和として求められる。",
+          "転移題材の解法接続: 円環上の逐次削除を reverse process の挿入木へ変え、最初の挿入を根とする interval decomposition と count/sum の二量 DP で全履歴を集計する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 1,
+  "difficultyRank": 1,
+  "representativeRank": 2,
+  "globalIndex": 22,
+  "orderReason": "削除・上書き・未来依存を含む更新列を逆向きに読み、追加だけ・first-writeだけなどの単調な処理へ変換して元の時刻へ答えを戻す。"
+}

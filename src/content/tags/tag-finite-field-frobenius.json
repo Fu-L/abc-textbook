@@ -1,0 +1,51 @@
+{
+  "id": "tag-finite-field-frobenius",
+  "name": "有限体Frobenius軌道",
+  "definition": "有限体上のFrobenius写像の軌道と固定体を用い、指数的な反復区間をorbit長ごとのrunへ圧縮する。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [
+    "tag-finite-field-extension"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "Frobenius写像",
+      "orbit",
+      "有限体"
+    ],
+    "triggerPatterns": [
+      "p乗写像を反復",
+      "固定体"
+    ],
+    "invariantPatterns": [
+      "orbit長",
+      "拡大次数"
+    ],
+    "goalPatterns": [
+      "反復区間圧縮"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-finite-field-extension",
+      "type": "extension",
+      "rationale": "拡大有限体の表現と四則演算へFrobenius写像・固定体・orbit長の構造を加え、反復区間の圧縮まで扱う。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-decompose-finite-field-frobenius-orbits"
+  ],
+  "representativeProblemIds": [
+    "abc251-ex"
+  ],
+  "aliases": [
+    "Frobenius automorphism",
+    "Frobenius写像",
+    "finite-field orbit"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

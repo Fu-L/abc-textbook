@@ -150,9 +150,26 @@ describe('T159 frozen preview integration and correction impact', () => {
         ({ ownerType }) => ownerType === 'derived_index',
       );
       expect(indexAssessments).toHaveLength(impact.derivedIndexPaths.length);
-      expect(
-        impact.surfaceAssessments.every(({ rationale }) => /T0(?:48|49|50)/u.test(rationale)),
-      ).toBe(true);
+      const taskPatternBySurface = {
+        'problem:body': /T066–T071.*T075/u,
+        'problem:example': /T066–T071.*T072.*T074–T075/u,
+        'problem:exercise': /T066–T071.*T075/u,
+        'problem:answer': /T066–T071.*T074–T075・T078/u,
+        'problem:placement': /T049/u,
+        'problem:derived_index': /T160.*T049/u,
+        'learning_unit_candidate:body': /T050/u,
+        'learning_unit_candidate:example': /T050/u,
+        'learning_unit_candidate:exercise': /T050/u,
+        'learning_unit_candidate:answer': /T050/u,
+        'learning_unit_candidate:standard_order': /T048/u,
+        'learning_unit_candidate:derived_index': /T160/u,
+        'derived_index:index': /T160.*T049/u,
+      } as const;
+      for (const assessment of impact.surfaceAssessments) {
+        const key =
+          `${assessment.ownerType}:${assessment.surface}` as keyof typeof taskPatternBySurface;
+        expect(assessment.rationale, key).toMatch(taskPatternBySurface[key]);
+      }
     }
   }, 30_000);
 

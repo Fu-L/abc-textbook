@@ -1,0 +1,176 @@
+{
+  "id": "unit-integer-boundary-blocks",
+  "kind": "section",
+  "title": "整数境界と同値区間を正確に分ける",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "素因数指数による整数条件の分解。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812",
+    "source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd",
+    "source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0",
+    "source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019",
+    "source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd",
+    "source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94",
+    "source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88",
+    "source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b",
+    "source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651",
+    "source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c"
+  ],
+  "tagIds": [
+    "tag-integer-boundary-blocks"
+  ],
+  "ownedTagIds": [
+    "tag-integer-boundary-blocks"
+  ],
+  "learningOutcomeIds": [
+    "outcome-evaluate-compressed-integer-blocks",
+    "outcome-partition-integer-parameter-ranges"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-evaluate-compressed-integer-blocks",
+    "outcome-partition-integer-parameter-ranges"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/integer-boundary-blocks.md",
+  "problemIds": [
+    "abc216-e",
+    "abc230-e",
+    "abc239-ex",
+    "abc240-f",
+    "abc243-g",
+    "abc253-g",
+    "abc283-ex",
+    "abc293-f",
+    "abc313-g",
+    "abc315-g",
+    "abc318-f",
+    "abc356-e",
+    "abc361-f",
+    "abc370-g",
+    "abc372-g",
+    "abc402-g",
+    "abc414-e",
+    "abc429-g",
+    "abc443-g",
+    "abc444-f",
+    "abc452-e"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-evaluate-compressed-integer-blocks",
+      "learningOutcomeIds": [
+        "outcome-evaluate-compressed-integer-blocks"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC240 F「Sum Sum Max」について、C の同値 block を一項ずつ展開すると M が10^9まであるが、block 開始時の累積値を A_0,B_0 とすれば、block 内 n 項後は B=B_0+xn、A=A_0+B_0n+x n(n+1)/2 と閉じた式になる。",
+      "procedure": [
+        "観察: C の同値 block を一項ずつ展開すると M が10^9まであるが、block 開始時の累積値を A_0,B_0 とすれば、block 内 n 項後は B=B_0+xn、A=A_0+B_0n+x n(n+1)/2 と閉じた式になる。",
+        "観察: block 内の A は整数 n 上の二次式で、隣接差は B_0+xn という等差数列である。したがって最大候補は端点、または差分の符号が正から負へ変わる付近に限られる。",
+        "着眼: A(n)-A(n-1)=B_0+xn なので、x<0 のとき最大点はこの値が非負である最後の n とその隣にあり、微分ではなく整数差分で境界を決められる。",
+        "方針: 各 run の二次式を作り、x≥0 なら両端、x<0 なら離散差分が0を跨ぐ整数付近と両端だけを評価する。（y_i の大きさに依存せず、上凸・下凸という形から block 内最大を定数個の候補へ絞れる。）",
+        "接続: 各 (x,y) で f(n)=A+B n+x n(n+1)/2 を定義し、n=1,y と、x<0 なら -B/x 付近を [1,y] に clamp した候補を評価して全体最大を更新する。その後 A←f(y)、B←B+xy として次 block へ進む。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "圧縮block内の一次・二次式や操作列の累積境界を閉形式にし、極値・順位・個数を求められる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    },
+    {
+      "key": "guided-outcome-partition-integer-parameter-ranges",
+      "learningOutcomeIds": [
+        "outcome-partition-integer-parameter-ranges"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC230 E「Fraction Floor Sum」について、i が大きくなると floor(N/i) は単調に減り、同じ商を取る i が長い連続区間としてまとまる。",
+      "procedure": [
+        "観察: i が大きくなると floor(N/i) は単調に減り、同じ商を取る i が長い連続区間としてまとまる。",
+        "観察: 商が k となる整数 i の個数は floor(N/k)−floor(N/(k＋1)) で求まり、小さい商は値ごとに一括加算できる。",
+        "着眼: 全ての i を走査する代わりに、floor(N/i) の値が同じ区間を数えるという商側からの集約へ視点を移す。",
+        "方針: sqrt(N) 以下の商は出現回数でまとめ、それより大きい商は対応する小さい i を一つずつ処理する。（商と添字の少なくとも一方が sqrt(N) 以下になる双曲線の性質により、両側を合わせても平方根程度の項だけで済む。）",
+        "接続: 整数双曲線 xy≤N の格子点数え上げとして、小さい商の頻度集約と小さい除数の直接和を境界 floor(sqrt(N)) で分割する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "床関数をconstant quotient blockまたはfloor-sum再帰で処理し、整数根・桁数の境界も誤差なく扱える。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-evaluate-compressed-integer-blocks",
+      "learningOutcomeIds": [
+        "outcome-evaluate-compressed-integer-blocks"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「圧縮block内の一次・二次式や操作列の累積境界を閉形式にし、極値・順位・個数を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC253 G「Swap Many Times」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「圧縮block内の一次・二次式や操作列の累積境界を閉形式にし、極値・順位・個数を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 辞書順に並ぶ交換操作のL番目からR番目だけを適用した最終順列を高速に構成できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 辞書順に並ぶ交換操作のL番目からR番目だけを適用した最終順列を高速に構成できる。",
+          "転移題材の解法接続: 三角数を64ビットで計算してL,Rの行と行内位置を求める。最初と最後の不完全行の交換を直接行い、その間の完全行群があれば対応するsuffix回転を二回のreverseでまとめて適用する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "圧縮block内の一次・二次式や操作列の累積境界を閉形式にし、極値・順位・個数を求められる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    },
+    {
+      "key": "attainment-outcome-partition-integer-parameter-ranges",
+      "learningOutcomeIds": [
+        "outcome-partition-integer-parameter-ranges"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「床関数をconstant quotient blockまたはfloor-sum再帰で処理し、整数根・桁数の境界も誤差なく扱える」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC239 Ex「Dice Product 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「床関数をconstant quotient blockまたはfloor-sum再帰で処理し、整数根・桁数の境界も誤差なく扱える」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 乗法的な確率過程を残り倍率の期待値 DP に変換し、自己ループを解消して quotient grouping と商状態 memoization で評価できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 乗法的な確率過程を残り倍率の期待値 DP に変換し、自己ループを解消して quotient grouping と商状態 memoization で評価できる。",
+          "転移題材の解法接続: f(0)=0 とし、未計算の x では i=2 から min(N,x) までを quotient block [l,r] に分け、(r-l+1)f(floor(x/l)) を加える。N とこの和を足して N-1 の法逆元を掛け、map に memoize して f(M) を返す。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "床関数をconstant quotient blockまたはfloor-sum再帰で処理し、整数根・桁数の境界も誤差なく扱える。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 2,
+  "representativeRank": 3,
+  "globalIndex": 49,
+  "orderReason": "floorや整数根の値が変わる境界を正確に求め、同値な整数範囲をまとめて処理する。"
+}

@@ -1,0 +1,48 @@
+{
+  "id": "tag-subset-bitmask-dp",
+  "name": "部分集合・bitmask状態DP",
+  "definition": "各bitの意味を固定し、訪問集合・選択集合・frontierなどの部分集合状態間を遷移する。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "bitmask",
+      "訪問集合",
+      "部分集合"
+    ],
+    "triggerPatterns": [
+      "submask",
+      "小さいN",
+      "集合状態"
+    ],
+    "invariantPatterns": [
+      "bitの意味",
+      "集合包含"
+    ],
+    "goalPatterns": [
+      "全訪問",
+      "部分集合状態"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-enumerate-subset-state-space"
+  ],
+  "representativeProblemIds": [
+    "abc219-e",
+    "abc301-e"
+  ],
+  "aliases": [
+    "bitmask DP",
+    "subset DP",
+    "部分集合DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

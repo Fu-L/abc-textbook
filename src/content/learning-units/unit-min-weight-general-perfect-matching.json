@@ -1,0 +1,99 @@
+{
+  "id": "unit-min-weight-general-perfect-matching",
+  "kind": "subsection",
+  "title": "一般グラフの最小重み完全matching",
+  "parentId": "unit-flow-matching",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-bipartite-matching"
+  ],
+  "excludedTopics": [
+    "一般グラフの最小重み完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb",
+    "source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2"
+  ],
+  "tagIds": [
+    "tag-min-weight-general-perfect-matching"
+  ],
+  "ownedTagIds": [
+    "tag-min-weight-general-perfect-matching"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-min-weight-general-perfect-matching"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-min-weight-general-perfect-matching"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/min-weight-general-perfect-matching.md",
+  "problemIds": [
+    "abc412-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-solve-min-weight-general-perfect-matching",
+      "learningOutcomeIds": [
+        "outcome-solve-min-weight-general-perfect-matching"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC412 G「Degree Harmony」について、良いsubgraphのdegree d_iは、A_i個のstubのうちd_i個を他labelと組ませ、残りA_i-d_i個を同label内でpairにする、と解釈できる。後者が可能な条件はd_i≤A_iかつparity一致である。",
+      "procedure": [
+        "観察: 良いsubgraphのdegree d_iは、A_i個のstubのうちd_i個を他labelと組ませ、残りA_i-d_i個を同label内でpairにする、と解釈できる。後者が可能な条件はd_i≤A_iかつparity一致である。",
+        "観察: X=ΣA_i≤150個のcopy頂点を作れば、このstub pairing全体は一般graphのperfect matchingになる。異label pairのweight1が元subgraphのedge数に対応し、同label pairはweight0で余剰を吸収する。",
+        "着眼: matching中に同じlabel pair間のweight1 edgeが二本あれば、その4 copyを各label内のweight0二辺へ交換して費用を下げられる。よって最小解は元simple graphの同じedgeを重複使用しない。",
+        "着眼: Xが奇数ならperfect matchingは不可能。偶数ならEdmonds blossomで直接解け、またTutte行列へ辺weightをyの次数として埋め込む乱択判定・補間でも最小weightだけを得られる。",
+        "方針: 各label i のcopyをA_i個作った0/1重みgraph Hの最小重みperfect matchingへ帰着する（同label copiesをweight0で完全接続し、元Gにedge i-jがあるlabel間をweight1で完全接続する。perfect matchingの最小weightが良いgraphの最小edge数になり、存在しなければ-1。）",
+        "接続: Xが奇数なら-1。X頂点のHを構築し、一般graph用minimum-weight perfect matching（blossom等）を実行する。matchingなしなら-1、あればweight0/1辺の総和を出力する。Tutte行列を使う場合はentryを乱数·y^{w}とし、detの最小非零次数の半分を同じ答えとして求める。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "一般グラフの最小重み完全matchingをweighted blossomまたは重み付きTutte多項式へ帰着し、存在判定だけでなく最小重みまで求められる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-solve-min-weight-general-perfect-matching",
+      "learningOutcomeIds": [
+        "outcome-solve-min-weight-general-perfect-matching"
+      ],
+      "prerequisiteIds": [
+        "outcome-characterize-bipartite-feasibility-by-hall",
+        "outcome-solve-bipartite-matching",
+        "prereq-abc-advanced-v1",
+        "unit-bipartite-matching"
+      ],
+      "attainmentCondition": "学習成果「一般グラフの最小重み完全matchingをweighted blossomまたは重み付きTutte多項式へ帰着し、存在判定だけでなく最小重みまで求められる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "assessment": {
+        "method": "ABC412 G「Degree Harmony」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「一般グラフの最小重み完全matchingをweighted blossomまたは重み付きTutte多項式へ帰着し、存在判定だけでなく最小重みまで求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
+          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
+          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
+          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
+          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+        ],
+        "expectedResult": "一般グラフの最小重み完全matchingをweighted blossomまたは重み付きTutte多項式へ帰着し、存在判定だけでなく最小重みまで求められるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 99,
+  "globalIndex": 204,
+  "orderReason": "二部matchingでは表せないpairing模型を作った後、奇cycleを扱うweighted blossomまたは重み付きTutte多項式で最小重みまで求める。"
+}

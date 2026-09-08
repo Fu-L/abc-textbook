@@ -1,0 +1,24 @@
+{
+  "id": "outcome-model-max-flow-min-cut",
+  "statement": "選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "scopeIds": [
+    "abc225-g",
+    "abc227-h",
+    "abc239-g",
+    "abc259-g",
+    "abc263-g",
+    "abc285-g",
+    "abc318-g",
+    "abc326-g",
+    "abc332-g",
+    "abc347-g",
+    "abc354-g",
+    "abc397-g",
+    "abc413-g",
+    "tag-max-flow-min-cut",
+    "unit-max-flow-min-cut"
+  ]
+}

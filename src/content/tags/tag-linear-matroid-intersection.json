@@ -1,0 +1,50 @@
+{
+  "id": "tag-linear-matroid-intersection",
+  "name": "線形matroid交差の乱択rank判定",
+  "definition": "二つの線形matroidの表現A₁,A₂からA₁diag(r)A₂ᵀを作り、有限体上の乱択rankを共通独立集合の最大sizeとして高確率で判定する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-linear-system-rank",
+    "tag-matroid-greedy",
+    "tag-randomized-algorithm"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "common independent set",
+      "representation matrices",
+      "two linear matroids"
+    ],
+    "triggerPatterns": [
+      "graphic and partition matroid",
+      "二種類の線形独立性",
+      "構成不要のintersection rank"
+    ],
+    "invariantPatterns": [
+      "Schwartz.?Zippel",
+      "common independent rank",
+      "symbolic rank"
+    ],
+    "goalPatterns": [
+      "intervalごとの存在判定",
+      "最大共通独立size"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-test-linear-matroid-intersection-rank"
+  ],
+  "representativeProblemIds": [
+    "abc399-g"
+  ],
+  "aliases": [
+    "linear matroid intersection",
+    "randomized intersection rank",
+    "線形マトロイド交差"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

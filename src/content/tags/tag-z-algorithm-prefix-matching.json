@@ -1,0 +1,50 @@
+{
+  "id": "tag-z-algorithm-prefix-matching",
+  "name": "Z algorithmによるprefix matching",
+  "definition": "各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。",
+  "parentId": "tag-string-state-representation",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "prefix",
+      "一致長",
+      "文字列"
+    ],
+    "triggerPatterns": [
+      "前後を連結して照合",
+      "各位置とprefixを比較"
+    ],
+    "invariantPatterns": [
+      "Z-box",
+      "最右一致区間"
+    ],
+    "goalPatterns": [
+      "全位置のprefix一致長"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-suffix-lcp-index",
+      "type": "analogy",
+      "rationale": "一つのprefixとの一致長列と、全suffix間の辞書順・LCP索引を目的に応じて使い分ける。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-prefix-match-state"
+  ],
+  "representativeProblemIds": [
+    "abc257-g",
+    "abc284-f"
+  ],
+  "aliases": [
+    "Z algorithm",
+    "Zアルゴリズム",
+    "Z配列"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,47 @@
+{
+  "id": "tag-lagrangian-relaxation",
+  "name": "Lagrangian relaxation・Aliens trick",
+  "definition": "個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [
+    "tag-basic-convex-optimization"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "cardinality constraint",
+      "optimization oracle",
+      "penalty λ"
+    ],
+    "triggerPatterns": [
+      "ちょうどK個",
+      "個数制約を外す"
+    ],
+    "invariantPatterns": [
+      "dual bound",
+      "tie break",
+      "選択数の単調性"
+    ],
+    "goalPatterns": [
+      "制約付き最適値"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-optimize-by-lagrangian-relaxation"
+  ],
+  "representativeProblemIds": [
+    "abc305-ex",
+    "abc400-g"
+  ],
+  "aliases": [
+    "Aliens DP",
+    "Aliens trick",
+    "ラグランジュ緩和"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

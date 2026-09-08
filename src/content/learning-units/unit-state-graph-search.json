@@ -1,0 +1,120 @@
+{
+  "id": "unit-state-graph-search",
+  "kind": "subsection",
+  "title": "状態グラフのモデリングと探索",
+  "parentId": "unit-graph-search",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011",
+    "source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638",
+    "source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c",
+    "source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6",
+    "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9",
+    "source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5",
+    "source-abc289-e-problem-0a4e1dff9cb9abbea54c09115823b35955c8dff42df604789622e9836c48af09",
+    "source-abc289-editorial-5726-2208a3d56b3cfb0f7cc7690336323f83880ed60654819f8d17bb6eb5a8faa24a"
+  ],
+  "tagIds": [
+    "tag-state-graph-search"
+  ],
+  "ownedTagIds": [
+    "tag-state-graph-search"
+  ],
+  "learningOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/state-graph-search.md",
+  "problemIds": [
+    "abc241-f",
+    "abc244-f",
+    "abc257-g",
+    "abc289-e",
+    "abc302-f",
+    "abc305-f",
+    "abc317-e",
+    "abc319-g",
+    "abc329-e",
+    "abc336-f",
+    "abc355-e",
+    "abc361-g",
+    "abc394-e",
+    "abc413-f",
+    "abc414-f",
+    "abc417-e",
+    "abc427-e",
+    "abc429-e",
+    "abc443-f",
+    "abc446-e",
+    "abc446-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-select-state-graph-search",
+      "learningOutcomeIds": [
+        "outcome-select-state-graph-search"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC241 F「Skate」について、盤面は最大10^9×10^9だが、一手の停止位置は衝突した障害物の直前に限られる。したがって開始点を除く到達候補は各障害物の上下左右に隣接する O(N) マスしかない。",
+      "procedure": [
+        "観察: 盤面は最大10^9×10^9だが、一手の停止位置は衝突した障害物の直前に限られる。したがって開始点を除く到達候補は各障害物の上下左右に隣接する O(N) マスしかない。",
+        "観察: 現在位置から一方向の遷移先は、同じ行または列でその方向に最も近い障害物があれば、その一つ手前として一意に決まる。障害物がなければ崖へ落ちるためその手自体が禁止される。",
+        "着眼: 通過するだけのマスは次の手を選べないので状態に不要であり、goal も障害物直前として実際に停止できた場合だけ到達扱いになる。",
+        "方針: 行ごと・列ごとに障害物座標を sort し、BFS の各状態から predecessor/successor を二分探索して最大4遷移を生成する。（巨大な空白マスを graph から除き、停止可能点だけの sparse implicit graph として最短手数を求められる。）",
+        "接続: 障害物を row→sorted columns と column→sorted rows に格納する。start から BFS し、上下左右それぞれ nearest obstacle を lower_bound で探し、その直前マスが別状態なら距離+1で enqueue する。goal の距離が得られなければ -1 とする。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-select-state-graph-search",
+      "learningOutcomeIds": [
+        "outcome-select-state-graph-search"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC289 E「Swap Places」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 2人が同時に位置を交換する最小手数を、色制約付きproduct graphのBFSで求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 2人が同時に位置を交換する最小手数を、色制約付きproduct graphのBFSで求められる。",
+          "転移題材の解法接続: distをN×Nの-1で初期化し、queueへ(1,N)を距離0で入れる。popした(u,v)についてadj[u]×adj[v]を走査し、色が異なる未訪問(x,y)へdist+1で遷移する。BFS終了後のdist[N][1]を出力し、未訪問なら-1とする。test caseごとに配列を初期化する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 2,
+  "representativeRank": 43,
+  "globalIndex": 110,
+  "orderReason": "暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

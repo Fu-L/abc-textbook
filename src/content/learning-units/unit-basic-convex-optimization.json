@@ -1,0 +1,107 @@
+{
+  "id": "unit-basic-convex-optimization",
+  "kind": "subsection",
+  "title": "一次元凸・単峰最適化",
+  "parentId": "unit-discrete-convex",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "一次元凸・単峰最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92",
+    "source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72",
+    "source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f",
+    "source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708",
+    "source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88",
+    "source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b",
+    "source-abc314-editorial-6958-903fc195f820ea11b2d1c234636b2b3f311e60f34d6d00357ba1bab2b3125787",
+    "source-abc314-ex-problem-e573f2aa9925372ff091f6bb20223906f19c45f10b18478722aef8fc5baa4e85"
+  ],
+  "tagIds": [
+    "tag-basic-convex-optimization"
+  ],
+  "ownedTagIds": [
+    "tag-basic-convex-optimization"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-univariate-convex-function"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-univariate-convex-function"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/basic-convex-optimization.md",
+  "problemIds": [
+    "abc224-g",
+    "abc229-g",
+    "abc240-f",
+    "abc263-g",
+    "abc314-ex",
+    "abc330-f",
+    "abc459-g",
+    "abc462-e"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-optimize-univariate-convex-function",
+      "learningOutcomeIds": [
+        "outcome-optimize-univariate-convex-function"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC224 G「Roll or Increment」について、出目だけが将来を決めるがNは10^9なので状態別DPは作れない。増加した直後に目標へ着く前に振り直す戦略は、最初から振り直すよりA円だけ損である。",
+      "procedure": [
+        "観察: 出目だけが将来を決めるがNは10^9なので状態別DPは作れない。増加した直後に目標へ着く前に振り直す戦略は、最初から振り直すよりA円だけ損である。",
+        "着眼: 閾値区間へ入る確率はX/Nなので入るまでの振り直し回数の期待値はN/X、入った位置は一様なのでTまでの増加回数の期待値は(X-1)/2である。",
+        "着眼: f(x) は下に凸で実数上の最小点が sqrt(2BN/A) にあるため、整数解はその近傍と範囲端だけを調べればよい。",
+        "方針: 目標Tの直前X個の出目だけ増加を選ぶ閾値戦略へ絞り、振り直し後の期待費用 f(X)=A(X-1)/2+BN/X を整数X上で最小化する。（支配される『増加してから振る』を除くと増加を選ぶ状態はT直前の連続区間になり、凸な一変数関数だけを比較すればよい。）",
+        "接続: S≤Tなら直接増加するA(T-S)も候補にし、1≤X≤Tへ丸めた sqrt(2BN/A) 前後の整数について f(X) を評価して最小値を出す。S=Tなら0である。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-optimize-univariate-convex-function",
+      "learningOutcomeIds": [
+        "outcome-optimize-univariate-convex-function"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC314 Ex「Disk and Segments」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 円盤中心の二次元連続最適化を凸性で保証された入れ子探索へ変え、O(iter²N) で最小半径を近似できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 円盤中心の二次元連続最適化を凸性で保証された入れ子探索へ変え、O(iter²N) で最小半径を近似できる。",
+          "転移題材の解法接続: dist(point,segment) を内積射影と clamp で実装し、eval(x,y)=max_i dist とする。十分広い座標区間で、固定 x に対し y を約100回三分探索して F(x) を返す。さらに x も約100回三分探索し、最後の近傍での最小 eval を出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 3,
+  "representativeRank": 61,
+  "globalIndex": 121,
+  "orderReason": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

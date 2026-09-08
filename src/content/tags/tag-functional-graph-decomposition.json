@@ -1,0 +1,47 @@
+{
+  "id": "tag-functional-graph-decomposition",
+  "name": "関数グラフのcycle・tree分解",
+  "definition": "各頂点の後続が一意なgraphをcycleと流入treeへ分解し、前周期・周期を処理する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-state-graph-search"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "cycle",
+      "一意な後続",
+      "軌道"
+    ],
+    "triggerPatterns": [
+      "写像反復",
+      "各頂点から一辺"
+    ],
+    "invariantPatterns": [
+      "cycle",
+      "前周期"
+    ],
+    "goalPatterns": [
+      "周期処理",
+      "軌道分解"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-decompose-functional-graph"
+  ],
+  "representativeProblemIds": [
+    "abc357-e",
+    "abc387-f"
+  ],
+  "aliases": [
+    "cycle-tree decomposition",
+    "functional graph",
+    "関数グラフ"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,62 @@
+{
+  "id": "tag-min-cost-flow",
+  "name": "最小費用流・circulation",
+  "definition": "流量と費用を持つ残余networkを設計し、potential付き最短路・slope・cycle cancelingで流量別最小費用を求める。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-max-flow-min-cut",
+    "tag-shortest-path"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "costed edge",
+      "flow",
+      "residual network"
+    ],
+    "triggerPatterns": [
+      "利益最大化",
+      "割当費用",
+      "流量別"
+    ],
+    "invariantPatterns": [
+      "potential",
+      "reduced cost",
+      "residual cycle"
+    ],
+    "goalPatterns": [
+      "slope",
+      "最大利益",
+      "最小費用"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-max-flow-min-cut",
+      "type": "extension",
+      "rationale": "容量と保存則を持つflow模型へ辺費用と流量別最適化を加え、reduced costや残余cycleまで管理する拡張である。"
+    },
+    {
+      "tagId": "tag-shortest-path",
+      "type": "implementation_substrate",
+      "rationale": "potentialで非負化した残余graph上の最短路を、増加路選択の実装基盤にする。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-model-min-cost-flow"
+  ],
+  "representativeProblemIds": [
+    "abc214-h",
+    "abc407-g"
+  ],
+  "aliases": [
+    "min-cost flow",
+    "minimum-cost circulation",
+    "最小費用流"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

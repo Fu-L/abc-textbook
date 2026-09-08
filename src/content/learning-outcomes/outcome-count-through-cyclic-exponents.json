@@ -1,0 +1,13 @@
+{
+  "id": "outcome-count-through-cyclic-exponents",
+  "statement": "巡回部分群を指数と約数格子で分類し、重複を補正して対象を数えられる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-find-period-by-multiplicative-order"
+  ],
+  "scopeIds": [
+    "abc212-g",
+    "abc335-g",
+    "tag-cyclic-exponent-counting",
+    "unit-cyclic-group-exponent-counting"
+  ]
+}

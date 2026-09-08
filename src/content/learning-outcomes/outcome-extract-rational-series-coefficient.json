@@ -1,0 +1,12 @@
+{
+  "id": "outcome-extract-rational-series-coefficient",
+  "statement": "P(x)/Q(x)のN次係数をQ(-x)との積の偶奇係数へ半減し、対数段で巨大indexへ進む。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-encode-counting-by-generating-function"
+  ],
+  "scopeIds": [
+    "abc300-ex",
+    "tag-bostan-mori",
+    "unit-bostan-mori"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "id": "tag-fps-composition-power-projection",
+  "name": "FPS合成・power projection",
+  "definition": "多項式/FPSのcompositionとその転置であるpower projectionを、block分割・transposition・rational functionへ還元する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-formal-power-series"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "composition",
+      "formal series",
+      "linear functional"
+    ],
+    "triggerPatterns": [
+      "f\\(g\\(x\\)\\)",
+      "g\\(x\\)\\^kの係数pairing"
+    ],
+    "invariantPatterns": [
+      "degree truncation",
+      "transposed map"
+    ],
+    "goalPatterns": [
+      "power projection",
+      "高速合成"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-formal-power-series",
+      "type": "extension",
+      "rationale": "inverse・log・exp等の基本FPS演算を土台に、合成・power projectionとその転置という高次演算を加える。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-compose-series-and-project-powers"
+  ],
+  "representativeProblemIds": [
+    "abc387-g",
+    "abc439-g"
+  ],
+  "aliases": [
+    "FPS合成",
+    "polynomial composition",
+    "power projection"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

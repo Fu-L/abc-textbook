@@ -1,0 +1,46 @@
+{
+  "id": "tag-automaton-subset-construction",
+  "name": "非決定性automatonのsubset construction",
+  "definition": "同時に存在し得るNFA状態集合を一つのDFA状態とし、文字ごとの集合遷移と受理条件を構成する。",
+  "parentId": "tag-string-state-representation",
+  "prerequisiteTagIds": [
+    "tag-finite-pattern-automaton"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "DFA state",
+      "NFA状態集合",
+      "transition"
+    ],
+    "triggerPatterns": [
+      "複数状態へ遷移",
+      "非決定性"
+    ],
+    "invariantPatterns": [
+      "到達可能状態集合",
+      "言語同値"
+    ],
+    "goalPatterns": [
+      "有限状態DP",
+      "決定化"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-determinize-automaton-by-subsets"
+  ],
+  "representativeProblemIds": [
+    "abc228-g"
+  ],
+  "aliases": [
+    "NFAの決定化",
+    "powerset construction",
+    "subset construction"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

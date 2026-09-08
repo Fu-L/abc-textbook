@@ -1,0 +1,101 @@
+{
+  "id": "unit-euler-trail-circuit",
+  "kind": "subsection",
+  "title": "Euler trail・circuit",
+  "parentId": "unit-euler-degree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "Euler trail・circuitの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a",
+    "source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681",
+    "source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a",
+    "source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa",
+    "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51",
+    "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb"
+  ],
+  "tagIds": [
+    "tag-euler-trail-circuit"
+  ],
+  "ownedTagIds": [
+    "tag-euler-trail-circuit"
+  ],
+  "learningOutcomeIds": [
+    "outcome-construct-euler-trail-or-circuit"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-construct-euler-trail-or-circuit"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/euler-trail-circuit.md",
+  "problemIds": [
+    "abc227-h",
+    "abc286-g",
+    "abc336-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-construct-euler-trail-or-circuit",
+      "learningOutcomeIds": [
+        "outcome-construct-euler-trail-or-circuit"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC227 H「Eat Them All」について、3×3盤面を9頂点12辺の無向二部グラフとみる。各マスでは餌を食べるたびに1本の辺から出発し、最終的に始点へ戻るので、頂点vを端点とする辺の総通過回数は2A_vでなければならない。",
+      "procedure": [
+        "観察: 3×3盤面を9頂点12辺の無向二部グラフとみる。各マスでは餌を食べるたびに1本の辺から出発し、最終的に始点へ戻るので、頂点vを端点とする辺の総通過回数は2A_vでなければならない。",
+        "観察: A_vは最大100で行動列を直接探索する分岐は大きいが、盤面の辺数は12で固定されている。先に各辺を何回通るか決めれば、残る条件は次数と正の辺の連結性になる。",
+        "着眼: 辺eの通過回数x_eを多重辺数とみなすと、各頂点の次数は2A_vで全て偶数になる。正の多重辺のsupportが連結ならEuler閉路が存在し、その各出発がちょうど1缶を消費するので元の行動列へ戻せる。",
+        "着眼: gridは市松模様の二部グラフなので、黒頂点の残余次数をsource側、白頂点の残余次数をsink側に置き、盤面辺へ流す量を追加通過回数と解釈できる。",
+        "方針: 連結性を保証するspanning treeを列挙し、その辺へ1の下限制約を置いた次数充足問題を二部グラフの最大流で解く。（12辺の部分集合は全列挙でき、tree分を引いた残余次数は各辺の追加通過回数を流量とするbipartite flowに一致する。）",
+        "接続: 12辺の部分集合から9頂点を結ぶtreeを選び、各tree辺を1回使う分だけ端点の要求次数2A_vを減らす。残余要求を最大流で全て満たせたら辺多重度を復元し、(1,1)からHierholzer法でEuler閉路を構築して各辺をL/R/U/Dへ変換する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-construct-euler-trail-or-circuit",
+      "learningOutcomeIds": [
+        "outcome-construct-euler-trail-or-circuit"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC286 G「Unique Walk」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 指定edgeを各1回、他edgeを任意回使うwalkの存在を、縮約graphのEuler trail条件で線形に判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 指定edgeを各1回、他edgeを任意回使うwalkの存在を、縮約graphのEuler trail条件で線形に判定できる。",
+          "転移題材の解法接続: Sに属するedgeをmarkし、それ以外の全edgeでDSUをmergeする。各S edge(u,v)についてroot(u),root(v)のdegreeを1ずつ増やす。同じrootなら結果的に2増える。奇数degreeのroot数を数え、0または2ならYes、それ以外ならNoを出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 3,
+  "representativeRank": 76,
+  "globalIndex": 150,
+  "orderReason": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

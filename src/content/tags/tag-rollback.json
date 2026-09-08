@@ -1,0 +1,57 @@
+{
+  "id": "tag-rollback",
+  "name": "rollback・DFS入退場の状態復元",
+  "definition": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "DFS path",
+      "snapshot",
+      "変更履歴"
+    ],
+    "triggerPatterns": [
+      "offline dynamic",
+      "分岐探索",
+      "退場時に戻す"
+    ],
+    "invariantPatterns": [
+      "stack height",
+      "変更差分"
+    ],
+    "goalPatterns": [
+      "時間分割",
+      "状態復元"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-backtracking-search",
+      "type": "analogy",
+      "rationale": "再帰へ入る前の更新と復帰時のundoを対にし、現在pathだけの不変条件を保つ設計が共通する。"
+    },
+    {
+      "tagId": "tag-persistence",
+      "type": "contrast",
+      "rationale": "過去版を共有して保持する永続化と、現在状態をundoして探索順に戻すrollbackを区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-rollback-reversible-updates"
+  ],
+  "representativeProblemIds": [
+    "abc302-ex",
+    "abc363-g"
+  ],
+  "aliases": [
+    "rollback DSU",
+    "undo stack",
+    "ロールバックデータ構造"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

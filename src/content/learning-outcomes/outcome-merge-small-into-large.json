@@ -1,0 +1,18 @@
+{
+  "id": "outcome-merge-small-into-large",
+  "statement": "小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc273-ex",
+    "abc275-ex",
+    "abc324-g",
+    "abc329-f",
+    "abc369-g",
+    "abc411-f",
+    "abc451-f",
+    "abc454-g",
+    "abc462-g",
+    "tag-small-to-large",
+    "unit-small-to-large"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "tag-rerooting",
+  "name": "rerooting・全方位木DP",
+  "definition": "辺の両側情報とprefix/suffix合成を用いて、全ての根に対する木DP値を線形または準線形時間で得る。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [
+    "tag-rooted-tree-aggregation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "木",
+      "根",
+      "辺の両側"
+    ],
+    "triggerPatterns": [
+      "全頂点を根",
+      "根を移す"
+    ],
+    "invariantPatterns": [
+      "親側情報",
+      "除外合成"
+    ],
+    "goalPatterns": [
+      "全根の答え"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-reroot-tree-aggregation"
+  ],
+  "representativeProblemIds": [
+    "abc220-f",
+    "abc223-g"
+  ],
+  "aliases": [
+    "all-direction tree DP",
+    "rerooting DP",
+    "全方位木DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

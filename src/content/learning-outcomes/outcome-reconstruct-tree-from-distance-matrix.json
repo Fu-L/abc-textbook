@@ -1,0 +1,12 @@
+{
+  "id": "outcome-reconstruct-tree-from-distance-matrix",
+  "statement": "加法的距離行列から正重み木の候補を復元し、全点対距離の再計算で存在を完全検証できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-use-tree-diameter-extrema"
+  ],
+  "scopeIds": [
+    "abc451-e",
+    "tag-additive-tree-metric-reconstruction",
+    "unit-additive-tree-metric-reconstruction"
+  ]
+}

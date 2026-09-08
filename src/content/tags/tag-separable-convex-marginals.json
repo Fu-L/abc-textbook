@@ -1,0 +1,53 @@
+{
+  "id": "tag-separable-convex-marginals",
+  "name": "分離凸・凹の単調限界値選択",
+  "definition": "各対象の限界費用が単調増加（または限界利益が単調減少）することを使い、複数の限界値列から必要な上位・下位K項をpriority queue mergeまたは値の閾値計数で選ぶ。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [
+    "tag-basic-convex-optimization"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "marginal sequence",
+      "resources",
+      "separable concave rewards",
+      "separable convex costs"
+    ],
+    "triggerPatterns": [
+      "一単位ずつ配る",
+      "複数の単調列から上位K項",
+      "離散凸",
+      "離散凹"
+    ],
+    "invariantPatterns": [
+      "k-way mergeまたは閾値別個数",
+      "限界値の単調性"
+    ],
+    "goalPatterns": [
+      "最大総利益",
+      "最小配分費用"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-allocate-by-convex-marginal-costs"
+  ],
+  "representativeProblemIds": [
+    "abc216-e",
+    "abc359-f",
+    "abc389-e"
+  ],
+  "aliases": [
+    "marginal-cost greedy",
+    "monotone marginal selection",
+    "separable convex allocation",
+    "限界利益選択",
+    "限界費用貪欲"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

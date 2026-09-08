@@ -1,0 +1,54 @@
+{
+  "id": "tag-knapsack-resource",
+  "name": "資源軸knapsack DP",
+  "definition": "容量・時間・個数などの有界資源を軸に選択の価値を更新する。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "上限",
+      "価値",
+      "容量",
+      "資源",
+      "重さ"
+    ],
+    "triggerPatterns": [
+      "使う",
+      "選ぶ",
+      "選択",
+      "配る"
+    ],
+    "invariantPatterns": [
+      "以下",
+      "使用済み",
+      "合計"
+    ],
+    "goalPatterns": [
+      "可否",
+      "最大価値",
+      "最小コスト"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-design-resource-dp"
+  ],
+  "representativeProblemIds": [
+    "abc321-f",
+    "abc322-e",
+    "abc383-f"
+  ],
+  "aliases": [
+    "knapsack DP",
+    "ナップサックDP",
+    "部分和DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

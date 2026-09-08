@@ -1,0 +1,55 @@
+{
+  "id": "tag-finite-field-extension",
+  "name": "拡大有限体の表現と演算",
+  "definition": "素体上の多項式剰余または基底座標で有限体の元を表し、標準化された加減乗除を構成する。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [
+    "tag-modular-arithmetic"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "nim積",
+      "基底",
+      "拡大次数",
+      "既約多項式",
+      "有限体"
+    ],
+    "triggerPatterns": [
+      "体を拡大",
+      "基底係数",
+      "多項式で割った余り",
+      "根を添加"
+    ],
+    "invariantPatterns": [
+      "既約関係",
+      "標準形",
+      "演算で閉じる",
+      "零でない元は可逆"
+    ],
+    "goalPatterns": [
+      "体上の四則演算",
+      "平方根を表現",
+      "有限体で計算"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-compute-in-finite-field-extension"
+  ],
+  "representativeProblemIds": [
+    "abc274-ex",
+    "abc381-g"
+  ],
+  "aliases": [
+    "Nim product",
+    "extension field",
+    "quadratic finite field",
+    "有限体拡大"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

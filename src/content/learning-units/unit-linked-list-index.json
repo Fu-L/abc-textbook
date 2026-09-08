@@ -1,0 +1,99 @@
+{
+  "id": "unit-linked-list-index",
+  "kind": "section",
+  "title": "要素索引と連結リストで局所linkを更新する",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "全候補の大小順や区間集約を保つ平衡木・heap。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
+    "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70",
+    "source-abc344-e-problem-9750c819834eb24232bb9607c3292c04156a042d874f5469dbc4016bada17b13",
+    "source-abc344-editorial-9487-09db599fbdc3f6335c1e46f22db6d3a1a778659c300cb03a623af9d914d338de",
+    "source-abc421-editorial-13787-433e8d0a684c462cc1e7cceabc14552e13947bbf5910cabd3c98196fd12e0564",
+    "source-abc421-f-problem-0ab28e8057b1b056ea75492696f2deba87c12925e65a0fb80b14697fe8aea8b9"
+  ],
+  "tagIds": [
+    "tag-linked-list-index"
+  ],
+  "ownedTagIds": [
+    "tag-linked-list-index"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-local-sequence-links"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-local-sequence-links"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/linked-list-index.md",
+  "problemIds": [
+    "abc218-h",
+    "abc344-e",
+    "abc421-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-maintain-local-sequence-links",
+      "learningOutcomeIds": [
+        "outcome-maintain-local-sequence-links"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC344 E「Insert or Erase」について、queryは既知の値xの直後挿入またはx自身の削除であり、位置indexによるrandom accessは不要である。各valueから前後valueへ直接辿れるようにすれば、変更箇所は常に定数本のlinkだけになる。",
+      "procedure": [
+        "観察: queryは既知の値xの直後挿入またはx自身の削除であり、位置indexによるrandom accessは不要である。各valueから前後valueへ直接辿れるようにすれば、変更箇所は常に定数本のlinkだけになる。",
+        "着眼: distinct value保証によりvalue自身をnode identityとして使える。xの直後y挿入ではy.prev=x,y.next=x.nextとし両隣を繋ぎ直し、x削除ではx.prev.next=x.nextとx.next.prev=x.prevだけを更新すれば順序不変条件が保たれる。",
+        "方針: valueをnode keyとするdoubly linked listをhash mapで実装する（xのnodeをO(1)期待で特定し、挿入・削除を前後pointerの定数更新で処理できる。）",
+        "接続: 各valueに(prev,next)を持つ連想配列を作り、head/tail sentinelも接続する。type 1はxとそのnextの間へy nodeを挿入し、type 2はxの両隣を直結してmapからxを消す。最後にhead.nextからtailまでnextを辿り出力する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "要素IDから前後linkを引き、挿入・削除で変わる局所linkだけを更新して列順を復元できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-maintain-local-sequence-links",
+      "learningOutcomeIds": [
+        "outcome-maintain-local-sequence-links"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「要素IDから前後linkを引き、挿入・削除で変わる局所linkだけを更新して列順を復元できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC421 F「Erase between X and Y」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「要素IDから前後linkを引き、挿入・削除で変わる局所linkだけを更新して列順を復元できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 一意ID列の挿入・区間削除をnext配列へ落とし、未知の端点順序を並行探索で決めて総走査量を削除数へ償却できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 一意ID列の挿入・区間削除をnext配列へ落とし、未知の端点順序を並行探索で決めて総走査量を削除数へ償却できる。",
+          "転移題材の解法接続: next[0]=-1から始め、挿入は二本のnextを更新する。削除queryではcurX=x,curY=yと二つの一時和を持ち、両側を一歩ずつ進める。curXがyへ届けばx側の和を出してnext[x]=y、curYがxへ届けばy側の和を出してnext[y]=xとし、中間nodeを列から切り離す。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "時間計算量 O(Q)（公式解法全体。特殊な計算量解析を含む）を問題制約と照合し、対象技能が律速かを確認する。"
+        ],
+        "expectedResult": "要素IDから前後linkを引き、挿入・削除で変わる局所linkだけを更新して列順を復元できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 1,
+  "difficultyRank": 1,
+  "representativeRank": 5,
+  "globalIndex": 26,
+  "orderReason": "配列やmapの索引を使い、順序全体を走査せず前後linkだけを更新して列を保つ。"
+}

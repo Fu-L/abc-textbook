@@ -1,0 +1,52 @@
+{
+  "id": "tag-baby-step-giant-step",
+  "name": "Baby-Step Giant-Step・可逆作用の反復到達探索",
+  "definition": "有限群の累乗または有限集合上の可逆写像fについてf^t(s)=gをt=iB+jへ分け、target側のinverse baby stepとstart側のgiant stepをhash照合して到達時刻を平方根時間で求める。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [
+    "tag-modular-arithmetic"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "group action",
+      "start",
+      "target",
+      "可逆写像",
+      "有限群または有限orbit"
+    ],
+    "triggerPatterns": [
+      "affine合同漸化式",
+      "f\\^t\\(s\\)=g",
+      "g\\^t=h",
+      "反復到達時刻",
+      "離散対数"
+    ],
+    "invariantPatterns": [
+      "forward giant sequence",
+      "inverse baby table",
+      "t=iB\\+j"
+    ],
+    "goalPatterns": [
+      "平方根時間のorbit探索",
+      "最小到達時刻"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-find-orbit-hit-by-bsgs"
+  ],
+  "representativeProblemIds": [
+    "abc270-g"
+  ],
+  "aliases": [
+    "BSGS",
+    "Baby-Step Giant-Step",
+    "baby-step giant-step"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

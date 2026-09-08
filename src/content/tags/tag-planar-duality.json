@@ -1,0 +1,45 @@
+{
+  "id": "tag-planar-duality",
+  "name": "平面graph双対・cut/path対応",
+  "definition": "埋め込みのfaceをdual頂点へ写し、primal cutとdual path/cycleの対応から最小cut問題を最短路へ変換する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-max-flow-min-cut",
+    "tag-shortest-path"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "dual edges",
+      "faces",
+      "plane embedding"
+    ],
+    "triggerPatterns": [
+      "outer face",
+      "平面gridのcut"
+    ],
+    "invariantPatterns": [
+      "primal edge dual correspondence"
+    ],
+    "goalPatterns": [
+      "cutをpathへ変換"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-dualize-planar-cut-to-path"
+  ],
+  "representativeProblemIds": [
+    "abc413-g"
+  ],
+  "aliases": [
+    "cut–path duality",
+    "planar duality",
+    "平面双対グラフ"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

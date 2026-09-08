@@ -1,0 +1,49 @@
+{
+  "id": "tag-contribution-reordering",
+  "name": "寄与の数え上げと順序交換",
+  "definition": "答えを要素・組・連結成分ごとの独立な局所寄与へ分解し、和または積の集計順序を交換する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "合計",
+      "対",
+      "組",
+      "要素"
+    ],
+    "triggerPatterns": [
+      "二重和",
+      "寄与",
+      "数え上げ順序"
+    ],
+    "invariantPatterns": [
+      "何回数え",
+      "係数",
+      "独立"
+    ],
+    "goalPatterns": [
+      "場合の数",
+      "期待値",
+      "総和"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-reorder-counting-contributions"
+  ],
+  "representativeProblemIds": [
+    "abc215-g",
+    "abc224-f",
+    "abc233-e"
+  ],
+  "aliases": [
+    "contribution technique",
+    "主客転倒"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

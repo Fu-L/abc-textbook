@@ -1,0 +1,10 @@
+{
+  "id": "outcome-compose-finite-functions",
+  "statement": "小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc261-e",
+    "tag-finite-function-composition",
+    "unit-finite-function-composition"
+  ]
+}

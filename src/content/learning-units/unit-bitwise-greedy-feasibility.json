@@ -1,0 +1,94 @@
+{
+  "id": "unit-bitwise-greedy-feasibility",
+  "kind": "section",
+  "title": "bitwise greedyによるmask最適化",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "bitwise greedyによるmask最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4",
+    "source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"
+  ],
+  "tagIds": [
+    "tag-bitwise-greedy-feasibility"
+  ],
+  "ownedTagIds": [
+    "tag-bitwise-greedy-feasibility"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-mask-by-bitwise-feasibility"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-mask-by-bitwise-feasibility"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/bitwise-greedy-feasibility.md",
+  "problemIds": [
+    "abc408-e"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-optimize-mask-by-bitwise-feasibility",
+      "learningOutcomeIds": [
+        "outcome-optimize-mask-by-bitwise-feasibility"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC408 E「Minimum OR Path」について、mask x に含まれる bit だけをもつ辺、すなわち w OR x=x の辺だけで 1 から N へ到達できれば、その経路の OR も x の submask である。",
+      "procedure": [
+        "観察: mask x に含まれる bit だけをもつ辺、すなわち w OR x=x の辺だけで 1 から N へ到達できれば、その経路の OR も x の submask である。",
+        "観察: 到達可能な mask の集合は bit を追加する方向に単調であるため、上位 bit から 0 にできるか試すことで数値として最小の mask を確定できる。",
+        "着眼: simple path 条件は connectivity 判定を妨げない。許可辺で walk があれば cycle を除いて simple path にでき、その OR は増えない。",
+        "着眼: ある候補 x が可能なら x に bit を足した mask も同じ経路を許すので、lexicographic な bit 最小化と同様に高位から貪欲決定できる。",
+        "方針: 全30 bitを立てた mask から上位 bit を順に仮消去し、許可辺だけの DSU connectivity が保たれるなら消去を確定する（各判定は edge label が候補 mask の submask かを調べて DSU で結ぶだけで、全体 O(30(N+M)α(N)) になる。）",
+        "接続: ans=(1<<30)-1 とする。b=29..0 について cand=ans without bit b を作り、(w_i|cand)==cand の辺だけで DSU を再構築する。1,N が連結なら ans=cand とし、最後の ans を出力する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-optimize-mask-by-bitwise-feasibility",
+      "learningOutcomeIds": [
+        "outcome-optimize-mask-by-bitwise-feasibility"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。その発動条件、正当性、計算量を説明し、未知問へ実装できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "assessment": {
+        "method": "ABC408 E「Minimum OR Path」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
+          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
+          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
+          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
+          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+        ],
+        "expectedResult": "上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。その発動条件、正当性、計算量を説明し、未知問へ実装できるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 3,
+  "representativeRank": 74,
+  "globalIndex": 86,
+  "orderReason": "上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

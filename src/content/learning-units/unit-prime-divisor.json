@@ -1,0 +1,124 @@
+{
+  "id": "unit-prime-divisor",
+  "kind": "section",
+  "title": "素因数分解と約数構造",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "床関数や整数根の値が一定となる区間への分割。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+    "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+    "source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5",
+    "source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c",
+    "source-abc259-e-problem-eb7a258d38ce1d9f2ef53211daa3360cf49824f3019fbd9570feb5c144957816",
+    "source-abc259-editorial-4271-76fe64c5c7a413668836b08101de648037f01ce8e462d52ce8eb8b8d1ab980e8"
+  ],
+  "tagIds": [
+    "tag-prime-divisor-decomposition"
+  ],
+  "ownedTagIds": [
+    "tag-prime-divisor-decomposition"
+  ],
+  "learningOutcomeIds": [
+    "outcome-decompose-by-prime-or-divisor"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-decompose-by-prime-or-divisor"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/prime-divisor.md",
+  "problemIds": [
+    "abc212-g",
+    "abc222-g",
+    "abc227-g",
+    "abc230-g",
+    "abc238-g",
+    "abc245-ex",
+    "abc259-e",
+    "abc272-g",
+    "abc285-ex",
+    "abc304-f",
+    "abc322-g",
+    "abc335-g",
+    "abc349-f",
+    "abc363-f",
+    "abc368-f",
+    "abc384-f",
+    "abc393-e",
+    "abc400-e",
+    "abc403-f",
+    "abc412-e",
+    "abc420-g",
+    "abc428-g",
+    "abc445-e",
+    "abc461-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-decompose-by-prime-or-divisor",
+      "learningOutcomeIds": [
+        "outcome-decompose-by-prime-or-divisor"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC227 G「Divisors of Binomial Coefficient」について、約数個数は素因数指数から求まるが、Nは10^12なのでN!や二項係数そのものを構築できない。一方Kは10^6以下で、分子は[N-K+1,N]という短い連続区間、分母はK!である。",
+      "procedure": [
+        "観察: 約数個数は素因数指数から求まるが、Nは10^12なのでN!や二項係数そのものを構築できない。一方Kは10^6以下で、分子は[N-K+1,N]という短い連続区間、分母はK!である。",
+        "観察: sqrt(N)は最大10^6でKと同程度なので、sqrt(N)までの素数を列挙し、短い分子区間をまとめて割る方針なら制約に合う。",
+        "着眼: C(N,K)=N(N-1)…(N-K+1)/K!なので、素数pごとの指数は分子区間の指数総和からK!の指数を引けばよく、巨大な積を持つ必要がない。",
+        "着眼: 分子の各数をsqrt(N)以下の全素数で割り切った後に1より大きく残る因子は素数である。短い区間を配列に保持することで、区間篩と同様に各倍数だけを訪問できる。",
+        "方針: K!と連続区間[N-K+1,N]を篩の要領で素因数分解し、各素数の分子指数から分母指数を引く。（扱う整数は2K個に限られ、必要な素数もsqrt(N)以下までの篩で列挙できるため、Nの大きさに比例せず指数表を得られる。）",
+        "接続: sqrt(N)までを篩って素数を列挙する。各素数について分子区間内の最初の倍数から繰り返し割って指数を加え、K!中の指数を減らす。最後に各要素の残存素因数も加え、全ての指数eについて(e+1)をmod 998244353で掛ける。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-decompose-by-prime-or-divisor",
+      "learningOutcomeIds": [
+        "outcome-decompose-by-prime-or-divisor"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「整数の条件を素因数ごとの指数または約数格子上の条件に分解できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC259 E「LCM on Whiteboard」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「整数の条件を素因数ごとの指数または約数格子上の条件に分解できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: LCMへの一要素削除の影響を、素数ごとの一意最大という局所条件へ分解し、異なる結果数まで構成せずに数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: LCMへの一要素削除の影響を、素数ごとの一意最大という局所条件へ分解し、異なる結果数まで構成せずに数えられる。",
+          "転移題材の解法接続: 最初の走査で各素数pの最大指数max[p]と達成者数count[p]を求める。次に各a_iの組(p,e)を見てe=max[p]かつcount[p]=1が一つでもあればiを特別と数える。その個数をcとし、特別でないiがあれば共通の『LCM不変』も1種類なので、答えをmin(c+1,N)とする。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 2,
+  "representativeRank": 2,
+  "globalIndex": 43,
+  "orderReason": "初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。"
+}

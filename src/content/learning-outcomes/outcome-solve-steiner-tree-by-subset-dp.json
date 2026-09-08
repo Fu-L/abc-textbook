@@ -1,0 +1,14 @@
+{
+  "id": "outcome-solve-steiner-tree-by-subset-dp",
+  "statement": "terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest path relaxationを交互に行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-enumerate-subset-state-space",
+    "outcome-model-and-compute-shortest-path"
+  ],
+  "scopeIds": [
+    "abc364-g",
+    "abc395-g",
+    "tag-steiner-tree-dp",
+    "unit-steiner-tree-dp"
+  ]
+}

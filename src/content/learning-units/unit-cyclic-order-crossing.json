@@ -1,0 +1,104 @@
+{
+  "id": "unit-cyclic-order-crossing",
+  "kind": "subsection",
+  "title": "円環順序・chord交差",
+  "parentId": "unit-geometry-primitives",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-geometry-primitives"
+  ],
+  "excludedTopics": [
+    "円環順序・chord交差の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228",
+    "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e",
+    "source-abc338-e-problem-9dd60d4e5c4ed7772cd791c12f8b48bef91c588ae829b02c763fbe3f7f9e8bc0",
+    "source-abc338-editorial-9172-411422b4ddb0a7b0369c40a609943ac7f77967ee10923f39ad7fd7f30c5c8102",
+    "source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b",
+    "source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"
+  ],
+  "tagIds": [
+    "tag-cyclic-order-crossing"
+  ],
+  "ownedTagIds": [
+    "tag-cyclic-order-crossing"
+  ],
+  "learningOutcomeIds": [
+    "outcome-detect-crossing-by-cyclic-order"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-detect-crossing-by-cyclic-order"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md",
+  "problemIds": [
+    "abc263-ex",
+    "abc338-e",
+    "abc405-f",
+    "abc424-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-detect-crossing-by-cyclic-order",
+      "learningOutcomeIds": [
+        "outcome-detect-crossing-by-cyclic-order"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC338 E「Chords」について、各chordの端点をA_i<B_iに揃え、円を1と2Nの間で切る。二本が交差するのは端点がA_i<A_j<B_i<B_jのように交互に現れる場合であり、交差がなければ開いたchord区間は互いにdisjointか完全にnestedになる。",
+      "procedure": [
+        "観察: 各chordの端点をA_i<B_iに揃え、円を1と2Nの間で切る。二本が交差するのは端点がA_i<A_j<B_i<B_jのように交互に現れる場合であり、交差がなければ開いたchord区間は互いにdisjointか完全にnestedになる。",
+        "着眼: 左端を見たchordをpushし、右端iを見た時にstack topがiでなければ、iの内側で開始した別chordがまだ閉じておらずA_i<A_j<B_i<B_jとなる。逆にtopが常に一致すれば全区間は正しくnestedし交差しない。",
+        "方針: 端点を順に走査し、open中のchordをstackで照合する（非交差ならnested区間の閉じ順は必ずLIFOであり、一度の線形走査で交差を検出できる。）",
+        "接続: 各chordで端点をmin/maxにし、位置1,…,2Nにchord IDと左/右種別を記録する。左端ならIDをpush、右端ならpopしたIDと比較し、不一致ならYesを即出力する。最後まで一致すればNo。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "円周をcutして端点を線形化し、交互配置またはlaminar括弧構造からchord交差を判定・数え上げできる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-detect-crossing-by-cyclic-order",
+      "learningOutcomeIds": [
+        "outcome-detect-crossing-by-cyclic-order"
+      ],
+      "prerequisiteIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates",
+        "prereq-abc-advanced-v1",
+        "unit-geometry-primitives"
+      ],
+      "attainmentCondition": "学習成果「円周をcutして端点を線形化し、交互配置またはlaminar括弧構造からchord交差を判定・数え上げできる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC263 Ex「Intersection 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「円周をcutして端点を線形化し、交互配置またはlaminar括弧構造からchord交差を判定・数え上げできる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 実数二分探索、直線と円の交点、偏角ソート、BITによる区間加算・一点取得を扱えること。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 実数二分探索、直線と円の交点、偏角ソート、BITによる区間加算・一点取得を扱えること。",
+          "転移題材の解法接続: geometric order statistic を parametric counting にし、line-circle dualization で chord intersection、さらに circular order の interval crossing count へ段階的に落とす。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "円周をcutして端点を線形化し、交互配置またはlaminar括弧構造からchord交差を判定・数え上げできる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 82,
+  "globalIndex": 163,
+  "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "outcome-encode-threshold-constraints-as-two-sat",
+  "statement": "整数変数をthreshold命題列へ符号化し、単調性と二項制約をimplication graphへ張り、SCCから可否と充足割当を復元できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-condense-and-order-directed-graph"
+  ],
+  "scopeIds": [
+    "abc277-ex",
+    "tag-two-sat",
+    "unit-two-sat"
+  ]
+}

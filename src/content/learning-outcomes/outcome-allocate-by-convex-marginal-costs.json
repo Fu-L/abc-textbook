@@ -1,0 +1,16 @@
+{
+  "id": "outcome-allocate-by-convex-marginal-costs",
+  "statement": "分離凸費用または分離凹利益を単調な限界値列へ分解し、heap mergeか閾値別の個数・総和により必要な上位・下位K項を選べる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-optimize-univariate-convex-function"
+  ],
+  "scopeIds": [
+    "abc216-e",
+    "abc359-f",
+    "abc369-g",
+    "abc373-f",
+    "abc389-e",
+    "tag-separable-convex-marginals",
+    "unit-separable-convex-marginals"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "tag-state-normalization",
+  "name": "状態・配置の正規化",
+  "definition": "対称操作で同値な状態を一意な標準形へ写し、重複した探索・数え上げを除く。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "列",
+      "状態",
+      "配置"
+    ],
+    "triggerPatterns": [
+      "代表",
+      "同値",
+      "対称"
+    ],
+    "invariantPatterns": [
+      "同値類",
+      "標準形"
+    ],
+    "goalPatterns": [
+      "状態圧縮",
+      "重複除去"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-normalize-equivalent-states"
+  ],
+  "representativeProblemIds": [
+    "abc242-e",
+    "abc296-f"
+  ],
+  "aliases": [
+    "state canonicalization",
+    "標準形による状態圧縮"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

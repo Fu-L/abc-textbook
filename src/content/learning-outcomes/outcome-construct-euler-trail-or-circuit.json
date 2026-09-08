@@ -1,0 +1,12 @@
+{
+  "id": "outcome-construct-euler-trail-or-circuit",
+  "statement": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc227-h",
+    "abc286-g",
+    "abc336-g",
+    "tag-euler-trail-circuit",
+    "unit-euler-trail-circuit"
+  ]
+}

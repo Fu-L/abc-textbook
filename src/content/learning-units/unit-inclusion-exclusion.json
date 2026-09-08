@@ -1,0 +1,193 @@
+{
+  "id": "unit-inclusion-exclusion",
+  "kind": "section",
+  "title": "包除・Möbius反転で重複を補正する",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "選択順を二項係数だけで式化する数え上げ。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15",
+    "source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613",
+    "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d",
+    "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377",
+    "source-abc235-editorial-3252-e156873af08601dc484d0ce3da61dd8d27ddda8414b6756079ad415e547689b7",
+    "source-abc235-g-problem-ff02f7865679f2725f215161406783f97b2ef351e4e8c2fbd85cecabc3dd6249"
+  ],
+  "tagIds": [
+    "tag-divisor-mobius-inversion",
+    "tag-inclusion-exclusion",
+    "tag-subset-convolution",
+    "tag-subset-zeta-mobius-transform"
+  ],
+  "ownedTagIds": [
+    "tag-inclusion-exclusion"
+  ],
+  "learningOutcomeIds": [
+    "outcome-apply-subset-zeta-mobius-transform",
+    "outcome-compute-subset-convolution",
+    "outcome-correct-overlap-by-inversion",
+    "outcome-invert-divisor-lattice-by-mobius"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-correct-overlap-by-inversion"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md",
+  "problemIds": [
+    "abc212-g",
+    "abc214-g",
+    "abc215-h",
+    "abc230-g",
+    "abc235-g",
+    "abc236-ex",
+    "abc242-f",
+    "abc246-f",
+    "abc260-ex",
+    "abc272-ex",
+    "abc280-g",
+    "abc284-ex",
+    "abc285-ex",
+    "abc288-ex",
+    "abc294-ex",
+    "abc295-ex",
+    "abc297-ex",
+    "abc297-f",
+    "abc304-f",
+    "abc306-ex",
+    "abc309-g",
+    "abc317-f",
+    "abc327-g",
+    "abc331-g",
+    "abc335-g",
+    "abc343-e",
+    "abc349-f",
+    "abc357-g",
+    "abc361-f",
+    "abc377-f",
+    "abc386-g",
+    "abc423-f",
+    "abc455-e",
+    "abc456-g",
+    "abc462-g",
+    "abc465-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-correct-overlap-by-inversion",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC214 G「Three Permutations」について、条件に反する順列は、ある添字 i で r_i が p_i または q_i に等しいという事象の和であり、固定した違反添字数ごとに包除できる。",
+      "procedure": [
+        "観察: 条件に反する順列は、ある添字 i で r_i が p_i または q_i に等しいという事象の和であり、固定した違反添字数ごとに包除できる。",
+        "観察: 違反させる添字 i を辺 (p_i,q_i) とみなすと、必要なのは選んだ各辺へ相異なる端点を一つずつ割り当てる方法数である。",
+        "着眼: p と q がともに順列なので、値を頂点とする全体グラフでは各頂点の次数が高々 2 となり、非自明な連結成分はパスかサイクルに限られる。",
+        "着眼: 選択辺だけからなる一成分がサイクルなら端点割当ては 2 通り、頂点数 L のパスなら割り当てない頂点の選び方に対応して L 通りになる。",
+        "方針: 違反添字集合への包除を行い、二つの順列が作る次数 2 以下のグラフをパス・サイクルへ分解して集合サイズ別の係数を DP で集約する。（選択辺への単射な端点割当てが成分ごとの積に分かれ、全ての添字集合を個別列挙せず係数多項式として畳み込める。）",
+        "接続: 包除の交差項を次数 2 以下のグラフ上の端点単射数へ変換し、元の各パス・サイクル成分から選ぶ辺数別多項式を作って全体 DP と階乗係数へ合成する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    },
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-apply-subset-zeta-mobius-transform",
+        "outcome-compute-subset-convolution",
+        "outcome-invert-divisor-lattice-by-mobius"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（学習経路の比較）",
+      "omissions": [
+        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
+      ],
+      "environment": "紙上での未知問のモデル化と候補比較",
+      "input": "包除・Möbius反転で重複を補正するの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
+      "procedure": [
+        "約数格子のzeta・Möbius反転: 1個の直接所有Outcome、学ぶ理由「素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ」、対象外「約数格子のzeta・Möbius反転の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "subset zeta・Möbius変換: 1個の直接所有Outcome、学ぶ理由「集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ」、対象外「subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-correct-overlap-by-inversion",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC235 G「Gardens」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 複数種類の部分集合で全位置を覆う数え上げを、包除と打切り二項和の一次更新で処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 複数種類の部分集合で全位置を覆う数え上げを、包除と打切り二項和の一次更新で処理できる。",
+          "転移題材の解法接続: 全庭非空を空庭事象の inclusion-exclusion へ変え、各項 C(N,i)F_A(i)F_B(i)F_C(i) を、三つの打切り二項和の同時一次更新で走査する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    },
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-apply-subset-zeta-mobius-transform",
+        "outcome-compute-subset-convolution",
+        "outcome-invert-divisor-lattice-by-mobius"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
+      "assessment": {
+        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
+        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
+      },
+      "answer": {
+        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
+        "procedure": [
+          "問題を対象・操作・保つ量・求める量へ分解する。",
+          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
+          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
+          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
+        ],
+        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 2,
+  "representativeRank": 7,
+  "globalIndex": 60,
+  "orderReason": "単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。"
+}

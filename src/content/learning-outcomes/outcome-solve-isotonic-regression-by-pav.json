@@ -1,0 +1,12 @@
+{
+  "id": "outcome-solve-isotonic-regression-by-pav",
+  "statement": "単調制約付き凸最小化で違反する隣接blockをpoolし、block optimumが単調になるまでmergeする。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-optimize-univariate-convex-function"
+  ],
+  "scopeIds": [
+    "abc459-f",
+    "tag-isotonic-regression-pav",
+    "unit-isotonic-regression"
+  ]
+}

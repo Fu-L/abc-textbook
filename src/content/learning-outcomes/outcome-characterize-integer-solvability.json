@@ -1,0 +1,14 @@
+{
+  "id": "outcome-characterize-integer-solvability",
+  "statement": "整除条件や一次不定方程式の可解性をgcdで特徴付け、必要なら拡張EuclidでBézout整数解を構成できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc271-ex",
+    "abc315-g",
+    "abc340-f",
+    "abc459-g",
+    "abc460-e",
+    "tag-bezout-diophantine",
+    "unit-gcd-diophantine"
+  ]
+}

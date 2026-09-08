@@ -1,0 +1,46 @@
+{
+  "id": "tag-string-periodicity",
+  "name": "文字列周期・primitive word",
+  "definition": "prefix一致またはborderから最小periodを求め、文字列をprimitive rootと反復回数へ正規化する。",
+  "parentId": "tag-string-state-representation",
+  "prerequisiteTagIds": [
+    "tag-z-algorithm-prefix-matching"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "period",
+      "primitive root",
+      "string"
+    ],
+    "triggerPatterns": [
+      "同じblockの反復",
+      "最小周期"
+    ],
+    "invariantPatterns": [
+      "border relation",
+      "period divides length"
+    ],
+    "goalPatterns": [
+      "primitive word",
+      "周期正規化"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-normalize-string-to-primitive-period"
+  ],
+  "representativeProblemIds": [
+    "abc312-ex"
+  ],
+  "aliases": [
+    "minimal period",
+    "primitive word",
+    "文字列周期"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,47 @@
+{
+  "id": "tag-two-sat",
+  "name": "2-SAT・含意グラフ",
+  "definition": "二値選択のclauseを含意辺へ変換し、literalと否定literalのSCC関係から可解性と代入を得る。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-scc-condensation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "boolean",
+      "clause",
+      "literal"
+    ],
+    "triggerPatterns": [
+      "threshold boolean",
+      "二択",
+      "少なくとも一方"
+    ],
+    "invariantPatterns": [
+      "SCC順",
+      "否定literal"
+    ],
+    "goalPatterns": [
+      "充足可能性",
+      "具体代入"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-encode-threshold-constraints-as-two-sat"
+  ],
+  "representativeProblemIds": [
+    "abc277-ex"
+  ],
+  "aliases": [
+    "2-SAT",
+    "implication graph",
+    "含意グラフ"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

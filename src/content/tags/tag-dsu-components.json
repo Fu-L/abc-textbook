@@ -1,0 +1,59 @@
+{
+  "id": "tag-dsu-components",
+  "name": "DSUによる連結成分管理・縮約",
+  "definition": "辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "代表元",
+      "無向graph",
+      "連結成分"
+    ],
+    "triggerPatterns": [
+      "component merge",
+      "同値",
+      "辺追加"
+    ],
+    "invariantPatterns": [
+      "component metadata",
+      "root"
+    ],
+    "goalPatterns": [
+      "成分縮約",
+      "連結判定"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-monotone-threshold-search",
+      "type": "often_combined",
+      "rationale": "閾値以下の辺だけを有効化する単調判定器をDSUで共有するときに併用する。"
+    },
+    {
+      "tagId": "tag-spanning-tree-optimization",
+      "type": "often_combined",
+      "rationale": "Kruskal順に採用済み成分を管理する実装ではDSUを併用するが、cut・cycle性質そのものとは分けて学ぶ。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-augment-components-with-metadata",
+    "outcome-maintain-connectivity-components"
+  ],
+  "representativeProblemIds": [
+    "abc235-e",
+    "abc408-e"
+  ],
+  "aliases": [
+    "DSU",
+    "Union-Find",
+    "disjoint set union",
+    "素集合データ構造"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

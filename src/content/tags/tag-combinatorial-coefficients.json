@@ -1,0 +1,51 @@
+{
+  "id": "tag-combinatorial-coefficients",
+  "name": "組合せ係数・数え上げ",
+  "definition": "選択順・順列・分配を二項係数や階乗と対称性で式化する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "並べ方",
+      "個数",
+      "場合の数",
+      "選び方"
+    ],
+    "triggerPatterns": [
+      "何通り",
+      "分配",
+      "選ぶ",
+      "順列"
+    ],
+    "invariantPatterns": [
+      "ncr",
+      "対称性",
+      "階乗"
+    ],
+    "goalPatterns": [
+      "場合の数",
+      "確率",
+      "総数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-formulate-combinatorial-coefficients"
+  ],
+  "representativeProblemIds": [
+    "abc217-g",
+    "abc234-f",
+    "abc358-e"
+  ],
+  "aliases": [
+    "binomial coefficients",
+    "二項係数",
+    "重複組合せ"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

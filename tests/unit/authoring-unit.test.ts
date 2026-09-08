@@ -227,6 +227,53 @@ describe('Problem authoring unit', () => {
     ).toBe(false);
   });
 
+  it('separates canonical Unit ownership from descendant navigation coverage', () => {
+    const unit = catalogFixture().learningUnits[0];
+    if (!unit) throw new Error('Fixture learning unit is missing.');
+    const owned = {
+      ...unit,
+      ownedTagIds: [...unit.tagIds],
+      ownedLearningOutcomeIds: [...unit.learningOutcomeIds],
+      examples: unit.examples.map((example) => ({
+        ...example,
+        learningUnitRole: 'guided_outcome' as const,
+      })),
+      exercises: unit.exercises.map((exercise) => ({
+        ...exercise,
+        learningUnitRole: 'outcome_attainment' as const,
+      })),
+    };
+    expect(LearningUnitSchema.safeParse(owned).success).toBe(true);
+    expect(
+      LearningUnitSchema.safeParse({ ...owned, ownedLearningOutcomeIds: undefined }).success,
+    ).toBe(false);
+    expect(
+      LearningUnitSchema.safeParse({
+        ...owned,
+        examples: owned.examples.map((example) =>
+          Object.fromEntries(
+            Object.entries(example).filter(([field]) => field !== 'learningUnitRole'),
+          ),
+        ),
+      }).success,
+    ).toBe(false);
+
+    const routingOnly = {
+      ...unit,
+      ownedTagIds: [],
+      ownedLearningOutcomeIds: [],
+      examples: unit.examples.map((example) => ({
+        ...example,
+        learningUnitRole: 'curriculum_routing' as const,
+      })),
+      exercises: unit.exercises.map((exercise) => ({
+        ...exercise,
+        learningUnitRole: 'curriculum_routing' as const,
+      })),
+    };
+    expect(LearningUnitSchema.safeParse(routingOnly).success).toBe(true);
+  });
+
   it('validates Learning Unit outcome links and answer evidence before publication', () => {
     const catalog = catalogFixture();
     const unit = catalog.learningUnits[0];

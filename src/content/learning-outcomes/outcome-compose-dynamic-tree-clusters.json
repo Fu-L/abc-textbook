@@ -1,0 +1,13 @@
+{
+  "id": "outcome-compose-dynamic-tree-clusters",
+  "statement": "境界頂点を持つtree clusterの要約と結合を定義し、局所更新後の木DP値を保てる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-aggregate-rooted-tree"
+  ],
+  "scopeIds": [
+    "abc351-g",
+    "abc460-g",
+    "tag-static-top-tree",
+    "unit-static-top-tree"
+  ]
+}

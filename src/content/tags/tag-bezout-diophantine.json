@@ -1,0 +1,46 @@
+{
+  "id": "tag-bezout-diophantine",
+  "name": "Bézout等式・一次不定方程式",
+  "definition": "整数線形結合がgcdの倍数全体になることを使い、一次不定方程式の可解性と解のparameter表示を得る。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "gcd",
+      "整数係数",
+      "線形結合"
+    ],
+    "triggerPatterns": [
+      "ax\\+by=c",
+      "整数解"
+    ],
+    "invariantPatterns": [
+      "gcd divides c",
+      "一般解"
+    ],
+    "goalPatterns": [
+      "可解判定",
+      "整数解構成"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-characterize-integer-solvability"
+  ],
+  "representativeProblemIds": [
+    "abc271-ex",
+    "abc459-g"
+  ],
+  "aliases": [
+    "Bézout等式",
+    "extended Euclidean algorithm",
+    "一次不定方程式",
+    "拡張Euclid"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

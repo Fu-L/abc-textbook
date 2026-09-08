@@ -1,0 +1,107 @@
+{
+  "id": "unit-relaxed-convolution",
+  "kind": "subsection",
+  "title": "Relaxed・online convolution",
+  "parentId": "unit-polynomial-convolution",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-polynomial-convolution"
+  ],
+  "excludedTopics": [
+    "Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
+    "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9",
+    "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
+    "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f",
+    "source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada",
+    "source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"
+  ],
+  "tagIds": [
+    "tag-relaxed-convolution"
+  ],
+  "ownedTagIds": [
+    "tag-relaxed-convolution"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compute-online-relaxed-convolution"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-compute-online-relaxed-convolution"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/relaxed-convolution.md",
+  "problemIds": [
+    "abc213-h",
+    "abc230-h",
+    "abc281-ex",
+    "abc315-ex",
+    "abc357-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-compute-online-relaxed-convolution",
+      "learningOutcomeIds": [
+        "outcome-compute-online-relaxed-convolution"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC213 H「Stroll」について、時刻 t に街 s へ着く散歩コース数を d[s,t] とすると、道路 i を最後に渡る遷移は、出発側の時系列と長さ別通行方法数 p_i の畳み込みになる。",
+      "procedure": [
+        "観察: 時刻 t に街 s へ着く散歩コース数を d[s,t] とすると、道路 i を最後に渡る遷移は、出発側の時系列と長さ別通行方法数 p_i の畳み込みになる。",
+        "観察: 道路の長さは正なので、時刻 t の値は t より前の時刻だけに依存し、時間軸上には循環しない依存関係がある。",
+        "着眼: 普通の一括畳み込みでは d 自身が未確定なので計算できないが、分割統治なら左区間の確定値だけを右区間へ送れる。",
+        "着眼: 無向道路では一つの p_i が両方向の遷移に使われるため、左区間の各端点の系列から反対側へ対称に寄与を加える。",
+        "方針: 時間区間を分割統治し、左半分で確定した DP 列と各道路の p_i を高速畳み込みして右半分へ寄与させる。（未来の値を使わない依存順を守りながら、同じ区間間の畳み込みを NTT でまとめて計算できる。）",
+        "接続: 時間 DAG 上の自己参照型畳み込み DP を CDQ 型の分割統治で因果順に確定し、各区間間の道路遷移を NTT による多項式積として高速化する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-compute-online-relaxed-convolution",
+      "learningOutcomeIds": [
+        "outcome-compute-online-relaxed-convolution"
+      ],
+      "prerequisiteIds": [
+        "outcome-compute-convolution-or-correlation",
+        "prereq-abc-advanced-v1",
+        "unit-polynomial-convolution"
+      ],
+      "attainmentCondition": "学習成果「係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC230 H「Bullion」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 入れ子の unlabeled multiset 構造を母関数へ翻訳し、約数和とオンライン畳み込みから重量別個数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 入れ子の unlabeled multiset 構造を母関数へ翻訳し、約数和とオンライン畳み込みから重量別個数を求められる。",
+          "転移題材の解法接続: unlabeled multiset の組合せ構造から暗黙母関数を立て、対数微分で約数和列と自己畳み込みの係数再帰へ落とし、確定済み係数を CDQ 型 FFT で未来へ送る。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 96,
+  "globalIndex": 202,
+  "orderReason": "畳み込み・相互相関で得た考え方と実装を再利用し、Relaxed・online convolutionの発動条件・正当化・境界を重複なく学ぶ。"
+}

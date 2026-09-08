@@ -1,0 +1,43 @@
+{
+  "id": "tag-run-length-dynamics",
+  "name": "run-length状態の動的遷移",
+  "definition": "同値な連続要素をrunへ圧縮し、局所操作で変わるrunのsplit/mergeと長さだけを更新する。",
+  "parentId": "tag-string-state-representation",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "run length",
+      "runs",
+      "symbol"
+    ],
+    "triggerPatterns": [
+      "同じ値の連続block",
+      "局所操作でrunが変化"
+    ],
+    "invariantPatterns": [
+      "最大圧縮",
+      "隣接runは異値"
+    ],
+    "goalPatterns": [
+      "圧縮状態simulation"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-evolve-run-length-encoded-state"
+  ],
+  "representativeProblemIds": [
+    "abc313-e"
+  ],
+  "aliases": [
+    "RLE state",
+    "run-length dynamics",
+    "ランレングス状態"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

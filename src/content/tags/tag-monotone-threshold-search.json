@@ -1,0 +1,61 @@
+{
+  "id": "tag-monotone-threshold-search",
+  "name": "単調境界探索",
+  "definition": "可否または値の単調性を証明し、最初・最後の成立点を探す。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "上限",
+      "下限",
+      "境界",
+      "答え"
+    ],
+    "triggerPatterns": [
+      "二分探索",
+      "単調",
+      "可否判定"
+    ],
+    "invariantPatterns": [
+      "以上なら",
+      "以下なら",
+      "成立する最"
+    ],
+    "goalPatterns": [
+      "境界",
+      "最大化",
+      "最小化"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-dsu-components",
+      "type": "often_combined",
+      "rationale": "閾値以下の辺だけを有効化する単調判定器をDSUで共有するときに併用する。"
+    },
+    {
+      "tagId": "tag-two-pointers-window",
+      "type": "contrast",
+      "rationale": "どちらも単調性を使うが、値域の真偽境界を探す方法と連続区間の端を一方向へ進める方法を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-prove-and-search-threshold"
+  ],
+  "representativeProblemIds": [
+    "abc236-e",
+    "abc373-e",
+    "abc395-f"
+  ],
+  "aliases": [
+    "binary search on the answer",
+    "二分探索",
+    "答えの二分探索"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

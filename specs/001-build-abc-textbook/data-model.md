@@ -219,6 +219,7 @@ Integration mapは仮DAGをfinalへコピーする記録ではない。final Inv
 |---|---|
 | `inventoryDigest` | T044で完全一致を確認した全Problem/TechniqueInventory集合のdigest |
 | `previewSnapshotDigest` | T154の`passed` snapshot。preview成功を全件coverageの代替にしない |
+| `inputs.placementDecisionTable` | placementのfull/similar/supplement判定規則を持つpath・version・digest。materializerはaccepted buildと現行tableの一致を再検証する |
 | `integrationMapDigest` | 仮Tag/Outcome/Unit全件の`promote`/`merge`/`split`/`retire`対応表 |
 | `taxonomyDigest` | final Tag/Outcome/LearningUnit候補、定義、成果、代表問題のdigest |
 | `tagDagDigest` / `learningUnitDagDigest` | 別々に再計算した前提DAGと未知参照・循環なしの証跡 |
@@ -289,14 +290,34 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 | `additionalPrerequisiteUnitIds` | 追加curriculum prerequisiteまたは空配列。単独学習が論理的に不可能という意味には限定しない |
 | `excludedTopics` | 意図的対象外 |
 | `sourceRevisionIds` | 単位本文と所有例の根拠 |
-| `tagIds` / `learningOutcomeIds` | 各一つ以上 |
-| `examples` | 一つ以上。Learning Unit本文にinlineで置くExample block配列。`key`はUnit内local keyで、`executable`は実行証跡を必須とする |
-| `exercises` | 一つ以上。Outcome、前提、到達条件、Assessment、検証済みAnswerをco-locateした到達確認block |
+| `tagIds` / `learningOutcomeIds` | このUnit自身または子孫が所有するTag / Outcomeのnavigation closure。各一つ以上 |
+| `ownedTagIds` / `ownedLearningOutcomeIds` | このUnitで直接説明・到達確認するTag / Outcome。構造Unitでは空配列 |
+| `contentPhase` | T050生成物は`canonical_skeleton`。T055–T056/T155–T158が同じJSON/Markdownを引き継ぐ直前に`full_authoring`へ変更し、materializerのbyte所有を解除する |
+| `examples` | 各owned Outcomeをちょうど一回被覆する`guided_outcome` blockと、子Unitがある場合だけ、その全子孫Outcomeを対象に一つ置く`curriculum_routing`比較block。構造Unitはrouting blockだけを持つ。`key`はUnit内local keyで、`executable`は実行証跡を必須とする |
+| `exercises` | 各owned Outcomeをちょうど一回被覆する`outcome_attainment` Exercise/Assessment/Answerと、子Unitがある場合だけ一つ置く`curriculum_routing`確認block。構造Unitはrouting blockだけを持つ |
 | `problemIds` | 一つ以上 |
 | `stageRank` / `difficultyRank` / `representativeRank` | 0以上の整数 |
 | `globalIndex` / `orderReason` | 生成順と説明 |
 
 親子関係と前提関係は別に検証する。標準順はcurriculum prerequisite DAGをprecedence constraintとし、入次数0の候補だけを3 rank、最後にUnit IDのUTF-8 byte順で比較する。単なる併用、同分野、類似実装だけでは前提辺を追加せず、`relatedTags`へ理由付きで記録する。
+
+T050が生成するcanonical skeleton Markdownは正本としてGit管理するが、本文・到達確認・公開mappingが未受理の間はfrontmatterを`draft: true`に固定する。`contentPhase=full_authoring`のUnitは後続taskが本文byteを所有し、T050 materializerは直接所有・navigation closure・前提・block role・source coverage・文書骨格だけを再検証して上書きしない。T160だけがdraft境界を解除して共有route、sidebar、Pagefind、sitemap/feedをcanonical full corpusへ切り替える。
+
+### FullLearningUnitWorkManifest
+
+T055–T056/T155–T158がfull-corpus LearningUnit本文を非重複に所有するwork manifestである。Outcomeごとではなく、`docs/work-manifests/initial/us2/full-learning-units/<learningUnitId>/manifest.json`にcanonical LearningUnitごとにちょうど一件置く。
+
+| Field | Rule |
+|---|---|
+| `learningUnitId` / `ownerTaskId` | canonical Unitと、そのchapter subtreeを担当するT055/T056/T155–T158のいずれか一つ |
+| `chapterRootUnitId` | 担当partitionのchapter root。Unit自身または祖先と一致する |
+| `docPath` | canonical `LearningUnit.docPath`と完全一致し、別manifestと重複しない |
+| `ownedLearningOutcomeIds` | canonical Unitの同名fieldを順序込みで完全に束ねる。`learningOutcomeIds`の子孫rollupを直接所有と誤認して複製しない |
+| `contentMode` | Unitの主本文所有を示し、`ownedLearningOutcomeIds`が非空なら`outcome_attainment`、空なら`routing`。前者でも子Unitがあれば同一文書内に`curriculum_routing` blockを併設する |
+| `checkIds` / `evidencePaths` | 全owned Outcomeの`guided_outcome` / `outcome_attainment`、および子を持つ全Unitの`curriculum_routing`と標準順のnavigation reviewを追跡する |
+| `status` | `generated`, `in_progress`, `on_hold`, `reviewed`, `joined` |
+
+全canonical LearningUnit ID集合とmanifestの`learningUnitId`集合を完全一致させ、各canonical `(learningUnitId, ownedLearningOutcomeId)` pairも過不足なく一回だけ被覆する。各canonical Outcomeは全Unitの`ownedLearningOutcomeIds`を通じてちょうど一Unitに直接所有される。chapter/sectionなど子を持つ全Unitの`curriculum_routing` blockは担当chapter taskが同じ本文pathで所有し、T058のOutcome到達判定からblock単位で除外して、T057のnavigation reviewで子Unitへの導線と順序理由を検証する。
 
 ### ProblemPlacement
 
@@ -348,7 +369,7 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 
 ### SourceRecord / SourceRevision / CorrectionImpact
 
-SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。問題pageまたは個別公式解説のSourceRevisionは`officialTaskId`を保持し、Contestのlabel-to-task-ID mappingおよび参照元Problemと一致しなければならない。Contest全体・task list・公式解説indexのrevisionでは`officialTaskId`をnullにする。公式解説index (`/editorial`) と個別公式解説 (`/editorial/<id>`) は別resourceとして扱い、Technique Inventoryの問題固有根拠にindexだけを使ってはならない。CorrectionImpactは本文と別の訂正ライフサイクルを持つため独立entityとする。`affectedContentLocators`は`{ownerType: "problem", problemId, path}`または`{ownerType: "learning_unit", learningUnitId, path}`の判別付きunionで、ProblemAuthoringUnitのsection/local blockとLearningUnitの本文/Example/Exercise/Assessment/Answerを対象にする。これとは別に`affectedLearningUnitOrderIds`と`derivedIndexPaths`でUnit順と派生indexを列挙する。重複するowner ID配列を正本にせず、各locatorが選択したownerの実データへ解決できない限り公開不可である。
+SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。問題pageまたは個別公式解説のSourceRevisionは`officialTaskId`を保持し、Contestのlabel-to-task-ID mappingおよび参照元Problemと一致しなければならない。Contest全体・task list・公式解説indexのrevisionでは`officialTaskId`をnullにする。公式解説index (`/editorial`) と個別公式解説 (`/editorial/<id>`) は別resourceとして扱い、Technique Inventoryの問題固有根拠にindexだけを使ってはならない。CorrectionImpactは本文と別の訂正ライフサイクルを持つため独立entityとする。`sourceRevisionIds`は影響判断に使った重複のないSource Revisionをすべて保持し、互換用の主revisionである`sourceRevisionId`を必ず含む。`affectedContentLocators`は`{ownerType: "problem", problemId, path}`、`{ownerType: "learning_unit", learningUnitId, path}`、または配置policyを指す`{ownerType: "problem_placement", problemId, path}`の判別付きunionで、ProblemAuthoringUnitのsection/local block、LearningUnitの本文/Example/Exercise/Assessment/Answer、Problem配置を対象にする。これとは別に`affectedLearningUnitOrderIds`と`derivedIndexPaths`でUnit順と派生indexを列挙する。previewで評価したProblemのbody/example/exercise/answer/placement/derived_index、Learning Unit候補のbody/example/exercise/answer/standard_order/derived_index、およびderived index ownerの各surfaceは、canonical側の対応するlocator・Unit順・index pathが一つでも欠ければ受理しない。T049でこの写像完全性を`passed`にしてもcanonical CorrectionImpactの`verificationStatus`は`pending`のままとし、Problem本文の執筆、T057のcurriculum-routing検証、T058のOutcome到達度検証、T160の派生index投影を完了して実targetを検証した後にだけ`verified`へ昇格する。重複するowner ID配列を正本にせず、各locatorが選択したownerの実データへ解決できない限り公開不可である。
 
 ## 5. Learning records
 

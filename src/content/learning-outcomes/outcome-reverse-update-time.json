@@ -1,0 +1,19 @@
+{
+  "id": "outcome-reverse-update-time",
+  "statement": "時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc229-e",
+    "abc238-ex",
+    "abc249-f",
+    "abc253-f",
+    "abc264-e",
+    "abc329-e",
+    "abc346-e",
+    "abc375-f",
+    "abc392-f",
+    "abc464-e",
+    "tag-reverse-offline",
+    "unit-reverse-offline"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "id": "tag-modular-periodicity",
+  "name": "剰余周期・指数法則",
+  "definition": "有限剰余状態の周期またはFermat/Euler型指数簡約を示し、巨大な反復やtower exponentを短縮する。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [
+    "tag-modular-arithmetic"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "剰余列",
+      "巨大指数",
+      "有限状態"
+    ],
+    "triggerPatterns": [
+      "反復回数が巨大",
+      "指数を法で簡約"
+    ],
+    "invariantPatterns": [
+      "前周期",
+      "可逆性",
+      "周期"
+    ],
+    "goalPatterns": [
+      "巨大反復の値"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-exploit-modular-periodicity"
+  ],
+  "representativeProblemIds": [
+    "abc228-e",
+    "abc319-e"
+  ],
+  "aliases": [
+    "Eulerの定理",
+    "Fermatの小定理",
+    "modular periodicity",
+    "剰余周期"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

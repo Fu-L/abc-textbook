@@ -1,0 +1,14 @@
+{
+  "id": "outcome-schedule-range-query-updates",
+  "statement": "区間問い合わせの順序と追加・削除操作を設計し、端点移動の総量を評価できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc242-g",
+    "abc293-g",
+    "abc384-g",
+    "abc405-g",
+    "abc463-g",
+    "tag-mo-offline-range",
+    "unit-mo-offline-range"
+  ]
+}

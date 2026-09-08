@@ -1,0 +1,50 @@
+{
+  "id": "tag-mo-offline-range",
+  "name": "Mo's algorithmによるオフライン区間問い合わせ",
+  "definition": "区間問い合わせを端点の移動量が小さい順に並べ、一要素の追加・削除で答えを更新する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "区間query",
+      "右端",
+      "左端",
+      "数列"
+    ],
+    "triggerPatterns": [
+      "offline",
+      "クエリを並べ",
+      "追加と削除"
+    ],
+    "invariantPatterns": [
+      "block",
+      "区間の差分",
+      "端点移動"
+    ],
+    "goalPatterns": [
+      "各区間",
+      "異なる値",
+      "頻度"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-schedule-range-query-updates"
+  ],
+  "representativeProblemIds": [
+    "abc242-g",
+    "abc293-g",
+    "abc405-g"
+  ],
+  "aliases": [
+    "Mo's algorithm",
+    "Mo法",
+    "ムーのアルゴリズム"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

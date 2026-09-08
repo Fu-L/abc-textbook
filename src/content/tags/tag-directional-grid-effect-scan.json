@@ -1,0 +1,57 @@
+{
+  "id": "tag-directional-grid-effect-scan",
+  "name": "方向別grid scanによる長距離効果の前計算",
+  "definition": "各行・各列を効果の向きにscanし、最後のblockerまたはactive emitterだけを保って、直線状に続く監視・照射・到達禁止効果を全体線形時間で印付ける。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "affected cells",
+      "blocker",
+      "directed emitter",
+      "grid rows and columns"
+    ],
+    "triggerPatterns": [
+      "rayを個別に伸ばすと二乗",
+      "方向種類が定数個",
+      "直線効果がblockerまで続く"
+    ],
+    "invariantPatterns": [
+      "blocker属性と禁止属性の分離",
+      "各cellを定数回処理",
+      "現在activeな方向"
+    ],
+    "goalPatterns": [
+      "全効果領域の線形時間marking",
+      "後段探索の静的障害化"
+    ],
+    "excludedPatterns": [
+      "効果の向きが状態ごとに変わるray tracing",
+      "単なる全cell走査"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-event-sweep",
+      "type": "analogy",
+      "rationale": "順序に沿って進みながら少数のactive状態だけを更新する発想は共通する。一方、固定方向scanにはeventのsort・追加・削除がなく、event sweepそのものとは区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-precompute-directional-grid-effects"
+  ],
+  "representativeProblemIds": [
+    "abc317-e"
+  ],
+  "aliases": [
+    "directional grid scan",
+    "ray sweep",
+    "四方向scan",
+    "方向別グリッド走査"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

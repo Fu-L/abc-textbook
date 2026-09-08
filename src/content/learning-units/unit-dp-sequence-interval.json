@@ -1,0 +1,205 @@
+{
+  "id": "unit-dp-sequence-interval",
+  "kind": "section",
+  "title": "列・区間・分割のDP",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-state-design"
+  ],
+  "excludedTopics": [
+    "bitmask集合や容量だけを状態にし、列順・区間分割を持たないDP。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc214-editorial-2440-8404c7a84430603f504698d7a67b0eb89173b87ef656cf7e522e1d7ef121c7ac",
+    "source-abc214-f-problem-203e028b0a1974274025dd558bce523e82e7a094cc1d77c32448a6e2abd00b75",
+    "source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57",
+    "source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e",
+    "source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726",
+    "source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e",
+    "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
+    "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
+  ],
+  "tagIds": [
+    "tag-interval-partition-dp",
+    "tag-sequence-subsequence-dp"
+  ],
+  "ownedTagIds": [
+    "tag-interval-partition-dp",
+    "tag-sequence-subsequence-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-interval-split-dp",
+    "outcome-design-order-preserving-dp"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-interval-split-dp",
+    "outcome-design-order-preserving-dp"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-sequence-interval.md",
+  "problemIds": [
+    "abc214-f",
+    "abc217-f",
+    "abc219-h",
+    "abc225-f",
+    "abc228-h",
+    "abc230-f",
+    "abc233-g",
+    "abc234-g",
+    "abc237-f",
+    "abc238-ex",
+    "abc238-f",
+    "abc240-ex",
+    "abc242-ex",
+    "abc246-ex",
+    "abc252-g",
+    "abc261-g",
+    "abc262-ex",
+    "abc262-g",
+    "abc271-e",
+    "abc273-f",
+    "abc285-e",
+    "abc288-f",
+    "abc292-g",
+    "abc298-g",
+    "abc299-f",
+    "abc305-ex",
+    "abc315-f",
+    "abc325-g",
+    "abc327-e",
+    "abc339-e",
+    "abc345-e",
+    "abc354-f",
+    "abc360-g",
+    "abc362-e",
+    "abc369-f",
+    "abc386-f",
+    "abc393-f",
+    "abc400-f",
+    "abc410-g",
+    "abc418-g",
+    "abc439-e",
+    "abc457-g",
+    "abc466-e"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-design-interval-split-dp",
+      "learningOutcomeIds": [
+        "outcome-design-interval-split-dp"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC217 F「Make Pair」について、二人が選ばれる時点では隣接しているため、最初の並びに弧を描くと最終的なペアは交差しない。特に区間の左端の生徒が位置 2k の生徒と組むなら、その二人の間にいる 2k-2 人は先に区間内だけで消えていなければならない。",
+      "procedure": [
+        "観察: 二人が選ばれる時点では隣接しているため、最初の並びに弧を描くと最終的なペアは交差しない。特に区間の左端の生徒が位置 2k の生徒と組むなら、その二人の間にいる 2k-2 人は先に区間内だけで消えていなければならない。",
+        "観察: サンプル2では同じ二組を作っても取り除く順番が違えば別解として数えるため、非交差なペア分割の個数だけでなく、独立な区間の操作列を混ぜる順番も数える必要がある。",
+        "着眼: 左端と位置 2k の生徒が仲良しなら、内側 k-1 組の処理後にその二人を消す k 操作と、右側 j-k 操作を二項係数 C(j,k) 通りに interleave できる。",
+        "方針: 偶数長区間を全員取り除く方法数とし、左端の相手で分割する区間 DP に、左右の操作を混ぜる二項係数を掛ける。（左端の相手を固定すると内側と右側が独立な偶数長区間になり、仲の良さ、ペア構造、操作順の三要素を過不足なく積に分解できる。）",
+        "接続: dp[i][j] を生徒 i+1 から i+2j を全て消す方法数とし、左端の相手 i+2k を全て試す。仲良しの場合に dp[i+1][k-1]、dp[i+2k][j-k]、C(j,k) を掛けて加算し、空区間を 1 とする。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "区間または接頭辞の分割点を列挙し、小問題の答えを合成できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    },
+    {
+      "key": "guided-outcome-design-order-preserving-dp",
+      "learningOutcomeIds": [
+        "outcome-design-order-preserving-dp"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC214 F「Substrings」について、選んだ位置が隣り合わない部分列を数えるが、異なる位置集合から同じ文字列が得られる場合は一つとして数える必要がある。",
+      "procedure": [
+        "観察: 選んだ位置が隣り合わない部分列を数えるが、異なる位置集合から同じ文字列が得られる場合は一つとして数える必要がある。",
+        "観察: 位置 i の文字を末尾に使う文字列は、それ以前に同じ文字が最後に現れた位置 k より前の末尾から作る重複分を除くことで一意に数えられる。",
+        "着眼: 通常の部分列 DP における最終出現による重複排除と、隣接位置を選べないことによる一つ手前までの遷移制限を同時に適用する。",
+        "着眼: dp₀ を空文字列の一通り、隣接禁止用の番兵 dp₁ を 0 と置くと、同じ形の区間和で先頭付近も処理できる。",
+        "方針: 各文字列を最後に採用した位置で分類する部分列 DP に、前の採用位置を一つ以上空ける遷移範囲を組み込む。（同じ末尾文字による重複を最終出現位置で排除しながら、非隣接条件も和を取る添字範囲で表せる。）",
+        "接続: 末尾位置で分類した distinct-subsequence DP を作り、同じ文字の直前位置を左端、隣接を避けた位置を右端とする区間和を累積和で評価する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-design-interval-split-dp",
+      "learningOutcomeIds": [
+        "outcome-design-interval-split-dp"
+      ],
+      "prerequisiteIds": [
+        "outcome-design-minimal-sufficient-state",
+        "prereq-abc-advanced-v1",
+        "unit-dp-state-design"
+      ],
+      "attainmentCondition": "学習成果「区間または接頭辞の分割点を列挙し、小問題の答えを合成できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC219 H「Candles」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「区間または接頭辞の分割点を列挙し、小問題の答えを合成できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 燃焼残量の0打ち切りを救済対象の選択へ変形し、到着時刻和を残件数課金として区間 DP に組み込める。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 燃焼残量の0打ち切りを救済対象の選択へ変形し、到着時刻和を残件数課金として区間 DP に組み込める。",
+          "転移題材の解法接続: ろうそくと dummy を座標順に並べる。dp[l][r][side][k] を区間を訪問済みで端にいるときの最大の将来増分とし、次に l-1 または r+1 へ進む距離に k を掛けて引き、新位置を選ぶなら A を足して counter を減らし、選ばない遷移も取る。全区間・k を埋め、dummy 一点の状態で初期 counter を全て試す。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "区間または接頭辞の分割点を列挙し、小問題の答えを合成できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    },
+    {
+      "key": "attainment-outcome-design-order-preserving-dp",
+      "learningOutcomeIds": [
+        "outcome-design-order-preserving-dp"
+      ],
+      "prerequisiteIds": [
+        "outcome-design-minimal-sufficient-state",
+        "prereq-abc-advanced-v1",
+        "unit-dp-state-design"
+      ],
+      "attainmentCondition": "学習成果「列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC238 F「Two Exams」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 二試験の支配条件を満たす K 人選択を、一順位での走査と未選択側の最小順位 DP で数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 二試験の支配条件を満たす K 人選択を、一順位での走査と未選択側の最小順位 DP で数えられる。",
+          "転移題材の解法接続: 二次元支配順序の下向き閉包を数える問題を、一方の座標で sweep し、未選択集合が課す他方座標の最小境界だけを持つ DP にする。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 1,
+  "representativeRank": 2,
+  "globalIndex": 34,
+  "orderReason": "状態設計を土台に、列順を保つ選択と区間の分割点という二つの合成方法を学ぶ。"
+}

@@ -1,0 +1,105 @@
+{
+  "id": "unit-bipartite-structure",
+  "kind": "section",
+  "title": "二部彩色と成分構造を扱う",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "重み付き最短路、一般の彩色問題、および容量付きmatching・min-cutの最適化。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc327-editorial-7557-0fcf35f1e484448d15834cb135cc88d160f0ab24b20f773c61b5421416b61648",
+    "source-abc327-g-problem-e15ba600d96ccb73f7b9a4c04dce5db974afc7a1b7f89aaccede41e988ce5d05",
+    "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+    "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+    "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb",
+    "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+  ],
+  "tagIds": [
+    "tag-bipartite-structure"
+  ],
+  "ownedTagIds": [
+    "tag-bipartite-structure"
+  ],
+  "learningOutcomeIds": [
+    "outcome-color-and-classify-bipartite-components"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-color-and-classify-bipartite-components"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/bipartite-structure.md",
+  "problemIds": [
+    "abc327-g",
+    "abc398-e",
+    "abc398-g",
+    "abc437-g",
+    "abc445-g",
+    "abc451-f",
+    "abc454-e"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-color-and-classify-bipartite-components",
+      "learningOutcomeIds": [
+        "outcome-color-and-classify-bipartite-components"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC398 E「Tree Game」について、木はconnected bipartiteで、その二部分彩色はswapを除き一意である。odd cycleを作らず追加できるのは異なる色間の未存在edgeだけである。",
+      "procedure": [
+        "観察: 木はconnected bipartiteで、その二部分彩色はswapを除き一意である。odd cycleを作らず追加できるのは異なる色間の未存在edgeだけである。",
+        "観察: どの合法edgeを加えても部集合は変わらず、合法手数総数は|L||R|-(N-1)に固定される。",
+        "着眼: connected bipartite graphへcross-part edgeを追加しても同じ二部分彩色が有効なので、別候補の合法性は変化しない。",
+        "着眼: 初期tree edgeN-1は全てcross-partに既に存在するため、残候補数は積からN-1を引く。",
+        "方針: 二部分彩色して残り合法edge数のparityを求め、同じ色分割間の未edgeを応答用setに持つ（ゲームは固定された候補辺を交互に一つ消費するだけなので、残手数がoddなら先手、evenなら後手を選べば任意応答で必勝する。）",
+        "接続: DFS/BFSでcolorとpart sizeを求め、未edgecross pairをsetへ列挙する。size parityでFirst/Secondを宣言し、自手番ではsetから一辺を出し、相手入力edgeをsetから削除する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "各連結成分を二色に塗って矛盾を検出し、二つの部の大きさと色反転の自由度を成分ごとに集約できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-color-and-classify-bipartite-components",
+      "learningOutcomeIds": [
+        "outcome-color-and-classify-bipartite-components"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「各連結成分を二色に塗って矛盾を検出し、二つの部の大きさと色反転の自由度を成分ごとに集約できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC398 G「Not Only Tree Game」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「各連結成分を二色に塗って矛盾を検出し、二つの部の大きさと色反転の自由度を成分ごとに集約できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 一般bipartite graphのedge追加gameを、component彩色sizeのparity分類だけで線形時間判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 一般bipartite graphのedge追加gameを、component彩色sizeのparity分類だけで線形時間判定できる。",
+          "転移題材の解法接続: 全componentをBFS二色塗りしpart sizes(a,b)、size、edge数を集計してx,ee,oo,eo,isoを求める。公式の四caseを適用し、奇数ならAoki、偶数ならTakahashiを出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "各連結成分を二色に塗って矛盾を検出し、二つの部の大きさと色反転の自由度を成分ごとに集約できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 1,
+  "representativeRank": 3,
+  "globalIndex": 35,
+  "orderReason": "無向グラフを探索できることを前提に、辺をまたぐたび色を反転し、矛盾検出と成分ごとの二部サイズ集約を行う。"
+}

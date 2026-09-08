@@ -1,0 +1,17 @@
+{
+  "id": "outcome-count-prefix-constrained-objects",
+  "statement": "数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc235-f",
+    "abc288-ex",
+    "abc317-f",
+    "abc336-e",
+    "abc406-e",
+    "abc465-e",
+    "tag-digit-dp",
+    "unit-digit-dp"
+  ]
+}

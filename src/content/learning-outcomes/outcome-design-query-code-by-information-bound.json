@@ -1,0 +1,10 @@
+{
+  "id": "outcome-design-query-code-by-information-bound",
+  "statement": "応答列の総数からquery数の下界を証明し、それに一致するcodeword割当と復号を構成できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc337-e",
+    "tag-information-theoretic-query-design",
+    "unit-information-theoretic-query-design"
+  ]
+}

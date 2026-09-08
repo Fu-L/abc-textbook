@@ -1,0 +1,12 @@
+{
+  "id": "outcome-bound-reachability-in-numerical-semigroup",
+  "statement": "正の生成元をgcdで正規化し、Frobenius数・conductorまたは剰余類ごとの最小到達値から、それ以後の全距離が非負整数結合で到達可能だと証明して有限prefixだけを調べられる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-characterize-integer-solvability"
+  ],
+  "scopeIds": [
+    "abc388-f",
+    "tag-numerical-semigroup",
+    "unit-numerical-semigroup-reachability"
+  ]
+}

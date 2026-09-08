@@ -1,0 +1,52 @@
+{
+  "id": "tag-meet-in-the-middle",
+  "name": "meet-in-the-middle・半分全列挙",
+  "definition": "探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "候補集合",
+      "左右集合",
+      "部分集合"
+    ],
+    "triggerPatterns": [
+      "二集合",
+      "半分",
+      "照合"
+    ],
+    "invariantPatterns": [
+      "合成条件",
+      "独立列挙"
+    ],
+    "goalPatterns": [
+      "候補照合",
+      "指数探索"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-bounded-enumeration",
+      "type": "contrast",
+      "rationale": "候補全体を制約から直接界す全列挙と、探索空間を二分して部分結果を照合する半分全列挙を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-split-enumeration-space"
+  ],
+  "representativeProblemIds": [
+    "abc271-f",
+    "abc300-g"
+  ],
+  "aliases": [
+    "MITM",
+    "meet-in-the-middle",
+    "半分全列挙"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

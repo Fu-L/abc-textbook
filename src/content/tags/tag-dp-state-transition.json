@@ -1,0 +1,45 @@
+{
+  "id": "tag-dp-state-transition",
+  "name": "DP状態と遷移",
+  "definition": "未来に必要な情報を状態とし、遷移と基底を設計する。",
+  "parentId": null,
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "state",
+      "状態"
+    ],
+    "triggerPatterns": [
+      "transition",
+      "遷移"
+    ],
+    "invariantPatterns": [
+      "最適部分構造",
+      "未来"
+    ],
+    "goalPatterns": [
+      "\\bdp\\b",
+      "動的計画"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-design-state-transition"
+  ],
+  "representativeProblemIds": [
+    "abc253-e",
+    "abc375-e",
+    "abc391-g"
+  ],
+  "aliases": [
+    "DP",
+    "dynamic programming",
+    "動的計画法"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

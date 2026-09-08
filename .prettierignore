@@ -13,3 +13,18 @@ docs/verification/bootstrap/technique-inventory.json
 .specify/
 specs/
 prompt.md
+
+# These byte-for-byte artifacts are formatted and checked by their deterministic generators.
+docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json
+docs/verification/bootstrap/canonical-taxonomy-materialization.json
+docs/verification/bootstrap/final-taxonomy-check-results.json
+docs/verification/bootstrap/final-taxonomy.json
+docs/verification/bootstrap/problem-placements.json
+docs/verification/previews/initial-v1/taxonomy-integration.json
+src/content/docs/learn/
+src/content/learning-outcomes/
+src/content/learning-units/
+src/content/policies/learning-order.json
+src/content/policies/problem-placements.json
+src/content/tags/
+staging/taxonomy/initial/final-taxonomy-build.json

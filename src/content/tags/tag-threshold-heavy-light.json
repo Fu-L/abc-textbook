@@ -1,0 +1,46 @@
+{
+  "id": "tag-threshold-heavy-light",
+  "name": "平方根・閾値による軽重分類",
+  "definition": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "query",
+      "次数",
+      "頻度"
+    ],
+    "triggerPatterns": [
+      "heavy",
+      "light",
+      "閾値"
+    ],
+    "invariantPatterns": [
+      "heavy個数",
+      "light総和"
+    ],
+    "goalPatterns": [
+      "更新高速化",
+      "計算量均衡"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-balance-heavy-light-threshold"
+  ],
+  "representativeProblemIds": [
+    "abc219-g",
+    "abc335-f"
+  ],
+  "aliases": [
+    "sqrt decomposition",
+    "平方根分割",
+    "次数平方分割"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

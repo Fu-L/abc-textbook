@@ -1,0 +1,15 @@
+{
+  "id": "outcome-decompose-ranges-into-segment-tree-nodes",
+  "statement": "区間をO(log N)個のcanonical nodeへ分解し、range objectの登録、時間生存区間への配置、またはrange-edge graphの少数辺表現を構築できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-associative-range-summary"
+  ],
+  "scopeIds": [
+    "abc244-ex",
+    "abc342-g",
+    "abc363-g",
+    "abc414-g",
+    "tag-segment-tree-canonical-decomposition",
+    "unit-segment-tree-canonical-decomposition"
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "id": "unit-aho-corasick",
+  "kind": "subsection",
+  "title": "Aho–Corasick",
+  "parentId": "unit-string-automata",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-finite-pattern-automaton",
+    "unit-trie-prefix"
+  ],
+  "excludedTopics": [
+    "Aho–Corasickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc419-editorial-13623-83863d26c9a12a69f07be60afab51ff05603fa4e6f48038a54d1ac0e6c881f43",
+    "source-abc419-f-problem-6f4acd79816fc01bc857e64983555f3c7e040847741a7f21ee0fdbd1d0004ee9",
+    "source-abc458-editorial-20159-cd84e0dd7d040aa4baf7a31029f7f976734f461304118f5d9ee6f64a7b64bfca",
+    "source-abc458-f-problem-4cc44c1d7cc919609272d3502594318f2f3965b58e2e08c63cb2dcb24d0cbd27"
+  ],
+  "tagIds": [
+    "tag-aho-corasick"
+  ],
+  "ownedTagIds": [
+    "tag-aho-corasick"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-multi-pattern-automaton"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-multi-pattern-automaton"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/aho-corasick.md",
+  "problemIds": [
+    "abc419-f",
+    "abc458-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-build-multi-pattern-automaton",
+      "learningOutcomeIds": [
+        "outcome-build-multi-pattern-automaton"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC419 F「All Included」について、文字列を左から生成すると、将来pattern出現に影響する過去情報は「末尾のうちいずれかのS_iのprefixでもある最長suffix」と既出pattern集合だけである。",
+      "procedure": [
+        "観察: 文字列を左から生成すると、将来pattern出現に影響する過去情報は「末尾のうちいずれかのS_iのprefixでもある最長suffix」と既出pattern集合だけである。",
+        "観察: 全pattern長合計は高々80なので、Aho-Corasick automatonでこのsuffix状態と一文字遷移、遷移時に新たに含まれるpattern maskを小さく持てる。",
+        "着眼: failure link先のoutput maskもnodeへ伝播すれば、ある文字追加で終端するpatternだけでなく、そのsuffixとして同時に出現する短いpatternも一度のORで記録できる。",
+        "着眼: 未登録文字の遷移もfailure linkに従うcomplete DFAへ前計算すれば、DP内の一文字遷移をO(1)にできる。",
+        "方針: Aho-Corasick状態×既出pattern bitmaskの長さDP（26文字を追加してautomaton遷移し、destinationのoutput maskをORする。dpをL回進めたfull maskの総数が答えで、O(L·states·2^N·26)。）",
+        "接続: S_iをtrieへ挿入して終端nodeにbit iを立て、BFSでfailure link・全26遷移・累積output maskを構築する。dp[start][0]=1からL文字、各state/mask/charでnextStateへ進みmask|output[nextState]へ加算し、最後にmask=(1<<N)-1を全stateで足す。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "複数patternのTrieへfailure linkと出力情報を加え、Aho–Corasick automaton上で一致状態を更新できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-build-multi-pattern-automaton",
+      "learningOutcomeIds": [
+        "outcome-build-multi-pattern-automaton"
+      ],
+      "prerequisiteIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-index-shared-prefixes-with-trie",
+        "prereq-abc-advanced-v1",
+        "unit-finite-pattern-automaton",
+        "unit-trie-prefix"
+      ],
+      "attainmentCondition": "学習成果「複数patternのTrieへfailure linkと出力情報を加え、Aho–Corasick automaton上で一致状態を更新できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC458 F「Critical Misread」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「複数patternのTrieへfailure linkと出力情報を加え、Aho–Corasick automaton上で一致状態を更新できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 複数禁止patternを避ける長さN文字列数を、Aho-Corasick状態圧縮と行列累乗で対数段に計算できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 複数禁止patternを避ける長さN文字列数を、Aho-Corasick状態圧縮と行列累乗で対数段に計算できる。",
+          "転移題材の解法接続: 全patternをtrieへ入れfailure linkとcomplete gotoをBFS構築し、terminal伝播する。safe node間で26文字の遷移をcountしたmatrixを作り、root one-hot vectorをbinary exponentiationでN回遷移させ、safe state成分を総和する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "複数patternのTrieへfailure linkと出力情報を加え、Aho–Corasick automaton上で一致状態を更新できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 88,
+  "globalIndex": 180,
+  "orderReason": "有限状態automatonの構成・Trieによる共有接頭辞の索引で得た考え方と実装を再利用し、Aho–Corasickの発動条件・正当化・境界を重複なく学ぶ。"
+}

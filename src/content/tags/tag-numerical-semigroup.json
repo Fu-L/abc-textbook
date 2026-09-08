@@ -1,0 +1,46 @@
+{
+  "id": "tag-numerical-semigroup",
+  "name": "数値半群・conductor",
+  "definition": "正の生成元の非負整数結合がconductor以後を全て覆うことを示し、巨大な到達判定を有限prefixへ縮約する。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [
+    "tag-bezout-diophantine"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "到達集合",
+      "正の生成元",
+      "非負整数結合"
+    ],
+    "triggerPatterns": [
+      "任意回加える",
+      "十分大きい全て"
+    ],
+    "invariantPatterns": [
+      "gcd正規化",
+      "residue shortest path"
+    ],
+    "goalPatterns": [
+      "巨大距離の到達判定"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-bound-reachability-in-numerical-semigroup"
+  ],
+  "representativeProblemIds": [
+    "abc388-f"
+  ],
+  "aliases": [
+    "Frobeniusの硬貨問題",
+    "conductor",
+    "numerical semigroup",
+    "数値半群"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

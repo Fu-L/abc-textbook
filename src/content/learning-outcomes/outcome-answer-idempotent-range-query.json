@@ -1,0 +1,12 @@
+{
+  "id": "outcome-answer-idempotent-range-query",
+  "statement": "冪等な演算なら重なりを許す二つの2冪区間で任意rangeを覆えることを使い、静的queryをO(1)で答える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-associative-range-summary"
+  ],
+  "scopeIds": [
+    "abc282-f",
+    "tag-idempotent-overlap-range-query",
+    "unit-idempotent-overlap-range-query"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "id": "unit-planar-duality",
+  "kind": "section",
+  "title": "平面graph双対・cut/path対応",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-max-flow-min-cut",
+    "unit-weighted-shortest-path"
+  ],
+  "excludedTopics": [
+    "平面graph双対・cut/path対応の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc413-editorial-13403-a6cd05e7174483f4d0b5d99d10829df1975ff360e308407cc36d37e401633d73",
+    "source-abc413-g-problem-a4cc07d09ba7337eb815934efae7939e57963df0d50fb0ec81dfee731455e485"
+  ],
+  "tagIds": [
+    "tag-planar-duality"
+  ],
+  "ownedTagIds": [
+    "tag-planar-duality"
+  ],
+  "learningOutcomeIds": [
+    "outcome-dualize-planar-cut-to-path"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-dualize-planar-cut-to-path"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/planar-duality.md",
+  "problemIds": [
+    "abc413-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-dualize-planar-cut-to-path",
+      "learningOutcomeIds": [
+        "outcome-dualize-planar-cut-to-path"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC413 G「Big Banned Grid」について、free-cell graphでsourceからtargetへpathがあることは、各隣接edgeを両端freeなら容量1、どちらかblockedなら0としたnetworkのmax flowが正であることと同値である。",
+      "procedure": [
+        "観察: free-cell graphでsourceからtargetへpathがあることは、各隣接edgeを両端freeなら容量1、どちらかblockedなら0としたnetworkのmax flowが正であることと同値である。",
+        "観察: planar max-flow/min-cut dualityにより、到達不能はsource-targetを分ける容量0 cut、すなわち分割した外側face二端子を0-weight dual edgeだけで結ぶpathの存在に一致する。",
+        "着眼: 外側faceはsource-target間のboundary arcで二つにsplitし、top+right側を一端子、left+bottom側を他端子とする。この二端子を結ぶdual pathがprimalのs-t cutになる。",
+        "着眼: horizontal primal edgeの上下face、vertical edgeの左右faceを、そのedgeの少なくとも一端が障害物ならunionする。内部faceは障害物近傍だけ遅延生成すればよい。",
+        "方針: 障害物に接するcapacity0 primal edgeだけをdual face間のunionとして処理し、二つの外側arc terminalの連結性をDSUで判定する（各障害物は高々4本の隣接edgeを0にするので、巨大なHW個のcell/faceを生成せずO(K)個の関連faceだけhash mapで持てる。）",
+        "接続: dual terminal U=top/right outer arc、D=left/bottom outer arcを作る。各obstacleと上下左右のgrid内neighborが作るprimal edgeを一度ずつ見て、horizontalなら上・下face、verticalなら左・右faceをDSUで結ぶ。boundary側faceはU/Dへ対応させる。最後にU,Dが同componentならNo、そうでなければYes。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "埋め込みのfaceをdual頂点へ写し、primal cutとdual path/cycleの対応から最小cut問題を最短路へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-dualize-planar-cut-to-path",
+      "learningOutcomeIds": [
+        "outcome-dualize-planar-cut-to-path"
+      ],
+      "prerequisiteIds": [
+        "outcome-model-and-compute-shortest-path",
+        "outcome-model-max-flow-min-cut",
+        "prereq-abc-advanced-v1",
+        "unit-max-flow-min-cut",
+        "unit-weighted-shortest-path"
+      ],
+      "attainmentCondition": "学習成果「埋め込みのfaceをdual頂点へ写し、primal cutとdual path/cycleの対応から最小cut問題を最短路へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "assessment": {
+        "method": "ABC413 G「Big Banned Grid」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「埋め込みのfaceをdual頂点へ写し、primal cutとdual path/cycleの対応から最小cut問題を最短路へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
+          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
+          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
+          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
+          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+        ],
+        "expectedResult": "埋め込みのfaceをdual頂点へ写し、primal cutとdual path/cycleの対応から最小cut問題を最短路へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 92,
+  "globalIndex": 174,
+  "orderReason": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、平面graph双対・cut/path対応の発動条件・正当化・境界を重複なく学ぶ。"
+}

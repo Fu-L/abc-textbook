@@ -1,0 +1,15 @@
+{
+  "id": "outcome-optimize-by-lagrangian-relaxation",
+  "statement": "個数制約へpenalty λを加えたoracleを解き、最適解の個数単調性とtie-breakを使って元の制約付き最適値を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-optimize-univariate-convex-function"
+  ],
+  "scopeIds": [
+    "abc305-ex",
+    "abc355-g",
+    "abc393-g",
+    "abc400-g",
+    "tag-lagrangian-relaxation",
+    "unit-lagrangian-relaxation"
+  ]
+}

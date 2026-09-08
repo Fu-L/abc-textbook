@@ -1,0 +1,25 @@
+{
+  "id": "outcome-partition-integer-parameter-ranges",
+  "statement": "床関数をconstant quotient blockまたはfloor-sum再帰で処理し、整数根・桁数の境界も誤差なく扱える。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc230-e",
+    "abc239-ex",
+    "abc243-g",
+    "abc283-ex",
+    "abc293-f",
+    "abc313-g",
+    "abc315-g",
+    "abc318-f",
+    "abc356-e",
+    "abc361-f",
+    "abc370-g",
+    "abc372-g",
+    "abc402-g",
+    "abc414-e",
+    "abc443-g",
+    "abc452-e",
+    "tag-integer-boundary-blocks",
+    "unit-integer-boundary-blocks"
+  ]
+}

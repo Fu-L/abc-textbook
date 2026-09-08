@@ -1,0 +1,102 @@
+{
+  "id": "unit-fps-composition-power-projection",
+  "kind": "subsection",
+  "title": "FPS合成・power projection",
+  "parentId": "unit-formal-power-series",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-formal-power-series"
+  ],
+  "excludedTopics": [
+    "FPS合成・power projectionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0",
+    "source-abc387-g-problem-eecc85664ab281a340433ab68292e3f5b529d75e82f592f22bdc8746d35a2043",
+    "source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c",
+    "source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"
+  ],
+  "tagIds": [
+    "tag-fps-composition-power-projection"
+  ],
+  "ownedTagIds": [
+    "tag-fps-composition-power-projection"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compose-series-and-project-powers"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-compose-series-and-project-powers"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/fps-composition-power-projection.md",
+  "problemIds": [
+    "abc387-g",
+    "abc439-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-compose-series-and-project-powers",
+      "learningOutcomeIds": [
+        "outcome-compose-series-and-project-powers"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC387 G「Prime Circuit」について、全circuitが素数長なら偶数長circuitは存在しない。二つのcycleが頂点を共有すると、その対称差や連結したclosed trailから偶数長circuitを作れるため、cycle同士はvertex-disjointでなければならない。",
+      "procedure": [
+        "観察: 全circuitが素数長なら偶数長circuitは存在しない。二つのcycleが頂点を共有すると、その対称差や連結したclosed trailから偶数長circuitを作れるため、cycle同士はvertex-disjointでなければならない。",
+        "観察: 条件を満たすconnected graphは、素数長cycle blockとbridgeからなるvertex-disjoint cactusである。rooted labelled構造の指数型母関数Fは、G(x)=x+Σ_{prime p≥3}x^p/2としてF=G(x exp F)を満たす。",
+        "着眼: rootに付く独立な子構造はx exp F、rootを含むprime cycleはその構造をp個環状に並べ、二方向の対称性で2除算する。",
+        "着眼: power projection [x^n]f(x)^i g(x)をBostan–Mori型に計算し、転置原理で線形写像を逆順・転置すると高速composition g(f(x))が得られる。",
+        "方針: cactusのrooted EGF方程式を立て、Kinoshita–Li形式的冪級数合成を用いたNewton法または逆関数で解く（N=2.5×10^5では平方根次数の古典的compositionも重く、合成をO(N log²N)で行えば暗黙方程式の係数を制約内で得られる。）",
+        "接続: prime indicatorからGをN次まで構成する。F=G(x exp F)に対し、compositionをKinoshita–Li法で評価してFPS Newton iterationする（またはH=exp Gからx/H(x)のcompositional inverseを求める）。最後にrooted EGF係数をfactorialで戻す。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "多項式/FPSのcompositionとその転置であるpower projectionを、block分割・transposition・rational functionへ還元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-compose-series-and-project-powers",
+      "learningOutcomeIds": [
+        "outcome-compose-series-and-project-powers"
+      ],
+      "prerequisiteIds": [
+        "outcome-apply-formal-power-series-operations",
+        "prereq-abc-advanced-v1",
+        "unit-formal-power-series"
+      ],
+      "attainmentCondition": "学習成果「多項式/FPSのcompositionとその転置であるpower projectionを、block分割・transposition・rational functionへ還元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC439 G「Sugoroku 6」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「多項式/FPSのcompositionとその転置であるpower projectionを、block分割・transposition・rational functionへ還元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 多数人のすごろく勝率を、時刻方向の power projection と人方向の有理関数係数化で高速に一括計算できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 多数人のすごろく勝率を、時刻方向の power projection と人方向の有理関数係数化で高速に一括計算できる。",
+          "転移題材の解法接続: D と G=1+…+x^{N-1} に power projection を適用して f_n=[x^{N-1}]D^nG を得て g を差分化する。各 k の (w_k,r_k) から分数 w_k/(1-r_kx) を作り、積木状に分子分母をマージする。総分母の FPS inverse と分子を掛け、係数0…L-2を人1…L-1の答えにし、人Lは Σg_k f_k^{L-1} を直接求める。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "多項式/FPSのcompositionとその転置であるpower projectionを、block分割・transposition・rational functionへ還元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 99,
+  "globalIndex": 212,
+  "orderReason": "形式的べき級数の基本演算で得た考え方と実装を再利用し、FPS合成・power projectionの発動条件・正当化・境界を重複なく学ぶ。"
+}

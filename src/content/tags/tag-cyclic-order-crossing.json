@@ -1,0 +1,48 @@
+{
+  "id": "tag-cyclic-order-crossing",
+  "name": "円環順序・chord交差",
+  "definition": "円周上の端点順をcutで線形化し、二chordの端点交互配置またはlaminar括弧構造として交差を判定・数え上げる。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [
+    "tag-geometry-orientation-transform"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "chords",
+      "circle endpoints",
+      "laminar intervals"
+    ],
+    "triggerPatterns": [
+      "円周上の線分交差",
+      "円環をcut"
+    ],
+    "invariantPatterns": [
+      "alternating endpoints",
+      "properly nested intervals"
+    ],
+    "goalPatterns": [
+      "交差判定",
+      "交差数え上げ"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-detect-crossing-by-cyclic-order"
+  ],
+  "representativeProblemIds": [
+    "abc263-ex",
+    "abc338-e",
+    "abc424-f"
+  ],
+  "aliases": [
+    "chord crossing",
+    "円環順序",
+    "端点交互配置"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

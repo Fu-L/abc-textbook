@@ -1,0 +1,13 @@
+{
+  "id": "outcome-compute-in-finite-field-extension",
+  "statement": "基底と既約関係を定めて拡大有限体の元を一意に表し、標準形を保つ加減乗除を実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-compute-in-modular-arithmetic"
+  ],
+  "scopeIds": [
+    "abc274-ex",
+    "abc381-g",
+    "tag-finite-field-extension",
+    "unit-finite-field-extension"
+  ]
+}

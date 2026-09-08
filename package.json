@@ -61,6 +61,8 @@
     "corpus:final-taxonomy": "tsx scripts/corpus/final-taxonomy.ts --check",
     "corpus:final-taxonomy:write": "tsx scripts/corpus/final-taxonomy.ts --write",
     "corpus:final-taxonomy:review": "tsx scripts/corpus/review-final-taxonomy.ts",
+    "corpus:materialize-taxonomy": "tsx scripts/corpus/materialize-canonical-taxonomy.ts --check",
+    "corpus:materialize-taxonomy:write": "tsx scripts/corpus/materialize-canonical-taxonomy.ts --write",
     "test:e2e": "npm run build && npm run test:e2e:built --",
     "test:e2e:built": "playwright test",
     "test:e2e:install": "playwright install chromium firefox webkit",

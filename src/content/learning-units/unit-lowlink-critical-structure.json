@@ -1,0 +1,103 @@
+{
+  "id": "unit-lowlink-critical-structure",
+  "kind": "section",
+  "title": "lowlinkで橋・関節点を特定する",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-state-graph-search"
+  ],
+  "excludedTopics": [
+    "次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc301-editorial-6344-dc0137a9d497b87c806f280bfaa16810971f41dec665b5150a4a92beaa240e2c",
+    "source-abc301-ex-problem-9af37d3cfd4c8a86125b566c017bbdc9dbc36b618b097122b0d5477141ecd9c3",
+    "source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577",
+    "source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238",
+    "source-abc375-editorial-11133-4b7e5cfe9584c4fb06ab138b27bf0a6a43fb3b3849ea866173f55f2402ca4a90",
+    "source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f"
+  ],
+  "tagIds": [
+    "tag-lowlink-critical-structure"
+  ],
+  "ownedTagIds": [
+    "tag-lowlink-critical-structure"
+  ],
+  "learningOutcomeIds": [
+    "outcome-identify-bridges-and-articulations"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-identify-bridges-and-articulations"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/lowlink-critical-structure.md",
+  "problemIds": [
+    "abc301-ex",
+    "abc334-g",
+    "abc375-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-identify-bridges-and-articulations",
+      "learningOutcomeIds": [
+        "outcome-identify-bridges-and-articulations"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC301 Ex「Difference of Distance」について、bottleneck距離D(S,T)は重み≤wのsubgraphでの連結閾値であり、一辺重みを1増やして答えが変わるのはその辺重みがDと等しい場合だけである。",
+      "procedure": [
+        "観察: bottleneck距離D(S,T)は重み≤wのsubgraphでの連結閾値であり、一辺重みを1増やして答えが変わるのはその辺重みがDと等しい場合だけである。",
+        "着眼: w<Dなら更新後も≤D、w>Dなら最適pathは対象辺を使わない。w=Dだけ「D以下pathからその辺を除けるか」というbridge問題になる。",
+        "方針: 重み別DSU縮約＋lowlink bridge判定（軽い辺成分を縮約した同重みgraphで対象辺がS-Tを分離するbridgeか判定すれば、その辺が全最適bottleneck pathに必須か分かる。）",
+        "接続: 辺を重み順に処理し、w未満辺をDSUで縮約する。同重み辺で作るcomponent graphへlowlinkとDFS順を構築し、queryのS,T連結閾値と対象edgeのbridge分離sideから距離増加有無を答える。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-identify-bridges-and-articulations",
+      "learningOutcomeIds": [
+        "outcome-identify-bridges-and-articulations"
+      ],
+      "prerequisiteIds": [
+        "outcome-select-state-graph-search",
+        "prereq-abc-advanced-v1",
+        "unit-state-graph-search"
+      ],
+      "attainmentCondition": "学習成果「DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC334 G「Christmas Color Grid 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 一様に選んだ緑cellを赤へ変えた後の緑連結成分数の期待値をmod 998244353で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 一様に選んだ緑cellを赤へ変えた後の緑連結成分数の期待値をmod 998244353で求められる。",
+          "転移題材の解法接続: gridの#を無向graphとして各未訪問頂点からDFSし、ord・lowと初期成分数Cを求める。同時に各vの分離子数cを数え、rootならparts=c、非rootならparts=c+1とする。削除後全体はC-1+parts(v)なので全緑vで平均する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 11,
+  "globalIndex": 111,
+  "orderReason": "DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。"
+}

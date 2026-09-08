@@ -1,0 +1,10 @@
+{
+  "id": "outcome-translate-sequences-by-rsk",
+  "statement": "順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc378-g",
+    "tag-rsk-young-tableaux",
+    "unit-rsk-young-tableaux"
+  ]
+}

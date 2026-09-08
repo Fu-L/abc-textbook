@@ -1,0 +1,51 @@
+{
+  "id": "tag-graph-core-peeling",
+  "name": "graph core・leaf peeling",
+  "definition": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "core",
+      "degree",
+      "graph"
+    ],
+    "triggerPatterns": [
+      "次数未満を除去",
+      "葉を反復削除"
+    ],
+    "invariantPatterns": [
+      "削除queue",
+      "現在次数"
+    ],
+    "goalPatterns": [
+      "cycle core",
+      "残存頂点"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-directed-core-peeling",
+      "type": "analogy",
+      "rationale": "局所次数条件を満たさない頂点をqueueで除き、残存核の不変条件を読む発想が共通する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-peel-graph-core"
+  ],
+  "representativeProblemIds": [
+    "abc266-f",
+    "abc267-e"
+  ],
+  "aliases": [
+    "2-core",
+    "graph peeling",
+    "葉刈り"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

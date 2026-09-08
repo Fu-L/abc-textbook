@@ -1,0 +1,64 @@
+{
+  "id": "tag-convex-hull-trick",
+  "name": "Convex Hull Trick・直線包絡",
+  "definition": "一次関数の候補を傾き・交点順に管理し、各query点で最小または最大となる直線を選ぶ。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "query点",
+      "一次関数",
+      "傾き",
+      "切片",
+      "直線"
+    ],
+    "triggerPatterns": [
+      "dp遷移",
+      "最大値query",
+      "最小値query",
+      "直線を追加"
+    ],
+    "invariantPatterns": [
+      "上側包絡",
+      "下側包絡",
+      "交点順",
+      "傾き順"
+    ],
+    "goalPatterns": [
+      "dp高速化",
+      "最適値",
+      "線形関数の極値"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-basic-convex-optimization",
+      "type": "analogy",
+      "rationale": "どちらも凸性を語彙に持つが、一次元目的関数の単峰性から探索範囲を狭める方法と、複数直線の包絡を動的に管理する方法では発動条件・証明・実装が独立している。"
+    },
+    {
+      "tagId": "tag-dp-transition-acceleration",
+      "type": "often_combined",
+      "rationale": "DP遷移を直線の評価へ変形し、包絡線queryとして高速化する構成で併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-by-line-envelope"
+  ],
+  "representativeProblemIds": [
+    "abc228-h",
+    "abc289-g",
+    "abc372-g"
+  ],
+  "aliases": [
+    "CHT",
+    "Convex Hull Trick",
+    "直線包絡"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,15 @@
+{
+  "id": "outcome-count-combinatorial-objects-by-determinant",
+  "statement": "非交差経路またはspanning treeを行列のminorへ対応させ、行列式から個数を求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-solve-linear-system-and-rank"
+  ],
+  "scopeIds": [
+    "abc216-h",
+    "abc253-ex",
+    "abc323-g",
+    "abc336-g",
+    "tag-determinant-counting",
+    "unit-determinant-counting"
+  ]
+}

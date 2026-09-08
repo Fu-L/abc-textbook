@@ -1,0 +1,46 @@
+{
+  "id": "tag-additive-tree-metric-reconstruction",
+  "name": "加法的tree metric復元",
+  "definition": "全点対距離行列の加法性から葉の接続先とedge長を決め、候補木の全距離を再計算して存在を完全検証する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [
+    "tag-tree-metric-diameter"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "distance matrix",
+      "leaf attachment",
+      "weighted tree"
+    ],
+    "triggerPatterns": [
+      "additive metric",
+      "全点対距離から木を復元"
+    ],
+    "invariantPatterns": [
+      "path distance additivity",
+      "positive edge lengths"
+    ],
+    "goalPatterns": [
+      "存在判定",
+      "木の復元"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-reconstruct-tree-from-distance-matrix"
+  ],
+  "representativeProblemIds": [
+    "abc451-e"
+  ],
+  "aliases": [
+    "additive tree metric",
+    "distance-matrix tree reconstruction",
+    "加法的木距離"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,60 @@
+{
+  "id": "tag-potential-dsu",
+  "name": "potential・weighted DSU",
+  "definition": "親へのpotential差を保ち、同一成分内の差制約と矛盾をmerge・queryできる。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-dsu-components",
+    "tag-graph-potential-propagation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "potential",
+      "差制約",
+      "成分"
+    ],
+    "triggerPatterns": [
+      "offset",
+      "相対差",
+      "矛盾"
+    ],
+    "invariantPatterns": [
+      "cycle和",
+      "rootへのpotential"
+    ],
+    "goalPatterns": [
+      "差query",
+      "整合性判定"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-dsu-components",
+      "type": "implementation_substrate",
+      "rationale": "通常のDSUにrootまでの差分potentialを持たせ、merge時にoffsetを調整する。"
+    },
+    {
+      "tagId": "tag-graph-potential-propagation",
+      "type": "contrast",
+      "rationale": "固定graph上で等式を一括伝播する方法と、辺追加に追随して差分potentialを保つ方法を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-potential-differences"
+  ],
+  "representativeProblemIds": [
+    "abc280-f",
+    "abc466-g"
+  ],
+  "aliases": [
+    "potential DSU",
+    "weighted Union-Find",
+    "重み付きUnion-Find"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

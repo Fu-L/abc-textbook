@@ -1,0 +1,163 @@
+{
+  "id": "unit-gcd-diophantine",
+  "kind": "section",
+  "title": "gcdと整数解の成立条件",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "連分数・Stern–Brocotによる有理近似、および複数の合同類をCRTで統合する構成。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+    "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+    "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721",
+    "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6",
+    "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+    "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b",
+    "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+    "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"
+  ],
+  "tagIds": [
+    "tag-bezout-diophantine",
+    "tag-gcd-structure"
+  ],
+  "ownedTagIds": [
+    "tag-bezout-diophantine"
+  ],
+  "learningOutcomeIds": [
+    "outcome-characterize-integer-solvability",
+    "outcome-reduce-integer-structure-by-gcd"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-characterize-integer-solvability"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/gcd-diophantine.md",
+  "problemIds": [
+    "abc212-g",
+    "abc222-g",
+    "abc248-g",
+    "abc254-f",
+    "abc271-ex",
+    "abc306-g",
+    "abc315-g",
+    "abc340-f",
+    "abc418-e",
+    "abc438-g",
+    "abc445-g",
+    "abc459-g",
+    "abc460-e"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-characterize-integer-solvability",
+      "learningOutcomeIds": [
+        "outcome-characterize-integer-solvability"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC271 Ex「General General」について、各moveは8方向のinteger vectorで、順序は結果に影響せず、必要なのは許可vectorごとの非負使用回数とその総和だけである。",
+      "procedure": [
+        "観察: 各moveは8方向のinteger vectorで、順序は結果に影響せず、必要なのは許可vectorごとの非負使用回数とその総和だけである。",
+        "観察: 局所的なvector恒等式でmove countsを交換すると、操作回数を増やさずsupportを高々2方向へ減らせる。ただし二つのdiagonalと一つのaxis directionを使い、axisをちょうど1回残す形だけが例外候補になる。",
+        "着眼: 非平行な二vector u,vではdeterminantから係数p,qを一意に求め、割り切れてp,q≥0ならp+qが候補になる。",
+        "着眼: 三方向例外もaxis vectorを一度引けば残りは二方向の非負整数結合になり、同じsolverを再利用できる。",
+        "方針: 許可された高々2方向の組を全列挙して非負整数係数を解き、さらに各axis moveを1回先に使った残targetでも同じpair列挙を行う。（exchange argumentが少数supportのoptimal solutionの存在を保証し、方向数8は定数なので各caseを定数時間で判定できる。）",
+        "接続: integer lattice shortest walkをexchange argumentでconstant-support representationsへ縮約し、小さなDiophantine systemsの全列挙で解く。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "整除条件や一次不定方程式の可解性をgcdで特徴付け、必要なら拡張EuclidでBézout整数解を構成できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    },
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-reduce-integer-structure-by-gcd"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（学習経路の比較）",
+      "omissions": [
+        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
+      ],
+      "environment": "紙上での未知問のモデル化と候補比較",
+      "input": "gcdと整数解の成立条件の範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
+      "procedure": [
+        "gcd不変量・差分構造: 1個の直接所有Outcome、学ぶ理由「差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ」、対象外「gcd不変量・差分構造の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-characterize-integer-solvability",
+      "learningOutcomeIds": [
+        "outcome-characterize-integer-solvability"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「整除条件や一次不定方程式の可解性をgcdで特徴付け、必要なら拡張EuclidでBézout整数解を構成できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「整除条件や一次不定方程式の可解性をgcdで特徴付け、必要なら拡張EuclidでBézout整数解を構成できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 三重列挙を一軸走査と一次不定方程式の区間解数へ分解し、N=10^6 を扱える。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 三重列挙を一軸走査と一次不定方程式の区間解数へ分解し、N=10^6 を扱える。",
+          "転移題材の解法接続: g,u,v=extgcd(B,C) を一度求める。i=1..N で Y=X−Ai とし、Y≤0 または Y%g≠0 なら skip。基準 j0=u(Y/g), k0=v(Y/g) を作り、二変数の上下限制約から signed floor_div/ceil_div で t の下限・上限を求め、その交差長を答えへ加える。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "整除条件や一次不定方程式の可解性をgcdで特徴付け、必要なら拡張EuclidでBézout整数解を構成できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    },
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-reduce-integer-structure-by-gcd"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
+      "assessment": {
+        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
+        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
+      },
+      "answer": {
+        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
+        "procedure": [
+          "問題を対象・操作・保つ量・求める量へ分解する。",
+          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
+          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
+          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
+        ],
+        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "stageRank": 1,
+  "difficultyRank": 1,
+  "representativeRank": 1,
+  "globalIndex": 19,
+  "orderReason": "最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。"
+}

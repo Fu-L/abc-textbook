@@ -1,0 +1,177 @@
+{
+  "id": "unit-range-actions",
+  "kind": "section",
+  "title": "区間更新を要約へ作用させる",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-range-monoid-aggregation"
+  ],
+  "excludedTopics": [
+    "過去の版の保存・rollback・構造共有。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b",
+    "source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab",
+    "source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b",
+    "source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d",
+    "source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953",
+    "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80",
+    "source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00",
+    "source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e"
+  ],
+  "tagIds": [
+    "tag-lazy-segment-action",
+    "tag-segment-tree-beats"
+  ],
+  "ownedTagIds": [
+    "tag-lazy-segment-action"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-range-update-action",
+    "outcome-prune-range-actions-by-node-invariant"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-range-update-action"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/range-actions.md",
+  "problemIds": [
+    "abc237-g",
+    "abc248-ex",
+    "abc256-ex",
+    "abc262-ex",
+    "abc265-g",
+    "abc322-f",
+    "abc327-f",
+    "abc332-f",
+    "abc340-e",
+    "abc346-g",
+    "abc357-f",
+    "abc360-f",
+    "abc363-g",
+    "abc371-f",
+    "abc382-f",
+    "abc389-f",
+    "abc397-f",
+    "abc417-f",
+    "abc426-f",
+    "abc430-g",
+    "abc435-g",
+    "abc441-g",
+    "abc450-f",
+    "abc455-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-design-range-update-action",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC237 G「Range Sort Query」について、最終順列全体は不要で、値 X がどこへ移ったかだけを特定すればよい。",
+      "procedure": [
+        "観察: 最終順列全体は不要で、値 X がどこへ移ったかだけを特定すればよい。",
+        "観察: 任意の閾値 x について P_i≤x を 0、それ以外を 1 とすると、区間ソートは区間内の 0 と 1 の個数だけで決まる。",
+        "着眼: 区間の 1 の個数を S とすれば、昇順ソート後は末尾 S 個だけが 1、降順ソート後は先頭 S 個だけが 1 になる。",
+        "着眼: X−1 以下と X 以下の分類差は値 X 一個だけなので、同じソート列を施した後も二つの 01 列の差分は X の現在位置だけに残る。",
+        "方針: 閾値 x=X−1 と x=X の二つの 01 列を作り、区間和と区間 0/1 代入が可能な遅延セグメント木で全ソートを再現する。（昇順なら 0 群の後に 1 群、降順なら 1 群の後に 0 群を一括代入でき、二列が最後に異なる唯一の位置が X の位置になる。）",
+        "接続: 順列の値を order-preserving な閾値写像で二値化し、range sort を range count と range assign の遅延セグメント木操作へ落とす。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "更新作用の合成順と要約への適用を定義し、遅延評価で保てる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    },
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-prune-range-actions-by-node-invariant"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（学習経路の比較）",
+      "omissions": [
+        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
+      ],
+      "environment": "紙上での未知問のモデル化と候補比較",
+      "input": "区間更新を要約へ作用させるの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
+      "procedure": [
+        "Segment Tree Beats: 1個の直接所有Outcome、学ぶ理由「区間monoid要約で得た考え方と実装を再利用し、Segment Tree Beatsの発動条件・正当化・境界を重複なく学ぶ」、対象外「Segment Tree Beatsの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-design-range-update-action",
+      "learningOutcomeIds": [
+        "outcome-design-range-update-action"
+      ],
+      "prerequisiteIds": [
+        "outcome-design-associative-range-summary",
+        "prereq-abc-advanced-v1",
+        "unit-range-monoid-aggregation"
+      ],
+      "attainmentCondition": "学習成果「更新作用の合成順と要約への適用を定義し、遅延評価で保てる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC265 G「012 Inversion」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「更新作用の合成順と要約への適用を定義し、遅延評価で保てる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 三値列への任意一括置換と区間反転数照会を、写像lazy segment treeで処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 三値列への任意一括置換と区間反転数照会を、写像lazy segment treeで処理できる。",
+          "転移題材の解法接続: small-alphabet sequence statisticsをordered-pair monoidへ持ち上げ、alphabet endomorphismをそのmonoidへのlazy actionとしてsegment treeに載せる。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "更新作用の合成順と要約への適用を定義し、遅延評価で保てる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    },
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-prune-range-actions-by-node-invariant"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1",
+        "unit-range-monoid-aggregation"
+      ],
+      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
+      "assessment": {
+        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
+        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
+      },
+      "answer": {
+        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
+        "procedure": [
+          "問題を対象・操作・保つ量・求める量へ分解する。",
+          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
+          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
+          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
+        ],
+        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 3,
+  "representativeRank": 3,
+  "globalIndex": 145,
+  "orderReason": "結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。"
+}

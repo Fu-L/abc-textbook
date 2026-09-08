@@ -1,0 +1,105 @@
+{
+  "id": "unit-separable-linear-transform",
+  "kind": "subsection",
+  "title": "分離可能線形変換・Walsh–Hadamard変換",
+  "parentId": "unit-linear-algebra-xor",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc",
+    "source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93",
+    "source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541",
+    "source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da",
+    "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
+    "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5",
+    "source-abc288-editorial-5668-ef5c3075ac804bab211e75a08af10f6ebb16e459bc0b1aff5de1646db74da3cd",
+    "source-abc288-g-problem-db639708c759ee9e18690d8b5632e289ed81f9465831f8d77a0270f935cdbde1"
+  ],
+  "tagIds": [
+    "tag-separable-linear-transform"
+  ],
+  "ownedTagIds": [
+    "tag-separable-linear-transform"
+  ],
+  "learningOutcomeIds": [
+    "outcome-factor-separable-linear-transform"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-factor-separable-linear-transform"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md",
+  "problemIds": [
+    "abc212-h",
+    "abc220-h",
+    "abc265-ex",
+    "abc288-g",
+    "abc367-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-factor-separable-linear-transform",
+      "learningOutcomeIds": [
+        "outcome-factor-separable-linear-transform"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC212 H「Nim Counting」について、各山から一個以上の石を取れる通常の Nim なので、先手が負ける必要十分条件は全ての山サイズの排他的論理和が 0 になることである。",
+      "procedure": [
+        "観察: 各山から一個以上の石を取れる通常の Nim なので、先手が負ける必要十分条件は全ての山サイズの排他的論理和が 0 になることである。",
+        "観察: 許される山サイズの指示配列を C とすると、山が M 個のときの排他的論理和別の列数は C の M 回 XOR 畳み込みになる。",
+        "着眼: 求める勝ち局面を直接数えるより、総列数から XOR が 0 の負け局面数を引くと Nim の判定条件をそのまま使える。",
+        "着眼: 山数が固定でなく 1 から N までである点は、変換後の各値 v に対する v＋v²＋…＋vᴺ という冪和に吸収できる。",
+        "方針: Walsh–Hadamard 変換で XOR 畳み込みを成分ごとの積へ変え、各成分で 1 個から N 個までの冪和を求める。（山数ごとの畳み込みを反復せず、変換後の各座標で等比数列を計算して一度だけ逆変換できる。）",
+        "接続: Nim の敗北条件を XOR 畳み込みの添字 0 の係数へ翻訳し、XOR 変換領域で可変長列の冪和をまとめて評価してから逆変換する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-factor-separable-linear-transform",
+      "learningOutcomeIds": [
+        "outcome-factor-separable-linear-transform"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC288 G「3^N Minesweeper」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全位置のneighbor bomb数から、一貫するbomb配置をN軸の局所逆変換で復元できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 全位置のneighbor bomb数から、一貫するbomb配置をN軸の局所逆変換で復元できる。",
+          "転移題材の解法接続: AをindexのN桁ternary配列とみなす。各axisのstride=3^axisについて、他桁が同じ3 entry (f0,f1,f2)を全blockから取り出し、(f1-f2, f0+f2-f1, f1-f0)へ同時更新する。全N軸の処理後、array[index]がその位置のbomb有無B_indexなので順に出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 87,
+  "globalIndex": 178,
+  "orderReason": "Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

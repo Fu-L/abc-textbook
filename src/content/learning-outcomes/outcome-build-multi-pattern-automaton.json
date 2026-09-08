@@ -1,0 +1,14 @@
+{
+  "id": "outcome-build-multi-pattern-automaton",
+  "statement": "複数patternのTrieへfailure linkと出力情報を加え、Aho–Corasick automaton上で一致状態を更新できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-build-finite-string-automaton",
+    "outcome-index-shared-prefixes-with-trie"
+  ],
+  "scopeIds": [
+    "abc419-f",
+    "abc458-f",
+    "tag-aho-corasick",
+    "unit-aho-corasick"
+  ]
+}

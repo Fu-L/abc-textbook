@@ -1,0 +1,45 @@
+{
+  "id": "tag-isotonic-regression-pav",
+  "name": "isotonic regression・PAV",
+  "definition": "単調制約付き凸最小化で違反する隣接blockをpoolし、block optimumが単調になるまでmergeする。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [
+    "tag-basic-convex-optimization"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "blocks",
+      "convex losses",
+      "ordered variables"
+    ],
+    "triggerPatterns": [
+      "x1<=x2<=...",
+      "隣接最適値が逆転"
+    ],
+    "invariantPatterns": [
+      "block optimum order",
+      "pooled sufficient statistic"
+    ],
+    "goalPatterns": [
+      "単調制約最適化"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-solve-isotonic-regression-by-pav"
+  ],
+  "representativeProblemIds": [
+    "abc459-f"
+  ],
+  "aliases": [
+    "PAV",
+    "pool-adjacent-violators",
+    "単調回帰"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

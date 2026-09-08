@@ -1,0 +1,63 @@
+{
+  "id": "tag-bipartite-matching-hall",
+  "name": "二部matching・Hall・Kőnig",
+  "definition": "左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-bipartite-structure"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "matching",
+      "対応辺",
+      "左右頂点集合"
+    ],
+    "triggerPatterns": [
+      "path cover",
+      "一対一割当",
+      "近傍集合"
+    ],
+    "invariantPatterns": [
+      "Hall condition",
+      "augmenting path",
+      "交互路"
+    ],
+    "goalPatterns": [
+      "完全割当",
+      "最大matching",
+      "最小被覆"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-max-flow-min-cut",
+      "type": "often_combined",
+      "rationale": "二部matchingをunit-capacity flowへ帰着し、Kőnig型双対をmin-cutから説明するときに併用する。"
+    },
+    {
+      "tagId": "tag-min-weight-general-perfect-matching",
+      "type": "contrast",
+      "rationale": "二部性を使えるaugmenting path・Hall型議論と、odd blossomを扱う一般graph完全matchingを対比する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-characterize-bipartite-feasibility-by-hall",
+    "outcome-solve-bipartite-matching"
+  ],
+  "representativeProblemIds": [
+    "abc241-g",
+    "abc401-g"
+  ],
+  "aliases": [
+    "Hallの定理",
+    "Kőnigの定理",
+    "bipartite matching",
+    "二部マッチング"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

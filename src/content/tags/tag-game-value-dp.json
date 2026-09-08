@@ -1,0 +1,63 @@
+{
+  "id": "tag-game-value-dp",
+  "name": "minimax・局面値ゲームDP",
+  "definition": "両者が異なる目的で最適に手を選ぶ局面を、得点差・手数・勝敗値のminimaxで評価する。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "ゲーム",
+      "先手",
+      "局面",
+      "後手",
+      "得点",
+      "手番"
+    ],
+    "triggerPatterns": [
+      "互いに最適",
+      "最善手",
+      "最大化",
+      "最小化"
+    ],
+    "invariantPatterns": [
+      "局面値",
+      "得点差",
+      "手番ごとの目的"
+    ],
+    "goalPatterns": [
+      "ゲームの値",
+      "勝敗",
+      "最終得点",
+      "最適手数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-game-grundy-dp",
+      "type": "contrast",
+      "rationale": "impartial gameのGrundy数と、双方の目的が異なる局面のminimax値を同じゲームDPへ混同しない。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-evaluate-adversarial-game-value"
+  ],
+  "representativeProblemIds": [
+    "abc261-ex",
+    "abc303-g",
+    "abc349-e"
+  ],
+  "aliases": [
+    "minimax",
+    "partisan game",
+    "ミニマックス",
+    "得点差ゲームDP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "evidenceId": "bootstrap-canonical-taxonomy-materialization",
+  "status": "passed",
+  "evidenceScope": "T047–T050 canonical taxonomy, placement policy, and publication-disabled LearningUnit skeleton only. Full Unit expansion, executable attainment verification, Problem explanation authoring, and public projection remain deferred.",
+  "deferredCompletionTaskIds": [
+    "T055",
+    "T056",
+    "T057",
+    "T058",
+    "T059",
+    "T065",
+    "T066",
+    "T067",
+    "T068",
+    "T069",
+    "T070",
+    "T071",
+    "T072",
+    "T073",
+    "T074",
+    "T075",
+    "T076",
+    "T077",
+    "T078",
+    "T155",
+    "T156",
+    "T157",
+    "T158",
+    "T160"
+  ],
+  "sourceBuild": {
+    "id": "final-taxonomy-build-initial",
+    "digest": "16aff2521fde16d8f7695f35e1675cd5bb22fdbf94f6ef6a336eb09a3559f853",
+    "acceptedAt": "2026-09-07T23:46:44.921Z"
+  },
+  "taskIds": [
+    "T047",
+    "T048",
+    "T049",
+    "T050"
+  ],
+  "counts": {
+    "tags": 191,
+    "learningOutcomes": 194,
+    "learningUnits": 214,
+    "learningDocuments": 214,
+    "directlyOwnedTags": 191,
+    "directlyOwnedLearningOutcomes": 194,
+    "guidedOutcomeExamples": 194,
+    "outcomeAttainmentExercises": 194,
+    "curriculumRoutingUnits": 45,
+    "placements": 868,
+    "correctionImpacts": 12
+  },
+  "paths": {
+    "tags": "src/content/tags",
+    "learningOutcomes": "src/content/learning-outcomes",
+    "learningUnits": "src/content/learning-units",
+    "learningDocuments": "src/content/docs/learn",
+    "learningOrder": "src/content/policies/learning-order.json",
+    "problemPlacements": "src/content/policies/problem-placements.json",
+    "problemPlacementEvidence": "docs/verification/bootstrap/problem-placements.json",
+    "materializationEvidence": "docs/verification/bootstrap/canonical-taxonomy-materialization.json"
+  },
+  "digests": {
+    "tags": "7f1f1394b803618bd87d93d9b28d0e2f948cf7bee911f037d75a7e57023497b7",
+    "learningOutcomes": "e9a7a1a1bbc1b2ccbd50220c1c3a582e6733b6f344427bc919b6629b42d781ae",
+    "learningUnits": "e2a221d90f4a950b305f18dcce2863e8a8c506f17b37891651d8e0d16b4583f5",
+    "learningDocuments": "da9ae8b693c883bee88ee96c00f7f91e6cb4cac68a82ae55d31ac43bb20d7f44",
+    "learningOrderDigest": "3856d305cc885e833189f24638dbc6f5038089f35eacec5082c4624aebedbe59",
+    "problemPlacementPolicyDigest": "33d35db5ec566bf69bc770c5049a6364b07d3103a19d9b5b03b5b7ccc5f5f048"
+  },
+  "materializationDigest": "5aa26d8b63a4942e0606b4a249678e15174ba4bd827f6805c47f25b30a5d2751"
+}

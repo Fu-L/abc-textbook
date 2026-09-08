@@ -1,0 +1,102 @@
+{
+  "id": "unit-difference-constraints",
+  "kind": "subsection",
+  "title": "difference constraints・不等式系の最短路化",
+  "parentId": "unit-shortest-path-certificates",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-weighted-shortest-path"
+  ],
+  "excludedTopics": [
+    "difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db",
+    "source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e",
+    "source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552",
+    "source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"
+  ],
+  "tagIds": [
+    "tag-difference-constraints"
+  ],
+  "ownedTagIds": [
+    "tag-difference-constraints"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-difference-constraints"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-difference-constraints"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/difference-constraints.md",
+  "problemIds": [
+    "abc216-g",
+    "abc404-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-solve-difference-constraints",
+      "learningOutcomeIds": [
+        "outcome-solve-difference-constraints"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC216 G「01Sequence」について、区間 [L_i,R_i] に 1 が X_i 個以上という条件は、その区間にある 0 の個数が R_i−L_i＋1−X_i 以下という条件へ置き換えられる。",
+      "procedure": [
+        "観察: 区間 [L_i,R_i] に 1 が X_i 個以上という条件は、その区間にある 0 の個数が R_i−L_i＋1−X_i 以下という条件へ置き換えられる。",
+        "観察: B_i を先頭 i 要素の 0 の個数とすると、区間条件も各要素が 0/1 である条件も B の差に対する上限制約として書ける。",
+        "着眼: 1 の個数最小化を直接扱わず、補数である 0 の prefix 個数 B_N の最大化へ反転すると差分制約の上界問題になる。",
+        "着眼: B_i≤B_{i+1} と B_{i+1}≤B_i＋1 を同時に課すことで、隣接 prefix 差が必ず 0 または 1 となり二進列を復元できる。",
+        "方針: 0 の prefix 個数 B に対する差分制約グラフを作り、頂点 0 からの最短距離を求めて B_N を最大化する。（全制約が d_j−d_i≤w の形になり、辺重みも非負なのでダイクストラ法で同時に満たす最大の上界を得られる。）",
+        "接続: 区間内 1 の下限制約を prefix 0 数の差の上限へ翻訳し、各不等式を有向辺として最短路距離に符号化して、距離差から最小 1 列を復元する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "差の不等式をconstraint graphへ変換し、緩和と負閉路判定により可解性・極値・具体解を求められる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-solve-difference-constraints",
+      "learningOutcomeIds": [
+        "outcome-solve-difference-constraints"
+      ],
+      "prerequisiteIds": [
+        "outcome-model-and-compute-shortest-path",
+        "prereq-abc-advanced-v1",
+        "unit-weighted-shortest-path"
+      ],
+      "attainmentCondition": "学習成果「差の不等式をconstraint graphへ変換し、緩和と負閉路判定により可解性・極値・具体解を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC404 G「Specified Range Sums」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「差の不等式をconstraint graphへ変換し、緩和と負閉路判定により可解性・極値・具体解を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 区間和等式と各要素の正値条件を差分制約へ統合し、実行不能判定と最小総和を一つの最短路計算で得られる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 区間和等式と各要素の正値条件を差分制約へ統合し、実行不能判定と最小総和を一つの最短路計算で得られる。",
+          "転移題材の解法接続: 頂点 0..N のグラフを作り、X_v≤X_u+c を辺 u→v, 重み c に変換する。B_N=0 を始点として Bellman-Ford で距離を緩和し、N 回後にも更新があれば -1、なければ -dist[0] を出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "差の不等式をconstraint graphへ変換し、緩和と負閉路判定により可解性・極値・具体解を求められる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 93,
+  "globalIndex": 192,
+  "orderReason": "最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。"
+}

@@ -1,0 +1,32 @@
+{
+  "id": "outcome-compress-sparse-keys",
+  "statement": "初期値・将来更新値・疎なevent座標をsort-uniqueし、順序と等値性を保つdense indexまたは有限状態へ写せる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc221-e",
+    "abc231-f",
+    "abc232-g",
+    "abc254-g",
+    "abc262-ex",
+    "abc266-ex",
+    "abc273-f",
+    "abc276-ex",
+    "abc287-g",
+    "abc306-f",
+    "abc309-f",
+    "abc320-g",
+    "abc351-f",
+    "abc354-f",
+    "abc356-f",
+    "abc360-f",
+    "abc360-g",
+    "abc374-f",
+    "abc384-g",
+    "abc431-g",
+    "abc434-e",
+    "abc439-f",
+    "abc465-g",
+    "tag-coordinate-compression",
+    "unit-coordinate-compression"
+  ]
+}

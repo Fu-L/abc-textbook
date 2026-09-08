@@ -1,0 +1,66 @@
+{
+  "id": "tag-tree-metric-diameter",
+  "name": "木距離・直径・中心・最遠点",
+  "definition": "木の一意経路距離を少数の基準点から一括計算し、距離label・直径端点・中心・最遠点性質で頂点集合の距離条件を整理する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "中心",
+      "基準点",
+      "木",
+      "直径",
+      "端点",
+      "距離"
+    ],
+    "triggerPatterns": [
+      "中心",
+      "基準点からの距離",
+      "最大距離",
+      "最遠",
+      "木上の距離条件",
+      "直径"
+    ],
+    "invariantPatterns": [
+      "一意経路",
+      "中点",
+      "二端点",
+      "基準点からの距離label",
+      "直径端点"
+    ],
+    "goalPatterns": [
+      "中心",
+      "最大距離",
+      "最遠点",
+      "直径",
+      "距離条件",
+      "頂点分類"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-use-tree-diameter-extrema"
+  ],
+  "representativeProblemIds": [
+    "abc221-f",
+    "abc267-f",
+    "abc303-e",
+    "abc401-f"
+  ],
+  "aliases": [
+    "eccentricity",
+    "tree center",
+    "tree diameter",
+    "tree metric",
+    "最遠点",
+    "木の中心",
+    "木の直径",
+    "木距離"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

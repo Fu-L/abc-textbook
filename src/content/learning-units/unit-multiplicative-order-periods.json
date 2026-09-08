@@ -1,0 +1,104 @@
+{
+  "id": "unit-multiplicative-order-periods",
+  "kind": "section",
+  "title": "乗法的位数から最小周期を求める",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-modular-arithmetic",
+    "unit-prime-divisor"
+  ],
+  "excludedTopics": [
+    "約数格子上の指数計数・包除。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+    "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+    "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
+    "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
+  ],
+  "tagIds": [
+    "tag-multiplicative-order"
+  ],
+  "ownedTagIds": [
+    "tag-multiplicative-order"
+  ],
+  "learningOutcomeIds": [
+    "outcome-find-period-by-multiplicative-order"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-find-period-by-multiplicative-order"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/multiplicative-order-periods.md",
+  "problemIds": [
+    "abc222-g",
+    "abc335-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-find-period-by-multiplicative-order",
+      "learningOutcomeIds": [
+        "outcome-find-period-by-multiplicative-order"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC222 G「222」について、n 桁の数は 2(10^n-1)/9 である。g=gcd(K,2) とおくと、K がこの数を割る条件は M'=9K/g が 10^n-1 を割る条件、すなわち 10^n≡1 (mod M') と同値になる。これは 9 の法逆元を取る変形ではなく、整数の可除性による変形である。",
+      "procedure": [
+        "観察: n 桁の数は 2(10^n-1)/9 である。g=gcd(K,2) とおくと、K がこの数を割る条件は M'=9K/g が 10^n-1 を割る条件、すなわち 10^n≡1 (mod M') と同値になる。これは 9 の法逆元を取る変形ではなく、整数の可除性による変形である。",
+        "観察: この合同式に解があるのは gcd(10,M')=1 のときだけである。共通素因子 2 または 5 があれば矛盾し、互いに素なら Euler の定理により n=φ(M') が一つの解になる。",
+        "着眼: gcd(10,M')=1 のとき求める n は ord_{M'}(10) である。これは有限群 (Z/M'Z)^× の元の位数なので φ(M') を割り、φ(M') の約数を昇順に調べて最初に 10^d≡1 となる d が最小解である。",
+        "方針: Euler の定理で指数を φ(M') の約数へ限定し、昇順に modular power を検査して最小の乗法的位数を求める。（gcd(10,M')=1 のとき求める最小 n は 10 の乗法的位数で、φ(M') を割る。したがって長さを順に試さず、φ(M') の約数だけを検査できる。）",
+        "接続: 各 K について g=gcd(K,2), M'=9K/g を作る。gcd(10,M')>1 なら -1 とし、そうでなければ試し割りで φ(M') を求め、その正約数を昇順に列挙して powmod(10,d,M')=1 となる最初の d を出力する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "合同式で表された反復の最小周期を乗法的位数に帰着し、約数から求められる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-find-period-by-multiplicative-order",
+      "learningOutcomeIds": [
+        "outcome-find-period-by-multiplicative-order"
+      ],
+      "prerequisiteIds": [
+        "outcome-compute-in-modular-arithmetic",
+        "outcome-decompose-by-prime-or-divisor",
+        "prereq-abc-advanced-v1",
+        "unit-modular-arithmetic",
+        "unit-prime-divisor"
+      ],
+      "attainmentCondition": "学習成果「合同式で表された反復の最小周期を乗法的位数に帰着し、約数から求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC335 G「Discrete Logarithm Problems」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「合同式で表された反復の最小周期を乗法的位数に帰着し、約数から求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 正整数kによりA_i^k≡A_j mod Pとなる順序付きindex pair(i,j)の個数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 正整数kによりA_i^k≡A_j mod Pとなる順序付きindex pair(i,j)の個数を求められる。",
+          "転移題材の解法接続: P-1をtrial divisionで素因数分解する。各A_iについてmodular exponentiationで位数を削減し、その素因数指数vectorの頻度を数える。mixed-radix配列上で各軸のprefix zeta変換を行って各dに対するΣ_{e|d}freq[e]を得て、Σ_d freq[d]·divisorCount[d]を出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "合同式で表された反復の最小周期を乗法的位数に帰着し、約数から求められる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 3,
+  "representativeRank": 3,
+  "globalIndex": 72,
+  "orderReason": "合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。"
+}

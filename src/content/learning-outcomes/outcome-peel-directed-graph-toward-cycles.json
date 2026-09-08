@@ -1,0 +1,11 @@
+{
+  "id": "outcome-peel-directed-graph-toward-cycles",
+  "statement": "三色DFSまたはKahn型peelingの不変条件を説明し、有向cycleの存在を判定して必要ならcycleへ残るcoreを抽出できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc245-f",
+    "abc456-e",
+    "tag-directed-core-peeling",
+    "unit-directed-core-peeling"
+  ]
+}

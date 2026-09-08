@@ -1,0 +1,11 @@
+{
+  "id": "outcome-peel-graph-core",
+  "statement": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc266-f",
+    "abc267-e",
+    "tag-graph-core-peeling",
+    "unit-graph-core"
+  ]
+}

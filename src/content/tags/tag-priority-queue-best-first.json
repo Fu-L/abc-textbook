@@ -1,0 +1,46 @@
+{
+  "id": "tag-priority-queue-best-first",
+  "name": "priority queue・best-first列挙",
+  "definition": "現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "heap",
+      "候補frontier",
+      "暗黙graph"
+    ],
+    "triggerPatterns": [
+      "上位K個",
+      "最小から順",
+      "閾値で解禁"
+    ],
+    "invariantPatterns": [
+      "未確定候補の極値",
+      "重複排除"
+    ],
+    "goalPatterns": [
+      "best-first探索",
+      "k番目"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-enumerate-frontier-best-first"
+  ],
+  "representativeProblemIds": [
+    "abc297-e",
+    "abc391-f"
+  ],
+  "aliases": [
+    "best-first enumeration",
+    "heap",
+    "優先度付きキュー"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

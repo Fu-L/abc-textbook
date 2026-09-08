@@ -1,0 +1,102 @@
+{
+  "id": "unit-binary-trie",
+  "kind": "section",
+  "title": "bit列をTrieで索引化する",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
+    "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed",
+    "source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52",
+    "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea",
+    "source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07",
+    "source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7"
+  ],
+  "tagIds": [
+    "tag-binary-trie"
+  ],
+  "ownedTagIds": [
+    "tag-binary-trie"
+  ],
+  "learningOutcomeIds": [
+    "outcome-query-bitwise-order-with-trie"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-query-bitwise-order-with-trie"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/binary-trie.md",
+  "problemIds": [
+    "abc252-ex",
+    "abc254-ex",
+    "abc281-f",
+    "abc425-g",
+    "abc451-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-query-bitwise-order-with-trie",
+      "learningOutcomeIds": [
+        "outcome-query-bitwise-order-with-trie"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC254 Ex「Multiply or Divide by 2」について、非負整数を二進文字列とみなすと、Aを2で割る操作は末尾ビット削除であり、Aを2倍する操作を逆向きに見ると、B側は末尾が0のときだけその0を削除できる。",
+      "procedure": [
+        "観察: 非負整数を二進文字列とみなすと、Aを2で割る操作は末尾ビット削除であり、Aを2倍する操作を逆向きに見ると、B側は末尾が0のときだけその0を削除できる。",
+        "着眼: Aの余剰はどの末尾ビットでも削除して親へ上げられるが、Bの余剰は現在節点へ入る辺が0の場合だけ親へ上げられる。",
+        "着眼: 葉側で可能な一致を後回しにしてもより浅い一致しか得られないため、最深部から最大数を即座に対応させるのが最適である。",
+        "方針: 二進trieを葉から処理する貪欲マッチング（深い同一接頭辞でA,Bを先に対応させ、余剰だけを親へ上げれば移動回数を最小化でき、B側の上昇可否も辺ビットで判定できる。）",
+        "接続: A_i,B_iの二進表記を同じtrieへ挿入し、深い節点からA個数とB個数を相殺する。残ったAは親へ移し、残ったBは末尾辺が0なら親へ移し、1なら不可能として-1にする。全移動数を合計する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-query-bitwise-order-with-trie",
+      "learningOutcomeIds": [
+        "outcome-query-bitwise-order-with-trie"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC281 F「Xor Minimization」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全要素への共通XOR後の最大値を、上位bit再帰と支配group選択で最小化できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 全要素への共通XOR後の最大値を、上位bit再帰と支配group選択で最小化できる。",
+          "転移題材の解法接続: solve(V,b)を定義する。b<0なら0、一方groupだけならそのgroupでsolve(b-1)、両groupがあれば2^b+min(solve(V0,b-1),solve(V1,b-1))を返す。初期V=A,b=29の値が答え。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 2,
+  "representativeRank": 11,
+  "globalIndex": 65,
+  "orderReason": "整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。"
+}

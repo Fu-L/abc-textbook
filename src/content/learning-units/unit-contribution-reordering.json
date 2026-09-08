@@ -1,0 +1,169 @@
+{
+  "id": "unit-contribution-reordering",
+  "kind": "section",
+  "title": "局所寄与へ分解して集計順を交換する",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および独立な局所寄与へ分解できない集計。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27",
+    "source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e",
+    "source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f",
+    "source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0",
+    "source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46",
+    "source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9",
+    "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
+    "source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7"
+  ],
+  "tagIds": [
+    "tag-contribution-reordering"
+  ],
+  "ownedTagIds": [
+    "tag-contribution-reordering"
+  ],
+  "learningOutcomeIds": [
+    "outcome-reorder-counting-contributions"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-reorder-counting-contributions"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/contribution-reordering.md",
+  "problemIds": [
+    "abc215-g",
+    "abc216-f",
+    "abc218-e",
+    "abc219-h",
+    "abc220-e",
+    "abc221-e",
+    "abc221-f",
+    "abc222-e",
+    "abc224-f",
+    "abc226-e",
+    "abc231-g",
+    "abc233-e",
+    "abc238-ex",
+    "abc247-e",
+    "abc255-e",
+    "abc258-g",
+    "abc261-f",
+    "abc262-ex",
+    "abc268-g",
+    "abc269-e",
+    "abc269-f",
+    "abc277-g",
+    "abc280-g",
+    "abc283-ex",
+    "abc290-e",
+    "abc295-e",
+    "abc295-f",
+    "abc297-f",
+    "abc298-f",
+    "abc306-f",
+    "abc308-e",
+    "abc313-f",
+    "abc314-f",
+    "abc318-e",
+    "abc321-g",
+    "abc324-e",
+    "abc326-e",
+    "abc330-g",
+    "abc334-e",
+    "abc347-e",
+    "abc351-e",
+    "abc352-g",
+    "abc353-e",
+    "abc359-g",
+    "abc361-e",
+    "abc362-f",
+    "abc365-e",
+    "abc371-e",
+    "abc378-e",
+    "abc379-e",
+    "abc380-g",
+    "abc386-g",
+    "abc390-f",
+    "abc390-g",
+    "abc396-f",
+    "abc401-f",
+    "abc407-f",
+    "abc411-e",
+    "abc417-f",
+    "abc418-e",
+    "abc422-f",
+    "abc423-e",
+    "abc433-f",
+    "abc436-f",
+    "abc438-f",
+    "abc439-f",
+    "abc455-f",
+    "abc459-e",
+    "abc464-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-reorder-counting-contributions",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC215 G「Colorful Candies 2」について、選んだ K 個の飴に含まれる色数は、各色について「その色が一個以上現れた」という指示変数の総和である。",
+      "procedure": [
+        "観察: 選んだ K 個の飴に含まれる色数は、各色について「その色が一個以上現れた」という指示変数の総和である。",
+        "観察: 全 N 個中に n_i 個ある色 i が一度も選ばれない確率は C(N−n_i,K)／C(N,K) であり、出現確率はその余事象である。",
+        "着眼: 色どうしの出現は独立でなくても、期待値の線形性により各色の出現確率を単純に足せる。",
+        "着眼: 正の頻度 x が互いに異なるなら、その最小総和は 1＋2＋… と増えるため、存在する頻度値の種類数は少ない。",
+        "方針: 同じ出現個数 x を持つ色を a_x 個にまとめ、各 K に対して正の a_x だけから出現確率を加算する。（期待値への寄与は色名でなく頻度だけで決まり、異なる正頻度の種類数は N の平方根程度に抑えられる。）",
+        "接続: 色数を指示変数の和へ分解し、余事象の二項係数比を頻度別に集約して、正頻度の疎性を利用しながら全ての K の期待値を求める。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-reorder-counting-contributions",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC220 E「Distance on Large Perfect Binary Tree」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 指数個の完全木を展開せず、共通祖先の深さ・対称性・距離split区間から順序付き頂点対を数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 指数個の完全木を展開せず、共通祖先の深さ・対称性・距離split区間から順序付き頂点対を数えられる。",
+          "転移題材の解法接続: 2 の冪を法 998244353 で前計算する。各深さ d で H=N-1-d とし、D≤H なら片端が LCA の 2×2^D を加え、内部 split 区間の長さに 2^{D-1} を掛けて加える。その一頂点分へ 2^d を掛け、全深さを合計する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 1,
+  "difficultyRank": 1,
+  "representativeRank": 3,
+  "globalIndex": 23,
+  "orderReason": "答えを要素・組・成分ごとの局所寄与へ一意に分け、各対象が何回数えられるかを証明して二重和・積・期待値の集計順を交換する。"
+}

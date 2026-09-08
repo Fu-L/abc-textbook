@@ -1,0 +1,11 @@
+{
+  "id": "outcome-characterize-palindrome-intervals",
+  "statement": "各中心の回文半径を求め、左右対称な区間の成立条件を判定できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc349-g",
+    "abc398-f",
+    "tag-palindrome-radius",
+    "unit-palindrome-radius"
+  ]
+}

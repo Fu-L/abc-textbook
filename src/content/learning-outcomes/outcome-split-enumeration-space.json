@@ -1,0 +1,19 @@
+{
+  "id": "outcome-split-enumeration-space",
+  "statement": "探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc220-h",
+    "abc252-ex",
+    "abc271-f",
+    "abc300-g",
+    "abc326-f",
+    "abc336-f",
+    "abc402-f",
+    "abc423-g",
+    "abc427-f",
+    "abc464-f",
+    "tag-meet-in-the-middle",
+    "unit-meet-in-the-middle"
+  ]
+}

@@ -215,17 +215,22 @@ export interface CatalogLike {
     readonly globalIndex: number;
     readonly parentId: string | null;
     readonly tagIds: readonly string[];
+    readonly ownedTagIds?: readonly string[] | undefined;
     readonly learningOutcomeIds: readonly string[];
+    readonly ownedLearningOutcomeIds?: readonly string[] | undefined;
+    readonly contentPhase?: 'canonical_skeleton' | 'full_authoring' | undefined;
     readonly problemIds: readonly string[];
     readonly examples: readonly {
       readonly key: string;
       readonly learningOutcomeIds: readonly string[];
       readonly kind: 'executable' | 'pseudocode' | 'illustrative';
       readonly verificationStatus: 'pending' | 'passed' | 'not_applicable' | 'failed';
+      readonly learningUnitRole?: 'guided_outcome' | 'curriculum_routing' | undefined;
     }[];
     readonly exercises: readonly {
       readonly key: string;
       readonly learningOutcomeIds: readonly string[];
+      readonly learningUnitRole?: 'outcome_attainment' | 'curriculum_routing' | undefined;
       readonly answer: { readonly verificationStatus: 'pending' | 'passed' | 'failed' };
     }[];
   }[];
@@ -280,6 +285,7 @@ export interface CatalogLike {
   readonly correctionImpacts: readonly {
     readonly id: string;
     readonly sourceRevisionId: string;
+    readonly sourceRevisionIds?: readonly string[] | undefined;
     readonly affectedContentLocators: readonly (
       | {
           readonly ownerType: 'problem';
@@ -289,6 +295,11 @@ export interface CatalogLike {
       | {
           readonly ownerType: 'learning_unit';
           readonly learningUnitId: string;
+          readonly path: string;
+        }
+      | {
+          readonly ownerType: 'problem_placement';
+          readonly problemId: string;
           readonly path: string;
         }
     )[];
@@ -1250,7 +1261,13 @@ export const validateCatalogSemantics = (
       unitIds,
     );
     requireRefs(unit.id, 'tagIds', unit.tagIds, tagIds);
+    if (unit.ownedTagIds !== undefined) {
+      requireRefs(unit.id, 'ownedTagIds', unit.ownedTagIds, tagIds);
+    }
     requireRefs(unit.id, 'learningOutcomeIds', unit.learningOutcomeIds, outcomeIds);
+    if (unit.ownedLearningOutcomeIds !== undefined) {
+      requireRefs(unit.id, 'ownedLearningOutcomeIds', unit.ownedLearningOutcomeIds, outcomeIds);
+    }
     requireRefs(unit.id, 'problemIds', unit.problemIds, problemIds);
     for (const example of unit.examples) {
       requireRefs(
@@ -1510,7 +1527,9 @@ export const validateCatalogSemantics = (
   ): string =>
     locator.ownerType === 'problem'
       ? `problem:${locator.problemId}:${locator.path}`
-      : `learning_unit:${locator.learningUnitId}:${locator.path}`;
+      : locator.ownerType === 'learning_unit'
+        ? `learning_unit:${locator.learningUnitId}:${locator.path}`
+        : `problem_placement:${locator.problemId}:${locator.path}`;
   const authoringVisitState = new Map<string, 'visiting' | 'visited'>();
   const visitAuthoringUnit = (problemId: string, path: readonly string[]): void => {
     const state = authoringVisitState.get(problemId);
@@ -1533,6 +1552,12 @@ export const validateCatalogSemantics = (
   for (const unit of catalog.authoringUnits) visitAuthoringUnit(unit.problemId, []);
   for (const impact of catalog.correctionImpacts) {
     requireRefs(impact.id, 'sourceRevisionId', [impact.sourceRevisionId], sourceIds);
+    requireRefs(
+      impact.id,
+      'sourceRevisionIds',
+      impact.sourceRevisionIds ?? [impact.sourceRevisionId],
+      sourceIds,
+    );
     requireRefs(
       impact.id,
       'affectedLearningUnitOrderIds',
@@ -1575,6 +1600,16 @@ export const validateCatalogSemantics = (
             code: 'CORRECTION_IMPACT_CONTENT_NOT_FOUND',
             entityId: impact.id,
             message: `${locatorKey} does not resolve to a section or local block.`,
+          });
+        }
+        continue;
+      }
+      if (locator.ownerType === 'problem_placement') {
+        if (!problemIds.has(locator.problemId)) {
+          diagnostics.push({
+            code: 'CORRECTION_IMPACT_LOCATOR_OWNER_MISSING',
+            entityId: impact.id,
+            message: `${locatorKey} cannot resolve its Problem placement owner.`,
           });
         }
         continue;

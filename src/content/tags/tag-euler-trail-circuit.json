@@ -1,0 +1,47 @@
+{
+  "id": "tag-euler-trail-circuit",
+  "name": "Euler trail・circuit",
+  "definition": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "walk",
+      "次数",
+      "辺"
+    ],
+    "triggerPatterns": [
+      "一筆書き",
+      "全辺を一度"
+    ],
+    "invariantPatterns": [
+      "入出次数差",
+      "未使用辺",
+      "連結性"
+    ],
+    "goalPatterns": [
+      "trail判定",
+      "walk構成"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-construct-euler-trail-or-circuit"
+  ],
+  "representativeProblemIds": [
+    "abc227-h",
+    "abc286-g"
+  ],
+  "aliases": [
+    "Euler trail",
+    "Hierholzer法",
+    "オイラー路",
+    "一筆書き"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

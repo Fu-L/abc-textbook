@@ -1,0 +1,12 @@
+{
+  "id": "outcome-prune-range-actions-by-node-invariant",
+  "statement": "nodeの最大/次点/個数等からrange chmin/chmaxが一括適用できる条件を判定し、失敗時だけ子へ降りる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-associative-range-summary"
+  ],
+  "scopeIds": [
+    "abc430-g",
+    "tag-segment-tree-beats",
+    "unit-segment-tree-beats"
+  ]
+}

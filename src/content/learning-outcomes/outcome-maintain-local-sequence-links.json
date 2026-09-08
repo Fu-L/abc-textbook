@@ -1,0 +1,12 @@
+{
+  "id": "outcome-maintain-local-sequence-links",
+  "statement": "要素IDから前後linkを引き、挿入・削除で変わる局所linkだけを更新して列順を復元できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc218-h",
+    "abc344-e",
+    "abc421-f",
+    "tag-linked-list-index",
+    "unit-linked-list-index"
+  ]
+}

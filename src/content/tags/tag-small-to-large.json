@@ -1,0 +1,52 @@
+{
+  "id": "tag-small-to-large",
+  "name": "small-to-large・DSU on Tree",
+  "definition": "小さいcontainerだけを大きいcontainerへ移し、各要素の移動先sizeが倍増することから総仕事量を抑える。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "map",
+      "部分木container",
+      "集合"
+    ],
+    "triggerPatterns": [
+      "container swap",
+      "merge",
+      "小さい側"
+    ],
+    "invariantPatterns": [
+      "size倍増",
+      "要素移動"
+    ],
+    "goalPatterns": [
+      "部分木集約",
+      "集合併合"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-rooted-tree-aggregation",
+      "type": "often_combined",
+      "rationale": "子部分木の集合・mapを小さい側から大きい側へmergeする木DPで併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-merge-small-into-large"
+  ],
+  "representativeProblemIds": [
+    "abc324-g",
+    "abc329-f"
+  ],
+  "aliases": [
+    "DSU on Tree",
+    "sack technique",
+    "small-to-large"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

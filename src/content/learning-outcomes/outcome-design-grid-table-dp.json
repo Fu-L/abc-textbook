@@ -1,0 +1,19 @@
+{
+  "id": "outcome-design-grid-table-dp",
+  "statement": "グリッドまたは多次元表の依存方向と境界状態を定め、計算済みの局所近傍からDAG順に全状態を更新できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc221-h",
+    "abc227-f",
+    "abc311-e",
+    "abc347-f",
+    "abc358-g",
+    "abc415-e",
+    "abc443-e",
+    "abc464-e",
+    "tag-grid-table-dp",
+    "unit-dp-grid-table"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "id": "tag-digit-dp",
+  "name": "上限制約付き桁DP",
+  "definition": "数値上限以下の桁列を接頭辞から構成し、tight・started・剰余・digit maskなど将来に必要な有限統計を保つ。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "上限",
+      "二進表記",
+      "十進表記",
+      "数字列",
+      "桁"
+    ],
+    "triggerPatterns": [
+      "leading zero",
+      "prefix",
+      "剰余",
+      "未満フラグ",
+      "桁ごと"
+    ],
+    "invariantPatterns": [
+      "started flag",
+      "tight flag",
+      "上限と一致",
+      "先頭ゼロ"
+    ],
+    "goalPatterns": [
+      "以下の個数",
+      "値の総和",
+      "条件を満たす数"
+    ],
+    "excludedPatterns": [
+      "automaton state",
+      "carryだけ",
+      "parser",
+      "syntax",
+      "文法",
+      "構文木",
+      "混合基数",
+      "禁止pattern"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": true
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-automaton-dp",
+      "type": "contrast",
+      "rationale": "数値上限のtight状態を扱うDPと、受理条件を表す有限automatonとの直積DPを区別する。"
+    },
+    {
+      "tagId": "tag-carry-mixed-radix-dp",
+      "type": "contrast",
+      "rationale": "上限との接頭辞一致を保つ桁DPと、下位桁から繰り上がりだけを渡す混合基数DPを区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-prefix-constrained-objects"
+  ],
+  "representativeProblemIds": [
+    "abc235-f",
+    "abc336-e",
+    "abc406-e"
+  ],
+  "aliases": [
+    "digit DP",
+    "tight DP",
+    "上限制約付き桁DP",
+    "桁DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

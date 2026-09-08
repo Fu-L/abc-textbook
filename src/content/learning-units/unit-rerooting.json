@@ -1,0 +1,106 @@
+{
+  "id": "unit-rerooting",
+  "kind": "subsection",
+  "title": "rerooting・全方位木DP",
+  "parentId": "unit-tree-aggregation",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-rooted-tree-aggregation"
+  ],
+  "excludedTopics": [
+    "rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a",
+    "source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223",
+    "source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781",
+    "source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e",
+    "source-abc311-editorial-6814-952ca8df25e1dc29d36a2d97bf5823cc8ec71cafd9a762902cea712a7640e19f",
+    "source-abc311-ex-problem-e370488f1342f8751a5f37a9f0b8ab00784f5baee29786d775a1e52907cd7dc1"
+  ],
+  "tagIds": [
+    "tag-rerooting"
+  ],
+  "ownedTagIds": [
+    "tag-rerooting"
+  ],
+  "learningOutcomeIds": [
+    "outcome-reroot-tree-aggregation"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-reroot-tree-aggregation"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/rerooting.md",
+  "problemIds": [
+    "abc220-f",
+    "abc223-g",
+    "abc311-ex",
+    "abc348-e",
+    "abc460-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-reroot-tree-aggregation",
+      "learningOutcomeIds": [
+        "outcome-reroot-tree-aggregation"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC220 F「Distance Sums 2」について、各始点から独立に距離和を求めると同じ木を何度も探索する。一つの根1についてなら、全頂点の深さの和がそのまま ans(1) になり、同じ DFS で各部分木サイズも得られる。",
+      "procedure": [
+        "観察: 各始点から独立に距離和を求めると同じ木を何度も探索する。一つの根1についてなら、全頂点の深さの和がそのまま ans(1) になり、同じ DFS で各部分木サイズも得られる。",
+        "観察: 根を親 p から子 c へ一辺移すと、c の部分木内の sub(c) 頂点への距離は1減り、それ以外の N-sub(c) 頂点への距離は1増える。",
+        "着眼: 辺 p-c をまたぐ reroot 差分は、近くなる sub(c) 個の -1 と遠くなる N-sub(c) 個の +1 の合計 N-2sub(c) である。",
+        "方針: 最初の DFS で ans(1) と部分木サイズを求め、二回目の DFS で ans(c)=ans(p)+N-2sub(c) を全辺へ伝播する rerooting を行う。（根を一辺移した差分が切断された二成分のサイズだけで決まり、各頂点の距離を再計算せず全回答を共有できる。）",
+        "接続: 頂点1を根に DFS し、depth の総和と sub[v] を計算する。ans[1] をその総和で初期化し、親から子へ進むたび ans[child]=ans[parent]+N-2sub[child] を代入して全頂点を出力する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-reroot-tree-aggregation",
+      "learningOutcomeIds": [
+        "outcome-reroot-tree-aggregation"
+      ],
+      "prerequisiteIds": [
+        "outcome-aggregate-rooted-tree",
+        "prereq-abc-advanced-v1",
+        "unit-rooted-tree-aggregation"
+      ],
+      "attainmentCondition": "学習成果「子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC223 G「Vertex Deletion」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 木の各頂点について、最大マッチングを保ったままその頂点を避けられるかをrerootingで判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 木の各頂点について、最大マッチングを保ったままその頂点を避けられるかをrerootingで判定できる。",
+          "転移題材の解法接続: 有向辺の反対側を処理したときの白黒状態を木DPで求め、親側と子側の寄与をrerootして、各頂点を根にしたとき白で終わる頂点を数える。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 3,
+  "representativeRank": 75,
+  "globalIndex": 147,
+  "orderReason": "根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。"
+}

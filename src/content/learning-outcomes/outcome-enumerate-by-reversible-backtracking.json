@@ -1,0 +1,11 @@
+{
+  "id": "outcome-enumerate-by-reversible-backtracking",
+  "statement": "再帰の前後で使用状態を対称に更新・復元し、現在pathだけの制約を保って探索木を漏れなく列挙できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc284-e",
+    "abc419-g",
+    "tag-backtracking-search",
+    "unit-backtracking-search"
+  ]
+}

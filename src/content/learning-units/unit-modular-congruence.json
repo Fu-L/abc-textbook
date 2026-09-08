@@ -1,0 +1,110 @@
+{
+  "id": "unit-modular-congruence",
+  "kind": "section",
+  "title": "一次合同・CRTで解の類を統合する",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-gcd-diophantine",
+    "unit-modular-arithmetic"
+  ],
+  "excludedTopics": [
+    "可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d",
+    "source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760",
+    "source-abc286-editorial-5588-84001bb2b92333c70401743584f2dd937e4435e68da73f58abd8dedc18635260",
+    "source-abc286-f-problem-cafbda3fb64fbcd274bf163b32a922c2c5d1798c0c2c6c4ec0f55dd8b60aaacb",
+    "source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a",
+    "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
+  ],
+  "tagIds": [
+    "tag-modular-congruence-crt"
+  ],
+  "ownedTagIds": [
+    "tag-modular-congruence-crt"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-modular-constraints"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-modular-constraints"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/modular-congruence.md",
+  "problemIds": [
+    "abc245-ex",
+    "abc286-f",
+    "abc371-g",
+    "abc423-g",
+    "abc460-e"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-solve-modular-constraints",
+      "learningOutcomeIds": [
+        "outcome-solve-modular-constraints"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC245 Ex「Product Modulo 2」について、M≤10^12 は全剰余を状態にできない一方、素因数分解は試し割りで扱える範囲であり、M を互いに素な素数冪へ分解できる。",
+      "procedure": [
+        "観察: M≤10^12 は全剰余を状態にできない一方、素因数分解は試し割りで扱える範囲であり、M を互いに素な素数冪へ分解できる。",
+        "観察: 法 p^q では、積が特定の剰余 N になる列数は N の単元部分そのものではなく、打ち切った p 進指数 min(v_p(N),q) だけで決まる。",
+        "着眼: 互いに素な各 p^q への剰余の組は法 M の剰余と一対一対応するため、各座標で積が N と一致する列数を独立に数えて積を取れる。",
+        "着眼: p^q ごとに t=min(v_p(n),q) で F(p,q,k,n) を分類すると値は q+1 種類だけで、要素を 1 個追加する操作は固定行列による線形変換になる。",
+        "方針: M を素数冪 p^q に分け、各法で p 進指数 q+1 状態の線形遷移を作る。K 回分を行列累乗し、各素数冪の答えを掛ける。（中国剰余定理で独立化し、K≤10^9 を小さな行列の二分累乗へ、M≤10^12 を高々対数個の指数状態へ縮約できる。）",
+        "接続: M を ∏p^q に分解する。各素数冪について、目標剰余を打ち切り p 進指数で分類した q+1 次元 vector と 1 要素追加の遷移行列を構成し、K 乗を二分累乗で適用する。N mod p^q の指数に対応する成分を取り、全因子分を 998244353 で掛ける。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "合同条件の可解性を判定し、逆元・一次合同・CRTで解の類を構成できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-solve-modular-constraints",
+      "learningOutcomeIds": [
+        "outcome-solve-modular-constraints"
+      ],
+      "prerequisiteIds": [
+        "outcome-characterize-integer-solvability",
+        "outcome-compute-in-modular-arithmetic",
+        "prereq-abc-advanced-v1",
+        "unit-gcd-diophantine",
+        "unit-modular-arithmetic"
+      ],
+      "attainmentCondition": "学習成果「合同条件の可解性を判定し、逆元・一次合同・CRTで解の類を構成できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC286 F「Guess The Number 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「合同条件の可解性を判定し、逆元・一次合同・CRTで解の類を構成できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 長さ108のpermutationへの1回の反復応答から、1≤N≤10^9を合同式の一意解として復元できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 長さ108のpermutationへの1回の反復応答から、1≤N≤10^9を合同式の一意解として復元できる。",
+          "転移題材の解法接続: 長さ[4,9,5,7,11,13,17,19,23]の各連続blockをcycleにしたAを出力してflushする。Bを受け取り、各block先頭の移動量からN mod cを復元する。得た9合同式を中国剰余定理で統合し、[0,1338557220)の解を出力して直ちに終了する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "合同条件の可解性を判定し、逆元・一次合同・CRTで解の類を構成できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 2,
+  "representativeRank": 1,
+  "globalIndex": 40,
+  "orderReason": "法上の演算とBézout等式を使えることを前提に、一次合同の可解性を判定して複数条件をCRTで統合する。"
+}

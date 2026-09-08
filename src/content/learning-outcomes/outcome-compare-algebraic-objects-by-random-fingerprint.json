@@ -1,0 +1,15 @@
+{
+  "id": "outcome-compare-algebraic-objects-by-random-fingerprint",
+  "statement": "multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-and-bound-randomized-algorithm"
+  ],
+  "scopeIds": [
+    "abc238-g",
+    "abc339-f",
+    "abc367-f",
+    "abc455-g",
+    "tag-randomized-algebraic-fingerprint",
+    "unit-randomized-algebraic-fingerprint"
+  ]
+}

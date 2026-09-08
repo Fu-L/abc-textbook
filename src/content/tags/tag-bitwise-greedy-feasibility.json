@@ -1,0 +1,42 @@
+{
+  "id": "tag-bitwise-greedy-feasibility",
+  "name": "bitwise greedyによるmask最適化",
+  "definition": "上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "bitmask objective",
+      "feasibility oracle"
+    ],
+    "triggerPatterns": [
+      "AND/OR/XOR値を最適化",
+      "上位bit優先"
+    ],
+    "invariantPatterns": [
+      "oracle monotonicity",
+      "prefix bits fixed"
+    ],
+    "goalPatterns": [
+      "最適mask"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-optimize-mask-by-bitwise-feasibility"
+  ],
+  "representativeProblemIds": [
+    "abc408-e"
+  ],
+  "aliases": [
+    "bitwise greedy",
+    "mask feasibility greedy",
+    "上位bit貪欲"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

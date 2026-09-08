@@ -1,0 +1,61 @@
+{
+  "id": "tag-graph-potential-propagation",
+  "name": "静的graph等式制約のpotential伝播",
+  "definition": "可逆な加法・XOR演算で x_v=x_u⊙w と書ける辺等式をDFS/BFSで伝播し、cycle整合性を検査して各連結成分の解をroot offset一つで表す。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-state-graph-search"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "root-relative potential",
+      "加法群またはXOR群",
+      "辺等式制約"
+    ],
+    "triggerPatterns": [
+      "x_v=x_u⊙w",
+      "全制約が静的",
+      "成分ごとの自由offset"
+    ],
+    "invariantPatterns": [
+      "component-wide offset",
+      "cycle consistency",
+      "path potential"
+    ],
+    "goalPatterns": [
+      "可解性判定",
+      "成分offsetの最適化",
+      "相対値復元"
+    ],
+    "excludedPatterns": [
+      "negative cycle",
+      "online union/query",
+      "不等式の上界"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-potential-dsu",
+      "type": "contrast",
+      "rationale": "固定graph上で等式を一括伝播する方法と、辺追加に追随して差分potentialを保つ方法を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-propagate-static-graph-potentials"
+  ],
+  "representativeProblemIds": [
+    "abc352-f",
+    "abc396-e"
+  ],
+  "aliases": [
+    "XOR potential graph",
+    "graph potential propagation",
+    "グラフpotential",
+    "静的差分等式制約"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,54 @@
+{
+  "id": "tag-sequence-subsequence-dp",
+  "name": "列・subsequence DP",
+  "definition": "列のprefixや最後に選んだ要素を状態にし、順序を保つ選択を組み立てる。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "prefix",
+      "列",
+      "部分列",
+      "順序"
+    ],
+    "triggerPatterns": [
+      "一致",
+      "左から",
+      "最後の要素",
+      "選ぶ"
+    ],
+    "invariantPatterns": [
+      "最長",
+      "末尾",
+      "順序を保"
+    ],
+    "goalPatterns": [
+      "個数",
+      "最適",
+      "長さ"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-design-order-preserving-dp"
+  ],
+  "representativeProblemIds": [
+    "abc240-ex",
+    "abc271-e",
+    "abc354-f"
+  ],
+  "aliases": [
+    "LIS",
+    "subsequence DP",
+    "最長増加部分列",
+    "部分列DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

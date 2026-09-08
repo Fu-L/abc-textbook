@@ -1,0 +1,58 @@
+{
+  "id": "tag-dp-transition-acceleration",
+  "name": "DP遷移の集約・高速化",
+  "definition": "同じ形の遷移をprefix、単調構造、剰余類などでまとめる。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "dp",
+      "状態数",
+      "遷移",
+      "遷移元"
+    ],
+    "triggerPatterns": [
+      "二重ループ",
+      "全遷移",
+      "遷移をまとめ"
+    ],
+    "invariantPatterns": [
+      "区間和",
+      "単調",
+      "同じ係数",
+      "最小値"
+    ],
+    "goalPatterns": [
+      "更新",
+      "計算量",
+      "高速化"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-convex-hull-trick",
+      "type": "often_combined",
+      "rationale": "DP遷移を直線の評価へ変形し、包絡線queryとして高速化する構成で併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-factor-and-accelerate-transitions"
+  ],
+  "representativeProblemIds": [
+    "abc212-e",
+    "abc221-h",
+    "abc353-g"
+  ],
+  "aliases": [
+    "DP optimization",
+    "DP高速化"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,16 @@
+{
+  "id": "outcome-maintain-potential-differences",
+  "statement": "差分辺を累積するグラフ探索、またはDSUの親辺にpotential差を持たせ、同一成分内の頂点間差と矛盾を判定できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-augment-components-with-metadata",
+    "outcome-maintain-connectivity-components",
+    "outcome-propagate-static-graph-potentials"
+  ],
+  "scopeIds": [
+    "abc280-f",
+    "abc328-f",
+    "abc466-g",
+    "tag-potential-dsu",
+    "unit-potential-dsu"
+  ]
+}

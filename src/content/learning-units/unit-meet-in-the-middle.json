@@ -1,0 +1,108 @@
+{
+  "id": "unit-meet-in-the-middle",
+  "kind": "subsection",
+  "title": "meet-in-the-middle・半分全列挙",
+  "parentId": "unit-divide-enumeration",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541",
+    "source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da",
+    "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
+    "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed",
+    "source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1",
+    "source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa"
+  ],
+  "tagIds": [
+    "tag-meet-in-the-middle"
+  ],
+  "ownedTagIds": [
+    "tag-meet-in-the-middle"
+  ],
+  "learningOutcomeIds": [
+    "outcome-split-enumeration-space"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-split-enumeration-space"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/meet-in-the-middle.md",
+  "problemIds": [
+    "abc220-h",
+    "abc252-ex",
+    "abc271-f",
+    "abc300-g",
+    "abc326-f",
+    "abc336-f",
+    "abc402-f",
+    "abc423-g",
+    "abc427-f",
+    "abc464-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-split-enumeration-space",
+      "learningOutcomeIds": [
+        "outcome-split-enumeration-space"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC220 H「Security Camera」について、求めるのは監視道路数そのものではなく偶奇だけだが、N=40 なので全 2^N 配置は列挙できない。頂点を S,T の半分に分けると、各側の部分集合は約 2^20 個まで下がる。",
+      "procedure": [
+        "観察: 求めるのは監視道路数そのものではなく偶奇だけだが、N=40 なので全 2^N 配置は列挙できない。頂点を S,T の半分に分けると、各側の部分集合は約 2^20 個まで下がる。",
+        "観察: 左側の camera 集合 s を固定すると、交差辺のうち左端が未選択のものだけが右側 t の選択に依存する。その偶奇は、各右頂点への該当辺数の parity mask z_s と t の bit 内積 parity で表せる。",
+        "着眼: g[t]=(-1)^{R[t]} として H[z]=Σ_t (-1)^{popcount(z&t)}g[t] を求めると、H[z] は parity(z&t) xor R[t] が0の個数と1の個数の差になる。",
+        "着眼: 右部分集合の総数を U=2^{|T|} とすれば、条件値0の個数は (U+H[z])/2、条件値1の個数は (U-H[z])/2 で復元できる。",
+        "方針: 半分全列挙で左集合ごとの固定 parity と交差 mask、右集合ごとの内部 parity を作り、右側配列へ Walsh-Hadamard 変換を施して全 mask の一致個数を得る。（左右の組合せを一つずつ試さず、parity(z&t) という Boolean 内積の全 query を変換一回でまとめられる。）",
+        "接続: 各 s について、S 内と選択済み S 端点が監視する辺の parity L1[s]、S\\s から各 T 頂点へ出る辺数 parity の mask L2[s] を作る。各 t の T 内 parity R[t] から符号配列を作って XOR-WHT し、L2[s] の変換値から L1[s] と打ち消し合う右集合数を加算する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-split-enumeration-space",
+      "learningOutcomeIds": [
+        "outcome-split-enumeration-space"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC252 Ex「K-th beautiful Necklace」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 各色から一枚ずつ選んだXOR値のうち、K番目に大きい値を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 各色から一枚ずつ選んだXOR値のうち、K番目に大きい値を求められる。",
+          "転移題材の解法接続: 色を選択数の積が均衡する二群へ分け、各群で一色一枚を選ぶ全XORを重複込みで列挙する。一方を二進trieへ入れ、上位ビットから1側を選んだ組数を数えてKを更新しながらK番目に大きいXORを確定する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "時間計算量 O(3^{N/6} log V)（公式解法全体。特殊な計算量解析を含む）を問題制約と照合し、対象技能が律速かを確認する。"
+        ],
+        "expectedResult": "探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 3,
+  "representativeRank": 67,
+  "globalIndex": 128,
+  "orderReason": "探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

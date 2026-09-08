@@ -18,6 +18,7 @@ import {
   PreMaterializationCorrectionImpactSchema,
   ProblemAnalysisClaimRefSchema,
   ProblemAnalysisRecordSchema,
+  ProblemPlacementDecisionTableSchema,
   ReviewEvidenceReferenceSchema,
   TaxonomyIntegrationMapSchema,
 } from '../domain/schema-parts/catalog.js';
@@ -91,6 +92,7 @@ export interface FinalTaxonomyBuildLayout {
   readonly previewReferenceRoot: string;
   readonly provisionalMetadataComponentPath: string;
   readonly provisionalIntegrationPath: string;
+  readonly placementDecisionTablePath: string;
   readonly workManifestPath: string;
   readonly reviewCheckResultsPath: string;
   readonly reviewEvidencePath: string;
@@ -106,6 +108,7 @@ export const defaultFinalTaxonomyBuildLayout = (
   previewReferenceRoot: 'docs/verification/previews/initial-v1/preview-join',
   provisionalMetadataComponentPath: FROZEN_PREVIEW_METADATA_COMPONENT_PATH,
   provisionalIntegrationPath: 'docs/verification/previews/initial-v1/taxonomy-integration.json',
+  placementDecisionTablePath: 'src/content/policies/problem-placement.json',
   workManifestPath: 'docs/work-manifests/initial/us2/final-taxonomy/manifest.json',
   reviewCheckResultsPath: FINAL_TAXONOMY_REVIEW_CHECK_RESULTS_PATH,
   reviewEvidencePath: 'docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json',
@@ -138,6 +141,7 @@ export interface LoadedFinalTaxonomySourceContext {
   readonly previewTransaction: Readonly<Record<string, unknown>>;
   readonly provisionalMetadataComponent: FrozenPreviewMetadataComponent;
   readonly provisionalEvidence: FrozenProvisionalTaxonomyEvidence;
+  readonly placementDecisionTable: z.infer<typeof ProblemPlacementDecisionTableSchema>;
   readonly records: readonly ProblemAnalysisRecord[];
   readonly knownSourceRevisionIds: readonly string[];
   readonly referencedSourceRevisionIds: readonly string[];
@@ -574,6 +578,7 @@ export const loadFinalTaxonomySourceContext = async (
     authoringValue,
     provisionalMetadataComponentValue,
     provisionalValue,
+    placementDecisionTableValue,
     workManifest,
     reviewCheckResults,
     reviewEvidence,
@@ -582,6 +587,7 @@ export const loadFinalTaxonomySourceContext = async (
     readRepositoryJson(layout.repositoryRoot, layout.authoringEvidencePath),
     readRepositoryJson(layout.repositoryRoot, layout.provisionalMetadataComponentPath),
     readRepositoryJson(layout.repositoryRoot, layout.provisionalIntegrationPath),
+    readRepositoryJson(layout.repositoryRoot, layout.placementDecisionTablePath),
     readRepositoryJson(layout.repositoryRoot, layout.workManifestPath),
     readOptionalRepositoryJson(layout.repositoryRoot, layout.reviewCheckResultsPath),
     readOptionalRepositoryJson(layout.repositoryRoot, layout.reviewEvidencePath),
@@ -638,6 +644,9 @@ export const loadFinalTaxonomySourceContext = async (
   const provisionalEvidence = parseFrozenProvisionalTaxonomyEvidence(
     provisionalValue,
     layout.provisionalIntegrationPath,
+  );
+  const placementDecisionTable = ProblemPlacementDecisionTableSchema.parse(
+    placementDecisionTableValue,
   );
   const parsedMetadataComponent = FrozenPreviewMetadataComponentSchema.safeParse(
     provisionalMetadataComponentValue,
@@ -705,6 +714,7 @@ export const loadFinalTaxonomySourceContext = async (
     previewTransaction,
     provisionalMetadataComponent: parsedMetadataComponent.data,
     provisionalEvidence,
+    placementDecisionTable,
     records,
     knownSourceRevisionIds,
     referencedSourceRevisionIds,
@@ -843,7 +853,9 @@ const normalizeFinalCandidate = (candidate: FinalTaxonomyCandidate): FinalTaxono
           excludedTopics: sortedUnique(candidate.entity.excludedTopics),
           sourceRevisionIds: sortedUnique(candidate.entity.sourceRevisionIds),
           tagIds: sortedUnique(candidate.entity.tagIds),
+          ownedTagIds: sortedUnique(candidate.entity.ownedTagIds),
           learningOutcomeIds: sortedUnique(candidate.entity.learningOutcomeIds),
+          ownedLearningOutcomeIds: sortedUnique(candidate.entity.ownedLearningOutcomeIds),
           problemIds: sortedUnique(candidate.entity.problemIds),
         },
       });
@@ -1296,6 +1308,11 @@ export const assembleFinalTaxonomyBuild = (
       transactionId: context.previewReference.transactionId,
       status: 'passed',
     },
+    placementDecisionTable: {
+      path: layout.placementDecisionTablePath,
+      version: context.placementDecisionTable.version,
+      digest: context.placementDecisionTable.digest,
+    },
     integrationMapPath: layout.provisionalIntegrationPath,
   };
   const policy: FinalTaxonomyBuild['policy'] = {
@@ -1531,31 +1548,81 @@ const representativeDecisionRefs = (
   maximum = 3,
 ): ProblemAnalysisClaimRef[] =>
   normalizeClaimRefs(
-    decisions.slice(0, maximum).flatMap((decision) => {
-      const targetReferences = targetEvidenceRefsForDecision(decision, targetId, kind);
-      const dispositionReference =
-        kind === 'tag'
-          ? decision.claimDispositions.find(({ tagIds }) => tagIds.includes(targetId))?.claimRef
-          : undefined;
-      const primaryOutcomeIndex = [
-        decision.primaryOutcomeId,
-        ...decision.additionalPrimaryOutcomeIds,
-      ].indexOf(targetId);
-      const preferredPath =
-        kind === 'outcome' && primaryOutcomeIndex >= 0
-          ? `/outcomeCandidates/${String(primaryOutcomeIndex)}`
-          : kind === 'tag' && dispositionReference === undefined
-            ? '/reasoningPath/algorithmConnection'
+    decisions
+      .map((decision, originalIndex) => {
+        const targetRank =
+          kind === 'outcome'
+            ? decision.primaryOutcomeId === targetId ||
+              decision.additionalPrimaryOutcomeIds.includes(targetId)
+              ? 0
+              : supportingOutcomeIdsForDecision(decision).includes(targetId)
+                ? 1
+                : 2
+            : kind === 'tag'
+              ? decision.primaryTagIds.includes(targetId)
+                ? 0
+                : decision.supportingTagIds.includes(targetId)
+                  ? 1
+                  : 2
+              : decision.presentationUnitId === targetId
+                ? 0
+                : decision.learningUnitCandidateIds.includes(targetId)
+                  ? 1
+                  : 2;
+        return { decision, originalIndex, targetRank };
+      })
+      .sort(
+        (left, right) =>
+          left.targetRank - right.targetRank || left.originalIndex - right.originalIndex,
+      )
+      .slice(0, maximum)
+      .flatMap(({ decision }) => {
+        const targetReferences = targetEvidenceRefsForDecision(decision, targetId, kind);
+        const dispositionReference =
+          kind === 'tag'
+            ? decision.claimDispositions.find(({ tagIds }) => tagIds.includes(targetId))?.claimRef
             : undefined;
-      const reference = dispositionReference
-        ? policyClaimReference(dispositionReference)
-        : (targetReferences.find(({ claimPath }) => claimPath === preferredPath) ??
-          (kind === 'outcome'
-            ? targetReferences.find(({ claimPath }) => claimPath === '/outcomeCandidates/0')
-            : undefined) ??
-          targetReferences[0]);
-      return reference === undefined ? [] : [reference];
-    }),
+        const primaryOutcomeIndex = [
+          decision.primaryOutcomeId,
+          ...decision.additionalPrimaryOutcomeIds,
+        ].indexOf(targetId);
+        const preferredPath =
+          kind === 'outcome' && primaryOutcomeIndex >= 0
+            ? `/outcomeCandidates/${String(primaryOutcomeIndex)}`
+            : kind === 'tag' && dispositionReference === undefined
+              ? '/reasoningPath/algorithmConnection'
+              : undefined;
+        const evidencePathRank = (claimPath: string): number =>
+          claimPath.startsWith('/outcomeCandidates/')
+            ? 0
+            : claimPath.startsWith('/reasoningPath/keyInsights/') ||
+                claimPath === '/reasoningPath/algorithmConnection'
+              ? 1
+              : claimPath.startsWith('/implementationConcerns/')
+                ? 2
+                : claimPath.startsWith('/typicalTechniques/')
+                  ? 3
+                  : claimPath.startsWith('/reasoningPath/candidateApproaches/')
+                    ? 4
+                    : claimPath.startsWith('/reasoningPath/observations/')
+                      ? 5
+                      : claimPath.startsWith('/prerequisiteCandidates/')
+                        ? 6
+                        : 7;
+        const strongestTargetReference = [...targetReferences].sort(
+          (left, right) =>
+            evidencePathRank(left.claimPath) - evidencePathRank(right.claimPath) ||
+            compareCodeUnits(left.claimPath, right.claimPath),
+        )[0];
+        const reference = dispositionReference
+          ? policyClaimReference(dispositionReference)
+          : (targetReferences.find(({ claimPath }) => claimPath === preferredPath) ??
+            (kind === 'outcome'
+              ? targetReferences.find(({ claimPath }) => claimPath === '/outcomeCandidates/0')
+              : undefined) ??
+            strongestTargetReference);
+        return reference === undefined ? [] : [reference];
+      }),
   );
 
 const sourcesForRefs = (references: readonly ProblemAnalysisClaimRef[]): string[] =>
@@ -1850,7 +1917,9 @@ const finalCandidatesFromPolicy = (
         excludedTopics: unit.excludedTopics,
         sourceRevisionIds: sourcesForRefs(evidenceRefs),
         tagIds: unit.tagIds,
+        ownedTagIds: unit.ownedTagIds,
         learningOutcomeIds: unit.learningOutcomeIds,
+        ownedLearningOutcomeIds: unit.ownedLearningOutcomeIds,
         problemIds: unit.problemIds,
         stageRank: unit.stageRank,
         difficultyRank: unit.difficultyRank,
@@ -1897,8 +1966,6 @@ const placementsFromPolicy = (
       additionalElement: null,
       rationale: [
         `決定種別=${decision.decisionKind}`,
-        `著者判断状態=${decision.acceptanceStatus}`,
-        `曖昧性=${decision.ambiguityStatus}`,
         `選択理由: ${decision.selectionRationale}`,
         ...decision.supportingTagDecisions.map(
           ({ tagId, outcomeIds, selectionRationale }) =>
@@ -2136,17 +2203,17 @@ const semanticImpactsFromEntries = (
   ): string => {
     switch (surface) {
       case 'body':
-        return `T050以降の本文で${previewEntityId}の仮名称を最終Tag・Outcome・Unitへ置換し、Problem固有の導出は保持する。`;
+        return `T066–T071で作成しT075で結合するProblem本文では、${previewEntityId}の仮名称を最終Tag・Outcome・Unitへ置換し、Problem固有の導出は保持する。`;
       case 'example':
-        return `T050の例で最終Outcomeの到達能力を観察できるか確認し、仮分類だけを前提にした説明を残さない。`;
+        return `T066–T071のProblem例で最終Outcomeの到達能力を観察できるか確認し、T072・T074–T075で仮分類だけを前提にした説明を残していないことを検証する。`;
       case 'exercise':
-        return `T050の演習対応を最終Learning Unitへ接続し、対象Problemの分類変更を課題設計へ反映する。`;
+        return `T066–T071のProblem演習を最終Learning Unitへ接続し、対象Problemの分類変更を課題設計へ反映してT075で被覆を検証する。`;
       case 'answer':
-        return `T050の解答検証で最終Outcomeとad-hoc要素の双方が失われていないことを確認する。`;
+        return `T066–T071で作成するProblem解答について、最終Outcomeとad-hoc要素の双方が失われていないことをT074–T075・T078で確認する。`;
       case 'placement':
         return `T049で${previewEntityId}からの最終配置を確定し、primary/supporting分類とfull判定をmaterializeする。`;
       case 'derived_index':
-        return `T049でProblem索引の仮entity参照を最終IDへ更新し、placement digestとの一致を検証する。`;
+        return `T160でProblem索引の仮entity参照を最終IDへ更新し、T049のplacement digestとの一致を検証する。`;
     }
   };
   const unitSurfaceRationale = (
@@ -2165,7 +2232,7 @@ const semanticImpactsFromEntries = (
       case 'standard_order':
         return `T048で追加前提DAGと親子順制約を別々に適用し、このUnitの標準順位置を再計算する。`;
       case 'derived_index':
-        return `T049でUnit索引を最終ID・Problem集合・Outcome集合から再生成し、仮entityを正本入力にしない。`;
+        return `T160でUnit索引を最終ID・Problem集合・Outcome集合から再生成し、仮entityを正本入力にしない。`;
     }
   };
   const unitById = new Map(
@@ -2234,8 +2301,8 @@ const semanticImpactsFromEntries = (
         surface: 'index' as const,
         disposition: 'materialize_change' as const,
         rationale:
-          `T049で${entry.previewEntityId}のredirect/split/retire判断を派生taxonomy索引へ反映し、` +
-          '全868 Problemのplacement closureと照合する。',
+          `T160で${entry.previewEntityId}のredirect/split/retire判断を派生taxonomy索引へ反映し、` +
+          'T049で固定した全868 Problemのplacement closureと照合する。',
         evidenceRefs,
       })),
     ];
@@ -2491,6 +2558,16 @@ export const validateFinalTaxonomyBuildAgainstContext = (
     add('FINAL_TAXONOMY_PREVIEW_BINDING_MISMATCH', 'The passed T154 snapshot binding is stale.');
   }
   if (
+    build.inputs.placementDecisionTable.path !== context.layout.placementDecisionTablePath ||
+    build.inputs.placementDecisionTable.version !== context.placementDecisionTable.version ||
+    build.inputs.placementDecisionTable.digest !== context.placementDecisionTable.digest
+  ) {
+    add(
+      'FINAL_TAXONOMY_PLACEMENT_POLICY_BINDING_MISMATCH',
+      'The accepted placement decision table binding is stale.',
+    );
+  }
+  if (
     canonicalJson(build.integrationMap.provisionalEvidence) !==
       canonicalJson(context.provisionalEvidence) ||
     build.integrationMap.inventoryDigest !== context.inventoryEvidence.inventoryDigest ||
@@ -2566,14 +2643,24 @@ export const validateFinalTaxonomyBuildAgainstContext = (
     build.placements.map((placement) => [placement.problemId, placement]),
   );
   const standardOrderIndex = new Map(build.standardOrder.map((unitId, index) => [unitId, index]));
-  const learningUnitCandidateIds = new Set(
-    build.finalCandidates.flatMap((candidate) =>
-      candidate.kind === 'unit' ? [candidate.entity.id] : [],
-    ),
+  const ownershipUnitCandidates = build.finalCandidates.filter(
+    (candidate): candidate is Extract<FinalTaxonomyCandidate, { kind: 'unit' }> =>
+      candidate.kind === 'unit',
   );
-  const placementOutcomeById = new Map(
+  const ownerUnitIdsByOutcomeId = new Map(
     build.finalCandidates.flatMap((candidate) =>
-      candidate.kind === 'outcome' ? [[candidate.entity.id, candidate] as const] : [],
+      candidate.kind === 'outcome'
+        ? [
+            [
+              candidate.entity.id,
+              ownershipUnitCandidates
+                .filter(({ entity }) =>
+                  entity.ownedLearningOutcomeIds.includes(candidate.entity.id),
+                )
+                .map(({ entity }) => entity.id),
+            ] as const,
+          ]
+        : [],
     ),
   );
   for (const placement of build.placements) {
@@ -2617,10 +2704,18 @@ export const validateFinalTaxonomyBuildAgainstContext = (
     const dispositionPaths = sortedUnique(
       placement.claimDispositions.map(({ claimRef }) => claimRef.claimPath),
     );
-    if (!sameOrderedValues(expectedDispositionPaths, dispositionPaths)) {
+    const missingDispositionPaths = expectedDispositionPaths.filter(
+      (claimPath) => !dispositionPaths.includes(claimPath),
+    );
+    const invalidExtraDispositionPaths = dispositionPaths.filter(
+      (claimPath) =>
+        !expectedDispositionPaths.includes(claimPath) &&
+        !/^\/implementationConcerns\/(0|[1-9]\d*)$/u.test(claimPath),
+    );
+    if (missingDispositionPaths.length > 0 || invalidExtraDispositionPaths.length > 0) {
       add(
         'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_INCOMPLETE',
-        'Every typical Technique and prerequisite claim requires an explicit disposition.',
+        'Every typical Technique and prerequisite claim requires an explicit disposition; only explicit implementation-concern dispositions may be added.',
         placement.problemId,
       );
     }
@@ -2705,12 +2800,23 @@ export const validateFinalTaxonomyBuildAgainstContext = (
     }
     const primaryLearningUnitIds = sortedUnique(
       [placement.primaryOutcomeId, ...placement.additionalPrimaryOutcomeIds].flatMap(
-        (outcomeId) =>
-          placementOutcomeById
-            .get(outcomeId)
-            ?.entity.scopeIds.filter((scopeId) => learningUnitCandidateIds.has(scopeId)) ?? [],
+        (outcomeId) => ownerUnitIdsByOutcomeId.get(outcomeId) ?? [],
       ),
     );
+    const assignedOutcomeOwnerUnitIds = sortedUnique(
+      [
+        placement.primaryOutcomeId,
+        ...placement.additionalPrimaryOutcomeIds,
+        ...placement.supportingOutcomeIds,
+      ].flatMap((outcomeId) => ownerUnitIdsByOutcomeId.get(outcomeId) ?? []),
+    );
+    if (!sameOrderedValues(assignedOutcomeOwnerUnitIds, sortedUnique(placement.learningUnitIds))) {
+      add(
+        'PLACEMENT_OUTCOME_UNIT_OWNERSHIP_MISMATCH',
+        'Placement learning Units must exactly equal the direct owners of its assigned Outcomes.',
+        placement.problemId,
+      );
+    }
     const expectedPresentationUnitId = [...primaryLearningUnitIds]
       .sort(
         (left, right) =>
@@ -2758,6 +2864,100 @@ export const validateFinalTaxonomyBuildAgainstContext = (
   const tagById = new Map(tagCandidates.map(({ entity }) => [entity.id, entity]));
   const outcomeById = new Map(outcomeCandidates.map(({ entity }) => [entity.id, entity]));
   const unitById = new Map(unitCandidates.map(({ entity }) => [entity.id, entity]));
+  const directTagOwnerUnitIds = (tagId: string): string[] =>
+    unitCandidates
+      .filter(({ entity }) => entity.ownedTagIds.includes(tagId))
+      .map(({ entity }) => entity.id);
+  const directOutcomeOwnerUnitIds = (outcomeId: string): string[] =>
+    unitCandidates
+      .filter(({ entity }) => entity.ownedLearningOutcomeIds.includes(outcomeId))
+      .map(({ entity }) => entity.id);
+  for (const { entity: tag } of tagCandidates) {
+    const ownerUnitIds = directTagOwnerUnitIds(tag.id);
+    if (ownerUnitIds.length !== 1) {
+      add(
+        'TAG_DIRECT_UNIT_OWNER_INVALID',
+        `Every Tag requires exactly one direct Unit owner; found [${ownerUnitIds.join(',')}].`,
+        tag.id,
+      );
+    }
+  }
+  for (const { entity: outcome } of outcomeCandidates) {
+    const ownerUnitIds = directOutcomeOwnerUnitIds(outcome.id);
+    const scopedUnitIds = outcome.scopeIds.filter((scopeId) => unitById.has(scopeId));
+    const scopedTagOwnerUnitIds = outcome.scopeIds
+      .filter((scopeId) => tagById.has(scopeId))
+      .flatMap(directTagOwnerUnitIds);
+    if (ownerUnitIds.length !== 1) {
+      add(
+        'OUTCOME_DIRECT_UNIT_OWNER_INVALID',
+        `Every Outcome requires exactly one direct Unit owner; found [${ownerUnitIds.join(',')}].`,
+        outcome.id,
+      );
+    }
+    if (
+      !sameOrderedValues(sortedUnique(scopedUnitIds), sortedUnique(ownerUnitIds)) ||
+      !sameOrderedValues(sortedUnique(scopedTagOwnerUnitIds), sortedUnique(ownerUnitIds))
+    ) {
+      add(
+        'OUTCOME_UNIT_SCOPE_MISMATCH',
+        'Outcome Unit scope and the direct owners of its scoped Tags must equal its direct Unit owner.',
+        outcome.id,
+      );
+    }
+  }
+  for (const { entity: unit } of unitCandidates) {
+    const children = unitCandidates.filter(({ entity }) => entity.parentId === unit.id);
+    const expectedTagIds = sortedUnique([
+      ...unit.ownedTagIds,
+      ...children.flatMap(({ entity }) => entity.tagIds),
+    ]);
+    const expectedOutcomeIds = sortedUnique([
+      ...unit.ownedLearningOutcomeIds,
+      ...children.flatMap(({ entity }) => entity.learningOutcomeIds),
+    ]);
+    if (unit.ownedTagIds.some((tagId) => !unit.tagIds.includes(tagId))) {
+      add(
+        'UNIT_OWNED_TAG_NOT_NAVIGABLE',
+        'Every directly owned Tag must appear in Unit navigation coverage.',
+        unit.id,
+      );
+    }
+    if (
+      unit.ownedLearningOutcomeIds.some((outcomeId) => !unit.learningOutcomeIds.includes(outcomeId))
+    ) {
+      add(
+        'UNIT_OWNED_OUTCOME_NOT_NAVIGABLE',
+        'Every directly owned Outcome must appear in Unit navigation coverage.',
+        unit.id,
+      );
+    }
+    if (!sameOrderedValues(sortedUnique(unit.tagIds), expectedTagIds)) {
+      add(
+        'UNIT_TAG_NAVIGATION_ROLLUP_INVALID',
+        'Unit Tag navigation must equal directly owned Tags plus direct-child navigation closure.',
+        unit.id,
+      );
+    }
+    if (!sameOrderedValues(sortedUnique(unit.learningOutcomeIds), expectedOutcomeIds)) {
+      add(
+        'UNIT_OUTCOME_NAVIGATION_ROLLUP_INVALID',
+        'Unit Outcome navigation must equal directly owned Outcomes plus direct-child navigation closure.',
+        unit.id,
+      );
+    }
+    if (
+      unit.ownedTagIds.length === 0 &&
+      unit.ownedLearningOutcomeIds.length === 0 &&
+      children.length === 0
+    ) {
+      add(
+        'OWNERLESS_LEAF_UNIT',
+        'A Unit without direct Tag or Outcome ownership must contain at least one child Unit.',
+        unit.id,
+      );
+    }
+  }
   const tagHasAncestor = (tagId: string, ancestorId: string): boolean => {
     const visited = new Set<string>();
     let currentId: string | null = tagId;

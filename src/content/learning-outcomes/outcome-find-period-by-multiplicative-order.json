@@ -1,0 +1,14 @@
+{
+  "id": "outcome-find-period-by-multiplicative-order",
+  "statement": "合同式で表された反復の最小周期を乗法的位数に帰着し、約数から求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-compute-in-modular-arithmetic",
+    "outcome-decompose-by-prime-or-divisor"
+  ],
+  "scopeIds": [
+    "abc222-g",
+    "abc335-g",
+    "tag-multiplicative-order",
+    "unit-multiplicative-order-periods"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "id": "tag-binary-trie",
+  "name": "binary Trieによるbit列索引",
+  "definition": "整数を上位bitから分岐するTrieへ格納し、XOR・大小・距離条件に合う候補をbitごとに選ぶ。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "bit列",
+      "xor",
+      "上位bit",
+      "整数集合"
+    ],
+    "triggerPatterns": [
+      "bitごとに分岐",
+      "xorを最大",
+      "xorを最小",
+      "二進Trie"
+    ],
+    "invariantPatterns": [
+      "0と1の子",
+      "共通上位bit",
+      "部分木の要素数"
+    ],
+    "goalPatterns": [
+      "k番目",
+      "最大xor",
+      "最小xor",
+      "条件を満たす整数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-query-bitwise-order-with-trie"
+  ],
+  "representativeProblemIds": [
+    "abc254-ex",
+    "abc425-g"
+  ],
+  "aliases": [
+    "01-Trie",
+    "XOR Trie",
+    "bitwise trie"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

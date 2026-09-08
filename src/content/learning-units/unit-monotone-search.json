@@ -1,0 +1,135 @@
+{
+  "id": "unit-monotone-search",
+  "kind": "section",
+  "title": "単調境界を証明して探索する",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256",
+    "source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537",
+    "source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812",
+    "source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd",
+    "source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f",
+    "source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708"
+  ],
+  "tagIds": [
+    "tag-monotone-threshold-search"
+  ],
+  "ownedTagIds": [
+    "tag-monotone-threshold-search"
+  ],
+  "learningOutcomeIds": [
+    "outcome-prove-and-search-threshold"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-prove-and-search-threshold"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/monotone-search.md",
+  "problemIds": [
+    "abc215-f",
+    "abc216-e",
+    "abc229-g",
+    "abc236-e",
+    "abc246-g",
+    "abc263-ex",
+    "abc267-e",
+    "abc269-e",
+    "abc270-e",
+    "abc292-f",
+    "abc293-ex",
+    "abc294-f",
+    "abc295-f",
+    "abc300-f",
+    "abc303-f",
+    "abc304-g",
+    "abc320-g",
+    "abc324-f",
+    "abc330-f",
+    "abc346-f",
+    "abc370-f",
+    "abc373-e",
+    "abc374-e",
+    "abc381-e",
+    "abc388-e",
+    "abc388-g",
+    "abc389-e",
+    "abc394-g",
+    "abc395-f",
+    "abc397-g",
+    "abc401-g",
+    "abc402-f",
+    "abc424-e",
+    "abc427-g",
+    "abc428-f",
+    "abc444-f",
+    "abc458-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-prove-and-search-threshold",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC215 F「Dist Max 2」について、二点間距離 min(|x_i−x_j|,|y_i−y_j|) が K 以上であることは、x 差と y 差がともに K 以上であることと同値である。",
+      "procedure": [
+        "観察: 二点間距離 min(|x_i−x_j|,|y_i−y_j|) が K 以上であることは、x 差と y 差がともに K 以上であることと同値である。",
+        "観察: 点を x 座標順に並べると、現在点より x が K 以上小さい過去点だけを候補にし、その y の最小値と最大値で y 差 K 以上の存在を判定できる。",
+        "着眼: min が K 以上という条件は二つの絶対差への AND に分解され、片方をソート順と尺取りで処理できる。",
+        "着眼: 候補点の y 座標を全て検索する必要はなく、現在の y から最も離れ得る最小値と最大値だけで存在判定できる。",
+        "方針: 答え K を二分探索し、x 順の尺取りで条件を満たす過去点の y 最小値・最大値を保って実現可能性を判定する。（K が実現できればそれ以下も実現できる単調性があり、一回の判定はソート済み点列の一走査で済む。）",
+        "接続: 最大化する距離を閾値判定へ変え、x 座標で解禁される過去点集合を二ポインタで管理し、その y の両極値を使う単調判定を二分探索へ組み込む。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-prove-and-search-threshold",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「判定の単調性を証明し、二分探索の成功側・失敗側を設定できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC229 G「Longest Y」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「判定の単調性を証明し、二分探索の成功側・失敗側を設定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 隣接交換による同文字の連続化を順位補正・中央値・二分探索の組合せで評価できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 隣接交換による同文字の連続化を順位補正・中央値・二分探索の組合せで評価できる。",
+          "転移題材の解法接続: Y の位置列を順位補正して単調列 B を作り、長さ m の各窓について中央値までの L1 距離を prefix sum で求める可否判定を答えの二分探索に使う。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 1,
+  "difficultyRank": 0,
+  "representativeRank": 0,
+  "globalIndex": 11,
+  "orderReason": "判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。"
+}

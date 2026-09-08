@@ -1,0 +1,50 @@
+{
+  "id": "tag-dynamic-segment-tree",
+  "name": "動的・implicit Segment Tree",
+  "definition": "巨大または疎な座標域で訪れたnodeだけを生成し、区間要約と境界探索をO(log U)で保つ。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [
+    "tag-range-monoid-aggregation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "allocated nodes",
+      "large coordinate domain",
+      "range summary"
+    ],
+    "triggerPatterns": [
+      "onlineで座標出現",
+      "座標域が巨大"
+    ],
+    "invariantPatterns": [
+      "未生成nodeは単位要約"
+    ],
+    "goalPatterns": [
+      "疎な更新/query"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-range-monoid-aggregation",
+      "type": "extension",
+      "rationale": "区間monoid集約へ必要な節点だけを生成する疎な表現を加え、巨大またはonlineで現れる添字域まで扱う。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-sparse-domain-segment-tree"
+  ],
+  "representativeProblemIds": [
+    "abc403-g"
+  ],
+  "aliases": [
+    "implicit segment tree",
+    "sparse segment tree",
+    "動的セグメント木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

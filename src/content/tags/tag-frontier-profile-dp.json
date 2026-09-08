@@ -1,0 +1,48 @@
+{
+  "id": "tag-frontier-profile-dp",
+  "name": "frontier/profile DP・境界状態圧縮",
+  "definition": "走査済み領域と未走査領域の境界だけに未来へ影響する色・接続partitionを正規化して保持し、幅指数で遷移する。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "connectivity partition",
+      "grid sweep frontier",
+      "profile mask"
+    ],
+    "triggerPatterns": [
+      "一辺だけ小さい盤面",
+      "局所制約と全体連結性"
+    ],
+    "invariantPatterns": [
+      "closed component condition",
+      "future interface only"
+    ],
+    "goalPatterns": [
+      "幅指数DP",
+      "盤面数え上げ"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-design-frontier-profile-dp"
+  ],
+  "representativeProblemIds": [
+    "abc248-f",
+    "abc296-ex",
+    "abc379-g"
+  ],
+  "aliases": [
+    "frontier DP",
+    "plug DP",
+    "profile DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

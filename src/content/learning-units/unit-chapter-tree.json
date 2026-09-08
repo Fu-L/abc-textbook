@@ -1,0 +1,273 @@
+{
+  "id": "unit-chapter-tree",
+  "kind": "chapter",
+  "title": "木構造",
+  "parentId": null,
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [],
+  "sourceRevisionIds": [
+    "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
+    "source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7",
+    "source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a",
+    "source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223",
+    "source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072",
+    "source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea"
+  ],
+  "tagIds": [
+    "tag-additive-tree-metric-reconstruction",
+    "tag-dsu-merge-tree",
+    "tag-heavy-light-decomposition",
+    "tag-heavy-path-tree-dp",
+    "tag-implicit-binary-tree-arithmetic",
+    "tag-laminar-interval-containment-tree",
+    "tag-rerooting",
+    "tag-rooted-tree-aggregation",
+    "tag-static-top-tree",
+    "tag-tree-ancestor-lca",
+    "tag-tree-balanced-separator",
+    "tag-tree-euler-flattening",
+    "tag-tree-metric-diameter",
+    "tag-tree-model-structure",
+    "tag-tree-precedence-contraction",
+    "tag-virtual-tree"
+  ],
+  "ownedTagIds": [
+    "tag-tree-model-structure"
+  ],
+  "learningOutcomeIds": [
+    "outcome-accelerate-tree-dp-by-heavy-path",
+    "outcome-aggregate-rooted-tree",
+    "outcome-answer-tree-ancestor-queries",
+    "outcome-apply-heavy-light-decomposition",
+    "outcome-build-balanced-separator-decomposition",
+    "outcome-build-component-merge-tree",
+    "outcome-build-laminar-interval-containment-tree",
+    "outcome-build-virtual-tree",
+    "outcome-compose-dynamic-tree-clusters",
+    "outcome-count-implicit-binary-tree-layers",
+    "outcome-flatten-tree-by-euler-order",
+    "outcome-model-and-exploit-tree",
+    "outcome-optimize-tree-order-by-cluster-contraction",
+    "outcome-reconstruct-tree-from-distance-matrix",
+    "outcome-reroot-tree-aggregation",
+    "outcome-use-tree-diameter-extrema"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-model-and-exploit-tree"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/index.md",
+  "problemIds": [
+    "abc220-e",
+    "abc220-f",
+    "abc221-f",
+    "abc222-f",
+    "abc223-g",
+    "abc235-ex",
+    "abc239-e",
+    "abc240-e",
+    "abc246-g",
+    "abc248-g",
+    "abc259-f",
+    "abc263-f",
+    "abc264-ex",
+    "abc267-f",
+    "abc269-ex",
+    "abc275-ex",
+    "abc287-f",
+    "abc291-ex",
+    "abc293-ex",
+    "abc294-g",
+    "abc298-ex",
+    "abc303-e",
+    "abc309-e",
+    "abc311-ex",
+    "abc312-g",
+    "abc314-f",
+    "abc321-e",
+    "abc329-g",
+    "abc337-g",
+    "abc340-g",
+    "abc348-e",
+    "abc351-g",
+    "abc359-g",
+    "abc361-e",
+    "abc369-g",
+    "abc376-g",
+    "abc378-f",
+    "abc387-f",
+    "abc391-e",
+    "abc394-f",
+    "abc397-e",
+    "abc401-f",
+    "abc405-f",
+    "abc406-f",
+    "abc409-e",
+    "abc416-f",
+    "abc424-e",
+    "abc428-e",
+    "abc435-f",
+    "abc438-f",
+    "abc447-f",
+    "abc451-e",
+    "abc453-f",
+    "abc459-e",
+    "abc460-f",
+    "abc460-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-model-and-exploit-tree",
+      "learningOutcomeIds": [
+        "outcome-model-and-exploit-tree"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC220 E「Distance on Large Perfect Binary Tree」について、頂点数は 2^N-1 なので頂点を生成できないが、同じ深さの頂点は残りの部分木高さも子孫数も全て等しい。深さ d の頂点数自体も 2^d と式で扱える。",
+      "procedure": [
+        "観察: 頂点数は 2^N-1 なので頂点を生成できないが、同じ深さの頂点は残りの部分木高さも子孫数も全て等しい。深さ d の頂点数自体も 2^d と式で扱える。",
+        "観察: 順序付き対 (i,j) を LCA v で一意に分類し、v から両端までの距離を k と D-k に分けると、両端が部分木の高さ内に収まるかと、最初の辺が左右別になるかだけで個数が決まる。",
+        "着眼: 残り高さ H=N-1-d に対し、0<k<D の有効範囲は max(1,D-H)≤k≤min(D-1,H) という一つの整数区間になる。",
+        "着眼: 有効な内部 split 一つにつき、左右の向きを含む順序付き対は 2^{D-1} 個であり、片端が LCA の場合は k=0,D を別々に数える。",
+        "方針: 二端点のpathが最初に合流する頂点の深さごとに、片端が合流点の場合と両端が左右の子部分木にある場合を式で数え、同深さの頂点数を掛ける。（完全二分木の対称性により個々の頂点を消し、さらに有効な距離分割 k が連続区間になるため、その個数も端点だけで求められる。）",
+        "接続: 2 の冪を法 998244353 で前計算する。各深さ d で H=N-1-d とし、D≤H なら片端が LCA の 2×2^D を加え、内部 split 区間の長さに 2^{D-1} を掛けて加える。その一頂点分へ 2^d を掛け、全深さを合計する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "木固有の根・部分木・path・separator構造へ問題を写し、利用する性質を選ぶ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    },
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-accelerate-tree-dp-by-heavy-path",
+        "outcome-aggregate-rooted-tree",
+        "outcome-answer-tree-ancestor-queries",
+        "outcome-apply-heavy-light-decomposition",
+        "outcome-build-balanced-separator-decomposition",
+        "outcome-build-component-merge-tree",
+        "outcome-build-laminar-interval-containment-tree",
+        "outcome-build-virtual-tree",
+        "outcome-compose-dynamic-tree-clusters",
+        "outcome-count-implicit-binary-tree-layers",
+        "outcome-flatten-tree-by-euler-order",
+        "outcome-optimize-tree-order-by-cluster-contraction",
+        "outcome-reconstruct-tree-from-distance-matrix",
+        "outcome-reroot-tree-aggregation",
+        "outcome-use-tree-diameter-extrema"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（学習経路の比較）",
+      "omissions": [
+        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
+      ],
+      "environment": "紙上での未知問のモデル化と候補比較",
+      "input": "木構造の範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
+      "procedure": [
+        "木距離を基準点・直径・中心から捉える: 1個の直接所有Outcome、学ぶ理由「木を探索して基準点からの距離を求められることを前提に、一意経路から得る距離labelと、直径端点・中心が距離構造を代表する性質を学ぶ」、対象外「根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解」を照合する。",
+        "対称性・深さ・label区間で巨大な完全二分木を数える: 1個の直接所有Outcome、学ぶ理由「指数個の頂点を持つ完全二分木を展開せず、深さごとの対称性と2冪で集約するか、heap番号の祖先移動と深さ別子孫label区間で数える」、対象外「子を明示した一般木の木DP・rerooting、およびLCA・Euler順・HLD・virtual treeを実装するpath query。完全二分木でも個々の頂点を列挙する処理」を照合する。",
+        "木DP・集約・rerooting: 3個の下位Outcomeへの索引、学ぶ理由「探索で親子関係を作りDP状態を定義できた後、子側の集約と親側への差し替えで木全体の値を求める」、対象外「heap番号で暗黙に表された完全二分木の区間算術、木上パスの連続区間分解、重心による再帰分解、および更新のためのTop Tree cluster化」を照合する。",
+        "包含木の構築とancestor・path分解: 5個の下位Outcomeへの索引、学ぶ理由「基本的な木DFSを土台に、laminar区間をstackで包含木へ変換し、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する」、対象外「LCAという概念で対象を一意分類するだけで、ancestor query・Euler区間化・HLD・virtual treeを実装利用しない数え上げ、および重心による再帰分解」を照合する。",
+        "重心を分離点として木を再帰分解する: 1個の直接所有Outcome、学ぶ理由「部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える」、対象外「LCA・HLDによる固定木上パスの区間分解」を照合する。",
+        "加法的tree metric復元: 1個の直接所有Outcome、学ぶ理由「木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ」、対象外「加法的tree metric復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "DSU merge tree・Kruskal reconstruction tree: 1個の直接所有Outcome、学ぶ理由「DSUによる連結成分管理・縮約で得た考え方と実装を再利用し、DSU merge tree・Kruskal reconstruction treeの発動条件・正当化・境界を重複なく学ぶ」、対象外「DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "01 on Tree・親先行順序のcluster縮約: 1個の直接所有Outcome、学ぶ理由「DSUによる連結成分管理・縮約・貪欲法と交換論で得た考え方と実装を再利用し、01 on Tree・親先行順序のcluster縮約の発動条件・正当化・境界を重複なく学ぶ」、対象外「01 on Tree・親先行順序のcluster縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "rake・compressで動的木DPを保つ: 1個の直接所有Outcome、学ぶ理由「木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する」、対象外「更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition」を照合する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-model-and-exploit-tree",
+      "learningOutcomeIds": [
+        "outcome-model-and-exploit-tree"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「木固有の根・部分木・path・separator構造へ問題を写し、利用する性質を選ぶ。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC220 F「Distance Sums 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「木固有の根・部分木・path・separator構造へ問題を写し、利用する性質を選ぶ。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 一つの根の距離和と部分木サイズから、辺をまたぐ差分式を作って全頂点の距離和へ reroot できる。／根付き木、部分木サイズ、DFS、rerooting／距離和全体の reroot に必要なのは各距離値ではなく、移動した辺の子側に何頂点あるかだけである。 再利用の観点: 全始点への集約量では、始点を隣へ動かしたとき各対象の寄与が何種類の差分に分かれるかを調べる。／頂点1を根に DFS し、depth の総和と sub[v] を計算する。ans[1] をその総和で初期化し、親から子へ進むたび ans[child]=ans[parent]+N-2sub[child] を代入して全頂点を出力する。／最初の DFS で ans(1) と部分木サイズを求め、二回目の DFS で ans(c)=ans(p)+N-2sub(c) を全辺へ伝播する rerooting を行う。 — 根を一辺移した差分が切断された二成分のサイズだけで決まり、各頂点の距離を再計算せず全回答を共有できる。／辺 p-c をまたぐ reroot 差分は、近くなる sub(c) 個の -1 と遠くなる N-sub(c) 個の +1 の合計 N-2sub(c) である。／各始点から独立に距離和を求めると同じ木を何度も探索する。一つの根1についてなら、全頂点の深さの和がそのまま ans(1) になり、同じ DFS で各部分木サイズも得られる。／根を親 p から子 c へ一辺移すと、c の部分木内の sub(c) 頂点への距離は1減り、それ以外の N-sub(c) 頂点への距離は1増える。／全方位木 DP（rerooting）: 各頂点を根にした値が必要で、隣接する二つの根の答えの差を辺の両側の情報から求められるとき。 適用: 一つの根で基準値と部分木情報を作り、辺ごとの差分を全頂点へ伝える。／辺切断による寄与差分: 根や始点を一辺動かしたとき、対象が辺のどちら側にあるかで寄与変化が一定になるとき。 適用: 部分木側と補集合側の個数を数え、距離変化をまとめて加減する。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 一つの根の距離和と部分木サイズから、辺をまたぐ差分式を作って全頂点の距離和へ reroot できる。",
+          "対象技能が担う箇所: 根付き木、部分木サイズ、DFS、rerooting",
+          "対象技能が担う箇所: 距離和全体の reroot に必要なのは各距離値ではなく、移動した辺の子側に何頂点あるかだけである。 再利用の観点: 全始点への集約量では、始点を隣へ動かしたとき各対象の寄与が何種類の差分に分かれるかを調べる。",
+          "対象技能が担う箇所: 頂点1を根に DFS し、depth の総和と sub[v] を計算する。ans[1] をその総和で初期化し、親から子へ進むたび ans[child]=ans[parent]+N-2sub[child] を代入して全頂点を出力する。",
+          "対象技能が担う箇所: 最初の DFS で ans(1) と部分木サイズを求め、二回目の DFS で ans(c)=ans(p)+N-2sub(c) を全辺へ伝播する rerooting を行う。 — 根を一辺移した差分が切断された二成分のサイズだけで決まり、各頂点の距離を再計算せず全回答を共有できる。",
+          "対象技能が担う箇所: 辺 p-c をまたぐ reroot 差分は、近くなる sub(c) 個の -1 と遠くなる N-sub(c) 個の +1 の合計 N-2sub(c) である。",
+          "対象技能が担う箇所: 各始点から独立に距離和を求めると同じ木を何度も探索する。一つの根1についてなら、全頂点の深さの和がそのまま ans(1) になり、同じ DFS で各部分木サイズも得られる。",
+          "対象技能が担う箇所: 根を親 p から子 c へ一辺移すと、c の部分木内の sub(c) 頂点への距離は1減り、それ以外の N-sub(c) 頂点への距離は1増える。",
+          "対象技能が担う箇所: 全方位木 DP（rerooting）: 各頂点を根にした値が必要で、隣接する二つの根の答えの差を辺の両側の情報から求められるとき。 適用: 一つの根で基準値と部分木情報を作り、辺ごとの差分を全頂点へ伝える。",
+          "対象技能が担う箇所: 辺切断による寄与差分: 根や始点を一辺動かしたとき、対象が辺のどちら側にあるかで寄与変化が一定になるとき。 適用: 部分木側と補集合側の個数を数え、距離変化をまとめて加減する。",
+          "転移題材の解法接続: 頂点1を根に DFS し、depth の総和と sub[v] を計算する。ans[1] をその総和で初期化し、親から子へ進むたび ans[child]=ans[parent]+N-2sub[child] を代入して全頂点を出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "木固有の根・部分木・path・separator構造へ問題を写し、利用する性質を選ぶ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    },
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-accelerate-tree-dp-by-heavy-path",
+        "outcome-aggregate-rooted-tree",
+        "outcome-answer-tree-ancestor-queries",
+        "outcome-apply-heavy-light-decomposition",
+        "outcome-build-balanced-separator-decomposition",
+        "outcome-build-component-merge-tree",
+        "outcome-build-laminar-interval-containment-tree",
+        "outcome-build-virtual-tree",
+        "outcome-compose-dynamic-tree-clusters",
+        "outcome-count-implicit-binary-tree-layers",
+        "outcome-flatten-tree-by-euler-order",
+        "outcome-optimize-tree-order-by-cluster-contraction",
+        "outcome-reconstruct-tree-from-distance-matrix",
+        "outcome-reroot-tree-aggregation",
+        "outcome-use-tree-diameter-extrema"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
+      "assessment": {
+        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
+        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
+      },
+      "answer": {
+        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
+        "procedure": [
+          "問題を対象・操作・保つ量・求める量へ分解する。",
+          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
+          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
+          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
+        ],
+        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "stageRank": 0,
+  "difficultyRank": 0,
+  "representativeRank": 3,
+  "globalIndex": 3,
+  "orderReason": "一般グラフから独立させ、根・部分木・一意path・separatorという木固有の不変量を体系的に積み上げる。"
+}

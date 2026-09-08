@@ -1,0 +1,101 @@
+{
+  "id": "unit-parallel-binary-search",
+  "kind": "section",
+  "title": "parallel binary search・多数境界の判定共有",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-monotone-search"
+  ],
+  "excludedTopics": [
+    "parallel binary search・多数境界の判定共有の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9",
+    "source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be",
+    "source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598",
+    "source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905"
+  ],
+  "tagIds": [
+    "tag-parallel-binary-search"
+  ],
+  "ownedTagIds": [
+    "tag-parallel-binary-search"
+  ],
+  "learningOutcomeIds": [
+    "outcome-share-threshold-checks-by-parallel-binary-search"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-share-threshold-checks-by-parallel-binary-search"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/parallel-binary-search.md",
+  "problemIds": [
+    "abc233-ex",
+    "abc394-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-share-threshold-checks-by-parallel-binary-search",
+      "learningOutcomeIds": [
+        "outcome-share-threshold-checks-by-parallel-binary-search"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC233 Ex「Manhattan Christmas Tree」について、座標を u＝x＋y、v＝x−y へ 45 度回転すると、元のマンハッタン距離は max(|Δu|,|Δv|) というチェビシェフ距離になる。",
+      "procedure": [
+        "観察: 座標を u＝x＋y、v＝x−y へ 45 度回転すると、元のマンハッタン距離は max(|Δu|,|Δv|) というチェビシェフ距離になる。",
+        "観察: 距離 r 以下の木は回転後の軸平行長方形 [u−r,u＋r]×[v−r,v＋r] 内の点であり、その個数が K 以上かは r に対して単調である。",
+        "着眼: 長方形内点数は x≤u＋r の prefix 個数から x＜u−r の prefix 個数を引き、各 prefix を y 区間和で求められる。",
+        "方針: 各クエリの答えを並列二分探索し、同じ反復の全長方形内点数を x sweep と y 座標 Fenwick tree でオフライン計算する。（距離判定を軸平行長方形数え上げへ変換し、全クエリを各反復でまとめて点・イベントの一走査にできる。）",
+        "接続: K 番目距離を単調な個数判定へ変え、回転座標の矩形問合せを二つの x-prefix イベントへ分解して、parallel binary search と BIT sweep を重ねる。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "各queryの未確定区間を保ち、同じroundのmidをbucketして一方向更新できる判定器を共有し、全queryの最小・最大成立境界を求められる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-share-threshold-checks-by-parallel-binary-search",
+      "learningOutcomeIds": [
+        "outcome-share-threshold-checks-by-parallel-binary-search"
+      ],
+      "prerequisiteIds": [
+        "outcome-prove-and-search-threshold",
+        "prereq-abc-advanced-v1",
+        "unit-monotone-search"
+      ],
+      "attainmentCondition": "学習成果「各queryの未確定区間を保ち、同じroundのmidをbucketして一方向更新できる判定器を共有し、全queryの最小・最大成立境界を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC394 G「Dense Buildings」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「各queryの未確定区間を保ち、同じroundのmidをbucketして一方向更新できる判定器を共有し、全queryの最小・最大成立境界を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 大量のgrid移動queryを最大通行高度のoffline connectivityへ変換し、最小階段回数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 大量のgrid移動queryを最大通行高度のoffline connectivityへ変換し、最小階段回数を求められる。",
+          "転移題材の解法接続: 全grid隣接edgeをcapacity降順にsortする。各queryの[L,R) thresholdを持ち、mid別bucketを作るroundごとにDSUを初期化してedgeをthresholdまで追加し、endpoint連結ならL=mid、否ならR=midと更新する。確定Mから式を出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "各queryの未確定区間を保ち、同じroundのmidをbucketして一方向更新できる判定器を共有し、全queryの最小・最大成立境界を求められる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 80,
+  "globalIndex": 92,
+  "orderReason": "単一queryの単調境界を二分探索できるようになった後、多数queryのmidをroundごとに束ね、一方向更新できる判定器を共有する。"
+}

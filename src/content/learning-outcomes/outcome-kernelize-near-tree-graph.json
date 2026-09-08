@@ -1,0 +1,13 @@
+{
+  "id": "outcome-kernelize-near-tree-graph",
+  "statement": "terminal外の葉除去とdegree-2 chain縮約で、cycle rankや余分な辺数だけに依存する小kernelへ答えを保って縮約する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-peel-graph-core",
+    "outcome-use-cycle-space-basis"
+  ],
+  "scopeIds": [
+    "abc419-g",
+    "tag-near-tree-kernelization",
+    "unit-near-tree-kernelization"
+  ]
+}

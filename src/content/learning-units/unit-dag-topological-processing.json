@@ -1,0 +1,111 @@
+{
+  "id": "unit-dag-topological-processing",
+  "kind": "subsection",
+  "title": "DAGのtopological processing",
+  "parentId": "unit-directed-condensation",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-state-graph-search"
+  ],
+  "excludedTopics": [
+    "DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7",
+    "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3",
+    "source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31",
+    "source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b",
+    "source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef",
+    "source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"
+  ],
+  "tagIds": [
+    "tag-dag-topological-processing"
+  ],
+  "ownedTagIds": [
+    "tag-dag-topological-processing"
+  ],
+  "learningOutcomeIds": [
+    "outcome-process-dag-in-topological-order"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-process-dag-in-topological-order"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/dag-topological-processing.md",
+  "problemIds": [
+    "abc224-e",
+    "abc277-f",
+    "abc291-e",
+    "abc304-ex",
+    "abc306-ex",
+    "abc315-e",
+    "abc324-f",
+    "abc335-e",
+    "abc341-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-process-dag-in-topological-order",
+      "learningOutcomeIds": [
+        "outcome-process-dag-in-topological-order"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC277 F「Sorting a Matrix」について、0は後から任意の正数にできるため、最終flatten列が非減少かは、0を除いた既知値の相対順序だけで決まる。",
+      "procedure": [
+        "観察: 0は後から任意の正数にできるため、最終flatten列が非減少かは、0を除いた既知値の相対順序だけで決まる。",
+        "観察: 最終条件は、各行の既知値区間が行順に重ならないことと、各行内で既知値が同じ共通列順に非減少になることへ分離できる。",
+        "着眼: 非零要素を持つ行はminの昇順に並べ、直前までのmax≤次のminなら行間の全比較を満たす。全0行は既知制約を持たない。",
+        "着眼: 1行の正値を同値group順に並べ、隣接group間に補助頂点を挟めば、低いgroupの全列が高いgroupの全列より前という推移閉包を線形本数のedgeで表せる。",
+        "方針: 非零値だけで行ごとの[min,max]を並べて非重複を検査し、列には各行の大小制約を補助頂点で圧縮したDAGを作ってacyclicか判定する。（row swapとcolumn swapの影響を独立化し、全cell数に比例するgraphで共通列順の存在を判定できる。）",
+        "接続: 各行の0を除くmin/maxを集め、空行を除いてsortし隣接区間を検査する。列番号W頂点に加え、各行の昇順value group境界ごとに補助頂点とgroup→aux→次groupのedgeを作り、全graphがDAGならYesとする。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-process-dag-in-topological-order",
+      "learningOutcomeIds": [
+        "outcome-process-dag-in-topological-order"
+      ],
+      "prerequisiteIds": [
+        "outcome-select-state-graph-search",
+        "prereq-abc-advanced-v1",
+        "unit-state-graph-search"
+      ],
+      "attainmentCondition": "学習成果「依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC291 E「Find Permutation」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 条件を満たす順列が一意なら構成し、そうでなければNoと判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 条件を満たす順列が一意なら構成し、そうでなければNoと判定できる。",
+          "転移題材の解法接続: 入次数0集合を用いるKahn法を行い、各段階で候補がちょうど一つか確認しながら順序Pを作り、A[P_i]=iを出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 2,
+  "representativeRank": 56,
+  "globalIndex": 114,
+  "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "outcome-maintain-order-through-crossing-events",
+  "statement": "隣接要素が入れ替わる有効時刻だけをevent処理し、連続parameterに対する全順序と集計を更新できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-linearize-events"
+  ],
+  "scopeIds": [
+    "abc344-g",
+    "tag-kinetic-order-maintenance",
+    "unit-kinetic-order-maintenance"
+  ]
+}

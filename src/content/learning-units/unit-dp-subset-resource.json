@@ -1,0 +1,223 @@
+{
+  "id": "unit-dp-subset-resource",
+  "kind": "section",
+  "title": "集合・資源軸のDP",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-state-design"
+  ],
+  "excludedTopics": [
+    "入力順や区間端点だけを状態にし、集合・容量軸を持たないDP。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f",
+    "source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2",
+    "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+    "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+    "source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f",
+    "source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0",
+    "source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75",
+    "source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c"
+  ],
+  "tagIds": [
+    "tag-eventual-unbounded-knapsack",
+    "tag-knapsack-resource",
+    "tag-subset-bitmask-dp"
+  ],
+  "ownedTagIds": [
+    "tag-knapsack-resource"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-resource-dp",
+    "outcome-enumerate-subset-state-space",
+    "outcome-stabilize-unbounded-knapsack-by-best-density"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-resource-dp"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-subset-resource.md",
+  "problemIds": [
+    "abc213-g",
+    "abc215-e",
+    "abc216-f",
+    "abc216-h",
+    "abc219-e",
+    "abc222-e",
+    "abc228-g",
+    "abc232-f",
+    "abc244-f",
+    "abc246-f",
+    "abc269-g",
+    "abc274-e",
+    "abc275-f",
+    "abc278-f",
+    "abc287-f",
+    "abc288-e",
+    "abc290-ex",
+    "abc295-ex",
+    "abc300-ex",
+    "abc301-e",
+    "abc306-ex",
+    "abc307-g",
+    "abc309-g",
+    "abc310-ex",
+    "abc310-f",
+    "abc311-ex",
+    "abc313-f",
+    "abc319-f",
+    "abc320-f",
+    "abc321-f",
+    "abc321-g",
+    "abc322-e",
+    "abc325-f",
+    "abc328-g",
+    "abc332-e",
+    "abc332-g",
+    "abc338-f",
+    "abc341-f",
+    "abc343-g",
+    "abc352-f",
+    "abc354-e",
+    "abc364-e",
+    "abc366-f",
+    "abc373-f",
+    "abc375-e",
+    "abc381-f",
+    "abc382-e",
+    "abc383-f",
+    "abc390-e",
+    "abc396-g",
+    "abc400-g",
+    "abc402-e",
+    "abc410-e",
+    "abc411-g",
+    "abc415-g",
+    "abc416-f",
+    "abc419-e",
+    "abc419-f",
+    "abc424-g",
+    "abc425-f",
+    "abc426-g",
+    "abc428-g",
+    "abc432-f",
+    "abc441-f",
+    "abc461-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-design-resource-dp",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC216 F「Max Sum Counting」について、条件 max A_i ≥ sum B_i は、選んだ集合の中で最大の A を持つ要素を一つ固定すると、残りの B の総和上限として表せる。",
+      "procedure": [
+        "観察: 条件 max A_i ≥ sum B_i は、選んだ集合の中で最大の A を持つ要素を一つ固定すると、残りの B の総和上限として表せる。",
+        "観察: 組 (A_i,B_i) を A_i の昇順に並べれば、各非空部分集合にはソート順で最後に選ばれた一意な要素 i がある。",
+        "着眼: 最大値という集合全体の条件を、最大を担当する一要素 i の固定へ変えると、残りは加法的な B のナップサック条件になる。",
+        "着眼: A が同値の要素が複数あっても、ソート後に最後に選んだ添字を証人にすれば各部分集合はちょうど一度だけ数えられる。",
+        "方針: A の昇順に各要素を最大値の証人として固定し、それ以前の要素から B 和が A_i−B_i 以下となる選び方を部分和 DP で数える。（全ての非空部分集合を最後の要素で重複なく分類でき、以前の要素の情報は B の総和別個数だけで十分になる。）",
+        "接続: A 順の最後の選択要素で部分集合を分割し、走査済み要素の B 和別選択数を 0/1 ナップサック DP として維持して閾値以下を加算する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "資源軸の上限と更新順を選び、選択の重複を避けられる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    },
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-enumerate-subset-state-space",
+        "outcome-stabilize-unbounded-knapsack-by-best-density"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（学習経路の比較）",
+      "omissions": [
+        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
+      ],
+      "environment": "紙上での未知問のモデル化と候補比較",
+      "input": "集合・資源軸のDPの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
+      "procedure": [
+        "部分集合・bitmask状態DP: 1個の直接所有Outcome、学ぶ理由「DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ」、対象外「部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "大容量unbounded knapsackのeventual linearity: 1個の直接所有Outcome、学ぶ理由「通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する」、対象外「大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-design-resource-dp",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "prerequisiteIds": [
+        "outcome-design-minimal-sufficient-state",
+        "prereq-abc-advanced-v1",
+        "unit-dp-state-design"
+      ],
+      "attainmentCondition": "学習成果「資源軸の上限と更新順を選び、選択の重複を避けられる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC222 E「Red and Blue Tree」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「資源軸の上限と更新順を選び、選択の重複を避けられる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 木上の反復移動と辺への二値割当てを、辺使用回数の集計と符号和の部分和DPへ段階的に変換できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 木上の反復移動と辺への二値割当てを、辺使用回数の集計と符号和の部分和DPへ段階的に変換できる。",
+          "転移題材の解法接続: 各 A_i から A_{i+1} への木上パスをDFSで復元して C_e を加算し、目標 (S+K)/2 に対して C_e を一度ずつ選ぶ0/1部分和DPを行う。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "資源軸の上限と更新順を選び、選択の重複を避けられる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    },
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-enumerate-subset-state-space",
+        "outcome-stabilize-unbounded-knapsack-by-best-density"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1",
+        "unit-dp-state-design"
+      ],
+      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
+      "assessment": {
+        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
+        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
+      },
+      "answer": {
+        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
+        "procedure": [
+          "問題を対象・操作・保つ量・求める量へ分解する。",
+          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
+          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
+          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
+        ],
+        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 1,
+  "representativeRank": 1,
+  "globalIndex": 32,
+  "orderReason": "最小十分状態を設計できるようになった後、集合bitmaskや容量を軸にした遷移と更新順へ進む。"
+}

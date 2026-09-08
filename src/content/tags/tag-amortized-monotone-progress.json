@@ -1,0 +1,46 @@
+{
+  "id": "tag-amortized-monotone-progress",
+  "name": "単調進行による償却解析",
+  "definition": "要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "候補",
+      "操作列",
+      "要素"
+    ],
+    "triggerPatterns": [
+      "一度だけ",
+      "単調に減る",
+      "移動回数"
+    ],
+    "invariantPatterns": [
+      "potential",
+      "総削除回数"
+    ],
+    "goalPatterns": [
+      "償却上界",
+      "総計算量"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-bound-monotone-total-work"
+  ],
+  "representativeProblemIds": [
+    "abc217-e",
+    "abc256-ex"
+  ],
+  "aliases": [
+    "amortized analysis",
+    "potential method",
+    "償却解析"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,100 @@
+{
+  "id": "unit-path-matching-contraction",
+  "kind": "subsection",
+  "title": "path matchingのheap縮約greedy",
+  "parentId": "unit-flow-matching",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-greedy-exchange",
+    "unit-priority-queue-best-first"
+  ],
+  "excludedTopics": [
+    "path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54",
+    "source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"
+  ],
+  "tagIds": [
+    "tag-path-matching-contraction"
+  ],
+  "ownedTagIds": [
+    "tag-path-matching-contraction"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-path-matching-by-contraction"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-path-matching-by-contraction"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/path-matching-contraction.md",
+  "problemIds": [
+    "abc464-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-optimize-path-matching-by-contraction",
+      "learningOutcomeIds": [
+        "outcome-optimize-path-matching-by-contraction"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC464 G「Celester 2」について、両端に固定S,Rを足して隣接異符号を1とする差分01列へ移すと、一文字flipは隣接二bitの反転になる。1を増やす最適操作は二つの0をpairにし、その間を移動させて00を11にすることと解釈できる。",
+      "procedure": [
+        "観察: 両端に固定S,Rを足して隣接異符号を1とする差分01列へ移すと、一文字flipは隣接二bitの反転になる。1を増やす最適操作は二つの0をpairにし、その間を移動させて00を11にすることと解釈できる。",
+        "着眼: 差分列の1数 b とRS遷移数aは固定端により a=(b-1)/2 なので、目的は1数を必要量まで増やすことに等しい。",
+        "着眼: 隣り合う0位置をpairにするcostはその距離で、同じ0を二pairで使えない条件はDの隣接要素を同時選択できないpath matching条件になる。",
+        "方針: 0位置列の隣接距離Dを作り、隣接edgeを共有しないmatchingから所定個数を選ぶ最小重み問題を、最小edge貪欲と連結list更新 D_{l}+D_{r}-D_i で順に解く。（最適操作では11を00へ減らすflipを除去でき、0 pairのnoncrossing matchingへ正規化できる。path matchingのcardinality別最小重みにはCandies型のedge contraction貪欲が成立する。）",
+        "接続: 固定端込み差分を作り0位置間距離Dを列挙する。各D_iをmin-heapへ入れ、alive linked listを持つ。最小iを選んで累積costを記録し、隣接edgeを削除して新edge D_left+D_right-D_iを挿入する。必要な1増加数/2回分のprefix costを答える。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-optimize-path-matching-by-contraction",
+      "learningOutcomeIds": [
+        "outcome-optimize-path-matching-by-contraction"
+      ],
+      "prerequisiteIds": [
+        "outcome-enumerate-frontier-best-first",
+        "outcome-prove-greedy-order",
+        "prereq-abc-advanced-v1",
+        "unit-greedy-exchange",
+        "unit-priority-queue-best-first"
+      ],
+      "attainmentCondition": "学習成果「重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "assessment": {
+        "method": "ABC464 G「Celester 2」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
+          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
+          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
+          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
+          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+        ],
+        "expectedResult": "重み付きpathの最小k-matchingについて、最小edge採用後の補正縮約を証明し、heapと双方向linkで全cardinalityの最適値を求められるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 99,
+  "globalIndex": 205,
+  "orderReason": "path matchingの交互構造を使い、最小edgeの採用後も残りの全cardinality最適値を保存する補正縮約を導いてheapと双方向linkで実装する。"
+}

@@ -1,0 +1,56 @@
+{
+  "id": "tag-lazy-segment-action",
+  "name": "遅延評価する区間作用",
+  "definition": "区間更新を要約へ作用させ、作用の合成を遅延評価する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [
+    "tag-range-monoid-aggregation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "区間更新",
+      "区間要約",
+      "遅延値"
+    ],
+    "triggerPatterns": [
+      "range update",
+      "区間代入",
+      "区間加算"
+    ],
+    "invariantPatterns": [
+      "lazy",
+      "作用",
+      "合成順"
+    ],
+    "goalPatterns": [
+      "区間操作",
+      "更新とquery"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-range-monoid-aggregation",
+      "type": "implementation_substrate",
+      "rationale": "区間要約のmonoidと、その要約へ作用する写像を基盤として遅延更新を実装する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-range-update-action"
+  ],
+  "representativeProblemIds": [
+    "abc237-g",
+    "abc340-e",
+    "abc382-f"
+  ],
+  "aliases": [
+    "lazy propagation",
+    "lazy segment tree",
+    "遅延セグメント木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

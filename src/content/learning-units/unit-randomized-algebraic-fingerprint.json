@@ -1,0 +1,106 @@
+{
+  "id": "unit-randomized-algebraic-fingerprint",
+  "kind": "subsection",
+  "title": "乱択代数fingerprint",
+  "parentId": "unit-randomized-algorithms",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-randomized-algorithms"
+  ],
+  "excludedTopics": [
+    "乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc",
+    "source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f",
+    "source-abc339-editorial-9206-783ff9c3caa8b6c79125699ba25139d0f342ede0ece4c0a1081ab3044f3c70a2",
+    "source-abc339-f-problem-fd4fd095dde8aba7756de773d9f4b871b37d3563a7e3899c3f38b694662189b5",
+    "source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4",
+    "source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9"
+  ],
+  "tagIds": [
+    "tag-randomized-algebraic-fingerprint"
+  ],
+  "ownedTagIds": [
+    "tag-randomized-algebraic-fingerprint"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compare-algebraic-objects-by-random-fingerprint"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-compare-algebraic-objects-by-random-fingerprint"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/randomized-algebraic-fingerprint.md",
+  "problemIds": [
+    "abc238-g",
+    "abc339-f",
+    "abc367-f",
+    "abc455-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-compare-algebraic-objects-by-random-fingerprint",
+      "learningOutcomeIds": [
+        "outcome-compare-algebraic-objects-by-random-fingerprint"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC238 G「Cubic?」について、区間積が立方数であることは、区間内の各素数 p の指数合計が全て 3 の倍数であることと同値である。",
+      "procedure": [
+        "観察: 区間積が立方数であることは、区間内の各素数 p の指数合計が全て 3 の倍数であることと同値である。",
+        "観察: 素数ごとの指数 mod 3 ベクトルを全 prefix に保存すると次元とメモリが大きいが、ゼロベクトルかどうかだけなら乱択 fingerprint に圧縮できる。",
+        "着眼: a_p XOR b_p XOR (a_p XOR b_p)=0 なので、連続する素因数出現を三個周期で符号化すると、任意区間の p の指数が 3 の倍数の場合だけ寄与が必ず消える。",
+        "着眼: 区間 hash は prefixHash[R] XOR prefixHash[L−1] で得られ、少なくとも一素数の指数が非零 mod 3 なら独立一様乱数を含むため 0 との衝突確率は 2 の 64 乗分の 1 である。",
+        "方針: 各素数 p に独立な 64 bit 値 a_p,b_p を与え、p の出現へ a_p,b_p,a_p XOR b_p を周期的に割り当て、要素ごとの XOR 累積 hash を作る。（同じ素数の三出現は XOR で 0 になり、非立方区間が偶然 hash 0 になる確率だけを 2 の 64 乗分の 1 に抑えて各クエリを O(1) 判定できる。）",
+        "接続: 素因数指数の Z/3Z ベクトルを 64 bit XOR 空間へランダム線形写像し、prefix fingerprint の等値比較として range product の完全三乗性を判定する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-compare-algebraic-objects-by-random-fingerprint",
+      "learningOutcomeIds": [
+        "outcome-compare-algebraic-objects-by-random-fingerprint"
+      ],
+      "prerequisiteIds": [
+        "outcome-design-and-bound-randomized-algorithm",
+        "prereq-abc-advanced-v1",
+        "unit-randomized-algorithms"
+      ],
+      "attainmentCondition": "学習成果「multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC339 F「Product Equality」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: A_i×A_j=A_kを満たす順序付きtriple(i,j,k)の個数を、高確率で正しく求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: A_i×A_j=A_kを満たす順序付きtriple(i,j,k)の個数を、高確率で正しく求められる。",
+          "転移題材の解法接続: 10^9～2×10^9から独立に約20個のprimeを選び、各A_iをdecimal文字列から各mod residueへ変換してvector keyを作りfrequency mapへ入れる。全順序付きpair(i,j)についてcomponentwise residue積keyを作り、そのkeyの入力frequencyを答えへ加える。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 87,
+  "globalIndex": 177,
+  "orderReason": "乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ。"
+}

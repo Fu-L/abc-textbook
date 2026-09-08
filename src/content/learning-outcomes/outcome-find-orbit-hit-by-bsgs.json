@@ -1,0 +1,12 @@
+{
+  "id": "outcome-find-orbit-hit-by-bsgs",
+  "statement": "有限群の累乗または可逆な有限orbitについて、反復到達時刻をbaby/giant幅へ分解し、逆向きbaby tableと前向きgiant sequenceの衝突からindexを復元できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-compute-in-modular-arithmetic"
+  ],
+  "scopeIds": [
+    "abc270-g",
+    "tag-baby-step-giant-step",
+    "unit-baby-step-giant-step"
+  ]
+}

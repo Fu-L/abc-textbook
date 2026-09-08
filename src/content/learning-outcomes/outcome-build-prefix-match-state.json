@@ -1,0 +1,15 @@
+{
+  "id": "outcome-build-prefix-match-state",
+  "statement": "既知のZ-boxを再利用してZ arrayを線形時間で構成し、各位置から始まる接尾辞と文字列全体のprefixの最大一致長を、文字列連結によるprefix照合へ利用できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc257-g",
+    "abc284-f",
+    "abc312-ex",
+    "abc343-g",
+    "abc430-e",
+    "abc434-f",
+    "tag-z-algorithm-prefix-matching",
+    "unit-z-algorithm"
+  ]
+}

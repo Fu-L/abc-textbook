@@ -1,0 +1,167 @@
+{
+  "id": "unit-combinatorial-coefficients",
+  "kind": "section",
+  "title": "組合せ係数と対称性で数える",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "重なりを交互加減する包除・Möbius反転。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15",
+    "source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613",
+    "source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27",
+    "source-abc215-g-problem-9d5a37e8b9076586f4e03230b8d055dccd7cbb2a8ecb06a813bc11c813cb6e5e",
+    "source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341",
+    "source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97",
+    "source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a",
+    "source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555",
+    "source-abc226-editorial-2878-2de04cf0703a44bc099836c041ba9edc8d01da823227f38738ef602d5dbe9e10",
+    "source-abc226-f-problem-445d4ec66745084a734b87bfa5c86445e188cebfd19fc703876bb5f7b890cdba"
+  ],
+  "tagIds": [
+    "tag-combinatorial-coefficients"
+  ],
+  "ownedTagIds": [
+    "tag-combinatorial-coefficients"
+  ],
+  "learningOutcomeIds": [
+    "outcome-formulate-combinatorial-coefficients"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-formulate-combinatorial-coefficients"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md",
+  "problemIds": [
+    "abc214-g",
+    "abc215-g",
+    "abc216-h",
+    "abc217-f",
+    "abc217-g",
+    "abc225-h",
+    "abc226-f",
+    "abc227-g",
+    "abc234-f",
+    "abc235-g",
+    "abc238-ex",
+    "abc240-g",
+    "abc242-f",
+    "abc243-f",
+    "abc249-ex",
+    "abc251-ex",
+    "abc256-f",
+    "abc256-g",
+    "abc259-ex",
+    "abc260-ex",
+    "abc262-e",
+    "abc265-e",
+    "abc266-g",
+    "abc267-g",
+    "abc272-ex",
+    "abc273-g",
+    "abc276-g",
+    "abc278-ex",
+    "abc279-ex",
+    "abc281-g",
+    "abc284-ex",
+    "abc284-g",
+    "abc285-ex",
+    "abc288-ex",
+    "abc289-ex",
+    "abc290-f",
+    "abc295-e",
+    "abc297-f",
+    "abc303-ex",
+    "abc309-g",
+    "abc313-ex",
+    "abc321-g",
+    "abc327-g",
+    "abc336-g",
+    "abc345-g",
+    "abc357-g",
+    "abc358-e",
+    "abc386-g",
+    "abc389-g",
+    "abc390-g",
+    "abc392-g",
+    "abc399-f",
+    "abc405-e",
+    "abc405-g",
+    "abc409-g",
+    "abc422-g",
+    "abc425-e",
+    "abc431-f",
+    "abc432-g",
+    "abc433-f",
+    "abc453-e",
+    "abc456-g",
+    "abc458-e",
+    "abc459-e",
+    "abc463-f",
+    "abc463-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-formulate-combinatorial-coefficients",
+      "learningOutcomeIds": [
+        "outcome-formulate-combinatorial-coefficients"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC217 G「Groups」について、人を ID 順に一人ずつ追加すると、人 i より前に同じ余りを持つ人はちょうど floor((i-1)/M) 人いる。条件を満たす分け方では、その全員が互いに異なるグループへ入っている。",
+      "procedure": [
+        "観察: 人を ID 順に一人ずつ追加すると、人 i より前に同じ余りを持つ人はちょうど floor((i-1)/M) 人いる。条件を満たす分け方では、その全員が互いに異なるグループへ入っている。",
+        "観察: グループに名前はなく、追加した人 i は新しい一人グループを作るか、既存グループへ合流するかのどちらかで全ての場合を一意に分類できる。",
+        "着眼: 既存 j グループのうち禁止されるのは同余りの先行者が一人ずついる floor((i-1)/M) グループであり、合流可能数は j-floor((i-1)/M) である。",
+        "方針: dp[i][j] を先頭 i 人をちょうど j 個のグループへ分ける方法数とし、人 i の所属で遷移する。（同じ余りの既存人数が配置によらず floor((i-1)/M) 個の禁止グループを占めるため、状態に各グループの中身を持たず j だけで合流先の個数を決められる。）",
+        "接続: dp[i][j]=dp[i-1][j-1]+(j-floor((i-1)/M))dp[i-1][j] を法 998244353 で計算し、i=N の j=1..N を順に出力する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-formulate-combinatorial-coefficients",
+      "learningOutcomeIds": [
+        "outcome-formulate-combinatorial-coefficients"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC226 F「Score of Permutations」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 置換の反復周期をcycle typeへ圧縮し、型ごとの個数を掛けて全順列の関数値総和を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 置換の反復周期をcycle typeへ圧縮し、型ごとの個数を掛けて全順列の関数値総和を求められる。",
+          "転移題材の解法接続: 非減少な巡回長を選ぶDFSで総和Nの整数分割を列挙し、各頻度の順列数を階乗・逆元で求め、count×lcm^Kを998244353で加算する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 1,
+  "difficultyRank": 2,
+  "representativeRank": 6,
+  "globalIndex": 29,
+  "orderReason": "選び方の重複を二項係数で整理し、対称操作で同一視する対象は固定点平均でorbitを数える。"
+}

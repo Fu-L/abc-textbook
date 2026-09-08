@@ -1,0 +1,30 @@
+{
+  "id": "outcome-select-state-graph-search",
+  "statement": "暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc241-f",
+    "abc244-f",
+    "abc257-g",
+    "abc289-e",
+    "abc302-f",
+    "abc305-f",
+    "abc317-e",
+    "abc319-g",
+    "abc329-e",
+    "abc336-f",
+    "abc355-e",
+    "abc361-g",
+    "abc394-e",
+    "abc413-f",
+    "abc414-f",
+    "abc417-e",
+    "abc427-e",
+    "abc429-e",
+    "abc443-f",
+    "abc446-e",
+    "abc446-f",
+    "tag-state-graph-search",
+    "unit-state-graph-search"
+  ]
+}

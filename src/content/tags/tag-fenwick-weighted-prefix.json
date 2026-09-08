@@ -1,0 +1,68 @@
+{
+  "id": "tag-fenwick-weighted-prefix",
+  "name": "Fenwick Tree・反転数・重み付き接頭辞統計",
+  "definition": "値や座標の頻度を動的な接頭辞和で数えて反転数を求めるか、複数本を組み合わせて次数付きの区間式を評価する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [
+    "tag-prefix-difference"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "prefix",
+      "反転数",
+      "添字付き和",
+      "配列",
+      "重み",
+      "頻度"
+    ],
+    "triggerPatterns": [
+      "point update",
+      "一点更新",
+      "左側に大きい値",
+      "接頭辞和",
+      "累積和"
+    ],
+    "invariantPatterns": [
+      "bit",
+      "係数",
+      "処理済み頻度",
+      "複数本の"
+    ],
+    "goalPatterns": [
+      "query",
+      "動的和",
+      "区間式",
+      "反転数"
+    ],
+    "excludedPatterns": [
+      "bit.?dp",
+      "bit.?mask",
+      "bitset"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-coordinate-compression",
+      "type": "often_combined",
+      "rationale": "疎な値を順序保存圧縮してから、個数・重み・反転数をprefix集約する構成で併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-weighted-prefix-statistics"
+  ],
+  "representativeProblemIds": [
+    "abc221-e",
+    "abc256-f",
+    "abc287-g"
+  ],
+  "aliases": [
+    "BIT",
+    "Binary Indexed Tree",
+    "フェニック木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

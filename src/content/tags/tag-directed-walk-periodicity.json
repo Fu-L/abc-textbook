@@ -1,0 +1,47 @@
+{
+  "id": "tag-directed-walk-periodicity",
+  "name": "有向walkの周期・cycle差分gcd",
+  "definition": "往復可能領域でedgeごとのdepth差を集め、そのgcdをclosed walk長の周期として巨大歩数の到達可能性を判定する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-gcd-structure",
+    "tag-scc-condensation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "closed walk",
+      "depth difference",
+      "strongly connected region"
+    ],
+    "triggerPatterns": [
+      "巨大回数のwalk",
+      "戻れる歩数の合同類"
+    ],
+    "invariantPatterns": [
+      "cycle差分のgcd",
+      "eventual periodicity"
+    ],
+    "goalPatterns": [
+      "graph period",
+      "walk長到達可能性"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-compute-directed-walk-period"
+  ],
+  "representativeProblemIds": [
+    "abc306-g"
+  ],
+  "aliases": [
+    "cycle-length gcd",
+    "directed graph period",
+    "有向グラフ周期"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

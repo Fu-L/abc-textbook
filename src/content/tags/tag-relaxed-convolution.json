@@ -1,0 +1,53 @@
+{
+  "id": "tag-relaxed-convolution",
+  "name": "Relaxed・online convolution",
+  "definition": "係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-convolution"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "blocks",
+      "causal convolution",
+      "online coefficient sequence"
+    ],
+    "triggerPatterns": [
+      "online recurrence",
+      "次係数が過去係数に依存"
+    ],
+    "invariantPatterns": [
+      "block schedule",
+      "未確定係数を読まない"
+    ],
+    "goalPatterns": [
+      "online畳み込み"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-convolution",
+      "type": "extension",
+      "rationale": "一括入力の畳み込みへ「係数が逐次確定し、未来の係数を参照できない」というinterface制約を加え、online計算を可能にする。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-compute-online-relaxed-convolution"
+  ],
+  "representativeProblemIds": [
+    "abc213-h",
+    "abc230-h",
+    "abc315-ex"
+  ],
+  "aliases": [
+    "CDQ convolution",
+    "Relaxed Convolution",
+    "online convolution"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,51 @@
+{
+  "id": "tag-basic-convex-optimization",
+  "name": "一次元凸・単峰最適化",
+  "definition": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "integer/real domain",
+      "one-variable objective"
+    ],
+    "triggerPatterns": [
+      "下に凸",
+      "二次費用",
+      "単峰"
+    ],
+    "invariantPatterns": [
+      "単調な傾き",
+      "局所=大域最適"
+    ],
+    "goalPatterns": [
+      "最大点",
+      "最小点"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-convex-hull-trick",
+      "type": "analogy",
+      "rationale": "どちらも凸性を語彙に持つが、一次元目的関数の単峰性から探索範囲を狭める方法と、複数直線の包絡を動的に管理する方法では発動条件・証明・実装が独立している。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-univariate-convex-function"
+  ],
+  "representativeProblemIds": [
+    "abc224-g",
+    "abc314-ex"
+  ],
+  "aliases": [
+    "ternary search",
+    "unimodal optimization",
+    "一次元凸最適化"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

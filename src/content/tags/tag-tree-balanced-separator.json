@@ -1,0 +1,52 @@
+{
+  "id": "tag-tree-balanced-separator",
+  "name": "重心separatorによる木の再帰分解",
+  "definition": "各成分のサイズを半分以下にする重心をseparatorとし、除去後の成分を再帰的に分解する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "木",
+      "連結成分",
+      "部分木サイズ",
+      "重心"
+    ],
+    "triggerPatterns": [
+      "separator",
+      "再帰",
+      "半分以下",
+      "除いた各成分"
+    ],
+    "invariantPatterns": [
+      "成分サイズ",
+      "親を設定",
+      "重心",
+      "高さ.*log"
+    ],
+    "goalPatterns": [
+      "分解木",
+      "構成",
+      "親配列",
+      "距離query"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-build-balanced-separator-decomposition"
+  ],
+  "representativeProblemIds": [
+    "abc291-ex",
+    "abc359-g"
+  ],
+  "aliases": [
+    "centroid decomposition",
+    "tree separator",
+    "重心分解"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

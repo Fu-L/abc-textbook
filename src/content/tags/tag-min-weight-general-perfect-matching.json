@@ -1,0 +1,54 @@
+{
+  "id": "tag-min-weight-general-perfect-matching",
+  "name": "一般グラフの最小重み完全matching",
+  "definition": "奇cycleを含む一般グラフで全頂点をpairにし、weighted blossomまたは重み付きTutte多項式の最小次数からperfect matchingの重みを最小化する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-bipartite-matching-hall"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "odd cycle",
+      "perfect matching",
+      "重み付き一般グラフ"
+    ],
+    "triggerPatterns": [
+      "degree stub",
+      "pairing cost",
+      "二部でない",
+      "全頂点をpair"
+    ],
+    "invariantPatterns": [
+      "Tutte polynomial degree",
+      "alternating forest",
+      "blossom dual"
+    ],
+    "goalPatterns": [
+      "最小重みperfect matching"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-bipartite-matching-hall",
+      "type": "contrast",
+      "rationale": "二部性を使えるaugmenting path・Hall型議論と、odd blossomを扱う一般graph完全matchingを対比する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-min-weight-general-perfect-matching"
+  ],
+  "representativeProblemIds": [
+    "abc412-g"
+  ],
+  "aliases": [
+    "minimum-weight perfect matching",
+    "weighted blossom",
+    "一般グラフ最小重み完全マッチング"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

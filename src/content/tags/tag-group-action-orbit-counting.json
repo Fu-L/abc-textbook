@@ -1,0 +1,48 @@
+{
+  "id": "tag-group-action-orbit-counting",
+  "name": "群作用・軌道数え上げ",
+  "definition": "群作用の固定点を作用素のcycle typeごとに数え、BurnsideまたはPólyaで軌道数を得る。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-state-normalization"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "固定点",
+      "群作用",
+      "軌道"
+    ],
+    "triggerPatterns": [
+      "回転同一視",
+      "対称性で割る",
+      "置換同一視"
+    ],
+    "invariantPatterns": [
+      "cycle type",
+      "固定点"
+    ],
+    "goalPatterns": [
+      "軌道数",
+      "非同値な個数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-count-orbits-by-fixed-points"
+  ],
+  "representativeProblemIds": [
+    "abc284-ex",
+    "abc428-g"
+  ],
+  "aliases": [
+    "Burnsideの補題",
+    "Pólyaの数え上げ",
+    "orbit counting"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,97 @@
+{
+  "id": "unit-suffix-automaton",
+  "kind": "section",
+  "title": "Suffix Automatonで部分文字列集合を表す",
+  "parentId": "unit-chapter-string",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-finite-pattern-automaton"
+  ],
+  "excludedTopics": [
+    "接尾辞を辞書順に並べるSuffix Array、および複数patternの辞書照合だけを行うAho–Corasick。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc433-editorial-14604-dc4c7ff9c502d4e6f093918f8d3f4fe32c97ba0d442486658598234b34044eaf",
+    "source-abc433-g-problem-56991ad609c06493e3f50699aa57d6046d113f95a100f431f220b0430bef96a4"
+  ],
+  "tagIds": [
+    "tag-suffix-automaton"
+  ],
+  "ownedTagIds": [
+    "tag-suffix-automaton"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-suffix-automaton"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-suffix-automaton"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/suffix-automaton.md",
+  "problemIds": [
+    "abc433-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-build-suffix-automaton",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-automaton"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC433 G「Substring Game」について、ゲーム中に作られる文字列は S の部分文字列であり、手番では末尾へ一文字追加してなお部分文字列である遷移を選ぶ。これは Suffix Automaton の初期状態からの遷移グラフそのものである。",
+      "procedure": [
+        "観察: ゲーム中に作られる文字列は S の部分文字列であり、手番では末尾へ一文字追加してなお部分文字列である遷移を選ぶ。これは Suffix Automaton の初期状態からの遷移グラフそのものである。",
+        "着眼: Suffix Automaton の各遷移は表す部分文字列へ一文字追加する操作に対応し、len が増えるため遷移グラフは DAG である。",
+        "着眼: 出辺のない状態は手番プレイヤーの負け、負け状態へ移れる状態は勝ち、全遷移先が勝ちなら負けとなる。",
+        "方針: S の Suffix Automaton を構築し、各状態をゲーム局面として DAG 上の勝敗を後退解析する。（状態・遷移数がともに O(|S|) で、同じ右文脈を持つ多数の部分文字列を一状態へ圧縮できる。）",
+        "接続: S を一文字ずつ追加して Suffix Automaton を構築する。状態を len の降順に処理し、出辺先に losing が一つでもあれば winning、なければ losing とする。空文字列を表す初期状態の勝敗から Alice/Bob を答える。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-build-suffix-automaton",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-automaton"
+      ],
+      "prerequisiteIds": [
+        "outcome-build-finite-string-automaton",
+        "prereq-abc-advanced-v1",
+        "unit-finite-pattern-automaton"
+      ],
+      "attainmentCondition": "学習成果「endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "assessment": {
+        "method": "ABC433 G「Substring Game」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
+          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
+          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
+          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
+          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+        ],
+        "expectedResult": "endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 3,
+  "globalIndex": 142,
+  "orderReason": "有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。"
+}

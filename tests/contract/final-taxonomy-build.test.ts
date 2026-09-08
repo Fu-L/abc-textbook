@@ -40,6 +40,11 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     const { context, build } = await loadBuild();
 
     expect(FinalTaxonomyBuildSchema.parse(build)).toEqual(build);
+    expect(build.inputs.placementDecisionTable).toEqual({
+      path: context.layout.placementDecisionTablePath,
+      version: context.placementDecisionTable.version,
+      digest: context.placementDecisionTable.digest,
+    });
     expect(
       validateFinalTaxonomyBuildAgainstContext(context, build, {
         nonPrimaryTagIds: NON_PRIMARY_TAG_IDS,
@@ -95,6 +100,48 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         claimPath: '/outcomeCandidates/1',
       }),
     ]);
+    const prefixMatchOutcome = build.finalCandidates.find(
+      (candidate) =>
+        candidate.kind === 'outcome' && candidate.entity.id === 'outcome-build-prefix-match-state',
+    );
+    expect(prefixMatchOutcome?.kind).toBe('outcome');
+    if (prefixMatchOutcome?.kind !== 'outcome') {
+      throw new Error('Expected the prefix-match Outcome candidate.');
+    }
+    expect(prefixMatchOutcome.entity).toMatchObject({
+      statement:
+        '既知のZ-boxを再利用してZ arrayを線形時間で構成し、各位置から始まる接尾辞と文字列全体のprefixの最大一致長を、文字列連結によるprefix照合へ利用できる。',
+    });
+    expect(prefixMatchOutcome.entity.scopeIds).toEqual(
+      expect.arrayContaining(['tag-z-algorithm-prefix-matching', 'unit-z-algorithm']),
+    );
+    expect(prefixMatchOutcome.entity.statement).not.toMatch(/failure link/iu);
+
+    const heavyPathTag = build.finalCandidates.find(
+      (candidate) => candidate.kind === 'tag' && candidate.entity.id === 'tag-heavy-path-tree-dp',
+    );
+    const heavyPathOutcome = build.finalCandidates.find(
+      (candidate) =>
+        candidate.kind === 'outcome' &&
+        candidate.entity.id === 'outcome-accelerate-tree-dp-by-heavy-path',
+    );
+    const heavyPathUnit = build.finalCandidates.find(
+      (candidate) => candidate.kind === 'unit' && candidate.entity.id === 'unit-heavy-path-tree-dp',
+    );
+    expect(heavyPathTag?.entity).toMatchObject({
+      prerequisiteTagIds: ['tag-rooted-tree-aggregation'],
+    });
+    expect(heavyPathOutcome?.entity).toMatchObject({
+      prerequisiteOutcomeIds: ['outcome-aggregate-rooted-tree'],
+    });
+    expect(heavyPathUnit?.entity).toMatchObject({
+      parentId: 'unit-tree-aggregation',
+      additionalPrerequisiteUnitIds: ['unit-rooted-tree-aggregation'],
+    });
+    const orderIndex = new Map(build.standardOrder.map((unitId, index) => [unitId, index]));
+    expect(orderIndex.get('unit-rooted-tree-aggregation')).toBeLessThan(
+      orderIndex.get('unit-heavy-path-tree-dp') ?? -1,
+    );
     expect(build.placements.every(({ kind }) => kind === 'full')).toBe(true);
     expect(build.integrationMap.entries).toHaveLength(FINAL_TAXONOMY_PREVIEW_ENTITY_COUNT);
     expect(build.sourceRevisionIds).toHaveLength(1738);
@@ -110,6 +157,112 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(build.inputs.inventory.inventoryDigest).not.toBe(
       build.inputs.inventory.authoringInventoryDigest,
     );
+  }, 30_000);
+
+  it('rejects a placement decision table changed after the accepted build input was bound', async () => {
+    const { context, build } = await loadBuild();
+    const diagnostics = validateFinalTaxonomyBuildAgainstContext(
+      {
+        ...context,
+        placementDecisionTable: {
+          ...context.placementDecisionTable,
+          digest: '0'.repeat(64),
+        },
+      },
+      build,
+      {
+        nonPrimaryTagIds: NON_PRIMARY_TAG_IDS,
+        nonPrimaryOutcomeIds: NON_PRIMARY_OUTCOME_IDS,
+        singleProblemTagIds: SINGLE_PROBLEM_TAG_IDS,
+        singleProblemOutcomeIds: SINGLE_PROBLEM_OUTCOME_IDS,
+        singleProblemUnitIds: SINGLE_PROBLEM_UNIT_IDS,
+      },
+    );
+
+    expect(diagnostics.map(({ code }) => code)).toContain(
+      'FINAL_TAXONOMY_PLACEMENT_POLICY_BINDING_MISMATCH',
+    );
+  }, 30_000);
+
+  it('materializes unique direct Unit owners and exact descendant navigation rollups', async () => {
+    const { build } = await loadBuild();
+    const normalizeIds = (ids: readonly string[]): string[] => [...new Set(ids)].sort();
+    const tagCandidates = build.finalCandidates.filter(
+      (candidate): candidate is Extract<(typeof build.finalCandidates)[number], { kind: 'tag' }> =>
+        candidate.kind === 'tag',
+    );
+    const outcomeCandidates = build.finalCandidates.filter(
+      (
+        candidate,
+      ): candidate is Extract<(typeof build.finalCandidates)[number], { kind: 'outcome' }> =>
+        candidate.kind === 'outcome',
+    );
+    const unitCandidates = build.finalCandidates.filter(
+      (candidate): candidate is Extract<(typeof build.finalCandidates)[number], { kind: 'unit' }> =>
+        candidate.kind === 'unit',
+    );
+    const unitIds = new Set(unitCandidates.map(({ entity }) => entity.id));
+    const tagIds = new Set(tagCandidates.map(({ entity }) => entity.id));
+    const orderIndex = new Map(build.standardOrder.map((unitId, index) => [unitId, index]));
+    const ownerUnitIdsForTag = (tagId: string): string[] =>
+      unitCandidates
+        .filter(({ entity }) => entity.ownedTagIds.includes(tagId))
+        .map(({ entity }) => entity.id);
+    const ownerUnitIdsForOutcome = (outcomeId: string): string[] =>
+      unitCandidates
+        .filter(({ entity }) => entity.ownedLearningOutcomeIds.includes(outcomeId))
+        .map(({ entity }) => entity.id);
+
+    for (const { entity: tag } of tagCandidates) {
+      expect(ownerUnitIdsForTag(tag.id), tag.id).toHaveLength(1);
+    }
+    for (const { entity: outcome } of outcomeCandidates) {
+      const ownerUnitIds = ownerUnitIdsForOutcome(outcome.id);
+      const scopedUnitIds = outcome.scopeIds.filter((scopeId) => unitIds.has(scopeId));
+      const scopedTagOwnerUnitIds = outcome.scopeIds
+        .filter((scopeId) => tagIds.has(scopeId))
+        .flatMap(ownerUnitIdsForTag);
+      expect(ownerUnitIds, outcome.id).toHaveLength(1);
+      expect(normalizeIds(scopedUnitIds), outcome.id).toEqual(ownerUnitIds);
+      expect(normalizeIds(scopedTagOwnerUnitIds), outcome.id).toEqual(ownerUnitIds);
+    }
+    for (const { entity: unit } of unitCandidates) {
+      const children = unitCandidates.filter(({ entity }) => entity.parentId === unit.id);
+      expect(Array.isArray(unit.ownedTagIds), unit.id).toBe(true);
+      expect(Array.isArray(unit.ownedLearningOutcomeIds), unit.id).toBe(true);
+      expect(normalizeIds(unit.tagIds), `${unit.id}/tagIds`).toEqual(
+        normalizeIds([...unit.ownedTagIds, ...children.flatMap(({ entity }) => entity.tagIds)]),
+      );
+      expect(normalizeIds(unit.learningOutcomeIds), `${unit.id}/learningOutcomeIds`).toEqual(
+        normalizeIds([
+          ...unit.ownedLearningOutcomeIds,
+          ...children.flatMap(({ entity }) => entity.learningOutcomeIds),
+        ]),
+      );
+      if (unit.ownedTagIds.length === 0 && unit.ownedLearningOutcomeIds.length === 0) {
+        expect(children.length, unit.id).toBeGreaterThan(0);
+      }
+    }
+    for (const placement of build.placements) {
+      const primaryOutcomeIds = [
+        placement.primaryOutcomeId,
+        ...placement.additionalPrimaryOutcomeIds,
+      ];
+      const assignedOutcomeIds = [...primaryOutcomeIds, ...placement.supportingOutcomeIds];
+      const primaryOwnerUnitIds = normalizeIds(primaryOutcomeIds.flatMap(ownerUnitIdsForOutcome));
+      const assignedOwnerUnitIds = normalizeIds(assignedOutcomeIds.flatMap(ownerUnitIdsForOutcome));
+      const expectedPresentationUnitId = [...primaryOwnerUnitIds]
+        .sort(
+          (left, right) =>
+            (orderIndex.get(left) ?? Number.POSITIVE_INFINITY) -
+              (orderIndex.get(right) ?? Number.POSITIVE_INFINITY) || left.localeCompare(right),
+        )
+        .at(-1);
+      expect(normalizeIds(placement.learningUnitIds), placement.problemId).toEqual(
+        assignedOwnerUnitIds,
+      );
+      expect(placement.presentationUnitId, placement.problemId).toBe(expectedPresentationUnitId);
+    }
   }, 30_000);
 
   it('is byte-stable and does not use preview candidates to synthesize canonical taxonomy', async () => {
@@ -274,9 +427,15 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
           (_, index) => `/prerequisiteCandidates/${String(index)}`,
         ) ?? []),
       ].sort();
-      expect(
-        [...new Set(placement.claimDispositions.map(({ claimRef }) => claimRef.claimPath))].sort(),
-      ).toEqual(expectedDispositionPaths);
+      const actualDispositionPaths = [
+        ...new Set(placement.claimDispositions.map(({ claimRef }) => claimRef.claimPath)),
+      ].sort();
+      expect(actualDispositionPaths).toEqual(expect.arrayContaining(expectedDispositionPaths));
+      for (const extraPath of actualDispositionPaths.filter(
+        (claimPath) => !expectedDispositionPaths.includes(claimPath),
+      )) {
+        expect(extraPath).toMatch(/^\/implementationConcerns\/(0|[1-9]\d*)$/u);
+      }
       expect(placement.adHocElements).toEqual(
         record?.problemSpecificInsights
           .map(
@@ -312,6 +471,19 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
             ...placement.supportingOutcomeIds,
           ].includes(candidate.entity.id),
         );
+        const primaryAssignments = directAssignments.filter(
+          (placement) =>
+            placement.primaryOutcomeId === candidate.entity.id ||
+            placement.additionalPrimaryOutcomeIds.includes(candidate.entity.id),
+        );
+        if (primaryAssignments.length > 0) {
+          const primaryProblemIds = new Set(
+            primaryAssignments.map((placement) => placement.problemId),
+          );
+          expect(
+            candidate.evidenceRefs.some(({ problemId }) => primaryProblemIds.has(problemId)),
+          ).toBe(true);
+        }
         if (NON_PRIMARY_OUTCOME_IDS.includes(candidate.entity.id)) {
           expect(directAssignments).toEqual([]);
           expect(candidate.evidenceRefs.length).toBeGreaterThan(0);
@@ -330,6 +502,19 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         expect(candidate.entity.excludedTopics.length).toBeGreaterThan(0);
       }
     }
+    const modularArithmeticOutcome = build.finalCandidates.find(
+      (candidate) =>
+        candidate.kind === 'outcome' &&
+        candidate.entity.id === 'outcome-compute-in-modular-arithmetic',
+    );
+    expect(modularArithmeticOutcome?.evidenceRefs).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          problemId: 'abc228-e',
+          claimPath: '/outcomeCandidates/0',
+        }),
+      ]),
+    );
     const orderIndex = new Map(build.standardOrder.map((id, index) => [id, index]));
     const learningUnitIds = new Set(
       build.finalCandidates.flatMap((candidate) =>
@@ -473,6 +658,6 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         singleProblemOutcomeIds: SINGLE_PROBLEM_OUTCOME_IDS,
         singleProblemUnitIds: SINGLE_PROBLEM_UNIT_IDS,
       }),
-    ).toThrow(/PLACEMENT_PRIMARY_HOME_UNIT_INVALID/u);
+    ).toThrow(/must bind assigned Outcomes|PLACEMENT_PRIMARY_HOME_UNIT_INVALID/u);
   }, 30_000);
 });

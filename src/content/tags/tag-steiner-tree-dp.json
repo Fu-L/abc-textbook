@@ -1,0 +1,52 @@
+{
+  "id": "tag-steiner-tree-dp",
+  "name": "Steiner tree subset DP",
+  "definition": "terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest path relaxationを交互に行う。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-shortest-path",
+    "tag-subset-bitmask-dp"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "meeting vertex",
+      "subset",
+      "terminals"
+    ],
+    "triggerPatterns": [
+      "subset merge plus shortest path",
+      "少数terminalを連結"
+    ],
+    "invariantPatterns": [
+      "connected subgraph for mask ending at v"
+    ],
+    "goalPatterns": [
+      "最小Steiner tree"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-subset-bitmask-dp",
+      "type": "specialization",
+      "rationale": "terminal subsetを状態にし、部分集合分割と最短路closureを組み合わせる特殊化である。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-steiner-tree-by-subset-dp"
+  ],
+  "representativeProblemIds": [
+    "abc364-g",
+    "abc395-g"
+  ],
+  "aliases": [
+    "Dreyfus–Wagner法",
+    "Steiner tree DP",
+    "シュタイナー木DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -69,3 +69,10 @@ test('shows zero-result guidance and excludes controls, staging, and local state
   const payload = (await catalog.json()) as { schemaVersion?: string };
   expect(payload.schemaVersion).toBe('3.0.0');
 });
+
+test('keeps canonical LearningUnit skeletons unpublished until the T160 switch', async ({
+  page,
+}) => {
+  const response = await page.request.get('./learn/number-theory/dynamic-modular-product/');
+  expect(response.status()).toBe(404);
+});

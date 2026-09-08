@@ -1,0 +1,98 @@
+{
+  "id": "unit-dynamic-segment-tree",
+  "kind": "subsection",
+  "title": "動的・implicit Segment Tree",
+  "parentId": "unit-monoid-segment-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-range-monoid-aggregation"
+  ],
+  "excludedTopics": [
+    "動的・implicit Segment Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc403-editorial-12770-89d524d03f2fc4f095fecb61d7f270682ca1c9247a4ecb86cc7acce87d768ff6",
+    "source-abc403-g-problem-b65cb2206c4053168999e038af2c064c8597c976bcdbc32ee9535b31d78e3e7d"
+  ],
+  "tagIds": [
+    "tag-dynamic-segment-tree"
+  ],
+  "ownedTagIds": [
+    "tag-dynamic-segment-tree"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-sparse-domain-segment-tree"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-sparse-domain-segment-tree"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/dynamic-segment-tree.md",
+  "problemIds": [
+    "abc403-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-maintain-sparse-domain-segment-tree",
+      "learningOutcomeIds": [
+        "outcome-maintain-sparse-domain-segment-tree"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC403 G「Odd Position Sum Query」について、x_i は直前の答え z により暗号化されるため全挿入値を先読みできず、通常の座標圧縮を前処理として使えない。一方、値域は [1,10^9] で挿入点は Q 個だけである。",
+      "procedure": [
+        "観察: x_i は直前の答え z により暗号化されるため全挿入値を先読みできず、通常の座標圧縮を前処理として使えない。一方、値域は [1,10^9] で挿入点は Q 個だけである。",
+        "観察: 昇順列を左区間、右区間の順に連結すると、左の要素数が奇数か偶数かだけで右区間の奇数番目・偶数番目の役割が決まる。",
+        "着眼: 左の個数が偶数なら親の odd=left.odd+right.odd、even=left.even+right.even、奇数なら右の odd/even を交換して足す。",
+        "着眼: 同じ値が複数回入る葉でも、個数 c と値 x から odd=ceil(c/2)x、even=floor(c/2)x と表せるため、重複を特別な別構造で管理する必要はない。",
+        "方針: 必要な経路だけ生成する動的セグメント木に、要素数・局所奇数番目和・局所偶数番目和を持つ（左右の情報を個数の parity で結合でき、点追加後の根の奇数番目和がそのまま答えになる。ノード数と時間はいずれも Q log 10^9 である。）",
+        "接続: 根区間を [1,10^9+1) として x_i の根から葉までだけ生成し、葉の個数を 1 増やす。帰りがけに parity 付き結合で三つ組を更新し、root.odd を z として出力して次の x_i を計算する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "巨大または疎な座標域で訪れたnodeだけを生成し、区間要約と境界探索をO(log U)で保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-maintain-sparse-domain-segment-tree",
+      "learningOutcomeIds": [
+        "outcome-maintain-sparse-domain-segment-tree"
+      ],
+      "prerequisiteIds": [
+        "outcome-design-associative-range-summary",
+        "prereq-abc-advanced-v1",
+        "unit-range-monoid-aggregation"
+      ],
+      "attainmentCondition": "学習成果「巨大または疎な座標域で訪れたnodeだけを生成し、区間要約と境界探索をO(log U)で保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "assessment": {
+        "method": "ABC403 G「Odd Position Sum Query」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「巨大または疎な座標域で訪れたnodeだけを生成し、区間要約と境界探索をO(log U)で保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
+          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
+          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
+          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
+          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+        ],
+        "expectedResult": "巨大または疎な座標域で訪れたnodeだけを生成し、区間要約と境界探索をO(log U)で保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 83,
+  "globalIndex": 166,
+  "orderReason": "区間monoid要約で得た考え方と実装を再利用し、動的・implicit Segment Treeの発動条件・正当化・境界を重複なく学ぶ。"
+}

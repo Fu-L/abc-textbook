@@ -1,0 +1,107 @@
+{
+  "id": "unit-convex-boundary-hull",
+  "kind": "subsection",
+  "title": "凸包・支持方向・境界候補",
+  "parentId": "unit-convex-geometry",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-geometry-primitives"
+  ],
+  "excludedTopics": [
+    "凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+    "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
+    "source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a",
+    "source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f",
+    "source-abc275-editorial-5111-51c9acaf8a6c44d57dd0445da6d60dda5cc93d44ef12a3eabc0b55b292e8d731",
+    "source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b"
+  ],
+  "tagIds": [
+    "tag-convex-boundary-hull"
+  ],
+  "ownedTagIds": [
+    "tag-convex-boundary-hull"
+  ],
+  "learningOutcomeIds": [
+    "outcome-restrict-geometric-candidates-to-boundary"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-restrict-geometric-candidates-to-boundary"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/convex-boundary-hull.md",
+  "problemIds": [
+    "abc244-ex",
+    "abc257-ex",
+    "abc275-g",
+    "abc286-ex",
+    "abc341-g",
+    "abc356-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-restrict-geometric-candidates-to-boundary",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC257 Ex「Dice Sum 2」について、選んだサイコロiの平均をx_i、二次モーメント補正から費用を引いた値をy_iとすると、目的期待値は(Σx_i)^2+Σy_iに変形できる。",
+      "procedure": [
+        "観察: 選んだサイコロiの平均をx_i、二次モーメント補正から費用を引いた値をy_iとすると、目的期待値は(Σx_i)^2+Σy_iに変形できる。",
+        "着眼: f_i'(1)=E[die_i]、f_i''(1)を使うとE[(総和)^2]-費用が選択ベクトル和(X,Y)上のX^2+Yになる。",
+        "着眼: cを変えた順位は二点のcx+yが交差する傾きでだけ変わるので、全交差を偏角順に処理して現在順位をswapすれば上位K和を増分更新できる。",
+        "方針: K個和の上側凸包を線形評価のparametric sweepで列挙（凸関数X^2+Yの最大は選択和集合の凸包頂点にあり、各頂点はあるcでcX+Yが最大、すなわち個別値cx_i+y_i上位K個として得られる。）",
+        "接続: 各サイコロから整数スケールした(x_i,y_i)を作り、初期のx順と上位K和を用意する。全点対の順位交換イベントを傾き順にソートし、同傾き群を反映しながら上位KのΣx,Σyを更新して(Σx)^2+Σyの最大を評価する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-restrict-geometric-candidates-to-boundary",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "prerequisiteIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates",
+        "prereq-abc-advanced-v1",
+        "unit-geometry-primitives"
+      ],
+      "attainmentCondition": "学習成果「目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC275 G「Infinite Knapsack」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 無限個 knapsack の漸近効率を、価値正規化点の下側凸包上の L∞ norm 最小化として求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 無限個 knapsack の漸近効率を、価値正規化点の下側凸包上の L∞ norm 最小化として求められる。",
+          "転移題材の解法接続: 各点を (A_i/C_i,B_i/C_i) に写し、単調鎖で下側の Pareto convex frontier を作る。全頂点と隣接線分について max 座標の最小値 ans を調べ、求める極限 1/ans を浮動小数で出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 80,
+  "globalIndex": 158,
+  "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、凸包・支持方向・境界候補の発動条件・正当化・境界を重複なく学ぶ。"
+}

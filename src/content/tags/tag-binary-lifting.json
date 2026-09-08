@@ -1,0 +1,52 @@
+{
+  "id": "tag-binary-lifting",
+  "name": "doubling・binary lifting",
+  "definition": "決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "ancestor",
+      "写像",
+      "決定的遷移"
+    ],
+    "triggerPatterns": [
+      "K回後",
+      "jump",
+      "巨大回数"
+    ],
+    "invariantPatterns": [
+      "2冪合成",
+      "結合順"
+    ],
+    "goalPatterns": [
+      "累積遷移",
+      "高速jump"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-monoid-exponentiation",
+      "type": "analogy",
+      "rationale": "2冪長の遷移を前計算し、指数のbit分解で必要な合成だけを選ぶ構造が共通する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-jump-deterministic-transition"
+  ],
+  "representativeProblemIds": [
+    "abc310-g",
+    "abc438-e"
+  ],
+  "aliases": [
+    "binary lifting",
+    "doubling",
+    "ダブリング"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

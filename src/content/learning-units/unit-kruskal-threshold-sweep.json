@@ -1,0 +1,109 @@
+{
+  "id": "unit-kruskal-threshold-sweep",
+  "kind": "subsection",
+  "title": "Kruskal順の閾値DSU sweep",
+  "parentId": "unit-spanning-tree-optimization",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dsu-components",
+    "unit-spanning-tree-optimization"
+  ],
+  "excludedTopics": [
+    "Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc235-e-problem-dccad2a4c2f5987ff301944fb9581b4434faa1a3d9c6056a2a351517fb96d800",
+    "source-abc235-editorial-3254-3f27d67a0dbdcf3850835b7081f4364b176de8ed7482511f3e8c04b5bfb48b7b",
+    "source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb",
+    "source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93",
+    "source-abc301-editorial-6344-dc0137a9d497b87c806f280bfaa16810971f41dec665b5150a4a92beaa240e2c",
+    "source-abc301-ex-problem-9af37d3cfd4c8a86125b566c017bbdc9dbc36b618b097122b0d5477141ecd9c3"
+  ],
+  "tagIds": [
+    "tag-kruskal-threshold-sweep"
+  ],
+  "ownedTagIds": [
+    "tag-kruskal-threshold-sweep"
+  ],
+  "learningOutcomeIds": [
+    "outcome-sweep-connectivity-by-kruskal-threshold"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-sweep-connectivity-by-kruskal-threshold"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/kruskal-threshold-sweep.md",
+  "problemIds": [
+    "abc235-e",
+    "abc250-ex",
+    "abc301-ex",
+    "abc383-e"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-sweep-connectivity-by-kruskal-threshold",
+      "learningOutcomeIds": [
+        "outcome-sweep-connectivity-by-kruskal-threshold"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC235 E「MST + 1」について、追加辺 e=(u,v,w) が Kruskal 法で選ばれるかは、重み w 未満の元グラフ辺を処理した時点で u と v がまだ非連結かだけで決まる。",
+      "procedure": [
+        "観察: 追加辺 e=(u,v,w) が Kruskal 法で選ばれるかは、重み w 未満の元グラフ辺を処理した時点で u と v がまだ非連結かだけで決まる。",
+        "観察: 各クエリは独立で追加辺を実際には残さないため、全クエリの判定中に Union-Find を変化させるのは元グラフ辺だけである。",
+        "着眼: 答えを知るには完成した MST 自体は不要で、候補辺が現れる瞬間の軽い辺による連結性という途中状態だけで十分である。",
+        "方針: 元辺と全クエリを重み順に一緒に並べ、元辺では Union、クエリでは現在の連結性を読むだけの一回の sweep を行う。（各クエリを個別 Kruskal の重み w 時点まで進めた状態が、共通の元辺 sweep 上で完全に一致する。）",
+        "接続: Kruskal の選択条件を重み閾値付き連結性クエリへ切り出し、独立クエリを元辺だけが更新するオフライン Union-Find sweep に並列化する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "同重みeventの順序を正しく定め、Kruskal順にDSU成分とmetadataを併合してminimax連結閾値でquery・pairing・集計を処理できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-sweep-connectivity-by-kruskal-threshold",
+      "learningOutcomeIds": [
+        "outcome-sweep-connectivity-by-kruskal-threshold"
+      ],
+      "prerequisiteIds": [
+        "outcome-augment-components-with-metadata",
+        "outcome-construct-optimal-spanning-tree",
+        "outcome-maintain-connectivity-components",
+        "prereq-abc-advanced-v1",
+        "unit-dsu-components",
+        "unit-spanning-tree-optimization"
+      ],
+      "attainmentCondition": "学習成果「同重みeventの順序を正しく定め、Kruskal順にDSU成分とmetadataを併合してminimax連結閾値でquery・pairing・集計を処理できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC250 Ex「Trespassing Takahashi」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「同重みeventの順序を正しく定め、Kruskal順にDSU成分とmetadataを併合してminimax連結閾値でquery・pairing・集計を処理できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 各閾値tについて、距離t以下の移動を繰り返して家xから家yへ到達できるかを答えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 各閾値tについて、距離t以下の移動を繰り返して家xから家yへ到達できるかを答えられる。",
+          "転移題材の解法接続: K個の家を同時に始点としてDijkstraを行い、各辺の変換重みd[a]+c+d[b]を求めて昇順に並べる。質問もt順に処理し、重み≤tの辺をDSUへ追加して指定された家x,yの連結を判定する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "同重みeventの順序を正しく定め、Kruskal順にDSU成分とmetadataを併合してminimax連結閾値でquery・pairing・集計を処理できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 93,
+  "globalIndex": 193,
+  "orderReason": "DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。"
+}

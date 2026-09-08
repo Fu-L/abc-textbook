@@ -1,0 +1,10 @@
+{
+  "id": "outcome-precompute-directional-grid-effects",
+  "statement": "各行・各列でactiveな向きだけを更新し、blockerと通行禁止条件を混同せず、定数方向へ伸びる全効果領域をgrid全体の線形時間で印付けられる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc317-e",
+    "tag-directional-grid-effect-scan",
+    "unit-directional-grid-effect-scan"
+  ]
+}

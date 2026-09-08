@@ -1,0 +1,12 @@
+{
+  "id": "outcome-encode-labeled-trees-by-prufer-code",
+  "statement": "Prüfer列とlabel付き木の全単射、および各labelの出現回数=次数-1を使って次数制約を係数条件へ変換できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-formulate-combinatorial-coefficients"
+  ],
+  "scopeIds": [
+    "abc303-ex",
+    "tag-prufer-code",
+    "unit-prufer-code"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "tag-difference-constraints",
+  "name": "difference constraints・不等式系の最短路化",
+  "definition": "差の上界 x_v-x_u≤c を有向辺 u→v の重みcへ写し、Bellman–Ford等の緩和と負閉路から可解性・極値・具体解を求める。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-shortest-path"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "constraint graph",
+      "variables",
+      "x_v-x_u<=c"
+    ],
+    "triggerPatterns": [
+      "prefix sum inequality",
+      "差の上界または下界",
+      "整数列の区間個数制約"
+    ],
+    "invariantPatterns": [
+      "edge relaxation preserves every upper bound",
+      "negative cycle iff infeasible"
+    ],
+    "goalPatterns": [
+      "制約を満たす列の構成",
+      "可解性判定",
+      "変数の極値"
+    ],
+    "excludedPatterns": [
+      "online union/query",
+      "等式だけのpotential伝播"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-shortest-path",
+      "type": "reduction",
+      "rationale": "各不等式 x_v-x_u<=c を有向辺 u->v の緩和条件へ写し、可解性・極値を最短路または負閉路判定へ帰着する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-difference-constraints"
+  ],
+  "representativeProblemIds": [
+    "abc216-g",
+    "abc404-g"
+  ],
+  "aliases": [
+    "constraint graph",
+    "difference constraints",
+    "差の不等式",
+    "差分制約"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,15 @@
+{
+  "id": "outcome-build-suffix-lcp-index",
+  "statement": "接尾辞の辞書順とLCPを索引化し、出現範囲・部分文字列順位・distinct数・巡回shiftを処理できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc213-f",
+    "abc268-ex",
+    "abc272-f",
+    "abc280-ex",
+    "abc362-g",
+    "abc452-g",
+    "tag-suffix-lcp-index",
+    "unit-suffix-lcp-index"
+  ]
+}

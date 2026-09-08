@@ -1,0 +1,109 @@
+{
+  "id": "unit-ordered-interval-partition",
+  "kind": "subsection",
+  "title": "ordered interval partition・ODT",
+  "parentId": "unit-ordered-set-heap",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-ordered-set-multiset"
+  ],
+  "excludedTopics": [
+    "ordered interval partition・ODTの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc251-editorial-3954-5502e77b9db90e8223bf51820c90da77bdb341a71963b77421a1a563a6336004",
+    "source-abc251-ex-problem-fecc529753f72db31753658d74853da733df6f9c45e94aa18801d577114ab7b0",
+    "source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d",
+    "source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4",
+    "source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953",
+    "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80",
+    "source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1",
+    "source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222"
+  ],
+  "tagIds": [
+    "tag-ordered-interval-partition"
+  ],
+  "ownedTagIds": [
+    "tag-ordered-interval-partition"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-ordered-interval-partition"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-ordered-interval-partition"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/ordered-interval-partition.md",
+  "problemIds": [
+    "abc251-ex",
+    "abc255-ex",
+    "abc256-ex",
+    "abc380-e",
+    "abc435-e",
+    "abc465-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-maintain-ordered-interval-partition",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-interval-partition"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC255 Ex「Range Harvest Query」について、木iを前回B_i日目に収穫したならD日目の収穫量はi(D-B_i)であり、収穫後は区間内の全B_iが同じDへ上書きされる。",
+      "procedure": [
+        "観察: 木iを前回B_i日目に収穫したならD日目の収穫量はi(D-B_i)であり、収穫後は区間内の全B_iが同じDへ上書きされる。",
+        "着眼: 値dのブロック[l,r]からの収穫量は(D-d)Σ_(i=l)^r i=(D-d)(l+r)(r-l+1)/2と閉形式で計算できる。",
+        "着眼: 一問い合わせで新しく作るブロックは[L,R]の一個だけなので、消去されるブロック総数も全問い合わせでO(Q)である。",
+        "方針: 最終収穫日が等しい区間を平衡木で管理（更新区間と交わるブロックを分割して丸ごと削除・統合でき、各ブロックは生成後一度しか削除されないため全体の列挙数がO(Q)に収まる。）",
+        "接続: 初期ブロック[1,N]の値を0とし、各質問でLとR+1に境界を作る。完全に含まれる各ブロック[l,r],dの収穫量を足して削除し、値Dの一ブロック[L,R]を挿入する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-maintain-ordered-interval-partition",
+      "learningOutcomeIds": [
+        "outcome-maintain-ordered-interval-partition"
+      ],
+      "prerequisiteIds": [
+        "outcome-maintain-ordered-set-statistics",
+        "prereq-abc-advanced-v1",
+        "unit-ordered-set-multiset"
+      ],
+      "attainmentCondition": "学習成果「互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC380 E「1D Bucket Tool」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 巨大な同色成分の塗替えを、連続区間境界の局所更新として対数時間で処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 巨大な同色成分の塗替えを、連続区間境界の局所更新として対数時間で処理できる。",
+          "転移題材の解法接続: 各位置を長さ1成分として境界set・左端色map・色別個数を初期化する。塗替えで旧色個数を R-L 減らし新色へ足し、右境界、次に左境界を同色なら削除する。count query は色別個数を返す。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 3,
+  "representativeRank": 79,
+  "globalIndex": 155,
+  "orderReason": "ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。"
+}

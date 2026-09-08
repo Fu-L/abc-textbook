@@ -1,0 +1,46 @@
+{
+  "id": "tag-geometry-optimization-structure",
+  "name": "幾何・凸最適化への変換",
+  "definition": "配置・距離・目的関数を幾何predicateや凸構造へ変換する。",
+  "parentId": null,
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "点",
+      "目的関数",
+      "直線"
+    ],
+    "triggerPatterns": [
+      "最適化",
+      "距離",
+      "配置"
+    ],
+    "invariantPatterns": [
+      "凸",
+      "向き",
+      "境界"
+    ],
+    "goalPatterns": [
+      "幾何へ変換",
+      "最適点"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-transform-to-geometry-optimization"
+  ],
+  "representativeProblemIds": [
+    "abc251-g",
+    "abc257-ex"
+  ],
+  "aliases": [
+    "geometry and convex optimization",
+    "幾何・凸最適化"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

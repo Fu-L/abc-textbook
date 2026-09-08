@@ -1,0 +1,98 @@
+{
+  "id": "unit-fractional-parametric-search",
+  "kind": "section",
+  "title": "fractional programming・比率parametric search",
+  "parentId": "unit-chapter-geometry-optimization",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-monotone-search"
+  ],
+  "excludedTopics": [
+    "fractional programming・比率parametric searchの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc324-editorial-7405-5317d02fe307ce10102a7967c7f3daf33d3d92a95198f8b7d90c973e18e2e531",
+    "source-abc324-f-problem-a176553a647da6e3d14065cf470eec98dd1f7f0cfc7f9e784e56d782ecb04ce2"
+  ],
+  "tagIds": [
+    "tag-fractional-parametric-search"
+  ],
+  "ownedTagIds": [
+    "tag-fractional-parametric-search"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-ratio-by-parametric-search"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-ratio-by-parametric-search"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/fractional-parametric-search.md",
+  "problemIds": [
+    "abc324-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-optimize-ratio-by-parametric-search",
+      "learningOutcomeIds": [
+        "outcome-optimize-ratio-by-parametric-search"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC324 F「Beautiful Path」について、pathのbeauty/cost比がX以上という条件は、Σ(b_i-c_iX)≥0へ分母を払って加法的なpath weight条件にできる。",
+      "procedure": [
+        "観察: pathのbeauty/cost比がX以上という条件は、Σ(b_i-c_iX)≥0へ分母を払って加法的なpath weight条件にできる。",
+        "観察: 全edgeでu_i<v_iなので頂点番号順がtopological orderであり、固定Xでの最大path weightは1回のDAG DPで求められる。",
+        "着眼: cost総和は正なのでratio不等式を掛け算しても向きが変わらず、変換後weight和の符号だけを見ればよい。",
+        "着眼: dp[v]=1からvへの最大変換weightとし、到達不能を−∞にすれば、全incoming edge u→vからdp[u]+b-cXをmax更新できる。",
+        "方針: 候補比Xでedge weightをb-cXへ変換し、DAG最大path DPの可否を実数binary searchする。（ratio目的を線形和へ変換し、各判定を全edgeの一走査で行える。）",
+        "接続: predicate(X)ではdp[1]=0、他−∞とし、u=1..Nの番号順に全outgoing edge(u,v,b,c)でdp[v]=max(dp[v],dp[u]+b-cX)を更新し、dp[N]≥0を返す。lower=0、upperを最大b_i/c_i以上に取り、十分な回数binary searchしてtrueならlower=mid、falseならupper=midとしlowerを出力する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "比率候補xをbenefit-x·costの加法目的へ変換し、単調な判定問題を解いて最適比率を求められる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-optimize-ratio-by-parametric-search",
+      "learningOutcomeIds": [
+        "outcome-optimize-ratio-by-parametric-search"
+      ],
+      "prerequisiteIds": [
+        "outcome-prove-and-search-threshold",
+        "prereq-abc-advanced-v1",
+        "unit-monotone-search"
+      ],
+      "attainmentCondition": "学習成果「比率候補xをbenefit-x·costの加法目的へ変換し、単調な判定問題を解いて最適比率を求められる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
+      "assessment": {
+        "method": "ABC324 F「Beautiful Path」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「比率候補xをbenefit-x·costの加法目的へ変換し、単調な判定問題を解いて最適比率を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
+          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
+          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
+          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
+          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
+        ],
+        "expectedResult": "比率候補xをbenefit-x·costの加法目的へ変換し、単調な判定問題を解いて最適比率を求められるの適用可能範囲と破綻条件を反例付きで説明できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 89,
+  "globalIndex": 96,
+  "orderReason": "単調境界探索で得た考え方と実装を再利用し、fractional programming・比率parametric searchの発動条件・正当化・境界を重複なく学ぶ。"
+}

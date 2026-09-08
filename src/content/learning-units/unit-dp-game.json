@@ -1,0 +1,115 @@
+{
+  "id": "unit-dp-game",
+  "kind": "section",
+  "title": "ゲーム状態の勝敗とGrundy数",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-state-design"
+  ],
+  "excludedTopics": [
+    "得点差・最適手数・partisan局面値を求めるminimax評価。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc",
+    "source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93",
+    "source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132",
+    "source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a",
+    "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
+    "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5",
+    "source-abc278-editorial-5232-8837482708fe5b455f562d9bf57f546e49eb9285112b3dabbbcedd75fffb837b",
+    "source-abc278-f-problem-519f7651aa3986400132bc1168f74e594bffc48ff2757c5f6ea0842bebdeebc6"
+  ],
+  "tagIds": [
+    "tag-game-grundy-dp"
+  ],
+  "ownedTagIds": [
+    "tag-game-grundy-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-classify-game-states"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-classify-game-states"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-game.md",
+  "problemIds": [
+    "abc212-h",
+    "abc255-g",
+    "abc265-ex",
+    "abc278-f",
+    "abc278-g",
+    "abc297-g",
+    "abc354-e",
+    "abc368-f",
+    "abc380-f",
+    "abc398-e",
+    "abc398-g",
+    "abc433-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-classify-game-states",
+      "learningOutcomeIds": [
+        "outcome-classify-game-states"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC255 G「Constrained Nim」について、禁止手がない山nの遷移先には0..n-1が全て含まれるためGrundy数はそれまでの最大値hに1を足して伸び、挙動が変わるのはX_iだけである。",
+      "procedure": [
+        "観察: 禁止手がない山nの遷移先には0..n-1が全て含まれるためGrundy数はそれまでの最大値hに1を足して伸び、挙動が変わるのはX_iだけである。",
+        "着眼: 例外でないnでは、直前の例外値bar nからg(n)=n-bar n+h(bar n)と連続的に増える。",
+        "着眼: 0..hのGrundy値は最低一回ずつ現れるので、全頻度表には追加出現分だけを記録すれば、保持するキー数をO(M)へ抑えられる。",
+        "方針: 例外点だけのGrundy前計算と頻度mex（X_iを昇順に処理し、禁止された遷移先のGrundy頻度と全過去頻度を比較すれば例外点のmexを求め、その他の巨大nは直前例外からの線形式で評価できる。）",
+        "接続: S={0,X_i}を昇順に処理し、各例外Xについて禁止遷移先X-YのGrundy値を求める。過去全体での出現数が禁止分を上回る最小値をmexとしてg(X)にし、hと追加頻度を更新する。各A_iは直前例外を二分探索して式で求め、全山のxorを判定する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-classify-game-states",
+      "learningOutcomeIds": [
+        "outcome-classify-game-states"
+      ],
+      "prerequisiteIds": [
+        "outcome-design-minimal-sufficient-state",
+        "prereq-abc-advanced-v1",
+        "unit-dp-state-design"
+      ],
+      "attainmentCondition": "学習成果「後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC278 F「Shiritori」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: word再利用禁止shiritoriの最適勝者を、subset×末尾文字のgame DPで判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: word再利用禁止shiritoriの最適勝者を、subset×末尾文字のgame DPで判定できる。",
+          "転移題材の解法接続: dp[mask][c]をremaining set=mask、要求先頭文字cから手番playerが勝てるかとする。使用可能word iごとにdp[mask\\{i}][last_i]がfalseならtrueとし、maskの小さい順に埋める。full maskから任意初手で勝てればFirst。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 2,
+  "representativeRank": 5,
+  "globalIndex": 55,
+  "orderReason": "状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。"
+}

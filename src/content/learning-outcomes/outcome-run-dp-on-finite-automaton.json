@@ -1,0 +1,19 @@
+{
+  "id": "outcome-run-dp-on-finite-automaton",
+  "statement": "位置・長さとautomaton stateの積状態を作り、受理・禁止状態を除外して数え上げや最適化を行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-build-finite-string-automaton",
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc228-g",
+    "abc301-f",
+    "abc305-g",
+    "abc391-g",
+    "abc418-g",
+    "abc419-f",
+    "abc458-f",
+    "tag-automaton-dp",
+    "unit-automaton-dp"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "outcome-optimize-mask-by-bitwise-feasibility",
+  "statement": "上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc408-e",
+    "tag-bitwise-greedy-feasibility",
+    "unit-bitwise-greedy-feasibility"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "outcome-maintain-modular-product-under-factor-updates",
+  "statement": "法 m 上の積で一因子を差し替えるとき、取り得る因子のうち非零剰余がすべて可逆かを確認し、剰余 0 の因子数と可逆な非零剰余因子の積を分離して、可逆な旧因子を逆元で除き新因子を掛けて更新後の積を復元できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-compute-in-modular-arithmetic"
+  ],
+  "scopeIds": [
+    "abc405-g",
+    "abc411-e",
+    "abc456-g",
+    "tag-dynamic-modular-product",
+    "unit-dynamic-modular-product"
+  ]
+}

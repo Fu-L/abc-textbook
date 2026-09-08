@@ -1,0 +1,53 @@
+{
+  "id": "tag-idempotent-overlap-range-query",
+  "name": "冪等演算のoverlap range query・Sparse Table",
+  "definition": "冪等な演算なら重なりを許す二つの2冪区間で任意rangeを覆えることを使い、静的queryをO(1)で答える。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [
+    "tag-range-monoid-aggregation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "2冪区間",
+      "idempotent operation",
+      "静的配列"
+    ],
+    "triggerPatterns": [
+      "min/max/gcd",
+      "更新なし",
+      "重複して覆う"
+    ],
+    "invariantPatterns": [
+      "f\\(x,x\\)=x",
+      "floor log"
+    ],
+    "goalPatterns": [
+      "O\\(1\\) range query",
+      "query family構成"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-suffix-lcp-index",
+      "type": "often_combined",
+      "rationale": "suffix array上の二suffixのLCPを、隣接LCP列の区間最小値queryとして求めるときに併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-answer-idempotent-range-query"
+  ],
+  "representativeProblemIds": [
+    "abc282-f"
+  ],
+  "aliases": [
+    "Sparse Table",
+    "sparse table",
+    "冪等RMQ"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

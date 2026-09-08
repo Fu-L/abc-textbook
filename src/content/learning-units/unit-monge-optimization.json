@@ -1,0 +1,106 @@
+{
+  "id": "unit-monge-optimization",
+  "kind": "subsection",
+  "title": "Monge・monotone minima最適化",
+  "parentId": "unit-discrete-convex",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-transition-optimization"
+  ],
+  "excludedTopics": [
+    "Monge・monotone minima最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc305-editorial-6534-00b45bdb795c412a311d2d938a469f5c2f7c15e05d5c7d698c7b7da52d6e2d54",
+    "source-abc305-ex-problem-730ae4f7996eba3782f92a13c6c00df6cb84ff2c25a18bfbe74bb063308496d2",
+    "source-abc348-editorial-9707-e31a81617e57dd150c2c05cfe814e6a9b424cc80720ccfe1da0f26a7f8fad44a",
+    "source-abc348-g-problem-c6f9ebb220dc35e4c233cabf0a3b5e1898952199a2414b14ee2c8587232d84a4",
+    "source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea",
+    "source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c"
+  ],
+  "tagIds": [
+    "tag-monge-optimization"
+  ],
+  "ownedTagIds": [
+    "tag-monge-optimization"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-monge-transitions"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-monge-transitions"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/monge-optimization.md",
+  "problemIds": [
+    "abc305-ex",
+    "abc348-g",
+    "abc355-g",
+    "abc383-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-optimize-monge-transitions",
+      "learningOutcomeIds": [
+        "outcome-optimize-monge-transitions"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC305 Ex「Shojin」について、一日のproblem集合を固定すると、adjacent exchangeよりA>1の問題はB/(A−1)昇順、A=1の問題は最後に並べるのがminimum fatigueになる。",
+      "procedure": [
+        "観察: 一日のproblem集合を固定すると、adjacent exchangeよりA>1の問題はB/(A−1)昇順、A=1の問題は最後に並べるのがminimum fatigueになる。",
+        "観察: segment cost c(l,r)=f({l+1,…,r})は集合costのincreasing marginal propertyからquadrangle inequalityを満たし、K segmentsのminimum d(K)はKについてdiscrete convexになる。",
+        "着眼: problem pの追加によるfatigue増分は、既存集合が大きいほど前後のaffine composition係数が大きくなり増加するため、fはsupermodularになる。",
+        "着眼: penalty pで得るG(p)=min_K(d(K)+pK)から D=ceil(max_p((G(p)−X)/p)) と表せ、この比は探索可能なunimodal shapeを持つ。",
+        "方針: 一日ごとのpenalty pを加えたAliens DPでmin(cost+p×days)を求め、convex envelopeとternary searchからd(K)≤Xとなる最小Dを復元する。（Monge性がdays別最適costの凸性を保証し、Xを超えるedgesを除く高速DPと合わせてO(N log^2 X)にできる。）",
+        "接続: affine-composition orderingからsegment-cost Monge性を導き、partition shortest pathをLagrangian relaxation/Aliens DPとconvex dual searchで解く。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "quadrangle inequality/Monge性から各行の最適遷移位置が単調になることを示し、divide-and-conquerやSMAWKで最小値を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-optimize-monge-transitions",
+      "learningOutcomeIds": [
+        "outcome-optimize-monge-transitions"
+      ],
+      "prerequisiteIds": [
+        "outcome-factor-and-accelerate-transitions",
+        "prereq-abc-advanced-v1",
+        "unit-dp-transition-optimization"
+      ],
+      "attainmentCondition": "学習成果「quadrangle inequality/Monge性から各行の最適遷移位置が単調になることを示し、divide-and-conquerやSMAWKで最小値を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC348 G「Max (Sum - Max)」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「quadrangle inequality/Monge性から各行の最適遷移位置が単調になることを示し、divide-and-conquerやSMAWKで最小値を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 各k=1,…,Nについて、k indexを選んだΣA_i-max B_iの最大値を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 各k=1,…,Nについて、k indexを選んだΣA_i-max B_iの最大値を求められる。",
+          "転移題材の解法接続: pair(A_i,B_i)をB昇順sortする。solve(l,r)は各選択数の最大値vectorを返し、左右を再帰する。merge時に左Aを降順sortしたprefix x、右answer yからmonotone max-plus convolution zをO(len log len)で計算し、left-only、right-only、cross zの最大を各kへ格納する。root vectorの1…Nを出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "quadrangle inequality/Monge性から各行の最適遷移位置が単調になることを示し、divide-and-conquerやSMAWKで最小値を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 94,
+  "globalIndex": 197,
+  "orderReason": "DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge・monotone minima最適化の発動条件・正当化・境界を重複なく学ぶ。"
+}

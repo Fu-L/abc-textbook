@@ -1,0 +1,48 @@
+{
+  "id": "tag-randomized-algebraic-fingerprint",
+  "name": "乱択代数fingerprint",
+  "definition": "multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [
+    "tag-randomized-algorithm"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "multiset",
+      "多項式値",
+      "指数vector"
+    ],
+    "triggerPatterns": [
+      "完全冪判定",
+      "式の積が等しい",
+      "順序を無視"
+    ],
+    "invariantPatterns": [
+      "線形/乗法的合成",
+      "衝突上界"
+    ],
+    "goalPatterns": [
+      "確率的等価判定",
+      "集合同値query"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-compare-algebraic-objects-by-random-fingerprint"
+  ],
+  "representativeProblemIds": [
+    "abc238-g",
+    "abc339-f"
+  ],
+  "aliases": [
+    "Zobrist hash",
+    "multiset hash",
+    "randomized algebraic fingerprint"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

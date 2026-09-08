@@ -1,0 +1,101 @@
+{
+  "id": "unit-cyclic-group-exponent-counting",
+  "kind": "section",
+  "title": "巡回群を指数化して数える",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-multiplicative-order-periods"
+  ],
+  "excludedTopics": [
+    "乗法的位数から最小周期だけを求める問題。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
+    "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
+  ],
+  "tagIds": [
+    "tag-cyclic-exponent-counting"
+  ],
+  "ownedTagIds": [
+    "tag-cyclic-exponent-counting"
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-through-cyclic-exponents"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-count-through-cyclic-exponents"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/cyclic-group-exponent-counting.md",
+  "problemIds": [
+    "abc212-g",
+    "abc335-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-count-through-cyclic-exponents",
+      "learningOutcomeIds": [
+        "outcome-count-through-cyclic-exponents"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC212 G「Power Pair」について、x=0 なら正の整数 n に対して x^n=0 なので、寄与する組は (x,y)=(0,0) の 1 組だけである。残る非零剰余を乗法群として扱えばよい。",
+      "procedure": [
+        "観察: x=0 なら正の整数 n に対して x^n=0 なので、寄与する組は (x,y)=(0,0) の 1 組だけである。残る非零剰余を乗法群として扱えばよい。",
+        "観察: P が素数なので非零剰余は位数 m=P-1 の巡回群をなす。原始根 r を取り x=r^a,y=r^b と書くと、ある n で x^n=y となる条件は an≡b (mod m) へ移る。",
+        "着眼: an≡b (mod m) が n について解を持つのは gcd(m,a) が b を割るときに限る。したがって固定した a から到達できる b は m/gcd(m,a) 個であり、a の gcd ごとに寄与をまとめられる。",
+        "方針: 原始根の指数へ写し、g=gcd(m,a) ごとに指数 a の個数と到達可能な b の個数を約数上で集約する。（寄与は g=gcd(m,a) だけで決まり、g は m の約数に限られる。m<10^12 の約数数は高々 6720 なので、約数列挙と約数間の差し引きで制約内に収まる。）",
+        "接続: m の約数を降順に処理し、f(g)=m/g−Σ_{h:g|h,h>g}f(h) により gcd(m,a)=g となる a の個数を求める。最後に (0,0) の寄与を含む 1+Σ_g f(g)(m/g) を mod 998244353 で計算する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "巡回部分群を指数と約数格子で分類し、重複を補正して対象を数えられる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-count-through-cyclic-exponents",
+      "learningOutcomeIds": [
+        "outcome-count-through-cyclic-exponents"
+      ],
+      "prerequisiteIds": [
+        "outcome-find-period-by-multiplicative-order",
+        "prereq-abc-advanced-v1",
+        "unit-multiplicative-order-periods"
+      ],
+      "attainmentCondition": "学習成果「巡回部分群を指数と約数格子で分類し、重複を補正して対象を数えられる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC335 G「Discrete Logarithm Problems」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「巡回部分群を指数と約数格子で分類し、重複を補正して対象を数えられる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 正整数kによりA_i^k≡A_j mod Pとなる順序付きindex pair(i,j)の個数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 正整数kによりA_i^k≡A_j mod Pとなる順序付きindex pair(i,j)の個数を求められる。",
+          "転移題材の解法接続: P-1をtrial divisionで素因数分解する。各A_iについてmodular exponentiationで位数を削減し、その素因数指数vectorの頻度を数える。mixed-radix配列上で各軸のprefix zeta変換を行って各dに対するΣ_{e|d}freq[e]を得て、Σ_d freq[d]·divisorCount[d]を出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "巡回部分群を指数と約数格子で分類し、重複を補正して対象を数えられる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 3,
+  "representativeRank": 4,
+  "globalIndex": 75,
+  "orderReason": "乗法的位数とその約数分類を先に学び、巡回群の元を指数へ写して位数別に重複なく数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する。"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "outcome-build-cartesian-tree-decomposition",
+  "statement": "配列順とheap順を保つCartesian treeを単調stackで構成し、各部分木が表す連続区間へ問題を分解できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-prune-dominated-candidates-once"
+  ],
+  "scopeIds": [
+    "abc275-ex",
+    "abc420-f",
+    "abc435-f",
+    "tag-cartesian-tree",
+    "unit-cartesian-tree"
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "id": "unit-line-envelope",
+  "kind": "section",
+  "title": "Convex Hull Trick・直線包絡",
+  "parentId": "unit-chapter-geometry-optimization",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "Convex Hull Trick・直線包絡の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
+    "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777",
+    "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+    "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
+    "source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6",
+    "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63"
+  ],
+  "tagIds": [
+    "tag-convex-hull-trick"
+  ],
+  "ownedTagIds": [
+    "tag-convex-hull-trick"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-by-line-envelope"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-by-line-envelope"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/line-envelope.md",
+  "problemIds": [
+    "abc228-h",
+    "abc244-ex",
+    "abc289-g",
+    "abc372-g",
+    "abc448-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-optimize-by-line-envelope",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-line-envelope"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC228 H「Histogram」について、棒をAの昇順に並べる。完成後の高さに逆転があれば、前側の高い完成値を後側の低い完成値まで下げても、減らした枚数は増えず種類数も増えないため、最適解の完成値は非減少としてよい。",
+      "procedure": [
+        "観察: 棒をAの昇順に並べる。完成後の高さに逆転があれば、前側の高い完成値を後側の低い完成値まで下げても、減らした枚数は増えず種類数も増えないため、最適解の完成値は非減少としてよい。",
+        "観察: 同じ完成値にそろえる連続区間を一つのグループとみなせる。その完成値は区間右端の元の高さA_rまで下げても実現可能性と種類数を保ち、削除費用を減らせるので、候補は右端値だけで十分である。",
+        "着眼: R_i=Σ_{j≤i}C_jとすると、区間(l,r]を高さA_rへそろえる最終面積は(R_r−R_l)A_rである。全体で元面積ΣA_iC_iを最後に引けば、追加する棒の枚数と種類ごとの固定費XだけをDPできる。",
+        "着眼: D_r=min_{l<r}{D_l+X+(R_r−R_l)A_r}=R_rA_r+X+min_l{(−R_l)A_r+D_l} と分離すると、過去状態が直線、現在のA_rがquery座標になる。",
+        "方針: 区間DPの遷移をA_rにおける一次関数の最小値queryへ変形し、傾きとqueryの単調性を使うConvex Hull Trickで処理する。（各境界lの寄与が傾き−R_l、切片D_lの直線になり、累積本数R_lとソート済みA_rによって追加・queryの順序がともに単調になる。）",
+        "接続: (A,C)をA順にソートし、D_0=0、R_0=0の直線から始める。rを昇順に走査してx=A_rで直線群の最小値をqueryしD_rを求め、傾き−R_r・切片D_rの直線を単調dequeへ追加する。最後にD_N−ΣA_iC_iを出力する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-optimize-by-line-envelope",
+      "learningOutcomeIds": [
+        "outcome-optimize-by-line-envelope"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "学習成果「一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC244 Ex「Linear Maximization」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 追加点集合への線形最大化を prefix range に読み替え、segment-tree node ごとの convex hull で処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 追加点集合への線形最大化を prefix range に読み替え、segment-tree node ごとの convex hull で処理できる。",
+          "転移題材の解法接続: 全 Q 点を葉へ置く segment tree を作り、各 node の点を sort して上下 convex hull を構築する。時刻 i では range [1,i] を分解し、各 hull 上で A x+B y の最大頂点を unimodal search して全 node の最大を出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 93,
+  "globalIndex": 103,
+  "orderReason": "一次関数の候補を傾き・交点順に管理し、各query点で最小または最大となる直線を選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

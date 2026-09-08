@@ -1,0 +1,32 @@
+{
+  "id": "outcome-compute-convolution-or-correlation",
+  "statement": "係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc235-ex",
+    "abc265-ex",
+    "abc278-ex",
+    "abc281-ex",
+    "abc289-ex",
+    "abc291-g",
+    "abc300-ex",
+    "abc303-ex",
+    "abc307-ex",
+    "abc309-ex",
+    "abc315-ex",
+    "abc317-ex",
+    "abc331-g",
+    "abc345-g",
+    "abc352-g",
+    "abc385-g",
+    "abc390-g",
+    "abc392-g",
+    "abc409-g",
+    "abc422-g",
+    "abc432-g",
+    "abc436-g",
+    "abc462-g",
+    "tag-convolution",
+    "unit-polynomial-convolution"
+  ]
+}

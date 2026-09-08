@@ -1,0 +1,17 @@
+{
+  "id": "outcome-solve-modular-constraints",
+  "statement": "合同条件の可解性を判定し、逆元・一次合同・CRTで解の類を構成できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-characterize-integer-solvability",
+    "outcome-compute-in-modular-arithmetic"
+  ],
+  "scopeIds": [
+    "abc245-ex",
+    "abc286-f",
+    "abc371-g",
+    "abc423-g",
+    "abc460-e",
+    "tag-modular-congruence-crt",
+    "unit-modular-congruence"
+  ]
+}

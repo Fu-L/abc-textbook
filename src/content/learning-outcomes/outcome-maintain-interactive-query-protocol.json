@@ -1,0 +1,17 @@
+{
+  "id": "outcome-maintain-interactive-query-protocol",
+  "statement": "問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc269-e",
+    "abc278-g",
+    "abc282-f",
+    "abc286-f",
+    "abc305-f",
+    "abc337-e",
+    "abc355-e",
+    "abc398-e",
+    "tag-interactive-protocol",
+    "unit-interactive-protocol"
+  ]
+}

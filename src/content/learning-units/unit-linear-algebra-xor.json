@@ -1,0 +1,113 @@
+{
+  "id": "unit-linear-algebra-xor",
+  "kind": "section",
+  "title": "線形方程式・分離可能変換・行列式計数へ変換する",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "通常の多項式畳み込み・生成関数と、幾何の面積行列式。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc",
+    "source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93",
+    "source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541",
+    "source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da",
+    "source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190",
+    "source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e"
+  ],
+  "tagIds": [
+    "tag-linear-system-rank",
+    "tag-separable-linear-transform",
+    "tag-xor-linear-basis"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-factor-separable-linear-transform",
+    "outcome-maintain-xor-linear-basis",
+    "outcome-solve-linear-system-and-rank"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/linear-algebra-xor.md",
+  "problemIds": [
+    "abc212-h",
+    "abc220-h",
+    "abc223-h",
+    "abc236-f",
+    "abc249-g",
+    "abc265-ex",
+    "abc276-ex",
+    "abc278-ex",
+    "abc283-g",
+    "abc288-g",
+    "abc323-g",
+    "abc366-g",
+    "abc367-g",
+    "abc399-g",
+    "abc412-g",
+    "abc451-g"
+  ],
+  "examples": [
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-factor-separable-linear-transform",
+        "outcome-maintain-xor-linear-basis",
+        "outcome-solve-linear-system-and-rank"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（学習経路の比較）",
+      "omissions": [
+        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
+      ],
+      "environment": "紙上での未知問のモデル化と候補比較",
+      "input": "線形方程式・分離可能変換・行列式計数へ変換するの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
+      "procedure": [
+        "線形方程式・rank: 1個の直接所有Outcome、学ぶ理由「制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ」、対象外「線形方程式・rankの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "XOR線形基底: 1個の直接所有Outcome、学ぶ理由「整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ」、対象外「XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "分離可能線形変換・Walsh–Hadamard変換: 1個の直接所有Outcome、学ぶ理由「Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ」、対象外「分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-factor-separable-linear-transform",
+        "outcome-maintain-xor-linear-basis",
+        "outcome-solve-linear-system-and-rank"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
+      "assessment": {
+        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
+        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
+      },
+      "answer": {
+        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
+        "procedure": [
+          "問題を対象・操作・保つ量・求める量へ分解する。",
+          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
+          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
+          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
+        ],
+        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 9,
+  "globalIndex": 89,
+  "orderReason": "制約や多次元変換を線形方程式・基底・軸別変換・行列式へ写し、消去と分離によって解く。"
+}

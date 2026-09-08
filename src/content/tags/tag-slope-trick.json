@@ -1,0 +1,47 @@
+{
+  "id": "tag-slope-trick",
+  "name": "slope trick",
+  "definition": "区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [
+    "tag-basic-convex-optimization"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "breakpoints",
+      "slope",
+      "凸区分線形関数"
+    ],
+    "triggerPatterns": [
+      "prefix minimum",
+      "絶対値costを順次追加"
+    ],
+    "invariantPatterns": [
+      "傾き単調",
+      "左右heap balance"
+    ],
+    "goalPatterns": [
+      "最小値",
+      "最適解復元"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-maintain-piecewise-linear-convex-function"
+  ],
+  "representativeProblemIds": [
+    "abc217-h",
+    "abc406-g"
+  ],
+  "aliases": [
+    "Slope Trick",
+    "piecewise-linear convex DP",
+    "スロープトリック"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

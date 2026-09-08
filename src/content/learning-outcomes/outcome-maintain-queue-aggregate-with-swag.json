@@ -1,0 +1,12 @@
+{
+  "id": "outcome-maintain-queue-aggregate-with-swag",
+  "statement": "queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってpush/pop/foldを償却O(1)で処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-associative-range-summary"
+  ],
+  "scopeIds": [
+    "abc456-f",
+    "tag-swag",
+    "unit-swag"
+  ]
+}

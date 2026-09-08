@@ -1,0 +1,47 @@
+{
+  "id": "tag-near-tree-kernelization",
+  "name": "near-tree graphのkernel化",
+  "definition": "terminal外の葉除去とdegree-2 chain縮約で、cycle rankや余分な辺数だけに依存する小kernelへ答えを保って縮約する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-cycle-space-basis",
+    "tag-graph-core-peeling"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "chain",
+      "small kernel",
+      "terminal"
+    ],
+    "triggerPatterns": [
+      "chainを縮約",
+      "木に少数辺追加"
+    ],
+    "invariantPatterns": [
+      "cycle rank",
+      "答え保存"
+    ],
+    "goalPatterns": [
+      "parameterized kernel",
+      "path候補列挙"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-kernelize-near-tree-graph"
+  ],
+  "representativeProblemIds": [
+    "abc419-g"
+  ],
+  "aliases": [
+    "cycle-rank kernel",
+    "near-tree kernelization",
+    "次数2鎖圧縮"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

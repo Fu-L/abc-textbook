@@ -1,0 +1,72 @@
+{
+  "id": "tag-shortest-path",
+  "name": "最短路モデル",
+  "definition": "重み付きグラフに帰着し、距離の確定条件に応じた最短路法を選ぶ。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-state-graph-search"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "dijkstra",
+      "distance",
+      "path",
+      "コスト",
+      "距離",
+      "辺",
+      "道",
+      "重み"
+    ],
+    "triggerPatterns": [
+      "frontier",
+      "multi.?source",
+      "threshold",
+      "最小コスト",
+      "最短",
+      "移動"
+    ],
+    "invariantPatterns": [
+      "dist",
+      "priority queue",
+      "確定したvertex",
+      "緩和",
+      "距離確定"
+    ],
+    "goalPatterns": [
+      "最小コスト",
+      "最小時間",
+      "最短距離"
+    ],
+    "excludedPatterns": [
+      "syntax",
+      "最短(式|文字列)",
+      "構文"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-state-graph-search",
+      "type": "often_combined",
+      "rationale": "問題状態を頂点、合法操作を辺へ写してから、辺重みに応じた最短路algorithmを選ぶ流れで併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-model-and-compute-shortest-path"
+  ],
+  "representativeProblemIds": [
+    "abc213-e",
+    "abc237-e",
+    "abc325-e"
+  ],
+  "aliases": [
+    "Bellman–Ford法",
+    "Dijkstra法",
+    "shortest path",
+    "最短経路"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

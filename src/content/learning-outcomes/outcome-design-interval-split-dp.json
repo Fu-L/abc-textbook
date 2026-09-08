@@ -1,0 +1,33 @@
+{
+  "id": "outcome-design-interval-split-dp",
+  "statement": "区間または接頭辞の分割点を列挙し、小問題の答えを合成できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc217-f",
+    "abc219-h",
+    "abc228-h",
+    "abc230-f",
+    "abc233-g",
+    "abc234-g",
+    "abc238-ex",
+    "abc242-ex",
+    "abc252-g",
+    "abc261-g",
+    "abc262-ex",
+    "abc262-g",
+    "abc273-f",
+    "abc285-e",
+    "abc288-f",
+    "abc292-g",
+    "abc298-g",
+    "abc305-ex",
+    "abc325-g",
+    "abc400-f",
+    "abc418-g",
+    "abc466-e",
+    "tag-interval-partition-dp",
+    "unit-dp-sequence-interval"
+  ]
+}

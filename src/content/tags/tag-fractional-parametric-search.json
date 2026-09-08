@@ -1,0 +1,52 @@
+{
+  "id": "tag-fractional-parametric-search",
+  "name": "fractional programming・比率parametric search",
+  "definition": "比率目標xに対して各寄与をbenefit-x·costへ変換し、和が非負かという単調な加法最適化へ帰着する。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [
+    "tag-monotone-threshold-search"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "additive objective",
+      "benefit/cost ratio",
+      "parameter x"
+    ],
+    "triggerPatterns": [
+      "平均値の最適化",
+      "比の最大最小"
+    ],
+    "invariantPatterns": [
+      "benefit-x·cost",
+      "feasibility monotonicity"
+    ],
+    "goalPatterns": [
+      "最大平均",
+      "最適比率"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-monotone-threshold-search",
+      "type": "reduction",
+      "rationale": "比率目的を benefit-x·cost の加法判定へ意味保存変換し、その成立境界を単調閾値探索へ帰着する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-ratio-by-parametric-search"
+  ],
+  "representativeProblemIds": [
+    "abc324-f"
+  ],
+  "aliases": [
+    "fractional programming",
+    "parametric search for ratio",
+    "比率二分探索"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

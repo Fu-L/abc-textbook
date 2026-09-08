@@ -1,0 +1,14 @@
+{
+  "id": "outcome-identify-bridges-and-articulations",
+  "statement": "DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "scopeIds": [
+    "abc301-ex",
+    "abc334-g",
+    "abc375-g",
+    "tag-lowlink-critical-structure",
+    "unit-lowlink-critical-structure"
+  ]
+}

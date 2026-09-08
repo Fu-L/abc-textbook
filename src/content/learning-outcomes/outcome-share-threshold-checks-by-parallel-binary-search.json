@@ -1,0 +1,13 @@
+{
+  "id": "outcome-share-threshold-checks-by-parallel-binary-search",
+  "statement": "各queryの未確定区間を保ち、同じroundのmidをbucketして一方向更新できる判定器を共有し、全queryの最小・最大成立境界を求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-prove-and-search-threshold"
+  ],
+  "scopeIds": [
+    "abc233-ex",
+    "abc394-g",
+    "tag-parallel-binary-search",
+    "unit-parallel-binary-search"
+  ]
+}

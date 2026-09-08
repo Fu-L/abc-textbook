@@ -1,0 +1,16 @@
+{
+  "id": "outcome-maintain-piecewise-linear-convex-function",
+  "statement": "区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-optimize-univariate-convex-function"
+  ],
+  "scopeIds": [
+    "abc217-h",
+    "abc250-g",
+    "abc275-ex",
+    "abc406-g",
+    "abc458-g",
+    "tag-slope-trick",
+    "unit-slope-trick"
+  ]
+}

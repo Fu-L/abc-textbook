@@ -1,0 +1,59 @@
+{
+  "id": "tag-static-top-tree",
+  "name": "Static Top Treeによる動的木DP",
+  "definition": "境界頂点つきtree clusterをrake・compressで二分合成し、局所更新後の木DP値を根まで再計算する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [
+    "tag-rooted-tree-aggregation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "cluster",
+      "境界頂点",
+      "木",
+      "木DP"
+    ],
+    "triggerPatterns": [
+      "compress",
+      "rake",
+      "辺更新",
+      "頂点更新"
+    ],
+    "invariantPatterns": [
+      "cluster合成",
+      "二分木",
+      "境界頂点",
+      "局所再計算"
+    ],
+    "goalPatterns": [
+      "全体の値",
+      "動的木DP",
+      "更新後の木全体"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-rooted-tree-aggregation",
+      "type": "extension",
+      "rationale": "根付き木DPの合成則をboundary付きclusterの結合へ持ち上げ、局所変更後の再計算を対数個のclusterに限定する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-compose-dynamic-tree-clusters"
+  ],
+  "representativeProblemIds": [
+    "abc351-g",
+    "abc460-g"
+  ],
+  "aliases": [
+    "Static Top Tree",
+    "Top Tree",
+    "rake-compress tree"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

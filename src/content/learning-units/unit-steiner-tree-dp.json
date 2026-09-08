@@ -1,0 +1,105 @@
+{
+  "id": "unit-steiner-tree-dp",
+  "kind": "section",
+  "title": "Steiner tree subset DP",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-subset-state",
+    "unit-weighted-shortest-path"
+  ],
+  "excludedTopics": [
+    "Steiner tree subset DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc364-editorial-10547-0ce6702759818c3334c43dfff2b684fb4f5ff524c8e1a158e410e6d33ffd750a",
+    "source-abc364-g-problem-2b7755f38ab76701b38b7e8606e7efbd62fb407a019d63341ada4e0e7fed61b6",
+    "source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500",
+    "source-abc395-g-problem-28b4b77f6fd7b5f3d752638e1f2aa35eefec8abc1a034fccb30e919e725d5d55"
+  ],
+  "tagIds": [
+    "tag-steiner-tree-dp"
+  ],
+  "ownedTagIds": [
+    "tag-steiner-tree-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-steiner-tree-by-subset-dp"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-steiner-tree-by-subset-dp"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/steiner-tree-dp.md",
+  "problemIds": [
+    "abc364-g",
+    "abc395-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-solve-steiner-tree-by-subset-dp",
+      "learningOutcomeIds": [
+        "outcome-solve-steiner-tree-by-subset-dp"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC364 G「Last Major City」について、求める各答えは固定terminal 1..K−1と追加頂点vを含む最小Steiner treeの重みであり、K≤10なのでterminal集合をbit maskで持てる。",
+      "procedure": [
+        "観察: 求める各答えは固定terminal 1..K−1と追加頂点vを含む最小Steiner treeの重みであり、K≤10なのでterminal集合をbit maskで持てる。",
+        "観察: 同じ頂点vで二つのterminal部分集合を結合する遷移と、辺を一つ延ばしてroot位置を移す遷移の二種類で任意の最適木を分解できる。",
+        "着眼: dp[mask][v]←dp[sub][v]+dp[mask−sub][v]はvを共通接続点として二木を合併し、重複辺があれば最適解をさらに改善できるので上界遷移として安全である。",
+        "着眼: 各maskでmergeを済ませた値を全頂点sourceの初期距離としてDijkstraすれば、dp[mask][v]←dp[mask][u]+wを循環なく最短路閉包できる。",
+        "方針: dp[mask][v]をmask内terminalとvを結ぶ最小木とし、subset merge後にmulti-source Dijkstraで辺延長を閉包する。（Steiner treeの分岐を同一点での集合併合、path部分を最短路緩和として網羅できる。）",
+        "接続: 固定terminal i=1..K−1についてdp[1<<i][i]=0、他を∞とする。maskを昇順に処理し、全非空proper submaskとの和で各vをmin更新する。そのdp列を初期距離にmulti-source Dijkstraして全辺緩和する。full maskについてv=K..Nのdp[full][v]を出力する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest path relaxationを交互に行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-solve-steiner-tree-by-subset-dp",
+      "learningOutcomeIds": [
+        "outcome-solve-steiner-tree-by-subset-dp"
+      ],
+      "prerequisiteIds": [
+        "outcome-enumerate-subset-state-space",
+        "outcome-model-and-compute-shortest-path",
+        "prereq-abc-advanced-v1",
+        "unit-dp-subset-state",
+        "unit-weighted-shortest-path"
+      ],
+      "attainmentCondition": "学習成果「terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest path relaxationを交互に行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC395 G「Minimum Steiner Tree 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest path relaxationを交互に行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 固定terminalを共有する大量Steiner queryをsubset DPの再利用で一括前計算できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 固定terminalを共有する大量Steiner queryをsubset DPの再利用で一括前計算できる。",
+          "転移題材の解法接続: 固定terminal bitmaskについてsubset merge→dense Dijkstra closureを昇順maskで計算する。さらに各s>Kを一つ追加したterminal stateを同じ遷移で計算し、そのstateからtへclosureしたdp値をquery答えとして参照する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest path relaxationを交互に行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 91,
+  "globalIndex": 149,
+  "orderReason": "最短路モデル・部分集合・bitmask状態DPで得た考え方と実装を再利用し、Steiner tree subset DPの発動条件・正当化・境界を重複なく学ぶ。"
+}

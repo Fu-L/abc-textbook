@@ -1,0 +1,108 @@
+{
+  "id": "unit-dp-digit-string",
+  "kind": "section",
+  "title": "接頭辞から更新する有限状態DP",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-state-design"
+  ],
+  "excludedTopics": [
+    "整除鎖・加算式のcarryだけを下位桁から渡すDP、および接頭辞状態を使わない一般の表DP。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc228-editorial-2942-95765aba1977229808ad2c05816696527f7c547f42f56a6a101d6ed536bb8fdf",
+    "source-abc228-g-problem-0bda9bd2f12555defe74109966b56bc2d699f0f77de68f55f7136575c16a7719",
+    "source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227",
+    "source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e",
+    "source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9",
+    "source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c"
+  ],
+  "tagIds": [
+    "tag-automaton-dp",
+    "tag-digit-dp"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-count-prefix-constrained-objects",
+    "outcome-run-dp-on-finite-automaton"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-digit-string.md",
+  "problemIds": [
+    "abc228-g",
+    "abc235-f",
+    "abc288-ex",
+    "abc301-f",
+    "abc305-g",
+    "abc317-f",
+    "abc336-e",
+    "abc391-g",
+    "abc406-e",
+    "abc418-g",
+    "abc419-f",
+    "abc458-f",
+    "abc465-e"
+  ],
+  "examples": [
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-count-prefix-constrained-objects",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（学習経路の比較）",
+      "omissions": [
+        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
+      ],
+      "environment": "紙上での未知問のモデル化と候補比較",
+      "input": "接頭辞から更新する有限状態DPの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
+      "procedure": [
+        "automaton上のDP・行列遷移: 1個の直接所有Outcome、学ぶ理由「有限pattern automatonの完全遷移を構成できるようになった後、位置・長さとの直積状態で受理列を数え、桁上限がある場合だけ桁DPと組み合わせる」、対象外「automaton上のDP・行列遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "上限制約付き桁DP: 1個の直接所有Outcome、学ぶ理由「接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える」、対象外「上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-count-prefix-constrained-objects",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1",
+        "unit-dp-state-design"
+      ],
+      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
+      "assessment": {
+        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
+        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
+      },
+      "answer": {
+        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
+        "procedure": [
+          "問題を対象・操作・保つ量・求める量へ分解する。",
+          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
+          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
+          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
+        ],
+        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 2,
+  "representativeRank": 3,
+  "globalIndex": 71,
+  "orderReason": "状態設計を土台に、接頭辞から決まる有限統計を更新するという共通像を作り、数値上限の桁DPと有限automaton DPの境界を比較する。"
+}

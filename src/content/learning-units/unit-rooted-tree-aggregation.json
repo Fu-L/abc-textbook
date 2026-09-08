@@ -1,0 +1,129 @@
+{
+  "id": "unit-rooted-tree-aggregation",
+  "kind": "subsection",
+  "title": "根付き木DP・部分木集約",
+  "parentId": "unit-tree-aggregation",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-state-design"
+  ],
+  "excludedTopics": [
+    "根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc239-e-problem-0c0332ca346ab35bfa6ab96fb1358c42c5f5d1900beb6549ac2981886d6d849b",
+    "source-abc239-editorial-3385-b6460d588699cea27577b95603a64000088399f80feb54109efed334fa7c8ce5",
+    "source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72",
+    "source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362",
+    "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721",
+    "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"
+  ],
+  "tagIds": [
+    "tag-rooted-tree-aggregation"
+  ],
+  "ownedTagIds": [
+    "tag-rooted-tree-aggregation"
+  ],
+  "learningOutcomeIds": [
+    "outcome-aggregate-rooted-tree"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-aggregate-rooted-tree"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/rooted-tree-aggregation.md",
+  "problemIds": [
+    "abc239-e",
+    "abc246-g",
+    "abc248-g",
+    "abc259-f",
+    "abc263-f",
+    "abc264-ex",
+    "abc269-ex",
+    "abc275-ex",
+    "abc287-f",
+    "abc293-ex",
+    "abc298-ex",
+    "abc309-e",
+    "abc312-g",
+    "abc314-f",
+    "abc329-g",
+    "abc340-g",
+    "abc369-g",
+    "abc378-f",
+    "abc387-f",
+    "abc391-e",
+    "abc394-f",
+    "abc397-e",
+    "abc409-e",
+    "abc416-f",
+    "abc435-f",
+    "abc438-f",
+    "abc447-f",
+    "abc459-e"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-aggregate-rooted-tree",
+      "learningOutcomeIds": [
+        "outcome-aggregate-rooted-tree"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC239 E「Subtree K-th Max」について、各 query の K_i は20以下なので、部分木の全値を保存する必要はない。どの query にも使われない21番目以下の値は、祖先の部分木へ併合しても上位20個へ戻らない。",
+      "procedure": [
+        "観察: 各 query の K_i は20以下なので、部分木の全値を保存する必要はない。どの query にも使われない21番目以下の値は、祖先の部分木へ併合しても上位20個へ戻らない。",
+        "観察: 子部分木の上位候補と自頂点の値を集めれば、親部分木の上位候補が得られるため、葉から根への木 DP として前計算できる。",
+        "着眼: 上位K個だけを求める merge では、各入力集合からK位より下の要素を捨てても、union の上位K個は変わらない。",
+        "方針: 各頂点に、その部分木で大きい順の上位20値だけを持たせ、子の配列を併合・降順 sort・20個に truncate する。（query の上限を状態サイズへ直接反映でき、全 query は前計算済み配列の K_i-1 番目を見るだけになる。）",
+        "接続: 根1から親子関係と postorder を作る。各 v の候補を [X_v] で始め、各 child の上位20配列を追加して降順に並べ、先頭20個だけを P_v として残し、query (V,K) へ P_V[K-1] を返す。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "根付き木で子側の状態を合成し、部分木または木全体の値を求められる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-aggregate-rooted-tree",
+      "learningOutcomeIds": [
+        "outcome-aggregate-rooted-tree"
+      ],
+      "prerequisiteIds": [
+        "outcome-design-minimal-sufficient-state",
+        "prereq-abc-advanced-v1",
+        "unit-dp-state-design"
+      ],
+      "attainmentCondition": "学習成果「根付き木で子側の状態を合成し、部分木または木全体の値を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC248 G「GCD cost on the tree」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「根付き木で子側の状態を合成し、部分木または木全体の値を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 木上全頂点対の path 長×path gcd の総和を、gcd 別 count・長さ和を merge する木 DP で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 木上全頂点対の path 長×path gcd の総和を、gcd 別 count・長さ和を merge する木 DP で求められる。",
+          "転移題材の解法接続: 各頂点を cnt[A_v]=sum[A_v]=1、部分木内答え 0 で初期化する。子の DP を受け取り、全 gcd group 対で cross pair の寄与を答えへ加えた後、子の key y を gcd(A_v,y) に写して cnt と sum+cnt を親 map へ統合する。root の答えを 998244353 で出力する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "根付き木で子側の状態を合成し、部分木または木全体の値を求められる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 4,
+  "difficultyRank": 3,
+  "representativeRank": 63,
+  "globalIndex": 124,
+  "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。"
+}

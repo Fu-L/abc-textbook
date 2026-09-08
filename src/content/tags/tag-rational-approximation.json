@@ -1,0 +1,46 @@
+{
+  "id": "tag-rational-approximation",
+  "name": "連分数・Stern–Brocot有理近似",
+  "definition": "Euclidの商列またはStern–Brocot区間を辿り、分母制約下の最良有理近似を求める。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "Euclid商",
+      "分母上限",
+      "有理数"
+    ],
+    "triggerPatterns": [
+      "既約分数の順序",
+      "最良近似"
+    ],
+    "invariantPatterns": [
+      "区間包含",
+      "隣接分数の行列式"
+    ],
+    "goalPatterns": [
+      "分数探索",
+      "制約付き近似"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-approximate-rational-by-euclid"
+  ],
+  "representativeProblemIds": [
+    "abc273-ex",
+    "abc408-g"
+  ],
+  "aliases": [
+    "Farey sequence",
+    "Stern–Brocot木",
+    "continued fraction",
+    "連分数"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,13 @@
+{
+  "id": "outcome-flatten-tree-by-euler-order",
+  "statement": "Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc240-e",
+    "abc294-g",
+    "abc337-g",
+    "abc406-f",
+    "tag-tree-euler-flattening",
+    "unit-tree-euler-flattening"
+  ]
+}

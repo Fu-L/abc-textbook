@@ -1,0 +1,61 @@
+{
+  "id": "tag-dynamic-modular-product",
+  "name": "法上の動的積・剰余 0 因子の分離",
+  "definition": "取り得る因子のうち法 m で非零となるものがすべて可逆であることを確認し、因子の差し替えを「剰余 0 の因子数」と「非零因子の積」に分け、可逆な旧因子を逆元で外して新因子を掛ける。",
+  "parentId": "tag-modular-arithmetic",
+  "prerequisiteTagIds": [
+    "tag-modular-arithmetic"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "mod",
+      "剰余",
+      "因子",
+      "更新",
+      "積"
+    ],
+    "triggerPatterns": [
+      "0.*逆元",
+      "0.*除けない",
+      "一因子.*更新",
+      "因子.*差し替",
+      "積.*更新"
+    ],
+    "invariantPatterns": [
+      "0.*因子.*個数",
+      "zero count",
+      "非零.*可逆",
+      "非零因子積"
+    ],
+    "goalPatterns": [
+      "動的.*積",
+      "更新後.*積",
+      "法上.*積"
+    ],
+    "excludedPatterns": [
+      "すべての因子を毎回走査",
+      "加算だけ",
+      "積を更新しない"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-maintain-modular-product-under-factor-updates"
+  ],
+  "representativeProblemIds": [
+    "abc405-g",
+    "abc411-e",
+    "abc456-g"
+  ],
+  "aliases": [
+    "dynamic modular product",
+    "zero-aware modular product",
+    "剰余 0 因子数と可逆な非零剰余因子の積",
+    "法上の動的積"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

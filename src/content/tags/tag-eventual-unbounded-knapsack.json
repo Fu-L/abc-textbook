@@ -1,0 +1,47 @@
+{
+  "id": "tag-eventual-unbounded-knapsack",
+  "name": "大容量unbounded knapsackのeventual linearity",
+  "definition": "最大密度item以外の総使用量を剰余と交換論で有限に界し、小容量prefixだけをDPした後の巨大capacityを基準itemの反復で埋める。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-knapsack-resource"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "huge capacity",
+      "small integer weights",
+      "unbounded items"
+    ],
+    "triggerPatterns": [
+      "best value/weight item",
+      "capacityがDP不能に大きい",
+      "非基準itemを有限回へ交換"
+    ],
+    "invariantPatterns": [
+      "linear tail",
+      "non-best total weight is bounded",
+      "prefix residue collision"
+    ],
+    "goalPatterns": [
+      "巨大capacityの最大価値"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-stabilize-unbounded-knapsack-by-best-density"
+  ],
+  "representativeProblemIds": [
+    "abc415-g"
+  ],
+  "aliases": [
+    "best-density item",
+    "eventual linearity knapsack",
+    "大容量unbounded knapsack"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

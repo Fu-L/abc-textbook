@@ -1,0 +1,164 @@
+{
+  "id": "unit-monoid-segment-tree",
+  "kind": "section",
+  "title": "結合的要約と列・区間の合成",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "Fenwick Treeで保つ重み付き接頭辞統計。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+    "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+    "source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c",
+    "source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89",
+    "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+    "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+  ],
+  "tagIds": [
+    "tag-dynamic-segment-tree",
+    "tag-finite-function-composition",
+    "tag-idempotent-overlap-range-query",
+    "tag-range-monoid-aggregation",
+    "tag-segment-tree-canonical-decomposition",
+    "tag-static-sorted-range-index",
+    "tag-swag"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-answer-idempotent-range-query",
+    "outcome-build-static-sorted-range-index",
+    "outcome-compose-finite-functions",
+    "outcome-decompose-ranges-into-segment-tree-nodes",
+    "outcome-design-associative-range-summary",
+    "outcome-maintain-queue-aggregate-with-swag",
+    "outcome-maintain-sparse-domain-segment-tree"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/monoid-segment-tree.md",
+  "problemIds": [
+    "abc223-f",
+    "abc240-ex",
+    "abc244-ex",
+    "abc246-ex",
+    "abc248-ex",
+    "abc254-f",
+    "abc261-e",
+    "abc262-f",
+    "abc265-g",
+    "abc266-ex",
+    "abc268-ex",
+    "abc282-f",
+    "abc283-f",
+    "abc285-f",
+    "abc292-ex",
+    "abc299-g",
+    "abc309-f",
+    "abc322-f",
+    "abc331-f",
+    "abc339-e",
+    "abc339-g",
+    "abc342-g",
+    "abc343-f",
+    "abc353-g",
+    "abc354-f",
+    "abc356-f",
+    "abc357-f",
+    "abc360-g",
+    "abc363-g",
+    "abc365-f",
+    "abc388-g",
+    "abc403-g",
+    "abc408-f",
+    "abc410-g",
+    "abc414-g",
+    "abc415-f",
+    "abc418-f",
+    "abc424-f",
+    "abc429-f",
+    "abc432-e",
+    "abc434-g",
+    "abc437-f",
+    "abc440-f",
+    "abc447-g",
+    "abc453-g",
+    "abc456-f",
+    "abc460-f"
+  ],
+  "examples": [
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-answer-idempotent-range-query",
+        "outcome-build-static-sorted-range-index",
+        "outcome-compose-finite-functions",
+        "outcome-decompose-ranges-into-segment-tree-nodes",
+        "outcome-design-associative-range-summary",
+        "outcome-maintain-queue-aggregate-with-swag",
+        "outcome-maintain-sparse-domain-segment-tree"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（学習経路の比較）",
+      "omissions": [
+        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
+      ],
+      "environment": "紙上での未知問のモデル化と候補比較",
+      "input": "結合的要約と列・区間の合成の範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
+      "procedure": [
+        "有限関数・作用の合成: 1個の直接所有Outcome、学ぶ理由「小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ」、対象外「有限関数・作用の合成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "区間monoid要約: 1個の直接所有Outcome、学ぶ理由「queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ」、対象外「区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "冪等演算のoverlap range query・Sparse Table: 1個の直接所有Outcome、学ぶ理由「区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ」、対象外「冪等演算のoverlap range query・Sparse Tableの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "Segment Treeのcanonical区間分解: 1個の直接所有Outcome、学ぶ理由「区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ」、対象外「Segment Treeのcanonical区間分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "動的・implicit Segment Tree: 1個の直接所有Outcome、学ぶ理由「区間monoid要約で得た考え方と実装を再利用し、動的・implicit Segment Treeの発動条件・正当化・境界を重複なく学ぶ」、対象外「動的・implicit Segment Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "静的sorted range index・Merge Sort Tree: 1個の直接所有Outcome、学ぶ理由「Segment Treeのcanonical区間分解で得た考え方と実装を再利用し、静的sorted range index・Merge Sort Treeの発動条件・正当化・境界を重複なく学ぶ」、対象外「静的sorted range index・Merge Sort Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
+        "SWAG・two-stack queue aggregation: 1個の直接所有Outcome、学ぶ理由「区間monoid要約で得た考え方と実装を再利用し、SWAG・two-stack queue aggregationの発動条件・正当化・境界を重複なく学ぶ」、対象外「SWAG・two-stack queue aggregationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "curriculum-routing",
+      "learningOutcomeIds": [
+        "outcome-answer-idempotent-range-query",
+        "outcome-build-static-sorted-range-index",
+        "outcome-compose-finite-functions",
+        "outcome-decompose-ranges-into-segment-tree-nodes",
+        "outcome-design-associative-range-summary",
+        "outcome-maintain-queue-aggregate-with-swag",
+        "outcome-maintain-sparse-domain-segment-tree"
+      ],
+      "prerequisiteIds": [
+        "prereq-abc-advanced-v1"
+      ],
+      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
+      "assessment": {
+        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
+        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
+      },
+      "answer": {
+        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
+        "procedure": [
+          "問題を対象・操作・保つ量・求める量へ分解する。",
+          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
+          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
+          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
+        ],
+        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "curriculum_routing"
+    }
+  ],
+  "stageRank": 2,
+  "difficultyRank": 2,
+  "representativeRank": 1,
+  "globalIndex": 41,
+  "orderReason": "結合則を持つ要約という共通像から、Segment Tree・Sparse Table・SWAG・有限関数合成が使う分解方法の違いを比較する。"
+}

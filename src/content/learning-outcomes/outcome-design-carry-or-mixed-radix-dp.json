@@ -1,0 +1,13 @@
+{
+  "id": "outcome-design-carry-or-mixed-radix-dp",
+  "statement": "整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc231-e",
+    "abc466-g",
+    "tag-carry-mixed-radix-dp",
+    "unit-dp-carry-mixed-radix"
+  ]
+}

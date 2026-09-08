@@ -1,0 +1,12 @@
+{
+  "id": "outcome-compute-transitive-closure",
+  "statement": "各始点探索または中継許可集合の段階不変条件を保つWarshall更新で推移閉包を求め、必要なら初回到達段階も記録できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc287-ex",
+    "abc292-e",
+    "abc374-g",
+    "tag-transitive-closure",
+    "unit-transitive-closure"
+  ]
+}

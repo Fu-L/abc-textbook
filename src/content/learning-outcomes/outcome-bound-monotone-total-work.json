@@ -1,0 +1,28 @@
+{
+  "id": "outcome-bound-monotone-total-work",
+  "statement": "要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc217-e",
+    "abc255-ex",
+    "abc256-ex",
+    "abc295-g",
+    "abc302-e",
+    "abc305-f",
+    "abc307-f",
+    "abc312-ex",
+    "abc319-g",
+    "abc368-g",
+    "abc403-e",
+    "abc417-g",
+    "abc421-f",
+    "abc426-f",
+    "abc427-g",
+    "abc428-f",
+    "abc430-g",
+    "abc435-e",
+    "abc466-f",
+    "tag-amortized-monotone-progress",
+    "unit-amortized-monotone-progress"
+  ]
+}

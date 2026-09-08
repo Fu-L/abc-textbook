@@ -1,0 +1,47 @@
+{
+  "id": "tag-monge-optimization",
+  "name": "Monge・monotone minima最適化",
+  "definition": "quadrangle inequality/Monge性から各行の最適遷移位置が単調になることを示し、divide-and-conquerやSMAWKで最小値を求める。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [
+    "tag-dp-transition-acceleration"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "DP transition",
+      "argmin",
+      "cost matrix"
+    ],
+    "triggerPatterns": [
+      "concave max-plus convolution",
+      "四点不等式"
+    ],
+    "invariantPatterns": [
+      "argmin monotonicity",
+      "totally monotone"
+    ],
+    "goalPatterns": [
+      "row minima",
+      "遷移高速化"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-optimize-monge-transitions"
+  ],
+  "representativeProblemIds": [
+    "abc348-g",
+    "abc383-g"
+  ],
+  "aliases": [
+    "Monge最適化",
+    "SMAWK",
+    "monotone minima"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

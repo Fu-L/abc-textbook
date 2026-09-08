@@ -1,0 +1,52 @@
+{
+  "id": "tag-randomized-algorithm",
+  "name": "乱択・Monte Carloアルゴリズム",
+  "definition": "乱数で候補またはfingerprintを選び、成功条件と誤り確率を評価して反復や事後検証を設計する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "sample",
+      "乱数",
+      "候補",
+      "確率変数"
+    ],
+    "triggerPatterns": [
+      "sampling",
+      "ランダムに選",
+      "乱択",
+      "試行を繰り返"
+    ],
+    "invariantPatterns": [
+      "事後検証",
+      "独立試行",
+      "誤り確率",
+      "高確率"
+    ],
+    "goalPatterns": [
+      "候補を得る",
+      "衝突回避",
+      "高確率で発見"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-design-and-bound-randomized-algorithm"
+  ],
+  "representativeProblemIds": [
+    "abc272-g",
+    "abc422-e"
+  ],
+  "aliases": [
+    "Las Vegas algorithm",
+    "Monte Carlo algorithm",
+    "probabilistic method",
+    "乱択アルゴリズム"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

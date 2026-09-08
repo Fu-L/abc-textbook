@@ -1,0 +1,111 @@
+{
+  "id": "unit-labeled-component-decomposition",
+  "kind": "section",
+  "title": "label付き連結成分分解・exponential formula",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-generating-functions"
+  ],
+  "excludedTopics": [
+    "label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f",
+    "source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2",
+    "source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c",
+    "source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53",
+    "source-abc253-editorial-4023-366204e887abfce0e08e2692d2e2861877d7e000474c649f5be1fddbb290bf8a",
+    "source-abc253-ex-problem-403eda1a50e862876c0d2cf16a7969f8c8d764c1034b46e09454824b8ae3cabd",
+    "source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84",
+    "source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01"
+  ],
+  "tagIds": [
+    "tag-labeled-component-decomposition"
+  ],
+  "ownedTagIds": [
+    "tag-labeled-component-decomposition"
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-labeled-structures-by-components"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-count-labeled-structures-by-components"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md",
+  "problemIds": [
+    "abc213-g",
+    "abc236-ex",
+    "abc253-ex",
+    "abc318-ex",
+    "abc321-g",
+    "abc327-g",
+    "abc386-g"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-count-labeled-structures-by-components",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC213 G「Connectivity 2」について、頂点集合 S の内部にある元グラフの辺数を e(S) とすると、S 上で選べる全ての部分グラフは各辺を選ぶか否かで 2 の e(S) 乗個ある。",
+      "procedure": [
+        "観察: 頂点集合 S の内部にある元グラフの辺数を e(S) とすると、S 上で選べる全ての部分グラフは各辺を選ぶか否かで 2 の e(S) 乗個ある。",
+        "観察: 頂点 1 と頂点 k が連結である部分グラフは、頂点 1 を含む連結成分 S を一意に取り出すことで分類できる。",
+        "着眼: 連結グラフ数 f(S) は全グラフ数から、固定した基準頂点を含む真部分集合 T がその連結成分になる場合を全て引けば得られる。",
+        "着眼: 基準頂点を T に必ず含めることで、非連結グラフを基準頂点の連結成分によりちょうど一度だけ数えられる。",
+        "方針: 頂点部分集合ごとに、その集合全体を連結にする辺選択数を、頂点 1 側の連結成分を固定する包除型の部分集合 DP で求める。（N が小さいことを利用し、辺部分集合ではなく頂点部分集合とその部分集合の列挙へ計算対象を移せる。）",
+        "接続: 各頂点集合の内部辺数から全部分グラフ数を作り、基準頂点の連結成分による再帰で連結数を求めた後、1 と k を含む成分 S と外側の自由な辺選択を合成する。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-count-labeled-structures-by-components",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components"
+      ],
+      "prerequisiteIds": [
+        "outcome-encode-counting-by-generating-function",
+        "prereq-abc-advanced-v1",
+        "unit-generating-functions"
+      ],
+      "attainmentCondition": "学習成果「最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC318 Ex「Count Strong Test Cases」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 二解法の正誤を cycle component の EGF へ変換し、(N!)² 個の入力を一つの FPS exp 係数から数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 二解法の正誤を cycle component の EGF へ変換し、(N!)² 個の入力を一つの FPS exp 係数から数えられる。",
+          "転移題材の解法接続: mod 上で f_i=1/i² (1≤i≤N) を作り、FPS E=exp(f) mod x^{N+1} を Newton 法で求める。AliceのみAC/BobのみAC/両者AC の重複を対称性と1-cycleのみのケースで整理し、公式式 N!²(1−2[x^N]E)+N! を計算する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 4,
+  "representativeRank": 93,
+  "globalIndex": 102,
+  "orderReason": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。"
+}

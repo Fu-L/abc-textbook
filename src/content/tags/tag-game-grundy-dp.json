@@ -1,0 +1,64 @@
+{
+  "id": "tag-game-grundy-dp",
+  "name": "game状態・Grundy DP",
+  "definition": "各状態の勝敗またはGrundy数を後続状態から求める。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "ゲーム",
+      "先手",
+      "後手",
+      "手番",
+      "石"
+    ],
+    "triggerPatterns": [
+      "mex",
+      "勝ち",
+      "手を選",
+      "負け"
+    ],
+    "invariantPatterns": [
+      "grundy",
+      "xor",
+      "後続状態"
+    ],
+    "goalPatterns": [
+      "grundy",
+      "勝てる",
+      "勝者"
+    ],
+    "excludedPatterns": [
+      "bottleneck path",
+      "minimax path"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-game-value-dp",
+      "type": "contrast",
+      "rationale": "impartial gameのGrundy数と、双方の目的が異なる局面のminimax値を同じゲームDPへ混同しない。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-classify-game-states"
+  ],
+  "representativeProblemIds": [
+    "abc297-g",
+    "abc354-e",
+    "abc380-f"
+  ],
+  "aliases": [
+    "Nim",
+    "combinatorial game DP",
+    "ゲームDP",
+    "組合せゲーム"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

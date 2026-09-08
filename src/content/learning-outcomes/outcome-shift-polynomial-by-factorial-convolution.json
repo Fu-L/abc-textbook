@@ -1,0 +1,13 @@
+{
+  "id": "outcome-shift-polynomial-by-factorial-convolution",
+  "statement": "二項係数を階乗で分離し、係数列の反転と一回の畳み込みから P(x+a) の全係数を準線形時間で復元できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-compute-convolution-or-correlation",
+    "outcome-formulate-combinatorial-coefficients"
+  ],
+  "scopeIds": [
+    "abc323-g",
+    "tag-polynomial-taylor-shift",
+    "unit-polynomial-taylor-shift"
+  ]
+}

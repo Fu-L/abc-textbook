@@ -1,0 +1,105 @@
+{
+  "id": "unit-cartesian-tree",
+  "kind": "section",
+  "title": "大小関係をCartesian treeへ変換する",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-monotone-stack-queue"
+  ],
+  "excludedTopics": [
+    "最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0",
+    "source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f",
+    "source-abc420-editorial-13741-3707893785f657ea0534c3a14747e11b63e4f398d30f858a61cc0ee929c15fa7",
+    "source-abc420-f-problem-e5255d1e68596a19e9632578192125b612d2b28436ace623ca5a7f368018ff95",
+    "source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217",
+    "source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677"
+  ],
+  "tagIds": [
+    "tag-cartesian-tree"
+  ],
+  "ownedTagIds": [
+    "tag-cartesian-tree"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-cartesian-tree-decomposition"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-cartesian-tree-decomposition"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/cartesian-tree.md",
+  "problemIds": [
+    "abc275-ex",
+    "abc420-f",
+    "abc435-f"
+  ],
+  "examples": [
+    {
+      "key": "guided-outcome-build-cartesian-tree-decomposition",
+      "learningOutcomeIds": [
+        "outcome-build-cartesian-tree-decomposition"
+      ],
+      "kind": "illustrative",
+      "language": "日本語（考察手順）",
+      "omissions": [
+        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
+      ],
+      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
+      "input": "ABC275 Ex「Monster」について、操作順は総費用に影響せず、同じ最大 shield 値のままなら区間を広げても損をしないため、候補区間は B の極大支配区間へ絞れる。",
+      "procedure": [
+        "観察: 操作順は総費用に影響せず、同じ最大 shield 値のままなら区間を広げても損をしないため、候補区間は B の極大支配区間へ絞れる。",
+        "観察: 各 B_i を区間最大の代表とし、同値では右側を代表にする規約を置くと、候補区間は max Cartesian tree の部分木区間になる。",
+        "着眼: node i で追加の全区間攻撃を k 回行うと、k≥max(A_i-j,0) かつ費用は kB_i+F_left(j+k)+F_right(j+k) になる。",
+        "着眼: 子関数の限界削減量が j とともに減る離散凸性により、最適な到達高さ j_0 は『子側の次の1回の節約が B_i を下回る最初』という閾値になる。",
+        "方針: B の Cartesian tree 上で、区間全体が既に j 回攻撃済みのときの最小追加費用 F_i(j) を子から合成し、離散凸な折れ線の変化点だけを small-to-large で管理する。（A_i,j が 10^9 でも関数の傾き変化は部分木頂点数程度であり、全 j を列挙せず再帰式を評価できる。）",
+        "接続: 単調 stack等で tie規約付き max Cartesian treeを構築する。postorderで子の折れ線event集合を大きい方へ併合し、j≥A_i かつ子の限界節約<B_iとなる j_0 までeventを消費する。prefix slopeをB_iへ置換するbreakpointを挿入し、rootのF(0)を答える。"
+      ],
+      "executionTarget": null,
+      "expectedResult": "配列順とheap順を保つCartesian treeを単調stackで構成し、各部分木が表す連続区間へ問題を分解できる。",
+      "verificationStatus": "not_applicable",
+      "learningUnitRole": "guided_outcome"
+    }
+  ],
+  "exercises": [
+    {
+      "key": "attainment-outcome-build-cartesian-tree-decomposition",
+      "learningOutcomeIds": [
+        "outcome-build-cartesian-tree-decomposition"
+      ],
+      "prerequisiteIds": [
+        "outcome-prune-dominated-candidates-once",
+        "prereq-abc-advanced-v1",
+        "unit-monotone-stack-queue"
+      ],
+      "attainmentCondition": "学習成果「配列順とheap順を保つCartesian treeを単調stackで構成し、各部分木が表す連続区間へ問題を分解できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
+      "assessment": {
+        "method": "ABC420 F「kirinuki」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
+        "successCondition": "手法名の列挙に留まらず、学習成果「配列順とheap順を保つCartesian treeを単調stackで構成し、各部分木が表す連続区間へ問題を分解できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
+      },
+      "answer": {
+        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 最大500万cellのgridで、all-dotかつarea≤Kの全rectangleをO(NM)で数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
+        "procedure": [
+          "対象技能が担う箇所: 最大500万cellのgridで、all-dotかつarea≤Kの全rectangleをO(NM)で数えられる。",
+          "転移題材の解法接続: 各bottom rowでh_jを更新し、(h_j,j)などの一意順序によるnearest smaller境界からa=i-l+1,b=r-i+1を得る。h_i=0はskipし、gの三rangeをd=K/h_iでも分割して、h_iΣ(αw+β)またはαΣwq_w+βΣq_wを足す。全rowの寄与を64 bitで合計する。",
+          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
+          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
+          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
+          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
+        ],
+        "expectedResult": "配列順とheap順を保つCartesian treeを単調stackで構成し、各部分木が表す連続区間へ問題を分解できる。",
+        "verificationStatus": "pending"
+      },
+      "learningUnitRole": "outcome_attainment"
+    }
+  ],
+  "stageRank": 3,
+  "difficultyRank": 3,
+  "representativeRank": 10,
+  "globalIndex": 83,
+  "orderReason": "単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。"
+}

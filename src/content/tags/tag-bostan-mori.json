@@ -1,0 +1,50 @@
+{
+  "id": "tag-bostan-mori",
+  "name": "Bostan–Mori・有理生成関数の係数抽出",
+  "definition": "P(x)/Q(x)のN次係数をQ(-x)との積の偶奇係数へ半減し、対数段で巨大indexへ進む。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-generating-functions"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "denominator",
+      "numerator",
+      "rational series"
+    ],
+    "triggerPatterns": [
+      "巨大N次係数",
+      "線形漸化式の項"
+    ],
+    "invariantPatterns": [
+      "Q\\(x\\)Q\\(-x\\)",
+      "偶奇係数"
+    ],
+    "goalPatterns": [
+      "N次係数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-generating-functions",
+      "type": "extension",
+      "rationale": "組合せ構造を生成関数へ符号化する技能に対し、既に与えられた有理生成関数から巨大次数係数を偶奇分離で抽出する新しい目的・操作を加える。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-extract-rational-series-coefficient"
+  ],
+  "representativeProblemIds": [
+    "abc300-ex"
+  ],
+  "aliases": [
+    "Bostan–Mori",
+    "有理生成関数の係数抽出"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

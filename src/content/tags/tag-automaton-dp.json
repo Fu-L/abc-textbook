@@ -1,0 +1,60 @@
+{
+  "id": "tag-automaton-dp",
+  "name": "automaton上のDP・行列遷移",
+  "definition": "位置・長さとautomaton stateの積状態を作り、受理・禁止状態を除外して数え上げや最適化を行う。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence",
+    "tag-finite-pattern-automaton"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "automaton state",
+      "文字位置",
+      "遷移表"
+    ],
+    "triggerPatterns": [
+      "graph walkと有限状態",
+      "patternを避ける",
+      "長さLの文字列数"
+    ],
+    "invariantPatterns": [
+      "prefix後の状態",
+      "受理集合"
+    ],
+    "goalPatterns": [
+      "文字列数え上げ",
+      "最適walk"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-digit-dp",
+      "type": "contrast",
+      "rationale": "数値上限のtight状態を扱うDPと、受理条件を表す有限automatonとの直積DPを区別する。"
+    },
+    {
+      "tagId": "tag-finite-pattern-automaton",
+      "type": "implementation_substrate",
+      "rationale": "位置・長さと直積する有限状態および完全遷移表をDPの状態基盤にする。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-run-dp-on-finite-automaton"
+  ],
+  "representativeProblemIds": [
+    "abc305-g",
+    "abc418-g"
+  ],
+  "aliases": [
+    "DFA DP",
+    "automaton DP",
+    "オートマトンDP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}
