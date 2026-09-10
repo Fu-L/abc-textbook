@@ -1,6 +1,6 @@
 ---
 title: "最大流・最小カット"
-description: "前提から最大流・最小カットを見抜き、方針へ接続して検証するための学習単位。"
+description: "最大流・最小カットの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 180
@@ -8,108 +8,46 @@ sidebar:
 
 # 最大流・最小カット
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 状態グラフのモデリングと探索
-- この位置で学ぶ理由: 状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ。
-
-### この単元では扱わない範囲
-
-- 最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### 最大流・最小カット
 
 選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。
 
-検索語: max flow、min cut、最大流、最小カット
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: 状態グラフのモデリングと探索。
 
-### 例 1 — 選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
+状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ。
 
-題材: [ABC225 G「X」](https://atcoder.jp/contests/abc225/tasks/abc225_g)
+- 最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: source→cellに容量Aを張るとcellを未選択側へ置くcut費用になり、cell→斜め前cellの容量Cは前者だけ選択したrun開始時に限って切られる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。隣接する選択要素を一操作でまとめられ、費用が連結成分やrunの個数で決まるとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC225 G「X」](https://atcoder.jp/contests/abc225/tasks/abc225_g)
+2. [ABC239 G「Builder Takahashi」](https://atcoder.jp/contests/abc239/tasks/abc239_g)
+3. [ABC259 G「Grid Card Game」](https://atcoder.jp/contests/abc259/tasks/abc259_g)
+4. [ABC318 G「Typical Path Problem」](https://atcoder.jp/contests/abc318/tasks/abc318_g)
+5. [ABC326 G「Unlock Achievement」](https://atcoder.jp/contests/abc326/tasks/abc326_g)
+6. [ABC347 G「Grid Coloring 2」](https://atcoder.jp/contests/abc347/tasks/abc347_g)
+7. [ABC263 G「Erasing Prime Pairs」](https://atcoder.jp/contests/abc263/tasks/abc263_g)
+8. [ABC397 G「Maximize Distance」](https://atcoder.jp/contests/abc397/tasks/abc397_g)
+9. [ABC332 G「Not Too Many Balls」](https://atcoder.jp/contests/abc332/tasks/abc332_g)
 
-- 共有線分の利益最大化をrun境界の局所費用へ直し、二値ラベル最小カットとして構成できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 同じ斜め方向に連続してXを付けたマスは一本の線分でつながる。したがって必要線分数は、二つの対角方向それぞれで『選択マスだが一つ前の斜めマスは未選択』となるrunの始点数である。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 総和ΣAから、未選択マスのAと斜めrun開始のCを足す最小コストを引く形にし、各マスの選択をsource側とするs-t最小カットへ変換する。 — 利益と罰金が二値ラベル間の局所コストへ分解でき、選択→斜め前未選択のCが有向cut辺と一致する。
-- **棄却**: 各マスを独立に A_ij-2C が正なら選ぶ。 — 隣接して選んだXは線分を共有するため一マスの費用は独立でなく、斜め方向のrun構造を無視すると最適集合を失う。
-
-#### 鍵となる着眼
-
-- source→cellに容量Aを張るとcellを未選択側へ置くcut費用になり、cell→斜め前cellの容量Cは前者だけ選択したrun開始時に限って切られる。
-- 盤外は常に未選択とみなすため、上端から始まる二方向のrunにはcell→sinkの容量Cをそれぞれ張れば同じ局所式で扱える。
-
-#### アルゴリズムへ接続する
-
-各マスへsourceからA_ij、二つの上側斜め前マスへ各C、前マスが盤外ならsinkへCの辺を張り、ΣA_ij−mincutを答える。
-
-
-## 転用するときの確認
-
-- **連続runの開始点数え上げ**: 隣接する選択要素を一操作でまとめられ、費用が連結成分やrunの個数で決まるとき。 適用: 各対角線上の選択列を見て、0から1へ変わる位置だけを新しい線分の開始として数える。
-- **二値ラベル最適化のs-t最小カット**: 選択・未選択の単項コストと、特定の向きのラベル不一致に対する非負罰金の和を最小化するとき。 適用: 単項コストをsource/sink辺、不一致罰金をラベル間の有向辺としてcut容量に一致させる。
-- 描画や起動の共有費用は、連続区間の個数を0→1境界の個数へ書き換えて局所化する。
-- 連続すると費用を共有する選択では、一要素の費用を決めず、各方向の0→1境界だけに費用を置けないか考える。
-
-## 到達確認
-
-### 到達確認 1 — 選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
-
-転移題材: [ABC239 G「Builder Takahashi」](https://atcoder.jp/contests/abc239/tasks/abc239_g)
-
-**課題**: ABC239 G「Builder Takahashi」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 重み付き最小頂点カットを node splitting で最小辺カットへ変換し、最適費用と選択頂点を復元できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 重み付き最小頂点カットを node splitting で最小辺カットへ変換し、最適費用と選択頂点を復元できる。
-
-- 対象技能が担う箇所: 重み付き最小頂点カットを node splitting で最小辺カットへ変換し、最適費用と選択頂点を復元できる。
-- 転移題材の解法接続: 2N 頂点の有向 network を作り、中間頂点の in→out に c_v、元辺に対応する両方向 out→in に INF を置く。1_out を source、N_in を sink として max-flow を流し、flow 値と residual reachability で壁頂点列を出力する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-</details>
-
+- [ABC227 H「Eat Them All」](https://atcoder.jp/contests/abc227/tasks/abc227_h)
+- [ABC285 G「Tatami」](https://atcoder.jp/contests/abc285/tasks/abc285_g)
+- [ABC354 G「Select Strings」](https://atcoder.jp/contests/abc354/tasks/abc354_g)
+- [ABC413 G「Big Banned Grid」](https://atcoder.jp/contests/abc413/tasks/abc413_g)
 
 ## 根拠
 
@@ -120,4 +58,4 @@ sidebar:
 - [ABC239 G 公式解説](https://atcoder.jp/contests/abc239/editorial/3393)
 - [ABC239 G 公式問題文](https://atcoder.jp/contests/abc239/tasks/abc239_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-max-flow-min-cut`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-max-flow-min-cut`

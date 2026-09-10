@@ -225,12 +225,10 @@ export interface CatalogLike {
       readonly learningOutcomeIds: readonly string[];
       readonly kind: 'executable' | 'pseudocode' | 'illustrative';
       readonly verificationStatus: 'pending' | 'passed' | 'not_applicable' | 'failed';
-      readonly learningUnitRole?: 'guided_outcome' | 'curriculum_routing' | undefined;
     }[];
     readonly exercises: readonly {
       readonly key: string;
       readonly learningOutcomeIds: readonly string[];
-      readonly learningUnitRole?: 'outcome_attainment' | 'curriculum_routing' | undefined;
       readonly answer: { readonly verificationStatus: 'pending' | 'passed' | 'failed' };
     }[];
   }[];

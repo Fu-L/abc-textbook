@@ -22,7 +22,7 @@ export type TaxonomyEntityKind = 'tag' | 'outcome' | 'unit';
 /** Semantic rules used when turning reviewed Inventory claims into textbook placements. */
 export const FINAL_TAXONOMY_PLACEMENT_PRINCIPLES = Object.freeze({
   outcome:
-    'Outcomeは一つの到達確認で合否を判定できる原子的技能とし、発動条件・正当化・実装が異なる技能を「または」で束ねない。',
+    'Outcomeは問題の解法を横断して分類する原子的技能のmetadataとし、発動条件・正当化・実装が異なる技能を「または」で束ねない。',
   tag: 'Tagは未知問を見たときのrecognition・retrieval単位とし、発動条件・正当化原理・実装templateのいずれかが大きく異なるなら分割する。',
   learningUnit:
     'LearningUnitはmental modelとtransferを作る教材上の圧縮単位とし、比較学習が有効なsibling Tagだけを同じsectionのsubsectionとして束ねる。',
@@ -37,7 +37,7 @@ export const FINAL_TAXONOMY_PLACEMENT_PRINCIPLES = Object.freeze({
   relatedTags:
     'Tag間のcontrast・analogy・specialization・extension・reduction・often_combined・implementation_substrateはcurriculum prerequisiteと独立に保持し、未知問で再利用すべき思考が区別できる具体的理由を付ける。specializationは変形なしに成り立つ狭い一種、extensionは新しい目的・制約・操作・interfaceを加える拡張、reductionはsourceからtargetへの意味保存変換に限る。該当関係がないTagは空配列のままとする。',
   naming:
-    '固有算法名をalias・recallに置くのは、その算法を説明して到達確認できるOutcomeとUnitが現corpusにある場合だけとする。',
+    '固有算法名をalias・recallに置くのは、その算法の適用条件と正当性を説明できるOutcomeとUnitが現corpusにある場合だけとする。',
   fallback:
     '対象読者の共通前提はbaseline、独立した再利用技能にならない問題固有の工夫はproblem_specificにする。単一Problemの解法を入力語だけ言い換えた抽象化は、別の未知問で使える発動条件・不変量・実装templateを独立に示せない限りTag・Outcome・Unitへ昇格させない。',
   boundaries:
@@ -2079,7 +2079,11 @@ const TAG_SEEDS: readonly TagSeed[] = [
     name: '確率・期待値DP',
     definition: '確率遷移に対する期待値・分布・到達確率の再帰式を解く。',
     parentId: 'tag-dp-state-transition',
-    outcomeIds: ['outcome-solve-stochastic-recurrence'],
+    outcomeIds: [
+      'outcome-propagate-probability-distribution',
+      'outcome-solve-stochastic-recurrence',
+      'outcome-optimize-stochastic-actions',
+    ],
     unitIds: ['unit-dp-stochastic'],
     recall: [
       '期待値.?dp',
@@ -2636,7 +2640,7 @@ const TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-prefix-difference',
     name: '累積和・差分配列',
     definition:
-      '一次元区間や二次元矩形の情報、または一括加算を接頭辞・端点の差へ変換し、query・数え上げ・復元に使う。',
+      '一次元区間や多次元直方体の情報、または一括加算を接頭辞・端点の差へ変換し、query・数え上げ・復元に使う。',
     parentId: 'tag-query-sufficient-aggregate',
     outcomeIds: ['outcome-linearize-static-range-information'],
     unitIds: ['unit-prefix-aggregate'],
@@ -3177,6 +3181,7 @@ const TAG_SEEDS: readonly TagSeed[] = [
     parentId: 'tag-math-geometry-transformation',
     outcomeIds: [
       'outcome-partition-integer-parameter-ranges',
+      'outcome-sum-affine-floors-by-euclid',
       'outcome-evaluate-compressed-integer-blocks',
     ],
     unitIds: ['unit-integer-boundary-blocks'],
@@ -3370,7 +3375,10 @@ const TAG_SEEDS: readonly TagSeed[] = [
     definition:
       '非交差経路やspanning treeなどの組合せ対象を行列式に対応させ、LGV補題・行列木定理で数える。',
     parentId: 'tag-math-geometry-transformation',
-    outcomeIds: ['outcome-count-combinatorial-objects-by-determinant'],
+    outcomeIds: [
+      'outcome-count-nonintersecting-paths-by-lgv',
+      'outcome-count-combinatorial-objects-by-determinant',
+    ],
     unitIds: ['unit-linear-algebra-xor'],
     recall: ['determinant', '行列式', 'matrix.?tree', '行列木定理', '\\blgv\\b'],
     object: ['行列', '経路', '全域木', 'spanning tree', '有向木'],
@@ -5928,7 +5936,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-fractional-parametric-search': ['abc324-f'],
   'tag-information-theoretic-query-design': ['abc337-e'],
   'tag-cyclic-order-crossing': ['abc263-ex', 'abc338-e', 'abc424-f'],
-  'tag-kinetic-order-maintenance': ['abc344-g'],
+  'tag-kinetic-order-maintenance': ['abc344-g', 'abc257-ex'],
   'tag-poset-dilworth-antichain': ['abc237-ex', 'abc354-g', 'abc457-g'],
   'tag-tree-precedence-contraction': ['abc376-g'],
   'tag-frontier-profile-dp': ['abc248-f', 'abc296-ex', 'abc379-g'],
@@ -5967,6 +5975,14 @@ export const NON_PRIMARY_TAG_IDS = FINAL_TAXONOMY_TAGS.filter((tag) => !tag.prim
 );
 
 const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
+  'outcome-propagate-probability-distribution':
+    '互いに排反な状態に確率を配り、遷移確率・吸収条件・総確率を保って分布や到達確率を計算できる。',
+  'outcome-optimize-stochastic-actions':
+    '意思決定時点で観測済みの情報を状態にし、行動の最適化と確率平均を正しい順序で組み合わせたBellman式を解ける。',
+  'outcome-count-nonintersecting-paths-by-lgv':
+    'DAG上の経路数行列を作り、交差する経路族の符号反転と端点対応の条件から、LGVで頂点非共有経路族を数えられる。',
+  'outcome-sum-affine-floors-by-euclid':
+    'Σ floor((ai+b)/m)を整数部分の取り出しと格子点領域の転置で再帰し、Euclid型の引数減少からO(log m)を示せる。',
   'outcome-identify-reusable-abstraction':
     '問題固有の語を再利用可能な対象・操作・不変量に置き換えられる。',
   'outcome-precompute-directional-grid-effects':
@@ -6043,7 +6059,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。',
   'outcome-count-prefix-constrained-objects':
     '数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。',
-  'outcome-solve-stochastic-recurrence': '確率遷移から期待値または到達確率の再帰式を立てて解ける。',
+  'outcome-solve-stochastic-recurrence':
+    '状態から先の期待費用・期待回数を定義し、一歩分の費用と未来の期待値を分け、自己ループを移項した方程式を解ける。',
   'outcome-classify-game-states':
     '後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。',
   'outcome-evaluate-adversarial-game-value':
@@ -6113,7 +6130,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-reduce-graph-by-peeling-or-kernelization':
     '削除可能な葉・低次数頂点を反復除去してcycle coreと各頂点の所属を特定するか、terminal以外の葉除去とdegree-2 chain縮約によってcycle rankに依存する小kernelを構成できる。',
   'outcome-linearize-static-range-information':
-    '一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる。',
+    '各軸を昇順に累積して多次元prefix和を作り、D次元直方体を2^D隅の包除で取得できる。一次元の区間差と一括加算の端点差分にも接続できる。',
   'outcome-maintain-weighted-prefix-statistics':
     '処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。',
   'outcome-design-associative-range-summary':
@@ -6177,7 +6194,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-decompose-by-prime-or-divisor':
     '整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。',
   'outcome-partition-integer-parameter-ranges':
-    '床関数をconstant quotient blockまたはfloor-sum再帰で処理し、整数根・桁数の境界も誤差なく扱える。',
+    'floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。',
   'outcome-evaluate-compressed-integer-blocks':
     '圧縮block内の一次・二次式や操作列の累積境界を閉形式にし、極値・順位・個数を求められる。',
   'outcome-count-through-cyclic-exponents':
@@ -6203,7 +6220,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-compute-in-finite-field-extension':
     '基底と既約関係を定めて拡大有限体の元を一意に表し、標準形を保つ加減乗除を実装できる。',
   'outcome-count-combinatorial-objects-by-determinant':
-    '非交差経路またはspanning treeを行列のminorへ対応させ、行列式から個数を求められる。',
+    '辺重みからLaplacianを構成し、根の行列余因子を全域木の重み付き個数へ対応させられる。有向木の向きと自己ループの扱いを説明できる。',
   'outcome-reduce-geometry-to-algebraic-predicates':
     '幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。',
   'outcome-restrict-geometric-candidates-to-boundary':
@@ -6251,6 +6268,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
 const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
 
 const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
+  'outcome-optimize-stochastic-actions': ['outcome-solve-stochastic-recurrence'],
   'outcome-maintain-modular-product-under-factor-updates': [
     'outcome-compute-in-modular-arithmetic',
   ],
@@ -6321,8 +6339,13 @@ export const FINAL_TAXONOMY_OUTCOMES: readonly ObservableOutcomePolicy[] =
           ...(OUTCOME_PREREQUISITE_IDS[outcomeId] ?? []),
           ...tag.prerequisiteTagIds.flatMap(
             (prerequisiteTagId) =>
-              FINAL_TAXONOMY_TAGS.find((candidateTag) => candidateTag.id === prerequisiteTagId)
-                ?.learningOutcomeIds ?? [],
+              FINAL_TAXONOMY_TAGS.find(
+                (candidateTag) => candidateTag.id === prerequisiteTagId,
+              )?.learningOutcomeIds.filter(
+                (id) =>
+                  outcomeId !== 'outcome-count-euler-circuits-by-best' ||
+                  id !== 'outcome-count-nonintersecting-paths-by-lgv',
+              ) ?? [],
           ),
         ]),
       ].sort(),
@@ -6342,6 +6365,7 @@ export const NON_PRIMARY_OUTCOME_IDS = FINAL_TAXONOMY_OUTCOMES.filter((outcome) 
  * reports it once another exercise appears.
  */
 export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
+  'outcome-count-nonintersecting-paths-by-lgv',
   'outcome-accelerate-tree-dp-by-heavy-path',
   'outcome-pass-resource-dp-through-heavy-recursion',
   'outcome-traverse-stern-brocot-ancestors',
@@ -6376,7 +6400,6 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-maintain-sparse-domain-segment-tree',
   'outcome-normalize-string-to-primitive-period',
   'outcome-bound-reachability-in-numerical-semigroup',
-  'outcome-maintain-order-through-crossing-events',
   'outcome-optimize-ratio-by-parametric-search',
   'outcome-optimize-mask-by-bitwise-feasibility',
   'outcome-optimize-weighted-matroid-basis',
@@ -6426,7 +6449,6 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-idempotent-overlap-range-query',
   'unit-information-theoretic-query-design',
   'unit-isotonic-regression',
-  'unit-kinetic-order-maintenance',
   'unit-matroid-greedy',
   'unit-linear-matroid-intersection',
   'unit-min25-sieve',
@@ -6481,7 +6503,6 @@ export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-idempotent-overlap-range-query',
   'tag-information-theoretic-query-design',
   'tag-isotonic-regression-pav',
-  'tag-kinetic-order-maintenance',
   'tag-matroid-greedy',
   'tag-linear-matroid-intersection',
   'tag-min25-sieve',
@@ -8108,7 +8129,7 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   {
     from: 'outcome-enumerate-subset-state-space',
     to: 'outcome-apply-subset-zeta-mobius-transform',
-    problemIds: ['abc215-h', 'abc295-ex', 'abc349-f', 'abc423-f', 'abc465-f'],
+    problemIds: ['abc215-h', 'abc295-ex', 'abc349-f', 'abc423-f'],
   },
   {
     from: 'outcome-enumerate-subset-state-space',
@@ -8425,6 +8446,51 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
     to: 'outcome-run-dp-on-finite-automaton',
     problemIds: ['abc391-g'],
   },
+  {
+    from: 'outcome-count-combinatorial-objects-by-determinant',
+    to: 'outcome-count-nonintersecting-paths-by-lgv',
+    problemIds: ['abc216-h'],
+  },
+  {
+    from: 'outcome-partition-integer-parameter-ranges',
+    to: 'outcome-sum-affine-floors-by-euclid',
+    problemIds: ['abc283-ex', 'abc313-g', 'abc372-g', 'abc402-g', 'abc443-g'],
+  },
+  {
+    from: 'outcome-solve-stochastic-recurrence',
+    to: 'outcome-propagate-probability-distribution',
+    problemIds: [
+      'abc226-h',
+      'abc271-g',
+      'abc275-e',
+      'abc277-g',
+      'abc298-e',
+      'abc300-e',
+      'abc310-f',
+      'abc323-e',
+      'abc326-e',
+      'abc333-f',
+      'abc360-e',
+    ],
+  },
+  {
+    from: 'outcome-solve-stochastic-recurrence',
+    to: 'outcome-optimize-stochastic-actions',
+    problemIds: [
+      'abc266-e',
+      'abc314-e',
+      'abc342-f',
+      'abc350-e',
+      'abc402-e',
+      'abc404-f',
+      'abc421-e',
+    ],
+  },
+  {
+    from: 'outcome-linearize-events',
+    to: 'outcome-maintain-order-through-crossing-events',
+    problemIds: ['abc257-ex'],
+  },
 ];
 
 const outcomeRefinementByKey = new Map<string, string>();
@@ -8446,7 +8512,6 @@ const primaryOutcomeAdditionsByProblemId: Readonly<Record<string, readonly strin
   'abc228-g': ['outcome-run-dp-on-finite-automaton'],
   'abc301-f': ['outcome-run-dp-on-finite-automaton'],
   'abc305-g': ['outcome-run-dp-on-finite-automaton'],
-  'abc305-ex': ['outcome-optimize-monge-transitions'],
   'abc355-g': ['outcome-optimize-monge-transitions'],
   'abc357-g': ['outcome-compute-online-relaxed-convolution'],
   'abc418-g': ['outcome-run-dp-on-finite-automaton'],

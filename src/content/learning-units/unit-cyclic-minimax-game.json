@@ -35,66 +35,13 @@
     "abc261-ex",
     "abc413-f"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-solve-cyclic-minimax-game",
-      "learningOutcomeIds": [
-        "outcome-solve-cyclic-minimax-game"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。閉路を含む有限ゲームで、終端へ到達できる勝敗・有限性を逆向きに確定したいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC261 Ex「Game on Graph」について、状態は頂点 v と手番 t の組で、出次数 0 の状態はどちらの手番でも有限値 0 の終了状態である。",
-      "procedure": [
-        "観察: 状態は頂点 v と手番 t の組で、出次数 0 の状態はどちらの手番でも有限値 0 の終了状態である。",
-        "観察: 高橋手番は有限な遷移先が一つあれば終了を選べるが、青木手番が有限になるには全遷移先が有限でなければならない。",
-        "着眼: 有限な高橋状態の値は min(C(v,u)+dp[u][1])、有限な青木状態の値は max(C(v,u)+dp[u][0]) である。",
-        "着眼: 青木状態では未確定遷移数を出次数から減らし、0 になった瞬間に蓄積した最大値を確定する。高橋状態は最小候補がキューから出た瞬間に確定する。",
-        "方針: 終了状態から逆辺を辿る後退解析を行い、高橋状態は優先度付きキューで最小候補を確定し、青木状態は全出辺確定後に最大候補を確定する。（存在条件と全称条件を別々の確定規則にでき、非負辺重みの最小側だけ Dijkstra 型の順序で処理すれば minimax 値も同時に得られる。）",
-        "接続: reachability game の retrograde analysis に、AND/OR 状態の確定規則と nonnegative minimax distance の Dijkstra ordering を組み合わせる。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "終了局面から逆辺を辿り、終了側が一手選べば確定するOR局面と全手の確定を待つAND局面を区別する。未確定局面で無限継続を判定し、非負重みなら優先度付きキューで有限なminimax距離を確定する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc261-ex",
+    "abc413-f"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-solve-cyclic-minimax-game",
-      "learningOutcomeIds": [
-        "outcome-solve-cyclic-minimax-game"
-      ],
-      "prerequisiteIds": [
-        "outcome-evaluate-adversarial-game-value",
-        "prereq-abc-advanced-v1",
-        "unit-dp-game-value"
-      ],
-      "attainmentCondition": "学習成果「終了局面から逆辺を辿り、終了側が一手選べば確定するOR局面と全手の確定を待つAND局面を区別する。未確定局面で無限継続を判定し、非負重みなら優先度付きキューで有限なminimax距離を確定する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC413 F「No Passage」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「終了局面から逆辺を辿り、終了側が一手選べば確定するOR局面と全手の確定を待つAND局面を区別する。未確定局面で無限継続を判定し、非負重みなら優先度付きキューで有限なminimax距離を確定する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全開始cellの最適game手数／到達不能を O(HW) で同時に求め、その有限値総和を計算できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 全開始cellの最適game手数／到達不能を O(HW) で同時に求め、その有限値総和を計算できる。",
-          "転移題材の解法接続: distを∞、goalsを0でqueueへ入れる。distの小さい順にcell vをpopし、未確定の各grid neighbor uのfixedNeighborCountを増やす。2になった瞬間dist[u]=dist[v]+1としてpushする。最後に有限distを全て加え、∞cellは問題指定どおり0寄与とする。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "終了局面から逆辺を辿り、終了側が一手選べば確定するOR局面と全手の確定を待つAND局面を区別する。未確定局面で無限継続を判定し、非負重みなら優先度付きキューで有限なminimax距離を確定する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 90,

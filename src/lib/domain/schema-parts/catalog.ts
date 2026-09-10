@@ -791,7 +791,7 @@ export const LearningUnitSchema = strictObject({
     .describe('Navigation closure of Outcomes owned by this Unit or any descendant Unit.'),
   ownedLearningOutcomeIds: uniqueArray(EntityIdSchema)
     .optional()
-    .describe('Outcomes whose teaching and attainment blocks are authored directly in this Unit.'),
+    .describe('Outcomes described by the metadata of this Unit.'),
   contentPhase: z
     .enum(['canonical_skeleton', 'full_authoring'])
     .optional()
@@ -799,9 +799,17 @@ export const LearningUnitSchema = strictObject({
       'Byte-ownership phase for canonical Unit content. Full authoring takes over the generated skeleton in place.',
     ),
   docPath: SafePathSchema,
-  problemIds: z.array(ProblemIdSchema).min(1),
-  examples: uniqueArray(LearningUnitInlineExampleSchema).min(1),
-  exercises: uniqueArray(LearningUnitInlineExerciseSchema).min(1),
+  problemIds: uniqueArray(ProblemIdSchema).describe(
+    'Coverage of Problems presented here or in descendant Units.',
+  ),
+  directProblemIds: uniqueArray(ProblemIdSchema)
+    .optional()
+    .describe('Problems presented exactly here, in prerequisite-aware reading order.'),
+  relatedProblemIds: uniqueArray(ProblemIdSchema)
+    .optional()
+    .describe('Semantically related Problems presented outside this Unit subtree.'),
+  examples: uniqueArray(LearningUnitInlineExampleSchema),
+  exercises: uniqueArray(LearningUnitInlineExerciseSchema),
   stageRank: z.number().int().nonnegative(),
   difficultyRank: z.number().int().nonnegative(),
   representativeRank: z.number().int().nonnegative(),
@@ -833,49 +841,6 @@ export const LearningUnitSchema = strictObject({
       message:
         'A Unit can own only Outcomes included in its descendant-coverage learningOutcomeIds.',
     });
-  }
-  if (unit.ownedLearningOutcomeIds !== undefined) {
-    const ownedOutcomeIds = new Set(unit.ownedLearningOutcomeIds);
-    const validateCanonicalBlocks = (
-      field: 'examples' | 'exercises',
-      normalRole: 'guided_outcome' | 'outcome_attainment',
-    ): void => {
-      const blocks = unit[field];
-      if (blocks.some(({ learningUnitRole }) => learningUnitRole === undefined)) {
-        context.addIssue({
-          code: 'custom',
-          path: [field],
-          message: `Canonical Unit ${field} must declare learningUnitRole.`,
-        });
-      }
-      if (
-        blocks.some(({ learningOutcomeIds }) =>
-          learningOutcomeIds.some((outcomeId) => !unit.learningOutcomeIds.includes(outcomeId)),
-        )
-      ) {
-        context.addIssue({
-          code: 'custom',
-          path: [field],
-          message: `Canonical Unit ${field} may reference only covered Outcomes.`,
-        });
-      }
-      const normalOutcomeIds = blocks
-        .filter(({ learningUnitRole }) => learningUnitRole === normalRole)
-        .flatMap(({ learningOutcomeIds }) => learningOutcomeIds);
-      if (
-        normalOutcomeIds.length !== ownedOutcomeIds.size ||
-        new Set(normalOutcomeIds).size !== ownedOutcomeIds.size ||
-        normalOutcomeIds.some((outcomeId) => !ownedOutcomeIds.has(outcomeId))
-      ) {
-        context.addIssue({
-          code: 'custom',
-          path: [field],
-          message: `Canonical Unit ${field} must cover every owned Outcome exactly once with ${normalRole}.`,
-        });
-      }
-    };
-    validateCanonicalBlocks('examples', 'guided_outcome');
-    validateCanonicalBlocks('exercises', 'outcome_attainment');
   }
   for (const field of ['examples', 'exercises'] as const) {
     const keys = unit[field].map(({ key }) => key);
@@ -1322,9 +1287,11 @@ export const LearningUnitTaxonomyCandidateSchema = strictObject({
     .min(1)
     .describe('Exact navigation closure of Outcomes owned by this candidate or its descendants.'),
   ownedLearningOutcomeIds: uniqueArray(FinalOutcomeIdSchema).describe(
-    'Outcomes taught and assessed directly by this candidate; empty is valid for a structural Unit.',
+    'Outcomes described by this candidate; empty is valid for a structural Unit.',
   ),
-  problemIds: uniqueArray(ProblemIdSchema).min(1),
+  problemIds: uniqueArray(ProblemIdSchema),
+  directProblemIds: uniqueArray(ProblemIdSchema),
+  relatedProblemIds: uniqueArray(ProblemIdSchema),
   stageRank: z.number().int().nonnegative(),
   difficultyRank: z.number().int().nonnegative(),
   representativeRank: z.number().int().nonnegative(),
@@ -2337,7 +2304,6 @@ export const FinalTaxonomyBuildSchema = strictObject({
     const unit = candidate.entity;
     if (
       !sameFinalTaxonomySet(unit.sourceRevisionIds, candidate.sourceRevisionIds) ||
-      (unit.kind !== 'chapter' && unit.problemIds.length < 1) ||
       (unit.parentId !== null && !unitIdSet.has(unit.parentId)) ||
       unit.additionalPrerequisiteUnitIds.some((id) => !unitIdSet.has(id)) ||
       unit.tagIds.some((id) => !tagIdSet.has(id)) ||
@@ -2644,7 +2610,9 @@ export const FinalTaxonomyBuildSchema = strictObject({
       });
     }
     if (
-      assignedUnits.some((unit) => !unit.problemIds.includes(placement.problemId)) ||
+      assignedUnits.some(
+        (unit) => ![...unit.problemIds, ...unit.relatedProblemIds].includes(placement.problemId),
+      ) ||
       assignedTagIds.some((id) => !assignedUnits.some((unit) => unit.tagIds.includes(id))) ||
       assignedOutcomeIds.some(
         (id) => !assignedUnits.some((unit) => unit.learningOutcomeIds.includes(id)),
@@ -3030,12 +2998,6 @@ export const CanonicalProblemPlacementPolicySchema = strictObject({
   const canonicalImpactById = new Map(
     policy.correctionImpacts.map((impact) => [impact.id, impact]),
   );
-  const learningUnitExamplePath = new RegExp(`^examples\\.${ContentBlockKeyPattern}$`, 'u');
-  const learningUnitExercisePath = new RegExp(`^exercises\\.${ContentBlockKeyPattern}$`, 'u');
-  const learningUnitAnswerPath = new RegExp(
-    `^exercises\\.${ContentBlockKeyPattern}\\.answer$`,
-    'u',
-  );
   for (const previewImpact of policy.previewTaxonomyChanges) {
     const canonicalImpact = canonicalImpactById.get(previewImpact.id);
     if (canonicalImpact === undefined) continue;
@@ -3111,23 +3073,13 @@ export const CanonicalProblemPlacementPolicySchema = strictObject({
           hasCanonicalMapping = previewImpact.derivedIndexPaths.every((path) =>
             canonicalImpact.derivedIndexPaths.includes(path),
           );
-        } else if (assessment.surface === 'body') {
+        } else {
+          // Preview examples and exercises become ordinary canonical Unit prose.
           hasCanonicalMapping = canonicalImpact.affectedContentLocators.some(
             (locator) =>
               locator.ownerType === 'learning_unit' &&
               locator.learningUnitId === assessment.learningUnitId &&
               locator.path === 'content',
-          );
-        } else {
-          hasCanonicalMapping = canonicalImpact.affectedContentLocators.some(
-            (locator) =>
-              locator.ownerType === 'learning_unit' &&
-              locator.learningUnitId === assessment.learningUnitId &&
-              (assessment.surface === 'example'
-                ? learningUnitExamplePath.test(locator.path)
-                : assessment.surface === 'exercise'
-                  ? learningUnitExercisePath.test(locator.path)
-                  : learningUnitAnswerPath.test(locator.path)),
           );
         }
       } else {

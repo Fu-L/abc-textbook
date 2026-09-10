@@ -1,6 +1,6 @@
 ---
 title: "ordered interval partition・ODT"
-description: "前提からordered interval partition・ODTを見抜き、方針へ接続して検証するための学習単位。"
+description: "ordered interval partition・ODTの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 162
@@ -8,108 +8,39 @@ sidebar:
 
 # ordered interval partition・ODT
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: ordered set・multisetの動的順序管理
-- この位置で学ぶ理由: ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。
-
-### この単元では扱わない範囲
-
-- ordered interval partition・ODTの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### ordered interval partition・ODT
 
 互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。
 
-検索語: ODT、ordered disjoint tree、区間set
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: ordered set・multisetの動的順序管理。
 
-### 例 1 — 互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
+ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。
 
-題材: [ABC255 Ex「Range Harvest Query」](https://atcoder.jp/contests/abc255/tasks/abc255_h)
+- ordered interval partition・ODTの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: 値dのブロック[l,r]からの収穫量は(D-d)Σ_(i=l)^r i=(D-d)(l+r)(r-l+1)/2と閉形式で計算できる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。巨大な座標域への区間代入があり、値が区間ごとに一定となる。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC380 E「1D Bucket Tool」](https://atcoder.jp/contests/abc380/tasks/abc380_e)
+2. [ABC255 Ex「Range Harvest Query」](https://atcoder.jp/contests/abc255/tasks/abc255_h)
+3. [ABC435 E「Cover query」](https://atcoder.jp/contests/abc435/tasks/abc435_e)
+4. [ABC465 G「Sum of Mex of Mod of Linear」](https://atcoder.jp/contests/abc465/tasks/abc465_g)
 
-- 各収穫質問について区間内で得られる木の実総数を法998244353で求め、その最終収穫日を更新できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 木iを前回B_i日目に収穫したならD日目の収穫量はi(D-B_i)であり、収穫後は区間内の全B_iが同じDへ上書きされる。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 最終収穫日が等しい区間を平衡木で管理 — 更新区間と交わるブロックを分割して丸ごと削除・統合でき、各ブロックは生成後一度しか削除されないため全体の列挙数がO(Q)に収まる。
-- **棄却**: N本の木の最終日を配列で持つ — Nが最大10^18で配列を確保できず、区間を一本ずつ更新することもできない。
-
-#### 鍵となる着眼
-
-- 値dのブロック[l,r]からの収穫量は(D-d)Σ_(i=l)^r i=(D-d)(l+r)(r-l+1)/2と閉形式で計算できる。
-- 一問い合わせで新しく作るブロックは[L,R]の一個だけなので、消去されるブロック総数も全問い合わせでO(Q)である。
-
-#### アルゴリズムへ接続する
-
-初期ブロック[1,N]の値を0とし、各質問でLとR+1に境界を作る。完全に含まれる各ブロック[l,r],dの収穫量を足して削除し、値Dの一ブロック[L,R]を挿入する。
-
-
-## 転用するときの確認
-
-- **区間を一定値ブロックで持つODT**: 巨大な座標域への区間代入があり、値が区間ごとに一定となる。 適用: 区間端でブロックをsplitし、被覆ブロックを列挙・削除して一ブロックへ置換する。
-- **償却解析**: 一操作では多数区間を消す可能性があるが、新規区間数は少ない。 適用: 各ブロックの削除をその生成へ課金し、全走査量をO(Q)と評価する。
-- 巨大な添字域でも、区間代入が履歴を消し一操作の生成区間数が定数なら、区間集合の償却管理が使える。
-- 小さいNの配列実装と比較し、全域更新、点更新、入れ子・交差区間、R=N、同じ境界を繰り返し分割する場合を確認する。
-
-## 到達確認
-
-### 到達確認 1 — 互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
-
-転移題材: [ABC380 E「1D Bucket Tool」](https://atcoder.jp/contests/abc380/tasks/abc380_e)
-
-**課題**: ABC380 E「1D Bucket Tool」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 巨大な同色成分の塗替えを、連続区間境界の局所更新として対数時間で処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 巨大な同色成分の塗替えを、連続区間境界の局所更新として対数時間で処理できる。
-
-- 対象技能が担う箇所: 巨大な同色成分の塗替えを、連続区間境界の局所更新として対数時間で処理できる。
-- 転移題材の解法接続: 各位置を長さ1成分として境界set・左端色map・色別個数を初期化する。塗替えで旧色個数を R-L 減らし新色へ足し、右境界、次に左境界を同色なら削除する。count query は色別個数を返す。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-</details>
-
+- [ABC251 Ex「Fill Triangle」](https://atcoder.jp/contests/abc251/tasks/abc251_h)
+- [ABC256 Ex「I like Query Problem」](https://atcoder.jp/contests/abc256/tasks/abc256_h)
 
 ## 根拠
 
@@ -119,7 +50,5 @@ sidebar:
 - [ABC255 H 公式問題文](https://atcoder.jp/contests/abc255/tasks/abc255_h)
 - [ABC256 H 公式解説](https://atcoder.jp/contests/abc256/editorial/4113)
 - [ABC256 H 公式問題文](https://atcoder.jp/contests/abc256/tasks/abc256_h)
-- [ABC380 E 公式問題文](https://atcoder.jp/contests/abc380/tasks/abc380_e)
-- [ABC380 E 公式解説](https://atcoder.jp/contests/abc380/editorial/11356)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-ordered-interval-partition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-ordered-interval-partition`

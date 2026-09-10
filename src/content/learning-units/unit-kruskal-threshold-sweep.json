@@ -40,68 +40,15 @@
     "abc301-ex",
     "abc383-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-sweep-connectivity-by-kruskal-threshold",
-      "learningOutcomeIds": [
-        "outcome-sweep-connectivity-by-kruskal-threshold"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。候補辺が MST に入るかを多数問われ、各候補追加は他クエリへ影響しないとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC235 E「MST + 1」について、追加辺 e=(u,v,w) が Kruskal 法で選ばれるかは、重み w 未満の元グラフ辺を処理した時点で u と v がまだ非連結かだけで決まる。",
-      "procedure": [
-        "観察: 追加辺 e=(u,v,w) が Kruskal 法で選ばれるかは、重み w 未満の元グラフ辺を処理した時点で u と v がまだ非連結かだけで決まる。",
-        "観察: 各クエリは独立で追加辺を実際には残さないため、全クエリの判定中に Union-Find を変化させるのは元グラフ辺だけである。",
-        "着眼: 答えを知るには完成した MST 自体は不要で、候補辺が現れる瞬間の軽い辺による連結性という途中状態だけで十分である。",
-        "方針: 元辺と全クエリを重み順に一緒に並べ、元辺では Union、クエリでは現在の連結性を読むだけの一回の sweep を行う。（各クエリを個別 Kruskal の重み w 時点まで進めた状態が、共通の元辺 sweep 上で完全に一致する。）",
-        "接続: Kruskal の選択条件を重み閾値付き連結性クエリへ切り出し、独立クエリを元辺だけが更新するオフライン Union-Find sweep に並列化する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "同重みeventの順序を正しく定め、Kruskal順にDSU成分とmetadataを併合してminimax連結閾値でquery・pairing・集計を処理できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc383-e",
+    "abc235-e",
+    "abc250-ex",
+    "abc301-ex"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-sweep-connectivity-by-kruskal-threshold",
-      "learningOutcomeIds": [
-        "outcome-sweep-connectivity-by-kruskal-threshold"
-      ],
-      "prerequisiteIds": [
-        "outcome-augment-components-with-metadata",
-        "outcome-construct-optimal-spanning-tree",
-        "outcome-maintain-connectivity-components",
-        "prereq-abc-advanced-v1",
-        "unit-dsu-components",
-        "unit-spanning-tree-optimization"
-      ],
-      "attainmentCondition": "学習成果「同重みeventの順序を正しく定め、Kruskal順にDSU成分とmetadataを併合してminimax連結閾値でquery・pairing・集計を処理できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC250 Ex「Trespassing Takahashi」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「同重みeventの順序を正しく定め、Kruskal順にDSU成分とmetadataを併合してminimax連結閾値でquery・pairing・集計を処理できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 各閾値tについて、距離t以下の移動を繰り返して家xから家yへ到達できるかを答えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 各閾値tについて、距離t以下の移動を繰り返して家xから家yへ到達できるかを答えられる。",
-          "転移題材の解法接続: K個の家を同時に始点としてDijkstraを行い、各辺の変換重みd[a]+c+d[b]を求めて昇順に並べる。質問もt順に処理し、重み≤tの辺をDSUへ追加して指定された家x,yの連結を判定する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "同重みeventの順序を正しく定め、Kruskal順にDSU成分とmetadataを併合してminimax連結閾値でquery・pairing・集計を処理できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 93,

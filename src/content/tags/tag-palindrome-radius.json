@@ -37,8 +37,8 @@
     "outcome-characterize-palindrome-intervals"
   ],
   "representativeProblemIds": [
-    "abc349-g",
-    "abc398-f"
+    "abc398-f",
+    "abc349-g"
   ],
   "aliases": [
     "Manacher's algorithm",

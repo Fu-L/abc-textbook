@@ -35,79 +35,36 @@
   "docPath": "src/content/docs/learn/graph/functional-graph-decomposition.md",
   "problemIds": [
     "abc241-e",
-    "abc247-ex",
     "abc256-e",
-    "abc258-e",
     "abc284-g",
-    "abc286-f",
     "abc296-e",
     "abc357-e",
     "abc371-g",
     "abc377-e",
     "abc387-f",
     "abc399-e",
+    "abc436-e"
+  ],
+  "directProblemIds": [
+    "abc357-e",
+    "abc241-e",
+    "abc256-e",
+    "abc296-e",
+    "abc377-e",
+    "abc399-e",
     "abc436-e",
+    "abc387-f",
+    "abc284-g",
+    "abc371-g"
+  ],
+  "relatedProblemIds": [
+    "abc247-ex",
+    "abc258-e",
+    "abc286-f",
     "abc444-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-decompose-functional-graph",
-      "learningOutcomeIds": [
-        "outcome-decompose-functional-graph"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。有限状態で各状態の次状態が一意、操作回数だけが非常に大きいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC241 E「Putting Candies」について、次に参照する index は現在の総キャンディ数 X そのものではなく X mod N だけで決まり、residue r から (r+A_r) mod N へ移る N 状態の functional graph になる。",
-      "procedure": [
-        "観察: 次に参照する index は現在の総キャンディ数 X そのものではなく X mod N だけで決まり、residue r から (r+A_r) mod N へ移る N 状態の functional graph になる。",
-        "観察: 各状態の出辺は一つなので、0から進む residue 列は高々 N ステップで既出状態へ戻り、それ以降は同じ状態列と加算量を周期的に繰り返す。",
-        "着眼: 同じ residue に戻った二時点 s<t の間では状態遷移だけでなく加算する A の列も同じになり、cycle gain は prefix[t]-prefix[s] である。",
-        "方針: residue の初出 step と、その時点までの累積キャンディ数を記録し、cycle 検出後に残り回数を cycle 単位で飛ばす。（K は巨大でも cycle 前と一周期は合わせて N 状態以下で、加算値も prefix 差から一括計算できる。）",
-        "接続: state=0、prefix[0]=0 から、未訪問 state に step を記録し A_state を加えて次 residue へ進む。K 回前に repeat したら cycleStart s、length p、gain を求め、K-s を商と余りに分けて prefix[s]+商·gain+cycle prefix の余りを返す。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-decompose-functional-graph",
-      "learningOutcomeIds": [
-        "outcome-decompose-functional-graph"
-      ],
-      "prerequisiteIds": [
-        "outcome-select-state-graph-search",
-        "prereq-abc-advanced-v1",
-        "unit-state-graph-search"
-      ],
-      "attainmentCondition": "学習成果「後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC256 E「Takahashi's Anguish」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全ての人を並べたときに生じる不満度合計の最小値を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 全ての人を並べたときに生じる不満度合計の最小値を求められる。",
-          "転移題材の解法接続: 各頂点の入次数を求め、入次数0をキューに入れて辺を順に削除する。最後まで残る閉路頂点を未訪問ごとに一周し、その閉路上のC最小値を答えへ加える。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 60,

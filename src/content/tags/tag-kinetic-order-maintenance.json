@@ -33,7 +33,8 @@
     "outcome-maintain-order-through-crossing-events"
   ],
   "representativeProblemIds": [
-    "abc344-g"
+    "abc344-g",
+    "abc257-ex"
   ],
   "aliases": [
     "kinetic order maintenance",

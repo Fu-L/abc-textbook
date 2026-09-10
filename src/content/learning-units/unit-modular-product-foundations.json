@@ -30,6 +30,10 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/modular-product-foundations.md",
   "problemIds": [
+    "abc411-e"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
     "abc215-g",
     "abc220-e",
     "abc221-e",
@@ -85,7 +89,6 @@
     "abc380-g",
     "abc405-e",
     "abc405-g",
-    "abc411-e",
     "abc412-f",
     "abc417-f",
     "abc422-g",
@@ -94,59 +97,8 @@
     "abc448-e",
     "abc456-g"
   ],
-  "examples": [
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-compute-in-modular-arithmetic",
-        "outcome-maintain-modular-product-under-factor-updates"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（学習経路の比較）",
-      "omissions": [
-        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
-      ],
-      "environment": "紙上での未知問のモデル化と候補比較",
-      "input": "法上の演算と積の保守の範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
-      "procedure": [
-        "法上の四則演算・高速累乗・逆元: 1個の直接所有Outcome、学ぶ理由「剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する」、対象外「法 m で剰余 0 となる因子数と可逆な非零剰余因子の積を分けて因子差し替えを処理する動的積、複数の合同条件を統合する一次合同・CRT、および剰余列の最小周期を求める問題」を照合する。",
-        "可逆な非零剰余と剰余 0 因子を含む法上の動的積: 1個の直接所有Outcome、学ぶ理由「通常の法上演算と逆元の存在条件を前提に、取り得る因子のうち法 m で非零となるものがすべて可逆（典型的には素数法）かを確認する。剰余 0 だけは逆元を持たないため、その個数と可逆な非零剰余因子の積へ状態を分けて因子差し替えを定数時間で処理する」、対象外「因子が変化しない一回限りの積、和やmin/maxの更新、任意区間積を求めるSegment Tree、および合成数法で非零の非可逆因子も差し替える一般の場合」を照合する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-compute-in-modular-arithmetic",
-        "outcome-maintain-modular-product-under-factor-updates"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
-      "assessment": {
-        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
-        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
-      },
-      "answer": {
-        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
-        "procedure": [
-          "問題を対象・操作・保つ量・求める量へ分解する。",
-          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
-          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
-          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
-        ],
-        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 0,

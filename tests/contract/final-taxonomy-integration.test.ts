@@ -142,7 +142,11 @@ describe('T159 frozen preview integration and correction impact', () => {
           assessments.every(
             ({ evidenceRefs }) =>
               evidenceRefs.length > 0 &&
-              evidenceRefs.every(({ problemId }) => unit?.problemIds.includes(problemId)),
+              evidenceRefs.every(
+                ({ problemId }) =>
+                  unit !== undefined &&
+                  [...unit.problemIds, ...unit.relatedProblemIds].includes(problemId),
+              ),
           ),
         ).toBe(true);
       }

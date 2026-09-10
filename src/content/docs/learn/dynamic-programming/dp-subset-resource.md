@@ -1,6 +1,6 @@
 ---
 title: "集合・資源軸のDP"
-description: "前提から集合・資源軸のDPを見抜き、方針へ接続して検証するための学習単位。"
+description: "集合・資源軸のDPの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 32
@@ -8,147 +8,84 @@ sidebar:
 
 # 集合・資源軸のDP
 
-このページは **節** です。同じ対象を扱う技能を比較し、どの発動条件・不変量・計算量の違いで使い分けるかを学びます。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 資源軸の上限と更新順を選び、選択の重複を避けられる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 最小十分状態からDPを設計する
-- この位置で学ぶ理由: 最小十分状態を設計できるようになった後、集合bitmaskや容量を軸にした遷移と更新順へ進む。
-
-### この単元では扱わない範囲
-
-- 入力順や区間端点だけを状態にし、集合・容量軸を持たないDP。
-
-## 下位単元と学習順
-
-以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
-
-1. [部分集合・bitmask状態DP](./dp-subset-state.md)（標準順 130）— DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。
-2. [大容量unbounded knapsackのeventual linearity](./eventual-unbounded-knapsack.md)（標準順 211）— 通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。
-
-## 発動条件と見分け方
+## 概要
 
 ### 資源軸knapsack DP
 
 容量・時間・個数などの有界資源を軸に選択の価値を更新する。
 
-検索語: knapsack DP、ナップサックDP、部分和DP
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: 最小十分状態からDPを設計する。
 
-### 例 1 — 資源軸の上限と更新順を選び、選択の重複を避けられる
+最小十分状態を設計できるようになった後、集合bitmaskや容量を軸にした遷移と更新順へ進む。
 
-題材: [ABC216 F「Max Sum Counting」](https://atcoder.jp/contests/abc216/tasks/abc216_f)
+- 入力順や区間端点だけを状態にし、集合・容量軸を持たないDP。
 
-選定理由: 最大値という集合全体の条件を、最大を担当する一要素 i の固定へ変えると、残りは加法的な B のナップサック条件になる。
+## 下位単元
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。部分集合条件に最大値または最小値が現れ、各集合を一意な極値要素で分類できるとき。 問題全体への接続は併用技能を学んだ後に読む。
+- [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)
+- [大容量unbounded knapsackのeventual linearity](/learn/dynamic-programming/eventual-unbounded-knapsack/)
 
-#### このOutcomeを支える根拠
+## 問題一覧
 
-- 部分集合の最大値条件を一意な証人へ分解し、残りの加法条件をナップサック DP で数えられる。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### 観察
+1. [ABC321 F「#(subset sum = K) with Add and Erase」](https://atcoder.jp/contests/abc321/tasks/abc321_f)
+2. [ABC383 F「Diversity」](https://atcoder.jp/contests/abc383/tasks/abc383_f)
+3. [ABC269 G「Reversible Cards 2」](https://atcoder.jp/contests/abc269/tasks/abc269_g)
+4. [ABC275 F「Erase Subarrays」](https://atcoder.jp/contests/abc275/tasks/abc275_f)
+5. [ABC288 E「Wish List」](https://atcoder.jp/contests/abc288/tasks/abc288_e)
+6. [ABC320 F「Fuel Round Trip」](https://atcoder.jp/contests/abc320/tasks/abc320_f)
+7. [ABC325 F「Sensor Optimization Dilemma」](https://atcoder.jp/contests/abc325/tasks/abc325_f)
+8. [ABC364 E「Maximum Glutton」](https://atcoder.jp/contests/abc364/tasks/abc364_e)
+9. [ABC410 E「Battles in a Row」](https://atcoder.jp/contests/abc410/tasks/abc410_e)
+10. [ABC441 F「Must Buy」](https://atcoder.jp/contests/abc441/tasks/abc441_f)
+11. [ABC322 E「Product Development」](https://atcoder.jp/contests/abc322/tasks/abc322_e)
+12. [ABC216 F「Max Sum Counting」](https://atcoder.jp/contests/abc216/tasks/abc216_f)
+13. [ABC222 E「Red and Blue Tree」](https://atcoder.jp/contests/abc222/tasks/abc222_e)
+14. [ABC307 G「Approximate Equalization」](https://atcoder.jp/contests/abc307/tasks/abc307_g)
+15. [ABC390 E「Vitamin Balance」](https://atcoder.jp/contests/abc390/tasks/abc390_e)
+16. [ABC419 E「Subarray Sum Divisibility」](https://atcoder.jp/contests/abc419/tasks/abc419_e)
+17. [ABC461 F「Total Product is N」](https://atcoder.jp/contests/abc461/tasks/abc461_f)
+18. [ABC341 F「Breakdown」](https://atcoder.jp/contests/abc341/tasks/abc341_f)
+19. [ABC424 G「Set list」](https://atcoder.jp/contests/abc424/tasks/abc424_g)
 
-- 条件 max A_i ≥ sum B_i は、選んだ集合の中で最大の A を持つ要素を一つ固定すると、残りの B の総和上限として表せる。
-- 組 (A_i,B_i) を A_i の昇順に並べれば、各非空部分集合にはソート順で最後に選ばれた一意な要素 i がある。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 候補を比較する
+## 関連問題
 
-- **採用**: A の昇順に各要素を最大値の証人として固定し、それ以前の要素から B 和が A_i−B_i 以下となる選び方を部分和 DP で数える。 — 全ての非空部分集合を最後の要素で重複なく分類でき、以前の要素の情報は B の総和別個数だけで十分になる。
-- **棄却**: 全ての部分集合を列挙し、それぞれで A の最大値と B の合計を計算して条件を確認する。 — N 個の要素の部分集合は 2 の N 乗個あり、N＝5000 では列挙できない。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 鍵となる着眼
-
-- 最大値という集合全体の条件を、最大を担当する一要素 i の固定へ変えると、残りは加法的な B のナップサック条件になる。
-- A が同値の要素が複数あっても、ソート後に最後に選んだ添字を証人にすれば各部分集合はちょうど一度だけ数えられる。
-
-#### アルゴリズムへ接続する
-
-A 順の最後の選択要素で部分集合を分割し、走査済み要素の B 和別選択数を 0/1 ナップサック DP として維持して閾値以下を加算する。
-
-## 下位単元を使い分ける比較例
-
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **部分集合・bitmask状態DP** — 直接到達点: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。近いが対象外: 部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **大容量unbounded knapsackのeventual linearity** — 直接到達点: 剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。近いが対象外: 大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- **極値を担当する証人の固定**: 部分集合条件に最大値または最小値が現れ、各集合を一意な極値要素で分類できるとき。 適用: A でソートし、最後に選んだ i を最大 A の担当として、残りの選択を以前の要素だけへ限定する。
-- **部分和の 0/1 ナップサック数え上げ**: 各要素を高々一度選び、重み総和別の部分集合数を逐次維持するとき。 適用: 走査済み要素の B 和 s ごとの個数を持ち、i を証人にする前に s≤A_i−B_i の個数を答えへ足す。
-- 極値要素を固定して残りを DP するときは、証人自身が加法条件へ寄与する分を先に差し引く。
-- max と総和が同じ不等式に現れたら、max を達成する要素を固定して残りへ許される総和を導く。
-- 極値が同値でも値だけで分類せず、ソート後の最後の添字という一意な証人を使って重複を避ける。
-
-## 到達確認
-
-### 到達確認 1 — 資源軸の上限と更新順を選び、選択の重複を避けられる
-
-転移題材: [ABC222 E「Red and Blue Tree」](https://atcoder.jp/contests/abc222/tasks/abc222_e)
-
-**課題**: ABC222 E「Red and Blue Tree」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「資源軸の上限と更新順を選び、選択の重複を避けられる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 資源軸の上限と更新順を選び、選択の重複を避けられる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 木上の反復移動と辺への二値割当てを、辺使用回数の集計と符号和の部分和DPへ段階的に変換できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 木上の反復移動と辺への二値割当てを、辺使用回数の集計と符号和の部分和DPへ段階的に変換できる。
-
-- 対象技能が担う箇所: 木上の反復移動と辺への二値割当てを、辺使用回数の集計と符号和の部分和DPへ段階的に変換できる。
-- 転移題材の解法接続: 各 A_i から A_{i+1} への木上パスをDFSで復元して C_e を加算し、目標 (S+K)/2 に対して C_e を一度ずつ選ぶ0/1部分和DPを行う。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 資源軸の上限と更新順を選び、選択の重複を避けられる。
-
-</details>
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC213 G「Connectivity 2」](https://atcoder.jp/contests/abc213/tasks/abc213_g)
+- [ABC215 E「Chain Contestant」](https://atcoder.jp/contests/abc215/tasks/abc215_e)
+- [ABC216 H「Random Robots」](https://atcoder.jp/contests/abc216/tasks/abc216_h)
+- [ABC228 G「Digits on Grid」](https://atcoder.jp/contests/abc228/tasks/abc228_g)
+- [ABC246 F「typewriter」](https://atcoder.jp/contests/abc246/tasks/abc246_f)
+- [ABC278 F「Shiritori」](https://atcoder.jp/contests/abc278/tasks/abc278_f)
+- [ABC287 F「Components」](https://atcoder.jp/contests/abc287/tasks/abc287_f)
+- [ABC290 Ex「Bow Meow Optimization」](https://atcoder.jp/contests/abc290/tasks/abc290_h)
+- [ABC295 Ex「E or m」](https://atcoder.jp/contests/abc295/tasks/abc295_h)
+- [ABC300 Ex「Fibonacci: Revisited」](https://atcoder.jp/contests/abc300/tasks/abc300_h)
+- [ABC306 Ex「Balance Scale」](https://atcoder.jp/contests/abc306/tasks/abc306_h)
+- [ABC309 G「Ban Permutation」](https://atcoder.jp/contests/abc309/tasks/abc309_g)
+- [ABC311 Ex「Many Illumination Plans」](https://atcoder.jp/contests/abc311/tasks/abc311_h)
+- [ABC313 F「Flip Machines」](https://atcoder.jp/contests/abc313/tasks/abc313_f)
+- [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
+- [ABC332 G「Not Too Many Balls」](https://atcoder.jp/contests/abc332/tasks/abc332_g)
+- [ABC354 E「Remove Pairs」](https://atcoder.jp/contests/abc354/tasks/abc354_e)
+- [ABC366 F「Maximum Composition」](https://atcoder.jp/contests/abc366/tasks/abc366_f)
+- [ABC373 F「Knapsack with Diminishing Values」](https://atcoder.jp/contests/abc373/tasks/abc373_f)
+- [ABC375 E「3 Team Division」](https://atcoder.jp/contests/abc375/tasks/abc375_e)
+- [ABC382 E「Expansion Packs」](https://atcoder.jp/contests/abc382/tasks/abc382_e)
+- [ABC400 G「Patisserie ABC 3」](https://atcoder.jp/contests/abc400/tasks/abc400_g)
+- [ABC402 E「Payment Required」](https://atcoder.jp/contests/abc402/tasks/abc402_e)
+- [ABC416 F「Paint Tree 2」](https://atcoder.jp/contests/abc416/tasks/abc416_f)
+- [ABC419 F「All Included」](https://atcoder.jp/contests/abc419/tasks/abc419_f)
+- [ABC426 G「Range Knapsack Query」](https://atcoder.jp/contests/abc426/tasks/abc426_g)
+- [ABC428 G「Necklace」](https://atcoder.jp/contests/abc428/tasks/abc428_g)
 
 ## 根拠
 
@@ -158,7 +95,5 @@ A 順の最後の選択要素で部分集合を分割し、走査済み要素の
 - [ABC215 E 公式解説](https://atcoder.jp/contests/abc215/editorial/2483)
 - [ABC216 F 公式解説](https://atcoder.jp/contests/abc216/editorial/2560)
 - [ABC216 F 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_f)
-- [ABC222 E 公式問題文](https://atcoder.jp/contests/abc222/tasks/abc222_e)
-- [ABC222 E 公式解説](https://atcoder.jp/contests/abc222/editorial/2751)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-subset-resource`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-dp-subset-resource`

@@ -1,6 +1,6 @@
 ---
 title: "同値な状態を正規化する"
-description: "前提から同値な状態を正規化するを見抜き、方針へ接続して検証するための学習単位。"
+description: "同値な状態を正規化するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 21
@@ -8,109 +8,59 @@ sidebar:
 
 # 同値な状態を正規化する
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 対称操作で同値な状態の標準形と不変量を選べる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。
-
-### この単元では扱わない範囲
-
-- 交換論による貪欲順の証明。
-
-## 発動条件と見分け方
+## 概要
 
 ### 状態・配置の正規化
 
 対称操作で同値な状態を一意な標準形へ写し、重複した探索・数え上げを除く。
 
-検索語: state canonicalization、標準形による状態圧縮
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 対称操作で同値な状態の標準形と不変量を選べる
+対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。
 
-題材: [ABC219 F「Cleaning Robot」](https://atcoder.jp/contests/abc219/tasks/abc219_f)
+- 交換論による貪欲順の証明。
 
-選定理由: a≠0 としたとき q=floor(X/a)、s=X-qa、t=Y-qb を使うと、二点の (s,t) が等しいことと差が v の整数倍であることが同値になる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。同じ移動列を非常に多く繰り返し、一周期後の変位が一定であるとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC242 E「(∀x∀)」](https://atcoder.jp/contests/abc242/tasks/abc242_e)
+2. [ABC296 F「Simultaneous Swap」](https://atcoder.jp/contests/abc296/tasks/abc296_f)
+3. [ABC219 F「Cleaning Robot」](https://atcoder.jp/contests/abc219/tasks/abc219_f)
+4. [ABC250 E「Prefix Equality」](https://atcoder.jp/contests/abc250/tasks/abc250_e)
+5. [ABC382 G「Tile Distance 3」](https://atcoder.jp/contests/abc382/tasks/abc382_g)
+6. [ABC302 G「Sort from 1 to 4」](https://atcoder.jp/contests/abc302/tasks/abc302_g)
+7. [ABC313 G「Redistribution of Piles」](https://atcoder.jp/contests/abc313/tasks/abc313_g)
+8. [ABC462 E「Alternating Costs」](https://atcoder.jp/contests/abc462/tasks/abc462_e)
+9. [ABC463 F「Senshuraku」](https://atcoder.jp/contests/abc463/tasks/abc463_f)
+10. [ABC323 F「Push and Carry」](https://atcoder.jp/contests/abc323/tasks/abc323_f)
+11. [ABC427 G「Takahashi's Expectation 2」](https://atcoder.jp/contests/abc427/tasks/abc427_g)
+12. [ABC446 G「221 Subsequence」](https://atcoder.jp/contests/abc446/tasks/abc446_g)
+13. [ABC249 Ex「Dye Color」](https://atcoder.jp/contests/abc249/tasks/abc249_h)
 
-- 巨大回数の同一経路反復を一周期集合の平行移動 union と見なし、格子 orbit の gap 集計へ落とせる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- S を一回実行して訪れる重複なしの集合 V と、終了変位 v=(a,b) を求めると、r 回目に訪れる集合は V+(r-1)v である。K は巨大でも、異なる形を K 回シミュレーションしているわけではない。
-- 二つの基準点 p,q が異なる反復で同じマスを生成するのは q-p が v の整数倍のときだけである。したがって V を v に平行な同一直線・同じ剰余の orbit ごとに分ければ、重複は一次元の平行移動として数えられる。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: V の各点を変位 v による orbit key で分類し、orbit 内の整数位置 q をソートして、次の基準点までの gap と K の小さい方を足す。 — 各基準点が新しいマスを生む反復回数は、正方向で次に V と重なる最小 shift d に対する min(d,K) であり、隣接 gap だけから求められる。
-- **棄却**: S を K 回連結した経路を順にたどり、訪問座標を hash set に入れる。 — K は 10^12 まであり、同じ平行移動構造を反復回数分展開できない。
-
-#### 鍵となる着眼
-
-- a≠0 としたとき q=floor(X/a)、s=X-qa、t=Y-qb を使うと、二点の (s,t) が等しいことと差が v の整数倍であることが同値になる。
-- 同じ group の q を q_1<…<q_m とすると、各 q_r の寄与は r<m なら min(q_{r+1}-q_r,K)、最後は K である。
-
-#### アルゴリズムへ接続する
-
-一回分の全 prefix 座標を set で重複除去して V とする。v=0 なら |V| を返す。そうでなければ必要なら座標軸を交換して a≠0 とし、各点を (s,t,q) へ正規化して (s,t) ごとに q をソートし、隣接 gap の min と末尾の K を合計する。
-
-
-## 転用するときの確認
-
-- **反復経路の平行移動分解**: 同じ移動列を非常に多く繰り返し、一周期後の変位が一定であるとき。 適用: 一周期の訪問集合を求め、全体をその集合の等差的な平行移動の union として扱う。
-- **格子点の orbit 正規化**: 点集合の重複条件が固定ベクトルの整数倍差で表されるとき。 適用: ベクトル方向の整数座標 q と、それに不変な剰余 key を作り、group 内を一次元ソートする。
-- 有限集合を同じベクトルで多数回動かした union では、各 orbit の開始点列と隣接 gap が新規出現数を決める。
-- 変位が0の例と、同じ orbit に q=0,2 がある例を手計算し、後者の最初の基準点が min(2,K) 回だけ新規マスを作る理由を確認する。
-
-## 到達確認
-
-### 到達確認 1 — 対称操作で同値な状態の標準形と不変量を選べる
-
-転移題材: [ABC242 E「(∀x∀)」](https://atcoder.jp/contests/abc242/tasks/abc242_e)
-
-**課題**: ABC242 E「(∀x∀)」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「対称操作で同値な状態の標準形と不変量を選べる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 対称操作で同値な状態の標準形と不変量を選べる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 回文の自由度を前半へ圧縮し、辞書順上限を26進 prefix count と境界一候補へ分解できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 回文の自由度を前半へ圧縮し、辞書順上限を26進 prefix count と境界一候補へ分解できる。
-
-- 対象技能が担う箇所: 回文の自由度を前半へ圧縮し、辞書順上限を26進 prefix count と境界一候補へ分解できる。
-- 転移題材の解法接続: h 文字を左から読み ans=26·ans+(S_i-'A') と更新する。S の前半を左右へ鏡映して palindrome P を作り、P≤S なら ans に1を足して法998244353で出力する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 対称操作で同値な状態の標準形と不変量を選べる。
-
-</details>
-
+- [ABC218 H「Red and Blue Lamps」](https://atcoder.jp/contests/abc218/tasks/abc218_h)
+- [ABC232 H「King's Tour」](https://atcoder.jp/contests/abc232/tasks/abc232_h)
+- [ABC278 G「Generalized Subtraction Game」](https://atcoder.jp/contests/abc278/tasks/abc278_g)
+- [ABC284 G「Only Once」](https://atcoder.jp/contests/abc284/tasks/abc284_g)
+- [ABC301 F「Anti-DDoS」](https://atcoder.jp/contests/abc301/tasks/abc301_f)
+- [ABC307 E「Distinct Adjacent」](https://atcoder.jp/contests/abc307/tasks/abc307_e)
+- [ABC328 G「Cut and Reorder」](https://atcoder.jp/contests/abc328/tasks/abc328_g)
+- [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
+- [ABC404 F「Lost and Pound」](https://atcoder.jp/contests/abc404/tasks/abc404_f)
+- [ABC411 G「Count Cycles」](https://atcoder.jp/contests/abc411/tasks/abc411_g)
+- [ABC421 E「Yacht」](https://atcoder.jp/contests/abc421/tasks/abc421_e)
+- [ABC425 F「Inserting Process」](https://atcoder.jp/contests/abc425/tasks/abc425_f)
+- [ABC450 G「Random Subtraction」](https://atcoder.jp/contests/abc450/tasks/abc450_g)
 
 ## 根拠
 
@@ -120,7 +70,5 @@ sidebar:
 - [ABC219 F 公式問題文](https://atcoder.jp/contests/abc219/tasks/abc219_f)
 - [ABC232 H 公式解説](https://atcoder.jp/contests/abc232/editorial/3140)
 - [ABC232 H 公式問題文](https://atcoder.jp/contests/abc232/tasks/abc232_h)
-- [ABC242 E 公式問題文](https://atcoder.jp/contests/abc242/tasks/abc242_e)
-- [ABC242 E 公式解説](https://atcoder.jp/contests/abc242/editorial/3516)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-normalization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-normalization`

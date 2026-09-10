@@ -35,66 +35,19 @@
     "abc242-g",
     "abc293-g",
     "abc384-g",
-    "abc405-g",
+    "abc405-g"
+  ],
+  "directProblemIds": [
+    "abc293-g",
+    "abc242-g",
+    "abc384-g",
+    "abc405-g"
+  ],
+  "relatedProblemIds": [
     "abc463-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-schedule-range-query-updates",
-      "learningOutcomeIds": [
-        "outcome-schedule-range-query-updates"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。静的配列の多数の offline range query で、要素一個の追加・削除から答えを更新できるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC242 G「Range Pairing Query」について、区間内で色 c が cnt_c 人なら作れる pair は floor(cnt_c/2) で、答えは色ごとのこの値の和になる。query 間で端点を一つ動かすと変化するのは追加・削除した一色だけである。",
-      "procedure": [
-        "観察: 区間内で色 c が cnt_c 人なら作れる pair は floor(cnt_c/2) で、答えは色ごとのこの値の和になる。query 間で端点を一つ動かすと変化するのは追加・削除した一色だけである。",
-        "観察: 色を一個追加したとき旧個数が奇数なら pair が1増え、削除時は旧個数が偶数なら1減るため、区間状態を定数時間で更新できる。",
-        "着眼: 非線形な floor(cnt/2) でも、一個の増減差は cnt の偶奇だけで決まるため Mo の add/remove に必要な十分状態は頻度と総 pair 数だけである。",
-        "方針: query を Mo's algorithm の順に並べ、現在区間の色頻度と pair 総数を四種類の端点移動で保つ。（各 query を独立集計せず、近い区間間で O(1) update を共有でき、Q=10^6にも対応できる。）",
-        "接続: query を左端 block と右端で Mo 順に sort する。現在 [L,R] を伸縮し、add(x) は count[A_x] が奇数なら ans++、remove(x) は削除前 count[A_x] が偶数なら ans-- として頻度を更新し、元 query index へ ans を保存する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "区間問い合わせの順序と追加・削除操作を設計し、端点移動の総量を評価できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-schedule-range-query-updates",
-      "learningOutcomeIds": [
-        "outcome-schedule-range-query-updates"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「区間問い合わせの順序と追加・削除操作を設計し、端点移動の総量を評価できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC293 G「Triple Index」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「区間問い合わせの順序と追加・削除操作を設計し、端点移動の総量を評価できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 各区間の同値な添字三つ組数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 各区間の同値な添字三つ組数を求められる。",
-          "転移題材の解法接続: 質問を左端blockと右端順でソートし、現在区間を伸縮しながらfreq[A_i]と三つ組数を差分更新して元の質問順へ答える。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "区間問い合わせの順序と追加・削除操作を設計し、端点移動の総量を評価できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 8,

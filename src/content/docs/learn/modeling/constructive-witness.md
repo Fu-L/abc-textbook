@@ -1,6 +1,6 @@
 ---
 title: "成立証明から構成解を復元する"
-description: "前提から成立証明から構成解を復元するを見抜き、方針へ接続して検証するための学習単位。"
+description: "成立証明から構成解を復元するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 74
@@ -8,110 +8,67 @@ sidebar:
 
 # 成立証明から構成解を復元する
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。
-
-### この単元では扱わない範囲
-
-- 存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。
-
-## 発動条件と見分け方
+## 概要
 
 ### 構成解・witness復元
 
 成立条件の証明が与える局所操作やparentを記録し、実際の解を復元する。
 
-検索語: constructive algorithms、構築問題
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる
+存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。
 
-題材: [ABC232 H「King's Tour」](https://atcoder.jp/contests/abc232/tasks/abc232_h)
+- 存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。
 
-選定理由: S＝第一列全体と (H,2) を通る経路の末尾は、第一列を除いて上下反転した残り盤面の左上角に対応する。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。大きい盤面の一部を固定経路で消費すると、座標変換後に同じ条件の小さい盤面が残るとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC244 G「Construct Good Path」](https://atcoder.jp/contests/abc244/tasks/abc244_g)
+2. [ABC251 F「Two Spanning Trees」](https://atcoder.jp/contests/abc251/tasks/abc251_f)
+3. [ABC255 F「Pre-order and In-order」](https://atcoder.jp/contests/abc255/tasks/abc255_f)
+4. [ABC289 F「Teleporter Takahashi」](https://atcoder.jp/contests/abc289/tasks/abc289_f)
+5. [ABC299 E「Nearest Black Vertex」](https://atcoder.jp/contests/abc299/tasks/abc299_e)
+6. [ABC358 F「Easiest Maze」](https://atcoder.jp/contests/abc358/tasks/abc358_f)
+7. [ABC448 F「Authentic Traveling Salesman Problem」](https://atcoder.jp/contests/abc448/tasks/abc448_f)
+8. [ABC239 F「Construct Highway」](https://atcoder.jp/contests/abc239/tasks/abc239_f)
+9. [ABC232 H「King's Tour」](https://atcoder.jp/contests/abc232/tasks/abc232_h)
+10. [ABC233 F「Swap and Sort」](https://atcoder.jp/contests/abc233/tasks/abc233_f)
+11. [ABC260 F「Find 4-cycle」](https://atcoder.jp/contests/abc260/tasks/abc260_f)
+12. [ABC363 F「Palindromic Expression」](https://atcoder.jp/contests/abc363/tasks/abc363_f)
+13. [ABC387 E「Digit Sum Divisible 2」](https://atcoder.jp/contests/abc387/tasks/abc387_e)
+14. [ABC454 E「LRUD Moving」](https://atcoder.jp/contests/abc454/tasks/abc454_e)
+15. [ABC333 E「Takahashi Quest」](https://atcoder.jp/contests/abc333/tasks/abc333_e)
+16. [ABC453 F「Avoid Division」](https://atcoder.jp/contests/abc453/tasks/abc453_f)
 
-- 任意終点のキング全盤面巡回路を、対称変換と幅縮小の再帰的不変条件から構成できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- キングは縦横だけでなく斜めにも一マス動けるため、幅 2 の帯では上下を交互に通る経路と端を回る経路を柔軟につなげられる。
-- 任意終点へ合わせた全盤面の蛇行を直接場合分けすると端・角の例外が増えるが、外周の細い経路を先に通れば一辺短い同型問題が残る。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 幅 2 を明示構成の基底とし、指定終点を避ける L 字境界 S を先に訪問して、転置・反転した小さい長方形へ再帰する。 — 各段階で訪問済み帯と残りが一つの長方形になり、開始角と指定終点を保つ同じ問題へ縮小できる。
-- **棄却**: 行ごとの通常の蛇行順を作り、末尾を指定マスへ局所的に入れ替える。 — 終点が内部や端にある場合に未訪問領域が分断され、局所修正だけでは全マス一回訪問を保証できない。
-
-#### 鍵となる着眼
-
-- S＝第一列全体と (H,2) を通る経路の末尾は、第一列を除いて上下反転した残り盤面の左上角に対応する。
-- 終点が S 内にある場合は行列を転置すると、同じ形の境界が終点を含まない向きへ交換できる。
-
-#### アルゴリズムへ接続する
-
-長方形 Hamilton path の構成不変条件を「左上開始・任意の別終点」とし、対称変換で終点を境界から外して一列ずつ剥がす再帰構成を行う。
-
-
-## 転用するときの確認
-
-- **構成問題の再帰的不変条件**: 大きい盤面の一部を固定経路で消費すると、座標変換後に同じ条件の小さい盤面が残るとき。 適用: L 字境界を出力し、残りを上下反転・平行移動した幅 W−1 の問題として再帰する。
-- **転置・反転による場合分け削減**: 行と列が対称で、困難な境界位置を別向きの標準ケースへ写せるとき。 適用: W＝2 や終点が境界 S 内のケースを盤面転置で既存ケースへ移す。
-- 再帰構成では削る領域の大きさだけでなく、固定経路の出口が残り問題の標準始点に一致する形を設計する。
-- 構成の特殊ケースが増えたら、固定した帯を訪問した後の未訪問領域が同じ問題になる削り方を探す。
-- 再帰構成は出力列を眺めるだけでなく、各段階の開始点・終了点・未訪問長方形の三つを不変条件として検証する。
-
-## 到達確認
-
-### 到達確認 1 — 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる
-
-転移題材: [ABC233 F「Swap and Sort」](https://atcoder.jp/contests/abc233/tasks/abc233_f)
-
-**課題**: ABC233 F「Swap and Sort」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: グラフ辺交換による順列整列を、成分判定と spanning tree の葉固定で制限内の操作列として構成できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- グラフ辺交換による順列整列を、成分判定と spanning tree の葉固定で制限内の操作列として構成できる。
-
-- 対象技能が担う箇所: グラフ辺交換による順列整列を、成分判定と spanning tree の葉固定で制限内の操作列として構成できる。
-- 転移題材の解法接続: Union-Find で feasibility と spanning forest を構成し、各木を葉除去順に処理して、駒の現在位置から目標葉までの木路上の辺 ID を交換列として出力する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
-
-</details>
-
+- [ABC221 G「Jumping sequence」](https://atcoder.jp/contests/abc221/tasks/abc221_g)
+- [ABC227 H「Eat Them All」](https://atcoder.jp/contests/abc227/tasks/abc227_h)
+- [ABC240 E「Ranges on Tree」](https://atcoder.jp/contests/abc240/tasks/abc240_e)
+- [ABC276 Ex「Construct a Matrix」](https://atcoder.jp/contests/abc276/tasks/abc276_h)
+- [ABC326 F「Robot Rotation」](https://atcoder.jp/contests/abc326/tasks/abc326_f)
+- [ABC345 F「Many Lamps」](https://atcoder.jp/contests/abc345/tasks/abc345_f)
+- [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g)
+- [ABC362 F「Perfect Matching on a Tree」](https://atcoder.jp/contests/abc362/tasks/abc362_f)
+- [ABC366 G「XOR Neighbors」](https://atcoder.jp/contests/abc366/tasks/abc366_g)
+- [ABC369 F「Gather Coins」](https://atcoder.jp/contests/abc369/tasks/abc369_f)
+- [ABC392 E「Cables and Servers」](https://atcoder.jp/contests/abc392/tasks/abc392_e)
+- [ABC396 E「Min of Restricted Sum」](https://atcoder.jp/contests/abc396/tasks/abc396_e)
+- [ABC403 F「Shortest One Formula」](https://atcoder.jp/contests/abc403/tasks/abc403_f)
+- [ABC406 G「Travelling Salesman Problem」](https://atcoder.jp/contests/abc406/tasks/abc406_g)
+- [ABC432 F「Candy Redistribution」](https://atcoder.jp/contests/abc432/tasks/abc432_f)
+- [ABC437 G「Colorful Christmas Tree」](https://atcoder.jp/contests/abc437/tasks/abc437_g)
+- [ABC443 F「Non-Increasing Number」](https://atcoder.jp/contests/abc443/tasks/abc443_f)
+- [ABC451 E「Tree Distance」](https://atcoder.jp/contests/abc451/tasks/abc451_e)
 
 ## 根拠
 
@@ -121,7 +78,5 @@ sidebar:
 - [ABC227 H 公式問題文](https://atcoder.jp/contests/abc227/tasks/abc227_h)
 - [ABC232 H 公式解説](https://atcoder.jp/contests/abc232/editorial/3140)
 - [ABC232 H 公式問題文](https://atcoder.jp/contests/abc232/tasks/abc232_h)
-- [ABC233 F 公式解説](https://atcoder.jp/contests/abc233/editorial/3164)
-- [ABC233 F 公式問題文](https://atcoder.jp/contests/abc233/tasks/abc233_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-constructive-witness`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-constructive-witness`

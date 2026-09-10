@@ -1,6 +1,6 @@
 ---
 title: "NTT・FFTで畳み込みと相互相関を求める"
-description: "前提からNTT・FFTで畳み込みと相互相関を求めるを見抜き、方針へ接続して検証するための学習単位。"
+description: "NTT・FFTで畳み込みと相互相関を求めるの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 69
@@ -8,147 +8,70 @@ sidebar:
 
 # NTT・FFTで畳み込みと相互相関を求める
 
-このページは **節** です。同じ対象を扱う技能を比較し、どの発動条件・不変量・計算量の違いで使い分けるかを学びます。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。
-
-### この単元では扱わない範囲
-
-- 組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。
-
-## 下位単元と学習順
-
-以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
-
-1. [factorial convolutionによる多項式Taylor shift](./polynomial-taylor-shift.md)（標準順 208）— 畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。
-2. [Relaxed・online convolution](./relaxed-convolution.md)（標準順 210）— 畳み込み・相互相関で得た考え方と実装を再利用し、Relaxed・online convolutionの発動条件・正当化・境界を重複なく学ぶ。
-
-## 発動条件と見分け方
+## 概要
 
 ### 畳み込み・相互相関
 
 係数積和または反転列とのcorrelationを多項式積へ写し、必要な次数範囲をNTT/FFTで計算する。
 
-検索語: FFT、NTT、convolution、畳み込み
+ABC291 Gの巡回shiftごとのbitwise ORの総和を考える。観察: a_i,b_iをそのbitが0である指示変数とする。shift sでORが0の個数はR_s=Σ_{i=0}^{N-1}a_{(i+s) mod N}b_i。全shiftを直接計算するとO(N²)。
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+変換: aを2周並べてu、bを反転してv_j=b_{N-1-j}とする。多項式U(x)V(x)の係数c_tはΣ_{p+q=t}u_pv_q。t=N-1+sならp=i+s,q=N-1-iとなり、c_{N-1+s}=R_sを得る。
 
-## ガイド例
+出力: 各bitの寄与は2^bit·(N-R_s)。5 bitの寄与をshiftごとに足してから最大化する。bitごとに最適shiftを選ぶことはできない。
 
-### 例 1 — 係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる
+計算量と境界: 5回の通常畳み込みでO(N log N)。各係数はN以下なので法998244353で正確に復元できる。N=1とs=N-1で反転位置と参照係数を手計算する。
 
-題材: [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h)
+ABC265 Exは通常の畳み込みだけの導入には用いない。Conwayの数ゲーム、Grundy数、XOR畳み込みを学んだ後に、整数和とXORという異なる合成則を同時に保持する複合問題として取り組む。
 
-選定理由: 全体評価 (S,G)=(Σs_i, XOR g_i) に対し、先手勝ちは S>0 または S=0かつG>0 で特徴付けられる。
+## 前提と範囲
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。複数の独立局面から毎手一つを選ぶゲームで、局面ごとにpartisan値とimpartial値へ分解できるとき。 問題全体への接続は併用技能を学んだ後に読む。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-#### このOutcomeを支える根拠
+追加前提: なし。
 
-- 多数の独立な香車ゲーム配置の勝敗数を、加算・XOR混合分布の二次元変換で数えられる。
+係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。
 
-#### 観察
+- 組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。
 
-- 行同士に移動はなく、全体ゲームはH個の独立な一行ゲームの直和として評価できる。
-- 先手位置j・後手位置kの一行評価は、k<jなら (s,g)=(0,j−k−1)、k>jなら (s,g)=((j−1)−(W−k),0) になる。
+## 下位単元
 
-#### 候補を比較する
+- [factorial convolutionによる多項式Taylor shift](/learn/combinatorics-algebra/polynomial-taylor-shift/)
+- [Relaxed・online convolution](/learn/combinatorics-algebra/relaxed-convolution/)
 
-- **採用**: 一行配置の (s,g) 分布を作り、sは加算、gはXORする混合二次元畳み込みをtransform領域でH乗して全体分布を得る。 — 通常DFTは加算畳み込み、Walsh-Hadamard変換はXOR畳み込みを同時に対角化し、H回の合成を点ごとの冪へ変えられる。
-- **棄却**: 全W(W−1)^H配置を列挙し、各盤面のゲーム木を探索する。 — 配置数がHに対して指数的で、同じ一行局面の合成を繰り返している。
+## 問題一覧
 
-#### 鍵となる着眼
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-- 全体評価 (S,G)=(Σs_i, XOR g_i) に対し、先手勝ちは S>0 または S=0かつG>0 で特徴付けられる。
-- 負のsは一定offsetを加えて多項式次数へ写し、H行分の最大次数を覆う長さへzero paddingすれば巡回を通常畳み込みにできる。
+1. [ABC291 G「OR Sum」](https://atcoder.jp/contests/abc291/tasks/abc291_g)
+2. [ABC307 Ex「Marquee」](https://atcoder.jp/contests/abc307/tasks/abc307_h)
+3. [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h)
 
-#### アルゴリズムへ接続する
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-partisan gameのsurreal-number成分を加法群、impartial成分をXOR群として、direct product group上のconvolutionを多次元Fourier変換で対角化する。
+## 関連問題
 
-## 下位単元を使い分ける比較例
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **factorial convolutionによる多項式Taylor shift** — 直接到達点: 二項係数を階乗で分離し、係数列の反転と一回の畳み込みから P(x+a) の全係数を準線形時間で復元できる。近いが対象外: factorial convolutionによる多項式Taylor shiftの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **Relaxed・online convolution** — 直接到達点: 係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- **独立ゲームの数値・Grundy合成**: 複数の独立局面から毎手一つを選ぶゲームで、局面ごとにpartisan値とimpartial値へ分解できるとき。 適用: 数値成分を加算し、Grundy成分をXORして全体勝敗を判定する。
-- **加算×XORの混合畳み込み**: 状態pairの一軸が通常加算、他軸がbitwise XORで合成される分布を反復合成するとき。 適用: 加算軸へNTT、XOR軸へWalsh-Hadamard変換を施し、各点をH乗して逆変換する。
-- 複合ゲームは駒の相対配置ごとに標準ゲームへ分解し、加法則が異なる評価成分を分けて持つ。
-- 独立部分ゲームの評価が複数の演算で合成されるなら、各演算を対角化する変換の直積を考える。
-- 反復畳み込みの対象が全行同一なら、逐次DPではなく変換後の点ごとのH乗へ置き換える。
-
-## 到達確認
-
-### 到達確認 1 — 係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる
-
-転移題材: [ABC289 Ex「Trio」](https://atcoder.jp/contests/abc289/tasks/abc289_h)
-
-**課題**: ABC289 Ex「Trio」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 3本の独立random walkが時刻Tに初めて同一点へ集まる確率を、会合kernelの畳み込みとFPS除算で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 3本の独立random walkが時刻Tに初めて同一点へ集まる確率を、会合kernelの畳み込みとFPS除算で求められる。
-
-- 対象技能が担う箇所: 3本の独立random walkが時刻Tに初めて同一点へ集まる確率を、会合kernelの畳み込みとFPS除算で求められる。
-- 転移題材の解法接続: factorial・inverse factorialと2の逆冪を前計算する。初期位置(X,Y,Z)について有効parityだけq,r配列へinverse factorial積を入れ、NTT convolutionのindex 2t（offset採用時はその補正位置）からp(t)を復元する。この処理を(A,B,C)でG、(0,0,0)でHに行う。HのFPS inverseを次数Tまで求め、Gと掛けたFのx^T係数を出力する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。
-
-</details>
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC235 Ex「Painting Weighted Graph」](https://atcoder.jp/contests/abc235/tasks/abc235_h)
+- [ABC278 Ex「make 1」](https://atcoder.jp/contests/abc278/tasks/abc278_h)
+- [ABC289 Ex「Trio」](https://atcoder.jp/contests/abc289/tasks/abc289_h)
+- [ABC300 Ex「Fibonacci: Revisited」](https://atcoder.jp/contests/abc300/tasks/abc300_h)
+- [ABC303 Ex「Constrained Tree Degree」](https://atcoder.jp/contests/abc303/tasks/abc303_h)
+- [ABC309 Ex「Simple Path Counting Problem」](https://atcoder.jp/contests/abc309/tasks/abc309_h)
+- [ABC317 Ex「Walk」](https://atcoder.jp/contests/abc317/tasks/abc317_h)
+- [ABC323 G「Inversion of Tree」](https://atcoder.jp/contests/abc323/tasks/abc323_g)
+- [ABC331 G「Collect Them All」](https://atcoder.jp/contests/abc331/tasks/abc331_g)
+- [ABC345 G「Sugoroku 5」](https://atcoder.jp/contests/abc345/tasks/abc345_g)
+- [ABC352 G「Socks 3」](https://atcoder.jp/contests/abc352/tasks/abc352_g)
+- [ABC385 G「Counting Buildings」](https://atcoder.jp/contests/abc385/tasks/abc385_g)
+- [ABC390 G「Permutation Concatenation」](https://atcoder.jp/contests/abc390/tasks/abc390_g)
+- [ABC392 G「Fine Triplets」](https://atcoder.jp/contests/abc392/tasks/abc392_g)
+- [ABC409 G「Accumulation of Wealth」](https://atcoder.jp/contests/abc409/tasks/abc409_g)
+- [ABC422 G「Balls and Boxes」](https://atcoder.jp/contests/abc422/tasks/abc422_g)
+- [ABC432 G「Sum of Binom(A, B)」](https://atcoder.jp/contests/abc432/tasks/abc432_g)
+- [ABC436 G「Linear Inequation」](https://atcoder.jp/contests/abc436/tasks/abc436_g)
+- [ABC462 G「Completely Wrong」](https://atcoder.jp/contests/abc462/tasks/abc462_g)
 
 ## 根拠
 
@@ -158,9 +81,5 @@ partisan gameのsurreal-number成分を加法群、impartial成分をXOR群と�
 - [ABC230 H 公式問題文](https://atcoder.jp/contests/abc230/tasks/abc230_h)
 - [ABC235 H 公式解説](https://atcoder.jp/contests/abc235/editorial/3250)
 - [ABC235 H 公式問題文](https://atcoder.jp/contests/abc235/tasks/abc235_h)
-- [ABC265 H 公式解説](https://atcoder.jp/contests/abc265/editorial/4577)
-- [ABC265 H 公式問題文](https://atcoder.jp/contests/abc265/tasks/abc265_h)
-- [ABC289 H 公式解説](https://atcoder.jp/contests/abc289/editorial/5712)
-- [ABC289 H 公式問題文](https://atcoder.jp/contests/abc289/tasks/abc289_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-polynomial-convolution`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-polynomial-convolution`

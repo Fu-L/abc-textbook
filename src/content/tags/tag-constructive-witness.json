@@ -36,9 +36,9 @@
     "outcome-recover-valid-witness"
   ],
   "representativeProblemIds": [
+    "abc333-e",
     "abc239-f",
-    "abc244-g",
-    "abc333-e"
+    "abc244-g"
   ],
   "aliases": [
     "constructive algorithms",

@@ -1,6 +1,6 @@
 ---
 title: "数論"
-description: "前提から数論を見抜き、方針へ接続して検証するための学習単位。"
+description: "数論の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 6
@@ -8,204 +8,132 @@ sidebar:
 
 # 数論
 
-このページは **章** です。分野全体の索引として、技能の境界と学ぶ順序を俯瞰します。各技能の定義を混同せず、必要な節・小節へ降りるための地図として使ってください。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 整数条件を合同・整除・指数・約数格子などの数論構造へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 整数条件をgcd・合同・素因数指数・約数格子へ翻訳し、有限状態化と反転の基礎を作る。
-
-### この単元では扱わない範囲
-
-- なし
-
-## 下位単元と学習順
-
-以下は canonical standard order に沿った章内カリキュラムです。定義・証明・実装境界・Outcome到達確認は各リンク先で扱い、この章では経路選択に必要な境界を示します。
-
-1. [法上の演算と積の保守](./modular-product-foundations.md)（標準順 16）— 法上の基本演算を先に確立し、そのうえで「積から旧因子を逆元で外す」操作に必要な可逆性と、法 m で剰余 0 となる因子では逆元が存在しない境界を独立した動的保守技能として学ぶ。
-2. [gcdと整数解の成立条件](./gcd-diophantine.md)（標準順 20）— 最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。
-3. [剰余周期と指数法則を利用する](./modular-periodicity.md)（標準順 31）— 剰余列や冪が有限状態で周期化することを示し、周期前計算や指数法則で巨大な反復を短縮する。
-4. [一次合同・CRTで解の類を統合する](./modular-congruence.md)（標準順 41）— 法上の演算とBézout等式を使えることを前提に、一次合同の可解性を判定して複数条件をCRTで統合する。
-5. [素因数分解と約数構造](./prime-divisor.md)（標準順 44）— 初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。
-6. [連分数・Stern–Brocotで有理近似する](./rational-approximation.md)（標準順 45）— Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。
-7. [整数境界と同値区間を正確に分ける](./integer-boundary-blocks.md)（標準順 50）— floorや整数根の値が変わる境界を正確に求め、同値な整数範囲をまとめて処理する。
-8. [数値半群のconductor以後を一括到達とみなす](./numerical-semigroup-reachability.md)（標準順 69）— 生成元をgcdで正規化し、非負整数結合の到達集合がconductor以後の全整数を含むことを示して巨大距離を有限prefixへ縮約する。
-9. [乗法的位数から最小周期を求める](./multiplicative-order-periods.md)（標準順 73）— 合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。
-10. [巡回群を指数化して数える](./cyclic-group-exponent-counting.md)（標準順 76）— 乗法的位数とその約数分類を先に学び、巡回群の元を指数へ写して位数別に重複なく数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する。
-11. [Baby-Step Giant-Step・可逆作用の反復到達探索](./baby-step-giant-step.md)（標準順 98）— 有限集合上の可逆な作用と逆作用を定義し、離散対数やaffine反復を含む反復到達時刻をbaby/giantの衝突へ変換して平方根時間で求める。合同算術が必要な問題では個別のreadinessとして接続する。
-12. [標数pのFrobenius恒等式による反復高速化](./finite-field-frobenius.md)（標準順 111）— 法上の四則演算・高速累乗・逆元で得た考え方と実装を再利用し、標数pのFrobenius恒等式による反復高速化の発動条件・正当化・境界を重複なく学ぶ。
-13. [Gaussian整数・二平方和](./gaussian-integers-two-squares.md)（標準順 112）— 素因数・約数分解で得た考え方と実装を再利用し、Gaussian整数・二平方和の発動条件・正当化・境界を重複なく学ぶ。
-14. [Min_25・Lucy DP型の総和篩](./min25-sieve.md)（標準順 113）— 素因数・約数分解で得た考え方と実装を再利用し、Min_25・Lucy DP型の総和篩の発動条件・正当化・境界を重複なく学ぶ。
-15. [Stern–Brocot木の経路と祖先](./stern-brocot-ancestry.md)（標準順 119）— gcd不変量・差分構造で得た考え方と実装を再利用し、Stern–Brocot木の経路と祖先の発動条件・正当化・境界を重複なく学ぶ。
-16. [拡大有限体の表現と四則演算を構成する](./finite-field-extension.md)（標準順 215）— 素体上の演算を土台に、既約関係で元を標準化し、加減乗除が閉じる拡大体として扱う。
-
-## 発動条件と見分け方
+## 概要
 
 ### 数論構造への変換
 
 整数条件を合同・整除・指数・約数格子などの数論構造へ変換する。
 
-検索語: number theory、数論
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 整数条件を合同・整除・指数・約数格子などの数論構造へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
+整数条件をgcd・合同・素因数指数・約数格子へ翻訳し、有限状態化と反転の基礎を作る。
 
-題材: [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
+- なし
 
-選定理由: an≡b (mod m) が n について解を持つのは gcd(m,a) が b を割るときに限る。したがって固定した a から到達できる b は m/gcd(m,a) 個であり、a の gcd ごとに寄与をまとめられる。
+## 下位単元
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。素数法の非零剰余に積と冪が現れるとき。 問題全体への接続は併用技能を学んだ後に読む。
+- [法上の演算と積の保守](/learn/number-theory/modular-product-foundations/)
+- [gcdと整数解の成立条件](/learn/number-theory/gcd-diophantine/)
+- [剰余周期と指数法則を利用する](/learn/number-theory/modular-periodicity/)
+- [一次合同・CRTで解の類を統合する](/learn/number-theory/modular-congruence/)
+- [素因数分解と約数構造](/learn/number-theory/prime-divisor/)
+- [連分数・Stern–Brocotで有理近似する](/learn/number-theory/rational-approximation/)
+- [整数境界と同値区間を正確に分ける](/learn/number-theory/integer-boundary-blocks/)
+- [数値半群のconductor以後を一括到達とみなす](/learn/number-theory/numerical-semigroup-reachability/)
+- [乗法的位数から最小周期を求める](/learn/number-theory/multiplicative-order-periods/)
+- [巡回群を指数化して数える](/learn/number-theory/cyclic-group-exponent-counting/)
+- [Baby-Step Giant-Step・可逆作用の反復到達探索](/learn/number-theory/baby-step-giant-step/)
+- [標数pのFrobenius恒等式による反復高速化](/learn/number-theory/finite-field-frobenius/)
+- [Gaussian整数・二平方和](/learn/number-theory/gaussian-integers-two-squares/)
+- [Min_25・Lucy DP型の総和篩](/learn/number-theory/min25-sieve/)
+- [Stern–Brocot木の経路と祖先](/learn/number-theory/stern-brocot-ancestry/)
+- [拡大有限体の表現と四則演算を構成する](/learn/number-theory/finite-field-extension/)
 
-#### このOutcomeを支える根拠
+## 問題一覧
 
-- 素数法の冪到達可能性を原始根で一次合同式へ変換し、gcd ごとの個数を約数上で集計できる。
-- 素数法の非零剰余が位数 P-1 の巡回群をなすこと、一次合同式 an≡b (mod m) の可解条件、約数列挙と倍数側からの差し引き。
-- x=0 を非零剰余の巡回群から先に分離すると、残りを原始根の指数だけで統一できる。 再利用の観点: 演算が有限体の乗法に閉じる部分と例外値を分け、群構造へ写せる範囲を確認する。
-- m の約数を降順に処理し、f(g)=m/g−Σ_{h:g|h,h>g}f(h) により gcd(m,a)=g となる a の個数を求める。最後に (0,0) の寄与を含む 1+Σ_g f(g)(m/g) を mod 998244353 で計算する。
-- 原始根の指数へ写し、g=gcd(m,a) ごとに指数 a の個数と到達可能な b の個数を約数上で集約する。 — 寄与は g=gcd(m,a) だけで決まり、g は m の約数に限られる。m<10^12 の約数数は高々 6720 なので、約数列挙と約数間の差し引きで制約内に収まる。
-- an≡b (mod m) が n について解を持つのは gcd(m,a) が b を割るときに限る。したがって固定した a から到達できる b は m/gcd(m,a) 個であり、a の gcd ごとに寄与をまとめられる。
-- x=0 なら正の整数 n に対して x^n=0 なので、寄与する組は (x,y)=(0,0) の 1 組だけである。残る非零剰余を乗法群として扱えばよい。
-- P が素数なので非零剰余は位数 m=P-1 の巡回群をなす。原始根 r を取り x=r^a,y=r^b と書くと、ある n で x^n=y となる条件は an≡b (mod m) へ移る。
-- 原始根による指数化: 素数法の非零剰余に積と冪が現れるとき。 適用: 乗法群を Z/(P-1)Z の加法的な指数へ写す。
-- 約数上の包除的集計: 値が gcd(P-1,a) のみに依存するとき。 適用: 倍数側の個数を大きい約数から差し引き、gcd が各約数に等しい個数を得る。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### 観察
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-- x=0 なら正の整数 n に対して x^n=0 なので、寄与する組は (x,y)=(0,0) の 1 組だけである。残る非零剰余を乗法群として扱えばよい。
-- P が素数なので非零剰余は位数 m=P-1 の巡回群をなす。原始根 r を取り x=r^a,y=r^b と書くと、ある n で x^n=y となる条件は an≡b (mod m) へ移る。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 候補を比較する
+## 関連問題
 
-- **採用**: 原始根の指数へ写し、g=gcd(m,a) ごとに指数 a の個数と到達可能な b の個数を約数上で集約する。 — 寄与は g=gcd(m,a) だけで決まり、g は m の約数に限られる。m<10^12 の約数数は高々 6720 なので、約数列挙と約数間の差し引きで制約内に収まる。
-- **棄却**: a=1..m を全走査し、各 a について m/gcd(m,a) を答えへ加える。 — 式自体は正しいが O(P) となり P≤10^12 に間に合わないため、同じ gcd を持つ a をまとめる必要がある。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 鍵となる着眼
-
-- an≡b (mod m) が n について解を持つのは gcd(m,a) が b を割るときに限る。したがって固定した a から到達できる b は m/gcd(m,a) 個であり、a の gcd ごとに寄与をまとめられる。
-
-#### アルゴリズムへ接続する
-
-m の約数を降順に処理し、f(g)=m/g−Σ_{h:g|h,h>g}f(h) により gcd(m,a)=g となる a の個数を求める。最後に (0,0) の寄与を含む 1+Σ_g f(g)(m/g) を mod 998244353 で計算する。
-
-## 下位単元を使い分ける比較例
-
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **法上の演算と積の保守** — 直接到達点: 2個の下位Outcomeへ進むための構造索引。近いが対象外: 一次合同・CRT、剰余列の周期、乗法的位数、および法をまたいだ合同条件の統合。
-- **gcdと整数解の成立条件** — 直接到達点: 整除条件や一次不定方程式の可解性をgcdで特徴付け、必要なら拡張EuclidでBézout整数解を構成できる。近いが対象外: 連分数・Stern–Brocotによる有理近似、および複数の合同類をCRTで統合する構成。
-- **剰余周期と指数法則を利用する** — 直接到達点: 剰余類上の周期または指数法則を示し、周期状態の前計算や巨大指数の簡約で値を求められる。近いが対象外: 逆元・一次合同・CRTによる合同条件の統合、および巡回群の位数を使う計数。
-- **一次合同・CRTで解の類を統合する** — 直接到達点: 合同条件の可解性を判定し、逆元・一次合同・CRTで解の類を構成できる。近いが対象外: 可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。
-- **素因数分解と約数構造** — 直接到達点: 整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。近いが対象外: 床関数や整数根の値が一定となる区間への分割。
-- **連分数・Stern–Brocotで有理近似する** — 直接到達点: Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる。近いが対象外: 整除性や一次不定方程式の可解判定だけを行う問題、および合同類をCRTで統合する構成。
-- **整数境界と同値区間を正確に分ける** — 直接到達点: 圧縮block内の一次・二次式や操作列の累積境界を閉形式にし、極値・順位・個数を求められる／床関数をconstant quotient blockまたはfloor-sum再帰で処理し、整数根・桁数の境界も誤差なく扱える。近いが対象外: 素因数指数による整数条件の分解。
-- **数値半群のconductor以後を一括到達とみなす** — 直接到達点: 正の生成元をgcdで正規化し、Frobenius数・conductorまたは剰余類ごとの最小到達値から、それ以後の全距離が非負整数結合で到達可能だと証明して有限prefixだけを調べられる。近いが対象外: 負の係数も許す整数線形結合のgcd可解性だけを判定する問題、および使用回数に上限がある有限knapsack。
-- **乗法的位数から最小周期を求める** — 直接到達点: 合同式で表された反復の最小周期を乗法的位数に帰着し、約数から求められる。近いが対象外: 約数格子上の指数計数・包除。
-- **巡回群を指数化して数える** — 直接到達点: 巡回部分群を指数と約数格子で分類し、重複を補正して対象を数えられる。近いが対象外: 乗法的位数から最小周期だけを求める問題。
-- **Baby-Step Giant-Step・可逆作用の反復到達探索** — 直接到達点: 有限群の累乗または可逆な有限orbitについて、反復到達時刻をbaby/giant幅へ分解し、逆向きbaby tableと前向きgiant sequenceの衝突からindexを復元できる。近いが対象外: Baby-Step Giant-Step・可逆作用の反復到達探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **標数pのFrobenius恒等式による反復高速化** — 直接到達点: 標数pで中間の二項係数が消える恒等式 (1+x)^(p^t)=1+x^(p^t) をシフト演算へ適用し、隣接和反復をpの冪回ずつ飛ばす。圧縮列では各段のrun数の増加も評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 標数pのFrobenius恒等式による反復高速化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **Gaussian整数・二平方和** — 直接到達点: Z[i]での素因数分解と共役を用い、整数の二平方和表現をprime exponentごとに構成・数え上げる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: Gaussian整数・二平方和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **Min_25・Lucy DP型の総和篩** — 直接到達点: floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗法的関数のprefix sumをN^(2/3)級で求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: Min_25・Lucy DP型の総和篩の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **Stern–Brocot木の経路と祖先** — 直接到達点: 隣接分数の行列式が1であることを保ち、mediantとEuclidの商列からStern–Brocot木の経路を同方向の連続回数へ圧縮する。経路の共通prefixで祖先関係と必要な祖先集合を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: Stern–Brocot木の経路と祖先の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **拡大有限体の表現と四則演算を構成する** — 直接到達点: 基底と既約関係を定めて拡大有限体の元を一意に表し、標準形を保つ加減乗除を実装できる。近いが対象外: 素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- **原始根による指数化**: 素数法の非零剰余に積と冪が現れるとき。 適用: 乗法群を Z/(P-1)Z の加法的な指数へ写す。
-- **約数上の包除的集計**: 値が gcd(P-1,a) のみに依存するとき。 適用: 倍数側の個数を大きい約数から差し引き、gcd が各約数に等しい個数を得る。
-- 演算が有限体の乗法に閉じる部分と例外値を分け、群構造へ写せる範囲を確認する。
-- 固定した a に対する冪写像の像の大きさを gcd から再導出し、P=2 を含む小さい素数で (0,0) の 1 組と約数上の差し引きを全列挙結果に照合する。
-
-## 到達確認
-
-### 到達確認 1 — 整数条件を合同・整除・指数・約数格子などの数論構造へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
-
-転移題材: [ABC215 G「Colorful Candies 2」](https://atcoder.jp/contests/abc215/tasks/abc215_g)
-
-**課題**: ABC215 G「Colorful Candies 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「整数条件を合同・整除・指数・約数格子などの数論構造へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 整数条件を合同・整除・指数・約数格子などの数論構造へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 相関のある標本中の異種類数期待値を、指示変数・余事象・頻度集約で全標本サイズについて計算できる。／指示変数を用いて個数の期待値を確率の和へ変換できること。／法の下で階乗と逆階乗を前計算し、二項係数と確率の比を計算できること。／頻度ごとの配列は長さ N でも、正の異なる頻度は合計が N 以内という制約から平方根程度しか存在しない。 再利用の観点: 値別グループの走査が一見二乗でも、正の異なる値の総和制約から非零グループ数を評価できることがある。／色数を指示変数の和へ分解し、余事象の二項係数比を頻度別に集約して、正頻度の疎性を利用しながら全ての K の期待値を求める。／同じ出現個数 x を持つ色を a_x 個にまとめ、各 K に対して正の a_x だけから出現確率を加算する。 — 期待値への寄与は色名でなく頻度だけで決まり、異なる正頻度の種類数は N の平方根程度に抑えられる。／色どうしの出現は独立でなくても、期待値の線形性により各色の出現確率を単純に足せる。／正の頻度 x が互いに異なるなら、その最小総和は 1＋2＋… と増えるため、存在する頻度値の種類数は少ない。／選んだ K 個の飴に含まれる色数は、各色について「その色が一個以上現れた」という指示変数の総和である。／全 N 個中に n_i 個ある色 i が一度も選ばれない確率は C(N−n_i,K)／C(N,K) であり、出現確率はその余事象である。／指示変数と期待値の線形性: 異なる種類の出現数の期待値を求め、種類間の依存関係が複雑なとき。 適用: 各色が一度以上選ばれる指示変数を置き、その出現確率を色ごとに加える。／頻度による同型項の集約: 各種類の寄与が名前ではなく、その種類の出現回数だけで決まるとき。 適用: 頻度 x の色数 a_x を数え、同じ二項係数比を a_x 倍して一括加算する。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 相関のある標本中の異種類数期待値を、指示変数・余事象・頻度集約で全標本サイズについて計算できる。
-- 指示変数を用いて個数の期待値を確率の和へ変換できること。
-- 法の下で階乗と逆階乗を前計算し、二項係数と確率の比を計算できること。
-- 頻度ごとの配列は長さ N でも、正の異なる頻度は合計が N 以内という制約から平方根程度しか存在しない。 再利用の観点: 値別グループの走査が一見二乗でも、正の異なる値の総和制約から非零グループ数を評価できることがある。
-- 色数を指示変数の和へ分解し、余事象の二項係数比を頻度別に集約して、正頻度の疎性を利用しながら全ての K の期待値を求める。
-- 同じ出現個数 x を持つ色を a_x 個にまとめ、各 K に対して正の a_x だけから出現確率を加算する。 — 期待値への寄与は色名でなく頻度だけで決まり、異なる正頻度の種類数は N の平方根程度に抑えられる。
-- 色どうしの出現は独立でなくても、期待値の線形性により各色の出現確率を単純に足せる。
-- 正の頻度 x が互いに異なるなら、その最小総和は 1＋2＋… と増えるため、存在する頻度値の種類数は少ない。
-- 選んだ K 個の飴に含まれる色数は、各色について「その色が一個以上現れた」という指示変数の総和である。
-- 全 N 個中に n_i 個ある色 i が一度も選ばれない確率は C(N−n_i,K)／C(N,K) であり、出現確率はその余事象である。
-- 指示変数と期待値の線形性: 異なる種類の出現数の期待値を求め、種類間の依存関係が複雑なとき。 適用: 各色が一度以上選ばれる指示変数を置き、その出現確率を色ごとに加える。
-- 頻度による同型項の集約: 各種類の寄与が名前ではなく、その種類の出現回数だけで決まるとき。 適用: 頻度 x の色数 a_x を数え、同じ二項係数比を a_x 倍して一括加算する。
-
-- 対象技能が担う箇所: 相関のある標本中の異種類数期待値を、指示変数・余事象・頻度集約で全標本サイズについて計算できる。
-- 対象技能が担う箇所: 指示変数を用いて個数の期待値を確率の和へ変換できること。
-- 対象技能が担う箇所: 法の下で階乗と逆階乗を前計算し、二項係数と確率の比を計算できること。
-- 対象技能が担う箇所: 頻度ごとの配列は長さ N でも、正の異なる頻度は合計が N 以内という制約から平方根程度しか存在しない。 再利用の観点: 値別グループの走査が一見二乗でも、正の異なる値の総和制約から非零グループ数を評価できることがある。
-- 対象技能が担う箇所: 色数を指示変数の和へ分解し、余事象の二項係数比を頻度別に集約して、正頻度の疎性を利用しながら全ての K の期待値を求める。
-- 対象技能が担う箇所: 同じ出現個数 x を持つ色を a_x 個にまとめ、各 K に対して正の a_x だけから出現確率を加算する。 — 期待値への寄与は色名でなく頻度だけで決まり、異なる正頻度の種類数は N の平方根程度に抑えられる。
-- 対象技能が担う箇所: 色どうしの出現は独立でなくても、期待値の線形性により各色の出現確率を単純に足せる。
-- 対象技能が担う箇所: 正の頻度 x が互いに異なるなら、その最小総和は 1＋2＋… と増えるため、存在する頻度値の種類数は少ない。
-- 対象技能が担う箇所: 選んだ K 個の飴に含まれる色数は、各色について「その色が一個以上現れた」という指示変数の総和である。
-- 対象技能が担う箇所: 全 N 個中に n_i 個ある色 i が一度も選ばれない確率は C(N−n_i,K)／C(N,K) であり、出現確率はその余事象である。
-- 対象技能が担う箇所: 指示変数と期待値の線形性: 異なる種類の出現数の期待値を求め、種類間の依存関係が複雑なとき。 適用: 各色が一度以上選ばれる指示変数を置き、その出現確率を色ごとに加える。
-- 対象技能が担う箇所: 頻度による同型項の集約: 各種類の寄与が名前ではなく、その種類の出現回数だけで決まるとき。 適用: 頻度 x の色数 a_x を数え、同じ二項係数比を a_x 倍して一括加算する。
-- 転移題材の解法接続: 色数を指示変数の和へ分解し、余事象の二項係数比を頻度別に集約して、正頻度の疎性を利用しながら全ての K の期待値を求める。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 整数条件を合同・整除・指数・約数格子などの数論構造へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-</details>
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC215 G「Colorful Candies 2」](https://atcoder.jp/contests/abc215/tasks/abc215_g)
+- [ABC216 E「Amusement Park」](https://atcoder.jp/contests/abc216/tasks/abc216_e)
+- [ABC220 E「Distance on Large Perfect Binary Tree」](https://atcoder.jp/contests/abc220/tasks/abc220_e)
+- [ABC221 E「LEQ」](https://atcoder.jp/contests/abc221/tasks/abc221_e)
+- [ABC222 H「Beautiful Binary Tree」](https://atcoder.jp/contests/abc222/tasks/abc222_h)
+- [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
+- [ABC226 F「Score of Permutations」](https://atcoder.jp/contests/abc226/tasks/abc226_f)
+- [ABC230 G「GCD Permutation」](https://atcoder.jp/contests/abc230/tasks/abc230_g)
+- [ABC234 F「Reordering」](https://atcoder.jp/contests/abc234/tasks/abc234_f)
+- [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
+- [ABC238 Ex「Removing People」](https://atcoder.jp/contests/abc238/tasks/abc238_h)
+- [ABC238 G「Cubic?」](https://atcoder.jp/contests/abc238/tasks/abc238_g)
+- [ABC241 Ex「Card Deck Score」](https://atcoder.jp/contests/abc241/tasks/abc241_h)
+- [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
+- [ABC243 F「Lottery」](https://atcoder.jp/contests/abc243/tasks/abc243_f)
+- [ABC243 G「Sqrt」](https://atcoder.jp/contests/abc243/tasks/abc243_g)
+- [ABC246 F「typewriter」](https://atcoder.jp/contests/abc246/tasks/abc246_f)
+- [ABC248 G「GCD cost on the tree」](https://atcoder.jp/contests/abc248/tasks/abc248_g)
+- [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
+- [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
+- [ABC269 F「Numbered Checker」](https://atcoder.jp/contests/abc269/tasks/abc269_f)
+- [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h)
+- [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g)
+- [ABC272 G「Yet Another mod M」](https://atcoder.jp/contests/abc272/tasks/abc272_g)
+- [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e)
+- [ABC276 F「Double Chance」](https://atcoder.jp/contests/abc276/tasks/abc276_f)
+- [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
+- [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e)
+- [ABC282 E「Choose Two and Eat One」](https://atcoder.jp/contests/abc282/tasks/abc282_e)
+- [ABC284 Ex「Count Unlabeled Graphs」](https://atcoder.jp/contests/abc284/tasks/abc284_h)
+- [ABC284 G「Only Once」](https://atcoder.jp/contests/abc284/tasks/abc284_g)
+- [ABC285 Ex「Avoid Square Number」](https://atcoder.jp/contests/abc285/tasks/abc285_h)
+- [ABC289 Ex「Trio」](https://atcoder.jp/contests/abc289/tasks/abc289_h)
+- [ABC295 E「Kth Number」](https://atcoder.jp/contests/abc295/tasks/abc295_e)
+- [ABC297 Ex「Diff Adjacent」](https://atcoder.jp/contests/abc297/tasks/abc297_h)
+- [ABC297 F「Minimum Bounding Box 2」](https://atcoder.jp/contests/abc297/tasks/abc297_f)
+- [ABC298 E「Unfair Sugoroku」](https://atcoder.jp/contests/abc298/tasks/abc298_e)
+- [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h)
+- [ABC301 F「Anti-DDoS」](https://atcoder.jp/contests/abc301/tasks/abc301_f)
+- [ABC303 Ex「Constrained Tree Degree」](https://atcoder.jp/contests/abc303/tasks/abc303_h)
+- [ABC304 F「Shift Table」](https://atcoder.jp/contests/abc304/tasks/abc304_f)
+- [ABC306 G「Return to 1」](https://atcoder.jp/contests/abc306/tasks/abc306_g)
+- [ABC310 F「Make 10 Again」](https://atcoder.jp/contests/abc310/tasks/abc310_f)
+- [ABC310 G「Takahashi And Pass-The-Ball Game」](https://atcoder.jp/contests/abc310/tasks/abc310_g)
+- [ABC313 G「Redistribution of Piles」](https://atcoder.jp/contests/abc313/tasks/abc313_g)
+- [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
+- [ABC320 G「Slot Strategy 2 (Hard)」](https://atcoder.jp/contests/abc320/tasks/abc320_g)
+- [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
+- [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e)
+- [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
+- [ABC327 G「Many Good Tuple Problems」](https://atcoder.jp/contests/abc327/tasks/abc327_g)
+- [ABC332 F「Random Update Query」](https://atcoder.jp/contests/abc332/tasks/abc332_f)
+- [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f)
+- [ABC334 E「Christmas Color Grid 1」](https://atcoder.jp/contests/abc334/tasks/abc334_e)
+- [ABC336 G「16 Integers」](https://atcoder.jp/contests/abc336/tasks/abc336_g)
+- [ABC349 F「Subsequence LCM」](https://atcoder.jp/contests/abc349/tasks/abc349_f)
+- [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
+- [ABC361 F「x = a^b」](https://atcoder.jp/contests/abc361/tasks/abc361_f)
+- [ABC363 F「Palindromic Expression」](https://atcoder.jp/contests/abc363/tasks/abc363_f)
+- [ABC368 F「Dividing Game」](https://atcoder.jp/contests/abc368/tasks/abc368_f)
+- [ABC371 G「Lexicographically Smallest Permutation」](https://atcoder.jp/contests/abc371/tasks/abc371_g)
+- [ABC372 G「Ax + By < C」](https://atcoder.jp/contests/abc372/tasks/abc372_g)
+- [ABC380 G「Another Shuffle Window」](https://atcoder.jp/contests/abc380/tasks/abc380_g)
+- [ABC393 G「Unevenness」](https://atcoder.jp/contests/abc393/tasks/abc393_g)
+- [ABC403 F「Shortest One Formula」](https://atcoder.jp/contests/abc403/tasks/abc403_f)
+- [ABC405 E「Fruit Lineup」](https://atcoder.jp/contests/abc405/tasks/abc405_e)
+- [ABC405 G「Range Shuffle Query」](https://atcoder.jp/contests/abc405/tasks/abc405_g)
+- [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
+- [ABC417 F「Random Gathering」](https://atcoder.jp/contests/abc417/tasks/abc417_f)
+- [ABC418 E「Trapezium」](https://atcoder.jp/contests/abc418/tasks/abc418_e)
+- [ABC422 G「Balls and Boxes」](https://atcoder.jp/contests/abc422/tasks/abc422_g)
+- [ABC428 G「Necklace」](https://atcoder.jp/contests/abc428/tasks/abc428_g)
+- [ABC432 G「Sum of Binom(A, B)」](https://atcoder.jp/contests/abc432/tasks/abc432_g)
+- [ABC439 F「Beautiful Kadomatsu」](https://atcoder.jp/contests/abc439/tasks/abc439_f)
+- [ABC444 F「Half and Median」](https://atcoder.jp/contests/abc444/tasks/abc444_f)
+- [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
+- [ABC448 E「Simple Division」](https://atcoder.jp/contests/abc448/tasks/abc448_e)
+- [ABC456 G「Count Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_g)
+- [ABC461 F「Total Product is N」](https://atcoder.jp/contests/abc461/tasks/abc461_f)
 
 ## 根拠
 
@@ -216,4 +144,4 @@ m の約数を降順に処理し、f(g)=m/g−Σ_{h:g|h,h>g}f(h) により gcd(m
 - [ABC216 E 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_e)
 - [ABC216 E 公式解説](https://atcoder.jp/contests/abc216/editorial/2469)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-chapter-number-theory`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-chapter-number-theory`

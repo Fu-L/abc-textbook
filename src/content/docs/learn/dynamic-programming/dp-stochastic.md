@@ -1,6 +1,6 @@
 ---
 title: "確率過程・期待値DP"
-description: "前提から確率過程・期待値DPを見抜き、方針へ接続して検証するための学習単位。"
+description: "確率過程・期待値DPの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 52
@@ -8,108 +8,91 @@ sidebar:
 
 # 確率過程・期待値DP
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 確率遷移から期待値または到達確率の再帰式を立てて解ける。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 最小十分状態からDPを設計する
-- この位置で学ぶ理由: 状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。
-
-### この単元では扱わない範囲
-
-- 二人零和ゲームの勝敗・Grundy数。
-
-## 発動条件と見分け方
+## 概要
 
 ### 確率・期待値DP
 
 確率遷移に対する期待値・分布・到達確率の再帰式を解く。
 
-検索語: Markov DP、stochastic dynamic programming、期待値DP、確率DP
+確率DPでは、分布・到達確率、期待費用、観測後の行動最適化を区別する。以下ではABC300 E、ABC263 E、ABC266 Eの式を用いて、その違いを示す。
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+ABC300 Eでは初期値1に公平なサイコロの目を掛け、Nへの到達確率を求める。目1を何回引いても成功事象は変わらない。次に1以外が出るまで待つと、2〜6のどの目も確率1/5である。待機が永遠に続く確率は0。
 
-## ガイド例
+前向きにはp[1]=1とし、値vから2v,…,6vへ各p[v]/5を配る。Nに達した分を吸収し、Nを越えた分を失敗へ集める。未吸収・成功・失敗の総確率は1のまま。
 
-### 例 1 — 確率遷移から期待値または到達確率の再帰式を立てて解ける
+後ろ向きにはq(N)=1,q(v)=0 (v>N)、q(v)=Σ_{d=2}^6 q(dv)/5。再帰先は真に増え、2,3,5の指数で表せる疎な状態だけをmemo化できる。
 
-題材: [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h)
+期待回数なら一試行の費用1を加えるが、到達確率には加えない。法上では5の逆元を用い、N=1や2,3,5以外の素因数を持つNを確認する。
 
-選定理由: Y≥x はN個のうち少なくともK個がx以上であることと同値で、独立性から各変数の成功確率p_i(x)を掛けるPoisson-binomial型DPで求められる。
+ABC226 Hは連続分布への発展例。閾値xを固定し、各変数がx以上かの独立Bernoulli分布を成功個数DPで合成する。得た裾確率P(Y≥x)をxについて積分して期待値を得る。確率分布を作る工程と、裾確率から期待値を得る恒等式を分けて理解する。
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。非負の連続確率変数の期待値を求め、値以上となる事象の方が組合せ的に数えやすいとき。 問題全体への接続は併用技能を学んだ後に読む。
+入力: iからi,…,i+A_iへ等確率で移動し、N到達までの期待試行回数をE_iとする。終端はE_N=0。
 
-#### このOutcomeを支える根拠
+一歩解析: E_i=1+(E_i+Σ_{j=i+1}^{i+A_i}E_j)/(A_i+1)。自己項を左へ移すとE_i=(A_i+1+ΣE_j)/A_i。費用1まで自己ループと一緒に消してはいけない。
 
-- 連続な順位統計量の期待値をtail確率と区分多項式DPへ変換し、有理数の剰余として厳密に積分できる。
+A_i≥1なのでiを離れるまでの期待時間は有限。離れた後は位置が増えるため、後ろから順に解ける。suffix sumで連続区間の和を取れば全体O(N)。
 
-#### 観察
+境界: A_i=1ならE_i=2+E_{i+1}。一般に自己ループ確率p=1なら移項して割れず、正の費用を払う過程の期待時間は無限。
 
-- K番目に大きい値Yの期待値は、非負変数なので∫P(Y≥x)dxで求められる。各X_iの端点が0から100の整数であるため、単位区間[a,a+1]内ではP(X_i≥x)が定数または一次式になる。
+入力: 残りr回まで振れるとき、次の目を見る前の最適期待報酬をV_rとする。最後の1回は必ず採用するのでV_1=3.5。
 
-#### 候補を比較する
+r≥2では目dを観測してから停止か続行を選ぶ。停止はd、続行は独立な未来の最適値V_{r-1}。従ってV_r=(1/6)Σ_{d=1}^6 max(d,V_{r-1})。
 
-- **採用**: 各単位区間で、x以上となる変数の個数分布を係数がxの多項式であるDPとして作り、少なくともK個となる確率多項式を区間積分する。 — 順位統計量を直接追わずtail確率へ変えると独立変数の個数DPになり、整数端点により有限個の区間で厳密な多項式積分ができる。
-- **棄却**: 乱数サンプリングでK番目の値を多数回生成し、平均を法998244353へ変換する。 — 要求値は厳密な有理数の剰余であり、近似誤差を持つMonte Carloや数値積分から復元できない。
+max(E[d],V_{r-1})では、目を観測する前に一律に停止・続行を決めることになり別問題となる。V_2=4.25であり、3.5との差は観測情報の価値を表す。
 
-#### 鍵となる着眼
+残り回数が減るので後退帰納で最適性を証明できる。O(N)時間O(1)空間。最後の強制停止、同点でどちらを選んでも値が同じことを確認する。
 
-- Y≥x はN個のうち少なくともK個がx以上であることと同値で、独立性から各変数の成功確率p_i(x)を掛けるPoisson-binomial型DPで求められる。
-- [a,a+1]内でp_i(x)は0、1、(R_i-x)/(R_i-L_i)のいずれかなので、DP値も次数N以下の多項式となり、係数ごとに割って厳密に積分できる。
+## 前提と範囲
 
-#### アルゴリズムへ接続する
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-a=0,…,99ごとに各p_i(x)の一次多項式を作り、成功個数DPを多項式として更新する。j≥Kの多項式を合計して[a,a+1]で積分し、全区間の値を法998244353で加える。
+追加前提: 最小十分状態からDPを設計する。
 
+状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。
 
-## 転用するときの確認
+- 二人零和ゲームの勝敗・Grundy数。
 
-- **tail確率による期待値積分**: 非負の連続確率変数の期待値を求め、値以上となる事象の方が組合せ的に数えやすいとき。 適用: 順位値Yそのものの密度を作らず、E[Y]=∫P(Y≥x)dxを用いて個数条件へ変換する。
-- **区分多項式の確率DP**: 独立事象の成功確率が区間ごとに低次数多項式となり、成功個数の閾値確率が必要なとき。 適用: 成功個数を状態にして一次多項式p_iと1-p_iを掛け、得たtail多項式を係数積分する。
-- 連続分布の式が区分的に変わる問題では、全breakpointを列挙し、その間で密度・CDFが何次式になるかを確認する。
-- K番目の密度を直接微分する前に、『少なくともK個が閾値以上』というtail事象と、端点間での多項式性を使う。
+## 問題一覧
 
-## 到達確認
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-### 到達確認 1 — 確率遷移から期待値または到達確率の再帰式を立てて解ける
+1. [ABC300 E「Dice Product 3」](https://atcoder.jp/contests/abc300/tasks/abc300_e)
+2. [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
+3. [ABC266 E「Throwing the Die」](https://atcoder.jp/contests/abc266/tasks/abc266_e)
+4. [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e)
+5. [ABC382 E「Expansion Packs」](https://atcoder.jp/contests/abc382/tasks/abc382_e)
+6. [ABC450 G「Random Subtraction」](https://atcoder.jp/contests/abc450/tasks/abc450_g)
+7. [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
+8. [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h)
+9. [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h)
+10. [ABC332 F「Random Update Query」](https://atcoder.jp/contests/abc332/tasks/abc332_f)
+11. [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
+12. [ABC314 E「Roulettes」](https://atcoder.jp/contests/abc314/tasks/abc314_e)
+13. [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e)
+14. [ABC342 F「Black Jack」](https://atcoder.jp/contests/abc342/tasks/abc342_f)
+15. [ABC402 E「Payment Required」](https://atcoder.jp/contests/abc402/tasks/abc402_e)
+16. [ABC404 F「Lost and Pound」](https://atcoder.jp/contests/abc404/tasks/abc404_f)
+17. [ABC421 E「Yacht」](https://atcoder.jp/contests/abc421/tasks/abc421_e)
+18. [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h)
+19. [ABC298 E「Unfair Sugoroku」](https://atcoder.jp/contests/abc298/tasks/abc298_e)
+20. [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e)
+21. [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e)
+22. [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
+23. [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
+24. [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f)
+25. [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
 
-転移題材: [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-**課題**: ABC242 Ex「Random Painting」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
+## 関連問題
 
-**合格条件**: 手法名の列挙に留まらず、学習成果「確率遷移から期待値または到達確率の再帰式を立てて解ける」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 確率遷移から期待値または到達確率の再帰式を立てて解ける</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 反復抽選の被覆完了期待値を distinct-set stage に分解し、interval subset の全被覆数 DP と結合できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 反復抽選の被覆完了期待値を distinct-set stage に分解し、interval subset の全被覆数 DP と結合できる。
-
-- 対象技能が担う箇所: 反復抽選の被覆完了期待値を distinct-set stage に分解し、interval subset の全被覆数 DP と結合できる。
-- 転移題材の解法接続: interval を L,R 順に sort し、dp[j][k] を選択 union が [1,j]、選択数 k の subset 数として skip/select 遷移する。f(k)=dp[N][k] を得た後、Σ_{k=0}^{M-1}(1-f(k)/C(M,k))·M/(M-k) を法998244353で計算する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 確率遷移から期待値または到達確率の再帰式を立てて解ける。
-
-</details>
-
+- [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
+- [ABC249 Ex「Dye Color」](https://atcoder.jp/contests/abc249/tasks/abc249_h)
+- [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g)
+- [ABC310 F「Make 10 Again」](https://atcoder.jp/contests/abc310/tasks/abc310_f)
+- [ABC409 G「Accumulation of Wealth」](https://atcoder.jp/contests/abc409/tasks/abc409_g)
 
 ## 根拠
 
@@ -120,4 +103,4 @@ a=0,…,99ごとに各p_i(x)の一次多項式を作り、成功個数DPを多�
 - [ABC242 H 公式解説](https://atcoder.jp/contests/abc242/editorial/3523)
 - [ABC242 H 公式問題文](https://atcoder.jp/contests/abc242/tasks/abc242_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-stochastic`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-dp-stochastic`

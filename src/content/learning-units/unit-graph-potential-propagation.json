@@ -35,69 +35,17 @@
   "docPath": "src/content/docs/learn/graph/graph-potential-propagation.md",
   "problemIds": [
     "abc280-f",
-    "abc352-f",
     "abc396-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-propagate-static-graph-potentials",
-      "learningOutcomeIds": [
-        "outcome-propagate-static-graph-potentials"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。辺が二頂点値のxor差を指定するとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC396 E「Min of Restricted Sum」について、constraint A_x xor A_y=zはbitごとに独立で、連結成分内では一頂点の値を決めるとpath上のxorにより全頂点値が決まる。",
-      "procedure": [
-        "観察: constraint A_x xor A_y=zはbitごとに独立で、連結成分内では一頂点の値を決めるとpath上のxorにより全頂点値が決まる。",
-        "観察: rootを0と仮定したpotential p_vをDFSで付けると、任意解はcomponent共通mask tに対してA_v=p_v xor tとなる。",
-        "着眼: 既訪問vertexへ別pathから到達したとき、既存p_vとp_u xor zが異なればcycle xorが非零で解なしである。",
-        "着眼: Z≤10^9なので必要bit範囲を覆えばよく、各bitの選択を組み合わせたmask tで全値を同時に構成できる。",
-        "方針: xor potentialで整合性を検査し、各component・各bitで1の個数が少ないroot bitを選ぶ（bit bでt_bを反転するとcomponent全頂点のbitが反転するため、onesとsize-onesの小さい方を独立に選べばΣA_iを最小化できる。）",
-        "接続: 各未訪問rootをp=0としてDFS/BFSし、edge(u,v,z)でp_v=p_u xor zを割り当て矛盾検査する。componentごとに各bitのonesを数え、ones>size-onesならtのbitを1にし、A_v=p_v xor tを出す。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc280-f",
+    "abc396-e"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-propagate-static-graph-potentials",
-      "learningOutcomeIds": [
-        "outcome-propagate-static-graph-potentials"
-      ],
-      "prerequisiteIds": [
-        "outcome-select-state-graph-search",
-        "prereq-abc-advanced-v1",
-        "unit-state-graph-search"
-      ],
-      "attainmentCondition": "学習成果「辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC280 F「Pay or Receive」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 符号付きroad score queryを、component potentialと非零cycle flagによりnan/inf/有限差へ分類できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 符号付きroad score queryを、component potentialと非零cycle flagによりnan/inf/有限差へ分類できる。",
-          "転移題材の解法接続: 未訪問vertexごとにcomponent idとpot=0を置き、(u,v,+c)をDFS緩和する。pot[v]≠pot[u]+cを見つけたcomponentをbadにする。queryはcomponent不同ならnan、badならinf、それ以外はpot[y]-pot[x]。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
+  "relatedProblemIds": [
+    "abc352-f"
   ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 86,

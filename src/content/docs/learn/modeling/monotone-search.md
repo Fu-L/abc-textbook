@@ -1,6 +1,6 @@
 ---
 title: "単調境界を証明して探索する"
-description: "前提から単調境界を証明して探索するを見抜き、方針へ接続して検証するための学習単位。"
+description: "単調境界を証明して探索するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 11
@@ -8,110 +8,70 @@ sidebar:
 
 # 単調境界を証明して探索する
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。
-
-### この単元では扱わない範囲
-
-- 連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。
-
-## 発動条件と見分け方
+## 概要
 
 ### 単調境界探索
 
 可否または値の単調性を証明し、最初・最後の成立点を探す。
 
-検索語: binary search on the answer、二分探索、答えの二分探索
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる
+判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。
 
-題材: [ABC215 F「Dist Max 2」](https://atcoder.jp/contests/abc215/tasks/abc215_f)
+- 連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。
 
-選定理由: min が K 以上という条件は二つの絶対差への AND に分解され、片方をソート順と尺取りで処理できる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。最大化する整数値 K について、K を達成可能なら全ての小さい値も達成可能となるとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC373 E「How to Win the Election」](https://atcoder.jp/contests/abc373/tasks/abc373_e)
+2. [ABC395 F「Smooth Occlusion」](https://atcoder.jp/contests/abc395/tasks/abc395_f)
+3. [ABC270 E「Apple Baskets on Circle」](https://atcoder.jp/contests/abc270/tasks/abc270_e)
+4. [ABC292 F「Regular Triangle Inside a Rectangle」](https://atcoder.jp/contests/abc292/tasks/abc292_f)
+5. [ABC294 F「Sugar Water 2」](https://atcoder.jp/contests/abc294/tasks/abc294_f)
+6. [ABC303 F「Damage over Time」](https://atcoder.jp/contests/abc303/tasks/abc303_f)
+7. [ABC381 E「11/22 Subsequence」](https://atcoder.jp/contests/abc381/tasks/abc381_e)
+8. [ABC236 E「Average and Median」](https://atcoder.jp/contests/abc236/tasks/abc236_e)
+9. [ABC215 F「Dist Max 2」](https://atcoder.jp/contests/abc215/tasks/abc215_f)
+10. [ABC229 G「Longest Y」](https://atcoder.jp/contests/abc229/tasks/abc229_g)
+11. [ABC267 E「Erasing Vertices 2」](https://atcoder.jp/contests/abc267/tasks/abc267_e)
+12. [ABC300 F「More Holidays」](https://atcoder.jp/contests/abc300/tasks/abc300_f)
+13. [ABC304 G「Max of Medians」](https://atcoder.jp/contests/abc304/tasks/abc304_g)
+14. [ABC374 E「Sensor Optimization Dilemma 2」](https://atcoder.jp/contests/abc374/tasks/abc374_e)
+15. [ABC424 E「Cut in Half」](https://atcoder.jp/contests/abc424/tasks/abc424_e)
+16. [ABC444 F「Half and Median」](https://atcoder.jp/contests/abc444/tasks/abc444_f)
+17. [ABC269 E「Last Rook」](https://atcoder.jp/contests/abc269/tasks/abc269_e)
+18. [ABC330 F「Minimize Bounding Square」](https://atcoder.jp/contests/abc330/tasks/abc330_f)
+19. [ABC388 G「Simultaneous Kagamimochi 2」](https://atcoder.jp/contests/abc388/tasks/abc388_g)
+20. [ABC246 G「Game on Tree 3」](https://atcoder.jp/contests/abc246/tasks/abc246_g)
+21. [ABC293 Ex「Optimal Path Decomposition」](https://atcoder.jp/contests/abc293/tasks/abc293_h)
+22. [ABC458 G「Children Yearn for the Evil Kindergarten」](https://atcoder.jp/contests/abc458/tasks/abc458_g)
+23. [ABC263 Ex「Intersection 2」](https://atcoder.jp/contests/abc263/tasks/abc263_h)
 
-- 二座標の min 距離最大化を単調な存在判定へ変形し、二分探索と尺取りで点対列挙を避けられる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 二点間距離 min(|x_i−x_j|,|y_i−y_j|) が K 以上であることは、x 差と y 差がともに K 以上であることと同値である。
-- 点を x 座標順に並べると、現在点より x が K 以上小さい過去点だけを候補にし、その y の最小値と最大値で y 差 K 以上の存在を判定できる。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 答え K を二分探索し、x 順の尺取りで条件を満たす過去点の y 最小値・最大値を保って実現可能性を判定する。 — K が実現できればそれ以下も実現できる単調性があり、一回の判定はソート済み点列の一走査で済む。
-- **棄却**: 全ての異なる二点組について定義通り距離を計算し、最大値を更新する。 — 点対が N の二乗規模存在するため、20 万点の制約では全列挙できない。
-
-#### 鍵となる着眼
-
-- min が K 以上という条件は二つの絶対差への AND に分解され、片方をソート順と尺取りで処理できる。
-- 候補点の y 座標を全て検索する必要はなく、現在の y から最も離れ得る最小値と最大値だけで存在判定できる。
-
-#### アルゴリズムへ接続する
-
-最大化する距離を閾値判定へ変え、x 座標で解禁される過去点集合を二ポインタで管理し、その y の両極値を使う単調判定を二分探索へ組み込む。
-
-
-## 転用するときの確認
-
-- **答えの二分探索**: 最大化する整数値 K について、K を達成可能なら全ての小さい値も達成可能となるとき。 適用: 距離 K 以上の点対が存在するかを判定関数とし、真となる最大の K を探す。
-- **ソートと尺取りによる候補集合管理**: 二要素の座標差条件があり、一方の座標順に候補が単調に追加されるとき。 適用: x 差が K 以上になった過去点を順に追加し、y の最小・最大だけを維持する。
-- min や max を含む目的関数は、答え候補で閾値化すると論理積・論理和へ単純化する場合がある。
-- min で定義された距離を見たら、値 K 以上という条件を書き下して各成分の同時成立へ分解する。
-- 候補集合から「現在値と K 以上離れる要素があるか」だけを問うなら、全要素でなく最小値・最大値で十分か検討する。
-
-## 到達確認
-
-### 到達確認 1 — 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる
-
-転移題材: [ABC229 G「Longest Y」](https://atcoder.jp/contests/abc229/tasks/abc229_g)
-
-**課題**: ABC229 G「Longest Y」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「判定の単調性を証明し、二分探索の成功側・失敗側を設定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 隣接交換による同文字の連続化を順位補正・中央値・二分探索の組合せで評価できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 隣接交換による同文字の連続化を順位補正・中央値・二分探索の組合せで評価できる。
-
-- 対象技能が担う箇所: 隣接交換による同文字の連続化を順位補正・中央値・二分探索の組合せで評価できる。
-- 転移題材の解法接続: Y の位置列を順位補正して単調列 B を作り、長さ m の各窓について中央値までの L1 距離を prefix sum で求める可否判定を答えの二分探索に使う。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
-
-</details>
-
+- [ABC216 E「Amusement Park」](https://atcoder.jp/contests/abc216/tasks/abc216_e)
+- [ABC295 F「substr = S」](https://atcoder.jp/contests/abc295/tasks/abc295_f)
+- [ABC320 G「Slot Strategy 2 (Hard)」](https://atcoder.jp/contests/abc320/tasks/abc320_g)
+- [ABC324 F「Beautiful Path」](https://atcoder.jp/contests/abc324/tasks/abc324_f)
+- [ABC346 F「SSttrriinngg in StringString」](https://atcoder.jp/contests/abc346/tasks/abc346_f)
+- [ABC370 F「Cake Division」](https://atcoder.jp/contests/abc370/tasks/abc370_f)
+- [ABC388 E「Simultaneous Kagamimochi」](https://atcoder.jp/contests/abc388/tasks/abc388_e)
+- [ABC389 E「Square Price」](https://atcoder.jp/contests/abc389/tasks/abc389_e)
+- [ABC394 G「Dense Buildings」](https://atcoder.jp/contests/abc394/tasks/abc394_g)
+- [ABC397 G「Maximize Distance」](https://atcoder.jp/contests/abc397/tasks/abc397_g)
+- [ABC401 G「Push Simultaneously」](https://atcoder.jp/contests/abc401/tasks/abc401_g)
+- [ABC402 F「Path to Integer」](https://atcoder.jp/contests/abc402/tasks/abc402_f)
+- [ABC427 G「Takahashi's Expectation 2」](https://atcoder.jp/contests/abc427/tasks/abc427_g)
+- [ABC428 F「Pyramid Alignment」](https://atcoder.jp/contests/abc428/tasks/abc428_f)
 
 ## 根拠
 
@@ -122,4 +82,4 @@ sidebar:
 - [ABC229 G 公式解説](https://atcoder.jp/contests/abc229/editorial/2963)
 - [ABC229 G 公式問題文](https://atcoder.jp/contests/abc229/tasks/abc229_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-monotone-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-monotone-search`

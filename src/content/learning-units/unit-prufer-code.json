@@ -32,63 +32,12 @@
   "problemIds": [
     "abc303-ex"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-encode-labeled-trees-by-prufer-code",
-      "learningOutcomeIds": [
-        "outcome-encode-labeled-trees-by-prufer-code"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。label付き木の次数だけに条件があり、辺配置を直接扱う必要がない。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC303 Ex「Constrained Tree Degree」について、label付き木を直接数える代わりにPrüfer codeへ写すと、長さN-2の列で頂点iの出現回数がdeg(i)-1になる。全頂点に同じ許容次数集合が課される条件は、各文字の許容出現回数へ独立化できる。",
-      "procedure": [
-        "観察: label付き木を直接数える代わりにPrüfer codeへ写すと、長さN-2の列で頂点iの出現回数がdeg(i)-1になる。全頂点に同じ許容次数集合が課される条件は、各文字の許容出現回数へ独立化できる。",
-        "着眼: 許容出現回数集合R={d-1 | dは許容次数}に対しF(x)=Σ_{r∈R}x^r/r!と置く。各labelの出現回数を合計N-2にするmultinomial係数が係数へ組み込まれるため、答えは(N-2)!·[x^(N-2)]F(x)^Nとなる。",
-        "方針: Prüfer codeと指数型母関数の係数を計算する（次数制約を各labelの出現回数制約へ変換し、多項式のN乗の一係数として全木をまとめて数えられる。）",
-        "接続: factorialと逆factorialを前計算して次数N-2以下のFを作る。F^Nをbinary exponentiationとNTT畳み込みで計算し、各積をN-2次で打ち切る。最後にx^(N-2)の係数へ(N-2)!を掛ける。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "Prüfer列とlabel付き木の全単射、および各labelの出現回数=次数-1を使って次数制約を係数条件へ変換できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc303-ex"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-encode-labeled-trees-by-prufer-code",
-      "learningOutcomeIds": [
-        "outcome-encode-labeled-trees-by-prufer-code"
-      ],
-      "prerequisiteIds": [
-        "outcome-formulate-combinatorial-coefficients",
-        "prereq-abc-advanced-v1",
-        "unit-combinatorial-coefficients"
-      ],
-      "attainmentCondition": "学習成果「Prüfer列とlabel付き木の全単射、および各labelの出現回数=次数-1を使って次数制約を係数条件へ変換できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
-      "assessment": {
-        "method": "ABC303 Ex「Constrained Tree Degree」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「Prüfer列とlabel付き木の全単射、および各labelの出現回数=次数-1を使って次数制約を係数条件へ変換できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
-          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
-          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
-          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
-          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
-        ],
-        "expectedResult": "Prüfer列とlabel付き木の全単射、および各labelの出現回数=次数-1を使って次数制約を係数条件へ変換できるの適用可能範囲と破綻条件を反例付きで説明できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 94,

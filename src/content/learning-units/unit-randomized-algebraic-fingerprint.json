@@ -39,66 +39,15 @@
     "abc367-f",
     "abc455-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-compare-algebraic-objects-by-random-fingerprint",
-      "learningOutcomeIds": [
-        "outcome-compare-algebraic-objects-by-random-fingerprint"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。積が完全 k 乗かを多数区間で判定したいが、全素数の指数ベクトルを明示できないとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC238 G「Cubic?」について、区間積が立方数であることは、区間内の各素数 p の指数合計が全て 3 の倍数であることと同値である。",
-      "procedure": [
-        "観察: 区間積が立方数であることは、区間内の各素数 p の指数合計が全て 3 の倍数であることと同値である。",
-        "観察: 素数ごとの指数 mod 3 ベクトルを全 prefix に保存すると次元とメモリが大きいが、ゼロベクトルかどうかだけなら乱択 fingerprint に圧縮できる。",
-        "着眼: a_p XOR b_p XOR (a_p XOR b_p)=0 なので、連続する素因数出現を三個周期で符号化すると、任意区間の p の指数が 3 の倍数の場合だけ寄与が必ず消える。",
-        "着眼: 区間 hash は prefixHash[R] XOR prefixHash[L−1] で得られ、少なくとも一素数の指数が非零 mod 3 なら独立一様乱数を含むため 0 との衝突確率は 2 の 64 乗分の 1 である。",
-        "方針: 各素数 p に独立な 64 bit 値 a_p,b_p を与え、p の出現へ a_p,b_p,a_p XOR b_p を周期的に割り当て、要素ごとの XOR 累積 hash を作る。（同じ素数の三出現は XOR で 0 になり、非立方区間が偶然 hash 0 になる確率だけを 2 の 64 乗分の 1 に抑えて各クエリを O(1) 判定できる。）",
-        "接続: 各素数pについて全prefixを通じた出現位相を管理し、出現ごとにa_p,b_p,a_p XOR b_pを周期的にXORする。累積指数の剰余0,1,2はそれぞれ0,a_p,a_p XOR b_pに符号化され、区間積の完全三乗性は両端prefixの状態の等値判定になる。これは状態のランダム符号化であり、Z/3ZからXOR群への準同型ではない。異なる固定prefix状態の差にはa_p,b_pの少なくとも一方が奇数回現れる素数pがあり、他の乱数を固定すると一様な64 bit値が残るので衝突確率は2^(-64)。乱数と独立なQ個のquery全体ではunion boundでQ/2^64以下となる。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc339-f",
+    "abc367-f",
+    "abc238-g",
+    "abc455-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-compare-algebraic-objects-by-random-fingerprint",
-      "learningOutcomeIds": [
-        "outcome-compare-algebraic-objects-by-random-fingerprint"
-      ],
-      "prerequisiteIds": [
-        "outcome-design-and-bound-randomized-algorithm",
-        "prereq-abc-advanced-v1",
-        "unit-randomized-algorithms"
-      ],
-      "attainmentCondition": "学習成果「multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC339 F「Product Equality」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: A_i×A_j=A_kを満たす順序付きtriple(i,j,k)の個数を、高確率で正しく求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: A_i×A_j=A_kを満たす順序付きtriple(i,j,k)の個数を、高確率で正しく求められる。",
-          "転移題材の解法接続: 10^9～2×10^9から独立に約20個のprimeを選び、各A_iをdecimal文字列から各mod residueへ変換してvector keyを作りfrequency mapへ入れる。全順序付きpair(i,j)についてcomponentwise residue積keyを作り、そのkeyの入力frequencyを答えへ加える。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "multiset・素因数指数vector・巨大整数式をランダムな体元やXOR和へ写し、非同値対象が衝突する確率を評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 87,

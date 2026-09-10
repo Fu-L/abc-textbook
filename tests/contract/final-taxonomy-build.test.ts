@@ -234,6 +234,23 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     }
     for (const { entity: unit } of unitCandidates) {
       const children = unitCandidates.filter(({ entity }) => entity.parentId === unit.id);
+      expect(normalizeIds(unit.directProblemIds), unit.id).toEqual(
+        normalizeIds(
+          build.placements
+            .filter(({ presentationUnitId }) => presentationUnitId === unit.id)
+            .map(({ problemId }) => problemId),
+        ),
+      );
+      expect(normalizeIds(unit.problemIds), unit.id).toEqual(
+        normalizeIds([
+          ...unit.directProblemIds,
+          ...children.flatMap(({ entity }) => entity.problemIds),
+        ]),
+      );
+      expect(
+        unit.relatedProblemIds.some((id) => unit.problemIds.includes(id)),
+        unit.id,
+      ).toBe(false);
       expect(Array.isArray(unit.ownedTagIds), unit.id).toBe(true);
       expect(Array.isArray(unit.ownedLearningOutcomeIds), unit.id).toBe(true);
       expect(normalizeIds(unit.tagIds), `${unit.id}/tagIds`).toEqual(
@@ -499,7 +516,10 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
           expect(directAssignments.length).toBeGreaterThanOrEqual(2);
         }
       } else if (candidate.kind === 'unit' && candidate.entity.kind !== 'chapter') {
-        const problemCount = new Set(candidate.entity.problemIds).size;
+        const problemCount = new Set([
+          ...candidate.entity.problemIds,
+          ...candidate.entity.relatedProblemIds,
+        ]).size;
         if (SINGLE_PROBLEM_UNIT_IDS.includes(candidate.entity.id)) {
           expect(problemCount).toBe(1);
         } else {

@@ -15,9 +15,7 @@
     "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
     "source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7",
     "source-abc221-e-problem-31553d7a955139b88a89f7b7d5fad0702844b013338cca84806192fbbced4d37",
-    "source-abc221-editorial-2718-e8b624442e68a1112412ccfd31e488070b6bb0a6f415fd1a8ecbb260e8dad138",
-    "source-abc228-e-problem-206b70907effbf130d0797aeb5f04979b3d0938d3a5b017857ee6d5814f444e5",
-    "source-abc228-editorial-2932-685a5190cbdc171e572f3eba78ae2e8ae90bdc40a98ee203367c6c1b7eaba61d"
+    "source-abc221-editorial-2718-e8b624442e68a1112412ccfd31e488070b6bb0a6f415fd1a8ecbb260e8dad138"
   ],
   "tagIds": [
     "tag-modular-arithmetic"
@@ -33,7 +31,9 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/modular-arithmetic.md",
-  "problemIds": [
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
     "abc215-g",
     "abc220-e",
     "abc221-e",
@@ -96,64 +96,8 @@
     "abc439-f",
     "abc448-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-compute-in-modular-arithmetic",
-      "learningOutcomeIds": [
-        "outcome-compute-in-modular-arithmetic"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。素数法Pの下で、Pと互いに素な底を巨大な指数へ累乗したいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC228 E「Integer Sequence Fair」について、長さNの整数列は各要素にK通りの選択肢があるためK^N通りあり、それぞれにM通りの点数を独立に付けられる。したがって求める個数は M^(K^N) だが、N・K・Mが10^18以下なので指数そのものは構成できない。",
-      "procedure": [
-        "観察: 長さNの整数列は各要素にK通りの選択肢があるためK^N通りあり、それぞれにM通りの点数を独立に付けられる。したがって求める個数は M^(K^N) だが、N・K・Mが10^18以下なので指数そのものは構成できない。",
-        "観察: 法P=998244353は素数である。底MがPの倍数でなければFermatの小定理により指数をP-1で割った余りだけ求めればよい一方、MがPの倍数なら同じ簡約をしてはいけない。",
-        "着眼: M≡0 (mod P) のとき指数K^Nは正なので答えは0である。この場合に指数をP-1で簡約すると、余り0から誤って0^0を扱う可能性があるため先に分岐する。",
-        "着眼: MとPが互いに素なら M^(P-1)≡1 (mod P) なので、K^NをP-1で割った商の分は全て消え、余りだけが結果を決める。",
-        "方針: M mod Pを場合分けし、非零ならK^N mod (P-1)を高速冪で求め、その値を指数としてMの高速冪を計算する。（Fermatの小定理で巨大指数をP-1周期へ落とせ、二段の高速冪はいずれも指数のビット数に比例する反復で済む。）",
-        "接続: M mod P=0なら0を出力する。そうでなければ二分累乗法で e=K^N mod (P-1) を計算し、続けて M^e mod P を計算する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-compute-in-modular-arithmetic",
-      "learningOutcomeIds": [
-        "outcome-compute-in-modular-arithmetic"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC215 G「Colorful Candies 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 法の下で階乗と逆階乗を前計算し、二項係数と確率の比を計算できること。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 法の下で階乗と逆階乗を前計算し、二項係数と確率の比を計算できること。",
-          "転移題材の解法接続: 色数を指示変数の和へ分解し、余事象の二項係数比を頻度別に集約して、正頻度の疎性を利用しながら全ての K の期待値を求める。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 0,

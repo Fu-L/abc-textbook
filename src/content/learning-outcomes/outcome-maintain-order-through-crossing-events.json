@@ -5,6 +5,7 @@
     "outcome-linearize-events"
   ],
   "scopeIds": [
+    "abc257-ex",
     "abc344-g",
     "tag-kinetic-order-maintenance",
     "unit-kinetic-order-maintenance"

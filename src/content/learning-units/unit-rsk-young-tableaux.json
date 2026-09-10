@@ -30,62 +30,12 @@
   "problemIds": [
     "abc378-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-translate-sequences-by-rsk",
-      "learningOutcomeIds": [
-        "outcome-translate-sequences-by-rsk"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。permutation の LIS/LDS を同時に固定して数えたいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC378 G「Everlasting LIDS」について、RSK 対応では permutation の LIS と LDS が Young 図形の第一行・第一列長になる。長さ AB-1 で両者が A,B なら、形は A×B 長方形から右下1マスを除いたものに一意に定まる。",
-      "procedure": [
-        "観察: RSK 対応では permutation の LIS と LDS が Young 図形の第一行・第一列長になる。長さ AB-1 で両者が A,B なら、形は A×B 長方形から右下1マスを除いたものに一意に定まる。",
-        "着眼: 末尾に n+0.5 を加えて長方形へなる挿入過程は、元 tableau で t_{i+1,A-1}<t_{i,A} という追加順序制約に翻訳できる。",
-        "着眼: 小さい数から埋める途中状態は左上に閉じた ideal で、行ごとの充填長という境界 path だけで表せる。",
-        "方針: 条件を満たす標準 Young tableau を、1..AB-1 を置く順の ideal 状態 DP で数え、末尾追加条件に対応する右端列の不等式も遷移可否へ組み込む。（AB≤120 でも可能な Young 図形 ideal の状態数は制約内で50万程度に抑えられ、RSK の一対一対応から permutation 数を復元できる。）",
-        "接続: 長方形欠損形の各行の充填長を状態にし、標準 tableau の行列増加条件と追加の右端不等式を壊さない外角へ次の数を置く DP を行う。得た tableau 数を RSK のもう一方の tableau 数と組み合わせる。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc378-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-translate-sequences-by-rsk",
-      "learningOutcomeIds": [
-        "outcome-translate-sequences-by-rsk"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
-      "assessment": {
-        "method": "ABC378 G「Everlasting LIDS」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
-          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
-          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
-          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
-          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
-        ],
-        "expectedResult": "順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できるの適用可能範囲と破綻条件を反例付きで説明できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 99,

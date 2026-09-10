@@ -47,9 +47,9 @@
     "outcome-evaluate-adversarial-game-value"
   ],
   "representativeProblemIds": [
-    "abc218-g",
+    "abc349-e",
     "abc303-g",
-    "abc349-e"
+    "abc218-g"
   ],
   "aliases": [
     "minimax",

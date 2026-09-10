@@ -38,9 +38,9 @@
     "outcome-design-order-preserving-dp"
   ],
   "representativeProblemIds": [
-    "abc240-ex",
     "abc271-e",
-    "abc354-f"
+    "abc354-f",
+    "abc240-ex"
   ],
   "aliases": [
     "LIS",

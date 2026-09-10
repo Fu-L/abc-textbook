@@ -355,6 +355,8 @@ const createBuild = (
         learningOutcomeIds: outcomeIds,
         ownedLearningOutcomeIds: outcomeIds,
         problemIds,
+        directProblemIds: problemIds,
+        relatedProblemIds: [],
         stageRank: 0,
         difficultyRank: 0,
         representativeRank: 0,

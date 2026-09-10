@@ -1,6 +1,6 @@
 ---
 title: "根付き木DP・部分木集約"
-description: "前提から根付き木DP・部分木集約を見抜き、方針へ接続して検証するための学習単位。"
+description: "根付き木DP・部分木集約の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 130
@@ -8,108 +8,61 @@ sidebar:
 
 # 根付き木DP・部分木集約
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 根付き木で子側の状態を合成し、部分木または木全体の値を求められる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 最小十分状態からDPを設計する
-- この位置で学ぶ理由: DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。
-
-### この単元では扱わない範囲
-
-- 根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### 根付き木DP・部分木集約
 
 子部分木の状態をbottom-upに合成し、親へ渡す最小十分なopen/closed状態や要約を設計する。
 
-検索語: subtree DP、tree DP、根付き木DP
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: 最小十分状態からDPを設計する。
 
-### 例 1 — 根付き木で子側の状態を合成し、部分木または木全体の値を求められる
+DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。
 
-題材: [ABC239 E「Subtree K-th Max」](https://atcoder.jp/contests/abc239/tasks/abc239_e)
+- 根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: 上位K個だけを求める merge では、各入力集合からK位より下の要素を捨てても、union の上位K個は変わらない。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。要求される順位 K に小さい上限があり、集合の merge を繰り返すとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC239 E「Subtree K-th Max」](https://atcoder.jp/contests/abc239/tasks/abc239_e)
+2. [ABC394 F「Alkane」](https://atcoder.jp/contests/abc394/tasks/abc394_f)
+3. [ABC263 F「Tournament」](https://atcoder.jp/contests/abc263/tasks/abc263_f)
+4. [ABC264 Ex「Perfect Binary Tree」](https://atcoder.jp/contests/abc264/tasks/abc264_h)
+5. [ABC312 G「Avoid Straight Line」](https://atcoder.jp/contests/abc312/tasks/abc312_g)
+6. [ABC378 F「Add One Edge 2」](https://atcoder.jp/contests/abc378/tasks/abc378_f)
+7. [ABC391 E「Hierarchical Majority Vote」](https://atcoder.jp/contests/abc391/tasks/abc391_e)
+8. [ABC397 E「Path Decomposition of a Tree」](https://atcoder.jp/contests/abc397/tasks/abc397_e)
+9. [ABC409 E「Pair Annihilation」](https://atcoder.jp/contests/abc409/tasks/abc409_e)
+10. [ABC447 F「Centipede Graph」](https://atcoder.jp/contests/abc447/tasks/abc447_f)
+11. [ABC309 E「Family and Insurance」](https://atcoder.jp/contests/abc309/tasks/abc309_e)
+12. [ABC248 G「GCD cost on the tree」](https://atcoder.jp/contests/abc248/tasks/abc248_g)
+13. [ABC259 F「Select Edges」](https://atcoder.jp/contests/abc259/tasks/abc259_f)
+14. [ABC287 F「Components」](https://atcoder.jp/contests/abc287/tasks/abc287_f)
+15. [ABC416 F「Paint Tree 2」](https://atcoder.jp/contests/abc416/tasks/abc416_f)
+16. [ABC329 G「Delivery on Tree」](https://atcoder.jp/contests/abc329/tasks/abc329_g)
+17. [ABC459 E「Select from Subtrees」](https://atcoder.jp/contests/abc459/tasks/abc459_e)
 
-- 部分木順位 query に対し、query 上限から top-K 要約を設計し、木 DP で全頂点分を前計算できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 各 query の K_i は20以下なので、部分木の全値を保存する必要はない。どの query にも使われない21番目以下の値は、祖先の部分木へ併合しても上位20個へ戻らない。
-- 子部分木の上位候補と自頂点の値を集めれば、親部分木の上位候補が得られるため、葉から根への木 DP として前計算できる。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 各頂点に、その部分木で大きい順の上位20値だけを持たせ、子の配列を併合・降順 sort・20個に truncate する。 — query の上限を状態サイズへ直接反映でき、全 query は前計算済み配列の K_i-1 番目を見るだけになる。
-- **棄却**: query ごとに V_i の部分木を走査して値を集め、K_i 番目を選ぶ。 — 根に近い頂点への query が多数あると同じ部分木を繰り返し走査し、NQ 規模になり得る。
-
-#### 鍵となる着眼
-
-- 上位K個だけを求める merge では、各入力集合からK位より下の要素を捨てても、union の上位K個は変わらない。
-
-#### アルゴリズムへ接続する
-
-根1から親子関係と postorder を作る。各 v の候補を [X_v] で始め、各 child の上位20配列を追加して降順に並べ、先頭20個だけを P_v として残し、query (V,K) へ P_V[K-1] を返す。
-
-
-## 転用するときの確認
-
-- **上位K個への状態切り詰め**: 要求される順位 K に小さい上限があり、集合の merge を繰り返すとき。 適用: 各部分問題から上位K個だけを保持し、merge 後も即座にK個へ truncate する。
-- **部分木の bottom-up DP**: 親の答えが自頂点と各子部分木の要約の結合で得られるとき。 適用: postorder で子の要約を確定してから親へ併合する。
-- 大量 query では N や Q だけでなく、query parameter の最大値が前計算状態を切れるか確認する。
-- 子側で21位の値が親側で20位以内へ復活できない理由を、親に別の値を一つ加えた場合まで含めて説明する。
-
-## 到達確認
-
-### 到達確認 1 — 根付き木で子側の状態を合成し、部分木または木全体の値を求められる
-
-転移題材: [ABC248 G「GCD cost on the tree」](https://atcoder.jp/contests/abc248/tasks/abc248_g)
-
-**課題**: ABC248 G「GCD cost on the tree」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「根付き木で子側の状態を合成し、部分木または木全体の値を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 根付き木で子側の状態を合成し、部分木または木全体の値を求められる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 木上全頂点対の path 長×path gcd の総和を、gcd 別 count・長さ和を merge する木 DP で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 木上全頂点対の path 長×path gcd の総和を、gcd 別 count・長さ和を merge する木 DP で求められる。
-
-- 対象技能が担う箇所: 木上全頂点対の path 長×path gcd の総和を、gcd 別 count・長さ和を merge する木 DP で求められる。
-- 転移題材の解法接続: 各頂点を cnt[A_v]=sum[A_v]=1、部分木内答え 0 で初期化する。子の DP を受け取り、全 gcd group 対で cross pair の寄与を答えへ加えた後、子の key y を gcd(A_v,y) に写して cnt と sum+cnt を親 map へ統合する。root の答えを 998244353 で出力する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 根付き木で子側の状態を合成し、部分木または木全体の値を求められる。
-
-</details>
-
+- [ABC246 G「Game on Tree 3」](https://atcoder.jp/contests/abc246/tasks/abc246_g)
+- [ABC269 Ex「Antichain」](https://atcoder.jp/contests/abc269/tasks/abc269_h)
+- [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
+- [ABC293 Ex「Optimal Path Decomposition」](https://atcoder.jp/contests/abc293/tasks/abc293_h)
+- [ABC298 Ex「Sum of Min of Length」](https://atcoder.jp/contests/abc298/tasks/abc298_h)
+- [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
+- [ABC340 G「Leaf Color」](https://atcoder.jp/contests/abc340/tasks/abc340_g)
+- [ABC369 G「As far as possible」](https://atcoder.jp/contests/abc369/tasks/abc369_g)
+- [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
+- [ABC435 F「Cat exercise」](https://atcoder.jp/contests/abc435/tasks/abc435_f)
+- [ABC438 F「Sum of Mex」](https://atcoder.jp/contests/abc438/tasks/abc438_f)
 
 ## 根拠
 
@@ -120,4 +73,4 @@ sidebar:
 - [ABC248 G 公式解説](https://atcoder.jp/contests/abc248/editorial/3795)
 - [ABC248 G 公式問題文](https://atcoder.jp/contests/abc248/tasks/abc248_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-rooted-tree-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-rooted-tree-aggregation`

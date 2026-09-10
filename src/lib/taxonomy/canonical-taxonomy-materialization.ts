@@ -1,6 +1,6 @@
 import type { z } from 'zod';
-import { CANONICAL_GUIDED_EXAMPLES } from './canonical-guided-examples.js';
-import { CANONICAL_OUTCOME_NOTES } from './canonical-outcome-notes.js';
+import { CANONICAL_UNIT_CONTENT } from './canonical-unit-content.js';
+import { PROBLEM_READING_ORDER_REASON } from './problem-reading-order.js';
 
 import { canonicalDigest, canonicalJson } from '../domain/canonical-json.js';
 import {
@@ -10,7 +10,6 @@ import {
   FinalTaxonomyBuildSchema,
   LearningOutcomeSchema,
   LearningUnitSchema,
-  type ProblemAnalysisClaimRefSchema,
   ProblemAnalysisRecordSchema,
   ProblemPlacementDecisionTableSchema,
   ProblemSchema,
@@ -19,7 +18,6 @@ import {
 } from '../domain/schema-parts/catalog.js';
 
 type FinalTaxonomyBuild = z.infer<typeof FinalTaxonomyBuildSchema>;
-type ProblemAnalysisClaimRef = z.infer<typeof ProblemAnalysisClaimRefSchema>;
 type ProblemAnalysisRecord = z.infer<typeof ProblemAnalysisRecordSchema>;
 type Problem = z.infer<typeof ProblemSchema>;
 type SourceRevision = z.infer<typeof SourceRevisionSchema>;
@@ -33,20 +31,7 @@ type CorrectionImpact = z.infer<typeof CorrectionImpactSchema>;
 type CorrectionImpactLocator = CorrectionImpact['affectedContentLocators'][number];
 
 const PREVIEW_ID_PATTERN = /(?:^|-)(?:preview|provisional)(?:-|$)/u;
-const REQUIRED_DOCUMENT_SECTIONS = [
-  '## この単元でできるようになること',
-  '## 発動条件と見分け方',
-  '## ガイド例',
-  '## 到達確認',
-  '## 解答と自己評価基準',
-  '## 根拠',
-] as const;
-
-const UNIT_KIND_LABEL = {
-  chapter: '章',
-  section: '節',
-  subsection: '小節',
-} as const;
+const REQUIRED_DOCUMENT_SECTIONS = ['## 概要', '## 前提と範囲', '## 問題一覧', '## 根拠'] as const;
 
 const SOURCE_KIND_LABEL = {
   official_problem: '公式問題文',
@@ -100,17 +85,6 @@ export interface CanonicalTaxonomyMaterialization {
   readonly problemPlacementPolicy: CanonicalProblemPlacementPolicy;
   readonly problemPlacementEvidence: Readonly<Record<string, unknown>>;
   readonly materializationEvidence: Readonly<Record<string, unknown>>;
-}
-
-interface LearningActivity {
-  readonly outcome: LearningOutcome;
-  readonly record: ProblemAnalysisRecord;
-  readonly problem: Problem;
-  readonly evidenceClaims: readonly string[];
-  readonly assessmentRecord: ProblemAnalysisRecord | null;
-  readonly assessmentProblem: Problem | null;
-  readonly assessmentEvidenceClaims: readonly string[];
-  readonly assessmentKind: 'transfer_problem' | 'boundary_transformation';
 }
 
 interface ChildLearningUnitLink {
@@ -243,154 +217,10 @@ const learningUnitDocumentPath = (
     : `src/content/docs/learn/${directory}/${unit.id.replace(/^unit-/u, '')}.md`;
 };
 
-const rankedRecordsForOutcome = (input: {
-  readonly outcomeId: string;
-  readonly unitProblemIds: readonly string[];
-  readonly outcomeEvidenceProblemIds: readonly string[];
-  readonly primaryProblemIds: ReadonlySet<string>;
-  readonly supportingProblemIds: ReadonlySet<string>;
-  readonly recordByProblemId: ReadonlyMap<string, ProblemAnalysisRecord>;
-}): ProblemAnalysisRecord[] => {
-  const unitProblemSet = new Set(input.unitProblemIds);
-  const selection = CANONICAL_GUIDED_EXAMPLES[input.outcomeId];
-  if (selection === undefined) {
-    throw new CanonicalTaxonomyMaterializationError(
-      'CANONICAL_GUIDE_SELECTION_MISSING',
-      input.outcomeId,
-    );
-  }
-  const evidenceIndex = new Map<string, number>();
-  for (const [index, problemId] of input.outcomeEvidenceProblemIds.entries()) {
-    if (!evidenceIndex.has(problemId)) evidenceIndex.set(problemId, index);
-  }
-  const records = [...evidenceIndex]
-    .flatMap(([problemId, index]) => {
-      const record = input.recordByProblemId.get(problemId);
-      return record === undefined || !unitProblemSet.has(problemId) ? [] : [{ record, index }];
-    })
-    .sort((left, right) => {
-      const rank = (problemId: string): number =>
-        problemId === selection.problemId
-          ? -1
-          : input.primaryProblemIds.has(problemId)
-            ? 0
-            : input.supportingProblemIds.has(problemId)
-              ? 1
-              : 2;
-      return rank(left.record.problemId) - rank(right.record.problemId) || left.index - right.index;
-    })
-    .map(({ record }) => record);
-  if (records[0]?.problemId !== selection.problemId) {
-    throw new CanonicalTaxonomyMaterializationError(
-      'CANONICAL_UNIT_ACTIVITY_SOURCE_MISSING',
-      input.outcomeId,
-    );
-  }
-  return records;
-};
-
-const valueAtClaimPath = (record: ProblemAnalysisRecord, claimPath: string): unknown =>
-  claimPath
-    .slice(1)
-    .split('/')
-    .reduce<unknown>((value, segment) => {
-      if (value === null || typeof value !== 'object') return undefined;
-      return (value as Readonly<Record<string, unknown>>)[segment];
-    }, record);
-
-const claimText = (record: ProblemAnalysisRecord, reference: ProblemAnalysisClaimRef): string => {
-  const value = valueAtClaimPath(record, reference.claimPath);
-  if (value === null || typeof value !== 'object') {
-    throw new CanonicalTaxonomyMaterializationError(
-      'CANONICAL_OUTCOME_EVIDENCE_POINTER_INVALID',
-      `${reference.problemId}${reference.claimPath}`,
-    );
-  }
-  const claim = value as Readonly<Record<string, unknown>>;
-  if (typeof claim.text === 'string') return claim.text;
-  if (typeof claim.approach === 'string' && typeof claim.decisionReason === 'string') {
-    return `${claim.approach} — ${claim.decisionReason}`;
-  }
-  if (
-    typeof claim.name === 'string' &&
-    typeof claim.trigger === 'string' &&
-    typeof claim.application === 'string'
-  ) {
-    return `${claim.name}: ${claim.trigger} 適用: ${claim.application}`;
-  }
-  if (typeof claim.insight === 'string' && typeof claim.reusablePerspective === 'string') {
-    return `${claim.insight} 再利用の観点: ${claim.reusablePerspective}`;
-  }
-  const complexity = [
-    typeof claim.time === 'string' ? `時間 ${claim.time}` : null,
-    typeof claim.space === 'string' ? `空間 ${claim.space}` : null,
-  ].filter((part): part is string => part !== null);
-  if (complexity.length > 0) return complexity.join('、');
-  throw new CanonicalTaxonomyMaterializationError(
-    'CANONICAL_OUTCOME_EVIDENCE_POINTER_UNRENDERABLE',
-    `${reference.problemId}${reference.claimPath}`,
-  );
-};
-
-const evidenceClaimsForRecord = (
-  references: readonly ProblemAnalysisClaimRef[],
-  record: ProblemAnalysisRecord,
-): string[] => {
-  const claims = references
-    .filter(({ problemId }) => problemId === record.problemId)
-    .map((reference) => claimText(record, reference));
-  const result = [...new Set(claims)];
-  if (result.length === 0) {
-    throw new CanonicalTaxonomyMaterializationError(
-      'CANONICAL_OUTCOME_EVIDENCE_MISSING',
-      record.problemId,
-    );
-  }
-  return result;
-};
-
-const activityProcedure = (record: ProblemAnalysisRecord): string[] => {
-  const adopted = record.reasoningPath.candidateApproaches.find(
-    ({ decision }) => decision === 'adopted',
-  );
-  return [
-    ...record.reasoningPath.observations.slice(0, 2).map(({ text }) => `観察: ${text}`),
-    ...record.reasoningPath.keyInsights.slice(0, 2).map(({ text }) => `着眼: ${text}`),
-    ...(adopted === undefined ? [] : [`方針: ${adopted.approach}（${adopted.decisionReason}）`]),
-    `接続: ${record.reasoningPath.algorithmConnection.text}`,
-  ];
-};
-
-const transferAnswerProcedure = (
-  record: ProblemAnalysisRecord,
-  evidenceClaims: readonly string[],
-): string[] => {
-  const complexity = [
-    record.asymptoticComplexity?.time === undefined
-      ? null
-      : `時間計算量 ${record.asymptoticComplexity.time}`,
-    record.asymptoticComplexity?.space === undefined
-      ? null
-      : `空間計算量 ${record.asymptoticComplexity.space}`,
-  ].filter((part): part is string => part !== null);
-  return [
-    ...evidenceClaims.map((claim) => `対象技能が担う箇所: ${claim}`),
-    `転移題材の解法接続: ${record.reasoningPath.algorithmConnection.text}`,
-    '転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。',
-    '対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。',
-    '不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。',
-    complexity.length === 0
-      ? '対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。'
-      : `${complexity.join('、')}を問題制約と照合し、対象技能が律速かを確認する。`,
-  ];
-};
-
 const yamlString = (value: string): string => JSON.stringify(value);
 
 const markdownList = (items: readonly string[], emptyText = 'なし'): string =>
   items.length === 0 ? `- ${emptyText}` : items.map((item) => `- ${item}`).join('\n');
-
-const withoutTerminalPunctuation = (value: string): string => value.replace(/[。．.!?！？]+$/u, '');
 
 const problemLabel = (problem: Problem): string =>
   `${problem.contestId.toUpperCase()} ${problem.slotLabel}「${problem.title}」`;
@@ -407,222 +237,27 @@ const sourceRevisionLabel = (source: SourceRevision): string => {
   return `${subject} ${SOURCE_KIND_LABEL[source.sourceKind]}`;
 };
 
-const unitRoleDescription = (
-  kind: LearningUnit['kind'],
-  ownedOutcomeCount: number,
-  childCount: number,
-): string => {
-  if (kind === 'chapter') {
-    return '分野全体の索引として、技能の境界と学ぶ順序を俯瞰します。各技能の定義を混同せず、必要な節・小節へ降りるための地図として使ってください。';
-  }
-  if (childCount > 0 && ownedOutcomeCount === 0) {
-    return '下位単元が扱う技能を比較し、発動条件・不変量・計算量の違いから学習経路を選ぶための構造単元です。';
-  }
-  if (childCount > 0) {
-    return '同じ対象を扱う技能を比較し、どの発動条件・不変量・計算量の違いで使い分けるかを学びます。';
-  }
-  return '一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。';
-};
-
-const exerciseForOutcome = (unit: LearningUnit, outcomeId: string) => {
-  const exercise = unit.exercises.find(
-    ({ learningOutcomeIds, learningUnitRole }) =>
-      learningUnitRole === 'outcome_attainment' && learningOutcomeIds.includes(outcomeId),
-  );
-  if (exercise === undefined) {
-    throw new CanonicalTaxonomyMaterializationError(
-      'CANONICAL_UNIT_EXERCISE_MISSING',
-      `${unit.id}/${outcomeId}`,
-    );
-  }
-  return exercise;
-};
-
 const renderLearningUnitDocument = (input: {
   readonly unit: LearningUnit;
   readonly tags: readonly TechniqueTag[];
-  readonly outcomes: readonly LearningOutcome[];
-  readonly activities: readonly LearningActivity[];
   readonly childUnits: readonly ChildLearningUnitLink[];
   readonly prerequisiteTitles: readonly string[];
   readonly sources: readonly SourceRevision[];
+  readonly problems: ReadonlyMap<string, Problem>;
   readonly sourceBuild: { readonly id: string; readonly digest: string };
 }): string => {
-  const { unit, tags } = input;
-  const activities = input.activities;
-  const outcomes = activities.map(({ outcome }) => outcome);
-  const guidedExamples = activities
-    .map(({ outcome, record, problem, evidenceClaims }, index) => {
-      const selection = CANONICAL_GUIDED_EXAMPLES[outcome.id];
-      if (selection?.walkthrough !== undefined) {
-        return [
-          `### 例 ${String(index + 1)} — ${withoutTerminalPunctuation(outcome.statement)}`,
-          '',
-          `題材: [${problemLabel(problem)}](${problem.officialUrl})`,
-          '',
-          `選定理由: ${selection.rationale}`,
-          '',
-          `この例で扱う範囲: ${selection.scope}`,
-          '',
-          '#### このOutcomeを支える根拠',
-          '',
-          markdownList([selection.rationale]),
-          '',
-          '#### 観察から手順へ',
-          '',
-          markdownList(selection.walkthrough),
-        ].join('\n');
-      }
-      const rejected = record.reasoningPath.candidateApproaches.filter(
-        ({ decision }) => decision === 'rejected',
-      );
-      const adopted = record.reasoningPath.candidateApproaches.filter(
-        ({ decision }) => decision === 'adopted',
-      );
-      return [
-        `### 例 ${String(index + 1)} — ${withoutTerminalPunctuation(outcome.statement)}`,
-        '',
-        `題材: [${problemLabel(problem)}](${problem.officialUrl})`,
-        '',
-        `選定理由: ${CANONICAL_GUIDED_EXAMPLES[outcome.id]?.rationale ?? ''}`,
-        '',
-        `この例で扱う範囲: ${CANONICAL_GUIDED_EXAMPLES[outcome.id]?.scope ?? ''}`,
-        '',
-        '#### このOutcomeを支える根拠',
-        '',
-        markdownList(evidenceClaims),
-        '',
-        '#### 観察',
-        '',
-        markdownList(record.reasoningPath.observations.map(({ text }) => text)),
-        '',
-        '#### 候補を比較する',
-        '',
-        markdownList([
-          ...adopted.map(
-            ({ approach, decisionReason }) => `**採用**: ${approach} — ${decisionReason}`,
-          ),
-          ...rejected.map(
-            ({ approach, decisionReason }) => `**棄却**: ${approach} — ${decisionReason}`,
-          ),
-        ]),
-        '',
-        '#### 鍵となる着眼',
-        '',
-        markdownList(record.reasoningPath.keyInsights.map(({ text }) => text)),
-        '',
-        '#### アルゴリズムへ接続する',
-        '',
-        record.reasoningPath.algorithmConnection.text,
-      ].join('\n');
-    })
-    .join('\n\n');
-  const attainmentChecks = activities
-    .map(({ outcome, problem, assessmentProblem, assessmentKind }, index) => {
-      const exercise = exerciseForOutcome(unit, outcome.id);
-      const subject = assessmentProblem ?? problem;
-      return [
-        `### 到達確認 ${String(index + 1)} — ${withoutTerminalPunctuation(outcome.statement)}`,
-        '',
-        `${assessmentKind === 'transfer_problem' ? '転移題材' : '境界検証の元題材'}: [${problemLabel(subject)}](${subject.officialUrl})`,
-        '',
-        `**課題**: ${exercise.assessment.method}`,
-        '',
-        `**合格条件**: ${exercise.assessment.successCondition}`,
-      ].join('\n');
-    })
-    .join('\n\n');
-  const answers = activities
-    .map(({ outcome, assessmentEvidenceClaims }, index) => {
-      const exercise = exerciseForOutcome(unit, outcome.id);
-      return [
-        `<details><summary>到達確認 ${String(index + 1)} の解答基準 — ${withoutTerminalPunctuation(outcome.statement)}</summary>`,
-        '',
-        '**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。',
-        '',
-        exercise.answer.reasoningOrVerification,
-        '',
-        '根拠として照合する観点:',
-        '',
-        markdownList(assessmentEvidenceClaims),
-        '',
-        markdownList(exercise.answer.procedure),
-        '',
-        `期待する到達点: ${exercise.answer.expectedResult}`,
-        '',
-        '</details>',
-      ].join('\n');
-    })
-    .join('\n\n');
-  const sourceList = input.sources.map(
-    (source) => `[${sourceRevisionLabel(source)}](${source.url})`,
-  );
-  const childUnitNavigation = input.childUnits.map((child, index) => {
-    const filename = child.documentPath.split('/').at(-1);
-    if (filename === undefined) {
-      throw new CanonicalTaxonomyMaterializationError('CANONICAL_UNIT_DOCUMENT_PATH', child.id);
-    }
-    return `${String(index + 1)}. [${child.title}](./${filename})（標準順 ${String(child.globalIndex + 1)}）— ${child.orderReason}`;
-  });
-  const childUnitComparison = input.childUnits.map((child) => {
-    const directlyOwnedOutcomes = child.ownedLearningOutcomeIds.flatMap((outcomeId) => {
-      const outcome = input.outcomes.find(({ id }) => id === outcomeId);
-      return outcome === undefined ? [] : [outcome.statement];
+  const { unit } = input;
+  const problemLinks = (ids: readonly string[]): string[] =>
+    ids.map((id) => {
+      const problem = input.problems.get(id);
+      if (problem === undefined)
+        throw new CanonicalTaxonomyMaterializationError('CANONICAL_UNIT_PROBLEM_UNKNOWN', id);
+      return `[${problemLabel(problem)}](${problem.officialUrl})`;
     });
-    const directTarget =
-      directlyOwnedOutcomes.length === 0
-        ? `${String(child.learningOutcomeIds.length)}個の下位Outcomeへ進むための構造索引`
-        : directlyOwnedOutcomes.map(withoutTerminalPunctuation).join('／');
-    return `- **${child.title}** — 直接到達点: ${directTarget}。近いが対象外: ${child.excludedTopics[0] ?? '下位単元の定義に当てはまらない問題'}`;
-  });
-  const routingExercise = unit.exercises.find(
-    ({ learningUnitRole }) => learningUnitRole === 'curriculum_routing',
-  );
-  const routingSection =
-    input.childUnits.length === 0 || routingExercise === undefined
-      ? []
-      : [
-          '## 下位単元を使い分ける比較例',
-          '',
-          '未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。',
-          '',
-          childUnitComparison.join('\n'),
-          '',
-          `**比較の到達点**: ${routingExercise.attainmentCondition}`,
-          '',
-        ];
-  const routingAttainment =
-    routingExercise === undefined
-      ? []
-      : [
-          '### 学習経路の選択',
-          '',
-          `**課題**: ${routingExercise.assessment.method}`,
-          '',
-          `**合格条件**: ${routingExercise.assessment.successCondition}`,
-          '',
-        ];
-  const routingAnswer =
-    routingExercise === undefined
-      ? []
-      : [
-          '<details><summary>学習経路の選択の解答基準</summary>',
-          '',
-          '**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。',
-          '',
-          routingExercise.answer.reasoningOrVerification,
-          '',
-          markdownList(routingExercise.answer.procedure),
-          '',
-          `期待する到達点: ${routingExercise.answer.expectedResult}`,
-          '',
-          '</details>',
-          '',
-        ];
   return [
     '---',
     `title: ${yamlString(unit.title)}`,
-    `description: ${yamlString(`前提から${unit.title}を見抜き、方針へ接続して検証するための学習単位。`)}`,
+    `description: ${yamlString(`${unit.title}の概念と、基礎から応用へ読む問題一覧。`)}`,
     'draft: true',
     'sidebar:',
     `  order: ${String(unit.globalIndex)}`,
@@ -630,120 +265,59 @@ const renderLearningUnitDocument = (input: {
     '',
     `# ${unit.title}`,
     '',
-    `このページは **${UNIT_KIND_LABEL[unit.kind]}** です。${unitRoleDescription(unit.kind, outcomes.length, input.childUnits.length)}`,
+    '## 概要',
     '',
-    '読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。',
+    ...input.tags.flatMap((tag) => [`### ${tag.name}`, '', tag.definition, '']),
+    ...(CANONICAL_UNIT_CONTENT[unit.id] ?? []).flatMap((paragraph) => [paragraph, '']),
+    ...(input.tags.length === 0 ? ['下位の単元を、前提を満たす順にまとめます。', ''] : []),
+    '## 前提と範囲',
     '',
-    '## この単元でできるようになること',
+    `共通前提: ${unit.baselineId} (${unit.baselineVersion})。`,
     '',
-    markdownList(
-      outcomes.map(({ statement }) => statement),
-      '直接所有するOutcomeはありません。この単元では下位単元の選択と学習順を扱います。',
-    ),
+    `追加前提: ${input.prerequisiteTitles.join('、') || 'なし'}。`,
     '',
-    '## 前提・学習順・対象外',
+    unit.orderReason,
     '',
-    `- 共通前提: \`${unit.baselineId}\` version \`${unit.baselineVersion}\``,
-    `- 追加前提: ${input.prerequisiteTitles.length === 0 ? 'なし' : input.prerequisiteTitles.join('、')}`,
-    `- この位置で学ぶ理由: ${unit.orderReason}`,
+    markdownList(unit.excludedTopics),
     '',
-    '### この単元では扱わない範囲',
+    ...(input.childUnits.length === 0
+      ? []
+      : [
+          '## 下位単元',
+          '',
+          ...input.childUnits.map(
+            (child) =>
+              `- [${child.title}](/learn/${child.documentPath.replace(/^src\/content\/docs\/learn\//u, '').replace(/(?:\/index)?\.md$/u, '')}/)`,
+          ),
+          '',
+        ]),
+    '## 問題一覧',
     '',
-    markdownList(unit.excludedTopics, 'なし'),
+    '必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。',
     '',
-    ...(input.childUnits.length > 0
+    ...(unit.directProblemIds?.length
+      ? problemLinks(unit.directProblemIds).map((link, i) => `${String(i + 1)}. ${link}`)
+      : ['この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。']),
+    '',
+    '各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。',
+    '',
+    ...(unit.relatedProblemIds?.length
       ? [
-          '## 下位単元と学習順',
+          '## 関連問題',
           '',
-          unit.kind === 'chapter'
-            ? '以下は canonical standard order に沿った章内カリキュラムです。定義・証明・実装境界・Outcome到達確認は各リンク先で扱い、この章では経路選択に必要な境界を示します。'
-            : '以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。',
+          '以下はこの技能を用い、解説本文を別の単元に配置する問題です。',
           '',
-          childUnitNavigation.join('\n'),
+          markdownList(problemLinks(unit.relatedProblemIds)),
           '',
         ]
       : []),
-    '## 発動条件と見分け方',
-    '',
-    ...tags.flatMap((tag) => [
-      `### ${tag.name}`,
-      '',
-      tag.definition,
-      '',
-      `検索語: ${[...tag.aliases, ...tag.formerNames].join('、') || 'なし'}`,
-      '',
-    ]),
-    tags.length === 0
-      ? 'この構造単元はTagを直接所有しません。下位単元の定義と対象外を比較して学習経路を選びます。'
-      : '未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。',
-    '',
-    '## ガイド例',
-    '',
-    ...outcomes.flatMap(({ id }) => {
-      const notes = CANONICAL_OUTCOME_NOTES[id];
-      return notes === undefined ? [] : ['### 正当化と転用の境界', '', markdownList(notes), ''];
-    }),
-    guidedExamples || '- 通常のOutcomeガイド例は下位単元で扱います。',
-    '',
-    ...routingSection,
-    '',
-    '## 転用するときの確認',
-    '',
-    markdownList(
-      activities.flatMap(({ record }) => [
-        ...record.typicalTechniques.map(
-          ({ name, trigger, application }) => `**${name}**: ${trigger} 適用: ${application}`,
-        ),
-        ...record.problemSpecificInsights.map(({ reusablePerspective }) => reusablePerspective),
-        ...record.reviewAdvice.map(({ text }) => text),
-      ]),
-    ),
-    '',
-    '## 到達確認',
-    '',
-    attainmentChecks || '- 直接所有するOutcomeの到達確認はありません。',
-    '',
-    ...routingAttainment,
-    '',
-    '## 解答と自己評価基準',
-    '',
-    answers || '- 直接所有するOutcomeの解答基準はありません。',
-    '',
-    ...routingAnswer,
-    '',
     '## 根拠',
     '',
-    markdownList(sourceList),
+    markdownList(input.sources.map((source) => `[${sourceRevisionLabel(source)}](${source.url})`)),
     '',
     `Canonical taxonomy: FinalTaxonomyBuild \`${input.sourceBuild.id}\` digest \`${input.sourceBuild.digest}\` / LearningUnit \`${unit.id}\``,
     '',
   ].join('\n');
-};
-
-const finalOutcomeIdsForImpact = (
-  build: FinalTaxonomyBuild,
-  impactId: string,
-): readonly string[] => {
-  const candidateById = new Map(
-    build.finalCandidates.map((candidate) => [candidate.entity.id, candidate]),
-  );
-  return sortedUnique(
-    build.integrationMap.entries
-      .filter(({ correctionImpactIds }) => correctionImpactIds.includes(impactId))
-      .flatMap(({ finalEntityIds }) => finalEntityIds)
-      .flatMap((entityId) => {
-        const candidate = candidateById.get(entityId);
-        if (candidate === undefined) {
-          throw new CanonicalTaxonomyMaterializationError(
-            'CANONICAL_CORRECTION_TARGET_UNKNOWN',
-            `${impactId}/${entityId}`,
-          );
-        }
-        return candidate.kind === 'outcome'
-          ? [candidate.entity.id]
-          : candidate.entity.learningOutcomeIds;
-      }),
-  );
 };
 
 const canonicalCorrectionImpacts = (
@@ -752,7 +326,6 @@ const canonicalCorrectionImpacts = (
 ): CorrectionImpact[] => {
   const learningUnitById = new Map(learningUnits.map((output) => [output.value.id, output.value]));
   return build.correctionImpacts.map((impact) => {
-    const impactedOutcomeIds = new Set(finalOutcomeIdsForImpact(build, impact.id));
     const locators = impact.surfaceAssessments.flatMap<CorrectionImpactLocator>((assessment) => {
       if (assessment.ownerType === 'problem') {
         if (assessment.surface === 'placement') {
@@ -802,46 +375,7 @@ const canonicalCorrectionImpacts = (
             `${impact.id}/${assessment.learningUnitId}`,
           );
         }
-        const ownedImpactedOutcomeIds = new Set(
-          (unit.ownedLearningOutcomeIds ?? []).filter((outcomeId) =>
-            impactedOutcomeIds.has(outcomeId),
-          ),
-        );
-        const paths =
-          assessment.surface === 'example'
-            ? unit.examples
-                .filter(({ learningOutcomeIds, learningUnitRole }) =>
-                  learningUnitRole === 'curriculum_routing'
-                    ? learningOutcomeIds.some((outcomeId) => impactedOutcomeIds.has(outcomeId))
-                    : learningUnitRole === 'guided_outcome' &&
-                      learningOutcomeIds.some((outcomeId) =>
-                        ownedImpactedOutcomeIds.has(outcomeId),
-                      ),
-                )
-                .map(({ key }) => `examples.${key}`)
-            : unit.exercises
-                .filter(({ learningOutcomeIds, learningUnitRole }) =>
-                  learningUnitRole === 'curriculum_routing'
-                    ? learningOutcomeIds.some((outcomeId) => impactedOutcomeIds.has(outcomeId))
-                    : learningUnitRole === 'outcome_attainment' &&
-                      learningOutcomeIds.some((outcomeId) =>
-                        ownedImpactedOutcomeIds.has(outcomeId),
-                      ),
-                )
-                .map(({ key }) =>
-                  assessment.surface === 'answer' ? `exercises.${key}.answer` : `exercises.${key}`,
-                );
-        if (paths.length === 0) {
-          throw new CanonicalTaxonomyMaterializationError(
-            'CANONICAL_CORRECTION_BLOCK_MISSING',
-            `${impact.id}/${assessment.learningUnitId}/${assessment.surface}`,
-          );
-        }
-        return paths.map((path) => ({
-          ownerType: 'learning_unit' as const,
-          learningUnitId: assessment.learningUnitId,
-          path,
-        }));
+        return [{ ownerType: 'learning_unit' as const, learningUnitId: unit.id, path: 'content' }];
       }
       return [];
     });
@@ -892,41 +426,14 @@ export const buildCanonicalTaxonomyMaterialization = (
   const outcomes = outcomeCandidates.map(({ entity }) => LearningOutcomeSchema.parse(entity));
   const tagById = new Map(tags.map((tag) => [tag.id, tag]));
   const outcomeById = new Map(outcomes.map((outcome) => [outcome.id, outcome]));
-  const outcomeCandidateById = new Map(
-    outcomeCandidates.map((candidate) => [candidate.entity.id, candidate]),
-  );
   const unitCandidateById = new Map(
     unitCandidates.map((candidate) => [candidate.entity.id, candidate]),
   );
-  const recordByProblemId = new Map(input.records.map((record) => [record.problemId, record]));
   const problemById = new Map(input.problems.map((problem) => [problem.id, problem]));
   const sourceById = new Map(input.sources.map((source) => [source.id, source]));
   const unitById = new Map(
     unitCandidates.map(({ entity }) => [entity.id, { id: entity.id, parentId: entity.parentId }]),
   );
-  const primaryProblemIdsByOutcomeId = new Map<string, Set<string>>();
-  const supportingProblemIdsByOutcomeId = new Map<string, Set<string>>();
-  const addPlacementProblem = (
-    index: Map<string, Set<string>>,
-    outcomeId: string,
-    problemId: string,
-  ): void => {
-    const problemIds = index.get(outcomeId) ?? new Set<string>();
-    problemIds.add(problemId);
-    index.set(outcomeId, problemIds);
-  };
-  for (const placement of build.placements) {
-    for (const outcomeId of [
-      placement.primaryOutcomeId,
-      ...placement.additionalPrimaryOutcomeIds,
-    ]) {
-      addPlacementProblem(primaryProblemIdsByOutcomeId, outcomeId, placement.problemId);
-    }
-    for (const outcomeId of placement.supportingOutcomeIds) {
-      addPlacementProblem(supportingProblemIdsByOutcomeId, outcomeId, placement.problemId);
-    }
-  }
-
   const learningUnits: CanonicalLearningUnitOutput[] = unitCandidates
     .map((candidate) => {
       const unit = candidate.entity;
@@ -943,220 +450,15 @@ export const buildCanonicalTaxonomyMaterialization = (
           orderReason: entity.orderReason,
         }))
         .sort((left, right) => left.globalIndex - right.globalIndex);
-      const activities: LearningActivity[] = unit.ownedLearningOutcomeIds.map((outcomeId) => {
-        const outcome = outcomeById.get(outcomeId);
-        const outcomeCandidate = outcomeCandidateById.get(outcomeId);
-        if (outcome === undefined || outcomeCandidate === undefined) {
-          throw new CanonicalTaxonomyMaterializationError(
-            'CANONICAL_UNIT_OUTCOME_UNKNOWN',
-            `${unit.id}/${outcomeId}`,
-          );
-        }
-        const rankedRecords = rankedRecordsForOutcome({
-          outcomeId,
-          unitProblemIds: unit.problemIds,
-          outcomeEvidenceProblemIds: outcomeCandidate.evidenceRefs.map(
-            ({ problemId }) => problemId,
-          ),
-          primaryProblemIds: primaryProblemIdsByOutcomeId.get(outcomeId) ?? new Set<string>(),
-          supportingProblemIds: supportingProblemIdsByOutcomeId.get(outcomeId) ?? new Set<string>(),
-          recordByProblemId,
-        });
-        const record = rankedRecords[0];
-        if (record === undefined) {
-          throw new CanonicalTaxonomyMaterializationError(
-            'CANONICAL_UNIT_ACTIVITY_SOURCE_MISSING',
-            `${unit.id}/${outcomeId}`,
-          );
-        }
-        const problem = problemById.get(record.problemId);
-        if (problem === undefined) {
-          throw new CanonicalTaxonomyMaterializationError(
-            'CANONICAL_UNIT_PROBLEM_UNKNOWN',
-            record.problemId,
-          );
-        }
-        const assessmentRecord = rankedRecords.find(({ problemId }) => {
-          const selected = CANONICAL_GUIDED_EXAMPLES[outcomeId]?.assessmentProblemId;
-          return selected === undefined ? problemId !== record.problemId : problemId === selected;
-        });
-        const assessmentProblem =
-          assessmentRecord === undefined ? undefined : problemById.get(assessmentRecord.problemId);
-        if (assessmentRecord !== undefined && assessmentProblem === undefined) {
-          throw new CanonicalTaxonomyMaterializationError(
-            'CANONICAL_UNIT_PROBLEM_UNKNOWN',
-            assessmentRecord.problemId,
-          );
-        }
-        return {
-          outcome,
-          record,
-          problem,
-          evidenceClaims: evidenceClaimsForRecord(outcomeCandidate.evidenceRefs, record),
-          assessmentRecord: assessmentRecord ?? null,
-          assessmentProblem: assessmentProblem ?? null,
-          assessmentEvidenceClaims:
-            assessmentRecord === undefined
-              ? evidenceClaimsForRecord(outcomeCandidate.evidenceRefs, record)
-              : evidenceClaimsForRecord(outcomeCandidate.evidenceRefs, assessmentRecord),
-          assessmentKind:
-            assessmentRecord === undefined ? 'boundary_transformation' : 'transfer_problem',
-        };
-      });
-      const guidedExamples = activities.map(({ outcome, record, problem }) => ({
-        key: `guided-${outcome.id}`,
-        learningUnitRole: 'guided_outcome' as const,
-        learningOutcomeIds: [outcome.id],
-        kind: 'illustrative' as const,
-        language: '日本語（考察手順）',
-        omissions: [
-          CANONICAL_GUIDED_EXAMPLES[outcome.id]?.scope ?? '',
-          '問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。',
-        ],
-        environment: '対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境',
-        input: `${problemLabel(problem)}について、${record.reasoningPath.observations[0]?.text ?? outcome.statement}`,
-        procedure: CANONICAL_GUIDED_EXAMPLES[outcome.id]?.walkthrough ?? activityProcedure(record),
-        executionTarget: null,
-        expectedResult: outcome.statement,
-        verificationStatus: 'not_applicable' as const,
-      }));
-      const attainmentExercises = activities.map(
-        ({
-          outcome,
-          problem,
-          assessmentRecord,
-          assessmentProblem,
-          assessmentEvidenceClaims,
-          assessmentKind,
-        }) => ({
-          key: `attainment-${outcome.id}`,
-          learningUnitRole: 'outcome_attainment' as const,
-          learningOutcomeIds: [outcome.id],
-          prerequisiteIds: sortedUnique([
-            unit.baselineId,
-            ...unit.additionalPrerequisiteUnitIds,
-            ...outcome.prerequisiteOutcomeIds,
-          ]),
-          attainmentCondition:
-            assessmentKind === 'transfer_problem'
-              ? `学習成果「${withoutTerminalPunctuation(outcome.statement)}」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。`
-              : `学習成果「${withoutTerminalPunctuation(outcome.statement)}」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。`,
-          assessment: {
-            method:
-              CANONICAL_GUIDED_EXAMPLES[outcome.id]?.assessmentMethod ??
-              (assessmentKind === 'transfer_problem' && assessmentProblem !== null
-                ? `${problemLabel(assessmentProblem)}を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。`
-                : `${problemLabel(problem)}で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。`),
-            successCondition: `手法名の列挙に留まらず、学習成果「${withoutTerminalPunctuation(outcome.statement)}」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。`,
-          },
-          answer: {
-            reasoningOrVerification:
-              assessmentRecord === null
-                ? '単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。'
-                : `別題材では次の直接根拠を対象技能として切り出す: ${withoutTerminalPunctuation(assessmentEvidenceClaims.join('／'))}。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。`,
-            procedure:
-              CANONICAL_GUIDED_EXAMPLES[outcome.id]?.assessmentProcedure ??
-              (assessmentRecord === null
-                ? [
-                    '元の方針が必要とする対象・操作・不変量・目標を分けて書く。',
-                    '発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。',
-                    '元の正当化のうち最初に成立しなくなる命題を指摘する。',
-                    '計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。',
-                    '条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。',
-                  ]
-                : transferAnswerProcedure(assessmentRecord, assessmentEvidenceClaims)),
-            expectedResult:
-              assessmentKind === 'transfer_problem'
-                ? outcome.statement
-                : `${withoutTerminalPunctuation(outcome.statement)}の適用可能範囲と破綻条件を反例付きで説明できる。`,
-            verificationStatus: 'pending' as const,
-          },
-        }),
-      );
-      const routingExamples =
-        childUnits.length === 0
-          ? []
-          : [
-              {
-                key: 'curriculum-routing',
-                learningUnitRole: 'curriculum_routing' as const,
-                learningOutcomeIds: sortedUnique(
-                  childUnits.flatMap(({ learningOutcomeIds }) => learningOutcomeIds),
-                ),
-                kind: 'illustrative' as const,
-                language: '日本語（学習経路の比較）',
-                omissions: [
-                  '各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。',
-                ],
-                environment: '紙上での未知問のモデル化と候補比較',
-                input: `${unit.title}の範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。`,
-                procedure: childUnits.map((child) => {
-                  const directTarget =
-                    child.ownedLearningOutcomeIds.length === 0
-                      ? `${String(child.learningOutcomeIds.length)}個の下位Outcomeへの索引`
-                      : `${String(child.ownedLearningOutcomeIds.length)}個の直接所有Outcome`;
-                  return `${child.title}: ${directTarget}、学ぶ理由「${withoutTerminalPunctuation(child.orderReason)}」、対象外「${withoutTerminalPunctuation(child.excludedTopics[0] ?? '定義に当てはまらない問題')}」を照合する。`;
-                }),
-                executionTarget: null,
-                expectedResult:
-                  '下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。',
-                verificationStatus: 'not_applicable' as const,
-              },
-            ];
-      const routingExercises =
-        childUnits.length === 0
-          ? []
-          : [
-              {
-                key: 'curriculum-routing',
-                learningUnitRole: 'curriculum_routing' as const,
-                learningOutcomeIds: sortedUnique(
-                  childUnits.flatMap(({ learningOutcomeIds }) => learningOutcomeIds),
-                ),
-                prerequisiteIds: sortedUnique([
-                  unit.baselineId,
-                  ...unit.additionalPrerequisiteUnitIds,
-                ]),
-                attainmentCondition:
-                  '未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。',
-                assessment: {
-                  method:
-                    '未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。',
-                  successCondition:
-                    '採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。',
-                },
-                answer: {
-                  reasoningOrVerification:
-                    '正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。',
-                  procedure: [
-                    '問題を対象・操作・保つ量・求める量へ分解する。',
-                    '各下位単元の発動条件を一つずつ照合し、不足情報を明示する。',
-                    '採用候補の成立理由と、近い候補の最初の破綻点を対にする。',
-                    '前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。',
-                  ],
-                  expectedResult:
-                    '未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。',
-                  verificationStatus: 'pending' as const,
-                },
-              },
-            ];
-      const examples = [...guidedExamples, ...routingExamples];
-      const exercises = [...attainmentExercises, ...routingExercises];
-      const sourceRevisionIds = sortedUnique([
-        ...unit.sourceRevisionIds,
-        ...activities.flatMap(({ record, assessmentRecord }) => [
-          ...record.sourceRevisionIds,
-          ...(assessmentRecord?.sourceRevisionIds ?? []),
-        ]),
-      ]);
+      const sourceRevisionIds = unit.sourceRevisionIds;
       const documentPath = learningUnitDocumentPath(unit, unitById);
       const materializedUnit = LearningUnitSchema.parse({
         ...unit,
         sourceRevisionIds,
         contentPhase: 'canonical_skeleton',
         docPath: documentPath,
-        examples,
-        exercises,
+        examples: [],
+        exercises: [],
       });
       const materializedTags = (materializedUnit.ownedTagIds ?? []).map((tagId) => {
         const tag = tagById.get(tagId);
@@ -1188,17 +490,7 @@ export const buildCanonicalTaxonomyMaterialization = (
         document: renderLearningUnitDocument({
           unit: materializedUnit,
           tags: materializedTags,
-          outcomes: materializedUnit.learningOutcomeIds.map((outcomeId) => {
-            const outcome = outcomeById.get(outcomeId);
-            if (outcome === undefined) {
-              throw new CanonicalTaxonomyMaterializationError(
-                'CANONICAL_UNIT_OUTCOME_UNKNOWN',
-                `${unit.id}/${outcomeId}`,
-              );
-            }
-            return outcome;
-          }),
-          activities,
+          problems: problemById,
           childUnits,
           prerequisiteTitles,
           sources: materializedSources,
@@ -1353,7 +645,7 @@ export const buildCanonicalTaxonomyMaterialization = (
     evidenceId: 'bootstrap-canonical-problem-placements',
     status: 'passed',
     evidenceScope:
-      'T049 taxonomy decisions and CorrectionImpact mapping completeness only. CorrectionImpact target verification stays pending until Problem authoring, executable attainment review, and the T160 derived-index projection are complete.',
+      'T049 taxonomy decisions and CorrectionImpact mapping completeness only. CorrectionImpact target verification stays pending until Problem authoring, content review, and the T160 derived-index projection are complete.',
     deferredVerificationTaskIds: [
       'T057',
       'T058',
@@ -1391,7 +683,7 @@ export const buildCanonicalTaxonomyMaterialization = (
     evidenceId: 'bootstrap-canonical-taxonomy-materialization',
     status: 'passed',
     evidenceScope:
-      'T047–T050 canonical taxonomy, placement policy, and publication-disabled LearningUnit skeleton only. Full Unit expansion, executable attainment verification, Problem explanation authoring, and public projection remain deferred.',
+      'T047–T050 canonical taxonomy, placement policy, and publication-disabled LearningUnit skeleton only. Full Unit expansion, content verification, Problem explanation authoring, and public projection remain deferred.',
     deferredCompletionTaskIds: [
       'T055',
       'T056',
@@ -1407,6 +699,7 @@ export const buildCanonicalTaxonomyMaterialization = (
     ],
     sourceBuild,
     taskIds: ['T047', 'T048', 'T049', 'T050'],
+    problemReadingOrderReason: PROBLEM_READING_ORDER_REASON,
     counts: {
       tags: outputs.tags.length,
       learningOutcomes: outputs.learningOutcomes.length,
@@ -1420,24 +713,10 @@ export const buildCanonicalTaxonomyMaterialization = (
         (count, { value }) => count + (value.ownedLearningOutcomeIds?.length ?? 0),
         0,
       ),
-      guidedOutcomeExamples: learningUnits.reduce(
-        (count, { value }) =>
-          count +
-          value.examples.filter(({ learningUnitRole }) => learningUnitRole === 'guided_outcome')
-            .length,
+      directlyPlacedProblems: learningUnits.reduce(
+        (count, { value }) => count + (value.directProblemIds?.length ?? 0),
         0,
       ),
-      outcomeAttainmentExercises: learningUnits.reduce(
-        (count, { value }) =>
-          count +
-          value.exercises.filter(
-            ({ learningUnitRole }) => learningUnitRole === 'outcome_attainment',
-          ).length,
-        0,
-      ),
-      curriculumRoutingUnits: learningUnits.filter(({ value }) =>
-        value.examples.some(({ learningUnitRole }) => learningUnitRole === 'curriculum_routing'),
-      ).length,
       placements: build.placements.length,
       correctionImpacts: correctionImpacts.length,
     },
@@ -1484,8 +763,6 @@ export const validateCanonicalMaterialization = (
   const sourceIds = new Set(input.sources.map(({ id }) => id));
   const directTagOwnerCount = new Map<string, number>();
   const directOutcomeOwnerCount = new Map<string, number>();
-  const guidedOutcomeCount = new Map<string, number>();
-  const attainmentOutcomeCount = new Map<string, number>();
   const increment = (counts: Map<string, number>, id: string): void => {
     counts.set(id, (counts.get(id) ?? 0) + 1);
   };
@@ -1548,79 +825,11 @@ export const validateCanonicalMaterialization = (
     for (const tagId of ownedTagIds) increment(directTagOwnerCount, tagId);
     for (const outcomeId of ownedOutcomeIds) increment(directOutcomeOwnerCount, outcomeId);
 
-    const guidedExamples = output.value.examples.filter(
-      ({ learningUnitRole }) => learningUnitRole === 'guided_outcome',
-    );
-    const routingExamples = output.value.examples.filter(
-      ({ learningUnitRole }) => learningUnitRole === 'curriculum_routing',
-    );
-    const attainmentExercises = output.value.exercises.filter(
-      ({ learningUnitRole }) => learningUnitRole === 'outcome_attainment',
-    );
-    const routingExercises = output.value.exercises.filter(
-      ({ learningUnitRole }) => learningUnitRole === 'curriculum_routing',
-    );
-    const guidedOutcomeIds = guidedExamples.flatMap(({ learningOutcomeIds }) => learningOutcomeIds);
-    const attainmentOutcomeIds = attainmentExercises.flatMap(
-      ({ learningOutcomeIds }) => learningOutcomeIds,
-    );
-    for (const outcomeId of guidedOutcomeIds) increment(guidedOutcomeCount, outcomeId);
-    for (const outcomeId of attainmentOutcomeIds) increment(attainmentOutcomeCount, outcomeId);
     if (
-      output.value.examples.some(({ learningUnitRole }) => learningUnitRole === undefined) ||
-      guidedExamples.some(
-        ({ key, learningOutcomeIds }) =>
-          learningOutcomeIds.length !== 1 || key !== `guided-${learningOutcomeIds[0] ?? ''}`,
-      ) ||
-      canonicalJson(sortedUnique(guidedOutcomeIds)) !== canonicalJson(sortedUnique(ownedOutcomeIds))
+      output.value.contentPhase === 'canonical_skeleton' &&
+      (output.value.examples.length || output.value.exercises.length)
     ) {
-      diagnostics.push(`UNIT_GUIDED_OUTCOME_OWNERSHIP:${output.value.id}`);
-    }
-    if (
-      output.value.exercises.some(({ learningUnitRole }) => learningUnitRole === undefined) ||
-      attainmentExercises.some(
-        ({ key, learningOutcomeIds }) =>
-          learningOutcomeIds.length !== 1 || key !== `attainment-${learningOutcomeIds[0] ?? ''}`,
-      ) ||
-      canonicalJson(sortedUnique(attainmentOutcomeIds)) !==
-        canonicalJson(sortedUnique(ownedOutcomeIds))
-    ) {
-      diagnostics.push(`UNIT_ATTAINMENT_OUTCOME_OWNERSHIP:${output.value.id}`);
-    }
-
-    const children = [...expectedUnits.values()].filter(
-      ({ parentId }) => parentId === output.value.id,
-    );
-    const routedOutcomeIds = sortedUnique(
-      children.flatMap(({ learningOutcomeIds }) => learningOutcomeIds),
-    );
-    const expectedRoutingCount = children.length === 0 ? 0 : 1;
-    if (
-      routingExamples.length !== expectedRoutingCount ||
-      routingExercises.length !== expectedRoutingCount ||
-      routingExamples.some(
-        ({ key, learningOutcomeIds }) =>
-          key !== 'curriculum-routing' ||
-          canonicalJson(sortedUnique(learningOutcomeIds)) !== canonicalJson(routedOutcomeIds),
-      ) ||
-      routingExercises.some(
-        ({ key, learningOutcomeIds }) =>
-          key !== 'curriculum-routing' ||
-          canonicalJson(sortedUnique(learningOutcomeIds)) !== canonicalJson(routedOutcomeIds),
-      )
-    ) {
-      diagnostics.push(`UNIT_CURRICULUM_ROUTING:${output.value.id}`);
-    }
-    if (
-      (output.value.contentPhase === 'canonical_skeleton' &&
-        output.value.exercises.some(({ answer }) => answer.verificationStatus !== 'pending')) ||
-      output.value.examples.length !== ownedOutcomeIds.length + expectedRoutingCount ||
-      output.value.exercises.length !== ownedOutcomeIds.length + expectedRoutingCount
-    ) {
-      diagnostics.push(`UNIT_ACTIVITY_COUNT_OR_STATUS:${output.value.id}`);
-    }
-    if (children.length > 0 !== output.document.includes('## 下位単元を使い分ける比較例')) {
-      diagnostics.push(`UNIT_ROUTING_DOCUMENT:${output.value.id}`);
+      diagnostics.push(`UNIT_SKELETON_UNEXPECTED_BLOCKS:${output.value.id}`);
     }
   }
   for (const { id } of actualTags) {
@@ -1628,8 +837,6 @@ export const validateCanonicalMaterialization = (
   }
   for (const { id } of actualOutcomes) {
     if (directOutcomeOwnerCount.get(id) !== 1) diagnostics.push(`OUTCOME_OWNER_COUNT:${id}`);
-    if (guidedOutcomeCount.get(id) !== 1) diagnostics.push(`OUTCOME_GUIDED_COUNT:${id}`);
-    if (attainmentOutcomeCount.get(id) !== 1) diagnostics.push(`OUTCOME_ATTAINMENT_COUNT:${id}`);
   }
   if (
     canonicalJson(result.learningOrder.tagPrerequisites) !==

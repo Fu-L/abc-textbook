@@ -37,7 +37,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   // Queue-to-heap migration is safe because each element crosses the boundary at most once.
   'abc217-e': 'tag-amortized-heavy-light',
   'abc217-f': 'tag-interval-partition-dp',
-  'abc217-g': 'tag-combinatorial-coefficients',
+  'abc217-g': 'tag-dp-state-equivalence',
   'abc217-h': 'tag-discrete-convex-marginal',
 
   'abc218-e': 'tag-spanning-tree-optimization',

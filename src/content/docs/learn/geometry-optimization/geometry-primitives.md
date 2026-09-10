@@ -1,6 +1,6 @@
 ---
 title: "幾何の基本判定と座標変換"
-description: "前提から幾何の基本判定と座標変換を見抜き、方針へ接続して検証するための学習単位。"
+description: "幾何の基本判定と座標変換の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 28
@@ -8,144 +8,72 @@ sidebar:
 
 # 幾何の基本判定と座標変換
 
-このページは **節** です。同じ対象を扱う技能を比較し、どの発動条件・不変量・計算量の違いで使い分けるかを学びます。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
-
-### この単元では扱わない範囲
-
-- 凸包の境界候補列挙・半平面交差。
-
-## 下位単元と学習順
-
-以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
-
-1. [円環順序・chord交差](./cyclic-order-crossing.md)（標準順 171）— 幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。
-
-## 発動条件と見分け方
+## 概要
 
 ### 幾何の基本判定・配置・座標変換
 
 交差・方向・距離・接触条件を、外積、端点順、格子占有または変換後座標の局所判定にする。
 
-検索語: Manhattan transform、computational geometry、外積判定、計算幾何
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める
+座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
 
-題材: [ABC220 G「Isosceles Trapezium」](https://atcoder.jp/contests/abc220/tasks/abc220_g)
+- 凸包の境界候補列挙・半平面交差。
 
-選定理由: 線分方向の primitive vector (dx,dy) と、二倍中点 (x_i+x_j,y_i+y_j) のその方向への内積を組にすれば、垂直二等分線を実数なしで一意に正規化できる。
+## 下位単元
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。四点図形の条件が、向かい合う二線分が共有する軸・中点・長さなどで特徴付けられるとき。 問題全体への接続は併用技能を学んだ後に読む。
+- [円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/)
 
-#### このOutcomeを支える根拠
+## 問題一覧
 
-- 四点図形の等脚条件を二辺の垂直二等分線一致へ変換し、整数 key の点対 grouping で最大重みを求められる。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### 観察
+1. [ABC385 F「Visible Buildings」](https://atcoder.jp/contests/abc385/tasks/abc385_f)
+2. [ABC426 E「Closest Moment」](https://atcoder.jp/contests/abc426/tasks/abc426_e)
+3. [ABC442 E「Laser Takahashi」](https://atcoder.jp/contests/abc442/tasks/abc442_e)
+4. [ABC223 E「Placing Rectangles」](https://atcoder.jp/contests/abc223/tasks/abc223_e)
+5. [ABC351 E「Jump Distance Sum」](https://atcoder.jp/contests/abc351/tasks/abc351_e)
+6. [ABC220 G「Isosceles Trapezium」](https://atcoder.jp/contests/abc220/tasks/abc220_g)
+7. [ABC234 Ex「Enumerate Pairs」](https://atcoder.jp/contests/abc234/tasks/abc234_h)
+8. [ABC248 E「K-colinear Line」](https://atcoder.jp/contests/abc248/tasks/abc248_e)
+9. [ABC258 F「Main Street」](https://atcoder.jp/contests/abc258/tasks/abc258_f)
+10. [ABC296 G「Polygon and Points」](https://atcoder.jp/contests/abc296/tasks/abc296_g)
+11. [ABC301 G「Worst Picture」](https://atcoder.jp/contests/abc301/tasks/abc301_g)
+12. [ABC353 F「Tile Distance」](https://atcoder.jp/contests/abc353/tasks/abc353_f)
+13. [ABC366 E「Manhattan Multifocal Ellipse」](https://atcoder.jp/contests/abc366/tasks/abc366_e)
+14. [ABC377 F「Avoid Queen Attack」](https://atcoder.jp/contests/abc377/tasks/abc377_f)
+15. [ABC437 F「Manhattan Christmas Tree 2」](https://atcoder.jp/contests/abc437/tasks/abc437_f)
+16. [ABC343 E「7x7x7」](https://atcoder.jp/contests/abc343/tasks/abc343_e)
 
-- 等脚台形の平行な二辺を取り出すと、対称軸である垂直二等分線が一致する。逆に二線分の垂直二等分線が同じで中点が異なれば、その四端点は等脚台形を作る。
-- N≤1000 なので点対を辺候補として全列挙できるが、四点の全列挙はできない。必要なのは同じ垂直二等分線を持つ二辺のうち、中点が異なる重い組である。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 候補を比較する
+## 関連問題
 
-- **採用**: 全点対を正規化した垂直二等分線で group 化し、各 group で中点の異なる二辺の重み和最大を求める。 — 等脚条件の必要十分条件を二辺の共通 key に変え、点対列挙後は group 内の上位候補だけを比較すればよい。
-- **棄却**: 四点集合を全て選び、頂点順を試して辺の平行性と角を判定する。 — 候補数が N^4 であり、N=1000 に対して列挙できない。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 鍵となる着眼
-
-- 線分方向の primitive vector (dx,dy) と、二倍中点 (x_i+x_j,y_i+y_j) のその方向への内積を組にすれば、垂直二等分線を実数なしで一意に正規化できる。
-- 同じ垂直二等分線でも中点が一致する二辺は平行な対辺にならないため、最大辺と組ませる候補は中点 key が異なるものに限る。
-
-#### アルゴリズムへ接続する
-
-各 i<j について方向差を gcd と符号で primitive 化し、bisector key と二倍中点、重み C_i+C_j を記録する。bisector key で分類し、重み降順に見て中点が異なる二候補の最大和を更新し、存在しなければ -1 を出す。
-
-## 下位単元を使い分ける比較例
-
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **円環順序・chord交差** — 直接到達点: 円周をcutして端点を線形化し、交互配置またはlaminar括弧構造からchord交差を判定・数え上げできる。近いが対象外: 円環順序・chord交差の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- **幾何条件の線分対への分解**: 四点図形の条件が、向かい合う二線分が共有する軸・中点・長さなどで特徴付けられるとき。 適用: 全点対を列挙して共通 invariant で group 化し、四点列挙を二辺選択へ落とす。
-- **整数による直線正規化**: 傾き0・無限大を含む直線の一致判定を誤差なく行いたいとき。 適用: 方向係数を gcd と符号で正規化し、直線定数も整数の内積で表す。
-- 図形の名称から辺条件を順に検査せず、図形を特徴付ける対称軸や中心という一つの invariant を探す。
-- 長さの異なる二本の平行辺を描き、なぜ等脚なら垂直二等分線が同じか、また中点一致を除く必要があるかを図で確認する。
-
-## 到達確認
-
-### 到達確認 1 — 幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める
-
-転移題材: [ABC223 E「Placing Rectangles」](https://atcoder.jp/contests/abc223/tasks/abc223_e)
-
-**課題**: ABC223 E「Placing Rectangles」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 連続的な長方形配置を分離補題で定数個の帯分割へ落とし、整数寸法まで含めて必要十分に判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 連続的な長方形配置を分離補題で定数個の帯分割へ落とし、整数寸法まで含めて必要十分に判定できる。
-
-- 対象技能が担う箇所: 連続的な長方形配置を分離補題で定数個の帯分割へ落とし、整数寸法まで含めて必要十分に判定できる。
-- 転移題材の解法接続: A,B,C の6順列と X,Y の二方向を試し、最初の面積に必要な帯を切り取り、残った長方形で残り二面積を縦または横に分割できるか天井除算で調べる。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。
-
-</details>
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC221 G「Jumping sequence」](https://atcoder.jp/contests/abc221/tasks/abc221_g)
+- [ABC225 E「7」](https://atcoder.jp/contests/abc225/tasks/abc225_e)
+- [ABC233 Ex「Manhattan Christmas Tree」](https://atcoder.jp/contests/abc233/tasks/abc233_h)
+- [ABC240 G「Teleporting Takahashi」](https://atcoder.jp/contests/abc240/tasks/abc240_g)
+- [ABC243 Ex「Builder Takahashi (Enhanced version)」](https://atcoder.jp/contests/abc243/tasks/abc243_h)
+- [ABC250 F「One Fourth」](https://atcoder.jp/contests/abc250/tasks/abc250_f)
+- [ABC263 Ex「Intersection 2」](https://atcoder.jp/contests/abc263/tasks/abc263_h)
+- [ABC266 Ex「Snuke Panic (2D)」](https://atcoder.jp/contests/abc266/tasks/abc266_h)
+- [ABC274 F「Fishing」](https://atcoder.jp/contests/abc274/tasks/abc274_f)
+- [ABC280 G「Do Use Hexagon Grid 2」](https://atcoder.jp/contests/abc280/tasks/abc280_g)
+- [ABC283 F「Permutation Distance」](https://atcoder.jp/contests/abc283/tasks/abc283_f)
+- [ABC314 Ex「Disk and Segments」](https://atcoder.jp/contests/abc314/tasks/abc314_h)
+- [ABC315 F「Shortcuts」](https://atcoder.jp/contests/abc315/tasks/abc315_f)
+- [ABC323 F「Push and Carry」](https://atcoder.jp/contests/abc323/tasks/abc323_f)
+- [ABC405 F「Chord Crossing」](https://atcoder.jp/contests/abc405/tasks/abc405_f)
+- [ABC410 G「Longest Chord Chain」](https://atcoder.jp/contests/abc410/tasks/abc410_g)
+- [ABC422 E「Colinear」](https://atcoder.jp/contests/abc422/tasks/abc422_e)
+- [ABC424 F「Adding Chords」](https://atcoder.jp/contests/abc424/tasks/abc424_f)
+- [ABC457 G「Catch All Apples」](https://atcoder.jp/contests/abc457/tasks/abc457_g)
 
 ## 根拠
 
@@ -156,4 +84,4 @@ sidebar:
 - [ABC223 E 公式問題文](https://atcoder.jp/contests/abc223/tasks/abc223_e)
 - [ABC223 E 公式解説](https://atcoder.jp/contests/abc223/editorial/2781)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-geometry-primitives`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-geometry-primitives`

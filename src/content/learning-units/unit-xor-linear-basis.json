@@ -33,68 +33,20 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md",
   "problemIds": [
     "abc223-h",
-    "abc236-f",
+    "abc249-g",
+    "abc283-g"
+  ],
+  "directProblemIds": [
     "abc249-g",
     "abc283-g",
+    "abc223-h"
+  ],
+  "relatedProblemIds": [
+    "abc236-f",
     "abc451-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-maintain-xor-linear-basis",
-      "learningOutcomeIds": [
-        "outcome-maintain-xor-linear-basis"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。部分集合XORの実現可能性を問われ、値のbit幅が小さく固定されているとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC223 H「Xor Query」について、部分列の要素を選んだXORは、各数の二進表現を F_2 上の60次元ベクトルと見たときの線形結合である。したがって各問い合わせは区間ベクトルが X を生成するかという所属判定になる。",
-      "procedure": [
-        "観察: 部分列の要素を選んだXORは、各数の二進表現を F_2 上の60次元ベクトルと見たときの線形結合である。したがって各問い合わせは区間ベクトルが X を生成するかという所属判定になる。",
-        "着眼: 右端 r のprefixから、各suffixのspanが変化する添字だけを残すと、その集合は全prefixのspanの基底であり、添字が l 以上のものだけで span(A_l,…,A_r) を生成できる。",
-        "着眼: 新しいベクトルを挿入するとき同じpivotの古いベクトルより新しい添字を優先して交換すると、各pivotの表現可能範囲を最も右へ保てる。",
-        "方針: 右端を左から伸ばしながら、各pivotにできるだけ新しい添字を残すXOR線形基底を管理し、Rごとの問い合わせをその基底で判定する。（基底の次元は高々60であり、各基底ベクトルに区間左端の可否を判定する添字情報を持たせれば、N,Qの大きさに依らず一問を60bitで処理できる。）",
-        "接続: 問い合わせをRでまとめ、A_Rを添字付き線形基底へ挿入する。Xを高bitから、添字がL以上のpivotだけで消去し、0まで落とせればYesとする。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-maintain-xor-linear-basis",
-      "learningOutcomeIds": [
-        "outcome-maintain-xor-linear-basis"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC249 G「Xor Cards」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: AのXORがK以下となる非空カード集合の中で、BのXORの最大値を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: AのXORがK以下となる非空カード集合の中で、BのXORの最大値を求められる。",
-          "転移題材の解法接続: (A_i,B_i)を連結したベクトルにガウス消去を行い、A側の上位ビットからK以下となる分岐を探索する。Kとの大小が確定した各候補で残余基底によるBの最大XORを求め、最大値を採用する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 79,

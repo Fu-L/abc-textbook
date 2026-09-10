@@ -15,11 +15,7 @@
     "source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235",
     "source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b",
     "source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81",
-    "source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a",
-    "source-abc281-e-problem-d11db2b277b008f6758177c2a8c9dba9b4523974a151f78e84dcd865c5a052c3",
-    "source-abc281-editorial-5368-7f7b3eb734d53ddac960e9b66733c44c86def4cd7d960ac3b14835a4669980bf",
-    "source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd",
-    "source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928"
+    "source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a"
   ],
   "tagIds": [
     "tag-ordered-set-multiset"
@@ -36,86 +32,41 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/ordered-set-multiset.md",
   "problemIds": [
+    "abc281-e",
+    "abc306-e",
+    "abc308-g",
+    "abc314-g",
+    "abc330-e",
+    "abc356-f",
+    "abc431-g"
+  ],
+  "directProblemIds": [
+    "abc306-e",
+    "abc308-g",
+    "abc330-e",
+    "abc281-e",
+    "abc314-g",
+    "abc356-f",
+    "abc431-g"
+  ],
+  "relatedProblemIds": [
     "abc218-g",
     "abc245-e",
     "abc268-ex",
     "abc273-ex",
     "abc275-ex",
-    "abc281-e",
-    "abc306-e",
-    "abc308-g",
-    "abc314-g",
     "abc319-g",
     "abc320-e",
     "abc324-g",
-    "abc330-e",
-    "abc356-f",
     "abc364-f",
     "abc368-g",
     "abc406-g",
     "abc407-f",
     "abc418-f",
-    "abc431-g",
     "abc444-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-maintain-ordered-set-statistics",
-      "learningOutcomeIds": [
-        "outcome-maintain-ordered-set-statistics"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。動的multisetの小さい方K個と残りを分け、その集約値を維持したいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC281 E「Least Elements」について、隣接windowは左端1要素を削除し右端1要素を追加するだけなので、毎回sortし直す情報の大半は共通である。",
-      "procedure": [
-        "観察: 隣接windowは左端1要素を削除し右端1要素を追加するだけなので、毎回sortし直す情報の大半は共通である。",
-        "観察: windowを小さいK個のmultiset Lと残りRに分ければ、答えはsum(L)であり、必要な不変条件は|L|=Kかつmax(L)≤min(R)である。",
-        "着眼: 新値をmax(L)以下ならL、そうでなければRへ入れればorder不変量を保てる。削除後を含め|L|はK±1以内なので1回のrebalanceで足りる。",
-        "着眼: 重複値があるため、削除対象をどちらのmultisetに属するか判定し、iteratorまたは(value,index)で1個だけ消す必要がある。",
-        "方針: ordered multiset L,RとsumLを維持し、削除・挿入後に境界要素を高々1個移して|L|=Kへ戻す。（window更新2要素だけを対数時間で反映し、K最小値の和を直接保持できる。）",
-        "接続: 初windowをsortしてK個をL、残りをRへ入れsumLを作る。slideごとにoutgoingを所属setから削除し、incomingを境界比較で挿入する。|L|<KならminRをLへ、>KならmaxLをRへ移しsumLを更新して出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-maintain-ordered-set-statistics",
-      "learningOutcomeIds": [
-        "outcome-maintain-ordered-set-statistics"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC306 E「Best Performances」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: point update後のlargest K valuesのsumを対数時間で出力できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: point update後のlargest K valuesのsumを対数時間で出力できる。",
-          "転移題材の解法接続: dynamic top-K aggregateをorder-statistic boundaryで二分したmultisetsとrunning sumにより維持する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 60,

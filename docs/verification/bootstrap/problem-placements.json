@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "evidenceId": "bootstrap-canonical-problem-placements",
   "status": "passed",
-  "evidenceScope": "T049 taxonomy decisions and CorrectionImpact mapping completeness only. CorrectionImpact target verification stays pending until Problem authoring, executable attainment review, and the T160 derived-index projection are complete.",
+  "evidenceScope": "T049 taxonomy decisions and CorrectionImpact mapping completeness only. CorrectionImpact target verification stays pending until Problem authoring, content review, and the T160 derived-index projection are complete.",
   "deferredVerificationTaskIds": [
     "T057",
     "T058",
@@ -24,8 +24,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50",
-    "acceptedAt": "2026-09-08T13:23:02.761Z"
+    "digest": "9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa",
+    "acceptedAt": "2026-09-09T17:04:36.563Z"
   },
   "problemCount": 868,
   "uniqueProblemCount": 868,
@@ -35,11 +35,11 @@
     "similar": 0,
     "supplement": 0
   },
-  "tagAssignmentCount": 1745,
+  "tagAssignmentCount": 1744,
   "correctionImpactCount": 12,
   "previewTaxonomyChangeCount": 12,
-  "placementDigest": "ab448e8b9148dfc3a1cb6b015eed7de50c801c5f31371377cb1f78e119e32cb1",
-  "correctionImpactDigest": "2577cf4f8e2bbee5d90b19ee52d62c716275691bdf52e72f90c0688fa5829809",
+  "placementDigest": "39e8f5c08aca55783389f8897353045bc30b7f5c65c3e4beb384f6c924ff08a9",
+  "correctionImpactDigest": "d5154d05bb81da28d7b15fe937af487ec8770b9d81bf577062605f30d47e046e",
   "checks": [
     {
       "checkId": "accepted-build-binding",

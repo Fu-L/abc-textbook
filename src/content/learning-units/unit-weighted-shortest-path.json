@@ -35,104 +35,71 @@
   "docPath": "src/content/docs/learn/graph/weighted-shortest-path.md",
   "problemIds": [
     "abc213-e",
-    "abc218-f",
     "abc232-g",
     "abc237-e",
     "abc243-e",
     "abc243-ex",
     "abc245-g",
     "abc246-e",
-    "abc250-ex",
-    "abc252-e",
     "abc257-f",
-    "abc261-g",
-    "abc264-g",
-    "abc271-e",
     "abc277-e",
     "abc286-e",
     "abc291-f",
-    "abc297-e",
-    "abc301-e",
-    "abc305-e",
     "abc307-f",
-    "abc308-ex",
     "abc325-e",
-    "abc338-f",
     "abc342-e",
     "abc363-e",
-    "abc364-g",
     "abc369-e",
-    "abc375-f",
-    "abc375-g",
-    "abc393-g",
     "abc395-e",
-    "abc395-g",
     "abc414-g",
     "abc416-e",
-    "abc429-f",
     "abc431-e",
     "abc463-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-model-and-compute-shortest-path",
-      "learningOutcomeIds": [
-        "outcome-model-and-compute-shortest-path"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。グラフの辺重みが 0 と 1 だけで、頂点までの最小費用を求めるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC213 E「Stronger Takahashi」について、通路どうしは上下左右へ自由に移動でき、費用が増えるのは 2×2 の領域をパンチして壁を壊すときだけである。",
-      "procedure": [
-        "観察: 通路どうしは上下左右へ自由に移動でき、費用が増えるのは 2×2 の領域をパンチして壁を壊すときだけである。",
-        "観察: パンチは実際に通行が必要になった時点まで遅らせられるため、過去にどの壁を壊したかを状態として保持する必要はない。",
-        "着眼: 壊した壁を永続的な盤面状態として追う代わりに、パンチ一回で到達可能になる近傍マスへの有料辺へ操作を畳み込む。",
-        "着眼: 徒歩辺は元から通路の上下左右だけだが、パンチ辺の到着先は元のマスが壁か通路かにかかわらず利用できる。",
-        "方針: 徒歩を重み 0、現在位置に隣接する 2×2 領域へのパンチ後の移動を重み 1 の辺としてマス間グラフを作る。（各操作の費用が 0 または 1 で、位置ごとの最小パンチ数だけを 0-1 BFS で確定できる。）",
-        "接続: 不可逆な盤面変更を位置間の 0・1 重み付き遷移へ置換し、距離更新が 0 の頂点を deque の前、1 の頂点を後ろへ入れる最短路探索を行う。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc213-e",
+    "abc237-e",
+    "abc325-e",
+    "abc245-g",
+    "abc246-e",
+    "abc277-e",
+    "abc286-e",
+    "abc291-f",
+    "abc342-e",
+    "abc363-e",
+    "abc395-e",
+    "abc416-e",
+    "abc431-e",
+    "abc463-e",
+    "abc232-g",
+    "abc243-e",
+    "abc243-ex",
+    "abc257-f",
+    "abc369-e",
+    "abc414-g",
+    "abc307-f"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-model-and-compute-shortest-path",
-      "learningOutcomeIds": [
-        "outcome-model-and-compute-shortest-path"
-      ],
-      "prerequisiteIds": [
-        "outcome-select-state-graph-search",
-        "prereq-abc-advanced-v1",
-        "unit-state-graph-search"
-      ],
-      "attainmentCondition": "学習成果「移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC232 G「Modulo Shortest Path」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: mod 加法で定まる完全グラフを循環座標の疎な補助グラフへ変換し、最短路を計算できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: mod 加法で定まる完全グラフを循環座標の疎な補助グラフへ変換し、最短路を計算できる。",
-          "転移題材の解法接続: 加法 mod M の完全グラフ辺を円周距離へ因数分解し、座標圧縮した循環補助グラフ上の通常の非負最短路としてダイクストラ法を適用する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
+  "relatedProblemIds": [
+    "abc218-f",
+    "abc250-ex",
+    "abc252-e",
+    "abc261-g",
+    "abc264-g",
+    "abc271-e",
+    "abc297-e",
+    "abc301-e",
+    "abc305-e",
+    "abc308-ex",
+    "abc338-f",
+    "abc364-g",
+    "abc375-f",
+    "abc375-g",
+    "abc393-g",
+    "abc395-g",
+    "abc429-f"
   ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 75,

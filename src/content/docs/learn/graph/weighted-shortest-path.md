@@ -1,6 +1,6 @@
 ---
 title: "最短路モデル"
-description: "前提から最短路モデルを見抜き、方針へ接続して検証するための学習単位。"
+description: "最短路モデルの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 155
@@ -8,110 +8,71 @@ sidebar:
 
 # 最短路モデル
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 状態グラフのモデリングと探索
-- この位置で学ぶ理由: 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。
-
-### この単元では扱わない範囲
-
-- 最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### 最短路モデル
 
 重み付きグラフに帰着し、距離の確定条件に応じた最短路法を選ぶ。
 
-検索語: Bellman–Ford法、Dijkstra法、shortest path、最短経路
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: 状態グラフのモデリングと探索。
 
-### 例 1 — 移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる
+基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。
 
-題材: [ABC213 E「Stronger Takahashi」](https://atcoder.jp/contests/abc213/tasks/abc213_e)
+- 最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: 壊した壁を永続的な盤面状態として追う代わりに、パンチ一回で到達可能になる近傍マスへの有料辺へ操作を畳み込む。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。グラフの辺重みが 0 と 1 だけで、頂点までの最小費用を求めるとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC213 E「Stronger Takahashi」](https://atcoder.jp/contests/abc213/tasks/abc213_e)
+2. [ABC237 E「Skiing」](https://atcoder.jp/contests/abc237/tasks/abc237_e)
+3. [ABC325 E「Our clients, please wait a moment」](https://atcoder.jp/contests/abc325/tasks/abc325_e)
+4. [ABC245 G「Foreign Friends」](https://atcoder.jp/contests/abc245/tasks/abc245_g)
+5. [ABC246 E「Bishop 2」](https://atcoder.jp/contests/abc246/tasks/abc246_e)
+6. [ABC277 E「Crystal Switches」](https://atcoder.jp/contests/abc277/tasks/abc277_e)
+7. [ABC286 E「Souvenir」](https://atcoder.jp/contests/abc286/tasks/abc286_e)
+8. [ABC291 F「Teleporter and Closed off」](https://atcoder.jp/contests/abc291/tasks/abc291_f)
+9. [ABC342 E「Last Train」](https://atcoder.jp/contests/abc342/tasks/abc342_e)
+10. [ABC363 E「Sinking Land」](https://atcoder.jp/contests/abc363/tasks/abc363_e)
+11. [ABC395 E「Flip Edge」](https://atcoder.jp/contests/abc395/tasks/abc395_e)
+12. [ABC416 E「Development」](https://atcoder.jp/contests/abc416/tasks/abc416_e)
+13. [ABC431 E「Reflection on Grid」](https://atcoder.jp/contests/abc431/tasks/abc431_e)
+14. [ABC463 E「Roads and Gates」](https://atcoder.jp/contests/abc463/tasks/abc463_e)
+15. [ABC232 G「Modulo Shortest Path」](https://atcoder.jp/contests/abc232/tasks/abc232_g)
+16. [ABC243 E「Edge Deletion」](https://atcoder.jp/contests/abc243/tasks/abc243_e)
+17. [ABC243 Ex「Builder Takahashi (Enhanced version)」](https://atcoder.jp/contests/abc243/tasks/abc243_h)
+18. [ABC257 F「Teleporter Setting」](https://atcoder.jp/contests/abc257/tasks/abc257_f)
+19. [ABC369 E「Sightseeing Tour」](https://atcoder.jp/contests/abc369/tasks/abc369_e)
+20. [ABC414 G「AtCoder Express 4」](https://atcoder.jp/contests/abc414/tasks/abc414_g)
+21. [ABC307 F「Virus 2」](https://atcoder.jp/contests/abc307/tasks/abc307_f)
 
-- 盤面を変更する操作の履歴を局所的な重み付き辺へ圧縮し、0-1 BFS で最小操作回数を求められる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 通路どうしは上下左右へ自由に移動でき、費用が増えるのは 2×2 の領域をパンチして壁を壊すときだけである。
-- パンチは実際に通行が必要になった時点まで遅らせられるため、過去にどの壁を壊したかを状態として保持する必要はない。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 徒歩を重み 0、現在位置に隣接する 2×2 領域へのパンチ後の移動を重み 1 の辺としてマス間グラフを作る。 — 各操作の費用が 0 または 1 で、位置ごとの最小パンチ数だけを 0-1 BFS で確定できる。
-- **棄却**: 現在位置に加えて、これまでに破壊した全ての 2×2 領域または壁集合を状態として探索する。 — 破壊履歴の組合せが膨大であり、同じ位置への到達を履歴ごとに分ける必要もない。
-
-#### 鍵となる着眼
-
-- 壊した壁を永続的な盤面状態として追う代わりに、パンチ一回で到達可能になる近傍マスへの有料辺へ操作を畳み込む。
-- 徒歩辺は元から通路の上下左右だけだが、パンチ辺の到着先は元のマスが壁か通路かにかかわらず利用できる。
-
-#### アルゴリズムへ接続する
-
-不可逆な盤面変更を位置間の 0・1 重み付き遷移へ置換し、距離更新が 0 の頂点を deque の前、1 の頂点を後ろへ入れる最短路探索を行う。
-
-
-## 転用するときの確認
-
-- **0-1 BFS**: グラフの辺重みが 0 と 1 だけで、頂点までの最小費用を求めるとき。 適用: 無料の徒歩移動を deque の前、有料のパンチ移動を後ろへ追加して最小パンチ数を更新する。
-- **操作履歴の辺への圧縮**: 環境を変更する操作があるが、必要になる直前へ遅延しても最適性が失われないとき。 適用: 破壊済み壁集合を持たず、パンチ一回後に到達できる一定範囲のマスへ重み 1 の辺を張る。
-- 局所的な破壊操作では、操作領域そのものより「現在地から一操作後に到達できる位置集合」を列挙すると状態を減らせる。
-- 破壊状態が指数的に見えたら、破壊を必要になる瞬間まで延期できるかを検討し、位置だけの状態へ戻せないか考える。
-- パンチ範囲の図を単に暗記せず、現在地に隣接する各 2×2 領域から到達可能な相対位置の和集合として復元する。
-
-## 到達確認
-
-### 到達確認 1 — 移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる
-
-転移題材: [ABC232 G「Modulo Shortest Path」](https://atcoder.jp/contests/abc232/tasks/abc232_g)
-
-**課題**: ABC232 G「Modulo Shortest Path」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: mod 加法で定まる完全グラフを循環座標の疎な補助グラフへ変換し、最短路を計算できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- mod 加法で定まる完全グラフを循環座標の疎な補助グラフへ変換し、最短路を計算できる。
-
-- 対象技能が担う箇所: mod 加法で定まる完全グラフを循環座標の疎な補助グラフへ変換し、最短路を計算できる。
-- 転移題材の解法接続: 加法 mod M の完全グラフ辺を円周距離へ因数分解し、座標圧縮した循環補助グラフ上の通常の非負最短路としてダイクストラ法を適用する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる。
-
-</details>
-
+- [ABC218 F「Blocked Roads」](https://atcoder.jp/contests/abc218/tasks/abc218_f)
+- [ABC250 Ex「Trespassing Takahashi」](https://atcoder.jp/contests/abc250/tasks/abc250_h)
+- [ABC252 E「Road Reduction」](https://atcoder.jp/contests/abc252/tasks/abc252_e)
+- [ABC261 G「Replace」](https://atcoder.jp/contests/abc261/tasks/abc261_g)
+- [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
+- [ABC271 E「Subsequence Path」](https://atcoder.jp/contests/abc271/tasks/abc271_e)
+- [ABC297 E「Kth Takoyaki Set」](https://atcoder.jp/contests/abc297/tasks/abc297_e)
+- [ABC301 E「Pac-Takahashi」](https://atcoder.jp/contests/abc301/tasks/abc301_e)
+- [ABC305 E「Art Gallery on Graph」](https://atcoder.jp/contests/abc305/tasks/abc305_e)
+- [ABC308 Ex「Make Q」](https://atcoder.jp/contests/abc308/tasks/abc308_h)
+- [ABC338 F「Negative Traveling Salesman」](https://atcoder.jp/contests/abc338/tasks/abc338_f)
+- [ABC364 G「Last Major City」](https://atcoder.jp/contests/abc364/tasks/abc364_g)
+- [ABC375 F「Road Blocked」](https://atcoder.jp/contests/abc375/tasks/abc375_f)
+- [ABC375 G「Road Blocked 2」](https://atcoder.jp/contests/abc375/tasks/abc375_g)
+- [ABC393 G「Unevenness」](https://atcoder.jp/contests/abc393/tasks/abc393_g)
+- [ABC395 G「Minimum Steiner Tree 2」](https://atcoder.jp/contests/abc395/tasks/abc395_g)
+- [ABC429 F「Shortest Path Query」](https://atcoder.jp/contests/abc429/tasks/abc429_f)
 
 ## 根拠
 
@@ -122,4 +83,4 @@ sidebar:
 - [ABC232 G 公式解説](https://atcoder.jp/contests/abc232/editorial/3141)
 - [ABC232 G 公式問題文](https://atcoder.jp/contests/abc232/tasks/abc232_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-weighted-shortest-path`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-weighted-shortest-path`

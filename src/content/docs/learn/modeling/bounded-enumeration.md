@@ -1,6 +1,6 @@
 ---
 title: "候補数を界して全列挙・有限case分解する"
-description: "前提から候補数を界して全列挙・有限case分解するを見抜き、方針へ接続して検証するための学習単位。"
+description: "候補数を界して全列挙・有限case分解するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 25
@@ -8,110 +8,74 @@ sidebar:
 
 # 候補数を界して全列挙・有限case分解する
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 制約、生成パラメータ、固定選択数、有限な幾何caseから候補総数を先に界し、全候補を漏れなく評価する。
-
-### この単元では扱わない範囲
-
-- 探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。
-
-## 発動条件と見分け方
+## 概要
 
 ### 有界全列挙・有限case分解
 
 制約、少数の生成パラメータ、固定選択数、有限な幾何caseから候補総数を直接界し、全候補を評価する。
 
-検索語: bounded exhaustive search、finite case enumeration、制約を利用した全探索、小さい候補集合の全列挙
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる
+制約、生成パラメータ、固定選択数、有限な幾何caseから候補総数を先に界し、全候補を漏れなく評価する。
 
-題材: [ABC227 F「Treasure Hunting」](https://atcoder.jp/contests/abc227/tasks/abc227_f)
+- 探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。
 
-選定理由: Xが大きい方からK番目なら、Xより大きい値の個数はK未満で、X以上の値の個数はK以上である。したがって全ての>Xと必要個数の=Xを採用すれば、採用値は上位K個と一致する。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。集合や経路の最大側K個の和など、順位で選ばれる要素の総和を最適化するとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC234 E「Arithmetic Number」](https://atcoder.jp/contests/abc234/tasks/abc234_e)
+2. [ABC386 E「Maximize XOR」](https://atcoder.jp/contests/abc386/tasks/abc386_e)
+3. [ABC442 G「Lightweight Knapsack」](https://atcoder.jp/contests/abc442/tasks/abc442_g)
+4. [ABC219 E「Moat」](https://atcoder.jp/contests/abc219/tasks/abc219_e)
+5. [ABC254 E「Small d and k」](https://atcoder.jp/contests/abc254/tasks/abc254_e)
+6. [ABC272 E「Add and Mex」](https://atcoder.jp/contests/abc272/tasks/abc272_e)
+7. [ABC312 E「Tangency of Cuboids」](https://atcoder.jp/contests/abc312/tasks/abc312_e)
+8. [ABC328 E「Modulo MST」](https://atcoder.jp/contests/abc328/tasks/abc328_e)
+9. [ABC227 F「Treasure Hunting」](https://atcoder.jp/contests/abc227/tasks/abc227_f)
+10. [ABC313 F「Flip Machines」](https://atcoder.jp/contests/abc313/tasks/abc313_f)
+11. [ABC347 F「Non-overlapping Squares」](https://atcoder.jp/contests/abc347/tasks/abc347_f)
 
-- K番目候補Xを有限列挙し、>X・<X・=Xを区別するexact-k grid DPで各経路の上位K個和を正しく最小化できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 右・下だけの経路でも候補数は二項係数個あるため全経路は試せない。通常の経路DPは加法的なコストを扱えるが、今回は経路上の大きい方K個だけの和であり、そのままでは局所遷移に分解できない。
-- 大きい方からK番目の値をXと固定すると、Xより大きい通過マスは全て採用し、Xと等しい通過マスから不足分を選んで、ちょうどK個の採用値和として評価できる。Xの候補は盤面に現れる値だけで十分である。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 閾値Xを盤面の各値に固定し、X以上の値をちょうどk個採用した最小和をdp[k][i][j]で求める。 — a>Xは採用、a<Xは不採用を強制し、a=Xだけ採用・不採用の両遷移を許せば、同値を含む上位K個をちょうど選んだ状態を局所遷移で表せる。
-- **棄却**: 経路ごとに通過値を保持し、終点でsortして上位K個を求める。 — 単調経路の本数が指数的なうえ、通過値集合が同じマスへの履歴を合流させない。
-
-#### 鍵となる着眼
-
-- Xが大きい方からK番目なら、Xより大きい値の個数はK未満で、X以上の値の個数はK以上である。したがって全ての>Xと必要個数の=Xを採用すれば、採用値は上位K個と一致する。
-- 値がXのマスでは採用してkを1増やす遷移と、不採用のまま進む遷移の両方が必要である。片方だけにすると同値Xが複数ある経路で、ちょうどK個を選ぶ解を失う。
-
-#### アルゴリズムへ接続する
-
-盤面の各A[p][q]をXとして、dp[k][i][j]を左上から(i,j)まででX以上の値をちょうどk個採用した採用値和の最小値とする。次の値aがXより大きければ採用だけ、小さければ不採用だけ、等しければ両方へ遷移する。始点も同じ規則で初期化し、全Xに対するdp[K][H-1][W-1]の最小を答える。
-
-
-## 転用するときの確認
-
-- **K番目の値の有限候補列挙**: 集合や経路の最大側K個の和など、順位で選ばれる要素の総和を最適化するとき。 適用: K番目の値Xは入力値のいずれかなので、盤面上の値を外側で全列挙し、各Xに対する最適経路を比較する。
-- **閾値・採用個数付き単調grid DP**: 右・下の単調経路で、閾値以上からちょうどK個を選んだ最小和を求めるとき。 適用: 位置(i,j)に採用個数kを加え、値とXの大小に応じて採用・不採用を遷移する。境界a=Xでは両遷移を残す。
-- 順位に依存する目的関数を閾値化したら、最適値が変化する臨界点を入力値から列挙できないか調べる。
-- 「大きい方K個」が見えたら、K番目をXと固定したときに>Xを全採用し、=Xから何個選ぶべきかを小さいソート済み列で確認する。
-- a=Xで採用・不採用の両遷移を実装し、終点で採用個数がちょうどKの状態だけを比較する。
-
-## 到達確認
-
-### 到達確認 1 — 制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる
-
-転移題材: [ABC219 E「Moat」](https://atcoder.jp/contests/abc219/tasks/abc219_e)
-
-**課題**: ABC219 E「Moat」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 格子上の直交多角形をセル mask に離散化し、内部・外部双方の連結性で単純な境界を判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 格子上の直交多角形をセル mask に離散化し、内部・外部双方の連結性で単純な境界を判定できる。
-
-- 対象技能が担う箇所: 格子上の直交多角形をセル mask に離散化し、内部・外部双方の連結性で単純な境界を判定できる。
-- 転移題材の解法接続: 各 mask について村 bit が全て立っているか確認し、選択セルを4近傍探索して選択数と到達数を比較する。さらに盤面を外枠付きに拡張し、外枠から非選択セルだけを探索して未到達の空セルがなければ答えへ加える。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。
-
-</details>
-
+- [ABC220 G「Isosceles Trapezium」](https://atcoder.jp/contests/abc220/tasks/abc220_g)
+- [ABC223 E「Placing Rectangles」](https://atcoder.jp/contests/abc223/tasks/abc223_e)
+- [ABC226 F「Score of Permutations」](https://atcoder.jp/contests/abc226/tasks/abc226_f)
+- [ABC227 H「Eat Them All」](https://atcoder.jp/contests/abc227/tasks/abc227_h)
+- [ABC234 Ex「Enumerate Pairs」](https://atcoder.jp/contests/abc234/tasks/abc234_h)
+- [ABC240 Ex「Sequence of Substrings」](https://atcoder.jp/contests/abc240/tasks/abc240_h)
+- [ABC240 F「Sum Sum Max」](https://atcoder.jp/contests/abc240/tasks/abc240_f)
+- [ABC248 E「K-colinear Line」](https://atcoder.jp/contests/abc248/tasks/abc248_e)
+- [ABC257 F「Teleporter Setting」](https://atcoder.jp/contests/abc257/tasks/abc257_f)
+- [ABC258 F「Main Street」](https://atcoder.jp/contests/abc258/tasks/abc258_f)
+- [ABC260 F「Find 4-cycle」](https://atcoder.jp/contests/abc260/tasks/abc260_f)
+- [ABC270 F「Transportation」](https://atcoder.jp/contests/abc270/tasks/abc270_f)
+- [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
+- [ABC284 E「Count Simple Paths」](https://atcoder.jp/contests/abc284/tasks/abc284_e)
+- [ABC290 G「Edge Elimination」](https://atcoder.jp/contests/abc290/tasks/abc290_g)
+- [ABC293 F「Zero or One」](https://atcoder.jp/contests/abc293/tasks/abc293_f)
+- [ABC298 G「Strawberry War」](https://atcoder.jp/contests/abc298/tasks/abc298_g)
+- [ABC301 G「Worst Picture」](https://atcoder.jp/contests/abc301/tasks/abc301_g)
+- [ABC302 G「Sort from 1 to 4」](https://atcoder.jp/contests/abc302/tasks/abc302_g)
+- [ABC323 F「Push and Carry」](https://atcoder.jp/contests/abc323/tasks/abc323_f)
+- [ABC331 E「Set Meal」](https://atcoder.jp/contests/abc331/tasks/abc331_e)
+- [ABC343 E「7x7x7」](https://atcoder.jp/contests/abc343/tasks/abc343_e)
+- [ABC353 F「Tile Distance」](https://atcoder.jp/contests/abc353/tasks/abc353_f)
+- [ABC369 E「Sightseeing Tour」](https://atcoder.jp/contests/abc369/tasks/abc369_e)
+- [ABC387 E「Digit Sum Divisible 2」](https://atcoder.jp/contests/abc387/tasks/abc387_e)
+- [ABC409 F「Connecting Points」](https://atcoder.jp/contests/abc409/tasks/abc409_f)
+- [ABC410 F「Balanced Rectangles」](https://atcoder.jp/contests/abc410/tasks/abc410_f)
+- [ABC418 E「Trapezium」](https://atcoder.jp/contests/abc418/tasks/abc418_e)
+- [ABC419 G「Count Simple Paths 2」](https://atcoder.jp/contests/abc419/tasks/abc419_g)
+- [ABC459 G「Golf 2」](https://atcoder.jp/contests/abc459/tasks/abc459_g)
 
 ## 根拠
 
@@ -121,7 +85,5 @@ sidebar:
 - [ABC220 G 公式問題文](https://atcoder.jp/contests/abc220/tasks/abc220_g)
 - [ABC223 E 公式問題文](https://atcoder.jp/contests/abc223/tasks/abc223_e)
 - [ABC223 E 公式解説](https://atcoder.jp/contests/abc223/editorial/2781)
-- [ABC227 F 公式解説](https://atcoder.jp/contests/abc227/editorial/2914)
-- [ABC227 F 公式問題文](https://atcoder.jp/contests/abc227/tasks/abc227_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-bounded-enumeration`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-bounded-enumeration`

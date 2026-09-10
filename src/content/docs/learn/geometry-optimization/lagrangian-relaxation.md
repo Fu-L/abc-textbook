@@ -1,6 +1,6 @@
 ---
 title: "Lagrangian relaxation・Aliens trick"
-description: "前提からLagrangian relaxation・Aliens trickを見抜き、方針へ接続して検証するための学習単位。"
+description: "Lagrangian relaxation・Aliens trickの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 201
@@ -8,116 +8,41 @@ sidebar:
 
 # Lagrangian relaxation・Aliens trick
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 一次元凸・単峰最適化
-- この位置で学ぶ理由: 一次元凸・単峰最適化で得た考え方と実装を再利用し、Lagrangian relaxation・Aliens trickの発動条件・正当化・境界を重複なく学ぶ。
-
-### この単元では扱わない範囲
-
-- Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### Lagrangian relaxation・Aliens trick
 
 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。
 
-検索語: Aliens DP、Aliens trick、ラグランジュ緩和
+最小化でg(λ)=min_k(f(k)+λk)と置くと、g(λ)-λK≤f(K)は常に下界に過ぎない。f(k+1)-f(k)が単調非減少など、Kで支持直線に接する根拠を証明して初めて等号で復元できる。整数λだけを探す場合は必要な支持傾きが探索範囲にあることも確認する。
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+反例f(0)=0,f(1)=10,f(2)=0では、どのλでもk=1は選ばれず、K=1の最大双対下界は0。個数の単調性や同点時の個数優先だけでは真の値10を復元できない。
 
-## ガイド例
+## 前提と範囲
 
-### 正当化と転用の境界
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-- 最小化でg(λ)=min_k(f(k)+λk)と置くと、g(λ)-λK≤f(K)は常に下界に過ぎない。f(k+1)-f(k)が単調非減少など、Kで支持直線に接する根拠を証明して初めて等号で復元できる。整数λだけを探す場合は必要な支持傾きが探索範囲にあることも確認する。
-- 反例f(0)=0,f(1)=10,f(2)=0では、どのλでもk=1は選ばれず、K=1の最大双対下界は0。個数の単調性や同点時の個数優先だけでは真の値10を復元できない。
-- 到達確認では、(1)個数別最適値の定義、(2)双対ギャップがない証明、(3)oracleの同点処理と個数単調性、(4)g(λ)-λKの復元式を別々に説明する。最小化と最大化を取り違えない。
+追加前提: 一次元凸・単峰最適化。
 
-### 例 1 — 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
+一次元凸・単峰最適化で得た考え方と実装を再利用し、Lagrangian relaxation・Aliens trickの発動条件・正当化・境界を重複なく学ぶ。
 
-題材: [ABC305 Ex「Shojin」](https://atcoder.jp/contests/abc305/tasks/abc305_h)
+- Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: problem pの追加によるfatigue増分は、既存集合が大きいほど前後のaffine composition係数が大きくなり増加するため、fはsupermodularになる。
+## 問題一覧
 
-この例で扱う範囲: 個数別最小費用f(k)を定義した後の離散凸性の証明、penalty oracle、個数の境界探索を扱う。操作の順序付けとoracle高速化は別工程として区別する。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC400 G「Patisserie ABC 3」](https://atcoder.jp/contests/abc400/tasks/abc400_g)
+2. [ABC305 Ex「Shojin」](https://atcoder.jp/contests/abc305/tasks/abc305_h)
+3. [ABC393 G「Unevenness」](https://atcoder.jp/contests/abc393/tasks/abc393_g)
 
-- budget X内で必要なminimum practice daysと、そのdays数でのminimum total energyを求められる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 一日のproblem集合を固定すると、adjacent exchangeよりA>1の問題はB/(A−1)昇順、A=1の問題は最後に並べるのがminimum fatigueになる。
-- segment cost c(l,r)=f({l+1,…,r})は集合costのincreasing marginal propertyからquadrangle inequalityを満たし、K segmentsのminimum d(K)はKについてdiscrete convexになる。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 一日ごとのpenalty pを加えたAliens DPでmin(cost+p×days)を求め、convex envelopeとternary searchからd(K)≤Xとなる最小Dを復元する。 — Monge性がdays別最適costの凸性を保証し、Xを超えるedgesを除く高速DPと合わせてO(N log^2 X)にできる。
-- **棄却**: dp[k][r]=min_l dp[k−1][l]+c(l,r)を全K,l,rについて計算する。 — N^2以上のsegment transitionsとなりN=20万を扱えない。
-
-#### 鍵となる着眼
-
-- problem pの追加によるfatigue増分は、既存集合が大きいほど前後のaffine composition係数が大きくなり増加するため、fはsupermodularになる。
-- penalty pで得るG(p)=min_K(d(K)+pK)から D=ceil(max_p((G(p)−X)/p)) と表せ、この比は探索可能なunimodal shapeを持つ。
-
-#### アルゴリズムへ接続する
-
-affine-composition orderingからsegment-cost Monge性を導き、partition shortest pathをLagrangian relaxation/Aliens DPとconvex dual searchで解く。
-
-
-## 転用するときの確認
-
-- **隣接交換による最適順序**: operationsの順序だけを変えられ、二操作の前後比較からscalar keyを導けるとき。 適用: B_p(A_q−1)とB_q(A_p−1)をcross multiplyし、B/(A−1)順で一日分のaffine transformsを合成する。
-- **Monge分割DPとAliens trick**: segment partition costがquadrangle inequalityを満たし、最適costをsegment数制約と同時に求めたいとき。 適用: segment数へpenaltyを付けたunconstrained DPをoracleとし、convex dualから必要daysと元costを復元する。
-- 個数別最適値がconvexなら、budgetとの最初の交点をLagrangian oracleの傾き情報から探せる。
-- 区間内を並べ替えられるcostは、まず二要素交換でcanonical orderとset functionの性質を導く。
-- 分割数ごとの最適値が凸なら、個数を直接DP dimensionにせずpenalty付き最適化のdualを見る。
-
-## 到達確認
-
-### 到達確認 1 — 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
-
-転移題材: [ABC355 G「Baseball」](https://atcoder.jp/contests/abc355/tasks/abc355_g)
-
-**課題**: ABC355 G「Baseball」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 重み付き一次元 K-center 型目的を Monge DAG の固定辺数最短路へし、Aliens DP で大規模制約を処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 重み付き一次元 K-center 型目的を Monge DAG の固定辺数最短路へし、Aliens DP で大規模制約を処理できる。
-
-- 対象技能が担う箇所: 重み付き一次元 K-center 型目的を Monge DAG の固定辺数最短路へし、Aliens DP で大規模制約を処理できる。
-- 転移題材の解法接続: P と yP の prefix sum から c(i,j) oracle を作る。整数 λ に対し dp[j]=min_{i<j}(dp[i]+c(i,j)+λ) と使用辺数を lexicographic に計算し、分割統治＋monotone minima（または簡易LARSCH/CHT）で評価する。辺数が K+1 を跨ぐ λ を凸探索し、dp[N+1]−λ(K+1) の最大を答える。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-</details>
-
+- [ABC355 G「Baseball」](https://atcoder.jp/contests/abc355/tasks/abc355_g)
 
 ## 根拠
 
@@ -128,4 +53,4 @@ affine-composition orderingからsegment-cost Monge性を導き、partition shor
 - [ABC393 G 公式解説](https://atcoder.jp/contests/abc393/editorial/12192)
 - [ABC393 G 公式問題文](https://atcoder.jp/contests/abc393/tasks/abc393_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-lagrangian-relaxation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-lagrangian-relaxation`

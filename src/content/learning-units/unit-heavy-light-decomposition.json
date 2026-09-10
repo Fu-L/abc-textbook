@@ -30,70 +30,13 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/tree/heavy-light-decomposition.md",
-  "problemIds": [
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
     "abc351-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-apply-heavy-light-decomposition",
-      "learningOutcomeIds": [
-        "outcome-apply-heavy-light-decomposition"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。木構造は固定で頂点値だけ更新され、全体の木 DP 値を毎回求めるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC351 G「Hash on Tree」について、一回の A_v 更新が通常の木 DP f(v)=A_v+∏f(child) を変えるのは v の祖先全体で、鎖なら深さ N、星なら一頂点再計算に次数 N がかかる。単純な祖先更新では両方を同時に避けられない。",
-      "procedure": [
-        "観察: 一回の A_v 更新が通常の木 DP f(v)=A_v+∏f(child) を変えるのは v の祖先全体で、鎖なら深さ N、星なら一頂点再計算に次数 N がかかる。単純な祖先更新では両方を同時に避けられない。",
-        "観察: 木 DP は vertex/add-edge/rake/compress という cluster の結合演算として表せ、根側・遠端側の boundary を持つ path cluster の作用は affine function ax+b に閉じる。",
-        "着眼: point cluster は virtual root 配下の子積、path cluster は遠端に値 x の subtree を接続したとき近端 hash が ax+b になる二係数を持てば、rake は積、compress は affine composition にできる。",
-        "着眼: HLD の heavy path と light subtrees を単なる segment tree 連鎖にせず、cluster 含有頂点数で二分 merge を平衡化することで全 merge tree 深さを O(log N) にする。",
-        "方針: 重さで平衡化した Static Top Tree に木 DP の cluster 情報を載せ、葉 A_v 更新から根まで再計算する。（merge tree の深さが O(log N) で各 cluster 合成が定数時間なので、任意形状の木でも一点更新・全体値取得を O(log N) にできる。）",
-        "接続: 元木を heavy/light 分解し、path cluster の compress と point cluster の rake を頂点数 balance で組み上げた Static Top Tree を構築する。各 leaf vertex に A_v を持たせ、五種の cluster constructor/merge で hash 情報を計算する。query では leaf を更新し merge-tree 祖先だけ再計算し、root cluster の値を出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "heavy childを選んで木をheavy path列へ分け、path range queryまたはbalanced tree-cluster構築へ接続できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-apply-heavy-light-decomposition",
-      "learningOutcomeIds": [
-        "outcome-apply-heavy-light-decomposition"
-      ],
-      "prerequisiteIds": [
-        "outcome-answer-tree-ancestor-queries",
-        "outcome-flatten-tree-by-euler-order",
-        "prereq-abc-advanced-v1",
-        "unit-tree-ancestor-lca",
-        "unit-tree-euler-flattening"
-      ],
-      "attainmentCondition": "学習成果「heavy childを選んで木をheavy path列へ分け、path range queryまたはbalanced tree-cluster構築へ接続できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
-      "assessment": {
-        "method": "ABC351 G「Hash on Tree」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「heavy childを選んで木をheavy path列へ分け、path range queryまたはbalanced tree-cluster構築へ接続できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
-          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
-          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
-          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
-          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
-        ],
-        "expectedResult": "heavy childを選んで木をheavy path列へ分け、path range queryまたはbalanced tree-cluster構築へ接続できるの適用可能範囲と破綻条件を反例付きで説明できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 80,

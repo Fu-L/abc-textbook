@@ -1,6 +1,6 @@
 ---
 title: "gcd不変量・差分構造"
-description: "前提からgcd不変量・差分構造を見抜き、方針へ接続して検証するための学習単位。"
+description: "gcd不変量・差分構造の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 117
@@ -8,108 +8,41 @@ sidebar:
 
 # gcd不変量・差分構造
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-
-### この単元では扱わない範囲
-
-- gcd不変量・差分構造の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### gcd不変量・差分構造
 
 差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。
 
-検索語: gcd不変量、range gcd、差分gcd
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる
+差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-題材: [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
+- gcd不変量・差分構造の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: 同じ列の値同士を引けばAの隣接差が、同じ行の値同士を引けばBの隣接差が得られる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数の和で作る集合のgcdを少数の基準値と差へ変えたい。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
+2. [ABC438 G「Sum of Min」](https://atcoder.jp/contests/abc438/tasks/abc438_g)
 
-- 各長方形に含まれる全てのA_i+B_jの最大公約数を高速に求められる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 長方形内の全A_i+B_jのgcdは、基準値A_h1+B_w1と、行方向の隣接差A_i-A_(i-1)、列方向の隣接差B_j-B_(j-1)のgcdに等しい。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 差分列の区間gcdと基準一点 — gcdが差を取っても不変な性質により、二次元長方形を二つの一次元差分区間と一値へ分解できる。
-- **棄却**: 長方形内の全要素を列挙 — 一問い合わせで最大N^2個の値があり、Q=2×10^5では処理できない。
-
-#### 鍵となる着眼
-
-- 同じ列の値同士を引けばAの隣接差が、同じ行の値同士を引けばBの隣接差が得られる。
-- 逆に基準値と全隣接差から長方形内の任意のA_i+B_jを加減算で復元できるため、二つのgcdは一致する。
-
-#### アルゴリズムへ接続する
-
-差分配列dA[i]=A_i-A_(i-1)、dB[j]=B_j-B_(j-1)を区間gcd可能な構造へ載せる。各質問でgcd(A_h1+B_w1, gcd(dA[h1+1..h2]), gcd(dB[w1+1..w2]))を返す。
-
-
-## 転用するときの確認
-
-- **gcdの差分不変性**: 多数の和で作る集合のgcdを少数の基準値と差へ変えたい。 適用: 一つの基準値から他値を引き、行・列の隣接差へ分離する。
-- **静的区間gcd**: 変更のない差分列へ多数の区間gcd質問が来る。 適用: セグメント木やsparse tableで二つの差分区間のgcdを得る。
-- gcd集合へ共通基準を含め、他要素との差の生成系を探すと、高次元質問を低次元へ分解できる。
-- 小さい配列で長方形を全列挙したgcdと比較し、1×1、1行、1列、負の差分、全要素が同じ場合を確認する。
-
-## 到達確認
-
-### 到達確認 1 — gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる
-
-転移題材: [ABC438 G「Sum of Min」](https://atcoder.jp/contests/abc438/tasks/abc438_g)
-
-**課題**: ABC438 G「Sum of Min」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 巨大長の二周期列に対する min 総和を、gcd 分解・円環区間化・offline Fenwick で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 巨大長の二周期列に対する min 総和を、gcd 分解・円環区間化・offline Fenwick で求められる。
-
-- 対象技能が担う箇所: 巨大長の二周期列に対する min 総和を、gcd 分解・円環区間化・offline Fenwick で求められる。
-- 転移題材の解法接続: まず gcd ごとに A,B の対応剰余類を抽出する。互いに素なクラスで B' を N ステップ順に並べる。各 A_k から出現回数と B' 上の開始・長さを計算し、全周回を分離して余りを1〜2区間質問にする。質問を x=A_k 昇順に並べ、B' の値昇順 sweep と二本の Fenwick 木で count/sum を答えて合計する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる。
-
-</details>
-
+- [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
+- [ABC222 G「222」](https://atcoder.jp/contests/abc222/tasks/abc222_g)
+- [ABC248 G「GCD cost on the tree」](https://atcoder.jp/contests/abc248/tasks/abc248_g)
+- [ABC306 G「Return to 1」](https://atcoder.jp/contests/abc306/tasks/abc306_g)
+- [ABC418 E「Trapezium」](https://atcoder.jp/contests/abc418/tasks/abc418_e)
+- [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
 
 ## 根拠
 
@@ -119,9 +52,5 @@ sidebar:
 - [ABC222 G 公式問題文](https://atcoder.jp/contests/abc222/tasks/abc222_g)
 - [ABC248 G 公式解説](https://atcoder.jp/contests/abc248/editorial/3795)
 - [ABC248 G 公式問題文](https://atcoder.jp/contests/abc248/tasks/abc248_g)
-- [ABC254 F 公式解説](https://atcoder.jp/contests/abc254/editorial/4067)
-- [ABC254 F 公式問題文](https://atcoder.jp/contests/abc254/tasks/abc254_f)
-- [ABC438 G 公式解説](https://atcoder.jp/contests/abc438/editorial/14946)
-- [ABC438 G 公式問題文](https://atcoder.jp/contests/abc438/tasks/abc438_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-gcd-structure`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-gcd-structure`

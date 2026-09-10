@@ -34,8 +34,6 @@
   "docPath": "src/content/docs/learn/graph/graph-search.md",
   "problemIds": [
     "abc241-f",
-    "abc244-f",
-    "abc257-g",
     "abc287-ex",
     "abc289-e",
     "abc292-e",
@@ -43,77 +41,28 @@
     "abc305-f",
     "abc317-e",
     "abc319-g",
-    "abc329-e",
-    "abc336-f",
     "abc355-e",
     "abc361-g",
-    "abc374-g",
     "abc394-e",
-    "abc413-f",
     "abc414-f",
-    "abc417-e",
     "abc427-e",
     "abc429-e",
     "abc443-f",
     "abc446-e",
     "abc446-f"
   ],
-  "examples": [
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-compute-transitive-closure",
-        "outcome-precompute-directional-grid-effects",
-        "outcome-select-state-graph-search"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（学習経路の比較）",
-      "omissions": [
-        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
-      ],
-      "environment": "紙上での未知問のモデル化と候補比較",
-      "input": "状態グラフ探索・到達関係の範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
-      "procedure": [
-        "状態グラフのモデリングと探索: 1個の直接所有Outcome、学ぶ理由「暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ」、対象外「状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "推移閉包: 1個の直接所有Outcome、学ぶ理由「各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。その発動条件と正当化原理を比較可能な独立教材として学ぶ」、対象外「推移閉包の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "方向別grid scanによる長距離効果の前計算: 1個の直接所有Outcome、学ぶ理由「各行・各列を固定方向に一度ずつscanし、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する」、対象外「方向別grid scanによる長距離効果の前計算の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "curriculum_routing"
-    }
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc244-f",
+    "abc257-g",
+    "abc329-e",
+    "abc336-f",
+    "abc374-g",
+    "abc413-f",
+    "abc417-e"
   ],
-  "exercises": [
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-compute-transitive-closure",
-        "outcome-precompute-directional-grid-effects",
-        "outcome-select-state-graph-search"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
-      "assessment": {
-        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
-        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
-      },
-      "answer": {
-        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
-        "procedure": [
-          "問題を対象・操作・保つ量・求める量へ分解する。",
-          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
-          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
-          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
-        ],
-        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 1,
   "difficultyRank": 0,
   "representativeRank": 0,

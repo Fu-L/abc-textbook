@@ -34,70 +34,17 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/dynamic-modular-product.md",
   "problemIds": [
+    "abc411-e"
+  ],
+  "directProblemIds": [
+    "abc411-e"
+  ],
+  "relatedProblemIds": [
     "abc405-g",
-    "abc411-e",
     "abc456-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-maintain-modular-product-under-factor-updates",
-      "learningOutcomeIds": [
-        "outcome-maintain-modular-product-under-factor-updates"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。独立変数の最大値の期待値を求め、閾値以下確率が簡単なとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC411 E「E [max]」について、最大値が値 S_i に等しい確率を直接数えるより、P[max≤S_i] を使えば各 dice が S_i 以下を出す独立確率の積になる。",
-      "procedure": [
-        "観察: 最大値が値 S_i に等しい確率を直接数えるより、P[max≤S_i] を使えば各 dice が S_i 以下を出す独立確率の積になる。",
-        "観察: 全6N面の値を昇順 sweep すると、各 dice の「現在値以下の面数」B_j はその dice の面を通過したときだけ増え、更新総数は6N回である。",
-        "着眼: threshold v で dice j が許す面数を B_j とすると P[max≤v]=Π_j B_j/6^N。各 B_j は0..6だけなので非零積は逆元で差し替えられる。",
-        "着眼: 同じ値の全faceを一群として B_j を更新してからその threshold の CDF を評価する。途中で評価すると同値面を別の最大値として誤分割する。",
-        "方針: 期待値を CDF の差分和から部分和変形し、threshold sweep で Π_j(B_j/6) を更新する（E=S_max-Σ_i(S_{i+1}-S_i)P[max≤S_i] とし、zero count と非零 B_j の積を管理すれば、全 distinct threshold を O(N log N) で処理できる。）",
-        "接続: (faceValue,dieId) の6N組を sortし、同値groupごとに各 cnt[die] を増やす。積 product と cnt=0 の dice 数 zeros を更新し、CDF=zeros>0なら0、そうでなければ product·6^{-N} とする。隣のdistinct値との差×CDFを最大面値から引いて期待値を得る。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "法 m 上の積で一因子を差し替えるとき、取り得る因子のうち非零剰余がすべて可逆かを確認し、剰余 0 の因子数と可逆な非零剰余因子の積を分離して、可逆な旧因子を逆元で除き新因子を掛けて更新後の積を復元できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-maintain-modular-product-under-factor-updates",
-      "learningOutcomeIds": [
-        "outcome-maintain-modular-product-under-factor-updates"
-      ],
-      "prerequisiteIds": [
-        "outcome-compute-in-modular-arithmetic",
-        "prereq-abc-advanced-v1",
-        "unit-modular-arithmetic"
-      ],
-      "attainmentCondition": "学習成果「法 m 上の積で一因子を差し替えるとき、取り得る因子のうち非零剰余がすべて可逆かを確認し、剰余 0 の因子数と可逆な非零剰余因子の積を分離して、可逆な旧因子を逆元で除き新因子を掛けて更新後の積を復元できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC405 G「Range Shuffle Query」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「法 m 上の積で一因子を差し替えるとき、取り得る因子のうち非零剰余がすべて可逆かを確認し、剰余 0 の因子数と可逆な非零剰余因子の積を分離して、可逆な旧因子を逆元で除き新因子を掛けて更新後の積を復元できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 閾値は厳密にA_i<Xなので値区間を[1,X)とする。頻度fの変更時はinvFact[f]をfact[f]で打ち消してから新しいinvFactを掛け、bucket和・積と個別頻度を同じ順序で更新する。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 閾値は厳密にA_i<Xなので値区間を[1,X)とする。頻度fの変更時はinvFact[f]をfact[f]で打ち消してから新しいinvFactを掛け、bucket和・積と個別頻度を同じ順序で更新する。",
-          "転移題材の解法接続: factとinvFactを前計算し、queryをMo順に処理する。現在区間へのadd/removeごとに値の頻度と所属bucketの頻度和・逆階乗積をO(1)更新し、各Xについて[1,X)の完全bucketと端数から(k,p)を集約してfact[k]×pを出力する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "時間計算量 O(N√Q + Q√N)（公式解法全体。特殊な計算量解析を含む）を問題制約と照合し、対象技能が律速かを確認する。"
-        ],
-        "expectedResult": "法 m 上の積で一因子を差し替えるとき、取り得る因子のうち非零剰余がすべて可逆かを確認し、剰余 0 の因子数と可逆な非零剰余因子の積を分離して、可逆な旧因子を逆元で除き新因子を掛けて更新後の積を復元できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 1,

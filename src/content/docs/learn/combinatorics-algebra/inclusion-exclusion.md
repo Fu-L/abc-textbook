@@ -1,6 +1,6 @@
 ---
 title: "包除・Möbius反転で重複を補正する"
-description: "前提から包除・Möbius反転で重複を補正するを見抜き、方針へ接続して検証するための学習単位。"
+description: "包除・Möbius反転で重複を補正するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 60
@@ -8,147 +8,67 @@ sidebar:
 
 # 包除・Möbius反転で重複を補正する
 
-このページは **節** です。同じ対象を扱う技能を比較し、どの発動条件・不変量・計算量の違いで使い分けるかを学びます。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。
-
-### この単元では扱わない範囲
-
-- 選択順を二項係数だけで式化する数え上げ。
-
-## 下位単元と学習順
-
-以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
-
-1. [約数格子のzeta・Möbius反転](./divisor-mobius-inversion.md)（標準順 173）— 素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。
-2. [subset zeta・Möbius変換](./subset-transforms.md)（標準順 184）— 集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。
-
-## 発動条件と見分け方
+## 概要
 
 ### 集合上の包除原理
 
 条件集合の交差をsubsetごとに数え、交互符号で「少なくとも一つ」「全てを避ける」対象を重複なく数える。
 
-検索語: inclusion-exclusion principle、包除原理
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる
+単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。
 
-題材: [ABC214 G「Three Permutations」](https://atcoder.jp/contests/abc214/tasks/abc214_g)
+- 選択順を二項係数だけで式化する数え上げ。
 
-選定理由: p と q がともに順列なので、値を頂点とする全体グラフでは各頂点の次数が高々 2 となり、非自明な連結成分はパスかサイクルに限られる。
+## 下位単元
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各位置に少数の禁止値があり、それらを全て避ける順列の個数を求めるとき。 問題全体への接続は併用技能を学んだ後に読む。
+- [約数格子のzeta・Möbius反転](/learn/combinatorics-algebra/divisor-mobius-inversion/)
+- [subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/)
 
-#### このOutcomeを支える根拠
+## 問題一覧
 
-- 二つの禁止順列を避ける数え上げを、包除と次数 2 グラフの成分別多項式へ変換して集約できる。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### 観察
+1. [ABC242 F「Black and White Rooks」](https://atcoder.jp/contests/abc242/tasks/abc242_f)
+2. [ABC455 E「Unbalanced ABC Substrings」](https://atcoder.jp/contests/abc455/tasks/abc455_e)
+3. [ABC297 F「Minimum Bounding Box 2」](https://atcoder.jp/contests/abc297/tasks/abc297_f)
+4. [ABC280 G「Do Use Hexagon Grid 2」](https://atcoder.jp/contests/abc280/tasks/abc280_g)
+5. [ABC214 G「Three Permutations」](https://atcoder.jp/contests/abc214/tasks/abc214_g)
+6. [ABC246 F「typewriter」](https://atcoder.jp/contests/abc246/tasks/abc246_f)
+7. [ABC309 G「Ban Permutation」](https://atcoder.jp/contests/abc309/tasks/abc309_g)
+8. [ABC456 G「Count Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_g)
+9. [ABC285 Ex「Avoid Square Number」](https://atcoder.jp/contests/abc285/tasks/abc285_h)
+10. [ABC306 Ex「Balance Scale」](https://atcoder.jp/contests/abc306/tasks/abc306_h)
+11. [ABC462 G「Completely Wrong」](https://atcoder.jp/contests/abc462/tasks/abc462_g)
+12. [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
+13. [ABC236 Ex「Distinct Multiples」](https://atcoder.jp/contests/abc236/tasks/abc236_h)
 
-- 条件に反する順列は、ある添字 i で r_i が p_i または q_i に等しいという事象の和であり、固定した違反添字数ごとに包除できる。
-- 違反させる添字 i を辺 (p_i,q_i) とみなすと、必要なのは選んだ各辺へ相異なる端点を一つずつ割り当てる方法数である。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 候補を比較する
+## 関連問題
 
-- **採用**: 違反添字集合への包除を行い、二つの順列が作る次数 2 以下のグラフをパス・サイクルへ分解して集合サイズ別の係数を DP で集約する。 — 選択辺への単射な端点割当てが成分ごとの積に分かれ、全ての添字集合を個別列挙せず係数多項式として畳み込める。
-- **棄却**: 全ての順列 r を列挙し、各添字について p_i と q_i のどちらとも異なるかを確認する。 — 順列は N の階乗個あり、N が 2×10⁵ の制約では生成できない。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 鍵となる着眼
-
-- p と q がともに順列なので、値を頂点とする全体グラフでは各頂点の次数が高々 2 となり、非自明な連結成分はパスかサイクルに限られる。
-- 選択辺だけからなる一成分がサイクルなら端点割当ては 2 通り、頂点数 L のパスなら割り当てない頂点の選び方に対応して L 通りになる。
-
-#### アルゴリズムへ接続する
-
-包除の交差項を次数 2 以下のグラフ上の端点単射数へ変換し、元の各パス・サイクル成分から選ぶ辺数別多項式を作って全体 DP と階乗係数へ合成する。
-
-## 下位単元を使い分ける比較例
-
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **約数格子のzeta・Möbius反転** — 直接到達点: 約数/倍数方向の累積値とexact gcd・period値をnumber-theoretic Möbius関数または格子反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 約数格子のzeta・Möbius反転の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **subset zeta・Möbius変換** — 直接到達点: Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- **順列制約への包除原理**: 各位置に少数の禁止値があり、それらを全て避ける順列の個数を求めるとき。 適用: 禁止値を取ると指定した添字集合ごとの単射数を求め、集合サイズに応じた符号と残りの階乗を掛ける。
-- **次数 2 グラフの成分多項式**: 二つの順列や対応が作るグラフで各頂点次数が高々 2 になり、選択部分をサイズ別に数えるとき。 適用: パス・サイクルごとに選択辺数別の端点割当て総数を計算し、成分間を多項式 DP で畳み込む。
-- サイクル上の部分集合を数える際は、全選択を別扱いし、未選択要素を一つ基準にしてパスへ切り開く。
-- 位置ごとの禁止値が二つの順列で与えられたら、位置を辺、値を頂点とするグラフで次数制約が生まれるか確かめる。
-- 包除の交差項では、選んだ禁止事象が同時成立する条件を「辺へ異なる端点を割り当てる」と具体化してから成分を数える。
-
-## 到達確認
-
-### 到達確認 1 — 条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる
-
-転移題材: [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
-
-**課題**: ABC235 G「Gardens」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 複数種類の部分集合で全位置を覆う数え上げを、包除と打切り二項和の一次更新で処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 複数種類の部分集合で全位置を覆う数え上げを、包除と打切り二項和の一次更新で処理できる。
-
-- 対象技能が担う箇所: 複数種類の部分集合で全位置を覆う数え上げを、包除と打切り二項和の一次更新で処理できる。
-- 転移題材の解法接続: 全庭非空を空庭事象の inclusion-exclusion へ変え、各項 C(N,i)F_A(i)F_B(i)F_C(i) を、三つの打切り二項和の同時一次更新で走査する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。
-
-</details>
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
+- [ABC215 H「Cabbage Master」](https://atcoder.jp/contests/abc215/tasks/abc215_h)
+- [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
+- [ABC272 Ex「Flipping Coins 2」](https://atcoder.jp/contests/abc272/tasks/abc272_h)
+- [ABC284 Ex「Count Unlabeled Graphs」](https://atcoder.jp/contests/abc284/tasks/abc284_h)
+- [ABC288 Ex「A Nameless Counting Problem」](https://atcoder.jp/contests/abc288/tasks/abc288_h)
+- [ABC297 Ex「Diff Adjacent」](https://atcoder.jp/contests/abc297/tasks/abc297_h)
+- [ABC317 F「Nim」](https://atcoder.jp/contests/abc317/tasks/abc317_f)
+- [ABC327 G「Many Good Tuple Problems」](https://atcoder.jp/contests/abc327/tasks/abc327_g)
+- [ABC331 G「Collect Them All」](https://atcoder.jp/contests/abc331/tasks/abc331_g)
+- [ABC335 G「Discrete Logarithm Problems」](https://atcoder.jp/contests/abc335/tasks/abc335_g)
+- [ABC343 E「7x7x7」](https://atcoder.jp/contests/abc343/tasks/abc343_e)
+- [ABC357 G「Stair-like Grid」](https://atcoder.jp/contests/abc357/tasks/abc357_g)
+- [ABC377 F「Avoid Queen Attack」](https://atcoder.jp/contests/abc377/tasks/abc377_f)
+- [ABC386 G「Many MST」](https://atcoder.jp/contests/abc386/tasks/abc386_g)
+- [ABC465 F「Sjeltzer?」](https://atcoder.jp/contests/abc465/tasks/abc465_f)
 
 ## 根拠
 
@@ -158,7 +78,5 @@ sidebar:
 - [ABC214 G 公式問題文](https://atcoder.jp/contests/abc214/tasks/abc214_g)
 - [ABC215 H 公式解説](https://atcoder.jp/contests/abc215/editorial/2505)
 - [ABC215 H 公式問題文](https://atcoder.jp/contests/abc215/tasks/abc215_h)
-- [ABC235 G 公式解説](https://atcoder.jp/contests/abc235/editorial/3252)
-- [ABC235 G 公式問題文](https://atcoder.jp/contests/abc235/tasks/abc235_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-inclusion-exclusion`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-inclusion-exclusion`

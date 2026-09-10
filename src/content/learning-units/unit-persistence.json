@@ -33,64 +33,13 @@
     "abc273-e",
     "abc453-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-persist-data-structure-versions",
-      "learningOutcomeIds": [
-        "outcome-persist-data-structure-versions"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。push/popで変化する列の過去versionへ何度も戻りたいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC273 E「Notebook」について、sequence AへのADD/DELETEはstackのpush/popであり、SAVE時に必要なのは全要素のcopyではなくそのversionのtopを指す参照だけである。",
-      "procedure": [
-        "観察: sequence AへのADD/DELETEはstackのpush/popであり、SAVE時に必要なのは全要素のcopyではなくそのversionのtopを指す参照だけである。",
-        "観察: 各ADDで現在topをparentに持つimmutable nodeを一つ作れば、root-to-current pathがその時点のAを表し、過去versionも壊れない。",
-        "着眼: DELETEはcurrent=parent[current]、LOADはcurrent=saved[z]であり、sequenceを実際に辿る必要がない。",
-        "着眼: value −1のsentinel rootをempty sequenceとすれば、emptyでのDELETEと出力−1を条件分岐なしに統一できる。",
-        "方針: parent pointer付きnodeでpersistent stackを作り、page→top-nodeのmapだけを保存する。（各queryがnode一個の追加またはpointerの移動・保存だけになり、過去状態を共有できる。）",
-        "接続: versioned sequence operationsをstructural sharingするpersistent linked stackとして表し、notebook pagesをversion pointersにする。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc273-e",
+    "abc453-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-persist-data-structure-versions",
-      "learningOutcomeIds": [
-        "outcome-persist-data-structure-versions"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC453 G「Copy Query」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 多数の配列copyと独立更新を、永続segment treeのroot共有で対数時間・省メモリに処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 多数の配列copyと独立更新を、永続segment treeのroot共有で対数時間・省メモリに処理できる。",
-          "転移題材の解法接続: 初期配列からrootを構築する。type1で roots[X]=roots[Y]、type2で persistent pointUpdate(roots[X],p,v) の新rootを代入、type3で rangeQuery(roots[X],l,r) を返す。node poolを配列で確保する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 84,

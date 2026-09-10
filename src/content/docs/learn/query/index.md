@@ -1,6 +1,6 @@
 ---
 title: "データ構造と問い合わせ"
-description: "前提からデータ構造と問い合わせを見抜き、方針へ接続して検証するための学習単位。"
+description: "データ構造と問い合わせの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 4
@@ -8,204 +8,150 @@ sidebar:
 
 # データ構造と問い合わせ
 
-このページは **章** です。分野全体の索引として、技能の境界と学ぶ順序を俯瞰します。各技能の定義を混同せず、必要な節・小節へ降りるための地図として使ってください。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 問い合わせに十分で、更新と合成で保てる要約を導ける。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 問い合わせに必要な要約と更新規則を見抜く視点を先に学び、目的に合うデータ構造の選択へつなげる。
-
-### この単元では扱わない範囲
-
-- なし
-
-## 下位単元と学習順
-
-以下は canonical standard order に沿った章内カリキュラムです。定義・証明・実装境界・Outcome到達確認は各リンク先で扱い、この章では経路選択に必要な境界を示します。
-
-1. [一次元・二次元累積和と差分で区間情報を線形化する](./prefix-aggregate.md)（標準順 13）— 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
-2. [要素索引と連結リストで局所linkを更新する](./linked-list-index.md)（標準順 27）— 配列やmapの索引を使い、順序全体を走査せず前後linkだけを更新して列を保つ。
-3. [結合的要約と列・区間の合成](./monoid-segment-tree.md)（標準順 42）— 結合則を持つ要約という共通像から、Segment Tree・Sparse Table・SWAG・有限関数合成が使う分解方法の違いを比較する。
-4. [反転数・重み付き接頭辞統計をFenwick Treeで保つ](./weighted-prefix-fenwick.md)（標準順 47）— 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
-5. [構造を共有して過去の版を保存・復元する](./persistence-rollback.md)（標準順 54）— 更新で変わる箇所を局所化し、未変更部分の共有または履歴の巻き戻しで過去の版を扱う。
-6. [heap・ordered setで全候補の極値を保つ](./ordered-set-heap.md)（標準順 59）— 比較可能な候補全体から極値・順位・隣接を繰り返し取り出すため、動的な順序を保つ。
-7. [支配関係から不要な候補を単調stack・queueで削る](./monotone-stack-queue.md)（標準順 62）— 候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。
-8. [bitsetで集合演算をword並列化する](./bitset-word-parallel.md)（標準順 63）— 集合の交差・和・shiftを機械語word単位で同時処理し、要素ごとの走査をword幅だけ短縮する。
-9. [Fingerprintで列・集合・式の同値性を比較する](./string-hash.md)（標準順 64）— 列・集合・式を合成可能なfingerprintへ写し、衝突条件を意識して同値性を比較する。
-10. [bit列をTrieで索引化する](./binary-trie.md)（標準順 66）— 整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。
-11. [Moの順序で区間問い合わせの差分を更新する](./mo-offline-range.md)（標準順 81）— 区間への要素の追加・削除を定義し、問い合わせ順を並べ替えて端点移動の総量を抑える。
-12. [大小関係をCartesian treeへ変換する](./cartesian-tree.md)（標準順 84）— 単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。
-13. [上位bitの支配関係によるXOR minimax](./bitwise-minimax-partition.md)（標準順 100）— 最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-14. [区間更新を要約へ作用させる](./range-actions.md)（標準順 153）— 結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。
-
-## 発動条件と見分け方
+## 概要
 
 ### 更新可能な最小十分要約
 
 問い合わせの答えを合成でき、更新で保てる十分な統計量を導く。
 
-検索語: dynamic range aggregate、動的区間集約、更新可能な要約、更新可能な区間集約の設計
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 問い合わせに十分で、更新と合成で保てる要約を導ける
+問い合わせに必要な要約と更新規則を見抜く視点を先に学び、目的に合うデータ構造の選択へつなげる。
 
-題材: [ABC213 F「Common Prefixes」](https://atcoder.jp/contests/abc213/tasks/abc213_f)
+- なし
 
-選定理由: 必要なのは各 LCP 問合せの値ではなくそれらの総和なので、RMQ を繰り返す代わりに「区間最小値の総和」の問題として処理する。
+## 下位単元
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数の接尾辞どうしの辞書順関係や共通接頭辞長をまとめて扱うとき。 問題全体への接続は併用技能を学んだ後に読む。
+- [一次元・二次元累積和と差分で区間情報を線形化する](/learn/query/prefix-aggregate/)
+- [要素索引と連結リストで局所linkを更新する](/learn/query/linked-list-index/)
+- [結合的要約と列・区間の合成](/learn/query/monoid-segment-tree/)
+- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](/learn/query/weighted-prefix-fenwick/)
+- [構造を共有して過去の版を保存・復元する](/learn/query/persistence-rollback/)
+- [heap・ordered setで全候補の極値を保つ](/learn/query/ordered-set-heap/)
+- [支配関係から不要な候補を単調stack・queueで削る](/learn/query/monotone-stack-queue/)
+- [bitsetで集合演算をword並列化する](/learn/query/bitset-word-parallel/)
+- [Fingerprintで列・集合・式の同値性を比較する](/learn/query/string-hash/)
+- [bit列をTrieで索引化する](/learn/query/binary-trie/)
+- [Moの順序で区間問い合わせの差分を更新する](/learn/query/mo-offline-range/)
+- [大小関係をCartesian treeへ変換する](/learn/query/cartesian-tree/)
+- [上位bitの支配関係によるXOR minimax](/learn/query/bitwise-minimax-partition/)
+- [区間更新を要約へ作用させる](/learn/query/range-actions/)
 
-#### このOutcomeを支える根拠
+## 問題一覧
 
-- 接尾辞間の LCP 総和を区間最小値和へ変形し、接尾辞配列と単調スタックを組み合わせて全開始位置を処理できる。
-- 接尾辞配列の順位間にある LCP 配列の最小値が二接尾辞の LCP になる性質を理解していること。
-- 単調スタックで値が有効な連続区間をまとめ、区間最小値の総和を更新できること。
-- 固定した接尾辞自身との LCP はその接尾辞の長さであり、左右の LCP 配列から得る他接尾辞の寄与とは別に足す必要がある。 再利用の観点: 全要素との対比較和を左右走査へ分解したときは、比較対象が自分自身である対角成分が走査に含まれるかを確認する。
-- 接尾辞対の LCP を接尾辞配列上の区間最小値へ写し、LCP 配列を正順・逆順に単調スタックで走査して左右の全区間最小値和を合成する。
-- 接尾辞配列と LCP 配列を構成し、単調スタックで各終端に対する区間最小値の総和を左右から一括計算する。 — LCP 値が新たな最小値になる区間をまとめて管理でき、全順位の左右の寄与を線形走査で得られる。
-- 必要なのは各 LCP 問合せの値ではなくそれらの総和なので、RMQ を繰り返す代わりに「区間最小値の総和」の問題として処理する。
-- 単調スタックには LCP 値と、その値が現在の最小値になる開始位置の個数をまとめて持たせると総和を差分更新できる。
-- 二つの接尾辞の共通接頭辞長は、接尾辞配列上で両者の順位の間に並ぶ隣接 LCP 値の最小値に等しい。
-- 一つの接尾辞を固定すると、他の接尾辞との LCP 総和は、その順位から左へ延ばす区間最小値の総和と右へ延ばす区間最小値の総和に分けられる。
-- 接尾辞配列と LCP 配列: 多数の接尾辞どうしの辞書順関係や共通接頭辞長をまとめて扱うとき。 適用: 各接尾辞を順位へ変換し、二順位間の LCP を隣接 LCP 列の区間最小値として表す。
-- 単調スタックによる区間最小値和: 全ての始点または終点に対する区間の最小値の合計を求めるとき。 適用: 値と担当区間数をまとめ、より小さい LCP が来たら大きい値の区間を併合して累積和を更新する。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### 観察
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-- 二つの接尾辞の共通接頭辞長は、接尾辞配列上で両者の順位の間に並ぶ隣接 LCP 値の最小値に等しい。
-- 一つの接尾辞を固定すると、他の接尾辞との LCP 総和は、その順位から左へ延ばす区間最小値の総和と右へ延ばす区間最小値の総和に分けられる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 候補を比較する
+## 関連問題
 
-- **採用**: 接尾辞配列と LCP 配列を構成し、単調スタックで各終端に対する区間最小値の総和を左右から一括計算する。 — LCP 値が新たな最小値になる区間をまとめて管理でき、全順位の左右の寄与を線形走査で得られる。
-- **棄却**: 全ての接尾辞対について LCP 配列上の区間最小値を問い合わせ、各接尾辞の答えへ加える。 — 区間最小値を高速に答えても接尾辞対そのものが二乗個あり、全ての答えを作れない。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 鍵となる着眼
-
-- 必要なのは各 LCP 問合せの値ではなくそれらの総和なので、RMQ を繰り返す代わりに「区間最小値の総和」の問題として処理する。
-- 単調スタックには LCP 値と、その値が現在の最小値になる開始位置の個数をまとめて持たせると総和を差分更新できる。
-
-#### アルゴリズムへ接続する
-
-接尾辞対の LCP を接尾辞配列上の区間最小値へ写し、LCP 配列を正順・逆順に単調スタックで走査して左右の全区間最小値和を合成する。
-
-## 下位単元を使い分ける比較例
-
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **一次元・二次元累積和と差分で区間情報を線形化する** — 直接到達点: 一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる。近いが対象外: オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。
-- **要素索引と連結リストで局所linkを更新する** — 直接到達点: 要素IDから前後linkを引き、挿入・削除で変わる局所linkだけを更新して列順を復元できる。近いが対象外: 全候補の大小順や区間集約を保つ平衡木・heap。
-- **結合的要約と列・区間の合成** — 直接到達点: 7個の下位Outcomeへ進むための構造索引。近いが対象外: Fenwick Treeで保つ重み付き接頭辞統計。
-- **反転数・重み付き接頭辞統計をFenwick Treeで保つ** — 直接到達点: 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。近いが対象外: 一般のモノイドによるSegment Treeの区間要約。
-- **構造を共有して過去の版を保存・復元する** — 直接到達点: 2個の下位Outcomeへ進むための構造索引。近いが対象外: 区間更新作用の遅延評価。
-- **heap・ordered setで全候補の極値を保つ** — 直接到達点: 3個の下位Outcomeへ進むための構造索引。近いが対象外: 支配関係で一度捨てた候補を戻さない単調stack・queue。
-- **支配関係から不要な候補を単調stack・queueで削る** — 直接到達点: 候補を捨てられる支配条件を証明し、各候補を高々一度だけ単調stack・queueから削除できる。近いが対象外: 全候補から極値を反復取得するheap・ordered set。
-- **bitsetで集合演算をword並列化する** — 直接到達点: 集合をbit列へ符号化し、交差・和・shift・popcountをword並列に実行した計算量を評価できる。近いが対象外: 集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。
-- **Fingerprintで列・集合・式の同値性を比較する** — 直接到達点: 1個の下位Outcomeへ進むための構造索引。近いが対象外: 全接尾辞の辞書順索引と回文半径。
-- **bit列をTrieで索引化する** — 直接到達点: 整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる。近いが対象外: 文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。
-- **Moの順序で区間問い合わせの差分を更新する** — 直接到達点: 区間問い合わせの順序と追加・削除操作を設計し、端点移動の総量を評価できる。近いが対象外: オンラインのpriority queue・multiset、および単調stack・queue。
-- **大小関係をCartesian treeへ変換する** — 直接到達点: 配列順とheap順を保つCartesian treeを単調stackで構成し、各部分木が表す連続区間へ問題を分解できる。近いが対象外: 最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。
-- **上位bitの支配関係によるXOR minimax** — 直接到達点: 最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 上位bitの支配関係によるXOR minimaxの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **区間更新を要約へ作用させる** — 直接到達点: 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。近いが対象外: 過去の版の保存・rollback・構造共有。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- **接尾辞配列と LCP 配列**: 多数の接尾辞どうしの辞書順関係や共通接頭辞長をまとめて扱うとき。 適用: 各接尾辞を順位へ変換し、二順位間の LCP を隣接 LCP 列の区間最小値として表す。
-- **単調スタックによる区間最小値和**: 全ての始点または終点に対する区間の最小値の合計を求めるとき。 適用: 値と担当区間数をまとめ、より小さい LCP が来たら大きい値の区間を併合して累積和を更新する。
-- 全要素との対比較和を左右走査へ分解したときは、比較対象が自分自身である対角成分が走査に含まれるかを確認する。
-- 接尾辞対を見たら、まず辞書順で隣接する LCP 列へ移し、個別 RMQ ではなく集約量を求めている点を利用する。
-- 単調スタックの各要素が「どの開始位置群の最小値を代表するか」を言葉で説明し、左右の寄与の向きを確認する。
-
-## 到達確認
-
-### 到達確認 1 — 問い合わせに十分で、更新と合成で保てる要約を導ける
-
-転移題材: [ABC214 E「Packing Under Range Regulations」](https://atcoder.jp/contests/abc214/tasks/abc214_e)
-
-**課題**: ABC214 E「Packing Under Range Regulations」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「問い合わせに十分で、更新と合成で保てる要約を導ける」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 問い合わせに十分で、更新と合成で保てる要約を導ける</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 巨大な整数区間上の一対一割当てを、イベントジャンプと最早締切優先の貪欲法で判定できる。／区間を左端でソートし、走査位置までに開始した要素を優先度付きキューへ追加できること。／締切の早い仕事を先に処理する交換法による貪欲選択の正当性を理解できること。／箱番号の上限は大きいが、一個のボールを置くたびに現在位置は一つだけ増え、空白区間は左端イベントへ飛ばせる。 再利用の観点: 巨大な整数軸でも、各座標で処理せず「次に候補が生じる座標」と「実際に資源を消費する回数」だけを追う。／区間の左端を解禁時刻、右端を締切とみなし、疎な整数軸をイベント間で飛ばしながら最早締切優先で単位ジョブを配置する。／箱番号を昇順に走査し、左端を迎えた区間を優先度付きキューへ入れ、右端が最小の区間を現在の箱へ割り当てる。 — 締切が早いボールを先に使う交換法が成立し、明示する箱は実際に割り当てる位置だけでよい。／ある割当てが現在選んだ区間より右端の遅い区間を先に使っていても、両者を交換すれば可否を悪化させない。／候補キューが空なら、次の区間の左端までの箱にはどのボールも入れられないため、その位置へ直接ジャンプできる。／各ボール i は整数番号 L_i 以上 R_i 以下の箱のどれか一つへ入り、異なるボールは異なる箱を使わなければならない。／箱番号を小さい順に見たとき、現在の箱へ入れられるボールのうち右端 R が最小のものは、将来使える箱が最も少ない。／区間割当ての最早締切優先: 各要素へ区間内の相異なる整数を一つずつ割り当て、実行時刻を選べるとき。 適用: 現在位置までに開始した区間から右端が最小のものを min-heap で選び、箱を一つ消費する。／疎な座標のイベント走査: 座標範囲は巨大だが、状態が変化する入力端点と実際の処理回数だけは少ないとき。 適用: 候補が空の区間を一つずつ進まず、次に未処理の L_i へ現在位置を移す。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 巨大な整数区間上の一対一割当てを、イベントジャンプと最早締切優先の貪欲法で判定できる。
-- 区間を左端でソートし、走査位置までに開始した要素を優先度付きキューへ追加できること。
-- 締切の早い仕事を先に処理する交換法による貪欲選択の正当性を理解できること。
-- 箱番号の上限は大きいが、一個のボールを置くたびに現在位置は一つだけ増え、空白区間は左端イベントへ飛ばせる。 再利用の観点: 巨大な整数軸でも、各座標で処理せず「次に候補が生じる座標」と「実際に資源を消費する回数」だけを追う。
-- 区間の左端を解禁時刻、右端を締切とみなし、疎な整数軸をイベント間で飛ばしながら最早締切優先で単位ジョブを配置する。
-- 箱番号を昇順に走査し、左端を迎えた区間を優先度付きキューへ入れ、右端が最小の区間を現在の箱へ割り当てる。 — 締切が早いボールを先に使う交換法が成立し、明示する箱は実際に割り当てる位置だけでよい。
-- ある割当てが現在選んだ区間より右端の遅い区間を先に使っていても、両者を交換すれば可否を悪化させない。
-- 候補キューが空なら、次の区間の左端までの箱にはどのボールも入れられないため、その位置へ直接ジャンプできる。
-- 各ボール i は整数番号 L_i 以上 R_i 以下の箱のどれか一つへ入り、異なるボールは異なる箱を使わなければならない。
-- 箱番号を小さい順に見たとき、現在の箱へ入れられるボールのうち右端 R が最小のものは、将来使える箱が最も少ない。
-- 区間割当ての最早締切優先: 各要素へ区間内の相異なる整数を一つずつ割り当て、実行時刻を選べるとき。 適用: 現在位置までに開始した区間から右端が最小のものを min-heap で選び、箱を一つ消費する。
-- 疎な座標のイベント走査: 座標範囲は巨大だが、状態が変化する入力端点と実際の処理回数だけは少ないとき。 適用: 候補が空の区間を一つずつ進まず、次に未処理の L_i へ現在位置を移す。
-
-- 対象技能が担う箇所: 巨大な整数区間上の一対一割当てを、イベントジャンプと最早締切優先の貪欲法で判定できる。
-- 対象技能が担う箇所: 区間を左端でソートし、走査位置までに開始した要素を優先度付きキューへ追加できること。
-- 対象技能が担う箇所: 締切の早い仕事を先に処理する交換法による貪欲選択の正当性を理解できること。
-- 対象技能が担う箇所: 箱番号の上限は大きいが、一個のボールを置くたびに現在位置は一つだけ増え、空白区間は左端イベントへ飛ばせる。 再利用の観点: 巨大な整数軸でも、各座標で処理せず「次に候補が生じる座標」と「実際に資源を消費する回数」だけを追う。
-- 対象技能が担う箇所: 区間の左端を解禁時刻、右端を締切とみなし、疎な整数軸をイベント間で飛ばしながら最早締切優先で単位ジョブを配置する。
-- 対象技能が担う箇所: 箱番号を昇順に走査し、左端を迎えた区間を優先度付きキューへ入れ、右端が最小の区間を現在の箱へ割り当てる。 — 締切が早いボールを先に使う交換法が成立し、明示する箱は実際に割り当てる位置だけでよい。
-- 対象技能が担う箇所: ある割当てが現在選んだ区間より右端の遅い区間を先に使っていても、両者を交換すれば可否を悪化させない。
-- 対象技能が担う箇所: 候補キューが空なら、次の区間の左端までの箱にはどのボールも入れられないため、その位置へ直接ジャンプできる。
-- 対象技能が担う箇所: 各ボール i は整数番号 L_i 以上 R_i 以下の箱のどれか一つへ入り、異なるボールは異なる箱を使わなければならない。
-- 対象技能が担う箇所: 箱番号を小さい順に見たとき、現在の箱へ入れられるボールのうち右端 R が最小のものは、将来使える箱が最も少ない。
-- 対象技能が担う箇所: 区間割当ての最早締切優先: 各要素へ区間内の相異なる整数を一つずつ割り当て、実行時刻を選べるとき。 適用: 現在位置までに開始した区間から右端が最小のものを min-heap で選び、箱を一つ消費する。
-- 対象技能が担う箇所: 疎な座標のイベント走査: 座標範囲は巨大だが、状態が変化する入力端点と実際の処理回数だけは少ないとき。 適用: 候補が空の区間を一つずつ進まず、次に未処理の L_i へ現在位置を移す。
-- 転移題材の解法接続: 区間の左端を解禁時刻、右端を締切とみなし、疎な整数軸をイベント間で飛ばしながら最早締切優先で単位ジョブを配置する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 問い合わせに十分で、更新と合成で保てる要約を導ける。
-
-</details>
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC213 F「Common Prefixes」](https://atcoder.jp/contests/abc213/tasks/abc213_f)
+- [ABC214 E「Packing Under Range Regulations」](https://atcoder.jp/contests/abc214/tasks/abc214_e)
+- [ABC216 G「01Sequence」](https://atcoder.jp/contests/abc216/tasks/abc216_g)
+- [ABC217 E「Sorting Queries」](https://atcoder.jp/contests/abc217/tasks/abc217_e)
+- [ABC218 H「Red and Blue Lamps」](https://atcoder.jp/contests/abc218/tasks/abc218_h)
+- [ABC231 F「Jealous Two」](https://atcoder.jp/contests/abc231/tasks/abc231_f)
+- [ABC233 Ex「Manhattan Christmas Tree」](https://atcoder.jp/contests/abc233/tasks/abc233_h)
+- [ABC233 G「Strongest Takahashi」](https://atcoder.jp/contests/abc233/tasks/abc233_g)
+- [ABC238 E「Range Sums」](https://atcoder.jp/contests/abc238/tasks/abc238_e)
+- [ABC240 Ex「Sequence of Substrings」](https://atcoder.jp/contests/abc240/tasks/abc240_h)
+- [ABC244 Ex「Linear Maximization」](https://atcoder.jp/contests/abc244/tasks/abc244_h)
+- [ABC245 E「Wrapping Chocolate」](https://atcoder.jp/contests/abc245/tasks/abc245_e)
+- [ABC249 F「Ignore Operations」](https://atcoder.jp/contests/abc249/tasks/abc249_f)
+- [ABC250 G「Stonks」](https://atcoder.jp/contests/abc250/tasks/abc250_g)
+- [ABC251 Ex「Fill Triangle」](https://atcoder.jp/contests/abc251/tasks/abc251_h)
+- [ABC252 Ex「K-th beautiful Necklace」](https://atcoder.jp/contests/abc252/tasks/abc252_h)
+- [ABC252 F「Bread」](https://atcoder.jp/contests/abc252/tasks/abc252_f)
+- [ABC253 F「Operations on a Matrix」](https://atcoder.jp/contests/abc253/tasks/abc253_f)
+- [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
+- [ABC256 Ex「I like Query Problem」](https://atcoder.jp/contests/abc256/tasks/abc256_h)
+- [ABC261 F「Sorting Color Balls」](https://atcoder.jp/contests/abc261/tasks/abc261_f)
+- [ABC262 Ex「Max Limited Sequence」](https://atcoder.jp/contests/abc262/tasks/abc262_h)
+- [ABC262 F「Erase and Rotate」](https://atcoder.jp/contests/abc262/tasks/abc262_f)
+- [ABC263 Ex「Intersection 2」](https://atcoder.jp/contests/abc263/tasks/abc263_h)
+- [ABC266 Ex「Snuke Panic (2D)」](https://atcoder.jp/contests/abc266/tasks/abc266_h)
+- [ABC268 Ex「Taboo」](https://atcoder.jp/contests/abc268/tasks/abc268_h)
+- [ABC273 Ex「Inv(0,1)ving Insert(1,0)n」](https://atcoder.jp/contests/abc273/tasks/abc273_h)
+- [ABC274 Ex「XOR Sum of Arrays」](https://atcoder.jp/contests/abc274/tasks/abc274_h)
+- [ABC276 Ex「Construct a Matrix」](https://atcoder.jp/contests/abc276/tasks/abc276_h)
+- [ABC280 Ex「Substring Sort」](https://atcoder.jp/contests/abc280/tasks/abc280_h)
+- [ABC282 G「Similar Permutation」](https://atcoder.jp/contests/abc282/tasks/abc282_g)
+- [ABC283 F「Permutation Distance」](https://atcoder.jp/contests/abc283/tasks/abc283_f)
+- [ABC287 Ex「Directed Graph and Query」](https://atcoder.jp/contests/abc287/tasks/abc287_h)
+- [ABC294 G「Distance Queries on a Tree」](https://atcoder.jp/contests/abc294/tasks/abc294_g)
+- [ABC298 G「Strawberry War」](https://atcoder.jp/contests/abc298/tasks/abc298_g)
+- [ABC299 G「Minimum Permutation」](https://atcoder.jp/contests/abc299/tasks/abc299_g)
+- [ABC300 F「More Holidays」](https://atcoder.jp/contests/abc300/tasks/abc300_f)
+- [ABC303 G「Bags Game」](https://atcoder.jp/contests/abc303/tasks/abc303_g)
+- [ABC304 Ex「Constrained Topological Sort」](https://atcoder.jp/contests/abc304/tasks/abc304_h)
+- [ABC306 F「Merge Sets」](https://atcoder.jp/contests/abc306/tasks/abc306_f)
+- [ABC307 F「Virus 2」](https://atcoder.jp/contests/abc307/tasks/abc307_f)
+- [ABC307 G「Approximate Equalization」](https://atcoder.jp/contests/abc307/tasks/abc307_g)
+- [ABC309 F「Box in Box」](https://atcoder.jp/contests/abc309/tasks/abc309_f)
+- [ABC311 G「One More Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_g)
+- [ABC319 F「Fighter Takahashi」](https://atcoder.jp/contests/abc319/tasks/abc319_f)
+- [ABC319 G「Counting Shortest Paths」](https://atcoder.jp/contests/abc319/tasks/abc319_g)
+- [ABC320 E「Somen Nagashi」](https://atcoder.jp/contests/abc320/tasks/abc320_e)
+- [ABC324 G「Generate Arrays」](https://atcoder.jp/contests/abc324/tasks/abc324_g)
+- [ABC327 F「Apples」](https://atcoder.jp/contests/abc327/tasks/abc327_f)
+- [ABC330 F「Minimize Bounding Square」](https://atcoder.jp/contests/abc330/tasks/abc330_f)
+- [ABC330 G「Inversion Squared」](https://atcoder.jp/contests/abc330/tasks/abc330_g)
+- [ABC332 F「Random Update Query」](https://atcoder.jp/contests/abc332/tasks/abc332_f)
+- [ABC333 E「Takahashi Quest」](https://atcoder.jp/contests/abc333/tasks/abc333_e)
+- [ABC334 F「Christmas Present 2」](https://atcoder.jp/contests/abc334/tasks/abc334_f)
+- [ABC337 G「Tree Inversion」](https://atcoder.jp/contests/abc337/tasks/abc337_g)
+- [ABC339 E「Smooth Subsequence」](https://atcoder.jp/contests/abc339/tasks/abc339_e)
+- [ABC346 G「Alone」](https://atcoder.jp/contests/abc346/tasks/abc346_g)
+- [ABC347 F「Non-overlapping Squares」](https://atcoder.jp/contests/abc347/tasks/abc347_f)
+- [ABC353 G「Merchant Takahashi」](https://atcoder.jp/contests/abc353/tasks/abc353_g)
+- [ABC354 F「Useless for LIS」](https://atcoder.jp/contests/abc354/tasks/abc354_f)
+- [ABC359 F「Tree Degree Optimization」](https://atcoder.jp/contests/abc359/tasks/abc359_f)
+- [ABC360 F「InterSections」](https://atcoder.jp/contests/abc360/tasks/abc360_f)
+- [ABC360 G「Suitable Edit for LIS」](https://atcoder.jp/contests/abc360/tasks/abc360_g)
+- [ABC364 F「Range Connect MST」](https://atcoder.jp/contests/abc364/tasks/abc364_f)
+- [ABC366 G「XOR Neighbors」](https://atcoder.jp/contests/abc366/tasks/abc366_g)
+- [ABC368 G「Add and Multiply Queries」](https://atcoder.jp/contests/abc368/tasks/abc368_g)
+- [ABC373 F「Knapsack with Diminishing Values」](https://atcoder.jp/contests/abc373/tasks/abc373_f)
+- [ABC376 E「Max × Sum」](https://atcoder.jp/contests/abc376/tasks/abc376_e)
+- [ABC376 G「Treasure Hunting」](https://atcoder.jp/contests/abc376/tasks/abc376_g)
+- [ABC378 E「Mod Sigma Problem」](https://atcoder.jp/contests/abc378/tasks/abc378_e)
+- [ABC380 G「Another Shuffle Window」](https://atcoder.jp/contests/abc380/tasks/abc380_g)
+- [ABC388 G「Simultaneous Kagamimochi 2」](https://atcoder.jp/contests/abc388/tasks/abc388_g)
+- [ABC392 F「Insert」](https://atcoder.jp/contests/abc392/tasks/abc392_f)
+- [ABC396 F「Rotated Inversions」](https://atcoder.jp/contests/abc396/tasks/abc396_f)
+- [ABC404 G「Specified Range Sums」](https://atcoder.jp/contests/abc404/tasks/abc404_g)
+- [ABC406 F「Compare Tree Weights」](https://atcoder.jp/contests/abc406/tasks/abc406_f)
+- [ABC406 G「Travelling Salesman Problem」](https://atcoder.jp/contests/abc406/tasks/abc406_g)
+- [ABC407 E「Most Valuable Parentheses」](https://atcoder.jp/contests/abc407/tasks/abc407_e)
+- [ABC407 F「Sums of Sliding Window Maximum」](https://atcoder.jp/contests/abc407/tasks/abc407_f)
+- [ABC408 F「Athletic」](https://atcoder.jp/contests/abc408/tasks/abc408_f)
+- [ABC410 G「Longest Chord Chain」](https://atcoder.jp/contests/abc410/tasks/abc410_g)
+- [ABC414 G「AtCoder Express 4」](https://atcoder.jp/contests/abc414/tasks/abc414_g)
+- [ABC419 E「Subarray Sum Divisibility」](https://atcoder.jp/contests/abc419/tasks/abc419_e)
+- [ABC421 G「Increase to make it Increasing」](https://atcoder.jp/contests/abc421/tasks/abc421_g)
+- [ABC423 E「Sum of Subarrays」](https://atcoder.jp/contests/abc423/tasks/abc423_e)
+- [ABC427 E「Wind Cleaning」](https://atcoder.jp/contests/abc427/tasks/abc427_e)
+- [ABC433 E「Max Matrix 2」](https://atcoder.jp/contests/abc433/tasks/abc433_e)
+- [ABC436 F「Starry Landscape Photo」](https://atcoder.jp/contests/abc436/tasks/abc436_f)
+- [ABC437 F「Manhattan Christmas Tree 2」](https://atcoder.jp/contests/abc437/tasks/abc437_f)
+- [ABC438 G「Sum of Min」](https://atcoder.jp/contests/abc438/tasks/abc438_g)
+- [ABC439 F「Beautiful Kadomatsu」](https://atcoder.jp/contests/abc439/tasks/abc439_f)
+- [ABC444 E「Sparse Range」](https://atcoder.jp/contests/abc444/tasks/abc444_e)
+- [ABC449 E「A += v」](https://atcoder.jp/contests/abc449/tasks/abc449_e)
+- [ABC450 F「Strongly Connected 2」](https://atcoder.jp/contests/abc450/tasks/abc450_f)
+- [ABC452 E「You WILL Like Sigma Problem」](https://atcoder.jp/contests/abc452/tasks/abc452_e)
+- [ABC452 F「Interval Inversion Count」](https://atcoder.jp/contests/abc452/tasks/abc452_f)
+- [ABC455 E「Unbalanced ABC Substrings」](https://atcoder.jp/contests/abc455/tasks/abc455_e)
+- [ABC463 G「Random Walk Distance」](https://atcoder.jp/contests/abc463/tasks/abc463_g)
+- [ABC464 G「Celester 2」](https://atcoder.jp/contests/abc464/tasks/abc464_g)
 
 ## 根拠
 
@@ -216,4 +162,4 @@ sidebar:
 - [ABC216 G 公式解説](https://atcoder.jp/contests/abc216/editorial/2474)
 - [ABC216 G 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-chapter-query`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-chapter-query`

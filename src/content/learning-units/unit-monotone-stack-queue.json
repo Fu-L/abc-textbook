@@ -32,76 +32,29 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/monotone-stack-queue.md",
   "problemIds": [
-    "abc213-f",
     "abc228-f",
     "abc234-g",
     "abc248-ex",
+    "abc359-e",
+    "abc379-f"
+  ],
+  "directProblemIds": [
+    "abc359-e",
+    "abc379-f",
+    "abc228-f",
+    "abc234-g",
+    "abc248-ex"
+  ],
+  "relatedProblemIds": [
+    "abc213-f",
     "abc280-ex",
     "abc303-g",
     "abc334-f",
-    "abc359-e",
-    "abc379-f",
     "abc420-f",
     "abc435-f"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-prune-dominated-candidates-once",
-      "learningOutcomeIds": [
-        "outcome-prune-dominated-candidates-once"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。二人の選択後の評価が、先手の領域量から後手との重なり量を引く形になるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC228 F「Stamp Game」について、高橋が黒くした長方形を固定すると、得点はその長方形の総和から、青木が白くする重なり部分の総和を引いた値になる。全要素が正なので、青木は重なりを最大化する白長方形を選ぶ。",
-      "procedure": [
-        "観察: 高橋が黒くした長方形を固定すると、得点はその長方形の総和から、青木が白くする重なり部分の総和を引いた値になる。全要素が正なので、青木は重なりを最大化する白長方形を選ぶ。",
-        "観察: 白スタンプが黒スタンプより大きい方向は、重なりだけを考えれば黒スタンプと同じ長さに切り詰めてよい。切り詰め後は、青木の最適な重なりを黒長方形の内部に完全に収められる。",
-        "着眼: 青木の手を『白スタンプの盤面上の位置』で追う必要はなく、固定した黒長方形の内部で最大和となる h2×w2 長方形を引く最小最大問題に変換できる。",
-        "着眼: 白長方形の左上ごとの和を配列にすると、黒長方形内で許される左上座標は長方形範囲になる。その最大値は、横幅w1-w2+1、縦幅h1-h2+1のスライド最大値である。",
-        "方針: 長方形和を二次元累積和で求め、各黒長方形内に収まる白長方形和の最大値を二次元スライド最大値として前計算する。（各配置の和を定数時間で得られ、包含範囲ごとの最大値も横・縦の一方向窓へ分解して全盤面をまとめて処理できる。）",
-        "接続: h2,w2をh1,w1以下へ切り詰め、二次元累積和で全ての黒・白長方形和を作る。白長方形和へdequeによる横方向、次に縦方向の窓最大値を適用し、各黒位置について黒和−内部の白最大和を求め、その最大を答える。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "候補を捨てられる支配条件を証明し、各候補を高々一度だけ単調stack・queueから削除できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-prune-dominated-candidates-once",
-      "learningOutcomeIds": [
-        "outcome-prune-dominated-candidates-once"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「候補を捨てられる支配条件を証明し、各候補を高々一度だけ単調stack・queueから削除できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC234 G「Divide a Sequence」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「候補を捨てられる支配条件を証明し、各候補を高々一度だけ単調stack・queueから削除できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 区間極値を含む全分割積の DP を、重み付き単調スタックで線形走査へ高速化できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 区間極値を含む全分割積の DP を、重み付き単調スタックで線形走査へ高速化できる。",
-          "転移題材の解法接続: 区間分割 DP の遷移を max 部と min 部へ線形分離し、右端追加時の区間極値の変化を重み付き単調スタックでまとめて dp_i を算出する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "候補を捨てられる支配条件を証明し、各候補を高々一度だけ単調stack・queueから削除できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 7,

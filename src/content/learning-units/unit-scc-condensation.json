@@ -33,71 +33,15 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/scc-condensation.md",
-  "problemIds": [
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
     "abc214-h",
     "abc306-g",
     "abc374-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-condense-and-order-directed-graph",
-      "learningOutcomeIds": [
-        "outcome-condense-and-order-directed-graph"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。有向グラフで同一強連結成分内を自由に巡回でき、頂点資源をまとめて回収できるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC214 H「Collecting」について、同じ強連結成分へ一度入れば成分内を巡って全ての落とし物を回収できるため、成分を一頂点へ縮約し重みを合計してよい。",
-      "procedure": [
-        "観察: 同じ強連結成分へ一度入れば成分内を巡って全ての落とし物を回収できるため、成分を一頂点へ縮約し重みを合計してよい。",
-        "観察: 縮約後は DAG 上で始点から K 本の経路を選び、どれかの経路が初めて通る頂点の重みだけを一度得る問題になる。",
-        "着眼: 頂点 u の in から out へ、容量 1 の報酬辺と容量無限の無報酬辺を並べると、訪問回数にかかわらず X_u を高々一度だけ獲得できる。",
-        "着眼: トポロジカル順の重みの prefix sum を使って「通らなかった重み」を費用化すると、負の報酬辺を全て非負費用へ置き換えられる。",
-        "方針: 縮約 DAG の各頂点を入出力に分割し、最初の一単位だけ報酬を得る容量辺と再訪用の辺を置いて K 単位の最小費用流へ帰着する。（各流量が一人の経路に対応し、容量 1 の辺が頂点報酬を全経路を通じて一度だけ数える。）",
-        "接続: SCC 縮約で移動を DAG の経路へ変え、頂点報酬を容量付き node-splitting 辺で共有し、トポロジカル prefix による再重み付け後の最小費用流として K 経路を同時最適化する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "有向グラフの閉路を扱い、必要なら強連結成分へ縮約してDAG順に情報を伝播できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-condense-and-order-directed-graph",
-      "learningOutcomeIds": [
-        "outcome-condense-and-order-directed-graph"
-      ],
-      "prerequisiteIds": [
-        "outcome-process-dag-in-topological-order",
-        "prereq-abc-advanced-v1",
-        "unit-dag-topological-processing"
-      ],
-      "attainmentCondition": "学習成果「有向グラフの閉路を扱い、必要なら強連結成分へ縮約してDAG順に情報を伝播できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC306 G「Return to 1」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「有向グラフの閉路を扱い、必要なら強連結成分へ縮約してDAG順に情報を伝播できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 有向graphの周期gcd: 同じvertexへ戻るwalkの可能lengthを巨大なexact値について判定したいとき。 適用: root distance potentialと各edgeのdepth差+1のgcdからSCC periodを得る。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 有向graphの周期gcd: 同じvertexへ戻るwalkの可能lengthを巨大なexact値について判定したいとき。 適用: root distance potentialと各edgeのdepth差+1のgcdからSCC periodを得る。",
-          "転移題材の解法接続: strongly connected directed graphのperiodをDFS potentialsに対するedge discrepanciesのgcdとして計算し、target lengthのprime supportと照合する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "有向グラフの閉路を扱い、必要なら強連結成分へ縮約してDAG順に情報を伝播できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 71,

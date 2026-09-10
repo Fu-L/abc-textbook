@@ -1,6 +1,6 @@
 ---
 title: "尺取り法・sliding windowで連続区間を走査する"
-description: "前提から尺取り法・sliding windowで連続区間を走査するを見抜き、方針へ接続して検証するための学習単位。"
+description: "尺取り法・sliding windowで連続区間を走査するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 13
@@ -8,108 +8,52 @@ sidebar:
 
 # 尺取り法・sliding windowで連続区間を走査する
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。
-
-### この単元では扱わない範囲
-
-- 値域上の真偽境界を探す二分探索・パラメトリックサーチ。
-
-## 発動条件と見分け方
+## 概要
 
 ### 尺取り法・sliding window
 
 一列の連続窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進める。
 
-検索語: sliding window、two pointers、尺取り法
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる
+窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。
 
-題材: [ABC250 F「One Fourth」](https://atcoder.jp/contests/abc250/tasks/abc250_f)
+- 値域上の真偽境界を探す二分探索・パラメトリックサーチ。
 
-選定理由: 面積を2倍した外積和で保持すれば、四分の一との差は|全体の2倍面積-4×部分の2倍面積|として整数だけで比較できる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。一方の端点を固定した部分面積が他方の端点に対して単調に変化する。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC260 E「At Least One」](https://atcoder.jp/contests/abc260/tasks/abc260_e)
+2. [ABC294 E「2xN Grid」](https://atcoder.jp/contests/abc294/tasks/abc294_e)
+3. [ABC337 F「Usual Color Ball Problems」](https://atcoder.jp/contests/abc337/tasks/abc337_f)
+4. [ABC250 F「One Fourth」](https://atcoder.jp/contests/abc250/tasks/abc250_f)
+5. [ABC444 E「Sparse Range」](https://atcoder.jp/contests/abc444/tasks/abc444_e)
+6. [ABC370 F「Cake Division」](https://atcoder.jp/contests/abc370/tasks/abc370_f)
+7. [ABC258 E「Packing Potatoes」](https://atcoder.jp/contests/abc258/tasks/abc258_e)
+8. [ABC452 F「Interval Inversion Count」](https://atcoder.jp/contests/abc452/tasks/abc452_f)
 
-- 一つの対角線で分けた領域の面積と多角形全体の四分の一との差の最小値を求められる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 凸多角形で始点を固定すると、対角線のもう一端を周上で進めた部分多角形の面積は単調に増えるため、4倍面積が全体面積を跨ぐ位置だけ調べればよい。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 符号付き面積を更新する二点法 — 凸性による面積の単調性から、各始点で終点を戻さず進められ、目標を跨ぐ直前と直後だけで最小差を評価できる。
-- **棄却**: 全ての対角線について切り取る面積を計算する — 対角線が二次個あり、N=2×10^5では列挙できない。
-
-#### 鍵となる着眼
-
-- 面積を2倍した外積和で保持すれば、四分の一との差は|全体の2倍面積-4×部分の2倍面積|として整数だけで比較できる。
-- 始点を一つ進めても最適な終点は後退しないので、頂点列を巡回配列として二本のポインタを全体で線形回だけ動かせる。
-
-#### アルゴリズムへ接続する
-
-全体の2倍面積Sを求め、頂点を巡回させながら部分多角形の2倍面積Eを外積で増減する。各左端について4EがSを超えるまで右端を進め、跨ぐ前後の|S-4E|で答えを更新する。
-
-
-## 転用するときの確認
-
-- **凸多角形の二点法**: 一方の端点を固定した部分面積が他方の端点に対して単調に変化する。 適用: 目標面積を跨ぐ終点を単調ポインタで追跡する。
-- **外積による面積差分**: 座標多角形の面積を正確に高速更新したい。 適用: 三角形の外積を足し引きして、浮動小数点なしで部分面積を維持する。
-- 連続的に見える幾何最適化でも、単調な量の閾値越えへ直せれば二点法が使える。
-- 三角形・長方形・細長い凸多角形で二次全探索と比較し、ポインタ更新時の面積の足し引きと巡回端の候補漏れを確認する。
-
-## 到達確認
-
-### 到達確認 1 — 一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる
-
-転移題材: [ABC258 E「Packing Potatoes」](https://atcoder.jp/contests/abc258/tasks/abc258_e)
-
-**課題**: ABC258 E「Packing Potatoes」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 各問い合わせで指定されたK番目の箱へ入るじゃがいもの個数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 各問い合わせで指定されたK番目の箱へ入るじゃがいもの個数を求められる。
-
-- 対象技能が担う箇所: 各問い合わせで指定されたK番目の箱へ入るじゃがいもの個数を求められる。
-- 転移題材の解法接続: q=floor(X/S), rem=X mod Sとし、二周したW上の二点法でrem以上にする追加個数を各iへ求めてC_i=qN+追加数とする。next[i]=(i+C_i) mod Nを作り、0からの頂点列と閉路開始を記録して各K_i-1位置のCを返す。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。
-
-</details>
-
+- [ABC215 F「Dist Max 2」](https://atcoder.jp/contests/abc215/tasks/abc215_f)
+- [ABC281 E「Least Elements」](https://atcoder.jp/contests/abc281/tasks/abc281_e)
+- [ABC290 E「Make it Palindrome」](https://atcoder.jp/contests/abc290/tasks/abc290_e)
+- [ABC300 G「P-smooth number」](https://atcoder.jp/contests/abc300/tasks/abc300_g)
+- [ABC314 G「Amulets」](https://atcoder.jp/contests/abc314/tasks/abc314_g)
+- [ABC365 G「AtCoder Office」](https://atcoder.jp/contests/abc365/tasks/abc365_g)
+- [ABC366 E「Manhattan Multifocal Ellipse」](https://atcoder.jp/contests/abc366/tasks/abc366_e)
+- [ABC380 G「Another Shuffle Window」](https://atcoder.jp/contests/abc380/tasks/abc380_g)
+- [ABC388 G「Simultaneous Kagamimochi 2」](https://atcoder.jp/contests/abc388/tasks/abc388_g)
+- [ABC431 F「Almost Sorted 2」](https://atcoder.jp/contests/abc431/tasks/abc431_f)
+- [ABC455 G「Balanced Subarrays」](https://atcoder.jp/contests/abc455/tasks/abc455_g)
 
 ## 根拠
 
@@ -120,4 +64,4 @@ sidebar:
 - [ABC258 E 公式問題文](https://atcoder.jp/contests/abc258/tasks/abc258_e)
 - [ABC258 E 公式解説](https://atcoder.jp/contests/abc258/editorial/4215)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-two-pointers-window`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-two-pointers-window`

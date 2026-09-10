@@ -1,6 +1,6 @@
 ---
 title: "動的計画法"
-description: "前提から動的計画法を見抜き、方針へ接続して検証するための学習単位。"
+description: "動的計画法の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 1
@@ -8,204 +8,105 @@ sidebar:
 
 # 動的計画法
 
-このページは **章** です。分野全体の索引として、技能の境界と学ぶ順序を俯瞰します。各技能の定義を混同せず、必要な節・小節へ降りるための地図として使ってください。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 未来に十分な状態と、状態間の完全な遷移を説明できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 状態と遷移の設計を共通言語にし、集合・列・確率・ゲーム・遷移高速化へ進む土台を作る。
-
-### この単元では扱わない範囲
-
-- なし
-
-## 下位単元と学習順
-
-以下は canonical standard order に沿った章内カリキュラムです。定義・証明・実装境界・Outcome到達確認は各リンク先で扱い、この章では経路選択に必要な境界を示します。
-
-1. [最小十分状態からDPを設計する](./dp-state-design.md)（標準順 10）— 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
-2. [グリッド・多次元表の局所DPを設計する](./dp-grid-table.md)（標準順 32）— 状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。
-3. [集合・資源軸のDP](./dp-subset-resource.md)（標準順 33）— 最小十分状態を設計できるようになった後、集合bitmaskや容量を軸にした遷移と更新順へ進む。
-4. [列・区間・分割のDP](./dp-sequence-interval.md)（標準順 35）— 状態設計を土台に、列順を保つ選択と区間の分割点という二つの合成方法を学ぶ。
-5. [繰り上がり・借り・混合基数を状態にするDP](./dp-carry-mixed-radix.md)（標準順 49）— 状態設計を土台に、整除鎖の丸めや複数項の加算で次の桁へ渡すcarryだけを有限状態として保つ。
-6. [確率過程・期待値DP](./dp-stochastic.md)（標準順 53）— 状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。
-7. [ゲーム状態の勝敗とGrundy数](./dp-game.md)（標準順 56）— 状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。
-8. [minimax・得点差・局面値を評価するゲームDP](./dp-game-value.md)（標準順 58）— 状態遷移を設計できることを前提に、双方の最適行動を最大化・最小化として評価する。
-9. [接頭辞から更新する有限状態DP](./dp-digit-string.md)（標準順 72）— 状態設計を土台に、接頭辞から決まる有限統計を更新するという共通像を作り、数値上限の桁DPと有限automaton DPの境界を比較する。
-10. [DP遷移を因数分解・集約して加速する](./dp-transition-optimization.md)（標準順 77）— 正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。
-11. [固定線形遷移を巨大回数進める](./linear-recurrence.md)（標準順 80）— 一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。
-12. [独立な数ゲームの和](./conway-number-games.md)（標準順 101）— 有限局面DAGのminimaxで得た考え方と実装を再利用し、独立な数ゲームの和の発動条件・正当化・境界を重複なく学ぶ。
-13. [循環局面の後退解析とminimax距離](./cyclic-minimax-game.md)（標準順 102）— 有限局面DAGのminimaxで得た考え方と実装を再利用し、循環局面の後退解析とminimax距離の発動条件・正当化・境界を重複なく学ぶ。
-14. [Steiner tree subset DP](./steiner-tree-dp.md)（標準順 157）— 最短路モデル・部分集合・bitmask状態DPで得た考え方と実装を再利用し、Steiner tree subset DPの発動条件・正当化・境界を重複なく学ぶ。
-
-## 発動条件と見分け方
+## 概要
 
 ### DP状態と遷移
 
 未来に必要な情報を状態とし、遷移と基底を設計する。
 
-検索語: DP、dynamic programming、動的計画法
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 未来に十分な状態と、状態間の完全な遷移を説明できる
+状態と遷移の設計を共通言語にし、集合・列・確率・ゲーム・遷移高速化へ進む土台を作る。
 
-題材: [ABC212 E「Safety Journey」](https://atcoder.jp/contests/abc212/tasks/abc212_e)
+- なし
 
-選定理由: 密な許可関係をそのまま扱うのでなく、「全候補から疎な禁止集合を引く」という補集合側の表現に反転する。
+## 下位単元
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。許される遷移がほぼ全てで、禁止される遷移だけが少数列挙されているとき。 問題全体への接続は併用技能を学んだ後に読む。
+- [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)
+- [グリッド・多次元表の局所DPを設計する](/learn/dynamic-programming/dp-grid-table/)
+- [集合・資源軸のDP](/learn/dynamic-programming/dp-subset-resource/)
+- [列・区間・分割のDP](/learn/dynamic-programming/dp-sequence-interval/)
+- [繰り上がり・借り・混合基数を状態にするDP](/learn/dynamic-programming/dp-carry-mixed-radix/)
+- [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)
+- [ゲーム状態の勝敗とGrundy数](/learn/dynamic-programming/dp-game/)
+- [minimax・得点差・局面値を評価するゲームDP](/learn/dynamic-programming/dp-game-value/)
+- [接頭辞から更新する有限状態DP](/learn/dynamic-programming/dp-digit-string/)
+- [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)
+- [固定線形遷移を巨大回数進める](/learn/dynamic-programming/linear-recurrence/)
+- [独立な数ゲームの和](/learn/dynamic-programming/conway-number-games/)
+- [循環局面の後退解析とminimax距離](/learn/dynamic-programming/cyclic-minimax-game/)
+- [Steiner tree subset DP](/learn/dynamic-programming/steiner-tree-dp/)
 
-#### このOutcomeを支える根拠
+## 問題一覧
 
-- 密な遷移が疎な禁止関係で記述された DP を、全体和と例外減算に置き換えて実装できる。
-- DP の各状態が表す時点と場所を定義し、前段から次段への加法的遷移を組み立てられること。
-- 法を取る引き算で負値を正規化し、複数回の減算後も剰余を正しく扱えること。
-- この問題の入力は道路を列挙しているが、道路は移動可能辺ではなく移動禁止辺であり、実際の遷移グラフは非常に密である。 再利用の観点: 入力が関係の例外だけを表す問題では、例外を足す発想だけでなく、全集合から例外を引く集約式を検討する。
-- 日ごとの街別到達数を DP とし、全成分和を基準値にして禁止辺の両端からの寄与を差し引くことで、完全グラフの補グラフ上の遷移を疎な更新へ変換する。
-- 前日の到達数の総和を先に求め、各到着街について自己ループと壊れた道路の端点に由来する寄与だけを引く。 — 全ての許可辺を列挙せず、各日につき街と壊れた道路だけを走査して同じ遷移を計算できる。
-- 密な許可関係をそのまま扱うのでなく、「全候補から疎な禁止集合を引く」という補集合側の表現に反転する。
-- 同じ街に留まることも禁止されるため、入力された壊れた道路だけでなく dp の同じ添字の値も必ず総和から除く。
-- 各晩は今いる街にも壊れた道路の相手にも移動できず、それ以外のほぼ全ての街へ移動できる。使えない組だけが M 本の道路として疎に与えられている。
-- 翌日のある街への到達数は、前日の全街への到達数の総和から、その街自身と壊れた道路で隣接する街からの分を除けば得られる。
-- 補集合を使う遷移高速化: 許される遷移がほぼ全てで、禁止される遷移だけが少数列挙されているとき。 適用: 全状態の値の総和から自己遷移と壊れた道路に対応する値を引き、許可辺の走査を省く。
-- ローリング DP: 次の段が直前の段だけに依存し、段数分の履歴を保持する必要がないとき。 適用: 前日と翌日の街別配列を分け、各晩の遷移後に交換して K 日目の街 1 の値を得る。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### 観察
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-- 各晩は今いる街にも壊れた道路の相手にも移動できず、それ以外のほぼ全ての街へ移動できる。使えない組だけが M 本の道路として疎に与えられている。
-- 翌日のある街への到達数は、前日の全街への到達数の総和から、その街自身と壊れた道路で隣接する街からの分を除けば得られる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 候補を比較する
+## 関連問題
 
-- **採用**: 前日の到達数の総和を先に求め、各到着街について自己ループと壊れた道路の端点に由来する寄与だけを引く。 — 全ての許可辺を列挙せず、各日につき街と壊れた道路だけを走査して同じ遷移を計算できる。
-- **棄却**: 各日について全ての出発街と到着街の組を調べ、移動可能なら到達数を加える。 — 移動可能な組が密なので、街の組を直接列挙すると N の二乗に日数を掛けた回数の遷移が必要になる。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 鍵となる着眼
-
-- 密な許可関係をそのまま扱うのでなく、「全候補から疎な禁止集合を引く」という補集合側の表現に反転する。
-- 同じ街に留まることも禁止されるため、入力された壊れた道路だけでなく dp の同じ添字の値も必ず総和から除く。
-
-#### アルゴリズムへ接続する
-
-日ごとの街別到達数を DP とし、全成分和を基準値にして禁止辺の両端からの寄与を差し引くことで、完全グラフの補グラフ上の遷移を疎な更新へ変換する。
-
-## 下位単元を使い分ける比較例
-
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **最小十分状態からDPを設計する** — 直接到達点: 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。近いが対象外: 状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。
-- **グリッド・多次元表の局所DPを設計する** — 直接到達点: グリッドまたは多次元表の依存方向と境界状態を定め、計算済みの局所近傍からDAG順に全状態を更新できる。近いが対象外: 一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。
-- **集合・資源軸のDP** — 直接到達点: 資源軸の上限と更新順を選び、選択の重複を避けられる。近いが対象外: 入力順や区間端点だけを状態にし、集合・容量軸を持たないDP。
-- **列・区間・分割のDP** — 直接到達点: 区間または接頭辞の分割点を列挙し、小問題の答えを合成できる／列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。近いが対象外: bitmask集合や容量だけを状態にし、列順・区間分割を持たないDP。
-- **繰り上がり・借り・混合基数を状態にするDP** — 直接到達点: 整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。近いが対象外: 数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。
-- **確率過程・期待値DP** — 直接到達点: 確率遷移から期待値または到達確率の再帰式を立てて解ける。近いが対象外: 二人零和ゲームの勝敗・Grundy数。
-- **ゲーム状態の勝敗とGrundy数** — 直接到達点: 後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。近いが対象外: 有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。
-- **minimax・得点差・局面値を評価するゲームDP** — 直接到達点: 有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う。近いが対象外: 勝敗だけを分類する通常の後退解析・Grundy数。
-- **接頭辞から更新する有限状態DP** — 直接到達点: 2個の下位Outcomeへ進むための構造索引。近いが対象外: 整除鎖・加算式のcarryだけを下位桁から渡すDP、および接頭辞状態を使わない一般の表DP。
-- **DP遷移を因数分解・集約して加速する** — 直接到達点: 高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる。近いが対象外: 固定線形遷移の巨大回累乗。
-- **固定線形遷移を巨大回数進める** — 直接到達点: 固定線形遷移を行列または漸化式にし、巨大回数後の値を求められる。近いが対象外: 一般のDP遷移の区間集約・単調最適化。
-- **独立な数ゲームの和** — 直接到達点: 全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 独立な数ゲームの和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **循環局面の後退解析とminimax距離** — 直接到達点: 終了局面から逆辺を辿り、終了側が一手選べば確定するOR局面と全手の確定を待つAND局面を区別する。未確定局面で無限継続を判定し、非負重みなら優先度付きキューで有限なminimax距離を確定する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 循環局面の後退解析とminimax距離の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **Steiner tree subset DP** — 直接到達点: terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest path relaxationを交互に行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: Steiner tree subset DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- **補集合を使う遷移高速化**: 許される遷移がほぼ全てで、禁止される遷移だけが少数列挙されているとき。 適用: 全状態の値の総和から自己遷移と壊れた道路に対応する値を引き、許可辺の走査を省く。
-- **ローリング DP**: 次の段が直前の段だけに依存し、段数分の履歴を保持する必要がないとき。 適用: 前日と翌日の街別配列を分け、各晩の遷移後に交換して K 日目の街 1 の値を得る。
-- 入力が関係の例外だけを表す問題では、例外を足す発想だけでなく、全集合から例外を引く集約式を検討する。
-- 辺数が少ないのに「辺のない組へ移動する」と書かれていたら、入力辺ではなくその補集合が本体だと読み替える。
-- 全体和から引く対象を、入力の禁止辺だけで終えず、問題文が別に禁じる自己遷移まで列挙して確認する。
-
-## 到達確認
-
-### 到達確認 1 — 未来に十分な状態と、状態間の完全な遷移を説明できる
-
-転移題材: [ABC212 H「Nim Counting」](https://atcoder.jp/contests/abc212/tasks/abc212_h)
-
-**課題**: ABC212 H「Nim Counting」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「未来に十分な状態と、状態間の完全な遷移を説明できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 未来に十分な状態と、状態間の完全な遷移を説明できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: Nim の勝敗条件を XOR 分布の数え上げへ接続し、変換と冪和で可変長の列を一括処理できる。／通常の Nim で XOR が 0 の局面と 0 でない局面の勝敗を説明できること。／Walsh–Hadamard 変換と逆変換が XOR 畳み込みを成分積へ移す仕組みを理解していること。／山数 1 から N の答えを個別に作らず、変換後の一座標では全山数の寄与が単なる有限等比級数になる。 再利用の観点: 同じ畳み込み核を回数違いで合算する問題は、対角化後に冪の和として一括計算できないか検討する。／Nim の敗北条件を XOR 畳み込みの添字 0 の係数へ翻訳し、XOR 変換領域で可変長列の冪和をまとめて評価してから逆変換する。／Walsh–Hadamard 変換で XOR 畳み込みを成分ごとの積へ変え、各成分で 1 個から N 個までの冪和を求める。 — 山数ごとの畳み込みを反復せず、変換後の各座標で等比数列を計算して一度だけ逆変換できる。／求める勝ち局面を直接数えるより、総列数から XOR が 0 の負け局面数を引くと Nim の判定条件をそのまま使える。／山数が固定でなく 1 から N までである点は、変換後の各値 v に対する v＋v²＋…＋vᴺ という冪和に吸収できる。／各山から一個以上の石を取れる通常の Nim なので、先手が負ける必要十分条件は全ての山サイズの排他的論理和が 0 になることである。／許される山サイズの指示配列を C とすると、山が M 個のときの排他的論理和別の列数は C の M 回 XOR 畳み込みになる。／Nim 和による勝敗判定: 複数の山から一山だけ選んで正の個数を減らす通常プレイのゲームを扱うとき。 適用: 全山サイズの XOR が 0 の列を後手勝ちとして数え、全ての列から差し引く。／XOR 畳み込みと Walsh–Hadamard 変換: 選択値の XOR ごとの組合せ数を求め、同じ分布の畳み込みを何度も重ねるとき。 適用: 許可サイズの指示配列を変換し、座標ごとの冪和を計算して逆変換後の添字 0 を読む。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- Nim の勝敗条件を XOR 分布の数え上げへ接続し、変換と冪和で可変長の列を一括処理できる。
-- 通常の Nim で XOR が 0 の局面と 0 でない局面の勝敗を説明できること。
-- Walsh–Hadamard 変換と逆変換が XOR 畳み込みを成分積へ移す仕組みを理解していること。
-- 山数 1 から N の答えを個別に作らず、変換後の一座標では全山数の寄与が単なる有限等比級数になる。 再利用の観点: 同じ畳み込み核を回数違いで合算する問題は、対角化後に冪の和として一括計算できないか検討する。
-- Nim の敗北条件を XOR 畳み込みの添字 0 の係数へ翻訳し、XOR 変換領域で可変長列の冪和をまとめて評価してから逆変換する。
-- Walsh–Hadamard 変換で XOR 畳み込みを成分ごとの積へ変え、各成分で 1 個から N 個までの冪和を求める。 — 山数ごとの畳み込みを反復せず、変換後の各座標で等比数列を計算して一度だけ逆変換できる。
-- 求める勝ち局面を直接数えるより、総列数から XOR が 0 の負け局面数を引くと Nim の判定条件をそのまま使える。
-- 山数が固定でなく 1 から N までである点は、変換後の各値 v に対する v＋v²＋…＋vᴺ という冪和に吸収できる。
-- 各山から一個以上の石を取れる通常の Nim なので、先手が負ける必要十分条件は全ての山サイズの排他的論理和が 0 になることである。
-- 許される山サイズの指示配列を C とすると、山が M 個のときの排他的論理和別の列数は C の M 回 XOR 畳み込みになる。
-- Nim 和による勝敗判定: 複数の山から一山だけ選んで正の個数を減らす通常プレイのゲームを扱うとき。 適用: 全山サイズの XOR が 0 の列を後手勝ちとして数え、全ての列から差し引く。
-- XOR 畳み込みと Walsh–Hadamard 変換: 選択値の XOR ごとの組合せ数を求め、同じ分布の畳み込みを何度も重ねるとき。 適用: 許可サイズの指示配列を変換し、座標ごとの冪和を計算して逆変換後の添字 0 を読む。
-
-- 対象技能が担う箇所: Nim の勝敗条件を XOR 分布の数え上げへ接続し、変換と冪和で可変長の列を一括処理できる。
-- 対象技能が担う箇所: 通常の Nim で XOR が 0 の局面と 0 でない局面の勝敗を説明できること。
-- 対象技能が担う箇所: Walsh–Hadamard 変換と逆変換が XOR 畳み込みを成分積へ移す仕組みを理解していること。
-- 対象技能が担う箇所: 山数 1 から N の答えを個別に作らず、変換後の一座標では全山数の寄与が単なる有限等比級数になる。 再利用の観点: 同じ畳み込み核を回数違いで合算する問題は、対角化後に冪の和として一括計算できないか検討する。
-- 対象技能が担う箇所: Nim の敗北条件を XOR 畳み込みの添字 0 の係数へ翻訳し、XOR 変換領域で可変長列の冪和をまとめて評価してから逆変換する。
-- 対象技能が担う箇所: Walsh–Hadamard 変換で XOR 畳み込みを成分ごとの積へ変え、各成分で 1 個から N 個までの冪和を求める。 — 山数ごとの畳み込みを反復せず、変換後の各座標で等比数列を計算して一度だけ逆変換できる。
-- 対象技能が担う箇所: 求める勝ち局面を直接数えるより、総列数から XOR が 0 の負け局面数を引くと Nim の判定条件をそのまま使える。
-- 対象技能が担う箇所: 山数が固定でなく 1 から N までである点は、変換後の各値 v に対する v＋v²＋…＋vᴺ という冪和に吸収できる。
-- 対象技能が担う箇所: 各山から一個以上の石を取れる通常の Nim なので、先手が負ける必要十分条件は全ての山サイズの排他的論理和が 0 になることである。
-- 対象技能が担う箇所: 許される山サイズの指示配列を C とすると、山が M 個のときの排他的論理和別の列数は C の M 回 XOR 畳み込みになる。
-- 対象技能が担う箇所: Nim 和による勝敗判定: 複数の山から一山だけ選んで正の個数を減らす通常プレイのゲームを扱うとき。 適用: 全山サイズの XOR が 0 の列を後手勝ちとして数え、全ての列から差し引く。
-- 対象技能が担う箇所: XOR 畳み込みと Walsh–Hadamard 変換: 選択値の XOR ごとの組合せ数を求め、同じ分布の畳み込みを何度も重ねるとき。 適用: 許可サイズの指示配列を変換し、座標ごとの冪和を計算して逆変換後の添字 0 を読む。
-- 転移題材の解法接続: Nim の敗北条件を XOR 畳み込みの添字 0 の係数へ翻訳し、XOR 変換領域で可変長列の冪和をまとめて評価してから逆変換する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 未来に十分な状態と、状態間の完全な遷移を説明できる。
-
-</details>
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC212 H「Nim Counting」](https://atcoder.jp/contests/abc212/tasks/abc212_h)
+- [ABC213 G「Connectivity 2」](https://atcoder.jp/contests/abc213/tasks/abc213_g)
+- [ABC216 H「Random Robots」](https://atcoder.jp/contests/abc216/tasks/abc216_h)
+- [ABC218 G「Game on Tree 2」](https://atcoder.jp/contests/abc218/tasks/abc218_g)
+- [ABC225 F「String Cards」](https://atcoder.jp/contests/abc225/tasks/abc225_f)
+- [ABC227 F「Treasure Hunting」](https://atcoder.jp/contests/abc227/tasks/abc227_f)
+- [ABC228 G「Digits on Grid」](https://atcoder.jp/contests/abc228/tasks/abc228_g)
+- [ABC228 H「Histogram」](https://atcoder.jp/contests/abc228/tasks/abc228_h)
+- [ABC234 G「Divide a Sequence」](https://atcoder.jp/contests/abc234/tasks/abc234_g)
+- [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
+- [ABC236 E「Average and Median」](https://atcoder.jp/contests/abc236/tasks/abc236_e)
+- [ABC238 Ex「Removing People」](https://atcoder.jp/contests/abc238/tasks/abc238_h)
+- [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
+- [ABC245 Ex「Product Modulo 2」](https://atcoder.jp/contests/abc245/tasks/abc245_h)
+- [ABC246 Ex「01? Queries」](https://atcoder.jp/contests/abc246/tasks/abc246_h)
+- [ABC246 F「typewriter」](https://atcoder.jp/contests/abc246/tasks/abc246_f)
+- [ABC249 Ex「Dye Color」](https://atcoder.jp/contests/abc249/tasks/abc249_h)
+- [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h)
+- [ABC287 F「Components」](https://atcoder.jp/contests/abc287/tasks/abc287_f)
+- [ABC290 Ex「Bow Meow Optimization」](https://atcoder.jp/contests/abc290/tasks/abc290_h)
+- [ABC295 Ex「E or m」](https://atcoder.jp/contests/abc295/tasks/abc295_h)
+- [ABC300 Ex「Fibonacci: Revisited」](https://atcoder.jp/contests/abc300/tasks/abc300_h)
+- [ABC305 Ex「Shojin」](https://atcoder.jp/contests/abc305/tasks/abc305_h)
+- [ABC306 Ex「Balance Scale」](https://atcoder.jp/contests/abc306/tasks/abc306_h)
+- [ABC309 E「Family and Insurance」](https://atcoder.jp/contests/abc309/tasks/abc309_e)
+- [ABC309 G「Ban Permutation」](https://atcoder.jp/contests/abc309/tasks/abc309_g)
+- [ABC311 Ex「Many Illumination Plans」](https://atcoder.jp/contests/abc311/tasks/abc311_h)
+- [ABC313 F「Flip Machines」](https://atcoder.jp/contests/abc313/tasks/abc313_f)
+- [ABC319 G「Counting Shortest Paths」](https://atcoder.jp/contests/abc319/tasks/abc319_g)
+- [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
+- [ABC332 G「Not Too Many Balls」](https://atcoder.jp/contests/abc332/tasks/abc332_g)
+- [ABC347 F「Non-overlapping Squares」](https://atcoder.jp/contests/abc347/tasks/abc347_f)
+- [ABC366 F「Maximum Composition」](https://atcoder.jp/contests/abc366/tasks/abc366_f)
+- [ABC373 F「Knapsack with Diminishing Values」](https://atcoder.jp/contests/abc373/tasks/abc373_f)
+- [ABC374 F「Shipping」](https://atcoder.jp/contests/abc374/tasks/abc374_f)
+- [ABC378 G「Everlasting LIDS」](https://atcoder.jp/contests/abc378/tasks/abc378_g)
+- [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
+- [ABC388 F「Dangerous Sugoroku」](https://atcoder.jp/contests/abc388/tasks/abc388_f)
+- [ABC400 G「Patisserie ABC 3」](https://atcoder.jp/contests/abc400/tasks/abc400_g)
+- [ABC409 G「Accumulation of Wealth」](https://atcoder.jp/contests/abc409/tasks/abc409_g)
+- [ABC416 F「Paint Tree 2」](https://atcoder.jp/contests/abc416/tasks/abc416_f)
+- [ABC419 F「All Included」](https://atcoder.jp/contests/abc419/tasks/abc419_f)
+- [ABC426 G「Range Knapsack Query」](https://atcoder.jp/contests/abc426/tasks/abc426_g)
+- [ABC427 E「Wind Cleaning」](https://atcoder.jp/contests/abc427/tasks/abc427_e)
+- [ABC428 G「Necklace」](https://atcoder.jp/contests/abc428/tasks/abc428_g)
+- [ABC429 G「Sum of Pow of Mod of Linear」](https://atcoder.jp/contests/abc429/tasks/abc429_g)
+- [ABC433 G「Substring Game」](https://atcoder.jp/contests/abc433/tasks/abc433_g)
+- [ABC435 F「Cat exercise」](https://atcoder.jp/contests/abc435/tasks/abc435_f)
+- [ABC436 G「Linear Inequation」](https://atcoder.jp/contests/abc436/tasks/abc436_g)
+- [ABC446 G「221 Subsequence」](https://atcoder.jp/contests/abc446/tasks/abc446_g)
+- [ABC457 G「Catch All Apples」](https://atcoder.jp/contests/abc457/tasks/abc457_g)
+- [ABC458 F「Critical Misread」](https://atcoder.jp/contests/abc458/tasks/abc458_f)
+- [ABC464 E「Fill-Rect Query」](https://atcoder.jp/contests/abc464/tasks/abc464_e)
+- [ABC466 G「Segment Sum Constraints」](https://atcoder.jp/contests/abc466/tasks/abc466_g)
 
 ## 根拠
 
@@ -216,4 +117,4 @@ sidebar:
 - [ABC213 G 公式解説](https://atcoder.jp/contests/abc213/editorial/2392)
 - [ABC213 G 公式問題文](https://atcoder.jp/contests/abc213/tasks/abc213_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-chapter-dynamic-programming`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-chapter-dynamic-programming`

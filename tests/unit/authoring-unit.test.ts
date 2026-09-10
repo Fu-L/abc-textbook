@@ -207,12 +207,12 @@ describe('Problem authoring unit', () => {
     expect(staleCodes).toContain('EXECUTABLE_EXAMPLE_EVIDENCE_MISMATCH');
   });
 
-  it('keeps each Learning Unit example and attainment check in one strict document', () => {
+  it('allows ordinary optional Unit examples with unique local keys', () => {
     const unit = catalogFixture().learningUnits[0];
     if (!unit) throw new Error('Fixture learning unit is missing.');
     expect(LearningUnitSchema.safeParse(unit).success).toBe(true);
-    expect(LearningUnitSchema.safeParse({ ...unit, examples: [] }).success).toBe(false);
-    expect(LearningUnitSchema.safeParse({ ...unit, exercises: [] }).success).toBe(false);
+    expect(LearningUnitSchema.safeParse({ ...unit, examples: [] }).success).toBe(true);
+    expect(LearningUnitSchema.safeParse({ ...unit, exercises: [] }).success).toBe(true);
 
     const example = unit.examples[0];
     const exercise = unit.exercises[0];
@@ -234,44 +234,17 @@ describe('Problem authoring unit', () => {
       ...unit,
       ownedTagIds: [...unit.tagIds],
       ownedLearningOutcomeIds: [...unit.learningOutcomeIds],
-      examples: unit.examples.map((example) => ({
-        ...example,
-        learningUnitRole: 'guided_outcome' as const,
-      })),
-      exercises: unit.exercises.map((exercise) => ({
-        ...exercise,
-        learningUnitRole: 'outcome_attainment' as const,
-      })),
+      examples: [],
+      exercises: [],
     };
     expect(LearningUnitSchema.safeParse(owned).success).toBe(true);
     expect(
       LearningUnitSchema.safeParse({ ...owned, ownedLearningOutcomeIds: undefined }).success,
     ).toBe(false);
     expect(
-      LearningUnitSchema.safeParse({
-        ...owned,
-        examples: owned.examples.map((example) =>
-          Object.fromEntries(
-            Object.entries(example).filter(([field]) => field !== 'learningUnitRole'),
-          ),
-        ),
-      }).success,
-    ).toBe(false);
-
-    const routingOnly = {
-      ...unit,
-      ownedTagIds: [],
-      ownedLearningOutcomeIds: [],
-      examples: unit.examples.map((example) => ({
-        ...example,
-        learningUnitRole: 'curriculum_routing' as const,
-      })),
-      exercises: unit.exercises.map((exercise) => ({
-        ...exercise,
-        learningUnitRole: 'curriculum_routing' as const,
-      })),
-    };
-    expect(LearningUnitSchema.safeParse(routingOnly).success).toBe(true);
+      LearningUnitSchema.safeParse({ ...owned, ownedTagIds: [], ownedLearningOutcomeIds: [] })
+        .success,
+    ).toBe(true);
   });
 
   it('validates Learning Unit outcome links and answer evidence before publication', () => {

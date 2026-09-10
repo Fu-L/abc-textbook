@@ -1,6 +1,6 @@
 ---
 title: "法上の演算と積の保守"
-description: "前提から法上の演算と積の保守を見抜き、方針へ接続して検証するための学習単位。"
+description: "法上の演算と積の保守の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 15
@@ -8,83 +8,99 @@ sidebar:
 
 # 法上の演算と積の保守
 
-このページは **節** です。下位単元が扱う技能を比較し、発動条件・不変量・計算量の違いから学習経路を選ぶための構造単元です。
+## 概要
 
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
+下位の単元を、前提を満たす順にまとめます。
 
-## この単元でできるようになること
+## 前提と範囲
 
-- 直接所有するOutcomeはありません。この単元では下位単元の選択と学習順を扱います。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## 前提・学習順・対象外
+追加前提: なし。
 
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 法上の基本演算を先に確立し、そのうえで「積から旧因子を逆元で外す」操作に必要な可逆性と、法 m で剰余 0 となる因子では逆元が存在しない境界を独立した動的保守技能として学ぶ。
-
-### この単元では扱わない範囲
+法上の基本演算を先に確立し、そのうえで「積から旧因子を逆元で外す」操作に必要な可逆性と、法 m で剰余 0 となる因子では逆元が存在しない境界を独立した動的保守技能として学ぶ。
 
 - 一次合同・CRT、剰余列の周期、乗法的位数、および法をまたいだ合同条件の統合。
 
-## 下位単元と学習順
+## 下位単元
 
-以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
+- [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/)
+- [可逆な非零剰余と剰余 0 因子を含む法上の動的積](/learn/number-theory/dynamic-modular-product/)
 
-1. [法上の四則演算・高速累乗・逆元](./modular-arithmetic.md)（標準順 17）— 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
-2. [可逆な非零剰余と剰余 0 因子を含む法上の動的積](./dynamic-modular-product.md)（標準順 40）— 通常の法上演算と逆元の存在条件を前提に、取り得る因子のうち法 m で非零となるものがすべて可逆（典型的には素数法）かを確認する。剰余 0 だけは逆元を持たないため、その個数と可逆な非零剰余因子の積へ状態を分けて因子差し替えを定数時間で処理する。
+## 問題一覧
 
-## 発動条件と見分け方
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-この構造単元はTagを直接所有しません。下位単元の定義と対象外を比較して学習経路を選びます。
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-## ガイド例
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-- 通常のOutcomeガイド例は下位単元で扱います。
+## 関連問題
 
-## 下位単元を使い分ける比較例
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **法上の四則演算・高速累乗・逆元** — 直接到達点: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。近いが対象外: 法 m で剰余 0 となる因子数と可逆な非零剰余因子の積を分けて因子差し替えを処理する動的積、複数の合同条件を統合する一次合同・CRT、および剰余列の最小周期を求める問題。
-- **可逆な非零剰余と剰余 0 因子を含む法上の動的積** — 直接到達点: 法 m 上の積で一因子を差し替えるとき、取り得る因子のうち非零剰余がすべて可逆かを確認し、剰余 0 の因子数と可逆な非零剰余因子の積を分離して、可逆な旧因子を逆元で除き新因子を掛けて更新後の積を復元できる。近いが対象外: 因子が変化しない一回限りの積、和やmin/maxの更新、任意区間積を求めるSegment Tree、および合成数法で非零の非可逆因子も差し替える一般の場合。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- なし
-
-## 到達確認
-
-- 直接所有するOutcomeの到達確認はありません。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-- 直接所有するOutcomeの解答基準はありません。
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC215 G「Colorful Candies 2」](https://atcoder.jp/contests/abc215/tasks/abc215_g)
+- [ABC220 E「Distance on Large Perfect Binary Tree」](https://atcoder.jp/contests/abc220/tasks/abc220_e)
+- [ABC221 E「LEQ」](https://atcoder.jp/contests/abc221/tasks/abc221_e)
+- [ABC222 H「Beautiful Binary Tree」](https://atcoder.jp/contests/abc222/tasks/abc222_h)
+- [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
+- [ABC226 F「Score of Permutations」](https://atcoder.jp/contests/abc226/tasks/abc226_f)
+- [ABC228 E「Integer Sequence Fair」](https://atcoder.jp/contests/abc228/tasks/abc228_e)
+- [ABC234 F「Reordering」](https://atcoder.jp/contests/abc234/tasks/abc234_f)
+- [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
+- [ABC238 Ex「Removing People」](https://atcoder.jp/contests/abc238/tasks/abc238_h)
+- [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
+- [ABC241 Ex「Card Deck Score」](https://atcoder.jp/contests/abc241/tasks/abc241_h)
+- [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
+- [ABC243 F「Lottery」](https://atcoder.jp/contests/abc243/tasks/abc243_f)
+- [ABC245 Ex「Product Modulo 2」](https://atcoder.jp/contests/abc245/tasks/abc245_h)
+- [ABC246 F「typewriter」](https://atcoder.jp/contests/abc246/tasks/abc246_f)
+- [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
+- [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
+- [ABC269 F「Numbered Checker」](https://atcoder.jp/contests/abc269/tasks/abc269_f)
+- [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h)
+- [ABC270 G「Sequence in mod P」](https://atcoder.jp/contests/abc270/tasks/abc270_g)
+- [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g)
+- [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e)
+- [ABC276 F「Double Chance」](https://atcoder.jp/contests/abc276/tasks/abc276_f)
+- [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
+- [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e)
+- [ABC282 E「Choose Two and Eat One」](https://atcoder.jp/contests/abc282/tasks/abc282_e)
+- [ABC284 Ex「Count Unlabeled Graphs」](https://atcoder.jp/contests/abc284/tasks/abc284_h)
+- [ABC284 G「Only Once」](https://atcoder.jp/contests/abc284/tasks/abc284_g)
+- [ABC289 Ex「Trio」](https://atcoder.jp/contests/abc289/tasks/abc289_h)
+- [ABC295 E「Kth Number」](https://atcoder.jp/contests/abc295/tasks/abc295_e)
+- [ABC297 Ex「Diff Adjacent」](https://atcoder.jp/contests/abc297/tasks/abc297_h)
+- [ABC297 F「Minimum Bounding Box 2」](https://atcoder.jp/contests/abc297/tasks/abc297_f)
+- [ABC298 E「Unfair Sugoroku」](https://atcoder.jp/contests/abc298/tasks/abc298_e)
+- [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h)
+- [ABC301 F「Anti-DDoS」](https://atcoder.jp/contests/abc301/tasks/abc301_f)
+- [ABC303 Ex「Constrained Tree Degree」](https://atcoder.jp/contests/abc303/tasks/abc303_h)
+- [ABC304 F「Shift Table」](https://atcoder.jp/contests/abc304/tasks/abc304_f)
+- [ABC310 F「Make 10 Again」](https://atcoder.jp/contests/abc310/tasks/abc310_f)
+- [ABC310 G「Takahashi And Pass-The-Ball Game」](https://atcoder.jp/contests/abc310/tasks/abc310_g)
+- [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
+- [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
+- [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e)
+- [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
+- [ABC327 G「Many Good Tuple Problems」](https://atcoder.jp/contests/abc327/tasks/abc327_g)
+- [ABC332 F「Random Update Query」](https://atcoder.jp/contests/abc332/tasks/abc332_f)
+- [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f)
+- [ABC334 E「Christmas Color Grid 1」](https://atcoder.jp/contests/abc334/tasks/abc334_e)
+- [ABC335 G「Discrete Logarithm Problems」](https://atcoder.jp/contests/abc335/tasks/abc335_g)
+- [ABC336 G「16 Integers」](https://atcoder.jp/contests/abc336/tasks/abc336_g)
+- [ABC349 F「Subsequence LCM」](https://atcoder.jp/contests/abc349/tasks/abc349_f)
+- [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
+- [ABC380 G「Another Shuffle Window」](https://atcoder.jp/contests/abc380/tasks/abc380_g)
+- [ABC405 E「Fruit Lineup」](https://atcoder.jp/contests/abc405/tasks/abc405_e)
+- [ABC405 G「Range Shuffle Query」](https://atcoder.jp/contests/abc405/tasks/abc405_g)
+- [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
+- [ABC417 F「Random Gathering」](https://atcoder.jp/contests/abc417/tasks/abc417_f)
+- [ABC422 G「Balls and Boxes」](https://atcoder.jp/contests/abc422/tasks/abc422_g)
+- [ABC432 G「Sum of Binom(A, B)」](https://atcoder.jp/contests/abc432/tasks/abc432_g)
+- [ABC439 F「Beautiful Kadomatsu」](https://atcoder.jp/contests/abc439/tasks/abc439_f)
+- [ABC448 E「Simple Division」](https://atcoder.jp/contests/abc448/tasks/abc448_e)
+- [ABC456 G「Count Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_g)
 
 ## 根拠
 
@@ -95,4 +111,4 @@ sidebar:
 - [ABC221 E 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_e)
 - [ABC221 E 公式解説](https://atcoder.jp/contests/abc221/editorial/2718)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-modular-product-foundations`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-modular-product-foundations`

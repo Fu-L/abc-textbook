@@ -38,9 +38,9 @@
     "outcome-design-interval-split-dp"
   ],
   "representativeProblemIds": [
-    "abc233-g",
+    "abc466-e",
     "abc288-f",
-    "abc466-e"
+    "abc233-g"
   ],
   "aliases": [
     "interval DP",

@@ -15,9 +15,7 @@
     "source-abc268-editorial-4782-eba6ee35ec70b7e21f9935aec2f4f08bb56a01d390bc24e8952ee7c85cae2c51",
     "source-abc268-g-problem-1ce0d2d72d4e4fd15ee56036a2337b2e2dec2d261f9331527aaf393478ca62a1",
     "source-abc287-e-problem-4db894920640533697c1ae44f746223d25b228dff8a43790261e0db6b225e331",
-    "source-abc287-editorial-5609-3eae5d32344ce4b280463e67fdc31b14606774c7b48316b446410cb81ae139bb",
-    "source-abc353-e-problem-664ff6752d2dc14f04612070c41408399f4e648f0981d19c455ddc9db9b84432",
-    "source-abc353-editorial-9969-137ec1c5bd08e5a9fce39a58eb3825b744473a3d2ac97cb0be953ee76fae6e09"
+    "source-abc287-editorial-5609-3eae5d32344ce4b280463e67fdc31b14606774c7b48316b446410cb81ae139bb"
   ],
   "tagIds": [
     "tag-trie-prefix"
@@ -34,72 +32,24 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/string/trie-prefix.md",
   "problemIds": [
-    "abc240-ex",
-    "abc268-g",
     "abc287-e",
     "abc353-e",
     "abc377-g",
-    "abc403-e",
     "abc437-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-index-shared-prefixes-with-trie",
-      "learningOutcomeIds": [
-        "outcome-index-shared-prefixes-with-trie"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。多数文字列について共有prefixの深さをまとめて追いたいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC287 E「Karuta」について、同じprefix長kを持つ文字列groupでは、長さがちょうどkの文字列はそれ以上一致できず答えkで確定する。",
-      "procedure": [
-        "観察: 同じprefix長kを持つ文字列groupでは、長さがちょうどkの文字列はそれ以上一致できず答えkで確定する。",
-        "観察: 残りをk+1文字目で分類すると、size 1のgroupは他とk文字までしか一致せず答えk、size 2以上のgroupだけを次の深さへ再帰すればよい。",
-        "着眼: ある深さのprefixを共有する文字列が2本以上なら、その全ては少なくともその深さまで誰かと一致し、1本になった直前の深さが最大値になる。",
-        "着眼: 同じ文字列が複数回入力されても、終端深さのgroup sizeが2以上なので文字列長そのものが答えになる。",
-        "方針: 共通prefixごとのgroupを次文字で再帰分割し、単独になった深さを各文字列の答えにする。（trieの各文字を総入力長に比例して辿るだけで、全文字列の最大LCPを同時に確定できる。）",
-        "接続: 全indexをdepth 0のgroupとして再帰関数へ渡す。depth kで長さkの文字列へ答えkを設定し、それより長い文字列を次文字a..zでbucket分けする。bucket size 1ならそのindexの答えをk、size 2以上ならdepth k+1で再帰する。全indexの答えを入力順に出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc287-e",
+    "abc437-e",
+    "abc377-g",
+    "abc353-e"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-index-shared-prefixes-with-trie",
-      "learningOutcomeIds": [
-        "outcome-index-shared-prefixes-with-trie"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC353 E「Yet Another Sigma Problem」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全 pair の LCP を共有 prefix ごとの寄与へ転換し、総文字数に比例する Trie 走査で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 全 pair の LCP を共有 prefix ごとの寄与へ転換し、総文字数に比例する Trie 走査で求められる。",
-          "転移題材の解法接続: 空 Trie を用意し、j=1..N の順に S_j の文字をたどる。各文字後の node で現在 count を答えへ加え、その後（または二段目の走査で）S_j が通る全 node の count を1増やす。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
+  "relatedProblemIds": [
+    "abc240-ex",
+    "abc268-g",
+    "abc403-e"
   ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 0,

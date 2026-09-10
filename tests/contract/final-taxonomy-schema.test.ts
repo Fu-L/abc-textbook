@@ -324,6 +324,8 @@ const finalCandidates = (): z.input<typeof FinalTaxonomyCandidateSchema>[] => [
       learningOutcomeIds: ['outcome-core'],
       ownedLearningOutcomeIds: ['outcome-core'],
       problemIds: [...problemIds],
+      directProblemIds: [...problemIds],
+      relatedProblemIds: [],
       stageRank: 0,
       difficultyRank: 0,
       representativeRank: 0,

@@ -40,8 +40,8 @@
     "outcome-optimize-path-matching-by-contraction"
   ],
   "representativeProblemIds": [
-    "abc218-h",
-    "abc464-g"
+    "abc464-g",
+    "abc218-h"
   ],
   "aliases": [
     "minimum k-matching on a path",

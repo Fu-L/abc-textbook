@@ -35,65 +35,13 @@
     "abc233-ex",
     "abc394-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-share-threshold-checks-by-parallel-binary-search",
-      "learningOutcomeIds": [
-        "outcome-share-threshold-checks-by-parallel-binary-search"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。二次元の |Δx|＋|Δy| 距離球を範囲数え上げへ変換したいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC233 Ex「Manhattan Christmas Tree」について、座標を u＝x＋y、v＝x−y へ 45 度回転すると、元のマンハッタン距離は max(|Δu|,|Δv|) というチェビシェフ距離になる。",
-      "procedure": [
-        "観察: 座標を u＝x＋y、v＝x−y へ 45 度回転すると、元のマンハッタン距離は max(|Δu|,|Δv|) というチェビシェフ距離になる。",
-        "観察: 距離 r 以下の木は回転後の軸平行長方形 [u−r,u＋r]×[v−r,v＋r] 内の点であり、その個数が K 以上かは r に対して単調である。",
-        "着眼: 長方形内点数は x≤u＋r の prefix 個数から x＜u−r の prefix 個数を引き、各 prefix を y 区間和で求められる。",
-        "方針: 各クエリの答えを並列二分探索し、同じ反復の全長方形内点数を x sweep と y 座標 Fenwick tree でオフライン計算する。（距離判定を軸平行長方形数え上げへ変換し、全クエリを各反復でまとめて点・イベントの一走査にできる。）",
-        "接続: K 番目距離を単調な個数判定へ変え、回転座標の矩形問合せを二つの x-prefix イベントへ分解して、parallel binary search と BIT sweep を重ねる。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "各queryの未確定区間を保ち、同じroundのmidをbucketして一方向更新できる判定器を共有し、全queryの最小・最大成立境界を求められる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc394-g",
+    "abc233-ex"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-share-threshold-checks-by-parallel-binary-search",
-      "learningOutcomeIds": [
-        "outcome-share-threshold-checks-by-parallel-binary-search"
-      ],
-      "prerequisiteIds": [
-        "outcome-prove-and-search-threshold",
-        "prereq-abc-advanced-v1",
-        "unit-monotone-search"
-      ],
-      "attainmentCondition": "学習成果「各queryの未確定区間を保ち、同じroundのmidをbucketして一方向更新できる判定器を共有し、全queryの最小・最大成立境界を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC394 G「Dense Buildings」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「各queryの未確定区間を保ち、同じroundのmidをbucketして一方向更新できる判定器を共有し、全queryの最小・最大成立境界を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 大量のgrid移動queryを最大通行高度のoffline connectivityへ変換し、最小階段回数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 大量のgrid移動queryを最大通行高度のoffline connectivityへ変換し、最小階段回数を求められる。",
-          "転移題材の解法接続: 全grid隣接edgeをcapacity降順にsortする。各queryの[L,R) thresholdを持ち、mid別bucketを作るroundごとにDSUを初期化してedgeをthresholdまで追加し、endpoint連結ならL=mid、否ならR=midと更新する。確定Mから式を出力する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "各queryの未確定区間を保ち、同じroundのmidをbucketして一方向更新できる判定器を共有し、全queryの最小・最大成立境界を求められる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 80,

@@ -33,67 +33,19 @@
   "docPath": "src/content/docs/learn/tree/tree-euler-flattening.md",
   "problemIds": [
     "abc240-e",
-    "abc294-g",
     "abc337-g",
     "abc406-f"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-flatten-tree-by-euler-order",
-      "learningOutcomeIds": [
-        "outcome-flatten-tree-by-euler-order"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。部分木や連結な再帰部分が並び順上の区間になる表現を作りたいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC240 E「Ranges on Tree」について、異なる葉の部分木は互いに素なので、その区間も互いに交わらなければならない。葉が M 個なら少なくとも M 個の異なる正整数が必要で、最大値は M 未満にできない。",
-      "procedure": [
-        "観察: 異なる葉の部分木は互いに素なので、その区間も互いに交わらなければならない。葉が M 個なら少なくとも M 個の異なる正整数が必要で、最大値は M 未満にできない。",
-        "観察: DFS で葉を訪問順に1..Mと番号付けすると、任意の部分木に属する葉は DFS 順の連続区間を占める。よってその最小番号と最大番号を頂点の区間にできる。",
-        "着眼: 最適値を決めるのは頂点数ではなく、互いに素な最小部分木である葉の個数であり、内部頂点は葉区間の包として新しい整数を消費しない。",
-        "方針: 葉だけへ DFS 順の連番を与え、内部頂点の [L,R] を子区間の最小左端・最大右端として bottom-up に作る。（葉数 M という下界と同じ最大値で、包含する部分木は包含区間、互いに素な部分木は非交差区間になる構成を与える。）",
-        "接続: 根1から DFS し、子を持たない頂点に counter の現在値を L=R として割り当てて増やす。内部頂点では全 child の L の最小と R の最大を取り、全頂点の区間を出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc240-e",
+    "abc406-f",
+    "abc337-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-flatten-tree-by-euler-order",
-      "learningOutcomeIds": [
-        "outcome-flatten-tree-by-euler-order"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC294 G「Distance Queries on a Tree」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 辺重み更新と任意二頂点距離質問を処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 辺重み更新と任意二頂点距離質問を処理できる。",
-          "転移題材の解法接続: DFSで各辺の進入・退出時刻とLCA用tourを作る。重み変更はBITの+位置/-位置を差分更新し、距離質問は三頂点のprefix和とLCAから答える。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
+  "relatedProblemIds": [
+    "abc294-g"
   ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 67,

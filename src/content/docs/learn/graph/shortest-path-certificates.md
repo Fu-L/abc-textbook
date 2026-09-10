@@ -1,6 +1,6 @@
 ---
 title: "重み付き最短路・経路復元・差分制約"
-description: "前提から重み付き最短路・経路復元・差分制約を見抜き、方針へ接続して検証するための学習単位。"
+description: "重み付き最短路・経路復元・差分制約の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 42
@@ -8,85 +8,53 @@ sidebar:
 
 # 重み付き最短路・経路復元・差分制約
 
-このページは **節** です。下位単元が扱う技能を比較し、発動条件・不変量・計算量の違いから学習経路を選ぶための構造単元です。
+## 概要
 
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
+下位の単元を、前提を満たす順にまとめます。
 
-## この単元でできるようになること
+## 前提と範囲
 
-- 直接所有するOutcomeはありません。この単元では下位単元の選択と学習順を扱います。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## 前提・学習順・対象外
+追加前提: なし。
 
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 辺重みに応じた距離計算、距離等式による経路復元、差の不等式を緩和へ写す制約系への応用を順に学ぶ。
-
-### この単元では扱わない範囲
+辺重みに応じた距離計算、距離等式による経路復元、差の不等式を緩和へ写す制約系への応用を順に学ぶ。
 
 - 辺重みや最短距離を扱わず、到達可否だけを求める探索、および最短路に限らない一般の変更影響解析。
 
-## 下位単元と学習順
+## 下位単元
 
-以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
+- [最短路モデル](/learn/graph/weighted-shortest-path/)
+- [最短路を証明する木・経路の復元](/learn/graph/shortest-path-reconstruction/)
+- [difference constraints・不等式系の最短路化](/learn/graph/difference-constraints/)
 
-1. [最短路モデル](./weighted-shortest-path.md)（標準順 156）— 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。
-2. [最短路を証明する木・経路の復元](./shortest-path-reconstruction.md)（標準順 199）— 最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。
-3. [difference constraints・不等式系の最短路化](./difference-constraints.md)（標準順 200）— 最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。
+## 問題一覧
 
-## 発動条件と見分け方
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-この構造単元はTagを直接所有しません。下位単元の定義と対象外を比較して学習経路を選びます。
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-## ガイド例
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-- 通常のOutcomeガイド例は下位単元で扱います。
+## 関連問題
 
-## 下位単元を使い分ける比較例
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **最短路モデル** — 直接到達点: 移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる。近いが対象外: 最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **最短路を証明する木・経路の復元** — 直接到達点: 距離等式を満たす親辺を選び、最短路の木または経路を復元できる。近いが対象外: 最短路を証明する木・経路の復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **difference constraints・不等式系の最短路化** — 直接到達点: 差の不等式をconstraint graphへ変換し、緩和と負閉路判定により可解性・極値・具体解を求められる。近いが対象外: difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- なし
-
-## 到達確認
-
-- 直接所有するOutcomeの到達確認はありません。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-- 直接所有するOutcomeの解答基準はありません。
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC250 Ex「Trespassing Takahashi」](https://atcoder.jp/contests/abc250/tasks/abc250_h)
+- [ABC261 G「Replace」](https://atcoder.jp/contests/abc261/tasks/abc261_g)
+- [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
+- [ABC271 E「Subsequence Path」](https://atcoder.jp/contests/abc271/tasks/abc271_e)
+- [ABC297 E「Kth Takoyaki Set」](https://atcoder.jp/contests/abc297/tasks/abc297_e)
+- [ABC301 E「Pac-Takahashi」](https://atcoder.jp/contests/abc301/tasks/abc301_e)
+- [ABC305 E「Art Gallery on Graph」](https://atcoder.jp/contests/abc305/tasks/abc305_e)
+- [ABC338 F「Negative Traveling Salesman」](https://atcoder.jp/contests/abc338/tasks/abc338_f)
+- [ABC355 E「Guess the Sum」](https://atcoder.jp/contests/abc355/tasks/abc355_e)
+- [ABC364 G「Last Major City」](https://atcoder.jp/contests/abc364/tasks/abc364_g)
+- [ABC375 F「Road Blocked」](https://atcoder.jp/contests/abc375/tasks/abc375_f)
+- [ABC375 G「Road Blocked 2」](https://atcoder.jp/contests/abc375/tasks/abc375_g)
+- [ABC393 G「Unevenness」](https://atcoder.jp/contests/abc393/tasks/abc393_g)
+- [ABC395 G「Minimum Steiner Tree 2」](https://atcoder.jp/contests/abc395/tasks/abc395_g)
+- [ABC429 F「Shortest Path Query」](https://atcoder.jp/contests/abc429/tasks/abc429_f)
 
 ## 根拠
 
@@ -97,4 +65,4 @@ sidebar:
 - [ABC218 F 公式解説](https://atcoder.jp/contests/abc218/editorial/2606)
 - [ABC218 F 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-shortest-path-certificates`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-shortest-path-certificates`

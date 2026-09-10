@@ -43,9 +43,9 @@
     "outcome-query-recursively-defined-string"
   ],
   "representativeProblemIds": [
+    "abc450-e",
     "abc346-f",
-    "abc417-g",
-    "abc450-e"
+    "abc417-g"
   ],
   "aliases": [
     "compressed strings",

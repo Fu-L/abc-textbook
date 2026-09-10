@@ -1,6 +1,6 @@
 ---
 title: "ゲーム状態の勝敗とGrundy数"
-description: "前提からゲーム状態の勝敗とGrundy数を見抜き、方針へ接続して検証するための学習単位。"
+description: "ゲーム状態の勝敗とGrundy数の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 55
@@ -8,109 +8,45 @@ sidebar:
 
 # ゲーム状態の勝敗とGrundy数
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 最小十分状態からDPを設計する
-- この位置で学ぶ理由: 状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。
-
-### この単元では扱わない範囲
-
-- 有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。
-
-## 発動条件と見分け方
+## 概要
 
 ### game状態・Grundy DP
 
 各状態の勝敗またはGrundy数を後続状態から求める。
 
-検索語: Nim、combinatorial game DP、ゲームDP、組合せゲーム
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: 最小十分状態からDPを設計する。
 
-### 例 1 — 後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる
+状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。
 
-題材: [ABC255 G「Constrained Nim」](https://atcoder.jp/contests/abc255/tasks/abc255_g)
+- 有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。
 
-選定理由: 例外でないnでは、直前の例外値bar nからg(n)=n-bar n+h(bar n)と連続的に増える。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。複数の独立な山から一つを選んで動かす不偏ゲームで勝敗を求める。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC380 F「Exchange Game」](https://atcoder.jp/contests/abc380/tasks/abc380_f)
+2. [ABC297 G「Constrained Nim 2」](https://atcoder.jp/contests/abc297/tasks/abc297_g)
+3. [ABC255 G「Constrained Nim」](https://atcoder.jp/contests/abc255/tasks/abc255_g)
+4. [ABC354 E「Remove Pairs」](https://atcoder.jp/contests/abc354/tasks/abc354_e)
+5. [ABC278 F「Shiritori」](https://atcoder.jp/contests/abc278/tasks/abc278_f)
+6. [ABC368 F「Dividing Game」](https://atcoder.jp/contests/abc368/tasks/abc368_f)
+7. [ABC398 G「Not Only Tree Game」](https://atcoder.jp/contests/abc398/tasks/abc398_g)
+8. [ABC278 G「Generalized Subtraction Game」](https://atcoder.jp/contests/abc278/tasks/abc278_g)
+9. [ABC398 E「Tree Game」](https://atcoder.jp/contests/abc398/tasks/abc398_e)
 
-- 制約付きNimの初期局面で先手・後手のどちらに必勝戦略があるか判定できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 禁止手がない山nの遷移先には0..n-1が全て含まれるためGrundy数はそれまでの最大値hに1を足して伸び、挙動が変わるのはX_iだけである。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 例外点だけのGrundy前計算と頻度mex — X_iを昇順に処理し、禁止された遷移先のGrundy頻度と全過去頻度を比較すれば例外点のmexを求め、その他の巨大nは直前例外からの線形式で評価できる。
-- **棄却**: 0からmax AまでGrundy数をDP — 山サイズが最大10^18なので一つずつ計算・保存できない。
-
-#### 鍵となる着眼
-
-- 例外でないnでは、直前の例外値bar nからg(n)=n-bar n+h(bar n)と連続的に増える。
-- 0..hのGrundy値は最低一回ずつ現れるので、全頻度表には追加出現分だけを記録すれば、保持するキー数をO(M)へ抑えられる。
-
-#### アルゴリズムへ接続する
-
-S={0,X_i}を昇順に処理し、各例外Xについて禁止遷移先X-YのGrundy値を求める。過去全体での出現数が禁止分を上回る最小値をmexとしてg(X)にし、hと追加頻度を更新する。各A_iは直前例外を二分探索して式で求め、全山のxorを判定する。
-
-
-## 転用するときの確認
-
-- **Sprague-Grundy分解**: 複数の独立な山から一つを選んで動かす不偏ゲームで勝敗を求める。 適用: 各山のGrundy数を求めてxorし、0かどうかで勝者を決める。
-- **疎な例外点圧縮**: 通常位置では単純な規則で状態値が増え、少数の指定位置だけ遷移が欠ける。 適用: 例外X_iのみmexを計算し、例外間を閉形式で補間する。
-- **mexの頻度差分**: 遷移全集合から少数の禁止先を除いたmexを求めたい。 適用: 過去全体のGrundy出現数と禁止先側の出現数を比較する。
-- ほぼ完全な遷移集合から少数の辺だけが欠けるゲームでは、例外位置と値頻度の差だけを追う。
-- 山サイズが小さい場合の素朴なmex DPと比較し、同一Xの複数禁止手、同じGrundy値を指す禁止先、A_iが例外点・例外直後にある場合を確認する。
-
-## 到達確認
-
-### 到達確認 1 — 後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる
-
-転移題材: [ABC278 F「Shiritori」](https://atcoder.jp/contests/abc278/tasks/abc278_f)
-
-**課題**: ABC278 F「Shiritori」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: word再利用禁止shiritoriの最適勝者を、subset×末尾文字のgame DPで判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- word再利用禁止shiritoriの最適勝者を、subset×末尾文字のgame DPで判定できる。
-
-- 対象技能が担う箇所: word再利用禁止shiritoriの最適勝者を、subset×末尾文字のgame DPで判定できる。
-- 転移題材の解法接続: dp[mask][c]をremaining set=mask、要求先頭文字cから手番playerが勝てるかとする。使用可能word iごとにdp[mask\{i}][last_i]がfalseならtrueとし、maskの小さい順に埋める。full maskから任意初手で勝てればFirst。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。
-
-</details>
-
+- [ABC212 H「Nim Counting」](https://atcoder.jp/contests/abc212/tasks/abc212_h)
+- [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h)
+- [ABC433 G「Substring Game」](https://atcoder.jp/contests/abc433/tasks/abc433_g)
 
 ## 根拠
 
@@ -120,7 +56,5 @@ S={0,X_i}を昇順に処理し、各例外Xについて禁止遷移先X-YのGrun
 - [ABC255 G 公式問題文](https://atcoder.jp/contests/abc255/tasks/abc255_g)
 - [ABC265 H 公式解説](https://atcoder.jp/contests/abc265/editorial/4577)
 - [ABC265 H 公式問題文](https://atcoder.jp/contests/abc265/tasks/abc265_h)
-- [ABC278 F 公式解説](https://atcoder.jp/contests/abc278/editorial/5232)
-- [ABC278 F 公式問題文](https://atcoder.jp/contests/abc278/tasks/abc278_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-game`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-dp-game`

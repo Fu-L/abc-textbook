@@ -48,9 +48,9 @@
     "outcome-classify-game-states"
   ],
   "representativeProblemIds": [
-    "abc297-g",
     "abc354-e",
-    "abc380-f"
+    "abc380-f",
+    "abc297-g"
   ],
   "aliases": [
     "Nim",

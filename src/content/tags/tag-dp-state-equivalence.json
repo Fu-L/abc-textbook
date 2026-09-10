@@ -37,9 +37,9 @@
     "outcome-design-minimal-sufficient-state"
   ],
   "representativeProblemIds": [
+    "abc375-e",
     "abc232-e",
-    "abc296-ex",
-    "abc375-e"
+    "abc296-ex"
   ],
   "aliases": [
     "minimal sufficient state",

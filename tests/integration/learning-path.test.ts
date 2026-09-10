@@ -21,17 +21,18 @@ const learningPath = (nodes: readonly LearningPathNode[]) => {
 };
 
 describe('US2 LearningUnit and learning-path contract', () => {
-  it('requires outcomes, prerequisites, examples, exercises, answers, and assessments', () => {
+  it('requires classification and prerequisites while allowing prose without teaching blocks', () => {
     const catalog = CatalogSchema.parse(makeTrustedCatalog({}));
     const unit = catalog.learningUnits[0];
     if (!unit) throw new Error('Learning Unit fixture is missing.');
     expect(LearningUnitSchema.safeParse(unit).success).toBe(true);
+    expect(LearningUnitSchema.safeParse({ ...unit, examples: [], exercises: [] }).success).toBe(
+      true,
+    );
 
     for (const invalid of [
       { ...unit, learningOutcomeIds: [] },
       { ...unit, baselineId: '' },
-      { ...unit, examples: [] },
-      { ...unit, exercises: [] },
       { ...unit, exercises: [{ ...unit.exercises[0], assessment: undefined }] },
       { ...unit, exercises: [{ ...unit.exercises[0], answer: undefined }] },
     ]) {

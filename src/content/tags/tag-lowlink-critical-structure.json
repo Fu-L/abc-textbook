@@ -41,9 +41,9 @@
     "outcome-identify-bridges-and-articulations"
   ],
   "representativeProblemIds": [
-    "abc301-ex",
     "abc334-g",
-    "abc375-g"
+    "abc375-g",
+    "abc301-ex"
   ],
   "aliases": [
     "Low-Link",

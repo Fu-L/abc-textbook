@@ -52,9 +52,9 @@
   },
   "typicalTechniques": [
     {
-      "name": "多次元zeta transform",
+      "name": "6次元累積和（鎖の直積上のprefix集約）",
       "trigger": "各座標が小さく固定次元で、coordinate-wise prefix box総和を多数問うとき。",
-      "application": "dimensionごとの一次元累積を全gridへ順次適用する。",
+      "application": "各軸の桁値0〜9を昇順に累積する。添字の順序は座標ごとの大小関係であり、二進部分マスク関係ではない。",
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
@@ -73,7 +73,7 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "多次元zeta transform、直方体の包除原理と、その不変条件・境界条件を説明できること。",
+      "text": "多次元累積和と直方体の包除原理について、各軸の更新方向と下端が0の境界を説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

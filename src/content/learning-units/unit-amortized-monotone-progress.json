@@ -33,82 +33,38 @@
   "docPath": "src/content/docs/learn/modeling/amortized-monotone-progress.md",
   "problemIds": [
     "abc217-e",
-    "abc255-ex",
     "abc256-ex",
-    "abc295-g",
     "abc302-e",
+    "abc368-g",
+    "abc403-e",
+    "abc428-f",
+    "abc466-f"
+  ],
+  "directProblemIds": [
+    "abc302-e",
+    "abc466-f",
+    "abc217-e",
+    "abc403-e",
+    "abc428-f",
+    "abc368-g",
+    "abc256-ex"
+  ],
+  "relatedProblemIds": [
+    "abc255-ex",
+    "abc295-g",
     "abc305-f",
     "abc307-f",
     "abc312-ex",
     "abc319-g",
-    "abc368-g",
-    "abc403-e",
     "abc417-g",
     "abc421-f",
     "abc426-f",
     "abc427-g",
-    "abc428-f",
     "abc430-g",
-    "abc435-e",
-    "abc466-f"
+    "abc435-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-bound-monotone-total-work",
-      "learningOutcomeIds": [
-        "outcome-bound-monotone-total-work"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。一部の操作だけが既存要素を並べ替え、その後の追加要素は並べ替え済み部分の後ろに残るとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC217 E「Sorting Queries」について、操作3の直後に存在した要素は昇順のまま先頭側に並び、その後の操作1で加わる要素だけが末尾へ到着順に連なる。したがって、現在の列は「ソート済み部分」と「まだ一度もソートされていない追加部分」に分けて考えられる。",
-      "procedure": [
-        "観察: 操作3の直後に存在した要素は昇順のまま先頭側に並び、その後の操作1で加わる要素だけが末尾へ到着順に連なる。したがって、現在の列は「ソート済み部分」と「まだ一度もソートされていない追加部分」に分けて考えられる。",
-        "観察: 操作2が必要とするのは列全体ではなく先頭だけであり、ソート済み部分からは最小値、未ソート部分からは最古の要素だけを取り出せればよい。",
-        "着眼: heap が空でなければその最小値が必ず列の先頭であり、heap が空になって初めて queue の先頭が列の先頭になる。",
-        "方針: 未ソート部分を FIFO queue、ソート済み部分を min-priority queue で別々に持ち、操作3で前者の全要素を後者へ移す。（操作1の到着順と操作3後の昇順を同時に保てる。各要素が queue から heap へ移るのは高々一度なので、操作3の一回の重さではなく全クエリを通した仕事量で評価できる。）",
-        "接続: 操作1では queue へ追加し、操作2では heap が非空ならその最小値、空なら queue の先頭を出力して削除する。操作3では queue が空になるまで要素を heap へ移し、明示的な全体ソートを行わない。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-bound-monotone-total-work",
-      "learningOutcomeIds": [
-        "outcome-bound-monotone-total-work"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC256 Ex「I like Query Problem」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 区間floor除算、区間代入、区間和の三種類の質問を制約内で処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 区間floor除算、区間代入、区間和の三種類の質問を制約内で処理できる。",
-          "転移題材の解法接続: 初期配列を非零同値区間へまとめ、別に区間代入・区間和可能な遅延セグメント木を持つ。除算では対象区間をsplitして各値vをfloor(v/x)へ代入し、0区間をsetから消す。代入質問でもsetを置換し、和質問はsegment treeから得る。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 66,

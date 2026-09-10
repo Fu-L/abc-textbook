@@ -1,6 +1,6 @@
 import { lstat, readFile, readdir, realpath } from 'node:fs/promises';
 import path from 'node:path';
-import { CANONICAL_GUIDED_EXAMPLES } from './canonical-guided-examples.js';
+import { orderProblemsByPrerequisites } from './problem-reading-order.js';
 
 import {
   buildTechniqueInventoryAuthoringEvidence,
@@ -828,7 +828,7 @@ const normalizeFinalCandidate = (candidate: FinalTaxonomyCandidate): FinalTaxono
               compareCodeUnits(left.rationale, right.rationale),
           ),
           learningOutcomeIds: sortedUnique(candidate.entity.learningOutcomeIds),
-          representativeProblemIds: sortedUnique(candidate.entity.representativeProblemIds),
+          representativeProblemIds: [...candidate.entity.representativeProblemIds],
           aliases: sortedUnique(candidate.entity.aliases),
           formerNames: sortedUnique(candidate.entity.formerNames),
           replacementTagIds: sortedUnique(candidate.entity.replacementTagIds),
@@ -1774,22 +1774,52 @@ const learningUnitAndAncestorIds = (
 
 const materializePolicyLearningUnits = (
   decisions: readonly FinalPrimaryDecision[],
-): MetadataLearningUnitCandidate[] => {
+): (MetadataLearningUnitCandidate & {
+  directProblemIds: string[];
+  relatedProblemIds: string[];
+})[] => {
   const unitsById = new Map(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => [unit.id, unit]));
-  const problemsByUnitId = new Map<string, string[]>();
+  const skills = [
+    ...FINAL_TAXONOMY_TAGS.map((tag) => ({ id: tag.id, prerequisiteIds: tag.prerequisiteTagIds })),
+    ...FINAL_TAXONOMY_OUTCOMES.map((outcome) => ({
+      id: outcome.id,
+      prerequisiteIds: outcome.prerequisiteOutcomeIds,
+    })),
+  ];
+  const coverage = new Map<string, Set<string>>();
   for (const decision of decisions) {
-    for (const directUnitId of decision.learningUnitCandidateIds) {
-      for (const coveredUnitId of learningUnitAndAncestorIds(directUnitId, unitsById)) {
-        const problemIds = problemsByUnitId.get(coveredUnitId) ?? [];
-        problemIds.push(decision.problemId);
-        problemsByUnitId.set(coveredUnitId, problemIds);
-      }
+    for (const id of learningUnitAndAncestorIds(decision.presentationUnitId, unitsById)) {
+      const ids = coverage.get(id) ?? new Set<string>();
+      ids.add(decision.problemId);
+      coverage.set(id, ids);
     }
   }
-  return FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => ({
-    ...unit,
-    problemIds: sortedUnique(problemsByUnitId.get(unit.id) ?? []),
-  }));
+  return FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => {
+    const problemIds = sortedUnique([...(coverage.get(unit.id) ?? [])]);
+    const relatedProblemIds = sortedUnique(
+      decisions
+        .filter(
+          (decision) =>
+            decision.learningUnitCandidateIds.some((id) =>
+              learningUnitAndAncestorIds(id, unitsById).includes(unit.id),
+            ) && !problemIds.includes(decision.problemId),
+        )
+        .map(({ problemId }) => problemId),
+    );
+    return {
+      ...unit,
+      problemIds,
+      relatedProblemIds,
+      directProblemIds: orderProblemsByPrerequisites(
+        decisions.filter(({ presentationUnitId }) => presentationUnitId === unit.id),
+        skills,
+        [...FINAL_TAXONOMY_TAGS]
+          .sort((a, b) => compareCodeUnits(a.id, b.id))
+          .filter(({ id }) => unit.ownedTagIds.includes(id))
+          .flatMap(({ representativeProblemIds }) => representativeProblemIds),
+      ),
+    };
+  });
 };
 
 const finalCandidatesFromPolicy = (
@@ -1878,18 +1908,7 @@ const finalCandidatesFromPolicy = (
       supportingDecisions.length > 0
         ? representativeDecisionRefs(supportingDecisions, outcome.id, 'outcome')
         : normalizeClaimRefs(descendantDecisions.slice(0, 3).flatMap(decisionEvidenceRefs));
-    const guide = CANONICAL_GUIDED_EXAMPLES[outcome.id];
-    const guideDecision = representativeDecisions.find(
-      ({ problemId }) => problemId === guide?.problemId,
-    );
-    if (guideDecision === undefined) {
-      throw new FinalTaxonomyBuildError('OUTCOME_GUIDE_ASSIGNMENT_MISMATCH', outcome.id);
-    }
-    const guideRefs =
-      supportingDecisions.length > 0
-        ? representativeDecisionRefs([guideDecision], outcome.id, 'outcome')
-        : decisionEvidenceRefs(guideDecision);
-    const evidenceRefs = normalizeClaimRefs([...representativeEvidenceRefs, ...guideRefs]);
+    const evidenceRefs = representativeEvidenceRefs;
     return FinalTaxonomyCandidateSchema.parse({
       kind: 'outcome',
       entity: {
@@ -1908,8 +1927,10 @@ const finalCandidatesFromPolicy = (
     });
   });
   const unitCandidates = materializedUnits.map((unit): FinalTaxonomyCandidate => {
-    const supportingDecisions = decisions.filter((decision) =>
-      unit.problemIds.includes(decision.problemId),
+    const supportingDecisions = decisions.filter(
+      (decision) =>
+        unit.problemIds.includes(decision.problemId) ||
+        unit.relatedProblemIds.includes(decision.problemId),
     );
     const evidenceRefs = normalizeClaimRefs(
       supportingDecisions.slice(0, 3).flatMap((decision) => {
@@ -1934,6 +1955,8 @@ const finalCandidatesFromPolicy = (
         learningOutcomeIds: unit.learningOutcomeIds,
         ownedLearningOutcomeIds: unit.ownedLearningOutcomeIds,
         problemIds: unit.problemIds,
+        directProblemIds: unit.directProblemIds,
+        relatedProblemIds: unit.relatedProblemIds,
         stageRank: unit.stageRank,
         difficultyRank: unit.difficultyRank,
         representativeRank: unit.representativeRank,
@@ -2266,8 +2289,11 @@ const semanticImpactsFromEntries = (
     ]);
     const affectedLearningUnitCandidateIds = affectedUnitIdsForEntry(entry, candidates).filter(
       (unitId) =>
-        evidenceOwnerProblemIds.some(
-          (problemId) => unitById.get(unitId)?.problemIds.includes(problemId) === true,
+        evidenceOwnerProblemIds.some((problemId) =>
+          [
+            ...(unitById.get(unitId)?.problemIds ?? []),
+            ...(unitById.get(unitId)?.relatedProblemIds ?? []),
+          ].includes(problemId),
         ),
     );
     const evidenceRefs = claimRefsForProblems(evidenceOwnerProblemIds, decisionByProblemId);
@@ -2290,7 +2316,7 @@ const semanticImpactsFromEntries = (
         unitSurfaces.map((surface) => {
           const unit = unitById.get(learningUnitId);
           const relevantProblemIds = evidenceOwnerProblemIds.filter((problemId) =>
-            unit?.problemIds.includes(problemId),
+            [...(unit?.problemIds ?? []), ...(unit?.relatedProblemIds ?? [])].includes(problemId),
           );
           if (relevantProblemIds.length === 0) {
             throw new FinalTaxonomyBuildError(
@@ -2921,6 +2947,59 @@ export const validateFinalTaxonomyBuildAgainstContext = (
   }
   for (const { entity: unit } of unitCandidates) {
     const children = unitCandidates.filter(({ entity }) => entity.parentId === unit.id);
+    const expectedDirectIds = orderProblemsByPrerequisites(
+      build.placements.filter(({ presentationUnitId }) => presentationUnitId === unit.id),
+      [
+        ...tagCandidates.map(({ entity }) => ({
+          id: entity.id,
+          prerequisiteIds: entity.prerequisiteTagIds,
+        })),
+        ...outcomeCandidates.map(({ entity }) => ({
+          id: entity.id,
+          prerequisiteIds: entity.prerequisiteOutcomeIds,
+        })),
+      ],
+      [...tagCandidates]
+        .sort((a, b) => compareCodeUnits(a.entity.id, b.entity.id))
+        .filter(({ entity }) => unit.ownedTagIds.includes(entity.id))
+        .flatMap(({ entity }) => entity.representativeProblemIds),
+    );
+    if (!sameOrderedValues(unit.directProblemIds, expectedDirectIds)) {
+      add(
+        'UNIT_PROBLEM_READING_ORDER_INVALID',
+        'Direct Problems must follow prerequisite and mechanism order.',
+        unit.id,
+      );
+    }
+    if (unit.relatedProblemIds.some((id) => unit.problemIds.includes(id))) {
+      add(
+        'UNIT_RELATED_PROBLEM_COVERAGE_OVERLAP',
+        'Related references must exclude own and descendant coverage.',
+        unit.id,
+      );
+    }
+    if (!sameOrderedValues(sortedUnique(unit.directProblemIds), sortedUnique(expectedDirectIds))) {
+      add(
+        'UNIT_DIRECT_PROBLEM_PLACEMENT_INVALID',
+        'Direct Problems must match unique presentationUnitId assignments.',
+        unit.id,
+      );
+    }
+    if (
+      !sameOrderedValues(
+        sortedUnique(unit.problemIds),
+        sortedUnique([
+          ...unit.directProblemIds,
+          ...children.flatMap(({ entity }) => entity.problemIds),
+        ]),
+      )
+    ) {
+      add(
+        'UNIT_PROBLEM_COVERAGE_INVALID',
+        'Problem coverage must equal direct placement plus child coverage.',
+        unit.id,
+      );
+    }
     const expectedTagIds = sortedUnique([
       ...unit.ownedTagIds,
       ...children.flatMap(({ entity }) => entity.tagIds),
@@ -3143,7 +3222,7 @@ export const validateFinalTaxonomyBuildAgainstContext = (
     }
   }
   for (const { entity: unit } of unitCandidates) {
-    const supportingProblemCount = new Set(unit.problemIds).size;
+    const supportingProblemCount = new Set([...unit.problemIds, ...unit.relatedProblemIds]).size;
     const minimumSupport = singleProblemUnitIds.has(unit.id) ? 1 : 2;
     if (unit.kind !== 'chapter' && supportingProblemCount < minimumSupport) {
       add(
@@ -3217,7 +3296,8 @@ export const validateFinalTaxonomyBuildAgainstContext = (
         if (
           unit?.kind !== 'unit' ||
           assessment.evidenceRefs.some(
-            ({ problemId }) => !unit.entity.problemIds.includes(problemId),
+            ({ problemId }) =>
+              ![...unit.entity.problemIds, ...unit.entity.relatedProblemIds].includes(problemId),
           )
         ) {
           add(

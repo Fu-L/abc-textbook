@@ -32,79 +32,31 @@
   "problemIds": [
     "abc212-f",
     "abc241-e",
-    "abc247-ex",
     "abc254-g",
     "abc256-e",
-    "abc258-e",
     "abc284-g",
-    "abc286-f",
     "abc296-e",
     "abc310-g",
     "abc357-e",
     "abc367-e",
-    "abc370-f",
     "abc371-g",
     "abc377-e",
     "abc387-f",
     "abc399-e",
-    "abc417-g",
     "abc436-e",
-    "abc438-e",
+    "abc438-e"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc247-ex",
+    "abc258-e",
+    "abc286-f",
+    "abc370-f",
+    "abc417-g",
     "abc444-g"
   ],
-  "examples": [
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-decompose-functional-graph",
-        "outcome-jump-deterministic-transition"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（学習経路の比較）",
-      "omissions": [
-        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
-      ],
-      "environment": "紙上での未知問のモデル化と候補比較",
-      "input": "一意な後続・サイクル・ダブリングの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
-      "procedure": [
-        "関数グラフのcycle・tree分解: 1個の直接所有Outcome、学ぶ理由「状態グラフのモデリングと探索で得た考え方と実装を再利用し、関数グラフのcycle・tree分解の発動条件・正当化・境界を重複なく学ぶ」、対象外「関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "doubling・binary lifting: 1個の直接所有Outcome、学ぶ理由「決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ」、対象外「doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-decompose-functional-graph",
-        "outcome-jump-deterministic-transition"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
-      "assessment": {
-        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
-        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
-      },
-      "answer": {
-        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
-        "procedure": [
-          "問題を対象・操作・保つ量・求める量へ分解する。",
-          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
-          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
-          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
-        ],
-        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 1,
   "representativeRank": 4,

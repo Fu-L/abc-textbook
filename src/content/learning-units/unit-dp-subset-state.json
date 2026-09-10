@@ -17,11 +17,7 @@
     "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
     "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
     "source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341",
-    "source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97",
-    "source-abc232-editorial-3144-739c9255fe97d7547b110005e8a2a47d1393cadef05019ed068aa518e2ccf172",
-    "source-abc232-f-problem-6cea4f274f724badc0cfc01021a37f99c84df33baa0e728715d6390e1f9f96a7",
-    "source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c",
-    "source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6"
+    "source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97"
   ],
   "tagIds": [
     "tag-subset-bitmask-dp"
@@ -38,98 +34,61 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-subset-state.md",
   "problemIds": [
-    "abc213-g",
-    "abc215-e",
-    "abc216-h",
-    "abc228-g",
     "abc232-f",
     "abc244-f",
-    "abc246-f",
     "abc274-e",
-    "abc278-f",
-    "abc295-ex",
-    "abc300-ex",
     "abc301-e",
-    "abc306-ex",
-    "abc309-g",
     "abc310-f",
-    "abc313-f",
     "abc319-f",
-    "abc321-g",
     "abc328-g",
     "abc332-e",
     "abc338-f",
     "abc343-g",
     "abc352-f",
-    "abc354-e",
     "abc381-f",
     "abc396-g",
-    "abc400-g",
-    "abc402-e",
     "abc411-g",
-    "abc419-f",
     "abc425-f",
     "abc432-f"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-enumerate-subset-state-space",
-      "learningOutcomeIds": [
-        "outcome-enumerate-subset-state-space"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。二種類の操作が交換可能で、片方を全て先に寄せると最終構造を離散的に表せるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC232 F「Simple Operations on Sequence」について、ある要素を増減してから隣と交換する操作は、先に交換して移動先で同じ増減を行う操作へ入れ替えられる。",
-      "procedure": [
-        "観察: ある要素を増減してから隣と交換する操作は、先に交換して移動先で同じ増減を行う操作へ入れ替えられる。",
-        "観察: したがって全交換を先、全増減を後に行ってよく、最終的に A のどの元要素を B の各位置へ対応させるかという順列を選ぶ問題になる。",
-        "着眼: x を次に置くと、まだ未使用で x より小さい元添字は全て後ろへ来るので、その個数が x を左端とする転倒数としてこの時点で確定する。",
-        "方針: B の左から対応元を決め、既に使用した A の添字集合だけを状態とする subset DP を行う。（次に元添字 x を置く増減費用と、新たに確定する転倒数が使用済み集合と x だけから決まる。）",
-        "接続: 操作の交換可能性で解を「順列＋位置別補正」へ正規化し、順列の prefix で確定する転倒寄与を使用済みビット集合の遷移コストとして最短 DP を行う。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc232-f",
+    "abc274-e",
+    "abc332-e",
+    "abc396-g",
+    "abc381-f",
+    "abc244-f",
+    "abc328-g",
+    "abc343-g",
+    "abc411-g",
+    "abc425-f",
+    "abc301-e",
+    "abc338-f",
+    "abc352-f",
+    "abc310-f",
+    "abc319-f",
+    "abc432-f"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-enumerate-subset-state-space",
-      "learningOutcomeIds": [
-        "outcome-enumerate-subset-state-space"
-      ],
-      "prerequisiteIds": [
-        "outcome-design-minimal-sufficient-state",
-        "prereq-abc-advanced-v1",
-        "unit-dp-state-design"
-      ],
-      "attainmentCondition": "学習成果「bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC244 F「Shortest Good Path」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 訪問 parity と末尾からなる product graph を構成し、全2^N条件の最短 good path を一度の BFS で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 訪問 parity と末尾からなる product graph を構成し、全2^N条件の最短 good path を一度の BFS で求められる。",
-          "転移題材の解法接続: 各 v について dist[1<<v][v]=1 を queue に入れる。状態 (mask,v) から各 neighbor u へ (mask xor (1<<u),u) を距離+1で緩和し、BFS 後に mask=1..2^N-1 の min_v dist と mask0の0を合計する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
+  "relatedProblemIds": [
+    "abc213-g",
+    "abc215-e",
+    "abc216-h",
+    "abc228-g",
+    "abc246-f",
+    "abc278-f",
+    "abc295-ex",
+    "abc300-ex",
+    "abc306-ex",
+    "abc309-g",
+    "abc313-f",
+    "abc321-g",
+    "abc354-e",
+    "abc400-g",
+    "abc402-e",
+    "abc419-f"
   ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 62,

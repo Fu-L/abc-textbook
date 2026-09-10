@@ -15,11 +15,7 @@
     "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
     "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f",
     "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
-    "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb",
-    "source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c",
-    "source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e",
-    "source-abc413-e-problem-b33e30b82a6df49f0dc88ff9bbab8b13863a9d73d69009e0e22b19166cd6c101",
-    "source-abc413-editorial-13406-d94240a40fe855e57af83485a4cd057185bab32505c42cac77e1e73f3c2d50e4"
+    "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
   ],
   "tagIds": [
     "tag-recursive-divide-and-conquer"
@@ -36,6 +32,16 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/recursive-divide-and-conquer.md",
   "problemIds": [
+    "abc282-ex",
+    "abc413-e",
+    "abc426-g"
+  ],
+  "directProblemIds": [
+    "abc282-ex",
+    "abc413-e",
+    "abc426-g"
+  ],
+  "relatedProblemIds": [
     "abc213-h",
     "abc230-h",
     "abc247-ex",
@@ -46,7 +52,6 @@
     "abc273-ex",
     "abc281-ex",
     "abc281-f",
-    "abc282-ex",
     "abc304-g",
     "abc317-ex",
     "abc331-g",
@@ -57,69 +62,11 @@
     "abc381-g",
     "abc383-g",
     "abc385-g",
-    "abc413-e",
     "abc425-g",
-    "abc426-g",
     "abc439-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-divide-search-space-recursively",
-      "learningOutcomeIds": [
-        "outcome-divide-search-space-recursively"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。subarray costにminimum/maximumが含まれ、そのextremum位置を含む区間で値を固定できるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC282 Ex「Min + Sum」について、B_i≥0なのでprefix sum PBは非減少で、区間minimumが固定されればsumB≤S-minという条件の相手endpoint範囲を二分探索できる。",
-      "procedure": [
-        "観察: B_i≥0なのでprefix sum PBは非減少で、区間minimumが固定されればsumB≤S-minという条件の相手endpoint範囲を二分探索できる。",
-        "観察: 区間[L,R]のA最小位置Mを選ぶと、Mを含む全subarrayのminimumはA_Mに固定され、残りは左右再帰へ重複なく分割できる。",
-        "着眼: l≤M≤rなら条件はPB[r]-PB[l-1]≤S-A_Mとなり、l固定ではrのvalid集合がprefix、r固定ではlのvalid集合がsuffixになる。",
-        "着眼: [L,M]と[M,R]の短い方だけendpointを固定すると、再帰treeで各indexが短い側に入るたび担当区間sizeが少なくとも半減する。",
-        "方針: range minimum位置でdivide-and-conquerし、Mを含むintervalは短い側のendpointだけ列挙して、長い側の有効範囲をPB上のbinary searchで数える。（minimumの変化を消し、各indexの列挙回数をsmall-side規則で対数回に抑えられる。）",
-        "接続: RMQまたはmin Cartesian treeで各区間の最小位置Mを得る。leftが短ければ各l∈[L,M]についてPB上で最大r∈[M,R]を探し、rightが短ければ各rについて最小lを探す。cross数を加え、[L,M-1],[M+1,R]へ再帰する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-divide-search-space-recursively",
-      "learningOutcomeIds": [
-        "outcome-divide-search-space-recursively"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC413 E「Reverse 2^i」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 指数的に見えるdyadic反転の到達集合から、再帰二分だけで辞書順最小permutationを構成できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 指数的に見えるdyadic反転の到達集合から、再帰二分だけで辞書順最小permutationを構成できる。",
-          "転移題材の解法接続: 長さ1ならその要素を返す。区間を等分して左右を再帰的に最小化し、left[0]<right[0]ならleft+right、逆ならright+leftを返す。根の結果を出力し、各levelでのcopyを含め O(N·2^N) とする。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 69,

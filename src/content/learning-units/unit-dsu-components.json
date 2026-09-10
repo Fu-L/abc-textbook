@@ -15,15 +15,7 @@
     "source-abc226-e-problem-3ca6433e5ec0f6996502c33674b13259def0590aeea6689d74a414ab33bbf677",
     "source-abc226-editorial-2889-a9c5442114a34c37728bcec59eeeb20ea9188ddb5bd549a4dbcfec1bef7ea180",
     "source-abc229-e-problem-d9c76ebb631eb668dd6772d319953cc51d2956bed4f77fa174b0c2f60fba8b41",
-    "source-abc229-editorial-2958-e1f5841b40bd2ddd793fc39890bd1e7c2cc99e815182f14d0fac099106701eea",
-    "source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d",
-    "source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379",
-    "source-abc276-e-problem-426c86932b36db5a3d07ccaf25ee679a3eccfae746c5dcd0916fbad027f00628",
-    "source-abc276-editorial-5162-d44653efd19dfda81c93f3f3e585971c184a46f681ddffdb2dbdc9cb775d0ea4",
-    "source-abc279-editorial-5284-2ea014c0428701362b5eb54e72479b68b510301e5a6ea983c6cd976648341c18",
-    "source-abc279-f-problem-073733efc404d7b820298114bdc572224b608dd2d787fb84b3b51bc0d56d875b",
-    "source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59",
-    "source-abc372-editorial-10967-abf15d02f03a6ce0612e3ba16d6281389413d47d0d0a4904b7c4235a262c1011"
+    "source-abc229-editorial-2958-e1f5841b40bd2ddd793fc39890bd1e7c2cc99e815182f14d0fac099106701eea"
   ],
   "tagIds": [
     "tag-dsu-components"
@@ -42,157 +34,62 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/dsu-components.md",
   "problemIds": [
+    "abc238-e",
+    "abc276-e",
+    "abc279-f",
+    "abc304-e",
+    "abc335-e",
+    "abc372-e",
+    "abc392-e",
+    "abc401-e",
+    "abc420-e",
+    "abc434-e"
+  ],
+  "directProblemIds": [
+    "abc276-e",
+    "abc279-f",
+    "abc304-e",
+    "abc372-e",
+    "abc420-e",
+    "abc238-e",
+    "abc392-e",
+    "abc401-e",
+    "abc434-e",
+    "abc335-e"
+  ],
+  "relatedProblemIds": [
     "abc218-e",
     "abc226-e",
     "abc229-e",
     "abc233-f",
     "abc235-e",
-    "abc238-e",
     "abc239-f",
     "abc250-ex",
     "abc264-e",
     "abc270-f",
-    "abc276-e",
-    "abc279-f",
     "abc286-g",
     "abc295-g",
     "abc301-ex",
     "abc302-ex",
-    "abc304-e",
     "abc311-g",
     "abc314-f",
     "abc328-e",
-    "abc335-e",
     "abc349-g",
     "abc352-e",
     "abc355-f",
     "abc364-f",
-    "abc372-e",
     "abc376-g",
     "abc383-e",
-    "abc392-e",
     "abc394-g",
-    "abc401-e",
     "abc408-e",
     "abc409-f",
     "abc413-g",
-    "abc420-e",
-    "abc434-e",
     "abc440-g",
     "abc447-e",
     "abc451-f"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-augment-components-with-metadata",
-      "learningOutcomeIds": [
-        "outcome-augment-components-with-metadata"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。集合の併合と、要素が属する集合の外部属性queryが混在するとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC279 F「BOX」について、box移動は多数のballを一括して別boxへ移すため、ballごとのbox番号更新では同じ巨大集合を何度も走査し得る。",
-      "procedure": [
-        "観察: box移動は多数のballを一括して別boxへ移すため、ballごとのbox番号更新では同じ巨大集合を何度も走査し得る。",
-        "観察: 操作1はball集合の併合であり、各boxが現在どのDSU componentを持つか、各componentがどのboxにあるかを対応付ければよい。",
-        "着眼: DSU leaderはunion by sizeで変わり得るため、union後に返された新leaderへowner boxを設定し直す。",
-        "着眼: 空boxにはcomponentがないというsentinelを持てば、空→非空移動・非空同士union・新ball追加を同じ対応で処理できる。",
-        "方針: ballをDSU要素にし、box→component leaderとleader→boxの双方向mapを更新する。（集合併合と新ball追加をamortizedに処理し、queryはballのleaderからboxを即座に得られる。）",
-        "接続: 最大N+Q ballのDSUを用意し、rootOfBox[x]とboxOfRoot[r]を持つ。move Y→Xは空caseを分けてcomponentをunionしYを空にする。addはsingleton ballをX componentへunionし、query ball bはboxOfRoot[find(b)]を返す。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    },
-    {
-      "key": "guided-outcome-maintain-connectivity-components",
-      "learningOutcomeIds": [
-        "outcome-maintain-connectivity-components"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。多数の区間和が与えられ、特定区間の和を既知情報から復元できるか判定するとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC238 E「Range Sums」について、先頭 i 項の累積和を b_i とすると、区間 [l,r] の情報は二変数の差 b_r−b_{l−1} を与える。",
-      "procedure": [
-        "観察: 先頭 i 項の累積和を b_i とすると、区間 [l,r] の情報は二変数の差 b_r−b_{l−1} を与える。",
-        "観察: 知りたい全体和は b_N−b_0 であり、b_0=0 から既知の差を順に辿って b_N へ到達できるかだけが問題になる。",
-        "着眼: 差 b_v−b_u が既知である関係は、値そのものを保持しなくても u と v の間を移動できる無向辺として扱える。",
-        "方針: 累積和添字 0,…,N を頂点とし、各情報 [l,r] で l−1 と r を無向辺で結び、0 と N の連結性を判定する。（連結なら経路上の既知差を符号付きで足して b_N−b_0 を求められ、非連結なら b_N 側成分を平行移動して全体和を変えられる。）",
-        "接続: 区間和制約を prefix potential 間の差分制約へ変換し、目的の二ポテンシャルが同じ連結成分かを Union-Find またはグラフ探索で調べる。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-augment-components-with-metadata",
-      "learningOutcomeIds": [
-        "outcome-augment-components-with-metadata"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC372 E「K-th Largest Connected Components」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 追加型連結性に成分内 top-K 情報を組み込み、20万件の更新・問い合わせへ対応できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 追加型連結性に成分内 top-K 情報を組み込み、20万件の更新・問い合わせへ対応できる。",
-          "転移題材の解法接続: 各頂点を一要素の上位リストで初期化する。type 1 では DSU を併合し、root の二つのリストから大きい順に最大10個を作る。type 2 では root のリスト長を確認して k-1 番目を返す。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    },
-    {
-      "key": "attainment-outcome-maintain-connectivity-components",
-      "learningOutcomeIds": [
-        "outcome-maintain-connectivity-components"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC276 E「Round Trip」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 指定始点を通る長さ4以上のgrid cycleを、始点削除後の隣接road連結性として判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 指定始点を通る長さ4以上のgrid cycleを、始点削除後の隣接road連結性として判定できる。",
-          "転移題材の解法接続: S以外の'.'を頂点として隣接roadを連結する。Sの上下左右にあるroadを列挙し、その任意の2つのcomponent idが一致すればYes、なければNoを出す。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 2,
   "representativeRank": 58,

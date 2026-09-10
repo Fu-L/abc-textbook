@@ -1,6 +1,6 @@
 ---
 title: "分離可能線形変換・Walsh–Hadamard変換"
-description: "前提から分離可能線形変換・Walsh–Hadamard変換を見抜き、方針へ接続して検証するための学習単位。"
+description: "分離可能線形変換・Walsh–Hadamard変換の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 185
@@ -8,110 +8,38 @@ sidebar:
 
 # 分離可能線形変換・Walsh–Hadamard変換
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-
-### この単元では扱わない範囲
-
-- 分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### 分離可能線形変換・Walsh–Hadamard変換
 
 Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。
 
-検索語: Kronecker積変換、WHT、Walsh–Hadamard変換、XOR convolution
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる
+Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-題材: [ABC212 H「Nim Counting」](https://atcoder.jp/contests/abc212/tasks/abc212_h)
+- 分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: 求める勝ち局面を直接数えるより、総列数から XOR が 0 の負け局面数を引くと Nim の判定条件をそのまま使える。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。複数の山から一山だけ選んで正の個数を減らす通常プレイのゲームを扱うとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC288 G「3^N Minesweeper」](https://atcoder.jp/contests/abc288/tasks/abc288_g)
+2. [ABC367 G「Sum of (XOR^K or 0)」](https://atcoder.jp/contests/abc367/tasks/abc367_g)
+3. [ABC212 H「Nim Counting」](https://atcoder.jp/contests/abc212/tasks/abc212_h)
 
-- Nim の勝敗条件を XOR 分布の数え上げへ接続し、変換と冪和で可変長の列を一括処理できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 各山から一個以上の石を取れる通常の Nim なので、先手が負ける必要十分条件は全ての山サイズの排他的論理和が 0 になることである。
-- 許される山サイズの指示配列を C とすると、山が M 個のときの排他的論理和別の列数は C の M 回 XOR 畳み込みになる。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: Walsh–Hadamard 変換で XOR 畳み込みを成分ごとの積へ変え、各成分で 1 個から N 個までの冪和を求める。 — 山数ごとの畳み込みを反復せず、変換後の各座標で等比数列を計算して一度だけ逆変換できる。
-- **棄却**: 山数を一つずつ増やし、各時点の XOR 値と全ての許可サイズを組み合わせる DP を行う。 — 山数ごとに XOR 状態と K 種類のサイズを掛け合わせるため、N と値域が大きい制約には収まらない。
-
-#### 鍵となる着眼
-
-- 求める勝ち局面を直接数えるより、総列数から XOR が 0 の負け局面数を引くと Nim の判定条件をそのまま使える。
-- 山数が固定でなく 1 から N までである点は、変換後の各値 v に対する v＋v²＋…＋vᴺ という冪和に吸収できる。
-
-#### アルゴリズムへ接続する
-
-Nim の敗北条件を XOR 畳み込みの添字 0 の係数へ翻訳し、XOR 変換領域で可変長列の冪和をまとめて評価してから逆変換する。
-
-
-## 転用するときの確認
-
-- **Nim 和による勝敗判定**: 複数の山から一山だけ選んで正の個数を減らす通常プレイのゲームを扱うとき。 適用: 全山サイズの XOR が 0 の列を後手勝ちとして数え、全ての列から差し引く。
-- **XOR 畳み込みと Walsh–Hadamard 変換**: 選択値の XOR ごとの組合せ数を求め、同じ分布の畳み込みを何度も重ねるとき。 適用: 許可サイズの指示配列を変換し、座標ごとの冪和を計算して逆変換後の添字 0 を読む。
-- 同じ畳み込み核を回数違いで合算する問題は、対角化後に冪の和として一括計算できないか検討する。
-- 山の個数やサイズの列挙へ進む前に、まずゲーム理論側で負け局面を一つの代数条件へ絞り込む。
-- 演算が通常の加算ではなく XOR なら、通常畳み込みではなく XOR 畳み込みを対角化する変換を想起する。
-
-## 到達確認
-
-### 到達確認 1 — Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる
-
-転移題材: [ABC288 G「3^N Minesweeper」](https://atcoder.jp/contests/abc288/tasks/abc288_g)
-
-**課題**: ABC288 G「3^N Minesweeper」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 全位置のneighbor bomb数から、一貫するbomb配置をN軸の局所逆変換で復元できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 全位置のneighbor bomb数から、一貫するbomb配置をN軸の局所逆変換で復元できる。
-
-- 対象技能が担う箇所: 全位置のneighbor bomb数から、一貫するbomb配置をN軸の局所逆変換で復元できる。
-- 転移題材の解法接続: AをindexのN桁ternary配列とみなす。各axisのstride=3^axisについて、他桁が同じ3 entry (f0,f1,f2)を全blockから取り出し、(f1-f2, f0+f2-f1, f1-f0)へ同時更新する。全N軸の処理後、array[index]がその位置のbomb有無B_indexなので順に出力する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる。
-
-</details>
-
+- [ABC220 H「Security Camera」](https://atcoder.jp/contests/abc220/tasks/abc220_h)
+- [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h)
 
 ## 根拠
 
@@ -121,7 +49,5 @@ Nim の敗北条件を XOR 畳み込みの添字 0 の係数へ翻訳し、XOR �
 - [ABC220 H 公式問題文](https://atcoder.jp/contests/abc220/tasks/abc220_h)
 - [ABC265 H 公式解説](https://atcoder.jp/contests/abc265/editorial/4577)
 - [ABC265 H 公式問題文](https://atcoder.jp/contests/abc265/tasks/abc265_h)
-- [ABC288 G 公式解説](https://atcoder.jp/contests/abc288/editorial/5668)
-- [ABC288 G 公式問題文](https://atcoder.jp/contests/abc288/tasks/abc288_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-separable-linear-transform`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-separable-linear-transform`

@@ -1,6 +1,6 @@
 ---
 title: "グラフアルゴリズム"
-description: "前提からグラフアルゴリズムを見抜き、方針へ接続して検証するための学習単位。"
+description: "グラフアルゴリズムの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 2
@@ -8,204 +8,109 @@ sidebar:
 
 # グラフアルゴリズム
 
-このページは **章** です。分野全体の索引として、技能の境界と学ぶ順序を俯瞰します。各技能の定義を混同せず、必要な節・小節へ降りるための地図として使ってください。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 対象を頂点と辺に対応させ、利用するグラフ性質を示せる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 対象を頂点と辺へ写して到達可能性を扱えるようにし、連結性・最短路・木・フローへ進む土台を作る。
-
-### この単元では扱わない範囲
-
-- なし
-
-## 下位単元と学習順
-
-以下は canonical standard order に沿った章内カリキュラムです。定義・証明・実装境界・Outcome到達確認は各リンク先で扱い、この章では経路選択に必要な境界を示します。
-
-1. [状態グラフ探索・到達関係](./graph-search.md)（標準順 11）— 既知のDFS・BFS実装を土台に、長距離効果は探索前の方向別scanで静的な通行条件へ変換し、問題の状態を頂点、合法操作を辺として設計して到達関係を求める。
-2. [連結成分を管理し縮約する](./connectivity.md)（標準順 34）— 連結成分を探索できるようになった後、成分縮約、差分辺のpotential累積、辺追加に対する付加情報つきDSU管理を学ぶ。
-3. [二部彩色と成分構造を扱う](./bipartite-structure.md)（標準順 36）— 無向グラフを探索できることを前提に、辺をまたぐたび色を反転し、矛盾検出と成分ごとの二部サイズ集約を行う。
-4. [一意な後続・サイクル・ダブリング](./functional-graph.md)（標準順 37）— 状態グラフを理解した後、後続が一意という制約からcycleと流入木への分解やダブリングを導く。
-5. [重み付き最短路・経路復元・差分制約](./shortest-path-certificates.md)（標準順 43）— 辺重みに応じた距離計算、距離等式による経路復元、差の不等式を緩和へ写す制約系への応用を順に学ぶ。
-6. [SCCで閉路・DAG順・2-SATを処理する](./directed-condensation.md)（標準順 48）— 到達可能性を理解した後、相互到達する頂点を強連結成分へまとめ、DAG順の伝播またはimplication graphの矛盾判定へ使う。
-7. [次数parityからwalkや選択辺集合を判定・構成する](./euler-degree.md)（標準順 65）— グラフを探索できることを前提に、全辺walkの成立性や選択辺集合の端点条件を次数parityで特徴付け、葉から判定・構成する。
-8. [次数構造からgraph coreまたは小さなkernelへ縮約する](./graph-core-peeling.md)（標準順 67）— 連結性を探索できることを前提に、低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。
-9. [cut・cycle性質から最適全域木を構成する](./spanning-tree-optimization.md)（標準順 74）— 貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。
-10. [フロー・マッチング・カットへ帰着する](./flow-matching.md)（標準順 83）— 頂点と辺のモデルを作れることを前提に、選択制約を容量・カット・マッチングへ翻訳する。
-11. [単調path contraction・DSU jump](./monotone-path-contraction.md)（標準順 86）— 一度確定したpath区間を次未処理pointerまたはDSU parentで飛ばし、各頂点を高々一度だけ縮約する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-12. [cycle space・fundamental cycle basis](./cycle-space-basis.md)（標準順 106）— 無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。
-13. [lowlinkで橋・関節点を特定する](./lowlink-critical-structure.md)（標準順 117）— DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。
-14. [平面graph双対・cut/path対応](./planar-duality.md)（標準順 182）— 最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、平面graph双対・cut/path対応の発動条件・正当化・境界を重複なく学ぶ。
-
-## 発動条件と見分け方
+## 概要
 
 ### グラフモデルと構造
 
 対象を頂点・辺・木・有向遷移として構造化する。
 
-検索語: graph algorithms、グラフ理論
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 対象を頂点と辺に対応させ、利用するグラフ性質を示せる
+対象を頂点と辺へ写して到達可能性を扱えるようにし、連結性・最短路・木・フローへ進む土台を作る。
 
-題材: [ABC212 F「Greedy Takahashi」](https://atcoder.jp/contests/abc212/tasks/abc212_f)
+- なし
 
-選定理由: 旅程は時刻とともに前へ進み、バスを頂点とすると各頂点の後継が高々一つの関数グラフとして表せる。
+## 下位単元
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各状態から次状態が一意で、同じ遷移を多数のクエリから長距離たどるとき。 問題全体への接続は併用技能を学んだ後に読む。
+- [状態グラフ探索・到達関係](/learn/graph/graph-search/)
+- [連結成分を管理し縮約する](/learn/graph/connectivity/)
+- [二部彩色と成分構造を扱う](/learn/graph/bipartite-structure/)
+- [一意な後続・サイクル・ダブリング](/learn/graph/functional-graph/)
+- [重み付き最短路・経路復元・差分制約](/learn/graph/shortest-path-certificates/)
+- [SCCで閉路・DAG順・2-SATを処理する](/learn/graph/directed-condensation/)
+- [次数parityからwalkや選択辺集合を判定・構成する](/learn/graph/euler-degree/)
+- [次数構造からgraph coreまたは小さなkernelへ縮約する](/learn/graph/graph-core-peeling/)
+- [cut・cycle性質から最適全域木を構成する](/learn/graph/spanning-tree-optimization/)
+- [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
+- [単調path contraction・DSU jump](/learn/graph/monotone-path-contraction/)
+- [cycle space・fundamental cycle basis](/learn/graph/cycle-space-basis/)
+- [lowlinkで橋・関節点を特定する](/learn/graph/lowlink-critical-structure/)
+- [平面graph双対・cut/path対応](/learn/graph/planar-duality/)
 
-#### このOutcomeを支える根拠
+## 問題一覧
 
-- 時刻表から定まる決定的な旅程を関数グラフとして構成し、ダブリングで多数の時刻クエリへ答えられる。
-- ソート済み配列から指定値以上の最初の位置を二分探索で取得できること。
-- 一意な後継を持つ状態遷移に対し、2 の冪回先を合成するダブリングを構築できること。
-- 半整数時刻に居場所を問う設定により、整数の出発・到着時刻との等号を曖昧にせず、乗車中か街にいるかを比較だけで判定できる。 再利用の観点: 連続時間の問い合わせでも、イベント時刻との境界関係を整理すると離散的な後継遷移と終端判定へ落とせる。
-- 街別にソートした出発時刻列で後継バスを構成し、後継写像へ二進法的なジャンプ表を重ねて、時刻上限付きの経路追跡クエリへ変換する。
-- 各バスの一意な次バスを求め、その写像の 2 の冪回先をダブリング表として前計算する。 — 各クエリでは開始バスを二分探索し、到着時刻が Z 未満の範囲だけを大きな跳躍から選んで進められる。
-- 旅程は時刻とともに前へ進み、バスを頂点とすると各頂点の後継が高々一つの関数グラフとして表せる。
-- 終了時刻 Z が出発前、乗車中、到着後のどこに入るかで、出力は一つの街または二つの街に分かれる。
-- 高橋君は街にいるたび、現在時刻以後にその街を出る最初のバスへ必ず乗る。各街の同一出発時刻は重複しないので、次に選ぶバスは一意に定まる。
-- バス i の到着後に乗るバスは、到着街から時刻 T_i 以後に出る最初の一本であり、街ごとの出発時刻順リストから二分探索できる。
-- 関数グラフのダブリング: 各状態から次状態が一意で、同じ遷移を多数のクエリから長距離たどるとき。 適用: バスを状態、到着後の最初のバスを後継とし、2 の冪回先とその時刻情報を前計算する。
-- 時刻表への二分探索: 要素が場所ごとに時刻順で並び、指定時刻以後の最初の要素を繰り返し探すとき。 適用: 各街のバスを出発時刻で整列し、開始時刻または到着時刻以上となる最初の出発を lower_bound で得る。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### 観察
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-- 高橋君は街にいるたび、現在時刻以後にその街を出る最初のバスへ必ず乗る。各街の同一出発時刻は重複しないので、次に選ぶバスは一意に定まる。
-- バス i の到着後に乗るバスは、到着街から時刻 T_i 以後に出る最初の一本であり、街ごとの出発時刻順リストから二分探索できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 候補を比較する
+## 関連問題
 
-- **採用**: 各バスの一意な次バスを求め、その写像の 2 の冪回先をダブリング表として前計算する。 — 各クエリでは開始バスを二分探索し、到着時刻が Z 未満の範囲だけを大きな跳躍から選んで進められる。
-- **棄却**: 各クエリで開始時刻からバスを一台ずつ追跡し、時刻 Z に達するまでシミュレーションする。 — 一つの旅程が多数のバスを経由し得るため、クエリ数とバス数の積に近い追跡が発生する。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 鍵となる着眼
-
-- 旅程は時刻とともに前へ進み、バスを頂点とすると各頂点の後継が高々一つの関数グラフとして表せる。
-- 終了時刻 Z が出発前、乗車中、到着後のどこに入るかで、出力は一つの街または二つの街に分かれる。
-
-#### アルゴリズムへ接続する
-
-街別にソートした出発時刻列で後継バスを構成し、後継写像へ二進法的なジャンプ表を重ねて、時刻上限付きの経路追跡クエリへ変換する。
-
-## 下位単元を使い分ける比較例
-
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **状態グラフ探索・到達関係** — 直接到達点: 3個の下位Outcomeへ進むための構造索引。近いが対象外: eventをsortしてactive集合を増減するsweep line。
-- **連結成分を管理し縮約する** — 直接到達点: 4個の下位Outcomeへ進むための構造索引。近いが対象外: 距離・訪問順を求める探索、および有向グラフの強連結成分と順序。
-- **二部彩色と成分構造を扱う** — 直接到達点: 各連結成分を二色に塗って矛盾を検出し、二つの部の大きさと色反転の自由度を成分ごとに集約できる。近いが対象外: 重み付き最短路、一般の彩色問題、および容量付きmatching・min-cutの最適化。
-- **一意な後続・サイクル・ダブリング** — 直接到達点: 2個の下位Outcomeへ進むための構造索引。近いが対象外: 各頂点から複数の後続を選べる一般のグラフ探索・強連結成分への縮約。
-- **重み付き最短路・経路復元・差分制約** — 直接到達点: 3個の下位Outcomeへ進むための構造索引。近いが対象外: 辺重みや最短距離を扱わず、到達可否だけを求める探索、および最短路に限らない一般の変更影響解析。
-- **SCCで閉路・DAG順・2-SATを処理する** — 直接到達点: 5個の下位Outcomeへ進むための構造索引。近いが対象外: 無向辺追加だけを扱うDSU連結成分管理。
-- **次数parityからwalkや選択辺集合を判定・構成する** — 直接到達点: 2個の下位Outcomeへ進むための構造索引。近いが対象外: 容量付きフロー・マッチング・最小カットへの帰着。
-- **次数構造からgraph coreまたは小さなkernelへ縮約する** — 直接到達点: 2個の下位Outcomeへ進むための構造索引。近いが対象外: DFS時刻とlowlink値による橋・関節点の判定。
-- **cut・cycle性質から最適全域木を構成する** — 直接到達点: cut・cycle性質で辺の安全性を証明し、Kruskal法または同値な選択で最小・最大全域木を構成できる。近いが対象外: 任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。
-- **フロー・マッチング・カットへ帰着する** — 直接到達点: 8個の下位Outcomeへ進むための構造索引。近いが対象外: Eulerウォークの次数・偶奇条件。
-- **単調path contraction・DSU jump** — 直接到達点: 一度確定したpath区間を次未処理pointerまたはDSU parentで飛ばし、各頂点を高々一度だけ縮約する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 単調path contraction・DSU jumpの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **cycle space・fundamental cycle basis** — 直接到達点: 無向graphの全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning forestと各non-tree edgeが作るfundamental cycleからbasisを構成して、連結成分数Cに対するdim C(G)=M-N+Cを導ける。連結graphではC=1となる。さらに同一連結成分内のs,tに対して固定したs-t path P_0を取ると、任意のs-t path PについてPhi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pからこの写像が単射であることを示せる。したがってcycle-space dimensionを用いて、s-t path族の大きさを2^(dim C(G))以下に抑えられる。近いが対象外: ord/lowを用いた橋・関節点の検出、および偶数次数辺集合のcycle-space構造を使わない単なるcycle検出。
-- **lowlinkで橋・関節点を特定する** — 直接到達点: DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。近いが対象外: 次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。
-- **平面graph双対・cut/path対応** — 直接到達点: 埋め込みのfaceをdual頂点へ写し、primal cutとdual path/cycleの対応から最小cut問題を最短路へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 平面graph双対・cut/path対応の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- **関数グラフのダブリング**: 各状態から次状態が一意で、同じ遷移を多数のクエリから長距離たどるとき。 適用: バスを状態、到着後の最初のバスを後継とし、2 の冪回先とその時刻情報を前計算する。
-- **時刻表への二分探索**: 要素が場所ごとに時刻順で並び、指定時刻以後の最初の要素を繰り返し探すとき。 適用: 各街のバスを出発時刻で整列し、開始時刻または到着時刻以上となる最初の出発を lower_bound で得る。
-- 連続時間の問い合わせでも、イベント時刻との境界関係を整理すると離散的な後継遷移と終端判定へ落とせる。
-- 行動規則に「最も早いもの」があり同時刻の重複が排除されていたら、状態ごとの後継が一意になる点を先に抽出する。
-- ダブリングで終端を飛び越えるだけでなく、最後に残った一本の出発・到着時刻と質問時刻を比較して出力形式を決める。
-
-## 到達確認
-
-### 到達確認 1 — 対象を頂点と辺に対応させ、利用するグラフ性質を示せる
-
-転移題材: [ABC213 E「Stronger Takahashi」](https://atcoder.jp/contests/abc213/tasks/abc213_e)
-
-**課題**: ABC213 E「Stronger Takahashi」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「対象を頂点と辺に対応させ、利用するグラフ性質を示せる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 対象を頂点と辺に対応させ、利用するグラフ性質を示せる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 盤面を変更する操作の履歴を局所的な重み付き辺へ圧縮し、0-1 BFS で最小操作回数を求められる。／重み 0 と 1 の辺に対する deque を用いた最短路更新を説明し実装できること。／グリッド上の局所操作から到達可能な相対座標を導き、盤外判定を行えること。／2×2 のパンチ領域を現在位置に隣接させて選べば、一回のパンチで 5×5 近傍の四隅を除く範囲へ移れる。 再利用の観点: 局所的な破壊操作では、操作領域そのものより「現在地から一操作後に到達できる位置集合」を列挙すると状態を減らせる。／不可逆な盤面変更を位置間の 0・1 重み付き遷移へ置換し、距離更新が 0 の頂点を deque の前、1 の頂点を後ろへ入れる最短路探索を行う。／徒歩を重み 0、現在位置に隣接する 2×2 領域へのパンチ後の移動を重み 1 の辺としてマス間グラフを作る。 — 各操作の費用が 0 または 1 で、位置ごとの最小パンチ数だけを 0-1 BFS で確定できる。／壊した壁を永続的な盤面状態として追う代わりに、パンチ一回で到達可能になる近傍マスへの有料辺へ操作を畳み込む。／徒歩辺は元から通路の上下左右だけだが、パンチ辺の到着先は元のマスが壁か通路かにかかわらず利用できる。／通路どうしは上下左右へ自由に移動でき、費用が増えるのは 2×2 の領域をパンチして壁を壊すときだけである。／パンチは実際に通行が必要になった時点まで遅らせられるため、過去にどの壁を壊したかを状態として保持する必要はない。／0-1 BFS: グラフの辺重みが 0 と 1 だけで、頂点までの最小費用を求めるとき。 適用: 無料の徒歩移動を deque の前、有料のパンチ移動を後ろへ追加して最小パンチ数を更新する。／操作履歴の辺への圧縮: 環境を変更する操作があるが、必要になる直前へ遅延しても最適性が失われないとき。 適用: 破壊済み壁集合を持たず、パンチ一回後に到達できる一定範囲のマスへ重み 1 の辺を張る。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 盤面を変更する操作の履歴を局所的な重み付き辺へ圧縮し、0-1 BFS で最小操作回数を求められる。
-- 重み 0 と 1 の辺に対する deque を用いた最短路更新を説明し実装できること。
-- グリッド上の局所操作から到達可能な相対座標を導き、盤外判定を行えること。
-- 2×2 のパンチ領域を現在位置に隣接させて選べば、一回のパンチで 5×5 近傍の四隅を除く範囲へ移れる。 再利用の観点: 局所的な破壊操作では、操作領域そのものより「現在地から一操作後に到達できる位置集合」を列挙すると状態を減らせる。
-- 不可逆な盤面変更を位置間の 0・1 重み付き遷移へ置換し、距離更新が 0 の頂点を deque の前、1 の頂点を後ろへ入れる最短路探索を行う。
-- 徒歩を重み 0、現在位置に隣接する 2×2 領域へのパンチ後の移動を重み 1 の辺としてマス間グラフを作る。 — 各操作の費用が 0 または 1 で、位置ごとの最小パンチ数だけを 0-1 BFS で確定できる。
-- 壊した壁を永続的な盤面状態として追う代わりに、パンチ一回で到達可能になる近傍マスへの有料辺へ操作を畳み込む。
-- 徒歩辺は元から通路の上下左右だけだが、パンチ辺の到着先は元のマスが壁か通路かにかかわらず利用できる。
-- 通路どうしは上下左右へ自由に移動でき、費用が増えるのは 2×2 の領域をパンチして壁を壊すときだけである。
-- パンチは実際に通行が必要になった時点まで遅らせられるため、過去にどの壁を壊したかを状態として保持する必要はない。
-- 0-1 BFS: グラフの辺重みが 0 と 1 だけで、頂点までの最小費用を求めるとき。 適用: 無料の徒歩移動を deque の前、有料のパンチ移動を後ろへ追加して最小パンチ数を更新する。
-- 操作履歴の辺への圧縮: 環境を変更する操作があるが、必要になる直前へ遅延しても最適性が失われないとき。 適用: 破壊済み壁集合を持たず、パンチ一回後に到達できる一定範囲のマスへ重み 1 の辺を張る。
-
-- 対象技能が担う箇所: 盤面を変更する操作の履歴を局所的な重み付き辺へ圧縮し、0-1 BFS で最小操作回数を求められる。
-- 対象技能が担う箇所: 重み 0 と 1 の辺に対する deque を用いた最短路更新を説明し実装できること。
-- 対象技能が担う箇所: グリッド上の局所操作から到達可能な相対座標を導き、盤外判定を行えること。
-- 対象技能が担う箇所: 2×2 のパンチ領域を現在位置に隣接させて選べば、一回のパンチで 5×5 近傍の四隅を除く範囲へ移れる。 再利用の観点: 局所的な破壊操作では、操作領域そのものより「現在地から一操作後に到達できる位置集合」を列挙すると状態を減らせる。
-- 対象技能が担う箇所: 不可逆な盤面変更を位置間の 0・1 重み付き遷移へ置換し、距離更新が 0 の頂点を deque の前、1 の頂点を後ろへ入れる最短路探索を行う。
-- 対象技能が担う箇所: 徒歩を重み 0、現在位置に隣接する 2×2 領域へのパンチ後の移動を重み 1 の辺としてマス間グラフを作る。 — 各操作の費用が 0 または 1 で、位置ごとの最小パンチ数だけを 0-1 BFS で確定できる。
-- 対象技能が担う箇所: 壊した壁を永続的な盤面状態として追う代わりに、パンチ一回で到達可能になる近傍マスへの有料辺へ操作を畳み込む。
-- 対象技能が担う箇所: 徒歩辺は元から通路の上下左右だけだが、パンチ辺の到着先は元のマスが壁か通路かにかかわらず利用できる。
-- 対象技能が担う箇所: 通路どうしは上下左右へ自由に移動でき、費用が増えるのは 2×2 の領域をパンチして壁を壊すときだけである。
-- 対象技能が担う箇所: パンチは実際に通行が必要になった時点まで遅らせられるため、過去にどの壁を壊したかを状態として保持する必要はない。
-- 対象技能が担う箇所: 0-1 BFS: グラフの辺重みが 0 と 1 だけで、頂点までの最小費用を求めるとき。 適用: 無料の徒歩移動を deque の前、有料のパンチ移動を後ろへ追加して最小パンチ数を更新する。
-- 対象技能が担う箇所: 操作履歴の辺への圧縮: 環境を変更する操作があるが、必要になる直前へ遅延しても最適性が失われないとき。 適用: 破壊済み壁集合を持たず、パンチ一回後に到達できる一定範囲のマスへ重み 1 の辺を張る。
-- 転移題材の解法接続: 不可逆な盤面変更を位置間の 0・1 重み付き遷移へ置換し、距離更新が 0 の頂点を deque の前、1 の頂点を後ろへ入れる最短路探索を行う。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 対象を頂点と辺に対応させ、利用するグラフ性質を示せる。
-
-</details>
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC224 E「Integers on Grid」](https://atcoder.jp/contests/abc224/tasks/abc224_e)
+- [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
+- [ABC229 E「Graph Destruction」](https://atcoder.jp/contests/abc229/tasks/abc229_e)
+- [ABC233 F「Swap and Sort」](https://atcoder.jp/contests/abc233/tasks/abc233_f)
+- [ABC237 Ex「Hakata」](https://atcoder.jp/contests/abc237/tasks/abc237_h)
+- [ABC239 F「Construct Highway」](https://atcoder.jp/contests/abc239/tasks/abc239_f)
+- [ABC244 F「Shortest Good Path」](https://atcoder.jp/contests/abc244/tasks/abc244_f)
+- [ABC247 Ex「Rearranging Problem」](https://atcoder.jp/contests/abc247/tasks/abc247_h)
+- [ABC257 G「Prefix Concatenation」](https://atcoder.jp/contests/abc257/tasks/abc257_g)
+- [ABC258 E「Packing Potatoes」](https://atcoder.jp/contests/abc258/tasks/abc258_e)
+- [ABC261 G「Replace」](https://atcoder.jp/contests/abc261/tasks/abc261_g)
+- [ABC264 E「Blackout 2」](https://atcoder.jp/contests/abc264/tasks/abc264_e)
+- [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
+- [ABC267 E「Erasing Vertices 2」](https://atcoder.jp/contests/abc267/tasks/abc267_e)
+- [ABC271 E「Subsequence Path」](https://atcoder.jp/contests/abc271/tasks/abc271_e)
+- [ABC286 F「Guess The Number 2」](https://atcoder.jp/contests/abc286/tasks/abc286_f)
+- [ABC297 E「Kth Takoyaki Set」](https://atcoder.jp/contests/abc297/tasks/abc297_e)
+- [ABC301 E「Pac-Takahashi」](https://atcoder.jp/contests/abc301/tasks/abc301_e)
+- [ABC302 Ex「Ball Collector」](https://atcoder.jp/contests/abc302/tasks/abc302_h)
+- [ABC305 E「Art Gallery on Graph」](https://atcoder.jp/contests/abc305/tasks/abc305_e)
+- [ABC306 Ex「Balance Scale」](https://atcoder.jp/contests/abc306/tasks/abc306_h)
+- [ABC311 G「One More Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_g)
+- [ABC313 Ex「Group Photo」](https://atcoder.jp/contests/abc313/tasks/abc313_h)
+- [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
+- [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
+- [ABC324 F「Beautiful Path」](https://atcoder.jp/contests/abc324/tasks/abc324_f)
+- [ABC327 G「Many Good Tuple Problems」](https://atcoder.jp/contests/abc327/tasks/abc327_g)
+- [ABC328 E「Modulo MST」](https://atcoder.jp/contests/abc328/tasks/abc328_e)
+- [ABC329 E「Stamp」](https://atcoder.jp/contests/abc329/tasks/abc329_e)
+- [ABC336 F「Rotation Puzzle」](https://atcoder.jp/contests/abc336/tasks/abc336_f)
+- [ABC336 G「16 Integers」](https://atcoder.jp/contests/abc336/tasks/abc336_g)
+- [ABC338 F「Negative Traveling Salesman」](https://atcoder.jp/contests/abc338/tasks/abc338_f)
+- [ABC341 F「Breakdown」](https://atcoder.jp/contests/abc341/tasks/abc341_f)
+- [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g)
+- [ABC352 F「Estimate Order」](https://atcoder.jp/contests/abc352/tasks/abc352_f)
+- [ABC354 G「Select Strings」](https://atcoder.jp/contests/abc354/tasks/abc354_g)
+- [ABC363 G「Dynamic Scheduling」](https://atcoder.jp/contests/abc363/tasks/abc363_g)
+- [ABC364 G「Last Major City」](https://atcoder.jp/contests/abc364/tasks/abc364_g)
+- [ABC370 F「Cake Division」](https://atcoder.jp/contests/abc370/tasks/abc370_f)
+- [ABC375 F「Road Blocked」](https://atcoder.jp/contests/abc375/tasks/abc375_f)
+- [ABC376 G「Treasure Hunting」](https://atcoder.jp/contests/abc376/tasks/abc376_g)
+- [ABC386 G「Many MST」](https://atcoder.jp/contests/abc386/tasks/abc386_g)
+- [ABC393 G「Unevenness」](https://atcoder.jp/contests/abc393/tasks/abc393_g)
+- [ABC394 G「Dense Buildings」](https://atcoder.jp/contests/abc394/tasks/abc394_g)
+- [ABC395 G「Minimum Steiner Tree 2」](https://atcoder.jp/contests/abc395/tasks/abc395_g)
+- [ABC398 E「Tree Game」](https://atcoder.jp/contests/abc398/tasks/abc398_e)
+- [ABC398 G「Not Only Tree Game」](https://atcoder.jp/contests/abc398/tasks/abc398_g)
+- [ABC408 E「Minimum OR Path」](https://atcoder.jp/contests/abc408/tasks/abc408_e)
+- [ABC409 F「Connecting Points」](https://atcoder.jp/contests/abc409/tasks/abc409_f)
+- [ABC413 F「No Passage」](https://atcoder.jp/contests/abc413/tasks/abc413_f)
+- [ABC417 E「A Path in A Dictionary」](https://atcoder.jp/contests/abc417/tasks/abc417_e)
+- [ABC417 G「Binary Cat」](https://atcoder.jp/contests/abc417/tasks/abc417_g)
+- [ABC424 G「Set list」](https://atcoder.jp/contests/abc424/tasks/abc424_g)
+- [ABC429 F「Shortest Path Query」](https://atcoder.jp/contests/abc429/tasks/abc429_f)
+- [ABC440 G「Haunted House」](https://atcoder.jp/contests/abc440/tasks/abc440_g)
+- [ABC444 G「Kyoen」](https://atcoder.jp/contests/abc444/tasks/abc444_g)
+- [ABC447 E「Divide Graph」](https://atcoder.jp/contests/abc447/tasks/abc447_e)
+- [ABC454 E「LRUD Moving」](https://atcoder.jp/contests/abc454/tasks/abc454_e)
 
 ## 根拠
 
@@ -216,4 +121,4 @@ sidebar:
 - [ABC214 H 公式解説](https://atcoder.jp/contests/abc214/editorial/2441)
 - [ABC214 H 公式問題文](https://atcoder.jp/contests/abc214/tasks/abc214_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-chapter-graph`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-chapter-graph`

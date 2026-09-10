@@ -1,6 +1,6 @@
 ---
 title: "反転数・重み付き接頭辞統計をFenwick Treeで保つ"
-description: "前提から反転数・重み付き接頭辞統計をFenwick Treeで保つを見抜き、方針へ接続して検証するための学習単位。"
+description: "反転数・重み付き接頭辞統計をFenwick Treeで保つの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 46
@@ -8,108 +8,62 @@ sidebar:
 
 # 反転数・重み付き接頭辞統計をFenwick Treeで保つ
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 一次元・二次元累積和と差分で区間情報を線形化する
-- この位置で学ぶ理由: 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
-
-### この単元では扱わない範囲
-
-- 一般のモノイドによるSegment Treeの区間要約。
-
-## 発動条件と見分け方
+## 概要
 
 ### Fenwick Tree・反転数・重み付き接頭辞統計
 
 値や座標の頻度を動的な接頭辞和で数えて反転数を求めるか、複数本を組み合わせて次数付きの区間式を評価する。
 
-検索語: BIT、Binary Indexed Tree、フェニック木
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: 一次元・二次元累積和と差分で区間情報を線形化する。
 
-### 例 1 — 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる
+静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
 
-題材: [ABC221 E「LEQ」](https://atcoder.jp/contests/abc221/tasks/abc221_e)
+- 一般のモノイドによるSegment Treeの区間要約。
 
-選定理由: 部分列全体を DP 状態にせず、最初と最後だけを固定すると中間選択が独立な二択になり、その個数が端点間距離だけの冪になる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。部分列の条件が最初と最後だけに依存し、中間要素の採否が自由なとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC461 E「E-liter」](https://atcoder.jp/contests/abc461/tasks/abc461_e)
+2. [ABC256 F「Cumulative Cumulative Cumulative Sum」](https://atcoder.jp/contests/abc256/tasks/abc256_f)
+3. [ABC287 G「Balance Update Query」](https://atcoder.jp/contests/abc287/tasks/abc287_g)
+4. [ABC276 F「Double Chance」](https://atcoder.jp/contests/abc276/tasks/abc276_f)
+5. [ABC351 F「Double Sum」](https://atcoder.jp/contests/abc351/tasks/abc351_f)
+6. [ABC221 E「LEQ」](https://atcoder.jp/contests/abc221/tasks/abc221_e)
 
-- 端点だけで決まる部分列条件を端点対の指数重みへ変え、重み分離と Fenwick Tree で集計できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 部分列の最初と最後の index を i<j に固定すると、その間の j-i-1 要素はそれぞれ選ぶ・選ばないを自由に決められる。したがって端点が A_i≤A_j を満たす一組の寄与は 2^{j-i-1} である。
-- 端点対を直接列挙できないが、2^{j-i-1}=2^{j-1}·2^{-i} と分離できるため、右端 j を走査すると必要なのは A_i≤A_j である過去 i の重み 2^{-i} の prefix 和だけになる。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: A を座標圧縮し、Fenwick Tree に過去 index i の重み 2^{-i} を値 A_i の位置へ加え、各 j で A_j 以下の総和へ 2^{j-1} を掛ける。 — 値条件を Fenwick Tree の prefix query、index 間隔の重みを左右端へ分離し、全ての端点対の寄与をまとめられる。
-- **棄却**: 全ての i<j を調べ、A_i≤A_j なら 2^{j-i-1} を加える。 — 端点対が二乗個あり、N=3×10^5 では列挙できない。
-
-#### 鍵となる着眼
-
-- 部分列全体を DP 状態にせず、最初と最後だけを固定すると中間選択が独立な二択になり、その個数が端点間距離だけの冪になる。
-
-#### アルゴリズムへ接続する
-
-2 の冪と逆冪を法 998244353 で前計算する。j を左から走査し、Fenwick Tree の rank(A_j) 以下を query して 2^{j-1} 倍を答えへ加えた後、同じ rank に 2^{-j} を add する。
-
-
-## 転用するときの確認
-
-- **端点固定による部分列数え上げ**: 部分列の条件が最初と最後だけに依存し、中間要素の採否が自由なとき。 適用: 端点対ごとの中間二択を 2 の冪で数え、端点寄与の総和へ変える。
-- **座標圧縮付き Fenwick Tree**: 左からの走査中に、値が現在値以下または以上の過去要素の重み和が必要なとき。 適用: 値 rank 上の prefix sum と一点加算で不等号条件を処理する。
-- 二 index の差に指数が付く和では、a^{j-i}=a^j a^{-i} と分離してオンライン集計できないか試す。
-- 三要素で端点 (1,3) を固定し、中間を入れる・入れない二通りを数えてから、一般の 2^{j-i-1} を再導出する。
-
-## 到達確認
-
-### 到達確認 1 — 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる
-
-転移題材: [ABC256 F「Cumulative Cumulative Cumulative Sum」](https://atcoder.jp/contests/abc256/tasks/abc256_f)
-
-**課題**: ABC256 F「Cumulative Cumulative Cumulative Sum」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 三重累積和の点更新と prefix query を、一要素の寄与係数の二次展開と 0 次から 2 次の moment を持つ Fenwick tree により各 O(log N) で処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 三重累積和の点更新と prefix query を、一要素の寄与係数の二次展開と 0 次から 2 次の moment を持つ Fenwick tree により各 O(log N) で処理できる。
-
-- 対象技能が担う箇所: 三重累積和の点更新と prefix query を、一要素の寄与係数の二次展開と 0 次から 2 次の moment を持つ Fenwick tree により各 O(log N) で処理できる。
-- 転移題材の解法接続: S_r(x)=Σ_{i=1}^x i^r A_i (r=0,1,2) を 3 本の Fenwick tree で管理し、D_x={S_2(x)-(2x+3)S_1(x)+(x+1)(x+2)S_0(x)}/2 を計算する。代入更新は旧値との差分を 3 種類の重みで加える。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。
-
-</details>
-
+- [ABC231 F「Jealous Two」](https://atcoder.jp/contests/abc231/tasks/abc231_f)
+- [ABC233 Ex「Manhattan Christmas Tree」](https://atcoder.jp/contests/abc233/tasks/abc233_h)
+- [ABC253 F「Operations on a Matrix」](https://atcoder.jp/contests/abc253/tasks/abc253_f)
+- [ABC261 F「Sorting Color Balls」](https://atcoder.jp/contests/abc261/tasks/abc261_f)
+- [ABC263 Ex「Intersection 2」](https://atcoder.jp/contests/abc263/tasks/abc263_h)
+- [ABC294 G「Distance Queries on a Tree」](https://atcoder.jp/contests/abc294/tasks/abc294_g)
+- [ABC306 F「Merge Sets」](https://atcoder.jp/contests/abc306/tasks/abc306_f)
+- [ABC337 G「Tree Inversion」](https://atcoder.jp/contests/abc337/tasks/abc337_g)
+- [ABC341 E「Alternating String」](https://atcoder.jp/contests/abc341/tasks/abc341_e)
+- [ABC368 G「Add and Multiply Queries」](https://atcoder.jp/contests/abc368/tasks/abc368_g)
+- [ABC378 E「Mod Sigma Problem」](https://atcoder.jp/contests/abc378/tasks/abc378_e)
+- [ABC380 G「Another Shuffle Window」](https://atcoder.jp/contests/abc380/tasks/abc380_g)
+- [ABC384 G「Abs Sum」](https://atcoder.jp/contests/abc384/tasks/abc384_g)
+- [ABC392 F「Insert」](https://atcoder.jp/contests/abc392/tasks/abc392_f)
+- [ABC396 F「Rotated Inversions」](https://atcoder.jp/contests/abc396/tasks/abc396_f)
+- [ABC406 F「Compare Tree Weights」](https://atcoder.jp/contests/abc406/tasks/abc406_f)
+- [ABC431 G「One Time Swap 2」](https://atcoder.jp/contests/abc431/tasks/abc431_g)
+- [ABC436 F「Starry Landscape Photo」](https://atcoder.jp/contests/abc436/tasks/abc436_f)
+- [ABC438 G「Sum of Min」](https://atcoder.jp/contests/abc438/tasks/abc438_g)
+- [ABC439 F「Beautiful Kadomatsu」](https://atcoder.jp/contests/abc439/tasks/abc439_f)
+- [ABC441 E「A > B substring」](https://atcoder.jp/contests/abc441/tasks/abc441_e)
+- [ABC449 E「A += v」](https://atcoder.jp/contests/abc449/tasks/abc449_e)
+- [ABC452 F「Interval Inversion Count」](https://atcoder.jp/contests/abc452/tasks/abc452_f)
 
 ## 根拠
 
@@ -119,7 +73,5 @@ sidebar:
 - [ABC231 F 公式問題文](https://atcoder.jp/contests/abc231/tasks/abc231_f)
 - [ABC233 H 公式解説](https://atcoder.jp/contests/abc233/editorial/3168)
 - [ABC233 H 公式問題文](https://atcoder.jp/contests/abc233/tasks/abc233_h)
-- [ABC256 F 公式解説](https://atcoder.jp/contests/abc256/editorial/4131)
-- [ABC256 F 公式問題文](https://atcoder.jp/contests/abc256/tasks/abc256_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-weighted-prefix-fenwick`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-weighted-prefix-fenwick`

@@ -32,83 +32,40 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/two-pointers-window.md",
   "problemIds": [
-    "abc215-f",
     "abc250-f",
     "abc258-e",
     "abc260-e",
+    "abc294-e",
+    "abc337-f",
+    "abc370-f",
+    "abc444-e",
+    "abc452-f"
+  ],
+  "directProblemIds": [
+    "abc260-e",
+    "abc294-e",
+    "abc337-f",
+    "abc250-f",
+    "abc444-e",
+    "abc370-f",
+    "abc258-e",
+    "abc452-f"
+  ],
+  "relatedProblemIds": [
+    "abc215-f",
     "abc281-e",
     "abc290-e",
-    "abc294-e",
     "abc300-g",
     "abc314-g",
-    "abc337-f",
     "abc365-g",
     "abc366-e",
-    "abc370-f",
     "abc380-g",
     "abc388-g",
     "abc431-f",
-    "abc444-e",
-    "abc452-f",
     "abc455-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-maintain-monotone-window",
-      "learningOutcomeIds": [
-        "outcome-maintain-monotone-window"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。一方の端点を固定した部分面積が他方の端点に対して単調に変化する。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC250 F「One Fourth」について、凸多角形で始点を固定すると、対角線のもう一端を周上で進めた部分多角形の面積は単調に増えるため、4倍面積が全体面積を跨ぐ位置だけ調べればよい。",
-      "procedure": [
-        "観察: 凸多角形で始点を固定すると、対角線のもう一端を周上で進めた部分多角形の面積は単調に増えるため、4倍面積が全体面積を跨ぐ位置だけ調べればよい。",
-        "着眼: 面積を2倍した外積和で保持すれば、四分の一との差は|全体の2倍面積-4×部分の2倍面積|として整数だけで比較できる。",
-        "着眼: 始点を一つ進めても最適な終点は後退しないので、頂点列を巡回配列として二本のポインタを全体で線形回だけ動かせる。",
-        "方針: 符号付き面積を更新する二点法（凸性による面積の単調性から、各始点で終点を戻さず進められ、目標を跨ぐ直前と直後だけで最小差を評価できる。）",
-        "接続: 全体の2倍面積Sを求め、頂点を巡回させながら部分多角形の2倍面積Eを外積で増減する。各左端について4EがSを超えるまで右端を進め、跨ぐ前後の|S-4E|で答えを更新する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-maintain-monotone-window",
-      "learningOutcomeIds": [
-        "outcome-maintain-monotone-window"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC258 E「Packing Potatoes」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 各問い合わせで指定されたK番目の箱へ入るじゃがいもの個数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 各問い合わせで指定されたK番目の箱へ入るじゃがいもの個数を求められる。",
-          "転移題材の解法接続: q=floor(X/S), rem=X mod Sとし、二周したW上の二点法でrem以上にする追加個数を各iへ求めてC_i=qN+追加数とする。next[i]=(i+C_i) mod Nを作り、0からの頂点列と閉路開始を記録して各K_i-1位置のCを返す。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 1,
   "difficultyRank": 0,
   "representativeRank": 1,

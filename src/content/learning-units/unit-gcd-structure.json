@@ -15,11 +15,7 @@
     "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
     "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
     "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721",
-    "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6",
-    "source-abc254-editorial-4067-c931ee6e07f8d7b7e2f38c2ceb2193c131f8f11b66f6200318c5a3ce39a2cf54",
-    "source-abc254-f-problem-fb9b12af78f2c27e67cf3fdf37ca5b98e81bbb6ccf253f0e8602d3235e2f53d0",
-    "source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176",
-    "source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c"
+    "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"
   ],
   "tagIds": [
     "tag-gcd-structure"
@@ -36,72 +32,23 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/gcd-structure.md",
   "problemIds": [
+    "abc254-f",
+    "abc438-g"
+  ],
+  "directProblemIds": [
+    "abc254-f",
+    "abc438-g"
+  ],
+  "relatedProblemIds": [
     "abc212-g",
     "abc222-g",
     "abc248-g",
-    "abc254-f",
     "abc306-g",
     "abc418-e",
-    "abc438-g",
     "abc445-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-reduce-integer-structure-by-gcd",
-      "learningOutcomeIds": [
-        "outcome-reduce-integer-structure-by-gcd"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。多数の和で作る集合のgcdを少数の基準値と差へ変えたい。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC254 F「Rectangle GCD」について、長方形内の全A_i+B_jのgcdは、基準値A_h1+B_w1と、行方向の隣接差A_i-A_(i-1)、列方向の隣接差B_j-B_(j-1)のgcdに等しい。",
-      "procedure": [
-        "観察: 長方形内の全A_i+B_jのgcdは、基準値A_h1+B_w1と、行方向の隣接差A_i-A_(i-1)、列方向の隣接差B_j-B_(j-1)のgcdに等しい。",
-        "着眼: 同じ列の値同士を引けばAの隣接差が、同じ行の値同士を引けばBの隣接差が得られる。",
-        "着眼: 逆に基準値と全隣接差から長方形内の任意のA_i+B_jを加減算で復元できるため、二つのgcdは一致する。",
-        "方針: 差分列の区間gcdと基準一点（gcdが差を取っても不変な性質により、二次元長方形を二つの一次元差分区間と一値へ分解できる。）",
-        "接続: 差分配列dA[i]=A_i-A_(i-1)、dB[j]=B_j-B_(j-1)を区間gcd可能な構造へ載せる。各質問でgcd(A_h1+B_w1, gcd(dA[h1+1..h2]), gcd(dB[w1+1..w2]))を返す。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-reduce-integer-structure-by-gcd",
-      "learningOutcomeIds": [
-        "outcome-reduce-integer-structure-by-gcd"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC438 G「Sum of Min」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 巨大長の二周期列に対する min 総和を、gcd 分解・円環区間化・offline Fenwick で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 巨大長の二周期列に対する min 総和を、gcd 分解・円環区間化・offline Fenwick で求められる。",
-          "転移題材の解法接続: まず gcd ごとに A,B の対応剰余類を抽出する。互いに素なクラスで B' を N ステップ順に並べる。各 A_k から出現回数と B' 上の開始・長さを計算し、全周回を分離して余りを1〜2区間質問にする。質問を x=A_k 昇順に並べ、B' の値昇順 sweep と二本の Fenwick 木で count/sum を答えて合計する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 2,
   "representativeRank": 54,

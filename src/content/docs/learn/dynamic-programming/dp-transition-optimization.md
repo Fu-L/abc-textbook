@@ -1,6 +1,6 @@
 ---
 title: "DP遷移を因数分解・集約して加速する"
-description: "前提からDP遷移を因数分解・集約して加速するを見抜き、方針へ接続して検証するための学習単位。"
+description: "DP遷移を因数分解・集約して加速するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 76
@@ -8,110 +8,62 @@ sidebar:
 
 # DP遷移を因数分解・集約して加速する
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 最小十分状態からDPを設計する
-- この位置で学ぶ理由: 正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。
-
-### この単元では扱わない範囲
-
-- 固定線形遷移の巨大回累乗。
-
-## 発動条件と見分け方
+## 概要
 
 ### DP遷移の集約・高速化
 
 同じ形の遷移をprefix、単調構造、剰余類などでまとめる。
 
-検索語: DP optimization、DP高速化
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: 最小十分状態からDPを設計する。
 
-### 例 1 — 高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる
+正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。
 
-題材: [ABC212 E「Safety Journey」](https://atcoder.jp/contests/abc212/tasks/abc212_e)
+- 固定線形遷移の巨大回累乗。
 
-選定理由: 密な許可関係をそのまま扱うのでなく、「全候補から疎な禁止集合を引く」という補集合側の表現に反転する。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。許される遷移がほぼ全てで、禁止される遷移だけが少数列挙されているとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC212 E「Safety Journey」](https://atcoder.jp/contests/abc212/tasks/abc212_e)
+2. [ABC249 E「RLE」](https://atcoder.jp/contests/abc249/tasks/abc249_e)
+3. [ABC253 E「Distance Sequence」](https://atcoder.jp/contests/abc253/tasks/abc253_e)
+4. [ABC265 F「Manhattan Cafe」](https://atcoder.jp/contests/abc265/tasks/abc265_f)
+5. [ABC338 G「evall」](https://atcoder.jp/contests/abc338/tasks/abc338_g)
+6. [ABC370 E「Avoid K Partition」](https://atcoder.jp/contests/abc370/tasks/abc370_e)
+7. [ABC372 F「Teleporting Takahashi 2」](https://atcoder.jp/contests/abc372/tasks/abc372_f)
+8. [ABC442 F「Diagonal Separation 2」](https://atcoder.jp/contests/abc442/tasks/abc442_f)
+9. [ABC457 F「Second Gap」](https://atcoder.jp/contests/abc457/tasks/abc457_f)
+10. [ABC353 G「Merchant Takahashi」](https://atcoder.jp/contests/abc353/tasks/abc353_g)
+11. [ABC221 H「Count Multiset」](https://atcoder.jp/contests/abc221/tasks/abc221_h)
+12. [ABC243 G「Sqrt」](https://atcoder.jp/contests/abc243/tasks/abc243_g)
+13. [ABC334 F「Christmas Present 2」](https://atcoder.jp/contests/abc334/tasks/abc334_f)
+14. [ABC358 G「AtCoder Tour」](https://atcoder.jp/contests/abc358/tasks/abc358_g)
+15. [ABC282 G「Similar Permutation」](https://atcoder.jp/contests/abc282/tasks/abc282_g)
+16. [ABC408 F「Athletic」](https://atcoder.jp/contests/abc408/tasks/abc408_f)
+17. [ABC224 E「Integers on Grid」](https://atcoder.jp/contests/abc224/tasks/abc224_e)
 
-- 密な遷移が疎な禁止関係で記述された DP を、全体和と例外減算に置き換えて実装できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 各晩は今いる街にも壊れた道路の相手にも移動できず、それ以外のほぼ全ての街へ移動できる。使えない組だけが M 本の道路として疎に与えられている。
-- 翌日のある街への到達数は、前日の全街への到達数の総和から、その街自身と壊れた道路で隣接する街からの分を除けば得られる。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 前日の到達数の総和を先に求め、各到着街について自己ループと壊れた道路の端点に由来する寄与だけを引く。 — 全ての許可辺を列挙せず、各日につき街と壊れた道路だけを走査して同じ遷移を計算できる。
-- **棄却**: 各日について全ての出発街と到着街の組を調べ、移動可能なら到達数を加える。 — 移動可能な組が密なので、街の組を直接列挙すると N の二乗に日数を掛けた回数の遷移が必要になる。
-
-#### 鍵となる着眼
-
-- 密な許可関係をそのまま扱うのでなく、「全候補から疎な禁止集合を引く」という補集合側の表現に反転する。
-- 同じ街に留まることも禁止されるため、入力された壊れた道路だけでなく dp の同じ添字の値も必ず総和から除く。
-
-#### アルゴリズムへ接続する
-
-日ごとの街別到達数を DP とし、全成分和を基準値にして禁止辺の両端からの寄与を差し引くことで、完全グラフの補グラフ上の遷移を疎な更新へ変換する。
-
-
-## 転用するときの確認
-
-- **補集合を使う遷移高速化**: 許される遷移がほぼ全てで、禁止される遷移だけが少数列挙されているとき。 適用: 全状態の値の総和から自己遷移と壊れた道路に対応する値を引き、許可辺の走査を省く。
-- **ローリング DP**: 次の段が直前の段だけに依存し、段数分の履歴を保持する必要がないとき。 適用: 前日と翌日の街別配列を分け、各晩の遷移後に交換して K 日目の街 1 の値を得る。
-- 入力が関係の例外だけを表す問題では、例外を足す発想だけでなく、全集合から例外を引く集約式を検討する。
-- 辺数が少ないのに「辺のない組へ移動する」と書かれていたら、入力辺ではなくその補集合が本体だと読み替える。
-- 全体和から引く対象を、入力の禁止辺だけで終えず、問題文が別に禁じる自己遷移まで列挙して確認する。
-
-## 到達確認
-
-### 到達確認 1 — 高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる
-
-転移題材: [ABC221 H「Count Multiset」](https://atcoder.jp/contests/abc221/tasks/abc221_h)
-
-**課題**: ABC221 H「Count Multiset」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: multiplicity 制限付き整数分割を反転差分列へ写し、0-run 制約を二方向の累積和で処理して全サイズを数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- multiplicity 制限付き整数分割を反転差分列へ写し、0-run 制約を二方向の累積和で処理して全サイズを数えられる。
-
-- 対象技能が担う箇所: multiplicity 制限付き整数分割を反転差分列へ写し、0-run 制約を二方向の累積和で処理して全サイズを数えられる。
-- 転移題材の解法接続: 番兵 f[0][0]=1 を置く。x=1..N について各 y の g[x][y] を直前 M 行の f の sliding sum で保ち、y≥x なら f[x][y]=f[x][y-x]+g[x][y-x] を法 998244353 で計算する。求める k ごとの答えは f[k][N] である。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる。
-
-</details>
-
+- [ABC214 F「Substrings」](https://atcoder.jp/contests/abc214/tasks/abc214_f)
+- [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
+- [ABC279 G「At Most 2 Colors」](https://atcoder.jp/contests/abc279/tasks/abc279_g)
+- [ABC288 F「Integer Division」](https://atcoder.jp/contests/abc288/tasks/abc288_f)
+- [ABC311 F「Yet Another Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_f)
+- [ABC319 G「Counting Shortest Paths」](https://atcoder.jp/contests/abc319/tasks/abc319_g)
+- [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f)
+- [ABC342 F「Black Jack」](https://atcoder.jp/contests/abc342/tasks/abc342_f)
+- [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
+- [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
+- [ABC436 G「Linear Inequation」](https://atcoder.jp/contests/abc436/tasks/abc436_g)
+- [ABC446 G「221 Subsequence」](https://atcoder.jp/contests/abc446/tasks/abc446_g)
 
 ## 根拠
 
@@ -122,4 +74,4 @@ sidebar:
 - [ABC221 H 公式解説](https://atcoder.jp/contests/abc221/editorial/2719)
 - [ABC221 H 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-transition-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-dp-transition-optimization`

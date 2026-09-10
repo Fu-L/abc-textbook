@@ -33,65 +33,17 @@
   "docPath": "src/content/docs/learn/number-theory/rational-approximation.md",
   "problemIds": [
     "abc333-g",
-    "abc393-g",
     "abc408-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-approximate-rational-by-euclid",
-      "learningOutcomeIds": [
-        "outcome-approximate-rational-by-euclid"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。実数へ近い有理数を分母上限付きで求めたい。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC333 G「Nearest Fraction」について、入力小数rを正確な既約分数R/Dとして扱う。D≤Nならr自身が誤差0の答えであり、D>Nなら分母N以下でrを左右から挟む最隣接分数のどちらかだけを比較すればよい。",
-      "procedure": [
-        "観察: 入力小数rを正確な既約分数R/Dとして扱う。D≤Nならr自身が誤差0の答えであり、D>Nなら分母N以下でrを左右から挟む最隣接分数のどちらかだけを比較すればよい。",
-        "着眼: Stern–Brocot木を分母≤Nで切った探索木で、r以下の最大値xとr以上の最小値yは、rの連分数path上にある。連分数の次係数を分母がNを超えない最大値まで進めたsemiconvergentと、その直前境界からx,yを得られ、最適解はこの二つのどちらかである。",
-        "方針: 連分数・Stern–Brocot木で分母上限内の左右隣接分数を求める（分母≤Nの全既約分数を列挙せず、rへのpath上のconvergentとsemiconvergentから候補を二つに絞れる。）",
-        "接続: 小数文字列から整数Rと10の冪Dを作りgcdで約分する。Euclid法で連分数係数を順に得つつconvergentの分子分母を更新し、次の完全convergentが分母Nを超える箇所では係数をfloor((N-q_prevprev)/q_prev)までに切って左右候補を構成する。|R/D-p/q|を整数cross積で比較し、tieは小さいp/qを選ぶ。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc333-g",
+    "abc408-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-approximate-rational-by-euclid",
-      "learningOutcomeIds": [
-        "outcome-approximate-rational-by-euclid"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC408 G「A/B < p/q < C/D」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 最大 10^18 の二有理数の開区間に入る分母最小の有理数を、一 testcase あたり対数時間で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 最大 10^18 の二有理数の開区間に入る分母最小の有理数を、一 testcase あたり対数時間で求められる。",
-          "転移題材の解法接続: 各 testcase で n=floor(A/B) を取り両端から n を引く。正規化後の上端が1より大きければ pair=(1,1)、そうでなければ端点を逆数にして f(D/C,B/A) を再帰し pair をswapする。戻りながら p+=nq とし q を出力する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
+  "relatedProblemIds": [
+    "abc393-g"
   ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 2,

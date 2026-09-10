@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50",
-    "acceptedAt": "2026-09-08T13:23:02.761Z"
+    "digest": "9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa",
+    "acceptedAt": "2026-09-09T17:04:36.563Z"
   },
   "tagPrerequisites": [
     {
@@ -729,6 +729,10 @@
       "prerequisiteId": "outcome-encode-counting-by-generating-function"
     },
     {
+      "nodeId": "outcome-count-nonintersecting-paths-by-lgv",
+      "prerequisiteId": "outcome-solve-linear-system-and-rank"
+    },
+    {
       "nodeId": "outcome-count-orbits-by-fixed-points",
       "prerequisiteId": "outcome-normalize-equivalent-states"
     },
@@ -965,6 +969,14 @@
       "prerequisiteId": "outcome-prove-and-search-threshold"
     },
     {
+      "nodeId": "outcome-optimize-stochastic-actions",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-optimize-stochastic-actions",
+      "prerequisiteId": "outcome-solve-stochastic-recurrence"
+    },
+    {
       "nodeId": "outcome-optimize-tree-order-by-cluster-contraction",
       "prerequisiteId": "outcome-augment-components-with-metadata"
     },
@@ -991,6 +1003,10 @@
     {
       "nodeId": "outcome-process-dag-in-topological-order",
       "prerequisiteId": "outcome-select-state-graph-search"
+    },
+    {
+      "nodeId": "outcome-propagate-probability-distribution",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
     },
     {
       "nodeId": "outcome-propagate-static-graph-potentials",
@@ -3020,7 +3036,7 @@
     }
   ],
   "tagDagDigest": "10d392c3df01f27a61862043722e2d652d11d4e0ee3ae984fffe46effeedb2be",
-  "learningOutcomeDagDigest": "8724ccbbc758d19cde42a6d0fcf76523cda01434a3402ac52a34e610a89d2a40",
+  "learningOutcomeDagDigest": "e80a452827237238966b45cd45e3b75128bc5b105924d7f412bc4d4e8842148b",
   "learningUnitDagDigest": "8bff4fac683eaa16f8a7bdc6ecfbf18c4f4ff35364f024871d9b052a59048075",
   "orderDigest": "3711b978a95fbd553d54a3a26dca40bda4dd90cc313a2a7c842d307b77b7286d"
 }

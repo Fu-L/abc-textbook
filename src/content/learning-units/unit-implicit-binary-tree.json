@@ -32,68 +32,17 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/tree/implicit-binary-tree.md",
   "problemIds": [
+    "abc321-e"
+  ],
+  "directProblemIds": [
+    "abc321-e"
+  ],
+  "relatedProblemIds": [
     "abc220-e",
-    "abc321-e",
     "abc424-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-count-implicit-binary-tree-layers",
-      "learningOutcomeIds": [
-        "outcome-count-implicit-binary-tree-layers"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。親i/2・子2i,2i+1で巨大treeが番号だけ与えられるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC321 E「Complete Binary Tree」について、heap番号のtreeでは頂点vから下へd段の子孫labelが連続区間[v·2^d,(v+1)·2^d)になる。",
-      "procedure": [
-        "観察: heap番号のtreeでは頂点vから下へd段の子孫labelが連続区間[v·2^d,(v+1)·2^d)になる。",
-        "観察: Xから距離Kの頂点Yは、そのLCAがX自身か、Xの各ancestorのいずれかという高々tree高さ個のcaseへ一意に分かれる。",
-        "着眼: countDesc(v,d)はmax(0,min(N+1,(v+1)2^d)-v2^d)で、label上限Nとの区間intersectionだけになる。",
-        "着眼: Xからu段上のancestor zについてd=K-uが0ならz自身1個、d>0ならcountDesc(z,d)-countDesc(child,d-1)が寄与する。",
-        "方針: Xからrootまでancestorを算術で列挙し、各ancestorをpathの折返し点とするcaseを子孫label区間の長さでO(1)計数する。（Nが10^18でもtree高さは約60で、頂点やedgeを生成せず各testを処理できる。）",
-        "接続: overflowを避けるcountDesc(v,d)を用意し、まずanswer=countDesc(X,K)とする。child=X,z=floor(X/2),u=1からz=0またはu>Kまで上る。d=K-uが0なら1を加え、正ならcountDesc(z,d)-countDesc(child,d-1)を加える。その後child=z,z=floor(z/2)へ更新し、各testのanswerを出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "同じ深さの対称性と2冪で距離splitを集約するか、heap番号の祖先case分解と子孫label区間を使い、巨大な完全二分木を展開せず数えられる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-count-implicit-binary-tree-layers",
-      "learningOutcomeIds": [
-        "outcome-count-implicit-binary-tree-layers"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「同じ深さの対称性と2冪で距離splitを集約するか、heap番号の祖先case分解と子孫label区間を使い、巨大な完全二分木を展開せず数えられる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC220 E「Distance on Large Perfect Binary Tree」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「同じ深さの対称性と2冪で距離splitを集約するか、heap番号の祖先case分解と子孫label区間を使い、巨大な完全二分木を展開せず数えられる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 対称構造の深さ集約: 完全木などで、頂点に依存する量が深さだけで決まるとき。 適用: 一頂点分の数を深さから求め、その深さの頂点数を掛けて明示的な木を消す。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 対称構造の深さ集約: 完全木などで、頂点に依存する量が深さだけで決まるとき。 適用: 一頂点分の数を深さから求め、その深さの頂点数を掛けて明示的な木を消す。",
-          "転移題材の解法接続: 2 の冪を法 998244353 で前計算する。各深さ d で H=N-1-d とし、D≤H なら片端が LCA の 2×2^D を加え、内部 split 区間の長さに 2^{D-1} を掛けて加える。その一頂点分へ 2^d を掛け、全深さを合計する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "同じ深さの対称性と2冪で距離splitを集約するか、heap番号の祖先case分解と子孫label区間を使い、巨大な完全二分木を展開せず数えられる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 1,
   "representativeRank": 6,

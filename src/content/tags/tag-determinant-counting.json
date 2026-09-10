@@ -37,7 +37,8 @@
   },
   "relatedTags": [],
   "learningOutcomeIds": [
-    "outcome-count-combinatorial-objects-by-determinant"
+    "outcome-count-combinatorial-objects-by-determinant",
+    "outcome-count-nonintersecting-paths-by-lgv"
   ],
   "representativeProblemIds": [
     "abc216-h",

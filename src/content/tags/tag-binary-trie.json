@@ -37,8 +37,8 @@
     "outcome-query-bitwise-order-with-trie"
   ],
   "representativeProblemIds": [
-    "abc252-ex",
-    "abc425-g"
+    "abc425-g",
+    "abc252-ex"
   ],
   "aliases": [
     "01-Trie",

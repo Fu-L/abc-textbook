@@ -1,6 +1,6 @@
 ---
 title: "局所寄与へ分解して集計順を交換する"
-description: "前提から局所寄与へ分解して集計順を交換するを見抜き、方針へ接続して検証するための学習単位。"
+description: "局所寄与へ分解して集計順を交換するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 23
@@ -8,110 +8,102 @@ sidebar:
 
 # 局所寄与へ分解して集計順を交換する
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 答えを要素・組・成分ごとの局所寄与へ一意に分け、各対象が何回数えられるかを証明して二重和・積・期待値の集計順を交換する。
-
-### この単元では扱わない範囲
-
-- active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および独立な局所寄与へ分解できない集計。
-
-## 発動条件と見分け方
+## 概要
 
 ### 寄与の数え上げと順序交換
 
 答えを要素・組・連結成分ごとの独立な局所寄与へ分解し、和または積の集計順序を交換する。
 
-検索語: contribution technique、主客転倒
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる
+答えを要素・組・成分ごとの局所寄与へ一意に分け、各対象が何回数えられるかを証明して二重和・積・期待値の集計順を交換する。
 
-題材: [ABC215 G「Colorful Candies 2」](https://atcoder.jp/contests/abc215/tasks/abc215_g)
+- active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および独立な局所寄与へ分解できない集計。
 
-選定理由: 色どうしの出現は独立でなくても、期待値の線形性により各色の出現確率を単純に足せる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。異なる種類の出現数の期待値を求め、種類間の依存関係が複雑なとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC233 E「Σ[k=0..10^100]floor(X／10^k)」](https://atcoder.jp/contests/abc233/tasks/abc233_e)
+2. [ABC224 F「Problem where +s Separate Digits」](https://atcoder.jp/contests/abc224/tasks/abc224_f)
+3. [ABC231 G「Balls in Boxes」](https://atcoder.jp/contests/abc231/tasks/abc231_g)
+4. [ABC247 E「Max Min」](https://atcoder.jp/contests/abc247/tasks/abc247_e)
+5. [ABC255 E「Lucky Numbers」](https://atcoder.jp/contests/abc255/tasks/abc255_e)
+6. [ABC308 E「MEX」](https://atcoder.jp/contests/abc308/tasks/abc308_e)
+7. [ABC318 E「Sandwiches」](https://atcoder.jp/contests/abc318/tasks/abc318_e)
+8. [ABC324 E「Joint Two Strings」](https://atcoder.jp/contests/abc324/tasks/abc324_e)
+9. [ABC347 E「Set Add Query」](https://atcoder.jp/contests/abc347/tasks/abc347_e)
+10. [ABC365 E「Xor Sigma Problem」](https://atcoder.jp/contests/abc365/tasks/abc365_e)
+11. [ABC371 E「I Hate Sigma Problems」](https://atcoder.jp/contests/abc371/tasks/abc371_e)
+12. [ABC379 E「Sum of All Substrings」](https://atcoder.jp/contests/abc379/tasks/abc379_e)
+13. [ABC390 F「Double Sum 3」](https://atcoder.jp/contests/abc390/tasks/abc390_f)
+14. [ABC268 G「Random Student ID」](https://atcoder.jp/contests/abc268/tasks/abc268_g)
+15. [ABC269 F「Numbered Checker」](https://atcoder.jp/contests/abc269/tasks/abc269_f)
+16. [ABC290 E「Make it Palindrome」](https://atcoder.jp/contests/abc290/tasks/abc290_e)
+17. [ABC295 F「substr = S」](https://atcoder.jp/contests/abc295/tasks/abc295_f)
+18. [ABC330 G「Inversion Squared」](https://atcoder.jp/contests/abc330/tasks/abc330_g)
+19. [ABC334 E「Christmas Color Grid 1」](https://atcoder.jp/contests/abc334/tasks/abc334_e)
+20. [ABC362 F「Perfect Matching on a Tree」](https://atcoder.jp/contests/abc362/tasks/abc362_f)
+21. [ABC423 E「Sum of Subarrays」](https://atcoder.jp/contests/abc423/tasks/abc423_e)
+22. [ABC215 G「Colorful Candies 2」](https://atcoder.jp/contests/abc215/tasks/abc215_g)
+23. [ABC220 E「Distance on Large Perfect Binary Tree」](https://atcoder.jp/contests/abc220/tasks/abc220_e)
+24. [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
+25. [ABC295 E「Kth Number」](https://atcoder.jp/contests/abc295/tasks/abc295_e)
+26. [ABC418 E「Trapezium」](https://atcoder.jp/contests/abc418/tasks/abc418_e)
+27. [ABC407 F「Sums of Sliding Window Maximum」](https://atcoder.jp/contests/abc407/tasks/abc407_f)
+28. [ABC261 F「Sorting Color Balls」](https://atcoder.jp/contests/abc261/tasks/abc261_f)
+29. [ABC378 E「Mod Sigma Problem」](https://atcoder.jp/contests/abc378/tasks/abc378_e)
+30. [ABC396 F「Rotated Inversions」](https://atcoder.jp/contests/abc396/tasks/abc396_f)
+31. [ABC436 F「Starry Landscape Photo」](https://atcoder.jp/contests/abc436/tasks/abc436_f)
+32. [ABC438 F「Sum of Mex」](https://atcoder.jp/contests/abc438/tasks/abc438_f)
+33. [ABC306 F「Merge Sets」](https://atcoder.jp/contests/abc306/tasks/abc306_f)
+34. [ABC380 G「Another Shuffle Window」](https://atcoder.jp/contests/abc380/tasks/abc380_g)
+35. [ABC439 F「Beautiful Kadomatsu」](https://atcoder.jp/contests/abc439/tasks/abc439_f)
 
-- 相関のある標本中の異種類数期待値を、指示変数・余事象・頻度集約で全標本サイズについて計算できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 選んだ K 個の飴に含まれる色数は、各色について「その色が一個以上現れた」という指示変数の総和である。
-- 全 N 個中に n_i 個ある色 i が一度も選ばれない確率は C(N−n_i,K)／C(N,K) であり、出現確率はその余事象である。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 同じ出現個数 x を持つ色を a_x 個にまとめ、各 K に対して正の a_x だけから出現確率を加算する。 — 期待値への寄与は色名でなく頻度だけで決まり、異なる正頻度の種類数は N の平方根程度に抑えられる。
-- **棄却**: 各 K と各色の組について、その色が含まれる選び方を個別に計算して期待値へ加える。 — 色数も K の種類数も N に達し得るため、全組を処理すると二乗規模になる。
-
-#### 鍵となる着眼
-
-- 色どうしの出現は独立でなくても、期待値の線形性により各色の出現確率を単純に足せる。
-- 正の頻度 x が互いに異なるなら、その最小総和は 1＋2＋… と増えるため、存在する頻度値の種類数は少ない。
-
-#### アルゴリズムへ接続する
-
-色数を指示変数の和へ分解し、余事象の二項係数比を頻度別に集約して、正頻度の疎性を利用しながら全ての K の期待値を求める。
-
-
-## 転用するときの確認
-
-- **指示変数と期待値の線形性**: 異なる種類の出現数の期待値を求め、種類間の依存関係が複雑なとき。 適用: 各色が一度以上選ばれる指示変数を置き、その出現確率を色ごとに加える。
-- **頻度による同型項の集約**: 各種類の寄与が名前ではなく、その種類の出現回数だけで決まるとき。 適用: 頻度 x の色数 a_x を数え、同じ二項係数比を a_x 倍して一括加算する。
-- 値別グループの走査が一見二乗でも、正の異なる値の総和制約から非零グループ数を評価できることがある。
-- 異なる種類数の期待値では、分布全体を追う前に各種類が現れたかという指示変数へ分解する。
-- 同じ頻度の種類が同一式へ寄与するなら、頻度の種類数を総和制約から評価して反復回数を見積もる。
-
-## 到達確認
-
-### 到達確認 1 — 答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる
-
-転移題材: [ABC220 E「Distance on Large Perfect Binary Tree」](https://atcoder.jp/contests/abc220/tasks/abc220_e)
-
-**課題**: ABC220 E「Distance on Large Perfect Binary Tree」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 指数個の完全木を展開せず、共通祖先の深さ・対称性・距離split区間から順序付き頂点対を数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 指数個の完全木を展開せず、共通祖先の深さ・対称性・距離split区間から順序付き頂点対を数えられる。
-
-- 対象技能が担う箇所: 指数個の完全木を展開せず、共通祖先の深さ・対称性・距離split区間から順序付き頂点対を数えられる。
-- 転移題材の解法接続: 2 の冪を法 998244353 で前計算する。各深さ d で H=N-1-d とし、D≤H なら片端が LCA の 2×2^D を加え、内部 split 区間の長さに 2^{D-1} を掛けて加える。その一頂点分へ 2^d を掛け、全深さを合計する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。
-
-</details>
-
+- [ABC216 F「Max Sum Counting」](https://atcoder.jp/contests/abc216/tasks/abc216_f)
+- [ABC218 E「Destruction」](https://atcoder.jp/contests/abc218/tasks/abc218_e)
+- [ABC219 H「Candles」](https://atcoder.jp/contests/abc219/tasks/abc219_h)
+- [ABC221 E「LEQ」](https://atcoder.jp/contests/abc221/tasks/abc221_e)
+- [ABC221 F「Diameter set」](https://atcoder.jp/contests/abc221/tasks/abc221_f)
+- [ABC222 E「Red and Blue Tree」](https://atcoder.jp/contests/abc222/tasks/abc222_e)
+- [ABC238 Ex「Removing People」](https://atcoder.jp/contests/abc238/tasks/abc238_h)
+- [ABC258 G「Triangle」](https://atcoder.jp/contests/abc258/tasks/abc258_g)
+- [ABC262 Ex「Max Limited Sequence」](https://atcoder.jp/contests/abc262/tasks/abc262_h)
+- [ABC269 E「Last Rook」](https://atcoder.jp/contests/abc269/tasks/abc269_e)
+- [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
+- [ABC280 G「Do Use Hexagon Grid 2」](https://atcoder.jp/contests/abc280/tasks/abc280_g)
+- [ABC283 Ex「Popcount Sum」](https://atcoder.jp/contests/abc283/tasks/abc283_h)
+- [ABC297 F「Minimum Bounding Box 2」](https://atcoder.jp/contests/abc297/tasks/abc297_f)
+- [ABC298 F「Rook Score」](https://atcoder.jp/contests/abc298/tasks/abc298_f)
+- [ABC313 F「Flip Machines」](https://atcoder.jp/contests/abc313/tasks/abc313_f)
+- [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
+- [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
+- [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
+- [ABC351 E「Jump Distance Sum」](https://atcoder.jp/contests/abc351/tasks/abc351_e)
+- [ABC352 G「Socks 3」](https://atcoder.jp/contests/abc352/tasks/abc352_g)
+- [ABC353 E「Yet Another Sigma Problem」](https://atcoder.jp/contests/abc353/tasks/abc353_e)
+- [ABC359 G「Sum of Tree Distance」](https://atcoder.jp/contests/abc359/tasks/abc359_g)
+- [ABC361 E「Tree and Hamilton Path 2」](https://atcoder.jp/contests/abc361/tasks/abc361_e)
+- [ABC386 G「Many MST」](https://atcoder.jp/contests/abc386/tasks/abc386_g)
+- [ABC390 G「Permutation Concatenation」](https://atcoder.jp/contests/abc390/tasks/abc390_g)
+- [ABC401 F「Add One Edge 3」](https://atcoder.jp/contests/abc401/tasks/abc401_f)
+- [ABC411 E「E [max]」](https://atcoder.jp/contests/abc411/tasks/abc411_e)
+- [ABC417 F「Random Gathering」](https://atcoder.jp/contests/abc417/tasks/abc417_f)
+- [ABC422 F「Eat and Ride」](https://atcoder.jp/contests/abc422/tasks/abc422_f)
+- [ABC433 F「1122 Subsequence 2」](https://atcoder.jp/contests/abc433/tasks/abc433_f)
+- [ABC455 F「Merge Slimes 2」](https://atcoder.jp/contests/abc455/tasks/abc455_f)
+- [ABC459 E「Select from Subtrees」](https://atcoder.jp/contests/abc459/tasks/abc459_e)
+- [ABC464 F「Random Vault Heist」](https://atcoder.jp/contests/abc464/tasks/abc464_f)
 
 ## 根拠
 
@@ -121,7 +113,5 @@ sidebar:
 - [ABC216 F 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_f)
 - [ABC218 E 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_e)
 - [ABC218 E 公式解説](https://atcoder.jp/contests/abc218/editorial/2580)
-- [ABC220 E 公式問題文](https://atcoder.jp/contests/abc220/tasks/abc220_e)
-- [ABC220 E 公式解説](https://atcoder.jp/contests/abc220/editorial/2679)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-contribution-reordering`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-contribution-reordering`

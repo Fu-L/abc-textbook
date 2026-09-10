@@ -1,6 +1,6 @@
 ---
 title: "event順にactive集合を更新する"
-description: "前提からevent順にactive集合を更新するを見抜き、方針へ接続して検証するための学習単位。"
+description: "event順にactive集合を更新するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 18
@@ -8,144 +8,85 @@ sidebar:
 
 # event順にactive集合を更新する
 
-このページは **節** です。同じ対象を扱う技能を比較し、どの発動条件・不変量・計算量の違いで使い分けるかを学びます。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
-
-### この単元では扱わない範囲
-
-- 更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。
-
-## 下位単元と学習順
-
-以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
-
-1. [kinetic sorting・交差event順序更新](./kinetic-order-maintenance.md)（標準順 204）— event・値順のオフライン走査で得た考え方と実装を再利用し、kinetic sorting・交差event順序更新の発動条件・正当化・境界を重複なく学ぶ。
-
-## 発動条件と見分け方
+## 概要
 
 ### event・値順のオフライン走査
 
 値・時刻・座標順にeventを並べ、同値eventの処理順を定めてactive集合や集約を増分更新する。
 
-検索語: event sweep、sweep line、イベント走査、走査線
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる
+値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
 
-題材: [ABC231 F「Jealous Two」](https://atcoder.jp/contests/abc231/tasks/abc231_f)
+- 更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。
 
-選定理由: A が同値の点では B の大きい順に置くことで条件を満たす向きが処理済み側に現れるが、完全に同じ点の複数個はまとめて双方向を数える必要がある。
+## 下位単元
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。点対に x の一方向不等式と y の逆方向不等式が同時に課されるとき。 問題全体への接続は併用技能を学んだ後に読む。
+- [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/)
 
-#### このOutcomeを支える根拠
+## 問題一覧
 
-- 非厳密な二次元半順序を満たす順序付き点対を、重複点を保った sweep line で数えられる。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### 観察
+1. [ABC368 E「Train Delay」](https://atcoder.jp/contests/abc368/tasks/abc368_e)
+2. [ABC449 F「Grid Clipping」](https://atcoder.jp/contests/abc449/tasks/abc449_f)
+3. [ABC274 F「Fishing」](https://atcoder.jp/contests/abc274/tasks/abc274_f)
+4. [ABC453 E「Team Division」](https://atcoder.jp/contests/abc453/tasks/abc453_e)
+5. [ABC320 E「Somen Nagashi」](https://atcoder.jp/contests/abc320/tasks/abc320_e)
+6. [ABC283 F「Permutation Distance」](https://atcoder.jp/contests/abc283/tasks/abc283_f)
+7. [ABC309 F「Box in Box」](https://atcoder.jp/contests/abc309/tasks/abc309_f)
+8. [ABC311 G「One More Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_g)
+9. [ABC266 Ex「Snuke Panic (2D)」](https://atcoder.jp/contests/abc266/tasks/abc266_h)
+10. [ABC346 G「Alone」](https://atcoder.jp/contests/abc346/tasks/abc346_g)
+11. [ABC327 F「Apples」](https://atcoder.jp/contests/abc327/tasks/abc327_f)
+12. [ABC449 E「A += v」](https://atcoder.jp/contests/abc449/tasks/abc449_e)
+13. [ABC231 F「Jealous Two」](https://atcoder.jp/contests/abc231/tasks/abc231_f)
+14. [ABC360 F「InterSections」](https://atcoder.jp/contests/abc360/tasks/abc360_f)
 
-- 高橋への品 i、青木への品 j で喧嘩しない条件は A_i≥A_j かつ B_i≤B_j であり、二次元の半順序を満たす順序付き点対の個数になる。
-- 点を A 昇順、同じ A では B 降順に処理すると、現在点 i より前には A_j≤A_i の候補が揃い、残りは B_j≥B_i の個数問合せになる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 候補を比較する
+## 関連問題
 
-- **採用**: A で sweep し、座標圧縮した B の頻度を Fenwick tree または segment tree に蓄積して suffix 個数を問い合わせる。 — 一方の不等式をソート順へ吸収し、他方を一次元の動的な範囲和へ落とせる。
-- **棄却**: 全ての順序付き組 (i,j) について二つの不等式を直接確認する。 — 候補が N の二乗個あり、20 万点では全組を走査できない。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 鍵となる着眼
-
-- A が同値の点では B の大きい順に置くことで条件を満たす向きが処理済み側に現れるが、完全に同じ点の複数個はまとめて双方向を数える必要がある。
-
-#### アルゴリズムへ接続する
-
-喧嘩しない条件を二次元 dominance counting として、A の昇順 sweep と圧縮 B 上の suffix 頻度和を組み合わせ、同一点群を一括処理する。
-
-## 下位単元を使い分ける比較例
-
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **kinetic sorting・交差event順序更新** — 直接到達点: 隣接要素が入れ替わる有効時刻だけをevent処理し、連続parameterに対する全順序と集計を更新できる。近いが対象外: kinetic sorting・交差event順序更新の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- **二次元半順序の sweep line**: 点対に x の一方向不等式と y の逆方向不等式が同時に課されるとき。 適用: x をソート順で満たし、処理済み点の y 頻度から現在閾値以上の個数を取得する。
-- **座標圧縮と Fenwick tree**: 座標値は大きいが、挿入と prefix・suffix 個数問合せだけを行うとき。 適用: B の順位へ一点加算し、全挿入数から B_i 未満の prefix 和を引く。
-- dominance counting では、不等号が非厳密か、組が順序付きか、同一点と自己対を含むかをグループ単位で確認する。
-- 二変数の不等式対が出たら、一方をソートで自動的に満たし、残る一方をデータ構造の問合せにする。
-- タイブレークは適当に決めず、同じ第一座標で有効な第二座標の向きが処理済み側へ来る順を選ぶ。
-
-## 到達確認
-
-### 到達確認 1 — 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる
-
-転移題材: [ABC266 Ex「Snuke Panic (2D)」](https://atcoder.jp/contests/abc266/tasks/abc266_h)
-
-**課題**: ABC266 Ex「Snuke Panic (2D)」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 一方向y移動制約下の時空event最大報酬を、三次元dominance DPへ変換して求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 一方向y移動制約下の時空event最大報酬を、三次元dominance DPへ変換して求められる。
-
-- 対象技能が担う箇所: 一方向y移動制約下の時空event最大報酬を、三次元dominance DPへ変換して求められる。
-- 転移題材の解法接続: anisotropic movement coneをlinear coordinate transformでorthant orderへ変え、weighted event schedulingを3D dominance maximum DPとして解く。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。
-
-</details>
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC214 E「Packing Under Range Regulations」](https://atcoder.jp/contests/abc214/tasks/abc214_e)
+- [ABC223 H「Xor Query」](https://atcoder.jp/contests/abc223/tasks/abc223_h)
+- [ABC224 E「Integers on Grid」](https://atcoder.jp/contests/abc224/tasks/abc224_e)
+- [ABC233 Ex「Manhattan Christmas Tree」](https://atcoder.jp/contests/abc233/tasks/abc233_h)
+- [ABC235 E「MST + 1」](https://atcoder.jp/contests/abc235/tasks/abc235_e)
+- [ABC240 Ex「Sequence of Substrings」](https://atcoder.jp/contests/abc240/tasks/abc240_h)
+- [ABC245 E「Wrapping Chocolate」](https://atcoder.jp/contests/abc245/tasks/abc245_e)
+- [ABC250 Ex「Trespassing Takahashi」](https://atcoder.jp/contests/abc250/tasks/abc250_h)
+- [ABC254 G「Elevators」](https://atcoder.jp/contests/abc254/tasks/abc254_g)
+- [ABC257 Ex「Dice Sum 2」](https://atcoder.jp/contests/abc257/tasks/abc257_h)
+- [ABC263 Ex「Intersection 2」](https://atcoder.jp/contests/abc263/tasks/abc263_h)
+- [ABC268 Ex「Taboo」](https://atcoder.jp/contests/abc268/tasks/abc268_h)
+- [ABC280 G「Do Use Hexagon Grid 2」](https://atcoder.jp/contests/abc280/tasks/abc280_g)
+- [ABC287 Ex「Directed Graph and Query」](https://atcoder.jp/contests/abc287/tasks/abc287_h)
+- [ABC296 G「Polygon and Points」](https://atcoder.jp/contests/abc296/tasks/abc296_g)
+- [ABC301 Ex「Difference of Distance」](https://atcoder.jp/contests/abc301/tasks/abc301_h)
+- [ABC306 F「Merge Sets」](https://atcoder.jp/contests/abc306/tasks/abc306_f)
+- [ABC308 F「Vouchers」](https://atcoder.jp/contests/abc308/tasks/abc308_f)
+- [ABC332 G「Not Too Many Balls」](https://atcoder.jp/contests/abc332/tasks/abc332_g)
+- [ABC337 G「Tree Inversion」](https://atcoder.jp/contests/abc337/tasks/abc337_g)
+- [ABC351 F「Double Sum」](https://atcoder.jp/contests/abc351/tasks/abc351_f)
+- [ABC361 G「Go Territory」](https://atcoder.jp/contests/abc361/tasks/abc361_g)
+- [ABC393 F「Prefix LIS Query」](https://atcoder.jp/contests/abc393/tasks/abc393_f)
+- [ABC394 G「Dense Buildings」](https://atcoder.jp/contests/abc394/tasks/abc394_g)
+- [ABC401 E「Reachable Set」](https://atcoder.jp/contests/abc401/tasks/abc401_e)
+- [ABC407 F「Sums of Sliding Window Maximum」](https://atcoder.jp/contests/abc407/tasks/abc407_f)
+- [ABC408 F「Athletic」](https://atcoder.jp/contests/abc408/tasks/abc408_f)
+- [ABC410 G「Longest Chord Chain」](https://atcoder.jp/contests/abc410/tasks/abc410_g)
+- [ABC411 E「E [max]」](https://atcoder.jp/contests/abc411/tasks/abc411_e)
+- [ABC431 G「One Time Swap 2」](https://atcoder.jp/contests/abc431/tasks/abc431_g)
+- [ABC433 E「Max Matrix 2」](https://atcoder.jp/contests/abc433/tasks/abc433_e)
+- [ABC436 F「Starry Landscape Photo」](https://atcoder.jp/contests/abc436/tasks/abc436_f)
+- [ABC438 G「Sum of Min」](https://atcoder.jp/contests/abc438/tasks/abc438_g)
+- [ABC447 G「Div. 1 & Div. 2」](https://atcoder.jp/contests/abc447/tasks/abc447_g)
 
 ## 根拠
 
@@ -155,9 +96,5 @@ sidebar:
 - [ABC223 H 公式問題文](https://atcoder.jp/contests/abc223/tasks/abc223_h)
 - [ABC224 E 公式問題文](https://atcoder.jp/contests/abc224/tasks/abc224_e)
 - [ABC224 E 公式解説](https://atcoder.jp/contests/abc224/editorial/2814)
-- [ABC231 F 公式解説](https://atcoder.jp/contests/abc231/editorial/3059)
-- [ABC231 F 公式問題文](https://atcoder.jp/contests/abc231/tasks/abc231_f)
-- [ABC266 H 公式解説](https://atcoder.jp/contests/abc266/editorial/4664)
-- [ABC266 H 公式問題文](https://atcoder.jp/contests/abc266/tasks/abc266_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-event-sweep`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-event-sweep`

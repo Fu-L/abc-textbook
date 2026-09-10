@@ -15,11 +15,7 @@
     "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
     "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f",
     "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-    "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f",
-    "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
-    "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5",
-    "source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286",
-    "source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"
+    "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
   ],
   "tagIds": [
     "tag-convolution",
@@ -42,23 +38,30 @@
   "problemIds": [
     "abc213-h",
     "abc230-h",
-    "abc235-ex",
     "abc265-ex",
-    "abc278-ex",
     "abc281-ex",
-    "abc289-ex",
     "abc291-g",
+    "abc307-ex",
+    "abc315-ex",
+    "abc357-g"
+  ],
+  "directProblemIds": [
+    "abc291-g",
+    "abc307-ex",
+    "abc265-ex"
+  ],
+  "relatedProblemIds": [
+    "abc235-ex",
+    "abc278-ex",
+    "abc289-ex",
     "abc300-ex",
     "abc303-ex",
-    "abc307-ex",
     "abc309-ex",
-    "abc315-ex",
     "abc317-ex",
     "abc323-g",
     "abc331-g",
     "abc345-g",
     "abc352-g",
-    "abc357-g",
     "abc385-g",
     "abc390-g",
     "abc392-g",
@@ -68,113 +71,8 @@
     "abc436-g",
     "abc462-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-compute-convolution-or-correlation",
-      "learningOutcomeIds": [
-        "outcome-compute-convolution-or-correlation"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。複数の独立局面から毎手一つを選ぶゲームで、局面ごとにpartisan値とimpartial値へ分解できるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC265 Ex「No-capture Lance Game」について、行同士に移動はなく、全体ゲームはH個の独立な一行ゲームの直和として評価できる。",
-      "procedure": [
-        "観察: 行同士に移動はなく、全体ゲームはH個の独立な一行ゲームの直和として評価できる。",
-        "観察: 先手位置j・後手位置kの一行評価は、k<jなら (s,g)=(0,j−k−1)、k>jなら (s,g)=((j−1)−(W−k),0) になる。",
-        "着眼: 全体評価 (S,G)=(Σs_i, XOR g_i) に対し、先手勝ちは S>0 または S=0かつG>0 で特徴付けられる。",
-        "着眼: 負のsは一定offsetを加えて多項式次数へ写し、H行分の最大次数を覆う長さへzero paddingすれば巡回を通常畳み込みにできる。",
-        "方針: 一行配置の (s,g) 分布を作り、sは加算、gはXORする混合二次元畳み込みをtransform領域でH乗して全体分布を得る。（通常DFTは加算畳み込み、Walsh-Hadamard変換はXOR畳み込みを同時に対角化し、H回の合成を点ごとの冪へ変えられる。）",
-        "接続: partisan gameのsurreal-number成分を加法群、impartial成分をXOR群として、direct product group上のconvolutionを多次元Fourier変換で対角化する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    },
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-compute-online-relaxed-convolution",
-        "outcome-shift-polynomial-by-factorial-convolution"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（学習経路の比較）",
-      "omissions": [
-        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
-      ],
-      "environment": "紙上での未知問のモデル化と候補比較",
-      "input": "NTT・FFTで畳み込みと相互相関を求めるの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
-      "procedure": [
-        "factorial convolutionによる多項式Taylor shift: 1個の直接所有Outcome、学ぶ理由「畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する」、対象外「factorial convolutionによる多項式Taylor shiftの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "Relaxed・online convolution: 1個の直接所有Outcome、学ぶ理由「畳み込み・相互相関で得た考え方と実装を再利用し、Relaxed・online convolutionの発動条件・正当化・境界を重複なく学ぶ」、対象外「Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-compute-convolution-or-correlation",
-      "learningOutcomeIds": [
-        "outcome-compute-convolution-or-correlation"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC289 Ex「Trio」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 3本の独立random walkが時刻Tに初めて同一点へ集まる確率を、会合kernelの畳み込みとFPS除算で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 3本の独立random walkが時刻Tに初めて同一点へ集まる確率を、会合kernelの畳み込みとFPS除算で求められる。",
-          "転移題材の解法接続: factorial・inverse factorialと2の逆冪を前計算する。初期位置(X,Y,Z)について有効parityだけq,r配列へinverse factorial積を入れ、NTT convolutionのindex 2t（offset採用時はその補正位置）からp(t)を復元する。この処理を(A,B,C)でG、(0,0,0)でHに行う。HのFPS inverseを次数Tまで求め、Gと掛けたFのx^T係数を出力する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    },
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-compute-online-relaxed-convolution",
-        "outcome-shift-polynomial-by-factorial-convolution"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
-      "assessment": {
-        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
-        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
-      },
-      "answer": {
-        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
-        "procedure": [
-          "問題を対象・操作・保つ量・求める量へ分解する。",
-          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
-          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
-          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
-        ],
-        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 8,

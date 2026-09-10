@@ -26,79 +26,30 @@
     "tag-determinant-counting"
   ],
   "learningOutcomeIds": [
-    "outcome-count-combinatorial-objects-by-determinant"
+    "outcome-count-combinatorial-objects-by-determinant",
+    "outcome-count-nonintersecting-paths-by-lgv"
   ],
   "ownedLearningOutcomeIds": [
-    "outcome-count-combinatorial-objects-by-determinant"
+    "outcome-count-combinatorial-objects-by-determinant",
+    "outcome-count-nonintersecting-paths-by-lgv"
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/combinatorics-algebra/determinant-counting.md",
   "problemIds": [
     "abc216-h",
     "abc253-ex",
+    "abc323-g"
+  ],
+  "directProblemIds": [
+    "abc216-h",
     "abc323-g",
+    "abc253-ex"
+  ],
+  "relatedProblemIds": [
     "abc336-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-count-combinatorial-objects-by-determinant",
-      "learningOutcomeIds": [
-        "outcome-count-combinatorial-objects-by-determinant"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。DAG 上で順序付けられた複数始点・終点間の頂点非共有パス組を数えるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC216 H「Random Robots」について、各ロボットの N 回の移動は、頂点 (時刻,座標) から次時刻の同座標または右隣へ進む時間 DAG 上のパスである。",
-      "procedure": [
-        "観察: 各ロボットの N 回の移動は、頂点 (時刻,座標) から次時刻の同座標または右隣へ進む時間 DAG 上のパスである。",
-        "観察: 二体が同時刻に同じ座標へいることは二本のパスが頂点を共有することに等しく、出発順を保つ非交差パスの組を数えればよい。",
-        "着眼: 終点 y_j を固定したとき、始点 x_i からのパス数は右移動回数を選ぶ C(N,y_j−x_i) であり、LGV により非交差な K 本組はその行列式になる。",
-        "着眼: 行列式展開の置換符号は、新しい終点へ未使用始点 p を対応させる際、既選択のうち p より大きい添字数の偶奇から更新できる。",
-        "方針: 固定した昇順終点への非交差パス数を LGV 行列式で表し、終点座標の走査と始点集合の bit DP で全行列式展開を同時に合計する。（一体の始点から終点へのパス数は二項係数で求まり、置換の階乗列挙を選択済み始点集合だけの状態へ圧縮できる。）",
-        "接続: 衝突回避を時間 DAG の頂点非共有パスへ移し、LGV 行列式を終点座標順に展開しながら、選択済み始点マスクと転倒数符号を持つ subset DP で全終点列を合算する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "非交差経路またはspanning treeを行列のminorへ対応させ、行列式から個数を求められる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-count-combinatorial-objects-by-determinant",
-      "learningOutcomeIds": [
-        "outcome-count-combinatorial-objects-by-determinant"
-      ],
-      "prerequisiteIds": [
-        "outcome-solve-linear-system-and-rank",
-        "prereq-abc-advanced-v1",
-        "unit-linear-system-rank"
-      ],
-      "attainmentCondition": "学習成果「非交差経路またはspanning treeを行列のminorへ対応させ、行列式から個数を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC253 Ex「We Love Forest」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「非交差経路またはspanning treeを行列のminorへ対応させ、行列式から個数を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 各i=1..N-1について、i回選んだ辺が森を成す確率を法998244353で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 各i=1..N-1について、i回選んだ辺が森を成す確率を法998244353で求められる。",
-          "転移題材の解法接続: 全頂点部分集合Tについて多重辺ラプラシアンの余因子行列式からtree[T]を求める。固定頂点を含むTを列挙してforest[S][i]へtree[T]×forest[S\\T][i-(|T|-1)]を加え、得た森の辺集合数にi!を掛けて全M^iで割る。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "非交差経路またはspanning treeを行列のminorへ対応させ、行列式から個数を求められる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 92,

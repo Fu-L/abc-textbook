@@ -32,68 +32,16 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-carry-mixed-radix.md",
   "problemIds": [
-    "abc231-e",
+    "abc231-e"
+  ],
+  "directProblemIds": [
+    "abc231-e"
+  ],
+  "relatedProblemIds": [
     "abc466-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-design-carry-or-mixed-radix-dp",
-      "learningOutcomeIds": [
-        "outcome-design-carry-or-mixed-radix-dp"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。単位が次の単位を割り切り、目標値を過不足の両方で表して支払いと釣銭を最小化するとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC231 E「Minimal payments」について、A_{i+1} 以上の硬貨では A_{i+1} の倍数単位しか調整できないため、X の A_{i+1} 未満の端数は小さい硬貨側で処理する必要がある。",
-      "procedure": [
-        "観察: A_{i+1} 以上の硬貨では A_{i+1} の倍数単位しか調整できないため、X の A_{i+1} 未満の端数は小さい硬貨側で処理する必要がある。",
-        "観察: 端数 r に対して検討すべきなのは、r を小額硬貨で支払って下側の倍数へ残すか、A_{i+1}−r を釣銭でもらって上側の倍数へ丸めるかの二通りである。",
-        "着眼: 支払い額 Y 自体を探索せず、各額面で生じる繰り上がりを 0 または 1 の状態として追う貨幣版の桁 DP と考える。",
-        "方針: 小さい額から各桁の端数を処理し、次の硬貨単位へ切り下げる場合と切り上げる場合を再帰・メモ化する。（額面が整除鎖なので他の丸め方は二択のどちらかより硬貨数を減らせず、各額面で現れる金額も床・天井の二種類に限られる。）",
-        "接続: 整除関係を持つ額面列を混合基数の桁として、各桁で端数をそのまま払う遷移と補数を釣銭にする遷移の最小値をメモ化再帰で求める。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-design-carry-or-mixed-radix-dp",
-      "learningOutcomeIds": [
-        "outcome-design-carry-or-mixed-radix-dp"
-      ],
-      "prerequisiteIds": [
-        "outcome-design-minimal-sufficient-state",
-        "prereq-abc-advanced-v1",
-        "unit-dp-state-design"
-      ],
-      "attainmentCondition": "学習成果「整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC466 G「Segment Sum Constraints」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 少数変数の区間和制約解数を、weighted DSUの独立化とbitwise carry vector DPで有限・0・Infinityまで判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 少数変数の区間和制約解数を、weighted DSUの独立化とbitwise carry vector DPで有限・0・Infinityまで判定できる。",
-          "転移題材の解法接続: 各Sから区間長を引き非負問題へ変換する。weighted DSUでB_{L-1},B_Rを差Sでunionし矛盾を検出、成分内隣接prefixから独立区間式を抽出する。carry vector DPをbit0..29で回し、各bitのN-bit maskからnext carryを更新する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 3,

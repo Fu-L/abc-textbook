@@ -32,64 +32,12 @@
   "problemIds": [
     "abc456-f"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-maintain-queue-aggregate-with-swag",
-      "learningOutcomeIds": [
-        "outcome-maintain-queue-aggregate-with-swag"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。短い状態DPを多数の連続windowで再評価したいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC456 F「Plan Holidays」について、休日列の局所条件は、各日を休日にする/しない二状態のmin-cost DPで表せる。長さK windowごとに同じ2×2 min-plus遷移の積を求める問題になる。",
-      "procedure": [
-        "観察: 休日列の局所条件は、各日を休日にする/しない二状態のmin-cost DPで表せる。長さK windowごとに同じ2×2 min-plus遷移の積を求める問題になる。",
-        "着眼: 隣り合う休日間を2日以上空けない条件は、現在日を休まない状態が直前休日状態からだけ遷移する式 dp0'=dp1 を与える。",
-        "着眼: 最初と最後の休日距離はK-1またはKだけ見ればよく、window境界の A_{l-1}=INF を含む初期vectorで二ケースを吸収できる。",
-        "方針: 各A_iを写像 f_a(x,y)=(y,min(x,y)+a) または2×2 min-plus行列として表し、長さKのsliding productをSWAGで維持して全開始位置を評価する。（写像合成は結合的で固定4係数の形に閉じ、SWAGは非可換でもqueue前後stackの累積積により各要素を定数回だけ処理できる。）",
-        "接続: 各日の min-plus matrix [[INF,0],[A_i,A_i]] を作る。SWAGで順序付き長さK積をslideし、初期vector (0,A_{l-1}) へ作用させた休日終了stateの最小を答えへ反映する。端点ケースを番兵INFで処理する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってpush/pop/foldを償却O(1)で処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc456-f"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-maintain-queue-aggregate-with-swag",
-      "learningOutcomeIds": [
-        "outcome-maintain-queue-aggregate-with-swag"
-      ],
-      "prerequisiteIds": [
-        "outcome-design-associative-range-summary",
-        "prereq-abc-advanced-v1",
-        "unit-range-monoid-aggregation"
-      ],
-      "attainmentCondition": "学習成果「queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってpush/pop/foldを償却O(1)で処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
-      "assessment": {
-        "method": "ABC456 F「Plan Holidays」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってpush/pop/foldを償却O(1)で処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
-          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
-          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
-          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
-          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
-        ],
-        "expectedResult": "queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってpush/pop/foldを償却O(1)で処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できるの適用可能範囲と破綻条件を反例付きで説明できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 88,

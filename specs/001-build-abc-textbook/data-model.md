@@ -291,17 +291,18 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 | `excludedTopics` | 意図的対象外 |
 | `sourceRevisionIds` | 単位本文と所有例の根拠 |
 | `tagIds` / `learningOutcomeIds` | このUnit自身または子孫が所有するTag / Outcomeのnavigation closure。各一つ以上 |
-| `ownedTagIds` / `ownedLearningOutcomeIds` | このUnitで直接説明・到達確認するTag / Outcome。構造Unitでは空配列 |
+| `ownedTagIds` / `ownedLearningOutcomeIds` | このUnitへ直接所属する分類metadata。構造Unitでは空配列 |
 | `contentPhase` | T050生成物は`canonical_skeleton`。T055–T056/T155–T158が同じJSON/Markdownを引き継ぐ直前に`full_authoring`へ変更し、materializerのbyte所有を解除する |
-| `examples` | 各owned Outcomeをちょうど一回被覆する`guided_outcome` blockと、子Unitがある場合だけ、その全子孫Outcomeを対象に一つ置く`curriculum_routing`比較block。構造Unitはrouting blockだけを持つ。`key`はUnit内local keyで、`executable`は実行証跡を必須とする |
-| `exercises` | 各owned Outcomeをちょうど一回被覆する`outcome_attainment` Exercise/Assessment/Answerと、子Unitがある場合だけ一つ置く`curriculum_routing`確認block。構造Unitはrouting blockだけを持つ |
-| `problemIds` | 一つ以上 |
+| `examples` | 任意の通常本文の例。生成skeletonでは空配列。特定問題・Outcomeの例を必須にしない |
+| `exercises` | 任意の通常本文の演習。生成skeletonでは空配列。Outcomeごとの評価課題を要求しない |
+| `problemIds` | 自身のdirectProblemIdsと子のproblemIdsの和集合。coverageであり直接配置ではない |
+| `directProblemIds` / `relatedProblemIds` | 主配置問題の読む順序 / coverage外の関連参照。各Problemの主配置はpresentationUnitIdと一致し全Unitで一意 |
 | `stageRank` / `difficultyRank` / `representativeRank` | 0以上の整数 |
 | `globalIndex` / `orderReason` | 生成順と説明 |
 
 親子関係と前提関係は別に検証する。標準順はcurriculum prerequisite DAGをprecedence constraintとし、入次数0の候補だけを3 rank、最後にUnit IDのUTF-8 byte順で比較する。単なる併用、同分野、類似実装だけでは前提辺を追加せず、`relatedTags`へ理由付きで記録する。
 
-T050が生成するcanonical skeleton Markdownは正本としてGit管理するが、本文・到達確認・公開mappingが未受理の間はfrontmatterを`draft: true`に固定する。`contentPhase=full_authoring`のUnitは後続taskが本文byteを所有し、T050 materializerは直接所有・navigation closure・前提・block role・source coverage・文書骨格だけを再検証して上書きしない。T160だけがdraft境界を解除して共有route、sidebar、Pagefind、sitemap/feedをcanonical full corpusへ切り替える。
+T050のcanonical skeletonは配置・順序と簡潔な概説を固定し、公開mappingが未受理の間は`draft: true`にする。`contentPhase=full_authoring`へ引き継いだ後は本文を上書きせず、所属・coverage・前提・出典・文書骨格の整合を確認する。T160が公開projectionを切り替える。
 
 ### FullLearningUnitWorkManifest
 
@@ -313,11 +314,11 @@ T055–T056/T155–T158がfull-corpus LearningUnit本文を非重複に所有す
 | `chapterRootUnitId` | 担当partitionのchapter root。Unit自身または祖先と一致する |
 | `docPath` | canonical `LearningUnit.docPath`と完全一致し、別manifestと重複しない |
 | `ownedLearningOutcomeIds` | canonical Unitの同名fieldを順序込みで完全に束ねる。`learningOutcomeIds`の子孫rollupを直接所有と誤認して複製しない |
-| `contentMode` | Unitの主本文所有を示し、`ownedLearningOutcomeIds`が非空なら`outcome_attainment`、空なら`routing`。前者でも子Unitがあれば同一文書内に`curriculum_routing` blockを併設する |
-| `checkIds` / `evidencePaths` | 全owned Outcomeの`guided_outcome` / `outcome_attainment`、および子を持つ全Unitの`curriculum_routing`と標準順のnavigation reviewを追跡する |
+| `contentMode` | 概説と問題への導線を執筆する通常本文。Outcomeごとの評価課題を所有しない |
+| `checkIds` / `evidencePaths` | 概念・計算量・根拠の確認と、配置・順序・navigation reviewを追跡する |
 | `status` | `generated`, `in_progress`, `on_hold`, `reviewed`, `joined` |
 
-全canonical LearningUnit ID集合とmanifestの`learningUnitId`集合を完全一致させ、各canonical `(learningUnitId, ownedLearningOutcomeId)` pairも過不足なく一回だけ被覆する。各canonical Outcomeは全Unitの`ownedLearningOutcomeIds`を通じてちょうど一Unitに直接所有される。chapter/sectionなど子を持つ全Unitの`curriculum_routing` blockは担当chapter taskが同じ本文pathで所有し、T058のOutcome到達判定からblock単位で除外して、T057のnavigation reviewで子Unitへの導線と順序理由を検証する。
+全canonical LearningUnitとmanifestを一対一に対応させる。Tag / Outcomeの直接所属は分類metadataであり、教育課題の所有権を表さない。T057は前提順・主配置の一意性・coverage・導線を、T058は通常本文の数学的正確性を確認する。全Problemの固有解説はProblem authoring unitが所有する。
 
 ### ProblemPlacement
 

@@ -1,6 +1,6 @@
 ---
 title: "状態グラフ探索・到達関係"
-description: "前提から状態グラフ探索・到達関係を見抜き、方針へ接続して検証するための学習単位。"
+description: "状態グラフ探索・到達関係の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 10
@@ -8,86 +8,46 @@ sidebar:
 
 # 状態グラフ探索・到達関係
 
-このページは **節** です。下位単元が扱う技能を比較し、発動条件・不変量・計算量の違いから学習経路を選ぶための構造単元です。
+## 概要
 
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
+下位の単元を、前提を満たす順にまとめます。
 
-## この単元でできるようになること
+## 前提と範囲
 
-- 直接所有するOutcomeはありません。この単元では下位単元の選択と学習順を扱います。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## 前提・学習順・対象外
+追加前提: なし。
 
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 既知のDFS・BFS実装を土台に、長距離効果は探索前の方向別scanで静的な通行条件へ変換し、問題の状態を頂点、合法操作を辺として設計して到達関係を求める。
-
-### この単元では扱わない範囲
+既知のDFS・BFS実装を土台に、長距離効果は探索前の方向別scanで静的な通行条件へ変換し、問題の状態を頂点、合法操作を辺として設計して到達関係を求める。
 
 - eventをsortしてactive集合を増減するsweep line。
 - 非負重み付き距離の緩和・確定と最短路certificateの復元。
 
-## 下位単元と学習順
+## 下位単元
 
-以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
+- [状態グラフのモデリングと探索](/learn/graph/state-graph-search/)
+- [推移閉包](/learn/graph/transitive-closure/)
+- [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/)
 
-1. [状態グラフのモデリングと探索](./state-graph-search.md)（標準順 116）— 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-2. [推移閉包](./transitive-closure.md)（標準順 120）— 各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-3. [方向別grid scanによる長距離効果の前計算](./directional-grid-effect-scan.md)（標準順 144）— 各行・各列を固定方向に一度ずつscanし、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する。
+## 問題一覧
 
-## 発動条件と見分け方
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-この構造単元はTagを直接所有しません。下位単元の定義と対象外を比較して学習経路を選びます。
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-## ガイド例
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-- 通常のOutcomeガイド例は下位単元で扱います。
+## 関連問題
 
-## 下位単元を使い分ける比較例
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **状態グラフのモデリングと探索** — 直接到達点: 暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。近いが対象外: 状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **推移閉包** — 直接到達点: 各始点探索または中継許可集合の段階不変条件を保つWarshall更新で推移閉包を求め、必要なら初回到達段階も記録できる。近いが対象外: 推移閉包の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **方向別grid scanによる長距離効果の前計算** — 直接到達点: 各行・各列でactiveな向きだけを更新し、blockerと通行禁止条件を混同せず、定数方向へ伸びる全効果領域をgrid全体の線形時間で印付けられる。近いが対象外: 方向別grid scanによる長距離効果の前計算の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- なし
-
-## 到達確認
-
-- 直接所有するOutcomeの到達確認はありません。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-- 直接所有するOutcomeの解答基準はありません。
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC244 F「Shortest Good Path」](https://atcoder.jp/contests/abc244/tasks/abc244_f)
+- [ABC257 G「Prefix Concatenation」](https://atcoder.jp/contests/abc257/tasks/abc257_g)
+- [ABC329 E「Stamp」](https://atcoder.jp/contests/abc329/tasks/abc329_e)
+- [ABC336 F「Rotation Puzzle」](https://atcoder.jp/contests/abc336/tasks/abc336_f)
+- [ABC374 G「Only One Product Name」](https://atcoder.jp/contests/abc374/tasks/abc374_g)
+- [ABC413 F「No Passage」](https://atcoder.jp/contests/abc413/tasks/abc413_f)
+- [ABC417 E「A Path in A Dictionary」](https://atcoder.jp/contests/abc417/tasks/abc417_e)
 
 ## 根拠
 
@@ -98,4 +58,4 @@ sidebar:
 - [ABC257 G 公式解説](https://atcoder.jp/contests/abc257/editorial/4185)
 - [ABC257 G 公式問題文](https://atcoder.jp/contests/abc257/tasks/abc257_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-graph-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-graph-search`

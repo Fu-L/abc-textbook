@@ -32,64 +32,12 @@
   "problemIds": [
     "abc451-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-reconstruct-tree-from-distance-matrix",
-      "learningOutcomeIds": [
-        "outcome-reconstruct-tree-from-distance-matrix"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。正重み木の全点対距離が与えられ、存在判定と構成を行うとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC451 E「Tree Distance」について、正辺重みの木 metric が存在するなら、頂点1を根とした i の祖先 j は A_{1,j}+A_{j,i}=A_{1,i} を満たし、そのうち i に最も近いものが親である。",
-      "procedure": [
-        "観察: 正辺重みの木 metric が存在するなら、頂点1を根とした i の祖先 j は A_{1,j}+A_{j,i}=A_{1,i} を満たし、そのうち i に最も近いものが親である。",
-        "着眼: j が root-to-i path 上なら距離加法 A_{1,j}+A_{j,i}=A_{1,i} が成立し、木では逆も成立する。",
-        "着眼: 候補親を全頂点で選んだ後に N-1 辺の木として得た距離が A と完全一致すれば、それが存在証明そのものになる。",
-        "方針: 各 i≠1 について祖先条件を満たす j の中から A_{i,j} 最小を親候補にして重み A_{i,j} の辺を張り、完成候補木の全点対距離を再計算して入力行列と照合する。（木 path 上の加法性が祖先を必要十分に特徴付け、正重みにより最も近い真祖先が一意な親になる。最後の全距離検証が局所構成で見落とす全 metric 公理を保証する。）",
-        "接続: 対称化した A を使い、各 i の祖先候補を O(N) 走査して最短の j を選ぶ。候補なしなら No。辺を構築後、各始点から tree DFS で距離を求め、全 A_{i,j} と一致した場合だけ Yes と辺集合を出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "加法的距離行列から正重み木の候補を復元し、全点対距離の再計算で存在を完全検証できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc451-e"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-reconstruct-tree-from-distance-matrix",
-      "learningOutcomeIds": [
-        "outcome-reconstruct-tree-from-distance-matrix"
-      ],
-      "prerequisiteIds": [
-        "outcome-use-tree-diameter-extrema",
-        "prereq-abc-advanced-v1",
-        "unit-tree-metric"
-      ],
-      "attainmentCondition": "学習成果「加法的距離行列から正重み木の候補を復元し、全点対距離の再計算で存在を完全検証できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
-      "assessment": {
-        "method": "ABC451 E「Tree Distance」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「加法的距離行列から正重み木の候補を復元し、全点対距離の再計算で存在を完全検証できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
-          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
-          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
-          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
-          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
-        ],
-        "expectedResult": "加法的距離行列から正重み木の候補を復元し、全点対距離の再計算で存在を完全検証できるの適用可能範囲と破綻条件を反例付きで説明できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 95,

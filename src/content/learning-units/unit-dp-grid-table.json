@@ -17,9 +17,7 @@
     "source-abc227-editorial-2914-87defb838bebcd1104697af5ba110c6f49f96bee04b0b32ee2bbe32e8f0ce6d8",
     "source-abc227-f-problem-a9a41987be11c4be4182da98bcd5f68243f97b8b98b6fd3c30ed64e420e3e801",
     "source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648",
-    "source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345",
-    "source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b",
-    "source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc"
+    "source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345"
   ],
   "tagIds": [
     "tag-grid-table-dp"
@@ -36,75 +34,24 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-grid-table.md",
   "problemIds": [
-    "abc221-h",
-    "abc227-f",
     "abc311-e",
-    "abc347-f",
-    "abc358-g",
+    "abc415-e",
+    "abc443-e"
+  ],
+  "directProblemIds": [
     "abc415-e",
     "abc443-e",
+    "abc311-e"
+  ],
+  "relatedProblemIds": [
+    "abc221-h",
+    "abc227-f",
+    "abc347-f",
+    "abc358-g",
     "abc464-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-design-grid-table-dp",
-      "learningOutcomeIds": [
-        "outcome-design-grid-table-dp"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。固定した端点に対する有効サイズが 1..k の prefix をなす図形を数えるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC311 E「Defect-free Squares」について、正方形を左上・右下の二点で列挙すると候補が多いが、右下マスを固定すると、存在する辺長は 1 から最大値まで途切れない。よって最大辺長一つが個数も表す。",
-      "procedure": [
-        "観察: 正方形を左上・右下の二点で列挙すると候補が多いが、右下マスを固定すると、存在する辺長は 1 から最大値まで途切れない。よって最大辺長一つが個数も表す。",
-        "観察: 右下 (i,j) の正方形を一段拡張するには、上・左・左上を右下とする三つの正方形がすべて必要で、最小の辺長がボトルネックになる。",
-        "着眼: 穴マスでは dp=0、通常マスでは dp=min(dp_up,dp_left,dp_diag)+1 とすれば、新たに加わる下辺・右辺も三小正方形の和で覆われる。",
-        "着眼: dp[i][j]=k なら同じ右下を持つ辺長 1..k がすべて有効なので、全 dp の総和が重複のない答えになる。",
-        "方針: 各マスを右下とする穴なし正方形の最大辺長を、上・左・左上の最小値＋1 で DP する。（各正方形を右下で一意に分類でき、最大辺長 k がその右下からの k 個の正方形をまとめて数えるため O(HW) になる。）",
-        "接続: 穴を boolean grid に記録し、上と左に 0 の番兵行列を置く。行優先で、穴なら 0、そうでなければ三近傍の min+1 を計算して 64 bit の答えへ加算する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "グリッドまたは多次元表の依存方向と境界状態を定め、計算済みの局所近傍からDAG順に全状態を更新できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-design-grid-table-dp",
-      "learningOutcomeIds": [
-        "outcome-design-grid-table-dp"
-      ],
-      "prerequisiteIds": [
-        "outcome-design-minimal-sufficient-state",
-        "prereq-abc-advanced-v1",
-        "unit-dp-state-design"
-      ],
-      "attainmentCondition": "学習成果「グリッドまたは多次元表の依存方向と境界状態を定め、計算済みの局所近傍からDAG順に全状態を更新できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC415 E「Hungry Takahashi」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「グリッドまたは多次元表の依存方向と境界状態を定め、計算済みの局所近傍からDAG順に全状態を更新できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: pathと初期coinsを同時探索せず、各cellからの必要額をO(HW)で逆算して最小xを得られる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: pathと初期coinsを同時探索せず、各cellからの必要額をO(HW)で逆算して最小xを得られる。",
-          "転移題材の解法接続: 各cellのB=A-P_{i+j-1}を計算する。i=H..1,j=W..1の逆順で、goalはmax(0,-B)、他はmax(0,min(dp[i+1][j],dp[i][j+1])-B)とする。dp[1][1]を出力し、rolling rowでもO(W) memoryにできる。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "グリッドまたは多次元表の依存方向と境界状態を定め、計算済みの局所近傍からDAG順に全状態を更新できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 1,
   "representativeRank": 1,

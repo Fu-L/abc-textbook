@@ -32,69 +32,18 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/string/finite-pattern-automaton.md",
   "problemIds": [
-    "abc264-g",
+    "abc264-g"
+  ],
+  "directProblemIds": [
+    "abc264-g"
+  ],
+  "relatedProblemIds": [
     "abc301-f",
     "abc305-g",
     "abc418-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-build-finite-string-automaton",
-      "learningOutcomeIds": [
-        "outcome-build-finite-string-automaton"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。次の文字を加えた増分が直前の高々L文字だけで決まるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC264 G「String Fair」について、文字を一つ末尾へ追加したとき新たに発生する長さ1〜3の出現は、その文字と追加前の末尾2文字だけで決まる。",
-      "procedure": [
-        "観察: 文字を一つ末尾へ追加したとき新たに発生する長さ1〜3の出現は、その文字と追加前の末尾2文字だけで決まる。",
-        "観察: 一度加点済みのprefixは将来へ影響しないため、現在文字列を末尾2文字だけの有限状態へ圧縮できる。",
-        "着眼: 状態 xy から文字 z を追加する辺は yz へ進み、重み P(z)+P(yz)+P(xyz) を持つ。",
-        "着眼: ダミー文字 $ を二つ置き、$を含むpatternの点数を0にすれば、長さ1・2のprefixも同じ遷移式で扱える。",
-        "方針: 末尾2文字を頂点、次文字追加を重み付き辺とするグラフを作り、初期状態 $$ からの最大walkと到達可能な正閉路をBellman-Ford型緩和で調べる。（全文字列が始点からのwalkに一対一対応し、正重みcycleがあれば反復して無限大、なければ有限最大距離になる。）",
-        "接続: bounded-length substring score を de Bruijn 型 suffix automaton のedge weightへ変換し、unbounded sequence optimization を positive-cycle detection 付き longest walk にする。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "未来の一文字遷移を決める有限同値類を定義し、pattern suffix・subsequence進行・圧縮DP rowなどから完全遷移表を構成してDPや行列累乗に接続できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-build-finite-string-automaton",
-      "learningOutcomeIds": [
-        "outcome-build-finite-string-automaton"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「未来の一文字遷移を決める有限同値類を定義し、pattern suffix・subsequence進行・圧縮DP rowなどから完全遷移表を構成してDPや行列累乗に接続できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC301 F「Anti-DDoS」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「未来の一文字遷移を決める有限同値類を定義し、pattern suffix・subsequence進行・圧縮DP rowなどから完全遷移表を構成してDPや行列累乗に接続できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: ?を埋めてDDoS型文字列となる方法数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: ?を埋めてDDoS型文字列となる方法数を求められる。",
-          "転移題材の解法接続: Sのprefix固定大文字種類数を前計算し、29状態の個数DPを左から更新する。固定文字は一遷移、?は52文字を種類別係数でまとめ、最終的にDDoS型を含まない状態を全52^qから引く。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "未来の一文字遷移を決める有限同値類を定義し、pattern suffix・subsequence進行・圧縮DP rowなどから完全遷移表を構成してDPや行列累乗に接続できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 74,

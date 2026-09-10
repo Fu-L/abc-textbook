@@ -17,11 +17,7 @@
     "source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa",
     "source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4",
     "source-abc241-editorial-3452-f18fa1bc0cea4f5a85bf1f8aa2f537ebd132d8b6b8d079fe7275eb1c7ba4030e",
-    "source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a",
-    "source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee",
-    "source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83",
-    "source-abc317-editorial-7023-b224a577adb130f22958f2d9304d2188c87a4c17f5ad75a70ef80be439255603",
-    "source-abc317-g-problem-a15c857f0fa50149ef4a0e2c01ca8d89bf6581a5772e58b2ab82726188a66e0a"
+    "source-abc241-g-problem-e55b95c326721c0417f3cb31af3e1908ab5e7bbfa1f46f703cbd827b346c5a7a"
   ],
   "tagIds": [
     "tag-bipartite-matching-hall"
@@ -41,136 +37,37 @@
   "docPath": "src/content/docs/learn/graph/bipartite-matching.md",
   "problemIds": [
     "abc215-h",
-    "abc237-ex",
     "abc241-g",
     "abc274-g",
-    "abc313-ex",
     "abc317-g",
-    "abc318-f",
     "abc320-g",
-    "abc363-g",
     "abc374-g",
     "abc401-g",
-    "abc424-g",
     "abc437-g",
     "abc445-g",
     "abc461-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-characterize-bipartite-feasibility-by-hall",
-      "learningOutcomeIds": [
-        "outcome-characterize-bipartite-feasibility-by-hall"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。複数種類の資源を、各要求が受け入れる種類のいずれかへ一対一に割り当てるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC215 H「Cabbage Master」について、会社 j の B_j 個の注文を区別可能な一個注文へ分けると、各注文を許可品種のどれか一個へ割り当てる二部マッチングとして充足可能性を表せる。",
-      "procedure": [
-        "観察: 会社 j の B_j 個の注文を区別可能な一個注文へ分けると、各注文を許可品種のどれか一個へ割り当てる二部マッチングとして充足可能性を表せる。",
-        "観察: Hall の条件は、全注文部分集合 T に対する供給量 f(S_T) と |T| の比較であり、同じ許可集合を持つ注文をまとめれば品種部分集合 S だけの条件へ移せる。",
-        "着眼: g(S) を許可品種集合が S に含まれる一個注文の総数とすると、全注文を満たせる条件は全 S で f(S)−g(S) が非負であることになる。",
-        "着眼: 最小余裕 d を持つ品種集合から d＋1 個食べれば Hall 条件を初めて破れるため、最小摂取数は max(0,d＋1) である。",
-        "方針: Hall の定理で最小余裕を品種部分集合上の f(S)−g(S) に変換し、subset zeta・Möbius 変換で最小個数と選び方を集約する。（品種数 N は 20 以下なので全品種部分集合を扱え、会社の大きな注文数は許可マスクへの重みとしてまとめられる。）",
-        "接続: 注文充足を Hall の部分集合不等式へ移し、許可マスクの重みを subset zeta 変換して最小欠損を求め、最小集合族への包含を Möbius・superset zeta 変換で数える。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "二部割当が可能であることを近傍集合の大きさに関するHall条件で特徴付け、必要ならmin-cut条件と対応させられる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    },
-    {
-      "key": "guided-outcome-solve-bipartite-matching",
-      "learningOutcomeIds": [
-        "outcome-solve-bipartite-matching"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。各 item を候補先の一つへ割り当て、各受け手に上限があるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC241 G「Round Robin」について、候補 p が単独優勝できる completion があるなら、未消化の p の試合を全て p 勝利へ変えても p の勝数だけが増え相手は減るので、単独優勝は壊れない。まず p の最終勝数 win を最大に固定してよい。",
-      "procedure": [
-        "観察: 候補 p が単独優勝できる completion があるなら、未消化の p の試合を全て p 勝利へ変えても p の勝数だけが増え相手は減るので、単独優勝は壊れない。まず p の最終勝数 win を最大に固定してよい。",
-        "観察: 残る各試合は勝者を二人のどちらかへ一勝として割り当て、各 i≠p の合計勝数を win-1 以下に抑える配分問題になる。",
-        "着眼: 既に終了した試合 node は実際の winner だけへ、未終了試合 node は両 player へ辺を張れば、fixed result と自由選択を同じ network で扱える。",
-        "方針: 試合 node へ source から1流し、可能な winner の player node を経て各選手の勝数上限へ流す max-flow feasibility を p ごとに判定する。（一試合一勝の選択と選手別 capacity を整数 flow がそのまま表し、全試合分を流せることが必要十分になる。）",
-        "接続: 各 p について未終了の p 戦を p 勝利に固定して win を数える。source→全試合 node に容量1、試合→許される winner、player p→sink に win、他 player→sink に win-1 を置き、全試合数だけ flow が流れれば p を出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc241-g",
+    "abc461-g",
+    "abc317-g",
+    "abc401-g",
+    "abc274-g",
+    "abc437-g",
+    "abc445-g",
+    "abc320-g",
+    "abc215-h",
+    "abc374-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-characterize-bipartite-feasibility-by-hall",
-      "learningOutcomeIds": [
-        "outcome-characterize-bipartite-feasibility-by-hall"
-      ],
-      "prerequisiteIds": [
-        "outcome-color-and-classify-bipartite-components",
-        "prereq-abc-advanced-v1",
-        "unit-bipartite-structure"
-      ],
-      "attainmentCondition": "学習成果「二部割当が可能であることを近傍集合の大きさに関するHall条件で特徴付け、必要ならmin-cut条件と対応させられる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC317 G「Rearranging」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「二部割当が可能であることを近傍集合の大きさに関するHall条件で特徴付け、必要ならmin-cut条件と対応させられる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 行内並べ替え問題を M-正則二部多重グラフの完全 matching 分解へ帰着し、必ず構成可能であることも同時に証明できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 行内並べ替え問題を M-正則二部多重グラフの完全 matching 分解へ帰着し、必ず構成可能であることも同時に証明できる。",
-          "転移題材の解法接続: 行 N 頂点と値 N 頂点の二部多重グラフを作る。col=1..M ごとに Hopcroft–Karp または最大流でサイズ N の matching を求め、matched value を各行の col へ出力し、対応する edge occurrence を graph から削除する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "二部割当が可能であることを近傍集合の大きさに関するHall条件で特徴付け、必要ならmin-cut条件と対応させられる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    },
-    {
-      "key": "attainment-outcome-solve-bipartite-matching",
-      "learningOutcomeIds": [
-        "outcome-solve-bipartite-matching"
-      ],
-      "prerequisiteIds": [
-        "outcome-color-and-classify-bipartite-components",
-        "prereq-abc-advanced-v1",
-        "unit-bipartite-structure"
-      ],
-      "attainmentCondition": "学習成果「左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC274 G「Security Camera 3」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全empty cellsを監視するminimum camerasをbipartite matchingまたはmax flowで求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 全empty cellsを監視するminimum camerasをbipartite matchingまたはmax flowで求められる。",
-          "転移題材の解法接続: camera directions/positionsをmaximal visibility runsへcanonicalizeし、all-cell coverageをbipartite minimum vertex coverすなわちmaximum flowへ帰着する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
+  "relatedProblemIds": [
+    "abc237-ex",
+    "abc313-ex",
+    "abc318-f",
+    "abc363-g",
+    "abc424-g"
   ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 81,

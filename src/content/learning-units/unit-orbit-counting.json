@@ -35,66 +35,13 @@
     "abc284-ex",
     "abc428-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-count-orbits-by-fixed-points",
-      "learningOutcomeIds": [
-        "outcome-count-orbits-by-fixed-points"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。labelの置換で同一視した構造を数え、自己同型の大きさが対象ごとに異なるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC284 Ex「Count Unlabeled Graphs」について、頂点置換で同一視するunlabeled graphは、各graphを一律N!で割れないため、置換群S_Nの作用に対するBurnsideの補題で固定点を平均する。",
-      "procedure": [
-        "観察: 頂点置換で同一視するunlabeled graphは、各graphを一律N!で割れないため、置換群S_Nの作用に対するBurnsideの補題で固定点を平均する。",
-        "観察: 置換のcycleごとに頂点色は一定でなければならず、edge集合もunordered pair上の置換orbitごとに採用・不採用が一定になる。",
-        "着眼: cycle長列d_1..d_mに対し、固定されるc色彩色は各cycleの色を選ぶc^m通りである。",
-        "着眼: edge orbit数は、同一cycle d_i内がfloor(d_i/2)、異なる2cycle d_i,d_j間がgcd(d_i,d_j)なので、その総和Eに対してedge集合は2^E通りである。",
-        "方針: S_Nの置換をcycle typeでまとめ、固定される頂点彩色数とedge subset数をBurnsideで加算してから、使用色について包含排除する。（N≤30ではinteger partitionだけを列挙すればよく、自己同型によるorbit sizeの差も正確に扱える。）",
-        "接続: Nの各integer partitionをcycle長列として列挙する。cycle数m、edge orbit数E、type内の置換数を求め、各c=0..KのF(c)へtypeCount·c^m·2^Eを加える。全typeの和へ(N!)^{-1}を掛けてBurnside平均を取り、答えをΣ_c(-1)^(K-c) C(K,c)F(c)で求める。P>Nの素数なので必要なfactorial inverseが存在する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "群作用の固定点数を群要素のcycle typeごとに数え、BurnsideまたはPólyaの平均でorbit数を求められる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc428-g",
+    "abc284-ex"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-count-orbits-by-fixed-points",
-      "learningOutcomeIds": [
-        "outcome-count-orbits-by-fixed-points"
-      ],
-      "prerequisiteIds": [
-        "outcome-normalize-equivalent-states",
-        "prereq-abc-advanced-v1",
-        "unit-normalization"
-      ],
-      "attainmentCondition": "学習成果「群作用の固定点数を群要素のcycle typeごとに数え、BurnsideまたはPólyaの平均でorbit数を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC428 G「Necklace」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「群作用の固定点数を群要素のcycle typeごとに数え、BurnsideまたはPólyaの平均でorbit数を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 積制約付きネックレスを、順序付き列 DP と回転の不動点集計から数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 積制約付きネックレスを、順序付き列 DP と回転の不動点集計から数えられる。",
-          "転移題材の解法接続: A(n)[x] を『長さ n、総積 x の順序付き列数』として、宝石の頻度との積約数 DP で n≤V まで前計算する。各 L≤V、d|L、各完全 d 乗 x=y^d≤U について φ(d)·A(L/d)[y]/L を答え[x]へ加える。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "群作用の固定点数を群要素のcycle typeごとに数え、BurnsideまたはPólyaの平均でorbit数を求められる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 82,

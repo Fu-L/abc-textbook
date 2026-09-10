@@ -33,64 +33,13 @@
     "abc245-f",
     "abc456-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-peel-directed-graph-toward-cycles",
-      "learningOutcomeIds": [
-        "outcome-peel-directed-graph-toward-cycles"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。有向グラフで、行き先を失った頂点から不可能状態を後方へ伝播したいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC245 F「Endless Walk」について、有限頂点の有向グラフで無限に歩けることは、選んだ辺をたどり続けて最終的に有向閉路へ入れることと同値である。",
-      "procedure": [
-        "観察: 有限頂点の有向グラフで無限に歩けることは、選んだ辺をたどり続けて最終的に有向閉路へ入れることと同値である。",
-        "観察: 出次数 0 の頂点からは続けられない。また、行き先がすべて有限歩しかできないと確定した頂点も有限であるため、この性質を逆辺方向へ伝播できる。",
-        "着眼: 削除順を番号とみなすと、削除された頂点から進める先はすべて自分より先に削除済みであり、番号が真に減るので無限歩はできない。",
-        "着眼: 残った各頂点には残存頂点への出辺が少なくとも 1 本ある。その辺を選び続ければ有限個の頂点のどれかを再訪し、以後も歩き続けられる。",
-        "方針: 各頂点の未削除の出次数を持ち、出次数 0 の頂点を queue から削除して逆辺の始点の出次数を減らす。最後まで削除されない頂点を数える。（各辺を一度だけ処理し、閉路へ到達できない頂点を局所条件からまとめて除外できる。）",
-        "接続: 逆隣接リストと現在出次数を作り、初期 sink を queue に入れる。頂点 v を削除したら v への各入辺 u→v について outdeg[u] を減らし、0 になった u を追加する。N から削除数を引いた値が答えになる。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "三色DFSまたはKahn型peelingの不変条件を説明し、有向cycleの存在を判定して必要ならcycleへ残るcoreを抽出できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc245-f",
+    "abc456-e"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-peel-directed-graph-toward-cycles",
-      "learningOutcomeIds": [
-        "outcome-peel-directed-graph-toward-cycles"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「三色DFSまたはKahn型peelingの不変条件を説明し、有向cycleの存在を判定して必要ならcycleへ残るcoreを抽出できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC456 E「Endless Holidays」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「三色DFSまたはKahn型peelingの不変条件を説明し、有向cycleの存在を判定して必要ならcycleへ残るcoreを抽出できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 周期的休業下で無限旅行が可能かを、都市×曜日graphの有向cycleとして O((N+M)W) で判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 周期的休業下で無限旅行が可能かを、都市×曜日graphの有向cycleとして O((N+M)W) で判定できる。",
-          "転移題材の解法接続: 各open状態を頂点化し、wからw mod W+1へstay辺と各道路両方向辺を条件付きで追加する。全頂点に三色DFSを行いback edgeを見つけるか、indegree削除後に残る頂点があるかでYes/Noを返す。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "三色DFSまたはKahn型peelingの不変条件を説明し、有向cycleの存在を判定して必要ならcycleへ残るcoreを抽出できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 62,

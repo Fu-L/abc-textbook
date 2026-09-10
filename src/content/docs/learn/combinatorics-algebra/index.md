@@ -1,6 +1,6 @@
 ---
 title: "組合せ・多項式・線形代数"
-description: "前提から組合せ・多項式・線形代数を見抜き、方針へ接続して検証するための学習単位。"
+description: "組合せ・多項式・線形代数の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 7
@@ -8,208 +8,90 @@ sidebar:
 
 # 組合せ・多項式・線形代数
 
-このページは **章** です。分野全体の索引として、技能の境界と学ぶ順序を俯瞰します。各技能の定義を混同せず、必要な節・小節へ降りるための地図として使ってください。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 数え上げや遷移を係数列・多項式・線形写像へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 数え上げを全単射・係数列・線形写像へ変換し、高速変換と構造定理へ接続する。
-
-### この単元では扱わない範囲
-
-- なし
-
-## 下位単元と学習順
-
-以下は canonical standard order に沿った章内カリキュラムです。定義・証明・実装境界・Outcome到達確認は各リンク先で扱い、この章では経路選択に必要な境界を示します。
-
-1. [組合せ係数と対称性で数える](./combinatorial-coefficients.md)（標準順 30）— 選び方の重複を二項係数で整理し、対称操作で同一視する対象は固定点平均でorbitを数える。
-2. [包除・Möbius反転で重複を補正する](./inclusion-exclusion.md)（標準順 61）— 単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。
-3. [NTT・FFTで畳み込みと相互相関を求める](./polynomial-convolution.md)（標準順 70）— 係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。
-4. [組合せを生成関数へ符号化する](./generating-functions.md)（標準順 89）— 高速畳み込みを前提にせず、係数の意味を定義して和・積・sequence・set・cycleが表す組合せ構造を欲しい係数へ翻訳する。
-5. [線形方程式・分離可能変換・行列式計数へ変換する](./linear-algebra-xor.md)（標準順 90）— 制約や多次元変換を線形方程式・基底・軸別変換・行列式へ写し、消去と分離によって解く。
-6. [Matroidの独立性・greedy・線形交差](./matroid-theory.md)（標準順 92）— 独立集合族と交換公理を共通言語にし、単一matroidの重み付き基底と、現corpusで観測された二つの線形matroidの共通rank判定を分けて学ぶ。
-7. [群作用・軌道数え上げ](./orbit-counting.md)（標準順 94）— 状態・配置の正規化で得た考え方と実装を再利用し、群作用・軌道数え上げの発動条件・正当化・境界を重複なく学ぶ。
-8. [monoid exponentiation・連結演算doubling](./monoid-exponentiation.md)（標準順 96）— 長さ・値・補助剰余を含む要約の結合則と単位元を定義し、巨大な反復連結を二分累乗する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-9. [削除・縮約recurrence](./deletion-contraction.md)（標準順 103）— 辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-10. [鏡像法・reflection principle](./reflection-principle.md)（標準順 104）— 組合せ係数・数え上げで得た考え方と実装を再利用し、鏡像法・reflection principleの発動条件・正当化・境界を重複なく学ぶ。
-11. [半環行列・min-plus/max-min遷移](./semiring-matrix-exponentiation.md)（標準順 105）— 線形遷移・行列累乗で得た考え方と実装を再利用し、半環行列・min-plus/max-min遷移の発動条件・正当化・境界を重複なく学ぶ。
-12. [label付き連結成分分解・exponential formula](./labeled-component-decomposition.md)（標準順 107）— 生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。
-13. [Prüfer code・次数制約付きlabel木](./prufer-code.md)（標準順 109）— 組合せ係数・数え上げで得た考え方と実装を再利用し、Prüfer code・次数制約付きlabel木の発動条件・正当化・境界を重複なく学ぶ。
-14. [Robinson–Schensted対応・Young tableau](./rsk-young-tableaux.md)（標準順 114）— 順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-15. [行列式による数え上げ](./determinant-counting.md)（標準順 147）— 線形方程式・rankで得た考え方と実装を再利用し、行列式による数え上げの発動条件・正当化・境界を重複なく学ぶ。
-16. [BEST定理によるEuler circuit数え上げ](./euler-circuit-counting.md)（標準順 159）— 行列式による数え上げ・Euler trail・circuitで得た考え方と実装を再利用し、BEST定理によるEuler circuit数え上げの発動条件・正当化・境界を重複なく学ぶ。
-17. [半順序・Dilworth・最大反鎖](./poset-dilworth-antichain.md)（標準順 169）— 二部matching・Hall・Kőnig・列・subsequence DPで得た考え方と実装を再利用し、半順序・Dilworth・最大反鎖の発動条件・正当化・境界を重複なく学ぶ。
-18. [FPS演算・多点評価・合成を行う](./formal-power-series.md)（標準順 216）— 生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。
-
-## 発動条件と見分け方
+## 概要
 
 ### 組合せ・多項式・線形代数への変換
 
 数え上げや遷移を係数列・多項式・線形写像へ変換する。
 
-検索語: combinatorics and algebra、組合せ論・多項式・線形代数
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 数え上げや遷移を係数列・多項式・線形写像へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
+数え上げを全単射・係数列・線形写像へ変換し、高速変換と構造定理へ接続する。
 
-題材: [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
+- なし
 
-選定理由: an≡b (mod m) が n について解を持つのは gcd(m,a) が b を割るときに限る。したがって固定した a から到達できる b は m/gcd(m,a) 個であり、a の gcd ごとに寄与をまとめられる。
+## 下位単元
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。素数法の非零剰余に積と冪が現れるとき。 問題全体への接続は併用技能を学んだ後に読む。
+- [組合せ係数と対称性で数える](/learn/combinatorics-algebra/combinatorial-coefficients/)
+- [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)
+- [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)
+- [組合せを生成関数へ符号化する](/learn/combinatorics-algebra/generating-functions/)
+- [線形方程式・分離可能変換・行列式計数へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/)
+- [Matroidの独立性・greedy・線形交差](/learn/combinatorics-algebra/matroid-theory/)
+- [群作用・軌道数え上げ](/learn/combinatorics-algebra/orbit-counting/)
+- [monoid exponentiation・連結演算doubling](/learn/combinatorics-algebra/monoid-exponentiation/)
+- [削除・縮約recurrence](/learn/combinatorics-algebra/deletion-contraction/)
+- [鏡像法・reflection principle](/learn/combinatorics-algebra/reflection-principle/)
+- [半環行列・min-plus/max-min遷移](/learn/combinatorics-algebra/semiring-matrix-exponentiation/)
+- [label付き連結成分分解・exponential formula](/learn/combinatorics-algebra/labeled-component-decomposition/)
+- [Prüfer code・次数制約付きlabel木](/learn/combinatorics-algebra/prufer-code/)
+- [Robinson–Schensted対応・Young tableau](/learn/combinatorics-algebra/rsk-young-tableaux/)
+- [行列式による数え上げ](/learn/combinatorics-algebra/determinant-counting/)
+- [BEST定理によるEuler circuit数え上げ](/learn/combinatorics-algebra/euler-circuit-counting/)
+- [半順序・Dilworth・最大反鎖](/learn/combinatorics-algebra/poset-dilworth-antichain/)
+- [FPS演算・多点評価・合成を行う](/learn/combinatorics-algebra/formal-power-series/)
 
-#### このOutcomeを支える根拠
+## 問題一覧
 
-- 素数法の冪到達可能性を原始根で一次合同式へ変換し、gcd ごとの個数を約数上で集計できる。
-- 素数法の非零剰余が位数 P-1 の巡回群をなすこと、一次合同式 an≡b (mod m) の可解条件、約数列挙と倍数側からの差し引き。
-- x=0 を非零剰余の巡回群から先に分離すると、残りを原始根の指数だけで統一できる。 再利用の観点: 演算が有限体の乗法に閉じる部分と例外値を分け、群構造へ写せる範囲を確認する。
-- m の約数を降順に処理し、f(g)=m/g−Σ_{h:g|h,h>g}f(h) により gcd(m,a)=g となる a の個数を求める。最後に (0,0) の寄与を含む 1+Σ_g f(g)(m/g) を mod 998244353 で計算する。
-- 原始根の指数へ写し、g=gcd(m,a) ごとに指数 a の個数と到達可能な b の個数を約数上で集約する。 — 寄与は g=gcd(m,a) だけで決まり、g は m の約数に限られる。m<10^12 の約数数は高々 6720 なので、約数列挙と約数間の差し引きで制約内に収まる。
-- an≡b (mod m) が n について解を持つのは gcd(m,a) が b を割るときに限る。したがって固定した a から到達できる b は m/gcd(m,a) 個であり、a の gcd ごとに寄与をまとめられる。
-- x=0 なら正の整数 n に対して x^n=0 なので、寄与する組は (x,y)=(0,0) の 1 組だけである。残る非零剰余を乗法群として扱えばよい。
-- P が素数なので非零剰余は位数 m=P-1 の巡回群をなす。原始根 r を取り x=r^a,y=r^b と書くと、ある n で x^n=y となる条件は an≡b (mod m) へ移る。
-- 原始根による指数化: 素数法の非零剰余に積と冪が現れるとき。 適用: 乗法群を Z/(P-1)Z の加法的な指数へ写す。
-- 約数上の包除的集計: 値が gcd(P-1,a) のみに依存するとき。 適用: 倍数側の個数を大きい約数から差し引き、gcd が各約数に等しい個数を得る。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### 観察
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-- x=0 なら正の整数 n に対して x^n=0 なので、寄与する組は (x,y)=(0,0) の 1 組だけである。残る非零剰余を乗法群として扱えばよい。
-- P が素数なので非零剰余は位数 m=P-1 の巡回群をなす。原始根 r を取り x=r^a,y=r^b と書くと、ある n で x^n=y となる条件は an≡b (mod m) へ移る。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 候補を比較する
+## 関連問題
 
-- **採用**: 原始根の指数へ写し、g=gcd(m,a) ごとに指数 a の個数と到達可能な b の個数を約数上で集約する。 — 寄与は g=gcd(m,a) だけで決まり、g は m の約数に限られる。m<10^12 の約数数は高々 6720 なので、約数列挙と約数間の差し引きで制約内に収まる。
-- **棄却**: a=1..m を全走査し、各 a について m/gcd(m,a) を答えへ加える。 — 式自体は正しいが O(P) となり P≤10^12 に間に合わないため、同じ gcd を持つ a をまとめる必要がある。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 鍵となる着眼
-
-- an≡b (mod m) が n について解を持つのは gcd(m,a) が b を割るときに限る。したがって固定した a から到達できる b は m/gcd(m,a) 個であり、a の gcd ごとに寄与をまとめられる。
-
-#### アルゴリズムへ接続する
-
-m の約数を降順に処理し、f(g)=m/g−Σ_{h:g|h,h>g}f(h) により gcd(m,a)=g となる a の個数を求める。最後に (0,0) の寄与を含む 1+Σ_g f(g)(m/g) を mod 998244353 で計算する。
-
-## 下位単元を使い分ける比較例
-
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **組合せ係数と対称性で数える** — 直接到達点: 選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。近いが対象外: 重なりを交互加減する包除・Möbius反転。
-- **包除・Möbius反転で重複を補正する** — 直接到達点: 条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。近いが対象外: 選択順を二項係数だけで式化する数え上げ。
-- **NTT・FFTで畳み込みと相互相関を求める** — 直接到達点: 係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。近いが対象外: 組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。
-- **組合せを生成関数へ符号化する** — 直接到達点: 組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。近いが対象外: 係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。
-- **線形方程式・分離可能変換・行列式計数へ変換する** — 直接到達点: 3個の下位Outcomeへ進むための構造索引。近いが対象外: 通常の多項式畳み込み・生成関数と、幾何の面積行列式。
-- **Matroidの独立性・greedy・線形交差** — 直接到達点: 2個の下位Outcomeへ進むための構造索引。近いが対象外: 線形方程式一般、graph matching一般、および交換公理を用いない単なる貪欲選択。
-- **群作用・軌道数え上げ** — 直接到達点: 群作用の固定点数を群要素のcycle typeごとに数え、BurnsideまたはPólyaの平均でorbit数を求められる。近いが対象外: 群作用・軌道数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **monoid exponentiation・連結演算doubling** — 直接到達点: 反復対象を閉じた結合的要約へ持ち上げ、monoidの二分累乗で巨大な連結・合成を評価できる。近いが対象外: monoid exponentiation・連結演算doublingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **削除・縮約recurrence** — 直接到達点: 辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: 削除・縮約recurrenceの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **鏡像法・reflection principle** — 直接到達点: 最初に境界を破るpathとの鏡像対応を構成し、壁付きwalkの数え上げを符号付きの無境界問題へ変換できる。近いが対象外: 鏡像法・reflection principleの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **半環行列・min-plus/max-min遷移** — 直接到達点: 遷移を半環行列として定義し、結合則と単位元を保つ二分累乗・区間積で巨大回数の最適化遷移を計算できる。近いが対象外: 半環行列・min-plus/max-min遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **label付き連結成分分解・exponential formula** — 直接到達点: 最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける。近いが対象外: label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **Prüfer code・次数制約付きlabel木** — 直接到達点: Prüfer列とlabel付き木の全単射、および各labelの出現回数=次数-1を使って次数制約を係数条件へ変換できる。近いが対象外: Prüfer code・次数制約付きlabel木の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **Robinson–Schensted対応・Young tableau** — 直接到達点: 順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: Robinson–Schensted対応・Young tableauの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **行列式による数え上げ** — 直接到達点: 非交差経路またはspanning treeを行列のminorへ対応させ、行列式から個数を求められる。近いが対象外: 行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **BEST定理によるEuler circuit数え上げ** — 直接到達点: 有向Euler graphのcircuit数をrooted arborescenceの行列式と各頂点の出辺順列へ分解して数える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。近いが対象外: BEST定理によるEuler circuit数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **半順序・Dilworth・最大反鎖** — 直接到達点: 対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける。近いが対象外: 半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **FPS演算・多点評価・合成を行う** — 直接到達点: 定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる。近いが対象外: 積を一回求めるだけの畳み込み、および生成関数へ符号化するだけで高度な多項式演算を使わない計数。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- **原始根による指数化**: 素数法の非零剰余に積と冪が現れるとき。 適用: 乗法群を Z/(P-1)Z の加法的な指数へ写す。
-- **約数上の包除的集計**: 値が gcd(P-1,a) のみに依存するとき。 適用: 倍数側の個数を大きい約数から差し引き、gcd が各約数に等しい個数を得る。
-- 演算が有限体の乗法に閉じる部分と例外値を分け、群構造へ写せる範囲を確認する。
-- 固定した a に対する冪写像の像の大きさを gcd から再導出し、P=2 を含む小さい素数で (0,0) の 1 組と約数上の差し引きを全列挙結果に照合する。
-
-## 到達確認
-
-### 到達確認 1 — 数え上げや遷移を係数列・多項式・線形写像へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
-
-転移題材: [ABC212 H「Nim Counting」](https://atcoder.jp/contests/abc212/tasks/abc212_h)
-
-**課題**: ABC212 H「Nim Counting」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「数え上げや遷移を係数列・多項式・線形写像へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 数え上げや遷移を係数列・多項式・線形写像へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: Nim の勝敗条件を XOR 分布の数え上げへ接続し、変換と冪和で可変長の列を一括処理できる。／通常の Nim で XOR が 0 の局面と 0 でない局面の勝敗を説明できること。／Walsh–Hadamard 変換と逆変換が XOR 畳み込みを成分積へ移す仕組みを理解していること。／山数 1 から N の答えを個別に作らず、変換後の一座標では全山数の寄与が単なる有限等比級数になる。 再利用の観点: 同じ畳み込み核を回数違いで合算する問題は、対角化後に冪の和として一括計算できないか検討する。／Nim の敗北条件を XOR 畳み込みの添字 0 の係数へ翻訳し、XOR 変換領域で可変長列の冪和をまとめて評価してから逆変換する。／Walsh–Hadamard 変換で XOR 畳み込みを成分ごとの積へ変え、各成分で 1 個から N 個までの冪和を求める。 — 山数ごとの畳み込みを反復せず、変換後の各座標で等比数列を計算して一度だけ逆変換できる。／求める勝ち局面を直接数えるより、総列数から XOR が 0 の負け局面数を引くと Nim の判定条件をそのまま使える。／山数が固定でなく 1 から N までである点は、変換後の各値 v に対する v＋v²＋…＋vᴺ という冪和に吸収できる。／各山から一個以上の石を取れる通常の Nim なので、先手が負ける必要十分条件は全ての山サイズの排他的論理和が 0 になることである。／許される山サイズの指示配列を C とすると、山が M 個のときの排他的論理和別の列数は C の M 回 XOR 畳み込みになる。／Nim 和による勝敗判定: 複数の山から一山だけ選んで正の個数を減らす通常プレイのゲームを扱うとき。 適用: 全山サイズの XOR が 0 の列を後手勝ちとして数え、全ての列から差し引く。／XOR 畳み込みと Walsh–Hadamard 変換: 選択値の XOR ごとの組合せ数を求め、同じ分布の畳み込みを何度も重ねるとき。 適用: 許可サイズの指示配列を変換し、座標ごとの冪和を計算して逆変換後の添字 0 を読む。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- Nim の勝敗条件を XOR 分布の数え上げへ接続し、変換と冪和で可変長の列を一括処理できる。
-- 通常の Nim で XOR が 0 の局面と 0 でない局面の勝敗を説明できること。
-- Walsh–Hadamard 変換と逆変換が XOR 畳み込みを成分積へ移す仕組みを理解していること。
-- 山数 1 から N の答えを個別に作らず、変換後の一座標では全山数の寄与が単なる有限等比級数になる。 再利用の観点: 同じ畳み込み核を回数違いで合算する問題は、対角化後に冪の和として一括計算できないか検討する。
-- Nim の敗北条件を XOR 畳み込みの添字 0 の係数へ翻訳し、XOR 変換領域で可変長列の冪和をまとめて評価してから逆変換する。
-- Walsh–Hadamard 変換で XOR 畳み込みを成分ごとの積へ変え、各成分で 1 個から N 個までの冪和を求める。 — 山数ごとの畳み込みを反復せず、変換後の各座標で等比数列を計算して一度だけ逆変換できる。
-- 求める勝ち局面を直接数えるより、総列数から XOR が 0 の負け局面数を引くと Nim の判定条件をそのまま使える。
-- 山数が固定でなく 1 から N までである点は、変換後の各値 v に対する v＋v²＋…＋vᴺ という冪和に吸収できる。
-- 各山から一個以上の石を取れる通常の Nim なので、先手が負ける必要十分条件は全ての山サイズの排他的論理和が 0 になることである。
-- 許される山サイズの指示配列を C とすると、山が M 個のときの排他的論理和別の列数は C の M 回 XOR 畳み込みになる。
-- Nim 和による勝敗判定: 複数の山から一山だけ選んで正の個数を減らす通常プレイのゲームを扱うとき。 適用: 全山サイズの XOR が 0 の列を後手勝ちとして数え、全ての列から差し引く。
-- XOR 畳み込みと Walsh–Hadamard 変換: 選択値の XOR ごとの組合せ数を求め、同じ分布の畳み込みを何度も重ねるとき。 適用: 許可サイズの指示配列を変換し、座標ごとの冪和を計算して逆変換後の添字 0 を読む。
-
-- 対象技能が担う箇所: Nim の勝敗条件を XOR 分布の数え上げへ接続し、変換と冪和で可変長の列を一括処理できる。
-- 対象技能が担う箇所: 通常の Nim で XOR が 0 の局面と 0 でない局面の勝敗を説明できること。
-- 対象技能が担う箇所: Walsh–Hadamard 変換と逆変換が XOR 畳み込みを成分積へ移す仕組みを理解していること。
-- 対象技能が担う箇所: 山数 1 から N の答えを個別に作らず、変換後の一座標では全山数の寄与が単なる有限等比級数になる。 再利用の観点: 同じ畳み込み核を回数違いで合算する問題は、対角化後に冪の和として一括計算できないか検討する。
-- 対象技能が担う箇所: Nim の敗北条件を XOR 畳み込みの添字 0 の係数へ翻訳し、XOR 変換領域で可変長列の冪和をまとめて評価してから逆変換する。
-- 対象技能が担う箇所: Walsh–Hadamard 変換で XOR 畳み込みを成分ごとの積へ変え、各成分で 1 個から N 個までの冪和を求める。 — 山数ごとの畳み込みを反復せず、変換後の各座標で等比数列を計算して一度だけ逆変換できる。
-- 対象技能が担う箇所: 求める勝ち局面を直接数えるより、総列数から XOR が 0 の負け局面数を引くと Nim の判定条件をそのまま使える。
-- 対象技能が担う箇所: 山数が固定でなく 1 から N までである点は、変換後の各値 v に対する v＋v²＋…＋vᴺ という冪和に吸収できる。
-- 対象技能が担う箇所: 各山から一個以上の石を取れる通常の Nim なので、先手が負ける必要十分条件は全ての山サイズの排他的論理和が 0 になることである。
-- 対象技能が担う箇所: 許される山サイズの指示配列を C とすると、山が M 個のときの排他的論理和別の列数は C の M 回 XOR 畳み込みになる。
-- 対象技能が担う箇所: Nim 和による勝敗判定: 複数の山から一山だけ選んで正の個数を減らす通常プレイのゲームを扱うとき。 適用: 全山サイズの XOR が 0 の列を後手勝ちとして数え、全ての列から差し引く。
-- 対象技能が担う箇所: XOR 畳み込みと Walsh–Hadamard 変換: 選択値の XOR ごとの組合せ数を求め、同じ分布の畳み込みを何度も重ねるとき。 適用: 許可サイズの指示配列を変換し、座標ごとの冪和を計算して逆変換後の添字 0 を読む。
-- 転移題材の解法接続: Nim の敗北条件を XOR 畳み込みの添字 0 の係数へ翻訳し、XOR 変換領域で可変長列の冪和をまとめて評価してから逆変換する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 数え上げや遷移を係数列・多項式・線形写像へ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-</details>
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
+- [ABC215 G「Colorful Candies 2」](https://atcoder.jp/contests/abc215/tasks/abc215_g)
+- [ABC215 H「Cabbage Master」](https://atcoder.jp/contests/abc215/tasks/abc215_h)
+- [ABC217 F「Make Pair」](https://atcoder.jp/contests/abc217/tasks/abc217_f)
+- [ABC220 H「Security Camera」](https://atcoder.jp/contests/abc220/tasks/abc220_h)
+- [ABC227 G「Divisors of Binomial Coefficient」](https://atcoder.jp/contests/abc227/tasks/abc227_g)
+- [ABC235 Ex「Painting Weighted Graph」](https://atcoder.jp/contests/abc235/tasks/abc235_h)
+- [ABC238 Ex「Removing People」](https://atcoder.jp/contests/abc238/tasks/abc238_h)
+- [ABC249 Ex「Dye Color」](https://atcoder.jp/contests/abc249/tasks/abc249_h)
+- [ABC251 Ex「Fill Triangle」](https://atcoder.jp/contests/abc251/tasks/abc251_h)
+- [ABC256 F「Cumulative Cumulative Cumulative Sum」](https://atcoder.jp/contests/abc256/tasks/abc256_f)
+- [ABC256 G「Black and White Stones」](https://atcoder.jp/contests/abc256/tasks/abc256_g)
+- [ABC259 Ex「Yet Another Path Counting」](https://atcoder.jp/contests/abc259/tasks/abc259_h)
+- [ABC265 E「Warp」](https://atcoder.jp/contests/abc265/tasks/abc265_e)
+- [ABC269 Ex「Antichain」](https://atcoder.jp/contests/abc269/tasks/abc269_h)
+- [ABC273 G「Row Column Sums 2」](https://atcoder.jp/contests/abc273/tasks/abc273_g)
+- [ABC281 G「Farthest City」](https://atcoder.jp/contests/abc281/tasks/abc281_g)
+- [ABC284 G「Only Once」](https://atcoder.jp/contests/abc284/tasks/abc284_g)
+- [ABC288 Ex「A Nameless Counting Problem」](https://atcoder.jp/contests/abc288/tasks/abc288_h)
+- [ABC295 E「Kth Number」](https://atcoder.jp/contests/abc295/tasks/abc295_e)
+- [ABC313 Ex「Group Photo」](https://atcoder.jp/contests/abc313/tasks/abc313_h)
+- [ABC317 F「Nim」](https://atcoder.jp/contests/abc317/tasks/abc317_f)
+- [ABC335 G「Discrete Logarithm Problems」](https://atcoder.jp/contests/abc335/tasks/abc335_g)
+- [ABC343 E「7x7x7」](https://atcoder.jp/contests/abc343/tasks/abc343_e)
+- [ABC377 F「Avoid Queen Attack」](https://atcoder.jp/contests/abc377/tasks/abc377_f)
+- [ABC381 G「Fibonacci Product」](https://atcoder.jp/contests/abc381/tasks/abc381_g)
+- [ABC389 G「Odd Even Graph」](https://atcoder.jp/contests/abc389/tasks/abc389_g)
+- [ABC405 G「Range Shuffle Query」](https://atcoder.jp/contests/abc405/tasks/abc405_g)
+- [ABC412 G「Degree Harmony」](https://atcoder.jp/contests/abc412/tasks/abc412_g)
+- [ABC429 F「Shortest Path Query」](https://atcoder.jp/contests/abc429/tasks/abc429_f)
+- [ABC451 G「Minimum XOR Walk」](https://atcoder.jp/contests/abc451/tasks/abc451_g)
+- [ABC453 E「Team Division」](https://atcoder.jp/contests/abc453/tasks/abc453_e)
+- [ABC459 E「Select from Subtrees」](https://atcoder.jp/contests/abc459/tasks/abc459_e)
+- [ABC463 F「Senshuraku」](https://atcoder.jp/contests/abc463/tasks/abc463_f)
+- [ABC465 F「Sjeltzer?」](https://atcoder.jp/contests/abc465/tasks/abc465_f)
 
 ## 根拠
 
@@ -220,4 +102,4 @@ m の約数を降順に処理し、f(g)=m/g−Σ_{h:g|h,h>g}f(h) により gcd(m
 - [ABC213 G 公式解説](https://atcoder.jp/contests/abc213/editorial/2392)
 - [ABC213 G 公式問題文](https://atcoder.jp/contests/abc213/tasks/abc213_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-chapter-combinatorics-algebra`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-chapter-combinatorics-algebra`

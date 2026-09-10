@@ -9,7 +9,7 @@
 |---|---|---|
 | `/` | generated | 対象範囲、標準学習経路、コンテスト索引、要復習一覧、release 情報への入口 |
 | `/learn/` | LearningUnit graph | 全体学習順、前提、順序理由、chapter/section/subsection 階層 |
-| `/learn/<unit-slug>/` | LearningUnit + docs | 学習成果、前提、説明、例、問題、到達確認、前後ナビ |
+| `/learn/<unit-slug>/` | LearningUnit + docs | 分類、前提、概説、基礎→応用順の問題と解説への導線、前後ナビ |
 | `/problems/` | catalog + IndexedDB | 全問題一覧と静的属性・学習状態の複合絞り込み |
 | `/problems/<problemId>/` | Problem + Explanation | 問題情報、公式参照、解説、タグ、学習単位、類題、学習記録 |
 | `/tags/` | TechniqueTag | 深さ可変のタグ木、前提関係、同義語・旧名称検索 |

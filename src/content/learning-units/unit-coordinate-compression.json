@@ -15,9 +15,7 @@
     "source-abc231-editorial-3059-2800894ed0012eda3c59d85ce01046fba8bf0c21479cd2c0c4e8eb9298de0bc3",
     "source-abc231-f-problem-37c3e1fabb258af6c0177d00752d792cedf5ab67a0ea32e2697bfe540ba9a2d2",
     "source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98",
-    "source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52",
-    "source-abc374-editorial-11095-96d88404a0b6b88070e5ffa964c6c9a7809ac83cb8431a9044b0de85ad249703",
-    "source-abc374-f-problem-23882ecbf159233e00a1d0f004e255e55db05c60e57a2c9909ea3a84c4ed95bf"
+    "source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52"
   ],
   "tagIds": [
     "tag-coordinate-compression"
@@ -34,6 +32,12 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/coordinate-compression.md",
   "problemIds": [
+    "abc374-f"
+  ],
+  "directProblemIds": [
+    "abc374-f"
+  ],
+  "relatedProblemIds": [
     "abc221-e",
     "abc231-f",
     "abc232-g",
@@ -51,70 +55,14 @@
     "abc356-f",
     "abc360-f",
     "abc360-g",
-    "abc374-f",
     "abc384-g",
     "abc431-g",
     "abc434-e",
     "abc439-f",
     "abc465-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-compress-sparse-keys",
-      "learningOutcomeIds": [
-        "outcome-compress-sparse-keys"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。時刻上限は巨大だが、最適行動が入力時刻と固定間隔からしか起きないとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC374 F「Shipping」について、注文は到着時刻順にまとめて出荷する最適解がある。同じ注文集合を出す時刻は、最後の注文到着時刻を待つか、前回出荷から X 日後に即出すかのどちらかである。",
-      "procedure": [
-        "観察: 注文は到着時刻順にまとめて出荷する最適解がある。同じ注文集合を出す時刻は、最後の注文到着時刻を待つか、前回出荷から X 日後に即出すかのどちらかである。",
-        "着眼: 注文 j を i より先に出しても不満度は改善しないので、到着順の prefix を順番に処理する最適解へ交換できる。",
-        "着眼: 固定した次の束では出荷日は max(束末尾の T, 前回日+X) まで早めてよく、これを繰り返すと T_i+kX しか現れない。",
-        "方針: 候補日 T_i+kX の O(N^2) 個だけをイベント化し、イベント日と最後に処理した注文数を状態とする DP で最大 K 件の連続注文を出荷する。（最適出荷日が候補集合に限定され、N≤100 なのでイベント・注文数・束サイズの多項式 DP が時間内に収まる。）",
-        "接続: 全 T_i+kX (0≤k≤N) を sort unique する。dp[event][j] を j 件まで出した最小不満度とし、何もしない遷移と、その日に次の1..K件を出して X 日後以降の次 event へ進む遷移を行う。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "初期値・将来更新値・疎なevent座標をsort-uniqueし、順序と等値性を保つdense indexまたは有限状態へ写せる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-compress-sparse-keys",
-      "learningOutcomeIds": [
-        "outcome-compress-sparse-keys"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「初期値・将来更新値・疎なevent座標をsort-uniqueし、順序と等値性を保つdense indexまたは有限状態へ写せる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC221 E「LEQ」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「初期値・将来更新値・疎なevent座標をsort-uniqueし、順序と等値性を保つdense indexまたは有限状態へ写せる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 座標圧縮付き Fenwick Tree: 左からの走査中に、値が現在値以下または以上の過去要素の重み和が必要なとき。 適用: 値 rank 上の prefix sum と一点加算で不等号条件を処理する。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 座標圧縮付き Fenwick Tree: 左からの走査中に、値が現在値以下または以上の過去要素の重み和が必要なとき。 適用: 値 rank 上の prefix sum と一点加算で不等号条件を処理する。",
-          "転移題材の解法接続: 2 の冪と逆冪を法 998244353 で前計算する。j を左から走査し、Fenwick Tree の rank(A_j) 以下を query して 2^{j-1} 倍を答えへ加えた後、同じ rank に 2^{-j} を add する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "初期値・将来更新値・疎なevent座標をsort-uniqueし、順序と等値性を保つdense indexまたは有限状態へ写せる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 1,
   "difficultyRank": 0,
   "representativeRank": 2,

@@ -1,6 +1,6 @@
 ---
 title: "探索空間を分けて照合・再帰分割する"
-description: "前提から探索空間を分けて照合・再帰分割するを見抜き、方針へ接続して検証するための学習単位。"
+description: "探索空間を分けて照合・再帰分割するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 51
@@ -8,83 +8,60 @@ sidebar:
 
 # 探索空間を分けて照合・再帰分割する
 
-このページは **節** です。下位単元が扱う技能を比較し、発動条件・不変量・計算量の違いから学習経路を選ぶための構造単元です。
+## 概要
 
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
+下位の単元を、前提を満たす順にまとめます。
 
-## この単元でできるようになること
+## 前提と範囲
 
-- 直接所有するOutcomeはありません。この単元では下位単元の選択と学習順を扱います。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## 前提・学習順・対象外
+追加前提: なし。
 
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 探索空間を独立な二集合または再帰部分へ分けるか、部分結果をbalancedな積木・remainder tree・CDQで合成し、重複なく扱える入力規模を広げる。
-
-### この単元では扱わない範囲
+探索空間を独立な二集合または再帰部分へ分けるか、部分結果をbalancedな積木・remainder tree・CDQで合成し、重複なく扱える入力規模を広げる。
 
 - 候補数を制約・生成パラメータ・有限caseで直接界して全列挙する探索、軽重分類による償却解析、および入力木・trie・区間DPの構造をそのまま辿るだけの再帰。
 
-## 下位単元と学習順
+## 下位単元
 
-以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
+- [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/)
+- [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/)
 
-1. [meet-in-the-middle・半分全列挙](./meet-in-the-middle.md)（標準順 136）— 探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-2. [再帰分割・分割統治](./recursive-divide-and-conquer.md)（標準順 140）— pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+## 問題一覧
 
-## 発動条件と見分け方
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-この構造単元はTagを直接所有しません。下位単元の定義と対象外を比較して学習経路を選びます。
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-## ガイド例
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-- 通常のOutcomeガイド例は下位単元で扱います。
+## 関連問題
 
-## 下位単元を使い分ける比較例
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **meet-in-the-middle・半分全列挙** — 直接到達点: 探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。近いが対象外: meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-- **再帰分割・分割統治** — 直接到達点: pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。近いが対象外: 再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- なし
-
-## 到達確認
-
-- 直接所有するOutcomeの到達確認はありません。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-- 直接所有するOutcomeの解答基準はありません。
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC213 H「Stroll」](https://atcoder.jp/contests/abc213/tasks/abc213_h)
+- [ABC230 H「Bullion」](https://atcoder.jp/contests/abc230/tasks/abc230_h)
+- [ABC247 Ex「Rearranging Problem」](https://atcoder.jp/contests/abc247/tasks/abc247_h)
+- [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
+- [ABC267 Ex「Odd Sum」](https://atcoder.jp/contests/abc267/tasks/abc267_h)
+- [ABC269 Ex「Antichain」](https://atcoder.jp/contests/abc269/tasks/abc269_h)
+- [ABC272 Ex「Flipping Coins 2」](https://atcoder.jp/contests/abc272/tasks/abc272_h)
+- [ABC273 Ex「Inv(0,1)ving Insert(1,0)n」](https://atcoder.jp/contests/abc273/tasks/abc273_h)
+- [ABC281 Ex「Alchemy」](https://atcoder.jp/contests/abc281/tasks/abc281_h)
+- [ABC281 F「Xor Minimization」](https://atcoder.jp/contests/abc281/tasks/abc281_f)
+- [ABC304 G「Max of Medians」](https://atcoder.jp/contests/abc304/tasks/abc304_g)
+- [ABC317 Ex「Walk」](https://atcoder.jp/contests/abc317/tasks/abc317_h)
+- [ABC331 G「Collect Them All」](https://atcoder.jp/contests/abc331/tasks/abc331_g)
+- [ABC345 G「Sugoroku 5」](https://atcoder.jp/contests/abc345/tasks/abc345_g)
+- [ABC348 G「Max (Sum - Max)」](https://atcoder.jp/contests/abc348/tasks/abc348_g)
+- [ABC352 G「Socks 3」](https://atcoder.jp/contests/abc352/tasks/abc352_g)
+- [ABC357 G「Stair-like Grid」](https://atcoder.jp/contests/abc357/tasks/abc357_g)
+- [ABC381 G「Fibonacci Product」](https://atcoder.jp/contests/abc381/tasks/abc381_g)
+- [ABC383 G「Bar Cover」](https://atcoder.jp/contests/abc383/tasks/abc383_g)
+- [ABC385 G「Counting Buildings」](https://atcoder.jp/contests/abc385/tasks/abc385_g)
+- [ABC423 G「Small Multiple 2」](https://atcoder.jp/contests/abc423/tasks/abc423_g)
+- [ABC425 G「Sum of Min of XOR」](https://atcoder.jp/contests/abc425/tasks/abc425_g)
+- [ABC439 G「Sugoroku 6」](https://atcoder.jp/contests/abc439/tasks/abc439_g)
 
 ## 根拠
 
@@ -95,4 +72,4 @@ sidebar:
 - [ABC230 H 公式解説](https://atcoder.jp/contests/abc230/editorial/3003)
 - [ABC230 H 公式問題文](https://atcoder.jp/contests/abc230/tasks/abc230_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-divide-enumeration`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-divide-enumeration`

@@ -32,65 +32,12 @@
   "problemIds": [
     "abc277-ex"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-encode-threshold-constraints-as-two-sat",
-      "learningOutcomeIds": [
-        "outcome-encode-threshold-constraints-as-two-sat"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。小範囲整数変数への大小・和不等式をboolean制約へ落としたいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC277 Ex「Constrained Sums」について、各X_iは0,…,Mの小さな整数だが、Q個のsum区間制約がcycleを作るため、変数順に決める単純DPにはならない。",
-      "procedure": [
-        "観察: 各X_iは0,…,Mの小さな整数だが、Q個のsum区間制約がcycleを作るため、変数順に決める単純DPにはならない。",
-        "観察: threshold命題P_{i,j}: j≤X_iを導入すると、整数値1個がjに関してtrueからfalseへ一度だけ切り替わるboolean列になる。",
-        "着眼: L≤X_A+X_Bは全整数tについて P_{A,t}∨P_{B,L-t+1}、X_A+X_B≤Rは ¬P_{A,t}∨¬P_{B,R-t+1} と同値になる。",
-        "着眼: P_{i,0}=true、P_{i,M+1}=false、P_{i,j}⇒P_{i,j-1}を加えると、satisfying assignmentから最大true thresholdをX_iとして復元できる。",
-        "方針: 各threshold P_{i,j}を2-SAT変数にし、上下界のsum条件を全tに対する2-literal clauseへ変換してSCCで解く。（M≤100によりNM変数を持て、二変数和の整数不等式をthreshold ORへ正確に線形化できる。）",
-        "接続: iごとにthreshold 0,…,M+1を用意し、端のunit clauseと単調clauseを張る。各queryと関連tについてlower/upperの2-SAT clauseを追加し、implication graphのSCCで矛盾を判定する。可解なら各iの最大true jを出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "整数変数をthreshold命題列へ符号化し、単調性と二項制約をimplication graphへ張り、SCCから可否と充足割当を復元できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc277-ex"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-encode-threshold-constraints-as-two-sat",
-      "learningOutcomeIds": [
-        "outcome-encode-threshold-constraints-as-two-sat"
-      ],
-      "prerequisiteIds": [
-        "outcome-condense-and-order-directed-graph",
-        "prereq-abc-advanced-v1",
-        "unit-scc-condensation"
-      ],
-      "attainmentCondition": "学習成果「整数変数をthreshold命題列へ符号化し、単調性と二項制約をimplication graphへ張り、SCCから可否と充足割当を復元できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
-      "assessment": {
-        "method": "ABC277 Ex「Constrained Sums」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「整数変数をthreshold命題列へ符号化し、単調性と二項制約をimplication graphへ張り、SCCから可否と充足割当を復元できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
-          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
-          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
-          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
-          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
-        ],
-        "expectedResult": "整数変数をthreshold命題列へ符号化し、単調性と二項制約をimplication graphへ張り、SCCから可否と充足割当を復元できるの適用可能範囲と破綻条件を反例付きで説明できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 84,

@@ -1,6 +1,6 @@
 ---
 title: "label付き連結成分分解・exponential formula"
-description: "前提からlabel付き連結成分分解・exponential formulaを見抜き、方針へ接続して検証するための学習単位。"
+description: "label付き連結成分分解・exponential formulaの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 106
@@ -8,110 +8,40 @@ sidebar:
 
 # label付き連結成分分解・exponential formula
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 組合せを生成関数へ符号化する
-- この位置で学ぶ理由: 生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。
-
-### この単元では扱わない範囲
-
-- label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### label付き連結成分分解・exponential formula
 
 rootを含む連結成分または成分集合を一意に切り出し、全構造とconnected構造の関係をsubset DPや指数型母関数で解く。
 
-検索語: connected-component DP、exponential formula for labeled structures、ラベル付き連結成分分解
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: 組合せを生成関数へ符号化する。
 
-### 例 1 — 最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける
+生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。
 
-題材: [ABC213 G「Connectivity 2」](https://atcoder.jp/contests/abc213/tasks/abc213_g)
+- label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: 連結グラフ数 f(S) は全グラフ数から、固定した基準頂点を含む真部分集合 T がその連結成分になる場合を全て引けば得られる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。全グラフの数は容易だが、頂点集合全体が連結な場合だけを数えたいとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC213 G「Connectivity 2」](https://atcoder.jp/contests/abc213/tasks/abc213_g)
+2. [ABC327 G「Many Good Tuple Problems」](https://atcoder.jp/contests/abc327/tasks/abc327_g)
+3. [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
+4. [ABC386 G「Many MST」](https://atcoder.jp/contests/abc386/tasks/abc386_g)
 
-- 辺選択の指数的列挙を頂点部分集合 DP へ移し、基準頂点の連結成分を使って連結部分グラフを数えられる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 頂点集合 S の内部にある元グラフの辺数を e(S) とすると、S 上で選べる全ての部分グラフは各辺を選ぶか否かで 2 の e(S) 乗個ある。
-- 頂点 1 と頂点 k が連結である部分グラフは、頂点 1 を含む連結成分 S を一意に取り出すことで分類できる。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 頂点部分集合ごとに、その集合全体を連結にする辺選択数を、頂点 1 側の連結成分を固定する包除型の部分集合 DP で求める。 — N が小さいことを利用し、辺部分集合ではなく頂点部分集合とその部分集合の列挙へ計算対象を移せる。
-- **棄却**: 元グラフの各辺を使うかどうか全て列挙し、そのたびに頂点 1 から連結性を調べる。 — 辺数に対して指数個の部分グラフがあり、M が大きい制約では列挙できない。
-
-#### 鍵となる着眼
-
-- 連結グラフ数 f(S) は全グラフ数から、固定した基準頂点を含む真部分集合 T がその連結成分になる場合を全て引けば得られる。
-- 基準頂点を T に必ず含めることで、非連結グラフを基準頂点の連結成分によりちょうど一度だけ数えられる。
-
-#### アルゴリズムへ接続する
-
-各頂点集合の内部辺数から全部分グラフ数を作り、基準頂点の連結成分による再帰で連結数を求めた後、1 と k を含む成分 S と外側の自由な辺選択を合成する。
-
-
-## 転用するときの確認
-
-- **連結成分を固定する数え上げ**: 全グラフの数は容易だが、頂点集合全体が連結な場合だけを数えたいとき。 適用: 基準頂点を含む連結成分 T を一意な証人として、全グラフ数から非連結な場合を差し引く。
-- **部分集合 DP と部分集合列挙**: 頂点数は小さく、集合 S ごとにその部分集合 T を走査する再帰が自然に現れるとき。 適用: ビット集合 S の真部分集合 T のうち基準頂点を含むものを列挙し、連結成分と残りのグラフ数を掛ける。
-- 特定頂点の連結成分で対象を分類するときは、成分内部・成分外部・境界をまたぐ辺の三種類へ分けて自由度を数える。
-- 連結性の数え上げでは、非連結な対象を一意に代表する「固定頂点を含む成分」を先に選ぶ。
-- 最終式で S の外側を自由に数える前に、境界辺が不使用で固定される理由を成分の最大性から確認する。
-
-## 到達確認
-
-### 到達確認 1 — 最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける
-
-転移題材: [ABC318 Ex「Count Strong Test Cases」](https://atcoder.jp/contests/abc318/tasks/abc318_h)
-
-**課題**: ABC318 Ex「Count Strong Test Cases」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 二解法の正誤を cycle component の EGF へ変換し、(N!)² 個の入力を一つの FPS exp 係数から数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 二解法の正誤を cycle component の EGF へ変換し、(N!)² 個の入力を一つの FPS exp 係数から数えられる。
-
-- 対象技能が担う箇所: 二解法の正誤を cycle component の EGF へ変換し、(N!)² 個の入力を一つの FPS exp 係数から数えられる。
-- 転移題材の解法接続: mod 上で f_i=1/i² (1≤i≤N) を作り、FPS E=exp(f) mod x^{N+1} を Newton 法で求める。AliceのみAC/BobのみAC/両者AC の重複を対称性と1-cycleのみのケースで整理し、公式式 N!²(1−2[x^N]E)+N! を計算する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける。
-
-</details>
-
+- [ABC236 Ex「Distinct Multiples」](https://atcoder.jp/contests/abc236/tasks/abc236_h)
+- [ABC253 Ex「We Love Forest」](https://atcoder.jp/contests/abc253/tasks/abc253_h)
+- [ABC318 Ex「Count Strong Test Cases」](https://atcoder.jp/contests/abc318/tasks/abc318_h)
 
 ## 根拠
 
@@ -121,7 +51,5 @@ rootを含む連結成分または成分集合を一意に切り出し、全構�
 - [ABC236 H 公式問題文](https://atcoder.jp/contests/abc236/tasks/abc236_h)
 - [ABC253 H 公式解説](https://atcoder.jp/contests/abc253/editorial/4023)
 - [ABC253 H 公式問題文](https://atcoder.jp/contests/abc253/tasks/abc253_h)
-- [ABC318 H 公式解説](https://atcoder.jp/contests/abc318/editorial/7055)
-- [ABC318 H 公式問題文](https://atcoder.jp/contests/abc318/tasks/abc318_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-labeled-component-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-labeled-component-decomposition`

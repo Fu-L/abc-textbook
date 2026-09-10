@@ -12,10 +12,10 @@
   "sourceRevisionIds": [
     "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
     "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+    "source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a",
+    "source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555",
     "source-abc227-e-problem-b7746806d6e5e8256f10091efbe52d7fe25dc98cb8ba800e471036eab2cb6346",
-    "source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455",
-    "source-abc229-editorial-2964-a66e289920d7588fbb4b2e2cd89b55615cf46b882c4d66e37469774e168f85e0",
-    "source-abc229-f-problem-f2579985b675f085a56d0c290e1dc7beff1aa85aa5f2a862ccfd13f209542fb4"
+    "source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455"
   ],
   "tagIds": [
     "tag-dp-state-equivalence",
@@ -35,10 +35,10 @@
   "docPath": "src/content/docs/learn/dynamic-programming/dp-state-design.md",
   "problemIds": [
     "abc215-e",
+    "abc217-g",
     "abc227-e",
     "abc229-f",
     "abc232-e",
-    "abc236-e",
     "abc237-f",
     "abc244-e",
     "abc247-f",
@@ -49,142 +49,78 @@
     "abc273-g",
     "abc279-g",
     "abc281-g",
-    "abc282-g",
     "abc283-e",
     "abc296-ex",
     "abc307-e",
-    "abc309-e",
     "abc310-e",
-    "abc311-e",
     "abc311-f",
     "abc313-ex",
-    "abc322-e",
     "abc344-f",
     "abc345-e",
-    "abc350-e",
-    "abc374-f",
     "abc375-e",
     "abc376-f",
-    "abc378-g",
     "abc379-g",
-    "abc381-f",
-    "abc386-f",
-    "abc388-f",
     "abc389-g",
     "abc391-g",
     "abc403-f",
     "abc416-g",
-    "abc418-g",
     "abc422-f",
-    "abc427-e",
-    "abc435-f",
     "abc440-g",
     "abc450-f",
-    "abc457-f",
     "abc462-f"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-design-minimal-sufficient-state",
-      "learningOutcomeIds": [
-        "outcome-design-minimal-sufficient-state"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。種類数が小さく、各種類を使ったかどうかが将来の可否を決めるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC215 E「Chain Contestant」について、文字の種類は A..J の 10 種類だけである。選ぶ部分列では各文字が高々一つの連続区間に現れるため、過去の並び全体ではなく使用済み文字集合と現在の末尾文字が次の選択可否を決める。",
-      "procedure": [
-        "観察: 文字の種類は A..J の 10 種類だけである。選ぶ部分列では各文字が高々一つの連続区間に現れるため、過去の並び全体ではなく使用済み文字集合と現在の末尾文字が次の選択可否を決める。",
-        "着眼: 同じ文字を続ける遷移だけは使用済みでも許し、別文字へ移った後の再登場を mask で禁止する。",
-        "方針: 使用済み文字の bitmask と末尾文字を状態にし、選ばない・同じ文字を続ける・未使用文字へ移る遷移を数える。（この二情報が「一度離れた文字へ戻れない」という条件を必要十分に表す。）",
-        "接続: 文字列を左から走査し、各位置の文字 x について current から next へ、選ばない・last=x なら同じブロックを続ける・bit x が未使用なら新ブロックを始める遷移を行う。さらにその位置だけを選ぶ singleton を next[1<<x][x] へ加え、最後に全ての非空状態を合計する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    },
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-design-frontier-profile-dp"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（学習経路の比較）",
-      "omissions": [
-        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
-      ],
-      "environment": "紙上での未知問のモデル化と候補比較",
-      "input": "最小十分状態からDPを設計するの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
-      "procedure": [
-        "frontier/profile DP・境界状態圧縮: 1個の直接所有Outcome、学ぶ理由「DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ」、対象外「frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "curriculum_routing"
-    }
+  "directProblemIds": [
+    "abc232-e",
+    "abc217-g",
+    "abc229-f",
+    "abc244-e",
+    "abc247-f",
+    "abc251-e",
+    "abc264-f",
+    "abc283-e",
+    "abc310-e",
+    "abc344-f",
+    "abc376-f",
+    "abc462-f",
+    "abc227-e",
+    "abc265-e",
+    "abc273-g",
+    "abc281-g",
+    "abc307-e",
+    "abc416-g",
+    "abc422-f",
+    "abc440-g",
+    "abc403-f",
+    "abc375-e",
+    "abc215-e",
+    "abc237-f",
+    "abc279-g",
+    "abc311-f",
+    "abc345-e",
+    "abc391-g",
+    "abc450-f",
+    "abc389-g",
+    "abc313-ex"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-design-minimal-sufficient-state",
-      "learningOutcomeIds": [
-        "outcome-design-minimal-sufficient-state"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC227 E「Swap」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 少数種類の重複文字列について、目標prefixへの最小隣接swap費用を使用個数DPへ組み込み、到達可能な異なる文字列を数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 少数種類の重複文字列について、目標prefixへの最小隣接swap費用を使用個数DPへ組み込み、到達可能な異なる文字列を数えられる。",
-          "転移題材の解法接続: dp[k][e][y][c]を、各文字をその個数だけ使ったprefixを費用cで作る異なる方法数とする。次の文字種を選び、その文字の左端未使用出現が現在の残列で何番目かを追加費用として遷移し、c≤Kの最終状態を合計する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    },
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-design-frontier-profile-dp"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
-      "assessment": {
-        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
-        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
-      },
-      "answer": {
-        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
-        "procedure": [
-          "問題を対象・操作・保つ量・求める量へ分解する。",
-          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
-          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
-          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
-        ],
-        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "curriculum_routing"
-    }
+  "relatedProblemIds": [
+    "abc236-e",
+    "abc282-g",
+    "abc309-e",
+    "abc311-e",
+    "abc322-e",
+    "abc350-e",
+    "abc374-f",
+    "abc378-g",
+    "abc381-f",
+    "abc386-f",
+    "abc388-f",
+    "abc418-g",
+    "abc427-e",
+    "abc435-f",
+    "abc457-f"
   ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 1,
   "difficultyRank": 0,
   "representativeRank": 0,

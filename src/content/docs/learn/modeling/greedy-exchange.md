@@ -1,6 +1,6 @@
 ---
 title: "交換論から選択順を導く"
-description: "前提から交換論から選択順を導くを見抜き、方針へ接続して検証するための学習単位。"
+description: "交換論から選択順を導くの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 24
@@ -8,110 +8,95 @@ sidebar:
 
 # 交換論から選択順を導く
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
-
-### この単元では扱わない範囲
-
-- 対称操作による状態の正規化。
-
-## 発動条件と見分け方
+## 概要
 
 ### 貪欲法と交換論
 
 局所選択の交換または候補の支配関係から、調べる順序・残す候補・定数個のcaseを確定する。
 
-検索語: greedy algorithm、交換法、貪欲法
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる
+局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。
 
-題材: [ABC214 E「Packing Under Range Regulations」](https://atcoder.jp/contests/abc214/tasks/abc214_e)
+- 対称操作による状態の正規化。
 
-選定理由: ある割当てが現在選んだ区間より右端の遅い区間を先に使っていても、両者を交換すれば可否を悪化させない。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。各要素へ区間内の相異なる整数を一つずつ割り当て、実行時刻を選べるとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC268 F「Best Concatenation」](https://atcoder.jp/contests/abc268/tasks/abc268_f)
+2. [ABC226 G「The baggage」](https://atcoder.jp/contests/abc226/tasks/abc226_g)
+3. [ABC257 E「Addition and Multiplication 2」](https://atcoder.jp/contests/abc257/tasks/abc257_e)
+4. [ABC312 F「Cans and Openers」](https://atcoder.jp/contests/abc312/tasks/abc312_f)
+5. [ABC385 E「Snowflake Tree」](https://atcoder.jp/contests/abc385/tasks/abc385_e)
+6. [ABC404 E「Bowls and Beans」](https://atcoder.jp/contests/abc404/tasks/abc404_e)
+7. [ABC457 E「Crossing Table Cloth」](https://atcoder.jp/contests/abc457/tasks/abc457_e)
+8. [ABC225 E「7」](https://atcoder.jp/contests/abc225/tasks/abc225_e)
+9. [ABC252 F「Bread」](https://atcoder.jp/contests/abc252/tasks/abc252_f)
+10. [ABC262 F「Erase and Rotate」](https://atcoder.jp/contests/abc262/tasks/abc262_f)
+11. [ABC290 G「Edge Elimination」](https://atcoder.jp/contests/abc290/tasks/abc290_g)
+12. [ABC298 F「Rook Score」](https://atcoder.jp/contests/abc298/tasks/abc298_f)
+13. [ABC299 G「Minimum Permutation」](https://atcoder.jp/contests/abc299/tasks/abc299_g)
+14. [ABC376 E「Max × Sum」](https://atcoder.jp/contests/abc376/tasks/abc376_e)
+15. [ABC388 E「Simultaneous Kagamimochi」](https://atcoder.jp/contests/abc388/tasks/abc388_e)
+16. [ABC407 E「Most Valuable Parentheses」](https://atcoder.jp/contests/abc407/tasks/abc407_e)
+17. [ABC417 E「A Path in A Dictionary」](https://atcoder.jp/contests/abc417/tasks/abc417_e)
+18. [ABC434 F「Concat (2nd)」](https://atcoder.jp/contests/abc434/tasks/abc434_f)
+19. [ABC447 E「Divide Graph」](https://atcoder.jp/contests/abc447/tasks/abc447_e)
+20. [ABC214 E「Packing Under Range Regulations」](https://atcoder.jp/contests/abc214/tasks/abc214_e)
+21. [ABC245 E「Wrapping Chocolate」](https://atcoder.jp/contests/abc245/tasks/abc245_e)
+22. [ABC433 E「Max Matrix 2」](https://atcoder.jp/contests/abc433/tasks/abc433_e)
+23. [ABC290 Ex「Bow Meow Optimization」](https://atcoder.jp/contests/abc290/tasks/abc290_h)
+24. [ABC225 F「String Cards」](https://atcoder.jp/contests/abc225/tasks/abc225_f)
+25. [ABC366 F「Maximum Composition」](https://atcoder.jp/contests/abc366/tasks/abc366_f)
 
-- 巨大な整数区間上の一対一割当てを、イベントジャンプと最早締切優先の貪欲法で判定できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 各ボール i は整数番号 L_i 以上 R_i 以下の箱のどれか一つへ入り、異なるボールは異なる箱を使わなければならない。
-- 箱番号を小さい順に見たとき、現在の箱へ入れられるボールのうち右端 R が最小のものは、将来使える箱が最も少ない。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 箱番号を昇順に走査し、左端を迎えた区間を優先度付きキューへ入れ、右端が最小の区間を現在の箱へ割り当てる。 — 締切が早いボールを先に使う交換法が成立し、明示する箱は実際に割り当てる位置だけでよい。
-- **棄却**: 区間に含まれる全ての箱を頂点として二部グラフを作り、完全マッチングの有無を調べる。 — 箱番号は 10 億まであり、区間内の各整数を頂点として生成できない。
-
-#### 鍵となる着眼
-
-- ある割当てが現在選んだ区間より右端の遅い区間を先に使っていても、両者を交換すれば可否を悪化させない。
-- 候補キューが空なら、次の区間の左端までの箱にはどのボールも入れられないため、その位置へ直接ジャンプできる。
-
-#### アルゴリズムへ接続する
-
-区間の左端を解禁時刻、右端を締切とみなし、疎な整数軸をイベント間で飛ばしながら最早締切優先で単位ジョブを配置する。
-
-
-## 転用するときの確認
-
-- **区間割当ての最早締切優先**: 各要素へ区間内の相異なる整数を一つずつ割り当て、実行時刻を選べるとき。 適用: 現在位置までに開始した区間から右端が最小のものを min-heap で選び、箱を一つ消費する。
-- **疎な座標のイベント走査**: 座標範囲は巨大だが、状態が変化する入力端点と実際の処理回数だけは少ないとき。 適用: 候補が空の区間を一つずつ進まず、次に未処理の L_i へ現在位置を移す。
-- 巨大な整数軸でも、各座標で処理せず「次に候補が生じる座標」と「実際に資源を消費する回数」だけを追う。
-- 区間から異なる整数を選ぶ問題では、左から場所を埋め、候補の中で将来の余裕が最小の右端を優先する。
-- 座標上限を見て配列化を諦めるだけでなく、候補集合が空の区間を安全に飛ばせる理由まで確認する。
-
-## 到達確認
-
-### 到達確認 1 — 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる
-
-転移題材: [ABC225 E「7」](https://atcoder.jp/contests/abc225/tasks/abc225_e)
-
-**課題**: ABC225 E「7」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 原点からの可視性を偏角区間へ変換し、厳密比較を保った区間スケジューリングとして解ける。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 原点からの可視性を偏角区間へ変換し、厳密比較を保った区間スケジューリングとして解ける。
-
-- 対象技能が担う箇所: 原点からの可視性を偏角区間へ変換し、厳密比較を保った区間スケジューリングとして解ける。
-- 転移題材の解法接続: 浮動小数の角度を使わず端点方向を外積で比較して右端順にsortし、次の左端が直前に選んだ右端以上なら選択する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
-
-</details>
-
+- [ABC227 E「Swap」](https://atcoder.jp/contests/abc227/tasks/abc227_e)
+- [ABC228 H「Histogram」](https://atcoder.jp/contests/abc228/tasks/abc228_h)
+- [ABC236 F「Spices」](https://atcoder.jp/contests/abc236/tasks/abc236_f)
+- [ABC240 Ex「Sequence of Substrings」](https://atcoder.jp/contests/abc240/tasks/abc240_h)
+- [ABC254 Ex「Multiply or Divide by 2」](https://atcoder.jp/contests/abc254/tasks/abc254_h)
+- [ABC259 F「Select Edges」](https://atcoder.jp/contests/abc259/tasks/abc259_f)
+- [ABC268 Ex「Taboo」](https://atcoder.jp/contests/abc268/tasks/abc268_h)
+- [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
+- [ABC274 G「Security Camera 3」](https://atcoder.jp/contests/abc274/tasks/abc274_g)
+- [ABC304 Ex「Constrained Topological Sort」](https://atcoder.jp/contests/abc304/tasks/abc304_h)
+- [ABC305 Ex「Shojin」](https://atcoder.jp/contests/abc305/tasks/abc305_h)
+- [ABC308 F「Vouchers」](https://atcoder.jp/contests/abc308/tasks/abc308_f)
+- [ABC314 G「Amulets」](https://atcoder.jp/contests/abc314/tasks/abc314_g)
+- [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
+- [ABC319 F「Fighter Takahashi」](https://atcoder.jp/contests/abc319/tasks/abc319_f)
+- [ABC320 G「Slot Strategy 2 (Hard)」](https://atcoder.jp/contests/abc320/tasks/abc320_g)
+- [ABC322 G「Two Kinds of Base」](https://atcoder.jp/contests/abc322/tasks/abc322_g)
+- [ABC333 E「Takahashi Quest」](https://atcoder.jp/contests/abc333/tasks/abc333_e)
+- [ABC359 F「Tree Degree Optimization」](https://atcoder.jp/contests/abc359/tasks/abc359_f)
+- [ABC371 G「Lexicographically Smallest Permutation」](https://atcoder.jp/contests/abc371/tasks/abc371_g)
+- [ABC373 F「Knapsack with Diminishing Values」](https://atcoder.jp/contests/abc373/tasks/abc373_f)
+- [ABC374 E「Sensor Optimization Dilemma 2」](https://atcoder.jp/contests/abc374/tasks/abc374_e)
+- [ABC376 G「Treasure Hunting」](https://atcoder.jp/contests/abc376/tasks/abc376_g)
+- [ABC383 E「Sum of Max Matching」](https://atcoder.jp/contests/abc383/tasks/abc383_e)
+- [ABC384 E「Takahashi is Slime 2」](https://atcoder.jp/contests/abc384/tasks/abc384_e)
+- [ABC390 E「Vitamin Balance」](https://atcoder.jp/contests/abc390/tasks/abc390_e)
+- [ABC408 E「Minimum OR Path」](https://atcoder.jp/contests/abc408/tasks/abc408_e)
+- [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
+- [ABC415 G「Get Many Cola」](https://atcoder.jp/contests/abc415/tasks/abc415_g)
+- [ABC416 G「Concat (1st)」](https://atcoder.jp/contests/abc416/tasks/abc416_g)
+- [ABC432 F「Candy Redistribution」](https://atcoder.jp/contests/abc432/tasks/abc432_f)
+- [ABC436 E「Minimum Swap」](https://atcoder.jp/contests/abc436/tasks/abc436_e)
+- [ABC440 F「Egoism」](https://atcoder.jp/contests/abc440/tasks/abc440_f)
+- [ABC453 F「Avoid Division」](https://atcoder.jp/contests/abc453/tasks/abc453_f)
+- [ABC454 F「Make it Palindrome 2」](https://atcoder.jp/contests/abc454/tasks/abc454_f)
+- [ABC464 G「Celester 2」](https://atcoder.jp/contests/abc464/tasks/abc464_g)
+- [ABC466 E「Range Flip」](https://atcoder.jp/contests/abc466/tasks/abc466_e)
 
 ## 根拠
 
@@ -122,4 +107,4 @@ sidebar:
 - [ABC225 E 公式解説](https://atcoder.jp/contests/abc225/editorial/2853)
 - [ABC225 F 公式問題文](https://atcoder.jp/contests/abc225/tasks/abc225_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-greedy-exchange`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-greedy-exchange`

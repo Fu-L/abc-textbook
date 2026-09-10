@@ -48,9 +48,9 @@
     "outcome-reduce-geometry-to-algebraic-predicates"
   ],
   "representativeProblemIds": [
-    "abc220-g",
     "abc223-e",
-    "abc351-e"
+    "abc351-e",
+    "abc220-g"
   ],
   "aliases": [
     "Manhattan transform",

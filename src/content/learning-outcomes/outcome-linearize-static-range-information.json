@@ -1,6 +1,6 @@
 {
   "id": "outcome-linearize-static-range-information",
-  "statement": "一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる。",
+  "statement": "各軸を昇順に累積して多次元prefix和を作り、D次元直方体を2^D隅の包除で取得できる。一次元の区間差と一括加算の端点差分にも接続できる。",
   "prerequisiteOutcomeIds": [],
   "scopeIds": [
     "abc216-g",
@@ -37,6 +37,7 @@
     "abc454-f",
     "abc455-e",
     "abc464-g",
+    "abc465-f",
     "abc465-g",
     "tag-prefix-difference",
     "unit-prefix-aggregate"

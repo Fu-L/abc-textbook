@@ -289,11 +289,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     { 'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'] },
   ),
   'abc217-g': decision(
-    'outcome-formulate-combinatorial-coefficients',
+    'outcome-design-minimal-sufficient-state',
     [
-      d('t0', 'primary', 'tag-combinatorial-coefficients'),
-      d('t1', 'same_tag', 'tag-combinatorial-coefficients'),
-      d('p0', 'same_tag', 'tag-combinatorial-coefficients'),
+      d('t0', 'primary', 'tag-dp-state-equivalence'),
+      d('t1', 'same_tag', 'tag-dp-state-equivalence'),
+      d('p0', 'same_tag', 'tag-dp-state-equivalence'),
     ],
     {},
   ),

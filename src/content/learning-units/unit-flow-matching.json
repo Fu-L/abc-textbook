@@ -46,9 +46,7 @@
     "abc218-h",
     "abc224-h",
     "abc225-g",
-    "abc227-h",
     "abc231-h",
-    "abc237-ex",
     "abc239-g",
     "abc241-g",
     "abc247-g",
@@ -56,101 +54,38 @@
     "abc263-g",
     "abc274-g",
     "abc285-g",
-    "abc313-ex",
     "abc317-g",
-    "abc318-f",
     "abc318-g",
     "abc320-g",
     "abc326-g",
     "abc332-g",
     "abc347-g",
-    "abc354-g",
-    "abc363-g",
     "abc373-g",
     "abc374-g",
-    "abc393-g",
     "abc397-g",
     "abc401-g",
     "abc407-g",
     "abc412-g",
-    "abc413-g",
     "abc421-g",
-    "abc424-g",
     "abc437-g",
     "abc445-g",
     "abc461-g",
     "abc464-g"
   ],
-  "examples": [
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-characterize-bipartite-feasibility-by-hall",
-        "outcome-model-max-flow-min-cut",
-        "outcome-model-min-cost-flow",
-        "outcome-optimize-path-matching-by-contraction",
-        "outcome-solve-bipartite-matching",
-        "outcome-solve-flow-with-lower-bounds",
-        "outcome-solve-min-weight-general-perfect-matching",
-        "outcome-solve-weighted-bipartite-matching"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（学習経路の比較）",
-      "omissions": [
-        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
-      ],
-      "environment": "紙上での未知問のモデル化と候補比較",
-      "input": "フロー・マッチング・カットへ帰着するの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
-      "procedure": [
-        "二部matching・Hall・Kőnig: 2個の直接所有Outcome、学ぶ理由「二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ」、対象外「二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "最大流・最小カット: 1個の直接所有Outcome、学ぶ理由「状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ」、対象外「最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "下限制約付きflowの実現可能性: 1個の直接所有Outcome、学ぶ理由「最大流・最小カットで得た考え方と実装を再利用し、下限制約付きflowの実現可能性の発動条件・正当化・境界を重複なく学ぶ」、対象外「下限制約付きflowの実現可能性の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "最小費用流・circulation: 1個の直接所有Outcome、学ぶ理由「最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、最小費用流・circulationの発動条件・正当化・境界を重複なく学ぶ」、対象外「最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "重み付き二部完全matching: 1個の直接所有Outcome、学ぶ理由「二部matching・Hall・Kőnigで得た考え方と実装を再利用し、重み付き二部完全matchingの発動条件・正当化・境界を重複なく学ぶ」、対象外「重み付き二部完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "一般グラフの最小重み完全matching: 1個の直接所有Outcome、学ぶ理由「二部matchingでは表せないpairing模型を作った後、奇cycleを扱うweighted blossomまたは重み付きTutte多項式で最小重みまで求める」、対象外「一般グラフの最小重み完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "path matchingのheap縮約greedy: 1個の直接所有Outcome、学ぶ理由「path matchingの交互構造を使い、最小edgeの採用後も残りの全cardinality最適値を保存する補正縮約を導いてheapと双方向linkで実装する」、対象外「path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "curriculum_routing"
-    }
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc227-h",
+    "abc237-ex",
+    "abc313-ex",
+    "abc318-f",
+    "abc354-g",
+    "abc363-g",
+    "abc393-g",
+    "abc413-g",
+    "abc424-g"
   ],
-  "exercises": [
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-characterize-bipartite-feasibility-by-hall",
-        "outcome-model-max-flow-min-cut",
-        "outcome-model-min-cost-flow",
-        "outcome-optimize-path-matching-by-contraction",
-        "outcome-solve-bipartite-matching",
-        "outcome-solve-flow-with-lower-bounds",
-        "outcome-solve-min-weight-general-perfect-matching",
-        "outcome-solve-weighted-bipartite-matching"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
-      "assessment": {
-        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
-        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
-      },
-      "answer": {
-        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
-        "procedure": [
-          "問題を対象・操作・保つ量・求める量へ分解する。",
-          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
-          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
-          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
-        ],
-        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 9,

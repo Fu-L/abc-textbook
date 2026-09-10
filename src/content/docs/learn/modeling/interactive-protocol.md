@@ -1,6 +1,6 @@
 ---
 title: "対話protocolを守って情報を取得する"
-description: "前提から対話protocolを守って情報を取得するを見抜き、方針へ接続して検証するための学習単位。"
+description: "対話protocolを守って情報を取得するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 27
@@ -8,109 +8,42 @@ sidebar:
 
 # 対話protocolを守って情報を取得する
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 問い合わせ形式・回数上限・応答依存性・flushを明示し、通常のアルゴリズムをjudgeとの対話列として安全に実行する。
-
-### この単元では扱わない範囲
-
-- 入力を最初からすべて読める通常問題、および問い合わせ上限やflushを持たない模擬入出力。
-
-## 発動条件と見分け方
+## 概要
 
 ### 対話protocolとquery設計
 
 judgeとの問い合わせ・応答列をprotocolどおり実行し、回数上限内で必要な情報を識別する。
 
-検索語: interactive problem、query protocol、インタラクティブ問題、対話型問題
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる
+問い合わせ形式・回数上限・応答依存性・flushを明示し、通常のアルゴリズムをjudgeとの対話列として安全に実行する。
 
-題材: [ABC305 F「Dungeon Explore」](https://atcoder.jp/contests/abc305/tasks/abc305_f)
+- 入力を最初からすべて読める通常問題、および問い合わせ上限やflushを持たない模擬入出力。
 
-選定理由: judgeがadaptiveでも、過去に提示された隣接関係と矛盾しない連結グラフが存在する限り、DFSは現在見えた辺だけを使うので同じ論理で進められる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。探索先の隣接情報が訪問時にだけ判明し、移動そのものも辺に沿って行う必要があるとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-- 局所的に公開されるグラフ情報だけでDFSを実行し、探索木の辺往復から対話回数の上界を証明できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 未知のグラフでも、現在頂点の隣接一覧は毎手与えられる。既訪問集合と、各頂点へ初めて来たときの親を自分で記録すれば、未訪問隣接点へ進むか親へ戻るDFSの一手を決められる。
-- DFSで初訪問に使った辺だけを集めると全域木になる。木の辺は子へ進むときと戻るときの高々2回しか通らないので、頂点Nへ着くまでの移動数は2(N−1)以下である。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 見えている隣接点から常に未訪問頂点を選び、無ければ最初に来た親へ戻るオンラインDFSを行う。 — 未公開の辺を仮定せず現在までの情報だけで実行でき、連結性により全頂点を訪問し、移動上限もDFS木から保証できる。
-- **棄却**: 各手で頂点Nに近そうな未訪問隣接点を貪欲に選び、行き止まりでは任意の隣接点へ移る。 — 未知部分への距離を比較できず、戻り先を管理しないと既訪問領域を巡回して2N手の保証を失う。
-
-#### 鍵となる着眼
-
-- judgeがadaptiveでも、過去に提示された隣接関係と矛盾しない連結グラフが存在する限り、DFSは現在見えた辺だけを使うので同じ論理で進められる。
-- 上限が2N回なのは最短路を当てることを要求しているのではなく、全域木の往復2(N−1)回という探索保証に合わせた値である。
-
-#### アルゴリズムへ接続する
-
-visited[1]=true、DFS stack=[1]で始める。毎回受け取った隣接一覧から未訪問uがあればvisitedにしてstackへ積みuを出力し、無ければstack先頭を捨てて新しい先頭の親を出力する。Nへ移動したらjudgeのOKを受けて直ちに終了する。
-
-
-## 転用するときの確認
-
-- **オンラインDFSと明示的backtracking**: 探索先の隣接情報が訪問時にだけ判明し、移動そのものも辺に沿って行う必要があるとき。 適用: 既訪問集合とDFS stackを持ち、未訪問の子へ進み、無ければ親へ実際に一歩戻る。
-- **探索木による操作回数の償却**: DFSの前進と後退が操作回数として課金され、総回数の上界が必要なとき。 適用: 初訪問辺ごとに往路・復路を高々一回ずつ対応させ、全域木の辺数から上界を出す。
-- オンライン探索では、既知の全体像を求める前に、標準探索の『次の一手』が局所情報だけで決まるかを分解する。
-- 未知グラフを推測する説明ではなく、DFSの各判断に必要な三情報がいつ得られるかを追う。次に各前進辺へ高々一つの後退を対応させ、2N制約との余裕を確認する。
-
-## 到達確認
-
-### 到達確認 1 — 問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる
-
-転移題材: [ABC355 E「Guess the Sum」](https://atcoder.jp/contests/abc355/tasks/abc355_e)
-
-**課題**: ABC355 E「Guess the Sum」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 最小質問による区間和復元を dyadic 境界 graph の最短路へ厳密に帰着し、O(2^N) で質問列を構成できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 最小質問による区間和復元を dyadic 境界 graph の最短路へ厳密に帰着し、O(2^N) で質問列を構成できる。
-
-- 対象技能が担う箇所: 最小質問による区間和復元を dyadic 境界 graph の最短路へ厳密に帰着し、O(2^N) で質問列を構成できる。
-- 転移題材の解法接続: 頂点0..2^Nを用意し、全 i,j について u=2^ij,v=2^i(j+1) を辺で結ぶ。BFS で L から R+1 の parent edge を復元する。path 順に ? i j を出力・flushし、u→vなら応答を加え、v→uなら引く。法100へ正規化して ! ans を出力する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる。
-
-</details>
-
+- [ABC269 E「Last Rook」](https://atcoder.jp/contests/abc269/tasks/abc269_e)
+- [ABC278 G「Generalized Subtraction Game」](https://atcoder.jp/contests/abc278/tasks/abc278_g)
+- [ABC282 F「Union of Two Sets」](https://atcoder.jp/contests/abc282/tasks/abc282_f)
+- [ABC286 F「Guess The Number 2」](https://atcoder.jp/contests/abc286/tasks/abc286_f)
+- [ABC305 F「Dungeon Explore」](https://atcoder.jp/contests/abc305/tasks/abc305_f)
+- [ABC337 E「Bad Juice」](https://atcoder.jp/contests/abc337/tasks/abc337_e)
+- [ABC355 E「Guess the Sum」](https://atcoder.jp/contests/abc355/tasks/abc355_e)
+- [ABC398 E「Tree Game」](https://atcoder.jp/contests/abc398/tasks/abc398_e)
 
 ## 根拠
 
@@ -120,9 +53,5 @@ visited[1]=true、DFS stack=[1]で始める。毎回受け取った隣接一覧�
 - [ABC278 G 公式問題文](https://atcoder.jp/contests/abc278/tasks/abc278_g)
 - [ABC282 F 公式解説](https://atcoder.jp/contests/abc282/editorial/5403)
 - [ABC282 F 公式問題文](https://atcoder.jp/contests/abc282/tasks/abc282_f)
-- [ABC305 F 公式解説](https://atcoder.jp/contests/abc305/editorial/6542)
-- [ABC305 F 公式問題文](https://atcoder.jp/contests/abc305/tasks/abc305_f)
-- [ABC355 E 公式問題文](https://atcoder.jp/contests/abc355/tasks/abc355_e)
-- [ABC355 E 公式解説](https://atcoder.jp/contests/abc355/editorial/10079)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-interactive-protocol`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-interactive-protocol`

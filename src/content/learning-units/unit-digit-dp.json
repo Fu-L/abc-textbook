@@ -41,65 +41,17 @@
     "abc406-e",
     "abc465-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-count-prefix-constrained-objects",
-      "learningOutcomeIds": [
-        "outcome-count-prefix-constrained-objects"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。上限 N 以下の整数について、十進表記に特定数字が現れる条件を数え上げるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC235 F「Variety of Digits」について、N は最大 1 万桁なので数値として列挙できないが、上位から同じ prefix を選ぶ間だけ次桁上限が N の対応桁に制限される。",
-      "procedure": [
-        "観察: N は最大 1 万桁なので数値として列挙できないが、上位から同じ prefix を選ぶ間だけ次桁上限が N の対応桁に制限される。",
-        "観察: 条件は各数字が少なくとも一度出たかだけなので、prefix の履歴は出現数字集合の 10 bit mask に圧縮できる。",
-        "着眼: 新しい数字 d を末尾へ付けると、総和は旧総和×10＋旧個数×d で更新できるため、完成数を個別に保持しなくてよい。",
-        "方針: 桁位置、出現数字 mask、N 未満確定か、数が開始済みかを状態とする digit DP で、個数と値の総和を同時に更新する。（上限と leading zero を正しく扱いながら、各 prefix の将来に必要な情報を定数個の mask 状態へまとめられる。）",
-        "接続: 巨大上限の十進 prefix automaton 上で、tight・started・digit mask ごとの個数と数値和を伝播し、必要 mask を包含する終了状態の和を集計する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc235-f",
+    "abc336-e",
+    "abc406-e",
+    "abc465-e",
+    "abc317-f",
+    "abc288-ex"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-count-prefix-constrained-objects",
-      "learningOutcomeIds": [
-        "outcome-count-prefix-constrained-objects"
-      ],
-      "prerequisiteIds": [
-        "outcome-design-minimal-sufficient-state",
-        "prereq-abc-advanced-v1",
-        "unit-dp-state-design"
-      ],
-      "attainmentCondition": "学習成果「数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC288 Ex「A Nameless Counting Problem」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 上限M・総XOR Xを満たす長さNの非減少整数列数を、bit DPとmultiplicity parityの変換でmod 998244353計算できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 上限M・総XOR Xを満たす長さNの非減少整数列数を、bit DPとmultiplicity parityの変換でmod 998244353計算できる。",
-          "転移題材の解法接続: L=0..Nごとに上位bitからdigit DPし、既にM未満の要素数を状態として総XOR bitがXと一致する遷移を二項係数で加えf(L)を得る。odd(i,j),even(i,j)を、指定位置を奇数size/偶数sizeのj blockへ分割する個数として前計算し、h(x,y)=Σ_k even(x,k)·(M+1-y)_kも作る。Lを昇順に、f(L)からΣ_i C(L,i)Σ_{j≤min(L-1,i)}odd(i,j)g(j)h(L-i,j)を引いてdistinct ordered列数g(L)を得る。答えはΣ_{i=0..floor(N/2)} g(N-2i)/(N-2i)!·C(M+i,i)。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 82,

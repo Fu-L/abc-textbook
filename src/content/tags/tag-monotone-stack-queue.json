@@ -40,9 +40,9 @@
     "outcome-prune-dominated-candidates-once"
   ],
   "representativeProblemIds": [
-    "abc248-ex",
     "abc359-e",
-    "abc379-f"
+    "abc379-f",
+    "abc248-ex"
   ],
   "aliases": [
     "monotonic queue",

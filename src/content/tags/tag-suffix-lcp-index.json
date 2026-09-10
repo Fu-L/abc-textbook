@@ -47,9 +47,9 @@
     "outcome-build-suffix-lcp-index"
   ],
   "representativeProblemIds": [
-    "abc268-ex",
     "abc272-f",
-    "abc362-g"
+    "abc362-g",
+    "abc268-ex"
   ],
   "aliases": [
     "LCP配列",

@@ -1,6 +1,6 @@
 ---
 title: "上限制約付き桁DP"
-description: "前提から上限制約付き桁DPを見抜き、方針へ接続して検証するための学習単位。"
+description: "上限制約付き桁DPの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 171
@@ -8,109 +8,34 @@ sidebar:
 
 # 上限制約付き桁DP
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 最小十分状態からDPを設計する
-- この位置で学ぶ理由: 接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。
-
-### この単元では扱わない範囲
-
-- 上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### 上限制約付き桁DP
 
 数値上限以下の桁列を接頭辞から構成し、tight・started・剰余・digit maskなど将来に必要な有限統計を保つ。
 
-検索語: digit DP、tight DP、上限制約付き桁DP、桁DP
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: 最小十分状態からDPを設計する。
 
-### 例 1 — 数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる
+接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。
 
-題材: [ABC235 F「Variety of Digits」](https://atcoder.jp/contests/abc235/tasks/abc235_f)
+- 上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: 新しい数字 d を末尾へ付けると、総和は旧総和×10＋旧個数×d で更新できるため、完成数を個別に保持しなくてよい。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。上限 N 以下の整数について、十進表記に特定数字が現れる条件を数え上げるとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC235 F「Variety of Digits」](https://atcoder.jp/contests/abc235/tasks/abc235_f)
+2. [ABC336 E「Digit Sum Divisible」](https://atcoder.jp/contests/abc336/tasks/abc336_e)
+3. [ABC406 E「Popcount Sum 3」](https://atcoder.jp/contests/abc406/tasks/abc406_e)
+4. [ABC465 E「Digit Circus」](https://atcoder.jp/contests/abc465/tasks/abc465_e)
+5. [ABC317 F「Nim」](https://atcoder.jp/contests/abc317/tasks/abc317_f)
+6. [ABC288 Ex「A Nameless Counting Problem」](https://atcoder.jp/contests/abc288/tasks/abc288_h)
 
-- 巨大な十進上限下で数字包含条件を満たす整数の総和を、mask 付き digit DP で求められる。
-
-#### 観察
-
-- N は最大 1 万桁なので数値として列挙できないが、上位から同じ prefix を選ぶ間だけ次桁上限が N の対応桁に制限される。
-- 条件は各数字が少なくとも一度出たかだけなので、prefix の履歴は出現数字集合の 10 bit mask に圧縮できる。
-
-#### 候補を比較する
-
-- **採用**: 桁位置、出現数字 mask、N 未満確定か、数が開始済みかを状態とする digit DP で、個数と値の総和を同時に更新する。 — 上限と leading zero を正しく扱いながら、各 prefix の将来に必要な情報を定数個の mask 状態へまとめられる。
-- **棄却**: 1 から N までの各整数を生成し、必要数字を全て含むか調べて総和へ加える。 — N が 1 万桁に達し、整数の個数も値も列挙不可能である。
-
-#### 鍵となる着眼
-
-- 新しい数字 d を末尾へ付けると、総和は旧総和×10＋旧個数×d で更新できるため、完成数を個別に保持しなくてよい。
-
-#### アルゴリズムへ接続する
-
-巨大上限の十進 prefix automaton 上で、tight・started・digit mask ごとの個数と数値和を伝播し、必要 mask を包含する終了状態の和を集計する。
-
-
-## 転用するときの確認
-
-- **出現集合付き digit DP**: 上限 N 以下の整数について、十進表記に特定数字が現れる条件を数え上げるとき。 適用: 使用済み数字を bitmask、上限との大小を tight、leading zero を started で管理する。
-- **桁 DP での値の総和**: 条件を満たす整数の個数だけでなく、整数値そのものの合計を求めるとき。 適用: 各状態に count と sum を持ち、桁追加で sum' に 10×sum＋d×count を足す。
-- 桁条件に 0 が関わる digit DP では、padding の 0 と実際の表記中の 0 を started 状態で分離する。
-- 桁 DP で総和を求めるときは、同じ prefix 状態の値を列挙せず count と sum の二統計を持つ。
-- 必須数字に 0 が含まれる小例で、leading zero が出現扱いになっていないことを確認する。
-
-## 到達確認
-
-### 到達確認 1 — 数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる
-
-転移題材: [ABC288 Ex「A Nameless Counting Problem」](https://atcoder.jp/contests/abc288/tasks/abc288_h)
-
-**課題**: ABC288 Ex「A Nameless Counting Problem」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 上限M・総XOR Xを満たす長さNの非減少整数列数を、bit DPとmultiplicity parityの変換でmod 998244353計算できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 上限M・総XOR Xを満たす長さNの非減少整数列数を、bit DPとmultiplicity parityの変換でmod 998244353計算できる。
-
-- 対象技能が担う箇所: 上限M・総XOR Xを満たす長さNの非減少整数列数を、bit DPとmultiplicity parityの変換でmod 998244353計算できる。
-- 転移題材の解法接続: L=0..Nごとに上位bitからdigit DPし、既にM未満の要素数を状態として総XOR bitがXと一致する遷移を二項係数で加えf(L)を得る。odd(i,j),even(i,j)を、指定位置を奇数size/偶数sizeのj blockへ分割する個数として前計算し、h(x,y)=Σ_k even(x,k)·(M+1-y)_kも作る。Lを昇順に、f(L)からΣ_i C(L,i)Σ_{j≤min(L-1,i)}odd(i,j)g(j)h(L-i,j)を引いてdistinct ordered列数g(L)を得る。答えはΣ_{i=0..floor(N/2)} g(N-2i)/(N-2i)!·C(M+i,i)。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。
-
-</details>
-
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
 ## 根拠
 
@@ -121,4 +46,4 @@ sidebar:
 - [ABC317 F 公式解説](https://atcoder.jp/contests/abc317/editorial/7018)
 - [ABC317 F 公式問題文](https://atcoder.jp/contests/abc317/tasks/abc317_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-digit-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-digit-dp`

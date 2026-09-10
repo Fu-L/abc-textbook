@@ -39,69 +39,14 @@
     "abc354-g",
     "abc457-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-optimize-poset-antichain-by-dilworth",
-      "learningOutcomeIds": [
-        "outcome-optimize-poset-antichain-by-dilworth"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。二つの要素が半順序で比較可能なら同時に選べず、最大の互いに比較不能な集合を求めるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC237 Ex「Hakata」について、同じ回文が複数箇所に現れても互いに同じ文字列を部分文字列として含むため、異なる回文文字列だけを候補にすればよい。",
-      "procedure": [
-        "観察: 同じ回文が複数箇所に現れても互いに同じ文字列を部分文字列として含むため、異なる回文文字列だけを候補にすればよい。",
-        "観察: 異なる回文文字列の種類数は |S| 以下であり、包含関係は長さが増える向きの半順序を作る。",
-        "着眼: 禁止条件は回文区間の交差ではなく、回文文字列同士の substring 比較可能性なので、求める量は包含半順序の幅である。",
-        "着眼: 各回文を左右に複製し、左 i から右 j へ「i が j の部分文字列」の辺を張った二部グラフで、答えは N−最大マッチング数になる。",
-        "方針: 回文を頂点、厳密な部分文字列関係を比較可能性辺とする DAG を作り、Dilworth の定理で最大反鎖を最小鎖分解へ、さらに二部最大マッチングへ変換する。（同時に選べる集合は半順序の反鎖そのもので、最小鎖分解数は頂点数から二部最大マッチング数を引いて求められる。）",
-        "接続: 文字列包含を半順序として明示し、最大 antichain → minimum chain cover → bipartite matching という Dilworth の定理の標準変換を適用する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc237-ex",
+    "abc457-g",
+    "abc354-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-optimize-poset-antichain-by-dilworth",
-      "learningOutcomeIds": [
-        "outcome-optimize-poset-antichain-by-dilworth"
-      ],
-      "prerequisiteIds": [
-        "outcome-characterize-bipartite-feasibility-by-hall",
-        "outcome-design-order-preserving-dp",
-        "outcome-solve-bipartite-matching",
-        "prereq-abc-advanced-v1",
-        "unit-bipartite-matching",
-        "unit-dp-sequence-interval"
-      ],
-      "attainmentCondition": "学習成果「対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC354 G「Select Strings」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: substring 禁止集合を weighted poset antichain と見抜き、文字列比較後の min-cut で最大重みを求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: substring 禁止集合を weighted poset antichain と見抜き、文字列比較後の min-cut で最大重みを求められる。",
-          "転移題材の解法接続: 同一 S を最大 A にまとめる。全 ordered pair で KMP/Z/標準検索により substring 関係を判定する。左右コピーを作り source→L_i capacity A_i、R_i→sink capacity A_i、S_i substring S_j なら L_i→R_j capacity INF を張る。answer=ΣA_i−maxflow。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 93,

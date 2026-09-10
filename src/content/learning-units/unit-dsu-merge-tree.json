@@ -35,67 +35,13 @@
     "abc235-ex",
     "abc314-f"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-build-component-merge-tree",
-      "learningOutcomeIds": [
-        "outcome-build-component-merge-tree"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。辺重み閾値ごとの連結成分集合が操作候補となり、その包含階層上で数え上げるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC235 Ex「Painting Weighted Graph」について、一回の操作で赤くなる集合は、ある重み閾値以下の辺だけを残したグラフにおける一つの連結成分である。",
-      "procedure": [
-        "観察: 一回の操作で赤くなる集合は、ある重み閾値以下の辺だけを残したグラフにおける一つの連結成分である。",
-        "観察: 辺を重み昇順に追加すると成分が階層的に併合され、同じ重みの辺で同時につながる複数成分は一つの新成分として扱う必要がある。",
-        "着眼: m 個の子成分が一つになるとき、独立選択の積に含まれる「各子全体を一回ずつ塗る」X^m は、親全体を一回で塗る同じ集合 X に置き換える。",
-        "着眼: 係数 k をその集合に必要な最小操作回数と定義すれば、同じ赤集合を余分な操作回数でも作れる重複を排除できる。",
-        "方針: 最小全域森が作る閾値連結成分の併合階層上で、各成分の赤集合を作る最小操作回数別の生成多項式を畳み込む。（任意閾値の連結成分は最小全域森で再現でき、子成分の独立選択と親全体を一操作で塗る場合を局所式で統合できる。）",
-        "接続: Kruskal の重み別成分併合を reconstruction forest として、葉の 1＋X から親で ∏dp_child−X^m＋X を計算し、最後に森の根多項式を掛けて K 次まで合計する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc235-ex",
+    "abc314-f"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-build-component-merge-tree",
-      "learningOutcomeIds": [
-        "outcome-build-component-merge-tree"
-      ],
-      "prerequisiteIds": [
-        "outcome-augment-components-with-metadata",
-        "outcome-maintain-connectivity-components",
-        "prereq-abc-advanced-v1",
-        "unit-dsu-components"
-      ],
-      "attainmentCondition": "学習成果「成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC314 F「A Certain Game」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全選手への試合寄与を統合木の path sum として共有し、N−1 試合をほぼ線形時間で処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 全選手への試合寄与を統合木の path sum として共有し、N−1 試合をほぼ線形時間で処理できる。",
-          "転移題材の解法接続: 最初の N 葉を各一人チームとする。各試合で p,q の DSU representative に対応する現チーム節点 u,v を得て、新節点 w を作り u,v を子にし、辺重み size(u)/(size(u)+size(v)) 等を設定して union する。最後の根から DFS し累積辺和を各葉へ出力する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 85,

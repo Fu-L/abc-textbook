@@ -35,26 +35,12 @@
   "docPath": "src/content/docs/learn/geometry-optimization/geometry-primitives.md",
   "problemIds": [
     "abc220-g",
-    "abc221-g",
     "abc223-e",
-    "abc225-e",
-    "abc233-ex",
     "abc234-ex",
-    "abc240-g",
-    "abc243-ex",
     "abc248-e",
-    "abc250-f",
     "abc258-f",
-    "abc263-ex",
-    "abc266-ex",
-    "abc274-f",
-    "abc280-g",
-    "abc283-f",
     "abc296-g",
     "abc301-g",
-    "abc314-ex",
-    "abc315-f",
-    "abc323-f",
     "abc338-e",
     "abc343-e",
     "abc351-e",
@@ -62,119 +48,51 @@
     "abc366-e",
     "abc377-f",
     "abc385-f",
+    "abc426-e",
+    "abc437-f",
+    "abc442-e"
+  ],
+  "directProblemIds": [
+    "abc385-f",
+    "abc426-e",
+    "abc442-e",
+    "abc223-e",
+    "abc351-e",
+    "abc220-g",
+    "abc234-ex",
+    "abc248-e",
+    "abc258-f",
+    "abc296-g",
+    "abc301-g",
+    "abc353-f",
+    "abc366-e",
+    "abc377-f",
+    "abc437-f",
+    "abc343-e"
+  ],
+  "relatedProblemIds": [
+    "abc221-g",
+    "abc225-e",
+    "abc233-ex",
+    "abc240-g",
+    "abc243-ex",
+    "abc250-f",
+    "abc263-ex",
+    "abc266-ex",
+    "abc274-f",
+    "abc280-g",
+    "abc283-f",
+    "abc314-ex",
+    "abc315-f",
+    "abc323-f",
     "abc405-f",
     "abc410-g",
     "abc422-e",
     "abc424-f",
-    "abc426-e",
-    "abc437-f",
-    "abc442-e",
     "abc457-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-reduce-geometry-to-algebraic-predicates",
-      "learningOutcomeIds": [
-        "outcome-reduce-geometry-to-algebraic-predicates"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。四点図形の条件が、向かい合う二線分が共有する軸・中点・長さなどで特徴付けられるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC220 G「Isosceles Trapezium」について、等脚台形の平行な二辺を取り出すと、対称軸である垂直二等分線が一致する。逆に二線分の垂直二等分線が同じで中点が異なれば、その四端点は等脚台形を作る。",
-      "procedure": [
-        "観察: 等脚台形の平行な二辺を取り出すと、対称軸である垂直二等分線が一致する。逆に二線分の垂直二等分線が同じで中点が異なれば、その四端点は等脚台形を作る。",
-        "観察: N≤1000 なので点対を辺候補として全列挙できるが、四点の全列挙はできない。必要なのは同じ垂直二等分線を持つ二辺のうち、中点が異なる重い組である。",
-        "着眼: 線分方向の primitive vector (dx,dy) と、二倍中点 (x_i+x_j,y_i+y_j) のその方向への内積を組にすれば、垂直二等分線を実数なしで一意に正規化できる。",
-        "着眼: 同じ垂直二等分線でも中点が一致する二辺は平行な対辺にならないため、最大辺と組ませる候補は中点 key が異なるものに限る。",
-        "方針: 全点対を正規化した垂直二等分線で group 化し、各 group で中点の異なる二辺の重み和最大を求める。（等脚条件の必要十分条件を二辺の共通 key に変え、点対列挙後は group 内の上位候補だけを比較すればよい。）",
-        "接続: 各 i<j について方向差を gcd と符号で primitive 化し、bisector key と二倍中点、重み C_i+C_j を記録する。bisector key で分類し、重み降順に見て中点が異なる二候補の最大和を更新し、存在しなければ -1 を出す。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    },
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-detect-crossing-by-cyclic-order"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（学習経路の比較）",
-      "omissions": [
-        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
-      ],
-      "environment": "紙上での未知問のモデル化と候補比較",
-      "input": "幾何の基本判定と座標変換の範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
-      "procedure": [
-        "円環順序・chord交差: 1個の直接所有Outcome、学ぶ理由「幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ」、対象外「円環順序・chord交差の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-reduce-geometry-to-algebraic-predicates",
-      "learningOutcomeIds": [
-        "outcome-reduce-geometry-to-algebraic-predicates"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC223 E「Placing Rectangles」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 連続的な長方形配置を分離補題で定数個の帯分割へ落とし、整数寸法まで含めて必要十分に判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 連続的な長方形配置を分離補題で定数個の帯分割へ落とし、整数寸法まで含めて必要十分に判定できる。",
-          "転移題材の解法接続: A,B,C の6順列と X,Y の二方向を試し、最初の面積に必要な帯を切り取り、残った長方形で残り二面積を縦または横に分割できるか天井除算で調べる。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    },
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-detect-crossing-by-cyclic-order"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
-      "assessment": {
-        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
-        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
-      },
-      "answer": {
-        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
-        "procedure": [
-          "問題を対象・操作・保つ量・求める量へ分解する。",
-          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
-          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
-          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
-        ],
-        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 10,

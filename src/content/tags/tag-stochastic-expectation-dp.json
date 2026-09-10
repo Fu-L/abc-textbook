@@ -34,12 +34,14 @@
   },
   "relatedTags": [],
   "learningOutcomeIds": [
+    "outcome-optimize-stochastic-actions",
+    "outcome-propagate-probability-distribution",
     "outcome-solve-stochastic-recurrence"
   ],
   "representativeProblemIds": [
-    "abc226-h",
     "abc266-e",
-    "abc298-e"
+    "abc298-e",
+    "abc226-h"
   ],
   "aliases": [
     "Markov DP",

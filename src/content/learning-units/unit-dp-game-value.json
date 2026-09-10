@@ -34,68 +34,18 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-game-value.md",
   "problemIds": [
-    "abc218-g",
     "abc303-g",
     "abc349-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-evaluate-adversarial-game-value",
-      "learningOutcomeIds": [
-        "outcome-evaluate-adversarial-game-value"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。運要素がなく、双方が勝利を目的に最適行動し、state遷移がacyclicである。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC349 E「Weighted Tic-Tac-Toe」について、盤面は各cellがwhite/red/blueの3状態で高々3^9通りしかない。手番は塗られたcell数のparityで決まり、終了していなければ現在playerは「一手先に自分が勝つstateがあるか」だけを選べばよい。",
-      "procedure": [
-        "観察: 盤面は各cellがwhite/red/blueの3状態で高々3^9通りしかない。手番は塗られたcell数のparityで決まり、終了していなければ現在playerは「一手先に自分が勝つstateがあるか」だけを選べばよい。",
-        "着眼: terminalで同色三目があればその色のplayerが勝ち、全埋まりならred取得weight和とblue取得weight和を比較する。非terminalでは一つでもcurrent player勝利となるchildがあれば勝ち、全childが相手勝利なら負ける。",
-        "方針: 盤面stateをmemo化したminimax再帰で勝者を判定する（全game treeの同一盤面を共有し、有限DAG上の勝敗を高々3^9×9遷移で解ける。）",
-        "接続: redMask,blueMaskまたはternary codeをstate keyにする。8本のwinning maskを検査し、full boardならmask別weight sumを比較する。未終了ではmove数偶数ならTakahashi、奇数ならAokiとして各empty cellを自色へ追加し再帰し、自分勝ちchildを見つけたらtrueをmemoする。初期stateのwinnerを出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc349-e",
+    "abc303-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-evaluate-adversarial-game-value",
-      "learningOutcomeIds": [
-        "outcome-evaluate-adversarial-game-value"
-      ],
-      "prerequisiteIds": [
-        "outcome-design-minimal-sufficient-state",
-        "prereq-abc-advanced-v1",
-        "unit-dp-state-design"
-      ],
-      "attainmentCondition": "学習成果「有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC303 G「Bags Game」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 両者が最適に行動したときのTakahashiの利益XとAokiの利益Yの差X-Yを求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 両者が最適に行動したときのTakahashiの利益XとAokiの利益Yの差X-Yを求められる。",
-          "転移題材の解法接続: dp[i][j]を残存区間[j,j+i)から手番の人が得る最適得点差とする。三行動に対応する(k,Z)=(i-1,0),(max(i-B,0),A),(max(i-D,0),C)ごとに、配列S(k,l)+dp[k,l]の幅i-k+1のsliding minimumをdequeで求め、S(i,j)-Z-minを候補として最大を取る。答えはdp[N][0]。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
+  "relatedProblemIds": [
+    "abc218-g"
   ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 6,

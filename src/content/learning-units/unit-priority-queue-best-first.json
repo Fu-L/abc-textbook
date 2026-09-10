@@ -15,11 +15,7 @@
     "source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2",
     "source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b",
     "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
-    "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70",
-    "source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8",
-    "source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886",
-    "source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f",
-    "source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"
+    "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
   ],
   "tagIds": [
     "tag-priority-queue-best-first"
@@ -36,88 +32,47 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/priority-queue-best-first.md",
   "problemIds": [
+    "abc297-e",
+    "abc305-e",
+    "abc308-f",
+    "abc331-e",
+    "abc342-g",
+    "abc384-e",
+    "abc391-f",
+    "abc409-f",
+    "abc440-e"
+  ],
+  "directProblemIds": [
+    "abc391-f",
+    "abc440-e",
+    "abc331-e",
+    "abc384-e",
+    "abc308-f",
+    "abc409-f",
+    "abc297-e",
+    "abc305-e",
+    "abc342-g"
+  ],
+  "relatedProblemIds": [
     "abc214-e",
     "abc217-e",
     "abc218-h",
     "abc249-f",
     "abc250-g",
     "abc252-f",
-    "abc297-e",
     "abc304-ex",
-    "abc305-e",
     "abc307-f",
-    "abc308-f",
     "abc319-f",
     "abc320-e",
-    "abc331-e",
-    "abc342-g",
     "abc359-f",
     "abc373-f",
     "abc376-e",
     "abc376-g",
-    "abc384-e",
-    "abc391-f",
     "abc407-e",
-    "abc409-f",
-    "abc433-e",
-    "abc440-e"
+    "abc433-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-enumerate-frontier-best-first",
-      "learningOutcomeIds": [
-        "outcome-enumerate-frontier-best-first"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。非負加算で生成される半群の小さい値を順に列挙する。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC297 E「Kth Takoyaki Set」について、既知の安い金額vへたこ焼き一個A_jを足した値の中に、次に安い未出金額が必ず存在する。",
-      "procedure": [
-        "観察: 既知の安い金額vへたこ焼き一個A_jを足した値の中に、次に安い未出金額が必ず存在する。",
-        "着眼: 次の金額の買い方から一個外せば既に確定済み以下の金額になるため、確定集合から一手足した候補だけ見れば十分。",
-        "方針: 最小heapで金額グラフをDijkstra風列挙（0からv→v+A_jを生成し、最小値を重複除去しながらK個確定すれば買い方を列挙せず順位値を得られる。）",
-        "接続: heapへ0を入れ、最小値を取り出して直前確定値と異なる時だけ順位を進め、そのv+A_jを全j挿入する。0を含む順位補正後のK番目を返す。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-enumerate-frontier-best-first",
-      "learningOutcomeIds": [
-        "outcome-enumerate-frontier-best-first"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC305 E「Art Gallery on Graph」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 始点ごとに異なる距離上限を持つ到達範囲を、最大残余資源の多始点探索として一度に求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 始点ごとに異なる距離上限を持つ到達範囲を、最大残余資源の多始点探索として一度に求められる。",
-          "転移題材の解法接続: dを−1で初期化し、各(p_i,h_i)でd[p_i]をh_iにして最大heapへ入れる。最大の(x,v)を取り出し、古い候補なら捨てる。x>0なら各隣接uへx−1を緩和し、最後にd[v]≥0の頂点を昇順で列挙する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 2,
   "representativeRank": 57,

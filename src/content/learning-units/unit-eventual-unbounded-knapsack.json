@@ -35,66 +35,13 @@
     "abc310-ex",
     "abc415-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-stabilize-unbounded-knapsack-by-best-density",
-      "learningOutcomeIds": [
-        "outcome-stabilize-unbounded-knapsack-by-best-density"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。capacityが巨大だがitem weightが小さく、best ratio以外の使用量をboundedにできるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC415 G「Get Many Cola」について、一本飲んでexchange iを一回行うと最終的な瓶総数をD_i=A_i-B_iだけ消費し、追加でB_i本飲める。逆向きに見ると、容量Nでweight D_i・value B_iのunbounded knapsackに近い。",
-      "procedure": [
-        "観察: 一本飲んでexchange iを一回行うと最終的な瓶総数をD_i=A_i-B_iだけ消費し、追加でB_i本飲める。逆向きに見ると、容量Nでweight D_i・value B_iのunbounded knapsackに近い。",
-        "観察: ただし初期段階にはx≥B_iという実行条件がある。x≥K=max A_iになれば全B_i<Kなので条件は自動的に満たされ、以後は通常のunbounded knapsackになる。",
-        "着眼: 同じA_iならB_i最大のoptionだけがD_iも小さくvalueも大きいので他を削除でき、残る種類数はK以下になる。",
-        "着眼: 非i* itemがK個あればprefix weight和K+1個のmod D_{i*} residueに一致pairがあり、そのblockを同weightのi*複数へ交換できる。best ratioにより価値は減らない。",
-        "方針: best ratio B_i/D_i のitem i*以外を使う総weightがK(K+1)未満の最適解を利用し、小容量DP後をi*の反復で埋める（prefix x<K(K+1)だけ全itemでDPし、各到達xから残容量へi*を可能なだけ使う。鳩の巣原理でK個以上の非i* item blockは同weightのi*群へ価値を下げず交換できる。）",
-        "接続: 同じAを最大Bだけにdeduplicateし、cross multiplicationでi*を選ぶ。limit=K(K+1)付近まで、開始xを自由に選べる基底0と条件x≥B_iを反映したunbounded DPで最大追加drink数を求める。各DP state xからi*をfloor((N-x)/D*)回追加する候補を評価し、初期N本を足す。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc310-ex",
+    "abc415-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-stabilize-unbounded-knapsack-by-best-density",
-      "learningOutcomeIds": [
-        "outcome-stabilize-unbounded-knapsack-by-best-density"
-      ],
-      "prerequisiteIds": [
-        "outcome-design-resource-dp",
-        "prereq-abc-advanced-v1",
-        "unit-dp-subset-resource"
-      ],
-      "attainmentCondition": "学習成果「剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC310 Ex「Negative Cost」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 無限に長い実行列を O(L) 長のコンボと O(L²) の例外領域へ圧縮し、O(NL²+L³) で最小使用回数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 無限に長い実行列を O(L) 長のコンボと O(L²) の例外領域へ圧縮し、O(NL²+L³) で最小使用回数を求められる。",
-          "転移題材の解法接続: dp[len][balance] で長さ 2L 以下の基本列の最大ダメージを O(NL²) で求め、長さごとの最大値 d_len をコンボとする。効率 d_z/z 最大の z を選び、例外コンボ総コスト O(L²) までの無制限 knapsack で最大ダメージ M_x を O(L³) で計算する。各 x に不足分を z コンボで補った総手数の最小を取る。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 97,

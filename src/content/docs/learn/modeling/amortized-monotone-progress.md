@@ -1,6 +1,6 @@
 ---
 title: "単調進行による償却解析"
-description: "前提から単調進行による償却解析を見抜き、方針へ接続して検証するための学習単位。"
+description: "単調進行による償却解析の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 134
@@ -8,108 +8,52 @@ sidebar:
 
 # 単調進行による償却解析
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-
-### この単元では扱わない範囲
-
-- 単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### 単調進行による償却解析
 
 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。
 
-検索語: amortized analysis、potential method、償却解析
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる
+要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-題材: [ABC217 E「Sorting Queries」](https://atcoder.jp/contests/abc217/tasks/abc217_e)
+- 単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: heap が空でなければその最小値が必ず列の先頭であり、heap が空になって初めて queue の先頭が列の先頭になる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。一部の操作だけが既存要素を並べ替え、その後の追加要素は並べ替え済み部分の後ろに残るとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC302 E「Isolation」](https://atcoder.jp/contests/abc302/tasks/abc302_e)
+2. [ABC466 F「Many Mod Calculation」](https://atcoder.jp/contests/abc466/tasks/abc466_f)
+3. [ABC217 E「Sorting Queries」](https://atcoder.jp/contests/abc217/tasks/abc217_e)
+4. [ABC403 E「Forbidden Prefix」](https://atcoder.jp/contests/abc403/tasks/abc403_e)
+5. [ABC428 F「Pyramid Alignment」](https://atcoder.jp/contests/abc428/tasks/abc428_f)
+6. [ABC368 G「Add and Multiply Queries」](https://atcoder.jp/contests/abc368/tasks/abc368_g)
+7. [ABC256 Ex「I like Query Problem」](https://atcoder.jp/contests/abc256/tasks/abc256_h)
 
-- 操作履歴で順序規則が変わる列に対し、状態を queue と priority queue に分解し、一括移動を償却解析できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 操作3の直後に存在した要素は昇順のまま先頭側に並び、その後の操作1で加わる要素だけが末尾へ到着順に連なる。したがって、現在の列は「ソート済み部分」と「まだ一度もソートされていない追加部分」に分けて考えられる。
-- 操作2が必要とするのは列全体ではなく先頭だけであり、ソート済み部分からは最小値、未ソート部分からは最古の要素だけを取り出せればよい。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 未ソート部分を FIFO queue、ソート済み部分を min-priority queue で別々に持ち、操作3で前者の全要素を後者へ移す。 — 操作1の到着順と操作3後の昇順を同時に保てる。各要素が queue から heap へ移るのは高々一度なので、操作3の一回の重さではなく全クエリを通した仕事量で評価できる。
-- **棄却**: 列を一つの配列で保持し、操作3のたびに配列全体をソートする。 — 操作1を大量に行った後で操作3を繰り返す入力では同じ要素を何度もソートし、Q が 2×10^5 の制約に収まらない。
-
-#### 鍵となる着眼
-
-- heap が空でなければその最小値が必ず列の先頭であり、heap が空になって初めて queue の先頭が列の先頭になる。
-
-#### アルゴリズムへ接続する
-
-操作1では queue へ追加し、操作2では heap が非空ならその最小値、空なら queue の先頭を出力して削除する。操作3では queue が空になるまで要素を heap へ移し、明示的な全体ソートを行わない。
-
-
-## 転用するときの確認
-
-- **列の状態分割**: 一部の操作だけが既存要素を並べ替え、その後の追加要素は並べ替え済み部分の後ろに残るとき。 適用: 操作履歴の境界で列をソート済み部分と未処理 suffix に分け、それぞれに必要な順序だけを持つデータ構造を割り当てる。
-- **償却解析**: 一回だけ見ると重い一括移動がある一方、各要素がその移動を経験する回数を制限できるとき。 適用: 操作3で移した個数の総和を、操作1で追加された全要素数以下として数える。
-- 更新が列全体へ及ぶように見えたら、更新時点より前と後の要素で意味が変わらないかを調べ、履歴の境界を状態として残す。
-- サンプル1の操作3の直後と、その後に 0 を追加した直後を書き出し、heap を queue より先に読む理由を言葉で再確認する。
-
-## 到達確認
-
-### 到達確認 1 — 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる
-
-転移題材: [ABC256 Ex「I like Query Problem」](https://atcoder.jp/contests/abc256/tasks/abc256_h)
-
-**課題**: ABC256 Ex「I like Query Problem」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 区間floor除算、区間代入、区間和の三種類の質問を制約内で処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 区間floor除算、区間代入、区間和の三種類の質問を制約内で処理できる。
-
-- 対象技能が担う箇所: 区間floor除算、区間代入、区間和の三種類の質問を制約内で処理できる。
-- 転移題材の解法接続: 初期配列を非零同値区間へまとめ、別に区間代入・区間和可能な遅延セグメント木を持つ。除算では対象区間をsplitして各値vをfloor(v/x)へ代入し、0区間をsetから消す。代入質問でもsetを置換し、和質問はsegment treeから得る。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-</details>
-
+- [ABC255 Ex「Range Harvest Query」](https://atcoder.jp/contests/abc255/tasks/abc255_h)
+- [ABC295 G「Minimum Reachable City」](https://atcoder.jp/contests/abc295/tasks/abc295_g)
+- [ABC305 F「Dungeon Explore」](https://atcoder.jp/contests/abc305/tasks/abc305_f)
+- [ABC307 F「Virus 2」](https://atcoder.jp/contests/abc307/tasks/abc307_f)
+- [ABC312 Ex「snukesnuke」](https://atcoder.jp/contests/abc312/tasks/abc312_h)
+- [ABC319 G「Counting Shortest Paths」](https://atcoder.jp/contests/abc319/tasks/abc319_g)
+- [ABC417 G「Binary Cat」](https://atcoder.jp/contests/abc417/tasks/abc417_g)
+- [ABC421 F「Erase between X and Y」](https://atcoder.jp/contests/abc421/tasks/abc421_f)
+- [ABC426 F「Clearance」](https://atcoder.jp/contests/abc426/tasks/abc426_f)
+- [ABC427 G「Takahashi's Expectation 2」](https://atcoder.jp/contests/abc427/tasks/abc427_g)
+- [ABC430 G「Range Set Modifying Query」](https://atcoder.jp/contests/abc430/tasks/abc430_g)
+- [ABC435 E「Cover query」](https://atcoder.jp/contests/abc435/tasks/abc435_e)
 
 ## 根拠
 
@@ -120,4 +64,4 @@ sidebar:
 - [ABC256 H 公式解説](https://atcoder.jp/contests/abc256/editorial/4113)
 - [ABC256 H 公式問題文](https://atcoder.jp/contests/abc256/tasks/abc256_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-amortized-monotone-progress`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-amortized-monotone-progress`

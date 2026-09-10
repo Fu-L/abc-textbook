@@ -1,6 +1,6 @@
 ---
 title: "部分集合・bitmask状態DP"
-description: "前提から部分集合・bitmask状態DPを見抜き、方針へ接続して検証するための学習単位。"
+description: "部分集合・bitmask状態DPの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 129
@@ -8,109 +8,65 @@ sidebar:
 
 # 部分集合・bitmask状態DP
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 最小十分状態からDPを設計する
-- この位置で学ぶ理由: DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。
-
-### この単元では扱わない範囲
-
-- 部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### 部分集合・bitmask状態DP
 
 各bitの意味を固定し、訪問集合・選択集合・frontierなどの部分集合状態間を遷移する。
 
-検索語: bitmask DP、subset DP、部分集合DP
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: 最小十分状態からDPを設計する。
 
-### 例 1 — bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる
+DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。
 
-題材: [ABC232 F「Simple Operations on Sequence」](https://atcoder.jp/contests/abc232/tasks/abc232_f)
+- 部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: x を次に置くと、まだ未使用で x より小さい元添字は全て後ろへ来るので、その個数が x を左端とする転倒数としてこの時点で確定する。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。二種類の操作が交換可能で、片方を全て先に寄せると最終構造を離散的に表せるとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC232 F「Simple Operations on Sequence」](https://atcoder.jp/contests/abc232/tasks/abc232_f)
+2. [ABC274 E「Booster」](https://atcoder.jp/contests/abc274/tasks/abc274_e)
+3. [ABC332 E「Lucky bag」](https://atcoder.jp/contests/abc332/tasks/abc332_e)
+4. [ABC396 G「Flip Row or Col」](https://atcoder.jp/contests/abc396/tasks/abc396_g)
+5. [ABC381 F「1122 Subsequence」](https://atcoder.jp/contests/abc381/tasks/abc381_f)
+6. [ABC244 F「Shortest Good Path」](https://atcoder.jp/contests/abc244/tasks/abc244_f)
+7. [ABC328 G「Cut and Reorder」](https://atcoder.jp/contests/abc328/tasks/abc328_g)
+8. [ABC343 G「Compress Strings」](https://atcoder.jp/contests/abc343/tasks/abc343_g)
+9. [ABC411 G「Count Cycles」](https://atcoder.jp/contests/abc411/tasks/abc411_g)
+10. [ABC425 F「Inserting Process」](https://atcoder.jp/contests/abc425/tasks/abc425_f)
+11. [ABC301 E「Pac-Takahashi」](https://atcoder.jp/contests/abc301/tasks/abc301_e)
+12. [ABC338 F「Negative Traveling Salesman」](https://atcoder.jp/contests/abc338/tasks/abc338_f)
+13. [ABC352 F「Estimate Order」](https://atcoder.jp/contests/abc352/tasks/abc352_f)
+14. [ABC310 F「Make 10 Again」](https://atcoder.jp/contests/abc310/tasks/abc310_f)
+15. [ABC319 F「Fighter Takahashi」](https://atcoder.jp/contests/abc319/tasks/abc319_f)
+16. [ABC432 F「Candy Redistribution」](https://atcoder.jp/contests/abc432/tasks/abc432_f)
 
-- 混在する値変更・隣接交換操作を順列選択へ正規化し、転倒数付き subset DP で最小費用を求められる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- ある要素を増減してから隣と交換する操作は、先に交換して移動先で同じ増減を行う操作へ入れ替えられる。
-- したがって全交換を先、全増減を後に行ってよく、最終的に A のどの元要素を B の各位置へ対応させるかという順列を選ぶ問題になる。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: B の左から対応元を決め、既に使用した A の添字集合だけを状態とする subset DP を行う。 — 次に元添字 x を置く増減費用と、新たに確定する転倒数が使用済み集合と x だけから決まる。
-- **棄却**: A の全順列を列挙し、転倒数による交換費用と B への増減費用を計算する。 — N＝18 でも N の階乗個の順列は列挙できない。
-
-#### 鍵となる着眼
-
-- x を次に置くと、まだ未使用で x より小さい元添字は全て後ろへ来るので、その個数が x を左端とする転倒数としてこの時点で確定する。
-
-#### アルゴリズムへ接続する
-
-操作の交換可能性で解を「順列＋位置別補正」へ正規化し、順列の prefix で確定する転倒寄与を使用済みビット集合の遷移コストとして最短 DP を行う。
-
-
-## 転用するときの確認
-
-- **操作順の正規化**: 二種類の操作が交換可能で、片方を全て先に寄せると最終構造を離散的に表せるとき。 適用: 交換を全て先にして A の順列を確定し、その後の増減費用を位置ごとの絶対差に分離する。
-- **順列最適化の subset DP**: 順列を左から構成する追加費用が、使用済み要素集合と次要素だけに依存するとき。 適用: mask の popcount を次の B 添字とし、未使用 x の対応費用と確定転倒数を加える。
-- 値変更と位置変更が混在する最適化では、両操作を可換にして「対応」と「移動距離」の独立な費用へ分けられないか調べる。
-- 操作が任意順なら、隣接する異種操作を交換して一方を前へ寄せても結果と費用が保たれるかを確認する。
-- 順列の転倒数は完成後に数えるのでなく、次要素を置いた瞬間に確定する未使用要素との対として分配する。
-
-## 到達確認
-
-### 到達確認 1 — bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる
-
-転移題材: [ABC244 F「Shortest Good Path」](https://atcoder.jp/contests/abc244/tasks/abc244_f)
-
-**課題**: ABC244 F「Shortest Good Path」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 訪問 parity と末尾からなる product graph を構成し、全2^N条件の最短 good path を一度の BFS で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 訪問 parity と末尾からなる product graph を構成し、全2^N条件の最短 good path を一度の BFS で求められる。
-
-- 対象技能が担う箇所: 訪問 parity と末尾からなる product graph を構成し、全2^N条件の最短 good path を一度の BFS で求められる。
-- 転移題材の解法接続: 各 v について dist[1<<v][v]=1 を queue に入れる。状態 (mask,v) から各 neighbor u へ (mask xor (1<<u),u) を距離+1で緩和し、BFS 後に mask=1..2^N-1 の min_v dist と mask0の0を合計する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
-
-</details>
-
+- [ABC213 G「Connectivity 2」](https://atcoder.jp/contests/abc213/tasks/abc213_g)
+- [ABC215 E「Chain Contestant」](https://atcoder.jp/contests/abc215/tasks/abc215_e)
+- [ABC216 H「Random Robots」](https://atcoder.jp/contests/abc216/tasks/abc216_h)
+- [ABC228 G「Digits on Grid」](https://atcoder.jp/contests/abc228/tasks/abc228_g)
+- [ABC246 F「typewriter」](https://atcoder.jp/contests/abc246/tasks/abc246_f)
+- [ABC278 F「Shiritori」](https://atcoder.jp/contests/abc278/tasks/abc278_f)
+- [ABC295 Ex「E or m」](https://atcoder.jp/contests/abc295/tasks/abc295_h)
+- [ABC300 Ex「Fibonacci: Revisited」](https://atcoder.jp/contests/abc300/tasks/abc300_h)
+- [ABC306 Ex「Balance Scale」](https://atcoder.jp/contests/abc306/tasks/abc306_h)
+- [ABC309 G「Ban Permutation」](https://atcoder.jp/contests/abc309/tasks/abc309_g)
+- [ABC313 F「Flip Machines」](https://atcoder.jp/contests/abc313/tasks/abc313_f)
+- [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
+- [ABC354 E「Remove Pairs」](https://atcoder.jp/contests/abc354/tasks/abc354_e)
+- [ABC400 G「Patisserie ABC 3」](https://atcoder.jp/contests/abc400/tasks/abc400_g)
+- [ABC402 E「Payment Required」](https://atcoder.jp/contests/abc402/tasks/abc402_e)
+- [ABC419 F「All Included」](https://atcoder.jp/contests/abc419/tasks/abc419_f)
 
 ## 根拠
 
@@ -120,9 +76,5 @@ sidebar:
 - [ABC215 E 公式解説](https://atcoder.jp/contests/abc215/editorial/2483)
 - [ABC216 H 公式解説](https://atcoder.jp/contests/abc216/editorial/2561)
 - [ABC216 H 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_h)
-- [ABC232 F 公式解説](https://atcoder.jp/contests/abc232/editorial/3144)
-- [ABC232 F 公式問題文](https://atcoder.jp/contests/abc232/tasks/abc232_f)
-- [ABC244 F 公式解説](https://atcoder.jp/contests/abc244/editorial/3599)
-- [ABC244 F 公式問題文](https://atcoder.jp/contests/abc244/tasks/abc244_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-subset-state`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-dp-subset-state`

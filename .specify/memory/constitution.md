@@ -46,8 +46,9 @@ all affected explanations, examples, exercises, and answer material together. Th
 learner trust and prevents internally contradictory guidance.
 
 ### III. Progressive and Accessible Learning
-Material MUST advance from declared prerequisites through explanation, guided example,
-practice, and verification without relying on unstated knowledge. New terms MUST be defined
+Material MUST advance from declared prerequisites through concise conceptual explanations
+and systematically ordered Problems with their own full explanations, without relying on
+unstated knowledge. Fixed guide, transfer, assessment, or self-evaluation formats are not required. New terms MUST be defined
 at first use, and diagrams, tables, and other non-text content MUST have meaningful text
 alternatives where the publishing format supports them. Instructions MUST use clear,
 consistent language and MUST NOT depend on color, layout, or cultural context alone to convey

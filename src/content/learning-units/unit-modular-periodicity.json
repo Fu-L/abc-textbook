@@ -35,70 +35,18 @@
   "docPath": "src/content/docs/learn/number-theory/modular-periodicity.md",
   "problemIds": [
     "abc228-e",
-    "abc286-f",
+    "abc319-e"
+  ],
+  "directProblemIds": [
     "abc319-e",
+    "abc228-e"
+  ],
+  "relatedProblemIds": [
+    "abc286-f",
     "abc320-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-exploit-modular-periodicity",
-      "learningOutcomeIds": [
-        "outcome-exploit-modular-periodicity"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。素数法Pの下で、Pと互いに素な底を巨大な指数へ累乗したいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC228 E「Integer Sequence Fair」について、長さNの整数列は各要素にK通りの選択肢があるためK^N通りあり、それぞれにM通りの点数を独立に付けられる。したがって求める個数は M^(K^N) だが、N・K・Mが10^18以下なので指数そのものは構成できない。",
-      "procedure": [
-        "観察: 長さNの整数列は各要素にK通りの選択肢があるためK^N通りあり、それぞれにM通りの点数を独立に付けられる。したがって求める個数は M^(K^N) だが、N・K・Mが10^18以下なので指数そのものは構成できない。",
-        "観察: 法P=998244353は素数である。底MがPの倍数でなければFermatの小定理により指数をP-1で割った余りだけ求めればよい一方、MがPの倍数なら同じ簡約をしてはいけない。",
-        "着眼: M≡0 (mod P) のとき指数K^Nは正なので答えは0である。この場合に指数をP-1で簡約すると、余り0から誤って0^0を扱う可能性があるため先に分岐する。",
-        "着眼: MとPが互いに素なら M^(P-1)≡1 (mod P) なので、K^NをP-1で割った商の分は全て消え、余りだけが結果を決める。",
-        "方針: M mod Pを場合分けし、非零ならK^N mod (P-1)を高速冪で求め、その値を指数としてMの高速冪を計算する。（Fermatの小定理で巨大指数をP-1周期へ落とせ、二段の高速冪はいずれも指数のビット数に比例する反復で済む。）",
-        "接続: M mod P=0なら0を出力する。そうでなければ二分累乗法で e=K^N mod (P-1) を計算し、続けて M^e mod P を計算する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "剰余類上の周期または指数法則を示し、周期状態の前計算や巨大指数の簡約で値を求められる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-exploit-modular-periodicity",
-      "learningOutcomeIds": [
-        "outcome-exploit-modular-periodicity"
-      ],
-      "prerequisiteIds": [
-        "outcome-compute-in-modular-arithmetic",
-        "prereq-abc-advanced-v1",
-        "unit-modular-arithmetic"
-      ],
-      "attainmentCondition": "学習成果「剰余類上の周期または指数法則を示し、周期状態の前計算や巨大指数の簡約で値を求められる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC286 F「Guess The Number 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「剰余類上の周期または指数法則を示し、周期状態の前計算や巨大指数の簡約で値を求められる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 長さ108のpermutationへの1回の反復応答から、1≤N≤10^9を合同式の一意解として復元できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 長さ108のpermutationへの1回の反復応答から、1≤N≤10^9を合同式の一意解として復元できる。",
-          "転移題材の解法接続: 長さ[4,9,5,7,11,13,17,19,23]の各連続blockをcycleにしたAを出力してflushする。Bを受け取り、各block先頭の移動量からN mod cを復元する。得た9合同式を中国剰余定理で統合し、[0,1338557220)の解を出力して直ちに終了する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "剰余類上の周期または指数法則を示し、周期状態の前計算や巨大指数の簡約で値を求められる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 1,
   "representativeRank": 0,

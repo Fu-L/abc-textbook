@@ -30,70 +30,13 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/combinatorics-algebra/polynomial-taylor-shift.md",
-  "problemIds": [
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
     "abc323-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-shift-polynomial-by-factorial-convolution",
-      "learningOutcomeIds": [
-        "outcome-shift-polynomial-by-factorial-convolution"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。spanning treeをedge属性の個数別に数えたいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC323 G「Inversion of Tree」について、各inversion edgeへweight x、他edgeへweight 1を付けると、treeのweight積はx^{inversion数}であり、全spanning treeの重み和のx^K係数が求める答えになる。",
-      "procedure": [
-        "観察: 各inversion edgeへweight x、他edgeへweight 1を付けると、treeのweight積はx^{inversion数}であり、全spanning treeの重み和のx^K係数が求める答えになる。",
-        "観察: weighted Matrix-Tree theoremにより、この生成多項式はpolynomial Laplacianの任意のcofactor det(M_0+xM_1)として得られる。",
-        "着眼: 係数matrix Bが正則ならdet(A+xB)=det(B)det(xI+B^{-1}A)で、後半は−B^{-1}Aのcharacteristic polynomialになる。",
-        "着眼: M_1がsingularでもshift aを選んでC=M_0+aM_1を正則にし、E(z)=det(M_1+zC)をcharacteristic polynomialとして計算できる。",
-        "方針: det(M_0+xM_1)を正則な係数matrixへ変形し、characteristic polynomialをO(N^3)で求めて全係数を復元する。（N≤500で、N点のdeterminant評価を繰り返さず1回の行列多項式計算へ帰着できる。）",
-        "接続: 全unordered pair u<vについてP_u>P_vならw=x、否则w=1としてpolynomial Laplacianを作り、1行1列を除いてM_0,M_1へ分ける。d=N-1とし、C=M_0+aM_1が正則になるfield要素aを選ぶ。C^{-1}M_1を求め、−C^{-1}M_1のcharacteristic polynomialからE(z)=det(C)det(zI+C^{-1}M_1)を得る。degree dで係数をreverseしてQ(t)=D(a+t)とし、t=x-aのTaylor shiftでD(x)へ戻し、x^0..x^{N-1}係数を出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "二項係数を階乗で分離し、係数列の反転と一回の畳み込みから P(x+a) の全係数を準線形時間で復元できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-shift-polynomial-by-factorial-convolution",
-      "learningOutcomeIds": [
-        "outcome-shift-polynomial-by-factorial-convolution"
-      ],
-      "prerequisiteIds": [
-        "outcome-compute-convolution-or-correlation",
-        "outcome-formulate-combinatorial-coefficients",
-        "prereq-abc-advanced-v1",
-        "unit-combinatorial-coefficients",
-        "unit-polynomial-convolution"
-      ],
-      "attainmentCondition": "学習成果「二項係数を階乗で分離し、係数列の反転と一回の畳み込みから P(x+a) の全係数を準線形時間で復元できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
-      "assessment": {
-        "method": "ABC323 G「Inversion of Tree」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「二項係数を階乗で分離し、係数列の反転と一回の畳み込みから P(x+a) の全係数を準線形時間で復元できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
-          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
-          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
-          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
-          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
-        ],
-        "expectedResult": "二項係数を階乗で分離し、係数列の反転と一回の畳み込みから P(x+a) の全係数を準線形時間で復元できるの適用可能範囲と破綻条件を反例付きで説明できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 95,

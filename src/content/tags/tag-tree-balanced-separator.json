@@ -38,8 +38,8 @@
     "outcome-build-balanced-separator-decomposition"
   ],
   "representativeProblemIds": [
-    "abc291-ex",
-    "abc359-g"
+    "abc359-g",
+    "abc291-ex"
   ],
   "aliases": [
     "centroid decomposition",

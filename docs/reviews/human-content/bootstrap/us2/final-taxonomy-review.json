@@ -4,9 +4,9 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "3a7c70579256e1994d029b5edac52b074be8596a2311fb3de2a3d9b694077e5d",
+  "subjectDigest": "6cef61d0642516c03ec0cebcaf874f52cc938dbcf1a219537b8070fbfcb9bc4d",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-  "inventoryDigest": "cfe52ab2d3fae6b7680223a4d7d9d6775931571bc3c2239478ca5e252cb786b0",
+  "inventoryDigest": "704251f85d0d6b012c92b68db620aa5616ca38f3f14ac48df6b7d3b703217b6e",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": [
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "3a7c70579256e1994d029b5edac52b074be8596a2311fb3de2a3d9b694077e5d",
+      "subjectDigest": "6cef61d0642516c03ec0cebcaf874f52cc938dbcf1a219537b8070fbfcb9bc4d",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "7cc857b907b0cd243744b5fb7e909e04956c151b2bae0689951c4d6596eaaf83",
+      "resultDigest": "2421bb0a67363134ae385d50d9dfd017f2c99394e0305e80561c8a10f0cc46ca",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-08T13:22:51.735Z",
+      "completedAt": "2026-09-09T17:04:17.543Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "3a7c70579256e1994d029b5edac52b074be8596a2311fb3de2a3d9b694077e5d",
+      "subjectDigest": "6cef61d0642516c03ec0cebcaf874f52cc938dbcf1a219537b8070fbfcb9bc4d",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "7cc857b907b0cd243744b5fb7e909e04956c151b2bae0689951c4d6596eaaf83",
+      "resultDigest": "2421bb0a67363134ae385d50d9dfd017f2c99394e0305e80561c8a10f0cc46ca",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-08T13:22:54.964Z",
+      "completedAt": "2026-09-09T17:04:24.221Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "3a7c70579256e1994d029b5edac52b074be8596a2311fb3de2a3d9b694077e5d",
+      "subjectDigest": "6cef61d0642516c03ec0cebcaf874f52cc938dbcf1a219537b8070fbfcb9bc4d",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "7cc857b907b0cd243744b5fb7e909e04956c151b2bae0689951c4d6596eaaf83",
+      "resultDigest": "2421bb0a67363134ae385d50d9dfd017f2c99394e0305e80561c8a10f0cc46ca",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-08T13:22:55.420Z",
+      "completedAt": "2026-09-09T17:04:24.748Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "3a7c70579256e1994d029b5edac52b074be8596a2311fb3de2a3d9b694077e5d",
+      "subjectDigest": "6cef61d0642516c03ec0cebcaf874f52cc938dbcf1a219537b8070fbfcb9bc4d",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "7cc857b907b0cd243744b5fb7e909e04956c151b2bae0689951c4d6596eaaf83",
+      "resultDigest": "2421bb0a67363134ae385d50d9dfd017f2c99394e0305e80561c8a10f0cc46ca",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-08T13:22:55.636Z",
+      "completedAt": "2026-09-09T17:04:24.964Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "3a7c70579256e1994d029b5edac52b074be8596a2311fb3de2a3d9b694077e5d",
+      "subjectDigest": "6cef61d0642516c03ec0cebcaf874f52cc938dbcf1a219537b8070fbfcb9bc4d",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "7cc857b907b0cd243744b5fb7e909e04956c151b2bae0689951c4d6596eaaf83",
+      "resultDigest": "2421bb0a67363134ae385d50d9dfd017f2c99394e0305e80561c8a10f0cc46ca",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-08T13:23:00.156Z",
+      "completedAt": "2026-09-09T17:04:31.633Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "59fbf978735183e9f9d48c388258394602458f337e48ad16fe10de8777ce56bc",
+  "reviewerExecutedCheckSetDigest": "54fa83555fb5646c0f4528049cccfc43350ddcb0730f4b8dddc9f1d95b659fce",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -155,6 +155,7 @@
         "outcome-count-euler-circuits-by-best",
         "outcome-count-implicit-binary-tree-layers",
         "outcome-count-labeled-structures-by-components",
+        "outcome-count-nonintersecting-paths-by-lgv",
         "outcome-count-orbits-by-fixed-points",
         "outcome-count-prefix-constrained-objects",
         "outcome-count-through-cyclic-exponents",
@@ -241,6 +242,7 @@
         "outcome-optimize-path-matching-by-contraction",
         "outcome-optimize-poset-antichain-by-dilworth",
         "outcome-optimize-ratio-by-parametric-search",
+        "outcome-optimize-stochastic-actions",
         "outcome-optimize-tree-order-by-cluster-contraction",
         "outcome-optimize-univariate-convex-function",
         "outcome-optimize-weighted-matroid-basis",
@@ -251,6 +253,7 @@
         "outcome-persist-data-structure-versions",
         "outcome-precompute-directional-grid-effects",
         "outcome-process-dag-in-topological-order",
+        "outcome-propagate-probability-distribution",
         "outcome-propagate-static-graph-potentials",
         "outcome-prove-and-search-threshold",
         "outcome-prove-greedy-order",
@@ -289,6 +292,7 @@
         "outcome-solve-weighted-bipartite-matching",
         "outcome-split-enumeration-space",
         "outcome-stabilize-unbounded-knapsack-by-best-density",
+        "outcome-sum-affine-floors-by-euclid",
         "outcome-sum-multiplicative-function-by-min25-sieve",
         "outcome-sweep-connectivity-by-kruskal-threshold",
         "outcome-test-linear-matroid-intersection-rank",
@@ -301,10 +305,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "# PR #63 レビュー指摘への修正根拠\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5585405010\n\n作業主体はCodex。Fu-Lの「レビューコメントを修正してpushする」という指示に基づき、入力レコード、体系、例題選定、生成教材を修正した。以下は改訂の根拠と実施した検証の記録であり、人間が改訂後の全文を独立に再査読したという記録ではない。\n\n| 指摘 | 修正 |\n| --- | --- |\n| 1 | ABC238 Gを全prefixで出現位相を共有する周期符号化として説明。群準同型と区別し、固定queryの衝突確率と全queryのunion boundを明記。 |\n| 2 | Aliens trickの定義・Outcomeへ双対ギャップなしの証明を追加。離散凸性、支持傾き、個数tie-breakの役割と反例を分離。 |\n| 3 | automaton DPは禁止遷移を除外し、終了後の受理状態を集計。回避と全パターン充足を区別。 |\n| 4 | ABC219 Eを有界全探索へ移し、部分集合DPのガイドをABC232 Fへ変更。ABC377 Eはfunctional graphのサイクル分解へ移動。 |\n| 5 | Frobeniusを標数pの二項係数消滅とシフト演算の反復高速化へ再定義。拡大体の前提を除き、run数の二つの上界を追加。既存IDは参照の安定性のため維持。 |\n| 6 | 要素保持併合の倍増、setの消滅・生存への課金、分割の半減を区別。ABC329 Fの入力レコード内の誤った証明も修正。 |\n| 7 | ABC250 Gは初日の価格一個で初期化し、比較後にだけ挿入する手順へ統一。 |\n| 8 | BEST定理は使用頂点上の余因子を取る。自己ループ、空行列式、区別した補助辺を固定して切る対応を明示。 |\n| 9 | 有限minimax、Conwayの数ゲーム、循環minimaxを別Tag・Outcome・Unitへ分割。ABC265 Exの数成分、ABC413 Fの後退解析も対応する技能へ配置。 |\n| 10 | heavy path多項式DPとHLRecDPを分割。前者に畳み込み、後者に資源DPを接続し、再帰の意味と計算量を区別。 |\n| 11 | Stern–Brocot祖先経路と分母制約付き近似を分割。近似のガイドはABC333 G。 |\n| 12 | ABC280 Fを静的potentialへ移し、weighted DSUはABC328 Fをガイドに採用。親辺差、圧縮、根の併合符号を導出。 |\n| 13 | 全200 Outcomeのガイドを明示選定表へ固定。導入はABC214 Eのモデル変換部分、列fingerprintはABC331 Fのhash結合部分を切り出し、未習の全解法を導入の手順にしない。 |\n| 14 | binary Trieの導入をABC425 Gの単一XOR最小queryへ変更し、閾値以下個数の分岐も説明。ABC254 Exの祖先matching、ABC281 FのXOR minimaxを別技能へ分割。 |\n| 15 | ABC218 Hをpath matching縮約へ配置。ABC464 Gとの符号反転、個数固定、端の辺の処理を比較。 |\n| 16 | ABC310 Exのコンボ生成を固有の前処理とし、その後を大容量unbounded knapsackへ配置。ABC415 Gとの容量固定・目標価値固定の違いを比較。 |\n\n数学的な疑義は、コメントで指定された公式解説と入力レコードの根拠を照合し、上の適用条件・証明を再構成した。全868問の解説を独立に再検証したものではない。\n\n独立な小規模全探索との比較:\n\n- ABC250 G: 長さ1〜8、各価格1〜4の87,380列を、株数を状態とする厳密DPと比較して一致。別途 `[1,2,100]` の99も確認。\n- path matching: 長さ1〜7、重み−2〜2の97,655列で、縮約により得た全cardinalityの最小値が非隣接部分集合の全探索と一致。\n- ABC336 G: 長さ4〜11の全binary列を16種類のsubstring頻度で集約。3,151種類の頻度入力で、使用頂点・補助辺を含むBEST計数が列挙数と一致。\n\nこの比較は教材の手順を独立に実装した検算であり、問題解答の公開・T058の全到達確認完了を意味しない。体系と教材の機械検証は既存の契約テスト、materializationのbyte一致、verify:fastで行う。",
+      "reviewBasis": "# PR #63 レビュー修正の根拠\n\n対象:\n\n- https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5601163308\n- https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5605425073\n\n作業主体はCodex。Fu-Lの修正・push指示に基づく確認記録であり、人間による独立再査読を表さない。\n\n## 全問題解説集への整理\n\n新しいコメントを優先し、Guide /\nTransfer選定表、役割付きの例・評価課題の生成、Outcomeごとの評価課題のexactly-once検証を削除した。Tag\n/ Outcomeは分類・前提・関連のmetadataとする。仕様・計画・作業定義も同じ方針へ更新した。\n\n各ProblemのpresentationUnitIdを一意に保ち、directProblemIdsに読む順序を固定する。problemIdsは自身と子孫の主配置のcoverageとして導出し、範囲外の関連参照はrelatedProblemIdsに分離する。一般技法を直接扱う問題の自然な配置が親節の場合はそこに残し、葉へ形式的に押し込まない。\n\nUnitは前提DAGを満たすtopological\norderとし、既存の基礎→応用rankを同順位比較に使う。Problemは必要技能の前提閉包の真部分集合を先行させ、同時に置ける場合は解法の基本性、前提の深さ、技能数・複合性、代表順位、安定IDで決める。独立した難易度評価は未収集のためcontest番号・出題枠で代用しない。順序とcoverageを生成元・canonical\nprojectionの両方で検証する。\n\nUnit本文は概念とアルゴリズムの通常の概説とし、HLDの分解・light辺数・path\nqueryの計算量などを記述する。各Problem固有のauthoring\nunitとfull解説原則を維持し、全文執筆と公開切替は後続taskのままとする。\n\n## 数学・分類の修正\n\n1. ABC301 Fは禁止部分列を完成しない状態を足す。補集合を答えにしない。\n2. ABC215 Hの実行可能性は全Sで判定するが、最小破壊数と最小集合族はg(S)>0に制限する。\n3. 通常畳み込みはABC291 Gの反転相関から理解できる説明を残し、ABC265\n   Exを数ゲーム・XOR変換を併用する複合問題として整理する。\n4. ABC348 Gの単調な最適添字はM[i,k]=x[i-k]+y[k]のkであり、i-kではない。ABC305\n   ExのMonge性はAliens復元を支える凸性へ接続する。ABC217\n   Gは係数選択ではなく集合分割の状態設計へ配置する。整数解・係数の概説にはABC340 F・ABC234\n   Fの直接的な式を用いる。\n5. LGVと行列木定理を別Outcomeとし、BESTの前提は行列木側だけにする。\n6. 確率分布・到達確率、期待値方程式、観測後の行動最適化を別Outcomeにする。ABC300\n   Eの生成元も到達確率へ修正する。\n7. Euclid型床和を商一定区間とは別Outcomeにし、正規化・格子点転置・負係数を扱う。\n8. ABC465 Fは10進6軸の多次元累積和＋包除へ配置し、二進部分集合ゼータ変換との違いを明記する。\n9. ABC257 Exは凸境界の主分類を保ち、交差イベントによる順序更新を補助Outcomeへ追加する。\n\n197 Tag・204 Outcome・220 Unit・868\nProblem。既存IDを維持しつつ、LGV・確率分布・行動最適化・Euclid型床和の4\nOutcomeを追加した。変更した入力からproposed buildを再生成し、検査後に受理・materializeする。\n\n## 数学的検算\n\nPythonによる独立な小規模計算で以下を確認した。\n\n- ABC301 F: DD??Sの52²通りを禁止部分列の定義で全列挙し、676。\n- ABC215 H:\n  2品種、在庫各1〜3、3個の注文の許可集合全通り、計576入力。個体削除＋割当全探索による最小個数・選び方が、g(S)>0のHall最小余裕＋Möbius反転と一致。\n- floor_sum: n=0〜12、m=1〜13、a,b=−15〜15の162,409入力で、転置再帰と直接和が一致。\n- ABC348\n  G: 凹なxと任意のyによる3,000入力で、正しい列添字を使う分割統治の行最大位置が二次時間の直接計算と一致。\n- ABC291 G: 長さ1〜6のbinary列対5,460組で、畳み込みのN−1+s係数と巡回相関が一致。\n- ABC216 H: K=2,N=2,x=(0,1),y=(1,2)の非衝突経路族全列挙が行列式3と一致。\n\nこれは修正した導出の検算であり、全868問の独立解答検証や後続の本文執筆の完了を表すものではない。",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-08T13:23:02.761Z"
+      "reviewedAt": "2026-09-09T17:04:36.563Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -375,6 +379,7 @@
       "outcome-count-euler-circuits-by-best",
       "outcome-count-implicit-binary-tree-layers",
       "outcome-count-labeled-structures-by-components",
+      "outcome-count-nonintersecting-paths-by-lgv",
       "outcome-count-orbits-by-fixed-points",
       "outcome-count-prefix-constrained-objects",
       "outcome-count-through-cyclic-exponents",
@@ -461,6 +466,7 @@
       "outcome-optimize-path-matching-by-contraction",
       "outcome-optimize-poset-antichain-by-dilworth",
       "outcome-optimize-ratio-by-parametric-search",
+      "outcome-optimize-stochastic-actions",
       "outcome-optimize-tree-order-by-cluster-contraction",
       "outcome-optimize-univariate-convex-function",
       "outcome-optimize-weighted-matroid-basis",
@@ -471,6 +477,7 @@
       "outcome-persist-data-structure-versions",
       "outcome-precompute-directional-grid-effects",
       "outcome-process-dag-in-topological-order",
+      "outcome-propagate-probability-distribution",
       "outcome-propagate-static-graph-potentials",
       "outcome-prove-and-search-threshold",
       "outcome-prove-greedy-order",
@@ -509,6 +516,7 @@
       "outcome-solve-weighted-bipartite-matching",
       "outcome-split-enumeration-space",
       "outcome-stabilize-unbounded-knapsack-by-best-density",
+      "outcome-sum-affine-floors-by-euclid",
       "outcome-sum-multiplicative-function-by-min25-sieve",
       "outcome-sweep-connectivity-by-kruskal-threshold",
       "outcome-test-linear-matroid-intersection-rank",
@@ -524,12 +532,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "# PR #63 レビュー指摘への修正根拠\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5585405010\n\n作業主体はCodex。Fu-Lの「レビューコメントを修正してpushする」という指示に基づき、入力レコード、体系、例題選定、生成教材を修正した。以下は改訂の根拠と実施した検証の記録であり、人間が改訂後の全文を独立に再査読したという記録ではない。\n\n| 指摘 | 修正 |\n| --- | --- |\n| 1 | ABC238 Gを全prefixで出現位相を共有する周期符号化として説明。群準同型と区別し、固定queryの衝突確率と全queryのunion boundを明記。 |\n| 2 | Aliens trickの定義・Outcomeへ双対ギャップなしの証明を追加。離散凸性、支持傾き、個数tie-breakの役割と反例を分離。 |\n| 3 | automaton DPは禁止遷移を除外し、終了後の受理状態を集計。回避と全パターン充足を区別。 |\n| 4 | ABC219 Eを有界全探索へ移し、部分集合DPのガイドをABC232 Fへ変更。ABC377 Eはfunctional graphのサイクル分解へ移動。 |\n| 5 | Frobeniusを標数pの二項係数消滅とシフト演算の反復高速化へ再定義。拡大体の前提を除き、run数の二つの上界を追加。既存IDは参照の安定性のため維持。 |\n| 6 | 要素保持併合の倍増、setの消滅・生存への課金、分割の半減を区別。ABC329 Fの入力レコード内の誤った証明も修正。 |\n| 7 | ABC250 Gは初日の価格一個で初期化し、比較後にだけ挿入する手順へ統一。 |\n| 8 | BEST定理は使用頂点上の余因子を取る。自己ループ、空行列式、区別した補助辺を固定して切る対応を明示。 |\n| 9 | 有限minimax、Conwayの数ゲーム、循環minimaxを別Tag・Outcome・Unitへ分割。ABC265 Exの数成分、ABC413 Fの後退解析も対応する技能へ配置。 |\n| 10 | heavy path多項式DPとHLRecDPを分割。前者に畳み込み、後者に資源DPを接続し、再帰の意味と計算量を区別。 |\n| 11 | Stern–Brocot祖先経路と分母制約付き近似を分割。近似のガイドはABC333 G。 |\n| 12 | ABC280 Fを静的potentialへ移し、weighted DSUはABC328 Fをガイドに採用。親辺差、圧縮、根の併合符号を導出。 |\n| 13 | 全200 Outcomeのガイドを明示選定表へ固定。導入はABC214 Eのモデル変換部分、列fingerprintはABC331 Fのhash結合部分を切り出し、未習の全解法を導入の手順にしない。 |\n| 14 | binary Trieの導入をABC425 Gの単一XOR最小queryへ変更し、閾値以下個数の分岐も説明。ABC254 Exの祖先matching、ABC281 FのXOR minimaxを別技能へ分割。 |\n| 15 | ABC218 Hをpath matching縮約へ配置。ABC464 Gとの符号反転、個数固定、端の辺の処理を比較。 |\n| 16 | ABC310 Exのコンボ生成を固有の前処理とし、その後を大容量unbounded knapsackへ配置。ABC415 Gとの容量固定・目標価値固定の違いを比較。 |\n\n数学的な疑義は、コメントで指定された公式解説と入力レコードの根拠を照合し、上の適用条件・証明を再構成した。全868問の解説を独立に再検証したものではない。\n\n独立な小規模全探索との比較:\n\n- ABC250 G: 長さ1〜8、各価格1〜4の87,380列を、株数を状態とする厳密DPと比較して一致。別途 `[1,2,100]` の99も確認。\n- path matching: 長さ1〜7、重み−2〜2の97,655列で、縮約により得た全cardinalityの最小値が非隣接部分集合の全探索と一致。\n- ABC336 G: 長さ4〜11の全binary列を16種類のsubstring頻度で集約。3,151種類の頻度入力で、使用頂点・補助辺を含むBEST計数が列挙数と一致。\n\nこの比較は教材の手順を独立に実装した検算であり、問題解答の公開・T058の全到達確認完了を意味しない。体系と教材の機械検証は既存の契約テスト、materializationのbyte一致、verify:fastで行う。",
+    "rationale": "# PR #63 レビュー修正の根拠\n\n対象:\n\n- https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5601163308\n- https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5605425073\n\n作業主体はCodex。Fu-Lの修正・push指示に基づく確認記録であり、人間による独立再査読を表さない。\n\n## 全問題解説集への整理\n\n新しいコメントを優先し、Guide /\nTransfer選定表、役割付きの例・評価課題の生成、Outcomeごとの評価課題のexactly-once検証を削除した。Tag\n/ Outcomeは分類・前提・関連のmetadataとする。仕様・計画・作業定義も同じ方針へ更新した。\n\n各ProblemのpresentationUnitIdを一意に保ち、directProblemIdsに読む順序を固定する。problemIdsは自身と子孫の主配置のcoverageとして導出し、範囲外の関連参照はrelatedProblemIdsに分離する。一般技法を直接扱う問題の自然な配置が親節の場合はそこに残し、葉へ形式的に押し込まない。\n\nUnitは前提DAGを満たすtopological\norderとし、既存の基礎→応用rankを同順位比較に使う。Problemは必要技能の前提閉包の真部分集合を先行させ、同時に置ける場合は解法の基本性、前提の深さ、技能数・複合性、代表順位、安定IDで決める。独立した難易度評価は未収集のためcontest番号・出題枠で代用しない。順序とcoverageを生成元・canonical\nprojectionの両方で検証する。\n\nUnit本文は概念とアルゴリズムの通常の概説とし、HLDの分解・light辺数・path\nqueryの計算量などを記述する。各Problem固有のauthoring\nunitとfull解説原則を維持し、全文執筆と公開切替は後続taskのままとする。\n\n## 数学・分類の修正\n\n1. ABC301 Fは禁止部分列を完成しない状態を足す。補集合を答えにしない。\n2. ABC215 Hの実行可能性は全Sで判定するが、最小破壊数と最小集合族はg(S)>0に制限する。\n3. 通常畳み込みはABC291 Gの反転相関から理解できる説明を残し、ABC265\n   Exを数ゲーム・XOR変換を併用する複合問題として整理する。\n4. ABC348 Gの単調な最適添字はM[i,k]=x[i-k]+y[k]のkであり、i-kではない。ABC305\n   ExのMonge性はAliens復元を支える凸性へ接続する。ABC217\n   Gは係数選択ではなく集合分割の状態設計へ配置する。整数解・係数の概説にはABC340 F・ABC234\n   Fの直接的な式を用いる。\n5. LGVと行列木定理を別Outcomeとし、BESTの前提は行列木側だけにする。\n6. 確率分布・到達確率、期待値方程式、観測後の行動最適化を別Outcomeにする。ABC300\n   Eの生成元も到達確率へ修正する。\n7. Euclid型床和を商一定区間とは別Outcomeにし、正規化・格子点転置・負係数を扱う。\n8. ABC465 Fは10進6軸の多次元累積和＋包除へ配置し、二進部分集合ゼータ変換との違いを明記する。\n9. ABC257 Exは凸境界の主分類を保ち、交差イベントによる順序更新を補助Outcomeへ追加する。\n\n197 Tag・204 Outcome・220 Unit・868\nProblem。既存IDを維持しつつ、LGV・確率分布・行動最適化・Euclid型床和の4\nOutcomeを追加した。変更した入力からproposed buildを再生成し、検査後に受理・materializeする。\n\n## 数学的検算\n\nPythonによる独立な小規模計算で以下を確認した。\n\n- ABC301 F: DD??Sの52²通りを禁止部分列の定義で全列挙し、676。\n- ABC215 H:\n  2品種、在庫各1〜3、3個の注文の許可集合全通り、計576入力。個体削除＋割当全探索による最小個数・選び方が、g(S)>0のHall最小余裕＋Möbius反転と一致。\n- floor_sum: n=0〜12、m=1〜13、a,b=−15〜15の162,409入力で、転置再帰と直接和が一致。\n- ABC348\n  G: 凹なxと任意のyによる3,000入力で、正しい列添字を使う分割統治の行最大位置が二次時間の直接計算と一致。\n- ABC291 G: 長さ1〜6のbinary列対5,460組で、畳み込みのN−1+s係数と巡回相関が一致。\n- ABC216 H: K=2,N=2,x=(0,1),y=(1,2)の非衝突経路族全列挙が行列式3と一致。\n\nこれは修正した導出の検算であり、全868問の独立解答検証や後続の本文執筆の完了を表すものではない。",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-08T13:23:02.761Z"
+    "confirmedAt": "2026-09-09T17:04:36.563Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-08T13:23:02.761Z",
-  "evidenceDigest": "743f644c1f9c6de52d3ded38524c733cebb6cb0dd033e7b294489bd42a878332"
+  "generatedAt": "2026-09-09T17:04:36.563Z",
+  "evidenceDigest": "482130d40da9ef9a8a4d8f146c8dff3b15d7f76bc68cf9a2e96acbd246c40cfb"
 }

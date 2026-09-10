@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50",
-    "acceptedAt": "2026-09-08T13:23:02.761Z"
+    "digest": "9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa",
+    "acceptedAt": "2026-09-09T17:04:36.563Z"
   },
   "decisionTable": {
     "path": "src/content/policies/problem-placement.json",
@@ -3771,7 +3771,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「Hall の定理で最小余裕を品種部分集合上の f(S)−g(S) に変換し、subset zeta・Möbius 変換で最小個数と選び方を集約する。」、解法への接続「注文充足を Hall の部分集合不等式へ移し、許可マスクの重みを subset zeta 変換して最小欠損を求め、最小集合族への包含を Möbius・superset zeta 変換で数える。」、学習成果「大口注文の充足を Hall の最小余裕へ変換し、部分集合変換で最小破壊数とその個体選択数を求められる。」を照合し、tag-bipartite-matching-hall / outcome-characterize-bipartite-feasibility-by-hall をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-subset-zeta-mobius-transform; 補助Outcome=outcome-apply-subset-zeta-mobius-transform; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-subset-zeta-mobius-transform / outcome-apply-subset-zeta-mobius-transform を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「Hall の定理で最小余裕を品種部分集合上の f(S)−g(S) に変換し、subset zeta・Möbius 変換で最小個数と選び方を集約する。」、解法への接続「許可マスク別注文数をsubset zeta変換して実際の注文数g(S)を求める。全SのHall条件で実行可能性を判定し、不可能なら(X,Y)=(0,1)。可能ならg(S)>0に限った最小余裕dと集合族F={S:g(S)>0かつf(S)−g(S)=d}を作る。X=d+1とし、C(f(S),X)のMöbius反転で台集合がちょうどSの個体選択数h(S)を求める。Fのsuperset zeta変換が正のSについてh(S)を一度ずつ加える。」、学習成果「大口注文の充足を Hall の最小余裕へ変換し、部分集合変換で最小破壊数とその個体選択数を求められる。」を照合し、tag-bipartite-matching-hall / outcome-characterize-bipartite-feasibility-by-hall をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-subset-zeta-mobius-transform; 補助Outcome=outcome-apply-subset-zeta-mobius-transform; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-subset-zeta-mobius-transform / outcome-apply-subset-zeta-mobius-transform を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -4784,7 +4784,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「固定した昇順終点への非交差パス数を LGV 行列式で表し、終点座標の走査と始点集合の bit DP で全行列式展開を同時に合計する。」、解法への接続「衝突回避を時間 DAG の頂点非共有パスへ移し、LGV 行列式を終点座標順に展開しながら、選択済み始点マスクと転倒数符号を持つ subset DP で全終点列を合算する。」、学習成果「複数ランダム歩行の非衝突確率を、LGV 行列式と終点走査付き subset DP により数え上げられる。」を照合し、tag-determinant-counting / outcome-count-combinatorial-objects-by-determinant をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-subset-bitmask-dp; 補助Outcome=outcome-enumerate-subset-state-space; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-subset-bitmask-dp / outcome-enumerate-subset-state-space を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「固定した昇順終点への非交差パス数を LGV 行列式で表し、終点座標の走査と始点集合の bit DP で全行列式展開を同時に合計する。」、解法への接続「衝突回避を時間 DAG の頂点非共有パスへ移し、LGV 行列式を終点座標順に展開しながら、選択済み始点マスクと転倒数符号を持つ subset DP で全終点列を合算する。」、学習成果「複数ランダム歩行の非衝突確率を、LGV 行列式と終点走査付き subset DP により数え上げられる。」を照合し、tag-determinant-counting / outcome-count-nonintersecting-paths-by-lgv をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-subset-bitmask-dp; 補助Outcome=outcome-enumerate-subset-state-space; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-subset-bitmask-dp / outcome-enumerate-subset-state-space を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -4795,7 +4795,7 @@
         "tag-combinatorial-coefficients",
         "tag-subset-bitmask-dp"
       ],
-      "primaryOutcomeId": "outcome-count-combinatorial-objects-by-determinant",
+      "primaryOutcomeId": "outcome-count-nonintersecting-paths-by-lgv",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-enumerate-subset-state-space",
@@ -5505,21 +5505,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「dp[i][j] を先頭 i 人をちょうど j 個のグループへ分ける方法数とし、人 i の所属で遷移する。」、解法への接続「dp[i][j]=dp[i-1][j-1]+(j-floor((i-1)/M))dp[i-1][j] を法 998244353 で計算し、i=N の j=1..N を順に出力する。」、学習成果「属性衝突を伴うラベルなし集合分割を、禁止グループ数が状態詳細に依存しない順序へ並べて二次元 DP に落とせる。」を照合し、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「dp[i][j] を先頭 i 人をちょうど j 個のグループへ分ける方法数とし、人 i の所属で遷移する。」、解法への接続「dp[i][j]=dp[i-1][j-1]+(j-floor((i-1)/M))dp[i-1][j] を法 998244353 で計算し、i=N の j=1..N を順に出力する。」、学習成果「属性衝突を伴うラベルなし集合分割を、禁止グループ数が状態詳細に依存しない順序へ並べて二次元 DP に落とせる。」を照合し、tag-dp-state-equivalence / outcome-design-minimal-sufficient-state をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-combinatorial-coefficients"
+        "tag-dp-state-equivalence"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-formulate-combinatorial-coefficients",
+      "primaryOutcomeId": "outcome-design-minimal-sufficient-state",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
-        "unit-combinatorial-coefficients"
+        "unit-dp-state-design"
       ],
-      "presentationUnitId": "unit-combinatorial-coefficients",
+      "presentationUnitId": "unit-dp-state-design",
       "adHocElements": [
         "ID 順に処理することで、余り i mod M の先行者数が floor((i-1)/M) という単純な式になり、その人たちが別群にいることまで条件自身が保証する。（再利用可能な見方: 属性衝突つき集合分割では、処理順を選んで「同属性の先行者数」と「それらが占める箱数」を一致させられないか調べる。）"
       ],
@@ -5538,7 +5538,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-combinatorial-coefficients"
+            "tag-dp-state-equivalence"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -5556,7 +5556,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-combinatorial-coefficients"
+            "tag-dp-state-equivalence"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -5574,7 +5574,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-combinatorial-coefficients"
+            "tag-dp-state-equivalence"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         }
@@ -14162,7 +14162,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各単位区間で、x以上となる変数の個数分布を係数がxの多項式であるDPとして作り、少なくともK個となる確率多項式を区間積分する。」、解法への接続「a=0,…,99ごとに各p_i(x)の一次多項式を作り、成功個数DPを多項式として更新する。j≥Kの多項式を合計して[a,a+1]で積分し、全区間の値を法998244353で加える。」、学習成果「連続な順位統計量の期待値をtail確率と区分多項式DPへ変換し、有理数の剰余として厳密に積分できる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各単位区間で、x以上となる変数の個数分布を係数がxの多項式であるDPとして作り、少なくともK個となる確率多項式を区間積分する。」、解法への接続「a=0,…,99ごとに各p_i(x)の一次多項式を作り、成功個数DPを多項式として更新する。j≥Kの多項式を合計して[a,a+1]で積分し、全区間の値を法998244353で加える。」、学習成果「連続な順位統計量の期待値をtail確率と区分多項式DPへ変換し、有理数の剰余として厳密に積分できる。」を照合し、tag-stochastic-expectation-dp / outcome-propagate-probability-distribution をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -14170,7 +14170,7 @@
         "tag-stochastic-expectation-dp"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-propagate-probability-distribution",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
@@ -43211,7 +43211,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=curated_semantic_override; 選択理由: K個和の候補を線形評価の上側凸境界に限定し、支持方向のevent順に走査する。; 補助Tag=tag-event-sweep; 補助Outcome=outcome-linearize-events; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-event-sweep / outcome-linearize-events を補助技能として使う。",
+      "rationale": "決定種別=curated_semantic_override; 選択理由: K個和の候補を線形評価の上側凸境界に限定し、支持方向のevent順に走査する。; 補助Tag=tag-kinetic-order-maintenance; 補助Outcome=outcome-maintain-order-through-crossing-events; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-kinetic-order-maintenance / outcome-maintain-order-through-crossing-events を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -43219,16 +43219,16 @@
         "tag-convex-boundary-hull"
       ],
       "supportingTagIds": [
-        "tag-event-sweep"
+        "tag-kinetic-order-maintenance"
       ],
       "primaryOutcomeId": "outcome-restrict-geometric-candidates-to-boundary",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-linearize-events"
+        "outcome-maintain-order-through-crossing-events"
       ],
       "learningUnitIds": [
         "unit-convex-boundary-hull",
-        "unit-event-sweep"
+        "unit-kinetic-order-maintenance"
       ],
       "presentationUnitId": "unit-convex-boundary-hull",
       "adHocElements": [
@@ -43283,7 +43283,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-event-sweep"
+            "tag-kinetic-order-maintenance"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -43335,7 +43335,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-event-sweep"
+            "tag-kinetic-order-maintenance"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -51684,7 +51684,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「f(n)を残りn回での最適期待値とし、f(n)=Σ_{x=1}^6 max(x,f(n−1))/6 を小さいnから計算する。」、解法への接続「有限期限optimal stoppingをBellman value iterationにし、観測後のstop payoffとcontinuation valueの最大を取る。」、学習成果「出目を見て継続可否を選ぶサイコロゲームの最適期待値を、残り手数DPで求められる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「f(n)を残りn回での最適期待値とし、f(n)=Σ_{x=1}^6 max(x,f(n−1))/6 を小さいnから計算する。」、解法への接続「有限期限optimal stoppingをBellman value iterationにし、観測後のstop payoffとcontinuation valueの最大を取る。」、学習成果「出目を見て継続可否を選ぶサイコロゲームの最適期待値を、残り手数DPで求められる。」を照合し、tag-stochastic-expectation-dp / outcome-optimize-stochastic-actions をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -51692,7 +51692,7 @@
         "tag-stochastic-expectation-dp"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-optimize-stochastic-actions",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
@@ -57093,7 +57093,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「一つ前のaccess hourから次のaccess hourへの24×24 transition matrixを作り、binary exponentiationでN−1回遷移する。」、解法への接続「periodic Bernoulli processの無限待ち時間を一accessごとのfinite Markov transitionへ圧縮し、matrix exponentiationで巨大なaccess countを進める。」、学習成果「Nが10^18でもN-th accessを行うpersonの確率を24-state matrixで求められる。」を照合し、tag-linear-recurrence-matrix / outcome-accelerate-fixed-linear-transition をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。; 補助Tag=tag-stochastic-expectation-dp; 補助Outcome=outcome-solve-stochastic-recurrence; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「一つ前のaccess hourから次のaccess hourへの24×24 transition matrixを作り、binary exponentiationでN−1回遷移する。」、解法への接続「periodic Bernoulli processの無限待ち時間を一accessごとのfinite Markov transitionへ圧縮し、matrix exponentiationで巨大なaccess countを進める。」、学習成果「Nが10^18でもN-th accessを行うpersonの確率を24-state matrixで求められる。」を照合し、tag-linear-recurrence-matrix / outcome-accelerate-fixed-linear-transition をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。; 補助Tag=tag-stochastic-expectation-dp; 補助Outcome=outcome-propagate-probability-distribution; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-stochastic-expectation-dp / outcome-propagate-probability-distribution を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -57108,7 +57108,7 @@
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-compute-in-modular-arithmetic",
-        "outcome-solve-stochastic-recurrence"
+        "outcome-propagate-probability-distribution"
       ],
       "learningUnitIds": [
         "unit-dp-stochastic",
@@ -60161,7 +60161,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「回数 i と勝利前の位置 j の確率 DP を行い、各出目へ 1/M ずつ遷移し、N に着いた確率を回数ごとに答えへ加える。」、解法への接続「dp[0][0]=1 とし、i=0,…,K-1 で j<N と d=1,…,M を走査する。t=j+d が N 以下なら t、超えるなら 2N-t へ invM 倍を配り、t=N の分だけ答えに加える。」、学習成果「反射するすごろくの K 回以内勝利確率を、終了状態を分離した位置確率 DP で計算できる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「回数 i と勝利前の位置 j の確率 DP を行い、各出目へ 1/M ずつ遷移し、N に着いた確率を回数ごとに答えへ加える。」、解法への接続「dp[0][0]=1 とし、i=0,…,K-1 で j<N と d=1,…,M を走査する。t=j+d が N 以下なら t、超えるなら 2N-t へ invM 倍を配り、t=N の分だけ答えに加える。」、学習成果「反射するすごろくの K 回以内勝利確率を、終了状態を分離した位置確率 DP で計算できる。」を照合し、tag-stochastic-expectation-dp / outcome-propagate-probability-distribution をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -60171,7 +60171,7 @@
       "supportingTagIds": [
         "tag-modular-arithmetic"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-propagate-probability-distribution",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-compute-in-modular-arithmetic"
@@ -63256,7 +63256,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「random walkのprefixに対し、二つのordered markerが未選択/選択済みかを表す4状態をvertexごとに持ち、C=0到着時にmarkerを選ぶ遷移を加える。」、解法への接続「初期vertex1でmarker00の重み1から始める。各stepでcurrent vertexのdeg逆元を掛けて隣接vertexへ配り、到着先C=0なら各未選択markerについて現在時刻を選ぶ/選ばない遷移を行う。C=1到着後のstate11を答えへ加え、K回繰り返す。」、学習成果「level二乗報酬をmarker付きrandom-walk DPへ変換し、level次元なしで期待総額を計算できる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「random walkのprefixに対し、二つのordered markerが未選択/選択済みかを表す4状態をvertexごとに持ち、C=0到着時にmarkerを選ぶ遷移を加える。」、解法への接続「初期vertex1でmarker00の重み1から始める。各stepでcurrent vertexのdeg逆元を掛けて隣接vertexへ配り、到着先C=0なら各未選択markerについて現在時刻を選ぶ/選ばない遷移を行う。C=1到着後のstate11を答えへ加え、K回繰り返す。」、学習成果「level二乗報酬をmarker付きrandom-walk DPへ変換し、level次元なしで期待総額を計算できる。」を照合し、tag-stochastic-expectation-dp / outcome-propagate-probability-distribution をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -63267,7 +63267,7 @@
         "tag-contribution-reordering",
         "tag-modular-arithmetic"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-propagate-probability-distribution",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-compute-in-modular-arithmetic",
@@ -69504,7 +69504,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各bitで1_{bit k(A)=1}=floor((A+2^k)/2^{k+1})−floor(A/2^{k+1})を使い、合同等差数列上の二つのfloor和をACL floor_sumで求める。」、解法への接続「最小正のA=R+tMと最大≤Nからt rangeを求める。各kでm=2^{k+1}とし、shift後b=R+t_0Mについてfloor_sum(n,m,M,b+2^k)−floor_sum(n,m,M,b)をanswerへ足す。」、学習成果「合同類に属する1…Nのpopcount総和を、bit indicatorのfloor差とfloor_sumで高速に求められる。」を照合し、tag-integer-boundary-blocks / outcome-partition-integer-parameter-ranges をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各bitで1_{bit k(A)=1}=floor((A+2^k)/2^{k+1})−floor(A/2^{k+1})を使い、合同等差数列上の二つのfloor和をACL floor_sumで求める。」、解法への接続「最小正のA=R+tMと最大≤Nからt rangeを求める。各kでm=2^{k+1}とし、shift後b=R+t_0Mについてfloor_sum(n,m,M,b+2^k)−floor_sum(n,m,M,b)をanswerへ足す。」、学習成果「合同類に属する1…Nのpopcount総和を、bit indicatorのfloor差とfloor_sumで高速に求められる。」を照合し、tag-integer-boundary-blocks / outcome-sum-affine-floors-by-euclid をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -69514,7 +69514,7 @@
       "supportingTagIds": [
         "tag-contribution-reordering"
       ],
-      "primaryOutcomeId": "outcome-partition-integer-parameter-ranges",
+      "primaryOutcomeId": "outcome-sum-affine-floors-by-euclid",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-reorder-counting-contributions"
@@ -83940,7 +83940,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「手番付き二次元期待値DP」、解法への接続「dp[i][j][turn]をi,j降順に計算し、高橋手番はk=1..P、青木手番はk=1..Qの遷移平均を法逆元で取る。dp[A][B][0]を出す。」、学習成果「高橋が先にNへ着く確率を求められる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「手番付き二次元期待値DP」、解法への接続「dp[i][j][turn]をi,j降順に計算し、高橋手番はk=1..P、青木手番はk=1..Qの遷移平均を法逆元で取る。dp[A][B][0]を出す。」、学習成果「高橋が先にNへ着く確率を求められる。」を照合し、tag-stochastic-expectation-dp / outcome-propagate-probability-distribution をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -83950,7 +83950,7 @@
       "supportingTagIds": [
         "tag-modular-arithmetic"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-propagate-probability-distribution",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-compute-in-modular-arithmetic"
@@ -85603,7 +85603,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「2,3,5-smooth状態だけのメモ化再帰」、解法への接続「dp(N)=1、n>Nは0とし、未計算nを2..6倍先へ再帰して和/5を返す。dp(1)を法998244353で出力する。」、学習成果「最終的に値がちょうどNになる確率を求められる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「2,3,5-smooth状態だけのメモ化再帰」、解法への接続「dp(N)=1、n>Nは0とし、未計算nを2..6倍先へ再帰して和/5を返す。dp(1)を法998244353で出力する。」、学習成果「最終的に値がちょうどNになる確率を求められる。」を照合し、tag-stochastic-expectation-dp / outcome-propagate-probability-distribution をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -85611,7 +85611,7 @@
         "tag-stochastic-expectation-dp"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-propagate-probability-distribution",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
@@ -86900,7 +86900,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「大文字種類数を含む29状態prefix DP」、解法への接続「Sのprefix固定大文字種類数を前計算し、29状態の個数DPを左から更新する。固定文字は一遷移、?は52文字を種類別係数でまとめ、最終的にDDoS型を含まない状態を全52^qから引く。」、学習成果「?を埋めてDDoS型文字列となる方法数を求められる。」を照合し、tag-finite-pattern-automaton / outcome-build-finite-string-automaton をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。; 補助Tag=tag-state-normalization; 補助Outcome=outcome-normalize-equivalent-states; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-state-normalization / outcome-normalize-equivalent-states を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「大文字種類数を含む29状態prefix DP」、解法への接続「固定prefixの大文字情報と29状態の個数DPを左から更新する。?の52通りを種類別係数で集約し、同一大文字2回→小文字→大文字という禁止部分列を完成させる遷移を除外する。最後に禁止部分列が未完成の全状態を足す。全52^qから引かない。」、学習成果「?を埋め、DDoS型の部分列を含まない文字列の個数を求められる。」を照合し、tag-finite-pattern-automaton / outcome-build-finite-string-automaton をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。; 補助Tag=tag-state-normalization; 補助Outcome=outcome-normalize-equivalent-states; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-state-normalization / outcome-normalize-equivalent-states を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -90029,17 +90029,14 @@
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-lagrangian-relaxation",
-        "tag-monge-optimization"
+        "tag-lagrangian-relaxation"
       ],
       "supportingTagIds": [
         "tag-greedy-exchange-order",
         "tag-interval-partition-dp"
       ],
       "primaryOutcomeId": "outcome-optimize-by-lagrangian-relaxation",
-      "additionalPrimaryOutcomeIds": [
-        "outcome-optimize-monge-transitions"
-      ],
+      "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-design-interval-split-dp",
         "outcome-prove-greedy-order"
@@ -90047,14 +90044,31 @@
       "learningUnitIds": [
         "unit-dp-sequence-interval",
         "unit-greedy-exchange",
-        "unit-lagrangian-relaxation",
-        "unit-monge-optimization"
+        "unit-lagrangian-relaxation"
       ],
-      "presentationUnitId": "unit-monge-optimization",
+      "presentationUnitId": "unit-lagrangian-relaxation",
       "adHocElements": [
         "求めるのはcost≤Xの最小DとそのDでのd(D)なので、convex sequence dそのものを全列挙せずsupporting-line queriesから交点を特定する。（再利用可能な見方: 個数別最適値がconvexなら、budgetとの最初の交点をLagrangian oracleの傾き情報から探せる。）"
       ],
       "claimDispositions": [
+        {
+          "claimRef": {
+            "problemId": "abc305-ex",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc305-editorial-6534-00b45bdb795c412a311d2d938a469f5c2f7c15e05d5c7d698c7b7da52d6e2d54",
+              "source-abc305-ex-problem-730ae4f7996eba3782f92a13c6c00df6cb84ff2c25a18bfbe74bb063308496d2"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-greedy-exchange-order"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+        },
         {
           "claimRef": {
             "problemId": "abc305-ex",
@@ -90069,8 +90083,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-lagrangian-relaxation",
-            "tag-monge-optimization"
+            "tag-lagrangian-relaxation"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -90106,28 +90119,9 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-lagrangian-relaxation",
-            "tag-monge-optimization"
+            "tag-lagrangian-relaxation"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc305-ex",
-            "claimPath": "/typicalTechniques/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc305-editorial-6534-00b45bdb795c412a311d2d938a469f5c2f7c15e05d5c7d698c7b7da52d6e2d54",
-              "source-abc305-ex-problem-730ae4f7996eba3782f92a13c6c00df6cb84ff2c25a18bfbe74bb063308496d2"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-greedy-exchange-order"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -95161,7 +95155,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「到達可能和集合の bitmask ごとの確率を持つ DP を行い、各出目による shift-or を遷移させる。」、解法への接続「初期 mask は bit0 のみ。各 i で全 mask と x=1..min(A_i,10) を走査し、next=mask|((mask<<x)&((1<<11)−1)) へ dp/A_i を加える。A_i>10 なら mask 自身へ (A_i−10)dp/A_i を加え、最後に bit10 が立つ確率を合計する。」、学習成果「巨大な出目空間を 2048 個の到達可能集合へ圧縮し、和10を作れる確率を O(N·2^11·11) で求められる。」を照合し、tag-subset-bitmask-dp / outcome-enumerate-subset-state-space をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。; 補助Tag=tag-stochastic-expectation-dp; 補助Outcome=outcome-solve-stochastic-recurrence; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「到達可能和集合の bitmask ごとの確率を持つ DP を行い、各出目による shift-or を遷移させる。」、解法への接続「初期 mask は bit0 のみ。各 i で全 mask と x=1..min(A_i,10) を走査し、next=mask|((mask<<x)&((1<<11)−1)) へ dp/A_i を加える。A_i>10 なら mask 自身へ (A_i−10)dp/A_i を加え、最後に bit10 が立つ確率を合計する。」、学習成果「巨大な出目空間を 2048 個の到達可能集合へ圧縮し、和10を作れる確率を O(N·2^11·11) で求められる。」を照合し、tag-subset-bitmask-dp / outcome-enumerate-subset-state-space をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。; 補助Tag=tag-stochastic-expectation-dp; 補助Outcome=outcome-propagate-probability-distribution; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-stochastic-expectation-dp / outcome-propagate-probability-distribution を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -95176,7 +95170,7 @@
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-compute-in-modular-arithmetic",
-        "outcome-solve-stochastic-recurrence"
+        "outcome-propagate-probability-distribution"
       ],
       "learningUnitIds": [
         "unit-dp-stochastic",
@@ -98451,7 +98445,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「a_i を sort して s(x)=Σmin(a_i,x) を区分線形化し、区間ごとの floor((αx+β)/N) の和を floor_sum で計算する。」、解法への接続「a を昇順 sort し prefix sum を作る。x の区間 [a_k,a_{k+1}) では s(x)=prefix[k]+(N−k)x と書く。各区間で floor(s(x)/N) の総和を ACL floor_sum へ渡し、y=0 の一通りも足す。最小値以前の重複する正規形は公式の境界どおり補正する。」、学習成果「到達状態を正規形 (x,y) へ全単射し、10^9 幅の x 総和を O(N log max a) の floor_sum へ圧縮できる。」を照合し、tag-state-normalization / outcome-normalize-equivalent-states をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-integer-boundary-blocks; 補助Outcome=outcome-partition-integer-parameter-ranges; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-integer-boundary-blocks / outcome-partition-integer-parameter-ranges を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「a_i を sort して s(x)=Σmin(a_i,x) を区分線形化し、区間ごとの floor((αx+β)/N) の和を floor_sum で計算する。」、解法への接続「a を昇順 sort し prefix sum を作る。x の区間 [a_k,a_{k+1}) では s(x)=prefix[k]+(N−k)x と書く。各区間で floor(s(x)/N) の総和を ACL floor_sum へ渡し、y=0 の一通りも足す。最小値以前の重複する正規形は公式の境界どおり補正する。」、学習成果「到達状態を正規形 (x,y) へ全単射し、10^9 幅の x 総和を O(N log max a) の floor_sum へ圧縮できる。」を照合し、tag-state-normalization / outcome-normalize-equivalent-states をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-integer-boundary-blocks; 補助Outcome=outcome-sum-affine-floors-by-euclid; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-integer-boundary-blocks / outcome-sum-affine-floors-by-euclid を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -98464,7 +98458,7 @@
       "primaryOutcomeId": "outcome-normalize-equivalent-states",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-partition-integer-parameter-ranges"
+        "outcome-sum-affine-floors-by-euclid"
       ],
       "learningUnitIds": [
         "unit-integer-boundary-blocks",
@@ -98699,7 +98693,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「0 出目を除いた条件付きルーレットへ期待コストを補正し、残り点数の後ろ向き DP で各状態の最良ルーレットを選ぶ。」、解法への接続「各 roulette から0を除き cost_i=C_i P_i/(P_i−Z_i) を作る。e[p]=0 (p≥M) とし p=M−1..0 の順に、全 roulette の cost_i+非0出目に対する e[min(M,p+s)] の平均を計算し最小を e[p] とする。e[0] を出力する。」、学習成果「adaptive な無限履歴戦略を点数だけの Bellman DP へ圧縮し、O(MΣP_i) で最小期待費用を計算できる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「0 出目を除いた条件付きルーレットへ期待コストを補正し、残り点数の後ろ向き DP で各状態の最良ルーレットを選ぶ。」、解法への接続「各 roulette から0を除き cost_i=C_i P_i/(P_i−Z_i) を作る。e[p]=0 (p≥M) とし p=M−1..0 の順に、全 roulette の cost_i+非0出目に対する e[min(M,p+s)] の平均を計算し最小を e[p] とする。e[0] を出力する。」、学習成果「adaptive な無限履歴戦略を点数だけの Bellman DP へ圧縮し、O(MΣP_i) で最小期待費用を計算できる。」を照合し、tag-stochastic-expectation-dp / outcome-optimize-stochastic-actions をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -98707,7 +98701,7 @@
         "tag-stochastic-expectation-dp"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-optimize-stochastic-actions",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
@@ -106717,7 +106711,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「切替確率p[0..X]をDPし、曲1がX+0.5を覆う開始時刻の確率を合計する。」、解法への接続「invN=N^{-1} mod 998244353を一度求め、p[0]=1とする。t=1..Xでsum=Σ_{k:T_k≤t}p[t-T_k]を計算しp[t]=sum·invNとする。l=max(0,X-T_1+1)からXまでのp[t]を足し、さらにinvNを掛けて曲1が選ばれる確率として出力する。」、学習成果「random playlistでX+0.5秒時点に曲1が再生中である確率を、切替時刻DPから求められる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「切替確率p[0..X]をDPし、曲1がX+0.5を覆う開始時刻の確率を合計する。」、解法への接続「invN=N^{-1} mod 998244353を一度求め、p[0]=1とする。t=1..Xでsum=Σ_{k:T_k≤t}p[t-T_k]を計算しp[t]=sum·invNとする。l=max(0,X-T_1+1)からXまでのp[t]を足し、さらにinvNを掛けて曲1が選ばれる確率として出力する。」、学習成果「random playlistでX+0.5秒時点に曲1が再生中である確率を、切替時刻DPから求められる。」を照合し、tag-stochastic-expectation-dp / outcome-propagate-probability-distribution をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -106727,7 +106721,7 @@
       "supportingTagIds": [
         "tag-modular-arithmetic"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-propagate-probability-distribution",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-compute-in-modular-arithmetic"
@@ -109564,7 +109558,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各indexへ到達する確率p_iをprefix sumで更新し、A_i p_iを加える。」、解法への接続「mod 998244353でinvN=N^{-1}を求め、pref=p_0=1、answer=0とする。i=1..Nでp_i=pref·invN、answer+=A_i·p_i、pref+=p_iと更新する。最後にanswerを正規化して出力する。」、学習成果「strictly increasing die processのexpected salaryを、各payment到達確率の線形DPで求められる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各indexへ到達する確率p_iをprefix sumで更新し、A_i p_iを加える。」、解法への接続「mod 998244353でinvN=N^{-1}を求め、pref=p_0=1、answer=0とする。i=1..Nでp_i=pref·invN、answer+=A_i·p_i、pref+=p_iと更新する。最後にanswerを正規化して出力する。」、学習成果「strictly increasing die processのexpected salaryを、各payment到達確率の線形DPで求められる。」を照合し、tag-stochastic-expectation-dp / outcome-propagate-probability-distribution をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -109575,7 +109569,7 @@
         "tag-contribution-reordering",
         "tag-modular-arithmetic"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-propagate-probability-distribution",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-compute-in-modular-arithmetic",
@@ -116286,7 +116280,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「人数iと先頭からの位置jを状態にする確率DPを、隣接j間の漸化式で高速化する」、解法への接続「dp[1][0]=1から人数を一人ずつ増やす。m人のnew[0]はdp[m-1]を逆順にpの冪で重み付けしp/(1-p^m)を掛けてO(m)で求める。その後j=0,…,m-2についてnew[j+1]=p(new[j]+dp[m-1][j])でrowを埋め、dp[N]を出力する。」、学習成果「各person iが最後の一人として残る確率をmod 998244353で全員分求められる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dp-transition-acceleration; 補助Outcome=outcome-factor-and-accelerate-transitions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dp-transition-acceleration / outcome-factor-and-accelerate-transitions を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「人数iと先頭からの位置jを状態にする確率DPを、隣接j間の漸化式で高速化する」、解法への接続「dp[1][0]=1から人数を一人ずつ増やす。m人のnew[0]はdp[m-1]を逆順にpの冪で重み付けしp/(1-p^m)を掛けてO(m)で求める。その後j=0,…,m-2についてnew[j+1]=p(new[j]+dp[m-1][j])でrowを埋め、dp[N]を出力する。」、学習成果「各person iが最後の一人として残る確率をmod 998244353で全員分求められる。」を照合し、tag-stochastic-expectation-dp / outcome-propagate-probability-distribution をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dp-transition-acceleration; 補助Outcome=outcome-factor-and-accelerate-transitions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dp-transition-acceleration / outcome-factor-and-accelerate-transitions を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -116297,7 +116291,7 @@
         "tag-dp-transition-acceleration",
         "tag-modular-arithmetic"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-propagate-probability-distribution",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-compute-in-modular-arithmetic",
@@ -121827,7 +121821,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「dealer分布をsliding-sum DPで求め、playerを逆順DPする」、解法への接続「p[0]=1からdealerがL未満のstateだけを展開し、difference arrayまたはsliding sumで各p[y]を求める。terminal y≥Lのprefix sumから全q[i]を作る。r[j]=0 for j>Nとしてi=N,…,0を走査し、次D個のr平均をwindow sumで得てr[i]を更新し、r[0]を出力する。」、学習成果「playerが各scoreで最適にstop/continueを選んだ時の勝率を求められる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dp-transition-acceleration; 補助Outcome=outcome-factor-and-accelerate-transitions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dp-transition-acceleration / outcome-factor-and-accelerate-transitions を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「dealer分布をsliding-sum DPで求め、playerを逆順DPする」、解法への接続「p[0]=1からdealerがL未満のstateだけを展開し、difference arrayまたはsliding sumで各p[y]を求める。terminal y≥Lのprefix sumから全q[i]を作る。r[j]=0 for j>Nとしてi=N,…,0を走査し、次D個のr平均をwindow sumで得てr[i]を更新し、r[0]を出力する。」、学習成果「playerが各scoreで最適にstop/continueを選んだ時の勝率を求められる。」を照合し、tag-stochastic-expectation-dp / outcome-optimize-stochastic-actions をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dp-transition-acceleration; 補助Outcome=outcome-factor-and-accelerate-transitions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dp-transition-acceleration / outcome-factor-and-accelerate-transitions を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -121837,7 +121831,7 @@
       "supportingTagIds": [
         "tag-dp-transition-acceleration"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-optimize-stochastic-actions",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-factor-and-accelerate-transitions"
@@ -126760,7 +126754,7 @@
       "supportingTagIds": [
         "tag-dp-state-equivalence"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-optimize-stochastic-actions",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-design-minimal-sufficient-state"
@@ -134332,7 +134326,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「黒球が先頭か否かの二状態確率をK回更新し、最後に位置番号の期待値へ戻す。」、解法への接続「p=1からK回、leave=2(N−1)/N²、enter=2/N²としてp←p(1−leave)+(1−p)enterを法上で更新する。最後に先頭以外の位置番号平均を用いて期待値を計算する。」、学習成果「巨大な位置集合を先頭・非先頭の二状態へ縮約し、K回後の期待位置を法上で計算できる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。; 補助Tag=tag-state-normalization; 補助Outcome=outcome-normalize-equivalent-states; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-state-normalization / outcome-normalize-equivalent-states を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「黒球が先頭か否かの二状態確率をK回更新し、最後に位置番号の期待値へ戻す。」、解法への接続「p=1からK回、leave=2(N−1)/N²、enter=2/N²としてp←p(1−leave)+(1−p)enterを法上で更新する。最後に先頭以外の位置番号平均を用いて期待値を計算する。」、学習成果「巨大な位置集合を先頭・非先頭の二状態へ縮約し、K回後の期待位置を法上で計算できる。」を照合し、tag-stochastic-expectation-dp / outcome-propagate-probability-distribution をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。; 補助Tag=tag-state-normalization; 補助Outcome=outcome-normalize-equivalent-states; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-state-normalization / outcome-normalize-equivalent-states を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -134343,7 +134337,7 @@
         "tag-modular-arithmetic",
         "tag-state-normalization"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-propagate-probability-distribution",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-compute-in-modular-arithmetic",
@@ -143866,7 +143860,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「傾き順に直線の下包絡線を構築し、各直線が最小となる整数 x 区間ごとに floor_sum で許される y の個数を加える。」、解法への接続「A_i/B_i の比較を交差積で行い、同傾き処理後に下包絡線と交点の切上げ x を求める。x∈[1,Xmax) と各有効区間の共通部分に対し floor_sum を適用して総和を得る。」、学習成果「半平面共通部分の格子点数を下包絡線と floor_sum に分解して高速に数えられる。」を照合し、tag-convex-hull-trick / outcome-optimize-by-line-envelope をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-integer-boundary-blocks; 補助Outcome=outcome-partition-integer-parameter-ranges; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-integer-boundary-blocks / outcome-partition-integer-parameter-ranges を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「傾き順に直線の下包絡線を構築し、各直線が最小となる整数 x 区間ごとに floor_sum で許される y の個数を加える。」、解法への接続「A_i/B_i の比較を交差積で行い、同傾き処理後に下包絡線と交点の切上げ x を求める。x∈[1,Xmax) と各有効区間の共通部分に対し floor_sum を適用して総和を得る。」、学習成果「半平面共通部分の格子点数を下包絡線と floor_sum に分解して高速に数えられる。」を照合し、tag-convex-hull-trick / outcome-optimize-by-line-envelope をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-integer-boundary-blocks; 補助Outcome=outcome-sum-affine-floors-by-euclid; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-integer-boundary-blocks / outcome-sum-affine-floors-by-euclid を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -143879,7 +143873,7 @@
       "primaryOutcomeId": "outcome-optimize-by-line-envelope",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-partition-integer-parameter-ranges"
+        "outcome-sum-affine-floors-by-euclid"
       ],
       "learningUnitIds": [
         "unit-integer-boundary-blocks",
@@ -164107,7 +164101,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「state(T,x)から未solve problemへの一回提出を選ぶ期待値DPを行う」、解法への接続「d[mask][x]を0で初期化しx=0..Xを昇順に、全mask・未solve i with C_i≤xについてp_i(S_i+d[mask|bit][x-C_i])+(1-p_i)d[mask][x-C_i]でmax更新する。d[0][X]を出す。」、学習成果「adaptiveな有料submission戦略の最大期待scoreを、solve集合×残金のBellman DPで求められる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-subset-bitmask-dp; 補助Outcome=outcome-enumerate-subset-state-space; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-subset-bitmask-dp / outcome-enumerate-subset-state-space を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「state(T,x)から未solve problemへの一回提出を選ぶ期待値DPを行う」、解法への接続「d[mask][x]を0で初期化しx=0..Xを昇順に、全mask・未solve i with C_i≤xについてp_i(S_i+d[mask|bit][x-C_i])+(1-p_i)d[mask][x-C_i]でmax更新する。d[0][X]を出す。」、学習成果「adaptiveな有料submission戦略の最大期待scoreを、solve集合×残金のBellman DPで求められる。」を照合し、tag-stochastic-expectation-dp / outcome-optimize-stochastic-actions をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-subset-bitmask-dp; 補助Outcome=outcome-enumerate-subset-state-space; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-subset-bitmask-dp / outcome-enumerate-subset-state-space を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -164117,7 +164111,7 @@
       "supportingTagIds": [
         "tag-subset-bitmask-dp"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-optimize-stochastic-actions",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-enumerate-subset-state-space"
@@ -164581,7 +164575,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「剰余積を一般化floor sum f_{p,q}の有限な線形結合へ変形してEuclid再帰で計算する」、解法への接続「必要ならB1,B2をswapする。剰余積展開のpolynomial項を閉形式で求め、各mixed項を一般化floor sumへ渡す。floor1·floor2は差cの恒等式でq=1,2の単独floor和へ置換し、全項を64/128 bit整数で合成する。」、学習成果「linear剰余二列の積和を、binary floor差恒等式と一般化floor sumで各case対数時間に求められる。」を照合し、tag-integer-boundary-blocks / outcome-partition-integer-parameter-ranges をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「剰余積を一般化floor sum f_{p,q}の有限な線形結合へ変形してEuclid再帰で計算する」、解法への接続「必要ならB1,B2をswapする。剰余積展開のpolynomial項を閉形式で求め、各mixed項を一般化floor sumへ渡す。floor1·floor2は差cの恒等式でq=1,2の単独floor和へ置換し、全項を64/128 bit整数で合成する。」、学習成果「linear剰余二列の積和を、binary floor差恒等式と一般化floor sumで各case対数時間に求められる。」を照合し、tag-integer-boundary-blocks / outcome-sum-affine-floors-by-euclid をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -164589,7 +164583,7 @@
         "tag-integer-boundary-blocks"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-partition-integer-parameter-ranges",
+      "primaryOutcomeId": "outcome-sum-affine-floors-by-euclid",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
@@ -165740,7 +165734,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「DP[t][k] を以後の最大勝率とし、各ターンの押下回数配分を正の部分数 n と合計 s の補助 DP で最適化する」、解法への接続「最終ターン後を k≥K なら 1、それ以外 0 で初期化する。各 t,k について h[n][s]=max_{c_1+…+c_n=s,c_i>0}ΣDP[t+1][min(K,k+c_i)] を正の c で更新し、max_n(h[n][M]+(N-n)DP[t+1][k])/N を DP[t][k] とする。」、学習成果「区別不能な N 個のボタンへの最適押下配分を M にだけ依存する補助 DP へ圧縮し、最大勝率を求められる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-state-normalization; 補助Outcome=outcome-normalize-equivalent-states; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-state-normalization / outcome-normalize-equivalent-states を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「DP[t][k] を以後の最大勝率とし、各ターンの押下回数配分を正の部分数 n と合計 s の補助 DP で最適化する」、解法への接続「最終ターン後を k≥K なら 1、それ以外 0 で初期化する。各 t,k について h[n][s]=max_{c_1+…+c_n=s,c_i>0}ΣDP[t+1][min(K,k+c_i)] を正の c で更新し、max_n(h[n][M]+(N-n)DP[t+1][k])/N を DP[t][k] とする。」、学習成果「区別不能な N 個のボタンへの最適押下配分を M にだけ依存する補助 DP へ圧縮し、最大勝率を求められる。」を照合し、tag-stochastic-expectation-dp / outcome-optimize-stochastic-actions をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-state-normalization; 補助Outcome=outcome-normalize-equivalent-states; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-state-normalization / outcome-normalize-equivalent-states を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -165750,7 +165744,7 @@
       "supportingTagIds": [
         "tag-state-normalization"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-optimize-stochastic-actions",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-normalize-equivalent-states"
@@ -178994,7 +178988,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「f(k,S)のmemoized expectation DP」、解法への接続「held multisetをsort tupleでcanonical化し、f(1,S)は残diceを一回振ったscore平均、f(k,S)は各result tupleに対するkeep subset最大の平均としてmemoする。答えはf(3,empty)。」、学習成果「最適なkeep判断をした時の最終score期待値を求められる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-state-normalization; 補助Outcome=outcome-normalize-equivalent-states; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-state-normalization / outcome-normalize-equivalent-states を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「f(k,S)のmemoized expectation DP」、解法への接続「held multisetをsort tupleでcanonical化し、f(1,S)は残diceを一回振ったscore平均、f(k,S)は各result tupleに対するkeep subset最大の平均としてmemoする。答えはf(3,empty)。」、学習成果「最適なkeep判断をした時の最終score期待値を求められる。」を照合し、tag-stochastic-expectation-dp / outcome-optimize-stochastic-actions をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-state-normalization; 補助Outcome=outcome-normalize-equivalent-states; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-state-normalization / outcome-normalize-equivalent-states を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -179004,7 +178998,7 @@
       "supportingTagIds": [
         "tag-state-normalization"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-optimize-stochastic-actions",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-normalize-equivalent-states"
@@ -195202,7 +195196,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「条件を満たす個数を N から二つの floor_sum の差の総和を引く形で計算する。」、解法への接続「S1=Σ_{k=0}^{N-1}floor((Ak+B)/M)、S2=Σfloor(((A-1)k+B-1)/M) を floor_sum の符号・係数正規化込みで求め、N-(S1-S2) を返す。」、学習成果「巨大 N 上の線形剰余不等式を二つの floor_sum の差として対数時間で数えられる。」を照合し、tag-integer-boundary-blocks / outcome-partition-integer-parameter-ranges をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「条件を満たす個数を N から二つの floor_sum の差の総和を引く形で計算する。」、解法への接続「S1=Σ_{k=0}^{N-1}floor((Ak+B)/M)、S2=Σfloor(((A-1)k+B-1)/M) を floor_sum の符号・係数正規化込みで求め、N-(S1-S2) を返す。」、学習成果「巨大 N 上の線形剰余不等式を二つの floor_sum の差として対数時間で数えられる。」を照合し、tag-integer-boundary-blocks / outcome-sum-affine-floors-by-euclid をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -195210,7 +195204,7 @@
         "tag-integer-boundary-blocks"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-partition-integer-parameter-ranges",
+      "primaryOutcomeId": "outcome-sum-affine-floors-by-euclid",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
@@ -209690,26 +209684,26 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「sizeをbase10六次元indexにして6方向のzeta transformを行い、各queryでx_k>y_kなら0、そうでなければ下端条件を64個のprefix boxへ包除する。」、解法への接続「10^6配列に各ID weightを加える。k=0..5で全indexを走査しdigit_k>0ならzeta[idx]+=zeta[idx-10^k]とする。queryはmask0..63で bound_k=(mask bit?x_k-1:y_k)、符号(-1)^{popcount}を付けzeta[bound]を合計する。」、学習成果「百万通りの六次元size box queryを、6D zeta前計算と64項包除で高速に回答できる。」を照合し、tag-subset-zeta-mobius-transform / outcome-apply-subset-zeta-mobius-transform をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「sizeをbase10六次元indexにして6方向のzeta transformを行い、各queryでx_k>y_kなら0、そうでなければ下端条件を64個のprefix boxへ包除する。」、解法への接続「10^6配列に各ID weightを加える。k=0..5で全indexを走査しdigit_k>0ならzeta[idx]+=zeta[idx-10^k]とする。queryはmask0..63で bound_k=(mask bit?x_k-1:y_k)、符号(-1)^{popcount}を付けzeta[bound]を合計する。」、学習成果「百万通りの六次元size box queryを、6D zeta前計算と64項包除で高速に回答できる。」を照合し、tag-prefix-difference / outcome-linearize-static-range-information をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-subset-zeta-mobius-transform"
+        "tag-prefix-difference"
       ],
       "supportingTagIds": [
         "tag-inclusion-exclusion"
       ],
-      "primaryOutcomeId": "outcome-apply-subset-zeta-mobius-transform",
+      "primaryOutcomeId": "outcome-linearize-static-range-information",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-correct-overlap-by-inversion"
       ],
       "learningUnitIds": [
         "unit-inclusion-exclusion",
-        "unit-subset-transforms"
+        "unit-prefix-aggregate"
       ],
-      "presentationUnitId": "unit-subset-transforms",
+      "presentationUnitId": "unit-prefix-aggregate",
       "adHocElements": [
         "六桁decimal IDを一整数でなく各桁独立座標として見ると、固定10^6gridの多次元prefix sumになる。（再利用可能な見方: 次元6は2^6包除が小さいため、query数が多くても定数64項で処理できる。）"
       ],
@@ -209728,7 +209722,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-subset-zeta-mobius-transform"
+            "tag-prefix-difference"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -209764,7 +209758,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-subset-zeta-mobius-transform"
+            "tag-prefix-difference"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -210846,42 +210840,12 @@
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-chapter-dynamic-programming",
-          "path": "exercises.curriculum-routing.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-dynamic-programming",
-          "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-dynamic-programming",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-dynamic-programming",
-          "path": "exercises.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-dp-state-design",
-          "path": "exercises.attainment-outcome-design-minimal-sufficient-state.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-dp-state-design",
           "path": "content"
         },
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-dp-state-design",
-          "path": "examples.guided-outcome-design-minimal-sufficient-state"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-dp-state-design",
-          "path": "exercises.attainment-outcome-design-minimal-sufficient-state"
+          "path": "content"
         }
       ],
       "affectedLearningUnitOrderIds": [
@@ -210959,27 +210923,7 @@
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-chapter-number-theory",
-          "path": "exercises.curriculum-routing.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-number-theory",
           "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-number-theory",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-number-theory",
-          "path": "exercises.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-cyclic-group-exponent-counting",
-          "path": "exercises.attainment-outcome-count-through-cyclic-exponents.answer"
         },
         {
           "ownerType": "learning_unit",
@@ -210988,33 +210932,8 @@
         },
         {
           "ownerType": "learning_unit",
-          "learningUnitId": "unit-cyclic-group-exponent-counting",
-          "path": "examples.guided-outcome-count-through-cyclic-exponents"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-cyclic-group-exponent-counting",
-          "path": "exercises.attainment-outcome-count-through-cyclic-exponents"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-multiplicative-order-periods",
-          "path": "exercises.attainment-outcome-find-period-by-multiplicative-order.answer"
-        },
-        {
-          "ownerType": "learning_unit",
           "learningUnitId": "unit-multiplicative-order-periods",
           "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-multiplicative-order-periods",
-          "path": "examples.guided-outcome-find-period-by-multiplicative-order"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-multiplicative-order-periods",
-          "path": "exercises.attainment-outcome-find-period-by-multiplicative-order"
         }
       ],
       "affectedLearningUnitOrderIds": [
@@ -211091,22 +211010,7 @@
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-chapter-query",
-          "path": "exercises.attainment-outcome-derive-updateable-aggregate.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-query",
           "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-query",
-          "path": "examples.guided-outcome-derive-updateable-aggregate"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-query",
-          "path": "exercises.attainment-outcome-derive-updateable-aggregate"
         }
       ],
       "affectedLearningUnitOrderIds": [
@@ -211185,47 +211089,12 @@
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-change-impact-localization",
-          "path": "exercises.attainment-outcome-localize-change-impact-by-witness.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-change-impact-localization",
-          "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-change-impact-localization",
-          "path": "examples.guided-outcome-localize-change-impact-by-witness"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-change-impact-localization",
-          "path": "exercises.attainment-outcome-localize-change-impact-by-witness"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-graph",
-          "path": "exercises.curriculum-routing.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-graph",
           "path": "content"
         },
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-chapter-graph",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-graph",
-          "path": "exercises.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-modeling",
-          "path": "exercises.curriculum-routing.answer"
+          "path": "content"
         },
         {
           "ownerType": "learning_unit",
@@ -211234,53 +211103,13 @@
         },
         {
           "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-modeling",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-modeling",
-          "path": "exercises.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-certificates",
-          "path": "exercises.curriculum-routing.answer"
-        },
-        {
-          "ownerType": "learning_unit",
           "learningUnitId": "unit-shortest-path-certificates",
           "path": "content"
         },
         {
           "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-certificates",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-certificates",
-          "path": "exercises.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-reconstruction",
-          "path": "exercises.attainment-outcome-build-shortest-path-certificate.answer"
-        },
-        {
-          "ownerType": "learning_unit",
           "learningUnitId": "unit-shortest-path-reconstruction",
           "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-reconstruction",
-          "path": "examples.guided-outcome-build-shortest-path-certificate"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-reconstruction",
-          "path": "exercises.attainment-outcome-build-shortest-path-certificate"
         }
       ],
       "affectedLearningUnitOrderIds": [
@@ -211359,42 +211188,12 @@
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-chapter-dynamic-programming",
-          "path": "exercises.curriculum-routing.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-dynamic-programming",
-          "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-dynamic-programming",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-dynamic-programming",
-          "path": "exercises.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-dp-state-design",
-          "path": "exercises.attainment-outcome-design-minimal-sufficient-state.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-dp-state-design",
           "path": "content"
         },
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-dp-state-design",
-          "path": "examples.guided-outcome-design-minimal-sufficient-state"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-dp-state-design",
-          "path": "exercises.attainment-outcome-design-minimal-sufficient-state"
+          "path": "content"
         }
       ],
       "affectedLearningUnitOrderIds": [
@@ -211474,47 +211273,12 @@
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-chapter-combinatorics-algebra",
-          "path": "exercises.curriculum-routing.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-combinatorics-algebra",
-          "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-combinatorics-algebra",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-combinatorics-algebra",
-          "path": "exercises.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-number-theory",
-          "path": "exercises.curriculum-routing.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-number-theory",
           "path": "content"
         },
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-chapter-number-theory",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-number-theory",
-          "path": "exercises.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-cyclic-group-exponent-counting",
-          "path": "exercises.attainment-outcome-count-through-cyclic-exponents.answer"
+          "path": "content"
         },
         {
           "ownerType": "learning_unit",
@@ -211523,38 +211287,8 @@
         },
         {
           "ownerType": "learning_unit",
-          "learningUnitId": "unit-cyclic-group-exponent-counting",
-          "path": "examples.guided-outcome-count-through-cyclic-exponents"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-cyclic-group-exponent-counting",
-          "path": "exercises.attainment-outcome-count-through-cyclic-exponents"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-divisor-mobius-inversion",
-          "path": "exercises.attainment-outcome-invert-divisor-lattice-by-mobius.answer"
-        },
-        {
-          "ownerType": "learning_unit",
           "learningUnitId": "unit-divisor-mobius-inversion",
           "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-divisor-mobius-inversion",
-          "path": "examples.guided-outcome-invert-divisor-lattice-by-mobius"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-divisor-mobius-inversion",
-          "path": "exercises.attainment-outcome-invert-divisor-lattice-by-mobius"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-inclusion-exclusion",
-          "path": "exercises.curriculum-routing.answer"
         },
         {
           "ownerType": "learning_unit",
@@ -211563,53 +211297,13 @@
         },
         {
           "ownerType": "learning_unit",
-          "learningUnitId": "unit-inclusion-exclusion",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-inclusion-exclusion",
-          "path": "exercises.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-multiplicative-order-periods",
-          "path": "exercises.attainment-outcome-find-period-by-multiplicative-order.answer"
-        },
-        {
-          "ownerType": "learning_unit",
           "learningUnitId": "unit-multiplicative-order-periods",
           "path": "content"
         },
         {
           "ownerType": "learning_unit",
-          "learningUnitId": "unit-multiplicative-order-periods",
-          "path": "examples.guided-outcome-find-period-by-multiplicative-order"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-multiplicative-order-periods",
-          "path": "exercises.attainment-outcome-find-period-by-multiplicative-order"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-prime-divisor",
-          "path": "exercises.attainment-outcome-decompose-by-prime-or-divisor.answer"
-        },
-        {
-          "ownerType": "learning_unit",
           "learningUnitId": "unit-prime-divisor",
           "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-prime-divisor",
-          "path": "examples.guided-outcome-decompose-by-prime-or-divisor"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-prime-divisor",
-          "path": "exercises.attainment-outcome-decompose-by-prime-or-divisor"
         }
       ],
       "affectedLearningUnitOrderIds": [
@@ -211690,22 +211384,7 @@
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-chapter-query",
-          "path": "exercises.attainment-outcome-derive-updateable-aggregate.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-query",
           "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-query",
-          "path": "examples.guided-outcome-derive-updateable-aggregate"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-query",
-          "path": "exercises.attainment-outcome-derive-updateable-aggregate"
         }
       ],
       "affectedLearningUnitOrderIds": [
@@ -211784,47 +211463,12 @@
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-change-impact-localization",
-          "path": "exercises.attainment-outcome-localize-change-impact-by-witness.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-change-impact-localization",
-          "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-change-impact-localization",
-          "path": "examples.guided-outcome-localize-change-impact-by-witness"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-change-impact-localization",
-          "path": "exercises.attainment-outcome-localize-change-impact-by-witness"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-graph",
-          "path": "exercises.curriculum-routing.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-graph",
           "path": "content"
         },
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-chapter-graph",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-graph",
-          "path": "exercises.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-modeling",
-          "path": "exercises.curriculum-routing.answer"
+          "path": "content"
         },
         {
           "ownerType": "learning_unit",
@@ -211833,53 +211477,13 @@
         },
         {
           "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-modeling",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-chapter-modeling",
-          "path": "exercises.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-certificates",
-          "path": "exercises.curriculum-routing.answer"
-        },
-        {
-          "ownerType": "learning_unit",
           "learningUnitId": "unit-shortest-path-certificates",
           "path": "content"
         },
         {
           "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-certificates",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-certificates",
-          "path": "exercises.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-reconstruction",
-          "path": "exercises.attainment-outcome-build-shortest-path-certificate.answer"
-        },
-        {
-          "ownerType": "learning_unit",
           "learningUnitId": "unit-shortest-path-reconstruction",
           "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-reconstruction",
-          "path": "examples.guided-outcome-build-shortest-path-certificate"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-reconstruction",
-          "path": "exercises.attainment-outcome-build-shortest-path-certificate"
         }
       ],
       "affectedLearningUnitOrderIds": [
@@ -211958,37 +211562,7 @@
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-dp-state-design",
-          "path": "exercises.attainment-outcome-design-minimal-sufficient-state.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-dp-state-design",
-          "path": "exercises.curriculum-routing.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-dp-state-design",
           "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-dp-state-design",
-          "path": "examples.guided-outcome-design-minimal-sufficient-state"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-dp-state-design",
-          "path": "examples.curriculum-routing"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-dp-state-design",
-          "path": "exercises.attainment-outcome-design-minimal-sufficient-state"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-dp-state-design",
-          "path": "exercises.curriculum-routing"
         }
       ],
       "affectedLearningUnitOrderIds": [
@@ -212065,42 +211639,12 @@
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-cyclic-group-exponent-counting",
-          "path": "exercises.attainment-outcome-count-through-cyclic-exponents.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-cyclic-group-exponent-counting",
-          "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-cyclic-group-exponent-counting",
-          "path": "examples.guided-outcome-count-through-cyclic-exponents"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-cyclic-group-exponent-counting",
-          "path": "exercises.attainment-outcome-count-through-cyclic-exponents"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-multiplicative-order-periods",
-          "path": "exercises.attainment-outcome-find-period-by-multiplicative-order.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-multiplicative-order-periods",
           "path": "content"
         },
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-multiplicative-order-periods",
-          "path": "examples.guided-outcome-find-period-by-multiplicative-order"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-multiplicative-order-periods",
-          "path": "exercises.attainment-outcome-find-period-by-multiplicative-order"
+          "path": "content"
         }
       ],
       "affectedLearningUnitOrderIds": [
@@ -212176,42 +211720,12 @@
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-range-monoid-aggregation",
-          "path": "exercises.attainment-outcome-design-associative-range-summary.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-range-monoid-aggregation",
-          "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-range-monoid-aggregation",
-          "path": "examples.guided-outcome-design-associative-range-summary"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-range-monoid-aggregation",
-          "path": "exercises.attainment-outcome-design-associative-range-summary"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-weighted-prefix-fenwick",
-          "path": "exercises.attainment-outcome-maintain-weighted-prefix-statistics.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-weighted-prefix-fenwick",
           "path": "content"
         },
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-weighted-prefix-fenwick",
-          "path": "examples.guided-outcome-maintain-weighted-prefix-statistics"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-weighted-prefix-fenwick",
-          "path": "exercises.attainment-outcome-maintain-weighted-prefix-statistics"
+          "path": "content"
         }
       ],
       "affectedLearningUnitOrderIds": [
@@ -212291,42 +211805,12 @@
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-change-impact-localization",
-          "path": "exercises.attainment-outcome-localize-change-impact-by-witness.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-change-impact-localization",
-          "path": "content"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-change-impact-localization",
-          "path": "examples.guided-outcome-localize-change-impact-by-witness"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-change-impact-localization",
-          "path": "exercises.attainment-outcome-localize-change-impact-by-witness"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-reconstruction",
-          "path": "exercises.attainment-outcome-build-shortest-path-certificate.answer"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-reconstruction",
           "path": "content"
         },
         {
           "ownerType": "learning_unit",
           "learningUnitId": "unit-shortest-path-reconstruction",
-          "path": "examples.guided-outcome-build-shortest-path-certificate"
-        },
-        {
-          "ownerType": "learning_unit",
-          "learningUnitId": "unit-shortest-path-reconstruction",
-          "path": "exercises.attainment-outcome-build-shortest-path-certificate"
+          "path": "content"
         }
       ],
       "affectedLearningUnitOrderIds": [
@@ -290509,7 +289993,7 @@
       "impactSubjectDigest": "f1e0a7a12c22a4e4a4aed2632356ceaf3f7cfb5fec8704b3556b281c71436f40"
     }
   ],
-  "placementDigest": "ab448e8b9148dfc3a1cb6b015eed7de50c801c5f31371377cb1f78e119e32cb1",
-  "correctionImpactDigest": "2577cf4f8e2bbee5d90b19ee52d62c716275691bdf52e72f90c0688fa5829809",
+  "placementDigest": "39e8f5c08aca55783389f8897353045bc30b7f5c65c3e4beb384f6c924ff08a9",
+  "correctionImpactDigest": "d5154d05bb81da28d7b15fe937af487ec8770b9d81bf577062605f30d47e046e",
   "previewTaxonomyChangeDigest": "c84fe7608952547d6672a1ea12812d27f00df2d4aef59724748e369f57311467"
 }

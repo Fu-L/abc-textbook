@@ -48,127 +48,23 @@
     "abc300-ex",
     "abc317-ex",
     "abc318-ex",
-    "abc381-g",
     "abc387-g",
     "abc439-g",
     "abc449-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-apply-formal-power-series-operations",
-      "learningOutcomeIds": [
-        "outcome-apply-formal-power-series-operations"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。ちょうど d 個成立する対象は数えにくいが、指定した n 個が全て成立する対象なら数えやすいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC260 Ex「Colorfulness」について、全 k について C(P)^k を直接足す代わりに、C(P)=t となる順列数 a_t を先に得れば F(k)=Σ_t a_t t^k と分離できる。",
-      "procedure": [
-        "観察: 全 k について C(P)^k を直接足す代わりに、C(P)=t となる順列数 a_t を先に得れば F(k)=Σ_t a_t t^k と分離できる。",
-        "観察: 異色境界数 C と同色境界数 D は C＋D=N−1 なので、同色境界を指定して満たす列を数える包除原理が使える。",
-        "着眼: 同色境界が正確に d 個の列数を p_d、指定した n 個以上の同色境界を満たす数を q_n とすると、q_n=Σ_{d≥n}binom(d,n)p_d であり、二項反転で p を得られる。",
-        "着眼: 色 c の個数 m_c に対するブロック選択を g_c(x)=Σ_k binom(m_c−1,m_c−k)x^k/k! と正規化すると、積 ∏g_c の係数が多項係数付きの q 計算を表す。",
-        "方針: 指定した同色隣接を満たす数 q を色ごとのブロック EGF の積で求め、二項反転で正確な分布 a を復元した後、Σ_t a_t/(1−tx) を FPS 展開する。（分布計算と全冪モーメント生成の双方を多項式積・畳み込みへ落とせ、NTT と積木、FPS 逆元を一貫して利用できる。）",
-        "接続: 同色 run の組合せを exponential generating function で合成し、binomial inversion で分布を復元し、power moments を rational generating function の級数展開へ接続する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    },
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-compose-series-and-project-powers",
-        "outcome-evaluate-polynomial-at-many-points",
-        "outcome-extract-rational-series-coefficient"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（学習経路の比較）",
-      "omissions": [
-        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
-      ],
-      "environment": "紙上での未知問のモデル化と候補比較",
-      "input": "FPS演算・多点評価・合成を行うの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
-      "procedure": [
-        "多項式の多点評価・補間: 1個の直接所有Outcome、学ぶ理由「形式的べき級数の基本演算・再帰分割・分割統治で得た考え方と実装を再利用し、多項式の多点評価・補間の発動条件・正当化・境界を重複なく学ぶ」、対象外「多項式の多点評価・補間の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "Bostan–Mori・有理生成関数の係数抽出: 1個の直接所有Outcome、学ぶ理由「生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、Bostan–Mori・有理生成関数の係数抽出の発動条件・正当化・境界を重複なく学ぶ」、対象外「Bostan–Mori・有理生成関数の係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "FPS合成・power projection: 1個の直接所有Outcome、学ぶ理由「形式的べき級数の基本演算で得た考え方と実装を再利用し、FPS合成・power projectionの発動条件・正当化・境界を重複なく学ぶ」、対象外「FPS合成・power projectionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "curriculum_routing"
-    }
+  "directProblemIds": [
+    "abc449-g",
+    "abc318-ex",
+    "abc317-ex",
+    "abc289-ex",
+    "abc297-ex",
+    "abc260-ex"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-apply-formal-power-series-operations",
-      "learningOutcomeIds": [
-        "outcome-apply-formal-power-series-operations"
-      ],
-      "prerequisiteIds": [
-        "outcome-compute-convolution-or-correlation",
-        "outcome-encode-counting-by-generating-function",
-        "prereq-abc-advanced-v1",
-        "unit-generating-functions",
-        "unit-polynomial-convolution"
-      ],
-      "attainmentCondition": "学習成果「定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC289 Ex「Trio」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 3本の独立random walkが時刻Tに初めて同一点へ集まる確率を、会合kernelの畳み込みとFPS除算で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 3本の独立random walkが時刻Tに初めて同一点へ集まる確率を、会合kernelの畳み込みとFPS除算で求められる。",
-          "転移題材の解法接続: factorial・inverse factorialと2の逆冪を前計算する。初期位置(X,Y,Z)について有効parityだけq,r配列へinverse factorial積を入れ、NTT convolutionのindex 2t（offset採用時はその補正位置）からp(t)を復元する。この処理を(A,B,C)でG、(0,0,0)でHに行う。HのFPS inverseを次数Tまで求め、Gと掛けたFのx^T係数を出力する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "定数項の前提と次数打切りを確認し、Newton法を用いたFPSの逆数・対数・指数などを畳み込み計算へ還元できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    },
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-compose-series-and-project-powers",
-        "outcome-evaluate-polynomial-at-many-points",
-        "outcome-extract-rational-series-coefficient"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1",
-        "unit-generating-functions",
-        "unit-polynomial-convolution"
-      ],
-      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
-      "assessment": {
-        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
-        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
-      },
-      "answer": {
-        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
-        "procedure": [
-          "問題を対象・操作・保つ量・求める量へ分解する。",
-          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
-          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
-          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
-        ],
-        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "curriculum_routing"
-    }
+  "relatedProblemIds": [
+    "abc381-g"
   ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 5,
   "representativeRank": 10,

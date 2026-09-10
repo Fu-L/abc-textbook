@@ -62,6 +62,15 @@ describe('final taxonomy policy', () => {
   it('classifies reviewed examples by the adopted proof and transition mechanism', async () => {
     const table = await loadedDecisionTable;
     const expected = {
+      'abc217-g': 'outcome-design-minimal-sufficient-state',
+      'abc216-h': 'outcome-count-nonintersecting-paths-by-lgv',
+      'abc253-ex': 'outcome-count-combinatorial-objects-by-determinant',
+      'abc300-e': 'outcome-propagate-probability-distribution',
+      'abc263-e': 'outcome-solve-stochastic-recurrence',
+      'abc266-e': 'outcome-optimize-stochastic-actions',
+      'abc283-ex': 'outcome-sum-affine-floors-by-euclid',
+      'abc230-e': 'outcome-partition-integer-parameter-ranges',
+      'abc465-f': 'outcome-linearize-static-range-information',
       'abc219-e': 'outcome-enumerate-bounded-candidates-or-cases',
       'abc377-e': 'outcome-decompose-functional-graph',
       'abc229-h': 'outcome-add-conway-number-games',
@@ -86,7 +95,7 @@ describe('final taxonomy policy', () => {
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
     expect(FINAL_TAXONOMY_TAGS).toHaveLength(197);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(200);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(204);
     expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(220);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
@@ -1126,7 +1135,7 @@ describe('final taxonomy policy', () => {
         'outcome-optimize-path-matching-by-contraction',
         'unit-path-matching-contraction',
       ],
-      'abc465-f': ['outcome-apply-subset-zeta-mobius-transform', 'unit-subset-transforms'],
+      'abc465-f': ['outcome-linearize-static-range-information', 'unit-prefix-aggregate'],
       'abc466-f': ['outcome-bound-monotone-total-work', 'unit-amortized-monotone-progress'],
     };
 
@@ -1216,7 +1225,7 @@ describe('final taxonomy policy', () => {
     expect(byProblemId.get('abc250-ex')?.additionalPrimaryOutcomeIds).toContain(
       'outcome-sweep-connectivity-by-kruskal-threshold',
     );
-    expect(byProblemId.get('abc305-ex')?.additionalPrimaryOutcomeIds).toContain(
+    expect(byProblemId.get('abc305-ex')?.additionalPrimaryOutcomeIds).not.toContain(
       'outcome-optimize-monge-transitions',
     );
     expect(byProblemId.get('abc355-g')?.additionalPrimaryOutcomeIds).toContain(
@@ -1320,7 +1329,7 @@ describe('final taxonomy policy', () => {
     const multiPrimaryDecisions = table.decisions.filter(
       (decision) => decision.additionalPrimaryOutcomeIds.length > 0,
     );
-    expect(multiPrimaryDecisions).toHaveLength(51);
+    expect(multiPrimaryDecisions).toHaveLength(50);
     expect(
       multiPrimaryDecisions.some((decision) =>
         decision.claimDispositions.some(

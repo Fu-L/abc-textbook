@@ -33,109 +33,56 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/connectivity.md",
   "problemIds": [
+    "abc238-e",
+    "abc276-e",
+    "abc279-f",
+    "abc280-f",
+    "abc304-e",
+    "abc328-f",
+    "abc335-e",
+    "abc372-e",
+    "abc392-e",
+    "abc396-e",
+    "abc401-e",
+    "abc420-e",
+    "abc434-e",
+    "abc466-g"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
     "abc218-e",
     "abc226-e",
     "abc229-e",
     "abc233-f",
     "abc235-e",
-    "abc238-e",
     "abc239-f",
     "abc250-ex",
     "abc264-e",
     "abc270-f",
-    "abc276-e",
-    "abc279-f",
-    "abc280-f",
     "abc286-g",
     "abc295-g",
     "abc301-ex",
     "abc302-ex",
-    "abc304-e",
     "abc311-g",
     "abc314-f",
     "abc328-e",
-    "abc328-f",
-    "abc335-e",
     "abc349-g",
     "abc352-e",
     "abc352-f",
     "abc355-f",
     "abc364-f",
-    "abc372-e",
     "abc376-g",
     "abc383-e",
-    "abc392-e",
     "abc394-g",
-    "abc396-e",
-    "abc401-e",
     "abc408-e",
     "abc409-f",
     "abc413-g",
-    "abc420-e",
-    "abc434-e",
     "abc440-g",
     "abc447-e",
-    "abc451-f",
-    "abc466-g"
+    "abc451-f"
   ],
-  "examples": [
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-augment-components-with-metadata",
-        "outcome-maintain-connectivity-components",
-        "outcome-maintain-potential-differences",
-        "outcome-propagate-static-graph-potentials"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（学習経路の比較）",
-      "omissions": [
-        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
-      ],
-      "environment": "紙上での未知問のモデル化と候補比較",
-      "input": "連結成分を管理し縮約するの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
-      "procedure": [
-        "DSUによる連結成分管理・縮約: 2個の直接所有Outcome、学ぶ理由「辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ」、対象外「DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "静的graph等式制約のpotential伝播: 1個の直接所有Outcome、学ぶ理由「通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する」、対象外「静的graph等式制約のpotential伝播の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "potential・weighted DSU: 1個の直接所有Outcome、学ぶ理由「DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ」、対象外「potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-augment-components-with-metadata",
-        "outcome-maintain-connectivity-components",
-        "outcome-maintain-potential-differences",
-        "outcome-propagate-static-graph-potentials"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
-      "assessment": {
-        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
-        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
-      },
-      "answer": {
-        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
-        "procedure": [
-          "問題を対象・操作・保つ量・求める量へ分解する。",
-          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
-          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
-          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
-        ],
-        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 1,
   "representativeRank": 2,

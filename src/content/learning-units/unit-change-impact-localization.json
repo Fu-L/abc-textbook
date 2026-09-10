@@ -32,68 +32,18 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/change-impact-localization.md",
   "problemIds": [
+    "abc279-e"
+  ],
+  "directProblemIds": [
+    "abc279-e"
+  ],
+  "relatedProblemIds": [
     "abc218-f",
     "abc243-e",
-    "abc279-e",
     "abc448-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-localize-change-impact-by-witness",
-      "learningOutcomeIds": [
-        "outcome-localize-change-impact-by-witness"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。要素を一つ除いた各ケースを問われ、元の最適解が残るケースを判別できるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC218 F「Blocked Roads」について、M 本それぞれについて辺を一つ削除して BFS する素朴解は O(M(N+M)) で、M≤N(N-1) では重い。再探索が必要な辺を絞る必要がある。",
-      "procedure": [
-        "観察: M 本それぞれについて辺を一つ削除して BFS する素朴解は O(M(N+M)) で、M≤N(N-1) では重い。再探索が必要な辺を絞る必要がある。",
-        "観察: 元グラフで頂点 1 から N への最短路 P を一本固定する。P にない辺 e を削除しても P は残り、辺削除によって最短距離が短くなることもないため、e∉P の答えは元の距離と等しい。",
-        "着眼: 元の最短距離を d とすると、辺削除後の距離は d 以上である。一方 e∉P なら長さ d の P が残るので d 以下でもあり、両方向の不等式から答えは d と決まる。再探索候補は |P|≤N-1 本だけである。",
-        "方針: 元の最短路を一本復元し、その路上の辺を削除する場合だけ BFS を再実行する。（答えが変わり得る辺を高々 N-1 本へ限定でき、他の辺には元距離をそのまま使える。）",
-        "接続: まず BFS し、頂点 N が到達不能なら全 M 個を -1 とする。到達可能なら元距離 d を全辺の初期答えにし、predecessor edge から P を復元する。P 上の各 edge id だけを一つずつ無効化して BFS し、その距離を対応する答えへ上書きする。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "基準となる解や経路を証拠に、答えが変わり得る変更だけを特定して再計算を局所化できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-localize-change-impact-by-witness",
-      "learningOutcomeIds": [
-        "outcome-localize-change-impact-by-witness"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「基準となる解や経路を証拠に、答えが変わり得る変更だけを特定して再計算を局所化できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC279 E「Cheating Amidakuji」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「基準となる解や経路を証拠に、答えが変わり得る変更だけを特定して再計算を局所化できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 1つのswapを省いた全結果を、完全permutationとprefixの二label追跡で線形に列挙できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 1つのswapを省いた全結果を、完全permutationとprefixの二label追跡で線形に列挙できる。",
-          "転移題材の解法接続: まずidentityへ全A_k swapを適用してvalue→final positionのposを作る。次にidentityのprefix配列C'を持ち、iを昇順に、A_iの両位置の値x,yから答えを決めた後、そのswapをC'へ適用する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "基準となる解や経路を証拠に、答えが変わり得る変更だけを特定して再計算を局所化できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 6,

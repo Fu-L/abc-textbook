@@ -15,11 +15,7 @@
     "source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190",
     "source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e",
     "source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7",
-    "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3",
-    "source-abc231-editorial-3059-2800894ed0012eda3c59d85ce01046fba8bf0c21479cd2c0c4e8eb9298de0bc3",
-    "source-abc231-f-problem-37c3e1fabb258af6c0177d00752d792cedf5ab67a0ea32e2697bfe540ba9a2d2",
-    "source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193",
-    "source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e"
+    "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"
   ],
   "tagIds": [
     "tag-event-sweep",
@@ -38,10 +34,42 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/event-sweep.md",
   "problemIds": [
+    "abc231-f",
+    "abc266-ex",
+    "abc274-f",
+    "abc283-f",
+    "abc309-f",
+    "abc311-g",
+    "abc320-e",
+    "abc327-f",
+    "abc344-g",
+    "abc346-g",
+    "abc360-f",
+    "abc368-e",
+    "abc449-e",
+    "abc449-f",
+    "abc453-e"
+  ],
+  "directProblemIds": [
+    "abc368-e",
+    "abc449-f",
+    "abc274-f",
+    "abc453-e",
+    "abc320-e",
+    "abc283-f",
+    "abc309-f",
+    "abc311-g",
+    "abc266-ex",
+    "abc346-g",
+    "abc327-f",
+    "abc449-e",
+    "abc231-f",
+    "abc360-f"
+  ],
+  "relatedProblemIds": [
     "abc214-e",
     "abc223-h",
     "abc224-e",
-    "abc231-f",
     "abc233-ex",
     "abc235-e",
     "abc240-ex",
@@ -50,28 +78,17 @@
     "abc254-g",
     "abc257-ex",
     "abc263-ex",
-    "abc266-ex",
     "abc268-ex",
-    "abc274-f",
     "abc280-g",
-    "abc283-f",
     "abc287-ex",
     "abc296-g",
     "abc301-ex",
     "abc306-f",
     "abc308-f",
-    "abc309-f",
-    "abc311-g",
-    "abc320-e",
-    "abc327-f",
     "abc332-g",
     "abc337-g",
-    "abc344-g",
-    "abc346-g",
     "abc351-f",
-    "abc360-f",
     "abc361-g",
-    "abc368-e",
     "abc393-f",
     "abc394-g",
     "abc401-e",
@@ -83,114 +100,10 @@
     "abc433-e",
     "abc436-f",
     "abc438-g",
-    "abc447-g",
-    "abc449-e",
-    "abc449-f",
-    "abc453-e"
+    "abc447-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-linearize-events",
-      "learningOutcomeIds": [
-        "outcome-linearize-events"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。点対に x の一方向不等式と y の逆方向不等式が同時に課されるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC231 F「Jealous Two」について、高橋への品 i、青木への品 j で喧嘩しない条件は A_i≥A_j かつ B_i≤B_j であり、二次元の半順序を満たす順序付き点対の個数になる。",
-      "procedure": [
-        "観察: 高橋への品 i、青木への品 j で喧嘩しない条件は A_i≥A_j かつ B_i≤B_j であり、二次元の半順序を満たす順序付き点対の個数になる。",
-        "観察: 点を A 昇順、同じ A では B 降順に処理すると、現在点 i より前には A_j≤A_i の候補が揃い、残りは B_j≥B_i の個数問合せになる。",
-        "着眼: A が同値の点では B の大きい順に置くことで条件を満たす向きが処理済み側に現れるが、完全に同じ点の複数個はまとめて双方向を数える必要がある。",
-        "方針: A で sweep し、座標圧縮した B の頻度を Fenwick tree または segment tree に蓄積して suffix 個数を問い合わせる。（一方の不等式をソート順へ吸収し、他方を一次元の動的な範囲和へ落とせる。）",
-        "接続: 喧嘩しない条件を二次元 dominance counting として、A の昇順 sweep と圧縮 B 上の suffix 頻度和を組み合わせ、同一点群を一括処理する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    },
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-maintain-order-through-crossing-events"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（学習経路の比較）",
-      "omissions": [
-        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
-      ],
-      "environment": "紙上での未知問のモデル化と候補比較",
-      "input": "event順にactive集合を更新するの範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
-      "procedure": [
-        "kinetic sorting・交差event順序更新: 1個の直接所有Outcome、学ぶ理由「event・値順のオフライン走査で得た考え方と実装を再利用し、kinetic sorting・交差event順序更新の発動条件・正当化・境界を重複なく学ぶ」、対象外「kinetic sorting・交差event順序更新の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-linearize-events",
-      "learningOutcomeIds": [
-        "outcome-linearize-events"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC266 Ex「Snuke Panic (2D)」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 一方向y移動制約下の時空event最大報酬を、三次元dominance DPへ変換して求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 一方向y移動制約下の時空event最大報酬を、三次元dominance DPへ変換して求められる。",
-          "転移題材の解法接続: anisotropic movement coneをlinear coordinate transformでorthant orderへ変え、weighted event schedulingを3D dominance maximum DPとして解く。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    },
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-maintain-order-through-crossing-events"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
-      "assessment": {
-        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
-        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
-      },
-      "answer": {
-        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
-        "procedure": [
-          "問題を対象・操作・保つ量・求める量へ分解する。",
-          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
-          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
-          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
-        ],
-        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 1,

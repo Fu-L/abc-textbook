@@ -35,68 +35,17 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/semiring-matrix-exponentiation.md",
   "problemIds": [
     "abc236-g",
-    "abc429-f",
     "abc445-f"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-exponentiate-transition-over-semiring",
-      "learningOutcomeIds": [
-        "outcome-exponentiate-transition-over-semiring"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。固定長 walk の DP 遷移が結合的な二演算で行列積と同じ形になり、長さが巨大なとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC236 G「Good Vertices」について、辺の追加時刻をその辺の重みとすると、時刻 t までにちょうど L 辺で到達可能とは、使用辺の最大重みが t 以下の L-step walk があることと同値である。",
-      "procedure": [
-        "観察: 辺の追加時刻をその辺の重みとすると、時刻 t までにちょうど L 辺で到達可能とは、使用辺の最大重みが t 以下の L-step walk があることと同値である。",
-        "観察: 求める最早時刻は、頂点 1 から各頂点へのちょうど L 辺 walk が持つ最大辺重みの最小値という bottleneck DP になる。",
-        "着眼: (P⊗Q)_{ij}=min_k max(P_{ik},Q_{kj}) は、前半と後半の walk を中継点 k で連結したときの bottleneck 最小化そのものである。",
-        "方針: 辺時刻行列を、加法を min、乗法を max とする半環上で累乗し、長さ L の walk の最小 bottleneck を一括計算する。（二つの walk を連結すると最大辺重みは max、経路候補から最良を選ぶ演算は min で、行列積の結合則により二分累乗できる。）",
-        "接続: 時刻付き有向グラフの exact-length bottleneck path DP を (min,max) semiring の行列積へ写し、隣接行列の L 乗を繰り返し二乗法で初期ベクトルへ作用させる。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "遷移を半環行列として定義し、結合則と単位元を保つ二分累乗・区間積で巨大回数の最適化遷移を計算できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc236-g",
+    "abc445-f"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-exponentiate-transition-over-semiring",
-      "learningOutcomeIds": [
-        "outcome-exponentiate-transition-over-semiring"
-      ],
-      "prerequisiteIds": [
-        "outcome-accelerate-fixed-linear-transition",
-        "prereq-abc-advanced-v1",
-        "unit-linear-recurrence"
-      ],
-      "attainmentCondition": "学習成果「遷移を半環行列として定義し、結合則と単位元を保つ二分累乗・区間積で巨大回数の最適化遷移を計算できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC445 F「Exactly K Steps 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「遷移を半環行列として定義し、結合則と単位元を保つ二分累乗・区間積で巨大回数の最適化遷移を計算できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 巨大な K に対するちょうど K 辺経路の最小費用を min-plus 行列の二分累乗で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 巨大な K に対するちょうど K 辺経路の最小費用を min-plus 行列の二分累乗で求められる。",
-          "転移題材の解法接続: cost を base、min-plus 単位行列を acc とする。K の bit を下から見て、bit が1なら acc=acc⊗base、各段で base=base⊗base と更新し、要求された成分または行列を出力する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "遷移を半環行列として定義し、結合則と単位元を保つ二分累乗・区間積で巨大回数の最適化遷移を計算できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
+  "relatedProblemIds": [
+    "abc429-f"
   ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 91,

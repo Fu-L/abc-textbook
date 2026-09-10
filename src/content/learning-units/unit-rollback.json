@@ -36,64 +36,14 @@
     "abc302-ex",
     "abc363-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-rollback-reversible-updates",
-      "learningOutcomeIds": [
-        "outcome-rollback-reversible-updates"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。各 root-to-node path の統計量を全頂点または全葉で求め、要素の追加と rollback ができるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC218 G「Game on Tree 2」について、木を頂点1で根付けると、再訪禁止の駒は親へ戻れず子へ進み続け、必ず葉で止まる。終端の葉を固定すれば訪問集合は根からその葉までの path に一意に定まる。",
-      "procedure": [
-        "観察: 木を頂点1で根付けると、再訪禁止の駒は親へ戻れず子へ進み続け、必ず葉で止まる。終端の葉を固定すれば訪問集合は根からその葉までの path に一意に定まる。",
-        "観察: 各葉の path 中央値が分かれば、内部頂点では手番に応じて子の値の最大または最小を選ぶだけなので、ゲーム部分は通常の minimax 木 DP になる。",
-        "着眼: DFS の入場時に A_v を追加し、退場時に同じ一個を削除すれば、データ構造は常に現在の root-to-v path だけを表す。",
-        "着眼: 根の深さを0とすると、次の行き先を選ぶのは偶数深さで Taro、奇数深さで Jiro なので、それぞれ子の返り値の max と min を取る。",
-        "方針: DFS 中の根から現在頂点までの値の multiset を二分割して中央値を保ち、葉の評価値を求めながら深さ偶数で max、奇数で min を返す。（path への一要素追加・削除と中央値取得を効率化し、葉の payoff 計算と minimax を一度の DFS に統合できる。）",
-        "接続: 値を座標圧縮した Fenwick Tree の k-th 探索、または大小二つの multiset で path 中央値を管理する。葉では奇数個なら中央、偶数個なら中央二値の平均を返し、内部では深さの偶奇で集約する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc302-ex",
+    "abc218-g",
+    "abc363-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-rollback-reversible-updates",
-      "learningOutcomeIds": [
-        "outcome-rollback-reversible-updates"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC302 Ex「Ball Collector」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: v=2,…,Nの各独立な質問について、根からvまでで拾える異なる整数の最大数を順に求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: v=2,…,Nの各独立な質問について、根からvまでで拾える異なる整数の最大数を順に求められる。",
-          "転移題材の解法接続: 元の木を頂点1からDFSし、頂点iへ入ると値A_iとB_iを結ぶ辺をrollback DSUへ追加する。DSUは各成分の頂点数・辺数とΣmin(V,E)を持ち、その時点の総和をiの答えとして記録し、子の処理後に追加前までrollbackする。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 83,

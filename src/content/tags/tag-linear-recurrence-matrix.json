@@ -37,9 +37,9 @@
     "outcome-accelerate-fixed-linear-transition"
   ],
   "representativeProblemIds": [
+    "abc293-e",
     "abc256-g",
-    "abc270-ex",
-    "abc293-e"
+    "abc270-ex"
   ],
   "aliases": [
     "matrix exponentiation",

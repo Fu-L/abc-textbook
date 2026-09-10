@@ -1,6 +1,6 @@
 ---
 title: "Trieで共有接頭辞を索引化する"
-description: "前提からTrieで共有接頭辞を索引化するを見抜き、方針へ接続して検証するための学習単位。"
+description: "Trieで共有接頭辞を索引化するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 17
@@ -8,110 +8,40 @@ sidebar:
 
 # Trieで共有接頭辞を索引化する
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。
-
-### この単元では扱わない範囲
-
-- failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。
-
-## 発動条件と見分け方
+## 概要
 
 ### Trieによる共有接頭辞の索引
 
 文字列集合の各文字遷移を木として共有し、prefix通過数・prefix DP・辞書順探索をnode上で処理する。
 
-検索語: Trie、prefix tree、トライ木
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる
+文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。
 
-題材: [ABC287 E「Karuta」](https://atcoder.jp/contests/abc287/tasks/abc287_e)
+- failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。
 
-選定理由: ある深さのprefixを共有する文字列が2本以上なら、その全ては少なくともその深さまで誰かと一致し、1本になった直前の深さが最大値になる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数文字列について共有prefixの深さをまとめて追いたいとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC287 E「Karuta」](https://atcoder.jp/contests/abc287/tasks/abc287_e)
+2. [ABC437 E「Sort Arrays」](https://atcoder.jp/contests/abc437/tasks/abc437_e)
+3. [ABC377 G「Edit to Match」](https://atcoder.jp/contests/abc377/tasks/abc377_g)
+4. [ABC353 E「Yet Another Sigma Problem」](https://atcoder.jp/contests/abc353/tasks/abc353_e)
 
-- 各入力文字列について、別の文字列とのLCP最大値を総文字数に比例するprefix分割で求められる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 同じprefix長kを持つ文字列groupでは、長さがちょうどkの文字列はそれ以上一致できず答えkで確定する。
-- 残りをk+1文字目で分類すると、size 1のgroupは他とk文字までしか一致せず答えk、size 2以上のgroupだけを次の深さへ再帰すればよい。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 共通prefixごとのgroupを次文字で再帰分割し、単独になった深さを各文字列の答えにする。 — trieの各文字を総入力長に比例して辿るだけで、全文字列の最大LCPを同時に確定できる。
-- **棄却**: 各iについて他のN-1文字列とのLCPを先頭から比較する。 — 文字列pairが二次個あり、総文字数5×10^5の制約では比較回数が大きすぎる。
-- **棄却**: 文字列全体の最頻prefix長を1つ求め、全iへ同じ値を返す。 — 各文字列が属するbranchの混み方によって最長共有prefixは異なる。
-
-#### 鍵となる着眼
-
-- ある深さのprefixを共有する文字列が2本以上なら、その全ては少なくともその深さまで誰かと一致し、1本になった直前の深さが最大値になる。
-- 同じ文字列が複数回入力されても、終端深さのgroup sizeが2以上なので文字列長そのものが答えになる。
-
-#### アルゴリズムへ接続する
-
-全indexをdepth 0のgroupとして再帰関数へ渡す。depth kで長さkの文字列へ答えkを設定し、それより長い文字列を次文字a..zでbucket分けする。bucket size 1ならそのindexの答えをk、size 2以上ならdepth k+1で再帰する。全indexの答えを入力順に出力する。
-
-
-## 転用するときの確認
-
-- **trie相当のprefix分割**: 多数文字列について共有prefixの深さをまとめて追いたいとき。 適用: 次文字bucketへ再帰し、groupが単独になる深さを記録する。
-- **総入力長による計算量評価**: 可変長文字列をdepthごとに処理する再帰があるとき。 適用: 各文字を所属文字列の1段として一度だけbucket処理する。
-- 各要素の最良なpartnerを問う問題では、partnerが存在する共有分類の最深levelを求める形へ変換できないか考える。
-- 重複文字列、他文字列のprefixになっている文字列、最初の1文字で単独になる文字列を同時に含むtrieを描き、確定depthを確認する。
-
-## 到達確認
-
-### 到達確認 1 — 文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる
-
-転移題材: [ABC353 E「Yet Another Sigma Problem」](https://atcoder.jp/contests/abc353/tasks/abc353_e)
-
-**課題**: ABC353 E「Yet Another Sigma Problem」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 全 pair の LCP を共有 prefix ごとの寄与へ転換し、総文字数に比例する Trie 走査で求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 全 pair の LCP を共有 prefix ごとの寄与へ転換し、総文字数に比例する Trie 走査で求められる。
-
-- 対象技能が担う箇所: 全 pair の LCP を共有 prefix ごとの寄与へ転換し、総文字数に比例する Trie 走査で求められる。
-- 転移題材の解法接続: 空 Trie を用意し、j=1..N の順に S_j の文字をたどる。各文字後の node で現在 count を答えへ加え、その後（または二段目の走査で）S_j が通る全 node の count を1増やす。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる。
-
-</details>
-
+- [ABC240 Ex「Sequence of Substrings」](https://atcoder.jp/contests/abc240/tasks/abc240_h)
+- [ABC268 G「Random Student ID」](https://atcoder.jp/contests/abc268/tasks/abc268_g)
+- [ABC403 E「Forbidden Prefix」](https://atcoder.jp/contests/abc403/tasks/abc403_e)
 
 ## 根拠
 
@@ -121,7 +51,5 @@ sidebar:
 - [ABC268 G 公式問題文](https://atcoder.jp/contests/abc268/tasks/abc268_g)
 - [ABC287 E 公式問題文](https://atcoder.jp/contests/abc287/tasks/abc287_e)
 - [ABC287 E 公式解説](https://atcoder.jp/contests/abc287/editorial/5609)
-- [ABC353 E 公式問題文](https://atcoder.jp/contests/abc353/tasks/abc353_e)
-- [ABC353 E 公式解説](https://atcoder.jp/contests/abc353/editorial/9969)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-trie-prefix`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-trie-prefix`

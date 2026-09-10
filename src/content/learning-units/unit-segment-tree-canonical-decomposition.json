@@ -33,71 +33,16 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/segment-tree-canonical-decomposition.md",
-  "problemIds": [
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
     "abc244-ex",
     "abc342-g",
     "abc363-g",
     "abc414-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-decompose-ranges-into-segment-tree-nodes",
-      "learningOutcomeIds": [
-        "outcome-decompose-ranges-into-segment-tree-nodes"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。固定点集合に対し、様々な方向 vector との最大内積を問うとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC244 Ex「Linear Maximization」について、Ax+By は query vector (A,B) と点 (x,y) の内積であり、最大値は点集合の convex hull 上で達成される。hull の頂点順では支持方向に対する内積が unimodal になる。",
-      "procedure": [
-        "観察: Ax+By は query vector (A,B) と点 (x,y) の内積であり、最大値は点集合の convex hull 上で達成される。hull の頂点順では支持方向に対する内積が unimodal になる。",
-        "観察: i 回目に利用できる点は入力順 prefix [1,i] なので、online insertion と見なくても、全 query を先読みして index 区間への線形最大 query として処理できる。",
-        "着眼: 追加-only 集合は時刻 index の prefix なので、segment tree の range decomposition を使えば一つの query を O(log Q) 個の静的点集合 query へ分解できる。",
-        "方針: index segment tree の各 node 区間に点の convex hull を前計算し、prefix [1,i] を覆う node 群の hull で最大内積を二分・三分探索する。（標準的な静的 hull と segment tree だけで、動的 hull 用の高度な平衡木を避けられる。）",
-        "接続: 全 Q 点を葉へ置く segment tree を作り、各 node の点を sort して上下 convex hull を構築する。時刻 i では range [1,i] を分解し、各 hull 上で A x+B y の最大頂点を unimodal search して全 node の最大を出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "区間をO(log N)個のcanonical nodeへ分解し、range objectの登録、時間生存区間への配置、またはrange-edge graphの少数辺表現を構築できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-decompose-ranges-into-segment-tree-nodes",
-      "learningOutcomeIds": [
-        "outcome-decompose-ranges-into-segment-tree-nodes"
-      ],
-      "prerequisiteIds": [
-        "outcome-design-associative-range-summary",
-        "prereq-abc-advanced-v1",
-        "unit-range-monoid-aggregation"
-      ],
-      "attainmentCondition": "学習成果「区間をO(log N)個のcanonical nodeへ分解し、range objectの登録、時間生存区間への配置、またはrange-edge graphの少数辺表現を構築できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC342 G「Retroactive Range Chmax」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「区間をO(log N)個のcanonical nodeへ分解し、range objectの登録、時間生存区間への配置、またはrange-edge graphの少数辺表現を構築できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: segment tree区間分解: range objectをpoint queryで参照し、後から同じobjectを削除したい。 適用: rangeをO(log N) canonical nodeに登録し、point pathだけを走査する。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: segment tree区間分解: range objectをpoint queryで参照し、後から同じobjectを削除したい。 適用: rangeをO(log N) canonical nodeに登録し、point pathだけを走査する。",
-          "転移題材の解法接続: 各segment nodeにmultiset、または追加heapと削除heapのlazy deletion pairを置く。type 1の(l,r,x)をcanonical nodesへ挿入しoperation IDに情報を保存する。type 2では同じ分解nodeからxを削除する。type 3ではA_iとleafからrootまでの各node現在maxの最大を出力する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "区間をO(log N)個のcanonical nodeへ分解し、range objectの登録、時間生存区間への配置、またはrange-edge graphの少数辺表現を構築できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 78,

@@ -34,69 +34,12 @@
   "problemIds": [
     "abc399-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-test-linear-matroid-intersection-rank",
-      "learningOutcomeIds": [
-        "outcome-test-linear-matroid-intersection-rank"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。二つの線形matroidの最大common independent sizeだけが必要なとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC399 G「Colorful Spanning Tree」について、color上限はpartition matroid、cycleを含まないedge集合はgraphic matroidであり、colorful spanning tree存在は両matroidのcommon independent set rankがN-1かに等しい。",
-      "procedure": [
-        "観察: color上限はpartition matroid、cycleを含まないedge集合はgraphic matroidであり、colorful spanning tree存在は両matroidのcommon independent set rankがN-1かに等しい。",
-        "観察: 両matroidを有限体上の線形表現A_1,A_2へ写すと、random diagonal Dを挟むM=A_1DA_2^Tのrankが高確率でintersection rankになる。color interval[L,R]はA_1の対応row blockだけを残すことに一致する。",
-        "着眼: graphic matroidはoriented incidence columns、color cのpartition matroidはA_c行のVandermonde columnsで線形表現できる。",
-        "着眼: Schwartz–Zippelにより各edge変数へ大きな有限体の乱数を代入したrankは真のsymbolic rankを高確率で保つ。",
-        "方針: partition/graphic matroidの線形表現からrandomized intersection matrixを作り、連続row区間のrank N-1可否をbasis sweepで数える（ΣA_c≤300,N≤150なので、各Lからrowを追加するGaussian basisまたはABC223H型offline basisで最小Rを求め、可否の単調性から全interval数を多項式時間で集計できる。）",
-        "接続: A_1のcolor別row blockとincidence A_2からrandomized Mを構成する。各Lについてrow S_L..をcolor順にbasisへ追加しrankが初めてN-1になるRを記録し、それ以降のRを加算する。必要ならoffline sliding-basis techniqueでO(N²ΣA)へ高速化する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "二つの線形matroid表現から乱択intersection matrixを構成し、Schwartz–Zippelの誤り上界を示したうえでrankを最大共通独立sizeとして判定できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc399-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-test-linear-matroid-intersection-rank",
-      "learningOutcomeIds": [
-        "outcome-test-linear-matroid-intersection-rank"
-      ],
-      "prerequisiteIds": [
-        "outcome-design-and-bound-randomized-algorithm",
-        "outcome-optimize-weighted-matroid-basis",
-        "outcome-solve-linear-system-and-rank",
-        "prereq-abc-advanced-v1",
-        "unit-linear-system-rank",
-        "unit-matroid-greedy",
-        "unit-randomized-algorithms"
-      ],
-      "attainmentCondition": "学習成果「二つの線形matroid表現から乱択intersection matrixを構成し、Schwartz–Zippelの誤り上界を示したうえでrankを最大共通独立sizeとして判定できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
-      "assessment": {
-        "method": "ABC399 G「Colorful Spanning Tree」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「二つの線形matroid表現から乱択intersection matrixを構成し、Schwartz–Zippelの誤り上界を示したうえでrankを最大共通独立sizeとして判定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
-          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
-          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
-          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
-          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
-        ],
-        "expectedResult": "二つの線形matroid表現から乱択intersection matrixを構成し、Schwartz–Zippelの誤り上界を示したうえでrankを最大共通独立sizeとして判定できるの適用可能範囲と破綻条件を反例付きで説明できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 5,
   "representativeRank": 100,

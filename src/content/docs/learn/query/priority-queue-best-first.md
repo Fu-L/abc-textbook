@@ -1,6 +1,6 @@
 ---
 title: "priority queue・best-first列挙"
-description: "前提からpriority queue・best-first列挙を見抜き、方針へ接続して検証するための学習単位。"
+description: "priority queue・best-first列挙の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 121
@@ -8,107 +8,58 @@ sidebar:
 
 # priority queue・best-first列挙
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-
-### この単元では扱わない範囲
-
-- priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### priority queue・best-first列挙
 
 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。
 
-検索語: best-first enumeration、heap、優先度付きキュー
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
+現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-題材: [ABC297 E「Kth Takoyaki Set」](https://atcoder.jp/contests/abc297/tasks/abc297_e)
+- priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: 次の金額の買い方から一個外せば既に確定済み以下の金額になるため、確定集合から一手足した候補だけ見れば十分。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。非負加算で生成される半群の小さい値を順に列挙する。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC391 F「K-th Largest Triplet」](https://atcoder.jp/contests/abc391/tasks/abc391_f)
+2. [ABC440 E「Cookies」](https://atcoder.jp/contests/abc440/tasks/abc440_e)
+3. [ABC331 E「Set Meal」](https://atcoder.jp/contests/abc331/tasks/abc331_e)
+4. [ABC384 E「Takahashi is Slime 2」](https://atcoder.jp/contests/abc384/tasks/abc384_e)
+5. [ABC308 F「Vouchers」](https://atcoder.jp/contests/abc308/tasks/abc308_f)
+6. [ABC409 F「Connecting Points」](https://atcoder.jp/contests/abc409/tasks/abc409_f)
+7. [ABC297 E「Kth Takoyaki Set」](https://atcoder.jp/contests/abc297/tasks/abc297_e)
+8. [ABC305 E「Art Gallery on Graph」](https://atcoder.jp/contests/abc305/tasks/abc305_e)
+9. [ABC342 G「Retroactive Range Chmax」](https://atcoder.jp/contests/abc342/tasks/abc342_g)
 
-- 作れる相異なる金額のK番目を求められる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 既知の安い金額vへたこ焼き一個A_jを足した値の中に、次に安い未出金額が必ず存在する。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 最小heapで金額グラフをDijkstra風列挙 — 0からv→v+A_jを生成し、最小値を重複除去しながらK個確定すれば買い方を列挙せず順位値を得られる。
-- **棄却**: 各種類0..K個の個数全探索 — K^Nで指数的。
-
-#### 鍵となる着眼
-
-- 次の金額の買い方から一個外せば既に確定済み以下の金額になるため、確定集合から一手足した候補だけ見れば十分。
-
-#### アルゴリズムへ接続する
-
-heapへ0を入れ、最小値を取り出して直前確定値と異なる時だけ順位を進め、そのv+A_jを全j挿入する。0を含む順位補正後のK番目を返す。
-
-
-## 転用するときの確認
-
-- **暗黙グラフのbest-first search**: 非負加算で生成される半群の小さい値を順に列挙する。 適用: min-heapから確定値を取り出し各generatorを足す。
-- **重複除去**: 異なる買い方が同額になる。 適用: 同じheap値は順位で一度だけ数える。
-- 非負generatorのK小値はbest-firstで列挙する。
-- 小Kの個数全探索と比較し、A重複、同額を複数和で作る例、N=1を確認する。
-
-## 到達確認
-
-### 到達確認 1 — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる
-
-転移題材: [ABC305 E「Art Gallery on Graph」](https://atcoder.jp/contests/abc305/tasks/abc305_e)
-
-**課題**: ABC305 E「Art Gallery on Graph」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 始点ごとに異なる距離上限を持つ到達範囲を、最大残余資源の多始点探索として一度に求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 始点ごとに異なる距離上限を持つ到達範囲を、最大残余資源の多始点探索として一度に求められる。
-
-- 対象技能が担う箇所: 始点ごとに異なる距離上限を持つ到達範囲を、最大残余資源の多始点探索として一度に求められる。
-- 転移題材の解法接続: dを−1で初期化し、各(p_i,h_i)でd[p_i]をh_iにして最大heapへ入れる。最大の(x,v)を取り出し、古い候補なら捨てる。x>0なら各隣接uへx−1を緩和し、最後にd[v]≥0の頂点を昇順で列挙する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
-
-</details>
-
+- [ABC214 E「Packing Under Range Regulations」](https://atcoder.jp/contests/abc214/tasks/abc214_e)
+- [ABC217 E「Sorting Queries」](https://atcoder.jp/contests/abc217/tasks/abc217_e)
+- [ABC218 H「Red and Blue Lamps」](https://atcoder.jp/contests/abc218/tasks/abc218_h)
+- [ABC249 F「Ignore Operations」](https://atcoder.jp/contests/abc249/tasks/abc249_f)
+- [ABC250 G「Stonks」](https://atcoder.jp/contests/abc250/tasks/abc250_g)
+- [ABC252 F「Bread」](https://atcoder.jp/contests/abc252/tasks/abc252_f)
+- [ABC304 Ex「Constrained Topological Sort」](https://atcoder.jp/contests/abc304/tasks/abc304_h)
+- [ABC307 F「Virus 2」](https://atcoder.jp/contests/abc307/tasks/abc307_f)
+- [ABC319 F「Fighter Takahashi」](https://atcoder.jp/contests/abc319/tasks/abc319_f)
+- [ABC320 E「Somen Nagashi」](https://atcoder.jp/contests/abc320/tasks/abc320_e)
+- [ABC359 F「Tree Degree Optimization」](https://atcoder.jp/contests/abc359/tasks/abc359_f)
+- [ABC373 F「Knapsack with Diminishing Values」](https://atcoder.jp/contests/abc373/tasks/abc373_f)
+- [ABC376 E「Max × Sum」](https://atcoder.jp/contests/abc376/tasks/abc376_e)
+- [ABC376 G「Treasure Hunting」](https://atcoder.jp/contests/abc376/tasks/abc376_g)
+- [ABC407 E「Most Valuable Parentheses」](https://atcoder.jp/contests/abc407/tasks/abc407_e)
+- [ABC433 E「Max Matrix 2」](https://atcoder.jp/contests/abc433/tasks/abc433_e)
 
 ## 根拠
 
@@ -118,9 +69,5 @@ heapへ0を入れ、最小値を取り出して直前確定値と異なる時だ
 - [ABC217 E 公式解説](https://atcoder.jp/contests/abc217/editorial/2577)
 - [ABC218 H 公式解説](https://atcoder.jp/contests/abc218/editorial/2602)
 - [ABC218 H 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_h)
-- [ABC297 E 公式問題文](https://atcoder.jp/contests/abc297/tasks/abc297_e)
-- [ABC297 E 公式解説](https://atcoder.jp/contests/abc297/editorial/6167)
-- [ABC305 E 公式問題文](https://atcoder.jp/contests/abc305/tasks/abc305_e)
-- [ABC305 E 公式解説](https://atcoder.jp/contests/abc305/editorial/6539)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-priority-queue-best-first`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-priority-queue-best-first`

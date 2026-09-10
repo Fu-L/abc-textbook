@@ -15,9 +15,7 @@
     "source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014",
     "source-abc219-f-problem-81357b19bc73aa408a3ae3da0732b554e100dd724249f7455f547dfa6db1cbf5",
     "source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634",
-    "source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd",
-    "source-abc242-e-problem-105c649ecb269302c3783a0fc0425f5042be2f65892d32c9e1a658283a51fa21",
-    "source-abc242-editorial-3516-341f0c2b714e9d00396dc06071f467ad103a6c56d7f034cb2d80284e09c1d2f7"
+    "source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd"
   ],
   "tagIds": [
     "tag-state-normalization"
@@ -34,91 +32,52 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/normalization.md",
   "problemIds": [
-    "abc218-h",
     "abc219-f",
-    "abc232-h",
     "abc242-e",
     "abc249-ex",
     "abc250-e",
-    "abc278-g",
-    "abc284-g",
     "abc296-f",
-    "abc301-f",
     "abc302-g",
-    "abc307-e",
     "abc313-g",
     "abc323-f",
+    "abc382-g",
+    "abc427-g",
+    "abc446-g",
+    "abc462-e",
+    "abc463-f"
+  ],
+  "directProblemIds": [
+    "abc242-e",
+    "abc296-f",
+    "abc219-f",
+    "abc250-e",
+    "abc382-g",
+    "abc302-g",
+    "abc313-g",
+    "abc462-e",
+    "abc463-f",
+    "abc323-f",
+    "abc427-g",
+    "abc446-g",
+    "abc249-ex"
+  ],
+  "relatedProblemIds": [
+    "abc218-h",
+    "abc232-h",
+    "abc278-g",
+    "abc284-g",
+    "abc301-f",
+    "abc307-e",
     "abc328-g",
     "abc360-e",
-    "abc382-g",
     "abc404-f",
     "abc411-g",
     "abc421-e",
     "abc425-f",
-    "abc427-g",
-    "abc446-g",
-    "abc450-g",
-    "abc462-e",
-    "abc463-f"
+    "abc450-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-normalize-equivalent-states",
-      "learningOutcomeIds": [
-        "outcome-normalize-equivalent-states"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。同じ移動列を非常に多く繰り返し、一周期後の変位が一定であるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC219 F「Cleaning Robot」について、S を一回実行して訪れる重複なしの集合 V と、終了変位 v=(a,b) を求めると、r 回目に訪れる集合は V+(r-1)v である。K は巨大でも、異なる形を K 回シミュレーションしているわけではない。",
-      "procedure": [
-        "観察: S を一回実行して訪れる重複なしの集合 V と、終了変位 v=(a,b) を求めると、r 回目に訪れる集合は V+(r-1)v である。K は巨大でも、異なる形を K 回シミュレーションしているわけではない。",
-        "観察: 二つの基準点 p,q が異なる反復で同じマスを生成するのは q-p が v の整数倍のときだけである。したがって V を v に平行な同一直線・同じ剰余の orbit ごとに分ければ、重複は一次元の平行移動として数えられる。",
-        "着眼: a≠0 としたとき q=floor(X/a)、s=X-qa、t=Y-qb を使うと、二点の (s,t) が等しいことと差が v の整数倍であることが同値になる。",
-        "着眼: 同じ group の q を q_1<…<q_m とすると、各 q_r の寄与は r<m なら min(q_{r+1}-q_r,K)、最後は K である。",
-        "方針: V の各点を変位 v による orbit key で分類し、orbit 内の整数位置 q をソートして、次の基準点までの gap と K の小さい方を足す。（各基準点が新しいマスを生む反復回数は、正方向で次に V と重なる最小 shift d に対する min(d,K) であり、隣接 gap だけから求められる。）",
-        "接続: 一回分の全 prefix 座標を set で重複除去して V とする。v=0 なら |V| を返す。そうでなければ必要なら座標軸を交換して a≠0 とし、各点を (s,t,q) へ正規化して (s,t) ごとに q をソートし、隣接 gap の min と末尾の K を合計する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "対称操作で同値な状態の標準形と不変量を選べる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-normalize-equivalent-states",
-      "learningOutcomeIds": [
-        "outcome-normalize-equivalent-states"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「対称操作で同値な状態の標準形と不変量を選べる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC242 E「(∀x∀)」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「対称操作で同値な状態の標準形と不変量を選べる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 回文の自由度を前半へ圧縮し、辞書順上限を26進 prefix count と境界一候補へ分解できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 回文の自由度を前半へ圧縮し、辞書順上限を26進 prefix count と境界一候補へ分解できる。",
-          "転移題材の解法接続: h 文字を左から読み ans=26·ans+(S_i-'A') と更新する。S の前半を左右へ鏡映して palindrome P を作り、P≤S なら ans に1を足して法998244353で出力する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "対称操作で同値な状態の標準形と不変量を選べる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 2,

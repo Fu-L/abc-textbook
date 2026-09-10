@@ -17,7 +17,8 @@ Claimは`ProblemAuthoringUnit`に、ExampleとExercise/Assessment/Answerは所�
 のExampleはリポジトリ相対の `executionTarget` を必ず持ち、`pseudocode` と `illustrative` は
 `executionTarget: null` とする。これにより、実行可能と宣言した例が実行対象なしで公開されない。
 
-LearningUnitも同じExampleとExercise/Assessment/Answerのblock契約を使い、例と到達確認を各一件以上本文へco-locateする。CorrectionImpactも同じowner種別を持つ判別付きlocatorを正本とし、ProblemのsectionまたはLearningUnitの本文・local
+LearningUnitは簡潔な概念説明と前提順の問題一覧を持つ。ExampleとExercise/Assessment/Answerは任意の通常本文であり、Outcomeごとの例・評価課題を要求しない。全Problemは固有のauthoring
+unitを持ち、full解説を原則とする。CorrectionImpactも同じowner種別を持つ判別付きlocatorを正本とし、ProblemのsectionまたはLearningUnitの本文・local
 blockを実データへ解決する。document-local keyをCatalog全体のentity IDへ昇格させない。
 
 `similar` と `supplement` は Explanation ID ではなく安定した `primaryProblemId` を参照する。Source

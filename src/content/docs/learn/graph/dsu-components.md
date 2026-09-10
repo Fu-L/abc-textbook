@@ -1,6 +1,6 @@
 ---
 title: "DSUによる連結成分管理・縮約"
-description: "前提からDSUによる連結成分管理・縮約を見抜き、方針へ接続して検証するための学習単位。"
+description: "DSUによる連結成分管理・縮約の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 122
@@ -8,174 +8,72 @@ sidebar:
 
 # DSUによる連結成分管理・縮約
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。
-- 静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-
-### この単元では扱わない範囲
-
-- DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### DSUによる連結成分管理・縮約
 
 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。
 
-検索語: DSU、Union-Find、disjoint set union、素集合データ構造
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる
+辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-題材: [ABC279 F「BOX」](https://atcoder.jp/contests/abc279/tasks/abc279_f)
+- DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: DSU leaderはunion by sizeで変わり得るため、union後に返された新leaderへowner boxを設定し直す。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。集合の併合と、要素が属する集合の外部属性queryが混在するとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC276 E「Round Trip」](https://atcoder.jp/contests/abc276/tasks/abc276_e)
+2. [ABC279 F「BOX」](https://atcoder.jp/contests/abc279/tasks/abc279_f)
+3. [ABC304 E「Good Graph」](https://atcoder.jp/contests/abc304/tasks/abc304_e)
+4. [ABC372 E「K-th Largest Connected Components」](https://atcoder.jp/contests/abc372/tasks/abc372_e)
+5. [ABC420 E「Reachability Query」](https://atcoder.jp/contests/abc420/tasks/abc420_e)
+6. [ABC238 E「Range Sums」](https://atcoder.jp/contests/abc238/tasks/abc238_e)
+7. [ABC392 E「Cables and Servers」](https://atcoder.jp/contests/abc392/tasks/abc392_e)
+8. [ABC401 E「Reachable Set」](https://atcoder.jp/contests/abc401/tasks/abc401_e)
+9. [ABC434 E「Distribute Bunnies」](https://atcoder.jp/contests/abc434/tasks/abc434_e)
+10. [ABC335 E「Non-Decreasing Colorful Path」](https://atcoder.jp/contests/abc335/tasks/abc335_e)
 
-- ball集合の箱間一括移動・追加・所属queryを、DSUと代表元owner mapで処理できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- box移動は多数のballを一括して別boxへ移すため、ballごとのbox番号更新では同じ巨大集合を何度も走査し得る。
-- 操作1はball集合の併合であり、各boxが現在どのDSU componentを持つか、各componentがどのboxにあるかを対応付ければよい。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: ballをDSU要素にし、box→component leaderとleader→boxの双方向mapを更新する。 — 集合併合と新ball追加をamortizedに処理し、queryはballのleaderからboxを即座に得られる。
-- **棄却**: 各boxにball listを持ち、type1でYの全ballの所属boxをXへ書き換える。 — 大集合を箱間で繰り返し移す入力では総更新数が二次になり得る。
-
-#### 鍵となる着眼
-
-- DSU leaderはunion by sizeで変わり得るため、union後に返された新leaderへowner boxを設定し直す。
-- 空boxにはcomponentがないというsentinelを持てば、空→非空移動・非空同士union・新ball追加を同じ対応で処理できる。
-
-#### アルゴリズムへ接続する
-
-最大N+Q ballのDSUを用意し、rootOfBox[x]とboxOfRoot[r]を持つ。move Y→Xは空caseを分けてcomponentをunionしYを空にする。addはsingleton ballをX componentへunionし、query ball bはboxOfRoot[find(b)]を返す。
-
-### 例 2 — 静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる
-
-題材: [ABC238 E「Range Sums」](https://atcoder.jp/contests/abc238/tasks/abc238_e)
-
-選定理由: 差 b_v−b_u が既知である関係は、値そのものを保持しなくても u と v の間を移動できる無向辺として扱える。
-
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。多数の区間和が与えられ、特定区間の和を既知情報から復元できるか判定するとき。 問題全体への接続は併用技能を学んだ後に読む。
-
-#### このOutcomeを支える根拠
-
-- 区間和から全体和を決定できる条件を、累積和端点 0 と N の連結性として判定できる。
-
-#### 観察
-
-- 先頭 i 項の累積和を b_i とすると、区間 [l,r] の情報は二変数の差 b_r−b_{l−1} を与える。
-- 知りたい全体和は b_N−b_0 であり、b_0=0 から既知の差を順に辿って b_N へ到達できるかだけが問題になる。
-
-#### 候補を比較する
-
-- **採用**: 累積和添字 0,…,N を頂点とし、各情報 [l,r] で l−1 と r を無向辺で結び、0 と N の連結性を判定する。 — 連結なら経路上の既知差を符号付きで足して b_N−b_0 を求められ、非連結なら b_N 側成分を平行移動して全体和を変えられる。
-- **棄却**: a_1,…,a_N を未知数とする Q 本の一次方程式を作り、全体和が一意かを行列の階数で判定する。 — 一般の線形代数は N=20 万に対して重すぎ、区間係数が持つ差分構造を活かしていない。
-
-#### 鍵となる着眼
-
-- 差 b_v−b_u が既知である関係は、値そのものを保持しなくても u と v の間を移動できる無向辺として扱える。
-
-#### アルゴリズムへ接続する
-
-区間和制約を prefix potential 間の差分制約へ変換し、目的の二ポテンシャルが同じ連結成分かを Union-Find またはグラフ探索で調べる。
-
-
-## 転用するときの確認
-
-- **DSU componentへのmetadata付与**: 集合の併合と、要素が属する集合の外部属性queryが混在するとき。 適用: leaderにbox番号を紐付け、leader変更後にmetadataを新rootへ移す。
-- **containerとcomponentの間接参照**: 多数要素のcontainer移動を個別更新したくないとき。 適用: containerは集合代表だけ、query要素はfind経由でcontainerへ到達する。
-- bulk moveでは要素属性を書き換えず、集合objectへのpointer/代表とownerの対応を付け替える。
-- 大集合をbox1→2→3と移す例で、ball側は一度も更新せずowner[root]だけが変わることを追跡する。
-- **区間和の累積和差分化**: 多数の区間和が与えられ、特定区間の和を既知情報から復元できるか判定するとき。 適用: 区間 [l,r] を累積和頂点 l−1 と r の差へ変換する。
-- **差分関係グラフの連結判定**: 各情報が二つの未知ポテンシャルの差を与え、目的も二点間の差であるとき。 適用: 既知差の両端を結び、目的の両端が同一連結成分なら値を一意に復元できると判定する。
-- 未知の数値そのものではなく識別可能性を問う問題では、係数構造だけを抽出して判定できる場合がある。
-- 区間に関する線形式が並んだら、累積量の二点差に変えて関係グラフを作れないか試す。
-- 十分性だけでなく、非連結成分を一様にずらして目的値が変わるという反例で必要性も確認する。
-
-## 到達確認
-
-### 到達確認 1 — 成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる
-
-転移題材: [ABC372 E「K-th Largest Connected Components」](https://atcoder.jp/contests/abc372/tasks/abc372_e)
-
-**課題**: ABC372 E「K-th Largest Connected Components」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 到達確認 2 — 静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる
-
-転移題材: [ABC276 E「Round Trip」](https://atcoder.jp/contests/abc276/tasks/abc276_e)
-
-**課題**: ABC276 E「Round Trip」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 追加型連結性に成分内 top-K 情報を組み込み、20万件の更新・問い合わせへ対応できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 追加型連結性に成分内 top-K 情報を組み込み、20万件の更新・問い合わせへ対応できる。
-
-- 対象技能が担う箇所: 追加型連結性に成分内 top-K 情報を組み込み、20万件の更新・問い合わせへ対応できる。
-- 転移題材の解法接続: 各頂点を一要素の上位リストで初期化する。type 1 では DSU を併合し、root の二つのリストから大きい順に最大10個を作る。type 2 では root のリスト長を確認して k-1 番目を返す。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。
-
-</details>
-
-<details><summary>到達確認 2 の解答基準 — 静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 指定始点を通る長さ4以上のgrid cycleを、始点削除後の隣接road連結性として判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 指定始点を通る長さ4以上のgrid cycleを、始点削除後の隣接road連結性として判定できる。
-
-- 対象技能が担う箇所: 指定始点を通る長さ4以上のgrid cycleを、始点削除後の隣接road連結性として判定できる。
-- 転移題材の解法接続: S以外の'.'を頂点として隣接roadを連結する。Sの上下左右にあるroadを列挙し、その任意の2つのcomponent idが一致すればYes、なければNoを出す。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる。
-
-</details>
-
+- [ABC218 E「Destruction」](https://atcoder.jp/contests/abc218/tasks/abc218_e)
+- [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
+- [ABC229 E「Graph Destruction」](https://atcoder.jp/contests/abc229/tasks/abc229_e)
+- [ABC233 F「Swap and Sort」](https://atcoder.jp/contests/abc233/tasks/abc233_f)
+- [ABC235 E「MST + 1」](https://atcoder.jp/contests/abc235/tasks/abc235_e)
+- [ABC239 F「Construct Highway」](https://atcoder.jp/contests/abc239/tasks/abc239_f)
+- [ABC250 Ex「Trespassing Takahashi」](https://atcoder.jp/contests/abc250/tasks/abc250_h)
+- [ABC264 E「Blackout 2」](https://atcoder.jp/contests/abc264/tasks/abc264_e)
+- [ABC270 F「Transportation」](https://atcoder.jp/contests/abc270/tasks/abc270_f)
+- [ABC286 G「Unique Walk」](https://atcoder.jp/contests/abc286/tasks/abc286_g)
+- [ABC295 G「Minimum Reachable City」](https://atcoder.jp/contests/abc295/tasks/abc295_g)
+- [ABC301 Ex「Difference of Distance」](https://atcoder.jp/contests/abc301/tasks/abc301_h)
+- [ABC302 Ex「Ball Collector」](https://atcoder.jp/contests/abc302/tasks/abc302_h)
+- [ABC311 G「One More Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_g)
+- [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
+- [ABC328 E「Modulo MST」](https://atcoder.jp/contests/abc328/tasks/abc328_e)
+- [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g)
+- [ABC352 E「Clique Connect」](https://atcoder.jp/contests/abc352/tasks/abc352_e)
+- [ABC355 F「MST Query」](https://atcoder.jp/contests/abc355/tasks/abc355_f)
+- [ABC364 F「Range Connect MST」](https://atcoder.jp/contests/abc364/tasks/abc364_f)
+- [ABC376 G「Treasure Hunting」](https://atcoder.jp/contests/abc376/tasks/abc376_g)
+- [ABC383 E「Sum of Max Matching」](https://atcoder.jp/contests/abc383/tasks/abc383_e)
+- [ABC394 G「Dense Buildings」](https://atcoder.jp/contests/abc394/tasks/abc394_g)
+- [ABC408 E「Minimum OR Path」](https://atcoder.jp/contests/abc408/tasks/abc408_e)
+- [ABC409 F「Connecting Points」](https://atcoder.jp/contests/abc409/tasks/abc409_f)
+- [ABC413 G「Big Banned Grid」](https://atcoder.jp/contests/abc413/tasks/abc413_g)
+- [ABC440 G「Haunted House」](https://atcoder.jp/contests/abc440/tasks/abc440_g)
+- [ABC447 E「Divide Graph」](https://atcoder.jp/contests/abc447/tasks/abc447_e)
+- [ABC451 F「Make Bipartite 3」](https://atcoder.jp/contests/abc451/tasks/abc451_f)
 
 ## 根拠
 
@@ -185,13 +83,5 @@ sidebar:
 - [ABC226 E 公式解説](https://atcoder.jp/contests/abc226/editorial/2889)
 - [ABC229 E 公式問題文](https://atcoder.jp/contests/abc229/tasks/abc229_e)
 - [ABC229 E 公式解説](https://atcoder.jp/contests/abc229/editorial/2958)
-- [ABC238 E 公式問題文](https://atcoder.jp/contests/abc238/tasks/abc238_e)
-- [ABC238 E 公式解説](https://atcoder.jp/contests/abc238/editorial/3360)
-- [ABC276 E 公式問題文](https://atcoder.jp/contests/abc276/tasks/abc276_e)
-- [ABC276 E 公式解説](https://atcoder.jp/contests/abc276/editorial/5162)
-- [ABC279 F 公式解説](https://atcoder.jp/contests/abc279/editorial/5284)
-- [ABC279 F 公式問題文](https://atcoder.jp/contests/abc279/tasks/abc279_f)
-- [ABC372 E 公式問題文](https://atcoder.jp/contests/abc372/tasks/abc372_e)
-- [ABC372 E 公式解説](https://atcoder.jp/contests/abc372/editorial/10967)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dsu-components`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-dsu-components`

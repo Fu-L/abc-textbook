@@ -1,6 +1,6 @@
 ---
 title: "一次元・二次元累積和と差分で区間情報を線形化する"
-description: "前提から一次元・二次元累積和と差分で区間情報を線形化するを見抜き、方針へ接続して検証するための学習単位。"
+description: "一次元・二次元累積和と差分で区間情報を線形化するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 12
@@ -8,110 +8,71 @@ sidebar:
 
 # 一次元・二次元累積和と差分で区間情報を線形化する
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
-
-### この単元では扱わない範囲
-
-- オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。
-
-## 発動条件と見分け方
+## 概要
 
 ### 累積和・差分配列
 
-一次元区間や二次元矩形の情報、または一括加算を接頭辞・端点の差へ変換し、query・数え上げ・復元に使う。
+一次元区間や多次元直方体の情報、または一括加算を接頭辞・端点の差へ変換し、query・数え上げ・復元に使う。
 
-検索語: difference array、prefix sums、いもす法、累積和
+ABC465 Fの添字は{0,…,9}の6軸の直積。各軸を小さい桁値から累積し、queryの上下端を選ぶ64項の包除で直方体和を取る。桁値1は上限2のprefixに含まれるが、二進の1は2の部分マスクではない。Boolean lattice上の部分集合ゼータ変換と更新関係を混同しない。
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+## 前提と範囲
 
-## ガイド例
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-### 例 1 — 一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる
+追加前提: なし。
 
-題材: [ABC260 G「Scalene Triangle Area」](https://atcoder.jp/contests/abc260/tasks/abc260_g)
+一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
 
-選定理由: 水平区間の開始印は (s,t) から下へ M 行続き、終了印は (s,t＋2M),(s＋1,t＋2M−2),… と傾き二の対角線を進む。
+- オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。同じ形の斜辺付き領域を大量に加算し、境界が少数の格子方向へ揃っているとき。 問題全体への接続は併用技能を学んだ後に読む。
+## 問題一覧
 
-#### このOutcomeを支える根拠
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-- 傾き二の斜辺を持つ多数の被覆領域を、縦・斜め・横の三段階累積和で一括集計できる。
+1. [ABC430 F「Back and Forth Filling」](https://atcoder.jp/contests/abc430/tasks/abc430_f)
+2. [ABC260 G「Scalene Triangle Area」](https://atcoder.jp/contests/abc260/tasks/abc260_g)
+3. [ABC268 E「Chinese Restaurant (Three-Star Version)」](https://atcoder.jp/contests/abc268/tasks/abc268_e)
+4. [ABC278 E「Grid Filling」](https://atcoder.jp/contests/abc278/tasks/abc278_e)
+5. [ABC410 F「Balanced Rectangles」](https://atcoder.jp/contests/abc410/tasks/abc410_f)
+6. [ABC454 F「Make it Palindrome 2」](https://atcoder.jp/contests/abc454/tasks/abc454_f)
+7. [ABC465 F「Sjeltzer?」](https://atcoder.jp/contests/abc465/tasks/abc465_f)
+8. [ABC341 E「Alternating String」](https://atcoder.jp/contests/abc341/tasks/abc341_e)
+9. [ABC441 E「A > B substring」](https://atcoder.jp/contests/abc441/tasks/abc441_e)
 
-#### 観察
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-- コマ (s,t) が行 u=s+d で覆う列は、d≥0 に対して t から t＋2M−1−2d までの連続区間になる。
-- 各行の区間へ水平 imos を行うなら、左端の +1 は縦線上、右端の次の −1 は一行下がるごとに二列左へ動く斜線上に並ぶ。
+## 関連問題
 
-#### 候補を比較する
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- **採用**: 左境界を縦方向差分、右境界を遷移 (i−1,j＋2) から伝播する斜め差分で置き、最後に水平方向の累積和を取る。 — 三角形一個を定数個の印へ変換でき、二種類の境界を復元した後は全マスの被覆数が一括で得られる。
-- **棄却**: 各コマから覆う全マスを走査して被覆数を一つずつ増やす。 — コマが二乗個近くあり、一個の三角形も二乗面積を持ち得るため重複更新が大きすぎる。
-
-#### 鍵となる着眼
-
-- 水平区間の開始印は (s,t) から下へ M 行続き、終了印は (s,t＋2M),(s＋1,t＋2M−2),… と傾き二の対角線を進む。
-- 縦・斜めの差分をそれぞれ累積して水平差分配列へ合算し、各行を左から累積すれば全三角形の重ね合わせになる。
-
-#### アルゴリズムへ接続する
-
-非軸平行な格子三角形を、境界方向ごとに異なる prefix operator を持つ multidirectional imos として加算する。
-
-
-## 転用するときの確認
-
-- **多方向 imos 法**: 同じ形の斜辺付き領域を大量に加算し、境界が少数の格子方向へ揃っているとき。 適用: 各境界の方向に対応する差分配列を作り、それぞれの方向へ累積してから合成する。
-- **水平区間への境界分解**: 各行との交差が一つの連続区間になる図形を一括加算するとき。 適用: 各行の左端へ +1、右端の次へ −1 を生成し、最後に行方向の累積和を取る。
-- 分数係数を含む格子領域は整数倍して、境界の離散的なステップ方向を先に抽出する。
-- 斜め図形の領域加算は、各行の区間端点がどの格子方向へ移動するかを描いて差分方向を決める。
-- 複数方向の imos では、各中間配列が最終のどの境界印を生成するかを分けて不変条件を置く。
-
-## 到達確認
-
-### 到達確認 1 — 一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる
-
-転移題材: [ABC268 E「Chinese Restaurant (Three-Star Version)」](https://atcoder.jp/contests/abc268/tasks/abc268_e)
-
-**課題**: ABC268 E「Chinese Restaurant (Three-Star Version)」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 全回転に対する円環距離総和を、三角波の一次式imosで求めて最小化できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 全回転に対する円環距離総和を、三角波の一次式imosで求めて最小化できる。
-
-- 対象技能が担う箇所: 全回転に対する円環距離総和を、三角波の一次式imosで求めて最小化できる。
-- 転移題材の解法接続: sum of circular absolute-distance functionsをperiod doublingでpiecewise-linear range additionsへ変え、coefficient-wise imosで全評価点を一括計算する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 一次元区間を接頭辞の差へ、二次元矩形を四隅の包除へ変換するか、端点差分を取り、query・数え上げ・復元へ利用できる。
-
-</details>
-
+- [ABC216 G「01Sequence」](https://atcoder.jp/contests/abc216/tasks/abc216_g)
+- [ABC228 F「Stamp Game」](https://atcoder.jp/contests/abc228/tasks/abc228_f)
+- [ABC233 Ex「Manhattan Christmas Tree」](https://atcoder.jp/contests/abc233/tasks/abc233_h)
+- [ABC233 G「Strongest Takahashi」](https://atcoder.jp/contests/abc233/tasks/abc233_g)
+- [ABC238 E「Range Sums」](https://atcoder.jp/contests/abc238/tasks/abc238_e)
+- [ABC253 F「Operations on a Matrix」](https://atcoder.jp/contests/abc253/tasks/abc253_f)
+- [ABC276 Ex「Construct a Matrix」](https://atcoder.jp/contests/abc276/tasks/abc276_h)
+- [ABC282 G「Similar Permutation」](https://atcoder.jp/contests/abc282/tasks/abc282_g)
+- [ABC298 G「Strawberry War」](https://atcoder.jp/contests/abc298/tasks/abc298_g)
+- [ABC300 F「More Holidays」](https://atcoder.jp/contests/abc300/tasks/abc300_f)
+- [ABC307 G「Approximate Equalization」](https://atcoder.jp/contests/abc307/tasks/abc307_g)
+- [ABC311 G「One More Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_g)
+- [ABC330 F「Minimize Bounding Square」](https://atcoder.jp/contests/abc330/tasks/abc330_f)
+- [ABC330 G「Inversion Squared」](https://atcoder.jp/contests/abc330/tasks/abc330_g)
+- [ABC333 E「Takahashi Quest」](https://atcoder.jp/contests/abc333/tasks/abc333_e)
+- [ABC347 F「Non-overlapping Squares」](https://atcoder.jp/contests/abc347/tasks/abc347_f)
+- [ABC404 G「Specified Range Sums」](https://atcoder.jp/contests/abc404/tasks/abc404_g)
+- [ABC407 F「Sums of Sliding Window Maximum」](https://atcoder.jp/contests/abc407/tasks/abc407_f)
+- [ABC419 E「Subarray Sum Divisibility」](https://atcoder.jp/contests/abc419/tasks/abc419_e)
+- [ABC420 F「kirinuki」](https://atcoder.jp/contests/abc420/tasks/abc420_f)
+- [ABC421 G「Increase to make it Increasing」](https://atcoder.jp/contests/abc421/tasks/abc421_g)
+- [ABC423 E「Sum of Subarrays」](https://atcoder.jp/contests/abc423/tasks/abc423_e)
+- [ABC427 E「Wind Cleaning」](https://atcoder.jp/contests/abc427/tasks/abc427_e)
+- [ABC452 E「You WILL Like Sigma Problem」](https://atcoder.jp/contests/abc452/tasks/abc452_e)
+- [ABC455 E「Unbalanced ABC Substrings」](https://atcoder.jp/contests/abc455/tasks/abc455_e)
+- [ABC464 G「Celester 2」](https://atcoder.jp/contests/abc464/tasks/abc464_g)
+- [ABC465 G「Sum of Mex of Mod of Linear」](https://atcoder.jp/contests/abc465/tasks/abc465_g)
 
 ## 根拠
 
@@ -121,9 +82,5 @@ sidebar:
 - [ABC228 F 公式問題文](https://atcoder.jp/contests/abc228/tasks/abc228_f)
 - [ABC233 H 公式解説](https://atcoder.jp/contests/abc233/editorial/3168)
 - [ABC233 H 公式問題文](https://atcoder.jp/contests/abc233/tasks/abc233_h)
-- [ABC260 G 公式解説](https://atcoder.jp/contests/abc260/editorial/4457)
-- [ABC260 G 公式問題文](https://atcoder.jp/contests/abc260/tasks/abc260_g)
-- [ABC268 E 公式問題文](https://atcoder.jp/contests/abc268/tasks/abc268_e)
-- [ABC268 E 公式解説](https://atcoder.jp/contests/abc268/editorial/4777)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-prefix-aggregate`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-prefix-aggregate`

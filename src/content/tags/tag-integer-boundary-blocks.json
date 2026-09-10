@@ -35,12 +35,13 @@
   "relatedTags": [],
   "learningOutcomeIds": [
     "outcome-evaluate-compressed-integer-blocks",
-    "outcome-partition-integer-parameter-ranges"
+    "outcome-partition-integer-parameter-ranges",
+    "outcome-sum-affine-floors-by-euclid"
   ],
   "representativeProblemIds": [
     "abc230-e",
-    "abc239-ex",
-    "abc293-f"
+    "abc293-f",
+    "abc239-ex"
   ],
   "aliases": [
     "floor quotient grouping",

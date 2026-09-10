@@ -2602,11 +2602,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-digit-dp'],
   ]),
   'abc465-f': decision(
-    'outcome-enumerate-subset-state-space',
+    'outcome-linearize-static-range-information',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-subset-bitmask-transform'],
+      ['typicalTechniques', 0, 'primary', 'tag-prefix-difference'],
       ['typicalTechniques', 1, 'supporting', 'tag-inclusion-exclusion'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-subset-bitmask-transform'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-prefix-difference'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-inclusion-exclusion'],
     ],
     {

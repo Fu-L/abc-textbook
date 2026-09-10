@@ -41,9 +41,9 @@
     "outcome-design-range-update-action"
   ],
   "representativeProblemIds": [
-    "abc237-g",
     "abc340-e",
-    "abc382-f"
+    "abc382-f",
+    "abc237-g"
   ],
   "aliases": [
     "lazy propagation",

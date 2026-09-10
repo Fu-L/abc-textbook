@@ -1,6 +1,6 @@
 ---
 title: "最小十分状態からDPを設計する"
-description: "前提から最小十分状態からDPを設計するを見抜き、方針へ接続して検証するための学習単位。"
+description: "最小十分状態からDPを設計するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 9
@@ -8,151 +8,91 @@ sidebar:
 
 # 最小十分状態からDPを設計する
 
-このページは **節** です。同じ対象を扱う技能を比較し、どの発動条件・不変量・計算量の違いで使い分けるかを学びます。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
-
-### この単元では扱わない範囲
-
-- 状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。
-
-## 下位単元と学習順
-
-以下の小節を canonical standard order に沿って学びます。共通する対象と、各小節で追加される発動条件を区別してください。
-
-1. [frontier/profile DP・境界状態圧縮](./frontier-profile-dp.md)（標準順 192）— DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。
-
-## 発動条件と見分け方
+## 概要
 
 ### DPの最小十分状態
 
 将来の選択肢と答えが同じprefixを同一状態に縮約する。
 
-検索語: minimal sufficient state、state-compressed DP、状態圧縮DP、同値性によるDP状態圧縮
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる
+初歩的な一次元DPを土台に、未来を決める情報だけを残す最小十分状態の設計原則を学ぶ。
 
-題材: [ABC215 E「Chain Contestant」](https://atcoder.jp/contests/abc215/tasks/abc215_e)
+- 状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。
 
-選定理由: 同じ文字を続ける遷移だけは使用済みでも許し、別文字へ移った後の再登場を mask で禁止する。
+## 下位単元
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。種類数が小さく、各種類を使ったかどうかが将来の可否を決めるとき。 問題全体への接続は併用技能を学んだ後に読む。
+- [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/)
 
-#### このOutcomeを支える根拠
+## 問題一覧
 
-- 各種類が高々一つの連続ブロックに現れる部分列条件を、使用済み集合と末尾種類の DP へ変換して数えられる。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### 観察
+1. [ABC232 E「Rook Path」](https://atcoder.jp/contests/abc232/tasks/abc232_e)
+2. [ABC217 G「Groups」](https://atcoder.jp/contests/abc217/tasks/abc217_g)
+3. [ABC229 F「Make Bipartite」](https://atcoder.jp/contests/abc229/tasks/abc229_f)
+4. [ABC244 E「King Bombee」](https://atcoder.jp/contests/abc244/tasks/abc244_e)
+5. [ABC247 F「Cards」](https://atcoder.jp/contests/abc247/tasks/abc247_f)
+6. [ABC251 E「Takahashi and Animals」](https://atcoder.jp/contests/abc251/tasks/abc251_e)
+7. [ABC264 F「Monochromatic Path」](https://atcoder.jp/contests/abc264/tasks/abc264_f)
+8. [ABC283 E「Don't Isolate Elements」](https://atcoder.jp/contests/abc283/tasks/abc283_e)
+9. [ABC310 E「NAND repeatedly」](https://atcoder.jp/contests/abc310/tasks/abc310_e)
+10. [ABC344 F「Earn to Advance」](https://atcoder.jp/contests/abc344/tasks/abc344_f)
+11. [ABC376 F「Hands on Ring (Hard)」](https://atcoder.jp/contests/abc376/tasks/abc376_f)
+12. [ABC462 F「More ABC」](https://atcoder.jp/contests/abc462/tasks/abc462_f)
+13. [ABC227 E「Swap」](https://atcoder.jp/contests/abc227/tasks/abc227_e)
+14. [ABC265 E「Warp」](https://atcoder.jp/contests/abc265/tasks/abc265_e)
+15. [ABC273 G「Row Column Sums 2」](https://atcoder.jp/contests/abc273/tasks/abc273_g)
+16. [ABC281 G「Farthest City」](https://atcoder.jp/contests/abc281/tasks/abc281_g)
+17. [ABC307 E「Distinct Adjacent」](https://atcoder.jp/contests/abc307/tasks/abc307_e)
+18. [ABC416 G「Concat (1st)」](https://atcoder.jp/contests/abc416/tasks/abc416_g)
+19. [ABC422 F「Eat and Ride」](https://atcoder.jp/contests/abc422/tasks/abc422_f)
+20. [ABC440 G「Haunted House」](https://atcoder.jp/contests/abc440/tasks/abc440_g)
+21. [ABC403 F「Shortest One Formula」](https://atcoder.jp/contests/abc403/tasks/abc403_f)
+22. [ABC375 E「3 Team Division」](https://atcoder.jp/contests/abc375/tasks/abc375_e)
+23. [ABC215 E「Chain Contestant」](https://atcoder.jp/contests/abc215/tasks/abc215_e)
+24. [ABC237 F「|LIS| = 3」](https://atcoder.jp/contests/abc237/tasks/abc237_f)
+25. [ABC279 G「At Most 2 Colors」](https://atcoder.jp/contests/abc279/tasks/abc279_g)
+26. [ABC311 F「Yet Another Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_f)
+27. [ABC345 E「Colorful Subsequence」](https://atcoder.jp/contests/abc345/tasks/abc345_e)
+28. [ABC391 G「Many LCS」](https://atcoder.jp/contests/abc391/tasks/abc391_g)
+29. [ABC450 F「Strongly Connected 2」](https://atcoder.jp/contests/abc450/tasks/abc450_f)
+30. [ABC389 G「Odd Even Graph」](https://atcoder.jp/contests/abc389/tasks/abc389_g)
+31. [ABC313 Ex「Group Photo」](https://atcoder.jp/contests/abc313/tasks/abc313_h)
 
-- 文字の種類は A..J の 10 種類だけである。選ぶ部分列では各文字が高々一つの連続区間に現れるため、過去の並び全体ではなく使用済み文字集合と現在の末尾文字が次の選択可否を決める。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 候補を比較する
+## 関連問題
 
-- **採用**: 使用済み文字の bitmask と末尾文字を状態にし、選ばない・同じ文字を続ける・未使用文字へ移る遷移を数える。 — この二情報が「一度離れた文字へ戻れない」という条件を必要十分に表す。
-- **棄却**: 使用済み文字の bitmask だけを状態にして部分列を数える。 — 同じ mask でも末尾が現在の文字かどうかで、使用済み文字を続けられるかが変わるため、将来の遷移を決定できない。
-- **棄却**: 各位置を選ぶか選ばないかで全ての部分列を列挙する。 — 2^N 通りとなり、同じ使用済み集合と末尾を持つ履歴をまとめられない。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 鍵となる着眼
-
-- 同じ文字を続ける遷移だけは使用済みでも許し、別文字へ移った後の再登場を mask で禁止する。
-
-#### アルゴリズムへ接続する
-
-文字列を左から走査し、各位置の文字 x について current から next へ、選ばない・last=x なら同じブロックを続ける・bit x が未使用なら新ブロックを始める遷移を行う。さらにその位置だけを選ぶ singleton を next[1<<x][x] へ加え、最後に全ての非空状態を合計する。
-
-## 下位単元を使い分ける比較例
-
-未知問を見たときは、手法名を思い出す前に「対象」「操作」「保つ量」「求める量」を書き出します。それぞれの下位単元が要求する発動条件と照合し、採用する経路だけでなく、近い候補を棄却する理由も残してください。
-
-- **frontier/profile DP・境界状態圧縮** — 直接到達点: 未処理領域へ影響するfrontier上の局所値と接続partitionだけを正規化し、幅指数のprofile DPを設計できる。近いが対象外: frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-**比較の到達点**: 未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。
-
-
-## 転用するときの確認
-
-- **bitmask DP**: 種類数が小さく、各種類を使ったかどうかが将来の可否を決めるとき。 適用: 使用済み文字集合を bitmask で保持する。
-- **末尾状態による履歴圧縮**: 直前と同種かどうかだけが継続条件を変えるとき。 適用: 現在の連続区間の文字を末尾状態として持つ。
-- 部分列の履歴条件を、使用済み集合と現在開いている区間の種類へ分解できないか調べる。
-- AAB と ABA で許される部分列を列挙し、mask だけでは同種継続と再登場を区別できない理由、二層配列で同じ位置の再利用を防ぐ理由を説明する。
-
-## 到達確認
-
-### 到達確認 1 — 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる
-
-転移題材: [ABC227 E「Swap」](https://atcoder.jp/contests/abc227/tasks/abc227_e)
-
-**課題**: ABC227 E「Swap」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 学習経路の選択
-
-**課題**: 未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。
-
-**合格条件**: 採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 少数種類の重複文字列について、目標prefixへの最小隣接swap費用を使用個数DPへ組み込み、到達可能な異なる文字列を数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 少数種類の重複文字列について、目標prefixへの最小隣接swap費用を使用個数DPへ組み込み、到達可能な異なる文字列を数えられる。
-
-- 対象技能が担う箇所: 少数種類の重複文字列について、目標prefixへの最小隣接swap費用を使用個数DPへ組み込み、到達可能な異なる文字列を数えられる。
-- 転移題材の解法接続: dp[k][e][y][c]を、各文字をその個数だけ使ったprefixを費用cで作る異なる方法数とする。次の文字種を選び、その文字の左端未使用出現が現在の残列で何番目かを追加費用として遷移し、c≤Kの最終状態を合計する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
-
-</details>
-
-<details><summary>学習経路の選択の解答基準</summary>
-
-**検証状態**: `pending` — これは T057 の学習経路レビュー前に使う自己評価基準であり、検証済みとは扱いません。
-
-正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。
-
-- 問題を対象・操作・保つ量・求める量へ分解する。
-- 各下位単元の発動条件を一つずつ照合し、不足情報を明示する。
-- 採用候補の成立理由と、近い候補の最初の破綻点を対にする。
-- 前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。
-
-期待する到達点: 未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。
-
-</details>
-
+- [ABC236 E「Average and Median」](https://atcoder.jp/contests/abc236/tasks/abc236_e)
+- [ABC282 G「Similar Permutation」](https://atcoder.jp/contests/abc282/tasks/abc282_g)
+- [ABC309 E「Family and Insurance」](https://atcoder.jp/contests/abc309/tasks/abc309_e)
+- [ABC311 E「Defect-free Squares」](https://atcoder.jp/contests/abc311/tasks/abc311_e)
+- [ABC322 E「Product Development」](https://atcoder.jp/contests/abc322/tasks/abc322_e)
+- [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e)
+- [ABC374 F「Shipping」](https://atcoder.jp/contests/abc374/tasks/abc374_f)
+- [ABC378 G「Everlasting LIDS」](https://atcoder.jp/contests/abc378/tasks/abc378_g)
+- [ABC381 F「1122 Subsequence」](https://atcoder.jp/contests/abc381/tasks/abc381_f)
+- [ABC386 F「Operate K」](https://atcoder.jp/contests/abc386/tasks/abc386_f)
+- [ABC388 F「Dangerous Sugoroku」](https://atcoder.jp/contests/abc388/tasks/abc388_f)
+- [ABC418 G「Binary Operation」](https://atcoder.jp/contests/abc418/tasks/abc418_g)
+- [ABC427 E「Wind Cleaning」](https://atcoder.jp/contests/abc427/tasks/abc427_e)
+- [ABC435 F「Cat exercise」](https://atcoder.jp/contests/abc435/tasks/abc435_f)
+- [ABC457 F「Second Gap」](https://atcoder.jp/contests/abc457/tasks/abc457_f)
 
 ## 根拠
 
 - [ABC215 E 公式問題文](https://atcoder.jp/contests/abc215/tasks/abc215_e)
 - [ABC215 E 公式解説](https://atcoder.jp/contests/abc215/editorial/2483)
+- [ABC217 G 公式解説](https://atcoder.jp/contests/abc217/editorial/2390)
+- [ABC217 G 公式問題文](https://atcoder.jp/contests/abc217/tasks/abc217_g)
 - [ABC227 E 公式問題文](https://atcoder.jp/contests/abc227/tasks/abc227_e)
 - [ABC227 E 公式解説](https://atcoder.jp/contests/abc227/editorial/2908)
-- [ABC229 F 公式解説](https://atcoder.jp/contests/abc229/editorial/2964)
-- [ABC229 F 公式問題文](https://atcoder.jp/contests/abc229/tasks/abc229_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-state-design`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-dp-state-design`

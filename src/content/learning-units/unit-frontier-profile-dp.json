@@ -38,66 +38,14 @@
     "abc296-ex",
     "abc379-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-design-frontier-profile-dp",
-      "learningOutcomeIds": [
-        "outcome-design-frontier-profile-dp"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。幅が小さい graph を一方向に構築し、連結性を保つ辺選択を数えるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC248 F「Keep Connect」について、2×N ladder を左から作ると、処理済み部分に右端の上下 2 頂点をどちらも含まない連結成分が生じた時点で、以後の辺では再接続できない。",
-      "procedure": [
-        "観察: 2×N ladder を左から作ると、処理済み部分に右端の上下 2 頂点をどちらも含まない連結成分が生じた時点で、以後の辺では再接続できない。",
-        "観察: 将来全体が連結になり得る frontier 状態は、処理済み部分が連結な状態 0 と、上下の右端を別々に含む 2 成分だけの状態 1 の 2 種類に限られる。",
-        "着眼: 状態 0 からは新しい 3 辺のうち 3 本または任意の 2 本を残すと状態 0、横辺 a_i,b_i の片方だけを残す 2 通りが状態 1 になる。両横辺を消す遷移は過去成分を孤立させる。",
-        "着眼: 状態 1 からは a_i,b_i の両方を必ず残し、c_i も残せば状態 0、c_i を消せば状態 1 になる。",
-        "方針: 列 i、削除辺数 j、frontier の 2 状態を持つ DP で、新しい横 2 辺と縦 1 辺の残し方を遷移する。（全 subgraph を列挙せず、将来の連結可能性に必要な frontier connectivity と削除数だけを保持できる。）",
-        "接続: 初列は c_0 を残す dp[0][0][0]=1 と、消す dp[0][1][1]=1 で始める。以後 new0[j]=old0[j]+3old0[j-1]+old1[j]、new1[j]=2old0[j-2]+old1[j-1] を P で計算し、最後の dp[N-1][j][0] を j=1,…,N-1 について出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "未処理領域へ影響するfrontier上の局所値と接続partitionだけを正規化し、幅指数のprofile DPを設計できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc248-f",
+    "abc296-ex",
+    "abc379-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-design-frontier-profile-dp",
-      "learningOutcomeIds": [
-        "outcome-design-frontier-profile-dp"
-      ],
-      "prerequisiteIds": [
-        "outcome-design-minimal-sufficient-state",
-        "prereq-abc-advanced-v1",
-        "unit-dp-state-design"
-      ],
-      "attainmentCondition": "学習成果「未処理領域へ影響するfrontier上の局所値と接続partitionだけを正規化し、幅指数のprofile DPを設計できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC296 Ex「Unite」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「未処理領域へ影響するfrontier上の局所値と接続partitionだけを正規化し、幅指数のprofile DPを設計できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全ての既存黒マスを連結にする最小追加黒マス数を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 全ての既存黒マスを連結にする最小追加黒マス数を求められる。",
-          "転移題材の解法接続: 各マスで白/黒遷移を行い、上・左の黒ラベルをunionしてfrontier partitionをcanonicalizeする。孤立完成判定を入れ、最後に全必須黒が一成分の状態の追加数最小を取る。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "未処理領域へ影響するfrontier上の局所値と接続partitionだけを正規化し、幅指数のprofile DPを設計できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 90,

@@ -1,7 +1,7 @@
 {
   "id": "tag-prefix-difference",
   "name": "累積和・差分配列",
-  "definition": "一次元区間や二次元矩形の情報、または一括加算を接頭辞・端点の差へ変換し、query・数え上げ・復元に使う。",
+  "definition": "一次元区間や多次元直方体の情報、または一括加算を接頭辞・端点の差へ変換し、query・数え上げ・復元に使う。",
   "parentId": "tag-query-sufficient-aggregate",
   "prerequisiteTagIds": [],
   "semanticSignature": {
@@ -44,9 +44,9 @@
     "outcome-linearize-static-range-information"
   ],
   "representativeProblemIds": [
-    "abc260-g",
     "abc341-e",
-    "abc430-f"
+    "abc430-f",
+    "abc260-g"
   ],
   "aliases": [
     "difference array",

@@ -1,6 +1,6 @@
 ---
 title: "Suffix Automatonで部分文字列集合を表す"
-description: "前提からSuffix Automatonで部分文字列集合を表すを見抜き、方針へ接続して検証するための学習単位。"
+description: "Suffix Automatonで部分文字列集合を表すの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 149
@@ -8,111 +8,33 @@ sidebar:
 
 # Suffix Automatonで部分文字列集合を表す
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 有限状態automatonの構成
-- この位置で学ぶ理由: 有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。
-
-### この単元では扱わない範囲
-
-- 接尾辞を辞書順に並べるSuffix Array、および複数patternの辞書照合だけを行うAho–Corasick。
-
-## 発動条件と見分け方
+## 概要
 
 ### Suffix Automaton
 
 endpos同値類をstateとし、suffix linkとcloneで全部分文字列の遷移を線形状態数へ圧縮する。
 
-検索語: SAM、Suffix Automaton、接尾辞オートマトン
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: 有限状態automatonの構成。
 
-### 例 1 — endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる
+有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。
 
-題材: [ABC433 G「Substring Game」](https://atcoder.jp/contests/abc433/tasks/abc433_g)
+- 接尾辞を辞書順に並べるSuffix Array、および複数patternの辞書照合だけを行うAho–Corasick。
 
-選定理由: Suffix Automaton の各遷移は表す部分文字列へ一文字追加する操作に対応し、len が増えるため遷移グラフは DAG である。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。文字列の全相異なる部分文字列を、末尾への文字追加遷移を保った線形個の状態へ圧縮したいとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC433 G「Substring Game」](https://atcoder.jp/contests/abc433/tasks/abc433_g)
 
-- 部分文字列を伸ばすゲームの勝者を、Suffix Automaton と線形時間の後退解析で判定できる。
-
-#### 観察
-
-- ゲーム中に作られる文字列は S の部分文字列であり、手番では末尾へ一文字追加してなお部分文字列である遷移を選ぶ。これは Suffix Automaton の初期状態からの遷移グラフそのものである。
-
-#### 候補を比較する
-
-- **採用**: S の Suffix Automaton を構築し、各状態をゲーム局面として DAG 上の勝敗を後退解析する。 — 状態・遷移数がともに O(|S|) で、同じ右文脈を持つ多数の部分文字列を一状態へ圧縮できる。
-- **棄却**: 現在文字列そのものを set に持って全ての相異なる部分文字列を列挙する。 — 相異なる部分文字列は Θ(N^2) 個になり得る。
-
-#### 鍵となる着眼
-
-- Suffix Automaton の各遷移は表す部分文字列へ一文字追加する操作に対応し、len が増えるため遷移グラフは DAG である。
-- 出辺のない状態は手番プレイヤーの負け、負け状態へ移れる状態は勝ち、全遷移先が勝ちなら負けとなる。
-
-#### アルゴリズムへ接続する
-
-S を一文字ずつ追加して Suffix Automaton を構築する。状態を len の降順に処理し、出辺先に losing が一つでもあれば winning、なければ losing とする。空文字列を表す初期状態の勝敗から Alice/Bob を答える。
-
-
-## 転用するときの確認
-
-- **Suffix Automaton**: 文字列の全相異なる部分文字列を、末尾への文字追加遷移を保った線形個の状態へ圧縮したいとき。 適用: ゲーム局面の同値な right context を automaton の状態として共有する。
-- **DAG ゲームの後退解析**: 各手で非巡回グラフの辺を進み、動けない側が負ける impartial game の勝敗を求めるとき。 適用: 長さ降順に、遷移先の勝敗から現在状態を決める。
-- 局面数が多い文字列ゲームは、合法な一文字拡張を受理する automaton 上のゲームへ圧縮できる。
-- automaton が suffix だけでなく全 substring の一文字拡張を表すこと、初期状態を空文字列局面として評価することを確認する。
-
-## 到達確認
-
-### 到達確認 1 — endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる
-
-境界検証の元題材: [ABC433 G「Substring Game」](https://atcoder.jp/contests/abc433/tasks/abc433_g)
-
-**課題**: ABC433 G「Substring Game」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 部分文字列を伸ばすゲームの勝者を、Suffix Automaton と線形時間の後退解析で判定できる。
-
-- 元の方針が必要とする対象・操作・不変量・目標を分けて書く。
-- 発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。
-- 元の正当化のうち最初に成立しなくなる命題を指摘する。
-- 計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。
-- 条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。
-
-期待する到達点: endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せるの適用可能範囲と破綻条件を反例付きで説明できる。
-
-</details>
-
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
 ## 根拠
 
 - [ABC433 G 公式解説](https://atcoder.jp/contests/abc433/editorial/14604)
 - [ABC433 G 公式問題文](https://atcoder.jp/contests/abc433/tasks/abc433_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-suffix-automaton`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-suffix-automaton`

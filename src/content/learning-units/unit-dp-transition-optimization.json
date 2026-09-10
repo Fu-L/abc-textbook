@@ -35,95 +35,58 @@
   "docPath": "src/content/docs/learn/dynamic-programming/dp-transition-optimization.md",
   "problemIds": [
     "abc212-e",
-    "abc214-f",
     "abc221-h",
     "abc224-e",
-    "abc235-g",
     "abc243-g",
     "abc249-e",
     "abc253-e",
     "abc265-f",
-    "abc279-g",
     "abc282-g",
-    "abc288-f",
-    "abc311-f",
-    "abc319-g",
-    "abc333-f",
     "abc334-f",
     "abc338-g",
-    "abc342-f",
     "abc353-g",
     "abc358-g",
     "abc370-e",
     "abc372-f",
-    "abc387-f",
     "abc408-f",
-    "abc412-f",
-    "abc436-g",
     "abc442-f",
-    "abc446-g",
     "abc457-f"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-factor-and-accelerate-transitions",
-      "learningOutcomeIds": [
-        "outcome-factor-and-accelerate-transitions"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。許される遷移がほぼ全てで、禁止される遷移だけが少数列挙されているとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC212 E「Safety Journey」について、各晩は今いる街にも壊れた道路の相手にも移動できず、それ以外のほぼ全ての街へ移動できる。使えない組だけが M 本の道路として疎に与えられている。",
-      "procedure": [
-        "観察: 各晩は今いる街にも壊れた道路の相手にも移動できず、それ以外のほぼ全ての街へ移動できる。使えない組だけが M 本の道路として疎に与えられている。",
-        "観察: 翌日のある街への到達数は、前日の全街への到達数の総和から、その街自身と壊れた道路で隣接する街からの分を除けば得られる。",
-        "着眼: 密な許可関係をそのまま扱うのでなく、「全候補から疎な禁止集合を引く」という補集合側の表現に反転する。",
-        "着眼: 同じ街に留まることも禁止されるため、入力された壊れた道路だけでなく dp の同じ添字の値も必ず総和から除く。",
-        "方針: 前日の到達数の総和を先に求め、各到着街について自己ループと壊れた道路の端点に由来する寄与だけを引く。（全ての許可辺を列挙せず、各日につき街と壊れた道路だけを走査して同じ遷移を計算できる。）",
-        "接続: 日ごとの街別到達数を DP とし、全成分和を基準値にして禁止辺の両端からの寄与を差し引くことで、完全グラフの補グラフ上の遷移を疎な更新へ変換する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc212-e",
+    "abc249-e",
+    "abc253-e",
+    "abc265-f",
+    "abc338-g",
+    "abc370-e",
+    "abc372-f",
+    "abc442-f",
+    "abc457-f",
+    "abc353-g",
+    "abc221-h",
+    "abc243-g",
+    "abc334-f",
+    "abc358-g",
+    "abc282-g",
+    "abc408-f",
+    "abc224-e"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-factor-and-accelerate-transitions",
-      "learningOutcomeIds": [
-        "outcome-factor-and-accelerate-transitions"
-      ],
-      "prerequisiteIds": [
-        "outcome-design-minimal-sufficient-state",
-        "prereq-abc-advanced-v1",
-        "unit-dp-state-design"
-      ],
-      "attainmentCondition": "学習成果「高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC221 H「Count Multiset」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: multiplicity 制限付き整数分割を反転差分列へ写し、0-run 制約を二方向の累積和で処理して全サイズを数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: multiplicity 制限付き整数分割を反転差分列へ写し、0-run 制約を二方向の累積和で処理して全サイズを数えられる。",
-          "転移題材の解法接続: 番兵 f[0][0]=1 を置く。x=1..N について各 y の g[x][y] を直前 M 行の f の sliding sum で保ち、y≥x なら f[x][y]=f[x][y-x]+g[x][y-x] を法 998244353 で計算する。求める k ごとの答えは f[k][N] である。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
+  "relatedProblemIds": [
+    "abc214-f",
+    "abc235-g",
+    "abc279-g",
+    "abc288-f",
+    "abc311-f",
+    "abc319-g",
+    "abc333-f",
+    "abc342-f",
+    "abc387-f",
+    "abc412-f",
+    "abc436-g",
+    "abc446-g"
   ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 7,

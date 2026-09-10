@@ -32,64 +32,12 @@
   "problemIds": [
     "abc459-f"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-solve-isotonic-regression-by-pav",
-      "learningOutcomeIds": [
-        "outcome-solve-isotonic-regression-by-pav"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。単調制約下で隣接違反をblock平均化して一意解を求めるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC459 F「-1, +1」について、A_iをA_i-iへずらすと狭義増加化は広義増加化になる。隣接逆転を均す操作を前から繰り返した最終列は一意で、連続blockごとの総和をほぼ均等配分した形になる。",
-      "procedure": [
-        "観察: A_iをA_i-iへずらすと狭義増加化は広義増加化になる。隣接逆転を均す操作を前から繰り返した最終列は一意で、連続blockごとの総和をほぼ均等配分した形になる。",
-        "着眼: 長さL・総和Sのblockを最も均す整数列は floor((S+t)/L), t=0..L-1 で、値は二つの隣接整数だけになる。",
-        "着眼: stack mergeは各blockを一度pushし一度popするだけなので、境界比較を定数時間にできれば全体線形である。",
-        "方針: 各要素を一blockとしてstackへ入れ、直前blockの最終値が次blockの先頭値を超える間mergeし、block和と長さから floor((S+t)/len) の均し列を表す。（各block内の最適列は総和固定の最も平坦な広義単調列で、隣接block境界が逆転した場合は別々に保つ解が不可能なのでmergeが強制される。）",
-        "接続: shift後Aを左から処理し、blockに(l,r,sum)を持つ。top二blockの均し列境界値が非単調ならsum・lengthを合併する。確定blockごとにquotient/remainderから最終Bを復元し、元AからBへの必要操作数を公式に集計する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "単調制約付き凸最小化で違反する隣接blockをpoolし、block optimumが単調になるまでmergeする。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc459-f"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-solve-isotonic-regression-by-pav",
-      "learningOutcomeIds": [
-        "outcome-solve-isotonic-regression-by-pav"
-      ],
-      "prerequisiteIds": [
-        "outcome-optimize-univariate-convex-function",
-        "prereq-abc-advanced-v1",
-        "unit-basic-convex-optimization"
-      ],
-      "attainmentCondition": "学習成果「単調制約付き凸最小化で違反する隣接blockをpoolし、block optimumが単調になるまでmergeする。その発動条件、正当性、計算量を説明し、未知問へ実装できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
-      "assessment": {
-        "method": "ABC459 F「-1, +1」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「単調制約付き凸最小化で違反する隣接blockをpoolし、block optimumが単調になるまでmergeする。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
-          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
-          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
-          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
-          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
-        ],
-        "expectedResult": "単調制約付き凸最小化で違反する隣接blockをpoolし、block optimumが単調になるまでmergeする。その発動条件、正当性、計算量を説明し、未知問へ実装できるの適用可能範囲と破綻条件を反例付きで説明できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 94,

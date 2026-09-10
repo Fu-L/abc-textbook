@@ -37,62 +37,15 @@
     "abc417-g",
     "abc450-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-query-recursively-defined-string",
-      "learningOutcomeIds": [
-        "outcome-query-recursively-defined-string"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。有限base stringの巨大反復上で、指定文字の多数回先の出現位置が欲しい。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC346 F「SSttrriinngg in StringString」について、kを大きくしてg(T,k)がsubsequenceでなくなれば、それ以上も不可能なので答えは単調判定を二分探索できる。固定kではTの各文字をk回ずつ、f(S,N)内の最早位置へgreedy matchingすればよい。",
-      "procedure": [
-        "観察: kを大きくしてg(T,k)がsubsequenceでなくなれば、それ以上も不可能なので答えは単調判定を二分探索できる。固定kではTの各文字をk回ずつ、f(S,N)内の最早位置へgreedy matchingすればよい。",
-        "着眼: 現在absolute位置a以降で文字cのb回目出現は、S一周期内のc個数cnt_cでfull cyclesをまとめ、S+S内の出現位置またはposition vectorのlower_boundで残りを決められる。最早出現を選ぶgreedyは後続に最大の余地を残す。",
-        "方針: 文字別出現位置と周期countを使うsubsequence判定＋k二分探索（巨大なS^Nを構築せず、各T文字についてk個先の出現をO(log |S|)またはO(1)算術で飛べる。）",
-        "接続: S内の各文字の出現positionを前計算し、TにS不在文字があれば0を返す。feasible(k)ではpos=0から各c∈Tについて、pos mod |S|以降のc出現数、必要なfull cycle数、周期内indexを算術とbinary searchで求めてposをk個目の直後へ進め、pos≤N|S|か判定する。0…floor(N|S|/|T|)で最大kを二分探索する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "圧縮・反復・再帰または入れ子で定義された文字列を展開せず、block長・対応区切り・作用から照会・変換・評価できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc450-e",
+    "abc350-f",
+    "abc346-f",
+    "abc417-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-query-recursively-defined-string",
-      "learningOutcomeIds": [
-        "outcome-query-recursively-defined-string"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「圧縮・反復・再帰または入れ子で定義された文字列を展開せず、block長・対応区切り・作用から照会・変換・評価できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC350 F「Transpose」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「圧縮・反復・再帰または入れ子で定義された文字列を展開せず、block長・対応区切り・作用から照会・変換・評価できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 全matched parenthesis操作後に一意に得られる最終文字列をO(|S|)で構成できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 全matched parenthesis操作後に一意に得られる最終文字列をO(|S|)で構成できる。",
-          "転移題材の解法接続: stackで全parenthesis pair matchを求める同時にdepthを走査し、letterはdepth oddならcase toggleして保存する。i=0,dir=+1から、letterなら出力、parenthesisならi=match[i],dir=-dirとし、その後i+=dirする。範囲外へ出るまで続ける。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "圧縮・反復・再帰または入れ子で定義された文字列を展開せず、block長・対応区切り・作用から照会・変換・評価できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 2,
   "representativeRank": 2,

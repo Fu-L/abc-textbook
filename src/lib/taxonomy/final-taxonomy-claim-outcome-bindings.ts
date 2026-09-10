@@ -251,15 +251,6 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
       supporting('outcome-compute-in-modular-arithmetic'),
     ],
   },
-  'abc305-ex': {
-    '/typicalTechniques/1': [
-      primary('outcome-optimize-by-lagrangian-relaxation', 'outcome-optimize-monge-transitions'),
-      supporting('outcome-design-interval-split-dp'),
-    ],
-    '/prerequisiteCandidates/0': [
-      sameTag('outcome-optimize-by-lagrangian-relaxation', 'outcome-optimize-monge-transitions'),
-    ],
-  },
   'abc305-f': {
     '/typicalTechniques/0': [
       primary('outcome-select-state-graph-search', 'outcome-maintain-interactive-query-protocol'),

@@ -41,95 +41,44 @@
     "abc243-ex",
     "abc245-g",
     "abc246-e",
-    "abc250-ex",
     "abc252-e",
     "abc257-f",
-    "abc261-g",
-    "abc264-g",
-    "abc271-e",
     "abc277-e",
     "abc286-e",
     "abc291-f",
-    "abc297-e",
-    "abc301-e",
-    "abc305-e",
     "abc307-f",
     "abc308-ex",
     "abc325-e",
-    "abc338-f",
     "abc342-e",
-    "abc355-e",
     "abc363-e",
-    "abc364-g",
     "abc369-e",
-    "abc375-f",
-    "abc375-g",
-    "abc393-g",
     "abc395-e",
-    "abc395-g",
     "abc404-g",
     "abc414-g",
     "abc416-e",
-    "abc429-f",
     "abc431-e",
     "abc463-e"
   ],
-  "examples": [
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-build-shortest-path-certificate",
-        "outcome-model-and-compute-shortest-path",
-        "outcome-solve-difference-constraints"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（学習経路の比較）",
-      "omissions": [
-        "各Outcomeの証明・実装・問題固有の完全解説は、それを直接所有する下位単元で扱う。"
-      ],
-      "environment": "紙上での未知問のモデル化と候補比較",
-      "input": "重み付き最短路・経路復元・差分制約の範囲に属する未知問を一問選び、対象・操作・保つ量・求める量を抽出する。",
-      "procedure": [
-        "最短路モデル: 1個の直接所有Outcome、学ぶ理由「基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める」、対象外「最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "最短路を証明する木・経路の復元: 1個の直接所有Outcome、学ぶ理由「最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する」、対象外「最短路を証明する木・経路の復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。",
-        "difference constraints・不等式系の最短路化: 1個の直接所有Outcome、学ぶ理由「最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める」、対象外「difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法」を照合する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "下位単元を一つ以上の根拠とともに選び、近い不採用候補との境界を説明できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "curriculum_routing"
-    }
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc250-ex",
+    "abc261-g",
+    "abc264-g",
+    "abc271-e",
+    "abc297-e",
+    "abc301-e",
+    "abc305-e",
+    "abc338-f",
+    "abc355-e",
+    "abc364-g",
+    "abc375-f",
+    "abc375-g",
+    "abc393-g",
+    "abc395-g",
+    "abc429-f"
   ],
-  "exercises": [
-    {
-      "key": "curriculum-routing",
-      "learningOutcomeIds": [
-        "outcome-build-shortest-path-certificate",
-        "outcome-model-and-compute-shortest-path",
-        "outcome-solve-difference-constraints"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "未知問の構造から下位単元の候補を絞り、採用・棄却を発動条件と対象外の両方で説明できる。",
-      "assessment": {
-        "method": "未知問を一問選び、各下位単元に対して「発動条件を満たす」「対象外に該当する」「情報不足」のいずれかを判定し、標準順に沿って最初に学ぶ単元を選ぶ。",
-        "successCondition": "採用単元には必要な対象・操作・不変量を対応付け、少なくとも一つの近い候補には反例または条件不足を示す。"
-      },
-      "answer": {
-        "reasoningOrVerification": "正解は一つの単元名ではなく、問題構造と各候補の定義・対象外との照合である。下位単元のOutcome自体の到達確認はそれぞれの所有Unitで行う。",
-        "procedure": [
-          "問題を対象・操作・保つ量・求める量へ分解する。",
-          "各下位単元の発動条件を一つずつ照合し、不足情報を明示する。",
-          "採用候補の成立理由と、近い候補の最初の破綻点を対にする。",
-          "前提DAGと標準順を確認し、選んだ経路の最初の単元を決める。"
-        ],
-        "expectedResult": "未知問に対する学習経路を、発動条件・棄却理由・前提順とともに再現できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "curriculum_routing"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 1,

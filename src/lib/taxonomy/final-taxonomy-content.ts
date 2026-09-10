@@ -695,7 +695,7 @@ export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, reado
   'tag-bitset-word-parallel': ['abc258-g', 'abc348-f'],
   'tag-cartesian-tree': ['abc275-ex', 'abc420-f'],
   'tag-carry-mixed-radix-dp': ['abc231-e', 'abc466-g'],
-  'tag-combinatorial-coefficients': ['abc358-e', 'abc234-f', 'abc217-g'],
+  'tag-combinatorial-coefficients': ['abc234-f', 'abc358-e'],
   'tag-constructive-witness': ['abc333-e', 'abc239-f', 'abc244-g'],
   'tag-coordinate-compression': ['abc221-e', 'abc287-g', 'abc351-f', 'abc374-f'],
   'tag-contribution-reordering': ['abc233-e', 'abc224-f', 'abc215-g'],

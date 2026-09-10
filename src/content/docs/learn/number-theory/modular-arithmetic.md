@@ -1,6 +1,6 @@
 ---
 title: "法上の四則演算・高速累乗・逆元"
-description: "前提から法上の四則演算・高速累乗・逆元を見抜き、方針へ接続して検証するための学習単位。"
+description: "法上の四則演算・高速累乗・逆元の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 16
@@ -8,109 +8,95 @@ sidebar:
 
 # 法上の四則演算・高速累乗・逆元
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
-
-### この単元では扱わない範囲
-
-- 法 m で剰余 0 となる因子数と可逆な非零剰余因子の積を分けて因子差し替えを処理する動的積、複数の合同条件を統合する一次合同・CRT、および剰余列の最小周期を求める問題。
-
-## 発動条件と見分け方
+## 概要
 
 ### 法上の四則演算・高速累乗・逆元
 
 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算・確率を計算する。
 
-検索語: modular arithmetic、modular exponentiation、modular inverse、モジュラ逆元、法上の四則演算
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる
+剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
 
-題材: [ABC228 E「Integer Sequence Fair」](https://atcoder.jp/contests/abc228/tasks/abc228_e)
+- 法 m で剰余 0 となる因子数と可逆な非零剰余因子の積を分けて因子差し替えを処理する動的積、複数の合同条件を統合する一次合同・CRT、および剰余列の最小周期を求める問題。
 
-選定理由: M≡0 (mod P) のとき指数K^Nは正なので答えは0である。この場合に指数をP-1で簡約すると、余り0から誤って0^0を扱う可能性があるため先に分岐する。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。素数法Pの下で、Pと互いに素な底を巨大な指数へ累乗したいとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-- 巨大な指数を持つ剰余累乗について、底の可逆性を確認して周期へ落とし、例外を含めて計算できる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 長さNの整数列は各要素にK通りの選択肢があるためK^N通りあり、それぞれにM通りの点数を独立に付けられる。したがって求める個数は M^(K^N) だが、N・K・Mが10^18以下なので指数そのものは構成できない。
-- 法P=998244353は素数である。底MがPの倍数でなければFermatの小定理により指数をP-1で割った余りだけ求めればよい一方、MがPの倍数なら同じ簡約をしてはいけない。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: M mod Pを場合分けし、非零ならK^N mod (P-1)を高速冪で求め、その値を指数としてMの高速冪を計算する。 — Fermatの小定理で巨大指数をP-1周期へ落とせ、二段の高速冪はいずれも指数のビット数に比例する反復で済む。
-- **棄却**: K^Nを通常の整数として計算してから、Mをその回数だけ掛ける。 — 指数は入力の時点で10^18乗まで膨らみ、値の保持も回数分の反復もできない。
-
-#### 鍵となる着眼
-
-- M≡0 (mod P) のとき指数K^Nは正なので答えは0である。この場合に指数をP-1で簡約すると、余り0から誤って0^0を扱う可能性があるため先に分岐する。
-- MとPが互いに素なら M^(P-1)≡1 (mod P) なので、K^NをP-1で割った商の分は全て消え、余りだけが結果を決める。
-
-#### アルゴリズムへ接続する
-
-M mod P=0なら0を出力する。そうでなければ二分累乗法で e=K^N mod (P-1) を計算し、続けて M^e mod P を計算する。
-
-
-## 転用するときの確認
-
-- **Fermatの小定理による指数の簡約**: 素数法Pの下で、Pと互いに素な底を巨大な指数へ累乗したいとき。 適用: 指数K^NをP-1で割った余りへ置き換え、外側の累乗を計算可能な大きさにする。
-- **二分累乗法**: 指数が非常に大きく、累乗を剰余付きで求めたいとき。 適用: K^N mod (P-1) と M^e mod P の両方を、指数を2進展開して計算する。
-- 累乗塔を剰余で扱うときは、各段で使う周期の前提を底ごとに確認し、0や非互いに素の例外を先に分離する。
-- 『指数はP-1で割ればよい』だけで済ませず、その根拠がM≠0 (mod P) に依存することと、M≡0の場合の指数が正であることを別々に説明する。
-
-## 到達確認
-
-### 到達確認 1 — 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる
-
-転移題材: [ABC215 G「Colorful Candies 2」](https://atcoder.jp/contests/abc215/tasks/abc215_g)
-
-**課題**: ABC215 G「Colorful Candies 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 法の下で階乗と逆階乗を前計算し、二項係数と確率の比を計算できること。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 法の下で階乗と逆階乗を前計算し、二項係数と確率の比を計算できること。
-
-- 対象技能が担う箇所: 法の下で階乗と逆階乗を前計算し、二項係数と確率の比を計算できること。
-- 転移題材の解法接続: 色数を指示変数の和へ分解し、余事象の二項係数比を頻度別に集約して、正頻度の疎性を利用しながら全ての K の期待値を求める。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。
-
-</details>
-
+- [ABC215 G「Colorful Candies 2」](https://atcoder.jp/contests/abc215/tasks/abc215_g)
+- [ABC220 E「Distance on Large Perfect Binary Tree」](https://atcoder.jp/contests/abc220/tasks/abc220_e)
+- [ABC221 E「LEQ」](https://atcoder.jp/contests/abc221/tasks/abc221_e)
+- [ABC222 H「Beautiful Binary Tree」](https://atcoder.jp/contests/abc222/tasks/abc222_h)
+- [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
+- [ABC226 F「Score of Permutations」](https://atcoder.jp/contests/abc226/tasks/abc226_f)
+- [ABC228 E「Integer Sequence Fair」](https://atcoder.jp/contests/abc228/tasks/abc228_e)
+- [ABC234 F「Reordering」](https://atcoder.jp/contests/abc234/tasks/abc234_f)
+- [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
+- [ABC238 Ex「Removing People」](https://atcoder.jp/contests/abc238/tasks/abc238_h)
+- [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
+- [ABC241 Ex「Card Deck Score」](https://atcoder.jp/contests/abc241/tasks/abc241_h)
+- [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
+- [ABC243 F「Lottery」](https://atcoder.jp/contests/abc243/tasks/abc243_f)
+- [ABC245 Ex「Product Modulo 2」](https://atcoder.jp/contests/abc245/tasks/abc245_h)
+- [ABC246 F「typewriter」](https://atcoder.jp/contests/abc246/tasks/abc246_f)
+- [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
+- [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
+- [ABC269 F「Numbered Checker」](https://atcoder.jp/contests/abc269/tasks/abc269_f)
+- [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h)
+- [ABC270 G「Sequence in mod P」](https://atcoder.jp/contests/abc270/tasks/abc270_g)
+- [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g)
+- [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e)
+- [ABC276 F「Double Chance」](https://atcoder.jp/contests/abc276/tasks/abc276_f)
+- [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
+- [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e)
+- [ABC282 E「Choose Two and Eat One」](https://atcoder.jp/contests/abc282/tasks/abc282_e)
+- [ABC284 Ex「Count Unlabeled Graphs」](https://atcoder.jp/contests/abc284/tasks/abc284_h)
+- [ABC284 G「Only Once」](https://atcoder.jp/contests/abc284/tasks/abc284_g)
+- [ABC289 Ex「Trio」](https://atcoder.jp/contests/abc289/tasks/abc289_h)
+- [ABC295 E「Kth Number」](https://atcoder.jp/contests/abc295/tasks/abc295_e)
+- [ABC297 Ex「Diff Adjacent」](https://atcoder.jp/contests/abc297/tasks/abc297_h)
+- [ABC297 F「Minimum Bounding Box 2」](https://atcoder.jp/contests/abc297/tasks/abc297_f)
+- [ABC298 E「Unfair Sugoroku」](https://atcoder.jp/contests/abc298/tasks/abc298_e)
+- [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h)
+- [ABC301 F「Anti-DDoS」](https://atcoder.jp/contests/abc301/tasks/abc301_f)
+- [ABC303 Ex「Constrained Tree Degree」](https://atcoder.jp/contests/abc303/tasks/abc303_h)
+- [ABC304 F「Shift Table」](https://atcoder.jp/contests/abc304/tasks/abc304_f)
+- [ABC310 F「Make 10 Again」](https://atcoder.jp/contests/abc310/tasks/abc310_f)
+- [ABC310 G「Takahashi And Pass-The-Ball Game」](https://atcoder.jp/contests/abc310/tasks/abc310_g)
+- [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
+- [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
+- [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e)
+- [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
+- [ABC327 G「Many Good Tuple Problems」](https://atcoder.jp/contests/abc327/tasks/abc327_g)
+- [ABC332 F「Random Update Query」](https://atcoder.jp/contests/abc332/tasks/abc332_f)
+- [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f)
+- [ABC334 E「Christmas Color Grid 1」](https://atcoder.jp/contests/abc334/tasks/abc334_e)
+- [ABC335 G「Discrete Logarithm Problems」](https://atcoder.jp/contests/abc335/tasks/abc335_g)
+- [ABC336 G「16 Integers」](https://atcoder.jp/contests/abc336/tasks/abc336_g)
+- [ABC349 F「Subsequence LCM」](https://atcoder.jp/contests/abc349/tasks/abc349_f)
+- [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
+- [ABC380 G「Another Shuffle Window」](https://atcoder.jp/contests/abc380/tasks/abc380_g)
+- [ABC405 E「Fruit Lineup」](https://atcoder.jp/contests/abc405/tasks/abc405_e)
+- [ABC411 E「E [max]」](https://atcoder.jp/contests/abc411/tasks/abc411_e)
+- [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
+- [ABC417 F「Random Gathering」](https://atcoder.jp/contests/abc417/tasks/abc417_f)
+- [ABC422 G「Balls and Boxes」](https://atcoder.jp/contests/abc422/tasks/abc422_g)
+- [ABC432 G「Sum of Binom(A, B)」](https://atcoder.jp/contests/abc432/tasks/abc432_g)
+- [ABC439 F「Beautiful Kadomatsu」](https://atcoder.jp/contests/abc439/tasks/abc439_f)
+- [ABC448 E「Simple Division」](https://atcoder.jp/contests/abc448/tasks/abc448_e)
 
 ## 根拠
 
@@ -120,7 +106,5 @@ M mod P=0なら0を出力する。そうでなければ二分累乗法で e=K^N 
 - [ABC220 E 公式解説](https://atcoder.jp/contests/abc220/editorial/2679)
 - [ABC221 E 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_e)
 - [ABC221 E 公式解説](https://atcoder.jp/contests/abc221/editorial/2718)
-- [ABC228 E 公式問題文](https://atcoder.jp/contests/abc228/tasks/abc228_e)
-- [ABC228 E 公式解説](https://atcoder.jp/contests/abc228/editorial/2932)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-modular-arithmetic`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-modular-arithmetic`

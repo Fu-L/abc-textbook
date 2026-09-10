@@ -18,7 +18,6 @@ import {
 } from '../../src/lib/taxonomy/canonical-taxonomy-materialization.js';
 import { loadFinalTaxonomySourceContext } from '../../src/lib/taxonomy/final-taxonomy-build.js';
 import { SINGLE_PROBLEM_TAG_IDS } from '../../src/lib/taxonomy/final-taxonomy-policy.js';
-import { CANONICAL_GUIDED_EXAMPLES } from '../../src/lib/taxonomy/canonical-guided-examples.js';
 
 const BUILD_PATH = 'staging/taxonomy/initial/final-taxonomy-build.json';
 
@@ -39,30 +38,32 @@ const loadMaterializationInput = async () => {
 };
 
 describe('T047–T050 canonical taxonomy materialization', () => {
-  it('uses explicit teaching choices even when a simpler guide is only a supporting placement', async () => {
+  it('fixes unique presentation and descendant coverage without prescribed teaching blocks', async () => {
     const input = await loadMaterializationInput();
     const result = buildCanonicalTaxonomyMaterialization(input);
-    expect(Object.keys(CANONICAL_GUIDED_EXAMPLES).sort()).toEqual(
-      result.learningOutcomes.map(({ value }) => value.id).sort(),
-    );
-    const expected = {
-      'unit-dp-subset-state': 'ABC232 F',
-      'unit-potential-dsu': 'ABC328 F',
-      'unit-rational-approximation': 'ABC333 G',
-      'unit-sequence-fingerprint': 'ABC331 F',
-      'unit-binary-trie': 'ABC425 G',
-      'unit-dp-game-value': 'ABC349 E',
-      'unit-chapter-modeling': 'ABC214 E',
-    };
-    for (const [unitId, problemLabel] of Object.entries(expected)) {
-      const unit = result.learningUnits.find(({ value }) => value.id === unitId);
-      expect(
-        unit?.value.examples.find(({ learningUnitRole }) => learningUnitRole === 'guided_outcome')
-          ?.input,
-        unitId,
-      ).toContain(problemLabel);
-      expect(unit?.document).toContain('選定理由:');
+    const occurrences = new Map<string, string[]>();
+    for (const { value: unit, document } of result.learningUnits) {
+      expect(unit.examples).toEqual([]);
+      expect(unit.exercises).toEqual([]);
+      expect(document).toContain('## 概要');
+      expect(document).toContain('## 問題一覧');
+      expect(document).not.toMatch(/ガイド例|到達確認|自己評価|curriculum/u);
+      for (const id of unit.directProblemIds ?? [])
+        occurrences.set(id, [...(occurrences.get(id) ?? []), unit.id]);
+      const children = result.learningUnits.filter(({ value }) => value.parentId === unit.id);
+      expect([...unit.problemIds].sort()).toEqual(
+        [
+          ...new Set([
+            ...(unit.directProblemIds ?? []),
+            ...children.flatMap(({ value }) => value.problemIds),
+          ]),
+        ].sort(),
+      );
     }
+    for (const placement of input.build.placements)
+      expect(occurrences.get(placement.problemId)).toEqual([placement.presentationUnitId]);
+    expect(occurrences.size).toBe(868);
+    expect(result.learningOutcomes).toHaveLength(204);
   }, 30_000);
 
   it('materializes every accepted candidate and placement without re-synthesizing taxonomy', async () => {
@@ -111,18 +112,10 @@ describe('T047–T050 canonical taxonomy materialization', () => {
   it('hands full-authoring bytes off without relaxing canonical taxonomy invariants', async () => {
     const input = await loadMaterializationInput();
     const result = structuredClone(buildCanonicalTaxonomyMaterialization(input));
-    const unit = result.learningUnits.find(({ value }) => value.exercises.length > 0);
+    const unit = result.learningUnits[0];
     if (unit === undefined) throw new Error('Expected one canonical LearningUnit.');
 
     unit.value.contentPhase = 'full_authoring';
-    unit.value.exercises = unit.value.exercises.map((exercise) => ({
-      ...exercise,
-      answer: {
-        ...exercise.answer,
-        reasoningOrVerification: `${exercise.answer.reasoningOrVerification} 査読済みの補足。`,
-        verificationStatus: 'passed',
-      },
-    }));
     const authoredResult = {
       ...result,
       learningUnits: result.learningUnits.map((output) =>
@@ -143,202 +136,6 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     expect(validateCanonicalMaterialization(input, authoredResult)).toContain(
       `UNIT_SOURCE_UNKNOWN:${unit.value.id}`,
     );
-  }, 30_000);
-
-  it('authors each Outcome once and gives every container one separate curriculum-routing check', async () => {
-    const input = await loadMaterializationInput();
-    const result = buildCanonicalTaxonomyMaterialization(input);
-    const unitIds = new Set(result.learningUnits.map(({ value }) => value.id));
-    const outcomeIds = result.learningOutcomes.map(({ value }) => value.id);
-    const tagIds = result.tags.map(({ value }) => value.id);
-    const guidedOwnerCounts = new Map<string, number>();
-    const attainmentOwnerCounts = new Map<string, number>();
-    const outcomeOwnerCounts = new Map<string, number>();
-    const tagOwnerCounts = new Map<string, number>();
-    const increment = (counts: Map<string, number>, id: string): void => {
-      counts.set(id, (counts.get(id) ?? 0) + 1);
-    };
-    let routingUnitCount = 0;
-    let totalExampleCount = 0;
-    let totalExerciseCount = 0;
-
-    for (const output of result.learningUnits) {
-      const children = result.learningUnits.filter(
-        ({ value }) => value.parentId === output.value.id,
-      );
-      const ownedOutcomeIds = output.value.ownedLearningOutcomeIds ?? [];
-      const guidedExamples = output.value.examples.filter(
-        ({ learningUnitRole }) => learningUnitRole === 'guided_outcome',
-      );
-      const routingExamples = output.value.examples.filter(
-        ({ learningUnitRole }) => learningUnitRole === 'curriculum_routing',
-      );
-      const attainmentExercises = output.value.exercises.filter(
-        ({ learningUnitRole }) => learningUnitRole === 'outcome_attainment',
-      );
-      const routingExercises = output.value.exercises.filter(
-        ({ learningUnitRole }) => learningUnitRole === 'curriculum_routing',
-      );
-      const routedOutcomeIds = [
-        ...new Set(children.flatMap(({ value }) => value.learningOutcomeIds)),
-      ].sort();
-      totalExampleCount += output.value.examples.length;
-      totalExerciseCount += output.value.exercises.length;
-      for (const tagId of output.value.ownedTagIds ?? []) increment(tagOwnerCounts, tagId);
-      for (const outcomeId of ownedOutcomeIds) increment(outcomeOwnerCounts, outcomeId);
-      for (const example of guidedExamples) {
-        expect(example.learningOutcomeIds).toHaveLength(1);
-        const outcomeId = example.learningOutcomeIds[0];
-        if (outcomeId === undefined)
-          throw new Error(`Missing guided Outcome for ${output.value.id}.`);
-        expect(example.key).toBe(`guided-${outcomeId}`);
-        increment(guidedOwnerCounts, outcomeId);
-      }
-      for (const exercise of attainmentExercises) {
-        expect(exercise.learningOutcomeIds).toHaveLength(1);
-        const outcomeId = exercise.learningOutcomeIds[0];
-        if (outcomeId === undefined) {
-          throw new Error(`Missing attainment Outcome for ${output.value.id}.`);
-        }
-        expect(exercise.key).toBe(`attainment-${outcomeId}`);
-        increment(attainmentOwnerCounts, outcomeId);
-      }
-
-      expect(output.value.docPath).toBe(output.documentPath);
-      expect(output.value.ownedTagIds).toBeDefined();
-      expect(output.value.ownedLearningOutcomeIds).toBeDefined();
-      expect(guidedExamples).toHaveLength(ownedOutcomeIds.length);
-      expect(attainmentExercises).toHaveLength(ownedOutcomeIds.length);
-      expect(output.value.examples).toHaveLength(
-        ownedOutcomeIds.length + (children.length ? 1 : 0),
-      );
-      expect(output.value.exercises).toHaveLength(
-        ownedOutcomeIds.length + (children.length ? 1 : 0),
-      );
-      expect(guidedExamples.flatMap(({ learningOutcomeIds }) => learningOutcomeIds).sort()).toEqual(
-        [...ownedOutcomeIds].sort(),
-      );
-      expect(
-        attainmentExercises.flatMap(({ learningOutcomeIds }) => learningOutcomeIds).sort(),
-      ).toEqual([...ownedOutcomeIds].sort());
-      expect(output.document).toContain('## この単元でできるようになること');
-      expect(output.document).toContain('\ndraft: true\n');
-      expect(output.document).toContain('## 発動条件と見分け方');
-      expect(output.document).toContain('## ガイド例');
-      expect(output.document).toContain('## 到達確認');
-      expect(output.document).toContain('## 解答と自己評価基準');
-      expect(output.document).toContain('## 根拠');
-      expect(output.document).not.toContain('objectPatterns');
-      expect(output.document).not.toContain('triggerPatterns');
-      expect(output.document).not.toMatch(/。。|。の適用可能範囲|。 発動条件/u);
-      if (ownedOutcomeIds.length > 0) {
-        expect(output.document).toContain('#### このOutcomeを支える根拠');
-      } else {
-        expect(output.document).not.toContain('#### このOutcomeを支える根拠');
-      }
-      for (const exercise of output.value.exercises) {
-        expect(exercise.answer.verificationStatus).toBe('pending');
-      }
-      for (const exercise of attainmentExercises) {
-        expect(exercise.assessment.method).toMatch(/転移題材|発動条件を一つ選んで否定/u);
-      }
-      if (children.length > 0) {
-        routingUnitCount += 1;
-        expect(routingExamples).toHaveLength(1);
-        expect(routingExercises).toHaveLength(1);
-        expect(routingExamples[0]).toMatchObject({
-          key: 'curriculum-routing',
-          learningUnitRole: 'curriculum_routing',
-          learningOutcomeIds: routedOutcomeIds,
-          kind: 'illustrative',
-          verificationStatus: 'not_applicable',
-        });
-        expect(routingExercises[0]).toMatchObject({
-          key: 'curriculum-routing',
-          learningUnitRole: 'curriculum_routing',
-          learningOutcomeIds: routedOutcomeIds,
-          answer: { verificationStatus: 'pending' },
-        });
-        expect(output.document).toContain('## 下位単元と学習順');
-        expect(output.document).toContain('## 下位単元を使い分ける比較例');
-        expect(output.document).toContain('### 学習経路の選択');
-        expect(output.document).toContain('これは T057 の学習経路レビュー前');
-        for (const child of children) {
-          const childDocumentName = child.documentPath.split('/').at(-1);
-          expect(childDocumentName).toBeDefined();
-          if (childDocumentName === undefined) throw new Error('Expected a child document name.');
-          expect(output.document).toContain(`./${childDocumentName}`);
-        }
-      } else {
-        expect(routingExamples).toEqual([]);
-        expect(routingExercises).toEqual([]);
-        expect(output.document).not.toContain('## 下位単元を使い分ける比較例');
-      }
-      for (const prerequisiteId of output.value.additionalPrerequisiteUnitIds) {
-        expect(unitIds.has(prerequisiteId)).toBe(true);
-      }
-    }
-
-    expect(outcomeIds).toHaveLength(200);
-    expect(tagIds).toHaveLength(197);
-    expect(result.learningUnits).toHaveLength(220);
-    expect(
-      result.learningUnits.filter(({ value }) => value.ownedLearningOutcomeIds?.length === 0),
-    ).toHaveLength(24);
-    expect(
-      result.learningUnits.filter(({ value }) => {
-        const hasChildren = result.learningUnits.some(
-          ({ value: candidate }) => candidate.parentId === value.id,
-        );
-        return hasChildren && (value.ownedLearningOutcomeIds?.length ?? 0) > 0;
-      }),
-    ).toHaveLength(21);
-    expect(
-      result.learningUnits
-        .filter(({ value }) => value.ownedLearningOutcomeIds?.length === 2)
-        .map(({ value }) => value.id)
-        .sort(),
-    ).toEqual([
-      'unit-bipartite-matching',
-      'unit-dp-sequence-interval',
-      'unit-dsu-components',
-      'unit-integer-boundary-blocks',
-    ]);
-    expect(routingUnitCount).toBe(45);
-    expect(totalExampleCount).toBe(245);
-    expect(totalExerciseCount).toBe(245);
-    for (const outcomeId of outcomeIds) {
-      expect(outcomeOwnerCounts.get(outcomeId), `${outcomeId}/owner`).toBe(1);
-      expect(guidedOwnerCounts.get(outcomeId), `${outcomeId}/guided`).toBe(1);
-      expect(attainmentOwnerCounts.get(outcomeId), `${outcomeId}/attainment`).toBe(1);
-    }
-    for (const tagId of tagIds) expect(tagOwnerCounts.get(tagId), tagId).toBe(1);
-
-    const dynamicProduct = result.learningUnits.find(
-      ({ value }) => value.id === 'unit-dynamic-modular-product',
-    );
-    expect(dynamicProduct?.value.ownedLearningOutcomeIds).toEqual([
-      'outcome-maintain-modular-product-under-factor-updates',
-    ]);
-    expect(dynamicProduct?.value.examples[0]?.learningUnitRole).toBe('guided_outcome');
-    expect(dynamicProduct?.value.examples[0]?.input).toContain('ABC411 E');
-    expect(dynamicProduct?.value.exercises[0]?.assessment.method).toContain('ABC405 G');
-    expect(dynamicProduct?.document).toContain(
-      '現在区間へのadd/removeごとに値の頻度と所属bucketの頻度和・逆階乗積をO(1)更新',
-    );
-    const modularArithmetic = result.learningUnits.find(
-      ({ value }) => value.id === 'unit-modular-arithmetic',
-    );
-    expect(modularArithmetic?.value.ownedLearningOutcomeIds).not.toContain(
-      'outcome-maintain-modular-product-under-factor-updates',
-    );
-    const modularFoundations = result.learningUnits.find(
-      ({ value }) => value.id === 'unit-modular-product-foundations',
-    );
-    expect(modularFoundations?.value.ownedLearningOutcomeIds).toEqual([]);
-    expect(modularFoundations?.value.examples).toHaveLength(1);
-    expect(modularFoundations?.value.examples[0]?.learningUnitRole).toBe('curriculum_routing');
-    expect(modularFoundations?.document).toContain('./dynamic-modular-product.md');
   }, 30_000);
 
   it('preserves the two accepted DAGs, Outcome closure, and deterministic standard order', async () => {
@@ -385,71 +182,12 @@ describe('T047–T050 canonical taxonomy materialization', () => {
       expect(previewImpact).toBeDefined();
       expect(impact.sourceRevisionIds).toEqual(previewImpact?.sourceRevisionIds);
       expect(impact.sourceRevisionIds).toContain(impact.sourceRevisionId);
-      const candidateById = new Map(
-        input.build.finalCandidates.map((candidate) => [candidate.entity.id, candidate]),
-      );
-      const impactedOutcomeIds = new Set(
-        input.build.integrationMap.entries
-          .filter(({ correctionImpactIds }) => correctionImpactIds.includes(impact.id))
-          .flatMap(({ finalEntityIds }) => finalEntityIds)
-          .flatMap((entityId) => {
-            const candidate = candidateById.get(entityId);
-            if (candidate === undefined) return [];
-            return candidate.kind === 'outcome'
-              ? [candidate.entity.id]
-              : candidate.entity.learningOutcomeIds;
-          }),
-      );
-      for (const assessment of previewImpact?.surfaceAssessments ?? []) {
-        if (assessment.ownerType === 'problem' && assessment.surface === 'placement') {
-          expect(impact.affectedContentLocators).toContainEqual({
-            ownerType: 'problem_placement',
-            problemId: assessment.problemId,
-            path: 'src/content/policies/problem-placements.json',
-          });
-        }
-      }
       for (const locator of impact.affectedContentLocators) {
-        if (locator.ownerType !== 'learning_unit' || locator.path === 'content') continue;
-        const unit = result.learningUnits.find(
-          ({ value }) => value.id === locator.learningUnitId,
-        )?.value;
-        expect(unit).toBeDefined();
-        const exampleMatch = /^examples\.(.+)$/u.exec(locator.path);
-        const exerciseMatch = /^exercises\.([^.]+)(?:\.answer)?$/u.exec(locator.path);
-        if (exampleMatch !== null) {
-          const example = unit?.examples.find(({ key }) => key === exampleMatch[1]);
-          expect(example).toBeDefined();
-          expect(
-            example?.learningOutcomeIds.some((outcomeId) => impactedOutcomeIds.has(outcomeId)),
-          ).toBe(true);
-          if (example?.learningUnitRole === 'guided_outcome') {
-            expect(
-              example.learningOutcomeIds.every((outcomeId) =>
-                unit?.ownedLearningOutcomeIds?.includes(outcomeId),
-              ),
-            ).toBe(true);
-          } else {
-            expect(example?.learningUnitRole).toBe('curriculum_routing');
-          }
-        } else if (exerciseMatch !== null) {
-          const exercise = unit?.exercises.find(({ key }) => key === exerciseMatch[1]);
-          expect(exercise).toBeDefined();
-          expect(
-            exercise?.learningOutcomeIds.some((outcomeId) => impactedOutcomeIds.has(outcomeId)),
-          ).toBe(true);
-          if (exercise?.learningUnitRole === 'outcome_attainment') {
-            expect(
-              exercise.learningOutcomeIds.every((outcomeId) =>
-                unit?.ownedLearningOutcomeIds?.includes(outcomeId),
-              ),
-            ).toBe(true);
-          } else {
-            expect(exercise?.learningUnitRole).toBe('curriculum_routing');
-          }
-        } else {
-          throw new Error(`Unexpected LearningUnit locator: ${locator.path}`);
-        }
+        if (locator.ownerType !== 'learning_unit') continue;
+        expect(result.learningUnits.some(({ value }) => value.id === locator.learningUnitId)).toBe(
+          true,
+        );
+        expect(locator.path).toBe('content');
       }
     }
   }, 30_000);
@@ -563,12 +301,7 @@ describe('T047–T050 canonical taxonomy materialization', () => {
               ) {
                 return true;
               }
-              if (assessment.surface === 'body') return locator.path !== 'content';
-              if (assessment.surface === 'example') return !locator.path.startsWith('examples.');
-              if (assessment.surface === 'exercise') {
-                return !/^exercises\.[^.]+$/u.test(locator.path);
-              }
-              return !/^exercises\.[^.]+\.answer$/u.test(locator.path);
+              return locator.path !== 'content';
             },
           );
         }

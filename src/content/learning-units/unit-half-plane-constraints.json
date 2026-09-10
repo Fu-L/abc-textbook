@@ -32,64 +32,12 @@
   "problemIds": [
     "abc251-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-represent-convex-intersection-by-halfplanes",
-      "learningOutcomeIds": [
-        "outcome-represent-convex-intersection-by-halfplanes"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。点包含や複数凸集合の共通部分を辺ごとの線形不等式で扱いたい。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC251 G「Intersection of Polygons」について、凸多角形を平行移動しても各辺の向きと内向き半平面の法線は変わらず、変わるのは半平面境界の右辺定数だけである。",
-      "procedure": [
-        "観察: 凸多角形を平行移動しても各辺の向きと内向き半平面の法線は変わらず、変わるのは半平面境界の右辺定数だけである。",
-        "着眼: 反時計回りの辺ベクトルq_iに対し、点zが平行移動後の内部にある条件はcross(q_i,z)がその移動後頂点のcross値以上であることと書ける。",
-        "着眼: 全ての移動多角形に入るには各方向の全不等式を満たす必要があり、同じ左辺に対する右辺の最大値だけを残せる。",
-        "方針: 辺ごとに全平行移動の最強半平面を前計算（共通のN方向それぞれで右辺の最大値を取れば、M個の多角形の共通部分をN個の不等式だけで表せる。）",
-        "接続: 各辺iについてM個の平行移動後頂点との外積定数を計算し、その最大値limit[i]を保存する。各質問点zについて全iでcross(edge[i],z)≥limit[i]かを調べ、全て満たせばYesとする。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "凸多角形を向き付き辺の線形半平面制約へ変換し、平行移動後も左辺が同じ制約を最強の右辺へ集約して共通部分への包含を判定できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
+  "directProblemIds": [
+    "abc251-g"
   ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-represent-convex-intersection-by-halfplanes",
-      "learningOutcomeIds": [
-        "outcome-represent-convex-intersection-by-halfplanes"
-      ],
-      "prerequisiteIds": [
-        "outcome-reduce-geometry-to-algebraic-predicates",
-        "prereq-abc-advanced-v1",
-        "unit-geometry-primitives"
-      ],
-      "attainmentCondition": "学習成果「凸多角形を向き付き辺の線形半平面制約へ変換し、平行移動後も左辺が同じ制約を最強の右辺へ集約して共通部分への包含を判定できる」の発動条件を一つ崩したときの破綻点を特定し、適用境界を説明できる。",
-      "assessment": {
-        "method": "ABC251 G「Intersection of Polygons」で使った発動条件を一つ選んで否定した変形問題を作り、元の方針が最初に破綻する箇所、最小反例、代替方針の要否を説明する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「凸多角形を向き付き辺の線形半平面制約へ変換し、平行移動後も左辺が同じ制約を最強の右辺へ集約して共通部分への包含を判定できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "単例しかない技能を暗記問題にしないため、発動条件の否定が証明・不変量・計算量のどこを壊すかを検証する。以下は自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "元の方針が必要とする対象・操作・不変量・目標を分けて書く。",
-          "発動条件を一つだけ否定し、他条件を保つ最小の変形または反例を構成する。",
-          "元の正当化のうち最初に成立しなくなる命題を指摘する。",
-          "計算量だけが悪化するのか、正しさ自体が失われるのかを区別する。",
-          "条件を戻す以外の代替方針があるなら、その追加前提と計算量を述べる。"
-        ],
-        "expectedResult": "凸多角形を向き付き辺の線形半平面制約へ変換し、平行移動後も左辺が同じ制約を最強の右辺へ集約して共通部分への包含を判定できるの適用可能範囲と破綻条件を反例付きで説明できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 89,

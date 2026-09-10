@@ -168,7 +168,7 @@ ABC 212以降の上級問題を年代順に並べるだけでなく、必要な�
 - **FR-008**: 各正式タグは名称、定義、学習成果、代表問題、親またはルート、教材上の前提タグ、同義語・旧名称に加え、未知問で想起するための対象・発動条件・不変量・目的・除外条件からなるsemantic signatureを持たなければならない。該当する前提ではないTag間関係がある場合は、その型と学習上の理由も保持しなければならない。該当関係がないTagでは空の関係集合を許容し、件数を満たすためだけの関係を作ってはならない。
 - **FR-009**: 各問題は一つ以上の典型タグに関連付き、主・補助の典型と問題固有の要素を区別しなければならない。
 - **FR-010**: タグの前提関係と学習単位の前提関係を、論理的な最小依存ではなく説明の再利用と自然なprogressionを表す教材上のprecedence constraintとして別々の循環のない関係に保持し、すべての前提が先行する決定的な標準学習順を生成しなければならない。単なる併用、対比、類似、特殊化、拡張、帰着、実装基盤の関係を前提へ押し込んではならない。
-- **FR-011**: 各学習単位は対象学習者の共通前提、追加前提または追加前提なし、対象外、説明、問題を直接参照しなければならない。各canonical TagとLearningOutcomeはそれぞれちょうど一つのUnitが直接所有し、Unitのnavigation用Tag/Outcome集合は自身の直接所有集合と直下の子Unitのnavigation集合の完全な和集合でなければならない。直接所有する各Outcomeには一つの`guided_outcome`例と一つの`outcome_attainment`演習・評価・解答をco-locateし、子を持つ各Unitには直接所有Outcomeの有無にかかわらず、子のOutcome集合だけを対象とする一つの`curriculum_routing`例と演習・評価・解答を別blockとして置かなければならない。直接所有集合が空の構造Unitは必ず子を持ち、routingだけを所有しなければならない。canonical skeletonと後続のfull authoringは明示的な`contentPhase`でbyte所有権を引き継ぎ、T160が公開projectionを切り替えるまでcanonical Markdownをroute・sidebar・検索へ公開してはならない。
+- **FR-011**: 各学習単位は共通前提、追加前提または追加前提なし、対象外、必要な概念・アルゴリズムの簡潔な説明、問題一覧を持つ。Tag / Outcomeは分類・前提・関連問題のmetadataとし、各一つのUnitへ直接所属させる。navigation集合は自身と子孫の所属集合の和集合とする。各Problemは一意の`presentationUnitId`を持ち、自然に配置できる場合は葉Unitを選ぶ。`directProblemIds`はそのUnitへの主配置を読む順に並べ、`problemIds`は自身の直接配置と子孫のcoverage、`relatedProblemIds`は範囲外の関連参照とする。Unitは前提DAGのtopological order、同順位は基礎から応用のrankと安定ID順とする。Unit内のProblemは必要Tag / Outcomeの前提、解法の基本性・複合性を優先し、代表順位などと安定IDを最後のtie-breakに使う。固定のガイド・転移・評価課題は生成しない。各Problem固有のauthoring unitとfull解説原則を維持する。`contentPhase`で後続の本文執筆へ引き継ぎ、T160までcanonical文書はdraftとする。
 - **FR-012**: 各対象問題は完全解説を既定とし、主要な解法・証明・計算量・前提・学習成果が同じと検証できる場合だけ、根拠と差分付きの類題または補充問題にできる。
 - **FR-013**: 全対象問題は少なくとも一つの教科書学習単位または典型別問題集から到達可能でなければならず、未分類・参照不能な問題がある版を公開してはならない。
 - **FR-014**: コンテスト表は対象範囲で確認されたDより後の問題記号の和集合を公式順の列として生成し、E〜Hに固定せず将来の新しい記号も表示しなければならない。
@@ -210,7 +210,7 @@ ABC 212以降の上級問題を年代順に並べるだけでなく、必要な�
 - **Problem**: 一つの対象問題。コンテスト、問題記号、名称、公式参照、制約、根拠、確認日、公開状態に結び付く。
 - **Explanation**: 考察、典型・固有要素、正当性、計算量、例、注意、助言、出典、使用skill版を持つ学習用説明。
 - **Technique Tag**: 全対象問題を横断して得た再利用可能な典型または考察法。定義、学習成果、親、教材上の前提、代表問題、同義語、未知問でのrecognitionに使うsemantic signature、前提とは独立した型付きTag間関係を持つ。
-- **Learning Unit**: chapter、section、subsectionのいずれかとして配置される教材単位。前提、説明、問題に加え、自身が直接所有するTag・Outcomeと子孫を含むnavigation closureを区別して持つ。直接所有Outcomeは`guided_outcome`と`outcome_attainment`、子Unitへの導線は独立した`curriculum_routing`で扱う。
+- **Learning Unit**: chapter、section、subsectionの教材単位。簡潔な概説、前提、順序付きの主配置問題を持つ。直接所属のTag / Outcomeと子孫を含むnavigation集合、問題の主配置とcoverage・関連参照を区別する。
 - **Problem Placement**: 問題と主・補助Tag/Outcomeを結び、各Outcomeを直接所有するUnitだけを配置先とし、主Outcome所有者から一意な表示Unitを選ぶ。完全解説、類題、補充問題の別と判定根拠も表す。
 - **Source Revision**: 公式情報の確認版、確認日時、指紋、訂正系列、利用条件を表す。
 - **Correction Impact**: 出典や分類の変更がProblem本文・例・演習・解答・配置、LearningUnit本文・例・演習・解答・学習順、および派生索引へ与える影響を、所有者・具体的locator・全Source Revision・検証状態とともに表す。

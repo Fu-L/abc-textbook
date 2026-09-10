@@ -42,7 +42,7 @@
       }
     ],
     "algorithmConnection": {
-      "text": "Sのprefix固定大文字種類数を前計算し、29状態の個数DPを左から更新する。固定文字は一遷移、?は52文字を種類別係数でまとめ、最終的にDDoS型を含まない状態を全52^qから引く。",
+      "text": "固定prefixの大文字情報と29状態の個数DPを左から更新する。?の52通りを種類別係数で集約し、同一大文字2回→小文字→大文字という禁止部分列を完成させる遷移を除外する。最後に禁止部分列が未完成の全状態を足す。全52^qから引かない。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },
@@ -81,7 +81,7 @@
   ],
   "outcomeCandidates": [
     {
-      "text": "?を埋めてDDoS型文字列となる方法数を求められる。",
+      "text": "?を埋め、DDoS型の部分列を含まない文字列の個数を求められる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

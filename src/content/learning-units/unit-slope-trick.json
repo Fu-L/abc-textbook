@@ -36,70 +36,19 @@
   "problemIds": [
     "abc217-h",
     "abc250-g",
+    "abc406-g"
+  ],
+  "directProblemIds": [
+    "abc217-h",
+    "abc250-g",
+    "abc406-g"
+  ],
+  "relatedProblemIds": [
     "abc275-ex",
-    "abc406-g",
     "abc458-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-maintain-piecewise-linear-convex-function",
-      "learningOutcomeIds": [
-        "outcome-maintain-piecewise-linear-convex-function"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。最小化 DP の状態が一次元座標で、遷移が凸区分線形関数への hinge 加算や区間 min-plus 畳み込みとして書けるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC217 H「Snuketoon」について、時刻 T_i の位置 x を状態とする素朴な DP では、前時刻から距離 ΔT 以内の全位置の最小値に、左からの射撃なら max(0,X_i-x)、右からなら max(0,x-X_i) を加える。しかし座標と時刻は 10^9 まであり、位置を列挙できない。",
-      "procedure": [
-        "観察: 時刻 T_i の位置 x を状態とする素朴な DP では、前時刻から距離 ΔT 以内の全位置の最小値に、左からの射撃なら max(0,X_i-x)、右からなら max(0,x-X_i) を加える。しかし座標と時刻は 10^9 まであり、位置を列挙できない。",
-        "観察: 初期コスト、距離 ΔT 以内から取る区間最小、片側だけ傾き1の被害関数はいずれも凸性を保つため、各時刻の DP は少数の折れ点で表せる凸区分線形関数になる。",
-        "着眼: 移動更新 min_{|y-x|≤ΔT} f(y) は凸関数の最小値を取る区間を左へ ΔT、右へ ΔT だけ広げ、関数値の最小値自体は変えない。",
-        "着眼: D_i=0 の被害は (X_i-x)_+、D_i=1 の被害は (x-X_i)_+ であり、Slope Trick の片側 hinge 追加にそのまま対応する。",
-        "方針: DP の値を全位置に展開せず、凸関数の左右の折れ点を二つの priority queue と offset で管理する Slope Trick を用いる。（移動可能幅による min-plus 更新は最小区間を左右へ ΔT だけ広げる操作、射撃被害は hinge 関数を一つ足す操作として、折れ点だけを更新できる。）",
-        "接続: f_0 は x=0 だけが有限な凸関数として初期化する。射撃ごとに前時刻との差 ΔT を使って左右 heap の座標 offset を広げ、D_i に応じた hinge を X_i に追加し、最後に保持した最小値を答える。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-maintain-piecewise-linear-convex-function",
-      "learningOutcomeIds": [
-        "outcome-maintain-piecewise-linear-convex-function"
-      ],
-      "prerequisiteIds": [
-        "outcome-optimize-univariate-convex-function",
-        "prereq-abc-advanced-v1",
-        "unit-basic-convex-optimization"
-      ],
-      "attainmentCondition": "学習成果「区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC250 G「Stonks」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 各日に高々一回の売買操作を行える条件で、最終日に得られる所持金の最大値を求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 各日に高々一回の売買操作を行える条件で、最終日に得られる所持金の最大値を求められる。",
-          "転移題材の解法接続: 利益を0、最小ヒープを最初の価格一個で初期化する。二日目以降は挿入前の最小値mとP_iを比較し、m<P_iならmを一つ取り出して利益へP_i-mを加え、P_iを二個挿入する。そうでなければP_iを一個挿入する。heapは取引候補の限界費用を表し、過去の売りを後から取り消してより高い価格へ付け替えられる。価格[1,2,100]では利益は1+98=99となる。全体O(N log N)。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 89,

@@ -1,6 +1,6 @@
 ---
 title: "状態グラフのモデリングと探索"
-description: "前提から状態グラフのモデリングと探索を見抜き、方針へ接続して検証するための学習単位。"
+description: "状態グラフのモデリングと探索の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 115
@@ -8,108 +8,54 @@ sidebar:
 
 # 状態グラフのモデリングと探索
 
-このページは **小節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: なし
-- この位置で学ぶ理由: 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-
-### この単元では扱わない範囲
-
-- 状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
-
-## 発動条件と見分け方
+## 概要
 
 ### 状態グラフのモデリングと探索
 
 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。
 
-検索語: implicit graph search、状態グラフ、状態空間探索
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: なし。
 
-### 例 1 — 暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる
+暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
-題材: [ABC241 F「Skate」](https://atcoder.jp/contests/abc241/tasks/abc241_f)
+- 状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-選定理由: 通過するだけのマスは次の手を選べないので状態に不要であり、goal も障害物直前として実際に停止できた場合だけ到達扱いになる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。座標範囲は巨大だが、移動規則により停止・分岐できる点が障害物周辺などに限られるとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC302 F「Merge Set」](https://atcoder.jp/contests/abc302/tasks/abc302_f)
+2. [ABC241 F「Skate」](https://atcoder.jp/contests/abc241/tasks/abc241_f)
+3. [ABC289 E「Swap Places」](https://atcoder.jp/contests/abc289/tasks/abc289_e)
+4. [ABC394 E「Palindromic Shortest Path」](https://atcoder.jp/contests/abc394/tasks/abc394_e)
+5. [ABC414 F「Jump Traveling」](https://atcoder.jp/contests/abc414/tasks/abc414_f)
+6. [ABC429 E「Hit and Away」](https://atcoder.jp/contests/abc429/tasks/abc429_e)
+7. [ABC446 E「Multiple-Free Sequences」](https://atcoder.jp/contests/abc446/tasks/abc446_e)
+8. [ABC446 F「Reachable Set 2」](https://atcoder.jp/contests/abc446/tasks/abc446_f)
+9. [ABC361 G「Go Territory」](https://atcoder.jp/contests/abc361/tasks/abc361_g)
+10. [ABC443 F「Non-Increasing Number」](https://atcoder.jp/contests/abc443/tasks/abc443_f)
+11. [ABC427 E「Wind Cleaning」](https://atcoder.jp/contests/abc427/tasks/abc427_e)
+12. [ABC305 F「Dungeon Explore」](https://atcoder.jp/contests/abc305/tasks/abc305_f)
+13. [ABC319 G「Counting Shortest Paths」](https://atcoder.jp/contests/abc319/tasks/abc319_g)
+14. [ABC355 E「Guess the Sum」](https://atcoder.jp/contests/abc355/tasks/abc355_e)
 
-- 巨大盤面の滑走最短路を障害物隣接点だけの implicit graph に圧縮し、最寄り障害物検索付き BFS で解ける。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 盤面は最大10^9×10^9だが、一手の停止位置は衝突した障害物の直前に限られる。したがって開始点を除く到達候補は各障害物の上下左右に隣接する O(N) マスしかない。
-- 現在位置から一方向の遷移先は、同じ行または列でその方向に最も近い障害物があれば、その一つ手前として一意に決まる。障害物がなければ崖へ落ちるためその手自体が禁止される。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 行ごと・列ごとに障害物座標を sort し、BFS の各状態から predecessor/successor を二分探索して最大4遷移を生成する。 — 巨大な空白マスを graph から除き、停止可能点だけの sparse implicit graph として最短手数を求められる。
-- **棄却**: 全盤面の空きマスを頂点にし、一手で滑る先を探索する BFS を行う。 — H,W は10^9まであり、盤面を列挙も記憶もできない。
-
-#### 鍵となる着眼
-
-- 通過するだけのマスは次の手を選べないので状態に不要であり、goal も障害物直前として実際に停止できた場合だけ到達扱いになる。
-
-#### アルゴリズムへ接続する
-
-障害物を row→sorted columns と column→sorted rows に格納する。start から BFS し、上下左右それぞれ nearest obstacle を lower_bound で探し、その直前マスが別状態なら距離+1で enqueue する。goal の距離が得られなければ -1 とする。
-
-
-## 転用するときの確認
-
-- **巨大グリッドの停止候補への縮約**: 座標範囲は巨大だが、移動規則により停止・分岐できる点が障害物周辺などに限られるとき。 適用: 重要点だけを graph vertex とし、空白区間を一辺の遷移へ圧縮する。
-- **sorted 障害物の predecessor/successor**: 同じ行・列で最寄りの壁や点まで一気に移動するとき。 適用: 行列別の sorted list へ二分探索し、四方向の最寄り要素を取得する。
-- 滑走問題では境界で止まる規則か、壁がなければ操作禁止かを区別して遷移 graph を作る。
-- goal を通過するが次の障害物直前ではない例を描き、なぜ BFS 頂点へ goal を置くだけでは到達にしてはいけないか確認する。
-
-## 到達確認
-
-### 到達確認 1 — 暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる
-
-転移題材: [ABC289 E「Swap Places」](https://atcoder.jp/contests/abc289/tasks/abc289_e)
-
-**課題**: ABC289 E「Swap Places」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 2人が同時に位置を交換する最小手数を、色制約付きproduct graphのBFSで求められる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 2人が同時に位置を交換する最小手数を、色制約付きproduct graphのBFSで求められる。
-
-- 対象技能が担う箇所: 2人が同時に位置を交換する最小手数を、色制約付きproduct graphのBFSで求められる。
-- 転移題材の解法接続: distをN×Nの-1で初期化し、queueへ(1,N)を距離0で入れる。popした(u,v)についてadj[u]×adj[v]を走査し、色が異なる未訪問(x,y)へdist+1で遷移する。BFS終了後のdist[N][1]を出力し、未訪問なら-1とする。test caseごとに配列を初期化する。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。
-
-</details>
-
+- [ABC244 F「Shortest Good Path」](https://atcoder.jp/contests/abc244/tasks/abc244_f)
+- [ABC257 G「Prefix Concatenation」](https://atcoder.jp/contests/abc257/tasks/abc257_g)
+- [ABC317 E「Avoid Eye Contact」](https://atcoder.jp/contests/abc317/tasks/abc317_e)
+- [ABC329 E「Stamp」](https://atcoder.jp/contests/abc329/tasks/abc329_e)
+- [ABC336 F「Rotation Puzzle」](https://atcoder.jp/contests/abc336/tasks/abc336_f)
+- [ABC413 F「No Passage」](https://atcoder.jp/contests/abc413/tasks/abc413_f)
+- [ABC417 E「A Path in A Dictionary」](https://atcoder.jp/contests/abc417/tasks/abc417_e)
 
 ## 根拠
 
@@ -119,7 +65,5 @@ sidebar:
 - [ABC244 F 公式問題文](https://atcoder.jp/contests/abc244/tasks/abc244_f)
 - [ABC257 G 公式解説](https://atcoder.jp/contests/abc257/editorial/4185)
 - [ABC257 G 公式問題文](https://atcoder.jp/contests/abc257/tasks/abc257_g)
-- [ABC289 E 公式問題文](https://atcoder.jp/contests/abc289/tasks/abc289_e)
-- [ABC289 E 公式解説](https://atcoder.jp/contests/abc289/editorial/5726)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-state-graph-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-state-graph-search`

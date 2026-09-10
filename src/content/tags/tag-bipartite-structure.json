@@ -37,9 +37,9 @@
     "outcome-color-and-classify-bipartite-components"
   ],
   "representativeProblemIds": [
+    "abc451-f",
     "abc398-e",
-    "abc398-g",
-    "abc451-f"
+    "abc398-g"
   ],
   "aliases": [
     "2-coloring",

@@ -15,9 +15,7 @@
     "source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0",
     "source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019",
     "source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8",
-    "source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5",
-    "source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0",
-    "source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"
+    "source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5"
   ],
   "tagIds": [
     "tag-threshold-heavy-light"
@@ -35,72 +33,26 @@
   "docPath": "src/content/docs/learn/modeling/threshold-heavy-light.md",
   "problemIds": [
     "abc219-g",
-    "abc230-e",
-    "abc242-g",
     "abc259-ex",
     "abc335-f",
-    "abc345-g",
     "abc350-g",
-    "abc365-g",
+    "abc365-g"
+  ],
+  "directProblemIds": [
+    "abc219-g",
+    "abc335-f",
+    "abc350-g",
+    "abc259-ex",
+    "abc365-g"
+  ],
+  "relatedProblemIds": [
+    "abc230-e",
+    "abc242-g",
+    "abc345-g",
     "abc405-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-balance-heavy-light-threshold",
-      "learningOutcomeIds": [
-        "outcome-balance-heavy-light-threshold"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。グラフ query の一回の費用が中心頂点の次数に比例し、辺数の総和だけが小さいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC219 G「Propagation」について、一回の query は中心 x の現在値を全近傍へ上書きするため、次数の大きい頂点が何度も選ばれると隣接リスト走査の総量が大きくなる。一方、次数 B 以上の頂点数は次数和から高々 2M/B 個である。",
-      "procedure": [
-        "観察: 一回の query は中心 x の現在値を全近傍へ上書きするため、次数の大きい頂点が何度も選ばれると隣接リスト走査の総量が大きくなる。一方、次数 B 以上の頂点数は次数和から高々 2M/B 個である。",
-        "観察: 更新は加算ではなく代入なので、各頂点の正しい値は自分へ届いた更新のうち時刻が最大の一つだけで決まる。高次数頂点からの配布は、その頂点に値と時刻の看板を残して遅延できる。",
-        "着眼: 頂点 v を参照する直前に、v の明示値の時刻と v に隣接する全 heavy 頂点の看板時刻を比較すれば、未配布の代入を含む現在値を復元できる。",
-        "方針: 次数 B 未満の query は全近傍へ即時反映し、次数 B 以上なら看板だけを更新する。頂点の値が必要な時に隣接する高次数頂点の看板から最新時刻を解決する。（軽頂点の隣接走査を B 未満に抑え、遅延更新の確認先も高次数頂点数以下に抑えることで、疎グラフの次数和を利用できる。）",
-        "接続: 閾値 B を √M 程度に置き、各頂点について隣接 heavy 頂点を前計算する。query x の先頭で x を最新化し、x が light なら全近傍の値・時刻を更新、heavy なら x の看板へ値・時刻を保存する。全 query 後も各頂点を同じ方法で最新化して出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-balance-heavy-light-threshold",
-      "learningOutcomeIds": [
-        "outcome-balance-heavy-light-threshold"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC259 Ex「Yet Another Path Counting」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: カテゴリ頻度に応じて端点対の閉形式と全体DPを使い分け、全カテゴリの同値端点経路を重複なく数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: カテゴリ頻度に応じて端点対の閉形式と全体DPを使い分け、全カテゴリの同値端点経路を重複なく数えられる。",
-          "転移題材の解法接続: 階乗と逆階乗を2Nまで前計算する。ラベルごとに座標を集め、k≤Nなら比較可能な全座標対へ二項係数を加え、k>Nなら盤面を左上から走査するDPを一回行って対象マスで値を回収する。全加算は998244353で剰余を取る。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 74,

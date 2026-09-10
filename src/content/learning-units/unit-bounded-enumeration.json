@@ -15,9 +15,7 @@
     "source-abc220-editorial-2684-ebe75396fb3dc16f89b1952b2f1e9bb2bc23e34bff5179ed35fe39c2888ac327",
     "source-abc220-g-problem-11cd77caf912f0d4d4a1772f3a50e387c0c294519ddc6ef41e8278462c72a6ed",
     "source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1",
-    "source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf",
-    "source-abc227-editorial-2914-87defb838bebcd1104697af5ba110c6f49f96bee04b0b32ee2bbe32e8f0ce6d8",
-    "source-abc227-f-problem-a9a41987be11c4be4182da98bcd5f68243f97b8b98b6fd3c30ed64e420e3e801"
+    "source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf"
   ],
   "tagIds": [
     "tag-bounded-enumeration"
@@ -35,105 +33,64 @@
   "docPath": "src/content/docs/learn/modeling/bounded-enumeration.md",
   "problemIds": [
     "abc219-e",
+    "abc227-f",
+    "abc234-e",
+    "abc254-e",
+    "abc272-e",
+    "abc312-e",
+    "abc313-f",
+    "abc328-e",
+    "abc347-f",
+    "abc386-e",
+    "abc442-g"
+  ],
+  "directProblemIds": [
+    "abc234-e",
+    "abc386-e",
+    "abc442-g",
+    "abc219-e",
+    "abc254-e",
+    "abc272-e",
+    "abc312-e",
+    "abc328-e",
+    "abc227-f",
+    "abc313-f",
+    "abc347-f"
+  ],
+  "relatedProblemIds": [
     "abc220-g",
     "abc223-e",
     "abc226-f",
-    "abc227-f",
     "abc227-h",
-    "abc234-e",
     "abc234-ex",
     "abc240-ex",
     "abc240-f",
     "abc248-e",
-    "abc254-e",
     "abc257-f",
     "abc258-f",
     "abc260-f",
     "abc270-f",
     "abc271-ex",
-    "abc272-e",
     "abc284-e",
     "abc290-g",
     "abc293-f",
     "abc298-g",
     "abc301-g",
     "abc302-g",
-    "abc312-e",
-    "abc313-f",
     "abc323-f",
-    "abc328-e",
     "abc331-e",
     "abc343-e",
-    "abc347-f",
     "abc353-f",
     "abc369-e",
-    "abc386-e",
     "abc387-e",
     "abc409-f",
     "abc410-f",
     "abc418-e",
     "abc419-g",
-    "abc442-g",
     "abc459-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-enumerate-bounded-candidates-or-cases",
-      "learningOutcomeIds": [
-        "outcome-enumerate-bounded-candidates-or-cases"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。集合や経路の最大側K個の和など、順位で選ばれる要素の総和を最適化するとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC227 F「Treasure Hunting」について、右・下だけの経路でも候補数は二項係数個あるため全経路は試せない。通常の経路DPは加法的なコストを扱えるが、今回は経路上の大きい方K個だけの和であり、そのままでは局所遷移に分解できない。",
-      "procedure": [
-        "観察: 右・下だけの経路でも候補数は二項係数個あるため全経路は試せない。通常の経路DPは加法的なコストを扱えるが、今回は経路上の大きい方K個だけの和であり、そのままでは局所遷移に分解できない。",
-        "観察: 大きい方からK番目の値をXと固定すると、Xより大きい通過マスは全て採用し、Xと等しい通過マスから不足分を選んで、ちょうどK個の採用値和として評価できる。Xの候補は盤面に現れる値だけで十分である。",
-        "着眼: Xが大きい方からK番目なら、Xより大きい値の個数はK未満で、X以上の値の個数はK以上である。したがって全ての>Xと必要個数の=Xを採用すれば、採用値は上位K個と一致する。",
-        "着眼: 値がXのマスでは採用してkを1増やす遷移と、不採用のまま進む遷移の両方が必要である。片方だけにすると同値Xが複数ある経路で、ちょうどK個を選ぶ解を失う。",
-        "方針: 閾値Xを盤面の各値に固定し、X以上の値をちょうどk個採用した最小和をdp[k][i][j]で求める。（a>Xは採用、a<Xは不採用を強制し、a=Xだけ採用・不採用の両遷移を許せば、同値を含む上位K個をちょうど選んだ状態を局所遷移で表せる。）",
-        "接続: 盤面の各A[p][q]をXとして、dp[k][i][j]を左上から(i,j)まででX以上の値をちょうどk個採用した採用値和の最小値とする。次の値aがXより大きければ採用だけ、小さければ不採用だけ、等しければ両方へ遷移する。始点も同じ規則で初期化し、全Xに対するdp[K][H-1][W-1]の最小を答える。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-enumerate-bounded-candidates-or-cases",
-      "learningOutcomeIds": [
-        "outcome-enumerate-bounded-candidates-or-cases"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC219 E「Moat」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 格子上の直交多角形をセル mask に離散化し、内部・外部双方の連結性で単純な境界を判定できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 格子上の直交多角形をセル mask に離散化し、内部・外部双方の連結性で単純な境界を判定できる。",
-          "転移題材の解法接続: 各 mask について村 bit が全て立っているか確認し、選択セルを4近傍探索して選択数と到達数を比較する。さらに盤面を外枠付きに拡張し、外枠から非選択セルだけを探索して未到達の空セルがなければ答えへ加える。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 4,

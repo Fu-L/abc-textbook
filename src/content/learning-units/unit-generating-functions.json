@@ -34,19 +34,49 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/combinatorics-algebra/generating-functions.md",
   "problemIds": [
-    "abc214-g",
     "abc222-h",
     "abc225-h",
-    "abc230-h",
-    "abc235-ex",
     "abc241-ex",
     "abc247-ex",
+    "abc267-ex",
+    "abc279-ex",
+    "abc331-g",
+    "abc345-g",
+    "abc352-g",
+    "abc385-g",
+    "abc390-g",
+    "abc392-g",
+    "abc409-g",
+    "abc422-g",
+    "abc432-g",
+    "abc436-g"
+  ],
+  "directProblemIds": [
+    "abc225-h",
+    "abc279-ex",
+    "abc222-h",
+    "abc241-ex",
+    "abc267-ex",
+    "abc392-g",
+    "abc385-g",
+    "abc390-g",
+    "abc422-g",
+    "abc432-g",
+    "abc247-ex",
+    "abc436-g",
+    "abc331-g",
+    "abc352-g",
+    "abc409-g",
+    "abc345-g"
+  ],
+  "relatedProblemIds": [
+    "abc214-g",
+    "abc230-h",
+    "abc235-ex",
     "abc249-ex",
     "abc260-ex",
-    "abc267-ex",
     "abc269-ex",
     "abc272-ex",
-    "abc279-ex",
     "abc281-ex",
     "abc285-ex",
     "abc289-ex",
@@ -55,82 +85,15 @@
     "abc315-ex",
     "abc317-ex",
     "abc318-ex",
-    "abc331-g",
-    "abc345-g",
-    "abc352-g",
     "abc367-g",
-    "abc385-g",
     "abc387-g",
     "abc389-g",
-    "abc390-g",
-    "abc392-g",
-    "abc409-g",
-    "abc422-g",
-    "abc432-g",
-    "abc436-g",
     "abc439-g",
     "abc449-g",
     "abc462-g"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-encode-counting-by-generating-function",
-      "learningOutcomeIds": [
-        "outcome-encode-counting-by-generating-function"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。木を根の型と左右の独立な部分木へ分解でき、サイズ別個数の畳み込みが現れるとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC222 H「Beautiful Binary Tree」について、小さい木で操作を追うと、成功可能性は操作順そのものではなく、根と葉が1であること、1の総数がNであること、0同士が親子にならないことという静的な条件で決まる。",
-      "procedure": [
-        "観察: 小さい木で操作を追うと、成功可能性は操作順そのものではなく、根と葉が1であること、1の総数がNであること、0同士が親子にならないことという静的な条件で決まる。",
-        "着眼: 根が1の木の母関数を A、根が0の許容部分木を B とすると、子の置き方から B=2A+A^2、A=x(1+A+B)^2=x(1+3A+A^2)^2 を得る。",
-        "着眼: ラグランジュ反転により答えは (1/N)[x^(N-1)](1+3x+x^2)^(2N) となり、低次数多項式の冪は微分恒等式から二項漸化式で係数を順に出せる。",
-        "方針: 根が1の木と根が0の部分木を母関数で分け、関数方程式をラグランジュ反転して必要な一係数を漸化式で求める。（N=10^7 では木のサイズごとの畳み込みを直接計算できず、反転公式で答えを低次数多項式の冪の一係数へ落とす必要がある。）",
-        "接続: m=2N、u_k=[x^k](1+3x+x^2)^m として u_0=1 から u_k={3(m+1-k)u_(k-1)+(2m+2-k)u_(k-2)}/k を進め、u_(N-1)/N を出力する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-encode-counting-by-generating-function",
-      "learningOutcomeIds": [
-        "outcome-encode-counting-by-generating-function"
-      ],
-      "prerequisiteIds": [
-        "outcome-formulate-combinatorial-coefficients",
-        "prereq-abc-advanced-v1",
-        "unit-combinatorial-coefficients"
-      ],
-      "attainmentCondition": "学習成果「組合せの合成を生成関数の積・逆数・畳み込みに符号化できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC225 H「Social Distance 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「組合せの合成を生成関数の積・逆数・畳み込みに符号化できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 固定席で距離積を区間ごとに因数分解し、人数別重みの生成多項式を畳み込んで全配置を数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 固定席で距離積を区間ごとに因数分解し、人数別重みの生成多項式を畳み込んで全配置を数えられる。",
-          "転移題材の解法接続: 固定席からK+1個の区間多項式を作り、次数M-Kまでに切って小さいものから畳み込み、係数[M-K]へ未着席者の並べ方(M-K)!を掛ける。K=0は両端なしの式を直接使う。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 9,

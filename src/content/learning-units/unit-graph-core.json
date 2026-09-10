@@ -30,66 +30,16 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/graph-core.md",
   "problemIds": [
-    "abc266-f",
+    "abc266-f"
+  ],
+  "directProblemIds": [
+    "abc266-f"
+  ],
+  "relatedProblemIds": [
     "abc267-e"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-peel-graph-core",
-      "learningOutcomeIds": [
-        "outcome-peel-graph-core"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。連結unicyclic graphの唯一cycle上の頂点を求めたいとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC266 F「Well-defined Path Queries on a Namori」について、連結N頂点N辺の無向グラフは閉路をちょうど一つ持ち、その各閉路頂点へ木が付いたなもりグラフである。",
-      "procedure": [
-        "観察: 連結N頂点N辺の無向グラフは閉路をちょうど一つ持ち、その各閉路頂点へ木が付いたなもりグラフである。",
-        "観察: 同じ閉路頂点に付く木の中の二頂点間は一意pathだが、異なる閉路根に属すれば閉路を回る二方向がある。",
-        "着眼: leaf pruning後に残る2-coreはこのグラフでは唯一のcycleそのものである。",
-        "方針: 次数1頂点を反復削除してcycle頂点を抽出し、各cycle頂点からcycle辺を越えない探索で全頂点へ根labelを付ける。（queryの一意性は二頂点の所属cycle根labelが等しいかだけで判定できる。）",
-        "接続: unicyclic graphをcore cycleとrooted-tree componentsへ分解し、path multiplicity queryをcomponent label equalityへ圧縮する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-peel-graph-core",
-      "learningOutcomeIds": [
-        "outcome-peel-graph-core"
-      ],
-      "prerequisiteIds": [
-        "prereq-abc-advanced-v1"
-      ],
-      "attainmentCondition": "学習成果「次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件、正当性、計算量を説明し、未知問へ実装できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC267 E「Erasing Vertices 2」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件、正当性、計算量を説明し、未知問へ実装できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 単調な頂点peeling: 頂点削除により残存頂点の制約値が減少し、許可状態から不許可へ戻らないとき。 適用: 初期許可頂点をqueueへ入れ、削除差分で新たに許可された隣接頂点を追加する。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 単調な頂点peeling: 頂点削除により残存頂点の制約値が減少し、許可状態から不許可へ戻らないとき。 適用: 初期許可頂点をqueueへ入れ、削除差分で新たに許可された隣接頂点を追加する。",
-          "転移題材の解法接続: minimize maximum elimination costをparametric searchへ変え、monotone eligibilityを持つweighted degeneracy peelingでfeasibilityを判定する。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 69,

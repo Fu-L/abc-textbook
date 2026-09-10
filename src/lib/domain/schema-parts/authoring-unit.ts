@@ -71,12 +71,6 @@ export const InlineExampleSchema = strictObject({
 /** Example block owned by one Learning Unit document. */
 export const LearningUnitInlineExampleSchema = strictObject({
   ...inlineExampleFields,
-  learningUnitRole: z
-    .enum(['guided_outcome', 'curriculum_routing'])
-    .optional()
-    .describe(
-      'Learning Unit-local role. Canonical Units declare whether the block teaches an owned Outcome or routes among child Units.',
-    ),
 }).superRefine(validateInlineExample);
 
 const InlineAssessmentSchema = strictObject({ method: text, successCondition: text });
@@ -101,12 +95,6 @@ export const InlineExerciseSchema = strictObject(inlineExerciseFields);
 /** Exercise block owned by one Learning Unit document. */
 export const LearningUnitInlineExerciseSchema = strictObject({
   ...inlineExerciseFields,
-  learningUnitRole: z
-    .enum(['outcome_attainment', 'curriculum_routing'])
-    .optional()
-    .describe(
-      'Learning Unit-local role. Canonical Units declare whether the block assesses an owned Outcome or checks curriculum routing.',
-    ),
 });
 
 const FullExplanationSectionsSchema = strictObject({

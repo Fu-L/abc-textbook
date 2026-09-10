@@ -1,6 +1,6 @@
 ---
 title: "列・区間・分割のDP"
-description: "前提から列・区間・分割のDPを見抜き、方針へ接続して検証するための学習単位。"
+description: "列・区間・分割のDPの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
   order: 34
@@ -8,180 +8,80 @@ sidebar:
 
 # 列・区間・分割のDP
 
-このページは **節** です。一つの原子的な技能について、発動条件から正当化・計算量・実装上の境界条件までを再現できる状態を作ります。
-
-読み終えたら、手法名を覚えたかではなく、未知問から発動条件を抽出し、候補を比較し、正当化と計算量を説明できるかで自己評価します。
-
-## この単元でできるようになること
-
-- 区間または接頭辞の分割点を列挙し、小問題の答えを合成できる。
-- 列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。
-
-## 前提・学習順・対象外
-
-- 共通前提: `prereq-abc-advanced-v1` version `1.0.0`
-- 追加前提: 最小十分状態からDPを設計する
-- この位置で学ぶ理由: 状態設計を土台に、列順を保つ選択と区間の分割点という二つの合成方法を学ぶ。
-
-### この単元では扱わない範囲
-
-- bitmask集合や容量だけを状態にし、列順・区間分割を持たないDP。
-
-## 発動条件と見分け方
+## 概要
 
 ### 区間・分割DP
 
 区間またはprefixの分割点を遷移にし、局所解の合成を行う。
 
-検索語: interval DP、分割DP、区間DP
-
 ### 列・subsequence DP
 
 列のprefixや最後に選んだ要素を状態にし、順序を保つ選択を組み立てる。
 
-検索語: LIS、subsequence DP、最長増加部分列、部分列DP
+## 前提と範囲
 
-未知問では、対象・操作・保つべき量・求める量を言葉にし、上の定義をすべて満たすかを確認します。名称の一致だけでは採用しません。
+共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-## ガイド例
+追加前提: 最小十分状態からDPを設計する。
 
-### 例 1 — 区間または接頭辞の分割点を列挙し、小問題の答えを合成できる
+状態設計を土台に、列順を保つ選択と区間の分割点という二つの合成方法を学ぶ。
 
-題材: [ABC217 F「Make Pair」](https://atcoder.jp/contests/abc217/tasks/abc217_f)
+- bitmask集合や容量だけを状態にし、列順・区間分割を持たないDP。
 
-選定理由: 左端と位置 2k の生徒が仲良しなら、内側 k-1 組の処理後にその二人を消す k 操作と、右側 j-k 操作を二項係数 C(j,k) 通りに interleave できる。
+## 問題一覧
 
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。隣接要素の削除によって元の列の区間が独立に閉じ、最終的な対応が非交差になるとき。 問題全体への接続は併用技能を学んだ後に読む。
+必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-#### このOutcomeを支える根拠
+1. [ABC230 F「Predilection」](https://atcoder.jp/contests/abc230/tasks/abc230_f)
+2. [ABC238 F「Two Exams」](https://atcoder.jp/contests/abc238/tasks/abc238_f)
+3. [ABC252 G「Pre-Order」](https://atcoder.jp/contests/abc252/tasks/abc252_g)
+4. [ABC262 G「LIS with Stack」](https://atcoder.jp/contests/abc262/tasks/abc262_g)
+5. [ABC285 E「Work or Rest」](https://atcoder.jp/contests/abc285/tasks/abc285_e)
+6. [ABC292 G「Count Strictly Increasing Sequences」](https://atcoder.jp/contests/abc292/tasks/abc292_g)
+7. [ABC299 F「Square Subsequence」](https://atcoder.jp/contests/abc299/tasks/abc299_f)
+8. [ABC325 G「offence」](https://atcoder.jp/contests/abc325/tasks/abc325_g)
+9. [ABC327 E「Maximize Rating」](https://atcoder.jp/contests/abc327/tasks/abc327_e)
+10. [ABC362 E「Count Arithmetic Subsequences」](https://atcoder.jp/contests/abc362/tasks/abc362_e)
+11. [ABC400 F「Happy Birthday! 3」](https://atcoder.jp/contests/abc400/tasks/abc400_f)
+12. [ABC439 E「Kite」](https://atcoder.jp/contests/abc439/tasks/abc439_e)
+13. [ABC386 F「Operate K」](https://atcoder.jp/contests/abc386/tasks/abc386_f)
+14. [ABC466 E「Range Flip」](https://atcoder.jp/contests/abc466/tasks/abc466_e)
+15. [ABC288 F「Integer Division」](https://atcoder.jp/contests/abc288/tasks/abc288_f)
+16. [ABC233 G「Strongest Takahashi」](https://atcoder.jp/contests/abc233/tasks/abc233_g)
+17. [ABC214 F「Substrings」](https://atcoder.jp/contests/abc214/tasks/abc214_f)
+18. [ABC217 F「Make Pair」](https://atcoder.jp/contests/abc217/tasks/abc217_f)
+19. [ABC219 H「Candles」](https://atcoder.jp/contests/abc219/tasks/abc219_h)
+20. [ABC273 F「Hammer 2」](https://atcoder.jp/contests/abc273/tasks/abc273_f)
+21. [ABC315 F「Shortcuts」](https://atcoder.jp/contests/abc315/tasks/abc315_f)
+22. [ABC339 E「Smooth Subsequence」](https://atcoder.jp/contests/abc339/tasks/abc339_e)
+23. [ABC369 F「Gather Coins」](https://atcoder.jp/contests/abc369/tasks/abc369_f)
+24. [ABC393 F「Prefix LIS Query」](https://atcoder.jp/contests/abc393/tasks/abc393_f)
+25. [ABC271 E「Subsequence Path」](https://atcoder.jp/contests/abc271/tasks/abc271_e)
+26. [ABC261 G「Replace」](https://atcoder.jp/contests/abc261/tasks/abc261_g)
+27. [ABC354 F「Useless for LIS」](https://atcoder.jp/contests/abc354/tasks/abc354_f)
+28. [ABC298 G「Strawberry War」](https://atcoder.jp/contests/abc298/tasks/abc298_g)
+29. [ABC360 G「Suitable Edit for LIS」](https://atcoder.jp/contests/abc360/tasks/abc360_g)
+30. [ABC410 G「Longest Chord Chain」](https://atcoder.jp/contests/abc410/tasks/abc410_g)
+31. [ABC262 Ex「Max Limited Sequence」](https://atcoder.jp/contests/abc262/tasks/abc262_h)
+32. [ABC240 Ex「Sequence of Substrings」](https://atcoder.jp/contests/abc240/tasks/abc240_h)
 
-- 隣接削除から非交差な区間分割を見抜き、独立部分の方法数と操作順の interleave を同じ DP 遷移で数えられる。
+各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-#### 観察
+## 関連問題
 
-- 二人が選ばれる時点では隣接しているため、最初の並びに弧を描くと最終的なペアは交差しない。特に区間の左端の生徒が位置 2k の生徒と組むなら、その二人の間にいる 2k-2 人は先に区間内だけで消えていなければならない。
-- サンプル2では同じ二組を作っても取り除く順番が違えば別解として数えるため、非交差なペア分割の個数だけでなく、独立な区間の操作列を混ぜる順番も数える必要がある。
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-#### 候補を比較する
-
-- **採用**: 偶数長区間を全員取り除く方法数とし、左端の相手で分割する区間 DP に、左右の操作を混ぜる二項係数を掛ける。 — 左端の相手を固定すると内側と右側が独立な偶数長区間になり、仲の良さ、ペア構造、操作順の三要素を過不足なく積に分解できる。
-- **棄却**: 各時点で隣接する仲の良い組を列挙し、削除列を再帰的に全探索する。 — 同じ残存区間構造へ至る多数の順番を個別に探索するため指数的に分岐し、2N=400 では扱えない。
-
-#### 鍵となる着眼
-
-- 左端と位置 2k の生徒が仲良しなら、内側 k-1 組の処理後にその二人を消す k 操作と、右側 j-k 操作を二項係数 C(j,k) 通りに interleave できる。
-
-#### アルゴリズムへ接続する
-
-dp[i][j] を生徒 i+1 から i+2j を全て消す方法数とし、左端の相手 i+2k を全て試す。仲良しの場合に dp[i+1][k-1]、dp[i+2k][j-k]、C(j,k) を掛けて加算し、空区間を 1 とする。
-
-### 例 2 — 列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる
-
-題材: [ABC214 F「Substrings」](https://atcoder.jp/contests/abc214/tasks/abc214_f)
-
-選定理由: 通常の部分列 DP における最終出現による重複排除と、隣接位置を選べないことによる一つ手前までの遷移制限を同時に適用する。
-
-この例で扱う範囲: ここでは次の局所的な観察から対象技能を導く。異なる位置選択が同じ文字列を作り得るため、相異なる部分列だけを数えるとき。 問題全体への接続は併用技能を学んだ後に読む。
-
-#### このOutcomeを支える根拠
-
-- 部分列の同値な生成経路を最終出現で統合し、位置間隔の制約を遷移区間へ反映して相異なる文字列を数えられる。
-
-#### 観察
-
-- 選んだ位置が隣り合わない部分列を数えるが、異なる位置集合から同じ文字列が得られる場合は一つとして数える必要がある。
-- 位置 i の文字を末尾に使う文字列は、それ以前に同じ文字が最後に現れた位置 k より前の末尾から作る重複分を除くことで一意に数えられる。
-
-#### 候補を比較する
-
-- **採用**: 各文字列を最後に採用した位置で分類する部分列 DP に、前の採用位置を一つ以上空ける遷移範囲を組み込む。 — 同じ末尾文字による重複を最終出現位置で排除しながら、非隣接条件も和を取る添字範囲で表せる。
-- **棄却**: 各位置を選ぶか否かだけの DP で、隣接位置を同時に選ばない位置集合の個数を求める。 — 同じ文字列を作る異なる位置集合を別々に数えるため、問題が要求する相異なる部分列数にならない。
-
-#### 鍵となる着眼
-
-- 通常の部分列 DP における最終出現による重複排除と、隣接位置を選べないことによる一つ手前までの遷移制限を同時に適用する。
-- dp₀ を空文字列の一通り、隣接禁止用の番兵 dp₁ を 0 と置くと、同じ形の区間和で先頭付近も処理できる。
-
-#### アルゴリズムへ接続する
-
-末尾位置で分類した distinct-subsequence DP を作り、同じ文字の直前位置を左端、隣接を避けた位置を右端とする区間和を累積和で評価する。
-
-
-## 転用するときの確認
-
-- **端点固定の区間 DP**: 隣接要素の削除によって元の列の区間が独立に閉じ、最終的な対応が非交差になるとき。 適用: 左端の相手を固定して内側と残りの右区間へ分割し、短い偶数長区間から計算する。
-- **独立な操作列の interleave**: 独立な二部分の完成方法に加え、両部分の操作を行う時系列も区別して数えるとき。 適用: 一方から k 回、他方から j-k 回を選ぶ位置を二項係数 C(j,k) で数える。
-- 削除過程を数える問題では、完成した組合せだけでなく各依存関係が作る操作順の自由度を別因子として確認する。
-- N=2 で離れた二組が独立に消える例を作り、二項係数を掛けない数え方が操作順を落とすことを確認する。
-- **最終出現による部分列の重複排除**: 異なる位置選択が同じ文字列を作り得るため、相異なる部分列だけを数えるとき。 適用: 現在文字と同じ文字の直前出現位置を境界にし、それ以前から作られる重複した末尾追加を遷移から除く。
-- **DP 遷移の累積和**: 各状態が連続した添字範囲の DP 値の総和として表されるとき。 適用: 最終出現位置から隣接禁止境界までの和を prefix sum の差で求める。
-- 部分列に局所的な位置制約を追加するときは、既存の重複排除 DP の遷移元範囲をどう狭めるかとして考える。
-- 部分列の個数を問われたら、位置集合の個数か生成文字列の個数かを最初に区別し、同じ文字の例で重複を検査する。
-- 通常の最終出現 DP を基準にし、追加の位置制約が遷移元のどちらの境界を動かすかを式で比較する。
-
-## 到達確認
-
-### 到達確認 1 — 区間または接頭辞の分割点を列挙し、小問題の答えを合成できる
-
-転移題材: [ABC219 H「Candles」](https://atcoder.jp/contests/abc219/tasks/abc219_h)
-
-**課題**: ABC219 H「Candles」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「区間または接頭辞の分割点を列挙し、小問題の答えを合成できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-### 到達確認 2 — 列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる
-
-転移題材: [ABC238 F「Two Exams」](https://atcoder.jp/contests/abc238/tasks/abc238_f)
-
-**課題**: ABC238 F「Two Exams」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。
-
-**合格条件**: 手法名の列挙に留まらず、学習成果「列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。
-
-
-## 解答と自己評価基準
-
-<details><summary>到達確認 1 の解答基準 — 区間または接頭辞の分割点を列挙し、小問題の答えを合成できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 燃焼残量の0打ち切りを救済対象の選択へ変形し、到着時刻和を残件数課金として区間 DP に組み込める。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 燃焼残量の0打ち切りを救済対象の選択へ変形し、到着時刻和を残件数課金として区間 DP に組み込める。
-
-- 対象技能が担う箇所: 燃焼残量の0打ち切りを救済対象の選択へ変形し、到着時刻和を残件数課金として区間 DP に組み込める。
-- 転移題材の解法接続: ろうそくと dummy を座標順に並べる。dp[l][r][side][k] を区間を訪問済みで端にいるときの最大の将来増分とし、次に l-1 または r+1 へ進む距離に k を掛けて引き、新位置を選ぶなら A を足して counter を減らし、選ばない遷移も取る。全区間・k を埋め、dummy 一点の状態で初期 counter を全て試す。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 区間または接頭辞の分割点を列挙し、小問題の答えを合成できる。
-
-</details>
-
-<details><summary>到達確認 2 の解答基準 — 列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる</summary>
-
-**検証状態**: `pending` — これは T058 の実行・査読前に使う自己評価基準であり、正解済みとは扱いません。
-
-別題材では次の直接根拠を対象技能として切り出す: 二試験の支配条件を満たす K 人選択を、一順位での走査と未選択側の最小順位 DP で数えられる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。
-
-根拠として照合する観点:
-
-- 二試験の支配条件を満たす K 人選択を、一順位での走査と未選択側の最小順位 DP で数えられる。
-
-- 対象技能が担う箇所: 二試験の支配条件を満たす K 人選択を、一順位での走査と未選択側の最小順位 DP で数えられる。
-- 転移題材の解法接続: 二次元支配順序の下向き閉包を数える問題を、一方の座標で sweep し、未選択集合が課す他方座標の最小境界だけを持つ DP にする。
-- 転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。
-- 対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。
-- 不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。
-- 対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。
-
-期待する到達点: 列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。
-
-</details>
-
+- [ABC225 F「String Cards」](https://atcoder.jp/contests/abc225/tasks/abc225_f)
+- [ABC228 H「Histogram」](https://atcoder.jp/contests/abc228/tasks/abc228_h)
+- [ABC234 G「Divide a Sequence」](https://atcoder.jp/contests/abc234/tasks/abc234_g)
+- [ABC237 F「|LIS| = 3」](https://atcoder.jp/contests/abc237/tasks/abc237_f)
+- [ABC238 Ex「Removing People」](https://atcoder.jp/contests/abc238/tasks/abc238_h)
+- [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
+- [ABC246 Ex「01? Queries」](https://atcoder.jp/contests/abc246/tasks/abc246_h)
+- [ABC305 Ex「Shojin」](https://atcoder.jp/contests/abc305/tasks/abc305_h)
+- [ABC345 E「Colorful Subsequence」](https://atcoder.jp/contests/abc345/tasks/abc345_e)
+- [ABC418 G「Binary Operation」](https://atcoder.jp/contests/abc418/tasks/abc418_g)
+- [ABC457 G「Catch All Apples」](https://atcoder.jp/contests/abc457/tasks/abc457_g)
 
 ## 根拠
 
@@ -191,7 +91,5 @@ dp[i][j] を生徒 i+1 から i+2j を全て消す方法数とし、左端の相
 - [ABC217 F 公式問題文](https://atcoder.jp/contests/abc217/tasks/abc217_f)
 - [ABC219 H 公式解説](https://atcoder.jp/contests/abc219/editorial/2601)
 - [ABC219 H 公式問題文](https://atcoder.jp/contests/abc219/tasks/abc219_h)
-- [ABC238 F 公式解説](https://atcoder.jp/contests/abc238/editorial/3354)
-- [ABC238 F 公式問題文](https://atcoder.jp/contests/abc238/tasks/abc238_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `242ab0527fb4e5ccaf6440d6b44b7c02b44e576665069f3e39a88f996eb1bd50` / LearningUnit `unit-dp-sequence-interval`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-dp-sequence-interval`

@@ -17,9 +17,7 @@
     "source-abc231-editorial-3059-2800894ed0012eda3c59d85ce01046fba8bf0c21479cd2c0c4e8eb9298de0bc3",
     "source-abc231-f-problem-37c3e1fabb258af6c0177d00752d792cedf5ab67a0ea32e2697bfe540ba9a2d2",
     "source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9",
-    "source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be",
-    "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
-    "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+    "source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be"
   ],
   "tagIds": [
     "tag-fenwick-weighted-prefix"
@@ -37,19 +35,30 @@
   "docPath": "src/content/docs/learn/query/weighted-prefix-fenwick.md",
   "problemIds": [
     "abc221-e",
+    "abc256-f",
+    "abc276-f",
+    "abc287-g",
+    "abc351-f",
+    "abc461-e"
+  ],
+  "directProblemIds": [
+    "abc461-e",
+    "abc256-f",
+    "abc287-g",
+    "abc276-f",
+    "abc351-f",
+    "abc221-e"
+  ],
+  "relatedProblemIds": [
     "abc231-f",
     "abc233-ex",
     "abc253-f",
-    "abc256-f",
     "abc261-f",
     "abc263-ex",
-    "abc276-f",
-    "abc287-g",
     "abc294-g",
     "abc306-f",
     "abc337-g",
     "abc341-e",
-    "abc351-f",
     "abc368-g",
     "abc378-e",
     "abc380-g",
@@ -63,68 +72,10 @@
     "abc439-f",
     "abc441-e",
     "abc449-e",
-    "abc452-f",
-    "abc461-e"
+    "abc452-f"
   ],
-  "examples": [
-    {
-      "key": "guided-outcome-maintain-weighted-prefix-statistics",
-      "learningOutcomeIds": [
-        "outcome-maintain-weighted-prefix-statistics"
-      ],
-      "kind": "illustrative",
-      "language": "日本語（考察手順）",
-      "omissions": [
-        "ここでは次の局所的な観察から対象技能を導く。部分列の条件が最初と最後だけに依存し、中間要素の採否が自由なとき。 問題全体への接続は併用技能を学んだ後に読む。",
-        "問題固有の完全実装と入出力仕様は、後続のProblem解説で扱う。"
-      ],
-      "environment": "対象学習者の共通前提を満たす紙上検討または任意の競技プログラミング環境",
-      "input": "ABC221 E「LEQ」について、部分列の最初と最後の index を i<j に固定すると、その間の j-i-1 要素はそれぞれ選ぶ・選ばないを自由に決められる。したがって端点が A_i≤A_j を満たす一組の寄与は 2^{j-i-1} である。",
-      "procedure": [
-        "観察: 部分列の最初と最後の index を i<j に固定すると、その間の j-i-1 要素はそれぞれ選ぶ・選ばないを自由に決められる。したがって端点が A_i≤A_j を満たす一組の寄与は 2^{j-i-1} である。",
-        "観察: 端点対を直接列挙できないが、2^{j-i-1}=2^{j-1}·2^{-i} と分離できるため、右端 j を走査すると必要なのは A_i≤A_j である過去 i の重み 2^{-i} の prefix 和だけになる。",
-        "着眼: 部分列全体を DP 状態にせず、最初と最後だけを固定すると中間選択が独立な二択になり、その個数が端点間距離だけの冪になる。",
-        "方針: A を座標圧縮し、Fenwick Tree に過去 index i の重み 2^{-i} を値 A_i の位置へ加え、各 j で A_j 以下の総和へ 2^{j-1} を掛ける。（値条件を Fenwick Tree の prefix query、index 間隔の重みを左右端へ分離し、全ての端点対の寄与をまとめられる。）",
-        "接続: 2 の冪と逆冪を法 998244353 で前計算する。j を左から走査し、Fenwick Tree の rank(A_j) 以下を query して 2^{j-1} 倍を答えへ加えた後、同じ rank に 2^{-j} を add する。"
-      ],
-      "executionTarget": null,
-      "expectedResult": "処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。",
-      "verificationStatus": "not_applicable",
-      "learningUnitRole": "guided_outcome"
-    }
-  ],
-  "exercises": [
-    {
-      "key": "attainment-outcome-maintain-weighted-prefix-statistics",
-      "learningOutcomeIds": [
-        "outcome-maintain-weighted-prefix-statistics"
-      ],
-      "prerequisiteIds": [
-        "outcome-linearize-static-range-information",
-        "prereq-abc-advanced-v1",
-        "unit-prefix-aggregate"
-      ],
-      "attainmentCondition": "学習成果「処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる」をガイドとは別の題材で再現し、発動条件と成立理由を説明できる。",
-      "assessment": {
-        "method": "ABC256 F「Cumulative Cumulative Cumulative Sum」を初見の転移題材とする。問題全体で併用する別技能は既知として、学習成果が担う部分に絞り、ガイド例の手順を写さず「観察→候補比較→鍵→アルゴリズム」の順で方針を再構成する。",
-        "successCondition": "手法名の列挙に留まらず、学習成果「処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる」について、発動条件、不変量または正当化、計算量、境界条件を説明できる。"
-      },
-      "answer": {
-        "reasoningOrVerification": "別題材では次の直接根拠を対象技能として切り出す: 三重累積和の点更新と prefix query を、一要素の寄与係数の二次展開と 0 次から 2 次の moment を持つ Fenwick tree により各 O(log N) で処理できる。以下は転移を照合する自己評価用の観点であり、T058 での実行・査読は未完了である。",
-        "procedure": [
-          "対象技能が担う箇所: 三重累積和の点更新と prefix query を、一要素の寄与係数の二次展開と 0 次から 2 次の moment を持つ Fenwick tree により各 O(log N) で処理できる。",
-          "転移題材の解法接続: S_r(x)=Σ_{i=1}^x i^r A_i (r=0,1,2) を 3 本の Fenwick tree で管理し、D_x={S_2(x)-(2x+3)S_1(x)+(x+1)(x+2)S_0(x)}/2 を計算する。代入更新は旧値との差分を 3 種類の重みで加える。",
-          "転移題材の対象・操作・保つ量・求める量を分離し、ガイド例との共通構造を対応付ける。",
-          "対象技能を外側の解法枠組みから切り分け、その入力・出力と更新前後で保つ不変量を述べる。",
-          "不変量から各操作後の値が正しいことを示し、初期化・空状態・重複・端点などの境界を確認する。",
-          "対象技能が問題全体の計算量へ加える操作回数と一回あたりの費用を評価する。"
-        ],
-        "expectedResult": "処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。",
-        "verificationStatus": "pending"
-      },
-      "learningUnitRole": "outcome_attainment"
-    }
-  ],
+  "examples": [],
+  "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 2,
