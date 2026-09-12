@@ -3,7 +3,7 @@ title: "組合せを生成関数へ符号化する"
 description: "組合せを生成関数へ符号化するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 88
+  order: 101
 ---
 
 # 組合せを生成関数へ符号化する
@@ -13,6 +13,8 @@ sidebar:
 ### 生成関数による組合せ構造の符号化
 
 和・積・sequence・set・cycleなどの組合せ構成を係数列の演算へ翻訳し、欲しい個数を係数として抽出する。
+
+まず組合せ構造を和・積へ翻訳し、何の係数を求めるのかを定める。ABC385 Gなどの局所多項式の積はこの基本操作の例である。得られた式が暗黙方程式や巨大な積なら、次の高度な係数抽出の節で、式から計算可能な係数列を取り出す。
 
 ## 前提と範囲
 
@@ -29,21 +31,24 @@ sidebar:
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC225 H「Social Distance 2」](https://atcoder.jp/contests/abc225/tasks/abc225_h)
-2. [ABC279 Ex「Sum of Prod of Min」](https://atcoder.jp/contests/abc279/tasks/abc279_h)
-3. [ABC222 H「Beautiful Binary Tree」](https://atcoder.jp/contests/abc222/tasks/abc222_h)
-4. [ABC241 Ex「Card Deck Score」](https://atcoder.jp/contests/abc241/tasks/abc241_h)
-5. [ABC267 Ex「Odd Sum」](https://atcoder.jp/contests/abc267/tasks/abc267_h)
+2. [ABC241 Ex「Card Deck Score」](https://atcoder.jp/contests/abc241/tasks/abc241_h)
+3. [ABC267 Ex「Odd Sum」](https://atcoder.jp/contests/abc267/tasks/abc267_h)
+4. [ABC214 G「Three Permutations」](https://atcoder.jp/contests/abc214/tasks/abc214_g)
+5. [ABC389 G「Odd Even Graph」](https://atcoder.jp/contests/abc389/tasks/abc389_g)
 6. [ABC392 G「Fine Triplets」](https://atcoder.jp/contests/abc392/tasks/abc392_g)
 7. [ABC385 G「Counting Buildings」](https://atcoder.jp/contests/abc385/tasks/abc385_g)
-8. [ABC390 G「Permutation Concatenation」](https://atcoder.jp/contests/abc390/tasks/abc390_g)
-9. [ABC422 G「Balls and Boxes」](https://atcoder.jp/contests/abc422/tasks/abc422_g)
-10. [ABC432 G「Sum of Binom(A, B)」](https://atcoder.jp/contests/abc432/tasks/abc432_g)
-11. [ABC247 Ex「Rearranging Problem」](https://atcoder.jp/contests/abc247/tasks/abc247_h)
-12. [ABC436 G「Linear Inequation」](https://atcoder.jp/contests/abc436/tasks/abc436_g)
-13. [ABC331 G「Collect Them All」](https://atcoder.jp/contests/abc331/tasks/abc331_g)
-14. [ABC352 G「Socks 3」](https://atcoder.jp/contests/abc352/tasks/abc352_g)
-15. [ABC409 G「Accumulation of Wealth」](https://atcoder.jp/contests/abc409/tasks/abc409_g)
-16. [ABC345 G「Sugoroku 5」](https://atcoder.jp/contests/abc345/tasks/abc345_g)
+8. [ABC285 Ex「Avoid Square Number」](https://atcoder.jp/contests/abc285/tasks/abc285_h)
+9. [ABC390 G「Permutation Concatenation」](https://atcoder.jp/contests/abc390/tasks/abc390_g)
+10. [ABC422 G「Balls and Boxes」](https://atcoder.jp/contests/abc422/tasks/abc422_g)
+11. [ABC432 G「Sum of Binom(A, B)」](https://atcoder.jp/contests/abc432/tasks/abc432_g)
+12. [ABC247 Ex「Rearranging Problem」](https://atcoder.jp/contests/abc247/tasks/abc247_h)
+13. [ABC436 G「Linear Inequation」](https://atcoder.jp/contests/abc436/tasks/abc436_g)
+14. [ABC249 Ex「Dye Color」](https://atcoder.jp/contests/abc249/tasks/abc249_h)
+15. [ABC331 G「Collect Them All」](https://atcoder.jp/contests/abc331/tasks/abc331_g)
+16. [ABC352 G「Socks 3」](https://atcoder.jp/contests/abc352/tasks/abc352_g)
+17. [ABC409 G「Accumulation of Wealth」](https://atcoder.jp/contests/abc409/tasks/abc409_g)
+18. [ABC462 G「Completely Wrong」](https://atcoder.jp/contests/abc462/tasks/abc462_g)
+19. [ABC345 G「Sugoroku 5」](https://atcoder.jp/contests/abc345/tasks/abc345_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -51,15 +56,11 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC214 G「Three Permutations」](https://atcoder.jp/contests/abc214/tasks/abc214_g)
-- [ABC230 H「Bullion」](https://atcoder.jp/contests/abc230/tasks/abc230_h)
 - [ABC235 Ex「Painting Weighted Graph」](https://atcoder.jp/contests/abc235/tasks/abc235_h)
-- [ABC249 Ex「Dye Color」](https://atcoder.jp/contests/abc249/tasks/abc249_h)
 - [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
 - [ABC269 Ex「Antichain」](https://atcoder.jp/contests/abc269/tasks/abc269_h)
 - [ABC272 Ex「Flipping Coins 2」](https://atcoder.jp/contests/abc272/tasks/abc272_h)
 - [ABC281 Ex「Alchemy」](https://atcoder.jp/contests/abc281/tasks/abc281_h)
-- [ABC285 Ex「Avoid Square Number」](https://atcoder.jp/contests/abc285/tasks/abc285_h)
 - [ABC289 Ex「Trio」](https://atcoder.jp/contests/abc289/tasks/abc289_h)
 - [ABC297 Ex「Diff Adjacent」](https://atcoder.jp/contests/abc297/tasks/abc297_h)
 - [ABC303 Ex「Constrained Tree Degree」](https://atcoder.jp/contests/abc303/tasks/abc303_h)
@@ -68,18 +69,16 @@ sidebar:
 - [ABC318 Ex「Count Strong Test Cases」](https://atcoder.jp/contests/abc318/tasks/abc318_h)
 - [ABC367 G「Sum of (XOR^K or 0)」](https://atcoder.jp/contests/abc367/tasks/abc367_g)
 - [ABC387 G「Prime Circuit」](https://atcoder.jp/contests/abc387/tasks/abc387_g)
-- [ABC389 G「Odd Even Graph」](https://atcoder.jp/contests/abc389/tasks/abc389_g)
 - [ABC439 G「Sugoroku 6」](https://atcoder.jp/contests/abc439/tasks/abc439_g)
 - [ABC449 G「Many Repunit Sum 2」](https://atcoder.jp/contests/abc449/tasks/abc449_g)
-- [ABC462 G「Completely Wrong」](https://atcoder.jp/contests/abc462/tasks/abc462_g)
 
 ## 根拠
 
 - [ABC214 G 公式解説](https://atcoder.jp/contests/abc214/editorial/2442)
 - [ABC214 G 公式問題文](https://atcoder.jp/contests/abc214/tasks/abc214_g)
-- [ABC222 H 公式解説](https://atcoder.jp/contests/abc222/editorial/2742)
-- [ABC222 H 公式問題文](https://atcoder.jp/contests/abc222/tasks/abc222_h)
 - [ABC225 H 公式解説](https://atcoder.jp/contests/abc225/editorial/2834)
 - [ABC225 H 公式問題文](https://atcoder.jp/contests/abc225/tasks/abc225_h)
+- [ABC235 H 公式解説](https://atcoder.jp/contests/abc235/editorial/3250)
+- [ABC235 H 公式問題文](https://atcoder.jp/contests/abc235/tasks/abc235_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-generating-functions`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-generating-functions`

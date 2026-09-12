@@ -298,9 +298,11 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 | `problemIds` | 自身のdirectProblemIdsと子のproblemIdsの和集合。coverageであり直接配置ではない |
 | `directProblemIds` / `relatedProblemIds` | 主配置問題の読む順序 / coverage外の関連参照。各Problemの主配置はpresentationUnitIdと一致し全Unitで一意 |
 | `stageRank` / `difficultyRank` / `representativeRank` | 0以上の整数 |
-| `globalIndex` / `orderReason` | 生成順と説明 |
+| `globalIndex` / `orderReason` | 学習Unitは標準順の位置と説明。章・構造Unitの表示位置は最初の学習子孫から導出 |
 
-親子関係と前提関係は別に検証する。標準順はcurriculum prerequisite DAGをprecedence constraintとし、入次数0の候補だけを3 rank、最後にUnit IDのUTF-8 byte順で比較する。単なる併用、同分野、類似実装だけでは前提辺を追加せず、`relatedTags`へ理由付きで記録する。
+`parentId`は目次・navigationだけを表し、前提辺にはしない。章と所有技能・直接配置問題を持たない構造Unitは`standardOrder`から除外する。親子関係と前提関係は別に検証する。標準順はcurriculum prerequisite DAGをprecedence constraintとし、入次数0の候補だけを3 rank、最後にUnit IDのUTF-8 byte順で比較する。単なる併用、同分野、類似実装だけでは前提辺を追加せず、`relatedTags`へ理由付きで記録する。
+
+各Problemは、想定解法の再構成・実装に必要な全Outcome（supportingも含む）の最遅Unitへ主配置する。そのUnitの技能をprimaryにし、従来の主技能はco-primaryとして根拠を保持する。Unit内では基本的な解法を先に置き、技能集合の包含だけでは問題間の前提辺を作らない。学習段階のrankは内容の基本性に基づき、見出しの深さから決めない。
 
 T050のcanonical skeletonは配置・順序と簡潔な概説を固定し、公開mappingが未受理の間は`draft: true`にする。`contentPhase=full_authoring`へ引き継いだ後は本文を上書きせず、所属・coverage・前提・出典・文書骨格の整合を確認する。T160が公開projectionを切り替える。
 

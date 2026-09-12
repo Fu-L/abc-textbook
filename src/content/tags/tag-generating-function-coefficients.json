@@ -1,0 +1,50 @@
+{
+  "id": "tag-generating-function-coefficients",
+  "name": "母関数方程式・高度な係数抽出",
+  "definition": "暗黙方程式の反転、微分恒等式の係数比較、Euler積の疎な展開を使い分け、必要次数の係数を求める。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-generating-functions"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "係数列",
+      "形式的無限積",
+      "暗黙母関数"
+    ],
+    "triggerPatterns": [
+      "F=xΦ(F)",
+      "partitionの積",
+      "微分恒等式"
+    ],
+    "invariantPatterns": [
+      "形式的係数一致",
+      "必要次数より先の項の不寄与"
+    ],
+    "goalPatterns": [
+      "係数漸化式",
+      "疎な係数抽出"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-derive-coefficient-recurrence-by-differentiation",
+    "outcome-expand-euler-product-sparsely",
+    "outcome-invert-generating-function-equation"
+  ],
+  "representativeProblemIds": [
+    "abc222-h",
+    "abc279-ex"
+  ],
+  "aliases": [
+    "Eulerの五角数定理",
+    "Lagrange反転",
+    "係数漸化式"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

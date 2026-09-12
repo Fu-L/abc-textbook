@@ -3,7 +3,7 @@ title: "円環順序・chord交差"
 description: "円環順序・chord交差の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 170
+  order: 111
 ---
 
 # 円環順序・chord交差
@@ -29,6 +29,8 @@ sidebar:
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC338 E「Chords」](https://atcoder.jp/contests/abc338/tasks/abc338_e)
+2. [ABC424 F「Adding Chords」](https://atcoder.jp/contests/abc424/tasks/abc424_f)
+3. [ABC263 Ex「Intersection 2」](https://atcoder.jp/contests/abc263/tasks/abc263_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -36,9 +38,7 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC263 Ex「Intersection 2」](https://atcoder.jp/contests/abc263/tasks/abc263_h)
 - [ABC405 F「Chord Crossing」](https://atcoder.jp/contests/abc405/tasks/abc405_f)
-- [ABC424 F「Adding Chords」](https://atcoder.jp/contests/abc424/tasks/abc424_f)
 
 ## 根拠
 
@@ -49,4 +49,4 @@ sidebar:
 - [ABC405 F 公式解説](https://atcoder.jp/contests/abc405/editorial/13009)
 - [ABC405 F 公式問題文](https://atcoder.jp/contests/abc405/tasks/abc405_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-cyclic-order-crossing`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-cyclic-order-crossing`

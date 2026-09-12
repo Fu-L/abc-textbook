@@ -38,9 +38,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 5,
   "difficultyRank": 4,
   "representativeRank": 98,
-  "globalIndex": 112,
+  "globalIndex": 188,
   "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、Min_25・Lucy DP型の総和篩の発動条件・正当化・境界を重複なく学ぶ。"
 }

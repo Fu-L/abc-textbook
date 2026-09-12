@@ -3,7 +3,7 @@ title: "半順序・Dilworth・最大反鎖"
 description: "半順序・Dilworth・最大反鎖の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 168
+  order: 163
 ---
 
 # 半順序・Dilworth・最大反鎖
@@ -18,7 +18,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 二部matching・Hall・Kőnig、列・区間・分割のDP。
+追加前提: 二部matching・Hall・Kőnig、列・subsequence DP。
 
 二部matching・Hall・Kőnig・列・subsequence DPで得た考え方と実装を再利用し、半順序・Dilworth・最大反鎖の発動条件・正当化・境界を重複なく学ぶ。
 
@@ -43,4 +43,4 @@ sidebar:
 - [ABC457 G 公式解説](https://atcoder.jp/contests/abc457/editorial/20073)
 - [ABC457 G 公式問題文](https://atcoder.jp/contests/abc457/tasks/abc457_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-poset-dilworth-antichain`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-poset-dilworth-antichain`

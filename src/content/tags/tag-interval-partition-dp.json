@@ -1,7 +1,7 @@
 {
   "id": "tag-interval-partition-dp",
-  "name": "区間・分割DP",
-  "definition": "区間またはprefixの分割点を遷移にし、局所解の合成を行う。",
+  "name": "区間合成・領域分割DP",
+  "definition": "区間・長方形の分割点を遷移にし、互いに独立な小領域の解を合成する。",
   "parentId": "tag-dp-state-transition",
   "prerequisiteTagIds": [
     "tag-dp-state-equivalence"
@@ -38,14 +38,14 @@
     "outcome-design-interval-split-dp"
   ],
   "representativeProblemIds": [
-    "abc466-e",
-    "abc288-f",
-    "abc233-g"
+    "abc217-f",
+    "abc233-g",
+    "abc262-g"
   ],
   "aliases": [
     "interval DP",
-    "分割DP",
-    "区間DP"
+    "区間DP",
+    "領域分割DP"
   ],
   "formerNames": [],
   "lifecycle": "active",

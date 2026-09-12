@@ -1462,13 +1462,13 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     },
   ),
   'abc244-f': decision(
-    'outcome-enumerate-subset-state-space',
+    'outcome-select-state-graph-search',
     [
-      d('t0', 'primary', 'tag-subset-bitmask-transform'),
-      d('t1', 'supporting', 'tag-reachability-bfs'),
-      d('p0', 'supporting', 'tag-reachability-bfs'),
+      d('t0', 'primary', 'tag-reachability-bfs'),
+      d('t1', 'primary', 'tag-reachability-bfs'),
+      d('p0', 'same_tag', 'tag-reachability-bfs'),
     ],
-    { 'tag-reachability-bfs': ['outcome-select-state-graph-search'] },
+    {},
   ),
   'abc244-g': decision(
     'outcome-recover-valid-witness',
@@ -2181,16 +2181,13 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     ['outcome-apply-formal-power-series-operations'],
   ),
   'abc260-f': decision(
-    'outcome-recover-valid-witness',
+    'outcome-enumerate-bounded-candidates-or-cases',
     [
-      d('t0', 'primary', 'tag-constructive-witness'),
-      d('t1', 'supporting', 'tag-bounded-enumeration'),
-      d('p0', 'same_tag', 'tag-constructive-witness'),
-      d('p0', 'supporting', 'tag-bounded-enumeration'),
+      d('t0', 'primary', 'tag-bounded-enumeration'),
+      d('t1', 'primary', 'tag-bounded-enumeration'),
+      d('p0', 'same_tag', 'tag-bounded-enumeration'),
     ],
-    {
-      'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'],
-    },
+    {},
   ),
   'abc260-g': decision(
     'outcome-linearize-static-range-information',

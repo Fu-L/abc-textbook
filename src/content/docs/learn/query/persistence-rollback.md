@@ -3,7 +3,7 @@ title: "構造を共有して過去の版を保存・復元する"
 description: "構造を共有して過去の版を保存・復元するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 53
+  order: 116
 ---
 
 # 構造を共有して過去の版を保存・復元する
@@ -44,4 +44,4 @@ sidebar:
 - [ABC302 H 公式解説](https://atcoder.jp/contests/abc302/editorial/6409)
 - [ABC302 H 公式問題文](https://atcoder.jp/contests/abc302/tasks/abc302_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-persistence-rollback`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-persistence-rollback`

@@ -42,9 +42,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 93,
-  "globalIndex": 199,
+  "globalIndex": 158,
   "orderReason": "最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。"
 }

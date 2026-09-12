@@ -3,7 +3,7 @@ title: "heap・ordered setで全候補の極値を保つ"
 description: "heap・ordered setで全候補の極値を保つの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 58
+  order: 7
 ---
 
 # heap・ordered setで全候補の極値を保つ
@@ -49,28 +49,36 @@ sidebar:
 - [ABC250 G「Stonks」](https://atcoder.jp/contests/abc250/tasks/abc250_g)
 - [ABC251 Ex「Fill Triangle」](https://atcoder.jp/contests/abc251/tasks/abc251_h)
 - [ABC252 F「Bread」](https://atcoder.jp/contests/abc252/tasks/abc252_f)
-- [ABC256 Ex「I like Query Problem」](https://atcoder.jp/contests/abc256/tasks/abc256_h)
 - [ABC268 Ex「Taboo」](https://atcoder.jp/contests/abc268/tasks/abc268_h)
 - [ABC273 Ex「Inv(0,1)ving Insert(1,0)n」](https://atcoder.jp/contests/abc273/tasks/abc273_h)
 - [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
+- [ABC297 E「Kth Takoyaki Set」](https://atcoder.jp/contests/abc297/tasks/abc297_e)
 - [ABC304 Ex「Constrained Topological Sort」](https://atcoder.jp/contests/abc304/tasks/abc304_h)
+- [ABC305 E「Art Gallery on Graph」](https://atcoder.jp/contests/abc305/tasks/abc305_e)
 - [ABC307 F「Virus 2」](https://atcoder.jp/contests/abc307/tasks/abc307_f)
+- [ABC308 F「Vouchers」](https://atcoder.jp/contests/abc308/tasks/abc308_f)
+- [ABC314 G「Amulets」](https://atcoder.jp/contests/abc314/tasks/abc314_g)
 - [ABC319 F「Fighter Takahashi」](https://atcoder.jp/contests/abc319/tasks/abc319_f)
 - [ABC319 G「Counting Shortest Paths」](https://atcoder.jp/contests/abc319/tasks/abc319_g)
 - [ABC320 E「Somen Nagashi」](https://atcoder.jp/contests/abc320/tasks/abc320_e)
 - [ABC324 G「Generate Arrays」](https://atcoder.jp/contests/abc324/tasks/abc324_g)
+- [ABC331 E「Set Meal」](https://atcoder.jp/contests/abc331/tasks/abc331_e)
+- [ABC342 G「Retroactive Range Chmax」](https://atcoder.jp/contests/abc342/tasks/abc342_g)
+- [ABC356 F「Distance Component Size Query」](https://atcoder.jp/contests/abc356/tasks/abc356_f)
 - [ABC359 F「Tree Degree Optimization」](https://atcoder.jp/contests/abc359/tasks/abc359_f)
 - [ABC364 F「Range Connect MST」](https://atcoder.jp/contests/abc364/tasks/abc364_f)
 - [ABC368 G「Add and Multiply Queries」](https://atcoder.jp/contests/abc368/tasks/abc368_g)
 - [ABC373 F「Knapsack with Diminishing Values」](https://atcoder.jp/contests/abc373/tasks/abc373_f)
 - [ABC376 E「Max × Sum」](https://atcoder.jp/contests/abc376/tasks/abc376_e)
 - [ABC376 G「Treasure Hunting」](https://atcoder.jp/contests/abc376/tasks/abc376_g)
+- [ABC384 E「Takahashi is Slime 2」](https://atcoder.jp/contests/abc384/tasks/abc384_e)
 - [ABC406 G「Travelling Salesman Problem」](https://atcoder.jp/contests/abc406/tasks/abc406_g)
 - [ABC407 E「Most Valuable Parentheses」](https://atcoder.jp/contests/abc407/tasks/abc407_e)
 - [ABC407 F「Sums of Sliding Window Maximum」](https://atcoder.jp/contests/abc407/tasks/abc407_f)
+- [ABC409 F「Connecting Points」](https://atcoder.jp/contests/abc409/tasks/abc409_f)
 - [ABC418 F「We're teapots」](https://atcoder.jp/contests/abc418/tasks/abc418_f)
+- [ABC431 G「One Time Swap 2」](https://atcoder.jp/contests/abc431/tasks/abc431_g)
 - [ABC433 E「Max Matrix 2」](https://atcoder.jp/contests/abc433/tasks/abc433_e)
-- [ABC444 E「Sparse Range」](https://atcoder.jp/contests/abc444/tasks/abc444_e)
 
 ## 根拠
 
@@ -81,4 +89,4 @@ sidebar:
 - [ABC218 G 公式解説](https://atcoder.jp/contests/abc218/editorial/2607)
 - [ABC218 G 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-ordered-set-heap`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-ordered-set-heap`

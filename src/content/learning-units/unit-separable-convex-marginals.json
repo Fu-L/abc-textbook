@@ -50,9 +50,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 77,
-  "globalIndex": 160,
+  "globalIndex": 95,
   "orderReason": "離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。"
 }

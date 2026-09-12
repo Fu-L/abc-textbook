@@ -1,0 +1,20 @@
+{
+  "id": "outcome-design-lis-frontier",
+  "statement": "部分列の長さ別最小末尾と値別最良長を比較し、延長可能性を失わない状態圧縮と値域集約を選ぶ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-associative-range-summary",
+    "outcome-design-order-preserving-dp"
+  ],
+  "scopeIds": [
+    "abc240-ex",
+    "abc339-e",
+    "abc354-f",
+    "abc360-g",
+    "abc369-f",
+    "abc393-f",
+    "abc410-g",
+    "abc439-e",
+    "tag-lis-state",
+    "unit-dp-lis"
+  ]
+}

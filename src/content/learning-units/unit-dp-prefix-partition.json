@@ -1,0 +1,58 @@
+{
+  "id": "unit-dp-prefix-partition",
+  "kind": "subsection",
+  "title": "prefix分割DP",
+  "parentId": "unit-dp-sequence-interval",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-state-design"
+  ],
+  "excludedTopics": [
+    "prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c",
+    "source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba",
+    "source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058",
+    "source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e",
+    "source-abc285-e-problem-5969ddb4e4b20f1cde65314e6076f59514c97d2a96fac730b85ceab969eca9a7",
+    "source-abc285-editorial-5530-310be7210dbffe3c8ce1ed2c646edf0cf96ed70c1505ae86db112906fbd424f5"
+  ],
+  "tagIds": [
+    "tag-dp-prefix-partition"
+  ],
+  "ownedTagIds": [
+    "tag-dp-prefix-partition"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-prefix-partition-dp"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-prefix-partition-dp"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-prefix-partition.md",
+  "problemIds": [
+    "abc230-f",
+    "abc285-e",
+    "abc374-f"
+  ],
+  "directProblemIds": [
+    "abc285-e",
+    "abc230-f",
+    "abc374-f"
+  ],
+  "relatedProblemIds": [
+    "abc262-ex",
+    "abc288-f",
+    "abc466-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "stageRank": 1,
+  "difficultyRank": 0,
+  "representativeRank": 80,
+  "globalIndex": 14,
+  "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、prefix分割DPの発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -3,7 +3,7 @@ title: "二部彩色と成分構造を扱う"
 description: "二部彩色と成分構造を扱うの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 35
+  order: 31
 ---
 
 # 二部彩色と成分構造を扱う
@@ -28,7 +28,7 @@ sidebar:
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC451 F「Make Bipartite 3」](https://atcoder.jp/contests/abc451/tasks/abc451_f)
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -41,6 +41,7 @@ sidebar:
 - [ABC398 G「Not Only Tree Game」](https://atcoder.jp/contests/abc398/tasks/abc398_g)
 - [ABC437 G「Colorful Christmas Tree」](https://atcoder.jp/contests/abc437/tasks/abc437_g)
 - [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
+- [ABC451 F「Make Bipartite 3」](https://atcoder.jp/contests/abc451/tasks/abc451_f)
 - [ABC454 E「LRUD Moving」](https://atcoder.jp/contests/abc454/tasks/abc454_e)
 
 ## 根拠
@@ -52,4 +53,4 @@ sidebar:
 - [ABC398 E 公式解説](https://atcoder.jp/contests/abc398/editorial/12483)
 - [ABC398 G 公式問題文](https://atcoder.jp/contests/abc398/tasks/abc398_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-bipartite-structure`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-bipartite-structure`

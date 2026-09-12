@@ -3,7 +3,7 @@ title: "疎なkeyの順序を保ってdense indexへ圧縮する"
 description: "疎なkeyの順序を保ってdense indexへ圧縮するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 14
+  order: 4
 ---
 
 # 疎なkeyの順序を保ってdense indexへ圧縮する
@@ -14,13 +14,17 @@ sidebar:
 
 疎な初期値・将来更新値・event座標をsort-uniqueし、順序と等値性を保つdense indexまたは有限状態へ写す。
 
+保持すべき座標集合が分かっているなら、sort・uniqueした列への順位を添字として使う。保存されるのは等値性と大小順であり、距離や長さではない。時間差・面積などを計算するときは元座標も保持し、区間の重みには隣接座標の差を使う。
+
+ABC374 Fでは最適出荷時刻をT_i+kXへ限定できることを先に証明する。この候補発見は圧縮の前の工程であり、prefix分割DPの節で扱う。順位を付けるだけでは待ち時間や次回出荷可能時刻を計算できない。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
 追加前提: なし。
 
-比較に必要なのが順序と等値性だけであることを確認し、疎な初期値・将来更新値・event座標をsort-uniqueしたdense indexへ写す。
+保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。
 
 - 値・時刻順にactive集合を増減するevent sweep、および固定配列・行列を入力順のまま読むだけのscan。
 
@@ -28,7 +32,7 @@ sidebar:
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC374 F「Shipping」](https://atcoder.jp/contests/abc374/tasks/abc374_f)
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -53,6 +57,7 @@ sidebar:
 - [ABC356 F「Distance Component Size Query」](https://atcoder.jp/contests/abc356/tasks/abc356_f)
 - [ABC360 F「InterSections」](https://atcoder.jp/contests/abc360/tasks/abc360_f)
 - [ABC360 G「Suitable Edit for LIS」](https://atcoder.jp/contests/abc360/tasks/abc360_g)
+- [ABC374 F「Shipping」](https://atcoder.jp/contests/abc374/tasks/abc374_f)
 - [ABC384 G「Abs Sum」](https://atcoder.jp/contests/abc384/tasks/abc384_g)
 - [ABC431 G「One Time Swap 2」](https://atcoder.jp/contests/abc431/tasks/abc431_g)
 - [ABC434 E「Distribute Bunnies」](https://atcoder.jp/contests/abc434/tasks/abc434_e)
@@ -68,4 +73,4 @@ sidebar:
 - [ABC232 G 公式解説](https://atcoder.jp/contests/abc232/editorial/3141)
 - [ABC232 G 公式問題文](https://atcoder.jp/contests/abc232/tasks/abc232_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-coordinate-compression`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-coordinate-compression`

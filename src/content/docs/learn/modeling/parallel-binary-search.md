@@ -3,7 +3,7 @@ title: "parallel binary search・多数境界の判定共有"
 description: "parallel binary search・多数境界の判定共有の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 92
+  order: 108
 ---
 
 # parallel binary search・多数境界の判定共有
@@ -40,4 +40,4 @@ sidebar:
 - [ABC394 G 公式解説](https://atcoder.jp/contests/abc394/editorial/12282)
 - [ABC394 G 公式問題文](https://atcoder.jp/contests/abc394/tasks/abc394_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-parallel-binary-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-parallel-binary-search`

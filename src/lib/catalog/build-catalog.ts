@@ -1,3 +1,4 @@
+import { isCurriculumUnit, unitNavigationIndices } from '../taxonomy/learning-unit-order.js';
 import {
   CatalogContract,
   parseAtCoderContestResourceUrl,
@@ -29,6 +30,7 @@ export class CatalogBuildError extends Error {
 }
 
 interface Entity {
+  readonly globalIndex?: number;
   readonly id?: string;
   readonly problemId?: string | null;
   readonly contestId?: string;
@@ -206,6 +208,7 @@ export interface CatalogLike {
     readonly replacementTagIds: readonly string[];
   }[];
   readonly learningUnits: readonly {
+    readonly kind?: string;
     readonly id: string;
     readonly sourceRevisionIds: readonly string[];
     readonly additionalPrerequisiteUnitIds: readonly string[];
@@ -442,6 +445,11 @@ export const sortCatalogEntityArray = (
     return compareCodeUnits(a, b);
   };
   if (key === 'learningUnits') {
+    if (items.every((item) => 'ownedTagIds' in item))
+      return [...items].sort(
+        (a, b) =>
+          Number(a.globalIndex) - Number(b.globalIndex) || compareCodeUnits(a.id ?? '', b.id ?? ''),
+      );
     try {
       const ordered = deterministicTopologicalOrder(
         items.map((item) => ({
@@ -1691,7 +1699,7 @@ export const validateCatalogSemantics = (
   );
   try {
     const orderedLearningUnits = deterministicTopologicalOrder(
-      catalog.learningUnits.map((unit) => ({
+      catalog.learningUnits.filter(isCurriculumUnit).map((unit) => ({
         unit,
         id: unit.id,
         prerequisiteIds: unit.additionalPrerequisiteUnitIds,
@@ -1700,15 +1708,16 @@ export const validateCatalogSemantics = (
       (node) => node.ranks,
     );
     const expectedIds = orderedLearningUnits.map(({ id }) => id);
-    const actualIds = catalog.learningUnits.map(({ id }) => id);
+    const actualIds = catalog.learningUnits.filter(isCurriculumUnit).map(({ id }) => id);
     if (expectedIds.some((id, index) => actualIds[index] !== id)) {
       diagnostics.push({
         code: 'LEARNING_UNIT_ORDER_MISMATCH',
         message: 'Learning units must be stored in deterministic prerequisite order.',
       });
     }
-    for (const [index, unit] of catalog.learningUnits.entries()) {
-      if (unit.globalIndex !== index || unit.globalIndex !== expectedIds.indexOf(unit.id)) {
+    const navigationIndices = unitNavigationIndices(catalog.learningUnits, expectedIds);
+    for (const unit of catalog.learningUnits) {
+      if (unit.globalIndex !== navigationIndices.get(unit.id)) {
         diagnostics.push({
           code: 'LEARNING_UNIT_GLOBAL_INDEX_MISMATCH',
           entityId: unit.id,

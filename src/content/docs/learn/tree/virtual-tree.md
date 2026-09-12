@@ -3,7 +3,7 @@ title: "virtual tree・auxiliary tree"
 description: "virtual tree・auxiliary treeの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 186
+  order: 130
 ---
 
 # virtual tree・auxiliary tree
@@ -37,4 +37,4 @@ ancestor query・LCA・Euler順による部分木区間化で得た考え方と�
 - [ABC340 G 公式解説](https://atcoder.jp/contests/abc340/editorial/9249)
 - [ABC340 G 公式問題文](https://atcoder.jp/contests/abc340/tasks/abc340_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-virtual-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-virtual-tree`

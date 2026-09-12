@@ -34,24 +34,28 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/linear-recurrence.md",
   "problemIds": [
+    "abc245-ex",
     "abc256-g",
     "abc258-ex",
+    "abc270-ex",
     "abc271-g",
-    "abc293-e"
+    "abc293-e",
+    "abc299-ex",
+    "abc429-g"
   ],
   "directProblemIds": [
     "abc293-e",
     "abc258-ex",
     "abc256-g",
-    "abc271-g"
-  ],
-  "relatedProblemIds": [
-    "abc245-ex",
+    "abc429-g",
+    "abc271-g",
     "abc270-ex",
     "abc299-ex",
+    "abc245-ex"
+  ],
+  "relatedProblemIds": [
     "abc300-ex",
     "abc305-g",
-    "abc429-g",
     "abc458-f"
   ],
   "examples": [],
@@ -59,6 +63,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 8,
-  "globalIndex": 79,
+  "globalIndex": 62,
   "orderReason": "一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。"
 }

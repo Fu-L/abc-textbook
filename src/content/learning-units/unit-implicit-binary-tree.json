@@ -32,20 +32,21 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/tree/implicit-binary-tree.md",
   "problemIds": [
-    "abc321-e"
-  ],
-  "directProblemIds": [
-    "abc321-e"
-  ],
-  "relatedProblemIds": [
     "abc220-e",
+    "abc321-e",
     "abc424-e"
   ],
+  "directProblemIds": [
+    "abc321-e",
+    "abc424-e",
+    "abc220-e"
+  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "stageRank": 2,
   "difficultyRank": 1,
   "representativeRank": 6,
-  "globalIndex": 38,
+  "globalIndex": 33,
   "orderReason": "指数個の頂点を持つ完全二分木を展開せず、深さごとの対称性と2冪で集約するか、heap番号の祖先移動と深さ別子孫label区間で数える。"
 }

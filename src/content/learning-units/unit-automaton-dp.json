@@ -37,24 +37,25 @@
   "problemIds": [
     "abc301-f",
     "abc305-g",
+    "abc391-g",
     "abc418-g"
   ],
   "directProblemIds": [
+    "abc391-g",
     "abc305-g",
     "abc418-g",
     "abc301-f"
   ],
   "relatedProblemIds": [
     "abc228-g",
-    "abc391-g",
     "abc419-f",
     "abc458-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 80,
-  "globalIndex": 164,
+  "globalIndex": 103,
   "orderReason": "有限pattern automatonの完全遷移を構成できるようになった後、位置・長さとの直積状態で受理列を数え、桁上限がある場合だけ桁DPと組み合わせる。"
 }

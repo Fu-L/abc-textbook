@@ -3,7 +3,7 @@ title: "木構造"
 description: "木構造の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 3
+  order: 32
 ---
 
 # 木構造
@@ -28,13 +28,13 @@ sidebar:
 
 - [木距離を基準点・直径・中心から捉える](/learn/tree/tree-metric/)
 - [対称性・深さ・label区間で巨大な完全二分木を数える](/learn/tree/implicit-binary-tree/)
+- [重心を分離点として木を再帰分解する](/learn/tree/tree-balanced-separators/)
 - [木DP・集約・rerooting](/learn/tree/tree-aggregation/)
 - [包含木の構築とancestor・path分解](/learn/tree/tree-decomposition/)
-- [重心を分離点として木を再帰分解する](/learn/tree/tree-balanced-separators/)
-- [加法的tree metric復元](/learn/tree/additive-tree-metric-reconstruction/)
 - [DSU merge tree・Kruskal reconstruction tree](/learn/tree/dsu-merge-tree/)
-- [01 on Tree・親先行順序のcluster縮約](/learn/tree/tree-precedence-contraction/)
 - [資源DPを引数で渡すHLRecDP](/learn/tree/heavy-light-recursive-dp/)
+- [加法的tree metric復元](/learn/tree/additive-tree-metric-reconstruction/)
+- [01 on Tree・親先行順序のcluster縮約](/learn/tree/tree-precedence-contraction/)
 - [rake・compressで動的木DPを保つ](/learn/tree/static-top-tree/)
 
 ## 問題一覧
@@ -49,17 +49,8 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC220 E「Distance on Large Perfect Binary Tree」](https://atcoder.jp/contests/abc220/tasks/abc220_e)
-- [ABC246 G「Game on Tree 3」](https://atcoder.jp/contests/abc246/tasks/abc246_g)
 - [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
-- [ABC293 Ex「Optimal Path Decomposition」](https://atcoder.jp/contests/abc293/tasks/abc293_h)
 - [ABC369 G「As far as possible」](https://atcoder.jp/contests/abc369/tasks/abc369_g)
-- [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
-- [ABC424 E「Cut in Half」](https://atcoder.jp/contests/abc424/tasks/abc424_e)
-- [ABC435 F「Cat exercise」](https://atcoder.jp/contests/abc435/tasks/abc435_f)
-- [ABC438 F「Sum of Mex」](https://atcoder.jp/contests/abc438/tasks/abc438_f)
-- [ABC453 F「Avoid Division」](https://atcoder.jp/contests/abc453/tasks/abc453_f)
-- [ABC460 F「Farthest Pair Query」](https://atcoder.jp/contests/abc460/tasks/abc460_f)
 
 ## 根拠
 
@@ -70,4 +61,4 @@ sidebar:
 - [ABC221 F 公式解説](https://atcoder.jp/contests/abc221/editorial/2723)
 - [ABC221 F 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-chapter-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-chapter-tree`

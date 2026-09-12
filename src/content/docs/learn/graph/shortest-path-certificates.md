@@ -3,7 +3,7 @@ title: "重み付き最短路・経路復元・差分制約"
 description: "重み付き最短路・経路復元・差分制約の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 42
+  order: 91
 ---
 
 # 重み付き最短路・経路復元・差分制約
@@ -42,18 +42,11 @@ sidebar:
 
 - [ABC250 Ex「Trespassing Takahashi」](https://atcoder.jp/contests/abc250/tasks/abc250_h)
 - [ABC261 G「Replace」](https://atcoder.jp/contests/abc261/tasks/abc261_g)
-- [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
-- [ABC271 E「Subsequence Path」](https://atcoder.jp/contests/abc271/tasks/abc271_e)
-- [ABC297 E「Kth Takoyaki Set」](https://atcoder.jp/contests/abc297/tasks/abc297_e)
-- [ABC301 E「Pac-Takahashi」](https://atcoder.jp/contests/abc301/tasks/abc301_e)
-- [ABC305 E「Art Gallery on Graph」](https://atcoder.jp/contests/abc305/tasks/abc305_e)
-- [ABC338 F「Negative Traveling Salesman」](https://atcoder.jp/contests/abc338/tasks/abc338_f)
-- [ABC355 E「Guess the Sum」](https://atcoder.jp/contests/abc355/tasks/abc355_e)
 - [ABC364 G「Last Major City」](https://atcoder.jp/contests/abc364/tasks/abc364_g)
-- [ABC375 F「Road Blocked」](https://atcoder.jp/contests/abc375/tasks/abc375_f)
 - [ABC375 G「Road Blocked 2」](https://atcoder.jp/contests/abc375/tasks/abc375_g)
 - [ABC393 G「Unevenness」](https://atcoder.jp/contests/abc393/tasks/abc393_g)
 - [ABC395 G「Minimum Steiner Tree 2」](https://atcoder.jp/contests/abc395/tasks/abc395_g)
+- [ABC414 G「AtCoder Express 4」](https://atcoder.jp/contests/abc414/tasks/abc414_g)
 - [ABC429 F「Shortest Path Query」](https://atcoder.jp/contests/abc429/tasks/abc429_f)
 
 ## 根拠
@@ -65,4 +58,4 @@ sidebar:
 - [ABC218 F 公式解説](https://atcoder.jp/contests/abc218/editorial/2606)
 - [ABC218 F 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-shortest-path-certificates`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-shortest-path-certificates`

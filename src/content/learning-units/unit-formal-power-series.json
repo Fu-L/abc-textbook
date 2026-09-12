@@ -48,6 +48,7 @@
     "abc300-ex",
     "abc317-ex",
     "abc318-ex",
+    "abc381-g",
     "abc387-g",
     "abc439-g",
     "abc449-g"
@@ -60,14 +61,12 @@
     "abc297-ex",
     "abc260-ex"
   ],
-  "relatedProblemIds": [
-    "abc381-g"
-  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "stageRank": 4,
   "difficultyRank": 5,
   "representativeRank": 10,
-  "globalIndex": 215,
+  "globalIndex": 185,
   "orderReason": "生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。"
 }

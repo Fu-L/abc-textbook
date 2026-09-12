@@ -3,7 +3,7 @@ title: "最短路モデル"
 description: "最短路モデルの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 155
+  order: 91
 ---
 
 # 最短路モデル
@@ -47,8 +47,14 @@ sidebar:
 17. [ABC243 Ex「Builder Takahashi (Enhanced version)」](https://atcoder.jp/contests/abc243/tasks/abc243_h)
 18. [ABC257 F「Teleporter Setting」](https://atcoder.jp/contests/abc257/tasks/abc257_f)
 19. [ABC369 E「Sightseeing Tour」](https://atcoder.jp/contests/abc369/tasks/abc369_e)
-20. [ABC414 G「AtCoder Express 4」](https://atcoder.jp/contests/abc414/tasks/abc414_g)
-21. [ABC307 F「Virus 2」](https://atcoder.jp/contests/abc307/tasks/abc307_f)
+20. [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
+21. [ABC297 E「Kth Takoyaki Set」](https://atcoder.jp/contests/abc297/tasks/abc297_e)
+22. [ABC305 E「Art Gallery on Graph」](https://atcoder.jp/contests/abc305/tasks/abc305_e)
+23. [ABC375 F「Road Blocked」](https://atcoder.jp/contests/abc375/tasks/abc375_f)
+24. [ABC307 F「Virus 2」](https://atcoder.jp/contests/abc307/tasks/abc307_f)
+25. [ABC271 E「Subsequence Path」](https://atcoder.jp/contests/abc271/tasks/abc271_e)
+26. [ABC301 E「Pac-Takahashi」](https://atcoder.jp/contests/abc301/tasks/abc301_e)
+27. [ABC338 F「Negative Traveling Salesman」](https://atcoder.jp/contests/abc338/tasks/abc338_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -60,18 +66,12 @@ sidebar:
 - [ABC250 Ex「Trespassing Takahashi」](https://atcoder.jp/contests/abc250/tasks/abc250_h)
 - [ABC252 E「Road Reduction」](https://atcoder.jp/contests/abc252/tasks/abc252_e)
 - [ABC261 G「Replace」](https://atcoder.jp/contests/abc261/tasks/abc261_g)
-- [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
-- [ABC271 E「Subsequence Path」](https://atcoder.jp/contests/abc271/tasks/abc271_e)
-- [ABC297 E「Kth Takoyaki Set」](https://atcoder.jp/contests/abc297/tasks/abc297_e)
-- [ABC301 E「Pac-Takahashi」](https://atcoder.jp/contests/abc301/tasks/abc301_e)
-- [ABC305 E「Art Gallery on Graph」](https://atcoder.jp/contests/abc305/tasks/abc305_e)
 - [ABC308 Ex「Make Q」](https://atcoder.jp/contests/abc308/tasks/abc308_h)
-- [ABC338 F「Negative Traveling Salesman」](https://atcoder.jp/contests/abc338/tasks/abc338_f)
 - [ABC364 G「Last Major City」](https://atcoder.jp/contests/abc364/tasks/abc364_g)
-- [ABC375 F「Road Blocked」](https://atcoder.jp/contests/abc375/tasks/abc375_f)
 - [ABC375 G「Road Blocked 2」](https://atcoder.jp/contests/abc375/tasks/abc375_g)
 - [ABC393 G「Unevenness」](https://atcoder.jp/contests/abc393/tasks/abc393_g)
 - [ABC395 G「Minimum Steiner Tree 2」](https://atcoder.jp/contests/abc395/tasks/abc395_g)
+- [ABC414 G「AtCoder Express 4」](https://atcoder.jp/contests/abc414/tasks/abc414_g)
 - [ABC429 F「Shortest Path Query」](https://atcoder.jp/contests/abc429/tasks/abc429_f)
 
 ## 根拠
@@ -83,4 +83,4 @@ sidebar:
 - [ABC232 G 公式解説](https://atcoder.jp/contests/abc232/editorial/3141)
 - [ABC232 G 公式問題文](https://atcoder.jp/contests/abc232/tasks/abc232_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-weighted-shortest-path`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-weighted-shortest-path`

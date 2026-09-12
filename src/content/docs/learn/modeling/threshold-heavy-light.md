@@ -3,7 +3,7 @@ title: "平方根・閾値による軽重分類"
 description: "平方根・閾値による軽重分類の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 150
+  order: 88
 ---
 
 # 平方根・閾値による軽重分類
@@ -33,6 +33,9 @@ sidebar:
 3. [ABC350 G「Mediator」](https://atcoder.jp/contests/abc350/tasks/abc350_g)
 4. [ABC259 Ex「Yet Another Path Counting」](https://atcoder.jp/contests/abc259/tasks/abc259_h)
 5. [ABC365 G「AtCoder Office」](https://atcoder.jp/contests/abc365/tasks/abc365_g)
+6. [ABC230 E「Fraction Floor Sum」](https://atcoder.jp/contests/abc230/tasks/abc230_e)
+7. [ABC242 G「Range Pairing Query」](https://atcoder.jp/contests/abc242/tasks/abc242_g)
+8. [ABC405 G「Range Shuffle Query」](https://atcoder.jp/contests/abc405/tasks/abc405_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -40,10 +43,7 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC230 E「Fraction Floor Sum」](https://atcoder.jp/contests/abc230/tasks/abc230_e)
-- [ABC242 G「Range Pairing Query」](https://atcoder.jp/contests/abc242/tasks/abc242_g)
 - [ABC345 G「Sugoroku 5」](https://atcoder.jp/contests/abc345/tasks/abc345_g)
-- [ABC405 G「Range Shuffle Query」](https://atcoder.jp/contests/abc405/tasks/abc405_g)
 
 ## 根拠
 
@@ -54,4 +54,4 @@ sidebar:
 - [ABC242 G 公式解説](https://atcoder.jp/contests/abc242/editorial/3517)
 - [ABC242 G 公式問題文](https://atcoder.jp/contests/abc242/tasks/abc242_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-threshold-heavy-light`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-threshold-heavy-light`

@@ -3,7 +3,7 @@ title: "固定線形遷移を巨大回数進める"
 description: "固定線形遷移を巨大回数進めるの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 79
+  order: 62
 ---
 
 # 固定線形遷移を巨大回数進める
@@ -31,7 +31,11 @@ sidebar:
 1. [ABC293 E「Geometric Progression」](https://atcoder.jp/contests/abc293/tasks/abc293_e)
 2. [ABC258 Ex「Odd Steps」](https://atcoder.jp/contests/abc258/tasks/abc258_h)
 3. [ABC256 G「Black and White Stones」](https://atcoder.jp/contests/abc256/tasks/abc256_g)
-4. [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g)
+4. [ABC429 G「Sum of Pow of Mod of Linear」](https://atcoder.jp/contests/abc429/tasks/abc429_g)
+5. [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g)
+6. [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h)
+7. [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h)
+8. [ABC245 Ex「Product Modulo 2」](https://atcoder.jp/contests/abc245/tasks/abc245_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -39,12 +43,8 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC245 Ex「Product Modulo 2」](https://atcoder.jp/contests/abc245/tasks/abc245_h)
-- [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h)
-- [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h)
 - [ABC300 Ex「Fibonacci: Revisited」](https://atcoder.jp/contests/abc300/tasks/abc300_h)
 - [ABC305 G「Banned Substrings」](https://atcoder.jp/contests/abc305/tasks/abc305_g)
-- [ABC429 G「Sum of Pow of Mod of Linear」](https://atcoder.jp/contests/abc429/tasks/abc429_g)
 - [ABC458 F「Critical Misread」](https://atcoder.jp/contests/abc458/tasks/abc458_f)
 
 ## 根拠
@@ -56,4 +56,4 @@ sidebar:
 - [ABC258 H 公式解説](https://atcoder.jp/contests/abc258/editorial/4214)
 - [ABC258 H 公式問題文](https://atcoder.jp/contests/abc258/tasks/abc258_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-linear-recurrence`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-linear-recurrence`

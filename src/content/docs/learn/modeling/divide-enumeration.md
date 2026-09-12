@@ -3,7 +3,7 @@ title: "探索空間を分けて照合・再帰分割する"
 description: "探索空間を分けて照合・再帰分割するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 51
+  order: 72
 ---
 
 # 探索空間を分けて照合・再帰分割する
@@ -40,6 +40,7 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC213 H「Stroll」](https://atcoder.jp/contests/abc213/tasks/abc213_h)
+- [ABC220 H「Security Camera」](https://atcoder.jp/contests/abc220/tasks/abc220_h)
 - [ABC230 H「Bullion」](https://atcoder.jp/contests/abc230/tasks/abc230_h)
 - [ABC247 Ex「Rearranging Problem」](https://atcoder.jp/contests/abc247/tasks/abc247_h)
 - [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
@@ -49,7 +50,6 @@ sidebar:
 - [ABC273 Ex「Inv(0,1)ving Insert(1,0)n」](https://atcoder.jp/contests/abc273/tasks/abc273_h)
 - [ABC281 Ex「Alchemy」](https://atcoder.jp/contests/abc281/tasks/abc281_h)
 - [ABC281 F「Xor Minimization」](https://atcoder.jp/contests/abc281/tasks/abc281_f)
-- [ABC304 G「Max of Medians」](https://atcoder.jp/contests/abc304/tasks/abc304_g)
 - [ABC317 Ex「Walk」](https://atcoder.jp/contests/abc317/tasks/abc317_h)
 - [ABC331 G「Collect Them All」](https://atcoder.jp/contests/abc331/tasks/abc331_g)
 - [ABC345 G「Sugoroku 5」](https://atcoder.jp/contests/abc345/tasks/abc345_g)
@@ -59,8 +59,6 @@ sidebar:
 - [ABC381 G「Fibonacci Product」](https://atcoder.jp/contests/abc381/tasks/abc381_g)
 - [ABC383 G「Bar Cover」](https://atcoder.jp/contests/abc383/tasks/abc383_g)
 - [ABC385 G「Counting Buildings」](https://atcoder.jp/contests/abc385/tasks/abc385_g)
-- [ABC423 G「Small Multiple 2」](https://atcoder.jp/contests/abc423/tasks/abc423_g)
-- [ABC425 G「Sum of Min of XOR」](https://atcoder.jp/contests/abc425/tasks/abc425_g)
 - [ABC439 G「Sugoroku 6」](https://atcoder.jp/contests/abc439/tasks/abc439_g)
 
 ## 根拠
@@ -72,4 +70,4 @@ sidebar:
 - [ABC230 H 公式解説](https://atcoder.jp/contests/abc230/editorial/3003)
 - [ABC230 H 公式問題文](https://atcoder.jp/contests/abc230/tasks/abc230_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-divide-enumeration`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-divide-enumeration`

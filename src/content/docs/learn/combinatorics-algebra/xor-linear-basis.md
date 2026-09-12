@@ -3,7 +3,7 @@ title: "XOR線形基底"
 description: "XOR線形基底の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 163
+  order: 99
 ---
 
 # XOR線形基底
@@ -31,6 +31,7 @@ sidebar:
 1. [ABC249 G「Xor Cards」](https://atcoder.jp/contests/abc249/tasks/abc249_g)
 2. [ABC283 G「Partial Xor Enumeration」](https://atcoder.jp/contests/abc283/tasks/abc283_g)
 3. [ABC223 H「Xor Query」](https://atcoder.jp/contests/abc223/tasks/abc223_h)
+4. [ABC451 G「Minimum XOR Walk」](https://atcoder.jp/contests/abc451/tasks/abc451_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -39,7 +40,6 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC236 F「Spices」](https://atcoder.jp/contests/abc236/tasks/abc236_f)
-- [ABC451 G「Minimum XOR Walk」](https://atcoder.jp/contests/abc451/tasks/abc451_g)
 
 ## 根拠
 
@@ -50,4 +50,4 @@ sidebar:
 - [ABC249 G 公式解説](https://atcoder.jp/contests/abc249/editorial/3791)
 - [ABC249 G 公式問題文](https://atcoder.jp/contests/abc249/tasks/abc249_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-xor-linear-basis`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-xor-linear-basis`

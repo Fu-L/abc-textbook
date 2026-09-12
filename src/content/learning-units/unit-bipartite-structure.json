@@ -31,18 +31,15 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/bipartite-structure.md",
-  "problemIds": [
-    "abc451-f"
-  ],
-  "directProblemIds": [
-    "abc451-f"
-  ],
+  "problemIds": [],
+  "directProblemIds": [],
   "relatedProblemIds": [
     "abc327-g",
     "abc398-e",
     "abc398-g",
     "abc437-g",
     "abc445-g",
+    "abc451-f",
     "abc454-e"
   ],
   "examples": [],
@@ -50,6 +47,6 @@
   "stageRank": 2,
   "difficultyRank": 1,
   "representativeRank": 3,
-  "globalIndex": 35,
+  "globalIndex": 31,
   "orderReason": "無向グラフを探索できることを前提に、辺をまたぐたび色を反転し、矛盾検出と成分ごとの二部サイズ集約を行う。"
 }

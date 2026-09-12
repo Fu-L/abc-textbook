@@ -3,7 +3,7 @@ title: "label付き連結成分分解・exponential formula"
 description: "label付き連結成分分解・exponential formulaの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 106
+  order: 160
 ---
 
 # label付き連結成分分解・exponential formula
@@ -28,10 +28,12 @@ rootを含む連結成分または成分集合を一意に切り出し、全構�
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC213 G「Connectivity 2」](https://atcoder.jp/contests/abc213/tasks/abc213_g)
-2. [ABC327 G「Many Good Tuple Problems」](https://atcoder.jp/contests/abc327/tasks/abc327_g)
-3. [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
-4. [ABC386 G「Many MST」](https://atcoder.jp/contests/abc386/tasks/abc386_g)
+1. [ABC236 Ex「Distinct Multiples」](https://atcoder.jp/contests/abc236/tasks/abc236_h)
+2. [ABC213 G「Connectivity 2」](https://atcoder.jp/contests/abc213/tasks/abc213_g)
+3. [ABC253 Ex「We Love Forest」](https://atcoder.jp/contests/abc253/tasks/abc253_h)
+4. [ABC327 G「Many Good Tuple Problems」](https://atcoder.jp/contests/abc327/tasks/abc327_g)
+5. [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
+6. [ABC386 G「Many MST」](https://atcoder.jp/contests/abc386/tasks/abc386_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -39,8 +41,6 @@ rootを含む連結成分または成分集合を一意に切り出し、全構�
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC236 Ex「Distinct Multiples」](https://atcoder.jp/contests/abc236/tasks/abc236_h)
-- [ABC253 Ex「We Love Forest」](https://atcoder.jp/contests/abc253/tasks/abc253_h)
 - [ABC318 Ex「Count Strong Test Cases」](https://atcoder.jp/contests/abc318/tasks/abc318_h)
 
 ## 根拠
@@ -52,4 +52,4 @@ rootを含む連結成分または成分集合を一意に切り出し、全構�
 - [ABC253 H 公式解説](https://atcoder.jp/contests/abc253/editorial/4023)
 - [ABC253 H 公式問題文](https://atcoder.jp/contests/abc253/tasks/abc253_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-labeled-component-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-labeled-component-decomposition`

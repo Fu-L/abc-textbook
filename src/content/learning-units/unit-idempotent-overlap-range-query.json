@@ -38,9 +38,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 72,
-  "globalIndex": 153,
+  "globalIndex": 81,
   "orderReason": "区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ。"
 }

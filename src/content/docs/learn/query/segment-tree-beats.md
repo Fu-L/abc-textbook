@@ -3,7 +3,7 @@ title: "Segment Tree Beats"
 description: "Segment Tree Beatsの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 192
+  order: 143
 ---
 
 # Segment Tree Beats
@@ -37,4 +37,4 @@ nodeの最大/次点/個数等からrange chmin/chmaxが一括適用できる条
 - [ABC430 G 公式解説](https://atcoder.jp/contests/abc430/editorial/14300)
 - [ABC430 G 公式問題文](https://atcoder.jp/contests/abc430/tasks/abc430_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-segment-tree-beats`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-segment-tree-beats`

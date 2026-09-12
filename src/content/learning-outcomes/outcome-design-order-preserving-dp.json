@@ -9,24 +9,16 @@
     "abc225-f",
     "abc237-f",
     "abc238-f",
-    "abc240-ex",
     "abc246-ex",
     "abc271-e",
     "abc299-f",
     "abc315-f",
     "abc327-e",
-    "abc339-e",
     "abc345-e",
-    "abc354-f",
-    "abc360-g",
     "abc362-e",
-    "abc369-f",
     "abc386-f",
-    "abc393-f",
-    "abc410-g",
-    "abc439-e",
     "abc457-g",
     "tag-sequence-subsequence-dp",
-    "unit-dp-sequence-interval"
+    "unit-dp-sequence"
   ]
 }

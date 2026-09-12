@@ -1,3 +1,4 @@
+import { isCurriculumUnit, unitNavigationIndices } from '../../taxonomy/learning-unit-order.js';
 import { z } from 'zod';
 
 import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
@@ -813,7 +814,13 @@ export const LearningUnitSchema = strictObject({
   stageRank: z.number().int().nonnegative(),
   difficultyRank: z.number().int().nonnegative(),
   representativeRank: z.number().int().nonnegative(),
-  globalIndex: z.number().int().nonnegative(),
+  globalIndex: z
+    .number()
+    .int()
+    .nonnegative()
+    .describe(
+      'Curriculum position for teaching Units; navigation containers inherit the earliest teaching descendant position.',
+    ),
   orderReason: nonEmptyText,
 }).superRefine((unit, context) => {
   if ((unit.ownedTagIds === undefined) !== (unit.ownedLearningOutcomeIds === undefined)) {
@@ -1295,7 +1302,13 @@ export const LearningUnitTaxonomyCandidateSchema = strictObject({
   stageRank: z.number().int().nonnegative(),
   difficultyRank: z.number().int().nonnegative(),
   representativeRank: z.number().int().nonnegative(),
-  globalIndex: z.number().int().nonnegative(),
+  globalIndex: z
+    .number()
+    .int()
+    .nonnegative()
+    .describe(
+      'Curriculum position for teaching Units; navigation containers inherit the earliest teaching descendant position.',
+    ),
   orderReason: nonEmptyText,
 }).superRefine((unit, context) => {
   if (unit.parentId === unit.id) {
@@ -2469,18 +2482,24 @@ export const FinalTaxonomyBuildSchema = strictObject({
     });
   }
 
-  const unitParentEdges = candidatesByKind.unit.flatMap(({ entity }) =>
-    entity.parentId === null ? [] : [{ nodeId: entity.id, prerequisiteId: entity.parentId }],
-  );
   const expectedOrder = deterministicFinalLearningUnitOrder(
+    candidatesByKind.unit.map(({ entity }) => entity).filter(isCurriculumUnit),
+    build.learningUnitPrerequisites,
+  );
+  const navigationIndices = unitNavigationIndices(
     candidatesByKind.unit.map(({ entity }) => entity),
-    [...build.learningUnitPrerequisites, ...unitParentEdges],
+    expectedOrder,
   );
   if (
-    !sameFinalTaxonomySet(build.standardOrder, unitIds) ||
+    !sameFinalTaxonomySet(
+      build.standardOrder,
+      candidatesByKind.unit
+        .filter(({ entity }) => isCurriculumUnit(entity))
+        .map(({ entity }) => entity.id),
+    ) ||
     build.standardOrder.some((id, index) => expectedOrder[index] !== id) ||
     candidatesByKind.unit.some(
-      ({ entity }) => build.standardOrder[entity.globalIndex] !== entity.id,
+      ({ entity }) => navigationIndices.get(entity.id) !== entity.globalIndex,
     )
   ) {
     context.addIssue({
@@ -2560,7 +2579,7 @@ export const FinalTaxonomyBuildSchema = strictObject({
     ];
     const expectedPresentationUnitId = [
       ...new Set(
-        primaryOutcomeIds.flatMap((outcomeId) => ownerUnitIdsByOutcomeId.get(outcomeId) ?? []),
+        assignedOutcomeIds.flatMap((outcomeId) => ownerUnitIdsByOutcomeId.get(outcomeId) ?? []),
       ),
     ]
       .sort(

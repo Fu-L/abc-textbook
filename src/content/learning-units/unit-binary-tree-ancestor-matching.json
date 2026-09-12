@@ -41,6 +41,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 90,
-  "globalIndex": 98,
+  "globalIndex": 137,
   "orderReason": "貪欲法と交換論で得た考え方と実装を再利用し、二進操作の木へのモデル化と祖先マッチングの発動条件・正当化・境界を重複なく学ぶ。"
 }

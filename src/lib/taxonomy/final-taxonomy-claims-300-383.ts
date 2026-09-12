@@ -2527,14 +2527,18 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     { 'tag-greedy-exchange-order': ['outcome-prove-greedy-order'] },
   ),
   'abc374-f': decision(
-    'outcome-compress-sparse-keys',
+    'outcome-design-prefix-partition-dp',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-coordinate-compression'],
+      ['typicalTechniques', 0, 'primary', 'tag-dp-prefix-partition'],
       ['typicalTechniques', 1, 'supporting', 'tag-dp-state-equivalence'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-coordinate-compression'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-dp-prefix-partition'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-dp-state-equivalence'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-coordinate-compression'],
     ],
-    { 'tag-dp-state-equivalence': ['outcome-design-minimal-sufficient-state'] },
+    {
+      'tag-dp-state-equivalence': ['outcome-design-minimal-sufficient-state'],
+      'tag-coordinate-compression': ['outcome-compress-sparse-keys'],
+    },
   ),
   'abc374-g': decision(
     'outcome-condense-and-order-directed-graph',

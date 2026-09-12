@@ -33,27 +33,26 @@
   "docPath": "src/content/docs/learn/graph/binary-lifting.md",
   "problemIds": [
     "abc212-f",
-    "abc254-g",
-    "abc310-g",
     "abc367-e",
+    "abc370-f",
     "abc438-e"
   ],
   "directProblemIds": [
+    "abc367-e",
     "abc438-e",
     "abc212-f",
-    "abc367-e",
-    "abc310-g",
-    "abc254-g"
+    "abc370-f"
   ],
   "relatedProblemIds": [
-    "abc370-f",
+    "abc254-g",
+    "abc310-g",
     "abc417-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 3,
+  "stageRank": 1,
+  "difficultyRank": 0,
   "representativeRank": 64,
-  "globalIndex": 132,
+  "globalIndex": 11,
   "orderReason": "決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

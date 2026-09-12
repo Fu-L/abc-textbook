@@ -32,16 +32,15 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/bitset-word-parallel.md",
   "problemIds": [
-    "abc221-g",
     "abc258-g",
     "abc348-f"
   ],
   "directProblemIds": [
     "abc348-f",
-    "abc258-g",
-    "abc221-g"
+    "abc258-g"
   ],
   "relatedProblemIds": [
+    "abc221-g",
     "abc276-ex",
     "abc287-ex",
     "abc366-g",
@@ -52,6 +51,6 @@
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 9,
-  "globalIndex": 62,
+  "globalIndex": 48,
   "orderReason": "集合の交差・和・shiftを機械語word単位で同時処理し、要素ごとの走査をword幅だけ短縮する。"
 }

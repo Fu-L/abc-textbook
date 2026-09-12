@@ -2,6 +2,7 @@
   "id": "outcome-remove-boundaries-by-reflection",
   "statement": "最初に境界を破るpathとの鏡像対応を構成し、壁付きwalkの数え上げを符号付きの無境界問題へ変換できる。",
   "prerequisiteOutcomeIds": [
+    "outcome-compute-binomial-by-lucas",
     "outcome-formulate-combinatorial-coefficients"
   ],
   "scopeIds": [

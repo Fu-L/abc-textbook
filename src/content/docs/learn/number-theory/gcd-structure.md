@@ -3,7 +3,7 @@ title: "gcd不変量・差分構造"
 description: "gcd不変量・差分構造の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 117
+  order: 52
 ---
 
 # gcd不変量・差分構造
@@ -29,7 +29,8 @@ sidebar:
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
-2. [ABC438 G「Sum of Min」](https://atcoder.jp/contests/abc438/tasks/abc438_g)
+2. [ABC418 E「Trapezium」](https://atcoder.jp/contests/abc418/tasks/abc418_e)
+3. [ABC438 G「Sum of Min」](https://atcoder.jp/contests/abc438/tasks/abc438_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -41,7 +42,6 @@ sidebar:
 - [ABC222 G「222」](https://atcoder.jp/contests/abc222/tasks/abc222_g)
 - [ABC248 G「GCD cost on the tree」](https://atcoder.jp/contests/abc248/tasks/abc248_g)
 - [ABC306 G「Return to 1」](https://atcoder.jp/contests/abc306/tasks/abc306_g)
-- [ABC418 E「Trapezium」](https://atcoder.jp/contests/abc418/tasks/abc418_e)
 - [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
 
 ## 根拠
@@ -53,4 +53,4 @@ sidebar:
 - [ABC248 G 公式解説](https://atcoder.jp/contests/abc248/editorial/3795)
 - [ABC248 G 公式問題文](https://atcoder.jp/contests/abc248/tasks/abc248_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-gcd-structure`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-gcd-structure`

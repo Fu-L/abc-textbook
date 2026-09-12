@@ -3,7 +3,7 @@ title: "整数境界と同値区間を正確に分ける"
 description: "整数境界と同値区間を正確に分けるの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 49
+  order: 40
 ---
 
 # 整数境界と同値区間を正確に分ける
@@ -43,14 +43,12 @@ floorや整数根の値が変わる境界を正確に求め、同値な整数範
 3. [ABC402 G「Sum of Prod of Mod of Linear」](https://atcoder.jp/contests/abc402/tasks/abc402_g)
 4. [ABC414 E「Count A%B=C」](https://atcoder.jp/contests/abc414/tasks/abc414_e)
 5. [ABC443 G「Another Mod of Linear Problem」](https://atcoder.jp/contests/abc443/tasks/abc443_g)
-6. [ABC230 E「Fraction Floor Sum」](https://atcoder.jp/contests/abc230/tasks/abc230_e)
-7. [ABC293 F「Zero or One」](https://atcoder.jp/contests/abc293/tasks/abc293_f)
-8. [ABC283 Ex「Popcount Sum」](https://atcoder.jp/contests/abc283/tasks/abc283_h)
-9. [ABC452 E「You WILL Like Sigma Problem」](https://atcoder.jp/contests/abc452/tasks/abc452_e)
-10. [ABC240 F「Sum Sum Max」](https://atcoder.jp/contests/abc240/tasks/abc240_f)
-11. [ABC429 G「Sum of Pow of Mod of Linear」](https://atcoder.jp/contests/abc429/tasks/abc429_g)
-12. [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
-13. [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
+6. [ABC293 F「Zero or One」](https://atcoder.jp/contests/abc293/tasks/abc293_f)
+7. [ABC283 Ex「Popcount Sum」](https://atcoder.jp/contests/abc283/tasks/abc283_h)
+8. [ABC452 E「You WILL Like Sigma Problem」](https://atcoder.jp/contests/abc452/tasks/abc452_e)
+9. [ABC313 G「Redistribution of Piles」](https://atcoder.jp/contests/abc313/tasks/abc313_g)
+10. [ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://atcoder.jp/contests/abc315/tasks/abc315_g)
+11. [ABC444 F「Half and Median」](https://atcoder.jp/contests/abc444/tasks/abc444_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -59,13 +57,15 @@ floorや整数根の値が変わる境界を正確に求め、同値な整数範
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC216 E「Amusement Park」](https://atcoder.jp/contests/abc216/tasks/abc216_e)
+- [ABC230 E「Fraction Floor Sum」](https://atcoder.jp/contests/abc230/tasks/abc230_e)
+- [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
+- [ABC240 F「Sum Sum Max」](https://atcoder.jp/contests/abc240/tasks/abc240_f)
 - [ABC243 G「Sqrt」](https://atcoder.jp/contests/abc243/tasks/abc243_g)
-- [ABC313 G「Redistribution of Piles」](https://atcoder.jp/contests/abc313/tasks/abc313_g)
-- [ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://atcoder.jp/contests/abc315/tasks/abc315_g)
+- [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
 - [ABC361 F「x = a^b」](https://atcoder.jp/contests/abc361/tasks/abc361_f)
 - [ABC370 G「Divisible by 3」](https://atcoder.jp/contests/abc370/tasks/abc370_g)
 - [ABC372 G「Ax + By < C」](https://atcoder.jp/contests/abc372/tasks/abc372_g)
-- [ABC444 F「Half and Median」](https://atcoder.jp/contests/abc444/tasks/abc444_f)
+- [ABC429 G「Sum of Pow of Mod of Linear」](https://atcoder.jp/contests/abc429/tasks/abc429_g)
 
 ## 根拠
 
@@ -76,4 +76,4 @@ floorや整数根の値が変わる境界を正確に求め、同値な整数範
 - [ABC239 H 公式解説](https://atcoder.jp/contests/abc239/editorial/3357)
 - [ABC239 H 公式問題文](https://atcoder.jp/contests/abc239/tasks/abc239_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-integer-boundary-blocks`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-integer-boundary-blocks`

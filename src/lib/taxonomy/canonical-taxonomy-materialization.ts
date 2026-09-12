@@ -507,6 +507,7 @@ export const buildCanonicalTaxonomyMaterialization = (
     })),
   );
   const orderReasons = unitCandidates
+    .filter(({ entity }) => build.standardOrder.includes(entity.id))
     .map(({ entity }) => ({
       unitId: entity.id,
       globalIndex: entity.globalIndex,
@@ -888,7 +889,7 @@ export const validateCanonicalMaterialization = (
     if (canonicalJson(sortedUnique(placement.learningUnitIds)) !== canonicalJson(expectedUnitIds)) {
       diagnostics.push(`PLACEMENT_UNIT_OWNERSHIP:${placement.problemId}`);
     }
-    const expectedPresentationUnitId = primaryOutcomeIds
+    const expectedPresentationUnitId = assignedOutcomeIds
       .flatMap((outcomeId) => ownerUnitIdsByOutcomeId.get(outcomeId) ?? [])
       .sort(
         (left, right) =>

@@ -1,0 +1,13 @@
+{
+  "id": "outcome-design-interval-expansion-dp",
+  "statement": "訪問済み範囲と現在いる端を状態にし、未訪問の左右の隣点へ拡張する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc219-h",
+    "abc273-f",
+    "tag-dp-interval-expansion",
+    "unit-dp-interval-expansion"
+  ]
+}

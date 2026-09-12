@@ -41,6 +41,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 95,
-  "globalIndex": 109,
+  "globalIndex": 170,
   "orderReason": "木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ。"
 }

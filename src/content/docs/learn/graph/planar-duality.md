@@ -3,7 +3,7 @@ title: "平面graph双対・cut/path対応"
 description: "平面graph双対・cut/path対応の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 181
+  order: 156
 ---
 
 # 平面graph双対・cut/path対応
@@ -37,4 +37,4 @@ sidebar:
 - [ABC413 G 公式解説](https://atcoder.jp/contests/abc413/editorial/13403)
 - [ABC413 G 公式問題文](https://atcoder.jp/contests/abc413/tasks/abc413_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-planar-duality`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-planar-duality`

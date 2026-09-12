@@ -31,7 +31,7 @@ export const FINAL_TAXONOMY_PLACEMENT_PRINCIPLES = Object.freeze({
   supporting:
     '主解法とは別の観察可能な技能を実際に発動するときだけsupportingとし、用語が説明に現れるだけではUnitを付与しない。',
   homeAndReadiness:
-    'presentationUnitIdはprimaryおよびco-primary Outcomeをすべて履修済みにする最遅UnitをHomeとし、supporting OutcomeのUnitは自力で解ける時点を示すready-afterとして保持して掲載章を奪わせない。',
+    'presentationUnitIdは想定解法の再構成・実装に必須な全Outcome（supportingを含む）を履修済みにする最遅Unitとする。そのUnitの技能をprimaryへ昇格し、用語だけ・別解だけの技能は後ろ倒し要因にしない。',
   prerequisite:
     'curriculum prerequisiteは論理的な最小依存ではなく、先に学ぶことで後続Unitの説明・実装・考察が自然になり、重複を避けて段階的に到達できるときの教材上のprecedence constraintとする。単なる併用・類似・対比は前提にせずtyped relationへ分離する。',
   relatedTags:
@@ -1225,12 +1225,12 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-contribution-reordering':
     '答えを要素・組・成分ごとの局所寄与へ一意に分け、各対象が何回数えられるかを証明して二重和・積・期待値の集計順を交換する。',
   'unit-coordinate-compression':
-    '比較に必要なのが順序と等値性だけであることを確認し、疎な初期値・将来更新値・event座標をsort-uniqueしたdense indexへ写す。',
+    '保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。',
   'unit-normalization':
     '対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。',
   'unit-greedy-exchange': '局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。',
   'unit-bounded-enumeration':
-    '制約、生成パラメータ、固定選択数、有限な幾何caseから候補総数を先に界し、全候補を漏れなく評価する。',
+    '候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。',
   'unit-divide-enumeration':
     '探索空間を独立な二集合または再帰部分へ分けるか、部分結果をbalancedな積木・remainder tree・CDQで合成し、重複なく扱える入力規模を広げる。',
   'unit-decomposition-amortization':
@@ -1252,7 +1252,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-eventual-unbounded-knapsack':
     '通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。',
   'unit-dp-sequence-interval':
-    '状態設計を土台に、列順を保つ選択と区間の分割点という二つの合成方法を学ぶ。',
+    '状態設計を土台に、列の選択、LISの支配関係、prefix分割、独立な区間の合成、訪問済み区間の拡張を別の依存構造として比較する。',
   'unit-dp-digit-string':
     '状態設計を土台に、接頭辞から決まる有限統計を更新するという共通像を作り、数値上限の桁DPと有限automaton DPの境界を比較する。',
   'unit-digit-dp':
@@ -1787,7 +1787,7 @@ const TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-bounded-enumeration',
     name: '有界全列挙・有限case分解',
     definition:
-      '制約、少数の生成パラメータ、固定選択数、有限な幾何caseから候補総数を直接界し、全候補を評価する。',
+      '制約や生成パラメータから候補総数を界すか、鳩ノ巣原理で成功前の失敗回数を界して探索する。',
     parentId: 'tag-model-reduction',
     outcomeIds: ['outcome-enumerate-bounded-candidates-or-cases'],
     unitIds: ['unit-bounded-enumeration'],
@@ -2003,7 +2003,7 @@ const TAG_SEEDS: readonly TagSeed[] = [
     definition: '列のprefixや最後に選んだ要素を状態にし、順序を保つ選択を組み立てる。',
     parentId: 'tag-dp-state-transition',
     outcomeIds: ['outcome-design-order-preserving-dp'],
-    unitIds: ['unit-dp-sequence-interval'],
+    unitIds: ['unit-dp-sequence'],
     recall: ['subsequence', '部分列', '\\blis\\b', '列.?dp', 'マッチング.?dp'],
     object: ['列', 'prefix', '部分列', '順序'],
     trigger: ['左から', '選ぶ', '最後の要素', '一致'],
@@ -2013,11 +2013,11 @@ const TAG_SEEDS: readonly TagSeed[] = [
   },
   {
     id: 'tag-interval-partition-dp',
-    name: '区間・分割DP',
-    definition: '区間またはprefixの分割点を遷移にし、局所解の合成を行う。',
+    name: '区間合成・領域分割DP',
+    definition: '区間・長方形の分割点を遷移にし、互いに独立な小領域の解を合成する。',
     parentId: 'tag-dp-state-transition',
     outcomeIds: ['outcome-design-interval-split-dp'],
-    unitIds: ['unit-dp-sequence-interval'],
+    unitIds: ['unit-dp-interval-composition'],
     recall: ['区間.?dp', '分割.?dp', 'interval.?dp', 'マージ.?dp'],
     object: ['区間', '分割', '括弧', 'prefix'],
     trigger: ['切れ目', '左端', '右端', '区切る'],
@@ -3246,7 +3246,10 @@ const TAG_SEEDS: readonly TagSeed[] = [
     name: '組合せ係数・数え上げ',
     definition: '選択順・順列・分配を二項係数や階乗と対称性で式化する。',
     parentId: 'tag-math-geometry-transformation',
-    outcomeIds: ['outcome-formulate-combinatorial-coefficients'],
+    outcomeIds: [
+      'outcome-formulate-combinatorial-coefficients',
+      'outcome-compute-binomial-by-lucas',
+    ],
     unitIds: ['unit-combinatorial-coefficients'],
     recall: [
       '組合せ',
@@ -5801,6 +5804,72 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     goal: ['制約付き列挙', '解候補探索'],
     priority: 78,
   },
+  {
+    id: 'tag-dp-prefix-partition',
+    name: 'prefix分割DP',
+    definition: '列の最後のブロックを固定し、処理済みprefixの答えから次の切れ目へ遷移する。',
+    parentId: 'tag-dp-state-transition',
+    prerequisiteTagIds: ['tag-dp-state-equivalence'],
+    outcomeIds: ['outcome-design-prefix-partition-dp'],
+    unitIds: ['unit-dp-prefix-partition'],
+    recall: ['prefix分割DP', '最後のブロック', 'batch DP'],
+    object: ['prefix', '連続ブロック', '切れ目'],
+    trigger: ['最後の区間を固定', '到着順にまとめる', '分割を数える'],
+    invariant: ['処理済みprefix', '最後の切れ目の一意性'],
+    goal: ['分割の最適値', '分割数'],
+    priority: 80,
+  },
+  {
+    id: 'tag-dp-interval-expansion',
+    name: '区間拡張DP',
+    definition: '訪問済み範囲と現在いる端を状態にし、未訪問の左右の隣点へ拡張する。',
+    parentId: 'tag-dp-state-transition',
+    prerequisiteTagIds: ['tag-dp-state-equivalence'],
+    outcomeIds: ['outcome-design-interval-expansion-dp'],
+    unitIds: ['unit-dp-interval-expansion'],
+    recall: ['区間拡張DP', 'visited interval', 'endpoint DP'],
+    object: ['数直線', '訪問済み区間', '左右の端'],
+    trigger: ['未訪問の隣点', '鍵と壁', '移動と時間損失'],
+    invariant: ['訪問済み範囲の連続性', '区間長の増加'],
+    goal: ['最短移動', '最大回収価値'],
+    priority: 80,
+  },
+  {
+    id: 'tag-lis-state',
+    name: 'LIS・末尾の支配関係',
+    definition:
+      '部分列の長さ別最小末尾と値別最良長を比較し、延長可能性を失わない状態圧縮と値域集約を選ぶ。',
+    parentId: 'tag-dp-state-transition',
+    prerequisiteTagIds: ['tag-sequence-subsequence-dp', 'tag-range-monoid-aggregation'],
+    outcomeIds: ['outcome-design-lis-frontier'],
+    unitIds: ['unit-dp-lis'],
+    recall: ['LIS', 'tails', '最小末尾', '値域最大DP'],
+    object: ['部分列', '末尾', '二次元順序'],
+    trigger: ['順序を保って延長', '末尾の大小で支配', '直前値を範囲制約'],
+    invariant: ['長さ別最小末尾', '値別最良長'],
+    goal: ['最長部分列', '最適解への所属', '復元'],
+    priority: 80,
+  },
+  {
+    id: 'tag-generating-function-coefficients',
+    name: '母関数方程式・高度な係数抽出',
+    definition:
+      '暗黙方程式の反転、微分恒等式の係数比較、Euler積の疎な展開を使い分け、必要次数の係数を求める。',
+    parentId: 'tag-combinatorics-algebra-structure',
+    prerequisiteTagIds: ['tag-generating-functions'],
+    outcomeIds: [
+      'outcome-invert-generating-function-equation',
+      'outcome-derive-coefficient-recurrence-by-differentiation',
+      'outcome-expand-euler-product-sparsely',
+    ],
+    unitIds: ['unit-generating-function-coefficients'],
+    recall: ['Lagrange反転', '対数微分', 'Euler積', '五角数定理'],
+    object: ['暗黙母関数', '係数列', '形式的無限積'],
+    trigger: ['F=xΦ(F)', '微分恒等式', 'partitionの積'],
+    invariant: ['形式的係数一致', '必要次数より先の項の不寄与'],
+    goal: ['係数漸化式', '疎な係数抽出'],
+    priority: 80,
+  },
 ];
 
 const refinedLegacyTagSeeds = TAG_SEEDS.filter((seed) => !RETIRED_COARSE_TAG_IDS.has(seed.id)).map(
@@ -5893,7 +5962,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-inclusion-exclusion': ['abc246-f', 'abc462-g'],
   'tag-divisor-mobius-inversion': ['abc230-g', 'abc361-f'],
   'tag-convolution': ['abc307-ex', 'abc392-g'],
-  'tag-generating-functions': ['abc230-h', 'abc385-g'],
+  'tag-generating-functions': ['abc225-h', 'abc385-g'],
   'tag-formal-power-series': ['abc318-ex', 'abc387-g'],
   'tag-polynomial-multipoint-evaluation': ['abc272-ex', 'abc381-g'],
   'tag-polynomial-taylor-shift': ['abc323-g'],
@@ -5933,7 +6002,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-directed-walk-periodicity': ['abc306-g'],
   'tag-reflection-principle': ['abc309-ex'],
   'tag-labeled-component-decomposition': ['abc213-g', 'abc321-g', 'abc327-g'],
-  'tag-fractional-parametric-search': ['abc324-f'],
+  'tag-fractional-parametric-search': ['abc236-e', 'abc324-f', 'abc294-f'],
   'tag-information-theoretic-query-design': ['abc337-e'],
   'tag-cyclic-order-crossing': ['abc263-ex', 'abc338-e', 'abc424-f'],
   'tag-kinetic-order-maintenance': ['abc344-g', 'abc257-ex'],
@@ -5975,6 +6044,14 @@ export const NON_PRIMARY_TAG_IDS = FINAL_TAXONOMY_TAGS.filter((tag) => !tag.prim
 );
 
 const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
+  'outcome-invert-generating-function-equation':
+    'F=xΦ(F)からLagrange反転 [x^n]F=[t^(n−1)]Φ(t)^n/nを導き、形式的条件と法上の除算可能性を確認して係数問題へ変換できる。',
+  'outcome-derive-coefficient-recurrence-by-differentiation':
+    '母関数の微分恒等式を作り、次数ごとの係数比較から初期値・分母条件を持つ漸化式を導ける。',
+  'outcome-expand-euler-product-sparsely':
+    'Eulerの五角数定理により∏(1−x^i)を符号付きの疎な係数列へ展開し、必要次数までのO(√N)項で係数抽出できる。',
+  'outcome-compute-binomial-by-lucas':
+    '素数pのもとでn,kをp進展開し、Lucasの定理 C(n,k)=∏C(n_i,k_i) mod pで、n≥pでも階乗の零除算を避けて計算できる。',
   'outcome-propagate-probability-distribution':
     '互いに排反な状態に確率を配り、遷移確率・吸収条件・総確率を保って分布や到達確率を計算できる。',
   'outcome-optimize-stochastic-actions':
@@ -6054,7 +6131,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-design-resource-dp': '資源軸の上限と更新順を選び、選択の重複を避けられる。',
   'outcome-design-order-preserving-dp': '列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。',
   'outcome-design-interval-split-dp':
-    '区間または接頭辞の分割点を列挙し、小問題の答えを合成できる。',
+    '区間や長方形の分割点を列挙し、独立な小領域の答えを合成して領域サイズ順に計算できる。',
   'outcome-design-carry-or-mixed-radix-dp':
     '整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。',
   'outcome-count-prefix-constrained-objects':
@@ -6268,6 +6345,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
 const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
 
 const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
+  'outcome-classify-game-states': ['outcome-enumerate-subset-state-space'],
   'outcome-optimize-stochastic-actions': ['outcome-solve-stochastic-recurrence'],
   'outcome-maintain-modular-product-under-factor-updates': [
     'outcome-compute-in-modular-arithmetic',
@@ -6365,6 +6443,9 @@ export const NON_PRIMARY_OUTCOME_IDS = FINAL_TAXONOMY_OUTCOMES.filter((outcome) 
  * reports it once another exercise appears.
  */
 export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
+  'outcome-invert-generating-function-equation',
+  'outcome-expand-euler-product-sparsely',
+  'outcome-compute-binomial-by-lucas',
   'outcome-count-nonintersecting-paths-by-lgv',
   'outcome-accelerate-tree-dp-by-heavy-path',
   'outcome-pass-resource-dp-through-heavy-recursion',
@@ -6400,7 +6481,6 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-maintain-sparse-domain-segment-tree',
   'outcome-normalize-string-to-primitive-period',
   'outcome-bound-reachability-in-numerical-semigroup',
-  'outcome-optimize-ratio-by-parametric-search',
   'outcome-optimize-mask-by-bitwise-feasibility',
   'outcome-optimize-weighted-matroid-basis',
   'outcome-prune-range-actions-by-node-invariant',
@@ -6441,7 +6521,6 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-finite-field-frobenius',
   'unit-finite-function-composition',
   'unit-flow-lower-bounds',
-  'unit-fractional-parametric-search',
   'unit-gaussian-integers-two-squares',
   'unit-min-weight-general-perfect-matching',
   'unit-half-plane-constraints',
@@ -6495,7 +6574,6 @@ export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-finite-field-frobenius',
   'tag-finite-function-composition',
   'tag-flow-feasibility-lower-bounds',
-  'tag-fractional-parametric-search',
   'tag-gaussian-integers-two-squares',
   'tag-min-weight-general-perfect-matching',
   'tag-half-plane-constraints',
@@ -6612,6 +6690,11 @@ const LEGACY_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
 };
 
 const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
+  'unit-dp-sequence': 'unit-dp-sequence-interval',
+  'unit-dp-prefix-partition': 'unit-dp-sequence-interval',
+  'unit-dp-interval-composition': 'unit-dp-sequence-interval',
+  'unit-dp-interval-expansion': 'unit-dp-sequence-interval',
+  'unit-dp-lis': 'unit-dp-sequence-interval',
   'unit-meet-in-the-middle': 'unit-divide-enumeration',
   'unit-recursive-divide-and-conquer': 'unit-divide-enumeration',
   'unit-amortized-monotone-progress': 'unit-decomposition-amortization',
@@ -6775,7 +6858,7 @@ for (const tag of FINAL_TAXONOMY_TAGS) {
       title: tag.name,
       parentId,
       prerequisiteIds,
-      stageRank: parentIsChapter ? 3 : 4,
+      stageRank: 3,
       difficultyRank: Math.max(1, Math.floor(tag.primaryPriority / 20)),
       representativeRank: tag.primaryPriority,
       orderReason:
@@ -6788,6 +6871,27 @@ for (const tag of FINAL_TAXONOMY_TAGS) {
     });
   }
 }
+
+// Stages describe reusable content, independent of navigation depth.
+const FOUNDATIONAL_UNIT_IDS = new Set([
+  'unit-state-graph-search',
+  'unit-dsu-components',
+  'unit-priority-queue-best-first',
+  'unit-ordered-set-multiset',
+  'unit-binary-lifting',
+  'unit-weighted-prefix-fenwick',
+  'unit-range-monoid-aggregation',
+  'unit-dp-subset-state',
+  'unit-dp-sequence',
+  'unit-dp-prefix-partition',
+]);
+const SPECIALIZED_UNIT_IDS = new Set([
+  'unit-min25-sieve',
+  'unit-rsk-young-tableaux',
+  'unit-linear-matroid-intersection',
+  'unit-fps-composition-power-projection',
+  'unit-generating-function-coefficients',
+]);
 
 const BASE_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ...refinedLegacyUnitSeeds,
@@ -6815,7 +6919,7 @@ for (const outcome of FINAL_TAXONOMY_OUTCOMES) {
     for (const prerequisiteOutcomeId of outcome.prerequisiteOutcomeIds) {
       for (const prerequisiteUnitId of outcomeById.get(prerequisiteOutcomeId)
         ?.learningUnitCandidateIds ?? []) {
-        if (prerequisiteUnitId !== unitId && !unitIsSameOrDescendant(unitId, prerequisiteUnitId)) {
+        if (prerequisiteUnitId !== unitId) {
           prerequisiteUnitIds.add(prerequisiteUnitId);
         }
       }
@@ -6826,6 +6930,16 @@ for (const outcome of FINAL_TAXONOMY_OUTCOMES) {
 
 const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = BASE_LEARNING_UNIT_SEEDS.map((unit) => ({
   ...unit,
+  stageRank: FOUNDATIONAL_UNIT_IDS.has(unit.id)
+    ? 1
+    : SPECIALIZED_UNIT_IDS.has(unit.id)
+      ? 5
+      : unit.stageRank,
+  difficultyRank: FOUNDATIONAL_UNIT_IDS.has(unit.id)
+    ? 0
+    : SPECIALIZED_UNIT_IDS.has(unit.id)
+      ? 4
+      : unit.difficultyRank,
   prerequisiteIds: [
     ...new Set([
       ...unit.prerequisiteIds,
@@ -6838,9 +6952,7 @@ const unitSeedById = new Map(LEARNING_UNIT_SEEDS.map((unit) => [unit.id, unit]))
 const orderedUnitSeeds: readonly LearningUnitSeed[] = deterministicTopologicalOrder(
   LEARNING_UNIT_SEEDS.map((unit) => ({
     ...unit,
-    prerequisiteIds: [
-      ...new Set([...unit.prerequisiteIds, ...(unit.parentId === null ? [] : [unit.parentId])]),
-    ],
+    prerequisiteIds: unit.prerequisiteIds,
   })),
   (unit) => [unit.stageRank, unit.difficultyRank, unit.representativeRank],
 ).map((orderedUnit) => {
@@ -6885,7 +6997,11 @@ export const FINAL_LEARNING_UNIT_ORDER_POLICY = {
   semantics:
     '教材上のcurriculum prerequisiteを先行させる。単独学習の論理的不可能性ではなく、説明の再利用と自然なprogressionを表す。',
   tieBreakRanks: ['stageRank', 'difficultyRank', 'representativeRank', 'id'] as const,
-  orderedUnitIds: orderedUnitSeeds.map((unit) => unit.id),
+  orderedUnitIds: FINAL_LEARNING_UNIT_CANDIDATES.filter(
+    (unit) =>
+      unit.kind !== 'chapter' &&
+      (unit.ownedTagIds.length > 0 || unit.ownedLearningOutcomeIds.length > 0),
+  ).map((unit) => unit.id),
 };
 
 const learningUnitOrderIndex = new Map(
@@ -7763,6 +7879,51 @@ interface OutcomeRefinementGroup {
  */
 const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   {
+    from: 'outcome-design-interval-split-dp',
+    to: 'outcome-design-prefix-partition-dp',
+    problemIds: ['abc230-f', 'abc262-ex', 'abc285-e', 'abc288-f', 'abc466-e'],
+  },
+  {
+    from: 'outcome-design-interval-split-dp',
+    to: 'outcome-design-interval-expansion-dp',
+    problemIds: ['abc219-h', 'abc273-f'],
+  },
+  {
+    from: 'outcome-design-order-preserving-dp',
+    to: 'outcome-design-lis-frontier',
+    problemIds: [
+      'abc240-ex',
+      'abc339-e',
+      'abc354-f',
+      'abc360-g',
+      'abc369-f',
+      'abc393-f',
+      'abc410-g',
+      'abc439-e',
+    ],
+  },
+  {
+    from: 'outcome-encode-counting-by-generating-function',
+    to: 'outcome-invert-generating-function-equation',
+    problemIds: ['abc222-h'],
+  },
+  {
+    from: 'outcome-encode-counting-by-generating-function',
+    to: 'outcome-expand-euler-product-sparsely',
+    problemIds: ['abc279-ex'],
+  },
+  {
+    from: 'outcome-encode-counting-by-generating-function',
+    to: 'outcome-derive-coefficient-recurrence-by-differentiation',
+    problemIds: ['abc230-h'],
+  },
+  {
+    from: 'outcome-prove-and-search-threshold',
+    to: 'outcome-optimize-ratio-by-parametric-search',
+    problemIds: ['abc236-e', 'abc294-f'],
+  },
+
+  {
     from: 'outcome-evaluate-adversarial-game-value',
     to: 'outcome-add-conway-number-games',
     problemIds: ['abc229-h', 'abc265-ex'],
@@ -8509,6 +8670,7 @@ const refineOutcomeId = (problemId: string, outcomeId: string): string =>
   outcomeRefinementByKey.get(`${problemId}\u0000${outcomeId}`) ?? outcomeId;
 
 const primaryOutcomeAdditionsByProblemId: Readonly<Record<string, readonly string[]>> = {
+  'abc222-h': ['outcome-derive-coefficient-recurrence-by-differentiation'],
   'abc228-g': ['outcome-run-dp-on-finite-automaton'],
   'abc301-f': ['outcome-run-dp-on-finite-automaton'],
   'abc305-g': ['outcome-run-dp-on-finite-automaton'],
@@ -8533,6 +8695,12 @@ interface SupportingOutcomeAddition {
 const supportingOutcomeAdditionsByProblemId: Readonly<
   Record<string, readonly SupportingOutcomeAddition[]>
 > = {
+  'abc279-ex': [
+    {
+      outcomeId: 'outcome-compute-binomial-by-lucas',
+      claimPaths: ['/typicalTechniques/2', '/prerequisiteCandidates/2'],
+    },
+  ],
   'abc213-g': [
     {
       outcomeId: 'outcome-enumerate-subset-state-space',
@@ -9162,12 +9330,64 @@ if (
   throw new Error('FINAL_TAXONOMY_RAW_ASSIGNMENT_CLAIM_COVERAGE_MISMATCH');
 }
 
+/** Primary describes the new technique at the first point the adopted solution is readable.
+ * Keep earlier main techniques as co-primary, preserving their claim-level evidence.
+ */
+const alignPrimaryWithReadiness = (
+  decision: CuratedProblemClaimDecision,
+): CuratedProblemClaimDecision => {
+  const formerPrimary = [decision.primaryOutcomeId, ...decision.additionalPrimaryOutcomeIds];
+  const allOutcomes = sortedUnique([
+    ...formerPrimary,
+    ...Object.values(decision.supportingOutcomeIdsByTag).flat(),
+  ]);
+  const home = latestLearningUnitId(
+    allOutcomes.flatMap((id) => outcomeById.get(id)?.learningUnitCandidateIds ?? []),
+  );
+  const homeOutcomes = allOutcomes.filter((id) =>
+    outcomeById.get(id)?.learningUnitCandidateIds.includes(home),
+  );
+  const primaryOutcomeId = homeOutcomes.includes(decision.primaryOutcomeId)
+    ? decision.primaryOutcomeId
+    : homeOutcomes[0];
+  if (primaryOutcomeId === undefined) throw new Error('PRIMARY_READINESS_OUTCOME_MISSING');
+  const promotedTags = new Set(primaryTagIdsForOutcomeIds(homeOutcomes));
+  // All required Outcomes of a promoted Tag share the same primary role.
+  const promotedOutcomes = allOutcomes.filter((id) =>
+    outcomeById.get(id)?.scopeTagIds.some((tag) => promotedTags.has(tag)),
+  );
+  const primaryOutcomes = sortedUnique([...formerPrimary, ...promotedOutcomes]);
+  const dispositions = decision.dispositions
+    .map((disposition) => {
+      if (disposition.kind !== 'supporting') return [disposition];
+      const promoted = disposition.tagIds.filter((id) => promotedTags.has(id));
+      const remaining = disposition.tagIds.filter((id) => !promotedTags.has(id));
+      return [
+        ...(promoted.length === 0
+          ? []
+          : [{ ...disposition, kind: 'primary' as const, tagIds: promoted }]),
+        ...(remaining.length === 0 ? [] : [{ ...disposition, tagIds: remaining }]),
+      ];
+    })
+    .flat();
+  const uniqueDispositions = new Map(dispositions.map((d) => [JSON.stringify(d), d]));
+  return {
+    ...decision,
+    primaryOutcomeId,
+    additionalPrimaryOutcomeIds: primaryOutcomes.filter((id) => id !== primaryOutcomeId),
+    dispositions: [...uniqueDispositions.values()],
+    supportingOutcomeIdsByTag: Object.fromEntries(
+      Object.entries(decision.supportingOutcomeIdsByTag).filter(([tag]) => !promotedTags.has(tag)),
+    ),
+  };
+};
+
 export const FINAL_TAXONOMY_CLAIM_DECISIONS: Readonly<Record<string, CuratedProblemClaimDecision>> =
   Object.freeze(
     Object.fromEntries(
       Object.entries(RAW_FINAL_TAXONOMY_CLAIM_DECISIONS).map(([problemId, decision]) => [
         problemId,
-        normalizeClaimDecision(problemId, decision),
+        alignPrimaryWithReadiness(normalizeClaimDecision(problemId, decision)),
       ]),
     ),
   );
@@ -9424,11 +9644,7 @@ const claimDispositionsFor = (
           `FINAL_TAXONOMY_CURATED_CLAIM_ROLE_INVALID: ${record.problemId}${claimPath}/${kind}/${normalizedTagIds.join(',')}`,
         );
       }
-      if (kind === 'primary' && !claimPath.startsWith('/typicalTechniques/')) {
-        throw new Error(
-          `FINAL_TAXONOMY_PRIMARY_CLAIM_NOT_TECHNIQUE: ${record.problemId}${claimPath}`,
-        );
-      }
+
       if (kind === 'baseline' && baselineClassification === undefined) {
         throw new Error(`FINAL_TAXONOMY_BASELINE_SCOPE_INVALID: ${record.problemId}${claimPath}`);
       }
@@ -9660,7 +9876,7 @@ export const buildFullCorpusPrimaryDecisionTable = (
         supportingOutcomeIds,
         supportingTagDecisions,
         learningUnitCandidateIds,
-        presentationUnitId: latestLearningUnitId(primaryLearningUnitIds),
+        presentationUnitId: latestLearningUnitId(learningUnitCandidateIds),
         decisionKind: override ? 'curated_semantic_override' : 'explicit_inventory_assignment',
         ambiguityStatus: override ? 'curated_override' : 'proposed_assignment',
         selectionRationale: override
@@ -10074,12 +10290,7 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
     deterministicTopologicalOrder(
       FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => ({
         id: unit.id,
-        prerequisiteIds: [
-          ...new Set([
-            ...unit.additionalPrerequisiteUnitIds,
-            ...(unit.parentId === null ? [] : [unit.parentId]),
-          ]),
-        ],
+        prerequisiteIds: [...new Set([...unit.additionalPrerequisiteUnitIds])],
       })),
     );
   } catch (error) {

@@ -31,22 +31,18 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/binary-trie.md",
-  "problemIds": [
-    "abc425-g",
-    "abc451-g"
-  ],
-  "directProblemIds": [
-    "abc425-g",
-    "abc451-g"
-  ],
+  "problemIds": [],
+  "directProblemIds": [],
   "relatedProblemIds": [
-    "abc252-ex"
+    "abc252-ex",
+    "abc425-g",
+    "abc451-g"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 11,
-  "globalIndex": 65,
+  "globalIndex": 49,
   "orderReason": "整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。"
 }

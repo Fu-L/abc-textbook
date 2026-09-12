@@ -61,13 +61,17 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     const placementByProblemId = new Map(
       build.placements.map((placement) => [placement.problemId, placement]),
     );
-    expect(placementByProblemId.get('abc218-f')?.additionalPrimaryOutcomeIds).toEqual([
+    expect(placementByProblemId.get('abc218-f')?.primaryOutcomeId).toBe(
       'outcome-build-shortest-path-certificate',
+    );
+    expect(placementByProblemId.get('abc218-f')?.additionalPrimaryOutcomeIds).toEqual([
+      'outcome-localize-change-impact-by-witness',
     ]);
     expect(placementByProblemId.get('abc218-f')?.supportingOutcomeIds).not.toContain(
       'outcome-build-shortest-path-certificate',
     );
     expect(placementByProblemId.get('abc335-g')?.additionalPrimaryOutcomeIds).toEqual([
+      'outcome-count-through-cyclic-exponents',
       'outcome-find-period-by-multiplicative-order',
     ]);
     expect(placementByProblemId.get('abc419-g')).toMatchObject({
@@ -163,6 +167,88 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(build.inputs.inventory.inventoryDigest).not.toBe(
       build.inputs.inventory.authoringInventoryDigest,
     );
+  }, 30_000);
+
+  it('places reviewed examples only after all required skills and orders their basic forms first', async () => {
+    const { build } = await loadBuild();
+    const units = build.finalCandidates
+      .filter((candidate) => candidate.kind === 'unit')
+      .map(({ entity }) => entity);
+    const byProblem = new Map(
+      build.placements.map((placement) => [placement.problemId, placement]),
+    );
+    const byUnit = new Map(units.map((unit) => [unit.id, unit]));
+    const position = (id: string): [number, number] => {
+      const placement = byProblem.get(id);
+      if (!placement) throw new Error(`Missing placement: ${id}`);
+      const unit = byUnit.get(placement.presentationUnitId);
+      if (!unit) throw new Error(`Missing Unit: ${placement.presentationUnitId}`);
+      return [
+        build.standardOrder.indexOf(placement.presentationUnitId),
+        unit.directProblemIds.indexOf(id),
+      ];
+    };
+    for (const [basic, advanced] of [
+      ['abc367-e', 'abc212-f'],
+      ['abc367-e', 'abc438-e'],
+      ['abc216-f', 'abc321-f'],
+      ['abc314-f', 'abc235-ex'],
+      ['abc294-g', 'abc298-ex'],
+      ['abc354-e', 'abc255-g'],
+      ['abc275-e', 'abc226-h'],
+      ['abc298-e', 'abc226-h'],
+      ['abc273-f', 'abc219-h'],
+    ] as const) {
+      const a = position(basic),
+        b = position(advanced);
+      expect(a[0] < b[0] || (a[0] === b[0] && a[1] < b[1]), `${basic} before ${advanced}`).toBe(
+        true,
+      );
+    }
+    for (const [id, home] of Object.entries({
+      'abc450-f': 'unit-range-actions',
+      'abc327-f': 'unit-range-actions',
+      'abc370-f': 'unit-binary-lifting',
+      'abc244-f': 'unit-state-graph-search',
+      'abc435-g': 'unit-dp-transition-optimization',
+      'abc374-f': 'unit-dp-prefix-partition',
+      'abc260-f': 'unit-bounded-enumeration',
+      'abc236-e': 'unit-fractional-parametric-search',
+      'abc294-f': 'unit-fractional-parametric-search',
+      'abc339-e': 'unit-dp-lis',
+      'abc369-f': 'unit-dp-lis',
+      'abc393-f': 'unit-dp-lis',
+      'abc354-f': 'unit-dp-lis',
+    }))
+      expect(byProblem.get(id)?.presentationUnitId, id).toBe(home);
+    for (const placement of build.placements) {
+      const homeIndex = build.standardOrder.indexOf(placement.presentationUnitId);
+      expect(homeIndex, placement.problemId).toBe(
+        Math.max(...placement.learningUnitIds.map((id) => build.standardOrder.indexOf(id))),
+      );
+    }
+    for (const basic of [
+      'unit-state-graph-search',
+      'unit-dsu-components',
+      'unit-priority-queue-best-first',
+      'unit-ordered-set-multiset',
+      'unit-binary-lifting',
+      'unit-weighted-prefix-fenwick',
+      'unit-range-monoid-aggregation',
+    ]) {
+      for (const advanced of [
+        'unit-min25-sieve',
+        'unit-rsk-young-tableaux',
+        'unit-linear-matroid-intersection',
+        'unit-fps-composition-power-projection',
+      ]) {
+        expect(build.standardOrder.indexOf(basic), `${basic} before ${advanced}`).toBeLessThan(
+          build.standardOrder.indexOf(advanced),
+        );
+      }
+    }
+    expect(build.standardOrder).not.toContain('unit-chapter-graph');
+    expect(build.standardOrder).not.toContain('unit-shortest-path-certificates');
   }, 30_000);
 
   it('rejects a placement decision table changed after the accepted build input was bound', async () => {
@@ -412,7 +498,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     }
   }, 30_000);
 
-  it('preserves decision audit data, ad-hoc insights, reuse gates, and parent-before-child order', async () => {
+  it('preserves decision audit data, ad-hoc insights, reuse gates, and curriculum prerequisites independently of navigation', async () => {
     const { context, build } = await loadBuild();
     const recordsById = new Map(context.records.map((record) => [record.problemId, record]));
     const placementByProblemId = new Map(
@@ -557,10 +643,10 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     );
     expect(new Set(unitOrderReasons).size).toBe(unitOrderReasons.length);
     for (const candidate of build.finalCandidates) {
-      if (candidate.kind === 'unit' && candidate.entity.parentId !== null) {
-        expect(orderIndex.get(candidate.entity.parentId)).toBeLessThan(
-          orderIndex.get(candidate.entity.id) ?? -1,
-        );
+      if (candidate.kind === 'unit' && orderIndex.has(candidate.entity.id)) {
+        for (const id of candidate.entity.additionalPrerequisiteUnitIds) {
+          expect(orderIndex.get(id)).toBeLessThan(orderIndex.get(candidate.entity.id) ?? -1);
+        }
       }
     }
     for (const placement of build.placements) {
@@ -568,6 +654,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       const primaryLearningUnitIds = [
         placement.primaryOutcomeId,
         ...placement.additionalPrimaryOutcomeIds,
+        ...placement.supportingOutcomeIds,
       ].flatMap(
         (outcomeId) =>
           outcomeById
@@ -607,7 +694,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(verification.canonicalMaterializationAllowed).toBe(build.status === 'accepted');
   }, 30_000);
 
-  it('rejects unknown references, cycles, order drift, unclassified Problems, incomplete impacts, and supporting Home ownership', async () => {
+  it('rejects unknown references, cycles, order drift, unclassified Problems, incomplete impacts, and placement before required skills', async () => {
     const { context, build } = await loadBuild();
 
     const unknownReference = structuredClone(build);
@@ -649,7 +736,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       throw new Error('Expected the abc212-g placement.');
     }
     expect(cyclicExponentPlacement.learningUnitIds).toContain('unit-divisor-mobius-inversion');
-    cyclicExponentPlacement.presentationUnitId = 'unit-divisor-mobius-inversion';
+    cyclicExponentPlacement.presentationUnitId = 'unit-prime-divisor';
     const integrationEntries = supportingUnitAsHome.integrationMap.entries.map((entry) => {
       const { reviewEvidenceId: _reviewEvidenceId, status: _status, ...semanticEntry } = entry;
       void _reviewEvidenceId;

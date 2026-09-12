@@ -35,6 +35,7 @@
   "docPath": "src/content/docs/learn/query/ordered-interval-partition.md",
   "problemIds": [
     "abc255-ex",
+    "abc256-ex",
     "abc380-e",
     "abc435-e",
     "abc465-g"
@@ -43,17 +44,17 @@
     "abc380-e",
     "abc255-ex",
     "abc435-e",
-    "abc465-g"
+    "abc465-g",
+    "abc256-ex"
   ],
   "relatedProblemIds": [
-    "abc251-ex",
-    "abc256-ex"
+    "abc251-ex"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 79,
-  "globalIndex": 162,
+  "globalIndex": 98,
   "orderReason": "ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。"
 }

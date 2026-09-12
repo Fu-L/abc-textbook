@@ -3,7 +3,7 @@ title: "有限状態automatonの構成"
 description: "有限状態automatonの構成の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 148
+  order: 87
 ---
 
 # 有限状態automatonの構成
@@ -30,7 +30,7 @@ ABC301 FはDDoS型の部分列を含まない埋め方を求める。禁止部�
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -38,6 +38,7 @@ ABC301 FはDDoS型の部分列を含まない埋め方を求める。禁止部�
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
+- [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
 - [ABC301 F「Anti-DDoS」](https://atcoder.jp/contests/abc301/tasks/abc301_f)
 - [ABC305 G「Banned Substrings」](https://atcoder.jp/contests/abc305/tasks/abc305_g)
 - [ABC418 G「Binary Operation」](https://atcoder.jp/contests/abc418/tasks/abc418_g)
@@ -51,4 +52,4 @@ ABC301 FはDDoS型の部分列を含まない埋め方を求める。禁止部�
 - [ABC305 G 公式解説](https://atcoder.jp/contests/abc305/editorial/6540)
 - [ABC305 G 公式問題文](https://atcoder.jp/contests/abc305/tasks/abc305_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-finite-pattern-automaton`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-finite-pattern-automaton`

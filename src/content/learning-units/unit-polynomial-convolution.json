@@ -37,28 +37,27 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md",
   "problemIds": [
     "abc213-h",
-    "abc230-h",
-    "abc265-ex",
     "abc281-ex",
     "abc291-g",
     "abc307-ex",
     "abc315-ex",
+    "abc323-g",
     "abc357-g"
   ],
   "directProblemIds": [
     "abc291-g",
-    "abc307-ex",
-    "abc265-ex"
+    "abc307-ex"
   ],
   "relatedProblemIds": [
+    "abc230-h",
     "abc235-ex",
+    "abc265-ex",
     "abc278-ex",
     "abc289-ex",
     "abc300-ex",
     "abc303-ex",
     "abc309-ex",
     "abc317-ex",
-    "abc323-g",
     "abc331-g",
     "abc345-g",
     "abc352-g",
@@ -76,6 +75,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 8,
-  "globalIndex": 69,
+  "globalIndex": 51,
   "orderReason": "係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。"
 }

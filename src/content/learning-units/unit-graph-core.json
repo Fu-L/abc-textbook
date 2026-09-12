@@ -30,19 +30,19 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/graph-core.md",
   "problemIds": [
-    "abc266-f"
-  ],
-  "directProblemIds": [
-    "abc266-f"
-  ],
-  "relatedProblemIds": [
+    "abc266-f",
     "abc267-e"
   ],
+  "directProblemIds": [
+    "abc266-f",
+    "abc267-e"
+  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 69,
-  "globalIndex": 138,
+  "globalIndex": 75,
   "orderReason": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

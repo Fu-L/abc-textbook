@@ -35,25 +35,22 @@
   "docPath": "src/content/docs/learn/number-theory/gcd-diophantine.md",
   "problemIds": [
     "abc254-f",
-    "abc271-ex",
-    "abc315-g",
     "abc340-f",
-    "abc438-g",
-    "abc459-g"
+    "abc418-e",
+    "abc438-g"
   ],
   "directProblemIds": [
-    "abc340-f",
-    "abc315-g",
-    "abc271-ex",
-    "abc459-g"
+    "abc340-f"
   ],
   "relatedProblemIds": [
     "abc212-g",
     "abc222-g",
     "abc248-g",
+    "abc271-ex",
     "abc306-g",
-    "abc418-e",
+    "abc315-g",
     "abc445-g",
+    "abc459-g",
     "abc460-e"
   ],
   "examples": [],
@@ -61,6 +58,6 @@
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 1,
-  "globalIndex": 19,
+  "globalIndex": 18,
   "orderReason": "最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。"
 }

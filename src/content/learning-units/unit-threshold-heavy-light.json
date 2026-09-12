@@ -33,29 +33,32 @@
   "docPath": "src/content/docs/learn/modeling/threshold-heavy-light.md",
   "problemIds": [
     "abc219-g",
+    "abc230-e",
+    "abc242-g",
     "abc259-ex",
     "abc335-f",
     "abc350-g",
-    "abc365-g"
+    "abc365-g",
+    "abc405-g"
   ],
   "directProblemIds": [
     "abc219-g",
     "abc335-f",
     "abc350-g",
     "abc259-ex",
-    "abc365-g"
-  ],
-  "relatedProblemIds": [
+    "abc365-g",
     "abc230-e",
     "abc242-g",
-    "abc345-g",
     "abc405-g"
+  ],
+  "relatedProblemIds": [
+    "abc345-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 74,
-  "globalIndex": 150,
+  "globalIndex": 88,
   "orderReason": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

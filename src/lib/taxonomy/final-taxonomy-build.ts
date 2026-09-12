@@ -1,3 +1,4 @@
+import { isCurriculumUnit, unitNavigationIndices } from './learning-unit-order.js';
 import { lstat, readFile, readdir, realpath } from 'node:fs/promises';
 import path from 'node:path';
 import { orderProblemsByPrerequisites } from './problem-reading-order.js';
@@ -1216,21 +1217,23 @@ export const assembleFinalTaxonomyBuild = (
       candidate.kind === 'unit',
   );
   const orderedUnits = deterministicTopologicalOrder(
-    unitCandidates.map((candidate) => ({
-      id: candidate.entity.id,
-      prerequisiteIds: sortedUnique([
-        ...candidate.entity.additionalPrerequisiteUnitIds,
-        ...(candidate.entity.parentId === null ? [] : [candidate.entity.parentId]),
-      ]),
-      candidate,
-    })),
+    unitCandidates
+      .filter(({ entity }) => isCurriculumUnit(entity))
+      .map((candidate) => ({
+        id: candidate.entity.id,
+        prerequisiteIds: candidate.entity.additionalPrerequisiteUnitIds,
+        candidate,
+      })),
     ({ candidate }) => [
       candidate.entity.stageRank,
       candidate.entity.difficultyRank,
       candidate.entity.representativeRank,
     ],
   );
-  const globalIndexByUnitId = new Map(orderedUnits.map(({ id }, globalIndex) => [id, globalIndex]));
+  const globalIndexByUnitId = unitNavigationIndices(
+    unitCandidates.map(({ entity }) => entity),
+    orderedUnits.map(({ id }) => id),
+  );
   const finalCandidates = initiallyNormalizedCandidates
     .map((candidate) =>
       candidate.kind === 'unit'
@@ -2856,7 +2859,7 @@ export const validateFinalTaxonomyBuildAgainstContext = (
         placement.problemId,
       );
     }
-    const expectedPresentationUnitId = [...primaryLearningUnitIds]
+    const expectedPresentationUnitId = [...assignedOutcomeOwnerUnitIds]
       .sort(
         (left, right) =>
           (standardOrderIndex.get(left) ?? Number.POSITIVE_INFINITY) -
@@ -2872,7 +2875,7 @@ export const validateFinalTaxonomyBuildAgainstContext = (
     ) {
       add(
         'PLACEMENT_PRIMARY_HOME_UNIT_INVALID',
-        'The presentation Unit must be exactly the latest Unit that directly teaches a primary or co-primary Outcome; supporting Units cannot take Home ownership.',
+        'The presentation Unit must teach the latest required Outcome, including supporting skills.',
         placement.problemId,
       );
     }

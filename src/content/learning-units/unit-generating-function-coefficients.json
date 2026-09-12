@@ -1,0 +1,58 @@
+{
+  "id": "unit-generating-function-coefficients",
+  "kind": "section",
+  "title": "母関数方程式・高度な係数抽出",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-generating-functions"
+  ],
+  "excludedTopics": [
+    "母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc222-editorial-2742-0b52abf47c9dca1917f852a87070e8ceee676eabae8d37b24d7f809b38b22c86",
+    "source-abc222-h-problem-9a1dc4483c90ca4be68ee5b105475bf715ab96843f2fe15ad901578002e62147",
+    "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
+    "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f",
+    "source-abc279-editorial-5290-5a65ca8395c9d2fad6bc31056f401b8415bb0f4275c14878aea98dfbd2d40b88",
+    "source-abc279-ex-problem-23a78a33a742148d71c9f1f19a378907e506745b7fa6cc46b96f23443970ae65"
+  ],
+  "tagIds": [
+    "tag-generating-function-coefficients"
+  ],
+  "ownedTagIds": [
+    "tag-generating-function-coefficients"
+  ],
+  "learningOutcomeIds": [
+    "outcome-derive-coefficient-recurrence-by-differentiation",
+    "outcome-expand-euler-product-sparsely",
+    "outcome-invert-generating-function-equation"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-derive-coefficient-recurrence-by-differentiation",
+    "outcome-expand-euler-product-sparsely",
+    "outcome-invert-generating-function-equation"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/generating-function-coefficients.md",
+  "problemIds": [
+    "abc222-h",
+    "abc230-h",
+    "abc279-ex"
+  ],
+  "directProblemIds": [
+    "abc279-ex",
+    "abc222-h",
+    "abc230-h"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "stageRank": 5,
+  "difficultyRank": 4,
+  "representativeRank": 80,
+  "globalIndex": 187,
+  "orderReason": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、母関数方程式・高度な係数抽出の発動条件・正当化・境界を重複なく学ぶ。"
+}

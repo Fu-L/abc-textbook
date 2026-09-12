@@ -38,6 +38,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 12,
-  "globalIndex": 91,
+  "globalIndex": 154,
   "orderReason": "独立集合族と交換公理を共通言語にし、単一matroidの重み付き基底と、現corpusで観測された二つの線形matroidの共通rank判定を分けて学ぶ。"
 }

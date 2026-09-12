@@ -33,10 +33,12 @@
   "docPath": "src/content/docs/learn/number-theory/gcd-structure.md",
   "problemIds": [
     "abc254-f",
+    "abc418-e",
     "abc438-g"
   ],
   "directProblemIds": [
     "abc254-f",
+    "abc418-e",
     "abc438-g"
   ],
   "relatedProblemIds": [
@@ -44,14 +46,13 @@
     "abc222-g",
     "abc248-g",
     "abc306-g",
-    "abc418-e",
     "abc445-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 2,
   "representativeRank": 54,
-  "globalIndex": 117,
+  "globalIndex": 52,
   "orderReason": "差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

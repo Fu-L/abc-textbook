@@ -34,31 +34,32 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/weighted-prefix-fenwick.md",
   "problemIds": [
-    "abc221-e",
-    "abc256-f",
-    "abc276-f",
     "abc287-g",
-    "abc351-f",
+    "abc341-e",
+    "abc441-e",
+    "abc452-f",
     "abc461-e"
   ],
   "directProblemIds": [
     "abc461-e",
-    "abc256-f",
+    "abc341-e",
+    "abc441-e",
     "abc287-g",
-    "abc276-f",
-    "abc351-f",
-    "abc221-e"
+    "abc452-f"
   ],
   "relatedProblemIds": [
+    "abc221-e",
     "abc231-f",
     "abc233-ex",
     "abc253-f",
+    "abc256-f",
     "abc261-f",
     "abc263-ex",
+    "abc276-f",
     "abc294-g",
     "abc306-f",
     "abc337-g",
-    "abc341-e",
+    "abc351-f",
     "abc368-g",
     "abc378-e",
     "abc380-g",
@@ -70,15 +71,13 @@
     "abc436-f",
     "abc438-g",
     "abc439-f",
-    "abc441-e",
-    "abc449-e",
-    "abc452-f"
+    "abc449-e"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 2,
+  "stageRank": 1,
+  "difficultyRank": 0,
   "representativeRank": 2,
-  "globalIndex": 46,
+  "globalIndex": 5,
   "orderReason": "静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。"
 }

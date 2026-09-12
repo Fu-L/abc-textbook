@@ -2,13 +2,12 @@
   "id": "outcome-encode-counting-by-generating-function",
   "statement": "組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。",
   "prerequisiteOutcomeIds": [
+    "outcome-compute-binomial-by-lucas",
     "outcome-formulate-combinatorial-coefficients"
   ],
   "scopeIds": [
     "abc214-g",
-    "abc222-h",
     "abc225-h",
-    "abc230-h",
     "abc235-ex",
     "abc241-ex",
     "abc247-ex",
@@ -17,7 +16,6 @@
     "abc267-ex",
     "abc269-ex",
     "abc272-ex",
-    "abc279-ex",
     "abc281-ex",
     "abc285-ex",
     "abc289-ex",

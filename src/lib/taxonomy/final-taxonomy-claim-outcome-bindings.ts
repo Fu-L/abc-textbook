@@ -32,6 +32,16 @@ const sameTag = (...outcomeIds: readonly string[]): FinalClaimOutcomeBinding => 
 export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
   Record<string, Readonly<Record<string, readonly FinalClaimOutcomeBinding[]>>>
 > = {
+  'abc222-h': {
+    '/typicalTechniques/0': [sameTag('outcome-invert-generating-function-equation')],
+    '/typicalTechniques/1': [primary('outcome-invert-generating-function-equation')],
+    '/typicalTechniques/2': [primary('outcome-derive-coefficient-recurrence-by-differentiation')],
+    '/prerequisiteCandidates/0': [sameTag('outcome-invert-generating-function-equation')],
+    '/prerequisiteCandidates/1': [
+      sameTag('outcome-derive-coefficient-recurrence-by-differentiation'),
+      supporting('outcome-compute-in-modular-arithmetic'),
+    ],
+  },
   'abc214-h': {
     '/typicalTechniques/0': [primary('outcome-condense-and-order-directed-graph')],
     '/typicalTechniques/1': [primary('outcome-model-min-cost-flow')],
@@ -65,12 +75,14 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     '/prerequisiteCandidates/1': [sameTag('outcome-determinize-automaton-by-subsets')],
   },
   'abc230-h': {
-    '/typicalTechniques/0': [primary('outcome-encode-counting-by-generating-function')],
+    '/typicalTechniques/0': [primary('outcome-derive-coefficient-recurrence-by-differentiation')],
     '/typicalTechniques/1': [
       primary('outcome-compute-online-relaxed-convolution'),
       supporting('outcome-divide-search-space-recursively'),
     ],
-    '/prerequisiteCandidates/0': [sameTag('outcome-encode-counting-by-generating-function')],
+    '/prerequisiteCandidates/0': [
+      sameTag('outcome-derive-coefficient-recurrence-by-differentiation'),
+    ],
     '/prerequisiteCandidates/1': [
       sameTag('outcome-compute-online-relaxed-convolution'),
       supporting('outcome-divide-search-space-recursively'),

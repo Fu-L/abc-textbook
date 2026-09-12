@@ -3,7 +3,7 @@ title: "small-to-large・DSU on Tree"
 description: "small-to-large・DSU on Treeの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 144
+  order: 83
 ---
 
 # small-to-large・DSU on Tree
@@ -36,6 +36,7 @@ ABC324 Gの分割は、分割前の各要素が一方だけに属し、小さい
 2. [ABC411 F「Contraction」](https://atcoder.jp/contests/abc411/tasks/abc411_f)
 3. [ABC454 G「Mode in the Subtree」](https://atcoder.jp/contests/abc454/tasks/abc454_g)
 4. [ABC324 G「Generate Arrays」](https://atcoder.jp/contests/abc324/tasks/abc324_g)
+5. [ABC451 F「Make Bipartite 3」](https://atcoder.jp/contests/abc451/tasks/abc451_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -46,7 +47,6 @@ ABC324 Gの分割は、分割前の各要素が一方だけに属し、小さい
 - [ABC273 Ex「Inv(0,1)ving Insert(1,0)n」](https://atcoder.jp/contests/abc273/tasks/abc273_h)
 - [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
 - [ABC369 G「As far as possible」](https://atcoder.jp/contests/abc369/tasks/abc369_g)
-- [ABC451 F「Make Bipartite 3」](https://atcoder.jp/contests/abc451/tasks/abc451_f)
 - [ABC462 G「Completely Wrong」](https://atcoder.jp/contests/abc462/tasks/abc462_g)
 
 ## 根拠
@@ -58,4 +58,4 @@ ABC324 Gの分割は、分割前の各要素が一方だけに属し、小さい
 - [ABC324 G 公式解説](https://atcoder.jp/contests/abc324/editorial/7399)
 - [ABC324 G 公式問題文](https://atcoder.jp/contests/abc324/tasks/abc324_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-small-to-large`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-small-to-large`

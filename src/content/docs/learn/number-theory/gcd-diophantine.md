@@ -3,7 +3,7 @@ title: "gcdと整数解の成立条件"
 description: "gcdと整数解の成立条件の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 19
+  order: 18
 ---
 
 # gcdと整数解の成立条件
@@ -41,9 +41,6 @@ ABC340 Fの整数座標の三角形を例に、一次不定方程式へ帰着す
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC340 F「S = 1」](https://atcoder.jp/contests/abc340/tasks/abc340_f)
-2. [ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://atcoder.jp/contests/abc315/tasks/abc315_g)
-3. [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
-4. [ABC459 G「Golf 2」](https://atcoder.jp/contests/abc459/tasks/abc459_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -54,9 +51,11 @@ ABC340 Fの整数座標の三角形を例に、一次不定方程式へ帰着す
 - [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
 - [ABC222 G「222」](https://atcoder.jp/contests/abc222/tasks/abc222_g)
 - [ABC248 G「GCD cost on the tree」](https://atcoder.jp/contests/abc248/tasks/abc248_g)
+- [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
 - [ABC306 G「Return to 1」](https://atcoder.jp/contests/abc306/tasks/abc306_g)
-- [ABC418 E「Trapezium」](https://atcoder.jp/contests/abc418/tasks/abc418_e)
+- [ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://atcoder.jp/contests/abc315/tasks/abc315_g)
 - [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
+- [ABC459 G「Golf 2」](https://atcoder.jp/contests/abc459/tasks/abc459_g)
 - [ABC460 E「x + y ≡ x + y」](https://atcoder.jp/contests/abc460/tasks/abc460_e)
 
 ## 根拠
@@ -68,4 +67,4 @@ ABC340 Fの整数座標の三角形を例に、一次不定方程式へ帰着す
 - [ABC248 G 公式解説](https://atcoder.jp/contests/abc248/editorial/3795)
 - [ABC248 G 公式問題文](https://atcoder.jp/contests/abc248/tasks/abc248_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-gcd-diophantine`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-gcd-diophantine`

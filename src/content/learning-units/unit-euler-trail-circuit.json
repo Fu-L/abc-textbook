@@ -32,21 +32,20 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/euler-trail-circuit.md",
   "problemIds": [
-    "abc227-h",
     "abc286-g"
   ],
   "directProblemIds": [
-    "abc286-g",
-    "abc227-h"
+    "abc286-g"
   ],
   "relatedProblemIds": [
+    "abc227-h",
     "abc336-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 76,
-  "globalIndex": 157,
+  "globalIndex": 93,
   "orderReason": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

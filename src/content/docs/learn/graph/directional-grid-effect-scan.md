@@ -3,7 +3,7 @@ title: "方向別grid scanによる長距離効果の前計算"
 description: "方向別grid scanによる長距離効果の前計算の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 143
+  order: 80
 ---
 
 # 方向別grid scanによる長距離効果の前計算
@@ -37,4 +37,4 @@ sidebar:
 - [ABC317 E 公式問題文](https://atcoder.jp/contests/abc317/tasks/abc317_e)
 - [ABC317 E 公式解説](https://atcoder.jp/contests/abc317/editorial/7031)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-directional-grid-effect-scan`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-directional-grid-effect-scan`

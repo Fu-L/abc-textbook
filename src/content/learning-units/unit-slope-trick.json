@@ -36,22 +36,23 @@
   "problemIds": [
     "abc217-h",
     "abc250-g",
-    "abc406-g"
+    "abc275-ex",
+    "abc406-g",
+    "abc458-g"
   ],
   "directProblemIds": [
     "abc217-h",
     "abc250-g",
-    "abc406-g"
+    "abc458-g",
+    "abc406-g",
+    "abc275-ex"
   ],
-  "relatedProblemIds": [
-    "abc275-ex",
-    "abc458-g"
-  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 89,
-  "globalIndex": 190,
+  "globalIndex": 135,
   "orderReason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、slope trickの発動条件・正当化・境界を重複なく学ぶ。"
 }

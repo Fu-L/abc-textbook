@@ -3,7 +3,7 @@ title: "meet-in-the-middle・半分全列挙"
 description: "meet-in-the-middle・半分全列挙の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 135
+  order: 72
 ---
 
 # meet-in-the-middle・半分全列挙
@@ -31,12 +31,12 @@ sidebar:
 1. [ABC271 F「XOR on Grid Path」](https://atcoder.jp/contests/abc271/tasks/abc271_f)
 2. [ABC427 F「Not Adjacent」](https://atcoder.jp/contests/abc427/tasks/abc427_f)
 3. [ABC300 G「P-smooth number」](https://atcoder.jp/contests/abc300/tasks/abc300_g)
-4. [ABC220 H「Security Camera」](https://atcoder.jp/contests/abc220/tasks/abc220_h)
-5. [ABC252 Ex「K-th beautiful Necklace」](https://atcoder.jp/contests/abc252/tasks/abc252_h)
-6. [ABC326 F「Robot Rotation」](https://atcoder.jp/contests/abc326/tasks/abc326_f)
-7. [ABC336 F「Rotation Puzzle」](https://atcoder.jp/contests/abc336/tasks/abc336_f)
-8. [ABC402 F「Path to Integer」](https://atcoder.jp/contests/abc402/tasks/abc402_f)
-9. [ABC464 F「Random Vault Heist」](https://atcoder.jp/contests/abc464/tasks/abc464_f)
+4. [ABC252 Ex「K-th beautiful Necklace」](https://atcoder.jp/contests/abc252/tasks/abc252_h)
+5. [ABC326 F「Robot Rotation」](https://atcoder.jp/contests/abc326/tasks/abc326_f)
+6. [ABC336 F「Rotation Puzzle」](https://atcoder.jp/contests/abc336/tasks/abc336_f)
+7. [ABC402 F「Path to Integer」](https://atcoder.jp/contests/abc402/tasks/abc402_f)
+8. [ABC464 F「Random Vault Heist」](https://atcoder.jp/contests/abc464/tasks/abc464_f)
+9. [ABC423 G「Small Multiple 2」](https://atcoder.jp/contests/abc423/tasks/abc423_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -44,7 +44,7 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC423 G「Small Multiple 2」](https://atcoder.jp/contests/abc423/tasks/abc423_g)
+- [ABC220 H「Security Camera」](https://atcoder.jp/contests/abc220/tasks/abc220_h)
 
 ## 根拠
 
@@ -55,4 +55,4 @@ sidebar:
 - [ABC271 F 公式解説](https://atcoder.jp/contests/abc271/editorial/4925)
 - [ABC271 F 公式問題文](https://atcoder.jp/contests/abc271/tasks/abc271_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-meet-in-the-middle`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-meet-in-the-middle`

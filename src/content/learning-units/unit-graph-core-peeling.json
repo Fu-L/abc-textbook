@@ -31,17 +31,16 @@
   "docPath": "src/content/docs/learn/graph/graph-core-peeling.md",
   "problemIds": [
     "abc266-f",
+    "abc267-e",
     "abc419-g"
   ],
   "directProblemIds": [],
-  "relatedProblemIds": [
-    "abc267-e"
-  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 12,
-  "globalIndex": 66,
+  "globalIndex": 75,
   "orderReason": "連結性を探索できることを前提に、低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。"
 }

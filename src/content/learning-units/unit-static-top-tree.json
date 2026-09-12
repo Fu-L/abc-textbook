@@ -45,6 +45,6 @@
   "stageRank": 4,
   "difficultyRank": 5,
   "representativeRank": 7,
-  "globalIndex": 213,
+  "globalIndex": 183,
   "orderReason": "木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。"
 }

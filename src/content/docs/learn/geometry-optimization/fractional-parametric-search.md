@@ -3,7 +3,7 @@ title: "fractional programming・比率parametric search"
 description: "fractional programming・比率parametric searchの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 96
+  order: 133
 ---
 
 # fractional programming・比率parametric search
@@ -13,6 +13,12 @@ sidebar:
 ### fractional programming・比率parametric search
 
 比率目標xに対して各寄与をbenefit-x·costへ変換し、和が非負かという単調な加法最適化へ帰着する。
+
+分母Bが正の比率A/Bをx以上にできるかは、A−xB≥0に変換する。比率そのものは加算できなくても、変換後のスコアは要素・辺ごとに足せる。分母の符号と単調性を確認してから二分探索する。
+
+ABC236 Eの平均値側は各要素をA_i−xに置き換え、選択制約のDPでスコア最大値を求める。中央値側はA_i≥xを+1、それ以外を−1とする個数比較であり、比率の線形化とは区別する。
+
+ABC324 Fでは各辺の利得−x·費用をDAG上で最大化する。ABC294 Fでは砂糖量−x·総重量を各溶液に割り当て、二つのスコアの和が非負となる組数を整列と二分探索で数える。同じ変換の後に、最適化と計数という異なる判定器を接続する。
 
 ## 前提と範囲
 
@@ -28,13 +34,19 @@ sidebar:
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC324 F「Beautiful Path」](https://atcoder.jp/contests/abc324/tasks/abc324_f)
+1. [ABC236 E「Average and Median」](https://atcoder.jp/contests/abc236/tasks/abc236_e)
+2. [ABC294 F「Sugar Water 2」](https://atcoder.jp/contests/abc294/tasks/abc294_f)
+3. [ABC324 F「Beautiful Path」](https://atcoder.jp/contests/abc324/tasks/abc324_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
 ## 根拠
 
+- [ABC236 E 公式問題文](https://atcoder.jp/contests/abc236/tasks/abc236_e)
+- [ABC236 E 公式解説](https://atcoder.jp/contests/abc236/editorial/3279)
+- [ABC294 F 公式解説](https://atcoder.jp/contests/abc294/editorial/6007)
+- [ABC294 F 公式問題文](https://atcoder.jp/contests/abc294/tasks/abc294_f)
 - [ABC324 F 公式解説](https://atcoder.jp/contests/abc324/editorial/7405)
 - [ABC324 F 公式問題文](https://atcoder.jp/contests/abc324/tasks/abc324_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-fractional-parametric-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-fractional-parametric-search`

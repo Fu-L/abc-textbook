@@ -33,20 +33,20 @@
   "docPath": "src/content/docs/learn/tree/tree-balanced-separators.md",
   "problemIds": [
     "abc291-ex",
-    "abc359-g"
+    "abc359-g",
+    "abc453-f"
   ],
   "directProblemIds": [
     "abc291-ex",
-    "abc359-g"
-  ],
-  "relatedProblemIds": [
+    "abc359-g",
     "abc453-f"
   ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 8,
-  "globalIndex": 81,
+  "globalIndex": 64,
   "orderReason": "部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える。"
 }

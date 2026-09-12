@@ -33,19 +33,23 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/segment-tree-canonical-decomposition.md",
-  "problemIds": [],
-  "directProblemIds": [],
+  "problemIds": [
+    "abc342-g",
+    "abc414-g"
+  ],
+  "directProblemIds": [
+    "abc342-g",
+    "abc414-g"
+  ],
   "relatedProblemIds": [
     "abc244-ex",
-    "abc342-g",
-    "abc363-g",
-    "abc414-g"
+    "abc363-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 78,
-  "globalIndex": 161,
+  "globalIndex": 97,
   "orderReason": "区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。"
 }

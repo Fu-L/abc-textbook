@@ -3,7 +3,7 @@ title: "連結成分を管理し縮約する"
 description: "連結成分を管理し縮約するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 33
+  order: 8
 ---
 
 # 連結成分を管理し縮約する
@@ -56,18 +56,19 @@ sidebar:
 - [ABC311 G「One More Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_g)
 - [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
 - [ABC328 E「Modulo MST」](https://atcoder.jp/contests/abc328/tasks/abc328_e)
+- [ABC335 E「Non-Decreasing Colorful Path」](https://atcoder.jp/contests/abc335/tasks/abc335_e)
 - [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g)
 - [ABC352 E「Clique Connect」](https://atcoder.jp/contests/abc352/tasks/abc352_e)
-- [ABC352 F「Estimate Order」](https://atcoder.jp/contests/abc352/tasks/abc352_f)
 - [ABC355 F「MST Query」](https://atcoder.jp/contests/abc355/tasks/abc355_f)
 - [ABC364 F「Range Connect MST」](https://atcoder.jp/contests/abc364/tasks/abc364_f)
 - [ABC376 G「Treasure Hunting」](https://atcoder.jp/contests/abc376/tasks/abc376_g)
 - [ABC383 E「Sum of Max Matching」](https://atcoder.jp/contests/abc383/tasks/abc383_e)
+- [ABC392 E「Cables and Servers」](https://atcoder.jp/contests/abc392/tasks/abc392_e)
 - [ABC394 G「Dense Buildings」](https://atcoder.jp/contests/abc394/tasks/abc394_g)
+- [ABC401 E「Reachable Set」](https://atcoder.jp/contests/abc401/tasks/abc401_e)
 - [ABC408 E「Minimum OR Path」](https://atcoder.jp/contests/abc408/tasks/abc408_e)
 - [ABC409 F「Connecting Points」](https://atcoder.jp/contests/abc409/tasks/abc409_f)
 - [ABC413 G「Big Banned Grid」](https://atcoder.jp/contests/abc413/tasks/abc413_g)
-- [ABC440 G「Haunted House」](https://atcoder.jp/contests/abc440/tasks/abc440_g)
 - [ABC447 E「Divide Graph」](https://atcoder.jp/contests/abc447/tasks/abc447_e)
 - [ABC451 F「Make Bipartite 3」](https://atcoder.jp/contests/abc451/tasks/abc451_f)
 
@@ -80,4 +81,4 @@ sidebar:
 - [ABC229 E 公式問題文](https://atcoder.jp/contests/abc229/tasks/abc229_e)
 - [ABC229 E 公式解説](https://atcoder.jp/contests/abc229/editorial/2958)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-connectivity`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-connectivity`

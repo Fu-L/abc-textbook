@@ -3,7 +3,7 @@ title: "factorial convolutionによる多項式Taylor shift"
 description: "factorial convolutionによる多項式Taylor shiftの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 207
+  order: 171
 ---
 
 # factorial convolutionによる多項式Taylor shift
@@ -28,19 +28,13 @@ P(x+a) の全係数を二項展開し、階乗倍した係数列と a^i/i! の�
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
+1. [ABC323 G「Inversion of Tree」](https://atcoder.jp/contests/abc323/tasks/abc323_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
-
-## 関連問題
-
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
-
-- [ABC323 G「Inversion of Tree」](https://atcoder.jp/contests/abc323/tasks/abc323_g)
 
 ## 根拠
 
 - [ABC323 G 公式解説](https://atcoder.jp/contests/abc323/editorial/7356)
 - [ABC323 G 公式問題文](https://atcoder.jp/contests/abc323/tasks/abc323_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-polynomial-taylor-shift`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-polynomial-taylor-shift`

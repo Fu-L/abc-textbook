@@ -33,23 +33,24 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md",
   "problemIds": [
     "abc212-h",
+    "abc220-h",
     "abc288-g",
     "abc367-g"
   ],
   "directProblemIds": [
     "abc288-g",
+    "abc220-h",
     "abc367-g",
     "abc212-h"
   ],
   "relatedProblemIds": [
-    "abc220-h",
     "abc265-ex"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 87,
-  "globalIndex": 185,
+  "globalIndex": 129,
   "orderReason": "Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -3,7 +3,7 @@ title: "凸包・支持方向・境界候補"
 description: "凸包・支持方向・境界候補の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 165
+  order: 104
 ---
 
 # 凸包・支持方向・境界候補
@@ -32,7 +32,6 @@ sidebar:
 2. [ABC275 G「Infinite Knapsack」](https://atcoder.jp/contests/abc275/tasks/abc275_g)
 3. [ABC286 Ex「Don't Swim」](https://atcoder.jp/contests/abc286/tasks/abc286_h)
 4. [ABC356 G「Freestyle」](https://atcoder.jp/contests/abc356/tasks/abc356_g)
-5. [ABC257 Ex「Dice Sum 2」](https://atcoder.jp/contests/abc257/tasks/abc257_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -41,6 +40,7 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC244 Ex「Linear Maximization」](https://atcoder.jp/contests/abc244/tasks/abc244_h)
+- [ABC257 Ex「Dice Sum 2」](https://atcoder.jp/contests/abc257/tasks/abc257_h)
 
 ## 根拠
 
@@ -51,4 +51,4 @@ sidebar:
 - [ABC275 G 公式解説](https://atcoder.jp/contests/abc275/editorial/5111)
 - [ABC275 G 公式問題文](https://atcoder.jp/contests/abc275/tasks/abc275_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-convex-boundary-hull`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-convex-boundary-hull`

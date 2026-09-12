@@ -1,4 +1,8 @@
 export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[]>> = {
+  'tag-dp-prefix-partition': ['prefix分割DP', '最後のブロックを固定'],
+  'tag-dp-interval-expansion': ['区間拡張DP', '訪問済み区間DP'],
+  'tag-lis-state': ['LIS', '最長増加部分列', '長さ別最小末尾'],
+  'tag-generating-function-coefficients': ['Lagrange反転', '係数漸化式', 'Eulerの五角数定理'],
   'tag-conway-number-games': ['Conway number', 'simplicity rule', '二進有理数'],
   'tag-cyclic-minimax-game': ['retrograde analysis', 'AND OR game', 'minimax distance'],
   'tag-heavy-light-recursive-dp': ['HLRecDP', 'heavy light recursive DP'],
@@ -135,7 +139,7 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
     'interactive problem',
     'query protocol',
   ],
-  'tag-interval-partition-dp': ['区間DP', '分割DP', 'interval DP'],
+  'tag-interval-partition-dp': ['区間DP', '領域分割DP', 'interval DP'],
   'tag-knapsack-resource': ['ナップサックDP', '部分和DP', 'knapsack DP'],
   'tag-lazy-segment-action': ['遅延セグメント木', 'lazy segment tree', 'lazy propagation'],
   'tag-linear-algebra-xor': [
@@ -206,7 +210,7 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
   ],
   'tag-recursive-compressed-string': ['圧縮文字列', 'compressed strings'],
   'tag-reverse-offline': ['逆順処理', 'クエリの逆読み', 'reverse offline processing'],
-  'tag-sequence-subsequence-dp': ['部分列DP', '最長増加部分列', 'subsequence DP', 'LIS'],
+  'tag-sequence-subsequence-dp': ['部分列DP', 'subsequence DP'],
   'tag-shortest-path': ['最短経路', 'Dijkstra法', 'Bellman–Ford法', 'shortest path'],
   'tag-shortest-path-certificate': [
     '最短路木',
@@ -688,6 +692,10 @@ export const FINAL_TAG_FORMER_NAMES: Readonly<Record<string, readonly string[]>>
 };
 
 export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly string[]>> = {
+  'tag-dp-prefix-partition': ['abc285-e', 'abc288-f'],
+  'tag-dp-interval-expansion': ['abc273-f', 'abc219-h'],
+  'tag-lis-state': ['abc393-f', 'abc339-e'],
+  'tag-generating-function-coefficients': ['abc222-h', 'abc279-ex'],
   'tag-amortized-heavy-light': ['abc217-e', 'abc329-f', 'abc219-g'],
   'tag-bounded-enumeration': ['abc234-e', 'abc328-e', 'abc353-f', 'abc386-e', 'abc442-g'],
   'tag-bipartite-structure': ['abc451-f', 'abc398-e', 'abc398-g'],
@@ -736,7 +744,7 @@ export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, reado
   'tag-integer-boundary-blocks': ['abc230-e', 'abc293-f', 'abc239-ex'],
   'tag-implicit-binary-tree-arithmetic': ['abc220-e', 'abc321-e', 'abc424-e'],
   'tag-interactive-protocol': ['abc305-f', 'abc355-e'],
-  'tag-interval-partition-dp': ['abc466-e', 'abc288-f', 'abc233-g'],
+  'tag-interval-partition-dp': ['abc217-f', 'abc233-g', 'abc262-g'],
   'tag-knapsack-resource': ['abc321-f', 'abc322-e', 'abc383-f'],
   'tag-lazy-segment-action': ['abc340-e', 'abc382-f', 'abc237-g'],
   'tag-linear-algebra-xor': ['abc396-e', 'abc236-f', 'abc212-h'],
@@ -751,7 +759,7 @@ export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, reado
   'tag-modular-crt': ['abc286-f', 'abc423-g', 'abc245-ex'],
   'tag-monoid-segment-tree': ['abc261-e', 'abc223-f', 'abc292-ex'],
   'tag-monotone-stack-queue': ['abc359-e', 'abc379-f', 'abc248-ex'],
-  'tag-monotone-threshold-search': ['abc373-e', 'abc236-e', 'abc395-f'],
+  'tag-monotone-threshold-search': ['abc373-e', 'abc395-f'],
   'tag-ordered-set-heap': ['abc281-e', 'abc308-g', 'abc431-g'],
   'tag-palindrome-radius': ['abc398-f', 'abc349-g'],
   'tag-persistent-rollback': ['abc273-e', 'abc453-g', 'abc302-ex'],
@@ -763,7 +771,7 @@ export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, reado
   'tag-randomized-algorithm': ['abc272-g', 'abc422-e'],
   'tag-recursive-compressed-string': ['abc450-e', 'abc346-f', 'abc417-g'],
   'tag-reverse-offline': ['abc229-e', 'abc346-e', 'abc375-f'],
-  'tag-sequence-subsequence-dp': ['abc271-e', 'abc354-f', 'abc240-ex'],
+  'tag-sequence-subsequence-dp': ['abc271-e', 'abc327-e'],
   'tag-shortest-path': ['abc213-e', 'abc237-e', 'abc325-e'],
   'tag-shortest-path-certificate': ['abc252-e', 'abc218-f', 'abc308-ex'],
   'tag-spanning-tree-optimization': ['abc218-e', 'abc282-e', 'abc352-e'],

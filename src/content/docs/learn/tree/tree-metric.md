@@ -3,7 +3,7 @@ title: "木距離を基準点・直径・中心から捉える"
 description: "木距離を基準点・直径・中心から捉えるの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 37
+  order: 32
 ---
 
 # 木距離を基準点・直径・中心から捉える
@@ -34,7 +34,6 @@ sidebar:
 4. [ABC221 F「Diameter set」](https://atcoder.jp/contests/abc221/tasks/abc221_f)
 5. [ABC401 F「Add One Edge 3」](https://atcoder.jp/contests/abc401/tasks/abc401_f)
 6. [ABC361 E「Tree and Hamilton Path 2」](https://atcoder.jp/contests/abc361/tasks/abc361_e)
-7. [ABC267 F「Exactly K Steps」](https://atcoder.jp/contests/abc267/tasks/abc267_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -42,6 +41,7 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
+- [ABC267 F「Exactly K Steps」](https://atcoder.jp/contests/abc267/tasks/abc267_f)
 - [ABC460 F「Farthest Pair Query」](https://atcoder.jp/contests/abc460/tasks/abc460_f)
 
 ## 根拠
@@ -53,4 +53,4 @@ sidebar:
 - [ABC267 F 公式解説](https://atcoder.jp/contests/abc267/editorial/4714)
 - [ABC267 F 公式問題文](https://atcoder.jp/contests/abc267/tasks/abc267_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-tree-metric`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-tree-metric`

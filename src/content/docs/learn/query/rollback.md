@@ -3,7 +3,7 @@ title: "rollback・DFS入退場の状態復元"
 description: "rollback・DFS入退場の状態復元の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 174
+  order: 116
 ---
 
 # rollback・DFS入退場の状態復元
@@ -43,4 +43,4 @@ sidebar:
 - [ABC363 G 公式解説](https://atcoder.jp/contests/abc363/editorial/10451)
 - [ABC363 G 公式問題文](https://atcoder.jp/contests/abc363/tasks/abc363_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-rollback`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-rollback`

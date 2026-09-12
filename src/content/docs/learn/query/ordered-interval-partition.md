@@ -3,7 +3,7 @@ title: "ordered interval partition・ODT"
 description: "ordered interval partition・ODTの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 162
+  order: 98
 ---
 
 # ordered interval partition・ODT
@@ -32,6 +32,7 @@ ordered set・multisetの動的順序管理で得た考え方と実装を再利�
 2. [ABC255 Ex「Range Harvest Query」](https://atcoder.jp/contests/abc255/tasks/abc255_h)
 3. [ABC435 E「Cover query」](https://atcoder.jp/contests/abc435/tasks/abc435_e)
 4. [ABC465 G「Sum of Mex of Mod of Linear」](https://atcoder.jp/contests/abc465/tasks/abc465_g)
+5. [ABC256 Ex「I like Query Problem」](https://atcoder.jp/contests/abc256/tasks/abc256_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -40,7 +41,6 @@ ordered set・multisetの動的順序管理で得た考え方と実装を再利�
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC251 Ex「Fill Triangle」](https://atcoder.jp/contests/abc251/tasks/abc251_h)
-- [ABC256 Ex「I like Query Problem」](https://atcoder.jp/contests/abc256/tasks/abc256_h)
 
 ## 根拠
 
@@ -51,4 +51,4 @@ ordered set・multisetの動的順序管理で得た考え方と実装を再利�
 - [ABC256 H 公式解説](https://atcoder.jp/contests/abc256/editorial/4113)
 - [ABC256 H 公式問題文](https://atcoder.jp/contests/abc256/tasks/abc256_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-ordered-interval-partition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-ordered-interval-partition`

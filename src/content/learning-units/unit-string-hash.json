@@ -25,17 +25,18 @@
   "ownedLearningOutcomeIds": [],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/string-hash.md",
-  "problemIds": [],
+  "problemIds": [
+    "abc331-f"
+  ],
   "directProblemIds": [],
   "relatedProblemIds": [
-    "abc274-ex",
-    "abc331-f"
+    "abc274-ex"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 9,
-  "globalIndex": 63,
+  "globalIndex": 85,
   "orderReason": "列・集合・式を合成可能なfingerprintへ写し、衝突条件を意識して同値性を比較する。"
 }

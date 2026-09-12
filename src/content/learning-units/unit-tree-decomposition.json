@@ -37,26 +37,26 @@
   "docPath": "src/content/docs/learn/tree/tree-decomposition.md",
   "problemIds": [
     "abc240-e",
+    "abc267-f",
     "abc294-g",
     "abc298-ex",
+    "abc329-g",
     "abc337-g",
     "abc340-g",
     "abc405-f",
-    "abc406-f"
+    "abc406-f",
+    "abc438-f",
+    "abc460-f"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
-    "abc267-f",
-    "abc329-g",
-    "abc351-g",
-    "abc438-f",
-    "abc460-f"
+    "abc351-g"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 7,
-  "globalIndex": 78,
+  "globalIndex": 73,
   "orderReason": "基本的な木DFSを土台に、laminar区間をstackで包含木へ変換し、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。"
 }

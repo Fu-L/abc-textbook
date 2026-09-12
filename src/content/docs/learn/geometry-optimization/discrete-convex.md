@@ -3,7 +3,7 @@ title: "凸性・傾き・限界費用・slope trick"
 description: "凸性・傾き・限界費用・slope trickの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 90
+  order: 67
 ---
 
 # 凸性・傾き・限界費用・slope trick
@@ -43,14 +43,7 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC229 G「Longest Y」](https://atcoder.jp/contests/abc229/tasks/abc229_g)
-- [ABC240 F「Sum Sum Max」](https://atcoder.jp/contests/abc240/tasks/abc240_f)
 - [ABC263 G「Erasing Prime Pairs」](https://atcoder.jp/contests/abc263/tasks/abc263_g)
-- [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
-- [ABC330 F「Minimize Bounding Square」](https://atcoder.jp/contests/abc330/tasks/abc330_f)
-- [ABC458 G「Children Yearn for the Evil Kindergarten」](https://atcoder.jp/contests/abc458/tasks/abc458_g)
-- [ABC459 G「Golf 2」](https://atcoder.jp/contests/abc459/tasks/abc459_g)
-- [ABC462 E「Alternating Costs」](https://atcoder.jp/contests/abc462/tasks/abc462_e)
 
 ## 根拠
 
@@ -61,4 +54,4 @@ sidebar:
 - [ABC224 G 公式解説](https://atcoder.jp/contests/abc224/editorial/2816)
 - [ABC224 G 公式問題文](https://atcoder.jp/contests/abc224/tasks/abc224_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-discrete-convex`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-discrete-convex`

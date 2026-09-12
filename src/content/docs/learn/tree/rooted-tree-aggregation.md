@@ -3,7 +3,7 @@ title: "根付き木DP・部分木集約"
 description: "根付き木DP・部分木集約の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 130
+  order: 69
 ---
 
 # 根付き木DP・部分木集約
@@ -43,8 +43,11 @@ DPの最小十分状態で得た考え方と実装を再利用し、根付き木
 13. [ABC259 F「Select Edges」](https://atcoder.jp/contests/abc259/tasks/abc259_f)
 14. [ABC287 F「Components」](https://atcoder.jp/contests/abc287/tasks/abc287_f)
 15. [ABC416 F「Paint Tree 2」](https://atcoder.jp/contests/abc416/tasks/abc416_f)
-16. [ABC329 G「Delivery on Tree」](https://atcoder.jp/contests/abc329/tasks/abc329_g)
-17. [ABC459 E「Select from Subtrees」](https://atcoder.jp/contests/abc459/tasks/abc459_e)
+16. [ABC246 G「Game on Tree 3」](https://atcoder.jp/contests/abc246/tasks/abc246_g)
+17. [ABC293 Ex「Optimal Path Decomposition」](https://atcoder.jp/contests/abc293/tasks/abc293_h)
+18. [ABC459 E「Select from Subtrees」](https://atcoder.jp/contests/abc459/tasks/abc459_e)
+19. [ABC435 F「Cat exercise」](https://atcoder.jp/contests/abc435/tasks/abc435_f)
+20. [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -52,16 +55,13 @@ DPの最小十分状態で得た考え方と実装を再利用し、根付き木
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC246 G「Game on Tree 3」](https://atcoder.jp/contests/abc246/tasks/abc246_g)
 - [ABC269 Ex「Antichain」](https://atcoder.jp/contests/abc269/tasks/abc269_h)
 - [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
-- [ABC293 Ex「Optimal Path Decomposition」](https://atcoder.jp/contests/abc293/tasks/abc293_h)
 - [ABC298 Ex「Sum of Min of Length」](https://atcoder.jp/contests/abc298/tasks/abc298_h)
 - [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
+- [ABC329 G「Delivery on Tree」](https://atcoder.jp/contests/abc329/tasks/abc329_g)
 - [ABC340 G「Leaf Color」](https://atcoder.jp/contests/abc340/tasks/abc340_g)
 - [ABC369 G「As far as possible」](https://atcoder.jp/contests/abc369/tasks/abc369_g)
-- [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
-- [ABC435 F「Cat exercise」](https://atcoder.jp/contests/abc435/tasks/abc435_f)
 - [ABC438 F「Sum of Mex」](https://atcoder.jp/contests/abc438/tasks/abc438_f)
 
 ## 根拠
@@ -73,4 +73,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、根付き木
 - [ABC248 G 公式解説](https://atcoder.jp/contests/abc248/editorial/3795)
 - [ABC248 G 公式問題文](https://atcoder.jp/contests/abc248/tasks/abc248_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-rooted-tree-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-rooted-tree-aggregation`

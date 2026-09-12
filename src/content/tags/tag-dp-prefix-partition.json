@@ -1,0 +1,47 @@
+{
+  "id": "tag-dp-prefix-partition",
+  "name": "prefix分割DP",
+  "definition": "列の最後のブロックを固定し、処理済みprefixの答えから次の切れ目へ遷移する。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "prefix",
+      "切れ目",
+      "連続ブロック"
+    ],
+    "triggerPatterns": [
+      "分割を数える",
+      "到着順にまとめる",
+      "最後の区間を固定"
+    ],
+    "invariantPatterns": [
+      "処理済みprefix",
+      "最後の切れ目の一意性"
+    ],
+    "goalPatterns": [
+      "分割の最適値",
+      "分割数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-design-prefix-partition-dp"
+  ],
+  "representativeProblemIds": [
+    "abc285-e",
+    "abc288-f"
+  ],
+  "aliases": [
+    "prefix分割DP",
+    "最後のブロックを固定"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

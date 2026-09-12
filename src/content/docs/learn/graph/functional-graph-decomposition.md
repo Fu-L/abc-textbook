@@ -3,7 +3,7 @@ title: "関数グラフのcycle・tree分解"
 description: "関数グラフのcycle・tree分解の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 125
+  order: 66
 ---
 
 # 関数グラフのcycle・tree分解
@@ -35,9 +35,10 @@ sidebar:
 5. [ABC377 E「Permute K times 2」](https://atcoder.jp/contests/abc377/tasks/abc377_e)
 6. [ABC399 E「Replace」](https://atcoder.jp/contests/abc399/tasks/abc399_e)
 7. [ABC436 E「Minimum Swap」](https://atcoder.jp/contests/abc436/tasks/abc436_e)
-8. [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
+8. [ABC258 E「Packing Potatoes」](https://atcoder.jp/contests/abc258/tasks/abc258_e)
 9. [ABC284 G「Only Once」](https://atcoder.jp/contests/abc284/tasks/abc284_g)
 10. [ABC371 G「Lexicographically Smallest Permutation」](https://atcoder.jp/contests/abc371/tasks/abc371_g)
+11. [ABC286 F「Guess The Number 2」](https://atcoder.jp/contests/abc286/tasks/abc286_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -46,8 +47,7 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC247 Ex「Rearranging Problem」](https://atcoder.jp/contests/abc247/tasks/abc247_h)
-- [ABC258 E「Packing Potatoes」](https://atcoder.jp/contests/abc258/tasks/abc258_e)
-- [ABC286 F「Guess The Number 2」](https://atcoder.jp/contests/abc286/tasks/abc286_f)
+- [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
 - [ABC444 G「Kyoen」](https://atcoder.jp/contests/abc444/tasks/abc444_g)
 
 ## 根拠
@@ -59,4 +59,4 @@ sidebar:
 - [ABC256 E 公式問題文](https://atcoder.jp/contests/abc256/tasks/abc256_e)
 - [ABC256 E 公式解説](https://atcoder.jp/contests/abc256/editorial/4135)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-functional-graph-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-functional-graph-decomposition`

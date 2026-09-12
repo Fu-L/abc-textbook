@@ -3,7 +3,7 @@ title: "DAGのtopological processing"
 description: "DAGのtopological processingの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 120
+  order: 54
 ---
 
 # DAGのtopological processing
@@ -31,7 +31,10 @@ sidebar:
 1. [ABC315 E「Prerequisites」](https://atcoder.jp/contests/abc315/tasks/abc315_e)
 2. [ABC277 F「Sorting a Matrix」](https://atcoder.jp/contests/abc277/tasks/abc277_f)
 3. [ABC291 E「Find Permutation」](https://atcoder.jp/contests/abc291/tasks/abc291_e)
-4. [ABC304 Ex「Constrained Topological Sort」](https://atcoder.jp/contests/abc304/tasks/abc304_h)
+4. [ABC335 E「Non-Decreasing Colorful Path」](https://atcoder.jp/contests/abc335/tasks/abc335_e)
+5. [ABC304 Ex「Constrained Topological Sort」](https://atcoder.jp/contests/abc304/tasks/abc304_h)
+6. [ABC341 F「Breakdown」](https://atcoder.jp/contests/abc341/tasks/abc341_f)
+7. [ABC306 Ex「Balance Scale」](https://atcoder.jp/contests/abc306/tasks/abc306_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -40,10 +43,7 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC224 E「Integers on Grid」](https://atcoder.jp/contests/abc224/tasks/abc224_e)
-- [ABC306 Ex「Balance Scale」](https://atcoder.jp/contests/abc306/tasks/abc306_h)
 - [ABC324 F「Beautiful Path」](https://atcoder.jp/contests/abc324/tasks/abc324_f)
-- [ABC335 E「Non-Decreasing Colorful Path」](https://atcoder.jp/contests/abc335/tasks/abc335_e)
-- [ABC341 F「Breakdown」](https://atcoder.jp/contests/abc341/tasks/abc341_f)
 
 ## 根拠
 
@@ -54,4 +54,4 @@ sidebar:
 - [ABC291 E 公式問題文](https://atcoder.jp/contests/abc291/tasks/abc291_e)
 - [ABC291 E 公式解説](https://atcoder.jp/contests/abc291/editorial/5839)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-dag-topological-processing`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-dag-topological-processing`

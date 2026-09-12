@@ -3,7 +3,7 @@ title: "次数構造からgraph coreまたは小さなkernelへ縮約する"
 description: "次数構造からgraph coreまたは小さなkernelへ縮約するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 66
+  order: 75
 ---
 
 # 次数構造からgraph coreまたは小さなkernelへ縮約する
@@ -35,12 +35,6 @@ sidebar:
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-## 関連問題
-
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
-
-- [ABC267 E「Erasing Vertices 2」](https://atcoder.jp/contests/abc267/tasks/abc267_e)
-
 ## 根拠
 
 - [ABC266 F 公式解説](https://atcoder.jp/contests/abc266/editorial/4698)
@@ -50,4 +44,4 @@ sidebar:
 - [ABC419 G 公式解説](https://atcoder.jp/contests/abc419/editorial/13636)
 - [ABC419 G 公式問題文](https://atcoder.jp/contests/abc419/tasks/abc419_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-graph-core-peeling`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-graph-core-peeling`

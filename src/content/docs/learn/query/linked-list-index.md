@@ -3,7 +3,7 @@ title: "要素索引と連結リストで局所linkを更新する"
 description: "要素索引と連結リストで局所linkを更新するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 26
+  order: 24
 ---
 
 # 要素索引と連結リストで局所linkを更新する
@@ -29,7 +29,6 @@ sidebar:
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC344 E「Insert or Erase」](https://atcoder.jp/contests/abc344/tasks/abc344_e)
-2. [ABC421 F「Erase between X and Y」](https://atcoder.jp/contests/abc421/tasks/abc421_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -38,6 +37,7 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC218 H「Red and Blue Lamps」](https://atcoder.jp/contests/abc218/tasks/abc218_h)
+- [ABC421 F「Erase between X and Y」](https://atcoder.jp/contests/abc421/tasks/abc421_f)
 
 ## 根拠
 
@@ -48,4 +48,4 @@ sidebar:
 - [ABC421 F 公式解説](https://atcoder.jp/contests/abc421/editorial/13787)
 - [ABC421 F 公式問題文](https://atcoder.jp/contests/abc421/tasks/abc421_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-linked-list-index`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-linked-list-index`

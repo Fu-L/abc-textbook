@@ -1,0 +1,76 @@
+{
+  "id": "unit-dp-interval-composition",
+  "kind": "subsection",
+  "title": "区間合成・領域分割DP",
+  "parentId": "unit-dp-sequence-interval",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-state-design"
+  ],
+  "excludedTopics": [
+    "区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57",
+    "source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e",
+    "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
+    "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777",
+    "source-abc233-editorial-3184-ab4b36adbfd0c3b627d15746dfe4d9457e05f0c83e47e5e8554f2b06686d0f9d",
+    "source-abc233-g-problem-3b941d80cb692b12d25a1776c90c2c690d4c1f32cd5e2ff6fadcadb670749baf"
+  ],
+  "tagIds": [
+    "tag-interval-partition-dp"
+  ],
+  "ownedTagIds": [
+    "tag-interval-partition-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-interval-split-dp"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-interval-split-dp"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-interval-composition.md",
+  "problemIds": [
+    "abc217-f",
+    "abc233-g",
+    "abc234-g",
+    "abc238-ex",
+    "abc242-ex",
+    "abc252-g",
+    "abc261-g",
+    "abc262-g",
+    "abc292-g",
+    "abc298-g",
+    "abc325-g",
+    "abc400-f"
+  ],
+  "directProblemIds": [
+    "abc262-g",
+    "abc252-g",
+    "abc292-g",
+    "abc325-g",
+    "abc400-f",
+    "abc217-f",
+    "abc233-g",
+    "abc234-g",
+    "abc261-g",
+    "abc298-g",
+    "abc242-ex",
+    "abc238-ex"
+  ],
+  "relatedProblemIds": [
+    "abc228-h",
+    "abc305-ex",
+    "abc418-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "stageRank": 3,
+  "difficultyRank": 3,
+  "representativeRank": 76,
+  "globalIndex": 92,
+  "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、区間合成・領域分割DPの発動条件・正当化・境界を重複なく学ぶ。"
+}

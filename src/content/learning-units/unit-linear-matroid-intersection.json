@@ -40,9 +40,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 5,
+  "stageRank": 5,
+  "difficultyRank": 4,
   "representativeRank": 100,
-  "globalIndex": 219,
+  "globalIndex": 191,
   "orderReason": "matroidの独立性・交換公理、線形方程式のrank計算、乱択誤り評価を学んだ後、二つの線形matroidの共通独立rankを一枚の乱択行列へ圧縮する。"
 }

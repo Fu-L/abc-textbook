@@ -3,7 +3,7 @@ title: "二部matching・Hall・Kőnig"
 description: "二部matching・Hall・Kőnigの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 167
+  order: 109
 ---
 
 # 二部matching・Hall・Kőnig
@@ -39,9 +39,11 @@ ABC215 Hでは品種集合Sの在庫総数をf(S)、許可品種がすべてSに
 5. [ABC274 G「Security Camera 3」](https://atcoder.jp/contests/abc274/tasks/abc274_g)
 6. [ABC437 G「Colorful Christmas Tree」](https://atcoder.jp/contests/abc437/tasks/abc437_g)
 7. [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
-8. [ABC320 G「Slot Strategy 2 (Hard)」](https://atcoder.jp/contests/abc320/tasks/abc320_g)
-9. [ABC215 H「Cabbage Master」](https://atcoder.jp/contests/abc215/tasks/abc215_h)
-10. [ABC374 G「Only One Product Name」](https://atcoder.jp/contests/abc374/tasks/abc374_g)
+8. [ABC424 G「Set list」](https://atcoder.jp/contests/abc424/tasks/abc424_g)
+9. [ABC313 Ex「Group Photo」](https://atcoder.jp/contests/abc313/tasks/abc313_h)
+10. [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
+11. [ABC320 G「Slot Strategy 2 (Hard)」](https://atcoder.jp/contests/abc320/tasks/abc320_g)
+12. [ABC374 G「Only One Product Name」](https://atcoder.jp/contests/abc374/tasks/abc374_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -49,11 +51,9 @@ ABC215 Hでは品種集合Sの在庫総数をf(S)、許可品種がすべてSに
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
+- [ABC215 H「Cabbage Master」](https://atcoder.jp/contests/abc215/tasks/abc215_h)
 - [ABC237 Ex「Hakata」](https://atcoder.jp/contests/abc237/tasks/abc237_h)
-- [ABC313 Ex「Group Photo」](https://atcoder.jp/contests/abc313/tasks/abc313_h)
-- [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
 - [ABC363 G「Dynamic Scheduling」](https://atcoder.jp/contests/abc363/tasks/abc363_g)
-- [ABC424 G「Set list」](https://atcoder.jp/contests/abc424/tasks/abc424_g)
 
 ## 根拠
 
@@ -64,4 +64,4 @@ ABC215 Hでは品種集合Sの在庫総数をf(S)、許可品種がすべてSに
 - [ABC241 G 公式解説](https://atcoder.jp/contests/abc241/editorial/3452)
 - [ABC241 G 公式問題文](https://atcoder.jp/contests/abc241/tasks/abc241_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-bipartite-matching`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-bipartite-matching`

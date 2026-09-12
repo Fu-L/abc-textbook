@@ -3,7 +3,7 @@ title: "Euler trail・circuit"
 description: "Euler trail・circuitの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 157
+  order: 93
 ---
 
 # Euler trail・circuit
@@ -29,7 +29,6 @@ sidebar:
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC286 G「Unique Walk」](https://atcoder.jp/contests/abc286/tasks/abc286_g)
-2. [ABC227 H「Eat Them All」](https://atcoder.jp/contests/abc227/tasks/abc227_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -37,6 +36,7 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
+- [ABC227 H「Eat Them All」](https://atcoder.jp/contests/abc227/tasks/abc227_h)
 - [ABC336 G「16 Integers」](https://atcoder.jp/contests/abc336/tasks/abc336_g)
 
 ## 根拠
@@ -48,4 +48,4 @@ sidebar:
 - [ABC336 G 公式解説](https://atcoder.jp/contests/abc336/editorial/9060)
 - [ABC336 G 公式問題文](https://atcoder.jp/contests/abc336/tasks/abc336_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-euler-trail-circuit`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-euler-trail-circuit`

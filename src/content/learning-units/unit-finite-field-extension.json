@@ -32,19 +32,19 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/finite-field-extension.md",
   "problemIds": [
-    "abc274-ex",
-    "abc381-g"
+    "abc274-ex"
   ],
   "directProblemIds": [
-    "abc274-ex",
+    "abc274-ex"
+  ],
+  "relatedProblemIds": [
     "abc381-g"
   ],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "stageRank": 4,
   "difficultyRank": 5,
   "representativeRank": 10,
-  "globalIndex": 214,
+  "globalIndex": 184,
   "orderReason": "素体上の演算を土台に、既約関係で元を標準化し、加減乗除が閉じる拡大体として扱う。"
 }

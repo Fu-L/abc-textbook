@@ -34,27 +34,30 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-grid-table.md",
   "problemIds": [
+    "abc227-f",
     "abc311-e",
+    "abc347-f",
     "abc415-e",
-    "abc443-e"
+    "abc443-e",
+    "abc464-e"
   ],
   "directProblemIds": [
     "abc415-e",
     "abc443-e",
-    "abc311-e"
+    "abc311-e",
+    "abc227-f",
+    "abc464-e",
+    "abc347-f"
   ],
   "relatedProblemIds": [
     "abc221-h",
-    "abc227-f",
-    "abc347-f",
-    "abc358-g",
-    "abc464-e"
+    "abc358-g"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 2,
   "difficultyRank": 1,
   "representativeRank": 1,
-  "globalIndex": 31,
+  "globalIndex": 29,
   "orderReason": "状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。"
 }

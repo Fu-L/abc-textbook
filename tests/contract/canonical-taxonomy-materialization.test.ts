@@ -1,3 +1,4 @@
+import { isCurriculumUnit } from '../../src/lib/taxonomy/learning-unit-order.js';
 import { readFile } from 'node:fs/promises';
 
 import { describe, expect, it } from 'vitest';
@@ -63,7 +64,7 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     for (const placement of input.build.placements)
       expect(occurrences.get(placement.problemId)).toEqual([placement.presentationUnitId]);
     expect(occurrences.size).toBe(868);
-    expect(result.learningOutcomes).toHaveLength(204);
+    expect(result.learningOutcomes).toHaveLength(211);
   }, 30_000);
 
   it('materializes every accepted candidate and placement without re-synthesizing taxonomy', async () => {
@@ -151,6 +152,7 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     expect(result.learningOrder.standardOrder).toEqual(
       result.learningUnits
         .map(({ value }) => value)
+        .filter(isCurriculumUnit)
         .sort((left, right) => left.globalIndex - right.globalIndex)
         .map(({ id }) => id),
     );

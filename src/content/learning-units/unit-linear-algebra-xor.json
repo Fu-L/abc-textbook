@@ -33,6 +33,7 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/linear-algebra-xor.md",
   "problemIds": [
     "abc212-h",
+    "abc220-h",
     "abc223-h",
     "abc249-g",
     "abc276-ex",
@@ -40,23 +41,22 @@
     "abc283-g",
     "abc288-g",
     "abc366-g",
-    "abc367-g"
+    "abc367-g",
+    "abc451-g"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
-    "abc220-h",
     "abc236-f",
     "abc265-ex",
     "abc323-g",
     "abc399-g",
-    "abc412-g",
-    "abc451-g"
+    "abc412-g"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 9,
-  "globalIndex": 89,
+  "globalIndex": 84,
   "orderReason": "制約や多次元変換を線形方程式・基底・軸別変換・行列式へ写し、消去と分離によって解く。"
 }

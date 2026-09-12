@@ -39,7 +39,9 @@
     "outcome-optimize-ratio-by-parametric-search"
   ],
   "representativeProblemIds": [
-    "abc324-f"
+    "abc236-e",
+    "abc324-f",
+    "abc294-f"
   ],
   "aliases": [
     "fractional programming",

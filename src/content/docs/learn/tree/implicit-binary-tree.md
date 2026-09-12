@@ -3,7 +3,7 @@ title: "対称性・深さ・label区間で巨大な完全二分木を数える"
 description: "対称性・深さ・label区間で巨大な完全二分木を数えるの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 38
+  order: 33
 ---
 
 # 対称性・深さ・label区間で巨大な完全二分木を数える
@@ -29,15 +29,10 @@ sidebar:
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC321 E「Complete Binary Tree」](https://atcoder.jp/contests/abc321/tasks/abc321_e)
+2. [ABC424 E「Cut in Half」](https://atcoder.jp/contests/abc424/tasks/abc424_e)
+3. [ABC220 E「Distance on Large Perfect Binary Tree」](https://atcoder.jp/contests/abc220/tasks/abc220_e)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
-
-## 関連問題
-
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
-
-- [ABC220 E「Distance on Large Perfect Binary Tree」](https://atcoder.jp/contests/abc220/tasks/abc220_e)
-- [ABC424 E「Cut in Half」](https://atcoder.jp/contests/abc424/tasks/abc424_e)
 
 ## 根拠
 
@@ -48,4 +43,4 @@ sidebar:
 - [ABC424 E 公式問題文](https://atcoder.jp/contests/abc424/tasks/abc424_e)
 - [ABC424 E 公式解説](https://atcoder.jp/contests/abc424/editorial/13858)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-implicit-binary-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-implicit-binary-tree`

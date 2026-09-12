@@ -31,20 +31,17 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/cyclic-group-exponent-counting.md",
-  "problemIds": [
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
     "abc212-g",
     "abc335-g"
   ],
-  "directProblemIds": [
-    "abc335-g",
-    "abc212-g"
-  ],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 4,
-  "globalIndex": 75,
+  "globalIndex": 59,
   "orderReason": "乗法的位数とその約数分類を先に学び、巡回群の元を指数へ写して位数別に重複なく数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する。"
 }

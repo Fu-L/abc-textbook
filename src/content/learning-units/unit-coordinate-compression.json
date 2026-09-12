@@ -31,12 +31,8 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/coordinate-compression.md",
-  "problemIds": [
-    "abc374-f"
-  ],
-  "directProblemIds": [
-    "abc374-f"
-  ],
+  "problemIds": [],
+  "directProblemIds": [],
   "relatedProblemIds": [
     "abc221-e",
     "abc231-f",
@@ -55,6 +51,7 @@
     "abc356-f",
     "abc360-f",
     "abc360-g",
+    "abc374-f",
     "abc384-g",
     "abc431-g",
     "abc434-e",
@@ -66,6 +63,6 @@
   "stageRank": 1,
   "difficultyRank": 0,
   "representativeRank": 2,
-  "globalIndex": 14,
-  "orderReason": "比較に必要なのが順序と等値性だけであることを確認し、疎な初期値・将来更新値・event座標をsort-uniqueしたdense indexへ写す。"
+  "globalIndex": 4,
+  "orderReason": "保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。"
 }

@@ -3,7 +3,7 @@ title: "Z algorithmによるprefix matching"
 description: "Z algorithmによるprefix matchingの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 141
+  order: 79
 ---
 
 # Z algorithmによるprefix matching
@@ -31,6 +31,8 @@ sidebar:
 1. [ABC284 F「ABCBAC」](https://atcoder.jp/contests/abc284/tasks/abc284_f)
 2. [ABC430 E「Shift String」](https://atcoder.jp/contests/abc430/tasks/abc430_e)
 3. [ABC257 G「Prefix Concatenation」](https://atcoder.jp/contests/abc257/tasks/abc257_g)
+4. [ABC434 F「Concat (2nd)」](https://atcoder.jp/contests/abc434/tasks/abc434_f)
+5. [ABC343 G「Compress Strings」](https://atcoder.jp/contests/abc343/tasks/abc343_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -39,8 +41,6 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC312 Ex「snukesnuke」](https://atcoder.jp/contests/abc312/tasks/abc312_h)
-- [ABC343 G「Compress Strings」](https://atcoder.jp/contests/abc343/tasks/abc343_g)
-- [ABC434 F「Concat (2nd)」](https://atcoder.jp/contests/abc434/tasks/abc434_f)
 
 ## 根拠
 
@@ -51,4 +51,4 @@ sidebar:
 - [ABC312 H 公式解説](https://atcoder.jp/contests/abc312/editorial/6837)
 - [ABC312 H 公式問題文](https://atcoder.jp/contests/abc312/tasks/abc312_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-z-algorithm`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-z-algorithm`

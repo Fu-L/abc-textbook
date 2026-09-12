@@ -39,13 +39,10 @@
   ],
   "representativeProblemIds": [
     "abc271-e",
-    "abc354-f",
-    "abc240-ex"
+    "abc327-e"
   ],
   "aliases": [
-    "LIS",
     "subsequence DP",
-    "最長増加部分列",
     "部分列DP"
   ],
   "formerNames": [],

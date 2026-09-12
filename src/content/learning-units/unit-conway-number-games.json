@@ -32,19 +32,19 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/conway-number-games.md",
   "problemIds": [
-    "abc229-h"
-  ],
-  "directProblemIds": [
-    "abc229-h"
-  ],
-  "relatedProblemIds": [
+    "abc229-h",
     "abc265-ex"
   ],
+  "directProblemIds": [
+    "abc229-h",
+    "abc265-ex"
+  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 90,
-  "globalIndex": 100,
+  "globalIndex": 139,
   "orderReason": "有限局面DAGのminimaxで得た考え方と実装を再利用し、独立な数ゲームの和の発動条件・正当化・境界を重複なく学ぶ。"
 }

@@ -33,19 +33,18 @@
   "docPath": "src/content/docs/learn/string/trie-prefix.md",
   "problemIds": [
     "abc287-e",
-    "abc353-e",
     "abc377-g",
     "abc437-e"
   ],
   "directProblemIds": [
     "abc287-e",
     "abc437-e",
-    "abc377-g",
-    "abc353-e"
+    "abc377-g"
   ],
   "relatedProblemIds": [
     "abc240-ex",
     "abc268-g",
+    "abc353-e",
     "abc403-e"
   ],
   "examples": [],
@@ -53,6 +52,6 @@
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 0,
-  "globalIndex": 17,
+  "globalIndex": 16,
   "orderReason": "文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。"
 }

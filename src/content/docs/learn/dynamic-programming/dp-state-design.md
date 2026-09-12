@@ -3,7 +3,7 @@ title: "最小十分状態からDPを設計する"
 description: "最小十分状態からDPを設計するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 9
+  order: 0
 ---
 
 # 最小十分状態からDPを設計する
@@ -44,25 +44,6 @@ sidebar:
 10. [ABC344 F「Earn to Advance」](https://atcoder.jp/contests/abc344/tasks/abc344_f)
 11. [ABC376 F「Hands on Ring (Hard)」](https://atcoder.jp/contests/abc376/tasks/abc376_f)
 12. [ABC462 F「More ABC」](https://atcoder.jp/contests/abc462/tasks/abc462_f)
-13. [ABC227 E「Swap」](https://atcoder.jp/contests/abc227/tasks/abc227_e)
-14. [ABC265 E「Warp」](https://atcoder.jp/contests/abc265/tasks/abc265_e)
-15. [ABC273 G「Row Column Sums 2」](https://atcoder.jp/contests/abc273/tasks/abc273_g)
-16. [ABC281 G「Farthest City」](https://atcoder.jp/contests/abc281/tasks/abc281_g)
-17. [ABC307 E「Distinct Adjacent」](https://atcoder.jp/contests/abc307/tasks/abc307_e)
-18. [ABC416 G「Concat (1st)」](https://atcoder.jp/contests/abc416/tasks/abc416_g)
-19. [ABC422 F「Eat and Ride」](https://atcoder.jp/contests/abc422/tasks/abc422_f)
-20. [ABC440 G「Haunted House」](https://atcoder.jp/contests/abc440/tasks/abc440_g)
-21. [ABC403 F「Shortest One Formula」](https://atcoder.jp/contests/abc403/tasks/abc403_f)
-22. [ABC375 E「3 Team Division」](https://atcoder.jp/contests/abc375/tasks/abc375_e)
-23. [ABC215 E「Chain Contestant」](https://atcoder.jp/contests/abc215/tasks/abc215_e)
-24. [ABC237 F「|LIS| = 3」](https://atcoder.jp/contests/abc237/tasks/abc237_f)
-25. [ABC279 G「At Most 2 Colors」](https://atcoder.jp/contests/abc279/tasks/abc279_g)
-26. [ABC311 F「Yet Another Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_f)
-27. [ABC345 E「Colorful Subsequence」](https://atcoder.jp/contests/abc345/tasks/abc345_e)
-28. [ABC391 G「Many LCS」](https://atcoder.jp/contests/abc391/tasks/abc391_g)
-29. [ABC450 F「Strongly Connected 2」](https://atcoder.jp/contests/abc450/tasks/abc450_f)
-30. [ABC389 G「Odd Even Graph」](https://atcoder.jp/contests/abc389/tasks/abc389_g)
-31. [ABC313 Ex「Group Photo」](https://atcoder.jp/contests/abc313/tasks/abc313_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -70,20 +51,39 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
+- [ABC215 E「Chain Contestant」](https://atcoder.jp/contests/abc215/tasks/abc215_e)
+- [ABC227 E「Swap」](https://atcoder.jp/contests/abc227/tasks/abc227_e)
 - [ABC236 E「Average and Median」](https://atcoder.jp/contests/abc236/tasks/abc236_e)
+- [ABC237 F「|LIS| = 3」](https://atcoder.jp/contests/abc237/tasks/abc237_f)
+- [ABC265 E「Warp」](https://atcoder.jp/contests/abc265/tasks/abc265_e)
+- [ABC273 G「Row Column Sums 2」](https://atcoder.jp/contests/abc273/tasks/abc273_g)
+- [ABC279 G「At Most 2 Colors」](https://atcoder.jp/contests/abc279/tasks/abc279_g)
+- [ABC281 G「Farthest City」](https://atcoder.jp/contests/abc281/tasks/abc281_g)
 - [ABC282 G「Similar Permutation」](https://atcoder.jp/contests/abc282/tasks/abc282_g)
+- [ABC307 E「Distinct Adjacent」](https://atcoder.jp/contests/abc307/tasks/abc307_e)
 - [ABC309 E「Family and Insurance」](https://atcoder.jp/contests/abc309/tasks/abc309_e)
 - [ABC311 E「Defect-free Squares」](https://atcoder.jp/contests/abc311/tasks/abc311_e)
+- [ABC311 F「Yet Another Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_f)
+- [ABC313 Ex「Group Photo」](https://atcoder.jp/contests/abc313/tasks/abc313_h)
 - [ABC322 E「Product Development」](https://atcoder.jp/contests/abc322/tasks/abc322_e)
+- [ABC345 E「Colorful Subsequence」](https://atcoder.jp/contests/abc345/tasks/abc345_e)
 - [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e)
 - [ABC374 F「Shipping」](https://atcoder.jp/contests/abc374/tasks/abc374_f)
+- [ABC375 E「3 Team Division」](https://atcoder.jp/contests/abc375/tasks/abc375_e)
 - [ABC378 G「Everlasting LIDS」](https://atcoder.jp/contests/abc378/tasks/abc378_g)
 - [ABC381 F「1122 Subsequence」](https://atcoder.jp/contests/abc381/tasks/abc381_f)
 - [ABC386 F「Operate K」](https://atcoder.jp/contests/abc386/tasks/abc386_f)
 - [ABC388 F「Dangerous Sugoroku」](https://atcoder.jp/contests/abc388/tasks/abc388_f)
+- [ABC389 G「Odd Even Graph」](https://atcoder.jp/contests/abc389/tasks/abc389_g)
+- [ABC391 G「Many LCS」](https://atcoder.jp/contests/abc391/tasks/abc391_g)
+- [ABC403 F「Shortest One Formula」](https://atcoder.jp/contests/abc403/tasks/abc403_f)
+- [ABC416 G「Concat (1st)」](https://atcoder.jp/contests/abc416/tasks/abc416_g)
 - [ABC418 G「Binary Operation」](https://atcoder.jp/contests/abc418/tasks/abc418_g)
+- [ABC422 F「Eat and Ride」](https://atcoder.jp/contests/abc422/tasks/abc422_f)
 - [ABC427 E「Wind Cleaning」](https://atcoder.jp/contests/abc427/tasks/abc427_e)
 - [ABC435 F「Cat exercise」](https://atcoder.jp/contests/abc435/tasks/abc435_f)
+- [ABC440 G「Haunted House」](https://atcoder.jp/contests/abc440/tasks/abc440_g)
+- [ABC450 F「Strongly Connected 2」](https://atcoder.jp/contests/abc450/tasks/abc450_f)
 - [ABC457 F「Second Gap」](https://atcoder.jp/contests/abc457/tasks/abc457_f)
 
 ## 根拠
@@ -95,4 +95,4 @@ sidebar:
 - [ABC227 E 公式問題文](https://atcoder.jp/contests/abc227/tasks/abc227_e)
 - [ABC227 E 公式解説](https://atcoder.jp/contests/abc227/editorial/2908)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-dp-state-design`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-dp-state-design`

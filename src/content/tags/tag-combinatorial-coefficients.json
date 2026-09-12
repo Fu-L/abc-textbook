@@ -33,6 +33,7 @@
   },
   "relatedTags": [],
   "learningOutcomeIds": [
+    "outcome-compute-binomial-by-lucas",
     "outcome-formulate-combinatorial-coefficients"
   ],
   "representativeProblemIds": [

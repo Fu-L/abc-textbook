@@ -34,7 +34,6 @@
   "problemIds": [
     "abc221-f",
     "abc222-f",
-    "abc267-f",
     "abc303-e",
     "abc361-e",
     "abc401-f",
@@ -46,10 +45,10 @@
     "abc428-e",
     "abc221-f",
     "abc401-f",
-    "abc361-e",
-    "abc267-f"
+    "abc361-e"
   ],
   "relatedProblemIds": [
+    "abc267-f",
     "abc460-f"
   ],
   "examples": [],
@@ -57,6 +56,6 @@
   "stageRank": 2,
   "difficultyRank": 1,
   "representativeRank": 5,
-  "globalIndex": 37,
+  "globalIndex": 32,
   "orderReason": "木を探索して基準点からの距離を求められることを前提に、一意経路から得る距離labelと、直径端点・中心が距離構造を代表する性質を学ぶ。"
 }

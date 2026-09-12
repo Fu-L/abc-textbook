@@ -3,7 +3,7 @@ title: "Trieで共有接頭辞を索引化する"
 description: "Trieで共有接頭辞を索引化するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 17
+  order: 16
 ---
 
 # Trieで共有接頭辞を索引化する
@@ -31,7 +31,6 @@ sidebar:
 1. [ABC287 E「Karuta」](https://atcoder.jp/contests/abc287/tasks/abc287_e)
 2. [ABC437 E「Sort Arrays」](https://atcoder.jp/contests/abc437/tasks/abc437_e)
 3. [ABC377 G「Edit to Match」](https://atcoder.jp/contests/abc377/tasks/abc377_g)
-4. [ABC353 E「Yet Another Sigma Problem」](https://atcoder.jp/contests/abc353/tasks/abc353_e)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -41,6 +40,7 @@ sidebar:
 
 - [ABC240 Ex「Sequence of Substrings」](https://atcoder.jp/contests/abc240/tasks/abc240_h)
 - [ABC268 G「Random Student ID」](https://atcoder.jp/contests/abc268/tasks/abc268_g)
+- [ABC353 E「Yet Another Sigma Problem」](https://atcoder.jp/contests/abc353/tasks/abc353_e)
 - [ABC403 E「Forbidden Prefix」](https://atcoder.jp/contests/abc403/tasks/abc403_e)
 
 ## 根拠
@@ -52,4 +52,4 @@ sidebar:
 - [ABC287 E 公式問題文](https://atcoder.jp/contests/abc287/tasks/abc287_e)
 - [ABC287 E 公式解説](https://atcoder.jp/contests/abc287/editorial/5609)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-trie-prefix`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-trie-prefix`

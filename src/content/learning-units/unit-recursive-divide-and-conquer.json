@@ -33,12 +33,16 @@
   "docPath": "src/content/docs/learn/modeling/recursive-divide-and-conquer.md",
   "problemIds": [
     "abc282-ex",
+    "abc304-g",
     "abc413-e",
+    "abc425-g",
     "abc426-g"
   ],
   "directProblemIds": [
     "abc282-ex",
     "abc413-e",
+    "abc304-g",
+    "abc425-g",
     "abc426-g"
   ],
   "relatedProblemIds": [
@@ -52,7 +56,6 @@
     "abc273-ex",
     "abc281-ex",
     "abc281-f",
-    "abc304-g",
     "abc317-ex",
     "abc331-g",
     "abc345-g",
@@ -62,14 +65,13 @@
     "abc381-g",
     "abc383-g",
     "abc385-g",
-    "abc425-g",
     "abc439-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 69,
-  "globalIndex": 139,
+  "globalIndex": 76,
   "orderReason": "pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

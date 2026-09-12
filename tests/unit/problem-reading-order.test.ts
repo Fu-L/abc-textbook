@@ -28,10 +28,10 @@ describe('problem reading order', () => {
       orderProblemsByPrerequisites([basic, advanced], [...skills].reverse(), [advanced.problemId]),
     ).toEqual([basic.problemId, advanced.problemId]);
   });
-  it('orders a direct probability formulation before a continuous-distribution application', () => {
+  it('does not force a smaller skill set ahead of a basic discrete probability DP', () => {
     expect(
-      orderProblemsByPrerequisites([problem('abc226-h'), problem('abc300-e')], skills),
-    ).toEqual(['abc300-e', 'abc226-h']);
+      orderProblemsByPrerequisites([problem('abc226-h'), problem('abc275-e', true)], skills),
+    ).toEqual(['abc275-e', 'abc226-h']);
   });
   it('uses representative rank and then stable ID only when mechanism and requirements tie', () => {
     expect(

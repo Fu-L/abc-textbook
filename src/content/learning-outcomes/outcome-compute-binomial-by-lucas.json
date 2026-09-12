@@ -1,0 +1,10 @@
+{
+  "id": "outcome-compute-binomial-by-lucas",
+  "statement": "素数pのもとでn,kをp進展開し、Lucasの定理 C(n,k)=∏C(n_i,k_i) mod pで、n≥pでも階乗の零除算を避けて計算できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc279-ex",
+    "tag-combinatorial-coefficients",
+    "unit-combinatorial-coefficients"
+  ]
+}

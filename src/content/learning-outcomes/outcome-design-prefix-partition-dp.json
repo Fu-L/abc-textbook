@@ -1,0 +1,17 @@
+{
+  "id": "outcome-design-prefix-partition-dp",
+  "statement": "列の最後のブロックを固定し、処理済みprefixの答えから次の切れ目へ遷移する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc230-f",
+    "abc262-ex",
+    "abc285-e",
+    "abc288-f",
+    "abc374-f",
+    "abc466-e",
+    "tag-dp-prefix-partition",
+    "unit-dp-prefix-partition"
+  ]
+}

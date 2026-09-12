@@ -3,7 +3,7 @@ title: "kinetic sorting・交差event順序更新"
 description: "kinetic sorting・交差event順序更新の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 203
+  order: 165
 ---
 
 # kinetic sorting・交差event順序更新
@@ -29,14 +29,9 @@ event・値順のオフライン走査で得た考え方と実装を再利用し
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC344 G「Points and Comparison」](https://atcoder.jp/contests/abc344/tasks/abc344_g)
+2. [ABC257 Ex「Dice Sum 2」](https://atcoder.jp/contests/abc257/tasks/abc257_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
-
-## 関連問題
-
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
-
-- [ABC257 Ex「Dice Sum 2」](https://atcoder.jp/contests/abc257/tasks/abc257_h)
 
 ## 根拠
 
@@ -45,4 +40,4 @@ event・値順のオフライン走査で得た考え方と実装を再利用し
 - [ABC344 G 公式解説](https://atcoder.jp/contests/abc344/editorial/9491)
 - [ABC344 G 公式問題文](https://atcoder.jp/contests/abc344/tasks/abc344_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-kinetic-order-maintenance`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-kinetic-order-maintenance`

@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa",
-    "acceptedAt": "2026-09-09T17:04:36.563Z"
+    "digest": "1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861",
+    "acceptedAt": "2026-09-12T10:48:30.232Z"
   },
   "taskIds": [
     "T047",
@@ -40,14 +40,14 @@
     "T049",
     "T050"
   ],
-  "problemReadingOrderReason": "必要なTag・Outcomeの前提を含む技能集合が真部分集合となる問題を先に置く。同時に置ける問題は、解法の基本性、前提の深さ、必要技能数、主技能の複合数、補助技能数の順で基礎形を優先する。同順位では代表問題順位、最後にProblem IDで決定する。難易度の独立した数値評価が未収集のため、contest番号や出題枠は難易度の代用にしない。",
+  "problemReadingOrderReason": "技能集合の包含は問題間の前提にしない。問題は、解法の基本性、前提の深さ、必要技能数、主技能の複合数、補助技能数の順で基礎形を優先する。同順位では代表問題順位、最後にProblem IDで決定する。難易度の独立した数値評価が未収集のため、contest番号や出題枠は難易度の代用にしない。",
   "counts": {
-    "tags": 197,
-    "learningOutcomes": 204,
-    "learningUnits": 220,
-    "learningDocuments": 220,
-    "directlyOwnedTags": 197,
-    "directlyOwnedLearningOutcomes": 204,
+    "tags": 201,
+    "learningOutcomes": 211,
+    "learningUnits": 226,
+    "learningDocuments": 226,
+    "directlyOwnedTags": 201,
+    "directlyOwnedLearningOutcomes": 211,
     "directlyPlacedProblems": 868,
     "placements": 868,
     "correctionImpacts": 12
@@ -63,12 +63,12 @@
     "materializationEvidence": "docs/verification/bootstrap/canonical-taxonomy-materialization.json"
   },
   "digests": {
-    "tags": "3de30fb449e4f240bce69ec3de35270a4545e47f0aed91e50b4bae10afe21766",
-    "learningOutcomes": "5f2693a1170c3142677c41ccffc4211f4a1b659b258cf039955122d1cc0bf77c",
-    "learningUnits": "ec1ab361c531879bd90a36002169907a4ab9b9e34a95ced270fa3a9e9af750f4",
-    "learningDocuments": "ed438db49d77b90227cb972ba5d7d4e05adbf571393c6f633b73526aefa3ad11",
-    "learningOrderDigest": "bbdb8a40b040675605b4f50000f663851fd36ab46eb54162bbe8c6ef3cf28ec2",
-    "problemPlacementPolicyDigest": "7475ccfe6f10324f57a34d84cb6b51428b261d2187225390ba5f1581df51fc5d"
+    "tags": "3f84800eac018a829633f30ee5db92079e95276e789b81f89518f6867013bb8a",
+    "learningOutcomes": "3832187f00debbdfd79135549bff75272581fccfa331162b1d61b136b3a75dc3",
+    "learningUnits": "622f4bff431d1621f41727d67fa0a86be6b52857ef866a80778e17594054e3d1",
+    "learningDocuments": "121006e5c233b30b9519facf2e92372eb7ca6d0389b99c219fcc1a876dd84bd7",
+    "learningOrderDigest": "f1efe2093cb09cf9055614382252581f9d0b7f30b5138d24b89da2bbd6eeef22",
+    "problemPlacementPolicyDigest": "bd7cf3bb25d16f4d91a0dcec9e51c8e2c0ac761e1bd9dbffe91ef2cdd16887c9"
   },
-  "materializationDigest": "ae41869d03f7f9e977c902c35024212105fcd1b5ea04912afcdd3edda70297d9"
+  "materializationDigest": "b5122ae326876751526c260538ad424023059e3b110956cf9804921b9d2f4a5c"
 }

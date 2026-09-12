@@ -3,7 +3,7 @@ title: "subset zeta・Möbius変換"
 description: "subset zeta・Möbius変換の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 183
+  order: 126
 ---
 
 # subset zeta・Möbius変換
@@ -35,14 +35,9 @@ Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転�
 1. [ABC423 F「Loud Cicada」](https://atcoder.jp/contests/abc423/tasks/abc423_f)
 2. [ABC295 Ex「E or m」](https://atcoder.jp/contests/abc295/tasks/abc295_h)
 3. [ABC349 F「Subsequence LCM」](https://atcoder.jp/contests/abc349/tasks/abc349_f)
+4. [ABC215 H「Cabbage Master」](https://atcoder.jp/contests/abc215/tasks/abc215_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
-
-## 関連問題
-
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
-
-- [ABC215 H「Cabbage Master」](https://atcoder.jp/contests/abc215/tasks/abc215_h)
 
 ## 根拠
 
@@ -53,4 +48,4 @@ Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転�
 - [ABC295 H 公式解説](https://atcoder.jp/contests/abc295/editorial/6036)
 - [ABC295 H 公式問題文](https://atcoder.jp/contests/abc295/tasks/abc295_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-subset-transforms`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-subset-transforms`

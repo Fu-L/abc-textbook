@@ -3,7 +3,7 @@ title: "Fingerprintで列・集合・式の同値性を比較する"
 description: "Fingerprintで列・集合・式の同値性を比較するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 63
+  order: 85
 ---
 
 # Fingerprintで列・集合・式の同値性を比較する
@@ -39,7 +39,6 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC274 Ex「XOR Sum of Arrays」](https://atcoder.jp/contests/abc274/tasks/abc274_h)
-- [ABC331 F「Palindrome Query」](https://atcoder.jp/contests/abc331/tasks/abc331_f)
 
 ## 根拠
 
@@ -48,4 +47,4 @@ sidebar:
 - [ABC331 F 公式解説](https://atcoder.jp/contests/abc331/editorial/7820)
 - [ABC331 F 公式問題文](https://atcoder.jp/contests/abc331/tasks/abc331_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-string-hash`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-string-hash`

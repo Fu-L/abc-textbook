@@ -36,21 +36,21 @@
   "problemIds": [
     "abc218-f",
     "abc252-e",
-    "abc308-ex"
+    "abc308-ex",
+    "abc355-e"
   ],
   "directProblemIds": [
     "abc252-e",
     "abc308-ex",
-    "abc218-f"
-  ],
-  "relatedProblemIds": [
+    "abc218-f",
     "abc355-e"
   ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 92,
-  "globalIndex": 198,
+  "globalIndex": 157,
   "orderReason": "最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。"
 }

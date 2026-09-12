@@ -32,36 +32,32 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/two-pointers-window.md",
   "problemIds": [
-    "abc250-f",
-    "abc258-e",
+    "abc215-f",
     "abc260-e",
     "abc294-e",
-    "abc337-f",
-    "abc370-f",
-    "abc444-e",
-    "abc452-f"
+    "abc337-f"
   ],
   "directProblemIds": [
     "abc260-e",
     "abc294-e",
     "abc337-f",
-    "abc250-f",
-    "abc444-e",
-    "abc370-f",
-    "abc258-e",
-    "abc452-f"
+    "abc215-f"
   ],
   "relatedProblemIds": [
-    "abc215-f",
+    "abc250-f",
+    "abc258-e",
     "abc281-e",
     "abc290-e",
     "abc300-g",
     "abc314-g",
     "abc365-g",
     "abc366-e",
+    "abc370-f",
     "abc380-g",
     "abc388-g",
     "abc431-f",
+    "abc444-e",
+    "abc452-f",
     "abc455-g"
   ],
   "examples": [],
@@ -69,6 +65,6 @@
   "stageRank": 1,
   "difficultyRank": 0,
   "representativeRank": 1,
-  "globalIndex": 13,
+  "globalIndex": 3,
   "orderReason": "窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。"
 }

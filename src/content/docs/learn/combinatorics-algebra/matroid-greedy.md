@@ -3,7 +3,7 @@ title: "matroid greedy"
 description: "matroid greedyの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 196
+  order: 154
 ---
 
 # matroid greedy
@@ -37,4 +37,4 @@ Matroidの独立集合族と交換公理を定義した後、重み順greedyが�
 - [ABC236 F 公式解説](https://atcoder.jp/contests/abc236/editorial/3287)
 - [ABC236 F 公式問題文](https://atcoder.jp/contests/abc236/tasks/abc236_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-matroid-greedy`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-matroid-greedy`

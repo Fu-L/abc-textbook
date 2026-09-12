@@ -3,7 +3,7 @@ title: "確率過程・期待値DP"
 description: "確率過程・期待値DPの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 52
+  order: 42
 ---
 
 # 確率過程・期待値DP
@@ -56,31 +56,26 @@ max(E[d],V_{r-1})では、目を観測する前に一律に停止・続行を決
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC300 E「Dice Product 3」](https://atcoder.jp/contests/abc300/tasks/abc300_e)
-2. [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
-3. [ABC266 E「Throwing the Die」](https://atcoder.jp/contests/abc266/tasks/abc266_e)
-4. [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e)
-5. [ABC382 E「Expansion Packs」](https://atcoder.jp/contests/abc382/tasks/abc382_e)
-6. [ABC450 G「Random Subtraction」](https://atcoder.jp/contests/abc450/tasks/abc450_g)
-7. [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
-8. [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h)
-9. [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h)
-10. [ABC332 F「Random Update Query」](https://atcoder.jp/contests/abc332/tasks/abc332_f)
-11. [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
-12. [ABC314 E「Roulettes」](https://atcoder.jp/contests/abc314/tasks/abc314_e)
-13. [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e)
-14. [ABC342 F「Black Jack」](https://atcoder.jp/contests/abc342/tasks/abc342_f)
-15. [ABC402 E「Payment Required」](https://atcoder.jp/contests/abc402/tasks/abc402_e)
-16. [ABC404 F「Lost and Pound」](https://atcoder.jp/contests/abc404/tasks/abc404_f)
-17. [ABC421 E「Yacht」](https://atcoder.jp/contests/abc421/tasks/abc421_e)
-18. [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h)
-19. [ABC298 E「Unfair Sugoroku」](https://atcoder.jp/contests/abc298/tasks/abc298_e)
-20. [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e)
-21. [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e)
-22. [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
-23. [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
-24. [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f)
-25. [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
+1. [ABC298 E「Unfair Sugoroku」](https://atcoder.jp/contests/abc298/tasks/abc298_e)
+2. [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e)
+3. [ABC300 E「Dice Product 3」](https://atcoder.jp/contests/abc300/tasks/abc300_e)
+4. [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
+5. [ABC266 E「Throwing the Die」](https://atcoder.jp/contests/abc266/tasks/abc266_e)
+6. [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e)
+7. [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e)
+8. [ABC382 E「Expansion Packs」](https://atcoder.jp/contests/abc382/tasks/abc382_e)
+9. [ABC450 G「Random Subtraction」](https://atcoder.jp/contests/abc450/tasks/abc450_g)
+10. [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
+11. [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
+12. [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
+13. [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
+14. [ABC310 F「Make 10 Again」](https://atcoder.jp/contests/abc310/tasks/abc310_f)
+15. [ABC314 E「Roulettes」](https://atcoder.jp/contests/abc314/tasks/abc314_e)
+16. [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e)
+17. [ABC402 E「Payment Required」](https://atcoder.jp/contests/abc402/tasks/abc402_e)
+18. [ABC404 F「Lost and Pound」](https://atcoder.jp/contests/abc404/tasks/abc404_f)
+19. [ABC421 E「Yacht」](https://atcoder.jp/contests/abc421/tasks/abc421_e)
+20. [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -88,11 +83,16 @@ max(E[d],V_{r-1})では、目を観測する前に一律に停止・続行を決
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
+- [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
 - [ABC249 Ex「Dye Color」](https://atcoder.jp/contests/abc249/tasks/abc249_h)
+- [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h)
 - [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g)
-- [ABC310 F「Make 10 Again」](https://atcoder.jp/contests/abc310/tasks/abc310_f)
+- [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h)
+- [ABC332 F「Random Update Query」](https://atcoder.jp/contests/abc332/tasks/abc332_f)
+- [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f)
+- [ABC342 F「Black Jack」](https://atcoder.jp/contests/abc342/tasks/abc342_f)
 - [ABC409 G「Accumulation of Wealth」](https://atcoder.jp/contests/abc409/tasks/abc409_g)
+- [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
 
 ## 根拠
 
@@ -103,4 +103,4 @@ max(E[d],V_{r-1})では、目を観測する前に一律に停止・続行を決
 - [ABC242 H 公式解説](https://atcoder.jp/contests/abc242/editorial/3523)
 - [ABC242 H 公式問題文](https://atcoder.jp/contests/abc242/tasks/abc242_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-dp-stochastic`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-dp-stochastic`

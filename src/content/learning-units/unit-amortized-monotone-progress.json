@@ -33,10 +33,14 @@
   "docPath": "src/content/docs/learn/modeling/amortized-monotone-progress.md",
   "problemIds": [
     "abc217-e",
-    "abc256-ex",
     "abc302-e",
+    "abc305-f",
+    "abc319-g",
     "abc368-g",
     "abc403-e",
+    "abc421-f",
+    "abc426-f",
+    "abc427-g",
     "abc428-f",
     "abc466-f"
   ],
@@ -46,28 +50,28 @@
     "abc217-e",
     "abc403-e",
     "abc428-f",
+    "abc421-f",
+    "abc427-g",
+    "abc305-f",
+    "abc426-f",
     "abc368-g",
-    "abc256-ex"
+    "abc319-g"
   ],
   "relatedProblemIds": [
     "abc255-ex",
+    "abc256-ex",
     "abc295-g",
-    "abc305-f",
     "abc307-f",
     "abc312-ex",
-    "abc319-g",
     "abc417-g",
-    "abc421-f",
-    "abc426-f",
-    "abc427-g",
     "abc430-g",
     "abc435-e"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 66,
-  "globalIndex": 134,
+  "globalIndex": 71,
   "orderReason": "要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

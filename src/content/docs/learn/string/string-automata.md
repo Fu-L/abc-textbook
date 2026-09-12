@@ -3,7 +3,7 @@ title: "禁止・要求patternを有限状態へ圧縮する"
 description: "禁止・要求patternを有限状態へ圧縮するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 67
+  order: 87
 ---
 
 # 禁止・要求patternを有限状態へ圧縮する
@@ -40,6 +40,7 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
+- [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
 - [ABC301 F「Anti-DDoS」](https://atcoder.jp/contests/abc301/tasks/abc301_f)
 - [ABC305 G「Banned Substrings」](https://atcoder.jp/contests/abc305/tasks/abc305_g)
 - [ABC418 G「Binary Operation」](https://atcoder.jp/contests/abc418/tasks/abc418_g)
@@ -53,4 +54,4 @@ sidebar:
 - [ABC301 F 公式解説](https://atcoder.jp/contests/abc301/editorial/6331)
 - [ABC301 F 公式問題文](https://atcoder.jp/contests/abc301/tasks/abc301_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-string-automata`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-string-automata`

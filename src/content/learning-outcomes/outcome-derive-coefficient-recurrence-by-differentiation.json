@@ -1,0 +1,13 @@
+{
+  "id": "outcome-derive-coefficient-recurrence-by-differentiation",
+  "statement": "母関数の微分恒等式を作り、次数ごとの係数比較から初期値・分母条件を持つ漸化式を導ける。",
+  "prerequisiteOutcomeIds": [
+    "outcome-encode-counting-by-generating-function"
+  ],
+  "scopeIds": [
+    "abc222-h",
+    "abc230-h",
+    "tag-generating-function-coefficients",
+    "unit-generating-function-coefficients"
+  ]
+}

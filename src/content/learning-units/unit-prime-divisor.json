@@ -40,7 +40,8 @@
     "abc400-e",
     "abc412-e",
     "abc420-g",
-    "abc445-e"
+    "abc445-e",
+    "abc461-f"
   ],
   "directProblemIds": [
     "abc445-e",
@@ -51,7 +52,8 @@
     "abc412-e",
     "abc420-g",
     "abc227-g",
-    "abc322-g"
+    "abc322-g",
+    "abc461-f"
   ],
   "relatedProblemIds": [
     "abc212-g",
@@ -67,14 +69,13 @@
     "abc363-f",
     "abc368-f",
     "abc403-f",
-    "abc428-g",
-    "abc461-f"
+    "abc428-g"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 2,
-  "globalIndex": 43,
+  "globalIndex": 36,
   "orderReason": "初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。"
 }

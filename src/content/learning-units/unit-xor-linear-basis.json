@@ -34,22 +34,23 @@
   "problemIds": [
     "abc223-h",
     "abc249-g",
-    "abc283-g"
+    "abc283-g",
+    "abc451-g"
   ],
   "directProblemIds": [
     "abc249-g",
     "abc283-g",
-    "abc223-h"
+    "abc223-h",
+    "abc451-g"
   ],
   "relatedProblemIds": [
-    "abc236-f",
-    "abc451-g"
+    "abc236-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 79,
-  "globalIndex": 163,
+  "globalIndex": 99,
   "orderReason": "整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

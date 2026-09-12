@@ -35,7 +35,6 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/relaxed-convolution.md",
   "problemIds": [
     "abc213-h",
-    "abc230-h",
     "abc281-ex",
     "abc315-ex",
     "abc357-g"
@@ -43,16 +42,17 @@
   "directProblemIds": [
     "abc213-h",
     "abc315-ex",
-    "abc230-h",
-    "abc281-ex",
-    "abc357-g"
+    "abc357-g",
+    "abc281-ex"
   ],
-  "relatedProblemIds": [],
+  "relatedProblemIds": [
+    "abc230-h"
+  ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 96,
-  "globalIndex": 209,
+  "globalIndex": 174,
   "orderReason": "畳み込み・相互相関で得た考え方と実装を再利用し、Relaxed・online convolutionの発動条件・正当化・境界を重複なく学ぶ。"
 }

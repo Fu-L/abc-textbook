@@ -3,7 +3,7 @@ title: "Relaxed・online convolution"
 description: "Relaxed・online convolutionの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 209
+  order: 174
 ---
 
 # Relaxed・online convolution
@@ -30,11 +30,16 @@ sidebar:
 
 1. [ABC213 H「Stroll」](https://atcoder.jp/contests/abc213/tasks/abc213_h)
 2. [ABC315 Ex「Typical Convolution Problem」](https://atcoder.jp/contests/abc315/tasks/abc315_h)
-3. [ABC230 H「Bullion」](https://atcoder.jp/contests/abc230/tasks/abc230_h)
+3. [ABC357 G「Stair-like Grid」](https://atcoder.jp/contests/abc357/tasks/abc357_g)
 4. [ABC281 Ex「Alchemy」](https://atcoder.jp/contests/abc281/tasks/abc281_h)
-5. [ABC357 G「Stair-like Grid」](https://atcoder.jp/contests/abc357/tasks/abc357_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+
+## 関連問題
+
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
+
+- [ABC230 H「Bullion」](https://atcoder.jp/contests/abc230/tasks/abc230_h)
 
 ## 根拠
 
@@ -45,4 +50,4 @@ sidebar:
 - [ABC281 H 公式解説](https://atcoder.jp/contests/abc281/editorial/5371)
 - [ABC281 H 公式問題文](https://atcoder.jp/contests/abc281/tasks/abc281_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-relaxed-convolution`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-relaxed-convolution`

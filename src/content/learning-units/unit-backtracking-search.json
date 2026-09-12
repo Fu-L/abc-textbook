@@ -43,6 +43,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 78,
-  "globalIndex": 87,
+  "globalIndex": 96,
   "orderReason": "再帰へ入る直前に局所選択を反映し、復帰時に必ずundoして現在pathだけの制約を保ちながら探索木を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

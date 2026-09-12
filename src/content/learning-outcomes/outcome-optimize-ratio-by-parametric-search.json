@@ -5,6 +5,8 @@
     "outcome-prove-and-search-threshold"
   ],
   "scopeIds": [
+    "abc236-e",
+    "abc294-f",
     "abc324-f",
     "tag-fractional-parametric-search",
     "unit-fractional-parametric-search"

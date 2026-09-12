@@ -3,7 +3,7 @@ title: "巡回群を指数化して数える"
 description: "巡回群を指数化して数えるの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 75
+  order: 59
 ---
 
 # 巡回群を指数化して数える
@@ -28,10 +28,16 @@ sidebar:
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC335 G「Discrete Logarithm Problems」](https://atcoder.jp/contests/abc335/tasks/abc335_g)
-2. [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+
+## 関連問題
+
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
+
+- [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
+- [ABC335 G「Discrete Logarithm Problems」](https://atcoder.jp/contests/abc335/tasks/abc335_g)
 
 ## 根拠
 
@@ -40,4 +46,4 @@ sidebar:
 - [ABC335 G 公式解説](https://atcoder.jp/contests/abc335/editorial/9017)
 - [ABC335 G 公式問題文](https://atcoder.jp/contests/abc335/tasks/abc335_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-cyclic-group-exponent-counting`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-cyclic-group-exponent-counting`

@@ -36,18 +36,16 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/integer-boundary-blocks.md",
   "problemIds": [
-    "abc230-e",
-    "abc239-ex",
-    "abc240-f",
     "abc253-g",
     "abc283-ex",
     "abc293-f",
-    "abc318-f",
+    "abc313-g",
+    "abc315-g",
     "abc356-e",
     "abc402-g",
     "abc414-e",
-    "abc429-g",
     "abc443-g",
+    "abc444-f",
     "abc452-e"
   ],
   "directProblemIds": [
@@ -56,30 +54,30 @@
     "abc402-g",
     "abc414-e",
     "abc443-g",
-    "abc230-e",
     "abc293-f",
     "abc283-ex",
     "abc452-e",
-    "abc240-f",
-    "abc429-g",
-    "abc239-ex",
-    "abc318-f"
+    "abc313-g",
+    "abc315-g",
+    "abc444-f"
   ],
   "relatedProblemIds": [
     "abc216-e",
+    "abc230-e",
+    "abc239-ex",
+    "abc240-f",
     "abc243-g",
-    "abc313-g",
-    "abc315-g",
+    "abc318-f",
     "abc361-f",
     "abc370-g",
     "abc372-g",
-    "abc444-f"
+    "abc429-g"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 3,
-  "globalIndex": 49,
+  "globalIndex": 40,
   "orderReason": "floorや整数根の値が変わる境界を正確に求め、同値な整数範囲をまとめて処理する。"
 }

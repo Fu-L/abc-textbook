@@ -3,7 +3,7 @@ title: "一次元凸・単峰最適化"
 description: "一次元凸・単峰最適化の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 127
+  order: 67
 ---
 
 # 一次元凸・単峰最適化
@@ -30,6 +30,11 @@ sidebar:
 
 1. [ABC224 G「Roll or Increment」](https://atcoder.jp/contests/abc224/tasks/abc224_g)
 2. [ABC314 Ex「Disk and Segments」](https://atcoder.jp/contests/abc314/tasks/abc314_h)
+3. [ABC229 G「Longest Y」](https://atcoder.jp/contests/abc229/tasks/abc229_g)
+4. [ABC462 E「Alternating Costs」](https://atcoder.jp/contests/abc462/tasks/abc462_e)
+5. [ABC240 F「Sum Sum Max」](https://atcoder.jp/contests/abc240/tasks/abc240_f)
+6. [ABC330 F「Minimize Bounding Square」](https://atcoder.jp/contests/abc330/tasks/abc330_f)
+7. [ABC459 G「Golf 2」](https://atcoder.jp/contests/abc459/tasks/abc459_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -37,12 +42,7 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC229 G「Longest Y」](https://atcoder.jp/contests/abc229/tasks/abc229_g)
-- [ABC240 F「Sum Sum Max」](https://atcoder.jp/contests/abc240/tasks/abc240_f)
 - [ABC263 G「Erasing Prime Pairs」](https://atcoder.jp/contests/abc263/tasks/abc263_g)
-- [ABC330 F「Minimize Bounding Square」](https://atcoder.jp/contests/abc330/tasks/abc330_f)
-- [ABC459 G「Golf 2」](https://atcoder.jp/contests/abc459/tasks/abc459_g)
-- [ABC462 E「Alternating Costs」](https://atcoder.jp/contests/abc462/tasks/abc462_e)
 
 ## 根拠
 
@@ -53,4 +53,4 @@ sidebar:
 - [ABC240 F 公式解説](https://atcoder.jp/contests/abc240/editorial/3422)
 - [ABC240 F 公式問題文](https://atcoder.jp/contests/abc240/tasks/abc240_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-basic-convex-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-basic-convex-optimization`

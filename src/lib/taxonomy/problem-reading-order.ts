@@ -1,13 +1,28 @@
 import { deterministicTopologicalOrder } from '../validation/validate.js';
 
 export const PROBLEM_READING_ORDER_REASON =
-  '必要なTag・Outcomeの前提を含む技能集合が真部分集合となる問題を先に置く。同時に置ける問題は、解法の基本性、前提の深さ、必要技能数、主技能の複合数、補助技能数の順で基礎形を優先する。同順位では代表問題順位、最後にProblem IDで決定する。難易度の独立した数値評価が未収集のため、contest番号や出題枠は難易度の代用にしない。';
+  '技能集合の包含は問題間の前提にしない。問題は、解法の基本性、前提の深さ、必要技能数、主技能の複合数、補助技能数の順で基礎形を優先する。同順位では代表問題順位、最後にProblem IDで決定する。難易度の独立した数値評価が未収集のため、contest番号や出題枠は難易度の代用にしない。';
 
 /** Reviewed mechanism complexity, independent of difficulty or an example/assessment role.
  * Unlisted Problems use the ordinary level; these overrides distinguish direct formulations
  * from continuous distributions, mixed transforms, or additional counting decompositions.
  */
 export const PROBLEM_MECHANISM_RANK: Readonly<Record<string, number>> = {
+  'abc367-e': -2,
+  'abc216-f': -2,
+  'abc314-f': -2,
+  'abc294-g': -2,
+  'abc354-e': -2,
+  'abc275-e': -1,
+  'abc298-e': -1,
+  'abc273-f': -1,
+  'abc236-e': -1,
+  'abc327-e': -1,
+  'abc321-f': 2,
+  'abc235-ex': 2,
+  'abc298-ex': 2,
+  'abc255-g': 2,
+  'abc219-h': 2,
   'abc300-e': 0,
   'abc263-e': 0,
   'abc266-e': 0,
@@ -34,7 +49,7 @@ interface ReadingProblem {
   readonly supportingOutcomeIds: readonly string[];
 }
 
-/** Strict prerequisite-set inclusion defines precedence; no order is inferred from contest date. */
+/** Editorial mechanism ranks precede complexity hints; skill inclusion is not precedence. */
 export const orderProblemsByPrerequisites = (
   problems: readonly ReadingProblem[],
   skills: readonly Skill[],
@@ -70,13 +85,7 @@ export const orderProblemsByPrerequisites = (
   });
   const nodes = entries.map((entry) => ({
     id: entry.problem.problemId,
-    prerequisiteIds: entries
-      .filter(
-        (other) =>
-          other.required.size < entry.required.size &&
-          [...other.required].every((id) => entry.required.has(id)),
-      )
-      .map(({ problem }) => problem.problemId),
+    prerequisiteIds: [],
     entry,
   }));
   return deterministicTopologicalOrder(nodes, ({ entry }) => {

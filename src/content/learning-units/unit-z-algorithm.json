@@ -34,23 +34,25 @@
   "problemIds": [
     "abc257-g",
     "abc284-f",
-    "abc430-e"
+    "abc343-g",
+    "abc430-e",
+    "abc434-f"
   ],
   "directProblemIds": [
     "abc284-f",
     "abc430-e",
-    "abc257-g"
+    "abc257-g",
+    "abc434-f",
+    "abc343-g"
   ],
   "relatedProblemIds": [
-    "abc312-ex",
-    "abc343-g",
-    "abc434-f"
+    "abc312-ex"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 71,
-  "globalIndex": 141,
+  "globalIndex": 79,
   "orderReason": "各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -30,6 +30,8 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/modular-product-foundations.md",
   "problemIds": [
+    "abc276-f",
+    "abc310-g",
     "abc411-e"
   ],
   "directProblemIds": [],
@@ -57,7 +59,6 @@
     "abc270-g",
     "abc271-g",
     "abc275-e",
-    "abc276-f",
     "abc277-g",
     "abc280-e",
     "abc282-e",
@@ -73,7 +74,6 @@
     "abc303-ex",
     "abc304-f",
     "abc310-f",
-    "abc310-g",
     "abc314-f",
     "abc321-g",
     "abc323-e",

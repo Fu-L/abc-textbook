@@ -32,19 +32,19 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/kinetic-order-maintenance.md",
   "problemIds": [
+    "abc257-ex",
     "abc344-g"
   ],
   "directProblemIds": [
-    "abc344-g"
-  ],
-  "relatedProblemIds": [
+    "abc344-g",
     "abc257-ex"
   ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 94,
-  "globalIndex": 203,
+  "globalIndex": 165,
   "orderReason": "event・値順のオフライン走査で得た考え方と実装を再利用し、kinetic sorting・交差event順序更新の発動条件・正当化・境界を重複なく学ぶ。"
 }

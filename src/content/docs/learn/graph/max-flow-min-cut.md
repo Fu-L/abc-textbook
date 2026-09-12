@@ -3,7 +3,7 @@ title: "最大流・最小カット"
 description: "最大流・最小カットの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 180
+  order: 124
 ---
 
 # 最大流・最小カット
@@ -37,6 +37,7 @@ sidebar:
 7. [ABC263 G「Erasing Prime Pairs」](https://atcoder.jp/contests/abc263/tasks/abc263_g)
 8. [ABC397 G「Maximize Distance」](https://atcoder.jp/contests/abc397/tasks/abc397_g)
 9. [ABC332 G「Not Too Many Balls」](https://atcoder.jp/contests/abc332/tasks/abc332_g)
+10. [ABC227 H「Eat Them All」](https://atcoder.jp/contests/abc227/tasks/abc227_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -44,7 +45,6 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC227 H「Eat Them All」](https://atcoder.jp/contests/abc227/tasks/abc227_h)
 - [ABC285 G「Tatami」](https://atcoder.jp/contests/abc285/tasks/abc285_g)
 - [ABC354 G「Select Strings」](https://atcoder.jp/contests/abc354/tasks/abc354_g)
 - [ABC413 G「Big Banned Grid」](https://atcoder.jp/contests/abc413/tasks/abc413_g)
@@ -58,4 +58,4 @@ sidebar:
 - [ABC239 G 公式解説](https://atcoder.jp/contests/abc239/editorial/3393)
 - [ABC239 G 公式問題文](https://atcoder.jp/contests/abc239/tasks/abc239_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-max-flow-min-cut`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-max-flow-min-cut`

@@ -51,6 +51,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 93,
-  "globalIndex": 107,
+  "globalIndex": 162,
   "orderReason": "一次関数の候補を傾き・交点順に管理し、各query点で最小または最大となる直線を選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

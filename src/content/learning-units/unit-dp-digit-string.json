@@ -38,6 +38,7 @@
     "abc305-g",
     "abc317-f",
     "abc336-e",
+    "abc391-g",
     "abc406-e",
     "abc418-g",
     "abc465-e"
@@ -45,7 +46,6 @@
   "directProblemIds": [],
   "relatedProblemIds": [
     "abc228-g",
-    "abc391-g",
     "abc419-f",
     "abc458-f"
   ],
@@ -54,6 +54,6 @@
   "stageRank": 3,
   "difficultyRank": 2,
   "representativeRank": 3,
-  "globalIndex": 71,
+  "globalIndex": 103,
   "orderReason": "状態設計を土台に、接頭辞から決まる有限統計を更新するという共通像を作り、数値上限の桁DPと有限automaton DPの境界を比較する。"
 }

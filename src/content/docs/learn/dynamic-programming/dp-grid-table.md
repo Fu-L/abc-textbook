@@ -3,7 +3,7 @@ title: "グリッド・多次元表の局所DPを設計する"
 description: "グリッド・多次元表の局所DPを設計するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 31
+  order: 29
 ---
 
 # グリッド・多次元表の局所DPを設計する
@@ -31,6 +31,9 @@ sidebar:
 1. [ABC415 E「Hungry Takahashi」](https://atcoder.jp/contests/abc415/tasks/abc415_e)
 2. [ABC443 E「Climbing Silver」](https://atcoder.jp/contests/abc443/tasks/abc443_e)
 3. [ABC311 E「Defect-free Squares」](https://atcoder.jp/contests/abc311/tasks/abc311_e)
+4. [ABC227 F「Treasure Hunting」](https://atcoder.jp/contests/abc227/tasks/abc227_f)
+5. [ABC464 E「Fill-Rect Query」](https://atcoder.jp/contests/abc464/tasks/abc464_e)
+6. [ABC347 F「Non-overlapping Squares」](https://atcoder.jp/contests/abc347/tasks/abc347_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -39,10 +42,7 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC221 H「Count Multiset」](https://atcoder.jp/contests/abc221/tasks/abc221_h)
-- [ABC227 F「Treasure Hunting」](https://atcoder.jp/contests/abc227/tasks/abc227_f)
-- [ABC347 F「Non-overlapping Squares」](https://atcoder.jp/contests/abc347/tasks/abc347_f)
 - [ABC358 G「AtCoder Tour」](https://atcoder.jp/contests/abc358/tasks/abc358_g)
-- [ABC464 E「Fill-Rect Query」](https://atcoder.jp/contests/abc464/tasks/abc464_e)
 
 ## 根拠
 
@@ -53,4 +53,4 @@ sidebar:
 - [ABC311 E 公式問題文](https://atcoder.jp/contests/abc311/tasks/abc311_e)
 - [ABC311 E 公式解説](https://atcoder.jp/contests/abc311/editorial/6819)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-dp-grid-table`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-dp-grid-table`

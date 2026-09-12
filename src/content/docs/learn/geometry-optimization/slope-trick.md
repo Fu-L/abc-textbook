@@ -3,7 +3,7 @@ title: "slope trick"
 description: "slope trickの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 190
+  order: 135
 ---
 
 # slope trick
@@ -30,16 +30,11 @@ sidebar:
 
 1. [ABC217 H「Snuketoon」](https://atcoder.jp/contests/abc217/tasks/abc217_h)
 2. [ABC250 G「Stonks」](https://atcoder.jp/contests/abc250/tasks/abc250_g)
-3. [ABC406 G「Travelling Salesman Problem」](https://atcoder.jp/contests/abc406/tasks/abc406_g)
+3. [ABC458 G「Children Yearn for the Evil Kindergarten」](https://atcoder.jp/contests/abc458/tasks/abc458_g)
+4. [ABC406 G「Travelling Salesman Problem」](https://atcoder.jp/contests/abc406/tasks/abc406_g)
+5. [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
-
-## 関連問題
-
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
-
-- [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
-- [ABC458 G「Children Yearn for the Evil Kindergarten」](https://atcoder.jp/contests/abc458/tasks/abc458_g)
 
 ## 根拠
 
@@ -50,4 +45,4 @@ sidebar:
 - [ABC275 H 公式解説](https://atcoder.jp/contests/abc275/editorial/5128)
 - [ABC275 H 公式問題文](https://atcoder.jp/contests/abc275/tasks/abc275_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-slope-trick`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-slope-trick`

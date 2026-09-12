@@ -3,7 +3,7 @@ title: "鏡像法・reflection principle"
 description: "鏡像法・reflection principleの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 103
+  order: 148
 ---
 
 # 鏡像法・reflection principle
@@ -37,4 +37,4 @@ sidebar:
 - [ABC309 H 公式解説](https://atcoder.jp/contests/abc309/editorial/6751)
 - [ABC309 H 公式問題文](https://atcoder.jp/contests/abc309/tasks/abc309_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-reflection-principle`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-reflection-principle`

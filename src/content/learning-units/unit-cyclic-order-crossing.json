@@ -34,21 +34,23 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md",
   "problemIds": [
-    "abc338-e"
+    "abc263-ex",
+    "abc338-e",
+    "abc424-f"
   ],
   "directProblemIds": [
-    "abc338-e"
+    "abc338-e",
+    "abc424-f",
+    "abc263-ex"
   ],
   "relatedProblemIds": [
-    "abc263-ex",
-    "abc405-f",
-    "abc424-f"
+    "abc405-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
+  "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 82,
-  "globalIndex": 170,
+  "globalIndex": 111,
   "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。"
 }

@@ -3,7 +3,7 @@ title: "分離可能線形変換・Walsh–Hadamard変換"
 description: "分離可能線形変換・Walsh–Hadamard変換の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 185
+  order: 129
 ---
 
 # 分離可能線形変換・Walsh–Hadamard変換
@@ -29,8 +29,9 @@ Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolu
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC288 G「3^N Minesweeper」](https://atcoder.jp/contests/abc288/tasks/abc288_g)
-2. [ABC367 G「Sum of (XOR^K or 0)」](https://atcoder.jp/contests/abc367/tasks/abc367_g)
-3. [ABC212 H「Nim Counting」](https://atcoder.jp/contests/abc212/tasks/abc212_h)
+2. [ABC220 H「Security Camera」](https://atcoder.jp/contests/abc220/tasks/abc220_h)
+3. [ABC367 G「Sum of (XOR^K or 0)」](https://atcoder.jp/contests/abc367/tasks/abc367_g)
+4. [ABC212 H「Nim Counting」](https://atcoder.jp/contests/abc212/tasks/abc212_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -38,7 +39,6 @@ Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolu
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC220 H「Security Camera」](https://atcoder.jp/contests/abc220/tasks/abc220_h)
 - [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h)
 
 ## 根拠
@@ -50,4 +50,4 @@ Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolu
 - [ABC265 H 公式解説](https://atcoder.jp/contests/abc265/editorial/4577)
 - [ABC265 H 公式問題文](https://atcoder.jp/contests/abc265/tasks/abc265_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-separable-linear-transform`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-separable-linear-transform`

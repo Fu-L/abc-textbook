@@ -1724,11 +1724,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       'tag-tree-aggregation-reroot': ['outcome-aggregate-rooted-tree'],
     },
   ),
-  'abc435-g': decision('outcome-design-range-update-action', [
-    ['typicalTechniques', 0, 'primary', 'tag-lazy-segment-action'],
-    ['typicalTechniques', 1, 'same_tag', 'tag-lazy-segment-action'],
-    ['typicalTechniques', 2, 'same_tag', 'tag-lazy-segment-action'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-lazy-segment-action'],
+  'abc435-g': decision('outcome-factor-and-accelerate-transitions', [
+    ['typicalTechniques', 0, 'primary', 'tag-dp-transition-acceleration'],
+    ['typicalTechniques', 1, 'same_tag', 'tag-dp-transition-acceleration'],
+    ['typicalTechniques', 2, 'same_tag', 'tag-dp-transition-acceleration'],
+    ['prerequisiteCandidates', 0, 'same_tag', 'tag-dp-transition-acceleration'],
   ]),
   'abc436-e': decision(
     'outcome-decompose-functional-graph',

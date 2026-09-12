@@ -3,7 +3,7 @@ title: "automaton上のDP・行列遷移"
 description: "automaton上のDP・行列遷移の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 164
+  order: 103
 ---
 
 # automaton上のDP・行列遷移
@@ -28,9 +28,10 @@ sidebar:
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC305 G「Banned Substrings」](https://atcoder.jp/contests/abc305/tasks/abc305_g)
-2. [ABC418 G「Binary Operation」](https://atcoder.jp/contests/abc418/tasks/abc418_g)
-3. [ABC301 F「Anti-DDoS」](https://atcoder.jp/contests/abc301/tasks/abc301_f)
+1. [ABC391 G「Many LCS」](https://atcoder.jp/contests/abc391/tasks/abc391_g)
+2. [ABC305 G「Banned Substrings」](https://atcoder.jp/contests/abc305/tasks/abc305_g)
+3. [ABC418 G「Binary Operation」](https://atcoder.jp/contests/abc418/tasks/abc418_g)
+4. [ABC301 F「Anti-DDoS」](https://atcoder.jp/contests/abc301/tasks/abc301_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -39,7 +40,6 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC228 G「Digits on Grid」](https://atcoder.jp/contests/abc228/tasks/abc228_g)
-- [ABC391 G「Many LCS」](https://atcoder.jp/contests/abc391/tasks/abc391_g)
 - [ABC419 F「All Included」](https://atcoder.jp/contests/abc419/tasks/abc419_f)
 - [ABC458 F「Critical Misread」](https://atcoder.jp/contests/abc458/tasks/abc458_f)
 
@@ -52,4 +52,4 @@ sidebar:
 - [ABC305 G 公式解説](https://atcoder.jp/contests/abc305/editorial/6540)
 - [ABC305 G 公式問題文](https://atcoder.jp/contests/abc305/tasks/abc305_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-automaton-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-automaton-dp`

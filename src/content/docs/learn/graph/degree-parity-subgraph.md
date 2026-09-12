@@ -3,7 +3,7 @@ title: "指定次数parityの部分グラフ構成"
 description: "指定次数parityの部分グラフ構成の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 159
+  order: 94
 ---
 
 # 指定次数parityの部分グラフ構成
@@ -37,4 +37,4 @@ Euler trail・circuitで得た考え方と実装を再利用し、指定次数pa
 - [ABC345 F 公式解説](https://atcoder.jp/contests/abc345/editorial/9558)
 - [ABC345 F 公式問題文](https://atcoder.jp/contests/abc345/tasks/abc345_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-degree-parity-subgraph`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-degree-parity-subgraph`

@@ -1,7 +1,7 @@
 {
   "id": "tag-bounded-enumeration",
   "name": "有界全列挙・有限case分解",
-  "definition": "制約、少数の生成パラメータ、固定選択数、有限な幾何caseから候補総数を直接界し、全候補を評価する。",
+  "definition": "制約や生成パラメータから候補総数を界すか、鳩ノ巣原理で成功前の失敗回数を界して探索する。",
   "parentId": "tag-model-reduction",
   "prerequisiteTagIds": [],
   "semanticSignature": {

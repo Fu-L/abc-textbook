@@ -3,7 +3,7 @@ title: "FPS演算・多点評価・合成を行う"
 description: "FPS演算・多点評価・合成を行うの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 215
+  order: 185
 ---
 
 # FPS演算・多点評価・合成を行う
@@ -26,8 +26,8 @@ sidebar:
 
 ## 下位単元
 
-- [多項式の多点評価・補間](/learn/combinatorics-algebra/polynomial-multipoint-evaluation/)
 - [Bostan–Mori・有理生成関数の係数抽出](/learn/combinatorics-algebra/bostan-mori/)
+- [多項式の多点評価・補間](/learn/combinatorics-algebra/polynomial-multipoint-evaluation/)
 - [FPS合成・power projection](/learn/combinatorics-algebra/fps-composition-power-projection/)
 
 ## 問題一覧
@@ -43,12 +43,6 @@ sidebar:
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-## 関連問題
-
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
-
-- [ABC381 G「Fibonacci Product」](https://atcoder.jp/contests/abc381/tasks/abc381_g)
-
 ## 根拠
 
 - [ABC260 H 公式解説](https://atcoder.jp/contests/abc260/editorial/4434)
@@ -58,4 +52,4 @@ sidebar:
 - [ABC289 H 公式解説](https://atcoder.jp/contests/abc289/editorial/5712)
 - [ABC289 H 公式問題文](https://atcoder.jp/contests/abc289/tasks/abc289_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-formal-power-series`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-formal-power-series`

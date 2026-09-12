@@ -3,7 +3,7 @@ title: "重心を分離点として木を再帰分解する"
 description: "重心を分離点として木を再帰分解するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 81
+  order: 64
 ---
 
 # 重心を分離点として木を再帰分解する
@@ -30,14 +30,9 @@ sidebar:
 
 1. [ABC291 Ex「Balanced Tree」](https://atcoder.jp/contests/abc291/tasks/abc291_h)
 2. [ABC359 G「Sum of Tree Distance」](https://atcoder.jp/contests/abc359/tasks/abc359_g)
+3. [ABC453 F「Avoid Division」](https://atcoder.jp/contests/abc453/tasks/abc453_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
-
-## 関連問題
-
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
-
-- [ABC453 F「Avoid Division」](https://atcoder.jp/contests/abc453/tasks/abc453_f)
 
 ## 根拠
 
@@ -48,4 +43,4 @@ sidebar:
 - [ABC453 F 公式解説](https://atcoder.jp/contests/abc453/editorial/18542)
 - [ABC453 F 公式問題文](https://atcoder.jp/contests/abc453/tasks/abc453_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-tree-balanced-separators`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-tree-balanced-separators`

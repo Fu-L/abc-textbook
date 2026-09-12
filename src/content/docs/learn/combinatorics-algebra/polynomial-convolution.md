@@ -3,7 +3,7 @@ title: "NTT・FFTで畳み込みと相互相関を求める"
 description: "NTT・FFTで畳み込みと相互相関を求めるの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 69
+  order: 51
 ---
 
 # NTT・FFTで畳み込みと相互相関を求める
@@ -45,7 +45,6 @@ ABC265 Exは通常の畳み込みだけの導入には用いない。Conwayの�
 
 1. [ABC291 G「OR Sum」](https://atcoder.jp/contests/abc291/tasks/abc291_g)
 2. [ABC307 Ex「Marquee」](https://atcoder.jp/contests/abc307/tasks/abc307_h)
-3. [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -53,14 +52,15 @@ ABC265 Exは通常の畳み込みだけの導入には用いない。Conwayの�
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
+- [ABC230 H「Bullion」](https://atcoder.jp/contests/abc230/tasks/abc230_h)
 - [ABC235 Ex「Painting Weighted Graph」](https://atcoder.jp/contests/abc235/tasks/abc235_h)
+- [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h)
 - [ABC278 Ex「make 1」](https://atcoder.jp/contests/abc278/tasks/abc278_h)
 - [ABC289 Ex「Trio」](https://atcoder.jp/contests/abc289/tasks/abc289_h)
 - [ABC300 Ex「Fibonacci: Revisited」](https://atcoder.jp/contests/abc300/tasks/abc300_h)
 - [ABC303 Ex「Constrained Tree Degree」](https://atcoder.jp/contests/abc303/tasks/abc303_h)
 - [ABC309 Ex「Simple Path Counting Problem」](https://atcoder.jp/contests/abc309/tasks/abc309_h)
 - [ABC317 Ex「Walk」](https://atcoder.jp/contests/abc317/tasks/abc317_h)
-- [ABC323 G「Inversion of Tree」](https://atcoder.jp/contests/abc323/tasks/abc323_g)
 - [ABC331 G「Collect Them All」](https://atcoder.jp/contests/abc331/tasks/abc331_g)
 - [ABC345 G「Sugoroku 5」](https://atcoder.jp/contests/abc345/tasks/abc345_g)
 - [ABC352 G「Socks 3」](https://atcoder.jp/contests/abc352/tasks/abc352_g)
@@ -82,4 +82,4 @@ ABC265 Exは通常の畳み込みだけの導入には用いない。Conwayの�
 - [ABC235 H 公式解説](https://atcoder.jp/contests/abc235/editorial/3250)
 - [ABC235 H 公式問題文](https://atcoder.jp/contests/abc235/tasks/abc235_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-polynomial-convolution`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-polynomial-convolution`

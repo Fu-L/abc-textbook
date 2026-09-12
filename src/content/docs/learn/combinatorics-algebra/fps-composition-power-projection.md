@@ -3,7 +3,7 @@ title: "FPS合成・power projection"
 description: "FPS合成・power projectionの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 218
+  order: 189
 ---
 
 # FPS合成・power projection
@@ -40,4 +40,4 @@ sidebar:
 - [ABC439 G 公式解説](https://atcoder.jp/contests/abc439/editorial/14995)
 - [ABC439 G 公式問題文](https://atcoder.jp/contests/abc439/tasks/abc439_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-fps-composition-power-projection`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-fps-composition-power-projection`

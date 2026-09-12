@@ -3,7 +3,7 @@ title: "半環行列・min-plus/max-min遷移"
 description: "半環行列・min-plus/max-min遷移の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 104
+  order: 149
 ---
 
 # 半環行列・min-plus/max-min遷移
@@ -30,14 +30,9 @@ sidebar:
 
 1. [ABC236 G「Good Vertices」](https://atcoder.jp/contests/abc236/tasks/abc236_g)
 2. [ABC445 F「Exactly K Steps 2」](https://atcoder.jp/contests/abc445/tasks/abc445_f)
+3. [ABC429 F「Shortest Path Query」](https://atcoder.jp/contests/abc429/tasks/abc429_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
-
-## 関連問題
-
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
-
-- [ABC429 F「Shortest Path Query」](https://atcoder.jp/contests/abc429/tasks/abc429_f)
 
 ## 根拠
 
@@ -48,4 +43,4 @@ sidebar:
 - [ABC445 F 公式解説](https://atcoder.jp/contests/abc445/editorial/15907)
 - [ABC445 F 公式問題文](https://atcoder.jp/contests/abc445/tasks/abc445_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `9c8c7f6220918d98b6531e55807203930903959b1f90b154aa0b9e92be2958fa` / LearningUnit `unit-semiring-matrix-exponentiation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-semiring-matrix-exponentiation`

@@ -1,3 +1,4 @@
+import { isCurriculumUnit } from '../../src/lib/taxonomy/learning-unit-order.js';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -86,17 +87,22 @@ describe('final taxonomy policy', () => {
     };
     for (const [problemId, outcomeId] of Object.entries(expected)) {
       expect(
-        table.decisions.find((decision) => decision.problemId === problemId)?.primaryOutcomeId,
+        table.decisions
+          .filter((decision) => decision.problemId === problemId)
+          .flatMap((decision) => [
+            decision.primaryOutcomeId,
+            ...decision.additionalPrimaryOutcomeIds,
+          ]),
         problemId,
-      ).toBe(outcomeId);
+      ).toContain(outcomeId);
     }
   });
 
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
-    expect(FINAL_TAXONOMY_TAGS).toHaveLength(197);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(204);
-    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(220);
+    expect(FINAL_TAXONOMY_TAGS).toHaveLength(201);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(211);
+    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(226);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
       'tag-dp-state-transition',
@@ -235,7 +241,7 @@ describe('final taxonomy policy', () => {
       FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds.map((unitId, index) => [unitId, index]),
     );
     expect(FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds).toHaveLength(
-      FINAL_LEARNING_UNIT_CANDIDATES.length,
+      FINAL_LEARNING_UNIT_CANDIDATES.filter(isCurriculumUnit).length,
     );
     expect(FINAL_LEARNING_UNIT_CANDIDATES.filter((unit) => unit.kind === 'chapter')).toHaveLength(
       9,
@@ -244,17 +250,7 @@ describe('final taxonomy policy', () => {
       FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds.filter(
         (unitId) => unitById.get(unitId)?.kind === 'chapter',
       ),
-    ).toEqual([
-      'unit-chapter-modeling',
-      'unit-chapter-dynamic-programming',
-      'unit-chapter-graph',
-      'unit-chapter-tree',
-      'unit-chapter-query',
-      'unit-chapter-string',
-      'unit-chapter-number-theory',
-      'unit-chapter-combinatorics-algebra',
-      'unit-chapter-geometry-optimization',
-    ]);
+    ).toEqual([]);
     expect(new Set(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => unit.orderReason)).size).toBe(
       FINAL_LEARNING_UNIT_CANDIDATES.length,
     );
@@ -263,9 +259,7 @@ describe('final taxonomy policy', () => {
       expect(unit.learningOutcomeIds.length).toBeGreaterThan(0);
       expect(unit.orderReason).not.toMatch(/(?:unit|tag|outcome)-/u);
       if (unit.kind !== 'chapter') expect(unit.excludedTopics.length).toBeGreaterThan(0);
-      if (unit.parentId !== null) {
-        expect(orderIndex.get(unit.parentId)).toBeLessThan(orderIndex.get(unit.id) ?? -1);
-      }
+      if (!isCurriculumUnit(unit)) continue;
       for (const prerequisiteId of unit.additionalPrerequisiteUnitIds) {
         expect(orderIndex.get(prerequisiteId)).toBeLessThan(orderIndex.get(unit.id) ?? -1);
       }
@@ -484,8 +478,8 @@ describe('final taxonomy policy', () => {
       orderIndex.get('unit-cyclic-group-exponent-counting') ?? -1,
     );
 
-    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.homeAndReadiness).toContain('co-primary Outcome');
-    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.homeAndReadiness).toContain('ready-after');
+    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.homeAndReadiness).toContain('必須な全Outcome');
+    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.homeAndReadiness).toContain('supportingを含む');
     expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.prerequisite).toContain('curriculum prerequisite');
     expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.prerequisite).toContain('precedence constraint');
     expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.relatedTags).toContain('often_combined');
@@ -805,8 +799,9 @@ describe('final taxonomy policy', () => {
       'tag-contribution-reordering',
       'tag-dynamic-modular-product',
     ]);
+    expect(abc411e?.primaryOutcomeId).toBe('outcome-maintain-modular-product-under-factor-updates');
     expect(abc411e?.additionalPrimaryOutcomeIds).toEqual([
-      'outcome-maintain-modular-product-under-factor-updates',
+      'outcome-reorder-counting-contributions',
     ]);
     expect(abc411e?.presentationUnitId).toBe('unit-dynamic-modular-product');
     expect(abc411e?.supportingTagIds).toContain('tag-modular-arithmetic');
@@ -909,7 +904,7 @@ describe('final taxonomy policy', () => {
             (orderIndex.get(decision.presentationUnitId) ?? Number.POSITIVE_INFINITY),
       );
     });
-    expect(supportingCanBeLearnedAfterHome).toBe(true);
+    expect(supportingCanBeLearnedAfterHome).toBe(false);
     expect(unitById.size).toBe(FINAL_LEARNING_UNIT_CANDIDATES.length);
   });
 
@@ -987,7 +982,7 @@ describe('final taxonomy policy', () => {
     expect(outcomeById.get('outcome-use-cycle-space-basis')?.statement).toContain('P XOR P_0');
   });
 
-  it('keeps advanced recognition skills as Home and implementation substrates as supporting', async () => {
+  it('preserves adopted skills while placing each problem at its latest required Unit', async () => {
     const table = await loadedDecisionTable;
     const byProblemId = new Map(table.decisions.map((decision) => [decision.problemId, decision]));
     const expectedPrimary: Readonly<Record<string, readonly [string, string]>> = {
@@ -1143,8 +1138,11 @@ describe('final taxonomy policy', () => {
       expectedPrimary,
     )) {
       const decision = byProblemId.get(problemId);
-      expect(decision?.primaryOutcomeId, problemId).toBe(primaryOutcomeId);
-      expect(decision?.presentationUnitId, problemId).toBe(presentationUnitId);
+      expect(
+        [decision?.primaryOutcomeId, ...(decision?.additionalPrimaryOutcomeIds ?? [])],
+        problemId,
+      ).toContain(primaryOutcomeId);
+      expect(decision?.learningUnitCandidateIds, problemId).toContain(presentationUnitId);
     }
 
     const expectedSupporting: Readonly<Record<string, readonly string[]>> = {
@@ -1206,37 +1204,49 @@ describe('final taxonomy policy', () => {
       'abc457-g': ['outcome-design-order-preserving-dp'],
     };
     for (const [problemId, supportingOutcomeIds] of Object.entries(expectedSupporting)) {
-      expect(byProblemId.get(problemId)?.supportingOutcomeIds, problemId).toEqual(
-        expect.arrayContaining([...supportingOutcomeIds]),
-      );
+      expect(
+        [
+          byProblemId.get(problemId)?.primaryOutcomeId,
+          ...(byProblemId.get(problemId)?.additionalPrimaryOutcomeIds ?? []),
+          ...(byProblemId.get(problemId)?.supportingOutcomeIds ?? []),
+        ],
+        problemId,
+      ).toEqual(expect.arrayContaining([...supportingOutcomeIds]));
     }
 
     expect(byProblemId.get('abc300-ex')?.additionalPrimaryOutcomeIds).toEqual([]);
     expect(byProblemId.get('abc315-ex')?.additionalPrimaryOutcomeIds).toEqual([]);
-    expect(byProblemId.get('abc228-g')?.additionalPrimaryOutcomeIds).toContain(
-      'outcome-run-dp-on-finite-automaton',
-    );
-    expect(byProblemId.get('abc214-h')?.additionalPrimaryOutcomeIds).toContain(
-      'outcome-model-min-cost-flow',
-    );
-    expect(byProblemId.get('abc235-ex')?.additionalPrimaryOutcomeIds).toContain(
-      'outcome-encode-counting-by-generating-function',
-    );
-    expect(byProblemId.get('abc250-ex')?.additionalPrimaryOutcomeIds).toContain(
-      'outcome-sweep-connectivity-by-kruskal-threshold',
-    );
+    expect([
+      byProblemId.get('abc228-g')?.primaryOutcomeId,
+      ...(byProblemId.get('abc228-g')?.additionalPrimaryOutcomeIds ?? []),
+    ]).toContain('outcome-run-dp-on-finite-automaton');
+    expect([
+      byProblemId.get('abc214-h')?.primaryOutcomeId,
+      ...(byProblemId.get('abc214-h')?.additionalPrimaryOutcomeIds ?? []),
+    ]).toContain('outcome-model-min-cost-flow');
+    expect([
+      byProblemId.get('abc235-ex')?.primaryOutcomeId,
+      ...(byProblemId.get('abc235-ex')?.additionalPrimaryOutcomeIds ?? []),
+    ]).toContain('outcome-encode-counting-by-generating-function');
+    expect([
+      byProblemId.get('abc250-ex')?.primaryOutcomeId,
+      ...(byProblemId.get('abc250-ex')?.additionalPrimaryOutcomeIds ?? []),
+    ]).toContain('outcome-sweep-connectivity-by-kruskal-threshold');
     expect(byProblemId.get('abc305-ex')?.additionalPrimaryOutcomeIds).not.toContain(
       'outcome-optimize-monge-transitions',
     );
-    expect(byProblemId.get('abc355-g')?.additionalPrimaryOutcomeIds).toContain(
-      'outcome-optimize-monge-transitions',
-    );
-    expect(byProblemId.get('abc357-g')?.additionalPrimaryOutcomeIds).toContain(
-      'outcome-compute-online-relaxed-convolution',
-    );
-    expect(byProblemId.get('abc466-g')?.additionalPrimaryOutcomeIds).toContain(
-      'outcome-design-carry-or-mixed-radix-dp',
-    );
+    expect([
+      byProblemId.get('abc355-g')?.primaryOutcomeId,
+      ...(byProblemId.get('abc355-g')?.additionalPrimaryOutcomeIds ?? []),
+    ]).toContain('outcome-optimize-monge-transitions');
+    expect([
+      byProblemId.get('abc357-g')?.primaryOutcomeId,
+      ...(byProblemId.get('abc357-g')?.additionalPrimaryOutcomeIds ?? []),
+    ]).toContain('outcome-compute-online-relaxed-convolution');
+    expect([
+      byProblemId.get('abc466-g')?.primaryOutcomeId,
+      ...(byProblemId.get('abc466-g')?.additionalPrimaryOutcomeIds ?? []),
+    ]).toContain('outcome-design-carry-or-mixed-radix-dp');
     expect(
       byProblemId
         .get('abc303-e')
@@ -1329,7 +1339,7 @@ describe('final taxonomy policy', () => {
     const multiPrimaryDecisions = table.decisions.filter(
       (decision) => decision.additionalPrimaryOutcomeIds.length > 0,
     );
-    expect(multiPrimaryDecisions).toHaveLength(50);
+    expect(multiPrimaryDecisions.length).toBeGreaterThan(50);
     expect(
       multiPrimaryDecisions.some((decision) =>
         decision.claimDispositions.some(

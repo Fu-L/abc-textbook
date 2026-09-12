@@ -32,21 +32,20 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/linked-list-index.md",
   "problemIds": [
-    "abc344-e",
-    "abc421-f"
+    "abc344-e"
   ],
   "directProblemIds": [
-    "abc344-e",
-    "abc421-f"
+    "abc344-e"
   ],
   "relatedProblemIds": [
-    "abc218-h"
+    "abc218-h",
+    "abc421-f"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 5,
-  "globalIndex": 26,
+  "globalIndex": 24,
   "orderReason": "配列やmapの索引を使い、順序全体を走査せず前後linkだけを更新して列を保つ。"
 }
