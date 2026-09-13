@@ -1820,6 +1820,7 @@ const materializePolicyLearningUnits = (
           .sort((a, b) => compareCodeUnits(a.id, b.id))
           .filter(({ id }) => unit.ownedTagIds.includes(id))
           .flatMap(({ representativeProblemIds }) => representativeProblemIds),
+        unit.id,
       ),
     };
   });
@@ -2969,6 +2970,7 @@ export const validateFinalTaxonomyBuildAgainstContext = (
         .sort((a, b) => compareCodeUnits(a.entity.id, b.entity.id))
         .filter(({ entity }) => unit.ownedTagIds.includes(entity.id))
         .flatMap(({ entity }) => entity.representativeProblemIds),
+      unit.id,
     );
     if (!sameOrderedValues(unit.directProblemIds, expectedDirectIds)) {
       add(

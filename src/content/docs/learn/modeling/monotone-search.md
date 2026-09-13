@@ -28,12 +28,12 @@ sidebar:
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC373 E「How to Win the Election」](https://atcoder.jp/contests/abc373/tasks/abc373_e)
+1. [ABC270 E「Apple Baskets on Circle」](https://atcoder.jp/contests/abc270/tasks/abc270_e)
 2. [ABC395 F「Smooth Occlusion」](https://atcoder.jp/contests/abc395/tasks/abc395_f)
-3. [ABC270 E「Apple Baskets on Circle」](https://atcoder.jp/contests/abc270/tasks/abc270_e)
+3. [ABC381 E「11/22 Subsequence」](https://atcoder.jp/contests/abc381/tasks/abc381_e)
 4. [ABC292 F「Regular Triangle Inside a Rectangle」](https://atcoder.jp/contests/abc292/tasks/abc292_f)
-5. [ABC303 F「Damage over Time」](https://atcoder.jp/contests/abc303/tasks/abc303_f)
-6. [ABC381 E「11/22 Subsequence」](https://atcoder.jp/contests/abc381/tasks/abc381_e)
+5. [ABC373 E「How to Win the Election」](https://atcoder.jp/contests/abc373/tasks/abc373_e)
+6. [ABC303 F「Damage over Time」](https://atcoder.jp/contests/abc303/tasks/abc303_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -80,4 +80,4 @@ sidebar:
 - [ABC229 G 公式解説](https://atcoder.jp/contests/abc229/editorial/2963)
 - [ABC229 G 公式問題文](https://atcoder.jp/contests/abc229/tasks/abc229_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-monotone-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-monotone-search`

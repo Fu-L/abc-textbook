@@ -27,7 +27,18 @@
     "minimumDimensions": 2,
     "requireObjectForStrictRecall": false
   },
-  "relatedTags": [],
+  "relatedTags": [
+    {
+      "tagId": "tag-mo-offline-range",
+      "type": "contrast",
+      "rationale": "Moはquery順の再配置で区間端の総移動を抑える。heavy/lightは対象ごとの処理頻度・次数で二種類の算法を使い分ける。平方根という計算量だけでは同じ分類にしない。"
+    },
+    {
+      "tagId": "tag-value-bucket-aggregation",
+      "type": "contrast",
+      "rationale": "座標軸を連続blockに分けて完全blockと端数を合成する方法と、対象を頻度・次数の大小で分けて重い対象を前計算する方法を区別する。"
+    }
+  ],
   "learningOutcomeIds": [
     "outcome-balance-heavy-light-threshold"
   ],
@@ -36,9 +47,9 @@
     "abc335-f"
   ],
   "aliases": [
-    "sqrt decomposition",
-    "平方根分割",
-    "次数平方分割"
+    "heavy light threshold",
+    "次数平方分割",
+    "頻度によるheavy/light"
   ],
   "formerNames": [],
   "lifecycle": "active",

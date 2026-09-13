@@ -20,12 +20,14 @@
     "source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"
   ],
   "tagIds": [
+    "tag-additive-expectation-potential",
     "tag-stochastic-expectation-dp"
   ],
   "ownedTagIds": [
     "tag-stochastic-expectation-dp"
   ],
   "learningOutcomeIds": [
+    "outcome-decompose-expectation-by-additive-potential",
     "outcome-optimize-stochastic-actions",
     "outcome-propagate-probability-distribution",
     "outcome-solve-stochastic-recurrence"
@@ -40,6 +42,8 @@
   "problemIds": [
     "abc226-h",
     "abc239-ex",
+    "abc242-ex",
+    "abc249-ex",
     "abc263-e",
     "abc266-e",
     "abc275-e",
@@ -71,6 +75,7 @@
     "abc326-e",
     "abc360-e",
     "abc239-ex",
+    "abc242-ex",
     "abc314-e",
     "abc350-e",
     "abc404-f",
@@ -78,8 +83,6 @@
     "abc226-h"
   ],
   "relatedProblemIds": [
-    "abc242-ex",
-    "abc249-ex",
     "abc270-ex",
     "abc271-g",
     "abc299-ex",

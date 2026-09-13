@@ -3,7 +3,7 @@ title: "Prüfer code・次数制約付きlabel木"
 description: "Prüfer code・次数制約付きlabel木の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 170
+  order: 173
 ---
 
 # Prüfer code・次数制約付きlabel木
@@ -37,4 +37,4 @@ label付き木を長さN-2の列へ全単射し、頂点の出現回数=次数-1
 - [ABC303 H 公式解説](https://atcoder.jp/contests/abc303/editorial/6425)
 - [ABC303 H 公式問題文](https://atcoder.jp/contests/abc303/tasks/abc303_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-prufer-code`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-prufer-code`

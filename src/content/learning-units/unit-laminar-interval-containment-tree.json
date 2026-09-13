@@ -39,6 +39,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 84,
-  "globalIndex": 119,
+  "globalIndex": 121,
   "orderReason": "非交差区間族を括弧列として走査し、stack topを直接包含親にして包含関係を木へ変換する。その後の包含差分queryをLCAや木上距離へ接続する。"
 }

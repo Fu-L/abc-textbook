@@ -1,4 +1,7 @@
 export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[]>> = {
+  'tag-euclidean-floor-sum': ['floor_sum', 'Euclid型床和', '格子点転置'],
+  'tag-value-bucket-aggregation': ['値軸平方根分割', 'bucket decomposition', 'block集約'],
+  'tag-additive-expectation-potential': ['加法的ポテンシャル', '頻度別期待値方程式'],
   'tag-dp-prefix-partition': ['prefix分割DP', '最後のブロックを固定'],
   'tag-dp-interval-expansion': ['区間拡張DP', '訪問済み区間DP'],
   'tag-value-range-dp': ['値域DP', '値別最良長', 'Segment Tree上のDP'],
@@ -296,7 +299,7 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
   'tag-recursive-divide-and-conquer': ['分割統治', 'divide and conquer', 'CDQ分割統治'],
   'tag-amortized-monotone-progress': ['償却解析', 'amortized analysis', 'potential method'],
   'tag-small-to-large': ['small-to-large', 'DSU on Tree', 'sack technique'],
-  'tag-threshold-heavy-light': ['平方根分割', '次数平方分割', 'sqrt decomposition'],
+  'tag-threshold-heavy-light': ['頻度によるheavy/light', '次数平方分割', 'heavy light threshold'],
   'tag-heavy-path-tree-dp': ['heavy-path polynomial DP', 'heavy-path tree DP'],
   'tag-subset-bitmask-dp': ['部分集合DP', 'bitmask DP', 'subset DP'],
   'tag-subset-zeta-mobius-transform': [
@@ -813,6 +816,41 @@ export interface FinalTagRelationSeed {
 
 /** Peer relations are materialized in both directions for direct use from either Tag page. */
 export const FINAL_TAG_SYMMETRIC_RELATION_SEEDS: readonly FinalTagRelationSeed[] = [
+  {
+    sourceTagId: 'tag-mo-offline-range',
+    targetTagId: 'tag-value-bucket-aggregation',
+    type: 'often_combined',
+    rationale:
+      'Moで区間位置を動かし、値軸のbucketで閾値以下の頻度和・積を取得する。ABC405 Gでは多数の端点更新をO(1)に保つことが両者を組み合わせる理由になる。',
+  },
+  {
+    sourceTagId: 'tag-value-bucket-aggregation',
+    targetTagId: 'tag-threshold-heavy-light',
+    type: 'contrast',
+    rationale:
+      '座標軸を連続blockに分けて完全blockと端数を合成する方法と、対象を頻度・次数の大小で分けて重い対象を前計算する方法を区別する。',
+  },
+  {
+    sourceTagId: 'tag-mo-offline-range',
+    targetTagId: 'tag-threshold-heavy-light',
+    type: 'contrast',
+    rationale:
+      'Moはquery順の再配置で区間端の総移動を抑える。heavy/lightは対象ごとの処理頻度・次数で二種類の算法を使い分ける。平方根という計算量だけでは同じ分類にしない。',
+  },
+  {
+    sourceTagId: 'tag-integer-boundary-blocks',
+    targetTagId: 'tag-euclidean-floor-sum',
+    type: 'contrast',
+    rationale:
+      '商が一定の区間を列挙するO(√N)の分割と、床和の格子点領域を転置して法を減らすO(log m)の再帰を区別する。',
+  },
+  {
+    sourceTagId: 'tag-subset-bitmask-dp',
+    targetTagId: 'tag-frontier-profile-dp',
+    type: 'analogy',
+    rationale:
+      '集合の使用済みフラグを状態にする点は共通する。境界DPでは未来へ影響しない要素を忘れ、指数部分を全要素数ではなく境界幅に限定できることをさらに証明する。',
+  },
   {
     sourceTagId: 'tag-monotone-threshold-search',
     targetTagId: 'tag-two-pointers-window',

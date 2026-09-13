@@ -82,6 +82,6 @@
   "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 1,
-  "globalIndex": 70,
+  "globalIndex": 71,
   "orderReason": "辺重みに応じた距離計算、距離等式による経路復元、差の不等式を緩和へ写す制約系への応用を順に学ぶ。"
 }

@@ -45,6 +45,6 @@
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 4,
-  "globalIndex": 147,
+  "globalIndex": 149,
   "orderReason": "乗法的位数とその約数分類を先に学び、巡回群の元を指数へ写して位数別に重複なく数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する。"
 }

@@ -32,11 +32,16 @@
     "minimumDimensions": 2,
     "requireObjectForStrictRecall": false
   },
-  "relatedTags": [],
+  "relatedTags": [
+    {
+      "tagId": "tag-euclidean-floor-sum",
+      "type": "contrast",
+      "rationale": "商が一定の区間を列挙するO(√N)の分割と、床和の格子点領域を転置して法を減らすO(log m)の再帰を区別する。"
+    }
+  ],
   "learningOutcomeIds": [
     "outcome-evaluate-compressed-integer-blocks",
-    "outcome-partition-integer-parameter-ranges",
-    "outcome-sum-affine-floors-by-euclid"
+    "outcome-partition-integer-parameter-ranges"
   ],
   "representativeProblemIds": [
     "abc230-e",

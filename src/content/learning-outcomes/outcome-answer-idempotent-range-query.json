@@ -5,6 +5,7 @@
     "outcome-design-associative-range-summary"
   ],
   "scopeIds": [
+    "abc282-ex",
     "abc282-f",
     "tag-idempotent-overlap-range-query",
     "unit-idempotent-overlap-range-query"

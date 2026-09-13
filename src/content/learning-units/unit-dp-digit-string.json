@@ -54,6 +54,6 @@
   "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 3,
-  "globalIndex": 78,
+  "globalIndex": 79,
   "orderReason": "状態設計を土台に、接頭辞から決まる有限統計を更新するという共通像を作り、数値上限の桁DPと有限automaton DPの境界を比較する。"
 }

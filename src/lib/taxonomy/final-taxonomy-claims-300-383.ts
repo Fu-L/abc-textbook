@@ -464,12 +464,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
       ['typicalTechniques', 0, 'primary', 'tag-inclusion-exclusion'],
       ['typicalTechniques', 0, 'supporting', 'tag-combinatorial-coefficients'],
       ['typicalTechniques', 1, 'supporting', 'tag-subset-bitmask-transform'],
+      ['typicalTechniques', 1, 'supporting', 'tag-frontier-profile-dp'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-inclusion-exclusion'],
       ['prerequisiteCandidates', 1, 'supporting', 'tag-subset-bitmask-transform'],
     ],
     {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
       'tag-subset-bitmask-transform': ['outcome-enumerate-subset-state-space'],
+      'tag-frontier-profile-dp': ['outcome-design-frontier-profile-dp'],
     },
   ),
   'abc310-e': decision('outcome-design-minimal-sufficient-state', [

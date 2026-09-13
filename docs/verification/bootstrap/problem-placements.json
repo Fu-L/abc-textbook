@@ -24,8 +24,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a",
-    "acceptedAt": "2026-09-13T03:14:22.258Z"
+    "digest": "6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8",
+    "acceptedAt": "2026-09-13T09:09:50.944Z"
   },
   "problemCount": 868,
   "uniqueProblemCount": 868,
@@ -35,10 +35,10 @@
     "similar": 0,
     "supplement": 0
   },
-  "tagAssignmentCount": 1743,
+  "tagAssignmentCount": 1745,
   "correctionImpactCount": 12,
   "previewTaxonomyChangeCount": 12,
-  "placementDigest": "04a0cefb3557f8b7c5de51569deb6e7305ddf60c37c91ab537c47edd3bedb862",
+  "placementDigest": "bdb8509c7c6abe1517fd1a0b81a6bdcffa53f35533151d3156e87bc115c1c407",
   "correctionImpactDigest": "d5154d05bb81da28d7b15fe937af487ec8770b9d81bf577062605f30d47e046e",
   "checks": [
     {

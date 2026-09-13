@@ -41,6 +41,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 3,
-  "globalIndex": 149,
+  "globalIndex": 151,
   "orderReason": "有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。"
 }

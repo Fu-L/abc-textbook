@@ -3,7 +3,7 @@ title: "文字列周期・primitive word"
 description: "文字列周期・primitive wordの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 104
+  order: 105
 ---
 
 # 文字列周期・primitive word
@@ -37,4 +37,4 @@ Z algorithmによるprefix matchingで得た考え方と実装を再利用し、
 - [ABC312 H 公式解説](https://atcoder.jp/contests/abc312/editorial/6837)
 - [ABC312 H 公式問題文](https://atcoder.jp/contests/abc312/tasks/abc312_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-string-periodicity`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-string-periodicity`

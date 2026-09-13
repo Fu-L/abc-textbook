@@ -697,14 +697,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     'outcome-schedule-range-query-updates',
     [
       ['typicalTechniques', 0, 'primary', 'tag-mo-offline-range'],
-      ['typicalTechniques', 1, 'supporting', 'tag-amortized-heavy-light'],
+      ['typicalTechniques', 1, 'supporting', 'tag-value-bucket-aggregation'],
       ['implementationConcerns', 0, 'supporting', 'tag-dynamic-modular-product'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-mo-offline-range'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-amortized-heavy-light'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-value-bucket-aggregation'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-combinatorial-coefficients'],
     ],
     {
-      'tag-amortized-heavy-light': ['outcome-bound-total-work'],
+      'tag-value-bucket-aggregation': ['outcome-aggregate-value-prefix-by-buckets'],
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
       'tag-dynamic-modular-product': ['outcome-maintain-modular-product-under-factor-updates'],
     },

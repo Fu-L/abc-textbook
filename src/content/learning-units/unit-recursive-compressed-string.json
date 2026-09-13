@@ -49,6 +49,6 @@
   "stageRank": 3,
   "difficultyRank": 2,
   "representativeRank": 2,
-  "globalIndex": 86,
+  "globalIndex": 87,
   "orderReason": "明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。"
 }

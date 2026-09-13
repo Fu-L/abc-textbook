@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a",
-    "acceptedAt": "2026-09-13T03:14:22.258Z"
+    "digest": "6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8",
+    "acceptedAt": "2026-09-13T09:09:50.944Z"
   },
   "decisionTable": {
     "path": "src/content/policies/problem-placement.json",
@@ -17513,25 +17513,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「sqrt(N) 以下の商は出現回数でまとめ、それより大きい商は対応する小さい i を一つずつ処理する。」、解法への接続「整数双曲線 xy≤N の格子点数え上げとして、小さい商の頻度集約と小さい除数の直接和を境界 floor(sqrt(N)) で分割する。」、学習成果「巨大な floor 除算列の和を、商の頻度と平方根分割を使って列挙せず計算できる。」を照合し、tag-threshold-heavy-light / outcome-balance-heavy-light-threshold をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「sqrt(N) 以下の商は出現回数でまとめ、それより大きい商は対応する小さい i を一つずつ処理する。」、解法への接続「整数双曲線 xy≤N の格子点数え上げとして、小さい商の頻度集約と小さい除数の直接和を境界 floor(sqrt(N)) で分割する。」、学習成果「巨大な floor 除算列の和を、商の頻度と平方根分割を使って列挙せず計算できる。」を照合し、tag-integer-boundary-blocks / outcome-partition-integer-parameter-ranges をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-integer-boundary-blocks",
-        "tag-threshold-heavy-light"
+        "tag-integer-boundary-blocks"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-balance-heavy-light-threshold",
-      "additionalPrimaryOutcomeIds": [
-        "outcome-partition-integer-parameter-ranges"
-      ],
+      "primaryOutcomeId": "outcome-partition-integer-parameter-ranges",
+      "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
-        "unit-integer-boundary-blocks",
-        "unit-threshold-heavy-light"
+        "unit-integer-boundary-blocks"
       ],
-      "presentationUnitId": "unit-threshold-heavy-light",
+      "presentationUnitId": "unit-integer-boundary-blocks",
       "adHocElements": [
         "k₀＝floor(sqrt(N)) とすると、商が k₀＋1 以上の i は N/(k₀＋1) 以下に限られ、集約側との重複なしに直接列挙できる。（再利用可能な見方: 商と除数の対称性を使う分割では、境界の等号を式で確認して二重計上を避ける。）"
       ],
@@ -17551,24 +17547,6 @@
           "kind": "primary",
           "tagIds": [
             "tag-integer-boundary-blocks"
-          ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc230-e",
-            "claimPath": "/typicalTechniques/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0",
-              "source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019"
-            ]
-          },
-          "kind": "primary",
-          "tagIds": [
-            "tag-threshold-heavy-light"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -21593,25 +21571,25 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「現在右端に対する区間最大値が同じ左端群を単調減少 stack、最小値が同じ群を単調増加 stack にまとめ、群の dp 重み和と寄与総和を更新する。」、解法への接続「区間分割 DP の遷移を max 部と min 部へ線形分離し、右端追加時の区間極値の変化を重み付き単調スタックでまとめて dp_i を算出する。」、学習成果「区間極値を含む全分割積の DP を、重み付き単調スタックで線形走査へ高速化できる。」を照合し、tag-interval-partition-dp / outcome-design-interval-split-dp をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「現在右端に対する区間最大値が同じ左端群を単調減少 stack、最小値が同じ群を単調増加 stack にまとめ、群の dp 重み和と寄与総和を更新する。」、解法への接続「区間分割 DP の遷移を max 部と min 部へ線形分離し、右端追加時の区間極値の変化を重み付き単調スタックでまとめて dp_i を算出する。」、学習成果「区間極値を含む全分割積の DP を、重み付き単調スタックで線形走査へ高速化できる。」を照合し、tag-dp-prefix-partition / outcome-design-prefix-partition-dp をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-interval-partition-dp",
+        "tag-dp-prefix-partition",
         "tag-monotone-stack-queue"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-design-interval-split-dp",
+      "primaryOutcomeId": "outcome-design-prefix-partition-dp",
       "additionalPrimaryOutcomeIds": [
         "outcome-prune-dominated-candidates-once"
       ],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
-        "unit-dp-interval-composition",
+        "unit-dp-prefix-partition",
         "unit-monotone-stack-queue"
       ],
-      "presentationUnitId": "unit-dp-interval-composition",
+      "presentationUnitId": "unit-dp-prefix-partition",
       "adHocElements": [
         "区間評価 max−min をそのまま管理せず、max の総和と min の総和へ分けると同じ単調スタック処理を符号違いで二回使える。（再利用可能な見方: 複合した区間統計が線形結合なら、各成分を高速化しやすい標準統計へ分解してから合成する。）"
       ],
@@ -21648,7 +21626,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-interval-partition-dp"
+            "tag-dp-prefix-partition"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -24132,25 +24110,25 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「長さ j の増加部分列の最小末尾 a_j を j=1,2,3 について持ち、各 x を追加したとき最初の a_j≥x を x に置き換える DP を行う。」、解法への接続「通常は一列の LIS を求める patience sorting の tails 配列を、小さい値域上の有限状態へ変えて列の個数を数える DP にする。」、学習成果「LIS の tails 配列を状態として、LIS がちょうど 3 の値域制限列を数えられる。」を照合し、tag-sequence-subsequence-dp / outcome-design-order-preserving-dp をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「長さ j の増加部分列の最小末尾 a_j を j=1,2,3 について持ち、各 x を追加したとき最初の a_j≥x を x に置き換える DP を行う。」、解法への接続「通常は一列の LIS を求める patience sorting の tails 配列を、小さい値域上の有限状態へ変えて列の個数を数える DP にする。」、学習成果「LIS の tails 配列を状態として、LIS がちょうど 3 の値域制限列を数えられる。」を照合し、tag-lis-state / outcome-design-lis-frontier をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
         "tag-dp-state-equivalence",
-        "tag-sequence-subsequence-dp"
+        "tag-lis-state"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-design-order-preserving-dp",
+      "primaryOutcomeId": "outcome-design-lis-frontier",
       "additionalPrimaryOutcomeIds": [
         "outcome-design-minimal-sufficient-state"
       ],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
-        "unit-dp-sequence",
+        "unit-dp-lis",
         "unit-dp-state-design"
       ],
-      "presentationUnitId": "unit-dp-sequence",
+      "presentationUnitId": "unit-dp-lis",
       "adHocElements": [
         "未到達の末尾値には M＋1 を番兵として使い、初期状態を (M＋1,M＋1,M＋1) と表せる。（再利用可能な見方: 固定長までの部分列情報を数えるときは、存在しない層へ値域外番兵を置くと初期化と終了判定を統一できる。）"
       ],
@@ -24187,7 +24165,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-sequence-subsequence-dp"
+            "tag-lis-state"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -24241,7 +24219,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-sequence-subsequence-dp"
+            "tag-lis-state"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         }
@@ -28146,21 +28124,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「試合 node へ source から1流し、可能な winner の player node を経て各選手の勝数上限へ流す max-flow feasibility を p ごとに判定する。」、解法への接続「各 p について未終了の p 戦を p 勝利に固定して win を数える。source→全試合 node に容量1、試合→許される winner、player p→sink に win、他 player→sink に win-1 を置き、全試合数だけ flow が流れれば p を出力する。」、学習成果「round-robin の未確定勝敗を単位 flow の割当へ変え、候補ごとの単独優勝可能性を判定できる。」を照合し、tag-bipartite-matching-hall / outcome-solve-bipartite-matching をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「試合 node へ source から1流し、可能な winner の player node を経て各選手の勝数上限へ流す max-flow feasibility を p ごとに判定する。」、解法への接続「各 p について未終了の p 戦を p 勝利に固定して win を数える。source→全試合 node に容量1、試合→許される winner、player p→sink に win、他 player→sink に win-1 を置き、全試合数だけ flow が流れれば p を出力する。」、学習成果「round-robin の未確定勝敗を単位 flow の割当へ変え、候補ごとの単独優勝可能性を判定できる。」を照合し、tag-max-flow-min-cut / outcome-model-max-flow-min-cut をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-bipartite-matching-hall"
+        "tag-max-flow-min-cut"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-solve-bipartite-matching",
+      "primaryOutcomeId": "outcome-model-max-flow-min-cut",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
-        "unit-bipartite-matching"
+        "unit-max-flow-min-cut"
       ],
-      "presentationUnitId": "unit-bipartite-matching",
+      "presentationUnitId": "unit-max-flow-min-cut",
       "adHocElements": [
         "単独優勝の strict 条件は、候補の勝数 win を固定すると他選手ごとの容量 win-1 という独立な上限制約になる。（再利用可能な見方: strict な最大者の存在判定では候補値を先に固定し、他者を候補値-1以下へ配る問題に変える。）"
       ],
@@ -28179,7 +28157,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-bipartite-matching-hall"
+            "tag-max-flow-min-cut"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -28197,7 +28175,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-bipartite-matching-hall"
+            "tag-max-flow-min-cut"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -28215,7 +28193,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-bipartite-matching-hall"
+            "tag-max-flow-min-cut"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         }
@@ -28552,30 +28530,32 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「被覆する i-subset 数 f(i) を interval-union DP で数え、各 i<M の非被覆割合 (C(M,i)-f(i))/C(M,i) に stage 待ち時間 M/(M-i) を掛けて足す。」、解法への接続「interval を L,R 順に sort し、dp[j][k] を選択 union が [1,j]、選択数 k の subset 数として skip/select 遷移する。f(k)=dp[N][k] を得た後、Σ_{k=0}^{M-1}(1-f(k)/C(M,k))·M/(M-k) を法998244353で計算する。」、学習成果「反復抽選の被覆完了期待値を distinct-set stage に分解し、interval subset の全被覆数 DP と結合できる。」を照合し、tag-interval-partition-dp / outcome-design-interval-split-dp をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「被覆する i-subset 数 f(i) を interval-union DP で数え、各 i<M の非被覆割合 (C(M,i)-f(i))/C(M,i) に stage 待ち時間 M/(M-i) を掛けて足す。」、解法への接続「interval を L,R 順に sort し、dp[j][k] を選択 union が [1,j]、選択数 k の subset 数として skip/select 遷移する。f(k)=dp[N][k] を得た後、Σ_{k=0}^{M-1}(1-f(k)/C(M,k))·M/(M-k) を法998244353で計算する。」、学習成果「反復抽選の被覆完了期待値を distinct-set stage に分解し、interval subset の全被覆数 DP と結合できる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。; 補助Tag=tag-sequence-subsequence-dp; 補助Outcome=outcome-design-order-preserving-dp; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-sequence-subsequence-dp / outcome-design-order-preserving-dp を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-interval-partition-dp",
         "tag-stochastic-expectation-dp"
       ],
       "supportingTagIds": [
-        "tag-modular-arithmetic"
+        "tag-combinatorial-coefficients",
+        "tag-modular-arithmetic",
+        "tag-sequence-subsequence-dp"
       ],
-      "primaryOutcomeId": "outcome-design-interval-split-dp",
-      "additionalPrimaryOutcomeIds": [
-        "outcome-solve-stochastic-recurrence"
-      ],
+      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-compute-in-modular-arithmetic"
+        "outcome-compute-in-modular-arithmetic",
+        "outcome-design-order-preserving-dp",
+        "outcome-formulate-combinatorial-coefficients"
       ],
       "learningUnitIds": [
-        "unit-dp-interval-composition",
+        "unit-combinatorial-coefficients",
+        "unit-dp-sequence",
         "unit-dp-stochastic",
         "unit-modular-arithmetic"
       ],
-      "presentationUnitId": "unit-dp-interval-composition",
+      "presentationUnitId": "unit-dp-stochastic",
       "adHocElements": [
         "抽選順を直接追わず、「異なる区間が i 個そろった stage でまだ被覆しているか」へ期待値を分解すると、順序確率と subset 数え上げが分離する。（再利用可能な見方: with-replacement 過程では、distinct set が増える瞬間だけを埋め込んだ過程として観察する。）"
       ],
@@ -28610,11 +28590,11 @@
               "source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
-            "tag-interval-partition-dp"
+            "tag-sequence-subsequence-dp"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -28646,27 +28626,11 @@
               "source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"
             ]
           },
-          "kind": "primary",
-          "tagIds": [
-            "tag-interval-partition-dp"
-          ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc242-ex",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915",
-              "source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"
-            ]
-          },
           "kind": "supporting",
           "tagIds": [
-            "tag-modular-arithmetic"
+            "tag-combinatorial-coefficients",
+            "tag-modular-arithmetic",
+            "tag-sequence-subsequence-dp"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -29037,25 +29001,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「query を Mo's algorithm の順に並べ、現在区間の色頻度と pair 総数を四種類の端点移動で保つ。」、解法への接続「query を左端 block と右端で Mo 順に sort する。現在 [L,R] を伸縮し、add(x) は count[A_x] が奇数なら ans++、remove(x) は削除前 count[A_x] が偶数なら ans-- として頻度を更新し、元 query index へ ans を保存する。」、学習成果「色頻度の pair 総数を O(1) add/remove で維持し、大量 range query を Mo 順で処理できる。」を照合し、tag-threshold-heavy-light / outcome-balance-heavy-light-threshold をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「query を Mo's algorithm の順に並べ、現在区間の色頻度と pair 総数を四種類の端点移動で保つ。」、解法への接続「query を左端 block と右端で Mo 順に sort する。現在 [L,R] を伸縮し、add(x) は count[A_x] が奇数なら ans++、remove(x) は削除前 count[A_x] が偶数なら ans-- として頻度を更新し、元 query index へ ans を保存する。」、学習成果「色頻度の pair 総数を O(1) add/remove で維持し、大量 range query を Mo 順で処理できる。」を照合し、tag-mo-offline-range / outcome-schedule-range-query-updates をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-mo-offline-range",
-        "tag-threshold-heavy-light"
+        "tag-mo-offline-range"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-balance-heavy-light-threshold",
-      "additionalPrimaryOutcomeIds": [
-        "outcome-schedule-range-query-updates"
-      ],
+      "primaryOutcomeId": "outcome-schedule-range-query-updates",
+      "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
-        "unit-mo-offline-range",
-        "unit-threshold-heavy-light"
+        "unit-mo-offline-range"
       ],
-      "presentationUnitId": "unit-threshold-heavy-light",
+      "presentationUnitId": "unit-mo-offline-range",
       "adHocElements": [
         "pair 数の増減条件が追加前は奇数、削除前は偶数と逆になる。（再利用可能な見方: floor や parity を含む頻度集計では add/remove の差を別々に式で導き、対称だと決めつけない。）"
       ],
@@ -29113,24 +29073,6 @@
             "tag-mo-offline-range"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc242-g",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8",
-              "source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5"
-            ]
-          },
-          "kind": "primary",
-          "tagIds": [
-            "tag-threshold-heavy-light"
-          ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -35741,33 +35683,32 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「色ごとの個数に対する加法的ポテンシャル」、解法への接続「各個数jの一手後の分布を組合せ数から求め、g(j)=1/N+ΣP[j][k]g(k)を自己ループを移項してj=0から順に解き、初期色頻度のgの総和から単色終端のポテンシャルを差し引く。」、学習成果「初期配置から全てが同じ色になるまでの期待操作回数を法998244353で求められる。」を照合し、tag-generating-functions / outcome-encode-counting-by-generating-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-stochastic-expectation-dp; 補助Outcome=outcome-solve-stochastic-recurrence; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「色ごとの個数に対する加法的ポテンシャル」、解法への接続「各個数jの一手後の分布を組合せ数から求め、g(j)=1/N+ΣP[j][k]g(k)を自己ループを移項してj=0から順に解き、初期色頻度のgの総和から単色終端のポテンシャルを差し引く。」、学習成果「初期配置から全てが同じ色になるまでの期待操作回数を法998244353で求められる。」を照合し、tag-additive-expectation-potential / outcome-decompose-expectation-by-additive-potential をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-stochastic-expectation-dp; 補助Outcome=outcome-solve-stochastic-recurrence; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-generating-functions",
-        "tag-state-normalization"
+        "tag-additive-expectation-potential"
       ],
       "supportingTagIds": [
         "tag-combinatorial-coefficients",
+        "tag-convolution",
         "tag-stochastic-expectation-dp"
       ],
-      "primaryOutcomeId": "outcome-encode-counting-by-generating-function",
-      "additionalPrimaryOutcomeIds": [
-        "outcome-normalize-equivalent-states"
-      ],
+      "primaryOutcomeId": "outcome-decompose-expectation-by-additive-potential",
+      "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
+        "outcome-compute-convolution-or-correlation",
         "outcome-formulate-combinatorial-coefficients",
         "outcome-solve-stochastic-recurrence"
       ],
       "learningUnitIds": [
+        "unit-additive-expectation-potential",
         "unit-combinatorial-coefficients",
         "unit-dp-stochastic",
-        "unit-generating-functions",
-        "unit-normalization"
+        "unit-polynomial-convolution"
       ],
-      "presentationUnitId": "unit-generating-functions",
+      "presentationUnitId": "unit-additive-expectation-potential",
       "adHocElements": [
         "一色の個数は減少幅こそ大きいが増加は高々1であり、この非対称性が期待値方程式を前から解ける形にする。（再利用可能な見方: 多種類の対称な確率過程では、全体の吸収時間を一種類の周辺過程のポテンシャル和として探す。）"
       ],
@@ -35786,7 +35727,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-state-normalization"
+            "tag-additive-expectation-potential"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -35802,11 +35743,11 @@
               "source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
-            "tag-stochastic-expectation-dp"
+            "tag-additive-expectation-potential"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -35838,27 +35779,10 @@
               "source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"
             ]
           },
-          "kind": "primary",
-          "tagIds": [
-            "tag-generating-functions"
-          ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc249-ex",
-            "claimPath": "/prerequisiteCandidates/1",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec",
-              "source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"
-            ]
-          },
           "kind": "supporting",
           "tagIds": [
-            "tag-combinatorial-coefficients"
+            "tag-combinatorial-coefficients",
+            "tag-convolution"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -68713,16 +68637,20 @@
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
+        "tag-idempotent-overlap-range-query",
         "tag-recursive-divide-and-conquer"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-divide-search-space-recursively",
-      "additionalPrimaryOutcomeIds": [],
+      "primaryOutcomeId": "outcome-answer-idempotent-range-query",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-divide-search-space-recursively"
+      ],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
+        "unit-idempotent-overlap-range-query",
         "unit-recursive-divide-and-conquer"
       ],
-      "presentationUnitId": "unit-recursive-divide-and-conquer",
+      "presentationUnitId": "unit-idempotent-overlap-range-query",
       "adHocElements": [
         "minimum pivotを含むintervalではmin項が定数A_Mになり、min+sumという混合条件が単なるprefix sum差の閾値へ変わる。（再利用可能な見方: extremumと加法量が混ざる区間条件では、extremumを固定する分割とprefix sum queryを組み合わせる。）"
       ],
@@ -68791,9 +68719,11 @@
               "source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"
             ]
           },
-          "kind": "problem_specific",
-          "tagIds": [],
-          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
+          "kind": "primary",
+          "tagIds": [
+            "tag-idempotent-overlap-range-query"
+          ],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -69829,12 +69759,12 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各bitで1_{bit k(A)=1}=floor((A+2^k)/2^{k+1})−floor(A/2^{k+1})を使い、合同等差数列上の二つのfloor和をACL floor_sumで求める。」、解法への接続「最小正のA=R+tMと最大≤Nからt rangeを求める。各kでm=2^{k+1}とし、shift後b=R+t_0Mについてfloor_sum(n,m,M,b+2^k)−floor_sum(n,m,M,b)をanswerへ足す。」、学習成果「合同類に属する1…Nのpopcount総和を、bit indicatorのfloor差とfloor_sumで高速に求められる。」を照合し、tag-integer-boundary-blocks / outcome-sum-affine-floors-by-euclid をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各bitで1_{bit k(A)=1}=floor((A+2^k)/2^{k+1})−floor(A/2^{k+1})を使い、合同等差数列上の二つのfloor和をACL floor_sumで求める。」、解法への接続「最小正のA=R+tMと最大≤Nからt rangeを求める。各kでm=2^{k+1}とし、shift後b=R+t_0Mについてfloor_sum(n,m,M,b+2^k)−floor_sum(n,m,M,b)をanswerへ足す。」、学習成果「合同類に属する1…Nのpopcount総和を、bit indicatorのfloor差とfloor_sumで高速に求められる。」を照合し、tag-euclidean-floor-sum / outcome-sum-affine-floors-by-euclid をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-integer-boundary-blocks"
+        "tag-euclidean-floor-sum"
       ],
       "supportingTagIds": [
         "tag-contribution-reordering"
@@ -69846,9 +69776,9 @@
       ],
       "learningUnitIds": [
         "unit-contribution-reordering",
-        "unit-integer-boundary-blocks"
+        "unit-euclidean-floor-sum"
       ],
-      "presentationUnitId": "unit-integer-boundary-blocks",
+      "presentationUnitId": "unit-euclidean-floor-sum",
       "adHocElements": [
         "周期的bit patternを直接区間数えせず、半周期shiftしたfloor quotientの差にすると合同等差列とも自然に合成できる。（再利用可能な見方: periodic 0/1 indicatorはfloor((x+shift)/period)-floor(x/period)で表せないか試す。）"
       ],
@@ -69885,7 +69815,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -69903,7 +69833,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -69939,7 +69869,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -69957,7 +69887,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         }
@@ -82939,21 +82869,25 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「multiset一致と重複有無・反転parity判定」、解法への接続「A,Bをsortしてmultiset一致を確認し、重複があればYes。全相異ならFenwick tree等で両反転数parityを求め、一致するときだけYes。」、学習成果「同時swap操作でA,Bを一致させられるか判定できる。」を照合し、tag-state-normalization / outcome-normalize-equivalent-states をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「multiset一致と重複有無・反転parity判定」、解法への接続「A,Bをsortしてmultiset一致を確認し、重複があればYes。全相異ならFenwick tree等で両反転数parityを求め、一致するときだけYes。」、学習成果「同時swap操作でA,Bを一致させられるか判定できる。」を照合し、tag-fenwick-weighted-prefix / outcome-maintain-weighted-prefix-statistics をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
+        "tag-fenwick-weighted-prefix",
         "tag-state-normalization"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-normalize-equivalent-states",
-      "additionalPrimaryOutcomeIds": [],
+      "primaryOutcomeId": "outcome-maintain-weighted-prefix-statistics",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
-        "unit-normalization"
+        "unit-normalization",
+        "unit-weighted-prefix-fenwick"
       ],
-      "presentationUnitId": "unit-normalization",
+      "presentationUnitId": "unit-weighted-prefix-fenwick",
       "adHocElements": [
         "同時swap制約は全相異時だけ効き、重複一組があるだけでparity障害が消える。（再利用可能な見方: 重複を持つ並べ替えでは置換符号が一意でなくなる。）"
       ],
@@ -83011,6 +82945,24 @@
             "tag-state-normalization"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc296-f",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed",
+              "source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6"
+            ]
+          },
+          "kind": "primary",
+          "tagIds": [
+            "tag-fenwick-weighted-prefix"
+          ],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -94799,30 +94751,33 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「包除原理で先に固定する bad 位置を選び、その部分マッチング数を位置走査と幅 2X−1 の bitmask DP で数える。」、解法への接続「dp[i][k][mask] を位置 1..i までで k 組を固定し、i−X より大きく i+X より小さい使用値を mask で表す個数とする。位置 i+1 を固定しない遷移と、未使用の近傍値 l を割り当てる遷移を行う。最後に全状態へ (N−k)!(−1)^k を掛けて総和する。」、学習成果「局所禁止を持つ順列数を、包除原理と帯状部分マッチング DP により X の指数・N の多項式時間で計算できる。」を照合し、tag-subset-bitmask-dp / outcome-enumerate-subset-state-space をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「包除原理で先に固定する bad 位置を選び、その部分マッチング数を位置走査と幅 2X−1 の bitmask DP で数える。」、解法への接続「dp[i][k][mask] を位置 1..i までで k 組を固定し、i−X より大きく i+X より小さい使用値を mask で表す個数とする。位置 i+1 を固定しない遷移と、未使用の近傍値 l を割り当てる遷移を行う。最後に全状態へ (N−k)!(−1)^k を掛けて総和する。」、学習成果「局所禁止を持つ順列数を、包除原理と帯状部分マッチング DP により X の指数・N の多項式時間で計算できる。」を照合し、tag-frontier-profile-dp / outcome-design-frontier-profile-dp をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-subset-bitmask-dp; 補助Outcome=outcome-enumerate-subset-state-space; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-subset-bitmask-dp / outcome-enumerate-subset-state-space を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-inclusion-exclusion",
-        "tag-subset-bitmask-dp"
+        "tag-frontier-profile-dp",
+        "tag-inclusion-exclusion"
       ],
       "supportingTagIds": [
-        "tag-combinatorial-coefficients"
+        "tag-combinatorial-coefficients",
+        "tag-subset-bitmask-dp"
       ],
-      "primaryOutcomeId": "outcome-enumerate-subset-state-space",
+      "primaryOutcomeId": "outcome-design-frontier-profile-dp",
       "additionalPrimaryOutcomeIds": [
         "outcome-correct-overlap-by-inversion"
       ],
       "supportingOutcomeIds": [
+        "outcome-enumerate-subset-state-space",
         "outcome-formulate-combinatorial-coefficients"
       ],
       "learningUnitIds": [
         "unit-combinatorial-coefficients",
         "unit-dp-subset-state",
+        "unit-frontier-profile-dp",
         "unit-inclusion-exclusion"
       ],
-      "presentationUnitId": "unit-dp-subset-state",
+      "presentationUnitId": "unit-frontier-profile-dp",
       "adHocElements": [
         "N は大きくても、禁止辺グラフの bandwidth は X≤5 なので permanent 型の計数を局所状態へ圧縮できる。（再利用可能な見方: 順列条件では N だけで諦めず、許可・禁止行列の帯幅や疎性を探すと bitmask DP が現れる。）"
       ],
@@ -94875,9 +94830,27 @@
               "source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-subset-bitmask-dp"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc309-g",
+            "claimPath": "/typicalTechniques/1",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa",
+              "source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"
+            ]
+          },
+          "kind": "primary",
+          "tagIds": [
+            "tag-frontier-profile-dp"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -94911,11 +94884,11 @@
               "source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-subset-bitmask-dp"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -98836,12 +98809,12 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「a_i を sort して s(x)=Σmin(a_i,x) を区分線形化し、区間ごとの floor((αx+β)/N) の和を floor_sum で計算する。」、解法への接続「a を昇順 sort し prefix sum を作る。x の区間 [a_k,a_{k+1}) では s(x)=prefix[k]+(N−k)x と書く。各区間で floor(s(x)/N) の総和を ACL floor_sum へ渡し、y=0 の一通りも足す。最小値以前の重複する正規形は公式の境界どおり補正する。」、学習成果「到達状態を正規形 (x,y) へ全単射し、10^9 幅の x 総和を O(N log max a) の floor_sum へ圧縮できる。」を照合し、tag-integer-boundary-blocks / outcome-sum-affine-floors-by-euclid をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「a_i を sort して s(x)=Σmin(a_i,x) を区分線形化し、区間ごとの floor((αx+β)/N) の和を floor_sum で計算する。」、解法への接続「a を昇順 sort し prefix sum を作る。x の区間 [a_k,a_{k+1}) では s(x)=prefix[k]+(N−k)x と書く。各区間で floor(s(x)/N) の総和を ACL floor_sum へ渡し、y=0 の一通りも足す。最小値以前の重複する正規形は公式の境界どおり補正する。」、学習成果「到達状態を正規形 (x,y) へ全単射し、10^9 幅の x 総和を O(N log max a) の floor_sum へ圧縮できる。」を照合し、tag-euclidean-floor-sum / outcome-sum-affine-floors-by-euclid をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-integer-boundary-blocks",
+        "tag-euclidean-floor-sum",
         "tag-state-normalization"
       ],
       "supportingTagIds": [],
@@ -98851,10 +98824,10 @@
       ],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
-        "unit-integer-boundary-blocks",
+        "unit-euclidean-floor-sum",
         "unit-normalization"
       ],
-      "presentationUnitId": "unit-integer-boundary-blocks",
+      "presentationUnitId": "unit-euclidean-floor-sum",
       "adHocElements": [
         "状態を直接特徴付ける前に操作列の冗長な相殺を消すと、二整数 (x,y) が到達列を一意に表す。（再利用可能な見方: 到達状態数では同じ結果を生む操作列が障害になるので、まず canonical sequence の存在を探す。）"
       ],
@@ -98891,7 +98864,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -98909,7 +98882,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -98927,7 +98900,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         }
@@ -144254,7 +144227,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「傾き順に直線の下包絡線を構築し、各直線が最小となる整数 x 区間ごとに floor_sum で許される y の個数を加える。」、解法への接続「A_i/B_i の比較を交差積で行い、同傾き処理後に下包絡線と交点の切上げ x を求める。x∈[1,Xmax) と各有効区間の共通部分に対し floor_sum を適用して総和を得る。」、学習成果「半平面共通部分の格子点数を下包絡線と floor_sum に分解して高速に数えられる。」を照合し、tag-convex-hull-trick / outcome-optimize-by-line-envelope をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-integer-boundary-blocks; 補助Outcome=outcome-sum-affine-floors-by-euclid; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-integer-boundary-blocks / outcome-sum-affine-floors-by-euclid を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「傾き順に直線の下包絡線を構築し、各直線が最小となる整数 x 区間ごとに floor_sum で許される y の個数を加える。」、解法への接続「A_i/B_i の比較を交差積で行い、同傾き処理後に下包絡線と交点の切上げ x を求める。x∈[1,Xmax) と各有効区間の共通部分に対し floor_sum を適用して総和を得る。」、学習成果「半平面共通部分の格子点数を下包絡線と floor_sum に分解して高速に数えられる。」を照合し、tag-convex-hull-trick / outcome-optimize-by-line-envelope をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-euclidean-floor-sum; 補助Outcome=outcome-sum-affine-floors-by-euclid; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-euclidean-floor-sum / outcome-sum-affine-floors-by-euclid を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -144262,7 +144235,7 @@
         "tag-convex-hull-trick"
       ],
       "supportingTagIds": [
-        "tag-integer-boundary-blocks"
+        "tag-euclidean-floor-sum"
       ],
       "primaryOutcomeId": "outcome-optimize-by-line-envelope",
       "additionalPrimaryOutcomeIds": [],
@@ -144270,7 +144243,7 @@
         "outcome-sum-affine-floors-by-euclid"
       ],
       "learningUnitIds": [
-        "unit-integer-boundary-blocks",
+        "unit-euclidean-floor-sum",
         "unit-line-envelope"
       ],
       "presentationUnitId": "unit-line-envelope",
@@ -144310,7 +144283,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -144346,7 +144319,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -164981,21 +164954,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「剰余積を一般化floor sum f_{p,q}の有限な線形結合へ変形してEuclid再帰で計算する」、解法への接続「必要ならB1,B2をswapする。剰余積展開のpolynomial項を閉形式で求め、各mixed項を一般化floor sumへ渡す。floor1·floor2は差cの恒等式でq=1,2の単独floor和へ置換し、全項を64/128 bit整数で合成する。」、学習成果「linear剰余二列の積和を、binary floor差恒等式と一般化floor sumで各case対数時間に求められる。」を照合し、tag-integer-boundary-blocks / outcome-sum-affine-floors-by-euclid をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「剰余積を一般化floor sum f_{p,q}の有限な線形結合へ変形してEuclid再帰で計算する」、解法への接続「必要ならB1,B2をswapする。剰余積展開のpolynomial項を閉形式で求め、各mixed項を一般化floor sumへ渡す。floor1·floor2は差cの恒等式でq=1,2の単独floor和へ置換し、全項を64/128 bit整数で合成する。」、学習成果「linear剰余二列の積和を、binary floor差恒等式と一般化floor sumで各case対数時間に求められる。」を照合し、tag-euclidean-floor-sum / outcome-sum-affine-floors-by-euclid をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-integer-boundary-blocks"
+        "tag-euclidean-floor-sum"
       ],
       "supportingTagIds": [],
       "primaryOutcomeId": "outcome-sum-affine-floors-by-euclid",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
-        "unit-integer-boundary-blocks"
+        "unit-euclidean-floor-sum"
       ],
-      "presentationUnitId": "unit-integer-boundary-blocks",
+      "presentationUnitId": "unit-euclidean-floor-sum",
       "adHocElements": [
         "二つのfloorの積は一般の二変量集計に見えるが、offset差がM未満という入力正規化により単独momentだけへ還元できる。（再利用可能な見方: floor積では二floorの差の値域を先に調べ、小集合なら満たす低次数多項式恒等式でcross termを消す。）"
       ],
@@ -165014,7 +164987,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -165032,7 +165005,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -165050,7 +165023,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         }
@@ -167168,23 +167141,22 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「queryをMo順に並べ、値軸を平方根bucketへ分けて頻度和と逆階乗積を管理する」、解法への接続「factとinvFactを前計算し、queryをMo順に処理する。現在区間へのadd/removeごとに値の頻度と所属bucketの頻度和・逆階乗積をO(1)更新し、各Xについて[1,X)の完全bucketと端数から(k,p)を集約してfact[k]×pを出力する。」、学習成果「区間の多重集合順列数を頻度和と逆階乗積へ分解し、Moと値軸平方根分割を組み合わせて更新回数に応じた計算量を設計できる。」を照合し、tag-threshold-heavy-light / outcome-balance-heavy-light-threshold をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-dynamic-modular-product; 補助Outcome=outcome-maintain-modular-product-under-factor-updates; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dynamic-modular-product / outcome-maintain-modular-product-under-factor-updates を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「queryをMo順に並べ、値軸を平方根bucketへ分けて頻度和と逆階乗積を管理する」、解法への接続「factとinvFactを前計算し、queryをMo順に処理する。現在区間へのadd/removeごとに値の頻度と所属bucketの頻度和・逆階乗積をO(1)更新し、各Xについて[1,X)の完全bucketと端数から(k,p)を集約してfact[k]×pを出力する。」、学習成果「区間の多重集合順列数を頻度和と逆階乗積へ分解し、Moと値軸平方根分割を組み合わせて更新回数に応じた計算量を設計できる。」を照合し、tag-mo-offline-range / outcome-schedule-range-query-updates をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-dynamic-modular-product; 補助Outcome=outcome-maintain-modular-product-under-factor-updates; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dynamic-modular-product / outcome-maintain-modular-product-under-factor-updates を補助技能として使う。; 補助Tag=tag-value-bucket-aggregation; 補助Outcome=outcome-aggregate-value-prefix-by-buckets; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-value-bucket-aggregation / outcome-aggregate-value-prefix-by-buckets を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-mo-offline-range",
-        "tag-threshold-heavy-light"
+        "tag-mo-offline-range"
       ],
       "supportingTagIds": [
         "tag-combinatorial-coefficients",
-        "tag-dynamic-modular-product"
+        "tag-dynamic-modular-product",
+        "tag-value-bucket-aggregation"
       ],
-      "primaryOutcomeId": "outcome-balance-heavy-light-threshold",
-      "additionalPrimaryOutcomeIds": [
-        "outcome-schedule-range-query-updates"
-      ],
+      "primaryOutcomeId": "outcome-schedule-range-query-updates",
+      "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
+        "outcome-aggregate-value-prefix-by-buckets",
         "outcome-formulate-combinatorial-coefficients",
         "outcome-maintain-modular-product-under-factor-updates"
       ],
@@ -167192,9 +167164,9 @@
         "unit-combinatorial-coefficients",
         "unit-dynamic-modular-product",
         "unit-mo-offline-range",
-        "unit-threshold-heavy-light"
+        "unit-value-bucket-aggregation"
       ],
-      "presentationUnitId": "unit-threshold-heavy-light",
+      "presentationUnitId": "unit-mo-offline-range",
       "adHocElements": [
         "segment treeを平方根分割へ替えるとquery単体は遅くなる一方、Moで圧倒的多数発生する更新からlog因子を消せるため、全体では高速になる。（再利用可能な見方: 複合アルゴリズムでは各操作を一律に最速化せず、更新回数とquery回数を別々に数えてデータ構造の非対称な計算量を選ぶ。）"
       ],
@@ -167229,11 +167201,11 @@
               "source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
-            "tag-threshold-heavy-light"
+            "tag-value-bucket-aggregation"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -167283,11 +167255,11 @@
               "source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
-            "tag-threshold-heavy-light"
+            "tag-value-bucket-aggregation"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -195599,21 +195571,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「条件を満たす個数を N から二つの floor_sum の差の総和を引く形で計算する。」、解法への接続「S1=Σ_{k=0}^{N-1}floor((Ak+B)/M)、S2=Σfloor(((A-1)k+B-1)/M) を floor_sum の符号・係数正規化込みで求め、N-(S1-S2) を返す。」、学習成果「巨大 N 上の線形剰余不等式を二つの floor_sum の差として対数時間で数えられる。」を照合し、tag-integer-boundary-blocks / outcome-sum-affine-floors-by-euclid をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「条件を満たす個数を N から二つの floor_sum の差の総和を引く形で計算する。」、解法への接続「S1=Σ_{k=0}^{N-1}floor((Ak+B)/M)、S2=Σfloor(((A-1)k+B-1)/M) を floor_sum の符号・係数正規化込みで求め、N-(S1-S2) を返す。」、学習成果「巨大 N 上の線形剰余不等式を二つの floor_sum の差として対数時間で数えられる。」を照合し、tag-euclidean-floor-sum / outcome-sum-affine-floors-by-euclid をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-integer-boundary-blocks"
+        "tag-euclidean-floor-sum"
       ],
       "supportingTagIds": [],
       "primaryOutcomeId": "outcome-sum-affine-floors-by-euclid",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "learningUnitIds": [
-        "unit-integer-boundary-blocks"
+        "unit-euclidean-floor-sum"
       ],
-      "presentationUnitId": "unit-integer-boundary-blocks",
+      "presentationUnitId": "unit-euclidean-floor-sum",
       "adHocElements": [
         "剰余不等式は剰余値を直接追わず、除算で何回 modulus をまたいだかの差として数えられる。（再利用可能な見方: 0/1 しか取らない床関数差を見つけると、それ自体が条件の指示関数になる。）"
       ],
@@ -195632,7 +195604,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -195650,7 +195622,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -195668,7 +195640,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-integer-boundary-blocks"
+            "tag-euclidean-floor-sum"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         }
@@ -290420,7 +290392,7 @@
       "impactSubjectDigest": "f1e0a7a12c22a4e4a4aed2632356ceaf3f7cfb5fec8704b3556b281c71436f40"
     }
   ],
-  "placementDigest": "04a0cefb3557f8b7c5de51569deb6e7305ddf60c37c91ab537c47edd3bedb862",
+  "placementDigest": "bdb8509c7c6abe1517fd1a0b81a6bdcffa53f35533151d3156e87bc115c1c407",
   "correctionImpactDigest": "d5154d05bb81da28d7b15fe937af487ec8770b9d81bf577062605f30d47e046e",
   "previewTaxonomyChangeDigest": "c84fe7608952547d6672a1ea12812d27f00df2d4aef59724748e369f57311467"
 }

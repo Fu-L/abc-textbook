@@ -1,0 +1,14 @@
+{
+  "id": "outcome-decompose-expectation-by-additive-potential",
+  "statement": "対称な確率過程の期待費用を頻度別関数の和へ分離し、自己ループを含む一段方程式と終端の較正から吸収までの期待費用を求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-optimize-stochastic-actions",
+    "outcome-propagate-probability-distribution",
+    "outcome-solve-stochastic-recurrence"
+  ],
+  "scopeIds": [
+    "abc249-ex",
+    "tag-additive-expectation-potential",
+    "unit-additive-expectation-potential"
+  ]
+}

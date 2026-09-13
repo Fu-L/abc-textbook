@@ -51,6 +51,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 87,
-  "globalIndex": 126,
+  "globalIndex": 128,
   "orderReason": "Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

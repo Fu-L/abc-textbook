@@ -55,6 +55,6 @@
   "stageRank": 2,
   "difficultyRank": 4,
   "representativeRank": 82,
-  "globalIndex": 78,
+  "globalIndex": 79,
   "orderReason": "接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。"
 }

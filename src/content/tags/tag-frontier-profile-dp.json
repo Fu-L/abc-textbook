@@ -1,7 +1,7 @@
 {
   "id": "tag-frontier-profile-dp",
   "name": "frontier/profile DP・境界状態圧縮",
-  "definition": "走査済み領域と未走査領域の境界だけに未来へ影響する色・接続partitionを正規化して保持し、幅指数で遷移する。",
+  "definition": "走査済み領域と未走査領域の境界だけに未来へ影響する色・値の使用済みフラグ・接続partitionを保持し、必要なら同値な接続ラベルを正規化して幅指数で遷移する。",
   "parentId": "tag-dp-state-transition",
   "prerequisiteTagIds": [
     "tag-dp-state-equivalence"
@@ -10,17 +10,21 @@
     "objectPatterns": [
       "connectivity partition",
       "grid sweep frontier",
-      "profile mask"
+      "profile mask",
+      "帯状matchingの使用済み値"
     ],
     "triggerPatterns": [
       "一辺だけ小さい盤面",
+      "対角近傍に限られる許可辺",
       "局所制約と全体連結性"
     ],
     "invariantPatterns": [
       "closed component condition",
-      "future interface only"
+      "future interface only",
+      "窓外の使用済み値を忘れる"
     ],
     "goalPatterns": [
+      "帯状部分matchingの計数",
       "幅指数DP",
       "盤面数え上げ"
     ],
@@ -28,14 +32,21 @@
     "minimumDimensions": 2,
     "requireObjectForStrictRecall": false
   },
-  "relatedTags": [],
+  "relatedTags": [
+    {
+      "tagId": "tag-subset-bitmask-dp",
+      "type": "analogy",
+      "rationale": "集合の使用済みフラグを状態にする点は共通する。境界DPでは未来へ影響しない要素を忘れ、指数部分を全要素数ではなく境界幅に限定できることをさらに証明する。"
+    }
+  ],
   "learningOutcomeIds": [
     "outcome-design-frontier-profile-dp"
   ],
   "representativeProblemIds": [
     "abc248-f",
-    "abc296-ex",
-    "abc379-g"
+    "abc379-g",
+    "abc309-g",
+    "abc296-ex"
   ],
   "aliases": [
     "frontier DP",

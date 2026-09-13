@@ -34,6 +34,7 @@ sidebar:
 - [剰余周期と指数法則を利用する](/learn/number-theory/modular-periodicity/)
 - [連分数・Stern–Brocotで有理近似する](/learn/number-theory/rational-approximation/)
 - [乗法的位数から最小周期を求める](/learn/number-theory/multiplicative-order-periods/)
+- [格子点転置によるfloor_sum](/learn/number-theory/euclidean-floor-sum/)
 - [Baby-Step Giant-Step・可逆作用の反復到達探索](/learn/number-theory/baby-step-giant-step/)
 - [Stern–Brocot木の経路と祖先](/learn/number-theory/stern-brocot-ancestry/)
 - [数値半群のconductor以後を一括到達とみなす](/learn/number-theory/numerical-semigroup-reachability/)
@@ -63,7 +64,6 @@ sidebar:
 - [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
 - [ABC226 F「Score of Permutations」](https://atcoder.jp/contests/abc226/tasks/abc226_f)
 - [ABC227 G「Divisors of Binomial Coefficient」](https://atcoder.jp/contests/abc227/tasks/abc227_g)
-- [ABC230 E「Fraction Floor Sum」](https://atcoder.jp/contests/abc230/tasks/abc230_e)
 - [ABC230 G「GCD Permutation」](https://atcoder.jp/contests/abc230/tasks/abc230_g)
 - [ABC234 F「Reordering」](https://atcoder.jp/contests/abc234/tasks/abc234_f)
 - [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
@@ -153,4 +153,4 @@ sidebar:
 - [ABC216 E 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_e)
 - [ABC216 E 公式解説](https://atcoder.jp/contests/abc216/editorial/2469)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-chapter-number-theory`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-chapter-number-theory`

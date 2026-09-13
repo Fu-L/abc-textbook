@@ -29,7 +29,13 @@
     "minimumDimensions": 2,
     "requireObjectForStrictRecall": false
   },
-  "relatedTags": [],
+  "relatedTags": [
+    {
+      "tagId": "tag-frontier-profile-dp",
+      "type": "analogy",
+      "rationale": "集合の使用済みフラグを状態にする点は共通する。境界DPでは未来へ影響しない要素を忘れ、指数部分を全要素数ではなく境界幅に限定できることをさらに証明する。"
+    }
+  ],
   "learningOutcomeIds": [
     "outcome-enumerate-subset-state-space"
   ],

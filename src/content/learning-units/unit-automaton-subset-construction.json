@@ -41,6 +41,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 82,
-  "globalIndex": 150,
+  "globalIndex": 152,
   "orderReason": "有限状態automatonの構成で得た考え方と実装を再利用し、非決定性automatonのsubset constructionの発動条件・正当化・境界を重複なく学ぶ。"
 }

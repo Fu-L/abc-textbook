@@ -37,6 +37,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 91,
-  "globalIndex": 157,
+  "globalIndex": 160,
   "orderReason": "辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

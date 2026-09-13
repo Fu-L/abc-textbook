@@ -41,6 +41,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 89,
-  "globalIndex": 131,
+  "globalIndex": 133,
   "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、半平面制約・凸領域の共通部分の発動条件・正当化・境界を重複なく学ぶ。"
 }

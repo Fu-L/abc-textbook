@@ -14,10 +14,10 @@
   "sourceRevisionIds": [
     "source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c",
     "source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba",
+    "source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6",
+    "source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc",
     "source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058",
-    "source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e",
-    "source-abc285-e-problem-5969ddb4e4b20f1cde65314e6076f59514c97d2a96fac730b85ceab969eca9a7",
-    "source-abc285-editorial-5530-310be7210dbffe3c8ce1ed2c646edf0cf96ed70c1505ae86db112906fbd424f5"
+    "source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e"
   ],
   "tagIds": [
     "tag-dp-prefix-partition"
@@ -35,6 +35,7 @@
   "docPath": "src/content/docs/learn/dynamic-programming/dp-prefix-partition.md",
   "problemIds": [
     "abc230-f",
+    "abc234-g",
     "abc285-e",
     "abc374-f",
     "abc466-e"
@@ -43,7 +44,8 @@
     "abc285-e",
     "abc230-f",
     "abc466-e",
-    "abc374-f"
+    "abc374-f",
+    "abc234-g"
   ],
   "relatedProblemIds": [
     "abc262-ex",

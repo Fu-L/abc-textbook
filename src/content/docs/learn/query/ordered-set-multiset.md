@@ -28,10 +28,10 @@ sidebar:
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC306 E「Best Performances」](https://atcoder.jp/contests/abc306/tasks/abc306_e)
-2. [ABC308 G「Minimum Xor Pair Query」](https://atcoder.jp/contests/abc308/tasks/abc308_g)
-3. [ABC330 E「Mex and Update」](https://atcoder.jp/contests/abc330/tasks/abc330_e)
-4. [ABC281 E「Least Elements」](https://atcoder.jp/contests/abc281/tasks/abc281_e)
+1. [ABC330 E「Mex and Update」](https://atcoder.jp/contests/abc330/tasks/abc330_e)
+2. [ABC306 E「Best Performances」](https://atcoder.jp/contests/abc306/tasks/abc306_e)
+3. [ABC281 E「Least Elements」](https://atcoder.jp/contests/abc281/tasks/abc281_e)
+4. [ABC308 G「Minimum Xor Pair Query」](https://atcoder.jp/contests/abc308/tasks/abc308_g)
 5. [ABC444 E「Sparse Range」](https://atcoder.jp/contests/abc444/tasks/abc444_e)
 6. [ABC314 G「Amulets」](https://atcoder.jp/contests/abc314/tasks/abc314_g)
 
@@ -66,4 +66,4 @@ sidebar:
 - [ABC268 H 公式解説](https://atcoder.jp/contests/abc268/editorial/4786)
 - [ABC268 H 公式問題文](https://atcoder.jp/contests/abc268/tasks/abc268_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-ordered-set-multiset`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-ordered-set-multiset`

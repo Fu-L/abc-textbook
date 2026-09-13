@@ -1,0 +1,42 @@
+{
+  "id": "unit-value-bucket-aggregation",
+  "kind": "section",
+  "title": "値軸のbucket分割と区間集約",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [],
+  "excludedTopics": [
+    "値軸のbucket分割と区間集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc405-editorial-12997-8d1a52b7eec8ba1e235d005c7c0f233f6fc13ee79e5c108af0ad19d9941fac66",
+    "source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5"
+  ],
+  "tagIds": [
+    "tag-value-bucket-aggregation"
+  ],
+  "ownedTagIds": [
+    "tag-value-bucket-aggregation"
+  ],
+  "learningOutcomeIds": [
+    "outcome-aggregate-value-prefix-by-buckets"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-aggregate-value-prefix-by-buckets"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/value-bucket-aggregation.md",
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc405-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "stageRank": 2,
+  "difficultyRank": 3,
+  "representativeRank": 75,
+  "globalIndex": 70,
+  "orderReason": "値軸を長さBのblockに分け、完全blockの要約と端数の走査を合成する。点更新とqueryの回数を別々に数え、O(1)更新とO(V/B+B)の値prefix取得を選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

@@ -3,7 +3,7 @@ title: "frontier/profile DP・境界状態圧縮"
 description: "frontier/profile DP・境界状態圧縮の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 154
+  order: 157
 ---
 
 # frontier/profile DP・境界状態圧縮
@@ -12,7 +12,13 @@ sidebar:
 
 ### frontier/profile DP・境界状態圧縮
 
-走査済み領域と未走査領域の境界だけに未来へ影響する色・接続partitionを正規化して保持し、幅指数で遷移する。
+走査済み領域と未走査領域の境界だけに未来へ影響する色・値の使用済みフラグ・接続partitionを保持し、必要なら同値な接続ラベルを正規化して幅指数で遷移する。
+
+まずABC248 Fの幅2の接続状態を学び、ABC379 Gで最後の一行の色だけを保持する。次にABC309 Gでは位置iの近傍にある値の使用済みフラグを残す。窓から外れた値は未来の禁止辺に接続しないため、その使用状況を忘れても後続の選択肢は変わらない。
+
+ABC309 Gは包除で固定する位置数kと、幅2X−1の窓のmaskを持つ部分matching計数である。未固定部分の(N−k)!と符号(−1)^kを最後に掛ける。指数部分を全体サイズNから帯幅Xへ移すことが核心である。
+
+ABC296 Exでは色や使用済みbitだけでは足りず、境界上の黒マス同士が既に接続しているかをpartitionとして保持する。同じ接続関係のラベルを正規化し、成分が境界から消えると後から接続できないことも遷移条件に含める。
 
 ## 前提と範囲
 
@@ -29,8 +35,9 @@ DPの最小十分状態で得た考え方と実装を再利用し、frontier/pro
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC248 F「Keep Connect」](https://atcoder.jp/contests/abc248/tasks/abc248_f)
-2. [ABC296 Ex「Unite」](https://atcoder.jp/contests/abc296/tasks/abc296_h)
-3. [ABC379 G「Count Grid 3-coloring」](https://atcoder.jp/contests/abc379/tasks/abc379_g)
+2. [ABC379 G「Count Grid 3-coloring」](https://atcoder.jp/contests/abc379/tasks/abc379_g)
+3. [ABC309 G「Ban Permutation」](https://atcoder.jp/contests/abc309/tasks/abc309_g)
+4. [ABC296 Ex「Unite」](https://atcoder.jp/contests/abc296/tasks/abc296_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -40,7 +47,7 @@ DPの最小十分状態で得た考え方と実装を再利用し、frontier/pro
 - [ABC248 F 公式問題文](https://atcoder.jp/contests/abc248/tasks/abc248_f)
 - [ABC296 H 公式解説](https://atcoder.jp/contests/abc296/editorial/6119)
 - [ABC296 H 公式問題文](https://atcoder.jp/contests/abc296/tasks/abc296_h)
-- [ABC379 G 公式解説](https://atcoder.jp/contests/abc379/editorial/11331)
-- [ABC379 G 公式問題文](https://atcoder.jp/contests/abc379/tasks/abc379_g)
+- [ABC309 G 公式解説](https://atcoder.jp/contests/abc309/editorial/6745)
+- [ABC309 G 公式問題文](https://atcoder.jp/contests/abc309/tasks/abc309_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-frontier-profile-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-frontier-profile-dp`

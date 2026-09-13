@@ -1,0 +1,10 @@
+{
+  "id": "outcome-aggregate-value-prefix-by-buckets",
+  "statement": "値軸をblockへ分け、点更新で要約を差分修正し、完全blockと端数からprefixの和・積を取得できる。更新回数とquery回数に応じてblock幅を選べる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc405-g",
+    "tag-value-bucket-aggregation",
+    "unit-value-bucket-aggregation"
+  ]
+}

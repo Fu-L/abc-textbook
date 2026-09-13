@@ -17,6 +17,22 @@ const problem = (id: string, advanced = false) => ({
 });
 
 describe('problem reading order', () => {
+  it('prioritizes the reviewed local progression over skill counts and representative rank', () => {
+    const intro = problem('abc270-e', true);
+    const extension = problem('abc373-e');
+    expect(
+      orderProblemsByPrerequisites(
+        [extension, intro],
+        skills,
+        [extension.problemId],
+        'unit-monotone-search',
+      ),
+    ).toEqual([intro.problemId, extension.problemId]);
+    expect(orderProblemsByPrerequisites([extension, intro], skills, [], 'unit-unrelated')).toEqual([
+      extension.problemId,
+      intro.problemId,
+    ]);
+  });
   it('puts prerequisite skills before advanced composition regardless of contest ID or representative rank', () => {
     const basic = problem('abc466-g');
     const advanced = problem('abc212-e', true);

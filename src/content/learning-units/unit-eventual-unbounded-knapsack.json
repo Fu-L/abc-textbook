@@ -45,6 +45,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 97,
-  "globalIndex": 179,
+  "globalIndex": 182,
   "orderReason": "通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。"
 }

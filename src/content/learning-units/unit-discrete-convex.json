@@ -71,6 +71,6 @@
   "stageRank": 0,
   "difficultyRank": 4,
   "representativeRank": 12,
-  "globalIndex": 97,
+  "globalIndex": 98,
   "orderReason": "目的関数の凸・凹性と傾き変化を捉え、breakpointや限界費用から最適点を求める。"
 }

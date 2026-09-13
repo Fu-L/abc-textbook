@@ -64,7 +64,7 @@ sidebar:
 - [ABC217 E 公式解説](https://atcoder.jp/contests/abc217/editorial/2577)
 - [ABC219 G 公式解説](https://atcoder.jp/contests/abc219/editorial/2653)
 - [ABC219 G 公式問題文](https://atcoder.jp/contests/abc219/tasks/abc219_g)
-- [ABC230 E 公式問題文](https://atcoder.jp/contests/abc230/tasks/abc230_e)
-- [ABC230 E 公式解説](https://atcoder.jp/contests/abc230/editorial/3015)
+- [ABC255 H 公式解説](https://atcoder.jp/contests/abc255/editorial/4103)
+- [ABC255 H 公式問題文](https://atcoder.jp/contests/abc255/tasks/abc255_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-decomposition-amortization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-decomposition-amortization`

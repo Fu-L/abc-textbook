@@ -41,6 +41,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 90,
-  "globalIndex": 136,
+  "globalIndex": 138,
   "orderReason": "gcd不変量・差分構造で得た考え方と実装を再利用し、Stern–Brocot木の経路と祖先の発動条件・正当化・境界を重複なく学ぶ。"
 }

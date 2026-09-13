@@ -8,7 +8,7 @@
     "abc372-g",
     "abc402-g",
     "abc443-g",
-    "tag-integer-boundary-blocks",
-    "unit-integer-boundary-blocks"
+    "tag-euclidean-floor-sum",
+    "unit-euclidean-floor-sum"
   ]
 }

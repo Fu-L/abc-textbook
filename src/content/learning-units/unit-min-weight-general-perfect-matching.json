@@ -41,6 +41,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 99,
-  "globalIndex": 182,
+  "globalIndex": 185,
   "orderReason": "二部matchingでは表せないpairing模型を作った後、奇cycleを扱うweighted blossomまたは重み付きTutte多項式で最小重みまで求める。"
 }

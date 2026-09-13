@@ -16,6 +16,7 @@
     "source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2"
   ],
   "tagIds": [
+    "tag-additive-expectation-potential",
     "tag-automaton-dp",
     "tag-carry-mixed-radix-dp",
     "tag-conway-number-games",
@@ -50,6 +51,7 @@
     "outcome-aggregate-subsequence-transitions-by-value",
     "outcome-classify-game-states",
     "outcome-count-prefix-constrained-objects",
+    "outcome-decompose-expectation-by-additive-potential",
     "outcome-design-carry-or-mixed-radix-dp",
     "outcome-design-frontier-profile-dp",
     "outcome-design-grid-table-dp",
@@ -113,6 +115,7 @@
     "abc247-f",
     "abc248-f",
     "abc249-e",
+    "abc249-ex",
     "abc251-e",
     "abc252-g",
     "abc253-e",
@@ -268,7 +271,6 @@
     "abc228-h",
     "abc236-e",
     "abc246-ex",
-    "abc249-ex",
     "abc262-ex",
     "abc265-e",
     "abc271-e",

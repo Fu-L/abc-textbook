@@ -14,6 +14,8 @@ sidebar:
 
 値や座標の頻度を動的な接頭辞和で数えて反転数を求めるか、複数本を組み合わせて次数付きの区間式を評価する。
 
+ABC296 Fでは、二列のmultisetが一致し、値がすべて異なる場合に反転数の偶奇を比較する。左から値を追加し、既出個数から現在値以下のprefix頻度を引けば新たな反転数が得られる。重複がある場合に置換の偶奇を調整できるという証明と、その不変量を計算するFenwick treeの役割を分ける。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
@@ -35,22 +37,23 @@ sidebar:
 5. [ABC287 G「Balance Update Query」](https://atcoder.jp/contests/abc287/tasks/abc287_g)
 6. [ABC276 F「Double Chance」](https://atcoder.jp/contests/abc276/tasks/abc276_f)
 7. [ABC261 F「Sorting Color Balls」](https://atcoder.jp/contests/abc261/tasks/abc261_f)
-8. [ABC378 E「Mod Sigma Problem」](https://atcoder.jp/contests/abc378/tasks/abc378_e)
-9. [ABC392 F「Insert」](https://atcoder.jp/contests/abc392/tasks/abc392_f)
-10. [ABC396 F「Rotated Inversions」](https://atcoder.jp/contests/abc396/tasks/abc396_f)
-11. [ABC449 E「A += v」](https://atcoder.jp/contests/abc449/tasks/abc449_e)
-12. [ABC452 F「Interval Inversion Count」](https://atcoder.jp/contests/abc452/tasks/abc452_f)
-13. [ABC253 F「Operations on a Matrix」](https://atcoder.jp/contests/abc253/tasks/abc253_f)
-14. [ABC351 F「Double Sum」](https://atcoder.jp/contests/abc351/tasks/abc351_f)
-15. [ABC231 F「Jealous Two」](https://atcoder.jp/contests/abc231/tasks/abc231_f)
-16. [ABC368 G「Add and Multiply Queries」](https://atcoder.jp/contests/abc368/tasks/abc368_g)
-17. [ABC436 F「Starry Landscape Photo」](https://atcoder.jp/contests/abc436/tasks/abc436_f)
-18. [ABC438 G「Sum of Min」](https://atcoder.jp/contests/abc438/tasks/abc438_g)
-19. [ABC221 E「LEQ」](https://atcoder.jp/contests/abc221/tasks/abc221_e)
-20. [ABC306 F「Merge Sets」](https://atcoder.jp/contests/abc306/tasks/abc306_f)
-21. [ABC380 G「Another Shuffle Window」](https://atcoder.jp/contests/abc380/tasks/abc380_g)
-22. [ABC431 G「One Time Swap 2」](https://atcoder.jp/contests/abc431/tasks/abc431_g)
-23. [ABC439 F「Beautiful Kadomatsu」](https://atcoder.jp/contests/abc439/tasks/abc439_f)
+8. [ABC296 F「Simultaneous Swap」](https://atcoder.jp/contests/abc296/tasks/abc296_f)
+9. [ABC378 E「Mod Sigma Problem」](https://atcoder.jp/contests/abc378/tasks/abc378_e)
+10. [ABC392 F「Insert」](https://atcoder.jp/contests/abc392/tasks/abc392_f)
+11. [ABC396 F「Rotated Inversions」](https://atcoder.jp/contests/abc396/tasks/abc396_f)
+12. [ABC449 E「A += v」](https://atcoder.jp/contests/abc449/tasks/abc449_e)
+13. [ABC452 F「Interval Inversion Count」](https://atcoder.jp/contests/abc452/tasks/abc452_f)
+14. [ABC253 F「Operations on a Matrix」](https://atcoder.jp/contests/abc253/tasks/abc253_f)
+15. [ABC351 F「Double Sum」](https://atcoder.jp/contests/abc351/tasks/abc351_f)
+16. [ABC231 F「Jealous Two」](https://atcoder.jp/contests/abc231/tasks/abc231_f)
+17. [ABC368 G「Add and Multiply Queries」](https://atcoder.jp/contests/abc368/tasks/abc368_g)
+18. [ABC436 F「Starry Landscape Photo」](https://atcoder.jp/contests/abc436/tasks/abc436_f)
+19. [ABC438 G「Sum of Min」](https://atcoder.jp/contests/abc438/tasks/abc438_g)
+20. [ABC221 E「LEQ」](https://atcoder.jp/contests/abc221/tasks/abc221_e)
+21. [ABC306 F「Merge Sets」](https://atcoder.jp/contests/abc306/tasks/abc306_f)
+22. [ABC380 G「Another Shuffle Window」](https://atcoder.jp/contests/abc380/tasks/abc380_g)
+23. [ABC431 G「One Time Swap 2」](https://atcoder.jp/contests/abc431/tasks/abc431_g)
+24. [ABC439 F「Beautiful Kadomatsu」](https://atcoder.jp/contests/abc439/tasks/abc439_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -74,4 +77,4 @@ sidebar:
 - [ABC233 H 公式解説](https://atcoder.jp/contests/abc233/editorial/3168)
 - [ABC233 H 公式問題文](https://atcoder.jp/contests/abc233/tasks/abc233_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-weighted-prefix-fenwick`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-weighted-prefix-fenwick`

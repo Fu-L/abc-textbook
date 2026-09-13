@@ -3199,13 +3199,11 @@ const TAG_SEEDS: readonly TagSeed[] = [
     parentId: 'tag-math-geometry-transformation',
     outcomeIds: [
       'outcome-partition-integer-parameter-ranges',
-      'outcome-sum-affine-floors-by-euclid',
       'outcome-evaluate-compressed-integer-blocks',
     ],
     unitIds: ['unit-integer-boundary-blocks'],
     recall: [
       'floor.?quotient',
-      'floor.?sum',
       '商が一定',
       '整数平方根',
       '整数k乗根',
@@ -3653,6 +3651,52 @@ const FINAL_TAG_CURRICULUM_PREREQUISITE_ADDITIONS: Readonly<Record<string, reado
 };
 
 const REFINED_TAG_SEEDS: readonly TagSeed[] = [
+  {
+    id: 'tag-euclidean-floor-sum',
+    name: '格子点転置によるfloor_sum',
+    definition:
+      '一次式の床和を格子点数とみなし、整数部分の取り出しと領域の転置でEuclid互除法型に再帰する。商一定区間の列挙とは異なり、傾きと法の交換が計算量を決める。',
+    parentId: 'tag-number-theory-structure',
+    outcomeIds: ['outcome-sum-affine-floors-by-euclid'],
+    unitIds: ['unit-euclidean-floor-sum'],
+    recall: ['floor_sum', 'Euclidean floor sum', '床和'],
+    object: ['affine floor sum', '格子点領域'],
+    trigger: ['一次式の床の総和', '巨大な整数区間'],
+    invariant: ['格子点数保存', 'Euclid型の引数減少'],
+    goal: ['対数時間の床和', '重み付き床和'],
+    priority: 81,
+  },
+  {
+    id: 'tag-value-bucket-aggregation',
+    name: '値軸のbucket分割と区間集約',
+    definition:
+      '値軸を長さBのblockに分け、完全blockの要約と端数の走査を合成する。点更新とqueryの回数を別々に数え、O(1)更新とO(V/B+B)の値prefix取得を選ぶ。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-aggregate-value-prefix-by-buckets'],
+    unitIds: ['unit-value-bucket-aggregation'],
+    recall: ['sqrt decomposition', '値軸平方根分割', 'bucket aggregate'],
+    object: ['値prefix', 'block要約'],
+    trigger: ['queryより更新が多い', '定数時間の点更新'],
+    invariant: ['完全blockと端数', '値別頻度の集約'],
+    goal: ['頻度和と積', '更新queryの計算量配分'],
+    priority: 75,
+  },
+  {
+    id: 'tag-additive-expectation-potential',
+    name: '期待値の頻度圧縮と加法的ポテンシャル',
+    definition:
+      '種類名に関する対称性を使い、高次元の期待残り費用を頻度別関数の和へ分離する。一種類の一段方程式を自己ループも含めて解き、終端で定数を較正する。',
+    parentId: 'tag-dp-state-transition',
+    prerequisiteTagIds: ['tag-stochastic-expectation-dp'],
+    outcomeIds: ['outcome-decompose-expectation-by-additive-potential'],
+    unitIds: ['unit-additive-expectation-potential'],
+    recall: ['additive potential', '期待値の頻度圧縮'],
+    object: ['種類別個数', '一変数関数の和'],
+    trigger: ['種類名に対する対称性', '周辺遷移が個数だけで決まる'],
+    invariant: ['期待ドリフト', '終端ポテンシャル', '一段方程式'],
+    goal: ['吸収時間の期待値', '高次元状態の分離'],
+    priority: 90,
+  },
   {
     id: 'tag-conway-number-games',
     name: '独立な数ゲームの和',
@@ -5657,16 +5701,21 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-frontier-profile-dp',
     name: 'frontier/profile DP・境界状態圧縮',
     definition:
-      '走査済み領域と未走査領域の境界だけに未来へ影響する色・接続partitionを正規化して保持し、幅指数で遷移する。',
+      '走査済み領域と未走査領域の境界だけに未来へ影響する色・値の使用済みフラグ・接続partitionを保持し、必要なら同値な接続ラベルを正規化して幅指数で遷移する。',
     parentId: 'tag-dp-state-transition',
     prerequisiteTagIds: ['tag-dp-state-equivalence'],
     outcomeIds: ['outcome-design-frontier-profile-dp'],
     unitIds: ['unit-frontier-profile-dp'],
     recall: ['frontier DP', 'profile DP', 'plug DP'],
-    object: ['grid sweep frontier', 'connectivity partition', 'profile mask'],
-    trigger: ['一辺だけ小さい盤面', '局所制約と全体連結性'],
-    invariant: ['future interface only', 'closed component condition'],
-    goal: ['幅指数DP', '盤面数え上げ'],
+    object: [
+      'grid sweep frontier',
+      'connectivity partition',
+      'profile mask',
+      '帯状matchingの使用済み値',
+    ],
+    trigger: ['一辺だけ小さい盤面', '局所制約と全体連結性', '対角近傍に限られる許可辺'],
+    invariant: ['future interface only', 'closed component condition', '窓外の使用済み値を忘れる'],
+    goal: ['幅指数DP', '盤面数え上げ', '帯状部分matchingの計数'],
     priority: 90,
   },
   {
@@ -5953,9 +6002,9 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-tree-euler-flattening': ['abc240-e', 'abc294-g', 'abc406-f'],
   'tag-heavy-light-decomposition': ['abc351-g'],
   'tag-virtual-tree': ['abc340-g'],
-  'tag-max-flow-min-cut': ['abc225-g', 'abc239-g'],
+  'tag-max-flow-min-cut': ['abc241-g', 'abc225-g', 'abc239-g'],
   'tag-flow-feasibility-lower-bounds': ['abc285-g'],
-  'tag-bipartite-matching-hall': ['abc241-g', 'abc401-g'],
+  'tag-bipartite-matching-hall': ['abc274-g', 'abc401-g'],
   'tag-min-cost-flow': ['abc214-h', 'abc407-g'],
   'tag-weighted-bipartite-matching': ['abc373-g'],
   'tag-min-weight-general-perfect-matching': ['abc412-g'],
@@ -5968,7 +6017,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-range-monoid-aggregation': ['abc223-f', 'abc343-f'],
   'tag-segment-tree-canonical-decomposition': ['abc342-g', 'abc414-g'],
   'tag-static-sorted-range-index': ['abc339-g'],
-  'tag-idempotent-overlap-range-query': ['abc282-f'],
+  'tag-idempotent-overlap-range-query': ['abc282-f', 'abc282-ex'],
   'tag-swag': ['abc456-f'],
   'tag-finite-function-composition': ['abc261-e'],
   'tag-priority-queue-best-first': ['abc297-e', 'abc391-f'],
@@ -6042,7 +6091,10 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-kinetic-order-maintenance': ['abc344-g', 'abc257-ex'],
   'tag-poset-dilworth-antichain': ['abc237-ex', 'abc354-g', 'abc457-g'],
   'tag-tree-precedence-contraction': ['abc376-g'],
-  'tag-frontier-profile-dp': ['abc248-f', 'abc296-ex', 'abc379-g'],
+  'tag-frontier-profile-dp': ['abc248-f', 'abc379-g', 'abc309-g', 'abc296-ex'],
+  'tag-euclidean-floor-sum': ['abc443-g', 'abc283-ex', 'abc402-g'],
+  'tag-value-bucket-aggregation': ['abc405-g'],
+  'tag-additive-expectation-potential': ['abc249-ex'],
   'tag-semiring-matrix-exponentiation': ['abc236-g', 'abc429-f', 'abc445-f'],
   'tag-monoid-exponentiation': ['abc448-e'],
   'tag-additive-tree-metric-reconstruction': ['abc451-e'],
@@ -6172,6 +6224,10 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。',
   'outcome-solve-stochastic-recurrence':
     '状態から先の期待費用・期待回数を定義し、一歩分の費用と未来の期待値を分け、自己ループを移項した方程式を解ける。',
+  'outcome-decompose-expectation-by-additive-potential':
+    '対称な確率過程の期待費用を頻度別関数の和へ分離し、自己ループを含む一段方程式と終端の較正から吸収までの期待費用を求められる。',
+  'outcome-aggregate-value-prefix-by-buckets':
+    '値軸をblockへ分け、点更新で要約を差分修正し、完全blockと端数からprefixの和・積を取得できる。更新回数とquery回数に応じてblock幅を選べる。',
   'outcome-classify-game-states':
     '後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。',
   'outcome-evaluate-adversarial-game-value':
@@ -6365,7 +6421,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-optimize-tree-order-by-cluster-contraction':
     '親先行制約下の交換比較をcluster統計へまとめ、01 on Treeの縮約貪欲で最適順序を構成できる。',
   'outcome-design-frontier-profile-dp':
-    '未処理領域へ影響するfrontier上の局所値と接続partitionだけを正規化し、幅指数のprofile DPを設計できる。',
+    '未処理領域へ影響する境界上の色・使用済みフラグ・接続partitionだけを残し、窓外の情報を忘れられることを証明して幅指数のprofile DPを設計できる。',
   'outcome-exponentiate-transition-over-semiring':
     '遷移を半環行列として定義し、結合則と単位元を保つ二分累乗・区間積で巨大回数の最適化遷移を計算できる。',
   'outcome-exponentiate-associative-composition':
@@ -6476,6 +6532,8 @@ export const NON_PRIMARY_OUTCOME_IDS = FINAL_TAXONOMY_OUTCOMES.filter((outcome) 
  * reports it once another exercise appears.
  */
 export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
+  'outcome-decompose-expectation-by-additive-potential',
+  'outcome-aggregate-value-prefix-by-buckets',
   'outcome-invert-generating-function-equation',
   'outcome-expand-euler-product-sparsely',
   'outcome-compute-binomial-by-lucas',
@@ -6485,7 +6543,6 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-traverse-stern-brocot-ancestors',
   'outcome-match-binary-tree-ancestors',
   'outcome-minimize-maximum-xor-by-bit-partition',
-  'outcome-answer-idempotent-range-query',
   'outcome-precompute-directional-grid-effects',
   'outcome-build-laminar-interval-containment-tree',
   'outcome-use-cycle-space-basis',
@@ -6533,6 +6590,8 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-shift-polynomial-by-factorial-convolution',
 ];
 export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
+  'unit-additive-expectation-potential',
+  'unit-value-bucket-aggregation',
   'unit-heavy-path-tree-dp',
   'unit-heavy-light-recursive-dp',
   'unit-stern-brocot-ancestry',
@@ -6558,7 +6617,6 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-min-weight-general-perfect-matching',
   'unit-half-plane-constraints',
   'unit-heavy-light-decomposition',
-  'unit-idempotent-overlap-range-query',
   'unit-information-theoretic-query-design',
   'unit-isotonic-regression',
   'unit-matroid-greedy',
@@ -6586,6 +6644,8 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-weighted-bipartite-matching',
 ];
 export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
+  'tag-additive-expectation-potential',
+  'tag-value-bucket-aggregation',
   'tag-heavy-path-tree-dp',
   'tag-heavy-light-recursive-dp',
   'tag-stern-brocot-ancestry',
@@ -6611,7 +6671,6 @@ export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-min-weight-general-perfect-matching',
   'tag-half-plane-constraints',
   'tag-heavy-light-decomposition',
-  'tag-idempotent-overlap-range-query',
   'tag-information-theoretic-query-design',
   'tag-isotonic-regression-pav',
   'tag-matroid-greedy',
@@ -6816,6 +6875,7 @@ const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
   'unit-separable-convex-marginals': 'unit-discrete-convex',
   'unit-directed-walk-periodicity': 'unit-directed-condensation',
   'unit-frontier-profile-dp': 'unit-dp-state-design',
+  'unit-additive-expectation-potential': 'unit-dp-stochastic',
   'unit-kinetic-order-maintenance': 'unit-event-sweep',
   'unit-cyclic-order-crossing': 'unit-geometry-primitives',
 };
@@ -7981,17 +8041,7 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   {
     from: 'outcome-bound-total-work',
     to: 'outcome-balance-heavy-light-threshold',
-    problemIds: [
-      'abc219-g',
-      'abc230-e',
-      'abc242-g',
-      'abc259-ex',
-      'abc335-f',
-      'abc345-g',
-      'abc350-g',
-      'abc365-g',
-      'abc405-g',
-    ],
+    problemIds: ['abc219-g', 'abc259-ex', 'abc335-f', 'abc345-g', 'abc350-g', 'abc365-g'],
   },
   {
     from: 'outcome-bound-total-work',
@@ -8066,7 +8116,6 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
     from: 'outcome-reduce-selection-to-network-optimization',
     to: 'outcome-solve-bipartite-matching',
     problemIds: [
-      'abc241-g',
       'abc274-g',
       'abc313-ex',
       'abc317-g',
@@ -8082,6 +8131,7 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
     from: 'outcome-reduce-selection-to-network-optimization',
     to: 'outcome-model-max-flow-min-cut',
     problemIds: [
+      'abc241-g',
       'abc225-g',
       'abc227-h',
       'abc239-g',

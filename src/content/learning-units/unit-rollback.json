@@ -47,6 +47,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 83,
-  "globalIndex": 117,
+  "globalIndex": 119,
   "orderReason": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -14,15 +14,9 @@ sidebar:
 
 floor値・整数根・表記桁数・圧縮block内の式が変わる整数境界を正確に分け、区間ごとに処理する。
 
-商floor(N/i)が一定の区間をまとめる手法と、一次式の床和F(n,m,a,b)=Σ_{i=0}^{n−1}floor((ai+b)/m)をEuclid互除法型に計算する手法は別である。後者は次の引数変換を使う。
+商q=floor(N/l)が一定の最大区間は[l,floor(N/q)]である。右端の次へ進めば、i≤√Nの部分と商≤√Nの部分を合わせてO(√N)個のblockだけを処理できる。三角数・整数根・桁数の境界も、式が変わる位置を整数演算で求める。
 
-定義: n≥0,m>0。a=qm+a′,b=rm+b′（0≤a′,b′<m）と分け、F=q·n(n−1)/2+rn+F(n,m,a′,b′)。負の係数でもfloor除算で非負剰余を取れば同じ式。
-
-転置: 正規化後a>0としてy=floor((an+b)/m),c=(an+b) mod m。Fは0≤i<nかつ1≤j、mj≤ai+bの格子点数。iをn−1−iに反転し、jをy−tと書くと各t=0,…,y−1で許されるiの数はfloor((mt+c)/a)。従ってF(n,m,a,b)=F(y,a,m,c)。
-
-終了と計算量: a=0なら正規化後の和は0。y=0でも0。転置後の法はa<mとなり、次の係数正規化でm mod aが現れる。Euclid互除法と同じ引数減少なので反復はO(log m)。
-
-ABC283 Exでは対象列v=b+Miのbit kの指示値がfloor((v+2^k)/2^{k+1})−floor(v/2^{k+1})。この二つのFを計算し、bitごとの寄与を足す。
+一次式の床和を格子点領域の転置で計算するfloor_sumは別の原理である。商一定区間の列挙と混ぜず、「格子点転置によるfloor_sum」の節で引数の減少と重み付き和への拡張を学ぶ。
 
 ## 前提と範囲
 
@@ -38,17 +32,14 @@ floorや整数根の値が変わる境界を正確に求め、同値な整数範
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC253 G「Swap Many Times」](https://atcoder.jp/contests/abc253/tasks/abc253_g)
-2. [ABC356 E「Max/Min」](https://atcoder.jp/contests/abc356/tasks/abc356_e)
-3. [ABC402 G「Sum of Prod of Mod of Linear」](https://atcoder.jp/contests/abc402/tasks/abc402_g)
+1. [ABC230 E「Fraction Floor Sum」](https://atcoder.jp/contests/abc230/tasks/abc230_e)
+2. [ABC253 G「Swap Many Times」](https://atcoder.jp/contests/abc253/tasks/abc253_g)
+3. [ABC356 E「Max/Min」](https://atcoder.jp/contests/abc356/tasks/abc356_e)
 4. [ABC414 E「Count A%B=C」](https://atcoder.jp/contests/abc414/tasks/abc414_e)
-5. [ABC443 G「Another Mod of Linear Problem」](https://atcoder.jp/contests/abc443/tasks/abc443_g)
-6. [ABC293 F「Zero or One」](https://atcoder.jp/contests/abc293/tasks/abc293_f)
-7. [ABC283 Ex「Popcount Sum」](https://atcoder.jp/contests/abc283/tasks/abc283_h)
-8. [ABC452 E「You WILL Like Sigma Problem」](https://atcoder.jp/contests/abc452/tasks/abc452_e)
-9. [ABC313 G「Redistribution of Piles」](https://atcoder.jp/contests/abc313/tasks/abc313_g)
-10. [ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://atcoder.jp/contests/abc315/tasks/abc315_g)
-11. [ABC444 F「Half and Median」](https://atcoder.jp/contests/abc444/tasks/abc444_f)
+5. [ABC293 F「Zero or One」](https://atcoder.jp/contests/abc293/tasks/abc293_f)
+6. [ABC452 E「You WILL Like Sigma Problem」](https://atcoder.jp/contests/abc452/tasks/abc452_e)
+7. [ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://atcoder.jp/contests/abc315/tasks/abc315_g)
+8. [ABC444 F「Half and Median」](https://atcoder.jp/contests/abc444/tasks/abc444_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -57,14 +48,12 @@ floorや整数根の値が変わる境界を正確に求め、同値な整数範
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC216 E「Amusement Park」](https://atcoder.jp/contests/abc216/tasks/abc216_e)
-- [ABC230 E「Fraction Floor Sum」](https://atcoder.jp/contests/abc230/tasks/abc230_e)
 - [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
 - [ABC240 F「Sum Sum Max」](https://atcoder.jp/contests/abc240/tasks/abc240_f)
 - [ABC243 G「Sqrt」](https://atcoder.jp/contests/abc243/tasks/abc243_g)
 - [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
 - [ABC361 F「x = a^b」](https://atcoder.jp/contests/abc361/tasks/abc361_f)
 - [ABC370 G「Divisible by 3」](https://atcoder.jp/contests/abc370/tasks/abc370_g)
-- [ABC372 G「Ax + By < C」](https://atcoder.jp/contests/abc372/tasks/abc372_g)
 - [ABC429 G「Sum of Pow of Mod of Linear」](https://atcoder.jp/contests/abc429/tasks/abc429_g)
 
 ## 根拠
@@ -76,4 +65,4 @@ floorや整数根の値が変わる境界を正確に求め、同値な整数範
 - [ABC239 H 公式解説](https://atcoder.jp/contests/abc239/editorial/3357)
 - [ABC239 H 公式問題文](https://atcoder.jp/contests/abc239/tasks/abc239_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-integer-boundary-blocks`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-integer-boundary-blocks`

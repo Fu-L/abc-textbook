@@ -18,6 +18,8 @@ dp[r]をprefix [0,r)の答えとし、最後のブロック[l,r)を固定してd
 
 ABC285 Eでは休日間の平日ブロックの価値を前計算する。ABC288 Fでは最後の数の桁を一つ延ばす式を用いて全切れ目の和をまとめる。区間合成と違い、最後のブロック自体を同種の区間DPで解くとは限らない。
 
+ABC234 Gではdp[i]=Σ_{j<i}dp[j]·(max A[j,i)−min A[j,i))。最後の区間の寄与をmaxとminへ分け、各切れ目jの重みdp[j]を極値が等しい連続群ごとに単調stackへ持つ。右端追加で極値が更新される群をまとめて併合するため、各要素は高々一度push・popされる。
+
 ABC374 Fでは、出荷を前へ詰めても待ち時間が悪化しないことから、出荷時刻をT_i+kXへ限定する。到着順に先頭から何個を出荷済みかと、候補時刻を状態にして、次の荷物のブロックを出荷するDPへ進む。候補を残してよい証明を先に行い、時刻差には圧縮順位でなく元の時刻を使う。
 
 ## 前提と範囲
@@ -38,6 +40,7 @@ DPの最小十分状態で得た考え方と実装を再利用し、prefix分割
 2. [ABC230 F「Predilection」](https://atcoder.jp/contests/abc230/tasks/abc230_f)
 3. [ABC466 E「Range Flip」](https://atcoder.jp/contests/abc466/tasks/abc466_e)
 4. [ABC374 F「Shipping」](https://atcoder.jp/contests/abc374/tasks/abc374_f)
+5. [ABC234 G「Divide a Sequence」](https://atcoder.jp/contests/abc234/tasks/abc234_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -52,9 +55,9 @@ DPの最小十分状態で得た考え方と実装を再利用し、prefix分割
 
 - [ABC230 F 公式解説](https://atcoder.jp/contests/abc230/editorial/91)
 - [ABC230 F 公式問題文](https://atcoder.jp/contests/abc230/tasks/abc230_f)
+- [ABC234 G 公式解説](https://atcoder.jp/contests/abc234/editorial/3227)
+- [ABC234 G 公式問題文](https://atcoder.jp/contests/abc234/tasks/abc234_g)
 - [ABC262 H 公式解説](https://atcoder.jp/contests/abc262/editorial/4481)
 - [ABC262 H 公式問題文](https://atcoder.jp/contests/abc262/tasks/abc262_h)
-- [ABC285 E 公式問題文](https://atcoder.jp/contests/abc285/tasks/abc285_e)
-- [ABC285 E 公式解説](https://atcoder.jp/contests/abc285/editorial/5530)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-dp-prefix-partition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-dp-prefix-partition`

@@ -41,6 +41,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 90,
-  "globalIndex": 156,
+  "globalIndex": 159,
   "orderReason": "区間monoid要約で得た考え方と実装を再利用し、Segment Tree Beatsの発動条件・正当化・境界を重複なく学ぶ。"
 }

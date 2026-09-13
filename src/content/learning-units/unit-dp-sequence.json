@@ -16,8 +16,8 @@
     "source-abc214-f-problem-203e028b0a1974274025dd558bce523e82e7a094cc1d77c32448a6e2abd00b75",
     "source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01",
     "source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1",
-    "source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc",
-    "source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"
+    "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
+    "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
   ],
   "tagIds": [
     "tag-sequence-subsequence-dp"
@@ -35,7 +35,6 @@
   "docPath": "src/content/docs/learn/dynamic-programming/dp-sequence.md",
   "problemIds": [
     "abc225-f",
-    "abc237-f",
     "abc238-f",
     "abc299-f",
     "abc315-f",
@@ -50,13 +49,13 @@
     "abc299-f",
     "abc362-e",
     "abc386-f",
-    "abc237-f",
     "abc345-e",
     "abc315-f",
     "abc225-f"
   ],
   "relatedProblemIds": [
     "abc214-f",
+    "abc242-ex",
     "abc246-ex",
     "abc271-e",
     "abc457-g"

@@ -45,6 +45,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 90,
-  "globalIndex": 153,
+  "globalIndex": 156,
   "orderReason": "有限局面DAGのminimaxで得た考え方と実装を再利用し、独立な数ゲームの和の発動条件・正当化・境界を重複なく学ぶ。"
 }

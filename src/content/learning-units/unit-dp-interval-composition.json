@@ -36,9 +36,7 @@
   "problemIds": [
     "abc217-f",
     "abc233-g",
-    "abc234-g",
     "abc238-ex",
-    "abc242-ex",
     "abc252-g",
     "abc261-g",
     "abc262-g",
@@ -48,17 +46,15 @@
     "abc400-f"
   ],
   "directProblemIds": [
-    "abc262-g",
     "abc252-g",
-    "abc292-g",
-    "abc325-g",
-    "abc400-f",
     "abc217-f",
+    "abc325-g",
     "abc233-g",
-    "abc234-g",
-    "abc261-g",
+    "abc292-g",
+    "abc262-g",
+    "abc400-f",
     "abc298-g",
-    "abc242-ex",
+    "abc261-g",
     "abc238-ex"
   ],
   "relatedProblemIds": [
@@ -71,6 +67,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 76,
-  "globalIndex": 71,
+  "globalIndex": 72,
   "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、区間合成・領域分割DPの発動条件・正当化・境界を重複なく学ぶ。"
 }

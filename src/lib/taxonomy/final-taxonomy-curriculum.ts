@@ -132,6 +132,7 @@ export const CURRICULUM_STAGES = [
       'unit-tree-euler-flattening',
       'unit-tree-metric',
       'unit-weighted-prefix-fenwick',
+      'unit-value-bucket-aggregation',
       'unit-weighted-shortest-path',
       'unit-xor-linear-basis',
     ],
@@ -187,6 +188,7 @@ export const CURRICULUM_STAGES = [
       'unit-randomized-algebraic-fingerprint',
       'unit-randomized-algorithms',
       'unit-rational-approximation',
+      'unit-euclidean-floor-sum',
       'unit-recursive-compressed-string',
       'unit-rollback',
       'unit-segment-tree-canonical-decomposition',
@@ -211,6 +213,7 @@ export const CURRICULUM_STAGES = [
     rationale: '発展算法。強い構造条件や代数的道具を使う最適化・数え上げを学ぶ。',
     unitIds: [
       'unit-additive-tree-metric-reconstruction',
+      'unit-additive-expectation-potential',
       'unit-automaton-subset-construction',
       'unit-bostan-mori',
       'unit-conway-number-games',

@@ -3,7 +3,7 @@ title: "Suffix Automatonで部分文字列集合を表す"
 description: "Suffix Automatonで部分文字列集合を表すの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 149
+  order: 151
 ---
 
 # Suffix Automatonで部分文字列集合を表す
@@ -37,4 +37,4 @@ endpos同値類をstateとし、suffix linkとcloneで全部分文字列の遷�
 - [ABC433 G 公式解説](https://atcoder.jp/contests/abc433/editorial/14604)
 - [ABC433 G 公式問題文](https://atcoder.jp/contests/abc433/tasks/abc433_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-suffix-automaton`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-suffix-automaton`

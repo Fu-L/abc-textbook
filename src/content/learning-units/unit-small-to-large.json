@@ -56,6 +56,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 72,
-  "globalIndex": 100,
+  "globalIndex": 101,
   "orderReason": "小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

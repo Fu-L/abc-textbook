@@ -3,7 +3,7 @@ title: "組合せを生成関数へ符号化する"
 description: "組合せを生成関数へ符号化するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 108
+  order: 109
 ---
 
 # 組合せを生成関数へ符号化する
@@ -43,12 +43,11 @@ sidebar:
 11. [ABC432 G「Sum of Binom(A, B)」](https://atcoder.jp/contests/abc432/tasks/abc432_g)
 12. [ABC247 Ex「Rearranging Problem」](https://atcoder.jp/contests/abc247/tasks/abc247_h)
 13. [ABC436 G「Linear Inequation」](https://atcoder.jp/contests/abc436/tasks/abc436_g)
-14. [ABC249 Ex「Dye Color」](https://atcoder.jp/contests/abc249/tasks/abc249_h)
-15. [ABC331 G「Collect Them All」](https://atcoder.jp/contests/abc331/tasks/abc331_g)
-16. [ABC352 G「Socks 3」](https://atcoder.jp/contests/abc352/tasks/abc352_g)
-17. [ABC409 G「Accumulation of Wealth」](https://atcoder.jp/contests/abc409/tasks/abc409_g)
-18. [ABC462 G「Completely Wrong」](https://atcoder.jp/contests/abc462/tasks/abc462_g)
-19. [ABC345 G「Sugoroku 5」](https://atcoder.jp/contests/abc345/tasks/abc345_g)
+14. [ABC331 G「Collect Them All」](https://atcoder.jp/contests/abc331/tasks/abc331_g)
+15. [ABC352 G「Socks 3」](https://atcoder.jp/contests/abc352/tasks/abc352_g)
+16. [ABC409 G「Accumulation of Wealth」](https://atcoder.jp/contests/abc409/tasks/abc409_g)
+17. [ABC462 G「Completely Wrong」](https://atcoder.jp/contests/abc462/tasks/abc462_g)
+18. [ABC345 G「Sugoroku 5」](https://atcoder.jp/contests/abc345/tasks/abc345_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -81,4 +80,4 @@ sidebar:
 - [ABC235 H 公式解説](https://atcoder.jp/contests/abc235/editorial/3250)
 - [ABC235 H 公式問題文](https://atcoder.jp/contests/abc235/tasks/abc235_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-generating-functions`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-generating-functions`

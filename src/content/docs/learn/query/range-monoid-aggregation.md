@@ -83,4 +83,4 @@ queryに十分な値と結合順・単位元を定義し、Segment Treeまたは
 - [ABC246 H 公式解説](https://atcoder.jp/contests/abc246/editorial/3705)
 - [ABC246 H 公式問題文](https://atcoder.jp/contests/abc246/tasks/abc246_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-range-monoid-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-range-monoid-aggregation`

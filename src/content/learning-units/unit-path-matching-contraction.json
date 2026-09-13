@@ -46,6 +46,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 99,
-  "globalIndex": 183,
+  "globalIndex": 186,
   "orderReason": "path matchingの交互構造を使い、最小edgeの採用後も残りの全cardinality最適値を保存する補正縮約を導いてheapと双方向linkで実装する。"
 }

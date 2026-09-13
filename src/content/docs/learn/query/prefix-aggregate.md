@@ -30,11 +30,11 @@ ABC465 Fの添字は{0,…,9}の6軸の直積。各軸を小さい桁値から�
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC430 F「Back and Forth Filling」](https://atcoder.jp/contests/abc430/tasks/abc430_f)
-2. [ABC260 G「Scalene Triangle Area」](https://atcoder.jp/contests/abc260/tasks/abc260_g)
-3. [ABC268 E「Chinese Restaurant (Three-Star Version)」](https://atcoder.jp/contests/abc268/tasks/abc268_e)
-4. [ABC278 E「Grid Filling」](https://atcoder.jp/contests/abc278/tasks/abc278_e)
-5. [ABC300 F「More Holidays」](https://atcoder.jp/contests/abc300/tasks/abc300_f)
+1. [ABC278 E「Grid Filling」](https://atcoder.jp/contests/abc278/tasks/abc278_e)
+2. [ABC300 F「More Holidays」](https://atcoder.jp/contests/abc300/tasks/abc300_f)
+3. [ABC430 F「Back and Forth Filling」](https://atcoder.jp/contests/abc430/tasks/abc430_f)
+4. [ABC268 E「Chinese Restaurant (Three-Star Version)」](https://atcoder.jp/contests/abc268/tasks/abc268_e)
+5. [ABC260 G「Scalene Triangle Area」](https://atcoder.jp/contests/abc260/tasks/abc260_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -83,4 +83,4 @@ ABC465 Fの添字は{0,…,9}の6軸の直積。各軸を小さい桁値から�
 - [ABC233 H 公式解説](https://atcoder.jp/contests/abc233/editorial/3168)
 - [ABC233 H 公式問題文](https://atcoder.jp/contests/abc233/tasks/abc233_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-prefix-aggregate`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-prefix-aggregate`

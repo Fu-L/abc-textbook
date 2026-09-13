@@ -40,7 +40,8 @@
     "outcome-answer-idempotent-range-query"
   ],
   "representativeProblemIds": [
-    "abc282-f"
+    "abc282-f",
+    "abc282-ex"
   ],
   "aliases": [
     "Sparse Table",

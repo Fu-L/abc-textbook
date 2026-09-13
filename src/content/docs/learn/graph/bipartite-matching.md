@@ -3,7 +3,7 @@ title: "二部matching・Hall・Kőnig"
 description: "二部matching・Hall・Kőnigの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 77
+  order: 78
 ---
 
 # 二部matching・Hall・Kőnig
@@ -13,6 +13,8 @@ sidebar:
 ### 二部matching・Hall・Kőnig
 
 左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。
+
+左右の各頂点が高々一つの相手を選ぶ条件から始める。ABC401 Gの人とボタンの一対一対応で、距離の閾値を固定した完全matching判定を学ぶ。ABC274 Gでは横区間と縦区間からなる二部グラフへ還元し、matchingと最小vertex coverの関係を確認する。複数の仕事を同じ受け手へ割り当てる場合は、最大流の容量付き割当へ進む。
 
 ABC215 Hでは品種集合Sの在庫総数をf(S)、許可品種がすべてSに含まれる注文数をg(S)とする。全Sでf(S)≥g(S)がHallの条件である。供給を減らして割当て不能にする最小削除数は、g(S)>0でのf(S)−g(S)+1の最小値。注文0の条件は供給を0まで減らしても破れない。
 
@@ -32,17 +34,16 @@ ABC215 Hでは品種集合Sの在庫総数をf(S)、許可品種がすべてSに
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC241 G「Round Robin」](https://atcoder.jp/contests/abc241/tasks/abc241_g)
-2. [ABC461 G「Graph Problem 2026」](https://atcoder.jp/contests/abc461/tasks/abc461_g)
-3. [ABC317 G「Rearranging」](https://atcoder.jp/contests/abc317/tasks/abc317_g)
-4. [ABC401 G「Push Simultaneously」](https://atcoder.jp/contests/abc401/tasks/abc401_g)
-5. [ABC274 G「Security Camera 3」](https://atcoder.jp/contests/abc274/tasks/abc274_g)
-6. [ABC437 G「Colorful Christmas Tree」](https://atcoder.jp/contests/abc437/tasks/abc437_g)
-7. [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
-8. [ABC424 G「Set list」](https://atcoder.jp/contests/abc424/tasks/abc424_g)
-9. [ABC313 Ex「Group Photo」](https://atcoder.jp/contests/abc313/tasks/abc313_h)
-10. [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
-11. [ABC374 G「Only One Product Name」](https://atcoder.jp/contests/abc374/tasks/abc374_g)
+1. [ABC401 G「Push Simultaneously」](https://atcoder.jp/contests/abc401/tasks/abc401_g)
+2. [ABC274 G「Security Camera 3」](https://atcoder.jp/contests/abc274/tasks/abc274_g)
+3. [ABC461 G「Graph Problem 2026」](https://atcoder.jp/contests/abc461/tasks/abc461_g)
+4. [ABC317 G「Rearranging」](https://atcoder.jp/contests/abc317/tasks/abc317_g)
+5. [ABC437 G「Colorful Christmas Tree」](https://atcoder.jp/contests/abc437/tasks/abc437_g)
+6. [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
+7. [ABC424 G「Set list」](https://atcoder.jp/contests/abc424/tasks/abc424_g)
+8. [ABC313 Ex「Group Photo」](https://atcoder.jp/contests/abc313/tasks/abc313_h)
+9. [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
+10. [ABC374 G「Only One Product Name」](https://atcoder.jp/contests/abc374/tasks/abc374_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -61,7 +62,7 @@ ABC215 Hでは品種集合Sの在庫総数をf(S)、許可品種がすべてSに
 - [ABC215 H 公式問題文](https://atcoder.jp/contests/abc215/tasks/abc215_h)
 - [ABC237 H 公式解説](https://atcoder.jp/contests/abc237/editorial/3321)
 - [ABC237 H 公式問題文](https://atcoder.jp/contests/abc237/tasks/abc237_h)
-- [ABC241 G 公式解説](https://atcoder.jp/contests/abc241/editorial/3452)
-- [ABC241 G 公式問題文](https://atcoder.jp/contests/abc241/tasks/abc241_g)
+- [ABC274 G 公式解説](https://atcoder.jp/contests/abc274/editorial/5024)
+- [ABC274 G 公式問題文](https://atcoder.jp/contests/abc274/tasks/abc274_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-bipartite-matching`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-bipartite-matching`

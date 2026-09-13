@@ -55,6 +55,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 79,
-  "globalIndex": 107,
+  "globalIndex": 108,
   "orderReason": "ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。"
 }

@@ -1,0 +1,51 @@
+{
+  "id": "tag-euclidean-floor-sum",
+  "name": "格子点転置によるfloor_sum",
+  "definition": "一次式の床和を格子点数とみなし、整数部分の取り出しと領域の転置でEuclid互除法型に再帰する。商一定区間の列挙とは異なり、傾きと法の交換が計算量を決める。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "affine floor sum",
+      "格子点領域"
+    ],
+    "triggerPatterns": [
+      "一次式の床の総和",
+      "巨大な整数区間"
+    ],
+    "invariantPatterns": [
+      "Euclid型の引数減少",
+      "格子点数保存"
+    ],
+    "goalPatterns": [
+      "対数時間の床和",
+      "重み付き床和"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-integer-boundary-blocks",
+      "type": "contrast",
+      "rationale": "商が一定の区間を列挙するO(√N)の分割と、床和の格子点領域を転置して法を減らすO(log m)の再帰を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-sum-affine-floors-by-euclid"
+  ],
+  "representativeProblemIds": [
+    "abc443-g",
+    "abc283-ex",
+    "abc402-g"
+  ],
+  "aliases": [
+    "Euclid型床和",
+    "floor_sum",
+    "格子点転置"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

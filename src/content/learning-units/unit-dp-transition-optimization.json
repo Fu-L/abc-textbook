@@ -103,6 +103,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 7,
-  "globalIndex": 90,
+  "globalIndex": 91,
   "orderReason": "正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。"
 }

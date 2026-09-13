@@ -57,6 +57,6 @@
   "stageRank": 3,
   "difficultyRank": 1,
   "representativeRank": 8,
-  "globalIndex": 84,
+  "globalIndex": 85,
   "orderReason": "問い合わせ形式・回数上限・応答依存性・flushを明示し、通常のアルゴリズムをjudgeとの対話列として安全に実行する。"
 }

@@ -3,7 +3,7 @@ title: "kinetic sorting・交差event順序更新"
 description: "kinetic sorting・交差event順序更新の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 168
+  order: 171
 ---
 
 # kinetic sorting・交差event順序更新
@@ -40,4 +40,4 @@ event・値順のオフライン走査で得た考え方と実装を再利用し
 - [ABC344 G 公式解説](https://atcoder.jp/contests/abc344/editorial/9491)
 - [ABC344 G 公式問題文](https://atcoder.jp/contests/abc344/tasks/abc344_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-kinetic-order-maintenance`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-kinetic-order-maintenance`

@@ -12,10 +12,10 @@
   "sourceRevisionIds": [
     "source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed",
     "source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34",
-    "source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0",
-    "source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019",
-    "source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8",
-    "source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5"
+    "source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0",
+    "source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a",
+    "source-abc335-editorial-9038-75d1ffdd8b1f3f04351303bd37aa5663466c9211f668ed0c1fd1e25f0d815f2e",
+    "source-abc335-f-problem-43ce80c8813d030f4d8d45e6809eb385d25fd1db5fa21b707b2a9f9c32678483"
   ],
   "tagIds": [
     "tag-threshold-heavy-light"
@@ -33,23 +33,17 @@
   "docPath": "src/content/docs/learn/modeling/threshold-heavy-light.md",
   "problemIds": [
     "abc219-g",
-    "abc230-e",
-    "abc242-g",
     "abc259-ex",
     "abc335-f",
     "abc350-g",
-    "abc365-g",
-    "abc405-g"
+    "abc365-g"
   ],
   "directProblemIds": [
     "abc219-g",
     "abc335-f",
     "abc350-g",
     "abc259-ex",
-    "abc365-g",
-    "abc230-e",
-    "abc242-g",
-    "abc405-g"
+    "abc365-g"
   ],
   "relatedProblemIds": [
     "abc345-g"
@@ -59,6 +53,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 74,
-  "globalIndex": 103,
+  "globalIndex": 104,
   "orderReason": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

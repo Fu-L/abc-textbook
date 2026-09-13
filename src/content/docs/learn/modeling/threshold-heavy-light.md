@@ -3,7 +3,7 @@ title: "平方根・閾値による軽重分類"
 description: "平方根・閾値による軽重分類の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 103
+  order: 104
 ---
 
 # 平方根・閾値による軽重分類
@@ -33,9 +33,6 @@ sidebar:
 3. [ABC350 G「Mediator」](https://atcoder.jp/contests/abc350/tasks/abc350_g)
 4. [ABC259 Ex「Yet Another Path Counting」](https://atcoder.jp/contests/abc259/tasks/abc259_h)
 5. [ABC365 G「AtCoder Office」](https://atcoder.jp/contests/abc365/tasks/abc365_g)
-6. [ABC230 E「Fraction Floor Sum」](https://atcoder.jp/contests/abc230/tasks/abc230_e)
-7. [ABC242 G「Range Pairing Query」](https://atcoder.jp/contests/abc242/tasks/abc242_g)
-8. [ABC405 G「Range Shuffle Query」](https://atcoder.jp/contests/abc405/tasks/abc405_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -49,9 +46,9 @@ sidebar:
 
 - [ABC219 G 公式解説](https://atcoder.jp/contests/abc219/editorial/2653)
 - [ABC219 G 公式問題文](https://atcoder.jp/contests/abc219/tasks/abc219_g)
-- [ABC230 E 公式問題文](https://atcoder.jp/contests/abc230/tasks/abc230_e)
-- [ABC230 E 公式解説](https://atcoder.jp/contests/abc230/editorial/3015)
-- [ABC242 G 公式解説](https://atcoder.jp/contests/abc242/editorial/3517)
-- [ABC242 G 公式問題文](https://atcoder.jp/contests/abc242/tasks/abc242_g)
+- [ABC259 H 公式解説](https://atcoder.jp/contests/abc259/editorial/4269)
+- [ABC259 H 公式問題文](https://atcoder.jp/contests/abc259/tasks/abc259_h)
+- [ABC335 F 公式解説](https://atcoder.jp/contests/abc335/editorial/9038)
+- [ABC335 F 公式問題文](https://atcoder.jp/contests/abc335/tasks/abc335_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-threshold-heavy-light`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-threshold-heavy-light`

@@ -16,8 +16,8 @@
     "source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad",
     "source-abc296-editorial-6119-ac80203d7028d704d5d765eb1d8dbd94b2cdcfd612591e482994c1f616f2edf7",
     "source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475",
-    "source-abc379-editorial-11331-99b02bd194eebd23fc74338f23a4b867b546520ef2054f2379c2928e96c8c909",
-    "source-abc379-g-problem-0ebd4c1ce63bb44b9c683ba8f86d9c1d50ec610a667da82dd4f88c0c8c4f8171"
+    "source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa",
+    "source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"
   ],
   "tagIds": [
     "tag-frontier-profile-dp"
@@ -36,12 +36,14 @@
   "problemIds": [
     "abc248-f",
     "abc296-ex",
+    "abc309-g",
     "abc379-g"
   ],
   "directProblemIds": [
     "abc248-f",
-    "abc296-ex",
-    "abc379-g"
+    "abc379-g",
+    "abc309-g",
+    "abc296-ex"
   ],
   "relatedProblemIds": [],
   "examples": [],
@@ -49,6 +51,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 90,
-  "globalIndex": 154,
+  "globalIndex": 157,
   "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。"
 }

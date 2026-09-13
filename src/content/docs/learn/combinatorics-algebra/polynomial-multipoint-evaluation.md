@@ -3,7 +3,7 @@ title: "多項式の多点評価・補間"
 description: "多項式の多点評価・補間の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 187
+  order: 190
 ---
 
 # 多項式の多点評価・補間
@@ -40,4 +40,4 @@ product treeとremainder treeを構築し、一つの多項式を多数の点へ
 - [ABC381 G 公式解説](https://atcoder.jp/contests/abc381/editorial/11378)
 - [ABC381 G 公式問題文](https://atcoder.jp/contests/abc381/tasks/abc381_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-polynomial-multipoint-evaluation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-polynomial-multipoint-evaluation`

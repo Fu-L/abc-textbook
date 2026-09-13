@@ -4,14 +4,11 @@
   "prerequisiteOutcomeIds": [],
   "scopeIds": [
     "abc219-g",
-    "abc230-e",
-    "abc242-g",
     "abc259-ex",
     "abc335-f",
     "abc345-g",
     "abc350-g",
     "abc365-g",
-    "abc405-g",
     "tag-threshold-heavy-light",
     "unit-threshold-heavy-light"
   ]

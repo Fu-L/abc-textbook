@@ -41,6 +41,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 98,
-  "globalIndex": 181,
+  "globalIndex": 184,
   "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、Gaussian整数・二平方和の発動条件・正当化・境界を重複なく学ぶ。"
 }

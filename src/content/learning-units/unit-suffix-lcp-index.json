@@ -53,6 +53,6 @@
   "stageRank": 3,
   "difficultyRank": 2,
   "representativeRank": 2,
-  "globalIndex": 87,
+  "globalIndex": 88,
   "orderReason": "全接尾辞の辞書順と隣接LCPを索引化し、部分文字列の出現範囲・順位・個数へ答える。"
 }

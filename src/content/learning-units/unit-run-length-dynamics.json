@@ -39,6 +39,6 @@
   "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 70,
-  "globalIndex": 148,
+  "globalIndex": 150,
   "orderReason": "同値な連続要素をrunへ圧縮し、局所操作で変わるrunのsplit/mergeと長さだけを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

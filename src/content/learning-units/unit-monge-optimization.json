@@ -49,6 +49,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 94,
-  "globalIndex": 169,
+  "globalIndex": 172,
   "orderReason": "DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge・monotone minima最適化の発動条件・正当化・境界を重複なく学ぶ。"
 }

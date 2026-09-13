@@ -42,6 +42,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 91,
-  "globalIndex": 158,
+  "globalIndex": 161,
   "orderReason": "畳み込み・相互相関・根付き木DP・部分木集約で得た考え方と実装を再利用し、heavy path上の多項式木DPの発動条件・正当化・境界を重複なく学ぶ。"
 }

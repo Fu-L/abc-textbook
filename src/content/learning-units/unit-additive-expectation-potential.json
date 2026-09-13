@@ -1,0 +1,46 @@
+{
+  "id": "unit-additive-expectation-potential",
+  "kind": "subsection",
+  "title": "期待値の頻度圧縮と加法的ポテンシャル",
+  "parentId": "unit-dp-stochastic",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "additionalPrerequisiteUnitIds": [
+    "unit-dp-stochastic"
+  ],
+  "excludedTopics": [
+    "期待値の頻度圧縮と加法的ポテンシャルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc249-editorial-3842-1c73a62788380cc97a386b0c3db2803734266f6502a71bfe6035a636488e16ec",
+    "source-abc249-ex-problem-14bb83c88176a910c2d064c647200793b0ba5d4b67377eef28589c75fae8e266"
+  ],
+  "tagIds": [
+    "tag-additive-expectation-potential"
+  ],
+  "ownedTagIds": [
+    "tag-additive-expectation-potential"
+  ],
+  "learningOutcomeIds": [
+    "outcome-decompose-expectation-by-additive-potential"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-decompose-expectation-by-additive-potential"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/additive-expectation-potential.md",
+  "problemIds": [
+    "abc249-ex"
+  ],
+  "directProblemIds": [
+    "abc249-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "stageRank": 4,
+  "difficultyRank": 4,
+  "representativeRank": 90,
+  "globalIndex": 155,
+  "orderReason": "確率・期待値DPで得た考え方と実装を再利用し、期待値の頻度圧縮と加法的ポテンシャルの発動条件・正当化・境界を重複なく学ぶ。"
+}

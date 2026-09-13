@@ -28,8 +28,8 @@ sidebar:
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC284 F「ABCBAC」](https://atcoder.jp/contests/abc284/tasks/abc284_f)
-2. [ABC430 E「Shift String」](https://atcoder.jp/contests/abc430/tasks/abc430_e)
+1. [ABC430 E「Shift String」](https://atcoder.jp/contests/abc430/tasks/abc430_e)
+2. [ABC284 F「ABCBAC」](https://atcoder.jp/contests/abc284/tasks/abc284_f)
 3. [ABC257 G「Prefix Concatenation」](https://atcoder.jp/contests/abc257/tasks/abc257_g)
 4. [ABC434 F「Concat (2nd)」](https://atcoder.jp/contests/abc434/tasks/abc434_f)
 
@@ -51,4 +51,4 @@ sidebar:
 - [ABC312 H 公式解説](https://atcoder.jp/contests/abc312/editorial/6837)
 - [ABC312 H 公式問題文](https://atcoder.jp/contests/abc312/tasks/abc312_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-z-algorithm`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-z-algorithm`

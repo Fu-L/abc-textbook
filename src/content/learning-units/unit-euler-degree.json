@@ -43,6 +43,6 @@
   "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 10,
-  "globalIndex": 72,
+  "globalIndex": 73,
   "orderReason": "グラフを探索できることを前提に、全辺walkの成立性や選択辺集合の端点条件を次数parityで特徴付け、葉から判定・構成する。"
 }

@@ -32,12 +32,10 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/recursive-divide-and-conquer.md",
   "problemIds": [
-    "abc282-ex",
     "abc304-g",
     "abc413-e"
   ],
   "directProblemIds": [
-    "abc282-ex",
     "abc413-e",
     "abc304-g"
   ],
@@ -52,6 +50,7 @@
     "abc273-ex",
     "abc281-ex",
     "abc281-f",
+    "abc282-ex",
     "abc317-ex",
     "abc331-g",
     "abc345-g",

@@ -42,6 +42,10 @@ max(E[d],V_{r-1})では、目を観測する前に一律に停止・続行を決
 
 残り回数が減るので後退帰納で最適性を証明できる。O(N)時間O(1)空間。最後の強制停止、同点でどちらを選んでも値が同じことを確認する。
 
+ABC242 Exでは、異なる区間がk種類集まった段階に分ける。次の新種類までの期待待ち時間はM/(M−k)で、その段階まで被覆が終わっていない確率を掛けて足す。全被覆するk-subset数f(k)を別のDPで求めれば、期待値はΣ_{k=0}^{M−1}(1−f(k)/C(M,k))·M/(M−k)になる。
+
+f(k)の計数は、区間を左端順に処理し、隙間なく覆ったprefixの右端rと選択数kを状態にする走査DPである。区間[L,R]を選ぶならL≤r+1を要求し、右端をmax(r,R)へ更新する。一度隙間を残すと後続の区間では埋められない。二つの独立区間の解を掛け合わせる区間DPではない。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
@@ -51,6 +55,10 @@ max(E[d],V_{r-1})では、目を観測する前に一律に停止・続行を決
 状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。
 
 - 二人零和ゲームの勝敗・Grundy数。
+
+## 下位単元
+
+- [期待値の頻度圧縮と加法的ポテンシャル](/learn/dynamic-programming/additive-expectation-potential/)
 
 ## 問題一覧
 
@@ -69,11 +77,12 @@ max(E[d],V_{r-1})では、目を観測する前に一律に停止・続行を決
 11. [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
 12. [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
 13. [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
-14. [ABC314 E「Roulettes」](https://atcoder.jp/contests/abc314/tasks/abc314_e)
-15. [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e)
-16. [ABC404 F「Lost and Pound」](https://atcoder.jp/contests/abc404/tasks/abc404_f)
-17. [ABC421 E「Yacht」](https://atcoder.jp/contests/abc421/tasks/abc421_e)
-18. [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h)
+14. [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
+15. [ABC314 E「Roulettes」](https://atcoder.jp/contests/abc314/tasks/abc314_e)
+16. [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e)
+17. [ABC404 F「Lost and Pound」](https://atcoder.jp/contests/abc404/tasks/abc404_f)
+18. [ABC421 E「Yacht」](https://atcoder.jp/contests/abc421/tasks/abc421_e)
+19. [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -81,8 +90,6 @@ max(E[d],V_{r-1})では、目を観測する前に一律に停止・続行を決
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
-- [ABC249 Ex「Dye Color」](https://atcoder.jp/contests/abc249/tasks/abc249_h)
 - [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h)
 - [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g)
 - [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h)
@@ -103,4 +110,4 @@ max(E[d],V_{r-1})では、目を観測する前に一律に停止・続行を決
 - [ABC242 H 公式解説](https://atcoder.jp/contests/abc242/editorial/3523)
 - [ABC242 H 公式問題文](https://atcoder.jp/contests/abc242/tasks/abc242_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-dp-stochastic`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-dp-stochastic`

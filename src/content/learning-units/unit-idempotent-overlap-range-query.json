@@ -13,6 +13,8 @@
   ],
   "sourceRevisionIds": [
     "source-abc282-editorial-5403-a6fc1b073b674859f239b20188df61ec3a08834c8b5f8c17af1ca21e9ccd56e4",
+    "source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c",
+    "source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e",
     "source-abc282-f-problem-86da67b53a7e864329b60455cddbbc086b4f398d45a9087c6e381fc9847ec1d8"
   ],
   "tagIds": [
@@ -29,8 +31,12 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/idempotent-overlap-range-query.md",
-  "problemIds": [],
-  "directProblemIds": [],
+  "problemIds": [
+    "abc282-ex"
+  ],
+  "directProblemIds": [
+    "abc282-ex"
+  ],
   "relatedProblemIds": [
     "abc282-f"
   ],

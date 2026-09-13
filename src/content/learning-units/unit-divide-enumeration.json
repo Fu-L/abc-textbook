@@ -31,7 +31,6 @@
   "docPath": "src/content/docs/learn/modeling/divide-enumeration.md",
   "problemIds": [
     "abc271-f",
-    "abc282-ex",
     "abc300-g",
     "abc304-g",
     "abc326-f",
@@ -55,6 +54,7 @@
     "abc273-ex",
     "abc281-ex",
     "abc281-f",
+    "abc282-ex",
     "abc317-ex",
     "abc331-g",
     "abc345-g",

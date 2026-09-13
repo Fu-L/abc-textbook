@@ -48,6 +48,6 @@
   "stageRank": 0,
   "difficultyRank": 3,
   "representativeRank": 11,
-  "globalIndex": 111,
+  "globalIndex": 112,
   "orderReason": "向きと交差を判定できた後、凸境界への候補限定、半平面制約の共通部分、直線包絡による最適化を区別して扱う。"
 }

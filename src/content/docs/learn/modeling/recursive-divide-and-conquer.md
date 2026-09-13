@@ -28,9 +28,8 @@ pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC282 Ex「Min + Sum」](https://atcoder.jp/contests/abc282/tasks/abc282_h)
-2. [ABC413 E「Reverse 2^i」](https://atcoder.jp/contests/abc413/tasks/abc413_e)
-3. [ABC304 G「Max of Medians」](https://atcoder.jp/contests/abc304/tasks/abc304_g)
+1. [ABC413 E「Reverse 2^i」](https://atcoder.jp/contests/abc413/tasks/abc413_e)
+2. [ABC304 G「Max of Medians」](https://atcoder.jp/contests/abc304/tasks/abc304_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -48,6 +47,7 @@ pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結
 - [ABC273 Ex「Inv(0,1)ving Insert(1,0)n」](https://atcoder.jp/contests/abc273/tasks/abc273_h)
 - [ABC281 Ex「Alchemy」](https://atcoder.jp/contests/abc281/tasks/abc281_h)
 - [ABC281 F「Xor Minimization」](https://atcoder.jp/contests/abc281/tasks/abc281_f)
+- [ABC282 Ex「Min + Sum」](https://atcoder.jp/contests/abc282/tasks/abc282_h)
 - [ABC317 Ex「Walk」](https://atcoder.jp/contests/abc317/tasks/abc317_h)
 - [ABC331 G「Collect Them All」](https://atcoder.jp/contests/abc331/tasks/abc331_g)
 - [ABC345 G「Sugoroku 5」](https://atcoder.jp/contests/abc345/tasks/abc345_g)
@@ -70,4 +70,4 @@ pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結
 - [ABC247 H 公式解説](https://atcoder.jp/contests/abc247/editorial/3737)
 - [ABC247 H 公式問題文](https://atcoder.jp/contests/abc247/tasks/abc247_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-recursive-divide-and-conquer`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-recursive-divide-and-conquer`

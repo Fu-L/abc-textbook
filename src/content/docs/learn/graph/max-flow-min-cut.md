@@ -3,7 +3,7 @@ title: "最大流・最小カット"
 description: "最大流・最小カットの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 79
+  order: 80
 ---
 
 # 最大流・最小カット
@@ -13,6 +13,10 @@ sidebar:
 ### 最大流・最小カット
 
 選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。
+
+ABC241 Gを容量付き割当の導入にする。候補選手の勝数を最大化した後、残る未確定試合をそれぞれ一単位の供給とし、試合頂点から対戦する二選手へ容量1の辺を張る。各選手からsinkへの容量は候補の勝数未満に収める残り勝数枠とする。負の枠があれば不可能で、全試合分の流量が流れれば割当が存在する。
+
+同じ選手へ複数試合の勝利を割り当てられるため、選手側の容量は1とは限らない。一対一matchingとの違いを容量条件で確認してから、頂点容量の分割やmin-cutによる選択問題へ進む。
 
 ## 前提と範囲
 
@@ -28,15 +32,16 @@ sidebar:
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC225 G「X」](https://atcoder.jp/contests/abc225/tasks/abc225_g)
-2. [ABC239 G「Builder Takahashi」](https://atcoder.jp/contests/abc239/tasks/abc239_g)
-3. [ABC259 G「Grid Card Game」](https://atcoder.jp/contests/abc259/tasks/abc259_g)
-4. [ABC318 G「Typical Path Problem」](https://atcoder.jp/contests/abc318/tasks/abc318_g)
-5. [ABC326 G「Unlock Achievement」](https://atcoder.jp/contests/abc326/tasks/abc326_g)
-6. [ABC347 G「Grid Coloring 2」](https://atcoder.jp/contests/abc347/tasks/abc347_g)
-7. [ABC397 G「Maximize Distance」](https://atcoder.jp/contests/abc397/tasks/abc397_g)
-8. [ABC332 G「Not Too Many Balls」](https://atcoder.jp/contests/abc332/tasks/abc332_g)
-9. [ABC227 H「Eat Them All」](https://atcoder.jp/contests/abc227/tasks/abc227_h)
+1. [ABC241 G「Round Robin」](https://atcoder.jp/contests/abc241/tasks/abc241_g)
+2. [ABC225 G「X」](https://atcoder.jp/contests/abc225/tasks/abc225_g)
+3. [ABC239 G「Builder Takahashi」](https://atcoder.jp/contests/abc239/tasks/abc239_g)
+4. [ABC259 G「Grid Card Game」](https://atcoder.jp/contests/abc259/tasks/abc259_g)
+5. [ABC318 G「Typical Path Problem」](https://atcoder.jp/contests/abc318/tasks/abc318_g)
+6. [ABC326 G「Unlock Achievement」](https://atcoder.jp/contests/abc326/tasks/abc326_g)
+7. [ABC347 G「Grid Coloring 2」](https://atcoder.jp/contests/abc347/tasks/abc347_g)
+8. [ABC397 G「Maximize Distance」](https://atcoder.jp/contests/abc397/tasks/abc397_g)
+9. [ABC332 G「Not Too Many Balls」](https://atcoder.jp/contests/abc332/tasks/abc332_g)
+10. [ABC227 H「Eat Them All」](https://atcoder.jp/contests/abc227/tasks/abc227_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -58,4 +63,4 @@ sidebar:
 - [ABC239 G 公式解説](https://atcoder.jp/contests/abc239/editorial/3393)
 - [ABC239 G 公式問題文](https://atcoder.jp/contests/abc239/tasks/abc239_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-max-flow-min-cut`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-max-flow-min-cut`

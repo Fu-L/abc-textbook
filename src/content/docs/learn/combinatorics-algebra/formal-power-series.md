@@ -3,7 +3,7 @@ title: "FPS演算・多点評価・合成を行う"
 description: "FPS演算・多点評価・合成を行うの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 186
+  order: 189
 ---
 
 # FPS演算・多点評価・合成を行う
@@ -52,4 +52,4 @@ sidebar:
 - [ABC289 H 公式解説](https://atcoder.jp/contests/abc289/editorial/5712)
 - [ABC289 H 公式問題文](https://atcoder.jp/contests/abc289/tasks/abc289_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-formal-power-series`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-formal-power-series`

@@ -35,13 +35,11 @@
     "abc219-f",
     "abc242-e",
     "abc250-e",
-    "abc296-f",
     "abc307-e",
     "abc382-g"
   ],
   "directProblemIds": [
     "abc242-e",
-    "abc296-f",
     "abc219-f",
     "abc250-e",
     "abc382-g",
@@ -50,9 +48,9 @@
   "relatedProblemIds": [
     "abc218-h",
     "abc232-h",
-    "abc249-ex",
     "abc278-g",
     "abc284-g",
+    "abc296-f",
     "abc301-f",
     "abc302-g",
     "abc313-g",

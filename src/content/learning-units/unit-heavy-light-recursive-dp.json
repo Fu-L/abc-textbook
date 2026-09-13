@@ -42,6 +42,6 @@
   "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 90,
-  "globalIndex": 155,
+  "globalIndex": 158,
   "orderReason": "資源軸knapsack DP・根付き木DP・部分木集約で得た考え方と実装を再利用し、資源DPを引数で渡すHLRecDPの発動条件・正当化・境界を重複なく学ぶ。"
 }

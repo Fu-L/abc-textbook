@@ -25,52 +25,42 @@
   ],
   "learningOutcomeIds": [
     "outcome-evaluate-compressed-integer-blocks",
-    "outcome-partition-integer-parameter-ranges",
-    "outcome-sum-affine-floors-by-euclid"
+    "outcome-partition-integer-parameter-ranges"
   ],
   "ownedLearningOutcomeIds": [
     "outcome-evaluate-compressed-integer-blocks",
-    "outcome-partition-integer-parameter-ranges",
-    "outcome-sum-affine-floors-by-euclid"
+    "outcome-partition-integer-parameter-ranges"
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/integer-boundary-blocks.md",
   "problemIds": [
+    "abc230-e",
     "abc253-g",
-    "abc283-ex",
     "abc293-f",
-    "abc313-g",
     "abc315-g",
     "abc356-e",
-    "abc402-g",
     "abc414-e",
-    "abc443-g",
     "abc444-f",
     "abc452-e"
   ],
   "directProblemIds": [
+    "abc230-e",
     "abc253-g",
     "abc356-e",
-    "abc402-g",
     "abc414-e",
-    "abc443-g",
     "abc293-f",
-    "abc283-ex",
     "abc452-e",
-    "abc313-g",
     "abc315-g",
     "abc444-f"
   ],
   "relatedProblemIds": [
     "abc216-e",
-    "abc230-e",
     "abc239-ex",
     "abc240-f",
     "abc243-g",
     "abc318-f",
     "abc361-f",
     "abc370-g",
-    "abc372-g",
     "abc429-g"
   ],
   "examples": [],

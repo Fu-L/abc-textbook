@@ -46,6 +46,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 76,
-  "globalIndex": 72,
+  "globalIndex": 73,
   "orderReason": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

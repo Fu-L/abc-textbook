@@ -52,6 +52,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 93,
-  "globalIndex": 143,
+  "globalIndex": 145,
   "orderReason": "DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。"
 }

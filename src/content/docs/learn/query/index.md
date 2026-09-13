@@ -36,6 +36,7 @@ sidebar:
 - [結合的要約と列・区間の合成](/learn/query/monoid-segment-tree/)
 - [Fingerprintで列・集合・式の同値性を比較する](/learn/query/string-hash/)
 - [区間更新を要約へ作用させる](/learn/query/range-actions/)
+- [値軸のbucket分割と区間集約](/learn/query/value-bucket-aggregation/)
 - [Moの順序で区間問い合わせの差分を更新する](/learn/query/mo-offline-range/)
 - [大小関係をCartesian treeへ変換する](/learn/query/cartesian-tree/)
 - [構造を共有して過去の版を保存・復元する](/learn/query/persistence-rollback/)
@@ -63,7 +64,6 @@ sidebar:
 - [ABC234 G「Divide a Sequence」](https://atcoder.jp/contests/abc234/tasks/abc234_g)
 - [ABC238 E「Range Sums」](https://atcoder.jp/contests/abc238/tasks/abc238_e)
 - [ABC240 Ex「Sequence of Substrings」](https://atcoder.jp/contests/abc240/tasks/abc240_h)
-- [ABC242 G「Range Pairing Query」](https://atcoder.jp/contests/abc242/tasks/abc242_g)
 - [ABC244 Ex「Linear Maximization」](https://atcoder.jp/contests/abc244/tasks/abc244_h)
 - [ABC245 E「Wrapping Chocolate」](https://atcoder.jp/contests/abc245/tasks/abc245_e)
 - [ABC249 F「Ignore Operations」](https://atcoder.jp/contests/abc249/tasks/abc249_f)
@@ -108,7 +108,6 @@ sidebar:
 - [ABC373 F「Knapsack with Diminishing Values」](https://atcoder.jp/contests/abc373/tasks/abc373_f)
 - [ABC376 G「Treasure Hunting」](https://atcoder.jp/contests/abc376/tasks/abc376_g)
 - [ABC404 G「Specified Range Sums」](https://atcoder.jp/contests/abc404/tasks/abc404_g)
-- [ABC405 G「Range Shuffle Query」](https://atcoder.jp/contests/abc405/tasks/abc405_g)
 - [ABC406 F「Compare Tree Weights」](https://atcoder.jp/contests/abc406/tasks/abc406_f)
 - [ABC406 G「Travelling Salesman Problem」](https://atcoder.jp/contests/abc406/tasks/abc406_g)
 - [ABC407 F「Sums of Sliding Window Maximum」](https://atcoder.jp/contests/abc407/tasks/abc407_f)
@@ -140,4 +139,4 @@ sidebar:
 - [ABC216 G 公式解説](https://atcoder.jp/contests/abc216/editorial/2474)
 - [ABC216 G 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-chapter-query`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-chapter-query`
